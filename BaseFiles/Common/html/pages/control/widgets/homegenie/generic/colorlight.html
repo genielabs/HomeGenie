@@ -1,59 +1,46 @@
 ﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
-    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
-        <div data-ui-field="name" style="font-weight:bold">Name</div>
-        <div data-ui-field="description">loading...</div>
-        <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px">Features</a>
-        <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png" />
+    <div data-ui-field="name" style="margin-right:38px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
+    <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+    <a data-ui-field="settings" data-role="button" data-icon="gear" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Features</a>
+  </div>
+  <div align="center">
+    <div style="margin-left:10px;margin-bottom:10px;height:30px;">
+      <div data-ui-field="level-div" style="margin-top:20px;">
+        <input data-ui-field="level" type="range" min="0" max="100" style="display:block;" />
+      </div>
     </div>
-    <br />
-    <div class="ui-grid-a">
-        <div class="ui-block-a">
-            <div data-ui-field="color" style="margin-top:8px;margin-left:30px;width:48px;height:52px"></div>
-        </div>
-        <div class="ui-block-b">
-            <div data-role="controlgroup" data-type="horizontal">
-                <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn" href="#">Off</a>
-                <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn" href="#">On</a>
-            </div>
-        </div>
+    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+      <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn ui-btn-icon-left ui-icon-forbidden" href="#">Off</a>
+      <a data-ui-field="toggle" data-locale-id="control_module_toggle" class="ui-btn" href="#" style="width:30px">
+        <span><div data-ui-field="colorball" style="position:absolute;width:25px;height:25px;left:16px;top:4px"></div></span>&nbsp;
+      </a>
+      <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn ui-btn-icon-right ui-icon-power" href="#">On</a>
     </div>
-    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
-    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
-        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
-    </div>
+  </div>
+  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+    <div data-ui-field="updatetime" style="position:absolute;top:2px;left:5px;font-size:10pt;"></div>
+    <div data-ui-field="status" style="font-size:11pt;display:table-cell;">&nbsp;</div>
+  </div>
 </div>
 
 <!-- widget popups and other ui elements follow -->
 <div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
-    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-    <div style="margin:10px">
-        <!-- BEGIN - COMMON UI PART --->
-        <table width="100%">
-            <tr>
-                <td width="54">
-                    <div data-ui-field="color" style="width:54px;height:54px;"></div>
-                </td>
-                <td>
-                    <div data-ui-field="group" style="margin:0;margin-left:0;font-size:11pt">Group Name</div>
-                    <h4 data-ui-field="name" style="margin:0;margin-left:0;">Description</h4>
-                </td>
-                <td valign="top">
-                    <div data-ui-field="status" style="margin-top:10px;font-size:11pt;" align="right"></div>
-                </td>
-            </tr>
-        </table>
-        <!-- -->
-        <!-- END - COMMON UI PART --->
-        <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
-        <div data-ui-field="colors" style="margin-left: 18px; margin-top:0; margin-bottom: 15px;">
-        </div>
-        <div align="center">
-            <div data-role="controlgroup" data-type="horizontal">
-                <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn" href="#">Off</a>
-                <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn" href="#">On</a>
-            </div>
-        </div>
-        <!-- END - MODULE TYPE SPECIFIC DIVS -->
-        <br />
+  <!--a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a-->
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;height:42px;">
+    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png" />
+    <div data-ui-field="name" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt;font-weight:bold">Name</div>
+    <div data-ui-field="group" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:9pt"></div>
+    <div data-ui-field="status" style="position:absolute;right:10px;top:10px;font-size:11pt;display:table-cell;">&nbsp;</div>
+  </div>
+  <div style="margin:10px">
+    <div data-ui-field="colors" style="margin-left: 18px; margin-top:0; margin-bottom: 15px;"></div>
+  </div>
+  <div class="ui-footer ui-bar-inherit" align="center" style="height:46px">
+    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+      <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn ui-btn-icon-left ui-icon-forbidden" href="#">Off</a>
+      <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn ui-btn-icon-right ui-icon-power" href="#">On</a>
     </div>
+  </div>
 </div>

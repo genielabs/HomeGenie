@@ -32,6 +32,9 @@ using System.Threading;
 namespace HomeGenie.Data
 {
 
+    /// <summary>
+    /// Module parameter.
+    /// </summary>
     [Serializable()]
     public class ModuleParameter
     {
@@ -47,9 +50,14 @@ namespace HomeGenie.Data
             Name = "";
             Value = "";
             Description = "";
+            FieldType = "";
             UpdateTime = DateTime.UtcNow;
         }
-        //
+
+        /// <summary>
+        /// Gets the statistics.
+        /// </summary>
+        /// <value>The statistics.</value>
         [XmlIgnore, JsonIgnore]
         public ValueStatistics Statistics
         {
@@ -59,8 +67,17 @@ namespace HomeGenie.Data
                 return statistics;
             }
         }
-        //
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>The value.</value>
         public string Value
         {
             get
@@ -71,8 +88,7 @@ namespace HomeGenie.Data
             {
                 UpdateTime = DateTime.UtcNow;
                 parameterValue = value;
-                //
-                // can we add this value for statistics?
+                // is this a numeric value that can be added for statistics?
                 double v;
                 if (!string.IsNullOrEmpty(value) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
                 {
@@ -80,11 +96,32 @@ namespace HomeGenie.Data
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
         public string Description { get; set; }
-        public DateTime UpdateTime { get; /* protected */ set; }
+
+        /// <summary>
+        /// Gets or sets the type of the field.
+        /// </summary>
+        /// <value>The type of the field.</value>
+        public string FieldType { get; set; }
+
+        /// <summary>
+        /// Gets the update time.
+        /// </summary>
+        /// <value>The update time.</value>
+        public DateTime UpdateTime { get; set; }
+
         [XmlIgnore]
         public bool NeedsUpdate { get; set; }
 
+        /// <summary>
+        /// Gets the decimal value.
+        /// </summary>
+        /// <value>The decimal value.</value>
         [XmlIgnore, JsonIgnore]
         public double DecimalValue
         {
@@ -97,6 +134,11 @@ namespace HomeGenie.Data
             }
         }
 
+        /// <summary>
+        /// Determines whether this instance has the given name.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is name; otherwise, <c>false</c>.</returns>
+        /// <param name="name">Name.</param>
         public bool Is(string name)
         {
             return (this.Name.ToLower() == name.ToLower());
@@ -107,6 +149,11 @@ namespace HomeGenie.Data
             requestUpdateTimestamp = DateTime.UtcNow;
         }
 
+        /// <summary>
+        /// Waits until this parameter is updated.
+        /// </summary>
+        /// <returns><c>true</c>, if it was updated, <c>false</c> otherwise.</returns>
+        /// <param name="timeoutSeconds">Timeout seconds.</param>
         public bool WaitUpdate(double timeoutSeconds)
         {
             var lastUpdate = UpdateTime;
@@ -115,6 +162,10 @@ namespace HomeGenie.Data
             return lastUpdate.Ticks != UpdateTime.Ticks;
         }
 
+        /// <summary>
+        /// Gets the idle time (time elapsed since last update).
+        /// </summary>
+        /// <value>The idle time.</value>
         [XmlIgnore, JsonIgnore]
         public double IdleTime
         {

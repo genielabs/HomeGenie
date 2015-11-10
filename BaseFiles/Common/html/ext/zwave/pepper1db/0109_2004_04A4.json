@@ -36,7 +36,10 @@
         "@value": "04"
       },
       "genericClass": {
-        "@value": "a1"
+        "@value": "07"
+      },
+      "specificClass": {
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
@@ -128,7 +131,8 @@
         "@maxNodes": "5",
         "description": {
           "lang": {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "Lifeline"
           }
         }
       }

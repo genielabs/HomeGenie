@@ -1,19 +1,37 @@
-﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
 
-    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
-        <div data-ui-field="name" style="font-weight:bold">Name</div>
-        <div data-ui-field="description">loading...</div>
-        <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Features</a>
-        <!--a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a-->
-    </div>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td valign="top"><img class="hg-widget-icon" style="margin-top:20px" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/sensor.png" /></td>
-            <td align="right" valign="middle"><div data-ui-field="sensorstatus" style="font-size:12pt;"></div></td>
-        </tr>
-    </table>
-    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
-    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
-        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
-    </div>
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
+    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
+    <div data-ui-field="name" style="margin-right:38px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
+    <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+    <a data-ui-field="settings" data-role="button" data-icon="gear" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Features</a>
+  </div>
+
+  <div data-ui-field="sensoronoff" align="center" style="margin-top:2px;margin-bottom:6px;"></div>
+  <div data-ui-field="sensorstatus" align="center" style="margin-top:2px;margin-bottom:6px;"></div>
+
+  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="center">
+    <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+  </div>
+
+</div>
+
+
+<!-- templates -->
+<div data-ui-field="icontemplate" style="display:none">
+  <div style="display:inline-block;margin-left:10px;margin-top:5px;margin-right:10px;">
+    <div align="right" style="padding-right:4px;width:20px;float:left;text-align:bottom;line-height:28px">%icon%</div>
+  </div>
+</div>
+<div data-ui-field="iconvaluetemplate" style="display:none">
+  <div style="display:inline-block;margin-left:10px;margin-top:5px;margin-right:10px;">
+    <div align="right" style="padding-right:4px;width:20px;float:left;text-align:bottom;line-height:28px">%icon%</div>
+    <div align="left" style="padding-left:4px;float:left;font-size:20pt">%value%</div>
+  </div>
+</div>
+<div data-ui-field="valuetemplate" style="display:none">
+  <div style="display:inline-block;margin-left:10px;margin-top:5px;margin-right:10px;">
+    <div style="font-size:10pt">%label%</div>
+    <div style="font-size:20pt;line-height:24pt;">%value%</div>
+  </div>
 </div>

@@ -412,12 +412,6 @@
         <UpdateTime>2015-01-03T14:02:11.096254Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.InputDisplayCelsius</Name>
-        <Value>ixkAM/uq24w4FhL1vR+sFg==</Value>
-        <Description>Display Temperature in degrees Celsius - TRUE or FALSE</Description>
-        <UpdateTime>2015-01-03T14:02:11.096432Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>ConfigureOptions.Language</Name>
         <Value>Cn6VRtmascV3JQiOUKb3YQ==</Value>
         <Description>Language</Description>
@@ -566,6 +560,34 @@
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:05.337468Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>MCP3008 - Keypad Input</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>41</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.KeypadChannel</Name>
+        <Value>qkJKNkFIi+UfB0yobBZOfw==</Value>
+        <Description>MCP3008 channel where the keypad is connected to</Description>
+        <UpdateTime>2015-05-02T15:58:14.422833Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Disabled</Value>
+        <Description />
+        <UpdateTime>2015-05-02T15:58:02.121904Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2015-05-02T15:57:53.618121Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1128,12 +1150,6 @@
     <Address>82</Address>
     <Properties>
       <ModuleParameter>
-        <Name>ConfigureOptions.MaxLevel</Name>
-        <Value>eQmibguU4RfcrcKLwpuf7w==</Value>
-        <Description>Keep level below the following value</Description>
-        <UpdateTime>2015-01-03T14:02:11.104489Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
@@ -1460,6 +1476,46 @@
         <Value />
         <Description />
         <UpdateTime>2014-11-13T15:59:06.496746Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Alcatel One Touch Y800Z SMS Notify</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>201</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ModemIp</Name>
+        <Value />
+        <Description>1. Modem IP address</Description>
+        <UpdateTime>2015-05-02T15:37:52.989495Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ModemPassword</Name>
+        <Value />
+        <Description>2. Modem password</Description>
+        <UpdateTime>2015-05-02T15:37:52.9895Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.SmsRecipient</Name>
+        <Value />
+        <Description>4. Recipient phone number</Description>
+        <UpdateTime>2015-05-02T15:37:52.989505Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Disabled</Value>
+        <Description />
+        <UpdateTime>2015-05-02T15:37:59.364125Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2015-05-02T15:37:52.985238Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2596,6 +2652,52 @@
         <UpdateTime>2015-01-17T16:49:56.967426Z</UpdateTime>
       </ModuleParameter>
     </Properties>
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>IR Remote Controller</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>505</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerDownCode</Name>
+        <Value>rOoqqCUH8b8OMN93i0h4IfQTsgLVedpR3wqp4y6PZQ8=</Value>
+        <Description>2. Dimmer Down (enter IR button code)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2015-06-24T17:39:45.625881Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerInterval</Name>
+        <Value>Ri1VdDW6uIVO4CPS82EASw==</Value>
+        <Description>4. Dimmer Interval</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2015-06-24T17:39:45.626059Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerUpCode</Name>
+        <Value>rOoqqCUH8b8OMN93i0h4IQGQsBoLRvuWI49cvC2r7KA=</Value>
+        <Description>1. Dimmer Up (enter IR button code)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2015-06-24T17:39:45.626239Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2015-06-24T17:37:52.093969Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2015-06-24T17:22:15.463412Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
     <RoutingNode />
   </Module>
 </ArrayOfModule>

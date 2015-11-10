@@ -30,35 +30,25 @@
             </div>
         </div>
     </div>
-    
 
-    <div id="automationgroup_actionmenu" data-role="popup" data-overlay-theme="b">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
-        <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li><a data-ui-field="widgeteditor-btn" class="ui-btn ui-icon-edit ui-btn-icon-right" data-locale-id="configure_automationgroup_widgeteditor">Widget Editor</a></li>
-            <li><a data-ui-field="addgroup-btn" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_automationgroup_bottombar_group_add">Add Group</a>
-        </ul>
-    </div>
-    
-    
+
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a href="#page_configure" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
-                        Back
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
                 <li>
-                    <a href="#page_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#automationgroup_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
-                        Actions
+                    <a href="#automationgroup_add" data-rel="popup" data-transition="pop" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_automationgroup_bottombar_group_add">
+                        Add Group
                     </a>
                 </li>
             </ul>

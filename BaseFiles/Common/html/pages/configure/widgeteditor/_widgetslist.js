@@ -42,10 +42,10 @@ HG.WebApp.WidgetsList.InitializePage = function () {
         var widgetpath = newBrandText.val()+'/'+newCategoryText.val()+'/'+newNameText.val();
         HG.Configure.Widgets.Add(widgetpath, function(res){
             // open newly added widget
-            if (res.ResponseValue == 'OK')
+            if (res.Status == 'Ok')
             {
                 HG.WebApp.WidgetsList._currentWidget = widgetpath;
-                $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetEditor.PageId, { transition: 'slide' });
+                $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetEditor.PageId);
             }
             else
             {
@@ -103,7 +103,7 @@ HG.WebApp.WidgetsList.RefreshList = function(items) {
     listMenu.empty();
     listMenu.append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_widgetlist_list', 'Widget List') + '</li>');
     for (var i = 0; i < items.length; i++) {
-        listMenu.append('<li data-item-name="' + items[i] + '" data-item-index="' + i + '"><a href="#page_widgeteditor_editwidget" data-transition="slide"><img src="test" width="36" height="36" style="margin-left:7px;margin-top:2px" />' + items[i] + '</a></li>');
+        listMenu.append('<li data-item-name="' + items[i] + '" data-item-index="' + i + '"><a href="#page_widgeteditor_editwidget"><img src="test" width="36" height="36" style="margin-left:7px;margin-top:2px" />' + items[i] + '</a></li>');
     }
     listMenu.listview();
     listMenu.listview('refresh');

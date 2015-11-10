@@ -20,7 +20,6 @@
  *     Project Homepage: http://homegenie.it
  */
 
-#define LOGGING
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,27 +31,32 @@ using System.Net;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.IO.Packaging;
+
+using Newtonsoft.Json;
+
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using System.IO.Packaging;
-using System.Xml.Serialization;
 
 namespace HomeGenie.Service
 {
-    static class Extensions
+    
+    public static class Extensions
     {
-        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        /// <summary>
+        /// Perform a deep Copy of the object.
+        /// </summary>
+        /// <typeparam name="T">The type of object being copied.</typeparam>
+        /// <param name="source">The object instance to copy.</param>
+        /// <returns>The copied object.</returns>
+        public static T DeepClone<T>(this T source)
         {
-            IList<T> list = null;
-            if (listToClone.GetType() == typeof(TsList<T>))
+            // Don't serialize a null object, simply return the default for that object
+            if (Object.ReferenceEquals(source, null))
             {
-                list = listToClone.Select(item => (T)item.Clone()).ToList();
+                return default(T);
             }
-            else
-            {
-                list = listToClone.Select(item => (T)item.Clone()).ToList();
-            }
-            return list;
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
         }
     }
 
@@ -97,16 +101,6 @@ namespace HomeGenie.Service
         }
     }
 
-    public static class JsonHelper
-    {
-        public static string GetSimpleResponse(string value)
-        {
-            dynamic res = new ExpandoObject();
-            res.ResponseValue = value;
-            return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(res) + "]";
-        }
-    }
-
     public static class Utility
     {
 
@@ -119,72 +113,33 @@ namespace HomeGenie.Service
 
         public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
         {
-            return module.Properties.Find(delegate(ModuleParameter parameter)
-            {
+            if (module == null)
+                return null;
+            return ModuleParameterGet(module.Properties, propertyName);
+        }
+        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter>  parameters, string propertyName)
+        {
+            return parameters.Find(delegate(ModuleParameter parameter){
                 return parameter.Name == propertyName;
             });
         }
-
         public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
         {
             if (module == null)
                 return null;
-            //
-            var parameter = module.Properties.Find(mpar => mpar.Name == propertyName);
+            return ModuleParameterSet(module.Properties, propertyName, propertyValue);
+        }
+
+        public static ModuleParameter ModuleParameterSet(TsList<ModuleParameter> parameters, string propertyName, string propertyValue)
+        {
+            var parameter = parameters.Find(mpar => mpar.Name == propertyName);
             if (parameter == null)
             {
                 parameter = new ModuleParameter() { Name = propertyName, Value = propertyValue };
-                module.Properties.Add(parameter);
+                parameters.Add(parameter);
             }
             parameter.Value = propertyValue;
             return parameter;
-        }
-        
-        public static string WaitModuleParameterChange(Module module, string parameterName)
-        {
-            string value = "";
-            // TODO make it as a function _waitModuleParameterChange(mod, parname, timeout)
-            ModuleParameter parameter = null;
-            var start = DateTime.UtcNow.Ticks;
-            var now = start;
-            int maxSecWait = 10; // 10 seconds max wait
-            while (parameter == null && TimeSpan.FromTicks(now - start).TotalSeconds <= maxSecWait)
-            {
-                // wait for maxSecWait seconds if the parameterName doesn't exit yet - it migt not have been initialized yet
-                // classes that use encryption are require many messages to be exchanged
-                now = DateTime.UtcNow.Ticks;
-                parameter = Service.Utility.ModuleParameterGet(module, parameterName);
-                if (parameter == null)
-                {
-                    //Console.WriteLine("Thread - " + System.Threading.Thread.CurrentThread.ManagedThreadId + " Waiting .5s for " + parameterName + ". Waited " + TimeSpan.FromTicks(now - start).TotalSeconds);
-                    Thread.Sleep(500);
-                }
-            }
-
-            if (parameter != null)
-            {
-                var updated = DateTime.UtcNow.Ticks; //p.UpdateTime.Ticks - (TimeSpan.TicksPerSecond * 1); 
-                //
-                Thread.Sleep(500);
-                //
-                int timeout = 0;
-                int maxWait = 50; //(50 * 100ms ticks = 5000 ms)
-                int tickFrequency = 100;
-                //
-                // I don't think that it will ever get into the while loop because the "updated" was just reset
-                // what's the change the "parameter.UpdateTime.Ticks" was updated after "updated" was reset
-                // we'll accept 1 second old values as still current values
-                while ((TimeSpan.FromTicks(updated - parameter.UpdateTime.Ticks).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxWait)
-                {
-                    Thread.Sleep(tickFrequency);
-                }
-                //
-                if (timeout < maxWait)
-                {
-                    value = parameter.Value;
-                }
-            }
-            return value;
         }
 
         public static DateTime JavaTimeStampToDateTime(double javaTimestamp)
@@ -214,6 +169,8 @@ namespace HomeGenie.Service
                         "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
                         "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
                         "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
+                        (String.IsNullOrWhiteSpace(parameter.FieldType)
+                            ? "" : "           \"FieldType\": \"" + JsonEncode(parameter.FieldType) + "\",\n") +
                         "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\"\n" +
                         "       },\n";
                 }
@@ -235,8 +192,8 @@ namespace HomeGenie.Service
             }
             else
             {
-                fieldValue = fieldValue.Replace("&", "&amp;");
-                fieldValue = fieldValue.Replace("\"", "&quot;");
+                //fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\"", "\\\"");
                 fieldValue = fieldValue.Replace("\n", "\\n");
                 //fieldValue = fieldValue.Replace("\'", "\\'");
                 fieldValue = fieldValue.Replace("\r", "\\r");
@@ -293,7 +250,7 @@ namespace HomeGenie.Service
         {
             // if Pico TTS is not installed, then use Google Voice API
             // Note: Pico is only supported in Linux
-            if (File.Exists(picoPath) && "#en-us#en-gb#de-de#es-es#fr-fr#it-it#".IndexOf(locale.ToLower()) > 0)
+            if (File.Exists(picoPath) && "#en-us#en-gb#de-de#es-es#fr-fr#it-it#".IndexOf("#"+locale.ToLower()+"#") >= 0)
             {
                 if (async)
                 {
@@ -368,6 +325,8 @@ namespace HomeGenie.Service
             try
             {
                 var wavFile = Path.Combine(GetTmpFolder(), "_synthesis_tmp.wav");
+                if (File.Exists(wavFile))
+                    File.Delete(wavFile);
 
                 Process.Start(new ProcessStartInfo(picoPath, " -w " + wavFile + " -l " + locale + " \"" + sentence + "\"") {
                     CreateNoWindow = true,
@@ -376,11 +335,12 @@ namespace HomeGenie.Service
                     UseShellExecute = false
                 }).WaitForExit();
 
-                Play(wavFile);
+                if (File.Exists(wavFile))
+                    Play(wavFile);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // TODO: add error logging 
+                HomeGenieService.LogError(e);
             }
         }
 
@@ -388,19 +348,22 @@ namespace HomeGenie.Service
         {
             try
             {
-                var client = new WebClient();
-                client.Encoding = UTF8Encoding.UTF8;
-                client.Headers.Add("Referer", "http://translate.google.com");
-                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence));
-                client.Dispose();
-
                 var mp3File = Path.Combine(GetTmpFolder(), "_synthesis_tmp.mp3");
+                using (var client = new WebClient())
+                {
+                    client.Encoding = UTF8Encoding.UTF8;
+                    client.Headers.Add("Referer", "http://translate.google.com");
+                    var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence) + "&client=homegenie&ts=" + DateTime.UtcNow.Ticks);
 
-                if (File.Exists(mp3File))
-                    File.Delete(mp3File);
-                var stream = File.OpenWrite(mp3File);
-                stream.Write(audioData, 0, audioData.Length);
-                stream.Close();
+                    if (File.Exists(mp3File))
+                        File.Delete(mp3File);
+                    
+                    var stream = File.OpenWrite(mp3File);
+                    stream.Write(audioData, 0, audioData.Length);
+                    stream.Close();
+
+                    client.Dispose();
+                }
 
                 var wavFile = mp3File.Replace(".mp3", ".wav");
                 Process.Start(new ProcessStartInfo("lame", "--decode \"" + mp3File + "\" \"" + wavFile + "\"") {
@@ -410,11 +373,12 @@ namespace HomeGenie.Service
                     UseShellExecute = false
                 }).WaitForExit();
 
-                Play(wavFile);
+                if (File.Exists(mp3File))
+                    Play(wavFile);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // TODO: add error logging 
+                HomeGenieService.LogError(e);
             }
         }
 
@@ -497,7 +461,7 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             });
             asyncTask.Start();
@@ -572,5 +536,59 @@ namespace HomeGenie.Service
                 return element.Attribute(attr).Value;
             }
         }
+    }
+
+    public class ConsoleRedirect : TextWriter
+    {
+        private string lineBuffer = "";
+
+        public Action<string> ProcessOutput;
+
+        public override void Write(string message)
+        {
+            string newLine = new string(CoreNewLine);
+            if (message.IndexOf(newLine) >= 0)
+            {
+                string[] parts = message.Split(CoreNewLine);
+                if (message.StartsWith(newLine))
+                    this.WriteLine(this.lineBuffer);
+                else
+                    parts[0] = this.lineBuffer + parts[0];
+                this.lineBuffer = "";
+                if (parts.Length > 1 && !parts[parts.Length - 1].EndsWith(newLine))
+                {
+                    this.lineBuffer += parts[parts.Length - 1];
+                    parts[parts.Length - 1] = "";
+                }
+                foreach (var s in parts)
+                {
+                    if (!String.IsNullOrWhiteSpace(s))
+                        this.WriteLine(s);
+                }
+                message = "";
+            }
+            this.lineBuffer += message;
+        }
+        public override void WriteLine(string message)
+        {
+            if (ProcessOutput != null && !string.IsNullOrWhiteSpace(message))
+            {
+                // log entire line into the "Domain" column
+                //SystemLogger.Instance.WriteToLog(new HomeGenie.Data.LogEntry() {
+                //    Domain = "# " + this.lineBuffer + message
+                //});
+                ProcessOutput(this.lineBuffer + message);
+            }
+            this.lineBuffer = "";
+        }
+
+        public override System.Text.Encoding Encoding
+        {
+            get
+            {
+                return UTF8Encoding.UTF8;
+            }
+        }
+
     }
 }

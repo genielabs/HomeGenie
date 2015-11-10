@@ -2,6 +2,11 @@
     "timetable_group_shutters" : "Avvolgibili e variatori",
     "timetable_group_thermostats" : "Termostati",
     "timetable_group_lights" : "Luci e prese",
+    "timetable_title" : "Tabella Oraria",
+    "timetable_calendar" : "Calendario",
+    "timetable_program" : "Programma",
+    "timetable_standard" : "Standard",
+    "timetable_daylightsaving" : "Ora legale",
     
     "timetable_edit_table" : "Tabella oraria",
     "timetable_popup_set" : "Imposta",
@@ -40,5 +45,24 @@
     "timetable_calendar_special" : "Speciale",
     
     "timetable_popup_close" : "Chiudi",
-    "timetable_popup_save" : "Salve"    
+    "timetable_popup_save" : "Salva",
+        
+    "control_module_off" : "Off",
+    "control_module_on" : "On",
+    "control_module_close" : "Chiudi",
+    "control_module_open" : "Apri",
+    "control_module_calibrate" : "Calibra",
+
+    "therm_setpoint" : "Set Point",
+    "therm_cool" : "Fresco",
+    "therm_heat" : "Caldo",
+
+    "therm_fanmode" : "Ventilatore",
+    "fan_on" : "On",
+    "fan-auto" : "Auto",
+    "fan_circulate" : "Fai circolare",
+
+    "therm_setmode" : "Modalità",
+    "therm_off" : "Off",
+    "therm_auto" : "Auto"
 }

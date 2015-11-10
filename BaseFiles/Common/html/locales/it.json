@@ -7,8 +7,6 @@
          "Analizza",
     "home_menu_configure": 
          "Configura",
-    "home_menu_about": 
-         "Informazioni",
     "homegenie_about_title": 
          "Informazioni",
     "control_groups_and_modules": 
@@ -53,8 +51,14 @@
          "Indietro",
     "configure_group_bottombar_group_add": 
          "Agg. Gruppo",
+    "configure_group_group": 
+         "Gruppo",
     "configure_group_groupname": 
-         "Nome Gruppo",
+         "Nome",
+    "configure_group_groupwallpaper":
+        "Sfondo",
+    "configure_group_modulelist":
+        "Elenco Moduli",
     "configure_group_deletegroup": 
          "Rimuovere Gruppo?",
     "configure_group_deleteprompt": 
@@ -226,9 +230,9 @@
     "configure_interfaces_heading": 
          "Impostazioni",
     "configure_interfaces_optdisable": 
-         "Disattiva",
+         "Disattivo",
     "configure_interfaces_optenable": 
-         "Attiva",
+         "Attivo",
     "configure_maintenance_heading": 
          "Manutenzione",
     "configure_system_theme": 
@@ -601,8 +605,6 @@
         "Cambia",
     "configure_system_statistics_databasemaxsizechange":
         "Dimensione massima (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Nota: dopo aver cambiato dimensione, HomeGenie deve essere riavviato per rendere le modifiche effettive.",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Annulla",
     "configure_system_statistics_databasemaxsizechange_commit":
@@ -660,13 +662,161 @@
     "configure_widgeteditor_nobindmodule_close":
         "Chiudi",
     "configure_widgeteditor_bindtomodule":
-        "bind to module",
+        "collega a modulo",
     "configure_widgeteditor_selectmodule_placeholder":
-        "(select a module)",
+        "(seleziona modulo)",
     "configure_widgeteditor_title":
-        "Widget editor",
+        "Editor Widget",
     "configure_widgeteditor_savinghtml":
-        "Saving HTML...",
+        "Salvo HTML...",
     "configure_widgeteditor_savingjavascript":
-        "Saving Javascript..."
+        "Salvo Javascript...",
+    "configure_interfaces_importdriver":
+        "Installa Add-on",        
+    "configure_interfaces_download":
+        "Scarica & installa",        
+    "configure_interfaces_upload":
+        "Carica & installa",        
+    "configure_interfaces_addonslist":
+        "Elenco Add-on",        
+    "configure_interfaces_installaddons":
+        "Installa Add-on",
+    "configure_interfaces_downloadfromurl":
+        "Scarica pacchetto add-on da URL",
+    "configure_interfaces_uploadpackage":
+        "Carica pacchetto add-on da file",
+    "cronwizard_title":
+        "Wizard eventi Cron",        
+    "cronwizard_tab_minute":
+        "Minuto",        
+    "cronwizard_tab_hour":
+        "Ora",        
+    "cronwizard_tab_dayofmonth":
+        "Giorno del mese",        
+    "cronwizard_tab_month":
+        "Mese",        
+    "cronwizard_tab_dayofweek":
+        "Giorno della settimana",        
+    "cronwizard_event_willoccur":
+        "Questo evento si verificherà",
+    "cronwizard_minuteselect_everyminute":
+        "ogni minuto",        
+    "cronwizard_minuteselect_everysomeminute":
+        "ogni &lt;n&gt; minuto",        
+    "cronwizard_minuteselect_eachselected":
+        "nei minuti selezionati",        
+    "cronwizard_hourselect_everyhour":
+        "ogni ora",        
+    "cronwizard_hourselect_everysomehour":
+        "ogni &lt;n&gt; ora",        
+    "cronwizard_hourselect_eachselected":
+        "nelle ore selezionate",        
+    "cronwizard_dayselect_everyday":
+        "ogni giorno",        
+    "cronwizard_dayselect_eachselected":
+        "i giorni selezionati",
+    "cronwizard_monthselect_everymonth":
+        "ogni mese",        
+    "cronwizard_monthselect_eachselected":
+        "nei mesi selezionati",
+    "cronwizard_dayowselect_everydayow":
+        "ogni giorno della settimana",        
+    "cronwizard_dayowselect_eachselected":
+        "nei giorni della settimana selezionati",        
+"##":
+"## COMMON LOCALES",
+"##":
+"##",
+    "common_month_jan":
+        "Gen",        
+    "common_month_feb":
+        "Feb",        
+    "common_month_mar":
+        "Mar",        
+    "common_month_apr":
+        "Apr",        
+    "common_month_may":
+        "Mag",        
+    "common_month_jun":
+        "Giu",        
+    "common_month_jul":
+        "Lug",        
+    "common_month_aug":
+        "Ago",        
+    "common_month_sep":
+        "Set",        
+    "common_month_oct":
+        "Ott",        
+    "common_month_nov":
+        "Nov",        
+    "common_month_dec":
+        "Dic",        
+    "common_dayofweek_sun":
+        "Dom",        
+    "common_dayofweek_mon":
+        "Lun",        
+    "common_dayofweek_tue":
+        "Mar",        
+    "common_dayofweek_wed":
+        "Mer",        
+    "common_dayofweek_thu":
+        "Gio",        
+    "common_dayofweek_fri":
+        "Ven",        
+    "common_dayofweek_sat":
+        "Sab",        
+    "common_command_cancel":
+        "Annulla",        
+    "common_command_ok":
+        "Ok",
+    "common_command_proceed":
+        "Procedi",
+    "common_command_save":
+        "Salva",
+    "common_status_notset":
+        "Non impostato",
+    "common_voice_control":
+        "Controllo vocale",
+    "common_command_delete":
+        "Elimina",
+    "common_command_upload":
+        "Carica",
+    "common_select_none":
+        "Nessuno",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Home",
+    "home_menu_groups":
+        "Gruppi",
+    "home_menu_statistics":
+        "Statistiche",
+    "home_menu_automation":
+        "Automazione",
+    "home_menu_programeditor":
+        "Programmi",
+    "home_menu_widgeteditor":
+        "Widget",
+    "home_menu_scheduler":
+        "Pianificazione",
+    "home_menu_system":
+        "Sistema",
+    "home_menu_settings":
+        "Impostazioni",
+    "home_menu_maintenance":
+        "Manutenzione",
+    "home_menu_about": 
+         "Informazioni",
+    "home_menu_about_version":
+        "Versione",
+    "home_menu_about_userguide":
+        "Guida utente",
+    "home_menu_about_programming":
+        "Guida alla programmazione",
+    "home_menu_about_forum":
+        "Forum utenti",
+    "home_menu_about_support":
+        "Keep HomeGenie Up!"
 }

@@ -1,21 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r485</Version>
+  <Version>1.1 beta r500</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Updated Pepper1 Z-Wave database
-  - Program.Say will now use Pico TTS if installed in the system, otherwise Google Speech API
-  - Improved unhandled exceptions trapping/recovery
-  - Fixed bug in app module creation
-  - Added "Console.Output" to the event log page
-  - Added redirection of standard output/error to HG log file
-  - Fixed bug in ZWaveLib that was causing the creation of non-existent nodes
-  - Added pause to ModuleParameter.WaitUpdate loop
-  - Some minor fixes to the UI
-  - Fixed bug in modules cleanup (not deleting modules sometime)
-  - Fixed MQTT client app: it was missing reconnection when disconnected from MQTT server
-  - Deprecated Weeco 4M board interface driver as built-in (now available as importable interface driver)
-  - Added importable MIG interface driver plugins
-  - Added "configlets" files for implementing custom interface drivers UI</ReleaseNote>
-  <ReleaseDate>2015-04-30T18:26:11.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed ZWave interface sensor timeout bug and sensor Status.Level "0.01" bug
+  - Disabled limit of max one opened http connection per program in NetHelper
+  - Improved media server widget with thumbnails and support for multiple bitrates and formats
+  - Added UPnP interface command "AvMedia.GetItem"
+  - Improved camera widget
+  - Fixed 'continuous Event Stream disconnection' bug when running on old mono ARM-hf (eg. Raspberry Pi)
+  - Updated Spanish locales
+  - Disabled periodic Weather Underground program notifications in the UI
+  - Reverted XTenLib to the using of Thread instead of Task</ReleaseNote>
+  <ReleaseDate>2015-11-05T16:58:52.0000Z</ReleaseDate>
 </ReleaseInfo>

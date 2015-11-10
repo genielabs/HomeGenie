@@ -40,11 +40,11 @@ namespace HomeGenie.Service
     [Serializable]
     public class ReleaseInfo
     {
-        public string Name;
-        public string Version;
-        public string Description;
-        public string ReleaseNote;
-        public DateTime ReleaseDate;
+        public string Name { get; set; }
+        public string Version { get; set; }
+        public string Description { get; set; }
+        public string ReleaseNote { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public string DownloadUrl;
         public bool RequireRestart;
         public bool UpdateBreak;
@@ -98,7 +98,7 @@ namespace HomeGenie.Service
         public delegate void InstallProgressMessageEvent(object sender, string message);
         public InstallProgressMessageEvent InstallProgressMessage;
 
-        private string endpointUrl = "http://www.homegenie.it/release_updates.php";
+        private string endpointUrl = "http://www.homegenie.it/release_updates_v1_1.php";
         private ReleaseInfo currentRelease;
         private List<ReleaseInfo> remoteUpdates;
         private Timer checkInterval;
@@ -165,28 +165,40 @@ namespace HomeGenie.Service
 
         public List<ReleaseInfo> GetRemoteUpdates()
         {
-            var client = new WebClient();
-            client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-            try
+            using (var client = new WebClient())
             {
-                string releaseXml = client.DownloadString(endpointUrl);
-                var serializer = new XmlSerializer(typeof(List<ReleaseInfo>));
-                using (TextReader reader = new StringReader(releaseXml))
+                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                try
                 {
-                    remoteUpdates.Clear();
-                    var updates = (List<ReleaseInfo>)serializer.Deserialize(reader);
-                    updates.Sort(delegate(ReleaseInfo a, ReleaseInfo b) { return a.ReleaseDate.CompareTo(b.ReleaseDate); });
-                    foreach (var releaseInfo in updates)
+                    string releaseXml = client.DownloadString(endpointUrl);
+                    var serializer = new XmlSerializer(typeof(List<ReleaseInfo>));
+                    using (TextReader reader = new StringReader(releaseXml))
                     {
-                        if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
+                        remoteUpdates.Clear();
+                        var updates = (List<ReleaseInfo>)serializer.Deserialize(reader);
+                        updates.Sort(delegate(ReleaseInfo a, ReleaseInfo b)
                         {
-                            remoteUpdates.Add(releaseInfo);
-                            if (releaseInfo.UpdateBreak) break;
+                            return a.ReleaseDate.CompareTo(b.ReleaseDate);
+                        });
+                        foreach (var releaseInfo in updates)
+                        {
+                            if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
+                            {
+                                remoteUpdates.Add(releaseInfo);
+                                if (releaseInfo.UpdateBreak)
+                                    break;
+                            }
                         }
                     }
                 }
+                catch (Exception)
+                {
+                }
+                finally
+                {
+                    client.Dispose();
+                }
             }
-            catch (Exception) { }
             return remoteUpdates;
         }
 
@@ -248,19 +260,25 @@ namespace HomeGenie.Service
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(archiveName));
             }
-            var client = new WebClient();
-            client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-            try
+            using (var client = new WebClient())
             {
-                client.DownloadFile(releaseInfo.DownloadUrl, archiveName);
+                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                try
+                {
+                    client.DownloadFile(releaseInfo.DownloadUrl, archiveName);
+                }
+                catch (Exception)
+                {
+                    if (ArchiveDownloadUpdate != null)
+                        ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
+                    return null;
+                    //                throw;
+                }
+                finally
+                {
+                    client.Dispose();
+                }
             }
-            catch (Exception)
-            {
-                if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
-                return null;
-                //                throw;
-            }
-
             // Unarchive (unzip)
             if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
 
@@ -393,7 +411,6 @@ namespace HomeGenie.Service
 
                     if (!doNotCopy)
                     {
-                        Console.WriteLine("+ " + destinationFile);
                         try
                         {
                             LogMessage("+ Copying file '" + destinationFile + "'");
@@ -564,10 +581,10 @@ namespace HomeGenie.Service
                 bool configChanged = false;
                 foreach (var item in schedulerItems)
                 {
-                    if (homegenie.ProgramEngine.SchedulerService.Get(item.Name) == null)
+                    if (homegenie.ProgramManager.SchedulerService.Get(item.Name) == null)
                     {
                         LogMessage("+ Adding Scheduler Item: " + item.Name);
-                        homegenie.ProgramEngine.SchedulerService.AddOrUpdate(item.Name, item.CronExpression);
+                        homegenie.ProgramManager.SchedulerService.AddOrUpdate(item.Name, item.CronExpression);
                         if (!configChanged) configChanged = true;
                     }
                 }
@@ -601,12 +618,12 @@ namespace HomeGenie.Service
                 var config = (SystemConfiguration)serializer.Deserialize(reader);
                 //
                 bool configChanged = false;
-                foreach (var iface in config.MIGService.Interfaces)
+                foreach (var iface in config.MigService.Interfaces)
                 {
-                    if (homegenie.SystemConfiguration.MIGService.GetInterface(iface.Domain) == null)
+                    if (homegenie.SystemConfiguration.MigService.GetInterface(iface.Domain) == null)
                     {
                         LogMessage("+ Adding MIG Interface: " + iface.Domain);
-                        homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
+                        homegenie.SystemConfiguration.MigService.Interfaces.Add(iface);
                         if (!configChanged) configChanged = true;
                     }
                 }
@@ -644,9 +661,9 @@ namespace HomeGenie.Service
                     {
 
                         // Only system programs are to be updated
-                        if (program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        if (program.Address < ProgramManager.USER_SPACE_PROGRAMS_START)
                         {
-                            ProgramBlock oldProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                            ProgramBlock oldProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                             if (oldProgram != null)
                             {
 
@@ -657,7 +674,7 @@ namespace HomeGenie.Service
                                 // Preserve IsEnabled status if program already exist
                                 program.IsEnabled = oldProgram.IsEnabled;
                                 LogMessage("* Updating Automation Program: " + program.Name + " (" + program.Address + ")");
-                                homegenie.ProgramEngine.ProgramRemove(oldProgram);
+                                homegenie.ProgramManager.ProgramRemove(oldProgram);
 
                             }
                             else
@@ -689,7 +706,7 @@ namespace HomeGenie.Service
                             catch { }
 
                             // Add the new program to the ProgramEngine
-                            homegenie.ProgramEngine.ProgramAdd(program);
+                            homegenie.ProgramManager.ProgramAdd(program);
 
                             if (!configChanged) configChanged = true;
                         }

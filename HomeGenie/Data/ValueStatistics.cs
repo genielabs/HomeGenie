@@ -29,12 +29,39 @@ using HomeGenie.Service.Logging;
 
 namespace HomeGenie.Data
 {
+    /// <summary>
+    /// Value statistics.
+    /// </summary>
     public class ValueStatistics
     {
+        /// <summary>
+        /// Stat value.
+        /// </summary>
         public class StatValue
         {
-            public double Value;
-            public DateTime Timestamp;
+            /// <summary>
+            /// Gets the value.
+            /// </summary>
+            /// <value>The value.</value>
+            public readonly double Value;
+            /// <summary>
+            /// Gets the timestamp.
+            /// </summary>
+            /// <value>The timestamp.</value>
+            public readonly DateTime Timestamp;
+
+            /// <summary>
+            /// Gets the unix timestamp.
+            /// </summary>
+            /// <value>The unix timestamp.</value>
+            public double UnixTimestamp
+            {
+                get
+                {
+                    var uts = (Timestamp - new DateTime(1970, 1, 1, 0, 0, 0));
+                    return uts.TotalMilliseconds;
+                }
+            }
 
             public StatValue(double value, DateTime timestamp)
             {
@@ -44,8 +71,9 @@ namespace HomeGenie.Data
         }
 
         private List<StatValue> statValues;
-        private TsList<StatValue> historyValues = new TsList<StatValue>();
-        private int historyLimit = 10;
+        private TsList<StatValue> historyValues;
+        // historyLimit is expressed in minutes
+        private int historyLimit = 60 * 24;
         private StatValue lastEvent, lastOn, lastOff;
 
         public ValueStatistics()
@@ -54,32 +82,83 @@ namespace HomeGenie.Data
             statValues = new List<StatValue>();
             statValues.Add(new StatValue(0, LastProcessedTimestap));
             lastEvent = lastOn = lastOff = new StatValue(0, LastProcessedTimestap);
+            historyValues = new TsList<StatValue>();
             historyValues.Add(lastEvent);
-            while (historyValues.Count > historyLimit)
-            {
-                historyValues.RemoveAt(historyValues.Count - 1);
-            }
         }
 
-        public void AddValue(string fieldName, double value, DateTime timestamp)
+        /// <summary>
+        /// Gets or sets the history limit.
+        /// </summary>
+        /// <value>The history limit.</value>
+        public int HistoryLimit
+        {
+            get { return historyLimit; }
+            set { historyLimit = value; }
+        }
+
+        /// <summary>
+        /// Gets the history.
+        /// </summary>
+        /// <value>The history.</value>
+        public TsList<StatValue> History
+        {
+            get { return historyValues; }
+        }
+
+        /// <summary>
+        /// Gets the current value.
+        /// </summary>
+        /// <value>The current.</value>
+        public StatValue Current
+        {
+            get { return historyValues[0]; }
+        }
+
+        /// <summary>
+        /// Gets the last value.
+        /// </summary>
+        /// <value>The last.</value>
+        public StatValue Last
+        {
+            get { return lastEvent; }
+        }
+
+        /// <summary>
+        /// Gets the last on value (value != 0).
+        /// </summary>
+        /// <value>The last on.</value>
+        public StatValue LastOn
+        {
+            get { return lastOn; }
+        }
+
+        /// <summary>
+        /// Gets the last off value (value == 0).
+        /// </summary>
+        /// <value>The last off.</value>
+        public StatValue LastOff
+        {
+            get { return lastOff; }
+        }
+
+        internal void AddValue(string fieldName, double value, DateTime timestamp)
         {
             if (StatisticsLogger.IsValidField(fieldName))
             {
                 // add value for StatisticsLogger use
                 statValues.Add(new StatValue(value, timestamp));
             }
-            //
             // "value" is the occurring event in this very moment, 
             // so "Current" is holding previous value right now
             if (Current.Value != value)
             {
                 lastEvent = new StatValue(Current.Value, Current.Timestamp);
-                if (value == 0)
+                if (value == 0 && lastEvent.Value > 0)
                 {
                     lastOn = lastEvent;
                     lastOff = new StatValue(value, timestamp);
                 }
-                else if (Current.Value == 0)
+                else if (value > 0 && lastEvent.Value == 0)
                 {
                     lastOff = lastEvent;
                     lastOn = new StatValue(value, timestamp);
@@ -87,43 +166,17 @@ namespace HomeGenie.Data
             }
             // insert current value into history and so update "Current" to "value"
             historyValues.Insert(0, new StatValue(value, timestamp));
-        }
-
-        public int HistoryLimit
-        {
-            get { return historyLimit; }
-            set { historyLimit = value; }
-        }
-        
-        public TsList<StatValue> History
-        {
-            get { return historyValues; }
-        }
-
-        public StatValue Current
-        {
-            get { return historyValues[0]; }
-        }
-
-        public StatValue Last
-        {
-            get { return lastEvent; }
-        }
-
-        public StatValue LastOn
-        {
-            get { return lastOn; }
-        }
-        
-        public StatValue LastOff
-        {
-            get { return lastOff; }
+            // keeep size within historyLimit (minutes)
+            while ((DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
+            {
+                historyValues.RemoveAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes > historyLimit);
+            }
         }
 
         /// <summary>
         /// Get resampled statistic values by averaging values for a given time range increment (eg 60 minutes)
         /// </summary>
-        public List<StatValue> GetResampledValues(int sampleWidth) // in minutes
+        internal List<StatValue> GetResampledValues(int sampleWidth) // in minutes
         {
             // TODO: to be implemented
             return null;

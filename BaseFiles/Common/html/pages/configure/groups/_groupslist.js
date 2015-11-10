@@ -51,7 +51,7 @@ HG.WebApp.GroupsList.GetGroupsListViewItems = function () {
                 modulescount++;
             }
         }
-        $('#configure_groupslist').append('<li data-group-name="' + HG.WebApp.Data.Groups[i].Name + '" data-group-index="' + i + '"><a href="#page_configure_groupmodules" data-transition="slide">' + HG.WebApp.Data.Groups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        $('#configure_groupslist').append('<li data-group-name="' + HG.WebApp.Data.Groups[i].Name + '" data-group-index="' + i + '"><a href="#page_configure_groupmodules">' + HG.WebApp.Data.Groups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
     }
     $('#configure_groupslist').listview();
     $('#configure_groupslist').listview('refresh');

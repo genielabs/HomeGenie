@@ -39,12 +39,12 @@
             });
             // media buttons action
             widget.find('[data-ui-field=media_play]').on('click', function () {
-                servicecall('AvMedia.Play', module.Domain, module.Address);
+                servicecall('AvMedia.Play', module.Domain, module.Address, '');
                 widget.find('[data-ui-field=media_play]').hide();
                 widget.find('[data-ui-field=media_pause]').show();
             });
             widget.find('[data-ui-field=media_pause]').on('click', function () {
-                servicecall('AvMedia.Pause', module.Domain, module.Address);
+                servicecall('AvMedia.Pause', module.Domain, module.Address, '');
                 widget.find('[data-ui-field=media_pause]').hide();
                 widget.find('[data-ui-field=media_play]').show();
             });
@@ -52,15 +52,15 @@
                 servicecall('AvMedia.Pause', module.Domain, module.Address);
             });
             widget.find('[data-ui-field=media_stop]').on('click', function () {
-                servicecall('AvMedia.Stop', module.Domain, module.Address);
+                servicecall('AvMedia.Stop', module.Domain, module.Address, '');
                 widget.find('[data-ui-field=media_pause]').hide();
                 widget.find('[data-ui-field=media_play]').show();
             });
             widget.find('[data-ui-field=media_prev]').on('click', function () {
-                servicecall('AvMedia.Prev', module.Domain, module.Address);
+                servicecall('AvMedia.Prev', module.Domain, module.Address, '');
             });
             widget.find('[data-ui-field=media_next]').on('click', function () {
-                servicecall('AvMedia.Next', module.Domain, module.Address);
+                servicecall('AvMedia.Next', module.Domain, module.Address, '');
             });
             widget.find('[data-ui-field=media_mute]').on('click', function () {
                 if (_this.IsMuted) {

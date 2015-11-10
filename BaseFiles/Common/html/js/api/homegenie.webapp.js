@@ -4,8 +4,8 @@ HG.WebApp.Data = HG.WebApp.Data || {};
 //
 HG.WebApp.Data.Interfaces = Array();
 HG.WebApp.Data.Events = Array();
-HG.WebApp.Data.Modules = Array(); 
-HG.WebApp.Data.Groups = Array();  
+HG.WebApp.Data.Modules = Array();
+HG.WebApp.Data.Groups = Array();
 HG.WebApp.Data.AutomationGroups = Array();
 HG.WebApp.Data.Programs = Array();
 HG.WebApp.Data.ServiceKey = 'api';
@@ -20,11 +20,6 @@ HG.WebApp.Data._CurrentGroupIndex = 0;
 //
 HG.WebApp.Data._DefaultLocale = {};
 HG.WebApp.Data._CurrentLocale = {};
-//
-// Code Mirror editor instances (TODO: refactor these global vars to a better name)
-var editor1 = null;
-var editor2 = null;
-var editor3 = null;
 //
 // Speech Recognition objects
 var recognition = null;
@@ -44,22 +39,24 @@ HG.WebApp.InitializePage = function ()
     }
     //
     $.mobile.ajaxFormsEnabled = false;
-    $.ajaxSetup({
-        cache: false
-    });
+    //$.ajaxSetup({
+    //    cache: false
+    //});
     //
-    HG.Configure.LoadData();
+    HG.Configure.LoadData(function(){
+        HG.WebApp.Control.RenderMenu();
+    });
     //
     HG.WebApp.Home.UpdateHeaderStatus();
     window.setInterval('HG.WebApp.Home.UpdateHeaderStatus();', 10000);
     //
     // Page Before Show: common initialization stuff
     //
-    $('[data-role=page]').on('pagebeforeshow', function (event) 
+    $('[data-role=page]').on('pagebeforeshow', function (event)
     {
         setTheme(dataStore.get('UI.Theme'));
         //
-        if (this.id == "page_analyze") 
+        if (this.id == "page_analyze")
         {
             HG.WebApp.Statistics.InitConfiguration();
         }
@@ -67,42 +64,28 @@ HG.WebApp.InitializePage = function ()
         {
             HG.WebApp.Maintenance.LoadSettings();
         }
-        else if (this.id == 'page_configure_groups') 
+        else if (this.id == 'page_configure_groups')
         {
             HG.Configure.Modules.List(function (data) {
                 try
                 {
-                    HG.WebApp.Data.Modules = eval(data);                   
+                    HG.WebApp.Data.Modules = eval(data);
                 } catch (e) { }
                 HG.Automation.Programs.List(function () {
                     HG.WebApp.GroupsList.LoadGroups();
                 });
             });
         }
-        else if (this.id == 'page_configure_groupmodules') 
-        {
-            HG.WebApp.GroupModules.LoadGroupModules();
-            $.mobile.loading('show');
-        }
         else if (this.id == 'page_configure_schedulerservice')
         {
             HG.WebApp.Scheduler.LoadScheduling();
-        }
-        else if (this.id == 'page_automation_editprogram') 
-        {	            
-            $('#automation_program_scriptcondition').next().css('display', '');
-            $('#automation_program_scriptsource').next().css('display', '');
-            HG.WebApp.ProgramEdit.SetTab(1);
-            HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-            automationpage_ConditionsRefresh();                                                    
-            automationpage_CommandsRefresh();                                                   
         }
     });
     //
     // Page events - Close - Cleanup stuff
     //
     $('[data-role=page]').on('pagehide', function (event) {
-        if (this.id == "page_analyze") 
+        if (this.id == "page_analyze")
         {
             HG.WebApp.Statistics.SetAutoRefresh( false );
         }
@@ -125,114 +108,38 @@ HG.WebApp.InitializePage = function ()
     //
     setTimeout(function() {
 
+        // localize UI
         var userLang = HG.WebApp.Locales.GetUserLanguage();
-        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
-        // enable/disable speech input
-        if (!('webkitSpeechRecognition' in window)) {
-            //no speech support
-            $('#speechinput').hide();
-        } else {
-            // lookup for a localized version, if any
-            HG.VoiceControl.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.lingo.json', function(success) {
-                if (!success)
-                {
-                    // fallback to english lingo file
-                    HG.VoiceControl.Localize('./locales/en.lingo.json', function(res){ });
+        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
+            HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json', function(success){
+                $('#homegenie_overlay').fadeOut(200);
+                // Show about popup
+                if (!dataStore.get('UI.AboutPopupShown')) {
+                    dataStore.set('UI.AboutPopupShown', true);
+                    setTimeout(HG.WebApp.Home.About, 3000);
                 }
             });
-            recognition = new webkitSpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.onstart = function() { 
-                $('#voicerecognition_button').addClass('ui-disabled');
-            }
-            recognition.onresult = function(event) { 
-                var interim_transcript = '';
-                if (typeof(event.results) == 'undefined') {
-                    $('#speechinput').hide();
-                    recognition.onend = null;
-                    recognition.stop();
-                    return;
-                }
-                for (var i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        final_transcript += event.results[i][0].transcript;
-                    } else {
-                        interim_transcript += event.results[i][0].transcript;
-                    }
-                }
-            }
-            recognition.onerror = function(event) { 
-                $('#voicerecognition_button').removeClass('ui-disabled');
-                alert('Voice Recognition Error: ' + event); 
-            }
-            recognition.onend = function() { 
-                $('#voicerecognition_text').val(final_transcript);
-                $('#voicerecognition_button').removeClass('ui-disabled');
-                HG.VoiceControl.InterpretInput(final_transcript);
-                final_transcript = '';
-            }
-        }
-        //
-        // Apply UI settings
+        });
+        HG.VoiceControl.Initialize();
+
+        // apply UI settings
         setTheme(dataStore.get('UI.Theme'));
         if (dataStore.get('UI.EventsHistory'))
         {
             $('#btn_eventshistory_led').show();
         }
-        //
+
+        // get HG release info
+        HG.System.GetVersion(function(res){
+            $('#systemversion').html(res.Version);
+        });
+
         // add css google web fonts
         setTimeout(function(){
-            $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+            $('head').append('<link href="https://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
         }, 5000);
 
     }, 100);
-    //
-    // Code Mirror and other UI widgets
-    //
-    editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-1", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { globalVars: true },
-        theme: 'ambiance'
-    });
-    editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-2", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { globalVars: true },
-        theme: 'ambiance'
-    });
-    editor3 = CodeMirror.fromTextArea(document.getElementById('automation_program_sketchfile'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-3", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { globalVars: true },
-        theme: 'ambiance'
-    });
-    $(editor3.getWrapperElement()).hide();
     //
     // stacked message popups
     //
@@ -247,7 +154,7 @@ HG.WebApp.InitializePage = function ()
     Raphael.fn.ball = function (x, y, r, color) {
         return this.set(
             this.ellipse(x, y + r - r / 5, r, r / 2).attr({ fill: "rhsb(" + color.h + ", 1, .25)-hsb(" + color.h + ", 1, .25)", stroke: "none", opacity: 0 }),
-            this.ellipse(x, y, r, r).attr({ fill: "r(.5,.9)hsb(" + color.h + ", " + color.s + ", .75)-hsb(" + color.h + ", " + color.s + ", " + color.v + ")", stroke: "none", opacity: 0.8 }),
+            this.ellipse(x, y, r, r).attr({ fill: "r(.5,.9)hsb(" + color.h + ", " + color.s + ", .75)-hsb(" + color.h + ", " + color.s + ", " + color.b + ")", stroke: "none", opacity: 0.8 }),
             this.ellipse(x, y, r - r / 5, r - r / 20).attr({ stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0 })
         );
     };
@@ -282,88 +189,140 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.Events.PopupRefreshIgnore();
     });
     $('#actionconfirm_popup').enhanceWithin().popup();
+    //
+    // Side Panel
+    var menuPanel = $('body>[data-role="panel"]');
+    menuPanel.panel()
+        .on('panelopen', function() {
+            $('#homegenie_overlay').fadeIn(150);
+        })
+        .on('panelbeforeclose', function() {
+            $('#homegenie_overlay').fadeOut(150);
+        })
+        .children().first().trigger('create');
+    menuPanel.on('click', function() {
+        $(this).panel('close');
+    });
+    // A swipe gesture open up the Side Panel
+    $( document ).on('swipeleft swiperight', 'div[data-role=page]', function( e ) {
+        if ($('.ui-page-active .ui-popup-active').length == 0)
+        if (!$(e.target).is('span'))
+        if (!$(e.target).is('pre'))
+        if (!$(e.target).is('p'))
+        if (!$(e.target).is(':input'))
+        if ($(e.target).attr('id') != 'page_automation_editprogram')
+        if ($('#page_automation_editprogram').children().find($(e.target)).length == 0)
+        if ($(e.target).attr('id') != 'page_widgeteditor_editwidget')
+        if ($('#page_widgeteditor_editwidget').children().find($(e.target)).length == 0)
+        if ($.mobile.activePage.jqmData('panel') !== 'open') {
+            if (e.type === 'swipeleft') {
+                $(menuPanel.get(0)).panel('open');
+            } else if (e.type === 'swiperight') {
+                $(menuPanel.get(1)).panel('open');
+            }
+        }
+    });
+
+    // Cron Event Wizard popup
+    HG.Ui.GenerateWidget('core/popup.cronwizard', { parent: $(document).find('body') }, function(handler){
+        var element = handler.element;
+        element.enhanceWithin().popup();
+        HG.Ui.Popup.CronWizard = handler;
+    });
+
+    $('#homegenie_about').enhanceWithin().popup();
+    $('#about_popup_updatebutton').on('click', function(){
+        HG.System.UpdateManager.UpdateCheck();
+        $('#homegenie_about').popup('close');
+    });
 };
 
 
+
 //
-// namespace : HG.WebApp.Events 
+// namespace : HG.WebApp.Events
 // info      : -
 //
-{include pages/events/_events.js}	
+{include pages/events/_events.js}
 //
-// namespace : HG.WebApp.Control 
+// namespace : HG.WebApp.Control
 // info      : -
 //
-{include pages/control/_control.js}		
+{include pages/control/_control.js}
 //
-// namespace : HG.WebApp.Statistics 
+// namespace : HG.WebApp.Statistics
 // info      : -
 //
-{include pages/analyze/_statistics.js}		
+{include pages/analyze/_statistics.js}
 //
-// namespace : HG.WebApp.GroupsList 
+// namespace : HG.WebApp.GroupsList
 // info      : Configure/Groups ui logic (Groups List)
 //
-{include pages/configure/groups/_groupslist.js}		
+{include pages/configure/groups/_groupslist.js}
 //
-// namespace : HG.WebApp.GroupModules 
+// namespace : HG.WebApp.GroupModules
 // info      : Configure/Groups ui logic (Group Modules)
 //
-{include pages/configure/groups/_groupmodules.js}	
+{include pages/configure/groups/_groupmodules.js}
 //
-// namespace : HG.WebApp.SystemSettings 
+// namespace : HG.WebApp.SystemSettings
 // info      : -
 //
-{include pages/configure/interfaces/_systemsettings.js}	
+{include pages/configure/interfaces/_systemsettings.js}
 //
-// namespace : HG.WebApp.Maintenance 
+// namespace : HG.WebApp.Maintenance
 // info      : -
 //
-{include pages/configure/maintenance/_maintenance.js}	
+{include pages/configure/maintenance/_maintenance.js}
 //
-// namespace : HG.WebApp.AutomationGroups 
+// namespace : HG.WebApp.AutomationGroups
 // info      : -
 //
-{include pages/configure/programengine/_groupslist.js}	
+{include pages/configure/programengine/_groupslist.js}
 //
-// namespace : HG.WebApp.ProgramsList 
+// namespace : HG.WebApp.ProgramsList
 // info      : -
 //
-{include pages/configure/programengine/_programslist.js}	
+{include pages/configure/programengine/_programslist.js}
 //
-// namespace : HG.WebApp.ProgramEdit 
+// namespace : HG.WebApp.ProgramEdit
 // info      : -
 //
-{include pages/configure/programengine/_programedit.js}	
+{include pages/configure/programengine/_programedit.js}
 //
-// namespace : HG.WebApp.WidgetEditor 
+// namespace : HG.WebApp.WidgetEditor
 // info      : -
 //
-{include pages/configure/widgeteditor/_widgetslist.js} 
-{include pages/configure/widgeteditor/_widgetedit.js} 
+{include pages/configure/widgeteditor/_widgetslist.js}
+{include pages/configure/widgeteditor/_widgetedit.js}
 //
-// namespace : HG.WebApp.Scheduler 
+// namespace : HG.WebApp.Scheduler
 // info      : -
 //
-{include pages/configure/scheduler/_scheduler.js}	
+{include pages/configure/scheduler/_scheduler.js}
 //
-// namespace : HG.WebApp.Apps.NetPlEditCurrentModuleay.SlideShow 
+// namespace : HG.WebApp.Apps.NetPlEditCurrentModuleay.SlideShow
 // info      : -
 //
-{include pages/apps/netplay/_slideshow.js}	
+{include pages/apps/netplay/_slideshow.js}
 //
 // namespace : HG.WebApp.Home namespace
 // info      : -
 //
 HG.WebApp.Home = HG.WebApp.Home || {};
+HG.WebApp.Home.About = function()
+{
+    $('#homegenie_about').popup('open');
+};
+//
 HG.WebApp.Home.UpdateHeaderStatus = function()
 {
     HG.WebApp.Home.UpdateInterfacesStatus();
 };
 //
-HG.WebApp.Home.UpdateInterfacesStatus = function() 
+HG.WebApp.Home.UpdateInterfacesStatus = function()
 {
-    var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
+    var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/';
     $.ajax({
         url: ifaceurl,
         type: 'GET',
@@ -392,20 +351,92 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
             //
             if (isupdateavailable)
             {
-                status += '<a href="#page_configure_maintenance" data-transition="slide" alt="Update available."><img title="Update available." src="images/update.png" height="28" width="28" style="margin-left:6px" vspace="2" hspace="0" /></a>';
+                status += '<a href="#page_configure_maintenance" alt="Update available."><img title="Update available." src="images/update.png" height="28" width="28" style="margin-left:6px" vspace="2" hspace="0" /></a>';
             }
             //
             $('#interfaces_status').html(status);
         }
-    });		
+    });
 };
 //
 // namespace : HG.WebApp.Utility namespace
 // info      : global utility functions
 //
 HG.WebApp.Utility = HG.WebApp.Utility || {};
+// code mirror full screen editor popup
+HG.WebApp.Utility._cmFsEditor = null;
+HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callback) {
+    if (HG.WebApp.Utility._cmFsEditor == null) {
+        HG.WebApp.Utility._cmFsEditor = CodeMirror.fromTextArea(document.getElementById('fullscreen_edit_text'), {
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                "Ctrl-Space": "autocomplete"
+            },
+            foldGutter: true,
+            gutters: ["CodeMirror-lint-markers-4", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            highlightSelectionMatches: { showToken: /\w/ },
+            mode: { name: "javascript", globalVars: true },
+            theme: 'ambiance'
+        });
+    }
+    var editor = $('#fullscreen_edit_box');
+    editor.find('[data-ui-field=title]').html(title);
+    editor.find('[data-ui-field=subtitle]').html(subtitle);
+    var nameLabel = editor.find('[data-ui-field=namelabel]').html(name);
+    var nameInputDiv = editor.find('[data-ui-field=nameinput]');
+    var nameInputText = nameInputDiv.find('input').val(name);
+    var confirmButton = editor.find('[data-ui-field=confirm]');
+    var cancelButton = editor.find('[data-ui-field=cancel]');
+    if (name == null || name == '') {
+        nameLabel.hide();
+        nameInputDiv.show();
+    } else {
+        nameLabel.show();
+        nameInputDiv.hide();
+    }
+    cancelButton.on('click', function() {
+        var response = { 'name': nameInputText.val(), 'text': HG.WebApp.Utility._cmFsEditor.getValue(), 'isCanceled': true };
+        cancelButton.off('click');
+        confirmButton.off('click');
+        $('#fullscreen_edit_box').hide(150);
+        callback(response);
+    });
+    confirmButton.on('click', function() {
+        var response = { 'name': nameInputText.val(), 'text': HG.WebApp.Utility._cmFsEditor.getValue(), 'isCanceled': false };
+        if (nameInputText.val() == '') {
+            nameInputText.qtip({
+                content: {
+                    text: HG.WebApp.Locales.GetLocaleString('fullscreen_editor_entervalidname', 'Enter a valid name.')
+                },
+                show: { event: false, ready: true, delay: 200 },
+                hide: { event: false, inactive: 2000 },
+                style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                position: { my: 'bottom center', at: 'top center' }
+            })
+            .parent().stop().animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250)
+                .animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250);
+        } else {
+            cancelButton.off('click');
+            confirmButton.off('click');
+            $('#fullscreen_edit_box').hide(150);
+            callback(response);
+        }
+    });
+    HG.WebApp.Utility._cmFsEditor.setValue(content);
+    setTimeout(function(){
+        HG.WebApp.Utility._cmFsEditor.refresh();
+        HG.WebApp.Utility._cmFsEditor.focus();
+        HG.WebApp.Utility._cmFsEditor.setCursor({ line: 0, ch: 0 });
+    }, 500);
+    $('#fullscreen_edit_box').show(150);
+};
 HG.WebApp.Utility.ConfirmPopup = function(title, description, callback) {
-    var confirmPopup = $('#actionconfirm_popup'); 
+    var confirmPopup = $('#actionconfirm_popup');
     confirmPopup.buttonProceed = $('#actionconfirm_confirm_button');
     confirmPopup.buttonCancel = $('#actionconfirm_cancel_button');
     confirmPopup.find('h3').html(title);
@@ -443,7 +474,18 @@ HG.WebApp.Utility.GetElapsedTimeText = function (timestamp)
     }
     return ret;
 };
-HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address) 
+HG.WebApp.Utility.ParseModuleDomainAddress = function (domainAddress)
+{
+    var result = null;
+    if (domainAddress.indexOf(':') > 0) {
+        result = {
+            Domain: domainAddress.substring(0, domainAddress.lastIndexOf(':')),
+            Address: domainAddress.substring(domainAddress.lastIndexOf(':') + 1)
+        };
+    }
+    return result;
+},
+HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address)
 {
     var module = null;
     for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -454,7 +496,7 @@ HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address)
     }
     return module;
 };
-HG.WebApp.Utility.GetModuleIndexByDomainAddress = function (domain, address) 
+HG.WebApp.Utility.GetModuleIndexByDomainAddress = function (domain, address)
 {
     var moduleidx = -1;
     for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -497,7 +539,7 @@ HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value, times
         }
     }
 };
-	
+
 HG.WebApp.Utility.GetProgramByAddress = function (paddr)
 {
     var cp = null;
@@ -509,7 +551,7 @@ HG.WebApp.Utility.GetProgramByAddress = function (paddr)
         }
     }
     return cp;
-};	
+};
 
 HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
 {
@@ -528,44 +570,70 @@ HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
             command = 'Control.On';
             arg = '';
         }
-        commandobj = { 
-            'Domain' : module.Domain, 
-            'Target' : module.Address, 
-            'CommandString' : command, 
-            'CommandArguments' : arg 
+        commandobj = {
+            'Domain' : module.Domain,
+            'Target' : module.Address,
+            'CommandString' : command,
+            'CommandArguments' : arg
         };
     }
     else if (module.Domain == 'Controllers.LircRemote' && module.Address == 'IR')
     {
-        commandobj = { 
-            'Domain' : module.Domain, 
-            'Target' : module.Address, 
-            'CommandString' : 'Control.IrSend', 
-            'CommandArguments' : event.Value 
+        commandobj = {
+            'Domain' : module.Domain,
+            'Target' : module.Address,
+            'CommandString' : 'Control.IrSend',
+            'CommandArguments' : event.Value
         };
     }
     return commandobj;
 };
 
+HG.WebApp.Utility.GetLocaleTemperature = function (temp) {
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
+        // display as Fahrenheit
+        temp = Math.round((temp * 1.8 + 32) * 10) / 10;
+    } else {
+        // display as Celsius
+        temp = Math.round(temp * 10) / 10;
+    }
+    return (temp * 1).toFixed(2);
+};
+HG.WebApp.Utility.FormatTemperature = function (temp) {
+    var displayvalue = '';
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
+        // display as Fahrenheit
+        temp = Math.round((temp * 1.8 + 32) * 10) / 10;
+        displayvalue = (temp * 1).toFixed(1) + '&#8457;';
+    } else {
+        // display as Celsius
+        temp = Math.round(temp * 10) / 10;
+        displayvalue = (temp * 1).toFixed(1) + '&#8451;';
+    }
+    return displayvalue;
+};
+
 HG.WebApp.Utility.FormatDate = function (date)
 {
-    var endianType = HG.WebApp.Locales.GetDateEndianType();
+    var dateFormat = dataStore.get('UI.DateFormat');
     var dt = null;
-    if (endianType == 'M')
+    if (dateFormat != 'DMY24' && (dateFormat == 'MDY12' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
         dt = $.datepicker.formatDate('D, mm/dd/yy', date);
     else
         dt = $.datepicker.formatDate('D, dd/mm/yy', date);
-    return dt; 
+    return dt;
 };
 
 HG.WebApp.Utility.FormatDateTime = function (date, showms)
 {
-    var endianType = HG.WebApp.Locales.GetDateEndianType();
+    var dateFormat = dataStore.get('UI.DateFormat');
     var dt = null;
     var h = date.getHours();
     var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
     var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
-    if (endianType == 'M')
+    if (dateFormat != 'DMY24' && (dateFormat == 'MDY12' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
     {
         var ampm = (h >= 12 ? 'PM' : 'AM');
         h = h % 12; h = (h ? h : 12);
@@ -575,9 +643,9 @@ HG.WebApp.Utility.FormatDateTime = function (date, showms)
     {
         dt = h + ':' + mm + ':' + ss + (showms ? '.' + date.getMilliseconds() : '');
     }
-    return dt; 
+    return dt;
 };
-	
+
 HG.WebApp.Utility.JScrollToElement = function (element, delay) {
     $('html, body').animate({
         scrollTop: $(element).offset().top
@@ -590,13 +658,12 @@ HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
         {
             setTimeout(function () { $(popup_id2).popup('open'); }, 10);
         }
-        else	
+        else
         {
             setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
         }
-        $(popup_id1).off('popupafterclose', switchfn);
     };
-    $(popup_id1).on('popupafterclose', switchfn);
+    $(popup_id1).one('popupafterclose', switchfn);
     $(popup_id1).popup('close');
 };
 //
@@ -620,6 +687,14 @@ HG.WebApp.Locales.GetDateEndianType = function()
     if (localeDateParts[0] == '2') endianType = 'M';
     return endianType;
 };
+HG.WebApp.Locales.GetTemperatureUnit = function()
+{
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
+        return 'Fahrenheit';
+    else
+        return 'Celsius';
+};
 HG.WebApp.Locales.GetDefault = function(callback) {
     $.ajax({
         url: './locales/en.json',
@@ -627,12 +702,19 @@ HG.WebApp.Locales.GetDefault = function(callback) {
         success: function (data) {
             HG.WebApp.Data._DefaultLocale = $.parseJSON( data );
             callback();
+            $.ajax({
+                url: './locales/en.programs.json',
+                type: 'GET',
+                success: function (pdata) {
+                    HG.WebApp.Data._DefaultLocale = $.extend(HG.WebApp.Data._DefaultLocale, $.parseJSON( pdata ));
+                }
+            });
         }
-    });     
+    });
 };
-HG.WebApp.Locales.Localize = function(container, langurl)
+HG.WebApp.Locales.Localize = function(container, langurl, callback)
 {
-    // get data via ajax 
+    // get data via ajax
     // store it in 		HG.WebApp.Data._CurrentLocale
     // and replace locales strings in the current page
     HG.WebApp.Locales.GetDefault(function(){
@@ -640,7 +722,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
             url: langurl,
             type: 'GET',
             success: function (data) {
-                HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
+                HG.WebApp.Data._CurrentLocale = $.extend(HG.WebApp.Data._CurrentLocale, $.parseJSON( data ));
                 //
                 $(container).find('[data-locale-id]').each(function(index){
                     var stringid = $(this).attr('data-locale-id');
@@ -658,9 +740,14 @@ HG.WebApp.Locales.Localize = function(container, langurl)
                         }
                     }
                 });
+                if (typeof callback == 'function') callback(true);
+            },
+            error: function(xhr, status, error) {
+                console.log('LOCALIZATION ERROR: '+xhr.status+':'+xhr.statusText);
+                if (typeof callback == 'function') callback(false);
             }
         });
-    });		
+    });
 };
 HG.WebApp.Locales.LocalizeElement = function(elementId, locale) {
     $(elementId).find('[data-locale-id]').each(function(index){
@@ -679,7 +766,7 @@ HG.WebApp.Locales.LocalizeElement = function(elementId, locale) {
             }
         }
     });
-    
+
 };
 HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue, locale)
 {
@@ -712,7 +799,7 @@ HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue, locale)
         }
     });
     if (retval == null)
-        console.log('LOCALIZATION ERROR "' + stringid + '" NOT FOUND!!!'); 
+        console.log('LOCALIZATION ERROR "' + stringid + '" NOT FOUND!!!');
     return (retval == null && defaultValue ? defaultValue : retval);
 };
 HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
@@ -747,8 +834,8 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
             $(container).find('[data-localizable]').each(function(index){
                 var stringid = $(this).text();
                 var text = HG.WebApp.Locales.GetLocaleString(stringid, false, locale);
-                if (text != null) {                    
-                    $(this).text(text);                    
+                if (text != null) {
+                    $(this).text(text);
                 }
             });
             // try to localize widget's popups if they were already processed by jQuery popup() function
@@ -778,10 +865,26 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
 };
 HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValue) {
     var retval = null;
-    if(typeof(widget.data("Locale")) == "undefined")
+    if(widget == null || typeof(widget) == 'undefined' || typeof(widget.data('Locale')) == 'undefined')
         return (defaultValue ? defaultValue : null);
-    retval = HG.WebApp.Locales.GetLocaleString(stringid, false, widget.data("Locale"));
+    retval = HG.WebApp.Locales.GetLocaleString(stringid, false, widget.data('Locale'));
     return (retval == null && defaultValue ? defaultValue : retval);
+};
+HG.WebApp.Locales.GetProgramLocaleString = function(programAddress, stringId, defaultValue) {
+    var response = defaultValue;
+    var plocale;
+    var hasLocale = eval('(HG.WebApp.Data._CurrentLocale.Programs && HG.WebApp.Data._CurrentLocale.Programs['+programAddress+'])');
+    if (hasLocale)
+        plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
+    else {
+        hasLocale = eval('(HG.WebApp.Data._DefaultLocale.Programs && HG.WebApp.Data._DefaultLocale.Programs['+programAddress+'])');
+        if (hasLocale)
+            plocale = eval('HG.WebApp.Data._DefaultLocale.Programs['+programAddress+']');
+    }
+    if (typeof plocale != 'undefined') {
+        response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+    }
+    return response;
 };
 HG.WebApp.Locales.GenerateTemplate = function()
 {
@@ -796,4 +899,4 @@ HG.WebApp.Locales.GenerateTemplate = function()
     });
     console.log( localestring );
 };
-	
+

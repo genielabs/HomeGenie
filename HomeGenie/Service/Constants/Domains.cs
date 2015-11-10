@@ -41,8 +41,6 @@ namespace HomeGenie.Service.Constants
             = "HomeAutomation.HomeGenie";
         public const string HomeAutomation_HomeGenie_Automation
             = HomeAutomation_HomeGenie + ".Automation";
-        public const string HomeAutomation_HomeGenie_Scheduler
-            = HomeAutomation_HomeGenie + ".Scheduler";
         public const string HomeAutomation_ZWave
             = "HomeAutomation.ZWave";
         public const string HomeAutomation_X10

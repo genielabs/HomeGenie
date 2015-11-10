@@ -11,8 +11,6 @@
     levelKnobBindValue: "Heating",
 
     RenderView: function (cuid, module) {
-        var displayUnit = 'Celsius';
-        if (HG.WebApp.Locales.GetDateEndianType() == 'M') displayUnit = 'Fahrenheit';
 
         var container = $(cuid);
         var widget = container.find('[data-ui-field=widget]');
@@ -43,7 +41,7 @@
                 }
             });
 
-            if (displayUnit == 'Celsius') {
+            if (HG.WebApp.Locales.GetTemperatureUnit() == 'Celsius') {
                 controlpopup.find('[data-ui-field=level_knob]').trigger('configure', {
                     min: 5,
                     max: 40
@@ -160,10 +158,9 @@
         var temperatureField = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
         var temperature = 0;
         if (temperatureField != null) {
-            temperature = Math.round(temperatureField.Value.replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
+            temperature = temperatureField.Value.replace(',', '.');
+            widget.find('[data-ui-field=temperature_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
         }
-        widget.find('[data-ui-field=temperature_value]').html(temperature + '&deg;');
 
 
         // display current Heating SetPoint
@@ -173,9 +170,8 @@
         }
         else {
             widget.find('[data-ui-field=heat_field]').show();
-            var temperature = Math.round(heatTo.Value.toString().replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=heat_field] > [data-ui-field=set_value]').html(temperature + '&deg;');
+            var temperature = heatTo.Value.toString().replace(',', '.');
+            widget.find('[data-ui-field=heat_field] > [data-ui-field=set_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
         }
 
 
@@ -187,9 +183,8 @@
         }
         else {
             widget.find('[data-ui-field=heateconomy_field]').show();
-            var temperature = Math.round(heatEconomyTo.Value.toString().replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=heateconomy_field] > [data-ui-field=set_value]').html(temperature + '&deg;');
+            var temperature = heatEconomyTo.Value.toString().replace(',', '.');
+            widget.find('[data-ui-field=heateconomy_field] > [data-ui-field=set_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
         }
 
         // display current Furnace SetPoint
@@ -200,9 +195,8 @@
         }
         else {
             widget.find('[data-ui-field=furnace_field]').show();
-            var temperature = Math.round(furnaceTo.Value.toString().replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=furnace_field] > [data-ui-field=set_value]').html(temperature + '&deg;');
+            var temperature = furnaceTo.Value.toString().replace(',', '.');
+            widget.find('[data-ui-field=furnace_field] > [data-ui-field=set_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
         }
 
 

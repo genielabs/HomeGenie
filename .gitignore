@@ -1,22 +1,17 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Bb]in/
+[Oo]bj/
+
+*.userprefs
+*.suo
+*.pidb
 Thumbs.db
-HomeGenie/obj/
-HomeGenie/bin/
-HomeGenie_Windows/HomeGenieManager/obj/
-HomeGenie_Windows/HomeGenieService/obj/
-HomeGenie_Windows/HomeGenie_VS10.v12.suo
-MigFiles (copia)/
-MigFiles/MIG/obj/
-MigFiles/MIG/bin/
-MigFiles/SupportLibraries/NetClientLib/obj/
-MigFiles/SupportLibraries/NetClientLib/bin/
-MigFiles/SupportLibraries/SerialPortLib/obj/
-MigFiles/SupportLibraries/SerialPortLib/bin/
-MigFiles/SupportLibraries/W800RF32/obj/
-MigFiles/SupportLibraries/W800RF32/bin/
-MigFiles/SupportLibraries/XTenLib/obj/
-MigFiles/SupportLibraries/XTenLib/bin/
-MigFiles/SupportLibraries/ZWaveLib/obj/
-MigFiles/SupportLibraries/ZWaveLib/bin/
-BaseFiles/Common/obj/
-BaseFiles/Windows/obj/
+
+# Nuget packages
+packages/*
+!packages/repositories.config
 

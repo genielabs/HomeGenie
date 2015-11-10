@@ -2,6 +2,7 @@
 <ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Group>
     <Name>Dashboard</Name>
+    <Wallpaper>wallpaper_007.jpg</Wallpaper>
     <Modules>
       <ModuleReference>
         <Address>34</Address>
@@ -12,11 +13,11 @@
         <Domain>HomeAutomation.EnergyMonitor</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>36</Address>
+        <Address>90</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>90</Address>
+        <Address>36</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
@@ -24,25 +25,14 @@
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>2</Address>
-        <Domain>Favourites.Link</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>3</Address>
-        <Domain>Favourites.Link</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>4</Address>
-        <Domain>Favourites.Link</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>1</Address>
         <Domain>Favourites.Link</Domain>
       </ModuleReference>
     </Modules>
   </Group>
   <Group>
     <Name>Color Lights</Name>
+    <Wallpaper>wallpaper_006.jpg</Wallpaper>
     <Modules>
       <ModuleReference>
         <Address>1</Address>

@@ -16,14 +16,14 @@
             <h2 data-locale-id="configure_interfaces_importdriver">Install Add-ons</h2>
         </div>
         <div class="ui-content ui-corner-bottom">
-            <h4>Download add-on package from URL</h4>
+            <h4 data-locale-id="configure_interfaces_downloadfromurl">Download add-on package from URL</h4>
             <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
                 <input data-ui-field="download-url" type="text" title="Add-on driver from URL" name="url" placeholder="(enter url)" />
                 <a data-ui-field="download-btn" data-locale-id="configure_interfaces_download" class="ui-btn ui-shadow ui-corner-all">Download &amp; install</a>
             </fieldset>
-            <h4>Upload add-on package</h4>
+            <h4 data-locale-id="configure_interfaces_uploadpackage">Upload add-on package</h4>
             <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
-                <form data-ui-field="import-form" target="interface_import_uploadframe" enctype="multipart/form-data" method="post" action="../HomeAutomation.HomeGenie/Config/Interface.Import/" data-ajax="false">
+                <form data-ui-field="import-form" target="interface_import_uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/Interface.Import/" data-ajax="false">
                     <input data-ui-field="upload-file" type="file" title="Add-on driver from file" name="file" />
                 </form>
                 <a data-ui-field="upload-btn" data-locale-id="configure_interfaces_upload" class="ui-btn ui-shadow ui-corner-all">Upload &amp; install</a>
@@ -37,17 +37,17 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_back" class="ui-btn ui-icon-back ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_configure">
-                        Back
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_home">
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_interfaces_installaddons" data-ui-field="interface_import" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" data-transition="slide">
+                    <a data-locale-id="configure_interfaces_installaddons" data-ui-field="interface_import" class="ui-btn ui-icon-arrow-u ui-btn-icon-right">
                         Install Add-ons
                     </a>
                 </li>

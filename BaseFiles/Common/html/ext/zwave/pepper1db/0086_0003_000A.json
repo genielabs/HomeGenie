@@ -63,6 +63,10 @@
           {
             "@xml:lang": "en",
             "#text": "Binary Power Switch for Heavy Loads with Meetering"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Силовое реле с измерением энергопотребления"
           }
         ]
       },
@@ -73,6 +77,9 @@
           },
           {
             "@xml:lang": "en"
+          },
+          {
+            "@xml:lang": "ru"
           }
         ]
       },
@@ -84,7 +91,11 @@
           },
           {
             "@xml:lang": "en",
-            "#text": "To start the inklusion or exklusion push the Action Button once."
+            "#text": "To start the inclusion or exclusion push the Action Button once."
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Одинарное нажатие на кнопку"
           }
         ]
       },
@@ -145,11 +156,16 @@
           "description": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Lifeline"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Group 1"
+                "#text": "Lifeline"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Lifeline"
               }
             ]
           }
@@ -160,11 +176,16 @@
           "description": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Weiterleiten Schaltkommando"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Group 2"
+                "#text": "Retransmit Switch Command"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройства управляемые кнопкой"
               }
             ]
           }
@@ -187,6 +208,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Current Overload Protection"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Защита от перегрузки"
               }
             ]
           },
@@ -199,6 +224,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Load will be closed when the Current more than 39,5A and the time more than 5 seconds."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если ток будет больше 39,5 А в течении 5 секунд, то модуль выключится."
               }
             ]
           },
@@ -215,6 +244,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Activate Overload Protection"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Защита от перегрузки включена"
                   }
                 ]
               }
@@ -231,6 +264,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Deactivate Overload Protection"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Защита от перегрузки выключена"
                   }
                 ]
               }
@@ -251,6 +288,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Output Load Status"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Восстанавливать состояние после отключения питания"
               }
             ]
           },
@@ -263,6 +304,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Configure the output load status after re‐power on."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Определяет восстанавливать ли состояние модуля (включено/выключено) на то, которое было до отключения питания модуля."
               }
             ]
           },
@@ -279,6 +324,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "last status"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Восстанавливать состояние"
                   }
                 ]
               }
@@ -295,6 +344,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "always on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Всегда включено"
                   }
                 ]
               }
@@ -311,6 +364,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "always off"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Всегда выключено"
                   }
                 ]
               }
@@ -331,6 +388,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Notification on Status Change"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет о включении/выключении"
               }
             ]
           },
@@ -343,6 +404,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Defines the automated status notification of an associated device when status changes."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Каким классом команд отправлять отчет о включении/выключении"
               }
             ]
           },
@@ -359,6 +424,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "nothing"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Не отправлять отчет"
                   }
                 ]
               }
@@ -375,6 +444,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "hail"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Hail (Сказать контроллеру Привет!)"
                   }
                 ]
               }
@@ -391,6 +464,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "basic CC report"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Basic Report"
                   }
                 ]
               }
@@ -411,6 +488,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Enables/disables parameter 91/92"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Управление параметрами 91/92"
               }
             ]
           },
@@ -421,6 +502,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -437,6 +521,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Enabled parameter 91/92"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Параметры 91/92 включены"
                   }
                 ]
               }
@@ -453,6 +541,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled parameter 91/92"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Параметры 91/92 выключены"
                   }
                 ]
               }
@@ -473,6 +565,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Minimum Change to send Report (Watt)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет о изменении энергопотребления"
               }
             ]
           },
@@ -485,6 +581,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "The value represents the minimum change in wattage for a Report to be sent ."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Минимальное значение на которое должно измениться энергопотребление, чтобы отправился отчет"
               }
             ]
           },
@@ -500,6 +600,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "The value represents the minimum change in wattage."
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "Ватт"
                 }
               ]
             }
@@ -519,6 +623,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Minimum Change to send Report (%)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет о изменении энергопотребления (%)"
               }
             ]
           },
@@ -531,6 +639,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "The value represents the minimum change in wattage Percent for a report to be sent.\r\n(Valid values 0‐100) "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Минимальное значение на которое должно измениться энергопотребление в процентах, чтобы отправился отчет"
               }
             ]
           },
@@ -546,6 +658,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "The value represents the minimum change in wattage Percent."
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "%"
                 }
               ]
             }
@@ -565,6 +681,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Partner ID"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Partner ID"
               }
             ]
           },
@@ -575,6 +695,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -590,6 +713,10 @@
                   },
                   {
                     "@xml:lang": "en",
+                    "#text": "Aeon Labs Standard "
+                  },
+                  {
+                    "@xml:lang": "ru",
                     "#text": "Aeon Labs Standard "
                   }
                 ]
@@ -607,6 +734,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "others"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "AT&T"
                   }
                 ]
               }
@@ -626,7 +757,11 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/disable Configuration Locked"
+                "#text": "Enable/disable Configuration Locking"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Блокировка настроек"
               }
             ]
           },
@@ -637,6 +772,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -648,11 +786,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Deaktiviert Konfigurationssperre"
+                    "#text": "Deaktiviert  "
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Deactivate configurationlock"
+                    "#text": "Deactivate "
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Настройка параметров заблокирована"
                   }
                 ]
               }
@@ -664,11 +806,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Aktiviert Konfigurationssperre"
+                    "#text": "Aktiviert  "
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Activate configurationlock"
+                    "#text": "Activate  "
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Настройка параметров разблокирована"
                   }
                 ]
               }

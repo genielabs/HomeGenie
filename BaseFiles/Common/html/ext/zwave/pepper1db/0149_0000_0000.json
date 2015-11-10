@@ -579,7 +579,7 @@
           "@number": "30",
           "@type": "range",
           "@size": "1",
-          "@default": "80",
+          "@default": "ff",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -604,8 +604,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -654,8 +654,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -679,7 +679,7 @@
           "@number": "32",
           "@type": "range",
           "@size": "1",
-          "@default": "80",
+          "@default": "ff",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -704,8 +704,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -754,8 +754,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -779,7 +779,7 @@
           "@number": "34",
           "@type": "range",
           "@size": "1",
-          "@default": "80",
+          "@default": "ff",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -804,8 +804,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -854,8 +854,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -879,7 +879,7 @@
           "@number": "36",
           "@type": "range",
           "@size": "1",
-          "@default": "80",
+          "@default": "ff",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -904,8 +904,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
@@ -954,8 +954,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",

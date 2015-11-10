@@ -1,4 +1,5 @@
 HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || {};
+HG.WebApp.ProgramEdit.PageId = 'page_automation_editprogram';
 HG.WebApp.ProgramEdit._CurrentProgram = Array();
 HG.WebApp.ProgramEdit._CurrentProgram.Name = 'New Program';
 HG.WebApp.ProgramEdit._CurrentProgram.Conditions = Array();
@@ -11,7 +12,22 @@ HG.WebApp.ProgramEdit._SavePromptCallback = null;
 HG.WebApp.ProgramEdit._CurrentTab = 1;
 
 HG.WebApp.ProgramEdit.InitializePage = function () {
-    $('#page_automation_editprogram').on('pageinit', function (e) {
+    var page = $('#'+HG.WebApp.ProgramEdit.PageId);
+    page.on('pagehide', function (e) {
+        $('[data-ui-field=homegenie_panel_button]').removeClass('ui-disabled');
+    });
+    page.on('pageshow', function (e) {
+        $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
+    });
+    page.on('pagebeforeshow', function (e) {
+        $('#automation_program_scriptcondition').next().css('display', '');
+        $('#automation_program_scriptsource').next().css('display', '');
+        HG.WebApp.ProgramEdit.SetTab(1);
+        HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
+        automationpage_ConditionsRefresh();
+        automationpage_CommandsRefresh();
+    });
+    page.on('pageinit', function (e) {
         if (HOST_SYSTEM.substring(0, 3) == 'Win') {
             $('#automation_programtype_option_arduino').hide();
         }
@@ -23,13 +39,13 @@ HG.WebApp.ProgramEdit.InitializePage = function () {
         //
         $('#editprograms_backbutton').on('click', function () {
             HG.WebApp.ProgramEdit.CheckIsClean(function () {
-                $.mobile.changePage('#page_automation_programs', { transition: 'slide', reverse: true });
+                $.mobile.pageContainer.pagecontainer('change', '#page_automation_programs');
             });
             return false;
         });
         $('#editprograms_homebutton').on('click', function () {
             HG.WebApp.ProgramEdit.CheckIsClean(function () {
-                $.mobile.changePage('#page_home', { transition: 'slide', reverse: true });
+                $.mobile.pageContainer.pagecontainer('change', '#page_control');
             });
             return false;
         });
@@ -206,8 +222,7 @@ HG.WebApp.ProgramEdit.CheckIsClean = function (callback) {
             callback();
         }
         $('#automation_program_notsaved').popup('open');
-    }
-    else {
+    } else {
         callback();
     }
 };
@@ -269,18 +284,43 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () {
         var errors = HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors;
         if (typeof errors != 'undefined' && errors.trim() != '' && errors.trim() != '[]') {
             HG.WebApp.ProgramEdit.ShowProgramErrors(errors);
-        }
-        else {
+        } else {
             HG.WebApp.ProgramEdit.HideProgramErrors();
         }
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.HideProgramErrors();
     }
     // update title
-    var status = HG.WebApp.ProgramsList.GetProgramStatusColor(HG.WebApp.ProgramEdit._CurrentProgram);
+    var status = HG.WebApp.ProgramEdit.GetProgramStatusColor(HG.WebApp.ProgramEdit._CurrentProgram);
     var statusImage = '<img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ';
     $('#page_automation_program_title').html('<span style="font-size:9pt;font-weight:bold">PROGRAM EDITOR (' + editMode + ')</span><br />' + statusImage + HG.WebApp.ProgramEdit._CurrentProgram.Address + ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
+};
+
+HG.WebApp.ProgramEdit.GetProgramStatusColor = function (prog) {
+    var statusColor = 'black';
+    var statusProperty = '';
+    var hasErrors = (typeof (prog.Type) != 'undefined' && prog.Type.toLowerCase() != 'wizard' && typeof (prog.ScriptErrors) != 'undefined' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]');
+    //
+    var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prog.Address);
+    if (module != null) {
+        var propObj = HG.WebApp.Utility.GetModulePropertyByName(module, 'Program.Status');
+        if (propObj != null) statusProperty = propObj.Value;
+    }
+    //
+    if (statusProperty == 'Running') {
+        statusColor = 'green';
+    } else if (statusProperty == 'Background') {
+        statusColor = 'blue';
+    } else if (prog.IsEnabled) {
+        if (hasErrors)
+            statusColor = 'red';
+        else
+            statusColor = 'yellow';
+    } else if (hasErrors) {
+        statusColor = 'brown';
+    }
+    //
+    return statusColor;
 };
 
 HG.WebApp.ProgramEdit.RefreshProgramOptions = function () {
@@ -299,14 +339,12 @@ HG.WebApp.ProgramEdit.RefreshProgramOptions = function () {
             if (cp != null) {
                 if (cp.IsRunning) {
                     $('[id=editprograms_actionmenu_break]').each(function () { $(this).show(); });
-                }
-                else {
+                } else {
                     $('[id=editprograms_actionmenu_run]').each(function () { $(this).show(); });
                 }
                 if (cp.ScriptErrors.trim() != '' && cp.ScriptErrors.trim() != '[]') {
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = cp.ScriptErrors;
-                }
-                else {
+                } else {
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
                 }
                 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
@@ -353,8 +391,7 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile, callback)
             if (response.trim() != '' && response.trim() != '[]') {
                 $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_error_updating'), textVisible: true });
                 HG.WebApp.ProgramEdit.ShowProgramErrors(response);
-            }
-            else {
+            } else {
                 $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_saving_succeed'), textVisible: true });
                 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
             }
@@ -390,11 +427,9 @@ HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position) {
     var editor = (blockType == 'TC' ? editor1 : editor2);
     if (blockType == 'TC') {
         HG.WebApp.ProgramEdit.SetTab(3);
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.SketchFileOpen('main');
         HG.WebApp.ProgramEdit.SetTab(2);
-
     }
     window.setTimeout(function () {
         editor.setCursor(position);
@@ -496,13 +531,11 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message) {
                 style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                 position: { adjust: { screen: true }, my: 'top center', at: 'bottom center' }
             });
-        }
-        else {
+        } else {
             $('#program_error_button').hide();
             $('#program_error_button2').hide();
         }
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit._CurrentErrors = [];
     }
 
@@ -552,9 +585,9 @@ HG.WebApp.ProgramEdit.ShowExternalErrors = function () {
 
 HG.WebApp.ProgramEdit.HideProgramErrors = function () {
     HG.WebApp.ProgramEdit._CurrentErrors = [];
-    editor1.clearGutter('CodeMirror-lint-markers-1');
-    editor2.clearGutter('CodeMirror-lint-markers-2');
-    editor3.clearGutter('CodeMirror-lint-markers-3');
+    if (editor1 != null) editor1.clearGutter('CodeMirror-lint-markers-1');
+    if (editor2 != null) editor2.clearGutter('CodeMirror-lint-markers-2');
+    if (editor3 != null) editor3.clearGutter('CodeMirror-lint-markers-3');
     //$('#program_error_message_text').html('');
     $('#program_error_button').hide();
     $('#program_error_button2').hide();
@@ -583,8 +616,7 @@ HG.WebApp.ProgramEdit.CompileProgram = function () {
         HG.WebApp.ProgramEdit.SketchFileSave(function () {
             HG.WebApp.ProgramEdit.UpdateProgram(programblock, true);
         });
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.UpdateProgram(programblock, true);
     }
 };
@@ -598,9 +630,8 @@ HG.WebApp.ProgramEdit.SaveProgram = function (callback) {
         HG.WebApp.ProgramEdit.SketchFileSave(function () {
             HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
         });
-    }
-    else {
-        HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
+    } else {
+        HG.WebApp.ProgramEdit.UpdateProgram(programblock, true, callback);
     }
 };
 HG.WebApp.ProgramEdit.SetProgramData = function () {
@@ -632,38 +663,11 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program) {
     HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
     HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
     HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
-    //
-    // check if program is using the special var PROGRAM_OPTIONS_STRING
-    // this var is used to pass a string argument to the program
-    /*		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.indexOf('PROGRAM_OPTIONS_STRING') > 0)
-            {
-                var prompt = 'Enter program options:';
-                if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.substring(0, 24) == '//OPTIONS_STRING_PROMPT=')
-                {
-                    prompt = HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.substring(24);
-                    prompt = prompt.substring(0, prompt.indexOf('\n'));			
-                }
-                $('#simplestringdialog').simpledialog({
-                    'mode': 'string',
-                    'prompt': prompt,
-                    'cleanOnClose': false,
-                    'buttons': {
-                        'OK': {
-                            click: function () {
-                                HG.WebApp.ProgramEdit.RunProgram( program.Address, $('#simplestringdialog').attr('data-string') );
-                            }
-                        },
-                        'Cancel': {
-                            click: function () {
-                                //console.log(this);
-                            },
-                            icon: "delete",
-                        }
-                    }			
-                });
-            }
-            else*/
-    {
+    if (!HG.WebApp.ProgramEdit.IsClean()) {
+        HG.WebApp.ProgramEdit.SaveProgram(function(){
+            HG.WebApp.ProgramEdit.RunProgram(program.Address, null);
+        });
+    } else {
         HG.WebApp.ProgramEdit.RunProgram(program.Address, null);
     }
 };
@@ -745,8 +749,7 @@ HG.WebApp.ProgramEdit.SketchFileOpen = function (filename) {
             editor2.markClean();
             editor2.refresh();
             $.mobile.loading('hide');
-        }
-        else {
+        } else {
             // all other sketch files are stored in editor3
             $(editor2.getWrapperElement()).hide();
             $(editor3.getWrapperElement()).show();

@@ -9,7 +9,22 @@ HG.WebApp.Scheduler.InitializePage = function () {
         HG.WebApp.Scheduler.RefreshEventDetails();
     });
     //
-    $('#scheduleritem_update_button').bind('click', function (event) {
+    $('#schedulerservice_item_cronwizard').on('click', function(event) {
+        $('#schedulerservice_item_edit').one('popupafterclose', function(){
+            HG.Ui.Popup.CronWizard.element.one('popupafterclose', function(){
+                $('#schedulerservice_item_edit').popup('open');
+            });
+            HG.Ui.Popup.CronWizard.open();
+            HG.Ui.Popup.CronWizard.onChange = function(expr){
+                setTimeout(function(){
+                    $('#schedulerservice_item_cronexp').val(expr);
+                }, 500);
+            };
+        });
+        $('#schedulerservice_item_edit').popup('close');
+    });
+    //
+    $('#scheduleritem_update_button').on('click', function (event) {
         var name = $('#schedulerservice_item_name').val();
         var expr = $('#schedulerservice_item_cronexp').val();
         var prid = $('#schedulerservice_item_programid').val();
@@ -18,7 +33,7 @@ HG.WebApp.Scheduler.InitializePage = function () {
         });
     });
     //
-    $('#scheduleritem_delete_button').bind('click', function (event) {
+    $('#scheduleritem_delete_button').on('click', function (event) {
         var name = $('#schedulerservice_item_name').val();
         HG.Automation.Scheduling.Delete(name, function () {
             HG.WebApp.Scheduler.LoadScheduling();
@@ -27,7 +42,7 @@ HG.WebApp.Scheduler.InitializePage = function () {
         HG.WebApp.Scheduler._CurrentEventIndex = -1;
     });
     //
-    $('#scheduleritem_add_button').bind('click', function (event) {
+    $('#scheduleritem_add_button').on('click', function (event) {
         HG.WebApp.Scheduler._CurrentEventName = "";
         HG.WebApp.Scheduler._CurrentEventIndex = -1;
     });
@@ -49,7 +64,7 @@ HG.WebApp.Scheduler.GetItemMarkup = function (schedule) {
     //
     item += '	<p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
     item += '	<h3 class="ui-li-heading">' + displayName + '</h3>';
-    item += '	<p class="ui-li-desc">' + schedule.CronExpression + ' &nbsp;</p>';
+    item += '	<p class="ui-li-desc"><span style="font-family:monospace;font-weight:bold">' + schedule.CronExpression + '</span> &nbsp;&nbsp; ' + schedule.Description + '</p>';
     item += '</a>';
     item += '<a href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
     //

@@ -8,7 +8,7 @@
     
     <div data-role="navbar" style="position:absolute;top:115px;width:500px;margin-left:20px">
         <ul>
-            <li><a id="statistics_tab1_button" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.Statistics.SetTab(1)" data-ajax="false" data-locale-id="statistics_dataanalysis">Data analysis</a></li>
+            <li><a id="statistics_tab1_button" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.Statistics.SetTab(1)" data-ajax="false" data-locale-id="statistics_dataanalysis">Data analysis Hour</a></li>
             <li><a id="statistics_tab2_button" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.Statistics.SetTab(2)" data-ajax="false" data-locale-id="statistics_counterexpense">Counter and expense</a></li>
         </ul>
     </div>
@@ -16,16 +16,20 @@
 
         <div id="statistics_tab1">
             <div class="ui-grid-a">
-                <div class="ui-block-a" style="padding:5px;width:70%">
-                    <div id="page_analyze_title" style="font-weight:bold">Global, Watts</div>              
+                <div class="ui-block-a" style="padding:5px;width:50%">
+                    <div id="page_analyze_title" style="font-weight:bold">Global - Watts</div>              
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <a href="#analyze_stats_options" class="ui-btn ui-corner-all ui-icon-edit ui-btn-icon-left" data-rel="popup" data-mini="true">Options</a>
                     </fieldset>
                 </div>
-                <div class="ui-block-b" align="right" style="width:30%">
+                <div class="ui-block-b" align="right" style="width:50%">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <table>
                             <tr>
+                                <td>
+                                    <label data-locale-id="analyze_delete_stat" for="page_delete_stat" style="font-size:10pt">&nbsp;</label>
+                                    <a href="#" id="page_delete_stat" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-mini="true">Delete</a>
+                                </td>
                                 <td>
                                     <label data-locale-id="analyze_statistics_datefrom" for="page_analyze_datefrom" style="font-size:10pt">From</label>
                                     <input id="page_analyze_datefrom" type="text" data-mini="true" data-role="datebox" data-options='{"mode":"datebox","useNewStyle":"true"}'/>
@@ -45,7 +49,7 @@
         <div id="statistics_tab2" style="margin:0px;display:none">
             <div class="ui-grid-a">
                 <div class="ui-block-a" style="padding:5px;width:20%">
-                    <div id="page_analyze_title" style="font-weight:bold">Global, Watts</div>
+                    <div id="page_analyze_title2" style="font-weight:bold">Global - Watts</div>
                     <div id="page_analyze_cost_counter" style="font-size:22pt">Counter</div>
                 </div>
                 <div class="ui-block-b" style="width:80%" align="right">
@@ -78,10 +82,7 @@
                 <div id="statslast" style="height:200px;background-color:white;"></div>
             </div>
         </div>-->
-
-
     </div>
-
 
     <div id="analyze_stats_options" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
 
@@ -104,11 +105,17 @@
                     <option value="Meter.Watts">Watts</option>
                 </select>
 
+                <select id="page_analyze_type">
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                </select>
+                <!--
                 <select id="page_analyze_graphtype">
                     <option value="bars">Bars</option>
                     <option value="lines">Lines</option>
                     <option value="splines">Splines</option>
                 </select>
+                -->
             </fieldset>
         </div>
         <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
@@ -128,18 +135,18 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="home_menu_control" class="ui-btn ui-icon-grid ui-btn-icon-left" data-transition="slide" href="#page_control">
-                        Control
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_home">
+                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_control">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="home_menu_configure" class="ui-btn ui-icon-gear ui-btn-icon-right" data-transition="slide" href="#page_configure">
-                        Configure
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
             </ul>

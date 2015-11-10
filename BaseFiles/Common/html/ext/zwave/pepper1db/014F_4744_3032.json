@@ -38,6 +38,9 @@
       "genericClass": {
         "@value": "40"
       },
+      "specificClass": {
+        "@value": "00"
+      },
       "optional": {
         "@value": "true"
       },
@@ -123,7 +126,8 @@
         "@maxNodes": "1",
         "description": {
           "lang": {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "The device sends notifications\r\nto the controller."
           }
         }
       }

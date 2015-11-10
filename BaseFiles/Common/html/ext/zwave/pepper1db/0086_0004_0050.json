@@ -38,6 +38,9 @@
       "genericClass": {
         "@value": "10"
       },
+      "specificClass": {
+        "@value": "05"
+      },
       "optional": {
         "@value": "true"
       },
@@ -177,9 +180,9 @@
       "configParam": [
         {
           "@number": "37",
-          "@type": "rangemapped",
+          "@type": "bitset",
           "@size": "2",
-          "@default": "000d",
+          "@default": "0000",
           "name": {
             "lang": [
               {
@@ -200,7 +203,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "The Value1(low byte) is used to select the Siren sound. The Value2(high byte) is used to adjust the volume. Other values will be ignored."
+                "#text": "The Value1(low byte) is used to select the Siren sound. The Value2(high byte) is used to adjust the volume. Other values will be ignored.\r\nDefault Value: Value1 = 1, Value2 = 3."
               }
             ]
           },
@@ -208,16 +211,14 @@
             {
               "@from": "0000",
               "@to": "0000",
-              "@unit": "1",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "ändert den aktuellen Sound nicht."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "do not change the current sound."
+                    "#text": "do not change the current Siren sound"
                   }
                 ]
               }
@@ -225,16 +226,14 @@
             {
               "@from": "0001",
               "@to": "0001",
-              "@unit": "1",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Sirenensound 1 ist ausgewählt."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Siren sound 1 is selected."
+                    "#text": "Siren sound 1 is selected"
                   }
                 ]
               }
@@ -242,16 +241,14 @@
             {
               "@from": "0002",
               "@to": "0002",
-              "@unit": "1",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Sirenensound 2 ist ausgewählt."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Siren sound 2 is selected."
+                    "#text": "Siren sound 2 is selected"
                   }
                 ]
               }
@@ -259,16 +256,14 @@
             {
               "@from": "0003",
               "@to": "0003",
-              "@unit": "1",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Sirenensound 3 ist ausgewählt."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Siren sound 3 is selected."
+                    "#text": "Siren sound 3 is selected"
                   }
                 ]
               }
@@ -276,16 +271,14 @@
             {
               "@from": "0004",
               "@to": "0004",
-              "@unit": "1",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Sirenensound 4 ist ausgewählt."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Siren sound 4 is selected."
+                    "#text": "Siren sound 4 is selected"
                   }
                 ]
               }
@@ -293,16 +286,164 @@
             {
               "@from": "0005",
               "@to": "0005",
-              "@unit": "1",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Sirenensound 5 ist ausgewählt."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Siren sound 5 is selected."
+                    "#text": "Siren sound 5 is selected"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0006",
+              "@to": "0006",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0007",
+              "@to": "0007",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0008",
+              "@to": "0008",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "do not change the current volume"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0009",
+              "@to": "0009",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "set the volume to 88 dB"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "000a",
+              "@to": "000a",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "set the volume to 100 dB"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "000b",
+              "@to": "000b",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "set the volume to 105 dB"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "000c",
+              "@to": "000c",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "000d",
+              "@to": "000d",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "000e",
+              "@to": "000e",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "000f",
+              "@to": "000f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -524,22 +665,38 @@
               }
             ]
           },
-          "value": {
-            "@from": "00000000",
-            "@to": "00000000",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Setzt das Gerät auf Werkszustand zurück"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "Resets the device to factory state"
-                }
-              ]
+          "value": [
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Resets all configuration parameters to default setting."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "55555555",
+              "@to": "55555555",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Reset the product to default factory setting and be excluded from the Z-wave network."
+                  }
+                ]
+              }
             }
-          }
+          ]
         }
       ]
     },

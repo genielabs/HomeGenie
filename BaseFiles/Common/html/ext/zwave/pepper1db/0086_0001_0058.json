@@ -150,11 +150,12 @@
         "description": {
           "lang": [
             {
-              "@xml:lang": "de"
+              "@xml:lang": "de",
+              "#text": "Lifeline"
             },
             {
               "@xml:lang": "en",
-              "#text": "Group 1"
+              "#text": "Lifeline"
             }
           ]
         }
@@ -163,7 +164,7 @@
     "configParams": {
       "configParam": {
         "@number": "250",
-        "@type": "rangemapped",
+        "@type": "constant",
         "@size": "1",
         "@default": "00",
         "name": {

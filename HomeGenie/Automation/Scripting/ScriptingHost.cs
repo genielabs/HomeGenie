@@ -32,12 +32,8 @@ using HomeGenie.Service;
  * \section docs HomeGenie Documentation
  * \subsection doc_1 User Guide
  * <a href="http://www.homegenie.it/docs/quickstart.php">http://www.homegenie.it/docs/quickstart.php</a>
- * \subsection doc_3 Web Service API
- * <a href="http://www.homegenie.it/docs/api/overview.html">http://www.homegenie.it/docs/api/overview.html</a>
- * \subsection doc_2 Automation Programming
- * <a href="http://www.homegenie.it/docs/automation_introduction.php">http://www.homegenie.it/docs/automation_introduction.php</a>
- * \subsection doc_4 Helper Classes Reference
- * <a href="annotated.html">Class List</a>
+ * \subsection doc_2 Automation Programming and API
+ * <a href="http://genielabs.github.io/HomeGenie">http://genielabs.github.io/HomeGenie</a>
  * 
  */
 
@@ -50,11 +46,12 @@ namespace HomeGenie.Automation.Scripting
         public object ReturnValue = null;
     }
 
+    [Serializable]
     public class ScriptingHost
     {
 
         private HomeGenieService homegenie = null;
-        internal bool executeCodeToRun = false;
+        internal bool executeProgramCode = false;
         //
         private NetHelper netHelper;
         private ProgramHelper programHelper;
@@ -186,25 +183,27 @@ namespace HomeGenie.Automation.Scripting
             Pause(seconds);
         }
 
+        [Obsolete("Use Program.Run(bool) instead")]
         public void SetConditionTrue()
         {
-            executeCodeToRun = true;
+            executeProgramCode = true;
         }
 
+        [Obsolete("Use Program.Run(bool) instead")]
         public void SetConditionFalse()
         {
-            executeCodeToRun = false;
+            executeProgramCode = false;
         }
 
         public void Reset()
         {
-            serialPortHelper.Reset();
-            tcpClientHelper.Reset();
-            udpClientHelper.Reset();
-            netHelper.Reset();
-            mqttClientHelper.Reset();
-            knxClientHelper.Reset();
-            programHelper.Reset();
+            try { serialPortHelper.Reset(); } catch { }
+            try { tcpClientHelper.Reset(); } catch { }
+            try { udpClientHelper.Reset(); } catch { }
+            try { netHelper.Reset(); } catch { }
+            try { mqttClientHelper.Reset(); } catch { }
+            try { knxClientHelper.Reset(); } catch { }
+            try { programHelper.Reset(); } catch { }
         }
 
     }

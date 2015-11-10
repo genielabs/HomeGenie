@@ -30,6 +30,7 @@ using System.Threading;
 using HomeGenie.Service.Constants;
 using Newtonsoft.Json;
 using ExpressionEvaluation;
+using HomeGenie.Service;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -37,9 +38,9 @@ namespace HomeGenie.Automation.Scheduler
     {
         private List<SchedulerItem> events = new List<SchedulerItem>();
         private Timer serviceChecker;
-        private ProgramEngine masterControlProgram;
+        private ProgramManager masterControlProgram;
 
-        public SchedulerService(ProgramEngine programEngine)
+        public SchedulerService(ProgramManager programEngine)
         {
             masterControlProgram = programEngine;
         }
@@ -63,13 +64,23 @@ namespace HomeGenie.Automation.Scheduler
             for (int i = 0; i < events.Count; i++)
             {
                 var eventItem = events[i];
-                // TODO: execute items only once instead of repeating for the whole minute
-                string currentoccurrence = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-                if (eventItem.IsEnabled && eventItem.LastOccurrence != currentoccurrence && IsScheduling(eventItem.CronExpression))
+                // update next occurrence value
+                eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
+                // execute items only once instead of repeating for the whole minute
+                string currentOccurrence = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                if (eventItem.IsEnabled && eventItem.LastOccurrence != currentOccurrence && IsScheduling(eventItem.CronExpression))
                 {
-                    // update last/next occurrence values
-                    eventItem.LastOccurrence = currentoccurrence;
-                    eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
+                    /*
+                    masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                        this,
+                        Domains.HomeAutomation_HomeGenie, 
+                        SourceModule.Scheduler,
+                        "Scheduler Event Triggered",
+                        Properties.SchedulerTriggeredEvent, 
+                        eventItem.Name);
+                    */
+                    // update last occurrence value
+                    eventItem.LastOccurrence = currentOccurrence;
                     // execute associated task if any
                     if (!String.IsNullOrEmpty(eventItem.ProgramId))
                     {
@@ -77,6 +88,16 @@ namespace HomeGenie.Automation.Scheduler
                         if (program != null)
                         {
                             masterControlProgram.Run(program, "");
+                        }
+                        else
+                        {
+                            masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                                this,
+                                Domains.HomeAutomation_HomeGenie, 
+                                SourceModule.Scheduler,
+                                "Scheduler Event '"+eventItem.Name+"'",
+                                Properties.SchedulerError, 
+                                "No such program: '"+eventItem.ProgramId+"'");
                         }
                     }
                 }
@@ -221,11 +242,12 @@ namespace HomeGenie.Automation.Scheduler
             } 
             catch (Exception ex)
             {
-                masterControlProgram.HomeGenie.LogBroadcastEvent(
-                    Domains.HomeAutomation_HomeGenie_Scheduler, 
-                    cronExpression, 
-                    "Scheduler Expression", 
-                    Properties.SCHEDULER_ERROR, 
+                masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                    this,
+                    Domains.HomeAutomation_HomeGenie,  // before v1.1 it was: Domains.HomeAutomation_HomeGenie_Automation, 
+                    SourceModule.Scheduler, // before v1.1 it was: cronExpression, 
+                    cronExpression, // before v1.1 it was: "Scheduler Expression", 
+                    Properties.SchedulerError, 
                     JsonConvert.SerializeObject(ex.Message));
             }
             return success;

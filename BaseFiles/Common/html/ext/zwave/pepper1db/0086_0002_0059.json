@@ -36,7 +36,10 @@
         "@value": "04"
       },
       "genericClass": {
-        "@value": "a1"
+        "@value": "07"
+      },
+      "specificClass": {
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
@@ -409,7 +412,7 @@
           "@number": "111",
           "@type": "range",
           "@size": "4",
-          "@default": "00000070",
+          "@default": "00015270",
           "name": {
             "lang": [
               {
@@ -436,7 +439,7 @@
           },
           "value": {
             "@from": "00000000",
-            "@to": "0000ffff",
+            "@to": "7fffffff",
             "@unit": "sec",
             "description": {
               "lang": [
@@ -451,6 +454,332 @@
               ]
             }
           }
+        },
+        {
+          "@number": "121",
+          "@type": "bitset",
+          "@size": "4",
+          "@default": "00000100",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Command to Associated Nodes"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "To set which command will be sent to the associated nodes when the magnet switch is triggered."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00000000",
+              "@to": "00000000",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000003",
+              "@to": "00000003",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Sensor\r\nBinary"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000005",
+              "@to": "00000005",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000006",
+              "@to": "00000006",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000007",
+              "@to": "00000007",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "00000008",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Basic\r\nSet "
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000009",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "252",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Lock Configuration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Lock/ unlock all configuration parameters. "
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Unlock"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Lock"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "254",
+          "@type": "constant",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Device Tag"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "4",
+          "@default": "00000001",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Reset to default factory setting"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Resets all configuration parameters to default setting."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "55555555",
+              "@to": "55555555",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Reset the product to default factory setting and be excluded from the Z-wave network."
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     },

@@ -3,6 +3,7 @@ HG.WebApp.Events.PageId = 'page_events';
 HG.WebApp.Events._eventQueueCapacity = 200;
 HG.WebApp.Events._ledOffTimeout = null;
 HG.WebApp.Events._popupHideTimeout = null;
+HG.WebApp.Events._listeners = [];
 
 HG.WebApp.Events.InitializePage = function () {
     var page = $('#'+HG.WebApp.Events.PageId);
@@ -19,25 +20,63 @@ HG.WebApp.Events.InitializePage = function () {
         HG.WebApp.Events.Refresh();
     });
     setTimeout(function () {
-        HG.WebApp.Events.SetupListener();
+        HG.WebApp.Events.Setup();
     }, 2000);
 };
 
-HG.WebApp.Events.SetupListener = function () {
-    var es = new EventSource('/api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream/');
+HG.WebApp.Events.AddListener = function (listener) {
+    // listener object must implement listener.parameterEventCallback functionn
+    listener._eventListenerId = (HG.WebApp.Events._listeners.length + 1);
+    HG.WebApp.Events._listeners.push(listener);
+}
+
+HG.WebApp.Events.RemoveListener = function (listener) {
+    for (var l = 0; l < HG.WebApp.Events._listeners.length; l++) {
+        if (HG.WebApp.Events._listeners[l]._eventListenerId == listener._eventListenerId) {
+            HG.WebApp.Events._listeners.splice(l, 1);
+            break;
+        }
+    }
+}
+
+HG.WebApp.Events.Setup = function () {
+    var es = new EventSource('/events');
+    es.onopen = function(e) {
+        HG.WebApp.Events.ShowEventPopup({
+                        icon: 'images/genie.png',
+                        title: 'HomeGenie<br/>Event Stream<br/>CONNECTED!',
+                        text: '',
+                        timestamp: ''
+                    });
+    };
+    es.onerror = function(e) {
+        HG.WebApp.Events.ShowEventPopup({
+                        icon: 'images/genie.png',
+                        title: 'HomeGenie<br/>EventStream<br/>DISCONNECTED!',
+                        text: '',
+                        timestamp: ''
+                    });
+        es.close();
+        setTimeout(HG.WebApp.Events.Setup, 1000);
+    };
     es.onmessage = function (e) {
-        var event = eval('[' + e.data + ']')[0];
+        var event = JSON && JSON.parse(e.data) || $.parseJSON(e.data);
+        event.Value = event.Value.toString();
         //
+        var module = null;
         if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {
             // update event source (the module that is raising this event)
-            var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
+            module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
             if (module != null) {
-                var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, event.Property);
                 HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                 HG.WebApp.Control.RefreshGroupIndicators();
             }
             // send message to UI for updating UI elements related to this event (widgets, popup and such)
             HG.WebApp.Events.SendEventToUi(module, event);
+        }
+        //
+        if (event.Domain == 'MIGService.Interfaces') {
+            HG.WebApp.Home.UpdateInterfacesStatus();
         }
         //
         if (dataStore.get('UI.EventsHistory')) {
@@ -62,6 +101,10 @@ HG.WebApp.Events.SetupListener = function () {
             if ($.mobile.activePage.attr("id") == HG.WebApp.Events.PageId) {
                 HG.WebApp.Events.Refresh();
             }
+        }
+
+        for (var l = 0; l < HG.WebApp.Events._listeners.length; l++) {
+            HG.WebApp.Events._listeners[l].parameterEventCallback(module, event);
         }
     }
 }
@@ -138,7 +181,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
             else {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
-                var iconImage = configurepage_GetModuleIcon(module, null);
+                var iconImage = 'images/genie.png';
                 popupdata = {
                     icon: iconImage,
                     title: eventLog.Property + '<br/>' + eventLog.Value,
@@ -149,20 +192,20 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             break;
 
         case 'HomeAutomation.HomeGenie.Automation':
-            var iconImage = configurepage_GetModuleIcon(module, null);
+            var iconImage = HG.Ui.GetModuleIcon(module, null);
             if (eventLog.Property == 'Runtime.Error') {
-                if (eventLog.Value != '') {
+                if (module != null && eventLog.Value != '') {
                     popupdata = {
                         icon: iconImage,
                         title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
                         text: 'Runtime<br />Error',
                         timestamp: date
                     };
-                    if ($.mobile.activePage.attr("id") == "page_automation_editprogram") {
+                    if ($.mobile.activePage.attr("id") == 'page_automation_editprogram') {
                         HG.WebApp.ProgramEdit.RefreshProgramOptions();
                     }
                 }
-                else if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
+                else if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     //var cp = HG.WebApp.Utility.GetProgramByAddress(module.Address);
                     //if (cp != null) cp.ScriptErrors = '';
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
@@ -170,7 +213,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                 }
             }
             else if (eventLog.Property == 'Program.Status') {
-                if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
+                if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
             }
@@ -183,7 +226,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     timestamp: date
                 };
             }
-            else {
+            else if (eventLog.Property != 'Program.UiRefresh') {
                 //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                 //if (module.Name != '') name = module.Name;
                 popupdata = {
@@ -206,7 +249,6 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-                HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'].DiscoveryLog.prepend('*&nbsp;' + eventLog.Value + '<br/>');
                 break;
             }
             // continue to default processing
@@ -214,7 +256,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
         default:
             if (module != null && eventLog.Property != 'Meter.Watts') {
 
-                var iconImage = configurepage_GetModuleIcon(module, null);
+                var iconImage = HG.Ui.GetModuleIcon(module, null);
                 if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
                     iconImage = 'images/remote.png';
                     popupdata = {
@@ -233,12 +275,8 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     switch (propname) {
                         case 'Temperature':
                             iconImage = 'pages/control/widgets/homegenie/generic/images/temperature.png';
-                            if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
-                                // convert to Fahrenheit
-                                var temperature = Math.round(eventLog.Value.replace(',', '.') * 100) / 100;
-                                temperature = (temperature * 1.8) + 32;
-                                eventLog.Value = temperature.toString();
-                            }
+                            var temperature = eventLog.Value.replace(',', '.');
+                            eventLog.Value = HG.WebApp.Utility.FormatTemperature(temperature);
                             break;
                         case 'Luminance':
                             iconImage = 'pages/control/widgets/homegenie/generic/images/luminance.png';
@@ -298,28 +336,6 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     }
                 }
             }
-            /*
-            // TODO: DEPREACATE THIS?
-            else {
-                if (eventLog.Domain == 'Protocols.AirPlay' && eventLog.Property == 'PlayControl.DisplayImage') {
-                    var logdate = new Date(eventLog.UnixTimestamp);
-                    var date = HG.WebApp.Utility.FormatDateTime(logdate);
-
-                    s += '<table width="100%"><tr><td width="48" rowspan="2">';
-                    s += '<a _href="#dialog_netplay_show_popup" -data-rel="popup"><img src="images/playcontrol.png" width="48" height="48"></a>';
-                    s += '</td><td valign="top" align="left">';
-                    s += '<span style="color:gray;font-size:8pt;">AirPlay Service</span><br><b>Remote image display reuqest</b>';
-                    s += '</td><td align="right" style="color:lime;font-size:12pt">    </td></tr>';
-                    s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
-                    s += '</td></tr></table>';
-
-                    var displayid = eventLog.Value;
-                    var cts = eventLog.UnixTimestamp;
-
-                    HG.WebApp.Apps.NetPlay.SlideShow.DisplayImage(displayid, cts);
-
-                }
-            }*/
             break;
     }
     //

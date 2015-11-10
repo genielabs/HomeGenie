@@ -7,8 +7,6 @@
         "Анализ",
     "home_menu_configure": 
         "Настройка",
-    "home_menu_about": 
-        "О программе",
     "homegenie_about_title": 
         "О программе",
     "control_groups_and_modules": 
@@ -53,8 +51,14 @@
         "Назад",
     "configure_group_bottombar_group_add": 
         "Добавить группу",
+    "configure_group_group": 
+        "Группы",
     "configure_group_groupname": 
-        "Название группы",
+        "Название",
+    "configure_group_groupwallpaper":
+        "Wallpaper",
+    "configure_group_modulelist":
+        "Module List",
     "configure_group_deletegroup": 
         "Удалить группу?",
     "configure_group_deleteprompt": 
@@ -601,8 +605,6 @@
         "Изменить",
     "configure_system_statistics_databasemaxsizechange":
         "Максимальный размер (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Внимание: после изменения размера необходимо перезапустить HomeGenie, чтобы изменения вступили в силу!",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Отмена",
     "configure_system_statistics_databasemaxsizechange_commit":
@@ -668,5 +670,149 @@
     "configure_widgeteditor_savinghtml":
         "Сохраняем HTML...",
     "configure_widgeteditor_savingjavascript":
-        "Сохраняем Javascript..."
+        "Сохраняем Javascript...",
+    "configure_interfaces_importdriver":
+        "Установить расширения",        
+    "configure_interfaces_download":
+        "Скачать и установить",        
+    "configure_interfaces_upload":
+        "Загрузить и установить",        
+    "configure_interfaces_addonslist":
+        "Список расширений",        
+    "configure_interfaces_installaddons":
+        "Установить расширения",
+    "configure_interfaces_downloadfromurl":
+        "Скачать пакет расширения с URL",
+    "configure_interfaces_uploadpackage":
+        "Загрузить пакет расширения из файла",
+    "cronwizard_title":
+        "Мастер событий Cron",      
+    "cronwizard_tab_minute":
+        "Минута",        
+    "cronwizard_tab_hour":
+        "Час",        
+    "cronwizard_tab_dayofmonth":
+        "День месяца",        
+    "cronwizard_tab_month":
+        "Месяц",        
+    "cronwizard_tab_dayofweek":
+        "День недели",      
+    "cronwizard_event_willoccur":
+        "Это событие будет происходить",
+    "cronwizard_minuteselect_everyminute":
+        "каждую минуту",        
+    "cronwizard_minuteselect_everysomeminute":
+        "каждые &lt;n&gt; минут",        
+    "cronwizard_minuteselect_eachselected":
+        "каждую выбранную минуту",        
+    "cronwizard_hourselect_everyhour":
+        "каждый час",        
+    "cronwizard_hourselect_everysomehour":
+        "каждые &lt;n&gt; часов",        
+    "cronwizard_hourselect_eachselected":
+        "каждый выбранный час",        
+    "cronwizard_dayselect_everyday":
+        "каждый день",        
+    "cronwizard_dayselect_eachselected":
+        "каждый выбранный день",        
+    "cronwizard_monthselect_everymonth":
+        "каждый месяц",        
+    "cronwizard_monthselect_eachselected":
+        "каждый выбранный месяц",        
+    "cronwizard_dayowselect_everydayow":
+        "каждый день недели",        
+    "cronwizard_dayowselect_eachselected":
+        "каждый выбранный день недели",        
+    "common_month_jan":
+        "Янв",        
+    "common_month_feb":
+        "Фев",        
+    "common_month_mar":
+        "Мар",        
+    "common_month_apr":
+        "Апр",        
+    "common_month_may":
+        "Май",        
+    "common_month_jun":
+        "Июн",        
+    "common_month_jul":
+        "Июл",        
+    "common_month_aug":
+        "Авг",        
+    "common_month_sep":
+        "Сен",        
+    "common_month_oct":
+        "Окт",        
+    "common_month_nov":
+        "Ноя",        
+    "common_month_dec":
+        "Дек",        
+    "common_dayofweek_sun":
+        "Вс",        
+    "common_dayofweek_mon":
+        "Пн",        
+    "common_dayofweek_tue":
+        "Вт",        
+    "common_dayofweek_wed":
+        "Ср",        
+    "common_dayofweek_thu":
+        "Чт",        
+    "common_dayofweek_fri":
+        "Пт",        
+    "common_dayofweek_sat":
+        "Сб",        
+    "common_command_cancel":
+        "Отмена",        
+    "common_command_ok":
+        "Ok",
+    "common_command_proceed":
+        "Продолжить",
+    "common_command_save":
+        "Сохранить",
+    "common_status_notset":
+        "Не установлено",
+    "common_voice_control":
+        "Voice Control",
+    "common_command_delete":
+        "Delete",
+    "common_command_upload":
+        "Upload",
+    "common_select_none":
+        "None",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Home",
+    "home_menu_groups":
+        "Группы",
+    "home_menu_statistics":
+        "Statistics",
+    "home_menu_automation":
+        "Automation",
+    "home_menu_programeditor":
+        "Programs",
+    "home_menu_widgeteditor":
+        "Widgets",
+    "home_menu_scheduler":
+        "Scheduler",
+    "home_menu_system":
+        "System",
+    "home_menu_settings":
+        "Settings",
+    "home_menu_maintenance":
+        "Maintenance",
+    "home_menu_about": 
+        "О программе",
+    "home_menu_about_version":
+        "Version",
+    "home_menu_about_userguide":
+        "Users Guide",
+    "home_menu_about_programming":
+        "Programming Guide",
+    "home_menu_about_forum":
+        "Users Forum",
+    "home_menu_about_support":
+        "Keep HomeGenie Up!"
 }

@@ -121,7 +121,7 @@
         "description": {
           "lang": {
             "@xml:lang": "en",
-            "#text": "Group 1 must be assigned\r\nthe Node ID of the controller to which unsolicited notifi cations from the GB00Z-1 will be sent."
+            "#text": "Group 1 must be assigned\r\nthe Node ID of the controller to which unsolicited notifications from the GB00Z-1 will be sent."
           }
         }
       }

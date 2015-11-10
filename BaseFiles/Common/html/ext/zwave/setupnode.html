@@ -94,7 +94,7 @@
                             <td valign="top" style="min-width: 100px">
                                 <select id="opt-zwave-configuration-varselect"></select>
                             </td>
-                            <td style="padding-left: 10px; font-size: 11pt; font-weight: normal" id="opt-zwave-configuration-vardescription"></td>
+                            <td style="padding-left: 10px; font-size: 11pt; font-weight: normal; white-space: normal;" id="opt-zwave-configuration-vardescription"></td>
                         </tr>
                     </table>
 
@@ -130,6 +130,20 @@
                             </td>
                             <td>
                                 <input style="min-width:60px" type="text" id="wakeupset-value" data-module-prop="WakeUpInterval" placeholder="seconds" />
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+
+            <ul id="opt-zwave-heal-box" data-role="listview" data-inset="false">
+                <li data-role="list-divider">Heal Node / Routing Info</li>
+                <li>
+                    <label id="opt-zwave-heal-label">Routing Info = ?</label>
+                    <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
+                        <tr>
+                            <td style="padding-right:30px">
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_NodeNeighborUpdate()">Heal Node</a>
                             </td>
                         </tr>
                     </table>
@@ -283,18 +297,18 @@
         <div data-role="navbar" data-iconpos="right">
             <ul>
                 <li>
-                    <a class="ui-btn ui-icon-back ui-btn-icon-left" href="#" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" data-rel="back">
+                    <a class="ui-btn ui-icon-back ui-btn-icon-left" href="#" data-locale-id="bottombar_button_back" data-rel="back">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_home" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                    <a class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_control" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_menu_system" class="ui-btn ui-icon-gear ui-btn-icon-right" href="#page_configure_interfaces" data-transition="slide" data-direction="reverse">
-                        Settings
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
             </ul>

@@ -38,6 +38,7 @@ namespace HomeGenie.Automation.Scripting
     /// MQTT client helper.
     /// Class instance accessor: **MqttClient**
     /// </summary>
+    [Serializable]
     public class MqttClientHelper
     {
         private MqttClient mqttClient = null;
@@ -127,6 +128,20 @@ namespace HomeGenie.Automation.Scripting
                 mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
             }
             return this;
+        }
+        
+        /// <summary>
+        /// Publish a message to the specified topic.
+        /// </summary>
+        /// <param name="topic">Topic name.</param>
+        /// <param name="message">Message text as byte array.</param>
+        public MqttClientHelper Publish(string topic, byte[] message)
+        {
+        	lock (mqttSyncLock)
+        	{
+        		mqttClient.PublishMessage(topic, message);
+        	}
+        	return this;
         }
 
         /// <summary>

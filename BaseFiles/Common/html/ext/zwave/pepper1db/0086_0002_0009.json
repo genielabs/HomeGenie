@@ -81,10 +81,7 @@
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0086"
-        },
-        {
-          "@id": "0031",
+          "@id": "0086",
           "@version": "2"
         },
         {
@@ -96,19 +93,25 @@
           "@version": "2"
         },
         {
-          "@id": "0072"
+          "@id": "0072",
+          "@version": "2"
         },
         {
           "@id": "0070"
         },
         {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
           "@id": "0080"
         },
         {
-          "@id": "0020"
+          "@id": "0031",
+          "@version": "2"
         },
         {
-          "@id": "0085"
+          "@id": "0020"
         }
       ]
     },
@@ -127,18 +130,43 @@
     "configParams": {
       "configParam": {
         "@number": "1",
-        "@size": "0",
-        "@default": "",
+        "@type": "constant",
+        "@size": "2",
+        "@default": "0000",
         "name": {
           "lang": {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "Voltage"
           }
         },
         "description": {
           "lang": {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "Voltage to calculate wattage from amperage. Values\r\nrepresent voltage."
           }
-        }
+        },
+        "value": [
+          {
+            "@from": "0078",
+            "@to": "0078",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "US"
+              }
+            }
+          },
+          {
+            "@from": "00f0",
+            "@to": "00f0",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "EU, ANZ"
+              }
+            }
+          }
+        ]
       }
     },
     "resourceLinks": {

@@ -1,0 +1,658 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0115"
+      },
+      "productType": {
+        "@value": "0004"
+      },
+      "productId": {
+        "@value": "0002"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "04"
+      },
+      "protoSubVersion": {
+        "@value": "05"
+      },
+      "appVersion": {
+        "@value": "01"
+      },
+      "appSubVersion": {
+        "@value": "00"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "specificClass": {
+        "@value": "05"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "false"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "1000"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Solarbetriebene Aussensirene"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Siren - wireless outdoor solar Siren with flash."
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Siren - беспроводная сирена на солнечных батареях с звуковым и визуальным оповещением и встроенным аккумулятором."
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Abnehmen des Manipulationsschutzes"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Take off the tamper"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Снимите с кронштейна"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Kurzer Klick auf den Taster neben dem Ein/Aus-Schalter"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Single click on the service button, when the siren is off the holder"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Один раз нажать сервисную кнопку, когда сирена снята с кронштейн"
+          }
+        ]
+      },
+      "productName": "005107",
+      "brandName": "Z-Wave.me",
+      "productLine": "Z-Wave",
+      "productCode": "005107",
+      "productVersion": "1.0",
+      "batteryType": "Solar",
+      "batteryCount": "1"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0020",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "005a"
+        },
+        {
+          "@id": "005e",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0072",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "007a",
+          "@version": "3"
+        },
+        {
+          "@id": "0080"
+        },
+        {
+          "@id": "0086",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0098",
+          "@secure": "true"
+        },
+        {
+          "@id": "0025",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0030",
+          "@version": "2",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0031",
+          "@version": "5",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0059",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0070",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0071",
+          "@version": "5",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0085",
+          "@version": "2",
+          "@inNIF": "false",
+          "@secure": "true"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": {
+        "@number": "1",
+        "@maxNodes": "10",
+        "description": {
+          "lang": [
+            {
+              "@xml:lang": "de"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "Lifeline"
+            },
+            {
+              "@xml:lang": "ru",
+              "#text": "Lifeline"
+            }
+          ]
+        }
+      }
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Verhalten der Sirene bei Manipulation"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Siren triggering mode"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Режим срабатывания сирены"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert, wie sich das Gerät verhalten soll, wenn es von der Metall-Wandhalterung abgenommen wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Sets the tamper triggering mode when removed from the holder"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устанавливает режим срабатывания сирены при снятии с кронштейна"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Die Sirene löst bei Abnahme vom Haltewinkel sofort aus und kann durch den internen Taster oder ein Funkkommando wieder deaktiviert werden"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "The Siren triggers automatically when it's removed from the holder. Must be turned off, using the button or from the controller"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Сирена автоматически срабатывает, когда её снимают с кронштейна. Чтобы выключить надо нажать на кнопку или отправить команду по радио"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Die Sirene löst bei Abnahme vom Haltwinkel sofort aus und wird durch Wieder-Aufsetzen auf den Winkel deaktiviert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "The Siren triggers automatically when it's removed from the holder and turns off, when placed back on the holder"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Сирена автоматически срабатывает, когда её снимают с кронштейна, и выключается, когда помещают обратно"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Ein Abnehmen vom Haltewinkel aktiviert die Sirene nicht."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren doesn't trigger at all, when removed from the holder. Service Mode"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Сирена не срабатывает, когда снимают с кронштейна. Сервисный режим"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "2",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperatur-Kalibierung"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature adjustments"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Корректировка температуры"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Korrektur des Temperatursensors. Für positive Werte gilt 10 = 1 °C für negative Werte gilt x = 256 - (T°C * 10). Beispiel: Um eine lineare Verschiebung des Temperatursensors um 2.6 Kelvin zu erreichen, muss der Wert 256 - (2.6 * 10) = 230 betragen."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature correction. For positive value 10 = 1 °C, for negative value x = 256 - (T°C * 10). Example, if need shift -2.6°C, value calculate: 256 - (2.6 * 10) = 230."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Корректировка значения датчика температуры в пределах ±12.7˚C\r\n Для положительного 10 = 1.0°C. Для отрицательного значение x = 256 - (T°C * 10). Например, если нужно присылаемую температуру уменьшать на 2.6°C, то значение вычисляется так: 256 - (2.6 * 10) = 230.\r\n                "
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "7f",
+              "@unit": "0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "in 0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "in 0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "0.1 °C"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "ff",
+              "@unit": "-0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "in -0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "in -0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "-0.1 °C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "3",
+          "@type": "range",
+          "@size": "1",
+          "@default": "0a",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schwellenwert für Temperatur"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Unsolicited temperature report"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Автоматическая отправка температуры"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schwellenwert, bei dem automatisch ein Temperaturreport gesendet wird. 10 = 1 °C"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold temperature to send unsolicited report. 10 = 1 °C"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "На сколько должна измениться температура, чтобы датчик отправил температуру контроллеру. 10 = 1 °C"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00",
+            "@to": "ff",
+            "@unit": "0.1 °C",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "in 0.1 °C"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "in 0.1 °C"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "0.1 °C"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "4",
+          "@type": "range",
+          "@size": "2",
+          "@default": "000f",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Automatisches Senden einen Temperaturwertes"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Unsolicited temperature report after N wake up"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Автоматическая отправка температуры после N пробуждений"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Wenn dieser Konfigurationsparameter gesetzt ist, sendet das Gerät aller N * 4 Minuten unaufgefordert einen Temperaturwert."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "If the value is set, after N wake up number (measurement is every 4 minutes) the temperature report will be sent. By default it's 15 = every 1 hour"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если установлено значение, то после N пробуждений (сон = 4 мин) будет отправляться значение датчика температуры. По умолчанию температура отправляется при каждом 15 просыпании."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "ffff",
+              "@unit": "4 min",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "jedes N. Aufwachen"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "each Nth wakeup time"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "каждые N пробуждений"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "50",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "02",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sirenmodus: Sirene, Blitzlicht oder beides"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Switch mode: siren only, flash only, flash + siren"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Звуковое и световое оповещение"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Управляет световым и звуковым оповещением"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Nur Sirene"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren only"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Только сирена"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Nur Licht"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Flash only"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Только свет"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Licht + Sirene"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Flash + Siren"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Свет + сирена"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

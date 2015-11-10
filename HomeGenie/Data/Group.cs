@@ -29,11 +29,14 @@ namespace HomeGenie.Data
     public class Group
     {
         public string Name { get; set; }
+        public string Wallpaper { get; set; }
         //
         public List<ModuleReference> Modules { get; set; }
         //
         public Group()
         {
+            Name = "";
+            Wallpaper = "";
             Modules = new List<ModuleReference>();
         }
     }

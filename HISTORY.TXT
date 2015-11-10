@@ -1,5 +1,135 @@
 ﻿RELEASE HISTORY
 
+05/11/2015 v1.1-beta.500
+    - Fixed ZWave interface sensor timeout bug and sensor Status.Level "0.01" bug
+    - Disabled limit of max one opened http connection per program in NetHelper
+    - Improved media server widget with thumbnails and support for multiple bitrates and formats
+    - Added UPnP interface command "AvMedia.GetItem"
+    - Improved camera widget
+    - Fixed 'continuous Event Stream disconnection' bug when running on old mono ARM-hf (eg. Raspberry Pi)
+    - Updated Spanish locales
+    - Disabled periodic Weather Underground program notifications in the UI
+    - Reverted XTenLib to the using of Thread instead of Task
+
+28/10/2015 v1.1-beta.499
+    - Fixed SerialPortLib threading issues
+    - Added ZWaveLib node error status report- Fixed bug in Program Manager not releasing resources when disabling/stopping C-Sharp programs
+    - Added temperature unit and date format preference in the maintenance/ui settings page
+    - Fixed TcpClient helper class that was not releasing resources on disconnect/reconnect
+    - Added "Siren start delay" option to Security Alarm program
+    - Brand new style and features for dashboard widgets
+    - Added timetable program picker (module options dialog)
+
+20/10/2015 v1.1-beta.498
+    - Fixed MIG-Protocols-UPnP interface not releasing allocated SSDP resources
+    - Added to ZWaveLib message resend on node wake-up; fixed i/o synchronization issues in MIG ZWave interface
+    - Updated Pepper1 ZWave database
+    - Fixed HG/Web hang problem after certain number of connections not properly closed by remote clients (Too many open files)
+    - Added arm Home/Away modes to Security Alarm System app
+    - Reintroduced logging to file (SystemLogger)
+    - Fixed HTTP authentication issue when running HG on Windows (#230)
+    - Fixed Settings->Add-On Install bug (PR #231)
+
+10/10/2015 v1.1-beta.497
+    - Enhanced parameter statistics now holding up to 1 day of history (HistoryLimit is now expressed in minutes)
+    - Fixed duplicated event raising causing also issues with History/Statistics (#228)
+    - Added new API command /api/HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/<domain>/<address>/<parameter>
+    - Added new API command /api/HomeAutomation.HomeGenie/Config/Modules.ParameterGet/<domain>/<address>/<parameter> (should close issue #206)
+    - Optimized SSE
+
+20/09/2015 v1.1-beta.496
+    - Integrated new MIG library https://github.com/genielabs/mig-service-dotnet
+    - General speed and performance improvements
+    - Now logging through NLog library
+    - Updated all automation programs to use latest API
+    - Fixed HG configuration saving issue (not storing interface options)
+    - ZWaveLib: added caching and persistence of nodes data to zwavenodes.xml file
+    - ZWaveLib Discovery: added querying of nodes capbilities, NIF, Manufacturer Specs, Version during discovery process
+
+08/09/2015 v1.1-beta.494
+    - Deprecated Program.Setup and mandatory use of return statement in Trigger Code (now called Startup Code)
+    - Integrated new MIG library https://github.com/genielabs/mig-service-dotnet
+    - General speed and performance improvements
+    - Now logging through NLog library
+    - Updated all automation programs to use latest API
+
+26/08/2015 v1.00-beta.493-p4
+    - Fixed HG configuration saving issue (not storing interface options)
+    - ZWaveLib: added caching and persistence of nodes data to zwavenodes.xml file
+    - ZWaveLib Discovery: added querying of nodes capbilities, NIF, Manufacturer Specs, Version during discovery process
+    - Deprecated SC9000 security alarm program
+    - X10 CM-15, W800RF32: added RF security codes decoding and automatic modules creation from X10-RF
+    - Updated MIG to use latest automation libs (ZWaveLib, XTenLib, W800RfLib) and features
+
+13/08/2015 v1.00-beta.493-p3
+    - ZWave: added Heal Node / Routing Info functionality
+    - Added support for serial ports types ttyAMAx and ttyACMx (RaZberry / ZME_UZB1) - PR #194
+    - Some minor improvements to "Weather Underground" and "Query on Wake Up" programs - PR #190 PR #193
+    - Improved statistics delete functionality - PR #200
+
+30/07/2015 v1.00-beta.493-p2
+    - Changed behaviour of When.ModuleParameterIsChanging: event values can now be changed/adjusted before they are commited into the system
+    - Added "Days" parameter for viewing statistics graph along several days (PR #189)
+
+25/06/2015 v1.00-beta.493-p1
+    - Fix for AeonLabs HEM G2 (PR #186)
+    - Added Host Header configuration (adapted from pull request #163)
+    - Added "IR Remote Controller" automation program plugin (contributed by amin)
+    - Added feature field of type "capture" (init as "capture:<parameter_to_capture>")
+
+15/06/2015 v1.00-beta.493
+    - Updated HomeGenie Mac solution files to compile/run latest HG
+    - Fix Philips Hue bridge app level bug
+    - Widgets restyling (homegenie/generic): dimmer,light,switch,siren,colorlight
+    - Some lil UI fixing
+
+12/06/2015 v1.00-beta.492-p1
+    - Removed deprecated html pages
+    - Fixed possible memory leak both in Net Helper HTTP and SMTP clients
+    - Fixed "DiscoveryLog" javascript error
+
+08/06/2015 1.00 beta rev 492
+    - Added customizable wallpapers to control groups
+    - Fixed group separator add/remove bug
+    - Fixed colorlight widget rgb/hsb color conversion bug
+
+01/06/2015 1.00 beta rev 491-p1
+    - Fix to minor issues of the new UI
+
+31/05/2015 1.00 beta rev 491-git1
+    - Fixed issue #134 (cost per unit not saved)
+    - Improved Sensor widget (PR #174)
+
+30/05/2015 1.00 beta rev 491
+    - Restyled UI navigation. Added side menu (opens by clicking the upper left HomeGenie button)
+    - Improved Switch and Shutter widgets (PR #172 #173)
+    - Fixed Statistics Engine bug with parsing/passing wrong timerange values
+
+27/05/2015 1.00 beta rev 489
+    - Fixed CSharp app compile bug (Windows)
+
+10/05/2015 1.00 beta rev 484-git9 (r488 preview)
+    - Added localization of programs configuration options
+
+09/05/2015 1.00 beta rev 484-git8
+    - Added localization of module features and programs title/description
+    - Added postback call to automation programs when a module option/feature is changed from the UI
+
+08/05/2015 1.00 beta rev 484-git7 (487 preview)
+    - Added missing locale translation entries to locale files
+    - Added Cron event wizard and cron event input widget available as AddFeature "cron.text" field type
+
+05/05/2015 1.00 beta rev 484-git6
+    - Added confirm popup for "database reset" and "remote routing reset"
+    - Updated automation programs to use new Program.AddFeature widgets
+    - Added UI widgets for fields created with Program.AddFeature (last method parameter is the type: "text", "slider", "password", "checkbox", "module.text", "store.script", "store.list")
+    - Added simple store to Module helper too
+    - Added simple key/value persistent store to Program helper class: Program.Store("<store_name>")[.Get("<item_key>") | .Remove("<item_key>") | .List]
+    - Fixed encoding bug in input text of module features and program config options (not handling properly double quotes and other characters)
+    - Added "Description" field to MIGServiceConfiguration.Interface
+    - Added Sunrise/Sunset event raising to Weather Underground app
+    - Updated Jint: javascript engine now accepting "camelCase" convention for invoking Helper Classes
+
 30/04/2015 1.00 beta rev 484-git5
     - Updated Pepper1 Z-Wave database
     - MIG Interface driver add-ons can also be installed by entering the add-on package URL
@@ -103,7 +233,7 @@
     - Should fix bug in ZWaveLib Thermostat.SetPointSet (encoding of setpoint value)
     - Added ZWave message queuing for nodes supporting Wake Up command class (battery powered devices - issue #77)
     - Fixed bug in HG.WebApp.Statistics.InitConfiguration that was being called prior that statistics page was open
-    - Fixed bug in MIGInterfaceCommand options parsing, that was affecting Statistics/Parameter.StatsHour when a module domain/address filter was passed
+    - Fixed bug in MigInterfaceCommand options parsing, that was affecting Statistics/Parameter.StatsHour when a module domain/address filter was passed
     - Fixed IP Camera widget preview not showing
 
 07/02/2015 1.00 beta rev 476-git6

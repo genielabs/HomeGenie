@@ -18,7 +18,7 @@
         "@value": "0201"
       },
       "libType": {
-        "@value": "06"
+        "@value": "03"
       },
       "protoVersion": {
         "@value": "04"
@@ -27,16 +27,19 @@
         "@value": "05"
       },
       "appVersion": {
-        "@value": "00"
+        "@value": "01"
       },
       "appSubVersion": {
-        "@value": "30"
+        "@value": "00"
       },
       "basicClass": {
         "@value": "04"
       },
       "genericClass": {
-        "@value": "a1"
+        "@value": "07"
+      },
+      "specificClass": {
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
@@ -45,86 +48,45 @@
         "@value": "true"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
-      "beamSensor": "1000",
+      "beamSensor": "0",
       "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Z-Wave steuerbarer EN14604 kompatibler Rauchwarnmelder mit Sirene"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Z-Wave enabled EN14604 compatible Smoke detector with Siren function, optionally mains powered"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "battery operated smoke detector with siren function"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Taste am Funkmodule einmal drücken"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Hit button on Wireless Module"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "A simple click on the button of the wireless module (3) will include the device. Keeping the button (3) pressed for\r\n2 seconds will force the device to be included without application level security."
+        }
       },
-      "productName": "Smoke Detector + Siren",
-      "brandName": "Z-Wave ",
+      "productName": "SmokeSensor/Siren",
+      "brandName": "Z-Wave",
       "productLine": "Z-Wave",
       "productCode": "004001",
-      "productVersion": "0.48",
-      "batteryType": "9 V Block",
+      "batteryType": "9V",
       "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0020",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0025"
-        },
-        {
-          "@id": "0030",
-          "@version": "2"
-        },
-        {
-          "@id": "0059"
-        },
-        {
-          "@id": "005a"
-        },
-        {
           "@id": "005e",
           "@version": "2"
         },
         {
-          "@id": "0070"
-        },
-        {
-          "@id": "0071",
-          "@version": "4"
-        },
-        {
-          "@id": "0072"
+          "@id": "007a",
+          "@version": "3"
         },
         {
           "@id": "0073"
@@ -133,67 +95,92 @@
           "@id": "0080"
         },
         {
-          "@id": "0085",
-          "@version": "2"
+          "@id": "005a"
+        },
+        {
+          "@id": "0098",
+          "@controlled": "true"
         },
         {
           "@id": "0086",
           "@version": "2"
         },
         {
-          "@id": "0098",
-          "@controlled": "true"
+          "@id": "0072",
+          "@version": "2"
+        },
+        {
+          "@id": "0020",
+          "@controlled": "true",
+          "@secure": "true",
+          "@nonSecure": "false"
+        },
+        {
+          "@id": "0025",
+          "@secure": "true",
+          "@nonSecure": "false"
+        },
+        {
+          "@id": "0030",
+          "@version": "2",
+          "@secure": "true",
+          "@nonSecure": "false"
+        },
+        {
+          "@id": "0071",
+          "@version": "5",
+          "@controlled": "true",
+          "@secure": "true",
+          "@nonSecure": "false"
+        },
+        {
+          "@id": "0070",
+          "@secure": "true",
+          "@nonSecure": "false"
+        },
+        {
+          "@id": "0085",
+          "@version": "2",
+          "@secure": "true",
+          "@nonSecure": "false"
+        },
+        {
+          "@id": "0059",
+          "@secure": "true",
+          "@nonSecure": "false"
         }
       ]
     },
     "assocGroups": {
       "assocGroup": [
         {
-          "@number": "1",
+          "@number": "3",
           "@maxNodes": "4",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Lifeline"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Lifeline"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Switching Command when Alarm"
+            }
           }
         },
         {
           "@number": "2",
           "@maxNodes": "4",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Alarm -Meldungen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Alarm Reports"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Alarm Reports"
+            }
           }
         },
         {
-          "@number": "3",
+          "@number": "1",
           "@maxNodes": "4",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Schaltkommando bei Alarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Switching Command when Alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Lifeline"
+            }
           }
         }
       ]
@@ -206,43 +193,26 @@
           "@size": "1",
           "@default": "0a",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Siren-Alarm Interval"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Siren Alarm Sequence Interval"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Siren Alarm Sequence Interval"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Die steuerbare Sirene erzeugt einen anderen Ton als der Rauchmelder. Dessen Intervalzeit wird mit diesem Parameter eingestellt."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "The additional siren is creating a different acoustic signal differentiate from the smoke alarm. This sound is partly on and partly off. This parameter defines the total length of the interval in seconds. "
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The additional siren is creating a different acoustic signal differentiate from the smoke alarm. This sound is partly\r\non and partly off. This parameter defines the total length of the interval in seconds."
+            }
           },
           "value": {
             "@from": "03",
             "@to": "81",
+            "@unit": "sec",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Sekunden"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "seconds"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define a time interval."
+              }
             }
           }
         },
@@ -252,43 +222,26 @@
           "@size": "1",
           "@default": "08",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Siren-Alarm-Länge"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": " Siren Alarm Tone Length "
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Siren Alarm Tone Length "
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Die steuerbare Sirene erzeugt einen anderen Ton als der Rauchmelder.Die Länge des Tones wird mit diesem Parameter eingestellt"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "The additional siren is creating a different acoustic signal differentiate from the smoke alarm. This sound is partly on and partly off. This parameter defines the total length of the sound versus silence within this interval."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The additional siren is creating a different acoustic signal differentiate from the smoke alarm. This sound is partly on and partly off. This parameter defines the total length of the sound versus silence within this interval."
+            }
           },
           "value": {
             "@from": "01",
             "@to": "63",
+            "@unit": "sec",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "sec"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "sec"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define the total length of the sound."
+              }
             }
           }
         },
@@ -298,39 +251,24 @@
           "@size": "1",
           "@default": "63",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Wert des Einschaltkommandos"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Value of On-Command"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Value of On-Command"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "value": {
             "@from": "00",
             "@to": "63",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de"
-                },
-                {
-                  "@xml:lang": "en"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define the desired value."
+              }
             }
           }
         },
@@ -340,166 +278,103 @@
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Wert des Ausschaltkommandos"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Value of Off-Command"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Value of Off-Command"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "value": {
             "@from": "00",
             "@to": "63",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de"
-                },
-                {
-                  "@xml:lang": "en"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define the desired value."
+              }
             }
           }
         },
         {
           "@number": "5",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Status der automatischen Funkvermaschung für Rauchalarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Status of automated meshing of  Smoke Alarms"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Status of automated meshing of Smoke Alarms"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Der Rauchwarnmelder sendet Rauchalarme automatisch an alle anderen Rauchwarnmelder gleichen Typs im Z-Wave Netz. Dies entspricht den Anforderungen an Funkrauchmelder"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "This smoke detector can automatically inform other smoke detectors of same type about smoke alarms. They will then also turn on the siren. This function is a requirement of wireless networked smoke detectors"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "This smoke detector can automatically inform other smoke detectors of same type about smoke alarms. They will\r\nthen also turn on the siren. This function is a requirement of wireless networked smoke detectors."
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "inactive"
+                }
               }
             },
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "active"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "active"
+                }
               }
             }
           ]
         },
         {
           "@number": "6",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Status der automatischen Funkvermaschung für Batteriealarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Status of automated meshing of  Battery  Alarms"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Status of automated meshing of Battery Alarms"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Der Rauchwarnmelder sendet Batteriealarme automatisch an alle anderen Rauchwarnmelder gleichen Typs im Z-Wave Netz. Dies entspricht den Anforderungen an Funkrauchmelder"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "This smoke detector can automatically inform other smoke detectors of same type about battery alarms. They will then also turn on the siren. This function is a requirement of wireless networked smoke detectors"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "This smoke detector can automatically inform other smoke detectors of same type about battery alarms. They will\r\nthen also turn on the siren. This function is a requirement of wireless networked smoke detectors."
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "inactive "
+                }
               }
             },
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "active"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "active"
+                }
               }
             }
           ]
@@ -508,7 +383,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/ebc4781e1ec02495ded68d9849dd03447cc4083e.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/f81939294d052903082be35110fff22b1e6109c7.jpg"
       }
     }
   }

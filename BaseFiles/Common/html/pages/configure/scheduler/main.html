@@ -24,7 +24,10 @@
             <input id="schedulerservice_item_name" type="text" />
 
             <h3 data-locale-id="configure_schedulerservice_itemcronexp" class="ui-title">Cron Expression</h3>
-            <input id="schedulerservice_item_cronexp" type="text" />
+            <div style="position:relative">
+                <input id="schedulerservice_item_cronexp" type="text" />
+                <a id="schedulerservice_item_cronwizard" class="ui-btn ui-icon-calendar ui-btn-icon-notext ui-corner-all" style="position:absolute;right:2px;top:-4px">Wizard</a>
+            </div>
 
             <h3 data-locale-id="configure_schedulerservice_itemprogramid" class="ui-title">Program Id or Name (optional)</h3>
             <input id="schedulerservice_item_programid" type="text" />
@@ -52,12 +55,12 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#page_configure">
-                        Back
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#page_home">
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>

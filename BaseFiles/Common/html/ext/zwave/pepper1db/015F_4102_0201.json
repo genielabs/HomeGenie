@@ -133,11 +133,12 @@
           "description": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Schalten von assoziierten Geräten"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Group 1"
+                "#text": "Switching of associated devices"
               }
             ]
           }
@@ -148,11 +149,12 @@
           "description": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Bericht über Gerätezustand"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Group 2"
+                "#text": "Reporting devicestate"
               }
             ]
           }

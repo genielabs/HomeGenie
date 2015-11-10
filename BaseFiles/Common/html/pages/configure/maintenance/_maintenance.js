@@ -3,16 +3,29 @@
 HG.WebApp.Maintenance = HG.WebApp.Maintenance || {};
 
 HG.WebApp.Maintenance.InitializePage = function () {
+    $('#page_configure_maintenance').on('pagebeforeshow', function (e) {
+        $('#restore_configuration_uploadfile').val('')
+    });
     $('#page_configure_maintenance').on('pageinit', function (e) {
 
         $('#systemsettings_httpport_change').bind('click', function () {
             var port = $('#http_service_port').val();
             $.mobile.loading('show');
             HG.System.SetHttpPort(port, function (data) {
+                $('#systemsettings_httpport_text').html(port);
                 $.mobile.loading('hide');
             });
         });
-        //
+
+        $('#systemsettings_httphostheader_change').bind('click', function () {
+           var host = $('#http_host_header').val();
+           $.mobile.loading('show');
+           HG.System.SetHostHeader(host, function (data) {
+               $('#systemsettings_hostheader_text').html(host);
+               $.mobile.loading('hide');
+           });
+        });
+
         $("#configure_system_flip_httpcache").on('slidestop', function (event) {
             $.mobile.loading('show');
             if ($("#configure_system_flip_httpcache").val() == '1') {
@@ -52,6 +65,13 @@ HG.WebApp.Maintenance.InitializePage = function () {
             }
         });
         //
+        $("input[name='tempunit-choice']").on('change', function() {
+            dataStore.set('UI.TemperatureUnit', $(this).val());
+        });
+        $("input[name='dateformat-choice']").on('change', function() {
+            dataStore.set('UI.DateFormat', $(this).val());
+        });
+        //
         $('#configure_system_updatemanager_updatebutton').bind('click', function () {
             $('#configure_system_updatemanager_info').html('<strong>Checking for updates...</strong>');
             $.mobile.loading('show');
@@ -75,9 +95,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                     // TODO: ....
                     if (r[0].ResponseValue == 'OK') {
                         $('#configure_system_updateinstall_status').html('Update install complete.');
-                        setTimeout(function () {
-                            document.location.href = '/';
-                        }, 3000);
+                        setTimeout(function() { window.location.replace("/"); }, 3000);
                     }
                     else if (r[0].ResponseValue == 'RESTART') {
                         $('#configure_system_updateinstall_status').html('Installing files... (HomeGenie service stopped)');
@@ -93,7 +111,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
         });
         //
         //$('systemsettings_updateinstall_popup').on('popupbeforeposition', function (event) {
-        //    
+        //
         //});
         $('#configure_system_updatemanager_proceedbutton').bind('click', function () {
             $('#configure_system_updateinstall_button').addClass('ui-disabled');
@@ -135,7 +153,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             HG.System.SetPassword(pass, function (data) {
                 $.mobile.loading('hide');
                 setTimeout(function () {
-                    HG.WebApp.Maintenance.LoadSecuritySettings();
+                    HG.WebApp.Maintenance.LoadHttpSettings();
                 }, 1000);
             });
         });
@@ -143,7 +161,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $.mobile.loading('show');
             HG.System.ClearPassword(function (data) {
                 $.mobile.loading('hide');
-                HG.WebApp.Maintenance.LoadSecuritySettings();
+                HG.WebApp.Maintenance.LoadHttpSettings();
             });
         });
         //
@@ -187,9 +205,11 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $.mobile.loading('show', { text: 'Resetting to factory defaults, please wait...', textVisible: true, theme: 'a', html: '' });
             // FACTORY RESET....
             HG.Configure.System.ServiceCall("System.ConfigurationReset", function (data) {
-                alert('Factory Reset Completed!');
-                $.mobile.loading('hide');
-                window.location.replace("/");
+                setTimeout(function() {
+                    $.mobile.loading('hide');
+                    alert('Factory Reset Completed!');
+                    window.location.replace("/");
+                }, 20000);
             });
         });
         $('#systemsettings_backuprestores1selectallbtn').bind('click', function () {
@@ -206,9 +226,11 @@ HG.WebApp.Maintenance.InitializePage = function () {
             }
         });
         $('#maintenance_configuration_backupbutton').bind('click', function() {
-            window.open(location.protocol + '../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup');
+            window.open(location.protocol + '../../api/HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup');
         });
-        $('#restore_configuration_uploadframe').bind('load', function () {
+        $('#restore_configuration_uploadframe').bind('load', function(evt) {
+            if ($('#restore_configuration_uploadfile').val() == "")
+                return;
             HG.Configure.System.ServiceCall("System.ConfigurationRestoreS1", function (data) {
                 $.mobile.loading('hide');
                 $('#systemsettings_backuprestores1plist').empty();
@@ -232,16 +254,16 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
                 $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
-                    $.mobile.loading('hide');
-                    window.location.replace("/");
+                    setTimeout(function() {
+                        window.location.replace("/");
+                        $.mobile.loading('hide');
+                    }, 20000);
                 });
             });
         });
         //
         $('#systemsettings_modulesdelete').on('popupbeforeposition', function (event) {
-
             HG.WebApp.Maintenance.RefreshModulesList();
-
         });
         $('#configure_interfaces_modules_list').on('click', 'li', function () {
             $.mobile.loading('show');
@@ -277,6 +299,20 @@ HG.WebApp.Maintenance.InitializePage = function () {
             });
         });
 
+        $('#maintenance_configuration_routingresetbutton').on('click', function() {
+            var message = HG.WebApp.Locales.GetLocaleString('systemsettings_resetroutingdata_warning', 'This operation cannot be undone.');
+            HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_resetroutingdata_title', 'Reset routing data?'), message, function(confirmed){
+                if (confirmed) HG.Configure.Modules.RoutingReset();
+            });
+        });
+
+        $('#maintenance_configuration_databaseresetbutton').on('click', function() {
+            var message = HG.WebApp.Locales.GetLocaleString('systemsettings_resetdatabase_warning', 'This operation cannot be undone.');
+            HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_resetdatabase_title', 'Reset stats database?'), message, function(confirmed){
+                if (confirmed) HG.Statistics.Database.Reset();
+            });
+        });
+
     });
 };
 
@@ -293,17 +329,33 @@ HG.WebApp.Maintenance.RestoreProgramToggle = function (el) {
 HG.WebApp.Maintenance.LoadSettings = function () {
     $.mobile.loading('show');
     //
-    HG.Configure.System.ServiceCall("HttpService.GetPort", function (data) {
-        $('#http_service_port').val(data);
-        $('#systemsettings_httpport_text').html(data);
+    HG.WebApp.Maintenance.LoadUpdateCheckSettings();
+    HG.System.LoggingIsEnabled(function (data) {
+        $('#configure_system_flip_logging').val(data).slider('refresh');
         $.mobile.loading('hide');
     });
-    //
+    HG.WebApp.Maintenance.LoadHttpSettings();
     HG.WebApp.Maintenance.LoadStatisticsSettings();
-    HG.WebApp.Maintenance.LoadSecuritySettings();
-    HG.WebApp.Maintenance.LoadUpdateCheckSettings();
     //
     $('#configure_system_flip_eventshistory').val(dataStore.get('UI.EventsHistory') ? "1" : "0").slider('refresh');
+    //
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    $('#tempunit-celsius').prop("checked", false);
+    $('#tempunit-fahrenheit').prop('checked', false);
+    if (temperatureUnit != 'F')
+        $('#tempunit-celsius').prop('checked', true);
+    else
+        $('#tempunit-fahrenheit').prop('checked', true);
+    $("input[name='tempunit-choice']").checkboxradio('refresh');
+    //
+    var dateFormat = dataStore.get('UI.DateFormat');
+    $('#dateformat-dmy').prop("checked", false);
+    $('#dateformat-mdy').prop('checked', false);
+    if (dateFormat != 'MDY12')
+        $('#dateformat-dmy').prop('checked', true);
+    else
+        $('#dateformat-mdy').prop('checked', true);
+    $("input[name='dateformat-choice']").checkboxradio('refresh');
 };
 
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
@@ -333,20 +385,26 @@ HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
     });
 };
 
-HG.WebApp.Maintenance.LoadSecuritySettings = function () {
+HG.WebApp.Maintenance.LoadHttpSettings = function () {
     $.mobile.loading('show');
     HG.System.HasPassword(function (data) {
-        var sfx = (data == '1' ? 'on' : 'off');
+        var sfx = (data.ResponseValue == '1' ? 'on' : 'off');
         $('#securitysettings_password_image').attr('src', 'images/protection-' + sfx + '.png');
         //
-        HG.System.LoggingIsEnabled(function (data) {
-            $('#configure_system_flip_logging').val(data).slider('refresh');
+        HG.System.WebCacheIsEnabled(function (data) {
+            $('#configure_system_flip_httpcache').val(data == 'true' ? '1' : '0').slider('refresh');
             $.mobile.loading('hide');
         });
         //
-        HG.System.WebCacheIsEnabled(function (data) {
-            $('#configure_system_flip_httpcache').val(data).slider('refresh');
+        HG.Configure.System.ServiceCall("HttpService.GetPort", function (data) {
+            $('#http_service_port').val(data);
+            $('#systemsettings_httpport_text').html(data);
             $.mobile.loading('hide');
+        });
+        HG.Configure.System.ServiceCall("HttpService.GetHostHeader", function (data) {
+           $('#http_host_header').val(data);
+           $('#systemsettings_hostheader_text').html(data);
+           $.mobile.loading('hide');
         });
     });
 };
@@ -373,10 +431,10 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
             cdomain = mod.Domain;
         }
         $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
-			.append($('<a/>',
-				{
-				    'text': mod.Address + ' ' + mod.Name
-				})));
+            .append($('<a/>',
+                {
+                    'text': mod.Address + ' ' + mod.Name
+                })));
     }
     cdomain = '';
     for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -389,10 +447,10 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
             cdomain = mod.Domain;
         }
         $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
-			.append($('<a/>',
-				{
-				    'text': mod.Address + ' ' + mod.Name
-				})));
+            .append($('<a/>',
+                {
+                    'text': mod.Address + ' ' + mod.Name
+                })));
     }
     $('#configure_interfaces_modules_list').listview('refresh');
 };

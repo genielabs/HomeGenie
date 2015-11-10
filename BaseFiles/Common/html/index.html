@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
@@ -25,6 +26,7 @@
     <script src="js/jquery.notify.min.js"></script>
     <script src="js/jquery.qtip.min.js"></script>
     <script src="js/jquery.knob.js"></script>
+    <script src="js/jquery.fileupload.js"></script>
 
     <!-- custom css includes -->
     <link rel="stylesheet" href="css/homegenie.min.css" />
@@ -88,8 +90,9 @@
     <script src="js/colorwheel.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jqm-datebox.min.css">
     <script src="js/jqm-datebox.core.js"></script>
-    <script src="js/jqm-datebox.lang.utf8.min.js"></script>    
-    <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
+    <script src="js/jqm-datebox.lang.utf8.min.js"></script>
+
+    <!-- custom javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
     
     <!-- local css definitions and overrides -->
@@ -175,20 +178,15 @@
 
 </head>
 <body>
-    <!-- Home -->
-    {include pages/home.html}
-
-    <!-- Event Log -->
-    {include pages/events/main.html}
 
     <!-- Control -->
     {include pages/control/main.html}
 
+    <!-- Event Log -->
+    {include pages/events/main.html}
+
     <!-- Analyze -->
     {include pages/analyze/main.html}
-
-    <!-- Configure / Main -->
-    {include pages/configure/main.html}
 
     <!-- Configure / Groups -->
     {include pages/configure/groups/listgroups.html}
@@ -222,8 +220,8 @@
         <div style="float:left;" id="interfaces_status"></div>
         <!-- Event Logs button -->
         <div id="btn_eventshistory_led" style="float:left;display:none;margin-top:2px">
-            <a href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
-            <a href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
+            <a href="#page_events"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
+            <a href="#page_events"><img id="event_status_off" src="images/event_off.png" /></a>
         </div>
     </div>
 
@@ -236,7 +234,7 @@
     <div id="content" style="z-index:1973;">
         <div id="notifypopup" class="ui-notify-popup">
             <a class="ui-notify-close ui-notify-cross" href="x">X</a>
-            <div style="float:left;margin-right:6px;"><img src="#{icon}" width="48"></div>
+            <div style="float:left;margin-right:6px;"><img src="pages/control/widgets/homegenie/generic/images/status.png#{icon}" width="48"></div>
             <h1>#{title}</h1>
             <p>#{text}</p>
         </div>
@@ -253,8 +251,8 @@
         <div class="ui-content ui-corner-bottom">
             <p style="padding-left:20px;padding-right:20px;max-height:240px;overflow:hidden;overflow-y:auto;">This operation cannot be undone.</p>
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a data-locale-id="popup_confirm_action_cancel" id="actionconfirm_cancel_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete" data-rel="back">Cancel</a></div>
-                <div class="ui-block-b" align="right"><a data-locale-id="popup_confirm_action_proceed" id="actionconfirm_confirm_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" data-rel="back">Proceed</a></div>
+                <div class="ui-block-a"><a data-locale-id="common_command_cancel" id="actionconfirm_cancel_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete" data-rel="back">Cancel</a></div>
+                <div class="ui-block-b" align="right"><a data-locale-id="common_command_proceed" id="actionconfirm_confirm_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" data-rel="back">Proceed</a></div>
             </div>
         </div>
     </div>        
@@ -428,7 +426,7 @@
                 <a id="automationprograms_program_btn_export" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
             </div>
             <div class="ui-block-c">
-                <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit" data-transition="slide">Edit</a>
+                <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit">Edit</a>
             </div>
             <div class="ui-block-d">
                 <a id="automationprograms_program_restart" class="ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_restart">Restart</a>
@@ -437,6 +435,94 @@
     </div>
 
 <!-- END Global Popups -->
+
+<!--- TODO: Move the full screen editor to a better place ( ui/widgets/store.script.htm ? ) -->
+    <div id="fullscreen_edit_box" class="ui-corner-all ui-shadow" style="display:none;position:absolute;padding:20px;z-index:10000;background:white;color:black;top:50px;left:20px;right:20px;bottom:50px">
+        <h3 data-ui-field="title" style="margin:5px;margin-top:0px">Fullscreen Editor</h3>
+        <h4 data-ui-field="subtitle" style="margin:5px">...</h4>
+        <div class="ui-shadow" style="position:absolute;top:100px;left:30px;right:30px;bottom:100px;"><textarea id="fullscreen_edit_text" style="width:100%;height:100%;border:0;margin:0"></textarea></div>
+        
+        <div style="position:absolute;left:40px;bottom:20px">
+            <h4 data-ui-field="namelabel"></h4>
+            <div data-ui-field="nameinput" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset" style="position:relative;display:none;border-color:#fff">
+                <input type="text" data-role="none" placeholder="enter item name" />
+            </div>
+        </div>
+
+        <a data-ui-field="cancel" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:140px;bottom:20px">Cancel</a>
+        
+        <a data-ui-field="confirm" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:40px;bottom:20px">Ok</a>
+    </div>
+
+<!--- BEGIN Side Menu Panels -->
+
+    <div id="side_panel" data-role="panel" class="ui-page ui-overlay-shadow ui-corner-all" style="padding:0;margin:0;margin-top:41px;" data-position-fixed="true" data-position="left" data-display="overlay">
+        <ul data-role="listview" data-inset="false" class="ui-mini ui-corner-all">
+            <li><a data-locale-id="home_menu_groups" class="ui-btn ui-icon-grid ui-btn-icon-left" href="#page_configure_groups" data-transition="none">Groups</a></li>
+            <li data-locale-id="home_menu_automation" data-role="list-divider">Automation</li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-bars" data-locale-id="home_menu_programeditor" href="#page_configure_automationgroups" data-transition="none">Programs</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-edit" data-locale-id="home_menu_widgeteditor" href="#page_configure_widgetlist" data-transition="none">Widgets</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-clock" data-locale-id="home_menu_scheduler" href="#page_configure_schedulerservice" data-transition="none">Scheduler</a></li>
+            <li data-locale-id="home_menu_system" data-role="list-divider">System</li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-gear" data-locale-id="home_menu_settings" href="#page_configure_interfaces" data-transition="none">Settings</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="home_menu_maintenance" href="#page_configure_maintenance" data-transition="none">Maintenance</a></li>
+            <li data-locale-id="home_menu_about" data-role="list-divider">About</li>
+            <li><a class="ui-btn ui-icon-info ui-btn-icon-left" href="#homegenie_about" data-rel="popup">About HomeGenie</a></li>
+            <li><a class="ui-btn ui-icon-bars ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
+            <li><a class="ui-btn ui-icon-bars ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://genielabs.github.io/HomeGenie">Programming Guide</a></li>
+            <li><a class="ui-btn ui-icon-comment ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-heart" data-locale-id="home_menu_about_support" target="_blank" href="http://www.homegenie.it/keepuphg.php">Keep HomeGenie Up!</a></li>
+        </ul>
+        <br clear="all" />
+        <div align="center" style="font-size:9pt;position:absolute;left:0;right:0;bottom:0;height:30px">
+            HomeGenie &copy; 2011-2015 
+            <a href="https://github.com/genielabs/HomeGenie" target="_blank">G-Labs</a>
+        </div>
+    </div><!-- /panel -->
+
+    <div id="groups_panel" data-role="panel" class="ui-page ui-overlay-shadow ui-corner-all" style="padding:0;margin:0;margin-top:41px" data-position-fixed="true" data-position="left" data-display="overlay">
+        <ul data-role="listview" id="control_groupsmenu" data-inset="false" class="ui-mini ui-corner-all">
+            <li data-locale-id="configure_grouplist" data-role="list-divider">Group List</li>
+        </ul>
+    </div>
+
+<!--- END Side Menu Panels -->
+
+<!--- BEGIN HomeGenie Overlay -->
+
+    <div id="homegenie_overlay" style="position:fixed;top:41px;left:0;right:0;bottom:0;background-color:white;opacity:0.2;z-index:1000">
+        <div style="width:100%;height:100%;background:url(images/genie.png) no-repeat center center;"></div>
+    </div>
+
+<!--- END HomeGenie Overlay -->
+
+<!--- HomeGenie about popup -->
+    <div id="homegenie_about" class="ui-corner-all hg-popup-a" data-role="popup" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="slidedown">
+        <div data-role="header" class="ui-corner-top">
+            <h2 data-locale-id="home_menu_about">About</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <p align="center">HomeGenie <span data-locale-id="home_menu_about_version">Version</span> <span id="systemversion" style="font-weight:bold">?</span></p>
+            <hr />
+            <p style="font-weight:bold">What's hot</p>
+            <p>
+            Don't miss the new client for Android!
+            </p>
+            <div data-role="controlgroup" data-theme="d" data-mini="true">
+                <a class="ui-btn ui-btn-b ui-corner-all ui-icon-action ui-btn-icon-left" href="http://genielabs.github.io/HomeGenie/clients.html#HomeGeniePlus" target="_blank">HomeGenie Plus</a>
+            </div>
+        </div>
+        <div class="ui-grid-a ui-footer ui-bar-inherit">
+            <div class="ui-block-a" style="width:20%">
+                <a class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_popupfilter_optclose" data-rel="back">Close</a>
+            </div>
+            <div class="ui-block-b" style="width:80%" align="right">
+                <a class="ui-btn ui-corner-all ui-icon-recycle ui-btn-icon-right" id="about_popup_updatebutton" data-locale-id="configure_system_updatemanager_updatecheck" data-mini="true" href="#">Update Check</a>
+            </div>
+        </div>
+
+    </div>
+
 
 </body>
 </html>

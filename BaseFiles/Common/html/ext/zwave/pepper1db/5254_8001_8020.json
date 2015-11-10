@@ -155,7 +155,7 @@
           "@number": "1",
           "@type": "constant",
           "@size": "1",
-          "@default": "80",
+          "@default": "ff",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -200,8 +200,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "80",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",

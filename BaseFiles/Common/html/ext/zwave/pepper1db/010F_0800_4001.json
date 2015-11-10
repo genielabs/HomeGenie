@@ -200,8 +200,8 @@
         {
           "@number": "1",
           "@type": "range",
-          "@size": "1",
-          "@default": "0a",
+          "@size": "2",
+          "@default": "000a",
           "name": {
             "lang": [
               {
@@ -227,16 +227,16 @@
             ]
           },
           "value": {
-            "@from": "89",
-            "@to": "7f",
-            "@unit": "1",
+            "@from": "0008",
+            "@to": "00ff",
             "description": {
               "lang": [
                 {
                   "@xml:lang": "de"
                 },
                 {
-                  "@xml:lang": "en"
+                  "@xml:lang": "en",
+                  "#text": "Adjust the sensitivity."
                 }
               ]
             }
@@ -274,7 +274,6 @@
           "value": {
             "@from": "00",
             "@to": "0f",
-            "@unit": "time [s] = 0.5 x (value + 1)",
             "description": {
               "lang": [
                 {
@@ -283,7 +282,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "default 15 (= 8sec); The time of insensitivity should be shorter\nthat the time period set in parameter 6."
+                  "#text": "default 15 (= 8sec); The time of insensitivity should be shorter\r\nthat the time period set in parameter 6.\r\nFormula to calculate the time: time [s] = 0.5 x (value + 1)\r\nAvailable settings: 0 - 15 (0,5 - 8 seconds)"
                 }
               ]
             }
@@ -368,16 +367,14 @@
           "value": {
             "@from": "00",
             "@to": "03",
-            "@unit": "time [s] = 4 x (value + 1)",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "standard 2 (= 12s)"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "default 2 (= 12sec)"
+                  "#text": "Define a time interval.\r\nFormula to calculate the time: time [s] = 4 x (value + 1)\r\nDefault setting: 2 (12 seconds)\r\n\r\n"
                 }
               ]
             }
@@ -408,14 +405,14 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Period of time, after the motion alarm will be cancelled in the main controller and the\nassociated devices. Any motion detected during the cancellation delay time countdown will result in the countdown being restarted. In case of small values, below 10 seconds, the value of parameter 2 must be modified (PIR sensor’s “Blind Time”)."
+                "#text": "Period of time, after the motion alarm will be cancelled in the main controller and the\r\nassociated devices. Any motion detected during the cancellation delay time countdown will result in the countdown being restarted. In case of small values, below 10 seconds, the value of parameter 2 must be modified (PIR sensor’s “Blind Time”)."
               }
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0001",
             "@to": "7fff",
-            "@unit": "1s",
+            "@unit": "sec",
             "description": {
               "lang": [
                 {
@@ -424,7 +421,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "default 30 (=30sec)"
+                  "#text": "default 30 (=30sec), Define a time interval."
                 }
               ]
             }
@@ -432,7 +429,7 @@
         },
         {
           "@number": "8",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -540,9 +537,9 @@
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0001",
             "@to": "7fff",
-            "@unit": "1lux",
+            "@unit": "lux",
             "description": {
               "lang": [
                 {
@@ -551,7 +548,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "default 200 (200 lux)"
+                  "#text": "default 200 (200 lux), Dafine a value for light intensity."
                 }
               ]
             }
@@ -559,7 +556,7 @@
         },
         {
           "@number": "12",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -582,7 +579,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter determines the command frames sent in 1-st\nassociation group, assigned to PIR sensor."
+                "#text": "parameter determines the command frames sent in 1-st\r\nassociation group, assigned to PIR sensor."
               }
             ]
           },
@@ -623,7 +620,7 @@
         },
         {
           "@number": "14",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "ff",
           "name": {
@@ -703,7 +700,7 @@
         },
         {
           "@number": "16",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -806,23 +803,21 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter determines the chages in forces acting on the \nMotion Sensor resulting in tamper alarm beig reported - g-force acceleration."
+                "#text": "parameter determines the chages in forces acting on the \r\nMotion Sensor resulting in tamper alarm beig reported - g-force acceleration."
               }
             ]
           },
           "value": {
             "@from": "00",
-            "@to": "7a",
-            "@unit": "(0.08 - 2g; x 0.016g; 0 = tamper inactive)",
+            "@to": "79",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "standard 15 (= 0,224g)"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "default 15 (= 0.224g)"
+                  "#text": "Define a treshold. Available settigs: 0 - 121 (0,08 - 2g; multiply by 0,016g;\r\n0 = tamper inactive)\r\n"
                 }
               ]
             }
@@ -853,14 +848,14 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Time period after which a tamper alarm will be cacelled. Another tampering detected durig the countdown will NOT\nextend the delay."
+                "#text": "Time period after which a tamper alarm will be cacelled. Another tampering detected durig the countdown will NOT\r\nextend the delay."
               }
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0001",
             "@to": "7fff",
-            "@unit": "1s",
+            "@unit": "sec",
             "description": {
               "lang": [
                 {
@@ -869,7 +864,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "default 30sec"
+                  "#text": "default: 30sec, Define a time interval."
                 }
               ]
             }
@@ -877,7 +872,7 @@
         },
         {
           "@number": "24",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -900,7 +895,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter determines the behaviour of tamper and how it\nreports."
+                "#text": "parameter determines the behaviour of tamper and how it\r\nreports."
               }
             ]
           },
@@ -989,7 +984,7 @@
         },
         {
           "@number": "26",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -1081,18 +1076,17 @@
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0000",
             "@to": "7fff",
-            "@unit": "1lux",
+            "@unit": "lux",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "Werte 1 - 65535 lux; 0 = kein Report wird gesendet;\nstandard 200 lux"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "values 1 - 65535 lux; 0 = reports are not sent; default 200 lux"
+                  "#text": "Define a treshold. Available settings: 0 - 32767 (1-32767 lux; 0=reports are not sent)"
                 }
               ]
             }
@@ -1128,18 +1122,17 @@
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0000",
             "@to": "7fff",
             "@unit": "1s",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "Werte 1 - 65535; 0 = keine Reports werden gesendet"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "value 1 - 65535; 0 = no reports are sent"
+                  "#text": "Define a time interval. Available settings: 0 - 32767 (1-32767 seconds; 0 = no reports)"
                 }
               ]
             }
@@ -1175,9 +1168,9 @@
             ]
           },
           "value": {
-            "@from": "81",
-            "@to": "7f",
-            "@unit": "0,1°C",
+            "@from": "00",
+            "@to": "ff",
+            "@unit": "x 0,1°C",
             "description": {
               "lang": [
                 {
@@ -1186,7 +1179,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "(0.1 - 25.5°C; 0 = reports are not sent)"
+                  "#text": "Define a treshold. \r\n0 = reports are not sent"
                 }
               ]
             }
@@ -1222,9 +1215,9 @@
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0000",
             "@to": "7fff",
-            "@unit": "1s",
+            "@unit": "sec",
             "description": {
               "lang": [
                 {
@@ -1233,7 +1226,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "1 - 65535 seconds; 0 = temperature will not be measured"
+                  "#text": "Define a time interval. 0 = temperature will not be measured"
                 }
               ]
             }
@@ -1269,9 +1262,9 @@
             ]
           },
           "value": {
-            "@from": "8001",
+            "@from": "0000",
             "@to": "7fff",
-            "@unit": "1s",
+            "@unit": "sec",
             "description": {
               "lang": [
                 {
@@ -1280,7 +1273,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "1 - 65535 sec; 0 = reports are not\nsent"
+                  "#text": "Define a time interval. 0 = reports are not\r\nsent"
                 }
               ]
             }
@@ -1316,18 +1309,16 @@
             ]
           },
           "value": {
-            "@from": "8001",
-            "@to": "7fff",
-            "@unit": "1°C",
+            "@from": "fc18",
+            "@to": "03e8",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "0 - 100 (0 to 100°C);\nor 64536 - 65535 (-100 to \n-0.10°C)"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "0 - 100 (0 to 100°C);\nor 64536 - 65535 (-100 to \n-0.10°C)"
+                  "#text": "Set a value for temperature compensation.\r\nAvailable settings: -1000 - 1000 (-100°C – 100°C)"
                 }
               ]
             }
@@ -1358,7 +1349,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter determines the way in which LED diode behaves\nafter motion has been detected"
+                "#text": "parameter determines the way in which LED diode behaves\r\nafter motion has been detected"
               }
             ]
           },
@@ -1822,14 +1813,14 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter determines the brightness of LED when indicating\nmotion."
+                "#text": "parameter determines the brightness of LED when indicating\r\nmotion."
               }
             ]
           },
           "value": {
             "@from": "00",
             "@to": "64",
-            "@unit": "1%",
+            "@unit": "%",
             "description": {
               "lang": [
                 {
@@ -1838,7 +1829,7 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "1 - 100%; 0 = brightness determined by the ambient lighting - see parameters 82 and 83"
+                  "#text": "Define a brightness level.\r\n 0 = brightness determined by the ambient lighting - see parameters 82 and 83"
                 }
               ]
             }
@@ -1875,17 +1866,16 @@
           },
           "value": {
             "@from": "0000",
-            "@to": "7fff",
-            "@unit": "1lux",
+            "@to": "7ffe",
+            "@unit": "lux",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "0 bis Wert von Parameter 83"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "0 to value of parameter 83"
+                  "#text": "Available settings: 0 to parameter 83 value (0-32766 lux)"
                 }
               ]
             }
@@ -1921,18 +1911,17 @@
             ]
           },
           "value": {
-            "@from": "0000",
+            "@from": "0001",
             "@to": "7fff",
-            "@unit": "1lux",
+            "@unit": "lux",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "Wert des Parameter 82 bis 65535"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "value of parameter 82 to 65535"
+                  "#text": "Available settings: parameter 82 value to 32767 (1-32767 lux)"
                 }
               ]
             }
@@ -1963,14 +1952,14 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Minimum temperatur resulting in blue LED illumination. parameter is relevant only when parameter 80 has been\nproperly configured."
+                "#text": "Minimum temperatur resulting in blue LED illumination. parameter is relevant only when parameter 80 has been\r\nproperly configured."
               }
             ]
           },
           "value": {
             "@from": "00",
             "@to": "64",
-            "@unit": "1°C",
+            "@unit": "°C",
             "description": {
               "lang": [
                 {
@@ -2010,14 +1999,14 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Maximum temperatur resulting in red LED illumination. parameter is relevant only when parameter 80 has been\nproperly configured."
+                "#text": "Maximum temperatur resulting in red LED illumination. parameter is relevant only when parameter 80 has been\r\nproperly configured."
               }
             ]
           },
           "value": {
             "@from": "00",
             "@to": "7f",
-            "@unit": "1°C",
+            "@unit": "°C",
             "description": {
               "lang": [
                 {
@@ -2034,7 +2023,7 @@
         },
         {
           "@number": "89",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {

@@ -5,8 +5,50 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
 
+div[data-ui-field="wallpaper"] {
+    background: url() center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
 /* Code Mirror */
+
+#fullscreen_edit_box .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    border solid 1px red;
+    display: block;
+    cursor:default;
+}
+
+#fullscreen_edit_box .CodeMirror-code span {
+    font-family: Courier New, Courier, monospace !important;
+    font-size: 12pt !important;
+    white-space: pre;
+    line-height: 16pt;
+}
+
+#fullscreen_edit_box .CodeMirror-linenumber {
+    padding-top:3px;
+    font-size: 9pt;
+    font-family: Courier New, Courier, monospace !important;
+}
+
+#fullscreen_edit_box .CodeMirror-scroll {
+    overflow-x: auto;
+}
+
+#fullscreen_edit_box .CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: middle;
+    background-repeat: repeat-x;
+}
 
 #page_widgeteditor_editwidget .CodeMirror {
     border: 1px solid #eee;
@@ -96,6 +138,13 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     margin: 10px;
 }
 
+input[type=number] {
+    width: 70px;
+}
+
+.ui-slider-track {
+    margin-left: 100px;
+}
 
 
 /* HomeGenie UI */
@@ -157,17 +206,46 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
 .hg-widget-a {
     width: 260px;
     margin: 15px;
+    min-height: 160px;
+    padding-bottom:20px;
+    position:relative;
+}
+
+.hg-widget-a2 {
+    width: 520px;
+    margin: 15px;
+    min-height: 160px;
+    padding-bottom:20px;
+    position:relative;
 }
 
 .hg-widget-b {
     min-width: 260px;
     max-width: 540px;
     margin: 15px;
+    min-height: 180px;
+    position:relative;
 }
 
 .hg-widget-c {
     width: auto;
     margin: 15px;
+    min-height: 180px;
+    position:relative;
+}
+
+.hg-widget-a div[data-ui-field=description] {
+    font-size:9pt !important;
+}
+.hg-widget-a div[data-ui-field=name] {
+    font-weight:bold !important;
+    font-size:12pt !important;
+}
+.hg-widget-a div.ui-footer, .hg-widget-a2 div.ui-footer, .hg-widget-b div.ui-footer, .hg-widget-c div.ui-footer {
+    position:absolute;
+    bottom:0;
+    right:0;left:0;
+    height:20px;
 }
 
 .hg-widget-a div.ui-header, .hg-widget-b div.ui-header {
@@ -206,7 +284,7 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
 
 .hg-widget-container .ui-slider
 {
-    width: 120px;
+    min-width: 120px;
 }
 
 .hg-widget-icon {
@@ -252,6 +330,36 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     line-height: 30px;
     padding-left: 25px;
     background: url("../images/indicators/luminance-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-smoke {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/smoke-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-flood {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/flood-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-heat {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/heat-black.png") no-repeat scroll 0 6px transparent;
     vertical-align: middle;
     font-size: 14pt;
     font-weight: bold;
@@ -311,7 +419,7 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     line-height: 30px;
     padding-left: 25px;
-    background: url("../images/indicators/plug-door.png") no-repeat scroll 0 6px transparent;
+    background: url("../images/indicators/door-black.png") no-repeat scroll 0 6px transparent;
     vertical-align: middle;
     font-size: 14pt;
     font-weight: bold;
@@ -396,6 +504,18 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance, div.ui-bar-
     background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
 }
 
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-smoke, div.ui-bar-inherit span.hg-indicator-smoke {
+    background: url("../images/indicators/smoke.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-flood, div.ui-bar-inherit span.hg-indicator-flood {
+    background: url("../images/indicators/flood.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-heat, div.ui-bar-inherit span.hg-indicator-heat {
+    background: url("../images/indicators/heat.png") no-repeat scroll 0 6px transparent;
+}
+
 div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm, div.ui-bar-inherit span.hg-indicator-alarm {
     background: url("../images/indicators/alarm.png") no-repeat scroll 0 6px transparent;
 }
@@ -423,7 +543,7 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inher
 .ui-slider-track.ui-mini {
     height: 12px;
     top: 8px;
-    margin: 0px 15px 0px 68px;  /* add this line to file */
+    margin: 0px 15px 0px 90px;  /* add this line to file */
 }
 div.ui-slider-switch.ui-mini {
     height: 29px;
@@ -448,10 +568,32 @@ div.ui-slider-switch.ui-mini {
     opacity: 0.9;
 }
 /*.ui-menu-item { color: red; text-shadow: black; }*/
+.ui-slider {
+    min-width:120px;
+}
 
+div[data-role=page]:not(input) {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .freewall {
     float: left;
+}
+
+/* Custom Icons */
+
+.ui-icon-microphone:after {
+    background-image: url("../images/icons/micro-black.png");
+    background-position: 3px 3px;
+}
+div.ui-page-theme-a .ui-icon-microphone:after {
+    background-image: url("../images/icons/micro-white.png");
+    background-position: 3px 3px;
 }
 
 .ui-datepicker {     

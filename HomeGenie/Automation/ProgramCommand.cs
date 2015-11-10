@@ -28,10 +28,10 @@ namespace HomeGenie.Automation
     [Serializable()]
     public class ProgramCommand
     {
-        public string Domain;
-        public string Target;
-        public string CommandString;
-        public string CommandArguments;
+        public string Domain { get; set; }
+        public string Target { get; set; }
+        public string CommandString { get; set; }
+        public string CommandArguments { get; set; }
     }
 
 }

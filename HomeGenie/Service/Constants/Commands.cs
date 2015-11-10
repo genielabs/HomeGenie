@@ -31,22 +31,22 @@ namespace HomeGenie.Service.Constants
     {
         public static class Groups
         {
-            public const string GROUPS_LIGHTSON
+            public const string GroupsLightsOn
                 = "Groups.LightsOn";
-            public const string GROUPS_LIGHTSOFF
+            public const string GroupsLightsOff
                 = "Groups.LightsOff";
         }
 
         // commonly used commands
         public static class Control
         {
-            public const string CONTROL_ON
+            public const string ControlOn
                 = "Control.On";
-            public const string CONTROL_OFF
+            public const string ControlOff
                 = "Control.Off";
-            public const string CONTROL_LEVEL
+            public const string ControlLevel
                 = "Control.Level";
-            public const string CONTROL_TOGGLE
+            public const string ControlToggle
                 = "Control.Toggle";
         }
     }

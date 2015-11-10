@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>W800Rf32Lib</name>
+    </assembly>
+    <members>
+        <member name="T:W800Rf32Lib.RfReceiver">
+            <summary>
+            W800RF32 receiver class.
+            </summary></member>
+        <member name="T:W800Rf32Lib.RfReceiver.ConnectionStatusChangedEventHandler">
+            <summary>
+            Connected state changed event.
+            </summary></member>
+        <member name="E:W800Rf32Lib.RfReceiver.ConnectionStatusChanged">
+            <summary>
+            Occurs when connected state changed.
+            </summary></member>
+        <member name="T:W800Rf32Lib.RfReceiver.RawDataReceivedEventHandler">
+            <summary>
+            Raw data received event.
+            </summary></member>
+        <member name="E:W800Rf32Lib.RfReceiver.RfDataReceived">
+            <summary>
+            Occurs when raw data is received.
+            </summary></member>
+        <member name="T:W800Rf32Lib.RfReceiver.X10CommandReceivedEventHandler">
+            <summary>
+            X10 command received event.
+            </summary></member>
+        <member name="E:W800Rf32Lib.RfReceiver.RfCommandReceived">
+            <summary>
+            Occurs when x10 command received.
+            </summary></member>
+        <member name="T:W800Rf32Lib.RfReceiver.X10SecurityReceivedEventHandler">
+            <summary>
+            X10 security data received event.
+            </summary></member>
+        <member name="E:W800Rf32Lib.RfReceiver.RfSecurityReceived">
+            <summary>
+            Occurs when x10 security data is received.
+            </summary></member>
+        <member name="M:W800Rf32Lib.RfReceiver.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:W800Rf32Lib.RfReceiver" /> class.
+            </summary></member>
+        <member name="M:W800Rf32Lib.RfReceiver.Connect">
+            <summary>
+            Connect to the W800Rf32 receiver.
+            </summary></member>
+        <member name="M:W800Rf32Lib.RfReceiver.Disconnect">
+            <summary>
+            Disconnect from the W800Rf32 receiver.
+            </summary></member>
+        <member name="P:W800Rf32Lib.RfReceiver.IsConnected">
+            <summary>
+            Gets a value indicating whether the RF receiver hardware is connected.
+            </summary>
+            <value><c>true</c> if connected; otherwise, <c>false</c>.</value></member>
+        <member name="P:W800Rf32Lib.RfReceiver.PortName">
+            <summary>
+            Gets or sets the name of the serial port where the receiver is connected to.
+            </summary>
+            <value>The name of the port.</value></member>
+        <member name="M:W800Rf32Lib.RfReceiver.OnConnectionStatusChanged(W800Rf32Lib.ConnectionStatusChangedEventArgs)">
+            <summary>
+            Raises the connected state changed event.
+            </summary>
+            <param name="args">Arguments.</param></member>
+        <member name="M:W800Rf32Lib.RfReceiver.OnRfDataReceived(W800Rf32Lib.RfDataReceivedEventArgs)">
+            <summary>
+            Raises the rf data received event.
+            </summary>
+            <param name="args">Arguments.</param></member>
+        <member name="M:W800Rf32Lib.RfReceiver.OnRfCommandReceived(W800Rf32Lib.RfCommandReceivedEventArgs)">
+            <summary>
+            Raises the RF command received event.
+            </summary>
+            <param name="args">Arguments.</param></member>
+        <member name="M:W800Rf32Lib.RfReceiver.OnRfSecurityReceived(W800Rf32Lib.RfSecurityReceivedEventArgs)">
+            <summary>
+            Raises the RF security received event.
+            </summary>
+            <param name="args">Arguments.</param></member>
+        <member name="T:W800Rf32Lib.ConnectionStatusChangedEventArgs">
+            <summary>
+            Connected state changed event arguments.
+            </summary></member>
+        <member name="F:W800Rf32Lib.ConnectionStatusChangedEventArgs.Connected">
+            <summary>
+            The connected state.
+            </summary></member>
+        <member name="M:W800Rf32Lib.ConnectionStatusChangedEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:W800Rf32Lib.ConnectionStatusChangedEventArgs" /> class.
+            </summary>
+            <param name="state">State of the connection (true = connected, false = not connected).</param></member>
+        <member name="T:W800Rf32Lib.RfDataReceivedEventArgs">
+            <summary>
+            Rf data received event arguments.
+            </summary></member>
+        <member name="F:W800Rf32Lib.RfDataReceivedEventArgs.Data">
+            <summary>
+            The raw data.
+            </summary></member>
+        <member name="M:W800Rf32Lib.RfDataReceivedEventArgs.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:W800Rf32Lib.RfDataReceivedEventArgs" /> class.
+            </summary>
+            <param name="data">Data.</param></member>
+        <member name="T:W800Rf32Lib.RfCommandReceivedEventArgs">
+            <summary>
+            RF command received event arguments.
+            </summary></member>
+        <member name="F:W800Rf32Lib.RfCommandReceivedEventArgs.Command">
+            <summary>
+            The command.
+            </summary></member>
+        <member name="F:W800Rf32Lib.RfCommandReceivedEventArgs.HouseCode">
+            <summary>
+            The house code.
+            </summary></member>
+        <member name="F:W800Rf32Lib.RfCommandReceivedEventArgs.UnitCode">
+            <summary>
+            The unit code.
+            </summary></member>
+        <member name="M:W800Rf32Lib.RfCommandReceivedEventArgs.#ctor(W800Rf32Lib.X10RfFunction,W800Rf32Lib.X10HouseCode,W800Rf32Lib.X10UnitCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:W800Rf32Lib.RfCommandReceivedEventArgs" /> class.
+            </summary>
+            <param name="function">Function.</param>
+            <param name="housecode">Housecode.</param>
+            <param name="unitcode">Unitcode.</param></member>
+        <member name="T:W800Rf32Lib.RfSecurityReceivedEventArgs">
+            <summary>
+            RF security received event arguments.
+            </summary></member>
+        <member name="F:W800Rf32Lib.RfSecurityReceivedEventArgs.Event">
+            <summary>
+            The event.
+            </summary></member>
+        <member name="F:W800Rf32Lib.RfSecurityReceivedEventArgs.Address">
+            <summary>
+            The address.
+            </summary></member>
+        <member name="M:W800Rf32Lib.RfSecurityReceivedEventArgs.#ctor(W800Rf32Lib.X10RfSecurityEvent,System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:W800Rf32Lib.RfSecurityReceivedEventArgs" /> class.
+            </summary>
+            <param name="evt">Evt.</param>
+            <param name="addr">Address.</param></member>
+    </members>
+</doc>

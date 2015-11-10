@@ -185,7 +185,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "detected or cancelled, nodes added to this\r\ngroup will receive alarm frames. This group aims to provide\r\nbackward compatibility with devices not supporting the Z-Wave+\r\nprotocol. Only nodes not supporting the Z-wave+ protocol should be\r\nadded to this group."
+              "#text": "„Tamper BC” is assigned to the tamper\r\nalarm. Once tampering is detected or cancelled, nodes added to this\r\ngroup will receive alarm frames. This group aims to provide\r\nbackward compatibility with devices not supporting the Z-Wave+\r\nprotocol. Only nodes not supporting the Z-wave+ protocol should be\r\nadded to this group. The „Tamper BC” group can handle up to five\r\ndevices (one or multi-channel). If Fibaro Motion Sensor operates in\r\nprotected mode, outgoing messages are always encrypted."
             }
           }
         },
@@ -864,7 +864,6 @@
           "value": {
             "@from": "0000",
             "@to": "00ff",
-            "@unit": "°C",
             "description": {
               "lang": {
                 "@xml:lang": "en",
@@ -951,7 +950,6 @@
           "value": {
             "@from": "fc18",
             "@to": "03e8",
-            "@unit": "°C",
             "description": {
               "lang": {
                 "@xml:lang": "en",

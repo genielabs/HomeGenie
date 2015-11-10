@@ -7,6 +7,7 @@
   IconImage: 'images/scheduler.png',
   StatusText: '',
   Description: '',
+  ApiDomain: 'HomeAutomation.HomeGenie/Timetable',
   Widget: null,
   Module: null,
   ControlPopup: null,
@@ -15,13 +16,13 @@
   Initialized: false,
   
   Timebar: null,
+  TimebarElement: null,
   TimebarWidth: 530,
-  TimebarHeight: 50,
+  TimebarHeight: 40,
   TimebarResolution: 5,
   
   CalendarData: '',
-  CurrentGroup: '',
-  CurrentTableId: 0,
+  CurrentProgram: 0,
   Groups: [ 
     { 
         'Table': 'Level', 
@@ -120,17 +121,30 @@
       //
       // ui events handlers
       //
+      // table select tab buttons
+      this.Widget.find('[data-ui-field=btn-page-shutters]').click(function(el){
+        _this.Widget.find('[data-ui-field^=table-group-]').hide();
+        _this.Widget.find('[data-ui-field=table-group-0]').show();
+        _this.SetTableId(_this.CurrentProgram);
+      });
+      this.Widget.find('[data-ui-field=btn-page-thermostats]').click(function(el){
+        _this.Widget.find('[data-ui-field^=table-group-]').hide();
+        _this.Widget.find('[data-ui-field=table-group-1]').show();
+        _this.SetTableId(_this.CurrentProgram);
+      });
+      this.Widget.find('[data-ui-field=btn-page-lights]').click(function(el){
+        _this.Widget.find('[data-ui-field^=table-group-]').hide();
+        _this.Widget.find('[data-ui-field=table-group-2]').show();
+        _this.SetTableId(_this.CurrentProgram);
+      });
       // popup values on open
       this.ControlPopup.on('popupbeforeposition', function(evt, ui){
-        var description = _this.Widget.find('[data-role=navbar]').eq(0).find('[class*=ui-btn-active]').html();
-        $(this).find('[data-ui-field=timetable_edit_group]').html(description);
-        var title = HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_edit_table', 'Edit Timetable');
-        _this.ControlPopup.find('[data-ui-field=timetable_edit_slot]').html(title + ' #' + (_this.CurrentTableId + 1));
+        // TODO: resize width to best fit content
       });
       this.CalendarPopup.on('popupbeforeposition', function(evt, ui){
         $.mobile.loading('show', { text: 'Loading Calendar', textVisible: true });
         $.ajax({
-          url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.Module.Domain + '/' + _this.Module.Address + '/Calendar.Get/',
+          url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Calendar.Get/',
           type: "GET",
           dataType: "text",
           success: function (data) {
@@ -140,18 +154,12 @@
           }
         });
       });
-      this.Widget.find('[data-ui-field=btn-page-shutters]').click(function(el){
-        _this.SetTableGroup(0);
-      });
-      this.Widget.find('[data-ui-field=btn-page-thermostats]').click(function(el){
-        _this.SetTableGroup(1);
-      });
-      this.Widget.find('[data-ui-field=btn-page-lights]').click(function(el){
-        _this.SetTableGroup(2);
-      });
       this.Widget.find('[data-ui-field=btn-table-select]').click(function(el){
         var id = parseInt($(this).html() - 1);
-        _this.SetTable(id);
+        _this.CurrentProgram = id;
+        _this.Widget.find('[data-ui-field=btn-table-select]').removeClass('ui-btn-active');
+        _this.Widget.find('[data-ui-field=btn-table-select]').eq(id).addClass('ui-btn-active');
+        _this.SetTableId(id);
       });
       this.Widget.find('[data-ui-field=btn-table-help]').click(function(el){
         _this.HelpPopup.popup('open');
@@ -162,7 +170,7 @@
       this.CalendarPopup.find('[data-ui-field=btn_calendar_save]').click(function(el){
         $.mobile.loading('show', { text: 'Saving Calendar', textVisible: true });
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.Module.Domain + '/' + _this.Module.Address + '/Calendar.Set',
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Calendar.Set',
             type: 'POST',
             data: _this.CalendarData,
             dataType: 'text',
@@ -182,16 +190,16 @@
         var slotValue = _this.ControlPopup.find('[data-ui-field=select_action]').val();
         var slotRangeStart = _this.CurrentSlice.data("index");
         var slotRangeEnd = slotRangeStart + _this.CurrentSlice.data("length");
-        var request = _this.Groups[_this.CurrentGroup].Table + '.' + _this.CurrentTableId + '/' + slotFrom + '/' + slotTo + '/' + slotValue;
+        var request = _this.Groups[_this.TimebarElement.group].Table + '.' + _this.TimebarElement.table + '/' + slotFrom + '/' + slotTo + '/' + slotValue;
         request += '/' + slotRangeStart + '/' + slotRangeEnd;
         $.mobile.loading('show', { text: 'Saving table', textVisible: true });
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.Module.Domain + '/' + _this.Module.Address + '/Timetable.Set',
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Set',
             type: 'POST',
             data: request,
             dataType: 'text',
             success: function (data) {
-                _this.SetTable(_this.CurrentTableId);
+                _this.SetTable(_this.TimebarElement, _this.TimebarElement.table);
                 _this.ControlPopup.popup('close');
             }
         });
@@ -199,9 +207,25 @@
       //
       // timebar initialization
       //
-      var timebar = this.Timebar = this.Widget.find('[data-ui-field=timebar]');
-      this.TimetablePaper = Raphael(timebar.get(0), this.TimebarWidth, this.TimebarHeight);
-      this.SetTableGroup(0);     
+      this.timebar_level_s = this.Widget.find('[data-ui-field=timebar_level_s]');
+      this.timebar_level_s.paper = Raphael(this.timebar_level_s.get(0), this.TimebarWidth, this.TimebarHeight);
+      this.timebar_level_s.group = 0;
+      this.timebar_level_d = this.Widget.find('[data-ui-field=timebar_level_d]');
+      this.timebar_level_d.paper = Raphael(this.timebar_level_d.get(0), this.TimebarWidth, this.TimebarHeight);
+      this.timebar_level_d.group = 0;
+      this.timebar_therm_s = this.Widget.find('[data-ui-field=timebar_therm_s]');
+      this.timebar_therm_s.paper = Raphael(this.timebar_therm_s.get(0), this.TimebarWidth, this.TimebarHeight);
+      this.timebar_therm_s.group = 1;
+      this.timebar_therm_d = this.Widget.find('[data-ui-field=timebar_therm_d]');
+      this.timebar_therm_d.paper = Raphael(this.timebar_therm_d.get(0), this.TimebarWidth, this.TimebarHeight);
+      this.timebar_therm_d.group = 1;
+      this.timebar_onoff_s = this.Widget.find('[data-ui-field=timebar_onoff_s]');
+      this.timebar_onoff_s.paper = Raphael(this.timebar_onoff_s.get(0), this.TimebarWidth, this.TimebarHeight);
+      this.timebar_onoff_s.group = 2;
+      this.timebar_onoff_d = this.Widget.find('[data-ui-field=timebar_onoff_d]');
+      this.timebar_onoff_d.paper = Raphael(this.timebar_onoff_d.get(0), this.TimebarWidth, this.TimebarHeight);
+      this.timebar_onoff_d.group = 2;
+      this.SetTableId(this.CurrentProgram);
     }
     //
     if (lastupdatetime > 0)
@@ -226,29 +250,52 @@
     var year = (new Date).getFullYear();
     return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
   },
-  
-  SetTable: function(id) {
-    this.CurrentTableId = id;
-    this.Widget.find('[data-ui-field=description]').html('Timetable #' + (id + 1));
-    this.Widget.find('[data-ui-field=btn-table-select]').removeClass('ui-btn-active');
-    this.Widget.find('[data-ui-field=btn-table-select]').eq(id).addClass('ui-btn-active');
+
+  SetTableId: function(id) {
+      this.SetTable(this.timebar_level_s, id);
+      this.SetTable(this.timebar_level_d, id+'.DST');
+      this.SetTable(this.timebar_therm_s, id);
+      this.SetTable(this.timebar_therm_d, id+'.DST');
+      this.SetTable(this.timebar_onoff_s, id);
+      this.SetTable(this.timebar_onoff_d, id+'.DST');
+  },
+
+  SetTable: function(el, id) {
+    el.table = id;
+    el.paper.clear();
     var _this = this;
     var table = '';
     $.mobile.loading('show', { text: 'Loading table', textVisible: true });
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.Module.Domain + '/' + this.Module.Address + '/Timetable.Get/' + this.Groups[this.CurrentGroup].Table + '.' + this.CurrentTableId,
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Get/' + this.Groups[el.group].Table + '.' + el.table,
         type: 'GET',
         dataType: 'text',
         success: function (data) {
             table = eval(data)[0].ResponseValue;
-            _this.DrawTimetable(table);
+            _this.DrawTimetable(el, true, table);
             $.mobile.loading('hide');
         }
     });    
   },
   
   SetTableGroup: function(id) {
-    this.CurrentGroup = id;
+    // change popup title and description
+    var description = '';
+    switch(id) {
+    case 0:
+        description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_shutters', 'Shutters and Dimmers');
+        break;
+    case 1:
+        description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_thermostats', 'Thermostats');
+        break;
+    case 2:
+        description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_lights', 'Lights and Switches');
+        break;
+    }
+    this.ControlPopup.find('[data-ui-field=timetable_edit_group]').html(description);
+    var title = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_program', 'Program');
+    this.ControlPopup.find('[data-ui-field=timetable_edit_slot]').html(title + ' #' + (this.CurrentProgram + 1));
+    // Select menu options
     var actions = this.ControlPopup.find('[data-ui-field=select_action]');
     actions.empty();
     for (var i = 0; i < this.Groups[id].Actions.length; i++)
@@ -257,11 +304,10 @@
         actions.append('<option value="' + this.Groups[id].Actions[i].id + '" data-option-color="' + this.Groups[id].Actions[i].color + '" style="padding-left:5px;border-left:solid 30px ' + this.Groups[id].Actions[i].color + '">' + title + '</option>');
     }
     actions.selectmenu('refresh', true);
-    this.SetTable(0);
   },
   
-  GetTableAction: function(id) {
-    var actions = this.Groups[this.CurrentGroup].Actions;
+  GetTableAction: function(gid, id) {
+    var actions = this.Groups[gid].Actions;
     var foundAction = null;
     for (var a = 0; a < actions.length; a++)
     {
@@ -277,7 +323,7 @@
     var id = rect.data('action');
     var start = rect.data('index');
     var end = start + rect.data('length');
-    var action = this.GetTableAction(id);
+    var action = this.GetTableAction(rect.data('group'), id);
     var info = '';
     if (action != null)
     {
@@ -299,7 +345,9 @@
       return hour + ':' + minute;
   },
   
-  EditTimetable: function(start, length, action) {
+  EditTimetable: function(el, start, length, action) {
+    this.SetTableGroup(el.group);
+    this.TimebarElement = el;
     var selectStart = this.ControlPopup.find('[data-ui-field=select_timestart]');
     var selectEnd = this.ControlPopup.find('[data-ui-field=select_timeend]');
     selectStart.empty();
@@ -313,25 +361,27 @@
     }
     selectStart.selectmenu('refresh', true);
     selectEnd.selectmenu('refresh', true);
-    this.ControlPopup.find('[data-ui-field=select_action]').val(this.GetTableAction(action).id).selectmenu('refresh').change();
+    this.ControlPopup.find('[data-ui-field=select_action]').val(this.GetTableAction(el.group, action).id).selectmenu('refresh').change();
     this.ControlPopup.popup('open');
   },
   
-  DrawTimetable: function(timetable) {
+  DrawTimetable: function(el, drawHeader, timetable) {
     var _this = this;
-    _this.TimetablePaper.clear();
-    _this.TimetablePaper.rect(0, 0, this.TimebarWidth, this.TimebarHeight, 0).attr({fill: "#000", stroke: "none"});
+    var paper = el.paper;
+    paper.clear();
+    paper.rect(0, 0, this.TimebarWidth, this.TimebarHeight, 0).attr({fill: "#000", stroke: "none"});
     var tableLength = 24 * 60 / this.TimebarResolution;
     var sliceFactor = (60 / this.TimebarResolution);
     while (timetable.length < tableLength) timetable += ' ';
     var nb = 0, x = 0, y = 0, startIndex = 0;
     var stepSize = (_this.TimebarWidth / timetable.length);
+    var startY = drawHeader ? 14 : 0;
     for (var i = 0, c = timetable.length; i < tableLength; i++)
     {
       nb++;
       if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i])) 
       {
-        var rect = _this.TimetablePaper.rect(x, y + 14, (nb * stepSize) - 1, _this.TimebarHeight - 15).attr({ 'fill': '90-#455-' + _this.GetTableAction(timetable[i]).color, 'stroke': '#fff', 'stroke-width': '0.0' })
+        var rect = paper.rect(x, y + startY, (nb * stepSize) - 1, _this.TimebarHeight - (startY+1)).attr({ 'fill': '90-#455-' + _this.GetTableAction(el.group, timetable[i]).color, 'stroke': '#fff', 'stroke-width': '0.0' })
         .mouseover(function(e){
           this.attr({ 'stroke': '#5f5', 'stroke-width': '2', 'stroke-opacity' : 0.7 });
           _this.CurrentSlice = this;
@@ -340,8 +390,9 @@
           this.attr({ 'stroke': '#fff', 'stroke-width': '0.0' });
         })
         .click(function(e){
-          _this.EditTimetable(this.data('index'), this.data('length'), this.data('action'));
+          _this.EditTimetable(el, this.data('index'), this.data('length'), this.data('action'));
         });
+        rect.data('group', el.group);
         rect.data('index', startIndex);
         rect.data('length', nb);
         rect.data('action', timetable[i]);
@@ -358,10 +409,10 @@
         nb = 0;
         startIndex = i + 1;
       }
-      if (i % sliceFactor == 0)
+      if (drawHeader && i % sliceFactor == 0)
       {
-        this.TimetablePaper.text(((i / sliceFactor) * (sliceFactor * stepSize)) + 10, 7, (i / sliceFactor).toString()).attr({ fill: '#fff' });
-        this.TimetablePaper.rect(((i / sliceFactor) * (sliceFactor * stepSize)) + (stepSize * sliceFactor), 0, 2, 16, 0).attr({ fill: '#99f' });
+        paper.text(((i / sliceFactor) * (sliceFactor * stepSize)) + 10, 8, (i / sliceFactor).toString()).attr({ fill: '#fff' });
+        paper.rect(((i / sliceFactor) * (sliceFactor * stepSize)) + (stepSize * sliceFactor), 0, 2, 16, 0).attr({ fill: '#99f' });
       }
     }    
     

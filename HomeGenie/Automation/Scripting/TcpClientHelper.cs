@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// TCP client helper.
     /// Class instance accessor: **TcpClient**
     /// </summary>
+    [Serializable]
     public class TcpClientHelper
     {
         private TcpClient tcpClient;
@@ -47,6 +48,8 @@ namespace HomeGenie.Automation.Scripting
         public TcpClientHelper()
         {
             tcpClient = new TcpClient();
+            tcpClient.MessageReceived += tcpClient_MessageReceived;
+            tcpClient.ConnectedStateChanged += tcpClient_ConnectedStateChanged;
         }
 
         /// <summary>
@@ -66,8 +69,6 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="port">Port number.</param>
         public bool Connect(int port)
         {
-            tcpClient.MessageReceived += tcpClient_MessageReceived;
-            tcpClient.ConnectedStateChanged += tcpClient_ConnectedStateChanged;
             return tcpClient.Connect(this.serverAddress, port);
         }
 
@@ -77,8 +78,6 @@ namespace HomeGenie.Automation.Scripting
         public TcpClientHelper Disconnect()
         {
             tcpClient.Disconnect();
-            tcpClient.MessageReceived -= tcpClient_MessageReceived;
-            tcpClient.ConnectedStateChanged -= tcpClient_ConnectedStateChanged;
             return this;
         }
 
@@ -159,6 +158,8 @@ namespace HomeGenie.Automation.Scripting
         public void Reset()
         {
             Disconnect();
+            tcpClient.MessageReceived -= tcpClient_MessageReceived;
+            tcpClient.ConnectedStateChanged -= tcpClient_ConnectedStateChanged;
         }
 
         private void tcpClient_MessageReceived(byte[] message)

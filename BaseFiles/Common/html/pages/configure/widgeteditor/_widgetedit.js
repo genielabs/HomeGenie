@@ -27,12 +27,22 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     var saveConfirmButton = page.find('[data-ui-field=saveconfirm-btn]');
     var saveCancelButton = page.find('[data-ui-field=savecancel-btn]');
   
+    page.on('pagehide', function (e) {
+        $('[data-ui-field=homegenie_panel_button]').removeClass('ui-disabled');
+    });
+    page.on('pageshow', function (e) {
+        $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
+    });
     page.on('pageinit', function (e) {
         HG.WebApp.WidgetEditor._editorHtml = CodeMirror.fromTextArea(document.getElementById('widgeteditor_code_html'), {
             lineNumbers: true,
             matchBrackets: true,
             autoCloseBrackets: true,
             extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidget(function(){
+                    HG.WebApp.WidgetEditor._editorHtml.markClean();
+                    HG.WebApp.WidgetEditor._editorJscript.markClean();
+                }); },
                 "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
                 "Ctrl-Space": "autocomplete"
             },
@@ -48,6 +58,11 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             matchBrackets: true,
             autoCloseBrackets: true,
             extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidget(function(){
+                        HG.WebApp.WidgetEditor._editorHtml.markClean();
+                        HG.WebApp.WidgetEditor._editorJscript.markClean();
+                    }); 
+                },
                 "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
                 "Ctrl-Space": "autocomplete"
             },
@@ -62,7 +77,6 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     });
     page.on('pagebeforeshow', function (e) {
         page.find('[data-ui-field=title-heading]').html('<span style="font-size:10pt;font-weight:bold">' + HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_title', false, this.Locale) + '</span><br/>' + HG.WebApp.WidgetsList._currentWidget);
-
         // standard editor/preview size
         page.find('.CodeMirror').css('bottom', (HG.WebApp.WidgetEditor._previewHeight + 5)+'px');
         previewPanel.height(HG.WebApp.WidgetEditor._previewHeight);
@@ -168,7 +182,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         $('#editwidget_actionmenu').popup('close');
         // export current widget
         //HG.Configure.Widgets.Export(HG.WebApp.WidgetsList._currentWidget)
-        window.open(location.protocol + '../HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
+        window.open(location.protocol + '../../api/HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
     });
     
     deleteButton.bind('click', function(){
@@ -185,13 +199,13 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     
     backButton.bind('click', function(){
         HG.WebApp.WidgetEditor.CheckIsClean(function () {
-            $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetsList.PageId, { transition: 'slide', reverse: true });
+            $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetsList.PageId);
         });
         return false;
     });
     homeButton.bind('click', function(){
         HG.WebApp.WidgetEditor.CheckIsClean(function () {
-            $.mobile.pageContainer.pagecontainer('change', '#page_home', { transition: 'slide', reverse: true });
+            $.mobile.pageContainer.pagecontainer('change', '#page_control');
         });
         return false;
     });
@@ -279,13 +293,25 @@ HG.WebApp.WidgetEditor.CheckIsClean = function(callback) {
 };
 
 HG.WebApp.WidgetEditor.SaveWidget = function(callback) {
-    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savinghtml', false, this.Locale), textVisible: true, theme: 'a', html: '' });
-    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) {
-        $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savingjavascript', false, this.Locale), textVisible: true, theme: 'a', html: '' });
-        HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) {
-            $.mobile.loading('hide');
+    HG.WebApp.WidgetEditor.SaveWidgetHtml(function() {
+        HG.WebApp.WidgetEditor.SaveWidgetJavascript(function() {
+            HG.WebApp.WidgetEditor.Run();
             if (callback) callback();
         });
+    });
+};
+HG.WebApp.WidgetEditor.SaveWidgetHtml = function(callback) {
+    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savinghtml', false, this.Locale), textVisible: true, theme: 'a', html: '' });
+    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) {
+        $.mobile.loading('hide');
+        if (callback) callback();
+    });
+};
+HG.WebApp.WidgetEditor.SaveWidgetJavascript = function(callback) {
+    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savingjavascript', false, this.Locale), textVisible: true, theme: 'a', html: '' });
+    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) {
+        $.mobile.loading('hide');
+        if (callback) callback();
     });
 };
 

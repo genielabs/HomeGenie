@@ -34,13 +34,15 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 .animate({ borderColor: "#FFFFFF" }, 250);
         } else {
             importPopup.popup('close');
-            $.mobile.loading('show', { text: 'Downloading, please wait...', textVisible: true, html: '' });
-            $.get('../HomeAutomation.HomeGenie/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
-                $.mobile.loading('hide');
-                downloadUrl.val('');
-                var response = eval(arguments[2].responseText)[0];
-                HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
-            });
+            setTimeout(function() {
+                $.mobile.loading('show', { text: 'Downloading, please wait...', textVisible: true, html: '' });
+                $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
+                    $.mobile.loading('hide');
+                    downloadUrl.val('');
+                    var response = $.parseJSON(arguments[2].responseText);
+                    HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+                });
+            }, 1000);
         }
     });
     uploadButton.on('click', function () {
@@ -62,8 +64,10 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         uploadFile.val('');
         var response = uploadFrame[0].contentWindow.document.body;
         if (typeof response != 'undefined' && response != '' && (response.textContent || response.innerText)) {
-            response = eval(response.textContent || response.innerText)[0];
-            HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            try {
+                response = $.parseJSON(response.textContent || response.innerText);
+                HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            } catch (e) { }
         }
     });
 };
@@ -71,10 +75,10 @@ HG.WebApp.SystemSettings.InitializePage = function () {
 HG.WebApp.SystemSettings.AddonInstall = function(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
     text = text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
-    HG.WebApp.Utility.ConfirmPopup('Install add-on?', '<pre>'+text+'</pre>', function(confirm){
+    HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_addonsinstall_title', 'Install add-on?'), '<pre>'+text+'</pre>', function(confirm){
         if (confirm) {
             $.mobile.loading('show', { text: 'Installing, please wait...', textVisible: true, html: '' });
-            $.get('../HomeAutomation.HomeGenie/Config/Interface.Install', function(data){
+            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interface.Install', function(data){
                 HG.WebApp.SystemSettings.ListInterfaces();        
                 $.mobile.loading('hide');
             });
@@ -90,8 +94,8 @@ HG.WebApp.SystemSettings.ListInterfaces = function() {
         $.each(ifaceList, function(k,v){
             var domain = v.Domain;
             var name = domain.substring(domain.lastIndexOf('.')+1);
-            var item = $('<div data-role="collapsible" data-inset="true" />');
-            var itemHeader = $('<h3><span data-ui-field="title">'+name+'</span><img src="images/interfaces/'+name.toLowerCase()+'.png" style="position:absolute;right:8px;top:12px"></h3>');
+            var item = $('<div data-role="collapsible" data-inset="true" class="ui-mini" />');
+            var itemHeader = $('<h3><span data-ui-field="title">'+name+'</span><img src="images/interfaces/'+name.toLowerCase()+'.png" style="position:absolute;right:8px;top:6px"></h3>');
             item.append(itemHeader);
             var configlet = $('<p />');
             item.append(configlet);
@@ -102,6 +106,18 @@ HG.WebApp.SystemSettings.ListInterfaces = function() {
                     displayName = HG.WebApp.Locales.GetLocaleString('title', name, HG.WebApp.SystemSettings.Interfaces[domain].Locale);
                 }
                 itemHeader.find('[data-ui-field=title]').html(displayName);
+                itemHeader.attr('description', v.Description);
+                if (v.Description != null && v.Description.trim() != '') {
+                    itemHeader.qtip({
+                        content: {
+                            text: v.Description
+                        },
+                        show: { event: 'mouseover', ready: false, delay: 500 },
+                        hide: { event: 'mouseout' },
+                        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                        position: { my: 'bottom center', at: 'top center' }
+                    });
+                }
                 configlet.trigger('create');
                 HG.WebApp.SystemSettings.Interfaces[domain].Initialize();
             });

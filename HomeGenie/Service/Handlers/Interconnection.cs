@@ -29,6 +29,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Net;
+
+using HomeGenie.Automation;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -41,19 +44,23 @@ namespace HomeGenie.Service.Handlers
             homegenie = hg;
         }
 
-        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
+        public void ProcessRequest(MigClientRequest request)
         {
+            var context = request.Context.Data as HttpListenerContext;
+            var requestOrigin = context.Request.RemoteEndPoint.Address.ToString();
+
+            var migCommand = request.Command;
             switch (migCommand.Command)
             {
             case "Events.Push":
                 //TODO: implemet security and trust mechanism 
-                var stream = new StreamReader(request.InputStream).ReadToEnd();
+                var stream = request.RequestText;
                 var moduleEvent = JsonConvert.DeserializeObject<ModuleEvent>(
                     stream,
                     new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }
                 );
                 // prefix remote event domain with HGIC:<remote_node_address>.<domain>
-                moduleEvent.Module.Domain = "HGIC:" + request.RequestOrigin.Replace(".", "_") + "." + moduleEvent.Module.Domain;
+                moduleEvent.Module.Domain = "HGIC:" + requestOrigin.Replace(".", "_") + "." + moduleEvent.Module.Domain;
                 //
                 var module = homegenie.Modules.Find(delegate(Module o) {
                     return o.Domain == moduleEvent.Module.Domain && o.Address == moduleEvent.Module.Address;
@@ -65,21 +72,22 @@ namespace HomeGenie.Service.Handlers
                 }
                 Utility.ModuleParameterSet(module, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
                 // "<ip>:<port>" remote endpoint port is passed as the first argument from the remote point itself
-                module.RoutingNode = request.RequestOrigin + (migCommand.GetOption(0) != "" ? ":" + migCommand.GetOption(0) : "");
+                module.RoutingNode = requestOrigin + (migCommand.GetOption(0) != "" ? ":" + migCommand.GetOption(0) : "");
                 //
-                homegenie.LogBroadcastEvent(
+                homegenie.RaiseEvent(
+                    requestOrigin,
                     moduleEvent.Module.Domain,
                     moduleEvent.Module.Address,
-                    request.RequestOrigin,
+                    requestOrigin,
                     moduleEvent.Parameter.Name,
                     moduleEvent.Parameter.Value
                 );
-                HomeGenie.Service.HomeGenieService.RoutedEvent eventData = new HomeGenie.Service.HomeGenieService.RoutedEvent() {
-                    Sender = request.RequestOrigin,
+                var eventData = new ProgramManager.RoutedEvent() {
+                    Sender = requestOrigin,
                     Module = module,
                     Parameter = moduleEvent.Parameter
                 };
-                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.RouteParameterChangedEvent), eventData);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.ProgramManager.RoutePropertyChangedEvent), eventData);
                 break;
             }
         }

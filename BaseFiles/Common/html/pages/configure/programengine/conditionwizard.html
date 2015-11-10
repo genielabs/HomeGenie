@@ -6,7 +6,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectconditioncontext" style="margin-top:-10px;font-weight:bold">Select condition context</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul id="automation_conditiontarget" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
             <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_target_popup">HomeGenie</a></li>
@@ -30,7 +30,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectconditionsubject" style="margin-top:-10px;font-weight:bold">Select condition subject</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul id="automation_condition_target" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
     </div>
@@ -49,7 +49,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectconditionproperty" style="margin-top:-10px;font-weight:bold">Select comparison property</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul id="automation_condition_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
     </div>
@@ -68,7 +68,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectoperator" style="margin-top:-10px;font-weight:bold">Select comparison operator</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul data-role="listview" data-inset="false" style="height:180px;max-height:180px;">
             <li data-context-value="LessThan" id="configure_program_conditionlessthan"><a data-locale-id="configure_program_operatorless" data-rel="popup" href="#automation_condition_value">Less Than</a></li>
@@ -90,7 +90,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <fieldset data-role="controlgroup" data-type="vertical" style="height:134px;max-height:134px;">
             <input type="text" name="value" id="comparison_value_input" onkeyup="build_condition()" value="" placeholder="value" />
@@ -115,7 +115,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul id="automation_conditionvalue_domain" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
             <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_target_popup">HomeGenie</a></li>
@@ -136,7 +136,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul id="automation_conditionvalue_address" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
     </div>
@@ -155,7 +155,7 @@
     <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
-            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
         </div>
         <ul id="automation_conditionvalue_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
     </div>
@@ -238,7 +238,7 @@
             //
             switch (condition_targetdomain) {
                 case 'HomeAutomation.HomeGenie':
-                    $('#automation_condition_target').append('<li data-context-value="Automation"><a>Automation</a></li>');
+                    $('#automation_condition_target').append('<li data-context-value="Scheduler"><a>Scheduler</a></li>');
                     break;
                 default:
                     $('#automation_condition_target').append(automationpage_GetModulesListViewItems(condition_targetdomain, false));
@@ -259,9 +259,10 @@
             else {
                 switch (condition_targetdomain) {
                     case 'HomeAutomation.HomeGenie':
-                        $('#automation_condition_property').append('<li data-context-value="Meter.WattsCounter"><a>Meter.WattsCounter</a></li>');
-                        $('#automation_condition_property').append('<li data-context-value="Meter.WattsLoad"><a>Meter.WattsLoad</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Meter.WattsCounter"><a>Meter.WattsCounter</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Meter.WattsLoad"><a>Meter.WattsLoad</a></li>');
                         //$('#automation_condition_property').append('<li data-context-value="Scheduler.TimeEvent"><a>Scheduler.TimeEvent</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Scheduler.TriggeredEvent"><a>Scheduler.TriggeredEvent</a></li>');
                         $('#automation_condition_property').append('<li data-context-value="Scheduler.CronEvent"><a>Scheduler.CronEvent</a></li>');
 
                         $('#automation_condition_property').append('<li data-context-value="Scheduler.Date"><a>Scheduler.Date</a></li>');
@@ -484,7 +485,7 @@
             conditionstring = condition_targetdomain;
         }
         if (condition_targetsubject != '') {
-            conditionstring += '.' + condition_targetsubject;
+            conditionstring += '<strong>/</strong>' + condition_targetsubject;
         }
         if (condition_targetparameter != '') {
             conditionstring += '<br />&bull; <b>' + condition_targetparameter + '</b>';
@@ -560,7 +561,7 @@
             else
             {
                 html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
-                html += '<div class="ui-block-a">&nbsp;' + condition.Domain + ':' + condition.Target + '</div>';
+                html += '<div class="ui-block-a">&nbsp;' + condition.Domain + '/' + condition.Target + '</div>';
                 html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
                 html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
                 html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';

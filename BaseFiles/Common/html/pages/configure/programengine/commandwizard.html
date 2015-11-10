@@ -362,7 +362,7 @@
             commandstring = command_targetdomain;
         }
         if (command_targetsubject != '') {
-            commandstring += '.' + command_targetsubject;
+            commandstring += '<strong>/</strong>' + command_targetsubject;
         }
         if (command_targetparameter != '') {
             commandstring += '<br />&bull; <b>' + command_targetparameter + '</b>';
@@ -452,7 +452,7 @@
             var displayName = (module != null ? module.Name : '');
             html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_CommandChangeLine(' + i + ')">#' + lineNumber + '</div>';
             html += '<div class="ui-grid-c hg-wizard-grid" onclick="automationpage_CommandEditLine(' + i + ')">';
-            html += '<div class="ui-block-a">&nbsp;' + command.Domain + ':' + command.Target + '</div>';
+            html += '<div class="ui-block-a">&nbsp;' + command.Domain + '/' + command.Target + '</div>';
             html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
             html += '<div class="ui-block-c">&nbsp;' + command.CommandString + '</div>';
             html += '<div class="ui-block-d">&nbsp;' + args + '</div>';

@@ -59,44 +59,61 @@
     </Settings>
     <SystemName>HAL</SystemName>
     <Location />
-    <ServicePort>80</ServicePort>
-    <UserPassword />
     <GUID></GUID>
     <EnableLogFile>true</EnableLogFile>
   </HomeGenie>
-  <MIGService>
+  <MigService>
+    <Gateways>
+        <Gateway Name="WebServiceGateway" IsEnabled="true">
+            <Options>
+                <Option Name="BaseUrl" Value="/hg/html" />
+                <Option Name="HomePath" Value="html" />
+                <Option Name="Host" Value="+" />
+                <Option Name="Port" Value="80" />
+                <Option Name="Username" Value="admin" />
+                <Option Name="Password" Value="" />
+                <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
+                <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
+                <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
+                <Option Name="UrlAlias.2" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png" />
+                <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png" />
+                <Option Name="UrlAlias.4" Value="hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png" />
+                <Option Name="EnableFileCaching" Value="false" />
+            </Options>
+        </Gateway>
+    </Gateways>
     <Interfaces>
-      <Interface Domain="HomeAutomation.ZWave" IsEnabled="false">
+      <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.Insteon" IsEnabled="false">
+      <Interface Domain="HomeAutomation.Insteon" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.X10" IsEnabled="false">
+      <Interface Domain="HomeAutomation.X10" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="A" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.W800RF" IsEnabled="false">
+      <Interface Domain="HomeAutomation.W800RF" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="Controllers.LircRemote" IsEnabled="false">
+      <Interface Domain="Controllers.LircRemote" AssemblyName="MIG.Controllers.dll" IsEnabled="false">
         <Options />
       </Interface>
-      <Interface Domain="Media.CameraInput" IsEnabled="false">
+      <Interface Domain="Media.CameraInput" AssemblyName="MIG.Media.dll" IsEnabled="false">
         <Options />
       </Interface>
-      <Interface Domain="Protocols.UPnP" IsEnabled="false">
+      <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="false">
         <Options />
       </Interface>
     </Interfaces>
-  </MIGService>
+  </MigService>
 </SystemConfiguration>

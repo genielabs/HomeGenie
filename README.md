@@ -1,18 +1,15 @@
-# HomeGenie
+## Presentation Site and User's Guide
 
-**Project info and documentation**:
-http://homegenie.it
+http://www.homegenie.it
 
-![ScreenShot](https://github.com/genielabs/HomeGenie/raw/screenshots/screenshots/homegenie_eden_01.jpg "HomeGenie Dashboard 1")
+## Developer Docs
 
-
-![ScreenShot](https://github.com/genielabs/HomeGenie/raw/screenshots/screenshots/homegenie_01.jpg "HomeGenie Dashboard 2")
+https://genielabs.github.io/HomeGenie
 
 ## Supported IDEs
 
 - **MonoDevelop / Xamarin Studio**
 - **Microsoft Visual Studio**
-
 
 ## Building, debugging and packaging HomeGenie
 
@@ -33,37 +30,21 @@ http://homegenie.it
 - Build/Debug the main *HomeGenie* project
 - no setup packaging currently supported for Mac
 
-To debug mono remotely on RPi using Xamarin Studio on Mac follow these steps:
-
-1. In *startup_debug.sh* replace the IP on lines 13 and 16 from *10.0.1.10* to the actual IP address of your Raspberry Pi.
-2. Start HG from the console using *startup_debug.sh*
-
-    ```bash
-    $ cd /usr/local/bin/homegenie
-    $ ./startup_debug.sh
-    ```
-
-3. Start Xamarin Studio from Terminal with one environment variable defined:
-
-    ```bash
-    $ export MONODEVELOP_SDB_TEST=1
-    $ cd /Applications
-    $ open Xamarin\ Studio.app/
-    ```
-
-4. Open the project. To start debugging connect to mono debugger that runs on RPi using *Run* > *Run With* > *Custom Command Mono Soft Debugger* menu option. It will open a prompt window where you should enter the IP address of RPi in the *IP* field and 10000 in the *Port* field.
-5. Click *Connect* and debug will start.
-
-
 ## Precompiled packages and install instructions
 
-**Windows, Mac, Linux and Raspberry Pi**:
-http://homegenie.it/download.php
+**Windows, Mac, Linux**
+
+https://genielabs.github.io/HomeGenie/download.html
 
 ## Related projects
 
-- http://github.com/genielabs/HomeGenie-Android
-- http://github.com/genielabs/HomeGenie-WindowsPhone
+- https://github.com/genielabs/HomeGenie-Android
+- https://github.com/genielabs/HomeGenie-WindowsPhone
+- https://github.com/genielabs/mig-service-dotnet
+- https://github.com/genielabs/zwave-lib-dotnet
+- https://github.com/genielabs/x10-lib-dotnet
+- https://github.com/genielabs/w800rf32-lib-dotnet
+- https://github.com/genielabs/serialport-lib-dotnet
 
 ===============
 

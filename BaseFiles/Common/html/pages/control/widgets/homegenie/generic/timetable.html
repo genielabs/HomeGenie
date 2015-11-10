@@ -1,9 +1,34 @@
-<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="width:540px">
-
-  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
-    
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="position:relative;z-index:10;width:540px;height:290px;background:none">
+  <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.8;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
+  <div class="ui-header" style="padding-left:5px;padding-right:5px;font-weight:normal;border-top:0">
     <img src="images/scheduler.png" align="left" height="38" vspace="2">
-    <div data-role="navbar" style="position:absolute;width:480px;top:6px;margin-left:45px">
+    <div data-locale-id="timetable_title" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width:370px;font-size:16pt;font-weight:bold;padding:6px;float:left">Timetable</div>
+    <div class="ui-btn-right">
+        <a href="#" data-locale-id="timetable_calendar" data-ui-field="btn-table-calendar" data-role="button" data-icon="calendar">Calendar</a>
+        <a href="#" data-ui-field="btn-table-help" data-role="button" data-icon="info" style="display:none">Help</a>
+    </div>
+  </div>
+
+  <div data-ui-field="content" align="center" style="margin-top:2px;padding-bottom:7px;">
+
+    <div align="center" style="margin-left:50px;margin-right:20px">
+        <div data-locale-id="timetable_program" style="margin-top:12px;font-weight:bold;float:left">Program</div>
+        <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left">
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all ui-btn-active">1</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">2</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">3</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">4</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">5</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">6</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">7</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">8</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">9</a>
+          <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">10</a>
+        </div>
+        <br clear="all" />
+    </div>
+
+    <div data-role="navbar" style="margin-top:4px">
         <ul>
             <li><a data-ui-field="btn-page-shutters" class="ui-btn-active" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" data-ajax="false" data-locale-id="timetable_group_shutters">Shutters and dimmers</a></li>
             <li><a data-ui-field="btn-page-thermostats" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" data-ajax="false" data-locale-id="timetable_group_thermostats">Thermostats</a></li>
@@ -11,33 +36,25 @@
         </ul>
     </div>
 
-  </div>
-
-  <div data-ui-field="content" align="center" style="margin-top:2px;padding-bottom:7px;">
-    <div data-ui-field="description" align="left" style="margin-left:5px;font-weight:bold">Timetable #1</div>
-    <div data-ui-field="timebar" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:50px;margin-top:4px"></div>
-    <div class="ui-grid-a">
-        <div class="ui-block-a" style="width:75%" align="left">
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all ui-btn-active">1</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">2</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">3</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">4</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">5</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">6</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">7</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">8</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">9</a>
-              <a href="#" data-ui-field="btn-table-select" class="ui-btn ui-corner-all">10</a>
-            </div>
-        </div>
-        <div class="ui-block-b" style="width:25%" align="right">
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <a href="#" data-ui-field="btn-table-calendar" data-role="button" data-icon="calendar" data-iconpos="notext">Calendar</a>
-                <a href="#" data-ui-field="btn-table-help" data-role="button" data-icon="info" data-iconpos="notext" style="display:none">Help</a>
-            </div>
-        </div>
+    <div data-ui-field="table-group-0" style="border-top:solid 4px #148585;border-left:solid 1px  #148585;border-right:solid 1px  #148585;">
+        <div data-locale-id="timetable_standard" align="center">Standard</div>
+        <div data-ui-field="timebar_level_s" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:40px;margin-top:4px"></div>
+        <div data-locale-id="timetable_daylightsaving" align="center">Day Light Saving time</div>
+        <div data-ui-field="timebar_level_d" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:40px;margin-top:4px"></div>
     </div>
+    <div data-ui-field="table-group-1" style="display:none;border-top:solid 4px #148585;border-left:solid 1px  #148585;border-right:solid 1px  #148585;">
+        <div data-locale-id="timetable_standard" align="center">Standard</div>
+        <div data-ui-field="timebar_therm_s" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:40px;margin-top:4px"></div>
+        <div data-locale-id="timetable_daylightsaving" align="center">Day Light Saving time</div>
+        <div data-ui-field="timebar_therm_d" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:40px;margin-top:4px"></div>
+    </div>
+    <div data-ui-field="table-group-2" style="display:none;border-top:solid 4px #148585;border-left:solid 1px  #148585;border-right:solid 1px  #148585;">
+        <div data-locale-id="timetable_standard" align="center">Standard</div>
+        <div data-ui-field="timebar_onoff_s" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:40px;margin-top:4px"></div>
+        <div data-locale-id="timetable_daylightsaving" align="center">Day Light Saving time</div>
+        <div data-ui-field="timebar_onoff_d" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:40px;margin-top:4px"></div>
+    </div>
+
   </div>
 
 

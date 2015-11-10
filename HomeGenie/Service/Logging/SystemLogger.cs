@@ -16,9 +16,9 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace HomeGenie.Service.Logging
     public class SystemLogger : IDisposable
     {
         private static SystemLogger instance;
-        private static Queue<LogEntry> logQueue;
+        private static Queue<String> logQueue;
         private static int maxLogAge = (60 * 60 * 24) * 1;
         // one day
         private static int queueSize = 50;
@@ -68,7 +68,7 @@ namespace HomeGenie.Service.Logging
                 if (instance == null)
                 {
                     instance = new SystemLogger();
-                    logQueue = new Queue<LogEntry>();
+                    logQueue = new Queue<String>();
                 }
                 return instance;
             }
@@ -78,7 +78,7 @@ namespace HomeGenie.Service.Logging
         /// The single instance method that writes to the log file
         /// </summary>
         /// <param name="message">The message to write to the log</param>
-        public void WriteToLog(LogEntry logEntry)
+        public void WriteToLog(String logEntry)
         {
             standardOutput.WriteLine(logEntry);
             ThreadPool.QueueUserWorkItem(new WaitCallback((state)=>{
@@ -135,7 +135,7 @@ namespace HomeGenie.Service.Logging
                 while (logQueue.Count > 0)
                 {
                     var entry = logQueue.Dequeue();
-                    logWriter.WriteLine(entry.ToString());
+                    logWriter.WriteLine(entry);
                 }
             }
             catch (Exception e)
@@ -199,7 +199,7 @@ namespace HomeGenie.Service.Logging
             instance = null;
         }
     }
-    
+
     public class ConsoleRedirect : TextWriter
     {
         private string lineBuffer = "";

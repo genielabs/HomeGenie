@@ -40,6 +40,9 @@ HG.WebApp.Control.InitializePage = function () {
             }
         });
     });
+    page.on('pagehide', function (e) {
+        $('div[data-ui-field="wallpaper"]').hide();
+    });
     page.on('pagebeforeshow', function (e) {
         $.mobile.loading('show');
         HG.Configure.Groups.List('Control', function () 
@@ -58,22 +61,39 @@ HG.WebApp.Control.InitializePage = function () {
             $('#macrorecord_delay_seconds').val(data.DelayOptions);
         });
     });
-};
-//
-HG.WebApp.Control.ToggleMenu = function () {
-    $('#control_groupsmenu').slideToggle(400);
+    $('#control_bottombar_voice_button').on('click', function() {
+        if ($('#speechinput').css('display') == 'none') {
+            $(this).removeClass('ui-icon-carat-u');
+            $(this).addClass('ui-icon-carat-d');
+            $('#speechinput').show(150);
+            $('#speechinput').find('input').focus();
+        } else {
+            $(this).removeClass('ui-icon-carat-d');
+            $(this).addClass('ui-icon-carat-u');
+            $('#speechinput').hide(150);
+            $('#speechinput').find('input').blur();
+        }
+    });
+    $('#voicerecognition_text').on('change', function() {
+        HG.VoiceControl.InterpretInput($(this).val());
+    }).on('keyup', function(event) {
+        if(event.keyCode == 13) {
+            HG.VoiceControl.InterpretInput($(this).val());
+        }
+    });
 };
 //
 HG.WebApp.Control.ShowGroup = function (gid) {
     $.mobile.loading('show');
-    HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
+    HG.WebApp.Data._CurrentGroup = HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
     HG.WebApp.Data._CurrentGroupIndex = gid;
+    // set current group wallpaper
+    $('div[data-ui-field="wallpaper"]').show();
+    $('div[data-ui-field="wallpaper"]').css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
     HG.WebApp.Control.RefreshGroupIndicators();
-    $('#control_groupsmenu').slideUp(400, function () {
-        $('#control_groupcontent').children('div').hide();
-        $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
-        HG.WebApp.Control.RenderGroupModules(gid);
-    });
+    $('#control_groupcontent').children('div').hide();
+    $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
+    HG.WebApp.Control.RenderGroupModules(gid);
 };
 //
 HG.WebApp.Control.UpdateModules = function () {
@@ -139,18 +159,31 @@ HG.WebApp.Control.RecordMacroDiscard = function () {
     $('#toolbar_macrorecord').hide('slidedown');
 }
 //
+HG.WebApp.Control.RenderMenu = function () {
+    $('#groups_panel').panel().trigger('create');
+    $('#control_groupsmenu').find("li:gt(0)").remove();
+    for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+        var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:0px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
+        var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
+        item.on('click', function(){
+            var idx = $(this).attr('data-context-idx');
+            HG.WebApp.Control.ShowGroup(idx);
+            $.mobile.pageContainer.pagecontainer('change', '#page_control', { transition: 'none' });
+        });
+        $('#control_groupsmenu').append(item);
+    }
+    $('#control_groupsmenu').listview('refresh');
+};
+//
 HG.WebApp.Control.RenderGroups = function () {
     $('#control_groupcontent').empty();
-    $('#control_groupsmenu').empty();
-    //
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         if (i == 0) {
             HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[i].Name;
         }
-        $('#control_groupsmenu').append('<li onclick="HG.WebApp.Control.ShowGroup(' + i + ')">' + HG.WebApp.Data.Groups[i].Name + '<table align="right" style="position:absolute;right:10px;top:8px;vertical-align:middle"><tr id="control_groupindicators_' + i + '"></tr></table></li>');
-        var el = $('#control_groupcontent').append('<div id="groupdiv_modules_' + i + '" />');
+        $('#control_groupcontent').append('<div id="groupdiv_modules_' + i + '" />');
     }
-    $('#control_groupsmenu').listview('refresh');
+    HG.WebApp.Control.RenderMenu();
 };
 //
 HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
@@ -187,6 +220,7 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
             },
             error: function (data) {
 
+                console.log(data);
                 if (callback != null) callback(null);
 
             }
@@ -203,15 +237,13 @@ var widgetsloadtimer = null;
 HG.WebApp.Control.RenderModule = function () {
     clearTimeout(widgetsloadtimer);
     if (widgetsloadqueue.length > 0) {
-        //
         // extract and render element 
         var rendermodule = widgetsloadqueue.splice(0, 1)[0];
         var widget = $('#' + rendermodule.ElementId).data('homegenie.widget');
         if (widget != null && widget != 'undefined') {
             widget.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
             widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
-        }
-        else {
+        } else {
             var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
             HG.WebApp.Control.GetWidget(rendermodule.Module.Widget, function (w) {
                 if (w != null) {
@@ -220,7 +252,6 @@ HG.WebApp.Control.RenderModule = function () {
                     rendermodule.GroupElement.append(html);
                     rendermodule.GroupElement.trigger('create');
                     //rendermodule.GroupElement.listview('refresh');
-                    //
                     if (w.Json != null) {
                         try {
                             var myinstance = eval(w.Json)[0];
@@ -237,32 +268,24 @@ HG.WebApp.Control.RenderModule = function () {
                             console.log('[' + rendermodule.Module.Widget + '] widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
                             //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
                         }
-                    }
-                    else {
+                    } else {
                         alert(rendermodule.Module.Widget + " Widget Instance Error:\n" + e);
                     }
-
-                }
-                else {
+                } else {
                     //alert(rendermodule.Module.Widget + " Widget Error.");
                     // setTimeout('HG.WebApp.Control.RenderModule()', 10);
                 }
-
                 widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
             });
         }
-
-    }
-    else {
+    } else {
         HG.WebApp.Control._renderModuleBusy = false;
-        $.mobile.loading('hide');
-        //
         $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
             itemSelector: '.freewall',
             layoutMode: 'fitRows'
         }).isotope();
-        //
         HG.WebApp.Control.UpdateActionsMenu();
+        $.mobile.loading('hide');
     }
 
 };
@@ -300,7 +323,7 @@ HG.WebApp.Control.UpdateActionsMenu = function () {
                 var module = groupmodules.Modules[m];
                 if (module.Widget == 'homegenie/generic/program') {
                     // add item to actions menu
-                    $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + module.Name + '</a></li>');
+                    $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
                 }
             }
         }
@@ -332,7 +355,7 @@ HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
 HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
     if (widgetsloadqueue.length > 0 || HG.WebApp.Control._renderModuleBusy) {
         if (HG.WebApp.Control._renderModuleDelay != null) clearTimeout(HG.WebApp.Control._renderModuleDelay);
-        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 100);
+        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 10);
         return;
     }
     //
@@ -351,7 +374,7 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         var widgetfound = false;
 
         // look for UI Group Label (fake module with domain HomeGenie.UI.GroupLabel
-        if (module.Domain == 'HomeGenie.UI.Separator') {
+        if (module.Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
             module.Widget = 'homegenie/generic/grouplabel';
             widgetfound = true;
         }
@@ -459,32 +482,24 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
         //		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
 
         var indicators = '';
-        if (group_temperature != null) {
-            if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
-                // display as Fahrenheit
-                group_temperature = Math.round((group_temperature * 1.8 + 32) * 10) / 10;
-                displayvalue = (group_temperature * 1).toFixed(1) + '&#8457;';
-            } else {
-                // display as Celsius
-                group_temperature = Math.round(group_temperature * 10) / 10;
-                displayvalue = (group_temperature * 1).toFixed(1) + '&#8451;';
-            }
-            indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td><td>&nbsp;</td>';
-        }
-        if (group_humidity != null) {
-            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
-        }
-        if (group_luminance != null) {
-            indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
-        }
-        if (operating_lights > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
+        if (grouploadkw > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td>';
         }
         if (operating_switches > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td>';
         }
-        if (grouploadkw > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        if (operating_lights > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td>';
+        }
+        if (group_temperature != null) {
+            displayvalue = HG.WebApp.Utility.FormatTemperature(group_temperature);
+            indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td>';
+        }
+        if (group_luminance != null) {
+            indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td>';
+        }
+        if (group_humidity != null) {
+            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td>';
         }
 
         $('#control_groupindicators_' + i).html(indicators);
