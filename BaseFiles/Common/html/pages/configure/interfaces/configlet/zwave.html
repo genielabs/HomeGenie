@@ -13,6 +13,12 @@
                 <select data-ui-field="commanddelay" data-mini="true"></select>
             </div>
         </div>
+        <div class="ui-block-a">
+            <span data-locale-id="startup_discovery">Discovery on Startup</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <select data-ui-field="startupdiscovery" data-mini="true"></select>
+            </div>
+        </div>
         <div class="ui-block-b" align="right">
             <select data-ui-field="isenabled" data-role="slider">
                 <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
@@ -78,6 +84,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         // local fields
         var portSelect = configlet.find('[data-ui-field=serialport]');
         var delaySelect = configlet.find('[data-ui-field=commanddelay]');
+        var startupDiscoverySelect = configlet.find('[data-ui-field=startupdiscovery]');
         var enabledFlip = configlet.find('[data-ui-field=isenabled]');
         var discoveryButton = configlet.find('[data-ui-field=discovery_btn]');
         var addNodeButton = configlet.find('[data-ui-field=addnode_btn]');
@@ -97,6 +104,20 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 }
             });
         });
+        // populate startup discovery list
+        startupDiscoverySelect.empty();
+        startupDiscoverySelect.append('<option value="1">Yes</option>');
+        startupDiscoverySelect.append('<option value="0">No</option>');
+        // set current configured startup discovery
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'StartupDiscovery', '', function (startupDiscovery) {
+            startupDiscoverySelect.val(startupDiscovery.ResponseValue);
+            startupDiscoverySelect.selectmenu('refresh', true);
+        });
+        // bind to startup discovery change event
+        startupDiscoverySelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'StartupDiscovery', encodeURIComponent($(this).val()));
+        });
+
         // populate command delay list
         delaySelect.empty();
         delaySelect.append('<option value="0">0</option>');
@@ -105,7 +126,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         delaySelect.append('<option value="250">250</option>');
         delaySelect.append('<option value="500">500</option>');
         delaySelect.append('<option value="1000">1000</option>');
-        // set current configured port
+        // set current configured delay
         HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Delay', '', function (delay) {
             delaySelect.val(delay.ResponseValue);
             delaySelect.selectmenu('refresh', true);
