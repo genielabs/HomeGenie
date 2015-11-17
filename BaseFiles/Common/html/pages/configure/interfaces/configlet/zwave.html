@@ -7,6 +7,18 @@
                 <select data-ui-field="serialport" data-mini="true"></select>
             </div>
         </div>
+        <div class="ui-block-a">
+            <span data-locale-id="command_delay">Command Delay</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <select data-ui-field="commanddelay" data-mini="true"></select>
+            </div>
+        </div>
+        <div class="ui-block-a">
+            <span data-locale-id="startup_discovery">Discovery on Startup</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <select data-ui-field="startupdiscovery" data-mini="true"></select>
+            </div>
+        </div>
         <div class="ui-block-b" align="right">
             <select data-ui-field="isenabled" data-role="slider">
                 <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
@@ -21,6 +33,7 @@
         <span data-locale-id="common_tasks">ZWave Common Tasks</span>
         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
             <a data-ui-field="discovery_btn" data-locale-id="discovery" class="ui-btn ui-icon-search ui-btn-icon-left">Discovery</a>
+            <a data-ui-field="healnetwork_btn" data-locale-id="healnetwork" class="ui-btn ui-icon-search ui-btn-icon-left">Heal Network</a>
             <a data-ui-field="addnode_btn" data-locale-id="add_node" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
             <a data-ui-field="removenode_btn" data-locale-id="remove_node" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
             <a data-ui-field="hardreset_btn" data-locale-id="hard_reset_heading" class="ui-btn ui-icon-alert ui-btn-icon-left">Hard Reset</a>
@@ -42,6 +55,16 @@
         </div>
     </div>
     
+    <div data-ui-field="healnetwork_popup" class="ui-corner-all" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="healnetwork_heading">ZWave Network Heal</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <p data-ui-field="healnetwork_log" data-role="listview" style="font-family:monospace; font-size:8pt;"></p>
+        </div>
+    </div>
+
     <div data-ui-field="nodeoperation_popup" class="ui-corner-all hg-popup-a" data-position-to="window" data-transition="pop" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
@@ -68,11 +91,16 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         // initialize global fields
         this.DiscoveryLog = configlet.find('[data-ui-field=discovery_log]');
         this.DiscoveryPopup = configlet.find('[data-ui-field=discovery_popup]');
+        this.HealNetworkLog = configlet.find('[data-ui-field=healnetwork_log]');
+        this.HealNetworkPopup = configlet.find('[data-ui-field=healnetwork_popup]');
         this.NodeOperationPopup = configlet.find('[data-ui-field=nodeoperation_popup]');
         // local fields
         var portSelect = configlet.find('[data-ui-field=serialport]');
+        var delaySelect = configlet.find('[data-ui-field=commanddelay]');
+        var startupDiscoverySelect = configlet.find('[data-ui-field=startupdiscovery]');
         var enabledFlip = configlet.find('[data-ui-field=isenabled]');
         var discoveryButton = configlet.find('[data-ui-field=discovery_btn]');
+        var healNetworkButton = configlet.find('[data-ui-field=healnetwork_btn]');
         var addNodeButton = configlet.find('[data-ui-field=addnode_btn]');
         var removeNodeButton = configlet.find('[data-ui-field=removenode_btn]');
         var hardResetButton = configlet.find('[data-ui-field=hardreset_btn]');
@@ -89,6 +117,37 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                     }
                 }
             });
+        });
+        // populate startup discovery list
+        startupDiscoverySelect.empty();
+        startupDiscoverySelect.append('<option value="1">Yes</option>');
+        startupDiscoverySelect.append('<option value="0">No</option>');
+        // set current configured startup discovery
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'StartupDiscovery', '', function (startupDiscovery) {
+            startupDiscoverySelect.val(startupDiscovery.ResponseValue);
+            startupDiscoverySelect.selectmenu('refresh', true);
+        });
+        // bind to startup discovery change event
+        startupDiscoverySelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'StartupDiscovery', encodeURIComponent($(this).val()));
+        });
+
+        // populate command delay list
+        delaySelect.empty();
+        delaySelect.append('<option value="0">0</option>');
+        delaySelect.append('<option value="50">50</option>');
+        delaySelect.append('<option value="100">100</option>');
+        delaySelect.append('<option value="250">250</option>');
+        delaySelect.append('<option value="500">500</option>');
+        delaySelect.append('<option value="1000">1000</option>');
+        // set current configured delay
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Delay', '', function (delay) {
+            delaySelect.val(delay.ResponseValue);
+            delaySelect.selectmenu('refresh', true);
+        });
+        // bind to port select change event
+        delaySelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Delay', encodeURIComponent($(this).val()));
         });
         // populate serial port list
         HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (ports) {
@@ -116,7 +175,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         discoveryButton.on('click', function() {
             _this.ZWaveDiscovery();
         });
-        addNodeButton.on('click', function() {
+        healNetworkButton.on('click', function () {
+            _this.ZWaveHealNetwork();
+        });
+        addNodeButton.on('click', function () {
             _this.ZWaveNodeAdd();
         });
         removeNodeButton.on('click', function() {
@@ -127,6 +189,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         });
         // initialize popups
         this.DiscoveryPopup.popup();
+        this.HealNetworkPopup.popup();
         this.NodeOperationPopup.popup();
         this.NodeOperationPopup.on('popupbeforeposition', function (event) {
             var messageString = HG.WebApp.Locales.GetLocaleString('operation_timeout', false, _this.Locale);
@@ -146,11 +209,19 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                     this.DiscoveryLog.empty();
                     this.DiscoveryPopup.popup('open');
                 }
+                if (event.Value == 'Network Heal Started' && $.mobile.activePage.attr("id") == HG.WebApp.SystemSettings.PageId) {
+                    this.HealNetworkLog.empty();
+                    this.HealNetworkPopup.popup('open');
+                }
+                this.HealNetworkLog.prepend('<strong>' + event.Value + '</strong><br/>');
                 this.DiscoveryLog.prepend('<strong>' + event.Value + '</strong><br/>');
             } else if (event.Property.indexOf('ZWaveNode.') == 0) {
                 this.DiscoveryLog.prepend('Node ' + event.Source + ' <strong>' + event.Property.substring(10) + '</strong> ' + event.Value + '<br/>');
             }
-        }
+            if (event.Property.indexOf('RoutingInfo') > -1) {
+                this.HealNetworkLog.prepend('Node ' + event.Source + ' <strong>RoutingInfo: ' + event.Value + '</strong><br/>');
+            }
+    }
     },
     
     ZWaveDiscovery: function() {
@@ -158,7 +229,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/', function (data) { });
     },
     
-    ZWaveNodeAdd: function() {
+    ZWaveHealNetwork: function () {
+        this.HealNetworkPopup.popup('open');
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Controller.HealNetwork/', function (data) { });
+    },
+
+    ZWaveNodeAdd: function () {
         var _this = this;
         var titleString = HG.WebApp.Locales.GetLocaleString('add_node', false, this.Locale);
         _this.NodeOperationPopup.find('[data-ui-field=title]').html(titleString);
@@ -238,6 +314,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Discovery",
             "discovery_heading": 
                 "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -279,6 +359,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Discovery",
             "discovery_heading": 
                 "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -317,6 +401,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Discovery",
             "discovery_heading": 
                 "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -355,6 +443,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Découvrir",
             "discovery_heading": 
                 "Découverte ZWave",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Réinitialisation",
             "hard_reset":
@@ -393,6 +485,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Ricerca",
             "discovery_heading": 
                 "Ricerca ZWave",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -431,6 +527,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Discovery",
             "discovery_heading": 
                 "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -469,6 +569,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Обнаружение",
             "discovery_heading": 
                 "Обнаружение устройств ZWave",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Аппаратный сброс",
             "hard_reset":
@@ -507,6 +611,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Discovery",
             "discovery_heading": 
                 "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
