@@ -52,6 +52,7 @@
             <a data-ui-field="addnode_btn" data-locale-id="add_node" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
             <a data-ui-field="removenode_btn" data-locale-id="remove_node" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
             <a data-ui-field="healnetwork_btn" data-locale-id="healnetwork" class="ui-btn ui-icon-heart ui-btn-icon-left">Heal Network</a>
+            <a data-ui-field="softreset_btn" data-locale-id="soft_reset_heading" class="ui-btn ui-icon-recycle ui-btn-icon-left">Soft Reset</a>
             <a data-ui-field="hardreset_btn" data-locale-id="hard_reset_heading" class="ui-btn ui-icon-alert ui-btn-icon-left">Hard Reset</a>
         </div>
     </div>
@@ -119,6 +120,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         var healNetworkButton = configlet.find('[data-ui-field=healnetwork_btn]');
         var addNodeButton = configlet.find('[data-ui-field=addnode_btn]');
         var removeNodeButton = configlet.find('[data-ui-field=removenode_btn]');
+        var softResetButton = configlet.find('[data-ui-field=softreset_btn]');
         var hardResetButton = configlet.find('[data-ui-field=hardreset_btn]');
         // get enabled status
         HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Get', '', '', function (data) {
@@ -196,7 +198,10 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         removeNodeButton.on('click', function() {
             _this.ZWaveNodeRemove();
         });
-        hardResetButton.on('click', function() {
+        softResetButton.on('click', function () {
+            _this.ZWaveSoftReset();
+        });
+        hardResetButton.on('click', function () {
             _this.ZWaveHardReset();
         });
         // initialize popups
@@ -287,7 +292,16 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             _this.NodeOperationPopup.find('[data-ui-field=close_button]').removeClass('ui-disabled');
         });
     },
-    
+
+    ZWaveSoftReset: function () {
+        var _this = this;
+        var titleString = HG.WebApp.Locales.GetLocaleString('soft_reset', false, this.Locale);
+        var messageString = HG.WebApp.Locales.GetLocaleString('soft_reset_prompt', false, this.Locale);
+        HG.WebApp.Utility.ConfirmPopup(titleString, messageString, function (proceed) {
+            if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/' + _this.Id + '/1/Controller.SoftReset/', function (data) { });
+        });
+    },
+
     ZWaveHardReset: function() {
         var _this = this;
         var titleString = HG.WebApp.Locales.GetLocaleString('hard_reset', false, this.Locale);
@@ -330,6 +344,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -375,6 +395,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -417,6 +443,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -459,6 +491,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Réinitialisation",
             "hard_reset":
@@ -501,6 +539,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -543,6 +587,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
@@ -585,6 +635,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Аппаратный сброс",
             "hard_reset":
@@ -627,6 +683,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 "Network Heal",
             "heal_heading":
                 "ZWave Network Heal",
+            "soft_reset_heading":
+                "Restart Controller",
+            "soft_reset":
+                "Restart Controller?",
+            "soft_reset_prompt":
+                "Are you sure you want to restart the Z-Wave controller?",
             "hard_reset_heading":
                 "Hard Reset",
             "hard_reset":
