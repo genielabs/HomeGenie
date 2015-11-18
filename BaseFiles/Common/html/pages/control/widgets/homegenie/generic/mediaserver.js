@@ -99,7 +99,7 @@
     });
     _this.ControlPopup.find('[data-ui-field=path]').html(path);
     $.mobile.loading('show');
-    HG.Control.Modules.ServiceCall('AvMedia.Browse', _this.Module.Domain, _this.Module.Address, folderid, function (data) {
+    HG.Control.Modules.ServiceCall('AvMedia.Browse', _this.Module.Domain, _this.Module.Address, encodeURIComponent(folderid), function (data) {
       browselist.empty();
       browsefiles.empty();
       var items = eval(data);
@@ -172,7 +172,7 @@
   LoadItemData: function(item) {
     var _this = this;
     var vid = item.attr('data-context-id');
-    HG.Control.Modules.ServiceCall('AvMedia.GetItem', _this.Module.Domain, _this.Module.Address, vid, function (data) {
+    HG.Control.Modules.ServiceCall('AvMedia.GetItem', _this.Module.Domain, _this.Module.Address, encodeURIComponent(vid), function (data) {
       var title = $(data.item).attr('dc:title');
       if (typeof title != 'undefined' && title.length > 0)
         item.find('h3').html(title);
@@ -183,6 +183,10 @@
       var sampleFrequency = '';
       var thumbnail = '';
       var links = [];
+      // if item.res is not an array, we turn it into an array of one element
+      if (typeof data.item.res != 'undefined' && data.item.res.constructor !== Array) {
+        data.item.res = [ data.item.res ];
+      }
       $.each(data.item.res, function(idx, el){
         var protocolInfo = '';
         try {
@@ -191,16 +195,8 @@
         if (typeof protocolInfo == 'undefined' || protocolInfo == '')
           return true;
         var protocolUrl = $(el).attr('#text');
-        if (protocolInfo.indexOf('/') > 0) {
-          var format = '';
-          var f = protocolInfo.substring(protocolInfo.indexOf('/')+1);
-          if (f.indexOf(':') > 0) {
-            f = f.substring(0, f.indexOf(':'));
-            if (f.indexOf('-') > 0)
-              f = f.substring(f.lastIndexOf('-')+1);
-            format = f;
-          }
-          if (protocolInfo.indexOf(':image/') > 0) {
+        if (protocolInfo.indexOf(':') > 0) {
+          if (protocolInfo.indexOf(':image/') > 0 || protocolInfo.indexOf(':fanart:') > 0 || protocolInfo.indexOf(':poster:') > 0) {
             if (thumbnail == '')
               thumbnail = protocolUrl;
             if (links.length == 0) {
@@ -212,6 +208,14 @@
               links.push(btn);
             }
           } else {
+            var format = '';
+            var f = protocolInfo.substring(protocolInfo.indexOf('/')+1);
+            if (f.indexOf(':') > 0) {
+              f = f.substring(0, f.indexOf(':'));
+              if (f.indexOf('-') > 0)
+                f = f.substring(f.lastIndexOf('-')+1);
+              format = f;
+            }
             var bitrate = $(el).attr('@bitrate');
             if (typeof bitrate == 'undefined' || bitrate == 0)
               bitrate = '';

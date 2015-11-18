@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+18/11/2015 v1.1-beta.501
+    - Added UPnP AvMedia.Seek command
+    - Added configurable command delay and heal network options to ZWave interface
+    - Fix blocking event propagation. Events are now processed asynchronously (also solves issue #237)
+    - Fix Security Alarm program events propagation issue
+    - Fixed Media Server browser widget not listing/linking files encoded in one format only; fixed also issues with XBMC and Kodi media player
+
 05/11/2015 v1.1-beta.500
     - Fixed ZWave interface sensor timeout bug and sensor Status.Level "0.01" bug
     - Disabled limit of max one opened http connection per program in NetHelper
