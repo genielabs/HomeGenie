@@ -334,9 +334,17 @@
             <summary>
             Discovery progress event handler.
             </summary></member>
+        <member name="T:ZWaveLib.ZWaveController.HealProgressEventHandler">
+            <summary>
+            Heal progress event handler.
+            </summary></member>
         <member name="E:ZWaveLib.ZWaveController.DiscoveryProgress">
             <summary>
             Occurs during discovery process.
+            </summary></member>
+        <member name="E:ZWaveLib.ZWaveController.HealProgress">
+            <summary>
+            Occurs during heal process.
             </summary></member>
         <member name="T:ZWaveLib.ZWaveController.NodeOperationProgressEventHandler">
             <summary>
@@ -376,6 +384,11 @@
             Gets or sets the name of the serial port.
             </summary>
             <value>The name of the port.</value></member>
+        <member name="P:ZWaveLib.ZWaveController.CommandDelay">
+            <summary>
+            Gets or sets the amount of command delay.
+            </summary>
+            <value>The length of the delay in ms.</value></member>
         <member name="P:ZWaveLib.ZWaveController.Status">
             <summary>
             Gets the status.
@@ -408,6 +421,10 @@
         <member name="M:ZWaveLib.ZWaveController.Discovery">
             <summary>
             Query capabilities, Supported Classes and Manufacturer Specific of each node.
+            </summary></member>
+        <member name="M:ZWaveLib.ZWaveController.HealNetwork">
+            <summary>
+            Iterate through the nodes and performa a heal on each one
             </summary></member>
         <member name="M:ZWaveLib.ZWaveController.GetNodeInformationFrame(System.Byte)">
             <summary>
@@ -502,6 +519,11 @@
         <member name="M:ZWaveLib.ZWaveController.OnDiscoveryProgress(ZWaveLib.DiscoveryProgressEventArgs)">
             <summary>
             Raises the discovery progress event.
+            </summary>
+            <param name="args">Arguments.</param></member>
+        <member name="M:ZWaveLib.ZWaveController.OnHealProgress(ZWaveLib.HealProgressEventArgs)">
+            <summary>
+            Raises the heal progress event.
             </summary>
             <param name="args">Arguments.</param></member>
         <member name="M:ZWaveLib.ZWaveController.OnNodeOperationProgress(ZWaveLib.NodeOperationProgressEventArgs)">

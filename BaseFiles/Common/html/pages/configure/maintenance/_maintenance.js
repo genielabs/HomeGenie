@@ -90,22 +90,19 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 html: ""
             });
             HG.System.UpdateManager.InstallUpdate(function (res) {
-                var r = eval(res);
-                if (typeof r != 'undefined') {
-                    // TODO: ....
-                    if (r[0].ResponseValue == 'OK') {
-                        $('#configure_system_updateinstall_status').html('Update install complete.');
-                        setTimeout(function() { window.location.replace("/"); }, 3000);
-                    }
-                    else if (r[0].ResponseValue == 'RESTART') {
-                        $('#configure_system_updateinstall_status').html('Installing files... (HomeGenie service stopped)');
-                    }
-                    else if (r[0].ResponseValue == 'ERROR') {
-                        $('#configure_system_updateinstall_status').html('Error during installation progress.');
-                        //
-                        $.mobile.loading('hide');
-                        HG.WebApp.Maintenance.LoadUpdateCheckSettings();
-                    }
+                // TODO: ....
+                if (res.ResponseValue == 'OK') {
+                    $('#configure_system_updateinstall_status').html('Update install complete.');
+                    setTimeout(function() { window.location.replace("/"); }, 3000);
+                }
+                else if (res.ResponseValue == 'RESTART') {
+                    $('#configure_system_updateinstall_status').html('Installing files... (HomeGenie service stopped)');
+                }
+                else if (res.ResponseValue == 'ERROR') {
+                    $('#configure_system_updateinstall_status').html('Error during installation progress.');
+                    //
+                    $.mobile.loading('hide');
+                    HG.WebApp.Maintenance.LoadUpdateCheckSettings();
                 }
             });
         });
@@ -127,22 +124,18 @@ HG.WebApp.Maintenance.InitializePage = function () {
             HG.System.UpdateManager.DownloadUpdate(function (res) {
                 $.mobile.loading('hide');
                 HG.WebApp.Maintenance.LoadUpdateCheckSettings();
-                //
-                var r = eval(res);
-                if (typeof r != 'undefined') {
-                    // TODO: ....
-                    if (r[0].ResponseValue == 'OK') {
-                        $('#configure_system_updateinstall_status').html('Update files ready.');
-                        $('#configure_system_updateinstall_button').removeClass('ui-disabled');
-                    }
-                    else if (r[0].ResponseValue == 'RESTART') {
-                        $('#configure_system_updateinstall_status').html('Update files ready. HomeGenie will be restarted after updating.');
-                        $('#configure_system_updateinstall_button').removeClass('ui-disabled');
-                    }
-                    else if (r[0].ResponseValue == 'ERROR') {
-                        $('#configure_system_updateinstall_status').html('Error while downloading update files.');
-                        $('#configure_system_updateinstall_button').addClass('ui-disabled');
-                    }
+                // TODO: ....
+                if (res.ResponseValue == 'OK') {
+                    $('#configure_system_updateinstall_status').html('Update files ready.');
+                    $('#configure_system_updateinstall_button').removeClass('ui-disabled');
+                }
+                else if (res.ResponseValue == 'RESTART') {
+                    $('#configure_system_updateinstall_status').html('Update files ready. HomeGenie will be restarted after updating.');
+                    $('#configure_system_updateinstall_button').removeClass('ui-disabled');
+                }
+                else if (res.ResponseValue == 'ERROR') {
+                    $('#configure_system_updateinstall_status').html('Error while downloading update files.');
+                    $('#configure_system_updateinstall_button').addClass('ui-disabled');
                 }
             });
         });
@@ -361,8 +354,7 @@ HG.WebApp.Maintenance.LoadSettings = function () {
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
     $.mobile.loading('show');
     $('#configure_system_updateinstall_button').addClass('ui-disabled');
-    HG.System.UpdateManager.GetUpdateList(function (data) {
-        var releasedata = eval(data);
+    HG.System.UpdateManager.GetUpdateList(function (releasedata) {
         if (releasedata.length == 0) {
             $('#configure_system_updatemanager_info').html('No updates available.');
             $('#configure_system_updatemanager_detailsscroll').hide();

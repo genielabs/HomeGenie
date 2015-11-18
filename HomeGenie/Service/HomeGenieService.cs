@@ -546,8 +546,11 @@ namespace HomeGenie.Service
                 {
                     LogError(ex);
                 }
-
-                masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
+                // Prevent event pump from blocking on other worker tasks
+                Utility.RunAsyncTask(() =>
+                {
+                    masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
+                });
             }
             else
             {
