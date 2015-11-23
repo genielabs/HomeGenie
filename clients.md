@@ -78,7 +78,7 @@ the administrator can setup the configuration on the client in order to limit th
 
 Specifically designed to be a Control Panel for the end-user, HomeGenie Plus is a feature rich mobile client for HomeGenie server.
 
-<a href="https://play.google.com/store/apps/details?id=com.glabs.homegenieplus&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" /></a>
+<a href="https://play.google.com/store/apps/details?id=com.glabs.homegenieplus&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge-border.png" /></a>
 
 For best experience is highly recommended to use [HomeGenie Server 1.1 r501](download.html) (and up).
 
