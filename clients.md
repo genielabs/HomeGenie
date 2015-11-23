@@ -74,12 +74,20 @@ the administrator can setup the configuration on the client in order to limit th
     <br/><br/>
 </div>
 
-### HomeGenie Plus availability - Beta Testers
+### HomeGenie Plus
 
-HomeGenie Plus is currently available to beta testers and can be installed directly from the Google Play Store.
-For best experience is highly recommended to use [HomeGenie Server 1.1 r499](download.html) (and up).
+Specifically designed to be a Control Panel for the end-user, HomeGenie Plus is a feature rich mobile client for HomeGenie server.
 
-Click the link below to install **HomeGenie Plus for Android**:
+<a href="https://play.google.com/store/apps/details?id=com.glabs.homegenieplus&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" /></a>
+
+For best experience is highly recommended to use [HomeGenie Server 1.1 r501](download.html) (and up).
+
+### HomeGenie Plus - Beta Testers program
+
+HomeGenie Plus is also available to beta testers that can get latest development release and contribute to improve the app by submitting issues and
+requesting new features. The beta app be installed directly from the Google Play Store.
+
+Click the link below to install **HomeGenie Plus beta for Android**:
 
 [HomeGenie Plus for Android](https://play.google.com/apps/testing/com.glabs.homegenieplus)
 
@@ -87,7 +95,6 @@ Feel free to submit any issue or feature request using the following link:
 
 - [HomeGenie Plus issue reporting and features request](https://github.com/genielabs/homegenie-plus-android/issues)
 - [HomeGenie Plus discussion thread on HG forum](http://www.homegenie.it/forum/index.php?topic=1142)
-
 
 <br /><br /><br /><br />
 
