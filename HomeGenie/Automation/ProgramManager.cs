@@ -412,7 +412,7 @@ namespace HomeGenie.Automation
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
-                if (!program.IsEnabled) continue;
+                if (program == null || !program.IsEnabled) continue;
                 if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                 {
                     try

@@ -7,7 +7,7 @@
         <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_maintenance_heading">Maintenance</h3></div>
 
         <!-- SYSTEM OPTIONS -->
-        <div data-role="collapsible" data-inset="true" class="ui-mini">
+        <div data-role="collapsible" data-inset="true" class="ui-mini" data-collapsed="false">
 
             <h3><span data-locale-id="configure_system_options">System Options</span></h3>
             <div class="ui-grid-a">
@@ -264,7 +264,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_updateinstall">Update Install</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <div class="ui-content ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
                 <p id="configure_system_updateinstall_log" data-role="listview" style="font-family:monospace; font-size:8pt;"></p>
             </div>
             <div id="configure_system_updateinstall_status" style="border:1px dashed gray;margin:5px; padding:5px; height:50px; overflow:hidden"></div>
@@ -279,7 +279,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_deletemodule">Delete Module</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <div class="ui-content ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
                 <ul id="configure_interfaces_modules_list" data-role="listview"></ul>
             </div>
             <div data-role="footer" data-tap-toggle="false" style="height:54px">
@@ -292,10 +292,10 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="systemsettings_backuprestores1heading">Restore Configuration</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom ui-content">
                 <h3 data-locale-id="configure_system_backuprestores1note" class="ui-title">Select Automation Programs to restore:</h3>
                 <a data-locale-id="systemsettings_backuprestores1selectallnone" id="systemsettings_backuprestores1selectallbtn" class="ui-btn">Select all / none</a>
-                <fieldset id="systemsettings_backuprestores1plist" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;"></fieldset>
+                <div id="systemsettings_backuprestores1plist" style="border:solid 1px gray;padding:10px;height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;"></div>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a id="systemsettings_backuprestores1cancelbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_backuprestores1cancel" data-rel="back" data-transition="flow">Cancel</a>
@@ -311,7 +311,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_serviceportheading">HTTP Service Port</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom ui-content">
                 <h3 data-locale-id="configure_system_serviceportchangenote" class="ui-title">Note: after changing port HomeGenie must be restarted to make changes effective!</h3>
                 <p>
                     <label for="http_service_port"></label>
@@ -332,7 +332,7 @@
            <div data-role="header" class="ui-corner-top">
                <h1 data-locale-id="configure_system_hostheaderheading">HTTP Host Header</h1>
            </div>
-           <div class="ui-content" class="ui-corner-bottom ui-content">
+           <div class="ui-content ui-corner-bottom ui-content">
                <h3 data-locale-id="configure_system_hostheaderchangenote" class="ui-title">Note: after changing the host header HomeGenie must be restarted to make changes effective! Use &quot;+&quot; for default.</h3>
                <p>
                    <label for="http_host_header"></label>
@@ -353,7 +353,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="securitysettings_password_setpassword">Set password</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom ui-content">
                 <p data-locale-id="securitysettings_password_enterpassword">Enter password for 'admin' user</p>
                 <p>
                     <label for="securitysettings_user_password"></label>
@@ -376,7 +376,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="maintenance_configuration_factoryreset">Factory Reset?</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom ui-content">
                 <h3 data-locale-id="configure_maintenance_resetprompt" class="ui-title">Are you sure you want to reset system configuration to factory defaults?</h3>
                 <p data-locale-id="configure_maintenance_resetwarning"></p>
                 <div class="ui-grid-a">
@@ -395,7 +395,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="maintenance_configuration_servicerestart">Restart Service?</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom ui-content">
                 <h3 data-locale-id="configure_maintenance_restartprompt" class="ui-title">Are you sure you want to restart service?</h3>
                 <p data-locale-id="configure_maintenance_restartwarning"></p>
                 <div class="ui-grid-a">
@@ -413,7 +413,7 @@
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_updateinstall">Update Install</h1>
             </div>
-            <div class="ui-content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom ui-content">
                 <h3 data-locale-id="configure_system_updateinstall_warning" class="ui-title">It is strongly recommended to make a backup of your configuration before proceeding with any update.</h3>
                 <p></p>
                 <div class="ui-grid-a">

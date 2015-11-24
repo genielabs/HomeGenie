@@ -4,7 +4,7 @@
 a2cfe6b2fa0fe02e41ed5aa6a592376e  usr/local/bin/homegenie/UnitsNet.dll
 cc27215f3e44078c573b0018b7f6d4c5  usr/local/bin/homegenie/homegenie_stats.db
 2d16ca040e4fb13e049781295f061c13  usr/local/bin/homegenie/MIG.dll
-86342aca3b08488c2ae376b62f5af544  usr/local/bin/homegenie/startup_debug.sh
+927efc122932d193f4b3ebe76deec7f7  usr/local/bin/homegenie/startup_debug.sh
 fd387d7e07d27394fb2fa2d323ff8c5c  usr/local/bin/homegenie/CREDITS.TXT
 ed3022822cd3dc3348bb51dc054f1574  usr/local/bin/homegenie/IronPython.dll
 ad77e91f08f489a282e6deab524ce48a  usr/local/bin/homegenie/automationgroups.xml
@@ -50,7 +50,7 @@ d74542475a616d242338fa16c60e3678  usr/local/bin/homegenie/lib/mig/W800Rf32Lib.dl
 e3d04de67f8e4cf9fa4259a39130421d  usr/local/bin/homegenie/lib/mig/MIG.HomeAutomation.dll
 ca71de7a3c556db84be080f0275a4e6d  usr/local/bin/homegenie/lib/mig/MIG.Protocols.dll
 e2f6b564cb161a24fbd82e93352d1c9b  usr/local/bin/homegenie/lib/mig/LibUsbDotNet.dll
-da761d87ae5ca72947c8bb9239d2e5ff  usr/local/bin/homegenie/lib/mig/ZWaveLib.dll
+2922a5ae02ab33b84d271f5d8a5f073b  usr/local/bin/homegenie/lib/mig/ZWaveLib.dll
 13874c9fb26ea8a5ea60d59a38ba450e  usr/local/bin/homegenie/lib/mig/lircremotes.xml
 359671d90f8a459524a8c844347ac1d5  usr/local/bin/homegenie/programs/71.dll
 451906d98a1f31a32990553938684324  usr/local/bin/homegenie/programs/93.dll
@@ -109,7 +109,7 @@ f85bd266c0d92a420ea12d5835156db8  usr/local/bin/homegenie/programs/7.dll
 f44705a2e7251541db32e4761cf6bae6  usr/local/bin/homegenie/programs/41.dll
 8efb9babdfbfb500e59f0cc1c10d372c  usr/local/bin/homegenie/programs/16.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
-57a8aca478abd78e3cea01ba4bb02783  usr/local/bin/homegenie/HomeGenie.exe.mdb
+a05e8dc015e3f4fae7222b8c7814c0ed  usr/local/bin/homegenie/HomeGenie.exe.mdb
 edb4222ca9b4aa24ff7ad7dc5d63ab89  usr/local/bin/homegenie/NetClientLib.dll.mdb
 198a54b1a3bba2d5300270ea6f1b9cb5  usr/local/bin/homegenie/Common.Logging.dll
 037a39c0e60471e2ad6a155519aabaf8  usr/local/bin/homegenie/Common.dll.mdb
@@ -124,9 +124,9 @@ b367f1a0f7ba435a0c92f591f4ae0070  usr/local/bin/homegenie/Raspberry.IO.Component
 027d050500b7bb55a5ff9ae25aff0168  usr/local/bin/homegenie/Linux.dll
 702ba55b7993d65eee480c723c150a1d  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 2074c256e8b7a372e28490a436a8e04d  usr/local/bin/homegenie/NLog.dll
-990e3ec9796ebbbfb52339201630e514  usr/local/bin/homegenie/HISTORY.TXT
+9e38bf796ecb749e2de4c6eb01563744  usr/local/bin/homegenie/HISTORY.TXT
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
-edfb063870ff9ba02471e0f7213317ef  usr/local/bin/homegenie/programs.xml
+c1b4d7eab6e76592253a01b7c69f841d  usr/local/bin/homegenie/programs.xml
 58d4389f29365489f41cd547eb1f10ec  usr/local/bin/homegenie/modules.xml
 a19a8070a77444aafa96d3fbe033c42e  usr/local/bin/homegenie/IronRuby.Libraries.dll
 75bc82884f5bd1ab9c0a53ca0522e255  usr/local/bin/homegenie/Raspberry.IO.Interop.dll
@@ -628,7 +628,7 @@ c48890a84a981e3e5a9c237b13fba3d6  usr/local/bin/homegenie/html/ext/zwave/pepper1
 ffadf0cbdb3ebd3352493ed2c22bd4be  usr/local/bin/homegenie/html/ext/zwave/pepper1db/0109_2001_0102.json
 0818c4d4740daa2917806d41fd706bc1  usr/local/bin/homegenie/html/ext/zwave/pepper1db/0115_0100_0001.json
 fcdbf374fc690d3b97447a62519b3742  usr/local/bin/homegenie/html/ext/zwave/pepper1db/0086_0002_0004.json
-a63b3f8c58a392941bc3902c170be230  usr/local/bin/homegenie/html/ext/zwave/_nodesetup.js
+f8cca5dccb54a0f297d9373df5091113  usr/local/bin/homegenie/html/ext/zwave/_nodesetup.js
 9cac6fd67746927988ebefc16a9c095a  usr/local/bin/homegenie/html/pages/control/main.html
 86f5577753bbf0e1af3fba97fefa6346  usr/local/bin/homegenie/html/pages/control/widgets/weather/earthtools/sundata.html
 58bb6a76d77c1e05782f9a2b05475587  usr/local/bin/homegenie/html/pages/control/widgets/weather/earthtools/sundata.js
@@ -1033,12 +1033,12 @@ be3642f282ec1acabb42533d14602e88  usr/local/bin/homegenie/html/pages/configure/i
 30d5ddfe1f3fdc6ee3dd8b82fed80c55  usr/local/bin/homegenie/html/pages/configure/interfaces/_systemsettings.js
 36854f9a3b53d63d425281b0b8ea228e  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/camerainput.html
 0f669068e6597cf21ec9aa061804ba26  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/w800rf.html
-01d9efbcd1279f92257fe4f675c01af2  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/zwave.html
+3506a4a6b2e9a09f90225a5791ce9248  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/zwave.html
 27ebe3de1f7ee93628fd96895e0466ae  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/insteon.html
 2fee98ad08aa23c08a9db168e94f1ba6  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/lircremote.html
 8836c97cad677590515a63ffa9b63f68  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/x10.html
-7e86b4d6367578767de5f3bc6ce33eec  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/upnp.html
-7b52e2da234e79f5c300127150e46342  usr/local/bin/homegenie/html/pages/configure/maintenance/main.html
+d2ec0dc9bfb03fb7b9fe74ffa6045474  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/upnp.html
+23c2f9db55334ddb1a3297a0f49e6bdc  usr/local/bin/homegenie/html/pages/configure/maintenance/main.html
 3d782a1f9687e25dc96bfea47b6e960f  usr/local/bin/homegenie/html/pages/configure/maintenance/_maintenance.js
 17dbc2f4236458b774197c65f8da7f8e  usr/local/bin/homegenie/html/pages/configure/groups/_groupslist.js
 cd9a21cbada7574eae09abe47c01249f  usr/local/bin/homegenie/html/pages/configure/groups/_groupmodules.js
@@ -1678,7 +1678,7 @@ e68b5ba5011a20f19c2cf0910bb092fb  usr/local/bin/homegenie/html/js/jquery.mobile-
 1544ca9f803edff31be0577b9f985853  usr/local/bin/homegenie/html/js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css
 23968af605a5881dbb08d87ae1276b52  usr/local/bin/homegenie/html/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.map
 0d6a0a1de599d6ae30eaa18451353542  usr/local/bin/homegenie/html/js/jquery.mobile-1.4.5/jquery.mobile.external-png-1.4.5.min.css
-ae7c7f3e3adc27f11ac1ba9a6059a9e9  usr/local/bin/homegenie/html/index.html
+5efca6721243359456c43f357d24082b  usr/local/bin/homegenie/html/index.html
 50d2d2eb4d8bca9b1fe4aad698474ebf  usr/local/bin/homegenie/html/images/halt.png
 11e6aed03a9856f09de50c12d6f5379c  usr/local/bin/homegenie/html/images/configure.png
 55722106e7bdfae3f42816cbc751a6cd  usr/local/bin/homegenie/html/images/interfaces/airplay.png
@@ -1783,9 +1783,9 @@ b8459e32556b6e692fae8f9ff81817c9  usr/local/bin/homegenie/html/ui/core/popup.cro
 40acf64097f759ba725a1afb6f7075b8  usr/local/bin/homegenie/html/ui/core/popup.cronwizard.js
 8c62c286d03fd664a54dafcffaeb5fe3  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
 c01449322109e7477c208be018fd45fb  usr/local/bin/homegenie/ADDONS.md
-f616ece797146a9d6395f51d2e24e2f7  usr/local/bin/homegenie/startup.sh
-acadba8549470c5caef27c9038f987be  usr/local/bin/homegenie/HomeGenie.exe
-7735cf539475cd877c92df4d83d7bb18  usr/local/bin/homegenie/release_info.xml
+f382a968d978f314e126e0526f569460  usr/local/bin/homegenie/startup.sh
+41c31f7c5e3ae1329a329fab81f708de  usr/local/bin/homegenie/HomeGenie.exe
+767b48174fd0738d2ab239478baf49d6  usr/local/bin/homegenie/release_info.xml
 536920e88b28850b8df27484746134f4  usr/local/bin/homegenie/NetClientLib.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 272aa48b0bfd90305c6c27b4f4538566  usr/local/bin/homegenie/scheduler.xml
@@ -1796,7 +1796,7 @@ acbb8de3a6a8f53d69957e2607097992  usr/local/bin/homegenie/DEVELOPERS.TXT
 ae7bbf0f4b96d2a0effd97d69befb47e  usr/local/bin/homegenie/CommonMark.dll
 93675a8ef36065d0c64fe1bf4fb79902  usr/local/bin/homegenie/IronRuby.Libraries.Yaml.dll
 a29741b144c7af3349dd7ef1897d6073  usr/local/bin/homegenie/SerialPortLib.dll
-b93320782e2f1680b5f6819935102b3d  usr/local/bin/homegenie/systemconfig.xml
+4784edff86545381b39100e42841366c  usr/local/bin/homegenie/systemconfig.xml
 9f96aee193d53a925d18b2769e7958e0  usr/local/bin/homegenie/Ude.dll
 a8992f211bf62bcd6cb8b66c0df133a1  usr/local/bin/homegenie/HomeGenie.exe.config
 0728e681132f8722dd21b90d88970bd7  usr/local/bin/homegenie/Microsoft.Dynamic.dll

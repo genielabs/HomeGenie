@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r501</Version>
+  <Version>1.1 beta r503</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added UPnP AvMedia.Seek command
-  - Added configurable command delay and heal network options to ZWave interface
-  - Fix blocking event propagation. Events are now processed asynchronously (also solves issue #237)
-  - Fix Security Alarm program events propagation issue
-  - Fixed Media Server browser widget not listing/linking files encoded in one format only; fixed also issues with XBMC and Kodi media player</ReleaseNote>
-  <ReleaseDate>2015-11-18T14:25:17.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fix to system update manager not refreshing page after update or backup restore
+  - Fix ZWave device setup page timeout error when getting parameters
+  - Fix accented character encoding issue under Linux</ReleaseNote>
+  <ReleaseDate>2015-11-24T19:00:43.0000Z</ReleaseDate>
 </ReleaseInfo>

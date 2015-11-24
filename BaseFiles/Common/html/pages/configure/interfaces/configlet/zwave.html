@@ -1,15 +1,15 @@
 <div data-configlet-id="HomeAutomation.ZWave">
 
     <div class="ui-grid-a">
-        <div class="ui-block-a">
-            <div class="ui-grid-b">
-                <div class="ui-block-a">
+        <div class="ui-block-a" style="width:80%">
+            <table><tr>
+                <td style="padding-right:20px">
                     <span data-locale-id="device_port">Device Port</span>
                     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <select data-ui-field="serialport" data-mini="true"></select>
                     </div>
-                </div>
-                <div class="ui-block-b">
+                </td>
+                <td style="padding-right:20px">
                     <span data-locale-id="startup_discovery">Discovery on Startup</span>
                     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <select data-ui-field="startupdiscovery" data-mini="true">
@@ -17,8 +17,8 @@
                             <option value="0">No</option>
                         </select>
                     </div>
-                </div>
-                <div class="ui-block-c">
+                </td>
+                <td style="padding-right:20px">
                     <span data-locale-id="command_delay">Command Delay</span>
                     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <select data-ui-field="commanddelay" data-mini="true">
@@ -32,10 +32,10 @@
                             <option value="750">750ms</option>
                         </select>
                     </div>
-                </div>
-            </div>
+                </td>
+            </tr></table>
         </div>
-        <div class="ui-block-b" align="right">
+        <div class="ui-block-b" align="right" style="width:20%">
             <select data-ui-field="isenabled" data-role="slider">
                 <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
                 <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>

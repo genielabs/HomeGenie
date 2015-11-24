@@ -6,9 +6,9 @@
 cd "`dirname \"$0\"`"
 if [ -f /usr/bin/mono ]
 then
-    MONO="LC_ALL=en_US.UTF-8 /usr/bin/mono"
+    MONO="/usr/bin/mono"
 else
-    MONO="LC_ALL=en_US.UTF-8 /usr/local/bin/mono"
+    MONO="/usr/local/bin/mono"
 fi
 
 EXITCODE="1"

@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+24/11/2015 v1.1-beta.503
+    - Fix to system update manager not refreshing page after update or backup restore
+    - Fix ZWave device setup page timeout error when getting parameters
+    - Fix accented character encoding issue
+
 18/11/2015 v1.1-beta.501
     - Added UPnP AvMedia.Seek command
     - Added configurable command delay and heal network options to ZWave interface

@@ -139,6 +139,7 @@ namespace HomeGenie.Service
             // it will check every 24 hours
             updateChecker.Start();
 
+            Thread.Sleep(2000);
             Start();
         }
 
@@ -823,6 +824,9 @@ namespace HomeGenie.Service
             return success;
         }
 
+        /// <summary>
+        /// Reload system configuration and restart services and interfaces.
+        /// </summary>
         public void Reload()
         {
             migService.StopService();
@@ -882,6 +886,43 @@ namespace HomeGenie.Service
             {
                 Program.Quit(false);
             }
+        }
+
+        /// <summary>
+        /// Reload the system without stopping the web service.
+        /// </summary>
+        /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
+        public bool SoftReload()
+        {
+            bool success = true;
+            foreach (var migInterface in migService.Interfaces)
+            {
+                MigService.Log.Debug("Disabling Interface {0}", migInterface.GetDomain());
+                migInterface.IsEnabled = false;
+                migInterface.Disconnect();
+            }
+            LoadConfiguration();
+            try
+            {
+                // Initialize MIG Interfaces
+                foreach (MIG.Config.Interface iface in migService.Configuration.Interfaces)
+                {
+                    if (iface.IsEnabled)
+                    {
+                        migService.EnableInterface(iface.Domain);
+                    }
+                    else
+                    {
+                        migService.DisableInterface(iface.Domain);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MigService.Log.Error(e);
+                success = false;
+            }
+            return success;
         }
 
         public void LoadConfiguration()

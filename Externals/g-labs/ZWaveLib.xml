@@ -418,6 +418,26 @@
             <summary>
             Initialize the controller (get the node list).
             </summary></member>
+        <member name="M:ZWaveLib.ZWaveController.GetControllerInfo">
+            <summary>
+            Gets the controller info.
+            </summary>
+            <returns><c>true</c>, if controller info was gotten, <c>false</c> otherwise.</returns></member>
+        <member name="M:ZWaveLib.ZWaveController.GetControllerCapabilities">
+            <summary>
+            Gets the controller capabilities.
+            </summary>
+            <returns><c>true</c>, if controller capabilities was gotten, <c>false</c> otherwise.</returns></member>
+        <member name="M:ZWaveLib.ZWaveController.GetHomeId">
+            <summary>
+            Gets the home identifier.
+            </summary>
+            <returns><c>true</c>, if home identifier was gotten, <c>false</c> otherwise.</returns></member>
+        <member name="M:ZWaveLib.ZWaveController.GetSucNodeId">
+            <summary>
+            Gets the suc node identifier.
+            </summary>
+            <returns><c>true</c>, if suc node identifier was gotten, <c>false</c> otherwise.</returns></member>
         <member name="M:ZWaveLib.ZWaveController.Discovery">
             <summary>
             Query capabilities, Supported Classes and Manufacturer Specific of each node.

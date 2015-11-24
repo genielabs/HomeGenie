@@ -83,15 +83,12 @@
         </Gateway>
     </Gateways>
     <Interfaces>
+      <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="false">
+        <Options />
+      </Interface>
       <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
-        </Options>
-      </Interface>
-      <Interface Domain="HomeAutomation.Insteon" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
-        <Options>
-          <Option Name="Port" Value="" />
-          <Option Name="HouseCodes" Value="" />
         </Options>
       </Interface>
       <Interface Domain="HomeAutomation.X10" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
@@ -105,13 +102,16 @@
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
+      <Interface Domain="HomeAutomation.Insteon" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
+        <Options>
+          <Option Name="Port" Value="" />
+          <Option Name="HouseCodes" Value="" />
+        </Options>
+      </Interface>
       <Interface Domain="Controllers.LircRemote" AssemblyName="MIG.Controllers.dll" IsEnabled="false">
         <Options />
       </Interface>
       <Interface Domain="Media.CameraInput" AssemblyName="MIG.Media.dll" IsEnabled="false">
-        <Options />
-      </Interface>
-      <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="false">
         <Options />
       </Interface>
     </Interfaces>

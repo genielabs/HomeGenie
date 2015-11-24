@@ -301,7 +301,7 @@ namespace HomeGenie.Service.Handlers
                         }
                         else
                         {
-                            homegenie.Reload();
+                            homegenie.LoadConfiguration();
                             homegenie.UpdateChecker.Check();
                         }
                     }
@@ -492,7 +492,7 @@ namespace HomeGenie.Service.Handlers
                             File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
                         }
                     }
-                    homegenie.Reload();
+                    homegenie.SoftReload();
                     // Restore automation programs
                     string selectedPrograms = migCommand.GetOption(1);
                     serializer = new XmlSerializer(typeof(List<ProgramBlock>));
@@ -569,7 +569,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationLoad")
                 {
-                    homegenie.Reload();
+                    homegenie.SoftReload();
                 }
                 break;
 

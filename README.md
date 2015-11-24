@@ -4,7 +4,7 @@ http://www.homegenie.it
 
 ## Developer Docs
 
-https://genielabs.github.io/HomeGenie
+https://genielabs.github.io/HomeGenie/about.html
 
 ## Supported IDEs
 
