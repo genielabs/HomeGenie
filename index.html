@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>HomeGenie, Home Automaton Server in the Internet Of Things era</title>
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta name="description" content="HomeGenie, Open Source Home Automaton in the Internet of Things era" />
+    <meta name="keywords" lang="en-us" content="Home Automation,Domotics,Domotica,Z-Wave,X10,Insteon,RFXCom,LightwaveRF,Lightwave RF,433Mhz,RF,IR,ZWave,Raspberry Pi,GPIO,SPI,I2C,Weather,Macro,Scenarios,Automation,UPnP,DLNA,Control Point,Media Receiver,Aeon Labs,Fibaro,Marmitek,CM15,Z-Stick,CM11,SC9000,Philips Hue,Sensors,Voice Control,Open Source,Open Source Home Automation,Internet of Things,IoT,Server,Gateway" />
+    <meta name="author" content="Gene" />
+
+    <!--
+    <meta name="google-site-verification" content="_B_iK7-KURRqCweR_D3DTnNaoPKyMOVosPqipeCfw8o" />
+    <meta name="google-translate-customization" content="e090a2a8a9bcc892-a965e978c7b5fb69-g63de0038b6f55b4a-15" />    
+    <meta name="msvalidate.01" content="1432A2FA39281300FF64B7B49144A0D1" />
+    -->
+
+    <meta itemprop="applicationCategory" content="Open Source Home Automation Server IoT" />
+    <meta itemprop="operatingSystem" content="Windows, Linux, Mac" />
+    <meta itemprop="image" content="http://genielabs.github.io/HomeGenie/img/homegenie_friends.png" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Creative - Start Bootstrap Theme</title>
+
+    <!-- Lobster font -->
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Goole APIs -->
+	<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>		
+    <script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">HomeGenie</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#features">Features</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Download</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#support">Docs &amp; Support</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div id="header-background"></div>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <div class="header-content-text">
+                    <h1>Meet <span>HomeGenie</span></h1>
+                    <!--hr-->
+                    <p>The open source, programmable, home automation server for smart connected devices and applications</p>
+                </div>
+                <!--a href="#about" class="btn btn-primary btn-xl page-scroll" style="border:solid 1px white;margin-top:40px;">Find Out More</a-->
+            </div>
+        </div>
+        <div id="about" style="position:absolute;bottom:0px;width:100%;height:48%;display:block;padding-top:2%" align="center">
+            <div style="position:relative;width:100%;height:100%">
+                <img src="img/tablet_hands.png" height="100%" style="position:absolute;display:block;left:0;right:0;top:0;margin:auto;" />
+                <img id="tablet_img_09" src="img/hgplus_14.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_08" src="img/hgplus_13.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_07" src="img/hgplus_12.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_06" src="img/hgplus_06.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_05" src="img/hgplus_05.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_04" src="img/hgplus_04.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_03" src="img/hgplus_10.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_02" src="img/hgplus_09.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_01" src="img/hgplus_08.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+                <img id="tablet_img_00" src="img/hgplus_07.jpg" height="68%" style="position:absolute;display:block;top:10%;left:4px;right:0;margin:auto;"  />
+            </div>
+        </div>
+            <a href="#about" id="find-out-more" class="fa fa-4x fa-arrow-circle-down wow bounceIn page-scroll" data-wow-delay=".3s" style="color:white;text-decoration:none;position:absolute;right:30px;bottom:50%;cursor:pointer"></a>
+    </header>
+
+    <section class="bg-primary" style="position:relative">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Customizable solution for your Home Automation</h2>
+                    <hr class="light">
+                    <p class="text-faded" align="justify">
+Designed on a multi-standard basis, HomeGenie can interface to various devices such as X10, Insteon, Z-Wave, Philips Hue, UPnP/DLNA, RFXCom, KNX, communicate with external web services and integrate all of this into a common automation enviroment. So even if based on different standards, inside HomeGenie, all "modules" can be controlled and automated to work all togheter.<br/>
+With a modern built-in web user interace, HomeGenie can be enjoyed from any PC, smartphone or tablet.
+                    </p>
+                    <!--a href="#" class="btn btn-default btn-xl">Get Started!</a-->
+                    <div style="vertical-align:middle;text-align:center">
+                        <!-- Place this code where you want the badge to render.
+                        <ahref="//plus.google.com/105697864928973520721?prsrc=3" rel="publisher" target="_top" style="text-decoration:none;">
+                            <img src="//ssl.gstatic.com/images/icons/gplus-32.png" alt="Google+" style="border:0;width:28px;height:28px;margin-right:42px"/>
+                        </a>-->
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.homegenie.it/" data-size="small" data-hashtags="iot,homeautomation,raspberrypi,homegenie">Tweet</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                        <g:plusone size="large" href="http://www.homegenie.it/"></g:plusone>
+                        <!-- Follow G-Plus -->
+                        <div class="g-follow" data-annotation="none" data-height="24" data-href="//plus.google.com/105697864928973520721" data-rel="publisher"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a id="about-arrow-up" href="#page-top" class="fa fa-4x fa-arrow-circle-up wow bounceIn page-scroll" data-wow-delay=".3s" style="color:white;text-decoration:none;position:absolute;left:30px;top:30px;cursor:pointer"></a>
+        <a id="about-arrow-down" href="#features" class="fa fa-4x fa-arrow-circle-down wow bounceIn page-scroll" data-wow-delay=".3s" style="color:white;text-decoration:none;position:absolute;right:30px;top:30px;cursor:pointer"></a>
+    </section>
+
+    <section id="features" style="position:relative;padding-top:40px;padding-bottom:40px">
+        <div class="container" style="padding-bottom:28px">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Will HomeGenie grant your wish? :)</h2>
+                    <!--hr class="primary"-->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-play-circle-o wow bounceIn text-primary"></i>
+                        <h3>UPnP/DLNA</h3>
+                        <p class="text-muted">Control UPnP Lights, Media Servers and Media Receivers. Play music, images and videos from any media server to your TV, Speaker, PC and mobile device.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-lightbulb-o wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>Lighting Scenarios</h3>
+                        <p class="text-muted">Create scenarios with your finger tips and shape you home intelligence with no limits by creating advanced control/interaction logic using the built-in Program Editor.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-microphone wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>Remote Control</h3>
+                        <p class="text-muted">Talk to it from your PC or mobile device. HomeGenie is cabaple of understanding natural speech language to activate scenarios and control devices.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-wifi wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>IR/RF Control</h3>
+                        <p class="text-muted">You can also use an IR or RF remote control as a quick shortcut for activating scenarios and control devices. HomeGenie can be programmed as an IR gateway.</p>
+                    </div>
+                </div>
+            </div>
+
+        <div align="center">
+            <img title="HomeGenie and his friends..." alt="HomeGenie and his friends..." src="img/homegenie_friends.png">
+        </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-bar-chart wow bounceIn text-primary" data-wow-delay=".4s"></i>
+                        <h3>Statistics</h3>
+                        <p class="text-muted">Analyze data from sensors and external services: luminance, temperature, humidity, wind, rain, energy consumption and other parameters. Optimize costs and usage.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-align-justify wow bounceIn text-primary" data-wow-delay=".5s"></i>
+                        <h3>Program Editor</h3>
+                        <p class="text-muted">Use your favourite language for integrating new devices and services. The built-in Program Editor supports Javascript, Phyton, Ruby and C# right out of the box.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-th-large wow bounceIn text-primary" data-wow-delay=".6s"></i>
+                        <h3>Widget Editor</h3>
+                        <p class="text-muted">Customize the user interface by adding new components or modifying existing ones. The built-in Widget Editor let you extend the Web UI by using HTML and Javascript.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-code wow bounceIn text-primary" data-wow-delay=".7s"></i>
+                        <h3>Extensible API</h3>
+                        <p class="text-muted">Take interoperability to the next level. Whenever built-in APIs are not enough, HomeGenie offers an easy way for extending them by using the included Helper Classes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-padding" id="download">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img title="HomeGenie Web UI - Dashboard" src="img/hgweb_01.jpg" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img title="HomeGenie Web UI - Control Group" src="img/hgweb_02.jpg" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img title="HomeGenie Web UI - Program Editor" src="img/hgweb_03.jpg" class="img-responsive" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">HomeGenie Server v1.1</h2>
+                    <!--hr class="primary"-->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-windows wow bounceIn text-default"></i>
+                        <h3>Windows installer</h3>
+                        <p class="text-muted">XP / Vista / Win7 / Win8<br/>(.NET >= 4.5 required)</p>
+                        <a href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_1_beta_r503.exe/download" class="btn btn-success">Download</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-linux wow bounceIn text-default" data-wow-delay=".1s"></i>
+                        <h3>Linux .deb package</h3>
+                        <p class="text-muted">Ubuntu / Debian derivatives<br/>(Mono >= 3.2 recommended)</p>
+                        <a href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r503_all.deb/download" class="btn btn-success">Download</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-apple wow bounceIn text-default" data-wow-delay=".2s"></i>
+                        <h3>Platform agnostic .tgz</h3>
+                        <p class="text-muted">Mac OSX and others<br/>(Mono >= 3.2 recommended)</p>
+                        <a href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r503.tgz/download" class="btn btn-success">Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top:50px;">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <a href="http://genielabs.github.io/HomeGenie/install.html" class="btn btn-lg btn-primary"><i class="fa fa-lg fa-info"></i> Install Instructions</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <a href="https://github.com/genielabs" class="btn btn-lg btn-primary"><i class="fa fa-lg fa-github"></i> Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center" style="margin-top:50px">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">HomeGenie Mobile Clients</h2>
+                    <!--hr class="primary"-->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-windows wow bounceIn text-default"></i>
+                        <h3>Windows Phone</h3>
+                        <p class="text-muted">WP 7.5 and up</p>
+                        <a href="http://www.windowsphone.com/en-us/store/app/homegenie/b3bff0d6-f65a-4ce5-93f7-7be68d4849f3" class="btn btn-success">Windows Store</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-android wow bounceIn text-default" data-wow-delay=".1s"></i>
+                        <h3>Android client</h3>
+                        <p class="text-muted">Android 2.2 and up</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.glabs.homegenie" class="btn btn-success">Play Store</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-android wow bounceIn text-default" data-wow-delay=".2s"></i>
+                        <h3>Android client (plus)</h3>
+                        <p class="text-muted">Android 4.0 and up</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.glabs.homegenieplus" class="btn btn-success">Play Store</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <section id="support" style="padding:0px;padding-top:30px;">
+        <a id="about-arrow-up2" href="#page-top" class="page-scroll" data-wow-delay=".3s" style="margin:30px;"><i class="fa fa-4x fa-arrow-circle-up wow bounceIn page-scroll"></i></a>
+
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Documentation and Support</h2>
+                    <!--hr class="primary"-->
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top:50px;margin-bottom:250px">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <a href="http://www.homegenie.it/docs/index.php" class="btn btn-default btn-lg"><i class="fa fa-lg fa-book"></i> User's Guide</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="http://genielabs.github.io/HomeGenie/about.html" class="btn btn-default btn-lg"><i class="fa fa-lg fa-code"></i> Developers' Docs</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="http://www.homegenie.it/forum" class="btn btn-default btn-lg"><i class="fa fa-lg fa-users"></i> Support Forum</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div id="copyright" align="center" style="margin:40px">
+            <p style="font-size:10pt;color:gray;max-width:800px">
+                Product names, logos, brands, and other trademarks featured or referred to within this site are the property of their respective trademark holders.
+                These trademark holders are not affiliated with this project or website. They do not sponsor or endorse materials contained in these pages.
+            </p>
+            <br>
+            <span style="color:black">
+                Copyleft &copy; 2012-to-infinity-and-beyond <a target="_blank" href="https://github.com/genielabs" style="color:blue">G-Labs</a>
+            </span>
+        </div>
+
+    </section>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-70634540-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>

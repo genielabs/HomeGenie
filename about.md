@@ -1,5 +1,5 @@
 ---
-title: HomeGenie Dev Docs
+title: HomeGenie Dev Docs - About
 layout: main
 ---
 
