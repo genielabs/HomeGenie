@@ -275,6 +275,7 @@ header .header-content-text {
 
 .service-box {
     margin: 50px auto 0;
+    min-height: 240px;
     max-width: 400px;
 }
 
