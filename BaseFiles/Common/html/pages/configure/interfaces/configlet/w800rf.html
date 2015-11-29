@@ -44,18 +44,39 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.W800RF'] = {
         // populate port list
         HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (ports) {
             portSelect.empty().append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder') + '</option>');
+            portSelect.append('<option value="" data-ui-action="custom">(enter custom port)</option>');
             for (var p = 0; p < ports.length; p++) {
                 portSelect.append('<option value="' + ports[p] + '">' + ports[p] + '</option>');
             }
             portSelect.selectmenu('refresh', true);
             // set current configured port
             HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (port) {
+                var opt = portSelect.find('option[value="'+port.ResponseValue+'"]');
+                if (opt.length == 0) {
+                    // custom port
+                    portSelect.find('option').eq(1).val(port.ResponseValue);
+                    portSelect.find('option').eq(1).html(port.ResponseValue);
+                    portSelect.selectmenu('refresh', true);
+                }
                 portSelect.val(port.ResponseValue);
                 portSelect.selectmenu('refresh', true);
             });
         });
         // bind to port select change event
         portSelect.change(function (event) {
+            if ($(this)[0].selectedIndex == 1) {
+                var port = $(this).find('option').eq(1).text();
+                if (port == '(enter custom port)') port = '';
+                port = prompt("Please enter port path", port);
+                $(this).find('option').eq(1).val(port);
+                if (port != '' && port != '(enter custom port)') {
+                    $(this).find('option').eq(1).html(port);
+                } else {
+                    $(this).val('');
+                    $(this).find('option').eq(1).html('(enter custom port)');
+                }
+                $(this).selectmenu('refresh', true);
+            }
             HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Port', encodeURIComponent($(this).val()));
         });
     },

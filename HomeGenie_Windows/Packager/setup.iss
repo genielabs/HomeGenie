@@ -4,10 +4,10 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.1 beta (r503)
+AppVerName=HomeGenie 1.1 beta (r504)
 AppPublisher=GenieLabs
 AppPublisherURL=http://www.homegenie.it
-AppVersion=1.1 beta (r503)
+AppVersion=1.1 beta (r504)
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
@@ -171,8 +171,8 @@ begin
       Result := False; //when older version present and not uninstalled
   end;
   
-  if not IsDotNetDetected('v4\Full', 0) then begin
-     MsgBox('HomeGenie requires Microsoft .NET Framework 4.0.'#13#13
+  if not IsDotNetDetected('v4.5', 0) then begin
+     MsgBox('HomeGenie requires Microsoft .NET Framework 4.5.'#13#13
          'Please use Windows Update to install this version,'#13
          'and then re-run the HomeGenie setup program.', mbInformation, MB_OK);
      Result := false;
@@ -198,8 +198,8 @@ Type: files; Name: "{app}\SQLite.Interop.dll";
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Icons]
-Name: "{group}\HomeGenie 1.1 beta (r503)"; Filename: "{app}\HomeGenieManager.exe"
-Name: "{group}\Uninstall HomeGenie 1.1 beta (r503)"; Filename: "{uninstallexe}"
+Name: "{group}\HomeGenie 1.1 beta (r504)"; Filename: "{app}\HomeGenieManager.exe"
+Name: "{group}\Uninstall HomeGenie 1.1 beta (r504)"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\HomeGenie"; Filename: "{app}\HomeGenieManager.exe"
 
 [Run]

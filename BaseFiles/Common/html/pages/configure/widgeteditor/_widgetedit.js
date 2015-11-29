@@ -117,7 +117,10 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             var module = HG.WebApp.Data.Modules[m];
             var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
             if (widget != null) widget = widget.Value;
-            if (widget == HG.WebApp.WidgetsList._currentWidget)
+            var devType = module.DeviceType.toLowerCase();
+            var widgetType = HG.WebApp.WidgetsList._currentWidget.toLowerCase().split('/');
+            widgetType = widgetType[widgetType.length-1];
+            if (widget == HG.WebApp.WidgetsList._currentWidget || widgetType == devType)
             {
                 selected = m;
                 // prefer modules to programs as default bind module
@@ -136,7 +139,10 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             }
             var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
             if (widget != null) widget = widget.Value;
-            if (widget == HG.WebApp.WidgetsList._currentWidget || selected == '')
+            var devType = module.DeviceType.toLowerCase();
+            var widgetType = HG.WebApp.WidgetsList._currentWidget.toLowerCase().split('/');
+            widgetType = widgetType[widgetType.length-1];
+            if (widget == HG.WebApp.WidgetsList._currentWidget || widgetType == devType || selected == '')
             {
                 bindModuleSelect.append('<option value="' + m + '">' + name + '</option>');
             }

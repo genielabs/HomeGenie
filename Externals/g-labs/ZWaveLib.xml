@@ -281,7 +281,7 @@
             Sends the data request.
             </summary>
             <param name="request">Request.</param></member>
-        <member name="T:ZWaveLib.Values.ZWaveAlarmDetailType">
+        <member name="T:ZWaveLib.Values.ZWaveAlarmEvent">
             <summary>
             Enumerator for alarm value details. e.g., 0x16 corresponds with the action of
             an open door if the alarm AccessControl alarm type is set.

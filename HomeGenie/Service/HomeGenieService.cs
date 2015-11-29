@@ -391,9 +391,9 @@ namespace HomeGenie.Service
             return jsonModules;
         }
 
+        // TODO: move this to a better location
         public bool ExecuteAutomationRequest(MigInterfaceCommand command)
         {
-            bool handled = false; //never assigned
             string levelValue, commandValue;
             // check for certain commands
             if (command.Command == Commands.Groups.GroupsLightsOff)
@@ -408,7 +408,7 @@ namespace HomeGenie.Service
             }
             else
             {
-                return handled;
+                return false;
             }
             //loop, turning off lights
             try
@@ -436,7 +436,7 @@ namespace HomeGenie.Service
             {
                 // TODO: handle exception here
             }
-            return handled;
+            return true;
         }
 
         #endregion

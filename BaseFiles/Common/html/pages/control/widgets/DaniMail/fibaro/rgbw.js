@@ -90,7 +90,7 @@
         var srgbcolor = red + "," + green + "," + blue;
         _this.ControlImage.clear();_this.ControlImage.ball(12, 12, 12, color);
         //
-        HG.Control.Modules.ServiceCall("Control.ColorHsb",module.Domain, module.Address, srgbcolor, function (data) { });
+        HG.Control.Modules.ServiceCall("Control.ColorRgb",module.Domain, module.Address, srgbcolor, function (data) { });
       });
     }
     //
@@ -136,7 +136,7 @@
     } else {
       this.IconImage = 'pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png';
     }
-    var srgbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
+    var srgbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorRgb");
     if (srgbcolor != null && this.ColorWheel != null) {
         var rgbcolor = 'rgb('+srgbcolor.Value+')';
         var color = Raphael.rgb2hsb(rgbcolor);

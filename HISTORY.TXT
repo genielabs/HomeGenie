@@ -1,5 +1,15 @@
 ﻿RELEASE HISTORY
 
+28/11/2015 v1.1-beta.504
+    - Added Z-Wave "Send to sleep" option to "Query on Wake Up" program
+    - Added SendToSleep command after each WakeUp query for battery powered device
+    - Added custom serial port path selector for various serial interfaces (z-wave, x10, w800rf, insteon)
+    - Updated FibaroRGBW app
+    - Fixed ZWaveLib packet fragmentation issue (affecting RaZberry) and timeout errors occurring with some devices (eg. Fibaro in wall switches)
+    - Fixed "event stream disconnected" issue occurring on some mono-arm platforms
+    - Removed 20 seconds pause after backup restore/factory reset
+    - Fix modules serialization bug (backslash character not escaped)
+
 24/11/2015 v1.1-beta.503
     - Fix to system update manager not refreshing page after update or backup restore
     - Fix ZWave device setup page timeout error when getting parameters

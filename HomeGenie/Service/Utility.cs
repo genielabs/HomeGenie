@@ -192,10 +192,9 @@ namespace HomeGenie.Service
             }
             else
             {
-                //fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\\", "\\\\");
                 fieldValue = fieldValue.Replace("\"", "\\\"");
                 fieldValue = fieldValue.Replace("\n", "\\n");
-                //fieldValue = fieldValue.Replace("\'", "\\'");
                 fieldValue = fieldValue.Replace("\r", "\\r");
                 fieldValue = fieldValue.Replace("\t", "\\t");
                 fieldValue = fieldValue.Replace("\b", "\\b");

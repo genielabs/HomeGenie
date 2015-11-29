@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r503</Version>
+  <Version>1.1 beta r504</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fix to system update manager not refreshing page after update or backup restore
-  - Fix ZWave device setup page timeout error when getting parameters
-  - Fix accented character encoding issue under Linux</ReleaseNote>
-  <ReleaseDate>2015-11-24T19:00:43.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added Z-Wave "Send to sleep" option to "Query on Wake Up" program
+  - Added SendToSleep command after each WakeUp query for battery powered device
+  - Added custom serial port path selector for various serial interfaces (z-wave, x10, w800rf, insteon)
+  - Updated FibaroRGBW app
+  - Fixed ZWaveLib packet fragmentation issue (affecting RaZberry) and timeout errors occurring with some devices (eg. Fibaro in wall switches)
+  - Fixed "event stream disconnected" issue occurring on some mono-arm platforms
+  - Removed 20 seconds pause after backup restore/factory reset
+  - Fix modules serialization bug (backslash character not escaped)</ReleaseNote>
+  <ReleaseDate>2015-11-29T17:56:13.0000Z</ReleaseDate>
 </ReleaseInfo>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
     <Conditions />
@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:12.346427Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:28.92703Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -255,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:12.861784Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:28.939759Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -429,7 +429,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:13.361861Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.076516Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -501,7 +501,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:13.851527Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.084289Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1102,7 +1102,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:14.352093Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:28.282814Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1149,7 +1149,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:14.85267Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:28.282758Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1474,9 +1474,31 @@ while (Program.IsEnabled)
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
-    <Features />
-    <ActivationTime>2015-11-10T12:15:41.832722Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
+        <Property>HomeGenie.SecuritySensor</Property>
+        <Description>Use as Security Sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
+        <Property>HomeGenie.SecurityTriggerHome</Property>
+        <Description>Also trigger when armed Home</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.SecurityAlarm</Property>
+        <Description>Use as Security Alarm</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2015-11-29T17:52:28.596772Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1484,7 +1506,8 @@ while (Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Run();
+    <ScriptCondition>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpSleep", "Send to sleep after given delay (seconds, 0=disabled)", "slider:0:60:1");
+Program.Run();
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
@@ -1557,6 +1580,14 @@ while (Program.IsEnabled)
           module.Command("Basic.Get").Execute();
           Pause(.2);
         }
+        // no more info, send the node to sleep
+        var sendToSleepDelay = module.Parameter("HomeGenie.ZWaveWakeUpSleep").DecimalValue;
+        if (sendToSleepDelay &gt; 0)
+        {
+          Pause(sendToSleepDelay);
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Send to Sleep");
+          module.Command("WakeUp.SendToSleep").Execute();
+        }
       }
     }
   }
@@ -1571,9 +1602,17 @@ Program.GoBackground();</ScriptSource>
     <Name>Query on Wake Up</Name>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
-    <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:15.855555Z</TriggerTime>
+    <Features>
+      <ProgramFeature>
+        <FieldType>slider:0:60:1</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>DoorWindow,DoorLock,Thermostat,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveWakeUpSleep</Property>
+        <Description>Send to sleep after given delay (seconds, 0=disabled)</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime>2015-11-29T17:53:35.775156Z</ActivationTime>
+    <TriggerTime>2015-11-29T17:53:35.805067Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1628,7 +1667,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:16.355826Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:28.660089Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1737,7 +1776,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:16.859257Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:28.946235Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2075,7 +2114,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:17.861448Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.167596Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2173,7 +2212,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:18.373084Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.404342Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2322,7 +2361,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:18.86263Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.400148Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2569,7 +2608,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:19.36597Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.599789Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2644,11 +2683,100 @@ Modules.InDomain("HomeAutomation.ZWave").WithParameter("ZWaveNode.ManufacturerSp
   return false ;
 });
 Program.Run();</ScriptCondition>
-    <ScriptSource>//	Program.Option("ZWaveModule").Value  
+    <ScriptSource>// Program.Option("ZWaveModule").Value  
 // - http://&lt;hg_address&gt;/api/HomeAutomation.FibaroRGBW/...
 // - Version : 1.0
 // - Date : 06/02/2014
 // - Author : DaniMail
+
+Func&lt;string, string, bool&gt; bridgeapicall = (string lightnumber, string parameter) =&gt; 
+{
+  var moduleRaise = Modules.InDomain("HomeAutomation.FibaroRGBW").WithAddress(lightnumber).Get();
+  string[] values = parameter.Split(',');
+  
+  double level = (double.Parse(values[0].Replace(",", "."), CultureInfo.InvariantCulture)/255D)*99D ;
+  int iRed = (int)Math.Truncate(level) ;
+  var moduleRed = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".2").Get();
+  moduleRed.Command("Control.Level").Set( ((int)iRed).ToString() ) ;
+  level = (double.Parse(values[1].Replace(",", "."), CultureInfo.InvariantCulture)/255D)*99D ;
+  int iGreen = (int)Math.Truncate(level) ;
+  var moduleGreen = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".3").Get();
+  moduleGreen.Command("Control.Level").Set( ((int)iGreen).ToString() ) ;
+  level = (double.Parse(values[2].Replace(",", "."), CultureInfo.InvariantCulture)/255D)*99D ;
+  int iBlue = (int)Math.Truncate(level) ;
+  var moduleBlue = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".4").Get();
+  moduleBlue.Command("Control.Level").Set( ((int)iBlue).ToString() ) ;
+  
+  Program.RaiseEvent(moduleRaise, "Status.ColorRgb", parameter, "Fibaro RGBW");
+  
+  double average = (iRed + iGreen + iBlue) / 3;
+  Program.RaiseEvent(moduleRaise, "Status.Level", (average / 100).ToString(), "Fibaro RGBW");
+  
+  return true;
+};
+
+var HSB2RGB = new Func&lt;double,double,double,dynamic&gt;((double hue, double saturation, double brightness) =&gt; {
+  double red = 0, green = 0, blue = 0;
+  if (saturation == 0)
+  {
+    red = green = blue = brightness;
+  }
+  else
+  {
+    // the color wheel consists of 6 sectors. Figure out which sector you're in.
+    double sectorPos = hue / 60.0;
+    int sectorNumber = (int)(Math.Floor(sectorPos));
+    // get the fractional part of the sector
+    double fractionalSector = sectorPos - sectorNumber;
+
+    // calculate values for the three axes of the color. 
+    double p = brightness * (1.0 - saturation);
+    double q = brightness * (1.0 - (saturation * fractionalSector));
+    double t = brightness * (1.0 - (saturation * (1 - fractionalSector)));
+
+    // assign the fractional colors to r, g, and b based on the sector the angle is in.
+    switch (sectorNumber)
+    {
+      case 0:
+        red = brightness;
+        green = t;
+        blue = p;
+        break;
+      case 1:
+        red = q;
+        green = brightness;
+        blue = p;
+        break;
+      case 2:
+        red = p;
+        green = brightness;
+        blue = t;
+        break;
+      case 3:
+        red = p;
+        green = q;
+        blue = brightness;
+        break;
+      case 4:
+        red = t;
+        green = p;
+        blue = brightness;
+       break;
+      case 5:
+        red = brightness;
+        green = p;
+        blue = q;
+        break;
+    }
+  }
+  dynamic color = new ExpandoObject();
+  color.Red = (int)(red*255d);
+  color.Green = (int)(green*255d);
+  color.Blue = (int)(blue*255d);
+  return color;
+});
+
+
 
 When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt; {
     string[] reqs = ((string)args).Split('/');
@@ -2687,31 +2815,28 @@ When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt; {
             }
         	break;
         case "Control.Level":
-        	module.Command("Control.Level").Set((double.Parse(parameter)).ToString()) ;
-            Program.RaiseEvent(moduleRaise, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Fibaro RGBW");
+        	module.Command("Control.Level").Set((double.Parse(parameter.Replace(",", "."), CultureInfo.InvariantCulture)).ToString()) ;
+            Program.RaiseEvent(moduleRaise, "Status.Level", (double.Parse(parameter.Replace(",", "."), CultureInfo.InvariantCulture) / 100D).ToString(), "Fibaro RGBW");
         	break;
-		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
         case "Control.ColorHsb":
-        	string[] values = parameter.Split(',');
- 	        Program.RaiseEvent(moduleRaise, "Status.ColorHsb", parameter, "Fibaro RGBW");
-        	double level = (double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
-        	int iRed = (int)Math.Truncate(level) ;
-        	var moduleRed = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".2").Get();
-   		 	moduleRed.Command("Control.Level").Set( ((int)iRed).ToString() ) ;
-        	level = (double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
-        	int iGreen = (int)Math.Truncate(level) ;
-        	var moduleGreen = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".3").Get();
-    	 	moduleGreen.Command("Control.Level").Set( ((int)iGreen).ToString() ) ;
-        	level = (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
-        	int iBlue = (int)Math.Truncate(level) ;
-        	var moduleBlue = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".4").Get();
-    	 	moduleBlue.Command("Control.Level").Set( ((int)iBlue).ToString() ) ;
-        	Program.RaiseEvent(moduleRaise, "Status.Level", "1", "Fibaro RGBW");
-        	break; 
+            Program.RaiseEvent(moduleRaise, "Status.ColorHsb", parameter, "Fibaro RGBW");
+          	string[] hsbValues = parameter.Split(',');
+        	double h = double.Parse(hsbValues[0].Replace(",", "."), CultureInfo.InvariantCulture) * 360;
+			double s = double.Parse(hsbValues[1].Replace(",", "."), CultureInfo.InvariantCulture);
+			double b = double.Parse(hsbValues[2].Replace(",", "."), CultureInfo.InvariantCulture);
+                        
+            var rgbColor = HSB2RGB(h,s,b);
+			// then you have rgbColor.Red, rgbColor.Green and rgbColor.Blue properties.
+        	bridgeapicall(lightnumber, String.Format("{0},{1},{2}", rgbColor.Red, rgbColor.Green, rgbColor.Blue));
+          	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+         case "Control.ColorRgb":
+        	bridgeapicall(lightnumber, parameter);
+        	break;
         case "Control.ProgramRGB" :
 			module.Command("Config.ParameterSet").Set("72/" + parameter);
            	Program.RaiseEvent(moduleRaise, "Status.Level", "1", "Fibaro RGBW");
-//			Program.Notify("Program RGB", "N° " + parameter + " running" );
+//			Program.Notify("Program RGB", "N� " + parameter + " running" );
             break;
       }
       //
@@ -6727,7 +6852,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:20.380879Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.811091Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7440,7 +7565,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-11-10T12:14:20.868012Z</TriggerTime>
+    <TriggerTime>2015-11-29T17:52:29.792623Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
