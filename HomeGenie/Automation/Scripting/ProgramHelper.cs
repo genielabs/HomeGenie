@@ -690,7 +690,7 @@ namespace HomeGenie.Automation.Scripting
                 var actionEvent = homegenie.MigService.GetEvent(
                     programModule.Domain,
                     programModule.Address,
-                    "Automation Program",
+                    description,
                     parameter,
                     value
                 );
@@ -725,7 +725,7 @@ namespace HomeGenie.Automation.Scripting
                 var actionEvent = homegenie.MigService.GetEvent(
                     sourceModule.Instance.Domain,
                     sourceModule.Instance.Address,
-                    "Virtual Module",
+                    description,
                     parameter,
                     value
                 );

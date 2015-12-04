@@ -1,5 +1,13 @@
 ﻿RELEASE HISTORY
 
+04/12/2015 v1.1-beta.505
+    - Updated Z-Wave Level Poll program to support SwitchBinary/MultiLevel command classes
+    - Fixed XTenLib CM11 bug
+    - Fixed issue in FibaroRGBW app
+    - Added ":nopopup:" option to disable notification popup on RaiseEvent (":nopopup:" must be specified in the description field)
+    - Fixed "Program.UiRefresh" event, that was working only for program modules
+    - Fixed ZWaveLib SwitchBinary command class (sending 0x20 Basic instead of 0x25 SwitchBinary)
+
 28/11/2015 v1.1-beta.504
     - Added Z-Wave "Send to sleep" option to "Query on Wake Up" program
     - Added SendToSleep command after each WakeUp query for battery powered device

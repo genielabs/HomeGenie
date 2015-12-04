@@ -147,8 +147,8 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
         if ($.mobile.activePage.attr("id") == HG.WebApp.WidgetEditor.PageId) {
             HG.WebApp.WidgetEditor.RenderView(eventLog);
         }
-        // when event is an automation program event, we update the whole module
-        if (module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') {
+        // when event is an automation program event or the 'Program.UiRefresh' one, we update the whole module
+        if ((module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') || eventLog.Property == 'Program.UiRefresh') {
             HG.Configure.Modules.Get(module.Domain, module.Address, function (data) {
                 try {
                     var mod = eval('[' + data + ']')[0];
@@ -159,7 +159,6 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             });
         }
     }
-    //
     // show event popup as needed
     var logdate = new Date(eventLog.UnixTimestamp);
     var date = HG.WebApp.Utility.FormatDateTime(logdate);
@@ -178,8 +177,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
         case 'HomeGenie.UpdateChecker':
             if (eventLog.Property == 'InstallProgress.Message') {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
-            }
-            else {
+            } else {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
                 var iconImage = 'images/genie.png';
                 popupdata = {
@@ -204,20 +202,17 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     if ($.mobile.activePage.attr("id") == 'page_automation_editprogram') {
                         HG.WebApp.ProgramEdit.RefreshProgramOptions();
                     }
-                }
-                else if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
+                } else if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     //var cp = HG.WebApp.Utility.GetProgramByAddress(module.Address);
                     //if (cp != null) cp.ScriptErrors = '';
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
                     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
-            }
-            else if (eventLog.Property == 'Program.Status') {
+            } else if (eventLog.Property == 'Program.Status') {
                 if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
-            }
-            else if (eventLog.Property == 'Program.Notification') {
+            } else if (eventLog.Property == 'Program.Notification') {
                 var notification = JSON.parse(eventLog.Value);
                 popupdata = {
                     icon: iconImage,
@@ -225,8 +220,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-            }
-            else if (eventLog.Property != 'Program.UiRefresh') {
+            } else if (eventLog.Property != 'Program.UiRefresh') {
                 //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                 //if (module.Name != '') name = module.Name;
                 popupdata = {
@@ -265,8 +259,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         text: module.Address,
                         timestamp: date
                     };
-                }
-                else if (eventLog.Property.substring(0, 7) == 'Sensor.') {
+                } else if (eventLog.Property.substring(0, 7) == 'Sensor.') {
                     var group = HG.WebApp.GroupsList.GetModuleGroup(module);
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
@@ -295,8 +288,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         text: parseFloat(eventLog.Value.replace(',', '.')).toFixed(2),
                         timestamp: date
                     };
-                }
-                else if (eventLog.Property.substring(0, 7) == 'Status.') {
+                } else if (eventLog.Property.substring(0, 7) == 'Status.') {
                     var group = HG.WebApp.GroupsList.GetModuleGroup(module);
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
@@ -327,8 +319,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     };
                     HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
                     automationpage_ConditionsRefresh();
-                }
-                else if (HG.WebApp.ProgramEdit._IsCapturingCommands && eventLog.Value != '') {
+                } else if (HG.WebApp.ProgramEdit._IsCapturingCommands && eventLog.Value != '') {
                     var command = HG.WebApp.Utility.GetCommandFromEvent(module, eventLog);
                     if (command != null) {
                         HG.WebApp.ProgramEdit._CurrentProgram.Commands.push(command);
@@ -338,8 +329,8 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
             break;
     }
-    //
-    if (popupdata != null && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property)) {
+
+    if (popupdata != null && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property) && eventLog.Description.indexOf(':nopopup:') < 0) {
 
         HG.WebApp.Events.ShowEventPopup(popupdata, eventLog);
 
