@@ -5,5 +5,5 @@
   <Description>Latest public release.</Description>
   <ReleaseNote>   - Fix Interface Add-On install bug (it was removing all other interfaces when installing a new one)
   - Should fix occasional null reference exception in ValueStatistics.AddValue</ReleaseNote>
-  <ReleaseDate>2015-12-11T16:53:28.0000Z</ReleaseDate>
+  <ReleaseDate>2015-12-11T17:30:28.0000Z</ReleaseDate>
 </ReleaseInfo>

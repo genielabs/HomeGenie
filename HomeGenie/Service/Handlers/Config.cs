@@ -225,8 +225,12 @@ namespace HomeGenie.Service.Handlers
                         string destFile = Path.Combine(migFolder, Path.GetFileName(f.FullName));
                         if (File.Exists(destFile))
                         {
-                            File.Move(destFile, Path.Combine(destFile, ".old"));
-                            File.Delete(Path.Combine(destFile, ".old"));
+                            try { File.Delete(destFile + ".old"); } catch { }
+                            try 
+                            {
+                                File.Move(destFile, destFile + ".old");
+                                File.Delete(destFile + ".old");
+                            } catch  { }
                         }
                         File.Move(f.FullName, destFile);
                     }
