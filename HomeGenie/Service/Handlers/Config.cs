@@ -219,7 +219,6 @@ namespace HomeGenie.Service.Handlers
                     File.Move(Path.Combine(outFolder, "logo.png"), logoPath);
                     // copy other interface files to mig folder (dll and dependencies)
                     string migFolder = Path.Combine("lib", "mig");
-                    Utility.FolderCleanUp(migFolder);
                     DirectoryInfo dir = new DirectoryInfo(outFolder);
                     foreach (var f in dir.GetFiles())
                     {

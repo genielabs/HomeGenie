@@ -1,13 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r505</Version>
+  <Version>1.1 beta r506</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Updated Z-Wave Level Poll program to support SwitchBinary/MultiLevel command classes
-  - Fixed XTenLib CM11 bug
-  - Fixed issue in FibaroRGBW app
-  - Added ":nopopup:" option to disable notification popup on RaiseEvent (":nopopup:" must be specified in the description field)
-  - Fixed "Program.UiRefresh" event, that was working only for program modules
-  - Fixed ZWaveLib SwitchBinary command class (sending 0x20 Basic instead of 0x25 SwitchBinary)</ReleaseNote>
-  <ReleaseDate>2015-12-04T11:40:53.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fix Interface Add-On install bug (it was removing all other interfaces when installing a new one)
+  - Should fix occasional null reference exception in ValueStatistics.AddValue</ReleaseNote>
+  <ReleaseDate>2015-12-11T16:53:28.0000Z</ReleaseDate>
 </ReleaseInfo>

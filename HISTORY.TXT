@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+11/12/2015 v1.1-beta.506
+    - Fix Interface Add-On install bug (it was removing all other interfaces when installing a new one)
+    - Should fix occasional null reference exception in ValueStatistics.AddValue
+
 04/12/2015 v1.1-beta.505
     - Updated Z-Wave Level Poll program to support SwitchBinary/MultiLevel command classes
     - Fixed XTenLib CM11 bug
