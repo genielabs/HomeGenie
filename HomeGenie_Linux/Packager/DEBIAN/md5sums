@@ -109,7 +109,7 @@ f85bd266c0d92a420ea12d5835156db8  usr/local/bin/homegenie/programs/7.dll
 f44705a2e7251541db32e4761cf6bae6  usr/local/bin/homegenie/programs/41.dll
 8efb9babdfbfb500e59f0cc1c10d372c  usr/local/bin/homegenie/programs/16.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
-9bfe75706c5503ca86ea9c4bff699cfe  usr/local/bin/homegenie/HomeGenie.exe.mdb
+1e7c8f15156835dea239271abb7343ba  usr/local/bin/homegenie/HomeGenie.exe.mdb
 edb4222ca9b4aa24ff7ad7dc5d63ab89  usr/local/bin/homegenie/NetClientLib.dll.mdb
 198a54b1a3bba2d5300270ea6f1b9cb5  usr/local/bin/homegenie/Common.Logging.dll
 037a39c0e60471e2ad6a155519aabaf8  usr/local/bin/homegenie/Common.dll.mdb
@@ -124,7 +124,7 @@ b367f1a0f7ba435a0c92f591f4ae0070  usr/local/bin/homegenie/Raspberry.IO.Component
 027d050500b7bb55a5ff9ae25aff0168  usr/local/bin/homegenie/Linux.dll
 702ba55b7993d65eee480c723c150a1d  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 2074c256e8b7a372e28490a436a8e04d  usr/local/bin/homegenie/NLog.dll
-b650904296b60cf06ca5aa48f54c9449  usr/local/bin/homegenie/HISTORY.TXT
+0b554beda694e502269a5992752af19c  usr/local/bin/homegenie/HISTORY.TXT
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
 b286b7a9a18d6e01364b50783672e8ce  usr/local/bin/homegenie/programs.xml
 58d4389f29365489f41cd547eb1f10ec  usr/local/bin/homegenie/modules.xml
@@ -1784,8 +1784,8 @@ b8459e32556b6e692fae8f9ff81817c9  usr/local/bin/homegenie/html/ui/core/popup.cro
 8c62c286d03fd664a54dafcffaeb5fe3  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
 c01449322109e7477c208be018fd45fb  usr/local/bin/homegenie/ADDONS.md
 f382a968d978f314e126e0526f569460  usr/local/bin/homegenie/startup.sh
-0564b6ea618048231f617e90c6e3f250  usr/local/bin/homegenie/HomeGenie.exe
-57efc26eac288715b49390b7da820b96  usr/local/bin/homegenie/release_info.xml
+ea532a394ab36e61ed2dffd113cd5b71  usr/local/bin/homegenie/HomeGenie.exe
+4fb5304ec2004b83da4d374a72f3f219  usr/local/bin/homegenie/release_info.xml
 536920e88b28850b8df27484746134f4  usr/local/bin/homegenie/NetClientLib.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 272aa48b0bfd90305c6c27b4f4538566  usr/local/bin/homegenie/scheduler.xml

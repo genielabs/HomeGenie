@@ -82,6 +82,8 @@ namespace HomeGenie.Automation
         public bool IsRunning { get; set; }
         [XmlIgnore]
         public bool LastConditionEvaluationResult { get; set; }
+        [XmlIgnore]
+        public object OperationLock = new object();
 
         public DateTime? ActivationTime { get; set; }
         public DateTime? TriggerTime { get; set; }

@@ -62,8 +62,6 @@ namespace HomeGenie.Automation
 
     public class ProgramManager
     {
-        public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
-
         private TsList<ProgramBlock> automationPrograms = new TsList<ProgramBlock>();
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
@@ -81,102 +79,12 @@ namespace HomeGenie.Automation
         private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
 
-
-        public class EvaluateProgramConditionArgs
-        {
-            public ProgramBlock Program;
-            public ConditionEvaluationCallback Callback;
-        }
-
         public ProgramManager(HomeGenieService hg)
         {
             homegenie = hg;
             macroRecorder = new MacroRecorder(this);
             scheduler = new SchedulerService(this);
             scheduler.Start();
-        }
-
-        // TODO: v1.1 !!!IMPORTANT!!! possibly move this inside ProgramEngineBase.cs class and rename to EvaluateStartupCode
-        public void EvaluateProgramCondition(object evalArguments)
-        {
-            ProgramBlock program = (evalArguments as EvaluateProgramConditionArgs).Program;
-            ConditionEvaluationCallback callback = (evalArguments as EvaluateProgramConditionArgs).Callback;
-            //
-            bool isConditionSatisfied = false;
-            //
-            while (isEngineRunning && program.IsEnabled)
-            {
-                // the startup code is not evaluated while the program is running
-                if (program.IsRunning || !isEngineEnabled)
-                {
-                    Thread.Sleep(1000);
-                    continue;
-                }
-                // wait 1 second or a new event
-                program.Engine.RoutedEventAck.WaitOne(1000);
-                // check if the program is still allowed to run
-                if (program.IsRunning || !program.IsEnabled)
-                {
-                    program.Engine.RoutedEventAck.Reset();
-                    continue;
-                }
-                // evaluate and get result from the code
-                try
-                {
-                    isConditionSatisfied = false;
-                    program.WillRun = false;
-                    //
-                    var result = program.EvaluateCondition();
-                    if (result != null && result.Exception != null)
-                    {
-                        // runtime error occurred, script is being disabled
-                        // so user can notice and fix it
-                        List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, true) };
-                        program.ScriptErrors = JsonConvert.SerializeObject(error);
-                        program.IsEnabled = false;
-                        RaiseProgramModuleEvent(program, Properties.RuntimeError, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
-                    }
-                    else
-                    {
-                        isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
-                    }
-                    //
-                    bool lastResult = program.LastConditionEvaluationResult;
-                    program.LastConditionEvaluationResult = isConditionSatisfied;
-                    //
-                    if (program.ConditionType == ConditionType.OnSwitchTrue)
-                    {
-                        isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
-                    }
-                    else if (program.ConditionType == ConditionType.OnSwitchFalse)
-                    {
-                        isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
-                    }
-                    else if (program.ConditionType == ConditionType.OnTrue || program.ConditionType == ConditionType.Once)
-                    {
-                        // noop
-                    }
-                    else if (program.ConditionType == ConditionType.OnFalse)
-                    {
-                        isConditionSatisfied = !isConditionSatisfied;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // a runtime error occured
-                    if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)))
-                    {
-                        List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(ex, true) };
-                        program.ScriptErrors = JsonConvert.SerializeObject(error);
-                        program.IsEnabled = false;
-                        RaiseProgramModuleEvent(program, Properties.RuntimeError, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
-                    }
-                }
-                //
-                callback(program, isConditionSatisfied);
-                //
-                program.Engine.RoutedEventAck.Reset();
-            }
         }
 
         public bool Enabled
@@ -236,6 +144,7 @@ namespace HomeGenie.Automation
                         result = new MethodRunResult();
                         result.Exception = ex;
                     }
+                    program.IsRunning = false;
                     if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
                     {
                         // runtime error occurred, script is being disabled
@@ -249,21 +158,20 @@ namespace HomeGenie.Automation
                 }
                 catch (ThreadAbortException e)
                 {
-                    // nothing to be done here
+                    program.IsRunning = false;
                     RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Interrupted");
                 }
                 finally
                 {
-                    program.IsRunning = false;
                     program.Engine.ProgramThread = null;
                 }
             });
-            //
+
             if (program.ConditionType == ConditionType.Once)
             {
                 program.IsEnabled = false;
             }
-            //
+
             try
             {
                 program.Engine.ProgramThread.Start();
@@ -274,8 +182,6 @@ namespace HomeGenie.Automation
                 program.IsRunning = false;
                 RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
             }
-            //
-            //Thread.Sleep(100);
         }
 
         public void StopEngine()
@@ -310,7 +216,7 @@ namespace HomeGenie.Automation
             RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
             if (program.IsEnabled)
             {
-                StartProgramEvaluator(program);
+                StartProgramScheduler(program);
             }
         }
 
@@ -382,7 +288,6 @@ namespace HomeGenie.Automation
                 if (!program.IsEnabled) continue;
                 if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program.Address)))
                 {
-                    program.Engine.RoutedEventAck.Set();
                     if (program.Engine.ModuleIsChangingHandler != null)
                     {
                         bool handled = !program.Engine.ModuleIsChangingHandler(moduleHelper, moduleEvent.Parameter);
@@ -412,11 +317,20 @@ namespace HomeGenie.Automation
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
-                if (program == null || !program.IsEnabled) continue;
+                if (program == null || !program.IsEnabled || !isEngineEnabled || !isEngineRunning) continue;
                 if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                 {
                     try
                     {
+                        if (!program.IsRunning)
+                        Utility.RunAsyncTask(() =>
+                        {
+                            if (WillProgramRun(program))
+                            {
+                                Run(program, null);
+                            }
+                        });
+
                         if (program.Engine.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
                         {
                             bool handled = !program.Engine.ModuleChangedHandler(moduleHelper, moduleEvent.Parameter);
@@ -493,19 +407,100 @@ namespace HomeGenie.Automation
 
         #endregion
 
-        private void StartProgramEvaluator(ProgramBlock program)
+        private void StartProgramScheduler(ProgramBlock program)
         {
-            EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs() {
-                Program = program,
-                Callback = (ProgramBlock p, bool conditionsatisfied) =>
+            StopProgramScheduler(program);
+            program.Engine.StartupThread = new Thread(CheckProgramSchedule);
+            program.Engine.StartupThread.Start(program);
+        }
+        private void StopProgramScheduler(ProgramBlock program)
+        {
+            if (program.Engine.StartupThread != null)
+            {
+                try
                 {
-                    if (conditionsatisfied && p.IsEnabled)
-                    {
-                        Run(p, null); // that goes async too
-                    }
+                    if (!program.Engine.StartupThread.Join(1000))
+                        program.Engine.StartupThread.Abort();
+                } catch { }
+                program.Engine.StartupThread = null;
+            }
+        }
+
+        // this will ensure that the StartupCode is run at least every minute for checking scheduler conditions if any
+        private void CheckProgramSchedule(object p)
+        {
+            ProgramBlock program = (ProgramBlock)p;
+            while (isEngineRunning && program.IsEnabled)
+            {
+                Thread.Sleep((60 - DateTime.Now.Second) * 1000);
+                // the startup code is not evaluated while the program is running
+                if (program.IsRunning || !program.IsEnabled || !isEngineEnabled)
+                {
+                    continue;
                 }
-            };
-            ThreadPool.QueueUserWorkItem(new WaitCallback(EvaluateProgramCondition), evalArgs);
+                else if (WillProgramRun(program))
+                {
+                    Run(program, null);
+                }
+            }
+        }
+
+        private bool WillProgramRun(ProgramBlock program)
+        {
+            bool isConditionSatisfied = false;
+            // evaluate and get result from the code
+            lock (program.OperationLock)
+            try
+            {
+                program.WillRun = false;
+                //
+                var result = program.EvaluateCondition();
+                if (result != null && result.Exception != null)
+                {
+                    // runtime error occurred, script is being disabled
+                    // so user can notice and fix it
+                    List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, true) };
+                    program.ScriptErrors = JsonConvert.SerializeObject(error);
+                    program.IsEnabled = false;
+                    RaiseProgramModuleEvent(program, Properties.RuntimeError, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
+                }
+                else
+                {
+                    isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
+                }
+                //
+                bool lastResult = program.LastConditionEvaluationResult;
+                program.LastConditionEvaluationResult = isConditionSatisfied;
+                //
+                if (program.ConditionType == ConditionType.OnSwitchTrue)
+                {
+                    isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
+                }
+                else if (program.ConditionType == ConditionType.OnSwitchFalse)
+                {
+                    isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
+                }
+                else if (program.ConditionType == ConditionType.OnTrue || program.ConditionType == ConditionType.Once)
+                {
+                    // noop
+                }
+                else if (program.ConditionType == ConditionType.OnFalse)
+                {
+                    isConditionSatisfied = !isConditionSatisfied;
+                }
+            }
+            catch (Exception ex)
+            {
+                // a runtime error occured
+                if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)))
+                {
+                    List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(ex, true) };
+                    program.ScriptErrors = JsonConvert.SerializeObject(error);
+                    program.IsEnabled = false;
+                    RaiseProgramModuleEvent(program, Properties.RuntimeError, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
+                }
+            }
+            return isConditionSatisfied && program.IsEnabled;
         }
 
         private void program_EnabledStateChanged(object sender, bool isEnabled)
@@ -517,12 +512,11 @@ namespace HomeGenie.Automation
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
                 RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Enabled");
-                // TODO: CRITICAL
-                // TODO: we should ensure to dispose previous Evaluator Thread before starting the new one
-                StartProgramEvaluator(program);
+                StartProgramScheduler(program);
             }
             else
             {
+                StopProgramScheduler(program);
                 RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Disabled");
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();

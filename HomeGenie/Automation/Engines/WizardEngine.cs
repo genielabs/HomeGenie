@@ -158,7 +158,7 @@ namespace HomeGenie.Automation.Engines
                 {
                     switch (commands[x].Target)
                     {
-                    case "Automation":
+                    case SourceModule.Automation:
                         //
                         string cs = commands[x].CommandString;
                         switch (cs)
@@ -230,13 +230,14 @@ namespace HomeGenie.Automation.Engines
             bool returnValue = false;
             string comparisonValue = c.ComparisonValue;
             //
-            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
+            if (c.Domain == Domains.HomeAutomation_HomeGenie && (c.Target == SourceModule.Scheduler || c.Target == SourceModule.Automation) && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
             {
                 return homegenie.ProgramManager.SchedulerService.IsScheduling(c.ComparisonValue);
             }
             //
             // if the comparison value starts with ":", then the value is read from another module property
             // eg: ":HomeAutomation.X10/B3/Level"
+            //
             if (comparisonValue.StartsWith(":"))
             {
                 string[] propertyPath = comparisonValue.Substring(1).Split('/');
@@ -265,10 +266,10 @@ namespace HomeGenie.Automation.Engines
             }
             //
             // the following "Programs.*" parameters are deprecated, just left for compatibility with HG < r340
-            // Also the target "Automation" is deprecated and left for compatibility with HG < 499
+            // Also the target SourceModule.Automation is deprecated and left for compatibility with HG < 499
             //
             ModuleParameter parameter = null;
-            if (c.Domain == Domains.HomeAutomation_HomeGenie && (c.Target == SourceModule.Scheduler || c.Target == "Automation"))
+            if (c.Domain == Domains.HomeAutomation_HomeGenie && (c.Target == SourceModule.Scheduler || c.Target == SourceModule.Automation))
             {
                 parameter = new ModuleParameter();
                 parameter.Name = c.Property;

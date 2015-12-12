@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r506</Version>
+  <Version>1.1 beta r507</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fix Interface Add-On install bug (it was removing all other interfaces when installing a new one)
-  - Should fix occasional null reference exception in ValueStatistics.AddValue</ReleaseNote>
-  <ReleaseDate>2015-12-11T17:30:28.0000Z</ReleaseDate>
+  <ReleaseNote>   - Improved startup/trigger code check, now executing on every system event to ensure maximum accuracy even with Wizard scripts
+  - Fix wizard script Scheduler.CronEvent not working</ReleaseNote>
+  <ReleaseDate>2015-12-12T16:33:10.0000Z</ReleaseDate>
 </ReleaseInfo>

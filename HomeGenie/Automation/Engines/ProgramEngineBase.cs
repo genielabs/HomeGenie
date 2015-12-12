@@ -33,6 +33,7 @@ namespace HomeGenie.Automation.Engines
         protected HomeGenieService homegenie;
 
         // Main program thread
+        internal Thread StartupThread;
         internal Thread ProgramThread;
 
         // System events handlers
@@ -42,7 +43,6 @@ namespace HomeGenie.Automation.Engines
         public Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler;
         public Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler;
         public List<string> RegisteredApi = new List<string>();
-        public ManualResetEvent RoutedEventAck = new ManualResetEvent(false);
 
         public ProgramEngineBase(ProgramBlock pb)
         {

@@ -4,10 +4,12 @@ namespace HomeGenie
 {
     public static class SourceModule
     {
-        // HomeGenie System Source
+        // HomeGenie System
         public const string Master = "0";
-        // HomeGenie Scheduler Source
+        // HomeGenie Scheduler
         public const string Scheduler = "Scheduler";
+        // HomeGenie Automation
+        public const string Automation = "Automation";
     }
 }
 

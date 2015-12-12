@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+12/12/2015 v1.1-beta.507
+    - Improved startup/trigger code check, now executing on every system event to ensure maximum accuracy even with Wizard scripts
+    - Fix wizard script Scheduler.CronEvent not working
+
 11/12/2015 v1.1-beta.506
     - Fix Interface Add-On install bug (it was removing all other interfaces when installing a new one)
     - Should fix occasional null reference exception in ValueStatistics.AddValue
