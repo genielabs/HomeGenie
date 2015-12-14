@@ -759,7 +759,7 @@ namespace HomeGenie.Automation.Scripting
                 Properties.ProgramStatus,
                 "Background"
             );
-            while (this.IsEnabled)
+            while (homegenie.ProgramManager.Enabled && this.IsEnabled)
             {
                 Thread.Sleep(1000);
             }

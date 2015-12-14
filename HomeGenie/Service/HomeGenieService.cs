@@ -139,7 +139,7 @@ namespace HomeGenie.Service
             // it will check every 24 hours
             updateChecker.Start();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             Start();
         }
 
@@ -209,7 +209,8 @@ namespace HomeGenie.Service
             if (migService != null) migService.StopService();
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "MIG Service STOPPED");
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "ProgramEngine STOPPING");
-            if (masterControlProgram != null) masterControlProgram.StopEngine();
+            if (masterControlProgram != null)
+                masterControlProgram.Enabled = false;
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "ProgramEngine STOPPED");
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STOPPED");
 
@@ -962,7 +963,6 @@ namespace HomeGenie.Service
             if (masterControlProgram != null)
             {
                 masterControlProgram.Enabled = false;
-                masterControlProgram.StopEngine();
                 masterControlProgram = null;
             }
             masterControlProgram = new ProgramManager(this);
@@ -1026,7 +1026,6 @@ namespace HomeGenie.Service
             try
             {
                 masterControlProgram.Enabled = false;
-                masterControlProgram.StopEngine();
                 // delete old programs assemblies
                 foreach (var program in masterControlProgram.Programs)
                 {
@@ -1602,7 +1601,7 @@ namespace HomeGenie.Service
             string presentationUrl = "http://" + address + ":" + bindport;
             //string friendlyName = "HomeGenie: " + Environment.MachineName;
             string manufacturer = "G-Labs";
-            string manufacturerUrl = "http://generoso.info/";
+            string manufacturerUrl = "http://genielabs.github.io/HomeGenie/";
             string modelName = "HomeGenie";
             string modelDescription = "HomeGenie Home Automation Server";
             //string modelURL = "http://homegenie.it/";

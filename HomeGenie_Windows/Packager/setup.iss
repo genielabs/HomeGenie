@@ -4,10 +4,10 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.1 beta (r505)
+AppVerName=HomeGenie 1.1 beta (r507)
 AppPublisher=GenieLabs
 AppPublisherURL=http://www.homegenie.it
-AppVersion=1.1 beta (r505)
+AppVersion=1.1 beta (r507)
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
@@ -198,8 +198,8 @@ Type: files; Name: "{app}\SQLite.Interop.dll";
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Icons]
-Name: "{group}\HomeGenie 1.1 beta (r505)"; Filename: "{app}\HomeGenieManager.exe"
-Name: "{group}\Uninstall HomeGenie 1.1 beta (r505)"; Filename: "{uninstallexe}"
+Name: "{group}\HomeGenie 1.1 beta (r507)"; Filename: "{app}\HomeGenieManager.exe"
+Name: "{group}\Uninstall HomeGenie 1.1 beta (r507)"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\HomeGenie"; Filename: "{app}\HomeGenieManager.exe"
 
 [Run]
@@ -215,3 +215,4 @@ Filename: "{app}\HomeGenieManager.exe"; WorkingDir: "{app}"; Flags: nowait shell
 [UninstallRun]
 Filename: net.exe; Parameters: "stop HomeGenieService"; StatusMsg: "Stopping HomeGenie Service..."; Flags: waituntilterminated runhidden
 Filename: "{app}\HomeGenieService.exe"; Parameters: "--uninstall"; StatusMsg: "Unregistering HomeGenie Service..."; WorkingDir: "{app}"; Flags: waituntilterminated runhidden
+

@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.245454Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.109389Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -255,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.261897Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.256284Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -429,7 +429,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.333313Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.464015Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -501,7 +501,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.348316Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.195241Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1117,7 +1117,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.430432Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.408568Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1164,7 +1164,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:36.538223Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.254111Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1513,7 +1513,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:36.745841Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.476944Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1521,7 +1521,8 @@ while (Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpSleep", "Send to sleep after given delay (seconds, 0=disabled)", "slider:0:60:1");
+    <ScriptCondition>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpAlwaysAwake", "Set node as always awake", "checkbox");
+Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpSleep", "Send to sleep after given delay (seconds, 0=disabled)", "slider:0:60:1");
 Program.Run();
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
@@ -1595,13 +1596,21 @@ Program.Run();
           module.Command("Basic.Get").Execute();
           Pause(.2);
         }
-        // no more info, send the node to sleep
-        var sendToSleepDelay = module.Parameter("HomeGenie.ZWaveWakeUpSleep").DecimalValue;
-        if (sendToSleepDelay &gt; 0)
+        if (module.HasFeature("HomeGenie.ZWaveWakeUpAlwaysAwake"))
         {
-          Pause(sendToSleepDelay);
-          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Send to Sleep");
-          module.Command("WakeUp.SendToSleep").Execute();
+          module.Command("WakeUp.SetAlwaysAwake").Set("1");
+        }
+        else
+        {
+          module.Command("WakeUp.SetAlwaysAwake").Set("0");
+	      // no more info, send the node to sleep
+          var sendToSleepDelay = module.Parameter("HomeGenie.ZWaveWakeUpSleep").DecimalValue;
+          if (sendToSleepDelay &gt; 0)
+          {
+            Pause(sendToSleepDelay);
+            Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Send to Sleep");
+            module.Command("WakeUp.SendToSleep").Execute();
+          }
         }
       }
     }
@@ -1619,6 +1628,13 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features>
       <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>DoorWindow,DoorLock,Thermostat,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveWakeUpAlwaysAwake</Property>
+        <Description>Set node as always awake</Description>
+      </ProgramFeature>
+      <ProgramFeature>
         <FieldType>slider:0:60:1</FieldType>
         <ForDomains>HomeAutomation.ZWave</ForDomains>
         <ForTypes>DoorWindow,DoorLock,Thermostat,Sensor</ForTypes>
@@ -1626,8 +1642,8 @@ Program.GoBackground();</ScriptSource>
         <Description>Send to sleep after given delay (seconds, 0=disabled)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:36.736467Z</TriggerTime>
+    <ActivationTime>2015-12-13T15:04:46.89171Z</ActivationTime>
+    <TriggerTime>2015-12-13T15:04:46.923749Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1682,7 +1698,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.012061Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.647729Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1791,7 +1807,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.026948Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.449587Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2129,7 +2145,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.173839Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.56823Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2227,7 +2243,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.466047Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.381953Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2376,7 +2392,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.671966Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.285619Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2623,7 +2639,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.676424Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.277269Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6871,7 +6887,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:37.892342Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.184806Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7584,7 +7600,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-04T11:41:38.064393Z</TriggerTime>
+    <TriggerTime>2015-12-13T15:04:01.24517Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

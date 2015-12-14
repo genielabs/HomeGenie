@@ -282,7 +282,7 @@ Global
 		$42.NamingStyle = PascalCase
 		$42.IncludeInstanceMembers = True
 		$42.IncludeStaticEntities = True
-		version = 1.0
+		version = 1.1
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -600,9 +600,9 @@ HG.WebApp.ProgramEdit.RefreshCodeMirror = function () {
 
     // refresh editors
     setTimeout(function () {
-        editor1.refresh();
-        editor2.refresh();
-        editor3.refresh();
+        if (editor1 != null) editor1.refresh();
+        if (editor2 != null) editor2.refresh();
+        if (editor3 != null) editor3.refresh();
     }, 500);
 
 };

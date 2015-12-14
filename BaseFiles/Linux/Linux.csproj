@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Linux</RootNamespace>
     <AssemblyName>Linux</AssemblyName>
-    <ReleaseVersion>1.0</ReleaseVersion>
+    <ReleaseVersion>1.1</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

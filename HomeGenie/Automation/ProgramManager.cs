@@ -64,7 +64,7 @@ namespace HomeGenie.Automation
     {
         private TsList<ProgramBlock> automationPrograms = new TsList<ProgramBlock>();
         private HomeGenieService homegenie = null;
-        private SchedulerService scheduler = null;
+        private SchedulerService schedulerService = null;
         private MacroRecorder macroRecorder = null;
 
         public class RoutedEvent
@@ -75,7 +75,6 @@ namespace HomeGenie.Automation
         }
 
         //private object lockObject = new object();
-        private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
 
@@ -83,14 +82,34 @@ namespace HomeGenie.Automation
         {
             homegenie = hg;
             macroRecorder = new MacroRecorder(this);
-            scheduler = new SchedulerService(this);
-            scheduler.Start();
+            schedulerService = new SchedulerService(this);
         }
 
         public bool Enabled
         {
             get { return isEngineEnabled; }
-            set { isEngineEnabled = value; }
+            set 
+            {
+                bool wasEnabled = isEngineEnabled;
+                isEngineEnabled = value; 
+                if (wasEnabled && !isEngineEnabled)
+                {
+                    schedulerService.Stop();
+                    foreach (ProgramBlock program in automationPrograms)
+                    {
+                        program.Engine.Stop();
+                    }
+                }
+                else if (!wasEnabled && isEngineEnabled)
+                {
+                    schedulerService.Start();
+                    foreach (ProgramBlock program in automationPrograms)
+                    {
+                        if (program.IsEnabled)
+                            StartProgramScheduler(program);
+                    }
+                }
+            }
         }
 
         public HomeGenieService HomeGenie
@@ -105,7 +124,7 @@ namespace HomeGenie.Automation
 
         public SchedulerService SchedulerService
         {
-            get { return scheduler; }
+            get { return schedulerService; }
         }
 
         public List<ProgramError> CompileScript(ProgramBlock program)
@@ -154,7 +173,7 @@ namespace HomeGenie.Automation
                         program.IsEnabled = false;
                         RaiseProgramModuleEvent(program, Properties.RuntimeError, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                     }
-                    RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
+                    RaiseProgramModuleEvent(program, Properties.ProgramStatus, program.IsEnabled ? "Idle" : "Stopped");
                 }
                 catch (ThreadAbortException e)
                 {
@@ -184,16 +203,6 @@ namespace HomeGenie.Automation
             }
         }
 
-        public void StopEngine()
-        {
-            isEngineRunning = false;
-            scheduler.Stop();
-            foreach (ProgramBlock program in automationPrograms)
-            {
-                program.Engine.Stop();
-            }
-        }
-
         public TsList<ProgramBlock> Programs { get { return automationPrograms; } }
 
         public int GeneratePid()
@@ -212,9 +221,8 @@ namespace HomeGenie.Automation
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
             program.Engine.SetHost(homegenie);
-            // Initialize state
-            RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
-            if (program.IsEnabled)
+            RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Added");
+            if (isEngineEnabled && program.IsEnabled)
             {
                 StartProgramScheduler(program);
             }
@@ -222,6 +230,7 @@ namespace HomeGenie.Automation
 
         public void ProgramRemove(ProgramBlock program)
         {
+            RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Removed");
             program.IsEnabled = false;
             program.Engine.Stop();
             automationPrograms.Remove(program);
@@ -317,20 +326,12 @@ namespace HomeGenie.Automation
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
-                if (program == null || !program.IsEnabled || !isEngineEnabled || !isEngineRunning) continue;
+                if (program == null || !program.IsEnabled || !isEngineEnabled) continue;
                 if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                 {
                     try
                     {
-                        if (!program.IsRunning)
-                        Utility.RunAsyncTask(() =>
-                        {
-                            if (WillProgramRun(program))
-                            {
-                                Run(program, null);
-                            }
-                        });
-
+                        program.Engine.RoutedEventAck.Set();
                         if (program.Engine.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
                         {
                             bool handled = !program.Engine.ModuleChangedHandler(moduleHelper, moduleEvent.Parameter);
@@ -410,6 +411,7 @@ namespace HomeGenie.Automation
         private void StartProgramScheduler(ProgramBlock program)
         {
             StopProgramScheduler(program);
+            RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
             program.Engine.StartupThread = new Thread(CheckProgramSchedule);
             program.Engine.StartupThread.Start(program);
         }
@@ -419,6 +421,7 @@ namespace HomeGenie.Automation
             {
                 try
                 {
+                    program.Engine.RoutedEventAck.Set();
                     if (!program.Engine.StartupThread.Join(1000))
                         program.Engine.StartupThread.Abort();
                 } catch { }
@@ -430,9 +433,11 @@ namespace HomeGenie.Automation
         private void CheckProgramSchedule(object p)
         {
             ProgramBlock program = (ProgramBlock)p;
-            while (isEngineRunning && program.IsEnabled)
+            // set initial state to signaled
+            program.Engine.RoutedEventAck.Set();
+            while (isEngineEnabled && program.IsEnabled)
             {
-                Thread.Sleep((60 - DateTime.Now.Second) * 1000);
+                program.Engine.RoutedEventAck.WaitOne((60 - DateTime.Now.Second) * 1000);
                 // the startup code is not evaluated while the program is running
                 if (program.IsRunning || !program.IsEnabled || !isEngineEnabled)
                 {

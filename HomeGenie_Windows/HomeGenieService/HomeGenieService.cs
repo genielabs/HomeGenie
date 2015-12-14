@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -43,8 +43,7 @@ namespace HomeGenieService
     class HomeGenieService : ServiceBase
     {
         private Process homegenie = null;
-        //private ServiceHost serviceManager = null;
-        //
+
         public HomeGenieService()
         {
             this.ServiceName = "HomeGenie";
@@ -54,8 +53,7 @@ namespace HomeGenieService
             this.CanShutdown = true;
             this.CanStop = true;
         }
-
-
+        
         protected override void OnStart(string[] args)
         {
             base.OnStart(args);
@@ -70,13 +68,12 @@ namespace HomeGenieService
             base.OnStop();
         }
 
-
         private void StartHomeGenie()
         {
-            ThreadPool.QueueUserWorkItem(new WaitCallback(HomeGenieProcess));
+            new Thread(() => { StartHomeGenieProcess(); }).Start();
         }
 
-        private void HomeGenieProcess(object o)
+        private void StartHomeGenieProcess()
         {
             homegenie = new Process();
             homegenie.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenie.exe");
@@ -84,35 +81,22 @@ namespace HomeGenieService
             homegenie.StartInfo.UseShellExecute = false;
             homegenie.Start();
             homegenie.WaitForExit();
-            //
-            // if ExitCode is 1 then a restart has been required
-            //if (homegenie.ExitCode == 1)
-            //{
-            //    
-                Thread.Sleep(2000);
+            int exitCode = homegenie.ExitCode;
+            // if ExitCode is 1 then a restart was requested
+            if (exitCode == 1)
+            {
                 StartHomeGenie();
-            //}
+            }
         }
 
         private void StopHomeGenie()
         {
             if (homegenie != null)
             {
-                try
-                {
-                    homegenie.Kill();
-                }
-                catch { }
-                try
-                {
-                    homegenie.Dispose();
-                }
-                catch { }
+                try { homegenie.Kill(); } catch { }
             }
-            homegenie = null;
         }
-
-
+        
     }
 
     [RunInstaller(true)]
@@ -171,3 +155,4 @@ namespace HomeGenieService
     }
 
 }
+

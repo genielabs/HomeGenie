@@ -3,7 +3,8 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r507</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Improved startup/trigger code check, now executing on every system event to ensure maximum accuracy even with Wizard scripts
-  - Fix wizard script Scheduler.CronEvent not working</ReleaseNote>
-  <ReleaseDate>2015-12-12T16:33:10.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added "Set node as always awake" option to Z-Wave Query on WakeUp program
+  - Improved startup/trigger code check, now executing on every system event to ensure maximum accuracy even with Wizard scripts
+  - Fix wizard script "Scheduler.CronEvent" condition not working</ReleaseNote>
+  <ReleaseDate>2015-12-13T15:26:10.0000Z</ReleaseDate>
 </ReleaseInfo>

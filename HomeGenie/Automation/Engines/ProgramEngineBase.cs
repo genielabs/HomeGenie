@@ -43,6 +43,7 @@ namespace HomeGenie.Automation.Engines
         public Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler;
         public Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler;
         public List<string> RegisteredApi = new List<string>();
+        public AutoResetEvent RoutedEventAck = new AutoResetEvent(false);
 
         public ProgramEngineBase(ProgramBlock pb)
         {
