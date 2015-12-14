@@ -38,7 +38,7 @@ sudo apt-get install ca-certificates-mono
 # Embedded speech synthesys engine
 sudo apt-get install libttspico-utils
 # Arduino™ programming from *HG* program editor
-sudo apt-get install arduino-mk, empty-expect
+sudo apt-get install arduino-mk empty-expect
 ```
 
 **Note** *HomeGenie requires mono runtime version 3.2 or later.*
