@@ -785,6 +785,10 @@
         "Upload",
     "common_select_none":
         "None",
+    "common_command_exit":
+        "Exit",
+    "common_command_close":
+        "Close",
 "##":
 "## SIDE MENU LOCALES",
 "##":

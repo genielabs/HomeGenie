@@ -14,55 +14,55 @@
   CalendarPopup: null,
   HelpPopup: null,
   Initialized: false,
-  
+
   Timebar: null,
   TimebarElement: null,
   TimebarWidth: 530,
-  TimebarHeight: 40,
+  TimebarHeight: 50,
   TimebarResolution: 5,
-  
+
   CalendarData: '',
   CurrentProgram: 0,
   Groups: [ 
     { 
-        'Table': 'Level', 
-        'Actions': [
-            { id: '0', localeId: 'timetable_levelmode_off', description: 'Off', color: '#222' },
-            { id: '1', localeId: 'timetable_levelmode_10', description: '10%', color: '#663' },
-            { id: '2', localeId: 'timetable_levelmode_20', description: '20%', color: '#773' },
-            { id: '3', localeId: 'timetable_levelmode_30', description: '30%', color: '#884' },
-            { id: '4', localeId: 'timetable_levelmode_40', description: '40%', color: '#994' },
-            { id: '5', localeId: 'timetable_levelmode_50', description: '50%', color: '#AA4' },
-            { id: '6', localeId: 'timetable_levelmode_60', description: '60%', color: '#BB5' },
-            { id: '7', localeId: 'timetable_levelmode_70', description: '70%', color: '#CC5' },
-            { id: '8', localeId: 'timetable_levelmode_80', description: '80%', color: '#DD6' },
-            { id: '9', localeId: 'timetable_levelmode_90', description: '90%', color: '#EE7' },
-            { id: 'A', localeId: 'timetable_levelmode_100', description: '100%', color: '#FF8' }
-        ]
+      'Table': 'Level', 
+      'Actions': [
+        { id: '0', localeId: 'timetable_levelmode_off', description: 'Off', color: '#222' },
+        { id: '1', localeId: 'timetable_levelmode_10', description: '10%', color: '#663' },
+        { id: '2', localeId: 'timetable_levelmode_20', description: '20%', color: '#773' },
+        { id: '3', localeId: 'timetable_levelmode_30', description: '30%', color: '#884' },
+        { id: '4', localeId: 'timetable_levelmode_40', description: '40%', color: '#994' },
+        { id: '5', localeId: 'timetable_levelmode_50', description: '50%', color: '#AA4' },
+        { id: '6', localeId: 'timetable_levelmode_60', description: '60%', color: '#BB5' },
+        { id: '7', localeId: 'timetable_levelmode_70', description: '70%', color: '#CC5' },
+        { id: '8', localeId: 'timetable_levelmode_80', description: '80%', color: '#DD6' },
+        { id: '9', localeId: 'timetable_levelmode_90', description: '90%', color: '#EE7' },
+        { id: 'A', localeId: 'timetable_levelmode_100', description: '100%', color: '#FF8' }
+      ]
     },
     {
-        'Table': 'Therm',
-        'Actions': [ 
-            { id: '0', localeId: 'timetable_thermmode_off', description: 'Off', color: '#222' },
-            { id: '1', localeId: 'timetable_thermmode_heat', description: 'Heat', color: '#E33' },
-            { id: '2', localeId: 'timetable_thermmode_cool', description: 'Cool', color: '#77F' },
-            { id: '3', localeId: 'timetable_thermmode_auto', description: 'Auto', color: '#493' },
-            { id: '4', localeId: 'timetable_thermmode_fanonly', description: 'Fan Only', color: '#8A8' },
-            { id: '5', localeId: 'timetable_thermmode_autochangeover', description: 'Auto Changeover', color: '#A6F' },
-            { id: '6', localeId: 'timetable_thermmode_heateco', description: 'Heat Economy', color: '#B55' },
-            { id: '7', localeId: 'timetable_thermmode_cooleco', description: 'Cool Economy', color: '#66A' },
-            { id: '8', localeId: 'timetable_thermmode_away', description: 'Away', color: '#CCC' }
-        ]
+      'Table': 'Therm',
+      'Actions': [ 
+        { id: '0', localeId: 'timetable_thermmode_off', description: 'Off', color: '#222' },
+        { id: '1', localeId: 'timetable_thermmode_heat', description: 'Heat', color: '#E33' },
+        { id: '2', localeId: 'timetable_thermmode_cool', description: 'Cool', color: '#77F' },
+        { id: '3', localeId: 'timetable_thermmode_auto', description: 'Auto', color: '#493' },
+        { id: '4', localeId: 'timetable_thermmode_fanonly', description: 'Fan Only', color: '#8A8' },
+        { id: '5', localeId: 'timetable_thermmode_autochangeover', description: 'Auto Changeover', color: '#A6F' },
+        { id: '6', localeId: 'timetable_thermmode_heateco', description: 'Heat Economy', color: '#B55' },
+        { id: '7', localeId: 'timetable_thermmode_cooleco', description: 'Cool Economy', color: '#66A' },
+        { id: '8', localeId: 'timetable_thermmode_away', description: 'Away', color: '#CCC' }
+      ]
     },
     {
-        'Table': 'OnOff',
-        'Actions': [
-            { id: '0', localeId: 'timetable_onoffmode_off', description: 'Off', color: '#222' },
-            { id: '1', localeId: 'timetable_onoffmode_on', description: 'On', color: '#5F5' }
-        ]
+      'Table': 'OnOff',
+      'Actions': [
+        { id: '0', localeId: 'timetable_onoffmode_off', description: 'Off', color: '#222' },
+        { id: '1', localeId: 'timetable_onoffmode_on', description: 'On', color: '#5F5' }
+      ]
     }
   ],
-  
+
   CurrentSlice: null,
 
   RenderView: function (cuid, module) {
@@ -90,20 +90,20 @@
         minDate: new Date(year, 0, 1),
         maxDate: new Date(year, 11, 31),
         onSelect: function(dateText, inst) {
-            var day = _this.GetDayIndex(inst.selectedDay, inst.selectedMonth);
-            var dv = parseInt(_this.CalendarData[day]);
-            if (dv >= 3) dv = 0; else dv++;
-            _this.CalendarData = _this.CalendarData.substr(0, day) + dv.toString() + _this.CalendarData.substr(day + 1);
-            _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('refresh');
+          var day = _this.GetDayIndex(inst.selectedDay, inst.selectedMonth);
+          var dv = parseInt(_this.CalendarData[day]);
+          if (dv >= 3) dv = 0; else dv++;
+          _this.CalendarData = _this.CalendarData.substr(0, day) + dv.toString() + _this.CalendarData.substr(day + 1);
+          _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('refresh');
         },
         beforeShowDay: function(d) {
-            var day = _this.GetDayIndex(d.getDate(), d.getMonth());
-            var dayClass = _this.CalendarData.substr(day, 1);
-            if ((d.getDay() == 6 || d.getDay() == 0) && dayClass == '0')
-                dayClass = 'ui-datepicker-daywe'; // weekend
-            else
-                dayClass = 'ui-datepicker-day' + dayClass; 
-            return [true, dayClass, 'Day nr.' + (day + 1)];
+          var day = _this.GetDayIndex(d.getDate(), d.getMonth());
+          var dayClass = _this.CalendarData.substr(day, 1);
+          if ((d.getDay() == 6 || d.getDay() == 0) && dayClass == '0')
+            dayClass = 'ui-datepicker-daywe'; // weekend
+          else
+            dayClass = 'ui-datepicker-day' + dayClass; 
+          return [true, dayClass, 'Day nr.' + (day + 1)];
         }
       });
       var userLang = HG.WebApp.Locales.GetUserLanguage();
@@ -112,8 +112,8 @@
         type: "GET",
         dataType: "text",
         success: function (data) {
-           eval(data);
-           _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('option', $.datepicker.regional[userLang]);
+          eval(data);
+          _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('option', $.datepicker.regional[userLang]);
         }
       });
       // END jQuery UI Calendar initialization
@@ -121,22 +121,6 @@
       //
       // ui events handlers
       //
-      // table select tab buttons
-      this.Widget.find('[data-ui-field=btn-page-shutters]').click(function(el){
-        _this.Widget.find('[data-ui-field^=table-group-]').hide();
-        _this.Widget.find('[data-ui-field=table-group-0]').show();
-        _this.SetTableId(_this.CurrentProgram);
-      });
-      this.Widget.find('[data-ui-field=btn-page-thermostats]').click(function(el){
-        _this.Widget.find('[data-ui-field^=table-group-]').hide();
-        _this.Widget.find('[data-ui-field=table-group-1]').show();
-        _this.SetTableId(_this.CurrentProgram);
-      });
-      this.Widget.find('[data-ui-field=btn-page-lights]').click(function(el){
-        _this.Widget.find('[data-ui-field^=table-group-]').hide();
-        _this.Widget.find('[data-ui-field=table-group-2]').show();
-        _this.SetTableId(_this.CurrentProgram);
-      });
       // popup values on open
       this.ControlPopup.on('popupbeforeposition', function(evt, ui){
         // TODO: resize width to best fit content
@@ -148,36 +132,26 @@
           type: "GET",
           dataType: "text",
           success: function (data) {
-             _this.CalendarData = eval(data)[0].ResponseValue;
-             _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('refresh');
+            _this.CalendarData = eval(data)[0].ResponseValue;
+            _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('refresh');
             $.mobile.loading('hide');
           }
         });
       });
-      this.Widget.find('[data-ui-field=btn-table-select]').click(function(el){
-        var id = parseInt($(this).html() - 1);
-        _this.CurrentProgram = id;
-        _this.Widget.find('[data-ui-field=btn-table-select]').removeClass('ui-btn-active');
-        _this.Widget.find('[data-ui-field=btn-table-select]').eq(id).addClass('ui-btn-active');
-        _this.SetTableId(id);
-      });
       this.Widget.find('[data-ui-field=btn-table-help]').click(function(el){
         _this.HelpPopup.popup('open');
-      });
-      this.Widget.find('[data-ui-field=btn-table-calendar]').click(function(el){
-        _this.CalendarPopup.popup('open');
       });
       this.CalendarPopup.find('[data-ui-field=btn_calendar_save]').click(function(el){
         $.mobile.loading('show', { text: 'Saving Calendar', textVisible: true });
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Calendar.Set',
-            type: 'POST',
-            data: _this.CalendarData,
-            dataType: 'text',
-            success: function (data) {
-                _this.CalendarPopup.popup('close');
-                $.mobile.loading('hide');
-            }
+          url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Calendar.Set',
+          type: 'POST',
+          data: _this.CalendarData,
+          dataType: 'text',
+          success: function (data) {
+            _this.CalendarPopup.popup('close');
+            $.mobile.loading('hide');
+          }
         });    
       });
       this.ControlPopup.find('[data-ui-field=select_action]').change(function() {
@@ -194,38 +168,74 @@
         request += '/' + slotRangeStart + '/' + slotRangeEnd;
         $.mobile.loading('show', { text: 'Saving table', textVisible: true });
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Set',
-            type: 'POST',
-            data: request,
-            dataType: 'text',
-            success: function (data) {
-                _this.SetTable(_this.TimebarElement, _this.TimebarElement.table);
-                _this.ControlPopup.popup('close');
-            }
+          url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Set',
+          type: 'POST',
+          data: request,
+          dataType: 'text',
+          success: function (data) {
+            _this.SetTable(_this.TimebarElement, _this.TimebarElement.table);
+            _this.ControlPopup.popup('close');
+          }
         });
       });
-      //
+
+      // BEGIN Programs page initialization
+      var programsPageContainer = container.parent().parent().parent(); // $(document.body); //
+      this.ProgramsPage = container.find('[data-ui-field=timetable-programs-page]').detach();
+      programsPageContainer.find('[data-ui-field=timetable-programs-page]').detach();
+      programsPageContainer.append(this.ProgramsPage.get(0));
+      // program change button
+      this.ProgramsPage.find('[data-ui-field=btn-table-select]').click(function(el){
+        var id = parseInt($(this).html() - 1);
+        _this.CurrentProgram = id;
+        _this.ProgramsPage.find('[data-ui-field=btn-table-select]').removeClass('ui-btn-active');
+        _this.ProgramsPage.find('[data-ui-field=btn-table-select]').eq(id).addClass('ui-btn-active');
+        _this.SetTableId(id);
+      });
       // timebar initialization
-      //
-      this.timebar_level_s = this.Widget.find('[data-ui-field=timebar_level_s]');
+      this.timebar_level_modules = this.ProgramsPage.find('[data-ui-field=timebar_level_modules]');
+      this.timebar_level_s = this.ProgramsPage.find('[data-ui-field=timebar_level_s]');
       this.timebar_level_s.paper = Raphael(this.timebar_level_s.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_level_s.group = 0;
-      this.timebar_level_d = this.Widget.find('[data-ui-field=timebar_level_d]');
+      this.timebar_level_d = this.ProgramsPage.find('[data-ui-field=timebar_level_d]');
       this.timebar_level_d.paper = Raphael(this.timebar_level_d.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_level_d.group = 0;
-      this.timebar_therm_s = this.Widget.find('[data-ui-field=timebar_therm_s]');
+      this.timebar_therm_modules = this.ProgramsPage.find('[data-ui-field=timebar_therm_modules]');
+      this.timebar_therm_s = this.ProgramsPage.find('[data-ui-field=timebar_therm_s]');
       this.timebar_therm_s.paper = Raphael(this.timebar_therm_s.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_therm_s.group = 1;
-      this.timebar_therm_d = this.Widget.find('[data-ui-field=timebar_therm_d]');
+      this.timebar_therm_d = this.ProgramsPage.find('[data-ui-field=timebar_therm_d]');
       this.timebar_therm_d.paper = Raphael(this.timebar_therm_d.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_therm_d.group = 1;
-      this.timebar_onoff_s = this.Widget.find('[data-ui-field=timebar_onoff_s]');
+      this.timebar_onoff_modules = this.ProgramsPage.find('[data-ui-field=timebar_onoff_modules]');
+      this.timebar_onoff_s = this.ProgramsPage.find('[data-ui-field=timebar_onoff_s]');
       this.timebar_onoff_s.paper = Raphael(this.timebar_onoff_s.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_onoff_s.group = 2;
-      this.timebar_onoff_d = this.Widget.find('[data-ui-field=timebar_onoff_d]');
+      this.timebar_onoff_d = this.ProgramsPage.find('[data-ui-field=timebar_onoff_d]');
       this.timebar_onoff_d.paper = Raphael(this.timebar_onoff_d.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_onoff_d.group = 2;
-      this.SetTableId(this.CurrentProgram);
+      // open/close timetable programs settings page
+      this.Widget.find('[data-ui-field=btn-programs-open]').click(function(el){
+        $('[data-ui-field=wallpaper]').addClass("blur-filter");
+        $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
+        $(document.body).css('overflow', 'hidden');
+        _this.ProgramsPage.slideDown(500);
+        setTimeout(function(){
+          _this.ProgramsPage.scrollTop(0);
+          _this.SetTableId(_this.CurrentProgram);
+        }, 550);
+      });
+      this.ProgramsPage.find('[data-ui-field=btn-programs-close]').click(function(el){
+        $(document.body).css('overflow', 'auto');
+        $('[data-ui-field=homegenie_panel_button]').removeClass('ui-disabled');
+        $('[data-ui-field=wallpaper]').removeClass("blur-filter");
+        _this.ProgramsPage.slideUp(500);
+      });
+      this.ProgramsPage.find('[data-ui-field=btn-table-calendar]').click(function(el){
+        _this.CalendarPopup.popup('open');
+      });
+      // END
+
     }
     //
     if (lastupdatetime > 0)
@@ -233,6 +243,89 @@
       this.UpdateTime = HG.WebApp.Utility.FormatDate(lastupdatetime) + ' ' + HG.WebApp.Utility.FormatDateTime(lastupdatetime);
     }
     this.Widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + statusInfo + '</span>');
+  },
+
+  GetModules: function() {
+    var _this = this;
+    $.mobile.loading('show', { text: 'Loading modules', textVisible: true });
+    $.ajax({
+      url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.GetModules/', // + this.Groups[el.group].Table + '.' + el.table,
+      type: 'GET',
+      success: function (mods) {
+        //table = eval(data)[0].ResponseValue;
+        //console.log(mods);
+        _this.timebar_level_modules.empty();
+        _this.timebar_therm_modules.empty();
+        _this.timebar_onoff_modules.empty();
+        $.each(mods, function(i, m){
+          var item = $('<div style="display:table-row" />');
+          item.append('<div style="width:280px;display:table-cell;overflow:hidden;padding-left:4px;" align="left">'+m.Name+'</div>');
+          var flags = $('<div style="width:250px;display:table-cell;overflow:hidden" align="right" class="ui-mini" />');
+          item.append(flags);
+          var flagEnabled = $('<a href="#" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-check timetable-typeflag'+(m.Enabled?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
+          var flagCheckDST = $('<a href="#" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-clock timetable-typeflag'+(m.CheckDST?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
+          var flagRepeat = $('<a href="#" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-refresh timetable-typeflag'+(m.Repeat?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
+          var flagWeekday = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Workday===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day1':'')+'">W</a>');
+          var flagWeekend = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Weekend===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-daywe':'')+'">E</a>');
+          var flagHoliday = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Holiday===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day2':'')+'">H</a>');
+          var flagSpecial = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Special===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day3':'')+'">S</a>');
+          flags.append(flagEnabled);
+          flags.append(flagCheckDST);
+          flags.append(flagRepeat);
+          flags.append(flagWeekday);
+          flags.append(flagWeekend);
+          flags.append(flagHoliday);
+          flags.append(flagSpecial);
+          flagEnabled.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Enable', $(this).hasClass('ui-btn-active')?'':'On', function(){
+              _this.GetModules();
+            });
+          });
+          flagCheckDST.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.CheckDST', $(this).hasClass('ui-btn-active')?'':'On', function(){
+              _this.GetModules();
+            });
+          });
+          flagRepeat.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Repeat', $(this).hasClass('ui-btn-active')?'':'On', function(){
+              _this.GetModules();
+            });
+          });
+          flagWeekday.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Workday', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
+              _this.GetModules();
+            });
+          });
+          flagWeekend.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Weekend', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
+              _this.GetModules();
+            });
+          });
+          flagHoliday.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Holiday', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
+              _this.GetModules();
+            });
+          });
+          flagSpecial.on('click', function() {
+            HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Special', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
+              _this.GetModules();
+            });
+          });
+          switch (m.Type) {
+            case 'Level':
+              _this.timebar_level_modules.append(item);
+              break;
+            case 'Therm':
+              _this.timebar_therm_modules.append(item);
+              break;
+            case 'OnOff':
+              _this.timebar_onoff_modules.append(item);
+              break;
+          }
+        });
+        $.mobile.loading('hide');
+      }
+    });      
   },
   
   GetDayIndex: function(day, month) {
@@ -244,7 +337,7 @@
     if (!this.IsLeapYear() && month > 1) dayIndex++;
     return dayIndex;
   },
-  
+
   IsLeapYear: function() {
     // returns true if current year is a leap year
     var year = (new Date).getFullYear();
@@ -252,12 +345,14 @@
   },
 
   SetTableId: function(id) {
-      this.SetTable(this.timebar_level_s, id);
-      this.SetTable(this.timebar_level_d, id+'.DST');
-      this.SetTable(this.timebar_therm_s, id);
-      this.SetTable(this.timebar_therm_d, id+'.DST');
-      this.SetTable(this.timebar_onoff_s, id);
-      this.SetTable(this.timebar_onoff_d, id+'.DST');
+    this.SetTable(this.timebar_level_s, id);
+    this.SetTable(this.timebar_level_d, id+'.DST');
+    this.SetTable(this.timebar_therm_s, id);
+    this.SetTable(this.timebar_therm_d, id+'.DST');
+    this.SetTable(this.timebar_onoff_s, id);
+    this.SetTable(this.timebar_onoff_d, id+'.DST');
+    // refresh modules list
+    this.GetModules();
   },
 
   SetTable: function(el, id) {
@@ -267,28 +362,28 @@
     var table = '';
     $.mobile.loading('show', { text: 'Loading table', textVisible: true });
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Get/' + this.Groups[el.group].Table + '.' + el.table,
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            table = eval(data)[0].ResponseValue;
-            _this.DrawTimetable(el, true, table);
-            $.mobile.loading('hide');
-        }
+      url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Get/' + this.Groups[el.group].Table + '.' + el.table,
+      type: 'GET',
+      dataType: 'text',
+      success: function (data) {
+        table = eval(data)[0].ResponseValue;
+        _this.DrawTimetable(el, true, table);
+        $.mobile.loading('hide');
+      }
     });    
   },
-  
+
   SetTableGroup: function(id) {
     // change popup title and description
     var description = '';
     switch(id) {
-    case 0:
+      case 0:
         description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_shutters', 'Shutters and Dimmers');
         break;
-    case 1:
+      case 1:
         description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_thermostats', 'Thermostats');
         break;
-    case 2:
+      case 2:
         description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_lights', 'Lights and Switches');
         break;
     }
@@ -300,25 +395,25 @@
     actions.empty();
     for (var i = 0; i < this.Groups[id].Actions.length; i++)
     {
-        var title = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, this.Groups[id].Actions[i].localeId, this.Groups[id].Actions[i].description);
-        actions.append('<option value="' + this.Groups[id].Actions[i].id + '" data-option-color="' + this.Groups[id].Actions[i].color + '" style="padding-left:5px;border-left:solid 30px ' + this.Groups[id].Actions[i].color + '">' + title + '</option>');
+      var title = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, this.Groups[id].Actions[i].localeId, this.Groups[id].Actions[i].description);
+      actions.append('<option value="' + this.Groups[id].Actions[i].id + '" data-option-color="' + this.Groups[id].Actions[i].color + '" style="padding-left:5px;border-left:solid 30px ' + this.Groups[id].Actions[i].color + '">' + title + '</option>');
     }
     actions.selectmenu('refresh', true);
   },
-  
+
   GetTableAction: function(gid, id) {
     var actions = this.Groups[gid].Actions;
     var foundAction = null;
     for (var a = 0; a < actions.length; a++)
     {
-        if (actions[a].id == id) {
-            foundAction = actions[a];
-            break;
-        }
+      if (actions[a].id == id) {
+        foundAction = actions[a];
+        break;
+      }
     }
     return foundAction;
   },
-  
+
   GetSliceInfo: function(rect) {
     var id = rect.data('action');
     var start = rect.data('index');
@@ -327,24 +422,24 @@
     var info = '';
     if (action != null)
     {
-        info = '<strong>' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, action.localeId, action.description) + '</strong>';
-        info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_from', 'from');
-        info += ' <strong>' + this.GetSliceTime(start) + '</strong>';
-        info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_to', 'to');
-        info += ' <strong>' + this.GetSliceTime(end) + '</strong>';
+      info = '<strong>' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, action.localeId, action.description) + '</strong>';
+      info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_from', 'from');
+      info += ' <strong>' + this.GetSliceTime(start) + '</strong>';
+      info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_to', 'to');
+      info += ' <strong>' + this.GetSliceTime(end) + '</strong>';
     }
     return info;
   },
-  
+
   GetSliceTime: function(sliceIndex) {
-      var sliceSize = (60 / this.TimebarResolution);
-      var hour = Math.floor(sliceIndex / sliceSize);
-      var minute = Math.round(((sliceIndex / sliceSize) - hour) * 60);
-      if (hour.toString().length == 1) hour = '0' + hour;
-      if (minute.toString().length == 1) minute = '0' + minute;
-      return hour + ':' + minute;
+    var sliceSize = (60 / this.TimebarResolution);
+    var hour = Math.floor(sliceIndex / sliceSize);
+    var minute = Math.round(((sliceIndex / sliceSize) - hour) * 60);
+    if (hour.toString().length == 1) hour = '0' + hour;
+    if (minute.toString().length == 1) minute = '0' + minute;
+    return hour + ':' + minute;
   },
-  
+
   EditTimetable: function(el, start, length, action) {
     this.SetTableGroup(el.group);
     this.TimebarElement = el;
@@ -364,7 +459,7 @@
     this.ControlPopup.find('[data-ui-field=select_action]').val(this.GetTableAction(el.group, action).id).selectmenu('refresh').change();
     this.ControlPopup.popup('open');
   },
-  
+
   DrawTimetable: function(el, drawHeader, timetable) {
     var _this = this;
     var paper = el.paper;
@@ -399,10 +494,10 @@
         //
         var centerX = (nb * stepSize) / 2;
         $(rect.node).qtip({ 
-            content: _this.GetSliceInfo(rect),
-            show: { delay: 350 },
-            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
-            position: { my: 'bottom center', at: 'top right', adjust: { x: centerX, y: -10 } }
+          content: _this.GetSliceInfo(rect),
+          show: { delay: 350 },
+          style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+          position: { my: 'bottom center', at: 'top right', adjust: { x: centerX, y: -10 } }
         });
         //
         x += nb * stepSize;
@@ -415,7 +510,7 @@
         paper.rect(((i / sliceFactor) * (sliceFactor * stepSize)) + (stepSize * sliceFactor), 0, 2, 16, 0).attr({ fill: '#99f' });
       }
     }    
-    
+
   }
 
 }]

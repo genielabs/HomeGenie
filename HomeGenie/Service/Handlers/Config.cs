@@ -604,6 +604,19 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Modules.ParameterSet":
+                try
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    var parameter = Utility.ModuleParameterSet(module, migCommand.GetOption(2), migCommand.GetOption(3));
+                    request.ResponseData = new ResponseText("OK");
+                }
+                catch (Exception ex)
+                {
+                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                }
+                break;
+
             case "Modules.StatisticsGet":
                 try
                 {

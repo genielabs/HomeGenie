@@ -465,12 +465,12 @@ HG.WebApp.ProgramsList.UpdateOptionsPopup = function () {
     if ($.mobile.activePage.attr("id") != HG.WebApp.ProgramsList.PageId) {
         $('#automationprograms_program_edit').hide();
         $('#automationprograms_program_btn_delete').hide();
-        $('#automationprograms_program_btn_export').hide();
+        //$('#automationprograms_program_btn_export').hide();
     }
     else {
         $('#automationprograms_program_edit').show();
         $('#automationprograms_program_btn_delete').show();
-        $('#automationprograms_program_btn_export').show();
+        //$('#automationprograms_program_btn_export').show();
     }
     //
     $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('update_options_popup_loading'), textVisible: true, theme: 'a', html: '' });

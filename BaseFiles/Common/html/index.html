@@ -7,6 +7,7 @@
     <link rel="apple-touch-icon" href="/hg/html/images/genie.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes">
     <title>
         HomeGenie
     </title>
@@ -284,8 +285,7 @@
     
     
     <!-- Module Edit Popup -->
-    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <div data-role="header" class="ui-corner-top">
             <h1 id="module_title">Module Settings</h1>
         </div>
@@ -390,19 +390,21 @@
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/washingmachine.png" width="48" height="48" />
             </div>
         </div>
-        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
-            <div class="ui-block-a">
+        <div class="ui-grid-b ui-footer ui-bar-inherit" align="center">
+            <div class="ui-block-a" align="left" style="width:25%">
+                <a class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left" href="#" data-locale-id="common_command_cancel" data-rel="back">Cancel</a>
+            </div>
+            <div class="ui-block-b" align="center" style="width:50%">
                 <a id="module_remove_button" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremove" data-rel="back">Remove from group</a>
             </div>
-            <div class="ui-block-b">
-                <a id="module_update_button" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="configure_module_optupdate" data-rel="back">Update module</a>
+            <div class="ui-block-c" align="right" style="width:25%">
+                <a id="module_update_button" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="common_command_save" data-rel="back">Save</a>
             </div>
         </div>
     </div>
 
     <!-- Program Configuration Popup -->
-    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
+    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_program_options">Options</h2>
         </div>
@@ -420,15 +422,18 @@
         </div>
         <div class="ui-grid-c ui-footer ui-bar-inherit" align="center">
             <div class="ui-block-a">
-                <a id="automationprograms_program_btn_delete" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
+                <a class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left" data-locale-id="common_command_exit" data-rel="back">Exit</a>
             </div>
             <div class="ui-block-b">
-                <a id="automationprograms_program_btn_export" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
+                <a id="automationprograms_program_btn_delete" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
             </div>
+            <!--div class="ui-block-c">
+                <a id="automationprograms_program_btn_export" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
+            </div-->
             <div class="ui-block-c">
                 <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit">Edit</a>
             </div>
-            <div class="ui-block-d">
+            <div class="ui-block-e">
                 <a id="automationprograms_program_restart" class="ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_restart">Restart</a>
             </div>
         </div>
@@ -490,7 +495,7 @@
 
 <!--- BEGIN HomeGenie Overlay -->
 
-    <div id="homegenie_overlay" style="position:fixed;top:41px;left:0;right:0;bottom:0;background-color:white;opacity:0.2;z-index:1000">
+    <div id="homegenie_overlay" style="position:fixed;top:41px;left:0;right:0;bottom:0;background-color:black;opacity:0.4;z-index:1000">
         <div style="width:100%;height:100%;background:url(images/genie.png) no-repeat center center;"></div>
     </div>
 

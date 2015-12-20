@@ -43,6 +43,7 @@ namespace HomeGenie.Automation.Engines
             string[] includes = new string[] {
                 "using System.Net;",
                 "using System.Threading;",
+                "using MIG;",
                 "using Raspberry;",
                 "using Raspberry.Timers;",
                 "using Raspberry.IO;",

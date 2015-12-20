@@ -601,26 +601,7 @@ div.ui-page-theme-a .ui-icon-microphone:after {
     height: 300px;
     width: auto;
 }
-.ui-datepicker-daywe {
-    background: rgb(100, 100, 100);
-    background: rgba(100, 100, 100, 0.4);
-}
-.ui-datepicker-day0 {
-    background: rgb(100, 100, 255);
-    background: rgba(100, 100, 255, 0.4);
-}
-.ui-datepicker-day1 {
-    background: rgb(100, 100, 255);
-    background: rgba(100, 100, 255, 0.4);
-}
-.ui-datepicker-day2 {
-    background: rgb(0, 255, 0);
-    background: rgba(0, 255, 0, 0.4);
-}
-.ui-datepicker-day3 {
-    background: rgb(255, 0, 0);
-    background: rgba(255, 0, 0, 0.4);
-}
+
 .ui-datepicker-calendar .ui-state-default, .ui-widget-content .ui-state-default { background: none; }
 .ui-datepicker-calendar .ui-state-highlight, .ui-widget-content .ui-state-highlight { color: yellow; text-decoration: underline }
 .ui-datepicker-year { display: none; }

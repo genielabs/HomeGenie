@@ -197,7 +197,7 @@ HG.Configure.MIG.InterfaceCommand = function (domain, command, option1, option2,
 HG.Configure.Stores = HG.Configure.Stores || {};
 HG.Configure.Stores.ItemGet = function (domain, address, store, item, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemGet/' + domain + "/" + address + "/" + store + "/" + item + "/",
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemGet/' + domain + '/' + address + '/' + store + '/' + item + '/',
         type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -206,7 +206,7 @@ HG.Configure.Stores.ItemGet = function (domain, address, store, item, callback) 
 };
 HG.Configure.Stores.ItemSet = function (domain, address, store, item, value, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemSet/' + domain + "/" + address + "/" + store + "/" + item + "/",
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemSet/' + domain + '/' + address + '/' + store + '/' + item + '/',
         type: 'POST',
         data: value,
         success: function (data) {
@@ -216,7 +216,7 @@ HG.Configure.Stores.ItemSet = function (domain, address, store, item, value, cal
 };
 HG.Configure.Stores.ItemDelete = function (domain, address, store, item, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemDelete/' + domain + "/" + address + "/" + store + "/" + item + "/",
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemDelete/' + domain + '/' + address + '/' + store + '/' + item + '/',
         type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -225,7 +225,7 @@ HG.Configure.Stores.ItemDelete = function (domain, address, store, item, callbac
 };
 HG.Configure.Stores.ItemList = function (domain, address, store, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemList/' + domain + "/" + address + "/" + store + "/",
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemList/' + domain + '/' + address + '/' + store + '/',
         type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -248,7 +248,7 @@ HG.Configure.Modules.List = function (callback) {
 };
 HG.Configure.Modules.Get = function (domain, address, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Get/' + domain + "/" + address + "/",
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Get/' + domain + '/' + address + '/',
         type: 'GET',
         dataType: 'text',
         success: function (data) {
@@ -258,7 +258,7 @@ HG.Configure.Modules.Get = function (domain, address, callback) {
 };
 HG.Configure.Modules.Delete = function (domain, address, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Delete/' + domain + "/" + address + "/",
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Delete/' + domain + '/' + address + '/',
         type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -268,6 +268,15 @@ HG.Configure.Modules.Delete = function (domain, address, callback) {
 HG.Configure.Modules.RoutingReset = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.RoutingReset/',
+        type: 'GET',
+        success: function (data) {
+            if (typeof callback != 'undefined' && callback != null) callback(data);
+        }
+    });
+};
+HG.Configure.Modules.ParameterSet = function (domain, address, parameter, value, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.ParameterSet/' + domain + '/' + address + '/' + parameter + '/' + encodeURIComponent(value),
         type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);

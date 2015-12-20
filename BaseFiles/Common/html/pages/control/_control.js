@@ -192,7 +192,8 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
     for (var o = 0; o < HG.WebApp.Control._widgetList.length; o++) {
         if (HG.WebApp.Control._widgetList[o].Widget == widgetpath) {
             widgetcached = true;
-            if (callback != null) callback(HG.WebApp.Control._widgetList[o]);
+            if (typeof callback == 'function')
+                callback(HG.WebApp.Control._widgetList[o]);
             break;
         }
     }
@@ -209,25 +210,22 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
                 } catch (e) {
                     alert(widgetpath + " Loading Error:\n" + e);
                 }
-                //
                 $.get("pages/control/widgets/" + widgetpath + ".html", function (responsedata) {
-
                     var widgetobj = { Widget: widgetpath, Instance: widget, Json: widgetjson, Model: responsedata };
                     HG.WebApp.Control._widgetList.push(widgetobj);
-                    //
-                    if (callback != null) callback(widgetobj);
+                    if (typeof callback == 'function')
+                        callback(widgetobj);
                 });
             },
             error: function (data) {
-
                 console.log(data);
-                if (callback != null) callback(null);
-
+                if (typeof callback == 'function')
+                    callback(null);
             }
         });
-    }
-    else {
-        if (callback != null) callback(null);
+    } else if (!widgetcached) {
+        if (typeof callback == 'function')
+            callback(null);
     }
 
 };
@@ -244,7 +242,7 @@ HG.WebApp.Control.RenderModule = function () {
             widget.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
             widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
         } else {
-            var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
+            var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" style="display:none" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
             HG.WebApp.Control.GetWidget(rendermodule.Module.Widget, function (w) {
                 if (w != null) {
                     html += w.Model;
@@ -253,29 +251,32 @@ HG.WebApp.Control.RenderModule = function () {
                     rendermodule.GroupElement.trigger('create');
                     //rendermodule.GroupElement.listview('refresh');
                     if (w.Json != null) {
-                        try {
-                            var myinstance = eval(w.Json)[0];
-                            // localize widget
-                            HG.WebApp.Locales.LocalizeWidget(rendermodule.Module.Widget, rendermodule.ElementId);
-                            // render widget view and store reference to its instance
-                            myinstance.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
-                            $('#' + rendermodule.ElementId).data('homegenie.widget', myinstance);
-                            rendermodule.Module.WidgetInstance = myinstance;
-                            $('#module_options_button').unbind('click').bind('click.widget', function (event) {
-                                HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
-                            });
-                        } catch (e) {
-                            console.log('[' + rendermodule.Module.Widget + '] widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
-                            //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
-                        }
+                        var myinstance = eval(w.Json)[0];
+                        // store reference to this widget instance
+                        $('#' + rendermodule.ElementId).data('homegenie.widget', myinstance);
+                        rendermodule.Module.WidgetInstance = myinstance;
+                        // localize widget
+                        HG.WebApp.Locales.LocalizeWidget(rendermodule.Module.Widget, rendermodule.ElementId, function() {
+                            $('#' + rendermodule.ElementId).show();
+                            // render widget view and load next widget
+                            try {
+                                myinstance.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
+                            } catch (e) {
+                                console.log('[' + rendermodule.Module.Widget + '] widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
+                                //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
+                            }
+                            widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
+                        });
                     } else {
                         alert(rendermodule.Module.Widget + " Widget Instance Error:\n" + e);
+                        // an error occurred, continue loading next widget
+                        widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
                     }
                 } else {
-                    //alert(rendermodule.Module.Widget + " Widget Error.");
-                    // setTimeout('HG.WebApp.Control.RenderModule()', 10);
+                    console.log(rendermodule.Module.Widget + " Widget Error.");
+                    // an error occurred, continue loading next widget
+                    widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
                 }
-                widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
             });
         }
     } else {

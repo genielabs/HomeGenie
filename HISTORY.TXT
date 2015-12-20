@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+20/12/2015 v1.1-beta.508
+    - Improved Timetable widget with full screen options page (wip)
+    - Other minor UI improvements
+    - Added "Add to home screen" option for Android devices for opening Web UI full screen from the Android home screen
+    - Control page layout now centering each row
+
 13/12/2015 v1.1-beta.507
     - Added "Set node as always awake" option to Z-Wave Query on WakeUp program
     - Improved startup/trigger code check, now executing on every system event to ensure maximum accuracy even with Wizard scripts

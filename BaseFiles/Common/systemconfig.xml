@@ -27,24 +27,6 @@
         <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>EnergyManagement.Monitor.KwLoad</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T19:47:35.762198Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyManagement.Monitor.KwCounter</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T19:47:35.770991Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyManagement.Monitor.OperatingDevices</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T19:47:35.779683Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Messaging.Email.SmtpPort</Name>
         <Value />
         <Description />

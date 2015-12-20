@@ -196,8 +196,11 @@ HG.WebApp.InitializePage = function ()
         .on('panelopen', function() {
             $('#homegenie_overlay').fadeIn(150);
         })
+        .on('panelbeforeopen', function() {
+            $('#homegenie_overlay').fadeIn(250);
+        })
         .on('panelbeforeclose', function() {
-            $('#homegenie_overlay').fadeOut(150);
+            $('#homegenie_overlay').fadeOut(250);
         })
         .children().first().trigger('create');
     menuPanel.on('click', function() {
@@ -205,6 +208,7 @@ HG.WebApp.InitializePage = function ()
     });
     // A swipe gesture open up the Side Panel
     $( document ).on('swipeleft swiperight', 'div[data-role=page]', function( e ) {
+        if (!$('[data-ui-field=homegenie_panel_button]').hasClass('ui-disabled'))
         if ($('.ui-page-active .ui-popup-active').length == 0)
         if (!$(e.target).is('span'))
         if (!$(e.target).is('pre'))
@@ -802,7 +806,7 @@ HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue, locale)
         console.log('LOCALIZATION ERROR "' + stringid + '" NOT FOUND!!!');
     return (retval == null && defaultValue ? defaultValue : retval);
 };
-HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
+HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid, callback) {
     var userLang = HG.WebApp.Locales.GetUserLanguage();
     widgetpath = widgetpath.substring(0, widgetpath.lastIndexOf('/'));
     var container = '#' + elementid;
@@ -860,6 +864,12 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
                     }
                 });
             });
+            if (typeof callback == 'function') 
+                callback();
+        },
+        error: function() {
+            if (typeof callback == 'function') 
+                callback();
         }
     });
 };
