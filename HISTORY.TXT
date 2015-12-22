@@ -1,8 +1,9 @@
 ﻿RELEASE HISTORY
 
-20/12/2015 v1.1-beta.508
-    - Improved Timetable widget with full screen options page (wip)
-    - Other minor UI improvements
+22/12/2015 v1.1-beta.508
+    - Improved 'Smart Lights' app now with synch to Timetable option
+    - Improved 'Timetable' app and widget with full screen options page
+    - Other minor UI improvements and fixes
     - Added "Add to home screen" option for Android devices for opening Web UI full screen from the Android home screen
     - Control page layout now centering each row
 

@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.402093Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.635425Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -255,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.469135Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.978289Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -429,7 +429,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.422929Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.601426Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -501,7 +501,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.498943Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.877994Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1117,7 +1117,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.267327Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.546099Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1164,7 +1164,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.556226Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.780558Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1513,7 +1513,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.542237Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.755331Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1643,7 +1643,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.048746Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.878483Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1698,7 +1698,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.294951Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.640282Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1807,7 +1807,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.253275Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:56.022304Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2145,7 +2145,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.370834Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.966732Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2243,7 +2243,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.103312Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.970789Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2392,7 +2392,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.362356Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.862846Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2484,20 +2484,22 @@ Program.GoBackground();</ScriptSource>
     <Conditions />
     <Commands />
     <ScriptCondition>Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox");
+Program.AddFeature("", "Switch,Light,Dimmer", "TimeTable.ExternalControl", "Synchronize with Timetable schedule if set", "checkbox");
 Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor", "module.text:any:sensor:status.level,sensor.motiondetect");
-Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor", "module.text:any:any:sensor.luminance");
-Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:0:3600:30");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:1");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30");
 Program.Run();
 </ScriptCondition>
     <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
 var MOT_SENSOR_NAME = "HomeGenie.SmartLights.OnMotionDetect";
 var LUM_SENSOR_NAME = "HomeGenie.SmartLights.CheckLuminosity";
 var TURNOFF_TIMEOUT = "HomeGenie.SmartLights.SwitchOffTimeout";
+var MIN_LUMINANCE = "HomeGenie.SmartLights.MinLuminance";
 var LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
-var LUM_TRIGGER_VALUE = 10;
-//
+
 var smart_devices = Modules.WithFeature(SMART_LIGHT_ENABLE);
-//
+
 var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
   dynamic v = new ExpandoObject();
   v.Domain = "0";
@@ -2520,71 +2522,58 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
       if (motionlevel &gt; 0)
       {
         smart_devices.Each((mod)=&gt; {
+
+          // Timetable sync
+          bool synchTimetable = mod.HasFeature("TimeTable.ExternalControl") &amp;&amp; mod.HasFeature("TimeTable.Enable");
+          if (synchTimetable &amp;&amp; mod.Parameter("TimeTable.Status").Value == "OFF")
+            return false;
+
           var da = GetDomainAddress(mod.Parameter(MOT_SENSOR_NAME).Value);
           if (da.Domain == module.Instance.Domain &amp;&amp; da.Address == module.Instance.Address)
           {
             mod.Parameter(LAST_EVENT).Value = DateTime.UtcNow.Ticks.ToString();
-            if (mod.Level == 0)
+            //if (mod.IsOff)
             {
-              Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
-              //
               da = GetDomainAddress(mod.Parameter(LUM_SENSOR_NAME).Value);
               var lumsensor = Modules.InDomain(da.Domain).WithAddress(da.Address).Get();
               if (lumsensor.Instance != null)
               {
                 var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
-                if (luminosity &lt; LUM_TRIGGER_VALUE)
+                if (luminosity &lt; mod.Parameter(MIN_LUMINANCE).DecimalValue)
                 {
-                  mod.On();
+                  Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                  if (synchTimetable &amp;&amp; mod.Parameter("TimeTable.Status").DecimalValue &gt; 0)
+                    mod.Level = mod.Parameter("TimeTable.Status").DecimalValue;
+                  else
+                    mod.On();
                 }
               }
               else	
               {
-                mod.On();
+                Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                if (synchTimetable &amp;&amp; mod.Parameter("TimeTable.Status").DecimalValue &gt; 0)
+                  mod.Level = mod.Parameter("TimeTable.Status").DecimalValue;
+                else
+                  mod.On();
               }
             }
           }
-          //
+
           return false;
         });
       }
-      else
-      {
-        // timeout before turning it off
-      }
-    }
-    if (module.HasParameter("Sensor.Luminance"))
-    {
-      var luminosity = module.Parameter("Sensor.Luminance").DecimalValue;
-      smart_devices.Each((mod)=&gt; {
-        var da = GetDomainAddress(mod.Parameter(LUM_SENSOR_NAME).Value);
-        if (da.Domain == module.Instance.Domain &amp;&amp; da.Address == mod.Instance.Address &amp;&amp; mod.Level &gt; 0)
-        {
-          if (luminosity &gt;= LUM_TRIGGER_VALUE)
-          {
-            Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched OFF " + mod.Instance.Address + " " + mod.Instance.Name);
-            mod.Off();
-          }
-          else	
-          {
-            //if (luminosity &lt; 10) mod.Level = 100;
-            //else mod.Level = 50;
-          }
-        }
-        return false;
-      });
     }
   }
+  
   return true;
 });
-//
+
 while (Program.IsEnabled)
 {
   smart_devices.Each((mod)=&gt; {
     var timeout = mod.Parameter(TURNOFF_TIMEOUT).DecimalValue;
-    if (timeout == 0) timeout = 120; // default timeout is 2 minutes
-    //		Program.Notify("Smart Lights", mod.Instance.Address + " - " + mod.Instance.Name + " : " + mod.IsOn);
-    //		Pause(1);
+    // default timeout is 30 seconds
+    if (timeout == 0) timeout = 30;
     if (mod.IsOn)
     {
       var lastevent = mod.Parameter(LAST_EVENT).UpdateTime;
@@ -2599,7 +2588,7 @@ while (Program.IsEnabled)
     }
     return false;
   });
-  Pause(2);
+  Pause(5);
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -2608,38 +2597,9 @@ while (Program.IsEnabled)
     <Name>Smart Lights</Name>
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>HomeGenie.SmartLights.Enable</Property>
-        <Description>Enable Smart Light Control</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>module.text:any:sensor:status.level,sensor.motiondetect</FieldType>
-        <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
-        <Description>Controlled by motion sensor</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>module.text:any:any:sensor.luminance</FieldType>
-        <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>HomeGenie.SmartLights.CheckLuminosity</Property>
-        <Description>Controlled by luminance sensor</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:0:3600:30</FieldType>
-        <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>
-        <Description>Turn off after inactivity timeout (seconds)</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.221971Z</TriggerTime>
+    <Features />
+    <ActivationTime>2015-12-22T14:04:01.144258Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6655,20 +6615,29 @@ var GetTableSliceAction = new Func&lt;string, DateTime, ExpandoObject&gt;((table
 var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module, tableType, action) =&gt;{
   bool performed = false;
   bool repeat = module.HasFeature("TimeTable.Repeat");
+  bool externalControl = module.HasFeature("TimeTable.ExternalControl");
   switch (tableType)  
   {
     case "OnOff":
       if (action.Value == '1' &amp;&amp; (action.Previous == '0' || repeat))
       {
-      	Program.Notify("Timetable", module.Instance.Name + " ON");
-        module.On();
-        performed = true;
+        module.Parameter("TimeTable.Status").Value = "ON";
+        if (!externalControl)
+        {
+          Program.Notify("Timetable", module.Instance.Name + " ON");
+          module.On();
+          performed = true;
+        }
       }
       else if (action.Value == '0' &amp;&amp; (action.Previous == '1' || repeat))
       {
-      	Program.Notify("Timetable", module.Instance.Name + " OFF");
-        module.Off();
-        performed = true;
+        module.Parameter("TimeTable.Status").Value = "OFF";
+        if (!externalControl)
+        {
+          Program.Notify("Timetable", module.Instance.Name + " OFF");
+          module.Off();
+          performed = true;
+        }
       }
       break;
 	case "Level":
@@ -6677,15 +6646,23 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
       if (action.Value == 'A') level = 10;
       if (action.Value != '0' &amp;&amp; (action.Previous != action.Value || repeat))
       {
-      	Program.Notify("Timetable", module.Instance.Name + " Level " + (level * 10) + "%");
-        module.Level = level * 10;
-        performed = true;
+        module.Parameter("TimeTable.Status").Value = (level * 10).ToString();
+        if (!externalControl)
+        {
+          Program.Notify("Timetable", module.Instance.Name + " Level " + (level * 10) + "%");
+          module.Level = level * 10;
+          performed = true;
+        }
       }
       else if (action.Value == '0' &amp;&amp; (action.Previous != action.Value || repeat))
       {
-      	Program.Notify("Timetable", module.Instance.Name + " OFF");
-        module.Off();
-        performed = true;
+        module.Parameter("TimeTable.Status").Value = "OFF";
+        if (!externalControl)
+        {
+          Program.Notify("Timetable", module.Instance.Name + " OFF");
+          module.Off();
+          performed = true;
+        }
       }
       break;
     case "Therm":
@@ -6744,6 +6721,44 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
   return performed;
 });
 
+var _checkLock = new object();
+var CheckScheduling = new Action(()=&gt;{
+  lock(_checkLock)
+  timetableModules.Each((module)=&gt;{
+    
+    // determine table type
+    var tableType = GetTableType(module);    
+    // calculate current day of year as interval from 0 to 365 (non-leap year normalized)
+    var todayDate = DateTime.Now;
+	var tableIndex = GetTableIndex(module, todayDate);
+    // Day Light Saving check
+    var tableSuffix = "";
+    if (TimeZoneInfo.Local.IsDaylightSavingTime(todayDate) &amp;&amp; module.HasFeature("TimeTable.CheckDST"))
+       tableSuffix = ".DST";
+    // Perform action on current module
+    if (tableIndex &gt; 0)
+    {
+      // tables are stored as zero indexed
+      var timetable = GetTableSettings(tableType + "." + (tableIndex - 1) + tableSuffix);
+      dynamic action = GetTableSliceAction(timetable.Value, todayDate);
+      // check for exception in crossing from different table types on midnight
+      var previousTableIndex = GetTableIndex(module, todayDate.AddMinutes(-timeResolution));
+      if (previousTableIndex + tableSuffix != tableIndex + tableSuffix) 
+      {
+        var previousTable = GetTableSettings(tableType + "." + (previousTableIndex - 1) + tableSuffix);
+        action.Previous = previousTable.Value[tableLength - 1];
+      }
+      // perform action
+      if (PerformAction(module, tableType, action))
+      {
+      	Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + tableIndex + tableSuffix);
+      }
+    }
+
+    return false; // do not stop iterating, continue processing next module
+  });  
+});
+
 When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
   var request = args.ToString().Split('/');
   var response = "ERROR";
@@ -6756,6 +6771,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       break;
     case "Calendar.Set":
       Program.Store("Calendar").Get("Days").Value = request[3];
+      CheckScheduling();
       response = "OK";
       break;
     case "Timetable.Set":
@@ -6779,12 +6795,45 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
         newValue.Insert(slotTo, new String('0', slotRangeEnd - slotTo));
       }
       setting.Value = newValue.ToString();
+      CheckScheduling();
       response = "OK";
       break;
     case "Timetable.Get":
       setting = GetTableSettings(request[3]);
       response = setting.Value;
       break;
+    case "Timetable.CheckNow":
+      CheckScheduling();
+   	  break;
+    case "Timetable.GetScheduling":
+      var schedulingModules = new List&lt;dynamic&gt;();
+      Modules.OfDeviceType("Light,Switch,Shutter,Dimmer,Thermostat").Each((mod)=&gt;{
+        if (mod.HasFeature("TimeTable.Enable"))
+        {
+          dynamic tm = new ExpandoObject();
+          tm.Domain = mod.Instance.Domain;
+          tm.Address = mod.Instance.Address;
+          tm.Name = mod.Instance.Name;
+          tm.Type = GetTableType(mod);
+          //
+          var todayDate = DateTime.Now;
+          var tableIndex = GetTableIndex(mod, todayDate);
+          // Day Light Saving check
+          var tableSuffix = "";
+          if (TimeZoneInfo.Local.IsDaylightSavingTime(todayDate) &amp;&amp; mod.HasFeature("TimeTable.CheckDST"))
+       		tableSuffix = ".DST";
+          // Perform action on current module
+          if (tableIndex &gt; 0)
+          {
+            // tables are stored as zero indexed
+            tm.Timetable = GetTableSettings(tm.Type + "." + (tableIndex - 1) + tableSuffix).Value;
+          }
+          //
+          schedulingModules.Add(tm);
+        }
+        return false;
+      });
+      return schedulingModules;
     case "Timetable.GetModules":
       var modules = new List&lt;dynamic&gt;();
       Modules.OfDeviceType("Light,Switch,Shutter,Dimmer,Thermostat").Each((mod)=&gt;{
@@ -6813,39 +6862,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
 // Timetable control loop
 while (Program.IsEnabled)
 {
-  timetableModules.Each((module)=&gt;{
-
-    // determine table type
-    var tableType = GetTableType(module);    
-    // calculate current day of year as interval from 0 to 365 (non-leap year normalized)
-    var todayDate = DateTime.Now;
-	var tableIndex = GetTableIndex(module, todayDate);
-    // Day Light Saving check
-    var tableSuffix = "";
-    if (TimeZoneInfo.Local.IsDaylightSavingTime(todayDate) &amp;&amp; module.HasFeature("TimeTable.CheckDST"))
-       tableSuffix = ".DST";
-    // Perform action on current module
-    if (tableIndex &gt; 0)
-    {
-      var timetable = GetTableSettings(tableType + "." + (tableIndex - 1) + tableSuffix); // tables are stored as zero indexed
-      dynamic action = GetTableSliceAction(timetable.Value, todayDate);
-      // check for exception in crossing from different table types on midnight
-      var previousTableIndex = GetTableIndex(module, todayDate.AddMinutes(-timeResolution));
-      if (previousTableIndex + tableSuffix != tableIndex + tableSuffix) 
-      {
-        var previousTable = GetTableSettings(tableType + "." + (previousTableIndex - 1) + tableSuffix);
-        action.Previous = previousTable.Value[tableLength - 1];
-      }
-      // perform action
-      if (PerformAction(module, tableType, action))
-      {
-      	Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + tableIndex + tableSuffix);
-      }
-    }
-
-    return false; // do not stop iterating, continue processing next module
-  });
-  
+  CheckScheduling();
   // Pause until next slice of time of "timeResolution" size
   var nextCheck = (Math.Floor(DateTime.Now.Minute / timeResolution) + 1) * timeResolution;
   var pause = ((nextCheck - DateTime.Now.Minute) * 60) - DateTime.Now.Second;
@@ -6858,9 +6875,59 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features />
-    <ActivationTime>2015-12-20T15:39:31.809217Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Weekend</Property>
+        <Description>Timetable to use for weekend</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Workday</Property>
+        <Description>Timetable to use for workday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Holiday</Property>
+        <Description>Timetable to use for holiday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Special</Property>
+        <Description>Timetable to use for special day</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Enable</Property>
+        <Description>Enable Timetable scheduling</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Repeat</Property>
+        <Description>Repeat command for the whole duration</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.CheckDST</Property>
+        <Description>Enable Day Light Saving check</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime>2015-12-22T14:01:59.398959Z</ActivationTime>
+    <TriggerTime>2015-12-22T14:01:59.464927Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7573,7 +7640,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-20T15:38:52.362356Z</TriggerTime>
+    <TriggerTime>2015-12-21T16:16:55.7134Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

@@ -22,7 +22,7 @@
     .my-breakpoint.ui-grid-a .ui-block-b { width: 50%; }
   }
   .timetable-programs-container {
-    width:1100px;
+    width:100%; max-width:1100px;
     padding-bottom:50px;
   }
   .timetable-programs-modules {
@@ -75,16 +75,11 @@
     </div>
   </div>
 
-  <div data-ui-field="content">
-
-    <p align="center">Current scheduling</p>
-    <p align="center">...</p>
-
+  <div data-ui-field="status-container" align="center" style="margin:0;padding:0;margin-bottom:10px;border-bottom:solid 1px">
+    <h3 data-locale-id="timetable_today_schedule" data-ui-field="description" style="padding:6px;margin:0;font-weight:bold">Today's Schedule</h3>
   </div>
-
-
-  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="center" style="display:none">
-    <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+  <div align="center" style="position:absolute;bottom:10px;right:5px;left:5px;height:200px;overflow-y:scroll;font-size:8pt">
+    <div data-ui-field="scheduling" style="display: table;margin: 0 auto;" align="left"></div>
   </div>
 
 </div>
@@ -212,7 +207,7 @@
       <div class="ui-grid-a my-breakpoint">
 
         <div class="ui-block-a">
-          <div class="timetable-label ui-bar-inherit">Modules</div>
+          <div data-locale-id="common_command_modules" class="timetable-label ui-bar-inherit">Modules</div>
           <div data-ui-field="timebar_level_modules" class="timetable-programs-modules"></div>
         </div>
         <div class="ui-block-b">
@@ -228,7 +223,7 @@
       <div class="ui-grid-a my-breakpoint">
 
         <div class="ui-block-a">
-          <div class="timetable-label ui-bar-inherit">Modules</div>
+          <div data-locale-id="common_command_modules" class="timetable-label ui-bar-inherit">Modules</div>
           <div data-ui-field="timebar_therm_modules" class="timetable-programs-modules"></div>
         </div>
         <div class="ui-block-b">
@@ -244,7 +239,7 @@
       <div class="ui-grid-a my-breakpoint">
 
         <div class="ui-block-a">
-          <div class="timetable-label ui-bar-inherit">Modules</div>
+          <div data-locale-id="common_command_modules" class="timetable-label ui-bar-inherit">Modules</div>
           <div data-ui-field="timebar_onoff_modules" class="timetable-programs-modules"></div>
         </div>
         <div class="ui-block-b">
@@ -260,9 +255,22 @@
 
   </div>
 
-  <p align="right" style="position:fixed;top:42px;right:10px;width:300px;" class="ui-mini">
-    <a href="#" data-locale-id="timetable_calendar" data-ui-field="btn-table-calendar" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-calendar ui-btn-inline">Calendar</a>
-    <a href="#" data-locale-id="common_command_close" data-ui-field="btn-programs-close" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete ui-btn-inline">Close</a>
-  </p>
+  <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+    <div data-role="navbar">
+      <ul>
+        <li>
+          <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+            &nbsp;
+          </a>
+        </li>
+        <li>
+          <a data-ui-field="btn-table-calendar" href="#" data-locale-id="timetable_calendar" class="ui-btn ui-btn-icon-left ui-icon-calendar">Calendar</a>
+        </li>
+        <li>
+          <a data-ui-field="btn-programs-close" href="#" data-locale-id="common_command_close" class="ui-btn ui-btn-icon-right ui-icon-delete">Close</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
 </div>

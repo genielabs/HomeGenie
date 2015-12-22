@@ -630,22 +630,25 @@ HG.WebApp.Utility.FormatDate = function (date)
     return dt;
 };
 
-HG.WebApp.Utility.FormatDateTime = function (date, showms)
+// if options contains 's' show seconds
+// if options contains 'sm' show seconds and milliseconds
+HG.WebApp.Utility.FormatDateTime = function (date, options)
 {
     var dateFormat = dataStore.get('UI.DateFormat');
     var dt = null;
     var h = date.getHours();
     var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
     var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
+    if (typeof options == 'undefined' || options == null) options = '';
     if (dateFormat != 'DMY24' && (dateFormat == 'MDY12' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
     {
         var ampm = (h >= 12 ? 'PM' : 'AM');
         h = h % 12; h = (h ? h : 12);
-        dt = h + ':' + mm + ':' + ss + (showms ? '.' + date.getMilliseconds() : '') + ' ' + ampm;
+        dt = h + ':' + mm + (options.indexOf('s')==0 ? ':' + ss + (options == 'sm' ? '.' + date.getMilliseconds() : '') : '') + ' ' + ampm;
     }
     else
     {
-        dt = h + ':' + mm + ':' + ss + (showms ? '.' + date.getMilliseconds() : '');
+        dt = h + ':' + mm + (options.indexOf('s')==0 ? ':' + ss + (options == 'sm' ? '.' + date.getMilliseconds() : '') : '');
     }
     return dt;
 };

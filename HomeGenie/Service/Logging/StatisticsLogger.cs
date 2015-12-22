@@ -44,7 +44,6 @@ namespace HomeGenie.Service.Logging
         public double Value;
     }
 
-
     public class StatisticsLogger
     {
         public static List<string> StatisticsFields = new List<string>() {

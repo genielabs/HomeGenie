@@ -93,18 +93,14 @@ HG.Ui.GetModuleIcon = function(module, callback, elid) {
         var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
         if (widget != null && widget.Value != '') {
             widget = widget.Value;
-        }
-        else {
+        } else {
             widget = 'homegenie/generic/' + module.DeviceType.toLowerCase();
         }
-        //
         if (widgeticon != null && widgeticon.Value != '') {
             icon = widgeticon.Value;
-        }
-        else if (module.WidgetInstance && module.WidgetInstance != null && module.WidgetInstance != 'undefined') {
+        } else if (module.WidgetInstance && module.WidgetInstance != null && module.WidgetInstance != 'undefined') {
             icon = module.WidgetInstance.IconImage;
-        }
-        else {
+        } else {
             // get reference to generic type widget 
             HG.WebApp.WidgetsList.GetWidgetIcon(widget, elid, callback);
             return icon;
@@ -112,4 +108,14 @@ HG.Ui.GetModuleIcon = function(module, callback, elid) {
     }
     if (callback != null) callback(icon, elid);
     return icon;
+};
+
+HG.Ui.GetModuleDisplayName = function(module) {
+    var name = module.Domain + ' ' + module.Address;
+    try {
+        name = module.Name;
+        name += ' ('+module.Domain.substring(module.Domain.lastIndexOf('.')+1)+' '+module.Address+')';
+        name = name.trim();
+    } catch(e) { }
+    return name;
 };

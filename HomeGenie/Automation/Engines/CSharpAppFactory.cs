@@ -43,7 +43,6 @@ namespace HomeGenie.Automation.Engines
             string[] includes = new string[] {
                 "using System.Net;",
                 "using System.Threading;",
-                "using MIG;",
                 "using Raspberry;",
                 "using Raspberry.Timers;",
                 "using Raspberry.IO;",
@@ -79,8 +78,8 @@ using System;
 using System.Text; using System.Globalization; using System.Linq; using System.Collections.Generic; using System.Dynamic; using Newtonsoft.Json; using Newtonsoft.Json.Linq;
 
 using HomeGenie;
-using HomeGenie.Service;
-using HomeGenie.Automation; using HomeGenie.Data;
+using HomeGenie.Service; using HomeGenie.Service.Logging;
+using HomeGenie.Automation; using HomeGenie.Data; using MIG;
 ";
             source += String.Join(" ", includes);
             source += @"

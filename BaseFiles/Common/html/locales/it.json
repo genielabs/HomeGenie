@@ -783,6 +783,14 @@
         "Carica",
     "common_select_none":
         "Nessuno",
+    "common_command_exit":
+        "Esci",
+    "common_command_close":
+        "Chiudi",
+    "common_command_module":
+        "Modulo",
+    "common_command_modules":
+        "Moduli",
 "##":
 "## SIDE MENU LOCALES",
 "##":

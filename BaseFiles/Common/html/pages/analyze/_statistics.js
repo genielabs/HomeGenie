@@ -338,6 +338,7 @@ HG.WebApp.Statistics.Refresh = function () {
                                     for (var tx = 0; tx < stats[sx].length; tx++)
                                         stats[sx][tx][1] = HG.WebApp.Utility.GetLocaleTemperature(stats[sx][tx][1]);
                                 }
+                                var dateFormat = dataStore.get('UI.DateFormat');
                                 $.plot($("#statshour"), [
                                         { label: 'Max', data: stats[1], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
                                         { label: 'Avg', data: stats[2], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
@@ -347,7 +348,7 @@ HG.WebApp.Statistics.Refresh = function () {
                                     ],
                                     {
                                         yaxis: { show: true },
-                                        xaxis: { mode: "time", timeformat: "%H:00", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
+                                        xaxis: { mode: "time", timeformat: (dateFormat == "MDY12" ? "%h:00%p" : "%h:00"), minTickSize: [1, "hour"], tickSize: [1, "hour"] },
                                         legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
                                         lines: { show: showlines, lineWidth: 1.0 },
                                         series: {
@@ -425,6 +426,7 @@ HG.WebApp.Statistics.Refresh = function () {
             }
             else
             {
+                var dateFormat = dataStore.get('UI.DateFormat');
                 $.ajax({
                     url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsMultiple/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
                     type: 'GET',
@@ -442,7 +444,7 @@ HG.WebApp.Statistics.Refresh = function () {
                         }
                         if(showtype == true)
                         {
-                           tformat = "%H:00";
+                           tformat = (dateFormat == "MDY12" ? "%h:00%p" : "%h:00");
                            tickSize = "hour";
                         }
                         else
@@ -507,13 +509,14 @@ HG.WebApp.Statistics.Refresh = function () {
                 $('#page_analyze_cost_counter').html('Counter ' + (Math.round(total * 100) / 100));
                 //
                 try {
+                    var dateFormat = dataStore.get('UI.DateFormat');
                     $.plot($("#statscounter"), [{
                             label: HG.WebApp.Statistics._CurrentParameter,
                             data: stats[0]
                         }],
                         {
                             yaxis: { show: true },
-                            xaxis: { mode: "time", timeformat: "%H:00", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
+                            xaxis: { mode: "time", timeformat: (dateFormat == "MDY12" ? "%h:00%p" : "%h:00"), minTickSize: [1, "hour"], tickSize: [1, "hour"] },
                             legend: { position: "nw", backgroundOpacity: 0.3 },
                             lines: { show: showlines, lineWidth: 1.5 },
                             series: {

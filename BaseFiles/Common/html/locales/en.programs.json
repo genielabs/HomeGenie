@@ -101,9 +101,13 @@
     "HomeGenie.SmartLights.OnMotionDetect":
         "Controlled by motion sensor",
     "HomeGenie.SmartLights.CheckLuminosity":
-        "Controlled by light sensor",
+        "Controlled by light sensor (optional)",
     "HomeGenie.SmartLights.SwitchOffTimeout":
-        "Turn off after inactivity timeout (seconds)"
+        "Turn off after inactivity timeout (seconds)",
+    "HomeGenie.SmartLights.MinLuminance":
+        "Turn on if luminance is below:",
+    "TimeTable.ExternalControl":
+        "Synchronize with Timetable scheduling"
 },
 
 "8": {

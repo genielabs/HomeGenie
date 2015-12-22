@@ -3,8 +3,10 @@
     "timetable_group_thermostats" : "Termostati",
     "timetable_group_lights" : "Luci e prese",
     "timetable_title" : "Tabella Oraria",
+    "timetable_today_schedule" : "Programmazione Odierna",
     "timetable_calendar" : "Calendario",
     "timetable_program" : "Programma",
+    "timetable_programs" : "Programmi Tabella Oraria",
     "timetable_standard" : "Standard",
     "timetable_daylightsaving" : "Ora legale",
     

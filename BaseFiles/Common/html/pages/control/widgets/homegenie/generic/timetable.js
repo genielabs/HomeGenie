@@ -1,7 +1,7 @@
 [{
   Name: "Timetable",
   Author: "Generoso Martello",
-  Version: "2015-01-26",
+  Version: "2015-12-21",
 
   GroupName: '',
   IconImage: 'images/scheduler.png',
@@ -64,16 +64,13 @@
   ],
 
   CurrentSlice: null,
+  _refreshTimeout: null,
 
   RenderView: function (cuid, module) {
     var container = $(cuid);
-    //
-    var lastupdatetime = new Date();
-    var statusInfo = 'Timetable Widget alpha (work in progress)';
-    //
+    var _this = this;      
     if (!this.Initialized)
     {
-      var _this = this;      
       this.Initialized = true;
       this.Module = module;
       this.Widget = container.find('[data-ui-field=widget]');
@@ -226,30 +223,72 @@
         }, 550);
       });
       this.ProgramsPage.find('[data-ui-field=btn-programs-close]').click(function(el){
+        var btn = $(this);
+        setTimeout(function(){
+          $(btn).removeClass('ui-btn-active');
+        }, 500);
         $(document.body).css('overflow', 'auto');
         $('[data-ui-field=homegenie_panel_button]').removeClass('ui-disabled');
         $('[data-ui-field=wallpaper]').removeClass("blur-filter");
         _this.ProgramsPage.slideUp(500);
+        _this.RefreshSchedulingLog();
       });
       this.ProgramsPage.find('[data-ui-field=btn-table-calendar]').click(function(el){
+        var btn = $(this);
+        setTimeout(function(){
+          $(btn).removeClass('ui-btn-active');
+        }, 500);
         _this.CalendarPopup.popup('open');
       });
       // END
 
     }
-    //
-    if (lastupdatetime > 0)
-    {
-      this.UpdateTime = HG.WebApp.Utility.FormatDate(lastupdatetime) + ' ' + HG.WebApp.Utility.FormatDateTime(lastupdatetime);
-    }
-    this.Widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + statusInfo + '</span>');
+
+    // Refresh current scheduling infos
+    this.RefreshSchedulingLog();
+  },
+
+  RefreshSchedulingLog: function() {
+    var _this = this;
+    if (this._refreshTimeout != null)
+      clearTimeout(this._refreshTimeout);
+    this._refreshTimeout = setTimeout(function(){
+      _this._refreshTimeout = null;
+      var schedLog = _this.Widget.find('[data-ui-field=scheduling]');
+      schedLog.empty();
+      $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.GetScheduling/',
+        type: 'GET',
+        success: function (schedulingModules) {
+          if (schedulingModules.length > 0) {
+            $.each(schedulingModules, function(i, m){
+              var item = $('<div/>');
+              var itemTitle = $('<div style="margin:0;font-size:10pt;font-weight:bold;margin-top:8px" />');
+              var itemImage = $('<img src="pages/control/widgets/homegenie/generic/images/unknown.png" width="32" height="32" align="absmiddle" style="margin-right:4px">');
+              itemTitle.append(itemImage);
+              itemTitle.append(HG.Ui.GetModuleDisplayName(m));
+              var itemInfo = $('<div style="margin-left:10px">'+_this.GetTableInfo(m.Type, m.Timetable)+'</div>');
+              item.append(itemTitle);
+              item.append(itemInfo);
+              schedLog.append(item);
+              var modObj = HG.WebApp.Utility.GetModuleByDomainAddress(m.Domain, m.Address);
+              HG.Ui.GetModuleIcon(modObj, function(icon, elid) {
+                $(itemImage).attr('src', icon);
+              }, itemImage);
+            });
+          } else {
+            schedLog.append('<div align="center" style="line-height: 200px">No schedule programmed</div>');
+          }
+        }
+      });
+    }, 2000);
   },
 
   GetModules: function() {
     var _this = this;
-    $.mobile.loading('show', { text: 'Loading modules', textVisible: true });
+    $.mobile.loading('show', { text: 'Updating data', textVisible: true });
     $.ajax({
-      url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.GetModules/', // + this.Groups[el.group].Table + '.' + el.table,
+      url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.GetModules/',
       type: 'GET',
       success: function (mods) {
         //table = eval(data)[0].ResponseValue;
@@ -262,13 +301,13 @@
           item.append('<div style="width:280px;display:table-cell;overflow:hidden;padding-left:4px;" align="left">'+m.Name+'</div>');
           var flags = $('<div style="width:250px;display:table-cell;overflow:hidden" align="right" class="ui-mini" />');
           item.append(flags);
-          var flagEnabled = $('<a href="#" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-check timetable-typeflag'+(m.Enabled?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
-          var flagCheckDST = $('<a href="#" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-clock timetable-typeflag'+(m.CheckDST?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
-          var flagRepeat = $('<a href="#" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-refresh timetable-typeflag'+(m.Repeat?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
-          var flagWeekday = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Workday===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day1':'')+'">W</a>');
-          var flagWeekend = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Weekend===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-daywe':'')+'">E</a>');
-          var flagHoliday = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Holiday===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day2':'')+'">H</a>');
-          var flagSpecial = $('<a href="#" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Special===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day3':'')+'">S</a>');
+          var flagEnabled = $('<a href="#" title="Enable Timetable scheduling for this module" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-check timetable-typeflag'+(m.Enabled?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
+          var flagCheckDST = $('<a href="#" title="Use alternate schedule on Daylight Saving Time" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-clock timetable-typeflag'+(m.CheckDST?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
+          var flagRepeat = $('<a href="#" title="Keep set module state for the whole schedule duration (5 minutes interval check)" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-refresh timetable-typeflag'+(m.Repeat?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');
+          var flagWeekday = $('<a href="#" title="Use this schedule on Weekdays" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Workday===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day1':'')+'">W</a>');
+          var flagWeekend = $('<a href="#" title="Use this schedule on Weekend" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Weekend===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-daywe':'')+'">E</a>');
+          var flagHoliday = $('<a href="#" title="Use this schedule on Holidays" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Holiday===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day2':'')+'">H</a>');
+          var flagSpecial = $('<a href="#" title="Use this schedule on Special days" class="ui-btn ui-btn-inline timetable-typeflag'+(m.Special===_this.CurrentProgram+1?' ui-btn-active ui-datepicker-day3':'')+'">S</a>');
           flags.append(flagEnabled);
           flags.append(flagCheckDST);
           flags.append(flagRepeat);
@@ -277,38 +316,51 @@
           flags.append(flagHoliday);
           flags.append(flagSpecial);
           flagEnabled.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Enable', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           flagCheckDST.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.CheckDST', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           flagRepeat.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Repeat', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
             });
           });
           flagWeekday.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Workday', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           flagWeekend.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Weekend', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           flagHoliday.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Holiday', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           flagSpecial.on('click', function() {
+            $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Special', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           switch (m.Type) {
@@ -327,7 +379,11 @@
       }
     });      
   },
-  
+
+  CheckNow: function() {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.CheckNow/', function (data) { });
+  },
+
   GetDayIndex: function(day, month) {
     // ignore year in date, consider always as current year
     var year = (new Date).getFullYear();
@@ -414,19 +470,29 @@
     return foundAction;
   },
 
-  GetSliceInfo: function(rect) {
-    var id = rect.data('action');
-    var start = rect.data('index');
-    var end = start + rect.data('length');
-    var action = this.GetTableAction(rect.data('group'), id);
+  GetSliceInfo: function(actionId, tableGroup, start, length, drawDecor) {
+    var action = this.GetTableAction(tableGroup, actionId);
+    var end = start + length;
     var info = '';
     if (action != null)
     {
-      info = '<strong>' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, action.localeId, action.description) + '</strong>';
+      var startDate = this.GetSliceTime(start);
+      var endDate = this.GetSliceTime(end);
+      var dt = new Date();
+      var inRange = (dt >= startDate && dt <= endDate);
+      if (drawDecor) {
+          if (inRange) 
+            info += '<span style="border-left:3px solid lime;padding-left:4px;">';
+          else
+            info += '<span style="border-left:3px dotted gray;padding-left:4px;">';
+      }
+      info += '<strong>' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, action.localeId, action.description) + '</strong>';
       info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_from', 'from');
-      info += ' <strong>' + this.GetSliceTime(start) + '</strong>';
+      info += ' <strong>' + HG.WebApp.Utility.FormatDateTime(startDate) + '</strong>';
       info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_to', 'to');
-      info += ' <strong>' + this.GetSliceTime(end) + '</strong>';
+      info += ' <strong>' + HG.WebApp.Utility.FormatDateTime(endDate) + '</strong>';
+      if (drawDecor)
+          info += '</span>';
     }
     return info;
   },
@@ -435,9 +501,10 @@
     var sliceSize = (60 / this.TimebarResolution);
     var hour = Math.floor(sliceIndex / sliceSize);
     var minute = Math.round(((sliceIndex / sliceSize) - hour) * 60);
-    if (hour.toString().length == 1) hour = '0' + hour;
-    if (minute.toString().length == 1) minute = '0' + minute;
-    return hour + ':' + minute;
+    var d = new Date();
+    d.setHours(hour);
+    d.setMinutes(minute);
+    return d;
   },
 
   EditTimetable: function(el, start, length, action) {
@@ -450,7 +517,7 @@
     var tableLength = 24 * 60 / this.TimebarResolution;
     for (var i = 0; i <= tableLength; i++)
     {
-      var displayTime = this.GetSliceTime(i);
+      var displayTime = HG.WebApp.Utility.FormatDateTime(this.GetSliceTime(i));
       selectStart.append('<option value="' + i + '"' + (i == start ? ' selected' : '') + '>' + displayTime + '</option>');
       selectEnd.append('<option value="' + i + '"' + (i == (start + length) ? ' selected' : '') + '>' + displayTime + '</option>');
     }
@@ -458,6 +525,25 @@
     selectEnd.selectmenu('refresh', true);
     this.ControlPopup.find('[data-ui-field=select_action]').val(this.GetTableAction(el.group, action).id).selectmenu('refresh').change();
     this.ControlPopup.popup('open');
+  },
+
+  GetTableInfo: function(tableType, timetable) {
+    var tableInfo = '';
+    var tableLength = 24 * 60 / this.TimebarResolution;
+    var nb = 0, startIndex = 0;
+    for (var i = 0, c = timetable.length; i < tableLength; i++)
+    {
+      nb++;
+      if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i])) 
+      {
+        var g = 0; if (tableType == 'Therm') g = 1; else if (tableType == 'OnOff') g = 2;
+        var slice = { group: g, action: timetable[i], index: startIndex, length: nb };
+        tableInfo += this.GetSliceInfo(slice.action, slice.group, slice.index, slice.length, true)+'<br/>';
+        nb = 0;
+        startIndex = i + 1;
+      }
+    }
+    return tableInfo;
   },
 
   DrawTimetable: function(el, drawHeader, timetable) {
@@ -494,7 +580,7 @@
         //
         var centerX = (nb * stepSize) / 2;
         $(rect.node).qtip({ 
-          content: _this.GetSliceInfo(rect),
+          content: _this.GetSliceInfo(rect.data('action'), rect.data('group'), rect.data('index'), rect.data('length')),
           show: { delay: 350 },
           style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
           position: { my: 'bottom center', at: 'top right', adjust: { x: centerX, y: -10 } }

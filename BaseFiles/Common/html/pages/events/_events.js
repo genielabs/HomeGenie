@@ -123,9 +123,9 @@ HG.WebApp.Events.Refresh = function () {
         if (filterProperty != '' && event.Property.indexOf(filterProperty) < 0) continue;
         //
         var d = new Date(event.UnixTimestamp);
-        var longDate = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d, false);
+        var longDate = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d);
         rows += '<tr>';
-        rows += '<td><abbr title="' + longDate + '">' + HG.WebApp.Utility.FormatDateTime(d, true) + '</abbr></td>';
+        rows += '<td><abbr title="' + longDate + '">' + HG.WebApp.Utility.FormatDateTime(d, 'sm') + '</abbr></td>';
         rows += '<td>' + event.Property + '</td>';
         rows += '<td>' + event.Value + '</td>';
         rows += '<td>' + event.Source + '</td>';

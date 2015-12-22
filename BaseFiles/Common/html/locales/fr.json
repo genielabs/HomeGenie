@@ -783,6 +783,14 @@
         "Télécharger",
     "common_select_none":
         "Aucun",
+    "common_command_exit":
+        "Exit",
+    "common_command_close":
+        "Close",
+    "common_command_module":
+        "Module",
+    "common_command_modules":
+        "Modules",
 "##":
 "## SIDE MENU LOCALES",
 "##":

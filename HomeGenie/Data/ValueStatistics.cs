@@ -165,10 +165,14 @@ namespace HomeGenie.Data
                 }
             }
             // keeep size within historyLimit (minutes)
-            while ((DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
+            try
             {
-                historyValues.RemoveAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes > historyLimit);
-            }
+                while ((DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
+                {
+                    historyValues.RemoveAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes > historyLimit);
+                }
+                // leave this wrapped in a try..catch
+            } catch { }
             // insert current value into history and so update "Current" to "value"
             historyValues.Insert(0, new StatValue(value, timestamp));
         }

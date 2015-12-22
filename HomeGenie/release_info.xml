@@ -3,9 +3,10 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r508</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Improved Timetable widget with full screen options page (wip)
-  - Other minor UI improvements
+  <ReleaseNote>   - Improved 'Smart Lights' app now with synch to Timetable option
+  - Improved 'Timetable' app and widget with full screen options page
+  - Other minor UI improvements and fixes
   - Added "Add to home screen" option for Android devices for opening Web UI full screen from the Android home screen
   - Control page layout now centering each row</ReleaseNote>
-  <ReleaseDate>2015-12-20T15:42:39.0000Z</ReleaseDate>
+  <ReleaseDate>2015-12-22T16:26:18.0000Z</ReleaseDate>
 </ReleaseInfo>

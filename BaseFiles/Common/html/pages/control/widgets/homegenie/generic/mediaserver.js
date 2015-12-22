@@ -44,7 +44,7 @@
       //
       var _this = this;
       controlpopup.on('popupbeforeposition', function (event) {
-        var availHeight = $(document).height()-360;
+        var availHeight = $(window).height()-320;
         controlpopup.find('[data-ui-field=browsecontent]').parent().css('height', availHeight);
         controlpopup.find('[data-ui-field=browsecontent]').parent().css('max-height', availHeight);
         controlpopup.find('[data-ui-field=browsefiles]').parent().css('height', availHeight);
@@ -90,32 +90,22 @@
     widget.find('[data-ui-field=description]').html(this.DeviceInfo != '' ? this.DeviceInfo : this.Description);
   },
 
+  hasSubfolders: false,
   RenderBrowseList: function (browselist, folderid) {
     var _this = this;
     var browsefiles = _this.ControlPopup.find('[data-ui-field=browsefiles]');
     var path = '';
+    var folderCount = 0;
+    this.hasSubfolders = false;
     $.each(_this.NavPath, function(idx,p){
       path += p+' / ';
     });
     _this.ControlPopup.find('[data-ui-field=path]').html(path);
     $.mobile.loading('show');
     HG.Control.Modules.ServiceCall('AvMedia.Browse', _this.Module.Domain, _this.Module.Address, encodeURIComponent(folderid), function (data) {
-      browselist.empty();
       browsefiles.empty();
       var items = eval(data);
       if (typeof (items) == 'undefined') return false;
-      //
-      if (folderid != '0') {
-        var levelupitem = $('<li><a style="white-space:nowrap;" class="ui-btn ui-icon-back ui-btn-icon-left" href="#">Parent folder</a></li>');
-        levelupitem.on('click', function (e) {
-          _this.NavStack.pop();
-          _this.NavPath.pop();
-          var clicked = _this.NavStack[_this.NavStack.length - 1];
-          _this.RenderBrowseList(browselist, clicked);
-        });
-        browselist.append(levelupitem);
-      }
-      //
       for (i = 0; i < items.length; i++) {
         var iconfile = 'browser_folder'; // object.container
         if (items[i].Class.indexOf('object.item.videoItem') == 0) {
@@ -126,11 +116,36 @@
           iconfile = 'browser_image';
         }
         if (items[i].Class.indexOf('object.container') == 0) {
+          if (folderCount == 0) {
+            browselist.empty();
+            if (folderid != '0') {
+              var levelupitem = $('<li><a style="white-space:nowrap;" class="ui-btn ui-icon-back ui-btn-icon-left" href="#">Parent folder</a></li>');
+              levelupitem.on('click', function (e) {
+                _this.NavStack.pop();
+                _this.NavPath.pop();
+                var clicked = _this.NavStack[_this.NavStack.length - 1];
+                if (!_this.hasSubfolders && _this.NavStack.length > 1) {
+                  _this.NavStack.pop();
+                  _this.NavPath.pop();
+                  clicked = _this.NavStack[_this.NavStack.length - 1];
+                }
+                _this.RenderBrowseList(browselist, clicked);
+              });
+              browselist.append(levelupitem);
+            }
+            _this.hasSubfolders = true;
+          }
+          folderCount++;
           var icon = '<img height="34" src="pages/control/widgets/homegenie/generic/images/' + iconfile + '.png" align="left" style="margin-top:4px;margin-left:6px">';
           var litem = $('<li data-context-id="' + items[i].Id + '" data-mini="true" data-icon="false" class="ui-li-has-thumb"><a style="white-space:nowrap;" href="#">' + icon + ' ' + items[i].Title + '</a></li>');
           litem.on('click', function (e) {
-            _this.NavStack.push($(this).attr('data-context-id'));
-            _this.NavPath.push($(this).text());
+            if (_this.hasSubfolders) {
+                _this.NavStack.push($(this).attr('data-context-id'));
+                _this.NavPath.push($(this).text());
+            } else {
+                _this.NavStack[_this.NavStack.length-1] = $(this).attr('data-context-id');
+                _this.NavPath[_this.NavPath.length-1] = $(this).text();
+            }
             _this.RenderBrowseList(browselist, $(this).attr('data-context-id'));
           });
           browselist.append(litem);

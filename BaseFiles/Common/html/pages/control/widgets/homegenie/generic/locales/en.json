@@ -3,8 +3,10 @@
     "timetable_group_thermostats" : "Thermostats",
     "timetable_group_lights" : "Lights and switches",
     "timetable_title" : "Timetable",
+    "timetable_today_schedule" : "Today's Schedule",
     "timetable_calendar" : "Calendar",
     "timetable_program" : "Program",
+    "timetable_programs" : "Timetable Programs",
     "timetable_standard" : "Standard",
     "timetable_daylightsaving" : "Day Light Saving time",
     

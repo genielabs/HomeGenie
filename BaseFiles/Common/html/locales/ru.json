@@ -779,6 +779,14 @@
         "Upload",
     "common_select_none":
         "None",
+    "common_command_exit":
+        "Exit",
+    "common_command_close":
+        "Close",
+    "common_command_module":
+        "Module",
+    "common_command_modules":
+        "Modules",
 "##":
 "## SIDE MENU LOCALES",
 "##":

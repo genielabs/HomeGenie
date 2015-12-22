@@ -101,6 +101,7 @@
         }
 
         try {
+          var dateFormat = dataStore.get('UI.DateFormat');
           $.plot(_this.Widget.find('[data-ui-field=energystats]'), [
             { label: 'kW counter&nbsp;', data: dataSerie, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: true } }
           ],
@@ -108,7 +109,7 @@
             yaxis: { 
                 show: true, min: yMin 
             },
-            xaxis: { mode: "time", timeformat: "%h%p", minTickSize: [2, "hour"], tickSize: [2, "hour"] },
+            xaxis: { mode: "time", useLocalTime: true, timeformat: (dateFormat == "MDY12" ? "%h%p" : "%h"), minTickSize: [2, "hour"], tickSize: [2, "hour"] },
             legend: { position: "nw", noColumns: 6, backgroundColor: 'rgba(0,0,0,0.4)' },
             lines: { 
               show: showlines, lineWidth: 1.0,
