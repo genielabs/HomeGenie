@@ -77,6 +77,7 @@ namespace HomeGenie.Automation.Scripting
         private object mqttSyncLock = new object();
 
         private HomeGenieService homegenie;
+        private bool defaultCredentials;
 
         public NetHelper(HomeGenieService hg)
         {
@@ -406,6 +407,10 @@ namespace HomeGenie.Automation.Scripting
                     {
                         webClient.Credentials = networkCredential;
                     }
+                    else if (this.defaultCredentials)
+                    {
+                        webClient.UseDefaultCredentials = true;
+                    }
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                     if (customHeaders.Count > 0)
                         webClient.Headers.Add(customHeaders);
@@ -491,6 +496,10 @@ namespace HomeGenie.Automation.Scripting
                     if (this.networkCredential != null)
                     {
                         webClient.Credentials = networkCredential;
+                    }
+                    else if (this.defaultCredentials)
+                    {
+                        webClient.UseDefaultCredentials = true;
                     }
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                     if (customHeaders.Count > 0)
@@ -643,6 +652,12 @@ namespace HomeGenie.Automation.Scripting
         public NetHelper WithCredentials(string user, string pass)
         {
             this.networkCredential = new NetworkCredential(user, pass);
+            return this;
+        }
+
+        public NetHelper WithDefaultCredentials()
+        {
+            this.defaultCredentials = true;
             return this;
         }
 
