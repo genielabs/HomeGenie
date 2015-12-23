@@ -1700,7 +1700,7 @@ Program.GoBackground();</ScriptSource>
     <ActivationTime xsi:nil="true" />
     <TriggerTime>2015-12-21T16:16:55.640282Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
@@ -2027,7 +2027,7 @@ shown as hyperlink buttons in the control page.</Description>
                    "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
                    "MobileNotification.SendChanges", 
                    "Push notifications to Windows Phone client",
-                   "text");
+                   "checkbox");
 Program.Run();
 </ScriptCondition>
     <ScriptSource>string notificationurl = "";
@@ -2125,8 +2125,7 @@ while(Program.IsEnabled)
   }
   Pause(5);
 }
-
-Program.GoBackground();</ScriptSource>
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
@@ -2147,7 +2146,7 @@ Currently limited to one client channel.</Description>
     <ActivationTime xsi:nil="true" />
     <TriggerTime>2015-12-21T16:16:55.966732Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2485,7 +2484,7 @@ Program.GoBackground();</ScriptSource>
     <Commands />
     <ScriptCondition>Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox");
 Program.AddFeature("", "Switch,Light,Dimmer", "TimeTable.ExternalControl", "Synchronize with Timetable schedule if set", "checkbox");
-Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor", "module.text:any:sensor:status.level,sensor.motiondetect");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect");
 Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance");
 Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:1");
 Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30");

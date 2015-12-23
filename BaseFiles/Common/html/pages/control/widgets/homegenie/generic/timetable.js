@@ -263,7 +263,7 @@
           if (schedulingModules.length > 0) {
             $.each(schedulingModules, function(i, m){
               var item = $('<div/>');
-              var itemTitle = $('<div style="margin:0;font-size:10pt;font-weight:bold;margin-top:8px" />');
+              var itemTitle = $('<div style="margin:0;font-size:11pt;font-weight:bold;margin-top:8px;max-width:270px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" />');
               var itemImage = $('<img src="pages/control/widgets/homegenie/generic/images/unknown.png" width="32" height="32" align="absmiddle" style="margin-right:4px">');
               itemTitle.append(itemImage);
               itemTitle.append(HG.Ui.GetModuleDisplayName(m));
@@ -298,7 +298,7 @@
         _this.timebar_onoff_modules.empty();
         $.each(mods, function(i, m){
           var item = $('<div style="display:table-row" />');
-          item.append('<div style="width:280px;display:table-cell;overflow:hidden;padding-left:4px;" align="left">'+m.Name+'</div>');
+          item.append('<div style="width:270px;padding-left:4px;-display:table-cell;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" align="left">'+HG.Ui.GetModuleDisplayName(m)+'</div>');
           var flags = $('<div style="width:250px;display:table-cell;overflow:hidden" align="right" class="ui-mini" />');
           item.append(flags);
           var flagEnabled = $('<a href="#" title="Enable Timetable scheduling for this module" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-check timetable-typeflag'+(m.Enabled?' ui-btn-e ui-btn-active':'')+'">&nbsp;</a>');

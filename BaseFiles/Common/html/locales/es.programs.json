@@ -99,7 +99,7 @@
     "HomeGenie.SmartLights.Enable":
         "Activa el control de 'Iluminación Inteligente'",
     "HomeGenie.SmartLights.OnMotionDetect":
-        "Controlado por detector de movimiento",
+        "Controlado por detector de movimiento (optional)",
     "HomeGenie.SmartLights.CheckLuminosity":
         "Controlado por sensor d eluz (optional)",
     "HomeGenie.SmartLights.SwitchOffTimeout":

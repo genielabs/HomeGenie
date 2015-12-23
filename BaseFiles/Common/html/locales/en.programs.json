@@ -99,7 +99,7 @@
     "HomeGenie.SmartLights.Enable":
         "Enable 'Smart Lights' control",
     "HomeGenie.SmartLights.OnMotionDetect":
-        "Controlled by motion sensor",
+        "Controlled by motion sensor (optional)",
     "HomeGenie.SmartLights.CheckLuminosity":
         "Controlled by light sensor (optional)",
     "HomeGenie.SmartLights.SwitchOffTimeout":

@@ -84,7 +84,7 @@
         sendtolist.append(mr);
       }
     }
-    sendtolist.append('<option value="browser">Open in browser</option>');
+    sendtolist.append('<option value="browser">This device</option>');
     sendtolist.selectmenu('refresh');
     // 
     widget.find('[data-ui-field=description]').html(this.DeviceInfo != '' ? this.DeviceInfo : this.Description);

@@ -99,7 +99,7 @@
     "HomeGenie.SmartLights.Enable":
         "Activer l'éclairage automatique",
     "HomeGenie.SmartLights.OnMotionDetect":
-        "Contrôlé par capteur de mouvement",
+        "Contrôlé par capteur de mouvement (optional)",
     "HomeGenie.SmartLights.CheckLuminosity":
         "Contrôlé par capteur de luminosité (optional)",
     "HomeGenie.SmartLights.SwitchOffTimeout":
