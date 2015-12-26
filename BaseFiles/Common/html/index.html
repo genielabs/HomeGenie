@@ -11,11 +11,12 @@
     <title>
         HomeGenie
     </title>
-    <!-- jquery & jquery mobile css's -->
+    <!-- jquery + jquery mobile css's -->
     <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
     <!--link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.inline-png-1.4.5.min.css" /-->
     <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.inline-svg-1.4.5.min.css" />
     <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jqm-font-awesome-isvg-ipng.min.css" />
     <link rel="stylesheet" href="css/ui.notify.css" />
     <link rel="stylesheet" href="css/jquery.qtip.min.css" />
     <link rel="stylesheet" href="css/jquery-ui.min.css" />
@@ -285,7 +286,7 @@
     
     
     <!-- Module Edit Popup -->
-    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
+    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <div data-role="header" class="ui-corner-top">
             <h1 id="module_title">Module Settings</h1>
         </div>
@@ -390,21 +391,18 @@
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/washingmachine.png" width="48" height="48" />
             </div>
         </div>
-        <div class="ui-grid-b ui-footer ui-bar-inherit" align="center">
-            <div class="ui-block-a" align="left" style="width:25%">
+        <div class="ui-grid-a ui-footer ui-bar-inherit">
+            <div class="ui-block-a" align="left">
                 <a class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left" href="#" data-locale-id="common_command_cancel" data-rel="back">Cancel</a>
             </div>
-            <div class="ui-block-b" align="center" style="width:50%">
-                <a id="module_remove_button" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremove" data-rel="back">Remove from group</a>
-            </div>
-            <div class="ui-block-c" align="right" style="width:25%">
-                <a id="module_update_button" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="common_command_save" data-rel="back">Save</a>
+            <div class="ui-block-b" align="right">
+                <a id="module_update_button" class="ui-btn ui-corner-all ui-icon-fa-save ui-btn-icon-left" href="#" data-locale-id="common_command_save" data-rel="back">Save</a>
             </div>
         </div>
     </div>
 
     <!-- Program Configuration Popup -->
-    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
+    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_program_options">Options</h2>
         </div>
@@ -465,17 +463,17 @@
         <ul data-role="listview" data-inset="false" class="ui-mini ui-corner-all">
             <li><a data-locale-id="home_menu_groups" class="ui-btn ui-icon-grid ui-btn-icon-left" href="#page_configure_groups" data-transition="none">Groups</a></li>
             <li data-locale-id="home_menu_automation" data-role="list-divider">Automation</li>
-            <li><a class="ui-btn ui-btn-icon-left ui-icon-bars" data-locale-id="home_menu_programeditor" href="#page_configure_automationgroups" data-transition="none">Programs</a></li>
-            <li><a class="ui-btn ui-btn-icon-left ui-icon-edit" data-locale-id="home_menu_widgeteditor" href="#page_configure_widgetlist" data-transition="none">Widgets</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-fa-code" data-locale-id="home_menu_programeditor" href="#page_configure_automationgroups" data-transition="none">Programs</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-fa-cube" data-locale-id="home_menu_widgeteditor" href="#page_configure_widgetlist" data-transition="none">Widgets</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-clock" data-locale-id="home_menu_scheduler" href="#page_configure_schedulerservice" data-transition="none">Scheduler</a></li>
             <li data-locale-id="home_menu_system" data-role="list-divider">System</li>
-            <li><a class="ui-btn ui-btn-icon-left ui-icon-gear" data-locale-id="home_menu_settings" href="#page_configure_interfaces" data-transition="none">Settings</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-fa-wrench" data-locale-id="home_menu_settings" href="#page_configure_interfaces" data-transition="none">Settings</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="home_menu_maintenance" href="#page_configure_maintenance" data-transition="none">Maintenance</a></li>
             <li data-locale-id="home_menu_about" data-role="list-divider">About</li>
             <li><a class="ui-btn ui-icon-info ui-btn-icon-left" href="#homegenie_about" data-rel="popup">About HomeGenie</a></li>
-            <li><a class="ui-btn ui-icon-bars ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
-            <li><a class="ui-btn ui-icon-bars ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://genielabs.github.io/HomeGenie/about.html">Programming Guide</a></li>
-            <li><a class="ui-btn ui-icon-comment ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
+            <li><a class="ui-btn ui-icon-fa-book ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
+            <li><a class="ui-btn ui-icon-fa-book ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://genielabs.github.io/HomeGenie/about.html">Programming Guide</a></li>
+            <li><a class="ui-btn ui-icon-fa-commenting ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-heart" data-locale-id="home_menu_about_support" target="_blank" href="http://www.homegenie.it/keepuphg.php">Keep HomeGenie Up!</a></li>
         </ul>
         <br clear="all" />

@@ -83,8 +83,8 @@
         } else if (typeof address != 'undefined' && address.indexOf(':') > 0) {
             var da = HG.WebApp.Utility.ParseModuleDomainAddress(address);
             var mod = HG.WebApp.Utility.GetModuleByDomainAddress(da.Domain, da.Address);
-            if (mod != null && (textInput.val() == '' || (textInput.val().toLowerCase() == mod.Name.toLowerCase()) || (textInput.val().toLowerCase() == address.toLowerCase()))) {
-                textInput.val(mod.Name!=''?mod.Name:mod.Domain+':'+mod.Address);
+            if (mod != null && (textInput.val() == '' || (textInput.val().toLowerCase() == HG.Ui.GetModuleDisplayName(mod).toLowerCase()))) {
+                textInput.val(HG.Ui.GetModuleDisplayName(mod));
                 verified = true;
             }
         }
@@ -107,8 +107,7 @@
             var groupModules = HG.Configure.Groups.GetGroupModules(groupName);
             for (var m = 0; m < groupModules.Modules.length; m++) {
                 var mod = groupModules.Modules[m];
-                var label = mod.Name;
-                if (label == null || label == '') label = mod.Domain+':'+mod.Address;
+                var label = HG.Ui.GetModuleDisplayName(mod);
                 var matchFilter = mod.Name + ':' + mod.Domain + ':' + mod.Address;
                 var matchSearch = matchFilter.indexOf(filter) >= 0;
                 if (this.matchDomain != '')

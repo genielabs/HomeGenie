@@ -105,7 +105,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         });
         
         // initially the user have to press Run/Preview button in order to activate the widget
-        page.find('[data-ui-field=preview-div]').html('');
+        page.find('[data-ui-field=preview-div]').empty();
         HG.WebApp.WidgetEditor._hasError = true;
         // populate "bind module" select menu
         var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');

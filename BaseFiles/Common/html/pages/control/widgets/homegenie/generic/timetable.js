@@ -178,9 +178,10 @@
 
       // BEGIN Programs page initialization
       var programsPageContainer = container.parent().parent().parent(); // $(document.body); //
-      this.ProgramsPage = container.find('[data-ui-field=timetable-programs-page]').detach();
-      programsPageContainer.find('[data-ui-field=timetable-programs-page]').detach();
+      this.ProgramsPage = container.find('[data-ui-field=timetable-programs-page]').remove();
+      programsPageContainer.find('[data-ui-field=timetable-programs-page]').remove();
       programsPageContainer.append(this.ProgramsPage.get(0));
+      programsPageContainer.trigger('create');
       // program change button
       this.ProgramsPage.find('[data-ui-field=btn-table-select]').click(function(el){
         var id = parseInt($(this).html() - 1);
@@ -232,6 +233,7 @@
         $('[data-ui-field=wallpaper]').removeClass("blur-filter");
         _this.ProgramsPage.slideUp(500);
         _this.RefreshSchedulingLog();
+        HG.WebApp.Control.UpdateModules();
       });
       this.ProgramsPage.find('[data-ui-field=btn-table-calendar]').click(function(el){
         var btn = $(this);
@@ -262,6 +264,7 @@
         success: function (schedulingModules) {
           if (schedulingModules.length > 0) {
             $.each(schedulingModules, function(i, m){
+              if (typeof m.Timetable == 'undefined') return true;
               var item = $('<div/>');
               var itemTitle = $('<div style="margin:0;font-size:11pt;font-weight:bold;margin-top:8px;max-width:270px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" />');
               var itemImage = $('<img src="pages/control/widgets/homegenie/generic/images/unknown.png" width="32" height="32" align="absmiddle" style="margin-right:4px">');
@@ -333,6 +336,7 @@
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Repeat', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
+              _this.CheckNow();
             });
           });
           flagWeekday.on('click', function() {

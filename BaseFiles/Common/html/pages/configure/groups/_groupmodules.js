@@ -15,8 +15,10 @@ HG.WebApp.GroupModules.InitializePage = function () {
             var domain = selectedopt.attr('data-context-domain');
             var address = selectedopt.attr('data-context-value');
             HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, domain, address, function () {
-                $.mobile.silentScroll($("#page_configure_groupmodules_list li").last().position().top);
-                HG.WebApp.GroupModules.EditCurrentModule($("#page_configure_groupmodules_list li").last());
+                var item = $("#page_configure_groupmodules_list ul li").last();
+                var availHeight = $(window).height()-item.height()-50;
+                $.mobile.silentScroll(item.position().top-availHeight);
+                HG.WebApp.GroupModules.EditCurrentModule(item);
                 $.mobile.loading('show');
                 setTimeout("$('#automation_group_module_edit').popup('open');$.mobile.loading('hide');", 1000);
             });
@@ -25,7 +27,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
         $('#group_delete_button').bind('click', function (event) {
             HG.WebApp.GroupModules.DeleteGroup(HG.WebApp.GroupModules.CurrentGroup);
         });
-        //	
+        //
         $('#module_options_button').bind('click', function (event) {
             HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
         });
@@ -49,7 +51,9 @@ HG.WebApp.GroupModules.InitializePage = function () {
             var label = $('#automation_group_separatorlabel').val().trim();
             if (label != '') {
                 HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.SeparatorItemDomain, label, function () {
-                    $.mobile.silentScroll($("#page_configure_groupmodules_list li").last().position().top);
+                    var item = $("#page_configure_groupmodules_list ul li").last();
+                    var availHeight = $(window).height()-item.height()-50;
+                    $.mobile.silentScroll(item.position().top-availHeight);
                 });
             }
         });
@@ -104,13 +108,6 @@ HG.WebApp.GroupModules.InitializePage = function () {
                 });
             });
         });
-        //
-        $("#page_configure_groupmodules_list").sortable();
-        $("#page_configure_groupmodules_list").disableSelection();
-        //<!-- Refresh list to the end of sort for having a correct display -->
-        $("#page_configure_groupmodules_list").bind("sortstop", function (event, ui) {
-            HG.WebApp.GroupModules.SortModules();
-        });
 
         $('#groupmodules_groupwall').on('change', function(){
             if ($(this).val()=='')
@@ -154,7 +151,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
         done: function (e, data) {
             var wp = data.result.ResponseValue;
             $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+wp+')');
-            HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() { 
+            HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() {
                 var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
                 group.Wallpaper = wp;
                 if ($.mobile.activePage.attr('id') == 'page_control')
@@ -207,7 +204,7 @@ HG.WebApp.GroupModules.ModuleIconsToggle = function () {
 HG.WebApp.GroupModules.SortModules = function () {
 
     var neworder = '';
-    $('#page_configure_groupmodules_list').children('li').each(function () {
+    $('#page_configure_groupmodules_list ul').children('li').each(function () {
         var midx = $(this).attr('data-module-index');
         if (midx >= 0) {
             neworder += (midx + ';')
@@ -460,6 +457,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     $('#groupmodules_groupname').val(groupmodules.Name);
     //
     $('#page_configure_groupmodules_list').empty();
+    $('#page_configure_groupmodules_list').append('<ul data-role="listview" />');
     //$('#page_configure_groupmodules_list').listview().listview('refresh');
     //$('#page_configure_groupmodules_list').append('<li data-icon="false" data-role="list-divider">Group Modules</li>');
     //
@@ -469,34 +467,38 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
 
         if (groupmodules.Modules[m].Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
             html += '<li class="ui-header" data-icon="false" data-module-index="' + m + '">';
-            html += '<a>' + groupmodules.Modules[m].Address + '</a>';
+            html += '<a style="height:25px;line-height:24px;font-size:12pt;font-weight:bold">&nbsp;' + groupmodules.Modules[m].Address + '</a>';
+            html += '<div class="ui-grid-a" style="position:absolute;right:0;top:1px;">';
+            html += '<div class="ui-block-a"><a class="handle ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-notext ui-btn-inline">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle') + '</a></div>';
+            html += '<div class="ui-block-b"><a class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-inline">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle') + '</a></div>';
+            html += '</div>';
             html += '</li>';
         }
         else {
-            var address_label = "Module";
-            if (groupmodules.Modules[m].Domain == 'HomeAutomation.ZWave') {
-                address_label = "Node";
-            }
-            else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.Weeco4mGPIO') {
-                address_label = "GPIO";
-            }
-            else if (groupmodules.Modules[m].Domain == 'HomeAutomation.HomeGenie.Automation') {
-                address_label = "Program";
-            }
             var iconid = 'module_icon_image_' + m;
             var icon = 'pages/control/widgets/homegenie/generic/images/unknown.png';
-            html += '<li data-icon="bars" data-module-index="' + m + '">';
+            html += '<li data-icon="false" data-module-index="' + m + '">';
             html += '<a>';
             html += '<table><tr><td rowspan="2" align="left"><img id="' + iconid + '" height="54" src="' + icon + '"></td>';
             html += '<td style="padding-left:10px"><span>' + groupmodules.Modules[m].Name + '</span></td></tr>';
-            html += '<tr><td style="padding-left:10px"><span style="color:gray">' + domain_label + '</span> ' + address_label + ' ' + groupmodules.Modules[m].Address + '</td>';
-            html += '</tr></table></a>';
-            html += '<a href="#page_configure_groupmodules_propspopup" data-rel="popup" data-transition="pop">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle') + '</a>';
+            html += '<tr><td style="padding-left:10px"><span style="color:gray">' + domain_label + '</span> ' + groupmodules.Modules[m].Address + '</td>';
+            html += '</tr></table>';
+            html += '</a>';
+            html += '<div class="ui-grid-c" style="position:absolute;right:0;top:0;height:100%;">';
+            html += '<div data-ui-field="btn_settings" class="ui-block-a"><a title="Settings" data-rel="popup" data-transition="pop" class="ui-btn ui-icon-gear ui-btn-icon-notext ui-list-btn-option">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_optionstitle') + '</a></div>';
+            html += '<div data-ui-field="btn_parameters" class="ui-block-b"><a title="Parameters" data-rel="popup" data-transition="pop" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-list-btn-option">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle') + '</a></div>';
+            html += '<div data-ui-field="btn_delete" class="ui-block-d"><a title="Remove from this group" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-list-btn-option">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle') + '</a></div>';
+            html += '<div class="ui-block-c"><a title="Drag to sort"  class="handle ui-btn ui-icon-fa-sort ui-btn-icon-notext ui-list-btn-option">' + HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle') + '</a></div>';
+            html += '</div>';
             html += '</li>';
         }
     }
-    $('#page_configure_groupmodules_list').append(html);
-    $('#page_configure_groupmodules_list').listview().listview('refresh');
+    $('#page_configure_groupmodules_list ul').append(html);
+    $('#page_configure_groupmodules_list ul').listview().listview('refresh');
+    $("#page_configure_groupmodules_list ul").sortable({ handle : '.handle', axis: 'y', scrollSpeed: 10 });
+    $("#page_configure_groupmodules_list ul").bind("sortstop", function (event, ui) {
+        HG.WebApp.GroupModules.SortModules();
+    });
     // udate icons asynchronously
     for (var m = 0; m < groupmodules.Modules.length; m++) {
         var iconid = 'module_icon_image_' + m;
@@ -505,36 +507,29 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
         }, iconid);
     }
     // set on click handler for list items
-    $("#page_configure_groupmodules_list li").each(function (index) {
+    $("#page_configure_groupmodules_list ul li").each(function (index) {
         var item = $(this);
-        item.find("a:first").on("click", function () {
+        item.find('[data-ui-field=btn_settings]').on('click', function () {
+            HG.WebApp.SetCurrentModule(item);
             HG.WebApp.GroupModules.EditCurrentModule(item);
         });
-        item.find("a:last").on("click", function () {
-            var m = item.attr('data-module-index');
-            if (m) {
-                HG.WebApp.GroupModules.CurrentModule = HG.WebApp.Utility.GetModuleByDomainAddress(groupmodules.Modules[m].Domain, groupmodules.Modules[m].Address);
-                if (HG.WebApp.GroupModules.CurrentModule == null) {
-                    // module not found, pheraps it was removed
-                    // so we return the data in the group module reference (address and domain only)
-                    HG.WebApp.GroupModules.CurrentModule = groupmodules.Modules[m];
-                    HG.WebApp.GroupModules.CurrentModule.DeviceType = '';
-                }
-            }
+        item.find('[data-ui-field=btn_parameters]').on('click', function () {
+            HG.WebApp.SetCurrentModule(item);
+            $('#page_configure_groupmodules_propspopup').popup('open');
+        });
+        item.find('[data-ui-field=btn_delete]').on('click', function (event) {
+            HG.WebApp.SetCurrentModule(item);
+            HG.WebApp.GroupModules.DeleteGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.CurrentModule);
+            HG.WebApp.GroupsList.SaveGroups(null);
         });
     });
     $("#configure_groupslist").listview("refresh");
 };
 
-HG.WebApp.GroupModules.EditCurrentModule = function (item) {
-
-    var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.GroupModules.CurrentGroup);
-    //
-    $("#configure_groupslist").attr('selected-module-index', item.attr('data-module-index'));
-    //
+HG.WebApp.SetCurrentModule = function (item) {
     var m = item.attr('data-module-index');
-    //
     if (m) {
+        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.GroupModules.CurrentGroup);
         HG.WebApp.GroupModules.CurrentModule = HG.WebApp.Utility.GetModuleByDomainAddress(groupmodules.Modules[m].Domain, groupmodules.Modules[m].Address);
         if (HG.WebApp.GroupModules.CurrentModule == null) {
             // module not found, pheraps it was removed
@@ -542,19 +537,23 @@ HG.WebApp.GroupModules.EditCurrentModule = function (item) {
             HG.WebApp.GroupModules.CurrentModule = groupmodules.Modules[m];
             HG.WebApp.GroupModules.CurrentModule.DeviceType = '';
         }
-        $('#module_remove_button').show();
-        if (HG.WebApp.GroupModules.CurrentModule.Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
-            HG.WebApp.GroupModules.EditModule.Address = HG.WebApp.GroupModules.CurrentModule.Address;
-            HG.WebApp.GroupModules.EditModule.Domain = HG.WebApp.GroupModules.CurrentModule.Domain;
-            $('#automation_group_separator_edit').popup('open', { transition: 'pop', positionTo: 'window' });
-        }
-        else {
-            HG.WebApp.GroupModules.ModuleEdit(function () {
-                // module updated callback
-                $('#control_groupslist').empty();
-                HG.WebApp.GroupModules.LoadGroupModules();
-            });
-        }
+    }
+};
+
+HG.WebApp.GroupModules.EditCurrentModule = function (item) {
+
+    HG.WebApp.SetCurrentModule(item);
+    //$("#configure_groupslist").attr('selected-module-index', item.attr('data-module-index'));
+    if (HG.WebApp.GroupModules.CurrentModule.Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
+        HG.WebApp.GroupModules.EditModule.Address = HG.WebApp.GroupModules.CurrentModule.Address;
+        HG.WebApp.GroupModules.EditModule.Domain = HG.WebApp.GroupModules.CurrentModule.Domain;
+        $('#automation_group_separator_edit').popup('open', { transition: 'pop', positionTo: 'window' });
+    } else {
+        HG.WebApp.GroupModules.ModuleEdit(function () {
+            // module updated callback
+            $('#control_groupslist').empty();
+            HG.WebApp.GroupModules.LoadGroupModules();
+        });
     }
 
 };

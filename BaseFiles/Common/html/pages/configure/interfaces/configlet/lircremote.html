@@ -70,7 +70,7 @@ HG.WebApp.SystemSettings.Interfaces['Controllers.LircRemote'] = {
             $.mobile.loading('show');
             var value = searchFilter.val();
             var html = '';
-            searchRemoteList.html('');
+            searchRemoteList.empty();
             if (value && value.length > 2) {
                 searchRemoteList.html('<li><div class="ui-loader"><span class="ui-icon ui-icon-loading"></span></div></li>');
                 searchRemoteList.listview('refresh');

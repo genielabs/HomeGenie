@@ -2,7 +2,7 @@
 <ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Group>
     <Name>Dashboard</Name>
-    <Wallpaper>wallpaper_007.jpg</Wallpaper>
+    <Wallpaper>wallpaper_006.jpg</Wallpaper>
     <Modules>
       <ModuleReference>
         <Address>34</Address>
@@ -32,7 +32,7 @@
   </Group>
   <Group>
     <Name>Color Lights</Name>
-    <Wallpaper>wallpaper_006.jpg</Wallpaper>
+    <Wallpaper>wallpaper_007.jpg</Wallpaper>
     <Modules>
       <ModuleReference>
         <Address>1</Address>

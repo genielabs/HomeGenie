@@ -600,6 +600,15 @@ div[data-role=page]:not(input) {
 
 /* Custom Icons */
 
+[class*=ui-block-]>a.ui-list-btn-option,
+.ui-list-btn-option {
+    height:88px;
+    width:40px;
+    padding:0;
+    margin:0;
+    border-right:0;
+}
+
 .ui-icon-microphone:after {
     background-image: url("../images/icons/micro-black.png");
     background-position: 3px 3px;

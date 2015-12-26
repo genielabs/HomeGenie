@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+23/12/2015 v1.1-beta.508a
+    - Fix to Timetable widget data refresh issue
+
 22/12/2015 v1.1-beta.508
     - Improved 'Smart Lights' app now with synch to Timetable option
     - Improved 'Timetable' app and widget with full screen options page

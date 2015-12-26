@@ -41,6 +41,12 @@ HG.WebApp.Control.InitializePage = function () {
         });
     });
     page.on('pagehide', function (e) {
+        // if it was loading, stop loading
+        if (widgetsloadtimer) clearTimeout(widgetsloadtimer);
+        if (HG.WebApp.Control._renderModuleDelay != null) clearTimeout(HG.WebApp.Control._renderModuleDelay);
+        HG.WebApp.Control._renderModuleBusy = false;
+        widgetsloadqueue = [];
+        // hide wallpaper
         $('div[data-ui-field="wallpaper"]').hide();
     });
     page.on('pagebeforeshow', function (e) {
@@ -93,7 +99,7 @@ HG.WebApp.Control.ShowGroup = function (gid) {
     HG.WebApp.Control.RefreshGroupIndicators();
     $('#control_groupcontent').children('div').hide();
     $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
-    HG.WebApp.Control.RenderGroupModules(gid);
+    setTimeout(function(){ HG.WebApp.Control.RenderGroupModules(gid); }, 100);
 };
 //
 HG.WebApp.Control.UpdateModules = function () {
@@ -176,6 +182,11 @@ HG.WebApp.Control.RenderMenu = function () {
 };
 //
 HG.WebApp.Control.RenderGroups = function () {
+    // destroy any previous instance of isotope
+    $.each($('#control_groupcontent').find('div[class=isotope]'), function(i, l){
+        $(this).isotope('destroy');
+    });
+    // render groups
     $('#control_groupcontent').empty();
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         if (i == 0) {
@@ -284,7 +295,8 @@ HG.WebApp.Control.RenderModule = function () {
         $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
             itemSelector: '.freewall',
             layoutMode: 'fitRows'
-        }).isotope();
+        }).isotope().addClass('isotope');
+
         HG.WebApp.Control.UpdateActionsMenu();
         $.mobile.loading('hide');
     }
@@ -295,7 +307,6 @@ HG.WebApp.Control.EditModule = function (module) {
     HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data._CurrentGroup;
     HG.WebApp.GroupModules.CurrentModule = module;
     var oldtype = module.DeviceType;
-    $('#module_remove_button').hide();
     HG.WebApp.GroupModules.ModuleEdit(function () {
         if (oldtype != module.DeviceType) {
             var grp = $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex);
@@ -324,7 +335,7 @@ HG.WebApp.Control.UpdateActionsMenu = function () {
                 var module = groupmodules.Modules[m];
                 if (module.Widget == 'homegenie/generic/program') {
                     // add item to actions menu
-                    $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
+                    $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-fa-play-circle-o ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
                 }
             }
         }
@@ -356,7 +367,7 @@ HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
 HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
     if (widgetsloadqueue.length > 0 || HG.WebApp.Control._renderModuleBusy) {
         if (HG.WebApp.Control._renderModuleDelay != null) clearTimeout(HG.WebApp.Control._renderModuleDelay);
-        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 10);
+        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 500);
         return;
     }
     //
@@ -407,8 +418,7 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         //
         if (modui.length == 0) {
             widgetsloadqueue.push({ GroupName: HG.WebApp.Data.Groups[groupIndex].Name, GroupElement: grp, ElementId: uid, Module: module });
-        }
-        else {
+        } else {
             if (modui.data('homegenie.widget')) {
                 module.WidgetInstance = modui.data('homegenie.widget');
                 module.WidgetInstance.RenderView(cuid, module);
@@ -480,7 +490,7 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
         }
         //
 
-        //		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
+        //'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
 
         var indicators = '';
         if (grouploadkw > 0) {

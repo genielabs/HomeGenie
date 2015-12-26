@@ -191,7 +191,7 @@
       var title = $(data.item).attr('dc:title');
       if (typeof title != 'undefined' && title.length > 0)
         item.find('h3').html(title);
-      item.find('p').html('');
+      item.find('p').empty();
       var size = 0; // TODO: size..
       var duration = '';
       var audioChannels = '';

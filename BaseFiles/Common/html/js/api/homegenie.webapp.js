@@ -1,4 +1,5 @@
 HG.WebApp = HG.WebApp || {};
+HG.Ext = HG.Ext || {};
 //
 HG.WebApp.Data = HG.WebApp.Data || {};
 //
@@ -110,8 +111,9 @@ HG.WebApp.InitializePage = function ()
 
         // localize UI
         var userLang = HG.WebApp.Locales.GetUserLanguage();
-        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
-            HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json', function(success){
+        HG.WebApp.Locales.Load('./locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
+            HG.WebApp.Locales.Load('./locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json', function(success){
+                HG.WebApp.Locales.Localize(document);
                 $('#homegenie_overlay').fadeOut(200);
                 // Show about popup
                 if (!dataStore.get('UI.AboutPopupShown')) {
@@ -177,10 +179,6 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, function () {
             HG.WebApp.GroupModules.ModuleUpdatedCallback();
         });
-    });
-    $('#module_remove_button').bind('click', function (event) {
-        HG.WebApp.GroupModules.DeleteGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.CurrentModule);
-        HG.WebApp.GroupsList.SaveGroups(null);
     });
     //
     $('#automationprograms_program_options').enhanceWithin().popup();
@@ -719,10 +717,9 @@ HG.WebApp.Locales.GetDefault = function(callback) {
         }
     });
 };
-HG.WebApp.Locales.Localize = function(container, langurl, callback)
-{
+HG.WebApp.Locales.Load = function(langurl, callback) {
     // get data via ajax
-    // store it in 		HG.WebApp.Data._CurrentLocale
+    // store it in HG.WebApp.Data._CurrentLocale
     // and replace locales strings in the current page
     HG.WebApp.Locales.GetDefault(function(){
         $.ajax({
@@ -730,23 +727,6 @@ HG.WebApp.Locales.Localize = function(container, langurl, callback)
             type: 'GET',
             success: function (data) {
                 HG.WebApp.Data._CurrentLocale = $.extend(HG.WebApp.Data._CurrentLocale, $.parseJSON( data ));
-                //
-                $(container).find('[data-locale-id]').each(function(index){
-                    var stringid = $(this).attr('data-locale-id');
-                    var text = HG.WebApp.Locales.GetLocaleString(stringid);
-                    if (text != null) {
-                        $this = $(this);
-                        if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
-                            $('span.ui-btn-text', $this).text(text);
-                        }
-                        else if( $this.is('input') ) {
-                            $this.attr("placeholder", text);
-                        }
-                        else {
-                            $(this).html(text);
-                        }
-                    }
-                });
                 if (typeof callback == 'function') callback(true);
             },
             error: function(xhr, status, error) {
@@ -754,6 +734,24 @@ HG.WebApp.Locales.Localize = function(container, langurl, callback)
                 if (typeof callback == 'function') callback(false);
             }
         });
+    });
+};
+HG.WebApp.Locales.Localize = function(container) {
+    $(container).find('[data-locale-id]').each(function(index){
+        var stringid = $(this).attr('data-locale-id');
+        var text = HG.WebApp.Locales.GetLocaleString(stringid);
+        if (text != null) {
+            $this = $(this);
+            if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
+                $('span.ui-btn-text', $this).text(text);
+            }
+            else if( $this.is('input') ) {
+                $this.attr("placeholder", text);
+            }
+            else {
+                $(this).html(text);
+            }
+        }
     });
 };
 HG.WebApp.Locales.LocalizeElement = function(elementId, locale) {

@@ -1,9 +1,4 @@
-﻿
-
-HG.Ext = HG.Ext || {};
-HG.Ext.ZWave = HG.Ext.ZWave || {};
-
-
+﻿HG.Ext.ZWave = HG.Ext.ZWave || {};
 HG.Ext.ZWave.NodeSetup = HG.Ext.ZWave.NodeSetup || {};
 
 HG.Ext.ZWave.NodeSetup.Show = function (module) {
@@ -11,7 +6,6 @@ HG.Ext.ZWave.NodeSetup.Show = function (module) {
 }
 
 HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
-
 
     // load data into fields
     $('#configurepage_OptionZWave_id').val(module.Address);
@@ -67,7 +61,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     $('#opt-zwave-battery-box').hide();
     $('#opt-zwave-door-lock').hide();
     //
-    $('#opt-zwave-nodeinformation-overview').html('');
+    $('#opt-zwave-nodeinformation-overview').empty();
     //
     var manufacturerspec = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.ManufacturerSpecific");
     $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + (manufacturerspec != null ? manufacturerspec.Value : '?'));
@@ -205,7 +199,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationValue"]').val(association);
     */
     //
-    /*			        
+    /*
     var variable = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Variables." + $('#configurepage_OptionZWave').find('input[data-module-prop="VariableId"]').val());
     if (variable != null)
     {
@@ -233,11 +227,11 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
                 productName: znodeDesc.productName,
                 brandName: znodeDesc.brandName,
                 productLine: znodeDesc.productLine,
-                associationGroups: (typeof devinfo.ZWaveDevice.assocGroups != 'undefined' 
-                                        ? Pepper1Db_getArray(devinfo.ZWaveDevice.assocGroups.assocGroup, 'assocGroup') 
+                associationGroups: (typeof devinfo.ZWaveDevice.assocGroups != 'undefined'
+                                        ? Pepper1Db_getArray(devinfo.ZWaveDevice.assocGroups.assocGroup, 'assocGroup')
                                         : []),
-                configParams: (typeof devinfo.ZWaveDevice.configParams != 'undefined' 
-                                        ? Pepper1Db_getArray(devinfo.ZWaveDevice.configParams.configParam, 'configParam') 
+                configParams: (typeof devinfo.ZWaveDevice.configParams != 'undefined'
+                                        ? Pepper1Db_getArray(devinfo.ZWaveDevice.configParams.configParam, 'configParam')
                                         : []),
                 imageUrl: ''
             }
@@ -352,30 +346,20 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
 
 
 
-        //            alert(zwaveNode.configParams[0].description);
-        //            alert(zwaveNode.associationGroups[0].description);
-        //            alert(zwaveNode.description + '\n' + zwaveNode.productName + '\n' + zwaveNode.brandName + '\n' + zwaveNode.productLine);  // <----- this is ok!
+        //alert(zwaveNode.configParams[0].description);
+        //alert(zwaveNode.associationGroups[0].description);
+        //alert(zwaveNode.description + '\n' + zwaveNode.productName + '\n' + zwaveNode.brandName + '\n' + zwaveNode.productLine);  // <----- this is ok!
 
 
 
     }
 
-
-
-
-
-
-
-
-
-
 }
 
 
 
-
-
 // TODO: Refactor all of the following methods to stay in "HG.Ext.ZWave." domain
+
 
 
 HG.WebApp.GroupModules.ZWave_AssociationGet = function () {
@@ -552,16 +536,8 @@ HG.WebApp.GroupModules.SensorMultiLevelParameterGet = function () {
 
 
 
-
-
-
-
-
-
-
-
-
 // TODO: Refactor all of the following methods to stay in "HG.Ext.ZWave.Api" domain
+
 
 
 function zwave_AssociationGet(nodeid, groupid, callback) {
@@ -718,26 +694,15 @@ function zwave_NodeInformationGet(nodeid, callback) {
 function _zwavedelayupdate(nodeid) {
     //HG.WebApp.GroupModules.ShowModuleOptions("HomeAutomation.ZWave", nodeid);
     window.setTimeout(function () {
-        //			HG.Configure.Modules.List(function(data){
-        //				HG.WebApp.Data.Modules = eval(data); 	   	
+        //HG.Configure.Modules.List(function(data){
+        //HG.WebApp.Data.Modules = eval(data);
         HG.WebApp.GroupModules.ShowModuleOptions("HomeAutomation.ZWave", nodeid);
-        //	    	});
+        //});
     }, 200);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* Pepper1 DB */
 
 
 function Pepper1Db_getConfigValue(zvalue) {
@@ -751,7 +716,6 @@ function Pepper1Db_getConfigValue(zvalue) {
     }
     return v;
 }
-
 
 function Pepper1Db_getConfigParam(zparam) {
     var p = { number: 1, valueType: '', valueSize: 1, valueDefault: '', name: '', description: '', values: [] };
@@ -825,6 +789,3 @@ function Pepper1Db_getLocaleText(zproperty) {
     // else
     return zproperty.lang['#text'];
 }
-
-
-

@@ -1,0 +1,4 @@
+﻿<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" width="16" height="16" overflow="auto" preserveAspectRatio="xMidYMid" baseProfile="tiny" space="preserve">
+  <path d="M320 768 L832 768 L832 960 Q832 1066 757 1141 Q682 1216 576 1216 Q470 1216 395 1141 Q320 1066 320 960 L320 768 z M1152 672 L1152 96 Q1152 56 1124 28 Q1096 0 1056 0 L96 0 Q56 0 28 28 Q0 56 0 96 L0 672 Q0 712 28 740 Q56 768 96 768 L128 768 L128 960 Q128 1144 260 1276 Q392 1408 576 1408 Q760 1408 892 1276 Q1024 1144 1024 960 L1024 768 L1056 768 Q1096 768 1124 740 Q1152 712 1152 672 z" pathLength="0" fill="White" transform="translate(2.857143, 0.5714296) scale(0.008928572, -0.008928572) translate(0, -1536)" />
+</svg>
