@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r508a</Version>
+  <Version>1.1 beta r509</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fix to Timetable widget data refresh issue</ReleaseNote>
-  <ReleaseDate>2015-12-23T16:26:02.0000Z</ReleaseDate>
+  <ReleaseNote>   - Little UI rework and improvements
+  - Fix to Timetable widget 'today events' bug</ReleaseNote>
+  <ReleaseDate>2015-12-27T21:40:18.0000Z</ReleaseDate>
 </ReleaseInfo>
