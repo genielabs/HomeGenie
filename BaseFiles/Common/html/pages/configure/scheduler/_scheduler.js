@@ -43,6 +43,7 @@ HG.WebApp.Scheduler.InitializePage = function () {
     });
     //
     $('#scheduleritem_add_button').on('click', function (event) {
+        $('#schedulerservice_item_name').val('');
         HG.WebApp.Scheduler._CurrentEventName = "";
         HG.WebApp.Scheduler._CurrentEventIndex = -1;
     });
@@ -127,11 +128,11 @@ HG.WebApp.Scheduler.RefreshEventDetails = function () {
         expr = schedule.CronExpression;
         prid = schedule.ProgramId;
         $('#schedulerservice_item_name').addClass('ui-disabled');
+        $('#schedulerservice_item_name').val(name);
     }
     else {
         $('#schedulerservice_item_name').removeClass('ui-disabled');
     }
-    $('#schedulerservice_item_name').val(name);
     $('#schedulerservice_item_cronexp').val(expr);
     $('#schedulerservice_item_programid').val(prid);
 

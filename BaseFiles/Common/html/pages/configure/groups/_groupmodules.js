@@ -516,7 +516,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
         });
         item.find('[data-ui-field=btn_parameters]').on('click', function () {
             HG.WebApp.SetCurrentModule(item);
-            $('#page_configure_groupmodules_propspopup').popup('open');
+            $('#page_configure_groupmodules_propspopup').popup('open', { transition: 'pop', positionTo: 'window' });
         });
         item.find('[data-ui-field=btn_delete]').on('click', function (event) {
             HG.WebApp.SetCurrentModule(item);

@@ -14,24 +14,13 @@ HG.WebApp.AutomationGroupsList.InitializePage = function () {
         $('#automationgroup_new_button').bind('click', function (event) {
             HG.WebApp.AutomationGroupsList.GroupsAdd($('#automationgroup_new_name').val());
         });
-        //
         widgetEditorButton.bind('click', function (event) {
             $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetsList.PageId, { transition: "slide" });
         });
-        //	
         $.mobile.loading('show');
         HG.Configure.Groups.List('Automation', function () {
             HG.WebApp.AutomationGroupsList.GetGroupsListViewItems();
             $.mobile.loading('hide');
-        });
-        //
-        HG.WebApp.AutomationGroupsList.LoadGroups();
-        //
-        $("#configure_automationgroupslist").sortable();
-        $("#configure_automationgroupslist").disableSelection();
-        //<!-- Refresh list to the end of sort for having a correct display -->
-        $("#configure_automationgroupslist").bind("sortstop", function (event, ui) {
-            HG.WebApp.AutomationGroupsList.SortGroups();
         });
     });
     page.on('pagebeforeshow', function (e) {
@@ -50,8 +39,11 @@ HG.WebApp.AutomationGroupsList.LoadGroups = function () {
 };
 //
 HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
+    if ($('#configure_automationgroupslist').hasClass('ui-sortable')) {
+        $('#configure_automationgroupslist').sortable('destroy');
+        $('#configure_automationgroupslist').off('sortstop');
+    }
     $('#configure_automationgroupslist').empty();
-    $('#configure_automationgroupslist').append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_grouplist') + '</li>');
     //
     var ifaceZwave = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.ZWave');
     var ifaceInsteon = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.Insteon');
@@ -60,15 +52,14 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
     //
     var i = 0;
     var hiddenGroup = ' style="display:none"';
+    var html = '<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_grouplist') + '</li>';
     for (; i < HG.WebApp.Data.AutomationGroups.length; i++) {
         var groupName = HG.WebApp.Data.AutomationGroups[i].Name;
         var itemVisibility = '';
-        //
         // hide non valid entries for the running configuration
         if ((groupName == 'Raspberry Pi' || groupName == 'CubieTruck') && HOST_SYSTEM.substring(0, 3) == 'Win') itemVisibility = hiddenGroup;
         else if (groupName == 'X10' && ifaceX10 == null && ifaceInsteon == null && ifaceW800rf == null) itemVisibility = hiddenGroup;
         else if (groupName == 'Z-Wave' && ifaceZwave == null) itemVisibility = hiddenGroup;
-        //
         // count modules
         var modulescount = 0;
         for (p = 0; p < HG.WebApp.Data.Programs.length; p++) {
@@ -76,9 +67,12 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
                 modulescount++;
             }
         }
-        $('#configure_automationgroupslist').append('<li' + itemVisibility + ' data-group-name="' + groupName + '" data-group-index="' + i + '"><a href="#page_automation_programs">' + groupName + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        html += '<li' + itemVisibility + ' data-icon="false" data-group-name="' + groupName + '" data-group-index="' + i + '">';
+        html += '<a href="#page_automation_programs">' + groupName + '</a>';
+        html += '<span class="ui-li-count">' + (modulescount) + '</span>';
+        html += '<div style="position:absolute;right:40px;top:0;height:100%;overflow:hidden"><a class="handle ui-btn ui-icon-fa-sort ui-btn-icon-notext ui-list-btn-option-mini"></a></div>';
+        html += '</li>';
     }
-    //
     // programs with no group are shown in "Ungrouped" special group
     modulescount = 0;
     for (p = 0; p < HG.WebApp.Data.Programs.length; p++) {
@@ -87,22 +81,20 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         }
     }
     if (modulescount > 0) {
-        $('#configure_automationgroupslist').append('<li data-group-name=""><a href="#page_automation_programs">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        html += '<li data-icon="false" data-group-name=""><a href="#page_automation_programs">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>';
     }
     //
-    $('#configure_automationgroupslist').listview();
-    $('#configure_automationgroupslist').listview('refresh');
-    //
-    $("#configure_automationgroupslist li").on('click', function () {
+    $('#configure_automationgroupslist').append(html);
+    $('#configure_automationgroupslist').listview().listview('refresh');
+    $('#configure_automationgroupslist').sortable({ handle : '.handle', axis: 'y', scrollSpeed: 10 }).sortable('refresh');
+    $('#configure_automationgroupslist').on('sortstop', function (event, ui) {
+        HG.WebApp.AutomationGroupsList.SortGroups();
+    });
+    $('#configure_automationgroupslist li').on("click", function () {
         HG.WebApp.AutomationGroupsList._CurrentGroup = $(this).attr('data-group-name');
+        $('#configure_automationgroupslist').attr('selected-group-name', $(this).attr('data-group-name'));
+        $('#configure_automationgroupslist').attr('selected-group-index', $(this).attr('data-group-index'));
     });
-    //
-    $("#configure_automationgroupslist li").bind("click", function () {
-        var group = $(this).text();
-        $("#configure_automationgroupslist").attr('selected-group-name', $(this).attr('data-group-name'));
-        $("#configure_automationgroupslist").attr('selected-group-index', $(this).attr('data-group-index'));
-    });
-    $("#configure_automationgroupslist").listview("refresh");
 };
 //
 HG.WebApp.AutomationGroupsList.GetGroupModules = function (groupname) {
@@ -113,7 +105,7 @@ HG.WebApp.AutomationGroupsList.GetGroupModules = function (groupname) {
             groupmodules.Index = i;
             for (var c = 0; c < HG.WebApp.Data.AutomationGroups[i].Modules.length; c++) {
                 var found = false;
-                /*					if (HG.WebApp.Data.AutomationGroups[i].Modules[c].Domain == 'HomeAutomation.HomeGenie.Automation')
+                /*if (HG.WebApp.Data.AutomationGroups[i].Modules[c].Domain == 'HomeAutomation.HomeGenie.Automation')
                 {
                 for (var m = 0; m < HG.WebApp.Data.Programs.length; m++) {
                 if (HG.WebApp.Data.Programs[m].Address == HG.WebApp.Data.AutomationGroups[i].Modules[c].Address) {
@@ -167,7 +159,6 @@ HG.WebApp.AutomationGroupsList.GroupsAdd = function (grpname) {
 
 };
 //
-
 HG.WebApp.AutomationGroupsList.SortGroups = function () {
 
     var neworder = '';
@@ -184,7 +175,7 @@ HG.WebApp.AutomationGroupsList.SortGroups = function () {
     });
 
 }
-
+//
 HG.WebApp.AutomationGroupsList.SaveGroups = function () {
     $.mobile.loading('show');
     $.ajax({
@@ -204,4 +195,3 @@ HG.WebApp.AutomationGroupsList.SaveGroups = function () {
         }
     });
 };
-//
