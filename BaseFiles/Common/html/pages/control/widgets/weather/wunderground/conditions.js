@@ -4,7 +4,7 @@
   Version: '2013-03-31',
 
   GroupName: '',
-  IconImage: 'pages/control/widgets/homegenie/generic/images/wu_logo.png',
+  IconImage: 'pages/control/widgets/weather/wunderground/images/wu_mostlysunny.png',
   StatusText: '',
   Description: '',
 

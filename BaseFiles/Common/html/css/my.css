@@ -608,6 +608,14 @@ div[data-role=page]:not(input) {
     margin:0;
     border-right:0;
 }
+[class*=ui-block-]>a.ui-list-btn-option-mini,
+.ui-list-btn-option-mini {
+    height:44px;
+    width:40px;
+    padding:0;
+    margin:0;
+    border-right:0;
+}
 
 .ui-icon-microphone:after {
     background-image: url("../images/icons/micro-black.png");
