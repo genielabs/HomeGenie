@@ -127,9 +127,8 @@
         $.ajax({
           url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Calendar.Get/',
           type: "GET",
-          dataType: "text",
           success: function (data) {
-            _this.CalendarData = eval(data)[0].ResponseValue;
+            _this.CalendarData = data.ResponseValue;
             _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('refresh');
             $.mobile.loading('hide');
           }
@@ -144,7 +143,6 @@
           url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Calendar.Set',
           type: 'POST',
           data: _this.CalendarData,
-          dataType: 'text',
           success: function (data) {
             _this.CalendarPopup.popup('close');
             $.mobile.loading('hide');
@@ -168,7 +166,6 @@
           url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Set',
           type: 'POST',
           data: request,
-          dataType: 'text',
           success: function (data) {
             _this.SetTable(_this.TimebarElement, _this.TimebarElement.table);
             _this.ControlPopup.popup('close');
@@ -181,6 +178,8 @@
       this.ProgramsPage = container.find('[data-ui-field=timetable-programs-page]').remove();
       programsPageContainer.find('[data-ui-field=timetable-programs-page]').remove();
       programsPageContainer.append(this.ProgramsPage.get(0));
+      // data-role=none is needed for correct slider widget initialization
+      programsPageContainer.find('[data-role=none]').removeAttr('data-role');
       programsPageContainer.trigger('create');
       // program change button
       this.ProgramsPage.find('[data-ui-field=btn-table-select]').click(function(el){
@@ -242,6 +241,30 @@
         }, 500);
         _this.CalendarPopup.popup('open');
       });
+      // program options flags
+      this._optionsSaveButton = this.ProgramsPage.find('[data-ui-field=btn-options-save]');
+      this._optionsSaveButton.click(function(el){
+        _this.SaveProgramOptions();
+      });
+      this.ProgramsPage.find('[data-ui-field^=chk-options-]').click(function(el){
+        _this._optionsSaveButton.removeClass('ui-disabled');
+      });
+      this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').change(function(el){
+        _this._optionsSaveButton.removeClass('ui-disabled');
+      });
+      var context = {
+        parent: programsPageContainer.find('[data-ui-field=tt_options_motion]'),
+        program: module.Address,
+        module: module,
+        parameter: { Description: HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_options_motionsensor', 'Motion Sensor'), Name: 'Volatile.ValueHolder', Value: '' }
+      };
+      HG.Ui.GenerateWidget('widgets/module.text:Any:Any:Status.Level,Sensor.MotionDetect', context, function(handler){
+        _this._optionsMotionSensor = handler;
+        handler.onChange = function(val){
+          _this._autoOffMotionSensor = val;
+          _this._optionsSaveButton.removeClass('ui-disabled');
+        };
+      });      
       // END
 
     }
@@ -280,13 +303,65 @@
               }, itemImage);
             });
           } else {
-            schedLog.append('<div align="center" style="line-height: 200px">No schedule programmed</div>');
+            schedLog.append('<div align="center" style="line-height: 200px">'+HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_programs_noschedules', 'No schedule programmed')+'</div>');
           }
         }
       });
     }, 2000);
   },
 
+  LoadProgramOptions: function() {
+    var _this = this;
+    this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', false).checkboxradio('refresh'); 
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', false).checkboxradio('refresh'); 
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', false).checkboxradio('refresh'); 
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', false).checkboxradio('refresh'); 
+    this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(60).slider('refresh');
+    this._optionsMotionSensor.setModule('');
+    this._optionsSaveButton.addClass('ui-disabled');
+    $.ajax({
+      url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.GetOptions/'+this.CurrentProgram,
+      type: 'GET',
+      dataType: 'json',
+      success: function (options) {
+        if (typeof options == 'object') {
+          _this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', options.Disable).checkboxradio('refresh'); 
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', options.AutoOff.WhenArmedAway).checkboxradio('refresh'); 
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', options.AutoOff.WhenArmedHome).checkboxradio('refresh'); 
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', options.AutoOff.WhenNoMotion).checkboxradio('refresh'); 
+          _this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(options.AutoOff.MotionTimeout).slider('refresh');
+          _this._optionsMotionSensor.setModule(options.AutoOff.MotionSensor);
+          _this._optionsSaveButton.addClass('ui-disabled');
+        }
+      }
+    }); 
+  },
+ 
+  SaveProgramOptions: function() {
+    var _this = this;
+    $.mobile.loading('show');
+    var options = { 
+        Disable: this.ProgramsPage.find('[data-ui-field=chk-options-disable]').is(':checked'), 
+        AutoOff: { 
+            WhenArmedAway: this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').is(':checked'),
+            WhenArmedHome: this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').is(':checked'),
+            WhenNoMotion: this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').is(':checked'),
+            MotionTimeout: this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(),
+            MotionSensor: this._autoOffMotionSensor 
+        } 
+    };
+    $.ajax({
+      url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.SetOptions/'+this.CurrentProgram,
+      type: 'POST',
+      data: JSON.stringify(options),
+      success: function (res) {
+        $.mobile.loading('hide');
+        _this.LoadProgramOptions();
+        _this.CheckNow();
+      }
+    }); 
+  },
+ 
   GetModules: function() {
     var _this = this;
     $.mobile.loading('show', { text: 'Updating data', textVisible: true });
@@ -294,8 +369,6 @@
       url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.GetModules/',
       type: 'GET',
       success: function (mods) {
-        //table = eval(data)[0].ResponseValue;
-        //console.log(mods);
         _this.timebar_level_modules.empty();
         _this.timebar_therm_modules.empty();
         _this.timebar_onoff_modules.empty();
@@ -405,6 +478,9 @@
   },
 
   SetTableId: function(id) {
+    // load program options
+    this.LoadProgramOptions();
+    // set/load tables
     this.SetTable(this.timebar_level_s, id);
     this.SetTable(this.timebar_level_d, id+'.DST');
     this.SetTable(this.timebar_therm_s, id);
@@ -424,9 +500,8 @@
     $.ajax({
       url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.Get/' + this.Groups[el.group].Table + '.' + el.table,
       type: 'GET',
-      dataType: 'text',
       success: function (data) {
-        table = eval(data)[0].ResponseValue;
+        table = (typeof data.ResponseValue != 'undefined' ? data.ResponseValue : '');
         _this.DrawTimetable(el, true, table);
         $.mobile.loading('hide');
       }

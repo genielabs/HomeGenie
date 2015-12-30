@@ -49,6 +49,17 @@
     "timetable_popup_close" : "Fermer",
     "timetable_popup_save" : "Valider",
 
+    "timetable_programs_noschedules" : "No schedule programmed",
+    "timetable_options_title" : "Program Options",
+    "timetable_options_disable" : "Disable this program",
+    "timetable_options_autooff_title" : "Automatically set all program schedules to Off:",
+    "timetable_options_autooff_away" : "When Armed Away",
+    "timetable_options_autooff_home" : "When Armed Home",
+    "timetable_options_autooff_nomotion" : "When no motion is detected",
+    "timetable_options_autooff_nomotion_timeout" : "Motion activity timeout (minutes)",
+    "timetable_options_motionsensor" : "Motion Sensor",
+    "timetable_options_save" : "Save Options",
+
     "control_module_off" : "Off",
     "control_module_on" : "On",
     "control_module_close" : "Fermé",

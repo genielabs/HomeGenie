@@ -10,7 +10,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
     var page = $('#'+HG.WebApp.GroupModules.PageId);
     page.on('pageinit', function (e) {
 
-        $('#module_add_button').bind('click', function (event) {
+        $('#module_add_button').on('click', function (event) {
             var selectedopt = $('#automation_group_moduleadd').find(":selected");
             var domain = selectedopt.attr('data-context-domain');
             var address = selectedopt.attr('data-context-value');
@@ -27,30 +27,26 @@ HG.WebApp.GroupModules.InitializePage = function () {
             });
         });
         //
-        $('#group_delete_button').bind('click', function (event) {
+        $('#group_delete_button').on('click', function (event) {
             HG.WebApp.GroupModules.DeleteGroup(HG.WebApp.GroupModules.CurrentGroup);
         });
         //
-        $('#module_options_button').bind('click', function (event) {
+        $('#module_options_button').on('click', function (event) {
             HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
         });
         //
-        $('#btn_configure_group_deletegroup').bind('click', function (event) {
+        $('#btn_configure_group_deletegroup').on('click', function (event) {
             HG.WebApp.Utility.SwitchPopup('#listmodules_actionmenu', '#automation_group_delete');
         });
-        $('#btn_configure_group_addmodule').bind('click', function (event) {
+        $('#btn_configure_group_addmodule').on('click', function (event) {
             HG.WebApp.Utility.SwitchPopup('#listmodules_actionmenu', '#automation_group_modulechoose');
         });
-        $('#btn_configure_group_addseparator').bind('click', function (event) {
+        $('#btn_configure_group_addseparator').on('click', function (event) {
             HG.WebApp.GroupModules.EditModule.Domain = '';
             HG.WebApp.GroupModules.EditModule.Address = '';
             HG.WebApp.Utility.SwitchPopup('#listmodules_actionmenu', '#automation_group_separator_edit');
         });
-        $('#btn_configure_group_editseparatorremove').bind('click', function (event) {
-            HG.WebApp.GroupModules.DeleteGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.CurrentModule);
-            HG.WebApp.GroupsList.SaveGroups(null);
-        });
-        $('#btn_configure_group_editseparatoradd').bind('click', function (event) {
+        $('#btn_configure_group_editseparatoradd').on('click', function (event) {
             var label = $('#automation_group_separatorlabel').val().trim();
             if (label != '') {
                 HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.SeparatorItemDomain, label, function () {
@@ -65,13 +61,11 @@ HG.WebApp.GroupModules.InitializePage = function () {
                 $('#automation_group_separatorlabel').val(HG.WebApp.GroupModules.EditModule.Address);
                 $('#automation_group_separatorlabel').addClass('ui-disabled');
                 $('#btn_configure_group_editseparatoradd').hide();
-                $('#btn_configure_group_editseparatorremove').show();
             }
             else {
                 $('#automation_group_separatorlabel').val('');
                 $('#automation_group_separatorlabel').removeClass('ui-disabled');
                 $('#btn_configure_group_editseparatoradd').show();
-                $('#btn_configure_group_editseparatorremove').hide();
             }
         });
         //
@@ -86,7 +80,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
             HG.WebApp.GroupModules.LoadModuleParameters();
         });
         //
-        $('#automation_group_module_propdelete').bind('click', function () {
+        $('#automation_group_module_propdelete').on('click', function () {
             if (HG.WebApp.GroupModules.CurrentModuleProperty != null) {
                 HG.WebApp.GroupModules.ModulePropertyDelete(HG.WebApp.GroupModules.CurrentModuleProperty.find('input[type=text]').first().val());
                 HG.WebApp.GroupModules.CurrentModuleProperty.remove();
@@ -133,6 +127,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
         });
     });
     page.on('pagebeforeshow', function(){
+        $('#page_configure_groupmodules_list ul').parent().animate({scrollTop: 0});
         HG.WebApp.GroupModules.LoadGroupModules();
         $.mobile.loading('show');
         HG.WebApp.GroupModules.RefreshWallpaper();

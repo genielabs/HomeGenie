@@ -1,15 +1,13 @@
 HG.WebApp.GroupsList = HG.WebApp.GroupsList || {};
-HG.WebApp.GroupsList.PageId = 'page_configure_groupmodules';
+HG.WebApp.GroupsList.PageId = 'page_configure_groups';
 
 HG.WebApp.GroupsList.InitializePage = function () {
     var page = $('#'+HG.WebApp.GroupsList.PageId);
     page.on('pageinit', function (e) {
-        $('[data-role=popup]').on('popupbeforeposition', function (event) {
-            if (this.id == 'configure_group_groupadd') {
-                $('#group_new_name').val('');
-            }
+        page.find('[id=configure_group_groupadd]').on('popupbeforeposition', function (event) {
+            $('#group_new_name').val('');
         });
-        $('#group_new_button').bind('click', function (event) {
+        page.find('[id=group_new_button]').on('click', function (event) {
             HG.WebApp.GroupsList.GroupsAdd($('#group_new_name').val());
         });
     });

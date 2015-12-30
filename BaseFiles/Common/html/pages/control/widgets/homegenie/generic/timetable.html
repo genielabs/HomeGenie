@@ -253,7 +253,39 @@
 
     </div>
 
+    <br /><hr />
+
+    <h3 data-locale-id="timetable_options_title" style="font-weight:bold">Program Options</h3>
+    <div class="ui-grid-a">
+      <div class="ui-block-a" align="left">
+        <input data-ui-field="chk-options-disable" type="checkbox" name="options-disable" id="options-disable" data-mini="true">
+        <label data-locale-id="timetable_options_disable" for="options-disable">Disable this program</label>
+      </div>
+      <div class="ui-block-b" align="left">
+      </div>
+    </div>
+    <p data-locale-id="timetable_options_autooff_title" align="left">Automatically set all program schedules to <strong>Off</strong>:</p>
+    <div class="ui-grid-a">
+      <div class="ui-block-a" align="left">
+        <input data-ui-field="chk-options-off-armedaway" type="checkbox" name="options-off-armedaway" id="options-off-armedaway" data-mini="true">
+        <label data-locale-id="timetable_options_autooff_away" for="options-off-armedaway">When Armed Away</label>
+        <input data-ui-field="chk-options-off-armedhome" type="checkbox" name="options-off-armedhome" id="options-off-armedhome" data-mini="true">
+        <label data-locale-id="timetable_options_autooff_home" for="options-off-armedhome">When Armed Home</label>
+        <input data-ui-field="chk-options-off-nomotion" type="checkbox" name="options-off-nomotion" id="options-off-nomotion" data-mini="true">
+        <label data-locale-id="timetable_options_autooff_nomotion" for="options-off-nomotion">When no motion is detected</label>
+      </div>
+      <div data-ui-field="tt_options_motion" class="ui-block-b" align="left">
+        <span data-locale-id="timetable_options_autooff_nomotion_timeout">Motion activity timeout (minutes)</span>
+        <input data-ui-field="slider-off-nomotiontime" data-role="none" type="range" name="options-off-nomotiontime" id="options-off-nomotiontime" value="60" min="5" max="1440" step="5">
+      </div>
+    </div>
+    <div align="center" style="margin-top:8px">
+      <a data-locale-id="timetable_options_save" data-ui-field="btn-options-save" class="ui-btn ui-corner-all ui-btn-shadow ui-btn-icon-left ui-icon-fa-save ui-btn-inline">Save Options</a>
+    </div>
+
   </div>
+  <!-- add vertical space for scrolling autocomplete box of motion sensor -->
+  <div style="height:40%;display:block">&nbsp;</div>
 
   <div data-role="footer" data-position="fixed" data-tap-toggle="false">
     <div data-role="navbar">

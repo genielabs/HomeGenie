@@ -3,7 +3,8 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r509</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Little UI rework and improvements
+  <ReleaseNote>   - Added 'Automatic Off' options to TimeTable programs (when armed home/away or no motion activity detected)
+  - Little UI rework and improvements
   - Fix to Timetable widget 'today events' bug</ReleaseNote>
-  <ReleaseDate>2015-12-27T21:40:18.0000Z</ReleaseDate>
+  <ReleaseDate>2015-12-30T19:34:47.0000Z</ReleaseDate>
 </ReleaseInfo>

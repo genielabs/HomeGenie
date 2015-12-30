@@ -200,6 +200,7 @@ namespace HomeGenie.Automation.Scripting
 
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MIG.dll");
+            compilerParams.ReferencedAssemblies.Add("NLog.dll");
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
 
             compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");

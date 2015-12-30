@@ -6,12 +6,10 @@ HG.WebApp.AutomationGroupsList.InitializePage = function () {
     var page = $('#'+HG.WebApp.AutomationGroupsList.PageId);
     var widgetEditorButton = page.find('[data-ui-field=widgeteditor-btn]');
     page.on('pageinit', function (e) {
-        $('[data-role=popup]').on('popupbeforeposition', function (event) {
-            if (this.id == 'automationgroup_add') {
-                $('#automationgroup_new_name').val('');
-            }
+        page.find('[id=automationgroup_add]').on('popupbeforeposition', function (event) {
+            page.find('[id=automationgroup_new_name]').val('');
         });
-        $('#automationgroup_new_button').bind('click', function (event) {
+        page.find('[id=automationgroup_new_button]').bind('click', function (event) {
             HG.WebApp.AutomationGroupsList.GroupsAdd($('#automationgroup_new_name').val());
         });
         widgetEditorButton.bind('click', function (event) {

@@ -21,12 +21,12 @@
             if (typeof _this.onChange == 'function') {
                 _this.onChange($(this).val());
             }
-        }); 
+        });
         textInput.on('keyup', function() {
-            _this.checkInput();            
+            _this.checkInput();
         });
         textInput.on('blur', function() {
-            _this.checkInput();            
+            _this.checkInput();
         });
         textInput.autocomplete({
             minLength: 0,
@@ -62,6 +62,12 @@
         }).focus(function () {
             $(this).trigger('keydown.autocomplete');
         });
+        this.checkInput();
+    },
+    setModule: function(address) {
+        var textInput = this.element.find('[data-ui-field=textinput]');
+        textInput.val('');
+        textInput.data('module-address', address);
         this.checkInput();
     },
     isOneOf: function(items, value){
@@ -130,6 +136,6 @@
                     itemList.push({ label: label, value: label, module: mod });
             }
         }
-        return itemList;    
+        return itemList;
     }
 }]

@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.635425Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.778321Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -255,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.978289Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.361361Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -429,7 +429,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.601426Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.594507Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -501,7 +501,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.877994Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.352661Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1117,7 +1117,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.546099Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.653241Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1164,7 +1164,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.780558Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.356701Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1513,7 +1513,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.755331Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.603904Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1643,7 +1643,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.878483Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.536176Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1698,7 +1698,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.640282Z</TriggerTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1807,7 +1807,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:56.022304Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.735174Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2144,7 +2144,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.966732Z</TriggerTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -2242,7 +2242,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.970789Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.757094Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2391,7 +2391,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.862846Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.507505Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2596,9 +2596,52 @@ while (Program.IsEnabled)
     <Name>Smart Lights</Name>
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
-    <Features />
-    <ActivationTime>2015-12-22T14:04:01.144258Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.Enable</Property>
+        <Description>Enable Smart Light Control</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>TimeTable.ExternalControl</Property>
+        <Description>Synchronize with Timetable schedule if set</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:sensor:status.level,sensor.motiondetect</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
+        <Description>Controlled by motion sensor (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:any:sensor.luminance</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.CheckLuminosity</Property>
+        <Description>Controlled by luminance sensor (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:1000:1</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.MinLuminance</Property>
+        <Description>Trigger if luminance is below</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:30:3600:30</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>
+        <Description>Turn off after inactivity timeout (seconds)</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2015-12-30T19:35:31.723358Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6556,6 +6599,27 @@ var GetTableSettings = new Func&lt;string, ModuleParameter&gt;((table)=&gt;{
   return setting;
 });
 
+// GetTableOptions Settings.Options.0
+var GetTableOptions = new Func&lt;string, dynamic&gt;((tableIndex)=&gt;{
+  dynamic options = new ExpandoObject();
+  // default options
+  options.Disable = false;
+  options.AutoOff = new ExpandoObject();
+  options.AutoOff.WhenArmedAway = false;
+  options.AutoOff.WhenArmedHome = false;
+  options.AutoOff.WhenNoMotion = false;
+  options.AutoOff.MotionTimeout = 60;
+  options.AutoOff.MotionSensor = "";
+  // try reading actual values
+  var topts = Program.Store("Tables").Get(tablePrefix+"Options."+tableIndex);
+  try { options = JObject.Parse(topts.Value); } catch { }
+  return options;
+});
+var SetTableOptions = new Action&lt;string, string&gt;((tableIndex, jsonOptions)=&gt;{
+  var topts = Program.Store("Tables").Get(tablePrefix+"Options."+tableIndex);
+  topts.Value = jsonOptions;
+});
+
 var GetTableIndex = new Func&lt;ModuleHelper, DateTime, int&gt;((module, date) =&gt; {
     var dayIndex = date.DayOfYear - 1;
     // normalize if not leap year
@@ -6601,13 +6665,83 @@ var GetTableIndex = new Func&lt;ModuleHelper, DateTime, int&gt;((module, date) =
   	return (int)tableIndex;
 });
 
-var GetTableSliceAction = new Func&lt;string, DateTime, ExpandoObject&gt;((table, date)=&gt;{
-  var sliceIndex = (int)Math.Floor((date - DateTime.Today).TotalMinutes / timeResolution);
-  var previous = (sliceIndex == 0 ? (tableLength - 1) : sliceIndex - 1);
+var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
+  dynamic v = new ExpandoObject();
+  v.Domain = "0";
+  v.Address = "0";
+  if (domainAddress.IndexOf(":") &gt; 0)
+  {
+    v.Domain = domainAddress.Substring(0, domainAddress.LastIndexOf(':'));
+    v.Address = domainAddress.Substring(domainAddress.LastIndexOf(':') + 1);
+  }
+  return v;
+});
+
+var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions, date)=&gt;{
+  bool autoOff = false;
+  if (tableOptions.AutoOff.WhenArmedAway == true || tableOptions.AutoOff.WhenArmedHome == true)
+  {
+    var securityAlarm = Program.WithAddress(90);
+    if (securityAlarm != null &amp;&amp; securityAlarm.IsEnabled)
+    {
+      var armedStatus = securityAlarm.Parameter("HomeGenie.SecurityArmed");
+      if (tableOptions.AutoOff.WhenArmedAway == true &amp;&amp; armedStatus.Value == "Away")
+        autoOff = true;
+      if (tableOptions.AutoOff.WhenArmedHome == true &amp;&amp; armedStatus.Value == "Home")
+        autoOff = true;
+    }
+  }
+  if (tableOptions.AutoOff.WhenNoMotion == true)
+  {
+    var mda = GetDomainAddress(tableOptions.AutoOff.MotionSensor.ToString());
+    var module = Modules.InDomain(mda.Domain).WithAddress(mda.Address).Get();
+    if (module.Instance != null)
+    {
+      	var lastMotion = DateTime.UtcNow;
+      	if (module.HasParameter("Sensor.MotionDetect"))
+          lastMotion = module.Parameter("Sensor.MotionDetect").UpdateTime;
+        else if (module.HasParameter("Status.Level"))
+          lastMotion = module.Parameter("Status.Level").UpdateTime;
+        if ((date-lastMotion).TotalMinutes &gt;= (int)tableOptions.AutoOff.MotionTimeout)
+          autoOff = true;
+    }
+  }
+  return autoOff;
+});
+
+var GetTableSliceAction = new Func&lt;int, string, string, DateTime, ExpandoObject&gt;((tableIndex, tableType, tableSuffix, date)=&gt;{
   dynamic action = new ExpandoObject();
-  action.Previous = table[previous];
-  action.Value = table[sliceIndex];
-  action.Index = sliceIndex;
+  action.TableIndex = tableIndex;
+  action.Index = (int)Math.Floor((date - DateTime.Today.ToUniversalTime()).TotalMinutes / timeResolution);
+  action.Date = date;
+  action.Value = null; // no action
+  // table index == 0 =&gt; no table associated, values go from 1 to 10
+  if (action.TableIndex &gt; 0)
+  {
+      // tables are stored as zero-indexed (0 to 9)
+      action.TableOptions = GetTableOptions((action.TableIndex - 1).ToString());
+	  action.Table = GetTableSettings(tableType + "." + (action.TableIndex - 1) + tableSuffix);
+      if (action.TableOptions.Disable == false)
+      {
+        // default action to "Off"
+        action.Value = '0';
+        // check table options constraint
+        if (!MatchAutoOffOptions(action.TableOptions, date))
+          action.Value = action.Table.Value[action.Index];
+      }
+  }
+  return action;
+});
+
+var GetModuleAction = new Func&lt;ModuleHelper, string, string, DateTime, ExpandoObject&gt;((module, tableType, tableSuffix, date)=&gt;{
+
+  // current action value
+  dynamic action = GetTableSliceAction(GetTableIndex(module, date), tableType, tableSuffix, date);
+  // previous action value (it might be a different table when crossing midnight)
+  var previousDate = date.AddMinutes(-timeResolution);
+  action.Previous = GetTableSliceAction(GetTableIndex(module, previousDate), tableType, tableSuffix, previousDate);
+  
+  //MigService.Log.Info(JsonConvert.SerializeObject(action));
   return action;
 });
 
@@ -6618,7 +6752,7 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
   switch (tableType)  
   {
     case "OnOff":
-      if (action.Value == '1' &amp;&amp; (action.Previous == '0' || repeat))
+      if (action.Value == '1' &amp;&amp; (action.Previous.Value == '0' || repeat))
       {
         module.Parameter("TimeTable.Status").Value = "ON";
         if (!externalControl)
@@ -6628,7 +6762,7 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
           performed = true;
         }
       }
-      else if (action.Value == '0' &amp;&amp; (action.Previous == '1' || repeat))
+      else if (action.Value == '0' &amp;&amp; (action.Previous.Value == '1' || repeat))
       {
         module.Parameter("TimeTable.Status").Value = "OFF";
         if (!externalControl)
@@ -6643,7 +6777,7 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
       // Level values are '0' = Off, '1' = 10%, '2' = 20%, ..., '9' = 90%, 'A' = 100%
       var level = ((int)action.Value - 48);
       if (action.Value == 'A') level = 10;
-      if (action.Value != '0' &amp;&amp; (action.Previous != action.Value || repeat))
+      if (action.Value != '0' &amp;&amp; (action.Previous.Value != action.Value || repeat))
       {
         module.Parameter("TimeTable.Status").Value = (level * 10).ToString();
         if (!externalControl)
@@ -6653,7 +6787,7 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
           performed = true;
         }
       }
-      else if (action.Value == '0' &amp;&amp; (action.Previous != action.Value || repeat))
+      else if (action.Value == '0' &amp;&amp; (action.Previous.Value != action.Value || repeat))
       {
         module.Parameter("TimeTable.Status").Value = "OFF";
         if (!externalControl)
@@ -6666,7 +6800,7 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
       break;
     case "Therm":
       var command = module.Command("Thermostat.ModeSet");
-      if (action.Value != action.Previous || repeat)
+      if (action.Value != action.Previous.Value || repeat)
       switch ((char)action.Value)
       {
         case '0':
@@ -6728,30 +6862,18 @@ var CheckScheduling = new Action(()=&gt;{
     // determine table type
     var tableType = GetTableType(module);    
     // calculate current day of year as interval from 0 to 365 (non-leap year normalized)
-    var todayDate = DateTime.Now;
-	var tableIndex = GetTableIndex(module, todayDate);
+    var todayDate = DateTime.UtcNow;
     // Day Light Saving check
     var tableSuffix = "";
     if (TimeZoneInfo.Local.IsDaylightSavingTime(todayDate) &amp;&amp; module.HasFeature("TimeTable.CheckDST"))
        tableSuffix = ".DST";
-    // Perform action on current module
-    if (tableIndex &gt; 0)
+    
+    // Get action for current module
+    dynamic action = GetModuleAction(module, tableType, tableSuffix, todayDate);
+    // perform action
+    if (action.Value != null &amp;&amp; PerformAction(module, tableType, action))
     {
-      // tables are stored as zero indexed
-      var timetable = GetTableSettings(tableType + "." + (tableIndex - 1) + tableSuffix);
-      dynamic action = GetTableSliceAction(timetable.Value, todayDate);
-      // check for exception in crossing from different table types on midnight
-      var previousTableIndex = GetTableIndex(module, todayDate.AddMinutes(-timeResolution));
-      if (previousTableIndex + tableSuffix != tableIndex + tableSuffix) 
-      {
-        var previousTable = GetTableSettings(tableType + "." + (previousTableIndex - 1) + tableSuffix);
-        action.Previous = previousTable.Value[tableLength - 1];
-      }
-      // perform action
-      if (PerformAction(module, tableType, action))
-      {
-      	Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + tableIndex + tableSuffix);
-      }
+      Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + action.TableIndex + tableSuffix);
     }
 
     return false; // do not stop iterating, continue processing next module
@@ -6804,6 +6926,12 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
     case "Timetable.CheckNow":
       CheckScheduling();
    	  break;
+    case "Timetable.GetOptions":
+      return GetTableOptions(request[3]);
+    case "Timetable.SetOptions":
+      SetTableOptions(request[3], Uri.UnescapeDataString(request[4]));
+      response = "OK";
+      break;
     case "Timetable.GetScheduling":
       var schedulingModules = new List&lt;dynamic&gt;();
       Modules.OfDeviceType("Light,Switch,Shutter,Dimmer,Thermostat").Each((mod)=&gt;{
@@ -6815,7 +6943,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
           tm.Name = mod.Instance.Name;
           tm.Type = GetTableType(mod);
           //
-          var todayDate = DateTime.Now;
+          var todayDate = DateTime.UtcNow;
           var tableIndex = GetTableIndex(mod, todayDate);
           // Day Light Saving check
           var tableSuffix = "";
@@ -6824,8 +6952,12 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
           // Perform action on current module
           if (tableIndex &gt; 0)
           {
-            // tables are stored as zero indexed
-            tm.Timetable = GetTableSettings(tm.Type + "." + (tableIndex - 1) + tableSuffix).Value;
+            var tableOptions = GetTableOptions((tableIndex - 1).ToString());
+            if (tableOptions.Disable != true)
+            {
+	            // tables are stored as zero indexed
+    	        tm.Timetable = GetTableSettings(tm.Type + "." + (tableIndex - 1) + tableSuffix).Value;
+            }
           }
           //
           schedulingModules.Add(tm);
@@ -6855,7 +6987,17 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       //return JsonConvert.SerializeObject(modules, Formatting.Indented);
       //break;
   }
-  return "[{ 'ResponseValue': '" + response + "' }]";
+  return "{ \"ResponseValue\": \"" + response + "\" }";
+});
+
+// module events handling
+When.ModuleParameterChanged((module, parameter)=&gt; {
+  // check scheduling is security system changed status
+  if (module.Instance.Domain == "HomeAutomation.HomeGenie.Automation" &amp;&amp; module.Instance.Address == "90" &amp;&amp; parameter.Is("HomeGenie.SecurityArmed"))
+  {
+    CheckScheduling();
+  }
+  return true;
 });
 
 // Timetable control loop
@@ -6874,59 +7016,9 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Weekend</Property>
-        <Description>Timetable to use for weekend</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Workday</Property>
-        <Description>Timetable to use for workday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Holiday</Property>
-        <Description>Timetable to use for holiday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Special</Property>
-        <Description>Timetable to use for special day</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Enable</Property>
-        <Description>Enable Timetable scheduling</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Repeat</Property>
-        <Description>Repeat command for the whole duration</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.CheckDST</Property>
-        <Description>Enable Day Light Saving check</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime>2015-12-22T14:01:59.398959Z</ActivationTime>
-    <TriggerTime>2015-12-22T14:01:59.464927Z</TriggerTime>
+    <Features />
+    <ActivationTime>2015-12-30T19:36:33.312639Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7639,7 +7731,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-21T16:16:55.7134Z</TriggerTime>
+    <TriggerTime>2015-12-30T19:35:31.657142Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

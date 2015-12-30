@@ -28,8 +28,8 @@
                     <div class="ui-block-c">
                         <p>&nbsp;</p>
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a id="groupmodules_group_deletebtn" data-locale-id="common_command_delete" href="#" class="ui-btn ui-btn-icon-left ui-icon-delete">Delete</a>
-                            <a id="groupmodules_group_uploadbtn" data-locale-id="common_command_upload" href="#" class="ui-btn ui-btn-icon-left ui-icon-arrow-u">Upload</a>
+                            <a id="groupmodules_group_deletebtn" data-locale-id="common_command_delete" href="#" class="ui-btn ui-btn-icon-left ui-icon-minus">Delete</a>
+                            <a id="groupmodules_group_uploadbtn" data-locale-id="common_command_upload" href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-upload">Upload</a>
                             <input id="groupmodules_group_uploadfile" type="file" style="display:none" />
                         </div>
                     </div>
@@ -53,10 +53,10 @@
             <p data-locale-id="configure_group_deletewarning">This action cannot be undone.</p>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_group_deletecancel" data-rel="back">Cancel</a>
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-delete" data-locale-id="configure_group_deletecancel" data-rel="back">Cancel</a>
                 </div>
                 <div class="ui-block-b">
-                    <a id="group_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_group_deleteconfirm" data-rel="back">Ok</a>
+                    <a id="group_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check" data-locale-id="configure_group_deleteconfirm" data-rel="back">Ok</a>
                 </div>
             </div>
         </div>
@@ -68,12 +68,14 @@
         </div>
         <div class="ui-content ui-corner-bottom">
             <select id="automation_group_moduleadd"></select>
+        </div>
+        <div class="ui-grid-a ui-footer ui-bar-inherit">
             <div class="ui-grid-a">
-                <div class="ui-block-a">
-                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_module_newmodulecancel" data-rel="back">Cancel</a>
+                <div class="ui-block-a" align="left">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back" data-locale-id="configure_module_newmodulecancel" data-rel="back">Cancel</a>
                 </div>
-                <div class="ui-block-b">
-                    <a id="module_add_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_module_newmoduleconfirm" data-rel="back">Add</a>
+                <div class="ui-block-b" align="right">
+                    <a id="module_add_button" href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-plus" data-locale-id="configure_module_newmoduleconfirm" data-rel="back">Add</a>
                 </div>
             </div>
         </div>
@@ -106,21 +108,15 @@
             <h1 id="configure_groupmodules_separatoredit" data-locale-id="configure_separator_edit">Edit Separator</h1>
         </div>
         <div class="ui-content ui-corner-bottom">
-            <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td>
-                        <label data-locale-id="configure_separator_label">Label</label>
-                        <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" data-locale-id="configure_separator_placeholder" value="" />
-                    </td>
-                </tr>
-            </table>
+            <label data-locale-id="configure_separator_label" for="automation_group_separatorlabel">Label</label>
+            <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" data-locale-id="configure_separator_placeholder" value="" />
         </div>
         <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
-            <div class="ui-block-a">
-                <a id="btn_configure_group_editseparatorremove" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremoveseparator" data-rel="back">Remove</a>
+            <div class="ui-block-a" align="left">
+                <a class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left" href="#" data-locale-id="common_command_cancel" data-rel="back">Cancel</a>
             </div>
-            <div class="ui-block-b">
-                <a id="btn_configure_group_editseparatoradd" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="configure_module_optaddseparator" data-rel="back">Update</a>
+            <div class="ui-block-b" align="right">
+                <a id="btn_configure_group_editseparatoradd" href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-plus" data-locale-id="configure_module_newmoduleconfirm" data-rel="back">Save</a>
             </div>
         </div>
     </div>
