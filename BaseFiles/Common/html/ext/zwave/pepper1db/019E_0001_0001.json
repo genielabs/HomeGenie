@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "00"
+        "@value": "01"
       },
       "basicClass": {
         "@value": "02"
@@ -57,7 +57,7 @@
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Multiradio server for home automation with optional cloud connectivitiy"
+          "#text": "Multiradio server for home automation with optional cloud connectivitiy."
         }
       },
       "wakeupNote": {
@@ -79,13 +79,11 @@
       "commandClass": [
         {
           "@id": "005e",
-          "@version": "2",
-          "@controlled": "true"
+          "@version": "2"
         },
         {
           "@id": "0086",
-          "@version": "2",
-          "@controlled": "true"
+          "@version": "2"
         },
         {
           "@id": "0060",
@@ -97,6 +95,9 @@
           "@controlled": "true"
         },
         {
+          "@id": "0026"
+        },
+        {
           "@id": "0072",
           "@controlled": "true"
         },
@@ -106,6 +107,10 @@
         },
         {
           "@id": "0022"
+        },
+        {
+          "@id": "005b",
+          "@controlled": "true"
         },
         {
           "@id": "0056",
@@ -125,21 +130,126 @@
           "@controlled": "true"
         },
         {
+          "@id": "008e",
+          "@version": "3",
+          "@controlled": "true"
+        },
+        {
           "@id": "005a",
           "@controlled": "true"
         },
         {
-          "@id": "0025",
-          "@controlled": "true"
+          "@id": "009c",
+          "@version": "2",
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
-          "@id": "008e",
-          "@version": "2"
+          "@id": "0080",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0030",
+          "@version": "2",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0025",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0070",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0062",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "007a",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0087",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0032",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0031",
+          "@version": "7",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0026",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0071",
+          "@version": "4",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0075",
+          "@version": "2",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0044",
+          "@version": "4",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0045",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0040",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0042",
+          "@version": "2",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0043",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0063",
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0084",
           "@version": "2",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },
@@ -149,7 +259,8 @@
         "@maxNodes": "3",
         "description": {
           "lang": {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "Lifeline"
           }
         }
       }
@@ -174,9 +285,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "15",
@@ -196,9 +318,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "14",
@@ -218,9 +351,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "13",
@@ -240,9 +384,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "12",
@@ -262,9 +417,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "11",
@@ -284,9 +450,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "10",
@@ -306,9 +483,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "9",
@@ -328,9 +516,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "8",
@@ -350,9 +549,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "7",
@@ -372,9 +582,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "6",
@@ -394,9 +615,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "5",
@@ -416,9 +648,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "4",
@@ -438,9 +681,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "3",
@@ -460,9 +714,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "2",
@@ -482,9 +747,20 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         },
         {
           "@number": "1",
@@ -504,15 +780,26 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": {
-            "@id": "0020"
-          }
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0025"
+            },
+            {
+              "@id": "0026"
+            },
+            {
+              "@id": "005b"
+            }
+          ]
         }
       ]
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/7c2aa46bc6dfadd990b6ef01b2210db28df37301.png"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/253cb0abdc087b3122c63f81005550d58d781d57.jpg"
       }
     }
   }

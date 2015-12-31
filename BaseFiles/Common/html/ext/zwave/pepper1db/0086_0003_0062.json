@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "02"
+        "@value": "00"
       },
       "basicClass": {
         "@value": "04"
@@ -55,82 +55,51 @@
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Dimmbare RGB Glühbirne mit direkt eingebauter Z-Wave Steuerung"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "dimmable RGB bulb with Z-Wave control built right in"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "LED Bulb"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Turn the primary controller of Z-Wave network into inclusion mode, press the external switch of LED Bulb to turn it off and then press the external switch again to turn it on. "
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Turn the primary controller of Z-Wave network into inclusion mode, press the external switch of LED Bulb to turn it off and then press the external switch again to turn it on. \r\n"
+        }
       },
-      "productName": "Aeon LED RGB bulb",
-      "brandName": "Aeon Labs",
-      "productCode": "AEOEZW098",
-      "productVersion": "1.2"
+      "productName": "LED Bulb EU",
+      "brandName": "Aeotec",
+      "productLine": "Z-wave Product Line",
+      "productCode": "ZW098-C55"
     },
     "commandClasses": {
       "commandClass": [
         {
           "@id": "0020",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0026",
+          "@version": "2"
+        },
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0059"
+        },
+        {
+          "@id": "005e",
           "@version": "2",
           "@secure": "true"
         },
         {
-          "@id": "0027",
-          "@secure": "true"
-        },
-        {
-          "@id": "002b",
-          "@secure": "true"
-        },
-        {
-          "@id": "002c",
-          "@secure": "true"
-        },
-        {
-          "@id": "0033",
-          "@secure": "true"
-        },
-        {
-          "@id": "0059",
-          "@secure": "true"
-        },
-        {
-          "@id": "005e",
-          "@version": "2"
-        },
-        {
-          "@id": "0070",
-          "@secure": "true"
+          "@id": "0070"
         },
         {
           "@id": "0072",
@@ -138,18 +107,15 @@
           "@secure": "true"
         },
         {
-          "@id": "0073",
-          "@secure": "true"
+          "@id": "0073"
         },
         {
           "@id": "007a",
-          "@version": "2",
-          "@secure": "true"
+          "@version": "2"
         },
         {
           "@id": "0085",
-          "@version": "2",
-          "@secure": "true"
+          "@version": "2"
         },
         {
           "@id": "0086",
@@ -162,15 +128,15 @@
         },
         {
           "@id": "005a",
-          "@controlled": "true",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
           "@id": "0082",
           "@controlled": "true",
-          "@inNIF": "false",
           "@secure": "true"
+        },
+        {
+          "@id": "0033"
         }
       ]
     },
@@ -187,7 +153,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Group 1 is assigned to the Lifeline association group and every device has 5 nodes to associate. When the Bulb is turned on or off using the external switch, the Bulb will send a basic report of its status to the nodes in association group 1. To change what kind of signal is sent to the nodes in group 1, please see the detailed description of configuration parameter 80."
+                "#text": "\nGroup 1 is assigned to the Lifeline association group and every device has 5 nodes to associate. When the Bulb is turned on or off using the external switch, the Bulb will send a basic report of its status to the nodes in association group 1. To change what kind of signal is sent to the nodes in group 1, please see the detailed description of configuration parameter 80.\n"
               }
             ]
           }
@@ -203,7 +169,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "When the product receives a controlling Basic Set CC/Switch Binary Set CC/Switch Multilevel Start Level Change CC, Switch Multilevel Stop Level Change CC, Switch Multilevel Set CC, Scene Activation Set CC, which if cause the product’s state to be changed, which will lead to send the Basic Set CC/Switch Binary Set CC to nodes in group 2."
+                "#text": "\nWhen the product receives a controlling Basic Set CC/Switch Binary Set CC/Switch Multilevel Start Level Change CC, Switch Multilevel Stop Level Change CC, Switch Multilevel Set CC, Scene Activation Set CC, which if cause the product’s state to be changed, which will lead to send the Basic Set CC/Switch Binary Set CC to nodes in group 2.\n"
               }
             ]
           }
@@ -235,7 +201,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/disable the function of using external switch to turn on/off the bulb."
+                "#text": "\nEnable/disable the function of using external switch to turn on/off the bulb.\n"
               }
             ]
           },
@@ -250,7 +216,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "disable "
+                    "#text": "disable"
                   }
                 ]
               }
@@ -295,7 +261,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/disable the function of using external switch to turn on/off the bulbs color."
+                "#text": "\nEnable/disable the function of using external switch to turn on/off the bulbs color.\n"
               }
             ]
           },
@@ -355,7 +321,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable to send notifications to associated devices (Group 1)\r\nwhen the state of LED Bulb is changed."
+                "#text": "\nEnable to send notifications to associated devices (Group 1) when the state of LED Bulb is changed.\n"
               }
             ]
           },
@@ -519,7 +485,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "All configuration parameters are not configurable (Locked)."
+                    "#text": "\nAll configuration parameters are not configurable (Locked).\n"
                   }
                 ]
               }
@@ -564,7 +530,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Reset all configuration parameters to default setting."
+                    "#text": "\nReset all configuration parameters to default setting.\n"
                   }
                 ]
               }
@@ -579,7 +545,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Reset the product to default factory setting and be excluded from the Z-wave network."
+                    "#text": "\nReset the product to default factory setting and be excluded from the Z-wave network.\n"
                   }
                 ]
               }
@@ -590,7 +556,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/5b74414e87d0ed5682ffe80b2a1c299355dd347d.png"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/60f8282d89b851a4b533d03f89874a31edca338a.png"
       }
     }
   }

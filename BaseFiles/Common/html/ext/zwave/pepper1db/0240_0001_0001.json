@@ -30,7 +30,7 @@
         "@value": "04"
       },
       "appSubVersion": {
-        "@value": "32"
+        "@value": "20"
       },
       "basicClass": {
         "@value": "02"
@@ -125,92 +125,112 @@
         },
         {
           "@id": "009c",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0080",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0030",
           "@version": "2",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0025",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0081",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0033",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0070",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0062",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0032",
           "@version": "4",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0060",
           "@version": "4",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0031",
           "@version": "7",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0026",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0035",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0040",
           "@version": "2",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0043",
           "@version": "2",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0063",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0084",
           "@version": "2",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "008e",
           "@version": "3",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0071",
           "@version": "5",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

@@ -50,7 +50,8 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0"
+      "beamSensor": "0",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
@@ -100,22 +101,20 @@
       "commandClass": [
         {
           "@id": "0020",
+          "@controlled": "true",
           "@inNIF": "false"
         },
         {
           "@id": "0030",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
           "@id": "0031",
           "@version": "5",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
           "@id": "0059",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
@@ -124,13 +123,11 @@
         },
         {
           "@id": "0070",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
           "@id": "0071",
           "@version": "3",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
@@ -140,18 +137,15 @@
         },
         {
           "@id": "0073",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
           "@id": "007a",
           "@version": "2",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
           "@id": "0080",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
@@ -161,7 +155,6 @@
         {
           "@id": "0085",
           "@version": "2",
-          "@inNIF": "false",
           "@secure": "true"
         },
         {
@@ -174,12 +167,7 @@
           "@secure": "true"
         },
         {
-          "@id": "005a",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0082",
-          "@controlled": "true"
+          "@id": "005a"
         }
       ]
     },
@@ -1004,7 +992,7 @@
             ]
           },
           "value": {
-            "@from": "00000001",
+            "@from": "00000005",
             "@to": "0028de80",
             "@unit": "seconds",
             "description": {
@@ -1050,7 +1038,7 @@
             ]
           },
           "value": {
-            "@from": "00000001",
+            "@from": "00000005",
             "@to": "0028de80",
             "@unit": "seconds",
             "description": {
@@ -1068,7 +1056,7 @@
         },
         {
           "@number": "113",
-          "@type": "constant",
+          "@type": "range",
           "@size": "4",
           "@default": "00000708",
           "name": {
@@ -1096,7 +1084,7 @@
             ]
           },
           "value": {
-            "@from": "00000001",
+            "@from": "00000005",
             "@to": "0028de80",
             "@unit": "seconds",
             "description": {
@@ -1255,7 +1243,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in temperature to induce an automatic report.\r\nNote:\r\n1. When the unit is Celsius, threshold=Value.\r\n2. When the unit is Fahrenheit, threshold=Value*1.8\r\nThe accuracy is 0.1."
+                "#text": "Threshold change in temperature to induce an automatic report.\r\nNote:\r\n1. When the unit is Celsius, threshold=Value.\r\n2. When the unit is Fahrenheit, threshold=Value*1.8\r\nThe accuracy is 0.1.\r\nThe high byte is the part of integer, the low byte is\r\nthe fractional part."
               }
             ]
           }
@@ -1283,7 +1271,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in humidity to induce an automatic report.\r\nThe accuracy is 0.1."
+                "#text": "Threshold change in humidity to induce an automatic report.\r\nThe accuracy is 0.1.\r\nThe high byte is the part of integer, the low byte is\r\nthe fractional part."
               }
             ]
           },
@@ -1333,7 +1321,7 @@
           },
           "value": {
             "@from": "0000",
-            "@to": "006f",
+            "@to": "03e8",
             "@unit": "lux",
             "description": {
               "lang": [
@@ -1371,7 +1359,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in battery level to induce an automatic report."
+                "#text": "Threshold change in battery level to induce an automatic report. The accuracy is 0.1.\r\nThe high byte is the part of integer, the low byte is\r\nthe fractional part."
               }
             ]
           },

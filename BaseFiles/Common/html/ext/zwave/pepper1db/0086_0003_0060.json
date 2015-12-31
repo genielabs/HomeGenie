@@ -88,7 +88,7 @@
           }
         ]
       },
-      "productName": "Smart Switch 6",
+      "productName": "Smart Switch 6 EU",
       "brandName": "Aeon Labs",
       "productCode": "AEOEZW096",
       "productVersion": "0.99"
@@ -97,10 +97,12 @@
       "commandClass": [
         {
           "@id": "0020",
+          "@controlled": "true",
           "@inNIF": "false"
         },
         {
-          "@id": "0025"
+          "@id": "0025",
+          "@controlled": "true"
         },
         {
           "@id": "0027"
@@ -114,14 +116,16 @@
         },
         {
           "@id": "005e",
-          "@version": "2"
+          "@version": "2",
+          "@secure": "true"
         },
         {
           "@id": "0070"
         },
         {
           "@id": "0072",
-          "@version": "2"
+          "@version": "2",
+          "@secure": "true"
         },
         {
           "@id": "0073"
@@ -139,15 +143,21 @@
         },
         {
           "@id": "0086",
-          "@version": "2"
+          "@version": "2",
+          "@secure": "true"
         },
         {
           "@id": "005a",
-          "@controlled": "true"
+          "@secure": "true"
         },
         {
           "@id": "0082",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0098",
+          "@secure": "true"
         }
       ]
     },
@@ -335,7 +345,7 @@
         },
         {
           "@number": "33",
-          "@type": "bitrange",
+          "@type": "rangemapped",
           "@size": "4",
           "@default": "00000000",
           "name": {
@@ -363,7 +373,22 @@
           "value": [
             {
               "@from": "00000000",
-              "@to": "00000007",
+              "@to": "000000ff",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000100",
+              "@to": "0000ffff",
               "description": {
                 "lang": [
                   {
@@ -371,14 +396,14 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Range of blue color value."
+                    "#text": "Range of red color value."
                   }
                 ]
               }
             },
             {
-              "@from": "00000008",
-              "@to": "0000000f",
+              "@from": "00010000",
+              "@to": "00ffffff",
               "description": {
                 "lang": [
                   {
@@ -392,8 +417,8 @@
               }
             },
             {
-              "@from": "00000010",
-              "@to": "00000017",
+              "@from": "01000000",
+              "@to": "7fffffff",
               "description": {
                 "lang": [
                   {
@@ -401,22 +426,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": " Range of red color value."
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "00000018",
-              "@to": "0000001f",
-              "@reserved": "true",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de"
-                  },
-                  {
-                    "@xml:lang": "en"
+                    "#text": "Range of blue color value."
                   }
                 ]
               }
@@ -866,7 +876,7 @@
         },
         {
           "@number": "100",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -1225,7 +1235,7 @@
         },
         {
           "@number": "110",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {

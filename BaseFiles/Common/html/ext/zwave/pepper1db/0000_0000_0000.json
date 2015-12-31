@@ -37,14 +37,13 @@
       },
       "routing": {
         "@value": "false"
-      },
-      "rfFrequency": "US"
+      }
     },
     "deviceDescription": {
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "USB Z-Wave & ZigBee Stick"
+          "#text": "Z-Wave Gateway based on Raspberry Pi"
         }
       },
       "wakeupNote": {
@@ -57,15 +56,10 @@
           "@xml:lang": "en"
         }
       },
-      "productName": "HubZ",
-      "brandName": "Nortek Security & Control",
-      "productLine": "Home Security & Control",
-      "productCode": "HUSBZB-1"
-    },
-    "resourceLinks": {
-      "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/dd4bef608771cdc7b773511402dc1e583a357cd3.jpg"
-      }
+      "productName": "RaZberry",
+      "brandName": "RaZberry",
+      "productLine": "RaZberry",
+      "productCode": "RaZberry"
     }
   }
 }

@@ -71,8 +71,8 @@
           "#text": "Refer to your primary controller\r\ninstructions to process the Inclusion\r\n/ Exclusion setup procedure.\r\nWhen prompted by your primary\r\ncontroller (gateway), click once on\r\nthe “L” button.\r\nLED will flash slowly\r\nuntil complete the\r\nstep of inclusion /\r\nexclusion.\r\n"
         }
       },
-      "productName": "Remotec",
-      "brandName": "BW8510US",
+      "productName": "BW8510US",
+      "brandName": "Remotec",
       "productLine": "Z-Wave Home Automation",
       "productCode": "ZRC-90US",
       "batteryType": "AAA",

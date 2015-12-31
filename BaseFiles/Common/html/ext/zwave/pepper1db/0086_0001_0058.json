@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "02"
+        "@value": "01"
       },
       "basicClass": {
         "@value": "01"
@@ -50,67 +50,64 @@
       "routing": {
         "@value": "false"
       },
-      "beamSensor": "0",
       "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Sichere Fernbedienung mit 4 Tasten"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Secure Key Chain Controller with 4 buttons"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Key Fob Gen5 is a fully functional Z-wave remote controller, which can include, exclude and control the other Z-Wave certified devices. It also can be acted a secondary controller in a network. "
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Drücken der learn-Taste um die inklusion/exklusion zu starten"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Press the learn-button to start inclusion/excklusion-mode"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Short press the “Include” button on the Key Fob, it will go into inclusion state and its blue LED will blink slowly to wait including other slave Z-Wave devices. "
+        }
       },
-      "productName": "Key Chain Controller",
-      "brandName": "AEOTEC",
-      "productCode": "AEO_KFOB",
-      "productVersion": "1.2"
+      "productName": "Key Fob Gen5 EU",
+      "brandName": "Aeotec",
+      "productLine": "Z-wave Product Line",
+      "productCode": "ZW088-C",
+      "batteryType": "CR2450",
+      "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0020",
-          "@inNIF": "false"
+          "@id": "0085",
+          "@version": "2"
         },
         {
           "@id": "0059"
-        },
-        {
-          "@id": "005a"
         },
         {
           "@id": "005e",
           "@version": "2"
         },
         {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0084",
+          "@version": "2",
+          "@controlled": "true"
+        },
+        {
+          "@id": "002b",
+          "@controlled": "true"
+        },
+        {
           "@id": "0070"
+        },
+        {
+          "@id": "0080"
         },
         {
           "@id": "0072",
@@ -120,26 +117,16 @@
           "@id": "0073"
         },
         {
-          "@id": "0080"
-        },
-        {
-          "@id": "0084",
-          "@version": "2"
-        },
-        {
-          "@id": "0085"
-        },
-        {
-          "@id": "0086",
-          "@version": "2"
-        },
-        {
-          "@id": "002b",
-          "@controlled": "true"
+          "@id": "005a"
         },
         {
           "@id": "0026",
           "@controlled": "true"
+        },
+        {
+          "@id": "0020",
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },
@@ -148,83 +135,78 @@
         "@number": "1",
         "@maxNodes": "5",
         "description": {
-          "lang": [
-            {
-              "@xml:lang": "de",
-              "#text": "Lifeline"
-            },
-            {
-              "@xml:lang": "en",
-              "#text": "Lifeline"
-            }
-          ]
+          "lang": {
+            "@xml:lang": "en",
+            "#text": "Group 1 is assigned to the Lifeline association group and every device has 5 nodes to associate. When the Key Fob is in Scene Mode, pressing the control button, which will send the corresponding Scene id to the associated nodes."
+          }
         }
       }
     },
     "configParams": {
-      "configParam": {
-        "@number": "250",
-        "@type": "constant",
-        "@size": "1",
-        "@default": "00",
-        "name": {
-          "lang": [
-            {
-              "@xml:lang": "de",
-              "#text": "Aktiviert den selektiven Gruppenmodus"
-            },
-            {
+      "configParam": [
+        {
+          "@number": "250",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
               "@xml:lang": "en",
-              "#text": "Enable Selective Group Mode"
-            }
-          ]
-        },
-        "description": {
-          "lang": [
-            {
-              "@xml:lang": "de",
-              "#text": "Aktiviert den selektiven Gruppenmodus oder den Szenenmodus wenn das Gerät im \"Use\"-Mode verwendet wird."
-            },
-            {
-              "@xml:lang": "en",
-              "#text": "Enable selective Group Mode or Scene Mode when the Key Fob is in Use mode."
-            }
-          ]
-        },
-        "value": [
-          {
-            "@from": "00",
-            "@to": "00",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Gruppenmodus"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "Groupmode"
-                }
-              ]
+              "#text": "Group/Scene Mode"
             }
           },
-          {
-            "@from": "01",
-            "@to": "01",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Szenenmodus"
-                },
-                {
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Enable selective Group Mode or Scene Mode when the\r\nKey Fob is in Use mode."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
                   "@xml:lang": "en",
-                  "#text": "Scenemode"
+                  "#text": "Group mode"
                 }
-              ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Scene mode"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reset to Default Settings"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Resets the configuration parameter to default factory setting"
             }
           }
-        ]
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/4d5e021e7c7fe9c31e3d939f3118347dbd35457e.png"
       }
     }
   }

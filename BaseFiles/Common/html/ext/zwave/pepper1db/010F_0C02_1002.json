@@ -165,7 +165,8 @@
         },
         {
           "@id": "008b",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },
@@ -411,7 +412,7 @@
         },
         {
           "@number": "11",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "00ff",
           "name": {
@@ -462,7 +463,7 @@
         },
         {
           "@number": "12",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "0000",
           "name": {
@@ -601,7 +602,7 @@
         },
         {
           "@number": "20",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "0001",
           "name": {

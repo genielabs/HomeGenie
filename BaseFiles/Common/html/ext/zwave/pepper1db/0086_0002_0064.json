@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "04"
+        "@value": "00"
       },
       "basicClass": {
         "@value": "04"
@@ -50,58 +50,63 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0"
+      "beamSensor": "1000",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
         "lang": [
           {
-            "@xml:lang": "de",
-            "#text": "Der Aeon Labs Multisensor 6 ist ein mit Batterie oder Gleichstrom betriebener 5-in-1 Z-Wave Sensor."
+            "@xml:lang": "de"
           },
           {
             "@xml:lang": "en",
-            "#text": "The Aeon Labs MultiSensor 6 is a battery or DC powered (USB port), \r\n5-in-1 Z-Wave sensor. "
+            "#text": "MultiSensor 6"
           }
         ]
       },
       "wakeupNote": {
         "lang": [
           {
-            "@xml:lang": "de",
-            "#text": "Zur De-/Aktivierung einer Wake-Up Nachricht für 10 Minuten, halten Sie den Aktionsknopf für 3 Sekunden gedrückt. (Bei Aktivierung wird die orange LED schnell blinken.)"
+            "@xml:lang": "de"
           },
           {
-            "@xml:lang": "en",
-            "#text": "In order to enable/disable wake up for 10 minutes, press and hold the Action Button for 3 seconds.\r\n(When it is enabled, the orange Led will fast blink) "
+            "@xml:lang": "en"
           }
         ]
       },
       "inclusionNote": {
         "lang": [
           {
-            "@xml:lang": "de",
-            "#text": "1. Schalten Sie den Multisensor ein. Bei Druck auf den Aktionsknopf beginnt die LED langsam zu blinken.\r\n2. Stellen Sie den Primär Controller in den Inklusionsmodus. (Informationen dazu finden Sie in dessen Handbuch.)\r\n3. Drücken Sie den Aktionsknopf.\r\n4. War die Inklusion erfolgreich, bleibt die LED weitere 8 Sekunden angeschalten, wenn Sie kurz auf den Aktionsknopf drücken. Blinkt die LED langsam weiter, müssen Sie den Inklusionsprozess ab Schritt 2 nochmals wiederholen."
+            "@xml:lang": "de"
           },
           {
             "@xml:lang": "en",
-            "#text": "1. Power on MultiSensor. The MultiSensor’s LED will blink slowly when you short press the Action Button. \r\n2. Let the primary controller into inclusion mode (If you don’t know how to do this, refer to its manual). \r\n3. Press the Action Button. \r\n4. If the inclusion is success, MultiSensor’s LED will be kept turning on for 8 seconds when you short press the Action Button. If the LED is still in slow blink, in which you need to repeat the process from step 2."
+            "#text": "Turn the primary controller of Z-Wave network into inclusion mode, short press the product’s Z-Wave button that you can find in the back of the product. "
           }
         ]
       },
-      "productName": "Aeon Multisensor 6",
-      "brandName": "Aeon Labs",
-      "productCode": "AEOEZW100 ",
-      "productVersion": "1.4",
-      "batteryType": "CR123A",
-      "batteryCount": "2"
+      "productName": "MultiSensor 6 EU",
+      "brandName": "Aeotec",
+      "productLine": "Z-wave Product Line",
+      "productCode": "ZW100-C"
     },
     "commandClasses": {
       "commandClass": [
         {
           "@id": "0020",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0030"
+        },
+        {
+          "@id": "0031",
+          "@version": "5"
+        },
+        {
+          "@id": "0059"
         },
         {
           "@id": "005e",
@@ -109,14 +114,35 @@
           "@secure": "true"
         },
         {
+          "@id": "0070"
+        },
+        {
+          "@id": "0071",
+          "@version": "3"
+        },
+        {
           "@id": "0072",
           "@version": "2",
           "@secure": "true"
         },
         {
+          "@id": "0073"
+        },
+        {
+          "@id": "007a",
+          "@version": "2"
+        },
+        {
+          "@id": "0080"
+        },
+        {
           "@id": "0084",
           "@version": "2",
           "@secure": "true"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
         },
         {
           "@id": "0086",
@@ -128,57 +154,8 @@
           "@secure": "true"
         },
         {
-          "@id": "0030",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0031",
-          "@version": "5",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0059",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0070",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0071",
-          "@version": "3",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0073",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "007a",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0080",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0085",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
           "@id": "005a",
-          "@controlled": "true"
+          "@secure": "true"
         }
       ]
     },
@@ -189,12 +166,11 @@
         "description": {
           "lang": [
             {
-              "@xml:lang": "de",
-              "#text": "Gruppe 1"
+              "@xml:lang": "de"
             },
             {
               "@xml:lang": "en",
-              "#text": "Group 1"
+              "#text": "Group 1 is assigned to the Lifeline association group and every device has 5 nodes to associate. The Motion sensor, Humidity sensor, thermometer, light sensor and Ultraviolet sensor reports will be sent to the associated nodes in Group 1."
             }
           ]
         }
@@ -204,18 +180,18 @@
       "configParam": [
         {
           "@number": "2",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Wake Up De-/Aktivierung "
+                "#text": "Bleibe 10 Minuten nach Batteriewechsel wach"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/Disable waking up "
+                "#text": "Wake up 10 minutes when batteries are inserted"
               }
             ]
           },
@@ -223,11 +199,11 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Wake Up De-/Aktivierung für 10 Minuten, sobald der Multisensor neueingeschalten wird (Batteriemodus)"
+                "#text": "definiert, ob der Sensor 10 Minuten nach jedem Batteriewechsel ausgeweckt bleiben soll"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/Disable waking up for 10 minutes when re-power on (battery mode) the \r\nMultiSensor. "
+                "#text": "Stay awake for 10 minutes after batteries are inserted"
               }
             ]
           },
@@ -239,11 +215,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "deaktivert"
+                    "#text": "nein"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "disable"
+                    "#text": "no"
                   }
                 ]
               }
@@ -255,11 +231,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "aktiviert"
+                    "#text": "ja"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "enable"
+                    "#text": "yes"
                   }
                 ]
               }
@@ -270,16 +246,16 @@
           "@number": "3",
           "@type": "range",
           "@size": "2",
-          "@default": "0000",
+          "@default": "00f0",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "vorgegebene PIR Zeit"
+                "#text": "Eingeschaltete Zeit "
               },
               {
                 "@xml:lang": "en",
-                "#text": "default PIR time "
+                "#text": "On time"
               }
             ]
           },
@@ -287,54 +263,37 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Die vorgegebene PIR Zeit beträgt 4 Minuten. Der Multisensor sendet BASIC SET CC(0x00) an zugehörige Verknüpfungen, wenn in den nächsten 4 Minuten keine Bewegung ausgelöst wird"
+                "#text": "Definiert die Zeit, die der Bewegungssensor ein assoziiertes Gerät bei nicht mehr vorhandener Bewegung eingeschaltet lässt, bevor ein AUS-Kommandos gesendet wird"
               },
               {
                 "@xml:lang": "en",
-                "#text": " The default PIR time is 4 minutes. The Multisensor will send BASIC SET CC (0x00) to the associated nodes if no motion is triggered again in 4 minutes. "
+                "#text": "How long should the device associated to multi senor keep state On before sending it Off command (if the value is bigger than 255, the value would be rounded to next integer in minutes)"
               }
             ]
           },
-          "value": [
-            {
-              "@from": "000a",
-              "@to": "00ff",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Die Zeiteinheit ist an zweiter Stelle, wenn der Wertebereich zwischen 10-255 liegt.\r\nStandardwert ist 240."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": " The time unit is second if the value range is in 10 to 255.\r\nDefault Value is 240."
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "0100",
-              "@to": "0e10",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Der Werteberich liegt zwischen 256 - 3600, die Zeiteinheit is in Minuten und deren Wert sollte folgende Regeln unterliegen:\r\na) Zeitintervall = Wert/ 60, wenn der Zeitintervall ohne Rest durch 60 teilbar ist.\r\nb) Zeitintervall = (Wert/ 60) +1, wenn der Zeitintervall durch 60 teilbar ist und ein Restbetrag bleibt.\r\nAlle anderen Werte werden ignoriert."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "If the value range is in 256 to 3600, the time unit will be minute and its value \r\nshould follow the below rules: \r\na),  Interval time =Value/60, if the interval time can be divided by 60 and without remainder. \r\nb), Interval time= (Value/60) +1, if the interval time can be divided by 60 and has remainder. \r\nOther values will be ignored."
-                  }
-                ]
-              }
+          "value": {
+            "@from": "0001",
+            "@to": "3bc4",
+            "@unit": "seconds",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "verzögerung"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "delay"
+                }
+              ]
             }
-          ]
+          }
         },
         {
           "@number": "4",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "05",
           "name": {
             "lang": [
               {
@@ -458,30 +417,28 @@
         },
         {
           "@number": "5",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "01",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "gesandter Befehl, sobald der Bewegungssensor auslöst"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "command sent when the motion sensor triggered. "
+                "#text": "Motion Detection"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Welcher Befehl wird gesendet, wenn der Bewegungssensor auslöst."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Which command would be sent when the motion sensor triggered. "
+                "#text": "Which command would be sent when the motion\r\nsensor triggered."
               }
             ]
           },
@@ -492,12 +449,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "sendet BASIC SET CC"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "send Basic Set CC. "
+                    "#text": "Send Basic Set CC."
                   }
                 ]
               }
@@ -508,12 +464,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "sendet Sensor-Binärreport CC"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "send Sensor Binary Report CC. "
+                    "#text": "Send Sensor Binary Report CC."
                   }
                 ]
               }
@@ -569,30 +524,28 @@
         },
         {
           "@number": "40",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "selektive Berichterstattung"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "selective reporting"
+                "#text": "Reports for Parameters 41-44"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "De-/Aktivierung der selektiven Berichterstattung nur wenn die Messwerte einen bestimmten Grenzwert oder einen Prozentsatz erreichen, s. u. 41-44. Das ist für eine Reduzierung der Netzwerkauslastung sinnvoll."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/disable the selective reporting only when measurements reach a certain \r\nthreshold or percentage set in 41-44 below.  This is used to reduce network \r\ntraffic."
+                "#text": "Enable/disable the selective reporting only when\r\nmeasurements reach a certain threshold or percentage\r\nset in 41‐44 below.  This is used to reduce network\r\ntraffic. "
               }
             ]
           },
@@ -603,8 +556,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "deaktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -619,8 +571,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "aktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -633,127 +584,167 @@
         },
         {
           "@number": "41",
-          "@type": "rangemapped",
+          "@type": "range",
           "@size": "2",
-          "@default": "0000",
+          "@default": "0001",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Änderung des Temperaturgrenzwertes zur Auslösung eines automatischen Berichts"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in temperature to induce an automatic report.  "
+                "#text": "Temperature Automatic Report"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "1. Ist die Einheit Celsius, Grenzwert = Wert. \r\n2. Ist die Einheit Fahrenheit, Grenzwert = Wert*1.8. \r\nDie Genauigkeit beträgt 0.1. \r\n3. Der High Byte ist die ganze Dezimalzahl, der Low Byte ist die Bruchzahl nach dem Komma."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "1. When the unit is Celsius, threshold=Value. \r\n2. When the unit is Fahrenheit, threshold=Value*1.8. \r\nThe accuracy is 0.1. \r\n3. The high byte is the part of integer, the low byte is the fractional part."
+                "#text": "Threshold change in temperature to induce an automatic report.\r\nNote:\r\n1. When the unit is Celsius, threshold=Value.\r\n2. When the unit is Fahrenheit, threshold=Value*1.8\r\nThe accuracy is 0.1.\r\nThe high byte is the part of integer, the low byte is\r\nthe fractional part."
               }
             ]
           }
         },
         {
           "@number": "42",
-          "@type": "rangemapped",
+          "@type": "range",
           "@size": "2",
-          "@default": "0000",
+          "@default": "0005",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Änderung des Grenzwertes für die Luftfeuchtigkeit zur Auslösung eines automatischen Berichts"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in humidity to induce an automatic report. "
+                "#text": "Humidity Automatic Report"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Die Genauigkeit ist 0,1.\r\nDer High Byte ist die ganze Dezimalzahl, der Low Byte ist die Bruchzahl nach dem Komma."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "The accuracy is 0.1. \r\nThe high byte is the part of integer, the low byte is the fractional part. "
+                "#text": "Threshold change in humidity to induce an automatic report.\r\nThe accuracy is 0.1.\r\nThe high byte is the part of integer, the low byte is\r\nthe fractional part."
               }
             ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "0064",
+            "@unit": "% RH",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold for the humidity reports."
+                }
+              ]
+            }
           }
         },
         {
           "@number": "43",
-          "@type": "rangemapped",
+          "@type": "range",
           "@size": "2",
-          "@default": "0000",
+          "@default": "0064",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Änderung des Grenzwertes für die Leuchtstärke zur Auslösung eines automatischen Berichts"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in luminance to induce an automatic report. "
+                "#text": "Luminance Automatic Report"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Voreingestellter Wert = 100 LUX"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Default Value = 100 LUX"
+                "#text": "Threshold change in luminance to induce an automatic report."
               }
             ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "03e8",
+            "@unit": "lux",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold for the luminance reports."
+                }
+              ]
+            }
           }
         },
         {
           "@number": "44",
-          "@type": "rangemapped",
+          "@type": "range",
           "@size": "2",
-          "@default": "0000",
+          "@default": "0005",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Änderung des Grenzwertes für den Batteriestand zur Auslösung eines automatischen Berichts"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold change in battery level to induce an automatic report. "
+                "#text": "Battery Automatic Report"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Die Genauigkeit ist 0,1.\r\nDer High Byte ist die ganze Dezimalzahl, der Low Byte ist die Bruchzahl nach dem Komma.\r\n"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "The accuracy is 0.1. \r\nThe high byte is the part of integer, the low byte is the fractional part."
+                "#text": "Threshold change in battery level to induce an automatic report. The accuracy is 0.1.\r\nThe high byte is the part of integer, the low byte is\r\nthe fractional part."
               }
             ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "0064",
+            "@unit": "%",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold for the battery level reports."
+                }
+              ]
+            }
           }
         },
         {
           "@number": "45",
-          "@type": "rangemapped",
+          "@type": "range",
           "@size": "2",
           "@default": "0000",
           "name": {
@@ -779,34 +770,47 @@
                 "#text": "Default Value = 2"
               }
             ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "000b",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold."
+                }
+              ]
+            }
           }
         },
         {
           "@number": "46",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "De-/Aktivierung der Sendung des Alarmberichts über niedrige Temperatur (<- 15 ℃)"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable/disable to send the alarm report of low temperature(<-15℃) "
+                "#text": "Low Temperature Alarm Report"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Die Batterieaktivität sinkt bei niedrigen Temperaturen (max. -15 °C), was darauf zurückzuführen ist, dass ein Produkt möglicherweise nicht normal tätig ist. Die Anwendung einer USB-Stromversorgung wird bei niedrigen Temperaturen empfohlen."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "The battery activity will be reduced at low temperatures (-15 degrees \r\nCelsius and below), which will lead to the product may not work normally. It is \r\nrecommended to use USB power at low temperatures."
+                "#text": "1.Enable/disable to send the alarm report of low\r\ntemperature(<‐15℃)\r\n2. Value=1, enable (The MultiSensor will report the\r\nMulti Level Temperature CC with the value=0xFFFF to\r\ncontroller if the current temperature is less than ‐\r\n15℃).\r\nNote: The battery activity will be reduced at low\r\ntemperatures (‐15 degrees Celsius and below), which\r\nwill lead to the product may not work normally. It is\r\nrecommended to use USB power at low temperatures."
               }
             ]
           },
@@ -817,12 +821,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "deaktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "disable"
+                    "#text": "Disable to send the alarm report of low temperature"
                   }
                 ]
               }
@@ -833,12 +836,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "aktiviert (Der Multisensor meldet die Multileveltemperatur CC mit dem Wert = 0xFFFF an den Controller, wenn die aktuelle Temperatur unter -15 °C liegt"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": " enable (The MultiSensor will report the Multi Level Temperature CC \r\nwith the value=0xFFFF to controller if the current temperature is less than -15℃)."
+                    "#text": "Enable to send the alarm report of low temperature"
                   }
                 ]
               }
@@ -846,73 +848,61 @@
           ]
         },
         {
-          "@number": "100",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "setzt 101-103 als Standard"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Set 101-103 to default. "
-              }
-            ]
-          }
-        },
-        {
           "@number": "101",
-          "@type": "rangemapped",
+          "@type": "bitset",
           "@size": "4",
-          "@default": "00000000",
+          "@default": "000000e1",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Welcher Bericht muss in Berichtsgruppe 1 gesendet werden"
+                "#text": "Automatisches Senden von Report an Gruppe 1"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Which report needs to be sent in Report group 1"
+                "#text": "Send unsolicited reports periodicaly. Interval group 1"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Definiert, welcher Report soll automatisch an alle in Gruppe 1 assoziierten Geräte gesendet werden soll."
               },
               {
-                "@xml:lang": "en"
+                "@xml:lang": "en",
+                "#text": "Which reports need to send automatically in timing intervals for group 1"
               }
             ]
           },
           "value": [
             {
-              "@from": "00000001",
-              "@to": "00000001",
+              "@from": "00000000",
+              "@to": "00000000",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0-7 = reserviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "#text": "Battery"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -920,15 +910,14 @@
             {
               "@from": "00000002",
               "@to": "00000002",
+              "@reserved": "true",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0-7 = reserviert"
+                    "@xml:lang": "de"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -936,15 +925,14 @@
             {
               "@from": "00000003",
               "@to": "00000003",
+              "@reserved": "true",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0-7 = reserviert"
+                    "@xml:lang": "de"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -955,12 +943,71 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0 = Batterie\r\n1-3 = reserviert\r\n4 = Ultraviolett\r\n5 = Temperatur\r\n6 = Luftfeuchtigkeit\r\n7 = Leuchtstärke"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0 = Battery\r\n1-3 = reserved\r\n4 = ultraviolet\r\n5 = temperature\r\n6 = Humidity\r\n7 = Luminance"
+                    "#text": "Ultraviolet"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000005",
+              "@to": "00000005",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Temperatur\ne"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000006",
+              "@to": "00000006",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Humidity"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000007",
+              "@to": "00000007",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Luminan\nce"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -969,35 +1016,37 @@
         },
         {
           "@number": "102",
-          "@type": "rangemapped",
+          "@type": "bitset",
           "@size": "4",
           "@default": "00000000",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Welcher Bericht muss in Berichtsgruppe 2 gesendet werden"
+                "#text": "Automatisches Senden von Report an Gruppe 2"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Which report needs to be sent in Report group 2 "
+                "#text": "Send unsolicited reports periodicaly. Intervcal group 2"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Definiert, welcher Report soll automatisch an alle in Gruppe 2 assoziierten Geräte gesendet werden soll."
               },
               {
-                "@xml:lang": "en"
+                "@xml:lang": "en",
+                "#text": "Which reports need to send automatically in timing intervals for group 2"
               }
             ]
           },
           "value": [
             {
-              "@from": "00000001",
-              "@to": "00000001",
+              "@from": "00000000",
+              "@to": "00000000",
               "description": {
                 "lang": [
                   {
@@ -1005,7 +1054,22 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "#text": "Battery"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1013,14 +1077,14 @@
             {
               "@from": "00000002",
               "@to": "00000002",
+              "@reserved": "true",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1028,14 +1092,14 @@
             {
               "@from": "00000003",
               "@to": "00000003",
+              "@reserved": "true",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1050,7 +1114,67 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0 = Battery\r\n1-3 = reserved\r\n4 = ultraviolet\r\n5 = temperature\r\n6 = Humidity\r\n7 = Luminance"
+                    "#text": "Ultraviolet"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000005",
+              "@to": "00000005",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Temperature"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000006",
+              "@to": "00000006",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Humidity"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000007",
+              "@to": "00000007",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Luminance"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1059,16 +1183,18 @@
         },
         {
           "@number": "103",
-          "@type": "rangemapped",
+          "@type": "bitset",
           "@size": "4",
           "@default": "00000000",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de"
+                "@xml:lang": "de",
+                "#text": "Automatisches Senden von Report an Gruppe 3"
               },
               {
-                "@xml:lang": "en"
+                "@xml:lang": "en",
+                "#text": "Send unsolicited reports periodicaly. Intervcal group 3"
               }
             ]
           },
@@ -1076,27 +1202,41 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Welcher Bericht muss in Berichtsgruppe 3 gesendet werden"
+                "#text": "Definiert, welcher Report soll automatisch an alle in Gruppe 3 assoziierten Geräte gesendet werden soll."
               },
               {
                 "@xml:lang": "en",
-                "#text": "Which report needs to be sent in Report group 3"
+                "#text": "Which reports need to send automatically in timing intervals for group 3"
               }
             ]
           },
           "value": [
             {
-              "@from": "00000001",
-              "@to": "00000001",
+              "@from": "00000000",
+              "@to": "00000000",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0-7 = reserviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "#text": "Battery"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1104,15 +1244,14 @@
             {
               "@from": "00000002",
               "@to": "00000002",
+              "@reserved": "true",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0-7 = reserviert"
+                    "@xml:lang": "de"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1120,15 +1259,14 @@
             {
               "@from": "00000003",
               "@to": "00000003",
+              "@reserved": "true",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0-7 = reserviert"
+                    "@xml:lang": "de"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "0-7 = reserved"
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1139,12 +1277,71 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "0 = Batterie\r\n1-3 = reserviert\r\n4 = Ultraviolett\r\n5 = Temperatur\r\n6 = Luftfeuchtigkeit\r\n7 = Leuchtstärke"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0 = Battery\r\n1-3 = reserved\r\n4 = ultraviolet\r\n5 = temperature\r\n6 = Humidity\r\n7 = Luminance"
+                    "#text": "Ultraviolet"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000005",
+              "@to": "00000005",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Temperature"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000006",
+              "@to": "00000006",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Humidity"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000007",
+              "@to": "00000007",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Luminance"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -1152,19 +1349,156 @@
           ]
         },
         {
-          "@number": "110",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "00",
+          "@number": "111",
+          "@type": "range",
+          "@size": "4",
+          "@default": "00000e10",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "setzt 111-113 als Standard"
+                "#text": "Interval zum automatischen Senden von Reports für Gruppe 1"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Set 111-113 to default. "
+                "#text": "Unsolicitate reports interval for timing groups 1"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Interval, innerhalb dessen das Gerät automatisch einen Report an alle Geräte in Assoziationsgruppe 1 sendet"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Interval to send out reports to timing group 1"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000005",
+            "@to": "0028de80",
+            "@unit": "seconds",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define an interval time."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "112",
+          "@type": "range",
+          "@size": "4",
+          "@default": "00000e10",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Interval zum automatischen Senden von Reports für Gruppe 2"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Unsolicitate reports interval for timing groups 2"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Interval, innerhalb dessen das Gerät automatisch einen Report an alle Geräte in Assoziationsgruppe 2 sendet"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Interval to send out reports to timing group 2"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000005",
+            "@to": "0028de80",
+            "@unit": "seconds",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define an interval time."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "113",
+          "@type": "range",
+          "@size": "4",
+          "@default": "00000e10",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Interval zum automatischen Senden von Reports für Gruppe 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Unsolicitate reports interval for timing groups 3"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Interval, innerhalb dessen das Gerät automatisch einen Report an alle Geräte in Assoziationsgruppe 3 sendet"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Interval to send out reports to timing group 3"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000005",
+            "@to": "0028de80",
+            "@unit": "seconds",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define an interval time."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "201",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature calibration"
               }
             ]
           },
@@ -1174,13 +1508,98 @@
                 "@xml:lang": "de"
               },
               {
-                "@xml:lang": "en"
+                "@xml:lang": "en",
+                "#text": "The calibration value = standard value - measure value.\r\nE.g. If measure value =25.3℃ and the standard value = 23.2℃, so the\r\ncalibration value= 23.2℃ - 25.3℃= -2.1℃ (0xFFEB).\r\nIf the measure value =30.1℃ and the standard value = 33.2℃, so the calibration\r\nvalue= 33.2℃ - 30.1℃=3.1℃ (0x001F)."
               }
             ]
           }
         },
         {
-          "@number": "111",
+          "@number": "202",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Humidity sensor calibration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The calibration value = standard value - measure value.\r\nE.g. If measure value =80RH and the standard value = 75RH, so the calibration\r\nvalue= 75RH – 80RH= -5RH (0xFFFB).\r\nIf the measure value =85RH and the standard value = 90RH, so the calibration\r\nvalue= 90RH – 85RH=5RH (0x0005)."
+              }
+            ]
+          }
+        },
+        {
+          "@number": "203",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Luminance sensor calibration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The calibration value = standard value - measure value.\r\nE.g. If measure value =800Lux and the standard value = 750Lux, so the\r\ncalibration value= 750 – 800= -50 (0xFFCE).\r\nIf the measure value =850Lux and the standard value = 900Lux, so the calibration\r\nvalue= 900 – 850=50 (0x0032)."
+              }
+            ]
+          }
+        },
+        {
+          "@number": "204",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Ultraviolet sensor calibration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The calibration value = standard value - measure value.\r\nE.g. If measure value =9 and the standard value = 8, so the calibration value= 8 –\r\n9= -1 (0xFE).\r\nIf the measure value =7 and the standard value = 9, so the calibration value= 9 –\r\n7=2 (0x02)."
+              }
+            ]
+          }
+        },
+        {
+          "@number": "252",
           "@type": "constant",
           "@size": "1",
           "@default": "00",
@@ -1190,7 +1609,68 @@
                 "@xml:lang": "de"
               },
               {
-                "@xml:lang": "en"
+                "@xml:lang": "en",
+                "#text": "Lock Configuration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enable/disable all configuration parameters to be locked."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable all configuration parameters to be locked."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Enable all configuration parameters to be locked."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "4",
+          "@default": "00000001",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Reset to default factory setting"
               }
             ]
           },
@@ -1203,9 +1683,46 @@
                 "@xml:lang": "en"
               }
             ]
-          }
+          },
+          "value": [
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Resets all configuration parameters to default setting."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "55555555",
+              "@to": "55555555",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Reset the product to default factory setting and be excluded from the Z-wave network."
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/1c9f763dbd9e82b5c3d8d9518392c2bdbdafb2ee.png"
+      }
     }
   }
 }

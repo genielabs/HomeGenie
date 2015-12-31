@@ -24,10 +24,10 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "83"
+        "@value": "53"
       },
       "appVersion": {
-        "@value": "14"
+        "@value": "0e"
       },
       "appSubVersion": {
         "@value": "03"
@@ -37,6 +37,9 @@
       },
       "genericClass": {
         "@value": "10"
+      },
+      "specificClass": {
+        "@value": "05"
       },
       "optional": {
         "@value": "true"
@@ -135,6 +138,120 @@
           }
         }
       }
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Siren/Strobe Mode"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Configure the desired mode."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All Enable"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Siren Only"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Strobe Only"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "2",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Alarm Auto StopTime"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Set an alarm auto stop time."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "30s"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "60s"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "120s"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Will Not Automatically Stop"
+                }
+              }
+            }
+          ]
+        }
+      ]
     },
     "resourceLinks": {
       "deviceImage": {

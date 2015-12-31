@@ -21,16 +21,16 @@
         "@value": "00"
       },
       "protoVersion": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "00"
+        "@value": "5c"
       },
       "appVersion": {
-        "@value": "00"
+        "@value": "01"
       },
       "appSubVersion": {
-        "@value": "00"
+        "@value": "0a"
       },
       "basicClass": {
         "@value": "04"
@@ -50,19 +50,18 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0",
+      "beamSensor": "1000",
       "rfFrequency": "US"
     },
     "deviceDescription": {
       "description": {
         "lang": [
           {
-            "@xml:lang": "de",
-            "#text": "Versteckter Türsensor"
+            "@xml:lang": "de"
           },
           {
             "@xml:lang": "en",
-            "#text": "recessed Doorsensor"
+            "#text": "Recessed Door Sensor Gen5"
           }
         ]
       },
@@ -88,9 +87,11 @@
           }
         ]
       },
-      "productName": "AEO_ZW089_A",
-      "brandName": "AEOTEC",
-      "productVersion": "1.12",
+      "productName": "Recessed Door Sensor Gen5 US",
+      "brandName": "Aeotec",
+      "productLine": "Z-wave Product Line",
+      "productCode": "ZW089-A",
+      "productVersion": "1.10",
       "batteryType": "CR2",
       "batteryCount": "1"
     },
@@ -98,11 +99,13 @@
       "commandClass": [
         {
           "@id": "0020",
+          "@controlled": "true",
           "@inNIF": "false"
         },
         {
           "@id": "005e",
-          "@version": "2"
+          "@version": "2",
+          "@secure": "true"
         },
         {
           "@id": "0072",
@@ -119,61 +122,39 @@
           "@secure": "true"
         },
         {
-          "@id": "0030",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0030"
         },
         {
-          "@id": "0059",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0059"
         },
         {
-          "@id": "0070",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0070"
         },
         {
           "@id": "0071",
-          "@version": "3",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "3"
         },
         {
-          "@id": "0073",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0073"
         },
         {
           "@id": "007a",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "2"
         },
         {
-          "@id": "0080",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0080"
         },
         {
           "@id": "0084",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "2"
         },
         {
           "@id": "0085",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "2"
         },
         {
           "@id": "005a",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0082",
-          "@controlled": "true"
+          "@secure": "true"
         }
       ]
     },

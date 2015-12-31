@@ -24,7 +24,7 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "95"
+        "@value": "5f"
       },
       "appVersion": {
         "@value": "01"
@@ -171,8 +171,8 @@
               }
             },
             {
-              "@from": "80",
-              "@to": "7f",
+              "@from": "01",
+              "@to": "ff",
               "@unit": "°C",
               "description": {
                 "lang": {
@@ -202,8 +202,8 @@
           },
           "value": [
             {
-              "@from": "80",
-              "@to": "7f",
+              "@from": "01",
+              "@to": "ff",
               "@unit": "mins",
               "description": {
                 "lang": {
@@ -243,8 +243,8 @@
           },
           "value": [
             {
-              "@from": "80",
-              "@to": "7f",
+              "@from": "01",
+              "@to": "ff",
               "@unit": "%Rh",
               "description": {
                 "lang": {
@@ -267,7 +267,7 @@
         },
         {
           "@number": "4",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "05",
           "name": {
@@ -284,8 +284,8 @@
           },
           "value": [
             {
-              "@from": "80",
-              "@to": "7f",
+              "@from": "01",
+              "@to": "ff",
               "@unit": "mins",
               "description": {
                 "lang": {

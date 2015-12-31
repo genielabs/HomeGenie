@@ -159,22 +159,6 @@
     "assocGroups": {
       "assocGroup": [
         {
-          "@number": "6",
-          "@maxNodes": "16",
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Standardberichtsgruppe"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Default reporting group"
-              }
-            ]
-          }
-        },
-        {
           "@number": "5",
           "@maxNodes": "16",
           "description": {

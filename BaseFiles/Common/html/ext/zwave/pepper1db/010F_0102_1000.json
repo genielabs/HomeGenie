@@ -18,19 +18,19 @@
         "@value": "1000"
       },
       "libType": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoVersion": {
-        "@value": "00"
+        "@value": "04"
       },
       "protoSubVersion": {
-        "@value": "00"
+        "@value": "05"
       },
       "appVersion": {
-        "@value": "00"
+        "@value": "03"
       },
       "appSubVersion": {
-        "@value": "00"
+        "@value": "02"
       },
       "basicClass": {
         "@value": "04"

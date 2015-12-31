@@ -36,27 +36,26 @@
         "@value": "04"
       },
       "genericClass": {
-        "@value": "31"
+        "@value": "10"
       },
       "specificClass": {
-        "@value": "03"
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
       },
       "listening": {
-        "@value": "false"
+        "@value": "true"
       },
       "routing": {
         "@value": "false"
       },
-      "rfFrequency": "EU"
+      "rfFrequency": "US"
     },
     "deviceDescription": {
       "description": {
         "lang": {
-          "@xml:lang": "en",
-          "#text": "Aeon Labs Home Energy Meter Gen5 is a Z-Wave device that can monitor the total amount of electricity of your home. \r\nIt can report the wattage energy usage and KWH usage to a Z-Wave Controller (especially a gateway). "
+          "@xml:lang": "en"
         }
       },
       "wakeupNote": {
@@ -70,102 +69,110 @@
           "#text": "Turn the primary controller of Z-Wave network into inclusion mode, short press the product’s Action button that you can find on the product's housing. "
         }
       },
-      "productName": "Home Energy Meter Gen5",
+      "productName": "Aeon Labs Smart Switch (2nd Edition)",
       "brandName": "Aeon Labs"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "005e",
-          "@version": "2",
-          "@secure": "true"
-        },
-        {
-          "@id": "0086",
-          "@version": "2",
-          "@secure": "true"
-        },
-        {
-          "@id": "0072",
-          "@version": "2",
-          "@secure": "true"
+          "@id": "0025"
         },
         {
           "@id": "0032",
           "@version": "3"
         },
         {
-          "@id": "0056",
-          "@secure": "true"
+          "@id": "0027"
         },
         {
-          "@id": "0060",
-          "@version": "3"
+          "@id": "002c"
         },
         {
-          "@id": "0060",
-          "@version": "2"
+          "@id": "002b"
         },
         {
           "@id": "0070"
         },
         {
-          "@id": "0085",
+          "@id": "0085"
+        },
+        {
+          "@id": "0056"
+        },
+        {
+          "@id": "0072",
           "@version": "2"
         },
         {
-          "@id": "0059"
+          "@id": "0086"
         },
         {
-          "@id": "007a",
-          "@version": "2"
+          "@id": "00ef"
         },
         {
-          "@id": "0073"
-        },
-        {
-          "@id": "0098",
-          "@secure": "true"
-        },
-        {
-          "@id": "00ef",
-          "@secure": "true"
-        },
-        {
-          "@id": "005a",
-          "@secure": "true"
+          "@id": "0082"
         }
       ]
     },
     "assocGroups": {
-      "assocGroup": {
-        "@number": "1",
-        "@maxNodes": "5",
-        "description": {
-          "lang": {
-            "@xml:lang": "en",
-            "#text": "Lifeline"
+      "assocGroup": [
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The Node IDs in Group 1 will receive Hail Command /Basic report."
+            }
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The Node IDs in Group 1 will receive Meter REPORT for watt/ KWH."
+            }
           }
         }
-      }
+      ]
     },
     "configParams": {
       "configParam": [
         {
           "@number": "2",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Make Smart Switch blink"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Configuration Value 1：1-255\r\nConfiguration Value 1 Specifies the time that Smart Switch\r\nblinks, The unit is Second;\r\nConfiguration Value 2：1-255\r\nConfiguration Value 2 Specifies the on/off status of the\r\ncycle, its unit is 0.1 second.\r\n For example: if we set Configuration Value 1 to '15',Configuration Value 2 to\r\n'10',then Smart Switch will open for 0.5 seconds, close for 0.5\r\nseconds, and repeat for 14 times."
+            }
+          }
+        },
+        {
+          "@number": "3",
           "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Energy Detection Mode Configuration"
+              "#text": "Current Overload Protection"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "This parameter is used to configure the energy detection\nmode when the parameter 101~103 have been configured."
+              "#text": "The load will be closed when\r\nthe Current is more than 15.5A and the time is more than 2\r\nminutes."
             }
           },
           "value": [
@@ -175,67 +182,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "report Wattage and the absolute KWH value"
-                }
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "report positive/negative Wattage and the algebraic sum KWH value"
-                }
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "report positive/negative Wattage and the positive KWH value (consuming electricity)"
-                }
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "report positive/negative Wattage and the negative KWH value (generating electricity)"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "@number": "3",
-          "@type": "constant",
-          "@size": "1",
-          "@default": "01",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Enable/Disable the Function of Parameters 4 to 10."
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Enable selective reporting only when power change reaches\na certain threshold or percentage set in 4‐10 below.  This is\nused to reduce network traffic."
-            }
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "disable "
+                  "#text": "disable"
                 }
               }
             },
@@ -252,188 +199,64 @@
           ]
         },
         {
-          "@number": "4",
-          "@type": "range",
-          "@size": "2",
-          "@default": "0032",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Induce an automatic report of whole HEM."
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Threshold change in wattage to induce an automatic report\n(Whole HEM)."
-            }
-          },
-          "value": {
-            "@from": "0001",
-            "@to": "7fff",
-            "@unit": "W",
-            "description": {
-              "lang": {
-                "@xml:lang": "en",
-                "#text": "Define a value."
-              }
-            }
-          }
-        },
-        {
-          "@number": "5",
-          "@type": "range",
-          "@size": "2",
-          "@default": "0032",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Induce an automatic report for Clamp 1."
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Threshold change in wattage to induce an automatic report\n(Whole HEM)."
-            }
-          },
-          "value": {
-            "@from": "0001",
-            "@to": "7fff",
-            "@unit": "W",
-            "description": {
-              "lang": {
-                "@xml:lang": "en",
-                "#text": "Define a value."
-              }
-            }
-          }
-        },
-        {
-          "@number": "6",
-          "@type": "range",
-          "@size": "2",
-          "@default": "0032",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Induce an automatic report for Clamp 2."
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Threshold change in wattage to induce an automatic report\n(Whole HEM)."
-            }
-          },
-          "value": {
-            "@from": "0001",
-            "@to": "7fff",
-            "@unit": "W",
-            "description": {
-              "lang": {
-                "@xml:lang": "en",
-                "#text": "Define a value."
-              }
-            }
-          }
-        },
-        {
-          "@number": "8",
-          "@type": "range",
-          "@size": "1",
-          "@default": "0a",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Induce an automatic report of whole HEM(%)"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Percentage change in wattage to induce an automatic report.\n(Whole HEM)."
-            }
-          },
-          "value": {
-            "@from": "00",
-            "@to": "64",
-            "@unit": "%",
-            "description": {
-              "lang": {
-                "@xml:lang": "en",
-                "#text": "Define a treshold."
-              }
-            }
-          }
-        },
-        {
-          "@number": "9",
-          "@type": "range",
-          "@size": "1",
-          "@default": "0a",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Induce an automatic report for Clamp 1(%)"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Percentage change in wattage to induce an automatic report.\n(Whole HEM)."
-            }
-          },
-          "value": {
-            "@from": "00",
-            "@to": "64",
-            "@unit": "%",
-            "description": {
-              "lang": {
-                "@xml:lang": "en",
-                "#text": "Define a treshold."
-              }
-            }
-          }
-        },
-        {
-          "@number": "10",
-          "@type": "range",
-          "@size": "1",
-          "@default": "0a",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Induce an automatic report for Clamp 2(%)"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Percentage change in wattage to induce an automatic report.\n(Whole HEM)."
-            }
-          },
-          "value": {
-            "@from": "00",
-            "@to": "64",
-            "@unit": "%",
-            "description": {
-              "lang": {
-                "@xml:lang": "en",
-                "#text": "Define a treshold."
-              }
-            }
-          }
-        },
-        {
-          "@number": "13",
+          "@number": "80",
           "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Enable /Disable CRC-16 Encapsulation"
+              "#text": "Notifications"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Enable to send notifications to associated devices (Group 1)\r\nwhen the state of Micro Switch’s load is changed."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "send nothing"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Hail CC"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Basic CC report"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "90",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Enables/disables parameter 91 and 92"
             }
           },
           "description": {
@@ -465,20 +288,95 @@
           ]
         },
         {
-          "@number": "101",
-          "@type": "bitset",
-          "@size": "4",
-          "@default": "00000002",
+          "@number": "91",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0032",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Reports Group 1"
+              "#text": "Automatic Report(W)"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Which reports need to send in Report group 1"
+              "#text": "The value here represents minimum change in wattage (in\r\nterms of wattage) for a REPORT to be sent."
+            }
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "959f",
+            "@unit": "W",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define a  treshold to induce a report."
+              }
+            }
+          }
+        },
+        {
+          "@number": "92",
+          "@type": "range",
+          "@size": "1",
+          "@default": "0a",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Automatic Report(%)"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The value here represents minimum change in wattage\r\npercent (in terms of percentage) for the REPORT to be sent."
+            }
+          },
+          "value": {
+            "@from": "00",
+            "@to": "64",
+            "@unit": "%",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define a  treshold to induce a report."
+              }
+            }
+          }
+        },
+        {
+          "@number": "100",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Set Paremeters 101-103 to Default"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          }
+        },
+        {
+          "@number": "101",
+          "@type": "bitset",
+          "@size": "4",
+          "@default": "00000000",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reports in Group 1"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Which reports will be sent in Report group 1."
             }
           },
           "value": [
@@ -488,7 +386,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for KWH)\nat the\ngroup time\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPOR\r\nT (for\r\nvoltage\r\nat the\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -498,7 +396,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for\nwattage)\nat the\ngroup time\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\ncurrent)\r\nat the\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -508,7 +406,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto\nsend\nMeter\nREPORT\n(for V) at\nthe\ngroup\ntime\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\nwatt) at\r\nthe\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -518,142 +416,12 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\nkWh) at\r\nthe\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
             {
               "@from": "00000004",
-              "@to": "00000007",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000008",
-              "@to": "00000008",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for Watt)\nat the\ngroup time\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000009",
-              "@to": "00000009",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for Watt)\nat the\ngroup time\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "0000000a",
-              "@to": "0000000a",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "0000000b",
-              "@to": "0000000b",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for kWh)\nat the\ngroup time\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "0000000c",
-              "@to": "0000000c",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for kWh)\nat the\ngroup time\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "0000000d",
-              "@to": "0000000f",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000010",
-              "@to": "00000010",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for V) at\nthe group\ntime\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000011",
-              "@to": "00000011",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for V) at\nthe group\ntime\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "00000012",
-              "@to": "00000012",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000013",
-              "@to": "00000013",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000014",
-              "@to": "00000014",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "00000015",
-              "@to": "00000017",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000018",
               "@to": "0000001f",
               "@reserved": "true",
               "description": {
@@ -668,17 +436,17 @@
           "@number": "102",
           "@type": "bitset",
           "@size": "4",
-          "@default": "00000001",
+          "@default": "00000000",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Reports Group 2"
+              "#text": "Reports in Group 2"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Which reports need to send in Report group 2"
+              "#text": "Which reports will be sent in Report group 2."
             }
           },
           "value": [
@@ -688,7 +456,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for KWH)\nat the\ngroup time\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\nkWh) at\r\nthe\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -698,7 +466,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for\nwattage)\nat the\ngroup time\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\nwatt) at\r\nthe\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -708,7 +476,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto\nsend\nMeter\nREPORT\n(for V) at\nthe\ngroup\ntime\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\ncurrent)\r\nat the\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -718,142 +486,12 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPOR\r\nT (for\r\nvoltage\r\nat the\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
             {
               "@from": "00000004",
-              "@to": "00000007",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000008",
-              "@to": "00000008",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for Watt)\nat the\ngroup time\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000009",
-              "@to": "00000009",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for Watt)\nat the\ngroup time\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "0000000a",
-              "@to": "0000000a",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "0000000b",
-              "@to": "0000000b",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for kWh)\nat the\ngroup time\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "0000000c",
-              "@to": "0000000c",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for kWh)\nat the\ngroup time\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "0000000d",
-              "@to": "0000000f",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000010",
-              "@to": "00000010",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for V) at\nthe group\ntime\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000011",
-              "@to": "00000011",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for V) at\nthe group\ntime\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "00000012",
-              "@to": "00000012",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000013",
-              "@to": "00000013",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000014",
-              "@to": "00000014",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "00000015",
-              "@to": "00000017",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000018",
               "@to": "0000001f",
               "@reserved": "true",
               "description": {
@@ -872,13 +510,13 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Reports Group 3"
+              "#text": "Reports in Group 3"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Which reports need to send in Report group 3"
+              "#text": "Which reports will be sent in Report group 3."
             }
           },
           "value": [
@@ -888,7 +526,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for KWH)\nat the\ngroup time\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPOR\r\nT (for\r\nvoltage\r\nat the\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -898,7 +536,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for\nwattage)\nat the\ngroup time\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\ncurrent)\r\nat the\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -908,7 +546,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto\nsend\nMeter\nREPORT\n(for V) at\nthe\ngroup\ntime\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\nwatt) at\r\nthe\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
@@ -918,144 +556,13 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Whole\nHEM)"
+                  "#text": "Auto\r\nsend\r\nMeter\r\nREPORT\r\n(for\r\nkWh) at\r\nthe\r\ngroup\r\ntime\r\ninterval"
                 }
               }
             },
             {
               "@from": "00000004",
-              "@to": "00000007",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000008",
-              "@to": "00000008",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for Watt)\nat the\ngroup time\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000009",
-              "@to": "00000009",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for Watt)\nat the\ngroup time\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "0000000a",
-              "@to": "0000000a",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "0000000b",
-              "@to": "0000000b",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for kWh)\nat the\ngroup time\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "0000000c",
-              "@to": "0000000c",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for kWh)\nat the\ngroup time\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "0000000d",
-              "@to": "0000000f",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000010",
-              "@to": "00000010",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for V) at\nthe group\ntime\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000011",
-              "@to": "00000011",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for V) at\nthe group\ntime\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "00000012",
-              "@to": "00000012",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000013",
-              "@to": "00000013",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Clamp 1)"
-                }
-              }
-            },
-            {
-              "@from": "00000014",
-              "@to": "00000014",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Auto send\nMeter\nREPORT\n(for A) at\nthe group\ntime\ninterval\n(Clamp 2)"
-                }
-              }
-            },
-            {
-              "@from": "00000015",
-              "@to": "00000017",
-              "@reserved": "true",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en"
-                }
-              }
-            },
-            {
-              "@from": "00000018",
               "@to": "0000001f",
-              "@reserved": "true",
               "description": {
                 "lang": {
                   "@xml:lang": "en"
@@ -1065,26 +572,42 @@
           ]
         },
         {
-          "@number": "111",
-          "@type": "range",
-          "@size": "4",
-          "@default": "0000003c",
+          "@number": "110",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Time Interval Report Group 1"
+              "#text": "Set Parameters 111-113 to Default"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          }
+        },
+        {
+          "@number": "111",
+          "@type": "constant",
+          "@size": "4",
+          "@default": "00000003",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Report Interval Group 1"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "The time interval of sending Report group 1"
+              "#text": "The time interval of sending Report group 1."
             }
           },
           "value": {
             "@from": "00000001",
-            "@to": "7fffffff",
-            "@unit": "sec",
+            "@to": "ffffffff",
             "description": {
               "lang": {
                 "@xml:lang": "en",
@@ -1095,25 +618,24 @@
         },
         {
           "@number": "112",
-          "@type": "range",
+          "@type": "constant",
           "@size": "4",
-          "@default": "00000078",
+          "@default": "00000258",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Time Interval Report Group 2"
+              "#text": "Report Interval Group 2"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "The time interval of sending Report group 2"
+              "#text": "The time interval of sending Report group 2."
             }
           },
           "value": {
             "@from": "00000001",
-            "@to": "7fffffff",
-            "@unit": "sec",
+            "@to": "ffffffff",
             "description": {
               "lang": {
                 "@xml:lang": "en",
@@ -1124,25 +646,24 @@
         },
         {
           "@number": "113",
-          "@type": "range",
+          "@type": "constant",
           "@size": "4",
-          "@default": "00000078",
+          "@default": "00000258",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Time Interval Report Group 3"
+              "#text": "Report Interval Group 3"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "The time interval of sending Report group 3"
+              "#text": "The time interval of sending Report group 3."
             }
           },
           "value": {
             "@from": "00000001",
-            "@to": "7fffffff",
-            "@unit": "sec",
+            "@to": "ffffffff",
             "description": {
               "lang": {
                 "@xml:lang": "en",
@@ -1184,7 +705,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Others"
+                  "#text": "AT&T"
                 }
               }
             }
@@ -1198,47 +719,7 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Lock Configuration"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Enable/Disable Lock Configuration"
-            }
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "All configuration parameters are configurable."
-                }
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "All configuration parameters are not configurable (Locked)."
-                }
-              }
-            }
-          ]
-        },
-        {
-          "@number": "255",
-          "@type": "constant",
-          "@size": "4",
-          "@default": "00000000",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Reset to Default Factory Setting"
+              "#text": "Enable/disable the Lock Configuration"
             }
           },
           "description": {
@@ -1248,33 +729,63 @@
           },
           "value": [
             {
-              "@from": "00000001",
-              "@to": "00000001",
+              "@from": "00",
+              "@to": "00",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Resets all configuration parameters to default setting."
+                  "#text": "disable "
                 }
               }
             },
             {
-              "@from": "55555555",
-              "@to": "55555555",
+              "@from": "01",
+              "@to": "01",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Reset the product to default factory setting and be excluded from the Z-wave network."
+                  "#text": "enable"
                 }
               }
             }
           ]
+        },
+        {
+          "@number": "254",
+          "@type": "constant",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Device Tag"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          }
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reset All"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reset configuration settings to factory defaults."
+            }
+          }
         }
       ]
-    },
-    "resourceLinks": {
-      "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/6eba437d02ab555e4ac5c2b4437bb990a480dba1.png"
-      }
     }
   }
 }

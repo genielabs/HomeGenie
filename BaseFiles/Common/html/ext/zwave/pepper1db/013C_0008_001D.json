@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "95"
+        "@value": "5f"
       },
       "appVersion": {
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "11"
+        "@value": "0b"
       },
       "basicClass": {
         "@value": "04"
@@ -138,7 +138,8 @@
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0094",
@@ -244,7 +245,7 @@
       "configParam": [
         {
           "@number": "2",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "ff",
           "name": {

@@ -147,7 +147,8 @@
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

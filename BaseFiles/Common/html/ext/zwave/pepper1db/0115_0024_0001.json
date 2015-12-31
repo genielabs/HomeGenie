@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "03"
+        "@value": "04"
       },
       "basicClass": {
         "@value": "04"
@@ -87,11 +87,11 @@
           }
         ]
       },
-      "productName": "Floor thermostat 1.3",
+      "productName": "Floor thermostat 1.4",
       "brandName": "Z-Wave.Me",
       "productLine": "Devilink modification",
       "productCode": "FT",
-      "productVersion": "1.3"
+      "productVersion": "1.4"
     },
     "commandClasses": {
       "commandClass": [
@@ -717,6 +717,86 @@
                   {
                     "@xml:lang": "ru",
                     "#text": "Ватт"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "8",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0384",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Periode für automatischen Temperatur Report"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Unsolicited temperature report period"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Как часто отправлять температуру"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Automatisches Senden des Temperatur Reports. 0 = aus"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Period for unsolicited send the temperature report. By default 15 minute. 0 = Off"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время периодической отправки температуры задается в секундах. По умолчанию температура автоматически отправляется каждые 15 минут."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "001e",
+              "@to": "ffff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Seconds"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Seconds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Секунды"
                   }
                 ]
               }

@@ -123,6 +123,7 @@
         {
           "@id": "0020",
           "@controlled": "true",
+          "@inNIF": "false",
           "@secure": "true",
           "@nonSecure": "false"
         },
@@ -151,6 +152,7 @@
         {
           "@id": "002b",
           "@controlled": "true",
+          "@inNIF": "false",
           "@secure": "true",
           "@nonSecure": "false"
         },
@@ -178,7 +180,8 @@
         },
         {
           "@id": "008b",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

@@ -121,24 +121,29 @@
         },
         {
           "@id": "0027",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0022",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0026",
           "@version": "3",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "002b",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

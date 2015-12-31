@@ -24,7 +24,7 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "95"
+        "@value": "5f"
       },
       "appVersion": {
         "@value": "05"
@@ -151,7 +151,8 @@
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },
@@ -204,8 +205,8 @@
             ]
           },
           "value": {
-            "@from": "80",
-            "@to": "7f",
+            "@from": "01",
+            "@to": "ff",
             "@unit": "min",
             "description": {
               "lang": [

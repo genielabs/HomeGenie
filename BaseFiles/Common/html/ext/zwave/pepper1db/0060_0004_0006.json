@@ -24,7 +24,7 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "95"
+        "@value": "5f"
       },
       "appVersion": {
         "@value": "01"
@@ -257,7 +257,7 @@
         },
         {
           "@number": "4",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "0001",
           "name": {
@@ -298,7 +298,7 @@
         },
         {
           "@number": "5",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "003c",
           "name": {
@@ -339,7 +339,7 @@
         },
         {
           "@number": "6",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "0000",
           "name": {
@@ -380,7 +380,7 @@
         },
         {
           "@number": "7",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {

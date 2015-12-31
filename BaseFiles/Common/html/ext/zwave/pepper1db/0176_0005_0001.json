@@ -133,19 +133,23 @@
         },
         {
           "@id": "0027",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0025",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
           "@id": "0026",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

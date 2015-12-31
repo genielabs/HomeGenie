@@ -4,6 +4,8 @@
   <Version>1.1 beta r509</Version>
   <Description>Latest public release.</Description>
   <ReleaseNote>   - Added 'Automatic Off' options to TimeTable programs (when armed home/away or no motion activity detected)
+  - Updated Z-Wave device database (pepper1)
+  - Updated RaspberrySharp-IO libraries
   - Little UI rework and improvements
   - Fix to Timetable widget 'today events' bug</ReleaseNote>
   <ReleaseDate>2015-12-30T19:34:47.0000Z</ReleaseDate>

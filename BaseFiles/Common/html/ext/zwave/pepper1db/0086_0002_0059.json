@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "0c"
+        "@value": "0a"
       },
       "basicClass": {
         "@value": "04"
@@ -50,48 +50,32 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0",
-      "rfFrequency": "EU",
-      "certNumber": "ZC10-14120011"
+      "beamSensor": "1000",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Versteckter Türsensor"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "recessed Doorsensor"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Recessed Door Sensor Gen5"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "einfaches Drücken des Z-Wave Taste"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Z-Wave Button press"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Z-Wave Button press"
+        }
       },
-      "productName": "AEO_ZW089",
-      "brandName": "AEOTEC",
-      "productVersion": "1.12",
+      "productName": "Recessed Door Sensor Gen5 EU",
+      "brandName": "Aeotec",
+      "productLine": "Z-wave Product Line",
+      "productCode": "ZW089-C",
+      "productVersion": "1.10",
       "batteryType": "CR2",
       "batteryCount": "1"
     },
@@ -99,11 +83,13 @@
       "commandClass": [
         {
           "@id": "0020",
+          "@controlled": "true",
           "@inNIF": "false"
         },
         {
           "@id": "005e",
-          "@version": "2"
+          "@version": "2",
+          "@secure": "true"
         },
         {
           "@id": "0072",
@@ -120,61 +106,39 @@
           "@secure": "true"
         },
         {
-          "@id": "0030",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0030"
         },
         {
-          "@id": "0059",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0059"
         },
         {
-          "@id": "0070",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0070"
         },
         {
           "@id": "0071",
-          "@version": "3",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "3"
         },
         {
-          "@id": "0073",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0073"
         },
         {
           "@id": "007a",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "2"
         },
         {
-          "@id": "0080",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0080"
         },
         {
           "@id": "0084",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "2"
         },
         {
           "@id": "0085",
-          "@version": "2",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@version": "2"
         },
         {
           "@id": "005a",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0082",
-          "@controlled": "true"
+          "@secure": "true"
         }
       ]
     },
@@ -191,7 +155,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "receive Basic Set/ Sensor Binary Report, when the state\r\n"
+                "#text": "receive Basic Set/ Sensor Binary Report, when the state\n"
               }
             ]
           }
@@ -433,7 +397,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "minimum battery low check Interval time is 4 minutes\r\n"
+                "#text": "minimum battery low check Interval time is 4 minutes\n"
               }
             ]
           },
@@ -553,7 +517,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Sensor\r\nBinary"
+                    "#text": "Sensor\nBinary"
                   }
                 ]
               }
@@ -613,7 +577,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Basic\r\nSet "
+                    "#text": "Basic\nSet "
                   }
                 ]
               }
@@ -785,7 +749,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/4d1e151997c231554c7c8794c8e936b477a660d6.png"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/1c2281a13d50d880cc60181fde520d6ac6e669ae.png"
       }
     }
   }

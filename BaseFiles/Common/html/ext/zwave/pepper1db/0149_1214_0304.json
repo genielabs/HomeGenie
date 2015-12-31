@@ -24,7 +24,7 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "99"
+        "@value": "63"
       },
       "appVersion": {
         "@value": "01"
@@ -144,7 +144,8 @@
         },
         {
           "@id": "0020",
-          "@controlled": "true"
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

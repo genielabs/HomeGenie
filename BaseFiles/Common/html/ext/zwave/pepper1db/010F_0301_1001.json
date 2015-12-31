@@ -962,8 +962,8 @@
             ]
           },
           "value": {
-            "@from": "0",
-            "@to": "ff",
+            "@from": "81",
+            "@to": "7f",
             "@unit": "1W",
             "description": {
               "lang": [
@@ -1019,7 +1019,7 @@
             ]
           },
           "value": {
-            "@from": "0",
+            "@from": "8001",
             "@to": "7fff",
             "@unit": "1s",
             "description": {
