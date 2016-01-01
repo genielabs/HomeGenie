@@ -112,7 +112,7 @@
             log += '<div class="ui-block-b" align="right" style="border-top:1px solid rgba(200,200,200,0.5)"><br/>'+date+'</div>';
         }
     } else {
-        log = '<div align="center" style="line-height: 148px">No recent activity</div>';
+        log = '<div align="center" style="line-height: 148px">'+HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'securityalarm_noactivity', 'No recent activity')+'</div>';
     }
     this.Widget.find('[data-ui-field=activity-log]').html(log);
     // auto refresh every 60 seconds

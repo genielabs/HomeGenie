@@ -77,5 +77,7 @@
 
     "therm_setmode" : "Operating Mode",
     "therm_off" : "Off",
-    "therm_auto" : "Auto"
+    "therm_auto" : "Auto",
+
+    "securityalarm_noactivity" : "No recent activity"
 }

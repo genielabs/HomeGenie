@@ -91,9 +91,8 @@
             $.ajax({
                 url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.timetableWidget.ApiDomain + '/Timetable.Get/' + this.TableGroup + '.' + p,
                 type: 'GET',
-                dataType: 'text',
                 success: function (data) {
-                    var table = eval(data)[0].ResponseValue;
+                    var table = data.ResponseValue;
                     _this.timetableWidget.DrawTimetable(_this.timebar_s, false, table);
                     $.mobile.loading('hide');
                 }
@@ -101,9 +100,8 @@
             $.ajax({
                 url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.timetableWidget.ApiDomain + '/Timetable.Get/' + this.TableGroup + '.' + p+'.DST',
                 type: 'GET',
-                dataType: 'text',
                 success: function (data) {
-                    var table = eval(data)[0].ResponseValue;
+                    var table = data.ResponseValue;
                     _this.timetableWidget.DrawTimetable(_this.timebar_d, false, table);
                     $.mobile.loading('hide');
                 }

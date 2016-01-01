@@ -1,6 +1,6 @@
 ﻿RELEASE HISTORY
 
-30/12/2015 v1.1-beta.509
+01/01/2016 v1.1-beta.509
     - Added 'Automatic Off' options to TimeTable programs (when armed home/away or no motion activity detected)
     - Updated Z-Wave device database (pepper1)
     - Updated RaspberrySharp-IO libraries

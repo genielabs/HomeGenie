@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.647935Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.513394Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -164,6 +164,15 @@ Program.Run();
   return true;
 };
 
+var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
+  dynamic color = new ExpandoObject();
+  string[] parts = hsb.Split(',');
+  color.H = (parts[0] != "" ? parts[0] : "1");
+  color.S = (parts.Length &gt; 1 &amp;&amp; parts[1] != "" ? parts[1] : "0");
+  color.B = (parts.Length &gt; 2 &amp;&amp; parts[2] != "" ? parts[2] : "1");
+  return color;
+});
+
 var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
 // - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
 When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
@@ -181,9 +190,11 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
     {
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
       case "Control.On":
-        bridgeapicall(lightnumber, "{ \"on\" : true }");
-        string[] hsb1 = module.Parameter("Status.ColorHsb").Value.Split(',');
-        Program.RaiseEvent(module, "Status.Level", hsb1[2], "Hue Light");
+        {
+          bridgeapicall(lightnumber, "{ \"on\" : true }");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          Program.RaiseEvent(module, "Status.Level", color.B, "Hue Light");
+        }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
       case "Control.Off":
@@ -194,8 +205,8 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         if (module.Parameter("Status.Level").DecimalValue == 0)
         {
           bridgeapicall(lightnumber, "{ \"on\" : true }");
-          string[] hsb2 = module.Parameter("Status.ColorHsb").Value.Split(',');
-          Program.RaiseEvent(module, "Status.Level", hsb2[2], "Hue Light");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          Program.RaiseEvent(module, "Status.Level", color.B, "Hue Light");
         }
         else
         {
@@ -204,12 +215,14 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         }
         break;
       case "Control.Level":
-        if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
-        bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
-	    string[] hsb3 = module.Parameter("Status.ColorHsb").Value.Split(',');
-      	var bl = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
-      	module.Parameter("Status.ColorHsb").Value = hsb3[0]+','+hsb3[1]+','+bl;
-        Program.RaiseEvent(module, "Status.Level", bl, "Hue Light");
+        {
+          if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
+          bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
+          module.Parameter("Status.ColorHsb").Value = color.H+','+color.S+','+bri;
+          Program.RaiseEvent(module, "Status.Level", bri, "Hue Light");
+        }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
       case "Control.ColorHsb":
@@ -255,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.492696Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.402348Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -429,7 +442,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.751589Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.350731Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -501,7 +514,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.46695Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.310826Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1117,7 +1130,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.796979Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.610451Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1164,7 +1177,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.625654Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.516866Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1513,7 +1526,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.814516Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.643568Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1643,7 +1656,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.609273Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.253796Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1807,7 +1820,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.466951Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.615343Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2242,7 +2255,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.55475Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.634274Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2391,7 +2404,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.779031Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.431926Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2641,7 +2654,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.480729Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.366358Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4738,12 +4751,16 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
       var domainAddress = thermostat.Parameter(PARAMETER_TEMPERATURE_MODULE).Value;
       if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
       {
-        var domain = domainAddress.Split(':')[0].ToLower();
-        var address = domainAddress.Split(':')[1].ToLower();
-        if (module.Instance.Domain.ToLower() == domain &amp;&amp; module.Instance.Address.ToLower() == address)
+        var separatorIndex = domainAddress.LastIndexOf(':');
+        if (separatorIndex &gt; 0) 
         {
-          Program.RaiseEvent(thermostat, "Sensor.Temperature", parameter.Value, EVENT_DESCRIPTION);
-          ThermostatLogicRun(thermostat);
+          var domain = domainAddress.Substring(0, separatorIndex).ToLower();
+          var address = domainAddress.Substring(separatorIndex + 1).ToLower();
+          if (module.Instance.Domain.ToLower() == domain &amp;&amp; module.Instance.Address.ToLower() == address)
+          {
+            Program.RaiseEvent(thermostat, "Sensor.Temperature", parameter.Value, EVENT_DESCRIPTION);
+            ThermostatLogicRun(thermostat);
+          }
         }
       }
       return false;
@@ -6569,6 +6586,7 @@ Program.Run();
 var MODULE_DOMAIN = "HomeAutomation.HomeGenie";
 var MODULE_ADDRESS = "Timetable";
 
+var programsCount = 10;
 var timeResolution = 5d;
 var tableLength = (int)((24 * 60) / timeResolution);
 var tablePrefix = "Settings.";
@@ -6677,6 +6695,20 @@ var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
   return v;
 });
 
+var GetClosestEvent = new Func&lt;ModuleParameter, DateTime, DateTime&gt;((parameter, date)=&gt;{
+  var hist = parameter.Statistics.History.DeepClone();
+  var closest = hist[hist.Count-1];
+  for(int p = hist.Count-1; p &gt;= 0; p--)
+  {
+    if (date &lt;= hist[p].Timestamp)
+    {
+      break;
+    }
+    closest = hist[p];
+  }
+  return closest.Timestamp;
+});
+
 var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions, date)=&gt;{
   bool autoOff = false;
   if (tableOptions.AutoOff.WhenArmedAway == true || tableOptions.AutoOff.WhenArmedHome == true)
@@ -6691,19 +6723,19 @@ var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions,
         autoOff = true;
     }
   }
-  if (tableOptions.AutoOff.WhenNoMotion == true)
+  if (!autoOff &amp;&amp; tableOptions.AutoOff.WhenNoMotion == true)
   {
     var mda = GetDomainAddress(tableOptions.AutoOff.MotionSensor.ToString());
     var module = Modules.InDomain(mda.Domain).WithAddress(mda.Address).Get();
     if (module.Instance != null)
     {
-      	var lastMotion = DateTime.UtcNow;
-      	if (module.HasParameter("Sensor.MotionDetect"))
-          lastMotion = module.Parameter("Sensor.MotionDetect").UpdateTime;
-        else if (module.HasParameter("Status.Level"))
-          lastMotion = module.Parameter("Status.Level").UpdateTime;
-        if ((date-lastMotion).TotalMinutes &gt;= (int)tableOptions.AutoOff.MotionTimeout)
-          autoOff = true;
+      var lastMotion = DateTime.UtcNow;
+      if (module.HasParameter("Sensor.MotionDetect"))
+        lastMotion = GetClosestEvent(module.Parameter("Sensor.MotionDetect"), date);
+      else if (module.HasParameter("Status.Level"))
+        lastMotion = GetClosestEvent(module.Parameter("Status.Level"), date);
+      if ((date-lastMotion).TotalMinutes &gt;= (int)tableOptions.AutoOff.MotionTimeout)
+        autoOff = true;
     }
   }
   return autoOff;
@@ -6738,16 +6770,18 @@ var GetModuleAction = new Func&lt;ModuleHelper, string, string, DateTime, Expand
   // current action value
   dynamic action = GetTableSliceAction(GetTableIndex(module, date), tableType, tableSuffix, date);
   // previous action value (it might be a different table when crossing midnight)
-  var previousDate = date.AddMinutes(-timeResolution);
+  double minuteDiff = ((date.Minute+(date.Second/60d))%timeResolution);
+  if (minuteDiff == 0) minuteDiff = timeResolution;
+  var previousDate = date.AddMinutes(-minuteDiff);
   action.Previous = GetTableSliceAction(GetTableIndex(module, previousDate), tableType, tableSuffix, previousDate);
-  
+
   //MigService.Log.Info(JsonConvert.SerializeObject(action));
   return action;
 });
 
-var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module, tableType, action) =&gt;{
+var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool, bool&gt;((module, tableType, action, forceRepeat) =&gt;{
   bool performed = false;
-  bool repeat = module.HasFeature("TimeTable.Repeat");
+  bool repeat = module.HasFeature("TimeTable.Repeat") || forceRepeat;
   bool externalControl = module.HasFeature("TimeTable.ExternalControl");
   switch (tableType)  
   {
@@ -6855,7 +6889,8 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
 });
 
 var _checkLock = new object();
-var CheckScheduling = new Action(()=&gt;{
+var CheckScheduling = new Action&lt;int,bool&gt;((tableIndex, forceRepeat)=&gt;{
+  // if tableIndex == 0, check all tables, otherwise check the given table only (1-10)
   lock(_checkLock)
   timetableModules.Each((module)=&gt;{
     
@@ -6871,7 +6906,7 @@ var CheckScheduling = new Action(()=&gt;{
     // Get action for current module
     dynamic action = GetModuleAction(module, tableType, tableSuffix, todayDate);
     // perform action
-    if (action.Value != null &amp;&amp; PerformAction(module, tableType, action))
+    if (action.Value != null &amp;&amp; (tableIndex == 0 || tableIndex == action.TableIndex) &amp;&amp; PerformAction(module, tableType, action, forceRepeat))
     {
       Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + action.TableIndex + tableSuffix);
     }
@@ -6892,7 +6927,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       break;
     case "Calendar.Set":
       Program.Store("Calendar").Get("Days").Value = request[3];
-      CheckScheduling();
+      CheckScheduling(0, false);
       response = "OK";
       break;
     case "Timetable.Set":
@@ -6916,7 +6951,8 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
         newValue.Insert(slotTo, new String('0', slotRangeEnd - slotTo));
       }
       setting.Value = newValue.ToString();
-      CheckScheduling();
+      var tidx = int.Parse(request[3].Substring(request[3].IndexOf(".")+1));
+      CheckScheduling(tidx+1, false);
       response = "OK";
       break;
     case "Timetable.Get":
@@ -6924,7 +6960,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       response = setting.Value;
       break;
     case "Timetable.CheckNow":
-      CheckScheduling();
+      CheckScheduling(int.Parse(request[3]), false);
    	  break;
     case "Timetable.GetOptions":
       return GetTableOptions(request[3]);
@@ -6995,7 +7031,19 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
   // check scheduling is security system changed status
   if (module.Instance.Domain == "HomeAutomation.HomeGenie.Automation" &amp;&amp; module.Instance.Address == "90" &amp;&amp; parameter.Is("HomeGenie.SecurityArmed"))
   {
-    CheckScheduling();
+    CheckScheduling(0, true); // 0 = check all timetable programs
+  }
+  else if (parameter.Is("Status.Level") || parameter.Is("Sensor.MotionDetect"))
+  {
+    for (int t = 0; t &lt; programsCount; t++)
+    {
+      var moduleDomainAddress = module.Instance.Domain+":"+module.Instance.Address;
+      var tableOptions = GetTableOptions((t).ToString());
+      if (tableOptions.Disable != true &amp;&amp; tableOptions.AutoOff.WhenNoMotion == true &amp;&amp; tableOptions.AutoOff.MotionSensor == moduleDomainAddress)
+      {
+        CheckScheduling((t+1), false); // check current timetable program
+      }    
+    }
   }
   return true;
 });
@@ -7003,7 +7051,7 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
 // Timetable control loop
 while (Program.IsEnabled)
 {
-  CheckScheduling();
+  CheckScheduling(0, false); // 0 = check all timetable programs
   // Pause until next slice of time of "timeResolution" size
   var nextCheck = (Math.Floor(DateTime.Now.Minute / timeResolution) + 1) * timeResolution;
   var pause = ((nextCheck - DateTime.Now.Minute) * 60) - DateTime.Now.Second;
@@ -7016,59 +7064,9 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Weekend</Property>
-        <Description>Timetable to use for weekend</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Workday</Property>
-        <Description>Timetable to use for workday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Holiday</Property>
-        <Description>Timetable to use for holiday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Special</Property>
-        <Description>Timetable to use for special day</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Enable</Property>
-        <Description>Enable Timetable scheduling</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Repeat</Property>
-        <Description>Repeat command for the whole duration</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.CheckDST</Property>
-        <Description>Enable Day Light Saving check</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.717573Z</TriggerTime>
+    <Features />
+    <ActivationTime>2016-01-01T14:54:11.994025Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7781,7 +7779,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-12-31T01:43:16.651719Z</TriggerTime>
+    <TriggerTime>2016-01-01T14:53:11.379347Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

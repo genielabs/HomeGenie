@@ -23,9 +23,9 @@
 
   CalendarData: '',
   CurrentProgram: 0,
-  Groups: [ 
-    { 
-      'Table': 'Level', 
+  Groups: [
+    {
+      'Table': 'Level',
       'Actions': [
         { id: '0', localeId: 'timetable_levelmode_off', description: 'Off', color: '#222' },
         { id: '1', localeId: 'timetable_levelmode_10', description: '10%', color: '#663' },
@@ -42,7 +42,7 @@
     },
     {
       'Table': 'Therm',
-      'Actions': [ 
+      'Actions': [
         { id: '0', localeId: 'timetable_thermmode_off', description: 'Off', color: '#222' },
         { id: '1', localeId: 'timetable_thermmode_heat', description: 'Heat', color: '#E33' },
         { id: '2', localeId: 'timetable_thermmode_cool', description: 'Cool', color: '#77F' },
@@ -68,7 +68,7 @@
 
   RenderView: function (cuid, module) {
     var container = $(cuid);
-    var _this = this;      
+    var _this = this;
     if (!this.Initialized)
     {
       this.Initialized = true;
@@ -99,7 +99,7 @@
           if ((d.getDay() == 6 || d.getDay() == 0) && dayClass == '0')
             dayClass = 'ui-datepicker-daywe'; // weekend
           else
-            dayClass = 'ui-datepicker-day' + dayClass; 
+            dayClass = 'ui-datepicker-day' + dayClass;
           return [true, dayClass, 'Day nr.' + (day + 1)];
         }
       });
@@ -147,7 +147,7 @@
             _this.CalendarPopup.popup('close');
             $.mobile.loading('hide');
           }
-        });    
+        });
       });
       this.ControlPopup.find('[data-ui-field=select_action]').change(function() {
         var color = $(this).find('option:selected').attr('data-option-color');
@@ -264,7 +264,7 @@
           _this._autoOffMotionSensor = val;
           _this._optionsSaveButton.removeClass('ui-disabled');
         };
-      });      
+      });
       // END
 
     }
@@ -312,10 +312,10 @@
 
   LoadProgramOptions: function() {
     var _this = this;
-    this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', false).checkboxradio('refresh'); 
-    this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', false).checkboxradio('refresh'); 
-    this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', false).checkboxradio('refresh'); 
-    this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', false).checkboxradio('refresh'); 
+    this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', false).checkboxradio('refresh');
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', false).checkboxradio('refresh');
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', false).checkboxradio('refresh');
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', false).checkboxradio('refresh');
     this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(60).slider('refresh');
     this._optionsMotionSensor.setModule('');
     this._optionsSaveButton.addClass('ui-disabled');
@@ -325,30 +325,30 @@
       dataType: 'json',
       success: function (options) {
         if (typeof options == 'object') {
-          _this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', options.Disable).checkboxradio('refresh'); 
-          _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', options.AutoOff.WhenArmedAway).checkboxradio('refresh'); 
-          _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', options.AutoOff.WhenArmedHome).checkboxradio('refresh'); 
-          _this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', options.AutoOff.WhenNoMotion).checkboxradio('refresh'); 
+          _this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', options.Disable).checkboxradio('refresh');
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', options.AutoOff.WhenArmedAway).checkboxradio('refresh');
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', options.AutoOff.WhenArmedHome).checkboxradio('refresh');
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', options.AutoOff.WhenNoMotion).checkboxradio('refresh');
           _this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(options.AutoOff.MotionTimeout).slider('refresh');
           _this._optionsMotionSensor.setModule(options.AutoOff.MotionSensor);
           _this._optionsSaveButton.addClass('ui-disabled');
         }
       }
-    }); 
+    });
   },
- 
+
   SaveProgramOptions: function() {
     var _this = this;
     $.mobile.loading('show');
-    var options = { 
-        Disable: this.ProgramsPage.find('[data-ui-field=chk-options-disable]').is(':checked'), 
-        AutoOff: { 
+    var options = {
+        Disable: this.ProgramsPage.find('[data-ui-field=chk-options-disable]').is(':checked'),
+        AutoOff: {
             WhenArmedAway: this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').is(':checked'),
             WhenArmedHome: this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').is(':checked'),
             WhenNoMotion: this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').is(':checked'),
             MotionTimeout: this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(),
-            MotionSensor: this._autoOffMotionSensor 
-        } 
+            MotionSensor: this._autoOffMotionSensor
+        }
     };
     $.ajax({
       url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.SetOptions/'+this.CurrentProgram,
@@ -357,11 +357,11 @@
       success: function (res) {
         $.mobile.loading('hide');
         _this.LoadProgramOptions();
-        _this.CheckNow();
+        _this.CheckNow(_this.CurrentProgram+1);
       }
-    }); 
+    });
   },
- 
+
   GetModules: function() {
     var _this = this;
     $.mobile.loading('show', { text: 'Updating data', textVisible: true });
@@ -395,49 +395,49 @@
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Enable', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(0);
             });
           });
           flagCheckDST.on('click', function() {
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.CheckDST', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(0);
             });
           });
           flagRepeat.on('click', function() {
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Repeat', $(this).hasClass('ui-btn-active')?'':'On', function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(0);
             });
           });
           flagWeekday.on('click', function() {
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Workday', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(_this.CurrentProgram+1);
             });
           });
           flagWeekend.on('click', function() {
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Weekend', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(_this.CurrentProgram+1);
             });
           });
           flagHoliday.on('click', function() {
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Holiday', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(_this.CurrentProgram+1);
             });
           });
           flagSpecial.on('click', function() {
             $.mobile.loading('show');
             HG.Configure.Modules.ParameterSet(m.Domain, m.Address, 'TimeTable.Special', $(this).hasClass('ui-btn-active')?'':_this.CurrentProgram+1, function(){
               _this.GetModules();
-              _this.CheckNow();
+              _this.CheckNow(_this.CurrentProgram+1);
             });
           });
           switch (m.Type) {
@@ -454,11 +454,11 @@
         });
         $.mobile.loading('hide');
       }
-    });      
+    });
   },
 
-  CheckNow: function() {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.CheckNow/', function (data) { });
+  CheckNow: function(prog) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.CheckNow/'+prog, function (data) { });
   },
 
   GetDayIndex: function(day, month) {
@@ -505,7 +505,7 @@
         _this.DrawTimetable(el, true, table);
         $.mobile.loading('hide');
       }
-    });    
+    });
   },
 
   SetTableGroup: function(id) {
@@ -560,7 +560,7 @@
       var dt = new Date();
       var inRange = (dt >= startDate && dt <= endDate);
       if (drawDecor) {
-          if (inRange) 
+          if (inRange)
             info += '<span style="border-left:3px solid lime;padding-left:4px;">';
           else
             info += '<span style="border-left:3px dotted gray;padding-left:4px;">';
@@ -613,7 +613,7 @@
     for (var i = 0, c = timetable.length; i < tableLength; i++)
     {
       nb++;
-      if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i])) 
+      if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i]))
       {
         var g = 0; if (tableType == 'Therm') g = 1; else if (tableType == 'OnOff') g = 2;
         var slice = { group: g, action: timetable[i], index: startIndex, length: nb };
@@ -639,7 +639,7 @@
     for (var i = 0, c = timetable.length; i < tableLength; i++)
     {
       nb++;
-      if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i])) 
+      if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i]))
       {
         var rect = paper.rect(x, y + startY, (nb * stepSize) - 1, _this.TimebarHeight - (startY+1)).attr({ 'fill': '90-#455-' + _this.GetTableAction(el.group, timetable[i]).color, 'stroke': '#fff', 'stroke-width': '0.0' })
         .mouseover(function(e){
@@ -658,7 +658,7 @@
         rect.data('action', timetable[i]);
         //
         var centerX = (nb * stepSize) / 2;
-        $(rect.node).qtip({ 
+        $(rect.node).qtip({
           content: _this.GetSliceInfo(rect.data('action'), rect.data('group'), rect.data('index'), rect.data('length')),
           show: { delay: 350 },
           style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
@@ -674,7 +674,7 @@
         paper.text(((i / sliceFactor) * (sliceFactor * stepSize)) + 10, 8, (i / sliceFactor).toString()).attr({ fill: '#fff' });
         paper.rect(((i / sliceFactor) * (sliceFactor * stepSize)) + (stepSize * sliceFactor), 0, 2, 16, 0).attr({ fill: '#99f' });
       }
-    }    
+    }
 
   }
 
