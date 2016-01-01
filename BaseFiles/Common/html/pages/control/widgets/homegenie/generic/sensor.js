@@ -28,13 +28,13 @@
            var prop = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Alarm");
            if(prop.Value == '255')
            {
-           	  HG.WebApp.Utility.SetModulePropertyByName(module, "Sensor.Alarm", "0");
+                 HG.WebApp.Utility.SetModulePropertyByName(module, "Sensor.Alarm", "0");
               prop = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Alarm");
-	          prop.NeedsUpdate = 'true';
+              prop.NeedsUpdate = 'true';
               HG.WebApp.GroupModules.UpdateModule(module, function () {
                   HG.WebApp.GroupModules.ModuleUpdatedCallback();
               });
-           	  var sensorstatus = widget.find('[data-ui-field=sensoronoff]').html();
+                 var sensorstatus = widget.find('[data-ui-field=sensoronoff]').html();
               sensorstatus = sensorstatus.replace('<span class="hg-indicator-alarm" style="padding-left:0;width:20px;">&nbsp;</span>','') ;
               widget.find('[data-ui-field=sensoronoff]').html(sensorstatus);
            }
@@ -103,65 +103,65 @@
                         imagesrc = 'hg-indicator-energy';
                     }
                     else if (module.Properties[p].Name == 'Sensor.DoorWindow') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-door';
-                       	displayvalue = '';
+                           displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Alarm') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-alarm';
-                       	displayvalue = '';
+                           displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Smoke') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-smoke';
-                       	displayvalue = '';
+                           displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Flood') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-flood';
-                       	displayvalue = '';
+                           displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Heat') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-heat';
-                       	displayvalue = '';
+                           displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Generic') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-generic';
-                       	displayvalue = '';
+                           displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Status.Level') {
-                    	if( value != '0' )
+                        if( value != '0' )
                            imagesrc = 'hg-indicator-level';
                         else
-                       	   displayvalue = '';
+                              displayvalue = '';
                     }
                     if (imagesrc != '') {
                         displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
-                    	if( displayvalue != '' )
-                    	{
-				          var template = container.find('[data-ui-field=iconvaluetemplate]').html();		
-	 			          template = template.replace('%icon%', displayname);
-				          template = template.replace('%value%', displayvalue);
-				          sensorimgdata += template;
-					    }
-	                    else
-                    	{
-				          var template = container.find('[data-ui-field=icontemplate]').html();
-				          template = template.replace('%icon%', displayname);
-				          sensoricon += template;
-					    }
+                        if( displayvalue !== '')
+                        {
+                          var template = container.find('[data-ui-field=iconvaluetemplate]').html();
+                           template = template.replace('%icon%', displayname);
+                          template = template.replace('%value%', displayvalue);
+                          sensorimgdata += template;
+                        }
+                        else
+                        {
+                          var template = container.find('[data-ui-field=icontemplate]').html();
+                          template = template.replace('%icon%', displayname);
+                          sensoricon += template;
+                        }
                     }
                     else {
-                    	if( displayvalue != '' )
-                    	{
-				          var template = container.find('[data-ui-field=valuetemplate]').html();
-				          template = template.replace('%label%', displayname);
-				          template = template.replace('%value%', displayvalue);
-				          sensortxtdata += template;
-					    }
+                        if( displayvalue !== '')
+                        {
+                          var template = container.find('[data-ui-field=valuetemplate]').html();
+                          template = template.replace('%label%', displayname);
+                          template = template.replace('%value%', displayvalue);
+                          sensortxtdata += template;
+                        }
                     }
                 }
             }

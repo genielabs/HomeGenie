@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.513394Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.1302Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.402348Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:33.785234Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -442,7 +442,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.350731Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:33.918211Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -514,7 +514,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.310826Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:33.714026Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1130,7 +1130,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.610451Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.244145Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1177,7 +1177,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.516866Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.126066Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1526,7 +1526,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.643568Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.22617Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1656,7 +1656,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.253796Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:33.762977Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1820,7 +1820,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.615343Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.21353Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2255,7 +2255,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.634274Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:33.959347Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2404,7 +2404,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.431926Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.190384Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2654,7 +2654,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.366358Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:33.889148Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7064,9 +7064,59 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features />
-    <ActivationTime>2016-01-01T14:54:11.994025Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Weekend</Property>
+        <Description>Timetable to use for weekend</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Workday</Property>
+        <Description>Timetable to use for workday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Holiday</Property>
+        <Description>Timetable to use for holiday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Special</Property>
+        <Description>Timetable to use for special day</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Enable</Property>
+        <Description>Enable Timetable scheduling</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Repeat</Property>
+        <Description>Repeat command for the whole duration</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.CheckDST</Property>
+        <Description>Enable Day Light Saving check</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2016-01-01T19:45:33.753842Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7779,7 +7829,93 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-01T14:53:11.379347Z</TriggerTime>
+    <TriggerTime>2016-01-01T19:45:34.035602Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.AddOption("ZoneSensors.Count", "5", "Number of Zone Sensors", "slider:1:10:1");
+Program.Run();
+</ScriptCondition>
+    <ScriptSource>var FLD_ZONESENSORS_DOMAIN = "HomeGenie.ZoneSensors";
+var FLD_ZONESENSORS_ENABLE = "HomeGenie.ZoneSensors.Enable";
+
+var zonesCount = (int)Program.Option("ZoneSensors.Count").DecimalValue;
+if (zonesCount &lt; 1) zonesCount = 1;
+Program.AddVirtualModules(FLD_ZONESENSORS_DOMAIN, "Sensor", "homegenie/generic/sensor", 1, zonesCount);
+Program.AddFeature("!"+FLD_ZONESENSORS_DOMAIN, "", FLD_ZONESENSORS_ENABLE, "Include in Zone Sensors", "checkbox");
+for (int s = 1; s &lt;= zonesCount; s++)
+{
+  Program.AddFeature("!"+FLD_ZONESENSORS_DOMAIN, "", FLD_ZONESENSORS_DOMAIN+"."+s, "Zone Sensor "+s, "checkbox");
+}
+
+When.ModuleParameterChanged((module, parameter)=&gt;{
+  if (module.Instance.Domain != FLD_ZONESENSORS_DOMAIN &amp;&amp; module.HasFeature(FLD_ZONESENSORS_ENABLE))
+  {
+    for (int s = 1; s &lt;= zonesCount; s++)
+    {
+      if (module.HasFeature(FLD_ZONESENSORS_DOMAIN+"."+s))
+      {
+        // get all module in the same sensors zone
+        var zoneModule = Modules.InDomain(FLD_ZONESENSORS_DOMAIN).WithAddress(s.ToString()).Get();
+		var zoneSensors = Modules.WithFeature(FLD_ZONESENSORS_DOMAIN+"."+s);
+        if ((parameter.Name.StartsWith("Sensor.") || parameter.Name.StartsWith("Meter.")) &amp;&amp; !parameter.Is("Sensor.MotionDetect"))
+        {
+          // calculate the average value
+          double avg = 0;
+          double count = 0;
+          zoneSensors.Each((mod)=&gt;{
+            if (mod.HasFeature(FLD_ZONESENSORS_ENABLE) &amp;&amp; mod.HasParameter(parameter.Name))
+            {
+              avg += mod.Parameter(parameter.Name).DecimalValue;
+              count++;
+            }
+            return false;
+          });
+          if (count &gt; 0)
+          {
+            Program.RaiseEvent(zoneModule, parameter.Name, (avg/count).ToString(CultureInfo.InvariantCulture), "Zone Sensors");
+          }
+        }
+        else if (parameter.Name.StartsWith("Sensor.") || parameter.Name.StartsWith("Status."))
+        {
+          // set level to 1 if at least one module has value greater than zero
+	      //Program.RaiseEvent()
+          var eventValue = "0";
+          zoneSensors.Each((mod)=&gt;{
+            if (mod.HasFeature(FLD_ZONESENSORS_ENABLE) &amp;&amp; mod.HasParameter(parameter.Name))
+            {
+              if(mod.Parameter(parameter.Name).DecimalValue &gt; 0)
+              {
+                eventValue = "1";
+                return true;
+              }
+            }
+            return false;
+          });
+          Program.RaiseEvent(zoneModule, parameter.Name, eventValue, "Zone Sensors");
+        }
+      }
+    }
+  }
+  return true;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>29</Address>
+    <Name>Zone Sensors</Name>
+    <Description>Adds an arbitrary number of Zone Sensors. Each of them can group multiple sensors into one logcal sensor.
+When changing the number of zone sensors, program restart is required.</Description>
+    <Group>Devices and Things</Group>
+    <Features />
+    <ActivationTime>2016-01-01T19:46:30.207833Z</ActivationTime>
+    <TriggerTime>2016-01-01T19:46:30.241625Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

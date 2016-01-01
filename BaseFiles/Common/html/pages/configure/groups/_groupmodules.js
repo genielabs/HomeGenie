@@ -622,7 +622,42 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid) {
         }
     }
 };
-
+HG.WebApp.GroupModules.MatchValues = function(valueList, matchValue) {
+    var inclusionList = [ valueList ];
+    if (valueList.indexOf(',') > 0)
+        inclusionList = valueList.split(',');
+    else if (valueList.indexOf('|') > 0)
+        inclusionList = valueList.split('|');
+    // build exclusion list and remove empty entries
+    var exclusionList = [];
+    $.each(inclusionList, function(idx, val) {
+        if (val.trim().indexOf('!') == 0) {
+            inclusionList.splice(idx, 1);
+            exclusionList.push(val.trim().substring(1));
+        } else if (val.trim() == '') {
+            inclusionList.splice(idx, 1);
+        }
+        return true;
+    });
+    // check if matching
+    var isMatching = (inclusionList.length == 0);
+    $.each(inclusionList, function(idx, val) {
+        if (val.trim() == matchValue.trim()) {
+            isMatching = true;
+            return false;
+        }
+        return true;
+    });
+    // check if not in exclusion list
+    $.each(exclusionList, function(idx, val) {
+        if (val.trim() == matchValue.trim()) {
+            isMatching = false;
+            return false;
+        }
+        return true;
+    });
+    return isMatching;
+};
 HG.WebApp.GroupModules.UpdateFeatures = function () {
     HG.WebApp.GroupModules.EditModule.Properties = Array(); // used to store "features" values
     //
@@ -638,9 +673,8 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
         var features = HG.WebApp.Data.Programs[p].Features;
         if (features.length > 0) {
             for (var f = 0; f < features.length; f++) {
-                var fd = ',' + features[f].ForDomains.toLowerCase() + ',|' + features[f].ForDomains.toLowerCase() + '|';
-                var fs = ',' + features[f].ForTypes.toLowerCase() + ',|' + features[f].ForTypes.toLowerCase() + '|';
-                var featurematch = (features[f].ForDomains == '' || fd.indexOf(HG.WebApp.GroupModules.EditModule.Domain.toLowerCase(), 0) >= 0) && (features[f].ForTypes == '' || fs.indexOf(HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase(), 0) >= 0);
+                var featurematch = HG.WebApp.GroupModules.MatchValues(features[f].ForDomains.toLowerCase(), HG.WebApp.GroupModules.EditModule.Domain.toLowerCase());
+                featurematch = featurematch && HG.WebApp.GroupModules.MatchValues(features[f].ForTypes.toLowerCase(), HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase());
                 if (featurematch) {
                     var property = features[f].Property;
                     var prop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, property);
