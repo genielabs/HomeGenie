@@ -1,13 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r509</Version>
+  <Version>1.1 beta r509a</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added 'Zone Sensors' program; group multiple sensors into one logical sensor
-  - Added 'Automatic Off' options to TimeTable programs (when armed home/away or no motion activity detected)
-  - Updated Z-Wave device database (pepper1)
-  - Updated RaspberrySharp-IO libraries
-  - Little UI rework and improvements
-  - Fix to Timetable widget 'today events' bug</ReleaseNote>
-  <ReleaseDate>2016-01-01T15:24:10.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fix TimeTable occasional desync/event loosing on slower systems</ReleaseNote>
+  <ReleaseDate>2016-01-02T06:33:47.0000Z</ReleaseDate>
 </ReleaseInfo>

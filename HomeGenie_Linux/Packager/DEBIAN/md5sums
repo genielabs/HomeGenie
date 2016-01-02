@@ -100,7 +100,7 @@ f8daf8edf5875fe5c27fe958eb73a0c9  usr/local/bin/homegenie/programs/60.dll
 43cb7ef0cf6b399415c298eef6ee9dce  usr/local/bin/homegenie/programs/39.dll
 f85bd266c0d92a420ea12d5835156db8  usr/local/bin/homegenie/programs/7.dll
 3bc33fbad015b2ffcbeb04bd03d7a509  usr/local/bin/homegenie/programs/112.dll
-4f00c67e80bb4e3642fb2deb2d82c002  usr/local/bin/homegenie/programs/36.dll
+a406234eb5cad53d8da7a1159f48020a  usr/local/bin/homegenie/programs/36.dll
 8d30c644e6b8659ea656b23f66ce74c4  usr/local/bin/homegenie/programs/74.dll
 431a0efc761d95a5fbf73c7d83df5288  usr/local/bin/homegenie/programs/100.dll
 ce5fac122de281565d7b024812e4be7c  usr/local/bin/homegenie/programs/64.dll
@@ -125,9 +125,9 @@ cb2955458b620dbf5ed454b5ad1bba50  usr/local/bin/homegenie/Raspberry.IO.Component
 d127cd699e15cf5feb4df3cdd34b77df  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 2074c256e8b7a372e28490a436a8e04d  usr/local/bin/homegenie/NLog.dll
 1dcf890d5a0ac7fdcd3db320b629a3ca  usr/local/bin/homegenie/Raspberry.IO.Components.dll.config
-65b1fdb880239271f9ef9abf7198e3dd  usr/local/bin/homegenie/HISTORY.TXT
+fc4284316401d5f2933dede2fea1b7d7  usr/local/bin/homegenie/HISTORY.TXT
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
-c26ffe87c4447eaf2159a2730ec89a99  usr/local/bin/homegenie/programs.xml
+4aad6075d7503f57781ddfed4cc8d762  usr/local/bin/homegenie/programs.xml
 58d4389f29365489f41cd547eb1f10ec  usr/local/bin/homegenie/modules.xml
 a19a8070a77444aafa96d3fbe033c42e  usr/local/bin/homegenie/IronRuby.Libraries.dll
 456c7d0d3afb06de913ee487f333aadc  usr/local/bin/homegenie/Raspberry.IO.Interop.dll
@@ -3023,13 +3023,13 @@ b8459e32556b6e692fae8f9ff81817c9  usr/local/bin/homegenie/html/ui/core/popup.cro
 c01449322109e7477c208be018fd45fb  usr/local/bin/homegenie/ADDONS.md
 f382a968d978f314e126e0526f569460  usr/local/bin/homegenie/startup.sh
 265ba207e2109fa8e4f9449dfb8c6c7c  usr/local/bin/homegenie/HomeGenie.exe
-e76c0f94d1bc56a2b966f669d12b83fe  usr/local/bin/homegenie/release_info.xml
+af0a38182ca23f5fb4f7575bc99e75e2  usr/local/bin/homegenie/release_info.xml
 536920e88b28850b8df27484746134f4  usr/local/bin/homegenie/NetClientLib.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 272aa48b0bfd90305c6c27b4f4538566  usr/local/bin/homegenie/scheduler.xml
 ca7296e5c1dc0a5f0c9762733f0fb9b7  usr/local/bin/homegenie/groups.xml
 61b0c6d8eb2c756355d52df2ef6170c6  usr/local/bin/homegenie/Microsoft.Scripting.dll
-2167f6bbfc55f1304ee640fb875460ba  usr/local/bin/homegenie/homegenie_factory_config.zip
+92e46ee622d1a86382aa4a8754ba6b63  usr/local/bin/homegenie/homegenie_factory_config.zip
 acbb8de3a6a8f53d69957e2607097992  usr/local/bin/homegenie/DEVELOPERS.TXT
 ae7bbf0f4b96d2a0effd97d69befb47e  usr/local/bin/homegenie/CommonMark.dll
 93675a8ef36065d0c64fe1bf4fb79902  usr/local/bin/homegenie/IronRuby.Libraries.Yaml.dll
