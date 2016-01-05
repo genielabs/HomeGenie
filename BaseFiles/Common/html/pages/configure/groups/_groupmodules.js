@@ -438,7 +438,7 @@ HG.WebApp.GroupModules.DeleteGroup = function (group) {
     HG.Configure.Groups.DeleteGroup('Control', group, function () {
         $.mobile.loading('hide');
         setTimeout(function () {
-            $.mobile.changePage($('#page_configure_groups'));
+            $.mobile.changePage($('#page_configure_groups'), { transition: 'fade', changeHash: true });
         }, 200);
     });
     $('#control_groupslist').empty();
@@ -730,7 +730,7 @@ HG.WebApp.GroupModules.ShowModuleOptions = function (domain, address) {
         switch (module.Domain) {
             case 'HomeAutomation.ZWave':
                 HG.Ext.ZWave.NodeSetup.Show(module);
-                $.mobile.changePage($('#configurepage_OptionZWave'), { transition: "slide" });
+                $.mobile.changePage($('#configurepage_OptionZWave'), { transition: 'fade', changeHash: true });
                 break;
                 //case 'HomeAutomation.X10':
                 //    $.mobile.changePage($('#configurepage_OptionX10'), { transition: "slide" });

@@ -31,9 +31,11 @@ using System.Net;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
-using System.IO.Packaging;
 
 using Newtonsoft.Json;
+
+using ICSharpCode.SharpZipLib.Zip;
+using ICSharpCode.SharpZipLib.Core;
 
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
@@ -383,14 +385,25 @@ namespace HomeGenie.Service
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)
         {
+            bool success = true;
             List<string> extractedFiles = new List<string>();
-            // Unarchive (unzip)
-            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
+            ZipFile zipFile = null;
+            try
             {
-                foreach (var part in package.GetParts())
+                FileStream fs = File.OpenRead(archiveName);
+                zipFile = new ZipFile(fs);
+                //if (!String.IsNullOrEmpty(password)) {
+                //    zf.Password = password;  // AES encrypted entries are handled automatically
+                //}
+                foreach (ZipEntry zipEntry in zipFile)
                 {
-                    string filePath = part.Uri.OriginalString.Substring(1);
-                    string target = Path.Combine(destinationFolder, filePath);
+                    if (!zipEntry.IsFile)
+                    {
+                        continue; // Ignore directories
+                    }
+
+                    string filePath = zipEntry.Name;
+                    string target = Path.Combine(destinationFolder, filePath.TrimStart(new char[]{'/', '\\'}));
                     if (!Directory.Exists(Path.GetDirectoryName(target)))
                     {
                         Directory.CreateDirectory(Path.GetDirectoryName(target));
@@ -398,43 +411,59 @@ namespace HomeGenie.Service
 
                     if (File.Exists(target))
                         File.Delete(target);
-
-                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read))
-                    using (var destination = File.OpenWrite(target))
+                    
+                    byte[] buffer = new byte[4096];
+                    Stream zipStream = zipFile.GetInputStream(zipEntry);
+                    String fullZipToPath = Path.Combine(destinationFolder, filePath);
+                    using (FileStream streamWriter = File.Create(fullZipToPath))
                     {
-                        byte[] buffer = new byte[4096];
-                        int read;
-                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            destination.Write(buffer, 0, read);
-                        }
+                        StreamUtils.Copy(zipStream, streamWriter, buffer);
                     }
                     try { extractedFiles.Add(filePath); } catch { }
                 }
             }
-
+            catch (Exception e)
+            {
+                success = false;
+                extractedFiles.Clear();
+                // TODO: something to do here?
+            }
+            finally
+            {
+                if (zipFile != null)
+                {
+                    zipFile.IsStreamOwner = true;
+                    zipFile.Close();
+                }
+            }
             return extractedFiles;
         }
 
         internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
         {
-            using (var zip = System.IO.Packaging.Package.Open(zipFilename, FileMode.OpenOrCreate))
+            if (!File.Exists(zipFilename))
             {
-                string destFilename = (String.IsNullOrWhiteSpace(storeAsName) ? fileToAdd : storeAsName);
-                var uri = PackUriHelper.CreatePartUri(new Uri(destFilename, UriKind.Relative));
-                if (zip.PartExists(uri))
-                {
-                    zip.DeletePart(uri);
+                FileStream zfs = File.Create(zipFilename);
+                ZipOutputStream zipStream = new ZipOutputStream(zfs);
+                zipStream.SetLevel(3); //0-9, 9 being the highest level of compression
+                /*
+                // NOTE: commented code because this is raising an error "Extra data extended Zip64 information length is invalid"
+                // For compatibility with previous HG, we add the "[Content_Types].xml" file
+                zipStream.PutNextEntry(new ZipEntry("[Content_Types].xml"));
+                using (FileStream streamReader = File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "[Content_Types].xml"))) {
+                    StreamUtils.Copy(streamReader, zipStream, new byte[4096]);
                 }
-                var part = zip.CreatePart(uri, "", CompressionOption.Normal);
-                using (var fileStream = new FileStream(fileToAdd, FileMode.Open, FileAccess.Read))
-                {
-                    using (var outputStream = part.GetStream())
-                    {
-                        CopyStream(fileStream, outputStream);
-                    }
-                }
+                zipStream.CloseEntry();
+                */
+                zipStream.IsStreamOwner = true; // Makes the Close also close the underlying stream
+                zipStream.Close();
             }
+            ZipFile zipFile = new ZipFile(zipFilename);
+            zipFile.BeginUpdate();
+            zipFile.Add(fileToAdd, (String.IsNullOrWhiteSpace(storeAsName) ? fileToAdd : storeAsName));
+            zipFile.CommitUpdate();
+            zipFile.IsStreamOwner = true;
+            zipFile.Close();
         }
 
         private static void CopyStream(System.IO.FileStream inputStream, System.IO.Stream outputStream)

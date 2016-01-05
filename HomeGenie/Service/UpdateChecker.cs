@@ -27,8 +27,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
-using System.IO.Packaging;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -279,45 +277,14 @@ namespace HomeGenie.Service
                     client.Dispose();
                 }
             }
+
             // Unarchive (unzip)
-            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
+            if (ArchiveDownloadUpdate != null)
+                ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
 
             bool errorOccurred = false;
-            var files = new List<string>();
-            try
-            {
-                using (ZipPackage package = (ZipPackage)Package.Open(archiveName, FileMode.Open, FileAccess.Read))
-                {
-                    foreach (PackagePart part in package.GetParts())
-                    {
-                        string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/');
-                        if (!Directory.Exists(Path.GetDirectoryName(target)))
-                        {
-                            Directory.CreateDirectory(Path.GetDirectoryName(target));
-                        }
-
-                        if (File.Exists(target)) File.Delete(target);
-
-                        using (Stream source = part.GetStream(
-                            FileMode.Open, FileAccess.Read))
-                        using (Stream destination = File.OpenWrite(target))
-                        {
-                            byte[] buffer = new byte[4096];
-                            int read;
-                            while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                destination.Write(buffer, 0, read);
-                            }
-                        }
-                        files.Add(target);
-                        //Console.WriteLine("Deflated {0}", target);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                errorOccurred = true;
-            }
+            var files = Utility.UncompressZip(archiveName, destinationFolder);
+            errorOccurred = (files.Count == 0);
 
             if (ArchiveDownloadUpdate != null)
             {

@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.113675Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:48.898447Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -173,7 +173,6 @@ var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
   return color;
 });
 
-var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
 // - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
 When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
   string[] reqs = ((string)args).Split('/');
@@ -184,6 +183,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
     string command = reqs[2];
     string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
     //
+	var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
     var module = hueModules.WithAddress(lightnumber).Get();
     //
     switch(command)
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.412696Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.260081Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -302,6 +302,8 @@ Program.Run();
 </ScriptCondition>
     <ScriptSource>var sunsetEvent = "Sunset";
 var sunriseEvent = "Sunrise";
+var sunsetToSunriseEvent = "FromSunsetToSunrise";
+var sunriseToSunsetEvent = "FromSunriseToSunset";
 
 while (Program.IsEnabled)
 {
@@ -336,6 +338,12 @@ while (Program.IsEnabled)
       Scheduler
         .WithName(sunriseEvent)
         .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
+      Scheduler
+        .WithName(sunsetToSunriseEvent)
+        .SetSchedule(String.Format("(* {0}-23 * * *):({1}-59 {2} * * *):(* 0-{3} * * *):(0-{4} {5} * * *)", (sunset_hour+1), sunset_minute, sunset_hour, (sunrise_hour-1), sunrise_minute, sunrise_hour));
+      Scheduler
+        .WithName(sunriseToSunsetEvent)
+        .SetSchedule(String.Format("({0}-59 {1} * * *):(* {2}-{3} * * *):(0-{4} {5} * * *)", sunrise_minute, sunrise_hour, (sunrise_hour+1), sunset_hour, sunset_minute, sunset_hour));
 
       webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
       var weatherdata = Net.WebService(webserviceurl).GetData();
@@ -442,7 +450,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.281672Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.135492Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -514,7 +522,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.418411Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.279884Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1130,7 +1138,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.243919Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.181801Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1177,7 +1185,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.065864Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:48.956692Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1526,7 +1534,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.252523Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.329137Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1656,7 +1664,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:32.985289Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.201012Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1820,7 +1828,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.292141Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.243784Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2255,7 +2263,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.431781Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.274597Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2404,7 +2412,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.217426Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.082281Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2654,7 +2662,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.02872Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.167064Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -5533,7 +5541,6 @@ Func &lt;int, string, bool&gt; sendRGBWSetColorHexString = (int zone, string col
   return sendRGBWColorCommand (zone, milightColor);
 };
 
-var milightModules = Modules.InDomain("HomeAutomation.MiLightRGBW");
 When.WebServiceCallReceived("HomeAutomation.MiLight", ( args ) =&gt; {
   //Console.WriteLine("MiLight ************************ WebServiceCallReceived");
   string[] reqs = ((string)args).Split('/');
@@ -5545,6 +5552,7 @@ When.WebServiceCallReceived("HomeAutomation.MiLight", ( args ) =&gt; {
     string parameter = ""; 
     if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
     //
+	var milightModules = Modules.InDomain("HomeAutomation.MiLightRGBW");
     var module = milightModules.WithAddress(lightnumber).Get();
 
     //Console.WriteLine("module name " + module.Instance.Name);
@@ -6622,9 +6630,12 @@ var GetTableOptions = new Func&lt;string, dynamic&gt;((tableIndex)=&gt;{
   dynamic options = new ExpandoObject();
   // default options
   options.Disable = false;
+  options.DisableTimeRange = "";
   options.AutoOff = new ExpandoObject();
   options.AutoOff.WhenArmedAway = false;
   options.AutoOff.WhenArmedHome = false;
+  options.AutoOff.WhenInTimeRange = false;
+  options.AutoOff.TimeRange = "";
   options.AutoOff.WhenNoMotion = false;
   options.AutoOff.MotionTimeout = 60;
   options.AutoOff.MotionSensor = "";
@@ -6697,17 +6708,35 @@ var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
 });
 
 var GetClosestEvent = new Func&lt;ModuleParameter, DateTime, DateTime&gt;((parameter, date)=&gt;{
-  var hist = parameter.Statistics.History.DeepClone();
-  var closest = hist[hist.Count-1];
-  for(int p = hist.Count-1; p &gt;= 0; p--)
+  var closestTimestamp = DateTime.Now;
+  var hist = parameter.Statistics.History;
+  if (hist.Count &gt; 0)
   {
-    if (date &lt;= hist[p].Timestamp)
+    try
     {
-      break;
-    }
-    closest = hist[p];
+      var closest = hist[hist.Count-1];
+      for(int p = hist.Count-1; p &gt;= 0; p--)
+      {
+        if (date &lt;= hist[p].Timestamp)
+        {
+          break;
+        }
+        closest = hist[p];
+      }
+      closestTimestamp = closest.Timestamp;
+    } catch { }
   }
-  return closest.Timestamp;
+  return closestTimestamp;
+});
+
+var IsTableDisabled = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions, date)=&gt;{
+  var disabled = false;
+  Console.WriteLine(tableOptions.DisableTimeRange);
+  if (tableOptions.Disable == true &amp;&amp; tableOptions.DisableTimeRange == "")
+    disabled = true;
+  else if (tableOptions.Disable == true &amp;&amp; tableOptions.DisableTimeRange != "" &amp;&amp; Scheduler.IsOccurence(date, tableOptions.DisableTimeRange.ToString()))
+    disabled = true;
+  return disabled;
 });
 
 var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions, date)=&gt;{
@@ -6724,13 +6753,17 @@ var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions,
         autoOff = true;
     }
   }
+  if (!autoOff &amp;&amp; tableOptions.AutoOff.WhenInTimeRange == true &amp;&amp; tableOptions.AutoOff.TimeRange != "")
+  {
+    autoOff = Scheduler.IsOccurence(date, tableOptions.AutoOff.TimeRange.ToString());
+  }
   if (!autoOff &amp;&amp; tableOptions.AutoOff.WhenNoMotion == true)
   {
     var mda = GetDomainAddress(tableOptions.AutoOff.MotionSensor.ToString());
     var module = Modules.InDomain(mda.Domain).WithAddress(mda.Address).Get();
     if (module.Instance != null)
     {
-      var lastMotion = DateTime.UtcNow;
+      var lastMotion = DateTime.Now;
       if (module.HasParameter("Sensor.MotionDetect"))
         lastMotion = GetClosestEvent(module.Parameter("Sensor.MotionDetect"), date);
       else if (module.HasParameter("Status.Level"))
@@ -6745,7 +6778,7 @@ var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions,
 var GetTableSliceAction = new Func&lt;int, string, string, DateTime, ExpandoObject&gt;((tableIndex, tableType, tableSuffix, date)=&gt;{
   dynamic action = new ExpandoObject();
   action.TableIndex = tableIndex;
-  action.Index = (int)Math.Floor((date - DateTime.Today.ToUniversalTime()).TotalMinutes / timeResolution);
+  action.Index = (int)Math.Floor((date - DateTime.Today).TotalMinutes / timeResolution);
   action.Date = date;
   action.Value = null; // no action
   // table index == 0 =&gt; no table associated, values go from 1 to 10
@@ -6754,7 +6787,7 @@ var GetTableSliceAction = new Func&lt;int, string, string, DateTime, ExpandoObje
       // tables are stored as zero-indexed (0 to 9)
       action.TableOptions = GetTableOptions((action.TableIndex - 1).ToString());
 	  action.Table = GetTableSettings(tableType + "." + (action.TableIndex - 1) + tableSuffix);
-      if (action.TableOptions.Disable == false)
+      if (!IsTableDisabled(action.TableOptions, date))
       {
         // default action to "Off"
         action.Value = '0';
@@ -6889,10 +6922,8 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool, bool&gt;((m
   return performed;
 });
 
-var _checkLock = new object();
 var CheckScheduling = new Action&lt;DateTime, int,bool&gt;((date, tableIndex, forceRepeat)=&gt;{
   // if tableIndex == 0, check all tables, otherwise check the given table only (1-10)
-  lock(_checkLock)
   timetableModules.Each((module)=&gt;{
     
     // determine table type
@@ -6926,7 +6957,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       break;
     case "Calendar.Set":
       Program.Store("Calendar").Get("Days").Value = request[3];
-      CheckScheduling(DateTime.UtcNow, 0, false);
+      CheckScheduling(DateTime.Now, 0, false);
       response = "OK";
       break;
     case "Timetable.Set":
@@ -6951,7 +6982,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       }
       setting.Value = newValue.ToString();
       var tidx = int.Parse(request[3].Substring(request[3].IndexOf(".")+1));
-      CheckScheduling(DateTime.UtcNow, tidx+1, false);
+      CheckScheduling(DateTime.Now, tidx+1, false);
       response = "OK";
       break;
     case "Timetable.Get":
@@ -6959,7 +6990,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
       response = setting.Value;
       break;
     case "Timetable.CheckNow":
-      CheckScheduling(DateTime.UtcNow, int.Parse(request[3]), false);
+      CheckScheduling(DateTime.Now, int.Parse(request[3]), false);
    	  break;
     case "Timetable.GetOptions":
       return GetTableOptions(request[3]);
@@ -6978,7 +7009,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
           tm.Name = mod.Instance.Name;
           tm.Type = GetTableType(mod);
           //
-          var todayDate = DateTime.UtcNow;
+          var todayDate = DateTime.Now;
           var tableIndex = GetTableIndex(mod, todayDate);
           // Day Light Saving check
           var tableSuffix = "";
@@ -6988,7 +7019,7 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
           if (tableIndex &gt; 0)
           {
             var tableOptions = GetTableOptions((tableIndex - 1).ToString());
-            if (tableOptions.Disable != true)
+            if (!IsTableDisabled(tableOptions, todayDate))
             {
 	            // tables are stored as zero indexed
     	        tm.Timetable = GetTableSettings(tm.Type + "." + (tableIndex - 1) + tableSuffix).Value;
@@ -7028,9 +7059,10 @@ When.WebServiceCallReceived(MODULE_DOMAIN + "/" + MODULE_ADDRESS, (args)=&gt;{
 // module events handling
 When.ModuleParameterChanged((module, parameter)=&gt; {
   // check scheduling is security system changed status
+  var date = DateTime.Now; // parameter.UpdateTime would be more accurate perhaps
   if (module.Instance.Domain == "HomeAutomation.HomeGenie.Automation" &amp;&amp; module.Instance.Address == "90" &amp;&amp; parameter.Is("HomeGenie.SecurityArmed"))
   {
-    CheckScheduling(DateTime.UtcNow, 0, true); // 0 = check all timetable programs
+    CheckScheduling(date, 0, true); // 0 = check all timetable programs
   }
   else if (parameter.Is("Status.Level") || parameter.Is("Sensor.MotionDetect"))
   {
@@ -7038,9 +7070,9 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
     {
       var moduleDomainAddress = module.Instance.Domain+":"+module.Instance.Address;
       var tableOptions = GetTableOptions((t).ToString());
-      if (tableOptions.Disable != true &amp;&amp; tableOptions.AutoOff.WhenNoMotion == true &amp;&amp; tableOptions.AutoOff.MotionSensor == moduleDomainAddress)
+      if (!IsTableDisabled(tableOptions, date) &amp;&amp; tableOptions.AutoOff.WhenNoMotion == true &amp;&amp; tableOptions.AutoOff.MotionSensor == moduleDomainAddress)
       {
-        CheckScheduling(DateTime.UtcNow, (t+1), false); // check current timetable program
+        CheckScheduling(date, (t+1), false); // check current timetable program
       }    
     }
   }
@@ -7051,7 +7083,7 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
 while (Program.IsEnabled)
 {
   // Current date with seconds set to 0
-  var preciseDate = DateTime.UtcNow;
+  var preciseDate = DateTime.Now;
   preciseDate = preciseDate.AddSeconds(-preciseDate.Second);
   // Run scheduling check
   CheckScheduling(preciseDate, 0, false); // 0 = check all timetable programs
@@ -7067,9 +7099,59 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features />
-    <ActivationTime>2016-01-02T06:28:17.008464Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Weekend</Property>
+        <Description>Timetable to use for weekend</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Workday</Property>
+        <Description>Timetable to use for workday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Holiday</Property>
+        <Description>Timetable to use for holiday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Special</Property>
+        <Description>Timetable to use for special day</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Enable</Property>
+        <Description>Enable Timetable scheduling</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Repeat</Property>
+        <Description>Repeat command for the whole duration</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.CheckDST</Property>
+        <Description>Enable Day Light Saving check</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime>2016-01-05T19:02:11.848247Z</ActivationTime>
+    <TriggerTime>2016-01-05T19:02:11.893749Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7169,7 +7251,6 @@ Program.Run();
 </ScriptCondition>
     <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.KNX";
 const string EVENT_DESCRIPTION = "KNX Module";
-var knxModules = Modules.InDomain(MODULES_DOMAIN);
 
 var localIp = Program.Option("KnxLocalIp").Value;
 var localPort = (int)Program.Option("KnxLocalPort").DecimalValue;
@@ -7213,6 +7294,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, ( args ) =&gt; {
     string command = reqs[2];
     //string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
     //
+	var knxModules = Modules.InDomain(MODULES_DOMAIN);
     var module = knxModules.WithAddress(lightnumber).Get();
     var knxAddress = module.Parameter("KNX.Address");
     if (knxAddress == null)
@@ -7782,7 +7864,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-02T06:27:33.397615Z</TriggerTime>
+    <TriggerTime>2016-01-05T19:00:49.173286Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7866,7 +7948,50 @@ Program.GoBackground();
     <Description>Adds an arbitrary number of Zone Sensors. Each of them can group multiple sensors into one logcal sensor.
 When changing the number of zone sensors, program restart is required.</Description>
     <Group>Devices and Things</Group>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes />
+        <Property>HomeGenie.ZoneSensors.Enable</Property>
+        <Description>Include in Zone Sensors</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes />
+        <Property>HomeGenie.ZoneSensors.1</Property>
+        <Description>Zone Sensor 1</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes />
+        <Property>HomeGenie.ZoneSensors.2</Property>
+        <Description>Zone Sensor 2</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes />
+        <Property>HomeGenie.ZoneSensors.3</Property>
+        <Description>Zone Sensor 3</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes />
+        <Property>HomeGenie.ZoneSensors.4</Property>
+        <Description>Zone Sensor 4</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes />
+        <Property>HomeGenie.ZoneSensors.5</Property>
+        <Description>Zone Sensor 5</Description>
+      </ProgramFeature>
+    </Features>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>

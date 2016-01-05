@@ -35,7 +35,6 @@
                 res(_this.searchModule(req.term));
             },
             select: function (event, ui) {
-                //TODO: insert element
                 textInput.val(ui.item.value);
                 textInput.data('module-address', ui.item.module.Domain + ':' + ui.item.module.Address);
                 _this.checkInput();
@@ -101,7 +100,6 @@
             textInput.data('module-address', '');
             textInput.parent().css('border-color', 'red');
         }
-        //TODO: signal onChange event
         if (typeof this.onChange == 'function') {
             this.onChange(address);
         }

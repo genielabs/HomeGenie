@@ -24,7 +24,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Packaging;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -35,6 +34,11 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using OpenSource.UPnP;
+
 using HomeGenie.Automation;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
@@ -43,11 +47,6 @@ using HomeGenie.Automation.Scheduler;
 
 using MIG;
 using MIG.Gateways;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using OpenSource.UPnP;
 
 namespace HomeGenie.Service
 {
@@ -194,9 +193,7 @@ namespace HomeGenie.Service
             }
 
             // Save system data before quitting
-            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "SAVING DATA");
-            UpdateModulesDatabase();
-            systemConfiguration.Update();
+            SaveData();
 
             // Stop HG helper services
             updateChecker.Stop();
@@ -215,6 +212,14 @@ namespace HomeGenie.Service
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STOPPED");
 
             SystemLogger.Instance.Dispose();
+        }
+
+        public void SaveData()
+        {
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "SAVING DATA");
+            systemConfiguration.Update();
+            UpdateModulesDatabase();
+            UpdateSchedulerDatabase();
         }
 
         ~HomeGenieService()
@@ -1041,19 +1046,15 @@ namespace HomeGenie.Service
             //
             Reload();
             //
-            // regenerate encrypted files
-            UpdateModulesDatabase();
-            SystemConfiguration.Update();
+            SaveData();
         }
 
         public void BackupCurrentSettings()
         {
-            // regenerate encrypted files
             UpdateProgramsDatabase();
             UpdateGroupsDatabase("Automation");
             UpdateGroupsDatabase("Control");
-            UpdateModulesDatabase();
-            SystemConfiguration.Update();
+            SaveData();
             ArchiveConfiguration("html/homegenie_backup_config.zip");
         }
 

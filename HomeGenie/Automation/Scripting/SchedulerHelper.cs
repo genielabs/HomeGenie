@@ -85,20 +85,30 @@ namespace HomeGenie.Automation.Scripting
             var eventItem = homegenie.ProgramManager.SchedulerService.Get(scheduleName);
             if (eventItem != null)
             {
-                return homegenie.ProgramManager.SchedulerService.IsScheduling(eventItem.CronExpression);
+                return homegenie.ProgramManager.SchedulerService.IsScheduling(DateTime.Now, eventItem.CronExpression);
             }
             return false;
         }
 
         /// <summary>
-        /// Determines whether the given cron expression is matching in this very moment.
+        /// Determines whether the given cron expression is matching at this very moment.
         /// </summary>
         /// <returns><c>true</c> if the given cron expression is matching; otherwise, <c>false</c>.</returns>
         /// <param name="cronExpression">Cron expression.</param>
         public bool IsScheduling(string cronExpression)
         {
-            return homegenie.ProgramManager.SchedulerService.IsScheduling(cronExpression);
+            return homegenie.ProgramManager.SchedulerService.IsScheduling(DateTime.Now, cronExpression);
         }
 
+        /// <summary>
+        /// Determines whether the given cron expression is a matching occurence at the given date/time.
+        /// </summary>
+        /// <returns><c>true</c> if the given cron expression is matching; otherwise, <c>false</c>.</returns>
+        /// <param name="date">Date.</param>
+        /// <param name="cronExpression">Cron expression.</param>
+        public bool IsOccurence(DateTime date, string cronExpression)
+        {
+            return homegenie.ProgramManager.SchedulerService.IsScheduling(date, cronExpression);
+        }
     }
 }

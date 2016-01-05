@@ -232,7 +232,7 @@ namespace HomeGenie.Automation.Engines
             //
             if (c.Domain == Domains.HomeAutomation_HomeGenie && (c.Target == SourceModule.Scheduler || c.Target == SourceModule.Automation) && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
             {
-                return homegenie.ProgramManager.SchedulerService.IsScheduling(c.ComparisonValue);
+                return homegenie.ProgramManager.SchedulerService.IsScheduling(DateTime.Now, c.ComparisonValue);
             }
             //
             // if the comparison value starts with ":", then the value is read from another module property

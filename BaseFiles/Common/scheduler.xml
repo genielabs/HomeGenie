@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfSchedulerItem xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SchedulerItem>
+    <Name>FromSunriseToSunset</Name>
+    <CronExpression>(30-59 6 * * *):(* 7-17 * * *):(0-30 18 * * *)</CronExpression>
+    <ProgramId />
+    <IsEnabled>true</IsEnabled>
+    <LastOccurrence>-</LastOccurrence>
+    <NextOccurrence>-</NextOccurrence>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>FromSunsetToSunrise</Name>
+    <CronExpression>(* 19-23 * * *):(30-59 18 * * *):(* 0-5 * * *):(0-30 6 * * *)</CronExpression>
+    <ProgramId />
+    <IsEnabled>true</IsEnabled>
+    <LastOccurrence>-</LastOccurrence>
+    <NextOccurrence>-</NextOccurrence>
+  </SchedulerItem>
+  <SchedulerItem>
     <Name>Sunrise</Name>
     <CronExpression>30 6 * * *</CronExpression>
     <ProgramId />

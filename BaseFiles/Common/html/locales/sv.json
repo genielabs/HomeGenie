@@ -373,6 +373,8 @@
         "Documentation",
     "actions_menu": 
         "Actions Menu",
+    "control_group_configure":
+        "Configure Group",
     "control_macrorecord_record_macro": 
         "Record Macro",
     "control_macrorecord_recording": 

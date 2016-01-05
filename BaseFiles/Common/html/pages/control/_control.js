@@ -117,6 +117,10 @@ HG.WebApp.Control.UpdateModules = function () {
     });
 };
 //
+HG.WebApp.Control.ConfigureGroup = function () {
+    HG.WebApp.GroupsList.ConfigureGroup(HG.WebApp.Data._CurrentGroupIndex);
+};
+//
 HG.WebApp.Control.RecordMacroStart = function () {
     $('#control_actionmenu').popup('close');
     HG.Automation.Macro.Record();
@@ -150,7 +154,7 @@ HG.WebApp.Control.RecordMacroSave = function (mode) {
             HG.WebApp.ProgramEdit._CurrentProgram.Address = data;
             HG.Configure.Groups.List('Automation', function () {
                 HG.WebApp.ProgramsList.EditProgram();
-                $.mobile.changePage($('#page_automation_editprogram'), { transition: "slide" });
+                $.mobile.changePage($('#page_automation_editprogram'), { transition: 'fade', changeHash: true });
                 $.mobile.loading('hide');
             });
         });

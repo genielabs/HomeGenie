@@ -287,6 +287,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "UpdateManager.InstallUpdate") //UpdateManager.InstallProgramsCommit")
                 {
                     string resultMessage = "OK";
+                    homegenie.SaveData();
                     if (!homegenie.UpdateChecker.InstallFiles())
                     {
                         resultMessage = "ERROR";
@@ -367,16 +368,12 @@ namespace HomeGenie.Service.Handlers
                     // password only for now, with fixed user login 'admin'
                     string pass = migCommand.GetOption(1) == "" ? "" : MIG.Utility.Encryption.SHA1.GenerateHashString(migCommand.GetOption(1));
                     homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Password", pass);
-                    // regenerate encrypted files
-                    homegenie.SystemConfiguration.Update();
-                    homegenie.UpdateModulesDatabase();
+                    homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "Security.ClearPassword")
                 {
                     homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Password", "");
-                    // regenerate encrypted files
-                    homegenie.SystemConfiguration.Update();
-                    homegenie.UpdateModulesDatabase();
+                    homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "Security.HasPassword")
                 {
@@ -557,9 +554,7 @@ namespace HomeGenie.Service.Handlers
                         }
                     }
                     homegenie.UpdateProgramsDatabase();
-                    // Regenerate encrypted configuration files
-                    homegenie.UpdateModulesDatabase();
-                    homegenie.SystemConfiguration.Update();
+                    homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationReset")
                 {

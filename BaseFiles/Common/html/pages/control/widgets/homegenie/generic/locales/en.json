@@ -52,9 +52,12 @@
     "timetable_programs_noschedules" : "No schedule programmed",
     "timetable_options_title" : "Program Options",
     "timetable_options_disable" : "Disable this program",
+    "timetable_options_disablerange": "Disable using CronTab time range expression",
     "timetable_options_autooff_title" : "Automatically set all program schedules to Off:",
     "timetable_options_autooff_away" : "When Armed Away",
     "timetable_options_autooff_home" : "When Armed Home",
+    "timetable_options_autooff_timerange" : "Within the specified time range",
+    "timetable_options_timerange" : "CronTab time range expression",
     "timetable_options_autooff_nomotion" : "When no motion is detected",
     "timetable_options_autooff_nomotion_timeout" : "Motion activity timeout (minutes)",
     "timetable_options_motionsensor" : "Motion Sensor",
@@ -72,7 +75,7 @@
 
     "therm_fanmode" : "Fan Mode",
     "fan_on" : "On",
-    "fan-auto" : "Auto",
+    "fan_auto" : "Auto",
     "fan_circulate" : "Circulate",
 
     "therm_setmode" : "Operating Mode",

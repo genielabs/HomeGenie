@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+05/01/2016 v1.1-beta.510
+    - Faaaster archive compression/decompression using SharpZipLib
+    - Improved TimeTable to support CronTab expressions for program Disable/AutoOff options
+
 02/01/2016 v1.1-beta.509a
     - Fix TimeTable occasional desync/event loosing on slower systems
 

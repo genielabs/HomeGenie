@@ -373,6 +373,8 @@
         "Documentation",
     "actions_menu": 
         "Menu",
+    "control_group_configure":
+        "Configure Group",
     "control_macrorecord_record_macro": 
         "Enregister une Macro",
     "control_macrorecord_recording": 

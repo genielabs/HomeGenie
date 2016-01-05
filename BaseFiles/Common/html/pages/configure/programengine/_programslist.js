@@ -705,7 +705,7 @@ HG.WebApp.ProgramsList.AddProgram = function (progname) {
         HG.WebApp.ProgramsList.LoadPrograms(function () {
             HG.WebApp.ProgramEdit._CurrentProgram.Address = data;
             HG.WebApp.ProgramsList.EditProgram();
-            $.mobile.changePage($('#page_automation_editprogram'), { transition: "slide" });
+            $.mobile.changePage($('#page_automation_editprogram'), { transition: 'fade', changeHash: true });
         });
     });
 };
@@ -729,7 +729,7 @@ HG.WebApp.ProgramsList.DeleteGroup = function (group) {
     HG.Configure.Groups.DeleteGroup('Automation', group, function () {
         $.mobile.loading('hide');
         setTimeout(function () {
-            $.mobile.changePage($('#'+HG.WebApp.AutomationGroupsList.PageId));
+            $.mobile.changePage($('#'+HG.WebApp.AutomationGroupsList.PageId), { transition: 'fade', changeHash: true });
         }, 200);
     });
 };

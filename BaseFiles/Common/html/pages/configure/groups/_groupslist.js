@@ -41,7 +41,7 @@ HG.WebApp.GroupsList.GetGroupsListViewItems = function () {
             }
         }
         html += '<li data-icon="false" data-group-name="' + HG.WebApp.Data.Groups[i].Name + '" data-group-index="' + i + '">';
-        html += '<a href="#page_configure_groupmodules">' + HG.WebApp.Data.Groups[i].Name + '</a>';
+        html += '<a href="#">' + HG.WebApp.Data.Groups[i].Name + '</a>';
         html += '<span class="ui-li-count">' + (modulescount) + '</span>';
         html += '<div style="position:absolute;right:40px;top:0;height:100%;overflow:hidden"><a class="handle ui-btn ui-icon-fa-sort ui-btn-icon-notext ui-list-btn-option-mini"></a></div>';
         html += '</li>';
@@ -53,9 +53,14 @@ HG.WebApp.GroupsList.GetGroupsListViewItems = function () {
         HG.WebApp.GroupsList.SortGroups();
     });
     $('#configure_groupslist li').bind('click', function () {
-        $('#configure_groupslist').attr('selected-group-name', $(this).attr('data-group-name'));
-        $('#configure_groupslist').attr('selected-group-index', $(this).attr('data-group-index'));
+        HG.WebApp.GroupsList.ConfigureGroup($(this).attr('data-group-index'));
     });
+};
+//
+HG.WebApp.GroupsList.ConfigureGroup = function (gidx) {
+    $('#configure_groupslist').attr('selected-group-name', HG.WebApp.Data.Groups[gidx].Name);
+    $('#configure_groupslist').attr('selected-group-index', gidx);
+    $.mobile.changePage($('#page_configure_groupmodules'), { transition: 'fade', changeHash: true });
 };
 //
 HG.WebApp.GroupsList.GetModuleGroup = function (module) {

@@ -40,7 +40,8 @@ namespace HomeGenie.Automation.Scheduler
                 string d = "";
                 try
                 {
-                    d = ExpressionDescriptor.GetDescription(this.CronExpression); 
+                    d = ExpressionDescriptor.GetDescription(this.CronExpression);
+                    d = Char.ToLowerInvariant(d[0]) + d.Substring(1);
                 }
                 catch { }
                 return d;

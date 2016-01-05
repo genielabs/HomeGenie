@@ -373,6 +373,8 @@
         "Документация",
     "actions_menu": 
         "Меню действий",
+    "control_group_configure":
+        "Configure Group",
     "control_macrorecord_record_macro": 
         "Записать макрос",
     "control_macrorecord_recording": 

@@ -252,19 +252,45 @@
       this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').change(function(el){
         _this._optionsSaveButton.removeClass('ui-disabled');
       });
-      var context = {
+      var ctxMotion = {
         parent: programsPageContainer.find('[data-ui-field=tt_options_motion]'),
         program: module.Address,
         module: module,
         parameter: { Description: HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_options_motionsensor', 'Motion Sensor'), Name: 'Volatile.ValueHolder', Value: '' }
       };
-      HG.Ui.GenerateWidget('widgets/module.text:Any:Any:Status.Level,Sensor.MotionDetect', context, function(handler){
+      HG.Ui.GenerateWidget('widgets/module.text:Any:Any:Status.Level,Sensor.MotionDetect', ctxMotion, function(handler){
         _this._optionsMotionSensor = handler;
         handler.onChange = function(val){
           _this._autoOffMotionSensor = val;
           _this._optionsSaveButton.removeClass('ui-disabled');
         };
       });
+      var ctxCrontab = {
+        parent: programsPageContainer.find('[data-ui-field=tt_options_timerange]'),
+        program: module.Address,
+        module: module,
+        parameter: { Description: HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_options_timerange', 'CronTab time range expression'), Name: 'Volatile.ValueHolder', Value: '' }
+      };
+      HG.Ui.GenerateWidget('widgets/cron.text:nowizard', ctxCrontab, function(handler){
+        _this._optionsTimeRange = handler;
+        handler.onChange = function(val){
+          _this._autoOffTimeRange = val;
+          _this._optionsSaveButton.removeClass('ui-disabled');
+        };
+      });    
+      var ctxCrontabDisable = {
+        parent: programsPageContainer.find('[data-ui-field=tt_options_disablerange]'),
+        program: module.Address,
+        module: module,
+        parameter: { Description: HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_options_disablerange', 'Disable using CronTab time range expression'), Name: 'Volatile.ValueHolder', Value: '' }
+      };
+      HG.Ui.GenerateWidget('widgets/cron.text:nowizard', ctxCrontabDisable, function(handler){
+        _this._optionsDisableRange = handler;
+        handler.onChange = function(val){
+          _this._DisableTimeRange = val;
+          _this._optionsSaveButton.removeClass('ui-disabled');
+        };
+      });    
       // END
 
     }
@@ -313,8 +339,11 @@
   LoadProgramOptions: function() {
     var _this = this;
     this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', false).checkboxradio('refresh');
+    this._optionsDisableRange.setValue('');
     this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', false).checkboxradio('refresh');
     this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', false).checkboxradio('refresh');
+    this.ProgramsPage.find('[data-ui-field=chk-options-off-timerange]').prop('checked', false).checkboxradio('refresh');
+    this._optionsTimeRange.setValue('');
     this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', false).checkboxradio('refresh');
     this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(60).slider('refresh');
     this._optionsMotionSensor.setModule('');
@@ -326,8 +355,11 @@
       success: function (options) {
         if (typeof options == 'object') {
           _this.ProgramsPage.find('[data-ui-field=chk-options-disable]').prop('checked', options.Disable).checkboxradio('refresh');
+          _this._optionsDisableRange.setValue(options.DisableTimeRange);
           _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').prop('checked', options.AutoOff.WhenArmedAway).checkboxradio('refresh');
           _this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').prop('checked', options.AutoOff.WhenArmedHome).checkboxradio('refresh');
+          _this.ProgramsPage.find('[data-ui-field=chk-options-off-timerange]').prop('checked', options.AutoOff.WhenInTimeRange).checkboxradio('refresh');
+          _this._optionsTimeRange.setValue(options.AutoOff.TimeRange);
           _this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').prop('checked', options.AutoOff.WhenNoMotion).checkboxradio('refresh');
           _this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(options.AutoOff.MotionTimeout).slider('refresh');
           _this._optionsMotionSensor.setModule(options.AutoOff.MotionSensor);
@@ -342,9 +374,12 @@
     $.mobile.loading('show');
     var options = {
         Disable: this.ProgramsPage.find('[data-ui-field=chk-options-disable]').is(':checked'),
+        DisableTimeRange: this._DisableTimeRange,
         AutoOff: {
             WhenArmedAway: this.ProgramsPage.find('[data-ui-field=chk-options-off-armedaway]').is(':checked'),
             WhenArmedHome: this.ProgramsPage.find('[data-ui-field=chk-options-off-armedhome]').is(':checked'),
+            WhenInTimeRange: this.ProgramsPage.find('[data-ui-field=chk-options-off-timerange]').is(':checked'),
+            TimeRange: this._autoOffTimeRange,
             WhenNoMotion: this.ProgramsPage.find('[data-ui-field=chk-options-off-nomotion]').is(':checked'),
             MotionTimeout: this.ProgramsPage.find('[data-ui-field=slider-off-nomotiontime]').val(),
             MotionSensor: this._autoOffMotionSensor
@@ -457,8 +492,14 @@
     });
   },
 
+  _checkInterval: null,
   CheckNow: function(prog) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.ApiDomain + '/Timetable.CheckNow/'+prog, function (data) { });
+    var _this = this;
+    if (this._checkInterval != null)
+        clearTimeout(this._checkInterval);
+    this._checkInterval = setTimeout(function(){
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + _this.ApiDomain + '/Timetable.CheckNow/'+prog, function (data) { });
+    }, 2000);
   },
 
   GetDayIndex: function(day, month) {

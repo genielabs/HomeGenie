@@ -705,7 +705,7 @@ HG.WebApp.ProgramEdit.DeleteProgram = function (program) {
     HG.Automation.Programs.DeleteProgram(program, function () {
         $.mobile.loading('hide');
         setTimeout(function () {
-            $.mobile.changePage($('#page_automation_programs'), { transition: 'fade' });
+            $.mobile.changePage($('#page_automation_programs'), { transition: 'fade', changeHash: true });
         }, 200);
     });
 };

@@ -52,9 +52,12 @@
     "timetable_programs_noschedules" : "Nessuna programmazione",
     "timetable_options_title" : "Opzioni Programma",
     "timetable_options_disable" : "Disattiva questo programma",
+    "timetable_options_disablerange": "Usa espressione CronTab come intervallo di disattivazione",
     "timetable_options_autooff_title" : "Imposta automaticamente su Off questa programmazione:",
     "timetable_options_autooff_away" : "Se il sistema di sicurezza è 'Armed Away'",
     "timetable_options_autooff_home" : "Se il sistema di sicurezza è 'Armed Home'",
+    "timetable_options_autooff_timerange" : "Nell'intervallo di tempo specificato",
+    "timetable_options_timerange" : "Espressione CronTab dell'intervallo",
     "timetable_options_autooff_nomotion" : "Se nessun movimento è rilevato",
     "timetable_options_autooff_nomotion_timeout" : "Timeout movimento (minuti)",
     "timetable_options_motionsensor" : "Sensore Movimento",
@@ -72,7 +75,7 @@
 
     "therm_fanmode" : "Ventilatore",
     "fan_on" : "On",
-    "fan-auto" : "Auto",
+    "fan_auto" : "Auto",
     "fan_circulate" : "Fai circolare",
 
     "therm_setmode" : "Modalità",
