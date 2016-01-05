@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:48.898447Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.202498Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.260081Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.085557Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -450,7 +450,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.135492Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.407097Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -522,7 +522,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.279884Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.209188Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1138,7 +1138,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.181801Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.341951Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1185,7 +1185,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:48.956692Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.30898Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1534,7 +1534,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.329137Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.04648Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1664,7 +1664,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.201012Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.312708Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1828,7 +1828,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.243784Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.175842Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2263,7 +2263,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.274597Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.21773Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2412,7 +2412,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.082281Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.090024Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2662,7 +2662,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.167064Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.298833Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6731,7 +6731,6 @@ var GetClosestEvent = new Func&lt;ModuleParameter, DateTime, DateTime&gt;((param
 
 var IsTableDisabled = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions, date)=&gt;{
   var disabled = false;
-  Console.WriteLine(tableOptions.DisableTimeRange);
   if (tableOptions.Disable == true &amp;&amp; tableOptions.DisableTimeRange == "")
     disabled = true;
   else if (tableOptions.Disable == true &amp;&amp; tableOptions.DisableTimeRange != "" &amp;&amp; Scheduler.IsOccurence(date, tableOptions.DisableTimeRange.ToString()))
@@ -7099,59 +7098,9 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Weekend</Property>
-        <Description>Timetable to use for weekend</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Workday</Property>
-        <Description>Timetable to use for workday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Holiday</Property>
-        <Description>Timetable to use for holiday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Special</Property>
-        <Description>Timetable to use for special day</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Enable</Property>
-        <Description>Enable Timetable scheduling</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Repeat</Property>
-        <Description>Repeat command for the whole duration</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.CheckDST</Property>
-        <Description>Enable Day Light Saving check</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime>2016-01-05T19:02:11.848247Z</ActivationTime>
-    <TriggerTime>2016-01-05T19:02:11.893749Z</TriggerTime>
+    <Features />
+    <ActivationTime>2016-01-05T21:47:16.831704Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7864,7 +7813,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-05T19:00:49.173286Z</TriggerTime>
+    <TriggerTime>2016-01-05T21:46:50.390028Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
