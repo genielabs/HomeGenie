@@ -441,6 +441,7 @@ namespace HomeGenie.Service
 
         internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
         {
+            ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
             if (!File.Exists(zipFilename))
             {
                 FileStream zfs = File.Create(zipFilename);
