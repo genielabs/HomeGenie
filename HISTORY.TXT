@@ -1,6 +1,9 @@
 ﻿RELEASE HISTORY
 
-05/01/2016 v1.1-beta.510
+06/01/2016 v1.1-beta.511
+    - Fix archive compression "codepage not supported" bug introduced in r510
+    - Fix heavy cpu load bug introduced in r510
+    - Fix TimeTable time offset bug introduced in r510
     - Faaaster archive compression/decompression using SharpZipLib
     - Improved TimeTable to support CronTab expressions for program Disable/AutoOff options
 

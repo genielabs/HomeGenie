@@ -49,7 +49,7 @@ namespace HomeGenie.Automation.Scheduler
         {
             Stop();
             serviceChecker = new Timer(CheckScheduledEvents); //, null, 1000, 1000);
-            serviceChecker.Change(60-DateTime.Now.Second, Timeout.Infinite);
+            serviceChecker.Change((60-DateTime.Now.Second)*1000, Timeout.Infinite);
         }
 
         public void Stop()
@@ -62,7 +62,7 @@ namespace HomeGenie.Automation.Scheduler
 
         private void CheckScheduledEvents(object state)
         {
-            serviceChecker.Change(60-DateTime.Now.Second, Timeout.Infinite);
+            serviceChecker.Change((60-DateTime.Now.Second)*1000, Timeout.Infinite);
             var date = DateTime.Now;
             for (int i = 0; i < events.Count; i++)
             {
