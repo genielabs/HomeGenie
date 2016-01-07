@@ -317,6 +317,10 @@
         "Aktualisierung Prüfung",
     "configure_system_updatemanager_installupdate": 
         "Installiere Aktualisierung",
+    "configure_system_updatemanager_no_updates":
+        "No updates available.",
+    "configure_system_updatemanager_updates_available":
+        "The following updates are available:",
     "configure_system_restart_service": 
         "Dienst neu starten",
     "configure_system_restart": 
@@ -819,8 +823,12 @@
         "Maintenance",
     "home_menu_about": 
         "Über uns",
+    "home_menu_about_homegenie":
+        "Über HomeGenie",
     "home_menu_about_version":
         "Version",
+    "home_menu_about_whatshot":
+        "What's hot",
     "home_menu_about_userguide":
         "Users Guide",
     "home_menu_about_programming":

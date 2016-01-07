@@ -292,7 +292,7 @@
     "configure_grouplist": 
         "Список групп",
     "configure_schedulerservice_title": 
-        "планирование<br />Событий",
+        "Планирование<br />событий",
     "configure_scheduler_events": 
         "События планировщика",
     "configure_schedulerservice_bottombar_event_add": 
@@ -317,6 +317,10 @@
         "Проверить обновления",
     "configure_system_updatemanager_installupdate": 
         "Установить обновления",
+    "configure_system_updatemanager_no_updates":
+        "Нет обновлений.",
+    "configure_system_updatemanager_updates_available":
+        "Доступны следующие обновления:",
     "configure_system_restart_service": 
         "Перезапустить сервис",
     "configure_system_restart": 
@@ -340,7 +344,7 @@
     "configure_maintenance_configuration_info": 
         "<b>Внимание:</b> перед восстановлением файла резервной копии вам надо установить тот же пароль на систему, который был использован при создании резервной копии.",
     "configure_maintenance_configuration_backup": 
-        "Backup",
+        "Сохранить настройки",
     "configure_maintenance_configuration_restore": 
         "Восстановить",
     "configure_maintenance_configuration_factory_reset": 
@@ -374,7 +378,7 @@
     "actions_menu": 
         "Меню действий",
     "control_group_configure":
-        "Configure Group",
+        "Настроить группу",
     "control_macrorecord_record_macro": 
         "Записать макрос",
     "control_macrorecord_recording": 
@@ -390,9 +394,9 @@
     "control_macrorecord_options_none": 
         "Нет",
     "control_macrorecord_options_mimic": 
-        "Mimic",
+        "Смоделированная",
     "control_macrorecord_options_fixed": 
-        "Фиксированная",
+        "Фикс.",
     "control_macrorecord_options_pauseduration": 
         "Длительность фиксированной паузы",
     "update_options_popup_loading": 
@@ -555,6 +559,8 @@
         "Media Receiver",
     "configure_module_typemediatransmitter": 
         "Media Transmitter",
+    "configure_module_doorlock":        
+        "Дверной замок",
     "configure_module_featuresoptions": 
         "Возможности/Свойства",
     "configure_editprogram_files":
@@ -624,7 +630,7 @@
     "configure_automationgroup_widgeteditor":
         "Редактор виджетов",
     "configure_widgetlist_heading":
-        "<font style=\"color:gray\">Виджеты</font><br />List</h3>",
+        "<font style=\"color:gray\">Виджеты</font><br />Список</h3>",
     "configure_widgetlist_importwidget":
         "Импортировать виджет",
     "configure_widgetlist_import":
@@ -724,7 +730,11 @@
     "cronwizard_dayowselect_everydayow":
         "каждый день недели",        
     "cronwizard_dayowselect_eachselected":
-        "каждый выбранный день недели",        
+        "каждый выбранный день недели",   
+"##":
+"## COMMON LOCALES",
+"##":
+"##",         
     "common_month_jan":
         "Янв",        
     "common_month_feb":
@@ -774,55 +784,59 @@
     "common_status_notset":
         "Не установлено",
     "common_voice_control":
-        "Voice Control",
+        "Голосовое управление",
     "common_command_delete":
-        "Delete",
+        "Удалить",
     "common_command_upload":
-        "Upload",
+        "Загрузить",
     "common_select_none":
-        "None",
+        "ничто",
     "common_command_exit":
-        "Exit",
+        "Выход",
     "common_command_close":
-        "Close",
+        "Закрыть",
     "common_command_module":
-        "Module",
+        "Модуль",
     "common_command_modules":
-        "Modules",
+        "Модули",
 "##":
 "## SIDE MENU LOCALES",
 "##":
 "##",
     "home_menu_home":
-        "Home",
+        "Главная",
     "home_menu_groups":
         "Группы",
     "home_menu_statistics":
-        "Statistics",
+        "Статистика",
     "home_menu_automation":
-        "Automation",
+        "Автоматизация",
     "home_menu_programeditor":
-        "Programs",
+        "Программы",
     "home_menu_widgeteditor":
-        "Widgets",
+        "Виджеты",
     "home_menu_scheduler":
-        "Scheduler",
+        "Расписание",
     "home_menu_system":
-        "System",
+        "Система",
     "home_menu_settings":
-        "Settings",
+        "Настройки",
     "home_menu_maintenance":
-        "Maintenance",
+        "Обслуживание",
     "home_menu_about": 
         "О программе",
+    "home_menu_about_homegenie":
+        "О HomeGenie",
     "home_menu_about_version":
-        "Version",
+        "версия",
+    "home_menu_about_whatshot":
+        "Горячие новости",
     "home_menu_about_userguide":
-        "Users Guide",
+        "Руководство пользователя",
     "home_menu_about_programming":
-        "Programming Guide",
+        "Руководство по разработке",
     "home_menu_about_forum":
-        "Users Forum",
+        "Форум для пользователей",
     "home_menu_about_support":
-        "Keep HomeGenie Up!"
+        "Поддержите HomeGenie!"
 }
