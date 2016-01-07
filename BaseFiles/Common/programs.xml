@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:10.069027Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:16.830362Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.999407Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.187595Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -450,7 +450,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.742282Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.400445Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -522,7 +522,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.999236Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.384641Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1138,7 +1138,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.813019Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.400406Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1185,7 +1185,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.98565Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.249559Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1534,7 +1534,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.894307Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.420174Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1664,7 +1664,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.719893Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.334026Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1828,7 +1828,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:10.027703Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:16.878421Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2263,7 +2263,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:10.031682Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.084684Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2412,7 +2412,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.850648Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.226356Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2457,8 +2457,8 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "text");
-Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event", "text");
+    <ScriptCondition>Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "capture:Receiver.RawData");
+Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event", "capture:Receiver.RawData");
 Program.AddVirtualModules("HomeAutomation.X10.RF", "Sensor", "homegenie/generic/sensor", 1, 16);
 Program.Run();
 </ScriptCondition>
@@ -2662,7 +2662,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:09.788687Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:16.918019Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6777,7 +6777,7 @@ var MatchAutoOffOptions = new Func&lt;dynamic, DateTime, bool&gt;((tableOptions,
 var GetTableSliceAction = new Func&lt;int, string, string, DateTime, ExpandoObject&gt;((tableIndex, tableType, tableSuffix, date)=&gt;{
   dynamic action = new ExpandoObject();
   action.TableIndex = tableIndex;
-  action.Index = (int)Math.Floor((date - DateTime.Today).TotalMinutes / timeResolution);
+  action.Index = (int)Math.Floor((date - date.Date).TotalMinutes / timeResolution);
   action.Date = date;
   action.Value = null; // no action
   // table index == 0 =&gt; no table associated, values go from 1 to 10
@@ -6841,11 +6841,21 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool, bool&gt;((m
       }
       break;
 	case "Level":
-      // Level values are '0' = Off, '1' = 10%, '2' = 20%, ..., '9' = 90%, 'A' = 100%
-      var level = ((int)action.Value - 48);
-      if (action.Value == 'A') level = 10;
-      if (action.Value != '0' &amp;&amp; (action.Previous.Value != action.Value || repeat))
+      // Level values are '0' = Off, '1' = 10%, '2' = 20%, ..., '9' = 90%, 'A' = 100%, 'B' = On
+      if (action.Value == 'B' &amp;&amp; (action.Previous.Value != action.Value || repeat))
       {
+        module.Parameter("TimeTable.Status").Value = "ON";
+        if (!externalControl)
+        {
+          Program.Notify("Timetable", module.Instance.Name + " ON");
+          module.On();
+          performed = true;
+        }
+      }
+      else if (action.Value != '0' &amp;&amp; (action.Previous.Value != action.Value || repeat))
+      {
+        var level = ((int)action.Value - 48);
+        if (action.Value == 'A') level = 10;
         module.Parameter("TimeTable.Status").Value = (level * 10).ToString();
         if (!externalControl)
         {
@@ -7149,8 +7159,8 @@ while (Program.IsEnabled)
         <Description>Enable Day Light Saving check</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2016-01-06T00:42:41.749703Z</ActivationTime>
-    <TriggerTime>2016-01-06T00:42:41.790891Z</TriggerTime>
+    <ActivationTime>2016-01-06T23:58:27.342802Z</ActivationTime>
+    <TriggerTime>2016-01-06T23:58:27.387293Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7863,7 +7873,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T00:42:10.071808Z</TriggerTime>
+    <TriggerTime>2016-01-06T23:54:17.028418Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7992,7 +8002,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2016-01-06T23:54:16.978881Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

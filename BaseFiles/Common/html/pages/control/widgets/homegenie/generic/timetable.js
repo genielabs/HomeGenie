@@ -28,6 +28,7 @@
       'Table': 'Level',
       'Actions': [
         { id: '0', localeId: 'timetable_levelmode_off', description: 'Off', color: '#222' },
+        { id: 'B', localeId: 'timetable_onoffmode_on', description: 'On', color: '#AF8' },
         { id: '1', localeId: 'timetable_levelmode_10', description: '10%', color: '#663' },
         { id: '2', localeId: 'timetable_levelmode_20', description: '20%', color: '#773' },
         { id: '3', localeId: 'timetable_levelmode_30', description: '30%', color: '#884' },

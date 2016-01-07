@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r511</Version>
+  <Version>1.1 beta r511a</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fix archive compression "codepage not supported" bug introduced in r510
-  - Fix heavy cpu load bug introduced in r510
-  - Fix TimeTable time offset bug introduced in r510
-  - Faaaster archive compression/decompression using SharpZipLib
-  - Improved TimeTable to support CronTab expressions for program Disable/AutoOff options</ReleaseNote>
-  <ReleaseDate>2016-01-06T00:49:18.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed bug that was stopping TimeTable program at midnight
+  - Added "On" value for TimeTable dimmers/shutters</ReleaseNote>
+  <ReleaseDate>2016-01-07T00:07:55.0000Z</ReleaseDate>
 </ReleaseInfo>
