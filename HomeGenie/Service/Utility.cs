@@ -385,7 +385,7 @@ namespace HomeGenie.Service
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)
         {
-            bool success = true;
+            ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
             List<string> extractedFiles = new List<string>();
             ZipFile zipFile = null;
             try
@@ -424,9 +424,9 @@ namespace HomeGenie.Service
             }
             catch (Exception e)
             {
-                success = false;
                 extractedFiles.Clear();
                 // TODO: something to do here?
+                Console.WriteLine("Unzip error: " + e.Message);
             }
             finally
             {

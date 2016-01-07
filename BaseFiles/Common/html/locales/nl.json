@@ -317,6 +317,10 @@
         "Update Check",
     "configure_system_updatemanager_installupdate": 
         "Update installeren",
+    "configure_system_updatemanager_no_updates":
+        "No updates available.",
+    "configure_system_updatemanager_updates_available":
+        "The following updates are available:",
     "configure_system_restart_service": 
         "Service Herstart",
     "configure_system_restart": 
@@ -815,8 +819,12 @@
         "Onderhoud",
     "home_menu_about": 
         "Over",
+    "home_menu_about_homegenie":
+        "About HomeGenie",
     "home_menu_about_version":
         "Versie",
+    "home_menu_about_whatshot":
+        "What's hot",
     "home_menu_about_userguide":
         "Handleiding",
     "home_menu_about_programming":

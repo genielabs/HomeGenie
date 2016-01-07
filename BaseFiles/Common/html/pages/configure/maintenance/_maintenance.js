@@ -353,12 +353,12 @@ HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
     $('#configure_system_updateinstall_button').addClass('ui-disabled');
     HG.System.UpdateManager.GetUpdateList(function (releasedata) {
         if (releasedata.length == 0) {
-            $('#configure_system_updatemanager_info').html('No updates available.');
+            $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_no_updates'));
             $('#configure_system_updatemanager_detailsscroll').hide();
             $('#configure_system_updatemanager_installbutton').hide();
         }
         else {
-            $('#configure_system_updatemanager_info').html('The following updates are available:');
+            $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_updates_available'));
             var s = '<pre>';
             for (var r = 0; r < releasedata.length; r++) {
                 var relinfo = releasedata[r];

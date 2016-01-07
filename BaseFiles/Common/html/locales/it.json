@@ -317,6 +317,10 @@
         "Controlla Aggiornamenti",
     "configure_system_updatemanager_installupdate":
         "Installa Aggiornamento",
+    "configure_system_updatemanager_no_updates":
+        "No updates available.",
+    "configure_system_updatemanager_updates_available":
+        "The following updates are available:",
     "configure_system_restart_service":
         "Riavvia Servizio",
     "configure_system_restart":
@@ -819,8 +823,12 @@
         "Manutenzione",
     "home_menu_about": 
          "Informazioni",
+    "home_menu_about_homegenie":
+        "About HomeGenie",
     "home_menu_about_version":
         "Versione",
+    "home_menu_about_whatshot":
+        "What's hot",
     "home_menu_about_userguide":
         "Guida utente",
     "home_menu_about_programming":
