@@ -4,7 +4,7 @@
     "Title":
         "Weather Underground",
     "Description": 
-        "Temps actuel, prévisions et autres infos tel le lever/coucher du soleil, vent, précipitations. Basé sur<strong>Weather Underground</strong> service. \nPour activer ce service spécifier une <strong>Clé</strong>  utilisateur validé. Cette clé est obtenue en créant un compte sur <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+        "Temps actuel, prévisions et autres infos tel lever/coucher du soleil, vent, précipitations. Basé sur<strong>Weather Underground</strong> service. \nPour activer ce service spécifier une <strong>Clé</strong>  utilisateur validé. Cette clé est obtenue en créant un compte sur <u>http://www.wunderground.com/weather/api/d/login.html</u>",
     "ConfigureOptions.Location":
         "Nom de la ville",
     "ConfigureOptions.InputDisplayCelsius":
@@ -12,7 +12,7 @@
     "ConfigureOptions.Language":
         "Langage (eg. EN, IT, FR, DE, ...)",
     "ConfigureOptions.UpdateInterval":
-        "Interval de mise à jour (minutes)",
+        "Intervalle de mise à jour (minutes)",
     "ConfigureOptions.ApiKey":
         "Clé de validation Weather Underground"
 },
