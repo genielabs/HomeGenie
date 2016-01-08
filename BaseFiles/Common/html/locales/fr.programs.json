@@ -4,17 +4,17 @@
     "Title":
         "Weather Underground",
     "Description": 
-        "Current weather, forecast and other infos like sunrise/sunset, wind, precipitations. Based on <strong>Weather Underground</strong> service. \nTo activate this widget specify a valid user <strong>Key</strong> that can be obtained creating an account from <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+        "Temps actuel, prévisions et autres infos tel lever/coucher du soleil, vent, précipitations. Basé sur<strong>Weather Underground</strong> service. \nPour activer ce service spécifier une <strong>Clé</strong>  utilisateur validé. Cette clé est obtenue en créant un compte sur <u>http://www.wunderground.com/weather/api/d/login.html</u>",
     "ConfigureOptions.Location":
-        "City name",
+        "Nom de la ville",
     "ConfigureOptions.InputDisplayCelsius":
-        "Display Temperature in degrees Celsius (TRUE=YES FALSE=NO)",
+        "Température en degrés Celsius (VRAI=YES FAUX=NO)",
     "ConfigureOptions.Language":
-        "Language (eg. EN, IT, FR, DE, ...)",
+        "Langage (eg. EN, IT, FR, DE, ...)",
     "ConfigureOptions.UpdateInterval":
-        "Update interval (minutes)",
+        "Intervalle de mise à jour (minutes)",
     "ConfigureOptions.ApiKey":
-        "Weather Underground service Key"
+        "Clé de validation Weather Underground"
 },
 
 "6": {
@@ -135,13 +135,13 @@
     "TimeTable.Enable":
         "Activer les Tables hotraires",
     "TimeTable.Repeat":
-        "Repeat command for the whole duration",
+        "Répéter la commande pour toute la durée",
     "TimeTable.CheckDST":
-        "Enable Day Light Saving check",
+        "Activer le test Jour plus long (Printemps Eté)",
     "TimeTable.UI.NoProgram":
-        "no program",
+        "Pas de table",
     "TimeTable.UI.ProgramNr":
-        "program #"
+        "Table #"
 },
 
 "112": {
