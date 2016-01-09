@@ -618,6 +618,9 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid) {
                     HG.WebApp.GroupModules.FeatureUpdate(handler.context, val);
                 };
                 $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
+                setTimeout(function(){
+                    $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
+                }, 300);
             });
         }
     }

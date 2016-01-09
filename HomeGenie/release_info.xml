@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r511a</Version>
+  <Version>1.1 beta r512</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed bug that was stopping TimeTable program at midnight
-  - Added "On" value for TimeTable dimmers/shutters</ReleaseNote>
-  <ReleaseDate>2016-01-07T00:07:55.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed compression/decompression issues
+  - Improved crontab input field with autocomplete</ReleaseNote>
+  <ReleaseDate>2016-01-09T21:08:12.0000Z</ReleaseDate>
 </ReleaseInfo>

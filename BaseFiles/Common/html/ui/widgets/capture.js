@@ -30,16 +30,31 @@
                 style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                 position: { my: 'bottom center', at: 'top center' }
             });
+            // listen to HG events for 10 seconds
+            HG.WebApp.Events.AddListener(_this);
+            setTimeout(function(){
+                if (_this._captureEnabled) {
+                    _this._captureEnabled = false;
+                    HG.WebApp.Events.RemoveListener(_this);
+                    captureButton.qtip({ 
+                        content: "Capture timeout!",
+                        show: { event: false, ready: true, delay: 500 },
+                        hide: { event: false, inactive: 2500 },
+                        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                        position: { my: 'bottom center', at: 'top center' }
+                    });
+                }
+            }, 10000);
         });
-        // listen to HG events
-        HG.WebApp.Events.AddListener(_this);
         $('#automation_group_module_edit').on('popupafterclose', function(){
+            _this._captureEnabled = false;
             HG.WebApp.Events.RemoveListener(_this);
         });
     },
     parameterEventCallback: function(module, event) {
         if (this._captureEnabled && event.Property.indexOf(this.eventParameter) == 0) {
             this._captureEnabled = false;
+            HG.WebApp.Events.RemoveListener(this);
             var textInput = this.element.find('[data-ui-field=textinput]');
             textInput.val(event.Value).trigger('change');
             textInput.qtip({ 

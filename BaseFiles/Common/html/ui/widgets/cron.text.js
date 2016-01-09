@@ -32,6 +32,7 @@
                     HG.Ui.Popup.CronWizard.open();
                     HG.Ui.Popup.CronWizard.onChange = function(expr){
                         var ctxt = textInput.val();
+                        ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));
                         textInput.val(ctxt+expr);
                         textInput.trigger('change');
                         textInput.blur();
@@ -47,11 +48,13 @@
             } else {
                 textDescription.val(textInput.val());
                 textDescription.css('color', '');
-                $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
-                    if (typeof res != 'undefined' && res.ResponseValue != '') {
-                        textDescription.val(res.ResponseValue);
-                    }
-                });
+                if(_this.getLastSeparator(textInput.val()) == 0) {
+                    $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
+                        if (typeof res != 'undefined' && res.ResponseValue != '') {
+                            textDescription.val(res.ResponseValue);
+                        }
+                    });
+                }
             }
             setTimeout(function(){
                 textInput.parent().hide();
@@ -67,9 +70,10 @@
                     url: '/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.HomeGenie/Automation/Scheduling.List',
                     type: 'GET',
                     success: function (data) {
+                        var filter = _this.getFilter(req.term);
                         var itemList = [];
                         $.each(data, function(idx, item){
-                            if (item.IsEnabled)
+                            if (item.IsEnabled && (item.Name.toLowerCase().indexOf(filter) >= 0 || item.Description.toLowerCase().indexOf(filter) >= 0))
                                 itemList.push({ label: '@'+item.Name+' ('+item.Description+')', value: '@'+item.Name });
                         });
                         res(itemList);
@@ -81,7 +85,9 @@
             },
             select: function (event, ui) {
                 var ctxt = textInput.val();
+                ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));
                 textInput.val(ctxt+ui.item.value);
+                textInput[0].setSelectionRange(textInput.val().length, textInput.val().length);
                 textInput.trigger('change');
                 event.preventDefault();
                 return false;
@@ -91,6 +97,7 @@
                 return false;
             },
             response: function (event, ui) {
+                textInput.trigger('change');
             },
             close: function (event, ui) {
                 textInput.focus();
@@ -113,6 +120,27 @@
         setTimeout(function(){
             textInput.blur();
         }, 200);
+    },
+    getLastSeparator: function(s) {
+        var lastIdx = 0;
+        var idxS1 = s.lastIndexOf(':');
+        var idxS2 = s.lastIndexOf(';');
+        if (idxS1 > idxS2)
+            lastIdx = idxS1;
+        else
+            lastIdx = idxS2;
+        idxS1 = s.lastIndexOf('(');
+        idxS2 = s.lastIndexOf(')');
+        if (idxS1 > idxS2 && idxS1 > lastIdx)
+            lastIdx = idxS1;
+        else if (idxS2 > lastIdx)
+            lastIdx = idxS2;
+        return lastIdx+1;
+    },
+    getFilter: function(terms) {
+        var filter = terms.toLowerCase();
+        filter = filter.substring(this.getLastSeparator(filter));
+        return filter.replace('@', '');
     },
     setValue: function(expr) {
         var textInput = this.element.find('[data-ui-field=textinput]');

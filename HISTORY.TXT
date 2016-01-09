@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+10/01/2015 v1.1-beta.512
+    - Improved crontab input field with autocomplete
+    - Updated compression library (latest HEAD SharpZipLib from master repo)
+
 06/01/2016 v1.1-beta.511
     - Fix archive compression "codepage not supported" bug introduced in r510
     - Fix heavy cpu load bug introduced in r510
