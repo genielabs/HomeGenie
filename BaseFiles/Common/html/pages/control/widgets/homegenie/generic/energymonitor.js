@@ -1,7 +1,7 @@
 [{
   Name: "Unknown Module",
   Author: "Generoso Martello",
-  Version: "2015-01-25",
+  Version: "2016-01-10",
 
   GroupName: '',
   IconImage: 'pages/control/widgets/homegenie/generic/images/power.png',
@@ -10,10 +10,13 @@
   Initialized: false,
   Widget: null,
   LastDrawStats: new Date(0),
+  _fieldName: 'WattLoad',
+  _fieldDesc: 'Watt Load',
 
   RenderView: function (cuid, module) {
     var container = $(cuid);
     var widget = this.Widget = container.find('[data-ui-field=widget]');
+    var _this = this;
     if (!this.Initialized)
     {
       this.Widget.find('[data-ui-field=energystats]').qtip({
@@ -33,7 +36,7 @@
           fixed: true
         }
       });
-      this.Widget.find('[data-ui-field=energystats]').bind("plothover", function (event, pos, item) {
+      this.Widget.find('[data-ui-field=energystats]').on('plothover', function (event, pos, item) {
         // Grab the API reference
         var graph = $(this),
             api = graph.qtip(),
@@ -54,6 +57,18 @@
           api.elements.tooltip.stop(1, 1);
           api.show(item);
         }
+      });
+      this.Widget.find('[data-ui-field=btn_watt_load]').on('click', function(){
+        _this._fieldName = 'WattLoad';
+        _this._fieldDesc = 'Watt Load';
+        _this.LastDrawStats = new Date();
+        _this.DrawStats('');
+      });
+      this.Widget.find('[data-ui-field=kwcounter]').on('click', function(){
+        _this._fieldName = 'KwCounter';
+        _this._fieldDesc = 'kW Counter';
+        _this.LastDrawStats = new Date();
+        _this.DrawStats('');
       });
     }
     // render widget
@@ -84,7 +99,7 @@
     var showbars = true;
 
     $.ajax({
-      url: '/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/HomeAutomation.EnergyMonitor/1/EnergyMonitor.KwCounter',
+      url: '/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/HomeAutomation.EnergyMonitor/1/EnergyMonitor.'+this._fieldName,
       type: 'GET',
       dataType: 'json',
       success: function (counterData) {
@@ -103,7 +118,7 @@
         try {
           var dateFormat = dataStore.get('UI.DateFormat');
           $.plot(_this.Widget.find('[data-ui-field=energystats]'), [
-            { label: 'kW counter&nbsp;', data: dataSerie, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: true } }
+            { label: _this._fieldDesc+'&nbsp;', data: dataSerie, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: true } }
           ],
                  {
             yaxis: { 

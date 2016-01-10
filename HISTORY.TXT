@@ -1,6 +1,8 @@
 ﻿RELEASE HISTORY
 
-10/01/2015 v1.1-beta.512
+10/01/2016 v1.1-beta.512
+    - Energy Monitor widget now shows Watt load graph as default
+    - Updated Russian and French locales
     - Improved crontab input field with autocomplete
     - Updated compression library (latest HEAD SharpZipLib from master repo)
 
