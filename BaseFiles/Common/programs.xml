@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:16.830362Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.199394Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.187595Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.080413Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -438,7 +438,7 @@ while (Program.IsEnabled)
     {
       Program.RaiseEvent(sunEventParameter.Name, sunsetEvent, sunsetEvent + " event");
     }
-    Pause(1);
+    Pause(60-DateTime.Now.Second);
   } while (Program.IsEnabled &amp;&amp; DateTime.Now.Ticks &lt;= pauseEnd.Ticks);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -449,8 +449,8 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.400445Z</TriggerTime>
+    <ActivationTime>2016-01-12T01:23:09.756523Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -522,7 +522,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.384641Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.114581Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1138,7 +1138,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.400406Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.021932Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1185,7 +1185,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.249559Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.303078Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1534,7 +1534,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.420174Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.102626Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1664,7 +1664,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.334026Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.056152Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1828,7 +1828,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:16.878421Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.183376Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2263,7 +2263,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.084684Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.149748Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2412,7 +2412,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.226356Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.317532Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2662,7 +2662,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:16.918019Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.170192Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7159,8 +7159,8 @@ while (Program.IsEnabled)
         <Description>Enable Day Light Saving check</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2016-01-06T23:58:27.342802Z</ActivationTime>
-    <TriggerTime>2016-01-06T23:58:27.387293Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2016-01-12T01:22:35.239485Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7873,7 +7873,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:17.028418Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.10771Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8002,7 +8002,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-06T23:54:16.978881Z</TriggerTime>
+    <TriggerTime>2016-01-12T01:22:35.224824Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

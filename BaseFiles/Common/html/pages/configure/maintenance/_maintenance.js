@@ -1,12 +1,14 @@
 ﻿// HomeAutomation.HomeGenie / Config / System.Configure / System.ConfigurationBackup
 
 HG.WebApp.Maintenance = HG.WebApp.Maintenance || {};
+HG.WebApp.Maintenance.PageId = 'page_configure_maintenance';
 
 HG.WebApp.Maintenance.InitializePage = function () {
-    $('#page_configure_maintenance').on('pagebeforeshow', function (e) {
+    var page = $('#'+HG.WebApp.Maintenance.PageId);
+    page.on('pagebeforeshow', function (e) {
         $('#restore_configuration_uploadfile').val('')
     });
-    $('#page_configure_maintenance').on('pageinit', function (e) {
+    page.on('pageinit', function (e) {
 
         $('#systemsettings_httpport_change').bind('click', function () {
             var port = $('#http_service_port').val();
@@ -303,7 +305,89 @@ HG.WebApp.Maintenance.InitializePage = function () {
             });
         });
 
+        // Add-ons repository browser
+        page.find('[id=systemsettings_browserepo]').on('popupbeforeposition', function (event) {
+            var availHeight = $(window).height()-320;
+            var availWidth = $(window).width();
+            availWidth = availWidth - (availWidth / 5);
+            var contentFiles = page.find('[data-ui-field=browser_files]');
+            if (availWidth > 500) {
+                contentFiles.parent().parent().css('width', availWidth);
+                contentFiles.parent().parent().css('max-width', availWidth);
+            }
+            contentFiles.css('height', availHeight/2);
+            contentFiles.css('max-height', availHeight/2);
+            var contentText = page.find('[data-ui-field=browser_text]');
+            contentText.css('height', availHeight/2);
+            contentText.css('max-height', availHeight/2);
+        });
+        page.find('[id=systemsettings_browserepo]').on('popupafteropen', function (event) {
+            HG.WebApp.Maintenance.BrowseRoot();
+        });
+        page.find('[data-ui-field=parent_folder]').on('click', function() {
+            var browse = HG.WebApp.Maintenance.BrowseRepository;
+            var history = HG.WebApp.Maintenance._BrowserHistory;
+            if (history.length > 1) {
+                history.pop();
+                browse(history.pop());
+            }
+        });
+        page.find('[data-ui-field=repository_browse]').on('click', function() {
+            // reset history and browse to new repo
+            history = [];
+            page.find('[data-ui-field=repository_files]').empty();
+            HG.WebApp.Maintenance.BrowseRepository(page.find('[data-ui-field=repository_url]').val());
+        });
+        page.find('[data-ui-field=repository_btn_category]').on('click', function(){
+            HG.WebApp.Maintenance._BrowserCategory = $(this).attr('data-category');
+            HG.WebApp.Maintenance.BrowseRoot();
+        });
+
     });
+};
+
+HG.WebApp.Maintenance._BrowserHistory = [];
+HG.WebApp.Maintenance._BrowserCategory = 'programs';
+HG.WebApp.Maintenance.BrowseRoot = function() {
+    var page = $('#'+HG.WebApp.Maintenance.PageId);
+    HG.WebApp.Maintenance.BrowseRepository(page.find('[data-ui-field=repository_url]').val()+'/'+HG.WebApp.Maintenance._BrowserCategory);
+};
+HG.WebApp.Maintenance.BrowseRepository = function(path) {
+    var page = $('#'+HG.WebApp.Maintenance.PageId);
+    var list = page.find('[data-ui-field=repository_files]');
+    var text = page.find('[data-ui-field=browser_text]');
+    var popup = page.find('[id=systemsettings_browserepo]');
+    var browse = HG.WebApp.Maintenance.BrowseRepository;
+    var history = HG.WebApp.Maintenance._BrowserHistory;
+    history.push(path);
+    $.get(path, function(data){
+      list.empty();
+      $.each(data, function(idx,file){
+        if (file.type == 'dir') {
+          console.log(file);
+          var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-folder">'+file.name+'</a></li>');
+          list.append(item);
+          item.on('click', function() {
+            browse(file.url);
+          });
+        } else if (file.name.toLowerCase().endsWith('.md')) {
+            $.get(file.download_url, function(readme) {
+                text.html(markdown.toHTML(readme));
+            });
+        } else if (file.type == 'file') {
+          var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-file-code-o">'+file.name+'</a></li>');
+          list.append(item);
+          item.on('click', function() {
+            //_this.ListFiles(file.url);
+            console.log(file);
+          });
+        }
+      });
+      list.listview().listview('refresh');
+      setTimeout(function(){
+        popup.popup().popup('reposition', { positionTo: 'window' });
+      }, 300);
+    }); 
 };
 
 HG.WebApp.Maintenance.RestoreProgramList = '';

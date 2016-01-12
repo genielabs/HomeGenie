@@ -36,6 +36,7 @@ namespace HomeGenie.Automation.Scheduler
 {
     public class SchedulerService
     {
+        private const int MAX_EVAL_RECURSION = 4;
         private List<SchedulerItem> events = new List<SchedulerItem>();
         private Timer serviceChecker;
         private ProgramManager masterControlProgram;
@@ -191,6 +192,7 @@ namespace HomeGenie.Automation.Scheduler
             return true;
         }
 
+        private int recursionCount = 0;
         public bool IsScheduling(DateTime date, string cronExpression)
         {
             string buildExpression = "";
@@ -229,7 +231,39 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     // Check expresion from scheduled item with a given name
                     var eventItem = Get(currentExpression.Substring(1));
-                    isEntryActive = (eventItem != null && eventItem.IsEnabled && EvaluateCronEntry(date, eventItem.CronExpression));
+                    if (eventItem == null)
+                    {
+                        masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                            this,
+                            Domains.HomeAutomation_HomeGenie,
+                            SourceModule.Scheduler,
+                            cronExpression,
+                            Properties.SchedulerError,
+                            JsonConvert.SerializeObject("Unknown event name '"+currentExpression+"'"));
+                    }
+                    else if (recursionCount >= MAX_EVAL_RECURSION)
+                    {
+                        recursionCount = 0;
+                        masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                            this,
+                            Domains.HomeAutomation_HomeGenie,
+                            SourceModule.Scheduler,
+                            cronExpression,
+                            Properties.SchedulerError,
+                            JsonConvert.SerializeObject("Too much recursion in expression '"+currentExpression+"'"));
+                        eventItem.IsEnabled = false;
+                    }
+                    else
+                    {
+                        recursionCount++;
+                        try
+                        {
+                            isEntryActive = (eventItem.IsEnabled && IsScheduling(date, eventItem.CronExpression));
+                        } catch{ }
+                        recursionCount--;
+                        if (recursionCount < 0)
+                            recursionCount = 0;
+                    }
                 }
                 else
                 {
@@ -281,6 +315,16 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     return true;
                 }
+            }
+            else
+            {
+                masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                    this,
+                    Domains.HomeAutomation_HomeGenie,
+                    SourceModule.Scheduler,
+                    cronExpression,
+                    Properties.SchedulerError,
+                    JsonConvert.SerializeObject("Syntax error in expression '"+cronExpression+"'"));
             }
             return false;
         }

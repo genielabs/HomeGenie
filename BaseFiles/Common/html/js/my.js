@@ -57,3 +57,10 @@ fitRows._getItemLayoutPosition = function( item ) {
 
   return position;
 };
+
+// Javascript utility extensions (this should be already supplied by js ECMA6)
+if (typeof String.prototype.endsWith !== 'function') {
+    String.prototype.endsWith = function(suffix) {
+        return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    };
+}

@@ -25,6 +25,19 @@
                     <a id="configure_system_updatemanager_installbutton" data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
                 </div>
             </div>
+
+            <!--hr style="border:1px dotted black" /-->
+            <div class="ui-grid-a" style="display:none">
+                <div class="ui-block-a">
+                    <label data-locale-id="configure_system_addonsrepository">Install Add-on</label><br />
+                </div>
+                <div class="ui-block-b" style="float:right;width:150px">
+                    <a href="#systemsettings_browserepo" data-rel="popup" data-transition="pop" class="ui-btn ui-corner-all" data-locale-id="configure_system_browserepository">
+                        Browse Repository
+                    </a>
+                </div>
+            </div>
+
             <hr style="border:1px dotted black" />
             <div class="ui-grid-a">
                 <div class="ui-block-a">
@@ -447,30 +460,47 @@
                 </div>
             </div>
         </div>
-        
-        <!--
-        <div id="systemsettings_statistics_timeresolutionseconds_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
-            <div data-role="header" class="ui-corner-top">
-                <h1 data-locale-id="configure_system_statistics_timeresolutionchange">Statistics Record Interval</h1>
+
+        <div id="systemsettings_browserepo" class="ui-corner-all hg-popup-b" data-role="popup" data-overlay-theme="b" data-position-to="window">
+            <div class="ui-corner-top" data-role="header">
+                <h2 data-locale-id="configure_system_browserepo">Repository Browser</h2>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:5%;;padding-top:10px;padding-right:4px" align="right">
+                        <i class="fa fa-globe fa-2x"></i>
+                    </div>
+                    <div class="ui-block-b" style="width:80%">
+                        <input data-ui-field="repository_url" type="text" value="https://api.github.com/repos/genielabs/homegenie-addons/contents" />
+                    </div>
+                    <div class="ui-block-c" style="width:15%" align="left">
+                        <a data-ui-field="repository_browse" href="#" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-fa-github">Browse</a>
+                    </div>
+                </div>
+                <div data-role="navbar" style="padding-right:4px">
+                    <ul>
+                      <li><a data-ui-field="repository_btn_category" data-category="programs" href="#" data-ajax="false" data-theme="b" class="ui-btn ui-btn-icon-left ui-icon-fa-code ui-btn-active">Programs</a></li>
+                      <li><a data-ui-field="repository_btn_category" data-category="widgets" href="#" data-ajax="false" data-theme="b" class="ui-btn ui-btn-icon-left ui-icon-fa-cube">Widgets</a></li>
+                      <li><a data-ui-field="repository_btn_category" data-category="interfaces" href="#" data-ajax="false" data-theme="b" class="ui-btn ui-btn-icon-left ui-icon-fa-wrench">MIG Interfaces</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="ui-corner-bottom ui-content">
-                <h3 data-locale-id="configure_system_statistics_timeresolutionchange_note" class="ui-title">Note: after changing interval, HomeGenie must be restarted to make changes effective!</h3>
-                <p>
-                    <label for="systemsettings_statistics_timeresolutionchange_seconds" />
-                    <input id="systemsettings_statistics_timeresolutionchange_seconds" type="number" />
-                </p>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_timeresolutionchange_cancel" data-rel="back">Cancel</a>
-                    </div>
-                    <div class="ui-block-b">
-                        <a id="systemsettings_statistics_timeresolution_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_timeresolutionchange_commit" data-rel="back" data-transition="flow">Change</a>
-                    </div>
+            <div>
+                <div class="ui-content trapScroll" data-ui-field="browser_files" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+                    <ul data-ui-field="repository_files"></ul>
+                </div>
+                <div data-ui-field="browser_text" class="trapScroll" style="border-top:2px solid gray;padding-left:10px;padding-right:10px;height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+                </div>
+            </div>
+
+            <div class="ui-grid-a ui-footer ui-bar-inherit">
+                <div class="ui-block-a">
+                    <a data-ui-field="parent_folder" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Back</a>
+                </div>
+                <div class="ui-block-b" align="right">
+                    <a class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right" data-mini="true" href="#" data-rel="back">Close</a>
                 </div>
             </div>
         </div>
-        -->    
 
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">

@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+    - Added recursion check to scheduler event expressions
+    - Fixed bug in evaluating composite scheduler events using names (@)
+
 10/01/2016 v1.1-beta.512
     - Energy Monitor widget now shows Watt load graph as default
     - Updated Russian and French locales
