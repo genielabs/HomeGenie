@@ -1,5 +1,7 @@
 ## Presentation Site and User's Guide
 
+[![Join the chat at https://gitter.im/genielabs/HomeGenie](https://badges.gitter.im/genielabs/HomeGenie.svg)](https://gitter.im/genielabs/HomeGenie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 http://www.homegenie.it
 
 ## Developer Docs
