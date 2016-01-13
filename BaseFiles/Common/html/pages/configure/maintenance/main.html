@@ -26,10 +26,10 @@
                 </div>
             </div>
 
-            <!--hr style="border:1px dotted black" /-->
-            <div class="ui-grid-a" style="display:none">
+            <hr style="border:1px dotted black" />
+            <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <label data-locale-id="configure_system_addonsrepository">Install Add-on</label><br />
+                    <label data-locale-id="configure_system_packagerepository">Install Package</label><br />
                 </div>
                 <div class="ui-block-b" style="float:right;width:150px">
                     <a href="#systemsettings_browserepo" data-rel="popup" data-transition="pop" class="ui-btn ui-corner-all" data-locale-id="configure_system_browserepository">
@@ -465,22 +465,18 @@
             <div class="ui-corner-top" data-role="header">
                 <h2 data-locale-id="configure_system_browserepo">Repository Browser</h2>
                 <div class="ui-grid-b">
-                    <div class="ui-block-a" style="width:5%;;padding-top:10px;padding-right:4px" align="right">
+                    <div class="ui-block-a" style="width:5%;;padding-top:12px;padding-right:6px" align="right">
                         <i class="fa fa-globe fa-2x"></i>
                     </div>
                     <div class="ui-block-b" style="width:80%">
-                        <input data-ui-field="repository_url" type="text" value="https://api.github.com/repos/genielabs/homegenie-addons/contents" />
+                        <input data-ui-field="repository_url" type="text" value="https://api.github.com/repos/genielabs/homegenie-packages/contents" />
                     </div>
                     <div class="ui-block-c" style="width:15%" align="left">
                         <a data-ui-field="repository_browse" href="#" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-fa-github">Browse</a>
                     </div>
                 </div>
-                <div data-role="navbar" style="padding-right:4px">
-                    <ul>
-                      <li><a data-ui-field="repository_btn_category" data-category="programs" href="#" data-ajax="false" data-theme="b" class="ui-btn ui-btn-icon-left ui-icon-fa-code ui-btn-active">Programs</a></li>
-                      <li><a data-ui-field="repository_btn_category" data-category="widgets" href="#" data-ajax="false" data-theme="b" class="ui-btn ui-btn-icon-left ui-icon-fa-cube">Widgets</a></li>
-                      <li><a data-ui-field="repository_btn_category" data-category="interfaces" href="#" data-ajax="false" data-theme="b" class="ui-btn ui-btn-icon-left ui-icon-fa-wrench">MIG Interfaces</a></li>
-                    </ul>
+                <div style="padding-left:8px">
+                    <p data-ui-field="browser_path">current path</p>
                 </div>
             </div>
 
@@ -488,15 +484,20 @@
                 <div class="ui-content trapScroll" data-ui-field="browser_files" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
                     <ul data-ui-field="repository_files"></ul>
                 </div>
-                <div data-ui-field="browser_text" class="trapScroll" style="border-top:2px solid gray;padding-left:10px;padding-right:10px;height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+                <div data-ui-field="browser_text" class="trapScroll" style="border-top:2px solid gray;height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+                    <div data-ui-field="description_text" style="padding-left:10px;padding-right:10px;"></div>
+                    <div class="ui-bar-inherit" data-ui-field="package_info" style="padding:10px;font-weight:normal"></div>
                 </div>
             </div>
 
-            <div class="ui-grid-a ui-footer ui-bar-inherit">
+            <div class="ui-grid-b ui-footer ui-bar-inherit">
                 <div class="ui-block-a">
                     <a data-ui-field="parent_folder" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Back</a>
                 </div>
-                <div class="ui-block-b" align="right">
+                <div class="ui-block-b" align="center">
+                    <a data-ui-field="install_package" class="ui-btn ui-shadow ui-corner-all ui-icon-fa-download ui-btn-icon-left">Install Package</a>
+                </div>
+                <div class="ui-block-c" align="right">
                     <a class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right" data-mini="true" href="#" data-rel="back">Close</a>
                 </div>
             </div>

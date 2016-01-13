@@ -320,8 +320,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             var contentText = page.find('[data-ui-field=browser_text]');
             contentText.css('height', availHeight/2);
             contentText.css('max-height', availHeight/2);
-        });
-        page.find('[id=systemsettings_browserepo]').on('popupafteropen', function (event) {
+        }).on('popupafteropen', function (event) {
             HG.WebApp.Maintenance.BrowseRoot();
         });
         page.find('[data-ui-field=parent_folder]').on('click', function() {
@@ -332,60 +331,90 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 browse(history.pop());
             }
         });
-        page.find('[data-ui-field=repository_browse]').on('click', function() {
-            // reset history and browse to new repo
-            history = [];
-            page.find('[data-ui-field=repository_files]').empty();
-            HG.WebApp.Maintenance.BrowseRepository(page.find('[data-ui-field=repository_url]').val());
+        page.find('[data-ui-field=install_package]').on('click', function() {
+            // TODO: install current package
         });
-        page.find('[data-ui-field=repository_btn_category]').on('click', function(){
-            HG.WebApp.Maintenance._BrowserCategory = $(this).attr('data-category');
+        page.find('[data-ui-field=repository_browse]').on('click', function() {
             HG.WebApp.Maintenance.BrowseRoot();
         });
-
     });
 };
 
 HG.WebApp.Maintenance._BrowserHistory = [];
-HG.WebApp.Maintenance._BrowserCategory = 'programs';
 HG.WebApp.Maintenance.BrowseRoot = function() {
+    // reset history and browse to new repo
+    HG.WebApp.Maintenance._BrowserHistory = [];
     var page = $('#'+HG.WebApp.Maintenance.PageId);
-    HG.WebApp.Maintenance.BrowseRepository(page.find('[data-ui-field=repository_url]').val()+'/'+HG.WebApp.Maintenance._BrowserCategory);
+    HG.WebApp.Maintenance.BrowseRepository({ url: page.find('[data-ui-field=repository_url]').val()+'/packages', name:'' });
 };
 HG.WebApp.Maintenance.BrowseRepository = function(path) {
     var page = $('#'+HG.WebApp.Maintenance.PageId);
     var list = page.find('[data-ui-field=repository_files]');
-    var text = page.find('[data-ui-field=browser_text]');
+    var text = page.find('[data-ui-field=description_text]');
+    var info = page.find('[data-ui-field=package_info]');
     var popup = page.find('[id=systemsettings_browserepo]');
     var browse = HG.WebApp.Maintenance.BrowseRepository;
     var history = HG.WebApp.Maintenance._BrowserHistory;
     history.push(path);
-    $.get(path, function(data){
-      list.empty();
+    // show/hide ui elements as needed
+    if (history.length > 1)
+        page.find('[data-ui-field=parent_folder]').show();
+    else
+        page.find('[data-ui-field=parent_folder]').hide();
+    page.find('[data-ui-field=install_package]').hide();
+    text.html('');
+    info.hide();
+    // show current path
+    var cpath = '';
+    $.each(history, function(idx, p){
+        cpath+='<strong>'+p.name+'</strong> / ';
+    });
+    page.find('[data-ui-field=browser_path]').html(cpath);
+    // get current folder files
+    list.empty();
+    $.mobile.loading('show');
+    $.get(path.url, function(data){
       $.each(data, function(idx,file){
         if (file.type == 'dir') {
-          console.log(file);
           var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-folder">'+file.name+'</a></li>');
           list.append(item);
           item.on('click', function() {
-            browse(file.url);
+            browse({ url: file.url, name: file.name });
           });
+        } else if (file.name.toLowerCase() == 'package.json') {
+            $.get(file.download_url, function(package) {
+                package = $.parseJSON(package);
+                var pkginfo = '<strong>Files</strong>: '
+                pkginfo +=  package.programs.length+' automation programs, ';
+                pkginfo +=  package.widgets.length+' ui widgets, ';
+                pkginfo +=  package.interfaces.length+' mig interfaces';
+                pkginfo += '<br/><strong>Version</strong>: '+package.version;
+                pkginfo += '<br/><strong>Published</strong>: '+package.published;
+                pkginfo += '<br/><strong>Author</strong>: '+package.author;
+                pkginfo += '<br/><a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
+                info.html(pkginfo);
+                info.show();
+                page.find('[data-ui-field=browser_text]').scrollTop(0);
+            });
+            page.find('[data-ui-field=install_package]').show();
         } else if (file.name.toLowerCase().endsWith('.md')) {
             $.get(file.download_url, function(readme) {
                 text.html(markdown.toHTML(readme));
+                page.find('[data-ui-field=browser_text]').scrollTop(0);
             });
         } else if (file.type == 'file') {
           var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-file-code-o">'+file.name+'</a></li>');
           list.append(item);
           item.on('click', function() {
             //_this.ListFiles(file.url);
-            console.log(file);
+            //console.log(file);
           });
         }
       });
       list.listview().listview('refresh');
       setTimeout(function(){
         popup.popup().popup('reposition', { positionTo: 'window' });
+        $.mobile.loading('hide');
       }, 300);
     }); 
 };

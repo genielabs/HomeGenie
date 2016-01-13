@@ -23,10 +23,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MIG;
 
 namespace HomeGenie
 {
-    public static class ProgramDynamiApi
+    public static class ProgramDynamicApi
     {
         private static Dictionary<string, Func<object, object>> dynamicApi = new Dictionary<string, Func<object, object>>();
 
@@ -69,6 +70,32 @@ namespace HomeGenie
             {
                 dynamicApi.Remove(request);
             }
+        }
+
+        public static object TryApiCall(MigInterfaceCommand command)
+        {
+            object response = "";
+            // Dynamic Interface API 
+            var registeredApi = command.Domain + "/" + command.Address + "/" + command.Command;
+            var handler = ProgramDynamicApi.Find(registeredApi);
+            if (handler != null)
+            {
+                // explicit command API handlers registered in the form <domain>/<address>/<command>
+                // receives only the remaining part of the request after the <command>
+                var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
+                response = handler(args);
+            }
+            else
+            {
+                handler = ProgramDynamicApi.FindMatching(command.OriginalRequest.Trim('/'));
+                if (handler != null)
+                {
+                    // other command API handlers
+                    // receives the full request string
+                    response = handler(command.OriginalRequest.Trim('/'));
+                }
+            }
+            return response;
         }
 
     }

@@ -337,7 +337,7 @@ namespace HomeGenie.Service
                 // If the command was not already handled, let automation programs process it
                 if (response == null || String.IsNullOrWhiteSpace(response.ToString()))
                 {
-                    response = masterControlProgram.TryDynamicApi(cmd);
+                    response = ProgramDynamicApi.TryApiCall(cmd);
                 }
                 //
                 // Macro Recording
@@ -683,7 +683,7 @@ namespace HomeGenie.Service
             // Let automation programs process the request; we append eventual POST data (RequestText) to the MigInterfaceCommand
             if (!String.IsNullOrWhiteSpace(args.Request.RequestText))
                 command = new MigInterfaceCommand(command.OriginalRequest + "/" + args.Request.RequestText);
-            args.Request.ResponseData = masterControlProgram.TryDynamicApi(command);
+            args.Request.ResponseData = ProgramDynamicApi.TryApiCall(command);
 
             // Macro Recording
             if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && command != null && command.Command != null && (command.Command.StartsWith("Control.") || (command.Command.StartsWith("AvMedia.") && command.Command != "AvMedia.Browse" && command.Command != "AvMedia.GetUri")))

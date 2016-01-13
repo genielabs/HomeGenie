@@ -242,7 +242,6 @@
     <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
     <Compile Include="Data\Store.cs" />
     <Compile Include="Automation\Scripting\StoreHelper.cs" />
-    <Compile Include="Automation\ProgramDynamiApi.cs" />
     <Compile Include="Data\SystemConfiguration_1_0.cs" />
     <Compile Include="Automation\Engines\CSharpEngine.cs" />
     <Compile Include="Automation\Engines\WizardEngine.cs" />
@@ -257,6 +256,7 @@
     <Compile Include="Automation\Engines\ProgramEngineBase.cs" />
     <Compile Include="Service\Logging\SystemLogger.cs" />
     <Compile Include="Service\Constants\SourceModule.cs" />
+    <Compile Include="Automation\ProgramDynamicApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

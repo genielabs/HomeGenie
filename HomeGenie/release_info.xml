@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r512</Version>
+  <Version>1.1 beta r513</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Energy Monitor widget now shows Watt load graph as default
-  - Updated Russian and French locales
-  - Improved crontab input field with autocomplete
-  - Updated compression library (latest HEAD SharpZipLib from master repo)</ReleaseNote>
-  <ReleaseDate>2016-01-10T12:28:21.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added Package Browser and Installer to the Maintenance page (wip)
+  - Fixed occasional "object reference not set" error when compiling/starting a program
+  - Added recursion check to scheduler event expressions
+  - Fixed bug in evaluating composite scheduler events using names (@)</ReleaseNote>
+  <ReleaseDate>2016-01-13T17:38:03.0000Z</ReleaseDate>
 </ReleaseInfo>

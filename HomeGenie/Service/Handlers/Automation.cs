@@ -344,7 +344,7 @@ namespace HomeGenie.Service.Handlers
                     {
                         // reset previous error status
                         currentProgram.IsEnabled = false;
-                        currentProgram.Engine.Stop();
+                        currentProgram.Engine.StopProgram();
                         currentProgram.ScriptErrors = "";
                         //
                         List<ProgramError> errors = homegenie.ProgramManager.CompileScript(currentProgram);
@@ -460,7 +460,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.IsEnabled = false;
                         try
                         {
-                            currentProgram.Engine.Stop();
+                            currentProgram.Engine.StopProgram();
                         }
                         catch
                         {
@@ -486,7 +486,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.IsEnabled = false;
                         try
                         {
-                            currentProgram.Engine.Stop();
+                            currentProgram.Engine.StopProgram();
                         }
                         catch
                         {
@@ -569,7 +569,7 @@ namespace HomeGenie.Service.Handlers
             if (program != null)
             {
                 program.IsEnabled = false;
-                program.Engine.Stop();
+                program.Engine.StopProgram();
                 homegenie.UpdateProgramsDatabase();
             }
             return program;

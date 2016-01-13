@@ -201,16 +201,14 @@ namespace HomeGenie.Automation.Scripting
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, object> handler)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.Engine.RegisteredApi.Add(apiCall);
-            homegenie.ProgramManager.RegisterDynamicApi(apiCall, handler);
+            program.Engine.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, string> handler)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.Engine.RegisteredApi.Add(apiCall);
-            homegenie.ProgramManager.RegisterDynamicApi(apiCall, handler);
+            program.Engine.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 
