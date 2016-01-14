@@ -7,5 +7,5 @@
   - Fixed occasional "object reference not set" error when compiling/starting a program
   - Added recursion check to scheduler event expressions
   - Fixed bug in evaluating composite scheduler events using names (@)</ReleaseNote>
-  <ReleaseDate>2016-01-13T17:38:03.0000Z</ReleaseDate>
+  <ReleaseDate>2016-01-14T17:32:01.0000Z</ReleaseDate>
 </ReleaseInfo>

@@ -33,6 +33,8 @@ namespace HomeGenie.Service.Constants
             = "HomeGenie.UpdateChecker";
         public const string HomeGenie_System
             = "HomeGenie.System";
+        public const string HomeGenie_PackageInstaller
+        = "HomeGenie.PackageInstaller";
         //
         public const string MigService_Interfaces
             = "MIGService.Interfaces";

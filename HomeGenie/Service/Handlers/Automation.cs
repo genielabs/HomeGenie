@@ -159,7 +159,9 @@ namespace HomeGenie.Service.Handlers
                         File.Delete(archiveName);
                     //
                     MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveName);
-                    //
+                    int newPid = homegenie.ProgramManager.GeneratePid();
+                    newProgram = Config.ProgramImport(homegenie, newPid, archiveName, migCommand.GetOption(0));
+                    /*
                     int newPid = homegenie.ProgramManager.GeneratePid();
                     var reader = new StreamReader(archiveName);
                     char[] signature = new char[2];
@@ -204,7 +206,7 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.ProgramManager.CompileScript(newProgram);
                     }
-                    //
+                    */
                     homegenie.UpdateProgramsDatabase();
                     //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
                     request.ResponseData = newProgram.Address.ToString();

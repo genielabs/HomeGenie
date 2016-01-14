@@ -163,6 +163,11 @@ namespace HomeGenie.Automation
             }
         }
 
+        public ProgramBlock ProgramGet(int pid)
+        {
+            return Programs.Find(p => p.Address == pid);
+        }
+
         public void ProgramRemove(ProgramBlock program)
         {
             RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Removed");

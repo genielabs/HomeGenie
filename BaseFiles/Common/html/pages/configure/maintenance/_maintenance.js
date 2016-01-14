@@ -332,7 +332,11 @@ HG.WebApp.Maintenance.InitializePage = function () {
             }
         });
         page.find('[data-ui-field=install_package]').on('click', function() {
-            // TODO: install current package
+            page.find('[data-ui-field=install_text]').empty();
+            $.mobile.loading('show');
+            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Package.Install/' + encodeURIComponent(HG.WebApp.Maintenance._BrowserPackage), function (res) {
+                $.mobile.loading('hide');
+            });
         });
         page.find('[data-ui-field=repository_browse]').on('click', function() {
             HG.WebApp.Maintenance.BrowseRoot();
@@ -341,6 +345,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
 };
 
 HG.WebApp.Maintenance._BrowserHistory = [];
+HG.WebApp.Maintenance._BrowserPackage = '';
 HG.WebApp.Maintenance.BrowseRoot = function() {
     // reset history and browse to new repo
     HG.WebApp.Maintenance._BrowserHistory = [];
@@ -362,6 +367,7 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
     else
         page.find('[data-ui-field=parent_folder]').hide();
     page.find('[data-ui-field=install_package]').hide();
+    page.find('[data-ui-field=install_text]').empty();
     text.html('');
     info.hide();
     // show current path
@@ -382,16 +388,18 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
             browse({ url: file.url, name: file.name });
           });
         } else if (file.name.toLowerCase() == 'package.json') {
+            HG.WebApp.Maintenance._BrowserPackage = file.download_url.substring(0, file.download_url.lastIndexOf('/'));
             $.get(file.download_url, function(package) {
                 package = $.parseJSON(package);
-                var pkginfo = '<strong>Files</strong>: '
+                var pkginfo = '<strong>'+package.title+'</strong>';
+                pkginfo += '<br/><strong>Version</strong>: '+package.version;
+                pkginfo += '<br/><strong>Author</strong>: '+package.author;
+                pkginfo += '<br/><strong>Files</strong>: '
                 pkginfo +=  package.programs.length+' automation programs, ';
                 pkginfo +=  package.widgets.length+' ui widgets, ';
                 pkginfo +=  package.interfaces.length+' mig interfaces';
-                pkginfo += '<br/><strong>Version</strong>: '+package.version;
                 pkginfo += '<br/><strong>Published</strong>: '+package.published;
-                pkginfo += '<br/><strong>Author</strong>: '+package.author;
-                pkginfo += '<br/><a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
+                pkginfo += '<br/><i class="fa fa-comments fa-md"></i> <a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
                 info.html(pkginfo);
                 info.show();
                 page.find('[data-ui-field=browser_text]').scrollTop(0);

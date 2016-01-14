@@ -189,6 +189,24 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
             break;
 
+        case 'HomeGenie.PackageInstaller':
+            var log = $('#systemsettings_browserepo').find('[data-ui-field=install_text]');
+            if (eventLog.Property == 'InstallProgress.Message') {
+                log.append('* ' + eventLog.Value + '<br/>');
+            } else {
+                log.append('* <strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
+                var iconImage = 'images/genie.png';
+                popupdata = {
+                    icon: iconImage,
+                    title: eventLog.Property + '<br/>' + eventLog.Value,
+                    text: '',
+                    timestamp: date
+                };
+            }
+            var height = log.parent()[0].scrollHeight;
+            log.parent().scrollTop(height);
+            break;
+
         case 'HomeAutomation.HomeGenie.Automation':
             var iconImage = HG.Ui.GetModuleIcon(module, null);
             if (eventLog.Property == 'Runtime.Error') {
