@@ -399,10 +399,19 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
                 pkginfo +=  package.widgets.length+' ui widgets, ';
                 pkginfo +=  package.interfaces.length+' mig interfaces';
                 pkginfo += '<br/><strong>Published</strong>: '+package.published;
-                pkginfo += '<br/><i class="fa fa-comments fa-md"></i> <a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
+                if (typeof package.sourcecode != 'undefined')
+                    pkginfo += '<br/><i class="fa fa-file-code-o fa-md"></i> <a href="'+package.sourcecode+'" target="_blank">Source Code</a><br/>';
+                if (typeof package.source_ != 'undefined')
+                    pkginfo += '<br/><i class="fa fa-comments fa-md"></i> <a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
                 info.html(pkginfo);
                 info.show();
                 page.find('[data-ui-field=browser_text]').scrollTop(0);
+                // check if already installed
+                $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Package.Get/' + encodeURIComponent(HG.WebApp.Maintenance._BrowserPackage), function (package) {
+                    if (typeof package.install_date != 'undefined') {
+                        info.append('<br/><strong>Installed</strong>: '+package.install_date);
+                    }
+                });
             });
             page.find('[data-ui-field=install_package]').show();
         } else if (file.name.toLowerCase().endsWith('.md')) {

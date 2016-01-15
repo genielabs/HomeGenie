@@ -628,7 +628,7 @@ namespace HomeGenie.Service
                     {
 
                         // Only system programs are to be updated
-                        if (program.Address < ProgramManager.USER_SPACE_PROGRAMS_START)
+                        if (program.Address < ProgramManager.USERSPACE_PROGRAMS_START)
                         {
                             ProgramBlock oldProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                             if (oldProgram != null)

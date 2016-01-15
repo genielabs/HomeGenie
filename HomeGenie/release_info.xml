@@ -3,9 +3,11 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r513</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added Package Browser and Installer to the Maintenance page (wip)
+  <ReleaseNote>   - Added installed packages and statistics files to backup archive
+  - Fixed bug in Z-Wave MultiCmd command class
+  - Added Package Browser and Installer to the Maintenance page
   - Fixed occasional "object reference not set" error when compiling/starting a program
   - Added recursion check to scheduler event expressions
   - Fixed bug in evaluating composite scheduler events using names (@)</ReleaseNote>
-  <ReleaseDate>2016-01-14T17:32:01.0000Z</ReleaseDate>
+  <ReleaseDate>2016-01-15T13:36:41.0000Z</ReleaseDate>
 </ReleaseInfo>

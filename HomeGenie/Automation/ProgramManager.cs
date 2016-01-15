@@ -76,7 +76,8 @@ namespace HomeGenie.Automation
 
         //private object lockObject = new object();
         private bool isEngineEnabled = false;
-        public static int USER_SPACE_PROGRAMS_START = 1000;
+        public const int USERSPACE_PROGRAMS_START = 1000;
+        public const int PACKAGE_PROGRAMS_START = 100000;
 
         public ProgramManager(HomeGenieService hg)
         {
@@ -142,10 +143,10 @@ namespace HomeGenie.Automation
 
         public int GeneratePid()
         {
-            int pid = USER_SPACE_PROGRAMS_START;
+            int pid = USERSPACE_PROGRAMS_START;
             foreach (ProgramBlock program in automationPrograms)
             {
-                if (pid <= program.Address)
+                if (pid <= program.Address && pid < ProgramManager.PACKAGE_PROGRAMS_START-1)
                     pid = program.Address + 1;
             }
             return pid;

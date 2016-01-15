@@ -60,6 +60,7 @@ namespace HomeGenie.Service
         private ProgramManager masterControlProgram;
         private VirtualMeter virtualMeter;
         private UpdateChecker updateChecker;
+        private PackageManager packageManager;
         private StatisticsLogger statisticsLogger;
         // Internal data structures
         private TsList<Module> systemModules = new HomeGenie.Service.TsList<Module>();
@@ -94,6 +95,7 @@ namespace HomeGenie.Service
             InitializeSystem();
             Reload();
 
+            packageManager = new PackageManager(this);
             updateChecker = new UpdateChecker(this);
             updateChecker.ArchiveDownloadUpdate += (object sender, ArchiveDownloadEventArgs args) =>
             {
@@ -280,6 +282,11 @@ namespace HomeGenie.Service
         public UpdateChecker UpdateChecker
         {
             get { return updateChecker; }
+        }
+        // Reference to PackageManager
+        public PackageManager PackageManager
+        {
+            get { return packageManager; }
         }
         // Reference to Statistics
         public StatisticsLogger Statistics
@@ -1567,6 +1574,12 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "scheduler.xml");
             Utility.AddFileToZip(archiveName, "groups.xml");
             Utility.AddFileToZip(archiveName, "release_info.xml");
+            // Statistics db
+            if (File.Exists("homegenie_stats.db"))
+                Utility.AddFileToZip(archiveName, "homegenie_stats.db");
+            // Installed packages
+            if (File.Exists("installed_packages.json"))
+                Utility.AddFileToZip(archiveName, "installed_packages.json");
             // Add MIG Interfaces config files (lib/mig/*.xml)
             string migLibFolder = Path.Combine("lib", "mig");
             if (Directory.Exists(migLibFolder))

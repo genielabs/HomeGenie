@@ -160,7 +160,7 @@ namespace HomeGenie.Service.Handlers
                     //
                     MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveName);
                     int newPid = homegenie.ProgramManager.GeneratePid();
-                    newProgram = Config.ProgramImport(homegenie, newPid, archiveName, migCommand.GetOption(0));
+                    newProgram = homegenie.PackageManager.ProgramImport(newPid, archiveName, migCommand.GetOption(0));
                     /*
                     int newPid = homegenie.ProgramManager.GeneratePid();
                     var reader = new StreamReader(archiveName);
