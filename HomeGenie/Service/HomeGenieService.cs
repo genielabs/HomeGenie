@@ -1548,7 +1548,7 @@ namespace HomeGenie.Service
             {
                 File.Delete(archiveName);
             }
-            // Add USERSPACE automation programs binary (csharp)
+            // Add USERSPACE automation program binaries (csharp)
             foreach (var program in masterControlProgram.Programs)
             {
                 if (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
@@ -1578,11 +1578,11 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "groups.xml");
             Utility.AddFileToZip(archiveName, "release_info.xml");
             // Statistics db
-            if (File.Exists("homegenie_stats.db"))
-                Utility.AddFileToZip(archiveName, "homegenie_stats.db");
+            if (File.Exists(StatisticsLogger.STATISTICS_DB_FILE))
+                Utility.AddFileToZip(archiveName, StatisticsLogger.STATISTICS_DB_FILE);
             // Installed packages
-            if (File.Exists("installed_packages.json"))
-                Utility.AddFileToZip(archiveName, "installed_packages.json");
+            if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
+                Utility.AddFileToZip(archiveName, PackageManager.PACKAGE_LIST_FILE);
             // Add MIG Interfaces config/data files (lib/mig/*.xml)
             string migLibFolder = Path.Combine("lib", "mig");
             if (Directory.Exists(migLibFolder))

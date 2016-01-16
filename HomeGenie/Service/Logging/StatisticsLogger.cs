@@ -46,6 +46,8 @@ namespace HomeGenie.Service.Logging
 
     public class StatisticsLogger
     {
+        public const string STATISTICS_DB_FILE = "homegenie_stats.db";
+
         public static List<string> StatisticsFields = new List<string>() {
             "Sensor.",
             "Meter.",
@@ -678,7 +680,7 @@ namespace HomeGenie.Service.Logging
         /// <returns>The statistics database name.</returns>
         private string GetStatisticsDatabaseName()
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "homegenie_stats.db");
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, StatisticsLogger.STATISTICS_DB_FILE);
         }
 
         private string DateTimeToSQLite(DateTime datetime)

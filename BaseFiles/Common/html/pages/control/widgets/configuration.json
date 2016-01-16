@@ -1,8 +1,1 @@
-﻿[
-    {
-        Description     : "Z-Wave.Me Floor Thermostat",
-        Widget          : "Bounz/Z-Wave.Me/thermostat",
-        MatchProperty   : "ZWaveNode.ManufacturerSpecific",
-        MatchValue      : "0115:0024:0001"
-    }
-]
+﻿[ ]

@@ -399,9 +399,9 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
                 pkginfo +=  package.widgets.length+' ui widgets, ';
                 pkginfo +=  package.interfaces.length+' mig interfaces';
                 pkginfo += '<br/><strong>Published</strong>: '+package.published;
-                if (typeof package.sourcecode != 'undefined')
+                if (typeof package.sourcecode != 'undefined' && package.sourcecode != "")
                     pkginfo += '<br/><i class="fa fa-file-code-o fa-md"></i> <a href="'+package.sourcecode+'" target="_blank">Source Code</a><br/>';
-                if (typeof package.source_ != 'undefined')
+                if (typeof package.homepage != 'undefined' && package.homepage != "")
                     pkginfo += '<br/><i class="fa fa-comments fa-md"></i> <a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
                 info.html(pkginfo);
                 info.show();

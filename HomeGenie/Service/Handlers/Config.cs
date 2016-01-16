@@ -434,13 +434,13 @@ namespace HomeGenie.Service.Handlers
                     File.Copy(Path.Combine(tempFolderPath, "modules.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"), true);
                     File.Copy(Path.Combine(tempFolderPath, "scheduler.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"), true);
                     // Statistics db
-                    if (File.Exists(Path.Combine(tempFolderPath, "homegenie_stats.db")))
-                        File.Copy(Path.Combine(tempFolderPath, "homegenie_stats.db"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "homegenie_stats.db"), true);
+                    if (File.Exists(Path.Combine(tempFolderPath, StatisticsLogger.STATISTICS_DB_FILE)))
+                        File.Copy(Path.Combine(tempFolderPath, StatisticsLogger.STATISTICS_DB_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, StatisticsLogger.STATISTICS_DB_FILE), true);
                     // Installed packages
                     bool restorePackages = false;
-                    if (File.Exists(Path.Combine(tempFolderPath, "installed_packages.json")))
+                    if (File.Exists(Path.Combine(tempFolderPath, PackageManager.PACKAGE_LIST_FILE)))
                     {
-                        File.Copy(Path.Combine(tempFolderPath, "installed_packages.json"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "installed_packages.json"), true);
+                        File.Copy(Path.Combine(tempFolderPath, PackageManager.PACKAGE_LIST_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PackageManager.PACKAGE_LIST_FILE), true);
                         restorePackages = true;
                     }
                     // Update system config

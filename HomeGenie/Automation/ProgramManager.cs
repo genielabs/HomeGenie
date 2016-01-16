@@ -67,17 +67,18 @@ namespace HomeGenie.Automation
         private SchedulerService schedulerService = null;
         private MacroRecorder macroRecorder = null;
 
+        //private object lockObject = new object();
+        private bool isEngineEnabled = false;
+
+        public const int USERSPACE_PROGRAMS_START = 1000;
+        public const int PACKAGE_PROGRAMS_START = 100000;
+
         public class RoutedEvent
         {
             public object Sender;
             public Module Module;
             public ModuleParameter Parameter;
         }
-
-        //private object lockObject = new object();
-        private bool isEngineEnabled = false;
-        public static int USERSPACE_PROGRAMS_START = 1000;
-        public static int PACKAGE_PROGRAMS_START = 100000;
 
         public ProgramManager(HomeGenieService hg)
         {

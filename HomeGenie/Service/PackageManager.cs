@@ -17,6 +17,8 @@ namespace HomeGenie.Service
         private HomeGenieService homegenie;
         private string widgetBasePath;
 
+        public const string PACKAGE_LIST_FILE = "installed_packages.json";
+
         public PackageManager(HomeGenieService hg)
         {
             homegenie = hg;
@@ -273,17 +275,17 @@ namespace HomeGenie.Service
             List<dynamic> pkgList = LoadInstalledPackages();
             pkgList.RemoveAll(p => p.folder_url.ToString() == pkgObject.folder_url.ToString());
             pkgList.Add(pkgObject);
-            File.WriteAllText("installed_packages.json", JsonConvert.SerializeObject(pkgList, Formatting.Indented));
+            File.WriteAllText(PackageManager.PACKAGE_LIST_FILE, JsonConvert.SerializeObject(pkgList, Formatting.Indented));
         }
 
         public List<dynamic> LoadInstalledPackages()
         {
             List<dynamic> pkgList = new List<dynamic>();
-            if (File.Exists("installed_packages.json"))
+            if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
             {
                 try
                 {
-                    pkgList = JArray.Parse(File.ReadAllText("installed_packages.json")).ToObject<List<dynamic>>();
+                    pkgList = JArray.Parse(File.ReadAllText(PackageManager.PACKAGE_LIST_FILE)).ToObject<List<dynamic>>();
                 }
                 catch (Exception e)
                 {
@@ -305,12 +307,48 @@ namespace HomeGenie.Service
             return iface;
         }
 
+        public void AddWidgetMapping(string jsonMap)
+        {
+            /* 
+               // example widget mapping
+               [
+                  {
+                      Description     : "Z-Wave.Me Floor Thermostat",
+                      Widget          : "Bounz/Z-Wave.Me/thermostat",
+                      MatchProperty   : "ZWaveNode.ManufacturerSpecific",
+                      MatchValue      : "0115:0024:0001"
+                  }
+               ]
+            */
+            string mapConfigFile = "html/pages/control/widgets/configuration.json";
+            var mapList = JArray.Parse(File.ReadAllText(mapConfigFile)).ToObject<List<dynamic>>();
+            var widgetMap = JArray.Parse(jsonMap).ToObject<List<dynamic>>();
+            try
+            {
+                foreach (var map in widgetMap)
+                {
+                    mapList.RemoveAll(m => m.MatchProperty.ToString() == map.MatchProperty.ToString() && m.MatchValue.ToString() == map.MatchValue.ToString());
+                    mapList.Add(map);
+                }
+                File.WriteAllText(mapConfigFile, JsonConvert.SerializeObject(mapList, Formatting.Indented));
+            }
+            catch 
+            {
+                // TODO: report exception
+            }
+        }
+
         public bool WidgetImport(string archiveFile, string importPath)
         {
             bool success = false;
+            string widgetInfoFile = "widget.info";
             List<string> extractedFiles = Utility.UncompressZip(archiveFile, importPath);
-            if (File.Exists(Path.Combine(importPath, "widget.info")))
+            if (File.Exists(Path.Combine(importPath, widgetInfoFile)))
             {
+                // Read "widget.info" and, if a mapping is present, add it to "html/pages/control/widgets/configuration.json"
+                var mapping = File.ReadAllText(Path.Combine(importPath, widgetInfoFile));
+                if (mapping.StartsWith("["))
+                    AddWidgetMapping(mapping);
                 foreach (string f in extractedFiles)
                 {
                     if (f.EndsWith(".html") || f.EndsWith(".js"))
