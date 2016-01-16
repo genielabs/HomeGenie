@@ -437,14 +437,30 @@ namespace HomeGenie.Service.Handlers
                     if (File.Exists(Path.Combine(tempFolderPath, StatisticsLogger.STATISTICS_DB_FILE)))
                         File.Copy(Path.Combine(tempFolderPath, StatisticsLogger.STATISTICS_DB_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, StatisticsLogger.STATISTICS_DB_FILE), true);
                     // Installed packages
-                    bool restorePackages = false;
                     if (File.Exists(Path.Combine(tempFolderPath, PackageManager.PACKAGE_LIST_FILE)))
                     {
                         File.Copy(Path.Combine(tempFolderPath, PackageManager.PACKAGE_LIST_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PackageManager.PACKAGE_LIST_FILE), true);
-                        restorePackages = true;
+                        // Restore packages from "installed_packages.json"
+                        string installFolder = Path.Combine(tempFolderPath, "pkg");
+                        List<dynamic> pkgList = homegenie.PackageManager.LoadInstalledPackages();
+                        foreach (var pkg in pkgList)
+                        {
+                            homegenie.PackageManager.InstallPackage(pkg.folder_url.ToString(), installFolder);
+                        }
                     }
                     // Update system config
                     UpdateSystemConfig();
+                    // Copy MIG configuration/data files if present (from folder lib/mig/*.xml)
+                    string migLibFolder = Path.Combine(tempFolderPath, "lib", "mig");
+                    if (Directory.Exists(migLibFolder))
+                    {
+                        foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
+                        {
+                            File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
+                        }
+                    }
+                    // Soft-reload system configuration from newely restored files and save config
+                    homegenie.SoftReload();
                     // Restore automation programs
                     string selectedPrograms = migCommand.GetOption(1);
                     serializer = new XmlSerializer(typeof(List<ProgramBlock>));
@@ -502,28 +518,7 @@ namespace HomeGenie.Service.Handlers
                             currentProgram.IsEnabled = program.IsEnabled;
                         }
                     }
-                    // Restore packages from "installed_packages.json"
-                    if (restorePackages)
-                    {
-                        string installFolder = Path.Combine(tempFolderPath, "pkg");
-                        List<dynamic> pkgList = homegenie.PackageManager.LoadInstalledPackages();
-                        foreach (var pkg in pkgList)
-                        {
-                            homegenie.PackageManager.InstallPackage(pkg.folder_url.ToString(), installFolder);
-                        }
-                    }
                     homegenie.UpdateProgramsDatabase();
-                    // Copy MIG configuration/data files if present (from folder lib/mig/*.xml)
-                    string migLibFolder = Path.Combine(tempFolderPath, "lib", "mig");
-                    if (Directory.Exists(migLibFolder))
-                    {
-                        foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
-                        {
-                            File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
-                        }
-                    }
-                    // Soft-reload system configuration from newely restored files and save config
-                    homegenie.SoftReload();
                     homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationReset")

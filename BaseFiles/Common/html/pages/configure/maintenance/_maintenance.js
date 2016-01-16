@@ -333,8 +333,10 @@ HG.WebApp.Maintenance.InitializePage = function () {
         });
         page.find('[data-ui-field=install_package]').on('click', function() {
             page.find('[data-ui-field=install_text]').empty();
+            page.find('[data-ui-field=install_package]').addClass('ui-disabled');
             $.mobile.loading('show');
             $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Package.Install/' + encodeURIComponent(HG.WebApp.Maintenance._BrowserPackage), function (res) {
+                page.find('[data-ui-field=install_package]').removeClass('ui-disabled');
                 $.mobile.loading('hide');
             });
         });
@@ -400,10 +402,10 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
                 pkginfo +=  package.interfaces.length+' mig interfaces';
                 pkginfo += '<br/><strong>Published</strong>: '+package.published;
                 if (typeof package.sourcecode != 'undefined' && package.sourcecode != "")
-                    pkginfo += '<br/><i class="fa fa-file-code-o fa-md"></i> <a href="'+package.sourcecode+'" target="_blank">Source Code</a><br/>';
+                    pkginfo += '<br/><i class="fa fa-file-code-o fa-md"></i> <a href="'+package.sourcecode+'" target="_blank">Source Code</a>';
                 if (typeof package.homepage != 'undefined' && package.homepage != "")
-                    pkginfo += '<br/><i class="fa fa-comments fa-md"></i> <a href="'+package.homepage+'" target="_blank">Forum Thread</a><br/>';
-                info.html(pkginfo);
+                    pkginfo += '<br/><i class="fa fa-comments fa-md"></i> <a href="'+package.homepage+'" target="_blank">Forum Thread</a>';
+                info.html(pkginfo+'<br/>');
                 info.show();
                 page.find('[data-ui-field=browser_text]').scrollTop(0);
                 // check if already installed

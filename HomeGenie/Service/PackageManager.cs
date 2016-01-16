@@ -351,10 +351,14 @@ namespace HomeGenie.Service
                     AddWidgetMapping(mapping);
                 foreach (string f in extractedFiles)
                 {
-                    string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
-                    if (!Directory.Exists(destFolder))
-                        Directory.CreateDirectory(destFolder);
-                    File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
+                    // copy only files contained in sub-folders, avoid copying zip-root files
+                    if (Path.GetDirectoryName(f) != "")
+                    {
+                        string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
+                        if (!Directory.Exists(destFolder))
+                            Directory.CreateDirectory(destFolder);
+                        File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
+                    }
                 }
                 success = true;
             }

@@ -235,6 +235,10 @@
          "Attivo",
     "configure_maintenance_heading": 
          "Manutenzione",
+    "configure_system_installpackage":
+        "Installa Pacchetto",
+    "configure_system_packagemanager":
+        "Gestore Pacchetti",
     "configure_system_theme": 
          "Tema",
     "configure_system_options": 

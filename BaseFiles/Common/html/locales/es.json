@@ -235,6 +235,10 @@
         "Activar",
     "configure_maintenance_heading": 
         "Mantenimiento",
+    "configure_system_installpackage":
+        "Install Package",
+    "configure_system_packagemanager":
+        "Package Manager",
     "configure_system_theme": 
         "Tema",
     "configure_system_options": 

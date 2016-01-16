@@ -235,6 +235,10 @@
         "Вкл.",
     "configure_maintenance_heading": 
         "Обслуживание",
+    "configure_system_installpackage":
+        "Install Package",
+    "configure_system_packagemanager":
+        "Package Manager",
     "configure_system_theme": 
         "Тема",
     "configure_system_options": 
