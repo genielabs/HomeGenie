@@ -351,13 +351,10 @@ namespace HomeGenie.Service
                     AddWidgetMapping(mapping);
                 foreach (string f in extractedFiles)
                 {
-                    if (f.EndsWith(".html") || f.EndsWith(".js"))
-                    {
-                        string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
-                        if (!Directory.Exists(destFolder))
-                            Directory.CreateDirectory(destFolder);
-                        File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
-                    }
+                    string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
+                    if (!Directory.Exists(destFolder))
+                        Directory.CreateDirectory(destFolder);
+                    File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
                 }
                 success = true;
             }
