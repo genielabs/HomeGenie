@@ -437,20 +437,14 @@ namespace HomeGenie.Service.Handlers
                     if (File.Exists(Path.Combine(tempFolderPath, "homegenie_stats.db")))
                         File.Copy(Path.Combine(tempFolderPath, "homegenie_stats.db"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "homegenie_stats.db"), true);
                     // Installed packages
+                    bool restorePackages = false;
                     if (File.Exists(Path.Combine(tempFolderPath, "installed_packages.json")))
-                        File.Copy(Path.Combine(tempFolderPath, "installed_packages.json"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "installed_packages.json"), true);
-                    // TODO: add backward compatibility for systemconfig.xml from HG 1.0 < r494
-                    UpdateSystemConfig();
-                    // Copy MIG configuration files if present (from folder lib/mig/*.xml)
-                    string migLibFolder = Path.Combine(tempFolderPath, "lib", "mig");
-                    if (Directory.Exists(migLibFolder))
                     {
-                        foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
-                        {
-                            File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
-                        }
+                        File.Copy(Path.Combine(tempFolderPath, "installed_packages.json"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "installed_packages.json"), true);
+                        restorePackages = true;
                     }
-                    homegenie.SoftReload();
+                    // Update system config
+                    UpdateSystemConfig();
                     // Restore automation programs
                     string selectedPrograms = migCommand.GetOption(1);
                     serializer = new XmlSerializer(typeof(List<ProgramBlock>));
@@ -462,7 +456,7 @@ namespace HomeGenie.Service.Handlers
                         var currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                         program.IsRunning = false;
                         // Only restore user space programs
-                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramManager.USERSPACE_PROGRAMS_START)
+                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
                         {
                             int oldPid = program.Address;
                             if (currentProgram == null)
@@ -471,10 +465,7 @@ namespace HomeGenie.Service.Handlers
                                 try
                                 {
                                     File.Copy(Path.Combine(tempFolderPath, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
-                                }
-                                catch
-                                {
-                                }
+                                } catch { }
                                 program.Address = newPid;
                                 homegenie.ProgramManager.ProgramAdd(program);
                             }
@@ -505,13 +496,34 @@ namespace HomeGenie.Service.Handlers
                                 }
                             }
                         }
-                        else if (currentProgram != null && program.Address < ProgramManager.USERSPACE_PROGRAMS_START)
+                        else if (currentProgram != null && (program.Address < ProgramManager.USERSPACE_PROGRAMS_START || program.Address >= ProgramManager.PACKAGE_PROGRAMS_START))
                         {
-                            // Only restore Enabled/Disabled status of system programs
+                            // Only restore Enabled/Disabled status of system programs and packages
                             currentProgram.IsEnabled = program.IsEnabled;
                         }
                     }
+                    // Restore packages from "installed_packages.json"
+                    if (restorePackages)
+                    {
+                        string installFolder = Path.Combine(tempFolderPath, "pkg");
+                        List<dynamic> pkgList = homegenie.PackageManager.LoadInstalledPackages();
+                        foreach (var pkg in pkgList)
+                        {
+                            homegenie.PackageManager.InstallPackage(pkg.folder_url.ToString(), installFolder);
+                        }
+                    }
                     homegenie.UpdateProgramsDatabase();
+                    // Copy MIG configuration/data files if present (from folder lib/mig/*.xml)
+                    string migLibFolder = Path.Combine(tempFolderPath, "lib", "mig");
+                    if (Directory.Exists(migLibFolder))
+                    {
+                        foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
+                        {
+                            File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
+                        }
+                    }
+                    // Soft-reload system configuration from newely restored files and save config
+                    homegenie.SoftReload();
                     homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationReset")
@@ -1200,17 +1212,26 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Package.List":
+                // TODO: get the list of installed packages...
+                break;
+                
             case "Package.Install":
                 {
                     string pkgFolderUrl = migCommand.GetOption(0);
                     string installFolder = Path.Combine(tempFolderPath, "pkg");
                     bool success = homegenie.PackageManager.InstallPackage(pkgFolderUrl, installFolder);
+                    if (success)
+                    {
+                        homegenie.UpdateProgramsDatabase();
+                        homegenie.SaveData();
+                    }
                     request.ResponseData = new ResponseText(success ? "OK" : "ERROR");
                 }
                 break;
 
             case "Package.Uninstall":
-                // TODO: ....
+                // TODO: uninstall a package....
                 break;
 
             }

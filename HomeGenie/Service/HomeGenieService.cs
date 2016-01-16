@@ -1548,21 +1548,24 @@ namespace HomeGenie.Service
             {
                 File.Delete(archiveName);
             }
-            // Add automation programs
+            // Add USERSPACE automation programs binary (csharp)
             foreach (var program in masterControlProgram.Programs)
             {
-                string relFile = Path.Combine("programs/", program.Address + ".dll");
-                if (File.Exists(relFile))
+                if (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
                 {
-                    Utility.AddFileToZip(archiveName, relFile);
-                }
-                if (program.Type.ToLower() == "arduino")
-                {
-                    string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
-                    string[] filePaths = Directory.GetFiles(arduinoFolder);
-                    foreach (string f in filePaths)
+                    string relFile = Path.Combine("programs/", program.Address + ".dll");
+                    if (File.Exists(relFile))
                     {
-                        Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
+                        Utility.AddFileToZip(archiveName, relFile);
+                    }
+                    if (program.Type.ToLower() == "arduino")
+                    {
+                        string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
+                        string[] filePaths = Directory.GetFiles(arduinoFolder);
+                        foreach (string f in filePaths)
+                        {
+                            Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
+                        }
                     }
                 }
             }
@@ -1580,7 +1583,7 @@ namespace HomeGenie.Service
             // Installed packages
             if (File.Exists("installed_packages.json"))
                 Utility.AddFileToZip(archiveName, "installed_packages.json");
-            // Add MIG Interfaces config files (lib/mig/*.xml)
+            // Add MIG Interfaces config/data files (lib/mig/*.xml)
             string migLibFolder = Path.Combine("lib", "mig");
             if (Directory.Exists(migLibFolder))
             {

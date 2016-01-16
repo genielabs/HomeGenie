@@ -8,6 +8,7 @@ using MIG.Config;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using HomeGenie.Automation;
+using HomeGenie.Data;
 
 namespace HomeGenie.Service
 {
@@ -90,6 +91,8 @@ namespace HomeGenie.Service
                             "= Installing: " + program.name.ToString()
                         );
                         int pid = int.Parse(program.uid.ToString());
+                        // by default enable package programs after installing them
+                        var enabled = true;
                         var oldProgram = homegenie.ProgramManager.ProgramGet(pid);
                         if (oldProgram != null)
                         {
@@ -101,12 +104,25 @@ namespace HomeGenie.Service
                                 Properties.InstallProgressMessage,
                                 "= Replacing: '" + oldProgram.Name + "' with pid " + pid
                             );
+                            // if the program was already installed, inherit IsEnabled
+                            enabled = oldProgram.IsEnabled;
                             homegenie.ProgramManager.ProgramRemove(oldProgram);
                         }
                         var programBlock = ProgramImport(pid, programFile, program.group.ToString());
                         if (programBlock != null)
                         {
-                            programBlock.IsEnabled = true;
+                            string groupName = programBlock.Group;
+                            if (!String.IsNullOrWhiteSpace(groupName))
+                            {
+                                // Add automation program group if does not exist
+                                Group newGroup = new Group() { Name = groupName };
+                                if (homegenie.AutomationGroups.Find(g => g.Name == newGroup.Name) == null)
+                                {
+                                    homegenie.AutomationGroups.Add(newGroup);
+                                    homegenie.UpdateGroupsDatabase("Automation");
+                                }
+                            }
+                            programBlock.IsEnabled = enabled;
                             homegenie.RaiseEvent(
                                 Domains.HomeGenie_System,
                                 Domains.HomeGenie_PackageInstaller,
@@ -220,15 +236,9 @@ namespace HomeGenie.Service
             }
             if (success)
             {
-                // TODO: add package info to the list of installed packages
-                // TODO: this package file must be included in the backup file also
-                // TODO: and the restore process should also download and install
-                // TODO: all packages included in it
                 pkgData.folder_url = pkgFolderUrl;
                 pkgData.install_date = DateTime.UtcNow;
                 AddInstalledPackage(pkgData);
-
-
                 homegenie.RaiseEvent(
                     Domains.HomeGenie_System,
                     Domains.HomeGenie_PackageInstaller,

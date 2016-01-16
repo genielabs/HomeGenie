@@ -76,8 +76,8 @@ namespace HomeGenie.Automation
 
         //private object lockObject = new object();
         private bool isEngineEnabled = false;
-        public const int USERSPACE_PROGRAMS_START = 1000;
-        public const int PACKAGE_PROGRAMS_START = 100000;
+        public static int USERSPACE_PROGRAMS_START = 1000;
+        public static int PACKAGE_PROGRAMS_START = 100000;
 
         public ProgramManager(HomeGenieService hg)
         {
@@ -144,11 +144,15 @@ namespace HomeGenie.Automation
         public int GeneratePid()
         {
             int pid = USERSPACE_PROGRAMS_START;
-            foreach (ProgramBlock program in automationPrograms)
+            var userPrograms = automationPrograms.FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START);
+            foreach (ProgramBlock program in userPrograms)
             {
-                if (pid <= program.Address && pid < ProgramManager.PACKAGE_PROGRAMS_START-1)
+                if (pid == program.Address)
                     pid = program.Address + 1;
+                else
+                    break;
             }
+            // TODO: it should return -1 if all user programs are already allocated
             return pid;
         }
 
