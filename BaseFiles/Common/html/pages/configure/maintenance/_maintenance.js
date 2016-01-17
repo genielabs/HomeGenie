@@ -2,6 +2,7 @@
 
 HG.WebApp.Maintenance = HG.WebApp.Maintenance || {};
 HG.WebApp.Maintenance.PageId = 'page_configure_maintenance';
+HG.WebApp.Maintenance.RestoreProgramList = '';
 
 HG.WebApp.Maintenance.InitializePage = function () {
     var page = $('#'+HG.WebApp.Maintenance.PageId);
@@ -209,13 +210,16 @@ HG.WebApp.Maintenance.InitializePage = function () {
         $('#systemsettings_backuprestores1selectallbtn').bind('click', function () {
             if (HG.WebApp.Maintenance.RestoreProgramList != '') {
                 HG.WebApp.Maintenance.RestoreProgramList = '';
-                $('#systemsettings_backuprestores1plist :checkbox').prop('checked', false).checkboxradio("refresh");
-            }
-            else {
+                $('#systemsettings_backuprestores1plist div').attr('data-checked', 'false')
+                    .find('i').addClass('fa-square-o')
+                    .removeClass('fa-check-square');
+            } else {
                 HG.WebApp.Maintenance.RestoreProgramList = '';
-                $('#systemsettings_backuprestores1plist').find(':checkbox').each(function () {
-                    $(this).prop('checked', true).checkboxradio("refresh");
-                    HG.WebApp.Maintenance.RestoreProgramList += ',' + $(this).prop('value') + ',';
+                $('#systemsettings_backuprestores1plist div').each(function () {
+                    $(this).attr('data-checked', 'true')
+                        .find('i').removeClass('fa-square-o')
+                        .addClass('fa-check-square');
+                    HG.WebApp.Maintenance.RestoreProgramList += ',' + $(this).attr('data-program') + ',';
                 });
             }
         });
@@ -232,20 +236,37 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 if (programs.length == 0) {
                     $('#systemsettings_backuprestores1plist').append("<p>No user's program found in this backup.</p>");
                     $('#systemsettings_backuprestores1selectallbtn').addClass('ui-disabled');
-                }
-                else {
+                } else {
                     for (var p = 0; p < programs.length; p++) {
-                        var pli = '<input onchange="HG.WebApp.Maintenance.RestoreProgramToggle(this)" type="checkbox" value="' + programs[p].Address + '" name="restoreprogram-' + p + '" id="restoreprogram-' + p + '" data-mini="true" /><label for="restoreprogram-' + p + '">' + programs[p].Address + ' ' + programs[p].Name + '</label>';
+                        var pli = $('<div data-checked="false" data-program="' + programs[p].Address + '" style="padding:4px;cursor:pointer"><i class="fa fa-square-o fa-lg" style="width:20px"></i> <span style="font-size:12pt">' + programs[p].Address + ' ' + programs[p].Name + '</label></span>');
+                        pli.on('click', function(){
+                            if ($(this).attr('data-checked') == 'true') {
+                                $(this).find('i').addClass('fa-square-o');
+                                $(this).find('i').removeClass('fa-check-square');
+                                $(this).attr('data-checked', 'false');
+                                HG.WebApp.Maintenance.RestoreProgramList = HG.WebApp.Maintenance.RestoreProgramList.replace(',' + $(this).attr('data-program') + ',', '');
+                            } else {
+                                $(this).find('i').removeClass('fa-square-o');
+                                $(this).find('i').addClass('fa-check-square');
+                                $(this).attr('data-checked', 'true');
+                                HG.WebApp.Maintenance.RestoreProgramList += ',' + $(this).attr('data-program') + ',';
+                            }
+                        });
                         $('#systemsettings_backuprestores1plist').append(pli);
                     }
                     $('#systemsettings_backuprestores1selectallbtn').removeClass('ui-disabled');
                 }
-                $('#systemsettings_backuprestores1plist').trigger('create');
+                $('#systemsettings_backuprestores1plist').scrollTop(0);
+                $('#systemsettings_backuprestores1').find('[data-ui-field=restore_log]').empty();
+                $('#systemsettings_backuprestores1').find('[data-ui-field=restore_log]').hide();
+                $('#systemsettings_backuprestores1').find('[data-ui-field=user-programs]').show();
                 $('#systemsettings_backuprestores1').popup('open');
             });
             $('#systemsettings_backuprestores1confirmbutton').bind('click', function () {
                 $('#systemsettings_backuprestores1cancelbutton').addClass('ui-disabled');
                 $('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
+                $('#systemsettings_backuprestores1').find('[data-ui-field=restore_log]').show();
+                $('#systemsettings_backuprestores1').find('[data-ui-field=user-programs]').hide();
                 $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
                     $.mobile.loading('hide');
@@ -414,20 +435,34 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
                         info.append('<br/><strong>Installed</strong>: '+package.install_date);
                     }
                 });
+                // Automation Programs
+                $.each(package.programs, function(idx, f) {
+                  var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-file-code-o">'+f.description+' ('+f.file+')</a></li>');
+                  list.append(item);
+                });
+                // Widgets
+                $.each(package.widgets, function(idx, f) {
+                  var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-cube">'+f.description+' ('+f.file+')</a></li>');
+                  list.append(item);
+                });
+                // MIG Interfaces
+                $.each(package.interfaces, function(idx, f) {
+                  var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-wrench">'+f.description+' ('+f.file+')</a></li>');
+                  list.append(item);
+                });
             });
             page.find('[data-ui-field=install_package]').show();
         } else if (file.name.toLowerCase().endsWith('.md')) {
             $.get(file.download_url, function(readme) {
-                text.html(markdown.toHTML(readme));
+                text.html(marked(readme));
                 page.find('[data-ui-field=browser_text]').scrollTop(0);
             });
         } else if (file.type == 'file') {
-          var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-file-code-o">'+file.name+'</a></li>');
-          list.append(item);
-          item.on('click', function() {
-            //_this.ListFiles(file.url);
-            //console.log(file);
-          });
+          //var item = $('<li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-file-code-o">'+file.name+'</a></li>');
+          //list.append(item);
+          //item.on('click', function() {
+          //  //console.log(file);
+          //});
         }
       });
       list.listview().listview('refresh');
@@ -436,16 +471,6 @@ HG.WebApp.Maintenance.BrowseRepository = function(path) {
         $.mobile.loading('hide');
       }, 300);
     }); 
-};
-
-HG.WebApp.Maintenance.RestoreProgramList = '';
-HG.WebApp.Maintenance.RestoreProgramToggle = function (el) {
-    if (el.checked) {
-        HG.WebApp.Maintenance.RestoreProgramList += ',' + el.value + ',';
-    }
-    else {
-        HG.WebApp.Maintenance.RestoreProgramList = HG.WebApp.Maintenance.RestoreProgramList.replace(',' + el.value + ',', '');
-    }
 };
 
 HG.WebApp.Maintenance.LoadSettings = function () {

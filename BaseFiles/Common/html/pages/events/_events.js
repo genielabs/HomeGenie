@@ -191,10 +191,13 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
 
         case 'HomeGenie.PackageInstaller':
             var log = $('#systemsettings_browserepo').find('[data-ui-field=install_text]');
+            var restore_log = $('#systemsettings_backuprestores1').find('[data-ui-field=restore_log]');
             if (eventLog.Property == 'InstallProgress.Message') {
                 log.append('* ' + eventLog.Value + '<br/>');
+                restore_log.append('* ' + eventLog.Value + '<br/>');
             } else {
                 log.append('* <strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
+                restore_log.append('* <strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
                 var iconImage = 'images/genie.png';
                 popupdata = {
                     icon: iconImage,
@@ -205,6 +208,15 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
             var height = log.parent()[0].scrollHeight;
             log.parent().scrollTop(height);
+            height = restore_log[0].scrollHeight;
+            restore_log.scrollTop(height);
+            break;
+
+        case 'HomeGenie.BackupRestore':
+            var restore_log = $('#systemsettings_backuprestores1').find('[data-ui-field=restore_log]');
+            restore_log.append('* ' + eventLog.Value + '<br/>');
+            var height = restore_log[0].scrollHeight;
+            restore_log.scrollTop(height);
             break;
 
         case 'HomeAutomation.HomeGenie.Automation':

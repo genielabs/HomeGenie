@@ -35,6 +35,8 @@ namespace HomeGenie.Service.Constants
             = "HomeGenie.System";
         public const string HomeGenie_PackageInstaller
         = "HomeGenie.PackageInstaller";
+        public const string HomeGenie_BackupRestore
+        = "HomeGenie.BackupRestore";
         //
         public const string MigService_Interfaces
             = "MIGService.Interfaces";

@@ -258,6 +258,7 @@
     <Compile Include="Service\Constants\SourceModule.cs" />
     <Compile Include="Automation\ProgramDynamicApi.cs" />
     <Compile Include="Service\PackageManager.cs" />
+    <Compile Include="Service\BackupManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

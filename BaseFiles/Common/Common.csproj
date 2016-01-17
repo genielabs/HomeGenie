@@ -5598,10 +5598,10 @@
     <None Include="html\css\font-awesome\scss\font-awesome.scss">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\markdown.min.js">
+    <None Include="installed_packages.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="installed_packages.json">
+    <None Include="html\js\marked.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

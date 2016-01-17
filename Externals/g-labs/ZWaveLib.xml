@@ -143,6 +143,39 @@
             <summary>
             Initializes a new instance of the <see cref="T:ZWaveLib.NodeCapabilities" /> class.
             </summary></member>
+        <member name="T:ZWaveLib.NodeVersion">
+            <summary>
+            Node software version.
+            </summary></member>
+        <member name="P:ZWaveLib.NodeVersion.LibraryType">
+            <summary>
+            Gets or sets the Z-Wave Library Type.
+            </summary>
+            <value>Z-Wave Library Type.</value></member>
+        <member name="P:ZWaveLib.NodeVersion.ProtocolVersion">
+            <summary>
+            Gets or sets the Z-Wave Protocol Version.
+            </summary>
+            <value>Z-Wave Protocol Version.</value></member>
+        <member name="P:ZWaveLib.NodeVersion.ProtocolSubVersion">
+            <summary>
+            Gets or sets the Z-Wave Protocol Sub Version.
+            </summary>
+            <value>Z-Wave Protocol Sub Version.</value></member>
+        <member name="P:ZWaveLib.NodeVersion.ApplicationVersion">
+            <summary>
+            Gets or sets the Application Version.
+            </summary>
+            <value>Application Version.</value></member>
+        <member name="P:ZWaveLib.NodeVersion.ApplicationSubVersion">
+            <summary>
+            Gets or sets the Application Sub Version.
+            </summary>
+            <value>Application Sub Version.</value></member>
+        <member name="M:ZWaveLib.NodeVersion.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ZWaveLib.NodeVersion" /> class.
+            </summary></member>
         <member name="T:ZWaveLib.NodeCommandClass">
             <summary>
             Node command class.
