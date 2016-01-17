@@ -2223,12 +2223,6 @@
     <None Include="html\pages\control\widgets\configuration.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\camerainput.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2625,306 +2619,6 @@
     <None Include="html\pages\control\widgets\homegenie\generic\images\icons\washingmachine.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\OpenWeatherMap.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\OpenWeatherMap.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Clouds.All.0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Clouds.All.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Clouds.All.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Clouds.All.3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Clouds.All.4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Condition.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Coord.Lat.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Coord.Lon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.High.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Humidity.0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Humidity.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Humidity.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Humidity.3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Humidity.4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Humidity.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Low.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Pressure.0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Pressure.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Main.Pressure.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Rain.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Rain.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Rain.3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Rain.4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Snow.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Snow.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Snow.3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Snow.4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Tendency.0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Tendency.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Tendency.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Widget.Preferences.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Widget.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Wind.Deg.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Wind.Speed.0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Wind.Speed.1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Wind.Speed.2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Wind.Speed.3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Wind.Speed.4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\01d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\01n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\02d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\02n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\03d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\03n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\04d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\04n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\09d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\09n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\10d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\10n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\11d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\11n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\13d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\13n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\50d.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\icons\50n.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+15.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+20.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+25.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+30.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+35.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+40.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+45.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+50.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+55.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+60.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+65.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+70.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+75.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+80.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+85.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+90.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.+95.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-15.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-20.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-25.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-30.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-35.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-40.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-45.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-50.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-55.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-60.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-65.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-70.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-75.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-80.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-85.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-90.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\shaders\Shader.-95.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\locales\de.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\locales\en.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\SolarAltitude.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3154,15 +2848,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\locales\de.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\weather\earthtools\sundata.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="html\pages\control\widgets\weather\earthtools\sundata.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="html\pages\control\widgets\weather\earthtools\images\earthtools.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\control\widgets\weather\wunderground\conditions.html">
@@ -4021,7 +3706,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\locales\fr.json" />
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\locales\fr.json" />
     <None Include="html\pages\control\widgets\homegenie\generic\energymonitor.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4747,15 +4431,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\images\wallpapers\wallpaper_006.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\DaniMail\fibaro\locales\en.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\DaniMail\fibaro\locales\fr.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\DaniMail\fibaro\locales\it.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\ui\widgets\capture.html">
@@ -5552,7 +5227,6 @@
     <Folder Include="lib\" />
     <Folder Include="html\images\icons\" />
     <Folder Include="html\images\wallpapers\" />
-    <Folder Include="html\pages\control\widgets\DaniMail\fibaro\locales\" />
     <Folder Include="lib\ape\" />
     <Folder Include="lib\mig\" />
     <Folder Include="lib\shared\" />
