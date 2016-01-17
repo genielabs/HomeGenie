@@ -13,7 +13,7 @@
     <Modules />
   </Group>
   <Group>
-    <Name>Weather and Enviroment</Name>
+    <Name>Weather and Environment</Name>
     <Modules />
   </Group>
   <Group>
@@ -42,14 +42,6 @@
   </Group>
   <Group>
     <Name>Scheduling</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>Raspberry Pi</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>CubieTruck</Name>
     <Modules />
   </Group>
 </ArrayOfGroup>
