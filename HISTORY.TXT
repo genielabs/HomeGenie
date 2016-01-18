@@ -1,8 +1,9 @@
 ﻿RELEASE HISTORY
 
-16/01/2016 v1.1-beta.513
+18/01/2016 v1.1-beta.513
+    - Added new Program.ApiCall(string apiCommand) helper method
     - Added installed packages and statistics files to backup archive
-    - Fixed bug in Z-Wave MultiCmd command class
+    - Fixed bug in Z-Wave MultiCmd and SensorBinary command class
     - Added Package Browser and Installer to the Maintenance page
     - Fixed occasional "object reference not set" error when compiling/starting a program
     - Added recursion check to scheduler event expressions

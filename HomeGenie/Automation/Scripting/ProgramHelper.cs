@@ -956,6 +956,17 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Invoke an API command and get the result.
+        /// </summary>
+        /// <returns>The API command response.</returns>
+        /// <param name="apiCommand">Any MIG/APP API command withouth the "/api/" prefix.</param>
+        public object ApiCall(string apiCommand)
+        {
+            if (apiCommand.StartsWith("/api/"))
+                apiCommand = apiCommand.Substring(5);
+            return homegenie.InterfaceControl(new MigInterfaceCommand(apiCommand));
+        }
 
 
         // TODO: find a better place for this and deprecate it
