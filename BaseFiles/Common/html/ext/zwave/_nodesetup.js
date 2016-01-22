@@ -66,6 +66,9 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     var manufacturerspec = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.ManufacturerSpecific");
     $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + (manufacturerspec != null ? manufacturerspec.Value : '?'));
     //
+    var nodeVersion = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Version");
+    $('#opt-zwave-version-label').html('NodeVersion = ' + (nodeVersion != null ? nodeVersion.Value : '?'));
+    //
     var nodeinfo = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.NodeInfo");
     if (nodeinfo != null) {
         //
@@ -457,30 +460,34 @@ HG.WebApp.GroupModules.ZWave_MeterReset = function (type) {
 };
 
 HG.WebApp.GroupModules.ZWave_NodeInfoRequest = function (callback) {
+    var zwaveNodeId = $('#configurepage_OptionZWave_id').val();
     $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ? (querying node...)');
-    zwave_ManufacturerSpecificGet($('#configurepage_OptionZWave_id').val(), function (res) {
+    zwave_ManufacturerSpecificGet(zwaveNodeId, function (res) {
         if (res == '') {
             $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ? (operation timeout!)');
             if (callback != null) callback(false);
         }
         else {
             var mspecs = res;
-            $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + mspecs + ' (querying nodeinfo)');
-            zwave_NodeInformationGet($('#configurepage_OptionZWave_id').val(), function (res) {
-                if (res == '') {
-                    $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + mspecs + ' (operation timeout!)');
-                    if (callback != null) callback(false);
-                }
-                else {
-                    var nodeid = $('#configurepage_OptionZWave_id').val();
-                    //TODO: find a better way of refreshing options data
-                    HG.Configure.Modules.List(function (data) {
-                        HG.WebApp.Data.Modules = eval(data);
-                        HG.WebApp.GroupModules.ShowModuleOptions("HomeAutomation.ZWave", nodeid);
-                    });
-                    //
-                    if (callback != null) callback(true);
-                }
+            zwave_VersionReport(zwaveNodeId, function(result){
+                var nodeVersion = result;
+                $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + mspecs + ' (querying nodeinfo)');
+                $('#opt-zwave-versionreport-label').html('SW Version: ' + nodeVersion);
+                zwave_NodeInformationGet(zwaveNodeId, function (res) {
+                    if (res == '') {
+                        $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + mspecs + ' (operation timeout!)');
+                        if (callback != null) callback(false);
+                    }
+                    else {
+                        //TODO: find a better way of refreshing options data
+                        HG.Configure.Modules.List(function (data) {
+                            HG.WebApp.Data.Modules = eval(data);
+                            HG.WebApp.GroupModules.ShowModuleOptions("HomeAutomation.ZWave", zwaveNodeId);
+                        });
+                        //
+                        if (callback != null) callback(true);
+                    }
+                });
             });
         }
     });
@@ -677,6 +684,14 @@ function zwave_NodeRemove(callback) {
 
 function zwave_ManufacturerSpecificGet(nodeid, callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/ManufacturerSpecific.Get/', function (data) {
+        if (typeof callback != 'undefined' && callback != null) {
+            callback(data.ResponseValue);
+        }
+    });
+}
+
+function zwave_VersionReport(nodeid, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Version.Report/', function (data) {
         if (typeof callback != 'undefined' && callback != null) {
             callback(data.ResponseValue);
         }
