@@ -126,6 +126,16 @@ div[data-ui-field="wallpaper"] {
 }
 
 
+#systemsettings_browserepo div[data-ui-field="description_text"] pre {
+    margin-left:8px;
+    border-left:solid 2px gray;
+    padding-left:8px;
+}
+
+#systemsettings_browserepo h4 {
+    font-weight: bold;
+}
+
 
 /* General purpose */
 

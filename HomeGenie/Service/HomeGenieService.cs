@@ -60,6 +60,7 @@ namespace HomeGenie.Service
         private ProgramManager masterControlProgram;
         private VirtualMeter virtualMeter;
         private UpdateChecker updateChecker;
+        private BackupManager backupManager;
         private PackageManager packageManager;
         private StatisticsLogger statisticsLogger;
         // Internal data structures
@@ -95,6 +96,7 @@ namespace HomeGenie.Service
             InitializeSystem();
             Reload();
 
+            backupManager = new BackupManager(this);
             packageManager = new PackageManager(this);
             updateChecker = new UpdateChecker(this);
             updateChecker.ArchiveDownloadUpdate += (object sender, ArchiveDownloadEventArgs args) =>
@@ -282,6 +284,11 @@ namespace HomeGenie.Service
         public UpdateChecker UpdateChecker
         {
             get { return updateChecker; }
+        }
+        // Reference to BackupManager
+        public BackupManager BackupManager
+        {
+            get { return backupManager; }
         }
         // Reference to PackageManager
         public PackageManager PackageManager
@@ -561,6 +568,7 @@ namespace HomeGenie.Service
                     LogError(ex);
                 }
                 // Prevent event pump from blocking on other worker tasks
+                if (masterControlProgram != null)
                 Utility.RunAsyncTask(() =>
                 {
                     masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
@@ -1033,36 +1041,16 @@ namespace HomeGenie.Service
 
         public void RestoreFactorySettings()
         {
-            string archiveName = "homegenie_factory_config.zip";
-            //
+            // Stop program engine
             try
             {
                 masterControlProgram.Enabled = false;
-                // delete old programs assemblies
-                foreach (var program in masterControlProgram.Programs)
-                {
-                    program.Engine.SetHost(this);
-                }
                 masterControlProgram = null;
-            }
-            catch
-            {
-            }
-            //
-            Utility.UncompressZip(archiveName, AppDomain.CurrentDomain.BaseDirectory);
-            //
+            } catch { }
+            // Uncompress factory settings and restart HG service
+            Utility.UncompressZip("homegenie_factory_config.zip", AppDomain.CurrentDomain.BaseDirectory);
             Reload();
-            //
             SaveData();
-        }
-
-        public void BackupCurrentSettings()
-        {
-            UpdateProgramsDatabase();
-            UpdateGroupsDatabase("Automation");
-            UpdateGroupsDatabase("Control");
-            SaveData();
-            ArchiveConfiguration("html/homegenie_backup_config.zip");
         }
 
         #endregion Initialization and Data Storage
@@ -1540,58 +1528,6 @@ namespace HomeGenie.Service
             }
             // Force re-generation of Modules list
             modules_RefreshAll();
-        }
-
-        private void ArchiveConfiguration(string archiveName)
-        {
-            if (File.Exists(archiveName))
-            {
-                File.Delete(archiveName);
-            }
-            // Add USERSPACE automation program binaries (csharp)
-            foreach (var program in masterControlProgram.Programs)
-            {
-                if (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
-                {
-                    string relFile = Path.Combine("programs/", program.Address + ".dll");
-                    if (File.Exists(relFile))
-                    {
-                        Utility.AddFileToZip(archiveName, relFile);
-                    }
-                    if (program.Type.ToLower() == "arduino")
-                    {
-                        string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
-                        string[] filePaths = Directory.GetFiles(arduinoFolder);
-                        foreach (string f in filePaths)
-                        {
-                            Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
-                        }
-                    }
-                }
-            }
-            // Add system config files
-            Utility.AddFileToZip(archiveName, "systemconfig.xml");
-            Utility.AddFileToZip(archiveName, "automationgroups.xml");
-            Utility.AddFileToZip(archiveName, "modules.xml");
-            Utility.AddFileToZip(archiveName, "programs.xml");
-            Utility.AddFileToZip(archiveName, "scheduler.xml");
-            Utility.AddFileToZip(archiveName, "groups.xml");
-            Utility.AddFileToZip(archiveName, "release_info.xml");
-            // Statistics db
-            if (File.Exists(StatisticsLogger.STATISTICS_DB_FILE))
-                Utility.AddFileToZip(archiveName, StatisticsLogger.STATISTICS_DB_FILE);
-            // Installed packages
-            if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
-                Utility.AddFileToZip(archiveName, PackageManager.PACKAGE_LIST_FILE);
-            // Add MIG Interfaces config/data files (lib/mig/*.xml)
-            string migLibFolder = Path.Combine("lib", "mig");
-            if (Directory.Exists(migLibFolder))
-            {
-                foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
-                {
-                    Utility.AddFileToZip(archiveName, f);
-                }
-            }
         }
 
         private void SetupUpnp()

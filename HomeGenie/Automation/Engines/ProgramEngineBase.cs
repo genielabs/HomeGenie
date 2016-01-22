@@ -133,7 +133,8 @@ namespace HomeGenie.Automation.Engines
                 {
                     programThread = null;
                     programBlock.IsRunning = false;
-                    homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Interrupted");
+                    if (homegenie.ProgramManager != null)
+                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Interrupted");
                 }
             });
 

@@ -374,8 +374,8 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestore")
                 {
                     // file uploaded by user
+                    Utility.FolderCleanUp(tempFolderPath);
                     string archivename = Path.Combine(tempFolderPath, "homegenie_restore_config.zip");
-                    Utility.FolderCleanUp(Utility.GetTmpFolder());
                     try
                     {
                         MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archivename);
@@ -416,110 +416,8 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS2")
                 {
-                    // Import automation groups
-                    var serializer = new XmlSerializer(typeof(List<Group>));
-                    var reader = new StreamReader(Path.Combine(tempFolderPath, "automationgroups.xml"));
-                    var automationGroups = (List<Group>)serializer.Deserialize(reader);
-                    reader.Close();
-                    foreach (var automationGroup in automationGroups)
-                    {
-                        if (homegenie.AutomationGroups.Find(g => g.Name == automationGroup.Name) == null)
-                        {
-                            homegenie.AutomationGroups.Add(automationGroup);
-                        }
-                    }
-                    homegenie.UpdateGroupsDatabase("Automation");
-                    // Copy system configuration files
-                    File.Copy(Path.Combine(tempFolderPath, "groups.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"), true);
-                    File.Copy(Path.Combine(tempFolderPath, "modules.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"), true);
-                    File.Copy(Path.Combine(tempFolderPath, "scheduler.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"), true);
-                    // Statistics db
-                    if (File.Exists(Path.Combine(tempFolderPath, StatisticsLogger.STATISTICS_DB_FILE)))
-                        File.Copy(Path.Combine(tempFolderPath, StatisticsLogger.STATISTICS_DB_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, StatisticsLogger.STATISTICS_DB_FILE), true);
-                    // Installed packages
-                    if (File.Exists(Path.Combine(tempFolderPath, PackageManager.PACKAGE_LIST_FILE)))
-                    {
-                        File.Copy(Path.Combine(tempFolderPath, PackageManager.PACKAGE_LIST_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PackageManager.PACKAGE_LIST_FILE), true);
-                        // Restore packages from "installed_packages.json"
-                        string installFolder = Path.Combine(tempFolderPath, "pkg");
-                        List<dynamic> pkgList = homegenie.PackageManager.LoadInstalledPackages();
-                        foreach (var pkg in pkgList)
-                        {
-                            homegenie.PackageManager.InstallPackage(pkg.folder_url.ToString(), installFolder);
-                        }
-                    }
-                    // Update system config
-                    UpdateSystemConfig();
-                    // Copy MIG configuration/data files if present (from folder lib/mig/*.xml)
-                    string migLibFolder = Path.Combine(tempFolderPath, "lib", "mig");
-                    if (Directory.Exists(migLibFolder))
-                    {
-                        foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
-                        {
-                            File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
-                        }
-                    }
-                    // Soft-reload system configuration from newely restored files and save config
-                    homegenie.SoftReload();
-                    // Restore automation programs
-                    string selectedPrograms = migCommand.GetOption(1);
-                    serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                    reader = new StreamReader(Path.Combine(tempFolderPath, "programs.xml"));
-                    var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
-                    reader.Close();
-                    foreach (var program in newProgramsData)
-                    {
-                        var currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
-                        program.IsRunning = false;
-                        // Only restore user space programs
-                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
-                        {
-                            int oldPid = program.Address;
-                            if (currentProgram == null)
-                            {
-                                var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramManager.GeneratePid() : program.Address);
-                                try
-                                {
-                                    File.Copy(Path.Combine(tempFolderPath, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
-                                } catch { }
-                                program.Address = newPid;
-                                homegenie.ProgramManager.ProgramAdd(program);
-                            }
-                            else if (currentProgram != null)
-                            {
-                                homegenie.ProgramManager.ProgramRemove(currentProgram);
-                                try
-                                {
-                                    File.Copy(Path.Combine(tempFolderPath, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
-                                }
-                                catch
-                                {
-                                }
-                                homegenie.ProgramManager.ProgramAdd(program);
-                            }
-                            // Restore Arduino program folder ...
-                            // TODO: this is untested yet...
-                            if (program.Type.ToLower() == "arduino")
-                            {
-                                string sourceFolder = Path.Combine(tempFolderPath, "programs", "arduino", oldPid.ToString());
-                                string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString());
-                                if (Directory.Exists(arduinoFolder))
-                                    Directory.Delete(arduinoFolder, true);
-                                Directory.CreateDirectory(arduinoFolder);
-                                foreach (string newPath in Directory.GetFiles(sourceFolder))
-                                {
-                                    File.Copy(newPath, newPath.Replace(sourceFolder, arduinoFolder), true);
-                                }
-                            }
-                        }
-                        else if (currentProgram != null && (program.Address < ProgramManager.USERSPACE_PROGRAMS_START || program.Address >= ProgramManager.PACKAGE_PROGRAMS_START))
-                        {
-                            // Only restore Enabled/Disabled status of system programs and packages
-                            currentProgram.IsEnabled = program.IsEnabled;
-                        }
-                    }
-                    homegenie.UpdateProgramsDatabase();
-                    homegenie.SaveData();
+                    var success = homegenie.BackupManager.RestoreConfiguration(tempFolderPath, migCommand.GetOption(1));
+                    request.ResponseData = new ResponseText(success ? "OK" : "ERROR");
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationReset")
                 {
@@ -527,7 +425,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationBackup")
                 {
-                    homegenie.BackupCurrentSettings();
+                    homegenie.BackupManager.BackupConfiguration("html/homegenie_backup_config.zip");
                     (request.Context.Data as HttpListenerContext).Response.Redirect("/hg/html/homegenie_backup_config.zip");
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationLoad")
@@ -1231,101 +1129,6 @@ namespace HomeGenie.Service.Handlers
 
             }
         }
-
-        private bool UpdateSystemConfig()
-        {
-            string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
-            string configText = File.ReadAllText(Path.Combine(tempFolderPath, "systemconfig.xml"));
-            if (configText.IndexOf("<ServicePort>") > 0)
-            {
-                configText = configText.Replace("SystemConfiguration", "SystemConfiguration_1_0");
-                configText = configText.Replace("HomeGenieConfiguration", "HomeGenieConfiguration_1_0");
-                // This is old configuration file from HG < 1.1
-                SystemConfiguration_1_0 oldConfig;
-                SystemConfiguration newConfig = new SystemConfiguration();
-                try
-                {
-                    // Load old config
-                    var serializerOld = new XmlSerializer(typeof(SystemConfiguration_1_0));
-                    using (var reader = new StringReader(configText))
-                        oldConfig = (SystemConfiguration_1_0)serializerOld.Deserialize(reader);
-                    // Copy setting to the new config format
-                    newConfig.HomeGenie.Settings = oldConfig.HomeGenie.Settings;
-                    newConfig.HomeGenie.SystemName = oldConfig.HomeGenie.SystemName;
-                    newConfig.HomeGenie.Location = oldConfig.HomeGenie.Location;
-                    newConfig.HomeGenie.GUID = oldConfig.HomeGenie.GUID;
-                    newConfig.HomeGenie.EnableLogFile = oldConfig.HomeGenie.EnableLogFile;
-                    newConfig.HomeGenie.Statistics = new HomeGenieConfiguration.StatisticsConfiguration();
-                    newConfig.HomeGenie.Statistics.MaxDatabaseSizeMBytes = oldConfig.HomeGenie.Statistics.MaxDatabaseSizeMBytes;
-                    newConfig.HomeGenie.Statistics.StatisticsTimeResolutionSeconds = oldConfig.HomeGenie.Statistics.StatisticsTimeResolutionSeconds;
-                    newConfig.HomeGenie.Statistics.StatisticsUIRefreshSeconds = oldConfig.HomeGenie.Statistics.StatisticsUIRefreshSeconds;
-                    var webGateway = new Gateway() { Name = "WebServiceGateway", IsEnabled = true };
-                    webGateway.Options = new List<Option>();
-                    webGateway.Options.Add(new Option("BaseUrl", "/hg/html"));
-                    webGateway.Options.Add(new Option("HomePath", "html"));
-                    webGateway.Options.Add(new Option("Host", oldConfig.HomeGenie.ServiceHost));
-                    webGateway.Options.Add(new Option("Port", oldConfig.HomeGenie.ServicePort.ToString()));
-                    webGateway.Options.Add(new Option("Username", "admin"));
-                    webGateway.Options.Add(new Option("Password", oldConfig.HomeGenie.UserPassword));
-                    webGateway.Options.Add(new Option("HttpCacheIgnore.1", "^.*\\/pages\\/control\\/widgets\\/.*\\.(js|html)$"));
-                    webGateway.Options.Add(new Option("HttpCacheIgnore.2", "^.*\\/html\\/index.html"));
-                    webGateway.Options.Add(new Option("UrlAlias.1", "api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events"));
-                    webGateway.Options.Add(new Option("UrlAlias.2", "hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png"));
-                    webGateway.Options.Add(new Option("UrlAlias.3", "hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png"));
-                    webGateway.Options.Add(new Option("UrlAlias.4", "hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png"));
-                    // TODO: EnableFileCaching value should be read from oldConfig.MIGService.EnableWebCache
-                    webGateway.Options.Add(new Option("EnableFileCaching", "false"));
-                    newConfig.MigService.Gateways.Add(webGateway);
-                    newConfig.MigService.Interfaces = oldConfig.MIGService.Interfaces;
-                    foreach(var iface in newConfig.MigService.Interfaces)
-                    {
-                        if (iface.Domain == "HomeAutomation.ZWave")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "HomeAutomation.Insteon")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "HomeAutomation.X10")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "HomeAutomation.W800RF")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "Controllers.LircRemote")
-                            iface.AssemblyName = "MIG.Controllers.dll";
-                        if (iface.Domain == "Media.CameraInput")
-                            iface.AssemblyName = "MIG.Media.dll";
-                        if (iface.Domain == "Protocols.UPnP")
-                            iface.AssemblyName = "MIG.Protocols.dll";
-                    }
-                    // Check for lircconfig.xml
-                    if (File.Exists(Path.Combine(tempFolderPath, "lircconfig.xml")))
-                    {
-                        File.Copy(Path.Combine(tempFolderPath, "lircconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", "lircconfig.xml"), true);
-                    }
-                    // Update configuration file
-                    if (File.Exists(configFile))
-                    {
-                        File.Delete(configFile);
-                    }
-                    System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
-                    ws.Indent = true;
-                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(newConfig.GetType());
-                    System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(configFile, ws);
-                    x.Serialize(wri, newConfig);
-                    wri.Close();
-                }
-                catch (Exception e)
-                {
-                    MigService.Log.Error(e);
-                    return false;
-                }
-            }
-            else
-            {
-                // HG >= 1.1
-                File.Copy(Path.Combine(tempFolderPath, "systemconfig.xml"), configFile, true);
-            }
-            return true;
-        }
-
-        // TODO: move all the following methods into a static utility class
 
     }
 }

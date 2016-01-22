@@ -31,10 +31,6 @@ HG.WebApp.GroupModules.InitializePage = function () {
             HG.WebApp.GroupModules.DeleteGroup(HG.WebApp.GroupModules.CurrentGroup);
         });
         //
-        $('#module_options_button').on('click', function (event) {
-            HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
-        });
-        //
         $('#btn_configure_group_deletegroup').on('click', function (event) {
             HG.WebApp.Utility.SwitchPopup('#listmodules_actionmenu', '#automation_group_delete');
         });

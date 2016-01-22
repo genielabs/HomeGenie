@@ -162,6 +162,9 @@ HG.WebApp.InitializePage = function ()
     };
     // Global Popups
     $( "#automation_group_module_edit" ).enhanceWithin().popup();
+    $('#module_options_button').on('click', function (event) {
+        HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
+    });
     $('#module_update_button').bind('click', function (event) {
         HG.WebApp.GroupModules.CurrentModule.Name = HG.WebApp.GroupModules.EditModule.Name;
         HG.WebApp.GroupModules.CurrentModule.DeviceType = HG.WebApp.GroupModules.EditModule.DeviceType;
