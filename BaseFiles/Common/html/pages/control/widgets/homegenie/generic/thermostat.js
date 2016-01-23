@@ -227,7 +227,7 @@
         else {
             widget.find('[data-ui-field=heat_field]').show();
             var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
-            widget.find('[data-ui-field=heatset_value]').html(temperature.toFixed(1) + '&deg;');
+            widget.find('[data-ui-field=heatset_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
         }
 
 
@@ -240,7 +240,7 @@
         else {
             widget.find('[data-ui-field=cool_field]').show();
             var temperature = Math.round(coolTo.Value.replace(',', '.') * 100) / 100;
-            widget.find('[data-ui-field=coolset_value]').html(temperature.toFixed(1) + '&deg;');
+            widget.find('[data-ui-field=coolset_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
         }
         // enable/disable Cool Set Point feature (not every thermostat support it)
         if (coolTo == null) {

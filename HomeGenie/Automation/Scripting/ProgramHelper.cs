@@ -981,8 +981,6 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper Reset()
         {
-            //this.parameter = "";
-            //this.value = "";
             this.initialized = false;
             // no control widget --> not visible
             this.UseWidget(""); 

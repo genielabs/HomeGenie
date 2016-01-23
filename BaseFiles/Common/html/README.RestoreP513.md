@@ -12,6 +12,13 @@ Internet connection is required when extra packages are present in the backup fi
 
 ## List of packages moved to the Package Repository
 
+### MIG Interfaces
+
+- W800RF32 X10 RF Receiver
+- Insteon PLM
+- LIRC Infrared Control
+- V4L Camera
+
 ### Devices and Things
 
 - X10 FireCracker modules

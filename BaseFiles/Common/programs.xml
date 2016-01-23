@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.764558Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.300514Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.63213Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.114183Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -276,17 +276,16 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// list the program as custom weather widget
-Program.UseWidget( "weather/wunderground/conditions" );
-// set input fields parameters
-// &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-Program.AddOption("Location", "autoip", "City name", "text");
-Program.AddOption("Language", "EN", "Language", "text");
-Program.AddOption("ApiKey", "?", "Weather Underground Key", "text");
-Program.AddOption("UpdateInterval", "30", "Update interval (minutes)", "text");
-
-// 2014-01-22 - Added to allow the user to dynamically select how to display the temperature. by lancebooth 
-Program.AddOption("InputDisplayCelsius", "TRUE", "Display Temperature in degrees Celsius - TRUE or FALSE", "text");
+    <ScriptCondition>Program.Setup(()=&gt;{
+  // list the program as custom weather widget
+  Program.UseWidget( "weather/wunderground/conditions" );
+  // set input fields parameters
+  // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+  Program.AddOption("Location", "autoip", "City name", "text");
+  Program.AddOption("Language", "EN", "Language", "text");
+  Program.AddOption("ApiKey", "?", "Weather Underground Key", "text");
+  Program.AddOption("UpdateInterval", "30", "Update interval (minutes)", "text");
+});
 
 // initialize widget program parameters
 Program.Parameter("Astronomy.Sunset").Value = "";
@@ -311,10 +310,6 @@ while (Program.IsEnabled)
   string language = Program.Option("Language").Value;
   string apikey = Program.Option("ApiKey").Value;
 
-  // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature. by lancebooth
-  string display_celsius = Program.Option("InputDisplayCelsius").Value;
-
-  //
   if (!apikey.Contains("?"))
   {
     try
@@ -388,9 +383,6 @@ while (Program.IsEnabled)
       // 2014-01-22 - Added to allow the widget to display the date/time.
       Program.Parameter("Conditions.LastUpdated").Value = last_updated;
 
-      // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
-      Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
-
       // 2015-01-30 - Added forecast of next 3 days
       webserviceurl = "http://api.wunderground.com/api/" + apikey + "/forecast/lang:" + language + "/q/" + location + ".json";
       var forecastData = Net.WebService(webserviceurl).GetData().forecast.simpleforecast.forecastday;
@@ -449,8 +441,8 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Environment</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.414946Z</TriggerTime>
+    <ActivationTime>2016-01-22T17:33:08.183785Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -522,7 +514,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.672686Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.223985Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -744,7 +736,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.430126Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.384178Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -791,7 +783,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.748669Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.142987Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1140,7 +1132,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.782594Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.400181Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1270,7 +1262,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.446535Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.234414Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1369,7 +1361,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.72472Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.136817Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1627,7 +1619,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.801459Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.162466Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1776,7 +1768,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.606055Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.332019Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2026,7 +2018,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.431292Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.155183Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3556,7 +3548,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.609901Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.184582Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3657,7 +3649,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.693483Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.339691Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3786,7 +3778,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-17T22:49:37.461465Z</TriggerTime>
+    <TriggerTime>2016-01-22T17:32:08.190372Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

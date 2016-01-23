@@ -1,6 +1,9 @@
 ﻿RELEASE HISTORY
 
-18/01/2016 v1.1-beta.513
+21/01/2016 v1.1-beta.514
+    - Moved LIRC, Insteon, W800RF32, V4LCamera interfaces to package repository
+    - Fix C# automation program compile error on mono ARM platforms with locale settings using comma separator for decimals
+    - Fix package install error on mono ARM &lt; 4.0.4
     - Added new Program.ApiCall(string apiCommand) helper method
     - Added installed packages and statistics files to backup archive
     - Fixed bug in Z-Wave MultiCmd and SensorBinary command class

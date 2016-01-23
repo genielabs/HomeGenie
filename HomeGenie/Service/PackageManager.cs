@@ -1,14 +1,41 @@
-﻿using System;
+﻿/*
+    This file is part of HomeGenie Project source code.
+
+    HomeGenie is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    HomeGenie is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+*/
+
+/*
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
+
+using System;
 using System.IO;
-using HomeGenie.Service.Constants;
 using System.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using MIG.Config;
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+
 using HomeGenie.Automation;
 using HomeGenie.Data;
+using HomeGenie.Service.Constants;
+
+using MIG.Config;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HomeGenie.Service
 {
@@ -19,6 +46,21 @@ namespace HomeGenie.Service
 
         public const string PACKAGE_LIST_FILE = "installed_packages.json";
 
+        // TODO: TO BE REMOVED
+        // TODO: DUMMY SSL validation!! This must be removed as it could be intrduce security flaws
+        // TODO: SSL connection certificate validation:
+        // TODO: this is just an hack to fix certificate issues on mono < 4.0,
+        // TODO: not meant to be used in production enviroment
+        public static bool Validator(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
+        {
+            return true;
+        }
+
         public PackageManager(HomeGenieService hg)
         {
             homegenie = hg;
@@ -27,6 +69,13 @@ namespace HomeGenie.Service
 
         public bool InstallPackage(string pkgFolderUrl, string tempFolderPath)
         {
+            // TODO: TO BE REMOVED
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                // TODO: this is just an hack to fix certificate issues on mono < 4.0,
+                ServicePointManager.ServerCertificateValidationCallback = Validator;
+            }
+
             string installFolder = Path.Combine(tempFolderPath, "pkg");
             dynamic pkgData = null;
             bool success = true;
@@ -46,8 +95,16 @@ namespace HomeGenie.Service
                     string pkgJson = "[" + client.DownloadString(pkgFolderUrl + "/package.json") + "]";
                     pkgData = (JsonConvert.DeserializeObject(pkgJson) as JArray)[0];
                 }
-                catch
+                catch (Exception e)
                 {
+                    homegenie.RaiseEvent(
+                        Domains.HomeGenie_System,
+                        Domains.HomeGenie_PackageInstaller,
+                        SourceModule.Master,
+                        "HomeGenie Package Installer",
+                        Properties.InstallProgressMessage,
+                        "= ERROR: '" + e.Message + "'"
+                    );
                     success = false;
                 }
                 client.Dispose();
@@ -76,8 +133,16 @@ namespace HomeGenie.Service
                         {
                             client.DownloadFile(pkgFolderUrl + "/" + program.file.ToString(), programFile);
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            homegenie.RaiseEvent(
+                                Domains.HomeGenie_System,
+                                Domains.HomeGenie_PackageInstaller,
+                                SourceModule.Master,
+                                "HomeGenie Package Installer",
+                                Properties.InstallProgressMessage,
+                                "= ERROR: '" + e.Message + "'"
+                            );
                             success = false;
                         }
                         client.Dispose();
@@ -162,8 +227,16 @@ namespace HomeGenie.Service
                         {
                             client.DownloadFile(pkgFolderUrl + "/" + widget.file.ToString(), widgetFile);
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            homegenie.RaiseEvent(
+                                Domains.HomeGenie_System,
+                                Domains.HomeGenie_PackageInstaller,
+                                SourceModule.Master,
+                                "HomeGenie Package Installer",
+                                Properties.InstallProgressMessage,
+                                "= ERROR: '" + e.Message + "'"
+                            );
                             success = false;
                         }
                         client.Dispose();
@@ -208,8 +281,16 @@ namespace HomeGenie.Service
                             Utility.UncompressZip(migfaceFile, installFolder);
                             File.Delete(migfaceFile);
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            homegenie.RaiseEvent(
+                                Domains.HomeGenie_System,
+                                Domains.HomeGenie_PackageInstaller,
+                                SourceModule.Master,
+                                "HomeGenie Package Installer",
+                                Properties.InstallProgressMessage,
+                                "= ERROR: '" + e.Message + "'"
+                            );
                             success = false;
                         }
                         client.Dispose();
@@ -261,6 +342,14 @@ namespace HomeGenie.Service
                     "= Status: Package Install Error"
                 );
             }
+
+            // TODO: TO BE REMOVED
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                // TODO: this is just an hack to fix certificate issues on mono < 4.0,
+                ServicePointManager.ServerCertificateValidationCallback = null;
+            }
+
             return success;
         }
 
@@ -424,6 +513,9 @@ namespace HomeGenie.Service
             {
                 File.Delete(configFile);
                 //
+                // TODO: !IMPORTANT!
+                // TODO: since AppDomains are not implemented in MIG, a RESTART is required to load the new Assembly
+                // TODO: HG should ask for RESTART in the UI
                 homegenie.MigService.RemoveInterface(iface.Domain);
                 //
                 string configletName = iface.Domain.Substring(iface.Domain.LastIndexOf(".") + 1).ToLower();
