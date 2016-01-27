@@ -3568,7 +3568,6 @@ Program.Run();
 //
 // Allows adding conditional IR code for Lights, Switches and Dimmers.
 // Also let you dim last light using Up/Down button which you can define in configuration
-// Skip Command IR code is designed for disabling the next command and it is useful in case you just want to change the dimmer value.
 // 
 
 var dimmerInterval = Program.Option("DimmerInterval");
@@ -3629,8 +3628,7 @@ Program.GoBackground();</ScriptSource>
     <Name>IR Remote Controller</Name>
     <Description>Control module using an IR remote.
 When you press the assigned remote button, it will toggle the module on/off.
-Also it lets you dim last addressed module using Up/Down button which can be defined through program's configuration options.
-"Skip Command IR code" option is designed for disabling the next command and it's useful when you just want to change the dimmer value.</Description>
+Also it lets you dim last addressed module using Up/Down button which can be defined through program's configuration options.</Description>
     <Group>Lights</Group>
     <Features>
       <ProgramFeature>

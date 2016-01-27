@@ -83,7 +83,11 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "release_info.xml");
             // Statistics db
             if (File.Exists(StatisticsLogger.STATISTICS_DB_FILE))
+            {
+                homegenie.Statistics.CloseStatisticsDatabase();
                 Utility.AddFileToZip(archiveName, StatisticsLogger.STATISTICS_DB_FILE);
+                homegenie.Statistics.OpenStatisticsDatabase();
+            }
             // Installed packages
             if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
                 Utility.AddFileToZip(archiveName, PackageManager.PACKAGE_LIST_FILE);

@@ -93,21 +93,6 @@ namespace HomeGenie
             Quit(false);
         }
 
-        private static void ShellCommand(string command, string args)
-        {
-            try
-            {
-                var processInfo = new ProcessStartInfo(command, args);
-                processInfo.RedirectStandardOutput = false;
-                processInfo.UseShellExecute = false;
-                processInfo.CreateNoWindow = true;
-                var process = new Process();
-                process.StartInfo = processInfo;
-                process.Start();
-            }
-            catch { }
-        }
-
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) 
         {
             var logEntry = new MigEvent(

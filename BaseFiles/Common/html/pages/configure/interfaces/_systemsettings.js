@@ -5,7 +5,7 @@ HG.WebApp.SystemSettings.Interfaces = HG.WebApp.SystemSettings.Interfaces || {};
 HG.WebApp.SystemSettings.InitializePage = function () {
     var page = $('#'+HG.WebApp.SystemSettings.PageId);
     var importPopup = page.find('[data-ui-field=import-popup]');
-    var importButton = page.find('[data-ui-field=interface_import]');
+    var importButton = page.find('[data-ui-field=interface_install]');
     var importForm = page.find('[data-ui-field=import-form]');
     var downloadButton = page.find('[data-ui-field=download-btn]');
     var downloadUrl = page.find('[data-ui-field=download-url]');
@@ -24,7 +24,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         });
     });
     page.on('pageshow', function (e) {
-        page.find('[data-ui-field=package_install]').qtip({
+        page.find('[data-locale-id=configure_program_bbaractions]').qtip({
             content: {
                 text: HG.WebApp.Locales.GetLocaleString('configure_system_installtip_description', 'Go to the Package Manager to install additional features.'),
             },
@@ -43,7 +43,9 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         importButton.removeClass('ui-btn-active');
     });
     importButton.on('click', function() {
-        importPopup.popup('open');
+        setTimeout(function(){
+            importPopup.popup('open');
+        }, 500);
     });
     downloadButton.on('click', function() {
         if (downloadUrl.val() == '') {

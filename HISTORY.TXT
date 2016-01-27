@@ -1,6 +1,6 @@
 ﻿RELEASE HISTORY
 
-21/01/2016 v1.1-beta.514
+22/01/2016 v1.1-beta.514
     - Moved LIRC, Insteon, W800RF32, V4LCamera interfaces to package repository
     - Fix C# automation program compile error on mono ARM platforms with locale settings using comma separator for decimals
     - Fix package install error on mono ARM &lt; 4.0.4

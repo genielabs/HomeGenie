@@ -1,571 +1,571 @@
 {
-    "home_menu_title": 
+    "home_menu_title":
         "Inicio",
-    "home_menu_control": 
+    "home_menu_control":
         "Controlar",
-    "home_menu_analyze": 
+    "home_menu_analyze":
         "Analizar",
-    "home_menu_configure": 
+    "home_menu_configure":
         "Configurar",
-    "homegenie_about_title": 
+    "homegenie_about_title":
         "Acerca de...",
-    "control_groups_and_modules": 
+    "control_groups_and_modules":
         "Controlar<br>grupos y módulos",
-    "bottombar_button_home": 
+    "bottombar_button_home":
         "Inicio",
-    "configure_program_bbaractions": 
+    "configure_program_bbaractions":
         "Acciones",
-    "control_macrorecord_discard": 
+    "control_macrorecord_discard":
         "Descartar",
-    "control_macrorecord_save": 
+    "control_macrorecord_save":
         "Guardar",
-    "analyze_statistics": 
+    "analyze_statistics":
         "Analizar<br>estadísticas",
-    "analyze_total_watts_hourly": 
+    "analyze_total_watts_hourly":
         "Consumo total por franja horaria",
-    "analyze_load_peak_last": 
+    "analyze_load_peak_last":
         "Picos de consumo de las últimas cuatro horas",
-    "configure_menu_title": 
+    "configure_menu_title":
         "Configurar",
-    "configure_menu_heading": 
+    "configure_menu_heading":
         "Menú de configuración",
-    "configure_groups_heading": 
+    "configure_groups_heading":
         "Grupos<br>y módulos",
-    "configure_menu_groups_modules": 
+    "configure_menu_groups_modules":
         "Grupos y módulos",
-    "configure_menu_automation": 
+    "configure_menu_automation":
         "Automatización y programas",
-    "configure_menu_system": 
+    "configure_menu_system":
         "Preferencias",
-    "configure_menu_maintenance": 
+    "configure_menu_maintenance":
         "Mantenimiento y actualización",
-    "configure_automation_heading": 
+    "configure_automation_heading":
         "<font style='color:gray'>Programa</font><br>Grupos",
-    "configure_group_newgroup": 
+    "configure_group_newgroup":
         "Nuevo grupo",
-    "configure_group_entergroupname": 
+    "configure_group_entergroupname":
         "Añadir un nuevo grupo:",
-    "configure_group_newgroupcancel": 
+    "configure_group_newgroupcancel":
         "Cancelar",
-    "bottombar_button_back": 
+    "bottombar_button_back":
         "Volver",
-    "configure_group_bottombar_group_add": 
+    "configure_group_bottombar_group_add":
         "Añadir grupo",
-    "configure_group_group": 
+    "configure_group_group":
         "Grupo",
-    "configure_group_groupname": 
+    "configure_group_groupname":
         "Nombre",
     "configure_group_groupwallpaper":
         "Fondo de pantalla",
     "configure_group_modulelist":
         "Listado de módulos",
-    "configure_group_deletegroup": 
+    "configure_group_deletegroup":
         "¿Eliminar grupo?",
-    "configure_group_deleteprompt": 
+    "configure_group_deleteprompt":
         "¿Estás seguro de querer eliminar este grupo?",
-    "configure_group_deletewarning": 
+    "configure_group_deletewarning":
         "Esta acción es irreversible.",
-    "configure_group_deletecancel": 
+    "configure_group_deletecancel":
         "Cancelar",
-    "configure_group_deleteconfirm": 
+    "configure_group_deleteconfirm":
         "Eliminar",
-    "configure_module_newmoduleadd": 
+    "configure_module_newmoduleadd":
         "Añadir nuevo módulo",
-    "configure_module_newmodulecancel": 
+    "configure_module_newmodulecancel":
         "Cancelar",
-    "configure_module_newmoduleconfirm": 
+    "configure_module_newmoduleconfirm":
         "Añadir",
-    "configure_module_propname": 
+    "configure_module_propname":
         "Nombre",
-    "configure_module_typelight": 
+    "configure_module_typelight":
         "Iluminación",
-    "configure_module_typedimmer": 
+    "configure_module_typedimmer":
         "Variación",
-    "configure_module_typeswitch": 
+    "configure_module_typeswitch":
         "Enchufe",
-    "configure_module_typesensor": 
+    "configure_module_typesensor":
         "Detector de Movimiento",
-    "configure_module_typetemperature": 
+    "configure_module_typetemperature":
         "Cond. ambientales (°C) (% H) (Lux)",
-    "configure_module_typesiren": 
+    "configure_module_typesiren":
         "Alarma",
-    "configure_module_typefan": 
+    "configure_module_typefan":
         "Ventilador",
-    "configure_module_typethermostat": 
+    "configure_module_typethermostat":
         "Termostato",
-    "configure_module_typeshutter": 
+    "configure_module_typeshutter":
         "Persiana",
-    "configure_module_typedoorwindow": 
+    "configure_module_typedoorwindow":
         "Puerta/ventana",
-    "configure_module_options": 
+    "configure_module_options":
         "Configurar",
-    "configure_module_optupdate": 
+    "configure_module_optupdate":
         "Módulo de actualización",
-    "configure_module_optremove": 
+    "configure_module_optremove":
         "Eliminar del grupo",
-    "configure_group_bottombar_deletemodule": 
+    "configure_group_bottombar_deletemodule":
         "Eliminar grupo",
-    "configure_group_bottombar_addmodule": 
+    "configure_group_bottombar_addmodule":
         "Añadir módulo",
-    "configure_program_automationtitle": 
+    "configure_program_automationtitle":
         "Listado de programas",
-    "configure_program_newprogram": 
+    "configure_program_newprogram":
         "Nuevo escenario",
-    "configure_program_enterprogramname": 
+    "configure_program_enterprogramname":
         "Nombre del nuevo escenario:",
-    "configure_program_newprogramcancel": 
+    "configure_program_newprogramcancel":
         "Cancelar",
-    "configure_program_newprogramconfirm": 
+    "configure_program_newprogramconfirm":
         "Aceptar",
-    "configure_program_deletetitle": 
+    "configure_program_deletetitle":
         "¿Eliminar este escenario?",
-    "configure_program_deleteprompt": 
+    "configure_program_deleteprompt":
         "¿Estás seguro de querer eliminar este escenario?",
-    "configure_program_deleteadvice": 
+    "configure_program_deleteadvice":
         "Esta acción es irreversible.",
-    "configure_program_deletecancel": 
+    "configure_program_deletecancel":
         "Cancelar",
-    "configure_program_deleteconfirm": 
+    "configure_program_deleteconfirm":
         "Eliminar",
-    "configure_program_options": 
+    "configure_program_options":
         "Opciones",
-    "configure_program_options_edit": 
+    "configure_program_options_edit":
         "Editar",
-    "configure_program_options_export": 
+    "configure_program_options_export":
         "Exportar",
-    "configure_program_options_delete": 
+    "configure_program_options_delete":
         "Eliminar",
-    "configure_program_programgroup": 
+    "configure_program_programgroup":
         "Grupo de programa",
-    "configure_program_programname": 
+    "configure_program_programname":
         "Nombre de programa",
-    "configure_program_programdescription": 
+    "configure_program_programdescription":
         "Descripción del programa",
-    "configure_program_programtype": 
+    "configure_program_programtype":
         "Tipo de programa",
-    "configure_program_trigger": 
+    "configure_program_trigger":
         "Disparador de programa",
-    "configure_program_conditionswitchestrue": 
+    "configure_program_conditionswitchestrue":
         "Si las condiciones son verdaderas'",
-    "configure_program_conditionswitchesfalse": 
+    "configure_program_conditionswitchesfalse":
         "Si las condiciones son falsas'",
-    "configure_program_runonceconditiontrue": 
+    "configure_program_runonceconditiontrue":
         "Ejecutar, una vez que las condiciones sean verdaderas'",
-    "configure_program_conditionistrue": 
+    "configure_program_conditionistrue":
         "Tiempo que las condiciones son verdaderas'",
-    "configure_program_conditionisfalse": 
+    "configure_program_conditionisfalse":
         "Tiempo que las condiciones son falsas'",
-    "configure_program_programconditions": 
+    "configure_program_programconditions":
         "Condiciones",
-    "configure_program_conditionadd": 
+    "configure_program_conditionadd":
         "Añadir una condición",
-    "configure_program_selectconditioncontext": 
+    "configure_program_selectconditioncontext":
         "Seleccionar el tipo de condición",
-    "configure_program_wizardback": 
+    "configure_program_wizardback":
         "Volver",
-    "configure_program_selectoperator": 
+    "configure_program_selectoperator":
         "Seleccionar un tipo de comparación",
-    "configure_program_operatorless": 
+    "configure_program_operatorless":
         "Menos que",
-    "configure_program_operatorequal": 
+    "configure_program_operatorequal":
         "Igual",
-    "configure_program_operatorgreaterthan": 
+    "configure_program_operatorgreaterthan":
         "Mayor que",
-    "configure_program_selectvalue": 
+    "configure_program_selectvalue":
         "Seleccionar un valor de comparación",
-    "configure_program_wizarddone": 
+    "configure_program_wizarddone":
         "Finalizado",
-    "configure_program_deleteconditiontitle": 
+    "configure_program_deleteconditiontitle":
         "¿Eliminar condición?",
-    "configure_program_deleteconditionprompt": 
+    "configure_program_deleteconditionprompt":
         "¿Estás seguro de querer eliminar esta condición?",
-    "configure_program_deleteconditionadvice": 
+    "configure_program_deleteconditionadvice":
         "Esta acción es irreversible.",
-    "configure_program_instructions": 
+    "configure_program_instructions":
         "Comandos",
-    "configure_program_instructionadd": 
+    "configure_program_instructionadd":
         "Añadir un comando",
-    "configure_program_selectcommandcontext": 
+    "configure_program_selectcommandcontext":
         "Seleccionar el tipo de comando",
-    "configure_program_commandarguments": 
+    "configure_program_commandarguments":
         "Parámetros del comando",
-    "configure_program_deleteinstructiontitle": 
+    "configure_program_deleteinstructiontitle":
         "¿Eliminar el comando?",
-    "configure_program_deleteinstructionprompt": 
+    "configure_program_deleteinstructionprompt":
         "¿Estás seguro de querer eliminar este comando?",
-    "configure_program_csharpprogram": 
+    "configure_program_csharpprogram":
         "Programa C#",
-    "configure_program_savingtitle": 
+    "configure_program_savingtitle":
         "Guardar programa",
-    "configure_program_savingwait": 
+    "configure_program_savingwait":
         "Por favor, espere...",
-    "configure_program_switchtypetitle": 
+    "configure_program_switchtypetitle":
         "¿Cambiar tipo?",
-    "configure_program_switchtypeprompt": 
+    "configure_program_switchtypeprompt":
         "¿Estás seguro de querer cambiar el tipo de programa?",
-    "configure_program_switchtypeadvice": 
+    "configure_program_switchtypeadvice":
         "Los datos del programa actual se borrarán.",
-    "configure_program_switchtypecancel": 
+    "configure_program_switchtypecancel":
         "Cancelar",
-    "configure_program_switchtypeconfirm": 
+    "configure_program_switchtypeconfirm":
         "Cambiar",
-    "configure_program_options_run": 
+    "configure_program_options_run":
         "Ejecutar",
-    "configure_program_options_break": 
+    "configure_program_options_break":
         "Detener",
-    "configure_program_options_save": 
+    "configure_program_options_save":
         "Guardar",
-    "configure_program_errorstitle": 
+    "configure_program_errorstitle":
         "Errores",
-    "configure_program_bbar_programeditruncode": 
+    "configure_program_bbar_programeditruncode":
         "Editar código del disparador",
-    "configure_automationgroup_newgroup": 
+    "configure_automationgroup_newgroup":
         "Nuevo grupo",
-    "configure_automationgroup_entergroupname": 
+    "configure_automationgroup_entergroupname":
         "Introduce el nombre del nuevo grupo:",
-    "configure_automationgroup_newgroupcancel": 
+    "configure_automationgroup_newgroupcancel":
         "Cancelar",
-    "configure_automationgroup_bottombar_group_add": 
+    "configure_automationgroup_bottombar_group_add":
         "Añadir grupo",
-    "configure_interfaces_heading": 
+    "configure_interfaces_heading":
         "Preferencias",
-    "configure_interfaces_optdisable": 
+    "configure_interfaces_optdisable":
         "Desactivar",
-    "configure_interfaces_optenable": 
+    "configure_interfaces_optenable":
         "Activar",
-    "configure_maintenance_heading": 
+    "configure_maintenance_heading":
         "Mantenimiento",
     "configure_system_installpackage":
         "Install Package",
     "configure_system_packagemanager":
         "Package Manager",
-    "configure_system_theme": 
+    "configure_system_theme":
         "Tema",
-    "configure_system_options": 
+    "configure_system_options":
         "Opciones de sistema",
-    "configure_system_serviceportis": 
+    "configure_system_serviceportis":
         "El puerto Http es",
-    "configure_system_serviceportchange": 
+    "configure_system_serviceportchange":
         "Cambiar puerto",
-    "configure_security_passwordprotectedaccess": 
+    "configure_security_passwordprotectedaccess":
         "Acceso protegido por contraseña",
-    "configure_system_configanddata": 
+    "configure_system_configanddata":
         "Configuración y datos",
-    "configure_maintenance_configuration": 
+    "configure_maintenance_configuration":
         "Configuración",
-    "configure_system_statistics": 
+    "configure_system_statistics":
         "Estadísticas",
-    "configure_system_databasereset": 
+    "configure_system_databasereset":
         "Resetear base de datos",
-    "systemsettings_backuprestores1heading": 
+    "systemsettings_backuprestores1heading":
         "Restaurar configuración",
-    "configure_system_backuprestores1note": 
+    "configure_system_backuprestores1note":
         "Seleccionar los programas de automatización para restaurar:",
-    "systemsettings_backuprestores1cancel": 
+    "systemsettings_backuprestores1cancel":
         "Cancelar",
-    "systemsettings_backuprestores1confirm": 
+    "systemsettings_backuprestores1confirm":
         "Restaurar",
-    "configure_system_serviceportheading": 
+    "configure_system_serviceportheading":
         "Puerto Http",
-    "configure_system_serviceportchangenote": 
+    "configure_system_serviceportchangenote":
         "Nota: ¡Después de haber cambiado el puerto, debe reiniciar HomeGenie para validar los cambios!",
-    "configure_system_serviceportcancel": 
+    "configure_system_serviceportcancel":
         "Cancelar",
-    "securitysettings_password_adminpassword": 
+    "securitysettings_password_adminpassword":
         "<b>admin</b> contraseña de usuario",
-    "securitysettings_password_changecancel": 
+    "securitysettings_password_changecancel":
         "Cancelar",
-    "securitysettings_password_changecommit": 
+    "securitysettings_password_changecommit":
         "Establecer",
-    "maintenance_configuration_factoryreset": 
+    "maintenance_configuration_factoryreset":
         "¿Resetear a ajustes por defecto de fábrica?",
-    "configure_maintenance_resetprompt": 
+    "configure_maintenance_resetprompt":
         "¿Estás seguro de querer resetear la configuración del sistema a los ajustes por defecto de fábrica?",
-    "configure_maintenance_resetwarning": 
+    "configure_maintenance_resetwarning":
         "",
-    "configure_maintenance_resetproceed": 
+    "configure_maintenance_resetproceed":
         "Ejecutar",
-    "configure_maintenance_resetcancel": 
+    "configure_maintenance_resetcancel":
         "Cancelar",
-    "home_voicerecognition_text_placeholder": 
+    "home_voicerecognition_text_placeholder":
         "Haz clic en el botón para el control de voz o escribe un comando...",
-    "home_voicerecognition_voice": 
+    "home_voicerecognition_voice":
         "Voz",
-    "configure_menu_scheduler": 
+    "configure_menu_scheduler":
         "Programador horario",
-    "configure_grouplist": 
+    "configure_grouplist":
         "Listado de grupos",
-    "configure_schedulerservice_title": 
+    "configure_schedulerservice_title":
         "Programador<br /> de eventos",
-    "configure_scheduler_events": 
+    "configure_scheduler_events":
         "Programador de eventos",
-    "configure_schedulerservice_bottombar_event_add": 
+    "configure_schedulerservice_bottombar_event_add":
         "Añadir evento",
-    "configure_schedulerservice_schedulerevent": 
+    "configure_schedulerservice_schedulerevent":
         "Programador de evento",
-    "configure_schedulerservice_itemname": 
+    "configure_schedulerservice_itemname":
         "Nombre",
-    "configure_schedulerservice_itemcronexp": 
+    "configure_schedulerservice_itemcronexp":
         "Expresión horaria",
-    "configure_schedulerservice_itemprogramid": 
+    "configure_schedulerservice_itemprogramid":
         "Identificador (Id) del programa o nombre (opcional)",
-    "configure_schedulerservice_cancelitem": 
+    "configure_schedulerservice_cancelitem":
         "Cancelar",
-    "configure_schedulerservice_deleteitem": 
+    "configure_schedulerservice_deleteitem":
         "Eliminar",
-    "configure_schedulerservice_updateitem": 
+    "configure_schedulerservice_updateitem":
         "Actualizar",
-    "configure_system_updatemanager": 
+    "configure_system_updatemanager":
         "Gestión de actualización",
-    "configure_system_updatemanager_updatecheck": 
+    "configure_system_updatemanager_updatecheck":
         "Comprobar actualización",
-    "configure_system_updatemanager_installupdate": 
+    "configure_system_updatemanager_installupdate":
         "Instalar actualización",
     "configure_system_updatemanager_no_updates":
         "No updates available.",
     "configure_system_updatemanager_updates_available":
         "The following updates are available:",
-    "configure_system_restart_service": 
+    "configure_system_restart_service":
         "Reiniciar servicio",
-    "configure_system_restart": 
+    "configure_system_restart":
         "Reiniciar",
-    "configure_system_loganddebug": 
+    "configure_system_loganddebug":
         "Archivo de registro",
-    "configure_system_logdownload": 
+    "configure_system_logdownload":
         "Descargar",
-    "configure_system_logdownloadtoday": 
+    "configure_system_logdownloadtoday":
         "Hoy",
-    "configure_system_logdownloadyesterday": 
+    "configure_system_logdownloadyesterday":
         "Ayer",
-    "configure_system_httpsettings": 
+    "configure_system_httpsettings":
         "Configuración de HTTP",
-    "configure_security_passwordprotectedaccess_set": 
+    "configure_security_passwordprotectedaccess_set":
         "Establecer",
-    "configure_security_passwordprotectedaccess_clear": 
+    "configure_security_passwordprotectedaccess_clear":
         "Limpiar",
-    "configure_system_httpcache": 
+    "configure_system_httpcache":
         "Caché del servicio Http",
-    "configure_maintenance_configuration_info": 
+    "configure_maintenance_configuration_info":
         "<b>Nota:</b> antes de restaurar un archivo de copia, tienes que establecer la misma contraseña de sistema que cuando la creaste.",
-    "configure_maintenance_configuration_backup": 
+    "configure_maintenance_configuration_backup":
         "Copia de seguridad",
-    "configure_maintenance_configuration_restore": 
+    "configure_maintenance_configuration_restore":
         "Restaurar",
-    "configure_maintenance_configuration_factory_reset": 
+    "configure_maintenance_configuration_factory_reset":
         "Resetear a fábrica",
-    "configure_system_modulescleanup": 
+    "configure_system_modulescleanup":
         "Limpieza de módulos",
-    "configure_system_modulesselect": 
+    "configure_system_modulesselect":
         "Seleccionar módulos",
-    "configure_system_remotemodules": 
+    "configure_system_remotemodules":
         "Enrutado de módulos remotos",
-    "configure_system_modsroutingreset": 
+    "configure_system_modsroutingreset":
         "Resetear",
-    "configure_system_userinterface": 
+    "configure_system_userinterface":
         "Interfaz de usuario",
-    "configure_system_eventshistory": 
+    "configure_system_eventshistory":
         "Histórico de eventos",
-    "home_about_version": 
+    "home_about_version":
         "versión",
-    "home_about_codename": 
+    "home_about_codename":
         "codename",
-    "home_about_motto": 
+    "home_about_motto":
         "motto",
-    "home_about_concept": 
+    "home_about_concept":
         "Concepto, diseño, ideas y código<br /> por G-Labs",
-    "home_about_license": 
+    "home_about_license":
         "licencia",
-    "home_about_site": 
+    "home_about_site":
         "Página web y soporte",
-    "home_about_site_docs": 
+    "home_about_site_docs":
         "Documentación",
-    "actions_menu": 
+    "actions_menu":
         "Menú de acciones",
     "control_group_configure":
         "Configure Group",
-    "control_macrorecord_record_macro": 
+    "control_macrorecord_record_macro":
         "Grabar macro",
-    "control_macrorecord_recording": 
+    "control_macrorecord_recording":
         "Grabando...",
-    "control_macrorecord_description": 
+    "control_macrorecord_description":
         "Cada comando ejecutado está siendo grabado en un <strong>Asistente de Script</strong>.<br>Haz clic en el botón <strong>Guardar</strong> cuando acabes.",
-    "control_macrorecord_close": 
+    "control_macrorecord_close":
         "Cerrar",
-    "control_macrorecord_options": 
+    "control_macrorecord_options":
         "Opciones",
-    "control_macrorecord_options_pause": 
+    "control_macrorecord_options_pause":
         "Pausa entre comandos",
-    "control_macrorecord_options_none": 
+    "control_macrorecord_options_none":
         "Ninguna",
-    "control_macrorecord_options_mimic": 
+    "control_macrorecord_options_mimic":
         "Mímica",
-    "control_macrorecord_options_fixed": 
+    "control_macrorecord_options_fixed":
         "Fija",
-    "control_macrorecord_options_pauseduration": 
+    "control_macrorecord_options_pauseduration":
         "Segundos de pausa fijos",
-    "update_options_popup_loading": 
+    "update_options_popup_loading":
         "Cargando datos del programa",
-    "control_widget_notconfigured_title": 
+    "control_widget_notconfigured_title":
         "Aplicación no configurada",
-    "control_widget_notconfigured_text": 
+    "control_widget_notconfigured_text":
         "Clic en este botón para editar la configuración.",
-    "control_widget_notconfigured_button": 
+    "control_widget_notconfigured_button":
         "Cerrar",
-    "configure_program_options_details": 
+    "configure_program_options_details":
         "Detalles",
-    "configure_program_options_restart": 
+    "configure_program_options_restart":
         "Reiniciar",
-    "configure_program_details_implemfeatures": 
+    "configure_program_details_implemfeatures":
         "Características implementadas",
-    "configure_program_details_configoptions": 
+    "configure_program_details_configoptions":
         "Opciones de configuración",
-    "configure_program_details_moduleparams": 
+    "configure_program_details_moduleparams":
         "Parametros de módulo",
-    "configure_group_actionmenu_deletegroup": 
+    "configure_group_actionmenu_deletegroup":
         "Eliminar grupo",
-    "configure_group_actionmenu_addseparatorlabel": 
+    "configure_group_actionmenu_addseparatorlabel":
         "Añadir separador",
-    "configure_group_actionmenu_addmodule": 
+    "configure_group_actionmenu_addmodule":
         "Añadir módulo",
-    "configure_separator_edit": 
+    "configure_separator_edit":
         "Editar separador",
-    "configure_separator_label": 
+    "configure_separator_label":
         "Etiqueta",
-    "configure_separator_placeholder": 
+    "configure_separator_placeholder":
         "introducir etiqueta",
-    "configure_module_optaddseparator": 
+    "configure_module_optaddseparator":
         "Actualizar",
-    "configure_module_parameters": 
+    "configure_module_parameters":
         "Parámetros",
-    "configure_module_parameters_delete": 
+    "configure_module_parameters_delete":
         "Eliminar",
-    "configure_module_parameters_save": 
+    "configure_module_parameters_save":
         "Guardar",
-    "configure_module_parameters_linktitle": 
+    "configure_module_parameters_linktitle":
         "Parámetros de módulo",
-    "configure_automationgroup_add": 
+    "configure_automationgroup_add":
         "Añadir",
-    "configure_programslist_listtitle": 
+    "configure_programslist_listtitle":
         "Listado de programas",
-    "configure_programslist_tap_disable": 
+    "configure_programslist_tap_disable":
         "Toca para DESACTIVAR el programa",
-    "configure_programslist_tap_enable": 
+    "configure_programslist_tap_enable":
         "Toca para ACTIVAR el programa",
-    "configure_programslist_deletegroup": 
+    "configure_programslist_deletegroup":
         "Eliminar grupo",
-    "configure_programslist_importprogram": 
+    "configure_programslist_importprogram":
         "Importar programa",
-    "configure_programslist_addnewprogram": 
+    "configure_programslist_addnewprogram":
         "Añadir nuevo programa",
-    "configure_programslist_refreshlist": 
+    "configure_programslist_refreshlist":
         "Refrescar lista",
-    "configure_programslist_import": 
+    "configure_programslist_import":
         "Importar",
-    "configure_program_summary": 
+    "configure_program_summary":
         "Sumario",
-    "configure_program_programcode": 
+    "configure_program_programcode":
         "Código del programa",
-    "configure_program_sketchcode": 
+    "configure_program_sketchcode":
         "Esquema del código",
-    "configure_program_triggercode": 
+    "configure_program_triggercode":
         "Código del disparador",
-    "configure_program_makefile": 
+    "configure_program_makefile":
         "Makefile",
-    "configure-editprogram-addcommand": 
+    "configure-editprogram-addcommand":
         "Añadir comando",
-    "configure-editprogram-addcondition": 
+    "configure-editprogram-addcondition":
         "Añadir condición",
-    "configure-editprogram-capture": 
+    "configure-editprogram-capture":
         "Capturar",
-    "configure-editprogram-help": 
+    "configure-editprogram-help":
         "Ayuda",
-    "configure_program_triggertype": 
+    "configure_program_triggertype":
         "Disparador",
-    "configure_editprogram_options_delete": 
+    "configure_editprogram_options_delete":
         "Eliminar programa",
-    "configure_editprogram_saving_succeed": 
+    "configure_editprogram_saving_succeed":
         "La grabación fue exítosa.",
-    "configure_editprogram_saving": 
+    "configure_editprogram_saving":
         "Actualizando los datos de programa",
-    "configure_editprogram_error_updating": 
+    "configure_editprogram_error_updating":
         "¡Error en la actualización del programa!",
-    "configure_editprogram_compile": 
+    "configure_editprogram_compile":
         "Compilar",
-    "systemsettings_selectport_title": 
+    "systemsettings_selectport_title":
         "Reseña",
-    "systemsettings_selectport_placeholder": 
+    "systemsettings_selectport_placeholder":
         "(seleccionar puerto...)",
-    "systemsettings_selectport_text": 
+    "systemsettings_selectport_text":
         "Por favor, selecciona el puerto utilizado por este dispositivo",
-    "systemsettings_selectport_button": 
+    "systemsettings_selectport_button":
         "Cerrar",
-    "configure_group_newgroupconfirm": 
+    "configure_group_newgroupconfirm":
         "Aceptar",
-    "configure_module_optremoveseparator": 
+    "configure_module_optremoveseparator":
         "Eliminar",
-    "configure_program_selectcommandtarget": 
+    "configure_program_selectcommandtarget":
         "Seleccionar destino del comando",
-    "configure_program_selectcommandtoperform": 
+    "configure_program_selectcommandtoperform":
         "Seleccionar commando a ejecutar",
-    "configure_program_commandcustom": 
+    "configure_program_commandcustom":
         "Comando personalizado de API",
-    "configure_program_wizardproceed": 
+    "configure_program_wizardproceed":
         "Ejecutar",
-    "configure_program_commandcapturetitle": 
+    "configure_program_commandcapturetitle":
         "Capturando comandos",
-    "configure_program_waitingnewcommand": 
+    "configure_program_waitingnewcommand":
         "Esperando a eventos nuevos...",
-    "configure_program_waitingnewcommandadvice": 
+    "configure_program_waitingnewcommandadvice":
         "",
-    "configure_program_capturestop": 
+    "configure_program_capturestop":
         "Detener",
-    "configure_program_wizard_editline_title": 
+    "configure_program_wizard_editline_title":
         "Editar línea",
-    "configure_program_wizard_editcmdline_prompt": 
+    "configure_program_wizard_editcmdline_prompt":
         "Mueve o elimina la línea <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
-    "configure_program_wizard_editconline_prompt": 
+    "configure_program_wizard_editconline_prompt":
         "Mueve o elimina la línea <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
-    "configure_program_wizard_editline_number": 
+    "configure_program_wizard_editline_number":
         "Nuevo número de línea",
-    "configure_program_wizard_editline_delete": 
+    "configure_program_wizard_editline_delete":
         "Eliminar",
-    "configure_program_wizard_editline_change": 
+    "configure_program_wizard_editline_change":
         "Mover",
-    "configure_program_selectconditionsubject": 
+    "configure_program_selectconditionsubject":
         "Seleccionar el sujeto de la condición",
-    "configure_program_selectconditionproperty": 
+    "configure_program_selectconditionproperty":
         "Seleccionar la propiedad de la comparación",
-    "configure_program_conditioncapturetitle": 
+    "configure_program_conditioncapturetitle":
         "Capturando condiciones",
-    "configure_program_waitingnewcondition": 
+    "configure_program_waitingnewcondition":
         "Esperando por nuevos eventos...",
-    "configure_program_waitingnewconditionadvice": 
+    "configure_program_waitingnewconditionadvice":
         "",
-    "configure_program_options_update": 
+    "configure_program_options_update":
         "Actualizar",
-    "configure_system_updateinstall": 
+    "configure_system_updateinstall":
         "Instalar actualización",
-    "configure_system_deletemodule": 
+    "configure_system_deletemodule":
         "Eliminar módulo",
-    "systemsettings_backuprestores1selectallnone": 
+    "systemsettings_backuprestores1selectallnone":
         "Seleccionar todo/ninguno",
-    "securitysettings_password_setpassword": 
+    "securitysettings_password_setpassword":
         "Establecer contraseña",
-    "securitysettings_password_enterpassword": 
+    "securitysettings_password_enterpassword":
         "Introduce la contraseña para el usuario 'admin'",
-    "maintenance_configuration_servicerestart": 
+    "maintenance_configuration_servicerestart":
         "¿Reiniciar el servicio?",
-    "configure_maintenance_restartprompt": 
+    "configure_maintenance_restartprompt":
         "¿Estás seguro de querer reiniciar el servicio?",
-    "configure_maintenance_restartwarning": 
+    "configure_maintenance_restartwarning":
         "",
-    "configure_module_typemediareceiver": 
+    "configure_module_typemediareceiver":
         "Recibidor de medios",
-    "configure_module_typemediatransmitter": 
+    "configure_module_typemediatransmitter":
         "Transmisor de medios",
-    "configure_module_doorlock": 
+    "configure_module_doorlock":
         "Bloqueo de puertas",
-    "configure_module_featuresoptions": 
+    "configure_module_featuresoptions":
         "Características/Opciones",
     "configure_editprogram_files":
         "Archivos",
@@ -684,55 +684,53 @@
     "configure_widgeteditor_savingjavascript":
         "Guardando Javascript...",
     "configure_interfaces_importdriver":
-        "Instalar complementos",        
+        "Instalar Interfaz",
     "configure_interfaces_download":
-        "Descargar e instalar",        
+        "Descargar e instalar",
     "configure_interfaces_upload":
-        "Subir e instalar",        
-    "configure_interfaces_addonslist":
-        "Listado de complementos",        
-    "configure_interfaces_installaddons":
-        "Instalar complementos",
+        "Subir e instalar",
+    "configure_interfaces_install":
+        "Instalar Interfaz",
     "configure_interfaces_downloadfromurl":
-        "Descargar paquete de complementos desde una dirección URL",
+        "Descargar paquete desde una dirección URL",
     "configure_interfaces_uploadpackage":
-        "Sube un paquete de complementos desde un archivo",
+        "Sube un paquete desde un archivo",
     "cronwizard_title":
-        "Asistente de eventos",      
+        "Asistente de eventos",
     "cronwizard_tab_minute":
-        "Minuto",        
+        "Minuto",
     "cronwizard_tab_hour":
-        "Hora",        
+        "Hora",
     "cronwizard_tab_dayofmonth":
-        "Día del mes",        
+        "Día del mes",
     "cronwizard_tab_month":
-        "Mes",        
+        "Mes",
     "cronwizard_tab_dayofweek":
-        "Día de la semana",      
+        "Día de la semana",
     "cronwizard_event_willoccur":
         "Este evento ocurrirá",
     "cronwizard_minuteselect_everyminute":
-        "cada minuto",        
+        "cada minuto",
     "cronwizard_minuteselect_everysomeminute":
-        "cada &lt;n&gt; minutos",        
+        "cada &lt;n&gt; minutos",
     "cronwizard_minuteselect_eachselected":
-        "cada minuto seleccionado",        
+        "cada minuto seleccionado",
     "cronwizard_hourselect_everyhour":
-        "cada hora",        
+        "cada hora",
     "cronwizard_hourselect_everysomehour":
-        "cada &lt;n&gt; horas",        
+        "cada &lt;n&gt; horas",
     "cronwizard_hourselect_eachselected":
-        "cada hora seleccionada",        
+        "cada hora seleccionada",
     "cronwizard_dayselect_everyday":
-        "todos los días",        
+        "todos los días",
     "cronwizard_dayselect_eachselected":
-        "cada día seleccionado",        
+        "cada día seleccionado",
     "cronwizard_monthselect_everymonth":
-        "todos los meses",        
+        "todos los meses",
     "cronwizard_monthselect_eachselected":
-        "cada mes seleccionado",        
+        "cada mes seleccionado",
     "cronwizard_dayowselect_everydayow":
-        "todos los días de la semana",        
+        "todos los días de la semana",
     "cronwizard_dayowselect_eachselected":
         "cada día seleccionado de la semana",
 "##":
@@ -740,45 +738,45 @@
 "##":
 "##",
     "common_month_jan":
-        "Ene",        
+        "Ene",
     "common_month_feb":
-        "Feb",        
+        "Feb",
     "common_month_mar":
-        "Mar",        
+        "Mar",
     "common_month_apr":
-        "Abr",        
+        "Abr",
     "common_month_may":
-        "May",        
+        "May",
     "common_month_jun":
-        "Jun",        
+        "Jun",
     "common_month_jul":
-        "Jul",        
+        "Jul",
     "common_month_aug":
-        "Ago",        
+        "Ago",
     "common_month_sep":
-        "Sep",        
+        "Sep",
     "common_month_oct":
-        "Oct",        
+        "Oct",
     "common_month_nov":
-        "Nov",        
+        "Nov",
     "common_month_dec":
-        "Dic",        
+        "Dic",
     "common_dayofweek_sun":
-        "Dom",        
+        "Dom",
     "common_dayofweek_mon":
-        "Lun",        
+        "Lun",
     "common_dayofweek_tue":
-        "Mar",        
+        "Mar",
     "common_dayofweek_wed":
-        "Mie",        
+        "Mie",
     "common_dayofweek_thu":
-        "Jue",        
+        "Jue",
     "common_dayofweek_fri":
-        "Vie",        
+        "Vie",
     "common_dayofweek_sat":
-        "Sab",        
+        "Sab",
     "common_command_cancel":
-        "Cancelar",        
+        "Cancelar",
     "common_command_ok":
         "Aceptar",
     "common_command_proceed":
@@ -827,7 +825,7 @@
         "Preferencias",
     "home_menu_maintenance":
         "Mantenimiento",
-    "home_menu_about": 
+    "home_menu_about":
         "Acerca de...",
     "home_menu_about_homegenie":
         "About HomeGenie",
