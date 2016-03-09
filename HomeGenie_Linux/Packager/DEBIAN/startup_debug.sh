@@ -4,11 +4,15 @@
 # Example: ./startup_debug.sh /usr/local/bin/homegenie 10.0.1.10:10000
 #
 cd "`dirname \"$0\"`"
+# !!!NOTE!!!
+# "LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US" was added as a work-around 
+# for buggy mono on ARM (mono < 4.x)
+# remove it as soon as official mono 4.x is available through debian-arm/raspbian repository
 if [ -f /usr/bin/mono ]
 then
-    MONO="/usr/bin/mono"
+    MONO="LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US /usr/bin/mono"
 else
-    MONO="/usr/local/bin/mono"
+    MONO="LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US /usr/local/bin/mono"
 fi
 
 EXITCODE="1"

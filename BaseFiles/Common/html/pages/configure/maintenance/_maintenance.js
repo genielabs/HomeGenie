@@ -9,6 +9,22 @@ HG.WebApp.Maintenance.InitializePage = function () {
     page.on('pagebeforeshow', function (e) {
         $('#restore_configuration_uploadfile').val('')
     });
+    page.on('pageshow', function (e) {
+        page.find('[data-ui-field=package_install]').qtip({
+            content: {
+                text: HG.WebApp.Locales.GetLocaleString('configure_system_installpackage_description', 'Click here to install additional features.'),
+            },
+            show: { event: false, ready: true, delay: 1000 },
+            events: {
+                hide: function () {
+                    $(this).qtip('destroy');
+                }
+            },
+            hide: { event: false, inactive: 3000 },
+            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+            position: { my: 'right center', at: 'left center' }
+        });
+    });
     page.on('pageinit', function (e) {
 
         $('#systemsettings_httpport_change').bind('click', function () {

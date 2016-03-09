@@ -5,7 +5,7 @@ HG.WebApp.SystemSettings.Interfaces = HG.WebApp.SystemSettings.Interfaces || {};
 HG.WebApp.SystemSettings.InitializePage = function () {
     var page = $('#'+HG.WebApp.SystemSettings.PageId);
     var importPopup = page.find('[data-ui-field=import-popup]');
-    var importButton = page.find('[data-ui-field=interface_import]');
+    var importButton = page.find('[data-ui-field=interface_install]');
     var importForm = page.find('[data-ui-field=import-form]');
     var downloadButton = page.find('[data-ui-field=download-btn]');
     var downloadUrl = page.find('[data-ui-field=download-url]');
@@ -17,13 +17,35 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         importPopup.popup();
     });    
     page.on('pagebeforeshow', function (e) {
-        HG.WebApp.SystemSettings.ListInterfaces();
+        HG.Automation.Programs.List(function () {
+            HG.Configure.Groups.List('Automation', function () {
+                HG.WebApp.SystemSettings.ListInterfaces();
+            });
+        });
+    });
+    page.on('pageshow', function (e) {
+        page.find('[data-locale-id=configure_program_bbaractions]').qtip({
+            content: {
+                text: HG.WebApp.Locales.GetLocaleString('configure_system_installtip_description', 'Go to the Package Manager to install additional features.'),
+            },
+            show: { event: false, ready: true, delay: 1000 },
+            events: {
+                hide: function () {
+                    $(this).qtip('destroy');
+                }
+            },
+            hide: { event: false, inactive: 3000 },
+            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+            position: { my: 'bottom center', at: 'top center' }
+        });
     });
     importPopup.on('popupafteropen', function(event) {
         importButton.removeClass('ui-btn-active');
     });
     importButton.on('click', function() {
-        importPopup.popup('open');
+        setTimeout(function(){
+            importPopup.popup('open');
+        }, 500);
     });
     downloadButton.on('click', function() {
         if (downloadUrl.val() == '') {
@@ -91,6 +113,7 @@ HG.WebApp.SystemSettings.ListInterfaces = function() {
     var interfaceList = page.find('[data-ui-field=interface_list]');
     HG.Configure.Interfaces.ListConfig(function(ifaceList){
         interfaceList.empty();
+        interfaceList.append('<h3>Interfaces (MIG)</h3>');
         $.each(ifaceList, function(k,v){
             var domain = v.Domain;
             var name = domain.substring(domain.lastIndexOf('.')+1);
@@ -122,6 +145,48 @@ HG.WebApp.SystemSettings.ListInterfaces = function() {
                 HG.WebApp.SystemSettings.Interfaces[domain].Initialize();
             });
             interfaceList.append(item);
+        });
+        interfaceList.append('<h3>Automation Program Plugins</h3>');
+        $.each(HG.WebApp.Data.AutomationGroups, function(gidx, grp) {
+            var showGroup = true;
+            $.each(HG.WebApp.Data.Programs, function(pidx, prg) {
+                if (prg.IsEnabled && prg.Group == grp.Name) {
+                    var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prg.Address);
+                    if (module != null) {
+                        var hasOptions = false;
+                        for (var p = 0; p < module.Properties.length; p++) {
+                            if (module.Properties[p].Name.substring(0, 17) == 'ConfigureOptions.') {
+                                hasOptions = true;
+                                break;
+                            }
+                        }
+                        if (hasOptions) {
+                            if (showGroup) {
+                                interfaceList.append('<h4>'+grp.Name+'</h4>');
+                                showGroup = false;
+                            }
+                            var title = HG.WebApp.Locales.GetProgramLocaleString(prg.Address, 'Title', prg.Name);
+                            var desc = (prg.Description != 'undefined' && prg.Description != null ? prg.Description : '');
+                            desc = HG.WebApp.Locales.GetProgramLocaleString(prg.Address, 'Description', desc).replace(/\n/g, '<br />');
+                            var item = $('<div data-role="collapsible" data-inset="true" class="ui-mini" />');
+                            var itemHeader = $('<h3><span data-ui-field="title">'+title+'</span></h3>');
+                            item.append(itemHeader);
+                            var itemHtml = '<div><div class="ui-grid-a" style="padding-top:10px;padding-bottom:10px">';
+                            itemHtml += '<div class="ui-block-a" style="width:75%">'+desc+'</div>';
+                            itemHtml += '<div class="ui-block-b" style="width:25%" align="right"><a data-ui-field="options_button" href="#" class="ui-btn ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-gear">'+HG.WebApp.Locales.GetLocaleString('configure_program_options', 'Options')+'</a></div>';
+                            itemHtml += '</div></div>';
+                            item.append(itemHtml);
+                            item.find('[data-ui-field="options_button"]').on('click', function(){
+                                HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
+                                HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
+                                HG.WebApp.ProgramsList.UpdateOptionsPopup();
+                            });
+                            interfaceList.append(item);
+                        }
+                    }
+                }
+            });
+
         });
         interfaceList.trigger('create');
     });        

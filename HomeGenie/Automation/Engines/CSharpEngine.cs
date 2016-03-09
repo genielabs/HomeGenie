@@ -43,8 +43,21 @@ namespace HomeGenie.Automation.Engines
         private MethodInfo methodEvaluateCondition = null;
         private System.Reflection.Assembly appAssembly;
 
+        private static bool isShadowCopySet = false;
+
         public CSharpEngine(ProgramBlock pb) : base(pb) 
         {
+            // TODO: SetShadowCopyPath/SetShadowCopyFiles methods are deprecated... 
+            // TODO: create own AppDomain for "programDomain" instead of using CurrentDomain
+            // TODO: and use AppDomainSetup to set shadow copy for each app domain
+            // TODO: !!! verify AppDomain compatibility with mono !!!
+            if (!isShadowCopySet)
+            {
+                isShadowCopySet = true;
+                var domain = AppDomain.CurrentDomain;
+                domain.SetShadowCopyPath(Path.Combine(domain.BaseDirectory, "programs"));
+                domain.SetShadowCopyFiles();
+            }
         }
 
         public void Unload()
@@ -276,7 +289,6 @@ namespace HomeGenie.Automation.Engines
                     {
                         debugData = File.ReadAllBytes(this.AssemblyFile + ".pdb");
                     }
-                    AppDomain.CurrentDomain.SetShadowCopyFiles();
                     if (debugData != null)
                     {
                         appAssembly = Assembly.Load(assemblyData, debugData);

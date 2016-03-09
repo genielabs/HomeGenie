@@ -34,7 +34,7 @@
           text: HG.WebApp.Locales.GetLocaleString('control_widget_notconfigured_text'),
           button: HG.WebApp.Locales.GetLocaleString('control_widget_notconfigured_button')
         },
-        show: { event: false, ready: true, delay: 1000 },
+        show: { event: false, ready: true, delay: 3000 },
         events: {
           hide: function () {
             $(this).qtip('destroy');

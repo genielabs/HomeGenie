@@ -183,8 +183,8 @@ HG.WebApp.AutomationGroupsList.SaveGroups = function () {
         success: function (response) {
             $('#control_automationgroupslist').empty();
             //
-            // TODO: reload group programs
-            ///				HG.WebApp.GroupModules.LoadGroupModules();
+            // TODO: reload group programs (?)
+            ///HG.WebApp.GroupModules.LoadGroupModules();
             //
             $.mobile.loading('hide');
         },

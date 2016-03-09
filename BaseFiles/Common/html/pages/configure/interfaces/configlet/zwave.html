@@ -195,15 +195,17 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             if ($(this)[0].selectedIndex == 1) {
                 var port = $(this).find('option').eq(1).text();
                 if (port == '(enter custom port)') port = '';
-                port = prompt("Please enter port path", port);
-                $(this).find('option').eq(1).val(port);
-                if (port != '' && port != '(enter custom port)') {
-                    $(this).find('option').eq(1).html(port);
-                } else {
-                    $(this).val('');
-                    $(this).find('option').eq(1).html('(enter custom port)');
+                port = prompt('Please enter port path', port);
+                if (port != null) {
+                    $(this).find('option').eq(1).val(port);
+                    if (port != '' && port != '(enter custom port)') {
+                        $(this).find('option').eq(1).html(port);
+                    } else {
+                        $(this).val('');
+                        $(this).find('option').eq(1).html('(enter custom port)');
+                    }
+                    $(this).selectmenu('refresh', true);
                 }
-                $(this).selectmenu('refresh', true);
             }
             HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Port', encodeURIComponent($(this).val()));
         });

@@ -123,7 +123,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function () {
             fieldparams.append(params);
         }
     }
-    // 		
+    //
     var module = HG.WebApp.Utility.GetModuleByDomainAddress(HG.WebApp.ProgramEdit._CurrentProgram.Domain, HG.WebApp.ProgramEdit._CurrentProgram.Address);
     if (module != null) {
         //

@@ -543,7 +543,7 @@ namespace HomeGenie.Service.Logging
         /// Opens the statistics database.
         /// </summary>
         /// <returns><c>true</c>, if statistics database was opened, <c>false</c> otherwise.</returns>
-        private bool OpenStatisticsDatabase()
+        internal bool OpenStatisticsDatabase()
         {
             bool success = false;
             //lock (dbLock)
@@ -633,7 +633,7 @@ namespace HomeGenie.Service.Logging
         /// <summary>
         /// Closes the statistics database.
         /// </summary>
-        private void CloseStatisticsDatabase()
+        internal void CloseStatisticsDatabase()
         {
             //lock (dbLock)
             if (dbConnection != null)

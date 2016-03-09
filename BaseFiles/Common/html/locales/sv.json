@@ -682,19 +682,17 @@
     "configure_widgeteditor_savingjavascript":
         "Saving Javascript...",
     "configure_interfaces_importdriver":
-        "Install Add-ons",        
+        "Install Interface",        
     "configure_interfaces_download":
-        "Download & install",        
+        "Download and install",        
     "configure_interfaces_upload":
-        "Upload & install",        
-    "configure_interfaces_addonslist":
-        "Add-ons list",        
-    "configure_interfaces_installaddons":
-        "Install Add-ons",
+        "Upload and install",        
+    "configure_interfaces_install":
+        "Install Interface",
     "configure_interfaces_downloadfromurl":
-        "Download add-on package from URL",
+        "Download package from URL",
     "configure_interfaces_uploadpackage":
-        "Upload add-on package from file",
+        "Upload package from file",
     "cronwizard_title":
         "Cron event Wizard",      
     "cronwizard_tab_minute":

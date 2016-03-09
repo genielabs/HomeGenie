@@ -288,6 +288,10 @@ namespace HomeGenie.Service.Handlers
                     {
                         logpath = Path.Combine("log", "homegenie.log.bak");
                     }
+                    else if (SystemLogger.Instance != null)
+                    {                        
+                        SystemLogger.Instance.FlushLog();
+                    }
                     if (File.Exists(logpath))
                     {
                         using (var fs = new FileStream(logpath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))

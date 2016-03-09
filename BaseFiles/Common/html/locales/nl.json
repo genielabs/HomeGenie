@@ -1,569 +1,569 @@
 {
-    "home_menu_title": 
+    "home_menu_title":
         "Hoofdmenu",
-    "home_menu_control": 
+    "home_menu_control":
         "Bedienen",
-    "home_menu_analyze": 
+    "home_menu_analyze":
         "Analyzeren",
-    "home_menu_configure": 
+    "home_menu_configure":
         "Configureren",
-    "homegenie_about_title": 
+    "homegenie_about_title":
         "Over",
-    "control_groups_and_modules": 
+    "control_groups_and_modules":
         "Groepen<br>en Modules",
-    "bottombar_button_home": 
+    "bottombar_button_home":
         "Home",
-    "configure_program_bbaractions": 
+    "configure_program_bbaractions":
         "Actions",
-    "control_macrorecord_discard": 
+    "control_macrorecord_discard":
         "Discard",
-    "control_macrorecord_save": 
+    "control_macrorecord_save":
         "Bewaar",
-    "analyze_statistics": 
+    "analyze_statistics":
         "Analiseer<br>Statistieken",
-    "analyze_total_watts_hourly": 
+    "analyze_total_watts_hourly":
         "totaal verbruikt wattage per uur",
-    "analyze_load_peak_last": 
+    "analyze_load_peak_last":
         "verbruiks piek in de laatste vier uur",
-    "configure_menu_title": 
+    "configure_menu_title":
         "Configuratie",
-    "configure_menu_heading": 
+    "configure_menu_heading":
         "Configuratiemenu",
-    "configure_groups_heading": 
+    "configure_groups_heading":
         "Groepen en<br>Modules",
-    "configure_menu_groups_modules": 
+    "configure_menu_groups_modules":
         "Groepen en Modules",
-    "configure_menu_automation": 
+    "configure_menu_automation":
         "Automatisering en Programma's",
-    "configure_menu_system": 
+    "configure_menu_system":
         "Instellingen",
-    "configure_menu_maintenance": 
+    "configure_menu_maintenance":
         "Onderhoud en Updates",
-    "configure_automation_heading": 
+    "configure_automation_heading":
         "<font style='color:gray'>Programma</font><br>Groepen",
-    "configure_group_newgroup": 
+    "configure_group_newgroup":
         "Nieuwe Groep",
-    "configure_group_entergroupname": 
+    "configure_group_entergroupname":
         "Naam voor de nieuwe groep:",
-    "configure_group_newgroupcancel": 
+    "configure_group_newgroupcancel":
         "Afbreken",
-    "bottombar_button_back": 
+    "bottombar_button_back":
         "Terug",
-    "configure_group_bottombar_group_add": 
+    "configure_group_bottombar_group_add":
         "Groep toevoegen",
-    "configure_group_group": 
+    "configure_group_group":
         "Groep",
-    "configure_group_groupname": 
+    "configure_group_groupname":
         "Naam",
     "configure_group_groupwallpaper":
         "Wallpaper",
     "configure_group_modulelist":
         "Module Lijst",
-    "configure_group_deletegroup": 
+    "configure_group_deletegroup":
         "Groep verwijderen?",
-    "configure_group_deleteprompt": 
+    "configure_group_deleteprompt":
         "Weet u zeker dat u deze groep wilt verwijderen?",
-    "configure_group_deletewarning": 
+    "configure_group_deletewarning":
         "Deze actie kan niet ongedaan gemaakt worden.",
-    "configure_group_deletecancel": 
+    "configure_group_deletecancel":
         "Afbreken",
-    "configure_group_deleteconfirm": 
+    "configure_group_deleteconfirm":
         "Verwijderen",
-    "configure_module_newmoduleadd": 
+    "configure_module_newmoduleadd":
         "Nieuwe module toevoegen",
-    "configure_module_newmodulecancel": 
+    "configure_module_newmodulecancel":
         "Afbreken",
-    "configure_module_newmoduleconfirm": 
+    "configure_module_newmoduleconfirm":
         "Toevoegen",
-    "configure_module_propname": 
+    "configure_module_propname":
         "Naam",
-    "configure_module_typelight": 
+    "configure_module_typelight":
         "Licht",
-    "configure_module_typedimmer": 
+    "configure_module_typedimmer":
         "Dimmer",
-    "configure_module_typeswitch": 
+    "configure_module_typeswitch":
         "Schakelaar",
-    "configure_module_typesensor": 
+    "configure_module_typesensor":
         "Sensor",
-    "configure_module_typetemperature": 
+    "configure_module_typetemperature":
         "Temperatuur",
-    "configure_module_typesiren": 
+    "configure_module_typesiren":
         "Sirene",
-    "configure_module_typefan": 
+    "configure_module_typefan":
         "Fan",
-    "configure_module_typethermostat": 
+    "configure_module_typethermostat":
         "Thermostaat",
-    "configure_module_typeshutter": 
+    "configure_module_typeshutter":
         "Shutter",
-    "configure_module_typedoorwindow": 
+    "configure_module_typedoorwindow":
         "Deur/Raam",
-    "configure_module_options": 
+    "configure_module_options":
         "Setup",
-    "configure_module_optupdate": 
+    "configure_module_optupdate":
         "Module bijwerken",
-    "configure_module_optremove": 
+    "configure_module_optremove":
         "Verwijderen uit groep",
-    "configure_group_bottombar_deletemodule": 
+    "configure_group_bottombar_deletemodule":
         "Groep verwijderen",
-    "configure_group_bottombar_addmodule": 
+    "configure_group_bottombar_addmodule":
         "Module toevoegen",
-    "configure_program_automationtitle": 
+    "configure_program_automationtitle":
         "Programmalijst",
-    "configure_program_newprogram": 
+    "configure_program_newprogram":
         "Nieuw programma",
-    "configure_program_enterprogramname": 
+    "configure_program_enterprogramname":
         "Naam van het nieuwe programma:",
-    "configure_program_newprogramcancel": 
+    "configure_program_newprogramcancel":
         "Afbreken",
-    "configure_program_newprogramconfirm": 
+    "configure_program_newprogramconfirm":
         "Ok",
-    "configure_program_deletetitle": 
+    "configure_program_deletetitle":
         "Programma verwijderen?",
-    "configure_program_deleteprompt": 
+    "configure_program_deleteprompt":
         "Weet u zeker dat u dit programma wilt verwijderen?",
-    "configure_program_deleteadvice": 
+    "configure_program_deleteadvice":
         "Deze actie kan niet ongedaan gemaakt worden.",
-    "configure_program_deletecancel": 
+    "configure_program_deletecancel":
         "Afbreken",
-    "configure_program_deleteconfirm": 
+    "configure_program_deleteconfirm":
         "Verwijderen",
-    "configure_program_options": 
+    "configure_program_options":
         "Opties",
-    "configure_program_options_edit": 
+    "configure_program_options_edit":
         "Bewerken",
-    "configure_program_options_export": 
+    "configure_program_options_export":
         "Exporteren",
-    "configure_program_options_delete": 
+    "configure_program_options_delete":
         "Verwijderen",
-    "configure_program_programgroup": 
+    "configure_program_programgroup":
         "Programmagroep",
-    "configure_program_programname": 
+    "configure_program_programname":
         "Programma naam",
-    "configure_program_programdescription": 
+    "configure_program_programdescription":
         "Programma Beschrijving",
-    "configure_program_programtype": 
+    "configure_program_programtype":
         "Programma Type",
-    "configure_program_trigger": 
+    "configure_program_trigger":
         "Programma Trigger",
-    "configure_program_conditionswitchestrue": 
+    "configure_program_conditionswitchestrue":
         "als de conditie veranderd naar 'waar'",
-    "configure_program_conditionswitchesfalse": 
+    "configure_program_conditionswitchesfalse":
         "als de conditie veranderd naar 'niet waar'",
-    "configure_program_runonceconditiontrue": 
+    "configure_program_runonceconditiontrue":
         "een keer draaien als de conditie 'waar'is",
-    "configure_program_conditionistrue": 
+    "configure_program_conditionistrue":
         "totdat de conditie 'waar' is",
-    "configure_program_conditionisfalse": 
+    "configure_program_conditionisfalse":
         "totdat de conditie 'niet waar' is",
-    "configure_program_programconditions": 
+    "configure_program_programconditions":
         "Programma Condities",
-    "configure_program_conditionadd": 
+    "configure_program_conditionadd":
         "Conditie toevoegen",
-    "configure_program_selectconditioncontext": 
+    "configure_program_selectconditioncontext":
         "Selecteer conditie context",
-    "configure_program_wizardback": 
+    "configure_program_wizardback":
         "terug",
-    "configure_program_selectoperator": 
+    "configure_program_selectoperator":
         "Selecteer vergelijkings actie",
-    "configure_program_operatorless": 
+    "configure_program_operatorless":
         "Kleiner dan",
-    "configure_program_operatorequal": 
+    "configure_program_operatorequal":
         "Gelijk aan",
-    "configure_program_operatorgreaterthan": 
+    "configure_program_operatorgreaterthan":
         "Groter dan",
-    "configure_program_selectvalue": 
+    "configure_program_selectvalue":
         "Selecteer vergelijkings waarde",
-    "configure_program_wizarddone": 
+    "configure_program_wizarddone":
         "klaar",
-    "configure_program_deleteconditiontitle": 
+    "configure_program_deleteconditiontitle":
         "Conditie verwijderen?",
-    "configure_program_deleteconditionprompt": 
+    "configure_program_deleteconditionprompt":
         "Weet u zeker dat u deze conditie wilt verwijderen?",
-    "configure_program_deleteconditionadvice": 
+    "configure_program_deleteconditionadvice":
         "Deze actie kan niet ongedaan gemaakt worden.",
-    "configure_program_instructions": 
+    "configure_program_instructions":
         "Programma Instructies",
-    "configure_program_instructionadd": 
+    "configure_program_instructionadd":
         "Instructie toevoegen",
-    "configure_program_selectcommandcontext": 
+    "configure_program_selectcommandcontext":
         "Selecteer commando context",
-    "configure_program_commandarguments": 
+    "configure_program_commandarguments":
         "Commando argumenten",
-    "configure_program_deleteinstructiontitle": 
+    "configure_program_deleteinstructiontitle":
         "Instructie verwijderen?",
-    "configure_program_deleteinstructionprompt": 
+    "configure_program_deleteinstructionprompt":
         "Weet u zeker dat u deze instructie wilt verwijderen?",
-    "configure_program_csharpprogram": 
+    "configure_program_csharpprogram":
         "C# Programma",
-    "configure_program_savingtitle": 
+    "configure_program_savingtitle":
         "Programma bewaren",
-    "configure_program_savingwait": 
+    "configure_program_savingwait":
         "Wachten AUB...",
-    "configure_program_switchtypetitle": 
+    "configure_program_switchtypetitle":
         "Type wijzigen?",
-    "configure_program_switchtypeprompt": 
+    "configure_program_switchtypeprompt":
         "Weet u zeker dat u de type wil wijzigen?",
-    "configure_program_switchtypeadvice": 
+    "configure_program_switchtypeadvice":
         "Current program data will be cleared.",
-    "configure_program_switchtypecancel": 
+    "configure_program_switchtypecancel":
         "Annuleren",
-    "configure_program_switchtypeconfirm": 
+    "configure_program_switchtypeconfirm":
         "Wijzigen",
-    "configure_program_options_run": 
+    "configure_program_options_run":
         "Run",
-    "configure_program_options_break": 
+    "configure_program_options_break":
         "Afbreken",
-    "configure_program_options_save": 
+    "configure_program_options_save":
         "Bewaar",
-    "configure_program_errorstitle": 
+    "configure_program_errorstitle":
         "Fouten",
-    "configure_program_bbar_programeditruncode": 
+    "configure_program_bbar_programeditruncode":
         "Edit Trigger Code",
-    "configure_automationgroup_newgroup": 
+    "configure_automationgroup_newgroup":
         "Nieuwe Groep",
-    "configure_automationgroup_entergroupname": 
+    "configure_automationgroup_entergroupname":
         "Enter new group name:",
-    "configure_automationgroup_newgroupcancel": 
+    "configure_automationgroup_newgroupcancel":
         "Annuleren",
-    "configure_automationgroup_bottombar_group_add": 
+    "configure_automationgroup_bottombar_group_add":
         "Groep toevoegen",
-    "configure_interfaces_heading": 
+    "configure_interfaces_heading":
         "Instellingen",
-    "configure_interfaces_optdisable": 
+    "configure_interfaces_optdisable":
         "Disable",
-    "configure_interfaces_optenable": 
+    "configure_interfaces_optenable":
         "Enable",
-    "configure_maintenance_heading": 
+    "configure_maintenance_heading":
         "Onderhoud",
     "configure_system_installpackage":
         "Install Package",
     "configure_system_packagemanager":
         "Package Manager",
-    "configure_system_theme": 
+    "configure_system_theme":
         "Thema",
-    "configure_system_options": 
+    "configure_system_options":
         "Systeem Opties",
-    "configure_system_serviceportis": 
+    "configure_system_serviceportis":
         "Http service poort is",
-    "configure_system_serviceportchange": 
+    "configure_system_serviceportchange":
         "Poort veranderen",
-    "configure_security_passwordprotectedaccess": 
+    "configure_security_passwordprotectedaccess":
         "Password protected access",
-    "configure_system_configanddata": 
+    "configure_system_configanddata":
         "Configuratie and Data",
-    "configure_maintenance_configuration": 
+    "configure_maintenance_configuration":
         "Configuratie",
-    "configure_system_statistics": 
+    "configure_system_statistics":
         "Statistieken",
-    "configure_system_databasereset": 
+    "configure_system_databasereset":
         "Database Leegmaken",
-    "systemsettings_backuprestores1heading": 
+    "systemsettings_backuprestores1heading":
         "Restore Configuratie",
-    "configure_system_backuprestores1note": 
+    "configure_system_backuprestores1note":
         "Select Automation Programs to restore:",
-    "systemsettings_backuprestores1cancel": 
+    "systemsettings_backuprestores1cancel":
         "Annuleren",
-    "systemsettings_backuprestores1confirm": 
+    "systemsettings_backuprestores1confirm":
         "Restore",
-    "configure_system_serviceportheading": 
+    "configure_system_serviceportheading":
         "Http Service Poort",
-    "configure_system_serviceportchangenote": 
+    "configure_system_serviceportchangenote":
         "Notie: na het wijzigen van de poort moet HomeGenie herstart worden om de wijzigingen door te voeren!",
-    "configure_system_serviceportcancel": 
+    "configure_system_serviceportcancel":
         "Afbreken",
-    "securitysettings_password_adminpassword": 
+    "securitysettings_password_adminpassword":
         "<b>admin</b> user password",
-    "securitysettings_password_changecancel": 
+    "securitysettings_password_changecancel":
         "Annuleren",
-    "securitysettings_password_changecommit": 
+    "securitysettings_password_changecommit":
         "Set",
-    "maintenance_configuration_factoryreset": 
+    "maintenance_configuration_factoryreset":
         "Factory Reset?",
-    "configure_maintenance_resetprompt": 
+    "configure_maintenance_resetprompt":
         "Are you sure you want to reset system configuration to factory defaults?",
-    "configure_maintenance_resetwarning": 
+    "configure_maintenance_resetwarning":
         "",
-    "configure_maintenance_resetproceed": 
+    "configure_maintenance_resetproceed":
         "Doorgaan",
-    "configure_maintenance_resetcancel": 
+    "configure_maintenance_resetcancel":
         "Annuleren",
-    "home_voicerecognition_text_placeholder": 
+    "home_voicerecognition_text_placeholder":
         "Klik op de knop voor spraakcontrole of typ uw opdracht...",
-    "home_voicerecognition_voice": 
+    "home_voicerecognition_voice":
         "Spraak",
-    "configure_menu_scheduler": 
+    "configure_menu_scheduler":
         "Scheduler",
-    "configure_grouplist": 
+    "configure_grouplist":
         "Groepenlijst",
-    "configure_schedulerservice_title": 
+    "configure_schedulerservice_title":
         "Event<br />Planning",
-    "configure_scheduler_events": 
+    "configure_scheduler_events":
         "Scheduler Events",
-    "configure_schedulerservice_bottombar_event_add": 
+    "configure_schedulerservice_bottombar_event_add":
         "Add Event",
-    "configure_schedulerservice_schedulerevent": 
+    "configure_schedulerservice_schedulerevent":
         "Scheduler Event",
-    "configure_schedulerservice_itemname": 
+    "configure_schedulerservice_itemname":
         "Naam",
-    "configure_schedulerservice_itemcronexp": 
+    "configure_schedulerservice_itemcronexp":
         "Cron Expressie",
-    "configure_schedulerservice_itemprogramid": 
+    "configure_schedulerservice_itemprogramid":
         "Programa Id of Naam (optioneel)",
-    "configure_schedulerservice_cancelitem": 
+    "configure_schedulerservice_cancelitem":
         "Annuleren",
-    "configure_schedulerservice_deleteitem": 
+    "configure_schedulerservice_deleteitem":
         "Verwijderen",
-    "configure_schedulerservice_updateitem": 
+    "configure_schedulerservice_updateitem":
         "Update",
-    "configure_system_updatemanager": 
+    "configure_system_updatemanager":
         "Update Manager",
-    "configure_system_updatemanager_updatecheck": 
+    "configure_system_updatemanager_updatecheck":
         "Update Check",
-    "configure_system_updatemanager_installupdate": 
+    "configure_system_updatemanager_installupdate":
         "Update installeren",
     "configure_system_updatemanager_no_updates":
         "No updates available.",
     "configure_system_updatemanager_updates_available":
         "The following updates are available:",
-    "configure_system_restart_service": 
+    "configure_system_restart_service":
         "Service Herstart",
-    "configure_system_restart": 
+    "configure_system_restart":
         "Herstarten",
-    "configure_system_loganddebug": 
+    "configure_system_loganddebug":
         "Logbestand",
-    "configure_system_logdownload": 
+    "configure_system_logdownload":
         "Download",
-    "configure_system_logdownloadtoday": 
+    "configure_system_logdownloadtoday":
         "Vandaag",
-    "configure_system_logdownloadyesterday": 
+    "configure_system_logdownloadyesterday":
         "Gisteren",
-    "configure_system_httpsettings": 
+    "configure_system_httpsettings":
         "HTTP instellingen",
-    "configure_security_passwordprotectedaccess_set": 
+    "configure_security_passwordprotectedaccess_set":
         "Set",
-    "configure_security_passwordprotectedaccess_clear": 
+    "configure_security_passwordprotectedaccess_clear":
         "Clear",
-    "configure_system_httpcache": 
+    "configure_system_httpcache":
         "Http Service Cache",
-    "configure_maintenance_configuration_info": 
+    "configure_maintenance_configuration_info":
         "<b>Note:</b> before restoring a backup file you've to set the same system password used when creating it.",
-    "configure_maintenance_configuration_backup": 
+    "configure_maintenance_configuration_backup":
         "Backup",
-    "configure_maintenance_configuration_restore": 
+    "configure_maintenance_configuration_restore":
         "Restore",
-    "configure_maintenance_configuration_factory_reset": 
+    "configure_maintenance_configuration_factory_reset":
         "Factory Reset",
-    "configure_system_modulescleanup": 
+    "configure_system_modulescleanup":
         "Modules Cleanup",
-    "configure_system_modulesselect": 
+    "configure_system_modulesselect":
         "Selecteer Modules",
-    "configure_system_remotemodules": 
+    "configure_system_remotemodules":
         "Remote Modules Routing",
-    "configure_system_modsroutingreset": 
+    "configure_system_modsroutingreset":
         "Reset",
-    "configure_system_userinterface": 
+    "configure_system_userinterface":
         "Gebruikers Interface",
-    "configure_system_eventshistory": 
+    "configure_system_eventshistory":
         "Events History",
-    "home_about_version": 
+    "home_about_version":
         "versie",
-    "home_about_codename": 
+    "home_about_codename":
         "codename",
-    "home_about_motto": 
+    "home_about_motto":
         "motto",
-    "home_about_concept": 
+    "home_about_concept":
         "Concept, design, ideas and coding<br /> by G-Labs",
-    "home_about_license": 
+    "home_about_license":
         "license",
-    "home_about_site": 
+    "home_about_site":
         "HomePage and Support",
-    "home_about_site_docs": 
+    "home_about_site_docs":
         "Documentatie",
-    "actions_menu": 
+    "actions_menu":
         "Actie Menu",
     "control_group_configure":
         "Configure Group",
-    "control_macrorecord_record_macro": 
+    "control_macrorecord_record_macro":
         "Macro opnemen",
-    "control_macrorecord_recording": 
+    "control_macrorecord_recording":
         "Opnemen...",
-    "control_macrorecord_description": 
+    "control_macrorecord_description":
         "Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Save</strong> button when finished.",
-    "control_macrorecord_close": 
+    "control_macrorecord_close":
         "Sluiten",
-    "control_macrorecord_options": 
+    "control_macrorecord_options":
         "Opties",
-    "control_macrorecord_options_pause": 
+    "control_macrorecord_options_pause":
         "Pause Between commands",
-    "control_macrorecord_options_none": 
+    "control_macrorecord_options_none":
         "Geen",
-    "control_macrorecord_options_mimic": 
+    "control_macrorecord_options_mimic":
         "Mimic",
-    "control_macrorecord_options_fixed": 
+    "control_macrorecord_options_fixed":
         "Fixed",
-    "control_macrorecord_options_pauseduration": 
+    "control_macrorecord_options_pauseduration":
         "Fixed pause seconds",
-    "update_options_popup_loading": 
+    "update_options_popup_loading":
         "Programma data laden",
-    "control_widget_notconfigured_title": 
+    "control_widget_notconfigured_title":
         "Widget not configured",
-    "control_widget_notconfigured_text": 
+    "control_widget_notconfigured_text":
         "Click this button to edit configuration.",
-    "control_widget_notconfigured_button": 
+    "control_widget_notconfigured_button":
         "Sluit",
-    "configure_program_options_details": 
+    "configure_program_options_details":
         "Details",
-    "configure_program_options_restart": 
+    "configure_program_options_restart":
         "Restart",
-    "configure_program_details_implemfeatures": 
+    "configure_program_details_implemfeatures":
         "Implemented Features",
-    "configure_program_details_configoptions": 
+    "configure_program_details_configoptions":
         "Configuratie Opties",
-    "configure_program_details_moduleparams": 
+    "configure_program_details_moduleparams":
         "Module Parameters",
-    "configure_group_actionmenu_deletegroup": 
+    "configure_group_actionmenu_deletegroup":
         "Groep verwijderen",
-    "configure_group_actionmenu_addseparatorlabel": 
+    "configure_group_actionmenu_addseparatorlabel":
         "Scheiding toevoegen",
-    "configure_group_actionmenu_addmodule": 
+    "configure_group_actionmenu_addmodule":
         "Module toevoegen",
-    "configure_separator_edit": 
+    "configure_separator_edit":
         "Scheiding wijzigen",
-    "configure_separator_label": 
+    "configure_separator_label":
         "Label",
-    "configure_separator_placeholder": 
+    "configure_separator_placeholder":
         "enter label",
-    "configure_module_optaddseparator": 
+    "configure_module_optaddseparator":
         "Update",
-    "configure_module_parameters": 
+    "configure_module_parameters":
         "Parameters",
-    "configure_module_parameters_delete": 
+    "configure_module_parameters_delete":
         "Verwijderen",
-    "configure_module_parameters_save": 
+    "configure_module_parameters_save":
         "Bewaar",
-    "configure_module_parameters_linktitle": 
+    "configure_module_parameters_linktitle":
         "Module Parameters",
-    "configure_automationgroup_add": 
+    "configure_automationgroup_add":
         "Toevoegen",
-    "configure_programslist_listtitle": 
+    "configure_programslist_listtitle":
         "Programmalijst",
-    "configure_programslist_tap_disable": 
+    "configure_programslist_tap_disable":
         "Tap to DISABLE program",
-    "configure_programslist_tap_enable": 
+    "configure_programslist_tap_enable":
         "Tap to ENABLE program",
-    "configure_programslist_deletegroup": 
+    "configure_programslist_deletegroup":
         "Groep verwijderen",
-    "configure_programslist_importprogram": 
+    "configure_programslist_importprogram":
         "Programma importeren",
-    "configure_programslist_addnewprogram": 
+    "configure_programslist_addnewprogram":
         "Programma toevoegen",
-    "configure_programslist_refreshlist": 
+    "configure_programslist_refreshlist":
         "Lijst verversen",
-    "configure_programslist_import": 
+    "configure_programslist_import":
         "Importeren",
-    "configure_program_summary": 
+    "configure_program_summary":
         "Summary",
-    "configure_program_programcode": 
+    "configure_program_programcode":
         "Programma Code",
-    "configure_program_sketchcode": 
+    "configure_program_sketchcode":
         "Sketch Code",
-    "configure_program_triggercode": 
+    "configure_program_triggercode":
         "Trigger Code",
-    "configure_program_makefile": 
+    "configure_program_makefile":
         "Makefile",
-    "configure-editprogram-addcommand": 
+    "configure-editprogram-addcommand":
         "Commando toevoegen",
-    "configure-editprogram-addcondition": 
+    "configure-editprogram-addcondition":
         "Conditie toevoegen",
-    "configure-editprogram-capture": 
+    "configure-editprogram-capture":
         "Capture",
-    "configure-editprogram-help": 
+    "configure-editprogram-help":
         "Help",
-    "configure_program_triggertype": 
+    "configure_program_triggertype":
         "Trigger",
-    "configure_editprogram_options_delete": 
+    "configure_editprogram_options_delete":
         "Programma verwijderen",
-    "configure_editprogram_saving_succeed": 
+    "configure_editprogram_saving_succeed":
         "Bewaren succesvol.",
-    "configure_editprogram_saving": 
+    "configure_editprogram_saving":
         "Programma data bijwerken.",
-    "configure_editprogram_error_updating": 
+    "configure_editprogram_error_updating":
         "Fout bij programma bijwerken!",
-    "configure_editprogram_compile": 
+    "configure_editprogram_compile":
         "Compileren",
-    "systemsettings_selectport_title": 
+    "systemsettings_selectport_title":
         "Notice",
-    "systemsettings_selectport_placeholder": 
+    "systemsettings_selectport_placeholder":
         "(selecteer poort...)",
-    "systemsettings_selectport_text": 
+    "systemsettings_selectport_text":
         "Slecteer poort van het apparaat",
-    "systemsettings_selectport_button": 
+    "systemsettings_selectport_button":
         "Sluit",
-    "configure_group_newgroupconfirm": 
+    "configure_group_newgroupconfirm":
         "Ok",
-    "configure_module_optremoveseparator": 
+    "configure_module_optremoveseparator":
         "Verwijderen",
-    "configure_program_selectcommandtarget": 
+    "configure_program_selectcommandtarget":
         "Select command target",
-    "configure_program_selectcommandtoperform": 
+    "configure_program_selectcommandtoperform":
         "Select command to perform",
-    "configure_program_commandcustom": 
+    "configure_program_commandcustom":
         "Custom API command",
-    "configure_program_wizardproceed": 
+    "configure_program_wizardproceed":
         "Verder",
-    "configure_program_commandcapturetitle": 
+    "configure_program_commandcapturetitle":
         "Capturing Commands",
-    "configure_program_waitingnewcommand": 
+    "configure_program_waitingnewcommand":
         "Waiting for new events...",
-    "configure_program_waitingnewcommandadvice": 
+    "configure_program_waitingnewcommandadvice":
         "",
-    "configure_program_capturestop": 
+    "configure_program_capturestop":
         "Stop",
-    "configure_program_wizard_editline_title": 
+    "configure_program_wizard_editline_title":
         "Edit line",
-    "configure_program_wizard_editcmdline_prompt": 
+    "configure_program_wizard_editcmdline_prompt":
         "Move or delete line <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
-    "configure_program_wizard_editconline_prompt": 
+    "configure_program_wizard_editconline_prompt":
         "Move or delete line <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
-    "configure_program_wizard_editline_number": 
+    "configure_program_wizard_editline_number":
         "New line number",
-    "configure_program_wizard_editline_delete": 
+    "configure_program_wizard_editline_delete":
         "Verwijderen",
-    "configure_program_wizard_editline_change": 
+    "configure_program_wizard_editline_change":
         "Verplaats",
-    "configure_program_selectconditionsubject": 
+    "configure_program_selectconditionsubject":
         "Select condition subject",
-    "configure_program_selectconditionproperty": 
+    "configure_program_selectconditionproperty":
         "Select comparison property",
-    "configure_program_conditioncapturetitle": 
+    "configure_program_conditioncapturetitle":
         "Capturing Conditions",
-    "configure_program_waitingnewcondition": 
+    "configure_program_waitingnewcondition":
         "Waiting for new events...",
-    "configure_program_waitingnewconditionadvice": 
+    "configure_program_waitingnewconditionadvice":
         "",
-    "configure_program_options_update": 
+    "configure_program_options_update":
         "Update",
-    "configure_system_updateinstall": 
+    "configure_system_updateinstall":
         "Update Install",
-    "configure_system_deletemodule": 
+    "configure_system_deletemodule":
         "Delete Module",
-    "systemsettings_backuprestores1selectallnone": 
+    "systemsettings_backuprestores1selectallnone":
         "Selecteer alle / geen",
-    "securitysettings_password_setpassword": 
+    "securitysettings_password_setpassword":
         "Set password",
-    "securitysettings_password_enterpassword": 
+    "securitysettings_password_enterpassword":
         "Enter password for 'admin' user",
-    "maintenance_configuration_servicerestart": 
+    "maintenance_configuration_servicerestart":
         "Service herstarten?",
-    "configure_maintenance_restartprompt": 
+    "configure_maintenance_restartprompt":
         "Weet je zeker dat je de service wil herstarten?",
-    "configure_maintenance_restartwarning": 
+    "configure_maintenance_restartwarning":
         "",
-    "configure_module_typemediareceiver": 
+    "configure_module_typemediareceiver":
         "Media Ontvanger",
-    "configure_module_typemediatransmitter": 
+    "configure_module_typemediatransmitter":
         "Media Transmitter",
-    "configure_module_featuresoptions": 
+    "configure_module_featuresoptions":
         "Features/Options",
     "configure_editprogram_files":
         "Bestanden",
@@ -682,97 +682,95 @@
     "configure_widgeteditor_savingjavascript":
         "Javascript bewaren...",
     "configure_interfaces_importdriver":
-        "Add-ons installeren",        
+        "Interface installeren",
     "configure_interfaces_download":
-        "Download & installeer",        
+        "Download en installeer",
     "configure_interfaces_upload":
-        "Upload & installeer",        
-    "configure_interfaces_addonslist":
-        "Add-on lijst",        
-    "configure_interfaces_installaddons":
-        "Installeer Add-ons",
+        "Upload en installeer",
+    "configure_interfaces_install":
+        "Installeer Interface",
     "configure_interfaces_downloadfromurl":
-        "Download add-on package van URL",
+        "Download package van URL",
     "configure_interfaces_uploadpackage":
-        "Upload add-on package van bestand",
+        "Upload package van bestand",
     "cronwizard_title":
-        "Cron event Wizard",      
+        "Cron event Wizard",
     "cronwizard_tab_minute":
-        "Minuut",        
+        "Minuut",
     "cronwizard_tab_hour":
-        "Uur",        
+        "Uur",
     "cronwizard_tab_dayofmonth":
-        "Dag van de Maand",        
+        "Dag van de Maand",
     "cronwizard_tab_month":
-        "Maand",        
+        "Maand",
     "cronwizard_tab_dayofweek":
-        "Dag van de Week",      
+        "Dag van de Week",
     "cronwizard_event_willoccur":
         "This event will occur",
     "cronwizard_minuteselect_everyminute":
-        "iedere minuut",        
+        "iedere minuut",
     "cronwizard_minuteselect_everysomeminute":
-        "iedere &lt;n&gt; minuut",        
+        "iedere &lt;n&gt; minuut",
     "cronwizard_minuteselect_eachselected":
-        "alle geselecteerd minuten",        
+        "alle geselecteerd minuten",
     "cronwizard_hourselect_everyhour":
-        "iedere uue",        
+        "iedere uue",
     "cronwizard_hourselect_everysomehour":
-        "iedere &lt;n&gt; uur",        
+        "iedere &lt;n&gt; uur",
     "cronwizard_hourselect_eachselected":
-        "alle geselecteerd uren",        
+        "alle geselecteerd uren",
     "cronwizard_dayselect_everyday":
-        "iedere dag",        
+        "iedere dag",
     "cronwizard_dayselect_eachselected":
-        "alle geselecteerd dagen",        
+        "alle geselecteerd dagen",
     "cronwizard_monthselect_everymonth":
-        "iedere maand",        
+        "iedere maand",
     "cronwizard_monthselect_eachselected":
-        "alle geselecteerde maanden",        
+        "alle geselecteerde maanden",
     "cronwizard_dayowselect_everydayow":
-        "iedere dag van de week",        
+        "iedere dag van de week",
     "cronwizard_dayowselect_eachselected":
-        "alle geselecteerde dagen van de week",        
+        "alle geselecteerde dagen van de week",
     "common_month_jan":
-        "jan",        
+        "jan",
     "common_month_feb":
-        "feb",        
+        "feb",
     "common_month_mar":
-        "maa",        
+        "maa",
     "common_month_apr":
-        "apr",        
+        "apr",
     "common_month_may":
-        "mei",        
+        "mei",
     "common_month_jun":
-        "jun",        
+        "jun",
     "common_month_jul":
-        "jul",        
+        "jul",
     "common_month_aug":
-        "aug",        
+        "aug",
     "common_month_sep":
-        "sep",        
+        "sep",
     "common_month_oct":
-        "okt",        
+        "okt",
     "common_month_nov":
-        "nov",        
+        "nov",
     "common_month_dec":
-        "dec",        
+        "dec",
     "common_dayofweek_sun":
-        "zo",        
+        "zo",
     "common_dayofweek_mon":
-        "ma",        
+        "ma",
     "common_dayofweek_tue":
-        "di",        
+        "di",
     "common_dayofweek_wed":
-        "wo",        
+        "wo",
     "common_dayofweek_thu":
-        "do",        
+        "do",
     "common_dayofweek_fri":
-        "vr",        
+        "vr",
     "common_dayofweek_sat":
-        "za",        
+        "za",
     "common_command_cancel":
-        "Annuleren",        
+        "Annuleren",
     "common_command_ok":
         "Ok",
     "common_command_proceed":
@@ -821,7 +819,7 @@
         "Instellingen",
     "home_menu_maintenance":
         "Onderhoud",
-    "home_menu_about": 
+    "home_menu_about":
         "Over",
     "home_menu_about_homegenie":
         "About HomeGenie",

@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+    This file is part of HomeGenie Project source code.
+
+    HomeGenie is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    HomeGenie is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+*/
+
+/*
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
+
+using System;
 using System.IO;
 using HomeGenie.Automation;
 using HomeGenie.Service.Logging;
@@ -61,7 +83,11 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "release_info.xml");
             // Statistics db
             if (File.Exists(StatisticsLogger.STATISTICS_DB_FILE))
+            {
+                homegenie.Statistics.CloseStatisticsDatabase();
                 Utility.AddFileToZip(archiveName, StatisticsLogger.STATISTICS_DB_FILE);
+                homegenie.Statistics.OpenStatisticsDatabase();
+            }
             // Installed packages
             if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
                 Utility.AddFileToZip(archiveName, PackageManager.PACKAGE_LIST_FILE);

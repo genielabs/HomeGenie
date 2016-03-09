@@ -43,8 +43,6 @@ using HomeGenie.Service;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 
-using MIG.Utility;
-
 using Nmqtt;
 using NetClientLib;
 
@@ -476,10 +474,7 @@ namespace HomeGenie.Automation.Scripting
                 string json = "[" + response + "]";
                 try
                 {
-                    JsonSerializerSettings settings = new JsonSerializerSettings();
-                    settings.ContractResolver = new Serialization.CustomResolver();
-                    settings.Converters.Add(new Serialization.FormattedDecimalConverter(CultureInfo.InvariantCulture));
-                    returnValue = (JsonConvert.DeserializeObject(json, settings) as JArray)[0];
+                    returnValue = (JsonConvert.DeserializeObject(json) as JArray)[0];
                 }
                 catch
                 {
