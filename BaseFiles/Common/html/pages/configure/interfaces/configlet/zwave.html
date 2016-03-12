@@ -56,6 +56,7 @@
             <a data-ui-field="removenode_btn" data-locale-id="remove_node" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
             <a data-ui-field="healnetwork_btn" data-locale-id="healnetwork" class="ui-btn ui-icon-heart ui-btn-icon-left">Heal Network</a>
             <a data-ui-field="hardreset_btn" data-locale-id="hard_reset_heading" class="ui-btn ui-icon-alert ui-btn-icon-left">Hard Reset</a>
+            <a data-ui-field="update_p1db_btn" data-locale-id="update_p1db" class="ui-btn ui-icon-refresh ui-btn-icon-left">Update Pepper1 Database</a>
         </div>
     </div>
 
@@ -121,6 +122,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         var addNodeButton = configlet.find('[data-ui-field=addnode_btn]');
         var removeNodeButton = configlet.find('[data-ui-field=removenode_btn]');
         var hardResetButton = configlet.find('[data-ui-field=hardreset_btn]');
+        var updateP1DbButton = configlet.find('[data-ui-field=update_p1db_btn]');
         // TODO: deprecate the following two fields
         //var delaySelect = configlet.find('[data-ui-field=commanddelay]');
         //var startupDiscoverySelect = configlet.find('[data-ui-field=startupdiscovery]');
@@ -225,6 +227,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         hardResetButton.on('click', function() {
             _this.ZWaveHardReset();
         });
+        updateP1DbButton.on('click', function() {
+            _this.ZWaveUpdateP1Db();
+        });
         // initialize popups
         this.DiscoveryPopup.popup();
         this.HealNetworkPopup.popup();
@@ -324,6 +329,14 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/1/Controller.HardReset/', function (data) { });
         });
     },
+
+    ZWaveUpdateP1Db: function() {
+        var p1archive = encodeURIComponent('http://pepper1.net/zwavedb/device/export/device_archive.zip');
+        $.mobile.loading('show', {text: 'Updating Pepper1 DB...', textVisible: true});
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Db.Update/' + p1archive, function (data) { 
+            $.mobile.loading('hide');
+        });
+    },
     
     Localize: function() {
         var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
@@ -367,7 +380,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Cancel",
             "hard_resetproceed":
-                "Proceed"
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
         };
         var locale = defaultLocale;
         // other locale definitions follows
@@ -412,7 +427,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Cancel",
             "hard_resetproceed":
-                "Proceed"
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
             };
             break;
         // Spanish
@@ -454,7 +471,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Cancel",
             "hard_resetproceed":
-                "Proceed"
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
             };
             break;
         // French
@@ -496,7 +515,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Annuler",
             "hard_resetproceed":
-                "Exécuter"
+                "Exécuter",
+            "update_p1db":
+                "Update Pepper1 Database"
             };
             break;
         // Italian
@@ -538,7 +559,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Annulla",
             "hard_resetproceed":
-                "Procedi"
+                "Procedi",
+            "update_p1db":
+                "Update Pepper1 Database"
             };
             break;
         // Dutch
@@ -580,7 +603,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Cancel",
             "hard_resetproceed":
-                "Proceed"
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
             };
             break;
         // Russian
@@ -622,7 +647,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Отмена",
             "hard_resetproceed":
-                "Продолжить"
+                "Продолжить",
+            "update_p1db":
+                "Обновить базу данных Pepper1"
             };
             break;
         // Swedish
@@ -664,7 +691,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             "hard_resetcancel":
                 "Cancel",
             "hard_resetproceed":
-                "Proceed"
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
             };
             break;
         }
