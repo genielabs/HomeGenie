@@ -118,41 +118,41 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
             //
             switch (desc) {
                 case 'Wake Up':
-                $('#opt-zwave-wakeup-box').show();
-                break;
+                    $('#opt-zwave-wakeup-box').show();
+                    break;
                 case 'Association':
-                $('#opt-zwave-associations-box').show();
-                break;
+                    $('#opt-zwave-associations-box').show();
+                    break;
                 case 'Configuration':
-                $('#opt-zwave-configuration-box').show();
-                break;
+                    $('#opt-zwave-configuration-box').show();
+                    break;
                 case 'Multi Instance':
-                $('#opt-zwave-multiinstance-box').show();
-                break;
+                    $('#opt-zwave-multiinstance-box').show();
+                    break;
                 case 'Configuration':
-                $('#opt-zwave-configuration-box').show();
-                break;
+                    $('#opt-zwave-configuration-box').show();
+                    break;
                 case 'Switch Binary':
-                $('#opt-zwave-switchbinary-opt').show();
-                break;
+                    $('#opt-zwave-switchbinary-opt').show();
+                    break;
                 case 'Switch Multi Level':
-                $('#opt-zwave-switchmulti-opt').show();
-                break;
+                    $('#opt-zwave-switchmulti-opt').show();
+                    break;
                 case 'Sensor Binary':
-                $('#opt-zwave-sensorbinary-opt').show();
-                break;
+                    $('#opt-zwave-sensorbinary-opt').show();
+                    break;
                 case 'Sensor Multi Level':
-                $('#opt-zwave-sensormulti-opt').show();
-                break;
+                    $('#opt-zwave-sensormulti-opt').show();
+                    break;
                 case 'Battery':
-                $('#opt-zwave-battery-box').show();
-                break;
+                    $('#opt-zwave-battery-box').show();
+                    break;
                 case 'Meter':
-                $('#opt-zwave-meter-box').show();
-                break;
+                    $('#opt-zwave-meter-box').show();
+                    break;
                 case 'Door Lock':
-                $('#opt-zwave-door-lock').show();
-                break;
+                    $('#opt-zwave-door-lock').show();
+                    break;
             }
         }
         //
