@@ -21,19 +21,16 @@
 */
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
-using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
 using HomeGenie.Service;
 using MIG;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
-using Newtonsoft.Json;
-using System.Globalization;
-using System.Diagnostics;
 
 namespace HomeGenie.Automation
 {
@@ -145,16 +142,21 @@ namespace HomeGenie.Automation
         public int GeneratePid()
         {
             int pid = USERSPACE_PROGRAMS_START;
-            var userPrograms = automationPrograms.FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START);
-            foreach (ProgramBlock program in userPrograms)
+            var userPrograms = automationPrograms.
+                                    FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START).
+                                    GroupBy(p => p.Address).
+                                    OrderBy(p => p.Key).
+                                    Select(p => p.Key);
+
+            foreach (var program in userPrograms)
             {
-                if (pid == program.Address)
-                    pid = program.Address + 1;
+                if (pid == program)
+                    pid = program + 1;
                 else
                     break;
             }
-            // TODO: it should return -1 if all user programs are already allocated
-            return pid;
+
+            return (pid <= ProgramManager.PACKAGE_PROGRAMS_START ? pid : -1);
         }
 
         public void ProgramAdd(ProgramBlock program)
