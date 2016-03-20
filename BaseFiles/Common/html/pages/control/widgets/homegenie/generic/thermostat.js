@@ -1,7 +1,7 @@
 [{
     Name: "Thermostat Widget",
     Author: "Mike Tanana",
-    Version: "2013-07-03",
+    Version: "2016-02-05",
 
     GroupName: '',
     IconImage: 'pages/control/widgets/homegenie/generic/images/temperature.png',
@@ -90,10 +90,12 @@
                     if (thermostatMode.Value == 'Cool') {
                         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
                         controlpopup.find('[data-ui-field=mode_cool]').addClass('ui-btn-active');
+                        _this.EditCoolSetPoint(controlpopup, module);
                     }
                     else if (thermostatMode.Value == 'Heat') {
                         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
                         controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
+                        _this.EditHeatSetPoint(controlpopup, module);
                     }
                     else if (thermostatMode.Value == 'Auto') {
                         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
@@ -265,6 +267,30 @@
         var operatingMode = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.Mode");
         if (operatingMode != null) displayMode = operatingMode.Value;
         widget.find('[data-ui-field=mode_value]').html(displayMode);
+
+
+        // hide SetPoints depending on mode
+        if (operatingMode != null) {
+            switch (operatingMode.Value) {
+                case 'Off':
+                case 'FanOnly':
+                    widget.find('[data-ui-field=heat_field]').hide();
+                    widget.find('[data-ui-field=cool_field]').hide();
+                    break;
+                case 'Heat':
+                case 'AuxHeat':
+                case 'Furnace':
+                case 'HeatEconomy':
+                    widget.find('[data-ui-field=cool_field]').hide();
+                    break;
+                case 'Cool':
+                case 'CoolEconomy':
+                    widget.find('[data-ui-field=heat_field]').hide();
+                    break;
+                default:
+                    break;
+            }
+        }
 
     },
 
