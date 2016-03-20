@@ -34,6 +34,7 @@ using Microsoft.Scripting.Hosting;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Diagnostics;
+using System.Linq;
 
 namespace HomeGenie.Automation
 {
@@ -145,7 +146,9 @@ namespace HomeGenie.Automation
         public int GeneratePid()
         {
             int pid = USERSPACE_PROGRAMS_START;
-            var userPrograms = automationPrograms.FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START);
+            var userPrograms = automationPrograms
+                .FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START)
+                .OrderBy(p => p.Address);
             foreach (ProgramBlock program in userPrograms)
             {
                 if (pid == program.Address)
