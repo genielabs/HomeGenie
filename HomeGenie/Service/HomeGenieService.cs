@@ -763,7 +763,7 @@ namespace HomeGenie.Service
                     {
                         foreach (var parameter in module.Properties)
                         {
-                            // these two properties have to be kept in clear text
+                            // these four properties have to be kept in clear text
                             if (parameter.Name != Properties.WidgetDisplayModule
                                 && parameter.Name != Properties.VirtualModuleParentId
                                 && parameter.Name != Properties.ProgramStatus

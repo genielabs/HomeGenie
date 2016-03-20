@@ -39,6 +39,7 @@ using ICSharpCode.SharpZipLib.Core;
 
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
+using Newtonsoft.Json.Serialization;
 
 namespace HomeGenie.Service
 {
@@ -154,36 +155,13 @@ namespace HomeGenie.Service
 
         public static string Module2Json(Module module, bool hideProperties)
         {
-            string json = "{\n" +
-                "   \"Name\": \"" + JsonEncode(module.Name) + "\",\n" +
-                "   \"Description\": \"" + JsonEncode(module.Description) + "\",\n" +
-                "   \"DeviceType\": \"" + module.DeviceType + "\",\n" +
-                "   \"Domain\": \"" + module.Domain + "\",\n" +
-                "   \"Address\": \"" + module.Address + "\",\n";
-            if (!hideProperties)
+            var settings = new JsonSerializerSettings{ Formatting = Formatting.Indented };
+            if (hideProperties)
             {
-                json += "   \"Properties\": [ \n";
-                //
-                for (int i = 0; i < module.Properties.Count; i++)
-                {
-                    var parameter = module.Properties[i];
-                    json += "       {\n" +
-                        "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
-                        "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
-                        "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
-                        (String.IsNullOrWhiteSpace(parameter.FieldType)
-                            ? "" : "           \"FieldType\": \"" + JsonEncode(parameter.FieldType) + "\",\n") +
-                        "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\"\n" +
-                        "       },\n";
-                }
-                json = json.TrimEnd(',', '\n');
-                //
-                json += "   ],\n";
+                var resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties" });
+                settings.ContractResolver = resolver;
             }
-            json += "   \"RoutingNode\": \"" + (module.RoutingNode != null ? module.RoutingNode : "") + "\"\n";
-            json += "}";
-            //
-            return json;
+            return JsonConvert.SerializeObject(module, settings);
         }
 
         public static string JsonEncode(string fieldValue)
@@ -619,5 +597,23 @@ namespace HomeGenie.Service
             }
         }
 
+    }
+
+    public class IgnorePropertyContractResolver : DefaultContractResolver
+    {
+        private readonly List<string> _ignoredProperties;
+
+        public IgnorePropertyContractResolver(List<string> ignoredProperties)
+        {
+            _ignoredProperties = ignoredProperties;
+        }
+
+        protected override JsonProperty CreateProperty(System.Reflection.MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var jsonProperty = base.CreateProperty(member, memberSerialization);
+            if (_ignoredProperties.Contains(member.Name))
+                jsonProperty.ShouldSerialize = instance => {return false;};
+            return jsonProperty;
+        }
     }
 }
