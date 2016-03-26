@@ -1,17 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r514</Version>
+  <Version>1.1 beta r515</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Moved LIRC, Insteon, W800RF32, V4LCamera interfaces to package repository
-  - Fix C# automation program compile error on mono ARM platforms with locale settings using comma separator for decimals
-  - Fix package install error on mono ARM &lt; 4.0.4
-  - Added new Program.ApiCall(string apiCommand) helper method
-  - Added installed packages and statistics files to backup archive
-  - Fixed bug in Z-Wave MultiCmd and SensorBinary command class
-  - Added Package Browser and Installer to the Maintenance page
-  - Fixed occasional "object reference not set" error when compiling/starting a program
-  - Added recursion check to scheduler event expressions
-  - Fixed bug in evaluating composite scheduler events using names (@)</ReleaseNote>
-  <ReleaseDate>2016-01-22T15:38:02.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fix "Add new Program" bug (issue #259)
+    - Z-Wave Pepper1 database is now queried online
+    - Fix zwavenode.xml (node data persistence file) serialization issue</ReleaseNote>
+  <ReleaseDate>2016-03-26T12:05:11.0000Z</ReleaseDate>
 </ReleaseInfo>

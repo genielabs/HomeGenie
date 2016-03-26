@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+26/03/2016 v1.1-beta.515
+    - Fix "Add new Program" bug (issue #259)
+    - Z-Wave Pepper1 database is now queried online
+    - Fix zwavenode.xml (node data persistence file) serialization issue
+
 22/01/2016 v1.1-beta.514
     - Moved LIRC, Insteon, W800RF32, V4LCamera interfaces to package repository
     - Fix C# automation program compile error on mono ARM platforms with locale settings using comma separator for decimals
