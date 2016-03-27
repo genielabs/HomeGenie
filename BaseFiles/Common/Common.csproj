@@ -3514,6 +3514,9 @@
     <None Include="html\README.RestoreP513.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="additionalZwaveDevices.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
