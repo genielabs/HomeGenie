@@ -731,6 +731,8 @@
         "jeden Tag der Woche",
     "cronwizard_dayowselect_eachselected":
         "jeweils ausgewählt Tag in der Woche",
+    "no_device_found_for_manufacturerId":
+        "No device info was found for manufacturer ID",
 "##":
 "## COMMON LOCALES",
 "##":

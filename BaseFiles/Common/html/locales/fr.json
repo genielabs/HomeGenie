@@ -731,6 +731,8 @@
         "Chaque jour de la semaine",
     "cronwizard_dayowselect_eachselected":
         "Jours de semaine sélectionnés",
+    "no_device_found_for_manufacturerId":
+        "No device info was found for manufacturer ID",
 "##":
 "## COMMON LOCALES",
 "##":

@@ -731,6 +731,8 @@
         "iedere dag van de week",
     "cronwizard_dayowselect_eachselected":
         "alle geselecteerde dagen van de week",
+    "no_device_found_for_manufacturerId":
+        "No device info was found for manufacturer ID",
     "common_month_jan":
         "jan",
     "common_month_feb":

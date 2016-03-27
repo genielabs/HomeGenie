@@ -734,7 +734,9 @@
     "cronwizard_dayowselect_everydayow":
         "каждый день недели",        
     "cronwizard_dayowselect_eachselected":
-        "каждый выбранный день недели",   
+        "каждый выбранный день недели",
+    "no_device_found_for_manufacturerId":
+        "В базе данных нет информации об устройстве с manufacturer ID",
 "##":
 "## COMMON LOCALES",
 "##":

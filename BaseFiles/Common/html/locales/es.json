@@ -733,6 +733,8 @@
         "todos los días de la semana",
     "cronwizard_dayowselect_eachselected":
         "cada día seleccionado de la semana",
+    "no_device_found_for_manufacturerId":
+        "No device info was found for manufacturer ID",
 "##":
 "## COMMON LOCALES",
 "##":
