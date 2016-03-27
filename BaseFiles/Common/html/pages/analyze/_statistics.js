@@ -14,6 +14,32 @@ HG.WebApp.Statistics._RefreshInterval = 5 * 60000; // stats refresh interval = 2
 HG.WebApp.Statistics._SelItemObject = false;
 HG.WebApp.Statistics._ItemObject = '';
 //
+
+HG.WebApp.Statistics.GetDateBoxLocale = function () {
+    var locale = 'default';
+    var dateboxLanguages = jQuery.mobile.datebox.prototype.options.lang;
+    var userLanguage = HG.WebApp.Locales.GetUserLanguage();
+
+    if (dateboxLanguages) {
+        // Is the user's preferred language supported?
+        if (dateboxLanguages[userLanguage]) {
+            locale = userLanguage;
+        }
+
+        // Is there a locale available with the user's language in it? Take the first one.
+        else if (userLanguage.length === 2) {
+            $.each(dateboxLanguages, function (supportedLocale) {
+                if (supportedLocale.substring(0, 2) === userLanguage) {
+                    locale = supportedLocale;
+                    return false;
+                }
+            });
+        }
+    }
+
+    return locale;
+};
+
 HG.WebApp.Statistics.InitializePage = function () {
     $('#page_analyze_source').on('change', function () {
         var selected = $(this).find('option:selected');
@@ -308,8 +334,8 @@ HG.WebApp.Statistics.Refresh = function () {
             var end = new Date(parseFloat(trange.EndTime));
             var today = new Date();
             var minDays = Math.ceil((today - start) / (1000 * 60 * 60 * 24));
-            $('#page_analyze_datefrom').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Locales.GetUserLanguage() }).datebox('refresh');
-            $('#page_analyze_dateto').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Locales.GetUserLanguage() }).datebox('refresh');
+            $('#page_analyze_datefrom').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Statistics.GetDateBoxLocale() }).datebox('refresh');
+            $('#page_analyze_dateto').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Statistics.GetDateBoxLocale() }).datebox('refresh');
             if ($('#page_analyze_datefrom').val() == '') {
                 $('#page_analyze_datefrom').datebox('setTheDate', today);
                 $('#page_analyze_datefrom').trigger('datebox', {'method':'doset'})
