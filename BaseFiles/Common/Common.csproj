@@ -3514,7 +3514,7 @@
     <None Include="html\README.RestoreP513.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="additionalZwaveDevices.xml">
+    <None Include="lib\mig\p1db_custom.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
