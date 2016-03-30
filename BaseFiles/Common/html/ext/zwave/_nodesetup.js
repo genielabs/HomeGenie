@@ -213,6 +213,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     */
     //
 
+    $('#no-device-found-dialog-popup').popup();
     var devinfo = {};
 
     if (manufacturerspec != null && nodeVersion != null) {
@@ -229,10 +230,15 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
         $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/1/Db.GetDevice/' + manufacturerspec.Value.toLowerCase() + '/' + version, function (data) {
 
             $.mobile.loading('hide');
-            var responseData = JSON.parse(data.ResponseValue);
+            var responseData = [];
+            try {
+                responseData = JSON.parse(data.ResponseValue);
+            }
+            catch(e) { }
             devinfo = responseData[0];
             if (typeof devinfo === 'undefined') {
-                // TODO: notify user that device info wasn't found in pepper1db
+                $('#no-device-found-manufacturerId').text(manufacturerspec.Value.toLowerCase());
+                $('#no-device-found-dialog-popup').popup('open');
                 return;
             }
 

@@ -730,7 +730,9 @@
     "cronwizard_dayowselect_everydayow":
         "every day of week",        
     "cronwizard_dayowselect_eachselected":
-        "each selected day of week",        
+        "each selected day of week",       
+    "no_device_found_for_manufacturerId":
+        "No device info was found for manufacturer ID", 
     "common_month_jan":
         "Jan",        
     "common_month_feb":
