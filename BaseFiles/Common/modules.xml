@@ -1110,100 +1110,16 @@
     <Address>1</Address>
     <Properties>
       <ModuleParameter>
-        <Name>EnergyManagement.EnergySavingMode</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815446Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.110588Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>HomeGenie.ScheduleControl</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.81546Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOff</Name>
-        <Value>aP5xXbpLvanu8smp3kJ85NtxHptqcyoOFcs8Xp0ONEA=</Value>
-        <Description />
-        <UpdateTime>2015-01-03T14:02:11.110766Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOn</Name>
-        <Value>cTOF8mIugpfgzfgDPpbH5b3Oftjy6p0QkFUy7HCT8vg=</Value>
-        <Description />
-        <UpdateTime>2015-01-03T14:02:11.110943Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SecurityAlarm</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815484Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815486Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.Enable</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815487Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815489Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815491Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SunRiseOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-23T16:17:21.6399216Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SunSetOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-23T16:17:21.6409205Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TouchlessToggle</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-23T17:02:26.8571012Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TurnOffDelay</Name>
-        <Value>x7W6TCAxBXz/CDUi+lC+ZQ==</Value>
-        <Description />
-        <UpdateTime>2015-01-03T14:02:11.111119Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Meter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.111295Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>MobileNotification.SendChanges</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:08.815512Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -1216,12 +1132,6 @@
         <Value>r0n3TaaTzY37ZtZX4xg53Emgcc1dASgMVhxT4wtiPS/WXDzPsQ1V9b/TcV7AyfNt</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.111661Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Status.LastLevel</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <UpdateTime>2015-01-03T14:02:11.11184Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
@@ -1264,100 +1174,16 @@
     <Address>2</Address>
     <Properties>
       <ModuleParameter>
-        <Name>EnergyManagement.EnergySavingMode</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187955Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.112553Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>HomeGenie.ScheduleControl</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187963Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187963Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187964Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SecurityAlarm</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187965Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187966Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.Enable</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187967Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187969Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.18797Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SunRiseOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T17:41:54.018871Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SunSetOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T17:41:54.018786Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TouchlessToggle</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T17:41:54.018165Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TurnOffDelay</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187974Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Meter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.112734Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>MobileNotification.SendChanges</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:14.187977Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -1370,12 +1196,6 @@
         <Value>scF8VAU4sOjryaEj1FDqcRVkyqgxG9q78fobkwMg6VX02ogodZhAIpLcDoLNdOjz</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.113098Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Status.LastLevel</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <UpdateTime>2015-01-03T14:02:11.114522Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
@@ -1418,100 +1238,16 @@
     <Address>3</Address>
     <Properties>
       <ModuleParameter>
-        <Name>EnergyManagement.EnergySavingMode</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618876Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.11527Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>HomeGenie.ScheduleControl</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618891Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618893Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618897Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SecurityAlarm</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618898Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.6189Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.Enable</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618901Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618903Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618905Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SunRiseOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T17:41:54.021388Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SunSetOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T17:41:54.021286Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TouchlessToggle</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T17:41:54.020571Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TurnOffDelay</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618913Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Meter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.11545Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>MobileNotification.SendChanges</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T21:31:21.618917Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -1524,12 +1260,6 @@
         <Value>9TBtMgGMsQwWeB1apCQ0iL+g9JwUSCGwbMGX74VA8gF7TYn76LowT1OsRS9aLIsF</Value>
         <Description />
         <UpdateTime>2015-01-03T14:02:11.115809Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Status.LastLevel</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <UpdateTime>2015-01-03T14:02:11.115987Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
@@ -1572,76 +1302,10 @@
     <Address>4</Address>
     <Properties>
       <ModuleParameter>
-        <Name>EnergyManagement.EnergySavingMode</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.33672Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336747Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleControl</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336757Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336794Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336765Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SecurityAlarm</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336812Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336884Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.Enable</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336849Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336867Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336901Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TurnOffDelay</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336949Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>MobileNotification.SendChanges</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:05.336967Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -1678,76 +1342,10 @@
     <Address>5</Address>
     <Properties>
       <ModuleParameter>
-        <Name>EnergyManagement.EnergySavingMode</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754293Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754302Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleControl</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754311Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOff</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754327Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.ScheduleOn</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754319Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SecurityAlarm</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754336Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754365Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.Enable</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754347Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754355Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754373Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.TurnOffDelay</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.75439Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>MobileNotification.SendChanges</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-07-25T22:13:19.754398Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>

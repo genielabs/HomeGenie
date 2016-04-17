@@ -18,5 +18,6 @@ HomeGenie is using:
 - LIRC                              http://lirc.org
 - LAME                              http://lame.sourceforge.net
 - Pepper One Z-Wave DB              http://www.pepper1.net/
+- M2Mqtt                            http://m2mqtt.wordpress.com
 
 Z-Wave driver (ZWaveLib) originarly based on article "An introduction to Z-Wave programming in C#" (http://www.digiwave.dk/en/programming/an-introduction-to-z-wave-programming-in-c/).

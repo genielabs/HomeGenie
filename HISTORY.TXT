@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+17/04/2016 v1.1-beta.516
+    - Replaced nmqtt library with M2Mqyy.Net
+    - Fixed Data.Module.NeedsUdpdate serialization bug
+    - Reset oldest 24 hours of data instead of whole DB when statistics DB exceed size limit
+    - Fixed Web Server (MIG) headers bug preventing client from caching files
+    - Added event raising when a module property is changed from the UI; deprecated HG.Automation.Programs.PostBack; 
+
 26/03/2016 v1.1-beta.515
     - Fix "Add new Program" bug (issue #259)
     - Z-Wave Pepper1 database is now queried online

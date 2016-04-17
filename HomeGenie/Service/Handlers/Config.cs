@@ -111,9 +111,9 @@ namespace HomeGenie.Service.Handlers
                         var portList = new List<string>();
                         for (int p = serialPorts.Length - 1; p >= 0; p--)
                         {
-                            if (serialPorts[p].Contains("/ttyS") 
-                                || serialPorts[p].Contains("/ttyUSB") 
-                                || serialPorts[p].Contains("/ttyAMA")   // RaZberry
+                            if (serialPorts[p].Contains("/ttyS")
+                                || serialPorts[p].Contains("/ttyUSB")
+                                || serialPorts[p].Contains("/ttyAMA")// RaZberry
                                 || serialPorts[p].Contains("/ttyACM"))  // ZME_UZB1
                             {
                                 portList.Add(serialPorts[p]);
@@ -470,7 +470,7 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
-                    var parameter = Utility.ModuleParameterSet(module, migCommand.GetOption(2), migCommand.GetOption(3));
+                    homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, migCommand.GetOption(2), migCommand.GetOption(3));
                     request.ResponseData = new ResponseText("OK");
                 }
                 catch (Exception ex)
@@ -608,22 +608,19 @@ namespace HomeGenie.Service.Handlers
                         if (currentParameter == null)
                         {
                             currentModule.Properties.Add(newParameter);
+                            homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
                         }
                         else if (newParameter.NeedsUpdate)
                         {
                             // reset current reporting Watts if VMWatts field is set to 0
                             if (newParameter.Name == Properties.VirtualMeterWatts && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
                             {
-                                homegenie.RaiseEvent(
-                                    Domains.HomeGenie_System,
-                                    currentModule.Domain,
-                                    currentModule.Address,
-                                    currentModule.Description,
-                                    Properties.MeterWatts,
-                                    "0.0"
-                                );
+                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, Properties.MeterWatts, "0.0");
                             }
-                            currentParameter.Value = newParameter.Value;
+                            else if (newParameter.Value != currentParameter.Value)
+                            {
+                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
+                            }
                         }
                     }
                     // look for deleted properties

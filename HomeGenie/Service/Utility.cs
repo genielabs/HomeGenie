@@ -44,7 +44,7 @@ using Newtonsoft.Json.Serialization;
 namespace HomeGenie.Service
 {
     
-    public static class Extensions
+    public static class SerializationExtensions
     {
         /// <summary>
         /// Perform a deep Copy of the object.
@@ -60,6 +60,19 @@ namespace HomeGenie.Service
                 return default(T);
             }
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
+        }
+    }
+
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = dt.DayOfWeek - startOfWeek;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 

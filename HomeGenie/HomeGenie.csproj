@@ -123,32 +123,6 @@
       <HintPath>..\Externals\sqlite\System.Data.SQLite.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\Externals\nmqtt\Common.Logging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>..\Externals\nmqtt\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Nmqtt">
-      <HintPath>..\Externals\nmqtt\Nmqtt.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\Externals\nmqtt\System.Reactive.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\Externals\nmqtt\System.Reactive.Interfaces.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\Externals\nmqtt\System.Reactive.Linq.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Raspberry.IO.SerialPeripheralInterface">
       <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
     </Reference>
@@ -193,6 +167,10 @@
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\Externals\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="M2Mqtt.Net">
+      <HintPath>..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

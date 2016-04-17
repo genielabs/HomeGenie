@@ -20,19 +20,22 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using HomeGenie.Service.Constants;
-using HomeGenie.Service.Logging;
-using MIG;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using MIG;
+
+using HomeGenie.Service.Constants;
+using HomeGenie.Service.Logging;
 
 namespace HomeGenie.Service.Handlers
 {
     public class Statistics
     {
         private HomeGenieService homegenie;
+
         public Statistics(HomeGenieService hg)
         {
             homegenie = hg;
@@ -177,39 +180,39 @@ namespace HomeGenie.Service.Handlers
                             double sum = 0;
                             switch (x)
                             {
-                                case 0:
-                                    if (migCommand.GetOption(0).StartsWith(Properties.MeterAny))
-                                    {
-                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Min(se => se.Value));
-                                    }
-                                    else
-                                    {
-                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Min(se => se.Value));
-                                    }
-                                    break;
-                                case 1:
-                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Max(se => se.Value));
-                                    break;
-                                case 2:
-                                    if (migCommand.GetOption(0).StartsWith(Properties.MeterAny))
-                                    {
-                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
-                                    }
-                                    else
-                                    {
-                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
-                                    }
-                                    break;
-                                case 3:
-                                    if (migCommand.GetOption(0).StartsWith(Properties.MeterAny))
-                                    {
-                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
-                                    }
-                                    else
-                                    {
-                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
-                                    }
-                                    break;
+                            case 0:
+                                if (migCommand.GetOption(0).StartsWith(Properties.MeterAny))
+                                {
+                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Min(se => se.Value));
+                                }
+                                else
+                                {
+                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Min(se => se.Value));
+                                }
+                                break;
+                            case 1:
+                                sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Max(se => se.Value));
+                                break;
+                            case 2:
+                                if (migCommand.GetOption(0).StartsWith(Properties.MeterAny))
+                                {
+                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
+                                }
+                                else
+                                {
+                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
+                                }
+                                break;
+                            case 3:
+                                if (migCommand.GetOption(0).StartsWith(Properties.MeterAny))
+                                {
+                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
+                                }
+                                else
+                                {
+                                    sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
+                                }
+                                break;
                             }
                             // date is normalized to the current date, time info is preserved from original data entry
                             var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
@@ -276,14 +279,14 @@ namespace HomeGenie.Service.Handlers
                 {
                     if (entry.CustomData == "")
                         entry.CustomData = entry.Domain + ":" + entry.Address;
-                    if(moduleName != entry.CustomData)
+                    if (moduleName != entry.CustomData)
                     {
-                        if(moduleName != "")
+                        if (moduleName != "")
                         {
                             response = response.TrimEnd(',');
                             response += " ],[ ";
                         }
-                        response += "[\""+entry.CustomData + "\"] ],[ ";
+                        response += "[\"" + entry.CustomData + "\"] ],[ ";
                         moduleName = entry.CustomData;
                     }
                     response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
@@ -318,9 +321,9 @@ namespace HomeGenie.Service.Handlers
                 break;
             case "Parameter.StatDelete":
                 response = "[";
-                var dateText = migCommand.GetOption(0).Replace('.',',');
+                var dateText = migCommand.GetOption(0).Replace('.', ',');
                 dateStart = JavascriptToDateUtc(double.Parse(dateText));
-                var responseDelete = homegenie.Statistics.DeleteStat(dateStart,migCommand.GetOption(1));
+                var responseDelete = homegenie.Statistics.DeleteStat(dateStart, migCommand.GetOption(1));
                 response += "[Response," + responseDelete + "]";
                 response += "]";
                 request.ResponseData = response;

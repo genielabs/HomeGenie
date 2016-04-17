@@ -21,9 +21,9 @@
  */
 
 using System;
-
-using Nmqtt;
 using System.Net;
+using System.Text;
+using uPLibrary.Networking.M2Mqtt;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -33,7 +33,7 @@ namespace HomeGenie.Automation.Scripting
         public int Port = 1883;
         public string ClientId = "hg-" + new Random().Next(10000).ToString();
     }
-    
+
     /// <summary>
     /// MQTT client helper.
     /// Class instance accessor: **MqttClient**
@@ -41,11 +41,12 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class MqttClientHelper
     {
-        private MqttClient mqttClient = null;
         private NetworkCredential networkCredential = null;
         private MqttEndPoint endPoint = new MqttEndPoint();
-        private object mqttSyncLock = new object();
-                
+
+        private MqttClient mqttClient = null;
+        //private object mqttSyncLock = new object();
+
         /// <summary>
         /// Sets the MQTT server to use.
         /// </summary>
@@ -55,7 +56,7 @@ namespace HomeGenie.Automation.Scripting
             endPoint.Address = server;
             return this;
         }
-        
+
         /// <summary>
         /// Connects to the MQTT server using the default port (1883) and the specified client identifier.
         /// </summary>
@@ -79,7 +80,7 @@ namespace HomeGenie.Automation.Scripting
             Connect();
             return this;
         }
-                
+
         /// <summary>
         /// Disconnects from the MQTT server.
         /// </summary>
@@ -87,14 +88,8 @@ namespace HomeGenie.Automation.Scripting
         {
             if (this.mqttClient != null)
             {
-                try
-                {
-                    this.mqttClient.Dispose();
-                }
-                catch
-                {
-                }
-                mqttClient = null;
+                this.mqttClient.Disconnect();
+                this.mqttClient = null;
             }
             return this;
         }
@@ -106,13 +101,14 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
         public MqttClientHelper Subscribe(string topic, Action<string,string> callback)
         {
-            mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
-                //.ObserveOn(System.Threading.SynchronizationContext.Current)
-                .Subscribe(msg =>
-                           { 
-                    callback(msg.Topic, msg.Payload);
-                    //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
-                });
+            mqttClient.MqttMsgPublishReceived += (sender, e) =>
+            {
+                var msg = Encoding.UTF8.GetString(e.Message);
+                callback(e.Topic, msg);
+            };
+
+            mqttClient.Subscribe(new string[] { topic }, new byte[] { uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+
             return this;
         }
 
@@ -123,13 +119,15 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text.</param>
         public MqttClientHelper Publish(string topic, string message)
         {
-            lock (mqttSyncLock)
-            {
-                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
-            }
+            var body = Encoding.UTF8.GetBytes(message);
+            mqttClient.Publish(topic, body, 1, true);
+            //            lock (mqttSyncLock)
+            //            {
+            //                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+            //            }
             return this;
         }
-        
+
         /// <summary>
         /// Publish a message to the specified topic.
         /// </summary>
@@ -137,11 +135,8 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text as byte array.</param>
         public MqttClientHelper Publish(string topic, byte[] message)
         {
-        	lock (mqttSyncLock)
-        	{
-        		mqttClient.PublishMessage(topic, message);
-        	}
-        	return this;
+            mqttClient.Publish(topic, message);
+            return this;
         }
 
         /// <summary>
@@ -168,14 +163,15 @@ namespace HomeGenie.Automation.Scripting
         private void Connect()
         {
             Disconnect();
-            mqttClient = new MqttClient(endPoint.Address, endPoint.Port, endPoint.ClientId);
+            mqttClient = new MqttClient(endPoint.Address, endPoint.Port, false, null, null, MqttSslProtocols.None);
+
             if (this.networkCredential != null)
             {
-                mqttClient.Connect(this.networkCredential.UserName, this.networkCredential.Password);
+                mqttClient.Connect(this.endPoint.ClientId, this.networkCredential.UserName, this.networkCredential.Password);
             }
             else
             {
-                mqttClient.Connect();
+                mqttClient.Connect(endPoint.ClientId);
             }
         }
 
@@ -183,4 +179,3 @@ namespace HomeGenie.Automation.Scripting
 
     }
 }
-

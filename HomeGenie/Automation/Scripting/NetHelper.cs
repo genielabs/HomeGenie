@@ -43,7 +43,6 @@ using HomeGenie.Service;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 
-using Nmqtt;
 using NetClientLib;
 
 namespace HomeGenie.Automation.Scripting
@@ -72,12 +71,9 @@ namespace HomeGenie.Automation.Scripting
         private string mailSubject = "";
         private Dictionary<string, byte[]> attachments = new Dictionary<string, byte[]>();
 
-        private MqttClient mqttClient = null;
-
         // multithread safe lock objects
         private object smtpSyncLock = new object();
         //private object httpSyncLock = new object();
-        private object mqttSyncLock = new object();
 
         private HomeGenieService homegenie;
         private bool defaultCredentials;
@@ -182,126 +178,117 @@ namespace HomeGenie.Automation.Scripting
             this.mailSubject = subject;
             this.mailBody = messageText;
             //
-            lock(smtpSyncLock)
-            using (var message = new System.Net.Mail.MailMessage())
-            {
-                string[] mailRecipients = recipients.Split(';');
-                for (int e = 0; e < mailRecipients.Length; e++)
+            lock (smtpSyncLock)
+                using (var message = new System.Net.Mail.MailMessage())
                 {
-                    message.To.Add(mailRecipients[e]);
-                }
-                message.Subject = this.mailSubject;
-                message.From = new MailAddress(this.mailFrom);
-                message.Body = this.mailBody;
-                //
-                for (int a = 0; a < attachments.Count; a++)
-                {
-                    var attachment = new Attachment(
-                                         new MemoryStream(attachments.ElementAt(a).Value),
-                                         attachments.ElementAt(a).Key
-                                     );
-                    message.Attachments.Add(attachment);
-                }
-                //
-                if (this.mailService == "")
-                {
-                    // this is a System Parameter
-                    var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                    string[] mailRecipients = recipients.Split(';');
+                    for (int e = 0; e < mailRecipients.Length; e++)
                     {
-                        return mp.Name == "Messaging.Email.SmtpServer";
-                    });
-                    if (spSmtpServer != null)
-                    {
-                        this.mailService = spSmtpServer.Value;
+                        message.To.Add(mailRecipients[e]);
                     }
-                }
-                if (this.mailPort == -1)
-                {
-                    // this is a System Parameter
-                    var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                    {
-                        return mp.Name == "Messaging.Email.SmtpPort";
-                    });
-                    if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
-                    {
-                        this.mailPort = (int)spSmtpPort.DecimalValue;
-                    }
-                }
-                if (this.mailSsl == -1)
-                {
-                    // this is a System Parameter
-                    var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                    {
-                        return mp.Name == "Messaging.Email.SmtpUseSsl";
-                    });
-                    if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
-                    {
-                        this.mailSsl = 1;
-                    }
-                }
-                var credentials = this.networkCredential;
-                if (credentials == null)
-                {
-                    var username = "";
-                    // this is a System Parameter
-                    var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                    {
-                        return mp.Name == "Messaging.Email.SmtpUserName";
-                    });
-                    if (spSmtpUserName != null)
-                    {
-                        username = spSmtpUserName.Value;
-                    }
-                    if (!String.IsNullOrWhiteSpace(username))
-                    {
-                        var password = "";
-                        // this is a System Parameter
-                        var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                        {
-                            return mp.Name == "Messaging.Email.SmtpPassword";
-                        });
-                        if (spSmtpPassword != null)
-                        {
-                            password = spSmtpPassword.Value;
-                        }
-                        credentials = new NetworkCredential(username, password);
-                    }
-                }
+                    message.Subject = this.mailSubject;
+                    message.From = new MailAddress(this.mailFrom);
+                    message.Body = this.mailBody;
                     //
-                using (var smtpClient = new SmtpClient(this.mailService))
-                {
-                    try
+                    for (int a = 0; a < attachments.Count; a++)
                     {
-                        smtpClient.Credentials = credentials;
-                        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        if (this.mailPort > 0)
-                        {
-                            smtpClient.Port = this.mailPort;
-                        }
-                        if (this.mailSsl > 0)
-                        {
-                            smtpClient.EnableSsl = (this.mailSsl == 1);
-                        }
-                        smtpClient.Send(message);
-                        attachments.Clear();
+                        var attachment = new Attachment(new MemoryStream(attachments.ElementAt(a).Value), attachments.ElementAt(a).Key);
+                        message.Attachments.Add(attachment);
                     }
-                    catch (Exception ex)
+                    //
+                    if (this.mailService == "")
                     {
-                        HomeGenieService.LogError(
-                            Domains.HomeAutomation_HomeGenie_Automation,
-                            this.GetType().Name,
-                            ex.Message,
-                            "Exception.StackTrace",
-                            ex.StackTrace
-                        );
-                        return false;
+                        // this is a System Parameter
+                        var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpServer";
+                        });
+                        if (spSmtpServer != null)
+                        {
+                            this.mailService = spSmtpServer.Value;
+                        }
                     }
-                    finally 
+                    if (this.mailPort == -1)
                     {
-                        smtpClient.Dispose();
+                        // this is a System Parameter
+                        var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpPort";
+                        });
+                        if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
+                        {
+                            this.mailPort = (int)spSmtpPort.DecimalValue;
+                        }
+                    }
+                    if (this.mailSsl == -1)
+                    {
+                        // this is a System Parameter
+                        var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpUseSsl";
+                        });
+                        if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
+                        {
+                            this.mailSsl = 1;
+                        }
+                    }
+                    var credentials = this.networkCredential;
+                    if (credentials == null)
+                    {
+                        var username = "";
+                        // this is a System Parameter
+                        var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpUserName";
+                        });
+                        if (spSmtpUserName != null)
+                        {
+                            username = spSmtpUserName.Value;
+                        }
+                        if (!String.IsNullOrWhiteSpace(username))
+                        {
+                            var password = "";
+                            // this is a System Parameter
+                            var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                            {
+                                return mp.Name == "Messaging.Email.SmtpPassword";
+                            });
+                            if (spSmtpPassword != null)
+                            {
+                                password = spSmtpPassword.Value;
+                            }
+                            credentials = new NetworkCredential(username, password);
+                        }
+                    }
+                    //
+                    using (var smtpClient = new SmtpClient(this.mailService))
+                    {
+                        try
+                        {
+                            smtpClient.Credentials = credentials;
+                            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            if (this.mailPort > 0)
+                            {
+                                smtpClient.Port = this.mailPort;
+                            }
+                            if (this.mailSsl > 0)
+                            {
+                                smtpClient.EnableSsl = (this.mailSsl == 1);
+                            }
+                            smtpClient.Send(message);
+                            attachments.Clear();
+                        }
+                        catch (Exception ex)
+                        {
+                            HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, this.GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                            return false;
+                        }
+                        finally
+                        {
+                            smtpClient.Dispose();
+                        }
                     }
                 }
-            }
             return true;
         }
 
@@ -430,15 +417,9 @@ namespace HomeGenie.Automation.Scripting
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogError(
-                        Domains.HomeAutomation_HomeGenie_Automation,
-                        this.GetType().Name,
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, this.GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
-                finally 
+                finally
                 {
                     webClient.Dispose();
                 }
@@ -511,15 +492,9 @@ namespace HomeGenie.Automation.Scripting
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogError(
-                        Domains.HomeAutomation_HomeGenie_Automation,
-                        this.GetType().Name,
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, this.GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
-                finally 
+                finally
                 {
                     webClient.Dispose();
                 }
@@ -562,77 +537,7 @@ namespace HomeGenie.Automation.Scripting
 
         #endregion
 
-        //TODO: deprecate MQTT client in NetHelper (use MqttClientHelper instead)
-        #region MQTT client
-
-        /// <summary>
-        /// Sets the MQTT server to use.
-        /// </summary>
-        /// <returns>The service.</returns>
-        /// <param name="server">MQTT server address.</param>
-        /// <param name="port">MQTT server port.</param>
-        /// <param name="topic">MQTT topic.</param>
-        [Obsolete("use 'MqttClientHelper' class instead")]
-        public NetHelper MqttService(string server, int port, string clientId)
-        {
-            mqttClient = new MqttClient(server, port, clientId);
-            if (this.networkCredential != null)
-            {
-                mqttClient.Connect(this.networkCredential.UserName, this.networkCredential.Password);
-            }
-            else
-            {
-                mqttClient.Connect();
-            }
-            return this;
-        }
-
-        //TODO: deprecate this (use this.networkCredential instead)
-        [Obsolete("use 'MqttClientHelper' class instead")]
-        public NetHelper MqttService(string server, int port, string username, string password, string clientId)
-        {
-            mqttClient = new MqttClient(server, port, clientId);
-            mqttClient.Connect(username, password);
-            return this;
-        }
-
-        /// <summary>
-        /// Subscribe the specified topic.
-        /// </summary>
-        /// <param name="topic">Topic name.</param>
-        /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
-        [Obsolete("use 'MqttClientHelper' class instead")]
-        public NetHelper Subscribe(string topic, Action<string,string> callback)
-        {
-            mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
-            //.ObserveOn(System.Threading.SynchronizationContext.Current)
-                .Subscribe(msg =>
-            { 
-                callback(msg.Topic, msg.Payload);
-                //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
-            });
-            return this;
-        }
-
-        /// <summary>
-        /// Publish a message to the specified topic.
-        /// </summary>
-        /// <param name="topic">Topic name.</param>
-        /// <param name="message">Message text.</param>
-        [Obsolete("use 'MqttClientHelper' class instead")]
-        public NetHelper Publish(string topic, string message)
-        {
-            lock (mqttSyncLock)
-            {
-                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
-            }
-            return this;
-        }
-
-        #endregion
-
-
-        //TODO: add autodoc comment (HG Event forwarding)
+        // TODO: add autodoc comment (HG Event forwarding)
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
             string eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
@@ -671,10 +576,6 @@ namespace HomeGenie.Automation.Scripting
             this.networkCredential = null;
             this.mailBody = "";
             this.mailSubject = "";
-            if (this.mqttClient != null)
-            {
-                try { this.mqttClient.Dispose(); } catch { }
-            }
         }
 
         private class WebClient : System.Net.WebClient

@@ -219,11 +219,7 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
 
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.Core.dll"));
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.Interfaces.dll"));
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.Linq.dll"));
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.PlatformServices.dll"));
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Nmqtt.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "M2Mqtt.Net.dll"));
 
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);

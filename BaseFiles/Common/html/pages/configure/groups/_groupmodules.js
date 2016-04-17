@@ -715,11 +715,6 @@ HG.WebApp.GroupModules.FeatureUpdate = function (context, value) {
     var property = context.parameter.Name;
     var mp = HG.WebApp.Utility.GetModulePropertyByName(module, property);
     HG.WebApp.Utility.SetModulePropertyByName(module, property, value);
-    // postback value change to the automation program
-    HG.Automation.Programs.PostBack('ui/feature', program, module, property, value, function(res){
-        // TODO: think about how the response could be used (eg. field value validation and such)
-    });
-    //property.Changed = true;
 };
 
 HG.WebApp.GroupModules.ShowModuleOptions = function (domain, address) {

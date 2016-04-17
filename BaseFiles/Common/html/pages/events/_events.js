@@ -250,7 +250,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-            } else if (eventLog.Property != 'Program.UiRefresh') {
+            } else if (!HG.WebApp.Events.IsBlacklisted(eventLog.Property)) {
                 //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                 //if (module.Name != '') name = module.Name;
                 popupdata = {
@@ -278,7 +278,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             // continue to default processing
 
         default:
-            if (module != null && eventLog.Property != 'Meter.Watts') {
+            if (module != null && !HG.WebApp.Events.IsBlacklisted(eventLog.Property)) {
 
                 var iconImage = HG.Ui.GetModuleIcon(module, null);
                 if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
@@ -360,12 +360,20 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             break;
     }
 
-    if (popupdata != null && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property) && eventLog.Description.indexOf(':nopopup:') < 0) {
+    if (popupdata != null 
+            && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property) && eventLog.Description.indexOf(':nopopup:') < 0
+            && !HG.WebApp.Events.IsBlacklisted(eventLog.Property)) {
 
         HG.WebApp.Events.ShowEventPopup(popupdata, eventLog);
 
     }
 
+};
+
+HG.WebApp.Events.IsBlacklisted = function(property) {
+    if (property == 'Meter.Watts' || property.startsWith('ConfigureOptions.') || property == 'Program.UiRefresh')
+        return true;
+    return false;
 };
 
 HG.WebApp.Events.PopupRefreshIgnore = function () {

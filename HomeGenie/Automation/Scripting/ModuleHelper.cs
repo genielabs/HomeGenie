@@ -148,7 +148,7 @@ namespace HomeGenie.Automation.Scripting
         public bool HasFeature(string feature)
         {
             var parameter = Service.Utility.ModuleParameterGet(module, feature);
-            return (parameter != null && parameter.Value != null && parameter.Value != "");
+            return (parameter != null && !String.IsNullOrWhiteSpace(parameter.Value));
         }
 
         /// <summary>

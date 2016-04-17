@@ -220,7 +220,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
           bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
-          module.Parameter("Status.ColorHsb").Value = color.H+','+color.S+','+bri;
+          Program.RaiseEvent(module, "Status.ColorHsb", color.H+','+color.S+','+bri, "Hue Light");
           Program.RaiseEvent(module, "Status.Level", bri, "Hue Light");
         }
         break;

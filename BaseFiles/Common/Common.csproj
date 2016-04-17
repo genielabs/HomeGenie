@@ -3087,30 +3087,6 @@
       <Link>lib\shared\NCrontab.pdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\nmqtt\Nmqtt.dll">
-      <Link>lib\shared\Nmqtt.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\nmqtt\Nmqtt.dll.mdb">
-      <Link>lib\shared\Nmqtt.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\nmqtt\System.Reactive.Core.dll">
-      <Link>lib\shared\System.Reactive.Core.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\nmqtt\System.Reactive.Interfaces.dll">
-      <Link>lib\shared\System.Reactive.Interfaces.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\nmqtt\System.Reactive.Linq.dll">
-      <Link>lib\shared\System.Reactive.Linq.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\nmqtt\System.Reactive.PlatformServices.dll">
-      <Link>lib\shared\System.Reactive.PlatformServices.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\..\Externals\upnp\UPnP.dll">
       <Link>lib\shared\UPnP.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -3515,6 +3491,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="lib\mig\p1db_custom.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll">
+      <Link>lib\shared\M2Mqtt.Net.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll.mdb">
+      <Link>lib\shared\M2Mqtt.Net.dll.mdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

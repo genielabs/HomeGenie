@@ -107,7 +107,6 @@ namespace HomeGenie.Data
         /// Gets or sets the type of the field.
         /// </summary>
         /// <value>The type of the field.</value>
-        [JsonIgnore]
         public string FieldType { get; set; }
 
         /// <summary>
@@ -116,7 +115,7 @@ namespace HomeGenie.Data
         /// <value>The update time.</value>
         public DateTime UpdateTime { get; set; }
 
-        [XmlIgnore,JsonIgnore]
+        [XmlIgnore]
         public bool NeedsUpdate { get; set; }
 
         /// <summary>
