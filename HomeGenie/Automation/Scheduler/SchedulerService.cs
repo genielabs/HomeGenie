@@ -192,8 +192,7 @@ namespace HomeGenie.Automation.Scheduler
             return true;
         }
 
-        private int recursionCount = 0;
-        public bool IsScheduling(DateTime date, string cronExpression)
+        public bool IsScheduling(DateTime date, string cronExpression, int recursionCount = 0)
         {
             string buildExpression = "";
             int p = 0;
@@ -258,7 +257,7 @@ namespace HomeGenie.Automation.Scheduler
                         recursionCount++;
                         try
                         {
-                            isEntryActive = (eventItem.IsEnabled && IsScheduling(date, eventItem.CronExpression));
+                            isEntryActive = (eventItem.IsEnabled && IsScheduling(date, eventItem.CronExpression, recursionCount));
                         } catch{ }
                         recursionCount--;
                         if (recursionCount < 0)

@@ -82,7 +82,7 @@ ec099554c398fcea43ad04f7cdde405c  usr/local/bin/homegenie/programs/35.dll
 05a1ce1e38861d8ffe07caa659a60429  usr/local/bin/homegenie/programs/6.dll
 46e85a0b3dc1f6fd6f71c1af250e303c  usr/local/bin/homegenie/programs/16.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
-5f74c914c6b799e46137a72a5b101194  usr/local/bin/homegenie/HomeGenie.exe.mdb
+62bb5e929fe0ee64517c91d0ab900b13  usr/local/bin/homegenie/HomeGenie.exe.mdb
 edb4222ca9b4aa24ff7ad7dc5d63ab89  usr/local/bin/homegenie/NetClientLib.dll.mdb
 b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
 037a39c0e60471e2ad6a155519aabaf8  usr/local/bin/homegenie/Common.dll.mdb
@@ -1177,7 +1177,7 @@ ce07e14186da81596585fb8970aa7d80  usr/local/bin/homegenie/html/ui/widgets/captur
 b8459e32556b6e692fae8f9ff81817c9  usr/local/bin/homegenie/html/ui/core/popup.cronwizard.html
 40acf64097f759ba725a1afb6f7075b8  usr/local/bin/homegenie/html/ui/core/popup.cronwizard.js
 9e90aad43d8acc5b45729f2296cb5907  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
-f0e003c7d0a382bd0566052fae7debd6  usr/local/bin/homegenie/HomeGenie.exe
+fdbb99c3e6c929e8f9ad15d2b490edb4  usr/local/bin/homegenie/HomeGenie.exe
 f9216f58947d48474938c108465a23b4  usr/local/bin/homegenie/release_info.xml
 536920e88b28850b8df27484746134f4  usr/local/bin/homegenie/NetClientLib.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
