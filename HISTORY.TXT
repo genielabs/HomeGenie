@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+25/04/2016 v1.1-beta.517
+    - Fixed concurrency issue in method IsScheduling
+
 17/04/2016 v1.1-beta.516
     - Replaced nmqtt library with M2Mqyy.Net
     - Fixed Data.Module.NeedsUdpdate serialization bug

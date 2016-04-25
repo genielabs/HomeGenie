@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r516</Version>
+  <Version>1.1 beta r517</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Replaced nmqtt library with M2Mqyy.Net
-    - Fixed Data.Module.NeedsUdpdate serialization bug
-    - Reset oldest 24 hours of data instead of whole DB when statistics DB exceed size limit
-    - Fixed Web Server (MIG) headers bug preventing client from caching files
-    - Added event raising when a module property is changed from the UI; deprecated HG.Automation.Programs.PostBack</ReleaseNote>
-  <ReleaseDate>2016-04-17T15:50:28.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed concurrency issue in method IsScheduling</ReleaseNote>
+  <ReleaseDate>2016-04-25T20:50:11.0000Z</ReleaseDate>
 </ReleaseInfo>
