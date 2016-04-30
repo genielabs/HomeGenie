@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Group>
     <Name>Dashboard</Name>
     <Wallpaper>wallpaper_006.jpg</Wallpaper>
@@ -21,12 +21,28 @@
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>Resources on the web</Address>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>Virtual Modules</Address>
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>4</Address>
-        <Domain>Favourites.Link</Domain>
+        <Address>2</Address>
+        <Domain>HomeAutomation.Demo</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>3</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.Demo</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>3</Address>
+        <Domain>HomeAutomation.Demo</Domain>
       </ModuleReference>
     </Modules>
   </Group>

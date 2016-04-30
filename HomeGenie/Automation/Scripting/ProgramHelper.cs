@@ -807,7 +807,17 @@ namespace HomeGenie.Automation.Scripting
                 homegenie.ProgramManager.Run(program, options);
             }
         }
-        
+
+        /// <summary>
+        /// Parses the given (api call) string as a MigInterfaceCommand object.
+        /// </summary>
+        /// <returns>The mig command.</returns>
+        /// <param name="command">Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").</param>
+        public MigInterfaceCommand ParseApiCall(string apiCall)
+        {
+            return new MigInterfaceCommand(apiCall);
+        }
+
         /// <summary>
         /// Wait until the given program is not running.
         /// </summary>

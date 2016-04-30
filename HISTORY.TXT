@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+30/04/2016 v1.1-beta.518
+    - Added Program.ParseApiCall(string apiCall) helper method
+    - Added "$" class in Javascript programs (eg.: $.on.webServiceCallReceived(...); $.modules.withAddres(...); $.program.raiseEvent(...); )
+    - Added Virtual Modules demo app (Javascript)
+    - Added program loop check
+    - Fixed error reporting in program engine
+
 25/04/2016 v1.1-beta.517
     - Fixed concurrency issue in method IsScheduling
 

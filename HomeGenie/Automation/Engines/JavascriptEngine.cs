@@ -33,6 +33,34 @@ namespace HomeGenie.Automation.Engines
     {
         internal Engine scriptEngine;
         private ScriptingHost hgScriptingHost;
+        private string initScript = @"var $ = {
+          // ModulesManager
+          modules: hg.modules,
+          // SettingsHelper
+          settings: hg.settings,
+          // NetHelper
+          net: hg.net,
+          //  ProgramHelper
+          program: hg.program,
+          // EventsHelper
+          on: hg.when,
+          // SerialPortHelper
+          serial: hg.serialPort,
+          // TcpClientHelper
+          tcp: hg.tcpClient,
+          // UdpClientHelper
+          udp: hg.udpClient, 
+          // MqttClientHelper
+          mqtt: hg.mqttClient,
+          // KnxClientHelper
+          knx: hg.knxClient,
+          // SchedulerHelper
+          scheduler: hg.scheduler,
+          // Miscellaneous functions
+          pause: function(seconds) { hg.pause(seconds); },
+          delay: function(seconds) { this.pause(seconds); }
+        }
+        ";
 
         public JavascriptEngine(ProgramBlock pb) : base(pb)
         {
@@ -57,14 +85,12 @@ namespace HomeGenie.Automation.Engines
             hgScriptingHost = new ScriptingHost();
             hgScriptingHost.SetHost(homegenie, programBlock.Address);
             scriptEngine.SetValue("hg", hgScriptingHost);
-
             return true;
         }
-
         public MethodRunResult EvaluateCondition()
         {
             MethodRunResult result = null;
-            string jsScript = programBlock.ScriptCondition;
+            string jsScript = initScript + programBlock.ScriptCondition;
             result = new MethodRunResult();
             try
             {
@@ -82,7 +108,7 @@ namespace HomeGenie.Automation.Engines
         public MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
-            string jsScript = programBlock.ScriptSource;
+            var jsScript = initScript + programBlock.ScriptSource;
             //scriptEngine.Options.AllowClr(false);
             result = new MethodRunResult();
             try

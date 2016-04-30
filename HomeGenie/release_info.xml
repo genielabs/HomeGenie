@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r517</Version>
+  <Version>1.1 beta r518</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed concurrency issue in method IsScheduling</ReleaseNote>
-  <ReleaseDate>2016-04-25T20:50:11.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added Program.ParseApiCall(string apiCall) helper method
+  - Added "$" class in Javascript programs (eg.: $.on.webServiceCallReceived(...); $.modules.withAddres(...); $.program.raiseEvent(...); )
+  - Added Virtual Modules demo app (Javascript)
+  - Added program loop check
+  - Fixed error reporting in program engine</ReleaseNote>
+  <ReleaseDate>2016-04-30T17:57:38.0000Z</ReleaseDate>
 </ReleaseInfo>

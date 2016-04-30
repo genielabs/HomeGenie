@@ -44,4 +44,8 @@
     <Name>Scheduling</Name>
     <Modules />
   </Group>
+  <Group>
+    <Name>Demo</Name>
+    <Modules />
+  </Group>
 </ArrayOfGroup>

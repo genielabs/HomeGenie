@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.300514Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.61705Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.114183Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.534742Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -441,8 +441,8 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Environment</Group>
     <Features />
-    <ActivationTime>2016-01-22T17:33:08.183785Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2016-04-30T16:34:19.667089Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -514,7 +514,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.223985Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.552785Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -736,7 +736,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.384178Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.375571Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -783,7 +783,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.142987Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.630189Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1132,7 +1132,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.400181Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.429659Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1262,7 +1262,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.234414Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.650594Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1361,7 +1361,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.136817Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.400069Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1619,7 +1619,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.162466Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.569941Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1768,7 +1768,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.332019Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.418094Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2018,7 +2018,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.155183Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.526573Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2863,7 +2863,7 @@ while (Program.IsEnabled)
   });
   Pause(120);
 }</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
     <Name>Basic Thermostat</Name>
@@ -2871,11 +2871,26 @@ while (Program.IsEnabled)
 Temperature/Switch modules must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5 .
 Basic Thermostats can also be used with the Timetable scheduler widget.</Description>
     <Group>Weather and Environment</Group>
-    <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>module.text:any:any:sensor.temperature</FieldType>
+        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForTypes>Thermostat</ForTypes>
+        <Property>VirtualThermostat.TemperatureModule</Property>
+        <Description>Module to read temperature from</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
+        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForTypes>Thermostat</ForTypes>
+        <Property>VirtualThermostat.SwitchModule</Property>
+        <Description>Module to switch on/off on set point</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime>2016-04-30T16:37:50.528666Z</ActivationTime>
+    <TriggerTime>2016-04-30T16:37:50.569913Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -3548,7 +3563,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.184582Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.474905Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3647,7 +3662,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.339691Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.680711Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3776,8 +3791,184 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-01-22T17:32:08.190372Z</TriggerTime>
+    <TriggerTime>2016-04-30T16:34:19.446064Z</TriggerTime>
     <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>/* 
+|| @title: Virtual Modules Demo App
+|| @author: Generoso Martello
+|| @version: 1.0
+|| @updated: 2016-04-30 16:54
+|| @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
+||
+|| HomeGenie API reference
+||   http://genielabs.github.io/HomeGenie/programs.html
+||   http://genielabs.github.io/HomeGenie/api/ape/annotated.html
+||   http://genielabs.github.io/HomeGenie/api/mig/overview.html
+*/
+
+var _domain = "HomeAutomation.Demo";
+
+// Add a temperature and luminance sensor
+$.program.addVirtualModule(_domain, "1", "Sensor", "homegenie/generic/sensor");
+$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Set temperature value", "slider:-50:100:0.5");
+$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Set luminance value", "slider:0:1000:1");
+$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Set motion detection status", "slider:0:1:1");
+
+// Add a doorwindow sensor
+$.program.addVirtualModule(_domain, "2", "DoorWindow", "homegenie/generic/doorwindow");
+$.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Set door/window status", "slider:0:1:1");
+
+// Add an on/off switch
+$.program.addVirtualModule(_domain, "3", "Switch", "homegenie/generic/switch");
+$.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
+
+$.program.run();</ScriptCondition>
+    <ScriptSource>/* 
+|| @title: Virtual Modules Demo App
+|| @author: Generoso Martello
+|| @version: 1.0
+|| @updated: 2016-04-30 16:54
+|| @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
+||
+|| HomeGenie API reference
+||   http://genielabs.github.io/HomeGenie/programs.html
+||   http://genielabs.github.io/HomeGenie/api/ape/annotated.html
+||   http://genielabs.github.io/HomeGenie/api/mig/overview.html
+*/
+
+var _domain = "HomeAutomation.Demo";
+$.modules = $.modules.inDomain(_domain);
+
+initialize();
+
+// handle API call for this domain
+$.on.webServiceCallReceived(_domain, function(apiCall){
+
+  var ac = $.program.parseApiCall(apiCall);
+  // Example: 
+  //  if the "apiCall" was
+  //    "http://&lt;homegenie_address&gt;/api/HomeAutomation.Demo/3/Control.Level/50/1000"
+  //  then "ac" will have the following property values
+  //    ac.domain = "HomeAutomation.Demo"
+  //    ac.address = "3"
+  //    ac.command = "Control.On"
+  //    ac.optionsString = "50/1000"
+  //    ac.getOption(0) = "50"
+  //    ac.getOption(1) = "1000"
+
+  var response = "ERROR";
+  // get the module addressed by the API call
+  var mod = $.modules.withAddress(ac.address).get();
+  if (mod.isOfDeviceType("Switch")) {
+    switch (ac.command) {
+      case 'Control.On':
+        $.program.raiseEvent(mod, "Status.Level", "1", "");
+        response = "OK";
+        break;
+      case 'Control.Off':
+        $.program.raiseEvent(mod, "Status.Level", "0", "");
+        response = "OK";
+        break;
+      case 'Control.Toggle':
+        $.program.raiseEvent(mod, "Status.Level", mod.level != 0 ? "0" : "1", "");
+        response = "OK";
+        break;
+    }
+  }
+
+  // beside the response, also return back requested data for debugging purpose
+  return JSON.stringify({ 
+    ResponseValue: response, 
+    ApiCall: apiCall, 
+    Domain: ac.domain, 
+    Address: ac.address, 
+    Command: ac.command,
+    Options: ac.optionsString,
+    Option1: ac.getOption(0),
+    Option2: ac.getOption(1)
+  });
+
+});
+
+hg.program.goBackground();
+
+// let's give some default properties to virtual modules
+function initialize() {
+  // Multi Sensor
+  var multiSensor = $.modules.withAddress("1").get();
+  if (multiSensor.instance.name == "")
+    multiSensor.instance.name = 'Multi Sensor';
+  if (multiSensor.parameter("Sensor.Temperature").value == "")
+    multiSensor.parameter("Sensor.Temperature").value = "25.5";
+  if (multiSensor.parameter("Sensor.Luminance").value == "")
+    multiSensor.parameter("Sensor.Luminance").value = "273";
+  if (multiSensor.parameter("Sensor.MotionDetect").value == "")
+    multiSensor.parameter("Sensor.MotionDetect").value = "0";
+  // Door Window
+  var doorWindow = $.modules.withAddress("2").get();
+  if (doorWindow.instance.name == "")
+    doorWindow.instance.name = "Door Sensor";
+  if (doorWindow.parameter("Sensor.DoorWindow").value == "")
+    doorWindow.parameter("Sensor.DoorWindow").value = "1";
+  // Boiler Switch
+  var boilerSwitch = $.modules.withAddress("3").get();
+  if (boilerSwitch.instance.name == "")
+    boilerSwitch.instance.name = "Boiler Switch";
+  if (boilerSwitch.parameter("Status.Level").value == "")
+    boilerSwitch.parameter("Status.Level").value = "0";
+}</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>400</Address>
+    <Name>Virtual Modules Demo</Name>
+    <Description>Virtual modules demo for testing and evaluating purpose: Multi Sensor, Door Window, Switch</Description>
+    <Group>Demo</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>slider:-50:100:0.5</FieldType>
+        <ForDomains>HomeAutomation.Demo</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>Sensor.Temperature</Property>
+        <Description>Set temperature value</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:1000:1</FieldType>
+        <ForDomains>HomeAutomation.Demo</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>Sensor.Luminance</Property>
+        <Description>Set luminance value</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:1:1</FieldType>
+        <ForDomains>HomeAutomation.Demo</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>Sensor.MotionDetect</Property>
+        <Description>Set motion detection status</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:1:1</FieldType>
+        <ForDomains>HomeAutomation.Demo</ForDomains>
+        <ForTypes>DoorWindow</ForTypes>
+        <Property>Sensor.DoorWindow</Property>
+        <Description>Set door/window status</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:1:1</FieldType>
+        <ForDomains>HomeAutomation.Demo</ForDomains>
+        <ForTypes>Switch</ForTypes>
+        <Property>Status.Level</Property>
+        <Description>Set switch on/off</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime>2016-04-30T16:34:19.203172Z</ActivationTime>
+    <TriggerTime>2016-04-30T16:34:19.585079Z</TriggerTime>
+    <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

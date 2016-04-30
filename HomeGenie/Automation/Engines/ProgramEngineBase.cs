@@ -152,6 +152,7 @@ namespace HomeGenie.Automation.Engines
                 StopProgram();
                 homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Idle");
             }
+            lastProgramRunTs = DateTime.Now;
         }
 
         public void StopProgram()
@@ -201,6 +202,9 @@ namespace HomeGenie.Automation.Engines
 
         #endregion
 
+        private int loopPreventCount = 0;
+        private int loopPreventMax = 5;
+        private DateTime lastProgramRunTs = DateTime.Now;
 
         private void CheckProgramSchedule()
         {
@@ -217,7 +221,20 @@ namespace HomeGenie.Automation.Engines
                 }
                 else if (WillProgramRun())
                 {
-                    StartProgram(null);
+                    if ((DateTime.Now - lastProgramRunTs).TotalMilliseconds < 100)
+                        loopPreventCount++;
+                    else
+                        loopPreventCount = 0;
+                    if (loopPreventCount < loopPreventMax)
+                        StartProgram(null);
+                    else
+                    {
+                        string errorMessage = "Program has been disabled because it was looping/spawning too fast.";
+                        List<ProgramError> error = new List<ProgramError>() { new ProgramError(){CodeBlock = "TC", ErrorNumber = "0", ErrorMessage = errorMessage } };
+                        programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                        programBlock.IsEnabled = false;
+                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.RuntimeError, "TC: " + errorMessage);
+                    }
                 }
             }
         }
@@ -269,7 +286,7 @@ namespace HomeGenie.Automation.Engines
             catch (Exception ex)
             {
                 // a runtime error occured
-                if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)))
+                if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)) && !ex.GetType().Equals(typeof(ThreadAbortException)))
                 {
                     List<ProgramError> error = new List<ProgramError>() { programBlock.GetFormattedError(ex, true) };
                     programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
