@@ -19,10 +19,10 @@ The UI can be also opened by right clicking on the tray icon..
 Download _.deb package_ file and install it by double clicking on it, or by using gdebi command line tool:
 
 ```bash
-wget -O homegenie-beta_1.1.r517_all.deb https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r517_all.deb/download
+wget -O homegenie-beta_1.1.r518_all.deb https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r518_all.deb/download
 sudo apt-get update
 sudo apt-get install gdebi-core
-sudo gdebi homegenie-beta_1.1.r517_all.deb
+sudo gdebi homegenie-beta_1.1.r518_all.deb
 ```
 
 HomeGenie will be installed in the _/usr/local/bin/homegenie_ foder.
@@ -82,8 +82,8 @@ sudo apt-get install arduino-mk empty-expect
 Enter the following command terminal
 
 ```bash
-wget https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r517.tgz/download
-tar xzvf HomeGenie_1_1_beta_r517.tgz
+wget https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r518.tgz/download
+tar xzvf HomeGenie_1_1_beta_r518.tgz
 ```
 
 ### Running HomeGenie
