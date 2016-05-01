@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.61705Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.758601Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.534742Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.61356Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -442,7 +442,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Environment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.667089Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.852292Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -514,7 +514,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.552785Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.788683Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -736,7 +736,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.375571Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.806468Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -783,7 +783,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.630189Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.848293Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1132,7 +1132,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.429659Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.522888Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1262,7 +1262,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.650594Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.695675Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1361,7 +1361,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.400069Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.513298Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1619,7 +1619,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.569941Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.707097Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1768,7 +1768,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.418094Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.657391Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2018,7 +2018,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.526573Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.540828Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2887,8 +2887,8 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description>Module to switch on/off on set point</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2016-04-30T16:37:50.528666Z</ActivationTime>
-    <TriggerTime>2016-04-30T16:37:50.569913Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2016-05-01T13:21:31.605161Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3563,7 +3563,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.474905Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.59409Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3662,7 +3662,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.680711Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.584004Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3791,7 +3791,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-04-30T16:34:19.446064Z</TriggerTime>
+    <TriggerTime>2016-05-01T13:21:31.53227Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3966,8 +3966,108 @@ function initialize() {
         <Description>Set switch on/off</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2016-04-30T16:34:19.203172Z</ActivationTime>
-    <TriggerTime>2016-04-30T16:34:19.585079Z</TriggerTime>
+    <ActivationTime>2016-05-01T13:21:31.331375Z</ActivationTime>
+    <TriggerTime>2016-05-01T13:21:31.740209Z</TriggerTime>
+    <Type>Javascript</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSource>var _domain = "HomeAutomation.Demo";
+var _param = "Sensor.DoorWindow";
+var door = $.modules.inDomain(_domain).withAddress("2").get();
+var currentValue = door.parameter(_param).decimalValue;
+$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>401</Address>
+    <Name>Demo - Toggle Door</Name>
+    <Description>Toogle door window sensor value</Description>
+    <Group>Demo</Group>
+    <Features />
+    <ActivationTime>2016-05-01T13:30:23.208921Z</ActivationTime>
+    <TriggerTime>2016-05-01T13:29:35.988749Z</TriggerTime>
+    <Type>Javascript</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSource>var _domain = "HomeAutomation.Demo";
+var _param = "Sensor.MotionDetect";
+var motion = $.modules.inDomain(_domain).withAddress("1").get();
+var currentValue = motion.parameter(_param).decimalValue;
+$.program.raiseEvent(motion, _param, "1", "");
+$.pause(1);
+$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>402</Address>
+    <Name>Demo - Motion Detected</Name>
+    <Description>Simulate motion detection</Description>
+    <Group>Demo</Group>
+    <Features />
+    <ActivationTime>2016-05-01T13:34:46.433145Z</ActivationTime>
+    <TriggerTime>2016-05-01T13:35:29.652642Z</TriggerTime>
+    <Type>Javascript</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSource>var _domain = "HomeAutomation.Demo";
+var _param = "Sensor.Temperature";
+var multiSensor = $.modules.inDomain(_domain).withAddress("1").get();
+var temperature = multiSensor.parameter(_param);
+// simulate temperature changes over the time
+while($.program.isRunning) {
+  $.program.raiseEvent(multiSensor, _param, (temperature.decimalValue+Math.random()), "");
+  $.pause(60*5); // pause 60*5 = 5 minutes
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>403</Address>
+    <Name>Demo - Simulate Temperature</Name>
+    <Description />
+    <Group>Demo</Group>
+    <Features />
+    <ActivationTime>2016-05-01T13:45:31.767056Z</ActivationTime>
+    <TriggerTime>2016-05-01T13:41:25.423213Z</TriggerTime>
+    <Type>Javascript</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSource>var _domain = "HomeAutomation.Demo";
+var _param = "Sensor.Luminance";
+var multiSensor = $.modules.inDomain(_domain).withAddress("1").get();
+var luminance = multiSensor.parameter(_param);
+// simulate temperature changes over the time
+while($.program.isRunning) {
+  $.program.raiseEvent(multiSensor, _param, (luminance.decimalValue+(Math.random()*50)), "");
+  $.pause(60*5); // pause 60*5 = 5 minutes
+}
+</ScriptSource>
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>404</Address>
+    <Name>Demo - Simulate Luminance</Name>
+    <Description />
+    <Group>Demo</Group>
+    <Features />
+    <ActivationTime>2016-05-01T13:44:57.472458Z</ActivationTime>
+    <TriggerTime>2016-05-01T13:45:03.121597Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

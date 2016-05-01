@@ -44,6 +44,26 @@
         <Address>3</Address>
         <Domain>HomeAutomation.Demo</Domain>
       </ModuleReference>
+      <ModuleReference>
+        <Address>Simulate</Address>
+        <Domain>HomeGenie.UI.Separator</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>401</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>402</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>403</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>404</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
     </Modules>
   </Group>
   <Group>

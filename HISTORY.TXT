@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+01/05/2016 v1.1-beta.519
+    - Fixed bug that was causing programs features randomly disappear 
+    - Fixed wrong mime-type sent for web fonts (MIG)
+    - Thermostat widget restyling and fix to set point bug when using fahrenheit unit
+    - Added "Programs.Get" API command
+
 30/04/2016 v1.1-beta.518
     - Added Program.ParseApiCall(string apiCall) helper method
     - Added "$" class in Javascript programs (eg.: $.on.webServiceCallReceived(...); $.modules.withAddres(...); $.program.raiseEvent(...); )

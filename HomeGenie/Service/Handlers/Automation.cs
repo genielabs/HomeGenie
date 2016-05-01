@@ -288,6 +288,19 @@ namespace HomeGenie.Service.Handlers
                     request.ResponseData = programList;
                     break;
 
+                case "Programs.Get":
+                    try
+                    {
+                        var prg = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                        var settings = new JsonSerializerSettings{ Formatting = Formatting.Indented };
+                        request.ResponseData = JsonConvert.SerializeObject(prg, settings);
+                    }
+                    catch (Exception ex)
+                    {
+                        request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    }
+                    break;
+
                 case "Programs.Add":
                     newProgram = new ProgramBlock() {
                         Group = migCommand.GetOption(0),

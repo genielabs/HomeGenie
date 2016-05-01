@@ -611,11 +611,11 @@ HG.WebApp.Utility.FormatTemperature = function (temp) {
     if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
         // display as Fahrenheit
         temp = Math.round((temp * 1.8 + 32) * 10) / 10;
-        displayvalue = (temp * 1).toFixed(1) + '&#8457;';
+        displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8457;';
     } else {
         // display as Celsius
         temp = Math.round(temp * 10) / 10;
-        displayvalue = (temp * 1).toFixed(1) + '&#8451;';
+        displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8451;';
     }
     return displayvalue;
 };

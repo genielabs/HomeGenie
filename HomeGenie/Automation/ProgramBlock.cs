@@ -41,6 +41,7 @@ using Jint;
 using IronRuby;
 using System.Diagnostics;
 using HomeGenie.Automation.Engines;
+using Newtonsoft.Json;
 
 namespace HomeGenie.Automation
 {
@@ -172,6 +173,7 @@ namespace HomeGenie.Automation
             }
         }
 
+        [XmlIgnore,JsonIgnore]
         public ProgramEngineBase Engine
         {
             get { return (ProgramEngineBase)csScriptEngine; }
