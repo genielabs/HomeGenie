@@ -13,6 +13,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     var page = $('#'+HG.WebApp.WidgetEditor.PageId);
     var runPreviewButton = page.find('[data-ui-field=preview-btn]');
     var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
+    var editParamsButton = page.find('[data-ui-field=module-params-edit]');
     var errorsButton = page.find('[data-ui-field=errors-btn]');
     var saveButton = page.find('[data-ui-field=save-btn]');
     var exportButton = page.find('[data-ui-field=export-btn]');
@@ -230,8 +231,18 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         HG.WebApp.WidgetEditor.Run();
     });
     bindModuleSelect.on('change', function(){
+        if ($(this).val() == '')
+            editParamsButton.addClass('ui-disabled');
+        else
+            editParamsButton.removeClass('ui-disabled');
         HG.WebApp.WidgetEditor.RenderView();
     });
+    editParamsButton.on('click', function(){
+        if (bindModuleSelect.val() != '') {
+            var module = HG.WebApp.Data.Modules[bindModuleSelect.val()];
+            HG.WebApp.Control.EditModuleParams(module);
+        }
+    }); 
     errorsButton.hide();
     
     splitBar.mousedown(function(event) {
@@ -384,8 +395,8 @@ HG.WebApp.WidgetEditor.GetInstance = function(javascriptCode) {
             $$.v2 = true;
             $$.apiCall = HG.Control.Modules.ServiceCall;
             $$.util = HG.WebApp.Utility;
-            $$.ui = {};
-            $$.ui.blink = function(fieldName) {
+            $$.ui = HG.Ui;
+            $$.signalActity = function(fieldName) {
               if (typeof fieldName != 'undefined' && fieldName != '')
                 $$.ui.BlinkAnim($$.field(fieldName));
               if ($$.field('led').length) {

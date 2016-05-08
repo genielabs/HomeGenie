@@ -11,7 +11,7 @@
 $$.start = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
-    HG.WebApp.Control.EditModule($$.module);
+    $$.ui.EditModule($$.module);
   });
   // On button click
   $$.field('on').on('click', function () {
@@ -51,18 +51,18 @@ $$.update = function(parameter, value) {
   switch(parameter) {
     case 'Status.Level':
       $$.refreshStatus();
-      $$.ui.blink('name');
+      $$.signalActity('name');
       break;
     case 'Meter.Watts':
       $$.refreshMeter();
-      $$.ui.blink('status');
+      $$.signalActity('status');
       break;
     case 'Status.Error':
       if (value != '' && $$.field('led').length)
         $$.field('led').attr('src', 'images/common/led_red.png');
       break;
     default:
-      $$.ui.blink();
+      $$.signalActity();
   }
 }
 

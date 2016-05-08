@@ -55,7 +55,7 @@ HG.WebApp.InitializePage = function ()
     //
     $('[data-role=page]').on('pagebeforeshow', function (event)
     {
-        setTheme(dataStore.get('UI.Theme'));
+        HG.Ui.SetTheme(dataStore.get('UI.Theme'));
         //
         if (this.id == "page_analyze")
         {
@@ -125,7 +125,7 @@ HG.WebApp.InitializePage = function ()
         HG.VoiceControl.Initialize();
 
         // apply UI settings
-        setTheme(dataStore.get('UI.Theme'));
+        HG.Ui.SetTheme(dataStore.get('UI.Theme'));
         if (dataStore.get('UI.EventsHistory'))
         {
             $('#btn_eventshistory_led').show();
@@ -161,7 +161,12 @@ HG.WebApp.InitializePage = function ()
         );
     };
     // Global Popups
-    $( "#automation_group_module_edit" ).enhanceWithin().popup();
+    $('#automation_group_module_edit').enhanceWithin().popup();
+    $('#page_configure_groupmodules_propspopup').enhanceWithin().popup();
+    $('#page_configure_groupmodules_propspopup').on('popupbeforeposition', function (event) {
+        $('#automation_group_module_params').scrollTop(0);
+        HG.WebApp.GroupModules.LoadModuleParameters();
+    });
     $('#module_options_button').on('click', function (event) {
         HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
     });
@@ -653,6 +658,9 @@ HG.WebApp.Utility.FormatDateTime = function (date, options)
     }
     return dt;
 };
+// TODO: deprecate these two aliases
+HG.WebApp.Utility.SwitchPopup = HG.Ui.SwitchPopup;
+HG.WebApp.Utility.JScrollToElement = HG.Ui.ScrollTo;
 //
 // namespace : HG.WebApp.Utility namespace
 // info      : global utility functions

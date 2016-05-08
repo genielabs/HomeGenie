@@ -9,7 +9,7 @@
 $$.start = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
-    HG.WebApp.Control.EditModule($$.module);
+    $$.ui.EditModule($$.module);
   });
 }
 

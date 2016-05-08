@@ -14,7 +14,7 @@ var updateTime = '';
 $$.start = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
-    HG.WebApp.Control.EditModule($$.module);
+    $$.ui.EditModule($$.module);
   });
   $$.field('sensorstatus').on('click', function() {
     $$.showNextParam();    
@@ -39,7 +39,7 @@ $$.update = function(parameter, value) {
     case 'Sensor.Generic':
       $$.refreshStatus();
       $$.refreshParams();
-      $$.ui.blink('name');
+      $$.signalActity('name');
       break;
     case 'Status.Error':
       if (value != '' && $$.field('led').length)
@@ -47,18 +47,18 @@ $$.update = function(parameter, value) {
       break;
     case 'Status.Battery':
       $$.refreshBattery();
-      $$.ui.blink('status-battery');
+      $$.signalActity('status-battery');
       break;
     case 'Sensor.Alarm':
     case 'Sensor.Tamper':
       $$.refreshTamper();
-      $$.ui.blink('status-tamper');
+      $$.signalActity('status-tamper');
       break;
     case 'ZwaveNode_WakeUpSleepingStatus':
       //$$.refreshSleepingStatus();
       break;
     default:
-      $$.ui.blink();
+      $$.signalActity();
       $$.refreshParams();
       $$.focusParam(parameter);
   }
@@ -74,7 +74,7 @@ $$.stop = function() {
 $$.refreshBattery = function() {
   var param = $$.module.prop('Status.Battery');
   if (param != null && param.Value !== '') {
-    var ctx = HG.WebApp.Utility.GetParameterContext($$.module, param.Name, param.Value);
+    var ctx = $$.ui.GetParameterContext($$.module, param.Name, param.Value);
     $$.field('status-battery-image').attr('src', ctx.iconImage);
     $$.field('status-battery-level').html(ctx.valueText);
     $$.field('status-battery').show();
@@ -200,7 +200,7 @@ $$.refreshParams = function() {
     for (p = 0; p < $$.module.Properties.length; p++) {
       var parameter = $$.module.Properties[p];
       if (parameter.Name != 'Status.Battery' && parameter.Name != 'Status.Error' && parameter.Name != 'Sensor.Alarm' && parameter.Name != 'Sensor.Tamper') {
-        var ctx = HG.WebApp.Utility.GetParameterContext($$.module, parameter.Name, parameter.Value);
+        var ctx = $$.ui.GetParameterContext($$.module, parameter.Name, parameter.Value);
         if (!ctx.isUnknown) {
           var paramBox = $(paramTemplate);
           paramBox.find('[data-ui-field=param-icon]').attr('src', ctx.iconImage);

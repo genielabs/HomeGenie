@@ -13,7 +13,7 @@ var imageurl = $$.widget.icon;
 $$.start = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
-    HG.WebApp.Control.EditModule($$.module);
+    $$.ui.EditModule($$.module);
   });
 
   // Initialize camera live popup
@@ -88,7 +88,7 @@ $$.refresh = function () {
 
 $$.update = function(parameter, value) {
   // TODO: ..
-  $$.ui.blink();
+  $$.signalActity();
 }
 
 $$.stop = function() {

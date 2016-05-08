@@ -616,7 +616,3 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
     }
     $('#configure_interfaces_modules_list').listview('refresh');
 };
-
-HG.WebApp.Maintenance.SetTheme = function (theme) {
-    setTheme(theme);
-};

@@ -14,7 +14,7 @@ var colorImage = null;
 $$.start = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
-    HG.WebApp.Control.EditModule($$.module);
+    $$.ui.EditModule($$.module);
   });
 
   // When options button is clicked control popup is shown
@@ -82,22 +82,22 @@ $$.update = function(parameter, value) {
     case 'Status.Level':
       $$.refreshStatus();
       $$.refreshColor();
-      $$.ui.blink('name');
+      $$.signalActity('name');
       break;
     case 'Status.ColorHsb':
       $$.refreshStatus();
       $$.refreshColor();
-      $$.ui.blink('name');
+      $$.signalActity('name');
       break;
     case 'Meter.Watts':
       $$.refreshMeter();
-      $$.ui.blink('status');
+      $$.signalActity('status');
       break;
     case 'Status.Error':
       if (value != '' && $$.field('led').length)
         $$.field('led').attr('src', 'images/common/led_red.png');
     default:
-      $$.ui.blink();
+      $$.signalActity();
   }
 }
 

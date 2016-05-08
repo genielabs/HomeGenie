@@ -404,6 +404,26 @@
         </div>
     </div>
 
+    <!-- Edit Module Parameters Popup -->
+    <div id="page_configure_groupmodules_propspopup" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header">
+            <h2 data-locale-id="configure_module_parameters">Parameters</h2>
+        </div>
+        <div class="ui-content">
+            <ul class="trapScroll" id="automation_group_module_params" data-role="listview" style="height:230px;overflow:auto;"></ul>
+        </div>
+        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
+            <div class="ui-block-a" align="left">
+                <a class="ui-btn ui-icon-minus ui-btn-icon-left ui-disabled ui-corner-all" href="#" id="automation_group_module_propdelete" data-locale-id="configure_module_parameters_delete">Delete</a>
+            </div>
+            <!-- a class="ui-btn ui-icon-plus ui-btn-icon-left" href="javascript:HG.WebApp.GroupModules.ModulePropertyAdd(HG.WebApp.GroupModules.CurrentModule, 'Custom.Property', '')">Add</a -->
+            <div class="ui-block-b" align="right">
+                <a class="ui-btn ui-icon-fa-save ui-btn-icon-left ui-corner-all" href="javascript:HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, null)" id="automation_group_module_propsave" data-locale-id="configure_module_parameters_save">Save</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Program Configuration Popup -->
     <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -427,7 +447,7 @@
                 <a class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left" data-locale-id="common_command_exit" data-rel="back">Exit</a>
             </div>
             <div class="ui-block-b">
-                <a id="automationprograms_program_btn_delete" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
+                <a id="automationprograms_program_btn_delete" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.Ui.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
             </div>
             <!--div class="ui-block-c">
                 <a id="automationprograms_program_btn_export" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>

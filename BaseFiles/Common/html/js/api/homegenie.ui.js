@@ -5,6 +5,9 @@ HG.Ui._widgetCache = [];
 
 HG.Ui.Popup = HG.Ui.Popup || {};
 
+// Persist-Js global data store 
+var dataStore;
+
 ParameterType = {
     Status_ColorHsb:
         'Status.ColorHsb',
@@ -137,6 +140,10 @@ Module = {
     }
 };
 
+HG.Ui.DataStore = function() {
+    return dataStore;
+}
+
 HG.Ui.GenerateWidget = function(fieldType, context, callback) {
     // fieldType: 
     //    widgets/text, widgets/password, widgets/checkbox, widgets/slider, 
@@ -255,7 +262,6 @@ HG.Ui.GetModuleDisplayName = function(module) {
     return name;
 };
 
-HG.WebApp.Utility.SwitchPopup = /* TODO: deprecate 'HG.WebApp.Utility' alias */
 HG.Ui.SwitchPopup = function(popup_id1, popup_id2, notransition) {
     var switchfn = function( event, ui ) {
         if (notransition == true)
@@ -293,13 +299,34 @@ HG.Ui.BlinkAnim = function(element, repeatCount) {
   animate();
 };
 
-HG.WebApp.Utility.JScrollToElement = function (element, delay) {
+HG.Ui.ScrollTo = function (element, delay) {
     $('html, body').animate({
         scrollTop: $(element).offset().top
     }, delay);
 };
 
-HG.WebApp.Utility.GetParameterContext = function(module, parameter, value) {
+HG.Ui.SetTheme = function (theme) {
+    dataStore.set('UI.Theme', theme);
+    $(document).find('.ui-page')
+            .removeClass('ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e ui-page-theme-f ui-page-theme-g ui-page-theme-h')
+            .addClass('ui-page-theme-' + theme);
+    $(document).find('.ui-mobile-viewport')
+            .removeClass('ui-overlay-a ui-overlay-b ui-overlay-c ui-overlay-d ui-overlay-e ui-overlay-f ui-overlay-g ui-overlay-h')
+            .addClass('ui-overlay-' + theme);
+    $(document).find('.ui-popup')
+            .removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g ui-body-h')
+            .addClass('ui-body-' + theme);
+    $(document).find('.ui-loader')
+            .removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g ui-body-h')
+            .addClass('ui-body-' + theme);
+    return;
+};
+
+HG.Ui.EditModule = function(module) {
+    HG.WebApp.Control.EditModule(module);
+}
+
+HG.Ui.GetParameterContext = function(module, parameter, value) {
     var name = '';
     var icon = 0;
     var desc = "";

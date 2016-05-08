@@ -321,6 +321,12 @@ HG.WebApp.Control.EditModule = function (module) {
     });
 };
 
+HG.WebApp.Control.EditModuleParams = function (module) {
+    HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data._CurrentGroup;
+    HG.WebApp.GroupModules.CurrentModule = module;
+    $('#page_configure_groupmodules_propspopup').popup('open', { transition: 'pop', positionTo: 'window' });
+};
+
 HG.WebApp.Control.GetModuleUid = function (module) {
     var domain = module.Domain.substring(module.Domain.lastIndexOf('.') + 1).replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~() ]/g, '_');
     var address = module.Address.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~() ]/g, '_');

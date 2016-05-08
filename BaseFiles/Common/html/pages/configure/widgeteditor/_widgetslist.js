@@ -36,7 +36,7 @@ HG.WebApp.WidgetsList.InitializePage = function () {
         newBrandText.val('');
         newCategoryText.val('');
         newNameText.val('');
-        HG.WebApp.Utility.SwitchPopup('#widgetlist_actionmenu', addNewPopup);
+        HG.Ui.SwitchPopup('#widgetlist_actionmenu', addNewPopup);
     });
     addConfirmButton.bind('click', function () {
         var widgetpath = newBrandText.val()+'/'+newCategoryText.val()+'/'+newNameText.val();
@@ -55,7 +55,7 @@ HG.WebApp.WidgetsList.InitializePage = function () {
         return false;
     });
     importButton.bind('click', function () {
-        HG.WebApp.Utility.SwitchPopup('#widgetlist_actionmenu', importPopup);
+        HG.Ui.SwitchPopup('#widgetlist_actionmenu', importPopup);
     });
     newBrandText.bind('keyup blur',function(){ 
         newBrandText.val(newBrandText.val().replace(/[^a-z,A-Z]/g,'').toLowerCase()); }
