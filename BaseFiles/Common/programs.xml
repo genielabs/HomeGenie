@@ -3815,17 +3815,17 @@ When changing the number of zone sensors, program restart is required.</Descript
 var _domain = "HomeAutomation.Demo";
 
 // Add a temperature and luminance sensor
-$.program.addVirtualModule(_domain, "1", "Sensor", "homegenie/generic/sensor");
+$.program.addVirtualModule(_domain, "1", "Sensor", "");
 $.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Set temperature value", "slider:-50:100:0.5");
 $.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Set luminance value", "slider:0:1000:1");
 $.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Set motion detection status", "slider:0:1:1");
 
 // Add a doorwindow sensor
-$.program.addVirtualModule(_domain, "2", "DoorWindow", "homegenie/generic/doorwindow");
+$.program.addVirtualModule(_domain, "2", "DoorWindow", "");
 $.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Set door/window status", "slider:0:1:1");
 
 // Add an on/off switch
-$.program.addVirtualModule(_domain, "3", "Switch", "homegenie/generic/switch");
+$.program.addVirtualModule(_domain, "3", "Switch", "");
 $.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
 
 $.program.run();</ScriptCondition>
@@ -4028,7 +4028,7 @@ var multiSensor = $.modules.inDomain(_domain).withAddress("1").get();
 var temperature = multiSensor.parameter(_param);
 // simulate temperature changes over the time
 while($.program.isRunning) {
-  $.program.raiseEvent(multiSensor, _param, (temperature.decimalValue+Math.random()), "");
+  $.program.raiseEvent(multiSensor, _param, (temperature.decimalValue+(Math.random()-0.5)), "");
   $.pause(60*5); // pause 60*5 = 5 minutes
 }
 </ScriptSource>
@@ -4055,7 +4055,7 @@ var multiSensor = $.modules.inDomain(_domain).withAddress("1").get();
 var luminance = multiSensor.parameter(_param);
 // simulate temperature changes over the time
 while($.program.isRunning) {
-  $.program.raiseEvent(multiSensor, _param, (luminance.decimalValue+(Math.random()*50)), "");
+  $.program.raiseEvent(multiSensor, _param, (luminance.decimalValue+((Math.random()-0.5)*50)), "");
   $.pause(60*5); // pause 60*5 = 5 minutes
 }
 </ScriptSource>

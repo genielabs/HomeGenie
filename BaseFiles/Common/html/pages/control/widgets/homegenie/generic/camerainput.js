@@ -1,105 +1,96 @@
-﻿[{
-  Name: "Generic Camera Input",
-  Author: "Generoso Martello",
-  Version: "2013-06-08",
+﻿$$.widget = {
+  name: 'Generic Camera Input',
+  version: '1.2',
+  author: 'Generoso Martello',
+  release: '2016-05-06',
+  icon: 'pages/control/widgets/homegenie/generic/images/camera.png'
+};
 
-  GroupName: '',
-  IconImage: 'pages/control/widgets/homegenie/generic/images/camera.png',
-  StatusText: '',
-  Description: '',
-  Widget: null,
+var popupisopen = false;
+var requestPopupOpen = false;
+var imageurl = $$.widget.icon;
 
-  RenderView: function (cuid, module) {
-    var container = $(cuid);
-    var widget = this.Widget = container.find('[data-ui-field=widget]');
-    var controlpopup = widget.data('ControlPopUp');
-    var popupisopen = false;
-    var requestPopupOpen = false;
-    this.Description = 'Camera ' + module.Address;
-    //
-    var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, 'Image.URL');
-    if (imageurl != null) imageurl = imageurl.Value;
-    else imageurl = '/api/' + module.Domain + '/' + module.Address + '/Camera.GetPicture/';
-    //
-    // create and store a local reference to control popup object
-    //
-    if (!controlpopup) {
-      container.find('[data-ui-field=controlpopup]').trigger('create');
-      controlpopup = container.find('[data-ui-field=controlpopup]').popup();
-      widget.data('ControlPopUp', controlpopup);
-      var _this = this;
-      //
-      controlpopup.on('popupbeforeposition', function () { 
-        popupisopen = true; 
-        requestPopupOpen = false;
-        var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-        popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
-      });
-      controlpopup.on('popupafterclose', function () { popupisopen = false; $.mobile.loading('hide'); });
-      controlpopup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime())).load(function () {
-        var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-        if (requestPopupOpen) {
-          popup.popup('open');
-        } else if (popupisopen) {
-          $.mobile.loading('hide');
-          setTimeout(function () {
-            popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
-          }, 100);
-        }
-      }).error(function () {
-        var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-        if (popupisopen) {
-          $.mobile.loading('show', { text: 'Error connecting to camera', textVisible: true });
-          setTimeout(function () {
-            popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
-          }, 2000);
-        }
-      });
-      //
-      // initialization stuff here
-      //
-      // when widget is clicked control popup is shown
-      widget.find('[data-ui-field=camerapicturepreview]').on('click', function () {
-        if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
-          var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-          $.mobile.loading('show', { text: 'Connecting to camera', textVisible: true });
-          requestPopupOpen = true;
-          popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
-        }
-      });
-      widget.find('[data-ui-field=camerapicturepreview]').load(function () {
-        if (_this.Widget.is(':visible')) {
-          setTimeout(function () {
-            _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
-          }, 2000);
-        }
-      }).error(function () {
-        if (_this.Widget.is(':visible')) {
-          setTimeout(function () {
-            _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
-          }, 2000);
-        }
-      });
-      //
-      // ui events handlers
-      //
-      // settings button
-      widget.find('[data-ui-field=settings]').on('click', function () {
-        HG.WebApp.Control.EditModule(module);
-      });
-      //
+$$.start = function() {
+  // Settings button click
+  $$.field('settings').on('click', function () {
+    HG.WebApp.Control.EditModule($$.module);
+  });
+
+  // Initialize camera live popup
+  $$.popup.on('popupbeforeposition', function () { 
+    popupisopen = true; 
+    requestPopupOpen = false;
+    $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
+  });
+  $$.popup.on('popupafterclose', function () { popupisopen = false; $.mobile.loading('hide'); });
+  $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime())).load(function () {
+    if (requestPopupOpen) {
+      $$.popup.popup('open');
+    } else if (popupisopen) {
+      $.mobile.loading('hide');
+      setTimeout(function () {
+        $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
+      }, 100);
     }
-    //
-    // read some context data
-    //
-    this.GroupName = container.attr('data-context-group');
-    //
-    // render widget
-    //
-    widget.find('[data-ui-field=name]').html(module.Name);
-    widget.find('[data-ui-field=description]').html(this.Description);
-    //
-    this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?');
+  }).error(function () {
+    if (popupisopen) {
+      $.mobile.loading('show', { text: 'Error connecting to camera', textVisible: true });
+      setTimeout(function () {
+        $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
+      }, 2000);
+    }
+  });
+
+  // When widget is clicked control popup is shown
+  $$.field('camerapicturepreview').on('click', function () {
+      $.mobile.loading('show', { text: 'Connecting to camera', textVisible: true });
+      requestPopupOpen = true;
+      $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
+  });
+  $$.field('camerapicturepreview').load(function () {
+    if ($$.container.is(':visible')) {
+      setTimeout(function () {
+        $$.field('camerapicturepreview').attr('src', imageurl + '?' + (new Date().getTime()));
+      }, 2000);
+    }
+  }).error(function () {
+    if ($$.container.is(':visible')) {
+      setTimeout(function () {
+        $$.field('camerapicturepreview').attr('src', imageurl + '?' + (new Date().getTime()));
+      }, 2000);
+    }
+  });
+
+  // Set the camera image URL
+  var cameraUrl = $$.module.prop('Image.URL');
+  if (cameraUrl != null) imageurl = cameraUrl.Value;
+  else imageurl = '/api/' + $$.module.Domain + '/' + $$.module.Address + '/Camera.GetPicture/';
+}
+
+$$.refresh = function () {
+  // Set current icon image
+  var widgeticon = $$.module.prop('Widget.DisplayIcon');
+  if (widgeticon != null && widgeticon.Value != '') {
+    $$.widget.icon = widgeticon.Value;
+  } else {
+    if (level > 0) {
+      $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/'+$$.module.DeviceType.toLowerCase()+'_on.png';
+    } else {
+      $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/'+$$.module.DeviceType.toLowerCase()+'_off.png';
+    }
   }
 
-}]
+  HG.Ui.GetModuleIcon($.module, null, $$.field('icon'));
+  $$.field('camerapicturepreview').attr('src', imageurl + '?');
+  $$.field('name').html($$.module.Name);
+  $$.field('description').html('Camera ' + $$.module.Address);
+}
+
+$$.update = function(parameter, value) {
+  // TODO: ..
+  $$.ui.blink();
+}
+
+$$.stop = function() {
+  // TODO: ..
+}

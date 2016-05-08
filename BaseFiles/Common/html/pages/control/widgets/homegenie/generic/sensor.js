@@ -1,189 +1,220 @@
-﻿[{
-    Name: "Generic Sensor",
-    Author: "Generoso Martello",
-    Version: "2013-10-04",
+﻿$$.widget = {
+  name: 'Generic Sensor',
+  version: '1.2',
+  author: 'Generoso Martello',
+  release: '2016-05-06',
+  icon: 'pages/control/widgets/homegenie/generic/images/sensor.png'
+};
 
-    GroupName: '',
-    IconImage: 'pages/control/widgets/homegenie/generic/images/sensor.png',
-    StatusText: '',
-    Description: '',
-    Initialized: false,
+var paramTemplate = null;
+var paramIndex = 0;
+var tickerTimeout = null;
+var updateTime = '';
 
-    RenderView: function (cuid, module) {
-        var container = $(cuid);
-        var widget = container.find('[data-ui-field=widget]');
-        //
-        if (!this.Initialized) {
-            this.Initialized = true;
-            //
-            // ui events handlers
-            //
-            // settings button
-            widget.find('[data-ui-field=settings]').on('click', function () {
-                HG.WebApp.Control.EditModule(module);
-            });
+$$.start = function() {
+  // Settings button click
+  $$.field('settings').on('click', function () {
+    HG.WebApp.Control.EditModule($$.module);
+  });
+  $$.field('sensorstatus').on('click', function() {
+    $$.showNextParam();    
+  });
+}
+
+$$.refresh = function () {
+  // Refresh UI fields
+  $$.field('name').html($$.module.Name);
+  $$.field('description').html(($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address);
+  $$.refreshStatus();
+  $$.refreshBattery();
+  $$.refreshTamper();
+  //$$.refreshSleepingStatus();
+  $$.refreshParams();
+  $$.showNextParam();
+}
+
+$$.update = function(parameter, value) {
+  switch(parameter) {
+    case 'Status.Level':
+    case 'Sensor.Generic':
+      $$.refreshStatus();
+      $$.refreshParams();
+      $$.ui.blink('name');
+      break;
+    case 'Status.Error':
+      if (value != '' && $$.field('led').length)
+        $$.field('led').attr('src', 'images/common/led_red.png');
+      break;
+    case 'Status.Battery':
+      $$.refreshBattery();
+      $$.ui.blink('status-battery');
+      break;
+    case 'Sensor.Alarm':
+    case 'Sensor.Tamper':
+      $$.refreshTamper();
+      $$.ui.blink('status-tamper');
+      break;
+    case 'ZwaveNode_WakeUpSleepingStatus':
+      //$$.refreshSleepingStatus();
+      break;
+    default:
+      $$.ui.blink();
+      $$.refreshParams();
+      $$.focusParam(parameter);
+  }
+  HG.Ui.GetModuleIcon($$.module, function(i,e){
+    $$.field(e).attr('src', i);
+  }, 'icon');
+}
+
+$$.stop = function() {
+  // TODO: ..
+}
+
+$$.refreshBattery = function() {
+  var param = $$.module.prop('Status.Battery');
+  if (param != null && param.Value !== '') {
+    var ctx = HG.WebApp.Utility.GetParameterContext($$.module, param.Name, param.Value);
+    $$.field('status-battery-image').attr('src', ctx.iconImage);
+    $$.field('status-battery-level').html(ctx.valueText);
+    $$.field('status-battery').show();
+  } else {
+    $$.field('status-battery').hide();
+  }
+}
+
+$$.refreshTamper = function() {
+  var tamper = $$.module.prop('Sensor.Tamper');
+  var alarm = $$.module.prop('Sensor.Alarm');
+  if (tamper != null && (alarm == null || tamper.UpdateTime >= alarm.UpdateTime)) {
+    tamper = Module.getDoubleValue(tamper.Value);
+  } else if (alarm != null) {
+    tamper = Module.getDoubleValue(alarm.Value);
+  } else {
+    tamper = 0;
+  }
+  if (tamper > 0) {
+    $$.field('status-tamper').html('<span style="color:red;vertical-align:middle">TAMPERED</span>');
+    $$.field('status-tamper').show();
+  } else {
+    $$.field('status-tamper').hide();
+  }
+}
+
+$$.refreshStatus = function() {
+
+  HG.Ui.GetModuleIcon($$.module, function(i,e){
+    $$.field(e).attr('src', i);
+  }, 'icon');
+  var d = new Date(updateTime.replace(' ', 'T'));
+  $$.field('updatetime').html($$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d));
+  /*
+  var statusText = '';
+  var dwstate = $$.module.prop('Sensor.DoorWindow');
+  var generic = $$.module.prop('Sensor.Generic');
+  var level = $$.module.prop('Status.Level');
+
+
+  // Door status open/close
+  var doorstate = '';
+  if (dwstate != null && (generic == null || dwstate.UpdateTime >= generic.UpdateTime) && (level == null || dwstate.UpdateTime >= level.UpdateTime)) {
+    var updatetime = dwstate.UpdateTime;
+    if (typeof updatetime != 'undefined') {
+      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+      var d = new Date(updatetime);
+      updateTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
+    }
+    doorstate = dwstate.Value;
+  } else if (generic != null && (level == null || generic.UpdateTime >= level.UpdateTime)) {
+    var updatetime = generic.UpdateTime;
+    if (typeof updatetime != 'undefined') {
+      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+      var d = new Date(updatetime);
+      updateTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
+    }
+    doorstate = generic.Value;
+  } else if (level != null) {
+    var updatetime = level.UpdateTime;
+    if (typeof updatetime != 'undefined') {
+      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+      var d = new Date(updatetime);
+      updateTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
+    }
+    doorstate = level.Value.replace(',', '.') * 100;
+  }
+
+  if (doorstate === '') {
+    statusText = '&nbsp;&nbsp;&nbsp;<span style="vertical-align:middle">?</span>';
+    $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
+  } else if (doorstate != '0') {
+    statusText = '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
+    statusText += '&nbsp;<span style="vertical-align:middle">OPEN</span> ';
+    $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/door_open.png';
+  } else {
+    statusText = '<img width="15" height="15" src="images/common/led_yellow.png" style="vertical-align:middle" />';
+    statusText += '&nbsp;<span style="vertical-align:middle">CLOSED</span> ';
+    $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
+  }
+  */
+  //$$.field('status').html('<span style="vertical-align:middle">' + statusText + '</span>');
+}
+
+$$.focusParam = function(paramName) {
+  var param = $$.field('sensorstatus').find('[data-param-name="'+paramName+'"]');
+  if (param.length) {
+    paramIndex = parseInt(param.attr('data-param-index'));
+    $$.showNextParam();
+    HG.Ui.BlinkAnim(param);
+  }
+}
+
+$$.showNextParam = function() {
+  var param = $$.field('sensorstatus').children().eq(paramIndex);
+  param.clearQueue();
+  param.finish();
+  param.css('opacity', 1);
+  param.fadeIn(500);
+  $.each(param.siblings().not(param), function(k,v){
+    if ($(this).css('opacity') != '0') {
+      $(this).clearQueue();
+      $(this).finish();
+      $(this).fadeOut(500);
+    }
+    return true;
+  });
+  if (paramIndex < $$.field('sensorstatus').children().length - 1)
+    paramIndex++;
+  else
+    paramIndex = 0;
+  if (tickerTimeout != null)
+    clearTimeout(tickerTimeout);
+  tickerTimeout =  setTimeout($$.showNextParam, 5000);
+}
+
+$$.refreshParams = function() {
+  if (paramTemplate == null)
+    paramTemplate = $$.field('template').html();
+  $$.field('sensorstatus').empty();
+  if ($$.module.Properties != null) {
+    var idx = 0;
+    for (p = 0; p < $$.module.Properties.length; p++) {
+      var parameter = $$.module.Properties[p];
+      if (parameter.Name != 'Status.Battery' && parameter.Name != 'Status.Error' && parameter.Name != 'Sensor.Alarm' && parameter.Name != 'Sensor.Tamper') {
+        var ctx = HG.WebApp.Utility.GetParameterContext($$.module, parameter.Name, parameter.Value);
+        if (!ctx.isUnknown) {
+          var paramBox = $(paramTemplate);
+          paramBox.find('[data-ui-field=param-icon]').attr('src', ctx.iconImage);
+          paramBox.find('[data-ui-field=param-name]').html(ctx.displayName);
+          paramBox.find('[data-ui-field=param-value]').html(ctx.valueText);
+          $$.field('sensorstatus').append(paramBox);
+          if (updateTime < parameter.UpdateTime)
+            updateTime = parameter.UpdateTime;
+          paramBox.attr('data-param-name', parameter.Name);
+          paramBox.attr('data-param-index', idx);
+          paramBox.css('opacity', 0);
+          idx++;
         }
-
-        widget.find('[data-ui-field=sensoronoff]').on('click', function () {
-           var prop = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Alarm");
-           if(prop.Value == '255')
-           {
-                 HG.WebApp.Utility.SetModulePropertyByName(module, "Sensor.Alarm", "0");
-              prop = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Alarm");
-              prop.NeedsUpdate = 'true';
-              HG.WebApp.GroupModules.UpdateModule(module, function () {
-                  HG.WebApp.GroupModules.ModuleUpdatedCallback();
-              });
-                 var sensorstatus = widget.find('[data-ui-field=sensoronoff]').html();
-              sensorstatus = sensorstatus.replace('<span class="hg-indicator-alarm" style="padding-left:0;width:20px;">&nbsp;</span>','') ;
-              widget.find('[data-ui-field=sensoronoff]').html(sensorstatus);
-           }
-        });
-
-        widget.find('[data-ui-field=name]').html(module.Name);
-        //
-        var sensoricon = '';
-        var sensorimgdata = '';
-        var sensortxtdata = '';
-        var infotext = '';
-        var lastupdatetime = 0;
-        if(module.Properties != null) {
-           for (p = 0; p < module.Properties.length; p++) {
-                if (module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Level' || module.Properties[p].Name == 'Status.Battery') {
-                    var value = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
-                    if (isNaN(value)) value = module.Properties[p].Value;
-                    //
-                    var displayname = module.Properties[p].Name.replace('Sensor.', '');
-                    displayname = displayname.replace('Meter.', '');
-                    displayname = displayname.replace('Status.', '');
-                    displayname = '<b>' + displayname + '</b>';
-                    //
-                    var displayvalue = value;
-                    //
-                    var updatetime = module.Properties[p].UpdateTime;
-                    if (typeof(updatetime) != 'undefined')
-                    {
-                        updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-                        var d = new Date(updatetime);
-                        if (lastupdatetime < d) {
-                            lastupdatetime = d;
-                        }
-                    }
-                    //
-                    var imagesrc = '';
-                    //
-                    if (module.Properties[p].Name == 'Status.Battery') {
-                        var blevel = 0;
-                        blevel = parseFloat(module.Properties[p].Value);
-                        if (blevel == 255) blevel = 0;
-                        else if (blevel > 80 && blevel <= 100) blevel = 100;
-                        else if (blevel > 60) blevel = 80;
-                        else if (blevel > 40) blevel = 60;
-                        else if (blevel > 20) blevel = 40;
-                        else if (blevel > 10) blevel = 20;
-                        else if (blevel > 0) blevel = 10;
-                        //
-                        infotext += '<span style="vertical-align:middle">' + value + '%</span> <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
-                        continue;
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Temperature') {
-                        imagesrc = 'hg-indicator-temperature';
-                        var temp = module.Properties[p].Value.replace(',', '.');
-                        displayvalue = HG.WebApp.Utility.FormatTemperature(temp);
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Luminance') {
-                        imagesrc = 'hg-indicator-luminance';
-                        displayvalue = value + '&nbsp;lx';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Humidity') {
-                        imagesrc = 'hg-indicator-humidity';
-                        displayvalue = value + '%';
-                    }
-                    if (module.Properties[p].Name == 'Meter.Watts') {
-                        imagesrc = 'hg-indicator-energy';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.DoorWindow') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-door';
-                           displayvalue = '';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Alarm') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-alarm';
-                           displayvalue = '';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Smoke') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-smoke';
-                           displayvalue = '';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Flood') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-flood';
-                           displayvalue = '';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Heat') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-heat';
-                           displayvalue = '';
-                    }
-                    else if (module.Properties[p].Name == 'Sensor.Generic') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-generic';
-                           displayvalue = '';
-                    }
-                    else if (module.Properties[p].Name == 'Status.Level') {
-                        if( value != '0' )
-                           imagesrc = 'hg-indicator-level';
-                        else
-                              displayvalue = '';
-                    }
-                    if (imagesrc != '') {
-                        displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
-                        if( displayvalue !== '')
-                        {
-                          var template = container.find('[data-ui-field=iconvaluetemplate]').html();
-                           template = template.replace('%icon%', displayname);
-                          template = template.replace('%value%', displayvalue);
-                          sensorimgdata += template;
-                        }
-                        else
-                        {
-                          var template = container.find('[data-ui-field=icontemplate]').html();
-                          template = template.replace('%icon%', displayname);
-                          sensoricon += template;
-                        }
-                    }
-                    else {
-                        if( displayvalue !== '')
-                        {
-                          var template = container.find('[data-ui-field=valuetemplate]').html();
-                          template = template.replace('%label%', displayname);
-                          template = template.replace('%value%', displayvalue);
-                          sensortxtdata += template;
-                        }
-                    }
-                }
-            }
-        }
-        //
-        var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
-        if (widgeticon != null && widgeticon.Value != '') {
-            this.IconImage = widgeticon.Value;
-        }
-        //
-        widget.find('[data-ui-field=description]').html((module.Domain.substring(module.Domain.lastIndexOf('.') + 1))+' '+module.Address);
-        //
-        if (sensoricon != '') sensoricon = sensoricon + '<br clear="all" />';
-        if (sensorimgdata != '') sensorimgdata = sensorimgdata + '<br clear="all" />';
-        if (sensortxtdata != '') sensortxtdata = sensortxtdata + '<br clear="all" />';
-        if (lastupdatetime > 0) {
-            this.UpdateTime = HG.WebApp.Utility.FormatDate(lastupdatetime) + ' ' + HG.WebApp.Utility.FormatDateTime(lastupdatetime);
-        widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle;font-size:13px">' + this.UpdateTime + '</span>&nbsp;&nbsp;' + infotext);
-        widget.find('[data-ui-field=sensoronoff]').html(sensoricon);
-        widget.find('[data-ui-field=sensorstatus]').html(sensorimgdata + sensortxtdata);
-        widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
       }
-   }
-
-}]
+    }
+  }
+}

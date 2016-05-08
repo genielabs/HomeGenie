@@ -653,27 +653,6 @@ HG.WebApp.Utility.FormatDateTime = function (date, options)
     }
     return dt;
 };
-
-HG.WebApp.Utility.JScrollToElement = function (element, delay) {
-    $('html, body').animate({
-        scrollTop: $(element).offset().top
-    }, delay);
-};
-
-HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
-    var switchfn = function( event, ui ) {
-        if (notransition == true)
-        {
-            setTimeout(function () { $(popup_id2).popup('open'); }, 10);
-        }
-        else
-        {
-            setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
-        }
-    };
-    $(popup_id1).one('popupafterclose', switchfn);
-    $(popup_id1).popup('close');
-};
 //
 // namespace : HG.WebApp.Utility namespace
 // info      : global utility functions

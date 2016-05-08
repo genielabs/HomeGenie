@@ -143,7 +143,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
 
     // refresh widget associated to the module that raised the event
     if (module != null) {
-        HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
+        HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source, eventLog.Property, eventLog.Value);
         if ($.mobile.activePage.attr("id") == HG.WebApp.WidgetEditor.PageId) {
             HG.WebApp.WidgetEditor.RenderView(eventLog);
         }

@@ -9,13 +9,13 @@ HG.WebApp.ProgramsList.InitializePage = function () {
         });
         // action menu butttons
         $('#btn_automationprograms_group_delete').bind('click', function (event) {
-            HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automationprograms_group_delete');
+            HG.Ui.SwitchPopup('#listprograms_actionmenu', '#automationprograms_group_delete');
         });
         $('#btn_automation_program_import').bind('click', function (event) {
-            HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automation_program_import');
+            HG.Ui.SwitchPopup('#listprograms_actionmenu', '#automation_program_import');
         });
         $('#btn_automation_program_add').bind('click', function (event) {
-            HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automation_program_add');
+            HG.Ui.SwitchPopup('#listprograms_actionmenu', '#automation_program_add');
         });
         $('#btn_automation_program_refresh').bind('click', function (event) {
             $('#listprograms_actionmenu').popup('close');

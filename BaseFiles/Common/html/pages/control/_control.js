@@ -207,8 +207,11 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
     for (var o = 0; o < HG.WebApp.Control._widgetList.length; o++) {
         if (HG.WebApp.Control._widgetList[o].Widget == widgetpath) {
             widgetcached = true;
-            if (typeof callback == 'function')
-                callback(HG.WebApp.Control._widgetList[o]);
+            if (typeof callback == 'function') {
+                var w = HG.WebApp.Control._widgetList[o];
+                var widget = HG.WebApp.WidgetEditor.GetInstance(w.Json);
+                callback({ Widget: w.Widget, Instance: widget, Json: w.Json, Model: w.Model });
+            }
             break;
         }
     }
@@ -216,24 +219,24 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
         $.ajax({
             url: "pages/control/widgets/" + widgetpath + ".js",
             type: 'GET',
-            success: function (data) {
+            dataType: 'text',
+            success: function (jsData) {
                 var widget = null;
-                var widgetjson = null;
-                try {
-                    widgetjson = data;
-                    widget = eval(widgetjson)[0];
-                } catch (e) {
-                    alert(widgetpath + " Loading Error:\n" + e);
-                }
-                $.get("pages/control/widgets/" + widgetpath + ".html", function (responsedata) {
-                    var widgetobj = { Widget: widgetpath, Instance: widget, Json: widgetjson, Model: responsedata };
+                var widgetjson = jsData;
+                $.get("pages/control/widgets/" + widgetpath + ".html", function (htmlData) {
+                    var widgetobj = { Widget: widgetpath, Instance: null, Json: widgetjson, Model: htmlData };
                     HG.WebApp.Control._widgetList.push(widgetobj);
+                    try {
+                        widget = HG.WebApp.WidgetEditor.GetInstance(widgetjson);
+                    } catch (e) {
+                        alert(widgetpath + " Loading Error:\n" + e);
+                    }
                     if (typeof callback == 'function')
-                        callback(widgetobj);
+                        callback({ Widget: widgetpath, Instance: widget, Json: widgetjson, Model: htmlData });
                 });
             },
-            error: function (data) {
-                console.log(data);
+            error: function (jsData) {
+                console.log(jsData);
                 if (typeof callback == 'function')
                     callback(null);
             }
@@ -252,34 +255,30 @@ HG.WebApp.Control.RenderModule = function () {
     if (widgetsloadqueue.length > 0) {
         // extract and render element 
         var rendermodule = widgetsloadqueue.splice(0, 1)[0];
-        var widget = $('#' + rendermodule.ElementId).data('homegenie.widget');
+        var widget = $('#'+rendermodule.ElementId).data('homegenie.widget');
         if (widget != null && widget != 'undefined') {
-            widget.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
+            HG.WebApp.WidgetEditor.RenderWidget('#'+rendermodule.ElementId, widget, widget.module);
             widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
         } else {
             var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" style="display:none" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
             HG.WebApp.Control.GetWidget(rendermodule.Module.Widget, function (w) {
-                if (w != null) {
+                if (typeof w != 'undefined' && w != null) {
                     html += w.Model;
                     html += '</div></div>';
                     rendermodule.GroupElement.append(html);
                     rendermodule.GroupElement.trigger('create');
                     //rendermodule.GroupElement.listview('refresh');
                     if (w.Json != null) {
-                        var myinstance = eval(w.Json)[0];
+                        var myinstance = HG.WebApp.WidgetEditor.GetInstance(w.Json);
                         // store reference to this widget instance
-                        $('#' + rendermodule.ElementId).data('homegenie.widget', myinstance);
+                        $('#'+rendermodule.ElementId).data('homegenie.widget', myinstance);
                         rendermodule.Module.WidgetInstance = myinstance;
                         // localize widget
                         HG.WebApp.Locales.LocalizeWidget(rendermodule.Module.Widget, rendermodule.ElementId, function() {
-                            $('#' + rendermodule.ElementId).show();
+                            $('#'+rendermodule.ElementId).show();
                             // render widget view and load next widget
-                            try {
-                                myinstance.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
-                            } catch (e) {
-                                console.log('[' + rendermodule.Module.Widget + '] widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
-                                //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
-                            }
+                            var mod = rendermodule.Module;
+                            HG.WebApp.WidgetEditor.RenderWidget('#'+rendermodule.ElementId, mod.WidgetInstance, mod);
                             widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
                         });
                     } else {
@@ -316,8 +315,7 @@ HG.WebApp.Control.EditModule = function (module) {
             var grp = $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex);
             grp.empty();
             HG.WebApp.Control.ShowGroup(HG.WebApp.Data._CurrentGroupIndex);
-        }
-        else {
+        } else {
             HG.WebApp.Control.UpdateModuleWidget(module.Domain, module.Address);
         }
     });
@@ -347,7 +345,7 @@ HG.WebApp.Control.UpdateActionsMenu = function () {
     $('#control_custom_actionmenu').listview('refresh');
 };
 
-HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
+HG.WebApp.Control.UpdateModuleWidget = function (domain, address, parameter, value) {
     for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
         for (var m = 0; m < groupmodules.Modules.length; m++) {
@@ -360,7 +358,7 @@ HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
                 if (modui.length != 0) {
                     if (modui.data('homegenie.widget')) {
                         module.WidgetInstance = modui.data('homegenie.widget');
-                        module.WidgetInstance.RenderView(cuid, module);
+                        HG.WebApp.WidgetEditor.RenderWidget(cuid, module.WidgetInstance, module, { 'Property': parameter, 'Value': value });
                     }
                 }
             }
@@ -425,7 +423,7 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         } else {
             if (modui.data('homegenie.widget')) {
                 module.WidgetInstance = modui.data('homegenie.widget');
-                module.WidgetInstance.RenderView(cuid, module);
+                HG.WebApp.WidgetEditor.RenderWidget(cuid, module.WidgetInstance, module);
             }
         }
     }

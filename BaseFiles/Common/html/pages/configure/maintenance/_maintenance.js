@@ -133,7 +133,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $('#configure_system_updateinstall_button').addClass('ui-disabled');
             $('#configure_system_updatemanager_info').html('<strong>Downloading files...</strong>');
             $('#configure_system_updateinstall_log').empty();
-            HG.WebApp.Utility.SwitchPopup('#systemsettings_updatewarning_popup', '#systemsettings_updateinstall_popup', true)
+            HG.Ui.SwitchPopup('#systemsettings_updatewarning_popup', '#systemsettings_updateinstall_popup', true)
             $('#configure_system_updateinstall_status').html('Downloading files...');
             $.mobile.loading('show', {
                 text: 'Please wait...',

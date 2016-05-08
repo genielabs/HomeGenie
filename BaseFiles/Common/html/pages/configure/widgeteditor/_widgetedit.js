@@ -192,7 +192,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     });
     
     deleteButton.bind('click', function(){
-        HG.WebApp.Utility.SwitchPopup('#editwidget_actionmenu', deletePopup);
+        HG.Ui.SwitchPopup('#editwidget_actionmenu', deletePopup);
     });
     deleteConfirmButton.bind('click', function(){
         $.mobile.loading('show', { text: 'Deleting Widget...', textVisible: true, theme: 'a', html: '' });
@@ -345,13 +345,89 @@ HG.WebApp.WidgetEditor.RenderView = function(eventData) {
     var page = $('#'+HG.WebApp.WidgetEditor.PageId);
     var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
     var module = HG.WebApp.Data.Modules[bindModuleSelect.val()];
-    if (eventData != null && (eventData.Domain != module.Domain || eventData.Source != module.Address)) return;
-    try
-    {
-        HG.WebApp.WidgetEditor._widgetInstance.RenderView('#widget_preview_instance', module);
+    if (eventData != null && (eventData.Domain != module.Domain || eventData.Source != module.Address)) 
+        return;
+    HG.WebApp.WidgetEditor.RenderWidget('#widget_preview_instance', HG.WebApp.WidgetEditor._widgetInstance, module, eventData);
+};
+
+HG.WebApp.WidgetEditor.RenderWidget = function(cuid, widgetInstance, module, eventData) {
+    try {
+        if (widgetInstance.v2) {
+            if (typeof widgetInstance._bind == 'function') {
+                widgetInstance._bind(cuid, module);
+                widgetInstance._bind = null;
+            }
+            if (typeof widgetInstance.start == 'function' && !widgetInstance._started) {
+                widgetInstance.start();
+                widgetInstance._started = true;
+                if (typeof widgetInstance.refresh == 'function')
+                    widgetInstance.refresh();
+            }
+            if (typeof eventData != 'undefined' && typeof eventData.Property != 'undefined' && typeof widgetInstance.update == 'function')
+                widgetInstance.update(eventData.Property, eventData.Value);
+            else if (typeof widgetInstance.refresh == 'function')
+                widgetInstance.refresh();
+        } else {
+            widgetInstance.RenderView(cuid, module);
+        }
     } catch (e) {
+        console.log(e);
         HG.WebApp.WidgetEditor._hasError = true;
         HG.WebApp.WidgetEditor.ShowError(e);
+    }
+}
+
+HG.WebApp.WidgetEditor.GetInstance = function(javascriptCode) {
+    if (!javascriptCode.trim().startsWith('[')) {
+        var commonJs = `
+            var $$ = this;
+            $$.v2 = true;
+            $$.apiCall = HG.Control.Modules.ServiceCall;
+            $$.util = HG.WebApp.Utility;
+            $$.ui = {};
+            $$.ui.blink = function(fieldName) {
+              if (typeof fieldName != 'undefined' && fieldName != '')
+                $$.ui.BlinkAnim($$.field(fieldName));
+              if ($$.field('led').length) {
+                  $$.field('led').attr('src', 'images/common/led_green.png');
+                  setTimeout(function() {
+                    $$.field('led').attr('src', 'images/common/led_black.png');
+                  }, 100);
+              }
+            };
+            $$._bind = function(cuid, module) {
+                $$.module = module;
+                $$.module.prop = function(propName, value) {
+                    var p = HG.WebApp.Utility.GetModulePropertyByName(this, propName);
+                    if (typeof value != 'undefined')
+                        p.Value = value;
+                    return p;
+                };
+                $$.module.command = function(cmd, opt, callback) {
+                    HG.Control.Modules.ServiceCall(cmd, this.Domain, this.Address, opt, function (response) { 
+                        if (typeof callback == 'function')
+                            callback(response);
+                    });
+                };
+                $$.container = $(cuid);
+                $$.popup = $$.container.find('[data-ui-field=controlpopup]');
+                $$.popup.popup();
+                $$.popup.trigger('create');
+                $$.popup.field = function(f){ return $$.popup.find('[data-ui-field='+f+']'); };
+                $$._widget = $$.container.find('[data-ui-field=widget]');
+                $$._widget.data('ControlPopUp', $$.popup);
+                $$.field = function(f){ 
+                    /* TODO: implement caching */
+                    return $$._widget.find('[data-ui-field='+f+']'); 
+                };
+            };
+        `;
+        commonJs = commonJs.replace(/(\r\n|\n|\r)/gm,"");
+        javascriptCode = 'new function(){' + commonJs + javascriptCode + '}';
+        return eval(javascriptCode);
+    } else {
+        // old widget json format
+        return eval(javascriptCode)[0];
     }
 };
 
@@ -363,20 +439,16 @@ HG.WebApp.WidgetEditor.Run = function() {
     $.mobile.loading('show', { text: 'Checking Javascript code...', textVisible: true, theme: 'a', html: '' });
     HG.Configure.Widgets.Parse(javascriptCode, function(msg) { 
         $.mobile.loading('hide');
-        if (msg.ResponseValue != 'OK')
-        {
+        if (msg.ResponseValue != 'OK') {
             var message = msg.ResponseValue;
             var position = message.substr(message.indexOf('(') + 1);
             position = position.substr(0, position.indexOf(')')).split(',');
             message = message.substr(message.indexOf(':') + 2);
             message = message + '<br/> <a href="javascript:HG.WebApp.WidgetEditor.JumpToLine({ line: ' + (position[0] - 1) + ', ch: ' + (position[1] - 1) + ' })">Line <strong>' + position[0] + '</strong>, Column <strong>' + position[1] + '</strong></a>';
             HG.WebApp.WidgetEditor.ShowErrorTip(message, position[0]);
-        }
-        else
-        {
-            try
-            {
-                HG.WebApp.WidgetEditor._widgetInstance = eval(javascriptCode)[0];
+        } else {
+            try {
+                HG.WebApp.WidgetEditor._widgetInstance = HG.WebApp.WidgetEditor.GetInstance(javascriptCode);
                 // render HTML
                 HG.WebApp.WidgetEditor.Render();
                 // execute widget RenderView method
@@ -391,8 +463,7 @@ HG.WebApp.WidgetEditor.Run = function() {
 
 HG.WebApp.WidgetEditor.ShowError = function(e) {
     var stack = ErrorStackParser.parse(e);
-    if  (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
-    {
+    if  (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
         // FireFox already gives lineNumber and columnNumber properties in error object
         stack[0] = e;
     }

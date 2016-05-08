@@ -61,7 +61,7 @@ HG.WebApp.ProgramEdit.InitializePage = function () {
         });
         //
         $('#automation_program_delete_button').bind('click', function (event) {
-            HG.WebApp.Utility.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
+            HG.Ui.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
             return true;
         }); 
         //
@@ -172,7 +172,7 @@ HG.WebApp.ProgramEdit.InitializePage = function () {
         });
         $('#automation_program_sketchfiles_add').bind('click', function (event) {
             $('#programfile_new_name').val('');
-            HG.WebApp.Utility.SwitchPopup('#automation_program_listfiles', '#automation_program_fileadd', true);
+            HG.Ui.SwitchPopup('#automation_program_listfiles', '#automation_program_fileadd', true);
         });
         $('#programfile_new_button').bind('click', function (event) {
             $('#automation_program_fileadd').popup('close');

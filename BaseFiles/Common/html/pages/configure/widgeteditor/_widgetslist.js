@@ -121,7 +121,10 @@ HG.WebApp.WidgetsList.GetWidgetIcon = function (widget, elid, callback) {
     HG.WebApp.Control.GetWidget(widget, function (widgetobject) {
         if (widgetobject != null)
         {
-            icon = widgetobject.Instance.IconImage;
+            if (typeof widgetobject.Instance.widget != 'undefined' && typeof widgetobject.Instance.widget.icon != 'undefined')
+                icon = widgetobject.Instance.widget.icon;
+            else
+                icon = widgetobject.Instance.IconImage;
             if (callback != null) callback(icon, elid);
         }
     });

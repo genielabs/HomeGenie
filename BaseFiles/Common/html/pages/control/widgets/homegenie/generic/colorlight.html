@@ -1,5 +1,6 @@
-﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
-  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a" style="position;z-index:10;relative;background:none">
+  <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.8;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
+  <div class="ui-header" style="padding-left:5px;padding-right:5px;font-weight:normal;border-top:none">
     <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png" />
     <div data-ui-field="name" style="margin-right:38px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
     <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
@@ -19,9 +20,10 @@
       <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn ui-btn-icon-right ui-icon-power" href="#">On</a>
     </div>
   </div>
-  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+  <div class="ui-footer hg-widget-footer" align="right" style="border-bottom:0">
     <div data-ui-field="updatetime" style="position:absolute;top:2px;left:5px;font-size:10pt;"></div>
-    <div data-ui-field="status" style="font-size:11pt;display:table-cell;">&nbsp;</div>
+    <div data-ui-field="status" style="font-size:11pt;display:table-cell;padding-right:16px">&nbsp;</div>
+    <div style="position:absolute;top:1px;right:4px;"><img data-ui-field="led" src="images/common/led_black.png" style="width:14px"></div>
   </div>
 </div>
 

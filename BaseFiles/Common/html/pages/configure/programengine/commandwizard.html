@@ -37,7 +37,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_target_popup', '#automation_command_domain_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_command_target_popup', '#automation_command_domain_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_command_target_property', '#automation_command_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
         </div>
     </div>
@@ -83,10 +83,10 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_custom', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_command_custom', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
             <div class="ui-block-b">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_custom', '#automation_command_args', true)" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-corner-all" data-locale-id="configure_program_wizardproceed" data-rel="popup">Proceed</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_command_custom', '#automation_command_args', true)" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-corner-all" data-locale-id="configure_program_wizardproceed" data-rel="popup">Proceed</a>
             </div>
         </div>
     </div>
@@ -111,7 +111,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_args', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_command_args', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
             <div class="ui-block-b">
                 <a id="command_completed" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="#cancel" data-locale-id="configure_program_wizarddone">Finish</a>
@@ -286,22 +286,22 @@
 
         $('#automation_commandtarget').on('click', 'li', function () {
             command_targetdomain = $(this).attr('data-context-value');
-            HG.WebApp.Utility.SwitchPopup('#automation_command_domain_popup', '#automation_command_target_popup', true);
+            HG.Ui.SwitchPopup('#automation_command_domain_popup', '#automation_command_target_popup', true);
         });
 
         $('#automation_command_target_popup').on('click', 'li', function () {
             command_targetsubject = $(this).attr('data-context-value');
-            HG.WebApp.Utility.SwitchPopup('#automation_command_target_popup', '#automation_command_target_property', true);
+            HG.Ui.SwitchPopup('#automation_command_target_popup', '#automation_command_target_property', true);
         });
 
         $('#automation_command_target_property').on('click', 'li', function () {
             if ($(this).attr('data-context-value') == 'custom') {
                 $('#command_custom_input').val(command_targetparameter);
-                HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_custom', true);
+                HG.Ui.SwitchPopup('#automation_command_target_property', '#automation_command_custom', true);
             }
             else {
                 command_targetparameter = $(this).attr('data-context-value')
-                HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_args', true);
+                HG.Ui.SwitchPopup('#automation_command_target_property', '#automation_command_args', true);
             }
             //
             build_command();

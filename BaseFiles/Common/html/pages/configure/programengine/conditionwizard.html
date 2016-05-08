@@ -37,7 +37,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_target_popup', '#automation_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_target_popup', '#automation_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_target_homegenie_parameter', '#automation_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_target_homegenie_parameter', '#automation_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_type', '#automation_target_homegenie_parameter', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_type', '#automation_target_homegenie_parameter', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -94,13 +94,13 @@
         </div>
         <fieldset data-role="controlgroup" data-type="vertical" style="height:134px;max-height:134px;">
             <input type="text" name="value" id="comparison_value_input" onkeyup="build_condition()" value="" placeholder="value" />
-            <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value', '#automation_condition_value_domain', true)" class="ui-btn ui-corner-all">Module Parameter Value</a>
+            <a onclick="HG.Ui.SwitchPopup('#automation_condition_value', '#automation_condition_value_domain', true)" class="ui-btn ui-corner-all">Module Parameter Value</a>
         </fieldset>
     </div>
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value', '#automation_condition_type', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value', '#automation_condition_type', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
             <div class="ui-block-b">
                 <a data-locale-id="configure_program_wizarddone" id="condition_completed" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="#cancel">Done</a>
@@ -124,7 +124,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a">
             <div class="ui-block-a" align="center">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -162,7 +162,7 @@
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value_property', '#automation_condition_value_address', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value_property', '#automation_condition_value_address', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -342,24 +342,24 @@
 
         $('#automation_conditiontarget').on('click', 'li', function () {
             condition_targetdomain = $(this).attr('data-context-value');
-            HG.WebApp.Utility.SwitchPopup('#automation_domain', '#automation_target_popup', true);
+            HG.Ui.SwitchPopup('#automation_domain', '#automation_target_popup', true);
         });
 
         $('#automation_target_popup').on('click', 'li', function () {
             condition_targetsubject = $(this).attr('data-context-value');
-            HG.WebApp.Utility.SwitchPopup('#automation_target_popup', '#automation_target_homegenie_parameter', true);
+            HG.Ui.SwitchPopup('#automation_target_popup', '#automation_target_homegenie_parameter', true);
         });
 
         $('#automation_target_homegenie_parameter').on('click', 'li', function () {
             condition_targetparameter = $(this).attr('data-context-value')
-            HG.WebApp.Utility.SwitchPopup('#automation_target_homegenie_parameter', '#automation_condition_type', true);
+            HG.Ui.SwitchPopup('#automation_target_homegenie_parameter', '#automation_condition_type', true);
         });
 
         $('#automation_condition_type').on('click', 'li', function () {
             condition_type = $(this).attr('data-context-value')
             build_condition();
             //
-            HG.WebApp.Utility.SwitchPopup('#automation_condition_type', '#automation_condition_value', true);
+            HG.Ui.SwitchPopup('#automation_condition_type', '#automation_condition_value', true);
         });
 
 
@@ -375,7 +375,7 @@
             //
             build_condition();
             //
-            HG.WebApp.Utility.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value_address', true);
+            HG.Ui.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value_address', true);
         });
 
 
@@ -400,7 +400,7 @@
             //
             build_condition();
             //
-            HG.WebApp.Utility.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_property', true);
+            HG.Ui.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_property', true);
         });
 
         $('#automation_conditionvalue_property').on('click', 'li', function () {
@@ -409,7 +409,7 @@
             //
             build_condition();
             //
-            HG.WebApp.Utility.SwitchPopup('#automation_condition_value_property', '#automation_condition_value', true);
+            HG.Ui.SwitchPopup('#automation_condition_value_property', '#automation_condition_value', true);
         });
 
         $('#comparison_value_input').on('keyup', function () {

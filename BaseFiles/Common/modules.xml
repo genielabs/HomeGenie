@@ -431,6 +431,13 @@
         <UpdateTime>2016-05-01T13:56:30.189879Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>Status.Battery</Name>
+        <Value>73</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-01T13:56:30.194048Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
@@ -521,6 +528,13 @@
       <ModuleParameter>
         <Name>Sensor.DoorWindow</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-01T13:56:30.193249Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Battery</Name>
+        <Value>58</Value>
         <Description />
         <FieldType />
         <UpdateTime>2016-05-01T13:56:30.193249Z</UpdateTime>
