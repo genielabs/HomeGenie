@@ -108,55 +108,6 @@ $$.refreshStatus = function() {
   }, 'icon');
   var d = new Date(updateTime.replace(' ', 'T'));
   $$.field('updatetime').html($$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d));
-  /*
-  var statusText = '';
-  var dwstate = $$.module.prop('Sensor.DoorWindow');
-  var generic = $$.module.prop('Sensor.Generic');
-  var level = $$.module.prop('Status.Level');
-
-
-  // Door status open/close
-  var doorstate = '';
-  if (dwstate != null && (generic == null || dwstate.UpdateTime >= generic.UpdateTime) && (level == null || dwstate.UpdateTime >= level.UpdateTime)) {
-    var updatetime = dwstate.UpdateTime;
-    if (typeof updatetime != 'undefined') {
-      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-      var d = new Date(updatetime);
-      updateTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
-    }
-    doorstate = dwstate.Value;
-  } else if (generic != null && (level == null || generic.UpdateTime >= level.UpdateTime)) {
-    var updatetime = generic.UpdateTime;
-    if (typeof updatetime != 'undefined') {
-      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-      var d = new Date(updatetime);
-      updateTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
-    }
-    doorstate = generic.Value;
-  } else if (level != null) {
-    var updatetime = level.UpdateTime;
-    if (typeof updatetime != 'undefined') {
-      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-      var d = new Date(updatetime);
-      updateTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
-    }
-    doorstate = level.Value.replace(',', '.') * 100;
-  }
-
-  if (doorstate === '') {
-    statusText = '&nbsp;&nbsp;&nbsp;<span style="vertical-align:middle">?</span>';
-    $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
-  } else if (doorstate != '0') {
-    statusText = '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
-    statusText += '&nbsp;<span style="vertical-align:middle">OPEN</span> ';
-    $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/door_open.png';
-  } else {
-    statusText = '<img width="15" height="15" src="images/common/led_yellow.png" style="vertical-align:middle" />';
-    statusText += '&nbsp;<span style="vertical-align:middle">CLOSED</span> ';
-    $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
-  }
-  */
-  //$$.field('status').html('<span style="vertical-align:middle">' + statusText + '</span>');
 }
 
 $$.focusParam = function(paramName) {
