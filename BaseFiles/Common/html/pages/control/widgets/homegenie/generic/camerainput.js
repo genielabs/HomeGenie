@@ -10,7 +10,7 @@ var popupisopen = false;
 var requestPopupOpen = false;
 var imageurl = $$.widget.icon;
 
-$$.start = function() {
+$$.onStart = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
     $$.ui.EditModule($$.module);
@@ -67,7 +67,7 @@ $$.start = function() {
   else imageurl = '/api/' + $$.module.Domain + '/' + $$.module.Address + '/Camera.GetPicture/';
 }
 
-$$.refresh = function () {
+$$.onRefresh = function () {
   // Set current icon image
   var widgeticon = $$.module.prop('Widget.DisplayIcon');
   if (widgeticon != null && widgeticon.Value != '') {
@@ -80,17 +80,21 @@ $$.refresh = function () {
     }
   }
 
-  HG.Ui.GetModuleIcon($.module, null, $$.field('icon'));
+  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+    $$.field('icon').attr('src', imgPath);
+    $$.widget.icon = imgPath;
+  });
+
   $$.field('camerapicturepreview').attr('src', imageurl + '?');
   $$.field('name').html($$.module.Name);
   $$.field('description').html('Camera ' + $$.module.Address);
 }
 
-$$.update = function(parameter, value) {
+$$.onUpdate = function(parameter, value) {
   // TODO: ..
   $$.signalActity();
 }
 
-$$.stop = function() {
+$$.onStop = function() {
   // TODO: ..
 }

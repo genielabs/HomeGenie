@@ -8,7 +8,7 @@
 
 // widget class methods
 
-$$.start = function() {
+$$.onStart = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
     $$.ui.EditModule($$.module);
@@ -31,7 +31,7 @@ $$.start = function() {
   });          
 }
 
-$$.refresh = function () {
+$$.onRefresh = function () {
   // Hide dimmer level if device type is switch
   if ($$.module.DeviceType == 'Switch' || $$.module.DeviceType == 'Light') {
     $$.field('level-div').hide();
@@ -47,7 +47,7 @@ $$.refresh = function () {
   $$.refreshMeter();
 }
 
-$$.update = function(parameter, value) {
+$$.onUpdate = function(parameter, value) {
   switch(parameter) {
     case 'Status.Level':
       $$.refreshStatus();
@@ -66,7 +66,7 @@ $$.update = function(parameter, value) {
   }
 }
 
-$$.stop = function() {
+$$.onStop = function() {
   // TODO: ...
 }
 
@@ -94,9 +94,10 @@ $$.refreshStatus = function() {
     }
   } else level = 0;
 
-  HG.Ui.GetModuleIcon($$.module, function(i,e){
-    $$.field(e).attr('src', i);
-  }, 'icon');
+  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+    $$.field('icon').attr('src', imgPath);
+    $$.widget.icon = imgPath;
+  });
   $$.field('level').val(level).slider('refresh');
   $$.field('updatetime').html(displayTime);
 }

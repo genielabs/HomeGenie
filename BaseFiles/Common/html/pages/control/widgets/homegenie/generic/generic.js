@@ -6,26 +6,27 @@
   icon: 'pages/control/widgets/homegenie/generic/images/flag-yellow.png'
 };
 
-$$.start = function() {
+$$.onStart = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
     $$.ui.EditModule($$.module);
   });
 }
 
-$$.refresh = function () {
+$$.onRefresh = function () {
   $$.field('name').html($$.module.Name + " (" + $$.module.DeviceType + ")");
   var description = ($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address;
   $$.field('description').html(description);
-  HG.Ui.GetModuleIcon($$.module, function(i,e){
-    $$.field(e).attr('src', i);
-  }, 'icon');
+  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+    $$.field('icon').attr('src', imgPath);
+    $$.widget.icon = imgPath;
+  });
 }
 
-$$.update = function(parameter, value) {
+$$.onUpdate = function(parameter, value) {
   // TODO: ..
 }
 
-$$.stop = function() {
+$$.onStop = function() {
   // TODO: ..
 }

@@ -11,7 +11,7 @@ var colorImage = null;
 
 // widget class methods
 
-$$.start = function() {
+$$.onStart = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
     $$.ui.EditModule($$.module);
@@ -60,12 +60,13 @@ $$.start = function() {
   });
 }
 
-$$.refresh = function () {
-  HG.Ui.GetModuleIcon($$.module, function(i,e){
-    $$.field(e).attr('src', i);
-  }, 'icon');
+$$.onRefresh = function () {
+  $$.field('name').html($$.module.Name);
   $$.field('description').html(($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address);
-  $$.field('icon').attr('src', $$.widget.icon);
+  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+    $$.field('icon').attr('src', imgPath);
+    $$.widget.icon = imgPath;
+  });
 
   // Control PopUp
   $$.popup.field('group').html(this.GroupName);
@@ -76,7 +77,7 @@ $$.refresh = function () {
   $$.refreshMeter();
 }
 
-$$.update = function(parameter, value) {
+$$.onUpdate = function(parameter, value) {
   // TODO: ..
   switch(parameter) {
     case 'Status.Level':
@@ -101,7 +102,7 @@ $$.update = function(parameter, value) {
   }
 }
 
-$$.stop = function() {
+$$.onStop = function() {
   // TODO: ..
 }
 

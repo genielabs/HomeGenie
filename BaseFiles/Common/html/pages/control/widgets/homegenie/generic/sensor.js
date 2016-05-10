@@ -11,7 +11,7 @@ var paramIndex = 0;
 var tickerTimeout = null;
 var updateTime = '';
 
-$$.start = function() {
+$$.onStart = function() {
   // Settings button click
   $$.field('settings').on('click', function () {
     $$.ui.EditModule($$.module);
@@ -21,7 +21,7 @@ $$.start = function() {
   });
 }
 
-$$.refresh = function () {
+$$.onRefresh = function () {
   // Refresh UI fields
   $$.field('name').html($$.module.Name);
   $$.field('description').html(($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address);
@@ -33,7 +33,7 @@ $$.refresh = function () {
   $$.showNextParam();
 }
 
-$$.update = function(parameter, value) {
+$$.onUpdate = function(parameter, value) {
   switch(parameter) {
     case 'Status.Level':
     case 'Sensor.Generic':
@@ -61,15 +61,14 @@ $$.update = function(parameter, value) {
       $$.signalActity();
       $$.refreshParams();
       $$.focusParam(parameter);
+      $$.refreshStatus();
   }
-  HG.Ui.GetModuleIcon($$.module, function(i,e){
-    $$.field(e).attr('src', i);
-  }, 'icon');
 }
 
-$$.stop = function() {
+$$.onStop = function() {
   // TODO: ..
 }
+
 
 $$.refreshBattery = function() {
   var param = $$.module.prop('Status.Battery');
@@ -102,10 +101,10 @@ $$.refreshTamper = function() {
 }
 
 $$.refreshStatus = function() {
-
-  HG.Ui.GetModuleIcon($$.module, function(i,e){
-    $$.field(e).attr('src', i);
-  }, 'icon');
+  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+    $$.field('icon').attr('src', imgPath);
+    $$.widget.icon = imgPath;
+  });
   var d = new Date(updateTime.replace(' ', 'T'));
   $$.field('updatetime').html($$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d));
 }

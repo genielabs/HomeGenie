@@ -368,16 +368,16 @@ HG.WebApp.WidgetEditor.RenderWidget = function(cuid, widgetInstance, module, eve
                 widgetInstance._bind(cuid, module);
                 widgetInstance._bind = null;
             }
-            if (typeof widgetInstance.start == 'function' && !widgetInstance._started) {
-                widgetInstance.start();
+            if (typeof widgetInstance.onStart == 'function' && !widgetInstance._started) {
+                widgetInstance.onStart();
                 widgetInstance._started = true;
-                if (typeof widgetInstance.refresh == 'function')
-                    widgetInstance.refresh();
+                if (typeof widgetInstance.onRefresh == 'function')
+                    widgetInstance.onRefresh();
             }
-            if (typeof eventData != 'undefined' && typeof eventData.Property != 'undefined' && typeof widgetInstance.update == 'function')
-                widgetInstance.update(eventData.Property, eventData.Value);
-            else if (typeof widgetInstance.refresh == 'function')
-                widgetInstance.refresh();
+            if (typeof eventData != 'undefined' && typeof eventData.Property != 'undefined' && typeof widgetInstance.onUpdate == 'function')
+                widgetInstance.onUpdate(eventData.Property, eventData.Value);
+            else if (typeof widgetInstance.onRefresh == 'function')
+                widgetInstance.onRefresh();
         } else {
             widgetInstance.RenderView(cuid, module);
         }
@@ -392,6 +392,7 @@ HG.WebApp.WidgetEditor.GetInstance = function(javascriptCode) {
     if (!javascriptCode.trim().startsWith('[')) {
         var commonJs = `
             var $$ = this;
+            $$._fieldCache = [];
             $$.v2 = true;
             $$.apiCall = HG.Control.Modules.ServiceCall;
             $$.util = HG.WebApp.Utility;
@@ -405,6 +406,12 @@ HG.WebApp.WidgetEditor.GetInstance = function(javascriptCode) {
                     $$.field('led').attr('src', 'images/common/led_black.png');
                   }, 100);
               }
+            };
+            $$.field = function(f){ 
+                if (typeof $$._fieldCache[f] == 'undefined')
+                    $$._fieldCache[f] = $$._widget.find('[data-ui-field='+f+']');
+                $$._fieldCache[f] = $$._widget.find('[data-ui-field='+f+']');
+                return $$._fieldCache[f]; 
             };
             $$._bind = function(cuid, module) {
                 $$.module = module;
@@ -427,10 +434,6 @@ HG.WebApp.WidgetEditor.GetInstance = function(javascriptCode) {
                 $$.popup.field = function(f){ return $$.popup.find('[data-ui-field='+f+']'); };
                 $$._widget = $$.container.find('[data-ui-field=widget]');
                 $$._widget.data('ControlPopUp', $$.popup);
-                $$.field = function(f){ 
-                    /* TODO: implement caching */
-                    return $$._widget.find('[data-ui-field='+f+']'); 
-                };
             };
         `;
         commonJs = commonJs.replace(/(\r\n|\n|\r)/gm,"");
