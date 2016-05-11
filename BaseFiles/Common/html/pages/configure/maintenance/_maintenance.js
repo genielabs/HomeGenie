@@ -361,7 +361,7 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             $('#maintenance_configuration_databaseresetbutton').on('click', function () {
                 var message = HG.WebApp.Locales.GetLocaleString('systemsettings_resetdatabase_warning', 'This operation cannot be undone.');
                 HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_resetdatabase_title', 'Reset stats database?'), message, function (confirmed) {
-                    if (confirmed) HG.Statistics.Database.Reset();
+                    if (confirmed) HG.Statistics.DatabaseReset();
                 });
             });
 
