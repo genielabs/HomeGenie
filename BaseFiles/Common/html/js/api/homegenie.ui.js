@@ -133,11 +133,11 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
     Module = {
         getDoubleValue: function(v) {
             var value = 0;
-            try { value = parseFloat(v.replace(',', '.')); } catch(e) { }
+            try { value = parseFloat(v.toString().replace(',', '.')); } catch(e) { console.log(e); }
             return value;
         },
         getFormattedNumber: function(v) {
-            return (Math.round(this.getDoubleValue(v) * 10)/10).toString();
+            return (Math.round(this.getDoubleValue(v)*10)/10).toString();
         }
     };
 
@@ -414,9 +414,12 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                     //    hideable = true;
                     break;
                 case ParameterType.Sensor_Temperature:
+                        console.log(HG.WebApp.Locales.GetTemperatureUnit());
                     if (HG.WebApp.Locales.GetTemperatureUnit() == 'Fahrenheit') {
                         var degrees = Module.getDoubleValue(value);
-                        degrees = (9.0 / 5.0) * degrees + 32.0;
+                        console.log(degrees);
+                        degrees = ((9.0 / 5.0) * degrees) + 32.0;
+                        console.log(degrees);
                         desc = Module.getFormattedNumber(degrees);
                     } else {
                         desc = Module.getFormattedNumber(value);

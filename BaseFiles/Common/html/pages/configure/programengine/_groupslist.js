@@ -6,6 +6,7 @@ HG.WebApp.AutomationGroupsList = HG.WebApp.AutomationGroupsList || new function(
     $$.InitializePage = function () {
         var page = $('#'+$$.PageId);
         var widgetEditorButton = page.find('[data-ui-field=widgeteditor-btn]');
+        $$.groupList = $('#configure_automationgroupslist');
         page.on('pageinit', function (e) {
             page.find('[id=automationgroup_add]').on('popupbeforeposition', function (event) {
                 page.find('[id=automationgroup_new_name]').val('');
@@ -38,12 +39,11 @@ HG.WebApp.AutomationGroupsList = HG.WebApp.AutomationGroupsList || new function(
     };
 
     $$.GetGroupsListViewItems = function () {
-        var groupList = $('#configure_automationgroupslist');
-        if (groupList.hasClass('ui-sortable')) {
-            groupList.sortable('destroy');
-            groupList.off('sortstop');
+        if ($$.groupList.hasClass('ui-sortable')) {
+            $$.groupList.sortable('destroy');
+            $$.groupList.off('sortstop');
         }
-        groupList.empty();
+        $$.groupList.empty();
 
         var ifaceZwave = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.ZWave');
         var ifaceInsteon = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.Insteon');
@@ -84,16 +84,16 @@ HG.WebApp.AutomationGroupsList = HG.WebApp.AutomationGroupsList || new function(
             html += '<li data-icon="false" data-group-name=""><a href="#page_automation_programs">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>';
         }
 
-        groupList.append(html);
-        groupList.listview().listview('refresh');
-        groupList.sortable({ handle : '.handle', axis: 'y', scrollSpeed: 10 }).sortable('refresh');
-        groupList.on('sortstop', function (event, ui) {
+        $$.groupList.append(html);
+        $$.groupList.listview().listview('refresh');
+        $$.groupList.sortable({ handle : '.handle', axis: 'y', scrollSpeed: 10 }).sortable('refresh');
+        $$.groupList.on('sortstop', function (event, ui) {
             $$.SortGroups();
         });
-        groupList.find('li').on("click", function () {
+        $$.groupList.find('li').on("click", function () {
             $$._CurrentGroup = $(this).attr('data-group-name');
-            groupList.attr('selected-group-name', $(this).attr('data-group-name'));
-            groupList.attr('selected-group-index', $(this).attr('data-group-index'));
+            $$.groupList.attr('selected-group-name', $(this).attr('data-group-name'));
+            $$.groupList.attr('selected-group-index', $(this).attr('data-group-index'));
         });
     };
 
@@ -160,14 +160,12 @@ HG.WebApp.AutomationGroupsList = HG.WebApp.AutomationGroupsList || new function(
     $$.SortGroups = function () {
 
         var neworder = '';
-
-        $('#configure_automationgroupslist').children('li').each(function () {
+        $$.groupList.children('li').each(function () {
             var gidx = $(this).attr('data-group-index');
             if (gidx >= 0) {
                 neworder += (gidx + ';')
             }
         });
-
         HG.Configure.Groups.Sort('Automation', neworder, function (res) {
             $$.LoadGroups();
         });

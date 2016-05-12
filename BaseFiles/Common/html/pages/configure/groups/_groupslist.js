@@ -91,7 +91,7 @@ HG.WebApp.GroupsList = HG.WebApp.GroupsList || new function () { var $$ = this;
 
         var neworder = '';
         var current = 0;
-        groups.children('li').each(function () {
+        $$.groupList.children('li').each(function () {
             var gidx = $(this).attr('data-group-index');
             if (gidx >= 0) {
                 neworder += (gidx + ';')
@@ -99,7 +99,7 @@ HG.WebApp.GroupsList = HG.WebApp.GroupsList || new function () { var $$ = this;
                 current++;
             }
         });
-        groups.empty();
+        $$.groupList.empty();
         $.mobile.loading('show');
         HG.Configure.Groups.Sort('Control', neworder, function (res) {
             $.mobile.loading('hide');
@@ -115,7 +115,7 @@ HG.WebApp.GroupsList = HG.WebApp.GroupsList || new function () { var $$ = this;
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.Save/',
             data: JSON.stringify(HG.WebApp.Data.Groups),
             success: function (response) {
-                groups.empty();
+                $$.groupList.empty();
                 HG.WebApp.GroupModules.LoadGroupModules();
                 $.mobile.loading('hide');
                 if (callback != null) callback();
