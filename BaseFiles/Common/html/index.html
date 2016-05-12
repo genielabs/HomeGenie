@@ -109,10 +109,7 @@
         var HOST_SYSTEM = '{hostos}';
         $(document).ready(function (e) {
 
-            //
-            //HG.WebApp.Locales.GenerateTemplate(); <-- use this to re-create the UI localization template
-            //
-            HG.WebApp.InitializePage();
+            HG.WebApp.Initialize();
 
             $.mobile.switchPopup = function (sourceElement, destinationElement, onswitched) {
                 var afterClose = function () {

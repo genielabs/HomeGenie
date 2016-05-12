@@ -190,7 +190,6 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
         exportButton.bind('click', function () {
             $('#editwidget_actionmenu').popup('close');
             // export current widget
-            //HG.Configure.Widgets.Export(HG.WebApp.WidgetsList._currentWidget)
             window.open(location.protocol + '../../api/HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
         });
 

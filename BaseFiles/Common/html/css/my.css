@@ -218,7 +218,7 @@ input[type=number] {
 
 .hg-widget-a {
     width: 260px;
-    margin: 15px;
+    margin: 10px;
     min-height: 160px;
     padding-bottom:20px;
     position:relative;
@@ -226,7 +226,7 @@ input[type=number] {
 
 .hg-widget-a2 {
     width: 520px;
-    margin: 15px;
+    margin: 10px;
     min-height: 160px;
     padding-bottom:20px;
     position:relative;
@@ -235,14 +235,14 @@ input[type=number] {
 .hg-widget-b {
     min-width: 260px;
     max-width: 540px;
-    margin: 15px;
+    margin: 10px;
     min-height: 180px;
     position:relative;
 }
 
 .hg-widget-c {
     width: auto;
-    margin: 15px;
+    margin: 10px;
     min-height: 180px;
     position:relative;
 }

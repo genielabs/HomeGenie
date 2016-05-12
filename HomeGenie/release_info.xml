@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r519</Version>
+  <Version>1.1 beta r520</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed bug that was causing programs features randomly disappear 
-  - Fixed wrong mime-type sent for web fonts (MIG)
-  - Thermostat widget restyling and fix to set point bug when using fahrenheit unit
-  - Added "Programs.Get" API command</ReleaseNote>
-  <ReleaseDate>2016-05-01T15:34:21.0000Z</ReleaseDate>
+  <ReleaseNote></ReleaseNote>
+  <ReleaseDate>2016-05-12T19:40:03.0000Z</ReleaseDate>
 </ReleaseInfo>

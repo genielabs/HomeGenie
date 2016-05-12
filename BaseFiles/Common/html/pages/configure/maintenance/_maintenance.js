@@ -1,4 +1,7 @@
-﻿// HomeAutomation.HomeGenie / Config / System.Configure / System.ConfigurationBackup
+﻿//
+// namespace : HG.WebApp.Maintenance namespace
+// info      : HomeAutomation.HomeGenie / Config / System.Configure / System.ConfigurationBackup
+//
 HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this;
 
     $$.PageId = 'page_configure_maintenance';
@@ -343,7 +346,7 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             $('#systemsettings_databasemaxsize_change').bind('click', function () {
                 var sizemb = $('#systemsettings_databasemaxsizechange_size').val();
                 $.mobile.loading('show');
-                HG.System.SetStatisticsDatabaseMaximumSize(sizemb, function (data) {
+                HG.Statistics.SetStatisticsDatabaseMaximumSize(sizemb, function (data) {
                     $.mobile.loading('hide');
                     setTimeout(function () {
                         $$.LoadStatisticsSettings();

@@ -532,20 +532,4 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         });
     };
 
-    $$.ModuleSetLevel = function (pv) {
-        HG.Control.Modules.ServiceCall('Control.Level', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, pv, function (data) { });
-    };
-
-    $$.GroupLightsOn = function (group) {
-        HG.Automation.Groups.LightsOn(group);
-    };
-
-    $$.GroupLightsOff = function (group) {
-        HG.Automation.Groups.LightsOff(group);
-    };
-
-    $$.Toggle = function (domain, address) {
-        HG.Control.Modules.ServiceCall('Control.Toggle', domain, address, '', function (data) { });
-    };
-
 };

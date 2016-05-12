@@ -1,21 +1,23 @@
 //
-// namespace : HG.Configure.Groups namespace
+// namespace : HG.Configure namespace
 // info      : -
 //
-HG.Configure = HG.Configure || {};
+HG.Configure = HG.Configure || new function(){ var $$ = this;
 
-HG.Configure.LoadData = function (callback) {
-    HG.Configure.Modules.List(function (data) {
-        try {
-            HG.WebApp.Data.Modules = eval(data);
-        } catch (e) { }
-        //
-        HG.Automation.Programs.List(function () {
-            HG.Configure.Groups.List('Control', function () {
+    $$.LoadData = function(callback) {
+        $$.Modules.List(function (data) {
+            try {
+                HG.WebApp.Data.Modules = eval(data);
+            } catch (e) { }
+            //
+            HG.Automation.Programs.List(function () {
+                $$.Groups.List('Control', function () {
 
-                if (callback != null) callback();
+                    if (callback != null) callback();
 
+                });
             });
         });
-    });
+    };
+
 };
