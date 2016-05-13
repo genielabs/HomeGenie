@@ -124,7 +124,7 @@
             // get current volume on popup open
             _this.PendingRequests++;
             servicecall('AvMedia.GetVolume', module.Domain, module.Address, '', function (res) {
-                if (_this.Widget != null) {
+                if (typeof res.ResponseValue != 'undefined' && _this.Widget != null) {
                     _this.Widget.find('[data-ui-field=media_volume]').val(res.ResponseValue);
                     _this.Widget.find('.ui-slider').width(250);
                     _this.Widget.find('[data-ui-field=media_volume]').slider('refresh');
@@ -134,7 +134,7 @@
             // get mute status
             _this.PendingRequests++;
             servicecall('AvMedia.GetMute', module.Domain, module.Address, '', function (res) {
-                if (res.ResponseValue.toLowerCase() == 'false') {
+                if (typeof res.ResponseValue != 'undefined' && res.ResponseValue.toLowerCase() == 'false' && _this.Widget != null) {
                     _this.Widget.find('[data-ui-field=media_mute]').attr('src', 'pages/control/widgets/homegenie/generic/images/media_mute.png');
                     _this.IsMuted = false;
                 }

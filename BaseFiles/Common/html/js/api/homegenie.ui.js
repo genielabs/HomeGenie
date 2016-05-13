@@ -414,12 +414,9 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                     //    hideable = true;
                     break;
                 case ParameterType.Sensor_Temperature:
-                        console.log(HG.WebApp.Locales.GetTemperatureUnit());
                     if (HG.WebApp.Locales.GetTemperatureUnit() == 'Fahrenheit') {
                         var degrees = Module.getDoubleValue(value);
-                        console.log(degrees);
                         degrees = ((9.0 / 5.0) * degrees) + 32.0;
-                        console.log(degrees);
                         desc = Module.getFormattedNumber(degrees);
                     } else {
                         desc = Module.getFormattedNumber(value);
@@ -492,3 +489,33 @@ HG.Ui.Popup = HG.Ui.Popup || {};
 
 // TODO: is this still used??
 eval('hg = {}; hg.ui =  HG.Ui;');
+
+HG.Ui.CreatePage = function(model, cuid) {
+    var $$ = model;
+    $$._fieldCache = [];
+    $$.PageId = $$.pageId = cuid;
+    $$.getContainer = function() { 
+        if (typeof $$.container == 'undefined')
+            $$.container = $('#'+$$.pageId); 
+        return $$.container; 
+    };
+    $$.field = function(field, globalSearch) {
+        var f = globalSearch ? '@'+field : field;
+        var el = null;
+        if (typeof $$._fieldCache[f] == 'undefined') {
+            el = globalSearch ? $(field) : $$.container.find('[data-ui-field='+field+']');
+            if (el.length) 
+                $$._fieldCache[f] = el;
+        } else {
+            el = $$._fieldCache[f];
+        }
+        return el; 
+    };
+    $$.clearCache = function() {
+        var obj = $$._fieldCache;
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop)) { delete obj[prop]; } 
+        }
+        $$._fieldCache = [];
+    };
+};

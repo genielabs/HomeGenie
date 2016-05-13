@@ -1,5 +1,8 @@
 HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = this;
 
+    // TODO: $.extend(this, new HG.Ui.Page())
+    // and use $$.field(name) method instead of jQuery.find
+
     $$.PageId = 'page_widgeteditor_editwidget';
     $$._hasError = false;
     $$._editorHtml = null;
@@ -374,6 +377,8 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
                 if (typeof widgetInstance._bind == 'function') {
                     widgetInstance._bind(cuid, module);
                     widgetInstance._bind = null;
+                } else {
+                    widgetInstance.setModule(module);
                 }
                 if (typeof widgetInstance.onStart == 'function' && !widgetInstance._started) {
                     widgetInstance.onStart();
@@ -414,13 +419,22 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
           }, 100);
       }
     };
-    $$.field = function(f){ 
-        if (typeof $$._fieldCache[f] == 'undefined')
-            $$._fieldCache[f] = $$._widget.find('[data-ui-field='+f+']');
-        $$._fieldCache[f] = $$._widget.find('[data-ui-field='+f+']');
-        return $$._fieldCache[f]; 
+    $$.field = function(field, globalSearch){
+        var f = globalSearch ? '@'+field : field;
+        var el = null;
+        if (typeof $$._fieldCache[f] == 'undefined') {
+            el = globalSearch ? $(field) : $$._widget.find('[data-ui-field='+field+']');
+            if (el.length)
+                $$._fieldCache[f] = el;
+        } else {
+            el = $$._fieldCache[f];
+        }
+        return el 
     };
-    $$._bind = function(cuid, module) {
+    $$.clearCache = function() {
+        $$._fieldCache.length = 0;
+    };
+    $$.setModule = function(module) {
         $$.module = module;
         $$.module.prop = function(propName, value) {
             var p = HG.WebApp.Utility.GetModulePropertyByName(this, propName);
@@ -434,6 +448,9 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
                     callback(response);
             });
         };
+    };
+    $$._bind = function(cuid, module) {
+        $$.setModule(module);
         $$.container = $(cuid);
         $$.popup = $$.container.find('[data-ui-field=controlpopup]');
         $$.popup.popup();
@@ -495,6 +512,7 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
     };
 
     $$.ShowErrorTip = function (message, lineNumber) {
+        if ($$._editorJscript == null) return;
         var page = $('#' + $$.PageId);
         var errorsButton = page.find('[data-ui-field=errors-btn]');
         var marker = document.createElement('div');

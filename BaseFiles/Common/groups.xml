@@ -2,19 +2,19 @@
 <ArrayOfGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Group>
     <Name>Dashboard</Name>
-    <Wallpaper>wallpaper_006.jpg</Wallpaper>
+    <Wallpaper>wallpaper_001.jpg</Wallpaper>
     <Modules>
       <ModuleReference>
         <Address>34</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>1</Address>
-        <Domain>HomeAutomation.EnergyMonitor</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>90</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.EnergyMonitor</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>36</Address>

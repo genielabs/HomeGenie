@@ -1,29 +1,34 @@
 HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
 
-    $$.PageId = 'page_control';
     $$._widgetConfiguration = [];
     $$._widgetList = [];
     $$._renderModuleDelay = null;
     $$._renderModuleBusy = false;
 
     $$.InitializePage = function () {
-        var page = $('#'+$$.PageId);
+        var page = $$.getContainer();
         page.on('pageinit', function (e) {
-            $('#toolbar_macrorecord').hide();
-            $('#toolbar_control').show();
+            $$.toolbarMacroRecord = $('#toolbar_macrorecord');
+            $$.toolbarMacroRecord.hide();
+            $$.toolbarControl = $('#toolbar_control');
+            $$.toolbarControl.show();
+            $$.recordDelayNone = $('#macrorecord_delay_none');
+            $$.recordDelayMimic = $('#macrorecord_delay_mimic');
+            $$.recordDelayFixed = $('#macrorecord_delay_fixed');
             $('#control_macrorecord_optionspopup').bind('popupafterclose', function () {
-                if ($('#macrorecord_delay_none').prop('checked')) {
+                if ($$.recordDelayNone.prop('checked')) {
                     HG.Automation.Macro.SetDelay('None', '');
                 }
-                else if ($('#macrorecord_delay_mimic').prop('checked')) {
+                else if ($$.recordDelayMimic.prop('checked')) {
                     HG.Automation.Macro.SetDelay('Mimic', '');
                 }
-                else if ($('#macrorecord_delay_fixed').prop('checked')) {
-                    HG.Automation.Macro.SetDelay('Fixed', $('#macrorecord_delay_seconds').val());
+                else if ($$.recordDelayFixed.prop('checked')) {
+                    HG.Automation.Macro.SetDelay('Fixed', $$.field('#macrorecord_delay_seconds', true).val());
                 }
             });
-            $('#control_groupselect').change(function () {
-                var gid = $('#control_groupselect').val();
+            $$.controlGroupSelect = $('#control_groupselect');
+            $$.controlGroupSelect.change(function () {
+                var gid = $$.controlGroupSelect.val();
                 $$.ShowGroup(gid);
             });
             $.ajax({
@@ -44,40 +49,44 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             $$._renderModuleBusy = false;
             widgetsloadqueue = [];
             // hide wallpaper
-            $('div[data-ui-field="wallpaper"]').hide();
+            $$.field('div[data-ui-field="wallpaper"]', true).hide();
         });
         page.on('pagebeforeshow', function (e) {
+            $$.clearCache();
             $.mobile.loading('show');
             HG.Configure.Groups.List('Control', function ()
             {
-                if ($('#control_groupslist').children().length == 0)
+                if ($$.field('#control_groupslist', true).children().length == 0)
                 {
                     $$.RenderGroups();
                 }
                 $$.UpdateModules();
             });
             HG.Automation.Macro.GetDelay(function(data){
-                $('#macrorecord_delay_none').prop('checked', false).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_mimic').prop('checked', false).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_fixed').prop('checked', false).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_' + data.DelayType.toLowerCase()).prop('checked', true).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_seconds').val(data.DelayOptions);
+                $$.recordDelayNone.prop('checked', false).checkboxradio( 'refresh' );
+                $$.recordDelayMimic.prop('checked', false).checkboxradio( 'refresh' );
+                $$.recordDelayFixed.prop('checked', false).checkboxradio( 'refresh' );
+                $$.field('#macrorecord_delay_' + data.DelayType.toLowerCase(), true).prop('checked', true).checkboxradio( 'refresh' );
+                $$.field('#macrorecord_delay_seconds', true).val(data.DelayOptions);
             });
         });
-        $('#control_bottombar_voice_button').on('click', function() {
-            if ($('#speechinput').css('display') == 'none') {
-                $(this).removeClass('ui-icon-carat-u');
-                $(this).addClass('ui-icon-carat-d');
-                $('#speechinput').show(150);
-                $('#speechinput').find('input').focus();
+        $$.field('#control_bottombar_voice_button', true).on('click', function() {
+            var btn = $(this);
+            var speechInput = $$.field('#speechinput', true);
+            if (speechInput.css('display') == 'none') {
+                btn.removeClass('ui-icon-carat-u');
+                btn.addClass('ui-icon-carat-d');
+                speechInput.show(150);
+                speechInput.find('input').focus();
             } else {
-                $(this).removeClass('ui-icon-carat-d');
-                $(this).addClass('ui-icon-carat-u');
-                $('#speechinput').hide(150);
-                $('#speechinput').find('input').blur();
+                btn.removeClass('ui-icon-carat-d');
+                btn.addClass('ui-icon-carat-u');
+                speechInput.hide(150);
+                speechInput.find('input').blur();
             }
+            setTimeout(function(){btn.removeClass('ui-btn-active');}, 200);
         });
-        $('#voicerecognition_text').on('change', function() {
+        $$.field('#voicerecognition_text', true).on('change', function() {
             HG.VoiceControl.InterpretInput($(this).val());
         }).on('keyup', function(event) {
             if(event.keyCode == 13) {
@@ -91,11 +100,11 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         HG.WebApp.Data._CurrentGroup = HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
         HG.WebApp.Data._CurrentGroupIndex = gid;
         // set current group wallpaper
-        $('div[data-ui-field="wallpaper"]').show();
-        $('div[data-ui-field="wallpaper"]').css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
+        $$.field('div[data-ui-field="wallpaper"]', true).show();
+        $$.field('div[data-ui-field="wallpaper"]', true).css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
         $$.RefreshGroupIndicators();
-        $('#control_groupcontent').children('div').hide();
-        $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
+        $$.field('#control_groupcontent', true).children('div').hide();
+        $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).show();
         setTimeout(function(){ $$.RenderGroupModules(gid); }, 100);
     };
 
@@ -119,13 +128,13 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.RecordMacroStart = function () {
-        $('#control_actionmenu').popup('close');
+        $$.field('#control_actionmenu', true).popup('close');
         HG.Automation.Macro.Record();
-        $('#toolbar_control').hide('slidedown');
+        $$.toolbarControl.hide('slidedown');
         setTimeout(function () {
-            $('#toolbar_macrorecord').show('slideup');
+            $$.toolbarMacroRecord.show('slideup');
         }, 500);
-        $('#btn_control_macrorecord').qtip({
+        $$.field('#btn_control_macrorecord', true).qtip({
             content: {
                 title: HG.WebApp.Locales.GetLocaleString('control_macrorecord_recording'),
                 text: HG.WebApp.Locales.GetLocaleString('control_macrorecord_description'),
@@ -151,24 +160,24 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 HG.WebApp.ProgramEdit._CurrentProgram.Address = data;
                 HG.Configure.Groups.List('Automation', function () {
                     HG.WebApp.ProgramsList.EditProgram();
-                    $.mobile.changePage($('#page_automation_editprogram'), { transition: 'fade', changeHash: true });
+                    $.mobile.changePage($$.field('#page_automation_editprogram', true), { transition: 'fade', changeHash: true });
                     $.mobile.loading('hide');
                 });
             });
         });
-        $('#toolbar_control').show('slideup');
-        $('#toolbar_macrorecord').hide('slidedown');
+        $$.toolbarControl.show('slideup');
+        $$.toolbarMacroRecord.hide('slidedown');
     };
 
     $$.RecordMacroDiscard = function () {
         HG.Automation.Macro.Discard();
-        $('#toolbar_control').show('slideup');
-        $('#toolbar_macrorecord').hide('slidedown');
+        $$.toolbarControl.show('slideup');
+        $$.toolbarMacroRecord.hide('slidedown');
     };
 
     $$.RenderMenu = function () {
-        $('#groups_panel').panel().trigger('create');
-        $('#control_groupsmenu').find("li:gt(0)").remove();
+        $$.field('#groups_panel', true).panel().trigger('create');
+        $$.field('#control_groupsmenu', true).find("li:gt(0)").remove();
         for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
             var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:0px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
             var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
@@ -177,23 +186,23 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 $$.ShowGroup(idx);
                 $.mobile.pageContainer.pagecontainer('change', '#page_control', { transition: 'none' });
             });
-            $('#control_groupsmenu').append(item);
+            $$.field('#control_groupsmenu', true).append(item);
         }
-        $('#control_groupsmenu').listview('refresh');
+        $$.field('#control_groupsmenu', true).listview('refresh');
     };
 
     $$.RenderGroups = function () {
         // destroy any previous instance of isotope
-        $.each($('#control_groupcontent').find('div[class=isotope]'), function(i, l){
+        $.each($$.field('#control_groupcontent', true).find('div[class=isotope]'), function(i, l){
             $(this).isotope('destroy');
         });
         // render groups
-        $('#control_groupcontent').empty();
+        $$.field('#control_groupcontent', true).empty();
         for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
             if (i == 0) {
                 HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[i].Name;
             }
-            $('#control_groupcontent').append('<div id="groupdiv_modules_' + i + '" />');
+            $$.field('#control_groupcontent', true).append('<div id="groupdiv_modules_' + i + '" />');
         }
         $$.RenderMenu();
     };
@@ -250,7 +259,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         if (widgetsloadqueue.length > 0) {
             // extract and render element
             var rendermodule = widgetsloadqueue.splice(0, 1)[0];
-            var widget = $('#'+rendermodule.ElementId).data('homegenie.widget');
+            var widget = $$.field('#'+rendermodule.ElementId, true).data('homegenie.widget');
             if (widget != null && widget != 'undefined') {
                 HG.WebApp.WidgetEditor.RenderWidget('#'+rendermodule.ElementId, widget, widget.module);
                 widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 10);
@@ -266,31 +275,31 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                         if (w.Json != null) {
                             var myinstance = HG.WebApp.WidgetEditor.GetInstance(w.Json);
                             // store reference to this widget instance
-                            $('#'+rendermodule.ElementId).data('homegenie.widget', myinstance);
+                            $$.field('#'+rendermodule.ElementId, true).data('homegenie.widget', myinstance);
                             rendermodule.Module.WidgetInstance = myinstance;
                             // localize widget
                             HG.WebApp.Locales.LocalizeWidget(rendermodule.Module.Widget, rendermodule.ElementId, function() {
-                                $('#'+rendermodule.ElementId).show();
+                                $$.field('#'+rendermodule.ElementId, true).show();
                                 // render widget view and load next widget
                                 var mod = rendermodule.Module;
                                 HG.WebApp.WidgetEditor.RenderWidget('#'+rendermodule.ElementId, mod.WidgetInstance, mod);
-                                widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 10);
+                                widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 0);
                             });
                         } else {
                             alert(rendermodule.Module.Widget + " Widget Instance Error:\n" + e);
                             // an error occurred, continue loading next widget
-                            widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 10);
+                            widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 0);
                         }
                     } else {
                         console.log(rendermodule.Module.Widget + " Widget Error.");
                         // an error occurred, continue loading next widget
-                        widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 10);
+                        widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 0);
                     }
                 });
             }
         } else {
             $$._renderModuleBusy = false;
-            $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
+            $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).isotope({
                 itemSelector: '.freewall',
                 layoutMode: 'fitRows'
             }).isotope().addClass('isotope');
@@ -307,7 +316,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         var oldtype = module.DeviceType;
         HG.WebApp.GroupModules.ModuleEdit(function () {
             if (oldtype != module.DeviceType) {
-                var grp = $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex);
+                var grp = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
                 grp.empty();
                 $$.ShowGroup(HG.WebApp.Data._CurrentGroupIndex);
             } else {
@@ -319,7 +328,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     $$.EditModuleParams = function (module) {
         HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data._CurrentGroup;
         HG.WebApp.GroupModules.CurrentModule = module;
-        $('#page_configure_groupmodules_propspopup').popup('open', { transition: 'pop', positionTo: 'window' });
+        $$.field('#page_configure_groupmodules_propspopup', true).popup('open', { transition: 'pop', positionTo: 'window' });
     };
 
     $$.GetModuleUid = function (module) {
@@ -330,7 +339,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.UpdateActionsMenu = function () {
-        $('#control_custom_actionmenu').empty();
+        $$.field('#control_custom_actionmenu', true).empty();
         for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
             if (i == HG.WebApp.Data._CurrentGroupIndex) {
                 var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
@@ -338,12 +347,12 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                     var module = groupmodules.Modules[m];
                     if (module.Widget == 'homegenie/generic/program') {
                         // add item to actions menu
-                        $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-fa-play-circle-o ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
+                        $$.field('#control_custom_actionmenu', true).append('<li><a class="ui-btn ui-icon-fa-play-circle-o ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
                     }
                 }
             }
         }
-        $('#control_custom_actionmenu').listview('refresh');
+        $$.field('#control_custom_actionmenu', true).listview('refresh');
     };
 
     $$.UpdateModuleWidget = function (domain, address, parameter, value) {
@@ -354,7 +363,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 if (module.Domain == domain && module.Address == address) {
                     var uid = 'groupdiv_modules_' + groupmodules.Index + '_module_' + $$.GetModuleUid(module);
                     var cuid = '#' + uid;
-                    var modui = $(cuid);
+                    var modui = $$.field(cuid, true);
                     var type = module.DeviceType + ''; type = type.toLowerCase();
                     if (modui.length != 0) {
                         if (modui.data('homegenie.widget')) {
@@ -378,12 +387,12 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         $$._renderModuleDelay = null;
         //
         var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
-        var grp = $('#groupdiv_modules_' + groupmodules.Index);
+        var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
         for (var m = 0; m < groupmodules.Modules.length; m++) {
             var module = groupmodules.Modules[m];
-            var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + $$.GetModuleUid(module));
+            var uid = ($$.field('#groupdiv_modules_' + groupmodules.Index, true).attr('id') + '_module_' + $$.GetModuleUid(module));
             var cuid = '#' + uid;
-            var modui = $(cuid);
+            var modui = $$.field(cuid, true);
             var type = module.DeviceType + ''; type = type.toLowerCase();
             //
             var widgetfound = false;
@@ -445,12 +454,12 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             var group_humidity = null;
             var group_luminance = null;
             //
-            var grp = $('#groupdiv_modules_' + groupmodules.Index);
+            var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
             for (var m = 0; m < groupmodules.Modules.length; m++) {
                 var module = groupmodules.Modules[m];
-                var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + $$.GetModuleUid(module));
+                var uid = ($$.field('#groupdiv_modules_' + groupmodules.Index, true).attr('id') + '_module_' + $$.GetModuleUid(module));
                 var cuid = '#' + uid;
-                var modui = $(cuid);
+                var modui = $$.field(cuid, true);
                 var type = module.DeviceType + ''; type = type.toLowerCase();
                 //
                 var w = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
@@ -516,11 +525,11 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td>';
             }
 
-            $('#control_groupindicators_' + i).html(indicators);
+            $$.field('#control_groupindicators_' + i, true).html(indicators);
 
             if (i == HG.WebApp.Data._CurrentGroupIndex) {
-                $('#control_groupmenutitle').html(HG.WebApp.Data.Groups[i].Name);
-                $('#control_groupindicators').html(indicators);
+                $$.field('#control_groupmenutitle', true).html(HG.WebApp.Data.Groups[i].Name);
+                $$.field('#control_groupindicators', true).html(indicators);
             }
         }
     };
@@ -533,3 +542,4 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
 };
+HG.Ui.CreatePage(HG.WebApp.Control, 'page_control');
