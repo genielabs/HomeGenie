@@ -699,6 +699,7 @@ eb79ebea6322b95f5bab19facbbd1f28  usr/local/bin/homegenie/html/js/jquery.notify.
 b314901465a83bf5fdd08d17409d5fce  usr/local/bin/homegenie/html/js/homegenie.api.js
 5d60cc1f7b4b7abeecbd3ab2b6bd498e  usr/local/bin/homegenie/html/js/jquery.ui.touch-punch.min.js
 c6512bc70dcbf5ac8b7c2721cbd52351  usr/local/bin/homegenie/html/js/colorwheel.js
+8d4223896ddbb9cd132aceef6882cb04  usr/local/bin/homegenie/html/js/startswith.js
 c5980a2ab542f1faf296b7cf46520d43  usr/local/bin/homegenie/html/js/eventsource.js
 75eb6e399fae4de18c26d44ef239e7e5  usr/local/bin/homegenie/html/pages/events/_events.js
 d427dfc02f1f6277e41bd22f0462b618  usr/local/bin/homegenie/html/pages/events/main.html
@@ -1093,7 +1094,7 @@ d311329f6b7f6588be49094a592492c9  usr/local/bin/homegenie/html/images/genie.png
 b488b97ca1f19753a9f38d1e0144b115  usr/local/bin/homegenie/html/images/event_on.png
 11e6aed03a9856f09de50c12d6f5379c  usr/local/bin/homegenie/html/images/configure.png
 ecaa88f7fa0bf610a5a26cf545dcd3aa  usr/local/bin/homegenie/html/blank.html
-a7f97366f9fb32d862b09b9066beb289  usr/local/bin/homegenie/html/index.html
+745560094fa3ce8b4617c132101b30a8  usr/local/bin/homegenie/html/index.html
 69338ffa66f8af999156761d486f763b  usr/local/bin/homegenie/html/README.RestoreP513.md
 a4e8c938edacd5e8c55c5441054dcf9a  usr/local/bin/homegenie/html/icons.html
 9e90aad43d8acc5b45729f2296cb5907  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
