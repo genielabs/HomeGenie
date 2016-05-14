@@ -14,6 +14,10 @@
       </ModuleReference>
       <ModuleReference>
         <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>1</Address>
         <Domain>HomeAutomation.EnergyMonitor</Domain>
       </ModuleReference>
       <ModuleReference>
@@ -21,20 +25,16 @@
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>1</Address>
-        <Domain>HomeAutomation.BasicThermostat</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>Virtual Modules</Address>
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>2</Address>
-        <Domain>HomeAutomation.Demo</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>3</Address>
         <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>2</Address>
+        <Domain>HomeAutomation.Demo</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>1</Address>
@@ -70,6 +70,10 @@
     <Name>Color Lights</Name>
     <Wallpaper>wallpaper_007.jpg</Wallpaper>
     <Modules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeGenie.ZoneSensors</Domain>
+      </ModuleReference>
       <ModuleReference>
         <Address>1</Address>
         <Domain>HomeAutomation.PhilipsHue</Domain>

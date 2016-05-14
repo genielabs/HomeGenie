@@ -78,20 +78,20 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             //
             $("#configure_system_flip_eventshistory").on('slidestop', function (event) {
                 if ($("#configure_system_flip_eventshistory").val() == '1') {
-                    dataStore.set('UI.EventsHistory', true);
+                    HG.WebApp.Store.set('UI.EventsHistory', true);
                     $('#btn_eventshistory_led').show();
                 }
                 else {
-                    dataStore.set('UI.EventsHistory', false);
+                    HG.WebApp.Store.set('UI.EventsHistory', false);
                     $('#btn_eventshistory_led').hide();
                 }
             });
             //
             $("input[name='tempunit-choice']").on('change', function () {
-                dataStore.set('UI.TemperatureUnit', $(this).val());
+                HG.WebApp.Store.set('UI.TemperatureUnit', $(this).val());
             });
             $("input[name='dateformat-choice']").on('change', function () {
-                dataStore.set('UI.DateFormat', $(this).val());
+                HG.WebApp.Store.set('UI.DateFormat', $(this).val());
             });
             //
             $('#configure_system_updatemanager_updatebutton').bind('click', function () {
@@ -526,9 +526,9 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
         $$.LoadHttpSettings();
         $$.LoadStatisticsSettings();
         //
-        $('#configure_system_flip_eventshistory').val(dataStore.get('UI.EventsHistory') ? "1" : "0").slider('refresh');
+        $('#configure_system_flip_eventshistory').val(HG.WebApp.Store.get('UI.EventsHistory') ? "1" : "0").slider('refresh');
         //
-        var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+        var temperatureUnit = HG.WebApp.Store.get('UI.TemperatureUnit');
         $('#tempunit-celsius').prop("checked", false);
         $('#tempunit-fahrenheit').prop('checked', false);
         if (temperatureUnit != 'F')
@@ -537,7 +537,7 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             $('#tempunit-fahrenheit').prop('checked', true);
         $("input[name='tempunit-choice']").checkboxradio('refresh');
         //
-        var dateFormat = dataStore.get('UI.DateFormat');
+        var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
         $('#dateformat-dmy').prop("checked", false);
         $('#dateformat-mdy').prop('checked', false);
         if (dateFormat != 'MDY12')

@@ -79,7 +79,7 @@
                 HG.WebApp.Home.UpdateInterfacesStatus();
             }
             //
-            if (dataStore.get('UI.EventsHistory')) {
+            if (HG.WebApp.Store.get('UI.EventsHistory')) {
                 // add message to local events queue
                 HG.WebApp.Data.Events.push(event);
                 if (HG.WebApp.Data.Events.length > $$._eventQueueCapacity) {
@@ -377,7 +377,7 @@
     };
 
     $$.PopupRefreshIgnore = function () {
-        var ignoreList = dataStore.get('UI.EventPopupIgnore');
+        var ignoreList = HG.WebApp.Store.get('UI.EventPopupIgnore');
         if (ignoreList == null) return;
         $$.field('#popupsettings_ignorelist', true).find('li:gt(0)').remove();
         for (var i = 0; i < ignoreList.length; i++)
@@ -396,7 +396,7 @@
     }
 
     $$.PopupHasIgnore = function (domain, address, property) {
-        var ignoreList = dataStore.get('UI.EventPopupIgnore');
+        var ignoreList = HG.WebApp.Store.get('UI.EventPopupIgnore');
         if (ignoreList == null) return false;
         var exists = false;
         for(var i = 0; i < ignoreList.length; i++)
@@ -411,14 +411,14 @@
     };
 
     $$.PopupRemoveIgnore = function (index) {
-        var ignoreList = dataStore.get('UI.EventPopupIgnore');
+        var ignoreList = HG.WebApp.Store.get('UI.EventPopupIgnore');
         if (ignoreList == null || ignoreList.length <= index) return;
         ignoreList.splice(index, 1);
         $$.PopupRefreshIgnore();
     };
 
     $$.PopupAddIgnore = function (domain, address, property) {
-        var ignoreList = dataStore.get('UI.EventPopupIgnore');
+        var ignoreList = HG.WebApp.Store.get('UI.EventPopupIgnore');
         if (ignoreList == null)
         {
             ignoreList = Array();
@@ -426,7 +426,7 @@
         if (!$$.PopupHasIgnore(domain, address, property))
         {
             ignoreList.push({ Domain: domain, Address: address, Property: property });
-            dataStore.set('UI.EventPopupIgnore', ignoreList);
+            HG.WebApp.Store.set('UI.EventPopupIgnore', ignoreList);
         }
         $$.field('#statuspopup', true).css('display', 'none');
     };

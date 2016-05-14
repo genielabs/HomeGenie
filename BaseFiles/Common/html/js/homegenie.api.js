@@ -1,5 +1,3 @@
-<script type="text/javascript">
-
 /*
 || HomeGenie Web API
 || Copyright: (c) 2010-2016 GenieLabs
@@ -55,19 +53,3 @@ var HG = HG || {};
 // info      : -
 //
 {include js/api/homegenie.voicecontrol.js}
-//
-// namespace : HG.WebApp
-// info      : -
-//
-{include js/api/homegenie.webapp.js}
-{include js/api/homegenie.webapp.home.js}
-{include js/api/homegenie.webapp.locales.js}
-{include js/api/homegenie.webapp.utility.js}
-//
-// namespace : HG.Ext.ZWave
-// info      : -
-// TODO: move this to a proper location
-HG.Ext = HG.Ext || {};
-{include ext/zwave/_nodesetup.js}
-
-</script>

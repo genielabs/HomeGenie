@@ -116,7 +116,7 @@
         }
 
         try {
-          var dateFormat = dataStore.get('UI.DateFormat');
+          var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
           $.plot(_this.Widget.find('[data-ui-field=energystats]'), [
             { label: _this._fieldDesc+'&nbsp;', data: dataSerie, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: true } }
           ],

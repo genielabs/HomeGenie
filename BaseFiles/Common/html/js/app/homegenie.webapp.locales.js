@@ -26,7 +26,7 @@ HG.WebApp.Locales = HG.WebApp.Locales || new function(){ var $$ = this;
 
     $$.GetTemperatureUnit = function()
     {
-        var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+        var temperatureUnit = HG.WebApp.Store.get('UI.TemperatureUnit');
         if (temperatureUnit != 'C' && (temperatureUnit == 'F' || $$.GetDateEndianType() == 'M'))
             return 'Fahrenheit';
         else

@@ -239,7 +239,7 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
     };
 
     $$.GetLocaleTemperature = function (temp) {
-        var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+        var temperatureUnit = HG.WebApp.Store.get('UI.TemperatureUnit');
         if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
             // display as Fahrenheit
             temp = Math.round((temp * 1.8 + 32) * 10) / 10;
@@ -252,7 +252,7 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
 
     $$.FormatTemperature = function (temp) {
         var displayvalue = '';
-        var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+        var temperatureUnit = HG.WebApp.Store.get('UI.TemperatureUnit');
         if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
             // display as Fahrenheit
             temp = Math.round((temp * 1.8 + 32) * 10) / 10;
@@ -267,7 +267,7 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
 
     $$.FormatDate = function (date)
     {
-        var dateFormat = dataStore.get('UI.DateFormat');
+        var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
         var dt = null;
         if (dateFormat != 'DMY24' && (dateFormat == 'MDY12' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
             dt = $.datepicker.formatDate('D, mm/dd/yy', date);
@@ -280,7 +280,7 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
     // if options contains 'sm' show seconds and milliseconds
     $$.FormatDateTime = function (date, options)
     {
-        var dateFormat = dataStore.get('UI.DateFormat');
+        var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
         var dt = null;
         var h = date.getHours();
         var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;

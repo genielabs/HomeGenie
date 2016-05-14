@@ -72,7 +72,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
         $('#page_analyze_costperunit').on('change', function () {
             var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
             $('#page_analyze_totalcost').val(cost.toFixed(2));
-            dataStore.set('UI.Statistics.CostPerUnit', $('#page_analyze_costperunit').val());
+            HG.WebApp.Store.set('UI.Statistics.CostPerUnit', $('#page_analyze_costperunit').val());
         });
         //
         $('#analyze_stats_options').on('popupbeforeposition', function (event) {
@@ -236,7 +236,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
 
     $$.InitConfiguration = function () {
         // cost per unit default value
-        $('#page_analyze_costperunit').val(dataStore.get('UI.Statistics.CostPerUnit') ? dataStore.get('UI.Statistics.CostPerUnit') : 0.00022);
+        $('#page_analyze_costperunit').val(HG.WebApp.Store.get('UI.Statistics.CostPerUnit') ? HG.WebApp.Store.get('UI.Statistics.CostPerUnit') : 0.00022);
         // read stats settings
         HG.Statistics.ServiceCall('Configuration.Get', '', '', function (setting) {
             var sec = (setting.StatisticsUIRefreshSeconds * 1);
@@ -354,7 +354,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                                             for (var tx = 0; tx < stats[sx].length; tx++)
                                                 stats[sx][tx][1] = HG.WebApp.Utility.GetLocaleTemperature(stats[sx][tx][1]);
                                     }
-                                    var dateFormat = dataStore.get('UI.DateFormat');
+                                    var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
                                     $.plot($("#statshour"), [
                                             {
                                                 label: 'Max',
@@ -506,7 +506,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                     
                 } else {
                     
-                    var dateFormat = dataStore.get('UI.DateFormat');
+                    var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
                     $.ajax({
                         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsMultiple/' + $$._CurrentParameter + '/' + $$._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
                         type: 'GET',
@@ -598,7 +598,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                     $('#page_analyze_cost_counter').html('Counter ' + (Math.round(total * 100) / 100));
                     //
                     try {
-                        var dateFormat = dataStore.get('UI.DateFormat');
+                        var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
                         $.plot($("#statscounter"), [{
                                 label: $$._CurrentParameter,
                                 data: stats[0]

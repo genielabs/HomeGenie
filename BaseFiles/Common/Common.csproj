@@ -690,9 +690,6 @@
     <None Include="html\js\api\homegenie.control.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\api\homegenie.inc.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\js\api\homegenie.statistics.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -700,9 +697,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\js\api\homegenie.voicecontrol.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\js\api\homegenie.webapp.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\js\codemirror-4.03\AUTHORS">
@@ -3531,22 +3525,31 @@
     <None Include="html\js\api\homegenie.configure.system.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\api\homegenie.inc.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\js\api\homegenie.control.modules.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\js\api\homegenie.system.updatemanager.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\api\homegenie.webapp.locales.js">
+    <None Include="html\js\homegenie.api.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\api\homegenie.webapp.utility.js">
+    <None Include="html\js\homegenie.api.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\api\homegenie.webapp.home.js">
+    <None Include="html\js\homegenie.webapp.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\js\homegenie.webapp.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\js\app\homegenie.webapp.home.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\js\app\homegenie.webapp.locales.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\js\app\homegenie.webapp.utility.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -3584,5 +3587,6 @@
     <Folder Include="lib\shared\zh-CHS\" />
     <Folder Include="html\pages\control\widgets\weather\wunderground\images\" />
     <Folder Include="html\css\font-awesome\" />
+    <Folder Include="html\js\app\" />
   </ItemGroup>
 </Project>

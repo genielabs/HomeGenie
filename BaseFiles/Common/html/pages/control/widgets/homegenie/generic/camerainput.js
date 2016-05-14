@@ -12,17 +12,17 @@ var imageurl = $$.widget.icon;
 
 $$.onStart = function() {
   // Settings button click
-  $$.field('settings').on('click', function () {
+  $$.field('settings').on('click', function() {
     $$.ui.EditModule($$.module);
   });
 
   // Initialize camera live popup
-  $$.popup.on('popupbeforeposition', function () { 
+  $$.popup.on('popupbeforeposition', function() { 
     popupisopen = true; 
     requestPopupOpen = false;
     $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
   });
-  $$.popup.on('popupafterclose', function () { popupisopen = false; $.mobile.loading('hide'); });
+  $$.popup.on('popupafterclose', function() { popupisopen = false; $.mobile.loading('hide'); });
   $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime())).load(function () {
     if (requestPopupOpen) {
       $$.popup.popup('open');
@@ -30,7 +30,7 @@ $$.onStart = function() {
       $.mobile.loading('hide');
       setTimeout(function () {
         $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
-      }, 100);
+      }, 80);
     }
   }).error(function () {
     if (popupisopen) {
@@ -42,12 +42,12 @@ $$.onStart = function() {
   });
 
   // When widget is clicked control popup is shown
-  $$.field('camerapicturepreview').on('click', function () {
+  $$.field('camerapicturepreview').on('click', function() {
       $.mobile.loading('show', { text: 'Connecting to camera', textVisible: true });
       requestPopupOpen = true;
       $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
   });
-  $$.field('camerapicturepreview').load(function () {
+  $$.field('camerapicturepreview').load(function() {
     if ($$.container.is(':visible')) {
       setTimeout(function () {
         $$.field('camerapicturepreview').attr('src', imageurl + '?' + (new Date().getTime()));
@@ -60,6 +60,21 @@ $$.onStart = function() {
       }, 2000);
     }
   });
+  $$.field('sizetoggle').on('click', function(){
+    if ($$._widget.data('enlarged') === true) {
+        $$._widget.css('width', '');
+        $$._widget.css('height', '');
+        $$.field('camerapicturepreview').css('height', '172');
+        $$._widget.data('enlarged', false);
+    } else {
+        $$._widget.css('width', '430');
+        $$._widget.css('height', '290');
+        $$.field('camerapicturepreview').css('height', '282');
+        $$._widget.data('enlarged', true);
+    }
+    // force content relayout
+    $$.container.parent().parent().isotope('layout')
+  });
 
   // Set the camera image URL
   var cameraUrl = $$.module.prop('Image.URL');
@@ -67,26 +82,10 @@ $$.onStart = function() {
   else imageurl = '/api/' + $$.module.Domain + '/' + $$.module.Address + '/Camera.GetPicture/';
 }
 
-$$.onRefresh = function () {
-  // Set current icon image
-  var widgeticon = $$.module.prop('Widget.DisplayIcon');
-  if (widgeticon != null && widgeticon.Value != '') {
-    $$.widget.icon = widgeticon.Value;
-  } else {
-    if (level > 0) {
-      $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/'+$$.module.DeviceType.toLowerCase()+'_on.png';
-    } else {
-      $$.widget.icon = 'pages/control/widgets/homegenie/generic/images/'+$$.module.DeviceType.toLowerCase()+'_off.png';
-    }
-  }
-
-  HG.Ui.GetModuleIcon($$.module, function(imgPath){
-    $$.field('icon').attr('src', imgPath);
-    $$.widget.icon = imgPath;
-  });
-
+$$.onRefresh = function() {
   $$.field('camerapicturepreview').attr('src', imageurl + '?');
   $$.field('name').html($$.module.Name);
+  $$.popup.field('name').html($$.module.Name);
   $$.field('description').html('Camera ' + $$.module.Address);
 }
 

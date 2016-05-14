@@ -1,5 +1,3 @@
-// Persist-Js global data store 
-var dataStore;
 //
 // namespace : HG.Ui namespace
 // info      : -
@@ -140,10 +138,6 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
             return (Math.round(this.getDoubleValue(v)*10)/10).toString();
         }
     };
-
-    $$.DataStore = function() {
-        return dataStore;
-    }
 
     $$.GenerateWidget = function(fieldType, context, callback) {
         // fieldType: 
@@ -307,7 +301,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
     };
 
     $$.SetTheme = function (theme) {
-        dataStore.set('UI.Theme', theme);
+        HG.WebApp.Store.set('UI.Theme', theme);
         $(document).find('.ui-page')
                 .removeClass('ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e ui-page-theme-f ui-page-theme-g ui-page-theme-h')
                 .addClass('ui-page-theme-' + theme);
@@ -421,7 +415,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                     } else {
                         desc = Module.getFormattedNumber(value);
                     }
-                    desc += "°";
+                    desc += "&deg;";
                     icon = 'images/indicators/temperature.png';
                     break;
                 case ParameterType.Sensor_Luminance:

@@ -93,6 +93,11 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 HG.VoiceControl.InterpretInput($(this).val());
             }
         });
+        $$.field('#groups_panel', true).panel().trigger('create');
+        $$.field('#groups_panel', true).on('beforeopen', function(){
+          setTimeout($$.RenderMenu, 1000);
+        });
+
     };
 
     $$.ShowGroup = function (gid) {
@@ -176,7 +181,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.RenderMenu = function () {
-        $$.field('#groups_panel', true).panel().trigger('create');
         $$.field('#control_groupsmenu', true).find("li:gt(0)").remove();
         for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
             var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:0px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
@@ -188,7 +192,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             });
             $$.field('#control_groupsmenu', true).append(item);
         }
-        $$.field('#control_groupsmenu', true).listview('refresh');
+        $$.field('#control_groupsmenu', true).listview().listview('refresh');
     };
 
     $$.RenderGroups = function () {
@@ -204,7 +208,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             }
             $$.field('#control_groupcontent', true).append('<div id="groupdiv_modules_' + i + '" />');
         }
-        $$.RenderMenu();
     };
 
     $$.GetWidget = function (widgetpath, callback) {

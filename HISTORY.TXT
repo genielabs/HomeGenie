@@ -1,5 +1,14 @@
 ﻿RELEASE HISTORY
 
+14/05/2016 v1.1-beta.520
+    - Optimized general web UI performances (should fix #272)
+    - Migrated some generic widgets to new API model: camerainput, colorlight, dimmer, doorwindow, generic, light, sensor, siren, switch, template
+    - Revamped HG Javascript API code and model
+    - Fixed ZWaveLib db serialization issue
+    - Fixed SharpZipLib version compatibility PR #276
+    - Brand new Dashboard look
+    - Added new automation program: "Virtual Modules Demo"
+
 01/05/2016 v1.1-beta.519
     - Fixed bug that was causing programs features randomly disappear 
     - Fixed wrong mime-type sent for web fonts (MIG)

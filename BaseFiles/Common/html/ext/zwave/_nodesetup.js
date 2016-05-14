@@ -1,4 +1,5 @@
-﻿HG.Ext.ZWave = HG.Ext.ZWave || {};
+﻿HG.Ext = HG.Ext || {};
+HG.Ext.ZWave = HG.Ext.ZWave || {};
 HG.Ext.ZWave.NodeSetup = HG.Ext.ZWave.NodeSetup || {};
 
 HG.Ext.ZWave.NodeSetup.Show = function (module) {

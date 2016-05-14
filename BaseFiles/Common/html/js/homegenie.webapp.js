@@ -1,3 +1,10 @@
+﻿/*
+|| HomeGenie Web API
+|| Copyright: (c) 2010-2016 GenieLabs
+|| Author   : Generoso Martello
+|| E-Mail   : gene@homegenie.it
+*/ 
+
 //
 // namespace : HG.WebApp namespace
 // info      : -
@@ -17,24 +24,22 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
 
     };
 
+    $$.Store = $.jStorage;
+
+    /*
+    || Application start - Init stuff
+    */
     $$.Initialize = function() {
-        //
-        // Application start - Init stuff
-        //
-        dataStore = $.jStorage;
-        //
-        var theme = dataStore.get('UI.Theme');
+
+        var theme = $$.Store.get('UI.Theme');
         if (theme == null || (theme < 'a' || theme > 'g')) {
-            dataStore.set('UI.Theme', 'a');
+            $$.Store.set('UI.Theme', 'a');
         }
         //
         $.mobile.ajaxFormsEnabled = false;
-        //$.ajaxSetup({
-        //    cache: false
-        //});
         //
         HG.Configure.LoadData(function(){
-            $$.Control.RenderMenu();
+            setTimeout($$.Control.RenderMenu, 2000);
         });
         //
         $$.Home.UpdateHeaderStatus();
@@ -43,7 +48,7 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
         // Page Before Show: common initialization stuff
         //
         $('[data-role=page]').on('pagebeforeshow', function (event) {
-            HG.Ui.SetTheme(dataStore.get('UI.Theme'));
+            HG.Ui.SetTheme($$.Store.get('UI.Theme'));
             if (this.id == "page_analyze") {
                 $$.Statistics.InitConfiguration();
             } else if (this.id == 'page_configure_maintenance') {
@@ -95,8 +100,8 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
                     $$.Locales.Localize(document);
                     $('#homegenie_overlay').fadeOut(200);
                     // Show about popup
-                    if (!dataStore.get('UI.AboutPopupShown')) {
-                        dataStore.set('UI.AboutPopupShown', true);
+                    if (!$$.Store.get('UI.AboutPopupShown')) {
+                        $$.Store.set('UI.AboutPopupShown', true);
                         setTimeout($$.Home.About, 3000);
                     }
                 });
@@ -104,8 +109,8 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
             HG.VoiceControl.Initialize();
 
             // apply UI settings
-            HG.Ui.SetTheme(dataStore.get('UI.Theme'));
-            if (dataStore.get('UI.EventsHistory')) {
+            HG.Ui.SetTheme($$.Store.get('UI.Theme'));
+            if ($$.Store.get('UI.EventsHistory')) {
                 $('#btn_eventshistory_led').show();
             }
 
@@ -232,8 +237,13 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
     };
 
 };
-
-
+//
+// namespace : HG.WebApp
+// info      : -
+//
+{include js/app/homegenie.webapp.locales.js}
+{include js/app/homegenie.webapp.utility.js}
+{include js/app/homegenie.webapp.home.js}
 
 //
 // namespace : HG.WebApp.Events

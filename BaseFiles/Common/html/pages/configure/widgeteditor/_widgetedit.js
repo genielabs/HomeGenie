@@ -402,64 +402,63 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
 
     $$.GetInstance = function (javascriptCode) {
         if (!javascriptCode.trim().startsWith('[')) {
-            var commonJs = `
-    var $$ = this;
-    $$._fieldCache = [];
-    $$.v2 = true;
-    $$.apiCall = HG.Control.Modules.ServiceCall;
-    $$.util = HG.WebApp.Utility;
-    $$.ui = HG.Ui;
-    $$.signalActity = function(fieldName) {
-      if (typeof fieldName != 'undefined' && fieldName != '')
-        $$.ui.BlinkAnim($$.field(fieldName));
-      if ($$.field('led').length) {
-          $$.field('led').attr('src', 'images/common/led_green.png');
-          setTimeout(function() {
-            $$.field('led').attr('src', 'images/common/led_black.png');
-          }, 100);
-      }
-    };
-    $$.field = function(field, globalSearch){
-        var f = globalSearch ? '@'+field : field;
-        var el = null;
-        if (typeof $$._fieldCache[f] == 'undefined') {
-            el = globalSearch ? $(field) : $$._widget.find('[data-ui-field='+field+']');
-            if (el.length)
-                $$._fieldCache[f] = el;
-        } else {
-            el = $$._fieldCache[f];
-        }
-        return el 
-    };
-    $$.clearCache = function() {
-        $$._fieldCache.length = 0;
-    };
-    $$.setModule = function(module) {
-        $$.module = module;
-        $$.module.prop = function(propName, value) {
-            var p = HG.WebApp.Utility.GetModulePropertyByName(this, propName);
-            if (typeof value != 'undefined')
-                p.Value = value;
-            return p;
-        };
-        $$.module.command = function(cmd, opt, callback) {
-            HG.Control.Modules.ServiceCall(cmd, this.Domain, this.Address, opt, function (response) { 
-                if (typeof callback == 'function')
-                    callback(response);
-            });
-        };
-    };
-    $$._bind = function(cuid, module) {
-        $$.setModule(module);
-        $$.container = $(cuid);
-        $$.popup = $$.container.find('[data-ui-field=controlpopup]');
-        $$.popup.popup();
-        $$.popup.trigger('create');
-        $$.popup.field = function(f){ return $$.popup.find('[data-ui-field='+f+']'); };
-        $$._widget = $$.container.find('[data-ui-field=widget]');
-        $$._widget.data('ControlPopUp', $$.popup);
-    };
-`;
+            var commonJs = "";
+            commonJs += "    var $$ = this;";
+            commonJs += "    $$._fieldCache = [];";
+            commonJs += "    $$.v2 = true;";
+            commonJs += "    $$.apiCall = HG.Control.Modules.ServiceCall;";
+            commonJs += "    $$.util = HG.WebApp.Utility;";
+            commonJs += "    $$.ui = HG.Ui;";
+            commonJs += "    $$.signalActity = function(fieldName) {";
+            commonJs += "      if (typeof fieldName != 'undefined' && fieldName != '')";
+            commonJs += "        $$.ui.BlinkAnim($$.field(fieldName));";
+            commonJs += "      if ($$.field('led').length) {";
+            commonJs += "          $$.field('led').attr('src', 'images/common/led_green.png');";
+            commonJs += "          setTimeout(function() {";
+            commonJs += "            $$.field('led').attr('src', 'images/common/led_black.png');";
+            commonJs += "          }, 100);";
+            commonJs += "      }";
+            commonJs += "    };";
+            commonJs += "    $$.field = function(field, globalSearch){";
+            commonJs += "        var f = globalSearch ? '@'+field : field;";
+            commonJs += "        var el = null;";
+            commonJs += "        if (typeof $$._fieldCache[f] == 'undefined') {";
+            commonJs += "            el = globalSearch ? $(field) : $$._widget.find('[data-ui-field='+field+']');";
+            commonJs += "            if (el.length)";
+            commonJs += "                $$._fieldCache[f] = el;";
+            commonJs += "        } else {";
+            commonJs += "            el = $$._fieldCache[f];";
+            commonJs += "        }";
+            commonJs += "        return el"; 
+            commonJs += "    };";
+            commonJs += "    $$.clearCache = function() {";
+            commonJs += "        $$._fieldCache.length = 0;";
+            commonJs += "    };";
+            commonJs += "    $$.setModule = function(module) {";
+            commonJs += "        $$.module = module;";
+            commonJs += "        $$.module.prop = function(propName, value) {";
+            commonJs += "            var p = HG.WebApp.Utility.GetModulePropertyByName(this, propName);";
+            commonJs += "            if (typeof value != 'undefined')";
+            commonJs += "                p.Value = value;";
+            commonJs += "            return p;";
+            commonJs += "        };";
+            commonJs += "        $$.module.command = function(cmd, opt, callback) {";
+            commonJs += "            HG.Control.Modules.ServiceCall(cmd, this.Domain, this.Address, opt, function (response) { ";
+            commonJs += "                if (typeof callback == 'function')";
+            commonJs += "                    callback(response);";
+            commonJs += "            });";
+            commonJs += "        };";
+            commonJs += "    };";
+            commonJs += "    $$._bind = function(cuid, module) {";
+            commonJs += "        $$.setModule(module);";
+            commonJs += "        $$.container = $(cuid);";
+            commonJs += "        $$.popup = $$.container.find('[data-ui-field=controlpopup]');";
+            commonJs += "        $$.popup.popup();";
+            commonJs += "        $$.popup.trigger('create');";
+            commonJs += "        $$.popup.field = function(f){ return $$.popup.find('[data-ui-field='+f+']'); };";
+            commonJs += "        $$._widget = $$.container.find('[data-ui-field=widget]');";
+            commonJs += "        $$._widget.data('ControlPopUp', $$.popup);";
+            commonJs += "    };";
             commonJs = commonJs.replace(/(\r\n|\n|\r)/gm, "");
             javascriptCode = 'new function(){' + commonJs + javascriptCode + '}';
             return eval(javascriptCode);
