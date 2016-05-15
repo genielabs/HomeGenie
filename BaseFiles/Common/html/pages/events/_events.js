@@ -441,7 +441,7 @@
         s += '<tr style="color:gray;font-size:9pt;"><td colspan="2">' + popupdata.timestamp + '</td>';
         if (eventLog)
         {
-            s += '<td align="right"><a href="#" title="Block popup from this source" onclick="$$.PopupAddIgnore(\'' + eventLog.Domain + '\',\'' + eventLog.Source + '\',\'' + eventLog.Property + '\')"><img border="0" alt="Block popup from this source" src="images/halt.png" /></a></td>';
+            s += '<td align="right"><a href="#" title="Block popup from this source" onclick="HG.WebApp.Events.PopupAddIgnore(\'' + eventLog.Domain + '\',\'' + eventLog.Source + '\',\'' + eventLog.Property + '\')"><img border="0" alt="Block popup from this source" src="images/halt.png" /></a></td>';
         }
         s += '</tr>';
         s += '</table>';
