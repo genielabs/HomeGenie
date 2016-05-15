@@ -19,9 +19,16 @@
                             <p id="configure_system_updatemanager_details"></p>
                         </div>
                     </div>
+                    <div>
+                        <form id="updatemanager_updatefile_form" target="uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/System.Configure/UpdateManager.ManualUpdate" data-ajax="false">
+                            <input id="updatemanager_updatefile_uploadfile" type="file" title="Manual update from '.tgz' release file." name="file" />
+                        </form>
+                        <iframe id="updatemanager_updatefile_uploadframe" name="uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+                    </div>
                 </div>
                 <div class="ui-block-b" style="float:right;width:150px">
                     <a id="configure_system_updatemanager_updatebutton" data-locale-id="configure_system_updatemanager_updatecheck" class="ui-btn ui-corner-all">Update Check</a>
+                    <a id="configure_system_updatemanager_manualbutton" data-locale-id="configure_system_updatemanager_manualupdate" href="#" class="ui-btn ui-corner-all">Manual Update</a>
                     <a id="configure_system_updatemanager_installbutton" data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
                 </div>
             </div>

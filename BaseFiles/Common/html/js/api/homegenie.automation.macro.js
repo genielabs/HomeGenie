@@ -44,7 +44,7 @@ HG.Automation.Macro = HG.Automation.Macro || new function(){ var $$ = this;
                 callback(data);
             },
             error: function(xhr, status, error) {
-                console.log('$$.GetDelay ERROR: '+xhr.status+':'+xhr.statusText);
+                console.log('HG.Automation.Macro.GetDelay ERROR: '+xhr.status+':'+xhr.statusText);
                 callback();
             }
         });

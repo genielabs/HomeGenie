@@ -102,6 +102,35 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                     $$.LoadUpdateCheckSettings();
                 });
             });
+            $('#configure_system_updatemanager_manualbutton').on('click', function () {
+                //$('#configure_system_updatemanager_info').html('<strong>Updating from file...</strong>');
+                if ($('#updatemanager_updatefile_uploadfile').val() == "") {
+                    alert('Select a .tgz release file to install first');
+                    $('#updatemanager_updatefile_uploadfile').parent().stop().animate({borderColor: "#FF5050"}, 250)
+                        .animate({borderColor: "#FFFFFF"}, 250)
+                        .animate({borderColor: "#FF5050"}, 250)
+                        .animate({borderColor: "#FFFFFF"}, 250);
+                } else {
+                    $.mobile.loading('show');
+                    $('#configure_system_updatemanager_manualbutton').addClass('ui-disabled');
+                    $.mobile.loading('show', {
+                        text: 'Processing release file, please wait...',
+                        textVisible: true,
+                        theme: 'a',
+                        html: ''
+                    });
+                    $('#configure_system_updateinstall_log').html();
+                    $('#systemsettings_updateinstall_popup').popup('open');
+                    $('#updatemanager_updatefile_form').submit();
+                }
+            });
+            $('#updatemanager_updatefile_uploadframe').bind('load', function (evt) {
+                if ($('#updatemanager_updatefile_uploadfile').val() == "")
+                    return;
+                $('#configure_system_updatemanager_manualbutton').removeClass('ui-disabled');
+                $.mobile.loading('hide');
+                $('#systemsettings_updateinstall_popup').popup('close');
+            });
             $('#configure_system_updateinstall_button').bind('click', function () {
                 $('#configure_system_updateinstall_button').addClass('ui-disabled');
                 $('#configure_system_updatemanager_info').html('<strong>Installing updates...</strong>');
@@ -118,11 +147,9 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                         setTimeout(function () {
                             window.location.replace("/");
                         }, 3000);
-                    }
-                    else if (res.ResponseValue == 'RESTART') {
+                    } else if (res.ResponseValue == 'RESTART') {
                         $('#configure_system_updateinstall_status').html('Installing files... (HomeGenie service stopped)');
-                    }
-                    else if (res.ResponseValue == 'ERROR') {
+                    } else if (res.ResponseValue == 'ERROR') {
                         $('#configure_system_updateinstall_status').html('Error during installation progress.');
                         //
                         $.mobile.loading('hide');
@@ -152,12 +179,10 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                     if (res.ResponseValue == 'OK') {
                         $('#configure_system_updateinstall_status').html('Update files ready.');
                         $('#configure_system_updateinstall_button').removeClass('ui-disabled');
-                    }
-                    else if (res.ResponseValue == 'RESTART') {
+                    } else if (res.ResponseValue == 'RESTART') {
                         $('#configure_system_updateinstall_status').html('Update files ready. HomeGenie will be restarted after updating.');
                         $('#configure_system_updateinstall_button').removeClass('ui-disabled');
-                    }
-                    else if (res.ResponseValue == 'ERROR') {
+                    } else if (res.ResponseValue == 'ERROR') {
                         $('#configure_system_updateinstall_status').html('Error while downloading update files.');
                         $('#configure_system_updateinstall_button').addClass('ui-disabled');
                     }
@@ -216,8 +241,7 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                         .animate({borderColor: "#FFFFFF"}, 250)
                         .animate({borderColor: "#FF5050"}, 250)
                         .animate({borderColor: "#FFFFFF"}, 250);
-                }
-                else {
+                } else {
                     $('#systemsettings_backuprestores1cancelbutton').removeClass('ui-disabled');
                     $('#systemsettings_backuprestores1confirmbutton').removeClass('ui-disabled');
                     $.mobile.loading('show', {

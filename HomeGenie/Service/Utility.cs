@@ -40,6 +40,8 @@ using ICSharpCode.SharpZipLib.Core;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 using Newtonsoft.Json.Serialization;
+using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
 
 namespace HomeGenie.Service
 {
@@ -372,6 +374,34 @@ namespace HomeGenie.Service
             {
                 HomeGenieService.LogError(e);
             }
+        }
+
+        internal static List<string> UncompressTgz(string archiveName, string destinationFolder)
+        {
+            List<string> extractedFiles = new List<string>();
+            try
+            {
+                Stream inStream = File.OpenRead(archiveName);
+                Stream gzipStream = new GZipInputStream(inStream);
+
+                TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
+                tarArchive.ProgressMessageEvent += (archive, entry, message) => {
+                    extractedFiles.Add(entry.Name);
+                };
+
+                tarArchive.ExtractContents(destinationFolder);
+                tarArchive.ListContents();
+                tarArchive.Close();
+
+                gzipStream.Close();
+                inStream.Close();
+            } 
+            catch (Exception e) 
+            {
+                Console.WriteLine("UnTar error: " + e.Message);
+            }
+
+            return extractedFiles;
         }
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)

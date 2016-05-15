@@ -219,6 +219,98 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateChecker.Check();
                     request.ResponseData = new ResponseText("OK");
                 }
+                else if (migCommand.GetOption(0) == "UpdateManager.ManualUpdate")
+                {
+                    homegenie.RaiseEvent(
+                        Domains.HomeGenie_System,
+                        Domains.HomeGenie_UpdateChecker,
+                        SourceModule.Master,
+                        "HomeGenie Manual Update",
+                        Properties.InstallProgressMessage,
+                        "Receiving update file"
+                    );
+                    bool success = false;
+                    // file uploaded by user
+                    Utility.FolderCleanUp(tempFolderPath);
+                    string archivename = Path.Combine(tempFolderPath, "homegenie_update_file.tgz");
+                    try
+                    {
+                        MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archivename);
+                        var files = Utility.UncompressTgz(archivename, tempFolderPath);
+                        File.Delete(archivename);
+                        string relInfo = Path.Combine(tempFolderPath, "homegenie", "release_info.xml");
+                        if (File.Exists(relInfo))
+                        {
+                            var updateRelease = UpdateChecker.GetReleaseFile(relInfo);
+                            var currentRelease = homegenie.UpdateChecker.GetCurrentRelease();
+                            if (updateRelease.ReleaseDate >= currentRelease.ReleaseDate)
+                            {
+                                string installPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_update", "files");
+                                Utility.FolderCleanUp(installPath);
+                                Directory.Move(Path.Combine(tempFolderPath, "homegenie"), Path.Combine(installPath, "HomeGenie"));
+                                var installStatus = homegenie.UpdateChecker.InstallFiles();
+                                if (installStatus != UpdateChecker.InstallStatus.Error)
+                                {
+                                    success = true;
+                                    if (installStatus == UpdateChecker.InstallStatus.RestartRequired)
+                                    {
+                                        homegenie.RaiseEvent(
+                                            Domains.HomeGenie_System,
+                                            Domains.HomeGenie_UpdateChecker,
+                                            SourceModule.Master,
+                                            "HomeGenie Manual Update",
+                                            Properties.InstallProgressMessage,
+                                            "HomeGenie will now restart."
+                                        );
+                                        Program.Quit(true);
+                                    }
+                                    else
+                                    {
+                                        homegenie.RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "UPDATED");
+                                        Thread.Sleep(3000);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                homegenie.RaiseEvent(
+                                    Domains.HomeGenie_System,
+                                    Domains.HomeGenie_UpdateChecker,
+                                    SourceModule.Master,
+                                    "HomeGenie Manual Update",
+                                    Properties.InstallProgressMessage,
+                                    "ERROR: Installed release is newer than update file"
+                                );
+                                Thread.Sleep(3000);
+                            }
+                        }
+                        else 
+                        {
+                            homegenie.RaiseEvent(
+                                Domains.HomeGenie_System,
+                                Domains.HomeGenie_UpdateChecker,
+                                SourceModule.Master,
+                                "HomeGenie Manual Update",
+                                Properties.InstallProgressMessage,
+                                "ERROR: Invalid update file"
+                            );
+                            Thread.Sleep(3000);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        homegenie.RaiseEvent(
+                            Domains.HomeGenie_System,
+                            Domains.HomeGenie_UpdateChecker,
+                            SourceModule.Master,
+                            "HomeGenie Update Checker",
+                            Properties.InstallProgressMessage,
+                            "ERROR: Exception occurred ("+e.Message+")"
+                        );
+                        Thread.Sleep(3000);
+                    }
+                    request.ResponseData = new ResponseStatus(success ? Status.Ok : Status.Error);
+                }
                 else if (migCommand.GetOption(0) == "UpdateManager.DownloadUpdate")
                 {
                     var resultMessage = "ERROR";
@@ -240,7 +332,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     string resultMessage = "OK";
                     homegenie.SaveData();
-                    if (!homegenie.UpdateChecker.InstallFiles())
+                    if (homegenie.UpdateChecker.InstallFiles() == UpdateChecker.InstallStatus.Error)
                     {
                         resultMessage = "ERROR";
                     }

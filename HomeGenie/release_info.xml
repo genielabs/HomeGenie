@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r520</Version>
+  <Version>1.1 beta r521</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Optimized general web UI performances (should fix #272)
-  - Migrated some generic widgets to new API model: camerainput, colorlight, dimmer, doorwindow, generic, light, sensor, siren, switch, template
-  - Revamped HG Javascript API code and model
-  - Fixed ZWaveLib db serialization issue
-  - Fixed SharpZipLib version compatibility PR #276
-  - Brand new Dashboard look
-  - Added new automation program: "Virtual Modules Demo"</ReleaseNote>
-  <ReleaseDate>2016-05-12T19:40:03.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added "Manual Update" option to maintenance page
+  - Updates can now be installed from .tgz release files</ReleaseNote>
+  <ReleaseDate>2016-05-15T15:22:18.0000Z</ReleaseDate>
 </ReleaseInfo>

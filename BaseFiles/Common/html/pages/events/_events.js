@@ -166,8 +166,8 @@
         switch (eventLog.Domain) {
 
             case 'HomeGenie.System':
-                if (eventLog.Value == 'STARTED') {
-                    $$.field('#configure_system_updateinstall_status', true).html('Update install complete. HomeGenie started.');
+                if (eventLog.Value == 'STARTED' || eventLog.Value == 'UPDATED') {
+                    $$.field('#configure_system_updateinstall_status', true).html('Update install complete. HomeGenie ready.');
                     setTimeout(function () {
                         document.location.href = '/';
                     }, 3000);

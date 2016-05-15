@@ -14,7 +14,7 @@ HG.Statistics = HG.Statistics || new function(){ var $$ = this;
                 callback(data);
             },
             error: function(xhr, status, error) {
-                console.log('$$.ServiceCall ERROR: '+xhr.status+':'+xhr.statusText);
+                console.log('HG.Statistics.ServiceCall ERROR: '+xhr.status+':'+xhr.statusText);
                 callback();
             }
         });
