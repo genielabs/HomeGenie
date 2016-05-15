@@ -4,10 +4,10 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.1 beta (r520)
+AppVerName=HomeGenie 1.1 beta (r521)
 AppPublisher=GenieLabs
 AppPublisherURL=http://www.homegenie.it
-AppVersion=1.1 beta (r520)
+AppVersion=1.1 beta (r521)
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
@@ -198,8 +198,8 @@ Type: files; Name: "{app}\SQLite.Interop.dll";
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Icons]
-Name: "{group}\HomeGenie 1.1 beta (r520)"; Filename: "{app}\HomeGenieManager.exe"
-Name: "{group}\Uninstall HomeGenie 1.1 beta (r520)"; Filename: "{uninstallexe}"
+Name: "{group}\HomeGenie 1.1 beta (r521)"; Filename: "{app}\HomeGenieManager.exe"
+Name: "{group}\Uninstall HomeGenie 1.1 beta (r521)"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\HomeGenie"; Filename: "{app}\HomeGenieManager.exe"
 
 [Run]

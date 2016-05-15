@@ -3,10 +3,10 @@
 9f96aee193d53a925d18b2769e7958e0  usr/local/bin/homegenie/Ude.dll
 1dcf890d5a0ac7fdcd3db320b629a3ca  usr/local/bin/homegenie/Raspberry.IO.Components.dll.config
 b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
-7b85776e3ba6483f6447ebfbcd950cbe  usr/local/bin/homegenie/release_info.xml
+141c960eb10370052d82d91eb09a1faa  usr/local/bin/homegenie/release_info.xml
 961ca7869699fdb0913fc0a8d2d3aa0e  usr/local/bin/homegenie/Linux.dll.mdb
 26aa2c76b7c6a102291cb3df7b06e2db  usr/local/bin/homegenie/IronPython.Modules.dll
-6e1ad8c9a93a42a00021beeab4babc10  usr/local/bin/homegenie/HomeGenie.exe
+83b12f6a911fc5645583f16a693e4260  usr/local/bin/homegenie/HomeGenie.exe
 6fa1b7ce01c0bdc927c9f662f74ddf21  usr/local/bin/homegenie/html/css/jquery.qtip.min.css
 e5d30611614c33d91ca7fe10b2f5ac8f  usr/local/bin/homegenie/html/css/jquery.mobile.icons.min.css
 b5da7fd09901162a9ed353308eb1bf1b  usr/local/bin/homegenie/html/css/ui.notify.css
@@ -534,9 +534,9 @@ aeddf44fdbe6765c1feec9186159b05f  usr/local/bin/homegenie/html/js/jquery.mobile-
 e68b5ba5011a20f19c2cf0910bb092fb  usr/local/bin/homegenie/html/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css
 f5fd13e975ed9b5bd496aba32a022ccd  usr/local/bin/homegenie/html/js/jquery.mobile.splitview.js
 0a42f90be8dea7ba67debe5500bd4542  usr/local/bin/homegenie/html/js/jqm-datebox.core.js
-2b935e2097b66639876d5d8fc3fd7c72  usr/local/bin/homegenie/html/js/homegenie.webapp.min.js
+4a42eeb5f863c4dc34f75f2bb3fc267a  usr/local/bin/homegenie/html/js/homegenie.webapp.min.js
 15d1937f3ea4497313e5255517a99b4b  usr/local/bin/homegenie/html/js/jquery-2.0.2.min.js
-8aabcecc5fd6cde95912efbdc6d03c80  usr/local/bin/homegenie/html/js/api/homegenie.statistics.js
+8a5e1f82b4a0d521a053d48ac124dd40  usr/local/bin/homegenie/html/js/api/homegenie.statistics.js
 aaf55bea217d1ec35af26d02510b1b28  usr/local/bin/homegenie/html/js/api/homegenie.automation.programs.js
 a1c1a56d184f7cfecbeaeb8079281080  usr/local/bin/homegenie/html/js/api/homegenie.automation.scheduling.js
 26e4a43815fc28044f68feb44c4c1842  usr/local/bin/homegenie/html/js/api/homegenie.configure.stores.js
@@ -551,7 +551,7 @@ a2a3de29247e64f7b43d9730fb7e5ad3  usr/local/bin/homegenie/html/js/api/homegenie.
 a89f99c89bfded5426fa0037f17f86ee  usr/local/bin/homegenie/html/js/api/homegenie.voicecontrol.js
 5cfd97f8dfa97ee1141a430d3203a88b  usr/local/bin/homegenie/html/js/api/homegenie.control.modules.js
 0e6ed90bba97dd883a87762c8133e1f2  usr/local/bin/homegenie/html/js/api/homegenie.system.js
-9e1e558749211e1780924e2a0f55ad00  usr/local/bin/homegenie/html/js/api/homegenie.automation.macro.js
+f72be0194990fb4ae799823f534b2abb  usr/local/bin/homegenie/html/js/api/homegenie.automation.macro.js
 2a85025af3bc885fea38f3f3bc72a381  usr/local/bin/homegenie/html/js/api/homegenie.configure.groups.js
 5ba1bf1e440e148ddb1328565956ebe6  usr/local/bin/homegenie/html/js/api/homegenie.configure.interfaces.js
 3bcdb189bcefb9afdf06b260ec62f998  usr/local/bin/homegenie/html/js/api/homegenie.configure.modules.js
@@ -685,7 +685,7 @@ a0ab03cb257499995a9567ba6f95e951  usr/local/bin/homegenie/html/js/codemirror-4.0
 4e6c3c4acaad046fc1b94a7f1c22693a  usr/local/bin/homegenie/html/js/codemirror-4.03/keymap/sublime.js
 fc356e82253486efbcbb25268292e953  usr/local/bin/homegenie/html/js/codemirror-4.03/keymap/vim.js
 5dd76136dd50082ee7a16d9f833595a9  usr/local/bin/homegenie/html/js/codemirror-4.03/keymap/emacs.js
-7c25e9342f52656207fce751315ea85f  usr/local/bin/homegenie/html/js/homegenie.api.min.js
+840957e0e68a4ff2dd66333fd1d4acfb  usr/local/bin/homegenie/html/js/homegenie.api.min.js
 5f70aeb99a20be66d18708c7e43290d1  usr/local/bin/homegenie/html/js/jquery.mobile.splitview.css
 523871857897f8a572f05df9e2aabf8e  usr/local/bin/homegenie/html/js/jquery.knob.js
 95def87b93d11289cd2eee1cc3ca7948  usr/local/bin/homegenie/html/js/json2.js
@@ -701,7 +701,7 @@ b314901465a83bf5fdd08d17409d5fce  usr/local/bin/homegenie/html/js/homegenie.api.
 c6512bc70dcbf5ac8b7c2721cbd52351  usr/local/bin/homegenie/html/js/colorwheel.js
 8d4223896ddbb9cd132aceef6882cb04  usr/local/bin/homegenie/html/js/startswith.js
 c5980a2ab542f1faf296b7cf46520d43  usr/local/bin/homegenie/html/js/eventsource.js
-75eb6e399fae4de18c26d44ef239e7e5  usr/local/bin/homegenie/html/pages/events/_events.js
+fe2d57df58db51c568969733b0ec0800  usr/local/bin/homegenie/html/pages/events/_events.js
 d427dfc02f1f6277e41bd22f0462b618  usr/local/bin/homegenie/html/pages/events/main.html
 59c62b496ded33ba38f2b2354f792ac3  usr/local/bin/homegenie/html/pages/header.html
 110a74cdaba4da7a8dbd471e4e90cc8b  usr/local/bin/homegenie/html/pages/apps/netplay/slideshow.html
@@ -758,7 +758,7 @@ a1c8bcbbc9ae88fd850c7ff4568ecccc  usr/local/bin/homegenie/html/pages/control/wid
 062070e75b9b690cdde7e83a51066a49  usr/local/bin/homegenie/html/pages/control/widgets/weather/wunderground/images/wu_cloudynight.png
 61ec2c123e1c034460cb33352e736f4b  usr/local/bin/homegenie/html/pages/control/widgets/weather/wunderground/images/weather-windy.png
 ba74dd5579cfbfbfeae6ee9614916d59  usr/local/bin/homegenie/html/pages/control/widgets/weather/wunderground/images/wu_windy.png
-1ee4d6908fe2722d4436c9965f827809  usr/local/bin/homegenie/html/pages/control/widgets/weather/wunderground/conditions.html
+e99989700f957a422332952a772a6ca1  usr/local/bin/homegenie/html/pages/control/widgets/weather/wunderground/conditions.html
 5b4bbb0db4d8e934e65df0a3b0fe2fec  usr/local/bin/homegenie/html/pages/control/widgets/jkUtils/SolarAltitude/locales/de.json
 4abaa9f1fc55bd14759a060225e5be44  usr/local/bin/homegenie/html/pages/control/widgets/jkUtils/SolarAltitude/SolarAltitude.html
 fc5b92e5efa04c39daaac0185e79fddf  usr/local/bin/homegenie/html/pages/control/widgets/jkUtils/SolarAltitude/images/Widget.png
@@ -992,8 +992,8 @@ a5419ed1e0ea611b5aee4f40e42b31d5  usr/local/bin/homegenie/html/pages/control/_co
 5acfdab557234f8835553e3c0e2dcf0e  usr/local/bin/homegenie/html/pages/control/main.html
 3703bfc7ea0f4cbfb0e8a2a661741a6a  usr/local/bin/homegenie/html/pages/configure/scheduler/_scheduler.js
 3318eb56f702788015bc2ee6ee051d05  usr/local/bin/homegenie/html/pages/configure/scheduler/main.html
-538a37fed4c567c3df4928abbad40e5b  usr/local/bin/homegenie/html/pages/configure/maintenance/_maintenance.js
-81932cf2c19e5ecd2037d26c92c48539  usr/local/bin/homegenie/html/pages/configure/maintenance/main.html
+3cb020baa27d213b04c2d23f77be875d  usr/local/bin/homegenie/html/pages/configure/maintenance/_maintenance.js
+04ce53ddc5e4d5e62747f9e3498981a2  usr/local/bin/homegenie/html/pages/configure/maintenance/main.html
 35d12ca91ad3e3eb325752e686d92d88  usr/local/bin/homegenie/html/pages/configure/widgeteditor/_widgetslist.js
 a887fa79784e6721029b8158b4a92c4a  usr/local/bin/homegenie/html/pages/configure/widgeteditor/listwidgets.html
 026bc9e2e6e714c45aa4c689c5402434  usr/local/bin/homegenie/html/pages/configure/widgeteditor/_widgetedit.js
@@ -1094,7 +1094,7 @@ d311329f6b7f6588be49094a592492c9  usr/local/bin/homegenie/html/images/genie.png
 b488b97ca1f19753a9f38d1e0144b115  usr/local/bin/homegenie/html/images/event_on.png
 11e6aed03a9856f09de50c12d6f5379c  usr/local/bin/homegenie/html/images/configure.png
 ecaa88f7fa0bf610a5a26cf545dcd3aa  usr/local/bin/homegenie/html/blank.html
-745560094fa3ce8b4617c132101b30a8  usr/local/bin/homegenie/html/index.html
+0f3eaf50be0f5560f446152d37cd9430  usr/local/bin/homegenie/html/index.html
 69338ffa66f8af999156761d486f763b  usr/local/bin/homegenie/html/README.RestoreP513.md
 a4e8c938edacd5e8c55c5441054dcf9a  usr/local/bin/homegenie/html/icons.html
 9e90aad43d8acc5b45729f2296cb5907  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
@@ -1114,7 +1114,7 @@ c0dbb1e6c51a2cdc5278c6d4d89bae32  usr/local/bin/homegenie/Common.dll.mdb
 8b44d53cb2d7afc7ff215bd43df7fc40  usr/local/bin/homegenie/scheduler.xml
 3370764d6697cf724c34c76a789dc3fc  usr/local/bin/homegenie/UPnP.dll
 8742ca673f11373aa5b26f966c03ef49  usr/local/bin/homegenie/LICENCE.TXT
-934de06bd46922eba257d9520f750dee  usr/local/bin/homegenie/HomeGenie.exe.mdb
+1ebd2d2bfa448e6f6083219bdd684b9d  usr/local/bin/homegenie/HomeGenie.exe.mdb
 a8992f211bf62bcd6cb8b66c0df133a1  usr/local/bin/homegenie/HomeGenie.exe.config
 4f1bd3233c0472fbdc699f0acc85779a  usr/local/bin/homegenie/modules.xml
 75618d7a8e25819a16609b0be6cec450  usr/local/bin/homegenie/Raspberry.IO.GeneralPurpose.dll
@@ -1156,7 +1156,7 @@ ae7bbf0f4b96d2a0effd97d69befb47e  usr/local/bin/homegenie/CommonMark.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
 e33483b8ed739cd267f9a27ea266c87e  usr/local/bin/homegenie/Raspberry.IO.dll
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
-4df26343a7f41dd8a091509140a7173c  usr/local/bin/homegenie/HISTORY.TXT
+6d590d35e80df13181e71f271d88f4cf  usr/local/bin/homegenie/HISTORY.TXT
 acbb8de3a6a8f53d69957e2607097992  usr/local/bin/homegenie/DEVELOPERS.TXT
 1d9ad3e990e9a228c53c63eb28f70518  usr/local/bin/homegenie/Common.dll
 0728e681132f8722dd21b90d88970bd7  usr/local/bin/homegenie/Microsoft.Dynamic.dll
