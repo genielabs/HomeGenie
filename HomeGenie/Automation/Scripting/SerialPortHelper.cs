@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO.Ports;
 
 using SerialPortLib;
 
@@ -72,11 +73,13 @@ namespace HomeGenie.Automation.Scripting
         /// Connect the serial port at the specified speed.
         /// </summary>
         /// <param name="baudRate">Baud rate.</param>
-        public bool Connect(int baudRate)
+        /// <param name="stopBits">Stop Bits.</param>
+        /// <param name="parity">Parity.</param>
+        /// 
+        public bool Connect(int baudRate, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
         {
             serialPort.MessageReceived += SerialPort_MessageReceived;
             serialPort.ConnectionStatusChanged += SerialPort_ConnectionStatusChanged;
-            //
             serialPort.SetPort(portName, baudRate);
             return serialPort.Connect();
         }

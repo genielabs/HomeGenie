@@ -104,6 +104,9 @@
       <HintPath>..\Externals\NCrontab\NCrontab.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SerialPortLib">
+      <HintPath>..\..\serialport-lib-dotnet2\SerialPortLib\bin\Debug\SerialPortLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ServiceProcess" />
@@ -161,9 +164,6 @@
     </Reference>
     <Reference Include="MIG">
       <HintPath>..\Externals\g-labs\MIG.dll</HintPath>
-    </Reference>
-    <Reference Include="SerialPortLib">
-      <HintPath>..\Externals\g-labs\SerialPortLib.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\Externals\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -323,7 +323,5 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <Folder Include="Automation\Engines\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
