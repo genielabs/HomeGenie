@@ -19,13 +19,15 @@
             <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
                 <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Run / Preview</a>
             </div>
-            <label style="padding-left:20px;padding-top:14px;float:left" data-locale-id="configure_widgeteditor_bindtomodule">bind to module</label>
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
-                <select data-role="selectmenu" data-ui-field="bindmodule-sel"></select>
-            </div>
+            <div style="position:absolute;right:0">
+                <label style="padding-left:20px;padding-top:14px;float:left" data-locale-id="configure_widgeteditor_bindtomodule">bind to module</label>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                    <select data-role="selectmenu" data-ui-field="bindmodule-sel"></select>
+                </div>
 
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
-                <a data-ui-field="module-params-edit" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-bars" href="#">&nbsp;</a>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                    <a data-ui-field="module-params-edit" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-bars" href="#">&nbsp;</a>
+                </div>
             </div>
 
             <div data-ui-field="tab1-div">
@@ -35,7 +37,7 @@
                 </div>
 
                 <!-- html editor -->
-                <div>
+                <div style="margin-right:420px">
                     <textarea id="widgeteditor_code_html" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
                 </div>
 
@@ -63,18 +65,16 @@
                 
             </div>
             
-            
-            <div data-ui-field="preview-panel" class="ui-panel-wrapper ui-corner-bottom" style="height:245px;left:5px;right:5px;position:absolute;margin:0;bottom:5px;overflow:hidden;cursor:default">
-            
-                <div data-ui-field="split-bar" style="width:100%;height:5px;background:yellow;overflow:hidden;cursor:ns-resize">&nbsp;</div>
-                                        
+            <div data-ui-field="preview-panel" class="ui-panel-wrapper ui-corner-right" style="position:absolute;width:420px;top:60px;right:8px;margin:0;bottom:8px;overflow:auto;cursor:default;display:table-cell">
+
                 <div align="center">
                     <container><!-- this fake tag 'container' should prevent html errors to corrupt page structure -->
                         <div data-ui-field="preview-div" style="padding-top:10px"></div>
                     </container>
                 </div>
-                
+
             </div>
+            <div data-ui-field="split-bar" style="z-index:1000;position:absolute;width:5px;top:60px;bottom:8px;right:420px;background:yellow;overflow:hidden;cursor:ew-resize">&nbsp;</div>
             
         </div>
 

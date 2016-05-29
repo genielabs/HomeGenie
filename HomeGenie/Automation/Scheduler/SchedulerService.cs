@@ -68,47 +68,38 @@ namespace HomeGenie.Automation.Scheduler
             for (int i = 0; i < events.Count; i++)
             {
                 var eventItem = events[i];
-                // update next occurrence value
-                eventItem.NextOccurrence = GetNextEventOccurrence(date, eventItem.CronExpression);
-                // execute items only once instead of repeating for the whole minute
-                string currentOccurrence = date.ToString("yyyy-MM-dd HH:mm");
-                if (eventItem.IsEnabled && eventItem.LastOccurrence != currentOccurrence && IsScheduling(date, eventItem.CronExpression))
+                if (eventItem.IsEnabled)
                 {
-                    /*
-                    masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                    // update next occurrence value
+                    eventItem.NextOccurrence = GetNextEventOccurrence(date, eventItem.CronExpression);
+                    // execute items only once instead of repeating for the whole minute
+                    string currentOccurrence = date.ToString("yyyy-MM-dd HH:mm");
+                    if (eventItem.LastOccurrence != currentOccurrence && IsScheduling(date, eventItem.CronExpression))
+                    {
+                        /*
+                        masterControlProgram.HomeGenie.MigService.RaiseEvent(
                         this,
                         Domains.HomeAutomation_HomeGenie,
                         SourceModule.Scheduler,
                         "Scheduler Event Triggered",
                         Properties.SchedulerTriggeredEvent,
                         eventItem.Name);
-                    */
-                    // update last occurrence value
-                    eventItem.LastOccurrence = currentOccurrence;
-                    // execute associated task if any
-                    if (!String.IsNullOrEmpty(eventItem.ProgramId))
-                    {
-                        var program = masterControlProgram.Programs.Find(p => p.Address.ToString() == eventItem.ProgramId || p.Name == eventItem.ProgramId);
-                        if (program != null)
+                        */
+                        // update last occurrence value
+                        eventItem.LastOccurrence = currentOccurrence;
+                        // execute associated task if any
+                        if (!String.IsNullOrEmpty(eventItem.ProgramId))
                         {
-                            masterControlProgram.HomeGenie.MigService.RaiseEvent(
-                                this,
-                                Domains.HomeAutomation_HomeGenie,
-                                SourceModule.Scheduler,
-                                "Scheduler Event '"+eventItem.Name+"'",
-                                Properties.SchedulerTriggeredEvent,
-                                "'"+eventItem.Name+"' running '"+eventItem.ProgramId+"'");
-                            masterControlProgram.Run(program, "");
-                        }
-                        else
-                        {
-                            masterControlProgram.HomeGenie.MigService.RaiseEvent(
-                                this,
-                                Domains.HomeAutomation_HomeGenie,
-                                SourceModule.Scheduler,
-                                "Scheduler Event '"+eventItem.Name+"'",
-                                Properties.SchedulerError,
-                                "No such program: '"+eventItem.ProgramId+"'");
+                            var program = masterControlProgram.Programs.Find(p => p.Address.ToString() == eventItem.ProgramId || p.Name == eventItem.ProgramId);
+                            if (program != null)
+                            {
+                                masterControlProgram.HomeGenie.MigService.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, "Scheduler Event '" + eventItem.Name + "'", Properties.SchedulerTriggeredEvent, "'" + eventItem.Name + "' running '" + eventItem.ProgramId + "'");
+                                masterControlProgram.Run(program, "");
+                            }
+                            else
+                            {
+                                masterControlProgram.HomeGenie.MigService.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, "Scheduler Event '" + eventItem.Name + "'", Properties.SchedulerError, "No such program: '" + eventItem.ProgramId + "'");
+                            }
                         }
                     }
                 }
@@ -121,7 +112,7 @@ namespace HomeGenie.Automation.Scheduler
             return eventItem;
         }
 
-        public SchedulerItem AddOrUpdate(string name, string cronExpression)
+        public SchedulerItem AddOrUpdate(string name, string cronExpression, string data = null, string description = null, string pid = null)
         {
             if (String.IsNullOrEmpty(name)) return null;
             //
@@ -135,6 +126,12 @@ namespace HomeGenie.Automation.Scheduler
                 justAdded = true;
             }
             eventItem.CronExpression = cronExpression;
+            if (description != null)
+                eventItem.Description = description;
+            if (data != null)
+                eventItem.Data = data;
+            if (pid != null)
+                eventItem.ProgramId = pid;
             eventItem.LastOccurrence = "-";
             eventItem.NextOccurrence = GetNextEventOccurrence(DateTime.Now, eventItem.CronExpression);
             // by default newly added events are enabled
@@ -226,7 +223,11 @@ namespace HomeGenie.Automation.Scheduler
                 if (String.IsNullOrEmpty(currentExpression)) continue;
 
                 bool isEntryActive = false;
-                if (currentExpression.StartsWith("@"))
+                if (currentExpression.StartsWith("#"))
+                {
+                    isEntryActive = true;
+                }
+                else if (currentExpression.StartsWith("@"))
                 {
                     // Check expresion from scheduled item with a given name
                     var eventItem = Get(currentExpression.Substring(1));

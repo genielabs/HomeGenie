@@ -13,13 +13,27 @@
         html = html.replace(/{description}/g, description);
         element.html(html);
         var _this = this;
+        this.config = HG.WebApp.Utility.GetModulePropertyByName(this.module, context.parameter.Name+'.Data');
+        if (this.config != null && this.config.Value != '')
+            this.config = $.parseJSON(this.config.Value);
         var textDescription = element.find('[data-ui-field=description]');
         var textInput = element.find('[data-ui-field=textinput]');
         textInput.val(context.parameter.Value);
         textInput.on('change', function(evt){
+            if (_this.config != null) {
+                HG.WebApp.Utility.SetModulePropertyByName(_this.module, context.parameter.Name+'.Data', '');
+                _this.config = null;
+            }
             if (typeof _this.onChange == 'function') {
                 _this.onChange($(this).val());
             }
+        });
+        textDescription.qtip({
+            content: {
+                text: function(){ return textDescription.val(); }
+            },
+            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+            position: { my: 'bottom center', at: 'top center' }
         });
         if (this.nowizard) {
             element.find('[data-ui-field=cronwiz]').hide();
@@ -29,13 +43,20 @@
                     HG.Ui.Popup.CronWizard.element.one('popupafterclose', function(){
                         $('#automation_group_module_edit').popup('open');
                     });
+
+                    if (_this.config != null)
+                        HG.Ui.Popup.CronWizard.config = _this.config;
+
                     HG.Ui.Popup.CronWizard.open();
-                    HG.Ui.Popup.CronWizard.onChange = function(expr){
-                        var ctxt = textInput.val();
-                        ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));
-                        textInput.val(ctxt+expr);
+                    HG.Ui.Popup.CronWizard.onChange = function(expr, cfg){
+                        //var ctxt = textInput.val();
+                        //ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));
+                        //textInput.val(ctxt+expr);
+                        textInput.val(expr);
                         textInput.trigger('change');
+                        _this.config = cfg; // <-- this has to be placed after 'change' and before 'blur'
                         textInput.blur();
+                        HG.WebApp.Utility.SetModulePropertyByName(_this.module, context.parameter.Name+'.Data', JSON.stringify(cfg));
                     };
                 });
                 $('#automation_group_module_edit').popup('close');
@@ -48,12 +69,16 @@
             } else {
                 textDescription.val(textInput.val());
                 textDescription.css('color', '');
-                if(_this.getLastSeparator(textInput.val()) == 0) {
-                    $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
-                        if (typeof res != 'undefined' && res.ResponseValue != '') {
-                            textDescription.val(res.ResponseValue);
-                        }
-                    });
+                if (_this.config != null && typeof _this.config.description != 'undefined' && _this.config.description != '') {
+                    textDescription.val(_this.config.description);
+                } else {
+                    if(_this.getLastSeparator(textInput.val()) == 0) {
+                        $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
+                            if (typeof res != 'undefined' && res.ResponseValue != '') {
+                                textDescription.val(res.ResponseValue);
+                            }
+                        });
+                    }
                 }
             }
             setTimeout(function(){

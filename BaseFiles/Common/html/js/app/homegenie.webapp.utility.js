@@ -299,6 +299,27 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
         return dt;
     };
 
+    $$.GetDateBoxLocale = function () {
+        var locale = 'default';
+        var dateboxLanguages = jQuery.jtsage.datebox.prototype.options.lang; //jQuery.mobile.datebox.prototype.options.lang;
+        var userLanguage = HG.WebApp.Locales.GetUserLanguage();
+        if (dateboxLanguages) {
+            // Is the user's preferred language supported?
+            if (dateboxLanguages[userLanguage]) {
+                locale = userLanguage;
+            } else if (userLanguage.length === 2) {
+                // Is there a locale available with the user's language in it? Take the first one.
+                $.each(dateboxLanguages, function (supportedLocale) {
+                    if (supportedLocale.substring(0, 2) === userLanguage) {
+                        locale = supportedLocale;
+                        return false;
+                    }
+                });
+            }
+        }
+        return locale;
+    };
+
     // TODO: deprecate these two aliases at some point
     $$.SwitchPopup = HG.Ui.SwitchPopup;
     $$.JScrollToElement = HG.Ui.ScrollTo;

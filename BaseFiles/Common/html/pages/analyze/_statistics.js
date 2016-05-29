@@ -11,29 +11,6 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
     $$._SelItemObject = false;
     $$._ItemObject = '';
 
-    $$.GetDateBoxLocale = function () {
-        var locale = 'default';
-        var dateboxLanguages = jQuery.mobile.datebox.prototype.options.lang;
-        var userLanguage = HG.WebApp.Locales.GetUserLanguage();
-
-        if (dateboxLanguages) {
-            // Is the user's preferred language supported?
-            if (dateboxLanguages[userLanguage]) {
-                locale = userLanguage;
-            } else if (userLanguage.length === 2) {
-                // Is there a locale available with the user's language in it? Take the first one.
-                $.each(dateboxLanguages, function (supportedLocale) {
-                    if (supportedLocale.substring(0, 2) === userLanguage) {
-                        locale = supportedLocale;
-                        return false;
-                    }
-                });
-            }
-        }
-
-        return locale;
-    };
-
     $$.InitializePage = function () {
         $('#page_analyze_source').on('change', function () {
             var selected = $(this).find('option:selected');
@@ -319,12 +296,12 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                 $('#page_analyze_datefrom').datebox('option', {
                     'minDays': minDays,
                     'maxDays': 0,
-                    'useLang': $$.GetDateBoxLocale()
+                    'useLang': HG.WebApp.Utility.GetDateBoxLocale()
                 }).datebox('refresh');
                 $('#page_analyze_dateto').datebox('option', {
                     'minDays': minDays,
                     'maxDays': 0,
-                    'useLang': $$.GetDateBoxLocale()
+                    'useLang': HG.WebApp.Utility.GetDateBoxLocale()
                 }).datebox('refresh');
                 if ($('#page_analyze_datefrom').val() == '') {
                     $('#page_analyze_datefrom').datebox('setTheDate', today);

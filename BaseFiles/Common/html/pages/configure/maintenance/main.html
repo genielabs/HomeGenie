@@ -20,10 +20,10 @@
                         </div>
                     </div>
                     <div>
-                        <form id="updatemanager_updatefile_form" target="uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/System.Configure/UpdateManager.ManualUpdate" data-ajax="false">
+                        <form id="updatemanager_updatefile_form" target="updatefile_uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/System.Configure/UpdateManager.ManualUpdate" data-ajax="false">
                             <input id="updatemanager_updatefile_uploadfile" type="file" title="Manual update from '.tgz' release file." name="file" />
                         </form>
-                        <iframe id="updatemanager_updatefile_uploadframe" name="uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+                        <iframe id="updatemanager_updatefile_uploadframe" name="updatefile_uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
                     </div>
                 </div>
                 <div class="ui-block-b" style="float:right;width:150px">
@@ -143,10 +143,10 @@
                     <div>
                         <label data-locale-id="configure_maintenance_configuration">Configuration</label>
                         <p data-locale-id="configure_maintenance_configuration_info">&nbsp;<strong>Note:</strong> before restoring a backup file you've to set the same system password used when creating it.</p>
-                        <form id="restore_configuration_form" target="uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationRestore" data-ajax="false">
+                        <form id="restore_configuration_form" target="configuration_uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationRestore" data-ajax="false">
                             <input id="restore_configuration_uploadfile" type="file" title="Restore from backup file." name="file" />
                         </form>
-                        <iframe id="restore_configuration_uploadframe" name="uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+                        <iframe id="restore_configuration_uploadframe" name="configuration_uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
                         <p>If you are restoring a backup file made with HG prior to v1.1-beta.513 <a href="README.RestoreP513.md" target="_blank">READ THIS</a>.
                     </div>
                 </div>

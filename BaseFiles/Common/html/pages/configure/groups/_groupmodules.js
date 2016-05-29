@@ -82,7 +82,7 @@
                     $.mobile.loading('show');
                     HG.Configure.Modules.List(function (data) {
                         try {
-                            HG.WebApp.Data.Modules = eval(data);
+                            HG.WebApp.Data.Modules = data;
                         } catch (e) {
                         }
                         HG.Automation.Programs.List(function () {
@@ -122,6 +122,7 @@
         });
         $$.field('#groupmodules_group_uploadfile', true).fileupload({
             url: '/api/HomeAutomation.HomeGenie/Config/Groups.WallpaperAdd',
+            replaceFileInput: false,
             dropZone: $('[data-upload-dropzone=wallpaper]'),
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -687,6 +688,10 @@
                         prop.ProgramIndex = p;
                         prop.FieldType = features[f].FieldType;
                         prop.Description = features[f].Description;
+                        // <prop>.Data is a special field to store extra data related to <prop> (eg. input form state)
+                        var propData = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, property+'.Data');
+                        if (propData != null)
+                            HG.WebApp.Utility.SetModulePropertyByName($$.EditModule, propData.Name, propData.Value);
                         //
                         if (cprogram < 0) {
                             var address = HG.WebApp.Data.Programs[p].Address;

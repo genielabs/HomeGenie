@@ -8,6 +8,34 @@ a {
     text-decoration: none;
 }
 
+.inline {
+    display: inline-block !important;
+}
+.ui-datebox-container {
+    padding:10px;
+}
+.label-small {
+    font-size: 10pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.caption {
+    font-size: 8pt;
+    text-transform: uppercase;
+}
+.title-normal {
+    font-size: 18pt;
+}
+.title-medium {
+    font-size: 24pt;
+}
+.title-big {
+    font-size: 36pt;
+}
+.clickable {
+    cursor: pointer;
+}
+
 div[data-ui-field="wallpaper"] {
     background: url() center;
     background-size: 100% 100%;
@@ -57,10 +85,10 @@ div[data-ui-field="wallpaper"] {
     border: 1px solid #eee;
     height: auto;
     position: absolute;
-    top: 55px;
-    bottom: 30px;
-    left: 5px;
-    right: 5px;
+    top: 60px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
     border solid 1px red;
     display: block;
     cursor:default;

@@ -158,7 +158,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
         $.each($$._widgetCache, function(k,v){
             if (v.widget == fieldType) {
                 var element = $(v.html);
-                var handler = eval(v.json)[0];
+                var handler = v.json.startsWith('[') ? eval(v.json)[0] : eval('new function(){ var $$ = this; '+v.json+' };');
                 element.one('create', function() {
                     handler.element = element;
                     handler.context = context;
@@ -182,16 +182,18 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
             $.mobile.loading('show');
         $.ajax({
             url: "ui/" + fieldType + ".html",
+            dataType: 'text',
             type: 'GET',
             success: function (htmlData) {
                 var element = $(htmlData);
                 $.ajax({
                     url: "ui/" + fieldType + ".js",
+                    dataType: 'text',
                     type: 'GET',
                     success: function (jsonData) {
                         $$._widgetCache.push({ widget: fieldType, html: htmlData, json: jsonData });
                         var handler = null;
-                        try { handler = eval(jsonData)[0]; }
+                        try { handler = jsonData.startsWith('[') ? eval(jsonData)[0] : eval('new function(){ var $$ = this; '+jsonData+' };'); }
                         catch (e) { console.log(e); callback(null); return; }
                         element.one('create', function() {
                             handler.element = element;
@@ -209,6 +211,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                         }
                     },
                     error: function (data) {
+                        console.log(data);
                         if (callback != null) callback(null);
                     }
                 });

@@ -30,7 +30,9 @@
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                             <a id="groupmodules_group_deletebtn" data-locale-id="common_command_delete" href="#" class="ui-btn ui-btn-icon-left ui-icon-minus">Delete</a>
                             <a id="groupmodules_group_uploadbtn" data-locale-id="common_command_upload" href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-upload">Upload</a>
-                            <input id="groupmodules_group_uploadfile" type="file" style="display:none" />
+                            <form id="groupmodules_group_uploadform" target="groupmodules_group_uploadfile" enctype="multipart/form-data" data-ajax="false">
+                                <input id="groupmodules_group_uploadfile" type="file" style="display:none" />
+                            </form>
                         </div>
                     </div>
                 </div>

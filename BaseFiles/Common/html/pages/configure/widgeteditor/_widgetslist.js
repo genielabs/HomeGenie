@@ -26,7 +26,7 @@ HG.WebApp.WidgetsList = HG.WebApp.WidgetsList || new function () { var $$ = this
         page.on('pagebeforeshow', function (e) {
             HG.Configure.Modules.List(function (data) {
                 try {
-                    HG.WebApp.Data.Modules = eval(data);
+                    HG.WebApp.Data.Modules = data;
                 } catch (e) {
                 }
             });

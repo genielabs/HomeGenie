@@ -455,7 +455,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this
                     HG.Configure.Modules.List(function (data) {
                         //
                         try {
-                            HG.WebApp.Data.Modules = eval(data);
+                            HG.WebApp.Data.Modules = data;
                         } catch (e) {
                         }
                     });

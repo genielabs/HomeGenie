@@ -15,21 +15,30 @@
                 HG.Ui.Popup.CronWizard.element.one('popupafterclose', function () {
                     $('#schedulerservice_item_edit').popup('open');
                 });
+                if ($('#schedulerservice_item_data').val() != '')
+                    HG.Ui.Popup.CronWizard.config = $.parseJSON($('#schedulerservice_item_data').val());
                 HG.Ui.Popup.CronWizard.open();
-                HG.Ui.Popup.CronWizard.onChange = function (expr) {
+                HG.Ui.Popup.CronWizard.onChange = function (expr,config) {
                     setTimeout(function () {
                         $('#schedulerservice_item_cronexp').val(expr);
+                        $('#schedulerservice_item_data').val(JSON.stringify(config));
+                        $('#schedulerservice_item_desc').val(config.description);
                     }, 500);
                 };
             });
             $('#schedulerservice_item_edit').popup('close');
         });
-        //
+        $('#schedulerservice_item_cronexp').on('change', function() {
+            $('#schedulerservice_item_data').val('');
+            $('#schedulerservice_item_desc').val('');
+        });
         $('#scheduleritem_update_button').on('click', function (event) {
             var name = $('#schedulerservice_item_name').val();
             var expr = $('#schedulerservice_item_cronexp').val();
+            var data = $('#schedulerservice_item_data').val();
+            var desc = $('#schedulerservice_item_desc').val();
             var prid = $('#schedulerservice_item_programid').val();
-            HG.Automation.Scheduling.Update(name, expr, prid, function () {
+            HG.Automation.Scheduling.Update(name, expr, data, desc, prid, function () {
                 $$.LoadScheduling();
             });
         });
@@ -66,7 +75,7 @@
         //
         item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
         item += '   <h3 class="ui-li-heading">' + displayName + '</h3>';
-        item += '   <p class="ui-li-desc"><span style="font-family:monospace;font-weight:bold">' + schedule.CronExpression + '</span> &nbsp;&nbsp; ' + schedule.Description + '</p>';
+        item += '   <p class="ui-li-desc" style="padding-right:160px">' + (schedule.Description != null ? schedule.Description : '') + ' <span style="opacity:0.5">(' + schedule.CronExpression + ')</span></p>';
         item += '</a>';
         item += '<a href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
         //
@@ -120,13 +129,13 @@
     $$.RefreshEventDetails = function () {
 
         var schedule = null;
-        var name = '';
-        var expr = '';
-        var prid = '';
+        var name = '', expr = '', data = '', desc = '', prid = '';
         if ($$._CurrentEventIndex != -1) {
             schedule = $$._ScheduleList[$$._CurrentEventIndex];
             name = schedule.Name;
             expr = schedule.CronExpression;
+            data = schedule.Data;
+            desc = schedule.Description;
             prid = schedule.ProgramId;
             $('#schedulerservice_item_name').addClass('ui-disabled');
             $('#schedulerservice_item_name').val(name);
@@ -135,6 +144,8 @@
             $('#schedulerservice_item_name').removeClass('ui-disabled');
         }
         $('#schedulerservice_item_cronexp').val(expr);
+        $('#schedulerservice_item_data').val(data);
+        $('#schedulerservice_item_desc').val(desc);
         $('#schedulerservice_item_programid').val(prid);
 
     };

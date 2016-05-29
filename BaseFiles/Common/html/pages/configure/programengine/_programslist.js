@@ -487,7 +487,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         HG.Automation.Programs.List(function () {
             HG.Configure.Modules.List(function (data) {
                 try {
-                    HG.WebApp.Data.Modules = eval(data);
+                    HG.WebApp.Data.Modules = data;
                 } catch (e) {
                 }
 

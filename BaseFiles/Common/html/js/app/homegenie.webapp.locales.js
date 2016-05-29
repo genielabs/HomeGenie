@@ -13,6 +13,9 @@ HG.WebApp.Locales = HG.WebApp.Locales || new function(){ var $$ = this;
         return userLang;
     };
 
+    // Set default locale
+    moment.locale($$.GetUserLanguage());
+
     $$.GetDateEndianType = function()
     {
         // L = Little Endian -> DMY

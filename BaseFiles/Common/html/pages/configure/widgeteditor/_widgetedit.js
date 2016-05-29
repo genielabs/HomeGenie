@@ -8,8 +8,8 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
     $$._editorHtml = null;
     $$._editorJscript = null;
     $$._widgetInstance = null;
-    $$._previewHeight = 245;
-    $$._splitDragStartY = 0;
+    $$.previewWidth = 420; //245;
+    $$._splitDragStartX = 0;
     $$._savePromptCallback = null;
 
     $$.InitializePage = function () {
@@ -89,9 +89,9 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
         page.on('pagebeforeshow', function (e) {
             page.find('[data-ui-field=title-heading]').html('<span style="font-size:10pt;font-weight:bold">' + HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_title', false, this.Locale) + '</span><br/>' + HG.WebApp.WidgetsList._currentWidget);
             // standard editor/preview size
-            page.find('.CodeMirror').css('bottom', ($$._previewHeight + 5) + 'px');
-            previewPanel.height($$._previewHeight);
-
+            page.find('.CodeMirror').css('right', ($$.previewWidth + 5));
+            splitBar.css('right', $$.previewWidth);
+            previewPanel.width($$.previewWidth);
             // load widget html/js
             $.ajax({
                 url: '/hg/html/pages/control/widgets/' + HG.WebApp.WidgetsList._currentWidget + '.html',
@@ -250,17 +250,17 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
         errorsButton.hide();
 
         splitBar.mousedown(function (event) {
-                $$._splitDragStartY = event.pageY;
+                $$._splitDragStartX = event.pageX;
                 $(window).mousemove(function (ev) {
-                    var deltaY = $$._splitDragStartY - ev.pageY;
-                    var maxHeight = page.height() / 2;
-                    var newHeight = (previewPanel.height() + deltaY);
+                    var deltaX = $$._splitDragStartX - ev.pageX;
+                    var maxHeight = page.width() / 2;
+                    var newHeight = (previewPanel.width() + deltaX);
                     if (newHeight >= 5 && newHeight <= maxHeight) {
-                        previewPanel.height((previewPanel.height() + deltaY));
-                        page.find('.CodeMirror').css('bottom', (previewPanel.height() + 5) + 'px');
-                        $$._splitDragStartY = ev.pageY;
-                    }
-                    else {
+                        previewPanel.width((previewPanel.width() + deltaX));
+                        page.find('.CodeMirror').css('right', (previewPanel.width() + 5));
+                        splitBar.css('right', previewPanel.width());
+                        $$._splitDragStartX = ev.pageX;
+                    } else {
                         $(window).unbind("mousemove");
                         $$._editorHtml.refresh();
                         $$._editorJscript.refresh();
@@ -303,8 +303,7 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
                 callback();
             }
             page.find('[data-ui-field=notsaved-popup]').popup('open');
-        }
-        else {
+        } else {
             callback();
         }
     };

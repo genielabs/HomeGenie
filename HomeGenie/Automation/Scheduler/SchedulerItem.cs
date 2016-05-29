@@ -33,8 +33,8 @@ namespace HomeGenie.Automation.Scheduler
     {
         public string Name { get; set; }
         public string CronExpression { get; set; }
-        public string Description 
-        {
+        public string Description { get; set; }
+        /*(
             get 
             { 
                 string d = "";
@@ -46,11 +46,14 @@ namespace HomeGenie.Automation.Scheduler
                 catch { }
                 return d;
             } 
-        }
-        public string ProgramId { get; set; }
+        }*/
+        public string Data { get; set; }
         public bool IsEnabled { get; set; }
         public string LastOccurrence { get; set; }
         public string NextOccurrence { get; set; }
+
+        // TODO: deprecate this field - left for compatibility with hg <= r521
+        public string ProgramId { get; set; }
 
         public SchedulerItem()
         {

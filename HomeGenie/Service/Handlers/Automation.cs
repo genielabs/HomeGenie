@@ -102,14 +102,14 @@ namespace HomeGenie.Service.Handlers
                 {
                 case "Scheduling.Add":
                 case "Scheduling.Update":
+                    var newSchedule = JsonConvert.DeserializeObject<SchedulerItem>(request.RequestText);
                     var item = homegenie.ProgramManager.SchedulerService.AddOrUpdate(
-                        migCommand.GetOption(0),
-                        migCommand.GetOption(1).Replace(
-                            "|",
-                            "/"
-                        )
+                        newSchedule.Name,
+                        newSchedule.CronExpression,
+                        newSchedule.Data,
+                        newSchedule.Description,
+                        newSchedule.ProgramId
                     );
-                    item.ProgramId = migCommand.GetOption(2);
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Delete":

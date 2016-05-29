@@ -4,11 +4,18 @@
 //  
 HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = this;
 
-    $$.Update = function (name, expression, pid, callback) {
+    $$.Update = function (name, expression, data, description, pid, callback) {
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + name + '/' + expression.replace(/\//g, '|') + '/' + pid,
-            type: 'GET',
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + encodeURIComponent(name),
+            type: 'POST',
             dataType: 'text',
+            data: JSON.stringify({
+                Name: name,
+                CronExpression: expression,
+                Data: data,
+                Description: description,
+                ProgramId: pid
+            }),
             success: function (data) {
                 if (typeof callback != 'undefined')
                     callback(data);
@@ -18,7 +25,7 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = 
 
     $$.Delete = function (name, callback) {
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Delete/' + name,
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Delete/' + encodeURIComponent(name),
             type: 'GET',
             dataType: 'text',
             success: function (data) {
@@ -30,7 +37,7 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = 
 
     $$.Enable = function (name, callback) {
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Enable/' + name,
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Enable/' + encodeURIComponent(name),
             type: 'GET',
             dataType: 'text',
             success: function (data) {
@@ -42,7 +49,7 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = 
 
     $$.Disable = function (name, callback) {
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Disable/' + name,
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Disable/' + encodeURIComponent(name),
             type: 'GET',
             dataType: 'text',
             success: function (data) {

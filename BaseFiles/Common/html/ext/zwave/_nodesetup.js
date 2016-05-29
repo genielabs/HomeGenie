@@ -520,7 +520,7 @@ HG.WebApp.GroupModules.ZWave_NodeInfoRequest = function (callback) {
                     else {
                         //TODO: find a better way of refreshing options data
                         HG.Configure.Modules.List(function (data) {
-                            HG.WebApp.Data.Modules = eval(data);
+                            HG.WebApp.Data.Modules = data;
                             HG.WebApp.GroupModules.ShowModuleOptions('HomeAutomation.ZWave', zwaveNodeId);
                         });
                         //
@@ -749,7 +749,7 @@ function _zwavedelayupdate(nodeid) {
     //HG.WebApp.GroupModules.ShowModuleOptions("HomeAutomation.ZWave", nodeid);
     window.setTimeout(function () {
         //HG.Configure.Modules.List(function(data){
-        //HG.WebApp.Data.Modules = eval(data);
+        //HG.WebApp.Data.Modules = data;
         HG.WebApp.GroupModules.ShowModuleOptions('HomeAutomation.ZWave', nodeid);
         //});
     }, 200);

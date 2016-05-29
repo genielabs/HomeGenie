@@ -290,7 +290,13 @@
     var displayState = '';
     var operatingState = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.OperatingState");
     var operatingFanMode = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.FanMode");
-    if (operatingState != null) displayState = operatingState.Value;
+    if (operatingState != null) {
+      if (operatingState.Value == 'Heating')
+        widget.find('[data-ui-field=heatset_image]').css('color', 'red');
+      else
+        widget.find('[data-ui-field=heatset_image]').css('color', '');
+      displayState = operatingState.Value;
+    }
     if (operatingFanMode != null) displayState += ' '+operatingFanMode.Value;
     widget.find('[data-ui-field=operating_value]').html(displayState);
 
