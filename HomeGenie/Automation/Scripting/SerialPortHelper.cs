@@ -16,14 +16,15 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO.Ports;
 
 using SerialPortLib;
 
@@ -72,11 +73,13 @@ namespace HomeGenie.Automation.Scripting
         /// Connect the serial port at the specified speed.
         /// </summary>
         /// <param name="baudRate">Baud rate.</param>
-        public bool Connect(int baudRate)
+        /// <param name="stopBits">Stop Bits.</param>
+        /// <param name="parity">Parity.</param>
+        /// 
+        public bool Connect(int baudRate, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
         {
             serialPort.MessageReceived += SerialPort_MessageReceived;
             serialPort.ConnectionStatusChanged += SerialPort_ConnectionStatusChanged;
-            //
             serialPort.SetPort(portName, baudRate);
             return serialPort.Connect();
         }
@@ -155,7 +158,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get { return serialPort.IsConnected; }
         }
-        
+
         /// <summary>
         /// Gets or sets the end of line delimiter used in text messaging.
         /// </summary>
@@ -165,7 +168,7 @@ namespace HomeGenie.Automation.Scripting
             get { return textEndOfLine[0]; }
             set { textEndOfLine = new string[] { value }; }
         }
-        
+
         public void Reset()
         {
             Disconnect();
