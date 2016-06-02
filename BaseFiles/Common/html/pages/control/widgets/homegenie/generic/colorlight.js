@@ -63,7 +63,7 @@ $$.onStart = function() {
 $$.onRefresh = function () {
   $$.field('name').html($$.module.Name);
   $$.field('description').html(($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address);
-  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+  $$.ui.GetModuleIcon($$.module, function(imgPath){
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;
   });

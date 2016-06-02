@@ -101,7 +101,7 @@ $$.refreshTamper = function() {
 }
 
 $$.refreshStatus = function() {
-  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+  $$.ui.GetModuleIcon($$.module, function(imgPath){
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;
   });
@@ -114,7 +114,7 @@ $$.focusParam = function(paramName) {
   if (param.length) {
     paramIndex = parseInt(param.attr('data-param-index'));
     $$.showNextParam();
-    HG.Ui.BlinkAnim(param);
+    $$.ui.BlinkAnim(param);
   }
 }
 

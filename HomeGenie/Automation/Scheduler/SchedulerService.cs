@@ -192,6 +192,9 @@ namespace HomeGenie.Automation.Scheduler
         public bool IsScheduling(DateTime date, string cronExpression, int recursionCount = 0)
         {
             string buildExpression = "";
+            // '[' and ']' are just aestethic alias for '(' and ')'
+            cronExpression = cronExpression.Replace("[", "(");
+            cronExpression = cronExpression.Replace("]", ")");
             int p = 0;
             while (p < cronExpression.Length)
             {

@@ -94,7 +94,7 @@ $$.refreshStatus = function() {
     }
   } else level = 0;
 
-  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+  $$.ui.GetModuleIcon($$.module, function(imgPath){
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;
   });

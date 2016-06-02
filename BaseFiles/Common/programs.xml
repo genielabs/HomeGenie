@@ -3815,22 +3815,22 @@ When changing the number of zone sensors, program restart is required.</Descript
 var _domain = "HomeAutomation.Demo";
 
 // Add a temperature and luminance sensor
-$.program.addVirtualModule(_domain, "1", "Sensor", "");
-$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Set temperature value", "slider:-50:100:0.5");
-$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Set luminance value", "slider:0:1000:1");
-$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Set motion detection status", "slider:0:1:1");
-$.program.addFeature(_domain, "Sensor", "Status.Battery", "Set battery level", "slider:0:100:1");
+$$.program.addVirtualModule(_domain, "1", "Sensor", "");
+$$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Set temperature value", "slider:-50:100:0.5");
+$$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Set luminance value", "slider:0:1000:1");
+$$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Set motion detection status", "slider:0:1:1");
+$$.program.addFeature(_domain, "Sensor", "Status.Battery", "Set battery level", "slider:0:100:1");
 
 // Add a doorwindow sensor
-$.program.addVirtualModule(_domain, "2", "DoorWindow", "");
-$.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Set door/window status", "slider:0:1:1");
-$.program.addFeature(_domain, "DoorWindow", "Status.Battery", "Set battery level", "slider:0:100:1");
+$$.program.addVirtualModule(_domain, "2", "DoorWindow", "");
+$$.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Set door/window status", "slider:0:1:1");
+$$.program.addFeature(_domain, "DoorWindow", "Status.Battery", "Set battery level", "slider:0:100:1");
 
 // Add an on/off switch
-$.program.addVirtualModule(_domain, "3", "Switch", "");
-$.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
+$$.program.addVirtualModule(_domain, "3", "Switch", "");
+$$.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
 
-$.program.run();</ScriptCondition>
+$$.program.run();</ScriptCondition>
     <ScriptSource>/* 
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
@@ -3845,14 +3845,14 @@ $.program.run();</ScriptCondition>
 */
 
 var _domain = "HomeAutomation.Demo";
-$.modules = $.modules.inDomain(_domain);
+$$.modules = $$.modules.inDomain(_domain);
 
 initialize();
 
 // handle API call for this domain
-$.on.webServiceCallReceived(_domain, function(apiCall){
+$$.on.webServiceCallReceived(_domain, function(apiCall){
 
-  var ac = $.program.parseApiCall(apiCall);
+  var ac = $$.program.parseApiCall(apiCall);
   // Example: 
   //  if the "apiCall" was
   //    "http://&lt;homegenie_address&gt;/api/HomeAutomation.Demo/3/Control.Level/50/1000"
@@ -3866,19 +3866,19 @@ $.on.webServiceCallReceived(_domain, function(apiCall){
 
   var response = "ERROR";
   // get the module addressed by the API call
-  var mod = $.modules.withAddress(ac.address).get();
+  var mod = $$.modules.withAddress(ac.address).get();
   if (mod.isOfDeviceType("Switch")) {
     switch (ac.command) {
       case 'Control.On':
-        $.program.raiseEvent(mod, "Status.Level", "1", "");
+        $$.program.raiseEvent(mod, "Status.Level", "1", "");
         response = "OK";
         break;
       case 'Control.Off':
-        $.program.raiseEvent(mod, "Status.Level", "0", "");
+        $$.program.raiseEvent(mod, "Status.Level", "0", "");
         response = "OK";
         break;
       case 'Control.Toggle':
-        $.program.raiseEvent(mod, "Status.Level", mod.level != 0 ? "0" : "1", "");
+        $$.program.raiseEvent(mod, "Status.Level", mod.level != 0 ? "0" : "1", "");
         response = "OK";
         break;
     }
@@ -3898,12 +3898,12 @@ $.on.webServiceCallReceived(_domain, function(apiCall){
 
 });
 
-hg.program.goBackground();
+$$.program.goBackground();
 
 // let's give some default properties to virtual modules
 function initialize() {
   // Multi Sensor
-  var multiSensor = $.modules.withAddress("1").get();
+  var multiSensor = $$.modules.withAddress("1").get();
   if (multiSensor.instance.name == "")
     multiSensor.instance.name = 'Multi Sensor';
   if (multiSensor.parameter("Sensor.Temperature").value == "")
@@ -3913,13 +3913,13 @@ function initialize() {
   if (multiSensor.parameter("Sensor.MotionDetect").value == "")
     multiSensor.parameter("Sensor.MotionDetect").value = "0";
   // Door Window
-  var doorWindow = $.modules.withAddress("2").get();
+  var doorWindow = $$.modules.withAddress("2").get();
   if (doorWindow.instance.name == "")
     doorWindow.instance.name = "Door Sensor";
   if (doorWindow.parameter("Sensor.DoorWindow").value == "")
     doorWindow.parameter("Sensor.DoorWindow").value = "1";
   // Boiler Switch
-  var boilerSwitch = $.modules.withAddress("3").get();
+  var boilerSwitch = $$.modules.withAddress("3").get();
   if (boilerSwitch.instance.name == "")
     boilerSwitch.instance.name = "Boiler Switch";
   if (boilerSwitch.parameter("Status.Level").value == "")
@@ -3984,12 +3984,12 @@ function initialize() {
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.DoorWindow";
-var door = $.modules.inDomain(_domain).withAddress("2").get();
+var door = $$.modules.inDomain(_domain).withAddress("2").get();
 var currentValue = door.parameter(_param).decimalValue;
-$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
+$$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>401</Address>
@@ -4006,14 +4006,14 @@ $.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptSo
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.MotionDetect";
-var motion = $.modules.inDomain(_domain).withAddress("1").get();
+var motion = $$.modules.inDomain(_domain).withAddress("1").get();
 var currentValue = motion.parameter(_param).decimalValue;
-$.program.raiseEvent(motion, _param, "1", "");
-$.pause(1);
-$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
+$$.program.raiseEvent(motion, _param, "1", "");
+$$.pause(1);
+$$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
     <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>402</Address>
@@ -4030,15 +4030,15 @@ $.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.Temperature";
-var multiSensor = $.modules.inDomain(_domain).withAddress("1").get();
+var multiSensor = $$.modules.inDomain(_domain).withAddress("1").get();
 var temperature = multiSensor.parameter(_param);
 // simulate temperature changes over the time
-while($.program.isRunning) {
-  $.program.raiseEvent(multiSensor, _param, (temperature.decimalValue+(Math.random()-0.5)), "");
-  $.pause(60*5); // pause 60*5 = 5 minutes
+while($$.program.isRunning) {
+  $$.program.raiseEvent(multiSensor, _param, (temperature.decimalValue+(Math.random()-0.5)), "");
+  $$.pause(60*5); // pause 60*5 = 5 minutes
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -4057,17 +4057,17 @@ while($.program.isRunning) {
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.Luminance";
-var multiSensor = $.modules.inDomain(_domain).withAddress("1").get();
+var multiSensor = $$.modules.inDomain(_domain).withAddress("1").get();
 var luminance = multiSensor.parameter(_param);
 // simulate temperature changes over the time
-while($.program.isRunning) {
+while($$.program.isRunning) {
   var lux = (luminance.decimalValue+((Math.random()-0.5)*50));
   if (lux &lt; 0) lux = 0;
-  $.program.raiseEvent(multiSensor, _param, lux, "");
-  $.pause(60*5); // pause 60*5 = 5 minutes
+  $$.program.raiseEvent(multiSensor, _param, lux, "");
+  $$.pause(60*5); // pause 60*5 = 5 minutes
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>

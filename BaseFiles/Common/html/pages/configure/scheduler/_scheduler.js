@@ -15,9 +15,14 @@
                 HG.Ui.Popup.CronWizard.element.one('popupafterclose', function () {
                     $('#schedulerservice_item_edit').popup('open');
                 });
+                var config = null;
                 if ($('#schedulerservice_item_data').val() != '')
-                    HG.Ui.Popup.CronWizard.config = $.parseJSON($('#schedulerservice_item_data').val());
-                HG.Ui.Popup.CronWizard.open();
+                    config = $.parseJSON($('#schedulerservice_item_data').val());
+                else
+                    config = {
+
+                    };                    
+                HG.Ui.Popup.CronWizard.open(config);
                 HG.Ui.Popup.CronWizard.onChange = function (expr,config) {
                     setTimeout(function () {
                         $('#schedulerservice_item_cronexp').val(expr);
@@ -56,6 +61,7 @@
             $('#schedulerservice_item_name').val('');
             $$._CurrentEventName = "";
             $$._CurrentEventIndex = -1;
+            $$.EditCurrentItem();
         });
 
     };
@@ -65,20 +71,12 @@
         if (displayName.indexOf('.') > 0)
             displayName = displayName.substring(displayName.indexOf('.') + 1);
         var item = '<li data-icon="' + (schedule.IsEnabled ? 'check' : 'alert') + '" data-schedule-name="' + schedule.Name + '"  data-schedule-index="' + i + '">';
-        item += '<a href="#schedulerservice_item_edit" data-rel="popup" data-position-to="window" data-transition="pop">';
-        //
-        //            var triggertime = '';
-        //            if (progrm.TriggerTime != null) {
-        //                var triggerts = moment(progrm.TriggerTime);
-        //                triggertime = triggerts.format('L LT');
-        //            }
-        //
+        item += '<a href="#">';
         item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
         item += '   <h3 class="ui-li-heading">' + displayName + '</h3>';
         item += '   <p class="ui-li-desc" style="padding-right:160px">' + (schedule.Description != null ? schedule.Description : '') + ' <span style="opacity:0.5">(' + schedule.CronExpression + ')</span></p>';
         item += '</a>';
         item += '<a href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
-        //
         item += '</li>';
         return item;
     }
@@ -117,13 +115,23 @@
             $('#configure_schedulerservice_list').listview();
             $('#configure_schedulerservice_list').listview('refresh');
             //
-            $("#configure_schedulerservice_list li").bind("click", function () {
+            $("#configure_schedulerservice_list li").bind("click", function() {
                 $$._CurrentEventName = $(this).attr('data-schedule-name');
                 $$._CurrentEventIndex = $(this).attr('data-schedule-index')
+                $$.EditCurrentItem();
             });
             //
             if (callback) callback();
         });
+    };
+
+    $$.EditCurrentItem = function() {
+        HG.Ui.Popup.CronWizard.open($$._CurrentEventName);
+        HG.Ui.Popup.CronWizard.onChange = function(item) {
+            HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.ProgramId, function () {
+                $$.LoadScheduling();
+            });
+        };
     };
 
     $$.RefreshEventDetails = function () {

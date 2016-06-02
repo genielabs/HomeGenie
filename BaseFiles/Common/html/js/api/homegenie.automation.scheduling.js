@@ -4,6 +4,17 @@
 //  
 HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = this;
 
+    $$.Get = function (name, callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Get/' + encodeURIComponent(name),
+            type: 'GET',
+            success: function (data) {
+                if (typeof callback != 'undefined')
+                    callback(data);
+            }
+        });
+    };
+
     $$.Update = function (name, expression, data, description, pid, callback) {
         $.ajax({
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + encodeURIComponent(name),

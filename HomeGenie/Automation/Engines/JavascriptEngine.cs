@@ -33,7 +33,7 @@ namespace HomeGenie.Automation.Engines
     {
         internal Engine scriptEngine;
         private ScriptingHost hgScriptingHost;
-        private string initScript = @"var $ = {
+        private string initScript = @"var $$ = {
           // ModulesManager
           modules: hg.modules,
           // SettingsHelper

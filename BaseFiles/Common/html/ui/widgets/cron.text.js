@@ -43,11 +43,7 @@
                     HG.Ui.Popup.CronWizard.element.one('popupafterclose', function(){
                         $('#automation_group_module_edit').popup('open');
                     });
-
-                    if (_this.config != null)
-                        HG.Ui.Popup.CronWizard.config = _this.config;
-
-                    HG.Ui.Popup.CronWizard.open();
+                    HG.Ui.Popup.CronWizard.open(_this.config);
                     HG.Ui.Popup.CronWizard.onChange = function(expr, cfg){
                         //var ctxt = textInput.val();
                         //ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));

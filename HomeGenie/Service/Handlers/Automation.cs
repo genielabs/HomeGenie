@@ -137,7 +137,7 @@ namespace HomeGenie.Service.Handlers
                 case "Scheduling.Describe":
                     var cronDescription = "";
                     try { 
-                        cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0)); 
+                        cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0).Trim()); 
                         cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
                     } catch { }
                     request.ResponseData = new ResponseText(cronDescription);

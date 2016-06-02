@@ -17,7 +17,7 @@ $$.onRefresh = function () {
   $$.field('name').html($$.module.Name + " (" + $$.module.DeviceType + ")");
   var description = ($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address;
   $$.field('description').html(description);
-  HG.Ui.GetModuleIcon($$.module, function(imgPath){
+  $$.ui.GetModuleIcon($$.module, function(imgPath){
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;
   });
