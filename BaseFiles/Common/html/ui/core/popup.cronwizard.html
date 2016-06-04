@@ -1,4 +1,4 @@
-<div class="ui-corner-all" style="width:720px;" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
+<div class="ui-corner-all cronwiz-container" style="width:720px;" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
     
     <div class="ui-corner-top" data-role="header">
         <h2 data-locale-id="cronwizard_title">Cron event Wizard</h2>
@@ -10,8 +10,8 @@
                 <input data-ui-field="cron-name" type="text" data-inline="true" />
                 <span class="label-small">Type</span>
                 <select data-ui-field="cron-type-select" data-inline="true">
-                    <option value="1" data-locale-id="cronwizard_typeselect_everyday">every day</option>
-                    <option value="2" data-locale-id="cronwizard_typeselect_period">time period</option>
+                    <option value="1" data-locale-id="cronwizard_typeselect_everyday">days</option>
+                    <option value="2" data-locale-id="cronwizard_typeselect_period">date period</option>
                     <option value="3" data-locale-id="cronwizard_typeselect_custom">custom cron expression</option>
                 </select>
             </div>
@@ -27,7 +27,8 @@
 
     <div data-role="content" style="width:100%;height:260px;overflow:auto;overflow-x:hidden;margin-top:122px;">
 
-        <div data-ui-field="date-picker-div" class="ui-corner-all" style="z-index:1000;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(200,200,200,0.6);padding-top:80px" align="center">
+        <div data-ui-field="date-picker-div" style="z-index:1000;position:fixed;top:0;left:0;right:0;bottom:0;padding-top:80px" align="center">
+            <div class="ui-corner-all" style="position:absolute;background:rgba(200,200,200,0.6);left:0;top:0;right:0;bottom:0"></div>
             <div><div><input data-ui-field="date-picker" type="text" data-role="none" /></div></div>
             <div style="margin-top:60px"><div><div><input data-ui-field="time-picker" type="text" data-role="none" /></div></div></div>
         </div>
@@ -188,19 +189,26 @@
 
             </div>
 
-            <div style="display:block;height:40px">&nbsp;</div>
-
         </div><!-- end wizard container -->
 
-        <div data-ui-field="cronexpr-container" class="ui-mini" style="padding-left:10px;padding-right:10px;">
+        <div data-ui-field="cronexpr-container" class="ui-mini" style="padding-left:30px;padding-right:25px;">
 
-            <span class="label-small">Cron expression</span><br/>
+            <div align="center" class="label-small" style="margin-bottom:4px;margin-right:10px;margin-left:10px">Cron expression</div>
             <textarea data-ui-field="cron-expr" 
                                 data-role="none"
-                                class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"
-                                style="height:180px;max-height:180px;width:100%;font-family:monospace;font-size:12pt"></textarea>            
+                                style="font-family:monospace;font-size:18pt"></textarea>            
 
         </div><!-- end custom cron expression container -->
+
+        <div data-ui-field="program-container" class="ui-mini" style="padding-left:0px;padding-right:25px;">
+
+            <div align="center" class="label-small" style="margin-top:10px;margin-bottom:4px;margin-left:25px">Run script on event occurrence</div>
+            <textarea data-ui-field="program-script" 
+                                data-role="none"
+                                style="font-family:monospace;font-size:18pt"></textarea>    
+                                        
+        </div><!-- end program container -->
+
 
     </div>
 
@@ -208,8 +216,8 @@
 
         <div align="right">
 
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-delete" data-locale-id="common_command_cancel">Cancel</a>
-            <a data-ui-field="confirm-button" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-check" data-locale-id="common_command_ok">Ok</a>
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-back" data-locale-id="common_command_cancel">Cancel</a>
+            <a data-ui-field="confirm-button" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-check" data-locale-id="common_command_save">Save</a>
 
         </div>
 

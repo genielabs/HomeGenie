@@ -234,6 +234,22 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
             HG.System.UpdateManager.UpdateCheck();
             $('#homegenie_about').popup('close');
         });
+
+        $$.lastSleepCheck = new Date().getTime();
+        setInterval($$.sleepCheck, 1000);
+    };
+
+    $$.lastSleepCheck = 0;
+    $$.sleepCheck = function() {
+        var now = new Date().getTime();
+        var diff = now - $$.lastSleepCheck;
+        if (diff > 5000 && (HG.WebApp.Events._eventSource == null || HG.WebApp.Events._eventSource.readyState == 2)) {
+            // Reconnect eventsource on mobile device resume
+            console.log('sleepCheck -> device resume');
+            //alert('sleepCheck -> resume');
+            HG.WebApp.Events.Setup();
+        }
+        $$.lastSleepCheck = now;
     };
 
 };

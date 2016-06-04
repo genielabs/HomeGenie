@@ -1,12 +1,10 @@
 <div class="ui-mini">
     <label for="feature-{id}" style="font-size:10pt;">{description}</label>
     <div style="position:relative;">
-        <div style="margin-right:34px">
-            <input data-ui-field="textinput" name="option-{id}" id="feature-{id}" type="text" data-mini="true" />
+        <div style="margin-right:64px">
+            <select data-ui-field="cronselect" name="option-{id}" id="feature-{id}" data-mini="true"></select>
         </div>
-        <a data-ui-field="cronwiz" title="Cron Wizard" class="ui-btn ui-icon-calendar ui-btn-icon-notext ui-corner-all" style="position:absolute;right:7px;top:-7px">Wizard</a>
-    </div>
-    <div style="position:relative;">
-        <input data-ui-field="description" name="option-{id}" id="feature-{id}" type="text" data-mini="true" style="cursor:pointer" />
+        <a data-ui-field="cronwiz-addnew" title="Add new" class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all" style="position:absolute;right:0px;top:-5px">Add new</a>
+        <a data-ui-field="cronwiz-edit" title="Edit" class="ui-btn ui-icon-edit ui-btn-icon-notext ui-corner-all" style="position:absolute;right:32px;top:-5px">Edit</a>
     </div>
 </div>

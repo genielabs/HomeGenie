@@ -15,7 +15,7 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = 
         });
     };
 
-    $$.Update = function (name, expression, data, description, pid, callback) {
+    $$.Update = function (name, expression, data, description, script, callback) {
         $.ajax({
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + encodeURIComponent(name),
             type: 'POST',
@@ -25,7 +25,7 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = 
                 CronExpression: expression,
                 Data: data,
                 Description: description,
-                ProgramId: pid
+                Script: script
             }),
             success: function (data) {
                 if (typeof callback != 'undefined')

@@ -2,7 +2,6 @@
     init: function(options) {
         this.program = this.context.program;
         this.module = this.context.module;
-        this.nowizard = ((typeof options[0] != 'undefined' && options[0].toLowerCase() == 'nowizard') ? true : false);
     },
     bind: function() {
         var element = this.element;
@@ -13,160 +12,110 @@
         html = html.replace(/{description}/g, description);
         element.html(html);
         var _this = this;
-        this.config = HG.WebApp.Utility.GetModulePropertyByName(this.module, context.parameter.Name+'.Data');
-        if (this.config != null && this.config.Value != '')
-            this.config = $.parseJSON(this.config.Value);
-        var textDescription = element.find('[data-ui-field=description]');
-        var textInput = element.find('[data-ui-field=textinput]');
-        textInput.val(context.parameter.Value);
-        textInput.on('change', function(evt){
-            if (_this.config != null) {
-                HG.WebApp.Utility.SetModulePropertyByName(_this.module, context.parameter.Name+'.Data', '');
-                _this.config = null;
-            }
+        this.cronSelect = element.find('[data-ui-field=cronselect]').qtip({
+            prerender: true,
+            content: {
+                text: function(){ 
+                    var desc = _this.cronSelect.find('option:selected').attr('desc');
+                    if (typeof desc == 'undefined')
+                        desc = _this.cronSelect.find('option:selected').attr('value');
+                    return desc; 
+                }
+            },
+            show: { delay: 500 },
+            hide: { inactive: 3000 },
+            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+            position: { my: 'bottom center', at: 'top center' }
+        }).on('change', function(){
+            if ($(this).val()=='')
+                element.find('[data-ui-field=cronwiz-edit]').addClass('ui-disabled');
+            else
+                element.find('[data-ui-field=cronwiz-edit]').removeClass('ui-disabled');
             if (typeof _this.onChange == 'function') {
                 _this.onChange($(this).val());
             }
         });
-        textDescription.qtip({
-            content: {
-                text: function(){ return textDescription.val(); }
-            },
-            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
-            position: { my: 'bottom center', at: 'top center' }
-        });
-        if (this.nowizard) {
-            element.find('[data-ui-field=cronwiz]').hide();
-        } else {
-            element.find('[data-ui-field=cronwiz]').on('click', function(){
+        element.find('[data-ui-field=cronwiz-addnew]').on('click', function(){
+            HG.Ui.Popup.CronWizard.onChange = function(item){
+                HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.Script, function () {
+                    _this.refreshCronList('@'+item.Name);
+                    _this.cronSelect.trigger('change');
+                });
+            };
+            if ($('#automation_group_module_edit-popup').hasClass('ui-popup-active')) {
                 $('#automation_group_module_edit').one('popupafterclose', function(){
                     HG.Ui.Popup.CronWizard.element.one('popupafterclose', function(){
                         $('#automation_group_module_edit').popup('open');
                     });
-                    HG.Ui.Popup.CronWizard.open(_this.config);
-                    HG.Ui.Popup.CronWizard.onChange = function(expr, cfg){
-                        //var ctxt = textInput.val();
-                        //ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));
-                        //textInput.val(ctxt+expr);
-                        textInput.val(expr);
-                        textInput.trigger('change');
-                        _this.config = cfg; // <-- this has to be placed after 'change' and before 'blur'
-                        textInput.blur();
-                        HG.WebApp.Utility.SetModulePropertyByName(_this.module, context.parameter.Name+'.Data', JSON.stringify(cfg));
-                    };
+                    HG.Ui.Popup.CronWizard.open();
                 });
                 $('#automation_group_module_edit').popup('close');
-            });
-        }
-        textInput.on('blur', function(evt){
-            if (textInput.val() == '') {
-                textDescription.val(HG.WebApp.Locales.GetLocaleString('common_status_notset', 'Not set'));
-                textDescription.css('color', 'gray');
             } else {
-                textDescription.val(textInput.val());
-                textDescription.css('color', '');
-                if (_this.config != null && typeof _this.config.description != 'undefined' && _this.config.description != '') {
-                    textDescription.val(_this.config.description);
-                } else {
-                    if(_this.getLastSeparator(textInput.val()) == 0) {
-                        $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
-                            if (typeof res != 'undefined' && res.ResponseValue != '') {
-                                textDescription.val(res.ResponseValue);
-                            }
-                        });
-                    }
-                }
+                HG.Ui.Popup.CronWizard.open();
             }
-            setTimeout(function(){
-                textInput.parent().hide();
-                textDescription.parent().show();
-            }, 200);
         });
-
-        textInput.autocomplete({
-            minLength: 0,
-            delay: 500,
-            source: function (req, res){
-                $.ajax({
-                    url: '/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.HomeGenie/Automation/Scheduling.List',
-                    type: 'GET',
-                    success: function (data) {
-                        var filter = _this.getFilter(req.term);
-                        var itemList = [];
-                        $.each(data, function(idx, item){
-                            if (item.IsEnabled && (item.Name.toLowerCase().indexOf(filter) >= 0 || item.Description.toLowerCase().indexOf(filter) >= 0))
-                                itemList.push({ label: '@'+item.Name+' ('+item.Description+')', value: '@'+item.Name });
-                        });
-                        res(itemList);
-                    },
-                    failure: function (data) {
-                        res([]);
-                    }
+        element.find('[data-ui-field=cronwiz-edit]').on('click', function(){
+            HG.Ui.Popup.CronWizard.onChange = function(item){
+                HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.Script, function () {
+                    _this.refreshCronList('@'+item.Name);
+                    _this.cronSelect.trigger('change');
                 });
-            },
-            select: function (event, ui) {
-                var ctxt = textInput.val();
-                ctxt = ctxt.substring(0, _this.getLastSeparator(ctxt));
-                textInput.val(ctxt+ui.item.value);
-                textInput[0].setSelectionRange(textInput.val().length, textInput.val().length);
-                textInput.trigger('change');
-                event.preventDefault();
-                return false;
-            },
-            focus: function (event, ui) {
-                event.preventDefault();
-                return false;
-            },
-            response: function (event, ui) {
-                textInput.trigger('change');
-            },
-            close: function (event, ui) {
-                textInput.focus();
-                return true;
+            };
+            if ($('#automation_group_module_edit-popup').hasClass('ui-popup-active')) {
+                $('#automation_group_module_edit').one('popupafterclose', function(){
+                    HG.Ui.Popup.CronWizard.element.one('popupafterclose', function(){
+                        $('#automation_group_module_edit').popup('open');
+                    });
+                    HG.Ui.Popup.CronWizard.open(_this.cronSelect.find('option:selected').text());
+                });
+                $('#automation_group_module_edit').popup('close');
+            } else {
+                HG.Ui.Popup.CronWizard.open(_this.cronSelect.find('option:selected').text());
             }
-        }).focus(function () {
-            $(this).trigger('keydown.autocomplete');
         });
-
-        textDescription.on('focus', function(evt){
-            $(this).trigger('click');
-        });
-        textDescription.on('click', function(evt){
-            textDescription.parent().hide();
-            textInput.parent().show();
-            setTimeout(function(){
-                textInput.focus();
-            }, 500);
-        });
-        setTimeout(function(){
-            textInput.blur();
-        }, 200);
-    },
-    getLastSeparator: function(s) {
-        var lastIdx = 0;
-        var idxS1 = s.lastIndexOf(':');
-        var idxS2 = s.lastIndexOf(';');
-        if (idxS1 > idxS2)
-            lastIdx = idxS1;
-        else
-            lastIdx = idxS2;
-        idxS1 = s.lastIndexOf('(');
-        idxS2 = s.lastIndexOf(')');
-        if (idxS1 > idxS2 && idxS1 > lastIdx)
-            lastIdx = idxS1;
-        else if (idxS2 > lastIdx)
-            lastIdx = idxS2;
-        return lastIdx+1;
-    },
-    getFilter: function(terms) {
-        var filter = terms.toLowerCase();
-        filter = filter.substring(this.getLastSeparator(filter));
-        return filter.replace('@', '');
+        this.refreshCronList(context.parameter.Value);
+        this.cronSelect.trigger('change');
     },
     setValue: function(expr) {
-        var textInput = this.element.find('[data-ui-field=textinput]');
-        textInput.val(expr);
-        textInput.trigger('change');
-        textInput.blur();
+        this.cronSelect.val(expr).selectmenu('refresh');
+    },
+    refreshCronList: function(currentItem) {
+        var _this = this;
+        $.mobile.loading('show');
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.HomeGenie/Automation/Scheduling.List',
+            type: 'GET',
+            success: function (data) {
+                _this.schedulerItems = data;
+                _this.cronSelect.empty();
+                var notSet = $('<option />');
+                var notSetText = HG.WebApp.Locales.GetLocaleString('common_status_notset', 'Not set');
+                notSet.attr({ 'value': '', 'desc': notSetText }).text(notSetText);
+                _this.cronSelect.append(notSet);
+                var found = false;
+                $.each(data, function(k,v) {
+                    var entry = $('<option/>')
+                        .attr({'value': '@'+v.Name, 'desc': v.Description })
+                        .text(v.Name);
+                    if (currentItem == '@'+v.Name)
+                        found = true;
+                    _this.cronSelect.append(entry);
+                });
+                if (!found && currentItem != '' && typeof currentItem != 'undefined') {
+                    var entry = $('<option/>')
+                        .attr({'value': currentItem, 'desc': currentItem })
+                        .text(currentItem);
+                    _this.cronSelect.append(entry);
+                }
+                _this.cronSelect.val(currentItem).selectmenu('refresh');
+                if (typeof currentItem != 'undefined' || currentItem == '')
+                    _this.element.find('[data-ui-field=cronwiz-edit]').addClass('ui-disabled');
+
+                $.mobile.loading('hide');
+            },
+            failure: function (data) {
+                // TODO: handle this...
+            }
+        });
     }
 }]

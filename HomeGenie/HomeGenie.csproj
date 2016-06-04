@@ -237,6 +237,8 @@
     <Compile Include="Automation\ProgramDynamicApi.cs" />
     <Compile Include="Service\PackageManager.cs" />
     <Compile Include="Service\BackupManager.cs" />
+    <Compile Include="Automation\Scheduler\SchedulerScriptingHost.cs" />
+    <Compile Include="Automation\Scheduler\SchedulerScriptingEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

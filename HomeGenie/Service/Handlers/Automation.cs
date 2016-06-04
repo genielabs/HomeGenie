@@ -108,7 +108,7 @@ namespace HomeGenie.Service.Handlers
                         newSchedule.CronExpression,
                         newSchedule.Data,
                         newSchedule.Description,
-                        newSchedule.ProgramId
+                        newSchedule.Script
                     );
                     homegenie.UpdateSchedulerDatabase();
                     break;
@@ -132,6 +132,24 @@ namespace HomeGenie.Service.Handlers
                     {
                         return s1.Name.CompareTo(s2.Name);
                     });
+                    /*
+                    var d = DateTime.Today.ToUniversalTime();
+                    foreach (var ce in homegenie.ProgramManager.SchedulerService.Items) 
+                    {
+                        int occurrences = 0;
+                        for (int m = 0; m < 1440; m++)
+                        {
+                            if (homegenie.ProgramManager.SchedulerService.IsScheduling(d, ce.CronExpression))
+                            {
+                                Console.WriteLine("{0} {1}", d, JsonConvert.SerializeObject(ce));
+                                occurrences++;
+                                if (occurrences > 10)
+                                    break;
+                            }
+                            d = d.AddMinutes(1);
+                        }
+                    }
+                    */
                     request.ResponseData = homegenie.ProgramManager.SchedulerService.Items;
                     break;
                 case "Scheduling.Describe":

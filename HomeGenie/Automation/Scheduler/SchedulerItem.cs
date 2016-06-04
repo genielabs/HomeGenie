@@ -25,6 +25,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CronExpressionDescriptor;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -34,26 +36,17 @@ namespace HomeGenie.Automation.Scheduler
         public string Name { get; set; }
         public string CronExpression { get; set; }
         public string Description { get; set; }
-        /*(
-            get 
-            { 
-                string d = "";
-                try
-                {
-                    d = ExpressionDescriptor.GetDescription(this.CronExpression);
-                    d = Char.ToLowerInvariant(d[0]) + d.Substring(1);
-                }
-                catch { }
-                return d;
-            } 
-        }*/
         public string Data { get; set; }
         public bool IsEnabled { get; set; }
         public string LastOccurrence { get; set; }
         public string NextOccurrence { get; set; }
 
+        public string Script { get; set; }
         // TODO: deprecate this field - left for compatibility with hg <= r521
         public string ProgramId { get; set; }
+
+        [XmlIgnore,JsonIgnore]
+        public SchedulerScriptingEngine ScriptEngine { get; set; }
 
         public SchedulerItem()
         {

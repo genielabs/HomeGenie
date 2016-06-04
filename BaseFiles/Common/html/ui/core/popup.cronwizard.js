@@ -5,13 +5,23 @@ $$.bind = function() {
     $$.userLang = HG.WebApp.Locales.GetUserLanguage();
     $$.cronUpdateTimeout = null;
 
-    $$.cronExprText = $$.element.find('textarea[data-ui-field="cron-expr"]').on('keyup', function() {
-        $$.buildCron(1000);
+    $$.cronName = $$.element.find('[data-ui-field=cron-name]').blur(function(){
+        var txt = $$.cronName.val();
+        $$.cronName.val(txt.replace(/[^A-Za-z0-9+\.-]/g, ''));
     });
 
     // ok button
     element.find('[data-ui-field=confirm-button]').on('click', function(){
-        if (typeof $$.onChange == 'function') {
+        var cronExpression = $$._buildCron();
+        if ($$.cronName.val().trim().length < 2) {
+            $$.cronName.qtip({
+                content: { text: 'Please enter a name of two or more characters.' },
+                show: { event: false, delay: 500 },
+                hide: { inactive: 2000 },
+                style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                position: { my: 'top center', at: 'bottom center' }
+            }).qtip('show');
+        } else if (cronExpression != '' && typeof $$.onChange == 'function') {
             var eachMinute = [];
             $$.eachMinuteGroup.find("input[type=checkbox]:checked").each(function() {
                 eachMinute.push($(this).val());
@@ -35,8 +45,9 @@ $$.bind = function() {
             // update bound item data
             if ($$.item.Name == '') 
                 $$.item.Name = $$.cronName.val();
-            $$.item.CronExpression = $$._buildCron();
-            $$.item.Description = $$.element.find('[data-ui-field=cron-desc]').html();
+            $$.item.CronExpression = cronExpression;
+            $$.item.Description = $$.element.find('[data-ui-field=cron-desc]').val();
+            $$.item.Script = $$.programEditor.getValue();
             $$.item.Data = JSON.stringify({
                 itemType: $$.cronTypeSelect.val(),
                 type: $$.eventType.val(),
@@ -59,7 +70,17 @@ $$.bind = function() {
             });
             $$.onChange($$.item);
             $$.onChange = null;
+            $$.element.popup('close');
+        } else {
+            $$.element.find('[data-role="content"]').qtip({
+                content: { text: 'Please enter a valid cron time expression.' },
+                show: { event: false, delay: 500 },
+                hide: { event: false, inactive: 2000 },
+                style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                position: { my: 'bottom center', at: 'top center' }
+            }).qtip('show');
         }
+
     });
     
     // "each minute" control group
@@ -89,8 +110,10 @@ $$.bind = function() {
             case '3':
                 element.find('[data-ui-field="wizard-container"]').hide();
                 element.find('[data-ui-field="cronexpr-container"]').show();
+                $$.cronEditor.refresh();
                 break;
         }
+        $$.element.find('[data-role="content"]').scrollTop(0);
         $$._buildCron();
     });
     // minute type select
@@ -207,8 +230,10 @@ $$.bind = function() {
         }
         $$.buildCron();
     });
-    $$.datePickerDiv = $$.element.find('[data-ui-field="date-picker-div"]');
-    $$.datePickerDiv.hide();
+    $$.datePickerDiv = $$.element.find('[data-ui-field="date-picker-div"]').hide();
+    $$.datePickerDiv.find('div:first').on('click', function(){
+        $$.datePickerDiv.slideUp(100);
+    });
     $$.datePicker = $$.element.find('[data-ui-field="date-picker"]').datebox({
         mode: "calbox",
         useLang: HG.WebApp.Utility.GetDateBoxLocale(),
@@ -228,7 +253,7 @@ $$.bind = function() {
         var diplayDate = moment(v).format('MMMM D');
         $$.datePickerDiv.currentTarget.val(v);
         $$.datePickerDiv.currentTarget.html(diplayDate);
-        $$.datePickerDiv.slideUp(150);
+        $$.datePickerDiv.slideUp(100);
         $$.buildCron();
     });
     $$.dateFrom = $$.element.find('[data-ui-field="date-from"]').on('click', function() {
@@ -263,7 +288,7 @@ $$.bind = function() {
         var diplayTime = moment(v, 'HH:mm').format('LT');
         $$.datePickerDiv.currentTarget.val(v);
         $$.datePickerDiv.currentTarget.html(diplayTime);
-        $$.datePickerDiv.slideUp(150);
+        $$.datePickerDiv.slideUp(100);
         $$.buildCron();
     });
 
@@ -271,24 +296,48 @@ $$.bind = function() {
     $$.gfxHeight = 40;
     $$.gfxYear = Raphael($$.element.find('[data-ui-field="gfx-months"]')[0], $$.gfxWidth, $$.gfxHeight);
     $$.gfxDay = Raphael($$.element.find('[data-ui-field="gfx-time"]')[0], $$.gfxWidth, $$.gfxHeight);
+
+    $$.cronEditor = CodeMirror.fromTextArea($$.element.find('textarea[data-ui-field="cron-expr"]').get()[0], {
+        lineNumbers: false,
+        matchBrackets: true,
+        mode: { name: "javascript", globalVars: true },
+        theme: 'ambiance'
+    });
+    $$.cronEditor.setSize('100%', 80);
+    $$.cronEditor.on('change', function(cm,co){
+        if (!$$.cronEditor.preventEvent === true)
+            $$.buildCron(1000);
+    });
+
+    $$.programEditor = CodeMirror.fromTextArea($$.element.find('textarea[data-ui-field="program-script"]').get()[0], {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: { name: "javascript", globalVars: true },
+        theme: 'ambiance'
+    });
+    $$.programEditor.setSize('100%', 232);
 }
 
 $$.open = function(name) {
-    if (typeof name != 'undefined' && name != '') {
+    $$.item = {
+        Name: '',
+        CronExpression: '',
+        Data: $$._createConfig(),
+        Description: '',
+        IsEnabled: true,
+        ProgramId: '', // <-- this field is deprecated since hg r522
+        Script:''
+    }
+    if (typeof name != 'undefined' && name != '' && name != null) {
         $.mobile.loading('show');
         HG.Automation.Scheduling.Get(name, function (item) {
-            if (item == '') {
-                item = {
-                    Name: '',
-                    CronExpression: '',
-                    Data: null,
-                    Description: '',
-                    IsEnabled: true,
-                    ProgramId: ''
-                }
-            } else if (item.Data != null) {
+            // backward compatibility hg < r522
+            if (typeof item == 'undefined' || item == '') {
+                item = $$.item;
+                item.CronExpression = name;
+                item.Data = null;
+            } else if (item.Data != null)
                 item.Data = $.parseJSON(item.Data);
-            }
             if (typeof item.Data == 'undefined' || item.Data == null || typeof item.Data.type == 'undefined') {
                 // allocate a new item
                 item.Data = $$._createConfig();
@@ -300,6 +349,9 @@ $$.open = function(name) {
             $$.element.popup('open');
             $.mobile.loading('hide');
         });
+    } else {
+        $$._init();
+        $$.element.popup('open');
     }
 }
 
@@ -315,14 +367,19 @@ $$._init = function() {
     $$.eachDayowGroup.find("input[type=checkbox]:checked").prop('checked', false).checkboxradio('refresh');
     $$.eachMonthGroup.find("input[type=checkbox]:checked").prop('checked', false).checkboxradio('refresh');
 
-    $$.cronName = element.find('[data-ui-field=cron-name]').val($$.item.Name);
+    $$.cronName.val($$.item.Name);
+    if ($$.item.Name.trim() != '')
+        $$.cronName.addClass('ui-disabled');
+    else
+        $$.cronName.removeClass('ui-disabled');
 
     if ($$.item.Description == null)
         $$.item.Description = '';
     if ($$.item.CronExpression == null)
         $$.item.CronExpression = '';
-    $$.element.find('[data-ui-field=cron-desc]').html($$.item.Description);
-    $$.element.find('textarea[data-ui-field="cron-expr"]').val($$.item.CronExpression);
+    $$.element.find('[data-ui-field=cron-desc]').val($$.item.Description);
+    $$.cronEditor.setValue($$.item.CronExpression);
+    $$.programEditor.setValue($$.item.Script != null ? $$.item.Script : '');
 
     $$.cronTypeSelect.val($$.item.Data.itemType).trigger('change');
 
@@ -368,17 +425,19 @@ $$._init = function() {
 
     $$.buildCron();
 
+    // load initial values
     setTimeout(function(){
         if ($$.item.Description.trim() != '')
-            $$.element.find('[data-ui-field=cron-desc]').html($$.item.Description);
+            $$.element.find('[data-ui-field=cron-desc]').val($$.item.Description);
         if ($$.item.CronExpression.trim() != '')
-            $$.element.find('textarea[data-ui-field="cron-expr"]').val($$.item.CronExpression);
+            $$.cronEditor.setValue($$.item.CronExpression);
     }, 100);
 }
 
 $$._createConfig = function() {
     return {
-        type: 1,
+        itemType: 1,
+        type: 0,
         from: moment().format('YYYY-MM-DD'),
         to: moment().format('YYYY-MM-DD'),
         at: moment().format('HH:mm'),
@@ -521,11 +580,12 @@ $$._buildCron = function() {
     // custom cron expression
     if ($$.cronTypeSelect.val() == '3') {
         // Update the human readable output
-        $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent($$.cronExprText.val()), function(res){
+        var expr = $$.cronEditor.getValue();
+        $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(expr), function(res){
             if (res.ResponseValue != '')
-                $$.element.find('[data-ui-field=cron-desc]').html(res.ResponseValue);
+                $$.element.find('[data-ui-field=cron-desc]').val(res.ResponseValue);
         });
-        return $$.cronExprText.val();
+        return expr;
     }
     // Build the "Occur" cron expresison first
     // Occur - minute field
@@ -631,16 +691,18 @@ $$._buildCron = function() {
     // Update the human readable output
     $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(cronOccur), function(res){
         var desc = '';
-        if ($$.dateFrom.val() == $$.dateTo.val()) {
-            desc+= 'on '+moment($$.dateFrom.val()).format('MMMM DD');
-        } else {
-            desc+= 'from '+moment($$.dateFrom.val()).format('MMMM DD');
-            desc+= ' to '+moment($$.dateTo.val()).format('MMMM DD');
+        if ($$.cronTypeSelect.val() == '2') {
+            if ($$.dateFrom.val() == $$.dateTo.val()) {
+                desc+= 'on '+moment($$.dateFrom.val()).format('MMMM DD')+ ', ';
+            } else {
+                desc+= 'from '+moment($$.dateFrom.val()).format('MMMM DD');
+                desc+= ' to '+moment($$.dateTo.val()).format('MMMM DD')+ ', ';
+            }
         }
         if ($$.timeStart.val() == $$.timeEnd.val()) {
-            desc+= ' at '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
+            desc+= 'at '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
         } else {
-            desc+= ', starting at '+moment($$.timeStart.val(), 'HH:mm').format('LT');
+            desc+= 'starting at '+moment($$.timeStart.val(), 'HH:mm').format('LT');
             desc+= ' and ending at '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
         }
         if ($$.timeStart.val() == $$.timeEnd.val()) {
@@ -648,26 +710,31 @@ $$._buildCron = function() {
                 desc+= ', '+res.ResponseValue.substring(res.ResponseValue.indexOf(',')+1);
         } else
             desc+= ', '+res.ResponseValue;
-        $$.element.find('[data-ui-field=cron-desc]').html(desc);
+        $$.element.find('[data-ui-field=cron-desc]').val(desc);
     });
 
     // Build the final composite cron expression
     var cronexpr = '';
     var cm = '';
-    $.each(cronMonth, function(k,v) {
-        cm+='('+v+') : '; 
-    });
-    cm = cm.substring(0, cm.length-3);
+    if ($$.cronTypeSelect.val() == '2') {
+        $.each(cronMonth, function(k,v) {
+            cm+='('+v+') : '; 
+        });
+        cm = '[ '+cm.substring(0, cm.length-3)+' ]';
+    }
     var ct = '';
     $.each(cronTime, function(k,v) {
         ct+='('+v+') : '; 
     });
     ct = ct.substring(0, ct.length-3);
     if (cronOccur != emptyOccur)
-        cronexpr = '(' + cronOccur + ') ; [ '+cm+' ] ; [ '+ct+' ]';
+        cronexpr = '(' + cronOccur + ') ; '+(cm != '' ? cm+' ; ' : '')+'[ '+ct+' ]';
     else
-        cronexpr = '[ '+cm+' ] ; [ '+ct+' ]';
-    $$.element.find('textarea[data-ui-field="cron-expr"]').val(cronexpr);
+        cronexpr = (cm != '' ? cm+' ; ' : '') + '[ '+ct+' ]';
+
+    $$.cronEditor.preventEvent = true;
+    $$.cronEditor.setValue(cronexpr);
+    $$.cronEditor.preventEvent = false;
 
     return cronexpr;
 }

@@ -6,62 +6,13 @@
 
     $$.InitializePage = function () {
 
-        $('#schedulerservice_item_edit').on('popupbeforeposition', function (event) {
-            $$.RefreshEventDetails();
-        });
-        //
-        $('#schedulerservice_item_cronwizard').on('click', function (event) {
-            $('#schedulerservice_item_edit').one('popupafterclose', function () {
-                HG.Ui.Popup.CronWizard.element.one('popupafterclose', function () {
-                    $('#schedulerservice_item_edit').popup('open');
-                });
-                var config = null;
-                if ($('#schedulerservice_item_data').val() != '')
-                    config = $.parseJSON($('#schedulerservice_item_data').val());
-                else
-                    config = {
-
-                    };                    
-                HG.Ui.Popup.CronWizard.open(config);
-                HG.Ui.Popup.CronWizard.onChange = function (expr,config) {
-                    setTimeout(function () {
-                        $('#schedulerservice_item_cronexp').val(expr);
-                        $('#schedulerservice_item_data').val(JSON.stringify(config));
-                        $('#schedulerservice_item_desc').val(config.description);
-                    }, 500);
-                };
-            });
-            $('#schedulerservice_item_edit').popup('close');
-        });
-        $('#schedulerservice_item_cronexp').on('change', function() {
-            $('#schedulerservice_item_data').val('');
-            $('#schedulerservice_item_desc').val('');
-        });
-        $('#scheduleritem_update_button').on('click', function (event) {
-            var name = $('#schedulerservice_item_name').val();
-            var expr = $('#schedulerservice_item_cronexp').val();
-            var data = $('#schedulerservice_item_data').val();
-            var desc = $('#schedulerservice_item_desc').val();
-            var prid = $('#schedulerservice_item_programid').val();
-            HG.Automation.Scheduling.Update(name, expr, data, desc, prid, function () {
-                $$.LoadScheduling();
-            });
-        });
-        //
-        $('#scheduleritem_delete_button').on('click', function (event) {
-            var name = $('#schedulerservice_item_name').val();
-            HG.Automation.Scheduling.Delete(name, function () {
-                $$.LoadScheduling();
-            });
-            $$._CurrentEventName = "";
-            $$._CurrentEventIndex = -1;
-        });
-        //
         $('#scheduleritem_add_button').on('click', function (event) {
-            $('#schedulerservice_item_name').val('');
             $$._CurrentEventName = "";
             $$._CurrentEventIndex = -1;
             $$.EditCurrentItem();
+            setTimeout(function(){
+                $('#scheduleritem_add_button').removeClass('ui-btn-active');
+            }, 200);
         });
 
     };
@@ -70,13 +21,16 @@
         var displayName = schedule.Name;
         if (displayName.indexOf('.') > 0)
             displayName = displayName.substring(displayName.indexOf('.') + 1);
-        var item = '<li data-icon="' + (schedule.IsEnabled ? 'check' : 'alert') + '" data-schedule-name="' + schedule.Name + '"  data-schedule-index="' + i + '">';
-        item += '<a href="#">';
-        item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
+        var item = '<li  data-icon="false" data-schedule-name="' + schedule.Name + '" data-schedule-index="' + i + '">';
+        item += '<a href="#" data-ui-ref="edit-btn">';
+        //item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
         item += '   <h3 class="ui-li-heading">' + displayName + '</h3>';
-        item += '   <p class="ui-li-desc" style="padding-right:160px">' + (schedule.Description != null ? schedule.Description : '') + ' <span style="opacity:0.5">(' + schedule.CronExpression + ')</span></p>';
+        item += '   <p class="ui-li-desc">' + (schedule.Description != null ? schedule.Description : '') + ' <span style="opacity:0.5">(' + schedule.CronExpression + ')</span></p>';
         item += '</a>';
-        item += '<a href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
+        item += '<div class="ui-grid-a" style="position:absolute;right:0;top:0;height:100%;">';
+        item += '<div class="ui-block-a"><a data-ui-field="btn_delete" title="Delete" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-list-btn-option"></a></div>';
+        item += '<div class="ui-block-b"><a data-ui-field="btn_toggle" title="Disable" class="ui-btn ui-icon-' + (schedule.IsEnabled ? 'check' : 'alert') + ' ui-btn-icon-notext ui-list-btn-option">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a></div>';
+        item += '</div>';
         item += '</li>';
         return item;
     }
@@ -113,11 +67,31 @@
                 }
             }
             $('#configure_schedulerservice_list').listview();
+            // set on click handler for list items
+            $('#configure_schedulerservice_list').find("li").each(function (index) {
+                var item = $(this);
+                item.find('[data-ui-field=btn_delete]').on('click', function () {
+                    var that = $(this);
+                    HG.WebApp.Utility.ConfirmPopup('Delete item', 'This action cannot be undone!', function(proceed){
+                        if (proceed) {
+                            var name = that.parent().parent().parent().attr('data-schedule-name');
+                            HG.Automation.Scheduling.Delete(name, function () {
+                                $$.LoadScheduling();
+                            });
+                            $$._CurrentEventName = "";
+                            $$._CurrentEventIndex = -1;
+                        }
+                    });
+                });
+                item.find('[data-ui-field=btn_toggle]').on('click', function () {
+                    $$.ToggleScheduleIsEnabled($(this).parent().parent().parent().attr('data-schedule-index'));
+                });
+            });
             $('#configure_schedulerservice_list').listview('refresh');
             //
-            $("#configure_schedulerservice_list li").bind("click", function() {
-                $$._CurrentEventName = $(this).attr('data-schedule-name');
-                $$._CurrentEventIndex = $(this).attr('data-schedule-index')
+            $('#configure_schedulerservice_list li a[data-ui-ref="edit-btn"]').bind('click', function() {
+                $$._CurrentEventName = $(this).parent().attr('data-schedule-name');
+                $$._CurrentEventIndex = $(this).parent().attr('data-schedule-index');
                 $$.EditCurrentItem();
             });
             //
@@ -128,34 +102,10 @@
     $$.EditCurrentItem = function() {
         HG.Ui.Popup.CronWizard.open($$._CurrentEventName);
         HG.Ui.Popup.CronWizard.onChange = function(item) {
-            HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.ProgramId, function () {
+            HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.Script, function () {
                 $$.LoadScheduling();
             });
         };
-    };
-
-    $$.RefreshEventDetails = function () {
-
-        var schedule = null;
-        var name = '', expr = '', data = '', desc = '', prid = '';
-        if ($$._CurrentEventIndex != -1) {
-            schedule = $$._ScheduleList[$$._CurrentEventIndex];
-            name = schedule.Name;
-            expr = schedule.CronExpression;
-            data = schedule.Data;
-            desc = schedule.Description;
-            prid = schedule.ProgramId;
-            $('#schedulerservice_item_name').addClass('ui-disabled');
-            $('#schedulerservice_item_name').val(name);
-        }
-        else {
-            $('#schedulerservice_item_name').removeClass('ui-disabled');
-        }
-        $('#schedulerservice_item_cronexp').val(expr);
-        $('#schedulerservice_item_data').val(data);
-        $('#schedulerservice_item_desc').val(desc);
-        $('#schedulerservice_item_programid').val(prid);
-
     };
 
     $$.ToggleScheduleIsEnabled = function (index) {

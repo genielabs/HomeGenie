@@ -58,6 +58,14 @@ namespace HomeGenie.Automation.Scheduler
             if (serviceChecker != null)
             {
                 serviceChecker.Dispose();
+                for (int i = 0; i < events.Count; i++)
+                {
+                    var eventItem = events[i];
+                    if (eventItem.ScriptEngine != null)
+                    {
+                        eventItem.ScriptEngine.StopScript();
+                    }
+                }
             }
         }
 
@@ -76,19 +84,27 @@ namespace HomeGenie.Automation.Scheduler
                     string currentOccurrence = date.ToString("yyyy-MM-dd HH:mm");
                     if (eventItem.LastOccurrence != currentOccurrence && IsScheduling(date, eventItem.CronExpression))
                     {
-                        /*
                         masterControlProgram.HomeGenie.MigService.RaiseEvent(
-                        this,
-                        Domains.HomeAutomation_HomeGenie,
-                        SourceModule.Scheduler,
-                        "Scheduler Event Triggered",
-                        Properties.SchedulerTriggeredEvent,
-                        eventItem.Name);
-                        */
+                            this,
+                            Domains.HomeAutomation_HomeGenie,
+                            SourceModule.Scheduler,
+                            "Scheduler Event Triggered",
+                            Properties.SchedulerTriggeredEvent,
+                            eventItem.Name);
                         // update last occurrence value
                         eventItem.LastOccurrence = currentOccurrence;
+
                         // execute associated task if any
-                        if (!String.IsNullOrEmpty(eventItem.ProgramId))
+                        if (!String.IsNullOrWhiteSpace(eventItem.Script))
+                        {
+                            if (eventItem.ScriptEngine == null)
+                            {
+                                eventItem.ScriptEngine = new SchedulerScriptingEngine();
+                                eventItem.ScriptEngine.SetHost(masterControlProgram.HomeGenie, eventItem);
+                            }
+                            eventItem.ScriptEngine.StartScript();
+                        }
+                        else if (!String.IsNullOrEmpty(eventItem.ProgramId))
                         {
                             var program = masterControlProgram.Programs.Find(p => p.Address.ToString() == eventItem.ProgramId || p.Name == eventItem.ProgramId);
                             if (program != null)
@@ -112,7 +128,7 @@ namespace HomeGenie.Automation.Scheduler
             return eventItem;
         }
 
-        public SchedulerItem AddOrUpdate(string name, string cronExpression, string data = null, string description = null, string pid = null)
+        public SchedulerItem AddOrUpdate(string name, string cronExpression, string data = null, string description = null, string script = null)
         {
             if (String.IsNullOrEmpty(name)) return null;
             //
@@ -130,8 +146,10 @@ namespace HomeGenie.Automation.Scheduler
                 eventItem.Description = description;
             if (data != null)
                 eventItem.Data = data;
-            if (pid != null)
-                eventItem.ProgramId = pid;
+            if (script != null)
+                eventItem.Script = script;
+            if (eventItem.ScriptEngine != null)
+                eventItem.ScriptEngine.StopScript();
             eventItem.LastOccurrence = "-";
             eventItem.NextOccurrence = GetNextEventOccurrence(DateTime.Now, eventItem.CronExpression);
             // by default newly added events are enabled
@@ -173,6 +191,8 @@ namespace HomeGenie.Automation.Scheduler
                 eventItem.IsEnabled = false;
                 eventItem.LastOccurrence = "-";
                 eventItem.NextOccurrence = "-";
+                if (eventItem.ScriptEngine != null)
+                    eventItem.ScriptEngine.StopScript();
                 return true;
             }
             return false;
@@ -185,6 +205,8 @@ namespace HomeGenie.Automation.Scheduler
             {
                 return false;
             }
+            if (eventItem.ScriptEngine != null)
+                eventItem.ScriptEngine.Dispose();
             events.Remove(eventItem);
             return true;
         }
@@ -304,7 +326,6 @@ namespace HomeGenie.Automation.Scheduler
         {
             get { return events; }
         }
-
 
         private bool EvaluateCronEntry(DateTime date, string cronExpression)
         {

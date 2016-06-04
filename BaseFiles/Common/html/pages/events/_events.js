@@ -39,12 +39,28 @@
         }
     };
 
+    $$._eventSource = null;
     $$.Setup = function () {
-        var es = new EventSource('/events');
+        var es = $$._eventSource;
+        if (es == null)
+            es = $$._eventSource = new EventSource('/events');
+        else {
+            try {
+                es.close();
+                es = $$._eventSource = null;
+            } catch(e) { }
+            setTimeout($$.Setup, 1000);
+            $$.ShowEventPopup({
+                            icon: 'images/genie.png',
+                            title: 'HomeGenie<br/>Event Stream<br/>Reconnecting...',
+                            text: '',
+                            timestamp: ''
+                        });
+        }
         es.onopen = function(e) {
             $$.ShowEventPopup({
                             icon: 'images/genie.png',
-                            title: 'HomeGenie<br/>Event Stream<br/>CONNECTED!',
+                            title: 'HomeGenie<br/>Event Stream<br/>Connected.',
                             text: '',
                             timestamp: ''
                         });
@@ -52,11 +68,12 @@
         es.onerror = function(e) {
             $$.ShowEventPopup({
                             icon: 'images/genie.png',
-                            title: 'HomeGenie<br/>EventStream<br/>DISCONNECTED!',
+                            title: 'HomeGenie<br/>EventStream<br/>Disconnected!',
                             text: '',
                             timestamp: ''
                         });
             es.close();
+            es = $$._eventSource = null;
             setTimeout($$.Setup, 1000);
         };
         es.onmessage = function (e) {
