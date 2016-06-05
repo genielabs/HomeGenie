@@ -9,33 +9,33 @@ layout: main
 
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/luxicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
-    <a title="Download HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r521_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r521</strong> </a>
+    <a title="Download HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r522_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r522</strong> </a>
     <br>
     Linux .deb Package
     <br>
     Ubuntu / Debian derivatives
     <br>
-    <a title="Download HomeGenie for Debian Linux" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.521/homegenie-beta_1.1.r521_all.deb"> <strong style="text-decoration: underline;font-size:10pt">Alternative Download Link</strong> </a>
+    <a title="Download HomeGenie for Debian Linux" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.522/homegenie-beta_1.1.r522_all.deb"> <strong style="text-decoration: underline;font-size:10pt">Alternative Download Link</strong> </a>
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:25px">
     <img src="images/logos/macicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
-    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r521.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r521</strong> </a>
+    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r522.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r522</strong> </a>
     <br>
     Platform agnostic archive
     <br>
     Other Mono .NET systems
     <br>
-    <a title="Download HomeGenie platform agnostic archive" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.521/homegenie_1_1_beta_r521.tgz"> <strong style="text-decoration: underline;font-size:10pt">Alternative Download Link</strong> </a>
+    <a title="Download HomeGenie platform agnostic archive" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.522/homegenie_1_1_beta_r522.tgz"> <strong style="text-decoration: underline;font-size:10pt">Alternative Download Link</strong> </a>
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/winicon.png" alt="" style="margin-right:10px" width="82" align="left">
-    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_1_beta_r521.exe/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r521</strong> </a>
+    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_1_beta_r522.exe/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r522</strong> </a>
     <br>
     Windows Setup Installer
     <br>
     XP / Vista / Win7 / Win8
     <br>
-    <a target="_top" title="Download HomeGenie for Windows" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.521/HomeGenie_1_1_beta_r521.exe"> <strong style="text-decoration: underline;font-size:10pt">Alternative Download Link</strong> </a>
+    <a target="_top" title="Download HomeGenie for Windows" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.522/HomeGenie_1_1_beta_r522.exe"> <strong style="text-decoration: underline;font-size:10pt">Alternative Download Link</strong> </a>
 </p>
 
 <br clear="all"/>
