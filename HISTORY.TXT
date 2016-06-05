@@ -1,5 +1,14 @@
 ﻿RELEASE HISTORY
 
+05/06/2016 v1.1-beta.522
+    - Added new API method '/api/HomeAutomation.HomeGenie/Automation/Scheduling.ListOccurrences'
+    - Added 'SetScript', 'SetData' and 'Get' methods to Scheduler helper
+    - Added new wallpapers
+    - Improved MQTT helper class
+    - Added parity/stop bits options to serial port helper (PR #278)
+    - Brand new cron event wizard for scheduled events with inline script editor
+    - Helper class accessor in Javascript automation programs is now "$$"
+
 15/05/2016 v1.1-beta.521
     - Added "Manual Update" option to maintenance page
     - Updates can now be installed from .tgz release files

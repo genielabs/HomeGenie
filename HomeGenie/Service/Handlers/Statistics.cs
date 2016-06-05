@@ -60,7 +60,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Global.TimeRange":
                 var totalRange = homegenie.Statistics.GetDateRange();
-                request.ResponseData = "{ \"StartTime\" : \"" + DateToJavascript(totalRange.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\", \"EndTime\" : \"" + DateToJavascript(totalRange.TimeEnd).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\" }";
+                request.ResponseData = "{ \"StartTime\" : \"" + Utility.DateToJavascript(totalRange.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\", \"EndTime\" : \"" + Utility.DateToJavascript(totalRange.TimeEnd).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\" }";
                 break;
 
             case "Database.Reset":
@@ -99,8 +99,8 @@ namespace HomeGenie.Service.Handlers
                 response += "[ ";
                 //
                 var hoursAverage = new List<StatisticsEntry>();
-                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
-                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                dateStart = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(3)));
                 hoursAverage = homegenie.Statistics.GetHourlyCounter(domain, address, migCommand.GetOption(0), 3600, dateStart, dateEnd);
                 //
                 for (int h = 0; h < 24; h++)
@@ -117,12 +117,12 @@ namespace HomeGenie.Service.Handlers
                         sum = (double)(hoursAverage.FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Sum(se => se.Value));
                         // date is normalized to the current date, time info is preserved from original data entry
                         var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                        response += "[" + DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                        response += "[" + Utility.DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                     }
                     else
                     {
                         var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                        response += "[" + DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
+                        response += "[" + Utility.DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
                     }
                 }
                 response = response.TrimEnd(',');
@@ -141,8 +141,8 @@ namespace HomeGenie.Service.Handlers
                 //
                 response = "[";
                 //
-                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
-                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                dateStart = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(3)));
                 var hoursAverages = new List<StatisticsEntry>[5];
                 hoursAverages[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Min", dateStart, dateEnd);
                 hoursAverages[1] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Max", dateStart, dateEnd);
@@ -216,12 +216,12 @@ namespace HomeGenie.Service.Handlers
                             }
                             // date is normalized to the current date, time info is preserved from original data entry
                             var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                            response += "[" + DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                            response += "[" + Utility.DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                         }
                         else
                         {
                             var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                            response += "[" + DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
+                            response += "[" + Utility.DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
                         }
                     }
                     response = response.TrimEnd(',');
@@ -233,7 +233,7 @@ namespace HomeGenie.Service.Handlers
                 foreach (var entry in hoursAverages[4])
                 {
                     var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + entry.TimeStart.ToLocalTime().ToString("HH:mm:ss.ffffff"));
-                    response += "[" + DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                    response += "[" + Utility.DateToJavascript(date).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                 }
                 response = response.TrimEnd(',');
                 response += " ]";
@@ -251,14 +251,14 @@ namespace HomeGenie.Service.Handlers
                 //
                 response = "[";
                 //
-                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
-                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                dateStart = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(3)));
                 var daysAverages = new List<StatisticsEntry>[1];
                 daysAverages[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "", dateStart, dateEnd);
                 response += "[ ";
                 foreach (var entry in daysAverages[0])
                 {
-                    response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                    response += "[" + Utility.DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                 }
                 response = response.TrimEnd(',');
                 response += " ]";
@@ -269,8 +269,8 @@ namespace HomeGenie.Service.Handlers
             case "Parameter.StatsMultiple":
                 response = "[";
                 //
-                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
-                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                dateStart = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = Utility.JavascriptToDate(long.Parse(migCommand.GetOption(3)));
                 var daysMultiples = new List<StatisticsEntry>[1];
                 daysMultiples[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "All", dateStart, dateEnd);
                 response += "[ ";
@@ -289,7 +289,7 @@ namespace HomeGenie.Service.Handlers
                         response += "[\"" + entry.CustomData + "\"] ],[ ";
                         moduleName = entry.CustomData;
                     }
-                    response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                    response += "[" + Utility.DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                 }
                 response = response.TrimEnd(',');
                 response += " ]";
@@ -322,7 +322,7 @@ namespace HomeGenie.Service.Handlers
             case "Parameter.StatDelete":
                 response = "[";
                 var dateText = migCommand.GetOption(0).Replace('.', ',');
-                dateStart = JavascriptToDateUtc(double.Parse(dateText));
+                dateStart = Utility.JavascriptToDateUtc(double.Parse(dateText));
                 var responseDelete = homegenie.Statistics.DeleteStat(dateStart, migCommand.GetOption(1));
                 response += "[Response," + responseDelete + "]";
                 response += "]";
@@ -331,26 +331,5 @@ namespace HomeGenie.Service.Handlers
             }
         }
 
-        private DateTime JavascriptToDate(long timestamp)
-        {
-            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            return (baseDate.AddMilliseconds(timestamp));
-        }
-
-        private DateTime JavascriptToDateUtc(double timestamp)
-        {
-            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);
-            return (baseDate.AddMilliseconds(timestamp).ToUniversalTime());
-        }
-
-        private double DateToJavascript(DateTime date)
-        {
-            return ((date.Ticks - 621355968000000000L) / 10000D);
-        }
-
-        private double DateToJavascriptLocal(DateTime date)
-        {
-            return ((date.ToLocalTime().Ticks - 621355968000000000L) / 10000D);
-        }
     }
 }

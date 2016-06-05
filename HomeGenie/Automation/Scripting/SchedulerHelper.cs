@@ -57,6 +57,14 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
+        /// Get the selected schedule instance.
+        /// </summary>
+        public SchedulerItem Get()
+        {
+            return homegenie.ProgramManager.SchedulerService.Get(scheduleName);
+        }
+
+        /// <summary>
         /// Add/Modify the schedule with the previously selected name.
         /// </summary>
         /// <param name="cronExpression">Cron expression.</param>
@@ -67,12 +75,33 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
+        /// Sets the json data representing this schedule definition.
+        /// </summary>
+        /// <param name="data">JSON data string.</param>
+        public SchedulerHelper SetData(string data)
+        {
+            homegenie.ProgramManager.SchedulerService.SetData(scheduleName, data);
+            return this;
+        }
+
+        /// <summary>
         /// Sets the program id to run when the selected schedule occurs.
         /// </summary>
         /// <param name="programId">Program ID.</param>
+        [Obsolete("use 'SetScript' instead")]
         public SchedulerHelper SetProgram(string programId)
         {
             homegenie.ProgramManager.SchedulerService.SetProgram(scheduleName, programId);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the script (hg javascript) to run when the selected schedule occurs.
+        /// </summary>
+        /// <param name="script">HomeGenie Javascript code</param>
+        public SchedulerHelper SetScript(string script)
+        {
+            homegenie.ProgramManager.SchedulerService.SetScript(scheduleName, script);
             return this;
         }
 

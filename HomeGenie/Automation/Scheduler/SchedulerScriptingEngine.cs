@@ -4,6 +4,7 @@ using HomeGenie.Service;
 using System.Threading;
 using System.Collections.Generic;
 using HomeGenie.Service.Constants;
+using Newtonsoft.Json;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -74,7 +75,7 @@ namespace HomeGenie.Automation.Scheduler
                 StopScript();
 
             isRunning = true;
-            homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", "Start");
+            homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Start");
 
             programThread = new Thread(() =>
             {
@@ -93,15 +94,8 @@ namespace HomeGenie.Automation.Scheduler
                     programThread = null;
                     isRunning = false;
                     if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
-                    {
-                        // runtime error occurred, script is being disabled
-                        // so user can notice and fix it
-                        //List<ProgramError> error = new List<ProgramError>() { scriptEngine.GetFormattedError(result.Exception, false) };
-                        //programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        //programBlock.IsEnabled = false;
-                        //homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.RuntimeError, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
-                    }
-                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", "End");
+                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Error ("+result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ')+")");
+                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":End");
                     //homegenie.RaiseEvent(programBlock, Properties.ProgramStatus, programBlock.IsEnabled ? "Idle" : "Stopped");
                 }
                 catch (ThreadAbortException)
@@ -109,7 +103,7 @@ namespace HomeGenie.Automation.Scheduler
                     programThread = null;
                     isRunning = false;
                     if (homegenie.ProgramManager != null)
-                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", "Interrupted");
+                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Interrupted");
                 }
             });
 

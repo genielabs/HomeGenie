@@ -345,6 +345,11 @@ $$.open = function(name) {
                     item.Data.itemType = 3;
             }
             $$.item = item;
+            // backward compatibility for hg < r522
+            if ((typeof $$.item.ProgramId != 'undefined' && $$.item.ProgramId != '') && (typeof $$.item.Script == 'undefined' || $$.item.Script == '')) {
+                $$.item.ProgramId = '';
+                $$.item.Script = "$$.program.run('"+$$.item.ProgramId+"');";
+            }
             $$._init();
             $$.element.popup('open');
             $.mobile.loading('hide');
@@ -690,20 +695,27 @@ $$._buildCron = function() {
 
     // Update the human readable output
     $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(cronOccur), function(res){
+        var locales = HG.WebApp.Locales;
         var desc = '';
+        var text_on = locales.GetLocaleString('cronwizard_description_on', 'on');
+        var text_from = locales.GetLocaleString('cronwizard_description_from', 'from');
+        var text_to = locales.GetLocaleString('cronwizard_description_to', 'to');
         if ($$.cronTypeSelect.val() == '2') {
             if ($$.dateFrom.val() == $$.dateTo.val()) {
-                desc+= 'on '+moment($$.dateFrom.val()).format('MMMM DD')+ ', ';
+                desc+= text_on+' '+moment($$.dateFrom.val()).format('MMMM DD')+ ', ';
             } else {
-                desc+= 'from '+moment($$.dateFrom.val()).format('MMMM DD');
-                desc+= ' to '+moment($$.dateTo.val()).format('MMMM DD')+ ', ';
+                desc+= text_from+' '+moment($$.dateFrom.val()).format('MMMM DD');
+                desc+= ' '+text_to+' '+moment($$.dateTo.val()).format('MMMM DD')+ ', ';
             }
         }
+        var text_starting_at = locales.GetLocaleString('cronwizard_description_starting', 'starting at');
+        var text_ending_at = locales.GetLocaleString('cronwizard_description_ending', 'and ending at');
+        var text_at = locales.GetLocaleString('cronwizard_description_at', 'at');
         if ($$.timeStart.val() == $$.timeEnd.val()) {
-            desc+= 'at '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
+            desc+= text_at+' '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
         } else {
-            desc+= 'starting at '+moment($$.timeStart.val(), 'HH:mm').format('LT');
-            desc+= ' and ending at '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
+            desc+= text_starting_at+' '+moment($$.timeStart.val(), 'HH:mm').format('LT');
+            desc+= ' '+text_ending_at+' '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
         }
         if ($$.timeStart.val() == $$.timeEnd.val()) {
             if (cronOccur != emptyOccur)

@@ -735,6 +735,48 @@
         "каждый день недели",        
     "cronwizard_dayowselect_eachselected":
         "каждый выбранный день недели",
+    "cronwizard_event_name":
+        "Event name",
+    "cronwizard_typeselect_days":
+        "days",
+    "cronwizard_typeselect_period":
+        "date period",
+    "cronwizard_typeselect_custom":
+        "custom cron expression",
+    "cronwizard_event_description":
+        "Description",
+    "cronwizard_date_from":
+        "from",
+    "cronwizard_date_to":
+        "to",
+    "cronwizard_time_exact":
+        "at exact time",
+    "cronwizard_time_range":
+        "during a time range",
+    "cronwizard_time_start":
+        "start",
+    "cronwizard_time_end":
+        "end",
+    "cronwizard_time_at":
+        "at",
+    "cronwizard_event_occurrence":
+        "Occurrence",
+    "cronwizard_event_cronexpr":
+        "Cron expression",
+    "cronwizard_event_runscript":
+        "Run script on event occurrence",
+    "cronwizard_description_from":
+        "from",
+    "cronwizard_description_to":
+        "to",
+    "cronwizard_description_on":
+        "on",
+    "cronwizard_description_starting":
+        "starting at",
+    "cronwizard_description_ending":
+        "ending at",
+    "cronwizard_description_at":
+        "at",
     "no_device_found_for_manufacturerId":
         "В базе данных нет информации об устройстве с manufacturer ID",
 "##":

@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r521</Version>
+  <Version>1.1 beta r522</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added "Manual Update" option to maintenance page
-  - Updates can now be installed from .tgz release files</ReleaseNote>
-  <ReleaseDate>2016-05-15T15:22:18.0000Z</ReleaseDate>
+  <ReleaseNote></ReleaseNote>
+  <ReleaseDate>2016-06-05T09:08:07.0000Z</ReleaseDate>
 </ReleaseInfo>

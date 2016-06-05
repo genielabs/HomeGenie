@@ -107,7 +107,10 @@
                         .text(currentItem);
                     _this.cronSelect.append(entry);
                 }
+                var prevItem = _this.cronSelect.val();
                 _this.cronSelect.val(currentItem).selectmenu('refresh');
+                if (currentItem != prevItem)
+                    _this.cronSelect.trigger('change');
                 if (typeof currentItem != 'undefined' || currentItem == '')
                     _this.element.find('[data-ui-field=cronwiz-edit]').addClass('ui-disabled');
 

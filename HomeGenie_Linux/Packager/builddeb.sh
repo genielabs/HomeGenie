@@ -41,7 +41,7 @@ then
 	echo "- Fixing permissions..."
 
 	chmod -R 755 "$hg_target_folder/DEBIAN"
-	chmod +x "$hg_target_folder/usr/local/bin/homegenie/startup.sh"
+#	chmod +x "$hg_target_folder/usr/local/bin/homegenie/startup.sh"
 
 	echo "\n- Building deb file...\n"
 

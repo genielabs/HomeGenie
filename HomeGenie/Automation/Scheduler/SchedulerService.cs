@@ -159,13 +159,35 @@ namespace HomeGenie.Automation.Scheduler
             }
             return eventItem;
         }
+        public bool SetData(string name, string jsonData)
+        {
+            var eventItem = Get(name);
+            if (eventItem != null)
+            {
+                eventItem.Data = jsonData;
+                return true;
+            }
+            return false;
+        }
 
+        [Obsolete("use 'SetScript' instead")]
         public bool SetProgram(string name, string pid)
         {
             var eventItem = Get(name);
             if (eventItem != null)
             {
                 eventItem.ProgramId = pid;
+                return true;
+            }
+            return false;
+        }
+
+        public bool SetScript(string name, string script)
+        {
+            var eventItem = Get(name);
+            if (eventItem != null)
+            {
+                eventItem.Script = script;
                 return true;
             }
             return false;

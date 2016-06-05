@@ -518,6 +518,28 @@ namespace HomeGenie.Service
             return asyncTask;
         }
 
+        public static DateTime JavascriptToDate(long timestamp)
+        {
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            return (baseDate.AddMilliseconds(timestamp));
+        }
+
+        public static DateTime JavascriptToDateUtc(double timestamp)
+        {
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);
+            return (baseDate.AddMilliseconds(timestamp).ToUniversalTime());
+        }
+
+        public static double DateToJavascript(DateTime date)
+        {
+            return ((date.Ticks - 621355968000000000L) / 10000D);
+        }
+
+        public static double DateToJavascriptLocal(DateTime date)
+        {
+            return ((date.ToLocalTime().Ticks - 621355968000000000L) / 10000D);
+        }
+
         #endregion
 
     }

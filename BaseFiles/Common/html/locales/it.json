@@ -731,6 +731,48 @@
         "ogni giorno della settimana",
     "cronwizard_dayowselect_eachselected":
         "nei giorni della settimana selezionati",
+    "cronwizard_event_name":
+        "Nome evento",
+    "cronwizard_typeselect_days":
+        "giorni",
+    "cronwizard_typeselect_period":
+        "periodo",
+    "cronwizard_typeselect_custom":
+        "espressione cron presonalizzata",
+    "cronwizard_event_description":
+        "Descrizione",
+    "cronwizard_date_from":
+        "dal",
+    "cronwizard_date_to":
+        "al",
+    "cronwizard_time_exact":
+        "ora esatta",
+    "cronwizard_time_range":
+        "fascia oraria",
+    "cronwizard_time_start":
+        "inizio",
+    "cronwizard_time_end":
+        "fine",
+    "cronwizard_time_at":
+        "alle",
+    "cronwizard_event_occurrence":
+        "Occorrenza",
+    "cronwizard_event_cronexpr":
+        "Espressione cron",
+    "cronwizard_event_runscript":
+        "Esegui script ad ogni occorrenza dell'evento",
+    "cronwizard_description_from":
+        "dal",
+    "cronwizard_description_to":
+        "al",
+    "cronwizard_description_on":
+        "il",
+    "cronwizard_description_starting":
+        "a partire dalle",
+    "cronwizard_description_ending":
+        "fino alle",
+    "cronwizard_description_at":
+        "alle",
     "no_device_found_for_manufacturerId":
         "Nessuna informazione trovata su questo dispositivo",
 "##":

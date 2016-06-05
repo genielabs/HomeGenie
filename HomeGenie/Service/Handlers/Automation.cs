@@ -127,29 +127,36 @@ namespace HomeGenie.Service.Handlers
                 case "Scheduling.Get":
                     request.ResponseData = homegenie.ProgramManager.SchedulerService.Get(migCommand.GetOption(0));
                     break;
+                case "Scheduling.ListOccurrences":
+                    int hours = 24;
+                    int.TryParse(migCommand.GetOption(0), out hours);
+                    DateTime dateStart = DateTime.Today.ToUniversalTime();
+                    string startFrom = migCommand.GetOption(1);
+                    if (!String.IsNullOrWhiteSpace(startFrom))
+                        dateStart = Utility.JavascriptToDate(long.Parse(startFrom)); 
+                    List<dynamic> nextList = new List<dynamic>();
+                    foreach (var ce in homegenie.ProgramManager.SchedulerService.Items)
+                    {
+                        var evt = new { Name = ce.Name, Description = ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
+                        var d = dateStart;
+                        for (int m = 0; m < hours * 60; m++)
+                        {
+                            if (homegenie.ProgramManager.SchedulerService.IsScheduling(d, ce.CronExpression))
+                            {
+                                evt.Occurrences.Add(Utility.DateToJavascript(d));
+                            }
+                            d = d.AddMinutes(1);
+                        }
+                        if (evt.Occurrences.Count > 0)
+                            nextList.Add(evt);
+                    }
+                    request.ResponseData = nextList;
+                    break;
                 case "Scheduling.List":
                     homegenie.ProgramManager.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
                     {
                         return s1.Name.CompareTo(s2.Name);
                     });
-                    /*
-                    var d = DateTime.Today.ToUniversalTime();
-                    foreach (var ce in homegenie.ProgramManager.SchedulerService.Items) 
-                    {
-                        int occurrences = 0;
-                        for (int m = 0; m < 1440; m++)
-                        {
-                            if (homegenie.ProgramManager.SchedulerService.IsScheduling(d, ce.CronExpression))
-                            {
-                                Console.WriteLine("{0} {1}", d, JsonConvert.SerializeObject(ce));
-                                occurrences++;
-                                if (occurrences > 10)
-                                    break;
-                            }
-                            d = d.AddMinutes(1);
-                        }
-                    }
-                    */
                     request.ResponseData = homegenie.ProgramManager.SchedulerService.Items;
                     break;
                 case "Scheduling.Describe":
