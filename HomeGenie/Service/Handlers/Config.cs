@@ -317,7 +317,7 @@ namespace HomeGenie.Service.Handlers
                     bool success = homegenie.UpdateChecker.DownloadUpdateFiles();
                     if (success)
                     {
-                        if (homegenie.UpdateChecker.IsRestartRequired)
+                        if (homegenie.UpdateChecker.IsRestartRequired) // <-- TODO: deprecate this
                         {
                             resultMessage = "RESTART";
                         }
@@ -332,13 +332,14 @@ namespace HomeGenie.Service.Handlers
                 {
                     string resultMessage = "OK";
                     homegenie.SaveData();
-                    if (homegenie.UpdateChecker.InstallFiles() == UpdateChecker.InstallStatus.Error)
+                    var installStatus = homegenie.UpdateChecker.InstallFiles();
+                    if (installStatus == UpdateChecker.InstallStatus.Error)
                     {
                         resultMessage = "ERROR";
                     }
                     else
                     {
-                        if (homegenie.UpdateChecker.IsRestartRequired)
+                        if (installStatus == UpdateChecker.InstallStatus.RestartRequired)
                         {
                             resultMessage = "RESTART";
                             Utility.RunAsyncTask(() =>

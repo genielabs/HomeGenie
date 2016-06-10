@@ -243,6 +243,7 @@ namespace HomeGenie.Service.Handlers
                     //
                     var writerSettings = new System.Xml.XmlWriterSettings();
                     writerSettings.Indent = true;
+                    writerSettings.Encoding = Encoding.UTF8;
                     var programSerializer = new System.Xml.Serialization.XmlSerializer(typeof(ProgramBlock));
                     var builder = new StringBuilder();
                     var writer = System.Xml.XmlWriter.Create(builder, writerSettings);

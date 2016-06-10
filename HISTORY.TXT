@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+10/06/2016 v1.1-beta.523
+    - Integrated GitHub releases into UpdateChecker
+    - Should fix accented letters bug in module/group names
+
 05/06/2016 v1.1-beta.522
     - Added new API method '/api/HomeAutomation.HomeGenie/Automation/Scheduling.ListOccurrences'
     - Added 'SetScript', 'SetData' and 'Get' methods to Scheduler helper

@@ -31,6 +31,7 @@ using MIG;
 using MIG.Config;
 
 using HomeGenie.Service;
+using System.Text;
 
 namespace HomeGenie.Data
 {
@@ -79,6 +80,7 @@ namespace HomeGenie.Data
                 }
                 System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
                 ws.Indent = true;
+                ws.Encoding = Encoding.UTF8;
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(syscopy.GetType());
                 using (var wri = System.Xml.XmlWriter.Create(fname, ws))
                 {

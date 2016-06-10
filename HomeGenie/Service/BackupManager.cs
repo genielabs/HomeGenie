@@ -30,6 +30,7 @@ using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 using MIG.Config;
 using MIG;
+using System.Text;
 
 namespace HomeGenie.Service
 {
@@ -401,6 +402,7 @@ namespace HomeGenie.Service
                     }
                     System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
                     ws.Indent = true;
+                    ws.Encoding = Encoding.UTF8;
                     System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(newConfig.GetType());
                     System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(configFile, ws);
                     x.Serialize(wri, newConfig);

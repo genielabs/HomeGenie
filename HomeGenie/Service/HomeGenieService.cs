@@ -736,6 +736,7 @@ namespace HomeGenie.Service
                 }
                 var settings = new System.Xml.XmlWriterSettings();
                 settings.Indent = true;
+                settings.Encoding = Encoding.UTF8;
                 var serializer = new System.Xml.Serialization.XmlSerializer(groups.GetType());
                 var writer = System.Xml.XmlWriter.Create(filePath, settings);
                 serializer.Serialize(writer, groups);
@@ -781,6 +782,7 @@ namespace HomeGenie.Service
                     }
                     var settings = new System.Xml.XmlWriterSettings();
                     settings.Indent = true;
+                    settings.Encoding = Encoding.UTF8;
                     var serializer = new System.Xml.Serialization.XmlSerializer(clonedModules.GetType());
                     var writer = System.Xml.XmlWriter.Create(filePath, settings);
                     serializer.Serialize(writer, clonedModules);
@@ -807,6 +809,7 @@ namespace HomeGenie.Service
                 }
                 var settings = new System.Xml.XmlWriterSettings();
                 settings.Indent = true;
+                settings.Encoding = Encoding.UTF8;
                 var serializer = new System.Xml.Serialization.XmlSerializer(masterControlProgram.Programs.GetType());
                 var writer = System.Xml.XmlWriter.Create(filePath, settings);
                 serializer.Serialize(writer, masterControlProgram.Programs);
@@ -832,6 +835,7 @@ namespace HomeGenie.Service
                 }
                 var settings = new System.Xml.XmlWriterSettings();
                 settings.Indent = true;
+                settings.Encoding = Encoding.UTF8;
                 var serializer = new System.Xml.Serialization.XmlSerializer(masterControlProgram.SchedulerService.Items.GetType());
                 var writer = System.Xml.XmlWriter.Create(filePath, settings);
                 serializer.Serialize(writer, masterControlProgram.SchedulerService.Items);

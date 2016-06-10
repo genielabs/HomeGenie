@@ -579,14 +579,13 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                 $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_no_updates'));
                 $('#configure_system_updatemanager_detailsscroll').hide();
                 $('#configure_system_updatemanager_installbutton').hide();
-            }
-            else {
+            } else {
                 $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_updates_available'));
                 var s = '<pre>';
                 for (var r = 0; r < releasedata.length; r++) {
                     var relinfo = releasedata[r];
-                    s += ' * <strong>' + relinfo.Name + ' ' + relinfo.Version + '</strong>\n'
-                    s += '   <em>' + relinfo.ReleaseNote + '</em>\n'
+                    s += '<strong>' + relinfo.Name + ' ' + relinfo.Version + ' ' + relinfo.ReleaseDate + '</strong>\n'
+                    s += '<em>' + relinfo.ReleaseNote + '</em>\n'
                 }
                 s += '</pre>';
                 $('#configure_system_updatemanager_details').html(s);

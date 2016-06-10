@@ -4,15 +4,16 @@
 # Example: ./startup_debug.sh /usr/local/bin/homegenie
 #
 cd "`dirname \"$0\"`"
+ENCFIX=""
+#ENCFIX="LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US "
 # !!!NOTE!!!
 # "LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US" was added as a work-around 
-# for buggy mono on ARM (mono < 4.x)
-# remove it as soon as official mono 4.x is available through debian-arm/raspbian repository
+# for some buggy mono installations, uncomment if you're experiencing problems with decimal number parsing
 if [ -f /usr/bin/mono ]
 then
-    MONO="LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US /usr/bin/mono"
+    MONO="$ENCFIX/usr/bin/mono"
 else
-    MONO="LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US /usr/local/bin/mono"
+    MONO="$ENCFIX/usr/local/bin/mono"
 fi
 
 EXITCODE="1"

@@ -33,6 +33,8 @@ using System.Text;
 using System.Timers;
 using System.Xml.Serialization;
 using System.Security.Cryptography;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace HomeGenie.Service
 {
@@ -107,7 +109,12 @@ namespace HomeGenie.Service
 
         public InstallProgressMessageEvent InstallProgressMessage;
 
-        private string endpointUrl = "http://www.homegenie.it/release_updates_v1_1.php";
+        private const string releaseFile = "release_info.xml";
+        private const string githubRepository = "HomeGenie";
+        private string githubReleases = String.Format("https://api.github.com/repos/genielabs/{0}/releases", githubRepository);
+        // TODO: deprecate this
+        private const string endpointUrl = "http://www.homegenie.it/release_updates_v1_1.php";
+
         private ReleaseInfo currentRelease;
         private List<ReleaseInfo> remoteUpdates;
         private Timer checkInterval;
@@ -132,8 +139,7 @@ namespace HomeGenie.Service
         {
             if (UpdateProgress != null)
                 UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.STARTED));
-            GetCurrentRelease();
-            GetRemoteUpdates();
+            GetGitHubUpdates();
             if (currentRelease != null && remoteUpdates != null && UpdateProgress != null)
             {
                 UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.COMPLETED));
@@ -171,7 +177,7 @@ namespace HomeGenie.Service
 
         public ReleaseInfo GetCurrentRelease()
         {
-            return currentRelease = GetReleaseFile("release_info.xml");
+            return currentRelease = GetReleaseFile(releaseFile);
         }
 
         public List<ReleaseInfo> RemoteUpdates
@@ -179,6 +185,72 @@ namespace HomeGenie.Service
             get { return remoteUpdates; }
         }
 
+        public List<ReleaseInfo> GetGitHubUpdates()
+        {
+            GetCurrentRelease();
+            //githubReleases
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                try
+                {
+                    bool collectingComplete = false;
+                    string releaseJson = client.DownloadString(githubReleases);
+                    var deserializerSettings = new JsonSerializerSettings()
+                    {
+                        DateParseHandling = Newtonsoft.Json.DateParseHandling.None
+                    };
+                    dynamic releases = JsonConvert.DeserializeObject(releaseJson, deserializerSettings) as JArray;
+                    remoteUpdates.Clear();
+                    foreach(var rel in releases)
+                    {
+                        foreach(dynamic relFile in (rel.assets as JArray))
+                        {
+                            if (relFile.browser_download_url.ToString().EndsWith(".tgz"))
+                            {
+                                var releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
+                                if (currentRelease.ReleaseDate < releaseDate && remoteUpdates.Count == 0)
+                                {
+                                    var r = new ReleaseInfo();
+                                    r.Name = githubRepository;
+                                    r.Version = rel.tag_name.ToString();
+                                    r.Description = rel.name.ToString();
+                                    r.ReleaseNote = rel.body.ToString();
+                                    r.RequireRestart = false; // this flag is now useless since "restart" flag is dynamically computed by update process
+                                    r.UpdateBreak = true; // TODO: store this flag somewhere in the github entry
+                                    r.DownloadUrl = relFile.browser_download_url.ToString();
+                                    r.ReleaseDate = releaseDate;
+                                    remoteUpdates.Add(r);
+                                }
+                                else if (currentRelease.ReleaseDate < releaseDate)
+                                {
+                                    string relInfo = String.Format("\r\n\r\n[{0} {1:yyyy-MM-dd}]\r\n{2}", rel.tag_name.ToString(), releaseDate, rel.body.ToString());
+                                    remoteUpdates[0].ReleaseNote += relInfo;
+                                }
+                                else
+                                {
+                                    collectingComplete = true;
+                                }
+                            }
+                        }
+                        // updates from github contains the whole HG bundle so we always consider the most recent one
+                        if (collectingComplete)
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    client.Dispose();
+                }
+            }
+            return remoteUpdates;
+        }
+
+        // TODO: deprecate this
         public List<ReleaseInfo> GetRemoteUpdates()
         {
             using (var client = new WebClient())
@@ -312,6 +384,18 @@ namespace HomeGenie.Service
                     ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
                 else
                     ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.COMPLETED));
+            }
+
+            // update release_info.xml file with last releaseInfo ReleaseDate field in order to reflect github release date
+            if (files.Contains(Path.Combine("homegenie", releaseFile)))
+            {
+                var ri = GetReleaseFile(Path.Combine(destinationFolder, "homegenie", releaseFile));
+                ri.ReleaseDate = releaseInfo.ReleaseDate.ToUniversalTime();
+                XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo)); 
+                using (TextWriter writer = new StreamWriter(Path.Combine(destinationFolder, "homegenie", releaseFile)))
+                {
+                    serializer.Serialize(writer, ri); 
+                } 
             }
 
             return files;
@@ -496,7 +580,7 @@ namespace HomeGenie.Service
             return status;
         }
 
-
+        // TODO: deprecate this
         public bool IsRestartRequired
         {
             get
@@ -516,7 +600,6 @@ namespace HomeGenie.Service
                 return restartRequired;
             }
         }
-
 
         private void checkInterval_Elapsed(object sender, ElapsedEventArgs e)
         {
