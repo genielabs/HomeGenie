@@ -544,10 +544,10 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this
                         currentLine = err.Line;
                         currentBlock = err.CodeBlock;
                     }
-                    message += '<b>(' + err.Line + ',' + err.Column + '):</b> ' + err.ErrorMessage + '</br>';
+                    message += '<b>(' + err.Line + ',' + err.Column + '):</b> ' + err.ErrorMessage + '<br/>';
                     popupMessage += '<b><a href="javascript:HG.WebApp.ProgramEdit.JumpToLine(\'' + err.CodeBlock + '\', { line: ' + (err.Line - 1) + ', ch: ' + (err.Column - 1) + ' })">Line ' + err.Line + ', Column ' + err.Column + '</a></b> (<font style="color:' + (err.CodeBlock == 'TC' ? 'yellow">Trigger' : 'lime">Code') + '</font>):<br/>';
                 }
-                popupMessage += '&nbsp;&nbsp;&nbsp;&nbsp;<em>' + err.ErrorMessage.replace(/\n/g, '</br>&nbsp;&nbsp;&nbsp;&nbsp;') + '</em><br /><br />';
+                popupMessage += '&nbsp;&nbsp;&nbsp;&nbsp;<em>' + err.ErrorMessage.replace(/\n/g, '<br/>&nbsp;&nbsp;&nbsp;&nbsp;') + '</em><br /><br />';
             }
             if (marker != null) {
                 $(marker).qtip({
@@ -630,7 +630,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this
                         currentLine = lineParts[1];
                         currentBlock = err.CodeBlock;
                     }
-                    message += err + '</br>';
+                    message += err + '<br/>';
                 }
             }
         }

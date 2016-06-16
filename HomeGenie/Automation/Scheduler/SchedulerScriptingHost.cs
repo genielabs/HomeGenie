@@ -28,6 +28,7 @@ using System.Text;
 using HomeGenie.Service;
 
 using HomeGenie.Automation.Scripting;
+using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -43,6 +44,7 @@ namespace HomeGenie.Automation.Scheduler
     {
 
         private HomeGenieService homegenie = null;
+        private SchedulerItem schedulerItem = null;
         //
         private NetHelper netHelper;
         private SerialPortHelper serialPortHelper;
@@ -51,10 +53,12 @@ namespace HomeGenie.Automation.Scheduler
         private MqttClientHelper mqttClientHelper;
         private KnxClientHelper knxClientHelper;
         private SchedulerHelper schedulerHelper;
+        private ModulesManager boundModulesManager;
 
-        public void SetHost(HomeGenieService hg)
+        public void SetHost(HomeGenieService hg, SchedulerItem item)
         {
             homegenie = hg;
+            schedulerItem = item;
             netHelper = new NetHelper(homegenie);
             serialPortHelper = new SerialPortHelper();
             tcpClientHelper = new TcpClientHelper();
@@ -62,6 +66,16 @@ namespace HomeGenie.Automation.Scheduler
             mqttClientHelper = new MqttClientHelper();
             knxClientHelper = new KnxClientHelper();
             schedulerHelper = new SchedulerHelper(homegenie);
+            boundModulesManager = new ModulesManager(homegenie);
+            boundModulesManager.SelectModulesCallback = new Func<ModulesManager,List<Module>>((sender)=>{
+                List<Module> modules = new List<Module>();
+                foreach(var m in schedulerItem.BoundModules) {
+                    var mod = homegenie.Modules.Find(e=>e.Address == m.Address && e.Domain == m.Domain);
+                    if (mod != null)
+                        modules.Add(mod);
+                }
+                return modules;
+            });
         }
 
         public ModulesManager Modules
@@ -69,6 +83,14 @@ namespace HomeGenie.Automation.Scheduler
             get
             {
                 return new ModulesManager(homegenie);
+            }
+        }
+
+        public ModulesManager BoundModules
+        {
+            get
+            {
+                return boundModulesManager;
             }
         }
 
@@ -144,6 +166,22 @@ namespace HomeGenie.Automation.Scheduler
         public void Delay(double seconds)
         {
             Pause(seconds);
+        }
+
+        public void Say(string sentence, string locale = null, bool goAsync = false)
+        {
+            if (String.IsNullOrWhiteSpace(locale))
+            {
+                locale = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+            }
+            try
+            {
+                Utility.Say(sentence, locale, goAsync);
+            }
+            catch (Exception e) 
+            {
+                HomeGenieService.LogError(e);
+            }
         }
 
         public void Reset()

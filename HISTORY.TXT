@@ -1,7 +1,8 @@
 ﻿RELEASE HISTORY
 
-10/06/2016 v1.1-beta.523
-    - Integrated GitHub releases into UpdateChecker
+12/06/2016 v1.1-beta.523
+    - UpdateChecker now is using "GitHub releases" as only source for update checking and upgrade files
+    - Enabled UI widgets for program options
     - Should fix accented letters bug in module/group names
 
 05/06/2016 v1.1-beta.522

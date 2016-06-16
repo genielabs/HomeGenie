@@ -47,15 +47,20 @@ $$.bind = function() {
                 $$.item.Name = $$.cronName.val();
             $$.item.CronExpression = cronExpression;
             $$.item.Description = $$.element.find('[data-ui-field=cron-desc]').val();
+            $$.item.BoundDevices = $$.boundDevices;
+            $$.boundModules = [];
+            $$.modulesList.find('i[class*=fa-check-square]').each(function(k,v){
+                var el = $(v);
+                var domainAddress = el.attr('value');
+                $$.boundModules.push(HG.WebApp.Utility.ParseModuleDomainAddress(domainAddress));
+            });
+            $$.item.BoundModules = $$.boundModules;
             $$.item.Script = $$.programEditor.getValue();
             $$.item.Data = JSON.stringify({
                 itemType: $$.cronTypeSelect.val(),
-                type: $$.eventType.val(),
                 from: $$.dateFrom.val(),
                 to: $$.dateTo.val(),
-                at: $$.timeAt.val(),
-                start: $$.timeStart.val(),
-                end: $$.timeEnd.val(),
+                time: $$.timeItems,
                 occur_min_type: $$.minuteTypeSelect.val(),
                 occur_min_step: $$.everyMinuteSlider.val(),
                 occur_min_sel: eachMinute,
@@ -114,6 +119,17 @@ $$.bind = function() {
                 break;
         }
         $$.element.find('[data-role="content"]').scrollTop(0);
+        $$._buildCron();
+    });
+    $$.addTimeButton = element.find('[data-ui-field="addtime-button"]').on('click', function(){
+        var mode = $$.eventType.val();
+        // mode == '0' -> exact time, mode == '1' -> time range
+        if (mode == '0') {
+            $$.timeStart.val($$.timeAt.val()).html($$.timeAt.val());
+            $$.timeEnd.val($$.timeAt.val()).html($$.timeAt.val());
+        }
+        $$.timeItems.push({ start: $$.timeStart.val(), end: $$.timeEnd.val() });
+        $$.refreshTimeItems();
         $$._buildCron();
     });
     // minute type select
@@ -206,6 +222,19 @@ $$.bind = function() {
         $$.buildCron();
     });
 
+    $$.panelScheduling = $$.element.find('div[data-ui-field="panel-scheduling"]');
+    $$.panelModules = $$.element.find('div[data-ui-field="panel-modules"]');
+    $$.panelScript = $$.element.find('div[data-ui-field="panel-script"]');
+    $$.buttonScheduling = $$.element.find('a[data-ui-field="panel-scheduling-btn"]').on('click', function(){
+        $$._setPanel('0');
+    });
+    $$.buttonModules = $$.element.find('a[data-ui-field="panel-modules-btn"]').on('click', function(){
+        $$._setPanel('1');
+    });
+    $$.buttonScript = $$.element.find('a[data-ui-field="panel-script-btn"]').on('click', function(){
+        $$._setPanel('2');
+    });
+
     $$.timeRangeContainer = $$.element.find('div[data-ui-field="time-range"]');
     $$.timeRangeContainer.hide();
     $$.timeExactContainer = $$.element.find('div[data-ui-field="time-exact"]');
@@ -218,13 +247,9 @@ $$.bind = function() {
     $$.occurrenceHour.hide();
     $$.eventType.on('change', function() {
         if ($(this).val() == '0') {
-            $$.occurrenceMinute.hide(100);
-            $$.occurrenceHour.hide(100);
             $$.timeRangeContainer.hide(100);
             $$.timeExactContainer.show(100);
         } else {
-            $$.occurrenceMinute.show(100);
-            $$.occurrenceHour.show(100);
             $$.timeRangeContainer.show(100);
             $$.timeExactContainer.hide(100);
         }
@@ -292,10 +317,11 @@ $$.bind = function() {
         $$.buildCron();
     });
 
-    $$.gfxWidth = 300;
+    $$.gfxWidthMonths = 300;
+    $$.gfxWidthTime = 600;
     $$.gfxHeight = 40;
-    $$.gfxYear = Raphael($$.element.find('[data-ui-field="gfx-months"]')[0], $$.gfxWidth, $$.gfxHeight);
-    $$.gfxDay = Raphael($$.element.find('[data-ui-field="gfx-time"]')[0], $$.gfxWidth, $$.gfxHeight);
+    $$.gfxYear = Raphael($$.element.find('[data-ui-field="gfx-months"]')[0], $$.gfxWidthMonths, $$.gfxHeight);
+    $$.gfxDay = Raphael($$.element.find('[data-ui-field="gfx-time"]')[0], $$.gfxWidthTime, $$.gfxHeight);
 
     $$.cronEditor = CodeMirror.fromTextArea($$.element.find('textarea[data-ui-field="cron-expr"]').get()[0], {
         lineNumbers: false,
@@ -315,7 +341,40 @@ $$.bind = function() {
         mode: { name: "javascript", globalVars: true },
         theme: 'ambiance'
     });
-    $$.programEditor.setSize('100%', 232);
+    $$.programEditor.setSize('100%', 218);
+    $$.templateList = $$.element.find('[data-ui-field="templaes-list"]').on('change',function(){
+        var idx = $(this).val();
+            if (typeof idx != 'undefined' && idx != '') {
+            $.get('pages/configure/scheduler/templates/'+$$.templates[idx].Script, function(code){
+                $$.programEditor.replaceSelection(code);
+            }, 'text');
+            $$.templateList.val('').selectmenu('refresh');
+        }
+    });
+    $$.templates = [];
+    $.getJSON('pages/configure/scheduler/templates/index.json',function(templates){
+        $$.templates = templates;
+        $$.templateList.find('option:not(:first)').remove();
+        $.each(templates,function(k,v){
+            $$.templateList.append('<option value="'+k+'">'+v.Name+'</option>');
+        });
+        $$.templateList.selectmenu('refresh');
+    });
+
+    $$.devicesList = $$.element.find('[data-ui-field="devicetypes-select"]');
+    $$.devicesList.find('[class*=hg-ui-list-item]').on('click', function() {
+        var el = $(this).find('i');
+        var devType = el.attr('value');
+        if ($$._uiCheckToggle(el)) {
+            $$.boundDevices.push(devType);
+        } else {
+            var idx = $$.boundDevices.indexOf(devType);
+            if (idx >= 0)
+                $$.boundDevices.splice(idx,1);
+        }
+        $$.refreshModules();
+    });
+    $$.modulesList = $$.element.find('[data-ui-field="modules-select"]');
 }
 
 $$.open = function(name) {
@@ -338,7 +397,7 @@ $$.open = function(name) {
                 item.Data = null;
             } else if (item.Data != null)
                 item.Data = $.parseJSON(item.Data);
-            if (typeof item.Data == 'undefined' || item.Data == null || typeof item.Data.type == 'undefined') {
+            if (typeof item.Data == 'undefined' || item.Data == null || (typeof item.Data.type == 'undefined' && typeof item.Data.time == 'undefined')) {
                 // allocate a new item
                 item.Data = $$._createConfig();
                 if (item.CronExpression != '')
@@ -349,6 +408,13 @@ $$.open = function(name) {
             if ((typeof $$.item.ProgramId != 'undefined' && $$.item.ProgramId != '') && (typeof $$.item.Script == 'undefined' || $$.item.Script == '')) {
                 $$.item.ProgramId = '';
                 $$.item.Script = "$$.program.run('"+$$.item.ProgramId+"');";
+            }
+            // backward compatibility with hg r522
+            if (typeof $$.item.Data.type != 'undefined') {
+                if ($$.item.Data.type == '0')
+                    $$.item.Data.time = [{ start: $$.item.Data.at, end: $$.item.Data.at }];
+                else
+                    $$.item.Data.time = [{ start: $$.item.Data.start, end: $$.item.Data.end }];
             }
             $$._init();
             $$.element.popup('open');
@@ -372,6 +438,10 @@ $$._init = function() {
     $$.eachDayowGroup.find("input[type=checkbox]:checked").prop('checked', false).checkboxradio('refresh');
     $$.eachMonthGroup.find("input[type=checkbox]:checked").prop('checked', false).checkboxradio('refresh');
 
+    $$.timeItems = $$.item.Data.time;
+    $$.boundDevices = typeof $$.item.BoundDevices != 'undefined' ? $$.item.BoundDevices : [];
+    $$.boundModules = typeof $$.item.BoundModules != 'undefined' ? $$.item.BoundModules : [];
+
     $$.cronName.val($$.item.Name);
     if ($$.item.Name.trim() != '')
         $$.cronName.addClass('ui-disabled');
@@ -392,13 +462,13 @@ $$._init = function() {
     $$.dateFrom.html(moment($$.item.Data.from).format('MMMM D'));
     $$.dateTo.val($$.item.Data.to);
     $$.dateTo.html(moment($$.item.Data.to).format('MMMM D'));
-    $$.eventType.val($$.item.Data.type).trigger('change');
-    $$.timeAt.val($$.item.Data.at);
-    $$.timeAt.html(moment($$.item.Data.at, 'HH:mm').format('LT'));
-    $$.timeStart.val($$.item.Data.start);
-    $$.timeStart.html(moment($$.item.Data.start, 'HH:mm').format('LT'));
-    $$.timeEnd.val($$.item.Data.end);
-    $$.timeEnd.html(moment($$.item.Data.end, 'HH:mm').format('LT'));
+    $$.eventType.val(0).trigger('change');
+    $$.timeAt.val(moment().format('HH:mm'));
+    $$.timeAt.html(moment().format('LT'));
+    $$.timeStart.val(moment().format('HH:mm'));
+    $$.timeStart.html(moment().format('LT'));
+    $$.timeEnd.val(moment().format('HH:mm'));
+    $$.timeEnd.html(moment().format('LT'));
 
     // occurrence 
     $$.minuteTypeSelect.val($$.item.Data.occur_min_type).selectmenu().trigger('change');
@@ -437,17 +507,53 @@ $$._init = function() {
         if ($$.item.CronExpression.trim() != '')
             $$.cronEditor.setValue($$.item.CronExpression);
     }, 100);
+
+    $$._setPanel('0');
+}
+
+$$._uiCheckToggle = function(el) {
+    if (el.hasClass('fa-check-square')) {
+        el.removeClass('fa-check-square').addClass('fa-square-o');
+        return false;
+    } else {
+        el.removeClass('fa-square-o').addClass('fa-check-square');
+        return true;
+    }
+}
+
+$$._setPanel = function(id) {
+    $$.buttonScheduling.removeClass('ui-btn-active');
+    $$.buttonModules.removeClass('ui-btn-active');
+    $$.buttonScript.removeClass('ui-btn-active');
+    switch(id) {
+        case '0':
+            $$.panelScheduling.show();
+            $$.panelModules.hide();
+            $$.panelScript.hide();
+            $$.buttonScheduling.addClass('ui-btn-active');
+            break;
+        case '1':
+            $$.panelScheduling.hide();
+            $$.panelModules.show();
+            $$.panelScript.hide();
+            $$.buttonModules.addClass('ui-btn-active');
+            $$.refreshModules();
+            break;
+        case '2':
+            $$.panelScheduling.hide();
+            $$.panelModules.hide();
+            $$.panelScript.show();
+            $$.buttonScript.addClass('ui-btn-active');
+            break;
+    }
 }
 
 $$._createConfig = function() {
     return {
         itemType: 1,
-        type: 0,
         from: moment().format('YYYY-MM-DD'),
         to: moment().format('YYYY-MM-DD'),
-        at: moment().format('HH:mm'),
-        start: moment().format('HH:mm'),
-        end: moment().format('HH:mm'),
+        time: [],
         occur_min_type: 1,
         occur_min_step: 1,
         occur_min_sel: [],
@@ -460,6 +566,46 @@ $$._createConfig = function() {
         occur_month_type: 1,
         occur_month_sel: [],
     };
+}
+
+$$.refreshModules = function() {
+    $$.devicesList.find('i').each(function(k,v){
+        var el = $(v);
+        var devType = el.attr('value');
+        el.removeClass('fa-check-square').addClass('fa-square-o');
+        if ($$.boundDevices.includes(devType))
+            el.addClass('fa-check-square');
+    });
+    $$.modulesList.empty();
+    $$.devicesList.find('i[class*=fa-check-square]').each(function(k,v){
+        var devType = $(v).attr('value');
+        $.each(HG.WebApp.Data.Modules, function(j,mod){
+            if (mod.DeviceType == devType) {
+                var domainAddress = mod.Domain+':'+mod.Address;
+                var check = $.grep($$.boundModules, function(e){ return e.Domain+':'+e.Address == domainAddress; }).length == 0 ? 'square-o' : 'check-square';
+                var li = $('<li class="hg-ui-list-item"><span data-locale-id="configure_module_typelight">'+HG.Ui.GetModuleDisplayName(mod)+'</span><i value="'+domainAddress+'" class="fa fa-'+check+' hg-ui-checkbox"></i></li>');
+                li.on('click',function(){
+                    var el = $(this).find('i');
+                    if ($$._uiCheckToggle(el)) {
+                        $$.boundModules.push(HG.WebApp.Utility.ParseModuleDomainAddress(domainAddress));
+                    } else {
+                        $$.boundModules = $$.boundModules.filter(function(m) {
+                            return m.Domain+':'+m.Address !== domainAddress;
+                        });
+                    }
+                });
+                $$.modulesList.append(li);
+            }
+        });
+        $$.modulesList.listview('refresh');
+    });
+}
+
+// TODO: can this be removed?
+$$.refreshTimeItems = function() {
+    $.each($$.timeItems,function(k,v){
+        //console.log(v);
+    });
 }
 
 $$.showDatePicker = function(el) {
@@ -484,9 +630,11 @@ $$.buildCron = function(delay) {
     $$.cronUpdateTimeout = setTimeout($$._buildCron, typeof delay != 'undefined' ? delay : 10);
 }
 
-$$.updateGfx = function(gfx, from, to, max, scaleMax, offset, labelFn) {
+$$.updateGfx = function(gfx, items, max, scaleMax, offset, labelFn) {
     // Update gfx
     gfx.clear();
+    if (typeof items == 'function')
+        items = items();
     // month labels
     for (var m = 0; m < scaleMax; m++) {
         gfx.text(m*($$.gfxWidth/scaleMax)+4, 8, labelFn(m)).attr({fill:'white'});
@@ -496,26 +644,28 @@ $$.updateGfx = function(gfx, from, to, max, scaleMax, offset, labelFn) {
         stroke: "rgb(0,0,0)",
         "stroke-width": 2
     });
-    var sx = from*($$.gfxWidth/max);
-    var ex = to*($$.gfxWidth/max);
-    if (sx > ex) {
-        gfx.rect(0, $$.gfxHeight/2, ex, $$.gfxHeight).attr({
-            fill: "rgba(0, 255, 0, 50)", 
-            stroke: "rgb(255,255,255)",
-            "stroke-width": 1
-        });
-        gfx.rect(sx, $$.gfxHeight/2, $$.gfxWidth-sx, $$.gfxHeight).attr({
-            fill: "rgba(0, 255, 0, 50)", 
-            stroke: "rgb(255,255,255)",
-            "stroke-width": 1
-        });
-    } else {
-        gfx.rect(sx, $$.gfxHeight/2, ex-sx+3, $$.gfxHeight).attr({
-            fill: "rgba(0, 255, 0, 50)", 
-            stroke: "rgb(255,255,255)",
-            "stroke-width": 1
-        });
-    }
+    $.each(items,function(k,v){
+        var sx = v.from*($$.gfxWidth/max);
+        var ex = v.to*($$.gfxWidth/max);
+        if (sx > ex) {
+            gfx.rect(0, $$.gfxHeight/2, ex, $$.gfxHeight).attr({
+                fill: "rgba(0, 255, 0, 50)", 
+                stroke: "rgb(255,255,255)",
+                "stroke-width": 1
+            });
+            gfx.rect(sx, $$.gfxHeight/2, $$.gfxWidth-sx, $$.gfxHeight).attr({
+                fill: "rgba(0, 255, 0, 50)", 
+                stroke: "rgb(255,255,255)",
+                "stroke-width": 1
+            });
+        } else {
+            gfx.rect(sx, $$.gfxHeight/2, ex-sx+3, $$.gfxHeight).attr({
+                fill: "rgba(0, 255, 0, 50)", 
+                stroke: "rgb(255,255,255)",
+                "stroke-width": 1
+            });
+        }
+    });
 }
 
 $$.getMonthCron = function(dateFrom, dateTo, dayOccur, monthOccur) {
@@ -573,7 +723,11 @@ $$.getTimeCron = function(timeFrom, timeTo, minOccur, hourOccur) {
             if (hf > ht || ht-hf > 1 || (hf == ht && mt < mf)) {
                 var hfn = hf<23 ? hf+1 : 0;
                 var htp = ht>0 ? ht-1 : 23;
-                cron = minOccur+' '+hfn+(hfn!=htp?'-'+htp:'')+hour+' * * *';
+                if (hfn > htp && hfn < 23)
+                    htp = '23,'+htp;
+                else if (hfn > htp && hfn == 23)
+                    htp = ','+htp;
+                cron = minOccur+' '+hfn+(hfn!=htp?(htp.toString().startsWith(',')?'':'-')+htp:'')+hour+' * * *';
                 cronItems.push(cron);
             }
         }
@@ -582,6 +736,14 @@ $$.getTimeCron = function(timeFrom, timeTo, minOccur, hourOccur) {
 }
 
 $$._buildCron = function() {
+    // localized text
+    var locales = HG.WebApp.Locales;
+    var text_on = locales.GetLocaleString('cronwizard_description_on', 'on');
+    var text_from = locales.GetLocaleString('cronwizard_description_from', 'from');
+    var text_to = locales.GetLocaleString('cronwizard_description_to', 'to');
+    var text_starting_at = locales.GetLocaleString('cronwizard_description_starting', 'starting at');
+    var text_ending_at = locales.GetLocaleString('cronwizard_description_ending', 'and ending at');
+    var text_at = locales.GetLocaleString('cronwizard_description_at', 'at');
     // custom cron expression
     if ($$.cronTypeSelect.val() == '3') {
         // Update the human readable output
@@ -666,40 +828,82 @@ $$._buildCron = function() {
             month = month.substring(0, month.length -1);
     }
 
-    var mode = $$.eventType.val();
-    // mode == '0' -> exact time, mode == '1' -> time range
-    if (mode == '0') {
-        $$.timeStart.val($$.timeAt.val()).html($$.timeAt.val());
-        $$.timeEnd.val($$.timeAt.val()).html($$.timeAt.val());
-    }
-
-    var cronTime = $$.getTimeCron($$.timeStart.val(), $$.timeEnd.val(), min, hour);
+    var cronTime = [];
+    var timeList = $$.element.find('[data-ui-field="time-list"]');
+    timeList.empty();
+    var timeDescriptionSingle = '', timeDescriptionRange = '';
+    $$.timeItems.sort(function(a,b){
+        return a.start > b.start;
+    });
+    var hasRange = false;
+    $.each($$.timeItems,function(k,v){
+        var item = '', desc = '';
+        if (v.start == v.end) {
+            desc = text_at+' '+v.start;
+            item = $('<div title="tap to remove"><i class="fa fa-minus-circle"></i> '+desc+'</div>');
+            timeDescriptionSingle += ', '+desc;
+        } else {
+            hasRange = true;
+            desc = text_starting_at+' '+v.start+' '+text_ending_at+' '+v.end;
+            item = $('<div title="tap to remove"><i class="fa fa-minus-circle"></i> '+desc+'</div>');
+            timeDescriptionRange += ', '+desc;
+        }
+        item.css({ 'cursor': 'pointer'});
+        item.on('click', function(){
+            var ir = $$.timeItems[k];
+            var dt = moment(ir.start, 'HH:mm');
+            $$.timeAt.val(dt.format('HH:mm'));
+            $$.timeAt.html(dt.format('LT'));
+            $$.timeStart.val(dt.format('HH:mm'));
+            $$.timeStart.html(dt.format('LT'));
+            dt = moment(ir.end, 'HH:mm');
+            $$.timeEnd.val(dt.format('HH:mm'));
+            $$.timeEnd.html(dt.format('LT'));
+            if (ir.start == ir.end)
+                $$.eventType.val(0).trigger('change');
+            else
+                $$.eventType.val(1).trigger('change');
+            $$.timeItems.splice(k,1);
+            $$._buildCron();
+        });
+        timeList.append(item);
+        cronTime = cronTime.concat($$.getTimeCron(v.start, v.end, min, hour));
+    });
     var cronMonth = $$.getMonthCron($$.dateFrom.val(), $$.dateTo.val(), dayom, month);
 
     var emptyOccur = '* * * * *';
-    if (mode == '0' || $$.timeStart.val() == $$.timeEnd.val()) {
+    if (!hasRange) {
         min = '*';
         hour = '*';
+        $$.occurrenceMinute.hide(100);
+        $$.occurrenceHour.hide(100);
+    } else {
+        $$.occurrenceMinute.show(100);
+        $$.occurrenceHour.show(100);
     }
+
     var cronOccur = min+' '+hour+' '+ dayom + ' ' + month + ' ' + dayow;
 
-    $$.updateGfx($$.gfxYear, moment($$.dateFrom.val()).dayOfYear(), moment($$.dateTo.val()).dayOfYear(), 366, 12, 1, function(m){
+    $$.gfxWidth = $$.gfxWidthMonths;
+    $$.updateGfx($$.gfxYear, [{ from: moment($$.dateFrom.val()).dayOfYear(), to: moment($$.dateTo.val()).dayOfYear() }], 366, 12, 1, function(m){
         return ' ... '+moment().month(m).format('MMM');
     });
 
-    var ts = $$.getDayMinute($$.timeStart.val());
-    var te = $$.getDayMinute($$.timeEnd.val());
-    $$.updateGfx($$.gfxDay, ts, te, 1440, 24, 0, function(h){
-        return ' . '+(h%2==0?h:'')+' . ';
+    $$.gfxWidth = $$.gfxWidthTime;
+    $$.updateGfx($$.gfxDay, function(){
+        var items = [];
+        $.each($$.timeItems,function(k,v){
+            items.push({ from: $$.getDayMinute(v.start), to: $$.getDayMinute(v.end) });
+        });
+        return items;
+    }, 1440, 24, 0, function(h){
+        return ' . '+h+' ..';
     });
 
+    console.log(cronOccur);
     // Update the human readable output
     $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(cronOccur), function(res){
-        var locales = HG.WebApp.Locales;
         var desc = '';
-        var text_on = locales.GetLocaleString('cronwizard_description_on', 'on');
-        var text_from = locales.GetLocaleString('cronwizard_description_from', 'from');
-        var text_to = locales.GetLocaleString('cronwizard_description_to', 'to');
         if ($$.cronTypeSelect.val() == '2') {
             if ($$.dateFrom.val() == $$.dateTo.val()) {
                 desc+= text_on+' '+moment($$.dateFrom.val()).format('MMMM DD')+ ', ';
@@ -708,20 +912,18 @@ $$._buildCron = function() {
                 desc+= ' '+text_to+' '+moment($$.dateTo.val()).format('MMMM DD')+ ', ';
             }
         }
-        var text_starting_at = locales.GetLocaleString('cronwizard_description_starting', 'starting at');
-        var text_ending_at = locales.GetLocaleString('cronwizard_description_ending', 'and ending at');
-        var text_at = locales.GetLocaleString('cronwizard_description_at', 'at');
-        if ($$.timeStart.val() == $$.timeEnd.val()) {
-            desc+= text_at+' '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
-        } else {
-            desc+= text_starting_at+' '+moment($$.timeStart.val(), 'HH:mm').format('LT');
-            desc+= ' '+text_ending_at+' '+moment($$.timeEnd.val(), 'HH:mm').format('LT');
-        }
-        if ($$.timeStart.val() == $$.timeEnd.val()) {
-            if (cronOccur != emptyOccur)
+        console.log(res.ResponseValue);
+        console.log(cronOccur);
+        console.log(hasRange);
+        if (cronOccur != emptyOccur || hasRange) {
+            if (!hasRange)
                 desc+= ', '+res.ResponseValue.substring(res.ResponseValue.indexOf(',')+1);
-        } else
-            desc+= ', '+res.ResponseValue;
+            else
+                desc+= ', '+res.ResponseValue;
+        }
+        desc += timeDescriptionRange+timeDescriptionSingle;
+        if (desc.startsWith(','))
+            desc = desc.substring(1).trim();
         $$.element.find('[data-ui-field=cron-desc]').val(desc);
     });
 

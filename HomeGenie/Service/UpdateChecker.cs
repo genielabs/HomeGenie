@@ -135,19 +135,19 @@ namespace HomeGenie.Service
             remoteUpdates = new List<ReleaseInfo>();
         }
 
-        public void Check()
+        public bool Check()
         {
             if (UpdateProgress != null)
                 UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.STARTED));
             GetGitHubUpdates();
-            if (currentRelease != null && remoteUpdates != null && UpdateProgress != null)
+            if (UpdateProgress != null)
             {
-                UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.COMPLETED));
+                if (currentRelease != null && remoteUpdates != null)
+                    UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.COMPLETED));
+                else
+                    UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.ERROR));
             }
-            else
-            {
-                UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.ERROR));
-            }
+            return remoteUpdates != null;
         }
 
         public void Start()
@@ -201,7 +201,10 @@ namespace HomeGenie.Service
                         DateParseHandling = Newtonsoft.Json.DateParseHandling.None
                     };
                     dynamic releases = JsonConvert.DeserializeObject(releaseJson, deserializerSettings) as JArray;
-                    remoteUpdates.Clear();
+                    if (remoteUpdates != null)
+                        remoteUpdates.Clear();
+                    else
+                        remoteUpdates = new List<ReleaseInfo>();
                     foreach(var rel in releases)
                     {
                         foreach(dynamic relFile in (rel.assets as JArray))
@@ -241,6 +244,7 @@ namespace HomeGenie.Service
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    remoteUpdates = null;
                 }
                 finally
                 {

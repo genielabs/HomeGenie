@@ -1,0 +1,22 @@
+﻿[
+    { 
+        "Name": "Turn On",
+        "Script": "command.turn-on.js"
+    },
+    { 
+        "Name": "Turn Off",
+        "Script": "command.turn-off.js"
+    },
+    { 
+        "Name": "Set Level",
+        "Script": "command.set-level.js"
+    },
+    {
+        "Name": "Thermostat Mode Heat",
+        "Script": "command.therm-heat.js"
+    },
+    {
+        "Name": "Thermostat Off",
+        "Script": "command.therm-off.js"
+    }
+]

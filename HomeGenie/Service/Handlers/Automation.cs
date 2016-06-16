@@ -110,6 +110,8 @@ namespace HomeGenie.Service.Handlers
                         newSchedule.Description,
                         newSchedule.Script
                     );
+                    item.BoundDevices = newSchedule.BoundDevices;
+                    item.BoundModules = newSchedule.BoundModules;
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Delete":
@@ -137,15 +139,16 @@ namespace HomeGenie.Service.Handlers
                     List<dynamic> nextList = new List<dynamic>();
                     foreach (var ce in homegenie.ProgramManager.SchedulerService.Items)
                     {
+                        if (!ce.IsEnabled)
+                            continue;
                         var evt = new { Name = ce.Name, Description = ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
                         var d = dateStart;
-                        for (int m = 0; m < hours * 60; m++)
+                        var dateEnd = dateStart.AddHours(hours);
+                        var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, ce.CronExpression);
+                        occurs.Sort();
+                        foreach (var dt in occurs)
                         {
-                            if (homegenie.ProgramManager.SchedulerService.IsScheduling(d, ce.CronExpression))
-                            {
-                                evt.Occurrences.Add(Utility.DateToJavascript(d));
-                            }
-                            d = d.AddMinutes(1);
+                            evt.Occurrences.Add(Utility.DateToJavascript(dt.ToUniversalTime()));
                         }
                         if (evt.Occurrences.Count > 0)
                             nextList.Add(evt);

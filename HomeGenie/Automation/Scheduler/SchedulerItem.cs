@@ -27,6 +27,7 @@ using System.Text;
 using CronExpressionDescriptor;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -38,10 +39,14 @@ namespace HomeGenie.Automation.Scheduler
         public string Description { get; set; }
         public string Data { get; set; }
         public bool IsEnabled { get; set; }
+        public string Script { get; set; }
+        public List<string> BoundDevices { get; set; }
+        public List<ModuleReference> BoundModules { get; set; }
+
+        // TODO: deprecate the following two
         public string LastOccurrence { get; set; }
         public string NextOccurrence { get; set; }
 
-        public string Script { get; set; }
         // TODO: deprecate this field - left for compatibility with hg <= r521
         public string ProgramId { get; set; }
 
@@ -56,6 +61,8 @@ namespace HomeGenie.Automation.Scheduler
             IsEnabled = false;
             LastOccurrence = "-";
             NextOccurrence = "-";
+            BoundDevices = new List<string>();
+            BoundModules = new List<ModuleReference>();
         }
     }
 }

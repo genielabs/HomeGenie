@@ -273,6 +273,13 @@ namespace HomeGenie.Automation.Scripting
             return new ModuleHelper(homegenie, module);
         }
 
+        Func<ModulesManager,List<Module>> selectModulesCallback = null;
+        public Func<ModulesManager,List<Module>> SelectModulesCallback
+        {
+            get { return selectModulesCallback; }
+            set { selectModulesCallback = value; }
+        }
+
         /// <summary>
         /// Return the list of selected modules.
         /// </summary>
@@ -281,6 +288,9 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
+                if (SelectModulesCallback != null)
+                    return SelectModulesCallback(this);
+                
                 var modules = new List<Module>();
                 // select modules in current command context
                 foreach (var module in homegenie.Modules.ToList<Module>())

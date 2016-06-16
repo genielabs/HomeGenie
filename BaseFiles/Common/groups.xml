@@ -21,10 +21,6 @@
         <Domain>HomeAutomation.EnergyMonitor</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>36</Address>
-        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>Virtual Modules</Address>
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>

@@ -20,6 +20,7 @@ namespace HomeGenie.Automation.Scheduler
         private string initScript = @"var $$ = {
           // ModulesManager
           modules: hg.modules,
+          boundModules: hg.boundModules,
           // SettingsHelper
           settings: hg.settings,
           // NetHelper
@@ -38,7 +39,14 @@ namespace HomeGenie.Automation.Scheduler
           scheduler: hg.scheduler,
           // Miscellaneous functions
           pause: function(seconds) { hg.pause(seconds); },
-          delay: function(seconds) { this.pause(seconds); }
+          delay: function(seconds) { this.pause(seconds); },
+          say: function(sentence, language, async) { 
+            if (typeof language == 'undefined')
+                language = null;
+            if (typeof async == 'undefined')
+                async = false;
+            hg.say(sentence, language, async); 
+          }
         }
         ";
 
@@ -52,7 +60,7 @@ namespace HomeGenie.Automation.Scheduler
             eventItem = item;
             scriptEngine = new Engine();
             hgScriptingHost = new SchedulerScriptingHost();
-            hgScriptingHost.SetHost(homegenie);
+            hgScriptingHost.SetHost(homegenie, item);
             scriptEngine.SetValue("hg", hgScriptingHost);
         }
 

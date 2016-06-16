@@ -98,8 +98,8 @@
     <script src="js/jqm-datebox.lang.utf8.min.js"></script>
 
     <!-- HomeGenie Javascript includes -->
-    <script src="js/homegenie.api.js?version=r522"></script>
-    <script src="js/homegenie.webapp.js?version=r522"></script>
+    <script src="js/homegenie.api.js?version=r523"></script>
+    <script src="js/homegenie.webapp.js?version=r523"></script>
 
     <!-- custom javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
@@ -317,9 +317,7 @@
                             <option data-locale-id="configure_module_typedimmer" value="Dimmer">Dimmer</option>
                             <option data-locale-id="configure_module_typeswitch" value="Switch">Switch</option>
                             <option data-locale-id="configure_module_typesensor" value="Sensor">Sensor</option>
-                            <!--option data-locale-id="configure_module_typetemperature" value="Temperature">Temperature</option-->
                             <option data-locale-id="configure_module_typesiren" value="Siren">Siren</option>
-                            <!--option data-locale-id="configure_module_typefan" value="Fan">Fan</option-->
                             <option data-locale-id="configure_module_typethermostat" value="Thermostat">Thermostat</option>
                             <option data-locale-id="configure_module_typeshutter" value="Shutter">Shutter</option>
                             <option data-locale-id="configure_module_typedoorwindow" value="DoorWindow">Door/Window</option>
@@ -426,21 +424,20 @@
 
     <!-- Program Configuration Popup -->
     <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div class="ui-corner-top" data-role="header">
-            <h2 data-locale-id="configure_program_options">Options</h2>
+            <h2 id="automationprograms_program_title">Program Options</h2>
         </div>
-        <div class="ui-content ui-corner-bottom">
-            <h4 id="automationprograms_program_title"></h4>
-            <p id="automationprograms_program_description"></p>
-            <div data-role="navbar">
-                <ul id="automationprograms_program_options_list">
-                    <li id="automationprograms_program_options_tab0"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(0)" data-locale-id="configure_program_options" class="ui-btn-active">Options</a></li>
-                    <li id="automationprograms_program_options_tab1"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(1)" data-locale-id="configure_program_options_details">Details</a></li><!-- Implemented Parameters, Features and Virtual Modules -->
-                </ul>
-            </div><!-- /navbar -->
-            <div id="automationprograms_program_parameters" class="trapScroll hg-program-options-scroll" data-role="controlgroup" data-type="vertical"></div>
-            <div id="automationprograms_program_details" class="trapScroll hg-program-options-scroll" data-role="controlgroup" data-type="vertical"></div>
+        <div data-role="navbar" style="margin-right:4px">
+            <ul id="automationprograms_program_options_list">
+                <li id="automationprograms_program_options_tab0"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(0)" data-locale-id="configure_program_options" class="ui-btn-active">Options</a></li>
+                <li id="automationprograms_program_options_tab1"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(1)" data-locale-id="configure_program_options_details">Details</a></li><!-- Implemented Parameters, Features and Virtual Modules -->
+            </ul>
+        </div><!-- /navbar -->
+        <div class="ui-corner-bottom">
+            <div id="automationprograms_program_parameters" class="trapScroll hg-program-options-scroll" style="padding:10px">
+                <div id="automationprograms_program_description" class="ui-corner-all" style="padding:8px;background-color:rgba(120,120,120,0.3);margin-bottom:8px"></div>
+            </div>
+            <div id="automationprograms_program_details" class="trapScroll hg-program-options-scroll"></div>
         </div>
         <div class="ui-grid-c ui-footer ui-bar-inherit" align="center">
             <div class="ui-block-a">
@@ -495,7 +492,7 @@
             <li><a class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="home_menu_maintenance" href="#page_configure_maintenance" data-transition="none">Maintenance</a></li>
             <li data-locale-id="home_menu_about" data-role="list-divider">About</li>
             <li><a class="ui-btn ui-icon-info ui-btn-icon-left" data-locale-id="home_menu_about_homegenie" href="#homegenie_about" data-rel="popup">About HomeGenie</a></li>
-            <li><a class="ui-btn ui-icon-fa-book ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
+            <li><a class="ui-btn ui-icon-fa-book ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="https://genielabs.github.io/HomeGenie/walkthrough.html">Users Guide</a></li>
             <li><a class="ui-btn ui-icon-fa-book ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://genielabs.github.io/HomeGenie/about.html">Programming Guide</a></li>
             <li><a class="ui-btn ui-icon-fa-commenting ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-heart" data-locale-id="home_menu_about_support" target="_blank" href="http://www.homegenie.it/keepuphg.php">Keep HomeGenie Up!</a></li>

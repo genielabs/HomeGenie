@@ -79,7 +79,6 @@ namespace HomeGenie.Data
         /// <value>The properties.</value>
         public TsList<ModuleParameter> Properties { get; set; }
 
-        //[JsonIgnore] <-- this is also affecting xml serialization!?!?
         public TsList<Store> Stores { get; set; }
 
         public string RoutingNode { get; set; } // "<ip>:<port>" || ""

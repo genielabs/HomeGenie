@@ -3567,6 +3567,36 @@
     <None Include="html\css\jtsage-datebox.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\ui\widgets\wunderground.city.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\ui\widgets\wunderground.city.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\ui\widgets\program.text.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\ui\widgets\program.text.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\command.turn-on.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\command.turn-off.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\command.set-level.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\command.therm-heat.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\command.therm-off.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\index.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -3603,5 +3633,6 @@
     <Folder Include="html\pages\control\widgets\weather\wunderground\images\" />
     <Folder Include="html\css\font-awesome\" />
     <Folder Include="html\js\app\" />
+    <Folder Include="html\pages\configure\scheduler\templates\" />
   </ItemGroup>
 </Project>

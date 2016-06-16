@@ -39,6 +39,9 @@ $$.widget = {
  Shorthand for HG.WebApp.Utility
    $$.util
 
+ Shorthand for HG.WebApp.Locales
+   $$.locales
+
  Blink a widget field and the status led image (if present)
    $$.signalActity('<widget_field_name>') 
 

@@ -406,6 +406,7 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
             commonJs += "    $$._fieldCache = [];";
             commonJs += "    $$.v2 = true;";
             commonJs += "    $$.apiCall = HG.Control.Modules.ServiceCall;";
+            commonJs += "    $$.locales = HG.WebApp.Locales;";
             commonJs += "    $$.util = HG.WebApp.Utility;";
             commonJs += "    $$.ui = HG.Ui;";
             commonJs += "    $$.signalActity = function(fieldName) {";

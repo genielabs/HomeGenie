@@ -227,7 +227,7 @@ namespace HomeGenie.Automation.Scripting
                         {
                             return mp.Name == "Messaging.Email.SmtpUseSsl";
                         });
-                        if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
+                        if (spSmtpUseSsl != null && (spSmtpUseSsl.Value.ToLower() == "true" || spSmtpUseSsl.DecimalValue == 1))
                         {
                             this.mailSsl = 1;
                         }

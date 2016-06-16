@@ -19,7 +19,7 @@ Modules
   .OfDeviceType("Light,Dimmer")
   //.IterationDelay(0.35)
   .On();</ScriptSource>
-    <ScriptErrors>[{"Line":155,"Column":0,"ErrorMessage":"Object reference not set to an instance of an object","ErrorNumber":"-1","CodeBlock":"TC"}]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>6</Address>
     <Name>Group Lights ON</Name>
@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.346872Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.757499Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -268,7 +268,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.563623Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.946769Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -281,10 +281,10 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
   Program.UseWidget( "weather/wunderground/conditions" );
   // set input fields parameters
   // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-  Program.AddOption("Location", "autoip", "City name", "text");
+  Program.AddOption("Location", "autoip", "City name", "wunderground.city");
   Program.AddOption("Language", "EN", "Language", "text");
   Program.AddOption("ApiKey", "?", "Weather Underground Key", "text");
-  Program.AddOption("UpdateInterval", "30", "Update interval (minutes)", "text");
+  Program.AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15");
 });
 
 // initialize widget program parameters
@@ -442,7 +442,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Environment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.436392Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:33.038247Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -490,33 +490,11 @@ while (Program.IsEnabled)
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
-        <Property>HomeGenie.ScheduleControl</Property>
-        <Description>Control device on a given schedule</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>cron.text</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
-        <Property>HomeGenie.ScheduleOn</Property>
-        <Description>Turn On</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>cron.text</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
-        <Property>HomeGenie.ScheduleOff</Property>
-        <Description>Turn Off</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.342753Z</TriggerTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -736,7 +714,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.345203Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.760711Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -783,7 +761,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.36093Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.805374Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -843,7 +821,7 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
     <Name>Generic IP Camera</Name>
@@ -865,15 +843,15 @@ Program.AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecuritySensor",
 Program.AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecurityTriggerHome", "Also trigger when armed Home", "checkbox");
 Program.AddFeature("", "Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox");
 
-Program.AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "text");
-Program.AddOption("System.SirenStartTime", "0", "2. Sirens Start Delay (seconds)", "text");
-Program.AddOption("System.SirenMaxTime", "30", "3. Sirens Max Time (seconds, 0=infinite)", "text");
+Program.AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "slider:0:60:1");
+Program.AddOption("System.SirenStartTime", "0", "2. Sirens Start Delay (seconds)", "slider:0:30:1");
+Program.AddOption("System.SirenMaxTime", "30", "3. Sirens Max Time (seconds, 0=infinite)", "slider:0:1800:1");
 
 Program.AddOption("Email.Recipients", "", "4. Comma separated list of recipients e-mails for alarm notifications", "text");
 
-Program.AddOption("Trigger.ArmedProgram", "", "5. Program to run when armed", "text");
-Program.AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "text");
-Program.AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "text");
+Program.AddOption("Trigger.ArmedProgram", "", "5. Program to run when armed", "program.text");
+Program.AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "program.text");
+Program.AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "program.text");
 
 Program.Run();
 </ScriptCondition>
@@ -1132,7 +1110,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.361194Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.817921Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1262,7 +1240,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.347014Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.771929Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1328,9 +1306,9 @@ Program.GoBackground();</ScriptSource>
     <ScriptCondition>Program.AddOption("Email.Sender", "", "1. E-Mail address", "text");
 Program.AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text");
 Program.AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text");
-Program.AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "text");
+Program.AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "password");
 Program.AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text");
-Program.AddOption("Email.SmtpUseSsl", "FALSE", "6. SMTP Mail Server use SSL (TRUE or FALSE)", "text");
+Program.AddOption("Email.SmtpUseSsl", "false", "6. SMTP Mail Server use SSL", "checkbox");
 Program.Run();
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
@@ -1361,7 +1339,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.401061Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.825984Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1619,7 +1597,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.489506Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.848296Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1768,7 +1746,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.366932Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.806731Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2018,7 +1996,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.376161Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.819239Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2687,7 +2665,7 @@ Pause(10);</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.AddOption("ThermostatsCount", "1", "Virtual thermostats modules to create", "text");
+    <ScriptCondition>Program.AddOption("ThermostatsCount", "1", "Virtual thermostats modules to create", "slider:1:10:1");
 Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature");
 Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any");
 Program.Run();
@@ -2863,7 +2841,7 @@ while (Program.IsEnabled)
   });
   Pause(120);
 }</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
     <Name>Basic Thermostat</Name>
@@ -2888,7 +2866,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.441534Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.93337Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3511,61 +3489,11 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Weekend</Property>
-        <Description>Timetable to use for weekend</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Workday</Property>
-        <Description>Timetable to use for workday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Holiday</Property>
-        <Description>Timetable to use for holiday</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>timetable</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Special</Property>
-        <Description>Timetable to use for special day</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Enable</Property>
-        <Description>Enable Timetable scheduling</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.Repeat</Property>
-        <Description>Repeat command for the whole duration</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
-        <Property>TimeTable.CheckDST</Property>
-        <Description>Enable Day Light Saving check</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.497749Z</TriggerTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -3573,9 +3501,9 @@ while (Program.IsEnabled)
     <Commands />
     <ScriptCondition>Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable control by IR remote", "checkbox");
 Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle module with IR button (enter code)", "capture:Receiver.RawData");
-Program.AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "text");
-Program.AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "text");
-Program.AddOption("DimmerInterval", "5", "4. Dimmer Interval", "text");
+Program.AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "capture:Receiver.RawData");
+Program.AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "capture:Receiver.RawData");
+Program.AddOption("DimmerInterval", "5", "4. Dimming step", "slider:5:50:5");
 Program.Run();
 </ScriptCondition>
     <ScriptSource>// 
@@ -3662,7 +3590,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.557793Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.990136Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3791,7 +3719,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-05-14T10:49:28.478747Z</TriggerTime>
+    <TriggerTime>2016-06-16T15:25:32.961418Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3975,8 +3903,8 @@ function initialize() {
         <Description>Set switch on/off</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2016-05-14T10:49:28.225037Z</ActivationTime>
-    <TriggerTime>2016-05-14T10:49:28.673506Z</TriggerTime>
+    <ActivationTime>2016-06-16T15:25:32.606445Z</ActivationTime>
+    <TriggerTime>2016-06-16T15:25:33.141719Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3997,8 +3925,8 @@ $$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptS
     <Description>Toogle door window sensor value</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-05-14T10:49:28.226832Z</ActivationTime>
-    <TriggerTime>2016-05-14T10:49:48.400582Z</TriggerTime>
+    <ActivationTime>2016-06-16T15:25:32.60872Z</ActivationTime>
+    <TriggerTime>2016-06-14T05:45:01.443229Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4021,8 +3949,8 @@ $$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
     <Description>Simulate motion detection</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-05-14T10:49:51.168453Z</ActivationTime>
-    <TriggerTime>2016-05-14T10:49:49.980891Z</TriggerTime>
+    <ActivationTime>2016-06-16T15:25:32.608828Z</ActivationTime>
+    <TriggerTime>2016-06-14T05:44:58.888297Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4048,8 +3976,8 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-05-14T10:49:28.226996Z</ActivationTime>
-    <TriggerTime>2016-05-14T10:49:53.673382Z</TriggerTime>
+    <ActivationTime>2016-06-16T15:25:32.608909Z</ActivationTime>
+    <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4077,8 +4005,8 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-05-14T10:51:58.71807Z</ActivationTime>
-    <TriggerTime>2016-05-14T10:49:54.366517Z</TriggerTime>
+    <ActivationTime>2016-06-16T15:25:32.60899Z</ActivationTime>
+    <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

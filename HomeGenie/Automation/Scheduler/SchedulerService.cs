@@ -41,6 +41,15 @@ namespace HomeGenie.Automation.Scheduler
         private Timer serviceChecker;
         private ProgramManager masterControlProgram;
 
+        public class EvalNode
+        {
+            public List<DateTime> Occurrences;
+            public EvalNode Child;
+            public EvalNode Sibling;
+            public String Expression;
+            public String Operator; 
+        }
+
         public SchedulerService(ProgramManager programEngine)
         {
             masterControlProgram = programEngine;
@@ -235,20 +244,45 @@ namespace HomeGenie.Automation.Scheduler
 
         public bool IsScheduling(DateTime date, string cronExpression, int recursionCount = 0)
         {
-            string buildExpression = "";
+            return GetScheduling(date, date, cronExpression).Count == 1;
+        }
+
+        public List<DateTime> GetScheduling(DateTime dateStart, DateTime dateEnd, string cronExpression, int recursionCount = 0)
+        {
+            // align time
+            dateStart = dateStart.AddSeconds((double)-dateStart.Second-59);
+            dateEnd = dateEnd.AddSeconds((double)-dateEnd.Second);
             // '[' and ']' are just aestethic alias for '(' and ')'
             cronExpression = cronExpression.Replace("[", "(");
             cronExpression = cronExpression.Replace("]", ")");
             int p = 0;
+            var rootEvalNode = new EvalNode();
+            var evalNode = rootEvalNode;
+            char prevToken = ' ';
             while (p < cronExpression.Length)
             {
                 char token = cronExpression[p];
-                if (token == '(' || token == ')' || token == ';' || token == ':')
+                if (token == '\t' || token == '\r' || token == '\n')
+                    token = ' ';
+                if (token == '(' || token == ')' || token == ';' || token == ':' || token == ' ')
                 {
-                    buildExpression += token;
+                    if (prevToken == '(' && token == '(')
+                    {
+                        evalNode.Child = new EvalNode();
+                        evalNode = evalNode.Child;
+                    } 
+                    else if (prevToken == ')' && (token == ';' || token == ':'))
+                    {
+                        evalNode.Operator = token.ToString();
+                        evalNode.Sibling = new EvalNode();
+                        evalNode = evalNode.Sibling;
+                    }
+                    if (token != ' ')
+                        prevToken = token;
                     p++;
                     continue;
                 }
+                prevToken = ' ';
 
                 string currentExpression = token.ToString();
                 p++;
@@ -269,10 +303,11 @@ namespace HomeGenie.Automation.Scheduler
                 currentExpression = currentExpression.Trim(new char[] { ' ', '\t' });
                 if (String.IsNullOrEmpty(currentExpression)) continue;
 
-                bool isEntryActive = false;
+                evalNode.Expression = currentExpression;
+
                 if (currentExpression.StartsWith("#"))
                 {
-                    isEntryActive = true;
+                    // TODO: ...?
                 }
                 else if (currentExpression.StartsWith("@"))
                 {
@@ -305,7 +340,10 @@ namespace HomeGenie.Automation.Scheduler
                         recursionCount++;
                         try
                         {
-                            isEntryActive = (eventItem.IsEnabled && IsScheduling(date, eventItem.CronExpression, recursionCount));
+                            if (eventItem.IsEnabled)
+                            {
+                                evalNode.Occurrences = GetScheduling(dateStart, dateEnd, eventItem.CronExpression, recursionCount);
+                            }
                         } catch{ }
                         recursionCount--;
                         if (recursionCount < 0)
@@ -314,34 +352,36 @@ namespace HomeGenie.Automation.Scheduler
                 }
                 else
                 {
-                    isEntryActive = EvaluateCronEntry(date, currentExpression);
+                    evalNode.Occurrences = GetNextOccurrences(dateStart, dateEnd, currentExpression);
                 }
 
-                buildExpression += (isEntryActive ? "1" : "0");
-
             }
 
-            buildExpression = buildExpression.Replace(":", "+");
-            buildExpression = buildExpression.Replace(";", "*");
+            return EvalNodes(rootEvalNode);
+        }
 
-            bool success = false;
-            try
+        public List<DateTime> EvalNodes(EvalNode currentNode)
+        {
+            if (currentNode.Occurrences == null)
+                currentNode.Occurrences = new List<DateTime>();
+            var occurs = currentNode.Occurrences;
+            if (currentNode.Child != null)
             {
-                ExpressionEval eval = new ExpressionEval();
-                eval.Expression = buildExpression;
-                success = eval.EvaluateBool();
-            }
-            catch (Exception ex)
+                occurs = EvalNodes(currentNode.Child);
+            }                
+            if (currentNode.Sibling != null && currentNode.Operator != null)
             {
-                masterControlProgram.HomeGenie.MigService.RaiseEvent(
-                    this,
-                    Domains.HomeAutomation_HomeGenie,  // before v1.1 it was: Domains.HomeAutomation_HomeGenie_Automation,
-                    SourceModule.Scheduler, // before v1.1 it was: cronExpression,
-                    cronExpression, // before v1.1 it was: "Scheduler Expression",
-                    Properties.SchedulerError,
-                    JsonConvert.SerializeObject(ex.Message));
+                if (currentNode.Operator == ":")
+                {
+                    occurs.AddRange(EvalNodes(currentNode.Sibling));
+                }
+                else if (currentNode.Operator == ";")
+                {
+                    var matchList = EvalNodes(currentNode.Sibling);
+                    occurs.RemoveAll(dt => !matchList.Contains(dt));
+                }
             }
-            return success;
+            return occurs;
         }
 
         public List<SchedulerItem> Items
@@ -351,6 +391,8 @@ namespace HomeGenie.Automation.Scheduler
 
         private bool EvaluateCronEntry(DateTime date, string cronExpression)
         {
+            if (date.Kind != DateTimeKind.Local)
+                date = date.ToLocalTime();
             var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
             if (!cronSchedule.IsError)
             {
@@ -421,6 +463,8 @@ namespace HomeGenie.Automation.Scheduler
 
         private string GetNextEventOccurrence(DateTime date, string cronExpression)
         {
+            if (date.Kind != DateTimeKind.Local)
+                date = date.ToLocalTime();
             var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
             if (!cronSchedule.IsError)
             {
@@ -428,6 +472,20 @@ namespace HomeGenie.Automation.Scheduler
                 return occurrence.ToString("yyyy-MM-dd HH:mm");
             }
             return "-";
+        }
+
+        private List<DateTime> GetNextOccurrences(DateTime dateStart, DateTime dateEnd, string cronExpression)
+        {
+            if (dateStart.Kind != DateTimeKind.Local)
+                dateStart = dateStart.ToLocalTime();
+            if (dateEnd.Kind != DateTimeKind.Local)
+                dateEnd = dateEnd.ToLocalTime();
+            var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
+            if (!cronSchedule.IsError)
+            {
+                return cronSchedule.Value.GetNextOccurrences(dateStart, dateEnd).ToList();
+            }
+            return null;
         }
 
     }

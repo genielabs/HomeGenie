@@ -63,8 +63,6 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
                         $$.GroupsList.LoadGroups();
                     });
                 });
-            } else if (this.id == 'page_configure_schedulerservice') {
-                $$.Scheduler.LoadScheduling();
             }
         });
         //
@@ -174,7 +172,10 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
             });
         });
         //
-        $('#automationprograms_program_options').enhanceWithin().popup();
+        $('#automationprograms_program_options').enhanceWithin().popup().on('popupbeforeposition', function(){
+            $(this).css({ 'max-height': ($(window).height()-80)+'px' });
+            $('#automationprograms_program_parameters').css({ 'max-height': ($(window).height()-270)+'px' });
+        });
         $('#configure_popupsettings_edit').enhanceWithin().popup();
         $('#configure_popupsettings_edit').on('popupbeforeposition', function(){
             $$.Events.PopupRefreshIgnore();

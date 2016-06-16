@@ -105,17 +105,15 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         var fieldparams = $('#automationprograms_program_details');
         fieldparams.empty();
         fieldparams.trigger('create');
-        //
+
         var cp = HG.WebApp.Utility.GetProgramByAddress(HG.WebApp.ProgramEdit._CurrentProgram.Address);
         if (cp != null) {
             var params = '';
-            //
             // Program Features
-            //
             var features = cp.Features;
             for (var f = 0; f < features.length; f++) {
                 params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + features[f].Property + '</strong> : ';
-                params += '' + HG.WebApp.Locales.GetProgramLocaleString(cp.Address, features[f].Property, features[f].Description) + '</br>'
+                params += '' + HG.WebApp.Locales.GetProgramLocaleString(cp.Address, features[f].Property, features[f].Description) + '<br/>'
                 var fordomains = features[f].ForDomains;
                 if (fordomains == '') fordomains = 'Any';
                 var fortypes = features[f].ForTypes;
@@ -123,40 +121,36 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 params += '<span style="font-size:8pt;font;">Applies to: &nbsp;&nbsp;&nbsp; <strong>Domain</strong> &#9658; <em>' + fordomains + '</em> &nbsp;&nbsp;&nbsp; <strong>Type</strong> &#9658; <em>' + fortypes + '</em></span></p></li>';
             }
             if (params != '') {
-                params = '</br><ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_implemfeatures') + '</li>' + params + '</ul></br>';
+                params = '<ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_implemfeatures') + '</li>' + params + '</ul>';
                 fieldparams.append(params);
             }
         }
-        //
+
         var module = HG.WebApp.Utility.GetModuleByDomainAddress(HG.WebApp.ProgramEdit._CurrentProgram.Domain, HG.WebApp.ProgramEdit._CurrentProgram.Address);
         if (module != null) {
-            //
             // Program Config Input Fields
-            //
             params = '';
             for (var p = 0; p < module.Properties.length; p++) {
                 if (module.Properties[p].Name.substring(0, 17) == 'ConfigureOptions.') {
                     var inputType = 'text';
                     var desc = (module.Properties[p].Description && module.Properties[p].Description != 'undefined' && module.Properties[p].Description != '' ? module.Properties[p].Description : module.Properties[p].Name);
-                    if (desc.toLowerCase().indexOf('password') >= 0) inputType = 'password';
+                    if (desc.toLowerCase().indexOf('password') >= 0 || module.Properties[p].FieldType.startsWith('password')) inputType = 'password';
                     var updatetime = module.Properties[p].UpdateTime;
                     updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
                     var d = new Date(updatetime);
                     params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name.substring(17) + '</strong> = ';
-                    params += '"' + (inputType == 'password' ? '*****' : module.Properties[p].Value) + '"</br>'
+                    params += '"' + (inputType == 'password' ? '*****' : module.Properties[p].Value) + '"<br/>'
                     params += '<span style="font-size:8pt;"><em>' + d + '</em></span></p></li>';
                 }
             }
             if (params != '') {
-                params = '</br><ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_configoptions') + '</li>' + params + '</ul></br>';
+                params = '<ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_configoptions') + '</li>' + params + '</ul>';
                 fieldparams.append(params);
             }
         }
-        //
+
         if (module != null) {
-            //
             // Program Parameter Fields
-            //
             var params = '';
             for (var p = 0; p < module.Properties.length; p++) {
                 if (module.Properties[p].Name.substring(0, 17) == 'ConfigureOptions.' || module.Properties[p].Name == 'Widget.DisplayModule' || module.Properties[p].Name == 'VirtualModule.ParentId') continue;
@@ -164,27 +158,19 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
                 var d = new Date(updatetime);
                 params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name + '</strong> = ';
-                params += '"' + module.Properties[p].Value + '"</br>'
+                params += '"' + module.Properties[p].Value + '"<br/>'
                 params += '<span style="font-size:8pt;font;"><em>' + d + '</em></span></p></li>';
             }
             if (params != '') {
-                params = '</br><ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_moduleparams') + '</li>' + params + '</ul></br>';
+                params = '<ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_moduleparams') + '</li>' + params + '</ul>';
                 fieldparams.append(params);
             }
-            //
-            // Program Widget Display module
-            //
+            // TODO: show program's widget display module
             var widget = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
-            //
-            // Program Handling Module Events (yes/no)
-            //
-            //
-            // Program Adding WebService (base url/no)
-            //
+            // TODO: show program's handled events (yes/no)
+            // TODO: show program's registered dynamic webservices
         }
-        //
         // Program Virtual Modules
-        //
         var params = '';
         if (HG.WebApp.Data.Modules && HG.WebApp.Data.Modules.length) {
             for (m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -192,7 +178,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 var vparentid = HG.WebApp.Utility.GetModulePropertyByName(cmod, "VirtualModule.ParentId");
                 if (vparentid != null && vparentid.Value == HG.WebApp.ProgramEdit._CurrentProgram.Address && cmod.Domain != 'HomeAutomation.HomeGenie.Automation') {
                     params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + cmod.Domain + ' ' + cmod.Address + '</strong>';
-                    params += '</br>'
+                    params += '<br/>'
                     params += '<span style="font-size:8pt;font;"> ';
                     params += '<strong>Type</strong> &#9658; <em>' + cmod.DeviceType + '</em> &nbsp;&nbsp;&nbsp;';
                     if (cmod.Name != '') params += '<strong>Name</strong> &#9658; <em>' + cmod.Name + '</em> &nbsp;&nbsp;&nbsp;';
@@ -201,17 +187,16 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             }
         }
         if (params != '') {
-            params = '</br><ul data-role="listview"><li data-role="list-divider">Virtual Modules</li>' + params + '</ul></br>';
+            params = '<ul data-role="listview"><li data-role="list-divider">Virtual Modules</li>' + params + '</ul>';
             fieldparams.append(params);
         }
-        //
         fieldparams.trigger('create');
     };
 
     $$.RefreshProgramOptions = function () {
         var fieldparams = $('#automationprograms_program_parameters');
-        fieldparams.empty();
-        fieldparams.trigger('create');
+        fieldparams.find('div:not(:first)').remove();
+        //fieldparams.trigger('create');
         //
         var cp = HG.WebApp.Utility.GetProgramByAddress(HG.WebApp.ProgramEdit._CurrentProgram.Address);
         if (cp != null) {
@@ -243,25 +228,34 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                     return 0;
                 }
             });
-
+            // generate program's option fields
+            var pc = 0;
             for (var p = 0; p < arr.length; p++) {
-
-                var inputType = 'text';
-                var desc = (arr[p].Description && arr[p].Description != 'undefined' && arr[p].Description != '' ? arr[p].Description : arr[p].Name);
-                if (desc.toLowerCase().indexOf('password') >= 0) inputType = 'password';
-                var opt = $('<div><p style="font-weight:bold">' + HG.WebApp.Locales.GetProgramLocaleString(cp.Address, arr[p].Name, desc) + '</p></div>');
-                var optInput = $('<input type="' + inputType + '" data-parameter-name="' + arr[p].Name + '" onchange="HG.WebApp.ProgramsList.UpdateProgramParameter($(this))" />');
-                optInput.val(arr[p].Value);
-                opt.append(optInput);
-                fieldparams.append(opt);
-
+                var mp = arr[p];
+                if (typeof mp.FieldType != 'undefined' && mp.FieldType != null && mp.FieldType.trim() != '') {
+                    var context = {
+                        parent: fieldparams,
+                        program: cp,
+                        module: module,
+                        parameter: mp
+                    };
+                    var featureField = HG.Ui.GenerateWidget('widgets/' + mp.FieldType, context, function (handler) {
+                        handler.onChange = function (val) {
+                            var param = this.context.parameter;
+                            param.Value = val;
+                            param.NeedsUpdate = true;
+                            HG.WebApp.GroupModules.UpdateModule(this.context.module, null);
+                        };
+                    });
+                    pc++;
+                }
             }
-
+            fieldparams.prop('data-flag-hasoptions', pc > 0);
         }
-        //
         fieldparams.trigger('create');
     };
 
+    // TODO: deprecate this!??!
     $$.UpdateProgramParameter = function (el) {
         var parameter = el.attr('data-parameter-name');
         var module = HG.WebApp.Utility.GetModuleByDomainAddress(HG.WebApp.ProgramEdit._CurrentProgram.Domain, HG.WebApp.ProgramEdit._CurrentProgram.Address);
@@ -464,18 +458,19 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
     };
 
     $$.UpdateOptionsPopup = function () {
+        var popup = $('#automationprograms_program_options');
         if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
-        //
         // hide edit button if not called from automation section
         if ($.mobile.activePage.attr("id") != $$.PageId) {
             $('#automationprograms_program_edit').hide();
             $('#automationprograms_program_btn_delete').hide();
-            //$('#automationprograms_program_btn_export').hide();
-        }
-        else {
+            //$('#automationprograms_program_restart').hide();
+            popup.find('div[data-role="navbar"]').hide();
+        } else {
             $('#automationprograms_program_edit').show();
             $('#automationprograms_program_btn_delete').show();
-            //$('#automationprograms_program_btn_export').show();
+            //$('#automationprograms_program_restart').show();
+            popup.find('div[data-role="navbar"]').show();
         }
         //
         $.mobile.loading('show', {
@@ -501,7 +496,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 } else {
                     $('#automationprograms_program_options_tab1').css('visibility', '');
                 }
-                if ($('#automationprograms_program_parameters').text().trim() == '') {
+                if ($('#automationprograms_program_parameters').prop('data-flag-hasoptions') == false) {
                     $('#automationprograms_program_options_tab0').css('visibility', 'hidden');
                     if (hasdetails) {
                         $$.SetOptionsTab(1);

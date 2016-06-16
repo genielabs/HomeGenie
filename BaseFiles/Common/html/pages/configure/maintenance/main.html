@@ -11,14 +11,22 @@
 
             <h3><span data-locale-id="configure_system_options">System Options</span></h3>
             <div class="ui-grid-a">
-                <div class="ui-block-a">
+                <div class="ui-block-a" style="width:70%">
                     <div>
                         <label><span data-locale-id="configure_system_updatemanager">Update Manager</span></label>
                         <p id="configure_system_updatemanager_info" style="margin-top:5px"></p>
-                        <div id="configure_system_updatemanager_detailsscroll" style="background-color: black; border: 1px dashed gray; overflow-y: scroll; overflow-x: hidden; max-height: 60px;">
-                            <p id="configure_system_updatemanager_details"></p>
+                        <div id="configure_system_updatemanager_detailsscroll" style="background-color: black; border: 1px dashed gray; overflow-y: scroll; overflow-x: hidden; max-height: 120px;">
+                            <p style="margin-left:20px;margin-right:20px;font-size:9pt" id="configure_system_updatemanager_details"></p>
                         </div>
                     </div>
+                </div>
+                <div class="ui-block-b" style="float:right;width:150px">
+                    <a id="configure_system_updatemanager_updatebutton" data-locale-id="configure_system_updatemanager_updatecheck" class="ui-btn ui-corner-all">Update Check</a>
+                    <a id="configure_system_updatemanager_installbutton" data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
+                </div>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
                     <div>
                         <form id="updatemanager_updatefile_form" target="updatefile_uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/System.Configure/UpdateManager.ManualUpdate" data-ajax="false">
                             <input id="updatemanager_updatefile_uploadfile" type="file" title="Manual update from '.tgz' release file." name="file" />
@@ -27,9 +35,7 @@
                     </div>
                 </div>
                 <div class="ui-block-b" style="float:right;width:150px">
-                    <a id="configure_system_updatemanager_updatebutton" data-locale-id="configure_system_updatemanager_updatecheck" class="ui-btn ui-corner-all">Update Check</a>
                     <a id="configure_system_updatemanager_manualbutton" data-locale-id="configure_system_updatemanager_manualupdate" href="#" class="ui-btn ui-corner-all">Manual Update</a>
-                    <a id="configure_system_updatemanager_installbutton" data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
                 </div>
             </div>
 

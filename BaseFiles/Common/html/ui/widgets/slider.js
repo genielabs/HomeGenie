@@ -15,6 +15,7 @@
         html = html.replace(/{description}/g, description);
         element.html(html);
         var _this = this;
+        this.valueChanged = false;
         var valueLabel = element.find('[data-ui-field=value]');
         var sliderInput = element.find('[data-ui-field=sliderinput]');
         // reference to the slider object is only valid after it is created
@@ -26,9 +27,13 @@
             slider.attr('step', _this.step);
             slider.slider().slider('refresh');        
             slider.on('change', function(evt){
-                if (typeof _this.onChange == 'function') {
+                _this.valueChanged = true;
+            });
+            slider.on('slidestop', function(evt){
+                if (_this.valueChanged && typeof _this.onChange == 'function') {
                     _this.onChange($(this).val());
                 }
+                _this.valueChanged = false;
             });
         }, 500);
     }

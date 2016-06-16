@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r522</Version>
+  <Version>1.1 beta r523</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote></ReleaseNote>
-  <ReleaseDate>2016-06-05T09:08:07.0000Z</ReleaseDate>
+  <ReleaseNote>   - UpdateChecker now is using "GitHub releases" as only source for update checking and upgrade files
+  - Enabled UI widgets for program options
+  - Should fix accented letters bug in module/group names</ReleaseNote>
+  <ReleaseDate>2016-06-12T19:12:21.0000Z</ReleaseDate>
 </ReleaseInfo>

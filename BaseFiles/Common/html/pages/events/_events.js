@@ -242,7 +242,7 @@
                     if (module != null && eventLog.Value != '') {
                         popupdata = {
                             icon: iconImage,
-                            title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
+                            title: '<span style="color:yellow;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
                             text: 'Runtime<br />Error',
                             timestamp: date
                         };
@@ -263,7 +263,7 @@
                     var notification = JSON.parse(eventLog.Value);
                     popupdata = {
                         icon: iconImage,
-                        title: '<span style="color:yellow;font-size:9pt;">' + notification.Title + '</span><br>' + notification.Message,
+                        title: '<span style="color:yellow;">' + notification.Title + '</span><br>' + notification.Message,
                         text: '',
                         timestamp: date
                     };
@@ -272,7 +272,7 @@
                     //if (module.Name != '') name = module.Name;
                     popupdata = {
                         icon: iconImage,
-                        title: '<span style="color:yellow;font-size:9pt;">' + eventLog.Property + '</span><br>' + eventLog.Value,
+                        title: '<span style="color:yellow;">' + eventLog.Property + '</span><br>' + eventLog.Value,
                         text: '',
                         timestamp: date
                     };
@@ -286,7 +286,7 @@
                     var domain = eventLog.Domain.substr(eventLog.Domain.lastIndexOf('.') + 1);
                     popupdata = {
                         icon: 'images/genie.png',
-                        title: '<span style="color:yellow;font-size:9pt;">' + domain + ' ' + eventLog.Property + '</span><br/>' + eventLog.Value,
+                        title: '<span style="color:yellow;">' + domain + ' ' + eventLog.Property + '</span><br/>' + eventLog.Value,
                         text: '',
                         timestamp: date
                     };
@@ -296,65 +296,35 @@
 
             default:
                 if (module != null && !$$.IsBlacklisted(eventLog.Property)) {
-
-                    var iconImage = HG.Ui.GetModuleIcon(module, null);
                     if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
-                        iconImage = 'images/remote.png';
                         popupdata = {
-                            icon: iconImage,
-                            title: '<span style="color:yellow;font-size:9pt;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br/>' + eventLog.Value,
+                            icon: 'images/remote.png',
+                            title: '<span style="color:yellow;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br/>' + eventLog.Value,
                             text: module.Address,
                             timestamp: date
                         };
-                    } else if (eventLog.Property.substring(0, 7) == 'Sensor.') {
-                        var group = HG.WebApp.GroupsList.GetModuleGroup(module);
-                        if (group != null) group = group.Name;
-                        var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
-                        var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
-                        //
-                        switch (propname) {
-                            case 'Temperature':
-                                iconImage = 'pages/control/widgets/homegenie/generic/images/temperature.png';
-                                var temperature = eventLog.Value.replace(',', '.');
-                                eventLog.Value = HG.WebApp.Utility.FormatTemperature(temperature);
-                                break;
-                            case 'Luminance':
-                                iconImage = 'pages/control/widgets/homegenie/generic/images/luminance.png';
-                                break;
-                            default:
-                                iconImage = 'pages/control/widgets/homegenie/generic/images/sensor.png';
-                                break;
-                        }
-                        //
-                        if (module.Name != '') name = module.Name;
-                        if (group == null) group = '';
-                        //
-                        popupdata = {
-                            icon: iconImage,
-                            title: '<span style="color:yellow;font-size:9pt;">' + group + '</span><br><b>' + name + '</b><br>' + propname,
-                            text: parseFloat(eventLog.Value.replace(',', '.')).toFixed(2),
-                            timestamp: date
-                        };
-                    } else if (eventLog.Property.substring(0, 7) == 'Status.') {
-                        var group = HG.WebApp.GroupsList.GetModuleGroup(module);
-                        if (group != null) group = group.Name;
-                        var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
-                        var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
-                        var value = eventLog.Value;
-                        if (!isNaN(eventLog.Value.replace(',', '.')))
-                            value = (parseFloat(eventLog.Value.replace(',', '.')).toFixed(2));
-                        //
-                        if (module.Name != '') name = module.Name;
-                        if (group == null) group = '';
-                        //
-                        popupdata = {
-                            icon: iconImage,
-                            title: '<span style="color:yellow;font-size:9pt;">' + group + '</span><br><b>' + name + '</b>',
-                            text: propname + '<br />' + value,
-                            timestamp: date
-                        };
+                    } else if (!isNaN(eventLog.Value.replace(',', '.'))) {
+                        HG.Ui.GetModuleIcon(module, function(icon,elid){
+                            var iconImage = icon;
+                            var group = HG.WebApp.GroupsList.GetModuleGroup(module);
+                            if (group != null) group = group.Name;
+                            var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
+                            var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
+                            var value = eventLog.Value;
+                            if (!isNaN(eventLog.Value.replace(',', '.')))
+                                value = (parseFloat(eventLog.Value.replace(',', '.')).toFixed(2));
+                            //
+                            if (module.Name != '') name = module.Name;
+                            if (group == null) group = '';
+                            //
+                            popupdata = {
+                                icon: iconImage,
+                                title: '<span style="color:yellow;">' + group + '</span><br><b>' + name + '</b>',
+                                text: propname + '<br />' + value,
+                                timestamp: date
+                            };
+                        });
                     }
-                    //
                     // send this to wizard script event capture
                     if (HG.WebApp.ProgramEdit._IsCapturingConditions && eventLog.Value != '') {
                         var conditionobj = {
@@ -400,7 +370,7 @@
         for (var i = 0; i < ignoreList.length; i++)
         {
             var item = '<li data-icon="minus">';
-            item += '    <a href="#" class="ui-grid-b" onclick="$$.PopupRemoveIgnore(' + i + ')">';
+            item += '    <a href="#" class="ui-grid-b" onclick="HG.WebApp.Events.PopupRemoveIgnore(' + i + ')">';
             item += '        <div class="ui-block-a hg-label" style="width:40%">' + ignoreList[i].Domain + '</div>';
             item += '        <div class="ui-block-b hg-label" style="width:20%" align="center">' + ignoreList[i].Address + '</div>';
             item += '        <div class="ui-block-c hg-label" style="width:40%">' + ignoreList[i].Property + '</div>';
@@ -450,12 +420,13 @@
 
     $$.ShowEventPopup = function (popupdata, eventLog) {
 
-        var s = '<table width="100%"><tr><td width="42" valign="top">';
+        var s = '<table width="100%" onmouseenter="$(this).find(\'tr[data-ui-field=actions]\').show(250);">';
+        s += '<tr><td width="42" valign="top">';
         s += '<img src="' + popupdata.icon + '" width="42">';
-        s += '</td><td valign="top" align="left">';
+        s += '</td><td valign="middle" align="left">';
         s += popupdata.title;
-        s += '</td><td align="right" style="color:lime;font-size:12pt">' + popupdata.text + '</td></tr>';
-        s += '<tr style="color:gray;font-size:9pt;"><td colspan="2">' + popupdata.timestamp + '</td>';
+        s += '</td><td align="right" style="color:lime;">' + popupdata.text + '</td></tr>';
+        s += '<tr data-ui-field="actions" style="color:gray;display:none"><td colspan="2">' + popupdata.timestamp + '</td>';
         if (eventLog)
         {
             s += '<td align="right"><a href="#" title="Block popup from this source" onclick="HG.WebApp.Events.PopupAddIgnore(\'' + eventLog.Domain + '\',\'' + eventLog.Source + '\',\'' + eventLog.Property + '\')"><img border="0" alt="Block popup from this source" src="images/halt.png" /></a></td>';
@@ -471,12 +442,12 @@
         else {
             popup.css('display', '');
             popup.animate({ opacity: '0' }, 0, function () {
-                popup.animate({ right: '5px', opacity: '0.90' }, 300);
+                popup.animate({ right: '5px', opacity: '0.85' }, 200);
             });
         }
         $$._popupHideTimeout = setTimeout(function () {
             if (popup.css('display') != 'none') {
-                popup.animate({ right: '-300px', opacity: '0.0' }, 300, function () {
+                popup.animate({ right: '-300px', opacity: '0.0' }, 200, function () {
                     popup.css('display', 'none');
                 });
             }

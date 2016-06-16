@@ -96,10 +96,15 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             //
             $('#configure_system_updatemanager_updatebutton').bind('click', function () {
                 $('#configure_system_updatemanager_info').html('<strong>Checking for updates...</strong>');
+                $('#configure_system_updatemanager_detailsscroll').slideUp(300);
+                $('#configure_system_updatemanager_installbutton').hide();
                 $.mobile.loading('show');
                 HG.System.UpdateManager.UpdateCheck(function (res) {
                     $.mobile.loading('hide');
-                    $$.LoadUpdateCheckSettings();
+                    if (res.ResponseValue == 'OK')
+                        $$.LoadUpdateCheckSettings();
+                    else
+                        $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_connection_error', 'Connection error!'));
                 });
             });
             $('#configure_system_updatemanager_manualbutton').on('click', function () {
@@ -574,11 +579,13 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
     $$.LoadUpdateCheckSettings = function () {
         $.mobile.loading('show');
         $('#configure_system_updateinstall_button').addClass('ui-disabled');
+        $('#configure_system_updatemanager_detailsscroll').slideUp(300);
+        $('#configure_system_updatemanager_installbutton').hide();
         HG.System.UpdateManager.GetUpdateList(function (releasedata) {
-            if (releasedata.length == 0) {
+            if (releasedata.ResponseValue == 'ERROR') {
+                $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_connection_error', 'Connection error!'));
+            } else if (releasedata.length == 0) {
                 $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_no_updates'));
-                $('#configure_system_updatemanager_detailsscroll').hide();
-                $('#configure_system_updatemanager_installbutton').hide();
             } else {
                 $('#configure_system_updatemanager_info').html(HG.WebApp.Locales.GetLocaleString('configure_system_updatemanager_updates_available'));
                 var s = '<pre>';
@@ -589,7 +596,7 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                 }
                 s += '</pre>';
                 $('#configure_system_updatemanager_details').html(s);
-                $('#configure_system_updatemanager_detailsscroll').show();
+                $('#configure_system_updatemanager_detailsscroll').slideDown(300);
                 $('#configure_system_updatemanager_installbutton').show();
             }
             $.mobile.loading('hide');

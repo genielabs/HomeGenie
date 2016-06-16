@@ -5,6 +5,7 @@
         this.matchDomain = ((typeof options[0] == 'undefined' || options[0].toLowerCase() == 'any') ? '' : options[0].toLowerCase());
         this.matchType = ((typeof options[1] == 'undefined' || options[1].toLowerCase() == 'any') ? '' : options[1].toLowerCase());
         this.matchField = ((typeof options[2] == 'undefined' || options[2].toLowerCase() == 'any') ? '' : options[2].toLowerCase());
+        this.initialValue = this.context.parameter.Value;
     },
     bind: function() {
         var element = this.element;
@@ -17,22 +18,24 @@
         var _this = this;
         var textInput = element.find('[data-ui-field=textinput]');
         textInput.data('module-address', context.parameter.Value);
-        textInput.on('change', function(evt){
-            if (typeof _this.onChange == 'function') {
-                _this.onChange($(this).val());
-            }
-        });
         textInput.on('keyup', function() {
             _this.checkInput();
         });
         textInput.on('blur', function() {
             _this.checkInput();
+            var inputValue = textInput.data('module-address');
+            if (_this.initialValue != inputValue && typeof _this.onChange == 'function') {
+                _this.onChange(inputValue);
+                _this.initialValue = inputValue;
+            }
         });
         textInput.autocomplete({
             minLength: 0,
             delay: 500,
             source: function (req, res){
-                res(_this.searchModule(req.term));
+                if (req.term.indexOf('(') > 0)
+                    req.term = req.term.substring(0, req.term.indexOf('(')-1);
+                res(_this.searchModule(req.term.trim()));
             },
             select: function (event, ui) {
                 textInput.val(ui.item.value);
@@ -89,7 +92,9 @@
             var da = HG.WebApp.Utility.ParseModuleDomainAddress(address);
             var mod = HG.WebApp.Utility.GetModuleByDomainAddress(da.Domain, da.Address);
             if (mod != null && (textInput.val() == '' || (textInput.val().toLowerCase() == HG.Ui.GetModuleDisplayName(mod).toLowerCase()))) {
-                textInput.val(HG.Ui.GetModuleDisplayName(mod));
+                var newValue = HG.Ui.GetModuleDisplayName(mod);
+                if (textInput.val() != newValue)
+                    textInput.val(newValue);
                 verified = true;
             }
         }
@@ -99,9 +104,6 @@
             address = '';
             textInput.data('module-address', '');
             textInput.parent().css('border-color', 'red');
-        }
-        if (typeof this.onChange == 'function') {
-            this.onChange(address);
         }
     },
     searchModule: function(filter) {

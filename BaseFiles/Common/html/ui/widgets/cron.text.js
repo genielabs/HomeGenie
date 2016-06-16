@@ -37,7 +37,7 @@
         });
         element.find('[data-ui-field=cronwiz-addnew]').on('click', function(){
             HG.Ui.Popup.CronWizard.onChange = function(item){
-                HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.Script, function () {
+                HG.Automation.Scheduling.UpdateItem(item.Name, item, function () {
                     _this.refreshCronList('@'+item.Name);
                     _this.cronSelect.trigger('change');
                 });
@@ -56,7 +56,7 @@
         });
         element.find('[data-ui-field=cronwiz-edit]').on('click', function(){
             HG.Ui.Popup.CronWizard.onChange = function(item){
-                HG.Automation.Scheduling.Update(item.Name, item.CronExpression, item.Data, item.Description, item.Script, function () {
+                HG.Automation.Scheduling.UpdateItem(item.Name, item, function () {
                     _this.refreshCronList('@'+item.Name);
                     _this.cronSelect.trigger('change');
                 });

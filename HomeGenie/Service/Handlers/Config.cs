@@ -212,12 +212,15 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.UpdatesList")
                 {
-                    request.ResponseData = homegenie.UpdateChecker.RemoteUpdates;
+                    if (homegenie.UpdateChecker.RemoteUpdates != null)
+                        request.ResponseData = homegenie.UpdateChecker.RemoteUpdates;
+                    else
+                        request.ResponseData = new ResponseText("ERROR");
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.Check")
                 {
-                    homegenie.UpdateChecker.Check();
-                    request.ResponseData = new ResponseText("OK");
+                    bool checkSuccess = homegenie.UpdateChecker.Check();
+                    request.ResponseData = new ResponseText(checkSuccess ? "OK" : "ERROR");
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.ManualUpdate")
                 {

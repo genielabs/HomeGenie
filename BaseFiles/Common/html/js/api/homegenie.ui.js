@@ -225,7 +225,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
 
     $$.GetModuleIcon = function(module, callback, elid) {
         var icon = 'pages/control/widgets/homegenie/generic/images/unknown.png';
-        if (module != null && module.DeviceType && module.DeviceType != '' && module.DeviceType != 'undefined') {
+        if (module != null && typeof module.DeviceType != 'undefined' && module.DeviceType != '') {
             var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, ParameterType.Widget_DisplayIcon);
             var widget = HG.WebApp.Utility.GetModulePropertyByName(module, ParameterType.Widget_DisplayModule);
             if (widget != null && widget.Value != '') {
@@ -235,7 +235,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
             }
             if (widgeticon != null && widgeticon.Value != '') {
                 icon = widgeticon.Value;
-            } else if (module.WidgetInstance && module.WidgetInstance != null && module.WidgetInstance != 'undefined') {
+            } else if (typeof module.WidgetInstance != 'undefined') {
                 if (typeof module.WidgetInstance.widget != 'undefined' && typeof module.WidgetInstance.widget.icon != 'undefined')
                     icon = module.WidgetInstance.widget.icon;
                 else // Compatibility fall-back for old widget format
@@ -322,6 +322,12 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
 
     $$.EditModule = function(module) {
         HG.WebApp.Control.EditModule(module);
+    }
+
+    $$.ConfigureProgram = function(module) {
+        HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
+        HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
+        HG.WebApp.ProgramsList.UpdateOptionsPopup();    
     }
 
     $$.GetParameterContext = function(module, parameter, value) {

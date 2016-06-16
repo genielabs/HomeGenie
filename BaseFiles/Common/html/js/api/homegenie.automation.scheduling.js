@@ -34,6 +34,20 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || new function(){ var $$ = 
         });
     };
 
+    $$.UpdateItem = function (name, item, callback) {
+        item.Name = name; // not allowing rename
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + encodeURIComponent(name),
+            type: 'POST',
+            dataType: 'text',
+            data: JSON.stringify(item),
+            success: function (data) {
+                if (typeof callback != 'undefined')
+                    callback(data);
+            }
+        });
+    };
+
     $$.Delete = function (name, callback) {
         $.ajax({
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Delete/' + encodeURIComponent(name),

@@ -222,13 +222,13 @@ input[type=number] {
     background-color: black;
     color: white;
     font-family: monospace !important;
-    font-size: 10pt;
-    border: solid 1px gray;
-    padding: 5px;
-    margin-top: 85px;
+    font-size: 9pt;
+    border: solid 2px rgba(200,200,200,0.75);
+    padding: 4px;
+    margin-top: 45px;
     right: -300px;
     width: 285px;
-    max-height: 120px;
+    max-height: 100px;
     opacity: 0.0;
     z-index: 1973;
 }
@@ -250,12 +250,8 @@ input[type=number] {
 }
 
 .hg-program-options-scroll {
-    border: solid 1px gray;
-    padding: 5px;
-    padding-top: 0;
-    height: 180px;
-    max-height: 180px;
-    overflow-y: scroll;
+    max-height: 280px;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 

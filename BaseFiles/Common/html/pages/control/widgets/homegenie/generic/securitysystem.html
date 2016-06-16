@@ -1,38 +1,38 @@
 ﻿<style>
-.blinking_alarm {
+  .blinking_alarm {
     -webkit-animation-name: blinker;
     -webkit-animation-duration: 0.7s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
-    
+
     -moz-animation-name: blinker;
     -moz-animation-duration: 0.7s;
     -moz-animation-timing-function: linear;
     -moz-animation-iteration-count: infinite;
-    
+
     animation-name: blinker;
     animation-duration: 0.7s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-}
+  }
 
-@-moz-keyframes blinker {  
+  @-moz-keyframes blinker {  
     0% { opacity: 1.0; }
     50% { opacity: 0.5; }
     100% { opacity: 1.0; }
-}
+  }
 
-@-webkit-keyframes blinker {  
+  @-webkit-keyframes blinker {  
     0% { opacity: 1.0; }
     50% { opacity: 0.5; }
     100% { opacity: 1.0; }
-}
+  }
 
-@keyframes blinker {  
+  @keyframes blinker {  
     0% { opacity: 1.0; }
     50% { opacity: 0.5; }
     100% { opacity: 1.0; }
-}
+  }
 </style>
 <div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="width:320px;height:290px;position:relative;z-index:10;background:none">
   <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.8;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
@@ -51,8 +51,8 @@
   <div data-ui-field="disarm_group" data-role="controlgroup" data-type="horizontal" align="center" data-mini="true" style="display:none">
     <a data-ui-field="btn_disarm" href="#" class="ui-btn ui-icon-forbidden ui-btn-icon-left">Disarm</a>
   </div>
-  <div style="position:absolute;bottom:10px;right:5px;left:5px;height:148px;overflow-y:scroll;font-size:10pt">
-    <div data-ui-field="activity-log" class="ui-grid-a" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+  <div style="position:absolute;bottom:10px;right:5px;left:5px;height:148px;overflow-y:auto;font-size:10pt">
+    <div data-ui-field="activity-log" class="ui-grid-a" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-right:4px">
     </div>
   </div>
   <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right" style="display:none">
