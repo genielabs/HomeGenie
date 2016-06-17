@@ -14,9 +14,8 @@
             $$.editorContainer.hide();
             $$.calendarContainer.hide();
             setTimeout(function(){
-                $$.showCalendar();
-                setTimeout($$.LoadScheduling, 500);
-            }, 300);
+                $$.LoadScheduling($$.showCalendar);
+            }, 500);
         });
 
         $$.datePicker = page.find('[data-ui-field="calendar-date"]').datebox({
@@ -107,9 +106,20 @@
         startDate.setHours(0,0,0,0);
         HG.Control.Modules.ApiCall('HomeAutomation.HomeGenie', 'Automation', 'Scheduling.ListOccurrences', (24*1).toString()+'/'+startDate.getTime(), function(schedules){
             occursList.empty();
+            var d = new Date(); d.setSeconds(0);
             var occurrences = [];
             $.each(schedules, function(k,v){
               var entry = { name: v.Name, occurs: [] };
+              $.each($$._ScheduleList,function(sk,sv){
+                if (sv.Name == v.Name) {
+                    entry.index = sk;
+                    entry.description = sv.Description;
+                    entry.boundModules = sv.BoundModules.length;
+                    entry.hasScript = (typeof sv.Script != 'undefined' && sv.Script != null && sv.Script.trim() != '');
+                    entry.prevOccurrence = 0;
+                    entry.nextOccurrence = 0;
+                }
+              });
               var prev = 0, start = 0;
               $.each(v.Occurrences, function(kk,vv){
                 if (prev == 0) prev = start = end = vv;
@@ -120,15 +130,28 @@
                     prev = vv;
                 }
                 end = vv;
+                if (entry.prevOccurrence < vv && vv < d.getTime())
+                    entry.prevOccurrence = vv;
+                if (entry.nextOccurrence == 0 && vv > d.getTime())
+                    entry.nextOccurrence = vv;
               });
               entry.occurs.push({ from: start, to: end });
               occurrences.push(entry);
             });
             var w = $(window).width()-32-50, h = 10;
             $.each(occurrences, function(k,v){
-                occursList.append('<h2 style="text-align:left;margin:0;margin-top:0.5em">'+v.name+'</h2>');
                 var timeBarDiv = $('<div/>');
-                occursList.append(timeBarDiv);
+                timeBarDiv.css('cursor', 'pointer');
+                timeBarDiv.on('click',function(){
+                    $$._CurrentEventName = v.name;
+                    $$._CurrentEventIndex = v.index;
+                    $$.EditCurrentItem();
+                });
+                var indicators = '';
+                if (v.boundModules > 0)
+                    indicators += '<i title="bound modules" class="fa fa-check-square"></i> '+v.boundModules;
+                if (v.hasScript > 0)
+                    indicators += '&nbsp;&nbsp;&nbsp;<i title="runs script" class="fa fa-code"></i>';
                 var timeBar = Raphael(timeBarDiv[0], w, h*2.5);
                 timeBarDiv.append('<i class="fa fa-clock-o" aria-hidden="true" style="font-size:20pt;margin-left:8px;opacity:0.65;vertical-align:top;"></i>');
                 timeBar.rect(0, 0, w, h*2.5).attr({
@@ -136,6 +159,8 @@
                     stroke: "rgb(0,0,0)",
                     "stroke-width": 1
                 });
+                occursList.append('<div class="ui-grid-a"><div class="ui-block-a"><h2 style="text-align:left;margin:0;margin-top:0.5em">'+v.name+'</h2></div><div class="ui-block-b" align="right" style="padding-right:48px;padding-top:20px">'+indicators+'</div></div>');
+                occursList.append(timeBarDiv);
 
                 $.each(v.occurs, function(kk,vv){
                     var df = sd = new Date(vv.from);
@@ -148,15 +173,8 @@
                         stroke: "rgba(255,255,255, 70)",
                         "stroke-width": 1
                     });
-
-                    var mf = HG.WebApp.Utility.FormatDateTime(new Date(vv.from));
-                    var mt = HG.WebApp.Utility.FormatDateTime(new Date(vv.to));
-                    //if (vv.from == vv.to)
-                    //    occursList.append('<div>at '+mf+'</div>');
-                    //else
-                    //    occursList.append('<div>from '+mf+' to '+mt+'</div>');
-
                 });    
+
 
                 for (var t = 0; t < 24; t++) {
                     timeBar.text(t*(w/24)+(w/48), 18, t.toString()).attr({fill:'white'});
@@ -166,7 +184,13 @@
                     });
                 }
 
-                var d = new Date();
+                // build basic tooltip data
+                var desc = '<strong>'+v.name+'</strong><br/>&nbsp;&nbsp;&nbsp;';
+                if (typeof v.description != 'undefined' && v.description != null && v.description.trim() != '')
+                    desc += v.description;
+                desc += '<br/>';
+
+                d = new Date(); d.setSeconds(0);
                 var isToday = d.toDateString() == $$._CurrentDate.toDateString();
                 if (isToday) {
                     d = d.getTime();
@@ -183,6 +207,16 @@
                         stroke: "rgba(0,0,0, 70)",
                         "stroke-width": 0.5
                     });
+                    // tooltip: previous/next occurrence text
+                    if (v.prevOccurrence > 0 || v.nextOccurrence > 0) {
+                        desc += '<strong>Today</strong><div align="center">';
+                        if (v.prevOccurrence > 0)
+                            desc += moment(v.prevOccurrence).format('LT')+' <i class="fa fa-long-arrow-left"></i>';
+                        desc += ' <i class="fa fa-clock-o"></i> ';
+                        if (v.nextOccurrence > 0)
+                            desc += '<i class="fa fa-long-arrow-right"></i> '+moment(v.nextOccurrence).format('LT')+'<br/>';
+                        desc += '</div>';
+                    }
                 } else {
                     var d2 = new Date(); d2.setHours(0,0,0,0);
                     if ($$._CurrentDate.getTime() > d2.getTime()) {
@@ -193,6 +227,15 @@
                         });
                     }
                 }
+
+                // attach tooltip
+                timeBarDiv.qtip({
+                  content: desc,
+                  show: { delay: 350 },
+                  hide: { inactive: 3000 },
+                  style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                  position: { my: 'bottom center', at: 'top center' }
+                });
 
                 timeBar.rect(0, 0, w, h*2.5).attr({
                     stroke: "rgba(255, 255, 255, 0.75)", 
@@ -276,7 +319,10 @@
         HG.Ui.Popup.CronWizard.open($$._CurrentEventName);
         HG.Ui.Popup.CronWizard.onChange = function(item) {
             HG.Automation.Scheduling.UpdateItem(item.Name, item, function () {
-                $$.showEditor();
+                if ($$._CurrentEventName == '')
+                    $$.showEditor();
+                else
+                    $$.RefreshOccursTable();
             });
         };
     };

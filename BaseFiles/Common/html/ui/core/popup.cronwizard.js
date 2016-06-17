@@ -21,6 +21,19 @@ $$.bind = function() {
                 style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                 position: { my: 'top center', at: 'bottom center' }
             }).qtip('show');
+        } else if (cronExpression.replace(/#|\(|\[|\]|\(|\)|\s|:|;/g,'') == '') {
+            var target = $$.element.find('div[class="CodeMirror-scroll"]');
+            if ($$.cronTypeSelect.val() != '3')
+                target = $$.addTimeButton;
+            HG.Ui.ScrollTo(target, 500, $$.panelScheduling, function(){
+                target.qtip({
+                    content: { text: 'Please add one or more time items.' },
+                    show: { event: false, delay: 500 },
+                    hide: { inactive: 2000 },
+                    style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                    position: { my: 'bottom center', at: 'top center' }
+                }).qtip('show');
+            });
         } else if (cronExpression != '' && typeof $$.onChange == 'function') {
             var eachMinute = [];
             $$.eachMinuteGroup.find("input[type=checkbox]:checked").each(function() {
@@ -128,7 +141,24 @@ $$.bind = function() {
             $$.timeStart.val($$.timeAt.val()).html($$.timeAt.val());
             $$.timeEnd.val($$.timeAt.val()).html($$.timeAt.val());
         }
-        $$.timeItems.push({ start: $$.timeStart.val(), end: $$.timeEnd.val() });
+        var isNew = true;
+        if ($$.timeItems.length > 0)
+        $.each($$.timeItems,function(k,v){
+            var s = $$.timeStart.val();
+            var e = $$.timeEnd.val();
+            console.log('s '+s+' v.start '+v.start);
+            console.log('e '+e+' v.end '+v.end);
+            if ((v.start <= s && v.end >= s) || (v.start <= e && v.end >= e)) {
+                if (v.start > s)
+                    v.start = s;
+                if (v.end < e)
+                    v.end = e;
+                isNew = false;
+                return false;
+            }
+        });
+        if (isNew)
+            $$.timeItems.push({ start: $$.timeStart.val(), end: $$.timeEnd.val() });
         $$.refreshTimeItems();
         $$._buildCron();
     });
@@ -724,7 +754,7 @@ $$.getTimeCron = function(timeFrom, timeTo, minOccur, hourOccur) {
                 var hfn = hf<23 ? hf+1 : 0;
                 var htp = ht>0 ? ht-1 : 23;
                 if (hfn > htp && hfn < 23)
-                    htp = '23,'+htp;
+                    htp = '23,0-'+htp;
                 else if (hfn > htp && hfn == 23)
                     htp = ','+htp;
                 cron = minOccur+' '+hfn+(hfn!=htp?(htp.toString().startsWith(',')?'':'-')+htp:'')+hour+' * * *';
@@ -836,39 +866,43 @@ $$._buildCron = function() {
         return a.start > b.start;
     });
     var hasRange = false;
-    $.each($$.timeItems,function(k,v){
-        var item = '', desc = '';
-        if (v.start == v.end) {
-            desc = text_at+' '+v.start;
-            item = $('<div title="tap to remove"><i class="fa fa-minus-circle"></i> '+desc+'</div>');
-            timeDescriptionSingle += ', '+desc;
-        } else {
-            hasRange = true;
-            desc = text_starting_at+' '+v.start+' '+text_ending_at+' '+v.end;
-            item = $('<div title="tap to remove"><i class="fa fa-minus-circle"></i> '+desc+'</div>');
-            timeDescriptionRange += ', '+desc;
-        }
-        item.css({ 'cursor': 'pointer'});
-        item.on('click', function(){
-            var ir = $$.timeItems[k];
-            var dt = moment(ir.start, 'HH:mm');
-            $$.timeAt.val(dt.format('HH:mm'));
-            $$.timeAt.html(dt.format('LT'));
-            $$.timeStart.val(dt.format('HH:mm'));
-            $$.timeStart.html(dt.format('LT'));
-            dt = moment(ir.end, 'HH:mm');
-            $$.timeEnd.val(dt.format('HH:mm'));
-            $$.timeEnd.html(dt.format('LT'));
-            if (ir.start == ir.end)
-                $$.eventType.val(0).trigger('change');
-            else
-                $$.eventType.val(1).trigger('change');
-            $$.timeItems.splice(k,1);
-            $$._buildCron();
+    if ($$.timeItems.length == 0) {
+        timeList.append(HG.WebApp.Locales.GetLocaleString('cronwizard_time_empty', 'no time added.'));
+    } else {
+        $.each($$.timeItems,function(k,v){
+            var item = '', desc = '';
+            if (v.start == v.end) {
+                desc = text_at+' '+v.start;
+                item = $('<div title="tap to remove"><i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;'+desc+'</div>');
+                timeDescriptionSingle += ', '+desc;
+            } else {
+                hasRange = true;
+                desc = text_starting_at+' '+v.start+' '+text_ending_at+' '+v.end;
+                item = $('<div title="tap to remove"><i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;'+desc+'</div>');
+                timeDescriptionRange += ', '+desc;
+            }
+            item.css({ 'cursor': 'pointer'});
+            item.on('click', function(){
+                var ir = $$.timeItems[k];
+                var dt = moment(ir.start, 'HH:mm');
+                $$.timeAt.val(dt.format('HH:mm'));
+                $$.timeAt.html(dt.format('LT'));
+                $$.timeStart.val(dt.format('HH:mm'));
+                $$.timeStart.html(dt.format('LT'));
+                dt = moment(ir.end, 'HH:mm');
+                $$.timeEnd.val(dt.format('HH:mm'));
+                $$.timeEnd.html(dt.format('LT'));
+                if (ir.start == ir.end)
+                    $$.eventType.val(0).trigger('change');
+                else
+                    $$.eventType.val(1).trigger('change');
+                $$.timeItems.splice(k,1);
+                $$._buildCron();
+            });
+            timeList.append(item);
+            cronTime = cronTime.concat($$.getTimeCron(v.start, v.end, min, hour));
         });
-        timeList.append(item);
-        cronTime = cronTime.concat($$.getTimeCron(v.start, v.end, min, hour));
-    });
+    }
     var cronMonth = $$.getMonthCron($$.dateFrom.val(), $$.dateTo.val(), dayom, month);
 
     var emptyOccur = '* * * * *';
@@ -900,7 +934,6 @@ $$._buildCron = function() {
         return ' . '+h+' ..';
     });
 
-    console.log(cronOccur);
     // Update the human readable output
     $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(cronOccur), function(res){
         var desc = '';
@@ -912,9 +945,6 @@ $$._buildCron = function() {
                 desc+= ' '+text_to+' '+moment($$.dateTo.val()).format('MMMM DD')+ ', ';
             }
         }
-        console.log(res.ResponseValue);
-        console.log(cronOccur);
-        console.log(hasRange);
         if (cronOccur != emptyOccur || hasRange) {
             if (!hasRange)
                 desc+= ', '+res.ResponseValue.substring(res.ResponseValue.indexOf(',')+1);

@@ -29,7 +29,6 @@ using NCrontab;
 using System.Threading;
 using HomeGenie.Service.Constants;
 using Newtonsoft.Json;
-using ExpressionEvaluation;
 using HomeGenie.Service;
 
 namespace HomeGenie.Automation.Scheduler

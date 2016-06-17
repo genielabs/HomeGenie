@@ -297,10 +297,12 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
       animate();
     };
 
-    $$.ScrollTo = function (element, delay) {
-        $('html, body').animate({
+    $$.ScrollTo = function (element, delay, container, callback) {
+        if (typeof container == 'undefined')
+            container = $('html, body');
+        container.animate({
             scrollTop: $(element).offset().top
-        }, delay);
+        }, delay, callback);
     };
 
     $$.SetTheme = function (theme) {

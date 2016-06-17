@@ -8,12 +8,7 @@
             <div class="ui-block-a" style="padding-right:10px;">
                 <span data-locale-id="cronwizard_event_name" class="label-small">Event name</span><br/>
                 <input data-ui-field="cron-name" type="text" data-inline="true" />
-                <span class="label-small">Type</span>
-                <select data-ui-field="cron-type-select" data-inline="true">
-                    <option value="1" data-locale-id="cronwizard_typeselect_days">days</option>
-                    <option value="2" data-locale-id="cronwizard_typeselect_period">date period</option>
-                    <option value="3" data-locale-id="cronwizard_typeselect_custom">custom cron expression</option>
-                </select>
+                <p>...</p>
             </div>
             <div class="ui-block-b" style="padding-left:10px;">
                 <span data-locale-id="cronwizard_event_description" class="label-small">Description</span><br/>
@@ -51,14 +46,21 @@
             <div style="margin-top:60px"><div><div><input data-ui-field="time-picker" type="text" data-role="none" /></div></div></div>
         </div>
 
-        <div style="display:block;height:20px">&nbsp;</div>
+         <div class="label-small ui-bar-inherit" align="center">Type</div>
+         <div align="center" class="ui-mini">
+             <select data-ui-field="cron-type-select" data-inline="true">
+                 <option value="1" data-locale-id="cronwizard_typeselect_days">days</option>
+                 <option value="2" data-locale-id="cronwizard_typeselect_period">date period</option>
+                 <option value="3" data-locale-id="cronwizard_typeselect_custom">custom cron expression</option>
+             </select>
+         </div>
 
-        <div data-ui-field="wizard-container" class="ui-mini">
+        <div data-ui-field="wizard-container">
 
-            <div data-ui-field="options-tabs-0" class="crontab-option-tab">
+            <div data-ui-field="options-tabs-0" class="ui-mini" style="margin:0;">
 
-                 <div data-ui-field="date-range" class="ui-grid-b">
-                  <div class="ui-block-a" align="center" style="width:27%">
+                 <div data-ui-field="date-range" class="ui-grid-b" style="margin-bottom:10px">
+                  <div class="ui-block-a" align="center" style="width:27%;">
                     <div data-locale-id="cronwizard_date_from" class="label-small">from</div>
                     <div class="title-normal clickable" data-ui-field="date-from">May 12</div>
                   </div>
@@ -71,6 +73,12 @@
                   </div>
                 </div>
 
+
+                <div data-locale-id="cronwizard_time_label" class="label-small ui-bar-inherit" align="center">Time</div>
+                <div data-ui-field="time-list" style="margin-top:6px;padding-left:80px;padding-right:80px;font-size:12pt;line-height:24pt;">no time added.</div>
+                <div align="center" style="margin-top:8px"><div data-ui-field="gfx-time">&nbsp;</div></div>
+
+
                  <div class="ui-grid-b">
                   <div class="ui-block-a" align="center">
                     <select data-ui-field="type" data-inline="true">
@@ -79,12 +87,16 @@
                     </select>
                   </div>
                   <div class="ui-block-b">
-                      <div class="ui-grid-a" data-ui-field="time-range" style="opacity:0.6">
-                          <div class="ui-block-a" align="center">
+                      <div class="ui-grid-b" data-ui-field="time-range" style="opacity:0.6">
+                          <div class="ui-block-a" align="center" style="width:40%">
                             <div data-locale-id="cronwizard_time_start" class="label-small">Start</div>
                             <div data-ui-field="time-start" class="title-medium clickable">12:00</div>
                           </div>
-                          <div class="ui-block-b" align="center">
+                          <div class="ui-block-b" align="center" style="width:20%">
+                            <div>&nbsp;</div>
+                            <i class="fa fa-long-arrow-right title-medium"></i>
+                          </div>
+                          <div class="ui-block-c" align="center" style="width:40%">
                             <div data-locale-id="cronwizard_time_end" class="label-small">End</div>
                             <div data-ui-field="time-end" class="title-medium clickable">18:45</div>
                           </div>
@@ -95,20 +107,17 @@
                       </div>
                   </div>
                   <div class="ui-block-c" align="center" data-mini="true">
-                      <a href="#" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus ui-btn-inline ui-mini" data-ui-field="addtime-button">Add</a>
+                      <a href="#" class="ui-btn ui-corner-all ui-btn-icon-right ui-icon-plus ui-btn-inline ui-mini" data-ui-field="addtime-button">Add</a>
                   </div>
                 </div>
 
-                <div align="center" style="margin-top:8px"><div data-ui-field="gfx-time">&nbsp;</div></div>
-                <div data-ui-field="time-list" style="padding-left:50px;padding-right:50px;font-size:18pt"></div>
-
             </div>
 
-            <div align="center" style="margin-bottom:10px;margin-top:20px">
+            <div align="center" class="ui-bar-inherit" style="margin-bottom:10px;margin-top:20px">
                 <span data-locale-id="cronwizard_event_occurrence" class="label-small">Occurrence</span>
             </div>
 
-            <div style="padding-left:20px;padding-right:20px">
+            <div class="ui-mini" style="margin:0;padding-left:20px;padding-right:20px">
 
                 <div data-ui-field="options-tabs-1" class="crontab-option-tab">
 
@@ -216,7 +225,7 @@
 
         </div><!-- end wizard container -->
 
-        <div data-ui-field="cronexpr-container" class="ui-mini" style="padding-left:30px;padding-right:25px;">
+        <div data-ui-field="cronexpr-container" class="ui-mini" style="margin-top:2em;padding-left:30px;padding-right:25px;">
 
             <div data-locale-id="cronwizard_event_cronexpr" align="center" class="label-small" style="margin-bottom:4px;margin-right:10px;margin-left:10px">Cron expression</div>
             <textarea data-ui-field="cron-expr" 

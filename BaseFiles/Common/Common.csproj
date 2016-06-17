@@ -3051,10 +3051,6 @@
       <Link>lib\shared\CronExpressionDescriptor.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\ExpressionEvaluation\ExpressionEvaluation.dll">
-      <Link>lib\shared\ExpressionEvaluation.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\..\Externals\knx.net\KNXLib.dll">
       <Link>lib\shared\KNXLib.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

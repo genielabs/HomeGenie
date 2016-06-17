@@ -1,1 +1,0 @@
-http://www.codeproject.com/Articles/9114/math-function-boolean-string-expression-evaluator
