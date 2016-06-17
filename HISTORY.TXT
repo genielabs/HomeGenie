@@ -1,6 +1,7 @@
 ﻿RELEASE HISTORY
 
-12/06/2016 v1.1-beta.523
+17/06/2016 v1.1-beta.523
+    - Introducing the new Scheduler; deprecated Timetable and Scheduled on/off programs
     - UpdateChecker now is using "GitHub releases" as only source for update checking and upgrade files
     - Enabled UI widgets for program options
     - Should fix accented letters bug in module/group names
