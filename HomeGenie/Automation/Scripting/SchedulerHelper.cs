@@ -75,16 +75,6 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Sets the json data representing this schedule definition.
-        /// </summary>
-        /// <param name="data">JSON data string.</param>
-        public SchedulerHelper SetData(string data)
-        {
-            homegenie.ProgramManager.SchedulerService.SetData(scheduleName, data);
-            return this;
-        }
-
-        /// <summary>
         /// Sets the program id to run when the selected schedule occurs.
         /// </summary>
         /// <param name="programId">Program ID.</param>

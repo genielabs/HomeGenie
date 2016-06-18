@@ -38,7 +38,8 @@
             $$.RefreshOccursTable();
         });
 
-        $$.displayDate = page.find('[data-ui-field="display-date"]').on('click', function(){
+        $$.displayDate = page.find('[data-ui-field="display-date"]');
+        page.find('[data-ui-field="calendar-title"]').on('click', function(){
             $$.datePicker.datebox('open');
         });
 
@@ -130,7 +131,7 @@
                     prev = vv;
                 }
                 end = vv;
-                if (entry.prevOccurrence < vv && vv < d.getTime())
+                if (entry.prevOccurrence < vv && vv <= d.getTime())
                     entry.prevOccurrence = vv;
                 if (entry.nextOccurrence == 0 && vv > d.getTime())
                     entry.nextOccurrence = vv;
@@ -185,7 +186,7 @@
                 }
 
                 // build basic tooltip data
-                var desc = '<strong>'+v.name+'</strong><br/>&nbsp;&nbsp;&nbsp;';
+                var desc = '';
                 if (typeof v.description != 'undefined' && v.description != null && v.description.trim() != '')
                     desc += v.description;
                 desc += '<br/>';
@@ -209,13 +210,14 @@
                     });
                     // tooltip: previous/next occurrence text
                     if (v.prevOccurrence > 0 || v.nextOccurrence > 0) {
-                        desc += '<strong>Today</strong><div align="center">';
-                        if (v.prevOccurrence > 0)
-                            desc += moment(v.prevOccurrence).format('LT')+' <i class="fa fa-long-arrow-left"></i>';
-                        desc += ' <i class="fa fa-clock-o"></i> ';
-                        if (v.nextOccurrence > 0)
-                            desc += '<i class="fa fa-long-arrow-right"></i> '+moment(v.nextOccurrence).format('LT')+'<br/>';
-                        desc += '</div>';
+                        if (v.prevOccurrence > 0) {
+                            desc += '<br/><strong>Today last</strong><br/>&nbsp;&nbsp;&nbsp;';
+                            desc += moment(v.prevOccurrence).format('LT')+'&nbsp;&nbsp;('+moment(v.prevOccurrence).from(new Date())+')';
+                        }
+                        if (v.nextOccurrence > 0) {
+                            desc += '<br/><strong>Today next</strong><br/>&nbsp;&nbsp;&nbsp;';
+                            desc += moment(v.nextOccurrence).format('LT')+'&nbsp;&nbsp;('+moment(v.nextOccurrence).from(new Date())+')';
+                        }
                     }
                 } else {
                     var d2 = new Date(); d2.setHours(0,0,0,0);
@@ -230,10 +232,23 @@
 
                 // attach tooltip
                 timeBarDiv.qtip({
-                  content: desc,
-                  show: { delay: 350 },
-                  hide: { inactive: 3000 },
-                  style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                  content: {
+                    text: desc,
+                    title: {
+                        text: '<strong>'+v.name+'</strong>',            
+                        //button: 'close'
+                    }
+                  },
+                  show: { delay: 350, solo: true, effect: function(offset) {
+                    $(this).slideDown(100);
+                  } },
+                  hide: { inactive: 10000 },
+                  style: { 
+                    classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap',
+                    width: 400, 
+                    name: 'dark',
+                    padding: 0
+                  },
                   position: { my: 'bottom center', at: 'top center' }
                 });
 
@@ -322,7 +337,7 @@
                 if ($$._CurrentEventName == '')
                     $$.showEditor();
                 else
-                    $$.RefreshOccursTable();
+                    $$.LoadScheduling($$.RefreshOccursTable);
             });
         };
     };

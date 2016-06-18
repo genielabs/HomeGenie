@@ -21,6 +21,8 @@ namespace HomeGenie.Automation.Scheduler
           // ModulesManager
           modules: hg.modules,
           boundModules: hg.boundModules,
+          // ProgramHelperBase
+          program: hg.Program,
           // SettingsHelper
           settings: hg.settings,
           // NetHelper
@@ -39,14 +41,7 @@ namespace HomeGenie.Automation.Scheduler
           scheduler: hg.scheduler,
           // Miscellaneous functions
           pause: function(seconds) { hg.pause(seconds); },
-          delay: function(seconds) { this.pause(seconds); },
-          say: function(sentence, language, async) { 
-            if (typeof language == 'undefined')
-                language = null;
-            if (typeof async == 'undefined')
-                async = false;
-            hg.say(sentence, language, async); 
-          }
+          delay: function(seconds) { this.pause(seconds); }
         }
         ";
 
@@ -103,16 +98,14 @@ namespace HomeGenie.Automation.Scheduler
                     isRunning = false;
                     if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
                         homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Error ("+result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ')+")");
-                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":End");
-                    //homegenie.RaiseEvent(programBlock, Properties.ProgramStatus, programBlock.IsEnabled ? "Idle" : "Stopped");
                 }
                 catch (ThreadAbortException)
                 {
                     programThread = null;
                     isRunning = false;
-                    if (homegenie.ProgramManager != null)
-                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Interrupted");
+                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Interrupted");
                 }
+                homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":End");
             });
 
             try

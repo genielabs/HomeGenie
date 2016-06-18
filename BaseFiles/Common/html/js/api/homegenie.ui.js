@@ -300,8 +300,9 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
     $$.ScrollTo = function (element, delay, container, callback) {
         if (typeof container == 'undefined')
             container = $('html, body');
+        var scroll = container.scrollTop()+($(element).offset().top-container.offset().top);
         container.animate({
-            scrollTop: $(element).offset().top
+            scrollTop: scroll
         }, delay, callback);
     };
 

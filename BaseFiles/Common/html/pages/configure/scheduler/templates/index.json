@@ -1,22 +1,37 @@
 ﻿[
     { 
-        "Name": "Turn On",
-        "Script": "command.turn-on.js"
+        "name": {
+            "en": "Turn On",
+            "it": "Accendi"
+        },
+        "script": "command.turn-on.js"
     },
     { 
-        "Name": "Turn Off",
-        "Script": "command.turn-off.js"
+        "name": {
+            "en": "Turn Off",
+            "it": "Spegni"
+        },
+        "script": "command.turn-off.js"
     },
     { 
-        "Name": "Set Level",
-        "Script": "command.set-level.js"
+        "name": {
+            "en": "Set Level",
+            "it": "Imposta livello"
+        },
+        "script": "command.set-level.js"
     },
     {
-        "Name": "Thermostat Mode Heat",
-        "Script": "command.therm-heat.js"
+        "name": {
+            "en": "Thermostat Mode Heat",
+            "it": "Modalità termostato 'Caldo'"
+        },
+        "script": "command.therm-heat.js"
     },
     {
-        "Name": "Thermostat Off",
-        "Script": "command.therm-off.js"
+        "name": {
+            "en": "Thermostat Off",
+            "it": "Spegni termostato"
+        },
+        "script": "command.therm-off.js"
     }
 ]

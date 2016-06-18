@@ -2,7 +2,8 @@ $$.bind = function() {
     var element = $$.element;
     var context = $$.context;
 
-    $$.userLang = HG.WebApp.Locales.GetUserLanguage();
+    var locales = HG.WebApp.Locales;
+    $$.userLang = locales.GetUserLanguage();
     $$.cronUpdateTimeout = null;
 
     $$.cronName = $$.element.find('[data-ui-field=cron-name]').blur(function(){
@@ -14,9 +15,10 @@ $$.bind = function() {
     element.find('[data-ui-field=confirm-button]').on('click', function(){
         var cronExpression = $$._buildCron();
         if ($$.cronName.val().trim().length < 2) {
+            $$._setPanel('0');
             $$.cronName.qtip({
-                content: { text: 'Please enter a name of two or more characters.' },
-                show: { event: false, delay: 500 },
+                content: { text: locales.GetLocaleString('cronwizard_warning_nametooshort', 'Please enter a name of two or more characters.') },
+                show: { event: false, delay: 500, solo: true },
                 hide: { inactive: 2000 },
                 style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                 position: { my: 'top center', at: 'bottom center' }
@@ -25,10 +27,11 @@ $$.bind = function() {
             var target = $$.element.find('div[class="CodeMirror-scroll"]');
             if ($$.cronTypeSelect.val() != '3')
                 target = $$.addTimeButton;
-            HG.Ui.ScrollTo(target, 500, $$.panelScheduling, function(){
+            $$._setPanel('0');
+            HG.Ui.ScrollTo($$.element.find('[data-ui-field="time-title"]'), 250, $$.panelScheduling, function(){
                 target.qtip({
-                    content: { text: 'Please add one or more time items.' },
-                    show: { event: false, delay: 500 },
+                    content: { text: locales.GetLocaleString('cronwizard_warning_timeempty', 'Please add one or more time items.') },
+                    show: { event: false, delay: 500, solo: true },
                     hide: { inactive: 2000 },
                     style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                     position: { my: 'bottom center', at: 'top center' }
@@ -92,7 +95,7 @@ $$.bind = function() {
         } else {
             $$.element.find('[data-role="content"]').qtip({
                 content: { text: 'Please enter a valid cron time expression.' },
-                show: { event: false, delay: 500 },
+                show: { event: false, delay: 500, solo: true },
                 hide: { event: false, inactive: 2000 },
                 style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                 position: { my: 'bottom center', at: 'top center' }
@@ -131,7 +134,7 @@ $$.bind = function() {
                 $$.cronEditor.refresh();
                 break;
         }
-        $$.element.find('[data-role="content"]').scrollTop(0);
+        $$.panelScheduling.scrollTop(0);
         $$._buildCron();
     });
     $$.addTimeButton = element.find('[data-ui-field="addtime-button"]').on('click', function(){
@@ -146,8 +149,6 @@ $$.bind = function() {
         $.each($$.timeItems,function(k,v){
             var s = $$.timeStart.val();
             var e = $$.timeEnd.val();
-            console.log('s '+s+' v.start '+v.start);
-            console.log('e '+e+' v.end '+v.end);
             if ((v.start <= s && v.end >= s) || (v.start <= e && v.end >= e)) {
                 if (v.start > s)
                     v.start = s;
@@ -160,6 +161,7 @@ $$.bind = function() {
         if (isNew)
             $$.timeItems.push({ start: $$.timeStart.val(), end: $$.timeEnd.val() });
         $$.refreshTimeItems();
+        HG.Ui.ScrollTo($$.element.find('[data-ui-field="time-title"]'), 250, $$.panelScheduling);
         $$._buildCron();
     });
     // minute type select
@@ -255,7 +257,7 @@ $$.bind = function() {
     $$.panelScheduling = $$.element.find('div[data-ui-field="panel-scheduling"]');
     $$.panelModules = $$.element.find('div[data-ui-field="panel-modules"]');
     $$.panelScript = $$.element.find('div[data-ui-field="panel-script"]');
-    $$.buttonScheduling = $$.element.find('a[data-ui-field="panel-scheduling-btn"]').on('click', function(){
+    $$.buttonOccurrence = $$.element.find('a[data-ui-field="panel-occurrence-btn"]').on('click', function(){
         $$._setPanel('0');
     });
     $$.buttonModules = $$.element.find('a[data-ui-field="panel-modules-btn"]').on('click', function(){
@@ -265,6 +267,7 @@ $$.bind = function() {
         $$._setPanel('2');
     });
 
+    $$.timeList = $$.element.find('[data-ui-field="time-list"]');
     $$.timeRangeContainer = $$.element.find('div[data-ui-field="time-range"]');
     $$.timeRangeContainer.hide();
     $$.timeExactContainer = $$.element.find('div[data-ui-field="time-exact"]');
@@ -375,7 +378,7 @@ $$.bind = function() {
     $$.templateList = $$.element.find('[data-ui-field="templaes-list"]').on('change',function(){
         var idx = $(this).val();
             if (typeof idx != 'undefined' && idx != '') {
-            $.get('pages/configure/scheduler/templates/'+$$.templates[idx].Script, function(code){
+            $.get('pages/configure/scheduler/templates/'+$$.templates[idx].script, function(code){
                 $$.programEditor.replaceSelection(code);
             }, 'text');
             $$.templateList.val('').selectmenu('refresh');
@@ -384,9 +387,13 @@ $$.bind = function() {
     $$.templates = [];
     $.getJSON('pages/configure/scheduler/templates/index.json',function(templates){
         $$.templates = templates;
-        $$.templateList.find('option:not(:first)').remove();
+        $$.templateList.empty();
+        $$.templateList.append('<option value="">'+locales.GetLocaleString('cronwizard_script_addsnippet', '[ add code snippet ]')+'</option>');
         $.each(templates,function(k,v){
-            $$.templateList.append('<option value="'+k+'">'+v.Name+'</option>');
+            var name = v.name["en"];
+            if (typeof v.name[$$.userLang] != 'undefined')
+                name = v.name[$$.userLang];
+            $$.templateList.append('<option value="'+k+'">'+name+'</option>');
         });
         $$.templateList.selectmenu('refresh');
     });
@@ -552,15 +559,19 @@ $$._uiCheckToggle = function(el) {
 }
 
 $$._setPanel = function(id) {
-    $$.buttonScheduling.removeClass('ui-btn-active');
+    var locales = HG.WebApp.Locales;
+    $$.buttonOccurrence.removeClass('ui-btn-active');
     $$.buttonModules.removeClass('ui-btn-active');
     $$.buttonScript.removeClass('ui-btn-active');
+    var panelDesc = $$.element.find('[data-ui-field="panel-desc"]');
     switch(id) {
         case '0':
+            $$.panelScheduling.scrollTop(0);
             $$.panelScheduling.show();
             $$.panelModules.hide();
             $$.panelScript.hide();
-            $$.buttonScheduling.addClass('ui-btn-active');
+            $$.buttonOccurrence.addClass('ui-btn-active');
+            panelDesc.html(locales.GetLocaleString('cronwizard_occurrence_desc', 'Define occurrences of this event'));
             break;
         case '1':
             $$.panelScheduling.hide();
@@ -568,12 +579,15 @@ $$._setPanel = function(id) {
             $$.panelScript.hide();
             $$.buttonModules.addClass('ui-btn-active');
             $$.refreshModules();
+            panelDesc.html(locales.GetLocaleString('cronwizard_modules_desc', 'Select modules that will be handled by this event script (optional)'));
             break;
         case '2':
             $$.panelScheduling.hide();
             $$.panelModules.hide();
             $$.panelScript.show();
             $$.buttonScript.addClass('ui-btn-active');
+            panelDesc.html(locales.GetLocaleString('cronwizard_script_desc', 'Enter JavaScript code that will be executed at every occurrence of this event (optional)'));
+            $$.programEditor.refresh();
             break;
     }
 }
@@ -753,12 +767,14 @@ $$.getTimeCron = function(timeFrom, timeTo, minOccur, hourOccur) {
             if (hf > ht || ht-hf > 1 || (hf == ht && mt < mf)) {
                 var hfn = hf<23 ? hf+1 : 0;
                 var htp = ht>0 ? ht-1 : 23;
-                if (hfn > htp && hfn < 23)
-                    htp = '23,0-'+htp;
-                else if (hfn > htp && hfn == 23)
-                    htp = ','+htp;
-                cron = minOccur+' '+hfn+(hfn!=htp?(htp.toString().startsWith(',')?'':'-')+htp:'')+hour+' * * *';
-                cronItems.push(cron);
+                if (!(hfn == 0 && htp == 23)) {
+                    if (hfn > htp && hfn < 23)
+                        htp = '23,0-'+htp;
+                    else if (hfn > htp && hfn == 23)
+                        htp = ','+htp;
+                    cron = minOccur+' '+hfn+(hfn!=htp?(htp.toString().startsWith(',')?'':'-')+htp:'')+hour+' * * *';
+                    cronItems.push(cron);
+                }
             }
         }
     }
@@ -859,15 +875,14 @@ $$._buildCron = function() {
     }
 
     var cronTime = [];
-    var timeList = $$.element.find('[data-ui-field="time-list"]');
-    timeList.empty();
+    $$.timeList.empty();
     var timeDescriptionSingle = '', timeDescriptionRange = '';
     $$.timeItems.sort(function(a,b){
         return a.start > b.start;
     });
     var hasRange = false;
     if ($$.timeItems.length == 0) {
-        timeList.append(HG.WebApp.Locales.GetLocaleString('cronwizard_time_empty', 'no time added.'));
+        $$.timeList.append('<span style="opacity:0.5">'+locales.GetLocaleString('cronwizard_warning_timeempty', 'Please add one or more time items.')+'</span>');
     } else {
         $.each($$.timeItems,function(k,v){
             var item = '', desc = '';
@@ -899,7 +914,7 @@ $$._buildCron = function() {
                 $$.timeItems.splice(k,1);
                 $$._buildCron();
             });
-            timeList.append(item);
+            $$.timeList.append(item);
             cronTime = cronTime.concat($$.getTimeCron(v.start, v.end, min, hour));
         });
     }
@@ -972,9 +987,9 @@ $$._buildCron = function() {
     });
     ct = ct.substring(0, ct.length-3);
     if (cronOccur != emptyOccur)
-        cronexpr = '(' + cronOccur + ') ; '+(cm != '' ? cm+' ; ' : '')+'[ '+ct+' ]';
+        cronexpr = '(' + cronOccur + ')' + (cm != '' ? ' ; '+cm : '') + (ct != '' ? ' ; [ '+ct+' ]' : '');
     else
-        cronexpr = (cm != '' ? cm+' ; ' : '') + '[ '+ct+' ]';
+        cronexpr = (cm != '' ? cm : '') + (ct != '' ? ' ; [ '+ct+' ]' : '');
 
     $$.cronEditor.preventEvent = true;
     $$.cronEditor.setValue(cronexpr);

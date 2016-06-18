@@ -733,8 +733,8 @@
         "Jours de semaine sélectionnés",
     "cronwizard_event_name":
         "Event name",
-    "cronwizard_typeselect_days":
-        "days",
+    "cronwizard_typeselect_standard":
+        "standard",
     "cronwizard_typeselect_period":
         "date period",
     "cronwizard_typeselect_custom":
@@ -768,11 +768,43 @@
     "cronwizard_description_on":
         "on",
     "cronwizard_description_starting":
-        "starting at",
+        "from",
     "cronwizard_description_ending":
-        "ending at",
+        "to",
     "cronwizard_description_at":
         "at",
+    "cronwizard_occurrence_desc":
+        "Define occurrences of this event",
+    "cronwizard_modules_desc":
+        "Select modules that will be handled by this event script (optional)",
+    "cronwizard_script_desc":
+        "Enter JavaScript code that will be executed at every occurrence of this event (optional)",
+    "cronwizard_warning_nametooshort":
+        "Please enter a name of two or more characters.",
+    "cronwizard_warning_timeempty":
+        "Please add one or more time items.",
+    "cronwizard_script_addsnippet":
+        "[ add code snippet ]",
+    "cronwizard_eventtype_label":
+        "Event type",
+    "cronwizard_time_label":
+        "Time",
+    "cronwizard_add_time":
+        "Add",
+    "cronwizard_select_type":
+        "Type",
+    "cronwizard_select_modules":
+        "Modules",
+    "cronwizard_section_occurrence":
+        "Occurrence",
+    "cronwizard_section_modules":
+        "Modules",
+    "cronwizard_section_script":
+        "Script",
+    "configure_schedulerservice_editevents":
+        "Edit Events",
+    "configure_schedulerservice_calendarview":
+        "Calendar View",
     "no_device_found_for_manufacturerId":
         "No device info was found for manufacturer ID",
 "##":

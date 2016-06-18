@@ -45,11 +45,11 @@ namespace HomeGenie.Automation.Scripting
             this.module = module;
         }
 
-        public override List<HomeGenie.Data.Module> SelectedModules
+        public override TsList<HomeGenie.Data.Module> SelectedModules
         {
             get
             {
-                var selectedModules = new List<Data.Module>();
+                var selectedModules = new TsList<Data.Module>();
                 selectedModules.Add(module);
                 return selectedModules;
             }
@@ -194,5 +194,37 @@ namespace HomeGenie.Automation.Scripting
             return storage;
         }
 
+        /// <summary>
+        /// Raise a module parameter event and set the parameter with the specified value. 
+        /// </summary>
+        /// <returns>ModuleHelper.</returns>
+        /// <param name="parameter">Parameter name.</param>
+        /// <param name="value">The new parameter value to set.</param>
+        /// <param name="description">Event description.</param>
+        public ModuleHelper RaiseEvent(string parameter, string value, string description)
+        {
+            try
+            {
+                var actionEvent = homegenie.MigService.GetEvent(
+                    this.Instance.Domain,
+                    this.Instance.Address,
+                    description,
+                    parameter,
+                    value
+                );
+                homegenie.RaiseEvent(this, actionEvent);
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogError(
+                    this.Instance.Domain,
+                    this.Instance.Address,
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
+            return this;
+        }
     }
 }

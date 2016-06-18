@@ -53,6 +53,7 @@ namespace HomeGenie.Automation.Scripting
         private string withFeature = "";
         private string withoutFeature = "";
         private double iterationDelay = 0;
+        private Func<ModulesManager,TsList<Module>> modulesListCallback = null;
 
         internal HomeGenieService homegenie;
 
@@ -273,27 +274,42 @@ namespace HomeGenie.Automation.Scripting
             return new ModuleHelper(homegenie, module);
         }
 
-        Func<ModulesManager,List<Module>> selectModulesCallback = null;
-        public Func<ModulesManager,List<Module>> SelectModulesCallback
+        /// <summary>
+        /// Gets or sets the modules set on which this helper class will be working on.
+        /// </summary>
+        /// <value>The modules list callback.</value>
+        public Func<ModulesManager,TsList<Module>> ModulesListCallback
         {
-            get { return selectModulesCallback; }
-            set { selectModulesCallback = value; }
+            get { return modulesListCallback; }
+            set { modulesListCallback = value; }
+        }
+
+        /// <summary>
+        /// Gets the complete modules list.
+        /// </summary>
+        /// <value>The modules.</value>
+        public TsList<Module> Modules
+        {
+            get
+            {
+                if (modulesListCallback == null)
+                    return homegenie.Modules;
+                else
+                    return modulesListCallback(this);
+            }
         }
 
         /// <summary>
         /// Return the list of selected modules.
         /// </summary>
         /// <returns>List&lt;Module&gt;</returns>
-        public virtual List<Module> SelectedModules
+        public virtual TsList<Module> SelectedModules
         {
             get
             {
-                if (SelectModulesCallback != null)
-                    return SelectModulesCallback(this);
-                
-                var modules = new List<Module>();
+                var modules = new TsList<Module>();
                 // select modules in current command context
-                foreach (var module in homegenie.Modules.ToList<Module>())
+                foreach (var module in Modules)
                 {
                     bool selected = true;
                     if (selected && this.inDomain != null && this.inDomain != "" && GetArgumentsList(this.inDomain.ToLower()).Contains(module.Domain.ToLower()) == false)
@@ -806,9 +822,18 @@ namespace HomeGenie.Automation.Scripting
 
         private object InterfaceControl(Module module, MigInterfaceCommand migCommand)
         {
+            object response = null;
             migCommand.Domain = module.Domain;
             migCommand.Address = module.Address;
-            return homegenie.InterfaceControl(migCommand);
+            try
+            {
+                response = homegenie.InterfaceControl(migCommand);
+            }
+            catch(Exception e)
+            {
+                // TODO: should report the error?
+            }
+            return response;
         }
     }
 }

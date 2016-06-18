@@ -733,8 +733,8 @@
         "nei giorni della settimana selezionati",
     "cronwizard_event_name":
         "Nome evento",
-    "cronwizard_typeselect_days":
-        "giorni",
+    "cronwizard_typeselect_standard":
+        "standard",
     "cronwizard_typeselect_period":
         "periodo",
     "cronwizard_typeselect_custom":
@@ -768,11 +768,43 @@
     "cronwizard_description_on":
         "il",
     "cronwizard_description_starting":
-        "a partire dalle",
+        "dalle",
     "cronwizard_description_ending":
         "fino alle",
     "cronwizard_description_at":
         "alle",
+    "cronwizard_occurrence_desc":
+        "Definire gli orari/occorrenze di questo evento.",
+    "cronwizard_modules_desc":
+        "Scegliere i moduli che saranno gestiti dallo script di questo evento (opzionale)",
+    "cronwizard_script_desc":
+        "Inserire il codice JavaScript che sarà eseguito ad ogni occorrenza di questo evento (opzionale)",
+    "cronwizard_warning_nametooshort":
+        "Inserire un nome di almeno due caratteri.",
+    "cronwizard_warning_timeempty":
+        "Aggiungere uno o più orari.",
+    "cronwizard_script_addsnippet":
+        "[ aggiungi pezzo di codice ]",
+    "cronwizard_eventtype_label":
+        "Tipo evento",
+    "cronwizard_time_label":
+        "Orario",
+    "cronwizard_add_time":
+        "Aggiungi",
+    "cronwizard_select_type":
+        "Tipo",
+    "cronwizard_select_modules":
+        "Moduli",
+    "cronwizard_section_occurrence":
+        "Occorrenza",
+    "cronwizard_section_modules":
+        "Moduli",
+    "cronwizard_section_script":
+        "Script",
+    "configure_schedulerservice_editevents":
+        "Modifica eventi",
+    "configure_schedulerservice_calendarview":
+        "Vista calendario",
     "no_device_found_for_manufacturerId":
         "Nessuna informazione trovata su questo dispositivo",
 "##":

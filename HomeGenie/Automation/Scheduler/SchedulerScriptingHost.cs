@@ -53,7 +53,7 @@ namespace HomeGenie.Automation.Scheduler
         private MqttClientHelper mqttClientHelper;
         private KnxClientHelper knxClientHelper;
         private SchedulerHelper schedulerHelper;
-        private ModulesManager boundModulesManager;
+        private ProgramHelperBase programHelper;
 
         public void SetHost(HomeGenieService hg, SchedulerItem item)
         {
@@ -66,16 +66,15 @@ namespace HomeGenie.Automation.Scheduler
             mqttClientHelper = new MqttClientHelper();
             knxClientHelper = new KnxClientHelper();
             schedulerHelper = new SchedulerHelper(homegenie);
-            boundModulesManager = new ModulesManager(homegenie);
-            boundModulesManager.SelectModulesCallback = new Func<ModulesManager,List<Module>>((sender)=>{
-                List<Module> modules = new List<Module>();
-                foreach(var m in schedulerItem.BoundModules) {
-                    var mod = homegenie.Modules.Find(e=>e.Address == m.Address && e.Domain == m.Domain);
-                    if (mod != null)
-                        modules.Add(mod);
-                }
-                return modules;
-            });
+            programHelper = new ProgramHelperBase(homegenie);
+        }
+
+        public ProgramHelperBase Program
+        {
+            get
+            {
+                return programHelper;
+            }
         }
 
         public ModulesManager Modules
@@ -90,6 +89,16 @@ namespace HomeGenie.Automation.Scheduler
         {
             get
             {
+                var boundModulesManager = new ModulesManager(homegenie);
+                boundModulesManager.ModulesListCallback = new Func<ModulesManager,TsList<Module>>((sender)=>{
+                    TsList<Module> modules = new TsList<Module>();
+                    foreach(var m in schedulerItem.BoundModules) {
+                        var mod = homegenie.Modules.Find(e=>e.Address == m.Address && e.Domain == m.Domain);
+                        if (mod != null)
+                            modules.Add(mod);
+                    }
+                    return modules;
+                });
                 return boundModulesManager;
             }
         }

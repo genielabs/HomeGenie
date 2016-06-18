@@ -3,12 +3,12 @@
     <div class="ui-corner-top" data-role="header">
         <h2 data-locale-id="cronwizard_title">Cron event Wizard</h2>
     </div>
-    <div style="position:absolute;top:40px;left:0;right:0;padding-left:14px;padding-right:14px;padding-top:4px;border-bottom:1px gray dotted">
+    <div style="position:absolute;top:40px;left:0;right:0;padding-left:14px;padding-right:14px;padding-top:4px;border-bottom:1px gray dotted;height:120px">
         <div class="ui-grid-a ui-mini">
             <div class="ui-block-a" style="padding-right:10px;">
                 <span data-locale-id="cronwizard_event_name" class="label-small">Event name</span><br/>
                 <input data-ui-field="cron-name" type="text" data-inline="true" />
-                <p>...</p>
+                <p data-ui-field="panel-desc">...</p>
             </div>
             <div class="ui-block-b" style="padding-left:10px;">
                 <span data-locale-id="cronwizard_event_description" class="label-small">Description</span><br/>
@@ -46,10 +46,10 @@
             <div style="margin-top:60px"><div><div><input data-ui-field="time-picker" type="text" data-role="none" /></div></div></div>
         </div>
 
-         <div class="label-small ui-bar-inherit" align="center">Type</div>
+         <div data-locale-id="cronwizard_eventtype_label" class="label-small ui-bar-inherit" align="center">Event Type</div>
          <div align="center" class="ui-mini">
              <select data-ui-field="cron-type-select" data-inline="true">
-                 <option value="1" data-locale-id="cronwizard_typeselect_days">days</option>
+                 <option value="1" data-locale-id="cronwizard_typeselect_standard">standard</option>
                  <option value="2" data-locale-id="cronwizard_typeselect_period">date period</option>
                  <option value="3" data-locale-id="cronwizard_typeselect_custom">custom cron expression</option>
              </select>
@@ -74,7 +74,7 @@
                 </div>
 
 
-                <div data-locale-id="cronwizard_time_label" class="label-small ui-bar-inherit" align="center">Time</div>
+                <div data-ui-field="time-title" data-locale-id="cronwizard_time_label" class="label-small ui-bar-inherit" align="center">Time</div>
                 <div data-ui-field="time-list" style="margin-top:6px;padding-left:80px;padding-right:80px;font-size:12pt;line-height:24pt;">no time added.</div>
                 <div align="center" style="margin-top:8px"><div data-ui-field="gfx-time">&nbsp;</div></div>
 
@@ -107,7 +107,7 @@
                       </div>
                   </div>
                   <div class="ui-block-c" align="center" data-mini="true">
-                      <a href="#" class="ui-btn ui-corner-all ui-btn-icon-right ui-icon-plus ui-btn-inline ui-mini" data-ui-field="addtime-button">Add</a>
+                      <a data-locale-id="cronwizard_add_time" href="#" class="ui-btn ui-corner-all ui-btn-icon-right ui-icon-plus ui-btn-inline ui-mini" data-ui-field="addtime-button">Add</a>
                   </div>
                 </div>
 
@@ -240,12 +240,12 @@
         <div class="ui-grid-a" style="margin-top:124px">
             <div class="ui-block-a">
                 <ul data-ui-field="devicetypes-select" data-role="listview" data-icon="false">
-                    <li data-role="list-divider">Device types</li>
+                    <li data-locale-id="cronwizard_select_type" data-role="list-divider" class="label-small">Select type</li>
                 </ul>
             </div>
             <div class="ui-block-b">
                 <ul data-ui-field="devicetypes-select" data-role="listview" data-icon="false">
-                    <li data-role="list-divider">Modules linked to this event</li>
+                    <li data-locale-id="cronwizard_select_modules" data-role="list-divider" class="label-small">Modules</li>
                 </ul>
             </div>
         </div>
@@ -309,14 +309,14 @@
 
         <div data-ui-field="program-container" class="ui-mini" style="margin:0">
 
-            <div class="ui-bar-inherit" style="padding:0;margin:0">
+            <div class="ui-bar-inherit" style="padding:0;margin:0;padding-top:1px">
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:70%">
                         <p data-locale-id="cronwizard_event_runscript" class="label-small" style="padding-left:1em;">Run script on event occurrence</p>
                     </div>
                     <div class="ui-block-b" align="right" style="width:30%">
                         <select data-ui-field="templaes-list">
-                            <option value="">[ load from template ]</option>
+                            <option data-locale-id="cronwizard_script_addsnippet" value="">[ add code snippet ]</option>
                         </select>
                     </div>
                 </div>
@@ -335,11 +335,11 @@
 
         <div class="ui-grid-a">
             <div class="ui-block-a" class="ui-mini" style="width:70%">
-                <a data-ui-field="panel-scheduling-btn" href="#" class="ui-btn ui-corner-all ui-btn-active"><i class="fa fa-clock-o"></i> Scheduling</a>
+                <a data-ui-field="panel-occurrence-btn" href="#" class="ui-btn ui-corner-all ui-btn-active"><i class="fa fa-clock-o"></i> <span data-locale-id="cronwizard_section_occurrence">Occurence</span></a>
                 <i class="fa fa-long-arrow-right"></i>
-                <a data-ui-field="panel-modules-btn" href="#" class="ui-btn ui-corner-all"><i class="fa fa-cube"></i> Modules</a> 
+                <a data-ui-field="panel-modules-btn" href="#" class="ui-btn ui-corner-all"><i class="fa fa-cube"></i> <span data-locale-id="cronwizard_section_modules">Modules</span></a> 
                 <i class="fa fa-long-arrow-right"></i>
-                <a data-ui-field="panel-script-btn" href="#" class="ui-btn ui-corner-all"><i class="fa fa-code"></i> Script</a>
+                <a data-ui-field="panel-script-btn" href="#" class="ui-btn ui-corner-all"><i class="fa fa-code"></i> <span data-locale-id="cronwizard_section_script">Script</span></a>
             </div>
             <div class="ui-block-b" style="width:30%">
                 <div align="right">
