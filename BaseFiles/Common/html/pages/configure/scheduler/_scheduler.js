@@ -52,9 +52,13 @@
             $$.showCalendar();
         });
         page.find('[data-ui-field="add-button"]').on('click', function(){
+            var _btn = $(this);
             $$._CurrentEventName = "";
             $$._CurrentEventIndex = -1;
-            setTimeout($$.EditCurrentItem, 500);
+            $$.EditCurrentItem();
+            setTimeout(function() {
+                _btn.removeClass('ui-btn-active');
+            }, 200);
         });
     };
 

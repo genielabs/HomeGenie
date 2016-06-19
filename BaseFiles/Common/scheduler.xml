@@ -19,20 +19,11 @@ if ($$.onPrevious() &amp;&amp; !$$.onNext())
     </BoundDevices>
     <BoundModules>
       <ModuleReference>
-        <Address>1</Address>
-        <Domain>HomeAutomation.PhilipsHue</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>2</Address>
-        <Domain>HomeAutomation.PhilipsHue</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>3</Address>
         <Domain>HomeAutomation.PhilipsHue</Domain>
       </ModuleReference>
     </BoundModules>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>-</NextOccurrence>
+    <LastOccurrence></LastOccurrence>
     <ProgramId />
   </SchedulerItem>
   <SchedulerItem>
@@ -61,8 +52,7 @@ if ($$.onPrevious() &amp;&amp; !$$.onNext())
         <Domain>HomeAutomation.BasicThermostat</Domain>
       </ModuleReference>
     </BoundModules>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>-</NextOccurrence>
+    <LastOccurrence></LastOccurrence>
     <ProgramId />
   </SchedulerItem>
   <SchedulerItem>
@@ -74,7 +64,7 @@ if ($$.onPrevious() &amp;&amp; !$$.onNext())
     <Script>// Set Mode=Heat, if previous minute was not in schedule (start occurrence range)
 if (!$$.onPrevious()) 
   $$.boundModules
-    .command('Thermostat.ModeSet')
+    .command('TherNmostat.ModeSet')
     .set('Heat');
 // Set Mode=Off, if next minute won't be in schedule (end occurrence range)
 if ($$.onPrevious() &amp;&amp; !$$.onNext()) 
@@ -89,8 +79,7 @@ if ($$.onPrevious() &amp;&amp; !$$.onNext())
         <Domain>HomeAutomation.BasicThermostat</Domain>
       </ModuleReference>
     </BoundModules>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>-</NextOccurrence>
+    <LastOccurrence></LastOccurrence>
     <ProgramId />
   </SchedulerItem>
 </ArrayOfSchedulerItem>

@@ -78,9 +78,8 @@ namespace HomeGenie.Automation.Scheduler
         /// <value>The bound modules.</value>
         public List<ModuleReference> BoundModules { get; set; }
 
-        // TODO: deprecate the following two
+        [XmlIgnore,JsonIgnore]
         public string LastOccurrence { get; set; }
-        public string NextOccurrence { get; set; }
 
         // TODO: deprecate this field - left for compatibility with hg <= r521
         public string ProgramId { get; set; }
@@ -94,8 +93,7 @@ namespace HomeGenie.Automation.Scheduler
             CronExpression = "";
             ProgramId = "";
             IsEnabled = false;
-            LastOccurrence = "-";
-            NextOccurrence = "-";
+            LastOccurrence = "";
             BoundDevices = new List<string>();
             BoundModules = new List<ModuleReference>();
         }

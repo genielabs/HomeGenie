@@ -2275,7 +2275,7 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Porch Light</Name>
+    <Name>Light 1</Name>
     <Description />
     <DeviceType>Dimmer</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
@@ -2423,7 +2423,7 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Light 3</Name>
+    <Name>Porch Light</Name>
     <Description />
     <DeviceType>Dimmer</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
