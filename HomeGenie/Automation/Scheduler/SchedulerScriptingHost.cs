@@ -45,6 +45,7 @@ namespace HomeGenie.Automation.Scheduler
 
         private HomeGenieService homegenie = null;
         private SchedulerItem schedulerItem = null;
+        private Store localStore;
         //
         private NetHelper netHelper;
         private SerialPortHelper serialPortHelper;
@@ -54,11 +55,19 @@ namespace HomeGenie.Automation.Scheduler
         private KnxClientHelper knxClientHelper;
         private SchedulerHelper schedulerHelper;
         private ProgramHelperBase programHelper;
+        private StoreHelper storeHelper;
+
+        public SchedulerScriptingHost()
+        {
+            localStore = new Store();
+            storeHelper = new StoreHelper(new TsList<Store>(){localStore}, "local");
+        }
 
         public void SetHost(HomeGenieService hg, SchedulerItem item)
         {
             homegenie = hg;
             schedulerItem = item;
+            Reset();
             netHelper = new NetHelper(homegenie);
             serialPortHelper = new SerialPortHelper();
             tcpClientHelper = new TcpClientHelper();
@@ -165,6 +174,11 @@ namespace HomeGenie.Automation.Scheduler
             {
                 return schedulerHelper;
             }
+        }
+
+        public ModuleParameter Data(string name)
+        {
+            return storeHelper.Get(name);
         }
 
         public void Pause(double seconds)

@@ -56,10 +56,20 @@ namespace HomeGenie.Automation.Scheduler
           prevMin = new Date(prevMin.getTime()-60000);
           return $$.scheduler.isOccurrence(prevMin, event.CronExpression);
         };
+        $$.data = function(k,v) {
+            if (typeof v == 'undefined') {
+                return hg.data(k).Value;
+            } else {
+                hg.data(k).value = v;
+                return $$;
+            }
+        };
         ";
 
         public SchedulerScriptingEngine()
         {
+            // we do not dispose the scripting host to keep volatile data persistent across instances
+            hgScriptingHost = new SchedulerScriptingHost();
         }
 
         public void SetHost(HomeGenieService hg, SchedulerItem item)
@@ -67,7 +77,6 @@ namespace HomeGenie.Automation.Scheduler
             homegenie = hg;
             eventItem = item;
             scriptEngine = new Engine();
-            hgScriptingHost = new SchedulerScriptingHost();
             hgScriptingHost.SetHost(homegenie, item);
             scriptEngine.SetValue("hg", hgScriptingHost);
             scriptEngine.SetValue("event", eventItem);

@@ -79,20 +79,10 @@ namespace HomeGenie.Automation.Scripting
         /// Sets the program id to run when the selected schedule occurs.
         /// </summary>
         /// <param name="programId">Program ID.</param>
-        [Obsolete("use 'SetScript' instead")]
+        [Obsolete()]
         public SchedulerHelper SetProgram(string programId)
         {
             homegenie.ProgramManager.SchedulerService.SetProgram(scheduleName, programId);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the script (hg javascript) to run when the selected schedule occurs.
-        /// </summary>
-        /// <param name="script">HomeGenie Javascript code</param>
-        public SchedulerHelper SetScript(string script)
-        {
-            homegenie.ProgramManager.SchedulerService.SetScript(scheduleName, script);
             return this;
         }
 

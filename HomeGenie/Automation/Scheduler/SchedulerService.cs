@@ -180,7 +180,7 @@ namespace HomeGenie.Automation.Scheduler
             return false;
         }
 
-        [Obsolete("use 'SetScript' instead")]
+        [Obsolete()]
         public bool SetProgram(string name, string pid)
         {
             var eventItem = Get(name);
@@ -243,6 +243,8 @@ namespace HomeGenie.Automation.Scheduler
 
         public bool IsScheduling(DateTime date, string cronExpression, int recursionCount = 0)
         {
+            if (date.Kind != DateTimeKind.Local)
+                date = date.ToLocalTime();
             var hits = GetScheduling(date.Date, date.Date.AddHours(24).AddMinutes(-1), cronExpression);
             var match = (DateTime?)hits.Find(d => d.ToUniversalTime().ToString(FORMAT_DATETIME) == date.ToUniversalTime().ToString(FORMAT_DATETIME));
             return match != null && match != DateTime.MinValue;
@@ -529,50 +531,6 @@ namespace HomeGenie.Automation.Scheduler
                     Properties.SchedulerError,
                     JsonConvert.SerializeObject("Syntax error in expression '"+cronExpression+"'"));
             }
-            return false;
-        }
-
-        // TODO: deprecate this method
-        private bool IsEventActive(string cronExpression, List<string> checkedStack = null)
-        {
-            if (checkedStack == null) checkedStack = new List<string>();
-            //
-            string[] expressionList = cronExpression.Split(':'); // <-- ':' is OR operator
-            for (int e = 0; e < expressionList.Length; e++)
-            {
-                string currentExpression = expressionList[e].Trim();
-                // avoid loops
-                if (checkedStack.Contains(currentExpression))
-                {
-                    continue;
-                }
-                checkedStack.Add(currentExpression);
-                if (currentExpression.StartsWith("@"))
-                {
-                    // Check expresion from scheduled item with a given name
-                    var eventItem = Get(currentExpression.Substring(1));
-                    if (eventItem != null && eventItem.IsEnabled && IsEventActive(eventItem.CronExpression, checkedStack))
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    // Check current expression
-                    var cronSchedule = NCrontab.CrontabSchedule.TryParse(currentExpression);
-                    if (!cronSchedule.IsError)
-                    {
-                        var occurrence = cronSchedule.Value.GetNextOccurrence(DateTime.Now.AddMinutes(-1));
-                        string d1 = DateTime.Now.ToUniversalTime().ToString(FORMAT_DATETIME);
-                        string d2 = occurrence.ToUniversalTime().ToString(FORMAT_DATETIME);
-                        if (d1 == d2)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            //
             return false;
         }
 
