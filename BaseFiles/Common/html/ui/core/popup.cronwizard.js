@@ -8,7 +8,7 @@ $$.bind = function() {
 
     $$.cronName = $$.element.find('[data-ui-field=cron-name]').blur(function(){
         var txt = $$.cronName.val();
-        $$.cronName.val(txt.replace(/[^A-Za-z0-9+\.-]/g, ''));
+        $$.cronName.val(txt.replace(/[^A-Za-z0-9\.]/g, ''));
     });
 
     // ok button
@@ -432,7 +432,7 @@ $$.open = function(name) {
                 item = $$.item;
                 item.CronExpression = name;
                 item.Data = null;
-            } else if (item.Data != null)
+            } else if (item.Data != null && item.Data != '')
                 item.Data = $.parseJSON(item.Data);
             if (typeof item.Data == 'undefined' || item.Data == null || (typeof item.Data.type == 'undefined' && typeof item.Data.time == 'undefined')) {
                 // allocate a new item
@@ -750,34 +750,11 @@ $$.getTimeCron = function(timeFrom, timeTo, minOccur, hourOccur) {
     var ht = parseInt(timeTo.substring(0, 2));
     var mt = parseInt(timeTo.substring(3,5));
     var cron = '';
-    if (hf+':'+mf == ht+':'+mt) {            
+    if (hf+':'+mf == ht+':'+mt)
         cron = mf+' '+hf+' * * *';
-        cronItems.push(cron);
-    } else {
-        var min = minOccur.replace('*',''); if (min != '' && !min.startsWith('/')) min = ','+min;
-        var hour = hourOccur.replace('*',''); if (hour != '' && !hour.startsWith('/')) hour = ','+hour;
-        if (hf == ht && mt >= mf) {
-            cron = mf+'-'+mt+min+' '+hf+hour+' * * *';
-            cronItems.push(cron);
-        } else {
-            cron = mf+(mf!=59?'-59':'')+min+' '+hf+hour+' * * *';
-            cronItems.push(cron);
-            cron = (mt!=0?'00-':'')+mt+min+' '+ht+hour+' * * *';
-            cronItems.push(cron);
-            if (hf > ht || ht-hf > 1 || (hf == ht && mt < mf)) {
-                var hfn = hf<23 ? hf+1 : 0;
-                var htp = ht>0 ? ht-1 : 23;
-                if (!(hfn == 0 && htp == 23)) {
-                    if (hfn > htp && hfn < 23)
-                        htp = '23,0-'+htp;
-                    else if (hfn > htp && hfn == 23)
-                        htp = ','+htp;
-                    cron = minOccur+' '+hfn+(hfn!=htp?(htp.toString().startsWith(',')?'':'-')+htp:'')+hour+' * * *';
-                    cronItems.push(cron);
-                }
-            }
-        }
-    }
+    else
+        cron = '('+mf+' '+hf+' * * *) > ('+mt+' '+ht+' * * *)';
+    cronItems.push(cron);
     return cronItems;
 }
 
@@ -989,7 +966,7 @@ $$._buildCron = function() {
     if (cronOccur != emptyOccur)
         cronexpr = '(' + cronOccur + ')' + (cm != '' ? ' ; '+cm : '') + (ct != '' ? ' ; [ '+ct+' ]' : '');
     else
-        cronexpr = (cm != '' ? cm : '') + (ct != '' ? ' ; [ '+ct+' ]' : '');
+        cronexpr = (cm != '' ? cm : '') + (ct != '' ? (cm != '' ? ' ; ' : '') + '[ '+ct+' ]' : '');
 
     $$.cronEditor.preventEvent = true;
     $$.cronEditor.setValue(cronexpr);

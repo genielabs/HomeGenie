@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Innovative.SolarCalculator;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -120,14 +121,24 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Determines whether the given cron expression is a matching occurence at the given date/time.
+        /// Determines whether the given cron expression is a matching occurrence at the given date/time.
         /// </summary>
         /// <returns><c>true</c> if the given cron expression is matching; otherwise, <c>false</c>.</returns>
         /// <param name="date">Date.</param>
         /// <param name="cronExpression">Cron expression.</param>
-        public bool IsOccurence(DateTime date, string cronExpression)
+        public bool IsOccurrence(DateTime date, string cronExpression)
         {
             return homegenie.ProgramManager.SchedulerService.IsScheduling(date, cronExpression);
+        }
+
+        /// <summary>
+        /// Solar Times data.
+        /// </summary>
+        /// <returns>SolarTime data.</returns>
+        /// <param name="date">Date.</param>
+        public SolarTimes SolarTimes(DateTime date)
+        {
+            return new SolarTimes(date, homegenie.ProgramManager.SchedulerService.Location["latitude"].Value, homegenie.ProgramManager.SchedulerService.Location["longitude"].Value);
         }
     }
 }

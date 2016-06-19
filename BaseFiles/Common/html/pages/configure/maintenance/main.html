@@ -61,13 +61,34 @@
                 </div>
             </div>
 
-            <!--- logging options disabled in HG v1.1 due to new logger -->
+            <div>
+                <hr style="border:1px dotted black" />
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_location">Location</label>
+                        <div class="ui-grid-a" style="width:260px">
+                            <div class="ui-block-a" style="padding-right:4px">
+                                <p data-locale-id="configure_system_latitude" class="label-small">Latitude</p>
+                                <input data-ui-field="location-latitude" type="text" />
+                           </div>
+                           <div class="ui-block-b" style="padding-left:4px">
+                                <p data-locale-id="configure_system_longitude" class="label-small">Longitude</p>
+                                <input data-ui-field="location-longitude" type="text" />
+                           </div>
+                       </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <a id="maintenance_configuration_locationbutton" class="ui-btn ui-corner-all" data-locale-id="configure_system_setlocation" href="#maintenance_configuration_locationpopup" data-rel="popup" data-transition="slidedown">Set</a>
+                    </div>
+                </div>
+            </div>
+
             <div>
                 <hr style="border:1px dotted black" />
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <label data-locale-id="configure_system_loganddebug">Log file</label>
-                        <p data-locale-id="configure_system_logdownload">Download</p>
+                        <p data-locale-id="configure_system_logdownload" class="label-small">Download</p>
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                             <a id="btn_configuresystem_downloadtday" class="ui-btn" data-locale-id="configure_system_logdownloadtoday">Today</a>
                             <a id="btn_configuresystem_downloadyday" class="ui-btn" data-locale-id="configure_system_logdownloadyesterday">Yesterday</a>
@@ -299,6 +320,16 @@
             </div>
         </div>
 
+        <div id="maintenance_configuration_locationpopup" class="ui-corner-all" data-role="popup" data-dismissible="true" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_pickalocation">Set location</h1>
+            </div>
+            <div class="ui-content ui-corner-bottom ui-content">
+                <input type="text" data-ui-field="location-name" />
+                <div data-ui-field="location-picker" class="ui-corner-all" style="width:520px;height:420px"></div>
+            </div>
+        </div>
 
         <div id="systemsettings_modulesdelete" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>

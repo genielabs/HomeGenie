@@ -1,51 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfSchedulerItem xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SchedulerItem>
-    <Name>FromSunriseToSunset</Name>
-    <CronExpression>(30-59 6 * * *):(* 7-17 * * *):(0-30 18 * * *)</CronExpression>
-    <ProgramId />
+    <Name>Outdoor.Lights.On</Name>
+    <CronExpression>@SolarTimes.Sunset + 30 &gt; @SolarTimes.Sunrise - 60</CronExpression>
+    <Description>Half an hour after sunset until one hour before sunrise.</Description>
+    <Data>{"itemType":"3","from":"2016-06-19","to":"2016-06-19","time":[],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"1","occur_month_sel":[]}</Data>
     <IsEnabled>true</IsEnabled>
+    <Script>// Turn on, if previous minute was not in schedule (start occurrence range)
+if (!$$.onPrevious()) 
+  $$.boundModules.on();
+// Turn off, if next minute won't be in schedule (end occurrence range)
+if ($$.onPrevious() &amp;&amp; !$$.onNext()) 
+  $$.boundModules.off();
+</Script>
+    <BoundDevices>
+      <string>Dimmer</string>
+      <string>Light</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>2</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>3</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+    </BoundModules>
     <LastOccurrence>-</LastOccurrence>
     <NextOccurrence>-</NextOccurrence>
+    <ProgramId />
   </SchedulerItem>
   <SchedulerItem>
-    <Name>FromSunsetToSunrise</Name>
-    <CronExpression>(* 19-23 * * *):(30-59 18 * * *):(* 0-5 * * *):(0-30 6 * * *)</CronExpression>
-    <ProgramId />
+    <Name>Thermostat.Economy.Heat</Name>
+    <CronExpression>(* * * 4,11 *) ; [ (0-59 7 * * *) : (0 10 * * *) : (* 8-9 * * *) : (0-59 20 * * *) : (0 22 * * *) : (* 21 * * *) ]</CronExpression>
+    <Description>every minute, only in April and November, from 07:00 to 10:00 and from 20:00 to 22:00</Description>
+    <Data>{"itemType":"1","from":"2016-06-19","to":"2016-06-19","time":[{"start":"07:00","end":"10:00"},{"start":"20:00","end":"22:00"}],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"2","occur_month_sel":["4","11"]}</Data>
     <IsEnabled>true</IsEnabled>
+    <Script>// Set Mode=Heat, if previous minute was not in schedule (start occurrence range)
+if (!$$.onPrevious()) 
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .set('Heat');
+// Set Mode=Off, if next minute won't be in schedule (end occurrence range)
+if ($$.onPrevious() &amp;&amp; !$$.onNext()) 
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .set('Off');
+</Script>
+    <BoundDevices>
+      <string>Thermostat</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+    </BoundModules>
     <LastOccurrence>-</LastOccurrence>
     <NextOccurrence>-</NextOccurrence>
+    <ProgramId />
   </SchedulerItem>
   <SchedulerItem>
-    <Name>Sunrise</Name>
-    <CronExpression>30 6 * * *</CronExpression>
-    <ProgramId />
+    <Name>Thermostat.Heat</Name>
+    <CronExpression>(* * * 1,2,3,12 *) ; [ (0-59 7 * * *) : (0 11 * * *) : (* 8-10 * * *) : (0-59 16 * * *) : (0 23 * * *) : (* 17-22 * * *) ]</CronExpression>
+    <Description>every minute, only in Gennuary, February, March, and December, from 07:00 to 11:00, from 16:00 to 23:00</Description>
+    <Data>{"itemType":"1","from":"2016-06-19","to":"2016-06-19","time":[{"start":"07:00","end":"11:00"},{"start":"16:00","end":"23:00"}],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"2","occur_month_sel":["1","2","3","12"]}</Data>
     <IsEnabled>true</IsEnabled>
+    <Script>// Set Mode=Heat, if previous minute was not in schedule (start occurrence range)
+if (!$$.onPrevious()) 
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .set('Heat');
+// Set Mode=Off, if next minute won't be in schedule (end occurrence range)
+if ($$.onPrevious() &amp;&amp; !$$.onNext()) 
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .set('Off');
+</Script>
+    <BoundDevices />
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+    </BoundModules>
     <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-03 06.30</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>Sunset</Name>
-    <CronExpression>30 18 * * *</CronExpression>
+    <NextOccurrence>-</NextOccurrence>
     <ProgramId />
-    <IsEnabled>true</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-02 18.30</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>Weekdays</Name>
-    <CronExpression>* * * * 1-5</CronExpression>
-    <ProgramId />
-    <IsEnabled>true</IsEnabled>
-    <LastOccurrence>2014-04-02 17.14</LastOccurrence>
-    <NextOccurrence>2014-04-02 17.15</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>Weekend</Name>
-    <CronExpression>* * * * 0,6</CronExpression>
-    <ProgramId />
-    <IsEnabled>true</IsEnabled>
-    <LastOccurrence>2014-02-23 16.52</LastOccurrence>
-    <NextOccurrence>2014-02-23 16.53</NextOccurrence>
   </SchedulerItem>
 </ArrayOfSchedulerItem>

@@ -15,6 +15,13 @@
     },
     { 
         "name": {
+            "en": "Turn On/Off range",
+            "it": "Intervallo Accendi/Spegni"
+        },
+        "script": "command.turn-on-off.range.js"
+    },
+    { 
+        "name": {
             "en": "Set Level",
             "it": "Imposta livello"
         },

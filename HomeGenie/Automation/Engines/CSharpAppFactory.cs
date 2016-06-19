@@ -43,6 +43,8 @@ namespace HomeGenie.Automation.Engines
             string[] includes = new string[] {
                 "using System.Net;",
                 "using System.Threading;",
+                "using Innovative.Geometry;",
+                "using Innovative.SolarCalculator;",
                 "using Raspberry;",
                 "using Raspberry.Timers;",
                 "using Raspberry.IO;",
@@ -220,6 +222,8 @@ namespace HomeGenie.Automation.Scripting
             }
 
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "M2Mqtt.Net.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.Geometry.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.SolarCalculator.dll"));
 
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);

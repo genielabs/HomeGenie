@@ -168,6 +168,14 @@
       <HintPath>..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Innovative.SolarCalculator">
+      <HintPath>..\Externals\SolarCalculator\Innovative.SolarCalculator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Innovative.Geometry">
+      <HintPath>..\Externals\SolarCalculator\Innovative.Geometry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />

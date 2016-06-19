@@ -23,25 +23,13 @@
     </div>
 
 
-    <div id="schedulerservice_actionmenu" data-role="popup" data-overlay-theme="b">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
-        <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li><a data-ui-field="calendar-button" data-locale-id="configure_schedulerservice_calendarview" href="#" class="ui-btn ui-btn-icon-left ui-icon-calendar">Calendar View</a></li>
-            <li><a data-ui-field="edit-button" data-locale-id="configure_schedulerservice_editevents" href="#" class="ui-btn ui-btn-icon-left ui-icon-edit">Edit Events</a></li>
-            <li><a data-ui-field="add-button" data-locale-id="configure_schedulerservice_bottombar_event_add" href="#" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Event</a></li>
-        </ul>
-    </div>
-
-
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
-                    &nbsp;
-                    </a>
+                    <a data-ui-field="calendar-button" data-locale-id="configure_schedulerservice_calendarview" href="#" class="ui-btn ui-btn-icon-left ui-icon-calendar">Calendar View</a>
+                    <a data-ui-field="edit-button" data-locale-id="configure_schedulerservice_editevents" href="#" class="ui-btn ui-btn-icon-left ui-icon-edit">Edit Events</a>
                 </li>
                 <li>
                     <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
@@ -49,9 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#schedulerservice_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
-                        Actions
-                    </a>
+                    <a data-ui-field="add-button" data-locale-id="configure_schedulerservice_bottombar_event_add" href="#" class="ui-btn ui-icon-plus ui-btn-icon-right">Add Event</a>
                 </li>
             </ul>
         </div><!-- /navbar -->

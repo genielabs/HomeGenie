@@ -136,7 +136,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.637144Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.899492Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -270,7 +270,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.739434Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:15.053253Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -301,9 +301,7 @@ Program.Parameter("Conditions.Description").Value = "";
 
 Program.Run();
 </ScriptCondition>
-    <ScriptSource>var sunsetEvent = "Sunset";
-var sunriseEvent = "Sunrise";
-var sunsetToSunriseEvent = "FromSunsetToSunrise";
+    <ScriptSource>var sunsetToSunriseEvent = "FromSunsetToSunrise";
 var sunriseToSunsetEvent = "FromSunriseToSunset";
 
 while (Program.IsEnabled)
@@ -316,7 +314,6 @@ while (Program.IsEnabled)
   {
     try
     {
-
       string webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/astronomy/lang:" + language + "/q/" + location + ".json";
       var astronomydata = Net.WebService(webserviceurl).GetData();
 
@@ -327,20 +324,6 @@ while (Program.IsEnabled)
 
       Program.Parameter("Astronomy.Sunset").Value = sunset_hour.ToString("D2") + ":" + sunset_minute.ToString("D2");
       Program.Parameter("Astronomy.Sunrise").Value = sunrise_hour.ToString("D2") + ":" + sunrise_minute.ToString("D2");
-
-      // Update Scheduler entries
-      Scheduler
-        .WithName(sunsetEvent)
-        .SetSchedule(String.Format("{0} {1} * * *", sunset_minute, sunset_hour));
-      Scheduler
-        .WithName(sunriseEvent)
-        .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
-      Scheduler
-        .WithName(sunsetToSunriseEvent)
-        .SetSchedule(String.Format("(* {0}-23 * * *):({1}-59 {2} * * *):(* 0-{3} * * *):(0-{4} {5} * * *)", (sunset_hour+1), sunset_minute, sunset_hour, (sunrise_hour-1), sunrise_minute, sunrise_hour));
-      Scheduler
-        .WithName(sunriseToSunsetEvent)
-        .SetSchedule(String.Format("({0}-59 {1} * * *):(* {2}-{3} * * *):(0-{4} {5} * * *)", sunrise_minute, sunrise_hour, (sunrise_hour+1), sunset_hour, sunset_minute, sunset_hour));
 
       webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
       var weatherdata = Net.WebService(webserviceurl).GetData();
@@ -420,20 +403,7 @@ while (Program.IsEnabled)
   //
   var delayMins = Program.Option("UpdateInterval").DecimalValue;
   if (delayMins &lt; 1) delayMins = 1;
-  var pauseEnd = DateTime.Now.AddMinutes(delayMins);
-  var sunEventParameter = Program.Parameter("Sun.Event");
-  do
-  {
-    if (Scheduler.IsScheduling("@Sunrise") &amp;&amp; sunEventParameter.Value != sunriseEvent)
-    {
-      Program.RaiseEvent(sunEventParameter.Name, sunriseEvent, sunriseEvent + " event");
-    }
-    else if (Scheduler.IsScheduling("@Sunset") &amp;&amp; sunEventParameter.Value != sunsetEvent)
-    {
-      Program.RaiseEvent(sunEventParameter.Name, sunsetEvent, sunsetEvent + " event");
-    }
-    Pause(60-DateTime.Now.Second);
-  } while (Program.IsEnabled &amp;&amp; DateTime.Now.Ticks &lt;= pauseEnd.Ticks);
+  Pause(delayMins*60);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -443,8 +413,8 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Environment</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.785708Z</TriggerTime>
+    <ActivationTime>2016-06-19T18:50:21.447542Z</ActivationTime>
+    <TriggerTime>2016-06-19T18:50:21.595488Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -670,7 +640,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.640696Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.900976Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -717,7 +687,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.633347Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.927427Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1068,7 +1038,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.710893Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:15.169739Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1198,7 +1168,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.639481Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.892635Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1299,7 +1269,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.748955Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.904789Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1556,7 +1526,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.853107Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.996822Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1705,7 +1675,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.720772Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.923217Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1938,426 +1908,9 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.671307Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.919517Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>hg.Program.UseWidget("jkUtils/SolarAltitude/SolarAltitude");
-hg.Program.AddOption("jkUtils.SolarAltitude.Latitude", "", "Location: Latitude", "text");
-hg.Program.AddOption("jkUtils.SolarAltitude.Longitude", "", "Location: Longitude", "text");    
-hg.Program.AddOption("jkUtils.SolarAltitude.Label", "", "Custom Label", "text");
-hg.Program.AddOption("jkUtils.SolarAltitude.Zoom", "100%", "Custom Zoom", "text");
-hg.Program.AddOption("jkUtils.SolarAltitude.Color", "46", "Custom Color (HUE Value)", "text");
-hg.Program.AddOption("jkUtils.SolarAltitude.Timeformat", "FALSE", "Custom Timeformat (TRUE = use AM/PM Format, FALSE = use 24h Format)", "text");
-hg.Program.Run();
-</ScriptCondition>
-    <ScriptSource>
-// jkUtils - Solar Altitude Ver 2.0 2014-05-07
-// ------------------------------------
-// A HomeGenie script to locally calculate sunrise/sunset with civil, nautical and astronomical timings.
-// This script also sets and automatically updates timers for the scheduler service.
-// Requires local longitude and latitude values to be set within programm options.
-// Localization implemented for: US-en and DE-de. Feel free to add your own localization in /locales dir analogous to HomeGenie .json files.
-// All used Icons/Graphics make full use of png-transparency to be able to place them over any colored background.
-
-// Released under BSD-licensed.
-// (c) 2014 Jan Koch, Berlin
-
-// Acknowledgements:
-
-// This program makes use of the original SunCalc which is a JavaScript library for calculating sun/mooon position and light phases.
-// For more info see https://github.com/mourner/SunCalc (c) 2011-2014, Vladimir Agafonkin. BSD-licensed.
-
-// calculations for illumination parameters of the moon, based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
-// Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
-
-
-// shortcuts for easier to read formulas
-
-var PI = Math.PI,
-    sin = Math.sin,
-    cos = Math.cos,
-    tan = Math.tan,
-    asin = Math.asin,
-    atan = Math.atan2,
-    acos = Math.acos,
-    rad = PI / 180;
-
-// sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
-
-
-// date/time constants and conversions
-
-var dayMs = 1000 * 60 * 60 * 24,
-    J1970 = 2440588,
-    J2000 = 2451545;
-
-function toJulian(date) {
-  return date.valueOf() / dayMs - 0.5 + J1970;
-}
-function fromJulian(j) {
-  return new Date((j + 0.5 - J1970) * dayMs);
-}
-function toDays(date) {
-  return toJulian(date) - J2000;
-}
-
-
-// general calculations for position
-
-var e = rad * 23.4397; // obliquity of the Earth
-
-function getRightAscension(l, b) {
-  return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l));
-}
-function getDeclination(l, b) {
-  return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l));
-}
-function getAzimuth(H, phi, dec) {
-  return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi));
-}
-function getAltitude(H, phi, dec) {
-  return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H));
-}
-function getSiderealTime(d, lw) {
-  return rad * (280.16 + 360.9856235 * d) - lw;
-}
-
-
-// general sun calculations
-
-function getSolarMeanAnomaly(d) {
-  return rad * (357.5291 + 0.98560028 * d);
-}
-function getEquationOfCenter(M) {
-  return rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M));
-}
-function getEclipticLongitude(M, C) {
-  var P = rad * 102.9372; // perihelion of the Earth
-  return M + C + P + PI;
-}
-function getSunCoords(d) {
-
-  var M = getSolarMeanAnomaly(d),
-      C = getEquationOfCenter(M),
-      L = getEclipticLongitude(M, C);
-
-  return {
-    dec: getDeclination(L, 0),
-    ra: getRightAscension(L, 0)
-  };
-}
-
-
-var SolarAltitude = {};
-
-
-// calculates sun position for a given date and latitude/longitude
-
-SolarAltitude.getPosition = function (date, lat, lng) {
-
-  var lw = rad * -lng,
-      phi = rad * lat,
-      d = toDays(date),
-
-      c = getSunCoords(d),
-      H = getSiderealTime(d, lw) - c.ra;
-
-  return {
-    azimuth: getAzimuth(H, phi, c.dec),
-    altitude: getAltitude(H, phi, c.dec)
-  };
-};
-
-
-// sun times configuration (angle, morning name, evening name)
-
-var times = [
-  [ -0.83,'sunrise', 'sunset' ],
-  [ -0.3, 'sunriseEnd', 'sunsetStart' ],
-  [ -6,   'dawn', 'dusk' ],                     //nautical twilight angle
-  [ -12,  'nauticalDawn', 'nauticalDusk'],     //astronomical twilight angle
-  [ -18,  'nightEnd', 'night' ],               //darkness angle
-  [ 6,    'goldenHourEnd', 'goldenHour' ]
-];
-
-// adds a custom time to the times config
-
-SolarAltitude.addTime = function (angle, riseName, setName) {
-  times.push([angle, riseName, setName]);
-};
-
-
-// calculations for sun times
-
-var J0 = 0.0009;
-
-function getJulianCycle(d, lw) {
-  return Math.round(d - J0 - lw / (2 * PI));
-}
-function getApproxTransit(Ht, lw, n) {
-  return J0 + (Ht + lw) / (2 * PI) + n;
-}
-function getSolarTransitJ(ds, M, L) {
-  return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
-}
-function getHourAngle(h, phi, d) {
-  var first = sin(h) - sin(phi) * sin(d),
-      second = cos(phi) * cos(d),
-      third = first / second;
-  if ( third &lt; -1 || third &gt; 1 ) {
-    third = Math.round(third);
-  }  
-  return acos(third);
-}
-
-
-// calculates sun times for a given date and latitude/longitude
-
-SolarAltitude.getTimes = function (date, lat, lng) {
-
-  var lw = rad * -lng,
-      phi = rad * lat,
-      d = toDays(date),
-
-      n = getJulianCycle(d, lw),
-      ds = getApproxTransit(0, lw, n),
-
-      M = getSolarMeanAnomaly(ds),
-      C = getEquationOfCenter(M),
-      L = getEclipticLongitude(M, C),
-
-      dec = getDeclination(L, 0),
-
-      Jnoon = getSolarTransitJ(ds, M, L);
-
-
-  // returns set time for the given sun altitude
-  function getSetJ(h) {
-    var w = getHourAngle(h, phi, dec),
-        a = getApproxTransit(w, lw, n);
-
-    return getSolarTransitJ(a, M, L);
-  }
-
-
-  var result = {
-    solarNoon: fromJulian(Jnoon),
-    nadir: fromJulian(Jnoon - 0.5)
-  };
-
-  var i, len, time, angle, morningName, eveningName, Jset, Jrise;
-
-  for (i = 0, len = times.length; i &lt; len; i += 1) {
-    time = times[i];
-
-    Jset = getSetJ(time[0] * rad);
-    Jrise = Jnoon - (Jset - Jnoon);
-
-    result[time[1]] = fromJulian(Jrise);
-    result[time[2]] = fromJulian(Jset);
-  }
-
-  return result;
-};
-
-
-// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
-
-function getMoonCoords(d) { // geocentric ecliptic coordinates of the moon
-
-  var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
-      M = rad * (134.963 + 13.064993 * d), // mean anomaly
-      F = rad * (93.272 + 13.229350 * d), // mean distance
-
-      l = L + rad * 6.289 * sin(M), // longitude
-      b = rad * 5.128 * sin(F), // latitude
-      dt = 385001 - 20905 * cos(M); // distance to the moon in km
-
-  return {
-    ra: getRightAscension(l, b),
-    dec: getDeclination(l, b),
-    dist: dt
-  };
-}
-
-SolarAltitude.getMoonPosition = function (date, lat, lng) {
-
-  var lw = rad * -lng,
-      phi = rad * lat,
-      d = toDays(date),
-
-      c = getMoonCoords(d),
-      H = getSiderealTime(d, lw) - c.ra,
-      h = getAltitude(H, phi, c.dec);
-
-  // altitude correction for refraction
-  h = h + rad * 0.017 / tan(h + rad * 10.26 / (h + rad * 5.10));
-
-  return {
-    azimuth: getAzimuth(H, phi, c.dec),
-    altitude: h,
-    distance: c.dist
-  };
-};
-
-SolarAltitude.getMoonIllumination = function (date) {
-
-  var d = toDays(date),
-      s = getSunCoords(d),
-      m = getMoonCoords(d),
-
-      sdist = 149598000, // distance from Earth to Sun in km
-
-      phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
-      inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi));
-
-  return {
-    fraction: (1 + cos(inc)) / 2,
-    angle: atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec)
-                - cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra))
-  };
-};
-
-SolarAltitude.printTime = function (d,m){
-  var newd = new Date(d.valueOf() + m * 60000);
-  var min = newd.getMinutes();
-  var hour = newd.getHours();
-  if (min &lt; 10) min = "0" + min;
-  if (hour &lt; 10) hour = "0" + hour;
-  return hour+":"+min;
-};
-
-SolarAltitude.saveTimer = function (timer,d,m){
-  var str = 'hg.Program.Parameter("'+ timer + '").Value = SolarAltitude.printTime(d,m);';
-  eval(str);
-  var str = 'var savedTimer = hg.Program.Parameter("'+ timer + '").Value';
-  eval(str);
-  var spiltTimer = savedTimer.split(":");
-  timer = timer.substring(timer.indexOf(".")+1);
-  hg.Scheduler.WithName(timer).SetSchedule(""+ spiltTimer[1] +" "+ spiltTimer[0] +" * * *");
-};
-
-
-SolarAltitude.main = function () {
-
-  // HomeGenie Main Script Logic starts here ------- 
-
-  var currentTime = new Date();
-  var latitude = hg.Program.Option("jkUtils.SolarAltitude.Latitude").Value;
-  var longitude = hg.Program.Option("jkUtils.SolarAltitude.Longitude").Value;    
-  var sun = SolarAltitude.getTimes(currentTime, latitude, longitude);
-  var moon = SolarAltitude.getMoonIllumination(currentTime);
-
-  var timeFormat = {hour: "numeric", minute: "numeric"};
-
-  // copy configure inputs to parameters as well
-  hg.Program.Parameter("jkUtils.SolarAltitude.Latitude").Value = hg.Program.Option("jkUtils.SolarAltitude.Latitude").Value;
-  hg.Program.Parameter("jkUtils.SolarAltitude.Longitude").Value = hg.Program.Option("jkUtils.SolarAltitude.Longitude").Value;
-  hg.Program.Parameter("jkUtils.SolarAltitude.Label").Value = hg.Program.Option("jkUtils.SolarAltitude.Label").Value;
-  hg.Program.Parameter("jkUtils.SolarAltitude.Timeformat").Value = hg.Program.Option("jkUtils.SolarAltitude.Timeformat").Value;
-
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Day.Start",sun.nightEnd,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Day.Noon",sun.solarNoon,0);
-
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Night.Start",sun.night,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Night.Nadir",sun.nadir,0);
-
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Night.End",sun.nightEnd,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Astronomical.Start",sun.nightEnd,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Astronomical.End",sun.nauticalDawn,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Nautical.Start",sun.nauticalDawn,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Nautical.End",sun.dawn,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Civil.Start",sun.dawn,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Civil.End",sun.sunrise,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Sunrise.Start",sun.sunrise,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Sunrise.End",sun.sunriseEnd,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.GoldenHour.Start",sun.sunriseEnd,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.GoldenHour.End",sun.goldenHourEnd,0);
-
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.GoldenHour.Start",sun.goldenHour,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.GoldenHour.End",sun.sunsetStart,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Sunset.Start",sun.sunsetStart,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Sunset.End",sun.sunset,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Civil.Start",sun.sunset,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Civil.End",sun.dusk,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Nautical.Start",sun.dusk,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Nautical.End",sun.nauticalDusk,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Astronomical.Start",sun.nauticalDusk,0);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Astronomical.End",sun.night,-1);
-  SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Night.Start",sun.night,0);
-
-  hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Fraction").Value = moon.fraction;
-
-  moon.fraction = moon.fraction * 100;
-
-  hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Precent").Value = Math.round(moon.fraction) + "%";
-  hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Angle").Value = moon.angle;
-  hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Waxing").Value = (moon.angle &lt; 0 ? "1" : "0");
-
-  hg.Program.Parameter("jkUtils.SolarAltitude.LastUpdated").Value = SolarAltitude.printTime(currentTime,0);
-
-  hg.Program.Notify("jkUtils - Solar Altitude", "Data has been updated.");
-
-};
-
-//
-// Web service calls handling
-//
-hg.When.WebServiceCallReceived(hg.Program.Module.Domain + "/" + hg.Program.Module.Address, function (args) {
-  var reqs = args.split('/');
-  var res = "ERROR";
-  var command = reqs[2];
-  switch(command)
-  {
-    case "Control.Refresh":
-      res = "OK";
-      hg.Program.Notify("jkutils: SolarAltitude","Update triggered.");
-      SolarAltitude.main();
-      break;
-  }
-  return res;
-});
-
-// For your convenience:
-//   If you should need a way to parse the saved times within you own scripts, you can use the following function.
-//   It is able to parse all kind of notations e.g.: '1:00 pm','1:00 p.m.', ...
-
-//   function parseTime(timestring) {
-//     var d = new Date();
-//     var time = timestring.match(/(\d+)(?::(\d\d))?\s*(p?)/);
-//     d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
-//     d.setMinutes( parseInt(time[2]) || 0 );
-
-//    return d;
-//   }
-
-
-while (hg.Program.IsEnabled)
-{
-  SolarAltitude.main();
-  // Update every 12 hours
-  hg.Pause(12*60*60);
-
-}
-
-</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>501</Address>
-    <Name>jkUtils - Solar Altitude</Name>
-    <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
-  Please set your local longitude/latitude in program options.</Description>
-    <Group>Weather and Environment</Group>
-    <Features />
-    <ActivationTime>2015-01-24T15:29:22.324048Z</ActivationTime>
-    <TriggerTime>2015-01-28T15:43:27.645661Z</TriggerTime>
-    <Type>Javascript</Type>
-    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2806,7 +2359,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.776811Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.962293Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2987,7 +2540,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.781345Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:15.028863Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3117,7 +2670,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2016-06-18T14:18:22.731339Z</TriggerTime>
+    <TriggerTime>2016-06-19T18:35:14.961932Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3301,8 +2854,8 @@ function initialize() {
         <Description>Set switch on/off</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2016-06-18T14:18:22.514789Z</ActivationTime>
-    <TriggerTime>2016-06-18T14:18:23.012338Z</TriggerTime>
+    <ActivationTime>2016-06-19T18:35:14.767492Z</ActivationTime>
+    <TriggerTime>2016-06-19T18:35:15.246836Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3347,7 +2900,7 @@ $$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
     <Description>Simulate motion detection</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-06-18T14:18:22.516624Z</ActivationTime>
+    <ActivationTime>2016-06-19T18:35:14.76934Z</ActivationTime>
     <TriggerTime>2016-06-18T13:58:14.256339Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -3374,7 +2927,7 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-06-18T14:18:22.516704Z</ActivationTime>
+    <ActivationTime>2016-06-19T18:35:14.76942Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -3403,7 +2956,7 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2016-06-18T14:18:22.516786Z</ActivationTime>
+    <ActivationTime>2016-06-19T18:35:14.769502Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>

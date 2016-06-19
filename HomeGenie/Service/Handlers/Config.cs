@@ -205,7 +205,22 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             case "System.Configure":
-                if (migCommand.GetOption(0) == "Service.Restart")
+                if (migCommand.GetOption(0) == "Location.Set")
+                {
+                    bool success = false;
+                    try
+                    {
+                        homegenie.SystemConfiguration.HomeGenie.Location = request.RequestText;
+                        homegenie.SaveData();
+                        success = true;
+                    } catch { }
+                    request.ResponseData = new ResponseText(success ? "OK" : "ERROR");
+                }
+                if (migCommand.GetOption(0) == "Location.Get")
+                {
+                    request.ResponseData = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location);
+                }
+                else if (migCommand.GetOption(0) == "Service.Restart")
                 {
                     Program.Quit(true);
                     request.ResponseData = new ResponseText("OK");

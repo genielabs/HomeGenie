@@ -41,8 +41,21 @@ namespace HomeGenie.Automation.Scheduler
           scheduler: hg.scheduler,
           // Miscellaneous functions
           pause: function(seconds) { hg.pause(seconds); },
-          delay: function(seconds) { this.pause(seconds); }
-        }
+          delay: function(seconds) { this.pause(seconds); },
+          event: hg.event
+        };
+        $$.onNext = function() {
+          var nextMin = new Date();
+          nextMin.setSeconds(0);
+          nextMin = new Date(nextMin.getTime()+60000);
+          return $$.scheduler.isOccurrence(nextMin, event.CronExpression);
+        };
+        $$.onPrevious = function() {
+          var prevMin = new Date();
+          prevMin.setSeconds(0);
+          prevMin = new Date(prevMin.getTime()-60000);
+          return $$.scheduler.isOccurrence(prevMin, event.CronExpression);
+        };
         ";
 
         public SchedulerScriptingEngine()
@@ -57,6 +70,7 @@ namespace HomeGenie.Automation.Scheduler
             hgScriptingHost = new SchedulerScriptingHost();
             hgScriptingHost.SetHost(homegenie, item);
             scriptEngine.SetValue("hg", hgScriptingHost);
+            scriptEngine.SetValue("event", eventItem);
         }
 
         public void Dispose()

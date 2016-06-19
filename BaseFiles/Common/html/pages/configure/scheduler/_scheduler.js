@@ -46,15 +46,12 @@
         $$.editorContainer = page.find('[data-ui-field="editor-container"]');
         $$.calendarContainer = page.find('[data-ui-field="calendar-container"]');
         $$.editorButton = page.find('[data-ui-field="edit-button"]').on('click', function(){
-            $('#schedulerservice_actionmenu').popup('close');
             $$.showEditor();
         });
         $$.calendarButton = page.find('[data-ui-field="calendar-button"]').on('click', function(){
-            $('#schedulerservice_actionmenu').popup('close');
             $$.showCalendar();
         });
         page.find('[data-ui-field="add-button"]').on('click', function(){
-            $('#schedulerservice_actionmenu').popup('close');
             $$._CurrentEventName = "";
             $$._CurrentEventIndex = -1;
             setTimeout($$.EditCurrentItem, 500);
@@ -82,7 +79,7 @@
     $$.GetItemMarkup = function (schedule) {
         var displayName = schedule.Name;
         if (displayName.indexOf('.') > 0)
-            displayName = displayName.substring(displayName.indexOf('.') + 1);
+            displayName = displayName.substring(displayName.lastIndexOf('.') + 1);
         var item = '<li  data-icon="false" data-schedule-name="' + schedule.Name + '" data-schedule-index="' + i + '">';
         item += '<a href="#" data-ui-ref="edit-btn">';
         //item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
@@ -109,9 +106,22 @@
             occursList.empty();
             var d = new Date(); d.setSeconds(0);
             var occurrences = [];
+            var currentGroup = '';
+            schedules.sort(function(a,b){
+                return (a.Name.toUpperCase() > b.Name.toUpperCase() || a.Name.indexOf('.') >= 0);
+            });
             $.each(schedules, function(k,v){
-              var entry = { name: v.Name, occurs: [] };
-              $.each($$._ScheduleList,function(sk,sv){
+              var n = v.Name;
+              if (n.indexOf('.') > 0) {
+                var scheduleGroup = n.substring(0, n.lastIndexOf('.'));
+                if (scheduleGroup != currentGroup) {
+                    occurrences.push({ title: scheduleGroup.replace(/\./g, ' / '), separator: true });
+                    currentGroup = scheduleGroup;
+                }
+                n = n.substring(n.lastIndexOf('.')+1);
+              }
+              var entry = { name: v.Name, title: n, occurs: [] };
+              $.each($$._ScheduleList, function(sk,sv){
                 if (sv.Name == v.Name) {
                     entry.index = sk;
                     entry.description = sv.Description;
@@ -141,6 +151,11 @@
             });
             var w = $(window).width()-32-50, h = 10;
             $.each(occurrences, function(k,v){
+                if (v.separator) {
+                    occursList.append('<div align="center" style="margin-top:1em;padding:0.25em;width:auto;font-size:18pt">'+v.title+'</div>');
+                    return true;
+                }
+
                 var timeBarDiv = $('<div/>');
                 timeBarDiv.css('cursor', 'pointer');
                 timeBarDiv.on('click',function(){
@@ -160,7 +175,7 @@
                     stroke: "rgb(0,0,0)",
                     "stroke-width": 1
                 });
-                occursList.append('<div class="ui-grid-a"><div class="ui-block-a"><h2 style="text-align:left;margin:0;margin-top:0.5em">'+v.name+'</h2></div><div class="ui-block-b" align="right" style="padding-right:48px;padding-top:20px">'+indicators+'</div></div>');
+                occursList.append('<div class="ui-grid-a"><div class="ui-block-a"><h2 style="text-align:left;margin:0;margin-top:0.5em;opacity:0.75">'+v.title+'</h2></div><div class="ui-block-b" align="right" style="padding-right:48px;padding-top:20px">'+indicators+'</div></div>');
                 occursList.append(timeBarDiv);
 
                 $.each(v.occurs, function(kk,vv){
@@ -276,7 +291,7 @@
             $('#configure_schedulerservice_list').empty();
             $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_scheduler_events') + '</li>');
             //
-            // element containing '.' in the name are grouped in own sections
+            // element containing '.' in the name are grouped into own sections
             for (i = 0; i < $$._ScheduleList.length; i++) {
                 var schedule = $$._ScheduleList[i];
                 if (schedule.Name.indexOf('.') < 0) {
@@ -288,10 +303,10 @@
             for (i = 0; i < $$._ScheduleList.length; i++) {
                 var schedule = $$._ScheduleList[i];
                 if (schedule.Name.indexOf('.') > 0) {
-                    var scheduleGroup = schedule.Name.substring(0, schedule.Name.indexOf('.'));
+                    var scheduleGroup = schedule.Name.substring(0, schedule.Name.lastIndexOf('.'));
                     var item = $$.GetItemMarkup(schedule);
                     if (scheduleGroup != currentGroup) {
-                        $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup + '</li>');
+                        $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup.replace(/\./g, ' / ') + '</li>');
                         currentGroup = scheduleGroup;
                     }
                     $('#configure_schedulerservice_list').append(item);

@@ -1611,237 +1611,6 @@
     <None Include="html\pages\control\widgets\homegenie\generic\images\icons\washingmachine.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\SolarAltitude.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="html\pages\control\widgets\jkUtils\SolarAltitude\SolarAltitude.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\Coord.Lat.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\Coord.Lon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\Widget.Preferences.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\Widget.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Astronomical.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Civil.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Day.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\GoldenHour.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Moon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Nautical.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Night.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\icons\Noon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+15.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+20.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+25.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+30.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+35.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+40.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+45.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+50.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+55.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+60.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+65.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+70.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+75.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+80.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+85.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+90.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.+95.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-10.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-15.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-20.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-25.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-30.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-35.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-40.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-45.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-50.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-55.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-60.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-65.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-70.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-75.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-80.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-85.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-90.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\shaders\Shader.-95.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Day.Noon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.Astronomical.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.Civil.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.GoldenHour.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.GoldenHour.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.Nautical.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.Night.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.Sunset.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Evening.Sunset.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.Astronomical.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.Civil.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.GoldenHour.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.GoldenHour.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.Nautical.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.Night.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.Sunrise.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Morning.Sunrise.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\status\Night.Nadir.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\topbar\GoldenHour.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\topbar\Noon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\topbar\Sun.End.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\topbar\Sun.Start.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\locales\de.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\pages\control\widgets\weather\wunderground\conditions.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2535,7 +2304,6 @@
     <None Include="programs\40.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\locales\fr.json" />
     <None Include="html\pages\control\widgets\homegenie\generic\energymonitor.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3579,6 +3347,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\configure\scheduler\templates\index.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\configure\scheduler\templates\command.turn-on-off.range.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\js\locationpicker.jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\SolarCalculator\Innovative.SolarCalculator.dll">
+      <Link>lib\shared\Innovative.SolarCalculator.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\SolarCalculator\Innovative.Geometry.dll">
+      <Link>lib\shared\Innovative.Geometry.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

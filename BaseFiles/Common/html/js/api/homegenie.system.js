@@ -125,4 +125,26 @@ HG.System = HG.System || new function(){ var $$ = this;
         });
     };
 
+    $$.LocationGet = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Location.Get/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null)
+                    callback(data);
+            }
+        });
+    };
+
+    $$.LocationSet = function (locationData, callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Location.Set/',
+            type: 'POST',
+            data: JSON.stringify(locationData),
+            success: function (data) {
+                if (callback != null)
+                    callback(data);
+            }
+        });
+    };
 };

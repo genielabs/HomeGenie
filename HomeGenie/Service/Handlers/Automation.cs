@@ -35,6 +35,7 @@ using Microsoft.Scripting.Hosting;
 using Microsoft.Scripting;
 using CronExpressionDescriptor;
 using HomeGenie.Automation.Engines;
+using Innovative.SolarCalculator;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -169,6 +170,10 @@ namespace HomeGenie.Service.Handlers
                         cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
                     } catch { }
                     request.ResponseData = new ResponseText(cronDescription);
+                    break;
+                case "Scheduling.SolarTimes":
+                    var solarTimes = new SolarTimes(DateTime.Now, homegenie.ProgramManager.SchedulerService.Location["latitude"].Value, homegenie.ProgramManager.SchedulerService.Location["longitude"].Value);
+                    request.ResponseData = solarTimes;
                     break;
                 }
             }

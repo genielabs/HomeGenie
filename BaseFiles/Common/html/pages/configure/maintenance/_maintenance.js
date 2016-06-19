@@ -9,6 +9,10 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
 
     $$.InitializePage = function () {
         var page = $('#' + $$.PageId);
+        var locationPopup = page.find('[id=maintenance_configuration_locationpopup]');
+        var locationName = page.find('[data-ui-field=location-name]');
+        $$.locationLat = page.find('[data-ui-field="location-latitude"]').on('change', function(){ $$.Location.name = ''; $$.SetLocation(); });
+        $$.locationLon = page.find('[data-ui-field="location-longitude"]').on('change', function(){ $$.Location.name = ''; $$.SetLocation(); });
         page.on('pagebeforeshow', function (e) {
             $('#restore_configuration_uploadfile').val('')
         });
@@ -29,7 +33,31 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             });
         });
         page.on('pageinit', function (e) {
-
+            locationPopup.popup().on('popupbeforeposition',function(){
+                if (locationPopup.initialized) {
+                    page.find('[data-ui-field="location-picker"]').locationpicker('location', { latitude: $$.Location.latitude, longitude: $$.Location.longitude });
+                } else {
+                    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=places').done(function(){
+                        $.cachedScript('js/locationpicker.jquery.js').done(function(){
+                            locationPopup.initialized = true;
+                            page.find('[data-ui-field="location-picker"]').locationpicker({
+                                location: { latitude: $$.Location.latitude, longitude: $$.Location.longitude },   
+                                radius: 0,
+                                inputBinding: {
+                                    locationNameInput: locationName       
+                                },
+                                enableAutocomplete: true,
+                                onchanged: function(currentLocation, radius, isMarkerDropped) {
+                                    $$.Location.name = locationName.val();
+                                    $$.locationLat.val(currentLocation.latitude);
+                                    $$.locationLon.val(currentLocation.longitude);
+                                    $$.SetLocation();
+                                }           
+                            });
+                        });
+                    });
+                }
+            });
             $('#systemsettings_httpport_change').bind('click', function () {
                 var port = $('#http_service_port').val();
                 $.mobile.loading('show');
@@ -544,10 +572,32 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
         });
     };
 
+    $$.SetLocation = function(){
+        var lat = parseFloat($$.locationLat.val());
+        var lon = parseFloat($$.locationLon.val());
+        if (lat != null) {
+            $$.Location.latitude = lat;
+            $$.locationLat.val(lat);
+        }
+        if (lon != null) {
+            $$.Location.longitude = lon;
+            $$.locationLon.val(lon);
+        }
+        HG.System.LocationSet($$.Location);
+    };
+
     $$.LoadSettings = function () {
         $.mobile.loading('show');
         //
         $$.LoadUpdateCheckSettings();
+        HG.System.LocationGet(function(data) {
+            if (typeof data.latitude != 'undefined')
+                $$.Location = data;
+            else
+                $$.Location = { name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 };
+            $$.locationLat.val($$.Location.latitude);
+            $$.locationLon.val($$.Location.longitude);
+        });
         HG.System.LoggingIsEnabled(function (data) {
             $('#configure_system_flip_logging').val(data).slider('refresh');
             $.mobile.loading('hide');
