@@ -1,7 +1,9 @@
 ﻿RELEASE HISTORY
 
-19/06/2016 v1.1-beta.523
-    - Brand new Scheduler; deprecated: Timetable, Scheduled on/off programs and Solar Altitude Widget
+20/06/2016 v1.1-beta.523
+    - Added some example schedules (using new hg-cron syntax)
+    - Added location latitude and longitude settings to maintenance page
+    - Brand new Scheduler with improved cron expression engine; deprecated: Timetable, Scheduled on/off programs and Solar Altitude Widget
     - UpdateChecker now is using "GitHub releases" as only source for update checking and upgrade files
     - Enabled UI widgets for program options
     - Should fix accented letters bug in module/group names

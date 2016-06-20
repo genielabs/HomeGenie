@@ -65,11 +65,17 @@ namespace HomeGenie.Automation.Scripting
             return (module.Name.ToLower() == name.ToLower());
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="HomeGenie.Automation.Scripting.ModuleHelper"/> was found.
-        /// </summary>
-        /// <value><c>true</c> if was found; otherwise, <c>false</c>.</value>
+        [Obsolete("Use 'Exists' instead")]
         public bool WasFound
+        {
+            get { return module != null; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="HomeGenie.Automation.Scripting.ModuleHelper"/> has a valid module instance.
+        /// </summary>
+        /// <value><c>true</c> if module instance is valid; otherwise, <c>false</c>.</value>
+        public bool Exists
         {
             get { return module != null; }
         }

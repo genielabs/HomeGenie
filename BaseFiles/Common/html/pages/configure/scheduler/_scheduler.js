@@ -83,7 +83,7 @@
     $$.GetItemMarkup = function (schedule) {
         var displayName = schedule.Name;
         if (displayName.indexOf('.') > 0)
-            displayName = displayName.substring(displayName.lastIndexOf('.') + 1);
+            displayName = displayName.substring(displayName.indexOf('.') + 1);
         var item = '<li  data-icon="false" data-schedule-name="' + schedule.Name + '" data-schedule-index="' + i + '">';
         item += '<a href="#" data-ui-ref="edit-btn">';
         //item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
@@ -111,18 +111,15 @@
             var d = new Date(); d.setSeconds(0);
             var occurrences = [];
             var currentGroup = '';
-            schedules.sort(function(a,b){
-                return (a.Name.toUpperCase() > b.Name.toUpperCase() || a.Name.indexOf('.') >= 0);
-            });
             $.each(schedules, function(k,v){
               var n = v.Name;
               if (n.indexOf('.') > 0) {
-                var scheduleGroup = n.substring(0, n.lastIndexOf('.'));
+                var scheduleGroup = n.substring(0, n.indexOf('.'));
                 if (scheduleGroup != currentGroup) {
                     occurrences.push({ title: scheduleGroup.replace(/\./g, ' / '), separator: true });
                     currentGroup = scheduleGroup;
                 }
-                n = n.substring(n.lastIndexOf('.')+1);
+                n = n.substring(n.indexOf('.')+1);
               }
               var entry = { name: v.Name, title: n, occurs: [] };
               $.each($$._ScheduleList, function(sk,sv){
@@ -188,8 +185,8 @@
                     vv.from -= sd.getTime();
                     vv.to -= sd.getTime();
                     var sx1 = Math.round(vv.from/(1440*60000)*w), sx2 = Math.round(vv.to/(1440*60000)*w)-sx1;
-                    timeBar.rect(sx1, 0, sx2+4, h+1).attr({
-                        fill: "rgba(255, 255, 70, 75)", 
+                    timeBar.rect(sx1-1, 0, sx2+1, h+1).attr({
+                        fill: "rgba(255, 255, 70, 85)", 
                         stroke: "rgba(255,255,255, 70)",
                         "stroke-width": 1
                     });
@@ -204,13 +201,29 @@
                     });
                 }
 
+                d = new Date(); d.setSeconds(0);
+
                 // build basic tooltip data
                 var desc = '';
                 if (typeof v.description != 'undefined' && v.description != null && v.description.trim() != '')
                     desc += v.description;
-                desc += '<br/>';
+                desc += '<p align="center"><strong>';
+                desc += moment($$._CurrentDate).format('LL');
+                desc += '</strong></p>';
 
-                d = new Date(); d.setSeconds(0);
+                // tooltip: previous/next occurrence text
+                if (v.prevOccurrence > 0 || v.nextOccurrence > 0) {
+                    if (v.prevOccurrence > 0) {
+                        desc += 'Last &nbsp;&nbsp;&nbsp;';
+                        desc += '<strong>'+moment(v.prevOccurrence).format('LT')+'</strong>&nbsp;&nbsp;('+moment(v.prevOccurrence).from(new Date())+')';
+                        desc += '<br/>';
+                    }
+                    if (v.nextOccurrence > 0) {
+                        desc += 'Next &nbsp;&nbsp;&nbsp;';
+                        desc += '<strong>'+moment(v.nextOccurrence).format('LT')+'</strong>&nbsp;&nbsp;('+moment(v.nextOccurrence).from(new Date())+')';
+                    }
+                }
+
                 var isToday = d.toDateString() == $$._CurrentDate.toDateString();
                 if (isToday) {
                     d = d.getTime();
@@ -227,17 +240,6 @@
                         stroke: "rgba(0,0,0, 70)",
                         "stroke-width": 0.5
                     });
-                    // tooltip: previous/next occurrence text
-                    if (v.prevOccurrence > 0 || v.nextOccurrence > 0) {
-                        if (v.prevOccurrence > 0) {
-                            desc += '<br/><strong>Today last</strong><br/>&nbsp;&nbsp;&nbsp;';
-                            desc += moment(v.prevOccurrence).format('LT')+'&nbsp;&nbsp;('+moment(v.prevOccurrence).from(new Date())+')';
-                        }
-                        if (v.nextOccurrence > 0) {
-                            desc += '<br/><strong>Today next</strong><br/>&nbsp;&nbsp;&nbsp;';
-                            desc += moment(v.nextOccurrence).format('LT')+'&nbsp;&nbsp;('+moment(v.nextOccurrence).from(new Date())+')';
-                        }
-                    }
                 } else {
                     var d2 = new Date(); d2.setHours(0,0,0,0);
                     if ($$._CurrentDate.getTime() > d2.getTime()) {
@@ -248,6 +250,17 @@
                         });
                     }
                 }
+
+                timeBarDiv.on('mousemove',function(e,d){
+                    if ($(e.target).is('rect')) {
+                        
+                        var md = new Date($$._CurrentDate.getTime());
+                        md.setHours(0,0,0,0);
+                        md = new Date(md.getTime()+(e.offsetX / w * 1440 * 60000)-60000);
+                        $$._CurrentDate = md;
+
+                    }
+                });
 
                 // attach tooltip
                 timeBarDiv.qtip({
@@ -307,7 +320,7 @@
             for (i = 0; i < $$._ScheduleList.length; i++) {
                 var schedule = $$._ScheduleList[i];
                 if (schedule.Name.indexOf('.') > 0) {
-                    var scheduleGroup = schedule.Name.substring(0, schedule.Name.lastIndexOf('.'));
+                    var scheduleGroup = schedule.Name.substring(0, schedule.Name.indexOf('.'));
                     var item = $$.GetItemMarkup(schedule);
                     if (scheduleGroup != currentGroup) {
                         $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup.replace(/\./g, ' / ') + '</li>');

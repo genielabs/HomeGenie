@@ -226,6 +226,7 @@ namespace HomeGenie.Automation
             // Route event to Programs->ModuleIsChangingHandler
             if (RoutePropertyBeforeChangeEvent(routedEvent))
             {
+                ThreadPool.QueueUserWorkItem(new WaitCallback(schedulerService.OnModuleUpdate), routedEvent);
                 // Route event to Programs->ModuleChangedHandler
                 ThreadPool.QueueUserWorkItem(new WaitCallback(RoutePropertyChangedEvent), routedEvent);
             }

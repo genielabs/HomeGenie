@@ -29,6 +29,7 @@ using HomeGenie.Service;
 
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
+using System.Threading;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -56,6 +57,7 @@ namespace HomeGenie.Automation.Scheduler
         private SchedulerHelper schedulerHelper;
         private ProgramHelperBase programHelper;
         private StoreHelper storeHelper;
+        private Action<ModuleHelper, ModuleParameter> moduleUpdateHandler;
 
         public SchedulerScriptingHost()
         {
@@ -76,6 +78,34 @@ namespace HomeGenie.Automation.Scheduler
             knxClientHelper = new KnxClientHelper();
             schedulerHelper = new SchedulerHelper(homegenie);
             programHelper = new ProgramHelperBase(homegenie);
+        }
+
+        public void RouteModuleEvent(HomeGenie.Automation.ProgramManager.RoutedEvent eventData)
+        {
+            if (moduleUpdateHandler != null)
+            {
+                var module = new ModuleHelper(homegenie, eventData.Module);
+                var parameter = eventData.Parameter;
+                var callback = new WaitCallback((state) =>
+                {
+                    try
+                    {
+                        moduleUpdateHandler(module, parameter);
+                    }
+                    catch (Exception e) 
+                    {
+                        Console.WriteLine("ERROR {0}", schedulerItem.Name);
+                        Console.WriteLine("ERROR SchedulerScriptingHost.RouteModuleEvent: {0}", e.Message);
+                    }
+                });
+                ThreadPool.QueueUserWorkItem(callback);
+            }
+        }
+
+        public SchedulerScriptingHost OnModuleUpdate(Action<ModuleHelper, ModuleParameter> handler)
+        {
+            moduleUpdateHandler = handler;
+            return this;
         }
 
         public ProgramHelperBase Program

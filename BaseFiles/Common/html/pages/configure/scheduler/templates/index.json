@@ -29,8 +29,8 @@
     },
     {
         "name": {
-            "en": "Thermostat Mode Heat",
-            "it": "Modalità termostato 'Caldo'"
+            "en": "Thermostat Mode",
+            "it": "Modalità termostato"
         },
         "script": "command.therm-heat.js"
     },
@@ -40,5 +40,12 @@
             "it": "Spegni termostato"
         },
         "script": "command.therm-off.js"
+    },
+    {
+        "name": {
+            "en": "Say",
+            "it": "Parla"
+        },
+        "script": "program.say.js"
     }
 ]

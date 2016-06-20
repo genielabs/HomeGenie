@@ -3363,6 +3363,9 @@
       <Link>lib\shared\Innovative.Geometry.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\pages\configure\scheduler\templates\program.say.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />

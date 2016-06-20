@@ -1,9 +1,33 @@
-﻿using System;
-using Jint;
-using HomeGenie.Service;
+﻿/*
+    This file is part of HomeGenie Project source code.
+
+    HomeGenie is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    HomeGenie is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+*/
+
+/*
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
+
+using System;
 using System.Threading;
 using System.Collections.Generic;
+
+using HomeGenie.Service;
 using HomeGenie.Service.Constants;
+
+using Jint;
 using Newtonsoft.Json;
 
 namespace HomeGenie.Automation.Scheduler
@@ -58,11 +82,14 @@ namespace HomeGenie.Automation.Scheduler
         };
         $$.data = function(k,v) {
             if (typeof v == 'undefined') {
-                return hg.data(k).Value;
+                return hg.data(k).value;
             } else {
                 hg.data(k).value = v;
                 return $$;
             }
+        };
+        $$.onUpdate = function(handler) {
+            hg.onModuleUpdate(handler);
         };
         ";
 
@@ -154,9 +181,17 @@ namespace HomeGenie.Automation.Scheduler
                 programThread = null;
             }
             if (hgScriptingHost != null)
+            {
+                hgScriptingHost.OnModuleUpdate(null);
                 hgScriptingHost.Reset();
+            }
         }
 
+        public void RouteModuleEvent(object eventData)
+        {
+            var moduleEvent = (HomeGenie.Automation.ProgramManager.RoutedEvent)eventData;
+            hgScriptingHost.RouteModuleEvent(moduleEvent);
+        }
 
     }
 }
