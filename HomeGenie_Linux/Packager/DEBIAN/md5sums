@@ -6,7 +6,7 @@ b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
 7a6fe21bb2b47873a4b73c3e8d00826d  usr/local/bin/homegenie/release_info.xml
 d41cdd52800b4bdf9c06e385d16931e3  usr/local/bin/homegenie/Linux.dll.mdb
 26aa2c76b7c6a102291cb3df7b06e2db  usr/local/bin/homegenie/IronPython.Modules.dll
-2aaf03863d3b8c70243fb0df81f4e9bd  usr/local/bin/homegenie/HomeGenie.exe
+065296161c5f6d9b2f93b6149e64e3e9  usr/local/bin/homegenie/HomeGenie.exe
 6fa1b7ce01c0bdc927c9f662f74ddf21  usr/local/bin/homegenie/html/css/jquery.qtip.min.css
 e5d30611614c33d91ca7fe10b2f5ac8f  usr/local/bin/homegenie/html/css/jquery.mobile.icons.min.css
 b5da7fd09901162a9ed353308eb1bf1b  usr/local/bin/homegenie/html/css/ui.notify.css
@@ -1032,7 +1032,7 @@ d311329f6b7f6588be49094a592492c9  usr/local/bin/homegenie/html/images/genie.png
 b488b97ca1f19753a9f38d1e0144b115  usr/local/bin/homegenie/html/images/event_on.png
 11e6aed03a9856f09de50c12d6f5379c  usr/local/bin/homegenie/html/images/configure.png
 ecaa88f7fa0bf610a5a26cf545dcd3aa  usr/local/bin/homegenie/html/blank.html
-456d83b145d4fde18f0ecd31f037b0dd  usr/local/bin/homegenie/html/index.html
+8fd8cc27ca2014df97ca63d3591c7b41  usr/local/bin/homegenie/html/index.html
 69338ffa66f8af999156761d486f763b  usr/local/bin/homegenie/html/README.RestoreP513.md
 a4e8c938edacd5e8c55c5441054dcf9a  usr/local/bin/homegenie/html/icons.html
 9e90aad43d8acc5b45729f2296cb5907  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
@@ -1052,7 +1052,7 @@ c8164876b6f66616d68387443621510c  usr/local/bin/homegenie/ICSharpCode.SharpZipLi
 2841311b16c606e491d65a63ccbafd1c  usr/local/bin/homegenie/scheduler.xml
 3370764d6697cf724c34c76a789dc3fc  usr/local/bin/homegenie/UPnP.dll
 8742ca673f11373aa5b26f966c03ef49  usr/local/bin/homegenie/LICENCE.TXT
-c9189484a8c28006476a1f355d288583  usr/local/bin/homegenie/HomeGenie.exe.mdb
+14038f5a5f3dfd54b72f102ec24b5a0b  usr/local/bin/homegenie/HomeGenie.exe.mdb
 a8992f211bf62bcd6cb8b66c0df133a1  usr/local/bin/homegenie/HomeGenie.exe.config
 62a74c22cb81d80aa1d0ce3e31080931  usr/local/bin/homegenie/modules.xml
 75618d7a8e25819a16609b0be6cec450  usr/local/bin/homegenie/Raspberry.IO.GeneralPurpose.dll

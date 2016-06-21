@@ -79,6 +79,7 @@ namespace HomeGenie.Data
         /// <value>The properties.</value>
         public TsList<ModuleParameter> Properties { get; set; }
 
+        [JsonConverter(typeof(HideValueConverter))]
         public TsList<Store> Stores { get; set; }
 
         public string RoutingNode { get; set; } // "<ip>:<port>" || ""
@@ -108,6 +109,24 @@ namespace HomeGenie.Data
             return obj;
         }
 
+    }
+
+    class HideValueConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(object[]);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+                writer.WriteValue("");
+        }
     }
 }
 

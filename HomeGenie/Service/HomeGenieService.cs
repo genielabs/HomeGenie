@@ -147,7 +147,10 @@ namespace HomeGenie.Service
             // this is a fix for upgrading from r522 to any new release as the SchedulerItem object has changed in r523
             // de-serializing new object will only work after HomeGenie.exe update and restart
             if (File.Exists("scheduler_update.xml"))
+            {
                 updateChecker.UpdateScheduler("scheduler_update.xml");
+                File.Delete("scheduler_update.xml");
+            }
 
             Start();
         }

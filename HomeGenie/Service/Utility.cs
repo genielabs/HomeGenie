@@ -171,12 +171,11 @@ namespace HomeGenie.Service
         public static string Module2Json(Module module, bool hideProperties)
         {
             var settings = new JsonSerializerSettings{ Formatting = Formatting.Indented };
-            var resolver = new IgnorePropertyContractResolver(new List<string>{ "Stores" });
             if (hideProperties)
             {
-                resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties", "Stores" });
+                var resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties" });
+                settings.ContractResolver = resolver;
             }
-            settings.ContractResolver = resolver;
             return JsonConvert.SerializeObject(module, settings);
         }
 
