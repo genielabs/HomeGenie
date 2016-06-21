@@ -111,8 +111,10 @@ namespace HomeGenie.Service.Handlers
                         newSchedule.Description,
                         newSchedule.Script
                     );
-                    item.BoundDevices = newSchedule.BoundDevices;
-                    item.BoundModules = newSchedule.BoundModules;
+                    if (newSchedule.BoundDevices != null)
+                        item.BoundDevices = newSchedule.BoundDevices;
+                    if (newSchedule.BoundModules != null)
+                        item.BoundModules = newSchedule.BoundModules;
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Delete":

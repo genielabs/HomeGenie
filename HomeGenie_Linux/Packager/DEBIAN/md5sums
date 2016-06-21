@@ -3,10 +3,10 @@
 9f96aee193d53a925d18b2769e7958e0  usr/local/bin/homegenie/Ude.dll
 1dcf890d5a0ac7fdcd3db320b629a3ca  usr/local/bin/homegenie/Raspberry.IO.Components.dll.config
 b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
-4fa2694c07a38ed024a64f6956e2a329  usr/local/bin/homegenie/release_info.xml
+7a6fe21bb2b47873a4b73c3e8d00826d  usr/local/bin/homegenie/release_info.xml
 d41cdd52800b4bdf9c06e385d16931e3  usr/local/bin/homegenie/Linux.dll.mdb
 26aa2c76b7c6a102291cb3df7b06e2db  usr/local/bin/homegenie/IronPython.Modules.dll
-0cf114a4c356392c90a780c1ec246108  usr/local/bin/homegenie/HomeGenie.exe
+2aaf03863d3b8c70243fb0df81f4e9bd  usr/local/bin/homegenie/HomeGenie.exe
 6fa1b7ce01c0bdc927c9f662f74ddf21  usr/local/bin/homegenie/html/css/jquery.qtip.min.css
 e5d30611614c33d91ca7fe10b2f5ac8f  usr/local/bin/homegenie/html/css/jquery.mobile.icons.min.css
 b5da7fd09901162a9ed353308eb1bf1b  usr/local/bin/homegenie/html/css/ui.notify.css
@@ -915,7 +915,7 @@ a27edfe9eecc391907b0bcb484c9c460  usr/local/bin/homegenie/html/pages/control/wid
 57aa59c98ffe503f31a986907fe52dc9  usr/local/bin/homegenie/html/pages/control/widgets/homegenie/generic/light.html
 1508cd82ecf907dc249fceff6d29ddbb  usr/local/bin/homegenie/html/pages/control/widgets/homegenie/generic/mediareceiver.js
 6ddcf90cc8c332da1113a1116fd111e7  usr/local/bin/homegenie/html/pages/control/widgets/homegenie/generic/unknown.html
-9e1f820ecbd644f413ee4ccca5672308  usr/local/bin/homegenie/html/pages/control/_control.js
+e0a447d8885a8abd93712962b5203408  usr/local/bin/homegenie/html/pages/control/_control.js
 5acfdab557234f8835553e3c0e2dcf0e  usr/local/bin/homegenie/html/pages/control/main.html
 2687d9c3bf7000687b26da28c1bd127a  usr/local/bin/homegenie/html/pages/configure/scheduler/templates/program.say.js
 4e2f999b91c63abe26f6402aa4dadc93  usr/local/bin/homegenie/html/pages/configure/scheduler/templates/index.json
@@ -1032,7 +1032,7 @@ d311329f6b7f6588be49094a592492c9  usr/local/bin/homegenie/html/images/genie.png
 b488b97ca1f19753a9f38d1e0144b115  usr/local/bin/homegenie/html/images/event_on.png
 11e6aed03a9856f09de50c12d6f5379c  usr/local/bin/homegenie/html/images/configure.png
 ecaa88f7fa0bf610a5a26cf545dcd3aa  usr/local/bin/homegenie/html/blank.html
-28ce2315a18049bf77b44feea9a1ac0c  usr/local/bin/homegenie/html/index.html
+456d83b145d4fde18f0ecd31f037b0dd  usr/local/bin/homegenie/html/index.html
 69338ffa66f8af999156761d486f763b  usr/local/bin/homegenie/html/README.RestoreP513.md
 a4e8c938edacd5e8c55c5441054dcf9a  usr/local/bin/homegenie/html/icons.html
 9e90aad43d8acc5b45729f2296cb5907  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
@@ -1052,7 +1052,7 @@ c8164876b6f66616d68387443621510c  usr/local/bin/homegenie/ICSharpCode.SharpZipLi
 2841311b16c606e491d65a63ccbafd1c  usr/local/bin/homegenie/scheduler.xml
 3370764d6697cf724c34c76a789dc3fc  usr/local/bin/homegenie/UPnP.dll
 8742ca673f11373aa5b26f966c03ef49  usr/local/bin/homegenie/LICENCE.TXT
-1426cf33f9b04660fd50374c011b5bcc  usr/local/bin/homegenie/HomeGenie.exe.mdb
+c9189484a8c28006476a1f355d288583  usr/local/bin/homegenie/HomeGenie.exe.mdb
 a8992f211bf62bcd6cb8b66c0df133a1  usr/local/bin/homegenie/HomeGenie.exe.config
 62a74c22cb81d80aa1d0ce3e31080931  usr/local/bin/homegenie/modules.xml
 75618d7a8e25819a16609b0be6cec450  usr/local/bin/homegenie/Raspberry.IO.GeneralPurpose.dll
@@ -1092,7 +1092,7 @@ ae7bbf0f4b96d2a0effd97d69befb47e  usr/local/bin/homegenie/CommonMark.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
 e33483b8ed739cd267f9a27ea266c87e  usr/local/bin/homegenie/Raspberry.IO.dll
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
-598f23f0232159c734fcdde81d0247f5  usr/local/bin/homegenie/HISTORY.TXT
+20a830289a2e3eeab9c7e096aef99023  usr/local/bin/homegenie/HISTORY.TXT
 acbb8de3a6a8f53d69957e2607097992  usr/local/bin/homegenie/DEVELOPERS.TXT
 1d9ad3e990e9a228c53c63eb28f70518  usr/local/bin/homegenie/Common.dll
 0728e681132f8722dd21b90d88970bd7  usr/local/bin/homegenie/Microsoft.Dynamic.dll
@@ -1137,7 +1137,7 @@ e2f6b564cb161a24fbd82e93352d1c9b  usr/local/bin/homegenie/lib/mig/LibUsbDotNet.d
 2033b5196b81337f7affb4a6d1aedd00  usr/local/bin/homegenie/lib/mig/p1db_custom.xml
 419c63466303958863e3cb552f2acc91  usr/local/bin/homegenie/lib/mig/MIG.Controllers.dll
 c6dc6a6d961a88ea80e1b2f137bd9ac3  usr/local/bin/homegenie/lib/mig/ZWaveLib.dll
-fe5b578c445ea0fe273c093c3b14ee6f  usr/local/bin/homegenie/lib/mig/MIG.HomeAutomation.dll
+32b6188f977218a2e014d7f524f91657  usr/local/bin/homegenie/lib/mig/MIG.HomeAutomation.dll
 ca71de7a3c556db84be080f0275a4e6d  usr/local/bin/homegenie/lib/mig/MIG.Protocols.dll
 4b9a7d5996299f8066ede35cd17a68b2  usr/local/bin/homegenie/lib/mig/MIG.Media.dll
 71cbc2cbf22d9703ddf26767d3bf814b  usr/local/bin/homegenie/lib/mig/lircconfig.xml

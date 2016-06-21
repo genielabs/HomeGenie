@@ -160,9 +160,11 @@ namespace HomeGenie.Automation.Scheduler
             if (data != null)
                 eventItem.Data = data;
             if (script != null)
+            {
+                if (eventItem.ScriptEngine != null && eventItem.Script != script)
+                    eventItem.ScriptEngine.StopScript();
                 eventItem.Script = script;
-            if (eventItem.ScriptEngine != null)
-                eventItem.ScriptEngine.StopScript();
+            }
             eventItem.LastOccurrence = "";
             // by default newly added events are enabled
             if (justAdded)

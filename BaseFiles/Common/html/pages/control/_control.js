@@ -110,7 +110,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         $$.RefreshGroupIndicators();
         $$.field('#control_groupcontent', true).children('div').hide();
         $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).show();
-        setTimeout(function(){ $$.RenderGroupModules(gid); }, 100);
+        setTimeout(function(){ $$.RenderGroupModules(gid); }, 500);
     };
 
     $$.UpdateModules = function () {
@@ -386,8 +386,8 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             return;
         }
         //
-        $$._renderModuleBusy = true;
         $$._renderModuleDelay = null;
+        $$._renderModuleBusy = true;
         //
         var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
         var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);

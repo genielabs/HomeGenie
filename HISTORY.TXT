@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+21/06/2016 v1.1-beta.524
+    - Minor fixes to the new scheduler
+    - ZWave interface: moved Pepper1 db download from constructor to the connect method
+
 20/06/2016 v1.1-beta.523
     - Added some example schedules (using new hg-cron syntax)
     - Added location latitude and longitude settings to maintenance page

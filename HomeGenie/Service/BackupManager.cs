@@ -98,7 +98,10 @@ namespace HomeGenie.Service
             {
                 foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
                 {
-                    Utility.AddFileToZip(archiveName, f);
+                    // exclude Pepper1 Db from backup (only the p1db_custom.xml file will be included)
+                    // in the future the p1db.xml file should be moved to a different path 
+                    if (Path.GetFileName(f) != "p1db.xml")
+                        Utility.AddFileToZip(archiveName, f);
                 }
             }
         }

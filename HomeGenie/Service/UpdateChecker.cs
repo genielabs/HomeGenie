@@ -605,24 +605,7 @@ namespace HomeGenie.Service
             }
         }
 
-        private void checkInterval_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Check();
-            if (IsUpdateAvailable)
-            {
-                // TODO: ...
-            }
-        }
-
-        private void LogMessage(string message)
-        {
-            if (InstallProgressMessage != null)
-            {
-                InstallProgressMessage(this, message);
-            }
-        }
-
-        private bool UpdateGroups(string file)
+        public bool UpdateGroups(string file)
         {
             bool success = true;
             //
@@ -663,7 +646,7 @@ namespace HomeGenie.Service
             return success;
         }
 
-        private bool UpdateAutomationGroups(string file)
+        public bool UpdateAutomationGroups(string file)
         {
             bool success = true;
             //
@@ -704,7 +687,7 @@ namespace HomeGenie.Service
             return success;
         }
 
-        private bool UpdateScheduler(string file)
+        public bool UpdateScheduler(string file)
         {
             bool success = true;
             //
@@ -720,6 +703,7 @@ namespace HomeGenie.Service
                 bool configChanged = false;
                 foreach (var item in schedulerItems)
                 {
+                    // it will only import the new ones
                     if (homegenie.ProgramManager.SchedulerService.Get(item.Name) == null)
                     {
                         LogMessage("+ Adding Scheduler Item: " + item.Name);
@@ -745,7 +729,7 @@ namespace HomeGenie.Service
             return success;
         }
 
-        private bool UpdateSystemConfig(string file)
+        public bool UpdateSystemConfig(string file)
         {
             bool success = true;
             //
@@ -785,7 +769,7 @@ namespace HomeGenie.Service
             return success;
         }
 
-        private bool UpdatePrograms(string file)
+        public bool UpdatePrograms(string file)
         {
             bool success = true;
             try
@@ -895,6 +879,23 @@ namespace HomeGenie.Service
                              (oldProgram.Group == newProgram.Group) &&
                              (oldProgram.Type == newProgram.Type);
             return !unchanged;
+        }
+
+        private void LogMessage(string message)
+        {
+            if (InstallProgressMessage != null)
+            {
+                InstallProgressMessage(this, message);
+            }
+        }
+
+        private void checkInterval_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Check();
+            if (IsUpdateAvailable)
+            {
+                // TODO: ...
+            }
         }
 
     }
