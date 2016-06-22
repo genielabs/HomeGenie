@@ -128,7 +128,7 @@ namespace HomeGenie.Automation.Scheduler
                 StopScript();
 
             isRunning = true;
-            homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Start");
+            homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, eventItem.Name+":Start");
 
             programThread = new Thread(() =>
             {
@@ -147,15 +147,15 @@ namespace HomeGenie.Automation.Scheduler
                     programThread = null;
                     isRunning = false;
                     if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
-                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Error ("+result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ')+")");
+                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, "Error ("+result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ')+")");
                 }
                 catch (ThreadAbortException)
                 {
                     programThread = null;
                     isRunning = false;
-                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":Interrupted");
+                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, "Interrupted");
                 }
-                homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, "EventScript.Status", eventItem.Name+":End");
+                homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, "End");
             });
 
             try

@@ -296,14 +296,14 @@
 
             default:
                 if (module != null && !$$.IsBlacklisted(eventLog.Property)) {
-                    if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
+                    if (eventLog.Property == 'Receiver.RawData' && eventLog.Value != '') {
                         popupdata = {
                             icon: 'images/remote.png',
                             title: '<span style="color:yellow;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br/>' + eventLog.Value,
                             text: module.Address,
                             timestamp: date
                         };
-                    } else if (!isNaN(eventLog.Value.replace(',', '.'))) {
+                    } else {
                         HG.Ui.GetModuleIcon(module, function(icon,elid){
                             var iconImage = icon;
                             var group = HG.WebApp.GroupsList.GetModuleGroup(module);
@@ -313,6 +313,8 @@
                             var value = eventLog.Value;
                             if (!isNaN(eventLog.Value.replace(',', '.')))
                                 value = (parseFloat(eventLog.Value.replace(',', '.')).toFixed(2));
+                            else
+                                value = eventLog.Value;
                             //
                             if (module.Name != '') name = module.Name;
                             if (group == null) group = '';

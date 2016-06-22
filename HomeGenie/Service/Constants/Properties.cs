@@ -36,8 +36,14 @@ namespace HomeGenie.Service.Constants
             = "HomeGenie.Status";
         public const string SystemInfoHttpAddress
             = "SystemInfo.HttpAddress";
+        public const string SchedulerModuleUpdateStart
+            = "Scheduler.OnModuleUpdateStart";
+        public const string SchedulerModuleUpdateEnd
+        = "Scheduler.OnModuleUpdateEnd";
         public const string SchedulerError
             = "Scheduler.Error";
+        public const string SchedulerScriptStatus
+            = "Scheduler.ScriptStatus";
         public const string SchedulerTriggeredEvent
             = "Scheduler.TriggeredEvent";
         public const string ProgramStatus

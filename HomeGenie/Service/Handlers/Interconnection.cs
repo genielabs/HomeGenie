@@ -70,24 +70,10 @@ namespace HomeGenie.Service.Handlers
                     module = moduleEvent.Module;
                     homegenie.Modules.Add(module);
                 }
-                Utility.ModuleParameterSet(module, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
+                //Utility.ModuleParameterSet(module, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
                 // "<ip>:<port>" remote endpoint port is passed as the first argument from the remote point itself
                 module.RoutingNode = requestOrigin + (migCommand.GetOption(0) != "" ? ":" + migCommand.GetOption(0) : "");
-                //
-                homegenie.RaiseEvent(
-                    requestOrigin,
-                    moduleEvent.Module.Domain,
-                    moduleEvent.Module.Address,
-                    requestOrigin,
-                    moduleEvent.Parameter.Name,
-                    moduleEvent.Parameter.Value
-                );
-                var eventData = new ProgramManager.RoutedEvent() {
-                    Sender = requestOrigin,
-                    Module = module,
-                    Parameter = moduleEvent.Parameter
-                };
-                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.ProgramManager.RoutePropertyChangedEvent), eventData);
+                homegenie.RaiseEvent(requestOrigin, moduleEvent.Module.Domain, moduleEvent.Module.Address, requestOrigin, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
                 break;
             }
         }

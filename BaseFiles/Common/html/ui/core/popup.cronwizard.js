@@ -617,7 +617,7 @@ $$.refreshModules = function() {
         var el = $(v);
         var devType = el.attr('value');
         el.removeClass('fa-check-square').addClass('fa-square-o');
-        if ($$.boundDevices.includes(devType))
+        if ($$.boundDevices.indexOf(devType) != -1)
             el.addClass('fa-check-square');
     });
     $$.modulesList.empty();
@@ -627,7 +627,7 @@ $$.refreshModules = function() {
             if (mod.DeviceType == devType) {
                 var domainAddress = mod.Domain+':'+mod.Address;
                 var check = $.grep($$.boundModules, function(e){ return e.Domain+':'+e.Address == domainAddress; }).length == 0 ? 'square-o' : 'check-square';
-                var li = $('<li class="hg-ui-list-item"><span data-locale-id="configure_module_typelight">'+HG.Ui.GetModuleDisplayName(mod)+'</span><i value="'+domainAddress+'" class="fa fa-'+check+' hg-ui-checkbox"></i></li>');
+                var li = $('<li class="hg-ui-list-item"><span>'+HG.Ui.GetModuleDisplayName(mod)+'</span><i value="'+domainAddress+'" class="fa fa-'+check+' hg-ui-checkbox"></i></li>');
                 li.on('click',function(){
                     var el = $(this).find('i');
                     if ($$._uiCheckToggle(el)) {

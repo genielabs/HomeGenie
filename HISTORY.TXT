@@ -1,6 +1,8 @@
 ﻿RELEASE HISTORY
 
-21/06/2016 v1.1-beta.524
+22/06/2016 v1.1-beta.525
+    - Fixed issues with scheduler UI in Internet Explorer
+    - Fixed interconnections events bug (events firing multiple times)
     - Minor fixes to the new scheduler
     - ZWave interface: moved Pepper1 db download from constructor to the connect method
 

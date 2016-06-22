@@ -30,6 +30,7 @@ using HomeGenie.Service;
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
 using System.Threading;
+using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -90,12 +91,31 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     try
                     {
+                        homegenie.MigService.RaiseEvent(
+                            this,
+                            Domains.HomeAutomation_HomeGenie,
+                            SourceModule.Scheduler,
+                            "Scheduler Routed Event",
+                            Properties.SchedulerModuleUpdateStart,
+                            schedulerItem.Name);
                         moduleUpdateHandler(module, parameter);
+                        homegenie.MigService.RaiseEvent(
+                            this,
+                            Domains.HomeAutomation_HomeGenie,
+                            SourceModule.Scheduler,
+                            "Scheduler Routed Event",
+                            Properties.SchedulerModuleUpdateEnd,
+                            schedulerItem.Name);
                     }
                     catch (Exception e) 
                     {
-                        Console.WriteLine("ERROR {0}", schedulerItem.Name);
-                        Console.WriteLine("ERROR SchedulerScriptingHost.RouteModuleEvent: {0}", e.Message);
+                        homegenie.MigService.RaiseEvent(
+                            this,
+                            Domains.HomeAutomation_HomeGenie,
+                            SourceModule.Scheduler,
+                            e.Message.Replace('\n', ' ').Replace('\r', ' '),
+                            Properties.SchedulerError,
+                            schedulerItem.Name);
                     }
                 });
                 ThreadPool.QueueUserWorkItem(callback);

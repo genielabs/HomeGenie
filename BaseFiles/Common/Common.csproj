@@ -3294,9 +3294,6 @@
     <None Include="html\js\app\homegenie.webapp.utility.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\startswith.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\..\Externals\CronExpressionDescriptor\pt\CronExpressionDescriptor.resources.dll">
       <Link>lib\shared\pt\CronExpressionDescriptor.resources.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
