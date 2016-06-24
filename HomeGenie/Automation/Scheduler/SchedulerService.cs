@@ -117,6 +117,7 @@ namespace HomeGenie.Automation.Scheduler
                             }
                             eventItem.ScriptEngine.StartScript();
                         }
+                        // TODO: deprecate this! - temporarly left for compatibility with HG <= r522
                         else if (!String.IsNullOrEmpty(eventItem.ProgramId))
                         {
                             var program = masterControlProgram.Programs.Find(p => p.Address.ToString() == eventItem.ProgramId || p.Name == eventItem.ProgramId);

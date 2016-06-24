@@ -9,7 +9,7 @@
         element.html(html);
         var _this = this;
         var checkBox = element.find('[data-ui-field=checkbox]');
-        checkBox.prop('checked', context.parameter.Value != '' ? true : false);
+        checkBox.prop('checked', context.parameter.Value != '' && context.parameter.Value.toLowerCase() != 'false' && context.parameter.Value != '0'  ? true : false);
         checkBox.on('change', function(evt){
             if (typeof _this.onChange == 'function') {
                 if ($(this).is(':checked'))

@@ -707,7 +707,7 @@ namespace HomeGenie.Service
                     if (homegenie.ProgramManager.SchedulerService.Get(item.Name) == null)
                     {
                         LogMessage("+ Adding Scheduler Item: " + item.Name);
-                        homegenie.ProgramManager.SchedulerService.AddOrUpdate(item.Name, item.CronExpression, item.Data, item.Description, item.ProgramId);
+                        homegenie.ProgramManager.SchedulerService.AddOrUpdate(item.Name, item.CronExpression, item.Data, item.Description, item.Script);
                         if (!configChanged)
                             configChanged = true;
                     }

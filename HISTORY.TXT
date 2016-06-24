@@ -1,5 +1,7 @@
 ﻿RELEASE HISTORY
 
+    - Fixed SSL error when sending e-mails
+
 22/06/2016 v1.1-beta.525
     - Fixed issues with scheduler UI in Internet Explorer
     - Fixed interconnections events bug (events firing multiple times)
