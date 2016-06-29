@@ -3,7 +3,6 @@ title: HomeGenie Walkthrough
 layout: main
 published: true
 ---
-
 # Software Walkthrough
 
 ## Initial setup and configuration
@@ -12,6 +11,10 @@ After [HomeGenie installation](install.html), you can access it's **administrati
 
 {: .center}
 ![Administration page url]({{site.baseurl}}/images/docs/admin_page_url.png)
+
+...
+
+![Dashboard]({{site.baseurl}}/images/docs/hg_dashboard_01.jpg)
 
 {: .center}
 ``` Work In Progress... ```
