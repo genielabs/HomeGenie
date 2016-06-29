@@ -25,9 +25,6 @@ When you see a *gear button* in the upper right corner of a widget, it means tha
 {: .center}
 ![Weather options popup]({{site.baseurl}}/images/docs/weather_options_02.png)
 
-{: .center}
-![Configuring Weather Widget]({{site.baseurl}}/images/docs/weather_options_01.png)
-
 ...
 
 ### Configuring the Alarm System
