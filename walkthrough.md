@@ -14,7 +14,7 @@ After [HomeGenie installation](install.html), you can access it's **administrati
 
 The start page is the *Dashboard* containing some **Widgets** such as *Weather*, *Alarm System*, *Energy Monitor*, *Thermostat*, a couple of sensors and lights.
 
-This preset configuration is also a playable **demo**, useful for starting learn some *HomeGenie* basics before you proceed integrating your smart devices into it.
+This preset configuration is also a playable demo, useful for starting learn some *HomeGenie* basics before you proceed integrating your smart devices into it.
 
 {: .center}
 ![Dashboard]({{site.baseurl}}/images/docs/dashboard_page_01.png)
