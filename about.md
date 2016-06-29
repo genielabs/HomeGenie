@@ -15,7 +15,7 @@ and its mission is to try to find a reasonable way of converging all these new o
 piece of software.
 
 {: .center}
-![Administration page url]({{site.baseurl}}/images/docs/admin_page_01.png)
+![Dashboard]({{site.baseurl}}/images/docs/dashboard_page_01.png)
 
 ## Integrated Editor for Automation Programs and UI Widgets
 
