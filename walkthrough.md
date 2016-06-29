@@ -13,6 +13,7 @@ After [HomeGenie installation](install.html), you can access it's **administrati
 ![Administration page url]({{site.baseurl}}/images/docs/admin_page_url.png)
 
 The start page is the *Dashboard* containing some **Widgets** such as *Weather*, *Alarm System*, *Energy Monitor*, *Thermostat*, a couple of sensors and lights.
+
 You can start learning some *HomeGenie* basics by playing with this factory configuration before you proceed integrating your smart devices into HG.
 
 {: .center}
