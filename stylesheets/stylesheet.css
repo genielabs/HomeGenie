@@ -434,7 +434,7 @@ th {
 
 /* LAYOUT STYLES */
 body {
-  font-family: FontAwesome;
+  font-family: FontAwesome, Sans-Serif;
   font-size: 11pt;
   font-weight: 400;
   line-height: 1.5;
