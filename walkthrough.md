@@ -12,7 +12,6 @@ After installing HomeGenie, you can access it's **administration** panel with a 
 
 ![Administration page url]({{site.baseurl}}/images/docs/admin_page_url.png)
 
-
 <br />
 
 ``` Work In Progress... ```
