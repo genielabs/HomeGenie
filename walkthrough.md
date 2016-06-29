@@ -7,35 +7,37 @@ published: true
 
 ## Initial setup and configuration
 
-After [HomeGenie installation](install.html), you can access it's **administration** site by entering  into your web browser the address of the computer where HG was installed:
+After [HomeGenie installation](install.html), you can access it's **administration** site by entering  into your web browser the address (IP or hostname) of the computer where HG was installed:
 
 {: .center}
 ![Administration page url]({{site.baseurl}}/images/docs/admin_page_url.png)
 
 The start page is the *Dashboard* containing some **Widgets** such as *Weather*, *Alarm System*, *Energy Monitor*, *Thermostat*, a couple of sensors and lights.
-You can start learning some *HomeGenie* basics by playing with this preset configuration.
+You can start learning some *HomeGenie* basics by playing with this factory configuration before you proceed integrating your smart devices into HG.
 
 {: .center}
 ![Dashboard]({{site.baseurl}}/images/docs/dashboard_page_01.png)
 
-### Configuring the Weather Widget
+### Configuring Widgets
 
-When you see a *gear button* in the upper right corner of a widget, it means that the widget have some options that can be configured. Pressing the button will popup a configuration dialog.
+When you see a *gear button* in the upper right corner of a widget, it means that the widget have options that can be configured. Pressing the button will popup a configuration dialog.
 
 {: .center}
 ![Weather configuration dialog]({{site.baseurl}}/images/docs/weather_options_01.png)
 
-...
-
-### Configuring the Alarm System
+### Weather Forecast Widget
 
 ...
 
-### Configuring the Thermostat
+### Alarm System
 
 ...
 
-### Configuring Lights, Appliances and Sensors
+### Thermostat
+
+...
+
+### Lights, Appliances and Sensors
 
 ...
 
