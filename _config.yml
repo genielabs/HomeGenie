@@ -8,10 +8,9 @@ collections:
   docs:
     output: true
 prose:
-  rooturl: '_posts'
+  rooturl: ''
   media: 'images/docs'
   ignore:
-    - index.md
     - _config.yml
     - /_layouts
     - /_includes
