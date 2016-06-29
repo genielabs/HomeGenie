@@ -1,9 +1,7 @@
 name: HomeGenie
 baseurl: '/HomeGenie'
-markdown: redcarpet
-markdown_ext:  markdown,mkdown,mkdn,mkd,md,html
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+markdown: kramdown
+highlighter: rouge
 collections:
   docs:
     output: true
