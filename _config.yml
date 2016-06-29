@@ -7,4 +7,12 @@ redcarpet:
 collections:
   docs:
     output: true
+prose:
+  rooturl: '_posts'
+  media: 'images/docs'
+  ignore:
+    - index.md
+    - _config.yml
+    - /_layouts
+    - /_includes
 
