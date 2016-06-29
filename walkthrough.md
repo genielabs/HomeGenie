@@ -13,6 +13,7 @@ After [HomeGenie installation](install.html), you can access it's **administrati
 ![Administration page url]({{site.baseurl}}/images/docs/admin_page_url.png)
 
 ...
+
 ![Dashboard]({{site.baseurl}}/images/docs/dashboard_page_01.png)
 
 {: .center}
