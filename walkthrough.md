@@ -18,6 +18,20 @@ You can start learning some *HomeGenie* basics by playing with this preset confi
 {: .center}
 ![Dashboard]({{site.baseurl}}/images/docs/dashboard_page_01.png)
 
+### Configuring the Weather Widget
+
+...
+
+### Configuring the Alarm System
+
+...
+
+### Configuring the Thermostat
+
+...
+
+### Configuring Lights, Appliances and Sensors
+
 ...
 
 {: .center}
