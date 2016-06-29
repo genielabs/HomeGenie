@@ -10,9 +10,11 @@ published: true
 
 After installing HomeGenie, you can access it's **administration** panel with a web browser by entering the address of the computer where HG was installed to:
 
-![Opening administration page]({{site.baseurl}}/images/docs/hg_admin_url.png)
+<p align="center">
 
-<br />
+![Administration page url]({{site.baseurl}}/images/docs/admin_page_url.png)
+
+</p>
 
 ``` Work In Progress... ```
 
