@@ -4,7 +4,7 @@ layout: main
 published: true
 ---
 
-# Documentation and Developers site
+# Developers documentation
 
 ## What is this all about?
 
