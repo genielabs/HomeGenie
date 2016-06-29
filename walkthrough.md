@@ -20,10 +20,10 @@ You can start learning some *HomeGenie* basics by playing with this preset confi
 
 ### Configuring the Weather Widget
 
-When you see a *gear button* in the upper right corner of a widget, it means that the widget have some options that can be configured. Pressing the button will popup a configuration box.
+When you see a *gear button* in the upper right corner of a widget, it means that the widget have some options that can be configured. Pressing the button will popup a configuration dialog.
 
 {: .center}
-![Weather options popup]({{site.baseurl}}/images/docs/weather_options_02.png)
+![Weather configuration dialog]({{site.baseurl}}/images/docs/weather_options_01.png)
 
 ...
 
