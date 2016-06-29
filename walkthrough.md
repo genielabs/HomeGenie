@@ -14,7 +14,7 @@ After [HomeGenie installation](install.html), you can access it's **administrati
 
 ...
 
-![Dashboard]({{site.baseurl}}/images/docs/hg_dashboard_01.jpg)
+![Dashboard]({{site.baseurl}}/images/docs/dashboard_page_01.png)
 
 {: .center}
 ``` Work In Progress... ```
