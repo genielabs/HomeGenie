@@ -22,6 +22,10 @@ body {
   margin: 0;
 }
 
+.center {
+	text-align: center;
+}
+
 /* HTML5 display definitions
    ========================================================================== */
 
@@ -886,4 +890,3 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
-
