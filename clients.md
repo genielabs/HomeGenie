@@ -1,11 +1,10 @@
 ---
 title: HomeGenie Clients
 layout: main
+published: true
 ---
 
 # Mobile and Web clients
-
-<br />
 
 ## HomeGenie Web UI
 
@@ -97,5 +96,3 @@ Feel free to submit any issue or feature request using the following link:
 - [HomeGenie Plus discussion thread on HG forum](http://www.homegenie.it/forum/index.php?topic=1142)
 
 <br /><br /><br /><br />
-
-
