@@ -20,6 +20,7 @@ You can start learning some *HomeGenie* basics by playing with this preset confi
 
 ### Configuring the Weather Widget
 
+![Configuring Weather Widget]({{site.baseurl}}/images/docs/weather_options_01.png)
 ...
 
 ### Configuring the Alarm System
