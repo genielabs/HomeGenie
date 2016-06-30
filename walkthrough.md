@@ -52,4 +52,4 @@ You will learn later how to use widgets data in a Wizard Script or Automation Pr
 ``` Work In Progress... ```
 
 
-In the meantime see the [User's Guide](http://www.homegenie.it/docs/index.php) on HomeGenie presentation site.
+In the meantime see the old [User's Guide](http://www.homegenie.it/docs/index.php) on HomeGenie presentation site.
