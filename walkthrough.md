@@ -28,13 +28,13 @@ When you see a *gear button* in the upper right corner of a widget, it means tha
 
 ### Weather Forecast Widget
 
-HomeGenie can integrate also external services and make the data available to the system so that this can be used for automating task.
+HomeGenie can integrate also external services and make the data available to the system so that this can be used for automating tasks.
 
 For example having motorized window shades to open or close on behalf of the sun position and the weather conditions (cloudy or not) or turning off the garden irrigation system if it's raining outside.
 
 The Weather widget is based on [Weather Underground](http://www.wunderground.com) and requires that the user create an account in order to obtain a *service key* that is needed to make the widget
 functional (as shown in the picture above).
-You will learn later how to use widgets data in a Wizard Script or Automation Program to automate tasks.
+You will learn later from this guide how to use widgets data in a Wizard Script or Automation Program to automate tasks.
 
 ### Alarm System
 
