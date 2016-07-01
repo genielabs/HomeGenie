@@ -47,7 +47,7 @@ This preset configuration is also a playable demo, useful for starting to learn 
 
 ### Configuring Widgets
 
-Pressing the *gear button* in the upper right corner of a widget will popup a dialog for customizing the various widget options.
+Pressing the *gear button* in the upper right corner of a widget, it will popup a dialog for customizing the various widget options.
 
 {: .center}
 ![Weather configuration dialog]({{site.baseurl}}/images/docs/weather_options_01.png)
