@@ -47,7 +47,7 @@ This preset configuration is also a playable demo, useful for starting to learn 
 
 ### Configuring Widgets
 
-When you see a *gear button* in the upper right corner of a widget, it means that the widget have options that can be configured. Pressing the button will popup a configuration dialog.
+Pressing the *gear button* in the upper right corner of a widget will popup a dialog for customizing the various widget options.
 
 {: .center}
 ![Weather configuration dialog]({{site.baseurl}}/images/docs/weather_options_01.png)
@@ -56,16 +56,18 @@ When you see a *gear button* in the upper right corner of a widget, it means tha
 
 HomeGenie can integrate also external services and make the data available to the system so that this can be used for automating tasks.
 
-For example having motorized window shades to open or close on behalf of the sun position and the weather conditions (cloudy or not) or turning off the garden irrigation system if it's raining outside.
+The Weather widget itself is based on [Weather Underground](http://www.wunderground.com) service. 
+It requires to register as a user in order to obtain a *service key* that is needed to make the widget
+functional (see options shown in the picture above).
+Once configured with a correct API key and restarted, the weather widget will retrieve updated forecast and other useful data for your location.
 
-The Weather widget is based on [Weather Underground](http://www.wunderground.com) service and requires that the user create an account in order to obtain a *service key* that is needed to make the widget
-functional (as shown in the picture above).
+This data can then be used to automate various taks. For example having motorized window shades to open or close on behalf of the sun position and the weather conditions (cloudy or not) or turning off the garden irrigation system if it's raining outside.
 
-You will learn later from this guide how to use widgets data in a Wizard Script or Automation Program to automate tasks.
+You will learn later from this guide how to use widgets' data in a Wizard Script or Automation Program to automate tasks.
 
 ### Alarm System
 
-If your home automation setup includes devices such as motion, smoke, co2 detectors, door/window sensors, then you can use them for a basic security alarm system.
+If your home automation setup includes devices such as motion/smoke/co2/etc.. detectors, door/window sensors, then you can use them to create a basic security alarm system.
 
 In the picture below, you can see options for the *Security Alarm Widget*. It can be configured to send e-mails when the alarm is triggered and/or to run an automation program when the system is armed/disarmed/triggered.
 
