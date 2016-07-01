@@ -73,7 +73,7 @@ In the picture below, you can see options for the *Security Alarm Widget*. It ca
 
 ![Alarm System Options]({{site.baseurl}}/images/docs/alarm_system_01.png)
 
-The animation below shows how to setup alarms and sensors of the *Security Alarm System*. Then, by pressing the *Motion Detected* button in the dashboard, it will simulate a motion event and so, when the system is armed, it will trigger the alarm.
+The animation below shows how to setup alarms and sensors for the *Security Alarm System*. Then, by pressing the *Motion Detected* button in the dashboard, it will simulate a motion event and so, when the system is armed, it will trigger the alarm.
 
 <div align="center">
 <iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
