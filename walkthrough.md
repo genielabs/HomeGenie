@@ -73,7 +73,7 @@ In the picture below, you can see options for the *Security Alarm Widget*. It ca
 
 ![Alarm System Options]({{site.baseurl}}/images/docs/alarm_system_01.png)
 
-To include a sensor in the alarm system press the options button of the sensor widget and configure the *Security Alarm System* options as shown below:
+The animation below shows how to configure alarms, sensors of the *Security Alarm System*.
 
 <div align="center">
 <iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
