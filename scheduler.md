@@ -48,7 +48,7 @@ The ‘/’ character can be used to specify increments to values. For example, 
 	*/5 8-16 * * 2-6
 
 
-Cron expressions can also be grouped using parhenthesys and combined using the following operators:
+Cron expressions can also be grouped using parenthesis and combined using the following operators:
 
 
 ` ; `  logical *AND* operator
