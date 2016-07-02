@@ -45,5 +45,12 @@ The ‘/’ character can be used to specify increments to values. For example, 
 (end excerpt)
 
 
+Cron expressions can also be grouped and combined using cron operators:
+
+**;** - logical *AND* operator
+**:** - logical *OR*  operator
+**>** - *UNTIL* (time range)
+**%** - *EXCEPT*
+
 
 ... **TODO** ...
