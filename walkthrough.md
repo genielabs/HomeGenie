@@ -80,12 +80,12 @@ The following animation shows how to setup alarms and sensors for the *Security 
 <iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-
-### Thermostat
+### Lights, Appliances and Sensors
 
 ...
 
-### Lights, Appliances and Sensors
+
+### Thermostat
 
 ...
 
