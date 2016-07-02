@@ -52,20 +52,20 @@ The ‘/’ character can be used to specify increments to values. For example, 
 Cron expressions can also be grouped using parenthesis and combined using the following operators:
 
 
-` ; `  logical *AND* operator
+` ; ` &nbsp; logical *AND* operator
 
-` : `  logical *OR*  operator
+` : ` &nbsp; logical *OR*  operator
 
-` > `  *UNTIL* (time range)
+` > ` &nbsp; *UNTIL* (time range)
 
-` % `  *EXCEPT*
+` % ` &nbsp; *EXCEPT*
 
 
 **Example 5** - From 11:20pm to 3:15am
 
 	(20 11 * * *) > (15 3 * * *)
 
-**Example 6** - From 11:20pm to 3:15am but not in May and September
+**Example 6** - From 11:20pm to 3:15am except in May (4) and September (8)
 
 	((20 11 * * *) > (15 3 * * *)) % (* * * 4,8 *)
 
