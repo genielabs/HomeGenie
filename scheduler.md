@@ -1,4 +1,7 @@
-#layout: main
+---
+layout: main
+title: HomeGenie Scheduler
+---
 
 ## Scheduler
 
