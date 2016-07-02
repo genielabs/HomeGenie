@@ -48,6 +48,7 @@ This preset configuration is also a playable demo, useful for starting to learn 
 ### Configuring Widgets
 
 Pressing the *gear button* in the upper right corner of a widget, it will popup a dialog for customizing the various widget options.
+Let's now see how to configure each of them.
 
 {: .center}
 ![Weather configuration dialog]({{site.baseurl}}/images/docs/weather_options_01.png)
@@ -73,7 +74,7 @@ In the picture below, you can see options for the *Security Alarm Widget*. It ca
 
 ![Alarm System Options]({{site.baseurl}}/images/docs/alarm_system_01.png)
 
-The animation below shows how to setup alarms and sensors for the *Security Alarm System*. Then, by pressing the *Motion Detected* button in the dashboard, it will simulate a motion event and so, when the system is armed, it will trigger the alarm.
+The following animation shows how to setup alarms and sensors for the *Security Alarm System*. Then, by pressing the *Motion Detected* button in the dashboard, it will simulate a motion event and so, when the system is armed, it will trigger the alarm.
 
 <div align="center">
 <iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
