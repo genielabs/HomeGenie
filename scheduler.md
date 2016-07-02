@@ -1,12 +1,12 @@
 ## Scheduler
 
+...
+
 ### Cron Expressions
 
-Another way to define event occurrences is by using cron expressions. 
+Another way to define event occurrences (schedules) is by using cron expressions. 
 
-(start excerpt from http://wiki.ephesoft.com/cron-expressions)
-
-Cron-Expressions are used to configure schedules. Cron-Expressions are strings that are actually made up of seven sub-expressions, that describe individual details of the schedule. These sub-expression are separated with white-space, and represent:
+Cron-Expressions are strings that are actually made up of seven sub-expressions, that describe individual details of the schedule. These sub-expression are separated with white-space, and represent:
 
 - Minutes
 - Hours
