@@ -42,8 +42,6 @@ The ‘/’ character can be used to specify increments to values. For example, 
 
 	*/5 8-16 * * 2-6
 
-(end excerpt)
-
 
 Cron expressions can also be grouped using parhenthesys and combined using the following operators:
 
