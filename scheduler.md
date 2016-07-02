@@ -51,13 +51,13 @@ The ‘/’ character can be used to specify increments to values. For example, 
 Cron expressions can also be grouped using parhenthesys and combined using the following operators:
 
 
-` ; ` logical *AND* operator
+` ; `  logical *AND* operator
 
-` : ` logical *OR*  operator
+` : `  logical *OR*  operator
 
-` > ` *UNTIL* (time range)
+` > `  *UNTIL* (time range)
 
-` % ` *EXCEPT*
+` % `  *EXCEPT*
 
 
 **Example 5** - From 11:20pm to 3:15am
