@@ -52,5 +52,10 @@ Cron expressions can also be grouped using parhenthesys and combined using the f
 **>** - *UNTIL* (time range)
 **%** - *EXCEPT*
 
+**Example 5** - From 11:20pm to 3:15am
+
+	(20 11 * * *) > (15 3 * * *)
+    
+
 
 ... **TODO** ...
