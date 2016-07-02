@@ -20,7 +20,7 @@ Wild-cards (the ‘\*‘ character) can be used to say “every” possible valu
 
 All of the fields have a set of valid values that can be specified. These values should be fairly obvious – such as the numbers 0 to 59 for seconds and minutes, and the values 0 to 23 for hours. Day-of-Month can be any value 1-31. Months can be specified as values between 0 and 11. Days-of-Week can be specified as values between 1 and 7 (1 = Sunday).
 
-The ‘/’ character can be used to specify increments to values. For example, if you put ‘0/15’ in the Minutes field, it means ‘every 15th minute of the hour, starting at minute zero’. If you used ‘3/20’ in the Minutes field, it would mean ‘every 20th minute of the hour, starting at minute three’ – or in other words it is the same as specifying ‘3,23,43’ in the Minutes field. Note the subtlety that “/35″ does *not* mean “every 35 minutes” – it mean “every 35th minute of the hour, starting at minute zero” – or in other words the same as specifying ‘0,35’.
+The ‘/’ character can be used to specify increments to values. For example, if you put ‘0/15’ in the Minutes field, it means ‘every 15th minute of the hour, starting at minute zero’. If you used ‘3/20’ in the Minutes field, it would mean ‘every 20th minute of the hour, starting at minute three’ – or in other words it is the same as specifying ‘3,23,43’ in the Minutes field.
 
 
 #### Example Cron Expressions
