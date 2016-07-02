@@ -32,7 +32,7 @@ The '/' character can be used to specify increments to values. For example, if y
 #### Example Cron Expressions
 
 
-**Example 1** – an expression to create a trigger that simply fires every 5 minutes
+**Example 1** – An expression to create a trigger that simply fires every 5 minutes
 
 	0/5 * * * *
 
@@ -69,9 +69,9 @@ Cron expressions can also be grouped using parenthesis and combined using the fo
 
 	((20 23 * * *) > (15 3 * * *)) % (* * * 4,8 *)
 
-**Example 7** - At 11:20 PM or 3:15 AM in January (0) and December (11) every Sunday (1) and Monday(2)
+**Example 7** - At 11:20 PM or 3:15 AM in January (1) and December (12) every Sunday (0) and Tuesday (2)
 
-	((20 23 * * *) : (15 3 * * *)) ; (* * * 0,11 1,2)
+	((20 23 * * *) : (15 3 * * *)) ; (* * * 1,12 0,2)
 
 
 
