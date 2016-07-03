@@ -80,3 +80,10 @@ Cron expressions can also be grouped using parenthesis and combined using the fo
 **Example 7** At 11:20PM or 3:15AM in January(1) and December(12) every Sunday(0) and Tuesday(2)
 
 	((20 23 * * *) : (15 3 * * *)) ; (* * * 1,12 0,2)
+
+
+{: .center}
+``` Work In Progress... ```
+
+
+In the meantime see the old [User's Guide](http://www.homegenie.it/docs/index.php) on HomeGenie presentation site.
