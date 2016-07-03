@@ -4,7 +4,7 @@ layout: main
 published: true
 ---
 
-# Mobile and Web clients
+# Walkthrough
 
 ## HomeGenie Web UI
 
