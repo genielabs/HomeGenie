@@ -29,7 +29,7 @@ function onYouTubeIframeAPIReady() {
  }
 </script>
 
-# Software Walkthrough
+# Walkthrough
 
 ## Initial setup and configuration
 
