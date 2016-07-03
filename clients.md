@@ -33,6 +33,7 @@ to be used for administration and testing purposes as it will give full access t
 - [HomeGenie for Windows Phone on github](https://github.com/genielabs/HomeGenie-WindowsPhone)
 
 <a name="HomeGeniePlus"></a>
+
 ## HomeGenie Plus for Android
 
 Specifically designed to be a Control Panel for the end-user, **HomeGenie Plus** is a feature rich mobile client for HomeGenie.
