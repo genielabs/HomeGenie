@@ -2,6 +2,7 @@
 title: Programs
 category: ape
 layout: post
+published: true
 ---
 # Automation Programs
 
@@ -137,6 +138,8 @@ long-time consuming operation or infinite loop in the *Startup Code*.
 [Program Store](api/ape/a00009.html#a111c3e247c9a22cf44e032bfb568f876) and [System Settings](api/ape/a00012.html).
 
 <a name="modules"></a>
+
+
 ## Virtual Modules, Program Module and Widgets
 
 Virtual Modules (or just modules) are used in *HG* as an abstraction for devices or services. So, each of them, represent
@@ -283,7 +286,9 @@ When.ModuleParameterChanged((module, parameter) => {
 // the program will be running in the background waiting for events
 Program.GoBackground();
 ```
+
 #### Javascript
+
 ```javascript
 hg.when.moduleParameterChanged(function(module, parameter) {
     // put code here using "module" and "parameter" objects
@@ -291,6 +296,7 @@ hg.when.moduleParameterChanged(function(module, parameter) {
 });
 hg.program.goBackground();
 ```
+
 #### Python
 ```python
 def module_updated_fn(mod,par):
@@ -299,6 +305,7 @@ def module_updated_fn(mod,par):
 hg.When.ModuleParameterChanged(module_updated_fn)
 hg.Program.GoBackground()
 ```
+
 #### Ruby
 ```ruby
 module_updated_fn = lambda { |mod,par|
@@ -313,6 +320,8 @@ Automation programs can also raise events, so the system (and other programs as 
 The function [Program.RaiseEvent](api/ape/a00009.html#af51db91ed13809da94337aac3c1053b7) is meant for that.
 
 <a name="commands"></a>
+
+
 ## Reacting to commands
 
 When the user click a button or any other control of a module widget, an [API](api/mig/overview.html) command request is
