@@ -32,19 +32,19 @@ The '/' character can be used to specify increments to values. For example, if y
 #### Example Cron Expressions
 
 
-**Example 1** – An expression to create a trigger that simply fires every 5 minutes
+**Example 1** An expression to create a trigger that simply fires every 5 minutes
 
 	0/5 * * * *
 
-**Example 2** – Every even minute
+**Example 2** Every even minute
 
 	*/2 * * * *
 
-**Example 3** – Every odd minute
+**Example 3** Every odd minute
 
 	1-59/2 * * * *
 
-**Example 4** – Every 5 minutes, Weekdays from 8am-5pm.
+**Example 4** Every 5 minutes, Weekdays from 8am-5pm.
 
 	*/5 8-16 * * 1-5
 
