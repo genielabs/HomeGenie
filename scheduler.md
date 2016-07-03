@@ -8,7 +8,7 @@ published: true
 
 ![Scheduler Cron Wizard]({{site.baseurl}}/images/docs/scheduler_wizard_01.png)
 
-( //TODO: show how to use the scheduler wizard and its options )
+( `//TODO: show how to use the scheduler wizard and its options )` )
 
 {: .center}
 ... **TODO** ...
