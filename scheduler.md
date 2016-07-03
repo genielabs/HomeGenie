@@ -20,7 +20,7 @@ Cron expressions are strings that are actually made up of five sub-expressions, 
 - Month
 - Day-of-Week
 
-Individual sub-expressions can contain ranges and/or lists.
+Individual sub-expressions can contain ranges (eg. 8-22) and/or lists (eg. 5,10,30,45).
 
 Wild-cards (the '\*' character) can be used to say “every” possible value of this field. Therefore the '\*' character in the *Month* field of the previous example simply means “every month”. A '\*' in the Day-Of-Week field would therefore obviously mean “every day of the week”.
 
@@ -72,7 +72,3 @@ Cron expressions can also be grouped using parenthesis and combined using the fo
 **Example 7** At 11:20PM or 3:15AM in January(1) and December(12) every Sunday(0) and Tuesday(2)
 
 	((20 23 * * *) : (15 3 * * *)) ; (* * * 1,12 0,2)
-
-
-
-... **TODO** ...
