@@ -6,6 +6,8 @@ published: true
 
 ## Scheduler
 
+![Scheduler Cron Wizard]({{site.baseurl}}/images/docs/scheduler_wizard_01.png)
+
 ... **TODO** ...
 
 ### Cron expressions
