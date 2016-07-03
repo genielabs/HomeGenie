@@ -4,6 +4,8 @@ title: HomeGenie Scheduler
 published: true
 ---
 
+# Walkthrough
+
 ## Scheduler
 
 ![Scheduler Cron Wizard]({{site.baseurl}}/images/docs/scheduler_wizard_01.png)
