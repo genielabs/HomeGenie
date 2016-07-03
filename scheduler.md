@@ -61,15 +61,15 @@ Cron expressions can also be grouped using parenthesis and combined using the fo
 ` % ` &nbsp; *EXCEPT*
 
 
-**Example 5** - From 11:20 PM to 3:15 AM
+**Example 5** From 11:20PM to 3:15AM
 
 	(20 23 * * *) > (15 3 * * *)
 
-**Example 6** - From 11:20 PM to 3:15 AM except in May (5) and September (9)
+**Example 6** From 11:20PM to 3:15AM except in May(5) and September(9)
 
 	((20 23 * * *) > (15 3 * * *)) % (* * * 5,9 *)
 
-**Example 7** - At 11:20 PM or 3:15 AM in January (1) and December (12) every Sunday (0) and Tuesday (2)
+**Example 7** At 11:20PM or 3:15AM in January(1) and December(12) every Sunday(0) and Tuesday(2)
 
 	((20 23 * * *) : (15 3 * * *)) ; (* * * 1,12 0,2)
 
