@@ -18,7 +18,7 @@ published: true
 
 Another way to define event occurrences (schedules) is by using cron expressions. 
 
-Cron expressions are strings that are actually made up of five sub-expressions, that describe individual details of the schedule. These sub-expression are separated with white-space, and represent:
+Cron expressions are strings that are actually made up of five sub-expressions, that describe individual details of the schedule. These sub-expressions are separated with white-space, and represent:
 
 - Minutes
 - Hours
