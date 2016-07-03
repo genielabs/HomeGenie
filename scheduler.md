@@ -52,11 +52,11 @@ The '/' character can be used to specify increments to values. For example, if y
 Cron expressions can also be grouped using parenthesis and combined using the following operators:
 
 
-` ; ` &nbsp; *AND* operator
+` ; ` &nbsp; *AND*
 
-` : ` &nbsp; *OR*  operator
+` : ` &nbsp; *OR*
 
-` > ` &nbsp; *UNTIL* (time range)
+` > ` &nbsp; *UNTIL* (time range, 'from' > 'to')
 
 ` % ` &nbsp; *EXCEPT*
 
