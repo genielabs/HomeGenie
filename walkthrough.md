@@ -103,7 +103,7 @@ If enabled, the device will react to any of the following events:
   <i class="fa fa-icon-hand-right"></i>
   it will turn off if below the configured value
 - *Timeout*
-  <i class="fa fa-icon-arrow-right"></i>
+  <i class="fa fa-icon-angle-right"></i>
   it will turn off if idle for more than the configured value
 
 #### IR Remote Control
