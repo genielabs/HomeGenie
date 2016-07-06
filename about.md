@@ -28,5 +28,5 @@ However, developing an [Interface Plugins](https://github.com/genielabs/mig-serv
 
 ## Software Diagram
 
-<br />
+{: .center}
 <img src="https://raw.githubusercontent.com/genielabs/HomeGenie/master/HomeGenie_Diagram.png" />
