@@ -85,7 +85,7 @@ The following animation shows how to setup alarms and sensors for the *Security 
 Also lights, appliances, sensors and other widgets have configurable options. Some options are related to the integration with other services/widgets (such as the alarm system), some other options are used to configure the behavior of the underlying device.
 
 {: .center}
-![Widget Feature/Options]({{site.baseurl}}/images/docs/widget_options_01.png)
+![Widget Features/Options]({{site.baseurl}}/images/docs/widget_options_01.gif)
 
 #### Energy Saving Mode
 
