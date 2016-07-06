@@ -94,7 +94,14 @@ If enabled, the device will restore last dimmer level when turned on. This is us
 
 #### Smart Lights
 
+If enabled, the device will react to any of the following events:
 
+- *Motion Detection*
+  it will turn on
+- *Luminance*
+  it will turn off if below the configured value
+- *Timeout*
+  it will turn off if idle for more than the configured value
 
 #### IR Remote Control
 
