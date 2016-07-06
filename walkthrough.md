@@ -97,7 +97,7 @@ If enabled, the device will restore last dimmer level when turned on. This is us
 If enabled, the device will react to any of the following events:
 
 - *Motion Detection*
-  <i class="fa fa-icon-chevron-right"></i>
+  <i class="fa fa-hand-o-right"></i>
   it will turn on if motion is detected from the configured sensor
 - *Luminance*
   <i class="fa fa-icon-hand-right"></i>
