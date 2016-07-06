@@ -111,7 +111,7 @@ If enabled, the device will react to any of the following events:
 
 #### IR Remote Control
 
-
+...
 
 ### Thermostat
 
