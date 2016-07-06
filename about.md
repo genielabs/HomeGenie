@@ -22,7 +22,7 @@ For this purpose, HomeGenie integrate [Automation Program](programs.html) and [W
 
 ## Core development - Multi-protocol I/O Gateway (MIG)
 
-Whenever the integrated editor is not providing a good way of interfacing to something, [MIG](https://github.com/genielabs/mig-service-dotnet) can offer a more flexible solution throught its [Interface Plugins](https://github.com/genielabs/mig-service-dotnet). *MIG* is the base library top of which HG is built on.<br/>
+Whenever the integrated editor is not providing enough "power" for interfacing to something, [MIG](https://github.com/genielabs/mig-service-dotnet) can offer a more flexible solution throught its [Interface Plugins](https://github.com/genielabs/mig-service-dotnet). *MIG* is the base library top of which HG is built on.<br/>
 However, developing an [Interface Plugins](https://github.com/genielabs/mig-service-dotnet), will require to go outside HomeGenie UI and use an external IDE such as *Xamarin Studio* or *Visual Studio* so to take advantage of the full power of **.NET** framework and **C#** language.
 
 
