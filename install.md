@@ -1,6 +1,7 @@
 ---
 title: This is my title
 layout: main
+published: true
 ---
 
 # Install instructions
@@ -18,7 +19,7 @@ The UI can be also opened by right clicking on the tray icon..
 
 Download _.deb package_ file and install it by double clicking on it, or by using gdebi command line tool:
 
-```bash
+```sh
 wget https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.525/homegenie-beta_1.1.r525_all.deb
 sudo apt-get update
 sudo apt-get install gdebi-core
