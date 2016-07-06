@@ -97,13 +97,13 @@ If enabled, the device will restore last dimmer level when turned on. This is us
 If enabled, the device will react to any of the following events:
 
 - *Motion Detection*
-  <i class="fa fa-hand-o-right"></i>
+  <i class="fa fa-long-arrow-right"></i>
   it will turn on if motion is detected from the configured sensor
 - *Luminance*
   <i class="fa fa-long-arrow-right"></i>
   it will turn off if below the configured value
 - *Timeout*
-  <i class="fa fa-angle-right"></i>
+  <i class="fa fa-long-arrow-right"></i>
   it will turn off if idle for more than the configured value
 
 #### IR Remote Control
