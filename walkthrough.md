@@ -104,7 +104,7 @@ If enabled, the device will react to any of the following events:
   it will turn **on** if motion is detected from the configured sensor
 - *Luminance*
   <i class="fa fa-long-arrow-right"></i>
-  it will turn **off** if luminance from the configured sensor is below the given value
+  it will turn **on** if luminance from the configured sensor is below the given value
 - *Timeout*
   <i class="fa fa-long-arrow-right"></i>
   it will turn **off** if idle for more than the configured value
