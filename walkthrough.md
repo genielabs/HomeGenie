@@ -86,11 +86,14 @@ Also lights, appliances, sensors and other widgets have configurable options. So
 
 #### Energy Saving Mode
 
+If enabled, this option will limit the level of a dimmer to a given value (20% by default).
 
 #### Level Memory
 
+If enabled, the device will restore last dimmer level when turned on. This is useful when the device itself does not implement this feature as it happens for some old X10 dimmer modules.
 
 #### Smart Lights
+
 
 
 #### IR Remote Control
