@@ -19,8 +19,7 @@ piece of software.
 
 ## Integrated Editor for Automation Programs and UI Widgets
 
-In order to achieve this mission, the key factor for a such kind of software is to offer an integrated enviroment and set of tools for adding new features and supporting new hardware or services with a little effort, and also let the end user do this on his own, so to have a easy way to integrate custom solutions as needed.
-
+In order to achieve this mission, the key factor for a such kind of software is to offer an integrated enviroment and set of tools for adding new features and supporting new hardware or services with a little effort, and also let the end user do this on his own, so to have a easy way to integrate custom solutions as needed.<br/>
 This is why HomeGenie integrates [Automation Program](programs.html) and [Widget](widgets.html) editors.<br/>
 So, if you want to improve a widget or integrate a new device/service, you can do it without leaving HomeGenie UI.
 
