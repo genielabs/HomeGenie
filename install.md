@@ -1,6 +1,7 @@
 ---
 title: This is my title
 layout: main
+published: true
 ---
 
 # Install instructions
@@ -18,7 +19,7 @@ The UI can be also opened by right clicking on the tray icon..
 
 Download _.deb package_ file and install it by double clicking on it, or by using gdebi command line tool:
 
-```bash
+```Shell
 wget https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.525/homegenie-beta_1.1.r525_all.deb
 sudo apt-get update
 sudo apt-get install gdebi-core
@@ -32,7 +33,7 @@ Once installed, *HomeGenie* UI can be opened by entering the following URL in yo
 
 ### Optional packages
 
-```bash
+```Shell
 # SSL client support
 sudo apt-get install ca-certificates-mono
 # Embedded speech synthesys engine
@@ -54,7 +55,7 @@ HomeGenie can also be installed on other systems (eg. Mac OS X and other UNIX ba
  Enter the following command from terminal (```apt-get``` is shown here, eventually replace it with whatever package manager
  is suitable for your operating system):
 
-```bash
+```Shell
 sudo apt-get install mono-runtime libmono-corlib2.0-cil libmono-system-web4.0-cil libmono-system-numerics4.0-cil libmono-system-serviceprocess4.0-cil libmono-system-data4.0-cil libmono-system-core4.0-cil libmono-system-servicemodel4.0a-cil libmono-windowsbase4.0-cil libmono-system-runtime-serialization-formatters-soap4.0-cil libmono-system-runtime-serialization4.0-cil libmono-system-xml-linq4.0-cil mono-dmcs
 ```
 
@@ -62,7 +63,7 @@ sudo apt-get install mono-runtime libmono-corlib2.0-cil libmono-system-web4.0-ci
 
 In order to activate some features, optional dependencies may be required to install.
 
-```bash
+```Shell
 # Audio playback utilities
 sudo apt-get install alsa-utils lame
 # Embedded speech syntesys engine
@@ -81,7 +82,7 @@ sudo apt-get install arduino-mk empty-expect
 
 Enter the following command terminal
 
-```bash
+```Shell
 wget https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.525/homegenie_1_1_beta_r525.tgz
 tar xzvf homegenie_1_1_beta_r525.tgz
 ```
@@ -90,7 +91,7 @@ tar xzvf homegenie_1_1_beta_r525.tgz
 
 After uncompressing, the *homegenie* folder will be created. Enter the following commands from terminal to start HomeGenie:
 
-```bash
+```Shell
 cd homegenie
 ./startup.sh
 ```
