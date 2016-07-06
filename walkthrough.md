@@ -68,7 +68,7 @@ You will learn later from this guide how to use widgets' data in a Wizard Script
 
 ### Alarm System
 
-If your home automation setup includes devices such as motion/smoke/co2/etc.. detectors, door/window sensors, then you can use them to create a basic security alarm system.
+If your home automation setup includes devices such as motion/smoke/co2/etc.. detectors, door/window sensors, then you can use these to create a basic security alarm system.
 
 In the picture below, you can see options for the *Security Alarm Widget*. It can be configured to send e-mails when the alarm is triggered and/or to run an automation program when the system is armed/disarmed/triggered.
 
@@ -76,13 +76,25 @@ In the picture below, you can see options for the *Security Alarm Widget*. It ca
 
 The following animation shows how to setup alarms and sensors for the *Security Alarm System*. Then, by pressing the *Motion Detected* button in the dashboard, it will simulate a motion event and so, when the system is armed, it will trigger the alarm.
 
-<div align="center">
+{: .center}
 <iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
-</div>
+
 
 ### Lights, Appliances and Sensors
 
-...
+Also lights, appliances, sensors and other widgets have configurable options. Some options are related to the integration with other services/widgets (such as the alarm system), some other options are used to configure the behavior of the underlying device.
+
+#### Energy Saving Mode
+
+
+#### Level Memory
+
+
+#### Smart Lights
+
+
+#### IR Remote Control
+
 
 
 ### Thermostat
