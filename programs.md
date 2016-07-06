@@ -253,7 +253,7 @@ latter one. In most situations *ModuleParameterChanged* will be used.
 ### Example - Apply turn off timeout when a module is switched on
 
 #### CSharp
-```csharp
+```c#
 // this function will be called each time a module parameter is updated
 When.ModuleParameterChanged((module, parameter) => {
   // check if the module raising the event has the Turn Off Delay set
