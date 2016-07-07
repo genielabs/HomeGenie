@@ -113,6 +113,10 @@ If enabled, the device will react to any of the following events:
 
 ...
 
+{: .center}
+<iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/b9hTAnzO1Qw?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
+
+
 ### Thermostat
 
 ...
