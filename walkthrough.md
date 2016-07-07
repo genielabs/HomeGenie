@@ -77,7 +77,7 @@ In the picture below, you can see options for the *Security Alarm Widget*. It ca
 The following animation shows how to setup alarms and sensors for the *Security Alarm System*. Then, by pressing the *Motion Detected* button in the dashboard, it will simulate a motion event and so, when the system is armed, it will trigger the alarm.
 
 {: .center}
-<iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
+<iframe id="player_1" width="680" height="400" src="http://www.youtube.com/embed/1Hesj-jEtFs?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
 
 
 ### Lights, Appliances and Sensors
@@ -114,7 +114,7 @@ If enabled, the device will react to any of the following events:
 ...
 
 {: .center}
-<iframe id="player" width="680" height="400" src="http://www.youtube.com/embed/b9hTAnzO1Qw?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
+<iframe id="player_2" width="680" height="400" src="http://www.youtube.com/embed/b9hTAnzO1Qw?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0" frameborder="0" allowfullscreen></iframe>
 
 
 ### Thermostat
