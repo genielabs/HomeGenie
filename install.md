@@ -71,7 +71,9 @@ sudo apt-get install libttspico-utils
 # SSL client support
 sudo apt-get install ca-certificates-mono
 # LIRC Infrared inteface
-sudo apt-get install lirc libv4l-0
+sudo apt-get install lirc liblircclient-dev
+# Video4Linux camera
+sudo apt-get install libv4l-0
 # X10 CM15 Home Automation interface
 sudo apt-get install libusb-1.0-0 libusb-1.0-0-dev
 # Arduino™ programming from *HG* program editor
