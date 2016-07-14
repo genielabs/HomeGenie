@@ -296,13 +296,14 @@
 
             default:
                 if (module != null && !$$.IsBlacklisted(eventLog.Property)) {
-                    if (eventLog.Property == 'Receiver.RawData' && eventLog.Value != '') {
-                        popupdata = {
-                            icon: 'images/remote.png',
-                            title: '<span style="color:yellow;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br/>' + eventLog.Value,
-                            text: module.Address,
-                            timestamp: date
-                        };
+                    if (eventLog.Property == 'Receiver.RawData') {
+                        if (eventLog.Value != '')
+                            popupdata = {
+                                icon: 'images/remote.png',
+                                title: '<span style="color:yellow;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br/>' + eventLog.Value,
+                                text: module.Address,
+                                timestamp: date
+                            };
                     } else {
                         HG.Ui.GetModuleIcon(module, function(icon,elid){
                             var iconImage = icon;
@@ -311,10 +312,8 @@
                             var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                             var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
                             var value = eventLog.Value;
-                            if (!isNaN(eventLog.Value.replace(',', '.')))
-                                value = (parseFloat(eventLog.Value.replace(',', '.')).toFixed(2));
-                            else
-                                value = eventLog.Value;
+                            if (!isNaN(value.replace(',', '.')) && value != '')
+                                value = (parseFloat(value.replace(',', '.')).toFixed(2));
                             //
                             if (module.Name != '') name = module.Name;
                             if (group == null) group = '';
@@ -352,9 +351,7 @@
         if (popupdata != null 
                 && !$$.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property) && eventLog.Description.indexOf(':nopopup:') < 0
                 && !$$.IsBlacklisted(eventLog.Property)) {
-
             $$.ShowEventPopup(popupdata, eventLog);
-
         }
 
     };

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r525</Version>
+  <Version>1.1 beta r526</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed issues with scheduler UI in Internet Explorer
-  - Fixed interconnections events bug (events firing multiple times)
-  - Minor fixes to the new scheduler
-  - ZWave interface: moved Pepper1 db download from constructor to the connect method</ReleaseNote>
-  <ReleaseDate>2016-06-22T14:38:11.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed side menu refresh bug
+  - Fonts are now embedded in css (no more delay downloading from google fonts)
+  - Fixed SSL error when sending e-mails
+  - Other minor fixes/improvements</ReleaseNote>
+  <ReleaseDate>2016-07-08T00:00:00.0000Z</ReleaseDate>
 </ReleaseInfo>

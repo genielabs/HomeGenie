@@ -2,7 +2,6 @@
 // Override and customize Isotope FitRows layout mode: CENTER each rows
 var fitRows = Isotope.LayoutMode.modes.fitRows.prototype;
 fitRows._resetLayout = function() {
-
   // pre-calculate offsets for centering each row
   this.x = 0;
   this.y = 0;

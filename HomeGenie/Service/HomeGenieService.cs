@@ -1604,45 +1604,6 @@ namespace HomeGenie.Service
             localDevice.StartDevice();
         }
 
-        // this is used to generate Lirc supported remotes from http://lirc.sourceforge.net/remotes/
-        private List<string> GetLircItems(string url)
-        {
-            string[] lines = new string[0];
-            using (var webclient = new WebClient())
-            {
-                string response = webclient.DownloadString(url);
-
-                string pattern = @"<(.|\n)*?>";
-                response = response.Replace("</a>", " ");
-                response = System.Text.RegularExpressions.Regex.Replace(response, pattern, string.Empty);
-
-                response = response.Replace("&amp;", "&");
-                response = response.Replace("&nbsp;", " ");
-
-                lines = response.Split('\n');
-
-                webclient.Dispose();
-            }
-
-            bool readItems = false;
-            var manufacturers = new List<string>();
-            foreach (string l in lines)
-            {
-                if (readItems)
-                {
-                    if (l.Trim() == "") break;
-                    string brand = l.Split('/')[0];
-                    brand = brand.Split(' ')[0];
-                    manufacturers.Add(brand.Trim());
-                }
-                else if (l.ToLower().StartsWith("parent directory"))
-                {
-                    readItems = true;
-                }
-            }
-            return manufacturers;
-        }
-
         #endregion
     }
 }

@@ -1,6 +1,10 @@
 ﻿RELEASE HISTORY
 
+07/07/2016 v1.1-beta.526
+    - Fixed side menu refresh bug
+    - Fonts are now embedded in css (no more delay downloading from google fonts)
     - Fixed SSL error when sending e-mails
+    - Other minor fixes/improvements
 
 22/06/2016 v1.1-beta.525
     - Fixed issues with scheduler UI in Internet Explorer

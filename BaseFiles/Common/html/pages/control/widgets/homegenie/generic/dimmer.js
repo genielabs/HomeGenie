@@ -98,7 +98,7 @@ $$.refreshStatus = function() {
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;
   });
-  $$.field('level').val(level).slider('refresh');
+  $$.field('level').val(level).slider().slider('refresh');
   $$.field('updatetime').html(displayTime);
 }
 

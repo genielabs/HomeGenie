@@ -38,10 +38,6 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
         //
         $.mobile.ajaxFormsEnabled = false;
         //
-        HG.Configure.LoadData(function(){
-            setTimeout($$.Control.RenderMenu, 2000);
-        });
-        //
         $$.Home.UpdateHeaderStatus();
         window.setInterval('HG.WebApp.Home.UpdateHeaderStatus();', 10000);
         //
@@ -117,11 +113,6 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
                 $('#systemversion').html(res.Version);
             });
 
-            // add css google web fonts
-            setTimeout(function(){
-                $('head').append('<link href="https://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
-            }, 5000);
-
         }, 100);
         //
         // stacked message popups
@@ -191,6 +182,9 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
             })
             .on('panelbeforeopen', function() {
                 $('#homegenie_overlay').fadeIn(250);
+                if ($(this).prop('id') == 'groups_panel') {
+                    HG.WebApp.Control.RenderMenu();
+                }
             })
             .on('panelbeforeclose', function() {
                 $('#homegenie_overlay').fadeOut(250);
@@ -202,7 +196,7 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
         //
         // A swipe gesture open up the Side Panel
         //
-        $( document ).on('swipeleft swiperight', 'div[data-role=page]', function( e ) {
+        $(document).on('swipeleft swiperight', 'div[data-role=page]', function( e ) {
             if (!$('[data-ui-field=homegenie_panel_button]').hasClass('ui-disabled'))
             if ($('.ui-page-active .ui-popup-active').length == 0)
             if (!$(e.target).is('span'))
@@ -238,6 +232,7 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
 
         $$.lastSleepCheck = new Date().getTime();
         setInterval($$.sleepCheck, 1000);
+
     };
 
     $$.lastSleepCheck = 0;
@@ -252,7 +247,6 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
         }
         $$.lastSleepCheck = now;
     };
-
 };
 //
 // namespace : HG.WebApp

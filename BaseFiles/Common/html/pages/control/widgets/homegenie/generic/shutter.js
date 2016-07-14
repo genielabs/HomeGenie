@@ -115,7 +115,7 @@
     widget.find('[data-ui-field=status]').html(this.StatusText);
     widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
     widget.find('[data-ui-field=updatetime]').html(this.UpdateTime);
-    widget.find('[data-ui-field=level]').val(level).slider('refresh');
+    widget.find('[data-ui-field=level]').val(level).slider().slider('refresh');
   }
 
 }]

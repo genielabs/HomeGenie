@@ -94,10 +94,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             }
         });
         $$.field('#groups_panel', true).panel().trigger('create');
-        $$.field('#groups_panel', true).on('beforeopen', function(){
-          setTimeout($$.RenderMenu, 1000);
-        });
-
     };
 
     $$.ShowGroup = function (gid) {
@@ -106,7 +102,10 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         HG.WebApp.Data._CurrentGroupIndex = gid;
         // set current group wallpaper
         $$.field('div[data-ui-field="wallpaper"]', true).show();
-        $$.field('div[data-ui-field="wallpaper"]', true).css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
+        if (typeof HG.WebApp.Data.Groups[gid].Wallpaper != 'undefined' && HG.WebApp.Data.Groups[gid].Wallpaper != '')
+            $$.field('div[data-ui-field="wallpaper"]', true).css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
+        else
+            $$.field('div[data-ui-field="wallpaper"]', true).css('background-image', '');
         $$.RefreshGroupIndicators();
         $$.field('#control_groupcontent', true).children('div').hide();
         $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).show();
@@ -178,21 +177,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         HG.Automation.Macro.Discard();
         $$.toolbarControl.show('slideup');
         $$.toolbarMacroRecord.hide('slidedown');
-    };
-
-    $$.RenderMenu = function () {
-        $$.field('#control_groupsmenu', true).find("li:gt(0)").remove();
-        for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-            var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:0px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
-            var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
-            item.on('click', function(){
-                var idx = $(this).attr('data-context-idx');
-                $$.ShowGroup(idx);
-                $.mobile.pageContainer.pagecontainer('change', '#page_control', { transition: 'none' });
-            });
-            $$.field('#control_groupsmenu', true).append(item);
-        }
-        $$.field('#control_groupsmenu', true).listview().listview('refresh');
     };
 
     $$.RenderGroups = function () {
@@ -321,6 +305,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             if (oldtype != module.DeviceType) {
                 var grp = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
                 grp.empty();
+                $$.clearCache();
                 $$.ShowGroup(HG.WebApp.Data._CurrentGroupIndex);
             } else {
                 $$.UpdateModuleWidget(module.Domain, module.Address);
@@ -393,7 +378,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
         for (var m = 0; m < groupmodules.Modules.length; m++) {
             var module = groupmodules.Modules[m];
-            var uid = ($$.field('#groupdiv_modules_' + groupmodules.Index, true).attr('id') + '_module_' + $$.GetModuleUid(module));
+            var uid = (grp.attr('id') + '_module_' + $$.GetModuleUid(module));
             var cuid = '#' + uid;
             var modui = $$.field(cuid, true);
             var type = module.DeviceType + ''; type = type.toLowerCase();
@@ -447,7 +432,38 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         }
     };
 
+    $$._renderMenuTimeout = null;
+    $$.RenderMenu = function () {
+        if ($$._renderMenuTimeout != null)
+            clearTimeout($$._renderMenuTimeout);
+        $$._renderMenuTimeout = setTimeout($$._RenderMenu, 500);
+    };
+
+    $$._RenderMenu = function () {
+        //$$.field('#control_groupsmenu', true).find("li:gt(0)").remove();
+        $$.field('#control_groupsmenu', true).empty();
+        for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+            var indicators = '<div class="ui-body-inherit ui-body-a" style="margin-top:6px;border:0"><div style="white-space:normal;max-width:230px" id="control_groupindicators_' + i + '"></div>';
+            var item = $('<li data-context-idx="' + i + '" style="height:auto;cursor:pointer;font-size:12pt"><strong>' + HG.WebApp.Data.Groups[i].Name + '</strong>'+indicators+'</li>');
+            item.on('click', function(){
+                var idx = $(this).attr('data-context-idx');
+                $$.ShowGroup(idx);
+                $.mobile.pageContainer.pagecontainer('change', '#page_control', { transition: 'none' });
+            });
+            $$.field('#control_groupsmenu', true).append(item);
+        }
+        $$.field('#control_groupsmenu', true).listview().listview('refresh');
+        $$._RefreshGroupIndicators();
+    };
+
+    $$._refreshIndicatorsTimeout = null;
     $$.RefreshGroupIndicators = function () {
+        if ($$._refreshIndicatorsTimeout != null)
+            clearTimeout($$._refreshIndicatorsTimeout);
+        $$._refreshIndicatorsTimeout = setTimeout($$._RefreshGroupIndicators, 500);
+    };
+
+    $$._RefreshGroupIndicators = function () {
         for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
             var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
             var grouploadkw = 0;
@@ -456,6 +472,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             var group_temperature = null;
             var group_humidity = null;
             var group_luminance = null;
+            var group_doorwindow = null;
             //
             var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
             for (var m = 0; m < groupmodules.Modules.length; m++) {
@@ -481,26 +498,31 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                             break;
                     }
                 }
-
                 if (group_temperature == null) {
                     var t = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
                     if (t != null && t.Value != '') {
                         group_temperature = parseFloat(t.Value.replace(',', '.'));
                     }
                 }
-
                 if (group_humidity == null) {
                     var h = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Humidity");
                     if (h != null && h.Value != '') {
                         group_humidity = parseFloat(h.Value.replace(',', '.'));
                     }
                 }
-
                 if (group_luminance == null) {
                     var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Luminance");
                     if (l != null && l.Value != '') {
                         group_luminance = parseFloat(l.Value.replace(',', '.'));
                     }
+                }
+
+                var d = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.DoorWindow");
+                if (d != null && d.Value != '' && d.Value != '0') {
+                    if (group_doorwindow == null)
+                        group_doorwindow = 1;
+                    else
+                        group_doorwindow++;
                 }
             }
             //
@@ -508,33 +530,35 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             //'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
 
             var indicators = '';
+            if (group_doorwindow != null) {
+                indicators += '<span class="hg-indicator-door">' + (group_doorwindow * 1).toFixed(0) + '</span> ';
+            }
             if (grouploadkw > 0) {
-                indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td>';
+                indicators += '<span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span> ';
             }
             if (operating_switches > 0) {
-                indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td>';
+                indicators += '<span class="hg-indicator-plug">' + operating_switches + '</span> ';
             }
             if (operating_lights > 0) {
-                indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td>';
+                indicators += '<span class="hg-indicator-bulb">' + operating_lights + '</span> ';
             }
             if (group_temperature != null) {
                 displayvalue = HG.WebApp.Utility.FormatTemperature(group_temperature);
-                indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td>';
+                indicators += '<span class="hg-indicator-temperature">' + displayvalue + '</span> ';
             }
             if (group_luminance != null) {
-                indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td>';
+                indicators += '<span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span> ';
             }
             if (group_humidity != null) {
-                indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td>';
+                indicators += '<span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span> ';
             }
-
-            $$.field('#control_groupindicators_' + i, true).html(indicators);
-
+            $('#control_groupindicators_' + i).html(indicators);
             if (i == HG.WebApp.Data._CurrentGroupIndex) {
                 $$.field('#control_groupmenutitle', true).html(HG.WebApp.Data.Groups[i].Name);
                 $$.field('#control_groupindicators', true).html(indicators);
             }
         }
+        $$.field('#control_groupsmenu', true).listview().listview('refresh');
     };
 
     $$.LoadGroups = function () {

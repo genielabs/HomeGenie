@@ -122,7 +122,7 @@ $$.refreshStatus = function() {
     }
     level = parseFloat(level.Value.replace(',', '.'))*100;
   } else level = '';
-  $$.field('level').val(level).slider('refresh');
+  $$.field('level').val(level).slider().slider('refresh');
   $$.field('updatetime').html(displayTime);
 }
 
