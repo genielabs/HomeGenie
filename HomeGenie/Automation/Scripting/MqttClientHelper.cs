@@ -80,7 +80,36 @@ namespace HomeGenie.Automation.Scripting
             Connect();
             return this;
         }
+        
+        /// <summary>
+        /// Connects to the MQTT server using the specified port and client identifier and a callback function in case of lost connection.
+        /// </summary>
+        /// <param name="port">MQTT server port.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="callback">The name of callback function, like RefreshConnection</param>
+        /// <example>Action RefreshConnection = () => {...}</example>
+        public MqttClientHelper Connect(int port, string clientId, Action callback)
+        {
+            endPoint.Port = port;
+            endPoint.ClientId = clientId;
 
+            Disconnect();
+            mqttClient = new MqttClient(endPoint.Address, endPoint.Port, false, null, null, MqttSslProtocols.None);
+
+            if (this.networkCredential != null)
+            {
+                mqttClient.Connect(this.endPoint.ClientId, this.networkCredential.UserName, this.networkCredential.Password);
+            }
+            else
+            {
+                mqttClient.Connect(endPoint.ClientId);
+            }
+
+            mqttClient.ConnectionClosed += (sender, e) => callback();
+
+            return this;
+        }
+        
         /// <summary>
         /// Disconnects from the MQTT server.
         /// </summary>
