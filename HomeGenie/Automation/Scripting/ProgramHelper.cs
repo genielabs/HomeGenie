@@ -602,6 +602,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="description">Event description.</param>
         public ProgramHelper RaiseEvent(string parameter, string value, string description)
         {
+            if (programModule == null) RelocateProgramModule();
             try
             {
                 var actionEvent = homegenie.MigService.GetEvent(
