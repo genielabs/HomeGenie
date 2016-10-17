@@ -35,6 +35,8 @@ using System.Xml.Serialization;
 using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace HomeGenie.Service
 {
@@ -122,6 +124,35 @@ namespace HomeGenie.Service
 
         private HomeGenieService homegenie;
 
+
+        // TODO: this is just a temporary hack not meant to be used in production enviroment
+        public static bool Validator(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
+        {
+            string gitHubCertificateHash = "CF059889CAFF8ED85E5CE0C2E4F7E6C3C750DD5C";
+            string remoteCertificateHash = certificate.GetCertHashString();
+            if (sslPolicyErrors == SslPolicyErrors.None)
+            {
+                return true;
+            }
+            // verify against api.github.com certificate hash string
+            else if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors && remoteCertificateHash == gitHubCertificateHash)
+            {
+                Console.WriteLine("Applied github certificate issue work-around.");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("SSL validation error! Remote hash is: {0}", remoteCertificateHash);
+                return false;
+            }
+        }
+
+
         // TODO: add automatic interval check and "UpdateAvailable", "UpdateChecking" events
 
         public UpdateChecker(HomeGenieService hg)
@@ -133,6 +164,11 @@ namespace HomeGenie.Service
             checkInterval.Elapsed += checkInterval_Elapsed;
             //
             remoteUpdates = new List<ReleaseInfo>();
+
+            // TODO: SSL connection certificate validation:
+            // TODO: this is just an hack to fix certificate issues happening sometimes on api.github.com site,
+            // TODO: not meant to be used in production enviroment
+            ServicePointManager.ServerCertificateValidationCallback = Validator;
         }
 
         public bool Check()

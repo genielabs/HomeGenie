@@ -81,24 +81,7 @@ namespace HomeGenie.Automation.Scripting
         public NetHelper(HomeGenieService hg)
         {
             homegenie = hg;
-            // TODO: SSL connection certificate validation:
-            // TODO: this is just an hack to fix certificate issues on mono < 4.0,
-            // TODO: not meant to be used in production enviroment
-            //ServicePointManager.ServerCertificateValidationCallback = Validator;
         }
-
-        // TODO: this is just an hack not meant to be used in production enviroment
-        /*
-        public static bool Validator(
-            object sender,
-            X509Certificate certificate,
-            X509Chain chain,
-            SslPolicyErrors sslPolicyErrors
-        )
-        {
-            return true;
-        }
-        */
 
         #region SMTP client
 

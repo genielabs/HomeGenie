@@ -1,6 +1,7 @@
 ﻿RELEASE HISTORY
 
 07/07/2016 v1.1-beta.526
+    - Fixed Camera widget 'hanging' bug when displaying multiple cameras on a page, also increased refresh speed
     - Fixed side menu refresh bug
     - Fonts are now embedded in css (no more delay downloading from google fonts)
     - Fixed SSL error when sending e-mails

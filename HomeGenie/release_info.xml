@@ -3,7 +3,8 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r526</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed side menu refresh bug
+  <ReleaseNote>   - Fixed Camera widget 'hanging' bug when displaying multiple cameras on a page, also increased refresh speed
+  - Fixed side menu refresh bug
   - Fonts are now embedded in css (no more delay downloading from google fonts)
   - Fixed SSL error when sending e-mails
   - Other minor fixes/improvements</ReleaseNote>
