@@ -98,7 +98,18 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
         UPnP_FriendlyName:
             'UPnP.FriendlyName',
         UPnP_RendererState_MediaItem:
-            'Widget.State.MediaItem'
+            'Widget.State.MediaItem',
+				// New MySensor types
+        Sensor_Flow:
+						'Sensor.Flow',
+				Sensor_Volume:
+						'Sensor.Volume',
+				Sensor_Distance:
+						'Sensor.Distance',
+				Sensor_Infrared:
+						'Sensor.Infrared',
+				Sensor_UV:
+						'Sensor.UV',
     };
 
     var ModuleType = {
@@ -466,6 +477,27 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                     desc = ($.isNumeric(value) ? Module.getFormattedNumber(value) : value);
                     icon = 'images/indicators/alarm.png';
                     break;
+                	// New MySensor types
+								case ParameterType.Sensor_Flow:
+            				desc = Module.getFormattedNumber(value);
+            				icon = 'images/indicators/flow.png';
+            				break;
+            		case ParameterType.Sensor_Volume:
+            				desc = Module.getFormattedNumber(value);
+            				icon = 'images/indicators/volume.png';
+            				break;
+            		case ParameterType.Sensor_Distance:
+            				desc = Module.getFormattedNumber(value);
+            				icon = 'images/indicators/distance.png';
+            				break;
+            		case ParameterType.Sensor_Infrared:
+            			desc = BitConverter.ToString(value);
+            			icon = 'images/indicators/infrared.png';
+            			break;
+            		case ParameterType.Sensor_UV:
+            			desc = Module.getFormattedNumber(value);
+            			icon = 'images/indicators/uv.png';
+            			break;
                 default:
                     desc = ($.isNumeric(value) ? Module.getFormattedNumber(value) : value);
                     icon = 'images/indicators/generic.png';
