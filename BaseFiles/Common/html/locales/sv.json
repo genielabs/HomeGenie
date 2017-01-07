@@ -69,8 +69,10 @@
         "Avbryt",
     "configure_group_deleteconfirm": 
         "Ta Bort",
-    "configure_module_newmoduleadd": 
+    "configure_group_addmodule": 
         "Lägg Till Ny Modul",
+	 "configure_automation_group_modulechoose_desc":
+			"Klicka på en modul för att lägga till den.",
     "configure_module_newmodulecancel": 
         "Avbryt",
     "configure_module_newmoduleconfirm": 
