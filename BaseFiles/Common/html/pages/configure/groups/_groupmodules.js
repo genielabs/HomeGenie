@@ -97,7 +97,7 @@
                                 cursect = module.Domain;
                             }
                             $('#automation_group_module_list').append($('<li/>', {
-                                'data-icon': 'minus',
+                                'data-icon': 'plus',
                                 'data-context-domain': module.Domain,
                                 'data-context-address': module.Address
                             })
@@ -108,6 +108,7 @@
                         }
                     }
                 }
+                $('#automation_group_module_list').listview('refresh');
             };
 
             $$.AddGroupModule = function (group, domain, address, callback) {
