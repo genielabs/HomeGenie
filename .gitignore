@@ -12,6 +12,8 @@
 Thumbs.db
 
 # Nuget packages
-packages/*
-!packages/repositories.config
+**/packages/*
+!**/packages/repositories.config
 
+
+**/.idea/*

@@ -24,19 +24,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Timers;
 using System.Xml.Serialization;
-
-using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 using OpenSource.UPnP;
 
 using HomeGenie.Automation;
