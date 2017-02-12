@@ -61,12 +61,98 @@
                     $$.field('#btn_configure_group_editseparatoradd', true).show();
                 }
             });
+
             $$.field('#automation_group_modulechoose', true).on('popupbeforeposition', function (event) {
-                var moduleAdd = $('#automation_group_moduleadd');
-                moduleAdd.empty();
-                moduleAdd.append($$.GetModulesListViewItems($$.CurrentGroup));
-                moduleAdd.selectmenu('refresh');
+                $$.GetModulesListViewItems($$.CurrentGroup);
             });
+
+            $('#automation_group_module_list').on('click', 'li', function () {
+                $.mobile.loading('show');
+                //
+                var domain = $(this).attr('data-context-domain');
+                var address = $(this).attr('data-context-address');
+                $$.AddGroupModule($$.CurrentGroup, domain, address, function () {
+                    var list = $$.field('#page_configure_groupmodules_list', true).find('ul');
+                    var item = list.find('li').last();
+                    list.parent().animate({ scrollTop: item.position().top });
+
+                    $$.GetModulesListViewItems($$.CurrentGroup);
+                    $.mobile.loading('hide');
+                });
+            });
+
+            $$.GetModulesListViewItems = function (groupname) {
+                var groupmodules = HG.Configure.Groups.GetGroupModules(groupname);
+                $('#automation_group_module_list').empty();
+                var cursect = '';
+                if (HG.WebApp.Data.Modules && HG.WebApp.Data.Modules.length) {
+                    for (m = 0; m < HG.WebApp.Data.Modules.length; m++) {
+                        var module = HG.WebApp.Data.Modules[m];
+                        var haselement = $.grep(groupmodules.Modules, function (value) {
+                            return (value.Domain == module.Domain && value.Address == module.Address);
+                        });
+                        // module it's not present in current group
+                        if (haselement.length == 0) {
+                            var propwidget = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
+                            var vmparentid = HG.WebApp.Utility.GetModulePropertyByName(module, "VirtualModule.ParentId");
+                            var widget = (propwidget != null && propwidget.Value != null) ? propwidget.Value : '';
+                            var vid = (vmparentid != null && vmparentid.Value != null) ? vmparentid.Value : '';
+                            // check if no explicit witdget is specified and it's not a virtual module or program
+                            if (module.Domain == 'HomeAutomation.HomeGenie.Automation') {
+                                var pid = (vid != '' && vid != module.Address) ? vid : module.Address;
+                                var cp = HG.WebApp.Utility.GetProgramByAddress(pid);
+                                if (cp != null) {
+                                    if (!cp.IsEnabled)
+                                        continue;
+                                    else if (cp.Type.toLowerCase() != 'wizard' && widget == '')
+                                        continue;
+                                }
+                            }
+
+                            if (cursect != module.Domain) {
+                                $('#automation_group_module_list').append($('<li/>', { 'data-role': 'list-divider' }).append(module.Domain));
+                                cursect = module.Domain;
+                            }
+                            $('#automation_group_module_list').append($('<li/>', {
+                                'data-icon': 'plus',
+                                'data-context-domain': module.Domain,
+                                'data-context-address': module.Address
+                            })
+                                .append($('<a/>',
+                                    {
+                                        'text': module.Address + ' ' + (module.Name != '' ? module.Name : (module.Description != '' ? module.Description : module.DeviceType))
+                                    })));
+                        }
+                    }
+                }
+                $('#automation_group_module_list').listview('refresh');
+            };
+
+            $$.AddGroupModule = function (group, domain, address, callback) {
+                var alreadyexists = false;
+                var moduleindex = -1;
+                for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+                    if (HG.WebApp.Data.Groups[i].Name == group) {
+                        for (c = 0; c < HG.WebApp.Data.Groups[i].Modules.length; c++) {
+                            if (domain == HG.WebApp.Data.Groups[i].Modules[c].Domain && address == HG.WebApp.Data.Groups[i].Modules[c].Address) {
+                                alreadyexists = true;
+                                break;
+                            }
+                        }
+                        if (!alreadyexists) {
+                            HG.WebApp.Data.Groups[i].Modules.push({ 'Address': address, 'Domain': domain });
+                            moduleindex = HG.WebApp.Data.Groups[i].length - 1;
+                        }
+                        //
+                        break;
+                    }
+                }
+                //
+                HG.WebApp.GroupsList.SaveGroups(function () {
+                    callback();
+                });
+            };
+
             $$.field('#automation_group_module_propdelete', true).on('click', function () {
                 if ($$.CurrentModuleProperty != null) {
                     $$.ModulePropertyDelete($$.CurrentModuleProperty.find('input[type=text]').first().val());

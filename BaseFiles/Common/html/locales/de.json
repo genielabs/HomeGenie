@@ -69,7 +69,7 @@
         "Abbrechen",
     "configure_group_deleteconfirm":
         "Löschen",
-    "configure_module_newmoduleadd":
+    "configure_group_addmodule":
         "Neues Modul hinzufügen",
     "configure_module_newmodulecancel":
         "Abbrechen",

@@ -69,7 +69,7 @@
         "Annuler",
     "configure_group_deleteconfirm":
         "Supprimer",
-    "configure_module_newmoduleadd":
+    "configure_group_addmodule":
         "Ajouter un Module",
     "configure_module_newmodulecancel":
         "Annuler",
