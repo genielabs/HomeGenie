@@ -1,4 +1,6 @@
-HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this;
+HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
+
+    var $$ = this;
 
     $$.PageId = 'page_automation_editprogram';
     $$._CurrentProgram = Array();
@@ -248,10 +250,11 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this
         }
     };
     $$.IsClean = function () {
-        var isClean = ($$._CurrentProgram.Group == $('#automation_programgroup').val());
-        isClean = isClean && ($$._CurrentProgram.Name == $('#automation_programname').val());
-        isClean = isClean && ($$._CurrentProgram.Description == $('#automation_programdescription').val());
-        isClean = isClean && ($$._CurrentProgram.ConditionType == $('#automation_conditiontype').val());
+        var isClean = ($$._CurrentProgram.Group === $('#automation_programgroup').val());
+        isClean = isClean && ($$._CurrentProgram.Name === $('#automation_programname').val());
+        isClean = isClean && ($$._CurrentProgram.Description === $('#automation_programdescription').val());
+        isClean = isClean && ($$._CurrentProgram.AutoRestartEnabled === $('#automation_program_autorestartenabled').is(':checked') );
+        isClean = isClean && ($$._CurrentProgram.ConditionType === $('#automation_conditiontype').val());
         isClean = isClean && editor1.isClean() && editor2.isClean() && editor3.isClean();
         // TODO: add checking of Wizard type programs Conditions and Commands too
         return isClean;
@@ -700,6 +703,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this
         $$._CurrentProgram.Group = $('#automation_programgroup').val();
         $$._CurrentProgram.Name = $('#automation_programname').val();
         $$._CurrentProgram.Description = $('#automation_programdescription').val();
+        $$._CurrentProgram.AutoRestartEnabled = $('#automation_program_autorestartenabled').is(':checked');
         $$._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
         $$._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
         $$._CurrentProgram.ScriptErrors = '';
@@ -710,6 +714,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () { var $$ = this
             'Group': $$._CurrentProgram.Group,
             'Name': $$._CurrentProgram.Name,
             'Description': $$._CurrentProgram.Description,
+            'AutoRestartEnabled': $$._CurrentProgram.AutoRestartEnabled,
             'IsEnabled': $$._CurrentProgram.IsEnabled,
             'ScriptCondition': $$._CurrentProgram.ScriptCondition,
             'ScriptSource': $$._CurrentProgram.ScriptSource,

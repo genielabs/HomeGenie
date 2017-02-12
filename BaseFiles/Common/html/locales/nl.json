@@ -871,6 +871,8 @@
         "Module",
     "common_command_modules":
         "Modules",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
 "##":
 "## SIDE MENU LOCALES",
 "##":

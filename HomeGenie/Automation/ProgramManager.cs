@@ -24,52 +24,24 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
-using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
 using HomeGenie.Service;
 using MIG;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
-using Microsoft.Scripting.Hosting;
-using Newtonsoft.Json;
-using System.Globalization;
-using System.Diagnostics;
 using System.Linq;
 
 namespace HomeGenie.Automation
 {
-
-    public class ScriptEngineErrors : ErrorListener
-    {
-        private string blockType = "TC";
-        public List<ProgramError> Errors = new List<ProgramError>();
-
-        public ScriptEngineErrors(string type)
-        {
-            blockType = type;
-        }
-
-        public override void ErrorReported(ScriptSource source, string message, Microsoft.Scripting.SourceSpan span, int errorCode, Microsoft.Scripting.Severity severity)
-        {
-            Errors.Add(new ProgramError() {
-                Line = span.Start.Line,
-                Column = span.Start.Column,
-                ErrorMessage = message,
-                ErrorNumber = errorCode.ToString(),
-                CodeBlock = blockType
-            });
-        }
-    }
-
     public class ProgramManager
     {
-        private TsList<ProgramBlock> automationPrograms = new TsList<ProgramBlock>();
-        private HomeGenieService homegenie = null;
-        private SchedulerService schedulerService = null;
-        private MacroRecorder macroRecorder = null;
+        private readonly TsList<ProgramBlock> _automationPrograms = new TsList<ProgramBlock>();
+        private readonly HomeGenieService _hgService;
+        private readonly SchedulerService _schedulerService;
+        private readonly MacroRecorder _macroRecorder;
 
         //private object lockObject = new object();
-        private bool isEngineEnabled = false;
+        private bool _isEngineEnabled;
 
         public const int USERSPACE_PROGRAMS_START = 1000;
         public const int PACKAGE_PROGRAMS_START = 100000;
@@ -83,30 +55,30 @@ namespace HomeGenie.Automation
 
         public ProgramManager(HomeGenieService hg)
         {
-            homegenie = hg;
-            macroRecorder = new MacroRecorder(this);
-            schedulerService = new SchedulerService(this);
+            _hgService = hg;
+            _macroRecorder = new MacroRecorder(this);
+            _schedulerService = new SchedulerService(this);
         }
 
         public bool Enabled
         {
-            get { return isEngineEnabled; }
+            get { return _isEngineEnabled; }
             set 
             {
-                bool wasEnabled = isEngineEnabled;
-                isEngineEnabled = value; 
-                if (wasEnabled && !isEngineEnabled)
+                bool wasEnabled = _isEngineEnabled;
+                _isEngineEnabled = value;
+                if (wasEnabled && !_isEngineEnabled)
                 {
-                    schedulerService.Stop();
-                    foreach (ProgramBlock program in automationPrograms)
+                    _schedulerService.Stop();
+                    foreach (ProgramBlock program in _automationPrograms)
                     {
                         program.Engine.StopScheduler();
                     }
                 }
-                else if (!wasEnabled && isEngineEnabled)
+                else if (!wasEnabled && _isEngineEnabled)
                 {
-                    schedulerService.Start();
-                    foreach (ProgramBlock program in automationPrograms)
+                    _schedulerService.Start();
+                    foreach (ProgramBlock program in _automationPrograms)
                     {
                         if (program.IsEnabled)
                             program.Engine.StartScheduler();
@@ -117,17 +89,17 @@ namespace HomeGenie.Automation
 
         public HomeGenieService HomeGenie
         {
-            get { return homegenie; }
+            get { return _hgService; }
         }
 
         public MacroRecorder MacroRecorder
         {
-            get { return macroRecorder; }
+            get { return _macroRecorder; }
         }
 
         public SchedulerService SchedulerService
         {
-            get { return schedulerService; }
+            get { return _schedulerService; }
         }
 
         public List<ProgramError> CompileScript(ProgramBlock program)
@@ -141,12 +113,12 @@ namespace HomeGenie.Automation
             program.Engine.StartProgram(options);
         }
 
-        public TsList<ProgramBlock> Programs { get { return automationPrograms; } }
+        public TsList<ProgramBlock> Programs { get { return _automationPrograms; } }
 
         public int GeneratePid()
         {
             int pid = USERSPACE_PROGRAMS_START;
-            var userPrograms = automationPrograms
+            var userPrograms = _automationPrograms
                 .FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START)
                 .OrderBy(p => p.Address);
             foreach (ProgramBlock program in userPrograms)
@@ -162,11 +134,11 @@ namespace HomeGenie.Automation
 
         public void ProgramAdd(ProgramBlock program)
         {
-            automationPrograms.Add(program);
+            _automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
-            program.Engine.SetHost(homegenie);
+            program.Engine.SetHost(_hgService);
             RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Added");
-            if (isEngineEnabled && program.IsEnabled)
+            if (_isEngineEnabled && program.IsEnabled)
             {
                 program.Engine.StartScheduler();
             }
@@ -181,7 +153,7 @@ namespace HomeGenie.Automation
         {
             RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Removed");
             program.IsEnabled = false;
-            automationPrograms.Remove(program);
+            _automationPrograms.Remove(program);
             // delete program files
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
             // remove csharp assembly
@@ -201,11 +173,11 @@ namespace HomeGenie.Automation
 
         internal void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
         {
-            var programModule = homegenie.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());
+            var programModule = _hgService.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());
             if (programModule != null)
             {
                 Utility.ModuleParameterSet(programModule, property, value);
-                homegenie.RaiseEvent(program.Address, programModule.Domain, programModule.Address, "Automation Program", property, value);
+                _hgService.RaiseEvent(program.Address, programModule.Domain, programModule.Address, "Automation Program", property, value);
                 //homegenie.MigService.RaiseEvent(actionEvent);
                 //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
@@ -229,14 +201,14 @@ namespace HomeGenie.Automation
                 // Route event to Programs->ModuleChangedHandler
                 ThreadPool.QueueUserWorkItem(new WaitCallback(RoutePropertyChangedEvent), routedEvent);
                 // Route event to SchedulerService->OnModuleUpdate
-                ThreadPool.QueueUserWorkItem(new WaitCallback(schedulerService.OnModuleUpdate), routedEvent);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(_schedulerService.OnModuleUpdate), routedEvent);
             }
         }
 
         public bool RoutePropertyBeforeChangeEvent(object eventData)
         {
             var moduleEvent = (RoutedEvent)eventData;
-            var moduleHelper = new Automation.Scripting.ModuleHelper(homegenie, moduleEvent.Module);
+            var moduleHelper = new Automation.Scripting.ModuleHelper(_hgService, moduleEvent.Module);
             string originalValue = moduleEvent.Parameter.Value;
             for (int p = 0; p < Programs.Count; p++)
             {
@@ -268,12 +240,12 @@ namespace HomeGenie.Automation
         public void RoutePropertyChangedEvent(object eventData)
         {
             var moduleEvent = (RoutedEvent)eventData;
-            var moduleHelper = new Automation.Scripting.ModuleHelper(homegenie, moduleEvent.Module);
+            var moduleHelper = new Automation.Scripting.ModuleHelper(_hgService, moduleEvent.Module);
             string originalValue = moduleEvent.Parameter.Value;
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
-                if (program == null || !program.IsEnabled || !isEngineEnabled) continue;
+                if (program == null || !program.IsEnabled || !_isEngineEnabled) continue;
                 if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                 {
                     try
@@ -318,8 +290,8 @@ namespace HomeGenie.Automation
             if (isEnabled)
             {
                 program.ScriptErrors = "";
-                homegenie.modules_RefreshPrograms();
-                homegenie.modules_RefreshVirtualModules();
+                _hgService.modules_RefreshPrograms();
+                _hgService.modules_RefreshVirtualModules();
                 RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Enabled");
                 program.Engine.StartScheduler();
             }
@@ -327,10 +299,10 @@ namespace HomeGenie.Automation
             {
                 program.Engine.StopScheduler();
                 RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Disabled");
-                homegenie.modules_RefreshPrograms();
-                homegenie.modules_RefreshVirtualModules();
+                _hgService.modules_RefreshPrograms();
+                _hgService.modules_RefreshVirtualModules();
             }
-            homegenie.modules_Sort();
+            _hgService.modules_Sort();
         }
     }
 }

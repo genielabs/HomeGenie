@@ -1,6 +1,6 @@
 {
     "home_menu_title":
-        "Home Menü",
+        "Home MenÃ¼",
     "home_menu_control":
         "Steuerung",
     "home_menu_analyze":
@@ -8,7 +8,7 @@
     "home_menu_configure":
         "Konfiguration",
     "homegenie_about_title":
-        "Über uns",
+        "Ãœber uns",
     "control_groups_and_modules":
         "Steuerung Gruppe<br>und Module",
     "bottombar_button_home":
@@ -48,9 +48,9 @@
     "configure_group_newgroupcancel":
         "Abbrechen",
     "bottombar_button_back":
-        "Zurück",
+        "ZurÃ¼ck",
     "configure_group_bottombar_group_add":
-        "Gruppe Hinzufügen",
+        "Gruppe HinzufÃ¼gen",
     "configure_group_group":
         "Gruppen",
     "configure_group_groupname":
@@ -60,21 +60,21 @@
     "configure_group_modulelist":
         "Module List",
     "configure_group_deletegroup":
-        "Gruppe Löschen?",
+        "Gruppe LÃ¶schen?",
     "configure_group_deleteprompt":
-        "Sind Sie sicher das Sie diese Gruppe Löschen möchten?",
+        "Sind Sie sicher das Sie diese Gruppe LÃ¶schen mÃ¶chten?",
     "configure_group_deletewarning":
-        "Diese Aktion kann nicht rückgängig gemacht werden.",
+        "Diese Aktion kann nicht rÃ¼ckgÃ¤ngig gemacht werden.",
     "configure_group_deletecancel":
         "Abbrechen",
     "configure_group_deleteconfirm":
-        "Löschen",
+        "LÃ¶schen",
     "configure_module_newmoduleadd":
-        "Neues Modul hinzufügen",
+        "Neues Modul hinzufÃ¼gen",
     "configure_module_newmodulecancel":
         "Abbrechen",
     "configure_module_newmoduleconfirm":
-        "Hinzufügen",
+        "HinzufÃ¼gen",
     "configure_module_propname":
         "Name",
     "configure_module_typelight":
@@ -94,9 +94,9 @@
     "configure_module_typethermostat":
         "Thermostat",
     "configure_module_typeshutter":
-        "Auslöser",
+        "AuslÃ¶ser",
     "configure_module_typedoorwindow":
-        "Tür/Fenster",
+        "TÃ¼r/Fenster",
     "configure_module_options":
         "Setup",
     "configure_module_optupdate":
@@ -104,9 +104,9 @@
     "configure_module_optremove":
         "Entferne von Gruppe",
     "configure_group_bottombar_deletemodule":
-        "Gruppe Löschen",
+        "Gruppe LÃ¶schen",
     "configure_group_bottombar_addmodule":
-        "Modul Hinzufügen",
+        "Modul HinzufÃ¼gen",
     "configure_program_automationtitle":
         "Programmliste",
     "configure_program_newprogram":
@@ -118,7 +118,7 @@
     "configure_program_newprogramconfirm":
         "Ok",
     "configure_program_deletetitle":
-        "Programm Löschen?",
+        "Programm LÃ¶schen?",
     "configure_program_deleteprompt":
         "Sind Sie sicher das Sie dieses Programm Loeschen wollen?",
     "configure_program_deleteadvice":
@@ -126,7 +126,7 @@
     "configure_program_deletecancel":
         "Abbrechen",
     "configure_program_deleteconfirm":
-        "Löschen",
+        "LÃ¶schen",
     "configure_program_options":
         "Optionen",
     "configure_program_options_edit":
@@ -144,39 +144,39 @@
     "configure_program_programtype":
         "Programm Art",
     "configure_program_trigger":
-        "Programm auslösen",
+        "Programm auslÃ¶sen",
     "configure_program_conditionswitchestrue":
         "Wenn die Bedingung Berechnung schaltet zu 'wahr'",
     "configure_program_conditionswitchesfalse":
         "Wenn die Bedingung Berechnung schaltet zu 'falsch'",
     "configure_program_runonceconditiontrue":
-        "einmal ausgeführt, wenn die Bedingung Evaluierung liefert 'wahr'",
+        "einmal ausgefÃ¼hrt, wenn die Bedingung Evaluierung liefert 'wahr'",
     "configure_program_conditionistrue":
-        "Wenn die Bedingung Berechnung zurückgibt 'wahr'",
+        "Wenn die Bedingung Berechnung zurÃ¼ckgibt 'wahr'",
     "configure_program_conditionisfalse":
-        "Wenn die Bedingung Berechnung zurückgibt 'falsch'",
+        "Wenn die Bedingung Berechnung zurÃ¼ckgibt 'falsch'",
     "configure_program_programconditions":
         "Programm Bedingungen",
     "configure_program_conditionadd":
-        "Bedingungen Hinzufügen",
+        "Bedingungen HinzufÃ¼gen",
     "configure_program_selectconditioncontext":
-        "Wähle Bedingungen Kontext",
+        "WÃ¤hle Bedingungen Kontext",
     "configure_program_wizardback":
-        "zurück",
+        "zurÃ¼ck",
     "configure_program_selectoperator":
-        "Wählen Vergleichsoperator",
+        "WÃ¤hlen Vergleichsoperator",
     "configure_program_operatorless":
         "Weniger Als",
     "configure_program_operatorequal":
         "Gleich",
     "configure_program_operatorgreaterthan":
-        "Grösser Als",
+        "GrÃ¶sser Als",
     "configure_program_selectvalue":
-        "Wähle Vergleichswert",
+        "WÃ¤hle Vergleichswert",
     "configure_program_wizarddone":
         "Erledigt",
     "configure_program_deleteconditiontitle":
-        "Bedingung Löschen?",
+        "Bedingung LÃ¶schen?",
     "configure_program_deleteconditionprompt":
         "Sind Sie sicher, dass Sie wirklich die Bedingungen und Erklaerung Loeschen moechten?",
     "configure_program_deleteconditionadvice":
@@ -186,11 +186,11 @@
     "configure_program_instructionadd":
         "Instruktionen Hinzufuegen",
     "configure_program_selectcommandcontext":
-        "Wählen Sie den Befehl Kontext",
+        "WÃ¤hlen Sie den Befehl Kontext",
     "configure_program_commandarguments":
         "Befehlsargumente",
     "configure_program_deleteinstructiontitle":
-        "Instruktionen Löschen?",
+        "Instruktionen LÃ¶schen?",
     "configure_program_deleteinstructionprompt":
         "Sind Sie sicher, dass Sie wirklich die Anweisung und Erklaerung Loeschen moechten??",
     "configure_program_csharpprogram":
@@ -204,7 +204,7 @@
     "configure_program_switchtypeprompt":
         "Sind sie sicher das Sie dieses Programm aendern wollen?",
     "configure_program_switchtypeadvice":
-        "Aktuelle Programm-Daten werden gelöscht.",
+        "Aktuelle Programm-Daten werden gelÃ¶scht.",
     "configure_program_switchtypecancel":
         "Abbrechen",
     "configure_program_switchtypeconfirm":
@@ -218,7 +218,7 @@
     "configure_program_errorstitle":
         "Fehler",
     "configure_program_bbar_programeditruncode":
-        "Bearbeiten-Auslöse-Code",
+        "Bearbeiten-AuslÃ¶se-Code",
     "configure_automationgroup_newgroup":
         "Neue Gruppe",
     "configure_automationgroup_entergroupname":
@@ -226,7 +226,7 @@
     "configure_automationgroup_newgroupcancel":
         "Abbrechen",
     "configure_automationgroup_bottombar_group_add":
-        "Gruppe Hinzufügen",
+        "Gruppe HinzufÃ¼gen",
     "configure_interfaces_heading":
         "Einstellungen",
     "configure_interfaces_optdisable":
@@ -248,7 +248,7 @@
     "configure_system_serviceportchange":
         "Wechsle Port",
     "configure_security_passwordprotectedaccess":
-        "Passwort Geschützter Zugriff",
+        "Passwort GeschÃ¼tzter Zugriff",
     "configure_system_configanddata":
         "Konfiguration und Daten",
     "configure_maintenance_configuration":
@@ -260,7 +260,7 @@
     "systemsettings_backuprestores1heading":
         "Konfiguration wiederherstellen",
     "configure_system_backuprestores1note":
-        "Wählen Automation Programme zur Wiederherstellung:",
+        "WÃ¤hlen Automation Programme zur Wiederherstellung:",
     "systemsettings_backuprestores1cancel":
         "Abbrechen",
     "systemsettings_backuprestores1confirm":
@@ -288,7 +288,7 @@
     "configure_maintenance_resetcancel":
         "Abbrechen",
     "home_voicerecognition_text_placeholder":
-        "Klicken Sie auf die Schaltfläche für die Sprachsteuerung oder geben Sie einen Satz...",
+        "Klicken Sie auf die SchaltflÃ¤che fÃ¼r die Sprachsteuerung oder geben Sie einen Satz...",
     "home_voicerecognition_voice":
         "Stimme",
     "configure_menu_scheduler":
@@ -300,7 +300,7 @@
     "configure_scheduler_events":
         "Geplante Ereignisse",
     "configure_schedulerservice_bottombar_event_add":
-        "Ereignis hinzufügen",
+        "Ereignis hinzufÃ¼gen",
     "configure_schedulerservice_schedulerevent":
         "Geplante Ereignisse",
     "configure_schedulerservice_itemname":
@@ -312,13 +312,13 @@
     "configure_schedulerservice_cancelitem":
         "Abbrechen",
     "configure_schedulerservice_deleteitem":
-        "löschen",
+        "lÃ¶schen",
     "configure_schedulerservice_updateitem":
         "Aktualisierung",
     "configure_system_updatemanager":
         "Aktualisierung Manager",
     "configure_system_updatemanager_updatecheck":
-        "Aktualisierung Prüfung",
+        "Aktualisierung PrÃ¼fung",
     "configure_system_updatemanager_installupdate":
         "Installiere Aktualisierung",
     "configure_system_updatemanager_no_updates":
@@ -342,11 +342,11 @@
     "configure_security_passwordprotectedaccess_set":
         "einstellen",
     "configure_security_passwordprotectedaccess_clear":
-        "löschen",
+        "lÃ¶schen",
     "configure_system_httpcache":
         "Http Service Cache",
     "configure_maintenance_configuration_info":
-        "<b>Notiz:</b> vor der Wiederherstellung einer Sicherungsdatei müssen Sie dem System das gleiche Passwort hinterlegen wie bei der erstellung der Sicherungsdatei",
+        "<b>Notiz:</b> vor der Wiederherstellung einer Sicherungsdatei mÃ¼ssen Sie dem System das gleiche Passwort hinterlegen wie bei der erstellung der Sicherungsdatei",
     "configure_maintenance_configuration_backup":
         "Sicherungskopie",
     "configure_maintenance_configuration_restore":
@@ -356,13 +356,13 @@
     "configure_system_modulescleanup":
         "Module Bereinigung",
     "configure_system_modulesselect":
-        "Wähle Module",
+        "WÃ¤hle Module",
     "configure_system_remotemodules":
         "Remote Modules Routing",
     "configure_system_modsroutingreset":
-        "zurücksetzten",
+        "zurÃ¼cksetzten",
     "configure_system_userinterface":
-        "Benutzeroberfläche",
+        "BenutzeroberflÃ¤che",
     "configure_system_eventshistory":
         "Ereignisse Verlauf",
     "home_about_version":
@@ -380,7 +380,7 @@
     "home_about_site_docs":
         "Dokumentation",
     "actions_menu":
-        "Aktionsmenü",
+        "AktionsmenÃ¼",
     "control_group_configure":
         "Configure Group",
     "control_macrorecord_record_macro":
@@ -408,7 +408,7 @@
     "control_widget_notconfigured_title":
         "Widget nicht konfiguriert",
     "control_widget_notconfigured_text":
-        "Klicken Sie auf diese Schaltfläche, um die Konfiguration zu bearbeiten.",
+        "Klicken Sie auf diese SchaltflÃ¤che, um die Konfiguration zu bearbeiten.",
     "control_widget_notconfigured_button":
         "schliessen",
     "configure_program_options_details":
@@ -422,29 +422,29 @@
     "configure_program_details_moduleparams":
         "Module Parameters",
     "configure_group_actionmenu_deletegroup":
-        "Gruppe löschen",
+        "Gruppe lÃ¶schen",
     "configure_group_actionmenu_addseparatorlabel":
-        "Trennzeichen hinzufügen ",
+        "Trennzeichen hinzufÃ¼gen ",
     "configure_group_actionmenu_addmodule":
-        "Modul hinzufügen",
+        "Modul hinzufÃ¼gen",
     "configure_separator_edit":
         "Trennzeichen bearbeiten",
     "configure_separator_label":
         "Beschriftung",
     "configure_separator_placeholder":
-        "Beschriftung einfügen",
+        "Beschriftung einfÃ¼gen",
     "configure_module_optaddseparator":
         "Aktualisierung",
     "configure_module_parameters":
         "Parameter",
     "configure_module_parameters_delete":
-        "löschen",
+        "lÃ¶schen",
     "configure_module_parameters_save":
         "Speichern",
     "configure_module_parameters_linktitle":
         "Modulparameter",
     "configure_automationgroup_add":
-        "hinzufügen",
+        "hinzufÃ¼gen",
     "configure_programslist_listtitle":
         "Programmliste",
     "configure_programslist_tap_disable":
@@ -452,11 +452,11 @@
     "configure_programslist_tap_enable":
         "Tippen Sie auf Programm um es zu AKTIVIEREN",
     "configure_programslist_deletegroup":
-        "Gruppe löschen",
+        "Gruppe lÃ¶schen",
     "configure_programslist_importprogram":
         "Programm Importieren",
     "configure_programslist_addnewprogram":
-        "Neus Programm hinzufügen",
+        "Neus Programm hinzufÃ¼gen",
     "configure_programslist_refreshlist":
         "Liste aktualisieren",
     "configure_programslist_import":
@@ -468,21 +468,21 @@
     "configure_program_sketchcode":
         "Sketch Code",
     "configure_program_triggercode":
-        "Auslöser Code",
+        "AuslÃ¶ser Code",
     "configure_program_makefile":
         "Dateierstellen",
     "configure-editprogram-addcommand":
-        "Befehl Hinzufügen",
+        "Befehl HinzufÃ¼gen",
     "configure-editprogram-addcondition":
-        "Bedingung hinzufügen",
+        "Bedingung hinzufÃ¼gen",
     "configure-editprogram-capture":
         "Aufzeichnen",
     "configure-editprogram-help":
         "Hilfe",
     "configure_program_triggertype":
-        "Auslöser",
+        "AuslÃ¶ser",
     "configure_editprogram_options_delete":
-        "Programm löschen",
+        "Programm lÃ¶schen",
     "configure_editprogram_saving_succeed":
         "Speichern erfolgreich.",
     "configure_editprogram_saving":
@@ -494,9 +494,9 @@
     "systemsettings_selectport_title":
         "Mitteilung",
     "systemsettings_selectport_placeholder":
-        "(Port auswählen...)",
+        "(Port auswÃ¤hlen...)",
     "systemsettings_selectport_text":
-        "Bitte wähle einen Port das von diesem Gerät verwendet wird",
+        "Bitte wÃ¤hle einen Port das von diesem GerÃ¤t verwendet wird",
     "systemsettings_selectport_button":
         "schliessen",
     "configure_group_newgroupconfirm":
@@ -504,9 +504,9 @@
     "configure_module_optremoveseparator":
         "entfernen",
     "configure_program_selectcommandtarget":
-        "Wählen ein Befehlsziel",
+        "WÃ¤hlen ein Befehlsziel",
     "configure_program_selectcommandtoperform":
-        "Wähle den Befehl ausführen",
+        "WÃ¤hle den Befehl ausfÃ¼hren",
     "configure_program_commandcustom":
         "Benutzerdefinierte API-Befehl",
     "configure_program_wizardproceed":
@@ -522,19 +522,19 @@
     "configure_program_wizard_editline_title":
         "Bearbeitungszeile",
     "configure_program_wizard_editcmdline_prompt":
-        "Verschieben oder löschen Linie<span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Verschieben oder lÃ¶schen Linie<span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editconline_prompt":
-        "Verschieben oder löschen Linie<span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Verschieben oder lÃ¶schen Linie<span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editline_number":
         "Neue Zeilennummer",
     "configure_program_wizard_editline_delete":
-        "löschen",
+        "lÃ¶schen",
     "configure_program_wizard_editline_change":
         "bewegen",
     "configure_program_selectconditionsubject":
-        "Wähle Bedingung Gegenstand",
+        "WÃ¤hle Bedingung Gegenstand",
     "configure_program_selectconditionproperty":
-        "Wähle Vergleichs Eigenschaft",
+        "WÃ¤hle Vergleichs Eigenschaft",
     "configure_program_conditioncapturetitle":
         "Bedingungen Aufzeichnen ",
     "configure_program_waitingnewcondition":
@@ -546,13 +546,13 @@
     "configure_system_updateinstall":
         "Aktualisierung installiert",
     "configure_system_deletemodule":
-        "Module löschen",
+        "Module lÃ¶schen",
     "systemsettings_backuprestores1selectallnone":
-        "Auswählen Alle / Keine",
+        "AuswÃ¤hlen Alle / Keine",
     "securitysettings_password_setpassword":
         "Kennwort festlegen",
     "securitysettings_password_enterpassword":
-        "Geben Sie ein Kennwort für den Benutzer \"admin\" ein ",
+        "Geben Sie ein Kennwort fÃ¼r den Benutzer \"admin\" ein ",
     "maintenance_configuration_servicerestart":
         "Dienst neu starten?",
     "configure_maintenance_restartprompt":
@@ -560,7 +560,7 @@
     "configure_maintenance_restartwarning":
         "",
     "configure_module_typemediareceiver":
-        "Medienempfänger",
+        "MedienempfÃ¤nger",
     "configure_module_typemediatransmitter":
         "Media Transmitter",
     "configure_module_featuresoptions":
@@ -568,7 +568,7 @@
     "configure_editprogram_files":
         "Dateien",
     "configure_program_newfile":
-        "Datei hinzufügen",
+        "Datei hinzufÃ¼gen",
     "configure_program_filename":
         "Dateiname",
     "configure_program_fileslist":
@@ -576,15 +576,15 @@
     "configure_program_fileslist_exit":
         "beenden",
     "configure_program_fileslist_delete":
-        "löschen",
+        "lÃ¶schen",
     "configure_program_fileslist_edit":
         "bearbeiten",
     "configure_program_fileslist_add":
-        "Hinzufügen",
+        "HinzufÃ¼gen",
     "configure_program_hasmodification":
         "Program was modified!",
     "configure_program_savechangesprompt":
-        "Möchten Sie diese Änderungen speichern?",
+        "MÃ¶chten Sie diese Ã„nderungen speichern?",
     "configure_program_changeswillbelost":
         "",
     "configure_program_dontsave":
@@ -594,7 +594,7 @@
     "statistics_dataanalysis":
         "Datenanalyse",
     "statistics_counterexpense":
-        "Zähler und Kosten",
+        "ZÃ¤hler und Kosten",
     "analyze_statistics_datefrom":
         "von",
     "analyze_statistics_dateto":
@@ -602,19 +602,19 @@
     "analyze_statistics_costperunit":
         "Kosten pro Einheit",
     "analyze_statistics_overallcounter":
-        "Gesamtzähler",
+        "GesamtzÃ¤hler",
     "analyze_statistics_totalexpense":
         "Gesamtkosten",
     "configure_program_oroperator":
         "OR operator",
     "configure_system_statistics_clear":
-        "Löschen alle Statistikdaten",
+        "LÃ¶schen alle Statistikdaten",
     "configure_system_statistics_databasemaxsize":
-        "Maximale Datenbankgröße ist",
+        "Maximale DatenbankgrÃ¶ÃŸe ist",
     "configure_system_statistics_changedatabasemaxsize":
         "Wechseln",
     "configure_system_statistics_databasemaxsizechange":
-        "maximale Größe (MB)",
+        "maximale GrÃ¶ÃŸe (MB)",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Abbrechen",
     "configure_system_statistics_databasemaxsizechange_commit":
@@ -646,35 +646,35 @@
     "configure_widgetlist_add_widgetname":
         "Name",
     "configure_widgetlist_newwidgetconfirm":
-        "Hinzufügen",
+        "HinzufÃ¼gen",
     "configure_widgetlist_action_import":
         "Importieren",
     "configure_widgetlist_action_addwidget":
-        "Widget hinzufügen",
+        "Widget hinzufÃ¼gen",
     "configure_widgeteditor_html":
         "HTML",
     "configure_widgeteditor_javascript":
         "Javascript",
     "configure_widgeteditor_previewupdate":
-        "Ausführen / Vorschau",
+        "AusfÃ¼hren / Vorschau",
     "configure_widgeteditor_hasmodification":
-        "Widget wurde geändert!",
+        "Widget wurde geÃ¤ndert!",
     "configure_widgeteditor_deletetitle":
-        "Widget löschen?",
+        "Widget lÃ¶schen?",
     "configure_widgeteditor_deleteprompt":
-        "Sind Sie sicher, dass Sie dieses Widget löschen wollen?",
+        "Sind Sie sicher, dass Sie dieses Widget lÃ¶schen wollen?",
     "configure_widgetlist_list":
         "Widget Liste",
     "configure_widgeteditor_nobindmodule_title":
-        "Wähle ein Modul",
+        "WÃ¤hle ein Modul",
     "configure_widgeteditor_nobindmodule_text":
-        "Kein gültiges Modul für die Datenbindung wurde gefunden, wählen Sie bitte eines aus.",
+        "Kein gÃ¼ltiges Modul fÃ¼r die Datenbindung wurde gefunden, wÃ¤hlen Sie bitte eines aus.",
     "configure_widgeteditor_nobindmodule_close":
         "schliessen",
     "configure_widgeteditor_bindtomodule":
         "binden an das Modul",
     "configure_widgeteditor_selectmodule_placeholder":
-        "(wähle ein Modul)",
+        "(wÃ¤hle ein Modul)",
     "configure_widgeteditor_title":
         "Widget editor",
     "configure_widgeteditor_savinghtml":
@@ -712,25 +712,25 @@
     "cronwizard_minuteselect_everysomeminute":
         "jede &lt;n&gt; minute",
     "cronwizard_minuteselect_eachselected":
-        "jede ausgewählte Minute",
+        "jede ausgewÃ¤hlte Minute",
     "cronwizard_hourselect_everyhour":
         "jede Stunde",
     "cronwizard_hourselect_everysomehour":
         "jede &lt;n&gt; Stunde",
     "cronwizard_hourselect_eachselected":
-        "jeweils ausgewählt Stunde",
+        "jeweils ausgewÃ¤hlt Stunde",
     "cronwizard_dayselect_everyday":
         "jeden Tag",
     "cronwizard_dayselect_eachselected":
-        "jeden ausgewählten Tag",
+        "jeden ausgewÃ¤hlten Tag",
     "cronwizard_monthselect_everymonth":
         "jeden Monat",
     "cronwizard_monthselect_eachselected":
-        "jeden ausgewählten Monat",
+        "jeden ausgewÃ¤hlten Monat",
     "cronwizard_dayowselect_everydayow":
         "jeden Tag der Woche",
     "cronwizard_dayowselect_eachselected":
-        "jeweils ausgewählt Tag in der Woche",
+        "jeweils ausgewÃ¤hlt Tag in der Woche",
     "cronwizard_event_name":
         "Event name",
     "cronwizard_typeselect_standard":
@@ -807,6 +807,8 @@
         "Calendar View",
     "no_device_found_for_manufacturerId":
         "No device info was found for manufacturer ID",
+    "configure_program_autorestart": 
+        "Auto restart program on failure",
 "##":
 "## COMMON LOCALES",
 "##":
@@ -900,9 +902,9 @@
     "home_menu_maintenance":
         "Maintenance",
     "home_menu_about":
-        "Über uns",
+        "Ãœber uns",
     "home_menu_about_homegenie":
-        "Über HomeGenie",
+        "Ãœber HomeGenie",
     "home_menu_about_version":
         "Version",
     "home_menu_about_whatshot":

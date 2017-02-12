@@ -811,6 +811,8 @@
         "Calendar View",
     "no_device_found_for_manufacturerId":
         "В базе данных нет информации об устройстве с manufacturer ID",
+    "configure_program_autorestart":
+        "Перезапускать программу в случае её крэша",
 "##":
 "## COMMON LOCALES",
 "##":

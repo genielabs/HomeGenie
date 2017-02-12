@@ -27,20 +27,22 @@ using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scripting;
 using Newtonsoft.Json;
-using MIG;
+using NLog;
 
 namespace HomeGenie.Automation.Engines
 {
-    public class ProgramEngineBase
+    public abstract class ProgramEngineBase
     {
+        private static Logger _log = LogManager.GetCurrentClassLogger();
+
         // Main program threads
-        private Thread startupThread;
-        private Thread programThread;
+        private Thread _startupThread;
+        private Thread _programThread;
 
-        private List<string> registeredApi = new List<string>();
+        private readonly List<string> _registeredApi = new List<string>();
 
-        protected ProgramBlock programBlock;
-        protected HomeGenieService homegenie;
+        protected ProgramBlock ProgramBlock;
+        protected HomeGenieService Homegenie;
 
         // System events handlers
         public Func<bool> SystemStarted;
@@ -51,106 +53,109 @@ namespace HomeGenie.Automation.Engines
 
         public AutoResetEvent RoutedEventAck = new AutoResetEvent(false);
 
-        public ProgramEngineBase(ProgramBlock pb)
+        protected ProgramEngineBase(ProgramBlock pb)
         {
-            programBlock = pb;
+            ProgramBlock = pb;
         }
 
         public void SetHost(HomeGenieService hg)
         {
             (this as IProgramEngine).Unload();
-            homegenie = hg;
+            Homegenie = hg;
             (this as IProgramEngine).Load();
         }
 
         public void StartScheduler()
         {
             StopScheduler();
-            homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Idle");
-            startupThread = new Thread(CheckProgramSchedule);
-            startupThread.Start();
+            Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Idle");
+            _startupThread = new Thread(CheckProgramSchedule);
+            _startupThread.Start();
         }
 
         public void StopScheduler()
         {
-            if (startupThread != null)
+            if (_startupThread != null)
             {
                 try
                 {
                     RoutedEventAck.Set();
-                    if (!startupThread.Join(1000))
-                        startupThread.Abort();
+                    if (!_startupThread.Join(1000))
+                        _startupThread.Abort();
                 } catch { }
-                startupThread = null;
+                _startupThread = null;
             }
-            if (programThread != null)
+            if (_programThread != null)
                 StopProgram();
         }
 
         public void StartProgram(string options)
         {
-            if (programBlock.IsRunning)
+            if (ProgramBlock.IsRunning)
                 return;
 
             // TODO: since if !program.IsRunning also thread should be null
             // TODO: so this is probably useless here and could be removed?
-            if (programThread != null)
+            if (_programThread != null)
                 StopProgram();
 
-            programBlock.IsRunning = true;
-            homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Running");
+            ProgramBlock.IsRunning = true;
+            Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Running");
 
-            programBlock.TriggerTime = DateTime.UtcNow;
+            ProgramBlock.TriggerTime = DateTime.UtcNow;
 
-            programThread = new Thread(() =>
+            _programThread = new Thread(() =>
             {
                 try
                 {
-                    MethodRunResult result = null;
+                    MethodRunResult result;
                     try
                     {
-                        result = programBlock.Run(options);
+                        result = ProgramBlock.Run(options);
                     }
                     catch (Exception ex)
                     {
-                        result = new MethodRunResult();
-                        result.Exception = ex;
+                        result = new MethodRunResult {Exception = ex};
                     }
-                    programThread = null;
-                    programBlock.IsRunning = false;
-                    if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
+                    _programThread = null;
+                    ProgramBlock.IsRunning = false;
+                    if (result != null && result.Exception != null && !result.Exception.GetType()
+                            .Equals(typeof(System.Reflection.TargetException)))
                     {
                         // runtime error occurred, script is being disabled
                         // so user can notice and fix it
-                        List<ProgramError> error = new List<ProgramError>() { programBlock.GetFormattedError(result.Exception, false) };
-                        programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        programBlock.IsEnabled = false;
-                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.RuntimeError, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
+                        var error = new List<ProgramError> {ProgramBlock.GetFormattedError(result.Exception, false)};
+                        ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                        _log.Error(result.Exception, "Error while running program {0}", ProgramBlock.Address);
+                        Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                            PrepareExceptionMessage(CodeBlockEnum.CR, result.Exception));
+
+                        TryToAutoRestart();
                     }
-                    homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, programBlock.IsEnabled ? "Idle" : "Stopped");
+                    Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, ProgramBlock.IsEnabled ? "Idle" : "Stopped");
                 }
                 catch (ThreadAbortException)
                 {
-                    programThread = null;
-                    programBlock.IsRunning = false;
-                    if (homegenie.ProgramManager != null)
-                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Interrupted");
+                    _programThread = null;
+                    ProgramBlock.IsRunning = false;
+                    if (Homegenie.ProgramManager != null)
+                        Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Interrupted");
                 }
             });
 
-            if (programBlock.ConditionType == ConditionType.Once)
+            if (ProgramBlock.ConditionType == ConditionType.Once)
             {
-                programBlock.IsEnabled = false;
+                ProgramBlock.IsEnabled = false;
             }
 
             try
             {
-                programThread.Start();
+                _programThread.Start();
             }
             catch
             {
                 StopProgram();
-                homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.ProgramStatus, "Idle");
+                Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Idle");
             }
             lastProgramRunTs = DateTime.Now;
         }
@@ -161,7 +166,7 @@ namespace HomeGenie.Automation.Engines
             {
                 try { Stopping(); } catch { }
             }
-            programBlock.IsRunning = false;
+            ProgramBlock.IsRunning = false;
             //
             //TODO: complete cleanup and deallocation stuff here
             //
@@ -171,22 +176,22 @@ namespace HomeGenie.Automation.Engines
             SystemStopping = null;
             Stopping = null;
             //
-            foreach (string apiCall in registeredApi)
+            foreach (string apiCall in _registeredApi)
             {
                 ProgramDynamicApi.UnRegister(apiCall);
             }
-            registeredApi.Clear();
+            _registeredApi.Clear();
             //
             (this as IProgramEngine).Unload();
 
-            if (programThread != null)
+            if (_programThread != null)
             {
                 try
                 {
-                    if (!programThread.Join(1000))
-                        programThread.Abort();
+                    if (!_programThread.Join(1000))
+                        _programThread.Abort();
                 } catch { }
-                programThread = null;
+                _programThread = null;
             }
 
         }
@@ -196,7 +201,7 @@ namespace HomeGenie.Automation.Engines
 
         public void RegisterDynamicApi(string apiCall, Func<object, object> handler)
         {
-            registeredApi.Add(apiCall);
+            _registeredApi.Add(apiCall);
             ProgramDynamicApi.Register(apiCall, handler);
         }
 
@@ -210,12 +215,12 @@ namespace HomeGenie.Automation.Engines
         {
             // set initial state to signaled
             RoutedEventAck.Set();
-            while ( homegenie.ProgramManager.Enabled && programBlock.IsEnabled)
+            while ( Homegenie.ProgramManager.Enabled && ProgramBlock.IsEnabled)
             {
                 // if no event is received this will ensure that the StartupCode is run at least every minute for checking scheduler conditions if any
                 RoutedEventAck.WaitOne((60 - DateTime.Now.Second) * 1000);
                 // the startup code is not evaluated while the program is running
-                if (programBlock.IsRunning || !programBlock.IsEnabled || !homegenie.ProgramManager.Enabled)
+                if (ProgramBlock.IsRunning || !ProgramBlock.IsEnabled || !Homegenie.ProgramManager.Enabled)
                 {
                     continue;
                 }
@@ -229,11 +234,16 @@ namespace HomeGenie.Automation.Engines
                         StartProgram(null);
                     else
                     {
-                        string errorMessage = "Program has been disabled because it was looping/spawning too fast.";
-                        List<ProgramError> error = new List<ProgramError>() { new ProgramError(){CodeBlock = "TC", ErrorNumber = "0", ErrorMessage = errorMessage } };
-                        programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        programBlock.IsEnabled = false;
-                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.RuntimeError, "TC: " + errorMessage);
+                        var errorMessage = "Program has been disabled because it was looping/spawning too fast.";
+                        List<ProgramError> error = new List<ProgramError>() { new ProgramError()
+                        {
+                            CodeBlock = CodeBlockEnum.TC,
+                            ErrorNumber = "0",
+                            ErrorMessage = errorMessage
+                        } };
+                        ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                        ProgramBlock.IsEnabled = false;
+                        Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError, CodeBlockEnum.TC + errorMessage);
                     }
                 }
             }
@@ -243,60 +253,85 @@ namespace HomeGenie.Automation.Engines
         {
             bool isConditionSatisfied = false;
             // evaluate and get result from the code
-            lock (programBlock.OperationLock)
+            lock (ProgramBlock.OperationLock)
+            {
                 try
-            {
-                programBlock.WillRun = false;
-                //
-                var result = programBlock.EvaluateCondition();
-                if (result != null && result.Exception != null)
                 {
-                    // runtime error occurred, script is being disabled
-                    // so user can notice and fix it
-                    List<ProgramError> error = new List<ProgramError>() { programBlock.GetFormattedError(result.Exception, true) };
-                    programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                    programBlock.IsEnabled = false;
-                    homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.RuntimeError, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
+                    ProgramBlock.WillRun = false;
+                    //
+                    var result = ProgramBlock.EvaluateCondition();
+                    if (result != null && result.Exception != null)
+                    {
+                        // runtime error occurred, script is being disabled
+                        // so user can notice and fix it
+                        var error = new List<ProgramError> {ProgramBlock.GetFormattedError(result.Exception, true)};
+                        ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                        _log.Error(result.Exception, "Error while evaluating condition in program {0}",
+                            ProgramBlock.Address);
+                        Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                            PrepareExceptionMessage(CodeBlockEnum.TC, result.Exception));
+
+                        TryToAutoRestart();
+                    }
+                    else
+                    {
+                        isConditionSatisfied = (result != null ? (bool) result.ReturnValue : false);
+                    }
+                    //
+                    bool lastResult = ProgramBlock.LastConditionEvaluationResult;
+                    ProgramBlock.LastConditionEvaluationResult = isConditionSatisfied;
+                    //
+                    if (ProgramBlock.ConditionType == ConditionType.OnSwitchTrue)
+                    {
+                        isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
+                    }
+                    else if (ProgramBlock.ConditionType == ConditionType.OnSwitchFalse)
+                    {
+                        isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
+                    }
+                    else if (ProgramBlock.ConditionType == ConditionType.OnTrue ||
+                             ProgramBlock.ConditionType == ConditionType.Once)
+                    {
+                        // noop
+                    }
+                    else if (ProgramBlock.ConditionType == ConditionType.OnFalse)
+                    {
+                        isConditionSatisfied = !isConditionSatisfied;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
-                }
-                //
-                bool lastResult = programBlock.LastConditionEvaluationResult;
-                programBlock.LastConditionEvaluationResult = isConditionSatisfied;
-                //
-                if (programBlock.ConditionType == ConditionType.OnSwitchTrue)
-                {
-                    isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
-                }
-                else if (programBlock.ConditionType == ConditionType.OnSwitchFalse)
-                {
-                    isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
-                }
-                else if (programBlock.ConditionType == ConditionType.OnTrue || programBlock.ConditionType == ConditionType.Once)
-                {
-                    // noop
-                }
-                else if (programBlock.ConditionType == ConditionType.OnFalse)
-                {
-                    isConditionSatisfied = !isConditionSatisfied;
+                    // a runtime error occured
+                    if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)) &&
+                        !ex.GetType().Equals(typeof(ThreadAbortException)))
+                    {
+                        List<ProgramError> error = new List<ProgramError>() {ProgramBlock.GetFormattedError(ex, true)};
+                        ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                        Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                            PrepareExceptionMessage(CodeBlockEnum.TC, ex));
+                        TryToAutoRestart();
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                // a runtime error occured
-                if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)) && !ex.GetType().Equals(typeof(ThreadAbortException)))
-                {
-                    List<ProgramError> error = new List<ProgramError>() { programBlock.GetFormattedError(ex, true) };
-                    programBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                    programBlock.IsEnabled = false;
-                    homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.RuntimeError, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
-                }
-            }
-            return isConditionSatisfied && programBlock.IsEnabled;
+
+            return isConditionSatisfied && ProgramBlock.IsEnabled;
         }
 
+        private void TryToAutoRestart()
+        {
+            if (ProgramBlock.AutoRestartEnabled)
+            {
+                Thread.Sleep(2000); // sleep 2 secs to avoid fast fail loops
+                ProgramBlock.IsEnabled = true;
+            }
+            else
+                ProgramBlock.IsEnabled = false;
+        }
+
+        private static string PrepareExceptionMessage(CodeBlockEnum codeType, Exception ex)
+        {
+            return codeType + ": " + ex.Message.Replace('\n', ' ').Replace('\r', ' ');
+        }
     }
 }
 
