@@ -29,6 +29,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Net.Sockets;
 using System.Threading;
+using System.Xml;
 using OpenSource.UPnP;
 
 using HomeGenie.Automation;
@@ -753,7 +754,8 @@ namespace HomeGenie.Service
 
         public bool UpdateModulesDatabase()
         {
-            bool success = false;
+            var success = false;
+            XmlWriter writer = null;
             modules_RefreshAll();
             lock (systemModules.LockObject)
             {
@@ -771,28 +773,31 @@ namespace HomeGenie.Service
                                 && parameter.Name != Properties.ProgramStatus
                                 && parameter.Name != Properties.RuntimeError)
                             {
-                                if (!String.IsNullOrEmpty(parameter.Value))
+                                if (!string.IsNullOrEmpty(parameter.Value))
                                     parameter.Value = StringCipher.Encrypt(parameter.Value, GetPassPhrase());
                             }
                         }
                     }
-                    string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml");
-                    if (File.Exists(filePath))
-                    {
-                        File.Delete(filePath);
-                    }
-                    var settings = new System.Xml.XmlWriterSettings();
-                    settings.Indent = true;
-                    settings.Encoding = Encoding.UTF8;
-                    var serializer = new System.Xml.Serialization.XmlSerializer(clonedModules.GetType());
-                    var writer = System.Xml.XmlWriter.Create(filePath, settings);
+
+                    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml");
+                    File.Delete(filePath);
+
+                    var settings = new XmlWriterSettings {Indent = true};
+                    var serializer = new XmlSerializer(clonedModules.GetType());
+                    writer = XmlWriter.Create(filePath, settings);
                     serializer.Serialize(writer, clonedModules);
-                    writer.Close();
+                    writer.Flush();
                     success = true;
                 }
                 catch (Exception ex)
                 {
-                    LogError(Domains.HomeAutomation_HomeGenie, "UpdateModulesDatabase()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    LogError(Domains.HomeAutomation_HomeGenie, "UpdateModulesDatabase()", ex.Message,
+                        "Exception.StackTrace", ex.StackTrace);
+                }
+                finally
+                {
+                    if (writer != null)
+                        writer.Close();
                 }
             }
             return success;
