@@ -4,8 +4,8 @@
 //
 HG.Ui = HG.Ui || new function(){ var $$ = this;
 
-    $$._widgetQueueCount = 0;
-    $$._widgetCache = [];
+    $$._componentQueueCount = 0;
+    $$._compomentCache = [];
 
     var ParameterType = {
         Status_ColorHsb:
@@ -166,7 +166,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
         }
         // pick it from cache if exists
         var cached = false;
-        $.each($$._widgetCache, function(k,v){
+        $.each($$._compomentCache, function(k, v){
             if (v.widget == fieldType) {
                 var element = $(v.html);
                 var handler = v.json.startsWith('[') ? eval(v.json)[0] : eval('new function(){ var $$ = this; '+v.json+' };');
@@ -176,8 +176,14 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                     setTimeout(function(){
                         callback(handler);
                     }, 200);
-                    if (handler.init) handler.init(options);
-                    if (handler.bind) handler.bind();
+                    if (handler.init) {
+                        console.log({ h: handler, l: 'init' });
+                        handler.init(options);
+                    }
+                    if (handler.bind) {
+                        console.log({ h: handler, l: 'bind' });
+                        handler.bind();
+                    }
                     widgetWrapper.show();
                 });
                 widgetWrapper.hide();
@@ -189,7 +195,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
         });
         if (cached) return widgetWrapper;
         // ... or load it from web
-        if ($$._widgetQueueCount++ == 0)
+        if ($$._componentQueueCount++ == 0)
             $.mobile.loading('show');
         $.ajax({
             url: "ui/" + fieldType + ".html",
@@ -202,7 +208,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                     dataType: 'text',
                     type: 'GET',
                     success: function (jsonData) {
-                        $$._widgetCache.push({ widget: fieldType, html: htmlData, json: jsonData });
+                        $$._compomentCache.push({ widget: fieldType, html: htmlData, json: jsonData });
                         var handler = null;
                         try { handler = jsonData.startsWith('[') ? eval(jsonData)[0] : eval('new function(){ var $$ = this; '+jsonData+' };'); }
                         catch (e) { console.log(e); callback(null); return; }
@@ -217,7 +223,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                         widgetWrapper.hide();
                         widgetWrapper.append(element);
                         element.trigger('create');
-                        if (--$$._widgetQueueCount == 0) {
+                        if (--$$._componentQueueCount == 0) {
                             $.mobile.loading('hide');
                         }
                     },

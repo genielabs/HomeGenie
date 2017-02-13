@@ -37,8 +37,8 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                 if (locationPopup.initialized) {
                     page.find('[data-ui-field="location-picker"]').locationpicker('location', { latitude: $$.Location.latitude, longitude: $$.Location.longitude });
                 } else {
-                    $.cachedScript('http://maps.google.com/maps/api/js?sensor=false&libraries=places').done(function(){
-                        $.cachedScript('js/locationpicker.jquery.js').done(function(){
+                    $.cachedScript('http://maps.google.com/maps/api/js?k'+'ey='+'AIzaSyCSS'+'Msdcyihg'+'UsHWYCwGcGXBS'+'Nu1kWgCGQ'+'&sensor=false&libraries=places').done(function(){
+                        $.getScript('js/locationpicker.jquery.js').done(function(){
                             locationPopup.initialized = true;
                             page.find('[data-ui-field="location-picker"]').locationpicker({
                                 location: { latitude: $$.Location.latitude, longitude: $$.Location.longitude },   
