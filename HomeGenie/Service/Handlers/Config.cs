@@ -39,6 +39,7 @@ using System.Xml.Serialization;
 using Jint.Parser;
 using HomeGenie.Automation.Scripting;
 using MIG.Config;
+using Innovative.SolarCalculator;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -218,7 +219,16 @@ namespace HomeGenie.Service.Handlers
                 }
                 if (migCommand.GetOption(0) == "Location.Get")
                 {
-                    request.ResponseData = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location);
+                    request.ResponseData = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location) as dynamic;
+                    var location = homegenie.ProgramManager.SchedulerService.Location;
+                    var sun = new SolarTimes(DateTime.UtcNow.ToLocalTime(), location["latitude"].Value, location["longitude"].Value);
+                    var sunData = JsonConvert.SerializeObject(sun, Formatting.Indented,
+                        new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, Error = (sender, errorArgs)=>
+                        {
+                            var currentError = errorArgs.ErrorContext.Error.Message;
+                            errorArgs.ErrorContext.Handled = true;
+                        } });
+                    (request.ResponseData as dynamic).sunData = JsonConvert.DeserializeObject(sunData);
                 }
                 else if (migCommand.GetOption(0) == "Service.Restart")
                 {
