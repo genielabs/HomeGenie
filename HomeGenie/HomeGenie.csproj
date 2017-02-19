@@ -207,6 +207,7 @@
     <Compile Include="Service\Handlers\Config.cs" />
     <Compile Include="Service\Handlers\Interconnection.cs" />
     <Compile Include="Service\Handlers\Statistics.cs" />
+    <Compile Include="Service\JsonHelper.cs" />
     <Compile Include="Service\Logging\StatisticsLogger.cs" />
     <Compile Include="Service\UpdateChecker.cs" />
     <Compile Include="Service\Utility.cs" />
