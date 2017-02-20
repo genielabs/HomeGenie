@@ -251,6 +251,14 @@ namespace HomeGenie.Automation.Scheduler
             return match != null && match != DateTime.MinValue;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="dateStart"></param>
+        /// <param name="dateEnd"></param>
+        /// <param name="cronExpression">Cron expression</param>
+        /// <param name="recursionCount"></param>
+        /// <returns></returns>
         public List<DateTime> GetScheduling(DateTime dateStart, DateTime dateEnd, string cronExpression, int recursionCount = 0)
         {
             // align time
@@ -260,7 +268,7 @@ namespace HomeGenie.Automation.Scheduler
             // '[' and ']' are just aestethic alias for '(' and ')'
             cronExpression = cronExpression.Replace("[", "(").Replace("]", ")");
 
-            var specialChars = new[] {'(', ')', ';', ':', ' ', '>', '%'};
+            var specialChars = new[] {'(', ')', ' ', ';', '&', ':', '|', '>', '%', '!'};
             var charIndex = 0;
             var rootEvalNode = new EvalNode();
             var evalNode = rootEvalNode;
@@ -292,10 +300,13 @@ namespace HomeGenie.Automation.Scheduler
                             }
                             break;
 
-                        case ';':
-                        case ':':
-                        case '>':
-                        case '%':
+                        case ';': // AND
+                        case '&': // AND
+                        case ':': // OR
+                        case '|': // OR
+                        case '>': // TO
+                        case '%': // NOT
+                        case '!': // NOT
                             // collect operator and switch to next node
                             evalNode.Operator = token.ToString();
                             evalNode.Sibling = new EvalNode {Parent = evalNode.Parent};
@@ -309,7 +320,7 @@ namespace HomeGenie.Automation.Scheduler
 
                 var currentExpression = token.ToString();
                 charIndex++;
-                while (charIndex < cronExpression.Length)
+                while (charIndex < cronExpression.Length) // collecting plain cron expression
                 {
                     token = cronExpression[charIndex];
                     if (specialChars.Except(new []{' '}).Contains(token))
@@ -442,16 +453,16 @@ namespace HomeGenie.Automation.Scheduler
             }                
             if (currentNode.Sibling != null && currentNode.Operator != null)
             {
-                if (currentNode.Operator == ":")
+                if (currentNode.Operator == ":" || currentNode.Operator == "|")
                 {
                     occurs.AddRange(EvalNodes(currentNode.Sibling));
                 }
-                else if (currentNode.Operator == "%")
+                else if (currentNode.Operator == "%" || currentNode.Operator == "!")
                 {
                     var matchList = EvalNodes(currentNode.Sibling);
                     occurs = occurs.Except(matchList).ToList();
                 }
-                else if (currentNode.Operator == ";")
+                else if (currentNode.Operator == ";" || currentNode.Operator == "&")
                 {
                     var matchList = EvalNodes(currentNode.Sibling);
                     //occurs.RemoveAll(dt => !matchList.Contains(dt));
