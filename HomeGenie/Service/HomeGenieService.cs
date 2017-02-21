@@ -40,6 +40,7 @@ using HomeGenie.Automation.Scheduler;
 
 using MIG;
 using MIG.Gateways;
+using NLog;
 
 namespace HomeGenie.Service
 {
@@ -47,6 +48,8 @@ namespace HomeGenie.Service
     public class HomeGenieService
     {
         #region Private Fields declaration
+
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         private MigService migService;
         private WebServiceGateway webGateway;
@@ -1433,7 +1436,7 @@ namespace HomeGenie.Service
                 {
                     systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
                     // setup logging
-                    if (!String.IsNullOrEmpty(systemConfiguration.HomeGenie.EnableLogFile) && systemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true"))
+                    if (!string.IsNullOrEmpty(systemConfiguration.HomeGenie.EnableLogFile) && systemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true"))
                     {
                         SystemLogger.Instance.OpenLog();
                     }
@@ -1450,13 +1453,12 @@ namespace HomeGenie.Service
                     {
                         try
                         {
-                            if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
-                                    parameter.Value,
-                                    GetPassPhrase()
-                                );
+                            if (!string.IsNullOrEmpty(parameter.Value))
+                                parameter.Value = StringCipher.Decrypt(parameter.Value, GetPassPhrase());
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            _log.Error(ex);
                         }
                     }
                 }
