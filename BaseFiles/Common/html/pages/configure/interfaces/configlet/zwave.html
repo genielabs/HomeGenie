@@ -331,7 +331,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
     },
 
     ZWaveUpdateP1Db: function() {
-        var p1archive = encodeURIComponent('http://pepper1.net/zwavedb/device/export/device_archive.zip');
+        var p1archive = encodeURIComponent('https://genielabs.github.io/HomeGenie/_hg_files/zwave/pepper1_device_archive.zip');
         $.mobile.loading('show', {text: 'Updating Pepper1 DB...', textVisible: true});
         $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Db.Update/' + p1archive, function (data) { 
             $.mobile.loading('hide');
