@@ -661,10 +661,14 @@ div.ui-page-theme-a div.ui-body-inherit img.auto-invert, div.ui-bar-inherit img.
     text-align: center;
 }
 
-    .hg-wizard-grid-linenumber:hover {
-        background-color: limegreen;
-        cursor: pointer;
-    }
+.hg-wizard-grid-linenumber:hover {
+    background-color: limegreen;
+    cursor: pointer;
+}
+
+.hg-scheduler-table-row {
+    margin-left: -20px;
+}
 
 #page_automation_editprogram label {
     font-weight: bold;

@@ -637,6 +637,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 //
                 $('#automation_programname').val(HG.WebApp.ProgramEdit._CurrentProgram.Name);
                 $('#automation_programdescription').val(HG.WebApp.ProgramEdit._CurrentProgram.Description);
+                $('#automation_program_autorestartenabled').val(HG.WebApp.ProgramEdit._CurrentProgram.AutoRestartEnabled);
                 //
                 $('#automation_programgroup').val(HG.WebApp.ProgramEdit._CurrentProgram.Group);
                 $('#automation_programgroup').selectmenu().selectmenu('refresh');

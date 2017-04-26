@@ -69,7 +69,7 @@
         "Отмена",
     "configure_group_deleteconfirm": 
         "Удалить",
-    "configure_module_newmoduleadd": 
+    "configure_group_addmodule": 
         "Добавить новый модуль",
     "configure_module_newmodulecancel": 
         "Отмена",
@@ -296,7 +296,7 @@
     "configure_grouplist": 
         "Список групп",
     "configure_schedulerservice_title": 
-        "Планирование<br />событий",
+        "Планирование событий",
     "configure_scheduler_events": 
         "События планировщика",
     "configure_schedulerservice_bottombar_event_add": 
@@ -811,6 +811,8 @@
         "Calendar View",
     "no_device_found_for_manufacturerId":
         "В базе данных нет информации об устройстве с manufacturer ID",
+    "configure_program_autorestart":
+        "Перезапускать программу в случае её крэша",
 "##":
 "## COMMON LOCALES",
 "##":

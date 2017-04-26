@@ -374,11 +374,12 @@ namespace HomeGenie.Service.Handlers
                     }
                     else
                     {
-                        bool typeChanged = (currentProgram.Type.ToLower() != newProgram.Type.ToLower());
+                        var typeChanged = !string.Equals(currentProgram.Type, newProgram.Type, StringComparison.CurrentCultureIgnoreCase);
                         currentProgram.Type = newProgram.Type;
                         currentProgram.Group = newProgram.Group;
                         currentProgram.Name = newProgram.Name;
                         currentProgram.Description = newProgram.Description;
+                        currentProgram.AutoRestartEnabled = newProgram.AutoRestartEnabled;
                         if (typeChanged)
                             currentProgram.Engine.SetHost(homegenie);
                         currentProgram.IsEnabled = newProgram.IsEnabled;

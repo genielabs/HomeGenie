@@ -69,8 +69,10 @@
          "Cancel",
     "configure_group_deleteconfirm":
          "Delete",
-    "configure_module_newmoduleadd":
+    "configure_group_addmodule":
          "Add New Module",
+	 "configure_automation_group_modulechoose_desc":
+			"Tap a module to add it.",
     "configure_module_newmodulecancel":
          "Cancel",
     "configure_module_newmoduleconfirm":
@@ -809,6 +811,8 @@
         "Calendar View",
     "no_device_found_for_manufacturerId":
         "No device info was found for manufacturer ID",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
 "##":
 "## COMMON LOCALES",
 "##":

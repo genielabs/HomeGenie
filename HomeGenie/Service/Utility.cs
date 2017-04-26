@@ -135,12 +135,12 @@ namespace HomeGenie.Service
                 return null;
             return ModuleParameterGet(module.Properties, propertyName);
         }
-        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter>  parameters, string propertyName)
+
+        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter> parameters, string propertyName)
         {
-            return parameters.Find(delegate(ModuleParameter parameter){
-                return parameter.Name == propertyName;
-            });
+            return parameters.Find(x => x.Name == propertyName);
         }
+
         public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
         {
             if (module == null)

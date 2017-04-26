@@ -21,20 +21,8 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.IO;
-using System.Globalization;
-
 using HomeGenie.Service;
-using Raspberry;
-
-using Newtonsoft.Json;
-using System.Diagnostics;
 using HomeGenie.Service.Constants;
-using HomeGenie.Service.Logging;
 using MIG;
 
 namespace HomeGenie

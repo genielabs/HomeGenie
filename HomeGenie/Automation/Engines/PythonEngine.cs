@@ -54,13 +54,13 @@ namespace HomeGenie.Automation.Engines
         {
             Unload();
 
-            if (homegenie == null)
+            if (Homegenie == null)
                 return false;
 
             scriptEngine = Python.CreateEngine();
 
             hgScriptingHost = new ScriptingHost();
-            hgScriptingHost.SetHost(homegenie, programBlock.Address);
+            hgScriptingHost.SetHost(Homegenie, ProgramBlock.Address);
             dynamic scope = scriptScope = scriptEngine.CreateScope();
             scope.hg = hgScriptingHost;
 
@@ -70,13 +70,13 @@ namespace HomeGenie.Automation.Engines
         public MethodRunResult EvaluateCondition()
         {
             MethodRunResult result = null;
-            string pythonScript = programBlock.ScriptCondition;
+            string pythonScript = ProgramBlock.ScriptCondition;
             result = new MethodRunResult();
             try
             {
                 var sh = (scriptScope as dynamic).hg as ScriptingHost;
                 scriptEngine.Execute(pythonScript, scriptScope);
-                result.ReturnValue = sh.executeProgramCode || programBlock.WillRun;
+                result.ReturnValue = sh.ExecuteProgramCode || ProgramBlock.WillRun;
             }
             catch (Exception e)
             {
@@ -88,7 +88,7 @@ namespace HomeGenie.Automation.Engines
         public MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
-            string pythonScript = programBlock.ScriptSource;
+            string pythonScript = ProgramBlock.ScriptSource;
             result = new MethodRunResult();
             try
             {
@@ -110,7 +110,7 @@ namespace HomeGenie.Automation.Engines
         public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
-                CodeBlock = isTriggerBlock ? "TC" : "CR",
+                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",
@@ -131,12 +131,12 @@ namespace HomeGenie.Automation.Engines
             List<ProgramError> errors = new List<ProgramError>();
 
             var engine = Python.CreateEngine();
-            var source = scriptEngine.CreateScriptSourceFromString(programBlock.ScriptCondition);
-            var errorListener = new ScriptEngineErrors("TC");
+            var source = scriptEngine.CreateScriptSourceFromString(ProgramBlock.ScriptCondition);
+            var errorListener = new ScriptEngineErrors(CodeBlockEnum.TC);
             source.Compile(errorListener);
             errors.AddRange(errorListener.Errors);
-            errorListener = new ScriptEngineErrors("CR");
-            source = scriptEngine.CreateScriptSourceFromString(programBlock.ScriptSource);
+            errorListener = new ScriptEngineErrors(CodeBlockEnum.CR);
+            source = scriptEngine.CreateScriptSourceFromString(ProgramBlock.ScriptSource);
             source.Compile(errorListener);
             errors.AddRange(errorListener.Errors);
             engine.Runtime.Shutdown();
