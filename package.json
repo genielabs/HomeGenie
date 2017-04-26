@@ -1,0 +1,30 @@
+{
+  "name": "homegenie-docs",
+  "version": "1.1.525",
+  "description": "HomeGenie documentation site.",
+  "author": "Generoso Martello <gene@homegenie.it>",
+  "contributors": [],
+  "bin": {},
+  "scripts": {
+    "test": "echo \"Error: not implemented\" && exit 1",
+    "start": "http-server html/"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "npm-cli": "^0.1.0",
+    "zuix": "^0.4.9-6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/genielabs/HomeGenie"
+  },
+  "keywords": [
+    "HomeGenie",
+    "documentation",
+    "home automation server",
+    "open source",
+    "web"
+  ],
+  "license": "Apache-2.0"
+}
