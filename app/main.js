@@ -62,6 +62,7 @@ function showPage(path) {
             makeScrollable(pageContext.view());
             zuix.field('content_pages')
                 .append(pageContext.view());
+            zuix.componentize(pageContext.view());
         }
         revealPage(pageContext);
     });
@@ -180,6 +181,15 @@ var contentTree = {
                     }
                 },
                 {
+                    id: 'remotes',
+                    template: 'app/layout/drawer_menu_subitem',
+                    data: {
+                        title: 'IR/RF remotes',
+                        link: '#/docs/remotes',
+                        file: 'app/content/docs/remotes.md'
+                    }
+                },
+                {
                     id: 'scheduler',
                     template: 'app/layout/drawer_menu_subitem',
                     data: {
@@ -195,15 +205,6 @@ var contentTree = {
                         title: 'UPnP/DLNA',
                         link: '#/docs/upnp_dlna',
                         file: 'app/content/docs/upnp_dlna.md'
-                    }
-                },
-                {
-                    id: 'remotes',
-                    template: 'app/layout/drawer_menu_subitem',
-                    data: {
-                        title: 'IR/RF remotes',
-                        link: '#/docs/remotes',
-                        file: 'app/content/docs/remotes.md'
                     }
                 },
                 {
@@ -272,6 +273,15 @@ var contentTree = {
                 title: 'Source',
                 icon: 'view_headline',
                 link: 'https://github.com/genielabs/HomeGenie'
+            }
+        },
+        {
+            id: 'partners',
+            template: 'app/layout/drawer_menu_item',
+            data: {
+                title: 'For vendors',
+                icon: 'business_center',
+                link: '#'
             }
         }/*,
         {
