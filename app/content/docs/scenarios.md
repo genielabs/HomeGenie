@@ -38,6 +38,8 @@ There are different ways in which a script can be performed:
 case it will appear as a button that can be pressed to run/stop it
 - it can be automatically performed when certain conditions occurs
 
-[VIDEO: RECORD MACRO, WIZARD SCRIPT, MODULE BUTTON, MOTION DETECTION TRIGGER]
+<div class="content-margin" align="center">
+    <iframe self="size-medium" height="440" src="https://www.youtube.com/embed/zwqJ3YeqOTc?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 <br/>

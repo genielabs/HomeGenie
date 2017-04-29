@@ -1,33 +1,21 @@
-## RF and InfraRed Remote Control
+## IR and RF Remote Control
 
-### Controlling HomeGenie with a remote control
+Even if a phone or tablet can be used to remote control *HomeGenie*, a RF/IR remote
+is still a quick and comfortable way for controlling devices.
 
-It's true, today many people own a mobile device such as smartphones and tablets.
-But what we will really find in almost every house is the old good infrared remote control.
-These are easy to use for everyone and are very cheap. So why not using one of these
-for programming and controlling our home automation system?
+HomeGenie support X10 RF remotes and IR controller/remotes supported by [LIRC](http://www.lirc.org/)
+or other IR gateways that can be found in the *Package Manager*.
 
-[IMAGE ADDING IR REMOTE IN CONFIG]
+See the video at the end of in the [Setup](#/setup) page for instruction on
+installing additional drivers though the *Package Manager*.
 
-As shown in the picture above, we can setup the IR remote control in HomeGenie from the
-Configure->Settings section by enabling the LIRC Infrared Remotes interface and by adding
-our remote model to the configuration. 
-
-Once configured, HomeGenie will be able to receive events from the IR remote.
-So, now, we can create automation scripts triggered by remote control buttons,
-simply by adding a new Wizard Script and by capturing the code of the desired
-IR button as shown in the example below.
+The video below shows how to use an infrared remote to control lights and switches.
 
 <div class="content-margin" align="center">
     <iframe self="size-medium" height="440" src="https://www.youtube.com/embed/f_uywgXmAwk?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-Note that the InfraRed control feature is currently available only for Linux and other
-standard LIRC capable systems. It is currently not supported in Windows.
-
-X10 RF control is indeed available for all OS.
-
-#### LIRC configuration
+#### Troubleshooting LIRC in Linux, Raspberry & co.
 
 To enable IR remote control edit the /etc/lirc/hardware.conf file: 
 
