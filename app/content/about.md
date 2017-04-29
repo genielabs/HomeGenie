@@ -26,7 +26,7 @@ improving of functionality, adding new widgets or integrating
 new devices/services, can be done directly from the web user interface.
 
 <div class="media-container">
-    <img self="size-medium" src="https://lh3.googleusercontent.com/i_DtXr1NEVuA1J4CLpC1_GHsY9zUHFMUCM2CQUoN4vn028zP6vQ3kCwAfMdX7ULKOA_LuKb9oiwqaq6xk3ROyNrv0h88iDieR5bMV96oAExtyF2kOIBih0qhEwkX3e-vJaOZxgyanc_vNiZZUvTFews0L94AQcSVQxUsLBQxuZcK9FuE03-tkDhNQFxX-Hxv4CNQgeJ5W-H_9huh8WzyA9W6GlNgkJ8DaAdn1Bw1VJwj7w-9lo-evUYrNHcWDw1oWwkzYdpO5HJEtpHM0-Dl56R2GeO62ZKNAW0HOvopCWF0yKQtuzJ3DOecHuV8_hoZghnh6PGBERtZwk9_bVbfIrO7pUJW9F8WeUU9txWfRiMgerMqGc9lMZqgt7st3vq_NAnzadMg3dMDjx2LfzfREEjRwm6Oi-wPuAsSc9ZFHseW6qPiyfhKhMJmscZhxWFzCyywo_69tB5LaGXS_1z9ZB9CxefqXynheq9JDiaXQo88_ppVWulXSKMujmAKQcIFbgRjx8DxZlkMxspGhp49cY0cSBQy2eRin-AZVCbDGV4=w1172-h783-no" />
+    <img self="size-medium" src="images/docs/program_editor_01.png" />
 </div>
 
 Already many additional widgets, drivers and automation programs are available
