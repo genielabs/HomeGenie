@@ -40,8 +40,11 @@ through the *Package Repository* that can be browsed from the web interface.
 ### Single Board Computers and GPIO/I2C/SPI support
 
 *HomeGenie* can be installed in a few steps on most popular and inexpensive Single Board Computers
-such as *Raspberry Pi*. The [Program](#/programs.md) editor and its API support **GPIO**/**I2C**/**SPI**
+such as *Raspberry Pi*.
+
+The [Program Editor](#/develop/programs) and its API support **GPIO**/**I2C**/**SPI**
 hardware programming.
+
 Applications and useful widgets can be found in the *SBC* section of the
 <a href="https://github.com/genielabs/homegenie-packages/tree/master/packages/Single%20Board%20Computers/Raspberry%20Pi">Package Repository</a>.
 
@@ -60,5 +63,5 @@ HomeGenie server source code is publicly available on GitHub.
 #### HomeGenie Server software diagram
 
 <div class="media-container">
-    <img self="size-medium" src="https://raw.githubusercontent.com/genielabs/HomeGenie/master/HomeGenie_Diagram.png" />
+    <img self="size-xlarge" src="https://raw.githubusercontent.com/genielabs/HomeGenie/master/HomeGenie_Diagram.png" />
 </div>

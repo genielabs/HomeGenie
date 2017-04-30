@@ -1,4 +1,4 @@
-## IR and RF Remote Control
+## IR and RF remotes
 
 Even if a phone or tablet can be used to remote control *HomeGenie*, a RF/IR remote
 is still a quick and comfortable way for controlling devices.

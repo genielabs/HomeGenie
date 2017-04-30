@@ -42,4 +42,6 @@ case it will appear as a button that can be pressed to run/stop it
     <iframe self="size-medium" height="440" src="https://www.youtube.com/embed/zwqJ3YeqOTc?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
+See the above *How-To* video for further information. 
+
 <br/>

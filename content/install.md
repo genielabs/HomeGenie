@@ -126,5 +126,3 @@ cd homegenie
 
 You can now start using HomeGenie opening the following URL in your web browser:
 `http://<server_address>/` (where `<server_address>` is the name or ip of the host where HomeGenie was installed).
-
-**Note:** *HomeGenie requires mono runtime version 3.2 or later.*

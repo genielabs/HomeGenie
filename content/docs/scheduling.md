@@ -1,4 +1,41 @@
-## The Scheduler
+## Scheduling
+
+With the *Scheduler*, which is available from the *Configure* menu, 
+*HomeGenie* can be programmed to take some actions on time based occurrences.
+
+The main *Scheduler* page is the calendar view that shows programmed events
+for the day. By clicking the date text, we can choose a different
+date so to display programmed events for any given day.
+
+<div class="media-container">
+    <img self="size-medium" src="images/docs/scheduler_calendar_01.png">
+</div>
+
+The time-line of an event will have a yellow bar to indicate the time ranges
+where the event occurs. If it's grayed out it means that the occurrence is
+in the future and has not occurred yet. Passing the pointer over it
+will display a popup with a summary of the event and its last/next
+occurrence (see above picture). 
+
+It can also have some indicators on the right:
+
+&nbsp;&nbsp; <i class="material-icons bigger">code</i> a script is associated with the event
+
+&nbsp;&nbsp; <i class="material-icons bigger">check_box</i> number of modules bound to the event
+
+[... // TODO: ...]
+
+
+### Event scheduling
+
+There are various types of events. The most simple event is the one which
+has a single occurrence, a given day at a given time, for example:
+April 30th 2017 at 9pm.
+
+But we can also define a recurring event, or an event that combines with
+other events.
+
+All these kind of events can be defined using the *Cron event Wizard*.
 
 <div class="media-container">
     <img self="size-medium" src="images/docs/scheduler_wizard_01.png">
@@ -6,13 +43,27 @@
 
 ( `//TODO: show how to use the scheduler wizard and its options` )
 
-{: .center}
-... **TODO** ...
 
+#### Occurrences
 
-### Cron expressions
-
+... [naming convention, multiple occurrences, ... ]
+ 
 Another way to define event occurrences (schedules) is by using cron expressions. 
+...
+
+
+#### Modules
+
+...
+
+
+#### Script 
+
+...
+
+
+
+### About cron expressions
 
 Cron expressions are strings that are actually made up of five sub-expressions, that describe individual details of the schedule. These sub-expressions are separated with white-space, and represent:
 
@@ -61,14 +112,10 @@ The '/' character can be used to specify increments to values. For example, if y
 
 Cron expressions can also be grouped using parenthesis and combined using the following operators:
 
-
-` ; ` &nbsp; *AND*
-
-` : ` &nbsp; *OR*
-
-` > ` &nbsp; *UNTIL* (time range, 'from' > 'to')
-
-` % ` &nbsp; *EXCEPT*
+- ` ; ` &nbsp; *AND*
+- ` : ` &nbsp; *OR*
+- ` > ` &nbsp; *UNTIL* (time range, 'from' > 'to')
+- ` % ` &nbsp; *EXCEPT*
 
 
 **Example 5** From 11:20PM to 3:15AM
@@ -89,3 +136,7 @@ Cron expressions can also be grouped using parenthesis and combined using the fo
 ((20 23 * * *) : (15 3 * * *)) ; (* * * 1,12 0,2)
 ```
 
+
+### Cron variables
+
+[ // TODO: explain how to use cron variables - eg. @Holidays.Winter, or built-in eg: SolarTimes....]
