@@ -84,7 +84,7 @@ var contentTree = {
                         link: '#/docs/scheduling',
                         file: 'content/docs/scheduling.md'
                     }
-                },
+                }/*,
                 {
                     id: 'upnp_dlna',
                     template: 'app/layout/drawer_menu_subitem',
@@ -102,7 +102,7 @@ var contentTree = {
                         link: '#/docs/interconnect',
                         file: 'content/docs/interconnect.md'
                     }
-                }
+                }*/
             ]
         },
         {
@@ -161,26 +161,34 @@ var contentTree = {
                 icon: 'view_headline',
                 link: 'https://github.com/genielabs/HomeGenie'
             }
+        },
+        {
+            id: 'community',
+            template: 'app/layout/drawer_menu_item',
+            data: {
+                title: 'Community', // System Integrators
+                icon: 'group',
+                link: 'https://plus.google.com/communities/116563910167155544886'
+            }
         }/*,
-         {
-         id: 'partners',
-         template: 'app/layout/drawer_menu_item',
-         data: {
-         title: 'For vendors',
-         icon: 'business_center',
-         link: '#'
-         }
+        {
+             id: 'partners',
+             template: 'app/layout/drawer_menu_item',
+             data: {
+                 title: 'Vendors/S.I.', // System Integrators
+                 icon: 'business_center',
+                 link: '#'
+             }
          },
          {
-         id: 'archive',
-         template: 'app/layout/drawer_menu_item',
-         data: {
-         title: 'Archived',
-         icon: 'archive',
-         link: '#'
-         }
+             id: 'archive',
+             template: 'app/layout/drawer_menu_item',
+             data: {
+                 title: 'Archived',
+                 icon: 'archive',
+                 link: '#'
+             }
          }*/
-
     ]
 
 };

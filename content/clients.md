@@ -71,7 +71,7 @@ Feel free to submit any issue or feature request using the following link:
 
 ## Open Source client for Android
 
-The open source client for Android and Windows Phone is meant to be a quick shortcut for accessing your HomeGenie server. This is still intended
+The open source client for Android and Windows Phone are meant to be a quick shortcut for accessing your HomeGenie server. This is still intended
 to be used for administration and testing purposes as it will give full access to HomeGenie server.
 
 
