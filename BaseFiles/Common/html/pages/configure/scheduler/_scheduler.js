@@ -153,12 +153,13 @@
             var w = $(window).width()-32-50, h = 10;
             $.each(occurrences, function(k,v){
                 if (v.separator) {
-                    occursList.append('<div align="center" style="margin-top:1em;padding:0.25em;width:auto;font-size:18pt">'+v.title+'</div>');
+                    occursList.append('<div align="center" style="margin-top:1em;padding:0.25em;width:auto;font-size:16pt">'+v.title+'</div>');
                     return true;
                 }
 
                 var timeBarDiv = $('<div/>');
                 timeBarDiv.css('cursor', 'pointer');
+                timeBarDiv.addClass('hg-scheduler-table-row');
                 timeBarDiv.on('click',function(){
                     $$._CurrentEventName = v.name;
                     $$._CurrentEventIndex = v.index;
@@ -176,7 +177,7 @@
                     stroke: "rgb(0,0,0)",
                     "stroke-width": 1
                 });
-                occursList.append('<div class="ui-grid-a"><div class="ui-block-a"><h2 style="text-align:left;margin:0;margin-top:0.5em;opacity:0.75">'+v.title+'</h2></div><div class="ui-block-b" align="right" style="padding-right:48px;padding-top:20px">'+indicators+'</div></div>');
+                occursList.append('<div class="ui-grid-a"><div class="ui-block-a"><h3 style="text-align:left;margin:0;margin-top:0.5em;opacity:0.75">'+v.title+'</h3></div><div class="ui-block-b" align="right" style="padding-right:48px;padding-top:20px">'+indicators+'</div></div>');
                 occursList.append(timeBarDiv);
 
                 $.each(v.occurs, function(kk,vv){

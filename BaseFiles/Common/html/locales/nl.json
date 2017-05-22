@@ -69,7 +69,7 @@
         "Afbreken",
     "configure_group_deleteconfirm":
         "Verwijderen",
-    "configure_module_newmoduleadd":
+    "configure_group_addmodule":
         "Nieuwe module toevoegen",
     "configure_module_newmodulecancel":
         "Afbreken",
@@ -871,6 +871,8 @@
         "Module",
     "common_command_modules":
         "Modules",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
 "##":
 "## SIDE MENU LOCALES",
 "##":

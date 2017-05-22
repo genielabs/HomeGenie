@@ -69,7 +69,7 @@
         "Annuler",
     "configure_group_deleteconfirm":
         "Supprimer",
-    "configure_module_newmoduleadd":
+    "configure_group_addmodule":
         "Ajouter un Module",
     "configure_module_newmodulecancel":
         "Annuler",
@@ -807,6 +807,8 @@
         "Calendar View",
     "no_device_found_for_manufacturerId":
         "No device info was found for manufacturer ID",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
 "##":
 "## COMMON LOCALES",
 "##":

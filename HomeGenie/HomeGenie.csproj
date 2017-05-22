@@ -179,9 +179,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
+    <Compile Include="Automation\ProgramError.cs" />
     <Compile Include="Automation\ProgramFeature.cs" />
     <Compile Include="Automation\Scheduler\SchedulerItem.cs" />
     <Compile Include="Automation\Scheduler\SchedulerService.cs" />
+    <Compile Include="Automation\ScriptEngineErrors.cs" />
+    <Compile Include="Automation\Scripting\CodeBlockEnum.cs" />
+    <Compile Include="Automation\Scripting\MethodRunResult.cs" />
     <Compile Include="Automation\Scripting\ScriptingHost.cs" />
     <Compile Include="Automation\Scripting\ModuleHelper.cs" />
     <Compile Include="Automation\Scripting\ModulesManager.cs" />
@@ -203,6 +207,7 @@
     <Compile Include="Service\Handlers\Config.cs" />
     <Compile Include="Service\Handlers\Interconnection.cs" />
     <Compile Include="Service\Handlers\Statistics.cs" />
+    <Compile Include="Service\JsonHelper.cs" />
     <Compile Include="Service\Logging\StatisticsLogger.cs" />
     <Compile Include="Service\UpdateChecker.cs" />
     <Compile Include="Service\Utility.cs" />

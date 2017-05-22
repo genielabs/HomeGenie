@@ -124,10 +124,6 @@ namespace HomeGenie.Data
 
         public string EnableLogFile { get; set; }
 
-        public HomeGenieConfiguration()
-        {
-        }
-
         [Serializable()]
         public class StatisticsConfiguration
         {

@@ -48,7 +48,7 @@ namespace HomeGenie.Automation.Engines
 
         public bool Load()
         {
-            if (homegenie == null)
+            if (Homegenie == null)
                 return false;
 
             if (hgScriptingHost != null)
@@ -57,7 +57,7 @@ namespace HomeGenie.Automation.Engines
                 hgScriptingHost = null;
             }
             hgScriptingHost = new ScriptingHost();
-            hgScriptingHost.SetHost(homegenie, programBlock.Address);
+            hgScriptingHost.SetHost(Homegenie, ProgramBlock.Address);
 
             return true;
         }
@@ -68,7 +68,7 @@ namespace HomeGenie.Automation.Engines
             result = new MethodRunResult();
             try
             {
-                result.ReturnValue = EvaluateCondition(programBlock.Conditions);
+                result.ReturnValue = EvaluateCondition(ProgramBlock.Conditions);
             }
             catch (Exception e)
             {
@@ -82,7 +82,7 @@ namespace HomeGenie.Automation.Engines
             var result = new MethodRunResult();
             try
             {
-                ExecuteScript(programBlock.Commands);
+                ExecuteScript(ProgramBlock.Commands);
             }
             catch (Exception e)
             {
@@ -100,7 +100,7 @@ namespace HomeGenie.Automation.Engines
         public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
-                CodeBlock = isTriggerBlock ? "TC" : "CR",
+                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",
@@ -183,10 +183,10 @@ namespace HomeGenie.Automation.Engines
                             break;
                         case "Program.Run":
                             string programId = commands[x].CommandArguments;
-                            var programToRun = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+                            var programToRun = Homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
                             if (programToRun != null /*&& programToRun.Address != program.Address*/ && !programToRun.IsRunning)
                             {
-                                homegenie.ProgramManager.Run(programToRun, "");
+                                Homegenie.ProgramManager.Run(programToRun, "");
                             }
                             break;
                         case "Program.WaitFor":
@@ -209,7 +209,7 @@ namespace HomeGenie.Automation.Engines
                         default:
                             var programCommand = commands[x];
                             string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
-                            homegenie.ExecuteAutomationRequest(new MigInterfaceCommand(wrequest));
+                            Homegenie.ExecuteAutomationRequest(new MigInterfaceCommand(wrequest));
                             break;
                         }
                         //
@@ -232,7 +232,7 @@ namespace HomeGenie.Automation.Engines
             //
             if (c.Domain == Domains.HomeAutomation_HomeGenie && (c.Target == SourceModule.Scheduler || c.Target == SourceModule.Automation) && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
             {
-                return homegenie.ProgramManager.SchedulerService.IsScheduling(DateTime.Now, c.ComparisonValue);
+                return Homegenie.ProgramManager.SchedulerService.IsScheduling(DateTime.Now, c.ComparisonValue);
             }
             //
             // if the comparison value starts with ":", then the value is read from another module property
@@ -247,11 +247,11 @@ namespace HomeGenie.Automation.Engines
                     string domain = propertyPath[0];
                     string address = propertyPath[1];
                     string propertyName = propertyPath[2];
-                    var targetModule = homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
+                    var targetModule = Homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
                     if (targetModule == null)
                     {
                         // abbreviated path, eg: ":X10/B3/Level"
-                        targetModule = homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
+                        targetModule = Homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
                     }
                     //
                     if (targetModule != null)
@@ -320,7 +320,7 @@ namespace HomeGenie.Automation.Engines
             }
             else
             {
-                Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
+                Module module = Homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
                 if (module != null)
                     parameter = module.Properties.Find(mp => mp.Name == c.Property);
             }
@@ -365,7 +365,7 @@ namespace HomeGenie.Automation.Engines
         {
             string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
             var interfaceCommand = new MigInterfaceCommand(command);
-            homegenie.InterfaceControl(interfaceCommand);
+            Homegenie.InterfaceControl(interfaceCommand);
         }
     }
 }
