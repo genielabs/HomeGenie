@@ -204,6 +204,10 @@ namespace HomeGenie.Automation.Scripting
                             textBuffer = lines[lines.Length - 1];
                         }
                     }
+                    else
+                    {
+                        textBuffer = textMessage;
+                    }
                 }
             }
         }
