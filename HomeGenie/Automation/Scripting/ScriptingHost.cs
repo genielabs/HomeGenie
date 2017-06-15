@@ -27,9 +27,7 @@ using NLog;
 /*! \mainpage Extend, customize, create!
  *
  * \section docs HomeGenie Documentation
- * \subsection doc_1 User Guide
- * <a href="http://www.homegenie.it/docs/quickstart.php">http://www.homegenie.it/docs/quickstart.php</a>
- * \subsection doc_2 Automation Programming and API
+ * 
  * <a href="http://genielabs.github.io/HomeGenie">http://genielabs.github.io/HomeGenie</a>
  * 
  */

@@ -2094,11 +2094,8 @@ while (Program.IsRunning &amp;&amp; MqttIsConnected) Pause(1);</ScriptSource>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
-    <Description>Publish modules over an MQTT network.
-This is similar to "events forwarding" programs, used for connecting homegenie servers each other, but it relays on an external MQTT service (http://mosquitto.org/).
-To publish a module over the MQTT network, activate "Publish module on MQTT" option on it. 
-Other HomeGenie servers will automatically discover the published module once an event is generated from it.
-Supports full control/scripting of remote modules, just like a standard local module.</Description>
+    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+Other servers will automatically inherit the published module once an event is generated from it.</Description>
     <Group>Interconnections</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
