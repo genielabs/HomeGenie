@@ -727,38 +727,14 @@ namespace HomeGenie.Service
             {
                 namePrefix = ""; // default fallback to Control Groups groups.xml - no prefix
             }
-            //
-            bool success = false;
-            try
-            {
-                string filePath = Path.Combine(
-                                      AppDomain.CurrentDomain.BaseDirectory,
-                                      namePrefix.ToLower() + "groups.xml"
-                                  );
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-                var settings = new System.Xml.XmlWriterSettings();
-                settings.Indent = true;
-                settings.Encoding = Encoding.UTF8;
-                var serializer = new System.Xml.Serialization.XmlSerializer(groups.GetType());
-                var writer = System.Xml.XmlWriter.Create(filePath, settings);
-                serializer.Serialize(writer, groups);
-                writer.Close();
-                //
-                success = true;
-            }
-            catch
-            {
-            }
-            return success;
+
+            var filename = namePrefix.ToLower() + "groups.xml";
+            return UpdateXmlDatabase(groups, filename);
         }
 
         public bool UpdateModulesDatabase()
         {
             var success = false;
-            XmlWriter writer = null;
             modules_RefreshAll();
             lock (systemModules.LockObject)
             {
@@ -782,25 +758,12 @@ namespace HomeGenie.Service
                         }
                     }
 
-                    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml");
-                    File.Delete(filePath);
-
-                    var settings = new XmlWriterSettings {Indent = true};
-                    var serializer = new XmlSerializer(clonedModules.GetType());
-                    writer = XmlWriter.Create(filePath, settings);
-                    serializer.Serialize(writer, clonedModules);
-                    writer.Flush();
-                    success = true;
+                    success = UpdateXmlDatabase(clonedModules, "modules.xml");
                 }
                 catch (Exception ex)
                 {
                     LogError(Domains.HomeAutomation_HomeGenie, "UpdateModulesDatabase()", ex.Message,
                         "Exception.StackTrace", ex.StackTrace);
-                }
-                finally
-                {
-                    if (writer != null)
-                        writer.Close();
                 }
             }
             return success;
@@ -808,52 +771,43 @@ namespace HomeGenie.Service
 
         public bool UpdateProgramsDatabase()
         {
-            bool success = false;
-            try
-            {
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs.xml");
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-                var settings = new System.Xml.XmlWriterSettings();
-                settings.Indent = true;
-                settings.Encoding = Encoding.UTF8;
-                var serializer = new System.Xml.Serialization.XmlSerializer(masterControlProgram.Programs.GetType());
-                var writer = System.Xml.XmlWriter.Create(filePath, settings);
-                serializer.Serialize(writer, masterControlProgram.Programs);
-                writer.Close();
-
-                success = true;
-            }
-            catch
-            {
-            }
-            return success;
+            return UpdateXmlDatabase(masterControlProgram.Programs, "programs.xml");
         }
 
         public bool UpdateSchedulerDatabase()
         {
-            bool success = false;
+            return UpdateXmlDatabase(masterControlProgram.SchedulerService.Items, "scheduler.xml");
+        }
+
+        private static bool UpdateXmlDatabase<T>(T items, string filename)
+        {
+            var success = false;
+            XmlWriter writer = null;
             try
             {
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml");
+                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
                 if (File.Exists(filePath))
-                {
                     File.Delete(filePath);
-                }
-                var settings = new System.Xml.XmlWriterSettings();
-                settings.Indent = true;
-                settings.Encoding = Encoding.UTF8;
-                var serializer = new System.Xml.Serialization.XmlSerializer(masterControlProgram.SchedulerService.Items.GetType());
-                var writer = System.Xml.XmlWriter.Create(filePath, settings);
-                serializer.Serialize(writer, masterControlProgram.SchedulerService.Items);
-                writer.Close();
 
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    Encoding = Encoding.UTF8
+                };
+                var serializer = new XmlSerializer(typeof(T));
+                writer = XmlWriter.Create(filePath, settings);
+                serializer.Serialize(writer, items);
+                writer.Flush();
                 success = true;
             }
-            catch
+            catch (Exception e)
             {
+                LogError(Domains.HomeAutomation_HomeGenie, string.Format("UpdateXmlDatabase<{0}>()", typeof(T).FullName), e.Message, "StackTrace", e.StackTrace);
+            }
+            finally
+            {
+                if(writer != null)
+                    writer.Close();
             }
             return success;
         }
