@@ -6,14 +6,13 @@
 [Bb]in/
 [Oo]bj/
 
+# Temporary and local IDE/System files
 *.userprefs
 *.suo
 *.pidb
 Thumbs.db
+**/.idea/*
 
 # Nuget packages
 **/packages/*
 !**/packages/repositories.config
-
-
-**/.idea/*
