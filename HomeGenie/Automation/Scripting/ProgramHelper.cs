@@ -266,10 +266,10 @@ namespace HomeGenie.Automation.Scripting
         /// ProgramHelper.
         /// </returns>
         /// <param name='forDomains'>
-        /// A string with comma separated list of domains of modules that will showing this input field. Use an empty string for all domains.
+        /// A string with comma separated list of module domains that will showing this input field. Use an empty string for all domains.
         /// </param>
         /// <param name='forModuleTypes'>
-        /// A string with comma separated list of types of modules that will showing this input field.
+        /// A string with comma separated list of module types that will be showing this input field.
         /// </param>
         /// <param name='parameterName'>
         /// Name of the module parameter bound to this feature field.
@@ -782,16 +782,6 @@ namespace HomeGenie.Automation.Scripting
                 return programModule;
             }
         }
-
-        // TODO: find a better place for this and deprecate it
-        public double EnergyUseCounter
-        {
-            get
-            {
-                return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(Properties.MeterWatts, 3600) : 0;
-            }
-        }
-
 
         public ProgramHelper Reset()
         {

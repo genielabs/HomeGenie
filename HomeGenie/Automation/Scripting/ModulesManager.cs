@@ -42,7 +42,7 @@ namespace HomeGenie.Automation.Scripting
     public class ModulesManager
     {
         private string command = "Command.NotSelected";
-        private string commandValue = "0";
+        private string commandOptions = "0";
         //private string parameter = "Parameter.NotSelected";
         private string withName = "";
         private string ofDeviceType = "";
@@ -464,7 +464,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="options">Options.</param>
         public object GetValue(string options = "")
         {
-            this.commandValue = options;
+            this.commandOptions = options;
             object response = null;
             // execute this command context
             var selectedModules = SelectedModules;
@@ -473,7 +473,7 @@ namespace HomeGenie.Automation.Scripting
                 var module = selectedModules[0];
                 response = InterfaceControl(
                     module,
-                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandOptions)
                 );
             }
             return response;
@@ -504,8 +504,8 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>ModulesManager</returns>
         public ModulesManager Set()
         {
-            this.commandValue = "0";
-            return Set(this.commandValue);
+            this.commandOptions = "0";
+            return Set(this.commandOptions);
         }
 
         /// <summary>
@@ -515,7 +515,7 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>ModulesManager</returns>
         public ModulesManager Set(string options)
         {
-            this.commandValue = options;
+            this.commandOptions = options;
             // execute this command context
             if (command != "")
             {
@@ -523,7 +523,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     InterfaceControl(
                         module,
-                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
+                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandOptions)
                     );
                     DelayIteration();
                 }
@@ -541,7 +541,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOn)
                 );
                 DelayIteration();
             }
@@ -558,7 +558,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOff)
                 );
                 DelayIteration();
             }
@@ -580,18 +580,18 @@ namespace HomeGenie.Automation.Scripting
                     {
                         InterfaceControl(
                             module,
-                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
+                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOn)
                         );
                     }
                     else
                     {
                         InterfaceControl(
                             module,
-                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
+                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOff)
                         );
                     }
+                    DelayIteration();
                 }
-                DelayIteration();
             }
             return this;
         }
@@ -617,22 +617,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                double averageLevel = 0;
-                if (SelectedModules.Count > 0)
-                {
-                    foreach (var module in SelectedModules)
-                    {
-                        var levelParameter = Utility.ModuleParameterGet(module, Properties.StatusLevel);
-                        if (levelParameter != null)
-                        {
-                            double level = levelParameter.DecimalValue;
-                            level = (level * 100D);
-                            averageLevel += level;
-                        }
-                    }
-                    averageLevel = averageLevel / SelectedModules.Count;
-                }
-                return averageLevel;
+                return GetAverageParameterValue(Properties.StatusLevel);
             }
             set
             {
@@ -649,22 +634,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                bool isOn = false;
-                if (SelectedModules.Count > 0)
-                {
-                    foreach (var module in SelectedModules)
-                    {
-                        var levelParameter = Utility.ModuleParameterGet(module, Properties.StatusLevel);
-                        if (levelParameter != null)
-                        {
-                            double dvalue = levelParameter.DecimalValue;
-                            isOn = isOn || (dvalue * 100D > 0D); // if at least one of the selected modules are on it returns true
-                            if (isOn) break;
-                        }
-
-                    }
-                }
-                return isOn;
+                return IsGreaterThanZero(Properties.StatusLevel);
             }
         }
 
@@ -688,18 +658,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                bool alarmed = false;
-                foreach (var module in SelectedModules)
-                {
-                    var alarmParameter = Utility.ModuleParameterGet(module, "Sensor.Alarm");
-                    if (alarmParameter != null)
-                    {
-                        double intvalue = alarmParameter.DecimalValue;
-                        alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules are alarmed it returns true
-                        if (alarmed) break;
-                    }
-                }
-                return alarmed;
+                return IsGreaterThanZero(Properties.SensorAlarm);
             }
         }
 
@@ -711,18 +670,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                bool alarmed = false;
-                foreach (var module in SelectedModules)
-                {
-                    var motionParameter = Service.Utility.ModuleParameterGet(module, "Sensor.MotionDetect");
-                    if (motionParameter != null)
-                    {
-                        double intvalue = motionParameter.DecimalValue;
-                        alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules detected motion it returns true
-                        if (alarmed) break;
-                    }
-                }
-                return alarmed;
+                return IsGreaterThanZero(Properties.SensorMotionDetect);
             }
         }
 
@@ -734,7 +682,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return GetAverageParameterValue("Sensor.Temperature");
+                return GetAverageParameterValue(Properties.SensorTemperature);
             }
         }
 
@@ -746,7 +694,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return GetAverageParameterValue("Sensor.Luminance");
+                return GetAverageParameterValue(Properties.SensorLuminance);
             }
         }
 
@@ -758,7 +706,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return GetAverageParameterValue("Sensor.Humidity");
+                return GetAverageParameterValue(Properties.SensorHumidity);
             }
         }
 
@@ -768,7 +716,7 @@ namespace HomeGenie.Automation.Scripting
         public ModulesManager Reset()
         {
             command = "Command.NotSelected";
-            commandValue = "0";
+            commandOptions = "0";
             //parameter = "Parameter.NotSelected";
             withName = "";
             ofDeviceType = "";
@@ -799,17 +747,35 @@ namespace HomeGenie.Automation.Scripting
         private double GetAverageParameterValue(string parameter)
         {
             double averageValue = 0;
-            if (SelectedModules.Count > 0)
+            int count = 0;
+            foreach (var module in SelectedModules)
             {
-                foreach (var module in SelectedModules)
+                var p = Service.Utility.ModuleParameterGet(module, parameter);
+                if (p != null)
                 {
-                    double value = Service.Utility.ModuleParameterGet(module, parameter).DecimalValue;
-                    averageValue += value;
-                    ;
+                    averageValue += p.DecimalValue;
+                    count++;
                 }
-                averageValue = averageValue / SelectedModules.Count;
             }
+            if (count > 0)
+                averageValue = averageValue / SelectedModules.Count;
             return averageValue;
+        }
+
+        private bool IsGreaterThanZero(string parameter)
+        {
+            bool gz = false;
+            foreach (var module in SelectedModules)
+            {
+                var p = Utility.ModuleParameterGet(module, parameter);
+                if (p != null)
+                {
+                    // if at least one of the selected modules has 'parameter' greater than zero then return true
+                    gz = (p.DecimalValue * 100D > 0D); 
+                    if (gz) break;
+                }
+            }
+            return gz;
         }
 
         private void DelayIteration()
