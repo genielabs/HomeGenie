@@ -42,7 +42,7 @@ contribute following same rules used for the main repo.
 
 #### **Coding styles and conventions**
 
-Please follow [Microsoft .Net](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) coding rules.
+Please follow *Microsoft .Net* [coding conventions](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) and [naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions).
 You may find out that some of these rules are not respected in the existing code,
 but this will be fixed from time to time.
 
