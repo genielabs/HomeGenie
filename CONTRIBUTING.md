@@ -3,8 +3,6 @@
 When contributing to this repository, please first discuss the change you wish to make via the
 [issue tracker](https://github.com/genielabs/HomeGenie/issues) before making a change.
 
-Note we have a code of conduct, please follow it in all your interactions with the project.
-
 ## How to contribute to HomeGenie
 
 #### **Did you find a bug?**
