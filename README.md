@@ -1,10 +1,10 @@
 [![Join the chat at https://gitter.im/genielabs/HomeGenie](https://badges.gitter.im/genielabs/HomeGenie.svg)](https://gitter.im/genielabs/HomeGenie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Presentation Site and User's Guide
+## Presentation Site
 
 http://www.homegenie.it
 
-## Developer Docs
+## User's Guide and Developer Docs
 
 https://genielabs.github.io/HomeGenie/
 
@@ -17,7 +17,7 @@ https://genielabs.github.io/HomeGenie/download.html
 ## Contributing
 
 Read the [CONTRIBUTING.md](https://github.com/genielabs/HomeGenie/blob/master/CONTRIBUTING.md) file
-for information about contributing to this project.
+for information about contributing to this repository.
 
 ## Related projects
 
@@ -31,7 +31,7 @@ for information about contributing to this project.
 - https://github.com/genielabs/HomeGenie-Android
 - https://github.com/genielabs/HomeGenie-WindowsPhone
 
-===============
+------
 
 ### License Information
 
