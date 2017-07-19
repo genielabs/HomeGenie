@@ -21,13 +21,15 @@ for information about contributing to this project.
 
 ## Related projects
 
-- https://github.com/genielabs/HomeGenie-Android
-- https://github.com/genielabs/HomeGenie-WindowsPhone
+- https://github.com/genielabs/homegenie-packages
 - https://github.com/genielabs/mig-service-dotnet
 - https://github.com/genielabs/zwave-lib-dotnet
 - https://github.com/genielabs/x10-lib-dotnet
 - https://github.com/genielabs/w800rf32-lib-dotnet
 - https://github.com/genielabs/serialport-lib-dotnet
+- https://github.com/genielabs/HomeGenie-Android-ClientLib
+- https://github.com/genielabs/HomeGenie-Android
+- https://github.com/genielabs/HomeGenie-WindowsPhone
 
 ===============
 
