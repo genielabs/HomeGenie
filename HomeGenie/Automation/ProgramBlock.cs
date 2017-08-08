@@ -33,9 +33,9 @@ namespace HomeGenie.Automation
     [Serializable()]
     public class ProgramBlock
     {
-        private IProgramEngine _programEngine;
-        private bool _isProgramEnabled;
-        private string _codeType = "";
+        private IProgramEngine programEngine;
+        private bool isProgramEnabled;
+        private string codeType = "";
 
         // event delegates
         public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
@@ -94,47 +94,47 @@ namespace HomeGenie.Automation
             Conditions = new List<ProgramCondition>();
             ConditionType = ConditionType.None;
             //
-            _isProgramEnabled = false;
+            isProgramEnabled = false;
             IsRunning = false;
         }
 
         public string Type
         {
-            get { return _codeType; }
+            get { return codeType; }
             set
             {
-                bool changed = _codeType != value;
-                _codeType = value;
-                if (changed || _programEngine == null)
+                bool changed = codeType != value;
+                codeType = value;
+                if (changed || programEngine == null)
                 {
-                    if (_programEngine != null)
+                    if (programEngine != null)
                     {
-                        _programEngine.Unload();
-                        _programEngine = null;
+                        programEngine.Unload();
+                        programEngine = null;
                     }
-                    switch (_codeType.ToLower())
+                    switch (codeType.ToLower())
                     {
                         case "csharp":
-                            _programEngine = new CSharpEngine(this);
+                            programEngine = new CSharpEngine(this);
                             break;
                         case "python":
-                            _programEngine = new PythonEngine(this);
+                            programEngine = new PythonEngine(this);
                             break;
                         case "ruby":
-                            _programEngine = new RubyEngine(this);
+                            programEngine = new RubyEngine(this);
                             break;
                         case "javascript":
-                            _programEngine = new JavascriptEngine(this);
+                            programEngine = new JavascriptEngine(this);
                             break;
                         case "wizard":
-                            _programEngine = new WizardEngine(this);
+                            programEngine = new WizardEngine(this);
                             break;
                         case "arduino":
-                            _programEngine = new ArduinoEngine(this);
+                            programEngine = new ArduinoEngine(this);
                             break;
                         default:
                             throw new NotImplementedException(
-                                string.Format("Program engine for type {0} is not implemented", _codeType));
+                                string.Format("Program engine for type {0} is not implemented", codeType));
                     }
                 }
             }
@@ -142,23 +142,23 @@ namespace HomeGenie.Automation
 
         public bool IsEnabled
         {
-            get { return _isProgramEnabled; }
+            get { return isProgramEnabled; }
             set
             {
-                if (_isProgramEnabled != value)
+                if (isProgramEnabled != value)
                 {
-                    _isProgramEnabled = value;
+                    isProgramEnabled = value;
                     LastConditionEvaluationResult = false;
-                    if (_isProgramEnabled)
+                    if (isProgramEnabled)
                     {
                         ActivationTime = DateTime.UtcNow;
-                        if (_programEngine != null)
-                            _programEngine.Load();
+                        if (programEngine != null)
+                            programEngine.Load();
                     }
                     else
                     {
-                        if (_programEngine != null)
-                            _programEngine.Unload();
+                        if (programEngine != null)
+                            programEngine.Unload();
                     }
                     if (EnabledStateChanged != null)
                         EnabledStateChanged(this, value);
@@ -169,7 +169,7 @@ namespace HomeGenie.Automation
         [XmlIgnore,JsonIgnore]
         public ProgramEngineBase Engine
         {
-            get { return (ProgramEngineBase)_programEngine; }
+            get { return (ProgramEngineBase)programEngine; }
         }
 
 
@@ -181,12 +181,12 @@ namespace HomeGenie.Automation
 
         internal List<ProgramError>  Compile()
         {
-            return _programEngine.Compile();
+            return programEngine.Compile();
         }
 
         internal MethodRunResult Run(string options)
         {
-            return _programEngine.Run(options);
+            return programEngine.Run(options);
         }
 
         internal ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
@@ -199,15 +199,15 @@ namespace HomeGenie.Automation
                 ErrorMessage = e.Message
             };
             // TODO: can it be null at this point???
-            if (_programEngine != null)
-                error = _programEngine.GetFormattedError(e, isTriggerBlock);
+            if (programEngine != null)
+                error = programEngine.GetFormattedError(e, isTriggerBlock);
             return error;
         }
 
         // TODO: v1.1 !!!IMPORTANT!!! rename to EvaluateStartupCode
         internal MethodRunResult EvaluateCondition()
         {
-            return _programEngine.EvaluateCondition();
+            return programEngine.EvaluateCondition();
         }
 
         #endregion

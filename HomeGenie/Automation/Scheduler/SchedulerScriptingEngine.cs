@@ -22,13 +22,10 @@
 
 using System;
 using System.Threading;
-using System.Collections.Generic;
-
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 
 using Jint;
-using Newtonsoft.Json;
 
 namespace HomeGenie.Automation.Scheduler
 {

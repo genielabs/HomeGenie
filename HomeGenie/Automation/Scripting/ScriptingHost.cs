@@ -37,30 +37,30 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class ScriptingHost
     {
-        private HomeGenieService _hgService;
+        private HomeGenieService hgService;
         internal bool ExecuteProgramCode;
         private static Logger _log = LogManager.GetCurrentClassLogger();
 
 
         public void SetHost(HomeGenieService hg, int programId)
         {
-            _hgService = hg;
-            Net = new NetHelper(_hgService);
-            Program = new ProgramHelper(_hgService, programId);
-            When = new EventsHelper(_hgService, programId);
+            hgService = hg;
+            Net = new NetHelper(hgService);
+            Program = new ProgramHelper(hgService, programId);
+            When = new EventsHelper(hgService, programId);
             SerialPort = new SerialPortHelper();
             TcpClient = new TcpClientHelper();
             UdpClient = new UdpClientHelper();
             MqttClient = new MqttClientHelper();
             KnxClient = new KnxClientHelper();
-            Scheduler = new SchedulerHelper(_hgService);
+            Scheduler = new SchedulerHelper(hgService);
         }
 
         public ModulesManager Modules
         {
             get
             {
-                return new ModulesManager(_hgService);
+                return new ModulesManager(hgService);
             }
         }
 
@@ -68,7 +68,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return new SettingsHelper(_hgService);
+                return new SettingsHelper(hgService);
             }
         }
 

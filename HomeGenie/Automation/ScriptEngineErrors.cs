@@ -6,12 +6,12 @@ namespace HomeGenie.Automation
 {
     public class ScriptEngineErrors : ErrorListener
     {
-        private readonly CodeBlockEnum _blockType;
+        private readonly CodeBlockEnum blockType;
         public List<ProgramError> Errors = new List<ProgramError>();
 
         public ScriptEngineErrors(CodeBlockEnum type)
         {
-            _blockType = type;
+            blockType = type;
         }
 
         public override void ErrorReported(ScriptSource source, string message, Microsoft.Scripting.SourceSpan span, int errorCode, Microsoft.Scripting.Severity severity)
@@ -21,7 +21,7 @@ namespace HomeGenie.Automation
                 Column = span.Start.Column,
                 ErrorMessage = message,
                 ErrorNumber = errorCode.ToString(),
-                CodeBlock = _blockType
+                CodeBlock = blockType
             });
         }
     }
