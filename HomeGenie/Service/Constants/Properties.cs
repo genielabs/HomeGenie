@@ -39,7 +39,7 @@ namespace HomeGenie.Service.Constants
         public const string SchedulerModuleUpdateStart
             = "Scheduler.OnModuleUpdateStart";
         public const string SchedulerModuleUpdateEnd
-        = "Scheduler.OnModuleUpdateEnd";
+            = "Scheduler.OnModuleUpdateEnd";
         public const string SchedulerError
             = "Scheduler.Error";
         public const string SchedulerScriptStatus
@@ -74,6 +74,8 @@ namespace HomeGenie.Service.Constants
             = "Sensor.Humidity";
         public const string SensorAlarm
             = "Sensor.Alarm";
+        public const string SensorTamper
+            = "Sensor.Tamper";
         public const string SensorMotionDetect
             = "Sensor.MotionDetect";
         public const string VirtualMeterWatts

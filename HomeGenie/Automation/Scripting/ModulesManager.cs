@@ -646,7 +646,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return !this.IsOn;
+                return IsZero(Properties.StatusLevel);
             }
         }
 
@@ -658,7 +658,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return IsGreaterThanZero(Properties.SensorAlarm);
+                return IsGreaterThanZero(Properties.SensorAlarm) || IsGreaterThanZero(Properties.SensorTamper);
             }
         }
 
@@ -670,7 +670,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return IsGreaterThanZero(Properties.SensorMotionDetect);
+                return IsGreaterThanZero(Properties.SensorMotionDetect) || IsGreaterThanZero(Properties.StatusLevel);
             }
         }
 
@@ -776,6 +776,22 @@ namespace HomeGenie.Automation.Scripting
                 }
             }
             return gz;
+        }
+
+        private bool IsZero(string parameter)
+        {
+            bool ez = false;
+            foreach (var module in SelectedModules)
+            {
+                var p = Utility.ModuleParameterGet(module, parameter);
+                if (p != null)
+                {
+                    // if at least one of the selected modules has 'parameter' equal zero then return true
+                    ez = (p.DecimalValue * 100D == 0D); 
+                    if (ez) break;
+                }
+            }
+            return ez;
         }
 
         private void DelayIteration()
