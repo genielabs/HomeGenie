@@ -31,6 +31,17 @@
         "Выключает всё освещение в рамках выбранной группы."
 },
 
+"81": {
+    "Title":
+        "Energy Monitor",
+    "Description":
+        "Collects and display information about device status and energy consumption.",
+    "EnergyManagement.MonitorStatus":
+        "Monitor status",
+    "EnergyManagement.MonitorWatts":
+        "Monitor watts"
+},
+
 "82": {
     "Title":
         "Energy Saving Mode",

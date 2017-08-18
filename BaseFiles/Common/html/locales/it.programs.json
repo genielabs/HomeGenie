@@ -31,6 +31,17 @@
         "Spegne tutte le luci del gruppo selezionato."
 },
 
+"81": {
+    "Title":
+        "Energy Monitor",
+    "Description":
+        "Collects and display information about device status and energy consumption.",
+    "EnergyManagement.MonitorStatus":
+        "Monitor status",
+    "EnergyManagement.MonitorWatts":
+        "Monitor watts"
+},
+
 "82": {
     "Title":
         "Modalità risparmio energetico",

@@ -1,36 +1,12 @@
 [![Join the chat at https://gitter.im/genielabs/HomeGenie](https://badges.gitter.im/genielabs/HomeGenie.svg)](https://gitter.im/genielabs/HomeGenie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Presentation Site and User's Guide
+## Presentation Site
 
 http://www.homegenie.it
 
-## Developer Docs
+## User's Guide and Developer Docs
 
-https://genielabs.github.io/HomeGenie/about.html
-
-## Supported IDEs
-
-- **MonoDevelop / Xamarin Studio**
-- **Microsoft Visual Studio**
-
-## Building, debugging and packaging HomeGenie
-
-**Linux**
-- Open the *HomeGenie_Linux/HomeGenie_Linux.sln* solution file
-- Prepare base files by building the *BaseFiles/Linux* project
-- Build/Debug the main *HomeGenie* project
-- To bundle a debian setup package, build the *Packger* project (even if this appear to be disabled, it will lauch a script in a terminal window)
-
-**Windows**
-- Open the *HomeGenie_Windows/HomeGenie_VS10.sln* solution file
-- Prepare base files by building the *BaseFiles/Windows* project
-- Build/Run/Debug the main *HomeGenie* project
-- To bundle a setup package, open and run the InnoSetup file located in the *HomeGenie_Windows/Packager* folder.
-
-**Mac**
-- Open the *HomeGenie_Mac/HomeGenie_Mac.sln* solution file
-- Build/Debug the main *HomeGenie* project
-- no setup packaging currently supported for Mac
+https://genielabs.github.io/HomeGenie/
 
 ## Precompiled packages and install instructions
 
@@ -38,17 +14,24 @@ https://genielabs.github.io/HomeGenie/about.html
 
 https://genielabs.github.io/HomeGenie/download.html
 
+## Contributing
+
+Read the [CONTRIBUTING.md](https://github.com/genielabs/HomeGenie/blob/master/CONTRIBUTING.md) file
+for information about contributing to this repository.
+
 ## Related projects
 
-- https://github.com/genielabs/HomeGenie-Android
-- https://github.com/genielabs/HomeGenie-WindowsPhone
+- https://github.com/genielabs/homegenie-packages
 - https://github.com/genielabs/mig-service-dotnet
 - https://github.com/genielabs/zwave-lib-dotnet
 - https://github.com/genielabs/x10-lib-dotnet
 - https://github.com/genielabs/w800rf32-lib-dotnet
 - https://github.com/genielabs/serialport-lib-dotnet
+- https://github.com/genielabs/HomeGenie-Android-ClientLib
+- https://github.com/genielabs/HomeGenie-Android
+- https://github.com/genielabs/HomeGenie-WindowsPhone
 
-===============
+------
 
 ### License Information
 

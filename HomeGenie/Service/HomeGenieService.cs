@@ -353,10 +353,12 @@ namespace HomeGenie.Service
                     }
                 }
                 //
-                // If the command was not already handled, let automation programs process it
-                if (response == null || String.IsNullOrWhiteSpace(response.ToString()))
+                // Route command to Automation Programs' Dynamic API
+                var r = ProgramDynamicApi.TryApiCall(cmd);
+                if (r != null && !String.IsNullOrWhiteSpace(r.ToString()))
                 {
-                    response = ProgramDynamicApi.TryApiCall(cmd);
+                    // Automation Programs can eventually override MIG response
+                    response = r;
                 }
                 //
                 // Macro Recording

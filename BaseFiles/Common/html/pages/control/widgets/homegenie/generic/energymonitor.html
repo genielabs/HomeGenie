@@ -2,30 +2,45 @@
   .flot-tick-label, .tickLabel {
     font-size: 8pt;
   }
+  .field-label {
+    margin-left: 6px;
+    font-size: 8pt;
+    text-transform: uppercase;    
+  }
 </style>
 <div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="width:430px;height:290px;position:relative;z-index:10;background:none">
   <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.8;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
   <div class="ui-header" style="padding-left:5px;padding-right:5px;font-weight:normal;border-top:0">
     <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width:400px;font-size:16pt;font-weight:bold;padding:6px;float:left">Energy Monitor</div>
+    <a data-ui-field="btn_reset" data-role="button" data-icon="fa-hourglass-start" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px;">Reset Counter</a>
     <a href="#page_analyze" data-role="button" data-icon="fa-bar-chart" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Statistics</a>
   </div>
-
+  
   <div class="ui-grid-b" align="center" style="font-size:18pt;line-height:20px;margin-top:4px">
     <div data-ui-field="btn_watt_load" class="ui-block-a" style="cursor:pointer">
-      <div style="margin-left:6px;font-size:8pt;text-transform:uppercase">Actual load</div>
+      <div class="field-label">Actual load</div>
       <span class="hg-indicator-energy" style="padding-left:0;padding-top:5px;width:20px;">&nbsp;</span> <span data-ui-field="wattload">0.00</span>
     </div>
     <div class="ui-block-b">
-      <div style="margin-left:6px;font-size:8pt;text-transform:uppercase">Lights</div>
+      <div class="field-label">Lights</div>
       <span class="hg-indicator-bulb" style="padding-left:0;padding-top:5px;width:20px;">&nbsp;</span> <span data-ui-field="lightcount">2</span>
     </div>
     <div class="ui-block-c">
-      <div style="margin-left:6px;font-size:8pt;text-transform:uppercase">Appliances</div>
+      <div class="field-label">Appliances</div>
       <span class="hg-indicator-plug" style="padding-left:0;padding-top:5px;width:20px;">&nbsp;</span> <span data-ui-field="switchcount">2</span>
     </div>
   </div>
 
-  <div data-ui-field="kwcounter" align="center" style="font-size:20pt;cursor:pointer"></div>
+  <div class="ui-grid-a" align="center" style="font-size:14pt;line-height:16px;">
+    <div class="ui-block-a">
+      <div class="field-label">Total Counter</div>
+      <div data-ui-field="kwcounter" align="center" style="cursor:pointer">0.0000 kW</div>
+    </div>
+    <div class="ui-block-b">
+      <div class="field-label">Today Counter</div>
+      <div data-ui-field="kwcounter-today" align="center">0.0000 kW</div>
+    </div>
+  </div>
 
   <div style="position:absolute;bottom:0;height:140px;right:0;left:0;margin:1px;padding:4px;background-color:rgba(0,0,0,0.3);border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;">
     <div data-ui-field="energystats" style="height:140px;background-color:transparent;width:100%;"></div>

@@ -12,28 +12,28 @@
         <Value>dtYEgv0vZ5T3NeZhZD9OXwdXbj1zTH6CONPfHB1b7UKXK3qyQQ1isdMDbupOD6p4</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.946848Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.922928Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.947055Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.923259Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921341Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868688Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.293382Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.878968Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -51,28 +51,28 @@
         <Value>dtYEgv0vZ5T3NeZhZD9OX8QyQ/zTYFOSjCnNHTd7si1LbcsTOyjLwaF7pz3fc7ZY</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.947268Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.923616Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.947474Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.923943Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921367Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868718Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.293406Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.87903Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -90,28 +90,28 @@
         <Value>dtYEgv0vZ5T3NeZhZD9OX54ux5W82wufcF4PJ6VOP5o=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.947684Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.924271Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.947923Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.924614Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921395Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.86875Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.293421Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.879066Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -129,28 +129,28 @@
         <Value>5BOwzpBQ9VBL1Ge/a1HawZhFygJCYHK45g/0DXYIAJ9X9TnN/4D58r5QbS2Cb2Td</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.948134Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.924949Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.948341Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.925272Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921421Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868781Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.293435Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.879103Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -168,14 +168,14 @@
         <Value>180</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921446Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868812Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.29345Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.879142Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -235,63 +235,63 @@
         <Value>rRAZBIpIrn4rorVjil3CnQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.948549Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.9256Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.Mode</Name>
         <Value>efeJUM9Jft3eGxbrMuFDjg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.948755Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.925928Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.OperatingState</Name>
         <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.94896Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.92625Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.SetPoint.Heating</Name>
         <Value>Apma0vFWxyYLbG9G0hLZng==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.949166Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.926573Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.950605Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.926896Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>78</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921498Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867868Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualThermostat.SwitchModule</Name>
         <Value>ug/UPzkooLMixWdNMmxKrFF7upi3yg4QfucST0HHlpM=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.950814Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.927223Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualThermostat.TemperatureModule</Name>
         <Value>ug/UPzkooLMixWdNMmxKrKGaoa3wOVHjeO07bm/mYms=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.951022Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.927578Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/thermostat</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.326553Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.404894Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -309,7 +309,7 @@
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.951229Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.927905Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggerHome</Name>
@@ -323,7 +323,7 @@
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.951487Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.928384Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ZoneSensors.2</Name>
@@ -358,56 +358,56 @@
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.951694Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.928714Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Luminance</Name>
         <Value>H7r2AhR8FPpz5QmxovMc4Apx1kCyvJXstr1iniQFXII=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.951944Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.931067Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.MotionDetect</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.952153Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.93153Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
         <Value>rRAZBIpIrn4rorVjil3CnQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.952363Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.931873Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Battery</Name>
         <Value>7BXCPbbywJhg08paoEJ+sg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.954545Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.932262Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.954803Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.932591Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>400</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921891Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.86845Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:40:58.0031Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.582997Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -425,21 +425,21 @@
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.955038Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.932925Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggerHome</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.955268Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.933248Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ZoneSensors.1</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.955481Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.933569Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ZoneSensors.2</Name>
@@ -474,49 +474,49 @@
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.955694Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.933899Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.DoorWindow</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.955949Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.934222Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Battery</Name>
         <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.956164Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.934544Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.956392Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.934887Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>400</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.922008Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868605Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayIcon</Name>
         <Value>E9WznBPefYB8nLZUqi7Cekglb1+MimNTJo/NJws2raEiDb+8lGvSG7AgpK6SJmqQaAa1geElQRDRTp2dSEt8ug==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-06-14T05:40:28.070097Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.935224Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:40:58.095107Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.646359Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -529,6 +529,20 @@
     <Domain>HomeAutomation.Demo</Domain>
     <Address>3</Address>
     <Properties>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.935558Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.935882Z</UpdateTime>
+      </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.IRControler.Enable</Name>
         <Value />
@@ -632,42 +646,42 @@
         <Value>JkkNaJnYX1KrWjzybs0aXg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.956624Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.936308Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.956866Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.936647Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>p7qzGq0tASFINdhHedzWJA==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.95708Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.936976Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>400</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.922046Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868655Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayIcon</Name>
         <Value>E9WznBPefYB8nLZUqi7Cekglb1+MimNTJo/NJws2raEiDb+8lGvSG7AgpK6SJmqQ11C2VjHQ8woquD6r4tOBPSjs8v1DMvxJI1fuC/5bivQ=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.957301Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.937329Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:40:58.127023Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.736969Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -682,66 +696,87 @@
     <Properties>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter</Name>
-        <Value>qWktiL4IuyaJZ+ILOVnyCg==</Value>
+        <Value>7izsS63lUWdTcqbl73WK5A==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.957515Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.937659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.KwCounter.Today</Name>
+        <Value>7izsS63lUWdTcqbl73WK5A==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.937659Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
-        <Value>54KON7uTvj6Bpc/1ctVgcQ==</Value>
+        <Value>4Fmfgj/yZ3JipvXEWu0f1w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.957727Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.937987Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
         <Value>M3m/88N37t16WUoTMlpS6g==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.95794Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.938311Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingLights</Name>
         <Value>M3m/88N37t16WUoTMlpS6g==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.958152Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.938751Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingSwitches</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.958365Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.93922Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattCounter</Name>
-        <Value>akanoYeGysNA6LkgCvnOTA==</Value>
+        <Value>fJKEdvpBVYckfXMBhYbP0g==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.958578Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.939781Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.WattCounter.Today</Name>
+        <Value>fJKEdvpBVYckfXMBhYbP0g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.939781Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattLoad</Name>
-        <Value>zdxGVA0sVzpSPzRpt6M7PQ==</Value>
+        <Value>ipXZgEpSs6zm4BdGLrG/XQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.95879Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.940198Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.UiRefresh</Name>
+        <Value>3um8K0XMFOEPgC7Npve+lSsmpf4IdUgwdksOBq6nq8U=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.940763Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>81</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921295Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867731Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/energymonitor</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.248804Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:49:25.354598Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -759,7 +794,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:44:00.413518Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.605442Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -791,7 +826,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.371654Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.146905Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -823,7 +858,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.505203Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.605283Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -855,14 +890,14 @@
         <Value>XE9to2Sm7dB2Q5DV4MqM8q6O8d7MAowN9yK58r/3jdLdZHAgEz9IfuJ3peWmSYveRwu5rXdw6w627PX1CJxGIQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.959013Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.941345Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.546455Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:58.427168Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -894,21 +929,21 @@
         <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>Philips Hue Bridge IP Address</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.959227Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.94189Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.BridgeUsername</Name>
         <Value>pPx+IKgjmjrO7CTwAMY9jg==</Value>
         <Description>Philips Hue Bridge API username</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.95944Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.942225Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.683625Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:57.68692Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -940,14 +975,14 @@
         <Value>Ri1VdDW6uIVO4CPS82EASw==</Value>
         <Description>Number of Zone Sensors</Description>
         <FieldType>slider:1:10:1</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.959653Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.94255Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.668693Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:57.931735Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -972,98 +1007,98 @@
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.456923Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133644Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Astronomy.Sunset</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.456919Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133636Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.City</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.456927Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133651Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.Description</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.456943Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.13369Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.DisplayLocation</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.456937Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133675Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.IconUrl</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.45694Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133682Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.TemperatureC</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.45693Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133659Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.TemperatureF</Name>
         <Value />
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.456933Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.133667Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ApiKey</Name>
         <Value>VGqXv2FlOtueeEb8myx1bw==</Value>
         <Description>Weather Underground Key</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.959928Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.942876Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Language</Name>
         <Value>Cn6VRtmascV3JQiOUKb3YQ==</Value>
         <Description>Language</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.960136Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.943207Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Location</Name>
         <Value>9zHIW0h+bCZIpaI9n1F1kg==</Value>
         <Description>City name</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.960343Z</UpdateTime>
+        <FieldType>wunderground.city</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.943546Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.UpdateInterval</Name>
         <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
         <Description>Update interval (minutes)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.960548Z</UpdateTime>
+        <FieldType>slider:15:1440:15</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.943871Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Interrupted</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:02.703013Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:59.474009Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sun.Event</Name>
         <Value>G8GvH8M6JtG3xFq5Eu3D1w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.960755Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.94422Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1127,7 +1162,7 @@
         <Value>zRnKjiDQdmA0iHoz5lUl8oWM3a1XmnG6bG6/dP6cmGGPPTRrJ93nj1DjroeiuijOWOfE9eW3bjNaLcrnfqxbM9NQ0k2YpMmuRpR/WjzmOys=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.96097Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.944559Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -1144,139 +1179,7 @@
         <UpdateTime>2016-04-30T16:16:32.608663Z</UpdateTime>
       </ModuleParameter>
     </Properties>
-    <Stores>
-      <Store>
-        <Name>Calendar</Name>
-        <Description />
-        <Data>
-          <ModuleParameter>
-            <Name>Days</Name>
-            <Value>200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:16:32.637408Z</UpdateTime>
-          </ModuleParameter>
-        </Data>
-      </Store>
-      <Store>
-        <Name>Tables</Name>
-        <Description />
-        <Data>
-          <ModuleParameter>
-            <Name>Settings.Options.0</Name>
-            <Value>{"Disable":false,"DisableTimeRange":"","AutoOff":{"WhenArmedAway":true,"WhenArmedHome":true,"WhenInTimeRange":false,"TimeRange":"","WhenNoMotion":true,"MotionTimeout":"5","MotionSensor":"HomeAutomation.Demo:1"}}</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-01T13:55:40.501206Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.1</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.540859Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.2</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.540911Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.3</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.540935Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.4</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.540958Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.5</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.540982Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.6</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.541006Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.7</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.541029Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.8</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.541053Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Options.9</Name>
-            <Value />
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-04-30T16:19:17.541077Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Level.0</Name>
-            <Value>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000666666666666666666666666666666AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-01T13:52:06.236757Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Level.0.DST</Name>
-            <Value>777777777777000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000555555555555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-14T10:47:30.72012Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Therm.0</Name>
-            <Value>000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111666666666666666666666666666666666666666666666666666666666666666666666666666666111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-14T10:47:30.719706Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.Therm.0.DST</Name>
-            <Value>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-01T13:51:27.615491Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.OnOff.0</Name>
-            <Value>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-01T13:51:27.634257Z</UpdateTime>
-          </ModuleParameter>
-          <ModuleParameter>
-            <Name>Settings.OnOff.0.DST</Name>
-            <Value>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Value>
-            <Description />
-            <FieldType />
-            <UpdateTime>2016-05-01T13:51:27.644003Z</UpdateTime>
-          </ModuleParameter>
-        </Data>
-      </Store>
-    </Stores>
+    <Stores />
     <RoutingNode />
   </Module>
   <Module>
@@ -1291,7 +1194,7 @@
         <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.961177Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.944884Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
@@ -1312,7 +1215,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.128864Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:28.980868Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1344,7 +1247,7 @@
         <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.961385Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.945209Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
@@ -1365,7 +1268,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.129665Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:28.982366Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1397,7 +1300,7 @@
         <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.961593Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.945534Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
@@ -1418,7 +1321,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.130502Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:28.992263Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1450,7 +1353,7 @@
         <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.961801Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.945858Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
@@ -1471,7 +1374,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.139393Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.025955Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1524,14 +1427,14 @@
         <Value>meJwjyLKoo9JY2kYx/ZR4g==</Value>
         <Description>2. MQTT server port</Description>
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.962009Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.946184Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerTopic</Name>
         <Value>j4pi82PQEHeb4jgboRapLw==</Value>
         <Description>3. Topic</Description>
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.962252Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.946506Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Username</Name>
@@ -1545,7 +1448,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.171949Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.033505Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1576,22 +1479,22 @@
         <Name>ConfigureOptions.ThermostatsCount</Name>
         <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description>Virtual thermostats modules to create</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.96246Z</UpdateTime>
+        <FieldType>slider:1:10:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.94683Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Notification</Name>
         <Value>v5pJfYH9t67TqtNvjgJhDv2n420khiuznpJyWisvXi7S3cBOmrYrVOQWi7gbtzdu1227n0uiaIv4ETKeHDpgWX6uGodNXNOKWOGEptCWJY/Rne3fHpL2pR2sjQAMzN1W</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.962674Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.947164Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Interrupted</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:08.819801Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.671352Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1616,28 +1519,28 @@
         <Value>brjQKghjAAmd8uyeI1dWKw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.962882Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.947496Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
         <Value>brjQKghjAAmd8uyeI1dWKw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.963088Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.94782Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.963293Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.94825Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Interrupted</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:06.781834Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:02.598868Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1669,7 +1572,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.546553Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:58.485834Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1701,7 +1604,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.554609Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:58.455218Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1733,84 +1636,84 @@
         <Value />
         <Description>4. Comma separated list of recipients e-mails for alarm notifications</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.362141Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.021697Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.ArmDelay</Name>
         <Value>evhKWvO6ao3ifrLl95fkRA==</Value>
         <Description>1. Arm Delay (seconds)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.963546Z</UpdateTime>
+        <FieldType>slider:0:60:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.948729Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.SirenMaxTime</Name>
         <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
         <Description>3. Sirens Max Time (seconds, 0=infinite)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.963776Z</UpdateTime>
+        <FieldType>slider:0:1800:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.949136Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.SirenStartTime</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description>2. Sirens Start Delay (seconds)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.964009Z</UpdateTime>
+        <FieldType>slider:0:30:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.949614Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.ArmedProgram</Name>
         <Value />
         <Description>5. Program to run when armed</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.362144Z</UpdateTime>
+        <FieldType>program.text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021703Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.DisarmedProgram</Name>
         <Value />
         <Description>6. Program to run when disarmed</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.362146Z</UpdateTime>
+        <FieldType>program.text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021708Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.TriggeredProgram</Name>
         <Value />
         <Description>7. Program to run when triggered</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.362149Z</UpdateTime>
+        <FieldType>program.text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021712Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityArmed</Name>
         <Value>El1vkIroVao/8lV913MHdQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.964233Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.950174Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggered</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.964445Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.950754Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Interrupted</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:04.749135Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:00.529061Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.UiRefresh</Name>
         <Value>49oBOPveu8cnZYdAYXlKbA==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.964657Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.951235Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.96487Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.951715Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1842,7 +1745,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.54663Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:58.426466Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1874,7 +1777,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.564135Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:58.473693Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1906,7 +1809,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.134664Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.004994Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1938,49 +1841,49 @@
         <Value />
         <Description>1. E-Mail address</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.37382Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.057549Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpPassword</Name>
         <Value />
         <Description>4. SMTP password (optional)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.373832Z</UpdateTime>
+        <FieldType>password</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.057565Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpPort</Name>
         <Value>eJbaQytfgHp7xJPm8Z/eJA==</Value>
         <Description>5. SMTP Mail Server port</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.965086Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.952108Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpServer</Name>
         <Value />
         <Description>2. SMTP Mail Server address</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.373827Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.057559Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpUserName</Name>
         <Value />
         <Description>3. SMTP username (optional)</Description>
         <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T09:49:54.37383Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:30.057562Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpUseSsl</Name>
-        <Value />
+        <Value>wO5wEfcHot5LVVYYRDaZ1w==</Value>
         <Description>6. SMTP Mail Server use SSL</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.9653Z</UpdateTime>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.952441Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Interrupted</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:05.764596Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:01.561525Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -2012,14 +1915,14 @@
         <Value>rRzv2Q0ruHKSPd7evlDMZGEGDFkXugaGL04L91g271sb4vBcJzuvNzCJWhJRnV1gmW/HMIfD9oHrZzJPNEweIw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.965519Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.95278Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Interrupted</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:07.797095Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:03.629301Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -2051,7 +1954,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.362634Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.982155Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -2083,7 +1986,7 @@
         <Value>Added</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.136955Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.018724Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -2115,7 +2018,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:02.222391Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:58.302665Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2140,7 +2043,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:43:51.985798Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.300247Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2165,7 +2068,7 @@
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:43:53.718431Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.31287Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2187,10 +2090,10 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Interrupted</Value>
+        <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:10.850139Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.320581Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2212,10 +2115,10 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Interrupted</Value>
+        <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.863457Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.335714Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2239,29 +2142,29 @@
         <Name>ConfigureOptions.DimmerDownCode</Name>
         <Value>rOoqqCUH8b8OMN93i0h4IfQTsgLVedpR3wqp4y6PZQ8=</Value>
         <Description>2. Dimmer Down (enter IR button code)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.965741Z</UpdateTime>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.953115Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.DimmerInterval</Name>
         <Value>Ri1VdDW6uIVO4CPS82EASw==</Value>
-        <Description>4. Dimmer Interval</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.965953Z</UpdateTime>
+        <Description>4. Dimming step</Description>
+        <FieldType>slider:5:50:5</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.953444Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.DimmerUpCode</Name>
         <Value>rOoqqCUH8b8OMN93i0h4IQGQsBoLRvuWI49cvC2r7KA=</Value>
         <Description>1. Dimmer Up (enter IR button code)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2016-05-14T10:48:11.966167Z</UpdateTime>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.95377Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:01.662112Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:51:57.583017Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2282,67 +2185,200 @@
     <Address>1</Address>
     <Properties>
       <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingLevel</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.296816Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingMode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.262767Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.954096Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.954446Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.315942Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.IRCode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.328386Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.96638Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.95486Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.333536Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityAlarm</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.341524Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.364668Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.346761Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.MinLuminance</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.379783Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.361638Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.384783Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.399679Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.413911Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.419545Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.422699Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.432527Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.385067Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>AvMKcV4MKFbMxOqE/Y5nUA==</Value>
+        <Value>g7p3hDs+ZOXCxq5/sXxGjg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.966593Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.955193Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.966805Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.955577Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>r0n3TaaTzY37ZtZX4xg53NEW2fsu/tEawAHrFQ2XfzE=</Value>
+        <Value>r0n3TaaTzY37ZtZX4xg53HD6ckcu5nz9nWDLfYAVFCE=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.96702Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.955908Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
+        <Value>0rHG2vyZ7cOVwR3AGC1llg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.967232Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.956231Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
-        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
+        <Value>0rHG2vyZ7cOVwR3AGC1llg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.967444Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.956553Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.968999Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.956877Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921523Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867161Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.342248Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.211203Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2356,67 +2392,200 @@
     <Address>2</Address>
     <Properties>
       <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingLevel</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.732427Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingMode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.726514Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.957203Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.957524Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.738619Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.IRCode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.743442Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.969205Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.957847Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.765107Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityAlarm</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.773132Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.805529Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.788601Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.MinLuminance</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.812162Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.793084Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.817064Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.828994Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.841031Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.855272Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.858634Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.871771Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.825427Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>KQMYVR9KfBbs8iGVbHcdgA==</Value>
+        <Value>x0ZB7fkPAVZ5bVLayjDoOw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.969411Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.958172Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.969617Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.958502Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>scF8VAU4sOjryaEj1FDqcQ5PkTPS9Gc4J2EFxgn+AyM=</Value>
+        <Value>scF8VAU4sOjryaEj1FDqcZI7faas1qBVcNTQi+Sz1Fc=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.969825Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.958829Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
+        <Value>twVIx3sXYzSaFq9smgxfvw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.97011Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.959156Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
-        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
+        <Value>twVIx3sXYzSaFq9smgxfvw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.97035Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.959491Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.971914Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.959814Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921548Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867276Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.342267Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.211286Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2444,6 +2613,20 @@
         <UpdateTime>2016-04-30T16:22:02.963836Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.960138Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.960466Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>HomeGenie.IRControler.Enable</Name>
         <Value />
         <Description />
@@ -2462,7 +2645,7 @@
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.972129Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.960788Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
@@ -2483,35 +2666,35 @@
         <Value>ug/UPzkooLMixWdNMmxKrKGaoa3wOVHjeO07bm/mYms=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.972345Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.961117Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.972572Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.961445Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.LastEvent</Name>
         <Value>mlUzwcP2vCW9JiaCtUXyTX/7ezZtAV46f+1rlO1L/zI=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.972795Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.961772Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.MinLuminance</Name>
         <Value>Fv6pSUnA/9WS7ebfeE3ZYQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.973014Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.962095Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
         <Value>ug/UPzkooLMixWdNMmxKrKGaoa3wOVHjeO07bm/mYms=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.973292Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.9625Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
@@ -2567,56 +2750,56 @@
         <Value>JkkNaJnYX1KrWjzybs0aXg==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.973508Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.962826Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
         <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.973751Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.963149Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
         <Value>9TBtMgGMsQwWeB1apCQ0iEAdLS9mGvphe12WigDzzDE=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.973965Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.963482Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.974178Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.963907Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
         <Value>nmCzQYqlWd7fZ5CFFVSqlA==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.97439Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.96424Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.975905Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.964601Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921573Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867448Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.342286Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.211353Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2648,21 +2831,21 @@
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.976114Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.964937Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921598Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867535Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.342305Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.211395Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2694,21 +2877,21 @@
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.976322Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.965302Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.92162Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867624Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.342324Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.211441Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2740,49 +2923,49 @@
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.976529Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.965652Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Luminance</Name>
         <Value>H7r2AhR8FPpz5QmxovMc4Apx1kCyvJXstr1iniQFXII=</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.976736Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.966028Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.MotionDetect</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.976942Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.966481Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
         <Value>rRAZBIpIrn4rorVjil3CnQ==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.977149Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.967054Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.977353Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.967638Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>29</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921659Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.867989Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.347224Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.486884Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2800,14 +2983,14 @@
         <Value>29</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921695Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868063Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.347244Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.486945Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2825,14 +3008,14 @@
         <Value>29</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921731Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868135Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.347263Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.487009Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2850,14 +3033,14 @@
         <Value>29</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921768Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868205Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.347284Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.487071Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -2875,14 +3058,281 @@
         <Value>29</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T10:48:11.921805Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:52:04.868275Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2016-05-14T09:49:54.347307Z</UpdateTime>
+        <UpdateTime>2017-08-17T17:32:29.48714Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name />
+    <Description>Philips hue (192.168.2.105) (Philips hue bridge 2012)</Description>
+    <DeviceType>Sensor</DeviceType>
+    <Domain>Protocols.UPnP</Domain>
+    <Address>2f402f80-da50-11e1-9b23-0017880a7b69</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>FavouritesLink.Url</Name>
+        <Value>DzQoMsv2a9SoGu+crAmzhw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.968221Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.DeviceType</Name>
+        <Value>pkJVjANF5SxvLnUdFEfZ6g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.968815Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.DeviceURN</Name>
+        <Value>nHYR49bKKumivq9XmuIIhZGd2dOvts+niZquzBT9XVXk5EmIJnCeSLUjRMTXJotS</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.969373Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.DeviceURN_Prefix</Name>
+        <Value>nHYR49bKKumivq9XmuIIhZGd2dOvts+niZquzBT9XVVtRwLUzKE7zybqoyDWdigo</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.969824Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.FriendlyName</Name>
+        <Value>s5zpHu9jN744tqZ59LlKcb9ByCIzfvztYYWjIFEG7nw=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.970235Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.LocationURL</Name>
+        <Value>gV6brc+zMyvE933SUb4MkisuqJZDxwkrg4bGxS3Wvn0tH/8xvLA1anaoyJRgqrlD</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.970639Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.Manufacturer</Name>
+        <Value>uuvbawMIDcMzF1hmPuL5ir2XJIb0swnDRZoEtSbjklI=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.971059Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ManufacturerURL</Name>
+        <Value>R+ZBW4DdrnJYDDRw44Kagu9loUA20s4kwfYIEgHRRPw=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.971482Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelDescription</Name>
+        <Value>GboQVH59Ol2Y9qwvYoIwZQUcvxeONZvwKRP1OpEPN3zDqQlqvqFF6CJJxO/dkpBR</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.971952Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelName</Name>
+        <Value>CioccPzRg/DUP3fcL3+6Vl04yvsAlmiHlf5gM6x8H3s=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.972442Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelNumber</Name>
+        <Value>GgEI2Fjq49uJBrLhJ6kzWQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.972967Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelURL</Name>
+        <Value>wv3FbM5JII4y1yMP5Uk4FjSeCioLrCLv9koYaTj3L4U=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.973355Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.PresentationURL</Name>
+        <Value>DzQoMsv2a9SoGu+crAmzhw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.973687Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.SerialNumber</Name>
+        <Value>Kn+ExK8rU/x2UO3y7X5CUw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.97401Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.StandardDeviceType</Name>
+        <Value>pkJVjANF5SxvLnUdFEfZ6g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.974331Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.UniqueDeviceName</Name>
+        <Value>D4bo97TS9bhpLUXL00zRDLfr1jfaKE1u1HiPfOvMMb4GiPnBbRhKGahtxFpsoqcI</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.974658Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.Version</Name>
+        <Value>7DI6fNorQ+MM0ljlwVZj8g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.974988Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/link</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:59.431347Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name />
+    <Description>MediaShare:1 (Windows Media Connect Compatible (uShare))</Description>
+    <DeviceType>MediaTransmitter</DeviceType>
+    <Domain>Protocols.UPnP</Domain>
+    <Address>898f9738-d930-4db4-a3cf-60e32758b249</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>UPnP.DeviceType</Name>
+        <Value>/ujWyBDkd03NCAN9DxPVqg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.975329Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.DeviceURN</Name>
+        <Value>nHYR49bKKumivq9XmuIIhVVItH2gucWuHX+BqGqq/C2syzO3YPGCIRGwpTwFN39J</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.975661Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.DeviceURN_Prefix</Name>
+        <Value>nHYR49bKKumivq9XmuIIhVVItH2gucWuHX+BqGqq/C3hcTv/UbJ/corMWR+sgKTr</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.97599Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.FriendlyName</Name>
+        <Value>ObeBHkSlksGVDPbCD6frlA==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.976311Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.LocationURL</Name>
+        <Value>gV6brc+zMyvE933SUb4MkltIP2/LzGNfXE26Ru14A2L8H0ibA30c+grqMGpb4KdR</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.976638Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.Manufacturer</Name>
+        <Value>6yB2gH9jjDhAEk2iBZKWkQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.976961Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ManufacturerURL</Name>
+        <Value>wM0IG9UyaSudIX9lD+toX5/JKGSzFAEiTiOIse6fJMc=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.977286Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelDescription</Name>
+        <Value>cdsD9XKejagDyn6bDlGvUYXijDi5KhA/tvf8QOmPY60cO1rooTTudDJM/TA19PW5</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.977614Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelName</Name>
+        <Value>NEDO+fTrCHiIbWgnSkofFMLzKT3xwf+6LerGJ6JtWuqBlWWmr94AZPyeiXnBjEHj</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.977948Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelNumber</Name>
+        <Value>7DI6fNorQ+MM0ljlwVZj8g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.97827Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.ModelURL</Name>
+        <Value>wM0IG9UyaSudIX9lD+toX3gZmBCqBZkIhhpvCyGTA3w=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.978596Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.PresentationURL</Name>
+        <Value>gV6brc+zMyvE933SUb4MkhVPKsU1N6xCSsk0WBrY8uE=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.978929Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.SerialNumber</Name>
+        <Value>+dHbNyw/Gbicc03gvvHn2A==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.979252Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.StandardDeviceType</Name>
+        <Value>/ujWyBDkd03NCAN9DxPVqg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.979582Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.UniqueDeviceName</Name>
+        <Value>50MmZ1x8MWO39rUBt6GXyDl5CuOmBlwDHbXAWjWJzkwyHC/BTc3Zr+vXOOQX4VaJ</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.97991Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UPnP.Version</Name>
+        <Value>7DI6fNorQ+MM0ljlwVZj8g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.980239Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/mediaserver</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:37:15.516384Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
