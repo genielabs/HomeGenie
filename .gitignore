@@ -16,3 +16,5 @@ Thumbs.db
 # Nuget packages
 **/packages/*
 !**/packages/repositories.config
+
+HomeGenie_Windows/\.vs/

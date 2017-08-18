@@ -625,25 +625,30 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         //
         for (i = 0; i < HG.WebApp.Data.Programs.length; i++) {
             if (HG.WebApp.Data.Programs[i].Address == HG.WebApp.ProgramEdit._CurrentProgram.Address) {
-                HG.WebApp.ProgramEdit._CurrentProgram.Type = HG.WebApp.Data.Programs[i].Type;
-                HG.WebApp.ProgramEdit._CurrentProgram.Group = HG.WebApp.Data.Programs[i].Group;
-                HG.WebApp.ProgramEdit._CurrentProgram.Name = HG.WebApp.Data.Programs[i].Name;
-                HG.WebApp.ProgramEdit._CurrentProgram.Description = HG.WebApp.Data.Programs[i].Description;
-                HG.WebApp.ProgramEdit._CurrentProgram.Address = HG.WebApp.Data.Programs[i].Address;
-                HG.WebApp.ProgramEdit._CurrentProgram.Domain = HG.WebApp.Data.Programs[i].Domain;
-                HG.WebApp.ProgramEdit._CurrentProgram.IsEnabled = HG.WebApp.Data.Programs[i].IsEnabled;
-                HG.WebApp.ProgramEdit._CurrentProgram.Conditions = HG.WebApp.Data.Programs[i].Conditions;
-                HG.WebApp.ProgramEdit._CurrentProgram.Commands = HG.WebApp.Data.Programs[i].Commands;
+                var program = HG.WebApp.Data.Programs[i];
+                HG.WebApp.ProgramEdit._CurrentProgram.Type = program.Type;
+                HG.WebApp.ProgramEdit._CurrentProgram.Group = program.Group;
+                HG.WebApp.ProgramEdit._CurrentProgram.Name = program.Name;
+                HG.WebApp.ProgramEdit._CurrentProgram.Description = program.Description;
+                HG.WebApp.ProgramEdit._CurrentProgram.Address = program.Address;
+                HG.WebApp.ProgramEdit._CurrentProgram.Domain = program.Domain;
+                HG.WebApp.ProgramEdit._CurrentProgram.IsEnabled = program.IsEnabled;
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions = program.Conditions;
+                HG.WebApp.ProgramEdit._CurrentProgram.Commands = program.Commands;
+                HG.WebApp.ProgramEdit._CurrentProgram.AutoRestartEnabled = program.AutoRestartEnabled;
                 //
                 $('#automation_programname').val(HG.WebApp.ProgramEdit._CurrentProgram.Name);
                 $('#automation_programdescription').val(HG.WebApp.ProgramEdit._CurrentProgram.Description);
-                $('#automation_program_autorestartenabled').val(HG.WebApp.ProgramEdit._CurrentProgram.AutoRestartEnabled);
+                
+                $('#automation_program_autorestartenabled').prop('checked', HG.WebApp.ProgramEdit._CurrentProgram.AutoRestartEnabled);
+                $('#automation_program_autorestartenabled').checkboxradio();
+                $('#automation_program_autorestartenabled').checkboxradio('refresh');
                 //
                 $('#automation_programgroup').val(HG.WebApp.ProgramEdit._CurrentProgram.Group);
                 $('#automation_programgroup').selectmenu().selectmenu('refresh');
                 //
-                HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = HG.WebApp.Data.Programs[i].ScriptCondition;
-                HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = HG.WebApp.Data.Programs[i].ScriptSource;
+                HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = program.ScriptCondition;
+                HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = program.ScriptSource;
                 //
                 $('#automation_programtype').val(HG.WebApp.ProgramEdit._CurrentProgram.Type);
                 $('#automation_programtype').selectmenu().selectmenu('refresh');
@@ -659,7 +664,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 editor3.clearHistory();
                 editor3.markClean();
                 //
-                HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = HG.WebApp.Data.Programs[i].ConditionType;
+                HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = program.ConditionType;
                 //
                 switch (HG.WebApp.ProgramEdit._CurrentProgram.ConditionType) {
                     case 2:
@@ -683,7 +688,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 $('#automation_conditiontype').selectmenu();
                 $('#automation_conditiontype').selectmenu('refresh');
                 //
-                HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = HG.WebApp.Data.Programs[i].ScriptErrors;
+                HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = program.ScriptErrors;
                 //
                 HG.WebApp.ProgramEdit.RefreshProgramOptions();
                 break;
