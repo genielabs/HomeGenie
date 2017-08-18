@@ -5,7 +5,7 @@ a53451c71516397a23af7781bcd261ab  usr/local/bin/homegenie/HISTORY.TXT
 2074c256e8b7a372e28490a436a8e04d  usr/local/bin/homegenie/NLog.dll
 ae7bbf0f4b96d2a0effd97d69befb47e  usr/local/bin/homegenie/CommonMark.dll
 b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
-584303794e487d4e6f55f070b9ff5293  usr/local/bin/homegenie/MIG.dll
+49ee12cdbe60ee280d0b43878155e1e0  usr/local/bin/homegenie/MIG.dll
 80abb66a7330a814591bf3f0dc0b2205  usr/local/bin/homegenie/SerialPortLib.dll
 245cb2044a26e93cf450ad64a84a749e  usr/local/bin/homegenie/CREDITS.TXT
 9acbea590ce7639360ddf126ad1342b1  usr/local/bin/homegenie/Raspberry.IO.GeneralPurpose.dll
@@ -14,7 +14,7 @@ b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 ed3022822cd3dc3348bb51dc054f1574  usr/local/bin/homegenie/IronPython.dll
 77b3a5f5184365b6d29cecfab3150d96  usr/local/bin/homegenie/Jint.dll
-fad7be7db2af74329d7980b35bf5a9da  usr/local/bin/homegenie/release_info.xml
+5b3b8c0557a78365b0e243606645e55b  usr/local/bin/homegenie/release_info.xml
 903e6ab6f1428ec2265cdf54355c4cba  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 6071b93d913fe4c81b86abd984f1bf51  usr/local/bin/homegenie/automationgroups.xml
 46b7171b15421fb7e2840a8b55bbd728  usr/local/bin/homegenie/NLog.config
