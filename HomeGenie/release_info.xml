@@ -3,10 +3,18 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r526</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed Camera widget 'hanging' bug when displaying multiple cameras on a page, also increased refresh speed
+  <ReleaseNote>   - Updated Energy Monitor Widget: added daily counter and total counter reset button.
+  - Added file "certaccept.xml" to bypass SSL certificate errors (RemoteCertificateChainErrors) 
+  - Improved group modules popup with multiple selection (#307)
+  - Fix #274 controlling virtual modules via script or scheduler fails if VM domain was same as a MIG interface domain
+  - Updated ZWaveLib 1.0.15
+  - Updated custom Raspberry.IO libs to fix 'unknown processor' error on lastest RPi firmwares
+  - Fix SerialPortHelper issue #314
+  - Fix location picker bug
+  - Fixed Camera widget 'hanging' bug when displaying multiple cameras on a page, also increased refresh speed
   - Fixed side menu refresh bug
   - Fonts are now embedded in css (no more delay downloading from google fonts)
   - Fixed SSL error when sending e-mails
   - Other minor fixes/improvements</ReleaseNote>
-  <ReleaseDate>2016-07-08T00:00:00.0000Z</ReleaseDate>
+  <ReleaseDate>2017-08-18T00:00:00.0000Z</ReleaseDate>
 </ReleaseInfo>

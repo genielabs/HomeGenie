@@ -46,21 +46,6 @@ namespace HomeGenie.Service
 
         public const string PACKAGE_LIST_FILE = "installed_packages.json";
 
-        // TODO: TO BE REMOVED
-        // TODO: DUMMY SSL validation!! This must be removed as it could be intrduce security flaws
-        // TODO: SSL connection certificate validation:
-        // TODO: this is just an hack to fix certificate issues on mono < 4.0,
-        // TODO: not meant to be used in production enviroment
-        public static bool Validator(
-            object sender,
-            X509Certificate certificate,
-            X509Chain chain,
-            SslPolicyErrors sslPolicyErrors
-        )
-        {
-            return true;
-        }
-
         public PackageManager(HomeGenieService hg)
         {
             homegenie = hg;
@@ -69,13 +54,6 @@ namespace HomeGenie.Service
 
         public bool InstallPackage(string pkgFolderUrl, string tempFolderPath)
         {
-            // TODO: TO BE REMOVED
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                // TODO: this is just an hack to fix certificate issues on mono < 4.0,
-                ServicePointManager.ServerCertificateValidationCallback = Validator;
-            }
-
             string installFolder = Path.Combine(tempFolderPath, "pkg");
             dynamic pkgData = null;
             bool success = true;
@@ -341,13 +319,6 @@ namespace HomeGenie.Service
                     Properties.InstallProgressMessage,
                     "= Status: Package Install Error"
                 );
-            }
-
-            // TODO: TO BE REMOVED
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                // TODO: this is just an hack to fix certificate issues on mono < 4.0,
-                ServicePointManager.ServerCertificateValidationCallback = null;
             }
 
             return success;

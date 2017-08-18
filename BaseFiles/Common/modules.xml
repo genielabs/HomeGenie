@@ -702,6 +702,13 @@
         <UpdateTime>2017-08-17T17:52:04.937659Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>EnergyMonitor.KwCounter.Today</Name>
+        <Value>7izsS63lUWdTcqbl73WK5A==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.937659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
         <Value>4Fmfgj/yZ3JipvXEWu0f1w==</Value>
         <Description />
@@ -731,6 +738,13 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattCounter</Name>
+        <Value>fJKEdvpBVYckfXMBhYbP0g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.939781Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.WattCounter.Today</Name>
         <Value>fJKEdvpBVYckfXMBhYbP0g==</Value>
         <Description />
         <FieldType />

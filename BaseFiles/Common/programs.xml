@@ -136,7 +136,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.220831Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.712519Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -270,7 +270,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.457324Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:34.019462Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -414,7 +414,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Environment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:30.143414Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:34.453266Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -640,7 +640,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.224657Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.717372Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -687,7 +687,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.21398Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.717265Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1038,7 +1038,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:30.022195Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:34.415507Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1168,7 +1168,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.226573Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.730942Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1269,7 +1269,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:30.057954Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.796477Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1443,8 +1443,10 @@ Currently limited to one client channel.</Description>
 </ScriptCondition>
     <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
 var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
-var kwLoad = energyMonitor.Parameter("EnergyMonitor.KwLoad");
+var kwCounterToday = energyMonitor.Parameter("EnergyMonitor.KwCounter.Today");
 var wattCounter = energyMonitor.Parameter("EnergyMonitor.WattCounter");
+var wattCounterToday = energyMonitor.Parameter("EnergyMonitor.WattCounter.Today");
+var kwLoad = energyMonitor.Parameter("EnergyMonitor.KwLoad");
 var wattLoad = energyMonitor.Parameter("EnergyMonitor.WattLoad");
 var operatingDevices = energyMonitor.Parameter("EnergyMonitor.OperatingDevices");
 var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
@@ -1503,6 +1505,9 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
     var totalWattCounter = wattCounter.DecimalValue + (totalLoad / 60D);
     wattCounter.Value = (totalWattCounter).ToString("0.000", CultureInfo.InvariantCulture);
     kwCounter.Value = (totalWattCounter / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
+    var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60D);
+    wattCounterToday.Value = (todayWattCounter).ToString("0.000", CultureInfo.InvariantCulture);
+    kwCounterToday.Value = (todayWattCounter / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
   }
   // Update current load/devices stats
   kwLoad.Value = (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
@@ -1515,16 +1520,19 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
 });
 
 When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
-  // TODO: add API to reset the energy counter
-  //if (args == "Reset")
-  //{
-  //  kwCounter.Value = "0";
-  //  wattCounter.Value = "0";
-  //}
+  var api = new MigInterfaceCommand((string)args);
+  if (api.Command == "Counter.Reset")
+  {
+    kwCounter.Value = "0";
+    wattCounter.Value = "0";
+    UpdateEnergyLoad();
+  }
   dynamic response = new System.Dynamic.ExpandoObject();
   response.KiloWattLoad = kwLoad.Value;
   response.KiloWattCouter = kwCounter.Value;
   response.WattCounter = wattCounter.Value;
+  response.KiloWattCounterToday = kwCounterToday.Value;
+  response.WattCounterToday = wattCounterToday.Value;
   response.WattLoad = wattLoad.Value;
   response.OperatingDevices = operatingDevices.Value;
   response.OperatingLights = operatingLights.Value;
@@ -1532,11 +1540,23 @@ When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
   return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(response) + "]";
 });
 
+var midNightReset = false;
 while (Program.IsEnabled)
 {
   if (updateRequired || (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt; 59) {
   	updateRequired = false;
     UpdateEnergyLoad();
+  }
+  // Reset daily counters within first minute after midnight
+  if ((DateTime.Now - DateTime.Today).TotalSeconds &lt; 60 &amp;&amp; !midNightReset) 
+  {
+    wattCounterToday.Value = "0";
+    kwCounterToday.Value = "0";
+    midNightReset = true;
+  }
+  else if ((DateTime.Now - DateTime.Today).TotalSeconds &gt;= 60 &amp;&amp; midNightReset)
+  {
+    midNightReset = false;
   }
   Pause(2);
 }
@@ -1549,7 +1569,7 @@ while (Program.IsEnabled)
 device status and energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
-    <ActivationTime>2017-08-17T17:49:25.327894Z</ActivationTime>
+    <ActivationTime>2017-08-18T10:14:05.388996Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -1699,7 +1719,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.25304Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.76508Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1932,7 +1952,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.259539Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.774778Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2380,7 +2400,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.376437Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:33.903108Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2561,7 +2581,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.37119Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:34.024702Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2691,7 +2711,7 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2017-08-17T17:32:29.457326Z</TriggerTime>
+    <TriggerTime>2017-08-18T08:48:34.145858Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2875,8 +2895,8 @@ function initialize() {
         <Description>Set switch on/off</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2017-08-17T17:32:28.951501Z</ActivationTime>
-    <TriggerTime>2017-08-17T17:32:29.907385Z</TriggerTime>
+    <ActivationTime>2017-08-18T08:48:33.493129Z</ActivationTime>
+    <TriggerTime>2017-08-18T08:48:34.358831Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2897,7 +2917,7 @@ $$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptS
     <Description>Toogle door window sensor value</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-17T17:32:28.952229Z</ActivationTime>
+    <ActivationTime>2017-08-18T08:48:33.493888Z</ActivationTime>
     <TriggerTime>2017-08-06T18:05:43.555555Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2921,7 +2941,7 @@ $$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
     <Description>Simulate motion detection</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-17T17:32:28.952351Z</ActivationTime>
+    <ActivationTime>2017-08-18T08:48:33.494011Z</ActivationTime>
     <TriggerTime>2016-06-18T13:58:14.256339Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2948,7 +2968,7 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-17T17:32:28.952473Z</ActivationTime>
+    <ActivationTime>2017-08-18T08:48:33.494135Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2977,7 +2997,7 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-17T17:32:28.952673Z</ActivationTime>
+    <ActivationTime>2017-08-18T08:48:33.494298Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
