@@ -14,7 +14,7 @@ b6df33c0bb71432909c278561f6fdb9c  usr/local/bin/homegenie/Common.Logging.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 ed3022822cd3dc3348bb51dc054f1574  usr/local/bin/homegenie/IronPython.dll
 77b3a5f5184365b6d29cecfab3150d96  usr/local/bin/homegenie/Jint.dll
-5b3b8c0557a78365b0e243606645e55b  usr/local/bin/homegenie/release_info.xml
+dd5db2ca1ef913bf027e4ec1ef85189a  usr/local/bin/homegenie/release_info.xml
 903e6ab6f1428ec2265cdf54355c4cba  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 6071b93d913fe4c81b86abd984f1bf51  usr/local/bin/homegenie/automationgroups.xml
 46b7171b15421fb7e2840a8b55bbd728  usr/local/bin/homegenie/NLog.config
@@ -48,7 +48,7 @@ a10fc9aa97ec8123eb53d6cce5205aad  usr/local/bin/homegenie/lib/shared/SoapBox.Flu
 2497cf08a8cf80bac20744c8494d06a6  usr/local/bin/homegenie/lib/shared/uk/CronExpressionDescriptor.resources.dll
 8898880f5b1964bc058e3286b396a064  usr/local/bin/homegenie/lib/shared/tr/CronExpressionDescriptor.resources.dll
 51908f49a9281ededae37cfa18cde70d  usr/local/bin/homegenie/lib/shared/CronExpressionDescriptor.dll
-db1fce222554238c61f87c836177a424  usr/local/bin/homegenie/lib/shared/Innovative.SolarCalculator.dll
+a60219e530a38e157a7471e781c80277  usr/local/bin/homegenie/lib/shared/Innovative.SolarCalculator.dll
 5dfc87df81abacf82441bad9467d10ed  usr/local/bin/homegenie/lib/shared/M2Mqtt.Net.dll.mdb
 ae0fde41ac16130b4ec74a277e3ff754  usr/local/bin/homegenie/lib/shared/NCrontab.dll
 668d68198a74c818c797bdd5f54560e2  usr/local/bin/homegenie/lib/shared/M2Mqtt.Net.dll
@@ -69,7 +69,7 @@ dc855bcd7df286edc345fd7fc4ff1f9d  usr/local/bin/homegenie/lib/shared/pt/CronExpr
 a19a8070a77444aafa96d3fbe033c42e  usr/local/bin/homegenie/IronRuby.Libraries.dll
 629f440a5278efc8007d8eb34443ac93  usr/local/bin/homegenie/installed_packages.json
 cc27215f3e44078c573b0018b7f6d4c5  usr/local/bin/homegenie/homegenie_stats.db
-281171fec847561247dcd7e760b9e833  usr/local/bin/homegenie/HomeGenie.exe.mdb
+ee84ae5452c88c9bfe711f4ed5cf4fc8  usr/local/bin/homegenie/HomeGenie.exe.mdb
 61b0c6d8eb2c756355d52df2ef6170c6  usr/local/bin/homegenie/Microsoft.Scripting.dll
 9f96aee193d53a925d18b2769e7958e0  usr/local/bin/homegenie/Ude.dll
 0728e681132f8722dd21b90d88970bd7  usr/local/bin/homegenie/Microsoft.Dynamic.dll
@@ -1149,7 +1149,7 @@ e4db61c96026790e3d7ce87408194768  usr/local/bin/homegenie/programs/76.dll
 b6cb77f9f825dcd7bb10aba4412730bd  usr/local/bin/homegenie/programs/82.dll
 9b416b14afe00e90921620a048b29aab  usr/local/bin/homegenie/programs/90.dll
 9e90aad43d8acc5b45729f2296cb5907  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
-ef6c63543e6b719a2896938b9602c0c0  usr/local/bin/homegenie/HomeGenie.exe
+a0f429c4ccb76961a4872a7361e10945  usr/local/bin/homegenie/HomeGenie.exe
 e1100642a53777bed407a5ce5f5f76fd  usr/local/bin/homegenie/programs.xml
 e57f7dd73199083f724886a5ff3f1239  usr/local/bin/homegenie/Raspberry.System.dll
 513c0ab6c041976fe0bfc13a0c3f1690  usr/local/bin/homegenie/websocket-sharp.dll
