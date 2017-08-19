@@ -480,7 +480,7 @@ namespace HomeGenie.Service
             var status = InstallStatus.Success;
             bool restartRequired = false;
             string oldFilesPath = Path.Combine("_update", "oldfiles");
-            string newFilesPath = Path.Combine("_update", "files", "HomeGenie");
+            string newFilesPath = Path.Combine("_update", "files", "HomeGenie_update");
             string fullReleaseFolder = Path.Combine("_update", "files", "homegenie");
             if (Directory.Exists(fullReleaseFolder))
             {
@@ -504,20 +504,29 @@ namespace HomeGenie.Service
                         using (var md5 = MD5.Create())
                         {
                             string localHash, remoteHash = "";
-                            using (var stream = File.OpenRead(destinationFile))
+                            try
                             {
-                                localHash = BitConverter.ToString(md5.ComputeHash(stream));
+                                // Try getting files' hash
+                                using (var stream = File.OpenRead(destinationFile))
+                                {
+                                    localHash = BitConverter.ToString(md5.ComputeHash(stream));
+                                }
+                                using (var stream = File.OpenRead(file))
+                                {
+                                    remoteHash = BitConverter.ToString(md5.ComputeHash(stream));
+                                }
+                                if (localHash != remoteHash)
+                                {
+                                    processFile = true;
+                                    //Console.WriteLine("CHANGED {0}", destinationFile);
+                                    //Console.WriteLine("   - LOCAL  {0}", localHash);
+                                    //Console.WriteLine("   - REMOTE {0}", remoteHash);
+                                }
                             }
-                            using (var stream = File.OpenRead(file))
+                            catch (Exception e)
                             {
-                                remoteHash = BitConverter.ToString(md5.ComputeHash(stream));
-                            }
-                            if (localHash != remoteHash)
-                            {
-                                processFile = true;
-                                //Console.WriteLine("CHANGED {0}", destinationFile);
-                                //Console.WriteLine("   - LOCAL  {0}", localHash);
-                                //Console.WriteLine("   - REMOTE {0}", remoteHash);
+                                // this mostly happen if the destinationFile is un use and cannot be opened,
+                                // file is then ignored if hash cannot be calculated
                             }
                         }
                     }

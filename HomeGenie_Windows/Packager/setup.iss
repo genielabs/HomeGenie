@@ -4,10 +4,10 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.1 beta (r523)
+AppVerName=HomeGenie 1.1 beta (r526)
 AppPublisher=GenieLabs
 AppPublisherURL=http://www.homegenie.it
-AppVersion=1.1 beta (r523)
+AppVersion=1.1 beta (r526)
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
@@ -29,7 +29,7 @@ PrivilegesRequired=admin
 ; registry. On all other architectures it will install in "32-bit mode".
 ArchitecturesInstallIn64BitMode=x64 ia64
 ;WindowVisible=True
-AppCopyright=(c) 2011-2015 G-Labs - info@homegenie.it
+AppCopyright=(c) 2011-2017 G-Labs - info@homegenie.it
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -198,8 +198,8 @@ Type: files; Name: "{app}\SQLite.Interop.dll";
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Icons]
-Name: "{group}\HomeGenie 1.1 beta (r523)"; Filename: "{app}\HomeGenieManager.exe"
-Name: "{group}\Uninstall HomeGenie 1.1 beta (r523)"; Filename: "{uninstallexe}"
+Name: "{group}\HomeGenie 1.1 beta (r526)"; Filename: "{app}\HomeGenieManager.exe"
+Name: "{group}\Uninstall HomeGenie 1.1 beta (r526)"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\HomeGenie"; Filename: "{app}\HomeGenieManager.exe"
 
 [Run]
