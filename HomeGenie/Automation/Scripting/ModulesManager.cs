@@ -309,8 +309,9 @@ namespace HomeGenie.Automation.Scripting
             {
                 var modules = new TsList<Module>();
                 // select modules in current command context
-                foreach (var module in Modules)
+                for (int cm = 0; cm < Modules.Count; cm++)
                 {
+                    var module = Modules[cm];
                     bool selected = true;
                     if (selected && this.inDomain != null && this.inDomain != "" && GetArgumentsList(this.inDomain.ToLower()).Contains(module.Domain.ToLower()) == false)
                     {
@@ -400,8 +401,9 @@ namespace HomeGenie.Automation.Scripting
             get
             {
                 var groups = new List<string>();
-                foreach (var group in homegenie.Groups)
+                for (int cg = 0; cg < homegenie.Groups.Count; cg++)
                 {
+                    var group = homegenie.Groups[cg];
                     groups.Add(group.Name);
                 }
                 return groups;
