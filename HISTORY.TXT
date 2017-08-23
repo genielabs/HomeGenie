@@ -1,6 +1,18 @@
 ﻿RELEASE HISTORY
 
-07/07/2016 v1.1-beta.526
+This file is no longer updated, referer to GitHub repository commits' log.
+
+https://github.com/genielabs/HomeGenie/commits/master
+
+19/08/2017 v1.1-beta.526
+    - Updated Energy Monitor Widget: added daily counter and total counter reset button.
+    - Added file "certaccept.xml" to bypass SSL certificate errors (RemoteCertificateChainErrors) 
+    - Improved group modules popup with multiple selection (#307)
+    - Fix #274 controlling virtual modules via script or scheduler fails if VM domain was same as a MIG interface domain
+    - Updated ZWaveLib 1.0.15
+    - Updated custom Raspberry.IO libs to fix 'unknown processor' error on lastest RPi firmwares
+    - Fix SerialPortHelper issue #314
+    - Fix location picker bug
     - Fixed Camera widget 'hanging' bug when displaying multiple cameras on a page, also increased refresh speed
     - Fixed side menu refresh bug
     - Fonts are now embedded in css (no more delay downloading from google fonts)
