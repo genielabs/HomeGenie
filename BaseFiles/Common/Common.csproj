@@ -1218,6 +1218,16 @@
     <None Include="html\pages\control\widgets\homegenie\generic\camerainput.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="html\images\indicators\distance-black.png" />
+    <Content Include="html\images\indicators\distance.png" />
+    <Content Include="html\images\indicators\flow-black.png" />
+    <Content Include="html\images\indicators\flow.png" />
+    <Content Include="html\images\indicators\infrared.png" />
+    <Content Include="html\images\indicators\infrared_black.png" />
+    <Content Include="html\images\indicators\uv-black.png" />
+    <Content Include="html\images\indicators\uv.png" />
+    <Content Include="html\images\indicators\volume.png" />
+    <Content Include="html\images\indicators\volume_black.png" />
     <Content Include="html\pages\control\widgets\homegenie\generic\camerainput.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
