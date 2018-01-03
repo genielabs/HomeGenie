@@ -1,0 +1,6 @@
+Package: wpkg
+Sub-Packages: *
+Architecture: any
+Version: 0.5
+Maintainer: Generoso Martello <gene@homegenie.it>
+Description: The package manager for the MinGW environment

@@ -1,0 +1,141 @@
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+
+version: 1.1.{build}
+skip_tags: true
+
+#---------------------------------#
+#     install configuration       #
+#---------------------------------#
+
+install:
+  # - git clone https://github.com/genielabs/mig-service-dotnet.git
+  
+  # Install innosetup
+  - choco install -y curl innosetup
+
+  # Install doxy
+  - choco install doxygen.portable
+
+  # Download wpkg and install
+  - appveyor downloadfile https://downloads.sourceforge.net/project/unigw/wpkg/1.0.0/wpkg-1.0.0-amd64.exe
+  - wpkg-1.0.0-amd64.exe /S
+  # Install 7zipcommandline
+  - nuget install 7ZipCLI -ExcludeVersion # http://help.appveyor.com/discussions/suggestions/702-pre-install-7zipcommandline
+  - set PATH=%appveyor_build_folder%\7ZipCLI\tools;"C:\Program Files (x86)\Inno Setup 5";%PATH%
+
+#---------------------------------#
+#      build configuration        #
+#---------------------------------#
+
+#build:
+#  project: c:\projects\homegenie\HomeGenie_Windows\HomeGenie_VS10.sln
+#  verbosity: minimal
+
+build_script:
+- cmd: >-
+    msbuild c:\projects\homegenie\BaseFiles\Windows\Windows.csproj /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+    msbuild c:\projects\homegenie\HomeGenie_Windows\HomeGenie_VS10.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+#---------------------------------#
+#       Post build steps          #
+#---------------------------------#
+
+# Generate documentation
+- cd C:\projects\homegenie\Doxy
+- doxygen.exe "C:\projects\homegenie\Doxy\Doxyfile"
+- cd C:\projects\homegenie
+
+#---------------------------------#
+#  pre deployment configuration   #
+#---------------------------------#
+
+before_deploy:
+  - ps: |
+
+      # Testing
+      #clear
+      #$env:APPVEYOR_BUILD_NUMBER = "123"
+      #$env:configuration = "debug"
+
+      #---------------------------------#
+      #         create deb file         #
+      #---------------------------------#
+
+      # Create folder for packaging from
+      New-Item c:\projects\homegenie\release -type directory -force | out-null
+
+      # Copy output from the build
+      # Todo - get this working via a variable and pass into compiler command above
+      if (!$env:CONFIGURATION) { $env:CONFIGURATION = "debug" }
+
+      Copy-Item -Path C:\projects\homegenie\HomeGenie\bin\$($env:CONFIGURATION)\ -Destination c:\projects\homegenie\release\usr\local\bin\homegenie -recurse -force
+
+      # prevent md5sums error
+      remove-item C:\projects\homegenie\HomeGenie_Linux\Packager\DEBIAN\md5sums -errorAction SilentlyContinue
+
+      # Make the description span two lines and be under the 70 char limit
+      $controlFile = 'C:\projects\homegenie\HomeGenie_Linux\Packager\DEBIAN\control'
+      (Get-Content $controlFile) -replace "Description: HomeGenie - open source, programmable, home automation server for smart connected devices and applications.", "Description: HomeGenie - open source, programmable, home automation server`n for smart connected devices and applications." | out-file $controlFile -encoding ASCII -force
+
+      # Copy the files needed to make a .deb package
+      Copy-Item -Path C:\projects\homegenie\HomeGenie_Linux\Packager\DEBIAN -Destination c:\projects\homegenie\release -recurse -force 
+      Copy-Item -Path C:\projects\homegenie\HomeGenie_Linux\Packager\DEBIAN -Destination c:\projects\homegenie\release\usr\local\bin\homegenie -recurse -force
+
+      # Replace -rxyz with version number eg-r1234 in control file(s)
+      (Get-Content 'c:\projects\homegenie\release\usr\local\bin\homegenie\DEBIAN\control') -replace "-rxyz", "r$($env:APPVEYOR_BUILD_NUMBER)" | out-file 'c:\projects\homegenie\release\usr\local\bin\homegenie\DEBIAN\control' -encoding ASCII -force
+      (Get-Content 'c:\projects\homegenie\release\DEBIAN\control') -replace "-rxyz", "r$($env:APPVEYOR_BUILD_NUMBER)" | out-file 'c:\projects\homegenie\release\DEBIAN\control' -encoding ASCII -force
+
+      # Remove items
+      remove-item c:\projects\homegenie\release\log -force -recurse -errorAction SilentlyContinue |out-null
+      get-childitem -path c:\projects\homegenie\release -filter libCameraCaptureV4L.so -Recurse | remove-item |out-null
+      get-childitem -path c:\projects\homegenie\release -filter liblirc_client.so -Recurse | remove-item |out-null
+      get-childitem -path c:\projects\homegenie\release -filter libusb-1.0.so -Recurse | remove-item |out-null
+
+      # Get the folder size in Kb and trim.. Consider Math::Ceiling to round
+      $Size = "{0:0}" -f ((get-childitem -path "c:\projects\homegenie\release\usr" -recurse | Measure-Object -property length -sum).Sum / 1Kb)
+
+      # Update Control file(s) with size
+      (Get-Content 'c:\projects\homegenie\release\usr\local\bin\homegenie\DEBIAN\control') -replace "-sxyz", $Size | out-file 'c:\projects\homegenie\release\usr\local\bin\homegenie\DEBIAN\control' -encoding ASCII -force
+      (Get-Content 'c:\projects\homegenie\release\DEBIAN\control') -replace "-sxyz", $Size | out-file 'c:\projects\homegenie\release\DEBIAN\control' -encoding ASCII -force
+
+  # Call wpkg to create .deb package
+  - C:\WPKG\bin\wpkg.exe --build c:\projects\homegenie\release --output-dir c:\projects\homegenie\release --verbose
+
+#---------------------------------#
+#         create TGZ file         #
+#---------------------------------#
+
+  - 7za a -ttar "c:\projects\homegenie\release\homegenie_1.1r%APPVEYOR_BUILD_NUMBER%_all.tgz" "C:\projects\homegenie\HomeGenie\bin\%CONFIGURATION%\*""
+
+#---------------------------------#
+# create windows setup (exe) file #
+#---------------------------------#
+
+  - iscc c:\projects\HomeGenie\HomeGenie_Windows\Packager\setup.iss /Oc:\projects\homegenie\release /Fhomegenie_1.1r%APPVEYOR_BUILD_NUMBER%_all
+
+#---------------------------------#
+#         Push Artifacts          #
+#---------------------------------#
+
+  - appveyor PushArtifact "release\homegenie_1.1r%APPVEYOR_BUILD_NUMBER%_all.deb"
+  - appveyor PushArtifact "release\homegenie_1.1r%APPVEYOR_BUILD_NUMBER%_all.tgz"
+  - appveyor PushArtifact "release\homegenie_1.1r%APPVEYOR_BUILD_NUMBER%_all.exe"
+
+#---------------------------------#
+#           Do Release            #
+#---------------------------------#
+
+deploy:
+  release: Homegenie-v$(appveyor_build_version)
+  description: 'Homegenie version $(appveyor_build_version)'
+  provider: GitHub
+  auth_token:
+    secure: 6xpJrNRZ7YlU22YNrDRs9dAmvp2LIJ4O7t+a5443/NERIk9Aspip7glMn9O4sqU6
+  # artifact: release\**\*.deb 
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: false        # deploy on tag push only
