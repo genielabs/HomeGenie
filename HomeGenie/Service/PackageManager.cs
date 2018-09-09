@@ -135,7 +135,9 @@ namespace HomeGenie.Service
                             Properties.InstallProgressMessage,
                             "= Installing: " + program.name.ToString()
                         );
-                        int pid = int.Parse(program.uid.ToString());
+                        int pid = homegenie.ProgramManager.GeneratePid();
+                        if (program.uid == null || !int.TryParse(program.uid.ToString(), out pid))
+                            program.uid = pid;
                         // by default enable package programs after installing them
                         var enabled = true;
                         var oldProgram = homegenie.ProgramManager.ProgramGet(pid);
