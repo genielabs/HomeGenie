@@ -7,6 +7,7 @@ then
     echo "No version string passed or no env '\$homegenie_version' set."
     exit 1
 fi
+set -e
 
 script_path="$( cd "$(dirname "$0")" ; pwd -P )"
 source_folder="$( cd "${script_path}/../../HomeGenie/bin/Debug" ; pwd -P )"

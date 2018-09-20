@@ -8,6 +8,7 @@ solution: HomeGenie_Linux/HomeGenie_Linux.sln
 before_install:
 before_script:
 script:
+    - msbuild /p:Configuration=Debug HomeGenie_Linux/HomeGenie_Linux.sln
 after_success:
   - HomeGenie_Linux/Packager/builddeb.sh
 after_failure:
