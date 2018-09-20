@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.2.527
+AppVerName=HomeGenie 1.1.527
 AppPublisher=GenieLabs
 AppPublisherURL=http://www.homegenie.it
 AppVersion=1.1.527
@@ -29,7 +29,7 @@ PrivilegesRequired=admin
 ; registry. On all other architectures it will install in "32-bit mode".
 ArchitecturesInstallIn64BitMode=x64 ia64
 ;WindowVisible=True
-AppCopyright=(c) 2011-2018 G-Labs - info@homegenie.it
+AppCopyright=(c) 2011-2017 G-Labs - info@homegenie.it
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -54,6 +54,81 @@ Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Code]
+function IsX64: Boolean;
+begin
+  Result := Is64BitInstallMode and (ProcessorArchitecture = paX64);
+end;
+
+function IsI64: Boolean;
+begin
+  Result := Is64BitInstallMode and (ProcessorArchitecture = paIA64);
+end;
+
+function IsX86: Boolean;
+begin
+  Result := not IsX64 and not IsI64;
+end;
+
+function Is64: Boolean;
+begin
+  Result := IsX64 or IsI64;
+end;
+
+
+function IsDotNetDetected(version: string; service: cardinal): boolean;
+// Indicates whether the specified version and service pack of the .NET Framework is installed.
+//
+// version -- Specify one of these strings for the required .NET Framework version:
+//    'v1.1.4322'     .NET Framework 1.1
+//    'v2.0.50727'    .NET Framework 2.0
+//    'v3.0'          .NET Framework 3.0
+//    'v3.5'          .NET Framework 3.5
+//    'v4\Client'     .NET Framework 4.0 Client Profile
+//    'v4\Full'       .NET Framework 4.0 Full Installation
+//    'v4.5'          .NET Framework 4.5
+//
+// service -- Specify any non-negative integer for the required service pack level:
+//    0               No service packs required
+//    1, 2, etc.      Service pack 1, 2, etc. required
+var
+    key: string;
+    install, release, serviceCount: cardinal;
+    check45, success: boolean;
+begin
+    // .NET 4.5 installs as update to .NET 4.0 Full
+    if version = 'v4.5' then begin
+        version := 'v4\Full';
+        check45 := true;
+    end else
+        check45 := false;
+
+    // installation key group for all .NET versions
+    key := 'SOFTWARE\Microsoft\NET Framework Setup\NDP\' + version;
+
+    // .NET 3.0 uses value InstallSuccess in subkey Setup
+    if Pos('v3.0', version) = 1 then begin
+        success := RegQueryDWordValue(HKLM, key + '\Setup', 'InstallSuccess', install);
+    end else begin
+        success := RegQueryDWordValue(HKLM, key, 'Install', install);
+    end;
+
+    // .NET 4.0/4.5 uses value Servicing instead of SP
+    if Pos('v4', version) = 1 then begin
+        success := success and RegQueryDWordValue(HKLM, key, 'Servicing', serviceCount);
+    end else begin
+        success := success and RegQueryDWordValue(HKLM, key, 'SP', serviceCount);
+    end;
+
+    // .NET 4.5 uses additional value Release
+    if check45 then begin
+        success := success and RegQueryDWordValue(HKLM, key, 'Release', release);
+        success := success and (release >= 378389);
+    end;
+
+    result := success and (install = 1) and (serviceCount >= service);
+end;
+
+
 
 function GetUninstallString: string;
 var
@@ -96,9 +171,20 @@ begin
       Result := False; //when older version present and not uninstalled
   end;
   
+  if not IsDotNetDetected('v4.5', 0) then begin
+     MsgBox('HomeGenie requires Microsoft .NET Framework 4.5.'#13#13
+         'Please use Windows Update to install this version,'#13
+         'and then re-run the HomeGenie setup program.', mbInformation, MB_OK);
+     Result := false;
+  end 
+  else
+     Result := true;
+
+  //MsgBox('Connect your automation interfaces now, if not already connected.', mbInformation, MB_OK);
 end;
 
 [Files]
+;Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
 Source: ".\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
