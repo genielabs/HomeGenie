@@ -24,8 +24,3 @@ http://github.com/genielabs/HomeGenie
 DOCUMENTATION
 
 http://genielabs.github.io/HomeGenie
-
-
-SUPPORT FORUM AND WIKI
-
-http://www.homegenie.it/forum
