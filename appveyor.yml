@@ -1,11 +1,11 @@
 version: 1.0.{build}
 branches:
-  only:
-  - master
+  except:
+    - gh-pages
 image: Visual Studio 2015
 configuration: Debug
 environment:
-  homegenie_version: 1.1-527
+  homegenie_version: 1.1-rc1.527
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
@@ -25,10 +25,16 @@ on_success:
 
     appveyor PushArtifact "Output\HomeGenie_%homegenie_version%.exe"
 
-deploy_script:
-- sh: >-
-    dir .\HomeGenie_Windows\Packager\Output
-
-    echo "TODO: should publish new release to GitHub"
-
+deploy:
+  release: v$(homegenie_version)
+  description: 'HomeGenie v$(homegenie_version)'
+  provider: GitHub
+  auth_token:
+    secure:  '$(github_deploy_key)'
+  artifact: 'Output\HomeGenie_$(homegenie_version).exe'
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: true        # deploy on tag push only
 
