@@ -1,5 +1,5 @@
 Package: homegenie
-Version: 1.1-rxyz
+Version: %version%
 Section: web
 Priority: optional
 Architecture: all
@@ -8,7 +8,7 @@ Depends: mono-runtime, libmono-corlib4.5-cil, libmono-system-web4.0-cil, libmono
 Pre-Depends: mono-runtime 
 Recommends: ca-certificates-mono 
 Suggests: arduino-mk, empty-expect
-Installed-Size: -sxyz
+Installed-Size: %installed_size%
 Maintainer: Generoso Martello <gene@homegenie.it>
 Homepage: http://www.homegenie.it
 Conflicts: 

@@ -172,7 +172,7 @@ begin
   end;
   
   if not IsDotNetDetected('v4.5', 0) then begin
-     MsgBox('HomeGenie requires Microsoft .NET Framework 4.5.'#13#13
+     MsgBox('HomeGenie requires Microsoft .NET Framework >= 4.5.'#13#13
          'Please use Windows Update to install this version,'#13
          'and then re-run the HomeGenie setup program.', mbInformation, MB_OK);
      Result := false;
@@ -184,7 +184,7 @@ begin
 end;
 
 [Files]
-Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
+;Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
 Source: ".\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion

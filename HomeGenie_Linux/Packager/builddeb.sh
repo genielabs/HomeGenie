@@ -1,65 +1,66 @@
 #!/bin/sh
 
+hg_version="1.1.527" # TODO: read version number from a shared file
+script_path="$( cd "$(dirname "$0")" ; pwd -P )"
+source_folder="$( cd "${script_path}/../../HomeGenie/bin/Debug" ; pwd -P )"
+target_folder="${script_path}/Output"
+
+echo "Source: $source_folder"
+echo "Destination: $target_folder"
+
 _cwd="$PWD"
+mkdir -p $target_folder
 
-echo "Enter HomeGenie revision (eg. r387):"
-read hg_revision_number
-
-echo "Enter target folder (eg. /home/myuser):"
-read hg_target_folder
-
-if [ -d "${hg_target_folder}" ]
+if [ -d "${target_folder}" ]
 then
 
-	hg_target_folder="${hg_target_folder}/homegenie-beta_1.1.${hg_revision_number}_all"
+    base_folder=$target_folder
+	target_folder="${target_folder}/homegenie_${hg_version}_all"
 
-	mkdir -p "$hg_target_folder/usr/local/bin/homegenie"
+	mkdir -p "$target_folder/usr/local/bin/homegenie"
 
-	echo "\n- Copying files to '$hg_target_folder'..."
+	echo "\n- Copying files to '$target_folder'..."
 
-	cp -r ../../HomeGenie/bin/Debug/* "$hg_target_folder/usr/local/bin/homegenie/"
-	rm -rf "$hg_target_folder/usr/local/bin/homegenie/log"
-	rm -rf "$hg_target_folder/usr/local/bin/homegenie/libCameraCaptureV4L.so"
-	rm -rf "$hg_target_folder/usr/local/bin/homegenie/liblirc_client.so"
-	rm -rf "$hg_target_folder/usr/local/bin/homegenie/libusb-1.0.so"
+	cp -r $source_folder/* "$target_folder/usr/local/bin/homegenie/"
+	rm -rf "$target_folder/usr/local/bin/homegenie/log"
+	rm -rf "$target_folder/usr/local/bin/homegenie/libCameraCaptureV4L.so"
+	rm -rf "$target_folder/usr/local/bin/homegenie/liblirc_client.so"
+	rm -rf "$target_folder/usr/local/bin/homegenie/libusb-1.0.so"
 
 	echo "\n- Generating md5sums in DEBIAN folder..."
-	cd $hg_target_folder
+	cd $target_folder
 	find "./usr/local/bin/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "\"usr/local/bin/homegenie/%P\" " | xargs md5sum > "$_cwd/DEBIAN/md5sums"
 	hg_installed_size=`du -s ./usr | cut -f1`
 	echo "  installed size: $hg_installed_size"
 	cd "$_cwd"
 
 	echo "- Copying updated DEBIAN folder..."
-	cp -r ./DEBIAN "$hg_target_folder/"
-	cp -r ./DEBIAN "$hg_target_folder/usr/local/bin/homegenie/"
-	sed -i s/-rxyz/-$hg_revision_number/g "$hg_target_folder/DEBIAN/control"
-	sed -i s/-rxyz/-$hg_revision_number/g "$hg_target_folder/usr/local/bin/homegenie/DEBIAN/control"
-	sed -i s/-sxyz/$hg_installed_size/g "$hg_target_folder/DEBIAN/control"
-	sed -i s/-sxyz/$hg_installed_size/g "$hg_target_folder/usr/local/bin/homegenie/DEBIAN/control"
+	cp -r ./DEBIAN "$target_folder/"
+	cp -r ./DEBIAN "$target_folder/usr/local/bin/homegenie/"
+	sed -i s/%version%/$hg_version/g "$target_folder/DEBIAN/control"
+	sed -i s/%version%/$hg_version/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
+	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/DEBIAN/control"
+	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
 
 	echo "- Fixing permissions..."
 
-	chmod -R 755 "$hg_target_folder/DEBIAN"
-#	chmod +x "$hg_target_folder/usr/local/bin/homegenie/startup.sh"
+	chmod -R 755 "$target_folder/DEBIAN"
+#	chmod +x "$target_folder/usr/local/bin/homegenie/startup.sh"
 
 	echo "\n- Building deb file...\n"
 
-	dpkg-deb --build "$hg_target_folder"
+	dpkg-deb --build "$target_folder"
 
 	echo "\n... done!\n"
 
-	while true; do
-		read -p "Remove temporary folder '$hg_target_folder'? " yn
-		case $yn in
-	    	[Yy]* ) rm -rf "$hg_target_folder"; break;;
-	    	[Nn]* ) exit;;
-	    	* ) echo "Please answer yes or no.";;
-		esac
-	done
+    cd "$target_folder/usr/local/bin/"
+    tar -czvf "${base_folder}/homegenie_${hg_version}.tgz" homegenie
+    rm -rf "$target_folder"; break;
+	cd "$_cwd"
     
 else
 
-    echo "Error: Directory '$hg_target_folder' does not exists."
+    echo "Error: Directory '$target_folder' does not exists."
 
 fi
+

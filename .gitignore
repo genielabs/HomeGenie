@@ -5,7 +5,7 @@
 [Rr]eleases/
 [Bb]in/
 [Oo]bj/
-Packager/Output/
+*/Packager/Output/
 
 # Temporary and local IDE/System files
 *.userprefs
