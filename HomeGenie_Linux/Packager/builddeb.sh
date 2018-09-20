@@ -7,7 +7,7 @@ then
     echo "No version string passed or no env '\$homegenie_version' set."
     exit 1
 fi
-set -e
+set -x -e
 
 script_path="$( cd "$(dirname "$0")" ; pwd -P )"
 source_folder="$( cd "${script_path}/../../HomeGenie/bin/Debug" ; pwd -P )"
@@ -37,11 +37,11 @@ then
 	rm -rf "$target_folder/usr/local/bin/homegenie/libusb-1.0.so"
 
 	echo "\n- Generating md5sums in DEBIAN folder..."
-	cd $target_folder
-	find "./usr/local/bin/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "\"usr/local/bin/homegenie/%P\" " | xargs md5sum > "$_cwd/DEBIAN/md5sums"
+	cd "$target_folder"
+	find "./usr/local/bin/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "\"usr/local/bin/homegenie/%P\" " | xargs md5sum > "$script_path/DEBIAN/md5sums"
 	hg_installed_size=`du -s ./usr | cut -f1`
 	echo "  installed size: $hg_installed_size"
-	cd "$_cwd"
+	cd "$script_path"
 
 	echo "- Copying updated DEBIAN folder..."
 	cp -r ./DEBIAN "$target_folder/"
