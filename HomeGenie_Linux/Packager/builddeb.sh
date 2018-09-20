@@ -17,8 +17,6 @@ echo "Packaging HomeGenie $homegenie_version"
 echo "Source: $source_folder"
 echo "Destination: $target_folder"
 
-exit 2
-
 _cwd="$PWD"
 mkdir -p $target_folder
 
@@ -68,10 +66,13 @@ then
     tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
     rm -rf "$target_folder"; break;
 	cd "$_cwd"
+
+    ls -la "${base_folder}"
     
 else
 
     echo "Error: Directory '$target_folder' does not exists."
+    exit 1
 
 fi
 
