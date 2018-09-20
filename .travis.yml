@@ -1,5 +1,9 @@
 language: csharp
 mono: 4.6.2
+env:
+  global:
+    - homegenie_version: 1.1.527
+    - secure: not_set
 solution: HomeGenie_Linux/HomeGenie_Linux.sln
 before_install:
 before_script:

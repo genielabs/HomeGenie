@@ -4,22 +4,26 @@ branches:
   - master
 image: Visual Studio 2015
 configuration: Debug
+environment:
+  homegenie_version: 1.2.527
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
 on_success:
 - cmd: >-
+    echo "Bundling installer for HomeGenie %homegenie_version%"
+    
     dir "HomeGenie\bin\Debug"
 
     cd "HomeGenie_Windows\Packager\"
 
-    "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q setup.iss
+    "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q /F"HomeGenie_%homegenie_version%" setup.iss
 
     echo "Adding artifact"
 
-    echo "TODO: should rename mysetup as homegenie_x.y.z.exe"
+    echo "TODO: should rename mysetup as homegenie_%homegenie_version%.exe"
 
-    appveyor PushArtifact Output\mysetup.exe
+    appveyor PushArtifact "Output\HomeGenie_%homegenie_version%.exe"
 
 deploy_script:
 - sh: >-

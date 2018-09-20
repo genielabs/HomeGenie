@@ -240,11 +240,3 @@ Raspberry Pi
 
 CubieTruck
 - GPIO Modules
-
-
-More program plugins available from contributors at Users' Forum board:
-http://www.homegenie.it/forum/index.php?board=3.0
-
-
-
-

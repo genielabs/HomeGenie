@@ -1,12 +1,22 @@
 #!/bin/sh
 
-hg_version="1.1.527" # TODO: read version number from a shared file
+homegenie_version="${1:-$homegenie_version}"
+
+if [ -z "$homegenie_version" ]
+then
+    echo "No version string passed or no env '\$homegenie_version' set."
+    exit 1
+fi
+
 script_path="$( cd "$(dirname "$0")" ; pwd -P )"
 source_folder="$( cd "${script_path}/../../HomeGenie/bin/Debug" ; pwd -P )"
 target_folder="${script_path}/Output"
 
+echo "Packaging HomeGenie $homegenie_version"
 echo "Source: $source_folder"
 echo "Destination: $target_folder"
+
+exit 2
 
 _cwd="$PWD"
 mkdir -p $target_folder
@@ -15,7 +25,7 @@ if [ -d "${target_folder}" ]
 then
 
     base_folder=$target_folder
-	target_folder="${target_folder}/homegenie_${hg_version}_all"
+	target_folder="${target_folder}/homegenie_${homegenie_version}_all"
 
 	mkdir -p "$target_folder/usr/local/bin/homegenie"
 
@@ -37,8 +47,8 @@ then
 	echo "- Copying updated DEBIAN folder..."
 	cp -r ./DEBIAN "$target_folder/"
 	cp -r ./DEBIAN "$target_folder/usr/local/bin/homegenie/"
-	sed -i s/%version%/$hg_version/g "$target_folder/DEBIAN/control"
-	sed -i s/%version%/$hg_version/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
+	sed -i s/%version%/$homegenie_version/g "$target_folder/DEBIAN/control"
+	sed -i s/%version%/$homegenie_version/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
 	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/DEBIAN/control"
 	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
 
@@ -54,7 +64,7 @@ then
 	echo "\n... done!\n"
 
     cd "$target_folder/usr/local/bin/"
-    tar -czvf "${base_folder}/homegenie_${hg_version}.tgz" homegenie
+    tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
     rm -rf "$target_folder"; break;
 	cd "$_cwd"
     
