@@ -10,13 +10,21 @@ build:
 on_success:
 - cmd: >-
     dir "HomeGenie\bin\Debug"
+
     cd "HomeGenie_Windows\Packager\"
+
     "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q setup.iss
+
     echo "Adding artifact"
+
     echo "TODO: should rename mysetup as homegenie_x.y.z.exe"
+
     appveyor PushArtifact Output\mysetup.exe
+
 deploy_script:
 - sh: >-
     dir .\HomeGenie_Windows\Packager\Output
+
     echo "TODO: should publish new release to GitHub"
+
 
