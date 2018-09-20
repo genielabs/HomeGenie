@@ -5,7 +5,7 @@ branches:
 image: Visual Studio 2015
 configuration: Debug
 environment:
-  homegenie_version: 1.2.527
+  homegenie_version: 1.1-527
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
