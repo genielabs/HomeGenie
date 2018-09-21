@@ -16,8 +16,11 @@ deploy:
   api_key:
     secure: UddT9q0YRxhD0ce4cRZrkmb5CDDeDwGVyOEO0koWFFwHIsqszQ8i6NgHJRF0+fmD9OLT65rONUbsZz1SG01gwdYy0aX46BdIRDz63Cs7TXZugoKu8ZagmXra8bb5nirJR6E54lCZrcma0zp0JlpOH6fAgWuG24LaWhmA4N8k4XNaLIQX9uHD7jTTK6gcq8JXaFA4UgXE6DwdkbGiPTUIdtHmuoEuTtW/djnkPwoE2ViqbAJfqJoxYJmce7v/C49enwqk9hSJ029r22hjtRpvsX02ZxPFXa7mR+310Jj+yRQWh4cCYZ+WfKqgpwNdQqvvT9HNslzLmP5WHVx5o0FOi96LC04HdezVqQhn2IkGMtc55qXoIC96vTwlUtmRMiD3XyUe8CJdp2tqL0tAnHbdNFqOgK5f0q6gM46KqEHP2aTDZaug4KGyairPR3Uw/Zx0pUy4a+ZBFg2myjKofdLKLMHMbIuWv1oSbY+5warxCTBUpx7NUP/JfQyrZwdQivjuqp+D7SvML66J56mzQ1/l9ExiTtKKFV0HpmJvmWFaucaYQBhy3i7+UafApPu8aFVTF6Fe/DovDfLV2/KBgUjhxPCeHRV7IXr3BOTfrpJQbr75SYkfjzFkT80ExELssUCo3oGk7T1V2RMlvVvL44yb6cGddXqsgmbdtqrkTdorhK4=
   file:
-    - HomeGenie_Linux/Packager/Output/homegenie_$(homegenie_version)_all.deb
-    - HomeGenie_Linux/Packager/Output/homegenie_$(homegenie_version).tgz
+  - HomeGenie_Linux/Packager/Output/homegenie_$(homegenie_version)_all.deb
+  - HomeGenie_Linux/Packager/Output/homegenie_$(homegenie_version).tgz
+  skip_cleanup: true
   on:
+    tags: true
+    branch: master
     repo: genielabs/HomeGenie
 

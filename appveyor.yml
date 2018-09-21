@@ -1,7 +1,7 @@
 version: 1.0.{build}
 branches:
   except:
-    - gh-pages
+  - gh-pages
 image: Visual Studio 2015
 configuration: Debug
 environment:
