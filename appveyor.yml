@@ -30,7 +30,7 @@ deploy:
   description: 'HomeGenie v$(homegenie_version)'
   provider: GitHub
   auth_token:
-    secure:  '$(github_deploy_key)'
+    secure:  1aMBEFi1qBAoV4H+LYx7hoVLgXJfndGoQ8I8qjLsoxXNA1zS+zgQHi2zVlRrmw1v
   artifact: 'Output\HomeGenie_$(homegenie_version).exe'
   draft: false
   prerelease: false
