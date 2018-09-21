@@ -9,8 +9,6 @@ build:
   verbosity: minimal
 after_build:
 - cmd: >-
-    nunit3-console ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll --result=myresults.xml;format=AppVeyor
-
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
     
     dir "HomeGenie\bin\Debug"
@@ -25,6 +23,10 @@ after_build:
 
     appveyor PushArtifact "Output\HomeGenie_%APPVEYOR_REPO_TAG_NAME%.exe"
 
+test:
+  assemblies:
+    only:
+      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)
   description: 'HomeGenie $(APPVEYOR_REPO_TAG_NAME)'
