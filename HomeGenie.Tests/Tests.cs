@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
 using NUnit.Framework;
@@ -27,7 +28,8 @@ namespace HomeGenie.Tests
             // then update the version string in `release_info.xml` file
             string releaseTag = Environment.GetEnvironmentVariable("TRAVIS_TAG");
             if (releaseTag == null) releaseTag = Environment.GetEnvironmentVariable("APPVEYOR_REPO_TAG_NAME");
-            if (releaseTag != null)
+            Trace.WriteLine("Release Tag: {0}", releaseTag);
+            if (!string.IsNullOrEmpty(releaseTag))
             {
                 Assert.True(releaseTag.StartsWith("v"));
                 releaseInfo.Version = releaseTag;
