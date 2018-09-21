@@ -194,7 +194,7 @@ namespace HomeGenie.Service
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 // TODO: this is just an hack to fix certificate issues on mono < 4.0,
-                ServicePointManager.ServerCertificateValidationCallback = Validator;
+                ServicePointManager.ServerCertificateValidationCallback += Validator;
             }
         }
 

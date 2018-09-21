@@ -23,8 +23,6 @@ after_test:
 
     echo "Adding artifact"
 
-    echo "TODO: should rename mysetup as homegenie_%APPVEYOR_REPO_TAG_NAME%.exe"
-
     appveyor PushArtifact "Output\HomeGenie_%APPVEYOR_REPO_TAG_NAME%.exe"
 
 deploy:
