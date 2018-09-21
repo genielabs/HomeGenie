@@ -7,13 +7,10 @@ configuration: Debug
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
-test:
-  # only assemblies to test
-  assemblies:
-    only:
-      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_build:
 - cmd: >-
+    nunit3-console ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll --result=myresults.xml;format=AppVeyor
+
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
     
     dir "HomeGenie\bin\Debug"
