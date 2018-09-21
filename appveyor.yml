@@ -7,7 +7,11 @@ configuration: Debug
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
-after_build:
+test:
+  assemblies:
+    only:
+      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+after_test:
 - cmd: >-
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
     
@@ -23,10 +27,6 @@ after_build:
 
     appveyor PushArtifact "Output\HomeGenie_%APPVEYOR_REPO_TAG_NAME%.exe"
 
-test:
-  assemblies:
-    only:
-      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)
   description: 'HomeGenie $(APPVEYOR_REPO_TAG_NAME)'
