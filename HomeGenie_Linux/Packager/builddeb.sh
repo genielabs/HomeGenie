@@ -1,6 +1,6 @@
 #!/bin/sh
 
-homegenie_version="${1:-$homegenie_version}"
+homegenie_version="${1:-$TRAVIS_TAG}"
 
 if [ -z "$homegenie_version" ]
 then

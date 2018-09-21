@@ -4,34 +4,32 @@ branches:
   - gh-pages
 image: Visual Studio 2015
 configuration: Debug
-environment:
-  homegenie_version: 1.1-rc1.527
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
 after_build:
 - cmd: >-
-    echo "Bundling installer for HomeGenie %homegenie_version%"
+    echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
     
     dir "HomeGenie\bin\Debug"
 
     cd "HomeGenie_Windows\Packager\"
 
-    "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q /F"HomeGenie_%homegenie_version%" setup.iss
+    "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
 
     echo "Adding artifact"
 
-    echo "TODO: should rename mysetup as homegenie_%homegenie_version%.exe"
+    echo "TODO: should rename mysetup as homegenie_%APPVEYOR_REPO_TAG_NAME%.exe"
 
-    appveyor PushArtifact "Output\HomeGenie_%homegenie_version%.exe"
+    appveyor PushArtifact "Output\HomeGenie_%APPVEYOR_REPO_TAG_NAME%.exe"
 
 deploy:
-  release: v$(homegenie_version)
-  description: 'HomeGenie v$(homegenie_version)'
+  release: $(APPVEYOR_REPO_TAG_NAME)
+  description: 'HomeGenie $(APPVEYOR_REPO_TAG_NAME)'
   provider: GitHub
   auth_token:
     secure:  1aMBEFi1qBAoV4H+LYx7hoVLgXJfndGoQ8I8qjLsoxXNA1zS+zgQHi2zVlRrmw1v
-  artifact: 'Output\HomeGenie_$(homegenie_version).exe'
+  artifact: 'Output\HomeGenie_$(APPVEYOR_REPO_TAG_NAME).exe'
   draft: false
   prerelease: false
   on:
