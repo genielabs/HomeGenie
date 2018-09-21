@@ -9,7 +9,7 @@ environment:
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal
-on_success:
+after_build:
 - cmd: >-
     echo "Bundling installer for HomeGenie %homegenie_version%"
     
