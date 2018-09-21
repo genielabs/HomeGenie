@@ -28,7 +28,6 @@ namespace HomeGenie.Tests
             // then update the version string in `release_info.xml` file
             string releaseTag = Environment.GetEnvironmentVariable("TRAVIS_TAG");
             if (releaseTag == null) releaseTag = Environment.GetEnvironmentVariable("APPVEYOR_REPO_TAG_NAME");
-            Trace.WriteLine("Release Tag: {0}", releaseTag);
             if (!string.IsNullOrEmpty(releaseTag))
             {
                 Assert.True(releaseTag.StartsWith("v"));
