@@ -12,7 +12,7 @@
 
 ### Specifications
 
-  - Version: 1.1-beta.r526
+  - Version: 1.1-stable.527
   - Operating System: 
   - .Net/Mono runtime version:
   - Hardware configuration: 

@@ -73,10 +73,20 @@ You can use one of the following IDEs:
 - Build/Debug the main *HomeGenie* project
 - no setup packaging currently supported for Mac
 
+##### Releasing a new version
+
+To release a new version push a new tag using the format:
+
+`v<major>.<minor>-[stable|beta|alpha].<build>`
+
+example: `v1.1-stable.527`
+
+When a new tag is submitted the CI system will build assets (.deb, .tgz, .exe distribution files) and upload them to the new GitHub release.
+
 
 #### Join HomeGenie team!
 
 HomeGenie is a volunteer effort. We encourage you to pitch in and join the team!
 
-Thanks! :heart: :heart: :heart:
+Thanks! :heart:
 

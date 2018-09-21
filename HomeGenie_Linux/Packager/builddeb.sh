@@ -4,7 +4,7 @@ homegenie_version="${1:-$TRAVIS_TAG}"
 
 if [ -z "$homegenie_version" ]
 then
-    echo "No version string passed or no env '\$homegenie_version' set."
+    echo "Skipping: no version string passed and no env '\$TRAVIS_TAG' is set."
     exit 1
 fi
 set -x -e
