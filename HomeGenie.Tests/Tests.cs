@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 using HomeGenie.Service;
 
-namespace HomeGenieTests
+namespace HomeGenie.Tests
 {
     [TestFixture]
     public class Tests

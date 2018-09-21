@@ -2,9 +2,13 @@ language: csharp
 mono: 4.6.2
 solution: HomeGenie_Linux/HomeGenie_Linux.sln
 before_install: 
+install:
+  - nuget restore HomeGenie_Linux/HomeGenie_Linux.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 before_script: 
 script:
 - xbuild /p:Configuration=Debug HomeGenie_Linux/HomeGenie_Linux.sln
+- mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_success:
 - HomeGenie_Linux/Packager/builddeb.sh
 after_failure: 
