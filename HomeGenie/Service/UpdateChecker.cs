@@ -482,9 +482,14 @@ namespace HomeGenie.Service
             string oldFilesPath = Path.Combine("_update", "oldfiles");
             string newFilesPath = Path.Combine("_update", "files", "HomeGenie_update");
             string fullReleaseFolder = Path.Combine("_update", "files", "homegenie");
+            string fullReleaseFolderAlt = Path.Combine("_update", "files", "HomeGenie");
             if (Directory.Exists(fullReleaseFolder))
             {
                 Directory.Move(fullReleaseFolder, newFilesPath);
+            }
+            else if (Directory.Exists(fullReleaseFolderAlt))
+            {
+                Directory.Move(fullReleaseFolderAlt, newFilesPath);
             }
             Utility.FolderCleanUp(oldFilesPath);
             if (Directory.Exists(newFilesPath))

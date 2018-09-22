@@ -275,7 +275,6 @@ namespace HomeGenie.Service.Handlers
                             {
                                 string installPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_update", "files");
                                 Utility.FolderCleanUp(installPath);
-                                Directory.Move(Path.Combine(tempFolderPath, "homegenie"), Path.Combine(installPath, "HomeGenie"));
                                 var installStatus = homegenie.UpdateChecker.InstallFiles();
                                 if (installStatus != UpdateChecker.InstallStatus.Error)
                                 {
