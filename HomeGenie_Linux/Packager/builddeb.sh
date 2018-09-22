@@ -63,7 +63,8 @@ then
 	echo "\n... done!\n"
 
     cd "$target_folder/usr/local/bin/"
-    tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
+    mv homegenie HomeGenie
+    tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" HomeGenie
     rm -rf "$target_folder"; break;
 	cd "$_cwd"
 
