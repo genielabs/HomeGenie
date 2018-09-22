@@ -28,13 +28,12 @@ after_test:
 deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)
   description: 'HomeGenie $(APPVEYOR_REPO_TAG_NAME)'
+  artifact: 'Output\HomeGenie_$(APPVEYOR_REPO_TAG_NAME).exe'
   provider: GitHub
   auth_token:
     secure:  1aMBEFi1qBAoV4H+LYx7hoVLgXJfndGoQ8I8qjLsoxXNA1zS+zgQHi2zVlRrmw1v
-  artifact: 'Output\HomeGenie_$(APPVEYOR_REPO_TAG_NAME).exe'
   draft: false
   prerelease: false
   on:
-    branch: master                 # release from master branch only
-    appveyor_repo_tag: true        # deploy on tag push only
+    appveyor_repo_tag: true
 
