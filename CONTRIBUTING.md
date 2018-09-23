@@ -1,8 +1,5 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via the
-[issue tracker](https://github.com/genielabs/HomeGenie/issues) before making a change.
-
 ## How to contribute to HomeGenie
 
 #### **Did you find a bug?**
@@ -40,15 +37,13 @@ contribute following same rules used for the main repo.
 
 #### **Coding styles and conventions**
 
-Please follow *Microsoft .Net* [coding conventions](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) and [naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions).
-You may find out that some of these rules are not respected in the existing code,
-but this will be fixed from time to time.
+This project follows *Microsoft .Net* [coding conventions](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) and [naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions).
 
 #### **Getting started with HomeGenie source code**
 
 Clone [**HomeGenie repository**](https://github.com/genielabs/HomeGenie).
 
-##### Building, debugging and packaging HomeGenie
+##### Building and debugging
 
 You can use one of the following IDEs:
 
@@ -81,7 +76,7 @@ To release a new version push a new tag using the format:
 
 example: `v1.1-stable.527`
 
-When a new tag is submitted the CI system will build assets (.deb, .tgz, .exe distribution files) and upload them to the new GitHub release.
+When a new tag is submitted the CI system will build the project, run tests and package assets (.deb, .tgz, .exe distribution files). Assets will be also uploaded to the new release on GitHub repository.
 
 
 #### Join HomeGenie team!
