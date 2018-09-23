@@ -72,7 +72,7 @@ You can use one of the following IDEs:
 
 To release a new version push a new tag using the format:
 
-`v<major>.<minor>-[stable|beta|alpha].<build>`
+`v<major>.<minor>-{stable|rc|beta|alpha}.<build>`
 
 example: `v1.1-stable.527`
 
