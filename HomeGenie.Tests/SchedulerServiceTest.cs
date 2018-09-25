@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using HomeGenie.Automation.Scheduler;
+
 using NUnit.Framework;
+
+using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenieTests
 {
