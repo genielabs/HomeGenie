@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 using HomeGenie.Automation.Scheduler;
 
-namespace HomeGenieTests
+namespace HomeGenie.Tests
 {
     [TestFixture]
     public class SchedulerServiceTest
