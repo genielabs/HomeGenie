@@ -240,12 +240,14 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                         parameter: mp
                     };
                     var featureField = HG.Ui.GenerateWidget('widgets/' + mp.FieldType, context, function (handler) {
-                        handler.onChange = function (val) {
-                            var param = this.context.parameter;
-                            param.Value = val;
-                            param.NeedsUpdate = true;
-                            HG.WebApp.GroupModules.UpdateModule(this.context.module, null);
-                        };
+                        if (handler != null) {
+                            handler.onChange = function (val) {
+                                var param = this.context.parameter;
+                                param.Value = val;
+                                param.NeedsUpdate = true;
+                                HG.WebApp.GroupModules.UpdateModule(this.context.module, null);
+                            };
+                        }
                     });
                     pc++;
                 }
