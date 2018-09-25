@@ -25,6 +25,7 @@ using HomeGenie.Automation.Scripting;
 
 using Jint;
 using System.Collections.Generic;
+using HomeGenie.Automation.Scheduler;
 using Jint.Parser;
 
 namespace HomeGenie.Automation.Engines
@@ -77,26 +78,26 @@ namespace HomeGenie.Automation.Engines
         {
             Unload();
 
-            if (homegenie == null)
+            if (Homegenie == null)
                 return false;
 
             scriptEngine = new Engine();
 
             hgScriptingHost = new ScriptingHost();
-            hgScriptingHost.SetHost(homegenie, programBlock.Address);
+            hgScriptingHost.SetHost(Homegenie, ProgramBlock.Address);
             scriptEngine.SetValue("hg", hgScriptingHost);
             return true;
         }
         public MethodRunResult EvaluateCondition()
         {
             MethodRunResult result = null;
-            string jsScript = initScript + programBlock.ScriptCondition;
+            string jsScript = initScript + ProgramBlock.ScriptCondition;
             result = new MethodRunResult();
             try
             {
                 var sh = (scriptEngine.GetValue("hg").ToObject() as ScriptingHost);
                 scriptEngine.Execute(jsScript);
-                result.ReturnValue = sh.executeProgramCode || programBlock.WillRun;
+                result.ReturnValue = sh.ExecuteProgramCode || ProgramBlock.WillRun;
             }
             catch (Exception e)
             {
@@ -108,7 +109,7 @@ namespace HomeGenie.Automation.Engines
         public MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
-            var jsScript = initScript + programBlock.ScriptSource;
+            var jsScript = initScript + ProgramBlock.ScriptSource;
             //scriptEngine.Options.AllowClr(false);
             result = new MethodRunResult();
             try
@@ -131,7 +132,7 @@ namespace HomeGenie.Automation.Engines
         public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
-                CodeBlock = isTriggerBlock ? "TC" : "CR",
+                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",
@@ -149,7 +150,7 @@ namespace HomeGenie.Automation.Engines
             //ParserOptions po = new ParserOptions();
             try
             {
-                jp.Parse(programBlock.ScriptCondition);
+                jp.Parse(ProgramBlock.ScriptCondition);
             }
             catch (Exception e)
             {
@@ -164,7 +165,7 @@ namespace HomeGenie.Automation.Engines
                         errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
-                            CodeBlock = "TC"
+                            CodeBlock = CodeBlockEnum.TC
                         });
                     }
                 }
@@ -172,7 +173,7 @@ namespace HomeGenie.Automation.Engines
             //
             try
             {
-                jp.Parse(programBlock.ScriptSource);
+                jp.Parse(ProgramBlock.ScriptSource);
             }
             catch (Exception e)
             {
@@ -187,7 +188,7 @@ namespace HomeGenie.Automation.Engines
                         errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
-                            CodeBlock = "CR"
+                            CodeBlock = CodeBlockEnum.CR
                         });
                     }
                 }

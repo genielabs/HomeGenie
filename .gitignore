@@ -12,8 +12,10 @@
 *.suo
 *.pidb
 Thumbs.db
-.idea
+**/.idea/*
 
 # Nuget packages
-packages/
-!packages/repositories.config
+**/packages/*
+!**/packages/repositories.config
+
+HomeGenie_Windows/\.vs/

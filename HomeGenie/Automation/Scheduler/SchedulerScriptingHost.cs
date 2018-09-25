@@ -21,10 +21,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using HomeGenie.Service;
 
 using HomeGenie.Automation.Scripting;
@@ -34,13 +30,6 @@ using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation.Scheduler
 {
-
-    public class MethodRunResult
-    {
-        public Exception Exception = null;
-        public object ReturnValue = null;
-    }
-
     [Serializable]
     public class SchedulerScriptingHost
     {

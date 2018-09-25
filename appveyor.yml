@@ -4,6 +4,8 @@ branches:
   - gh-pages
 image: Visual Studio 2015
 configuration: Debug
+before_build:
+  - nuget restore .\HomeGenie\packages.config -SolutionDirectory .\HomeGenie_Windows
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
   verbosity: minimal

@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie.Automation.Engines
 {
@@ -69,7 +70,7 @@ namespace HomeGenie.Automation.Engines
                                     Column = errorColumn,
                                     ErrorMessage = lineParts[3]+": " + String.Join(": ", errorDetail),
                                     ErrorNumber = "110",
-                                    CodeBlock = "CR"
+                                    CodeBlock = CodeBlockEnum.CR
                                 });
                             }
                         }
@@ -83,7 +84,7 @@ namespace HomeGenie.Automation.Engines
                                     Column = 0,
                                     ErrorMessage = line,
                                     ErrorNumber = "120",
-                                    CodeBlock = "TC"
+                                    CodeBlock = CodeBlockEnum.TC
                                 });
                             }
                         }
@@ -101,7 +102,7 @@ namespace HomeGenie.Automation.Engines
                             Column = 0,
                             ErrorMessage = errorOutput, // "Build failure: please check the Makefile; ensure BOARD_TAG is correct and ARDUINO_LIBS is referencing libraries needed by this sketch.\n\n" + errorOutput,
                             ErrorNumber = "130",
-                            CodeBlock = "CR"
+                            CodeBlock = CodeBlockEnum.CR
                         });
                     }
                 }

@@ -32,9 +32,6 @@ then
 
 	cp -r $source_folder/* "$target_folder/usr/local/bin/homegenie/"
 	rm -rf "$target_folder/usr/local/bin/homegenie/log"
-	rm -rf "$target_folder/usr/local/bin/homegenie/libCameraCaptureV4L.so"
-	rm -rf "$target_folder/usr/local/bin/homegenie/liblirc_client.so"
-	rm -rf "$target_folder/usr/local/bin/homegenie/libusb-1.0.so"
 
 	echo "\n- Generating md5sums in DEBIAN folder..."
 	cd "$target_folder"

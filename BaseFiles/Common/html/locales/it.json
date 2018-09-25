@@ -807,6 +807,8 @@
         "Vista calendario",
     "no_device_found_for_manufacturerId":
         "Nessuna informazione trovata su questo dispositivo",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
 "##":
 "## COMMON LOCALES",
 "##":

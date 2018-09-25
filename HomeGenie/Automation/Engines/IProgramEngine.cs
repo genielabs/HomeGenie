@@ -22,7 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-using HomeGenie.Automation.Scripting;
+using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation.Engines
 {

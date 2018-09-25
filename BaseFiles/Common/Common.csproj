@@ -42,6 +42,7 @@
     <None Include="modules.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="programs.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -928,15 +929,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\js\codemirror-4.03\mode\python\python.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\js\codemirror-4.03\mode\ruby\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\js\codemirror-4.03\mode\ruby\ruby.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\js\codemirror-4.03\mode\ruby\test.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\js\codemirror-4.03\theme\3024-day.css">
@@ -2853,14 +2845,6 @@
       <Link>lib\shared\NCrontab.pdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\upnp\UPnP.dll">
-      <Link>lib\shared\UPnP.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\upnp\UPnP.dll.mdb">
-      <Link>lib\shared\UPnP.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\images\wallpapers\wallpaper_005.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2892,38 +2876,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\MIG.Controllers.dll">
-      <Link>lib\mig\MIG.Controllers.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\MIG.HomeAutomation.dll">
-      <Link>lib\mig\MIG.HomeAutomation.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\MIG.Media.dll">
-      <Link>lib\mig\MIG.Media.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\MIG.Protocols.dll">
-      <Link>lib\mig\MIG.Protocols.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\SoapBox.FluentDwelling.dll">
-      <Link>lib\shared\SoapBox.FluentDwelling.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\LibUsbDotNet.dll">
-      <Link>lib\mig\LibUsbDotNet.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\XTenLib.dll">
-      <Link>lib\mig\XTenLib.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\g-labs\ZWaveLib.dll">
-      <Link>lib\mig\ZWaveLib.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\CronExpressionDescriptor\de\CronExpressionDescriptor.resources.dll">
@@ -3259,14 +3211,6 @@
     <None Include="lib\mig\p1db_custom.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll">
-      <Link>lib\shared\M2Mqtt.Net.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll.mdb">
-      <Link>lib\shared\M2Mqtt.Net.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\js\api\homegenie.automation.scheduling.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3433,7 +3377,6 @@
   <ItemGroup>
     <Compile Include="dummy.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Folder Include="html\pages\control\widgets\homegenie\generic\locales\" />
     <Folder Include="html\js\i18n\" />

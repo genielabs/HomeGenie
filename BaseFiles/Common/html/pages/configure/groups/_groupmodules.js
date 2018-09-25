@@ -9,6 +9,23 @@
     $$.InitializePage = function () {
         var page = $$.getContainer();
         page.on('pageinit', function (e) {
+            $$.field('#module_add_button', true).on('click', function (event) {
+                var selectedopt = $$.field('#automation_group_moduleadd', true).find(':selected');
+                var domain = selectedopt.attr('data-context-domain');
+                var address = selectedopt.attr('data-context-value');
+                $$.AddGroupModule($$.CurrentGroup, domain, address, function () {
+                    var list = $$.field('#page_configure_groupmodules_list', true).find('ul');
+                    var item = list.find('li').last();
+                    list.parent().animate({scrollTop: item.position().top});
+                    /*
+                     var availHeight = $(window).height()-item.height()-50;
+                     $.mobile.silentScroll(item.position().top-availHeight);
+                     $$.EditCurrentModule(item);
+                     $.mobile.loading('show');
+                     setTimeout("$('#automation_group_module_edit').popup('open');$.mobile.loading('hide');", 1000);
+                     */
+                });
+            });
             $$.field('#group_delete_button', true).on('click', function (event) {
                 $$.DeleteGroup($$.CurrentGroup);
             });
@@ -147,7 +164,7 @@
             groupName.change(function () {
                 HG.Configure.Groups.RenameGroup('Control', $$.CurrentGroup, groupName.val(), function (res) {
                     $$.CurrentGroup = groupName.val();
-                    $$.field("#configure_groupslist", true).attr('selected-group-name', groupName.val());
+                    $$.field('#configure_groupslist', true).attr('selected-group-name', groupName.val());
                     $.mobile.loading('show');
                     HG.Configure.Modules.List(function (data) {
                         try {
@@ -314,7 +331,7 @@
             type: 'POST',
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Update/',
             data: JSON.stringify(module, function (key, value) {
-                if (key == "WidgetInstance") return undefined; else return value;
+                if (key == 'WidgetInstance') return undefined; else return value;
             }),
             success: function (response) {
                 $.mobile.loading('hide');
@@ -374,6 +391,72 @@
             $(this).closest('div').parent().parent().parent().css('background', $(this).attr('originalbackground'));
             setTimeout("$('#automation_group_module_propdelete').addClass('ui-disabled')", 250);
             //        setTimeout("$('#automation_group_module_propsave').addClass('ui-disabled')", 250);
+        });
+    };
+
+    $$.GetModulesListViewItems = function (groupname) {
+        var groupmodules = HG.Configure.Groups.GetGroupModules(groupname);
+        var htmlopt = '';
+        var cursect = '';
+        if (HG.WebApp.Data.Modules && HG.WebApp.Data.Modules.length) {
+            for (m = 0; m < HG.WebApp.Data.Modules.length; m++) {
+                var module = HG.WebApp.Data.Modules[m];
+                var haselement = $.grep(groupmodules.Modules, function (value) {
+                    return (value.Domain == module.Domain && value.Address == module.Address);
+                });
+                // module it's not present in current group
+                if (haselement.length == 0) {
+                    var propwidget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
+                    var vmparentid = HG.WebApp.Utility.GetModulePropertyByName(module, 'VirtualModule.ParentId');
+                    var widget = (propwidget != null && propwidget.Value != null) ? propwidget.Value : '';
+                    var vid = (vmparentid != null && vmparentid.Value != null) ? vmparentid.Value : '';
+                    // check if no explicit witdget is specified and it's not a virtual module or program
+                    if (module.Domain == 'HomeAutomation.HomeGenie.Automation') {
+                        var pid = (vid != '' && vid != module.Address) ? vid : module.Address;
+                        var cp = HG.WebApp.Utility.GetProgramByAddress(pid);
+                        if (cp != null) {
+                            if (!cp.IsEnabled)
+                                continue;
+                            else if (cp.Type.toLowerCase() != 'wizard' && widget == '')
+                                continue;
+                        }
+                    }
+                    //
+                    if (cursect != module.Domain) {
+                        cursect = module.Domain;
+                        htmlopt += '<optgroup label="' + cursect + '"></optgroup>';
+                    }
+                    var displayname = (module.Name != '' ? module.Name : (module.Description != '' ? module.Description : module.DeviceType));
+                    displayname += ' (' + module.Address + ')';
+                    htmlopt += '<option data-context-domain="' + module.Domain + '" data-context-value="' + module.Address + '">' + displayname + '</option>';
+                }
+            }
+        }
+        return htmlopt;
+    };
+
+    $$.AddGroupModule = function (group, domain, address, callback) {
+        var alreadyexists = false;
+        var moduleindex = -1;
+        for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+            if (HG.WebApp.Data.Groups[i].Name == group) {
+                for (c = 0; c < HG.WebApp.Data.Groups[i].Modules.length; c++) {
+                    if (domain == HG.WebApp.Data.Groups[i].Modules[c].Domain && address == HG.WebApp.Data.Groups[i].Modules[c].Address) {
+                        alreadyexists = true;
+                        break;
+                    }
+                }
+                if (!alreadyexists) {
+                    HG.WebApp.Data.Groups[i].Modules.push({'Address': address, 'Domain': domain});
+                    moduleindex = HG.WebApp.Data.Groups[i].length - 1;
+                }
+                //
+                break;
+            }
+        }
+        //
+        HG.WebApp.GroupsList.SaveGroups(function () {
+            callback();
         });
     };
 
@@ -443,7 +526,7 @@
     };
 
     $$.LoadGroupModules = function () {
-        $$.CurrentGroup = $$.field("#configure_groupslist", true).attr('selected-group-name');
+        $$.CurrentGroup = $$.field('#configure_groupslist', true).attr('selected-group-name');
         //
         var groupmodules = HG.Configure.Groups.GetGroupModules($$.CurrentGroup);
         //
@@ -500,7 +583,7 @@
             }, iconid);
         }
         // set on click handler for list items
-        $$.field("#page_configure_groupmodules_list", true).find("ul li").each(function (index) {
+        $$.field('#page_configure_groupmodules_list', true).find('ul li').each(function (index) {
             var item = $(this);
             item.find('[data-ui-field=btn_settings]').on('click', function () {
                 HG.WebApp.SetCurrentModule(item);
@@ -519,7 +602,7 @@
                 HG.WebApp.GroupsList.SaveGroups(null);
             });
         });
-        $$.field("#configure_groupslist", true).listview().listview("refresh");
+        $$.field('#configure_groupslist', true).listview().listview('refresh');
     };
 
     HG.WebApp.SetCurrentModule = function (item) {
@@ -564,8 +647,8 @@
         $$.EditModule.DeviceType = $$.CurrentModule.DeviceType;
         //
         $$.EditModule.WMWatts = 0;
-        if (HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, "VirtualMeter.Watts") != null) {
-            $$.EditModule.WMWatts = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, "VirtualMeter.Watts").Value;
+        if (HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, 'VirtualMeter.Watts') != null) {
+            $$.EditModule.WMWatts = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, 'VirtualMeter.Watts').Value;
         }
         //
         // disable option button if it's a virtual module
@@ -573,8 +656,8 @@
         if ($$.CurrentModule.Domain != 'HomeAutomation.ZWave') {
             $$.field('#module_options_button', true).addClass('ui-disabled');
         }
-        else if (HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, "VirtualModule.ParentId") != null) {
-            var parentid = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, "VirtualModule.ParentId").Value;
+        else if (HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, 'VirtualModule.ParentId') != null) {
+            var parentid = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, 'VirtualModule.ParentId').Value;
             if (parentid != $$.CurrentModule.Address) {
                 $$.field('#module_options_button', true).addClass('ui-disabled');
             }
@@ -618,11 +701,11 @@
                     handler.onChange = function (val) {
                         $$.FeatureUpdate(handler.context, val);
                     };
-                    $$.field('#automation_group_module_edit', true).popup("reposition", {positionTo: 'window'});
+                    $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
                     if (refreshHandler != null)
                         clearTimeout(refreshHandler);
                     refreshHandler = setTimeout(function () {
-                        $$.field('#automation_group_module_edit', true).popup("reposition", {positionTo: 'window'});
+                        $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
                     }, 300);
                 });
             }
@@ -686,7 +769,7 @@
                     if (featurematch) {
                         var property = features[f].Property;
                         var prop = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, property);
-                        HG.WebApp.Utility.SetModulePropertyByName($$.EditModule, property, (prop != null ? prop.Value : ""));
+                        HG.WebApp.Utility.SetModulePropertyByName($$.EditModule, property, (prop != null ? prop.Value : ''));
                         prop = HG.WebApp.Utility.GetModulePropertyByName($$.EditModule, property);
                         prop.ProgramIndex = p;
                         prop.FieldType = features[f].FieldType;
@@ -719,7 +802,7 @@
                 $$.ShowFeatures(selected);
             }
         }
-        $$.field('#automation_group_module_edit', true).popup("reposition", {positionTo: 'window'});
+        $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
     };
 
     $$.FeatureUpdate = function (context, value) {

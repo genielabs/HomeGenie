@@ -809,6 +809,8 @@
         "Calendar View",
     "no_device_found_for_manufacturerId":
         "No device info was found for manufacturer ID",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
 "##":
 "## COMMON LOCALES",
 "##":

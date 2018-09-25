@@ -1,5 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('packages\NUnit.3.10.1\build\NUnit.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -68,53 +69,120 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IronPython">
-      <HintPath>..\Externals\Scripting\IronPython.dll</HintPath>
+    <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d">
+      <HintPath>packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="IronPython.Modules">
-      <HintPath>..\Externals\Scripting\IronPython.Modules.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <HintPath>packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="IronRuby">
-      <HintPath>..\Externals\Scripting\IronRuby.dll</HintPath>
+    <Reference Include="IronPython, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="IronRuby.Libraries">
-      <HintPath>..\Externals\Scripting\IronRuby.Libraries.dll</HintPath>
+    <Reference Include="IronPython.Modules, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.Modules.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="IronRuby.Libraries.Yaml">
-      <HintPath>..\Externals\Scripting\IronRuby.Libraries.Yaml.dll</HintPath>
+    <Reference Include="IronPython.SQLite, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.SQLite.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Jint">
-      <HintPath>..\Externals\Scripting\Jint.dll</HintPath>
+    <Reference Include="IronPython.Wpf, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f">
+      <HintPath>packages\Jint.2.11.58\lib\net45\Jint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LibUsb.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\LibUsb.Common.2.2.18\lib\net45\LibUsb.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LibUsbDotNet.LibUsbDotNet, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\LibUsbDotNet.2.2.18\lib\net45\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Dynamic">
-      <HintPath>..\Externals\Scripting\Microsoft.Dynamic.dll</HintPath>
+    <Reference Include="Microsoft.Dynamic, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Dynamic.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Scripting">
-      <HintPath>..\Externals\Scripting\Microsoft.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.Scripting, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Scripting.Metadata">
-      <HintPath>..\Externals\Scripting\Microsoft.Scripting.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MIG, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.1.0.5\lib\MIG.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MIG.HomeAutomation, Version=1.0.6841.30386, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.HomeAutomation.1.0.2\lib\MIG.HomeAutomation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MIG.Protocols, Version=1.0.6841.32282, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.Protocols.1.0.0\lib\MIG.Protocols.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NCrontab">
       <HintPath>..\Externals\NCrontab\NCrontab.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c">
+      <HintPath>packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SerialPortLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\SerialPortLib.1.0.16\lib\SerialPortLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Ude, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\UDE.CSharp.1.1.0\lib\Ude.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UPnP, Version=1.0.5772.30730, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.Protocols.1.0.0\lib\UPnP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e">
+      <HintPath>packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Raspberry.System">
       <HintPath>..\Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Externals\json\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.SQLite">
       <HintPath>..\Externals\sqlite\System.Data.SQLite.dll</HintPath>
       <Private>False</Private>
@@ -149,25 +217,6 @@
       <HintPath>..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UPnP">
-      <HintPath>..\Externals\upnp\UPnP.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\Externals\g-labs\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="MIG">
-      <HintPath>..\Externals\g-labs\MIG.dll</HintPath>
-    </Reference>
-    <Reference Include="SerialPortLib">
-      <HintPath>..\Externals\g-labs\SerialPortLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\Externals\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="M2Mqtt.Net">
-      <HintPath>..\Externals\M2Mqtt.Net\M2Mqtt.Net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Innovative.SolarCalculator">
       <HintPath>..\Externals\SolarCalculator\Innovative.SolarCalculator.dll</HintPath>
       <Private>False</Private>
@@ -176,12 +225,23 @@
       <HintPath>..\Externals\SolarCalculator\Innovative.Geometry.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="XTenLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\XTenLib.1.0.10\lib\XTenLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZWaveLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\ZWaveLib.1.0.18\lib\ZWaveLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
+    <Compile Include="Automation\ProgramError.cs" />
     <Compile Include="Automation\ProgramFeature.cs" />
     <Compile Include="Automation\Scheduler\SchedulerItem.cs" />
     <Compile Include="Automation\Scheduler\SchedulerService.cs" />
+    <Compile Include="Automation\ScriptEngineErrors.cs" />
+    <Compile Include="Automation\Scripting\CodeBlockEnum.cs" />
     <Compile Include="Automation\Scripting\ScriptingHost.cs" />
     <Compile Include="Automation\Scripting\ModuleHelper.cs" />
     <Compile Include="Automation\Scripting\ModulesManager.cs" />
@@ -230,7 +290,6 @@
     <Compile Include="Automation\ProgramManager.cs" />
     <Compile Include="Automation\Engines\IProgramEngine.cs" />
     <Compile Include="Automation\Engines\PythonEngine.cs" />
-    <Compile Include="Automation\Engines\RubyEngine.cs" />
     <Compile Include="Automation\Engines\JavascriptEngine.cs" />
     <Compile Include="Automation\Engines\ArduinoEngine.cs" />
     <Compile Include="Automation\Engines\CSharpAppFactory.cs" />
@@ -250,14 +309,6 @@
       <Link>CREDITS.TXT</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\DEVELOPERS.TXT">
-      <Link>DEVELOPERS.TXT</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\HISTORY.TXT">
-      <Link>HISTORY.TXT</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="..\LICENCE.TXT">
       <Link>LICENCE.TXT</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -268,6 +319,7 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -333,4 +385,10 @@
   <ItemGroup>
     <Folder Include="Automation\Engines\" />
   </ItemGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\NUnit.3.10.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit.3.10.1\build\NUnit.props'))" />
+  </Target>
 </Project>

@@ -25,68 +25,78 @@ using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
-
-using HomeGenie.Service;
 using System.IO;
+using System.Linq;
 
 namespace HomeGenie.Automation.Engines
 {
-
     public static class CSharpAppFactory
     {
+        public const int ConditionCodeOffset = 8;
 
-        public const int CONDITION_CODE_OFFSET = 7;
-        public const int PROGRAM_CODE_OFFSET = 20;
+        public static int ProgramCodeOffset
+        {
+            get { return Includes.Count() + 15; }
+        }
+
+        static readonly string[] Includes =
+        {
+            "System",
+            "System.Text",
+            "System.Globalization",
+            "System.Linq",
+            "System.Collections.Generic",
+            "System.Dynamic",
+            "System.Net",
+            "System.Threading",
+            "Newtonsoft.Json",
+            "Newtonsoft.Json.Linq",
+            "HomeGenie",
+            "HomeGenie.Service",
+            "HomeGenie.Service.Logging",
+            "HomeGenie.Automation",
+            "HomeGenie.Data",
+            "MIG",
+            "Innovative.Geometry",
+            "Innovative.SolarCalculator",
+            "Raspberry",
+            "Raspberry.Timers",
+            "Raspberry.IO",
+            "Raspberry.IO.Components.Controllers.Pca9685",
+            "Raspberry.IO.Components.Controllers.Tlc59711",
+            "Raspberry.IO.Components.Converters.Mcp3002",
+            "Raspberry.IO.Components.Converters.Mcp3008",
+            "Raspberry.IO.Components.Converters.Mcp4822",
+            "Raspberry.IO.Components.Displays.Hd44780",
+            "Raspberry.IO.Components.Displays.Ssd1306",
+            "Raspberry.IO.Components.Displays.Ssd1306.Fonts",
+            "Raspberry.IO.Components.Displays.Sda5708",
+            "Raspberry.IO.Components.Expanders.Mcp23017",
+            "Raspberry.IO.Components.Expanders.Pcf8574",
+            "Raspberry.IO.Components.Expanders.Mcp23008",
+            "Raspberry.IO.Components.Leds.GroveBar",
+            "Raspberry.IO.Components.Leds.GroveRgb",
+            "Raspberry.IO.Components.Sensors",
+            "Raspberry.IO.Components.Sensors.Distance.HcSr04",
+            "Raspberry.IO.Components.Sensors.Pressure.Bmp085",
+            "Raspberry.IO.Components.Sensors.Temperature.Dht",
+            "Raspberry.IO.Components.Sensors.Temperature.Tmp36",
+            "Raspberry.IO.Components.Devices.PiFaceDigital",
+            "Raspberry.IO.GeneralPurpose",
+            "Raspberry.IO.GeneralPurpose.Behaviors",
+            "Raspberry.IO.GeneralPurpose.Configuration",
+            "Raspberry.IO.InterIntegratedCircuit",
+            "Raspberry.IO.SerialPeripheralInterface",
+        };
 
         public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
         {
-            string[] includes = new string[] {
-                "using System.Net;",
-                "using System.Threading;",
-                "using Innovative.Geometry;",
-                "using Innovative.SolarCalculator;",
-                "using Raspberry;",
-                "using Raspberry.Timers;",
-                "using Raspberry.IO;",
-                "using Raspberry.IO.Components.Controllers.Pca9685;",
-                "using Raspberry.IO.Components.Controllers.Tlc59711;",
-                "using Raspberry.IO.Components.Converters.Mcp3002;",
-                "using Raspberry.IO.Components.Converters.Mcp3008;",
-                "using Raspberry.IO.Components.Converters.Mcp4822;",
-                "using Raspberry.IO.Components.Displays.Hd44780;",
-                "using Raspberry.IO.Components.Displays.Ssd1306;",
-                "using Raspberry.IO.Components.Displays.Ssd1306.Fonts;",
-                "using Raspberry.IO.Components.Displays.Sda5708;",
-                "using Raspberry.IO.Components.Expanders.Mcp23017;",
-                "using Raspberry.IO.Components.Expanders.Pcf8574;",
-                "using Raspberry.IO.Components.Expanders.Mcp23008;",
-                "using Raspberry.IO.Components.Leds.GroveBar;",
-                "using Raspberry.IO.Components.Leds.GroveRgb;",
-                "using Raspberry.IO.Components.Sensors;",
-                "using Raspberry.IO.Components.Sensors.Distance.HcSr04;",
-                "using Raspberry.IO.Components.Sensors.Pressure.Bmp085;",
-                "using Raspberry.IO.Components.Sensors.Temperature.Dht;",
-                "using Raspberry.IO.Components.Sensors.Temperature.Tmp36;",
-                "using Raspberry.IO.Components.Devices.PiFaceDigital;",
-                "using Raspberry.IO.GeneralPurpose;",
-                "using Raspberry.IO.GeneralPurpose.Behaviors;",
-                "using Raspberry.IO.GeneralPurpose.Configuration;",
-                "using Raspberry.IO.InterIntegratedCircuit;",
-                "using Raspberry.IO.SerialPeripheralInterface;"
-            };
-            string source = @"# pragma warning disable 0168 // variable declared but not used.
+            var source = @"# pragma warning disable 0168 // variable declared but not used.
 # pragma warning disable 0219 // variable assigned but not used.
 # pragma warning disable 0414 // private field assigned but not used.
 
-using System;
-using System.Text; using System.Globalization; using System.Linq; using System.Collections.Generic; using System.Dynamic; using Newtonsoft.Json; using Newtonsoft.Json.Linq;
+{usings}
 
-using HomeGenie;
-using HomeGenie.Service; using HomeGenie.Service.Logging;
-using HomeGenie.Automation; using HomeGenie.Data; using MIG;
-";
-            source += String.Join(" ", includes);
-            source += @"
 namespace HomeGenie.Automation.Scripting
 {
     [Serializable]
@@ -99,6 +109,7 @@ namespace HomeGenie.Automation.Scripting
 {statement}
 //////////////////////////////////////////////////////////////////
         }
+
         #pragma warning disable 0162
         private bool EvaluateConditionBlock()
         {
@@ -141,34 +152,37 @@ namespace HomeGenie.Automation.Scripting
 
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
-}
-";
-            
-            source = source.Replace("{statement}", scriptSource);
-            source = source.Replace("{condition}", conditionSource);
+}";
+            var usings = string.Join(" ", Includes.Select(x => string.Format("using {0};" + Environment.NewLine, x)));
+            source = source
+                .Replace("{usings}", usings)
+                .Replace("{statement}", scriptSource)
+                .Replace("{condition}", conditionSource);
 
-            Dictionary<string, string> providerOptions = new Dictionary<string, string> {
+            var providerOptions = new Dictionary<string, string> {
                 //                    { "CompilerVersion", "v4.0" }
             };
-            CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
-            CompilerParameters compilerParams = new CompilerParameters {
+            var provider = new CSharpCodeProvider(providerOptions);
+            var compilerParams = new CompilerParameters {
                 GenerateInMemory = false,
                 GenerateExecutable = false,
                 IncludeDebugInformation = true,
                 TreatWarningsAsErrors = false,
                 OutputAssembly = outputDllFile
+                // *** Useful for debugging
+                //,TempFiles = new TempFileCollection {KeepFiles = true}
             };
 
             // Mono runtime 2/3 compatibility fix 
             // TODO: this may not be required anymore
-            bool relocateSystemAsm = false;
-            Type type = Type.GetType("Mono.Runtime");
+            var relocateSystemAsm = false;
+            var type = Type.GetType("Mono.Runtime");
             if (type != null)
             {
                 MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
                 if (displayName != null)
                 {
-                    int major = 0;
+                    int major;
                     if (int.TryParse(displayName.Invoke(null, null).ToString().Substring(0, 1), out major) && major > 2)
                     {
                         relocateSystemAsm = true;
@@ -177,21 +191,21 @@ namespace HomeGenie.Automation.Scripting
             }
             if (!relocateSystemAsm)
             {
-                Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 foreach (var assembly in assemblies)
                 {
-                    var name = assembly.GetName();
-                    if (name.Name.ToLower() == "system")
+                    var assemblyName = assembly.GetName();
+                    switch (assemblyName.Name.ToLower())
                     {
-                        compilerParams.ReferencedAssemblies.Add(assembly.Location);
-                    }
-                    else if (name.Name.ToLower() == "system.core")
-                    {
-                        compilerParams.ReferencedAssemblies.Add(assembly.Location);
-                    }
-                    else if (name.Name.ToLower() == "microsoft.csharp")
-                    {
-                        compilerParams.ReferencedAssemblies.Add(assembly.Location);
+                        case "system":
+                            compilerParams.ReferencedAssemblies.Add(assembly.Location);
+                            break;
+                        case "system.core":
+                            compilerParams.ReferencedAssemblies.Add(assembly.Location);
+                            break;
+                        case "microsoft.csharp":
+                            compilerParams.ReferencedAssemblies.Add(assembly.Location);
+                            break;
                     }
                 }
             }
@@ -221,7 +235,7 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
 
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "M2Mqtt.Net.dll"));
+            compilerParams.ReferencedAssemblies.Add("M2Mqtt.Net.dll");
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.Geometry.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.SolarCalculator.dll"));
 

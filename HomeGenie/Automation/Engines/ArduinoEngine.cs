@@ -26,6 +26,7 @@ using System.IO;
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
 using System.Threading;
+using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation.Engines
 {
@@ -54,10 +55,10 @@ namespace HomeGenie.Automation.Engines
         {
             var result = new MethodRunResult();
             result = new MethodRunResult();
-            homegenie.RaiseEvent(
+            Homegenie.RaiseEvent(
                 Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
-                programBlock.Address.ToString(),
+                ProgramBlock.Address.ToString(),
                 "Arduino Sketch Upload",
                 "Arduino.UploadOutput",
                 "Upload started"
@@ -66,17 +67,17 @@ namespace HomeGenie.Automation.Engines
                 AppDomain.CurrentDomain.BaseDirectory,
                 "programs",
                 "arduino",
-                programBlock.Address.ToString()
+                ProgramBlock.Address.ToString()
             )).Split('\n');
             //
             for (int x = 0; x < outputResult.Length; x++)
             {
                 if (!String.IsNullOrWhiteSpace(outputResult[x]))
                 {
-                    homegenie.RaiseEvent(
+                    Homegenie.RaiseEvent(
                         Domains.HomeGenie_System,
                         Domains.HomeAutomation_HomeGenie_Automation,
-                        programBlock.Address.ToString(),
+                        ProgramBlock.Address.ToString(),
                         "Arduino Sketch",
                         "Arduino.UploadOutput",
                         outputResult[x]
@@ -85,10 +86,10 @@ namespace HomeGenie.Automation.Engines
                 }
             }
             //
-            homegenie.RaiseEvent(
+            Homegenie.RaiseEvent(
                 Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
-                programBlock.Address.ToString(),
+                ProgramBlock.Address.ToString(),
                 "Arduino Sketch",
                 "Arduino.UploadOutput",
                 "Upload finished"
@@ -103,7 +104,7 @@ namespace HomeGenie.Automation.Engines
         public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
-                CodeBlock = isTriggerBlock ? "TC" : "CR",
+                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",
@@ -118,7 +119,7 @@ namespace HomeGenie.Automation.Engines
             List<ProgramError> errors = new List<ProgramError>();
 
             // Generate, compile and upload Arduino Sketch
-            string sketchFileName = ArduinoAppFactory.GetSketchFile(programBlock.Address.ToString());
+            string sketchFileName = ArduinoAppFactory.GetSketchFile(ProgramBlock.Address.ToString());
             if (!Directory.Exists(Path.GetDirectoryName(sketchFileName)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(sketchFileName));
@@ -128,9 +129,9 @@ namespace HomeGenie.Automation.Engines
             try
             {
                 // .ino source is stored in the ScriptSource property
-                File.WriteAllText(sketchFileName, programBlock.ScriptSource);
+                File.WriteAllText(sketchFileName, ProgramBlock.ScriptSource);
                 // Makefile source is stored in the ScriptCondition property
-                File.WriteAllText(sketchMakefile, programBlock.ScriptCondition);
+                File.WriteAllText(sketchMakefile, ProgramBlock.ScriptCondition);
                 errors = ArduinoAppFactory.CompileSketch(sketchFileName, sketchMakefile);
             }
             catch (Exception e)
@@ -140,7 +141,7 @@ namespace HomeGenie.Automation.Engines
                     Column = 0,
                     ErrorMessage = "General failure: is 'arduino-mk' package installed?\n\n" + e.Message,
                     ErrorNumber = "500",
-                    CodeBlock = "CR"
+                    CodeBlock = CodeBlockEnum.CR
                 });
             }
 
