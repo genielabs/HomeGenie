@@ -85,10 +85,6 @@ namespace HomeGenie.Automation.Scheduler
         [XmlIgnore,JsonIgnore]
         public string LastOccurrence { get; set; }
 
-        // TODO: deprecate this field - left for compatibility with hg <= r521
-        [Obsolete("deprecate this field - left for compatibility with hg <= r521")]
-        public string ProgramId { get; set; }
-
         [XmlIgnore,JsonIgnore]
         public SchedulerScriptingEngine ScriptEngine { get; set; }
 
@@ -96,7 +92,6 @@ namespace HomeGenie.Automation.Scheduler
         {
             Name = "";
             CronExpression = "";
-            ProgramId = "";
             IsEnabled = false;
             LastOccurrence = "";
             BoundDevices = new List<string>();

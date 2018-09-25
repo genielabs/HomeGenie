@@ -21,8 +21,10 @@
  */
 
 using System;
-using HomeGenie.Service;
+
 using NLog;
+
+using HomeGenie.Service;
 
 /*! \mainpage Extend, customize, create!
  *

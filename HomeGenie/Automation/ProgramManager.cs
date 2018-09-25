@@ -24,12 +24,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
+using System.Linq;
+
+using MIG;
+
+using HomeGenie.Automation.Scheduler;
 using HomeGenie.Data;
 using HomeGenie.Service;
-using MIG;
 using HomeGenie.Service.Constants;
-using HomeGenie.Automation.Scheduler;
-using System.Linq;
 
 namespace HomeGenie.Automation
 {

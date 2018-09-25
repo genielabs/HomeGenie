@@ -24,11 +24,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Text.RegularExpressions;
+
 using Innovative.SolarCalculator;
 using Newtonsoft.Json;
-using HomeGenie.Service.Constants;
-using System.Text.RegularExpressions;
 using NLog;
+
+using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -100,6 +102,7 @@ namespace HomeGenie.Automation.Scheduler
                             "Scheduler Event Triggered",
                             Properties.SchedulerTriggeredEvent,
                             eventItem.Name);
+                        
                         // update last occurrence value
                         eventItem.LastOccurrence = currentOccurrence;
 
@@ -112,20 +115,6 @@ namespace HomeGenie.Automation.Scheduler
                                 eventItem.ScriptEngine.SetHost(masterControlProgram.HomeGenie, eventItem);
                             }
                             eventItem.ScriptEngine.StartScript();
-                        }
-                        // TODO: deprecate this! - temporarly left for compatibility with HG <= r522
-                        else if (!String.IsNullOrEmpty(eventItem.ProgramId))
-                        {
-                            var program = masterControlProgram.Programs.Find(p => p.Address.ToString() == eventItem.ProgramId || p.Name == eventItem.ProgramId);
-                            if (program != null)
-                            {
-                                masterControlProgram.HomeGenie.MigService.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, "Scheduler Event '" + eventItem.Name + "'", Properties.SchedulerTriggeredEvent, "'" + eventItem.Name + "' running '" + eventItem.ProgramId + "'");
-                                masterControlProgram.Run(program, "");
-                            }
-                            else
-                            {
-                                masterControlProgram.HomeGenie.MigService.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, "Scheduler Event '" + eventItem.Name + "'", Properties.SchedulerError, "No such program: '" + eventItem.ProgramId + "'");
-                            }
                         }
                     }
                 }
@@ -176,18 +165,6 @@ namespace HomeGenie.Automation.Scheduler
             if (eventItem != null)
             {
                 eventItem.Data = jsonData;
-                return true;
-            }
-            return false;
-        }
-
-        [Obsolete()]
-        public bool SetProgram(string name, string pid)
-        {
-            var eventItem = Get(name);
-            if (eventItem != null)
-            {
-                eventItem.ProgramId = pid;
                 return true;
             }
             return false;

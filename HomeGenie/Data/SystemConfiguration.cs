@@ -22,16 +22,13 @@
 
 using System;
 using System.Collections.Generic;
-
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
-using MIG;
 using MIG.Config;
 
 using HomeGenie.Service;
-using System.Text;
 
 namespace HomeGenie.Data
 {

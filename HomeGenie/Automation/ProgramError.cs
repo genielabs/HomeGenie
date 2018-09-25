@@ -1,6 +1,7 @@
-﻿using HomeGenie.Automation.Scripting;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie.Automation
 {

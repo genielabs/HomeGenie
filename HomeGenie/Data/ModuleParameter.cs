@@ -22,12 +22,10 @@
 
 using System;
 using System.Globalization;
+using System.Threading;
+using System.Xml.Serialization;
 
 using Newtonsoft.Json;
-using System.Xml.Serialization;
-using HomeGenie.Service;
-using HomeGenie.Service.Logging;
-using System.Threading;
 
 namespace HomeGenie.Data
 {

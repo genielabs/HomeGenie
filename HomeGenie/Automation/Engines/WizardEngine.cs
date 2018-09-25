@@ -21,14 +21,16 @@
  */
 
 using System;
-using HomeGenie.Service.Constants;
-using HomeGenie.Service;
-using HomeGenie.Data;
-using MIG;
 using System.Threading;
 using System.Globalization;
 using System.Collections.Generic;
+
+using MIG;
+
 using HomeGenie.Automation.Scripting;
+using HomeGenie.Service.Constants;
+using HomeGenie.Service;
+using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Engines
 {

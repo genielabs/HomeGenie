@@ -21,14 +21,14 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
+
+using HomeGenie.Automation.Scripting;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
-using System.IO;
-using System.Collections.Generic;
-using HomeGenie.Automation.Scripting;
-using System.Diagnostics;
-using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation.Engines
 {

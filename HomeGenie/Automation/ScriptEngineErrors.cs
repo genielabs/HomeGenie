@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
-using HomeGenie.Automation.Scripting;
+
 using Microsoft.Scripting.Hosting;
+
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie.Automation
 {

@@ -21,19 +21,14 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
+using System.Dynamic;
+
+using Newtonsoft.Json;
 
 using HomeGenie.Data;
 using HomeGenie.Service;
-using System.Threading;
-using System.Net;
-using System.IO;
 using HomeGenie.Service.Constants;
-using System.Dynamic;
-using Newtonsoft.Json;
-using MIG;
 
 namespace HomeGenie.Automation.Scripting
 {

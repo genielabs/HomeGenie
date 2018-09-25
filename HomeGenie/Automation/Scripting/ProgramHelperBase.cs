@@ -1,10 +1,12 @@
 ﻿using System;
-using HomeGenie.Service;
-using MIG;
-using HomeGenie.Automation.Scripting;
 using System.Threading;
 using System.IO;
 using System.Net;
+
+using MIG;
+
+using HomeGenie.Service;
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie
 {

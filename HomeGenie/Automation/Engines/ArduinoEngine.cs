@@ -26,7 +26,6 @@ using System.IO;
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
 using System.Threading;
-using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation.Engines
 {

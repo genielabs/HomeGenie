@@ -23,10 +23,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.IO;
 using System.Linq;
+
+using Microsoft.CSharp;
 
 namespace HomeGenie.Automation.Engines
 {

@@ -22,15 +22,13 @@
 
 using System;
 using System.Collections.Generic;
-
 using System.Xml.Serialization;
+
+using Newtonsoft.Json;
 
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
-
 using HomeGenie.Automation.Engines;
-using HomeGenie.Automation.Scheduler;
-using Newtonsoft.Json;
 
 namespace HomeGenie.Automation
 {    

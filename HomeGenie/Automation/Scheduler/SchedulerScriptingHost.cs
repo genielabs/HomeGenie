@@ -21,11 +21,11 @@
 */
 
 using System;
-using HomeGenie.Service;
+using System.Threading;
 
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
-using System.Threading;
+using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation.Scheduler

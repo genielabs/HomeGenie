@@ -21,10 +21,12 @@
  */
 
 using System;
-using Microsoft.Scripting.Hosting;
-using HomeGenie.Automation.Scripting;
-using IronPython.Hosting;
 using System.Collections.Generic;
+
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie.Automation.Engines
 {

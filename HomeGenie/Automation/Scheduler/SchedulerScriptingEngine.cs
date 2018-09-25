@@ -22,6 +22,7 @@
 
 using System;
 using System.Threading;
+
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 

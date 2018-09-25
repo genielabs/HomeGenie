@@ -21,12 +21,12 @@
  */
 
 using System;
-using HomeGenie.Automation.Scripting;
+using System.Collections.Generic;
 
 using Jint;
-using System.Collections.Generic;
-using HomeGenie.Automation.Scheduler;
 using Jint.Parser;
+
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie.Automation.Engines
 {

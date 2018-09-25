@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation.Engines
 {

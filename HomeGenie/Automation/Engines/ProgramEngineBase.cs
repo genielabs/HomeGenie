@@ -23,12 +23,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using HomeGenie.Automation.Scheduler;
+
+using Newtonsoft.Json;
+using NLog;
+
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
-using Newtonsoft.Json;
-using NLog;
 
 namespace HomeGenie.Automation.Engines
 {

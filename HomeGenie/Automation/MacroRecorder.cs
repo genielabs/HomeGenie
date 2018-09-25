@@ -20,11 +20,11 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using MIG;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using MIG;
+
 using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation
