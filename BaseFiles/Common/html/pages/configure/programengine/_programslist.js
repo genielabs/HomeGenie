@@ -331,9 +331,6 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
             editor1.setValue('');
             editor2.setValue('"""\nPython Automation Script\nExample for using Helper Classes:\nhg.Modules.WithName(\'Light 1\').On()\n"""\n')
-        } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
-            editor1.setValue('');
-            editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# hg.Modules.WithName(\'Light 1\').On()\n');
         } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
             editor1.setValue('');
             editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// hg.modules.withName(\'Light 1\').on();\n');
@@ -378,9 +375,6 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
                 editor2.setOption('mode', 'text/x-python');
                 editor1.setOption('mode', 'text/x-python');
-            } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
-                editor2.setOption('mode', 'text/x-ruby');
-                editor1.setOption('mode', 'text/x-ruby');
             } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
                 editor2.setOption('mode', 'text/javascript');
                 editor1.setOption('mode', 'text/javascript');

@@ -244,7 +244,7 @@ namespace HomeGenie.Automation.Scripting
                             smtpClient.EnableSsl = _mailSsl == true;
 
                             Log.Trace("SendMessage: going to send email {0} using mailService '{1}', port '{2}', credentials {3}, using SSL = {4}",
-                                message.ToPrettyJson(), _mailService, _mailPort, credentials.ToPrettyJson(), smtpClient.EnableSsl);
+                                message.ToString(), _mailService, _mailPort, credentials.ToString(), smtpClient.EnableSsl);
                             smtpClient.Send(message);
                             Log.Trace("Email sent");
                             _attachments.Clear();

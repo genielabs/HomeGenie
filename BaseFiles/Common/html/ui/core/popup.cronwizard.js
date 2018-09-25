@@ -546,6 +546,7 @@ $$._init = function() {
     }, 100);
 
     $$._setPanel('0');
+    $$.refreshModules();
 }
 
 $$._uiCheckToggle = function(el) {

@@ -17,8 +17,8 @@ $$.onStart = function() {
   });
 
   // Initialize camera live popup
-  $$.popup.on('popupbeforeposition', function() { 
-    popupisopen = true; 
+  $$.popup.on('popupbeforeposition', function() {
+    popupisopen = true;
     requestPopupOpen = false;
     $$.popup.field('camerapicture').attr('src', imageurl + '?' + (new Date().getTime()));
   });
@@ -39,12 +39,12 @@ $$.onStart = function() {
           if ($(window).width() / $(window).height() >= 1)
             $$.popup.field('camerapicture').css({ width: availW+'px', height: availH/(availW/w)+'px'});
           else
-            $$.popup.field('camerapicture').css({ width: availW*(availH/h)+'px', height: availH+'px'});             
+            $$.popup.field('camerapicture').css({ width: availW*(availH/h)+'px', height: availH+'px'});
         } else {
           if ($(window).width() / $(window).height() >= 1)
             $$.popup.field('camerapicture').css({ width: availW+'px', height: availH/(availW/w)+'px'});
           else
-            $$.popup.field('camerapicture').css({ width: availH/(h/w)+'px', height: availH+'px'});              
+            $$.popup.field('camerapicture').css({ width: availH/(h/w)+'px', height: availH+'px'});
         }
         setTimeout(function(){
           $$.popup.popup('reposition', { positionTo: 'window', animate: 'true' });
@@ -105,6 +105,7 @@ $$.onStart = function() {
   var cameraUrl = $$.module.prop('IpCamera.ImageURL');
   if (cameraUrl != null) imageurl = cameraUrl.Value;
   else imageurl = '/api/' + $$.module.Domain + '/' + $$.module.Address + '/Camera.GetPicture/';
+  if (imageurl.indexOf('?') > 0) imageurl += '&';
 }
 
 $$.onRefresh = function() {

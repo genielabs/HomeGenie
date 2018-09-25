@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\BaseFiles\Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mac", "..\BaseFiles\Mac\Mac.csproj", "{51F4FCF7-347A-4564-AB22-B6BFAF772B93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie.Tests", "..\HomeGenie.Tests\HomeGenie.Tests.csproj", "{3BB93A6B-B847-4A2D-AF33-63909A29C15D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU

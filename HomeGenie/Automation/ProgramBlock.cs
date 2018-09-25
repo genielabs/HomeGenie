@@ -22,14 +22,24 @@
 
 using System;
 using System.Collections.Generic;
+
 using System.Xml.Serialization;
+
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
+
 using HomeGenie.Automation.Engines;
+using HomeGenie.Automation.Scheduler;
 using Newtonsoft.Json;
 
 namespace HomeGenie.Automation
-{
+{    
+    public class MethodRunResult
+    {
+        public Exception Exception = null;
+        public object ReturnValue = null;
+    }
+
     [Serializable()]
     public class ProgramBlock
     {
@@ -55,10 +65,6 @@ namespace HomeGenie.Automation
 
         // common public members
         public string Domain  { get; set; }
-
-        /// <summary>
-        /// Program Id
-        /// </summary>
         public int Address  { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -120,9 +126,6 @@ namespace HomeGenie.Automation
                         case "python":
                             programEngine = new PythonEngine(this);
                             break;
-                        case "ruby":
-                            programEngine = new RubyEngine(this);
-                            break;
                         case "javascript":
                             programEngine = new JavascriptEngine(this);
                             break;
@@ -134,7 +137,8 @@ namespace HomeGenie.Automation
                             break;
                         default:
                             throw new NotImplementedException(
-                                string.Format("Program engine for type {0} is not implemented", codeType));
+                                string.Format("Program engine for type {0} is not implemented", codeType)
+                            );
                     }
                 }
             }
@@ -160,8 +164,7 @@ namespace HomeGenie.Automation
                         if (programEngine != null)
                             programEngine.Unload();
                     }
-                    if (EnabledStateChanged != null)
-                        EnabledStateChanged(this, value);
+                    if (EnabledStateChanged != null) EnabledStateChanged(this, value);
                 }
             }
         }

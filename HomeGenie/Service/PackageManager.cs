@@ -25,8 +25,6 @@ using System.IO;
 using System.Net;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
 
 using HomeGenie.Automation;
 using HomeGenie.Data;
@@ -135,7 +133,9 @@ namespace HomeGenie.Service
                             Properties.InstallProgressMessage,
                             "= Installing: " + program.name.ToString()
                         );
-                        int pid = int.Parse(program.uid.ToString());
+                        int pid = homegenie.ProgramManager.GeneratePid();
+                        if (program.uid == null || !int.TryParse(program.uid.ToString(), out pid))
+                            program.uid = pid;
                         // by default enable package programs after installing them
                         var enabled = true;
                         var oldProgram = homegenie.ProgramManager.ProgramGet(pid);
@@ -503,9 +503,16 @@ namespace HomeGenie.Service
                     File.Delete(logoPath);
                 }
                 File.Move(Path.Combine(sourceFolder, "logo.png"), logoPath);
-                // copy other interface files to mig folder (dll and dependencies)
+                // copy other interface files to mig folder (files and subfolders)
                 string migFolder = Path.Combine("lib", "mig");
                 DirectoryInfo dir = new DirectoryInfo(sourceFolder);
+                // copy folders
+                foreach (var d in dir.GetDirectories())
+                {
+                    string destFile = Path.Combine(migFolder, Path.GetFileName(d.FullName));
+                    File.Move(d.FullName, destFile);
+                }
+                // copy root files ("soft" copy to prevent I/O errors overwriting in-use files)
                 foreach (var f in dir.GetFiles())
                 {
                     string destFile = Path.Combine(migFolder, Path.GetFileName(f.FullName));

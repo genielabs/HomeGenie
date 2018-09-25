@@ -1,3 +1,5 @@
+[![Travis Build Status](https://travis-ci.org/genielabs/HomeGenie.svg?branch=master)](https://travis-ci.org/genielabs/HomeGenie)
+[![Build status](https://ci.appveyor.com/api/projects/status/96xnyg3jmqx1tj9h?svg=true)](https://ci.appveyor.com/project/genemars/homegenie)
 [![Join the chat at https://gitter.im/genielabs/HomeGenie](https://badges.gitter.im/genielabs/HomeGenie.svg)](https://gitter.im/genielabs/HomeGenie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Presentation Site

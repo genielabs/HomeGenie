@@ -61,7 +61,6 @@ div[data-ui-field="wallpaper"] {
     bottom: 5px;
     left: 5px;
     right: 5px;
-    border solid 1px red;
     display: block;
     cursor: default;
 }
@@ -85,7 +84,7 @@ div[data-ui-field="wallpaper"] {
 
 #fullscreen_edit_box .CodeMirror-focused .cm-matchhighlight {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
-    background-position: middle;
+    background-position: center;
     background-repeat: repeat-x;
 }
 
@@ -97,7 +96,6 @@ div[data-ui-field="wallpaper"] {
     bottom: 8px;
     left: 8px;
     right: 8px;
-    border solid 1px red;
     display: block;
     cursor: default;
 }
@@ -134,7 +132,6 @@ div[data-ui-field="wallpaper"] {
     bottom: 10px;
     left: 5px;
     right: 5px;
-    border solid 1px red;
     display: block;
     cursor: default;
 }
@@ -159,6 +156,11 @@ div[data-ui-field="wallpaper"] {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
     background-position: bottom;
     background-repeat: repeat-x;
+}
+
+#autorestartenabled .ui-checkbox {
+    display: inline-block;
+    margin-left: 4px;
 }
 
 .cronwiz-container .CodeMirror-code span {

@@ -25,6 +25,7 @@ using HomeGenie.Automation.Scripting;
 
 using Jint;
 using System.Collections.Generic;
+using HomeGenie.Automation.Scheduler;
 using Jint.Parser;
 
 namespace HomeGenie.Automation.Engines

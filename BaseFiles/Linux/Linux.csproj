@@ -33,21 +33,6 @@
     <None Include="lib\shared\System.Data.SQLite.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="lib\mig\v4l\debian64_libCameraCaptureV4L.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\mig\v4l\debian64_libCameraCaptureV4L.so.gd3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\mig\v4l\raspbian_libCameraCaptureV4L.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\mig\lircconfig.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\mig\lircremotes.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -61,6 +46,5 @@
   <ItemGroup>
     <Folder Include="lib\" />
     <Folder Include="lib\shared\" />
-    <Folder Include="lib\mig\" />
   </ItemGroup>
 </Project>

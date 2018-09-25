@@ -27,6 +27,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml.Serialization;
+
 using System.Net.Sockets;
 using System.Threading;
 using System.Xml;
@@ -729,14 +730,13 @@ namespace HomeGenie.Service
             {
                 namePrefix = ""; // default fallback to Control Groups groups.xml - no prefix
             }
-
-            var filename = namePrefix.ToLower() + "groups.xml";
+            string filename = namePrefix.ToLower() + "groups.xml";
             return UpdateXmlDatabase(groups, filename);
         }
 
         public bool UpdateModulesDatabase()
         {
-            var success = false;
+            bool success = false;
             modules_RefreshAll();
             lock (systemModules.LockObject)
             {
@@ -759,7 +759,6 @@ namespace HomeGenie.Service
                             }
                         }
                     }
-
                     success = UpdateXmlDatabase(clonedModules, "modules.xml");
                 }
                 catch (Exception ex)
@@ -783,14 +782,15 @@ namespace HomeGenie.Service
 
         private static bool UpdateXmlDatabase<T>(T items, string filename)
         {
-            var success = false;
+            bool success = false;
             XmlWriter writer = null;
             try
             {
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml");
                 if (File.Exists(filePath))
+                {
                     File.Delete(filePath);
-
+                }
                 var settings = new XmlWriterSettings
                 {
                     Indent = true,
@@ -808,8 +808,7 @@ namespace HomeGenie.Service
             }
             finally
             {
-                if(writer != null)
-                    writer.Close();
+                if (writer != null) writer.Close();
             }
             return success;
         }

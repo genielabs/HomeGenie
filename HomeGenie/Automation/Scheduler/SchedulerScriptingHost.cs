@@ -30,13 +30,6 @@ using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation.Scheduler
 {
-
-    public class MethodRunResult
-    {
-        public Exception Exception = null;
-        public object ReturnValue = null;
-    }
-
     [Serializable]
     public class SchedulerScriptingHost
     {

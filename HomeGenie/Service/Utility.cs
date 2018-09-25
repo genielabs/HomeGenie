@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.Dynamic;
@@ -34,14 +33,14 @@ using System.Runtime.InteropServices;
 
 using Newtonsoft.Json;
 
-using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
+using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
 
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 using Newtonsoft.Json.Serialization;
-using ICSharpCode.SharpZipLib.GZip;
-using ICSharpCode.SharpZipLib.Tar;
 
 namespace HomeGenie.Service
 {
@@ -135,12 +134,10 @@ namespace HomeGenie.Service
                 return null;
             return ModuleParameterGet(module.Properties, propertyName);
         }
-
-        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter> parameters, string propertyName)
+        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter>  parameters, string propertyName)
         {
             return parameters.Find(x => x.Name == propertyName);
         }
-
         public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
         {
             if (module == null)

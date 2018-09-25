@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -29,7 +29,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Timers;
 using System.Xml.Serialization;
 using System.Security.Cryptography;
@@ -194,7 +193,7 @@ namespace HomeGenie.Service
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 // TODO: this is just an hack to fix certificate issues on mono < 4.0,
-                ServicePointManager.ServerCertificateValidationCallback = Validator;
+                ServicePointManager.ServerCertificateValidationCallback += Validator;
             }
         }
 

@@ -21,12 +21,6 @@
                 <br clear="all" />
                 <label data-locale-id="configure_program_programdescription" for="automation_programdescription">Program Description</label>
                 <textarea id="automation_programdescription" cols="40" rows="3"></textarea>
-                <br clear="all" />
-
-                <div id="autorestartenabled">
-                    <label data-locale-id="configure_program_autorestart" for="automation_program_autorestartenabled">Auto restart program on failure</label>
-                    <input type="checkbox" id="automation_program_autorestartenabled" />
-                </div>
 
                 <br clear="all" />
                 <div class="ui-grid-a">
@@ -37,7 +31,6 @@
                             <option value="CSharp">C# Program</option>
                             <option value="Javascript">Javascript Script</option>
                             <option value="Python">Python Script</option>
-                            <option value="Ruby">Ruby Script</option>
                             <option id="automation_programtype_option_arduino" value="Arduino">Arduino Sketch</option>
                         </select>
                     </div>
@@ -45,6 +38,10 @@
                         <label data-locale-id="configure_program_programgroup" for="automation_programgroup">Program Group</label>
                         <select id="automation_programgroup"></select>
                     </div>
+                </div>
+                <div id="autorestartenabled">
+                    <label data-locale-id="configure_program_autorestart" for="automation_program_autorestartenabled">Auto restart program on failure</label>
+                    <input type="checkbox" id="automation_program_autorestartenabled" />
                 </div>
             </div>
         </div>
