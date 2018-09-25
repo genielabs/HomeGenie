@@ -6,10 +6,12 @@ using NUnit.Framework;
 
 using HomeGenie.Service;
 
+// Continuous Integration Deploy Tests (Travis / AppVeyor)
+
 namespace HomeGenie.Tests
 {
     [TestFixture]
-    public class Tests
+    public class CiDeployTest
     {
         [Test]
         public void Test1()

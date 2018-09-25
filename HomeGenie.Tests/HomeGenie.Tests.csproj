@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SchedulerServiceTest.cs" />
-    <Compile Include="Tests.cs" />
+    <Compile Include="CiDeployTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
