@@ -17,9 +17,17 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
             $('#restore_configuration_uploadfile').val('')
         });
         page.on('pageshow', function (e) {
-            page.find('[data-ui-field=package_install]').qtip({
+            var messageText = '';
+            if ($('#interfaces_status').data('update_available')) {
+                messageText = HG.WebApp.Locales.GetLocaleString('configure_system_installupdate_description',
+                    'Click here to install the latest update.');
+            } else {
+                messageText = HG.WebApp.Locales.GetLocaleString('configure_system_installpackage_description',
+                    'Click here to install additional features.');
+            }
+            page.find('[id=configure_system_updatemanager_installbutton]').qtip({
                 content: {
-                    text: HG.WebApp.Locales.GetLocaleString('configure_system_installpackage_description', 'Click here to install additional features.'),
+                    text: messageText,
                 },
                 show: {event: false, ready: true, delay: 1000},
                 events: {

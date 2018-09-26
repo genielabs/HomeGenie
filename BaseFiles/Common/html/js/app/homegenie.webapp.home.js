@@ -50,7 +50,9 @@ HG.WebApp.Home = HG.WebApp.Home || new function(){ var $$ = this;
                     status += '<a href="#page_configure_maintenance" alt="Update available."><img title="Update available." src="images/update.png" height="28" width="28" style="margin-left:6px" vspace="2" hspace="0" /></a>';
                 }
                 //
-                $('#interfaces_status').html(status);
+                $('#interfaces_status')
+                    .html(status)
+                    .data('update_available', isupdateavailable);
             }
         });
     };
