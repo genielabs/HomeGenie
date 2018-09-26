@@ -175,8 +175,6 @@ namespace HomeGenie.Service
         }
 
 
-        // TODO: add automatic interval check and "UpdateAvailable", "UpdateChecking" events
-
         public UpdateChecker(HomeGenieService hg)
         {
             homegenie = hg;
@@ -251,7 +249,7 @@ namespace HomeGenie.Service
         {
             GetCurrentRelease();
             //githubReleases
-            using (var client = new WebClient())
+            using (var client = new WebClientPx())
             {
                 client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                 try
@@ -319,7 +317,7 @@ namespace HomeGenie.Service
         // TODO: deprecate this
         public List<ReleaseInfo> GetRemoteUpdates()
         {
-            using (var client = new WebClient())
+            using (var client = new WebClientPx())
             {
                 client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                 try
@@ -416,7 +414,7 @@ namespace HomeGenie.Service
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(archiveName));
             }
-            using (var client = new WebClient())
+            using (var client = new WebClientPx())
             {
                 client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                 try
@@ -965,9 +963,56 @@ namespace HomeGenie.Service
             Check();
             if (IsUpdateAvailable)
             {
-                // TODO: ...
+                // TODO: Implement automatic update functionality?
             }
         }
 
+    }
+
+    // Work around for Mono TLS 1.2 issue (only applied to github.com)
+    // https://tirania.org/blog/archive/2017/Nov-20.html
+    public class WebClientPx : WebClient
+    {
+        public new string DownloadString(string address)
+        {
+            string result;
+            try
+            {
+                result = base.DownloadString(address);
+            }
+            catch (Exception e)
+            {
+                // try using proxy
+                if (Environment.OSVersion.Platform == PlatformID.Unix && address.StartsWith("https://") && address.IndexOf("github.com/") > 0)
+                {
+                    using (var wc = new WebClient())
+                    {
+                        result = wc.DownloadString(String.Format("http://zuix.it/gh/{0}", address.Substring(8)));
+                    }
+                }
+                else
+                {
+                    throw e;
+                }
+            }
+            return result;
+        }
+        public new void DownloadFile(string address, string fileName)
+        {
+            try
+            {
+                base.DownloadFile(address, fileName);
+            }
+            catch (Exception e)
+            {
+                if (Environment.OSVersion.Platform == PlatformID.Unix && address.StartsWith("https://") && address.IndexOf("github.com/") > 0)
+                {
+                    using (var wc = new WebClient())
+                    {
+                        wc.DownloadFile(String.Format("http://zuix.it/gh/{0}", address.Substring(8)), fileName);
+                    }
+                }
+            }
+        }
     }
 }

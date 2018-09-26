@@ -64,7 +64,7 @@ namespace HomeGenie.Service
                 Properties.InstallProgressMessage,
                 "= Downloading: package.json"
             );
-            using (var client = new WebClient())
+            using (var client = new WebClientPx())
             {
                 try
                 {
@@ -103,7 +103,7 @@ namespace HomeGenie.Service
                     string programFile = Path.Combine(installFolder, program.file.ToString());
                     if (File.Exists(programFile))
                         File.Delete(programFile);
-                    using (var client = new WebClient())
+                    using (var client = new WebClientPx())
                     {
                         try
                         {
@@ -199,7 +199,7 @@ namespace HomeGenie.Service
                     string widgetFile = Path.Combine(installFolder, widget.file.ToString());
                     if (File.Exists(widgetFile))
                         File.Delete(widgetFile);
-                    using (var client = new WebClient())
+                    using (var client = new WebClientPx())
                     {
                         try
                         {
@@ -251,7 +251,7 @@ namespace HomeGenie.Service
                     string migfaceFile = Path.Combine(installFolder, migface.file.ToString());
                     if (File.Exists(migfaceFile))
                         File.Delete(migfaceFile);
-                    using (var client = new WebClient())
+                    using (var client = new WebClientPx())
                     {
                         try
                         {
@@ -540,4 +540,3 @@ namespace HomeGenie.Service
 
     }
 }
-
