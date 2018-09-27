@@ -305,18 +305,6 @@
     <Compile Include="Automation\Scripting\ProgramHelperBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\CREDITS.TXT">
-      <Link>CREDITS.TXT</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\LICENCE.TXT">
-      <Link>LICENCE.TXT</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\README.TXT">
-      <Link>README.TXT</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
