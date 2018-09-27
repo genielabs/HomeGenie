@@ -5,6 +5,8 @@
 # HomeGenie
 <small>Smart Home server for Windows, Linux and Mac.</small>
 
+![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/docs/dashboard_page_01.jpg)
+
 Features
 ========
 
