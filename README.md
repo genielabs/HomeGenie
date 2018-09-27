@@ -83,6 +83,7 @@ for information about contributing to this repository.
 
 - https://github.com/genielabs/homegenie-packages
 - https://github.com/genielabs/mig-service-dotnet
+- https://play.google.com/store/apps/details?id=com.glabs.homegenieplus
 - https://github.com/genielabs/HomeGenie-Android-ClientLib
 - https://github.com/genielabs/HomeGenie-Android
 - https://github.com/genielabs/HomeGenie-WindowsPhone
