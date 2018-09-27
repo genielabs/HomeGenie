@@ -6,46 +6,54 @@
 <small>Smart Home server for Windows, Linux and Mac.</small>
 
 ![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/docs/dashboard_page_01.jpg)
-
+```
 Features
 ========
 
-* Modern, web based, responsive UI
-  use it on every device, from desktop PCs to smart phones and tablets
+* Modern, web based, responsive UI:
+  works on every device, from desktop PCs to smart phones and tablets
 
-* Integrated drivers for X10 and Z-Wave devices
+* Integrated drivers for X10 and Z-Wave devices:
   ready to use solution for your home automation
 
-* Real and virtual energy metering with statistics
+* Real and virtual energy metering with statistics:
   energy consumption awareness for optimizing costs and usage
 
-* UPnP / DLNA control point
-  control media receiver, renderer and light/switch device types
+* UPnP / DLNA control point:
+  control media servers, players, speakers and smart TVs
 
-* Wizard Scripting
-  no need to be a programmer, create scenarios with your fingers using the "live macro recording" feature
+* Wizard Scripts:
+  no need to be a programmer, create scenarios using the
+  "live macro recording" feature and fine tune them using
+   the *Wizard Script* program editor
 
-* Automation Program Plugins (APPs)
-  easily add/share new automation programs and features
+* Fully expandible and customizable:
+  add new features and automation programs
+  trhough the [packages repository](https://github.com/genielabs/homegenie-packages/tree/master/packages)
 
 * Localization
-  English, Italian, Spanish, French, Netherlands. Other languages can by added by creating a simple JSON file.
+  English, Italian, Spanish, French, Netherlands. More
+  languages can by added by creating a simple JSON file.
 
 * Password protected access
 
 * Configuration backup/restore and factory reset
 
 * Embeddable
-  runs on low-energy and low-cost embedded systems such as Raspberry Pi
+  runs on low-energy and low-cost embedded systems such as
+  Raspberry Pi
 
 * Customizable widgets and features
-  create new features and widgets that interact with your devices and internet services
+  create new features and widgets that interact with your
+  devices and internet services
 
 * Programmable Automation Engine
-  web based Program Editor and compiler with multi-language support: C#, Javascript, Phyton and Ruby, Arduino Sketch 
+  web based Program Editor and compiler with multi-language
+  support: C#, Javascript, Phyton and Ruby, Arduino Sketch 
 
 * Dynamic Web Service API and Helper Classes
-  make your devices and services talk each other using a common language over the net
+  make your devices and services talk each other using a
+  common language over the net
 
 * Direct access to Raspberry Pi hardware
   GPIO, SPI, I2C programming using an event driven model
@@ -58,7 +66,7 @@ Features
 
 * Programmable InfraRed transceiver
   use a common IR remote to control your automation system
-
+```
 
 ## Presentation site
 
