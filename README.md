@@ -60,11 +60,11 @@ Features
   use a common IR remote to control your automation system
 
 
-## Presentation Site
+## Presentation site
 
 http://www.homegenie.it
 
-## User's Guide and Developer Docs
+## User's guide and developer docs
 
 https://genielabs.github.io/HomeGenie/
 
