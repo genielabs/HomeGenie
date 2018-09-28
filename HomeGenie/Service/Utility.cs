@@ -154,11 +154,11 @@ namespace HomeGenie.Service
             }
             catch (Exception e)
             {
-                callback?.Invoke(items.GetType(), e);
+                if (callback != null) callback(items.GetType(), e);
             }
             finally
             {
-                writer?.Close();
+                if (writer != null) writer.Close();
             }
             return success;
         }

@@ -125,7 +125,7 @@ namespace HomeGenie.Automation.Engines
 
         public void Reset()
         {
-            hgScriptingHost?.Reset();
+            if (hgScriptingHost != null) hgScriptingHost.Reset();
         }
 
         public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
