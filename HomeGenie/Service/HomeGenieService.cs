@@ -719,6 +719,14 @@ namespace HomeGenie.Service
 
         #region Initialization and Data Persistence
 
+        private Func<Type,Exception,bool> UpdateDatabaseErrorHandler = new Func<Type, Exception, bool>((t, e) =>
+            {
+                LogError(Domains.HomeAutomation_HomeGenie,
+                    string.Format("UpdateXmlDatabase<{0}>()", t.FullName), e.Message, "StackTrace",
+                    e.StackTrace);
+                return false;
+            });
+
         public bool UpdateGroupsDatabase(string namePrefix)
         {
             var groups = controlGroups;
@@ -731,7 +739,7 @@ namespace HomeGenie.Service
                 namePrefix = ""; // default fallback to Control Groups groups.xml - no prefix
             }
             string filename = namePrefix.ToLower() + "groups.xml";
-            return UpdateXmlDatabase(groups, filename);
+            return Utility.UpdateXmlDatabase(groups, filename, UpdateDatabaseErrorHandler);
         }
 
         public bool UpdateModulesDatabase()
@@ -759,7 +767,7 @@ namespace HomeGenie.Service
                             }
                         }
                     }
-                    success = UpdateXmlDatabase(clonedModules, "modules.xml");
+                    success = Utility.UpdateXmlDatabase(clonedModules, "modules.xml", UpdateDatabaseErrorHandler);
                 }
                 catch (Exception ex)
                 {
@@ -772,45 +780,12 @@ namespace HomeGenie.Service
 
         public bool UpdateProgramsDatabase()
         {
-            return UpdateXmlDatabase(masterControlProgram.Programs, "programs.xml");
+            return Utility.UpdateXmlDatabase(masterControlProgram.Programs, "programs.xml", UpdateDatabaseErrorHandler);
         }
 
         public bool UpdateSchedulerDatabase()
         {
-            return UpdateXmlDatabase(masterControlProgram.SchedulerService.Items, "scheduler.xml");
-        }
-
-        private static bool UpdateXmlDatabase<T>(T items, string filename)
-        {
-            bool success = false;
-            XmlWriter writer = null;
-            try
-            {
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml");
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-                var settings = new XmlWriterSettings
-                {
-                    Indent = true,
-                    Encoding = Encoding.UTF8
-                };
-                var serializer = new XmlSerializer(typeof(T));
-                writer = XmlWriter.Create(filePath, settings);
-                serializer.Serialize(writer, items);
-                writer.Flush();
-                success = true;
-            }
-            catch (Exception e)
-            {
-                LogError(Domains.HomeAutomation_HomeGenie, string.Format("UpdateXmlDatabase<{0}>()", typeof(T).FullName), e.Message, "StackTrace", e.StackTrace);
-            }
-            finally
-            {
-                if (writer != null) writer.Close();
-            }
-            return success;
+            return Utility.UpdateXmlDatabase(masterControlProgram.SchedulerService.Items, "scheduler.xml", UpdateDatabaseErrorHandler);
         }
 
         /// <summary>
@@ -956,8 +931,11 @@ namespace HomeGenie.Service
             masterControlProgram = new ProgramManager(this);
             try
             {
+                string programsDatabase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs.xml");
+                // TODO: Deprecate Compat
+                Compat_526.FixProgramsDatabase(programsDatabase);
                 var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs.xml")))
+                using (var reader = new StreamReader(programsDatabase))
                 {
                     var programs = (List<ProgramBlock>)serializer.Deserialize(reader);
                     foreach (var program in programs)

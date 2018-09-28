@@ -32,7 +32,7 @@ namespace HomeGenie.Automation.Engines
 {
     public class PythonEngine : ProgramEngineBase, IProgramEngine
     {
-        internal ScriptEngine scriptEngine;
+        private ScriptEngine scriptEngine;
         private ScriptScope scriptScope;
         private ScriptingHost hgScriptingHost;
 
@@ -56,23 +56,23 @@ namespace HomeGenie.Automation.Engines
         {
             Unload();
 
-            if (Homegenie == null)
+            if (HomeGenie == null)
                 return false;
 
             scriptEngine = Python.CreateEngine();
 
             hgScriptingHost = new ScriptingHost();
-            hgScriptingHost.SetHost(Homegenie, ProgramBlock.Address);
+            hgScriptingHost.SetHost(HomeGenie, ProgramBlock.Address);
             dynamic scope = scriptScope = scriptEngine.CreateScope();
             scope.hg = hgScriptingHost;
 
             return true;
         }
 
-        public MethodRunResult EvaluateCondition()
+        public override MethodRunResult EvaluateStartupCode()
         {
             MethodRunResult result = null;
-            string pythonScript = ProgramBlock.ScriptCondition;
+            string pythonScript = ProgramBlock.ScriptSetup;
             result = new MethodRunResult();
             try
             {
@@ -87,7 +87,7 @@ namespace HomeGenie.Automation.Engines
             return result;
         }
 
-        public MethodRunResult Run(string options)
+        public override MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
             string pythonScript = ProgramBlock.ScriptSource;
@@ -105,11 +105,10 @@ namespace HomeGenie.Automation.Engines
 
         public void Reset()
         {
-            if (hgScriptingHost != null)
-                hgScriptingHost.Reset();
+            hgScriptingHost?.Reset();
         }
 
-        public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
@@ -128,12 +127,12 @@ namespace HomeGenie.Automation.Engines
             return error;
         }
 
-        public List<ProgramError> Compile()
+        public override List<ProgramError> Compile()
         {
             List<ProgramError> errors = new List<ProgramError>();
 
             var engine = Python.CreateEngine();
-            var source = scriptEngine.CreateScriptSourceFromString(ProgramBlock.ScriptCondition);
+            var source = scriptEngine.CreateScriptSourceFromString(ProgramBlock.ScriptSetup);
             var errorListener = new ScriptEngineErrors(CodeBlockEnum.TC);
             source.Compile(errorListener);
             errors.AddRange(errorListener.Errors);
@@ -148,4 +147,3 @@ namespace HomeGenie.Automation.Engines
         }
     }
 }
-

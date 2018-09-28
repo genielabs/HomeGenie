@@ -533,14 +533,13 @@ namespace HomeGenie.Service
                         //Console.WriteLine("NEW FILE {0}", file);
                     }
 
-                    if (processFile)
-                    {
+                    if (!processFile) continue;
 
-                        // Some files needs to be handled differently than just copying
-                        if (destinationFile.EndsWith(".xml") && File.Exists(destinationFile))
+                    // Some files needs to be handled differently than just copying
+                    if (destinationFile.EndsWith(".xml") && File.Exists(destinationFile))
+                    {
+                        switch (destinationFile)
                         {
-                            switch (destinationFile)
-                            {
                             case "automationgroups.xml":
                                 doNotCopy = true;
                                 status = UpdateAutomationGroups(file) ? InstallStatus.Success : InstallStatus.Error;;
@@ -567,73 +566,71 @@ namespace HomeGenie.Service
                                 doNotCopy = true;
                                 status = UpdateSystemConfig(file) ? InstallStatus.Success : InstallStatus.Error;;
                                 break;
-                            }
-                            if (status == InstallStatus.Error)
-                            {
-                                break;
-                            }
                         }
-                        else if (destinationFile.EndsWith("homegenie_stats.db"))
+                        if (status == InstallStatus.Error)
                         {
-                            doNotCopy = true;
+                            break;
                         }
+                    }
+                    else if (destinationFile.EndsWith("homegenie_stats.db"))
+                    {
+                        doNotCopy = true;
+                    }
 
-                        // Update the file
-                        if (!doNotCopy)
+                    if (doNotCopy) continue;
+                    
+                    // Update the file
+                    if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so"))
+                        restartRequired = true;
+
+                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+
+                    // backup current file before replacing it
+                    if (File.Exists(destinationFile))
+                    {
+                        string oldFile = Path.Combine(oldFilesPath, destinationFile);
+                        Directory.CreateDirectory(Path.GetDirectoryName(oldFile));
+
+                        LogMessage("+ Backup file '" + oldFile + "'");
+
+                        // TODO: delete oldFilesPath before starting update
+                        //File.Delete(oldFile); 
+
+                        if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll"))
                         {
-                            if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so"))
-                                restartRequired = true;
+                            // this will allow replace of new exe and dll files
+                            File.Move(destinationFile, oldFile);
+                        }
+                        else
+                        {
+                            File.Copy(destinationFile, oldFile);
+                        }
+                    }
 
-                            if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
-                            {
-                                Directory.CreateDirectory(destinationFolder);
-                            }
-
-                            // backup current file before replacing it
-                            if (File.Exists(destinationFile))
-                            {
-                                string oldFile = Path.Combine(oldFilesPath, destinationFile);
-                                Directory.CreateDirectory(Path.GetDirectoryName(oldFile));
-
-                                LogMessage("+ Backup file '" + oldFile + "'");
-
-                                // TODO: delete oldFilesPath before starting update
-                                //File.Delete(oldFile); 
-
-                                if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll"))
-                                {
-                                    // this will allow replace of new exe and dll files
-                                    File.Move(destinationFile, oldFile);
-                                }
-                                else
-                                {
-                                    File.Copy(destinationFile, oldFile);
-                                }
-                            }
-
+                    try
+                    {
+                        LogMessage("+ Copying file '" + destinationFile + "'");
+                        if (!string.IsNullOrWhiteSpace(Path.GetDirectoryName(destinationFile)) && !Directory.Exists(Path.GetDirectoryName(destinationFile)))
+                        {
                             try
                             {
-                                LogMessage("+ Copying file '" + destinationFile + "'");
-                                if (!String.IsNullOrWhiteSpace(Path.GetDirectoryName(destinationFile)) && !Directory.Exists(Path.GetDirectoryName(destinationFile)))
-                                {
-                                    try
-                                    {
-                                        Directory.CreateDirectory(Path.GetDirectoryName(destinationFile));
-                                        LogMessage("+ Created folder '" + Path.GetDirectoryName(destinationFile) + "'");
-                                    }
-                                    catch
-                                    {
-                                    }
-                                }
-                                File.Copy(file, destinationFile, true);
+                                Directory.CreateDirectory(Path.GetDirectoryName(destinationFile));
+                                LogMessage("+ Created folder '" + Path.GetDirectoryName(destinationFile) + "'");
                             }
-                            catch (Exception e)
+                            catch
                             {
-                                LogMessage("! Error copying file '" + destinationFile + "' (" + e.Message + ")");
-                                status = InstallStatus.Error;
-                                break;
                             }
                         }
+                        File.Copy(file, destinationFile, true);
+                    }
+                    catch (Exception e)
+                    {
+                        LogMessage("! Error copying file '" + destinationFile + "' (" + e.Message + ")");
+                        status = InstallStatus.Error;
+                        break;
                     }
 
                 }
@@ -651,27 +648,6 @@ namespace HomeGenie.Service
             }
 
             return status;
-        }
-
-        // TODO: deprecate this
-        public bool IsRestartRequired
-        {
-            get
-            {
-                bool restartRequired = false;
-                if (remoteUpdates != null)
-                {
-                    foreach (var releaseInfo in remoteUpdates)
-                    {
-                        if (releaseInfo.RequireRestart)
-                        {
-                            restartRequired = true;
-                            break;
-                        }
-                    }
-                }
-                return restartRequired;
-            }
         }
 
         public bool UpdateGroups(string file)
@@ -938,10 +914,7 @@ namespace HomeGenie.Service
 
         private bool ProgramsDiff(ProgramBlock oldProgram, ProgramBlock newProgram)
         {
-            bool unchanged = (JsonConvert.SerializeObject(oldProgram.ConditionType) == JsonConvert.SerializeObject(newProgram.ConditionType)) &&
-                             (JsonConvert.SerializeObject(oldProgram.Conditions) == JsonConvert.SerializeObject(newProgram.Conditions)) &&
-                             (JsonConvert.SerializeObject(oldProgram.Commands) == JsonConvert.SerializeObject(newProgram.Commands)) &&
-                             (oldProgram.ScriptCondition == newProgram.ScriptCondition) &&
+            bool unchanged = (oldProgram.ScriptSetup == newProgram.ScriptSetup) &&
                              (oldProgram.ScriptSource == newProgram.ScriptSource) &&
                              (oldProgram.Name == newProgram.Name) &&
                              (oldProgram.Description == newProgram.Description) &&

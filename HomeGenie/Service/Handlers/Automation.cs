@@ -196,52 +196,6 @@ namespace HomeGenie.Service.Handlers
                     MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveName);
                     int newPid = homegenie.ProgramManager.GeneratePid();
                     newProgram = homegenie.PackageManager.ProgramImport(newPid, archiveName, migCommand.GetOption(0));
-                    /*
-                    int newPid = homegenie.ProgramManager.GeneratePid();
-                    var reader = new StreamReader(archiveName);
-                    char[] signature = new char[2];
-                    reader.Read(signature, 0, 2);
-                    reader.Close();
-                    if (signature[0] == 'P' && signature[1] == 'K')
-                    {
-                        // Read and uncompress zip file content (arduino program bundle)
-                        string zipFileName = archiveName.Replace(".hgx", ".zip");
-                        if (File.Exists(zipFileName))
-                            File.Delete(zipFileName);
-                        File.Move(archiveName, zipFileName);
-                        string destFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "import");
-                        if (Directory.Exists(destFolder))
-                            Directory.Delete(destFolder, true);
-                        Utility.UncompressZip(zipFileName, destFolder);
-                        string bundleFolder = Path.Combine("programs", "arduino", newPid.ToString());
-                        if (Directory.Exists(bundleFolder))
-                            Directory.Delete(bundleFolder, true);
-                        if (!Directory.Exists(Path.Combine("programs", "arduino")))
-                            Directory.CreateDirectory(Path.Combine("programs", "arduino"));
-                        Directory.Move(Path.Combine(destFolder, "src"), bundleFolder);
-                        reader = new StreamReader(Path.Combine(destFolder, "program.hgx"));
-                    }
-                    else
-                    {
-                        reader = new StreamReader(archiveName);
-                    }
-                    var serializer = new XmlSerializer(typeof(ProgramBlock));
-                    newProgram = (ProgramBlock)serializer.Deserialize(reader);
-                    reader.Close();
-                    //
-                    newProgram.Address = newPid;
-                    newProgram.Group = migCommand.GetOption(0);
-                    homegenie.ProgramManager.ProgramAdd(newProgram);
-                    //
-                    newProgram.IsEnabled = false;
-                    newProgram.ScriptErrors = "";
-                    newProgram.Engine.SetHost(homegenie);
-                    //
-                    if (newProgram.Type.ToLower() != "arduino")
-                    {
-                        homegenie.ProgramManager.CompileScript(newProgram);
-                    }
-                    */
                     homegenie.UpdateProgramsDatabase();
                     //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
                     request.ResponseData = newProgram.Address.ToString();
@@ -254,7 +208,7 @@ namespace HomeGenie.Service.Handlers
                     var writerSettings = new System.Xml.XmlWriterSettings();
                     writerSettings.Indent = true;
                     writerSettings.Encoding = Encoding.UTF8;
-                    var programSerializer = new System.Xml.Serialization.XmlSerializer(typeof(ProgramBlock));
+                    var programSerializer = new XmlSerializer(typeof(ProgramBlock));
                     var builder = new StringBuilder();
                     var writer = System.Xml.XmlWriter.Create(builder, writerSettings);
                     programSerializer.Serialize(writer, currentProgram);
@@ -353,7 +307,7 @@ namespace HomeGenie.Service.Handlers
                     currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
                     {
-                        //TODO: remove groups associations as well
+                        // TODO: remove groups associations as well
                         homegenie.ProgramManager.ProgramRemove(currentProgram);
                         homegenie.UpdateProgramsDatabase();
                         // remove associated module entry
@@ -366,7 +320,7 @@ namespace HomeGenie.Service.Handlers
                 case "Programs.Update":
                     newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
                     currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == newProgram.Address);
-                        //
+                    //
                     if (currentProgram == null)
                     {
                         newProgram.Address = homegenie.ProgramManager.GeneratePid();
@@ -383,15 +337,10 @@ namespace HomeGenie.Service.Handlers
                         if (typeChanged)
                             currentProgram.Engine.SetHost(homegenie);
                         currentProgram.IsEnabled = newProgram.IsEnabled;
-                        currentProgram.ScriptCondition = newProgram.ScriptCondition;
+                        currentProgram.ScriptSetup = newProgram.ScriptSetup;
                         currentProgram.ScriptSource = newProgram.ScriptSource;
-                        currentProgram.Commands = newProgram.Commands;
-                        currentProgram.Conditions = newProgram.Conditions;
-                        currentProgram.ConditionType = newProgram.ConditionType;
-                        // reset last condition evaluation status
-                        currentProgram.LastConditionEvaluationResult = false;
                     }
-                        //
+                    //
                     if (migCommand.Command == "Programs.Compile")
                     {
                         // reset previous error status
@@ -405,9 +354,9 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
                         request.ResponseData = currentProgram.ScriptErrors;
                     }
-                        //
+                    //
                     homegenie.UpdateProgramsDatabase();
-                        //
+                    //
                     homegenie.modules_RefreshPrograms();
                     homegenie.modules_RefreshVirtualModules();
                     homegenie.modules_Sort();

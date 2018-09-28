@@ -37,7 +37,7 @@ namespace HomeGenie.Automation.Engines
         // c# program fields
         private AppDomain _programDomain = null;
         private Type _assemblyType = null;
-        private Object _scriptInstance = null;
+        private object _scriptInstance = null;
         private MethodInfo _methodRun = null;
         private MethodInfo _methodReset = null;
         private MethodInfo _methodEvaluateCondition = null;
@@ -87,7 +87,7 @@ namespace HomeGenie.Automation.Engines
             }
         }
 
-        public List<ProgramError> Compile()
+        public override List<ProgramError> Compile()
         {
             var errors = new List<ProgramError>();
 
@@ -124,7 +124,7 @@ namespace HomeGenie.Automation.Engines
             var result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
-                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptCondition, ProgramBlock.ScriptSource, tmpfile);
+                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, tmpfile);
             }
             catch (Exception ex)
             {
@@ -157,7 +157,7 @@ namespace HomeGenie.Automation.Engines
                     else
                     {
                         var warning = string.Format("{0},{1},{2}: {3}", blockType, errorRow, error.Column, error.ErrorText);
-                        Homegenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning, warning);
+                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning, warning);
                     }
                 }
             }
@@ -197,7 +197,7 @@ namespace HomeGenie.Automation.Engines
             return errors;
         }
 
-        public MethodRunResult EvaluateCondition()
+        public override MethodRunResult EvaluateStartupCode()
         {
             MethodRunResult result = null;
             if (_scriptAssembly != null && CheckAppInstance())
@@ -208,7 +208,7 @@ namespace HomeGenie.Automation.Engines
             return result;
         }
 
-        public MethodRunResult Run(string options)
+        public override MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
             if (_scriptAssembly != null && CheckAppInstance())
@@ -227,7 +227,7 @@ namespace HomeGenie.Automation.Engines
         }
 
 
-        public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             var error = new ProgramError() {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
@@ -250,8 +250,7 @@ namespace HomeGenie.Automation.Engines
             return error;
         }
 
-
-        internal string AssemblyFile
+        private string AssemblyFile
         {
             get
             {
@@ -261,7 +260,7 @@ namespace HomeGenie.Automation.Engines
             }
         }
 
-        internal bool LoadAssembly()
+        private bool LoadAssembly()
         {
             if (ProgramBlock.Type.ToLower() != "csharp")
                 return false;
@@ -308,7 +307,7 @@ namespace HomeGenie.Automation.Engines
                     _scriptInstance = Activator.CreateInstance(_assemblyType);
 
                     var miSetHost = _assemblyType.GetMethod("SetHost");
-                    miSetHost.Invoke(_scriptInstance, new object[2] { Homegenie, ProgramBlock.Address });
+                    miSetHost.Invoke(_scriptInstance, new object[2] { HomeGenie, ProgramBlock.Address });
 
                     _methodRun = _assemblyType.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                     // TODO: v1.1 !!!IMPORTANT!!! the method EvaluateCondition will be renamed to EvaluateStartupCode,
@@ -331,8 +330,6 @@ namespace HomeGenie.Automation.Engines
             }
             return success;
         }
-
-
+        
     }
 }
-

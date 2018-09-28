@@ -45,16 +45,16 @@ namespace HomeGenie.Automation.Engines
             return true;
         }
 
-        public MethodRunResult EvaluateCondition()
+        public override MethodRunResult EvaluateStartupCode()
         {
             return null;
         }
 
-        public MethodRunResult Run(string options)
+        public override MethodRunResult Run(string options)
         {
             var result = new MethodRunResult();
             result = new MethodRunResult();
-            Homegenie.RaiseEvent(
+            HomeGenie.RaiseEvent(
                 Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
                 ProgramBlock.Address.ToString(),
@@ -69,23 +69,21 @@ namespace HomeGenie.Automation.Engines
                 ProgramBlock.Address.ToString()
             )).Split('\n');
             //
-            for (int x = 0; x < outputResult.Length; x++)
+            foreach (var res in outputResult)
             {
-                if (!String.IsNullOrWhiteSpace(outputResult[x]))
-                {
-                    Homegenie.RaiseEvent(
-                        Domains.HomeGenie_System,
-                        Domains.HomeAutomation_HomeGenie_Automation,
-                        ProgramBlock.Address.ToString(),
-                        "Arduino Sketch",
-                        "Arduino.UploadOutput",
-                        outputResult[x]
-                    );
-                    Thread.Sleep(500);
-                }
+                if (string.IsNullOrWhiteSpace(res)) continue;
+                HomeGenie.RaiseEvent(
+                    Domains.HomeGenie_System,
+                    Domains.HomeAutomation_HomeGenie_Automation,
+                    ProgramBlock.Address.ToString(),
+                    "Arduino Sketch",
+                    "Arduino.UploadOutput",
+                    res
+                );
+                Thread.Sleep(500);
             }
             //
-            Homegenie.RaiseEvent(
+            HomeGenie.RaiseEvent(
                 Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
                 ProgramBlock.Address.ToString(),
@@ -100,7 +98,7 @@ namespace HomeGenie.Automation.Engines
         {
         }
 
-        public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
@@ -113,7 +111,7 @@ namespace HomeGenie.Automation.Engines
             return error;
         }
 
-        public List<ProgramError> Compile()
+        public override List<ProgramError> Compile()
         {
             List<ProgramError> errors = new List<ProgramError>();
 
@@ -129,8 +127,8 @@ namespace HomeGenie.Automation.Engines
             {
                 // .ino source is stored in the ScriptSource property
                 File.WriteAllText(sketchFileName, ProgramBlock.ScriptSource);
-                // Makefile source is stored in the ScriptCondition property
-                File.WriteAllText(sketchMakefile, ProgramBlock.ScriptCondition);
+                // Makefile source is stored in the ScriptSetup property
+                File.WriteAllText(sketchMakefile, ProgramBlock.ScriptSetup);
                 errors = ArduinoAppFactory.CompileSketch(sketchFileName, sketchMakefile);
             }
             catch (Exception e)

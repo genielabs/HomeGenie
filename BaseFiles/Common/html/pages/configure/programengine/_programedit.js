@@ -23,7 +23,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
             $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
         });
         page.on('pagebeforeshow', function (e) {
-            $('#automation_program_scriptcondition').next().css('display', '');
+            $('#automation_program_scriptsetup').next().css('display', '');
             $('#automation_program_scriptsource').next().css('display', '');
             $$.SetTab(1);
             $$.RefreshProgramEditorTitle();
@@ -688,14 +688,21 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
         $('#program_error_button').hide();
         $('#program_error_button2').hide();
         var programblock = $$.SetProgramData();
-        //
-        if ($$._CurrentProgram.Type.toLowerCase() == 'arduino') {
-            // save other opened sketch files before compiling
-            $$.SketchFileSave(function () {
-                $$.UpdateProgram(programblock, false, callback);
-            });
-        } else {
-            $$.UpdateProgram(programblock, true, callback);
+        switch ($$._CurrentProgram.Type.toLowerCase()) {
+            case 'arduino':
+                // save other opened sketch files before compiling
+                $$.SketchFileSave(function () {
+                    $$.UpdateProgram(programblock, false, callback);
+                });
+                break;
+            case 'wizard':
+                programblock.ScriptSource = JSON.stringify({
+                    'ConditionType': $$._CurrentProgram.ConditionType,
+                    'Conditions': $$._CurrentProgram.Conditions,
+                    'Commands': $$._CurrentProgram.Commands
+                });
+            default:
+                $$.UpdateProgram(programblock, true, callback);
         }
     };
     $$.SetProgramData = function () {
@@ -704,7 +711,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
         $$._CurrentProgram.Name = $('#automation_programname').val();
         $$._CurrentProgram.Description = $('#automation_programdescription').val();
         $$._CurrentProgram.AutoRestartEnabled = $('#automation_program_autorestartenabled').is(':checked');
-        $$._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
+        $$._CurrentProgram.ScriptSetup = editor1.getValue(); //$('#automation_program_scriptsetup').val();
         $$._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
         $$._CurrentProgram.ScriptErrors = '';
         $$._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
@@ -716,17 +723,14 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
             'Description': $$._CurrentProgram.Description,
             'AutoRestartEnabled': $$._CurrentProgram.AutoRestartEnabled,
             'IsEnabled': $$._CurrentProgram.IsEnabled,
-            'ScriptCondition': $$._CurrentProgram.ScriptCondition,
-            'ScriptSource': $$._CurrentProgram.ScriptSource,
-            'ConditionType': $$._CurrentProgram.ConditionType,
-            'Conditions': $$._CurrentProgram.Conditions,
-            'Commands': $$._CurrentProgram.Commands
+            'ScriptSetup': $$._CurrentProgram.ScriptSetup,
+            'ScriptSource': $$._CurrentProgram.ScriptSource
         };
         return programblock;
     };
 
     $$.CheckAndRunProgram = function (program) {
-        $$._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
+        $$._CurrentProgram.ScriptSetup = editor1.getValue(); //$('#automation_program_scriptsetup').val();
         $$._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
         $$._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
         if (!$$.IsClean()) {
@@ -755,7 +759,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
     };
 
     $$.RunProgram = function (pid, options) {
-        $$._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
+        $$._CurrentProgram.ScriptSetup = editor1.getValue(); //$('#automation_program_scriptsetup').val();
         $$._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
         $$._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
         //

@@ -235,6 +235,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automation\Engines\WizardScript\ComparisonOperator.cs" />
+    <Compile Include="Automation\Engines\WizardScript\ScriptCommand.cs" />
+    <Compile Include="Automation\Engines\WizardScript\ScriptCondition.cs" />
     <Compile Include="Automation\MacroRecorder.cs" />
     <Compile Include="Automation\ProgramError.cs" />
     <Compile Include="Automation\ProgramFeature.cs" />
@@ -251,6 +254,7 @@
     <Compile Include="Automation\Scripting\EventsHelper.cs" />
     <Compile Include="Automation\Scripting\TcpClientHelper.cs" />
     <Compile Include="Automation\Scripting\SerialPortHelper.cs" />
+    <Compile Include="Compat_526.cs" />
     <Compile Include="Data\ModuleEvent.cs" />
     <Compile Include="Data\ValueStatistics.cs" />
     <Compile Include="Data\VirtualModule.cs" />
@@ -271,10 +275,7 @@
     <Compile Include="Data\Module.cs" />
     <Compile Include="Data\ModuleParameter.cs" />
     <Compile Include="Service\HomeGenieService.cs" />
-    <Compile Include="Automation\ComparisonOperator.cs" />
     <Compile Include="Automation\ProgramBlock.cs" />
-    <Compile Include="Automation\ProgramCommand.cs" />
-    <Compile Include="Automation\ProgramCondition.cs" />
     <Compile Include="Service\VirtualMeter.cs" />
     <Compile Include="Data\SystemConfiguration.cs" />
     <Compile Include="Automation\Scripting\SettingsHelper.cs" />
@@ -284,7 +285,6 @@
     <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
     <Compile Include="Data\Store.cs" />
     <Compile Include="Automation\Scripting\StoreHelper.cs" />
-    <Compile Include="Data\SystemConfiguration_1_0.cs" />
     <Compile Include="Automation\Engines\CSharpEngine.cs" />
     <Compile Include="Automation\Engines\WizardEngine.cs" />
     <Compile Include="Automation\ProgramManager.cs" />

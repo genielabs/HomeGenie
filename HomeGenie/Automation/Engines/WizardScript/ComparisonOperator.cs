@@ -22,16 +22,15 @@
 
 using System;
 
-namespace HomeGenie.Automation
+namespace HomeGenie.Automation.Engines.WizardScript
 {
-
     [Serializable()]
-    public class ProgramCommand
+    public enum ComparisonOperator
     {
-        public string Domain { get; set; }
-        public string Target { get; set; }
-        public string CommandString { get; set; }
-        public string CommandArguments { get; set; }
+        LessThan = -1,
+        Equals = 0,
+        GreaterThan = 1,
+        LogicOrJoint = 100
     }
 
 }

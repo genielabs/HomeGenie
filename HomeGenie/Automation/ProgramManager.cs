@@ -106,7 +106,7 @@ namespace HomeGenie.Automation
 
         public List<ProgramError> CompileScript(ProgramBlock program)
         {
-            return program.Compile();
+            return program.Engine.Compile();
         }
 
         // TODO: v1.1 !!!IMPORTANT!!! move thread allocation and starting to ProgramEngineBase.cs class
@@ -180,8 +180,6 @@ namespace HomeGenie.Automation
             {
                 Utility.ModuleParameterSet(programModule, property, value);
                 hgService.RaiseEvent(program.Address, programModule.Domain, programModule.Address, "Automation Program", property, value);
-                //homegenie.MigService.RaiseEvent(actionEvent);
-                //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
         }
 

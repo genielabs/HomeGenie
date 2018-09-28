@@ -268,17 +268,6 @@ namespace HomeGenie.Automation.Scripting
             return true;
         }
 
-        // TODO: deprecate this (Program.RunAsyncTask can already do the trick)
-        [Obsolete("use 'Program.RunAsyncTask' instead")]
-        public void SendMessageAsync(string from, string recipients, string subject, string messageText)
-        {
-            var t = new Thread(() =>
-            {
-                SendMessage(from, recipients, subject, messageText);
-            });
-            t.Start();
-        }
-
         #endregion
 
 
@@ -401,17 +390,6 @@ namespace HomeGenie.Automation.Scripting
                 }
             }
             return returnvalue;
-        }
-
-        // TODO: deprecate this (Program.RunAsyncTask can do the trick)
-        [Obsolete("use 'Program.RunAsyncTask' instead")]
-        public void CallAsync()
-        {
-            var t = new Thread(() =>
-            {
-                Call();
-            });
-            t.Start();
         }
 
         /// <summary>

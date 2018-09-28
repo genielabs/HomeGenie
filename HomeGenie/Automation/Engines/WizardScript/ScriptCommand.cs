@@ -22,28 +22,16 @@
 
 using System;
 
-namespace HomeGenie.Automation
+namespace HomeGenie.Automation.Engines.WizardScript
 {
 
     [Serializable()]
-    public enum ConditionType
-    {
-        None = 0, // unused
-        OnSwitchTrue,
-        OnSwitchFalse,
-        Once,
-        OnTrue,
-        OnFalse
-    }
-
-    [Serializable()]
-    public class ProgramCondition
+    public class ScriptCommand
     {
         public string Domain { get; set; }
         public string Target { get; set; }
-        public string Property { get; set; }
-        public ComparisonOperator ComparisonOperator { get; set; }
-        public string ComparisonValue { get; set; }
+        public string CommandString { get; set; }
+        public string CommandArguments { get; set; }
     }
 
 }

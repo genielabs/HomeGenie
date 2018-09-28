@@ -29,6 +29,7 @@ using Newtonsoft.Json;
 using HomeGenie.Data;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
+using IronPython.Runtime.Exceptions;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -631,14 +632,15 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="parameter">Parameter name.</param>
         /// <param name="value">The new parameter value to set.</param>
         /// <param name="description">Event description.</param>
-        public ProgramHelper RaiseEvent(ModuleHelper sourceModule, string parameter, string value, string description)
+        [Obsolete("Use <module>.RaiseEvent instead.")]
+        public ProgramHelper RaiseEvent(ModuleHelper module, string parameter, string value, string description)
         {
             // TODO: deprecate this method, use ModuleHelper.RaiseEvent instead
             try
             {
                 var actionEvent = homegenie.MigService.GetEvent(
-                    sourceModule.Instance.Domain,
-                    sourceModule.Instance.Address,
+                    module.Instance.Domain,
+                    module.Instance.Address,
                     description,
                     parameter,
                     value

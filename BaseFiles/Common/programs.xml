@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
+    <ScriptSetup>Program.Setup(()=&gt;{
   Program.UseWidget("homegenie/generic/program");
-});</ScriptCondition>
+});</ScriptSetup>
     <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
 // ^^^^^^^
 // the line above is a special line that tells homegenie
@@ -26,19 +23,17 @@ Modules
     <Description>Turn on all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.747151Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
+    <ScriptSetup>Program.Setup(()=&gt;{
   Program.UseWidget("homegenie/generic/program");
 });
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
 // ^^^^^^^
 // the line above is a special line that tells homegenie
@@ -59,20 +54,18 @@ Modules
     <Description>Turn off all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.751604Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddFeature("", "Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on", "checkbox")
   .AddFeature("", "Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only", "checkbox")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>When.ModuleParameterChanged( (module, property) =&gt; {
   // stores the Status.MemoryLevel value for recalling last light dimmer level
   // when switched on
@@ -92,7 +85,7 @@ Modules
           var newlevel = (int)(memory.DecimalValue * 100);
           if (module.HasFeature("HomeGenie.LevelMemory.SimulateOnly"))
           {
-            Program.RaiseEvent(module, "Status.Level", memory.Value, "Memory Level");
+            module.RaiseEvent("Status.Level", memory.Value, "Memory Level");
           }
           else
           {
@@ -135,16 +128,14 @@ Program.GoBackground();</ScriptSource>
         <Description>Simulate only</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.756227Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.712519Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
   .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
   // Create 5 virtual modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5
@@ -152,7 +143,7 @@ Program.GoBackground();</ScriptSource>
   // See directory "html/pages/control/widgets/" for widget list
   .AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5)
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
 {
   if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
@@ -195,25 +186,25 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         {
           bridgeapicall(lightnumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
-          Program.RaiseEvent(module, "Status.Level", color.B, "Hue Light");
+          module.RaiseEvent("Status.Level", color.B, "Hue Light");
         }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
       case "Control.Off":
         bridgeapicall(lightnumber, "{ \"on\" : false }");
-        Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
+        module.RaiseEvent("Status.Level", "0", "Hue Light");
         break;
       case "Control.Toggle":
         if (module.Parameter("Status.Level").DecimalValue == 0)
         {
           bridgeapicall(lightnumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
-          Program.RaiseEvent(module, "Status.Level", color.B, "Hue Light");
+          module.RaiseEvent("Status.Level", color.B, "Hue Light");
         }
         else
         {
           bridgeapicall(lightnumber, "{ \"on\" : false }");
-          Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
+          module.RaiseEvent("Status.Level", "0", "Hue Light");
         }
         break;
       case "Control.Level":
@@ -222,8 +213,8 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
           bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
-          Program.RaiseEvent(module, "Status.ColorHsb", color.H+','+color.S+','+bri, "Hue Light");
-          Program.RaiseEvent(module, "Status.Level", bri, "Hue Light");
+          module.RaiseEvent("Status.ColorHsb", color.H+','+color.S+','+bri, "Hue Light");
+          module.RaiseEvent("Status.Level", bri, "Hue Light");
         }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
@@ -236,8 +227,8 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
                       ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) + 
                       ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) + 
                       ", \"transitiontime\" : " + transition.ToString() +  "}");
-        Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
-        Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
+        module.RaiseEvent("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
+        module.RaiseEvent("Status.ColorHsb", parameter, "Hue Light");
         break; 
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
       case "Control.Alert":
@@ -269,16 +260,14 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.757419Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:34.019462Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
+    <ScriptSetup>Program.Setup(()=&gt;{
   // list the program as custom weather widget
   Program.UseWidget( "weather/wunderground/conditions" )
   	// set input fields parameters
@@ -300,7 +289,7 @@ Program.Parameter("Conditions.IconUrl").Value = "";
 Program.Parameter("Conditions.Description").Value = "";    
 
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>var sunsetToSunriseEvent = "FromSunsetToSunrise";
 var sunriseToSunsetEvent = "FromSunriseToSunset";
 
@@ -413,19 +402,17 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Environment</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.758488Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:34.453266Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
+    <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
 Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
   // basic get will returns current device level 
@@ -462,21 +449,19 @@ Program.Run();
     <Description>Periodically query lights and switches level.</Description>
     <Group>Z-Wave</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
   .AddOption("CellUsername", "", "2. Username", "text")
   .AddOption("CellPassword", "", "3. Password", "text")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -501,21 +486,19 @@ Program.GoBackground();</ScriptSource>
     <Description>Forwards received IR/RF remote input to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
   .AddOption("CellUsername", "", "2. Username", "text")
   .AddOption("CellPassword", "", "3. Password", "text")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -540,21 +523,19 @@ Program.GoBackground();</ScriptSource>
     <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
   .AddOption("CellUsername", "", "2. Username", "text")
   .AddOption("CellPassword", "", "3. Password", "text")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -579,20 +560,18 @@ Program.GoBackground();</ScriptSource>
     <Description>Forwards module Status.* events to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light", "checkbox")
   .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Keep level below this value (%)", "slider:20:80:1")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
@@ -639,18 +618,16 @@ Program.GoBackground();</ScriptSource>
         <Description>Keep level below this value (%)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.761022Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.717372Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on", "checkbox");
+    <ScriptSetup>Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on", "checkbox");
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterIsChanging( (module, property) =&gt; {
   if (module.HasFeature("X10.LevelFix") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
@@ -686,22 +663,20 @@ Program.GoBackground();</ScriptSource>
         <Description>Set level to 100% when switched on</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.761995Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.717265Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddVirtualModules("Media.IpCamera", "Sensor", "homegenie/generic/camerainput", 1, 10)
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text")
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
 for (int cam = 1; cam &lt; 10; cam++)
 {
@@ -733,9 +708,9 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt; {
       case "Camera.MotionDetected":
       data = "{ 'ResponseValue' : 'OK' }";
       // blink Sensor.MotionDetect parameter
-      Program.RaiseEvent(module, "Sensor.MotionDetect", "255", "Generic IP Camera");
+      module.RaiseEvent("Sensor.MotionDetect", "255", "Generic IP Camera");
       Pause(1);
-      Program.RaiseEvent(module, "Sensor.MotionDetect", "0", "Generic IP Camera");
+      module.RaiseEvent("Sensor.MotionDetect", "0", "Generic IP Camera");
       break;
     }
   } catch (Exception e) { 
@@ -755,16 +730,14 @@ Program.GoBackground();
     <Description>Generic IP Camera driver.</Description>
     <Group>Devices and Things</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .UseWidget("homegenie/generic/securitysystem")
 
   .AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox")
@@ -782,7 +755,7 @@ Program.GoBackground();
   .AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "program.text")
 
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>//
 // init program parameters
 //
@@ -1037,19 +1010,17 @@ while (Program.IsEnabled)
         <Description>Use as Security Alarm</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.76346Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:34.415507Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpAlwaysAwake", "Set node as always awake", "checkbox");
+    <ScriptSetup>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpAlwaysAwake", "Set node as always awake", "checkbox");
 Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpSleep", "Send to sleep after given delay (seconds, 0=disabled)", "slider:0:60:1");
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
   if (parameter.Name == "ZWaveNode.WakeUpNotify")
@@ -1167,19 +1138,17 @@ Program.GoBackground();</ScriptSource>
         <Description>Send to sleep after given delay (seconds, 0=disabled)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.76461Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.730942Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)", "slider:0:3600:1")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>When.ModuleParameterIsChanging((module, parameter) =&gt; {
   // check if the module raising the event has the Turn Off Delay set
   if (module.HasFeature("HomeGenie.TurnOffDelay") &amp;&amp; module.Parameter("HomeGenie.TurnOffDelay").DecimalValue &gt; 0)
@@ -1223,16 +1192,14 @@ Program.GoBackground();</ScriptSource>
         <Description>Automatic turn off delay (seconds)</Description>
       </ProgramFeature>
     </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("Email.Sender", "", "1. E-Mail address", "text")
   .AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text")
   .AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text")
@@ -1240,7 +1207,7 @@ Program.GoBackground();</ScriptSource>
   .AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text")
   .AddOption("Email.SmtpUseSsl", "false", "6. SMTP Mail Server use SSL", "checkbox")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
 
@@ -1268,20 +1235,18 @@ Program.GoBackground();</ScriptSource>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.766461Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.796477Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
+    <ScriptSetup>Program.Setup(()=&gt;{
   Program
     .AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5)
     .AddFeature("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link", "text");
-});</ScriptCondition>
+});</ScriptSetup>
     <ScriptSource />
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1300,19 +1265,17 @@ shown as hyperlink buttons in the control page.</Description>
         <Description>Favourites link</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.76799Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddFeature("", "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "MobileNotification.SendChanges", "Push notifications to Windows Phone client", "checkbox")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>string notificationurl = "";
 var monitor = Program.WithName("Energy Monitor");
 
@@ -1426,21 +1389,19 @@ Currently limited to one client channel.</Description>
         <Description>Push notifications to Windows Phone client</Description>
       </ProgramFeature>
     </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor")
   .AddFeature("", "Light,Dimmer,Switch", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
   .AddFeature("", "Light,Dimmer,Switch,Sensor", "EnergyManagement.MonitorWatts", "Monitor watts", "checkbox")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
 var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
 var kwCounterToday = energyMonitor.Parameter("EnergyMonitor.KwCounter.Today");
@@ -1569,17 +1530,15 @@ while (Program.IsEnabled)
 device status and energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
-    <ActivationTime>2017-08-18T10:14:05.388996Z</ActivationTime>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.769723Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Run();
-</ScriptCondition>
+    <ScriptSetup>Program.Run();
+</ScriptSetup>
     <ScriptSource>var checkVirtualModules = new Func&lt;ModuleHelper, bool&gt;((module)=&gt;{
   var defaultType = "Switch";
   var parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchBinary.Count");
@@ -1615,7 +1574,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     if (int.TryParse(instance, out id))
     {
       var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(module.Instance.Address + "." + instance).Get();
-      Program.RaiseEvent(virtualmodule, "Status.Level", parameter.Value, "ZWaveNode");
+      virtualmodule.RaiseEvent("Status.Level", parameter.Value, "ZWaveNode");
     }
 
   }
@@ -1668,27 +1627,27 @@ When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
       {
         case "Control.On":
           parentmodule.Command("MultiInstance.Set").Execute("Switch.Binary/" + instance + "/255");
-          Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
+          virtualmodule.RaiseEvent("Status.Level", "1", "ZWaveNode");
           break;
         case "Control.Off":
           parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
-          Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
+          virtualmodule.RaiseEvent("Status.Level", "0", "ZWaveNode");
           break;
         case "Control.Toggle":
           if (virtualmodule.Parameter("Status.Level").DecimalValue == 0)
           {
             parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/255");
-            Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
+            virtualmodule.RaiseEvent("Status.Level", "1", "ZWaveNode");
           }
           else
           {
             parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
-            Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
+            virtualmodule.RaiseEvent("Status.Level", "0", "ZWaveNode");
           }
           break;
         case "Control.Level":
           parentmodule.Command("MultiInstance.Set").Set("Switch.MultiLevel/" + instance + "/" + parameter);
-          Program.RaiseEvent(virtualmodule, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
+          virtualmodule.RaiseEvent("Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
           break;
       }
       //
@@ -1718,21 +1677,19 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.771293Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.76508Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
   .AddOption("CellUsername", "", "2. Username", "text")
   .AddOption("CellPassword", "", "3. Password", "text")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -1756,20 +1713,18 @@ Program.GoBackground();</ScriptSource>
     <Description>Forwards devices' Sensor.* values changes to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "capture:Receiver.RawData");
+    <ScriptSetup>Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "capture:Receiver.RawData");
 Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event", "capture:Receiver.RawData");
 Program.AddVirtualModules("HomeAutomation.X10.RF", "Sensor", "homegenie/generic/sensor", 1, 16);
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>var x10rfModules = Modules.InDomain("HomeAutomation.X10.RF");
 // We want to do further processing whenever a module prop changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -1780,12 +1735,12 @@ When.ModuleParameterChanged( (module, property) =&gt; {
       var rfoff = m.Parameter("X10RFString.LevelOff").Value;
       if (rfon != "" &amp;&amp; rfon == property.Value)
       {
-        Program.RaiseEvent(m, "Status.Level", "1", "X10 Virtual RF Module");
+        m.RaiseEvent("Status.Level", "1", "X10 Virtual RF Module");
         return true;
       }
       else if (rfoff != "" &amp;&amp; rfoff == property.Value)
       {
-        Program.RaiseEvent(m, "Status.Level", "0", "X10 Virtual RF Module");
+        m.RaiseEvent("Status.Level", "0", "X10 Virtual RF Module");
         return true;
       }
       return false;
@@ -1802,23 +1757,21 @@ Program.GoBackground();</ScriptSource>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
     <Group>X10</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:1")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
 var MOT_SENSOR_NAME = "HomeGenie.SmartLights.OnMotionDetect";
 var LUM_SENSOR_NAME = "HomeGenie.SmartLights.CheckLuminosity";
@@ -1951,16 +1904,14 @@ while (Program.IsEnabled)
         <Description>Turn off after inactivity timeout (seconds)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.772959Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.774778Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>IPHostEntry host;
+    <ScriptSetup>IPHostEntry host;
 string localIP = "1";
 host = Dns.GetHostEntry(Dns.GetHostName());
 foreach (IPAddress ip in host.AddressList)
@@ -1980,7 +1931,7 @@ Program
   .AddOption("Password", "", "5. Password (optional)", "text")
   .AddFeature("", "", "MQTT.SensorPublish", "Publish module on MQTT network", "checkbox")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
 string topic = Program.Option("ServerTopic").Value.Trim();
@@ -2083,7 +2034,7 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
           {
             MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");         
           }
-          Program.RaiseEvent(module, property.Name, property.Value, "");
+          module.RaiseEvent(property.Name, property.Value, "");
         }
         break;
       }
@@ -2142,20 +2093,18 @@ while (Program.IsRunning &amp;&amp; MqttIsConnected) Pause(1);</ScriptSource>
 Other servers will automatically inherit the published module once an event is generated from it.</Description>
     <Group>Interconnections</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
+    <ScriptSetup>Program.Setup(()=&gt;{
   Program
     .AddFeature("HomeAutomation.PhilipsHue", "Dimmer", "Scenarios.SunriseColors", "Link to Sunrise Colors Scenario", "checkbox")
   	.UseWidget("homegenie/generic/program");
-});</ScriptCondition>
+});</ScriptSetup>
     <ScriptSource>// CSharp Automation Program Plugin
 
 // Initialize scenario
@@ -2189,21 +2138,19 @@ Pause(10);</ScriptSource>
         <Description>Link to Sunrise Colors Scenario</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.775416Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("ThermostatsCount", "1", "Virtual thermostats modules to create", "slider:1:10:1")
   .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature")
   .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>const int HOLDING_MODE_DIFF = 1;
 const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
 const string PARAMETER_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
@@ -2240,7 +2187,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
     var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
     if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
     {
-      Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+      thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
       Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid temperature module.");
       return false;
     }
@@ -2258,7 +2205,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
     var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
     if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
     {
-      Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+      thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
       Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid switch module.");
       return false;
     }
@@ -2271,7 +2218,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
         if (switchModule.IsOff) holdingMode[index] = false;
         if (operatingState.Value != "Heating")
         {
-          Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Heating", EVENT_DESCRIPTION);
+          thermostat.RaiseEvent("Thermostat.OperatingState", "Heating", EVENT_DESCRIPTION);
         }
         // Heating
         switchModule.On();
@@ -2281,7 +2228,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
         if (switchModule.IsOn) holdingMode[index] = true;
         if (operatingState.Value != "PendingHeat")
         {
-          Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "PendingHeat", EVENT_DESCRIPTION);
+          thermostat.RaiseEvent("Thermostat.OperatingState", "PendingHeat", EVENT_DESCRIPTION);
         }
         // Waiting
         switchModule.Off();
@@ -2291,7 +2238,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
     {
       if (operatingState.Value != "Off" &amp;&amp; operatingState.Value != "Idle")
       {
-        Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+        thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
         holdingMode[index] = false;
       }
       // Off
@@ -2320,7 +2267,7 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
           var address = domainAddress.Substring(separatorIndex + 1).ToLower();
           if (module.Instance.Domain.ToLower() == domain &amp;&amp; module.Instance.Address.ToLower() == address)
           {
-            Program.RaiseEvent(thermostat, "Sensor.Temperature", parameter.Value, EVENT_DESCRIPTION);
+            thermostat.RaiseEvent("Sensor.Temperature", parameter.Value, EVENT_DESCRIPTION);
             ThermostatLogicRun(thermostat);
           }
         }
@@ -2347,7 +2294,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
     if (option == "Heating")
     {
       var setPoint = cmdArgs[4];
-      Program.RaiseEvent(thermostat, "Thermostat.SetPoint.Heating", setPoint, EVENT_DESCRIPTION);
+      thermostat.RaiseEvent("Thermostat.SetPoint.Heating", setPoint, EVENT_DESCRIPTION);
       holdingMode[index] = false;
       ThermostatLogicRun(thermostat);
       res = "OK";
@@ -2357,7 +2304,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
     // Currently supported modes are Off or Heat
     if (option == "Off" || option == "Heat")
     {
-      Program.RaiseEvent(thermostat, "Thermostat.Mode", option, EVENT_DESCRIPTION);
+      thermostat.RaiseEvent("Thermostat.Mode", option, EVENT_DESCRIPTION);
       holdingMode[index] = false;
       ThermostatLogicRun(thermostat);
       res = "OK";
@@ -2399,19 +2346,17 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description>Module to switch on/off on set point</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.776701Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:33.903108Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.AddOption("PollInterval", "120", "Poll Interval (seconds)", "text");
+    <ScriptSetup>Program.AddOption("PollInterval", "120", "Poll Interval (seconds)", "text");
 //Program.AddFeature("HomeAutomation.ZWave", "Thermostat", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
   // basic get will returns current device level 
@@ -2438,19 +2383,17 @@ Program.Run();
     <Description />
     <Group>Z-Wave</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.AddOption("PollInterval", "45", "Poll Interval (seconds)", "text");
+    <ScriptSetup>Program.AddOption("PollInterval", "45", "Poll Interval (seconds)", "text");
 Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Sensor", "HomeGenie.ZWaveMeterPoll", "Poll meter Watt", "checkbox");
 Program.Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
   // basic get will returns current device level 
@@ -2480,23 +2423,21 @@ Program.Run();
         <Description>Poll meter Watt</Description>
       </ProgramFeature>
     </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable control by IR remote", "checkbox")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle module with IR button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "capture:Receiver.RawData")
   .AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "capture:Receiver.RawData")
   .AddOption("DimmerInterval", "5", "4. Dimming step", "slider:5:50:5")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>// 
 // Code adapted from: http://www.homegenie.it/forum/index.php?topic=950.0
 //
@@ -2580,19 +2521,17 @@ Also it lets you dim last addressed module using Up/Down button which can be def
         <Description>Toggle module with IR button (enter code)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.77799Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:34.024702Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program
+    <ScriptSetup>Program
   .AddOption("ZoneSensors.Count", "5", "Number of Zone Sensors", "slider:1:10:1")
   .Run();
-</ScriptCondition>
+</ScriptSetup>
     <ScriptSource>var FLD_ZONESENSORS_DOMAIN = "HomeGenie.ZoneSensors";
 var FLD_ZONESENSORS_ENABLE = "HomeGenie.ZoneSensors.Enable";
 
@@ -2630,13 +2569,12 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
           });
           if (count &gt; 0)
           {
-            Program.RaiseEvent(zoneModule, parameter.Name, (avg/count).ToString(CultureInfo.InvariantCulture), "Zone Sensors");
+            zoneModule.RaiseEvent(parameter.Name, (avg/count).ToString(CultureInfo.InvariantCulture), "Zone Sensors");
           }
         }
         else if (parameter.Name.StartsWith("Sensor.") || parameter.Name.StartsWith("Status."))
         {
           // set level to 1 if at least one module has value greater than zero
-	      //Program.RaiseEvent()
           var eventValue = "0";
           zoneSensors.Each((mod)=&gt;{
             if (mod.HasFeature(FLD_ZONESENSORS_ENABLE) &amp;&amp; mod.HasParameter(parameter.Name))
@@ -2649,7 +2587,7 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
             }
             return false;
           });
-          Program.RaiseEvent(zoneModule, parameter.Name, eventValue, "Zone Sensors");
+          zoneModule.RaiseEvent(parameter.Name, eventValue, "Zone Sensors");
         }
       }
     }
@@ -2710,16 +2648,14 @@ When changing the number of zone sensors, program restart is required.</Descript
         <Description>Zone Sensor 5</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime xsi:nil="true" />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.779063Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:34.145858Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>/* 
+    <ScriptSetup>/* 
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
 || @version: 1.0
@@ -2750,7 +2686,7 @@ $$.program.addFeature(_domain, "DoorWindow", "Status.Battery", "Set battery leve
 $$.program.addVirtualModule(_domain, "3", "Switch", "");
 $$.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
 
-$$.program.run();</ScriptCondition>
+$$.program.run();</ScriptSetup>
     <ScriptSource>/* 
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
@@ -2790,15 +2726,15 @@ $$.on.webServiceCallReceived(_domain, function(apiCall){
   if (mod.isOfDeviceType("Switch")) {
     switch (ac.command) {
       case 'Control.On':
-        $$.program.raiseEvent(mod, "Status.Level", "1", "");
+        mod.raiseEvent("Status.Level", "1", "");
         response = "OK";
         break;
       case 'Control.Off':
-        $$.program.raiseEvent(mod, "Status.Level", "0", "");
+        mod.raiseEvent("Status.Level", "0", "");
         response = "OK";
         break;
       case 'Control.Toggle':
-        $$.program.raiseEvent(mod, "Status.Level", mod.level != 0 ? "0" : "1", "");
+        mod.raiseEvent("Status.Level", mod.level != 0 ? "0" : "1", "");
         response = "OK";
         break;
     }
@@ -2895,21 +2831,19 @@ function initialize() {
         <Description>Set switch on/off</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2017-08-18T08:48:33.493129Z</ActivationTime>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.80703Z</ActivationTime>
     <TriggerTime>2017-08-18T08:48:34.358831Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.DoorWindow";
 var door = $$.modules.inDomain(_domain).withAddress("2").get();
 var currentValue = door.parameter(_param).decimalValue;
-$$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
+door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>401</Address>
@@ -2917,23 +2851,21 @@ $$.program.raiseEvent(door, _param, currentValue == 0 ? "1" : "0", "");</ScriptS
     <Description>Toogle door window sensor value</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-18T08:48:33.493888Z</ActivationTime>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.807897Z</ActivationTime>
     <TriggerTime>2017-08-06T18:05:43.555555Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.MotionDetect";
 var motion = $$.modules.inDomain(_domain).withAddress("1").get();
 var currentValue = motion.parameter(_param).decimalValue;
-$$.program.raiseEvent(motion, _param, "1", "");
+motion.raiseEvent(_param, "1", "");
 $$.pause(1);
-$$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
+motion.raiseEvent(_param, "0", "");</ScriptSource>
     <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>402</Address>
@@ -2941,23 +2873,21 @@ $$.program.raiseEvent(motion, _param, "0", "");</ScriptSource>
     <Description>Simulate motion detection</Description>
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-18T08:48:33.494011Z</ActivationTime>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.808025Z</ActivationTime>
     <TriggerTime>2016-06-18T13:58:14.256339Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.Temperature";
 var multiSensor = $$.modules.inDomain(_domain).withAddress("1").get();
 var temperature = multiSensor.parameter(_param);
 // simulate temperature changes over the time
 while($$.program.isRunning) {
-  $$.program.raiseEvent(multiSensor, _param, (temperature.decimalValue+(Math.random()-0.5)), "");
+  multiSensor.raiseEvent(_param, (temperature.decimalValue+(Math.random()-0.5)), "");
   $$.pause(60*5); // pause 60*5 = 5 minutes
 }
 </ScriptSource>
@@ -2968,16 +2898,14 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-18T08:48:33.494135Z</ActivationTime>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.808188Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>$$.program.useWidget('homegenie/generic/program');</ScriptCondition>
+    <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
     <ScriptSource>var _domain = "HomeAutomation.Demo";
 var _param = "Sensor.Luminance";
 var multiSensor = $$.modules.inDomain(_domain).withAddress("1").get();
@@ -2986,7 +2914,7 @@ var luminance = multiSensor.parameter(_param);
 while($$.program.isRunning) {
   var lux = (luminance.decimalValue+((Math.random()-0.5)*50));
   if (lux &lt; 0) lux = 0;
-  $$.program.raiseEvent(multiSensor, _param, lux, "");
+  multiSensor.raiseEvent(_param, lux, "");
   $$.pause(60*5); // pause 60*5 = 5 minutes
 }
 </ScriptSource>
@@ -2997,7 +2925,8 @@ while($$.program.isRunning) {
     <Description />
     <Group>Demo</Group>
     <Features />
-    <ActivationTime>2017-08-18T08:48:33.494298Z</ActivationTime>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2018-09-28T16:31:57.808317Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>

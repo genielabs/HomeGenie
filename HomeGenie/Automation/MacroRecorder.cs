@@ -22,7 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using HomeGenie.Automation.Engines;
 using MIG;
 
 using HomeGenie.Service.Constants;
@@ -75,9 +75,10 @@ namespace HomeGenie.Automation
             program.Name = "New Macro";
             program.Address = masterControlProgram.GeneratePid();
             program.Type = "Wizard";
+            WizardEngine.WizardScript wizardScript = ((WizardEngine)program.Engine).Script;
             foreach (var migCommand in macroCommands)
             {
-                var command = new ProgramCommand();
+                var command = new Engines.WizardScript.ScriptCommand();
                 command.Domain = migCommand.Domain;
                 command.Target = migCommand.Address;
                 command.CommandString = migCommand.Command;
@@ -87,7 +88,7 @@ namespace HomeGenie.Automation
                     //TODO: should we pass entire command option string? migCmd.OptionsString
                     command.CommandArguments = migCommand.GetOption(0) + (options != "" && options != "null" ? "/" + options : "");
                 }
-                program.Commands.Add(command);
+                wizardScript.Commands.Add(command);
             }
             masterControlProgram.ProgramAdd(program);
             //

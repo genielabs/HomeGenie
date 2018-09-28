@@ -177,11 +177,9 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                         callback(handler);
                     }, 200);
                     if (handler.init) {
-                        console.log({ h: handler, l: 'init' });
                         handler.init(options);
                     }
                     if (handler.bind) {
-                        console.log({ h: handler, l: 'bind' });
                         handler.bind();
                     }
                     widgetWrapper.show();

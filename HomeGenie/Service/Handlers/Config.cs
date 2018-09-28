@@ -343,20 +343,10 @@ namespace HomeGenie.Service.Handlers
                 {
                     var resultMessage = "ERROR";
                     bool success = homegenie.UpdateChecker.DownloadUpdateFiles();
-                    if (success)
-                    {
-                        if (homegenie.UpdateChecker.IsRestartRequired) // <-- TODO: deprecate this
-                        {
-                            resultMessage = "RESTART";
-                        }
-                        else
-                        {
-                            resultMessage = "OK";
-                        }
-                    }
+                    if (success) resultMessage = "OK";
                     request.ResponseData = new ResponseText(resultMessage);
                 }
-                else if (migCommand.GetOption(0) == "UpdateManager.InstallUpdate") //UpdateManager.InstallProgramsCommit")
+                else if (migCommand.GetOption(0) == "UpdateManager.InstallUpdate")
                 {
                     string resultMessage = "OK";
                     homegenie.SaveData();

@@ -49,15 +49,8 @@ namespace HomeGenie.Automation
         public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
         public event EnabledStateChangedEventHandler EnabledStateChanged;
 
-        // TODO: v1.1 !!!IMPORTANT!!! deprecate this and move to WizardEngine.cs
-        // wizard script public members
-        public ConditionType ConditionType { get; set; }
-        public List<ProgramCondition> Conditions { get; set; }
-        public List<ProgramCommand> Commands { get; set; }
-
-        // TODO: v1.1 !!!IMPORTANT!!! refactor ScriptCondition to ScriptSetup
         // c# program public members
-        public string ScriptCondition { get; set; }
+        public string ScriptSetup { get; set; }
         public string ScriptSource { get; set; }
         public string ScriptErrors { get; set; }
 
@@ -75,8 +68,6 @@ namespace HomeGenie.Automation
         [XmlIgnore]
         public bool IsRunning { get; set; }
         [XmlIgnore]
-        public bool LastConditionEvaluationResult { get; set; }
-        [XmlIgnore]
         public object OperationLock = new object();
 
         public DateTime? ActivationTime { get; set; }
@@ -90,13 +81,9 @@ namespace HomeGenie.Automation
             Features = new List<ProgramFeature>();
 
             Type = "Wizard";
-            ScriptCondition = "";
+            ScriptSetup = "";
             ScriptSource = "";
             ScriptErrors = "";
-            //
-            Commands = new List<ProgramCommand>();
-            Conditions = new List<ProgramCondition>();
-            ConditionType = ConditionType.None;
             //
             isProgramEnabled = false;
             IsRunning = false;
@@ -135,7 +122,7 @@ namespace HomeGenie.Automation
                             break;
                         default:
                             throw new NotImplementedException(
-                                string.Format("Program engine for type {0} is not implemented", codeType)
+                                $"Program engine for type {codeType} is not implemented"
                             );
                     }
                 }
@@ -150,68 +137,23 @@ namespace HomeGenie.Automation
                 if (isProgramEnabled != value)
                 {
                     isProgramEnabled = value;
-                    LastConditionEvaluationResult = false;
                     if (isProgramEnabled)
                     {
                         ActivationTime = DateTime.UtcNow;
-                        if (programEngine != null)
-                            programEngine.Load();
+                        programEngine?.Load();
                     }
                     else
                     {
-                        if (programEngine != null)
-                            programEngine.Unload();
+                        programEngine?.Unload();
                     }
-                    if (EnabledStateChanged != null) EnabledStateChanged(this, value);
+
+                    EnabledStateChanged?.Invoke(this, value);
                 }
             }
         }
 
         [XmlIgnore,JsonIgnore]
-        public ProgramEngineBase Engine
-        {
-            get { return (ProgramEngineBase)programEngine; }
-        }
-
-
-
-
-
-        // TODO: v1.1 !!!IMPORTANT!!! move this region to a ProgramEngineBase.cs class
-        #region ProgramBase methods
-
-        internal List<ProgramError>  Compile()
-        {
-            return programEngine.Compile();
-        }
-
-        internal MethodRunResult Run(string options)
-        {
-            return programEngine.Run(options);
-        }
-
-        internal ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
-        {
-            var error = new ProgramError {
-                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
-                Column = 0,
-                Line = 0,
-                ErrorNumber = "-1",
-                ErrorMessage = e.Message
-            };
-            // TODO: can it be null at this point???
-            if (programEngine != null)
-                error = programEngine.GetFormattedError(e, isTriggerBlock);
-            return error;
-        }
-
-        // TODO: v1.1 !!!IMPORTANT!!! rename to EvaluateStartupCode
-        internal MethodRunResult EvaluateCondition()
-        {
-            return programEngine.EvaluateCondition();
-        }
-
-        #endregion
+        public ProgramEngineBase Engine => (ProgramEngineBase)programEngine;
     }
 }
 

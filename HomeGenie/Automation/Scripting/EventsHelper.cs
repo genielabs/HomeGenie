@@ -209,13 +209,5 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-
-        //TODO: deprecate this
-        [Obsolete("use 'ModuleParameterChanged' instead")]
-        public EventsHelper ModuleParameterChange(Func<ModuleHelper, ModuleParameter, bool> handler)
-        {
-            return ModuleParameterChanged(handler);
-        }
-
     }
 }

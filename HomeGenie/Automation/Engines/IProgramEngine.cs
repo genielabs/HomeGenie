@@ -32,7 +32,7 @@ namespace HomeGenie.Automation.Engines
 
         List<ProgramError> Compile();
         // TODO: v1.1 !!!IMPORTANT!!! rename to EvaluateStartupCode
-        MethodRunResult EvaluateCondition();
+        MethodRunResult EvaluateStartupCode();
         MethodRunResult Run(string options);
 
         void Reset();

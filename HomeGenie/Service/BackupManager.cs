@@ -108,8 +108,6 @@ namespace HomeGenie.Service
 
         public bool RestoreConfiguration(string archiveFolder, string selectedPrograms)
         {
-
-            // TODO: move this to a separate class file method (eg. BackupHelper.cs)
             bool success = true;
             // Import automation groups
             var serializer = new XmlSerializer(typeof(List<Group>));
@@ -242,11 +240,14 @@ namespace HomeGenie.Service
                     );
                 }
             }
-            // Soft-reload system configuration from newely restored files and save config
+            // Soft-reload system configuration from newly restored files and save config
             homegenie.SoftReload();
             // Restore user-space automation programs
             serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-            reader = new StreamReader(Path.Combine(archiveFolder, "programs.xml"));
+            string programsDatabase = Path.Combine(archiveFolder, "programs.xml");
+            // TODO: Deprecate Compat
+            Compat_526.FixProgramsDatabase(programsDatabase);
+            reader = new StreamReader(programsDatabase);
             var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
             reader.Close();
             foreach (var program in newProgramsData)
@@ -334,94 +335,7 @@ namespace HomeGenie.Service
         private bool UpdateSystemConfig(string configPath)
         {
             string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
-            string configText = File.ReadAllText(Path.Combine(configPath, "systemconfig.xml"));
-            if (configText.IndexOf("<ServicePort>") > 0)
-            {
-                configText = configText.Replace("SystemConfiguration", "SystemConfiguration_1_0");
-                configText = configText.Replace("HomeGenieConfiguration", "HomeGenieConfiguration_1_0");
-                // This is old configuration file from HG < 1.1
-                SystemConfiguration_1_0 oldConfig;
-                SystemConfiguration newConfig = new SystemConfiguration();
-                try
-                {
-                    // Load old config
-                    var serializerOld = new XmlSerializer(typeof(SystemConfiguration_1_0));
-                    using (var reader = new StringReader(configText))
-                        oldConfig = (SystemConfiguration_1_0)serializerOld.Deserialize(reader);
-                    // Copy setting to the new config format
-                    newConfig.HomeGenie.Settings = oldConfig.HomeGenie.Settings;
-                    newConfig.HomeGenie.SystemName = oldConfig.HomeGenie.SystemName;
-                    newConfig.HomeGenie.Location = oldConfig.HomeGenie.Location;
-                    newConfig.HomeGenie.GUID = oldConfig.HomeGenie.GUID;
-                    newConfig.HomeGenie.EnableLogFile = oldConfig.HomeGenie.EnableLogFile;
-                    newConfig.HomeGenie.Statistics = new HomeGenieConfiguration.StatisticsConfiguration();
-                    newConfig.HomeGenie.Statistics.MaxDatabaseSizeMBytes = oldConfig.HomeGenie.Statistics.MaxDatabaseSizeMBytes;
-                    newConfig.HomeGenie.Statistics.StatisticsTimeResolutionSeconds = oldConfig.HomeGenie.Statistics.StatisticsTimeResolutionSeconds;
-                    newConfig.HomeGenie.Statistics.StatisticsUIRefreshSeconds = oldConfig.HomeGenie.Statistics.StatisticsUIRefreshSeconds;
-                    var webGateway = new Gateway() { Name = "WebServiceGateway", IsEnabled = true };
-                    webGateway.Options = new List<Option>();
-                    webGateway.Options.Add(new Option("BaseUrl", "/hg/html"));
-                    webGateway.Options.Add(new Option("HomePath", "html"));
-                    webGateway.Options.Add(new Option("Host", oldConfig.HomeGenie.ServiceHost));
-                    webGateway.Options.Add(new Option("Port", oldConfig.HomeGenie.ServicePort.ToString()));
-                    webGateway.Options.Add(new Option("Username", "admin"));
-                    webGateway.Options.Add(new Option("Password", oldConfig.HomeGenie.UserPassword));
-                    webGateway.Options.Add(new Option("HttpCacheIgnore.1", "^.*\\/pages\\/control\\/widgets\\/.*\\.(js|html)$"));
-                    webGateway.Options.Add(new Option("HttpCacheIgnore.2", "^.*\\/html\\/index.html"));
-                    webGateway.Options.Add(new Option("UrlAlias.1", "api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events"));
-                    webGateway.Options.Add(new Option("UrlAlias.2", "hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png"));
-                    webGateway.Options.Add(new Option("UrlAlias.3", "hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png"));
-                    webGateway.Options.Add(new Option("UrlAlias.4", "hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png"));
-                    // TODO: EnableFileCaching value should be read from oldConfig.MIGService.EnableWebCache
-                    webGateway.Options.Add(new Option("EnableFileCaching", "false"));
-                    newConfig.MigService.Gateways.Add(webGateway);
-                    newConfig.MigService.Interfaces = oldConfig.MIGService.Interfaces;
-                    foreach(var iface in newConfig.MigService.Interfaces)
-                    {
-                        if (iface.Domain == "HomeAutomation.ZWave")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "HomeAutomation.Insteon")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "HomeAutomation.X10")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "HomeAutomation.W800RF")
-                            iface.AssemblyName = "MIG.HomeAutomation.dll";
-                        if (iface.Domain == "Controllers.LircRemote")
-                            iface.AssemblyName = "MIG.Controllers.dll";
-                        if (iface.Domain == "Media.CameraInput")
-                            iface.AssemblyName = "MIG.Media.dll";
-                        if (iface.Domain == "Protocols.UPnP")
-                            iface.AssemblyName = "MIG.Protocols.dll";
-                    }
-                    // Check for lircconfig.xml
-                    if (File.Exists(Path.Combine(configPath, "lircconfig.xml")))
-                    {
-                        File.Copy(Path.Combine(configPath, "lircconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", "lircconfig.xml"), true);
-                    }
-                    // Update configuration file
-                    if (File.Exists(configFile))
-                    {
-                        File.Delete(configFile);
-                    }
-                    System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
-                    ws.Indent = true;
-                    ws.Encoding = Encoding.UTF8;
-                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(newConfig.GetType());
-                    System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(configFile, ws);
-                    x.Serialize(wri, newConfig);
-                    wri.Close();
-                }
-                catch (Exception e)
-                {
-                    MigService.Log.Error(e);
-                    return false;
-                }
-            }
-            else
-            {
-                // HG >= 1.1
-                File.Copy(Path.Combine(configPath, "systemconfig.xml"), configFile, true);
-            }
+            File.Copy(Path.Combine(configPath, "systemconfig.xml"), configFile, true);
             return true;
         }
 

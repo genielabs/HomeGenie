@@ -81,7 +81,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         $('#automationprograms_program_options_tab1 a').removeClass('ui-btn-active');
         $('#automationprograms_program_options_tab1 a').trigger('create');
         //
-        if (tabid == 0) {
+        if (tabid === 0) {
             $$.RefreshProgramOptions();
             $('#automationprograms_program_details').hide();
             $('#automationprograms_program_parameters').show();
@@ -257,20 +257,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         fieldparams.trigger('create');
     };
 
-    // TODO: deprecate this!??!
-    $$.UpdateProgramParameter = function (el) {
-        var parameter = el.attr('data-parameter-name');
-        var module = HG.WebApp.Utility.GetModuleByDomainAddress(HG.WebApp.ProgramEdit._CurrentProgram.Domain, HG.WebApp.ProgramEdit._CurrentProgram.Address);
-        for (var p = 0; p < module.Properties.length; p++) {
-            if (module.Properties[p].Name == parameter) {
-                module.Properties[p].Value = el.val();
-                module.Properties[p].NeedsUpdate = 'true';
-            }
-        }
-        HG.WebApp.GroupModules.UpdateModule(module, null);
-    };
-
-    $$.SetProgramType = function () {
+    $$.SetProgramType = function() {
         HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
         if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'arduino') {
             // in arduino type program we use editor1 for makefile, editor2 for main sketch file and editor3 for all other c++ files
@@ -485,26 +472,13 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 $$.RefreshProgramOptions();
                 $$.RefreshProgramDetails();
 
-                var hasdetails = true;
-                if ($('#automationprograms_program_details').text().trim() == '') {
-                    $('#automationprograms_program_options_tab1').css('visibility', 'hidden');
-                    hasdetails = false;
-                } else {
-                    $('#automationprograms_program_options_tab1').css('visibility', '');
-                }
-                if ($('#automationprograms_program_parameters').prop('data-flag-hasoptions') == false) {
-                    $('#automationprograms_program_options_tab0').css('visibility', 'hidden');
-                    if (hasdetails) {
+                $('#automationprograms_program_options_tab1').hide();
+                if ($('#automationprograms_program_details').text().trim().length > 0) {
+                    $('#automationprograms_program_options_tab1').show();
+                    if ($('#automationprograms_program_parameters').prop('data-flag-hasoptions') == false) {
                         $$.SetOptionsTab(1);
-                    } else {
-                        $('#automationprograms_program_parameters').hide();
-                        $('#automationprograms_program_details').hide();
-                    }
-                } else {
-                    $('#automationprograms_program_options_tab0').css('visibility', '');
-                    $$.SetOptionsTab(0);
-                }
-
+                    } else $$.SetOptionsTab(0);
+                } else $$.SetOptionsTab(0);
                 $('#automationprograms_program_details').scrollTop(0);
                 $('#automationprograms_program_parameters').scrollTop(0);
                 $('#automationprograms_program_options').popup('open', {'transition': 'slidedown'});
@@ -553,7 +527,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
 
     $$.EditProgram = function () {
         if (editor1 == null) {
-            editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
+            editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsetup'), {
                 lineNumbers: true,
                 matchBrackets: true,
                 autoCloseBrackets: true,
@@ -619,39 +593,38 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         }
         $('#automation_programgroup').trigger('create');
         //
+        var currentProgram = HG.WebApp.ProgramEdit._CurrentProgram;
         for (i = 0; i < HG.WebApp.Data.Programs.length; i++) {
-            if (HG.WebApp.Data.Programs[i].Address == HG.WebApp.ProgramEdit._CurrentProgram.Address) {
+            if (HG.WebApp.Data.Programs[i].Address == currentProgram.Address) {
                 var program = HG.WebApp.Data.Programs[i];
-                HG.WebApp.ProgramEdit._CurrentProgram.Type = program.Type;
-                HG.WebApp.ProgramEdit._CurrentProgram.Group = program.Group;
-                HG.WebApp.ProgramEdit._CurrentProgram.Name = program.Name;
-                HG.WebApp.ProgramEdit._CurrentProgram.Description = program.Description;
-                HG.WebApp.ProgramEdit._CurrentProgram.Address = program.Address;
-                HG.WebApp.ProgramEdit._CurrentProgram.Domain = program.Domain;
-                HG.WebApp.ProgramEdit._CurrentProgram.IsEnabled = program.IsEnabled;
-                HG.WebApp.ProgramEdit._CurrentProgram.Conditions = program.Conditions;
-                HG.WebApp.ProgramEdit._CurrentProgram.Commands = program.Commands;
-                HG.WebApp.ProgramEdit._CurrentProgram.AutoRestartEnabled = program.AutoRestartEnabled;
+                currentProgram.Type = program.Type;
+                currentProgram.Group = program.Group;
+                currentProgram.Name = program.Name;
+                currentProgram.Description = program.Description;
+                currentProgram.Address = program.Address;
+                currentProgram.Domain = program.Domain;
+                currentProgram.IsEnabled = program.IsEnabled;
+                currentProgram.AutoRestartEnabled = program.AutoRestartEnabled;
                 //
-                $('#automation_programname').val(HG.WebApp.ProgramEdit._CurrentProgram.Name);
-                $('#automation_programdescription').val(HG.WebApp.ProgramEdit._CurrentProgram.Description);
+                $('#automation_programname').val(currentProgram.Name);
+                $('#automation_programdescription').val(currentProgram.Description);
                 
-                $('#automation_program_autorestartenabled').prop('checked', HG.WebApp.ProgramEdit._CurrentProgram.AutoRestartEnabled);
+                $('#automation_program_autorestartenabled').prop('checked', currentProgram.AutoRestartEnabled);
                 $('#automation_program_autorestartenabled').checkboxradio();
                 $('#automation_program_autorestartenabled').checkboxradio('refresh');
                 //
-                $('#automation_programgroup').val(HG.WebApp.ProgramEdit._CurrentProgram.Group);
+                $('#automation_programgroup').val(currentProgram.Group);
                 $('#automation_programgroup').selectmenu().selectmenu('refresh');
                 //
-                HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = program.ScriptCondition;
-                HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = program.ScriptSource;
+                currentProgram.ScriptSetup = program.ScriptSetup;
+                currentProgram.ScriptSource = program.ScriptSource;
                 //
-                $('#automation_programtype').val(HG.WebApp.ProgramEdit._CurrentProgram.Type);
+                $('#automation_programtype').val(currentProgram.Type);
                 $('#automation_programtype').selectmenu().selectmenu('refresh');
                 $$.RefreshProgramType();
                 //
-                editor1.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition);
-                editor2.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource);
+                editor1.setValue(currentProgram.ScriptSetup);
+                editor2.setValue(currentProgram.ScriptSource);
                 // clear old edit history
                 editor1.clearHistory();
                 editor1.markClean();
@@ -660,31 +633,36 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 editor3.clearHistory();
                 editor3.markClean();
                 //
-                HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = program.ConditionType;
-                //
-                switch (HG.WebApp.ProgramEdit._CurrentProgram.ConditionType) {
-                    case 2:
-                        HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = "OnSwitchFalse";
-                        break;
-                    case 3:
-                        HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = "Once";
-                        break;
-                    case 4:
-                        HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = "OnTrue";
-                        break;
-                    case 5:
-                        HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = "OnFalse";
-                        break;
-                    default:
-                        HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = "OnSwitchTrue";
-                        break;
+                if (program.Type.toLowerCase() === 'wizard') {
+                    var script = JSON.parse(program.ScriptSource);
+                    currentProgram.ConditionType = script.ConditionType;
+                    currentProgram.Conditions = script.Conditions;
+                    currentProgram.Commands = script.Commands;
+                    //
+                    switch (currentProgram.ConditionType) {
+                        case 2:
+                            currentProgram.ConditionType = "OnSwitchFalse";
+                            break;
+                        case 3:
+                            currentProgram.ConditionType = "Once";
+                            break;
+                        case 4:
+                            currentProgram.ConditionType = "OnTrue";
+                            break;
+                        case 5:
+                            currentProgram.ConditionType = "OnFalse";
+                            break;
+                        default:
+                            currentProgram.ConditionType = "OnSwitchTrue";
+                            break;
+                    }
+                    //
+                    $('#automation_conditiontype').val(currentProgram.ConditionType);
+                    $('#automation_conditiontype').selectmenu();
+                    $('#automation_conditiontype').selectmenu('refresh');
                 }
                 //
-                $('#automation_conditiontype').val(HG.WebApp.ProgramEdit._CurrentProgram.ConditionType);
-                $('#automation_conditiontype').selectmenu();
-                $('#automation_conditiontype').selectmenu('refresh');
-                //
-                HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = program.ScriptErrors;
+                currentProgram.ScriptErrors = program.ScriptErrors;
                 //
                 HG.WebApp.ProgramEdit.RefreshProgramOptions();
                 break;

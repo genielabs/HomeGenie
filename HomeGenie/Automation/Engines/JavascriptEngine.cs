@@ -32,7 +32,7 @@ namespace HomeGenie.Automation.Engines
 {
     public class JavascriptEngine : ProgramEngineBase, IProgramEngine
     {
-        internal Engine scriptEngine;
+        private Engine scriptEngine;
         private ScriptingHost hgScriptingHost;
         private string initScript = @"var $$ = {
           // ModulesManager
@@ -78,20 +78,20 @@ namespace HomeGenie.Automation.Engines
         {
             Unload();
 
-            if (Homegenie == null)
+            if (HomeGenie == null)
                 return false;
 
             scriptEngine = new Engine();
 
             hgScriptingHost = new ScriptingHost();
-            hgScriptingHost.SetHost(Homegenie, ProgramBlock.Address);
+            hgScriptingHost.SetHost(HomeGenie, ProgramBlock.Address);
             scriptEngine.SetValue("hg", hgScriptingHost);
             return true;
         }
-        public MethodRunResult EvaluateCondition()
+        public override MethodRunResult EvaluateStartupCode()
         {
             MethodRunResult result = null;
-            string jsScript = initScript + ProgramBlock.ScriptCondition;
+            string jsScript = initScript + ProgramBlock.ScriptSetup;
             result = new MethodRunResult();
             try
             {
@@ -106,7 +106,7 @@ namespace HomeGenie.Automation.Engines
             return result;
         }
 
-        public MethodRunResult Run(string options)
+        public override MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
             var jsScript = initScript + ProgramBlock.ScriptSource;
@@ -125,11 +125,10 @@ namespace HomeGenie.Automation.Engines
 
         public void Reset()
         {
-            if (hgScriptingHost != null)
-                hgScriptingHost.Reset();
+            hgScriptingHost?.Reset();
         }
 
-        public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
             ProgramError error = new ProgramError() {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
@@ -138,19 +137,17 @@ namespace HomeGenie.Automation.Engines
                 ErrorNumber = "-1",
                 ErrorMessage = e.Message
             };
-
             return error;
         }
 
-        public List<ProgramError> Compile()
+        public override List<ProgramError> Compile()
         {
             List<ProgramError> errors = new List<ProgramError>();
-
             JavaScriptParser jp = new JavaScriptParser(false);
             //ParserOptions po = new ParserOptions();
             try
             {
-                jp.Parse(ProgramBlock.ScriptCondition);
+                jp.Parse(ProgramBlock.ScriptSetup);
             }
             catch (Exception e)
             {
@@ -193,10 +190,8 @@ namespace HomeGenie.Automation.Engines
                     }
                 }
             }
-
             return errors;
         }
 
     }
 }
-

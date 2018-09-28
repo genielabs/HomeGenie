@@ -30,7 +30,8 @@ using System.Net;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
-
+using System.Xml;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 using ICSharpCode.SharpZipLib.Core;
@@ -41,6 +42,7 @@ using ICSharpCode.SharpZipLib.Tar;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 using Newtonsoft.Json.Serialization;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace HomeGenie.Service
 {
@@ -82,36 +84,33 @@ namespace HomeGenie.Service
     {
         private object syncLock = new object();
 
-        public object LockObject
-        {
-            get { return syncLock; }
-        }
+        public object LockObject => syncLock;
 
-        new public void Clear()
+        public new void Clear()
         {
             lock (syncLock)
                 base.Clear();
         }
 
-        new public void Add(T value)
+        public new void Add(T value)
         {
             lock (syncLock)
                 base.Add(value);
         }
 
-        new public void RemoveAll(Predicate<T> predicate)
+        public new void RemoveAll(Predicate<T> predicate)
         {
             lock (syncLock)
                 base.RemoveAll(predicate);
         }
 
-        new public void Remove(T item)
+        public new void Remove(T item)
         {
             lock (syncLock)
                 base.Remove(item);
         }
 
-        new public void Sort(Comparison<T> comparison)
+        public new void Sort(Comparison<T> comparison)
         {
             lock (syncLock)
                 base.Sort(comparison);
@@ -128,6 +127,39 @@ namespace HomeGenie.Service
             return new DynamicXmlParser(root);
         }
 
+        public static bool UpdateXmlDatabase<T>(T items, string filename, Func<Type,Exception,bool> callback)
+        {
+            bool success = false;
+            XmlWriter writer = null;
+            try
+            {
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    Encoding = Encoding.UTF8
+                };
+                var serializer = new XmlSerializer(typeof(T));
+                writer = XmlWriter.Create(filePath, settings);
+                serializer.Serialize(writer, items);
+                writer.Flush();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                callback?.Invoke(items.GetType(), e);
+            }
+            finally
+            {
+                writer?.Close();
+            }
+            return success;
+        }
+        
         public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
         {
             if (module == null)

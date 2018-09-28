@@ -449,12 +449,13 @@ namespace HomeGenie.Service
                 if (!Directory.Exists(Path.Combine("programs", "arduino")))
                     Directory.CreateDirectory(Path.Combine("programs", "arduino"));
                 Directory.Move(Path.Combine(destFolder, "src"), bundleFolder);
-                reader = new StreamReader(Path.Combine(destFolder, "program.hgx"));
+                archiveName = Path.Combine(destFolder, "program.hgx");
             }
-            else
-            {
-                reader = new StreamReader(archiveName);
-            }
+            
+            // TODO: Deprecate Compat
+            Compat_526.FixProgramsDatabase(archiveName);
+            reader = new StreamReader(archiveName);
+            
             var serializer = new XmlSerializer(typeof(ProgramBlock));
             newProgram = (ProgramBlock)serializer.Deserialize(reader);
             reader.Close();
