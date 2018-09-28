@@ -48,12 +48,24 @@ namespace HomeGenie
                 var serializer2 = new XmlSerializer(typeof(HomeGenie.Automation.ProgramBlock));
                 var program2 = (HomeGenie.Automation.ProgramBlock) serializer2.Deserialize(reader2);
                 reader2.Close();
+                bool updated = false;
                 var wiz = ConvertScriptSource(program);
                 if (!string.IsNullOrEmpty(wiz))
                 {
                     // Covert old wizard script to new format
-                    // TODO: should log something...
                     program2.ScriptSource = ConvertScriptSource(program);
+                    updated = true;
+                }
+                else if (!String.IsNullOrEmpty(program.ScriptCondition))
+                {
+                    // Rename old 'ScriptCondition' field to 'ScriptSetup'
+                    program2.ScriptSetup = program.ScriptCondition;
+                    updated = true;
+                }
+
+                if (updated)
+                {
+                    // TODO: should log something...
                     var writerSettings = new XmlWriterSettings();
                     writerSettings.Indent = true;
                     writerSettings.Encoding = Encoding.UTF8;
@@ -63,7 +75,6 @@ namespace HomeGenie
                     programSerializer.Serialize(writer, program2);
                     writer.Close();                    
                 }
-
             }
             else
             {
@@ -124,6 +135,7 @@ namespace HomeGenie
             public List<ProgramCommand> Commands = new List<ProgramCommand>();
             public List<ProgramCondition> Conditions = new List<ProgramCondition>();
             public ConditionType ConditionType = ConditionType.None;
+            public string ScriptCondition;
             public bool LastConditionEvaluationResult { get; set; }
         }
 
