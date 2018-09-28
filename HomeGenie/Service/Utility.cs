@@ -84,7 +84,10 @@ namespace HomeGenie.Service
     {
         private object syncLock = new object();
 
-        public object LockObject => syncLock;
+        public object LockObject
+        {
+            get { return syncLock; }
+        }
 
         public new void Clear()
         {

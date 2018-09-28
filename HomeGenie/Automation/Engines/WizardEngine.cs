@@ -59,7 +59,10 @@ namespace HomeGenie.Automation.Engines
             script = new WizardScript(pb);
         }
 
-        public WizardScript Script => script;
+        public WizardScript Script
+        {
+            get { return script; }
+        }
 
         public void Unload()
         {

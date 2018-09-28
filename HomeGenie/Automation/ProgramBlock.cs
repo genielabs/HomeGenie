@@ -122,7 +122,7 @@ namespace HomeGenie.Automation
                             break;
                         default:
                             throw new NotImplementedException(
-                                $"Program engine for type {codeType} is not implemented"
+                                string.Format("Program engine for type {0} is not implemented", codeType)
                             );
                     }
                 }
@@ -152,8 +152,11 @@ namespace HomeGenie.Automation
             }
         }
 
-        [XmlIgnore,JsonIgnore]
-        public ProgramEngineBase Engine => (ProgramEngineBase)programEngine;
+        [XmlIgnore, JsonIgnore]
+        public ProgramEngineBase Engine
+        {
+            get { return (ProgramEngineBase) programEngine; }
+        }
     }
 }
 
