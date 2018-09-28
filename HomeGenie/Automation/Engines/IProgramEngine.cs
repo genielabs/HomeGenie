@@ -31,8 +31,7 @@ namespace HomeGenie.Automation.Engines
         bool Load();
 
         List<ProgramError> Compile();
-        // TODO: v1.1 !!!IMPORTANT!!! rename to EvaluateStartupCode
-        MethodRunResult EvaluateStartupCode();
+        MethodRunResult Setup();
         MethodRunResult Run(string options);
 
         void Reset();

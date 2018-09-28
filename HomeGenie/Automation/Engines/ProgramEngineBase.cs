@@ -93,7 +93,7 @@ namespace HomeGenie.Automation.Engines
                 StopProgram();
         }
 
-        public void StartProgram(string options)
+        public void StartProgram(string options = null)
         {
             if (ProgramBlock.IsRunning)
                 return;
@@ -175,7 +175,7 @@ namespace HomeGenie.Automation.Engines
             }
             ProgramBlock.IsRunning = false;
             //
-            //TODO: complete cleanup and deallocation stuff here
+            // cleanup and deallocation stuff here
             //
             ModuleIsChangingHandler = null;
             ModuleChangedHandler = null;
@@ -220,8 +220,7 @@ namespace HomeGenie.Automation.Engines
             throw new NotImplementedException();
         }
 
-        // TODO: v1.1 !!!IMPORTANT!!! rename to EvaluateStartupCode
-        public virtual MethodRunResult EvaluateStartupCode()
+        public virtual MethodRunResult Setup()
         {
             throw new NotImplementedException();
         }
@@ -288,7 +287,7 @@ namespace HomeGenie.Automation.Engines
                 {
                     ProgramBlock.WillRun = false;
                     //
-                    var result = EvaluateStartupCode();
+                    var result = Setup();
                     if (result != null && result.Exception != null)
                     {
                         // runtime error occurred, script is being disabled

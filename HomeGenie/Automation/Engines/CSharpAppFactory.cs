@@ -90,13 +90,13 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.SerialPeripheralInterface",
         };
 
-        public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
+        public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
         {
             var source = @"# pragma warning disable 0168 // variable declared but not used.
 # pragma warning disable 0219 // variable assigned but not used.
 # pragma warning disable 0414 // private field assigned but not used.
 
-{usings}
+{using}
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -107,16 +107,16 @@ namespace HomeGenie.Automation.Scripting
         {
 //////////////////////////////////////////////////////////////////
 // NOTE: user code start line is 16 *** please add new code after this method, do not alter start line! ***
-{statement}
+{source}
 //////////////////////////////////////////////////////////////////
         }
 
         #pragma warning disable 0162
-        private bool EvaluateConditionBlock()
+        private bool SetupCode()
         {
 //////////////////////////////////////////////////////////////////
 // NOTE: user code start line is ??? *** please add new code after this method, do not alter start line! ***
-{condition}
+{setup}
 //////////////////////////////////////////////////////////////////
             return false;
         }
@@ -136,13 +136,13 @@ namespace HomeGenie.Automation.Scripting
             return new MethodRunResult(){ Exception = ex, ReturnValue = null };
         }
 
-        private MethodRunResult EvaluateCondition()
+        private MethodRunResult Setup()
         {
             Exception ex = null;
             bool retval = false;
             try
             {
-                    retval = EvaluateConditionBlock();
+                retval = SetupCode();
             }
             catch (Exception e)
             {
@@ -154,11 +154,11 @@ namespace HomeGenie.Automation.Scripting
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
 }";
-            var usings = string.Join(" ", Includes.Select(x => string.Format("using {0};" + Environment.NewLine, x)));
+            var usingNs = string.Join(" ", Includes.Select(x => string.Format("using {0};" + Environment.NewLine, x)));
             source = source
-                .Replace("{usings}", usings)
-                .Replace("{statement}", scriptSource)
-                .Replace("{condition}", conditionSource);
+                .Replace("{using}", usingNs)
+                .Replace("{source}", scriptSource)
+                .Replace("{setup}", scriptSetup);
 
             var providerOptions = new Dictionary<string, string> {
                 //                    { "CompilerVersion", "v4.0" }

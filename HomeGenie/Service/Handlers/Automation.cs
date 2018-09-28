@@ -512,7 +512,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     try
                     {
-                        homegenie.ProgramManager.Run(program, options);
+                        program.Engine.StartProgram(options);
                     }
                     catch (Exception e)
                     {
@@ -552,7 +552,7 @@ namespace HomeGenie.Service.Handlers
                         program.IsEnabled = true;
                     try
                     {
-                        homegenie.ProgramManager.Run(program, options);
+                        program.Engine.StartProgram(options);
                     }
                     catch
                     {

@@ -645,7 +645,7 @@ namespace HomeGenie.Service.Handlers
                         //
                         try
                         {
-                            module.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), newModules[i]["DeviceType"].ToString(), true);
+                            module.DeviceType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), newModules[i]["DeviceType"].ToString(), true);
                         }
                         catch
                         {

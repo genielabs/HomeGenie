@@ -69,7 +69,7 @@ namespace HomeGenie.Automation.Engines
             return true;
         }
 
-        public override MethodRunResult EvaluateStartupCode()
+        public override MethodRunResult Setup()
         {
             MethodRunResult result = null;
             string pythonScript = ProgramBlock.ScriptSetup;

@@ -109,12 +109,6 @@ namespace HomeGenie.Automation
             return program.Engine.Compile();
         }
 
-        // TODO: v1.1 !!!IMPORTANT!!! move thread allocation and starting to ProgramEngineBase.cs class
-        public void Run(ProgramBlock program, string options)
-        {
-            program.Engine.StartProgram(options);
-        }
-
         public TsList<ProgramBlock> Programs { get { return automationPrograms; } }
 
         public int GeneratePid()

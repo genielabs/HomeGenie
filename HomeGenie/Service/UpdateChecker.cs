@@ -314,46 +314,6 @@ namespace HomeGenie.Service
             return remoteUpdates;
         }
 
-        // TODO: deprecate this
-        public List<ReleaseInfo> GetRemoteUpdates()
-        {
-            using (var client = new WebClientPx())
-            {
-                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                try
-                {
-                    string releaseXml = client.DownloadString(endpointUrl);
-                    var serializer = new XmlSerializer(typeof(List<ReleaseInfo>));
-                    using (TextReader reader = new StringReader(releaseXml))
-                    {
-                        remoteUpdates.Clear();
-                        var updates = (List<ReleaseInfo>)serializer.Deserialize(reader);
-                        updates.Sort(delegate(ReleaseInfo a, ReleaseInfo b)
-                        {
-                            return a.ReleaseDate.CompareTo(b.ReleaseDate);
-                        });
-                        foreach (var releaseInfo in updates)
-                        {
-                            if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
-                            {
-                                remoteUpdates.Add(releaseInfo);
-                                if (releaseInfo.UpdateBreak)
-                                    break;
-                            }
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                }
-                finally
-                {
-                    client.Dispose();
-                }
-            }
-            return remoteUpdates;
-        }
-
         public bool IsUpdateAvailable
         {
             get

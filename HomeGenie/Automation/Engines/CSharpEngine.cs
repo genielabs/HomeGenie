@@ -35,15 +35,15 @@ namespace HomeGenie.Automation.Engines
     public class CSharpEngine : ProgramEngineBase, IProgramEngine
     {
         // c# program fields
-        private AppDomain _programDomain = null;
-        private Type _assemblyType = null;
-        private object _scriptInstance = null;
-        private MethodInfo _methodRun = null;
-        private MethodInfo _methodReset = null;
-        private MethodInfo _methodEvaluateCondition = null;
+        private AppDomain _programDomain;
+        private Type _assemblyType;
+        private object _scriptInstance;
+        private MethodInfo _methodRun;
+        private MethodInfo _methodReset;
+        private MethodInfo _methodSetup;
         private Assembly _scriptAssembly;
 
-        private static bool _isShadowCopySet = false;
+        private static bool _isShadowCopySet;
 
         public CSharpEngine(ProgramBlock pb) : base(pb) 
         {
@@ -197,12 +197,12 @@ namespace HomeGenie.Automation.Engines
             return errors;
         }
 
-        public override MethodRunResult EvaluateStartupCode()
+        public override MethodRunResult Setup()
         {
             MethodRunResult result = null;
             if (_scriptAssembly != null && CheckAppInstance())
             {
-                result = (MethodRunResult)_methodEvaluateCondition.Invoke(_scriptInstance, null);
+                result = (MethodRunResult)_methodSetup.Invoke(_scriptInstance, null);
                 result.ReturnValue = (bool)result.ReturnValue || ProgramBlock.WillRun;
             }
             return result;
@@ -310,9 +310,7 @@ namespace HomeGenie.Automation.Engines
                     miSetHost.Invoke(_scriptInstance, new object[2] { HomeGenie, ProgramBlock.Address });
 
                     _methodRun = _assemblyType.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-                    // TODO: v1.1 !!!IMPORTANT!!! the method EvaluateCondition will be renamed to EvaluateStartupCode,
-                    // TODO: v1.1 !!!IMPORTANT!!! so if EvaluateCondition is not found look for EvaluateStartupCode method instead
-                    _methodEvaluateCondition = _assemblyType.GetMethod("EvaluateCondition", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+                    _methodSetup = _assemblyType.GetMethod("Setup", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                     _methodReset = _assemblyType.GetMethod("Reset");
 
                     success = true;

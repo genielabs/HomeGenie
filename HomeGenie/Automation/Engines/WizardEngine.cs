@@ -88,7 +88,7 @@ namespace HomeGenie.Automation.Engines
             return true;
         }
 
-        public override MethodRunResult EvaluateStartupCode()
+        public override MethodRunResult Setup()
         {
             MethodRunResult result = null;            
             result = new MethodRunResult();
@@ -242,7 +242,7 @@ namespace HomeGenie.Automation.Engines
                             var programToRun = HomeGenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
                             if (programToRun != null /*&& programToRun.Address != program.Address*/ && !programToRun.IsRunning)
                             {
-                                HomeGenie.ProgramManager.Run(programToRun, "");
+                                programToRun.Engine.StartProgram();
                             }
                             break;
                         case "Program.WaitFor":

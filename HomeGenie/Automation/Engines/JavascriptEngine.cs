@@ -88,7 +88,7 @@ namespace HomeGenie.Automation.Engines
             scriptEngine.SetValue("hg", hgScriptingHost);
             return true;
         }
-        public override MethodRunResult EvaluateStartupCode()
+        public override MethodRunResult Setup()
         {
             MethodRunResult result = null;
             string jsScript = initScript + ProgramBlock.ScriptSetup;

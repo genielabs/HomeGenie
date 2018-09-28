@@ -45,7 +45,7 @@ namespace HomeGenie.Automation.Engines
             return true;
         }
 
-        public override MethodRunResult EvaluateStartupCode()
+        public override MethodRunResult Setup()
         {
             return null;
         }

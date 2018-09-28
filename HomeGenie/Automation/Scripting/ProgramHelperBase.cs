@@ -161,7 +161,7 @@ namespace HomeGenie
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
             if (program != null && !program.IsRunning) //  && program.Address != myProgramId
             {
-                homegenie.ProgramManager.Run(program, options);
+                program.Engine.StartProgram(options);
             }
         }
 
