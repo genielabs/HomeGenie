@@ -140,14 +140,14 @@ namespace HomeGenie.Automation
                     if (isProgramEnabled)
                     {
                         ActivationTime = DateTime.UtcNow;
-                        programEngine?.Load();
+                        if (programEngine != null) programEngine.Load();
                     }
                     else
                     {
-                        programEngine?.Unload();
+                        if (programEngine != null) programEngine.Unload();
                     }
 
-                    EnabledStateChanged?.Invoke(this, value);
+                    if (EnabledStateChanged != null) EnabledStateChanged.Invoke(this, value);
                 }
             }
         }
