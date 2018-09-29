@@ -53,7 +53,7 @@ namespace HomeGenie
                 if (!string.IsNullOrEmpty(wiz))
                 {
                     // Covert old wizard script to new format
-                    program2.ScriptSource = ConvertScriptSource(program);
+                    program2.ScriptSource = wiz;
                     updated = true;
                 }
                 else if (!String.IsNullOrEmpty(program.ScriptCondition))
@@ -95,7 +95,14 @@ namespace HomeGenie
                         string wiz = ConvertScriptSource(programs2[p]);
                         if (!string.IsNullOrEmpty(wiz))
                         {
+                            // Covert old wizard script to new format
                             programs[p].ScriptSource = wiz;
+                            updated = true;
+                        } 
+                        else if (!String.IsNullOrEmpty(programs2[p].ScriptCondition))
+                        {
+                            // Rename old 'ScriptCondition' field to 'ScriptSetup'
+                            programs[p].ScriptSetup = programs2[p].ScriptCondition;
                             updated = true;
                         }
                     }
@@ -104,7 +111,7 @@ namespace HomeGenie
                     {
                         // Converted old wizard scripts to new format
                         // TODO: should log something...
-                        Utility.UpdateXmlDatabase(programs, "programs.xml", null);
+                        Utility.UpdateXmlDatabase(programs, programsFile, null);
                     }
                 }
 
