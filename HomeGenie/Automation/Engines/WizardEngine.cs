@@ -46,8 +46,19 @@ namespace HomeGenie.Automation.Engines
 
             public WizardScript(ProgramBlock pb)
             {
-                // TODO:
-                //throw new NotImplementedException();
+                if (!String.IsNullOrEmpty(pb.ScriptSource))
+                try
+                {
+                    var s = JsonConvert.DeserializeObject<WizardScript>(pb.ScriptSource);
+                    Commands = s.Commands;
+                    Conditions = s.Conditions;
+                    ConditionType = s.ConditionType;
+                    LastConditionEvaluationResult = false;
+                }
+                catch (Exception e)
+                {
+                    // TODO: report exception
+                }
             }
         }
 
@@ -56,7 +67,6 @@ namespace HomeGenie.Automation.Engines
         
         public WizardEngine(ProgramBlock pb) : base(pb)
         {
-            script = new WizardScript(pb);
         }
 
         public WizardScript Script
@@ -75,7 +85,7 @@ namespace HomeGenie.Automation.Engines
             if (HomeGenie == null)
                 return false;
 
-            script.LastConditionEvaluationResult = false;
+            script = new WizardScript(ProgramBlock);
             
             if (hgScriptingHost != null)
             {
