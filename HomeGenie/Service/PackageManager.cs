@@ -428,10 +428,11 @@ namespace HomeGenie.Service
         public ProgramBlock ProgramImport(int newPid, string archiveName, string groupName)
         {
             ProgramBlock newProgram;
-            var reader = new StreamReader(archiveName);
             char[] signature = new char[2];
-            reader.Read(signature, 0, 2);
-            reader.Close();
+            using (var reader = new StreamReader(archiveName))
+            {
+                reader.Read(signature, 0, 2);
+            }
             if (signature[0] == 'P' && signature[1] == 'K')
             {
                 // Read and uncompress zip file content (arduino program bundle)
@@ -454,12 +455,12 @@ namespace HomeGenie.Service
             
             // TODO: Deprecate Compat
             Compat_526.FixProgramsDatabase(archiveName);
-            reader = new StreamReader(archiveName);
             
-            var serializer = new XmlSerializer(typeof(ProgramBlock));
-            newProgram = (ProgramBlock)serializer.Deserialize(reader);
-            reader.Close();
-
+            using (var reader = new StreamReader(archiveName))
+            {
+                var serializer = new XmlSerializer(typeof(ProgramBlock));
+                newProgram = (ProgramBlock)serializer.Deserialize(reader);
+            }
             newProgram.Address = newPid;
             newProgram.Group = groupName;
             homegenie.ProgramManager.ProgramAdd(newProgram);

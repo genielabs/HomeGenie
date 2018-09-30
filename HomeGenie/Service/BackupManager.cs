@@ -53,24 +53,16 @@ namespace HomeGenie.Service
             {
                 File.Delete(archiveName);
             }
-            // Add USERSPACE automation program binaries (csharp)
+            // Add USER-SPACE program files (only for arduino-type programs)
             foreach (var program in homegenie.ProgramManager.Programs)
             {
-                if (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
+                if (program.Type.ToLower() == "arduino" && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START))
                 {
-                    string relFile = Path.Combine("programs/", program.Address + ".dll");
-                    if (File.Exists(relFile))
+                    string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
+                    string[] filePaths = Directory.GetFiles(arduinoFolder);
+                    foreach (string f in filePaths)
                     {
-                        Utility.AddFileToZip(archiveName, relFile);
-                    }
-                    if (program.Type.ToLower() == "arduino")
-                    {
-                        string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
-                        string[] filePaths = Directory.GetFiles(arduinoFolder);
-                        foreach (string f in filePaths)
-                        {
-                            Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
-                        }
+                        Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
                     }
                 }
             }
@@ -110,10 +102,12 @@ namespace HomeGenie.Service
         {
             bool success = true;
             // Import automation groups
+            List<Group> automationGroups;
             var serializer = new XmlSerializer(typeof(List<Group>));
-            var reader = new StreamReader(Path.Combine(archiveFolder, "automationgroups.xml"));
-            var automationGroups = (List<Group>)serializer.Deserialize(reader);
-            reader.Close();
+            using (var reader = new StreamReader(Path.Combine(archiveFolder, "automationgroups.xml")))
+            {
+                automationGroups = (List<Group>)serializer.Deserialize(reader);
+            }
             foreach (var automationGroup in automationGroups)
             {
                 if (homegenie.AutomationGroups.Find(g => g.Name == automationGroup.Name) == null)
@@ -245,27 +239,24 @@ namespace HomeGenie.Service
             // Restore user-space automation programs
             serializer = new XmlSerializer(typeof(List<ProgramBlock>));
             string programsDatabase = Path.Combine(archiveFolder, "programs.xml");
+            
             // TODO: Deprecate Compat
             Compat_526.FixProgramsDatabase(programsDatabase);
-            reader = new StreamReader(programsDatabase);
-            var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
-            reader.Close();
+
+            List<ProgramBlock> newProgramsData;
+            using (var reader = new StreamReader(programsDatabase))
+            {
+                newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
+            }
             foreach (var program in newProgramsData)
             {
                 var currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                 program.IsRunning = false;
-                // Only restore user space programs
-                if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
+                // Only restore USER-SPACE PROGRAMS
+                if (selectedPrograms.Contains("," + program.Address + ",") && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START))
                 {
-                    int oldPid = program.Address;
                     if (currentProgram == null)
                     {
-                        var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramManager.GeneratePid() : program.Address);
-                        try
-                        {
-                            File.Copy(Path.Combine(archiveFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
-                        } catch { }
-                        program.Address = newPid;
                         homegenie.ProgramManager.ProgramAdd(program);
                         homegenie.RaiseEvent(
                             Domains.HomeGenie_System,
@@ -276,16 +267,9 @@ namespace HomeGenie.Service
                             "= Added: Program '" + program.Name + "' (" + program.Address + ")"
                         );
                     }
-                    else if (currentProgram != null)
+                    else
                     {
                         homegenie.ProgramManager.ProgramRemove(currentProgram);
-                        try
-                        {
-                            File.Copy(Path.Combine(archiveFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
-                        }
-                        catch
-                        {
-                        }
                         homegenie.ProgramManager.ProgramAdd(program);
                         homegenie.RaiseEvent(
                             Domains.HomeGenie_System,
@@ -300,7 +284,7 @@ namespace HomeGenie.Service
                     // TODO: this is untested yet...
                     if (program.Type.ToLower() == "arduino")
                     {
-                        string sourceFolder = Path.Combine(archiveFolder, "programs", "arduino", oldPid.ToString());
+                        string sourceFolder = Path.Combine(archiveFolder, "programs", "arduino", program.Address.ToString());
                         string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString());
                         if (Directory.Exists(arduinoFolder))
                             Directory.Delete(arduinoFolder, true);
@@ -310,10 +294,14 @@ namespace HomeGenie.Service
                             File.Copy(newPath, newPath.Replace(sourceFolder, arduinoFolder), true);
                         }
                     }
+                    else
+                    {
+                        homegenie.ProgramManager.CompileScript(program);
+                    }
                 }
                 else if (currentProgram != null && (program.Address < ProgramManager.USERSPACE_PROGRAMS_START || program.Address >= ProgramManager.PACKAGE_PROGRAMS_START))
                 {
-                    // Only restore Enabled/Disabled status of system programs and packages
+                    // Only restore Enabled/Disabled status for SYSTEM PROGRAMS and packages
                     currentProgram.IsEnabled = program.IsEnabled;
                 }
             }
@@ -324,7 +312,7 @@ namespace HomeGenie.Service
                 SourceModule.Master,
                 "HomeGenie Backup Restore",
                 Properties.InstallProgressMessage,
-                "= Status: Backup Restore " + (success ? "Succesful" : "Errors")
+                "= Status: Backup Restore " + (success ? "Successful" : "Errors")
             );
             homegenie.SaveData();
 
