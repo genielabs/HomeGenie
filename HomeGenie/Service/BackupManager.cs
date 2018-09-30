@@ -28,9 +28,6 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using MIG.Config;
-using MIG;
-using System.Text;
 
 namespace HomeGenie.Service
 {

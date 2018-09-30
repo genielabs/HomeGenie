@@ -37,14 +37,14 @@ $$.onStart = function() {
           availH = $(window).height()-160;
           availW = availH * (w / h);
           if ($(window).width() / $(window).height() >= 1)
-            $$.popup.field('camerapicture').css({ width: availW+'px', height: availH/(availW/w)+'px'});
+            $$.popup.field('camerapicture').css({ width: availW+'px', height: 'auto'});
           else
-            $$.popup.field('camerapicture').css({ width: availW*(availH/h)+'px', height: availH+'px'});
+            $$.popup.field('camerapicture').css({ width: availW*(availH/h)+'px', height: 'auto'});
         } else {
           if ($(window).width() / $(window).height() >= 1)
-            $$.popup.field('camerapicture').css({ width: availW+'px', height: availH/(availW/w)+'px'});
+            $$.popup.field('camerapicture').css({ width: availW+'px', height: 'auto'});
           else
-            $$.popup.field('camerapicture').css({ width: availH/(h/w)+'px', height: availH+'px'});
+            $$.popup.field('camerapicture').css({ width: availH/(h/w)+'px', height: 'auto'});
         }
         setTimeout(function(){
           $$.popup.popup('reposition', { positionTo: 'window', animate: 'true' });

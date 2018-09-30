@@ -146,10 +146,24 @@ namespace HomeGenie.Automation.Engines
 
         public override List<ProgramError> Compile()
         {
-            script = JsonConvert.DeserializeObject<WizardScript>(ProgramBlock.ScriptSource);
+            var errors = new List<ProgramError>();
+            if (!string.IsNullOrEmpty(ProgramBlock.ScriptSource))
+            {
+                try
+                {
+                    script = JsonConvert.DeserializeObject<WizardScript>(ProgramBlock.ScriptSource);
+                }
+                catch (Exception e)
+                {
+                    errors = new List<ProgramError>() { new ProgramError()
+                    {
+                        ErrorMessage = e.Message
+                    }};
+                }
+            }
             // initial condition evaluation status
             script.LastConditionEvaluationResult = false;
-            return new List<ProgramError>();
+            return errors;
         }
 
         private bool EvaluateCondition(IReadOnlyList<ScriptCondition> conditions)
