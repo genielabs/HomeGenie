@@ -40,73 +40,75 @@ namespace HomeGenie
         {
             if (programsFile.EndsWith(".hgx"))
             {
-                var reader = new StreamReader(programsFile);
-                var serializer = new XmlSerializer(typeof(ProgramBlock));
-                var program = (ProgramBlock) serializer.Deserialize(reader);
-                reader.Close();
-                var reader2 = new StreamReader(programsFile);
-                var serializer2 = new XmlSerializer(typeof(HomeGenie.Automation.ProgramBlock));
-                var program2 = (HomeGenie.Automation.ProgramBlock) serializer2.Deserialize(reader2);
-                reader2.Close();
+                ProgramBlock program;
+                using (var reader = new StreamReader(programsFile))
+                {
+                    var serializer = new XmlSerializer(typeof(ProgramBlock));
+                    program = (ProgramBlock) serializer.Deserialize(reader);
+                }
+
+                HomeGenie.Automation.ProgramBlock programNew;
+                var programSerializer = new XmlSerializer(typeof(HomeGenie.Automation.ProgramBlock));
+                using (var reader = new StreamReader(programsFile))
+                {
+                    programNew = (HomeGenie.Automation.ProgramBlock) programSerializer.Deserialize(reader);
+                }
                 bool updated = false;
-                var wiz = ConvertScriptSource(program);
-                if (!string.IsNullOrEmpty(wiz))
+                var wizardJson = GetWizardScript(program);
+                if (!string.IsNullOrEmpty(wizardJson))
                 {
                     // Covert old wizard script to new format
-                    program2.ScriptSource = wiz;
+                    programNew.ScriptSource = wizardJson;
                     updated = true;
                 }
-                else if (!String.IsNullOrEmpty(program.ScriptCondition))
+                else if (!string.IsNullOrEmpty(program.ScriptCondition))
                 {
                     // Rename old 'ScriptCondition' field to 'ScriptSetup'
-                    program2.ScriptSetup = program.ScriptCondition;
+                    programNew.ScriptSetup = program.ScriptCondition;
                     updated = true;
                 }
 
-                if (updated)
+                if (!updated) return true;
+                // TODO: should log something...
+                var writerSettings = new XmlWriterSettings();
+                writerSettings.Indent = true;
+                writerSettings.Encoding = Encoding.UTF8;
+                var builder = new XmlTextWriter(programsFile, Encoding.UTF8);
+                using (var writer = XmlWriter.Create(builder, writerSettings))
                 {
-                    // TODO: should log something...
-                    var writerSettings = new XmlWriterSettings();
-                    writerSettings.Indent = true;
-                    writerSettings.Encoding = Encoding.UTF8;
-                    var programSerializer = new XmlSerializer(typeof(HomeGenie.Automation.ProgramBlock));
-                    var builder = new XmlTextWriter(programsFile, Encoding.UTF8);
-                    var writer = XmlWriter.Create(builder, writerSettings);
-                    programSerializer.Serialize(writer, program2);
-                    writer.Close();                    
+                    programSerializer.Serialize(writer, programNew);
                 }
             }
             else
             {
                 List<HomeGenie.Automation.ProgramBlock> programs;
-                var serializer = new XmlSerializer(typeof(List<HomeGenie.Automation.ProgramBlock>));
                 using (var reader = new StreamReader(programsFile))
                 {
+                    var serializer = new XmlSerializer(typeof(List<HomeGenie.Automation.ProgramBlock>));
                     programs = (List<HomeGenie.Automation.ProgramBlock>)serializer.Deserialize(reader);
                 }
-                List<ProgramBlock> programs2;
-                var serializer2 = new XmlSerializer(typeof(List<ProgramBlock>));
-                using (var reader2 = new StreamReader(programsFile))
+                List<ProgramBlock> programsNew;
+                using (var reader = new StreamReader(programsFile))
                 {
                     bool updated = false;
-                    programs2 = (List<ProgramBlock>)serializer2.Deserialize(reader2);
-                    for (int p = 0; p < programs2.Count; p++)
+                    var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
+                    programsNew = (List<ProgramBlock>)serializer.Deserialize(reader);
+                    for (int p = 0; p < programsNew.Count; p++)
                     {
-                        string wiz = ConvertScriptSource(programs2[p]);
-                        if (!string.IsNullOrEmpty(wiz))
+                        string wizardJson = GetWizardScript(programsNew[p]);
+                        if (!string.IsNullOrEmpty(wizardJson))
                         {
                             // Covert old wizard script to new format
-                            programs[p].ScriptSource = wiz;
+                            programs[p].ScriptSource = wizardJson;
                             updated = true;
                         } 
-                        else if (!String.IsNullOrEmpty(programs2[p].ScriptCondition))
+                        else if (!String.IsNullOrEmpty(programsNew[p].ScriptCondition))
                         {
                             // Rename old 'ScriptCondition' field to 'ScriptSetup'
-                            programs[p].ScriptSetup = programs2[p].ScriptCondition;
+                            programs[p].ScriptSetup = programsNew[p].ScriptCondition;
                             updated = true;
                         }
                     }
-
                     if (updated)
                     {
                         // Converted old wizard scripts to new format
@@ -114,26 +116,21 @@ namespace HomeGenie
                         Utility.UpdateXmlDatabase(programs, programsFile, null);
                     }
                 }
-
             }
-
             return true;
         }
 
-        private static string ConvertScriptSource(ProgramBlock program)
+        private static string GetWizardScript(ProgramBlock program)
         {
-            if (program.Type.ToLower() == "wizard" && program.Conditions.Count > 0 || program.Commands.Count > 0)
+            if ((program.Type.ToLower() != "wizard" || program.Conditions.Count <= 0) &&
+                program.Commands.Count <= 0) return null;
+            WizardEngine.WizardScript script = new WizardEngine.WizardScript(null)
             {
-                WizardEngine.WizardScript script = new WizardEngine.WizardScript(null)
-                {
-                    Commands = program.Commands.ToList<ScriptCommand>(),
-                    Conditions = program.Conditions.ToList<ScriptCondition>(),
-                    ConditionType = program.ConditionType
-                };
-                return JsonConvert.SerializeObject(script);
-            }
-
-            return null;
+                Commands = program.Commands.ToList<ScriptCommand>(),
+                Conditions = program.Conditions.ToList<ScriptCondition>(),
+                ConditionType = program.ConditionType
+            };
+            return JsonConvert.SerializeObject(script);
         }
 
         public class ProgramBlock
