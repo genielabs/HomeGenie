@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 
 using IronPython.Hosting;
+
 using Microsoft.Scripting.Hosting;
 
 using HomeGenie.Automation.Scripting;
@@ -110,7 +111,8 @@ namespace HomeGenie.Automation.Engines
 
         public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
-            ProgramError error = new ProgramError() {
+            ProgramError error = new ProgramError()
+            {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,

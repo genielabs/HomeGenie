@@ -23,15 +23,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
-using System.Threading;
 
 namespace HomeGenie.Automation.Engines
 {
-    public class ArduinoEngine  : ProgramEngineBase, IProgramEngine
+    public class ArduinoEngine : ProgramEngineBase, IProgramEngine
     {
-        
         public ArduinoEngine(ProgramBlock pb) : base(pb)
         {
         }
@@ -100,7 +100,8 @@ namespace HomeGenie.Automation.Engines
 
         public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
-            ProgramError error = new ProgramError() {
+            ProgramError error = new ProgramError()
+            {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
@@ -132,8 +133,9 @@ namespace HomeGenie.Automation.Engines
                 errors = ArduinoAppFactory.CompileSketch(sketchFileName, sketchMakefile);
             }
             catch (Exception e)
-            { 
-                errors.Add(new ProgramError() {
+            {
+                errors.Add(new ProgramError()
+                {
                     Line = 0,
                     Column = 0,
                     ErrorMessage = "General failure: is 'arduino-mk' package installed?\n\n" + e.Message,
@@ -144,8 +146,5 @@ namespace HomeGenie.Automation.Engines
 
             return errors;
         }
-
-
     }
 }
-

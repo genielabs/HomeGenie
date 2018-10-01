@@ -32,6 +32,4 @@ namespace HomeGenie.Automation.Engines.WizardScript
         GreaterThan = 1,
         LogicOrJoint = 100
     }
-
 }
-

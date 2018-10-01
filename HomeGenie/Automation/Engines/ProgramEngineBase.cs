@@ -27,6 +27,7 @@ using System.Reflection;
 using System.Threading;
 
 using Newtonsoft.Json;
+
 using NLog;
 
 using HomeGenie.Automation.Scripting;
@@ -64,9 +65,9 @@ namespace HomeGenie.Automation.Engines
 
         public void SetHost(HomeGenieService hg)
         {
-            ((IProgramEngine)this).Unload();
+            ((IProgramEngine) this).Unload();
             HomeGenie = hg;
-            ((IProgramEngine)this).Load();
+            ((IProgramEngine) this).Load();
         }
 
         public void StartScheduler()
@@ -86,7 +87,11 @@ namespace HomeGenie.Automation.Engines
                     RoutedEventAck.Set();
                     if (!_startupThread.Join(1000))
                         _startupThread.Abort();
-                } catch { }
+                }
+                catch
+                {
+                    // ignored
+                }
                 _startupThread = null;
             }
             if (_programThread != null)
@@ -126,7 +131,8 @@ namespace HomeGenie.Automation.Engines
                     }
                     _programThread = null;
                     ProgramBlock.IsRunning = false;
-                    if (result != null && result.Exception != null && result.Exception.GetType() != typeof(TargetException))
+                    if (result != null && result.Exception != null &&
+                        result.Exception.GetType() != typeof(TargetException))
                     {
                         // runtime error occurred, script is being disabled
                         // so user can notice and fix it
@@ -138,7 +144,8 @@ namespace HomeGenie.Automation.Engines
 
                         TryToAutoRestart();
                     }
-                    HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, ProgramBlock.IsEnabled ? "Idle" : "Stopped");
+                    HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus,
+                        ProgramBlock.IsEnabled ? "Idle" : "Stopped");
                 }
                 catch (ThreadAbortException)
                 {
@@ -171,7 +178,14 @@ namespace HomeGenie.Automation.Engines
         {
             if (Stopping != null)
             {
-                try { Stopping(); } catch { }
+                try
+                {
+                    Stopping();
+                }
+                catch
+                {
+                    // ignored
+                }
             }
             ProgramBlock.IsRunning = false;
             //
@@ -189,7 +203,7 @@ namespace HomeGenie.Automation.Engines
             }
             _registeredApi.Clear();
             //
-            ((IProgramEngine)this).Unload();
+            ((IProgramEngine) this).Unload();
 
             if (_programThread == null) return;
             try
@@ -202,10 +216,9 @@ namespace HomeGenie.Automation.Engines
                 // ignored
             }
             _programThread = null;
-
         }
-        
-        public virtual List<ProgramError>  Compile()
+
+        public virtual List<ProgramError> Compile()
         {
             throw new NotImplementedException();
         }
@@ -243,7 +256,7 @@ namespace HomeGenie.Automation.Engines
         {
             // set initial state to signaled
             RoutedEventAck.Set();
-            while ( HomeGenie.ProgramManager.Enabled && ProgramBlock.IsEnabled)
+            while (HomeGenie.ProgramManager.Enabled && ProgramBlock.IsEnabled)
             {
                 // if no event is received this will ensure that the StartupCode is run at least every minute for checking scheduler conditions if any
                 RoutedEventAck.WaitOne((60 - DateTime.Now.Second) * 1000);
@@ -263,15 +276,19 @@ namespace HomeGenie.Automation.Engines
                     else
                     {
                         var errorMessage = "Program has been disabled because it was looping/spawning too fast.";
-                        List<ProgramError> error = new List<ProgramError>() { new ProgramError()
+                        List<ProgramError> error = new List<ProgramError>()
                         {
-                            CodeBlock = CodeBlockEnum.TC,
-                            ErrorNumber = "0",
-                            ErrorMessage = errorMessage
-                        } };
+                            new ProgramError()
+                            {
+                                CodeBlock = CodeBlockEnum.TC,
+                                ErrorNumber = "0",
+                                ErrorMessage = errorMessage
+                            }
+                        };
                         ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
                         ProgramBlock.IsEnabled = false;
-                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError, CodeBlockEnum.TC + errorMessage);
+                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                            CodeBlockEnum.TC + errorMessage);
                     }
                 }
             }
@@ -338,4 +355,3 @@ namespace HomeGenie.Automation.Engines
         }
     }
 }
-

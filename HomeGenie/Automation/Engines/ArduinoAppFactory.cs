@@ -31,8 +31,7 @@ namespace HomeGenie.Automation.Engines
 {
     public static class ArduinoAppFactory
     {
-
-        public static List<ProgramError>  CompileSketch(string sketchFileName, string sketchMakefile)
+        public static List<ProgramError> CompileSketch(string sketchFileName, string sketchMakefile)
         {
             List<ProgramError> errors = new List<ProgramError>();
 
@@ -59,17 +58,19 @@ namespace HomeGenie.Automation.Engines
                         {
                             int errorRow = 0;
                             int errorColumn = 0;
-                            if (lineParts[3].Contains("error") && int.TryParse(lineParts[1], out errorRow) && int.TryParse(
-                                lineParts[2],
-                                out errorColumn
-                            ))
+                            if (lineParts[3].Contains("error") && int.TryParse(lineParts[1], out errorRow) &&
+                                int.TryParse(
+                                    lineParts[2],
+                                    out errorColumn
+                                ))
                             {
                                 var errorDetail = new String[lineParts.Length - 4];
                                 Array.Copy(lineParts, 4, errorDetail, 0, errorDetail.Length);
-                                errors.Add(new ProgramError() {
+                                errors.Add(new ProgramError()
+                                {
                                     Line = errorRow,
                                     Column = errorColumn,
-                                    ErrorMessage = lineParts[3]+": " + String.Join(": ", errorDetail),
+                                    ErrorMessage = lineParts[3] + ": " + String.Join(": ", errorDetail),
                                     ErrorNumber = "110",
                                     CodeBlock = CodeBlockEnum.CR
                                 });
@@ -80,7 +81,8 @@ namespace HomeGenie.Automation.Engines
                             int errorRow = 0;
                             if (int.TryParse(lineParts[1], out errorRow))
                             {
-                                errors.Add(new ProgramError() {
+                                errors.Add(new ProgramError()
+                                {
                                     Line = errorRow,
                                     Column = 0,
                                     ErrorMessage = line,
@@ -89,7 +91,8 @@ namespace HomeGenie.Automation.Engines
                                 });
                             }
                         }
-                        else if (!String.IsNullOrWhiteSpace(line) && !line.Contains("depends.mk:") && (line.Contains("error") || line.Contains(" *** ")))
+                        else if (!String.IsNullOrWhiteSpace(line) && !line.Contains("depends.mk:") &&
+                                 (line.Contains("error") || line.Contains(" *** ")))
                         {
                             errorOutput += line + "\n";
                         }
@@ -98,10 +101,12 @@ namespace HomeGenie.Automation.Engines
                     //
                     if (errors.Count == 0 && !String.IsNullOrWhiteSpace(errorOutput))
                     {
-                        errors.Add(new ProgramError() {
+                        errors.Add(new ProgramError()
+                        {
                             Line = 0,
                             Column = 0,
-                            ErrorMessage = errorOutput, // "Build failure: please check the Makefile; ensure BOARD_TAG is correct and ARDUINO_LIBS is referencing libraries needed by this sketch.\n\n" + errorOutput,
+                            ErrorMessage =
+                                errorOutput, // "Build failure: please check the Makefile; ensure BOARD_TAG is correct and ARDUINO_LIBS is referencing libraries needed by this sketch.\n\n" + errorOutput,
                             ErrorNumber = "130",
                             CodeBlock = CodeBlockEnum.CR
                         });
@@ -115,7 +120,7 @@ namespace HomeGenie.Automation.Engines
 
             return errors;
         }
-        
+
         public static string UploadSketch(string sketchDirectory)
         {
             string errorOutput = "";
@@ -141,16 +146,20 @@ namespace HomeGenie.Automation.Engines
             try
             {
                 string[] outputFile = File.ReadAllText(Path.Combine(sketchDirectory, "uploadres.txt")).Split('\n');
-                for(int l = 0; l < outputFile.Length; l++)
+                foreach (var line in outputFile)
                 {
-                    if ((outputFile[l].StartsWith("avrdude") && outputFile[l].IndexOf(":") > 0) || outputFile[l].Contains(" *** "))
+                    if ((line.StartsWith("avrdude") && line.IndexOf(":") > 0) ||
+                        line.Contains(" *** "))
                     {
-                        string logLine = outputFile[l].Substring(outputFile[l].IndexOf(":") + 1);
+                        string logLine = line.Substring(line.IndexOf(":") + 1);
                         errorOutput += logLine + "\n";
                     }
                 }
                 File.Delete(Path.Combine(sketchDirectory, "uploadres.txt"));
-            } catch {
+            }
+            catch
+            {
+                // ignored
             }
             //
             //if (!String.IsNullOrWhiteSpace(errorOutput))
@@ -174,15 +183,13 @@ namespace HomeGenie.Automation.Engines
 
         public static bool IsValidProjectFile(string filename)
         {
-            bool isValid = !Path.GetFileName(filename).StartsWith("sketch_") && 
-                Path.GetFileName(filename) != "Makefile" &&
-                (filename.EndsWith(".cpp")
-                || filename.EndsWith(".c")
-                || filename.EndsWith(".h")
-                || !filename.Contains("."));
+            bool isValid = !Path.GetFileName(filename).StartsWith("sketch_") &&
+                           Path.GetFileName(filename) != "Makefile" &&
+                           (filename.EndsWith(".cpp")
+                            || filename.EndsWith(".c")
+                            || filename.EndsWith(".h")
+                            || !filename.Contains("."));
             return isValid;
         }
-
     }
 }
-

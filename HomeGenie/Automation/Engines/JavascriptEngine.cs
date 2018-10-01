@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Engines
     {
         private Engine scriptEngine;
         private ScriptingHost hgScriptingHost;
+
         private string initScript = @"var $$ = {
           // ModulesManager
           modules: hg.modules,
@@ -88,6 +89,7 @@ namespace HomeGenie.Automation.Engines
             scriptEngine.SetValue("hg", hgScriptingHost);
             return true;
         }
+
         public override MethodRunResult Setup()
         {
             MethodRunResult result = null;
@@ -130,7 +132,8 @@ namespace HomeGenie.Automation.Engines
 
         public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
-            ProgramError error = new ProgramError() {
+            ProgramError error = new ProgramError()
+            {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
@@ -159,7 +162,8 @@ namespace HomeGenie.Automation.Engines
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
                         int line = int.Parse(error[0].Split(' ')[1]);
-                        errors.Add(new ProgramError() {
+                        errors.Add(new ProgramError()
+                        {
                             Line = line,
                             ErrorMessage = message,
                             CodeBlock = CodeBlockEnum.TC
@@ -175,23 +179,20 @@ namespace HomeGenie.Automation.Engines
             catch (Exception e)
             {
                 // TODO: parse error message
-                if (e.Message.Contains(":"))
+                if (!e.Message.Contains(":")) return errors;
+                string[] error = e.Message.Split(':');
+                string message = error[1];
+                // TODO: find a better solution for this "hg is not defined" check
+                if (message == "hg is not defined") return errors;
+                int line = int.Parse(error[0].Split(' ')[1]);
+                errors.Add(new ProgramError()
                 {
-                    string[] error = e.Message.Split(':');
-                    string message = error[1];
-                    if (message != "hg is not defined") // TODO: find a better solution for this
-                    {
-                        int line = int.Parse(error[0].Split(' ')[1]);
-                        errors.Add(new ProgramError() {
-                            Line = line,
-                            ErrorMessage = message,
-                            CodeBlock = CodeBlockEnum.CR
-                        });
-                    }
-                }
+                    Line = line,
+                    ErrorMessage = message,
+                    CodeBlock = CodeBlockEnum.CR
+                });
             }
             return errors;
         }
-
     }
 }

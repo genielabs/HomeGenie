@@ -39,4 +39,3 @@ namespace HomeGenie.Automation.Engines
         ProgramError GetFormattedError(Exception e, bool isTriggerBlock);
     }
 }
-

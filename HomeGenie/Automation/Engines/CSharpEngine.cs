@@ -45,19 +45,17 @@ namespace HomeGenie.Automation.Engines
 
         private static bool _isShadowCopySet;
 
-        public CSharpEngine(ProgramBlock pb) : base(pb) 
+        public CSharpEngine(ProgramBlock pb) : base(pb)
         {
             // TODO: SetShadowCopyPath/SetShadowCopyFiles methods are deprecated... 
             // TODO: create own AppDomain for "programDomain" instead of using CurrentDomain
             // TODO: and use AppDomainSetup to set shadow copy for each app domain
             // TODO: !!! verify AppDomain compatibility with mono !!!
-            if (!_isShadowCopySet)
-            {
-                _isShadowCopySet = true;
-                var domain = AppDomain.CurrentDomain;
-                domain.SetShadowCopyPath(Path.Combine(domain.BaseDirectory, "programs"));
-                domain.SetShadowCopyFiles();
-            }
+            if (_isShadowCopySet) return;
+            _isShadowCopySet = true;
+            var domain = AppDomain.CurrentDomain;
+            domain.SetShadowCopyPath(Path.Combine(domain.BaseDirectory, "programs"));
+            domain.SetShadowCopyFiles();
         }
 
         public bool Load()
@@ -75,16 +73,17 @@ namespace HomeGenie.Automation.Engines
             Reset();
             ProgramBlock.ActivationTime = null;
             ProgramBlock.TriggerTime = null;
-            if (_programDomain != null)
+            if (_programDomain == null) return;
+            // Unloading program app domain...
+            try
             {
-                // Unloading program app domain...
-                try { AppDomain.Unload(_programDomain); }
-                catch
-                {
-                    // ignored
-                }
-                _programDomain = null;
+                AppDomain.Unload(_programDomain);
             }
+            catch
+            {
+                // ignored
+            }
+            _programDomain = null;
         }
 
         public override List<ProgramError> Compile()
@@ -146,7 +145,8 @@ namespace HomeGenie.Automation.Engines
                     }
                     if (!error.IsWarning)
                     {
-                        errors.Add(new ProgramError {
+                        errors.Add(new ProgramError
+                        {
                             Line = errorRow,
                             Column = error.Column,
                             ErrorMessage = error.ErrorText,
@@ -156,8 +156,10 @@ namespace HomeGenie.Automation.Engines
                     }
                     else
                     {
-                        var warning = string.Format("{0},{1},{2}: {3}", blockType, errorRow, error.Column, error.ErrorText);
-                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning, warning);
+                        var warning = string.Format("{0},{1},{2}: {3}", blockType, errorRow, error.Column,
+                            error.ErrorText);
+                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning,
+                            warning);
                     }
                 }
             }
@@ -202,8 +204,8 @@ namespace HomeGenie.Automation.Engines
             MethodRunResult result = null;
             if (_scriptAssembly != null && CheckAppInstance())
             {
-                result = (MethodRunResult)_methodSetup.Invoke(_scriptInstance, null);
-                result.ReturnValue = (bool)result.ReturnValue || ProgramBlock.WillRun;
+                result = (MethodRunResult) _methodSetup.Invoke(_scriptInstance, null);
+                result.ReturnValue = (bool) result.ReturnValue || ProgramBlock.WillRun;
             }
             return result;
         }
@@ -213,7 +215,7 @@ namespace HomeGenie.Automation.Engines
             MethodRunResult result = null;
             if (_scriptAssembly != null && CheckAppInstance())
             {
-                result = (MethodRunResult)_methodRun.Invoke(_scriptInstance, new object[1] { options });
+                result = (MethodRunResult) _methodRun.Invoke(_scriptInstance, new object[1] {options});
             }
             return result;
         }
@@ -229,7 +231,8 @@ namespace HomeGenie.Automation.Engines
 
         public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {
-            var error = new ProgramError() {
+            var error = new ProgramError()
+            {
                 CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
@@ -241,11 +244,11 @@ namespace HomeGenie.Automation.Engines
             if (isTriggerBlock)
             {
                 var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;
-                error.Line -=  (CSharpAppFactory.ConditionCodeOffset + CSharpAppFactory.ProgramCodeOffset + sourceLines);
+                error.Line -= (CSharpAppFactory.ConditionCodeOffset + CSharpAppFactory.ProgramCodeOffset + sourceLines);
             }
             else
             {
-                error.Line -=  CSharpAppFactory.ProgramCodeOffset;
+                error.Line -= CSharpAppFactory.ProgramCodeOffset;
             }
             return error;
         }
@@ -307,10 +310,12 @@ namespace HomeGenie.Automation.Engines
                     _scriptInstance = Activator.CreateInstance(_assemblyType);
 
                     var miSetHost = _assemblyType.GetMethod("SetHost");
-                    miSetHost.Invoke(_scriptInstance, new object[2] { HomeGenie, ProgramBlock.Address });
+                    miSetHost.Invoke(_scriptInstance, new object[2] {HomeGenie, ProgramBlock.Address});
 
-                    _methodRun = _assemblyType.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-                    _methodSetup = _assemblyType.GetMethod("Setup", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+                    _methodRun = _assemblyType.GetMethod("Run",
+                        BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+                    _methodSetup = _assemblyType.GetMethod("Setup",
+                        BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                     _methodReset = _assemblyType.GetMethod("Reset");
 
                     success = true;
@@ -328,6 +333,5 @@ namespace HomeGenie.Automation.Engines
             }
             return success;
         }
-        
     }
 }

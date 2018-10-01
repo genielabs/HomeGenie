@@ -40,6 +40,7 @@ namespace HomeGenie.Automation.Engines
             get { return Includes.Count() + 15; }
         }
 
+        // TODO: move this to a config file
         static readonly string[] Includes =
         {
             "System",
@@ -160,11 +161,13 @@ namespace HomeGenie.Automation.Scripting
                 .Replace("{source}", scriptSource)
                 .Replace("{setup}", scriptSetup);
 
-            var providerOptions = new Dictionary<string, string> {
-                //                    { "CompilerVersion", "v4.0" }
+            var providerOptions = new Dictionary<string, string>
+            {
+                //{ "CompilerVersion", "v4.0" }
             };
             var provider = new CSharpCodeProvider(providerOptions);
-            var compilerParams = new CompilerParameters {
+            var compilerParams = new CompilerParameters
+            {
                 GenerateInMemory = false,
                 GenerateExecutable = false,
                 IncludeDebugInformation = true,
@@ -243,6 +246,5 @@ namespace HomeGenie.Automation.Scripting
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);
         }
-
     }
 }

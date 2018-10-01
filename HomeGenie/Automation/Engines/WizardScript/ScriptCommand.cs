@@ -24,7 +24,6 @@ using System;
 
 namespace HomeGenie.Automation.Engines.WizardScript
 {
-
     [Serializable()]
     public class ScriptCommand
     {
@@ -33,6 +32,4 @@ namespace HomeGenie.Automation.Engines.WizardScript
         public string CommandString { get; set; }
         public string CommandArguments { get; set; }
     }
-
 }
-

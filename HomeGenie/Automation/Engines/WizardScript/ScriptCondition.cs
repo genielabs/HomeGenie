@@ -24,7 +24,6 @@ using System;
 
 namespace HomeGenie.Automation.Engines.WizardScript
 {
-
     [Serializable()]
     public enum ConditionType
     {
@@ -45,5 +44,4 @@ namespace HomeGenie.Automation.Engines.WizardScript
         public ComparisonOperator ComparisonOperator { get; set; }
         public string ComparisonValue { get; set; }
     }
-
 }
