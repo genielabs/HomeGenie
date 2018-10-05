@@ -33,10 +33,11 @@ namespace HomeGenie.Automation.Scheduler
     [Serializable]
     public class SchedulerScriptingHost
     {
+        private HomeGenieService homegenie;
+        private SchedulerItem schedulerItem;
 
-        private HomeGenieService homegenie = null;
-        private SchedulerItem schedulerItem = null;
         private Store localStore;
+
         //
         private NetHelper netHelper;
         private SerialPortHelper serialPortHelper;
@@ -46,13 +47,13 @@ namespace HomeGenie.Automation.Scheduler
         private KnxClientHelper knxClientHelper;
         private SchedulerHelper schedulerHelper;
         private ProgramHelperBase programHelper;
-        private StoreHelper storeHelper;
+        private readonly StoreHelper storeHelper;
         private Action<ModuleHelper, ModuleParameter> moduleUpdateHandler;
 
         public SchedulerScriptingHost()
         {
             localStore = new Store();
-            storeHelper = new StoreHelper(new TsList<Store>(){localStore}, "local");
+            storeHelper = new StoreHelper(new TsList<Store>() {localStore}, "local");
         }
 
         public void SetHost(HomeGenieService hg, SchedulerItem item)
@@ -70,45 +71,43 @@ namespace HomeGenie.Automation.Scheduler
             programHelper = new ProgramHelperBase(homegenie);
         }
 
-        public void RouteModuleEvent(HomeGenie.Automation.ProgramManager.RoutedEvent eventData)
+        public void RouteModuleEvent(ProgramManager.RoutedEvent eventData)
         {
-            if (moduleUpdateHandler != null)
+            if (moduleUpdateHandler == null) return;
+            var module = new ModuleHelper(homegenie, eventData.Module);
+            var parameter = eventData.Parameter;
+            var callback = new WaitCallback((state) =>
             {
-                var module = new ModuleHelper(homegenie, eventData.Module);
-                var parameter = eventData.Parameter;
-                var callback = new WaitCallback((state) =>
+                try
                 {
-                    try
-                    {
-                        homegenie.MigService.RaiseEvent(
-                            this,
-                            Domains.HomeAutomation_HomeGenie,
-                            SourceModule.Scheduler,
-                            "Scheduler Routed Event",
-                            Properties.SchedulerModuleUpdateStart,
-                            schedulerItem.Name);
-                        moduleUpdateHandler(module, parameter);
-                        homegenie.MigService.RaiseEvent(
-                            this,
-                            Domains.HomeAutomation_HomeGenie,
-                            SourceModule.Scheduler,
-                            "Scheduler Routed Event",
-                            Properties.SchedulerModuleUpdateEnd,
-                            schedulerItem.Name);
-                    }
-                    catch (Exception e) 
-                    {
-                        homegenie.MigService.RaiseEvent(
-                            this,
-                            Domains.HomeAutomation_HomeGenie,
-                            SourceModule.Scheduler,
-                            e.Message.Replace('\n', ' ').Replace('\r', ' '),
-                            Properties.SchedulerError,
-                            schedulerItem.Name);
-                    }
-                });
-                ThreadPool.QueueUserWorkItem(callback);
-            }
+                    homegenie.MigService.RaiseEvent(
+                        this,
+                        Domains.HomeAutomation_HomeGenie,
+                        SourceModule.Scheduler,
+                        "Scheduler Routed Event",
+                        Properties.SchedulerModuleUpdateStart,
+                        schedulerItem.Name);
+                    moduleUpdateHandler(module, parameter);
+                    homegenie.MigService.RaiseEvent(
+                        this,
+                        Domains.HomeAutomation_HomeGenie,
+                        SourceModule.Scheduler,
+                        "Scheduler Routed Event",
+                        Properties.SchedulerModuleUpdateEnd,
+                        schedulerItem.Name);
+                }
+                catch (Exception e)
+                {
+                    homegenie.MigService.RaiseEvent(
+                        this,
+                        Domains.HomeAutomation_HomeGenie,
+                        SourceModule.Scheduler,
+                        e.Message.Replace('\n', ' ').Replace('\r', ' '),
+                        Properties.SchedulerError,
+                        schedulerItem.Name);
+                }
+            });
+            ThreadPool.QueueUserWorkItem(callback);
         }
 
         public SchedulerScriptingHost OnModuleUpdate(Action<ModuleHelper, ModuleParameter> handler)
@@ -119,18 +118,12 @@ namespace HomeGenie.Automation.Scheduler
 
         public ProgramHelperBase Program
         {
-            get
-            {
-                return programHelper;
-            }
+            get { return programHelper; }
         }
 
         public ModulesManager Modules
         {
-            get
-            {
-                return new ModulesManager(homegenie);
-            }
+            get { return new ModulesManager(homegenie); }
         }
 
         public ModulesManager BoundModules
@@ -138,10 +131,12 @@ namespace HomeGenie.Automation.Scheduler
             get
             {
                 var boundModulesManager = new ModulesManager(homegenie);
-                boundModulesManager.ModulesListCallback = new Func<ModulesManager,TsList<Module>>((sender)=>{
+                boundModulesManager.ModulesListCallback = new Func<ModulesManager, TsList<Module>>((sender) =>
+                {
                     TsList<Module> modules = new TsList<Module>();
-                    foreach(var m in schedulerItem.BoundModules) {
-                        var mod = homegenie.Modules.Find(e=>e.Address == m.Address && e.Domain == m.Domain);
+                    foreach (var m in schedulerItem.BoundModules)
+                    {
+                        var mod = homegenie.Modules.Find(e => e.Address == m.Address && e.Domain == m.Domain);
                         if (mod != null)
                             modules.Add(mod);
                     }
@@ -153,66 +148,42 @@ namespace HomeGenie.Automation.Scheduler
 
         public SettingsHelper Settings
         {
-            get
-            {
-                return new SettingsHelper(homegenie);
-            }
+            get { return new SettingsHelper(homegenie); }
         }
 
         public NetHelper Net
         {
-            get
-            {
-                return netHelper;
-            }
+            get { return netHelper; }
         }
 
         public SerialPortHelper SerialPort
         {
-            get
-            {
-                return serialPortHelper;
-            }
+            get { return serialPortHelper; }
         }
 
         public TcpClientHelper TcpClient
         {
-            get
-            {
-                return tcpClientHelper;
-            }
+            get { return tcpClientHelper; }
         }
 
         public UdpClientHelper UdpClient
         {
-            get
-            {
-                return udpClientHelper;
-            }
+            get { return udpClientHelper; }
         }
 
         public MqttClientHelper MqttClient
         {
-            get
-            {
-                return mqttClientHelper;
-            }
+            get { return mqttClientHelper; }
         }
 
         public KnxClientHelper KnxClient
         {
-            get
-            {
-                return knxClientHelper;
-            }
+            get { return knxClientHelper; }
         }
 
         public SchedulerHelper Scheduler
         {
-            get
-            {
-                return schedulerHelper;
-            }
+            get { return schedulerHelper; }
         }
 
         public ModuleParameter Data(string name)
@@ -222,7 +193,7 @@ namespace HomeGenie.Automation.Scheduler
 
         public void Pause(double seconds)
         {
-            System.Threading.Thread.Sleep((int)(seconds * 1000));
+            Thread.Sleep((int) (seconds * 1000));
         }
 
         public void Delay(double seconds)
@@ -234,13 +205,13 @@ namespace HomeGenie.Automation.Scheduler
         {
             if (String.IsNullOrWhiteSpace(locale))
             {
-                locale = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+                locale = Thread.CurrentThread.CurrentCulture.Name;
             }
             try
             {
                 Utility.Say(sentence, locale, goAsync);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 HomeGenieService.LogError(e);
             }
@@ -248,14 +219,54 @@ namespace HomeGenie.Automation.Scheduler
 
         public void Reset()
         {
-            try { serialPortHelper.Reset(); } catch { }
-            try { tcpClientHelper.Reset(); } catch { }
-            try { udpClientHelper.Reset(); } catch { }
-            try { netHelper.Reset(); } catch { }
-            try { mqttClientHelper.Reset(); } catch { }
-            try { knxClientHelper.Reset(); } catch { }
+            try
+            {
+                serialPortHelper.Reset();
+            }
+            catch
+            {
+                // ignored
+            }
+            try
+            {
+                tcpClientHelper.Reset();
+            }
+            catch
+            {
+                // ignored
+            }
+            try
+            {
+                udpClientHelper.Reset();
+            }
+            catch
+            {
+                // ignored
+            }
+            try
+            {
+                netHelper.Reset();
+            }
+            catch
+            {
+                // ignored
+            }
+            try
+            {
+                mqttClientHelper.Reset();
+            }
+            catch
+            {
+                // ignored
+            }
+            try
+            {
+                knxClientHelper.Reset();
+            }
+            catch
+            {
+                // ignored
+            }
         }
-
     }
-
 }

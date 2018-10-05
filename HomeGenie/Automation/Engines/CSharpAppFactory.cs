@@ -155,7 +155,7 @@ namespace HomeGenie.Automation.Scripting
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
 }";
-            var usingNs = string.Join(" ", Includes.Select(x => string.Format("using {0};" + Environment.NewLine, x)));
+            var usingNs = String.Join(" ", Includes.Select(x => String.Format("using {0};" + Environment.NewLine, x)));
             source = source
                 .Replace("{using}", usingNs)
                 .Replace("{source}", scriptSource)
@@ -187,7 +187,7 @@ namespace HomeGenie.Automation.Scripting
                 if (displayName != null)
                 {
                     int major;
-                    if (int.TryParse(displayName.Invoke(null, null).ToString().Substring(0, 1), out major) && major > 2)
+                    if (Int32.TryParse(displayName.Invoke(null, null).ToString().Substring(0, 1), out major) && major > 2)
                     {
                         relocateSystemAsm = true;
                     }

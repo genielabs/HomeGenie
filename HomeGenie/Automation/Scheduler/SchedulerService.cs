@@ -63,59 +63,53 @@ namespace HomeGenie.Automation.Scheduler
         {
             Stop();
             serviceChecker = new Timer(CheckScheduledEvents); //, null, 1000, 1000);
-            serviceChecker.Change((60-DateTime.Now.Second)*1000, Timeout.Infinite);
+            serviceChecker.Change((60 - DateTime.Now.Second) * 1000, Timeout.Infinite);
         }
 
         public void Stop()
         {
-            if (serviceChecker != null)
+            if (serviceChecker == null) return;
+            serviceChecker.Dispose();
+            foreach (var eventItem in events)
             {
-                serviceChecker.Dispose();
-                for (int i = 0; i < events.Count; i++)
+                if (eventItem.ScriptEngine != null)
                 {
-                    var eventItem = events[i];
-                    if (eventItem.ScriptEngine != null)
-                    {
-                        eventItem.ScriptEngine.StopScript();
-                    }
+                    eventItem.ScriptEngine.StopScript();
                 }
             }
         }
 
         private void CheckScheduledEvents(object state)
         {
-            serviceChecker.Change((60-DateTime.Now.Second)*1000, Timeout.Infinite);
+            serviceChecker.Change((60 - DateTime.Now.Second) * 1000, Timeout.Infinite);
             var date = DateTime.Now;
-            for (int i = 0; i < events.Count; i++)
+            foreach (var eventItem in events)
             {
-                var eventItem = events[i];
-                if (eventItem.IsEnabled)
+                if (!eventItem.IsEnabled) continue;
+                // execute items only once instead of repeating for the whole minute
+                string currentOccurrence = date.ToUniversalTime().ToString(FORMAT_DATETIME);
+                if (eventItem.LastOccurrence != currentOccurrence && IsScheduling(date, eventItem.CronExpression))
                 {
-                    // execute items only once instead of repeating for the whole minute
-                    string currentOccurrence = date.ToUniversalTime().ToString(FORMAT_DATETIME);
-                    if (eventItem.LastOccurrence != currentOccurrence && IsScheduling(date, eventItem.CronExpression))
-                    {
-                        masterControlProgram.HomeGenie.MigService.RaiseEvent(
-                            this,
-                            Domains.HomeAutomation_HomeGenie,
-                            SourceModule.Scheduler,
-                            "Scheduler Event Triggered",
-                            Properties.SchedulerTriggeredEvent,
-                            eventItem.Name);
-                        
-                        // update last occurrence value
-                        eventItem.LastOccurrence = currentOccurrence;
+                    masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                        this,
+                        Domains.HomeAutomation_HomeGenie,
+                        SourceModule.Scheduler,
+                        "Scheduler Event Triggered",
+                        Properties.SchedulerTriggeredEvent,
+                        eventItem.Name);
 
-                        // execute associated task if any
-                        if (!String.IsNullOrWhiteSpace(eventItem.Script))
+                    // update last occurrence value
+                    eventItem.LastOccurrence = currentOccurrence;
+
+                    // execute associated task if any
+                    if (!String.IsNullOrWhiteSpace(eventItem.Script))
+                    {
+                        if (eventItem.ScriptEngine == null)
                         {
-                            if (eventItem.ScriptEngine == null)
-                            {
-                                eventItem.ScriptEngine = new SchedulerScriptingEngine();
-                                eventItem.ScriptEngine.SetHost(masterControlProgram.HomeGenie, eventItem);
-                            }
-                            eventItem.ScriptEngine.StartScript();
+                            eventItem.ScriptEngine = new SchedulerScriptingEngine();
+                            eventItem.ScriptEngine.SetHost(masterControlProgram.HomeGenie, eventItem);
                         }
+                        eventItem.ScriptEngine.StartScript();
                     }
                 }
             }
@@ -123,11 +117,12 @@ namespace HomeGenie.Automation.Scheduler
 
         public SchedulerItem Get(string name)
         {
-            var eventItem = events.Find(e => e.Name.ToLower() == name.ToLower());
+            var eventItem = events.Find(e => String.Equals(e.Name, name, StringComparison.CurrentCultureIgnoreCase));
             return eventItem;
         }
 
-        public SchedulerItem AddOrUpdate(string name, string cronExpression, string data = null, string description = null, string script = null)
+        public SchedulerItem AddOrUpdate(string name, string cronExpression, string data = null,
+            string description = null, string script = null)
         {
             if (String.IsNullOrEmpty(name)) return null;
             //
@@ -159,6 +154,7 @@ namespace HomeGenie.Automation.Scheduler
             }
             return eventItem;
         }
+
         public bool SetData(string name, string jsonData)
         {
             var eventItem = Get(name);
@@ -224,8 +220,9 @@ namespace HomeGenie.Automation.Scheduler
             if (date.Kind != DateTimeKind.Local)
                 date = date.ToLocalTime();
             var hits = GetScheduling(date.Date, date.Date.AddHours(24).AddMinutes(-1), cronExpression);
-            var match = (DateTime?)hits.Find(d => d.ToUniversalTime().ToString(FORMAT_DATETIME) == date.ToUniversalTime().ToString(FORMAT_DATETIME));
-            return match != null && match != DateTime.MinValue;
+            var match = (DateTime?) hits.Find(d =>
+                d.ToUniversalTime().ToString(FORMAT_DATETIME) == date.ToUniversalTime().ToString(FORMAT_DATETIME));
+            return match != DateTime.MinValue;
         }
 
         /// <summary>
@@ -236,13 +233,14 @@ namespace HomeGenie.Automation.Scheduler
         /// <param name="cronExpression">Cron expression</param>
         /// <param name="recursionCount"></param>
         /// <returns></returns>
-        public List<DateTime> GetScheduling(DateTime dateStart, DateTime dateEnd, string cronExpression, int recursionCount = 0)
+        public List<DateTime> GetScheduling(DateTime dateStart, DateTime dateEnd, string cronExpression,
+            int recursionCount = 0)
         {
             // align time
-            dateStart = dateStart.AddSeconds((double)-dateStart.Second).AddMilliseconds(-dateStart.Millisecond);
-            dateEnd = dateEnd.AddSeconds((double)-dateEnd.Second).AddMilliseconds(-dateEnd.Millisecond);
+            dateStart = dateStart.AddSeconds((double) -dateStart.Second).AddMilliseconds(-dateStart.Millisecond);
+            dateEnd = dateEnd.AddSeconds((double) -dateEnd.Second).AddMilliseconds(-dateEnd.Millisecond);
 
-            // '[' and ']' are just aestethic alias for '(' and ')'
+            // '[' and ']' are just aesthetic alias for '(' and ')'
             cronExpression = cronExpression.Replace("[", "(").Replace("]", ")");
 
             var specialChars = new[] {'(', ')', ' ', ';', '&', ':', '|', '>', '%', '!'};
@@ -270,7 +268,8 @@ namespace HomeGenie.Automation.Scheduler
                             }
                             else
                             {
-                                masterControlProgram.HomeGenie.MigService.RaiseEvent(this, Domains.HomeAutomation_HomeGenie,
+                                masterControlProgram.HomeGenie.MigService.RaiseEvent(this,
+                                    Domains.HomeAutomation_HomeGenie,
                                     SourceModule.Scheduler, cronExpression, Properties.SchedulerError,
                                     JsonConvert.SerializeObject("Unbalanced parenthesis in '" + cronExpression + "'"));
                                 return new List<DateTime>();
@@ -300,7 +299,7 @@ namespace HomeGenie.Automation.Scheduler
                 while (charIndex < cronExpression.Length) // collecting plain cron expression
                 {
                     token = cronExpression[charIndex];
-                    if (specialChars.Except(new []{' '}).Contains(token))
+                    if (specialChars.Except(new[] {' '}).Contains(token))
                     {
                         break;
                     }
@@ -310,7 +309,7 @@ namespace HomeGenie.Automation.Scheduler
                 }
 
                 currentExpression = currentExpression.Trim(' ', '\t');
-                if (string.IsNullOrEmpty(currentExpression))
+                if (String.IsNullOrEmpty(currentExpression))
                     continue;
 
                 evalNode.Expression = currentExpression;
@@ -329,21 +328,20 @@ namespace HomeGenie.Automation.Scheduler
                     {
                         var addMin = currentExpression.Substring(currentExpression.LastIndexOf('+'));
                         addMin = Regex.Replace(addMin, @"\s+", "");
-                        addMinutes = int.Parse(addMin);
+                        addMinutes = Int32.Parse(addMin);
                         currentExpression = currentExpression.Substring(0, currentExpression.LastIndexOf('+'));
                     }
                     else if (currentExpression.IndexOf('-') > 0)
                     {
                         var addMin = currentExpression.Substring(currentExpression.LastIndexOf('-'));
                         addMin = Regex.Replace(addMin, @"\s+", "");
-                        addMinutes = int.Parse(addMin);
+                        addMinutes = Int32.Parse(addMin);
                         currentExpression = currentExpression.Substring(0, currentExpression.LastIndexOf('-'));
                     }
                     var eventName = currentExpression.Substring(1);
                     eventName = Regex.Replace(eventName, @"\s+", "");
                     switch (eventName)
                     {
-
                         #region Built-in events
 
                         case "SolarTimes.Sunrise":
@@ -362,20 +360,23 @@ namespace HomeGenie.Automation.Scheduler
 
                         default:
                         {
-                            // Check expresion from scheduled item with a given name
+                            // Check expression from scheduled item with a given name
                             var eventItem = Get(eventName);
                             if (eventItem == null)
                             {
                                 masterControlProgram.HomeGenie.MigService.RaiseEvent(this,
-                                    Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, cronExpression, Properties.SchedulerError,
+                                    Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, cronExpression,
+                                    Properties.SchedulerError,
                                     JsonConvert.SerializeObject("Unknown event name '" + currentExpression + "'"));
                             }
                             else if (recursionCount >= MAX_EVAL_RECURSION)
                             {
                                 recursionCount = 0;
                                 masterControlProgram.HomeGenie.MigService.RaiseEvent(this,
-                                    Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, cronExpression, Properties.SchedulerError,
-                                    JsonConvert.SerializeObject("Too much recursion in expression '" + currentExpression + "'"));
+                                    Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, cronExpression,
+                                    Properties.SchedulerError,
+                                    JsonConvert.SerializeObject(
+                                        "Too much recursion in expression '" + currentExpression + "'"));
                                 eventItem.IsEnabled = false;
                             }
                             else
@@ -391,7 +392,8 @@ namespace HomeGenie.Automation.Scheduler
                                         {
                                             for (var o = 0; o < evalNode.Occurrences.Count; o++)
                                             {
-                                                evalNode.Occurrences[o] = evalNode.Occurrences[o].AddMinutes(addMinutes);
+                                                evalNode.Occurrences[o] =
+                                                    evalNode.Occurrences[o].AddMinutes(addMinutes);
                                             }
                                         }
                                     }
@@ -413,13 +415,40 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     evalNode.Occurrences = GetNextOccurrences(dateStart, dateEnd, currentExpression);
                 }
-
             }
 
             return EvalNodes(rootEvalNode);
         }
 
-        public List<DateTime> EvalNodes(EvalNode currentNode)
+        public List<SchedulerItem> Items
+        {
+            get { return events; }
+        }
+
+        public dynamic Location
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location))
+                    masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location =
+                        "{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
+                return (dynamic) JsonConvert.DeserializeObject(masterControlProgram.HomeGenie.SystemConfiguration
+                    .HomeGenie.Location);
+            }
+        }
+
+        public void OnModuleUpdate(object eventData)
+        {
+            foreach (var item in events)
+            {
+                if (item.ScriptEngine != null)
+                {
+                    item.ScriptEngine.RouteModuleEvent(eventData);
+                }
+            }
+        }
+
+        private List<DateTime> EvalNodes(EvalNode currentNode)
         {
             if (currentNode.Occurrences == null)
                 currentNode.Occurrences = new List<DateTime>();
@@ -427,7 +456,7 @@ namespace HomeGenie.Automation.Scheduler
             if (currentNode.Child != null)
             {
                 occurs = EvalNodes(currentNode.Child);
-            }                
+            }
             if (currentNode.Sibling != null && currentNode.Operator != null)
             {
                 if (currentNode.Operator == ":" || currentNode.Operator == "|")
@@ -453,7 +482,9 @@ namespace HomeGenie.Automation.Scheduler
                         var start = occurs.Last();
                         var end = matchList.First();
                         var inc = start.AddMinutes(1).AddSeconds(-start.Second).AddMilliseconds(-start.Millisecond);
-                        while (end.ToUniversalTime().ToString(FORMAT_DATETIME) != inc.ToUniversalTime().ToString(FORMAT_DATETIME)) //(Math.Floor((end - inc).TotalMinutes) != 0)
+                        while (end.ToUniversalTime().ToString(FORMAT_DATETIME) !=
+                               inc.ToUniversalTime().ToString(FORMAT_DATETIME)
+                        ) //(Math.Floor((end - inc).TotalMinutes) != 0)
                         {
                             occurs.Add(inc);
                             if (inc.Hour == 23 && inc.Minute == 59)
@@ -473,60 +504,6 @@ namespace HomeGenie.Automation.Scheduler
             return occurs;
         }
 
-        public List<SchedulerItem> Items
-        {
-            get { return events; }
-        }
-
-        public dynamic Location
-        {
-            get
-            {
-                if (String.IsNullOrWhiteSpace(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location))
-                    masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location = "{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
-                return (dynamic)JsonConvert.DeserializeObject(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location);
-            }
-        }
-
-        public void OnModuleUpdate(object eventData)
-        {
-            foreach (var item in events)
-            {
-                if (item.ScriptEngine != null)
-                {
-                    item.ScriptEngine.RouteModuleEvent(eventData);
-                }
-            }
-        }
-
-        private bool EvaluateCronEntry(DateTime date, string cronExpression)
-        {
-            if (date.Kind != DateTimeKind.Local)
-                date = date.ToLocalTime();
-            var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
-            if (!cronSchedule.IsError)
-            {
-                var occurrence = cronSchedule.Value.GetNextOccurrence(date.AddMinutes(-1));
-                string d1 = date.ToUniversalTime().ToString(FORMAT_DATETIME);
-                string d2 = occurrence.ToUniversalTime().ToString(FORMAT_DATETIME);
-                if (d1 == d2)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                masterControlProgram.HomeGenie.MigService.RaiseEvent(
-                    this,
-                    Domains.HomeAutomation_HomeGenie,
-                    SourceModule.Scheduler,
-                    cronExpression,
-                    Properties.SchedulerError,
-                    JsonConvert.SerializeObject("Syntax error in expression '"+cronExpression+"'"));
-            }
-            return false;
-        }
-
         private List<DateTime> GetNextOccurrences(DateTime dateStart, DateTime dateEnd, string cronExpression)
         {
             if (dateStart.Kind != DateTimeKind.Local)
@@ -542,8 +519,10 @@ namespace HomeGenie.Automation.Scheduler
         private bool IsBetween(DateTime date, DateTime dateStart, DateTime dateEnd)
         {
             // TODO why is it comparing like a strings???
-            var dsr = string.Compare(date.ToUniversalTime().ToString(FORMAT_DATETIME), dateStart.ToUniversalTime().ToString(FORMAT_DATETIME)) >= 0;
-            var der = string.Compare(date.ToUniversalTime().ToString(FORMAT_DATETIME), dateEnd.ToUniversalTime().ToString(FORMAT_DATETIME)) <= 0;
+            var dsr = String.CompareOrdinal(date.ToUniversalTime().ToString(FORMAT_DATETIME),
+                          dateStart.ToUniversalTime().ToString(FORMAT_DATETIME)) >= 0;
+            var der = String.CompareOrdinal(date.ToUniversalTime().ToString(FORMAT_DATETIME),
+                          dateEnd.ToUniversalTime().ToString(FORMAT_DATETIME)) <= 0;
             return (dsr && der);
         }
 
@@ -553,7 +532,8 @@ namespace HomeGenie.Automation.Scheduler
                 evalNode.Occurrences = new List<DateTime>();
             while (start.Ticks < dateEnd.Ticks)
             {
-                var solarTimes = new SolarTimes(start.ToLocalTime(), Location["latitude"].Value, Location["longitude"].Value);
+                var solarTimes = new SolarTimes(start.ToLocalTime(), Location["latitude"].Value,
+                    Location["longitude"].Value);
                 var sunrise = solarTimes.Sunrise;
                 sunrise = sunrise.AddMinutes(addMinutes);
                 if (IsBetween(sunrise, start, dateEnd))

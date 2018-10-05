@@ -123,7 +123,7 @@ namespace HomeGenie.Automation.Engines
             if (message.Length > 2)
             {
                 int line = 0;
-                int.TryParse(message[1].Substring(5), out line);
+                Int32.TryParse(message[1].Substring(5), out line);
                 error.Line = line;
             }
             return error;

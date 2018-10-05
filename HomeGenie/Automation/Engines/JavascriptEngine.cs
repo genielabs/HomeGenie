@@ -161,7 +161,7 @@ namespace HomeGenie.Automation.Engines
                     string message = error[1];
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        int line = int.Parse(error[0].Split(' ')[1]);
+                        int line = Int32.Parse(error[0].Split(' ')[1]);
                         errors.Add(new ProgramError()
                         {
                             Line = line,
@@ -184,7 +184,7 @@ namespace HomeGenie.Automation.Engines
                 string message = error[1];
                 // TODO: find a better solution for this "hg is not defined" check
                 if (message == "hg is not defined") return errors;
-                int line = int.Parse(error[0].Split(' ')[1]);
+                int line = Int32.Parse(error[0].Split(' ')[1]);
                 errors.Add(new ProgramError()
                 {
                     Line = line,

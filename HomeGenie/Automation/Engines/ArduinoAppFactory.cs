@@ -37,13 +37,15 @@ namespace HomeGenie.Automation.Engines
 
             string fileIno = Path.GetFileName(sketchFileName);
             // run make
-            var processInfo = new ProcessStartInfo("make", "");
-            processInfo.WorkingDirectory = Path.GetDirectoryName(sketchFileName);
-            processInfo.RedirectStandardOutput = false;
-            processInfo.RedirectStandardInput = false;
-            processInfo.RedirectStandardError = true;
-            processInfo.UseShellExecute = false;
-            processInfo.CreateNoWindow = true;
+            var processInfo = new ProcessStartInfo("make", "")
+            {
+                WorkingDirectory = Path.GetDirectoryName(sketchFileName),
+                RedirectStandardOutput = false,
+                RedirectStandardInput = false,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
             using (Process process = Process.Start(processInfo))
             {
                 using (StreamReader reader = process.StandardError)
@@ -58,8 +60,8 @@ namespace HomeGenie.Automation.Engines
                         {
                             int errorRow = 0;
                             int errorColumn = 0;
-                            if (lineParts[3].Contains("error") && int.TryParse(lineParts[1], out errorRow) &&
-                                int.TryParse(
+                            if (lineParts[3].Contains("error") && Int32.TryParse(lineParts[1], out errorRow) &&
+                                Int32.TryParse(
                                     lineParts[2],
                                     out errorColumn
                                 ))
@@ -79,7 +81,7 @@ namespace HomeGenie.Automation.Engines
                         else if (line.StartsWith("Makefile:") && lineParts.Length > 2)
                         {
                             int errorRow = 0;
-                            if (int.TryParse(lineParts[1], out errorRow))
+                            if (Int32.TryParse(lineParts[1], out errorRow))
                             {
                                 errors.Add(new ProgramError()
                                 {
@@ -124,13 +126,15 @@ namespace HomeGenie.Automation.Engines
         public static string UploadSketch(string sketchDirectory)
         {
             string errorOutput = "";
-            var processInfo = new ProcessStartInfo("empty", "-f -L uploadres.txt make upload");
-            processInfo.WorkingDirectory = sketchDirectory;
-            processInfo.RedirectStandardOutput = false;
-            processInfo.RedirectStandardInput = false;
-            processInfo.RedirectStandardError = true;
-            processInfo.UseShellExecute = false;
-            processInfo.CreateNoWindow = true;
+            var processInfo = new ProcessStartInfo("empty", "-f -L uploadres.txt make upload")
+            {
+                WorkingDirectory = sketchDirectory,
+                RedirectStandardOutput = false,
+                RedirectStandardInput = false,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
             using (Process process = Process.Start(processInfo))
             {
                 using (StreamReader reader = process.StandardError)

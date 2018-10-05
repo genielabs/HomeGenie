@@ -122,8 +122,9 @@ namespace HomeGenie
 
         private static string GetWizardScript(ProgramBlock program)
         {
-            if ((program.Type.ToLower() != "wizard" || program.Conditions.Count <= 0) &&
-                program.Commands.Count <= 0) return null;
+            if (program.Type.ToLower() != "wizard" ||
+                (program.Conditions.Count <= 0 && program.Commands.Count <= 0)) 
+                return null;
             WizardEngine.WizardScript script = new WizardEngine.WizardScript(null)
             {
                 Commands = program.Commands.ToList<ScriptCommand>(),

@@ -21,12 +21,13 @@
 */
 
 using System;
+using System.Reflection;
 using System.Threading;
+
+using Jint;
 
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
-
-using Jint;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -38,8 +39,9 @@ namespace HomeGenie.Automation.Scheduler
         private bool isRunning;
 
         private Engine scriptEngine;
-        private SchedulerScriptingHost hgScriptingHost;
-        private string initScript = @"var $$ = {
+        private readonly SchedulerScriptingHost hgScriptingHost;
+
+        private const string InitScript = @"var $$ = {
           // ModulesManager
           modules: hg.modules,
           boundModules: hg.boundModules,
@@ -121,12 +123,13 @@ namespace HomeGenie.Automation.Scheduler
         {
             if (homegenie == null || eventItem == null || isRunning || String.IsNullOrWhiteSpace(eventItem.Script))
                 return;
-            
+
             if (programThread != null)
                 StopScript();
 
             isRunning = true;
-            homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, eventItem.Name+":Start");
+            homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
+                Properties.SchedulerScriptStatus, eventItem.Name + ":Start");
 
             programThread = new Thread(() =>
             {
@@ -135,7 +138,7 @@ namespace HomeGenie.Automation.Scheduler
                     MethodRunResult result = null;
                     try
                     {
-                        scriptEngine.Execute(initScript+eventItem.Script);
+                        scriptEngine.Execute(InitScript + eventItem.Script);
                     }
                     catch (Exception ex)
                     {
@@ -144,16 +147,20 @@ namespace HomeGenie.Automation.Scheduler
                     }
                     programThread = null;
                     isRunning = false;
-                    if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
-                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, "Error ("+result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ')+")");
+                    if (result != null && result.Exception != null && result.Exception.GetType() != typeof(TargetException))
+                        homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler,
+                            eventItem.Name, Properties.SchedulerScriptStatus,
+                            "Error (" + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ') + ")");
                 }
                 catch (ThreadAbortException)
                 {
                     programThread = null;
                     isRunning = false;
-                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, "Interrupted");
+                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
+                        Properties.SchedulerScriptStatus, "Interrupted");
                 }
-                homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name, Properties.SchedulerScriptStatus, "End");
+                homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
+                    Properties.SchedulerScriptStatus, "End");
             });
 
             try
@@ -175,7 +182,10 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     if (!programThread.Join(1000))
                         programThread.Abort();
-                } catch { }
+                }
+                catch
+                {
+                }
                 programThread = null;
             }
             if (hgScriptingHost != null)
@@ -187,10 +197,8 @@ namespace HomeGenie.Automation.Scheduler
 
         public void RouteModuleEvent(object eventData)
         {
-            var moduleEvent = (HomeGenie.Automation.ProgramManager.RoutedEvent)eventData;
+            var moduleEvent = (HomeGenie.Automation.ProgramManager.RoutedEvent) eventData;
             hgScriptingHost.RouteModuleEvent(moduleEvent);
         }
-
     }
 }
-

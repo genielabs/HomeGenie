@@ -48,7 +48,7 @@ namespace HomeGenie.Automation.Engines
 
             public WizardScript(ProgramBlock pb)
             {
-                if (pb == null || string.IsNullOrEmpty(pb.ScriptSource)) return;
+                if (pb == null || String.IsNullOrEmpty(pb.ScriptSource)) return;
                 try
                 {
                     var s = JsonConvert.DeserializeObject<WizardScript>(pb.ScriptSource);
@@ -150,7 +150,7 @@ namespace HomeGenie.Automation.Engines
         public override List<ProgramError> Compile()
         {
             var errors = new List<ProgramError>();
-            if (!string.IsNullOrEmpty(ProgramBlock.ScriptSource))
+            if (!String.IsNullOrEmpty(ProgramBlock.ScriptSource))
             {
                 try
                 {

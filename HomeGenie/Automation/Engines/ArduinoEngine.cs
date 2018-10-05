@@ -53,7 +53,6 @@ namespace HomeGenie.Automation.Engines
         public override MethodRunResult Run(string options)
         {
             var result = new MethodRunResult();
-            result = new MethodRunResult();
             HomeGenie.RaiseEvent(
                 Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
@@ -71,7 +70,7 @@ namespace HomeGenie.Automation.Engines
             //
             foreach (var res in outputResult)
             {
-                if (string.IsNullOrWhiteSpace(res)) continue;
+                if (String.IsNullOrWhiteSpace(res)) continue;
                 HomeGenie.RaiseEvent(
                     Domains.HomeGenie_System,
                     Domains.HomeAutomation_HomeGenie_Automation,
