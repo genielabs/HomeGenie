@@ -509,12 +509,12 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             if (propObj != null) statusProperty = propObj.Value;
         }
         //
-        if (statusProperty == 'Running') {
+        if (statusProperty === 'Running') {
             statusColor = 'green';
-        } else if (statusProperty == 'Background') {
+        } else if (statusProperty === 'Background') {
             statusColor = 'blue';
         } else if (prog.IsEnabled) {
-            if (hasErrors)
+            if (hasErrors || statusProperty === 'Interrupted')
                 statusColor = 'red';
             else
                 statusColor = 'yellow';

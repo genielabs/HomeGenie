@@ -61,9 +61,9 @@ namespace HomeGenie.Automation.Engines
         public bool Load()
         {
             var success = LoadAssembly();
-            if (!success)
+            if (!success && String.IsNullOrEmpty(ProgramBlock.ScriptErrors))
             {
-                ProgramBlock.ScriptErrors = "Program update is required.";
+                ProgramBlock.ScriptErrors = "Program is not compiled.";
             }
             return success;
         }
@@ -97,17 +97,19 @@ namespace HomeGenie.Automation.Engines
             }
 
             // dispose assembly and interrupt current task (if any)
+            bool wasEnabled = ProgramBlock.IsEnabled;
+            ProgramBlock.ScriptErrors = "";
             ProgramBlock.IsEnabled = false;
 
             // clean up old assembly files
             try
             {
                 // If the file to be deleted does not exist, no exception is thrown.
-                File.Delete(this.AssemblyFile);
-                File.Delete(this.AssemblyFile + ".mdb");
-                File.Delete(this.AssemblyFile.Replace(".dll", ".mdb"));
-                File.Delete(this.AssemblyFile + ".pdb");
-                File.Delete(this.AssemblyFile.Replace(".dll", ".pdb"));
+                File.Delete(AssemblyFile);
+                File.Delete(AssemblyFile + ".mdb");
+                File.Delete(AssemblyFile.Replace(".dll", ".mdb"));
+                File.Delete(AssemblyFile + ".pdb");
+                File.Delete(AssemblyFile.Replace(".dll", ".pdb"));
             }
             catch (Exception ex)
             {
@@ -196,6 +198,11 @@ namespace HomeGenie.Automation.Engines
                 HomeGenieService.LogError(ee);
             }
 
+            if (errors.Count == 0 && wasEnabled)
+            {
+                ProgramBlock.IsEnabled = true;
+            }
+            
             return errors;
         }
 
@@ -265,9 +272,6 @@ namespace HomeGenie.Automation.Engines
 
         private bool LoadAssembly()
         {
-            if (ProgramBlock.Type.ToLower() != "csharp")
-                return false;
-
             try
             {
                 var assemblyData = File.ReadAllBytes(this.AssemblyFile);

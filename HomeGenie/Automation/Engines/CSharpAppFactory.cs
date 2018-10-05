@@ -41,7 +41,7 @@ namespace HomeGenie.Automation.Engines
         }
 
         // TODO: move this to a config file
-        static readonly string[] Includes =
+        private static readonly string[] Includes =
         {
             "System",
             "System.Text",
