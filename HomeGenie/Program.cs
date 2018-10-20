@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.IO;
 
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
@@ -41,6 +42,34 @@ namespace HomeGenie
 
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
 
+            // Move MIG libraries from root folder to lib/mig
+            // TODO: find a better solution to this
+            string[] migFiles =
+            {
+                "MIG.HomeAutomation.dll",
+                "MIG.Protocols.dll",
+                "LibUsb.Common.dll",
+                "LibUsbDotNet.LibUsbDotNet.dll",
+                "XTenLib.dll",
+                "ZWaveLib.dll"
+            };
+            foreach (var f in migFiles)
+            {
+                string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, f);
+                if (!File.Exists(source)) continue;
+                try
+                {
+                    string dest = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", f);
+                    if (File.Exists(dest)) File.Delete(dest);
+                    File.Move(source, dest);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
+                }
+            }
+            
             _homegenie = new HomeGenieService();
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
         }
