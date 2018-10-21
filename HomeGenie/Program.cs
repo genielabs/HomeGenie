@@ -42,36 +42,53 @@ namespace HomeGenie
 
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
 
-            // Move MIG libraries from root folder to lib/mig
-            // TODO: find a better solution to this
-            string[] migFiles =
-            {
-                "MIG.HomeAutomation.dll",
-                "MIG.Protocols.dll",
-                "LibUsb.Common.dll",
-                "LibUsbDotNet.LibUsbDotNet.dll",
-                "XTenLib.dll",
-                "ZWaveLib.dll"
-            };
-            foreach (var f in migFiles)
-            {
-                string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, f);
-                if (!File.Exists(source)) continue;
-                try
-                {
-                    string dest = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", f);
-                    if (File.Exists(dest)) File.Delete(dest);
-                    File.Move(source, dest);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                }
-            }
+            PostInstallCheck();
             
             _homegenie = new HomeGenieService();
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
+        }
+
+        private static void PostInstallCheck()
+        {
+            string postInstallLock = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "postinstall.lock");
+            if (File.Exists(postInstallLock))
+            {
+                // Move MIG interface plugins from root folder to lib/mig
+                // TODO: find a better solution to this
+                string[] migFiles =
+                {
+                    "MIG.HomeAutomation.dll",
+                    "MIG.Protocols.dll",
+                    "LibUsb.Common.dll",
+                    "LibUsbDotNet.LibUsbDotNet.dll",
+                    "XTenLib.dll",
+                    "ZWaveLib.dll"
+                };
+                foreach (var f in migFiles)
+                {
+                    string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, f);
+                    if (!File.Exists(source)) continue;
+                    try
+                    {
+                        string dest = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", f);
+                        if (File.Exists(dest)) File.Delete(dest);
+                        File.Move(source, dest);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
+                    }
+                }                
+                // TODO: place any other post-install stuff here
+                try
+                {
+                    File.Delete(postInstallLock);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
+                }
+            }
         }
 
         internal static void Quit(bool restartService)

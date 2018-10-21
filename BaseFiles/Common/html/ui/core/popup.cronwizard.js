@@ -729,8 +729,8 @@ $$.getMonthCron = function(dateFrom, dateTo, dayOccur, monthOccur) {
         cron = '* * '+(df!=1?'1-':'')+dt+' '+mt+' *';
         cronItems.push(cron);
         if (mf > mt || mt-mf > 1 || (mf == mt && dt < df)) {
-            var mfn = mf<11 ? mf+1 : 0;
-            var mtp = mt>0 ? mt-1 : 11;            
+            var mfn = mf<12 ? mf+1 : 1;
+            var mtp = mt>1 ? mt-1 : 12;            
             cron = '* * * '+mfn+(mfn!=mtp?'-'+mtp:'')+' *';
             cronItems.push(cron);
         }

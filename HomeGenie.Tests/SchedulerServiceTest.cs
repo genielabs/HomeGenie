@@ -74,6 +74,16 @@ namespace HomeGenie.Tests
             DisplayOccurences(expression, occurences);
             Assert.That(occurences.Count, Is.EqualTo(12));
         }
+        
+        [Test]
+        [TestCase("[ (* * 1-31 11 *) : (* * 1-15 1 *) : (* * * 12 *) ]")]
+        public void CronExpressionAcrossYears(string expression)
+        {
+            var occurences = _scheduler.GetScheduling(new DateTime(2018, 6, 1), new DateTime(2019, 6, 30), expression);
+
+            DisplayOccurences(expression, occurences);
+            Assert.That(occurences.Count, Is.EqualTo((30+31+15)*1440));
+        }
 
         private static List<DateTime> GetOccurencesForDate(SchedulerService scheduler, DateTime date, string expression)
         {
