@@ -80,8 +80,7 @@ namespace HomeGenie.Tests
         public void CronExpressionAcrossYears(string expression)
         {
             var occurences = _scheduler.GetScheduling(new DateTime(2018, 6, 1), new DateTime(2019, 6, 30), expression);
-
-            DisplayOccurences(expression, occurences);
+            //DisplayOccurences(expression, occurences);
             Assert.That(occurences.Count, Is.EqualTo((30+31+15)*1440));
         }
 
