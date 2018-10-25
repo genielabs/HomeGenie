@@ -123,7 +123,7 @@ function drawStats(mod) {
     type: 'GET',
     dataType: 'json',
     success: function (counterData) {
-
+      if (counterData.History == null) return;
       var dataSerie = [];
       var yMin = 0;
       if (counterData.History.length > 0)

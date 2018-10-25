@@ -634,7 +634,8 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 editor3.markClean();
                 //
                 if (program.Type.toLowerCase() === 'wizard') {
-                    var script = JSON.parse(program.ScriptSource);
+                    var script = {ConditionType: '', Conditions: [], Commands: []};
+                    try { script = JSON.parse(program.ScriptSource); } catch (e) { }
                     currentProgram.ConditionType = script.ConditionType;
                     currentProgram.Conditions = script.Conditions;
                     currentProgram.Commands = script.Commands;
