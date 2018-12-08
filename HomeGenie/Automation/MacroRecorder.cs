@@ -27,6 +27,10 @@ using MIG;
 
 using HomeGenie.Service.Constants;
 
+using Newtonsoft.Json;
+
+using NLog.Layouts;
+
 namespace HomeGenie.Automation
 {
     public enum MacroDelayType
@@ -90,6 +94,8 @@ namespace HomeGenie.Automation
                 }
                 wizardScript.Commands.Add(command);
             }
+            // serialize WizardScript to program.ScriptSource property
+            program.ScriptSource = JsonConvert.SerializeObject(wizardScript);
             masterControlProgram.ProgramAdd(program);
             //
             return program;
