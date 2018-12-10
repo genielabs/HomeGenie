@@ -62,6 +62,7 @@ namespace HomeGenie
                     "LibUsb.Common.dll",
                     "LibUsbDotNet.LibUsbDotNet.dll",
                     "XTenLib.dll",
+                    "CM19Lib.dll",
                     "ZWaveLib.dll"
                 };
                 foreach (var f in migFiles)

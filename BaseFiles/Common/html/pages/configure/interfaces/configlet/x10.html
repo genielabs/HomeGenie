@@ -69,7 +69,8 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.X10'] = {
         HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (ports) {
             portSelect.empty().append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder') + '</option>');
             portSelect.append('<option value="" data-ui-action="custom">(enter custom port)</option>');
-            portSelect.append('<option value="USB">CM15 Pro - USB</option>');
+            portSelect.append('<option value="USB">CM15 Pro (USB)</option>');
+            portSelect.append('<option value="CM19-USB">CM19 Transceiver (USB)</option>');
             for (var p = 0; p < ports.length; p++) {
                 portSelect.append('<option value="' + ports[p] + '">CM11 - ' + ports[p] + '</option>');
             }
