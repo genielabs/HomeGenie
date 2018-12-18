@@ -125,7 +125,6 @@ namespace HomeGenie.Data
         {
             get
             {
-
                 double v = 0;
                 if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
                 return v;

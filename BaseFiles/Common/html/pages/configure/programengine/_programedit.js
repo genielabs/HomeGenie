@@ -274,7 +274,8 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
     };
 
     $$.IsModuleControllable = function (module) {
-        return (module.DeviceType != 'Generic' && module.DeviceType != 'Sensor' && module.DeviceType != 'DoorWindow' && module.DeviceType != 'Temperature');
+        return (module.DeviceType != 'Generic' && module.DeviceType != 'Sensor' && module.DeviceType != 'DoorWindow' && module.DeviceType != 'Temperature')
+            || (module.Address == "RF" || module.Address == "IR");
     };
 
     $$.GetDomainComparableModules = function (domain, showall) {

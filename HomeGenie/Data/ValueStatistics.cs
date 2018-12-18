@@ -77,10 +77,10 @@ namespace HomeGenie.Data
 
         public ValueStatistics()
         {
-            LastProcessedTimestap = DateTime.UtcNow;
+            LastProcessedTimestamp = DateTime.UtcNow;
             statValues = new List<StatValue>();
-            statValues.Add(new StatValue(0, LastProcessedTimestap));
-            lastEvent = lastOn = lastOff = new StatValue(0, LastProcessedTimestap);
+            statValues.Add(new StatValue(0, LastProcessedTimestamp));
+            lastEvent = lastOn = lastOff = new StatValue(0, LastProcessedTimestamp);
             historyValues = new TsList<StatValue>();
             historyValues.Add(lastEvent);
         }
@@ -186,7 +186,7 @@ namespace HomeGenie.Data
         }
 
         // These fields are used by StatisticsLogger
-        internal DateTime LastProcessedTimestap;
+        internal DateTime LastProcessedTimestamp;
         internal List<StatValue> Values
         {
             get { return statValues; }

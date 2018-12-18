@@ -215,15 +215,20 @@
                 case 'Controllers.LircRemote':
                     $('#automation_command_property').append('<li data-context-value="Control.IrSend"><a>Send IR code</a></li>');
                     break;
+                //case 'HomeAutomation.ZWave':
+                //case 'HomeAutomation.X10':
                 default:
-                    //			case 'HomeAutomation.X10':
-                    //			case 'HomeAutomation.ZWave':
                     var module = HG.WebApp.Utility.GetModuleByDomainAddress(command_targetdomain, command_targetsubject);
                     switch (module.DeviceType.toLowerCase()) {
                         case 'sensor':
+                            if (command_targetdomain == 'HomeAutomation.X10' && module.Address == 'RF') {
+                                $('#automation_command_property').append('<li data-context-value="Control.RfSend"><a>Send RF command</a></li>');
+                            }
+                            break;
                         case 'temperature':
                         case 'doorwindow':
                         case 'thermostat':
+                            // TODO: ...
                             break;
                         case 'light':
                         case 'switch':
@@ -232,10 +237,11 @@
                             $('#automation_command_property').append('<li data-context-value="Control.Toggle"><a>Control.Toggle</a></li>');
                             break;
                             /*
-                                            case 'siren':
-                                            case 'dimmer':
-                                            case 'shutter':
-                                            case 'fan':*/
+                            case 'siren':
+                            case 'dimmer':
+                            case 'shutter':
+                            case 'fan':
+                            */
                         default:
                             $('#automation_command_property').append('<li data-context-value="Control.On"><a>Control.On</a></li>');
                             $('#automation_command_property').append('<li data-context-value="Control.Off"><a>Control.Off</a></li>');

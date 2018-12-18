@@ -24,7 +24,7 @@ Modules
     <Group>Scenes</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.747151Z</ActivationTime>
+    <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -55,7 +55,7 @@ Modules
     <Group>Scenes</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.751604Z</ActivationTime>
+    <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -129,8 +129,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.756227Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.712519Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:00.980633Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -261,8 +261,8 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.757419Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:34.019462Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:00.992854Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -403,8 +403,8 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Environment</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.758488Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:34.453266Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.093709Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -619,8 +619,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.761022Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.717372Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:00.975702Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -664,8 +664,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.761995Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.717265Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:00.982857Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1011,8 +1011,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.76346Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:34.415507Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.089343Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1139,8 +1139,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.76461Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.730942Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:00.991095Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1236,8 +1236,8 @@ Program.GoBackground();</ScriptSource>
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.766461Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.796477Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.089436Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1266,7 +1266,7 @@ shown as hyperlink buttons in the control page.</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.76799Z</ActivationTime>
+    <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -1529,10 +1529,25 @@ while (Program.IsEnabled)
     <Description>Collects and display information about
 device status and energy consumption.</Description>
     <Group>Energy Management</Group>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <Property>EnergyManagement.MonitorStatus</Property>
+        <Description>Monitor status</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>EnergyManagement.MonitorWatts</Property>
+        <Description>Monitor watts</Description>
+      </ProgramFeature>
+    </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.769723Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.142451Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1678,8 +1693,8 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.771293Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.76508Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.013528Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1905,8 +1920,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.772959Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.774778Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.013641Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2139,7 +2154,7 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.775416Z</ActivationTime>
+    <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -2347,8 +2362,8 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.776701Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:33.903108Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.047763Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2431,21 +2446,14 @@ Program.Run();
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable control by IR remote", "checkbox")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle module with IR button (enter code)", "capture:Receiver.RawData")
-  .AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "capture:Receiver.RawData")
-  .AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "capture:Receiver.RawData")
-  .AddOption("DimmerInterval", "5", "4. Dimming step", "slider:5:50:5")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable remote control", "checkbox")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerUpCode", "Bright", "1. Bright button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerDownCode", "Dim", "2. Dim button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerInterval", "10", "4. Dimming step", "slider:5:50:5")
   .Run();
 </ScriptSetup>
-    <ScriptSource>// 
-// Code adapted from: http://www.homegenie.it/forum/index.php?topic=950.0
-//
-// Allows adding conditional IR code for Lights, Switches and Dimmers.
-// Also let you dim last light using Up/Down button which you can define in configuration
-// 
-
-var dimmerInterval = Program.Option("DimmerInterval");
+    <ScriptSource>var dimmerInterval = Program.Option("DimmerInterval");
 var dimmerUp = Program.Option("DimmerUpCode");
 var dimmerDown = Program.Option("DimmerDownCode");
 var irControlModules = Modules.WithFeature("HomeGenie.IRControler.Enable");
@@ -2455,36 +2463,44 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
   {
     var irData = parameter;
     var lastButton = module.Parameter("IrController.LastButton");
+    var lastIdle = module.Parameter("IrController.LastIdle");
+    var dimStep = dimmerInterval.DecimalValue;
+
     if (irData.Value != "") 
     {
-      if (lastButton.Value != "" &amp;&amp; (irData.Value == dimmerUp.Value || irData.Value == dimmerDown.Value)) 
+      if (lastButton.Value != "" &amp;&amp; lastIdle.IdleTime &gt; 0.25 &amp;&amp; (irData.Value == dimmerUp.Value || irData.Value == dimmerDown.Value))
       {
         irControlModules.Each((m) =&gt; {
-          if (m.Parameter("HomeGenie.IRControler.IRCode").Value == lastButton.Value) 
+          var moduleButton = m.Parameter("HomeGenie.IRControler.IRCode");
+          if (moduleButton.Value == lastButton.Value) 
           {
-            var level = m.Level;
-            if (irData.Value == dimmerUp.Value &amp;&amp; level &lt; 100) 
+            var level = m.Level * 100D;
+            if (irData.Value == dimmerUp.Value) 
             {
-              level += dimmerInterval.DecimalValue;
-              m.Level = (level &gt; 100 ? 100 : level);
-              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dimmer value: " + level);
+              level += dimStep;
+              m.Level = (level &gt;= 100 ? 100 : level);
+              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Bright (" + m.Level + ")");
             }
-            else if (irData.Value == dimmerDown.Value &amp;&amp; level &gt; dimmerInterval.DecimalValue) 
+            else if (irData.Value == dimmerDown.Value) 
             {
-              level -= dimmerInterval.DecimalValue;
-              m.Level = (level &lt; dimmerInterval.DecimalValue ? dimmerInterval.DecimalValue : level);
-              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dimmer value: " + level);
+              level -= dimStep;
+              m.Level = (level &lt;= dimStep ? dimStep : level);
+              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
             }
+            lastIdle.Value = "0"; 
           }
           return false; // do not break, continue iterating...
         });
       }
       else
       {
+        if (lastIdle.IdleTime &gt; 0.5)
         irControlModules.Each((m) =&gt; {
-          if (m.Parameter("HomeGenie.IRControler.IRCode").Value == irData.Value) 
+          var moduleButton = m.Parameter("HomeGenie.IRControler.IRCode");
+          if (moduleButton.Value == irData.Value) 
           {
             lastButton.Value = irData.Value;
+            lastIdle.Value = "1"; 
             m.Toggle();
             Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;toggled.");
           }
@@ -2500,10 +2516,9 @@ Program.GoBackground();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
-    <Name>IR Remote Controller</Name>
-    <Description>Control module using an IR remote.
-When you press the assigned remote button, it will toggle the module on/off.
-Also it lets you dim last addressed module using Up/Down button which can be defined through program's configuration options.</Description>
+    <Name>Remote Control</Name>
+    <Description>Toggle and dim the module using a Remote Control (IR or RF).
+Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; page.</Description>
     <Group>Lights</Group>
     <Features>
       <ProgramFeature>
@@ -2511,19 +2526,19 @@ Also it lets you dim last addressed module using Up/Down button which can be def
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.IRControler.Enable</Property>
-        <Description>Enable control by IR remote</Description>
+        <Description>Enable remote control</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>capture:Receiver.RawData</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.IRControler.IRCode</Property>
-        <Description>Toggle module with IR button (enter code)</Description>
+        <Description>Toggle button (enter code)</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.77799Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:34.024702Z</TriggerTime>
+    <ActivationTime>2018-12-18T23:30:16.958412Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2649,8 +2664,8 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.779063Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:34.145858Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2018-12-18T23:18:01.064483Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2832,8 +2847,8 @@ function initialize() {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.80703Z</ActivationTime>
-    <TriggerTime>2017-08-18T08:48:34.358831Z</TriggerTime>
+    <ActivationTime>2018-12-18T23:18:00.851046Z</ActivationTime>
+    <TriggerTime>2018-12-18T23:18:01.269918Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2852,7 +2867,7 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.807897Z</ActivationTime>
+    <ActivationTime>2018-12-18T23:18:00.851075Z</ActivationTime>
     <TriggerTime>2017-08-06T18:05:43.555555Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2874,7 +2889,7 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.808025Z</ActivationTime>
+    <ActivationTime>2018-12-18T23:18:00.851101Z</ActivationTime>
     <TriggerTime>2016-06-18T13:58:14.256339Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2899,7 +2914,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.808188Z</ActivationTime>
+    <ActivationTime>2018-12-18T23:18:00.851128Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2926,7 +2941,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-09-28T16:31:57.808317Z</ActivationTime>
+    <ActivationTime>2018-12-18T23:18:00.851162Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>

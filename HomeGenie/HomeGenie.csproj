@@ -131,11 +131,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.1.0.5\lib\MIG.dll</HintPath>
+      <HintPath>packages\MIG.1.0.6\lib\MIG.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MIG.HomeAutomation, Version=1.0.6918.41423, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.HomeAutomation.1.0.4\lib\MIG.HomeAutomation.dll</HintPath>
+    <Reference Include="MIG.HomeAutomation, Version=1.0.6926.36522, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.HomeAutomation.1.0.7\lib\MIG.HomeAutomation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG.Protocols, Version=1.0.6841.32282, Culture=neutral, PublicKeyToken=null">
@@ -230,7 +230,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="XTenLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\XTenLib.1.0.11\lib\XTenLib.dll</HintPath>
+      <HintPath>packages\XTenLib.1.0.12\lib\XTenLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ZWaveLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">

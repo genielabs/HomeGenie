@@ -668,7 +668,7 @@ namespace HomeGenie.Service.Logging
                     var parameter = module.Properties[p];
                     if (parameter.Statistics.Values.Count > 0)
                     {
-                        var values = parameter.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= end.Ticks && sv.Timestamp.Ticks > parameter.Statistics.LastProcessedTimestap.Ticks));
+                        var values = parameter.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= end.Ticks && sv.Timestamp.Ticks > parameter.Statistics.LastProcessedTimestamp.Ticks));
                         if (values.Count > 0)
                         {
                             double average = (values.Sum(d => d.Value) / values.Count);
@@ -695,7 +695,7 @@ namespace HomeGenie.Service.Logging
                                 }
                                 var dbCommand = dbConnection.CreateCommand();
                                 // "TimeStart","TimeEnd","Domain","Address","Parameter","AverageValue", "CustomData"
-                                dbCommand.Parameters.Add(new SQLiteParameter("@timestart", DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap)));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@timestart", DateTimeToSQLite(parameter.Statistics.LastProcessedTimestamp)));
                                 dbCommand.Parameters.Add(new SQLiteParameter("@timeend", DateTimeToSQLite(end)));
                                 dbCommand.Parameters.Add(new SQLiteParameter("@domain", module.Domain));
                                 dbCommand.Parameters.Add(new SQLiteParameter("@address", module.Address));
@@ -721,7 +721,7 @@ namespace HomeGenie.Service.Logging
                             //
                             // reset statistics history sample
                             //
-                            parameter.Statistics.LastProcessedTimestap = end;
+                            parameter.Statistics.LastProcessedTimestamp = end;
                             parameter.Statistics.Values.Clear();
                         }
                     }
