@@ -127,7 +127,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.1.0.7\lib\MIG.dll</HintPath>
+      <HintPath>packages\MIG.1.0.8\lib\MIG.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG.HomeAutomation, Version=1.0.6926.36522, Culture=neutral, PublicKeyToken=null">
