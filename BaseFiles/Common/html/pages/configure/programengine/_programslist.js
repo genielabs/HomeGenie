@@ -433,7 +433,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         $('#configure_programslist').listview();
         $('#configure_programslist').listview('refresh');
         //
-        $("#configure_programslist li a").bind("click", function () {
+        $('#configure_programslist li a.programitem').bind("click", function () {
             HG.WebApp.ProgramEdit._CurrentProgram.Domain = $(this).attr('data-program-domain');
             HG.WebApp.ProgramEdit._CurrentProgram.Address = $(this).attr('data-program-address');
             //$$.UpdateOptionsPopup();
