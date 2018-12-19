@@ -273,9 +273,9 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
             }
 
             $('#opt-zwave-nodeinformation-overview').html(addinfo + infotext);
-            if (zwaveNode.imageUrl !== '') {
-                $('#opt-zwave-nodeinformation-overview').append('<img src="' + zwaveNode.imageUrl + '" height="100" style="position:absolute; top:25px; right:10px; border:solid 2px; padding:1px">');
-            }
+            //if (zwaveNode.imageUrl !== '') {
+            //    $('#opt-zwave-nodeinformation-overview').append('<img src="' + zwaveNode.imageUrl + '" height="100" style="position:absolute; top:25px; right:10px; border:solid 2px; padding:1px">');
+            //}
 
 
             //$('#configassoc-gid').attr('min', 1);

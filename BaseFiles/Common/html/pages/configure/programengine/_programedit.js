@@ -254,7 +254,9 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
         isClean = isClean && ($$._CurrentProgram.Name === $('#automation_programname').val());
         isClean = isClean && ($$._CurrentProgram.Description === $('#automation_programdescription').val());
         isClean = isClean && ($$._CurrentProgram.AutoRestartEnabled === $('#automation_program_autorestartenabled').is(':checked') );
-        isClean = isClean && ($$._CurrentProgram.ConditionType === $('#automation_conditiontype').val());
+        if ($$._CurrentProgram.Type.toLowerCase() == 'wizard') {
+            isClean = isClean && ($$._CurrentProgram.ConditionType === $('#automation_conditiontype').val());
+        }
         isClean = isClean && editor1.isClean() && editor2.isClean() && editor3.isClean();
         // TODO: add checking of Wizard type programs Conditions and Commands too
         return isClean;
@@ -433,6 +435,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
                 $.mobile.loading('hide');
                 editor1.markClean();
                 editor2.markClean();
+                editor3.markClean();
                 $('#configure_program_editorcompilecode').removeClass('ui-disabled');
                 $('#configure_program_editorcompilecode2').removeClass('ui-disabled');
                 if (response.trim() != '' && response.trim() != '[]') {

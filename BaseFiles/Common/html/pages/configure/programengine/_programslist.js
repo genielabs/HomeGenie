@@ -436,7 +436,9 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         $("#configure_programslist li a").bind("click", function () {
             HG.WebApp.ProgramEdit._CurrentProgram.Domain = $(this).attr('data-program-domain');
             HG.WebApp.ProgramEdit._CurrentProgram.Address = $(this).attr('data-program-address');
-            $$.UpdateOptionsPopup();
+            //$$.UpdateOptionsPopup();
+            $$.EditProgram();
+            $.mobile.changePage($('#page_automation_editprogram'), {transition: 'fade', changeHash: true});
         });
     };
 
@@ -585,6 +587,10 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 theme: 'ambiance'
             });
             $(editor3.getWrapperElement()).hide();
+            // mark clean
+            editor1.markClean();
+            editor2.markClean();
+            editor3.markClean();
         }
         $('#automation_programgroup').empty();
         $('#automation_programgroup').append('<option value="">(select program group)</option>');

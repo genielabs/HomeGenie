@@ -2132,7 +2132,7 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>IR Remote Controller</Name>
+    <Name>Remote Control</Name>
     <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2140,31 +2140,31 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.DimmerDownCode</Name>
-        <Value>rOoqqCUH8b8OMN93i0h4IfQTsgLVedpR3wqp4y6PZQ8=</Value>
-        <Description>2. Dimmer Down (enter IR button code)</Description>
+        <Value>yYAoIpgWG6o05SodrB50kw==</Value>
+        <Description>2. Dim button (enter code)</Description>
         <FieldType>capture:Receiver.RawData</FieldType>
-        <UpdateTime>2017-08-17T17:52:04.953115Z</UpdateTime>
+        <UpdateTime>2018-12-19T01:53:33.541323Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.DimmerInterval</Name>
-        <Value>Ri1VdDW6uIVO4CPS82EASw==</Value>
+        <Value>evhKWvO6ao3ifrLl95fkRA==</Value>
         <Description>4. Dimming step</Description>
         <FieldType>slider:5:50:5</FieldType>
-        <UpdateTime>2017-08-17T17:52:04.953444Z</UpdateTime>
+        <UpdateTime>2018-12-19T01:53:33.541488Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.DimmerUpCode</Name>
-        <Value>rOoqqCUH8b8OMN93i0h4IQGQsBoLRvuWI49cvC2r7KA=</Value>
-        <Description>1. Dimmer Up (enter IR button code)</Description>
+        <Value>iIWYhk1toq6yVJaYMVGEuQ==</Value>
+        <Description>1. Bright button (enter code)</Description>
         <FieldType>capture:Receiver.RawData</FieldType>
-        <UpdateTime>2017-08-17T17:52:04.95377Z</UpdateTime>
+        <UpdateTime>2018-12-19T01:53:33.541651Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Idle</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2017-08-17T17:51:57.583017Z</UpdateTime>
+        <UpdateTime>2018-12-19T01:53:27.046206Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

@@ -130,7 +130,7 @@ Program.GoBackground();</ScriptSource>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:00.980633Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.635204Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -262,7 +262,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:00.992854Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.711178Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -404,7 +404,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.093709Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.739484Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -620,7 +620,7 @@ Program.GoBackground();</ScriptSource>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:00.975702Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.635082Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -665,7 +665,7 @@ Program.GoBackground();</ScriptSource>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:00.982857Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.631477Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1012,7 +1012,7 @@ while (Program.IsEnabled)
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.089343Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.654851Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1140,7 +1140,7 @@ Program.GoBackground();</ScriptSource>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:00.991095Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.647601Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1237,7 +1237,7 @@ Program.GoBackground();</ScriptSource>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.089436Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.668165Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1547,7 +1547,7 @@ device status and energy consumption.</Description>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.142451Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.687518Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1694,7 +1694,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.013528Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.6627Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1921,7 +1921,7 @@ while (Program.IsEnabled)
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.013641Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.674946Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2363,7 +2363,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.047763Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.699593Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2448,8 +2448,8 @@ Program.Run();
     <ScriptSetup>Program
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable remote control", "checkbox")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle button (enter code)", "capture:Receiver.RawData")
-  .AddOption("DimmerUpCode", "Bright", "1. Bright button (enter code)", "capture:Receiver.RawData")
-  .AddOption("DimmerDownCode", "Dim", "2. Dim button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerUpCode", "ButtonUp", "1. Bright button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerDownCode", "ButtonDown", "2. Dim button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerInterval", "10", "4. Dimming step", "slider:5:50:5")
   .Run();
 </ScriptSetup>
@@ -2484,7 +2484,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
             else if (irData.Value == dimmerDown.Value) 
             {
               level -= dimStep;
-              m.Level = (level &lt;= dimStep ? dimStep : level);
+              m.Level = (level &lt;= 5 ? 5 : level);
               Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
             }
             lastIdle.Value = "0"; 
@@ -2537,7 +2537,7 @@ Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; p
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-18T23:30:16.958412Z</ActivationTime>
+    <ActivationTime>2018-12-19T01:53:14.795429Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -2665,7 +2665,7 @@ When changing the number of zone sensors, program restart is required.</Descript
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-18T23:18:01.064483Z</TriggerTime>
+    <TriggerTime>2018-12-19T01:34:15.73514Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2847,8 +2847,8 @@ function initialize() {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-18T23:18:00.851046Z</ActivationTime>
-    <TriggerTime>2018-12-18T23:18:01.269918Z</TriggerTime>
+    <ActivationTime>2018-12-19T01:34:15.517353Z</ActivationTime>
+    <TriggerTime>2018-12-19T01:34:15.964753Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2867,7 +2867,7 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-18T23:18:00.851075Z</ActivationTime>
+    <ActivationTime>2018-12-19T01:34:15.517384Z</ActivationTime>
     <TriggerTime>2017-08-06T18:05:43.555555Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2889,8 +2889,8 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-18T23:18:00.851101Z</ActivationTime>
-    <TriggerTime>2016-06-18T13:58:14.256339Z</TriggerTime>
+    <ActivationTime>2018-12-19T01:34:15.517411Z</ActivationTime>
+    <TriggerTime>2018-12-19T01:45:08.185798Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2914,7 +2914,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-18T23:18:00.851128Z</ActivationTime>
+    <ActivationTime>2018-12-19T01:34:15.517439Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2941,7 +2941,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-18T23:18:00.851162Z</ActivationTime>
+    <ActivationTime>2018-12-19T01:34:15.517473Z</ActivationTime>
     <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
