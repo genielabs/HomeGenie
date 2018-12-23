@@ -59,6 +59,8 @@ namespace HomeGenie.Automation.Engines
             "HomeGenie.Automation",
             "HomeGenie.Data",
             "MIG",
+            "CM19Lib",
+            "X10 = CM19Lib.X10",
             "Innovative.Geometry",
             "Innovative.SolarCalculator",
             "Raspberry",
@@ -222,6 +224,7 @@ namespace HomeGenie.Automation.Scripting
 
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MIG.dll");
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "mig", "CM19Lib.dll"));
             compilerParams.ReferencedAssemblies.Add("NLog.dll");
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
 

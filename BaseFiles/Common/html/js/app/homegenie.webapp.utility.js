@@ -135,8 +135,9 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
     {
         var module = null;
         for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
-            if (HG.WebApp.Data.Modules[m].Domain == domain && HG.WebApp.Data.Modules[m].Address == address) {
-                module = HG.WebApp.Data.Modules[m];
+            var cm = HG.WebApp.Data.Modules[m];
+            if (cm != null && cm.Domain == domain && cm.Address == address) {
+                module = cm;
                 break;
             }
         }
@@ -147,7 +148,8 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
     {
         var moduleidx = -1;
         for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
-            if (HG.WebApp.Data.Modules[m].Domain == domain && HG.WebApp.Data.Modules[m].Address == address) {
+            var cm = HG.WebApp.Data.Modules[m];
+            if (cm != null && cm.Domain == domain && cm.Address == address) {
                 moduleidx = m;
                 break;
             }

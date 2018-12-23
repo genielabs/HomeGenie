@@ -70,7 +70,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CM19Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\CM19Lib.1.0.4\lib\CM19Lib.dll</HintPath>
+      <HintPath>packages\CM19Lib.1.1.2\lib\CM19Lib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d">
@@ -126,8 +126,8 @@
       <HintPath>packages\MIG.1.0.8\lib\MIG.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MIG.HomeAutomation, Version=1.0.6927.31715, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.HomeAutomation.1.0.8\lib\MIG.HomeAutomation.dll</HintPath>
+    <Reference Include="MIG.HomeAutomation, Version=1.0.6931.37409, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.HomeAutomation.1.0.9\lib\MIG.HomeAutomation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG.Protocols, Version=1.0.6841.32282, Culture=neutral, PublicKeyToken=null">

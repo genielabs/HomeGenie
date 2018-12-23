@@ -87,9 +87,22 @@
                 if (module != null) {
                     HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                     HG.WebApp.Control.RefreshGroupIndicators();
+                    $$.SendEventToUi(module, event);
+                } else {
+                    console.log("Adding module:", event.Domain, event.Source, "...");
+                    HG.Configure.Modules.Get(event.Domain, event.Source, function (data) {
+                        try {
+                            module = eval('[' + data + ']')[0];
+                            if (module != null) {
+                                HG.WebApp.Data.Modules.push(module);
+                                $$.SendEventToUi(module, event);
+                                console.log("...done.");
+                            }
+                        } catch (e) {
+                            console.log("...error!", e);
+                        }
+                    });
                 }
-                // send message to UI for updating UI elements related to this event (widgets, popup and such)
-                $$.SendEventToUi(module, event);
             }
             //
             if (event.Domain == 'MIGService.Interfaces') {
