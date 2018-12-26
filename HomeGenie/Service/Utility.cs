@@ -101,16 +101,16 @@ namespace HomeGenie.Service
                 base.Add(value);
         }
 
-        public new void RemoveAll(Predicate<T> predicate)
+        public new int RemoveAll(Predicate<T> predicate)
         {
             lock (syncLock)
-                base.RemoveAll(predicate);
+                return base.RemoveAll(predicate);
         }
 
-        public new void Remove(T item)
+        public new bool Remove(T item)
         {
             lock (syncLock)
-                base.Remove(item);
+                return base.Remove(item);
         }
 
         public new void Sort(Comparison<T> comparison)

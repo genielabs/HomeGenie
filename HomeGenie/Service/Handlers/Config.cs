@@ -755,17 +755,14 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             case "Modules.Delete":
-                var deletedModule = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
-                if (deletedModule != null)
-                {
-                    homegenie.Modules.Remove(deletedModule);
-                }
+                homegenie.Modules.RemoveAll(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                homegenie.VirtualModules.RemoveAll(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                 request.ResponseData = new ResponseText("OK");
                 //
                 homegenie.UpdateModulesDatabase();
                 break;
 
-            case "Stores.List":
+            case "Stores.List":    
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                     if (module != null)
