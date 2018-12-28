@@ -70,7 +70,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CM19Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\CM19Lib.1.1.3\lib\CM19Lib.dll</HintPath>
+      <HintPath>packages\CM19Lib.1.1.6\lib\CM19Lib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d">
@@ -126,8 +126,8 @@
       <HintPath>packages\MIG.1.0.9\lib\MIG.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MIG.HomeAutomation, Version=1.0.6933.24089, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.HomeAutomation.1.0.10\lib\MIG.HomeAutomation.dll</HintPath>
+    <Reference Include="MIG.HomeAutomation, Version=1.0.6936.41374, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.HomeAutomation.1.0.12\lib\MIG.HomeAutomation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG.Protocols, Version=1.0.6841.32282, Culture=neutral, PublicKeyToken=null">
@@ -222,7 +222,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="XTenLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\XTenLib.1.0.13\lib\XTenLib.dll</HintPath>
+      <HintPath>packages\XTenLib.1.0.15\lib\XTenLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ZWaveLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
