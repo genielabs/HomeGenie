@@ -126,8 +126,8 @@
       <HintPath>packages\MIG.1.0.9\lib\MIG.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MIG.HomeAutomation, Version=1.0.6936.41374, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.HomeAutomation.1.0.12\lib\MIG.HomeAutomation.dll</HintPath>
+    <Reference Include="MIG.HomeAutomation, Version=1.0.6937.38455, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.HomeAutomation.1.0.13\lib\MIG.HomeAutomation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG.Protocols, Version=1.0.6841.32282, Culture=neutral, PublicKeyToken=null">
