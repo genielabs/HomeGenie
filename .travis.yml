@@ -1,5 +1,6 @@
 language: csharp
 mono: 4.6.2
+dist: xenial
 solution: HomeGenie_Linux/HomeGenie_Linux.sln
 before_install: 
 install:
