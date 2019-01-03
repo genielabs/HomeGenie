@@ -84,7 +84,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="UPnP, Version=1.0.5772.30730, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\HomeGenie\packages\MIG.Protocols.1.0.0\lib\UPnP.dll</HintPath>
+      <HintPath>..\HomeGenie\packages\MIG.Protocols.1.0.2\lib\UPnP.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
