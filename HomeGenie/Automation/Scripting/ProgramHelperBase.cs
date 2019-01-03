@@ -22,12 +22,12 @@ namespace HomeGenie
         /// <summary>
         /// Program title field (runtime variable)
         /// </summary>
-        public string Title;
+        public string Title = "";
         
         /// <summary>
         /// Program description field (runtime variable)
         /// </summary>
-        public string Description;
+        public string Description = "";
 
         /// <summary>
         /// Gets the logger object.

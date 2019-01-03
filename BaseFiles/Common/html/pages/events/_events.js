@@ -84,7 +84,9 @@
             if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {
                 // update event source (the module that is raising this event)
                 module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
-                if (module != null) {
+                if (event.Property == 'HomeGenie.Status') {
+                    $$.SendEventToUi(module, event);
+                } else if (module != null) {
                     HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                     HG.WebApp.Control.RefreshGroupIndicators();
                     $$.SendEventToUi(module, event);

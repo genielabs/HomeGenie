@@ -550,6 +550,35 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
+        /// Display UI notification message from current program using the default `Program.Title`.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // Display `Hello world!` popup with the default `Program.Title `
+        /// Program.Notify("Hello world!");
+        /// </code>
+        /// </example>
+        public ProgramHelper Notify(string message)
+        {
+            dynamic notification = new ExpandoObject();
+            notification.Title = Title;
+            notification.Message = message;
+            string serializedMessage = JsonConvert.SerializeObject(notification);
+            homegenie.RaiseEvent(
+                myProgramId,
+                Domains.HomeAutomation_HomeGenie_Automation,
+                myProgramId.ToString(),
+                "Automation Program",
+                Properties.ProgramNotification,
+                serializedMessage
+            );
+            return this;
+        }
+
+        /// <summary>
         /// Display UI notification message from current program.
         /// </summary>
         /// <param name="title">Title.</param>
@@ -587,6 +616,16 @@ namespace HomeGenie.Automation.Scripting
         public ProgramHelper Notify(string title, string message, params object[] paramList)
         {
             return this.Notify(title, String.Format(message, paramList));
+        }
+
+        /// <summary>
+        /// Display UI notification message from current program.
+        /// </summary>
+        /// <param name="message">Formatted message.</param>
+        /// <param name="paramList">Format parameter list.</param>
+        public ProgramHelper Notify(string message, params object[] paramList)
+        {
+            return this.Notify(Title, String.Format(message, paramList));
         }
 
         /// <summary>

@@ -63,6 +63,7 @@ namespace HomeGenie.Automation.Engines
             "X10 = CM19Lib.X10",
             "Innovative.Geometry",
             "Innovative.SolarCalculator",
+            "OpenSource.UPnP",
             "Raspberry",
             "Raspberry.Timers",
             "Raspberry.IO",
@@ -90,7 +91,7 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.GeneralPurpose.Behaviors",
             "Raspberry.IO.GeneralPurpose.Configuration",
             "Raspberry.IO.InterIntegratedCircuit",
-            "Raspberry.IO.SerialPeripheralInterface",
+            "Raspberry.IO.SerialPeripheralInterface"
         };
 
         public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
@@ -230,6 +231,8 @@ namespace HomeGenie.Automation.Scripting
 
             compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");
             compilerParams.ReferencedAssemblies.Add("NetClientLib.dll");
+
+            compilerParams.ReferencedAssemblies.Add("UPnP.dll");
 
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {
