@@ -1735,50 +1735,6 @@ Program.GoBackground();</ScriptSource>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "capture:Receiver.RawData");
-Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event", "capture:Receiver.RawData");
-Program.AddVirtualModules("HomeAutomation.X10.RF", "Sensor", "homegenie/generic/sensor", 1, 16);
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>var x10rfModules = Modules.InDomain("HomeAutomation.X10.RF");
-// We want to do further processing whenever a module prop changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-  if (property.Name == "Receiver.RawData" &amp;&amp; module.Instance.Domain == "HomeAutomation.X10")
-  {
-    x10rfModules.Each((m)=&gt;{
-      var rfon = m.Parameter("X10RFString.LevelOn").Value;
-      var rfoff = m.Parameter("X10RFString.LevelOff").Value;
-      if (rfon != "" &amp;&amp; rfon == property.Value)
-      {
-        m.RaiseEvent("Status.Level", "1", "X10 Virtual RF Module");
-        return true;
-      }
-      else if (rfoff != "" &amp;&amp; rfoff == property.Value)
-      {
-        m.RaiseEvent("Status.Level", "0", "X10 Virtual RF Module");
-        return true;
-      }
-      return false;
-    });
-  }
-  return true;
-});
-
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>121</Address>
-    <Name>X10 RF Virtual Modules Mapper</Name>
-    <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
-    <Group>X10</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
     <ScriptSetup>Program
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
