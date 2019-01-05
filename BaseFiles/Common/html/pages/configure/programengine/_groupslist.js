@@ -46,20 +46,18 @@ HG.WebApp.AutomationGroupsList = HG.WebApp.AutomationGroupsList || new function(
         $$.groupList.empty();
 
         var ifaceZwave = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.ZWave');
-        var ifaceInsteon = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.Insteon');
-        var ifaceX10 = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.X10');
-        var ifaceW800rf = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.W800RF');
 
         var i = 0;
-        var hiddenGroup = ' style="display:none"';
+        var HiddenGroup = ' style="display:none"';
         var html = '<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_grouplist') + '</li>';
         for (; i < HG.WebApp.Data.AutomationGroups.length; i++) {
             var groupName = HG.WebApp.Data.AutomationGroups[i].Name;
             var itemVisibility = '';
             // hide non valid entries for the running configuration
-            if ((groupName == 'Raspberry Pi' || groupName == 'CubieTruck') && HOST_SYSTEM.substring(0, 3) == 'Win') itemVisibility = hiddenGroup;
-            else if (groupName == 'X10' && ifaceX10 == null && ifaceInsteon == null && ifaceW800rf == null) itemVisibility = hiddenGroup;
-            else if (groupName == 'Z-Wave' && ifaceZwave == null) itemVisibility = hiddenGroup;
+            if ((groupName == 'Raspberry Pi' || groupName == 'CubieTruck') && HOST_SYSTEM.substring(0, 3) == 'Win')
+                itemVisibility = HiddenGroup;
+            else if (groupName == 'Z-Wave' && ifaceZwave == null)
+                itemVisibility = HiddenGroup;
             // count modules
             var modulescount = 0;
             for (p = 0; p < HG.WebApp.Data.Programs.length; p++) {

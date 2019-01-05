@@ -656,6 +656,20 @@
         <UpdateTime>2017-08-17T17:52:04.936647Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>UpnpDevice.EmulateWemo</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T21:11:34.151343Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.Info.UDN</Name>
+        <Value>jxnhnFd4tARYeMGQOOmIh3x3Qt3fA821ZeSuX9JG8qiodNiXMDfPBC06KINqyRyq</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T21:11:34.151959Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
         <Value>p7qzGq0tASFINdhHedzWJA==</Value>
         <Description />
@@ -2751,6 +2765,20 @@
         <Description />
         <FieldType />
         <UpdateTime>2017-08-17T17:52:04.962826Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.EmulateWemo</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T20:58:51.231265Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.Info.UDN</Name>
+        <Value>EhIF43ElLs3hhBfGRKGaDkrlG843rvl/UnfvQ/AKXzIjZxrCESIO4owHGgcNOUao</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T20:58:51.231599Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>

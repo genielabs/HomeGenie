@@ -134,6 +134,177 @@ Program.GoBackground();</ScriptSource>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
+<ProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ScriptSetup>Program.Title = "UPnP Emulator";
+// Add "Emulate UPnP device" feature
+Program.AddFeature(
+  description:
+    // Description of this feature
+  	"Emulate UPnP device (WeMo)",
+  parameterName:
+    // Name of the module's parameter where to store this feature data
+  	"UpnpDevice.EmulateWemo",
+  type:
+    // Display in the UI as a checkbox
+  	"checkbox",
+  forDomains:
+    // Show this feature for all domains
+  	"",
+  forModuleTypes:
+    // Show this feature for all module types
+  	"Switch,Light,Dimmer"
+);
+// Run the 'Program Code'
+Program.Run();
+</ScriptSetup>
+  <ScriptSource>var FEATURE_EMULATE_WEMO = "UpnpDevice.EmulateWemo";
+var PARAM_UPNP_INFO_UDN = "UpnpDevice.Info.UDN";
+// List that holds allocated UPnP devices
+var upnpDevices = new Dictionary&lt;Module,UPnPDevice&gt;();
+
+Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{  
+  // Create the UPnP device to control the 'module'
+  var upnpDevice = UPnPDevice.CreateRootDevice(600, 2, null);
+  upnpDevice.StandardDeviceType = "urn:Belkin:device:controllee";
+  upnpDevice.ModelNumber = "3.1234";
+  // use the same ID even when restarted
+  if (module.HasParameter(PARAM_UPNP_INFO_UDN))
+  {
+    upnpDevice.UniqueDeviceName = module.Parameter(PARAM_UPNP_INFO_UDN).Value;
+  }
+  else
+  {
+    module.Parameter(PARAM_UPNP_INFO_UDN).Value = upnpDevice.UniqueDeviceName;
+  }
+  // Socket, Lightswitch - TODO: Insight, Motion
+  var modelName = "Socket";
+  upnpDevice.ModelDescription = "Belkin Plugin Socket 1.0";
+  if (module.Instance.DeviceType == ModuleTypes.Light || module.Instance.DeviceType == ModuleTypes.Dimmer)
+  {
+    modelName = "Lightswitch";
+    upnpDevice.ModelDescription = "Belkin Light Switch 1.0";
+  }
+  upnpDevice.ModelName = modelName;
+  // Prepend modelName (device type) to the UDN
+  upnpDevice.UniqueDeviceName = modelName + "-" + upnpDevice.UniqueDeviceName;
+  upnpDevice.FriendlyName = module.Instance.Name;
+  upnpDevice.Manufacturer = "Belkin International Inc.";
+  //upnpDevice.ManufacturerURL = "http://www.belkin.com";
+  upnpDevice.Major = 1; upnpDevice.Minor = 0;
+  upnpDevice.SerialNumber = "EMU-1234567890";
+
+  // Create an instance of the BasicEvent service
+  dynamic instance = new ExpandoObject();
+
+  // Declare the "BasicEvent1" service
+  var service = new UPnPService(
+    // Version
+    1.0,
+    // Service ID
+    "urn:Belkin:serviceId:basicevent1",
+    // Service Type
+    "urn:Belkin:service:basicevent:1", 
+    // Standard Service?
+    true,
+    // Service Object Instance
+    instance
+  );
+  //service.SCPDURL = "/eventservice.xml";
+  //service.ControlURL = "/upnp/control/basicevent1";
+  //service.EventURL = "/upnp/event/basicevent1";
+
+  string stateVarName = "BinaryState";
+  var stateVariable = new UPnPStateVariable(stateVarName, typeof(bool), true);
+  stateVariable.AddAssociation("GetBinaryState", stateVarName);
+  stateVariable.AddAssociation("SetBinaryState", stateVarName);
+  stateVariable.Value = false;
+  service.AddStateVariable(stateVariable);
+
+  instance.GetBinaryState = new Func&lt;bool&gt;(() =&gt; (bool)service.GetStateVariable(stateVarName) /* module.IsOn */);
+  instance.SetBinaryState = new Action&lt;int&gt;((BinaryState) =&gt; {
+    service.SetStateVariable(stateVarName, BinaryState != 0);
+    if (BinaryState == 1) module.On();
+    else module.Off();
+  });
+
+  // Add the methods
+  service.AddMethod("GetBinaryState", stateVarName);
+  service.AddMethod("SetBinaryState", stateVarName);
+
+  // Add the service
+  upnpDevice.AddService(service);
+  // Start the WeMo switch device UPnP simulator
+  upnpDevice.StartDevice();
+  
+  return upnpDevice;
+};
+
+When.ModuleParameterChanged((m, p)=&gt;{
+  // The checkbox option "UpnpDevice.EmulateWemo" has been changed
+  if (p.Is(FEATURE_EMULATE_WEMO))
+  {
+    // Remove the UPnP device if already allocated
+    if (upnpDevices.ContainsKey(m.Instance))
+    {
+      upnpDevices[m.Instance].StopDevice();
+      upnpDevices.Remove(m.Instance);
+      Program.Notify(Program.Title, "Removed UPnP device for {0}", m.Instance.Name);
+    }
+    // Check if the option is ON (not empty = On)
+    if (!String.IsNullOrEmpty(p.Value))
+    {
+      Program.Notify(Program.Title, "Added UPnP device for {0}", m.Instance.Name);
+      upnpDevices.Add(m.Instance, createUpnpModule(m));
+    }
+  }
+  else if (upnpDevices.ContainsKey(m.Instance) &amp;&amp; p.Is("Status.Level"))
+  {
+    // Update status level of the associated UPnP device 
+    upnpDevices[m.Instance].Services[0].SetStateVariable("BinaryState", (p.DecimalValue != 0));
+  }
+  return true;
+});
+
+When.ProgramStopping(()=&gt;{
+  // Stop allocated UPnP devices
+  foreach(var upnp in upnpDevices.Values)
+  {
+    Program.Notify(Program.Title, "Removed UPnP device for {0}", upnp.FriendlyName);
+    upnp.StopDevice();
+  }
+  return true;
+});
+
+// Allocates UPnP devices for modules with this option active
+Modules.WithFeature(FEATURE_EMULATE_WEMO).Each((m)=&gt;{
+  upnpDevices.Add(m.Instance, createUpnpModule(m));
+  return false; // continue iterating
+});
+
+// Continue running the program in the background
+Program.GoBackground();
+</ScriptSource>
+  <ScriptErrors>[]</ScriptErrors>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>20</Address>
+  <Name>UPnP Emulation</Name>
+  <Description>Make the device discoverable by third party applications and services supporting UPnP (Universal Plug and Play).</Description>
+  <Group>Devices and Things</Group>
+  <Features>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes>Switch,Light,Dimmer</ForTypes>
+      <Property>UpnpDevice.EmulateWemo</Property>
+      <Description>Emulate UPnP device (WeMo)</Description>
+    </ProgramFeature>
+  </Features>
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime>2019-01-05T20:52:06.08419Z</ActivationTime>
+  <TriggerTime>2019-01-05T20:52:06.120744Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>true</IsEnabled>
+</ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
   .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
@@ -621,51 +792,6 @@ Program.GoBackground();</ScriptSource>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime>2018-12-19T01:34:15.635082Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on", "checkbox");
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterIsChanging( (module, property) =&gt; {
-  if (module.HasFeature("X10.LevelFix") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
-  {
-    var level = module.Parameter("Status.Level");
-    var lastlevel = module.Parameter("Status.LastLevel");
-    //
-    bool justswitchedon = (level.DecimalValue &gt; 0 &amp;&amp; lastlevel.DecimalValue == 0);
-    lastlevel.Value = level.Value;
-    if (justswitchedon)
-    {
-      Program.Notify("X10 Auto Bright", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to 100%");
-      module.Command("Control.Bright").Set("100");
-      return false; // &lt;-- prevent ModuleParameterChanged event from being fired
-    }
-  }
-  return true; // &lt;-- continue routing event to other listeners
-});
-
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>84</Address>
-    <Name>Set to 100% when switched on</Name>
-    <Description>Brighten a light to 100% when switched on.</Description>
-    <Group>X10</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>HomeAutomation.X10</ForDomains>
-        <ForTypes>Dimmer</ForTypes>
-        <Property>X10.LevelFix</Property>
-        <Description>Set level to 100% when switched on</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.631477Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
