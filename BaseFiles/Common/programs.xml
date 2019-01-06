@@ -134,8 +134,8 @@ Program.GoBackground();</ScriptSource>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
-<ProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ScriptSetup>Program.Title = "UPnP Emulator";
+<ProgramBlock>
+  <ScriptSetup>Program.Title = "UPnP Emulation";
 // Add "Emulate UPnP device" feature
 Program.AddFeature(
   description:
@@ -164,9 +164,7 @@ var upnpDevices = new Dictionary&lt;Module,UPnPDevice&gt;();
 
 Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{  
   // Create the UPnP device to control the 'module'
-  var upnpDevice = UPnPDevice.CreateRootDevice(600, 2, null);
-  upnpDevice.StandardDeviceType = "urn:Belkin:device:controllee";
-  upnpDevice.ModelNumber = "3.1234";
+  var upnpDevice = UPnPDevice.CreateRootDevice(3600, 1, null);
   // use the same ID even when restarted
   if (module.HasParameter(PARAM_UPNP_INFO_UDN))
   {
@@ -176,22 +174,30 @@ Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
   {
     module.Parameter(PARAM_UPNP_INFO_UDN).Value = upnpDevice.UniqueDeviceName;
   }
+  upnpDevice.ModelNumber = "3.1234";
   // Socket, Lightswitch - TODO: Insight, Motion
-  var modelName = "Socket";
-  upnpDevice.ModelDescription = "Belkin Plugin Socket 1.0";
+  var modelName = "";
   if (module.Instance.DeviceType == ModuleTypes.Light || module.Instance.DeviceType == ModuleTypes.Dimmer)
   {
     modelName = "Lightswitch";
+    upnpDevice.StandardDeviceType = "urn:Belkin:device:lightswitch";
     upnpDevice.ModelDescription = "Belkin Light Switch 1.0";
+  }
+  else
+  {
+    modelName = "Socket";
+    upnpDevice.StandardDeviceType = "urn:Belkin:device:controllee";
+    upnpDevice.ModelDescription = "Belkin Plugin Socket 1.0";
   }
   upnpDevice.ModelName = modelName;
   // Prepend modelName (device type) to the UDN
   upnpDevice.UniqueDeviceName = modelName + "-" + upnpDevice.UniqueDeviceName;
   upnpDevice.FriendlyName = module.Instance.Name;
   upnpDevice.Manufacturer = "Belkin International Inc.";
-  //upnpDevice.ManufacturerURL = "http://www.belkin.com";
+  upnpDevice.ManufacturerURL = "http://www.belkin.com";
   upnpDevice.Major = 1; upnpDevice.Minor = 0;
   upnpDevice.SerialNumber = "EMU-1234567890";
+  upnpDevice.UserAgentTag = "redsonic";
 
   // Create an instance of the BasicEvent service
   dynamic instance = new ExpandoObject();
@@ -209,9 +215,9 @@ Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
     // Service Object Instance
     instance
   );
-  //service.SCPDURL = "/eventservice.xml";
-  //service.ControlURL = "/upnp/control/basicevent1";
-  //service.EventURL = "/upnp/event/basicevent1";
+  service.ControlURL = "/upnp/control/basicevent1";
+  service.EventURL = "/upnp/event/basicevent1";
+  service.SCPDURL = "/eventservice.xml";
 
   string stateVarName = "BinaryState";
   var stateVariable = new UPnPStateVariable(stateVarName, typeof(bool), true);
@@ -300,8 +306,8 @@ Program.GoBackground();
     </ProgramFeature>
   </Features>
   <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2019-01-05T20:52:06.08419Z</ActivationTime>
-  <TriggerTime>2019-01-05T20:52:06.120744Z</TriggerTime>
+  <ActivationTime>2019-01-06T16:11:15.045621Z</ActivationTime>
+  <TriggerTime>2019-01-06T16:11:15.068212Z</TriggerTime>
   <Type>CSharp</Type>
   <IsEnabled>true</IsEnabled>
 </ProgramBlock>

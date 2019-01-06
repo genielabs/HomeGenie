@@ -83,8 +83,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UPnP, Version=1.0.6944.2407, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\HomeGenie\packages\MIG.Protocols.1.0.3\lib\UPnP.dll</HintPath>
+    <Reference Include="UPnP, Version=1.0.6945.32274, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\HomeGenie\packages\MIG.Protocols.1.0.5\lib\UPnP.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
