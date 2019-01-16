@@ -27,7 +27,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
     <ReleaseVersion>1.1</ReleaseVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -105,10 +105,6 @@
       <HintPath>packages\LibUsbDotNet.2.2.8\lib\LibUsbDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Dynamic, Version=1.2.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
       <HintPath>packages\DynamicLanguageRuntime.1.2.2\lib\net45\Microsoft.Dynamic.dll</HintPath>
@@ -132,6 +128,10 @@
     </Reference>
     <Reference Include="MIG.Protocols, Version=1.0.6945.30619, Culture=neutral, PublicKeyToken=null">
       <HintPath>packages\MIG.Protocols.1.0.5\lib\MIG.Protocols.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MQTTnet, Version=2.8.5.0, Culture=neutral, PublicKeyToken=b69712f52770c0a7">
+      <HintPath>packages\MQTTnet.2.8.5\lib\net452\MQTTnet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NCrontab">

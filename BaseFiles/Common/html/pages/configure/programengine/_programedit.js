@@ -77,6 +77,10 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
                 $$.CompileProgram();
                 return true;
             });
+            $('#configure_program_editoroptions').bind('click', function (event) {
+                HG.WebApp.ProgramsList.UpdateOptionsPopup();
+                return true;
+            });
             //
             $('#editprograms_actionmenu').on('popupbeforeposition', function (event) {
                 $$.RefreshProgramOptions();
@@ -363,6 +367,7 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
         $('[id=editprograms_actionmenu_compile]').each(function () {
             $(this).addClass('ui-disabled');
         });
+        $('#configure_program_editoroptions').hide();
         //
         setTimeout(function () {
             HG.Automation.Programs.List(function () {
@@ -393,6 +398,10 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
                         $$._CurrentProgram.ScriptErrors = '';
                     }
                     $$.RefreshProgramEditorTitle();
+                }
+                if (HG.Automation.Programs.HasConfigurationOptions($$._CurrentProgram.Address))
+                {
+                    $('#configure_program_editoroptions').show();
                 }
             });
         }, 500);

@@ -8,7 +8,7 @@
     <RootNamespace>Common</RootNamespace>
     <AssemblyName>Common</AssemblyName>
     <ReleaseVersion>1.1</ReleaseVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -3419,5 +3419,11 @@
     <Folder Include="html\js\app\" />
     <Folder Include="html\pages\configure\scheduler\templates\" />
     <Folder Include="html\css\fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MQTTnet, Version=2.8.5.0, Culture=neutral, PublicKeyToken=b69712f52770c0a7">
+      <HintPath>..\..\HomeGenie\packages\MQTTnet.2.8.5\lib\net452\MQTTnet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 </Project>

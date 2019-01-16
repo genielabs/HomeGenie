@@ -52,6 +52,20 @@ HG.Automation.Programs = HG.Automation.Programs || new function(){ var $$ = this
             }
         });
     };
+    
+    $$.HasConfigurationOptions = function(programAddress) {
+        var hasOptions = false;
+        var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', programAddress);
+        if (module != null) {
+            for (var p = 0; p < module.Properties.length; p++) {
+                if (module.Properties[p].Name.substring(0, 17) === 'ConfigureOptions.') {
+                    hasOptions = true;
+                    break;
+                }
+            }
+        }
+        return hasOptions;
+    };
 
     $$.Toggle = function (pid, options, callback) {
         $.ajax({

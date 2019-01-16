@@ -153,38 +153,29 @@ HG.WebApp.SystemSettings = HG.WebApp.SystemSettings || new function () { var $$ 
                 var showGroup = true;
                 $.each(HG.WebApp.Data.Programs, function (pidx, prg) {
                     if (prg.IsEnabled && prg.Group == grp.Name) {
-                        var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prg.Address);
-                        if (module != null) {
-                            var hasOptions = false;
-                            for (var p = 0; p < module.Properties.length; p++) {
-                                if (module.Properties[p].Name.substring(0, 17) == 'ConfigureOptions.') {
-                                    hasOptions = true;
-                                    break;
-                                }
+                        if (HG.Automation.Programs.HasConfigurationOptions(prg.Address))
+                        {
+                            if (showGroup) {
+                                interfaceList.append('<h4>' + grp.Name + '</h4>');
+                                showGroup = false;
                             }
-                            if (hasOptions) {
-                                if (showGroup) {
-                                    interfaceList.append('<h4>' + grp.Name + '</h4>');
-                                    showGroup = false;
-                                }
-                                var title = HG.WebApp.Locales.GetProgramLocaleString(prg.Address, 'Title', prg.Name);
-                                var desc = (prg.Description != 'undefined' && prg.Description != null ? prg.Description : '');
-                                desc = HG.WebApp.Locales.GetProgramLocaleString(prg.Address, 'Description', desc).replace(/\n/g, '<br />');
-                                var item = $('<div data-role="collapsible" data-inset="true" class="ui-mini" />');
-                                var itemHeader = $('<h3><span data-ui-field="title">' + title + '</span></h3>');
-                                item.append(itemHeader);
-                                var itemHtml = '<div><div class="ui-grid-a" style="padding-top:10px;padding-bottom:10px">';
-                                itemHtml += '<div class="ui-block-a" style="width:75%">' + desc + '</div>';
-                                itemHtml += '<div class="ui-block-b" style="width:25%" align="right"><a data-ui-field="options_button" href="#" class="ui-btn ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-gear">' + HG.WebApp.Locales.GetLocaleString('configure_program_options', 'Options') + '</a></div>';
-                                itemHtml += '</div></div>';
-                                item.append(itemHtml);
-                                item.find('[data-ui-field="options_button"]').on('click', function () {
-                                    HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
-                                    HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
-                                    HG.WebApp.ProgramsList.UpdateOptionsPopup();
-                                });
-                                interfaceList.append(item);
-                            }
+                            var title = HG.WebApp.Locales.GetProgramLocaleString(prg.Address, 'Title', prg.Name);
+                            var desc = (prg.Description != 'undefined' && prg.Description != null ? prg.Description : '');
+                            desc = HG.WebApp.Locales.GetProgramLocaleString(prg.Address, 'Description', desc).replace(/\n/g, '<br />');
+                            var item = $('<div data-role="collapsible" data-inset="true" class="ui-mini" />');
+                            var itemHeader = $('<h3><span data-ui-field="title">' + title + '</span></h3>');
+                            item.append(itemHeader);
+                            var itemHtml = '<div><div class="ui-grid-a" style="padding-top:10px;padding-bottom:10px">';
+                            itemHtml += '<div class="ui-block-a" style="width:75%">' + desc + '</div>';
+                            itemHtml += '<div class="ui-block-b" style="width:25%" align="right"><a data-ui-field="options_button" href="#" class="ui-btn ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-gear">' + HG.WebApp.Locales.GetLocaleString('configure_program_options', 'Options') + '</a></div>';
+                            itemHtml += '</div></div>';
+                            item.append(itemHtml);
+                            item.find('[data-ui-field="options_button"]').on('click', function () {
+                                HG.WebApp.ProgramEdit._CurrentProgram.Domain = 'HomeAutomation.HomeGenie.Automation';
+                                HG.WebApp.ProgramEdit._CurrentProgram.Address = prg.Address;
+                                HG.WebApp.ProgramsList.UpdateOptionsPopup();
+                            });
+                            interfaceList.append(item);
                         }
                     }
                 });

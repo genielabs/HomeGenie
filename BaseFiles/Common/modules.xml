@@ -1417,52 +1417,66 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ClientId</Name>
-        <Value />
+        <Value>R2njjiSVqhR7ZLYhgPLqXA==</Value>
         <Description>0. Enter unique ID for this client</Description>
-        <FieldType />
-        <UpdateTime>2015-01-03T14:02:11.102843Z</UpdateTime>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.679447Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Password</Name>
         <Value />
-        <Description>5. Password (optional)</Description>
-        <FieldType />
-        <UpdateTime>2014-07-14T20:41:16.978473Z</UpdateTime>
+        <Description>6. Password (optional)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248044Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerAddress</Name>
         <Value />
         <Description>1. MQTT server address</Description>
-        <FieldType />
-        <UpdateTime>2014-07-14T20:41:11.960376Z</UpdateTime>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248031Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerPort</Name>
         <Value>meJwjyLKoo9JY2kYx/ZR4g==</Value>
         <Description>2. MQTT server port</Description>
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.946184Z</UpdateTime>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.679903Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerTopic</Name>
         <Value>j4pi82PQEHeb4jgboRapLw==</Value>
-        <Description>3. Topic</Description>
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.946506Z</UpdateTime>
+        <Description>4. Topic</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680294Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Username</Name>
         <Value />
-        <Description>4. Username (optional)</Description>
+        <Description>5. Username (optional)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248042Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.WebSockets</Name>
+        <Value/>
+        <Description>3. Connect using WebSockets</Description>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>UL/W8c0C3eum5GKmHT/IGqrJFNHnl599p9qIck5rp/zMkn7Czea54TC2SLUeiwtBZqCd5MP508KcQf3xMU7aLg==</Value>
+        <Description />
         <FieldType />
-        <UpdateTime>2014-07-14T20:41:16.978472Z</UpdateTime>
+        <UpdateTime>2019-01-16T02:57:30.681123Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Added</Value>
+        <Value>Running</Value>
         <Description />
         <FieldType />
-        <UpdateTime>2017-08-17T17:32:29.033505Z</UpdateTime>
+        <UpdateTime>2019-01-16T02:57:26.248328Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>

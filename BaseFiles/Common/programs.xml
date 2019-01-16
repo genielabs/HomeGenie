@@ -2014,35 +2014,38 @@ while (Program.IsEnabled)
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>IPHostEntry host;
-string localIP = "1";
-host = Dns.GetHostEntry(Dns.GetHostName());
-foreach (IPAddress ip in host.AddressList)
-{
-  if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-  {
-    localIP = ip.ToString();
-    localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
-  }
-}
-Program
-  .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
-  .AddOption("ServerAddress", "", "1. MQTT server address", "text")
-  .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
-  .AddOption("ServerTopic", "#", "3. Topic", "text")
-  .AddOption("Username", "", "4. Username (optional)", "text")
-  .AddOption("Password", "", "5. Password (optional)", "text")
-  .AddFeature("", "", "MQTT.SensorPublish", "Publish module on MQTT network", "checkbox")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
+  <ScriptSetup>IPHostEntry host;
+      string localIP = "1";
+      host = Dns.GetHostEntry(Dns.GetHostName());
+      foreach (IPAddress ip in host.AddressList)
+      {
+      if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+      {
+      localIP = ip.ToString();
+      localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
+      }
+      }
+      Program
+      .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
+      .AddOption("ServerAddress", "", "1. MQTT server address", "text")
+      .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
+      .AddOption("WebSockets", "On", "3. Connect using WebSockets", "checkbox")
+      .AddOption("ServerTopic", "#", "4. Topic", "text")
+      .AddOption("Username", "", "5. Username (optional)", "text")
+      .AddOption("Password", "", "6. Password (optional)", "text")
+      .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox")
+      .Run();
+    </ScriptSetup>
+  <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
 string topic = Program.Option("ServerTopic").Value.Trim();
 string clientid = Program.Option("ClientId").Value.Trim();
 string username = Program.Option("Username").Value.Trim();
 string password = Program.Option("Password").Value.Trim();
+bool useWebSockets = Program.Option("WebSockets").Value == "On" ? true : false;
 
 var MqttIsConnected = false;
+MqttClient.Reset();
 
 if (server == "")
 {
@@ -2052,18 +2055,21 @@ if (server == "")
 }
 else
 {
-  Program.Notify("MQTT", "Connecting to " + server + "...");
+  Program.Notify("MQTT", "Connecting to '" + server + ":" + port + "' ...");
   try
   {
     if (username != "")
     {
       MqttClient.WithCredentials(username, password);
     }
+
     MqttClient
       .Service(server)
-      .Connect(port, clientid);
-    Program.Notify("MQTT", "Connected!");
-    MqttIsConnected = true;
+      .UsingWebSockets(useWebSockets)
+      .Connect(port, clientid, ()=&gt;{
+        Program.Notify("MQTT", "Connected!");
+        MqttIsConnected = true;
+      });
   }
   catch (Exception e)
   {
@@ -2101,7 +2107,7 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
             {
               case "Module.Describe":
               var modinstance = targetmodule.Get().Instance;
-              MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Utility.Module2Json(modinstance, false));
+              MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Service.Utility.Module2Json(modinstance, false));
               break;
               default:
               targetmodule.Command(command).Execute();
@@ -2135,7 +2141,7 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
           }
           else if (!module.HasParameter("MQTT.SourceNode"))
           {
-            MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");         
+            MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");
           }
           module.RaiseEvent(property.Name, property.Value, "");
         }
@@ -2163,8 +2169,8 @@ When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
     int mqttdel = domain.IndexOf(":");
     var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
     domain = domain.Substring(mqttend + 1);
-    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");         
-    return "{ 'ResponseValue' : 'OK' }";   
+    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
+    return "{ 'ResponseValue' : 'OK' }";
   } catch (Exception e) {
     Program.Notify("MQTT ERROR!", e.Message);
     MqttIsConnected = false;
@@ -2177,7 +2183,9 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
   {
     try{
-      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Newtonsoft.Json.JsonConvert.SerializeObject(property));
+      byte[] bytes = Encoding.Default.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property));
+      string payload = Encoding.UTF8.GetString(bytes);
+      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property)));
     } catch  (Exception e){
       Program.Notify("MQTT ERROR!", e.Message);
       MqttIsConnected = false;
@@ -2187,22 +2195,30 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   return true;
 });
 
-while (Program.IsRunning &amp;&amp; MqttIsConnected) Pause(1);</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>77</Address>
-    <Name>MQTT Network</Name>
-    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
-Other servers will automatically inherit the published module once an event is generated from it.</Description>
-    <Group>Interconnections</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
+Program.GoBackground();</ScriptSource>
+  <ScriptErrors>[]</ScriptErrors>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>77</Address>
+  <Name>MQTT Network</Name>
+  <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+      Other servers will automatically inherit the published module once an event is generated from it.</Description>
+  <Group>Interconnections</Group>
+  <Features>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes />
+      <Property>MQTT.SensorPublish</Property>
+      <Description>Publish this module events</Description>
+    </ProgramFeature>
+  </Features>
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime xsi:nil="true" />
+  <TriggerTime xsi:nil="true" />
+  <Type>CSharp</Type>
+  <IsEnabled>false</IsEnabled>
+</ProgramBlock>
+<ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
   Program
     .AddFeature("HomeAutomation.PhilipsHue", "Dimmer", "Scenarios.SunriseColors", "Link to Sunrise Colors Scenario", "checkbox")

@@ -245,7 +245,6 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
 
-            compilerParams.ReferencedAssemblies.Add("M2Mqtt.Net.dll");
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.Geometry.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.SolarCalculator.dll"));
 

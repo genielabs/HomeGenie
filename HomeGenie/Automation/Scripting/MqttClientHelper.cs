@@ -23,8 +23,12 @@
 using System;
 using System.Net;
 using System.Text;
+using System.Threading;
 
-using uPLibrary.Networking.M2Mqtt;
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Protocol;
+using MQTTnet.Serializer;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -42,11 +46,12 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class MqttClientHelper
     {
+        private static MqttFactory factory = new MqttFactory();
         private NetworkCredential networkCredential = null;
         private MqttEndPoint endPoint = new MqttEndPoint();
+        private bool usingWebSockets = false;
 
         private MqttClient mqttClient = null;
-        //private object mqttSyncLock = new object();
 
         /// <summary>
         /// Sets the MQTT server to use.
@@ -93,21 +98,21 @@ namespace HomeGenie.Automation.Scripting
         {
             endPoint.Port = port;
             endPoint.ClientId = clientId;
-
             Disconnect();
-            mqttClient = new MqttClient(endPoint.Address, endPoint.Port, false, null, null, MqttSslProtocols.None);
-
-            if (this.networkCredential != null)
+            mqttClient = (MqttClient)factory.CreateMqttClient();
+            mqttClient.Connected += (sender, args) =>
             {
-                mqttClient.Connect(this.endPoint.ClientId, this.networkCredential.UserName, this.networkCredential.Password);
-            }
-            else
+                callback();
+            };
+            mqttClient.Disconnected += (sender, args) =>
             {
-                mqttClient.Connect(endPoint.ClientId);
-            }
-
-            mqttClient.ConnectionClosed += (sender, e) => callback();
-
+                Console.WriteLine(args.Exception.Message);
+                Disconnect();
+                Thread.Sleep(5000);
+                Connect();
+            };
+            var options = GetMqttOption(clientId);
+            mqttClient.ConnectAsync(options);            
             return this;
         }
         
@@ -116,9 +121,12 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         public MqttClientHelper Disconnect()
         {
-            if (this.mqttClient != null && this.mqttClient.IsConnected)
+            if (mqttClient != null)
             {
-                this.mqttClient.Disconnect();
+                var m = mqttClient;
+                mqttClient = null;
+                if (m.IsConnected) m.DisconnectAsync();
+                m.Dispose();
             }
             return this;
         }
@@ -130,14 +138,15 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
         public MqttClientHelper Subscribe(string topic, Action<string,string> callback)
         {
-            mqttClient.MqttMsgPublishReceived += (sender, e) =>
+            if (mqttClient != null)
             {
-                var msg = Encoding.UTF8.GetString(e.Message);
-                callback(e.Topic, msg);
-            };
-
-            mqttClient.Subscribe(new string[] { topic }, new byte[] { uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-
+                mqttClient.ApplicationMessageReceived += (object sender, MqttApplicationMessageReceivedEventArgs args) =>
+                {
+                    var msg = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
+                    callback(args.ApplicationMessage.Topic, msg);
+                };
+                mqttClient.SubscribeAsync(topic);
+            }
             return this;
         }
 
@@ -148,11 +157,9 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text.</param>
         public MqttClientHelper Publish(string topic, string message)
         {
-            var body = Encoding.UTF8.GetBytes(message);
-            mqttClient.Publish(topic, body, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-            if (!mqttClient.IsConnected)
+            if (mqttClient != null)
             {
-                throw new Exception("Mqtt not connected when publishing");
+                mqttClient.PublishAsync(topic, message, MqttQualityOfServiceLevel.AtLeastOnce, false);
             }
             return this;
         }
@@ -164,11 +171,22 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text as byte array.</param>
         public MqttClientHelper Publish(string topic, byte[] message)
         {
-            mqttClient.Publish(topic, message);
-            if (!mqttClient.IsConnected)
+            if (mqttClient != null)
             {
-                throw new Exception("Mqtt not connected when publishing");
+                mqttClient.PublishAsync(topic, Encoding.UTF8.GetString(message), MqttQualityOfServiceLevel.AtLeastOnce, false);
             }
+            return this;
+        }
+
+        /// <summary>
+        /// Use provided credentials when connecting.
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="user">Username.</param>
+        /// <param name="pass">Password.</param>
+        public MqttClientHelper UsingWebSockets(bool useWebSocket)
+        {
+            usingWebSockets = useWebSocket;
             return this;
         }
 
@@ -180,14 +198,14 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="pass">Password.</param>
         public MqttClientHelper WithCredentials(string user, string pass)
         {
-            this.networkCredential = new NetworkCredential(user, pass);
+            networkCredential = new NetworkCredential(user, pass);
             return this;
         }
 
         public void Reset()
         {
-            this.networkCredential = null;
-            this.endPoint = new MqttEndPoint();
+            networkCredential = null;
+            endPoint = new MqttEndPoint();
             Disconnect();
         }
 
@@ -196,16 +214,50 @@ namespace HomeGenie.Automation.Scripting
         private void Connect()
         {
             Disconnect();
-            mqttClient = new MqttClient(endPoint.Address, endPoint.Port, false, null, null, MqttSslProtocols.None);
-
-            if (this.networkCredential != null)
+            mqttClient = (MqttClient)factory.CreateMqttClient();
+            mqttClient.Disconnected += (sender, args) =>
             {
-                mqttClient.Connect(this.endPoint.ClientId, this.networkCredential.UserName, this.networkCredential.Password);
+                Console.WriteLine(args.Exception.Message);
+                Disconnect();
+                Thread.Sleep(5000);
+                Connect();
+            };
+            var options = GetMqttOption(endPoint.ClientId);
+            mqttClient.ConnectAsync(options);
+        }
+
+        private IMqttClientOptions GetMqttOption(string clientId)
+        {
+            var builder = new MqttClientOptionsBuilder()
+                .WithProtocolVersion(MqttProtocolVersion.V311)
+                .WithClientId(clientId);
+                /*
+                .WithWillMessage(new MqttApplicationMessage()
+                {
+                    Payload = Encoding.UTF8.GetBytes("Hello World!!!"),
+                    Topic = "/homegenie",
+                    Retain = true,
+                    QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce
+                });
+                */
+                // TODO: ...
+                //.WithKeepAlivePeriod(TimeSpan.FromSeconds(...))
+                //.WithCommunicationTimeout(TimeSpan.FromSeconds(...))
+                // .WithTls()
+                //.WithCleanSession();
+            if (usingWebSockets)
+            {
+                builder.WithWebSocketServer(endPoint.Address + ":" + endPoint.Port + "/mqtt");
             }
             else
             {
-                mqttClient.Connect(endPoint.ClientId);
+                builder.WithTcpServer(endPoint.Address, endPoint.Port);
             }
+            if (networkCredential != null)
+            {
+                builder.WithCredentials(networkCredential.UserName, networkCredential.Password);
+            }
+            return builder.Build();
         }
 
         #endregion
