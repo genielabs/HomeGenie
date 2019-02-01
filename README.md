@@ -95,6 +95,7 @@ for information about contributing to this repository.
 - https://github.com/genielabs/HomeGenie-Android-ClientLib
 - https://github.com/genielabs/HomeGenie-Android
 - https://github.com/genielabs/HomeGenie-WindowsPhone
+- https://github.com/genielabs/homegenie-mini
 
 ------
 
