@@ -895,9 +895,9 @@ var STATUS_DISARMED = "Disarmed";
 var STATUS_ARMED_AWAY = "Away";
 var STATUS_ARMED_HOME = "Home";
 
-Program.RaiseEvent("HomeGenie.SecurityArmed", STATUS_DISARMED, "Security System");
-Program.Parameter("HomeGenie.SecurityTriggered").Value = "0";
-Program.Parameter("Status.Level").Value = "0";
+//Program.RaiseEvent("HomeGenie.SecurityArmed", STATUS_DISARMED, "Security System");
+//Program.Parameter("HomeGenie.SecurityTriggered").Value = "0";
+//Program.Parameter("Status.Level").Value = "0";
 
 // Events History
 var history = new List&lt;dynamic&gt;();
@@ -1041,6 +1041,7 @@ When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address
         	res = JsonConvert.SerializeObject(history);
         	break;
       }
+      Program.UpdateModuleDatabase();
 
     }
   } 
@@ -1056,6 +1057,15 @@ When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address
 // main program loop
 var sirenModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren");
 var alarmModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light");
+
+if (Program.Parameter("Status.Level").Value != "0") {
+  var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
+  if (triggeredProgram != "")
+  {
+    Program.Run(triggeredProgram);
+  }
+}
+
 while (Program.IsEnabled)
 {
   if (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
@@ -1113,38 +1123,16 @@ while (Program.IsEnabled)
   Pause(1);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
-        <Property>HomeGenie.SecuritySensor</Property>
-        <Description>Use as Security Sensor</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
-        <Property>HomeGenie.SecurityTriggerHome</Property>
-        <Description>Also trigger when armed Home</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
-        <Property>HomeGenie.SecurityAlarm</Property>
-        <Description>Use as Security Alarm</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.654851Z</TriggerTime>
+    <ActivationTime>2019-02-05T20:01:16.951542Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2014,29 +2002,29 @@ while (Program.IsEnabled)
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-  <ScriptSetup>IPHostEntry host;
-      string localIP = "1";
-      host = Dns.GetHostEntry(Dns.GetHostName());
-      foreach (IPAddress ip in host.AddressList)
-      {
-      if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-      {
-      localIP = ip.ToString();
-      localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
-      }
-      }
-      Program
-      .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
-      .AddOption("ServerAddress", "", "1. MQTT server address", "text")
-      .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
-      .AddOption("WebSockets", "On", "3. Connect using WebSockets", "checkbox")
-      .AddOption("ServerTopic", "#", "4. Topic", "text")
-      .AddOption("Username", "", "5. Username (optional)", "text")
-      .AddOption("Password", "", "6. Password (optional)", "text")
-      .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox")
-      .Run();
-    </ScriptSetup>
-  <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
+    <ScriptSetup>IPHostEntry host;
+string localIP = "1";
+host = Dns.GetHostEntry(Dns.GetHostName());
+foreach (IPAddress ip in host.AddressList)
+{
+  if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+  {
+    localIP = ip.ToString();
+    localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
+  }
+}
+Program
+  .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
+  .AddOption("ServerAddress", "", "1. MQTT server address", "text")
+  .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
+  .AddOption("WebSockets", "", "3. Connect using WebSockets", "checkbox")
+  .AddOption("ServerTopic", "#", "4. Topic", "text")
+  .AddOption("Username", "", "5. Username (optional)", "text")
+  .AddOption("Password", "", "6. Password (optional)", "text")
+  .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
 string topic = Program.Option("ServerTopic").Value.Trim();
 string clientid = Program.Option("ClientId").Value.Trim();
@@ -2196,27 +2184,27 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-  <ScriptErrors>[]</ScriptErrors>
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>77</Address>
-  <Name>MQTT Network</Name>
-  <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>77</Address>
+    <Name>MQTT Network</Name>
+    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
       Other servers will automatically inherit the published module once an event is generated from it.</Description>
-  <Group>Interconnections</Group>
-  <Features>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes />
-      <Property>MQTT.SensorPublish</Property>
-      <Description>Publish this module events</Description>
-    </ProgramFeature>
-  </Features>
-  <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime xsi:nil="true" />
-  <TriggerTime xsi:nil="true" />
-  <Type>CSharp</Type>
-  <IsEnabled>false</IsEnabled>
+    <Group>Interconnections</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes />
+        <Property>MQTT.SensorPublish</Property>
+        <Description>Publish this module events</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2019-02-05T19:09:57.43412Z</ActivationTime>
+    <TriggerTime>2019-02-05T19:09:57.577187Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
 </ProgramBlock>
 <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{

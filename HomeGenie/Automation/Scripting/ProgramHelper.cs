@@ -819,6 +819,14 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Force update module database with current data.
+        /// </summary>
+        public bool UpdateModuleDatabase()
+        {
+            return homegenie.UpdateModulesDatabase();
+        }
+
         public ProgramHelper Reset()
         {
             this.initialized = false;
@@ -833,7 +841,6 @@ namespace HomeGenie.Automation.Scripting
             }
             return this;
         }
-
 
         private void RelocateProgramModule()
         {
