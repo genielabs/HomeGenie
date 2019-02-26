@@ -21,7 +21,7 @@ Modules
     <Address>6</Address>
     <Name>Group Lights ON</Name>
     <Description>Turn on all the lights in the current group.</Description>
-    <Group>Scenes</Group>
+    <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
@@ -52,7 +52,7 @@ Modules
     <Address>7</Address>
     <Name>Group Lights OFF</Name>
     <Description>Turn off all the lights in the current group.</Description>
-    <Group>Scenes</Group>
+    <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
@@ -1266,60 +1266,6 @@ Program.GoBackground();</ScriptSource>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)", "slider:0:3600:1")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>When.ModuleParameterIsChanging((module, parameter) =&gt; {
-  // check if the module raising the event has the Turn Off Delay set
-  if (module.HasFeature("HomeGenie.TurnOffDelay") &amp;&amp; module.Parameter("HomeGenie.TurnOffDelay").DecimalValue &gt; 0)
-  {
-    // Check if the module has just been turned on
-    if (parameter.Is("Status.Level") &amp;&amp; parameter.Statistics.Last.Value == 0 &amp;&amp; parameter.DecimalValue &gt; 0)
-    {
-      // Run a background timer that will turn off the light
-      var pausedelay = module.Parameter("HomeGenie.TurnOffDelay").DecimalValue;
-      Program.RunAsyncTask(()=&gt;{
-        Pause(pausedelay);
-        // Check if the light is still on, also module.IsOn could be used
-        if (parameter.DecimalValue &gt; 0)
-        {
-          module.Off();
-          Program.Notify(
-            "Turn Off Delay",
-            module.Instance.Name + "&lt;br&gt;" + 
-            module.Instance.Address + 
-            " switched off.");
-        }
-      });
-    }
-  }
-  return true;
-});
-// the program will be running in the background waiting for events
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>112</Address>
-    <Name>Turn Off Delay</Name>
-    <Description>When device is turned on, automatically turn it off after a given delay.</Description>
-    <Group>Energy Management</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>slider:0:3600:1</FieldType>
-        <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>HomeGenie.TurnOffDelay</Property>
-        <Description>Automatic turn off delay (seconds)</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
   .AddOption("Email.Sender", "", "1. E-Mail address", "text")
   .AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text")
   .AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text")
@@ -1358,36 +1304,6 @@ Program.GoBackground();</ScriptSource>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
     <TriggerTime>2018-12-19T01:34:15.668165Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program.Setup(()=&gt;{
-  Program
-    .AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5)
-    .AddFeature("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link", "text");
-});</ScriptSetup>
-    <ScriptSource />
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>180</Address>
-    <Name>Favourites Links</Name>
-    <Description>Add 5 virtual modules with customizable url link.
-These can be added to  groups and are then
-shown as hyperlink buttons in the control page.</Description>
-    <Group>Devices and Things</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Favourites.Link</ForDomains>
-        <ForTypes>Generic</ForTypes>
-        <Property>FavouritesLink.Url</Property>
-        <Description>Favourites link</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1807,7 +1723,7 @@ Program.GoBackground();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>93</Address>
-    <Name>Multi Instance/Channel  Virtual Modules</Name>
+    <Name>Multi Instance/Channel Virtual Modules</Name>
     <Description>Adds a virtual module for each instance of a multi instance node.
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
@@ -2235,7 +2151,7 @@ Pause(10);</ScriptSource>
     <Address>8</Address>
     <Name>Sunrise Colors Scenario</Name>
     <Description>Example scenario for Philips Hue lights.</Description>
-    <Group>Scenes</Group>
+    <Group>Scenarios</Group>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>

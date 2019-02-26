@@ -42,7 +42,6 @@ namespace HomeGenie.Automation.Scripting
     {
         private string command = "Command.NotSelected";
         private string commandOptions = "0";
-        //private string parameter = "Parameter.NotSelected";
         private string withName = "";
         private string ofDeviceType = "";
         private string inGroup = "";
@@ -274,7 +273,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Gets or sets the modules set on which this helper class will be working on.
+        /// Gets or sets the modules list on which this helper class will be working on.
         /// </summary>
         /// <value>The modules list callback.</value>
         public Func<ModulesManager,TsList<Module>> ModulesListCallback
@@ -714,11 +713,40 @@ namespace HomeGenie.Automation.Scripting
         #endregion
 
 
+        #region Utility methods
+
+        /// <summary>
+        /// Creates a copy of the actual modules selection.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        public ModulesManager Copy()
+        {
+            var modulesManager = new ModulesManager(homegenie)
+            {
+                command = command,
+                commandOptions = commandOptions,
+                withName = withName,
+                ofDeviceType = ofDeviceType,
+                inGroup = inGroup,
+                inDomain = inDomain,
+                withAddress = withAddress,
+                withParameter = withParameter,
+                withFeature = withFeature,
+                withoutFeature = withoutFeature,
+                iterationDelay = iterationDelay,
+                modulesListCallback = modulesListCallback
+            };
+            return modulesManager;
+        }
+
+        /// <summary>
+        /// Resets all selection filters.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
         public ModulesManager Reset()
         {
             command = "Command.NotSelected";
             commandOptions = "0";
-            //parameter = "Parameter.NotSelected";
             withName = "";
             ofDeviceType = "";
             inGroup = "";
@@ -730,6 +758,9 @@ namespace HomeGenie.Automation.Scripting
             //
             return this;
         }
+        
+        #endregion
+
 
         internal static List<string> GetArgumentsList(string csArgumentList)
         {

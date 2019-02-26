@@ -4,6 +4,12 @@
     $$._ledOffTimeout = null;
     $$._popupHideTimeout = null;
     $$._listeners = [];
+    $$._serviceDomains = [
+        'HomeGenie.System',
+        'HomeGenie.UpdateChecker',
+        'HomeGenie.PackageInstaller',
+        'HomeGenie.BackupRestore'
+    ];
 
     $$.InitializePage = function () {
         var page = $$.getContainer();
@@ -90,7 +96,7 @@
                     HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                     HG.WebApp.Control.RefreshGroupIndicators();
                     $$.SendEventToUi(module, event);
-                } else {
+                } else if ($$._serviceDomains.indexOf(event.Domain) === -1) {
                     console.log("Adding module:", event.Domain, event.Source, "...");
                     HG.Configure.Modules.Get(event.Domain, event.Source, function (data) {
                         try {
@@ -104,6 +110,8 @@
                             console.log("...error!", e);
                         }
                     });
+                } else {
+                    $$.SendEventToUi(module, event);
                 }
             }
             //

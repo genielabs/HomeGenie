@@ -88,12 +88,15 @@ $$.refreshStatus = function() {
     level = level.Value.replace(',', '.') * 100;
     if (level > 0) {
       $$.field('statusLed').attr('src', 'images/common/led_green.png');
-    }
-    else {
+    } else {
       $$.field('statusLed').attr('src', 'images/common/led_black.png');
     }
   } else level = 0;
-
+  if (level != 0) {
+    $$.widget.icon = $$.widget.icon.replace("_off.", "_on.");
+  } else {
+    $$.widget.icon = $$.widget.icon.replace("_on.", "_off.");
+  }
   $$.ui.GetModuleIcon($$.module, function(imgPath){
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;
