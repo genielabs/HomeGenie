@@ -4,19 +4,13 @@
     <ScriptSetup>Program.Setup(()=&gt;{
   Program.UseWidget("homegenie/generic/program");
 });</ScriptSetup>
-    <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
-// ^^^^^^^
-// the line above is a special line that tells homegenie
-// to ask for options input (to enter a group name in this specific case)
-// when program is manually run by user
-// NOTE: no white space allowed for OPTIONS_STRING_PROMPT line
-// that must be the FIRST line of code.
+    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from 
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
   .OfDeviceType("Light,Dimmer")
   //.IterationDelay(0.35)
   .On();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>6</Address>
     <Name>Group Lights ON</Name>
@@ -24,7 +18,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
+    <ActivationTime>2019-03-06T13:54:27.321683Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -34,19 +28,13 @@ Modules
   Program.UseWidget("homegenie/generic/program");
 });
 </ScriptSetup>
-    <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
-// ^^^^^^^
-// the line above is a special line that tells homegenie
-// to ask for options input (to enter a group name in this specific case)
-// when program is manually run by user
-// NOTE: no white space allowed for OPTIONS_STRING_PROMPT line
-// that must be the FIRST line of code.
-
+    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from 
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
   .OfDeviceType("Light,Dimmer")
   //.IterationDelay(0.35)
-  .Off();</ScriptSource>
+  .Off();
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>7</Address>
@@ -55,7 +43,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
+    <ActivationTime>2019-03-06T13:54:03.376932Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -66,10 +54,10 @@ Modules
   .AddFeature("", "Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only", "checkbox")
   .Run();
 </ScriptSetup>
-    <ScriptSource>When.ModuleParameterChanged( (module, property) =&gt; {
+    <ScriptSource>When.ModuleParameterChanged( (module, parameter) =&gt; {
   // stores the Status.MemoryLevel value for recalling last light dimmer level
   // when switched on
-  if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
+  if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; parameter.Name == "Status.Level")
   {
     var level = module.Parameter("Status.Level");
     var memory = module.Parameter("Status.MemoryLevel");
@@ -91,7 +79,8 @@ Modules
           {
             module.Level = newlevel; 
           }
-          Program.Notify("Level Memory", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to " + newlevel + "%");
+          var message = String.Format("{0}&lt;br&gt;{1} set to {2}%", module.Instance.Name, module.Instance.Address, newlevel);
+          Program.Notify(message);
           // returning false, prevent from routing event to other listeners                  
           return false;
         }
@@ -129,13 +118,13 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.635204Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:37:59.239571Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:37:59.323206Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
-<ProgramBlock>
-  <ScriptSetup>// Add "Emulate UPnP device" feature
+  <ProgramBlock>
+    <ScriptSetup>// Add "Emulate UPnP device" feature
 Program.AddFeature(
   description:
     // Description of this feature
@@ -156,7 +145,7 @@ Program.AddFeature(
 // Run the 'Program Code'
 Program.Run();
 </ScriptSetup>
-  <ScriptSource>var FEATURE_EMULATE_WEMO = "UpnpDevice.EmulateWemo";
+    <ScriptSource>var FEATURE_EMULATE_WEMO = "UpnpDevice.EmulateWemo";
 var PARAM_UPNP_INFO_UDN = "UpnpDevice.Info.UDN";
 // List that holds allocated UPnP devices
 var upnpDevices = new Dictionary&lt;Module,UPnPDevice&gt;();
@@ -289,27 +278,27 @@ Modules.WithFeature(FEATURE_EMULATE_WEMO).Each((m)=&gt;{
 // Continue running the program in the background
 Program.GoBackground();
 </ScriptSource>
-  <ScriptErrors>[]</ScriptErrors>
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>20</Address>
-  <Name>UPnP Emulation</Name>
-  <Description>Make the device discoverable by third party applications and services supporting UPnP (Universal Plug and Play).</Description>
-  <Group>Devices and Things</Group>
-  <Features>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes>Switch,Light,Dimmer</ForTypes>
-      <Property>UpnpDevice.EmulateWemo</Property>
-      <Description>Emulate UPnP device (WeMo)</Description>
-    </ProgramFeature>
-  </Features>
-  <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2019-01-06T16:11:15.045621Z</ActivationTime>
-  <TriggerTime>2019-01-06T16:11:15.068212Z</TriggerTime>
-  <Type>CSharp</Type>
-  <IsEnabled>true</IsEnabled>
-</ProgramBlock>
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>20</Address>
+    <Name>UPnP Emulation</Name>
+    <Description>Make the device discoverable by third party applications and services supporting UPnP (Universal Plug and Play).</Description>
+    <Group>Devices and Things</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>UpnpDevice.EmulateWemo</Property>
+        <Description>Emulate UPnP device (WeMo)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2019-03-06T13:27:07.410977Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:27:28.499679Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
   .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
@@ -320,7 +309,7 @@ Program.GoBackground();
   .AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5)
   .Run();
 </ScriptSetup>
-    <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
+    <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt; 
 {
   if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
   {
@@ -344,49 +333,46 @@ var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
 
 // - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
 When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
-  string[] reqs = ((string)args).Split('/');
-  //string domain = reqs[0];
+  var request = Program.ParseApiCall(args);
   try
   {
-    string lightnumber = reqs[1];
-    string command = reqs[2];
-    string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
-    //
+    string lightNumber = request.Address;
+    string parameter = Uri.UnescapeDataString(request.GetOption(0));
 	var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
-    var module = hueModules.WithAddress(lightnumber).Get();
+    var module = hueModules.WithAddress(lightNumber).Get();
     //
-    switch(command)
+    switch(request.Command)
     {
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
       case "Control.On":
         {
-          bridgeapicall(lightnumber, "{ \"on\" : true }");
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           module.RaiseEvent("Status.Level", color.B, "Hue Light");
         }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
       case "Control.Off":
-        bridgeapicall(lightnumber, "{ \"on\" : false }");
+        bridgeApiCall(lightNumber, "{ \"on\" : false }");
         module.RaiseEvent("Status.Level", "0", "Hue Light");
         break;
       case "Control.Toggle":
         if (module.Parameter("Status.Level").DecimalValue == 0)
         {
-          bridgeapicall(lightnumber, "{ \"on\" : true }");
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           module.RaiseEvent("Status.Level", color.B, "Hue Light");
         }
         else
         {
-          bridgeapicall(lightnumber, "{ \"on\" : false }");
+          bridgeApiCall(lightNumber, "{ \"on\" : false }");
           module.RaiseEvent("Status.Level", "0", "Hue Light");
         }
         break;
       case "Control.Level":
         {
-          if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
-          bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+          if (module.IsOff) bridgeApiCall(lightNumber, "{ \"on\" : true }");
+          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
           module.RaiseEvent("Status.ColorHsb", color.H+','+color.S+','+bri, "Hue Light");
@@ -398,7 +384,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         string[] values = parameter.Split(',');
         double transition = 5;
         if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
-        bridgeapicall(lightnumber, "{ \"on\" : true" + 
+        bridgeApiCall(lightNumber, "{ \"on\" : true" + 
                       ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) + 
                       ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) + 
                       ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) + 
@@ -411,19 +397,17 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         // eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
         string alertType = "select";
         if (parameter == "Long") {alertType = "lselect";}
-        bridgeapicall(lightnumber, "{\"alert\" : \"" + alertType + "\"}");
+        bridgeApiCall(lightNumber, "{\"alert\" : \"" + alertType + "\"}");
         break; 
     }
-    //
-    return "{ 'ResponseValue' : 'OK' }";    
+    return new ResponseText("OK");    
   } catch (Exception e) { 
 
-    Program.Notify("Philips Hue ERROR!", e.Message);
+    Program.Notify("ERROR: "+e.Message);
 
   }
-  return "{ 'ResponseValue' : 'ERROR' }";
+  return new ResponseText("ERROR");    
 });
-
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -437,22 +421,20 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.711178Z</TriggerTime>
+    <ActivationTime>2019-03-06T15:03:11.0854Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:03:11.47193Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.Setup(()=&gt;{
-  // list the program as custom weather widget
-  Program.UseWidget( "weather/wunderground/conditions" )
-  	// set input fields parameters
-  	// &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-  	.AddOption("Location", "autoip", "City name", "wunderground.city")
-  	.AddOption("Language", "EN", "Language", "text")
-  	.AddOption("ApiKey", "?", "Weather Underground Key", "text")
-  	.AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15");
-});
+    <ScriptSetup>// list the program as custom weather widget
+Program.UseWidget( "weather/wunderground/conditions" )
+  // set input fields parameters
+  // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+  .AddOption("Location", "autoip", "City name", "wunderground.city")
+  .AddOption("Language", "EN", "Language", "text")
+  .AddOption("ApiKey", "?", "Weather Underground Key", "text")
+  .AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15");
 
 // initialize widget program parameters
 Program.Parameter("Astronomy.Sunset").Value = "";
@@ -552,14 +534,12 @@ while (Program.IsEnabled)
       }
 
       Program.RaiseEvent("Program.UiRefresh", "Data Updated", "");
-      //Program.Notify("Weather Underground", "Updated.");
 
     } 
     catch (Exception e) 
     {
 
-      Program.Notify("Weather Underground ERROR!", "Unable to get data from service. " + e.Message);
-      //Program.Parameter("Conditions.City").Value = "ERROR: " + e.Message;
+      Program.Notify("ERROR: unable to get data from service. " + e.Message);
       Console.WriteLine( e.Message );
       Pause(10);
 
@@ -569,7 +549,8 @@ while (Program.IsEnabled)
   var delayMins = Program.Option("UpdateInterval").DecimalValue;
   if (delayMins &lt; 1) delayMins = 1;
   Pause(delayMins*60);
-}</ScriptSource>
+}
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
@@ -579,8 +560,8 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Environment</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.739484Z</TriggerTime>
+    <ActivationTime>2019-03-06T14:23:12.883095Z</ActivationTime>
+    <TriggerTime>2019-03-06T14:23:13.194497Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -618,7 +599,7 @@ Program.Run();
   Pause(delay);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>39</Address>
     <Name>Level Poll</Name>
@@ -655,7 +636,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 //
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>73</Address>
     <Name>IR/RF remote control events forwarding</Name>
@@ -692,7 +673,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 //
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>74</Address>
     <Name>Meter.Watts events forwarding</Name>
@@ -729,7 +710,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 //
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>75</Address>
     <Name>Status.Level events forwarding</Name>
@@ -749,8 +730,8 @@ Program.GoBackground();</ScriptSource>
   .Run();
 </ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-  if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
+When.ModuleParameterChanged( (module, parameter) =&gt; {
+  if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; parameter.Name == "Status.Level")
   {
     var level = module.Parameter("Status.Level");
     var newlevel = module.Parameter("EnergyManagement.EnergySavingLevel").DecimalValue;
@@ -762,7 +743,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
     //
     if (level.DecimalValue &gt; (newlevel / 100D)) 
     {
-      Program.Notify("Energy Saving Mode", module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
+      Program.Notify(module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
       module.Level = newlevel;
       return false;
     }
@@ -770,8 +751,8 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   // returning true, will route event to other listeners
   return true;
 });
-
-Program.GoBackground();</ScriptSource>
+Program.GoBackground();
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>82</Address>
@@ -795,8 +776,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.635082Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:49:56.186864Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:49:56.302053Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -809,49 +790,42 @@ Program.GoBackground();</ScriptSource>
   .Run();
 </ScriptSetup>
     <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
-for (int cam = 1; cam &lt; 10; cam++)
-{
-  var module = cameraModules.WithAddress(cam.ToString()).Get();
-  module.Parameter("Image.URL").Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
-}
+// initialize camera modules
+cameraModules.Each((module) =&gt; {
+  module.Parameter("Image.URL").Value = "/api/Media.IpCamera/" + module.Instance.Address + "/Camera.GetPicture/";
+  return false;
+});
 
 // - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/...
 When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt; {
-  string[] reqs = ((string)args).Split('/');
-  //string domain = reqs[0];
+  var request = Program.ParseApiCall(args);
   object data = "{ 'ResponseValue' : 'ERROR' }";
   try
   {
-    string cameraaddress = reqs[1];
-    string command = reqs[2];
     //string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
-    var module = cameraModules.WithAddress(cameraaddress).Get();
-    //
-    switch(command)
+    var module = cameraModules.WithAddress(request.Address).Get();
+    switch(request.Command)
     {
       // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/Camera.GetPicture
       case "Camera.GetPicture":
-      data = Net
-        .WebService(module.Parameter("IpCamera.ImageURL").Value)
-        .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
-        .GetBytes();
-      break;
+        data = Net
+          .WebService(module.Parameter("IpCamera.ImageURL").Value)
+          .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
+          .GetBytes();
+        break;
       case "Camera.MotionDetected":
-      data = "{ 'ResponseValue' : 'OK' }";
-      // blink Sensor.MotionDetect parameter
-      module.RaiseEvent("Sensor.MotionDetect", "255", "Generic IP Camera");
-      Pause(1);
-      module.RaiseEvent("Sensor.MotionDetect", "0", "Generic IP Camera");
-      break;
+        data = "{ 'ResponseValue' : 'OK' }";
+        // blink Sensor.MotionDetect parameter
+        module.RaiseEvent("Sensor.MotionDetect", "255", "Generic IP Camera");
+        Pause(1);
+        module.RaiseEvent("Sensor.MotionDetect", "0", "Generic IP Camera");
+        break;
     }
   } catch (Exception e) { 
-
     Program.Notify("IpCamera ERROR!", e.Message);
-
   }
   return data;
 });
-
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -893,10 +867,6 @@ Program.GoBackground();
 var STATUS_DISARMED = "Disarmed";
 var STATUS_ARMED_AWAY = "Away";
 var STATUS_ARMED_HOME = "Home";
-
-//Program.RaiseEvent("HomeGenie.SecurityArmed", STATUS_DISARMED, "Security System");
-//Program.Parameter("HomeGenie.SecurityTriggered").Value = "0";
-//Program.Parameter("Status.Level").Value = "0";
 
 // Events History
 var history = new List&lt;dynamic&gt;();
@@ -985,7 +955,6 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
         moduleAlarmed = true;      
     }
   }
-
   if (moduleAlarmed)
   {
     Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
@@ -993,13 +962,11 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
       module.Instance.Name + " " + parameter.Name + " (" +
       module.Instance.Domain + "." +
       module.Instance.Address + ")";
-
     var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
     if (triggeredProgram != "")
     {
       Program.Run(triggeredProgram);
     }
-
     return false;
   }
   return true;
@@ -1007,50 +974,43 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
 
 // web service calls handling
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args) =&gt; {
-  string[] reqs = ((string)args).Split('/');
-  var res = "";
-
+  var request = Program.ParseApiCall(args);
+  object res = null;
   try
   {
-    string command = reqs[2];
-    string pid = reqs[1];
-    if (pid == Program.Module.Address)
+    if (request.Address == Program.Module.Address)
     {
-
-      switch(command)
+      switch(request.Command)
       {
         case "Control.On":
         case "Control.ArmAway":
         	Program.RaiseEvent("Status.Level", "1", "Security System");
         	_armdisarm(false);
-        	res = "{ 'ResponseValue' : 'ARMING AWAY' }";
+        	res = new ResponseText("ARMING AWAY");
         	break;
         case "Control.ArmHome":
         	Program.RaiseEvent("Status.Level", "1", "Security System");
         	_armdisarm(true);
-        	res = "{ 'ResponseValue' : 'ARMING HOME' }";
+        	res = new ResponseText("ARMING HOME");
         	break;
         case "Control.Off":
         case "Control.Disarm":
         	Program.RaiseEvent("Status.Level", "0", "Security System");
         	_armdisarm(false);
-        	res = "{ 'ResponseValue' : 'DISARMED' }";
+        	res = new ResponseText("DISARMED");
         	break;
         case "Events.List":
-        	res = JsonConvert.SerializeObject(history);
+        	res = history; // objects are automatically serialized to JSON
         	break;
       }
       Program.UpdateModuleDatabase();
-
     }
   } 
   catch (Exception ex) 
   { 
-    res = "{ 'ResponseValue' : 'ERROR: " + ex.Message + " " + ex.StackTrace + "' }";
+    res = new ResponseText("ERROR: " + ex.Message + " " + ex.StackTrace);
   }
-  // unable to process request
   return res;
-
 });
 
 // main program loop
@@ -1072,7 +1032,7 @@ while (Program.IsEnabled)
     var watchTimer = new System.Diagnostics.Stopwatch();
     watchTimer.Start();
 
-    // send email
+    // send e-mail
     var subject = "HomeGenie Security System Alarmed";
     var messagetext = "Security System Alarm triggered by " + Program.Parameter("HomeGenie.SecurityTriggerSource").Value;
     var recipients = Program.Option("Email.Recipients").Value;
@@ -1117,21 +1077,42 @@ while (Program.IsEnabled)
     }
     sirenModules.Off();
     watchTimer.Stop();    
-    
   }
   Pause(1);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
+        <Property>HomeGenie.SecuritySensor</Property>
+        <Description>Use as Security Sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
+        <Property>HomeGenie.SecurityTriggerHome</Property>
+        <Description>Also trigger when armed Home</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.SecurityAlarm</Property>
+        <Description>Use as Security Alarm</Description>
+      </ProgramFeature>
+    </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-02-05T20:01:16.951542Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2019-03-06T15:19:21.442209Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:19:21.810911Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1235,7 +1216,7 @@ Program.Run();
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>91</Address>
     <Name>Query on Wake Up</Name>
@@ -1258,8 +1239,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.647601Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:27:19.846487Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:27:29.111554Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1273,25 +1254,15 @@ Program.GoBackground();</ScriptSource>
   .AddOption("Email.SmtpUseSsl", "false", "6. SMTP Mail Server use SSL", "checkbox")
   .Run();
 </ScriptSetup>
-    <ScriptSource>while (Program.IsEnabled)
-{
-
-  if (Program.Option("Email.Sender").Value != Settings.Parameter("Messaging.Email.Sender").Value)
-    Settings.Parameter("Messaging.Email.Sender").Value = Program.Option("Email.Sender").Value;
-  if (Program.Option("Email.SmtpServer").Value != Settings.Parameter("Messaging.Email.SmtpServer").Value)
-    Settings.Parameter("Messaging.Email.SmtpServer").Value = Program.Option("Email.SmtpServer").Value;
-  if (Program.Option("Email.SmtpPort").Value != Settings.Parameter("Messaging.Email.SmtpPort").Value)
-    Settings.Parameter("Messaging.Email.SmtpPort").Value = Program.Option("Email.SmtpPort").Value;
-  if (Program.Option("Email.SmtpUseSsl").Value != Settings.Parameter("Messaging.Email.SmtpUseSsl").Value)
-    Settings.Parameter("Messaging.Email.SmtpUseSsl").Value = Program.Option("Email.SmtpUseSsl").Value;
-  if (Program.Option("Email.SmtpUserName").Value != Settings.Parameter("Messaging.Email.SmtpUserName").Value)
-    Settings.Parameter("Messaging.Email.SmtpUserName").Value = Program.Option("Email.SmtpUserName").Value;
-  if (Program.Option("Email.SmtpPassword").Value != Settings.Parameter("Messaging.Email.SmtpPassword").Value)
-    Settings.Parameter("Messaging.Email.SmtpPassword").Value = Program.Option("Email.SmtpPassword").Value;
-
-  Pause(10);
-
-}
+    <ScriptSource>// detect when an option of this program is changed and store the new value to system settings
+When.ModuleParameterChanged((module, parameter)=&gt;{
+  if (module.Instance.Equals(Program.Module) &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+	var settingName = parameter.Name.Substring(17); // skip "ConfigureOptions." part
+    Settings.Parameter("Messaging."+settingName).Value = parameter.Value;
+  }
+  return true;
+});
+Program.GoBackground();
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1301,8 +1272,8 @@ Program.GoBackground();</ScriptSource>
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.668165Z</TriggerTime>
+    <ActivationTime>2019-03-06T14:41:06.870815Z</ActivationTime>
+    <TriggerTime>2019-03-06T14:41:07.045868Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1407,7 +1378,7 @@ while(Program.IsEnabled)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
     <Name>Windows Phone Push Notification Service</Name>
@@ -1450,9 +1421,6 @@ var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches
 
 // initialize
 energyMonitor.Instance.Name = "Energy Monitor";
-// TODO: add a button in the widget to reset manually the energy counter
-//kwCounter.Value = "0";
-//wattCounter.Value = "0";
 kwLoad.Value = "0";
 wattLoad.Value = "0";
 operatingDevices.Value = "0";
@@ -1581,8 +1549,8 @@ device status and energy consumption.</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.687518Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:48:09.631699Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:48:09.870199Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1719,7 +1687,7 @@ Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>93</Address>
     <Name>Multi Instance/Channel Virtual Modules</Name>
@@ -1728,8 +1696,8 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.6627Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:27:22.867202Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:27:29.323286Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1756,7 +1724,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   return true;
 });
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>76</Address>
     <Name>Sensor.* events forwarding</Name>
@@ -1823,13 +1791,13 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
                 var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
                 if (luminosity &lt; mod.Parameter(MIN_LUMINANCE).DecimalValue)
                 {
-                  Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                  Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
                   mod.On();
                 }
               }
               else	
               {
-                Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
                 mod.On();
               }
             }
@@ -1858,7 +1826,7 @@ while (Program.IsEnabled)
       if (checktime &lt; lastupdate.Ticks) checktime = lastupdate.Ticks;
       var elapsed = new TimeSpan(DateTime.UtcNow.Ticks - checktime);
       if (elapsed.TotalSeconds &gt; timeout) {
-        Program.Notify("Smart Lights", mod.Instance.Address + " " + mod.Instance.Name + "&lt;br&gt;switched OFF.");
+        Program.Notify(mod.Instance.Address + " " + mod.Instance.Name + "&lt;br&gt;switched OFF.");
         mod.Off();
       }
     }
@@ -1911,8 +1879,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.674946Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:43:52.505945Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:43:52.581308Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1952,13 +1920,13 @@ MqttClient.Reset();
 
 if (server == "")
 {
-  Program.Notify("MQTT", "Please configure server address");
+  Program.Notify("Please configure server address");
   Pause(5);
   return;
 }
 else
 {
-  Program.Notify("MQTT", "Connecting to '" + server + ":" + port + "' ...");
+  Program.Notify("Connecting to '" + server + ":" + port + "' ...");
   try
   {
     if (username != "")
@@ -1970,13 +1938,13 @@ else
       .Service(server)
       .UsingWebSockets(useWebSockets)
       .Connect(port, clientid, ()=&gt;{
-        Program.Notify("MQTT", "Connected!");
+        Program.Notify("Connected!");
         MqttIsConnected = true;
       });
   }
   catch (Exception e)
   {
-    Program.Notify("MQTT", e.Message);
+    Program.Notify(e.Message);
     Pause(5);
     return;
   }
@@ -2030,7 +1998,7 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
           module.Instance.Properties = modobj.Properties;
           module.Parameter("VirtualModule.ParentId").Value = parentid;
           module.Parameter("MQTT.SourceNode").Value = cid;
-          Program.Notify("MQTT", "Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
+          Program.Notify("Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
         }
         break;
         case "event":
@@ -2051,7 +2019,7 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
         break;
       }
     } catch (Exception e) {
-      Program.Notify("MQTT ERROR!", e.Message);
+      Program.Notify("ERROR: " + e.Message);
       MqttIsConnected = false;
     }
   }
@@ -2073,12 +2041,12 @@ When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
     var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
     domain = domain.Substring(mqttend + 1);
     MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
-    return "{ 'ResponseValue' : 'OK' }";
+    return new ResponseText("OK");
   } catch (Exception e) {
-    Program.Notify("MQTT ERROR!", e.Message);
+    Program.Notify("ERROR: " + e.Message);
     MqttIsConnected = false;
   }
-  return "{ 'ResponseValue' : 'ERROR' }";
+  return new ResponseText("ERROR");
 });
 
 // We want to do further processing whenever a module changes
@@ -2090,7 +2058,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
       string payload = Encoding.UTF8.GetString(bytes);
       MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property)));
     } catch  (Exception e){
-      Program.Notify("MQTT ERROR!", e.Message);
+      Program.Notify("ERROR: " + e.Message);
       MqttIsConnected = false;
     }
   }
@@ -2098,7 +2066,8 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   return true;
 });
 
-Program.GoBackground();</ScriptSource>
+Program.GoBackground();
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -2116,12 +2085,12 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-02-05T19:09:57.43412Z</ActivationTime>
-    <TriggerTime>2019-02-05T19:09:57.577187Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
-</ProgramBlock>
-<ProgramBlock>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
   Program
     .AddFeature("HomeAutomation.PhilipsHue", "Dimmer", "Scenarios.SunriseColors", "Link to Sunrise Colors Scenario", "checkbox")
@@ -2145,7 +2114,7 @@ Pause(5);
 // Last transition to bright white, 10 seconds
 colorLights.Set("0.13,0,1,10");
 Pause(10);</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>
     <Name>Sunrise Colors Scenario</Name>
@@ -2161,8 +2130,8 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2019-03-06T13:27:24.463459Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:02:00.368765Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2302,20 +2271,18 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 
 // implement Web API calls as defined in the Thermostat widget
 When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
-  var res = "ERROR";
-  var cmdArgs = args.ToString().Split('/');
-  var address = cmdArgs[1];
-  var command = cmdArgs[2];
-  var option = cmdArgs[3];
-  var thermostat = Modules.InDomain(MODULES_DOMAIN).WithAddress(address).Get();
+  var request = Program.ParseApiCall(args);
+  var option = request.GetOption(0);
+  var thermostat = Modules.InDomain(MODULES_DOMAIN).WithAddress(request.Address).Get();
   var index = int.Parse(thermostat.Instance.Address) - 1;
-  switch (command)
+  var res = "ERROR"; // default response text
+  switch (request.Command)
   {
     case "Thermostat.SetPointSet":
     // Basic thermostat currently only supports Heating mode
     if (option == "Heating")
     {
-      var setPoint = cmdArgs[4];
+      var setPoint = request.GetOption(1);
       thermostat.RaiseEvent("Thermostat.SetPoint.Heating", setPoint, EVENT_DESCRIPTION);
       holdingMode[index] = false;
       ThermostatLogicRun(thermostat);
@@ -2333,7 +2300,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
     }
     break;
   }
-  return "[{ \"ResponseValue\" : " + res + "}]";
+  return new ResponseText(res);
 });
 
 while (Program.IsEnabled)
@@ -2343,7 +2310,8 @@ while (Program.IsEnabled)
     return false;
   });
   Pause(120);
-}</ScriptSource>
+}
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
@@ -2369,8 +2337,8 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.699593Z</TriggerTime>
+    <ActivationTime>2019-03-06T14:18:51.214581Z</ActivationTime>
+    <TriggerTime>2019-03-06T14:18:51.49247Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2398,7 +2366,7 @@ Program.Run();
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>92</Address>
     <Name>Z-Wave Thermostat Poll</Name>
@@ -2430,7 +2398,7 @@ Program.Run();
   Pause(delay);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>40</Address>
     <Name>Meter Watt Poll</Name>
@@ -2486,13 +2454,13 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
             {
               level += dimStep;
               m.Level = (level &gt;= 100 ? 100 : level);
-              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Bright (" + m.Level + ")");
+              Program.Notify(m.Instance.Name + "&lt;br&gt;Bright (" + m.Level + ")");
             }
             else if (irData.Value == dimmerDown.Value) 
             {
               level -= dimStep;
               m.Level = (level &lt;= 5 ? 5 : level);
-              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
+              Program.Notify(m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
             }
             lastIdle.Value = "0"; 
           }
@@ -2509,7 +2477,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
             lastButton.Value = irData.Value;
             lastIdle.Value = "1"; 
             m.Toggle();
-            Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;toggled.");
+            Program.Notify(m.Instance.Name + "&lt;br&gt;toggled.");
           }
           return false; // do not break, continue iterating...
         });
@@ -2518,8 +2486,8 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
   }
   return true;
 });
-
-Program.GoBackground();</ScriptSource>
+Program.GoBackground();
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
@@ -2544,8 +2512,8 @@ Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; p
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-19T01:53:14.795429Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2019-03-06T13:40:12.67355Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:40:12.790116Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2619,7 +2587,7 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>29</Address>
     <Name>Zone Sensors</Name>
@@ -2671,8 +2639,8 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2018-12-19T01:34:15.73514Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:27:27.609901Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:27:31.457672Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2854,8 +2822,8 @@ function initialize() {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-19T01:34:15.517353Z</ActivationTime>
-    <TriggerTime>2018-12-19T01:34:15.964753Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:26:56.746427Z</ActivationTime>
+    <TriggerTime>2019-03-06T13:27:34.275558Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2874,8 +2842,8 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-19T01:34:15.517384Z</ActivationTime>
-    <TriggerTime>2017-08-06T18:05:43.555555Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:26:56.746641Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:16:14.885738Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2896,8 +2864,8 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-19T01:34:15.517411Z</ActivationTime>
-    <TriggerTime>2018-12-19T01:45:08.185798Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:26:56.746834Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:16:32.233907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2921,8 +2889,8 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-19T01:34:15.517439Z</ActivationTime>
-    <TriggerTime>2016-06-14T05:46:23.744457Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:26:56.747037Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:16:29.486907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2948,8 +2916,8 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2018-12-19T01:34:15.517473Z</ActivationTime>
-    <TriggerTime>2016-06-14T05:46:22.820073Z</TriggerTime>
+    <ActivationTime>2019-03-06T13:26:56.747245Z</ActivationTime>
+    <TriggerTime>2019-03-06T15:16:30.255377Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

@@ -813,14 +813,10 @@ namespace HomeGenie.Service
                                 LogMessage("+ Adding Automation Program: " + program.Name + " (" + program.Address + ")");
                             }
 
-                            // Try copying the new program files (binary dll or arduino sketch files)
-                            try
+                            // Try copying the new program files if it's an arduino sketch
+                            if (program.Type.ToLower() == "arduino")
                             {
-                                if (program.Type.ToLower() == "csharp")
-                                {
-                                    File.Copy(Path.Combine(UpdateBaseFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
-                                }
-                                else if (program.Type.ToLower() == "arduino")
+                                try
                                 {
                                     // copy arduino project files...
                                     // TODO: this is untested yet
@@ -833,13 +829,20 @@ namespace HomeGenie.Service
                                         LogMessage("* Updating Automation Program: " + program.Name + " (" + program.Address + ") - " + Path.GetFileName(newPath));
                                     }
                                 }
-                            }
-                            catch
-                            {
+                                catch
+                                {
+                                    // TODO: should report exception
+                                }
                             }
 
                             // Add the new program to the ProgramEngine
                             homegenie.ProgramManager.ProgramAdd(program);
+                            
+                            // Compile C# programs in order to generate new binary file
+                            if (program.Type.ToLower() == "csharp")
+                            {
+                                homegenie.ProgramManager.CompileScript(program);
+                            }
 
                             if (!configChanged)
                                 configChanged = true;

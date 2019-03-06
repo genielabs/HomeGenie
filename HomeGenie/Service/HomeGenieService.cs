@@ -982,6 +982,7 @@ namespace HomeGenie.Service
             // run remaining operations in the background
             Utility.RunAsyncTask(() =>
             {
+                BootProgress = 0;
                 // Rebuild automation programs if required
                 if (RebuildPrograms)
                 {
@@ -1025,8 +1026,8 @@ namespace HomeGenie.Service
                 masterControlProgram.Enabled = false;
                 masterControlProgram = null;
             } catch { }
-            // Uncompress factory settings and restart HG service
             RebuildPrograms = true;
+            // Uncompress factory settings and restart HG service
             Utility.UncompressZip("homegenie_factory_config.zip", AppDomain.CurrentDomain.BaseDirectory);
             Reload();
             SaveData();
