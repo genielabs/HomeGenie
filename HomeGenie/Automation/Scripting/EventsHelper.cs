@@ -44,7 +44,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified <handler> after HomeGenie service started.
+        /// Call the specified `handler` after HomeGenie service started.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -67,7 +67,7 @@ namespace HomeGenie.Automation.Scripting
         }
         
         /// <summary>
-        /// Call the specified <handler> when HomeGenie service is stopping.
+        /// Call the specified `handler` when HomeGenie service is stopping.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -90,7 +90,7 @@ namespace HomeGenie.Automation.Scripting
         }
         
         /// <summary>
-        /// Call the specified <handler> when the program is beign stopped.
+        /// Call the specified `handler` when the program is beign stopped.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -113,8 +113,8 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified <handler> function when a parameter of a module changed.
-        /// If either the <handler> returns false or changes the event value, the propagation will stop.
+        /// Call the specified `handler` function when a parameter of a module changed.
+        /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -141,8 +141,8 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified <handler> function when a parameter of a module is changing. 
-        /// If either the <handler> returns false or changes the event value, the propagation will stop.
+        /// Call the specified `handler` function when a parameter of a module is changing. 
+        /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -171,7 +171,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Define a <handler> function to call when a web service call starting with <apiCall> is received.
+        /// Define a `handler` function to call when a web service call starting with `apiCall` is received.
         /// This is used to create and handle user-defined web service API methods.
         /// </summary>
         /// <returns>EventsHelper</returns>

@@ -87,6 +87,18 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
         //
         setTimeout(function() {
 
+            var bootCheck = function() {
+                // Bootprogress check
+                HG.System.GetBootProgress(function(res){
+                    var p = res.replace(',', '.');
+                    HG.Ui.SetBootProgress(p);
+                    if (pv !== '100') {
+                        setTimeout(bootCheck, 1000);
+                    }
+                });
+            };
+            bootCheck();
+
             // localize UI
             var userLang = $$.Locales.GetUserLanguage();
             $$.Locales.Load('./locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){

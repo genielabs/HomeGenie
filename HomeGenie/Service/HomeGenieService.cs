@@ -66,11 +66,8 @@ namespace HomeGenie.Service
         private TsList<VirtualModule> virtualModules = new TsList<VirtualModule>();
         private List<Group> automationGroups = new List<Group>();
         private List<Group> controlGroups = new List<Group>();
-        //
+
         private SystemConfiguration systemConfiguration;
-        //
-        // public events
-        //public event Action<LogEntry> LogEventAction;
 
         #endregion
 
@@ -85,8 +82,9 @@ namespace HomeGenie.Service
 
         #region Lifecycle
 
-        public HomeGenieService()
+        public HomeGenieService(bool rebuildPrograms = false)
         {
+            RebuildPrograms = rebuildPrograms;
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             EnableOutputRedirect();
 
@@ -151,6 +149,8 @@ namespace HomeGenie.Service
 
             Start();
         }
+        
+        public bool RebuildPrograms { get; set; }
 
         public void Start()
         {
@@ -979,10 +979,42 @@ namespace HomeGenie.Service
             }
             // force re-generation of Modules list
             modules_RefreshAll();
-            //
-            // enable automation programs engine
-            //
-            masterControlProgram.Enabled = true;
+            // run remaining operations in the background
+            Utility.RunAsyncTask(() =>
+            {
+                // Rebuild automation programs if required
+                if (RebuildPrograms)
+                {
+                    double bootStep = 100D / masterControlProgram.Programs.Count;
+                    foreach (var program in masterControlProgram.Programs)
+                    {
+                        masterControlProgram.CompileScript(program);
+                        BootProgress += bootStep;
+                    }
+                    RebuildPrograms = false;
+                }
+                // enable automation programs engine
+                masterControlProgram.Enabled = true;
+                BootProgress = 100;
+            });
+        }
+
+        private double bootProgress = 0;
+        public double BootProgress
+        {
+            get { return bootProgress; }
+            private set
+            {
+                bootProgress = value;
+                RaiseEvent(
+                    Domains.HomeGenie_System,
+                    Domains.HomeGenie_System,
+                    SourceModule.Master,
+                    "HomeGenie Boot Progress",
+                    Properties.SystemInfoBootProgress,
+                    bootProgress.ToString()
+                );
+            }
         }
 
         public void RestoreFactorySettings()
@@ -994,6 +1026,7 @@ namespace HomeGenie.Service
                 masterControlProgram = null;
             } catch { }
             // Uncompress factory settings and restart HG service
+            RebuildPrograms = true;
             Utility.UncompressZip("homegenie_factory_config.zip", AppDomain.CurrentDomain.BaseDirectory);
             Reload();
             SaveData();

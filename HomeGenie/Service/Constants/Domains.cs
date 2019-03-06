@@ -34,13 +34,15 @@ namespace HomeGenie.Service.Constants
         public const string HomeGenie_System
             = "HomeGenie.System";
         public const string HomeGenie_PackageInstaller
-        = "HomeGenie.PackageInstaller";
+            = "HomeGenie.PackageInstaller";
         public const string HomeGenie_BackupRestore
-        = "HomeGenie.BackupRestore";
-        //
+            = "HomeGenie.BackupRestore";
+        public const string HomeGenie_BootProgress
+            = "HomeGenie.BootProgress";
+
         public const string MigService_Interfaces
             = "MIGService.Interfaces";
-        //
+
         public const string HomeAutomation_HomeGenie
             = "HomeAutomation.HomeGenie";
         public const string HomeAutomation_HomeGenie_Automation
@@ -53,16 +55,16 @@ namespace HomeGenie.Service.Constants
             = "HomeAutomation.Insteon";
         public const string HomeAutomation_W800RF
             = "HomeAutomation.W800RF";
-        //
+
         public const string Controllers_LircRemote
             = "Controllers.LircRemote";
-        //
+
         public const string EmbeddedSystems_Weeco4mGPIO
             = "EmbeddedSystems.Weeco4mGPIO";
-        //
+
         public const string Media_CameraInput
             = "Media.CameraInput";
-        //
+
         public const string Protocols_UPnP
             = "Protocols.UPnP";
     }

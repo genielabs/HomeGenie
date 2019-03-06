@@ -101,7 +101,6 @@ namespace HomeGenie.Automation.Scripting
         /// <summary>
         /// Connect to the remote host using the specified port.
         /// </summary>
-        /// <param name="port">Port number.</param>
         public KnxClientHelper Connect()
         {
             if (knxClient != null)

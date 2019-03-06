@@ -14,6 +14,16 @@ HG.System = HG.System || new function(){ var $$ = this;
         });
     };
 
+    $$.GetBootProgress = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.GetBootProgress/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
+
     $$.SetHttpPort = function (port, callback) {
         $.ajax({
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/',

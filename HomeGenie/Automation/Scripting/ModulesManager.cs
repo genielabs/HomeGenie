@@ -184,7 +184,7 @@ namespace HomeGenie.Automation.Scripting
         /// Select all modules having specified features.
         /// </summary>
         /// <returns>ModulesManager</returns>
-        /// <param name="feature">A string containing comma seperated feature names.</param>
+        /// <param name="features">A string containing comma separated feature names.</param>
         /// <remarks />
         /// <example>
         /// Example:
@@ -203,7 +203,7 @@ namespace HomeGenie.Automation.Scripting
         /// Select all modules NOT having specified features.
         /// </summary>
         /// <returns>ModulesManager</returns>
-        /// <param name="feature">A string containing comma seperated feature names.</param>
+        /// <param name="features">A string containing comma seperated feature names.</param>
         /// <remarks />
         /// <example>
         /// Example:
@@ -224,7 +224,7 @@ namespace HomeGenie.Automation.Scripting
         #region Collections/Enumeration
 
         /// <summary>
-        /// Iterate through each module in the current selection and pass it to the specified <callback>.
+        /// Iterate through each module in the current selection and pass it to the specified `callback`.
         /// To break the iteration, the callback must return *true*, otherwise *false*.
         /// </summary>
         /// <param name="callback">Callback function to call for each iteration.</param>

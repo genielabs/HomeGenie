@@ -561,3 +561,16 @@ HG.Ui.CreatePage = function(model, cuid) {
         $$._fieldCache = [];
     };
 };
+
+HG.Ui.SetBootProgress = function(pv) {
+    if (pv === '100') {
+        $('#bootprogress_text').html('');
+        $('#bootprogress_overlay').hide();
+        $('#bootprogress_bar_container').hide();
+    } else {
+        $('#bootprogress_overlay').show();
+        $('#bootprogress_text').html('Completing installation... '+pv+'%');
+        $('#bootprogress_bar_container').show();
+        $('#bootprogress_bar').css('width', pv+'%');
+    }
+};

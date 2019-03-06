@@ -179,11 +179,10 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Use provided credentials when connecting.
+        /// Connect over WebSocket (default = false).
         /// </summary>
         /// <returns>NetHelper.</returns>
-        /// <param name="user">Username.</param>
-        /// <param name="pass">Password.</param>
+        /// <param name="useWebSocket">true/false</param>
         public MqttClientHelper UsingWebSockets(bool useWebSocket)
         {
             usingWebSockets = useWebSocket;

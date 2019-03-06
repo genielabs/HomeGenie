@@ -20,3 +20,4 @@ Thumbs.db
 !**/packages/repositories.config
 
 HomeGenie_Windows/\.vs/
+Doxy/homegenie_api*

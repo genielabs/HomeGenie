@@ -90,13 +90,16 @@
             if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {
                 // update event source (the module that is raising this event)
                 module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
-                if (event.Property == 'HomeGenie.Status') {
+                if (event.Property == 'SystemInfo.BootProgress') {
+                    var p = event.Value.replace(',', '.');
+                    HG.Ui.SetBootProgress(p);
+                } else if (event.Property == 'HomeGenie.Status') {
                     $$.SendEventToUi(module, event);
                 } else if (module != null) {
                     HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                     HG.WebApp.Control.RefreshGroupIndicators();
                     $$.SendEventToUi(module, event);
-                } else if ($$._serviceDomains.indexOf(event.Domain) === -1) {
+                } else if ($$._serviceDomains.indexOf(event.Domain) === -1 && !(event.Domain === 'HomeAutomation.HomeGenie' && event.Source === 'Scheduler')) {
                     console.log("Adding module:", event.Domain, event.Source, "...");
                     HG.Configure.Modules.Get(event.Domain, event.Source, function (data) {
                         try {

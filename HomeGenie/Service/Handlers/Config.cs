@@ -205,6 +205,10 @@ namespace HomeGenie.Service.Handlers
                 request.ResponseData = homegenie.UpdateChecker.GetCurrentRelease();
                 break;
 
+            case "System.GetBootProgress":
+                request.ResponseData = homegenie.BootProgress;
+                break;
+
             case "System.Configure":
                 if (migCommand.GetOption(0) == "Location.Set")
                 {

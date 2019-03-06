@@ -34,6 +34,8 @@ namespace HomeGenie.Service.Constants
         // internal HomeGenie parameters
         public const string HomeGenieStatus
             = "HomeGenie.Status";
+        public const string SystemInfoBootProgress
+            = "SystemInfo.BootProgress";
         public const string SystemInfoHttpAddress
             = "SystemInfo.HttpAddress";
         public const string SchedulerModuleUpdateStart

@@ -54,7 +54,7 @@ namespace HomeGenie.Automation.Scripting
         /// Sets the server address to connect to.
         /// </summary>
         /// <returns>TcpClientHelper.</returns>
-        /// <param name="port">Host DNS or IP address.</param>
+        /// <param name="address">Host DNS or IP address.</param>
         public TcpClientHelper Service(string address)
         {
             serverAddress = address;

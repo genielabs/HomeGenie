@@ -45,23 +45,12 @@ namespace HomeGenie.Automation.Scripting
         private string myProgramDomain = Domains.HomeAutomation_HomeGenie_Automation;
         private object setupLock = new object();
 
-        //private string parameter = "";
-        //private string value = "";
-
+        // whether 'Setup' has been executed
         private bool initialized = false;
-        // if setup has been done
 
         public ProgramHelper(HomeGenieService hg, int programId) : base(hg)
         {
             myProgramId = programId;
-            //
-            //var oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == myProgramId.ToString());
-            //if (oldModule == null)
-            //{
-            //    AddControlWidget(""); // no control widget --> not visible
-            //}
-            // reset features and other values
-            //Reset();
         }
 
         /// <summary>
@@ -146,26 +135,22 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        public void Run()
-        {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            if (program != null)
-            {
-                program.WillRun = true;
-            }
-        }
-
         /// <summary>
         /// Run the program as soon as the "Startup Code" exits. This command is meant to be used in the "Startup Code".
         /// </summary>
         /// <param name="willRun">If set to <c>true</c> will run.</param>
-        public void Run(bool willRun = true)
+        public void Run(bool willRun)
         {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = GetProgramBlock();
             if (program != null)
             {
                 program.WillRun = willRun;
             }
+        }
+        // this "dupe" is required to avoid issues with JavaScript engine method resolution as optional/default parameters are not well supported at the time
+        public void Run()
+        {
+            Run(true);
         }
 
         /// <summary>
@@ -175,9 +160,8 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="widget">The widget path.</param>
         public ProgramHelper UseWidget(string widget)
         {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
+            var program = GetProgramBlock();
             var module = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
-            //
             if (module == null)
             {
                 module = new VirtualModule() {
@@ -189,15 +173,15 @@ namespace HomeGenie.Automation.Scripting
                 };
                 homegenie.VirtualModules.Add(module);
             }
-            //
+
             module.Name = (program != null ? program.Name : "");
             module.Domain = myProgramDomain;
             Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
-            //
+
             RelocateProgramModule();
             homegenie.modules_RefreshVirtualModules();
             homegenie.modules_Sort();
-            //
+
             return this;
         }
 
@@ -285,7 +269,7 @@ namespace HomeGenie.Automation.Scripting
             string type
         )
         {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = GetProgramBlock();
             ProgramFeature feature = null;
             //
             try
@@ -319,10 +303,10 @@ namespace HomeGenie.Automation.Scripting
         /// <summary>
         /// Return the feature field associated to the specified module parameter.
         /// </summary>
-        /// <param name="propertyName">Parameter name.</param>
+        /// <param name="parameterName">Parameter name.</param>
         public ProgramFeature Feature(string parameterName)
         {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = GetProgramBlock();
             ProgramFeature feature = null;
             //
             try
@@ -550,32 +534,38 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Display UI notification message from current program using the default `Program.Title`.
+        /// Display UI notification message using the name of the program as default title for the notification.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <remarks />
         /// <example>
         /// Example:
         /// <code>
-        /// // Display `Hello world!` popup with the default `Program.Title `
         /// Program.Notify("Hello world!");
         /// </code>
         /// </example>
         public ProgramHelper Notify(string message)
         {
-            dynamic notification = new ExpandoObject();
-            notification.Title = Title;
-            notification.Message = message;
-            string serializedMessage = JsonConvert.SerializeObject(notification);
-            homegenie.RaiseEvent(
-                myProgramId,
-                Domains.HomeAutomation_HomeGenie_Automation,
-                myProgramId.ToString(),
-                "Automation Program",
-                Properties.ProgramNotification,
-                serializedMessage
-            );
-            return this;
+            var programBlock = GetProgramBlock();
+            return Notify(programBlock.Name, message);
+        }
+
+        /// <summary>
+        /// Display UI notification message using the name of the program as default title for the notification.
+        /// </summary>
+        /// <param name="message">Formatted message.</param>
+        /// <param name="paramList">Format parameter list.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// Program.Notify("Hello world!");
+        /// </code>
+        /// </example>
+        public ProgramHelper Notify(string message, params object[] paramList)
+        {
+            var programBlock = GetProgramBlock();
+            return Notify(programBlock.Name, message, paramList);
         }
 
         /// <summary>
@@ -615,17 +605,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="paramList">Format parameter list.</param>
         public ProgramHelper Notify(string title, string message, params object[] paramList)
         {
-            return this.Notify(title, String.Format(message, paramList));
-        }
-
-        /// <summary>
-        /// Display UI notification message from current program.
-        /// </summary>
-        /// <param name="message">Formatted message.</param>
-        /// <param name="paramList">Format parameter list.</param>
-        public ProgramHelper Notify(string message, params object[] paramList)
-        {
-            return this.Notify(Title, String.Format(message, paramList));
+            return Notify(title, String.Format(message, paramList));
         }
 
         /// <summary>
@@ -704,8 +684,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         public void GoBackground()
         {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
-            program.IsEnabled = true;
+            GetProgramBlock().IsEnabled = true;
             homegenie.RaiseEvent(
                 myProgramId,
                 myProgramDomain,
@@ -784,8 +763,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
-                return program.IsRunning;
+                return GetProgramBlock().IsRunning;
             }
         }
 
@@ -799,8 +777,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
-                return program.IsEnabled;
+                return GetProgramBlock().IsEnabled;
             }
         }
 
@@ -833,7 +810,7 @@ namespace HomeGenie.Automation.Scripting
             // no control widget --> not visible
             this.UseWidget(""); 
             // remove all features 
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = GetProgramBlock();
             if (program != null)
             {
                 program.WillRun = false;
@@ -861,6 +838,12 @@ namespace HomeGenie.Automation.Scripting
                     ex.StackTrace
                 );
             }
+        }
+
+        private ProgramBlock GetProgramBlock()
+        {
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            return program;
         }
 
     }

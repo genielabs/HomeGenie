@@ -42,17 +42,19 @@ namespace HomeGenie
 
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
 
-            PostInstallCheck();
-            
-            _homegenie = new HomeGenieService();
+            bool rebuildPrograms = PostInstallCheck();
+
+            _homegenie = new HomeGenieService(rebuildPrograms);
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
         }
 
-        private static void PostInstallCheck()
+        private static bool PostInstallCheck()
         {
+            bool firstTimeInstall = false;
             string postInstallLock = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "postinstall.lock");
             if (File.Exists(postInstallLock))
             {
+                firstTimeInstall = true;
                 // Move MIG interface plugins from root folder to lib/mig
                 // TODO: find a better solution to this
                 string[] migFiles =
@@ -90,6 +92,7 @@ namespace HomeGenie
                     Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
                 }
             }
+            return firstTimeInstall;
         }
 
         internal static void Quit(bool restartService)

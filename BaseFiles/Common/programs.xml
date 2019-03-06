@@ -135,8 +135,7 @@ Program.GoBackground();</ScriptSource>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 <ProgramBlock>
-  <ScriptSetup>Program.Title = "UPnP Emulation";
-// Add "Emulate UPnP device" feature
+  <ScriptSetup>// Add "Emulate UPnP device" feature
 Program.AddFeature(
   description:
     // Description of this feature
@@ -254,12 +253,12 @@ When.ModuleParameterChanged((m, p)=&gt;{
     {
       upnpDevices[m.Instance].StopDevice();
       upnpDevices.Remove(m.Instance);
-      Program.Notify(Program.Title, "Removed UPnP device for {0}", m.Instance.Name);
+      Program.Notify("Removed UPnP device for {0}", m.Instance.Name);
     }
     // Check if the option is ON (not empty = On)
     if (!String.IsNullOrEmpty(p.Value))
     {
-      Program.Notify(Program.Title, "Added UPnP device for {0}", m.Instance.Name);
+      Program.Notify("Added UPnP device for {0}", m.Instance.Name);
       upnpDevices.Add(m.Instance, createUpnpModule(m));
     }
   }
@@ -275,7 +274,7 @@ When.ProgramStopping(()=&gt;{
   // Stop allocated UPnP devices
   foreach(var upnp in upnpDevices.Values)
   {
-    Program.Notify(Program.Title, "Removed UPnP device for {0}", upnp.FriendlyName);
+    Program.Notify("Removed UPnP device for {0}", upnp.FriendlyName);
     upnp.StopDevice();
   }
   return true;

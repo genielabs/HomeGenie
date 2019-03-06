@@ -20,16 +20,6 @@ namespace HomeGenie
         }
 
         /// <summary>
-        /// Program title field (runtime variable)
-        /// </summary>
-        public string Title = "";
-        
-        /// <summary>
-        /// Program description field (runtime variable)
-        /// </summary>
-        public string Description = "";
-
-        /// <summary>
         /// Gets the logger object.
         /// </summary>
         /// <value>The logger object.</value>
@@ -111,20 +101,24 @@ namespace HomeGenie
         }
 
         /// <summary>
-        /// Parses the given (api call) string as a MigInterfaceCommand object.
+        /// Parses the given (api call) string as a `MigInterfaceCommand` object.
         /// </summary>
         /// <returns>The mig command.</returns>
-        /// <param name="command">Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").</param>
+        /// <param name="apiCall">Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").</param>
         public MigInterfaceCommand ParseApiCall(string apiCall)
         {
             return new MigInterfaceCommand(apiCall);
+        }
+        public MigInterfaceCommand ParseApiCall(object apiCall)
+        {
+            return ParseApiCall((string)apiCall);
         }
 
         /// <summary>
         /// Invoke an API command and get the result.
         /// </summary>
         /// <returns>The API command response.</returns>
-        /// <param name="apiCommand">Any MIG/APP API command withouth the "/api/" prefix.</param>
+        /// <param name="apiCommand">Any MIG/APP API command withouth the `/api/` prefix.</param>
         public object ApiCall(string apiCommand)
         {
             if (apiCommand.StartsWith("/api/"))
