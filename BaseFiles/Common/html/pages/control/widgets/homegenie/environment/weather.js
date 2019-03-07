@@ -1,17 +1,17 @@
-﻿[{
-  Name: 'Weather Underground Widget',
+[{
+  Name: 'Weather Widget',
   Author: 'Generoso Martello',
   Version: '2013-03-31',
 
   GroupName: '',
-  IconImage: 'pages/control/widgets/weather/wunderground/images/wu_mostlysunny.png',
+  IconImage: 'pages/control/widgets/homegenie/environment/weather/images/partlycloudy.png',
   StatusText: '',
   Description: '',
 
   RenderView: function (cuid, module) {
     var container = $(cuid);
     var widget = container.find('[data-ui-field=widget]');
-    //
+    
     if (!this.Initialized) {
       this.Initialized = true;
       // settings button
@@ -21,7 +21,7 @@
         HG.WebApp.ProgramsList.UpdateOptionsPopup();
       });
     }
-    //
+
     var display_location = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.DisplayLocation').Value;
     var serviceapi = HG.WebApp.Utility.GetModulePropertyByName(module, 'ConfigureOptions.ApiKey').Value;
     if (serviceapi == '' || serviceapi == '?') {
@@ -44,12 +44,10 @@
         style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
         position: { my: 'top center', at: 'bottom center' }
       });
-    }
-    else if (display_location == '') {
+    } else if (display_location == '') {
       widget.find('[data-ui-field=name]').html('Waiting for data...');
       widget.find('[data-ui-field=last_updated_value]').html('Not updated!');
-    }
-    else {
+    } else {
       widget.find('[data-ui-field=name]').html(display_location);
       //
       var windspeed = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.WindKph').Value;
@@ -69,16 +67,12 @@
       //
       var last_updated = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.LastUpdated').Value;
       widget.find('[data-ui-field=last_updated_value]').html(last_updated);
-      //
-      var display_celsius = (HG.WebApp.Locales.GetTemperatureUnit() == 'Celsius');
-      if (display_celsius) {
-        var temperaturec = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.TemperatureC').Value;
-        widget.find('[data-ui-field=temperature_value]').html(temperaturec + '&#8451;');
-      } else {
-        var temperaturef = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.TemperatureF').Value;
-        widget.find('[data-ui-field=temperature_value]').html(temperaturef + '&#8457;');
-      }
-      //
+      
+      // Internally temperature is always expressed in Celsius, then converted to user locale unit
+      var temperature = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Temperature').Value;
+      temperature = HG.WebApp.Utility.GetLocaleTemperature(parseFloat(temperature.replace(',','.')));
+      widget.find('[data-ui-field=temperature_value]').html(temperature + '&#8451;');
+      
       // Forecast data
       for (var f = 1; f <= 3; f++)
       {
@@ -86,95 +80,23 @@
         widget.find('[data-ui-field=forecast_' + f + '_icon]').attr('src', this.GetIconUrl(fIconUrl));
         var fDescription = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Description').Value;
         widget.find('[data-ui-field=forecast_' + f + '_desc]').html(fDescription);
-        if (display_celsius) {
-          var temperatureMinC = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.TemperatureC.Low').Value;
-          var temperatureMaxC = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.TemperatureC.High').Value;
-          widget.find('[data-ui-field=forecast_' + f + '_tmin]').html(temperatureMinC + '&#8451;');
-          widget.find('[data-ui-field=forecast_' + f + '_tmax]').html(temperatureMaxC + '&#8451;');
-        } else {
-          var temperatureMinF = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.TemperatureF.Low').Value;
-          var temperatureMaxF = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.TemperatureF.High').Value;
-          widget.find('[data-ui-field=forecast_' + f + '_tmin]').html(temperatureMinF + '&#8457;');
-          widget.find('[data-ui-field=forecast_' + f + '_tmax]').html(temperatureMaxF + '&#8457;');
-        }
+        
+        var temperatureMin = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Temperature.Min').Value;
+        temperatureMin = HG.WebApp.Utility.GetLocaleTemperature(parseFloat(temperatureMin.replace(',','.')));
+        var temperatureMax = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Temperature.Max').Value;
+        temperatureMax = HG.WebApp.Utility.GetLocaleTemperature(parseFloat(temperatureMax.replace(',','.')));
+        widget.find('[data-ui-field=forecast_' + f + '_tmin]').html(temperatureMin + '&#8451;');
+        widget.find('[data-ui-field=forecast_' + f + '_tmax]').html(temperatureMax + '&#8451;');
+        
         var displayDate = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Weekday').Value.substr(0, 3) + ', ';
         displayDate += HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Day').Value + ' ';
         displayDate += HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Month').Value;
         widget.find('[data-ui-field=forecast_' + f + '_date]').html(displayDate);
-      }
+      } 
     }
-
   },
 
-  GetIconUrl: function(url) {
-    var localurl = 'wu_clear';
-    var fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
-    if (fileName.lastIndexOf('.') > 0) {
-      fileName = fileName.substring(0, fileName.lastIndexOf('.')).replace('nt_', '');
-      switch (fileName) {
-        case 'chanceflurries':
-          localurl = 'wu_chanceflurries.png';
-          break;
-        case 'chancerain':
-          localurl = 'wu_chancerain.png';
-          break;
-        case 'chancesleet':
-          localurl = 'wu_chancesleet.png';
-          break;
-        case 'chancesnow':
-          localurl = 'wu_chancesnow.png';
-          break;
-        case 'chancetstorms':
-          localurl = 'wu_chancestorm.png';
-          break;
-        case 'clear':
-          localurl = 'wu_clear.png';
-          break;
-        case 'cloudy':
-          localurl = 'wu_cloudy.png';
-          break;
-        case 'flurries':
-          localurl = 'wu_flurries.png';
-          break;
-        case 'fog':
-          localurl = 'wu_fog.png';
-          break;
-        case 'hazy':
-          localurl = 'wu_hazy.png';
-          break;
-        case 'mostlycloudy':
-          localurl = 'wu_partlysunny.png';
-          break;
-        case 'mostlysunny':
-          localurl = 'wu_mostlysunny.png';
-          break;
-        case 'partlycloudy':
-          localurl = 'wu_mostlysunny.png';
-          break;
-        case 'partlysunny':
-          localurl = 'wu_partlysunny.png';
-          break;
-        case 'sleet':
-          localurl = 'wu_sleet.png';
-          break;
-        case 'rain':
-          localurl = 'wu_rain01.png';
-          break;
-        case 'snow':
-          localurl = 'wu_snow.png';
-          break;
-        case 'sunny':
-          localurl = 'wu_clear.png';
-          break;
-        case 'tstorms':
-          localurl = 'wu_thunderstorms01.png';
-          break;
-        default:
-          localurl = 'wu_unknown.png';
-          break;
-      }
-    }
-    return 'pages/control/widgets/weather/wunderground/images/'+localurl;
+  GetIconUrl: function(icon) {
+    return 'pages/control/widgets/homegenie/environment/weather/images/'+icon+".png";
   }
-
 }]

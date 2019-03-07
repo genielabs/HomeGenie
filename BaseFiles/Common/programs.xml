@@ -427,11 +427,11 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>// list the program as custom weather widget
-Program.UseWidget( "weather/wunderground/conditions" )
+  <ScriptSetup>// list the program as custom weather widget
+Program.UseWidget( "homegenie/environment/weather" )
   // set input fields parameters
   // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-  .AddOption("Location", "autoip", "City name", "wunderground.city")
+  .AddOption("Location", "London, UK", "City name", "wunderground.city")
   .AddOption("Language", "EN", "Language", "text")
   .AddOption("ApiKey", "?", "Weather Underground Key", "text")
   .AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15");
@@ -440,16 +440,142 @@ Program.UseWidget( "weather/wunderground/conditions" )
 Program.Parameter("Astronomy.Sunset").Value = "";
 Program.Parameter("Astronomy.Sunrise").Value = "";
 Program.Parameter("Conditions.City").Value = "";
-Program.Parameter("Conditions.TemperatureC").Value = "";
-Program.Parameter("Conditions.TemperatureF").Value = "";
+Program.Parameter("Conditions.Temperature").Value = "";
 Program.Parameter("Conditions.DisplayLocation").Value = "";
 Program.Parameter("Conditions.IconUrl").Value = "";
 Program.Parameter("Conditions.Description").Value = "";    
 
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>var sunsetToSunriseEvent = "FromSunsetToSunrise";
-var sunriseToSunsetEvent = "FromSunriseToSunset";
+  <ScriptSource>
+Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
+  Program.Parameter("Conditions.City").Value = data.city;
+  Program.Parameter("Conditions.DisplayLocation").Value = data.city;
+  Program.Parameter("Conditions.Country").Value = data.country;
+  Program.Parameter("Conditions.Temperature").Value = data.temperature;
+  Program.Parameter("Conditions.Description").Value = data.weather_description;
+  Program.Parameter("Conditions.IconUrl").Value = data.weather_icon;
+  Program.Parameter("Conditions.Status").Value = data.weather_status; // eg. cloudy, sunny, etc..
+  Program.Parameter("Conditions.WindDirection").Value = data.wind_direction;
+  Program.Parameter("Conditions.WindKph").Value = data.wind_speed;
+  Program.Parameter("Conditions.PressureMb").Value = data.pressure;
+  Program.Parameter("Conditions.PrecipitationHourMetric").Value = data.rain_1h_mm;
+  // TODO: Program.Parameter("Conditions.UV").Value = "";
+  Program.Parameter("Conditions.LastUpdated").Value = data.update_dt;
+};
+Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
+  Program.Parameter("Conditions.Forecast." + day + ".Description").Value = data.weather_description;
+  Program.Parameter("Conditions.Forecast." + day + ".Year").Value = data.dt.Year.ToString("YYYY");
+  Program.Parameter("Conditions.Forecast." + day + ".Month").Value = data.dt.ToString("MMM");
+  Program.Parameter("Conditions.Forecast." + day + ".Day").Value = data.dt.ToString("dd");
+  Program.Parameter("Conditions.Forecast." + day + ".Weekday").Value = data.dt.ToString("dddd");
+  Program.Parameter("Conditions.Forecast." + day + ".IconUrl").Value = data.weather_icon;
+  Program.Parameter("Conditions.Forecast." + day + ".Temperature").Value = data.temperature;
+  Program.Parameter("Conditions.Forecast." + day + ".Temperature.Min").Value = data.temperature_min;
+  Program.Parameter("Conditions.Forecast." + day + ".Temperature.Max").Value = data.temperature_max;
+};
+Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
+  var icon = "unknonwn.png";
+  switch(type)
+  {
+    case "01d": // 	clear sky
+    icon = "clear";
+    break;
+    case "02d": // 	few clouds
+    icon = "partlycloudy";
+    break;
+    case "03d": // scattered clouds
+    icon = "scatteredclouds";
+    break;
+    case "04d": // broken clouds (?)
+    icon = "cloudy";
+    break;
+    case "09d": // 	shower rain
+    icon = "showerrain";
+    break;
+    case "10d": // rain
+    icon = "rain";
+    break;
+    case "11d": // thunderstorms
+    icon = "thunderstorms";
+    break;
+    case "13d": // snow
+    icon = "snow";
+    break;
+    case "50d": // mist
+    icon = "hazy";
+    break;
+    // Night icons
+    case "01n": // 	clear sky
+    icon = "clear_night";
+    break;
+    case "02n": // 	few clouds
+    icon = "partlycloudy_night";
+    break;
+    case "03n": // scattered clouds
+    icon = "scatteredclouds";
+    break;
+    case "04n": // broken clouds (?)
+    icon = "cloudy_night";
+    break;
+    case "09n": // 	shower rain
+    icon = "showerrain_night";
+    break;
+    case "10n": // rain
+    icon = "rain";
+    break;
+    case "11n": // thunderstorms
+    icon = "thunderstorms";
+    break;
+    case "13n": // snow
+    icon = "snow_night";
+    break;
+    case "50n": // mist
+    icon = "hazy";
+    break;
+  }
+  return icon;
+};
+Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
+  dynamic data = new ExpandoObject();
+  data.dt = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.dt);
+  data.update_dt = data.dt.ToLongDateString() + " " + data.dt.ToLongTimeString();
+  data.temperature = weatherData.main.temp.ToString();
+  data.temperature_min = weatherData.main.temp_min.ToString();
+  data.temperature_max = weatherData.main.temp_max.ToString();
+  data.pressure = weatherData.main.pressure.ToString();
+  var rain_1h_mm = "0";
+  var rain_3h_mm = "0";
+  if (weatherData.rain != null) {
+    if (weatherData.rain["1h"] != null)
+      rain_1h_mm = weatherData.rain["1h"].ToString();
+    if (weatherData.rain["3h"] != null)
+      rain_3h_mm = weatherData.rain["3h"].ToString();
+  }
+  data.rain_1h_mm = rain_1h_mm;
+  var snow_1h_mm = "0";
+  var snow_3h_mm = "0";
+  if (weatherData.snow != null) {
+    if (weatherData.snow["1h"] != null)
+      snow_1h_mm = weatherData.snow["1h"].ToString();
+    if (weatherData.snow["3h"] != null)
+      snow_3h_mm = weatherData.snow["3h"].ToString();
+  }
+  data.snow_1h_mm = snow_1h_mm;
+  data.wind_speed = weatherData.wind.speed.ToString();
+  data.wind_direction = "";
+  if (weatherData.wind.deg != null)
+  	data.wind_direction = weatherData.wind.deg.ToString();
+  data.weather_status = weatherData.weather[0].main.ToString();
+  data.weather_description = weatherData.weather[0].description.ToString();
+  data.weather_icon = GetWeatherIcon(weatherData.weather[0].icon.ToString());
+  // city and country fields are not present in forecast data
+  if (weatherData.name != null)
+  	data.city = weatherData.name.ToString();
+  if (weatherData.sys != null &amp;&amp; weatherData.sys.country != null)
+  	data.country = weatherData.sys.country.ToString();
+  return data;
+};
 
 while (Program.IsEnabled)
 {
@@ -461,78 +587,39 @@ while (Program.IsEnabled)
   {
     try
     {
-      string webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/astronomy/lang:" + language + "/q/" + location + ".json";
-      var astronomydata = Net.WebService(webserviceurl).GetData();
+      string webserviceurl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&amp;lang=" + language + "&amp;units=metric&amp;appid=" + apikey; 
+      var weatherData = Net.WebService(webserviceurl).GetData();
 
-      int sunrise_hour = int.Parse(astronomydata.moon_phase.sunrise.hour.ToString());
-      int sunrise_minute = int.Parse(astronomydata.moon_phase.sunrise.minute.ToString());
-      int sunset_hour = int.Parse(astronomydata.moon_phase.sunset.hour.ToString());
-      int sunset_minute = int.Parse(astronomydata.moon_phase.sunset.minute.ToString());
+      var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset).ToShortTimeString();
+      var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise).ToShortTimeString();
 
-      Program.Parameter("Astronomy.Sunset").Value = sunset_hour.ToString("D2") + ":" + sunset_minute.ToString("D2");
-      Program.Parameter("Astronomy.Sunrise").Value = sunrise_hour.ToString("D2") + ":" + sunrise_minute.ToString("D2");
+      Program.Parameter("Astronomy.Sunset").Value = sunset;
+      Program.Parameter("Astronomy.Sunrise").Value = sunrise;
 
-      webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
-      var weatherdata = Net.WebService(webserviceurl).GetData();
+      var data = CollectWeatherData(weatherData);
+      UpdateWeatherParameters(data);
+      
+      // get forecast data
+	  webserviceurl = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&amp;lang="+language+"&amp;units=metric&amp;appid=" + apikey; 
+      var forecast = Net.WebService(webserviceurl).GetData();
 
-      string city = weatherdata.location.city;
-      string country = weatherdata.location.country;
-      string country_iso3166 = weatherdata.location.country_iso3166; // eg. IT,US,NL,UK,AU,CH,DE...
-      string temperaturec = weatherdata.current_observation.temp_c;
-      string temperaturef = weatherdata.current_observation.temp_f;
-      string display_location = weatherdata.current_observation.display_location.full;
-      string weather_text = weatherdata.current_observation.weather;
-      string icon = weatherdata.current_observation.icon;
-      string icon_url = weatherdata.current_observation.icon_url.ToString().Replace("c/k", "c/e").Replace("http://icons.wxug", "https://api.wunderground");
-      string wind_dir = weatherdata.current_observation.wind_dir;
-      string wind_kph = weatherdata.current_observation.wind_kph;
-      string pressure_mb = weatherdata.current_observation.pressure_mb;
-      string feelslike_c = weatherdata.current_observation.feelslike_c;
-      string feelslike_f = weatherdata.current_observation.feelslike_f;
-      string UV = weatherdata.current_observation.UV;
-      string precip_1hr_metric = weatherdata.current_observation.precip_1hr_metric;
-
-      // 2014-01-22 - Added to allow the widget to display the date/time.
-      string last_updated = weatherdata.current_observation.observation_time; //DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
-
-      Program.Parameter("Conditions.City").Value = city;
-      Program.Parameter("Conditions.Country").Value = country;
-      Program.Parameter("Conditions.CountryCode").Value = country_iso3166;
-      Program.Parameter("Conditions.TemperatureC").Value = temperaturec;
-      Program.Parameter("Conditions.TemperatureF").Value = temperaturef;
-      Program.Parameter("Conditions.DisplayLocation").Value = display_location;
-      Program.Parameter("Conditions.Description").Value = weather_text;
-      Program.Parameter("Conditions.IconUrl").Value = icon_url;
-      Program.Parameter("Conditions.Status").Value = icon; // eg. cloudy, sunny, etc..
-      Program.Parameter("Conditions.WindDirection").Value = wind_dir;
-      Program.Parameter("Conditions.WindKph").Value = wind_kph;
-      Program.Parameter("Conditions.PressureMb").Value = pressure_mb;
-      Program.Parameter("Conditions.FeelsLikeC").Value = feelslike_c;
-      Program.Parameter("Conditions.FeelsLikeF").Value = feelslike_f;
-      Program.Parameter("Conditions.UV").Value = UV;
-      Program.Parameter("Conditions.PrecipitationHourMetric").Value = precip_1hr_metric;
-
-      // 2014-01-22 - Added to allow the widget to display the date/time.
-      Program.Parameter("Conditions.LastUpdated").Value = last_updated;
-
-      // 2015-01-30 - Added forecast of next 3 days
-      webserviceurl = "http://api.wunderground.com/api/" + apikey + "/forecast/lang:" + language + "/q/" + location + ".json";
-      var forecastData = Net.WebService(webserviceurl).GetData().forecast.simpleforecast.forecastday;
-      // Collect forecast data
-      for (int d = 1; d &lt;= 3; d++)
+      var forecastDay = 1;
+      var nextDay = DateTime.UtcNow.AddDays(1); nextDay = nextDay.Date + new TimeSpan(12, 0, 0);
+      foreach(var fc in forecast.list)
       {
-        Program.Parameter("Conditions.Forecast." + d + ".Description").Value = forecastData[d].conditions.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".Year").Value = forecastData[d].date.year.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".Month").Value = forecastData[d].date.monthname.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".Day").Value = forecastData[d].date.day.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".Weekday").Value = forecastData[d].date.weekday.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".IconUrl").Value = forecastData[d].icon_url.ToString().Replace("c/k", "c/e").Replace("http://icons.wxug", "https://api.wunderground");
-        Program.Parameter("Conditions.Forecast." + d + ".TemperatureC.Low").Value = forecastData[d].low.celsius.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".TemperatureF.Low").Value = forecastData[d].low.fahrenheit.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".TemperatureC.High").Value = forecastData[d].high.celsius.ToString();
-        Program.Parameter("Conditions.Forecast." + d + ".TemperatureF.High").Value = forecastData[d].high.fahrenheit.ToString();
-      }
+        var forecastTime = Utility.JavaTimeStampToDateTime(1000D*(int)fc.dt);
+        if (forecastTime.Equals(nextDay)) {
+          // collect forecast data for current forecastDay
+          
+          var forecastData = CollectWeatherData(fc);
+          UpdateForecastParameters(forecastDay, forecastData);
 
+          nextDay = nextDay.AddDays(1);
+          forecastDay++;
+        }
+        // process up to 3 days
+        if (forecastDay &gt; 3) break;
+      }
       Program.RaiseEvent("Program.UiRefresh", "Data Updated", "");
 
     } 
@@ -551,20 +638,21 @@ while (Program.IsEnabled)
   Pause(delayMins*60);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>34</Address>
-    <Name>Weather Underground</Name>
-    <Description>Current weather, forecast and sunrise/sunset information from &lt;strong&gt;Weather Underground&lt;/strong&gt; service. 
-To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
-    <Group>Weather and Environment</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T14:23:12.883095Z</ActivationTime>
-    <TriggerTime>2019-03-06T14:23:13.194497Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
+  <ScriptErrors>[]</ScriptErrors>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>34</Address>
+  <Name>OpenWeatherMap</Name>
+  <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
+To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
+</Description>
+  <Group>Weather and Environment</Group>
+  <Features />
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime>2019-03-07T16:44:52.889162Z</ActivationTime>
+  <TriggerTime>2019-03-07T16:44:53.37834Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>true</IsEnabled>
+</ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
 Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");

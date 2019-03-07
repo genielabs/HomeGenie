@@ -59,8 +59,7 @@ namespace HomeGenie.Automation.Engines
             "HomeGenie.Automation",
             "HomeGenie.Data",
             "MIG",
-            "CM19Lib",
-            "X10 = CM19Lib.X10",
+            "CM19Lib", "X10 = CM19Lib.X10",
             "Innovative.Geometry",
             "Innovative.SolarCalculator",
             "OpenSource.UPnP",
@@ -91,7 +90,8 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.GeneralPurpose.Behaviors",
             "Raspberry.IO.GeneralPurpose.Configuration",
             "Raspberry.IO.InterIntegratedCircuit",
-            "Raspberry.IO.SerialPeripheralInterface"
+            "Raspberry.IO.SerialPeripheralInterface",
+            "Utility = HomeGenie.Service.Utility"
         };
 
         public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string outputDllFile)

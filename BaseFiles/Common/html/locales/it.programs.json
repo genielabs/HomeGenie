@@ -2,19 +2,17 @@
 
 "34": {
     "Title":
-        "Weather Underground",
-    "Description": 
-        "Condizioni meteo, previsioni e altri dati come orario alba e tramonto, venti, precipitazioni. Basato sul servizio <strong>Weather Underground</strong>. \nPer attivare questo widget, indica una <strong>Key</strong> utente valida. Questa <strong>Key</strong> può essere ottenuta creando un account su <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+        "OpenWeatherMap",
+    "Description":
+        "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
     "ConfigureOptions.Location":
         "Città",
-    "ConfigureOptions.InputDisplayCelsius":
-        "Mostra temperatura in gradi centigradi? (TRUE=SI FALSE=NO)",
     "ConfigureOptions.Language":
         "Lingua (es. EN, IT, FR, DE, ...)",
     "ConfigureOptions.UpdateInterval":
         "Intervallo aggiornamento (minuti)",
     "ConfigureOptions.ApiKey":
-        "Weather Underground service Key"
+        "OpenWeatherMap API key"
 },
 
 "6": {

@@ -2,19 +2,17 @@
 
 "34": {
     "Title":
-        "Weather Underground",
-    "Description": 
-        "Текущая погода, прогноз и другая информация (время восхода/захода, ветер, осадки). Использует сервис <strong>Weather Underground</strong>. \nЧтобы активировать этот виджет укажите пользовательский <strong>ключ</strong>, который может быть получен при создании аккаунта на <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+        "OpenWeatherMap",
+    "Description":
+        "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
     "ConfigureOptions.Location":
         "Город",
-    "ConfigureOptions.InputDisplayCelsius":
-        "Отображать температуру в градусах Цельсия (TRUE=Да FALSE=Нет)",
     "ConfigureOptions.Language":
         "Язык (например EN, IT, FR, DE, RU, ...)",
     "ConfigureOptions.UpdateInterval":
         "Интервал обновления данных (минуты)",
     "ConfigureOptions.ApiKey":
-        "Пользовательский ключ Weather Underground (API Key)"
+        "Пользовательский ключ OpenWeatherMap (API Key)"
 },
 
 "6": {

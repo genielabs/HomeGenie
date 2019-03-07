@@ -2,19 +2,17 @@
 
 "34": {
     "Title":
-        "Weather Underground",
+        "OpenWeatherMap",
     "Description": 
-        "Current weather, forecast and other infos like sunrise/sunset, wind, precipitations. Based on <strong>Weather Underground</strong> service. \nTo activate this widget specify a valid user <strong>Key</strong> that can be obtained creating an account from <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+        "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
     "ConfigureOptions.Location":
         "City name",
-    "ConfigureOptions.InputDisplayCelsius":
-        "Display Temperature in degrees Celsius (TRUE=YES FALSE=NO)",
     "ConfigureOptions.Language":
         "Language (eg. EN, IT, FR, DE, ...)",
     "ConfigureOptions.UpdateInterval":
         "Update interval (minutes)",
     "ConfigureOptions.ApiKey":
-        "Weather Underground service Key"
+        "OpenWeatherMap API key"
 },
 
 "6": {

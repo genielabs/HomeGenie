@@ -2,19 +2,17 @@
 
 "34": {
     "Title":
-        "Servicio meteorológico 'Weather Underground'",
-    "Description": 
-        "El estado del tiempo actualizado, pronósticos y otras informaciones como los tiempos de amanecer/ocaso, viento, precipitaciones. Basado en el servicio <strong>'Weather Underground'</strong>. \nPara activar esta aplicación específica usa una <strong>clave (key)</strong> de usuario que se puede obtener creando una cuenta en <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+        "OpenWeatherMap",
+    "Description":
+        "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
     "ConfigureOptions.Location":
         "Nombre de ciudad",
-    "ConfigureOptions.InputDisplayCelsius":
-        "Visualizar la temperatura en grados Celsius (TRUE=YES FALSE=NO)",
     "ConfigureOptions.Language":
         "Idioma (p.e. EN, ES (para español), IT, FR, DE, ...)",
     "ConfigureOptions.UpdateInterval":
         "Intervalo de actualización (en minutos)",
     "ConfigureOptions.ApiKey":
-        "Clave (Key) del servicio 'Weather Underground'"
+        "API Key del servicio OpenWeatherMap"
 },
 
 "6": {
