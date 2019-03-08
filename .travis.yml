@@ -7,6 +7,7 @@ before_install:
   sudo apt install apt-transport-https
   echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
   sudo apt update
+  sudo apt install doxygen
 install:
   - nuget restore HomeGenie_Linux/HomeGenie_Linux.sln
   - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
