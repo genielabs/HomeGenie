@@ -92,7 +92,7 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
                 HG.System.GetBootProgress(function(res){
                     var p = res.replace(',', '.');
                     HG.Ui.SetBootProgress(p);
-                    if (pv !== '100') {
+                    if (p !== '100') {
                         setTimeout(bootCheck, 1000);
                     }
                 });

@@ -12,7 +12,7 @@
     "ConfigureOptions.UpdateInterval":
         "Intervalle de mise à jour (minutes)",
     "ConfigureOptions.ApiKey":
-        "Clé de validation OpenWeatherMap"
+        "Clé de validation OpenWeatherMap (APPID)"
 },
 
 "6": {

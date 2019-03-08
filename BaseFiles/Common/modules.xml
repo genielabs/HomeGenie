@@ -829,7 +829,7 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Weather Underground</Name>
+    <Name>OpenWeatherMap</Name>
     <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -878,23 +878,9 @@
         <UpdateTime>2017-08-17T17:32:30.133682Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Conditions.TemperatureC</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:32:30.133659Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Conditions.TemperatureF</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:32:30.133667Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>ConfigureOptions.ApiKey</Name>
         <Value>VGqXv2FlOtueeEb8myx1bw==</Value>
-        <Description>Weather Underground Key</Description>
+        <Description>OpenWeatherMap API key (APPID)</Description>
         <FieldType>text</FieldType>
         <UpdateTime>2017-08-17T17:52:04.942876Z</UpdateTime>
       </ModuleParameter>
@@ -907,7 +893,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Location</Name>
-        <Value>9zHIW0h+bCZIpaI9n1F1kg==</Value>
+        <Value>London, UK</Value>
         <Description>City name</Description>
         <FieldType>wunderground.city</FieldType>
         <UpdateTime>2017-08-17T17:52:04.943546Z</UpdateTime>
@@ -927,13 +913,6 @@
         <UpdateTime>2017-08-17T17:51:59.474009Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Sun.Event</Name>
-        <Value>G8GvH8M6JtG3xFq5Eu3D1w==</Value>
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.94422Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>34</Value>
         <Description />
@@ -942,7 +921,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
-        <Value>weather/wunderground/conditions</Value>
+        <Value>homegenie/environment/weather</Value>
         <Description />
         <FieldType />
         <UpdateTime>2014-04-11T19:26:31.5697656Z</UpdateTime>

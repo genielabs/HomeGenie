@@ -10,7 +10,7 @@ Modules
   .OfDeviceType("Light,Dimmer")
   //.IterationDelay(0.35)
   .On();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>6</Address>
     <Name>Group Lights ON</Name>
@@ -18,7 +18,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:54:27.321683Z</ActivationTime>
+    <ActivationTime>2019-03-08T10:02:19.021437Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -35,7 +35,7 @@ Modules
   //.IterationDelay(0.35)
   .Off();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>7</Address>
     <Name>Group Lights OFF</Name>
@@ -43,7 +43,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:54:03.376932Z</ActivationTime>
+    <ActivationTime>2019-03-08T10:02:22.430086Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -95,7 +95,7 @@ Modules
   return true; 
 });
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>16</Address>
     <Name>Level Memory</Name>
@@ -118,8 +118,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:37:59.239571Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:37:59.323206Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:27.461325Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:42.87568Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -294,8 +294,8 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:27:07.410977Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:27:28.499679Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:28.457328Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:42.875538Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -410,7 +410,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 });
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
     <Name>Philips Hue Bridge</Name>
@@ -421,19 +421,19 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T15:03:11.0854Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:03:11.47193Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:28.925489Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:44.01726Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-  <ScriptSetup>// list the program as custom weather widget
+    <ScriptSetup>// list the program as custom weather widget
 Program.UseWidget( "homegenie/environment/weather" )
   // set input fields parameters
   // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
   .AddOption("Location", "London, UK", "City name", "wunderground.city")
   .AddOption("Language", "EN", "Language", "text")
-  .AddOption("ApiKey", "?", "Weather Underground Key", "text")
+  .AddOption("ApiKey", "?", "OpenWeatherMap API key (APPID)", "text")
   .AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15");
 
 // initialize widget program parameters
@@ -447,21 +447,28 @@ Program.Parameter("Conditions.Description").Value = "";
 
 Program.Run();
 </ScriptSetup>
-  <ScriptSource>
+    <ScriptSource>
 Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
   Program.Parameter("Conditions.City").Value = data.city;
   Program.Parameter("Conditions.DisplayLocation").Value = data.city;
   Program.Parameter("Conditions.Country").Value = data.country;
-  Program.Parameter("Conditions.Temperature").Value = data.temperature;
   Program.Parameter("Conditions.Description").Value = data.weather_description;
   Program.Parameter("Conditions.IconUrl").Value = data.weather_icon;
   Program.Parameter("Conditions.Status").Value = data.weather_status; // eg. cloudy, sunny, etc..
-  Program.Parameter("Conditions.WindDirection").Value = data.wind_direction;
-  Program.Parameter("Conditions.WindKph").Value = data.wind_speed;
-  Program.Parameter("Conditions.PressureMb").Value = data.pressure;
-  Program.Parameter("Conditions.PrecipitationHourMetric").Value = data.rain_1h_mm;
-  // TODO: Program.Parameter("Conditions.UV").Value = "";
   Program.Parameter("Conditions.LastUpdated").Value = data.update_dt;
+  // Add values to standard Sensor.* parameters
+  Program.Parameter("Sensor.Temperature").Value = data.temperature;
+  Program.Parameter("Sensor.Temperature.Unit").Value = "Celsius";
+  Program.Parameter("Sensor.Pressure").Value = data.pressure;
+  Program.Parameter("Sensor.Pressure.Unit").Value = "Mb";
+  Program.Parameter("Sensor.Wind.Speed").Value = data.wind_speed;
+  Program.Parameter("Sensor.Wind.Speed.Unit").Value = "Kph";
+  Program.Parameter("Sensor.Wind.Direction").Value = data.wind_direction;
+  Program.Parameter("Sensor.Precipitation.Rain").Value = data.rain_1h_mm;
+  Program.Parameter("Sensor.Precipitation.Rain.Unit").Value = "1h";
+  Program.Parameter("Sensor.Precipitation.Snow").Value = data.snow_1h_mm;
+  Program.Parameter("Sensor.Precipitation.Snow.Unit").Value = "1h";
+  // TODO: Program.Parameter("Sensor.UV").Value = "...";
 };
 Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
   Program.Parameter("Conditions.Forecast." + day + ".Description").Value = data.weather_description;
@@ -638,21 +645,21 @@ while (Program.IsEnabled)
   Pause(delayMins*60);
 }
 </ScriptSource>
-  <ScriptErrors>[]</ScriptErrors>
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>34</Address>
-  <Name>OpenWeatherMap</Name>
-  <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>34</Address>
+    <Name>OpenWeatherMap</Name>
+    <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
 To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
 </Description>
-  <Group>Weather and Environment</Group>
-  <Features />
-  <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2019-03-07T16:44:52.889162Z</ActivationTime>
-  <TriggerTime>2019-03-07T16:44:53.37834Z</TriggerTime>
-  <Type>CSharp</Type>
-  <IsEnabled>true</IsEnabled>
-</ProgramBlock>
+    <Group>Weather and Environment</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2019-03-08T10:28:59.20936Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
 Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
@@ -841,7 +848,7 @@ When.ModuleParameterChanged( (module, parameter) =&gt; {
 });
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>82</Address>
     <Name>Energy Saving Mode</Name>
@@ -864,8 +871,8 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:49:56.186864Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:49:56.302053Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:36.812835Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:42.932578Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -916,7 +923,7 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt; {
 });
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
     <Name>Generic IP Camera</Name>
@@ -1169,7 +1176,7 @@ while (Program.IsEnabled)
   Pause(1);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
     <Name>Security Alarm System</Name>
@@ -1199,8 +1206,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T15:19:21.442209Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:19:21.810911Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:37.913973Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.315845Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1327,8 +1334,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:27:19.846487Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:27:29.111554Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:38.486128Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:42.951986Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1352,7 +1359,7 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 });
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>142</Address>
     <Name>E-Mail Account</Name>
@@ -1360,8 +1367,8 @@ Program.GoBackground();
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T14:41:06.870815Z</ActivationTime>
-    <TriggerTime>2019-03-06T14:41:07.045868Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:39.045239Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.180779Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1613,7 +1620,7 @@ while (Program.IsEnabled)
   Pause(2);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
     <Name>Energy Monitor</Name>
@@ -1637,8 +1644,8 @@ device status and energy consumption.</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:48:09.631699Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:48:09.870199Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:39.657595Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.162602Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1659,7 +1666,7 @@ device status and energy consumption.</Description>
   {
     string address = module.Instance.Address + "." + m.ToString();
     var virtualModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(address).Get();
-    if (!virtualModule.WasFound)
+    if (!virtualModule.Exists)
     {
       Program.AddVirtualModule("HomeAutomation.ZWave", address, defaultType, "");
       Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
@@ -1784,8 +1791,8 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:27:22.867202Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:27:29.323286Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:39.984504Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:42.999737Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1923,7 +1930,7 @@ while (Program.IsEnabled)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
     <Name>Smart Lights</Name>
@@ -1967,8 +1974,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:43:52.505945Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:43:52.581308Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:40.623564Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.022435Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2156,7 +2163,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
@@ -2218,8 +2225,8 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:27:24.463459Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:02:00.368765Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:41.240814Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2400,7 +2407,7 @@ while (Program.IsEnabled)
   Pause(120);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
     <Name>Basic Thermostat</Name>
@@ -2425,8 +2432,8 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T14:18:51.214581Z</ActivationTime>
-    <TriggerTime>2019-03-06T14:18:51.49247Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:41.579036Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.5004Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2576,7 +2583,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 });
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
     <Name>Remote Control</Name>
@@ -2600,8 +2607,8 @@ Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; p
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:40:12.67355Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:40:12.790116Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:42.415533Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.150004Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2727,8 +2734,8 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:27:27.609901Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:27:31.457672Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:42.745294Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.157036Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2910,8 +2917,8 @@ function initialize() {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:26:56.746427Z</ActivationTime>
-    <TriggerTime>2019-03-06T13:27:34.275558Z</TriggerTime>
+    <ActivationTime>2019-03-08T10:02:18.411464Z</ActivationTime>
+    <TriggerTime>2019-03-08T10:02:43.814021Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2930,7 +2937,7 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:26:56.746641Z</ActivationTime>
+    <ActivationTime>2019-03-08T10:02:18.411604Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:14.885738Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2952,7 +2959,7 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:26:56.746834Z</ActivationTime>
+    <ActivationTime>2019-03-08T10:02:18.411708Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:32.233907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2977,7 +2984,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:26:56.747037Z</ActivationTime>
+    <ActivationTime>2019-03-08T10:02:18.411828Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:29.486907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -3004,7 +3011,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-06T13:26:56.747245Z</ActivationTime>
+    <ActivationTime>2019-03-08T10:02:18.411939Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:30.255377Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>

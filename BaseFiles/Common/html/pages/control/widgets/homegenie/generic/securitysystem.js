@@ -37,23 +37,23 @@ $$.onRefresh = function () {
   var title = $$.locales.GetProgramLocaleString($$.module.Address, 'Title', 'Alarm System');
   $$.field('name').html(title);
 
-  refreshArmedStatus();
-  refreshCurrentMode();
-  loadLogData();
+  $$.refreshArmedStatus();
+  $$.refreshCurrentMode();
+  $$.loadLogData();
 }
 
 $$.onUpdate = function(parameter, value) {
   switch(parameter) {
     case 'Status.Level':
-      refreshArmedStatus();
-      refreshCurrentMode();
+      $$.refreshArmedStatus();
+      $$.refreshCurrentMode();
       break;
     case 'HomeGenie.SecurityArmed':
     case 'HomeGenie.SecurityTriggered':
-      refreshCurrentMode();
+      $$.refreshCurrentMode();
       break;
     default:
-      loadLogData();
+      $$.loadLogData();
       //$$.signalActity();
   }
 }
@@ -65,9 +65,9 @@ $$.onStop = function() {
 
 // private/custom methods
 
-refreshTimeout = null;
+$$.refreshTimeout = null;
 
-refreshArmedStatus = function() {
+$$.refreshArmedStatus = function() {
   var armedstatus = $$.module.prop('Status.Level'); //$$.module.prop('HomeGenie.SecurityArmed');
   if (armedstatus != null && armedstatus.Value == '1') {
     $$.field('arm_group').hide();
@@ -78,7 +78,7 @@ refreshArmedStatus = function() {
   }
 }
 
-refreshCurrentMode = function() {
+$$.refreshCurrentMode = function() {
   var blink = false;
   var statusDescription = '...';
   var armedlevel = $$.module.prop('Status.Level');
@@ -113,19 +113,19 @@ refreshCurrentMode = function() {
     $$.field('status-container').removeClass('blinking_alarm');
 }
 
-loadLogData = function() {
-  if (refreshTimeout != null)
-    clearTimeout(refreshTimeout);
-  refreshTimeout = setTimeout(function(){
-      $$.module.command('Events.List', '', function(logData){
-        refreshLog(logData);
-      });
+$$.loadLogData = function() {
+  if ($$.refreshTimeout != null)
+    clearTimeout($$.refreshTimeout);
+  $$.refreshTimeout = setTimeout(function(){
+    $$.module.command('Events.List', '', function(logData){
+      $$.refreshLog(logData);
+    });
   }, 200);
 }
 
-refreshLog = function(logData) {
+$$.refreshLog = function(logData) {
   // check wether the widget is disposed
-  if (typeof $$._widget == 'undefined') return; 
+  if (typeof $$._widget == 'undefined') return;
   $$.field('activity-log').empty();
   var log = '';
   if (logData.length > 0) {
@@ -140,7 +140,7 @@ refreshLog = function(logData) {
       $$.field('activity-log').append(logDetail);
       $$.field('activity-log').append(logTime);
       $$.ui.GetModuleIcon(securityModule, function(imgPath, elid){
-          $$.field('activity-log').find('[data-ui-field="'+elid+'"]').attr('src',imgPath);
+        $$.field('activity-log').find('[data-ui-field="'+elid+'"]').attr('src',imgPath);
       }, 'img'+i);
     }
   } else {
@@ -149,8 +149,8 @@ refreshLog = function(logData) {
   }
   // auto refresh every 60 seconds
   if ($.mobile.activePage.attr('id') == 'page_control') {
-    if (refreshTimeout != null)
-      clearTimeout(refreshTimeout);
-    refreshTimeout = setTimeout(loadLogData, 60000);
+    if ($$.refreshTimeout != null)
+      clearTimeout($$.refreshTimeout);
+    $$.refreshTimeout = setTimeout($$.loadLogData, 60000);
   }
 }

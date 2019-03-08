@@ -12,7 +12,7 @@
     "ConfigureOptions.UpdateInterval":
         "Intervallo aggiornamento (minuti)",
     "ConfigureOptions.ApiKey":
-        "OpenWeatherMap API key"
+        "OpenWeatherMap API key (APPID)"
 },
 
 "6": {
