@@ -569,8 +569,8 @@ HG.Ui.SetBootProgress = function(pv) {
         $('#bootprogress_bar_container').hide();
     } else {
         $('#bootprogress_overlay').show();
-        $('#bootprogress_text').html('Completing installation... '+pv+'%');
+        $('#bootprogress_text').html('Completing installation... ' + Math.ceil(pv) + '%');
         $('#bootprogress_bar_container').show();
-        $('#bootprogress_bar').css('width', pv+'%');
+        $('#bootprogress_bar').css('width', Math.ceil(pv) + '%');
     }
 };
