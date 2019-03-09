@@ -30,6 +30,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Content Include="homegenie_stats.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\pages\control\widgets\homegenie\environment\weather.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -3238,11 +3241,5 @@
     <Folder Include="html\js\app\" />
     <Folder Include="html\pages\configure\scheduler\templates\" />
     <Folder Include="html\css\fonts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="MQTTnet, Version=2.8.5.0, Culture=neutral, PublicKeyToken=b69712f52770c0a7">
-      <HintPath>..\..\HomeGenie\packages\MQTTnet.2.8.5\lib\net452\MQTTnet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
 </Project>
