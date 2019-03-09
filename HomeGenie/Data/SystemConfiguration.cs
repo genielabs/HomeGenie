@@ -132,14 +132,13 @@ namespace HomeGenie.Data
             public int StatisticsTimeResolutionSeconds { get; set; }
 
             [XmlAttribute]
-            public int StatisticsUIRefreshSeconds { get; set; }
+            public int StatisticsUiRefreshSeconds { get; set; }
 
             public StatisticsConfiguration()
             {
-
                 MaxDatabaseSizeMBytes = 5; // 5MB default.
-                StatisticsTimeResolutionSeconds = 5 * 60; // 5 minute default.
-                StatisticsUIRefreshSeconds = 2 * 60; // 2 minute default.
+                StatisticsTimeResolutionSeconds = 180; // 3 minutes default.
+                StatisticsUiRefreshSeconds = 120; // 2 minutes default.
             }
 
             /// <summary>
@@ -152,7 +151,6 @@ namespace HomeGenie.Data
             /// </summary>
             public void Validate()
             {
-                // 
                 if (MaxDatabaseSizeMBytes < 1)
                 {
                     MaxDatabaseSizeMBytes = 1;
@@ -162,11 +160,10 @@ namespace HomeGenie.Data
                 {
                     StatisticsTimeResolutionSeconds = 30;
                 }
-                if (StatisticsUIRefreshSeconds < 5)
+                if (StatisticsUiRefreshSeconds < 30)
                 {
-                    StatisticsUIRefreshSeconds = 5;
+                    StatisticsUiRefreshSeconds = 30;
                 }
-
             }
 
         }

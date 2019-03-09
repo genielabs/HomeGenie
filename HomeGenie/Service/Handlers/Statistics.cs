@@ -68,7 +68,7 @@ namespace HomeGenie.Service.Handlers
                 break;
             case "Configuration.Get":
                 // Just one at the moment.
-                request.ResponseData = "{ \"StatisticsUIRefreshSeconds\" : \"" + homegenie.SystemConfiguration.HomeGenie.Statistics.StatisticsUIRefreshSeconds + "\" }";
+                request.ResponseData = "{ \"StatisticsUiRefreshSeconds\" : \"" + homegenie.SystemConfiguration.HomeGenie.Statistics.StatisticsUiRefreshSeconds + "\" }";
                 break;
             case "Parameter.List":
                 domainSeparator = migCommand.GetOption(0).LastIndexOf(":");
@@ -319,14 +319,11 @@ namespace HomeGenie.Service.Handlers
                 response += "]";
                 request.ResponseData = response;
                 break;
-            case "Parameter.StatDelete":
-                response = "[";
+            case "Parameter.StatRemove":
                 var dateText = migCommand.GetOption(0).Replace('.', ',');
                 dateStart = Utility.JavascriptToDateUtc(double.Parse(dateText));
-                var responseDelete = homegenie.Statistics.DeleteStat(dateStart, migCommand.GetOption(1));
-                response += "[Response," + responseDelete + "]";
-                response += "]";
-                request.ResponseData = response;
+                homegenie.Statistics.DeleteData(dateStart, migCommand.GetOption(1));
+                request.ResponseData = new ResponseText("OK");
                 break;
             }
         }

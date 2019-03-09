@@ -49,6 +49,7 @@ namespace HomeGenie.Automation.Scripting
             hgService = hg;
             Net = new NetHelper(hgService);
             Program = new ProgramHelper(hgService, programId);
+            Data = new DataHelper();
             When = new EventsHelper(hgService, programId);
             SerialPort = new SerialPortHelper();
             TcpClient = new TcpClientHelper();
@@ -77,6 +78,8 @@ namespace HomeGenie.Automation.Scripting
         public NetHelper Net { get; private set; }
 
         public ProgramHelper Program { get; private set; }
+
+        public DataHelper Data { get; private set; }
 
         public EventsHelper Events
         {

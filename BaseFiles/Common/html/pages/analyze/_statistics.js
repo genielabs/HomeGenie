@@ -160,7 +160,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
         $("#page_delete_stat").on('click', function () {
             if ($$._SelItemObject == true) {
                 $.ajax({
-                    url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatDelete/' + $$._ItemObject,
+                    url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatRemove/' + $$._ItemObject + '/' + $$._CurrentParameter,
                     type: 'GET',
                     success: function (data) {
                         var stats = eval(data);
@@ -216,7 +216,7 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
         $('#page_analyze_costperunit').val(HG.WebApp.Store.get('UI.Statistics.CostPerUnit') ? HG.WebApp.Store.get('UI.Statistics.CostPerUnit') : 0.00022);
         // read stats settings
         HG.Statistics.ServiceCall('Configuration.Get', '', '', function (setting) {
-            var sec = (setting.StatisticsUIRefreshSeconds * 1);
+            var sec = (setting.StatisticsUiRefreshSeconds * 1);
             $$._RefreshInterval = sec * 1000; //2 * 60000;
             $$.SetAutoRefresh(true);
             $$.SetTab(1);

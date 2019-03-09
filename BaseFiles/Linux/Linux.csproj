@@ -30,11 +30,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="lib\shared\System.Data.SQLite.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="dummy.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -42,9 +37,5 @@
       <Project>{BFD3C868-1F62-43FF-8771-CF21825F0C0A}</Project>
       <Name>HomeGenie</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
-    <Folder Include="lib\shared\" />
   </ItemGroup>
 </Project>
