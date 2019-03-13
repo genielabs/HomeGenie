@@ -15,7 +15,7 @@ HG.WebApp.Apps.NetPlay.SlideShow.DisplayImage = function (displayid, cts) {
     }
     setTimeout(function () {
         if (displayid == "") displayid = "0"; // 0 = broadcast to all displays (only supproted method currently)
-        $(slidediv).html('<img src="/' + HG.WebApp.Data.ServiceKey + '/Protocols.AirPlay/' + displayid + '/Control.GetImage/' + (new Date().getTime()) + '" height="100%">');
+        $(slidediv).html('<img src="/' + HG.WebApp.Data.ServiceKey + '/Protocols.AirPlay/' + displayid + '/Control.GetImage/' + '" height="100%">');
         $(slidediv).show();
         $(slidediv).animate({ top: 0, left: 0 }, 2000);
     });

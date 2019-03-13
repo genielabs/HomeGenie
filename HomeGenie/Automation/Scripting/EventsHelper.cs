@@ -21,9 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using HomeGenie.Data;
 using HomeGenie.Service;
@@ -34,6 +31,7 @@ namespace HomeGenie.Automation.Scripting
     /// Events Helper class.\n
     /// Class instance accessor: **When**
     /// </summary>
+    [Serializable]
     public class EventsHelper
     {
         HomeGenieService homegenie = null;
@@ -46,7 +44,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified <handler> after HomeGenie service started.
+        /// Call the specified `handler` after HomeGenie service started.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -63,13 +61,13 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public EventsHelper SystemStarted(Func<bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.SystemStarted = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.SystemStarted = handler;
             return this;
         }
         
         /// <summary>
-        /// Call the specified <handler> when HomeGenie service is stopping.
+        /// Call the specified `handler` when HomeGenie service is stopping.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -86,13 +84,13 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public EventsHelper SystemStopping(Func<bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.SystemStopping = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.SystemStopping = handler;
             return this;
         }
         
         /// <summary>
-        /// Call the specified <handler> when the program is beign stopped.
+        /// Call the specified `handler` when the program is beign stopped.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -109,13 +107,14 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public EventsHelper ProgramStopping(Func<bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.Stopping = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.Stopping = handler;
             return this;
         }
 
         /// <summary>
-        /// Call the specified <handler> function when a parameter of a module changed.
+        /// Call the specified `handler` function when a parameter of a module changed.
+        /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -136,13 +135,14 @@ namespace HomeGenie.Automation.Scripting
         /// <seealso cref="ModuleParameterIsChanging"/>
         public EventsHelper ModuleParameterChanged(Func<ModuleHelper, ModuleParameter, bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.ModuleChangedHandler = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.ModuleChangedHandler = handler;
             return this;
         }
 
         /// <summary>
-        /// Call the specified <handler> function when a parameter of a module is changing.
+        /// Call the specified `handler` function when a parameter of a module is changing. 
+        /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -165,14 +165,13 @@ namespace HomeGenie.Automation.Scripting
         /// <seealso cref="ModuleParameterChanged"/>
         public EventsHelper ModuleParameterIsChanging(Func<ModuleHelper, ModuleParameter, bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.ModuleIsChangingHandler = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.ModuleIsChangingHandler = handler;
             return this;
-
         }
 
         /// <summary>
-        /// Define a <handler> function to call when a web service call starting with <apiCall> is received.
+        /// Define a `handler` function to call when a web service call starting with `apiCall` is received.
         /// This is used to create and handle user-defined web service API methods.
         /// </summary>
         /// <returns>EventsHelper</returns>
@@ -198,26 +197,16 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, object> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.registeredApiCalls.Add(apiCall);
-            homegenie.RegisterDynamicApi(apiCall, handler);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, string> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.registeredApiCalls.Add(apiCall);
-            homegenie.RegisterDynamicApi(apiCall, handler);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.RegisterDynamicApi(apiCall, handler);
             return this;
-        }
-
-
-        //TODO: deprecate this
-        [Obsolete("use 'ModuleParameterChanged' instead")]
-        public EventsHelper ModuleParameterChange(Func<ModuleHelper, ModuleParameter, bool> handler)
-        {
-            return ModuleParameterChanged(handler);
         }
 
     }

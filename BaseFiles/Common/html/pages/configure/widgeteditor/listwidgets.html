@@ -11,7 +11,7 @@
         <ul data-ui-field="group-list" data-role="listview"></ul>
 
     </div>
-    
+
     <div data-ui-field="import-popup" class="ui-corner-all hg-popup-a" data-transition="pop" data-overlay-theme="b">
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
         <div class="ui-corner-top" data-role="header">
@@ -19,11 +19,11 @@
         </div>
         <div class="ui-content ui-corner-bottom">
             <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
-                <form data-ui-field="import-form" target="widget_import_uploadframe" enctype="multipart/form-data" method="post" action="../HomeAutomation.HomeGenie/Config/Widgets.Import/" data-ajax="false">
+                <form data-ui-field="import-form" target="widget_import_uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/Widgets.Import/" data-ajax="false">
                     <input data-ui-field="upload-file" type="file" title="Import widget archive" name="file" />
                 </form>
                 <a data-ui-field="upload-btn" data-locale-id="configure_widgetlist_import" class="ui-btn ui-shadow ui-corner-all">Import</a>
-                <iframe data-ui-field="upload-frame" name="widget_import_uploadframe" src="/dummy/" style="display:none;width:0;height:0;border:0"></iframe>
+                <iframe data-ui-field="upload-frame" name="widget_import_uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
             </fieldset>
         </div>
     </div> 
@@ -56,8 +56,8 @@
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
         <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li><a data-ui-field="import-btn" class="ui-btn ui-icon-bars ui-btn-icon-right" data-locale-id="configure_widgetlist_action_import">Import</a></li>
-            <li><a data-ui-field="addnew-btn" class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_widgetlist_action_addwidget">Add Widget</a>
+            <li><a data-ui-field="import-btn" class="ui-btn ui-icon-fa-upload ui-btn-icon-right" data-locale-id="configure_widgetlist_action_import">Import</a></li>
+            <li><a data-ui-field="addnew-btn" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_widgetlist_action_addwidget">Add Widget</a></li>
         </ul>
     </div>
     
@@ -66,17 +66,17 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a href="#page_configure_automationgroups" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
-                        Back
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
                 <li>
-                    <a href="#page_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#widgetlist_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                    <a class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#widgetlist_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>

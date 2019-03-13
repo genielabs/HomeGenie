@@ -27,24 +27,6 @@
         <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>EnergyManagement.Monitor.KwLoad</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T19:47:35.762198Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyManagement.Monitor.KwCounter</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T19:47:35.770991Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyManagement.Monitor.OperatingDevices</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-02-09T19:47:35.779683Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Messaging.Email.SmtpPort</Name>
         <Value />
         <Description />
@@ -58,54 +40,45 @@
       </ModuleParameter>
     </Settings>
     <SystemName>HAL</SystemName>
-    <Location />
-    <ServicePort>80</ServicePort>
-    <UserPassword />
+    <Location>{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }</Location>
     <GUID></GUID>
     <EnableLogFile>true</EnableLogFile>
   </HomeGenie>
-  <MIGService>
+  <MigService>
+    <Gateways>
+        <Gateway Name="WebServiceGateway" IsEnabled="true">
+            <Options>
+                <Option Name="BaseUrl" Value="/hg/html" />
+                <Option Name="HomePath" Value="html" />
+                <Option Name="Host" Value="+" />
+                <Option Name="Port" Value="80" />
+                <Option Name="Username" Value="admin" />
+                <Option Name="Password" Value="" />
+                <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
+                <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
+                <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
+                <Option Name="UrlAlias.2" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png" />
+                <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png" />
+                <Option Name="UrlAlias.4" Value="hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png" />
+                <Option Name="EnableFileCaching" Value="false" />
+            </Options>
+        </Gateway>
+    </Gateways>
     <Interfaces>
-      <Interface Domain="HomeAutomation.ZWave" IsEnabled="false">
+      <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="true">
+        <Options />
+      </Interface>
+      <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.Insteon" IsEnabled="false">
-        <Options>
-          <Option Name="Port" Value="" />
-          <Option Name="HouseCodes" Value="" />
-        </Options>
-      </Interface>
-      <Interface Domain="HomeAutomation.X10" IsEnabled="false">
+      <Interface Domain="HomeAutomation.X10" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="A" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.W800RF" IsEnabled="false">
-        <Options>
-          <Option Name="Port" Value="" />
-        </Options>
-      </Interface>
-      <Interface Domain="Controllers.LircRemote" IsEnabled="false">
-        <Options />
-      </Interface>
-      <Interface Domain="Media.CameraInput" IsEnabled="false">
-        <Options />
-      </Interface>
-      <Interface Domain="Protocols.UPnP" IsEnabled="false">
-        <Options />
-      </Interface>
-      <Interface Domain="EmbeddedSystems.RaspiGPIO" IsEnabled="false">
-        <Options />
-      </Interface>
-      <Interface Domain="EmbeddedSystems.Weeco4mGPIO" IsEnabled="false">
-        <Options>
-          <Option Name="InputPin" Value="7" />
-          <Option Name="PulsePerWatt" Value="1.0" />
-        </Options>
-      </Interface>
     </Interfaces>
-  </MIGService>
+  </MigService>
 </SystemConfiguration>

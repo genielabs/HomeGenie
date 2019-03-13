@@ -20,165 +20,293 @@
  *     Project Homepage: http://homegenie.it
  */
 
-#define LOGGING
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
 using System.Xml.Linq;
 using System.Dynamic;
-
 using System.IO;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
+using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
 
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-
-using System.IO.Packaging;
-using System.Xml.Serialization;
+using Newtonsoft.Json.Serialization;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace HomeGenie.Service
 {
-
-    static class Extensions
+    
+    public static class SerializationExtensions
     {
-        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        /// <summary>
+        /// Perform a deep Copy of the object.
+        /// </summary>
+        /// <typeparam name="T">The type of object being copied.</typeparam>
+        /// <param name="source">The object instance to copy.</param>
+        /// <returns>The copied object.</returns>
+        public static T DeepClone<T>(this T source)
         {
-            IList<T> list = null;
-            if (listToClone.GetType() == typeof(TsList<T>))
+            // Don't serialize a null object, simply return the default for that object
+            if (Object.ReferenceEquals(source, null))
             {
-                list = listToClone.Select(item => (T)item.Clone()).ToList();
+                return default(T);
             }
-            else
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
+        }
+    }
+
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = dt.DayOfWeek - startOfWeek;
+            if (diff < 0)
             {
-                list = listToClone.Select(item => (T)item.Clone()).ToList();
+                diff += 7;
             }
-            return list;
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
-
         private object syncLock = new object();
-
-        public TsList()
-        {
-        }
 
         public object LockObject
         {
             get { return syncLock; }
         }
 
-        new public void Clear()
+        public new void Clear()
         {
-
-            lock (syncLock) base.Clear();
+            lock (syncLock)
+                base.Clear();
         }
 
-        new public void Add(T value)
+        public new void Add(T value)
         {
-
-            lock (syncLock) base.Add(value);
+            lock (syncLock)
+                base.Add(value);
         }
 
-        new public void RemoveAll(Predicate<T> predicate)
+        public new int RemoveAll(Predicate<T> predicate)
         {
-            lock (syncLock) base.RemoveAll(predicate);
+            lock (syncLock)
+                return base.RemoveAll(predicate);
         }
 
-        new public void Remove(T item)
+        public new bool Remove(T item)
         {
-            lock (syncLock) base.Remove(item);
+            lock (syncLock)
+                return base.Remove(item);
         }
 
-        new public void Sort(Comparison<T> comparison)
+        public new void Sort(Comparison<T> comparison)
         {
-            lock (syncLock) base.Sort(comparison);
-        }
-
-    }
-
-
-    public static class JsonHelper
-    {
-        public static string GetSimpleResponse(string value)
-        {
-            dynamic res = new ExpandoObject();
-            res.ResponseValue = value;
-            return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(res) + "]";
+            lock (syncLock)
+                base.Sort(comparison);
         }
     }
-
 
     public static class Utility
     {
-        [DllImport("winmm.dll", SetLastError = true)]
-        static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
 
-        // buffer size for AddFileToZip
-        private const long BUFFER_SIZE = 4096;
-        // delegate used by RunAsyncTask
-        public delegate void AsyncFunction();
-
-        internal static void Say(string sentence, string locale, bool async = false)
+        public static dynamic ParseXmlToDynamic(string xml)
         {
-            if (async)
+            var document = XElement.Load(new StringReader(xml));
+            XElement root = new XElement("Root", document);
+            return new DynamicXmlParser(root);
+        }
+
+        public static bool UpdateXmlDatabase<T>(T items, string filename, Func<Type,Exception,bool> callback)
+        {
+            bool success = false;
+            XmlWriter writer = null;
+            try
             {
-                var t = new Thread(() =>
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+                if (File.Exists(filePath))
                 {
-                    Say(sentence, locale);
-                });
-                t.Start();
+                    File.Delete(filePath);
+                }
+                var settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    Encoding = Encoding.UTF8
+                };
+                var serializer = new XmlSerializer(typeof(T));
+                writer = XmlWriter.Create(filePath, settings);
+                serializer.Serialize(writer, items);
+                writer.Flush();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                if (callback != null) callback(items.GetType(), e);
+            }
+            finally
+            {
+                if (writer != null) writer.Close();
+            }
+            return success;
+        }
+        
+        public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
+        {
+            if (module == null)
+                return null;
+            return ModuleParameterGet(module.Properties, propertyName);
+        }
+        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter>  parameters, string propertyName)
+        {
+            return parameters.Find(x => x.Name == propertyName);
+        }
+        public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
+        {
+            if (module == null)
+                return null;
+            return ModuleParameterSet(module.Properties, propertyName, propertyValue);
+        }
+
+        public static ModuleParameter ModuleParameterSet(TsList<ModuleParameter> parameters, string propertyName, string propertyValue)
+        {
+            var parameter = parameters.Find(mpar => mpar.Name == propertyName);
+            if (parameter == null)
+            {
+                parameter = new ModuleParameter() { Name = propertyName, Value = propertyValue };
+                parameters.Add(parameter);
+            }
+            parameter.Value = propertyValue;
+            return parameter;
+        }
+
+        public static DateTime JavaTimeStampToDateTime(double javaTimestamp)
+        {
+            // Java timestamp is millisecods past epoch
+            var timestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            timestamp = timestamp.AddMilliseconds(javaTimestamp);
+            return timestamp;
+        }
+
+        public static string Module2Json(Module module, bool hideProperties)
+        {
+            var settings = new JsonSerializerSettings{ Formatting = Formatting.Indented };
+            if (hideProperties)
+            {
+                var resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties" });
+                settings.ContractResolver = resolver;
+            }
+            return JsonConvert.SerializeObject(module, settings);
+        }
+
+        public static string JsonEncode(string fieldValue)
+        {
+            if (fieldValue == null)
+            {
+                fieldValue = "";
             }
             else
             {
-                Say(sentence, locale);
+                fieldValue = fieldValue.Replace("\\", "\\\\");
+                fieldValue = fieldValue.Replace("\"", "\\\"");
+                fieldValue = fieldValue.Replace("\n", "\\n");
+                fieldValue = fieldValue.Replace("\r", "\\r");
+                fieldValue = fieldValue.Replace("\t", "\\t");
+                fieldValue = fieldValue.Replace("\b", "\\b");
+                fieldValue = fieldValue.Replace("\f", "\\f");
             }
+            return fieldValue;
         }
 
-        internal static void Say(string sentence, string locale)
+        public static string XmlEncode(string fieldValue)
+        {
+            if (fieldValue == null)
+            {
+                fieldValue = "";
+            }
+            else //if (s.IndexOf("&") >= 0 && s.IndexOf("\"") >= 0)
+            {
+                fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\"", "&quot;");
+            }
+            return fieldValue;
+        }
+
+        public static string GetTmpFolder()
+        {
+            string tempFolder = "tmp";
+            if (!Directory.Exists(tempFolder))
+            {
+                Directory.CreateDirectory(tempFolder);
+            }
+            return tempFolder;
+        }
+
+        public static void FolderCleanUp(string path)
         {
             try
             {
-                var client = new WebClient();
-                client.Headers.Add("Referer", "http://translate.google.com");
-                var audioData = client.DownloadData("http://translate.google.com/translate_tts?tl=" + locale + "&q=" + sentence);
-                client.Dispose();
-
-                var outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
-                if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
-                var file = Path.Combine(outputDirectory, "_synthesis_tmp.mp3");
-
-                if (File.Exists(file)) File.Delete(file);
-                var stream = File.OpenWrite(file);
-                stream.Write(audioData, 0, audioData.Length);
-                stream.Close();
-
-                var wavFile = file.Replace(".mp3", ".wav");
-                Process.Start(new ProcessStartInfo("lame", "--decode \"" + file + "\" \"" + wavFile + "\"") {
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
-                    UseShellExecute = false
-                }).WaitForExit();
-
-                Play(wavFile);
+                // clean up directory
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
+                Directory.CreateDirectory(path);
             }
-            catch (Exception)
+            catch
             {
-                // TODO: add error logging 
+                // TODO: report exception
             }
         }
-
-        internal static void Play(string wavFile)
+        
+        private static string picoPath = "/usr/bin/pico2wave";
+        public static void Say(string sentence, string locale, bool async = false)
+        {
+            // if Pico TTS is not installed, then use Google Voice API
+            // Note: Pico is only supported in Linux
+            if (File.Exists(picoPath) && "#en-us#en-gb#de-de#es-es#fr-fr#it-it#".IndexOf("#"+locale.ToLower()+"#") >= 0)
+            {
+                if (async)
+                {
+                    var t = new Thread(() => {
+                        PicoSay(sentence, locale);
+                    });
+                    t.Start();
+                }
+                else
+                {
+                    PicoSay(sentence, locale);
+                }
+            }
+            else
+            {
+                if (async)
+                {
+                    var t = new Thread(() => {
+                        GoogleVoiceSay(sentence, locale);
+                    });
+                    t.Start();
+                }
+                else
+                {
+                    GoogleVoiceSay(sentence, locale);
+                }
+            }
+        }
+        
+        public static void Play(string wavFile)
         {
 
             var os = Environment.OSVersion;
@@ -186,18 +314,18 @@ namespace HomeGenie.Service
             //
             switch (platform)
             {
-            case PlatformID.Win32NT:
-            case PlatformID.Win32S:
-            case PlatformID.Win32Windows:
-            case PlatformID.WinCE:
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                case PlatformID.WinCE:
                 PlaySound(wavFile, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
                 break;
-            case PlatformID.Unix:
-            case PlatformID.MacOSX:
-            default:
-                    //var player = new System.Media.SoundPlayer();
-                    //player.SoundLocation = wavFile;
-                    //player.Play();
+                case PlatformID.Unix:
+                case PlatformID.MacOSX:
+                default:
+                //var player = new System.Media.SoundPlayer();
+                //player.SoundLocation = wavFile;
+                //player.Play();
                 Process.Start(new ProcessStartInfo("aplay", "\"" + wavFile + "\"") {
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden,
@@ -209,59 +337,187 @@ namespace HomeGenie.Service
 
         }
 
-        internal static List<string> UncompressZip(string archiveName, string destinationFolder)
+        #region Private helper methods
+
+        [DllImport("winmm.dll", SetLastError = true)]
+        static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
+        // buffer size for AddFileToZip
+        private const long BUFFER_SIZE = 4096;
+        // delegate used by RunAsyncTask
+        public delegate void AsyncFunction();
+
+        internal static void PicoSay(string sentence, string locale)
+        {
+            try
+            {
+                var wavFile = Path.Combine(GetTmpFolder(), "_synthesis_tmp.wav");
+                if (File.Exists(wavFile))
+                    File.Delete(wavFile);
+
+                Process.Start(new ProcessStartInfo(picoPath, " -w " + wavFile + " -l " + locale + " \"" + sentence + "\"") {
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    UseShellExecute = false
+                }).WaitForExit();
+
+                if (File.Exists(wavFile))
+                    Play(wavFile);
+            }
+            catch (Exception e)
+            {
+                HomeGenieService.LogError(e);
+            }
+        }
+
+        internal static void GoogleVoiceSay(string sentence, string locale)
+        {
+            try
+            {
+                var mp3File = Path.Combine(GetTmpFolder(), "_synthesis_tmp.mp3");
+                using (var client = new WebClient())
+                {
+                    client.Encoding = UTF8Encoding.UTF8;
+                    client.Headers.Add("Referer", "http://translate.google.com");
+                    var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence) + "&client=homegenie&ts=" + DateTime.UtcNow.Ticks);
+
+                    if (File.Exists(mp3File))
+                        File.Delete(mp3File);
+                    
+                    var stream = File.OpenWrite(mp3File);
+                    stream.Write(audioData, 0, audioData.Length);
+                    stream.Close();
+
+                    client.Dispose();
+                }
+
+                var wavFile = mp3File.Replace(".mp3", ".wav");
+                Process.Start(new ProcessStartInfo("lame", "--decode \"" + mp3File + "\" \"" + wavFile + "\"") {
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    UseShellExecute = false
+                }).WaitForExit();
+
+                if (File.Exists(mp3File))
+                    Play(wavFile);
+            }
+            catch (Exception e)
+            {
+                HomeGenieService.LogError(e);
+            }
+        }
+
+        internal static List<string> UncompressTgz(string archiveName, string destinationFolder)
         {
             List<string> extractedFiles = new List<string>();
-            // Unarchive (unzip)
-            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
+            try
             {
-                foreach (var part in package.GetParts())
-                {
-                    string filePath = part.Uri.OriginalString.Substring(1);
-                    string target = Path.Combine(destinationFolder, filePath);
-                    if (!Directory.Exists(Path.GetDirectoryName(target)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(target));
-                    }
+                Stream inStream = File.OpenRead(archiveName);
+                Stream gzipStream = new GZipInputStream(inStream);
 
-                    if (File.Exists(target)) File.Delete(target);
+                TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
+                tarArchive.ProgressMessageEvent += (archive, entry, message) => {
+                    extractedFiles.Add(entry.Name);
+                };
 
-                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
-                    {
-                        byte[] buffer = new byte[4096];
-                        int read;
-                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            destination.Write(buffer, 0, read);
-                        }
-                    }
+                tarArchive.ExtractContents(destinationFolder);
+                tarArchive.ListContents();
+                tarArchive.Close();
 
-                    extractedFiles.Add(filePath);
-                }
+                gzipStream.Close();
+                inStream.Close();
+            } 
+            catch (Exception e) 
+            {
+                Console.WriteLine("UnTar error: " + e.Message);
             }
 
             return extractedFiles;
         }
 
-        internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
+        internal static List<string> UncompressZip(string archiveName, string destinationFolder)
         {
-            using (var zip = System.IO.Packaging.Package.Open(zipFilename, FileMode.OpenOrCreate))
+            ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
+            List<string> extractedFiles = new List<string>();
+            ZipFile zipFile = null;
+            try
             {
-                string destFilename = (String.IsNullOrWhiteSpace(storeAsName) ? fileToAdd : storeAsName);
-                var uri = PackUriHelper.CreatePartUri(new Uri(destFilename, UriKind.Relative));
-                if (zip.PartExists(uri))
+                FileStream fs = File.OpenRead(archiveName);
+                zipFile = new ZipFile(fs);
+                //if (!String.IsNullOrEmpty(password)) {
+                //    zf.Password = password;  // AES encrypted entries are handled automatically
+                //}
+                foreach (ZipEntry zipEntry in zipFile)
                 {
-                    zip.DeletePart(uri);
-                }
-                var part = zip.CreatePart(uri, "", CompressionOption.Normal);
-                using (var fileStream = new FileStream(fileToAdd, FileMode.Open, FileAccess.Read))
-                {
-                    using (var outputStream = part.GetStream())
+                    if (!zipEntry.IsFile)
                     {
-                        CopyStream(fileStream, outputStream);
+                        continue; // Ignore directories
                     }
+
+                    string filePath = zipEntry.Name;
+                    string target = Path.Combine(destinationFolder, filePath.TrimStart(new char[]{'/', '\\'}));
+                    if (!Directory.Exists(Path.GetDirectoryName(target)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(target));
+                    }
+
+                    if (File.Exists(target))
+                        File.Delete(target);
+                    
+                    byte[] buffer = new byte[4096];
+                    Stream zipStream = zipFile.GetInputStream(zipEntry);
+                    String fullZipToPath = Path.Combine(destinationFolder, filePath);
+                    using (FileStream streamWriter = File.Create(fullZipToPath))
+                    {
+                        StreamUtils.Copy(zipStream, streamWriter, buffer);
+                    }
+                    try { extractedFiles.Add(filePath); } catch { }
                 }
             }
+            catch (Exception e)
+            {
+                extractedFiles.Clear();
+                // TODO: something to do here?
+                Console.WriteLine("Unzip error: " + e.Message);
+            }
+            finally
+            {
+                if (zipFile != null)
+                {
+                    zipFile.IsStreamOwner = true;
+                    zipFile.Close();
+                }
+            }
+            return extractedFiles;
+        }
+
+        internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
+        {
+            ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
+            if (!File.Exists(zipFilename))
+            {
+                FileStream zfs = File.Create(zipFilename);
+                ZipOutputStream zipStream = new ZipOutputStream(zfs);
+                zipStream.SetLevel(3); //0-9, 9 being the highest level of compression
+                /*
+                // NOTE: commented code because this is raising an error "Extra data extended Zip64 information length is invalid"
+                // For compatibility with previous HG, we add the "[Content_Types].xml" file
+                zipStream.PutNextEntry(new ZipEntry("[Content_Types].xml"));
+                using (FileStream streamReader = File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "[Content_Types].xml"))) {
+                    StreamUtils.Copy(streamReader, zipStream, new byte[4096]);
+                }
+                zipStream.CloseEntry();
+                */
+                zipStream.IsStreamOwner = true; // Makes the Close also close the underlying stream
+                zipStream.Close();
+            }
+            ZipFile zipFile = new ZipFile(zipFilename);
+            zipFile.BeginUpdate();
+            zipFile.Add(fileToAdd, (String.IsNullOrWhiteSpace(storeAsName) ? fileToAdd : storeAsName));
+            zipFile.CommitUpdate();
+            zipFile.IsStreamOwner = true;
+            zipFile.Close();
         }
 
         private static void CopyStream(System.IO.FileStream inputStream, System.IO.Stream outputStream)
@@ -287,151 +543,36 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "Service.Utility.RunAsyncTask",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             });
             asyncTask.Start();
             return asyncTask;
         }
 
-
-
-        public static dynamic ParseXmlToDynamic(string xml)
+        public static DateTime JavascriptToDate(long timestamp)
         {
-            var document = XElement.Load(new StringReader(xml));
-            XElement root = new XElement("Root", document);
-            return new DynamicXmlParser(root);
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            return (baseDate.AddMilliseconds(timestamp));
         }
 
-        public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
+        public static DateTime JavascriptToDateUtc(double timestamp)
         {
-            return module.Properties.Find(delegate(ModuleParameter parameter)
-            {
-                return parameter.Name == propertyName;
-            });
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);
+            return (baseDate.AddMilliseconds(timestamp).ToUniversalTime());
         }
 
-        public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
+        public static double DateToJavascript(DateTime date)
         {
-            if (module == null) return null;
-            //
-            var parameter = module.Properties.Find(mpar => mpar.Name == propertyName);
-            if (parameter == null)
-            {
-                parameter = new ModuleParameter() { Name = propertyName, Value = propertyValue };
-                module.Properties.Add(parameter);
-            }
-            parameter.Value = propertyValue;
-            return parameter;
+            return ((date.Ticks - 621355968000000000L) / 10000D);
         }
 
-        public static string WaitModuleParameterChange(Module module, string parameterName)
+        public static double DateToJavascriptLocal(DateTime date)
         {
-            string value = "";
-            // TODO make it as a function _waitModuleParameterChange(mod, parname, timeout)
-            ModuleParameter parameter = Service.Utility.ModuleParameterGet(module, parameterName);
-            if (parameter != null)
-            {
-                var updated = DateTime.UtcNow.Ticks; //p.UpdateTime.Ticks - (TimeSpan.TicksPerSecond * 1); 
-                //
-                Thread.Sleep(500);
-                //
-                int timeout = 0;
-                int maxWait = 50; //(50 * 100ms ticks = 5000 ms)
-                int tickFrequency = 100;
-                //
-                while ((TimeSpan.FromTicks(parameter.UpdateTime.Ticks - updated).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxWait)
-                {
-                    Thread.Sleep(tickFrequency);
-                }
-                //
-                if (timeout < maxWait)
-                {
-                    value = parameter.Value;
-                }
-            }
-            return value;
+            return ((date.ToLocalTime().Ticks - 621355968000000000L) / 10000D);
         }
 
-        public static DateTime JavaTimeStampToDateTime(double javaTimestamp)
-        {
-            // Java timestamp is millisecods past epoch
-            var timestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            timestamp = timestamp.AddMilliseconds(javaTimestamp);
-            return timestamp;
-        }
-
-        public static string Module2Json(Module module, bool hideProperties)
-        {
-            string json = "{\n" +
-                          "   \"Name\": \"" + JsonEncode(module.Name) + "\",\n" +
-                          "   \"Description\": \"" + JsonEncode(module.Description) + "\",\n" +
-                          "   \"DeviceType\": \"" + module.DeviceType + "\",\n" +
-                          "   \"Domain\": \"" + module.Domain + "\",\n" +
-                          "   \"Address\": \"" + module.Address + "\",\n";
-            if (!hideProperties)
-            {
-                json += "   \"Properties\": [ \n";
-                //
-                for (int i = 0; i < module.Properties.Count; i++)
-                {
-                    var parameter = module.Properties[i];
-                    json += "       {\n" +
-                    "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
-                    "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
-                    "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
-                    "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\"\n" +
-                    "       },\n";
-                }
-                json = json.TrimEnd(',', '\n');
-                //
-                json += "   ],\n";
-            }
-            json += "   \"RoutingNode\": \"" + (module.RoutingNode != null ? module.RoutingNode : "") + "\"\n";
-            json += "}";
-            //
-            return json;
-        }
-
-        public static string JsonEncode(string fieldValue)
-        {
-            if (fieldValue == null)
-            {
-                fieldValue = "";
-            }
-            else
-            {
-                fieldValue = fieldValue.Replace("&", "&amp;");
-                fieldValue = fieldValue.Replace("\"", "&quot;");
-                fieldValue = fieldValue.Replace("\n", "\\n");
-                //fieldValue = fieldValue.Replace("\'", "\\'");
-                fieldValue = fieldValue.Replace("\r", "\\r");
-                fieldValue = fieldValue.Replace("\t", "\\t");
-                fieldValue = fieldValue.Replace("\b", "\\b");
-                fieldValue = fieldValue.Replace("\f", "\\f");
-            }
-            return fieldValue;
-        }
-
-        public static string XmlEncode(string fieldValue)
-        {
-            if (fieldValue == null)
-            {
-                fieldValue = "";
-            }
-            else //if (s.IndexOf("&") >= 0 && s.IndexOf("\"") >= 0)
-            {
-                fieldValue = fieldValue.Replace("&", "&amp;");
-                fieldValue = fieldValue.Replace("\"", "&quot;");
-            }
-            return fieldValue;
-        }
+        #endregion
 
     }
 
@@ -499,7 +640,77 @@ namespace HomeGenie.Service
                 return element.Attribute(attr).Value;
             }
         }
+    }
+
+    public class ConsoleRedirect : TextWriter
+    {
+        private string lineBuffer = "";
+
+        public Action<string> ProcessOutput;
+
+        public override void Write(string message)
+        {
+            string newLine = new string(CoreNewLine);
+            if (message.IndexOf(newLine) >= 0)
+            {
+                string[] parts = message.Split(CoreNewLine);
+                if (message.StartsWith(newLine))
+                    this.WriteLine(this.lineBuffer);
+                else
+                    parts[0] = this.lineBuffer + parts[0];
+                this.lineBuffer = "";
+                if (parts.Length > 1 && !parts[parts.Length - 1].EndsWith(newLine))
+                {
+                    this.lineBuffer += parts[parts.Length - 1];
+                    parts[parts.Length - 1] = "";
+                }
+                foreach (var s in parts)
+                {
+                    if (!String.IsNullOrWhiteSpace(s))
+                        this.WriteLine(s);
+                }
+                message = "";
+            }
+            this.lineBuffer += message;
+        }
+        public override void WriteLine(string message)
+        {
+            if (ProcessOutput != null && !string.IsNullOrWhiteSpace(message))
+            {
+                // log entire line into the "Domain" column
+                //SystemLogger.Instance.WriteToLog(new HomeGenie.Data.LogEntry() {
+                //    Domain = "# " + this.lineBuffer + message
+                //});
+                ProcessOutput(this.lineBuffer + message);
+            }
+            this.lineBuffer = "";
+        }
+
+        public override System.Text.Encoding Encoding
+        {
+            get
+            {
+                return UTF8Encoding.UTF8;
+            }
+        }
 
     }
 
+    public class IgnorePropertyContractResolver : DefaultContractResolver
+    {
+        private readonly List<string> _ignoredProperties;
+
+        public IgnorePropertyContractResolver(List<string> ignoredProperties)
+        {
+            _ignoredProperties = ignoredProperties;
+        }
+
+        protected override JsonProperty CreateProperty(System.Reflection.MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var jsonProperty = base.CreateProperty(member, memberSerialization);
+            if (_ignoredProperties.Contains(member.Name))
+                jsonProperty.ShouldSerialize = instance => {return false;};
+            return jsonProperty;
+        }
+    }
 }

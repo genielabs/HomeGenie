@@ -4,35 +4,33 @@
     "home_menu_control": 
         "Kontroll",
     "home_menu_analyze": 
-        "Analyseringar",
+        "Analyser",
     "home_menu_configure": 
         "Konfigurera",
-    "home_menu_about": 
-        "Om",
     "homegenie_about_title": 
         "Om",
     "control_groups_and_modules": 
-        "Kontroll Grupper<br> och Moduler",
+        "Kontrollera Grupper<br>och Moduler",
     "bottombar_button_home": 
-        "Startsida",
+        "Hem",
     "configure_program_bbaractions": 
-        "Åtgärder",
+        "Val",
     "control_macrorecord_discard": 
         "Kassera",
     "control_macrorecord_save": 
         "Spara",
     "analyze_statistics": 
-        "Analyserings<br>Statistik",
+        "Analys<br>Statistik",
     "analyze_total_watts_hourly": 
         "total förbrukning av watt per timme",
     "analyze_load_peak_last": 
-        "belastningstopp de senaste fyra timmarna",
+        "max förbrukning de senaste fyra timmarna",
     "configure_menu_title": 
         "Konfigurera",
     "configure_menu_heading": 
-        "Konfigurations Meny",
+        "Konfigurationsmeny",
     "configure_groups_heading": 
-        "Groups<br>and Modules",
+        "Grupper<br>och Moduler",
     "configure_menu_groups_modules": 
         "Grupper och Moduler",
     "configure_menu_automation": 
@@ -42,19 +40,25 @@
     "configure_menu_maintenance": 
         "Underhåll och Uppdateringar",
     "configure_automation_heading": 
-        "Program<br>Grupper",
+         "<font style='color:gray'>Program</font><br>Grupper",
     "configure_group_newgroup": 
         "Ny Grupp",
     "configure_group_entergroupname": 
-        "Nytt grupp namn:",
+        "Nytt gruppnamn:",
     "configure_group_newgroupcancel": 
         "Avbryt",
     "bottombar_button_back": 
         "Tillbaka",
     "configure_group_bottombar_group_add": 
         "Lägg Till Grupp",
+    "configure_group_group": 
+        "Grupp",
     "configure_group_groupname": 
-        "Grupp Namn",
+        "Namn",
+    "configure_group_groupwallpaper":
+        "Bakgrund",
+    "configure_group_modulelist":
+        "Modullista",
     "configure_group_deletegroup": 
         "Ta Bort Grupp?",
     "configure_group_deleteprompt": 
@@ -65,8 +69,10 @@
         "Avbryt",
     "configure_group_deleteconfirm": 
         "Ta Bort",
-    "configure_module_newmoduleadd": 
+    "configure_group_addmodule": 
         "Lägg Till Ny Modul",
+	 "configure_automation_group_modulechoose_desc":
+			"Klicka på en modul för att lägga till den.",
     "configure_module_newmodulecancel": 
         "Avbryt",
     "configure_module_newmoduleconfirm": 
@@ -74,13 +80,13 @@
     "configure_module_propname": 
         "Namn",
     "configure_module_typelight": 
-        "Lljus",
+        "Belysning",
     "configure_module_typedimmer": 
         "Dimmer",
     "configure_module_typeswitch": 
         "Strömbrytare",
     "configure_module_typesensor": 
-        "Sensor",
+        "Givare",
     "configure_module_typetemperature": 
         "Temperatur",
     "configure_module_typesiren": 
@@ -90,11 +96,11 @@
     "configure_module_typethermostat": 
         "Termostat",
     "configure_module_typeshutter": 
-        "Shutter",
+        "Mörkläggning",
     "configure_module_typedoorwindow": 
         "Dörr/Fönster",
     "configure_module_options": 
-        "Setup",
+        "Inställningar",
     "configure_module_optupdate": 
         "Uppdatera modul",
     "configure_module_optremove": 
@@ -104,7 +110,7 @@
     "configure_group_bottombar_addmodule": 
         "Lägg Till Modul",
     "configure_program_automationtitle": 
-        "Programs List",
+        "Programlista",
     "configure_program_newprogram": 
         "Nytt Program",
     "configure_program_enterprogramname": 
@@ -132,35 +138,35 @@
     "configure_program_options_delete": 
         "Ta bort",
     "configure_program_programgroup": 
-        "Program Grupp",
+        "Programgrupp",
     "configure_program_programname": 
-        "Program Namn",
+        "Programnamn",
     "configure_program_programdescription": 
-        "Program Beskrivning",
+        "Programbeskrivning",
     "configure_program_programtype": 
-        "Program Typ",
+        "Programtyp",
     "configure_program_trigger": 
-        "Program Trigger",
+        "Programtrigger",
     "configure_program_conditionswitchestrue": 
-        "när villkoret utvärdering växlar till 'true/sant'",
+        "när villkoret växlar till 'true/sant'",
     "configure_program_conditionswitchesfalse": 
-        "när villkoret utvärdering växlar till 'false/falskt'",
+        "när villkoret växlar till 'false/falskt'",
     "configure_program_runonceconditiontrue": 
-        "köras en gång, när villkoret utvärdering returnerar 'sant/true'",
+        "kör en gång, när villkoret returnerar 'true/sant'",
     "configure_program_conditionistrue": 
-        "när villkoret utvärdering returnerar 'true/sant'",
+        "när villkoret returnerar 'true/sant'",
     "configure_program_conditionisfalse": 
-        "när villkoret utvärdering returnerar 'false/falskt'",
+        "när villkoret returnerar 'false/falskt'",
     "configure_program_programconditions": 
-        "Program Förhållanden",
+        "Programvillkor",
     "configure_program_conditionadd": 
-        "Lägg Till Förhållande",
+        "Lägg Till Villkor",
     "configure_program_selectconditioncontext": 
-        "Välj skick sammanhang",
+        "Välj Villkorsgrupp",
     "configure_program_wizardback": 
         "tillbaka",
     "configure_program_selectoperator": 
-        "Välj jämförelseoperatorn",
+        "Välj jämförelseoperator",
     "configure_program_operatorless": 
         "Mindre Än",
     "configure_program_operatorequal": 
@@ -172,17 +178,17 @@
     "configure_program_wizarddone": 
         "klar",
     "configure_program_deleteconditiontitle": 
-        "Radera skick?",
+        "Radera villkor?",
     "configure_program_deleteconditionprompt": 
-        "Är du säker på att du vill radera detta skick?",
+        "Är du säker på att du vill radera detta villkor?",
     "configure_program_deleteconditionadvice": 
         "Denna åtgärd kan inte ångras.",
     "configure_program_instructions": 
-        "Program Instruktioner",
+        "Programinstruktioner",
     "configure_program_instructionadd": 
         "Lägg Till Instruktion",
     "configure_program_selectcommandcontext": 
-        "Välj kommando sammanhang",
+        "Välj Kommandogrupp",
     "configure_program_commandarguments": 
         "Kommandoargument",
     "configure_program_deleteinstructiontitle": 
@@ -214,79 +220,37 @@
     "configure_program_errorstitle": 
         "Fel",
     "configure_program_bbar_programeditruncode": 
-        "Redigera Trigger Kod",
+        "Redigera Triggerkod",
     "configure_automationgroup_newgroup": 
         "Ny Grupp",
     "configure_automationgroup_entergroupname": 
-        "Nytt grupp namn:",
+        "Nytt gruppnamn:",
     "configure_automationgroup_newgroupcancel": 
         "Avbryt",
     "configure_automationgroup_bottombar_group_add": 
         "Lägg Till Grupp",
     "configure_interfaces_heading": 
         "Inställningar",
-    "configure_interfaces_zwaveoptions": 
-        "ZWave Gränssnitt Inställningar",
     "configure_interfaces_optdisable": 
-        "Inaktivera",
+        "Inaktiverad",
     "configure_interfaces_optenable": 
-        "Aktivera",
-    "configure_interfaces_zwaveport": 
-        "Enhets Port",
-    "configure_interfaces_zwavecommontasks": 
-        "ZWave Uppgifter",
-    "configure_interfaces_zwaveaddnode": 
-        "Lägg Till Nod",
-    "configure_interfaces_zwaveremovenode": 
-        "Ta Bort Nod",
-    "configure_interfaces_x10options": 
-        "X10 Gränssnitt Inställningar",
-    "configure_interfaces_x10port": 
-        "Enhets Port",
-    "configure_interfaces_x10housecodes": 
-        "Hus koder i bruk",
-    "configure_interfaces_w800rf32": 
-        "W800RF32 RF Receiver Gränssnitt Inställningar",
-    "configure_interfaces_w800rf32port": 
-        "Enhets Port",
-    "configure_interfaces_lircremote": 
-        "Lirc Infraröd Fjärr",
-    "configure_interfaces_lircremoteconfiguration": 
-        "Lirc Konfiguration",
-    "configure_interfaces_lircremoteaddremote": 
-        "Lägg Till Fjärr",
-    "configure_interfaces_camera": 
-        "Kamera Enheter",
-    "configure_interfaces_cameradesc": 
-        "Fungerar med alla Video4Linux kompatibla enheter på <b> / dev/video0 </ b> (Endast x64 Ubuntu och Raspberry Pi).",
-    "configure_interfaces_cameraport": 
-        "Enhets Port",
-    "configure_interfaces_raspigpio": 
-        "Raspberry Pi GPIO",
-    "configure_interfaces_airplay": 
-        "Airplay Mottagare",
-    "configure_system_lircremotesadd": 
-        "Lägg Till Fjärrkontroll",
-    "configure_system_zwaveaddnodeheading": 
-        "Lägg Till/Ta Bort Enhet",
-    "configure_system_zwaveaddnodepressbutton": 
-        "Tryck på knappen para för att lägga till enhet:",
-    "configure_system_zwaveaddnodeoperationtimeout": 
-        "denna åtgärd stängs ner inom 10 sekunder.",
-    "configure_system_zwaveaddnodeclose": 
-        "Stäng",
+        "Aktiverad",
     "configure_maintenance_heading": 
         "Underhåll",
+    "configure_system_installpackage":
+        "Installera Paket",
+    "configure_system_packagemanager":
+        "Pakethanterare",
     "configure_system_theme": 
         "Tema",
     "configure_system_options": 
-        "System Alternativ",
+        "Systemalternativ",
     "configure_system_serviceportis": 
-        "Http service porten är",
+        "Http-service porten är",
     "configure_system_serviceportchange": 
         "Ändra Port",
     "configure_security_passwordprotectedaccess": 
-        "Lösenordsskyddad Åtkomst",
+        "Lösenordskyddad Åtkomst",
     "configure_system_configanddata": 
         "Konfiguration och Data",
     "configure_maintenance_configuration": 
@@ -304,9 +268,9 @@
     "systemsettings_backuprestores1confirm": 
         "Återställ",
     "configure_system_serviceportheading": 
-        "Http Service Port",
+        "Http Service-Port",
     "configure_system_serviceportchangenote": 
-        "Notera: efter portbyte så måste HomeGenie startas om för att bekräfta de nya inställningarna!",
+        "Notera: efter byte av port så måste HomeGenie starta om för att använda de nya inställningarna!",
     "configure_system_serviceportcancel": 
         "Avbryt",
     "securitysettings_password_adminpassword": 
@@ -326,417 +290,629 @@
     "configure_maintenance_resetcancel": 
         "Avbryt",
     "home_voicerecognition_text_placeholder": 
-        "Click the button for voice control or type a sentence...",
+        "Klicka på knappen för röststyrning eller skriv en mening...",
     "home_voicerecognition_voice": 
-        "Voice",
+        "Röst",
     "configure_menu_scheduler": 
-        "Scheduler",
+        "Schemaläggare",
     "configure_grouplist": 
-        "Groups List",
+        "Grupplista",
     "configure_schedulerservice_title": 
-        "Event<br />Scheduling",
+        "Schemaläggning",
     "configure_scheduler_events": 
-        "Scheduler Events",
+        "Schemaläggningar",
     "configure_schedulerservice_bottombar_event_add": 
-        "Add Event",
+        "Lägg Till Händelse",
     "configure_schedulerservice_schedulerevent": 
-        "Scheduler Event",
+        "Schemaläggarhändelse",
     "configure_schedulerservice_itemname": 
-        "Name",
+        "Namn",
     "configure_schedulerservice_itemcronexp": 
-        "Cron Expression",
+        "Cron-uttryck",
     "configure_schedulerservice_itemprogramid": 
-        "Program Id or Name (optional)",
+        "Program-Id eller Namn (valbart)",
     "configure_schedulerservice_cancelitem": 
-        "Cancel",
+        "Avbryt",
     "configure_schedulerservice_deleteitem": 
-        "Delete",
+        "Ta bort",
     "configure_schedulerservice_updateitem": 
-        "Update",
+        "Uppdatera",
     "configure_system_updatemanager": 
-        "Update Manager",
+        "Uppdateringar",
     "configure_system_updatemanager_updatecheck": 
-        "Update Check",
+        "Sök uppdatering",
     "configure_system_updatemanager_installupdate": 
-        "Install Update",
+        "Installera Uppdatering",
+    "configure_system_updatemanager_no_updates":
+        "Inga nya uppdateringar tillgängliga.",
+    "configure_system_updatemanager_updates_available":
+        "Följande uppdateringar finns tillgängliga:",
     "configure_system_restart_service": 
-        "Service Restart",
+        "Starta om service",
     "configure_system_restart": 
-        "Restart",
+        "Starta om",
     "configure_system_loganddebug": 
-        "Log file",
+        "Log-fil",
     "configure_system_logdownload": 
-        "Download",
+        "Ladda ner",
     "configure_system_logdownloadtoday": 
-        "Today",
+        "I dag",
     "configure_system_logdownloadyesterday": 
-        "Yesterday",
+        "I går",
     "configure_system_httpsettings": 
-        "HTTP Settings",
+        "HTTP-inställningar",
     "configure_security_passwordprotectedaccess_set": 
-        "Set",
+        "Sätt lösenord",
     "configure_security_passwordprotectedaccess_clear": 
-        "Clear",
+        "Rensa",
     "configure_system_httpcache": 
-        "Http Service Cache",
+        "Http-servicecache",
     "configure_maintenance_configuration_info": 
-        "<b>Note:</b> before restoring a backup file you've to set the same system password used when creating it.",
+        "<b>Notis:</b> innan du återställer en backup behöver du sätta samma systemlösenord som när backupen togs.",
     "configure_maintenance_configuration_backup": 
         "Backup",
     "configure_maintenance_configuration_restore": 
-        "Restore",
+        "Återställ Backup",
     "configure_maintenance_configuration_factory_reset": 
-        "Factory Reset",
+        "Fabriksåterställ",
     "configure_system_modulescleanup": 
-        "Modules Cleanup",
+        "Rensa moduler",
     "configure_system_modulesselect": 
-        "Select Modules",
+        "Välj moduler",
     "configure_system_remotemodules": 
-        "Remote Modules Routing",
+        "Fjärrmoduler kopplingar",
     "configure_system_modsroutingreset": 
-        "Reset",
+        "Återställ",
     "configure_system_userinterface": 
-        "User Interface",
+        "Användargränssnitt",
     "configure_system_eventshistory": 
-        "Events History",
+        "Händelsehistorik",
     "home_about_version": 
         "version",
     "home_about_codename": 
-        "codename",
+        "kodnamn",
     "home_about_motto": 
-        "motto",
+        "måtto",
     "home_about_concept": 
-        "Concept, design, ideas and coding<br /> by G-Labs",
+        "Koncept, design, idéer och kodning<br /> av G-Labs",
     "home_about_license": 
-        "license",
+        "licens",
     "home_about_site": 
-        "HomePage and Support",
+        "Hemsida och Hjälp",
     "home_about_site_docs": 
-        "Documentation",
+        "Dokumentation",
     "actions_menu": 
-        "Actions Menu",
+        "val",
+    "control_group_configure":
+        "konfigurera Grupp",
     "control_macrorecord_record_macro": 
-        "Record Macro",
+        "Spela in Macro",
     "control_macrorecord_recording": 
-        "Recording...",
+        "Spelar in...",
     "control_macrorecord_description": 
-        "Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Save</strong> button when finished.",
+        "Alla kommandon spelas nu in till ett <strong>Wissardscript</strong>.<br>Tryck på <strong>Spara</strong>-knappen när du är klar.",
     "control_macrorecord_close": 
-        "Close",
+        "Stäng",
     "control_macrorecord_options": 
-        "Options",
+        "Val",
     "control_macrorecord_options_pause": 
-        "Pause Between commands",
+        "Pausa mellan kommandon",
     "control_macrorecord_options_none": 
-        "None",
+        "Ingen",
     "control_macrorecord_options_mimic": 
-        "Mimic",
+        "Ursprunglig",
     "control_macrorecord_options_fixed": 
-        "Fixed",
+        "Sätt",
     "control_macrorecord_options_pauseduration": 
-        "Fixed pause seconds",
+        "Förvald paus (sekunder)",
     "update_options_popup_loading": 
-        "Loading Program data",
+        "Laddar programdata",
     "control_widget_notconfigured_title": 
-        "Widget not configured",
+        "Widgeten är inte konfigurerad",
     "control_widget_notconfigured_text": 
-        "Click this button to edit configuration.",
+        "Klicka här för att ändra konfiguration.",
     "control_widget_notconfigured_button": 
-        "Close",
+        "Stäng",
     "configure_program_options_details": 
-        "Details",
+        "Detaljer",
     "configure_program_options_restart": 
-        "Restart",
+        "Starta om",
     "configure_program_details_implemfeatures": 
-        "Implemented Features",
+        "Implementerade funktioner",
     "configure_program_details_configoptions": 
-        "Configuration Options",
+        "Konfigurationsval",
     "configure_program_details_moduleparams": 
-        "Module Parameters",
+        "Modulvärden",
     "configure_group_actionmenu_deletegroup": 
-        "Delete Group",
+        "Ta bort Grupp",
     "configure_group_actionmenu_addseparatorlabel": 
-        "Add Separator",
+        "Lägg till avdelare",
     "configure_group_actionmenu_addmodule": 
-        "Add Module",
+        "Lägg till Modul",
     "configure_separator_edit": 
-        "Edit separator",
+        "Namnge avdelare",
     "configure_separator_label": 
-        "Label",
+        "Namn",
     "configure_separator_placeholder": 
-        "enter label",
+        "skriv namn",
     "configure_module_optaddseparator": 
-        "Update",
+        "Uppdatera",
     "configure_module_parameters": 
-        "Parameters",
+        "Ändra modulvärden",
     "configure_module_parameters_delete": 
-        "Delete",
+        "Ta bort",
     "configure_module_parameters_save": 
-        "Save",
+        "Spara",
     "configure_module_parameters_linktitle": 
-        "Module Parameters",
+        "Modulvärden",
     "configure_automationgroup_add": 
-        "Add",
+        "Lägg till",
     "configure_programslist_listtitle": 
-        "Programs list",
+        "Programlista",
     "configure_programslist_tap_disable": 
-        "Tap to DISABLE program",
+        "Tryck för att INAKTIVERA programmet",
     "configure_programslist_tap_enable": 
-        "Tap to ENABLE program",
+        "Tryck för att AKTIVERA programmet",
     "configure_programslist_deletegroup": 
-        "Delete Group",
+        "Ta Bort Grupp",
     "configure_programslist_importprogram": 
-        "Import program",
+        "Importera program",
     "configure_programslist_addnewprogram": 
-        "Add new program",
+        "Lägg till program",
     "configure_programslist_refreshlist": 
-        "Refresh list",
+        "Uppdatera lista",
     "configure_programslist_import": 
-        "Import",
+        "Importera",
     "configure_program_summary": 
-        "Summary",
+        "Summering",
     "configure_program_programcode": 
-        "Program Code",
+        "Programkod",
     "configure_program_sketchcode": 
-        "Sketch Code",
+        "Sketch-kod",
     "configure_program_triggercode": 
-        "Trigger Code",
+        "Triggerkod",
     "configure_program_makefile": 
         "Makefile",
     "configure-editprogram-addcommand": 
-        "Add Command",
+        "Lägg till Kommando",
     "configure-editprogram-addcondition": 
-        "Add Condition",
+        "Lägg till villkor",
     "configure-editprogram-capture": 
-        "Capture",
+        "Spela in",
     "configure-editprogram-help": 
-        "Help",
+        "Hjälp",
     "configure_program_triggertype": 
-        "Trigger",
+        "Triggas",
     "configure_editprogram_options_delete": 
-        "Delete Program",
+        "Ta Bort Program",
     "configure_editprogram_saving_succeed": 
-        "Saving succeed.",
+        "Sparar..",
     "configure_editprogram_saving": 
-        "Updating program data",
+        "Uppdaterar programdata",
     "configure_editprogram_error_updating": 
-        "Error updating program!",
+        "Fel vid uppdatering av program!",
     "configure_editprogram_compile": 
-        "Compile",
+        "Kompilera",
     "systemsettings_selectport_title": 
-        "Notice",
+        "Notis",
     "systemsettings_selectport_placeholder": 
-        "(select port...)",
+        "(välj port...)",
     "systemsettings_selectport_text": 
-        "Please select port used by this device",
+        "Välj vilken port som enheten använder",
     "systemsettings_selectport_button": 
-        "Close",
-    "systemsettings_x10housecodes_title": 
-        "Notice",
-    "systemsettings_x10housecodes_text": 
-        "Please select at least one house code.",
-    "systemsettings_x10housecodes_button": 
-        "Close",
-    "configure_interfaces_insteon": 
-        "Insteon PLM (2413S/2413U)",
-    "configure_interfaces_insteonport": 
-        "Device Port",
-    "configure_interfaces_insteonx10housecodes": 
-        "House Codes in use (for X10 devices only)",
+        "Stäng",
     "configure_group_newgroupconfirm": 
         "Ok",
     "configure_module_optremoveseparator": 
-        "Remove",
+        "Ta bort",
     "configure_program_selectcommandtarget": 
-        "Select command target",
+        "Välj målenhet",
     "configure_program_selectcommandtoperform": 
-        "Select command to perform",
+        "Välj kommando att utföra",
     "configure_program_commandcustom": 
-        "Custom API command",
+        "Eget API-kommando",
     "configure_program_wizardproceed": 
-        "Proceed",
+        "Fortsätt",
     "configure_program_commandcapturetitle": 
-        "Capturing Commands",
+        "Spelar in kommandon",
     "configure_program_waitingnewcommand": 
-        "Waiting for new events...",
+        "Väntar på nya kommandon...",
     "configure_program_waitingnewcommandadvice": 
         "",
     "configure_program_capturestop": 
-        "Stop",
+        "Stoppa inspelning",
     "configure_program_wizard_editline_title": 
-        "Edit Line",
+        "Ändra rad",
     "configure_program_wizard_editcmdline_prompt": 
-        "Move or delete line <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Flytta eller ta bort rad <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editconline_prompt": 
-        "Move or delete line <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Flytta eller ta bort rad <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editline_number": 
-        "New line number",
+        "Nytt radnummer",
     "configure_program_wizard_editline_delete": 
-        "Delete",
+        "Ta bort",
     "configure_program_wizard_editline_change": 
-        "Move",
+        "Flytta",
     "configure_program_selectconditionsubject": 
-        "Select condition subject",
+        "Välj Villkorsundergrupp",
     "configure_program_selectconditionproperty": 
-        "Select comparison property",
+        "Välj Villkorsegenskap",
     "configure_program_conditioncapturetitle": 
-        "Capturing Conditions",
+        "Spelar in händelser",
     "configure_program_waitingnewcondition": 
-        "Waiting for new events...",
+        "Väntar på nya händelser...",
     "configure_program_waitingnewconditionadvice": 
         "",
     "configure_program_options_update": 
-        "Update",
-    "configure_interfaces_zwavediscovery": 
-        "Discovery",
-    "configure_interfaces_camerasettings": 
-        "Device / Resolution / FPS",
-    "configure_interfaces_upnp": 
-        "Universal Plug &amp; Play",
-    "configure_interfaces_weeco4mgpio": 
-        "WEECOBOARD 4M GPIO",
-    "configure_system_zwavediscoverytitle": 
-        "ZWave Discovery",
+        "Uppdatera",
     "configure_system_updateinstall": 
-        "Update Install",
+        "Uppdatera Installation",
     "configure_system_deletemodule": 
-        "Delete Module",
+        "Ta Bort Modul",
     "systemsettings_backuprestores1selectallnone": 
-        "Select all / none",
+        "Välj alla / inga",
     "securitysettings_password_setpassword": 
-        "Set password",
+        "Ändra lösenord",
     "securitysettings_password_enterpassword": 
-        "Enter password for 'admin' user",
+        "Skriv in lösenord för 'admin'",
     "maintenance_configuration_servicerestart": 
-        "Restart Service?",
+        "Starta Om Tjänst?",
     "configure_maintenance_restartprompt": 
-        "Are you sure you want to restart service?",
+        "Är du säker på att du vill starta om tjänsten?",
     "configure_maintenance_restartwarning": 
         "",
     "configure_module_typemediareceiver": 
-        "Media Receiver",
+        "Mediamottagare",                         
     "configure_module_typemediatransmitter": 
-        "Media Transmitter",
+        "Mediasändare",
     "configure_module_featuresoptions": 
-        "Features/Options",
+        "Verktyg/Inställningar",
     "configure_editprogram_files":
-        "Files",
+        "Filer",
     "configure_program_newfile":
-        "Add File",
+        "Lägg till fil",
     "configure_program_filename":
-        "File name",
+        "Filnamn",
     "configure_program_fileslist":
-        "File list",
+        "Fillista",
     "configure_program_fileslist_exit":
-        "Exit",
+        "Gå ur",
     "configure_program_fileslist_delete":
-        "Delete",
+        "Ta bort",
     "configure_program_fileslist_edit":
-        "Edit",
+        "Ändra",
     "configure_program_fileslist_add":
-        "Add",
+        "Lägg till",
     "configure_program_hasmodification":
-        "Program was modified!",
+        "Programet har ändrats!",
     "configure_program_savechangesprompt":
-        "Do you want to save changes?",
+        "Vill du spara förändringar?",
     "configure_program_changeswillbelost":
         "",
     "configure_program_dontsave":
-        "No",
+        "Nej",
     "configure_program_saveconfirm":
-        "Save",
-    "configure_interfaces_zwavehardreset":
-        "Hard Reset",
-    "systemsettings_zwavehardreset_hardreset":
-        "Hard Reset Controller?",
-    "systemsettings_zwavehardreset_hardresetprompt":
-        "Are you sure you want to hard reset Z-Wave controller?",
-    "systemsettings_zwavehardreset_hardresetwarning":
-        "All nodes will be removed!",
-    "systemsettings_zwavehardreset_hardresetcancel":
-        "Cancel",
-    "systemsettings_zwavehardreset_hardresetproceed":
-        "Proceed",
+        "Spara",
     "statistics_dataanalysis":
-        "Data analysis",
+        "Dataanalys",
     "statistics_counterexpense":
-        "Counter and expense",
+        "Räknare och kostnad",
     "analyze_statistics_datefrom":
-        "From",
+        "Från",
     "analyze_statistics_dateto":
-        "To",
+        "Till",
     "analyze_statistics_costperunit":
-        "Cost per unit",
+        "Kostnad per enhet",
     "analyze_statistics_overallcounter":
-        "Overall counter",
+        "Totalräknare",
     "analyze_statistics_totalexpense":
-        "Total expense",
+        "Totalkostnad",
     "configure_program_oroperator":
-        "OR operator",
+        "Eller operator",
     "configure_system_statistics_clear":
-        "Clear all statistics data",
+        "Rensa all statistik",
     "configure_system_statistics_databasemaxsize":
-        "Maximum database size is",
+        "Max databasstorlek",
     "configure_system_statistics_changedatabasemaxsize":
-        "Change",
+        "Ändra",
     "configure_system_statistics_databasemaxsizechange":
-        "Maximum size (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Note: after changing size, HomeGenie must be restarted to make changes effective!",
+        "Max storlek (MB)",
     "configure_system_statistics_databasemaxsizechange_cancel":
-        "Cancel",
+        "Avbryt",
     "configure_system_statistics_databasemaxsizechange_commit":
-        "Change",
+        "Ändra",
     "configure_popupfilter_title":
-        "Event popup filters",
+        "Händelsepopupfilter",
     "configure_popupfilter_optclose":
-        "Close",
+        "Stäng",
     "configure_system_blockedpopups":
-        "Blocked popups",
+        "Blockerade popups",
     "configure_system_blockedpopups_edit":
-        "Edit",
+        "Ändra",
     "configure_system_updateinstall_warning":
-        "It is strongly recommended to make a backup of your configuration before proceeding with any update.",
+        "Det är starkt rekommenderat att ta en backup av konfigurationen innan man kör en uppdatering.",
     "configure_automationgroup_widgeteditor":
-        "Widget Editor",
+        "Widgethanterare",
     "configure_widgetlist_heading":
-        "<font style=\"color:gray\">Widgets</font><br />List</h3>",
+        "<font style=\"color:gray\">Widgetar</font><br />List</h3>",
     "configure_widgetlist_importwidget":
-        "Import Widget",
+        "Importera Widget",
     "configure_widgetlist_import":
-        "Import",
+        "Importera",
     "configure_widgetlist_add_popuptitle":
-        "New Widget",
+        "Ny Widget",
     "configure_widgetlist_add_widgetbrand":
-        "Brand",
+        "Märke",
     "configure_widgetlist_add_widgetcategory":
-        "Category",
+        "Kategori",
     "configure_widgetlist_add_widgetname":
-        "Name",
+        "Namn",
     "configure_widgetlist_newwidgetconfirm":
-        "Add",
+        "Lägg till",
     "configure_widgetlist_action_import":
-        "Import",
+        "Importera",
     "configure_widgetlist_action_addwidget":
-        "Add Widget",
+        "Lägg till Widget",
     "configure_widgeteditor_html":
         "HTML",
     "configure_widgeteditor_javascript":
         "Javascript",
     "configure_widgeteditor_previewupdate":
-        "Run / Preview",
+        "Kör / Förhandsgranska",
     "configure_widgeteditor_hasmodification":
-        "Widget was modified!",
+        "Widgeten har ändrats!",
     "configure_widgeteditor_deletetitle":
-        "Delete Widget?",
+        "Ta Bort Widget?",
     "configure_widgeteditor_deleteprompt":
-        "Are you sure you want to delete this widget?",
+        "Är du säker på att du vill ta bort widgeten?",
     "configure_widgetlist_list":
-        "Widget List",
+        "Widgetlista",
     "configure_widgeteditor_nobindmodule_title":
-        "Select a module",
+        "Välj en modul",
     "configure_widgeteditor_nobindmodule_text":
-        "No valid module for data binding has been found, please select one.",
+        "Ingen giltig modul har hittats för datakoppling. Välj en.",
     "configure_widgeteditor_nobindmodule_close":
-        "Close"
+        "Stäng",
+    "configure_widgeteditor_bindtomodule":
+        "bind till modul",
+    "configure_widgeteditor_selectmodule_placeholder":
+        "(välj modul)",
+    "configure_widgeteditor_title":
+        "Widgethanteraren",
+    "configure_widgeteditor_savinghtml":
+        "Sparar HTML...",
+    "configure_widgeteditor_savingjavascript":
+        "Sparar Javascript...",
+    "configure_interfaces_importdriver":
+        "Installera Interface",        
+    "configure_interfaces_download":
+        "Ladda ner och installera",        
+    "configure_interfaces_upload":
+        "Ladda upp och installera",        
+    "configure_interfaces_install":
+        "Installera Interface",
+    "configure_interfaces_downloadfromurl":
+        "Ladda ner paket från URL",
+    "configure_interfaces_uploadpackage":
+        "Ladda upp paket från fil",
+    "cronwizard_title":
+        "Cron-Guide",      
+    "cronwizard_tab_minute":
+        "Minut",        
+    "cronwizard_tab_hour":
+        "Timme",        
+    "cronwizard_tab_dayofmonth":
+        "Dag i månaden",        
+    "cronwizard_tab_month":
+        "Månad",        
+    "cronwizard_tab_dayofweek":
+        "Dag i veckan",      
+    "cronwizard_event_willoccur":
+        "Den här händelsen kommer ske",
+    "cronwizard_minuteselect_everyminute":
+        "varje minut",        
+    "cronwizard_minuteselect_everysomeminute":
+        "varje &lt;n&gt; minut",        
+    "cronwizard_minuteselect_eachselected":
+        "varje vald minut",        
+    "cronwizard_hourselect_everyhour":
+        "varje timme",        
+    "cronwizard_hourselect_everysomehour":
+        "varje &lt;n&gt; timme",        
+    "cronwizard_hourselect_eachselected":
+        "varje vald timme",        
+    "cronwizard_dayselect_everyday":
+        "varje dag",        
+    "cronwizard_dayselect_eachselected":
+        "varje vald dag",        
+    "cronwizard_monthselect_everymonth":
+        "varje månad",        
+    "cronwizard_monthselect_eachselected":
+        "varje vald månad",        
+    "cronwizard_dayowselect_everydayow":
+        "alla dagar i veckan",        
+    "cronwizard_dayowselect_eachselected":
+        "varje vald dag i veckan",
+    "cronwizard_event_name":
+        "Event name",
+    "cronwizard_typeselect_standard":
+        "standard",
+    "cronwizard_typeselect_period":
+        "date period",
+    "cronwizard_typeselect_custom":
+        "custom cron expression",
+    "cronwizard_event_description":
+        "Description",
+    "cronwizard_date_from":
+        "from",
+    "cronwizard_date_to":
+        "to",
+    "cronwizard_time_exact":
+        "at exact time",
+    "cronwizard_time_range":
+        "during a time range",
+    "cronwizard_time_start":
+        "start",
+    "cronwizard_time_end":
+        "end",
+    "cronwizard_time_at":
+        "at",
+    "cronwizard_event_occurrence":
+        "Occurrence",
+    "cronwizard_event_cronexpr":
+        "Cron expression",
+    "cronwizard_event_runscript":
+        "Run script on event occurrence",
+    "cronwizard_description_from":
+        "from",
+    "cronwizard_description_to":
+        "to",
+    "cronwizard_description_on":
+        "on",
+    "cronwizard_description_starting":
+        "from",
+    "cronwizard_description_ending":
+        "to",
+    "cronwizard_description_at":
+        "at",
+    "cronwizard_occurrence_desc":
+        "Define occurrences of this event",
+    "cronwizard_modules_desc":
+        "Select modules that will be handled by this event script (optional)",
+    "cronwizard_script_desc":
+        "Enter JavaScript code that will be executed at every occurrence of this event (optional)",
+    "cronwizard_warning_nametooshort":
+        "Please enter a name of two or more characters.",
+    "cronwizard_warning_timeempty":
+        "Please add one or more time items.",
+    "cronwizard_script_addsnippet":
+        "[ add code snippet ]",
+    "cronwizard_eventtype_label":
+        "Event type",
+    "cronwizard_time_label":
+        "Time",
+    "cronwizard_add_time":
+        "Add",
+    "cronwizard_select_type":
+        "Type",
+    "cronwizard_select_modules":
+        "Modules",
+    "cronwizard_section_occurrence":
+        "Occurrence",
+    "cronwizard_section_modules":
+        "Modules",
+    "cronwizard_section_script":
+        "Script",
+    "configure_schedulerservice_editevents":
+        "Edit Events",
+    "configure_schedulerservice_calendarview":
+        "Calendar View",
+    "no_device_found_for_manufacturerId":
+        "Ingen enhetsinfo för tillverkarens ID", 
+    "common_month_jan":
+        "Jan",        
+    "common_month_feb":
+        "Feb",        
+    "common_month_mar":
+        "Mar",        
+    "common_month_apr":
+        "Apr",        
+    "common_month_may":
+        "Maj",        
+    "common_month_jun":
+        "Jun",        
+    "common_month_jul":
+        "Jul",        
+    "common_month_aug":
+        "Aug",        
+    "common_month_sep":
+        "Sep",        
+    "common_month_oct":
+        "Okt",        
+    "common_month_nov":
+        "Nov",        
+    "common_month_dec":
+        "Dec",        
+    "common_dayofweek_sun":
+        "Sön",        
+    "common_dayofweek_mon":
+        "Mån",        
+    "common_dayofweek_tue":
+        "Tis",        
+    "common_dayofweek_wed":
+        "Ons",        
+    "common_dayofweek_thu":
+        "Tor",        
+    "common_dayofweek_fri":
+        "Fre",        
+    "common_dayofweek_sat":
+        "Lör",        
+    "common_command_cancel":
+        "Avbryt",        
+    "common_command_ok":
+        "Ok",
+    "common_command_proceed":
+        "Fortsätt",
+    "common_command_save":
+        "Spara",
+    "common_status_notset":
+        "Ej satt",
+    "common_voice_control":
+        "Röststyrning",
+    "common_command_delete":
+        "Ta bort",
+    "common_command_upload":
+        "Ladda upp",
+    "common_select_none":
+        "Ingen",
+    "common_command_exit":
+        "Gå ur",
+    "common_command_close":
+        "Stäng",
+    "common_command_module":
+        "Modul",
+    "common_command_modules":
+        "Moduler",
+    "configure_program_autorestart":
+        "Auto restart program on failure",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Hem",
+    "home_menu_groups":
+        "Grupper",
+    "home_menu_statistics":
+        "Statistik",
+    "home_menu_automation":
+        "Automatik",
+    "home_menu_programeditor":
+        "Program",
+    "home_menu_widgeteditor":
+        "Widgetar",
+    "home_menu_scheduler":
+        "Schemaläggare",
+    "home_menu_system":
+        "System",
+    "home_menu_settings":
+        "Inställningar",
+    "home_menu_maintenance":
+        "Underhåll",
+    "home_menu_about": 
+        "Om",
+    "home_menu_about_homegenie":
+        "Om HomeGenie",
+    "home_menu_about_version":
+        "Version",
+    "home_menu_about_whatshot":
+        "Hett just nu!",
+    "home_menu_about_userguide":
+        "Manual",
+    "home_menu_about_programming":
+        "Programmeringsguide",
+    "home_menu_about_forum":
+        "Användarforum",
+    "home_menu_about_support":
+        "Stöd HomeGenie"
 }

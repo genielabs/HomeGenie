@@ -3,6 +3,8 @@ sudo cp /usr/local/bin/homegenie/DEBIAN/homegenie /etc/init.d/
 sudo chmod +x /etc/init.d/homegenie
 sudo cp /usr/local/bin/homegenie/DEBIAN/startup.sh /usr/local/bin/homegenie/
 sudo chmod +x /usr/local/bin/homegenie/startup.sh
+sudo cp /usr/local/bin/homegenie/DEBIAN/startup_debug.sh /usr/local/bin/homegenie/
+sudo chmod +x /usr/local/bin/homegenie/startup_debug.sh
 sudo update-rc.d -f homegenie defaults
 sudo /etc/init.d/homegenie start
 echo "\nHomeGenie service succesfully installed.\nYou can now browse to http://localhost:80/ to access the user interface.\nNOTE: if the default port 80 is already taken, HG will try to bind next available port >= 8080.\n"

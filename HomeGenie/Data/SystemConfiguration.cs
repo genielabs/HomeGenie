@@ -16,98 +16,60 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
 using System.Collections.Generic;
-
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
-using MIG;
+using MIG.Config;
+
 using HomeGenie.Service;
 
 namespace HomeGenie.Data
 {
     [Serializable()]
-    public class SystemConfiguration : ICloneable
+    public class SystemConfiguration
     {
+        private string passphrase = "";
+
+        // TODO: change this to use standard event delegates model
         public event Action<bool> OnUpdate;
 
         public HomeGenieConfiguration HomeGenie { get; set; }
 
-        public MIGServiceConfiguration MIGService { get; set; }
+        public MigServiceConfiguration MigService { get; set; }
 
         public SystemConfiguration()
         {
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID platform = os.Platform;
-            //
             HomeGenie = new HomeGenieConfiguration();
-            MIGService = new MIGServiceConfiguration();
-            //
             HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
-            HomeGenie.ServicePort = 80;
-            HomeGenie.UserLogin = "admin";
-            HomeGenie.UserPassword = ""; // password auth disabled by default
             HomeGenie.EnableLogFile = "false";
+            MigService = new MigServiceConfiguration();
         }
-
-        public object Clone()
-        {
-            var stream = new MemoryStream();
-            var formatter = new BinaryFormatter();
-
-            formatter.Serialize(stream, this);
-
-            stream.Position = 0;
-            object obj = formatter.Deserialize(stream);
-            stream.Close();
-
-            return obj;
-        }
-
-        /*
-        public MIGServiceConfiguration.Interface GetInterface(string domain)
-        {
-            MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
-            return res;
-        }
-
-        public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)
-        {
-            return GetInterfaceOptions(domain).Find(o => o.Name == option);
-        }
-
-        public List<MIGServiceConfiguration.Interface.Option> GetInterfaceOptions(string domain)
-        {
-            MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
-            return mi.Options;
-        }
-        */
 
         public bool Update()
         {
             bool success = false;
             try
             {
-                SystemConfiguration syscopy = (SystemConfiguration)this.Clone();
+                var syscopy = this.DeepClone();
                 foreach (ModuleParameter p in syscopy.HomeGenie.Settings)
                 {
                     try
                     {
-                        if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
+                        if (!String.IsNullOrEmpty(p.Value))
+                            p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
                     }
                     catch
                     {
                     }
                 }
-
-
                 string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
                 if (File.Exists(fname))
                 {
@@ -115,14 +77,17 @@ namespace HomeGenie.Data
                 }
                 System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
                 ws.Indent = true;
+                ws.Encoding = Encoding.UTF8;
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(syscopy.GetType());
-                System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(fname, ws);
-                x.Serialize(wri, syscopy);
-                wri.Close();
+                using (var wri = System.Xml.XmlWriter.Create(fname, ws))
+                {
+                    x.Serialize(wri, syscopy);
+                }
                 success = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MIG.MigService.Log.Error(e);
             }
             //
             if (OnUpdate != null)
@@ -133,32 +98,28 @@ namespace HomeGenie.Data
             return success;
         }
 
+        public void SetPassPhrase(string pass)
+        {
+            passphrase = pass;
+        }
+
         public string GetPassPhrase()
         {
-            return (this.HomeGenie.UserPassword + "homegenie");
+            return passphrase;
         }
     }
 
     [Serializable()]
     public class HomeGenieConfiguration
     {
+        public string GUID { get; set; }
         public string SystemName { get; set; }
-
         public string Location { get; set; }
 
-        public int ServicePort { get; set; }
-
-        public string UserLogin { get; set; }
-
-        public string UserPassword { get; set; }
-
         public List<ModuleParameter> Settings = new List<ModuleParameter>();
-
-        public string GUID { get; set; }
+        public StatisticsConfiguration Statistics = new StatisticsConfiguration();
 
         public string EnableLogFile { get; set; }
-
-        public StatisticsConfiguration Statistics = new StatisticsConfiguration();
 
         [Serializable()]
         public class StatisticsConfiguration
@@ -171,14 +132,13 @@ namespace HomeGenie.Data
             public int StatisticsTimeResolutionSeconds { get; set; }
 
             [XmlAttribute]
-            public int StatisticsUIRefreshSeconds { get; set; }
+            public int StatisticsUiRefreshSeconds { get; set; }
 
             public StatisticsConfiguration()
             {
-
                 MaxDatabaseSizeMBytes = 5; // 5MB default.
-                StatisticsTimeResolutionSeconds = 5 * 60; // 5 minute default.
-                StatisticsUIRefreshSeconds = 2 * 60; // 2 minute default.
+                StatisticsTimeResolutionSeconds = 180; // 3 minutes default.
+                StatisticsUiRefreshSeconds = 120; // 2 minutes default.
             }
 
             /// <summary>
@@ -191,7 +151,6 @@ namespace HomeGenie.Data
             /// </summary>
             public void Validate()
             {
-                // 
                 if (MaxDatabaseSizeMBytes < 1)
                 {
                     MaxDatabaseSizeMBytes = 1;
@@ -201,15 +160,13 @@ namespace HomeGenie.Data
                 {
                     StatisticsTimeResolutionSeconds = 30;
                 }
-                if (StatisticsUIRefreshSeconds < 5)
+                if (StatisticsUiRefreshSeconds < 30)
                 {
-                    StatisticsUIRefreshSeconds = 5;
+                    StatisticsUiRefreshSeconds = 30;
                 }
-
             }
 
         }
     }
 
 }
-

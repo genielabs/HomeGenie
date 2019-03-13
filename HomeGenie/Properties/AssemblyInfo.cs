@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("G-Labs")]
 [assembly: AssemblyProduct("HomeGenie http://homegenie.it")]
-[assembly: AssemblyCopyright("Copyright © 2012-2014 by G-Labs info@homegenie.it")]
+[assembly: AssemblyCopyright("Copyright © 2012-2019 by G-Labs info@homegenie.it")]
 [assembly: AssemblyTrademark("GenieLabs")]
 [assembly: AssemblyCulture("")]
 

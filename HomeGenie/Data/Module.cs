@@ -21,38 +21,67 @@
  */
 
 using System;
-using System.Collections.Generic;
-
 using System.IO;
-using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-using HomeGenie.Service;
-
 using MIG;
+
+using HomeGenie.Service;
 
 namespace HomeGenie.Data
 {
+    /// <summary>
+    /// Module instance.
+    /// </summary>
     [Serializable()]
     public class Module : ICloneable
     {
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
         public string Name { get; set; }
-        public string Description { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ModuleTypes DeviceType { get; set; } //will indicate actual device (lamp, fan, dimmer light, etc.)
 
-        // location in actual physical Control-topology
-        public string Domain { get; set; } // only Domain is used. Interface should be used instead?
-        //public string Interface { get; set; }
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the device.
+        /// </summary>
+        /// <value>The type of the device.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ModuleTypes DeviceType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the domain.
+        /// </summary>
+        /// <value>The domain.</value>
+        public string Domain { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address.
+        /// </summary>
+        /// <value>The address.</value>
         public string Address { get; set; }
-        //
+
+        /// <summary>
+        /// Gets the properties.
+        /// </summary>
+        /// <value>The properties.</value>
         public TsList<ModuleParameter> Properties { get; set; }
-        //
-        public string RoutingNode { get; set; } // "<ip>:<port>" || ""
-        //
+
+        [JsonIgnore]
+        public TsList<Store> Stores { get; set; }
+
+        public string RoutingNode { get; set; }
+        // "<ip>:<port>" || ""
+
         public Module()
         {
             Name = "";
@@ -60,6 +89,7 @@ namespace HomeGenie.Data
             Description = "";
             DeviceType = MIG.ModuleTypes.Generic;
             Properties = new TsList<ModuleParameter>();
+            Stores = new TsList<Store>();
             RoutingNode = "";
         }
 

@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Innovative.SolarCalculator</name>
+    </assembly>
+    <members>
+        <member name="T:System.DateTimeExtensions">
+            <summary>
+            Provides extensions used to convert date time values used in Excel and Ole Automation.
+            </summary>
+        </member>
+        <member name="M:System.DateTimeExtensions.ToOleAutomationDate(System.DateTime)">
+            <summary>
+            An OLE Automation date is implemented as a floating-point number whose integral component is the number of 
+            days before or after midnight, 30 December 1899, and whose fractional component represents the time on that 
+            day divided by 24. For example, midnight, 31 December 1899 is represented by 1.0; 6 A.M., 1 January 1900 is 
+            represented by 2.25; midnight, 29 December 1899 is represented by -1.0; and 6 A.M., 29 December 1899 is 
+            represented by -1.25. The base OLE Automation Date is midnight, 30 December 1899. The minimum OLE Automation 
+            date is midnight, 1 January 0100. The maximum OLE Automation Date is the same as DateTime.MaxValue, the last
+            moment of 31 December 9999. The ToOADate method throws an OverflowException if the current instance represents 
+            a date that is later than MinValue and earlier than midnight on January1, 0100. However, if the value of the 
+            current instance is MinValue, the method returns 0.
+            </summary>
+            <param name="value">A DateTime value that will be converted to the Ole Automation date.</param>
+            <returns>Gets a value that represents the Ole Automation date for the given DateTime value.</returns>
+        </member>
+        <member name="T:Innovative.SolarCalculator.DecimalTimeSpan">
+            <summary>
+            Provides decimal versions of common TimeSpan methods to make
+            the code in the library look cleaner and ensure consistency.
+            </summary>
+        </member>
+        <member name="M:Innovative.SolarCalculator.DecimalTimeSpan.FromDays(System.Decimal)">
+            <summary>
+            Returns a System.TimeSpan that represents a specified number of days, where
+            the specification is accurate to the nearest millisecond.
+            </summary>
+            <param name="value">A number of days, accurate to the nearest millisecond.</param>
+            <returns>An object that represents value.</returns>
+        </member>
+        <member name="M:Innovative.SolarCalculator.DecimalTimeSpan.FromHours(System.Decimal)">
+            <summary>
+            Returns a System.TimeSpan that represents a specified number of hours, where
+            the specification is accurate to the nearest millisecond.
+            </summary>
+            <param name="value">A number of hours accurate to the nearest millisecond.</param>
+            <returns>An object that represents value.</returns>
+        </member>
+        <member name="M:Innovative.SolarCalculator.DecimalTimeSpan.FromMinutes(System.Decimal)">
+            <summary>
+            Returns a System.TimeSpan that represents a specified number of minutes,
+            where the specification is accurate to the nearest millisecond.
+            </summary>
+            <param name="value">A number of minutes, accurate to the nearest millisecond.</param>
+            <returns>An object that represents value.</returns>
+        </member>
+        <member name="T:Innovative.SolarCalculator.ExcelFormulae">
+            <summary>
+            Provides methods that mimic functions found in Excel the are either not available
+            in the .NET framework or have different behavior.
+            </summary>
+        </member>
+        <member name="M:Innovative.SolarCalculator.ExcelFormulae.ToExcelDateValue(System.DateTime)">
+            <summary>
+            The DATEVALUE function converts a date that is stored as text to a serial number that Excel recognizes as a date. 
+            For example, the formula = DATEVALUE("1/1/2008") returns 39448, the serial number of the date 1/1/2008.
+            Note The serial number returned by the DATEVALUE function can vary from the preceding example, depending 
+            on your computer's system date settings.
+            The DATEVALUE function is helpful in cases where a worksheet contains dates in a text format that you want 
+            to filter, sort, or format as dates, or use in date calculations.
+            </summary>
+            <param name="value">A DateTime value that will be converted to the DateValue.</param>
+            <returns>Gets a value that represents the Excel DateValue for the given DateTime value.</returns>
+        </member>
+        <member name="M:Innovative.SolarCalculator.ExcelFormulae.Mod(System.Decimal,System.Decimal)">
+            <summary>
+            Gets returns the remainder after a number is divided by a divisor. In Microsoft Excel, the result returned 
+            by the worksheet MOD function may be different from the result returned by the c# Mod operator. This problem 
+            occurs if you use the MOD function with either a negative number or a negative divisor, but not both negative.
+            See http://support.microsoft.com/kb/141178?wa=wsignin1.0 for more information.
+            </summary>
+            <param name="number">The numeric value whose remainder you wish to find.</param>
+            <param name="divisor">The number used to divide the number parameter. If the divisor is 0</param>
+            <returns></returns>
+        </member>
+        <member name="T:Innovative.SolarCalculator.SolarTimes">
+            <summary>
+            Provides mathematical operations to calculate the sunrise and sunset for a given date.
+            </summary>
+        </member>
+        <member name="M:Innovative.SolarCalculator.SolarTimes.#ctor">
+            <summary>
+            Creates a default instance of the SolarTimes object.
+            </summary>
+        </member>
+        <member name="M:Innovative.SolarCalculator.SolarTimes.#ctor(System.DateTimeOffset)">
+            <summary>
+            Creates an instance of the SolarTimes object with the specified For Date.
+            </summary>
+            <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
+        </member>
+        <member name="M:Innovative.SolarCalculator.SolarTimes.#ctor(System.DateTimeOffset,Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Creates an instance of the SolarTimes object with the specified For Date, Latitude and Longitude.
+            </summary>
+            <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
+            <param name="latitude">Specifies the angular measurement of north-south location on Earth's surface.</param>
+            <param name="longitude">Specifies the angular measurement of east-west location on Earth's surface.</param>
+        </member>
+        <member name="M:Innovative.SolarCalculator.SolarTimes.#ctor(System.DateTime,System.Int32,Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Creates an instance of the SolarTimes object with the specified For Date, Latitude Longitude and Time Zone Offset
+            </summary>
+            <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
+            <param name="timeZoneOffset">Specifies the time zone offset for the specified date in hours.</param>
+            <param name="latitude">Specifies the angular measurement of north-south location on Earth's surface.</param>
+            <param name="longitude">Specifies the angular measurement of east-west location on Earth's surface.</param>
+        </member>
+        <member name="M:Innovative.SolarCalculator.SolarTimes.ToRadians(System.Decimal)">
+            <summary>
+            This method is obsolete. Use Angle.ToRadians() instead.
+            </summary>
+            <param name="degrees">N/A</param>
+            <returns>N/A</returns>
+        </member>
+        <member name="M:Innovative.SolarCalculator.SolarTimes.ToDegrees(System.Decimal)">
+            <summary>
+            This method is obsolete. Use Angle.ToDegrees() instead.
+            </summary>
+            <param name="radians">N/A</param>
+            <returns>N/A</returns>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.ForDate">
+            <summary>
+            Specifies the Date for which the sunrise and sunset will be calculated.
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.Longitude">
+            <summary>
+            Angular measurement of east-west location on Earth's surface. Longitude is defined from the 
+            prime meridian, which passes through Greenwich, England. The international date line is defined 
+            around +/- 180° longitude. (180° east longitude is the same as 180° west longitude, because 
+            there are 360° in a circle.) Many astronomers define east longitude as positive. This 
+            solar calculator conforms to the international standard, with east longitude positive.
+            (Spreadsheet Column B, Row 4)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.Latitude">
+            <summary>
+            Angular measurement of north-south location on Earth's surface. Latitude ranges from 90° 
+            south (at the south pole; specified by a negative angle), through 0° (all along the equator), 
+            to 90° north (at the north pole). Latitude is usually defined as a positive value in the 
+            northern hemisphere and a negative value in the southern hemisphere.
+            (Spreadsheet Column B, Row 3)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.TimeZoneOffset">
+            <summary>
+            Gets the time zone offset for the specified date.
+            Time Zones are longitudinally defined regions on the Earth that keep a common time. A time 
+            zone generally spans 15° of longitude, and is defined by its offset (in hours) from UTC. 
+            For example, Mountain Standard Time (MST) in the US is 7 hours behind UTC (MST = UTC - 7).
+            (Spreadsheet Column B, Row 5)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.Sunrise">
+            <summary>
+            Sun Rise Time  
+            (Spreadsheet Column Y)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.Sunset">
+            <summary>
+            Sun Set Time
+            (Spreadsheet Column Z)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.AtmosphericRefraction">
+            <summary>
+            As light from the sun (or another celestial body) travels from the vacuum of space into Earth's atmosphere, the 
+            path of the light is bent due to refraction. This causes stars and planets near the horizon to appear higher in 
+            the sky than they actually are, and explains how the sun can still be visible after it has physically passed 
+            beyond the horizon at sunset. See also apparent sunrise.
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.TimePastLocalMidnight">
+            <summary>
+            Time past local midnight.
+            (Spreadsheet Column E)
+            </summary>	
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.JulianDay">
+            <summary>
+            Julian Day: a time period used in astronomical circles, defined as the number of days 
+            since 1 January, 4713 BCE (Before Common Era), with the first day defined as Julian 
+            day zero. The Julian day begins at noon UTC. Some scientists use the term Julian day 
+            to mean the numerical day of the current year, where January 1 is defined as day 001. 
+            (Spreadsheet Column F)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.JulianCentury">
+            <summary>
+            Julian Century
+            calendar established by Julius Caesar in 46 BC, setting the number of days in a year at 365, 
+            except for leap years which have 366, and occurred every 4 years. This calendar was reformed 
+            by Pope Gregory XIII into the Gregorian calendar, which further refined leap years and corrected 
+            for past errors by skipping 10 days in October of 1582. 
+            (Spreadsheet Column G)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SunGeometricMeanLongitude">
+            <summary>
+            Sun's Geometric Mean Longitude (degrees): Geometric Mean Ecliptic Longitude of Sun.
+            (Spreadsheet Column I)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SunMeanAnomaly">
+            <summary>
+            Sun's Mean Anomaly (degrees): Position of Sun relative to perigee
+            (Spreadsheet Column J)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.EccentricityOfEarthOrbit">
+            <summary>
+            Eccentricity of the Earth's Orbit: Eccentricity e is the ratio of half the distance between the foci c to
+            the semi-major axis a: e = c / a. For example, an orbit with e = 0 is circular, e = 1 is parabolic, and e 
+            between 0 and 1 is elliptic.
+            (Spreadsheet Column K)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SunEquationOfCenter">
+            <summary>
+            Sun Equation of the Center: Difference between mean anomaly and true anomaly.
+            (Spreadsheet Column L)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SunTrueLongitude">
+            <summary>
+            Sun True Longitude (degrees)
+            (Spreadsheet Column M)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SunApparentLongitude">
+            <summary>
+            Sun Apparent Longitude (degrees)
+            (Spreadsheet Column P)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.MeanEclipticObliquity">
+            <summary>
+            Mean Ecliptic Obliquity (degrees): Inclination of ecliptic plane w.r.t. celestial equator
+            (Spreadsheet Column Q)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.ObliquityCorrection">
+            <summary>
+            Obliquity Correction (degrees)
+            (Spreadsheet Column R)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SolarDeclination">
+            <summary>
+            Solar Declination (Degrees): The measure of how many degrees North (positive) or South (negative) 
+            of the equator that the sun is when viewed from the centre of the earth.  This varies from 
+            approximately +23.5 (North) in June to -23.5 (South) in December.
+            (Spreadsheet Column T)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.VarY">
+            <summary>
+            Var Y
+            (Spreadsheet Column U)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.EquationOfTime">
+            <summary>
+            Equation of Time (minutes)
+            Accounts for changes in the time of solar noon for a given location over the course of a year. Earth's 
+            elliptical orbit and Kepler's law of equal areas in equal times are the culprits behind this phenomenon.
+            (Spreadsheet Column V)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.HourAngleSunrise">
+            <summary>
+            HA Sunrise (degrees)
+            (Spreadsheet Column W)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SolarNoon">
+            <summary>
+            Solar Noon LST
+            Defined for a given day for a specific longitude, it is the time when the sun crosses the meridian of 
+            the observer's location. At solar noon, a shadow cast by a vertical pole will point either directly 
+            north or directly south, depending on the observer's latitude and the time of year. 
+            (Spreadsheet Column X)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.SunlightDuration">
+            <summary>
+            Sunlight Duration: The amount of time the sun is visible during the specified day.
+            (Spreadsheet Column AA)
+            </summary>
+        </member>
+        <member name="P:Innovative.SolarCalculator.SolarTimes.TrueSolarTime">
+            <summary>
+            Gets the True Solar Time in minutes. The Solar Time is defined as the time elapsed since the most recent 
+            meridian passage of the sun. This system is based on the rotation of the Earth with respect to the sun. 
+            A mean solar day is defined as the time between one solar noon and the next, averaged over the year.
+            (Spreadsheet Column AB)
+            </summary>
+        </member>
+        <member name="T:Innovative.SolarCalculator.Universal">
+            <summary>
+            Provides common .NET static methods that vary between versions.
+            </summary>
+        </member>
+        <member name="T:Innovative.SolarCalculator.Universal.Math">
+            <summary>
+            The Math functions in PORTABLE libraries only accept and return double. All other libraries accept
+            decimal. The library works in all decimal values. This class provides decimal based Math functions
+            for all platforms.
+            </summary>
+        </member>
+    </members>
+</doc>

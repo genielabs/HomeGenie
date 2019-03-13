@@ -21,9 +21,14 @@
  */
 
 using System;
-
-using Nmqtt;
 using System.Net;
+using System.Text;
+using System.Threading;
+
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Protocol;
+using MQTTnet.Serializer;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -33,18 +38,21 @@ namespace HomeGenie.Automation.Scripting
         public int Port = 1883;
         public string ClientId = "hg-" + new Random().Next(10000).ToString();
     }
-    
+
     /// <summary>
     /// MQTT client helper.
     /// Class instance accessor: **MqttClient**
     /// </summary>
+    [Serializable]
     public class MqttClientHelper
     {
-        private MqttClient mqttClient = null;
+        private static MqttFactory factory = new MqttFactory();
         private NetworkCredential networkCredential = null;
         private MqttEndPoint endPoint = new MqttEndPoint();
-        private object mqttSyncLock = new object();
-                
+        private bool usingWebSockets = false;
+
+        private MqttClient mqttClient = null;
+
         /// <summary>
         /// Sets the MQTT server to use.
         /// </summary>
@@ -54,7 +62,7 @@ namespace HomeGenie.Automation.Scripting
             endPoint.Address = server;
             return this;
         }
-        
+
         /// <summary>
         /// Connects to the MQTT server using the default port (1883) and the specified client identifier.
         /// </summary>
@@ -78,22 +86,47 @@ namespace HomeGenie.Automation.Scripting
             Connect();
             return this;
         }
-                
+        
+        /// <summary>
+        /// Connects to the MQTT server using the specified port and client identifier and a callback function in case of lost connection.
+        /// </summary>
+        /// <param name="port">MQTT server port.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="callback">The name of callback function, like RefreshConnection</param>
+        /// <example>Action RefreshConnection = () => {...}</example>
+        public MqttClientHelper Connect(int port, string clientId, Action callback)
+        {
+            endPoint.Port = port;
+            endPoint.ClientId = clientId;
+            Disconnect();
+            mqttClient = (MqttClient)factory.CreateMqttClient();
+            mqttClient.Connected += (sender, args) =>
+            {
+                callback();
+            };
+            mqttClient.Disconnected += (sender, args) =>
+            {
+                Console.WriteLine(args.Exception.Message);
+                Disconnect();
+                Thread.Sleep(5000);
+                Connect();
+            };
+            var options = GetMqttOption(clientId);
+            mqttClient.ConnectAsync(options);            
+            return this;
+        }
+        
         /// <summary>
         /// Disconnects from the MQTT server.
         /// </summary>
         public MqttClientHelper Disconnect()
         {
-            if (this.mqttClient != null)
+            if (mqttClient != null)
             {
-                try
-                {
-                    this.mqttClient.Dispose();
-                }
-                catch
-                {
-                }
+                var m = mqttClient;
                 mqttClient = null;
+                if (m.IsConnected) m.DisconnectAsync();
+                m.Dispose();
             }
             return this;
         }
@@ -105,13 +138,15 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
         public MqttClientHelper Subscribe(string topic, Action<string,string> callback)
         {
-            mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
-                //.ObserveOn(System.Threading.SynchronizationContext.Current)
-                .Subscribe(msg =>
-                           { 
-                    callback(msg.Topic, msg.Payload);
-                    //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
-                });
+            if (mqttClient != null)
+            {
+                mqttClient.ApplicationMessageReceived += (object sender, MqttApplicationMessageReceivedEventArgs args) =>
+                {
+                    var msg = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
+                    callback(args.ApplicationMessage.Topic, msg);
+                };
+                mqttClient.SubscribeAsync(topic);
+            }
             return this;
         }
 
@@ -122,10 +157,35 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text.</param>
         public MqttClientHelper Publish(string topic, string message)
         {
-            lock (mqttSyncLock)
+            if (mqttClient != null)
             {
-                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+                mqttClient.PublishAsync(topic, message, MqttQualityOfServiceLevel.AtLeastOnce, false);
             }
+            return this;
+        }
+
+        /// <summary>
+        /// Publish a message to the specified topic.
+        /// </summary>
+        /// <param name="topic">Topic name.</param>
+        /// <param name="message">Message text as byte array.</param>
+        public MqttClientHelper Publish(string topic, byte[] message)
+        {
+            if (mqttClient != null)
+            {
+                mqttClient.PublishAsync(topic, Encoding.UTF8.GetString(message), MqttQualityOfServiceLevel.AtLeastOnce, false);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Connect over WebSocket (default = false).
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="useWebSocket">true/false</param>
+        public MqttClientHelper UsingWebSockets(bool useWebSocket)
+        {
+            usingWebSockets = useWebSocket;
             return this;
         }
 
@@ -137,14 +197,14 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="pass">Password.</param>
         public MqttClientHelper WithCredentials(string user, string pass)
         {
-            this.networkCredential = new NetworkCredential(user, pass);
+            networkCredential = new NetworkCredential(user, pass);
             return this;
         }
 
         public void Reset()
         {
-            this.networkCredential = null;
-            this.endPoint = new MqttEndPoint();
+            networkCredential = null;
+            endPoint = new MqttEndPoint();
             Disconnect();
         }
 
@@ -153,19 +213,53 @@ namespace HomeGenie.Automation.Scripting
         private void Connect()
         {
             Disconnect();
-            mqttClient = new MqttClient(endPoint.Address, endPoint.Port, endPoint.ClientId);
-            if (this.networkCredential != null)
+            mqttClient = (MqttClient)factory.CreateMqttClient();
+            mqttClient.Disconnected += (sender, args) =>
             {
-                mqttClient.Connect(this.networkCredential.UserName, this.networkCredential.Password);
+                Console.WriteLine(args.Exception.Message);
+                Disconnect();
+                Thread.Sleep(5000);
+                Connect();
+            };
+            var options = GetMqttOption(endPoint.ClientId);
+            mqttClient.ConnectAsync(options);
+        }
+
+        private IMqttClientOptions GetMqttOption(string clientId)
+        {
+            var builder = new MqttClientOptionsBuilder()
+                .WithProtocolVersion(MqttProtocolVersion.V311)
+                .WithClientId(clientId);
+                /*
+                .WithWillMessage(new MqttApplicationMessage()
+                {
+                    Payload = Encoding.UTF8.GetBytes("Hello World!!!"),
+                    Topic = "/homegenie",
+                    Retain = true,
+                    QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce
+                });
+                */
+                // TODO: ...
+                //.WithKeepAlivePeriod(TimeSpan.FromSeconds(...))
+                //.WithCommunicationTimeout(TimeSpan.FromSeconds(...))
+                // .WithTls()
+                //.WithCleanSession();
+            if (usingWebSockets)
+            {
+                builder.WithWebSocketServer(endPoint.Address + ":" + endPoint.Port + "/mqtt");
             }
             else
             {
-                mqttClient.Connect();
+                builder.WithTcpServer(endPoint.Address, endPoint.Port);
             }
+            if (networkCredential != null)
+            {
+                builder.WithCredentials(networkCredential.UserName, networkCredential.Password);
+            }
+            return builder.Build();
         }
 
         #endregion
 
     }
 }
-

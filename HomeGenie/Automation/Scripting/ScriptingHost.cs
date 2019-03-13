@@ -21,70 +21,49 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using NLog;
 
 using HomeGenie.Service;
 
 /*! \mainpage Extend, customize, create!
  *
  * \section docs HomeGenie Documentation
- * \subsection doc_1 User Guide
- * <a href="http://www.homegenie.it/docs/quickstart.php">http://www.homegenie.it/docs/quickstart.php</a>
- * \subsection doc_3 Web Service API
- * <a href="http://www.homegenie.it/docs/api/overview.html">http://www.homegenie.it/docs/api/overview.html</a>
- * \subsection doc_2 Automation Programming
- * <a href="http://www.homegenie.it/docs/automation_introduction.php">http://www.homegenie.it/docs/automation_introduction.php</a>
- * \subsection doc_4 Helper Classes Reference
- * <a href="annotated.html">Class List</a>
+ * 
+ * <a href="http://genielabs.github.io/HomeGenie">http://genielabs.github.io/HomeGenie</a>
  * 
  */
 
 namespace HomeGenie.Automation.Scripting
 {
-
-    public class MethodRunResult
-    {
-        public Exception Exception = null;
-        public object ReturnValue = null;
-    }
-
+    [Serializable]
     public class ScriptingHost
     {
+        private HomeGenieService hgService;
+        internal bool ExecuteProgramCode;
+        private static Logger _log = LogManager.GetCurrentClassLogger();
 
-        private HomeGenieService homegenie = null;
-        internal bool executeCodeToRun = false;
-        //
-        private NetHelper netHelper;
-        private ProgramHelper programHelper;
-        private EventsHelper eventsHelper;
-        private SerialPortHelper serialPortHelper;
-        private TcpClientHelper tcpClientHelper;
-        private UdpClientHelper udpClientHelper;
-        private MqttClientHelper mqttClientHelper;
-        private KnxClientHelper knxClientHelper;
-        private SchedulerHelper schedulerHelper;
 
         public void SetHost(HomeGenieService hg, int programId)
         {
-            homegenie = hg;
-            netHelper = new NetHelper(homegenie);
-            programHelper = new ProgramHelper(homegenie, programId);
-            eventsHelper = new EventsHelper(homegenie, programId);
-            serialPortHelper = new SerialPortHelper();
-            tcpClientHelper = new TcpClientHelper();
-            udpClientHelper = new UdpClientHelper();
-            mqttClientHelper = new MqttClientHelper();
-            knxClientHelper = new KnxClientHelper();
-            schedulerHelper = new SchedulerHelper(homegenie);
+            hgService = hg;
+            Net = new NetHelper(hgService);
+            Program = new ProgramHelper(hgService, programId);
+            Data = new DataHelper();
+            When = new EventsHelper(hgService, programId);
+            SerialPort = new SerialPortHelper();
+            TcpClient = new TcpClientHelper();
+            UdpClient = new UdpClientHelper();
+            MqttClient = new MqttClientHelper();
+            KnxClient = new KnxClientHelper();
+            Scheduler = new SchedulerHelper(hgService);
         }
 
         public ModulesManager Modules
         {
             get
             {
-                return new ModulesManager(homegenie);
+                return new ModulesManager(hgService);
             }
         }
 
@@ -92,89 +71,37 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return new SettingsHelper(homegenie);
+                return new SettingsHelper(hgService);
             }
         }
 
-        public NetHelper Net
-        {
-            get
-            {
-                return netHelper;
-            }
-        }
+        public NetHelper Net { get; private set; }
 
-        public ProgramHelper Program
-        {
-            get
-            {
-                return programHelper;
-            }
-        }
+        public ProgramHelper Program { get; private set; }
+
+        public DataHelper Data { get; private set; }
 
         public EventsHelper Events
         {
             get
             {
-                return eventsHelper;
+                return When;
             }
         }
 
-        public EventsHelper When
-        {
-            get
-            {
-                return eventsHelper;
-            }
-        }
+        public EventsHelper When { get; private set; }
 
-        public SerialPortHelper SerialPort
-        {
-            get
-            {
-                return serialPortHelper;
-            }
-        }
+        public SerialPortHelper SerialPort { get; private set; }
 
-        public TcpClientHelper TcpClient
-        {
-            get
-            {
-                return tcpClientHelper;
-            }
-        }
-        
-        public UdpClientHelper UdpClient
-        {
-            get
-            {
-                return udpClientHelper;
-            }
-        }
-        
-        public MqttClientHelper MqttClient
-        {
-            get
-            {
-                return mqttClientHelper;
-            }
-        }
-        
-        public KnxClientHelper KnxClient
-        {
-            get
-            {
-                return knxClientHelper;
-            }
-        }
+        public TcpClientHelper TcpClient { get; private set; }
 
-        public SchedulerHelper Scheduler
-        {
-            get
-            {
-                return schedulerHelper;
-            }
-        }
+        public UdpClientHelper UdpClient { get; private set; }
+
+        public MqttClientHelper MqttClient { get; private set; }
+
+        public KnxClientHelper KnxClient { get; private set; }
+
+        public SchedulerHelper Scheduler { get; private set; }
 
         public void Pause(double seconds)
         {
@@ -186,25 +113,82 @@ namespace HomeGenie.Automation.Scripting
             Pause(seconds);
         }
 
+        [Obsolete("Use Program.Run(bool) instead")]
         public void SetConditionTrue()
         {
-            executeCodeToRun = true;
+            ExecuteProgramCode = true;
         }
 
+        [Obsolete("Use Program.Run(bool) instead")]
         public void SetConditionFalse()
         {
-            executeCodeToRun = false;
+            ExecuteProgramCode = false;
         }
 
         public void Reset()
         {
-            serialPortHelper.Reset();
-            tcpClientHelper.Reset();
-            udpClientHelper.Reset();
-            netHelper.Reset();
-            mqttClientHelper.Reset();
-            knxClientHelper.Reset();
-            programHelper.Reset();
+            try
+            {
+                SerialPort.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting SerialPort");
+            }
+
+            try
+            {
+                TcpClient.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting TcpClient");
+            }
+
+            try
+            {
+                UdpClient.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting UdpClient");
+            }
+
+            try
+            {
+                Net.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting Net");
+            }
+
+            try
+            {
+                MqttClient.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting MqttClient");
+            }
+
+            try
+            {
+                KnxClient.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting KnxClient");
+            }
+
+            try
+            {
+                Program.Reset();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Error in resetting Program");
+            }
         }
 
     }

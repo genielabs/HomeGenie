@@ -23,7 +23,7 @@ textarea,
 button,
 .ui-btn {
 	font-size: 1em;
-	line-height: 1.3; font-family: /*{global-font-family}*/;
+	line-height: 1.3;
 }
 legend,
 .ui-input-text input,

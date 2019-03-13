@@ -21,9 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using HomeGenie.Data;
 using HomeGenie.Service;
@@ -34,6 +31,7 @@ namespace HomeGenie.Automation.Scripting
     /// Module Helper class.\n
     /// This class is a module instance wrapper and it is used as return value of ModulesManager.Get() method.
     /// </summary>
+    [Serializable]
     public class ModuleHelper : ModulesManager
     {
         private HomeGenie.Data.Module module = null;
@@ -44,11 +42,11 @@ namespace HomeGenie.Automation.Scripting
             this.module = module;
         }
 
-        public override List<HomeGenie.Data.Module> SelectedModules
+        public override TsList<HomeGenie.Data.Module> SelectedModules
         {
             get
             {
-                var selectedModules = new List<Data.Module>();
+                var selectedModules = new TsList<Data.Module>();
                 selectedModules.Add(module);
                 return selectedModules;
             }
@@ -64,11 +62,17 @@ namespace HomeGenie.Automation.Scripting
             return (module.Name.ToLower() == name.ToLower());
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="HomeGenie.Automation.Scripting.ModuleHelper"/> was found.
-        /// </summary>
-        /// <value><c>true</c> if was found; otherwise, <c>false</c>.</value>
+        [Obsolete("Use 'Exists' instead")]
         public bool WasFound
+        {
+            get { return module != null; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="HomeGenie.Automation.Scripting.ModuleHelper"/> has a valid module instance.
+        /// </summary>
+        /// <value><c>true</c> if module instance is valid; otherwise, <c>false</c>.</value>
+        public bool Exists
         {
             get { return module != null; }
         }
@@ -147,7 +151,7 @@ namespace HomeGenie.Automation.Scripting
         public bool HasFeature(string feature)
         {
             var parameter = Service.Utility.ModuleParameterGet(module, feature);
-            return (parameter != null && parameter.Value != null && parameter.Value != "");
+            return (parameter != null && !String.IsNullOrWhiteSpace(parameter.Value));
         }
 
         /// <summary>
@@ -167,22 +171,63 @@ namespace HomeGenie.Automation.Scripting
         public ModuleParameter Parameter(string parameter)
         {
             ModuleParameter value = null;
-            if (SelectedModules.Count > 0)
+            if (this.module != null)
             {
                 try
                 {
-                    value = Service.Utility.ModuleParameterGet(module, parameter);
+                    value = Service.Utility.ModuleParameterGet(this.module, parameter);
                 }
                 catch { }
                 // create parameter if does not exists
                 if (value == null)
                 {
-                    value = Service.Utility.ModuleParameterSet(module, parameter, "");
+                    value = Service.Utility.ModuleParameterSet(this.module, parameter, "");
                 }
             }
             return value;
         }
+                
+        public StoreHelper Store(string storeName)
+        {
+            StoreHelper storage = null;
+            if (this.module != null)
+            {
+                storage = new StoreHelper(this.module.Stores, storeName);
+            }
+            return storage;
+        }
 
-
+        /// <summary>
+        /// Raise a module parameter event and set the parameter with the specified value. 
+        /// </summary>
+        /// <returns>ModuleHelper.</returns>
+        /// <param name="parameter">Parameter name.</param>
+        /// <param name="value">The new parameter value to set.</param>
+        /// <param name="description">Event description.</param>
+        public ModuleHelper RaiseEvent(string parameter, string value, string description)
+        {
+            try
+            {
+                var actionEvent = homegenie.MigService.GetEvent(
+                    this.Instance.Domain,
+                    this.Instance.Address,
+                    description,
+                    parameter,
+                    value
+                );
+                homegenie.RaiseEvent(this, actionEvent);
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogError(
+                    this.Instance.Domain,
+                    this.Instance.Address,
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
+            return this;
+        }
     }
 }

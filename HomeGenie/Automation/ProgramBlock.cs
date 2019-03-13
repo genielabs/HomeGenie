@@ -16,145 +16,117 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
-
-using System.IO;
-using System.Reflection;
-using Microsoft.CSharp;
-using System.CodeDom.Compiler;
 using System.Xml.Serialization;
 
-using HomeGenie.Service;
+using Newtonsoft.Json;
+
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
-
-using IronPython.Hosting;
-using Microsoft.Scripting;
-using Microsoft.Scripting.Hosting;
-using Jint;
-using IronRuby;
+using HomeGenie.Automation.Engines;
 
 namespace HomeGenie.Automation
-{
+{    
+    public class MethodRunResult
+    {
+        public Exception Exception = null;
+        public object ReturnValue = null;
+    }
 
     [Serializable()]
     public class ProgramBlock
     {
-        private HomeGenieService homegenie = null;
-        private bool isProgramEnabled = false;
+        private IProgramEngine programEngine;
+        private bool isProgramEnabled;
         private string codeType = "";
 
         // event delegates
         public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
-
         public event EnabledStateChangedEventHandler EnabledStateChanged;
 
-        // c# program fields
-        private AppDomain programDomain = null;
-        private Type assemblyType = null;
-        private Object assembly = null;
-        private MethodInfo methodRun = null;
-        private MethodInfo methodReset = null;
-        private MethodInfo methodEvaluateCondition = null;
-        //private static object instanceObject = new object();
-        private System.Reflection.Assembly appAssembly;
-
-        // IronScript fields for Python, Ruby, Javascript
-        internal object scriptEngine = null;
-        private ScriptScope scriptScope = null;
-        private ScriptingHost hgScriptingHost = null;
-
-        // System events handlers
-        internal Func<bool> SystemStarted = null;
-        internal Func<bool> SystemStopping = null;
-        internal Func<bool> Stopping = null;
-        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
-        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
-        internal List<string> registeredApiCalls = new List<string>();
-
-        // Main program thread
-        internal Thread ProgramThread;
-
-        // wizard script public members
-        //
-        // Type = "Wizard" program data
-        // subj: Domain, TargetNode, Property (eg. Domains.HomeAutomation_ZWave, "4", Globals.MODPAR_METER_WATTS ) , Date, Time
-        // cond: Equals, GreaterThan, LessThan
-        //  val: <value>
-        public ConditionType ConditionType;
-        public List<ProgramCondition> Conditions;
-        public List<ProgramCommand> Commands;
-
         // c# program public members
-        public string ScriptCondition;
-        public string ScriptSource;
-        public string ScriptErrors;
+        public string ScriptSetup { get; set; }
+        public string ScriptSource { get; set; }
+        public string ScriptErrors { get; set; }
 
         // common public members
-        public bool IsRunning;
-        public List<ProgramFeature> Features = new List<ProgramFeature>();
+        public string Domain  { get; set; }
+        public int Address  { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Group { get; set; }
+        public List<ProgramFeature> Features  { get; set; }
+        public bool AutoRestartEnabled { get; set; }
 
-        [NonSerialized]
-        public bool LastConditionEvaluationResult;
+        [XmlIgnore]
+        public bool WillRun { get; set; }
+        [XmlIgnore]
+        public bool IsRunning { get; set; }
+        [XmlIgnore]
+        public object OperationLock = new object();
 
-        public string Domain = Domains.HomeAutomation_HomeGenie_Automation;
-        public int Address = 0;
-        public string Name;
-        public string Description;
-        public string Group;
+        public DateTime? ActivationTime { get; set; }
+        public DateTime? TriggerTime { get; set; }
+
+        public ProgramBlock()
+        {
+            // init stuff
+            Domain = Domains.HomeAutomation_HomeGenie_Automation;
+            Address = 0;
+            Features = new List<ProgramFeature>();
+
+            Type = "Wizard";
+            ScriptSetup = "";
+            ScriptSource = "";
+            ScriptErrors = "";
+            //
+            isProgramEnabled = false;
+            IsRunning = false;
+        }
 
         public string Type
         {
             get { return codeType; }
             set
             {
+                bool changed = codeType != value;
                 codeType = value;
-                scriptEngine = null;
-                scriptScope = null;
-                switch (codeType.ToLower())
+                if (changed || programEngine == null)
                 {
-                case "python":
-                    try { scriptEngine = Python.CreateEngine(); } catch { }
-                    break;
-                case "ruby":
-                    try { scriptEngine = Ruby.CreateEngine(); } catch { }
-                    break;
-                case "javascript":
-                    try { scriptEngine = new Jint.Engine(); } catch { }
-                    break;
-                }
-                if (homegenie != null && scriptEngine != null)
-                {
-                    SetupScriptingScope();
+                    if (programEngine != null)
+                    {
+                        programEngine.Unload();
+                        programEngine = null;
+                    }
+                    switch (codeType.ToLower())
+                    {
+                        case "csharp":
+                            programEngine = new CSharpEngine(this);
+                            break;
+                        case "python":
+                            programEngine = new PythonEngine(this);
+                            break;
+                        case "javascript":
+                            programEngine = new JavascriptEngine(this);
+                            break;
+                        case "wizard":
+                            programEngine = new WizardEngine(this);
+                            break;
+                        case "arduino":
+                            programEngine = new ArduinoEngine(this);
+                            break;
+                        default:
+                            throw new NotImplementedException(
+                                string.Format("Program engine for type {0} is not implemented", codeType)
+                            );
+                    }
                 }
             }
-        }
-
-        public DateTime? ActivationTime;
-        public DateTime? TriggerTime;
-
-        public ProgramBlock()
-        {
-            // init stuff
-            Type = "";
-            ScriptCondition = "";
-            ScriptSource = "";
-            ScriptErrors = "";
-            //
-            AppAssembly = null;
-            //
-            Commands = new List<ProgramCommand>();
-            Conditions = new List<ProgramCondition>();
-            ConditionType = ConditionType.None;
-            //
-            isProgramEnabled = true;
-            IsRunning = false;
         }
 
         public bool IsEnabled
@@ -165,389 +137,26 @@ namespace HomeGenie.Automation
                 if (isProgramEnabled != value)
                 {
                     isProgramEnabled = value;
-                    if (isProgramEnabled) ActivationTime = DateTime.UtcNow;
-                    if (EnabledStateChanged != null) EnabledStateChanged(this, value);
-                }
-            }
-        }
-
-        public void SetHost(HomeGenieService hg)
-        {
-            homegenie = hg;
-            // force ScriptingHost assignment
-            this.Type = codeType;
-        }
-
-
-        #region IronPython, IronRuby and Jint Javascript Scripts methods
-
-        private void SetupScriptingScope()
-        {
-            hgScriptingHost = new ScriptingHost();
-            hgScriptingHost.SetHost(homegenie, this.Address);
-            if (scriptEngine.GetType() == typeof(ScriptEngine))
-            {
-                // IronPyton and IronRuby engines
-                ScriptEngine currentEngine = (scriptEngine as ScriptEngine);
-                dynamic scope = scriptScope = currentEngine.CreateScope();
-                scope.hg = hgScriptingHost;
-            }
-            else if (scriptEngine.GetType() == typeof(Jint.Engine))
-            {
-                // Jint Javascript engine
-                Jint.Engine javascriptEngine = (scriptEngine as Jint.Engine);
-                javascriptEngine.SetValue("hg", hgScriptingHost);
-            }
-        }
-
-        #endregion
-
-
-        #region CSharp App methods
-
-        internal System.Reflection.Assembly AppAssembly
-        {
-            get
-            {
-                return appAssembly;
-            }
-            set
-            {
-                ActivationTime = null;
-                TriggerTime = null;
-                try
-                {
-                    Stop();
-                }
-                catch (Exception)
-                {
-                    // TODO: handle this...
-                }
-                //
-                if (programDomain != null)
-                {
-                    // Unloading program app domain...
-                    try
+                    if (isProgramEnabled)
                     {
-                        AppDomain.Unload(programDomain);
+                        ActivationTime = DateTime.UtcNow;
+                        if (programEngine != null) programEngine.Load();
                     }
-                    catch
+                    else
                     {
+                        if (programEngine != null) programEngine.Unload();
                     }
-                    programDomain = null;
-                    //
-                    try
-                    {
-                        // Deleting assembly...
-                        File.Delete(this.AssemblyFile);
-                    }
-                    catch
-                    {
-                    }
-                }
-                //
-                IsRunning = false;
-                //
-                appAssembly = value;
 
+                    if (EnabledStateChanged != null) EnabledStateChanged.Invoke(this, value);
+                }
             }
         }
 
-        internal string AssemblyFile
+        [XmlIgnore, JsonIgnore]
+        public ProgramEngineBase Engine
         {
-            get
-            {
-                string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
-                file = Path.Combine(file, this.Address + ".dll");
-                return file;
-            }
+            get { return (ProgramEngineBase) programEngine; }
         }
-
-        internal bool AssemblyLoad()
-        {
-            bool succeed = false;
-            if (this.Type.ToLower() == "csharp")
-            {
-                try
-                {
-                    appAssembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
-                    succeed = true;
-                }
-                catch (Exception e)
-                {
-
-                    this.ScriptErrors = e.Message + "\n" + e.StackTrace;
-                }
-            }
-            return succeed;
-        }
-
-        internal void Reset()
-        {
-            // CSharp App
-            if (appAssembly != null && methodReset != null)
-            {
-                methodReset.Invoke(assembly, null);
-            }
-            // Python, Ruby, Javascript
-            else if (hgScriptingHost != null)
-            {
-                hgScriptingHost.Reset();
-                hgScriptingHost = null;
-            }
-        }
-
-        private bool CheckAppInstance()
-        {
-            bool success = false;
-            if (programDomain != null)
-            {
-                success = true;
-            }
-            else
-            {
-                try
-                {
-                    // Creating app domain
-                    programDomain = AppDomain.CurrentDomain;
-                    //
-                    assemblyType = appAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
-                    assembly = Activator.CreateInstance(assemblyType);
-                    //
-                    MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
-                    miSetHost.Invoke(assembly, new object[2] { homegenie, this.Address });
-                    //
-                    methodRun = assemblyType.GetMethod("Run");
-                    methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
-                    methodReset = assemblyType.GetMethod("Reset");
-                    //
-                    success = true;
-                }
-                catch (Exception ex)
-                {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie_Automation,
-                        this.Address.ToString(),
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
-            }
-            return success;
-        }
-
-        #endregion
-
-
-        #region Common methods
-
-        internal MethodRunResult Run(string options)
-        {
-            MethodRunResult result = null;
-            switch (codeType.ToLower())
-            {
-            case "python":
-                string pythonScript = this.ScriptSource;
-                ScriptEngine pythonEngine = (scriptEngine as ScriptEngine);
-                result = new MethodRunResult();
-                try
-                {
-                    pythonEngine.Execute(pythonScript, scriptScope);
-                }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
-                break;
-            case "ruby":
-                string rubyScript = this.ScriptSource;
-                ScriptEngine rubyEngine = (scriptEngine as ScriptEngine);
-                result = new MethodRunResult();
-                try
-                {
-                    rubyEngine.Execute(rubyScript, scriptScope);
-                }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
-                break;
-            case "javascript":
-                string jsScript = this.ScriptSource;
-                Jint.Engine engine = (scriptEngine as Jint.Engine);
-                    //engine.Options.AllowClr(false);
-                result = new MethodRunResult();
-                try
-                {
-                    engine.Execute(jsScript);
-                }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
-                break;
-            case "csharp":
-                if (appAssembly != null && CheckAppInstance())
-                {
-                    result = (MethodRunResult)methodRun.Invoke(assembly, new object[1] { options });
-                }
-                break;
-            case "arduino":
-                result = new MethodRunResult();
-                homegenie.LogBroadcastEvent(
-                    Domains.HomeAutomation_HomeGenie_Automation,
-                    this.Address.ToString(),
-                    "Arduino Sketch Upload",
-                    "Arduino.UploadOutput",
-                    "Upload started"
-                    );
-                string[] outputResult = ArduinoAppFactory.UploadSketch(Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory,
-                    "programs",
-                    "arduino",
-                    this.Address.ToString()
-                )).Split('\n');
-                //
-                for (int x = 0; x < outputResult.Length; x++)
-                {
-                    if (!String.IsNullOrWhiteSpace(outputResult[x]))
-                    {
-                        homegenie.LogBroadcastEvent(
-                            Domains.HomeAutomation_HomeGenie_Automation,
-                            this.Address.ToString(),
-                            "Arduino Sketch",
-                            "Arduino.UploadOutput",
-                            outputResult[x]
-                        );
-                        Thread.Sleep(500);
-                    }
-                }
-                //
-                homegenie.LogBroadcastEvent(
-                    Domains.HomeAutomation_HomeGenie_Automation,
-                    this.Address.ToString(),
-                    "Arduino Sketch",
-                    "Arduino.UploadOutput",
-                    "Upload finished"
-                    );
-                break;
-            }
-            //
-            return result;
-        }
-
-        internal MethodRunResult EvaluateCondition()
-        {
-            MethodRunResult result = null;
-            switch (codeType.ToLower())
-            {
-            case "python":
-                string pythonScript = this.ScriptCondition;
-                ScriptEngine pythonEngine = (scriptEngine as ScriptEngine);
-                result = new MethodRunResult();
-                try
-                {
-                    pythonEngine.Execute(pythonScript, scriptScope);
-                    result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
-                }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
-                break;
-            case "ruby":
-                string rubyScript = this.ScriptCondition;
-                ScriptEngine rubyEngine = (scriptEngine as ScriptEngine);
-                result = new MethodRunResult();
-                try
-                {
-                    rubyEngine.Execute(rubyScript, scriptScope);
-                    result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
-                }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
-                break;
-            case "javascript":
-                string jsScript = this.ScriptCondition;
-                Jint.Engine engine = (scriptEngine as Jint.Engine);
-                result = new MethodRunResult();
-                try
-                {
-                    engine.Execute(jsScript);
-                    result.ReturnValue = (engine.GetValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
-                }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
-                break;
-            case "csharp":
-                if (appAssembly != null && CheckAppInstance())
-                {
-                    result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
-                }
-                break;
-            }
-            //
-            return result;
-        }
-
-        internal void Stop()
-        {
-            this.IsRunning = false;
-            if (this.Stopping != null)
-            {
-                try { Stopping(); } catch { }
-            }
-            this.Reset();
-            //
-            if (ProgramThread != null)
-            {
-                try
-                {
-                    ProgramThread.Abort();
-                    ProgramThread.Join(100);
-                }
-                catch
-                {
-                }
-                //
-                ProgramThread = null;
-            }
-            //
-            //TODO: complete cleanup and deallocation stuff here
-            //
-            ModuleIsChangingHandler = null;
-            ModuleChangedHandler = null;
-            SystemStarted = null;
-            SystemStopping = null;
-            Stopping = null;
-            //
-            foreach (string apiCall in registeredApiCalls)
-            {
-                homegenie.UnRegisterDynamicApi(apiCall);
-            }
-            registeredApiCalls.Clear();
-            //
-            switch (codeType.ToLower())
-            {
-            case "python":
-            case "ruby":
-                (scriptEngine as ScriptEngine).Runtime.Shutdown();
-                break;
-            //case "javascript":
-            //case "csharp":
-            }
-        }
-
-        #endregion
-
-
     }
-
-
 }
 

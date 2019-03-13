@@ -16,14 +16,13 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.IO.Ports;
 
 using SerialPortLib;
 
@@ -33,6 +32,7 @@ namespace HomeGenie.Automation.Scripting
     /// Serial port helper.\n
     /// Class instance accessor: **SerialPort**
     /// </summary>
+    [Serializable]
     public class SerialPortHelper
     {
         private SerialPortInput serialPort;
@@ -71,11 +71,13 @@ namespace HomeGenie.Automation.Scripting
         /// Connect the serial port at the specified speed.
         /// </summary>
         /// <param name="baudRate">Baud rate.</param>
-        public bool Connect(int baudRate)
+        /// <param name="stopBits">Stop Bits.</param>
+        /// <param name="parity">Parity.</param>
+        /// 
+        public bool Connect(int baudRate, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
         {
-            serialPort.MessageReceived += serialPort_MessageReceived;
-            serialPort.ConnectedStateChanged += serialPort_ConnectedStateChanged;
-            //
+            serialPort.MessageReceived += SerialPort_MessageReceived;
+            serialPort.ConnectionStatusChanged += SerialPort_ConnectionStatusChanged;
             serialPort.SetPort(portName, baudRate);
             return serialPort.Connect();
         }
@@ -86,8 +88,8 @@ namespace HomeGenie.Automation.Scripting
         public SerialPortHelper Disconnect()
         {
             serialPort.Disconnect();
-            serialPort.MessageReceived -= serialPort_MessageReceived;
-            serialPort.ConnectedStateChanged -= serialPort_ConnectedStateChanged;
+            serialPort.MessageReceived -= SerialPort_MessageReceived;
+            serialPort.ConnectionStatusChanged -= SerialPort_ConnectionStatusChanged;
             return this;
         }
 
@@ -154,7 +156,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get { return serialPort.IsConnected; }
         }
-        
+
         /// <summary>
         /// Gets or sets the end of line delimiter used in text messaging.
         /// </summary>
@@ -164,21 +166,21 @@ namespace HomeGenie.Automation.Scripting
             get { return textEndOfLine[0]; }
             set { textEndOfLine = new string[] { value }; }
         }
-        
+
         public void Reset()
         {
             Disconnect();
         }
 
-        private void serialPort_MessageReceived(byte[] message)
+        private void SerialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
             if (dataReceived != null)
             {
-                dataReceived(message);
+                dataReceived(args.Data);
             }
             if (stringReceived != null)
             {
-                string textMessage = textBuffer + Encoding.UTF8.GetString(message);
+                string textMessage = textBuffer + Encoding.UTF8.GetString(args.Data);
                 if (String.IsNullOrEmpty(textEndOfLine[0]))
                 {
                     // raw string receive
@@ -200,14 +202,18 @@ namespace HomeGenie.Automation.Scripting
                             textBuffer = lines[lines.Length - 1];
                         }
                     }
+                    else
+                    {
+                        textBuffer = textMessage;
+                    }
                 }
             }
         }
 
-        private void serialPort_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
+        private void SerialPort_ConnectionStatusChanged(object sender, ConnectionStatusChangedEventArgs args)
         {
             // send last received text buffer before disconnecting
-            if (!statusargs.Connected && !String.IsNullOrEmpty(textBuffer))
+            if (!args.Connected && !String.IsNullOrEmpty(textBuffer))
             {
                 try { stringReceived(textBuffer); } catch { }
             }
@@ -215,7 +221,7 @@ namespace HomeGenie.Automation.Scripting
             textBuffer = "";
             if (statusChanged != null)
             {
-                statusChanged(statusargs.Connected);
+                statusChanged(args.Connected);
             }
         }
 

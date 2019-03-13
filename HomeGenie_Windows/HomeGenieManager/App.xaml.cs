@@ -70,14 +70,19 @@ namespace HomeGenieManager
                     if (upnpService.Count > 0)
                     {
                         Thread.Sleep(2000);
-                        System.Diagnostics.Process.Start(UPnPDevices[UPnPDevices.Keys.ElementAt(0)].PresentationURL);
-                        break;
+                        for (int s = 0; s < UPnPDevices.Count; s++)
+                        {
+                            var dev = UPnPDevices.ElementAt(s).Value;
+                            if (dev.StandardDeviceType == "HomeAutomationServer")
+                            {
+                                System.Diagnostics.Process.Start(dev.PresentationURL);
+                                t = 10;
+                                break;
+                            }
+                        }
                     }
-                    else
-                    {
-                        t++;
-                        Thread.Sleep(1000);
-                    }
+                    t++;
+                    Thread.Sleep(1000);
                 }
                 //
                 Thread.Sleep(2000);

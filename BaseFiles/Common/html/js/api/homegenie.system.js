@@ -2,171 +2,159 @@
 // namespace : HG.System
 // info      : -
 //
-HG.System = HG.System || {};
-//
-HG.System.SetHttpPort = function (port, callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.SetPassword = function (pass, callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.SetPassword/' + pass + '/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.ClearPassword = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.ClearPassword/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.HasPassword = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            var haspass = eval(data)[0];
-            if (callback != null) callback(haspass.ResponseValue);
-        }
-    });
-};
-HG.System.LoggingEnable = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Enable/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.LoggingDisable = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Disable/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.LoggingIsEnabled = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.IsEnabled/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            var haslog = eval(data)[0];
-            if (callback != null) callback(haslog.ResponseValue);
-        }
-    });
-};
+HG.System = HG.System || new function(){ var $$ = this;
 
+    $$.GetVersion = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.GetVersion/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
-HG.System.WebCacheEnable = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetWebCacheEnabled/1/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.WebCacheDisable = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetWebCacheEnabled/0/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
-HG.System.WebCacheIsEnabled = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.GetWebCacheEnabled/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            var haslog = eval(data)[0];
-            if (callback != null) callback(haslog.ResponseValue);
-        }
-    });
-};
+    $$.GetBootProgress = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.GetBootProgress/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
-// Should this be added to a new namespace like "HG.System.Statistics"? It's a setting, so thought it might not belong in homegenie.statstics.js... Opinions?
-HG.System.SetStatisticsDatabaseMaximumSize = function (mb, callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Statistics.SetStatisticsDatabaseMaximumSize/' + mb + '/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: "text",
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
+    $$.SetHttpPort = function (port, callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
+    $$.SetHostHeader = function (hostHeader, callback) {
+       $.ajax({
+           url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetHostHeader/' + hostHeader + '/',
+           type: 'GET',
+           success: function (data) {
+               if (callback != null) callback(data);
+           }
+       });
+    };
 
-HG.System.UpdateManager = HG.System.UpdateManager || {};
-HG.System.UpdateManager.UpdateCheck = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.Check/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
+    $$.SetPassword = function (pass, callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.SetPassword/' + pass + '/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
-HG.System.UpdateManager.GetUpdateList = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.UpdatesList/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
+    $$.ClearPassword = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.ClearPassword/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
-HG.System.UpdateManager.DownloadUpdate = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.DownloadUpdate/' + (new Date().getTime()),
-        type: 'GET',
-        dataType: 'text',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
+    $$.HasPassword = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
+    $$.LoggingEnable = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Enable/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
-HG.System.UpdateManager.InstallProgramsList = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.InstallProgramsList/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
-};
+    $$.LoggingDisable = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Disable/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
 
-HG.System.UpdateManager.InstallUpdate = function (callback) {
-    $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.InstallUpdate/' + (new Date().getTime()),
-        type: 'GET',
-        success: function (data) {
-            if (callback != null) callback(data);
-        }
-    });
+    $$.LoggingIsEnabled = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.IsEnabled/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data.ResponseValue);
+            }
+        });
+    };
+
+    $$.WebCacheEnable = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetWebCacheEnabled/1/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
+
+    $$.WebCacheDisable = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetWebCacheEnabled/0/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null) callback(data);
+            }
+        });
+    };
+
+    $$.WebCacheIsEnabled = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.GetWebCacheEnabled/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null)
+                    callback(data.ResponseValue);
+            }
+        });
+    };
+
+    $$.LocationGet = function (callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Location.Get/',
+            type: 'GET',
+            success: function (data) {
+                if (callback != null)
+                    callback(data);
+            }
+        });
+    };
+
+    $$.LocationSet = function (locationData, callback) {
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Location.Set/',
+            type: 'POST',
+            data: JSON.stringify(locationData),
+            success: function (data) {
+                if (callback != null)
+                    callback(data);
+            }
+        });
+    };
 };

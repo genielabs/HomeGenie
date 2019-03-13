@@ -1,0 +1,705 @@
+<div data-configlet-id="HomeAutomation.ZWave">
+
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style="width:80%">
+            <table><tr>
+                <td style="padding-right:20px">
+                    <span data-locale-id="device_port">Device Port</span>
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <select data-ui-field="serialport" data-mini="true"></select>
+                    </div>
+                </td>
+                <!-- TODO: deprecate this block -->
+                <!--
+                <td style="padding-right:20px">
+                    <span data-locale-id="startup_discovery">Discovery on Startup</span>
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <select data-ui-field="startupdiscovery" data-mini="true">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td style="padding-right:20px">
+                    <span data-locale-id="command_delay">Command Delay</span>
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <select data-ui-field="commanddelay" data-mini="true">
+                            <option value="100">100ms</option>
+                            <option value="150">150ms</option>
+                            <option value="200">200ms</option>
+                            <option value="250">250ms</option>
+                            <option value="300">300ms</option>
+                            <option value="400">400ms</option>
+                            <option value="500">500ms</option>
+                            <option value="750">750ms</option>
+                        </select>
+                    </div>
+                </td>
+                -->
+            </tr></table>
+        </div>
+        <div class="ui-block-b" align="right" style="width:20%">
+            <select data-ui-field="isenabled" data-role="slider">
+                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- common operation buttons -->
+
+    <div>
+        <span data-locale-id="common_tasks">ZWave Common Tasks</span>
+        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+            <a data-ui-field="discovery_btn" data-locale-id="discovery" class="ui-btn ui-icon-search ui-btn-icon-left">Discovery</a>
+            <a data-ui-field="addnode_btn" data-locale-id="add_node" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
+            <a data-ui-field="removenode_btn" data-locale-id="remove_node" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
+            <a data-ui-field="healnetwork_btn" data-locale-id="healnetwork" class="ui-btn ui-icon-heart ui-btn-icon-left">Heal Network</a>
+            <a data-ui-field="hardreset_btn" data-locale-id="hard_reset_heading" class="ui-btn ui-icon-alert ui-btn-icon-left">Hard Reset</a>
+            <a data-ui-field="update_p1db_btn" data-locale-id="update_p1db" class="ui-btn ui-icon-refresh ui-btn-icon-left">Update Pepper1 Database</a>
+        </div>
+    </div>
+
+    <!-- popups -->
+
+    <div data-ui-field="discovery_popup" class="ui-corner-all" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="discovery_heading">ZWave Discovery</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <p data-ui-field="discovery_log" style="font-family:monospace; font-size:8pt;"></p>
+        </div>
+        <div data-role="footer" data-tap-toggle="false" align="center">
+            <a href="#page_configure_groups" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-left" style="margin:8px">Configure Groups and Modules</a>
+        </div>
+    </div>
+    
+    <div data-ui-field="healnetwork_popup" class="ui-corner-all" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="healnetwork_heading">ZWave Network Heal</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <p data-ui-field="healnetwork_log" style="font-family:monospace; font-size:8pt;"></p>
+        </div>
+    </div>
+
+    <div data-ui-field="nodeoperation_popup" class="ui-corner-all hg-popup-a" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-ui-field="title" data-locale-id="add_node_heading">Add/Remove Node</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 data-locale-id="press_device_button" class="ui-title">Press the button on your device:</h3>
+            <h2 data-ui-field="nodeid" align="center"></h2>
+            <p data-ui-field="message" data-locale-id="operation_timeout">this operation will timeout in 10 seconds.</p>
+            <br />
+            <a data-ui-field="close_button" href="#" class="ui-btn ui-corner-all" data-locale-id="add_node_close" data-rel="back">Close</a>
+        </div>
+    </div>
+
+</div>
+        
+<script type="text/javascript" language="javascript">
+HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
+
+    Id: 'HomeAutomation.ZWave',
+    Initialize: function(){
+        var _this = this;
+        var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
+        // initialize global fields
+        this.DiscoveryLog = configlet.find('[data-ui-field=discovery_log]');
+        this.DiscoveryPopup = configlet.find('[data-ui-field=discovery_popup]');
+        this.HealNetworkLog = configlet.find('[data-ui-field=healnetwork_log]');
+        this.HealNetworkPopup = configlet.find('[data-ui-field=healnetwork_popup]');
+        this.NodeOperationPopup = configlet.find('[data-ui-field=nodeoperation_popup]');
+        // local fields
+        var portSelect = configlet.find('[data-ui-field=serialport]');
+        var enabledFlip = configlet.find('[data-ui-field=isenabled]');
+        var discoveryButton = configlet.find('[data-ui-field=discovery_btn]');
+        var healNetworkButton = configlet.find('[data-ui-field=healnetwork_btn]');
+        var addNodeButton = configlet.find('[data-ui-field=addnode_btn]');
+        var removeNodeButton = configlet.find('[data-ui-field=removenode_btn]');
+        var hardResetButton = configlet.find('[data-ui-field=hardreset_btn]');
+        var updateP1DbButton = configlet.find('[data-ui-field=update_p1db_btn]');
+        // TODO: deprecate the following two fields
+        //var delaySelect = configlet.find('[data-ui-field=commanddelay]');
+        //var startupDiscoverySelect = configlet.find('[data-ui-field=startupdiscovery]');
+        // get enabled status
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Get', '', '', function (data) {
+            enabledFlip.val(data.ResponseValue).slider('refresh');
+        });
+        // bind to enabled flip changes
+        enabledFlip.on('slidestop', function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Set', enabledFlip.val(), '', function (data) {
+                if (enabledFlip.val() == '1') {
+                    if (portSelect.val() == '') {
+                        HG.WebApp.SystemSettings.ShowPortTip(portSelect);
+                    }
+                }
+            });
+        });
+        /*
+        startupDiscoverySelect.selectmenu().selectmenu('refresh', true);
+        // get current configured startup discovery
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'StartupDiscovery', '', function (startupDiscovery) {
+            if (startupDiscovery && startupDiscovery.ResponseValue != '') {
+                startupDiscoverySelect.val(startupDiscovery.ResponseValue);
+                startupDiscoverySelect.selectmenu('refresh', true);
+            }
+        });
+        // bind to startup discovery change event
+        startupDiscoverySelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'StartupDiscovery', encodeURIComponent($(this).val()));
+        });
+        delaySelect.selectmenu().selectmenu('refresh', true);
+        // get current configured delay
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Delay', '', function (delay) {
+            if (delay && delay.ResponseValue != '') {
+                delaySelect.val(delay.ResponseValue);
+                delaySelect.selectmenu('refresh', true);
+            }
+        });
+        // bind to command delay change event
+        delaySelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Delay', encodeURIComponent($(this).val()));
+        });
+        */
+        // populate serial port list
+        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (ports) {
+            portSelect.empty();
+            portSelect.append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder', false, this.Locale) + '</option>');
+            portSelect.append('<option value="" data-ui-action="custom">(enter custom port)</option>');
+            if (ports.length == 0) {
+                portSelect.append('<option value="">NO SERIAL PORTS FOUND</option>');
+            } else {
+                for (var p = 0; p < ports.length; p++) {
+                    portSelect.append('<option value="' + ports[p] + '">' + ports[p] + '</option>');
+                }
+            }
+            portSelect.selectmenu('refresh', true);
+            // set current configured port
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (port) {
+                var opt = portSelect.find('option[value="'+port.ResponseValue+'"]');
+                if (opt.length == 0) {
+                    // custom port
+                    portSelect.find('option').eq(1).val(port.ResponseValue);
+                    portSelect.find('option').eq(1).html(port.ResponseValue);
+                    portSelect.selectmenu('refresh', true);
+                }
+                portSelect.val(port.ResponseValue);
+                portSelect.selectmenu('refresh', true);
+            });
+        });
+        // bind to port select change event
+        portSelect.change(function (event) {
+            if ($(this)[0].selectedIndex == 1) {
+                var port = $(this).find('option').eq(1).text();
+                if (port == '(enter custom port)') port = '';
+                port = prompt('Please enter port path', port);
+                if (port != null) {
+                    $(this).find('option').eq(1).val(port);
+                    if (port != '' && port != '(enter custom port)') {
+                        $(this).find('option').eq(1).html(port);
+                    } else {
+                        $(this).val('');
+                        $(this).find('option').eq(1).html('(enter custom port)');
+                    }
+                    $(this).selectmenu('refresh', true);
+                }
+            }
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Port', encodeURIComponent($(this).val()));
+        });
+        // bind to button actions
+        discoveryButton.on('click', function() {
+            _this.ZWaveDiscovery();
+        });
+        healNetworkButton.on('click', function () {
+            _this.ZWaveHealNetwork();
+        });
+        addNodeButton.on('click', function () {
+            _this.ZWaveNodeAdd();
+        });
+        removeNodeButton.on('click', function() {
+            _this.ZWaveNodeRemove();
+        });
+        hardResetButton.on('click', function() {
+            _this.ZWaveHardReset();
+        });
+        updateP1DbButton.on('click', function() {
+            _this.ZWaveUpdateP1Db();
+        });
+        // initialize popups
+        this.DiscoveryPopup.popup();
+        this.HealNetworkPopup.popup();
+        this.NodeOperationPopup.popup();
+        this.NodeOperationPopup.on('popupbeforeposition', function (event) {
+            var messageString = HG.WebApp.Locales.GetLocaleString('operation_timeout', false, _this.Locale);
+            _this.NodeOperationPopup.find('[data-ui-field=close_button]').addClass('ui-disabled');
+            _this.NodeOperationPopup.find('[data-ui-field=nodeid]').html('<span style="color:green">waiting</span>');
+            _this.NodeOperationPopup.find('[data-ui-field=message]').html(messageString);
+        });
+        // listen to hg events
+        HG.WebApp.Events.AddListener(this);
+    },
+
+    // this must be defined when listening to HG events
+    parameterEventCallback: function(module, event) {
+        if (event.Domain == this.Id) {
+            if (event.Source == '1') {
+                if (event.Value == 'Discovery Started' && $.mobile.activePage.attr("id") == HG.WebApp.SystemSettings.PageId) {
+                    this.DiscoveryLog.empty();
+                    this.DiscoveryPopup.popup('open');
+                }
+                if (event.Value == 'Network Heal Started' && $.mobile.activePage.attr("id") == HG.WebApp.SystemSettings.PageId) {
+                    this.HealNetworkLog.empty();
+                    this.HealNetworkPopup.popup('open');
+                }
+                this.HealNetworkLog.prepend('<strong>' + event.Value + '</strong><br/>');
+                this.DiscoveryLog.prepend('<strong>' + event.Value + '</strong><br/>');
+            } else if (event.Property.indexOf('ZWaveNode.') == 0) {
+                this.DiscoveryLog.prepend('Node ' + event.Source + ' <strong>' + event.Property.substring(10) + '</strong> ' + event.Value + '<br/>');
+            }
+            if (event.Property.indexOf('RoutingInfo') > -1) {
+                this.HealNetworkLog.prepend('Node ' + event.Source + ' <strong>RoutingInfo: ' + event.Value + '</strong><br/>');
+            }
+    }
+    },
+    
+    ZWaveDiscovery: function() {
+        this.DiscoveryPopup.popup('open');
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/', function (data) { });
+    },
+    
+    ZWaveHealNetwork: function () {
+        this.HealNetworkPopup.popup('open');
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Controller.HealNetwork/', function (data) { });
+    },
+
+    ZWaveNodeAdd: function () {
+        var _this = this;
+        var titleString = HG.WebApp.Locales.GetLocaleString('add_node', false, this.Locale);
+        _this.NodeOperationPopup.find('[data-ui-field=title]').html(titleString);
+        _this.NodeOperationPopup.popup('open');
+        zwave_NodeAdd(function (res) {
+            var nodeid = _this.NodeOperationPopup.find('[data-ui-field=nodeid]');
+            var message = _this.NodeOperationPopup.find('[data-ui-field=message]');
+            if (res.ResponseValue != 0) {
+                HG.WebApp.Control.UpdateModules();
+                nodeid.html(res.ResponseValue);
+                message.html('node added.');
+            }
+            else {
+                nodeid.html('<span style="color:red">timed out</span>');
+                message.html('operation failed.');
+            }
+            _this.NodeOperationPopup.find('[data-ui-field=close_button]').removeClass('ui-disabled');
+        });
+    },
+    
+    ZWaveNodeRemove: function() {
+        var _this = this;
+        var titleString = HG.WebApp.Locales.GetLocaleString('remove_node', false, this.Locale);
+        _this.NodeOperationPopup.find('[data-ui-field=title]').html(titleString);
+        _this.NodeOperationPopup.popup('open');
+        zwave_NodeRemove(function (res) {
+            var nodeid = _this.NodeOperationPopup.find('[data-ui-field=nodeid]');
+            var message = _this.NodeOperationPopup.find('[data-ui-field=message]');
+            if (res.ResponseValue != 0) {
+                HG.WebApp.Control.UpdateModules();
+                nodeid.html(res.ResponseValue);
+                message.html('node removed.');
+            }
+            else {
+                nodeid.html('<span style="color:red">timed out</span>');
+                message.html('operation falied.');
+            }
+            _this.NodeOperationPopup.find('[data-ui-field=close_button]').removeClass('ui-disabled');
+        });
+    },
+    
+    ZWaveHardReset: function() {
+        var _this = this;
+        var titleString = HG.WebApp.Locales.GetLocaleString('hard_reset', false, this.Locale);
+        var messageString = HG.WebApp.Locales.GetLocaleString('hard_reset_prompt', false, this.Locale);
+        var warningString = HG.WebApp.Locales.GetLocaleString('hard_reset_warning', false, this.Locale);
+        messageString += '<div style="font-weight:bolder">' + warningString + '</div>';
+        HG.WebApp.Utility.ConfirmPopup(titleString, messageString, function(proceed) {
+            if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/1/Controller.HardReset/', function (data) { });
+        });
+    },
+
+    ZWaveUpdateP1Db: function() {
+        var p1archive = encodeURIComponent('https://genielabs.github.io/HomeGenie/_hg_files/zwave/pepper1_device_archive.zip');
+        $.mobile.loading('show', {text: 'Updating Pepper1 DB...', textVisible: true});
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Db.Update/' + p1archive, function (data) { 
+            $.mobile.loading('hide');
+        });
+    },
+    
+    Localize: function() {
+        var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
+        var userLang = HG.WebApp.Locales.GetUserLanguage();
+        // English is the default locale
+        var defaultLocale = {
+            "title": 
+                 "ZWave Interface Options",
+            "device_port": 
+                 "Device Port",
+            "common_tasks": 
+                 "ZWave Common Tasks",
+            "add_node": 
+                 "Add Node",
+            "remove_node": 
+                 "Remove Node",
+            "add_node_heading": 
+                 "Add/Remove Node",
+            "press_device_button": 
+                 "Press the button on your device:",
+            "operation_timeout": 
+                 "this operation will timeout in 10 seconds.",
+            "add_node_close": 
+                 "Close",
+            "discovery": 
+                "Discovery",
+            "discovery_heading": 
+                "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Hard Reset",
+            "hard_reset":
+                "Hard Reset Controller?",
+            "hard_reset_prompt":
+                "Are you sure you want to hard reset Z-Wave controller?",
+            "hard_reset_warning":
+                "All nodes will be removed!",
+            "hard_resetcancel":
+                "Cancel",
+            "hard_resetproceed":
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
+        };
+        var locale = defaultLocale;
+        // other locale definitions follows
+        switch(userLang)
+        {
+        // German
+        case 'de': locale = {
+            "title": 
+                "ZWave Schnittstelle Optionen",
+            "device_port": 
+                "Geraete Port",
+            "common_tasks": 
+                "ZWave Allgemeine Aufgaben",
+            "add_node": 
+                "Node Hinzufuegen",
+            "remove_node": 
+                "Node Entfernen",
+            "add_node_heading": 
+                "Hinzufuegen/Entfernen Node",
+            "press_device_button": 
+                "Druecken Sie die Taste auf Ihrem Geraet:",
+            "operation_timeout": 
+                "Dieser Vorgang wird nach einer Zeitueberschreitung nach 10 Sekunden beendet.",
+            "add_node_close": 
+                "geschlossen",
+            "discovery": 
+                "Discovery",
+            "discovery_heading": 
+                "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Hard Reset",
+            "hard_reset":
+                "Hard Reset Controller?",
+            "hard_reset_prompt":
+                "Are you sure you want to hard reset Z-Wave controller?",
+            "hard_reset_warning":
+                "All nodes will be removed!",
+            "hard_resetcancel":
+                "Cancel",
+            "hard_resetproceed":
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
+            };
+            break;
+        // Spanish
+        case 'es': locale = {
+            "title": 
+                "Controlador ZWave",
+            "device_port": 
+                "Puerto del Controlador",
+            "common_tasks": 
+                "Acción ZWave",
+            "add_node": 
+                "Añadir modulo",
+            "remove_node": 
+                "Suprimir modulo",
+            "add_node_heading": 
+                "Añadir/Suprimir Modulo",
+            "press_device_button": 
+                "Pulsar sobre el botón del módulo:",
+            "operation_timeout": 
+                "Tienes 10 segundos.",
+            "add_node_close": 
+                "Cerrar",
+            "discovery": 
+                "Discovery",
+            "discovery_heading": 
+                "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Hard Reset",
+            "hard_reset":
+                "Hard Reset Controller?",
+            "hard_reset_prompt":
+                "Are you sure you want to hard reset Z-Wave controller?",
+            "hard_reset_warning":
+                "All nodes will be removed!",
+            "hard_resetcancel":
+                "Cancel",
+            "hard_resetproceed":
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
+            };
+            break;
+        // French
+        case 'fr': locale = {
+            "title": 
+                "Contrôleur ZWave",
+            "device_port": 
+                "Port du Contrôleur",
+            "common_tasks": 
+                "Action ZWave",
+            "add_node": 
+                "Ajouter un module",
+            "remove_node": 
+                "Supprimer un module",
+            "add_node_heading": 
+                "Ajout/suppression d'un module",
+            "press_device_button": 
+                "Appuyer sur le bouton du module :",
+            "operation_timeout": 
+                "Vous avez 10 secondes...",
+            "add_node_close": 
+                "Fermer",
+            "discovery": 
+                "Découvrir",
+            "discovery_heading": 
+                "Découverte ZWave",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Réinitialisation",
+            "hard_reset":
+                "Réinitialiser le Contrôleur ?",
+            "hard_reset_prompt":
+                "Etes-vous sûr de vouloir réintialiser le Contrôleur Z-Wave ?",
+            "hard_reset_warning":
+                "Tous les noeuds seront supprimés !",
+            "hard_resetcancel":
+                "Annuler",
+            "hard_resetproceed":
+                "Exécuter",
+            "update_p1db":
+                "Update Pepper1 Database"
+            };
+            break;
+        // Italian
+        case 'it': locale = {
+            "title": 
+                 "Interfaccia Z-Wave",
+            "device_port": 
+                 "Porta Dispositivo",
+            "common_tasks": 
+                 "Attivita' Z-Wave Comuni",
+            "add_node": 
+                 "Aggiungi Nodo",
+            "remove_node": 
+                 "Rimuovi Nodo",
+            "add_node_heading": 
+                 "Agg./Rim. Nodo",
+            "press_device_button": 
+                 "Premi il pulsante sul dispositivo:",
+            "operation_timeout": 
+                 "questa operazione scadrà entro 10 secondi.",
+            "add_node_close": 
+                 "Chiudi",
+            "discovery": 
+                "Ricerca",
+            "discovery_heading": 
+                "Ricerca ZWave",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Hard Reset",
+            "hard_reset":
+                "Reimpostare il Controller?",
+            "hard_reset_prompt":
+                "Sei sicuro di voler reimpostare il controller Z-Wave?",
+            "hard_reset_warning":
+                "Tutti i nodi verranno rimossi!",
+            "hard_resetcancel":
+                "Annulla",
+            "hard_resetproceed":
+                "Procedi",
+            "update_p1db":
+                "Update Pepper1 Database"
+            };
+            break;
+        // Dutch
+        case 'nl': locale = {
+            "title": 
+                "ZWave Interface",
+            "device_port": 
+                "Apparaat poort",
+            "common_tasks": 
+                "ZWave gebruikelijke taken",
+            "add_node": 
+                "Node toevoegen",
+            "remove_node": 
+                "Node verwijderen",
+            "add_node_heading": 
+                "Node toevoegen/verwijderen",
+            "press_device_button": 
+                "Druk op de knop op uw apparaat:",
+            "operation_timeout": 
+                "deze actie stopt over 10 seconden.",
+            "add_node_close": 
+                "Sluiten",
+            "discovery": 
+                "Discovery",
+            "discovery_heading": 
+                "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Hard Reset",
+            "hard_reset":
+                "Hard Reset Controller?",
+            "hard_reset_prompt":
+                "Are you sure you want to hard reset Z-Wave controller?",
+            "hard_reset_warning":
+                "All nodes will be removed!",
+            "hard_resetcancel":
+                "Cancel",
+            "hard_resetproceed":
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
+            };
+            break;
+        // Russian
+        case 'ru': locale = {
+            "title": 
+                "Опции интерфейса ZWave",
+            "device_port": 
+                "Порт устройства",
+            "common_tasks": 
+                "Основные задачи ZWave",
+            "add_node": 
+                "Добавить узел",
+            "remove_node": 
+                "Удалить узел",
+            "add_node_heading": 
+                "Добавить/Удалить узел",
+            "press_device_button": 
+                "Нажмите кнопку на устройстве:",
+            "operation_timeout": 
+                "таймаут операции - 10 секунд.",
+            "add_node_close": 
+                "Закрыть",
+            "discovery": 
+                "Обнаружение",
+            "discovery_heading": 
+                "Обнаружение устройств ZWave",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Аппаратный сброс",
+            "hard_reset":
+                "Аппатный сброс контроллера?",
+            "hard_reset_prompt":
+                "Вы уверены, что хотите сделать аппаратный сброс Z-Wave контроллера?",
+            "hard_reset_warning":
+                "Все устройства будут удалены из сети!",
+            "hard_resetcancel":
+                "Отмена",
+            "hard_resetproceed":
+                "Продолжить",
+            "update_p1db":
+                "Обновить базу данных Pepper1"
+            };
+            break;
+        // Swedish
+        case 'sv': locale = {
+            "title": 
+                "ZWave Gränssnitt Inställningar",
+            "device_port": 
+                "Enhets Port",
+            "common_tasks": 
+                "ZWave Uppgifter",
+            "add_node": 
+                "Lägg Till Nod",
+            "remove_node": 
+                "Ta Bort Nod",
+            "add_node_heading": 
+                "Lägg Till/Ta Bort Enhet",
+            "press_device_button": 
+                "Tryck på knappen para för att lägga till enhet:",
+            "operation_timeout": 
+                "denna åtgärd stängs ner inom 10 sekunder.",
+            "add_node_close": 
+                "Stäng",
+            "discovery": 
+                "Discovery",
+            "discovery_heading": 
+                "ZWave Discovery",
+            "heal":
+                "Network Heal",
+            "heal_heading":
+                "ZWave Network Heal",
+            "hard_reset_heading":
+                "Hard Reset",
+            "hard_reset":
+                "Hard Reset Controller?",
+            "hard_reset_prompt":
+                "Are you sure you want to hard reset Z-Wave controller?",
+            "hard_reset_warning":
+                "All nodes will be removed!",
+            "hard_resetcancel":
+                "Cancel",
+            "hard_resetproceed":
+                "Proceed",
+            "update_p1db":
+                "Update Pepper1 Database"
+            };
+            break;
+        }
+        HG.WebApp.Locales.LocalizeElement(this.Configlet, locale);
+        this.Locale = locale;
+    }
+    
+};
+</script>

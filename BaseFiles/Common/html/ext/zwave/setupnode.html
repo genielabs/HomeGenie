@@ -1,4 +1,10 @@
-﻿
+﻿<script type="text/javascript">
+// namespace : HG.Ext.ZWave
+// info      : -
+// TODO: move this to a proper location
+{include ext/zwave/_nodesetup.js}
+</script>
+
 <div id="configurepage_OptionZWave" data-role="page">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>
@@ -16,6 +22,7 @@
                 <li data-role="list-divider">Node Informations</li>
                 <li>
                     <label id="opt-zwave-manufacturerspecs-label">Manufacturer Specific = ?</label>
+                    <label id="opt-zwave-versionreport-label">SW Version: ?</label>
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px">
@@ -24,7 +31,6 @@
                         </tr>
                     </table>
                     <div id="opt-zwave-nodeinformation-overview"></div>
-                    <div id="opt-zwave-pepper1-link" style="position:absolute;top:3px;right:10px;font-size:10pt;"><a href="http://www.pepper1.net/zwavedb/" target="_blank">Powered by Pepper-One</a></div>
                 </li>
             </ul>
 
@@ -94,7 +100,7 @@
                             <td valign="top" style="min-width: 100px">
                                 <select id="opt-zwave-configuration-varselect"></select>
                             </td>
-                            <td style="padding-left: 10px; font-size: 11pt; font-weight: normal" id="opt-zwave-configuration-vardescription"></td>
+                            <td style="padding-left: 10px; font-size: 11pt; font-weight: normal; white-space: normal;" id="opt-zwave-configuration-vardescription"></td>
                         </tr>
                     </table>
 
@@ -130,6 +136,20 @@
                             </td>
                             <td>
                                 <input style="min-width:60px" type="text" id="wakeupset-value" data-module-prop="WakeUpInterval" placeholder="seconds" />
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+
+            <ul id="opt-zwave-heal-box" data-role="listview" data-inset="false">
+                <li data-role="list-divider">Heal Node / Routing Info</li>
+                <li>
+                    <label id="opt-zwave-heal-label">Routing Info = ?</label>
+                    <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
+                        <tr>
+                            <td style="padding-right:30px">
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_NodeNeighborUpdate()">Heal Node</a>
                             </td>
                         </tr>
                     </table>
@@ -261,6 +281,20 @@
                     </table>
                 </li>
             </ul>
+
+            <ul id="opt-zwave-door-lock" data-role="listview" data-inset="false">
+                <li data-role="list-divider">Door Lock</li>
+                <li>
+                    <label id="opt-zwave-doorlock-label">Door Lock Status = ?</label>
+                    <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
+                        <tr>
+                            <td style="padding-right:30px">
+                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_DoorLockGet()">Get</a>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
             
         </div>
 
@@ -269,24 +303,35 @@
         <div data-role="navbar" data-iconpos="right">
             <ul>
                 <li>
-                    <a class="ui-btn ui-icon-back ui-btn-icon-left" href="#" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" data-rel="back">
+                    <a class="ui-btn ui-icon-back ui-btn-icon-left" href="#" data-locale-id="bottombar_button_back" data-rel="back">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_home" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                    <a class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_control" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_menu_system" class="ui-btn ui-icon-gear ui-btn-icon-right" href="#page_configure_interfaces" data-transition="slide" data-direction="reverse">
-                        Settings
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
             </ul>
         </div><!-- /navbar -->
     </div>
+
+    <div id="no-device-found-dialog-popup" class="ui-corner-all" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div class="ui-content ui-corner-bottom">
+            <p>
+                <span data-locale-id="no_device_found_for_manufacturerId">No device info was found for manufacturer ID</span>
+                 = 
+                 <span id="no-device-found-manufacturerId"></span>.
+            </p>
+        </div>
+    </div>
+
 </div>
 <script type="text/javascript">
 </script>
-

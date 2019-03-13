@@ -5,46 +5,22 @@
 
     <div class="ui-content">
 
-        <img src="images/scheduler.png" style="position:absolute;top:65px;left:20px;" width="64" />
-        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30px;left:90px;" data-locale-id="configure_schedulerservice_title">Event<br />Scheduling</h3></div>
+        <h3 align="center" data-locale-id="configure_schedulerservice_title">Event Scheduling</h3>
 
-        <ul id="configure_schedulerservice_list" data-role="listview" data-split-icon="check" data-filter="true"></ul>
+        <div data-ui-field="editor-container">
+            <ul id="configure_schedulerservice_list" data-role="listview" data-split-icon="check" data-filter="true"></ul>
+        </div>
+
+        <div data-ui-field="calendar-container">
+            <div><input type="text" data-ui-field="calendar-date"/></div>
+            <div data-ui-field="calendar-title" align="center" style="font-size:24pt;cursor:pointer">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span data-ui-field="display-date">loading...</span>
+            </div>
+            <div data-ui-field="occurs-table" align="center"></div>
+        </div>
+
     </div>
-
-
-
-
-    <div id="schedulerservice_item_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <div data-role="header" class="ui-corner-top">
-            <h1 data-locale-id="configure_schedulerservice_schedulerevent">Scheduler Event</h1>
-        </div>
-        <div class="ui-content ui-corner-bottom">
-            <h3 data-locale-id="configure_schedulerservice_itemname" class="ui-title">Name</h3>
-            <input id="schedulerservice_item_name" type="text" />
-
-            <h3 data-locale-id="configure_schedulerservice_itemcronexp" class="ui-title">Cron Expression</h3>
-            <input id="schedulerservice_item_cronexp" type="text" />
-
-            <h3 data-locale-id="configure_schedulerservice_itemprogramid" class="ui-title">Program Id or Name (optional)</h3>
-            <input id="schedulerservice_item_programid" type="text" />
-        </div>
-
-        <div class="ui-grid-b ui-footer ui-bar-inherit" align="center">
-            <div class="ui-block-a">
-                <a data-locale-id="configure_schedulerservice_cancelitem" href="#" class="ui-btn ui-corner-all" data-rel="back">Cancel</a>
-            </div>
-            <div class="ui-block-b">
-                <a id="scheduleritem_delete_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_schedulerservice_deleteitem" data-rel="back">Delete</a>
-            </div>
-            <div class="ui-block-c">
-                <a id="scheduleritem_update_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_schedulerservice_updateitem" data-rel="back" data-transition="flow">Update</a>
-            </div>
-        </div>
-    </div>
-
-
-
 
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
@@ -52,19 +28,16 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#page_configure">
-                        Back
-                    </a>
+                    <a data-ui-field="calendar-button" data-locale-id="configure_schedulerservice_calendarview" href="#" class="ui-btn ui-btn-icon-left ui-icon-calendar">Calendar View</a>
+                    <a data-ui-field="edit-button" data-locale-id="configure_schedulerservice_editevents" href="#" class="ui-btn ui-btn-icon-left ui-icon-edit">Edit Events</a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#page_home">
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a id="scheduleritem_add_button" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_schedulerservice_bottombar_event_add" data-rel="popup" data-transition="pop" href="#schedulerservice_item_edit">
-                        Add Event
-                    </a>
+                    <a data-ui-field="add-button" data-locale-id="configure_schedulerservice_bottombar_event_add" href="#" class="ui-btn ui-icon-plus ui-btn-icon-right">Add Event</a>
                 </li>
             </ul>
         </div><!-- /navbar -->

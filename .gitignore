@@ -1,9 +1,23 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Bb]in/
+[Oo]bj/
+*/Packager/Output/
+
+# Temporary and local IDE/System files
+*.userprefs
+*.suo
+*.pidb
 Thumbs.db
-HomeGenie/bin/
-MigFiles (copia)/
-MigFiles/MIG/bin/
-MigFiles/SupportLibraries/NetClientLib/bin/
-MigFiles/SupportLibraries/SerialPortLib/bin/
-MigFiles/SupportLibraries/W800RF32/bin/
-MigFiles/SupportLibraries/XTenLib/bin/
-MigFiles/SupportLibraries/ZWaveLib/bin/
+**/.idea/*
+**/*.DotSettings.user
+
+# Nuget packages
+**/packages/*
+!**/packages/repositories.config
+
+HomeGenie_Windows/\.vs/
+Doxy/homegenie_api*

@@ -21,19 +21,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using System.IO;
-using System.Globalization;
 
 using HomeGenie.Service;
-using Raspberry;
-
-using Newtonsoft.Json;
-using System.Diagnostics;
 using HomeGenie.Service.Constants;
+using MIG;
 
 namespace HomeGenie
 {
@@ -46,99 +38,61 @@ namespace HomeGenie
         static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+            AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
 
-            Console.OutputEncoding = Encoding.UTF8;
-            /* Change current culture
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
-            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
-            */
-            var os = Environment.OSVersion;
-            var platform = os.Platform;
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
 
-            // TODO: run "uname" to determine OS type
-            if (platform == PlatformID.Unix)
+            bool rebuildPrograms = PostInstallCheck();
+
+            _homegenie = new HomeGenieService(rebuildPrograms);
+            do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
+        }
+
+        private static bool PostInstallCheck()
+        {
+            bool firstTimeInstall = false;
+            string postInstallLock = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "postinstall.lock");
+            if (File.Exists(postInstallLock))
             {
-
-                var libusblink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libusb-1.0.so");
-
-                // RaspBerry Pi armel dependency check and needed symlink
-                // TODO: check for armhf version
-                if (File.Exists("/lib/arm-linux-gnueabi/libusb-1.0.so.0.1.0") && !File.Exists(libusblink))
+                firstTimeInstall = true;
+                // Move MIG interface plugins from root folder to lib/mig
+                // TODO: find a better solution to this
+                string[] migFiles =
                 {
-                    ShellCommand("ln", " -s \"/lib/arm-linux-gnueabi/libusb-1.0.so.0.1.0\" \"" + libusblink + "\"");
-                }
-
-                // Debian/Ubuntu 64bit dependency and needed symlink check
-                if (File.Exists("/lib/x86_64-linux-gnu/libusb-1.0.so.0") && !File.Exists(libusblink))
+                    "MIG.HomeAutomation.dll",
+                    "MIG.Protocols.dll",
+                    "LibUsb.Common.dll",
+                    "LibUsbDotNet.LibUsbDotNet.dll",
+                    "XTenLib.dll",
+                    "CM19Lib.dll",
+                    "ZWaveLib.dll"
+                };
+                foreach (var f in migFiles)
                 {
-                    ShellCommand("ln", " -s \"/lib/x86_64-linux-gnu/libusb-1.0.so.0\" \"" + libusblink + "\"");
-                }
-
-                // lirc
-                var liblirclink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "liblirc_client.so");
-                if (File.Exists("/usr/lib/liblirc_client.so") && !File.Exists(liblirclink))
-                {
-                    ShellCommand("ln", " -s \"/usr/lib/liblirc_client.so\" \"" + liblirclink + "\"");
-                }
-                else if (File.Exists("/usr/lib/liblirc_client.so.0") && !File.Exists(liblirclink))
-                {
-                    ShellCommand("ln", " -s \"/usr/lib/liblirc_client.so.0\" \"" + liblirclink + "\"");
-                }
-
-                // video 4 linux interop
-                if (Raspberry.Board.Current.IsRaspberryPi)
-                {
-                    ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/raspbian_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
-                    //
-                    //if (File.Exists("/usr/lib/libgdiplus.so") && !File.Exists("/usr/local/lib/libgdiplus.so"))
-                    //{
-                    //    ShellCommand("ln", " -s \"/usr/lib/libgdiplus.so\" \"/usr/local/lib/libgdiplus.so\"");
-                    //}
-                }
-                else // fallback (ubuntu and other 64bit debians)
-                {
-                    string v4lfile = "v4l/debian64_libCameraCaptureV4L.so.gd3";
-                    if (!File.Exists("/usr/lib/x86_64-linux-gnu/libgd.so.3"))
-                    {
-                        v4lfile = "v4l/debian64_libCameraCaptureV4L.so";
-                    }
-                    ShellCommand(
-                        "cp",
-                        " -f \"" + Path.Combine(
-                            AppDomain.CurrentDomain.BaseDirectory,
-                            v4lfile
-                        ) + "\" \"" + Path.Combine(
-                            AppDomain.CurrentDomain.BaseDirectory,
-                            "libCameraCaptureV4L.so"
-                        ) + "\""
-                    );
-                }
-                //
-                var lircrcFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".lircrc");
-                if (!File.Exists(lircrcFile))
-                {
-                    var lircrc = "begin\n" +
-                        "        prog = homegenie\n" +
-                        "        button = KEY_1\n" +
-                        "        repeat = 3\n" +
-                        "        config = KEY_1\n" +
-                        "end\n";
+                    string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, f);
+                    if (!File.Exists(source)) continue;
                     try
                     {
-                        File.WriteAllText(lircrcFile, lircrc);
+                        string dest = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", f);
+                        if (File.Exists(dest)) File.Delete(dest);
+                        File.Move(source, dest);
                     }
-                    catch { }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
+                    }
+                }                
+                // TODO: place any other post-install stuff here
+                try
+                {
+                    File.Delete(postInstallLock);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
                 }
             }
-            //
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
-            //
-            AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
-            //
-            _homegenie = new HomeGenieService();
-            //
-            do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
+            return firstTimeInstall;
         }
 
         internal static void Quit(bool restartService)
@@ -178,32 +132,28 @@ namespace HomeGenie
             Quit(false);
         }
 
-        private static void ShellCommand(string command, string args)
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) 
         {
+            var logEntry = new MigEvent(
+                Domains.HomeAutomation_HomeGenie,
+                "Trapper",
+                "Unhandled Exception",
+                "Error.Exception",
+                e.ExceptionObject.ToString()
+            );
             try
             {
-                var processInfo = new ProcessStartInfo(command, args);
-                processInfo.RedirectStandardOutput = false;
-                processInfo.UseShellExecute = false;
-                processInfo.CreateNoWindow = true;
-                var process = new Process();
-                process.StartInfo = processInfo;
-                process.Start();
+                // try broadcast first (we don't want homegenie object to be passed, so use the domain string)
+                _homegenie.RaiseEvent(Domains.HomeGenie_System, logEntry);
             }
-            catch { }
-        }
-
-        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
-            HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
-                Domain = Domains.HomeAutomation_HomeGenie,
-                Source = "UnhandledExceptionTrapper",
-                Description = e.ExceptionObject.ToString(),
-                Property = "HomeGenie.UnhandledException",
-                Value = e.ExceptionObject.ToString()
-            });
+            catch 
+            {
+                HomeGenieService.LogError(logEntry);
+            }
         }
 
     }
+
 }
 
 

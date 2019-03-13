@@ -2,6 +2,13 @@
     "timetable_group_shutters" : "Avvolgibili e variatori",
     "timetable_group_thermostats" : "Termostati",
     "timetable_group_lights" : "Luci e prese",
+    "timetable_title" : "Tabella Oraria",
+    "timetable_today_schedule" : "Programmazione Odierna",
+    "timetable_calendar" : "Calendario",
+    "timetable_program" : "Programma",
+    "timetable_programs" : "Programmi Tabella Oraria",
+    "timetable_standard" : "Standard",
+    "timetable_daylightsaving" : "Ora legale",
     
     "timetable_edit_table" : "Tabella oraria",
     "timetable_popup_set" : "Imposta",
@@ -40,5 +47,40 @@
     "timetable_calendar_special" : "Speciale",
     
     "timetable_popup_close" : "Chiudi",
-    "timetable_popup_save" : "Salve"    
+    "timetable_popup_save" : "Salva",
+
+    "timetable_programs_noschedules" : "Nessuna programmazione",
+    "timetable_options_title" : "Opzioni Programma",
+    "timetable_options_disable" : "Disattiva questo programma",
+    "timetable_options_disablerange": "Usa espressione CronTab come intervallo di disattivazione",
+    "timetable_options_autooff_title" : "Imposta automaticamente su Off questa programmazione:",
+    "timetable_options_autooff_away" : "Se il sistema di sicurezza è 'Armed Away'",
+    "timetable_options_autooff_home" : "Se il sistema di sicurezza è 'Armed Home'",
+    "timetable_options_autooff_timerange" : "Nell'intervallo di tempo specificato",
+    "timetable_options_timerange" : "Espressione CronTab dell'intervallo",
+    "timetable_options_autooff_nomotion" : "Se nessun movimento è rilevato",
+    "timetable_options_autooff_nomotion_timeout" : "Timeout movimento (minuti)",
+    "timetable_options_motionsensor" : "Sensore Movimento",
+    "timetable_options_save" : "Salva Opzioni",
+        
+    "control_module_off" : "Off",
+    "control_module_on" : "On",
+    "control_module_close" : "Chiudi",
+    "control_module_open" : "Apri",
+    "control_module_calibrate" : "Calibra",
+
+    "therm_setpoint" : "Set Point",
+    "therm_cool" : "Fresco",
+    "therm_heat" : "Caldo",
+
+    "therm_fanmode" : "Ventilatore",
+    "fan_on" : "On",
+    "fan_auto" : "Auto",
+    "fan_circulate" : "Fai circolare",
+
+    "therm_setmode" : "Modalità",
+    "therm_off" : "Off",
+    "therm_auto" : "Auto",
+
+    "securityalarm_noactivity" : "Nessuna attività recente"
 }

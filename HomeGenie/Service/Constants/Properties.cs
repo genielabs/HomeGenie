@@ -32,53 +32,59 @@ namespace HomeGenie.Service.Constants
     public static class Properties
     {
         // internal HomeGenie parameters
-        public const string HOMEGENIE_STATUS
+        public const string HomeGenieStatus
             = "HomeGenie.Status";
-        public const string SYSTEMINFO_HTTPPORT
-            = "SystemInfo.HttpPort";
-        public const string SCHEDULER_ERROR
+        public const string SystemInfoBootProgress
+            = "SystemInfo.BootProgress";
+        public const string SystemInfoHttpAddress
+            = "SystemInfo.HttpAddress";
+        public const string SchedulerModuleUpdateStart
+            = "Scheduler.OnModuleUpdateStart";
+        public const string SchedulerModuleUpdateEnd
+            = "Scheduler.OnModuleUpdateEnd";
+        public const string SchedulerError
             = "Scheduler.Error";
-        public const string PROGRAM_STATUS
+        public const string SchedulerScriptStatus
+            = "Scheduler.ScriptStatus";
+        public const string SchedulerTriggeredEvent
+            = "Scheduler.TriggeredEvent";
+        public const string ProgramStatus
             = "Program.Status";
-        public const string RUNTIME_ERROR
+        public const string RuntimeError
             = "Runtime.Error";
-        public const string PROGRAM_NOTIFICATION
+        public const string CompilerWarning
+            = "Compiler.Warning";
+        public const string ProgramNotification
             = "Program.Notification";
-        public const string INSTALLPROGRESS_MESSAGE
+        public const string InstallProgressMessage
             = "InstallProgress.Message";
-        public const string INSTALLPROGRESS_UPDATE
+        public const string InstallProgressUpdate
             = "InstallProgress.Update";
 
         // commonly used parameters
-        public const string STATUS_LEVEL
+        public const string StatusLevel
             = "Status.Level";
-        public const string METER_WATTS
-            = "Meter.Watts";
-        public const string METER_ANY
+        public const string MeterAny
             = "Meter.";
-        public const string WIDGET_DISPLAYMODULE
+        public const string MeterWatts
+            = "Meter.Watts";
+        public const string SensorTemperature
+            = "Sensor.Temperature";
+        public const string SensorLuminance
+            = "Sensor.Luminance";
+        public const string SensorHumidity
+            = "Sensor.Humidity";
+        public const string SensorAlarm
+            = "Sensor.Alarm";
+        public const string SensorTamper
+            = "Sensor.Tamper";
+        public const string SensorMotionDetect
+            = "Sensor.MotionDetect";
+        public const string VirtualMeterWatts
+            = "VirtualMeter.Watts";
+        public const string WidgetDisplayModule
             = "Widget.DisplayModule";
-        public const string VIRTUALMODULE_PARENTID
+        public const string VirtualModuleParentId
             = "VirtualModule.ParentId";
-
-        // z-wave specific parameters
-        public const string ZWAVENODE_BASIC
-            = "ZWaveNode.Basic";
-        public const string ZWAVENODE_WAKEUPINTERVAL
-            = "ZWaveNode.WakeUpInterval";
-        public const string ZWAVENODE_BATTERY
-            = "ZWaveNode.Battery";
-        public const string ZWAVENODE_MULTIINSTANCE
-            = "ZWaveNode.MultiInstance";
-        public const string ZWAVENODE_ASSOCIATIONS
-            = "ZWaveNode.Associations";
-        public const string ZWAVENODE_CONFIGVARIABLES
-            = "ZWaveNode.Variables";
-        public const string ZWAVENODE_NODEINFO
-            = "ZWaveNode.NodeInfo";
-        public const string ZWAVENODE_MANUFACTURERSPECIFIC
-            = "ZWaveNode.ManufacturerSpecific";
-        public const string ZWAVENODE_DEVICEHANDLER
-            = "ZWaveNode.DeviceHandler";
     }
 }

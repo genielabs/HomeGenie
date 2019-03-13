@@ -1,5 +1,5 @@
-<!-- Manage Grpup Modules -->
-<div data-role="page" id="page_configure_groupmodules">
+<!-- Manage Group Modules -->
+<div data-role="page" id="page_configure_groupmodules" data-upload-dropzone="wallpaper">
 
     {include pages/header.html}
 
@@ -7,18 +7,42 @@
 
         <img src="images/groups.png" style="position:absolute;top:65px;left:20px;" width="64" />
         <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30px;left:90px;" id="page_configure_groupmodules_title" data-locale-id="configure_groups_heading">Groups and<br />Modules</h3></div>
+        <div id="configure_group_wallpaper" style="position:absolute;right:10px;top:50px;width:164px;height:92px;" class="ui-corner-all ui-overlay-shadow"></div>
 
-        <div>
-            <ul data-split-icon="delete" data-role="listview">
-                <li data-locale-id="configure_group_groupname" data-role="list-divider">Group Name</li>
-                <li>
-                    <input id="groupmodules_groupname" type="text" />
-                </li>
-            </ul>
-            <div style="margin-top:16px">
-                <ul id="page_configure_groupmodules_list" data-role="listview"></ul>
-            </div>
+        <ul data-split-icon="delete" data-role="listview">
+            <li data-locale-id="configure_group_group" data-role="list-divider">Group</li>
+            <li>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_group_groupname" for="groupmodules_groupname">Name</label>
+                        <input id="groupmodules_groupname" type="text" />
+                    </div>
+                    <div class="ui-block-b">
+                        <label data-locale-id="configure_group_groupwallpaper" for="groupmodules_groupwall" style="padding-left:6px">Wallpaper</label>
+                        <div data-role="controlgroup" data-mini="true" style="padding-top:2px">
+                            <select id="groupmodules_groupwall">
+                            <option data-locale-id="common_select_none" value="">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <p>&nbsp;</p>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a id="groupmodules_group_deletebtn" data-locale-id="common_command_delete" href="#" class="ui-btn ui-btn-icon-left ui-icon-minus">Delete</a>
+                            <a id="groupmodules_group_uploadbtn" data-locale-id="common_command_upload" href="#" class="ui-btn ui-btn-icon-left ui-icon-fa-upload">Upload</a>
+                            <form id="groupmodules_group_uploadform" target="groupmodules_group_uploadfile" enctype="multipart/form-data" data-ajax="false">
+                                <input id="groupmodules_group_uploadfile" type="file" style="display:none" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li data-locale-id="configure_group_modulelist" data-role="list-divider">Module List</li>
+        </ul>
+        <div id="page_configure_groupmodules_list" style="top:315px;bottom:35px;right:0;left:0;padding-top:15px;padding-right:15px;position:absolute;overflow:hidden;overflow-y:auto">
+            <ul data-role="listview"></ul>
         </div>
+
     </div>
 
 
@@ -31,52 +55,27 @@
             <p data-locale-id="configure_group_deletewarning">This action cannot be undone.</p>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_group_deletecancel" data-rel="back">Cancel</a>
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-delete" data-locale-id="configure_group_deletecancel" data-rel="back">Cancel</a>
                 </div>
                 <div class="ui-block-b">
-                    <a id="group_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_group_deleteconfirm" data-rel="back">Ok</a>
+                    <a id="group_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check" data-locale-id="configure_group_deleteconfirm" data-rel="back">Ok</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="automation_group_modulechoose" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
-        <div data-role="header" class="ui-corner-top">
-            <h1 data-locale-id="configure_module_newmoduleadd">Add New Module</h1>
-        </div>
-        <div class="ui-content ui-corner-bottom">
-            <select id="automation_group_moduleadd"></select>
-            <div class="ui-grid-a">
-                <div class="ui-block-a">
-                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_module_newmodulecancel" data-rel="back">Cancel</a>
-                </div>
-                <div class="ui-block-b">
-                    <a id="module_add_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_module_newmoduleconfirm" data-rel="back">Add</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="page_configure_groupmodules_propspopup" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
+    <div id="automation_group_modulechoose" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <div data-role="header">
-            <h2 data-locale-id="configure_module_parameters">Parameters</h2>
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="configure_group_addmodule">Add New Module</h1>
+		</div>
+        <div class="ui-content ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+		    <ul id="automation_group_module_list" data-role="listview"></ul>
         </div>
-        <div class="ui-content">
-            <ul class="trapScroll" id="automation_group_module_params" data-role="listview" style="height:230px;overflow:auto;"></ul>
-        </div>
-        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
-            <div class="ui-block-a">
-                <a class="ui-btn ui-icon-minus ui-btn-icon-left ui-disabled ui-corner-all" href="#" id="automation_group_module_propdelete" data-locale-id="configure_module_parameters_delete">Delete</a>
-            </div>
-            <!-- a class="ui-btn ui-icon-plus ui-btn-icon-left" href="javascript:HG.WebApp.GroupModules.ModulePropertyAdd(HG.WebApp.GroupModules.CurrentModule, 'Custom.Property', '')">Add</a -->
-            <div class="ui-block-b">
-                <a class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="javascript:HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, null)" id="automation_group_module_propsave" data-locale-id="configure_module_parameters_save">Save</a>
-            </div>
+        <div data-role="footer" data-tap-toggle="false" style="height:54px">
+		    <p align="center" data-locale-id="configure_automation_group_modulechoose_desc">Tap a module to add it.</p>
         </div>
     </div>
-
 
     <div id="automation_group_separator_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -84,21 +83,15 @@
             <h1 id="configure_groupmodules_separatoredit" data-locale-id="configure_separator_edit">Edit Separator</h1>
         </div>
         <div class="ui-content ui-corner-bottom">
-            <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td>
-                        <label data-locale-id="configure_separator_label">Label</label>
-                        <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" data-locale-id="configure_separator_placeholder" value="" />
-                    </td>
-                </tr>
-            </table>
+            <label data-locale-id="configure_separator_label" for="automation_group_separatorlabel">Label</label>
+            <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" data-locale-id="configure_separator_placeholder" value="" />
         </div>
         <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
-            <div class="ui-block-a">
-                <a id="btn_configure_group_editseparatorremove" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremoveseparator" data-rel="back">Remove</a>
+            <div class="ui-block-a" align="left">
+                <a class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left" href="#" data-locale-id="common_command_cancel" data-rel="back">Cancel</a>
             </div>
-            <div class="ui-block-b">
-                <a id="btn_configure_group_editseparatoradd" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="configure_module_optaddseparator" data-rel="back">Update</a>
+            <div class="ui-block-b" align="right">
+                <a id="btn_configure_group_editseparatoradd" href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-plus" data-locale-id="configure_module_newmoduleconfirm" data-rel="back">Save</a>
             </div>
         </div>
     </div>
@@ -132,17 +125,17 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_back" class="ui-btn ui-icon-back ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_configure_groups">
+                    <a data-locale-id="bottombar_button_back" class="ui-btn ui-icon-back ui-btn-icon-left" href="#" data-rel="back">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_home">
+                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_control">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_program_bbaractions" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#listmodules_actionmenu" data-rel="popup" data-transition="slideup">
+                    <a data-locale-id="configure_program_bbaractions" class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#listmodules_actionmenu" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>

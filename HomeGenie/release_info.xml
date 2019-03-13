@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r482</Version>
+  <Version>1.2-dev</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Updated RaspberrySharp-IO, now with support for PiFace Digital and MCP3002
-  - Improved Widget Editor reporting of javascript syntax errors to work with any web browser</ReleaseNote>
-  <ReleaseDate>2015-03-01T14:49:02.0000Z</ReleaseDate>
+  <ReleaseNote></ReleaseNote>
+  <ReleaseDate>2017-08-19T22:00:00.0000Z</ReleaseDate>
 </ReleaseInfo>

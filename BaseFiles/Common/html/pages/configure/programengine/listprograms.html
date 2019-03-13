@@ -68,12 +68,12 @@
         </div>
         <div class="ui-content ui-corner-bottom">
             <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
-                <form id="program_import_form" target="program_upload_frame" enctype="multipart/form-data" method="post" action="../HomeAutomation.HomeGenie/Automation/Programs.Import/" data-ajax="false">
+                <form id="program_import_form" target="program_upload_frame" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Automation/Programs.Import/" data-ajax="false">
                     <input id="program_import_uploadfile" type="file" title="Import program from XML file" name="file" />
                 </form>
                 <a data-locale-id="configure_programslist_import" id="program_import_button" href="#" class="ui-btn ui-shadow ui-corner-all">Import</a>
-                <iframe id="program_import_uploadframe" name="program_upload_frame" src="/dummy/" style="display:none;width:0;height:0;border:0"></iframe>
-                <iframe id="program_import_downloadframe" name="program_download_frame" src="/dummy/" style="display:none;width:0;height:0;border:0"></iframe>
+                <iframe id="program_import_uploadframe" name="program_upload_frame" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+                <iframe id="program_import_downloadframe" name="program_download_frame" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
             </fieldset>
         </div>
     </div>
@@ -82,26 +82,26 @@
         <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
         <ul data-role="listview" class="ui-listview" style="min-width:210px;">
             <li><a id="btn_automationprograms_group_delete" data-locale-id="configure_programslist_deletegroup" class="ui-btn ui-btn-icon-right ui-icon-minus">Delete group</a></li>
-            <li><a id="btn_automation_program_import" data-locale-id="configure_programslist_importprogram" class="ui-btn ui-btn-icon-right ui-icon-bars">Import program</a></li>
-            <li><a id="btn_automation_program_add" data-locale-id="configure_programslist_addnewprogram" class="ui-btn ui-btn-icon-right ui-icon-edit">Add new program</a></li>
-            <li><a id="btn_automation_program_refresh" data-locale-id="configure_programslist_refreshlist" class="ui-btn ui-btn-icon-right ui-icon-refresh">Refresh list</a></li>
+            <li><a id="btn_automation_program_import" data-locale-id="configure_programslist_importprogram" class="ui-btn ui-btn-icon-right ui-icon-fa-upload">Import program</a></li>
+            <li><a id="btn_automation_program_add" data-locale-id="configure_programslist_addnewprogram" class="ui-btn ui-btn-icon-right ui-icon-plus">Add new program</a></li>
+            <li><a id="btn_automation_program_refresh" data-locale-id="configure_programslist_refreshlist" class="ui-btn ui-btn-icon-right ui-icon-fa-refresh">Refresh list</a></li>
         </ul>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a href="#page_configure_automationgroups" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
+                    <a href="#page_configure_automationgroups" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a href="#page_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="#listprograms_actionmenu" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                    <a href="#listprograms_actionmenu" class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>

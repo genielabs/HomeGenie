@@ -2,6 +2,13 @@
     "timetable_group_shutters" : "Shutters and dimmers",
     "timetable_group_thermostats" : "Thermostats",
     "timetable_group_lights" : "Lights and switches",
+    "timetable_title" : "Timetable",
+    "timetable_today_schedule" : "Today's Schedule",
+    "timetable_calendar" : "Calendar",
+    "timetable_program" : "Program",
+    "timetable_programs" : "Timetable Programs",
+    "timetable_standard" : "Standard",
+    "timetable_daylightsaving" : "Day Light Saving time",
     
     "timetable_edit_table" : "Edit Timetable",
     "timetable_popup_set" : "Set",
@@ -40,5 +47,40 @@
     "timetable_calendar_special" : "Special",
     
     "timetable_popup_close" : "Close",
-    "timetable_popup_save" : "Save"
+    "timetable_popup_save" : "Save",
+
+    "timetable_programs_noschedules" : "No schedule programmed",
+    "timetable_options_title" : "Program Options",
+    "timetable_options_disable" : "Disable this program",
+    "timetable_options_disablerange": "Disable using CronTab time range expression",
+    "timetable_options_autooff_title" : "Automatically set all program schedules to Off:",
+    "timetable_options_autooff_away" : "When Armed Away",
+    "timetable_options_autooff_home" : "When Armed Home",
+    "timetable_options_autooff_timerange" : "Within the specified time range",
+    "timetable_options_timerange" : "CronTab time range expression",
+    "timetable_options_autooff_nomotion" : "When no motion is detected",
+    "timetable_options_autooff_nomotion_timeout" : "Motion activity timeout (minutes)",
+    "timetable_options_motionsensor" : "Motion Sensor",
+    "timetable_options_save" : "Save Options",
+
+    "control_module_off" : "Off",
+    "control_module_on" : "On",
+    "control_module_close" : "Close",
+    "control_module_open" : "Open",
+    "control_module_calibrate" : "Calibrate",
+
+    "therm_setpoint" : "Set Point",
+    "therm_cool" : "Cool",
+    "therm_heat" : "Heat",
+
+    "therm_fanmode" : "Fan Mode",
+    "fan_on" : "On",
+    "fan_auto" : "Auto",
+    "fan_circulate" : "Circulate",
+
+    "therm_setmode" : "Operating Mode",
+    "therm_off" : "Off",
+    "therm_auto" : "Auto",
+
+    "securityalarm_noactivity" : "No recent activity"
 }

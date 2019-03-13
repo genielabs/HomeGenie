@@ -28,19 +28,18 @@ using System.Text;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
-using System.Threading;
 
+using System.Net.NetworkInformation;
+using System.Collections.Specialized;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using HomeGenie.Service;
 using HomeGenie.Data;
-using System.Net.NetworkInformation;
-using System.Collections.Specialized;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
 using HomeGenie.Service.Constants;
-using Nmqtt;
+
+using NetClientLib;
+using NLog;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -48,53 +47,38 @@ namespace HomeGenie.Automation.Scripting
     /// Net Helper class.\n
     /// Class instance accessor: **Net**
     /// </summary>
+    [Serializable]
     public class NetHelper
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private string webServiceUrl = "";
-        private string method = "post";
-        private string putData = "";
-        private string mailService = "";
-        private int mailPort = -1;
-        // unset
-        private int mailSsl = -1;
-        // unset
-        private NameValueCollection customHeaders = new NameValueCollection();
-        private NetworkCredential networkCredential = null;
-        private string mailFrom = "homegenie@localhost";
-        //private string mailTo = "";
-        private string mailBody = "";
-        private string mailSubject = "";
-        private Dictionary<string, byte[]> attachments = new Dictionary<string, byte[]>();
+        private string _webServiceUrl = "";
+        private string _method = "post";
+        private string _putData = "";
 
-        private MqttClient mqttClient = null;
+        private string _mailService = "";
+        private int _mailPort = -1;
+        // unset
+        private bool? _mailSsl;
+
+        // unset
+        private readonly NameValueCollection _customHeaders = new NameValueCollection();
+        private NetworkCredential _networkCredential;
+        private bool _defaultCredentials;
+
+        private readonly Dictionary<string, byte[]> _attachments = new Dictionary<string, byte[]>();
 
         // multithread safe lock objects
-        private object smtpSyncLock = new object();
-        private object httpSyncLock = new object();
-        private object mqttSyncLock = new object();
+        private readonly object _smtpSyncLock = new object();
+        //private object httpSyncLock = new object();
 
-        private HomeGenieService homegenie;
+        private readonly HomeGenieService _homegenie;
+
 
         public NetHelper(HomeGenieService hg)
         {
-            homegenie = hg;
-            // TODO: SSL connection certificate validation
-            // TODO: this is just an hack not meant to be used in production enviroment
-            ServicePointManager.ServerCertificateValidationCallback = Validator;
+            _homegenie = hg;
         }
-
-        // TODO: this is just an hack not meant to be used in production enviroment
-        public static bool Validator(
-            object sender,
-            X509Certificate certificate,
-            X509Chain chain,
-            SslPolicyErrors sslPolicyErrors
-        )
-        {
-            return true;
-        }
-
 
         #region SMTP client
 
@@ -106,7 +90,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="smtpServer">SMTP server address</param>
         public NetHelper MailService(string smtpServer)
         {
-            this.mailService = smtpServer;
+            _mailService = smtpServer;
             return this;
         }
 
@@ -120,8 +104,9 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="useSsl">If set to <c>true</c> use SSL.</param>
         public NetHelper MailService(string smtpServer, int port, bool useSsl)
         {
-            this.mailPort = port;
-            this.mailSsl = (useSsl ? 1 : 0);
+            _mailService = smtpServer;
+            _mailPort = port;
+            _mailSsl = useSsl;
             return this;
         }
 
@@ -133,7 +118,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="data">Binary data of the file to attach.</param>
         public NetHelper AddAttachment(string name, byte[] data)
         {
-            attachments.Add(name, data);
+            _attachments.Add(name, data);
             return this;
         }
 
@@ -146,17 +131,14 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="messageText">Message text.</param>
         public bool SendMessage(string recipients, string subject, string messageText)
         {
-            this.mailFrom = "";
+            var mailFrom = "";
             // this is a System Parameter
-            var spEmailSender = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-            {
-                return mp.Name == "Messaging.Email.Sender";
-            });
+            var spEmailSender = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.Sender");
             if (spEmailSender != null && spEmailSender.Value != "")
             {
-                this.mailFrom = spEmailSender.Value;
+                mailFrom = spEmailSender.Value;
             }
-            return SendMessage(this.mailFrom, recipients, subject, messageText);
+            return SendMessage(mailFrom, recipients, subject, messageText);
         }
 
         /// <summary>
@@ -169,91 +151,76 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="messageText">Message text.</param>
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
-            lock(smtpSyncLock)
-            try
+            Log.Trace("SendMessage: called for recipients {0}", recipients);
+            var mailFrom = from;
+            var mailSubject = subject;
+            var mailBody = messageText;
+            //
+            Log.Trace("SendMessage: getting smtpSyncLock");
+            lock (_smtpSyncLock)
             {
-                this.mailFrom = from;
-                //this.mailTo = recipients;
-                this.mailSubject = subject;
-                this.mailBody = messageText;
-                //
-                using (var message = new System.Net.Mail.MailMessage())
+                Log.Trace("SendMessage: got smtpSyncLock");
+                using (var message = new MailMessage())
                 {
-                    string[] mailRecipients = recipients.Split(';');
-                    for (int e = 0; e < mailRecipients.Length; e++)
+                    var mailRecipients = recipients.Split(new[] {';', ','}, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var recipient in mailRecipients)
                     {
-                        message.To.Add(mailRecipients[e]);
+                        message.To.Add(recipient);
                     }
-                    message.Subject = this.mailSubject;
-                    message.From = new MailAddress(this.mailFrom);
-                    message.Body = this.mailBody;
+                    message.Subject = mailSubject;
+                    message.From = new MailAddress(mailFrom);
+                    message.Body = mailBody;
                     //
-                    for (int a = 0; a < attachments.Count; a++)
+                    for (var a = 0; a < _attachments.Count; a++)
                     {
-                        var attachment = new Attachment(
-                                             new MemoryStream(attachments.ElementAt(a).Value),
-                                             attachments.ElementAt(a).Key
-                                         );
+                        var attachment = new Attachment(new MemoryStream(_attachments.ElementAt(a).Value), _attachments.ElementAt(a).Key);
                         message.Attachments.Add(attachment);
                     }
                     //
-                    if (this.mailService == "")
+                    if (_mailService == "")
                     {
                         // this is a System Parameter
-                        var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                        {
-                            return mp.Name == "Messaging.Email.SmtpServer";
-                        });
+                        var spSmtpServer = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpServer");
                         if (spSmtpServer != null)
                         {
-                            this.mailService = spSmtpServer.Value;
+                            _mailService = spSmtpServer.Value;
                         }
                     }
-                    if (this.mailPort == -1)
+                    if (_mailPort == -1)
                     {
                         // this is a System Parameter
-                        var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                        {
-                            return mp.Name == "Messaging.Email.SmtpPort";
-                        });
+                        var spSmtpPort = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpPort");
                         if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
                         {
-                            this.mailPort = (int)spSmtpPort.DecimalValue;
+                            _mailPort = (int) spSmtpPort.DecimalValue;
                         }
                     }
-                    if (this.mailSsl == -1)
+                    if (!_mailSsl.HasValue)
                     {
                         // this is a System Parameter
-                        var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        var spSmtpUseSsl = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpUseSsl");
+                        if (spSmtpUseSsl != null && (spSmtpUseSsl.Value.ToLower() == "true" ||
+                                                     spSmtpUseSsl.Value.ToLower() == "on" ||
+                                                     spSmtpUseSsl.DecimalValue == 1))
                         {
-                            return mp.Name == "Messaging.Email.SmtpUseSsl";
-                        });
-                        if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
-                        {
-                            this.mailSsl = 1;
+                            _mailSsl = true;
                         }
                     }
-                    var credentials = this.networkCredential;
+                    var credentials = _networkCredential;
                     if (credentials == null)
                     {
                         var username = "";
                         // this is a System Parameter
-                        var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                        {
-                            return mp.Name == "Messaging.Email.SmtpUserName";
-                        });
+                        var spSmtpUserName = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpUserName");
                         if (spSmtpUserName != null)
                         {
                             username = spSmtpUserName.Value;
                         }
-                        if (!String.IsNullOrWhiteSpace(username))
+                        if (!string.IsNullOrWhiteSpace(username))
                         {
                             var password = "";
                             // this is a System Parameter
-                            var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp)
-                            {
-                                return mp.Name == "Messaging.Email.SmtpPassword";
-                            });
+                            var spSmtpPassword = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpPassword");
                             if (spSmtpPassword != null)
                             {
                                 password = spSmtpPassword.Value;
@@ -262,47 +229,59 @@ namespace HomeGenie.Automation.Scripting
                         }
                     }
                     //
-                    using (var smtpClient = new SmtpClient(this.mailService))
+
+                    using (var smtpClient = new SmtpClient(_mailService))
                     {
-                        smtpClient.Credentials = credentials;
-                        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        if (this.mailPort > 0)
+                        try
                         {
-                            smtpClient.Port = this.mailPort;
+                            smtpClient.Credentials = credentials;
+                            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            if (_mailPort > 0)
+                            {
+                                smtpClient.Port = _mailPort;
+                            }
+                            smtpClient.EnableSsl = _mailSsl == true;
+
+                            Log.Trace("SendMessage: going to send email {0} using mailService '{1}', port '{2}', credentials {3}, using SSL = {4}",
+                                message.ToString(), _mailService, _mailPort, credentials.ToString(), smtpClient.EnableSsl);
+                            smtpClient.Send(message);
+                            Log.Trace("Email sent");
+                            _attachments.Clear();
                         }
-                        if (this.mailSsl > 0)
+                        catch (Exception ex)
                         {
-                            smtpClient.EnableSsl = (this.mailSsl == 1);
+                            Log.Trace(ex, "SendMessage: error sending email {0}");
+                            Log.Error(ex);
+                            HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                            return false;
                         }
-                        smtpClient.Send(message);
-                        smtpClient.Dispose();
-                        //
-                        attachments.Clear();
+                        finally
+                        {
+                            Log.Trace("SendMessage: disposing smtpClient");
+                            smtpClient.Dispose();
+                        }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogEvent(
-                    Domains.HomeAutomation_HomeGenie_Automation,
-                    this.GetType().Name,
-                    ex.Message,
-                    "Exception.StackTrace",
-                    ex.StackTrace
-                );
-                return false;
-            }
+
             return true;
         }
 
-        // TODO: deprecate this (Program.RunAsyncTask can already do the trick)
-        public void SendMessageAsync(string from, string recipients, string subject, string messageText)
+        #endregion
+
+
+        #region IMAP client
+
+        /// <summary>
+        /// IMAP mail client helper.
+        /// </summary>
+        /// <returns>The IMAP client.</returns>
+        /// <param name="host">Host.</param>
+        /// <param name="port">Port.</param>
+        /// <param name="useSsl">If set to <c>true</c> use ssl.</param>
+        public ImapClient ImapClient(string host, int port, bool useSsl)
         {
-            var t = new Thread(() =>
-            {
-                this.SendMessage(from, recipients, subject, messageText);
-            });
-            t.Start();
+            return new ImapClient(host, port, useSsl);
         }
 
         #endregion
@@ -325,9 +304,9 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public NetHelper WebService(string serviceUrl)
         {
-            this.method = "";
-            this.customHeaders.Clear();
-            this.webServiceUrl = serviceUrl;
+            _method = "";
+            _customHeaders.Clear();
+            _webServiceUrl = serviceUrl;
             return this;
         }
 
@@ -337,8 +316,8 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="data">Data to send.</param>
         public NetHelper Put(string data)
         {
-            this.method = "PUT";
-            this.putData = data;
+            _method = "PUT";
+            _putData = data;
             return this;
         }
 
@@ -348,8 +327,8 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="data">String containing post data fields and values in the form field1=value1&filed2=value2&...&fieldn=valuen.</param>
         public NetHelper Post(string data)
         {
-            this.method = "POST";
-            this.putData = data;
+            _method = "POST";
+            _putData = data;
             return this;
         }
 
@@ -361,7 +340,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="value">Header value.</param>
         public NetHelper AddHeader(string name, string value)
         {
-            customHeaders.Add(name, value);
+            _customHeaders.Add(name, value);
             return this;
         }
 
@@ -372,51 +351,44 @@ namespace HomeGenie.Automation.Scripting
         public string Call()
         {
             string returnvalue = "";
-            lock(httpSyncLock)
-            try
+            //lock(httpSyncLock)
+            using (var webClient = new WebClient())
             {
-                using (var webClient = new WebClient())
+                try
                 {
                     webClient.Encoding = Encoding.UTF8;
-                    if (this.networkCredential != null)
+                    if (_networkCredential != null)
                     {
-                        webClient.Credentials = networkCredential;
+                        webClient.Credentials = _networkCredential;
+                    }
+                    else if (_defaultCredentials)
+                    {
+                        webClient.UseDefaultCredentials = true;
                     }
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                    webClient.Headers.Add(customHeaders);
-                    if (this.method == "")
+                    if (_customHeaders.Count > 0)
+                        webClient.Headers.Add(_customHeaders);
+                    if (_method == "")
                     {
-                        returnvalue = webClient.DownloadString(this.webServiceUrl);
+                        returnvalue = webClient.DownloadString(_webServiceUrl);
                     }
                     else
                     {
-                        byte[] data = Encoding.UTF8.GetBytes(this.putData);
-                        byte[] responsebytes = webClient.UploadData(this.webServiceUrl, this.method, data);
+                        byte[] data = Encoding.UTF8.GetBytes(_putData);
+                        byte[] responsebytes = webClient.UploadData(_webServiceUrl, _method, data);
                         returnvalue = Encoding.UTF8.GetString(responsebytes);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogEvent(
-                    Domains.HomeAutomation_HomeGenie_Automation,
-                    this.GetType().Name,
-                    ex.Message,
-                    "Exception.StackTrace",
-                    ex.StackTrace
-                );
+                catch (Exception ex)
+                {
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                }
+                finally
+                {
+                    webClient.Dispose();
+                }
             }
             return returnvalue;
-        }
-
-        // TODO: deprecate this (Program.RunAsyncTask can do the trick)
-        public void CallAsync()
-        {
-            var t = new Thread(() =>
-            {
-                this.Call();
-            });
-            t.Start();
         }
 
         /// <summary>
@@ -426,7 +398,7 @@ namespace HomeGenie.Automation.Scripting
         public dynamic GetData()
         {
             dynamic returnValue = null;
-            string response = this.Call();
+            string response = Call();
             if (response.Trim().StartsWith("<?xml"))
             {
                 returnValue = Utility.ParseXmlToDynamic(response);
@@ -453,21 +425,32 @@ namespace HomeGenie.Automation.Scripting
         public byte[] GetBytes()
         {
             byte[] responseBytes = null;
-            lock(httpSyncLock)
-            try
+            //lock(httpSyncLock)
+            using (var webClient = new WebClient())
             {
-                using (var webClient = new WebClient())
+                try
                 {
-                    if (this.networkCredential != null)
+                    if (_networkCredential != null)
                     {
-                        webClient.Credentials = networkCredential;
+                        webClient.Credentials = _networkCredential;
+                    }
+                    else if (_defaultCredentials)
+                    {
+                        webClient.UseDefaultCredentials = true;
                     }
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                    responseBytes = webClient.DownloadData(this.webServiceUrl);
+                    if (_customHeaders.Count > 0)
+                        webClient.Headers.Add(_customHeaders);
+                    responseBytes = webClient.DownloadData(_webServiceUrl);
                 }
-            }
-            catch
-            {
+                catch (Exception ex)
+                {
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                }
+                finally
+                {
+                    webClient.Dispose();
+                }
             }
             return responseBytes;
         }
@@ -483,7 +466,10 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="remoteAddress">IP or DNS address.</param>
         public bool Ping(string remoteAddress)
         {
-            bool success = false;
+            const string data = "01010101010101010101010101010101";
+            const int timeout = 1000;
+            var success = false;
+
             using (var pingClient = new Ping())
             {
                 var options = new PingOptions();
@@ -493,11 +479,10 @@ namespace HomeGenie.Automation.Scripting
                 options.DontFragment = true;
                 //
                 // Create a buffer of 32 bytes of data to be transmitted.
-                string data = "01010101010101010101010101010101";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 1000;
+                var buffer = Encoding.ASCII.GetBytes(data);
+
                 var reply = pingClient.Send(remoteAddress, timeout, buffer, options);
-                if (reply.Status == IPStatus.Success)
+                if (reply != null && reply.Status == IPStatus.Success)
                 {
                     success = true;
                 }
@@ -507,83 +492,17 @@ namespace HomeGenie.Automation.Scripting
 
         #endregion
 
-        //TODO: deprecate MQTT client in NetHelper (use MqttClientHelper instead)
-        #region MQTT client
-
-        /// <summary>
-        /// Sets the MQTT server to use.
-        /// </summary>
-        /// <returns>The service.</returns>
-        /// <param name="server">MQTT server address.</param>
-        /// <param name="port">MQTT server port.</param>
-        /// <param name="topic">MQTT topic.</param>
-        public NetHelper MqttService(string server, int port, string clientId)
-        {
-            mqttClient = new MqttClient(server, port, clientId);
-            if (this.networkCredential != null)
-            {
-                mqttClient.Connect(this.networkCredential.UserName, this.networkCredential.Password);
-            }
-            else
-            {
-                mqttClient.Connect();
-            }
-            return this;
-        }
-
-        //TODO: deprecate this (use this.networkCredential instead)
-        public NetHelper MqttService(string server, int port, string username, string password, string clientId)
-        {
-            mqttClient = new MqttClient(server, port, clientId);
-            mqttClient.Connect(username, password);
-            return this;
-        }
-
-        /// <summary>
-        /// Subscribe the specified topic.
-        /// </summary>
-        /// <param name="topic">Topic name.</param>
-        /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
-        public NetHelper Subscribe(string topic, Action<string,string> callback)
-        {
-            mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
-            //.ObserveOn(System.Threading.SynchronizationContext.Current)
-                .Subscribe(msg =>
-            { 
-                callback(msg.Topic, msg.Payload);
-                //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
-            });
-            return this;
-        }
-
-        /// <summary>
-        /// Publish a message to the specified topic.
-        /// </summary>
-        /// <param name="topic">Topic name.</param>
-        /// <param name="message">Message text.</param>
-        public NetHelper Publish(string topic, string message)
-        {
-            lock (mqttSyncLock)
-            {
-                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
-            }
-            return this;
-        }
-
-        #endregion
-
-
-        //TODO: add autodoc comment (HG Event forwarding)
+        // TODO: add autodoc comment (HG Event forwarding)
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
-            string eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
+            var eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + _homegenie.GetHttpServicePort();
             // propagate event to remote hg endpoint
-            this.WebService(eventRouteUrl)
-                .Put(JsonConvert.SerializeObject(
-                    new ModuleEvent(module.SelectedModules[0], parameter),
-                    new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }
-                ))
-                .CallAsync();
+            Utility.RunAsyncTask(() =>
+            {
+                WebService(eventRouteUrl)
+                    .Put(JsonConvert.SerializeObject(new ModuleEvent(module.Instance, parameter), new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }))
+                    .Call();
+            });
             return this;
         }
 
@@ -595,38 +514,38 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="pass">Password.</param>
         public NetHelper WithCredentials(string user, string pass)
         {
-            this.networkCredential = new NetworkCredential(user, pass);
+            _networkCredential = new NetworkCredential(user, pass);
+            return this;
+        }
+
+        public NetHelper WithDefaultCredentials()
+        {
+            _defaultCredentials = true;
             return this;
         }
 
         public void Reset()
         {
-            this.webServiceUrl = "";
-            this.mailService = "localhost";
-            this.networkCredential = null;
-            //this.mailTo = "";
-            this.mailBody = "";
-            this.mailSubject = "";
-            //
-            if (this.mqttClient != null)
-            {
-                try
-                {
-                    this.mqttClient.Dispose();
-                }
-                catch
-                {
-                }
-            }
+            _webServiceUrl = "";
+            _mailService = "localhost";
+            _networkCredential = null;
         }
 
         private class WebClient : System.Net.WebClient
         {
             protected override WebRequest GetWebRequest(Uri uri)
             {
-                WebRequest w = base.GetWebRequest(uri);
-                w.Timeout = 30 * 1000;
-                return w;
+                var webRequest = base.GetWebRequest(uri);
+                // Disable Keep-Alive (this lead to poor performance, so let's keep it disabled by default)
+                //if (w is HttpWebRequest)
+                //{
+                //    (w as HttpWebRequest).KeepAlive = false;
+                //}
+                // WebClient default timeout set to 10 seconds
+                if (webRequest != null)
+                    webRequest.Timeout = 10 * 1000;
+
+                return webRequest;
             }
         }
 

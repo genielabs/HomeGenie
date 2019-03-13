@@ -20,21 +20,25 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace HomeGenie.Automation
 {
     public class ProgramFeature
     {
-        public string FieldType = "checkbox";
+        public string FieldType { get; set; }
         //
-        public string ForDomains = "";
-        public string ForTypes = "";
+        public string ForDomains { get; set; }
+        public string ForTypes { get; set; }
         //
-        public string Property = "";
-        public string Description = "";
+        public string Property { get; set; }
+        public string Description { get; set; }
+
+        public ProgramFeature()
+        {
+            FieldType = "checkbox";
+            ForDomains = "";
+            ForTypes = "";
+            Property = "";
+            Description = "";
+        }
     }
 }

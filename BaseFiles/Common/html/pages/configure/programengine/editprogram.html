@@ -21,6 +21,7 @@
                 <br clear="all" />
                 <label data-locale-id="configure_program_programdescription" for="automation_programdescription">Program Description</label>
                 <textarea id="automation_programdescription" cols="40" rows="3"></textarea>
+
                 <br clear="all" />
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
@@ -30,13 +31,23 @@
                             <option value="CSharp">C# Program</option>
                             <option value="Javascript">Javascript Script</option>
                             <option value="Python">Python Script</option>
-                            <option value="Ruby">Ruby Script</option>
                             <option id="automation_programtype_option_arduino" value="Arduino">Arduino Sketch</option>
                         </select>
                     </div>
                     <div class="ui-block-b">
                         <label data-locale-id="configure_program_programgroup" for="automation_programgroup">Program Group</label>
                         <select id="automation_programgroup"></select>
+                    </div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div id="autorestartenabled">
+                            <label data-locale-id="configure_program_autorestart" for="automation_program_autorestartenabled">Auto restart program on failure</label>
+                            <input type="checkbox" id="automation_program_autorestartenabled" />
+                       </div>
+                    </div>
+                    <div class="ui-block-b" align="right">
+                        <a id="configure_program_editoroptions" href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-icon-left ui-icon-gear" data-locale-id="configure_program_options">Options</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +68,7 @@
                     <a id="program_error_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-alert" href="#">Errors</a>
                 </div>
                 <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;right:4px;position:absolute;margin:0" data-theme="e">
-                    <a class="ui-btn ui-btn-icon-left ui-icon-info" href="http://www.homegenie.it/docs/" data-locale-id="configure-editprogram-help" target="_blank">Help</a>
+                    <a class="ui-btn ui-btn-icon-left ui-icon-info" href="https://genielabs.github.io/HomeGenie/#/develop/programs" data-locale-id="configure-editprogram-help" target="_blank">Help</a>
                 </div>
                 <textarea id="automation_program_scriptsource" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="postion:absolute;width:100%;height:100%"></textarea>
                 <textarea id="automation_program_sketchfile" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="postion:absolute;width:100%;height:100%"></textarea>
@@ -104,7 +115,7 @@
                 <a class="ui-btn ui-btn-icon-left ui-icon-info" href="http://www.homegenie.it/docs/" data-locale-id="configure-editprogram-help" target="_blank">Help</a>
             </div>
             <div data-block-id="configure_program_editfortypecsharp" style="display:none">
-                <textarea id="automation_program_scriptcondition" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
+                <textarea id="automation_program_scriptsetup" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
             </div>
             <div data-block-id="configure_program_editfortypewizard" style="display:none;">
                 <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="position:fixed;top:4px;left:4px;position:absolute;margin:0" data-theme="e">
@@ -159,7 +170,7 @@
                     <a id="program_notsaved_dontsave" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_dontsave" data-inline="true" data-rel="back">No</a>
                 </div>
                 <div class="ui-block-b">
-                    <a id="program_notsaved_save" href="#" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_program_saveconfirm" data-inline="true" data-rel="back" data-transition="flow">Save</a>
+                    <a id="program_notsaved_save" href="#" class="ui-btn ui-corner-all ui-icon-fa-save ui-btn-icon-left" data-locale-id="configure_program_saveconfirm" data-inline="true" data-rel="back" data-transition="flow">Save</a>
                 </div>
             </div>
         </div>
@@ -231,9 +242,10 @@
         <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
         <ul data-role="listview" data-inset="false" style="min-width:210px;">
             <li><a id="automation_program_delete_button" class="ui-btn ui-icon-minus ui-btn-icon-right" data-locale-id="configure_editprogram_options_delete" data-position-to="window" data-transition="pop">Delete program</a></li>
-            <li id="editprograms_actionmenu_run"><a class="ui-btn ui-icon-gear ui-btn-icon-right" data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
-            <li id="editprograms_actionmenu_break"><a class="ui-btn ui-icon-minus ui-btn-icon-right" data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
-            <li><a class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_program_options_save" href="javascript:HG.WebApp.ProgramEdit.SaveProgram();history.back();">Save</a>
+            <li><a class="ui-btn ui-icon-fa-download ui-btn-icon-right" data-locale-id="configure_program_options_export" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Export</a>
+            <li id="editprograms_actionmenu_run"><a class="ui-btn ui-icon-fa-play ui-btn-icon-right" data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
+            <li id="editprograms_actionmenu_break"><a class="ui-btn ui-icon-fa-stop ui-btn-icon-right" data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
+            <li><a class="ui-btn ui-icon-fa-save ui-btn-icon-right" data-locale-id="configure_program_options_save" href="javascript:HG.WebApp.ProgramEdit.SaveProgram();history.back();">Save</a></li>
         </ul>
     </div>
 
@@ -242,17 +254,17 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a id="editprograms_backbutton" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#">
+                    <a id="editprograms_backbutton" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" href="#">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a id="editprograms_homebutton" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#">
+                    <a id="editprograms_homebutton" href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#editprograms_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                    <a class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#editprograms_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>

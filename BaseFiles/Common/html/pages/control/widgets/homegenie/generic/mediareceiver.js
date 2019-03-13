@@ -39,12 +39,12 @@
             });
             // media buttons action
             widget.find('[data-ui-field=media_play]').on('click', function () {
-                servicecall('AvMedia.Play', module.Domain, module.Address);
+                servicecall('AvMedia.Play', module.Domain, module.Address, '');
                 widget.find('[data-ui-field=media_play]').hide();
                 widget.find('[data-ui-field=media_pause]').show();
             });
             widget.find('[data-ui-field=media_pause]').on('click', function () {
-                servicecall('AvMedia.Pause', module.Domain, module.Address);
+                servicecall('AvMedia.Pause', module.Domain, module.Address, '');
                 widget.find('[data-ui-field=media_pause]').hide();
                 widget.find('[data-ui-field=media_play]').show();
             });
@@ -52,15 +52,15 @@
                 servicecall('AvMedia.Pause', module.Domain, module.Address);
             });
             widget.find('[data-ui-field=media_stop]').on('click', function () {
-                servicecall('AvMedia.Stop', module.Domain, module.Address);
+                servicecall('AvMedia.Stop', module.Domain, module.Address, '');
                 widget.find('[data-ui-field=media_pause]').hide();
                 widget.find('[data-ui-field=media_play]').show();
             });
             widget.find('[data-ui-field=media_prev]').on('click', function () {
-                servicecall('AvMedia.Prev', module.Domain, module.Address);
+                servicecall('AvMedia.Prev', module.Domain, module.Address, '');
             });
             widget.find('[data-ui-field=media_next]').on('click', function () {
-                servicecall('AvMedia.Next', module.Domain, module.Address);
+                servicecall('AvMedia.Next', module.Domain, module.Address, '');
             });
             widget.find('[data-ui-field=media_mute]').on('click', function () {
                 if (_this.IsMuted) {
@@ -95,28 +95,28 @@
         if (_this.PendingRequests == 0 && !_this.IsMouseDown) {
             var servicecall = HG.Control.Modules.ServiceCall;
             _this.PendingRequests++;
-            servicecall('AvMedia.GetTransportInfo', module.Domain, module.Address, '', function (res) {
-                var trinfo = eval(res)[0];
-                var state = trinfo.CurrentTransportState;
-                if (_this.Widget != null) {
-                    var playbutton = _this.Widget.find('[data-ui-field=media_play]');
-                    var pausebutton = _this.Widget.find('[data-ui-field=media_pause]');
-                    if (state == 'PAUSED_PLAYBACK') {
-                        playbutton.show();
-                        pausebutton.hide();
-                    }
-                    else if (state == 'STOPPED') {
-                        playbutton.show();
-                        pausebutton.hide();
-                        _this.Widget.find('[data-ui-field=media_position]').html('');
-                    }
-                    else if (state == 'PLAYING') {
-                        playbutton.hide();
-                        pausebutton.show();
-                        servicecall('AvMedia.GetPositionInfo', module.Domain, module.Address, '', function (res) {
-                            var posinfo = eval(res)[0];
-                            _this.Widget.find('[data-ui-field=media_position]').html(posinfo.RelTime);
-                        });
+            servicecall('AvMedia.GetTransportInfo', module.Domain, module.Address, '', function (trinfo) {
+                if (typeof trinfo != 'undefined') {
+                    var state = trinfo.CurrentTransportState;
+                    if (_this.Widget != null) {
+                        var playbutton = _this.Widget.find('[data-ui-field=media_play]');
+                        var pausebutton = _this.Widget.find('[data-ui-field=media_pause]');
+                        if (state == 'PAUSED_PLAYBACK') {
+                            playbutton.show();
+                            pausebutton.hide();
+                        }
+                        else if (state == 'STOPPED') {
+                            playbutton.show();
+                            pausebutton.hide();
+                            _this.Widget.find('[data-ui-field=media_position]').html('');
+                        }
+                        else if (state == 'PLAYING') {
+                            playbutton.hide();
+                            pausebutton.show();
+                            servicecall('AvMedia.GetPositionInfo', module.Domain, module.Address, '', function (posinfo) {
+                                _this.Widget.find('[data-ui-field=media_position]').html(posinfo.RelTime);
+                            });
+                        }
                     }
                 }
                 _this.PendingRequests--;
@@ -124,8 +124,8 @@
             // get current volume on popup open
             _this.PendingRequests++;
             servicecall('AvMedia.GetVolume', module.Domain, module.Address, '', function (res) {
-                if (_this.Widget != null) {
-                    _this.Widget.find('[data-ui-field=media_volume]').val(res);
+                if (typeof res.ResponseValue != 'undefined' && _this.Widget != null) {
+                    _this.Widget.find('[data-ui-field=media_volume]').val(res.ResponseValue);
                     _this.Widget.find('.ui-slider').width(250);
                     _this.Widget.find('[data-ui-field=media_volume]').slider('refresh');
                 }
@@ -134,7 +134,7 @@
             // get mute status
             _this.PendingRequests++;
             servicecall('AvMedia.GetMute', module.Domain, module.Address, '', function (res) {
-                if (res == '0' || res.toLowerCase() == 'false') {
+                if (typeof res.ResponseValue != 'undefined' && res.ResponseValue.toLowerCase() == 'false' && _this.Widget != null) {
                     _this.Widget.find('[data-ui-field=media_mute]').attr('src', 'pages/control/widgets/homegenie/generic/images/media_mute.png');
                     _this.IsMuted = false;
                 }

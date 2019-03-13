@@ -1,156 +1,156 @@
-﻿[{
-    Name: "Generic Color Light",
-    Author: "Generoso Martello",
-    Version: "2013-03-31",
+﻿$$.widget = {
+  name: 'Generic Color Light',
+  version: '1.2',
+  author: 'Generoso Martello',
+  release: '2016-05-06',
+  icon: 'pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png'
+};
 
-    GroupName: '',
-    IconImage: 'pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png',
-    StatusText: '',
-    Description: '',
-    UpdateTime: '',
-    HueLightNumber: '',
-    ColorWheel: null,
-    WidgetImage: null,
-    ControlImage: null,
+var colorWheel = null;
+var colorImage = null;
 
-    RenderView: function (cuid, module) {
-        if (cuid == null) return;
-        var container = $(cuid);
-        var widget = container.find('[data-ui-field=widget]');
-        var controlpopup = widget.data('ControlPopUp');
-        //
-        var deviceaddress = module.Address; //HG.WebApp.Utility.GetModulePropertyByName(module, "Philips.HueLight");
-        //
-        // create and store a local reference to control popup object
-        //
-        if (!controlpopup) {
-            container.find('[data-ui-field=controlpopup]').trigger('create');
-            controlpopup = container.find('[data-ui-field=controlpopup]').popup();
-            widget.data('ControlPopUp', controlpopup);
-            //
-            var iconp1 = this.WidgetImage = Raphael(widget.find('[data-ui-field=color]').get(0));
-            var iconp2 = this.ControlImage = Raphael(controlpopup.find('[data-ui-field=color]').get(0));
-            //
-            // initialization stuff here
-            //
-            // when options button is clicked control popup is shown
-            widget.find('[data-ui-field=options]').on('click', function () {
-                if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
-                    $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
-                }
-            });
-            widget.find('[data-ui-field=color]').on('click', function () {
-                if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
-                    $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
-                }
-            });
-            //
-            // ui events handlers
-            //
-            widget.find('[data-ui-field=on]').on('click', function () {
-                HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
-            });
-            widget.find('[data-ui-field=off]').on('click', function () {
-                HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
-            });
-            //
-            controlpopup.find('[data-ui-field=on]').on('click', function () {
-                HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
-            });
-            controlpopup.find('[data-ui-field=off]').on('click', function () {
-                HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
-            });
-            //
-            // settings button
-            widget.find('[data-ui-field=settings]').on('click', function () {
-                HG.WebApp.Control.EditModule(module);
-            });
-            //
-            this.ColorWheel = Raphael.colorwheel(controlpopup.find('[data-ui-field=colors]'), 200, 80);
-            this.ColorWheel.ondrag(null, function (rgbcolor) {
-                var color = Raphael.color(rgbcolor);
-                //
-                iconp1.clear(); iconp1.ball(22, 22, 22, color);
-                iconp2.clear(); iconp2.ball(22, 22, 22, color);
-                //
-                var hue = color.h;
-                var sat = color.s;
-                var bri = color.v;
-                var hsbcolor = hue + "," + sat + "," + bri;
-                //
-                HG.Control.Modules.ServiceCall("Control.ColorHsb", module.Domain, module.Address, hsbcolor, function (data) { });
-            });
-        }
-        //
-        // read some context data
-        //
-        this.GroupName = container.attr('data-context-group');
-        //
-        // get module watts prop
-        //
-        var watts = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
-        if (watts != null) {
-            var w = Math.round(watts.Value.replace(',', '.'));
-            if (w > 0) {
-                watts = w + 'W';
-            } else watts = '';
-        } else watts = '';
-        //
-        // get module level prop for status text
-        //
-        var level = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
-        if (level != null) {
-            var updatetime = level.UpdateTime;
-            if (typeof updatetime != 'undefined') {
-                updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-                var d = new Date(updatetime);
-                this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
-            }
-            //
-            level = level.Value.replace(',', '.') * 100;
-            if (level >= 99 || level == 0) {
-                if (level >= 99) {
-                    level = 'ON';
-                    this.StatusText = '<img width="16" height="16" src="images/common/led_green.png" style="vertical-align:middle" />';
-                }
-                else {
-                    level = 'OFF';
-                    this.StatusText = '<img width="16" height="16" src="images/common/led_black.png" style="vertical-align:middle" />';
-                }
-            }
-            else {
-                level = level.toFixed(0) + '%';
-                this.StatusText = '<img width="16" height="16" src="images/common/led_green.png" style="vertical-align:middle" />';
-            }
+// widget class methods
 
-        } else level = '';
-        //
-        this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp;' + level + '</span>&nbsp;' + this.StatusText;
-        //
-        var hsbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
-        if (hsbcolor != null && this.ColorWheel != null) {
-            hsbcolor = 'hsb(' + hsbcolor.Value + ')';
-            var color = Raphael.color(hsbcolor);
-            if (level == 'OFF') color.v = 0.05;
-            this.ColorWheel.color(hsbcolor);
-            this.WidgetImage.clear(); this.WidgetImage.ball(22, 22, 22, color);
-            this.ControlImage.clear(); this.ControlImage.ball(22, 22, 22, color);
-        }
-        //
-        this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
-        //
-        // render widget
-        //
-        widget.find('[data-ui-field=name]').html(module.Name);
-        widget.find('[data-ui-field=description]').html(this.Description);
-        widget.find('[data-ui-field=status]').html(this.StatusText);
-        widget.find('[data-ui-field=updatetime]').html(this.UpdateTime);
-        //
-        // render control popup
-        //
-        controlpopup.find('[data-ui-field=group]').html(this.GroupName);
-        controlpopup.find('[data-ui-field=name]').html(module.Name);
-        controlpopup.find('[data-ui-field=status]').html(level + '<br />' + watts);
+$$.onStart = function() {
+  // Settings button click
+  $$.field('settings').on('click', function () {
+    $$.ui.EditModule($$.module);
+  });
+
+  // When options button is clicked control popup is shown
+  $$.field('options').on('click', function () {
+    $$.popup.popup('open');
+  });
+  // On button click
+  $$.field('on').on('click', function () {
+    $$.module.command('Control.On');
+  });
+  // Off button click
+  $$.field('off').on('click', function () {
+    $$.module.command('Control.Off');
+  });
+  // Toggle button action (open color wheel popup)
+  $$.field('toggle').on('click', function () {
+    $$.popup.popup('open');
+  });          
+  // Level slider release
+  $$.field('level').on('slidestop', function () {
+    $$.module.command('Control.Level', $(this).val());
+  });          
+  // Popup buttons click
+  $$.popup.field('on').on('click', function () {
+    $$.module.command('Control.On');
+  });
+  $$.popup.field('off').on('click', function () {
+    $$.module.command('Control.Off');
+  });
+  // Setup color wheel
+  colorImage = Raphael($$.field('colorball').get(0));
+  colorWheel = Raphael.colorwheel($$.popup.field('colors'), 200, 80);
+  colorWheel.ondrag(null, function (rgbcolor) {
+    var color = Raphael.rgb2hsb(rgbcolor);
+    var hue = color.h;
+    var sat = color.s;
+    var bri = color.b;
+    var hsbcolor = hue + "," + sat + "," + bri;
+    colorWheel.color(rgbcolor);
+    color.b = 1;
+    colorImage.clear();colorImage.ball(12, 12, 12, color);
+    $$.module.command('Control.ColorHsb', hsbcolor);
+  });
+}
+
+$$.onRefresh = function () {
+  $$.field('name').html($$.module.Name);
+  $$.field('description').html(($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address);
+  $$.ui.GetModuleIcon($$.module, function(imgPath){
+    $$.field('icon').attr('src', imgPath);
+    $$.widget.icon = imgPath;
+  });
+
+  // Control PopUp
+  $$.popup.field('group').html(this.GroupName);
+  $$.popup.field('name').html($$.module.Name);
+
+  $$.refreshStatus();
+  $$.refreshColor();
+  $$.refreshMeter();
+}
+
+$$.onUpdate = function(parameter, value) {
+  // TODO: ..
+  switch(parameter) {
+    case 'Status.Level':
+      $$.refreshStatus();
+      $$.refreshColor();
+      $$.signalActity('name');
+      break;
+    case 'Status.ColorHsb':
+      $$.refreshStatus();
+      $$.refreshColor();
+      $$.signalActity('name');
+      break;
+    case 'Meter.Watts':
+      $$.refreshMeter();
+      $$.signalActity('status');
+      break;
+    case 'Status.Error':
+      if (value != '' && $$.field('led').length)
+        $$.field('led').attr('src', 'images/common/led_red.png');
+    default:
+      $$.signalActity();
+  }
+}
+
+$$.onStop = function() {
+  // TODO: ..
+}
+
+
+// custom methods
+
+$$.refreshStatus = function() {
+  // Get module level prop for status text
+  var displayTime = '';
+  var level = $$.module.prop('Status.Level');
+  if (level != null) {
+    var updatetime = level.UpdateTime;
+    if (typeof updatetime != 'undefined') {
+      updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+      var d = new Date(updatetime);
+      displayTime = $$.util.FormatDate(d) + ' ' + $$.util.FormatDateTime(d); //$$.util.GetElapsedTimeText(d);
     }
+    level = parseFloat(level.Value.replace(',', '.'))*100;
+  } else level = '';
+  $$.field('level').val(level).slider().slider('refresh');
+  $$.field('updatetime').html(displayTime);
+}
 
-}]
+$$.refreshColor = function() {
+  var level = $$.module.prop('Status.Level');
+  if (level != null) {
+    level = parseFloat(level.Value.replace(',', '.'))*100;
+  } else level = 0;
+  // Set current light color
+  var hsbcolor = $$.module.prop('Status.ColorHsb');
+  if (hsbcolor != null && colorWheel != null) {
+    var hexcolor = eval('Raphael.hsb('+hsbcolor.Value+')');
+    var color = Raphael.rgb2hsb(hexcolor);
+    colorWheel.color_hsb(color);
+    if (level == 0) color.b = 0; else color.b = 1;
+    colorImage.clear(); colorImage.ball(12, 12, 12, color);
+  }
+}
+
+$$.refreshMeter = function() {
+  // Get module watts prop
+  var watts = $$.module.prop('Meter.Watts');
+  if (watts != null) {
+    var w = Math.round(watts.Value.replace(',', '.'));
+    if (w > 0) {
+      watts = w + '<span style="opacity:0.65">W</span>';
+    } else watts = '';
+  } else watts = '';
+  $$.field('status').html('<span style="vertical-align:middle">' + watts + '</span>');
+  $$.popup.field('status').html('<span style="vertical-align:middle">' + watts + '</span>');
+}

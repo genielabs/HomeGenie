@@ -1,0 +1,30 @@
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
+        <span data-ui-field="name" style="font-weight:bold">Name</span><br />
+        <span data-ui-field="description">...</span>
+        <a data-ui-field="settings" data-role="button" data-icon="gear" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Features</a>
+  </div>
+  
+  <br />
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/securitysystem.png" />
+        </div>
+        <div class="ui-block-b" style="padding-top:8px;">
+            <select data-ui-field="lockunlock" data-role="slider">
+                <!-- for other possible values see ZWaveLib/CommandClasses/DoorLock.cs -->
+                <option value="Unsecured">
+                    Unlocked
+                </option>
+                <option value="Secured">
+                    Locked
+                </option>
+            </select>
+        </div>
+    </div>
+    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
+    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+    </div>
+</div>

@@ -21,8 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using NetClientLib;
@@ -34,9 +32,10 @@ namespace HomeGenie.Automation.Scripting
     /// UDP client helper.\n
     /// Class instance accessor: **UdpClient**
     /// </summary>
+    [Serializable]
     public class UdpClientHelper
     {
-        private UDPClient udpClient;
+        private UdpClient udpClient;
         private Action<byte[]> dataReceived;
         private Action<string> stringReceived;
         private Action<bool> statusChanged;
@@ -45,7 +44,7 @@ namespace HomeGenie.Automation.Scripting
 
         public UdpClientHelper()
         {
-            udpClient = new UDPClient();
+            udpClient = new UdpClient();
         }
 
         /// <summary>

@@ -1,138 +1,393 @@
-﻿HG.WebApp.Scheduler = HG.WebApp.Scheduler || {};
-HG.WebApp.Scheduler._ScheduleList = {};
-HG.WebApp.Scheduler._CurrentEventName = "";
-HG.WebApp.Scheduler._CurrentEventIndex = -1;
+﻿HG.WebApp.Scheduler = HG.WebApp.Scheduler || new function () { var $$ = this;
 
-HG.WebApp.Scheduler.InitializePage = function () {
+    $$.PageId = 'page_configure_schedulerservice';
+    $$._ScheduleList = {};
+    $$._CurrentEventName = "";
+    $$._CurrentEventIndex = -1;
+    $$._CurrentDate = new Date();
+    $$._UpdateTimeout = null;
 
-    $('#schedulerservice_item_edit').on('popupbeforeposition', function (event) {
-        HG.WebApp.Scheduler.RefreshEventDetails();
-    });
-    //
-    $('#scheduleritem_update_button').bind('click', function (event) {
-        var name = $('#schedulerservice_item_name').val();
-        var expr = $('#schedulerservice_item_cronexp').val();
-        var prid = $('#schedulerservice_item_programid').val();
-        HG.Automation.Scheduling.Update(name, expr, prid, function () {
-            HG.WebApp.Scheduler.LoadScheduling();
+    $$.InitializePage = function () {
+        var page = $('#' + $$.PageId);
+        page.on('pagebeforeshow', function (e) {
+            $$._CurrentDate = new Date(); // set today as initial date
+            $$.editorContainer.hide();
+            $$.calendarContainer.hide();
+            setTimeout(function(){
+                $$.LoadScheduling($$.showCalendar);
+            }, 500);
         });
-    });
-    //
-    $('#scheduleritem_delete_button').bind('click', function (event) {
-        var name = $('#schedulerservice_item_name').val();
-        HG.Automation.Scheduling.Delete(name, function () {
-            HG.WebApp.Scheduler.LoadScheduling();
+
+        $$.datePicker = page.find('[data-ui-field="calendar-date"]').datebox({
+            mode: "calbox",
+            useLang: HG.WebApp.Utility.GetDateBoxLocale(),
+            calShowWeek: true,
+            //useInline: true,
+            //hideContainer: true,
+            hideInput: true,
+            //useFocus: false,
+            useButton: false,
+            useClearButton: false,
+            useSetButton: true,
+            useHeader: true,
+            overrideCalHeaderFormat: '%B %Y',
+            overrideDateFormat: '%Y-%m-%d',
+            defaultValue: '12/02/73'
+        }).on('change', function(){
+            $$._CurrentDate = $$.datePicker.datebox('getTheDate');
+            $$.RefreshOccursTable();
         });
-        HG.WebApp.Scheduler._CurrentEventName = "";
-        HG.WebApp.Scheduler._CurrentEventIndex = -1;
-    });
-    //
-    $('#scheduleritem_add_button').bind('click', function (event) {
-        HG.WebApp.Scheduler._CurrentEventName = "";
-        HG.WebApp.Scheduler._CurrentEventIndex = -1;
-    });
 
-};
+        $$.displayDate = page.find('[data-ui-field="display-date"]');
+        page.find('[data-ui-field="calendar-title"]').on('click', function(){
+            $$.datePicker.datebox('open');
+        });
 
-HG.WebApp.Scheduler.GetItemMarkup = function (schedule) {
-    var displayName = schedule.Name;
-    if (displayName.indexOf('.') > 0)
-        displayName = displayName.substring(displayName.indexOf('.') + 1);
-    var item = '<li data-icon="' + (schedule.IsEnabled ? 'check' : 'alert') + '" data-schedule-name="' + schedule.Name + '"  data-schedule-index="' + i + '">';
-    item += '<a href="#schedulerservice_item_edit" data-rel="popup" data-position-to="window" data-transition="pop">';
-    //
-    //            var triggertime = '';
-    //            if (progrm.TriggerTime != null) {
-    //                var triggerts = moment(progrm.TriggerTime);
-    //                triggertime = triggerts.format('L LT');
-    //            }
-    //
-    item += '	<p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
-    item += '	<h3 class="ui-li-heading">' + displayName + '</h3>';
-    item += '	<p class="ui-li-desc">' + schedule.CronExpression + ' &nbsp;</p>';
-    item += '</a>';
-    item += '<a href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
-    //
-    item += '</li>';
-    return item;
-}
+        $$.editorContainer = page.find('[data-ui-field="editor-container"]');
+        $$.calendarContainer = page.find('[data-ui-field="calendar-container"]');
+        $$.editorButton = page.find('[data-ui-field="edit-button"]').on('click', function(){
+            $$.showEditor();
+        });
+        $$.calendarButton = page.find('[data-ui-field="calendar-button"]').on('click', function(){
+            $$.showCalendar();
+        });
+        page.find('[data-ui-field="add-button"]').on('click', function(){
+            var _btn = $(this);
+            $$._CurrentEventName = "";
+            $$._CurrentEventIndex = -1;
+            $$.EditCurrentItem();
+            setTimeout(function() {
+                _btn.removeClass('ui-btn-active');
+            }, 200);
+        });
+    };
 
-HG.WebApp.Scheduler.LoadScheduling = function (callback) {
-    $.mobile.loading('show');
-    HG.Automation.Scheduling.List(function (data) {
-        HG.WebApp.Scheduler._ScheduleList = data;
-        //
-        $.mobile.loading('hide');
-        //
-        $('#configure_schedulerservice_list').empty();
-        $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_scheduler_events') + '</li>');
-        //
-        // element containing '.' in the name are grouped in own sections
-        for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++) {
-            var schedule = HG.WebApp.Scheduler._ScheduleList[i];
-            if (schedule.Name.indexOf('.') < 0) {
-                var item = HG.WebApp.Scheduler.GetItemMarkup(schedule);
-                $('#configure_schedulerservice_list').append(item);
-            }
-        }
-        var currentGroup = '';
-        for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++) {
-            var schedule = HG.WebApp.Scheduler._ScheduleList[i];
-            if (schedule.Name.indexOf('.') > 0) {
-                var scheduleGroup = schedule.Name.substring(0, schedule.Name.indexOf('.'));
-                var item = HG.WebApp.Scheduler.GetItemMarkup(schedule);
+    $$.showCalendar = function() {
+        $$.calendarButton.hide();
+        $$.editorButton.show();
+        $$.editorContainer.fadeOut(200,function(){
+            $$.calendarContainer.fadeIn(200);
+        });
+        setTimeout($$.RefreshOccursTable, 500);
+    };
+
+    $$.showEditor = function() {
+        $$.editorButton.hide();
+        $$.calendarButton.show();
+        $$.calendarContainer.fadeOut(200,function(){
+            $$.editorContainer.fadeIn(200);
+        });
+        setTimeout($$.LoadScheduling, 500);
+    };
+
+    $$.GetItemMarkup = function (schedule) {
+        var displayName = schedule.Name;
+        if (displayName.indexOf('.') > 0)
+            displayName = displayName.substring(displayName.indexOf('.') + 1);
+        var item = '<li  data-icon="false" data-schedule-name="' + schedule.Name + '" data-schedule-index="' + i + '">';
+        item += '<a href="#" data-ui-ref="edit-btn">';
+        //item += '   <p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
+        item += '   <h3 class="ui-li-heading">' + displayName + '</h3>';
+        item += '   <p class="ui-li-desc">' + (schedule.Description != null ? schedule.Description : '') + ' <span style="opacity:0.5">(' + schedule.CronExpression + ')</span></p>';
+        item += '</a>';
+        item += '<div class="ui-grid-a" style="position:absolute;right:0;top:0;height:100%;">';
+        item += '<div class="ui-block-a"><a data-ui-field="btn_delete" title="Delete" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-list-btn-option"></a></div>';
+        item += '<div class="ui-block-b"><a data-ui-field="btn_toggle" title="Disable" class="ui-btn ui-icon-' + (schedule.IsEnabled ? 'check' : 'alert') + ' ui-btn-icon-notext ui-list-btn-option">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a></div>';
+        item += '</div>';
+        item += '</li>';
+        return item;
+    }
+
+    $$.RefreshOccursTable = function() {
+        var page = $('#' + $$.PageId);
+        var occursList = page.find('[data-ui-field="occurs-table"]');
+        var dd = moment($$._CurrentDate).format('LL');
+        $$.displayDate.html(dd);
+        $.mobile.loading('show');
+        var startDate = new Date($$._CurrentDate.getTime());
+        startDate.setHours(0,0,0,0);
+        HG.Control.Modules.ApiCall('HomeAutomation.HomeGenie', 'Automation', 'Scheduling.ListOccurrences', (24*1).toString()+'/'+startDate.getTime(), function(schedules){
+            occursList.empty();
+            var d = new Date(); d.setSeconds(0);
+            var occurrences = [];
+            var currentGroup = '';
+            $.each(schedules, function(k,v){
+              var n = v.Name;
+              if (n.indexOf('.') > 0) {
+                var scheduleGroup = n.substring(0, n.indexOf('.'));
                 if (scheduleGroup != currentGroup) {
-                    $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup + '</li>');
+                    occurrences.push({ title: scheduleGroup.replace(/\./g, ' / '), separator: true });
                     currentGroup = scheduleGroup;
                 }
-                $('#configure_schedulerservice_list').append(item);
+                n = n.substring(n.indexOf('.')+1);
+              }
+              var entry = { name: v.Name, title: n, occurs: [] };
+              $.each($$._ScheduleList, function(sk,sv){
+                if (sv.Name == v.Name) {
+                    entry.index = sk;
+                    entry.description = sv.Description;
+                    entry.boundModules = sv.BoundModules.length;
+                    entry.hasScript = (typeof sv.Script != 'undefined' && sv.Script != null && sv.Script.trim() != '');
+                    entry.prevOccurrence = 0;
+                    entry.nextOccurrence = 0;
+                }
+              });
+              var prev = 0, start = 0;
+              $.each(v.Occurrences, function(kk,vv){
+                if (prev == 0) prev = start = end = vv;
+                if (vv - prev > 60000) {
+                  entry.occurs.push({ from: start, to: end });
+                  prev = start = vv;
+                } else {
+                    prev = vv;
+                }
+                end = vv;
+                if (entry.prevOccurrence < vv && vv <= d.getTime())
+                    entry.prevOccurrence = vv;
+                if (entry.nextOccurrence == 0 && vv > d.getTime())
+                    entry.nextOccurrence = vv;
+              });
+              entry.occurs.push({ from: start, to: end });
+              occurrences.push(entry);
+            });
+            var w = $(window).width()-32-50, h = 10;
+            $.each(occurrences, function(k,v){
+                if (v.separator) {
+                    occursList.append('<div align="center" style="margin-top:1em;padding:0.25em;width:auto;font-size:16pt">'+v.title+'</div>');
+                    return true;
+                }
+
+                var timeBarDiv = $('<div/>');
+                timeBarDiv.css('cursor', 'pointer');
+                timeBarDiv.addClass('hg-scheduler-table-row');
+                timeBarDiv.on('click',function(){
+                    $$._CurrentEventName = v.name;
+                    $$._CurrentEventIndex = v.index;
+                    $$.EditCurrentItem();
+                });
+                var indicators = '';
+                if (v.boundModules > 0)
+                    indicators += '<i title="bound modules" class="fa fa-check-square"></i> '+v.boundModules;
+                if (v.hasScript > 0)
+                    indicators += '&nbsp;&nbsp;&nbsp;<i title="runs script" class="fa fa-code"></i>';
+                var timeBar = Raphael(timeBarDiv[0], w, h*2.5);
+                timeBarDiv.append('<i class="fa fa-clock-o" aria-hidden="true" style="font-size:20pt;margin-left:8px;opacity:0.65;vertical-align:top;"></i>');
+                timeBar.rect(0, 0, w, h*2.5).attr({
+                    fill: "rgb(90, 90, 90)", 
+                    stroke: "rgb(0,0,0)",
+                    "stroke-width": 1
+                });
+                occursList.append('<div class="ui-grid-a"><div class="ui-block-a"><h3 style="text-align:left;margin:0;margin-top:0.5em;opacity:0.75">'+v.title+'</h3></div><div class="ui-block-b" align="right" style="padding-right:48px;padding-top:20px">'+indicators+'</div></div>');
+                occursList.append(timeBarDiv);
+
+                $.each(v.occurs, function(kk,vv){
+                    var df = sd = new Date(vv.from);
+                    sd.setHours(0,0,0,0);
+                    vv.from -= sd.getTime();
+                    vv.to -= sd.getTime();
+                    var sx1 = Math.round(vv.from/(1440*60000)*w), sx2 = Math.round(vv.to/(1440*60000)*w)-sx1;
+                    timeBar.rect(sx1-1, 0, sx2+1, h+1).attr({
+                        fill: "rgba(255, 255, 70, 85)", 
+                        stroke: "rgba(255,255,255, 70)",
+                        "stroke-width": 1
+                    });
+                });    
+
+
+                for (var t = 0; t < 24; t++) {
+                    timeBar.text(t*(w/24)+(w/48), 18, t.toString()).attr({fill:'white'});
+                    timeBar.rect(t*(w/24), (h*1.25-1), (w/24), (h*1.25)+1).attr({
+                        stroke: "rgba(255, 255, 255, 0.2)", 
+                        "stroke-width": 1
+                    });
+                }
+
+                d = new Date(); d.setSeconds(0);
+
+                // build basic tooltip data
+                var desc = '';
+                if (typeof v.description != 'undefined' && v.description != null && v.description.trim() != '')
+                    desc += v.description;
+                desc += '<p align="center"><strong>';
+                desc += moment($$._CurrentDate).format('LL');
+                desc += '</strong></p>';
+
+                // tooltip: previous/next occurrence text
+                if (v.prevOccurrence > 0 || v.nextOccurrence > 0) {
+                    if (v.prevOccurrence > 0) {
+                        desc += 'Last &nbsp;&nbsp;&nbsp;';
+                        desc += '<strong>'+moment(v.prevOccurrence).format('LT')+'</strong>&nbsp;&nbsp;('+moment(v.prevOccurrence).from(new Date())+')';
+                        desc += '<br/>';
+                    }
+                    if (v.nextOccurrence > 0) {
+                        desc += 'Next &nbsp;&nbsp;&nbsp;';
+                        desc += '<strong>'+moment(v.nextOccurrence).format('LT')+'</strong>&nbsp;&nbsp;('+moment(v.nextOccurrence).from(new Date())+')';
+                    }
+                }
+
+                var isToday = d.toDateString() == $$._CurrentDate.toDateString();
+                if (isToday) {
+                    d = d.getTime();
+                    var d2 = new Date(); d2.setHours(0,0,0,0);
+                    d -= d2.getTime();
+                    var bw = Math.round(d/(1440*60000)*w);
+                    timeBar.rect(bw+2, 1, w-bw-2, (h*2.5)-2).attr({
+                        fill: "rgba(0, 0, 0, 0.35)", 
+                        stroke: "rgba(0,0,0, 70)",
+                        "stroke-width": 0.5
+                    });
+                    timeBar.rect(bw-1, 0, 2, h*2.5).attr({
+                        fill: "rgba(80, 255, 80, 0.8)", 
+                        stroke: "rgba(0,0,0, 70)",
+                        "stroke-width": 0.5
+                    });
+                } else {
+                    var d2 = new Date(); d2.setHours(0,0,0,0);
+                    if ($$._CurrentDate.getTime() > d2.getTime()) {
+                        timeBar.rect(0, 1, w, (h*2.5)-2).attr({
+                            fill: "rgba(0, 0, 0, 0.35)", 
+                            stroke: "rgba(0,0,0, 70)",
+                            "stroke-width": 0.5
+                        });
+                    }
+                }
+
+                timeBarDiv.on('mousemove',function(e,d){
+                    if ($(e.target).is('rect')) {
+                        
+                        var md = new Date($$._CurrentDate.getTime());
+                        md.setHours(0,0,0,0);
+                        md = new Date(md.getTime()+(e.offsetX / w * 1440 * 60000)-60000);
+                        $$._CurrentDate = md;
+
+                    }
+                });
+
+                // attach tooltip
+                timeBarDiv.qtip({
+                  content: {
+                    text: desc,
+                    title: {
+                        text: '<strong>'+v.name+'</strong>',            
+                        //button: 'close'
+                    }
+                  },
+                  show: { delay: 350, solo: true, effect: function(offset) {
+                    $(this).slideDown(100);
+                  } },
+                  hide: { inactive: 10000 },
+                  style: { 
+                    classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap',
+                    width: 400, 
+                    name: 'dark',
+                    padding: 0
+                  },
+                  position: { my: 'bottom center', at: 'top center' }
+                });
+
+                timeBar.rect(0, 0, w, h*2.5).attr({
+                    stroke: "rgba(255, 255, 255, 0.75)", 
+                    "stroke-width": 1
+                });
+            });
+            $.mobile.loading('hide');
+            // auto-refresh every minute
+            if ($$._UpdateTimeout != null)
+                clearTimeout($$._UpdateTimeout);
+            if ($.mobile.activePage.attr("id") == $$.PageId)
+                $$._UpdateTimeout = setTimeout($$.RefreshOccursTable, 60000);
+        });
+
+    }
+
+    $$.LoadScheduling = function (callback) {
+        $.mobile.loading('show');
+        HG.Automation.Scheduling.List(function (data) {
+            $$._ScheduleList = data;
+            $.mobile.loading('hide');
+            //
+            $('#configure_schedulerservice_list').empty();
+            $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_scheduler_events') + '</li>');
+            //
+            // element containing '.' in the name are grouped into own sections
+            for (i = 0; i < $$._ScheduleList.length; i++) {
+                var schedule = $$._ScheduleList[i];
+                if (schedule.Name.indexOf('.') < 0) {
+                    var item = $$.GetItemMarkup(schedule);
+                    $('#configure_schedulerservice_list').append(item);
+                }
             }
+            var currentGroup = '';
+            for (i = 0; i < $$._ScheduleList.length; i++) {
+                var schedule = $$._ScheduleList[i];
+                if (schedule.Name.indexOf('.') > 0) {
+                    var scheduleGroup = schedule.Name.substring(0, schedule.Name.indexOf('.'));
+                    var item = $$.GetItemMarkup(schedule);
+                    if (scheduleGroup != currentGroup) {
+                        $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup.replace(/\./g, ' / ') + '</li>');
+                        currentGroup = scheduleGroup;
+                    }
+                    $('#configure_schedulerservice_list').append(item);
+                }
+            }
+            $('#configure_schedulerservice_list').listview();
+            // set on click handler for list items
+            $('#configure_schedulerservice_list').find("li").each(function (index) {
+                var item = $(this);
+                item.find('[data-ui-field=btn_delete]').on('click', function () {
+                    var that = $(this);
+                    HG.WebApp.Utility.ConfirmPopup('Delete item', 'This action cannot be undone!', function(proceed){
+                        if (proceed) {
+                            var name = that.parent().parent().parent().attr('data-schedule-name');
+                            HG.Automation.Scheduling.Delete(name, function () {
+                                $$.LoadScheduling();
+                            });
+                            $$._CurrentEventName = "";
+                            $$._CurrentEventIndex = -1;
+                        }
+                    });
+                });
+                item.find('[data-ui-field=btn_toggle]').on('click', function () {
+                    $$.ToggleScheduleIsEnabled($(this).parent().parent().parent().attr('data-schedule-index'));
+                });
+            });
+            $('#configure_schedulerservice_list').listview('refresh');
+            //
+            $('#configure_schedulerservice_list li a[data-ui-ref="edit-btn"]').bind('click', function() {
+                $$._CurrentEventName = $(this).parent().attr('data-schedule-name');
+                $$._CurrentEventIndex = $(this).parent().attr('data-schedule-index');
+                $$.EditCurrentItem();
+            });
+            //
+            if (callback) callback();
+        });
+    };
+
+    $$.EditCurrentItem = function() {
+        HG.Ui.Popup.CronWizard.open($$._CurrentEventName);
+        HG.Ui.Popup.CronWizard.onChange = function(item) {
+            HG.Automation.Scheduling.UpdateItem(item.Name, item, function () {
+                if ($$._CurrentEventName == '')
+                    $$.showEditor();
+                else
+                    $$.LoadScheduling($$.RefreshOccursTable);
+            });
+        };
+    };
+
+    $$.ToggleScheduleIsEnabled = function (index) {
+        var item = $$._ScheduleList[index];
+        $.mobile.loading('show');
+        if (item.IsEnabled) {
+            HG.Automation.Scheduling.Disable(item.Name, function () {
+                $$.LoadScheduling();
+            });
         }
-        $('#configure_schedulerservice_list').listview();
-        $('#configure_schedulerservice_list').listview('refresh');
-        //
-        $("#configure_schedulerservice_list li").bind("click", function () {
-            HG.WebApp.Scheduler._CurrentEventName = $(this).attr('data-schedule-name');
-            HG.WebApp.Scheduler._CurrentEventIndex = $(this).attr('data-schedule-index')
-        });
-        //
-        if (callback) callback();
-    });
-};
+        else {
+            HG.Automation.Scheduling.Enable(item.Name, function () {
+                $$.LoadScheduling();
+            });
+        }
+    };
 
-HG.WebApp.Scheduler.RefreshEventDetails = function () {
-
-    var schedule = null;
-    var name = '';
-    var expr = '';
-    var prid = '';
-    if (HG.WebApp.Scheduler._CurrentEventIndex != -1) {
-        schedule = HG.WebApp.Scheduler._ScheduleList[HG.WebApp.Scheduler._CurrentEventIndex];
-        name = schedule.Name;
-        expr = schedule.CronExpression;
-        prid = schedule.ProgramId;
-        $('#schedulerservice_item_name').addClass('ui-disabled');
-    }
-    else {
-        $('#schedulerservice_item_name').removeClass('ui-disabled');
-    }
-    $('#schedulerservice_item_name').val(name);
-    $('#schedulerservice_item_cronexp').val(expr);
-    $('#schedulerservice_item_programid').val(prid);
-
-};
-
-HG.WebApp.Scheduler.ToggleScheduleIsEnabled = function (index) {
-    var item = HG.WebApp.Scheduler._ScheduleList[index];
-    $.mobile.loading('show');
-    if (item.IsEnabled) {
-        HG.Automation.Scheduling.Disable(item.Name, function () {
-            HG.WebApp.Scheduler.LoadScheduling();
-        });
-    }
-    else {
-        HG.Automation.Scheduling.Enable(item.Name, function () {
-            HG.WebApp.Scheduler.LoadScheduling();
-        });
-    }
 };

@@ -1242,7 +1242,7 @@
 
                     // first check global format
                     if (opts.timeformat != null)
-                        return $.plot.formatDate(d, opts.timeformat, opts.monthNames);
+                        return $.plot.formatDate(d, opts.timeformat, opts.monthNames, opts.useLocalTime);
                     
                     var t = axis.tickSize[0] * timeUnitSize[axis.tickSize[1]];
                     var span = axis.max - axis.min;
@@ -1267,7 +1267,7 @@
                     else
                         fmt = "%y";
                     
-                    return $.plot.formatDate(d, fmt, opts.monthNames);
+                    return $.plot.formatDate(d, fmt, opts.monthNames, opts.useLocalTime);
                 };
             }
             else {
@@ -2536,7 +2536,7 @@
     $.plot.plugins = [];
 
     // returns a string with the date d formatted according to fmt
-    $.plot.formatDate = function(d, fmt, monthNames) {
+    $.plot.formatDate = function(d, fmt, monthNames, useLocalTime) {
         var leftPad = function(n) {
             n = "" + n;
             return n.length == 1 ? "0" + n : n;
@@ -2544,7 +2544,7 @@
         
         var r = [];
         var escape = false, padNext = false;
-        var hours = d.getUTCHours();
+        var hours = useLocalTime ? d.getHours() : d.getUTCHours();
         var isAM = hours < 12;
         if (monthNames == null)
             monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -2563,12 +2563,12 @@
                 switch (c) {
                 case 'h': c = "" + hours; break;
                 case 'H': c = leftPad(hours); break;
-                case 'M': c = leftPad(d.getUTCMinutes()); break;
-                case 'S': c = leftPad(d.getUTCSeconds()); break;
-                case 'd': c = "" + d.getUTCDate(); break;
-                case 'm': c = "" + (d.getUTCMonth() + 1); break;
-                case 'y': c = "" + d.getUTCFullYear(); break;
-                case 'b': c = "" + monthNames[d.getUTCMonth()]; break;
+                case 'M': c = leftPad(useLocalTime ? d.getMinutes() : d.getUTCMinutes()); break;
+                case 'S': c = leftPad(useLocalTime ? d.getSeconds() : d.getUTCSeconds()); break;
+                case 'd': c = "" + (useLocalTime ? d.getDate() : d.getUTCDate()); break;
+                case 'm': c = "" + ((useLocalTime ? d.getMonth() : d.getUTCMonth()) + 1); break;
+                case 'y': c = "" + (useLocalTime ? d.getFullYear() : d.getUTCFullYear()); break;
+                case 'b': c = "" + monthNames[useLocalTime ? d.getMonth() : d.getUTCMonth()]; break;
                 case 'p': c = (isAM) ? ("" + "am") : ("" + "pm"); break;
                 case 'P': c = (isAM) ? ("" + "AM") : ("" + "PM"); break;
                 case '0': c = ""; padNext = true; break;

@@ -1,30 +1,21 @@
-; This examples demonstrates how libusb's drivers
-; can be installed automatically along with your application using an installer.
-;
 ; Requirements: Inno Setup (http://www.jrsoftware.org/isdl.php)
-;
-; To use this script, do the following:
-; - generate a setup package using inf-wizard and save the generated files to
-;   "this folder\driver"
-; - in this script replace <your_inf_file.inf> with the name of your .inf file
-; - customize other settings (strings)
 ; - open this script with Inno Setup
 ; - compile and run
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.00 beta (r476)
-AppPublisher=GenieLabs
-AppPublisherURL=http://www.homegenie.it
-AppVersion=1.00 beta (r476)
+AppVerName=HomeGenie {%APPVEYOR_REPO_TAG_NAME|1.2-dev}
+AppPublisher=G-Labs
+AppPublisherURL=https://glabs.it
+AppVersion={%APPVEYOR_REPO_TAG_NAME|1.2-dev}
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
 SolidCompression=yes
 ; Win2000 or higher
 MinVersion=5.0
-LicenseFile=..\..\LICENCE.TXT
-;InfoAfterFile=..\..\README.TXT
+LicenseFile=..\..\HomeGenie\bin\Debug\LICENCE.TXT
+;InfoAfterFile=..\..\HomeGenie\bin\Debug\README.TXT
 
 
 
@@ -38,7 +29,7 @@ PrivilegesRequired=admin
 ; registry. On all other architectures it will install in "32-bit mode".
 ArchitecturesInstallIn64BitMode=x64 ia64
 ;WindowVisible=True
-AppCopyright=(c) 2011-2014 G-Labs - info@homegenie.it
+AppCopyright=(c) 2011-2018 G-Labs - info@homegenie.it
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -180,8 +171,8 @@ begin
       Result := False; //when older version present and not uninstalled
   end;
   
-  if not IsDotNetDetected('v4\Full', 0) then begin
-     MsgBox('HomeGenie requires Microsoft .NET Framework 4.0.'#13#13
+  if not IsDotNetDetected('v4.5', 0) then begin
+     MsgBox('HomeGenie requires Microsoft .NET Framework >= 4.5.'#13#13
          'Please use Windows Update to install this version,'#13
          'and then re-run the HomeGenie setup program.', mbInformation, MB_OK);
      Result := false;
@@ -193,25 +184,11 @@ begin
 end;
 
 [Files]
-; copy your libusb-win32 setup package to the App folder
-Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
-;Source: "..\..\Drivers\LibUSB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
-Source: "..\..\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs
-;Source: "C:\Users\Gene\Documents\Progetti\Personali\HomeGenie\Drivers\USB_ActiveHome_Interface\dpinst32.exe"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
-;Source: "C:\Users\Gene\Documents\Progetti\Personali\HomeGenie\Drivers\USB_ActiveHome_Interface\dpinst64.exe"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
-;Source: "C:\Users\Gene\Documents\Progetti\Personali\HomeGenie\Drivers\USB_ActiveHome_Interface\dpscat.exe"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
-;Source: "C:\Users\Gene\Documents\Progetti\Personali\HomeGenie\Drivers\USB_ActiveHome_Interface\InstallDriver.exe"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
+;Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
+Source: ".\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_CM15"; Flags: ignoreversion recursesubdirs
+Source: ".\Drivers\USB_Transceiver\*"; DestDir: "{app}\Drivers\LibUsb_CM19"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-;Source: "..\..\HomeGenie\System.Data.SQLite_x64_static.dll"; DestDir: "{app}"; DestName: "System.Data.SQLite.dll"; Flags: ignoreversion; Check: Is64BitInstallMode
-;Source: "..\..\HomeGenie\System.Data.SQLite.dll"; DestDir: "{app}"; DestName: "System.Data.SQLite.dll"; Flags: ignoreversion; Check: not Is64BitInstallMode
-
-; also copy the native (32bit or 64 bit) libusb0.dll to the
-; system folder so that rundll32.exe will find it
-;Source: "..\..\Drivers\LibUSB_ActiveHome_Interface\x86\libusb0_x86.dll"; DestDir: "{sys}"; DestName: "libusb0.dll"; Flags: restartreplace uninsneveruninstall replacesameversion; Check: IsX86
-;Source: "..\..\Drivers\LibUSB_ActiveHome_Interface\amd64\libusb0.dll"; DestDir: "{sys}"; Flags: restartreplace uninsneveruninstall replacesameversion; Check: IsX64
-;Source: "..\..\Drivers\LibUSB_ActiveHome_Interface\ia64\libusb0.dll"; DestDir: "{sys}"; Flags: restartreplace uninsneveruninstall replacesameversion; Check: IsI64
 Source: "..\..\HomeGenie\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
-;Source: "..\..\HomeGenie\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion isreadme replacesameversion
 Source: "..\..\HomeGenie\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
 
 [InstallDelete]
@@ -222,18 +199,16 @@ Type: files; Name: "{app}\SQLite.Interop.dll";
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Icons]
-Name: "{group}\HomeGenie 1.00 beta (r476)"; Filename: "{app}\HomeGenieManager.exe"
-Name: "{group}\Uninstall HomeGenie 1.00 beta (r476)"; Filename: "{uninstallexe}"
+Name: "{group}\HomeGenie {%APPVEYOR_REPO_TAG_NAME|1.2-dev}"; Filename: "{app}\HomeGenieManager.exe"
+Name: "{group}\Uninstall HomeGenie {%APPVEYOR_REPO_TAG_NAME|1.2-dev}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\HomeGenie"; Filename: "{app}\HomeGenieManager.exe"
 
 [Run]
-; touch the HID .inf file to break its digital signature
-; this is only required if the device is a mouse or a keyboard !!
 ;Filename: "rundll32"; Parameters: "libusb0.dll,usb_touch_inf_file_np_rundll {win}\inf\input.inf"
 
-; invoke libusb's DLL to install the .inf file
-;Filename: "rundll32"; Parameters: "libusb0.dll,usb_install_driver_np_rundll {app}\Drivers\LibUsb_MarmitekCM15Pro\X10_USB_ActiveHome_(ACPI-compliant).inf"; StatusMsg: "Installing driver (this may take a few seconds) ..."
-Filename: "{app}\Drivers\LibUsb_MarmitekCM15Pro\InstallDriver.exe"; WorkingDir: "{app}"; Flags: hidewizard; Description: "X10 driver install"; StatusMsg: "Installing X10 driver"
+; Install drivers and service, then start it
+Filename: "{app}\Drivers\LibUsb_CM15\InstallDriver.exe"; WorkingDir: "{app}"; Flags: hidewizard; Description: "X10 CM15 driver"; StatusMsg: "Installing X10 CM15 driver"
+Filename: "{app}\Drivers\LibUsb_CM19\InstallDriver.exe"; WorkingDir: "{app}"; Flags: hidewizard; Description: "X10 CM19 driver"; StatusMsg: "Installing X10 CM19 driver"
 Filename: "{app}\HomeGenieService.exe"; Parameters: "--install"; WorkingDir: "{app}"; Flags: waituntilterminated runhidden; StatusMsg: "Registering HomeGenie Windows Service..."
 Filename: "net.exe"; Parameters: "start HomeGenieService"; Flags: waituntilterminated runhidden; Description: "Starting HomeGenie service"; StatusMsg: "Starting HomeGenie Service..."
 Filename: "{app}\HomeGenieManager.exe"; WorkingDir: "{app}"; Flags: nowait shellexec runminimized
@@ -241,3 +216,4 @@ Filename: "{app}\HomeGenieManager.exe"; WorkingDir: "{app}"; Flags: nowait shell
 [UninstallRun]
 Filename: net.exe; Parameters: "stop HomeGenieService"; StatusMsg: "Stopping HomeGenie Service..."; Flags: waituntilterminated runhidden
 Filename: "{app}\HomeGenieService.exe"; Parameters: "--uninstall"; StatusMsg: "Unregistering HomeGenie Service..."; WorkingDir: "{app}"; Flags: waituntilterminated runhidden
+

@@ -1,28 +1,61 @@
-﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
-    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
-        <span data-ui-field="name" style="font-weight:bold">Name</span><br />
-        <span data-ui-field="description">...</span>
-        <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Configuration</a>
-        <!--a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a-->
+﻿<style>
+  .blinking_alarm {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+  }
+
+  @-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+  }
+
+  @keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+  }
+</style>
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="width:320px;height:290px;position:relative;z-index:10;background:none">
+  <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.8;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
+  <div class="ui-header" style="padding-left:5px;padding-right:5px;font-weight:normal;border-top:0">
+    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/securitysystem.png" />
+    <div data-ui-field="name" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width:236px;font-size:16pt;font-weight:bold;padding:6px;float:left;">Alarm System</div>
+    <a data-ui-field="settings" data-role="button" data-icon="gear" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Configuration</a>
+  </div>
+  <div data-ui-field="status-container" align="center" style="background:rgba(100,255,100,0.45);margin:0;padding:0;margin-bottom:10px">
+    <h3 data-ui-field="description" style="padding:6px;margin:0;font-weight:bold">...</h3>
+  </div>
+  <div data-ui-field="arm_group" data-role="controlgroup" data-type="horizontal" align="center" data-mini="true">
+    <a data-ui-field="btn_armhome" href="#" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+    <a data-ui-field="btn_armaway" href="#" class="ui-btn ui-icon-lock ui-btn-icon-right">Away</a>
+  </div>
+  <div data-ui-field="disarm_group" data-role="controlgroup" data-type="horizontal" align="center" data-mini="true" style="display:none">
+    <a data-ui-field="btn_disarm" href="#" class="ui-btn ui-icon-forbidden ui-btn-icon-left">Disarm</a>
+  </div>
+  <div style="position:absolute;bottom:10px;right:5px;left:5px;height:148px;overflow-y:auto;font-size:10pt">
+    <div data-ui-field="activity-log" class="ui-grid-a" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-right:4px">
     </div>
-    <br />
-    <div class="ui-grid-a">
-        <div class="ui-block-a">
-            <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/securitysystem.png" />
-        </div>
-        <div class="ui-block-b" style="padding-top:8px;">
-            <select data-ui-field="armdisarm" data-role="slider">
-                <option value="off">
-                    Disarmed
-                </option>
-                <option value="on">
-                    Armed
-                </option>
-            </select>
-        </div>
-    </div>
-    <br />
-    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
-        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
-    </div>
+  </div>
+  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right" style="display:none">
+    <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+  </div>
 </div>

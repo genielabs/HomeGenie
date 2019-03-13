@@ -9,11 +9,11 @@
     <Modules />
   </Group>
   <Group>
-    <Name>Scenes</Name>
+    <Name>Scenarios</Name>
     <Modules />
   </Group>
   <Group>
-    <Name>Weather and Enviroment</Name>
+    <Name>Weather and Environment</Name>
     <Modules />
   </Group>
   <Group>
@@ -22,10 +22,6 @@
   </Group>
   <Group>
     <Name>Devices and Things</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>X10</Name>
     <Modules />
   </Group>
   <Group>
@@ -41,15 +37,7 @@
     <Modules />
   </Group>
   <Group>
-    <Name>Scheduling</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>Raspberry Pi</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>CubieTruck</Name>
+    <Name>Demo</Name>
     <Modules />
   </Group>
 </ArrayOfGroup>
