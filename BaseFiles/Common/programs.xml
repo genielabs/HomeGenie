@@ -546,7 +546,7 @@ Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
 Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
   dynamic data = new ExpandoObject();
   data.dt = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.dt);
-  data.update_dt = data.dt.ToLongDateString() + " " + data.dt.ToLongTimeString();
+  data.update_dt = data.dt.ToLongDateString() + " " + TimeZoneInfo.ConvertTime(data.dt, TimeZoneInfo.Local).ToLongTimeString();
   data.temperature = weatherData.main.temp.ToString();
   data.temperature_min = weatherData.main.temp_min.ToString();
   data.temperature_max = weatherData.main.temp_max.ToString();
@@ -596,12 +596,12 @@ while (Program.IsEnabled)
     {
       string webserviceurl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&amp;lang=" + language + "&amp;units=metric&amp;appid=" + apikey; 
       var weatherData = Net.WebService(webserviceurl).GetData();
+ 
+      var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset);
+      var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise);
 
-      var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset).ToShortTimeString();
-      var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise).ToShortTimeString();
-
-      Program.Parameter("Astronomy.Sunset").Value = sunset;
-      Program.Parameter("Astronomy.Sunrise").Value = sunrise;
+      Program.Parameter("Astronomy.Sunset").Value = TimeZoneInfo.ConvertTime(sunset, TimeZoneInfo.Local).ToShortTimeString();
+      Program.Parameter("Astronomy.Sunrise").Value = TimeZoneInfo.ConvertTime(sunrise, TimeZoneInfo.Local).ToShortTimeString();
 
       var data = CollectWeatherData(weatherData);
       UpdateWeatherParameters(data);
