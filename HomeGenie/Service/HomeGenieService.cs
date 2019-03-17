@@ -41,6 +41,8 @@ using HomeGenie.Automation.Scheduler;
 
 using MIG;
 using MIG.Gateways;
+using MIG.Gateways.Authentication;
+
 using NLog;
 
 namespace HomeGenie.Service
@@ -48,6 +50,12 @@ namespace HomeGenie.Service
     [Serializable]
     public class HomeGenieService
     {
+        #region Constants
+
+        public const string authenticationRealm = "HomeGenie Secure Zone";
+
+        #endregion
+        
         #region Private Fields declaration
 
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
@@ -75,7 +83,6 @@ namespace HomeGenie.Service
 
         private Handlers.Config wshConfig;
         private Handlers.Automation wshAutomation;
-        private Handlers.Interconnection wshInterconnection;
         private Handlers.Statistics wshStatistics;
 
         #endregion
@@ -309,68 +316,41 @@ namespace HomeGenie.Service
         // Public utility methods
         public string GetHttpServicePort()
         {
-            return webGateway.GetOption("Port").Value;
+            return webGateway.GetOption(WebServiceGatewayOptions.Port).Value;
         }
 
         public object InterfaceControl(MigInterfaceCommand cmd)
         {
             object response = null;
-            var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.Address);
-            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
-            if (isRemoteModule)
+            var migInterface = migService.GetInterface(cmd.Domain);
+            if (migInterface != null)
             {
                 try
                 {
-                    string domain = cmd.Domain;
-                    if (domain.StartsWith("HGIC:"))
-                        domain = domain.Substring(domain.IndexOf(".") + 1);
-                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.Address + "/" + cmd.Command + "/" + cmd.OptionsString;
-                    Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
-                    string username = webGateway.GetOption("Username").Value;
-                    string password = webGateway.GetOption("Password").Value;
-                    if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password))
-                    {
-                        netHelper.WithCredentials(username, password);
-                    }
-                    response = netHelper.GetData();
+                    response = migInterface.InterfaceControl(cmd);
                 }
                 catch (Exception ex)
                 {
-                    LogError(Domains.HomeAutomation_HomeGenie, "Interconnection:" + target.RoutingNode, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    LogError(Domains.HomeAutomation_HomeGenie, "InterfaceControl", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             }
-            else
+            //
+            // Route command to Automation Programs' Dynamic API
+            var r = ProgramDynamicApi.TryApiCall(cmd);
+            if (r != null && !String.IsNullOrWhiteSpace(r.ToString()))
             {
-                var migInterface = migService.GetInterface(cmd.Domain);
-                if (migInterface != null)
-                {
-                    try
-                    {
-                        response = migInterface.InterfaceControl(cmd);
-                    }
-                    catch (Exception ex)
-                    {
-                        LogError(Domains.HomeAutomation_HomeGenie, "InterfaceControl", ex.Message, "Exception.StackTrace", ex.StackTrace);
-                    }
-                }
-                //
-                // Route command to Automation Programs' Dynamic API
-                var r = ProgramDynamicApi.TryApiCall(cmd);
-                if (r != null && !String.IsNullOrWhiteSpace(r.ToString()))
-                {
-                    // Automation Programs can eventually override MIG response
-                    response = r;
-                }
-                //
-                // Macro Recording
-                //
-                // TODO: find a better solution for this.... 
-                // TODO: it was: migService_ServiceRequestPostProcess(this, new ProcessRequestEventArgs(cmd));
-                // TODO: !IMPORTANT!
-                if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && cmd != null && cmd.Command != null && (cmd.Command.StartsWith("Control.") || (cmd.Command.StartsWith("AvMedia.") && cmd.Command != "AvMedia.Browse" && cmd.Command != "AvMedia.GetUri")))
-                {
-                    masterControlProgram.MacroRecorder.AddCommand(cmd);
-                }
+                // Automation Programs can eventually override MIG response
+                response = r;
+            }
+            //
+            // Macro Recording
+            //
+            // TODO: find a better solution for this.... 
+            // TODO: it was: migService_ServiceRequestPostProcess(this, new ProcessRequestEventArgs(cmd));
+            // TODO: !IMPORTANT!
+            if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && cmd != null && cmd.Command != null && (cmd.Command.StartsWith("Control.") || (cmd.Command.StartsWith("AvMedia.") && cmd.Command != "AvMedia.Browse" && cmd.Command != "AvMedia.GetUri")))
+            {
+                masterControlProgram.MacroRecorder.AddCommand(cmd);
             }
             return response;
         }
@@ -602,51 +582,10 @@ namespace HomeGenie.Service
 
         private void migService_ServiceRequestPreProcess(object sender, ProcessRequestEventArgs args)
         {
-            // Currently we only support requests coming from WebServiceGateway
-            // TODO: in the future, add support for any MigGateway channel (eg. WebSocketGateway as well)
-            if (args.Request.Context.Source != ContextSource.WebServiceGateway)
+            if (args.Request.Context.Source != ContextSource.WebServiceGateway && args.Request.Context.Source != ContextSource.WebSocketGateway)
                 return;
 
             var migCommand = args.Request.Command;
-
-            #region Interconnection (Remote Node Command Routing)
-
-            Module target = systemModules.Find(m => m.Domain == migCommand.Domain && m.Address == migCommand.Address);
-            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
-            if (isRemoteModule)
-            {
-                try
-                {
-                    string domain = migCommand.Domain;
-                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
-                    string serviceurl = "http://" + target.RoutingNode + "/api/" + domain + "/" + migCommand.Address + "/" + migCommand.Command + "/" + migCommand.OptionsString;
-                    Automation.Scripting.NetHelper neth = new Automation.Scripting.NetHelper(this).WebService(serviceurl);
-                    string username = webGateway.GetOption("Username").Value;
-                    string password = webGateway.GetOption("Password").Value;
-                    if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password))
-                    {
-                        neth.WithCredentials(
-                            username,
-                            password
-                        );
-                    }
-                    neth.Call();
-                }
-                catch (Exception ex)
-                {
-                    LogError(
-                        Domains.HomeAutomation_HomeGenie,
-                        "Interconnection:" + target.RoutingNode,
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
-                return;
-            }
-
-            #endregion
-
             // HomeGenie Web Service domain API
             if (migCommand.Domain == Domains.HomeAutomation_HomeGenie)
             {
@@ -660,10 +599,6 @@ namespace HomeGenie.Service
 
                 case "Automation":
                     wshAutomation.ProcessRequest(args.Request);
-                    break;
-
-                case "Interconnection":
-                    wshInterconnection.ProcessRequest(args.Request);
                     break;
 
                 case "Statistics":
@@ -797,7 +732,7 @@ namespace HomeGenie.Service
 
             LoadConfiguration();
 
-            webGateway = (WebServiceGateway)migService.GetGateway("WebServiceGateway");
+            webGateway = (WebServiceGateway)migService.GetGateway(Gateways.WebServiceGateway);
             if (webGateway == null)
             {
                 RaiseEvent(
@@ -806,11 +741,21 @@ namespace HomeGenie.Service
                     SourceModule.Master,
                     "Configuration entry not found",
                     "Gateways",
-                    "WebServiceGateway"
+                    Gateways.WebServiceGateway
                 );
                 Program.Quit(false);
             }
-            int webPort = int.Parse(webGateway.GetOption("Port").Value);
+            // handle user authentication when Basic or Digest authentication schema is set
+            webGateway.SetOption(WebServiceGatewayOptions.AuthenticationRealm, authenticationRealm);
+            webGateway.UserAuthenticationHandler += (sender, eventArgs) =>
+            {
+                if (eventArgs.Username == systemConfiguration.HomeGenie.Username)
+                {
+                    return new User(eventArgs.Username, authenticationRealm, systemConfiguration.HomeGenie.Password);
+                }
+                return null;
+            };
+            int webPort = int.Parse(webGateway.GetOption(WebServiceGatewayOptions.Port).Value);
 
             bool started = migService.StartService();
             while (!started)
@@ -821,7 +766,7 @@ namespace HomeGenie.Service
                     SourceModule.Master,
                     "HTTP binding failed.",
                     Properties.SystemInfoHttpAddress,
-                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
+                    webGateway.GetOption(WebServiceGatewayOptions.Host).Value + ":" + webGateway.GetOption(WebServiceGatewayOptions.Port).Value
                 );
                 // Try auto-binding to another port >= 8080 (up to 8090)
                 if (webPort < 8080)
@@ -830,9 +775,10 @@ namespace HomeGenie.Service
                     webPort++;
                 if (webPort <= 8090)
                 {
-                    webGateway.SetOption("Port", webPort.ToString());
+                    webGateway.SetOption(WebServiceGatewayOptions.Port, webPort.ToString());
                     started = webGateway.Start();
                 }
+                else break;
             }
 
             if (started)
@@ -843,7 +789,7 @@ namespace HomeGenie.Service
                     SourceModule.Master,
                     "HomeGenie service ready",
                     Properties.SystemInfoHttpAddress,
-                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
+                    webGateway.GetOption(WebServiceGatewayOptions.Host).Value + ":" + webGateway.GetOption(WebServiceGatewayOptions.Port).Value
                 );
             }
             else
@@ -1000,7 +946,7 @@ namespace HomeGenie.Service
             });
         }
 
-        private double bootProgress = 0;
+        private double bootProgress;
         public double BootProgress
         {
             get { return bootProgress; }
@@ -1376,7 +1322,6 @@ namespace HomeGenie.Service
             // Setup web service handlers
             wshConfig = new Handlers.Config(this);
             wshAutomation = new Handlers.Automation(this);
-            wshInterconnection = new Handlers.Interconnection(this);
             wshStatistics = new Handlers.Statistics(this);
 
             // Initialize MigService, gateways and interfaces
@@ -1392,17 +1337,9 @@ namespace HomeGenie.Service
 
         private string GetPassPhrase()
         {
-            // Get username/password from web serivce and use as encryption key
-            var webGw = migService.GetGateway("WebServiceGateway");
-            if (webGw != null)
-            {
-                var username = webGw.GetOption("Username").Value;
-                var password = webGw.GetOption("Password").Value;
-                //return String.Format("{0}{1}homegenie", username, password);
-                return String.Format("{0}homegenie", password);
-            }
-            else
-                return "";
+            if (systemConfiguration != null && !String.IsNullOrEmpty(systemConfiguration.HomeGenie.Password))
+                return systemConfiguration.HomeGenie.Password;
+            return "homegenie";
         }
 
         private void LoadSystemConfig()
@@ -1537,8 +1474,8 @@ namespace HomeGenie.Service
                 }
             }
             string address = localIP;
-            string bindhost = webGateway.GetOption("Host").Value;
-            string bindport = webGateway.GetOption("Port").Value;
+            string bindhost = webGateway.GetOption(WebServiceGatewayOptions.Host).Value;
+            string bindport = webGateway.GetOption(WebServiceGatewayOptions.Port).Value;
             if (bindhost.Length > 1)
             {
                 address = bindhost;

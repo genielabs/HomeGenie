@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomeGenie WebSocket CLI</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flex-layout-attribute/1.0.3/css/flex-layout-attribute.min.css">
+    <script src="https://zuixjs.github.io/zuix/js/zuix.min.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+        }
+        .container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+        .header {
+            height: 24px;
+            background-color: #f2f2f2;
+            color: black;
+            font-weight: bold;
+            border-bottom: solid 2px black;
+        }
+        .output-wrapper {
+            position: relative;
+        }
+        .output {
+            font-family: monospace;
+            position: absolute;
+            top:0; left:0; right:0; bottom: 0;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        .cli {
+            border: solid 2px grey;
+            background-color: #f2f2f2;
+            min-height: 32px;
+            padding: 2px;
+        }
+    </style>
+
+    <script language="javascript" type="text/javascript">
+
+        var wsUri = 'ws://'+location.hostname+':8188/events?at=';
+        var output;
+        var websocket;
+
+        // Listen for WebSocket events
+        fetch('http://192.168.2.104:8080/api/HomeAutomation.HomeGenie/Config/WebSocket.GetToken').then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            var token = data.ResponseValue;
+            openWebSocketChannel(wsUri+token);
+        }).catch(function() {
+            // TODO: ..
+        });
+
+        function init()
+        {
+            var cli = zuix.field('input');
+            cli.on('keyup', function(e) {
+                if (e.keyCode === 13) {
+                    // Do something
+                    websocket.send(cli.value());
+                }
+            });
+        }
+
+        function openWebSocketChannel(uri)
+        {
+            websocket = new WebSocket(uri);
+            websocket.onopen = function(evt) { onOpen(evt) };
+            websocket.onclose = function(evt) { onClose(evt) };
+            websocket.onmessage = function(evt) { onMessage(evt) };
+            websocket.onerror = function(evt) { onError(evt) };
+        }
+
+        function onOpen(evt)
+        {
+            writeToScreen("CONNECTED");
+        }
+
+        function onClose(evt)
+        {
+            writeToScreen("DISCONNECTED");
+        }
+
+        function onMessage(evt)
+        {
+            var event = JSON.parse(evt.data);
+            var date = event.UnixTimestamp;
+            var domain = event.Domain;
+            var source = event.Source;
+            var description = event.Description;
+            var property = event.Property;
+            var value = event.Value;
+
+            var row = '<div layout="row center-left"><span>';
+            var d = new Date(date);
+            d = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+            row += d+' | ';
+            row += domain+' | ';
+            row += source+' | ';
+            //row += description+' | ';
+            row += property+' | ';
+            row += value;
+            row += '</span></div>';
+
+            var html = zuix.field('output').html();
+            zuix.field('output').html(html+row);
+            //writeToScreen(row);
+
+            var scroll = zuix.field('output').get();
+            scroll.scrollTop = scroll.scrollHeight;
+        }
+
+        function onError(evt)
+        {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        function writeToScreen(message)
+        {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            zuix.field('output').append(pre);
+        }
+
+        window.addEventListener("load", init, false);
+
+    </script>
+</head>
+<body>
+
+<div class="container" layout="column center-center">
+
+    <div class="header" self="top-stretch" layout="row center-center">
+        HomeGenie CLI
+    </div>
+
+    <div class="output-wrapper" self="size-x1 stretch-stretch">
+
+        <div class="output" data-ui-field="output"></div>
+
+    </div>
+
+    <div self="bottom-stretch" class="cli" layout="row stretch-stretch">
+
+        <input data-ui-field="input" type="text" placeholder="Enter API command without the '/api/' prefix, eg.: HomeAutomation.PhilipsHue/3/Control.Toggle (then press enter)">
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -114,6 +114,8 @@ namespace HomeGenie.Data
     {
         public string GUID { get; set; }
         public string SystemName { get; set; }
+        public string Username { get; set; } = "admin";
+        public string Password { get; set; } = "";
         public string Location { get; set; }
 
         public List<ModuleParameter> Settings = new List<ModuleParameter>();

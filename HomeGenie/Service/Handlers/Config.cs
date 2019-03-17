@@ -29,7 +29,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -38,8 +37,10 @@ using System.Threading;
 using System.Xml.Serialization;
 using Jint.Parser;
 using HomeGenie.Automation.Scripting;
-using MIG.Config;
 using Innovative.SolarCalculator;
+
+using MIG.Gateways;
+using MIG.Gateways.Authentication;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -437,57 +438,71 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "Security.SetPassword")
                 {
                     // password only for now, with fixed user login 'admin'
-                    string pass = migCommand.GetOption(1) == "" ? "" : MIG.Utility.Encryption.SHA1.GenerateHashString(migCommand.GetOption(1));
-                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Password", pass);
+                    string defaultUser = homegenie.SystemConfiguration.HomeGenie.Username;
+                    // WebServiceGateway requires password to be encrypted using the `Digest.CreatePassword(..)` method.
+                    // This applies both to 'Digest' and 'Basic' authentication methods.
+                    string password = migCommand.GetOption(1) == "" ? "" : Digest.CreatePassword(defaultUser, HomeGenieService.authenticationRealm, migCommand.GetOption(1));
+                    homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .SetOption(WebServiceGatewayOptions.Authentication, 
+                            String.IsNullOrEmpty(password) ? WebAuthenticationSchema.None : WebAuthenticationSchema.Digest);
+                    homegenie.SystemConfiguration.HomeGenie.Password = password;
                     homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "Security.ClearPassword")
                 {
-                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Password", "");
+                    homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .SetOption(WebServiceGatewayOptions.Authentication, WebAuthenticationSchema.None);
+                    homegenie.SystemConfiguration.HomeGenie.Password = "";
                     homegenie.SaveData();
                 }
                 else if (migCommand.GetOption(0) == "Security.HasPassword")
                 {
-                    var webGateway = homegenie.MigService.GetGateway("WebServiceGateway");
-                    var password = webGateway.GetOption("Password");
-                    request.ResponseData = new ResponseText((password == null || String.IsNullOrEmpty(password.Value) ? "0" : "1"));
+                    var password = homegenie.SystemConfiguration.HomeGenie.Password;
+                    request.ResponseData = new ResponseText(String.IsNullOrEmpty(password) ? "0" : "1");
                 }
                 else if (migCommand.GetOption(0) == "HttpService.SetWebCacheEnabled")
                 {
                     if (migCommand.GetOption(1) == "1")
                     {
-                        homegenie.MigService.GetGateway("WebServiceGateway").SetOption("EnableFileCaching", "true");
+                        homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                            .SetOption(WebServiceGatewayOptions.EnableFileCaching, "true");
                     }
                     else
                     {
-                        homegenie.MigService.GetGateway("WebServiceGateway").SetOption("EnableFileCaching", "false");
+                        homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                            .SetOption(WebServiceGatewayOptions.EnableFileCaching, "false");
                     }
                     homegenie.SystemConfiguration.Update();
                     request.ResponseData = new ResponseText("OK");
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetWebCacheEnabled")
                 {
-                    var fileCaching = homegenie.MigService.GetGateway("WebServiceGateway").GetOption("EnableFileCaching");
+                    var fileCaching = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .GetOption(WebServiceGatewayOptions.EnableFileCaching);
                     request.ResponseData = new ResponseText(fileCaching != null ? fileCaching.Value : "false");  
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetPort")
                 {
-                    var port = homegenie.MigService.GetGateway("WebServiceGateway").GetOption("Port");
+                    var port = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .GetOption(WebServiceGatewayOptions.Port);
                     request.ResponseData = new ResponseText(port != null ? port.Value : "8080");
                 }
                 else if (migCommand.GetOption(0) == "HttpService.SetPort")
                 {
-                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Port", migCommand.GetOption(1));
+                    homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .SetOption(WebServiceGatewayOptions.Port, migCommand.GetOption(1));
                     homegenie.SystemConfiguration.Update();
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetHostHeader")
                 {
-                    var host = homegenie.MigService.GetGateway("WebServiceGateway").GetOption("Host");
+                    var host = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .GetOption(WebServiceGatewayOptions.Host);
                     request.ResponseData = new ResponseText(host != null ? host.Value : "*");
                 }
                 else if (migCommand.GetOption(0) == "HttpService.SetHostHeader")
                 {
-                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Host", migCommand.GetOption(1));
+                    homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .SetOption(WebServiceGatewayOptions.Host, migCommand.GetOption(1));
                     homegenie.SystemConfiguration.Update();
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestore")
@@ -1240,6 +1255,16 @@ namespace HomeGenie.Service.Handlers
                 // TODO: uninstall a package....
                 break;
 
+            case "WebSocket.GetToken":
+                string token = "";
+                var webSocketGateway = (WebSocketGateway)homegenie.MigService.GetGateway(Gateways.WebSocketGateway);
+                if (webSocketGateway != null)
+                {
+                    // authorization token will be valid for 10 seconds
+                    token = webSocketGateway.GetAuthorizationToken(10).Value;
+                }
+                request.ResponseData = new ResponseText(token);
+                break;
             }
         }
 

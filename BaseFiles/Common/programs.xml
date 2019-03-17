@@ -297,7 +297,7 @@ Program.GoBackground();
     <ActivationTime>2019-03-08T10:02:28.457328Z</ActivationTime>
     <TriggerTime>2019-03-08T10:02:42.875538Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
@@ -700,117 +700,6 @@ Program.Run();
     <Name>Level Poll</Name>
     <Description>Periodically query lights and switches level.</Description>
     <Group>Z-Wave</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
-  .AddOption("CellUsername", "", "2. Username", "text")
-  .AddOption("CellPassword", "", "3. Password", "text")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-  var celladdress  = Program.Option("CellAddress").Value;
-  var cellusername = Program.Option("CellUsername").Value;
-  var cellpassword = Program.Option("CellPassword").Value;
-  // ROUTE IR/RF EVENT TO REMOTE HG CELL
-  if (!celladdress.Contains("?") &amp;&amp; property.Name == "Receiver.RawData")
-  {
-    Net
-      .WithCredentials(cellusername, cellpassword)
-      .SignalModuleEvent(celladdress, module, property);
-  }
-  // returning true, will route event to other listeners
-  return true;  
-});
-//
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>73</Address>
-    <Name>IR/RF remote control events forwarding</Name>
-    <Description>Forwards received IR/RF remote input to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
-  .AddOption("CellUsername", "", "2. Username", "text")
-  .AddOption("CellPassword", "", "3. Password", "text")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-  var celladdress  = Program.Option("CellAddress").Value;
-  var cellusername = Program.Option("CellUsername").Value;
-  var cellpassword = Program.Option("CellPassword").Value;
-  // ROUTE IR/RF EVENT TO REMOTE HG CELL
-  if (!celladdress.Contains("?") &amp;&amp; property.Name == "Meter.Watts")
-  {
-    Net
-      .WithCredentials(cellusername, cellpassword)
-      .SignalModuleEvent(celladdress, module, property);
-  }
-  // returning true, will route event to other listeners
-  return true;
-});
-//
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>74</Address>
-    <Name>Meter.Watts events forwarding</Name>
-    <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
-  .AddOption("CellUsername", "", "2. Username", "text")
-  .AddOption("CellPassword", "", "3. Password", "text")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-  var celladdress  = Program.Option("CellAddress").Value;
-  var cellusername = Program.Option("CellUsername").Value;
-  var cellpassword = Program.Option("CellPassword").Value;
-  // ROUTE METERING EVENT TO REMOTE HG CELL
-  if (!celladdress.Contains("?") &amp;&amp; property.Name.StartsWith("Status."))
-  {
-    Net
-      .WithCredentials(cellusername, cellpassword)
-      .SignalModuleEvent(celladdress, module, property);
-  }
-  // returning true, will route event to other listeners
-  return true;
-});
-//
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>75</Address>
-    <Name>Status.Level events forwarding</Name>
-    <Description>Forwards module Status.* events to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <ActivationTime xsi:nil="true" />
@@ -1795,42 +1684,6 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <TriggerTime>2019-03-08T10:02:42.999737Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text")
-  .AddOption("CellUsername", "", "2. Username", "text")
-  .AddOption("CellPassword", "", "3. Password", "text")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-  var celladdress  = Program.Option("CellAddress").Value;
-  var cellusername = Program.Option("CellUsername").Value;
-  var cellpassword = Program.Option("CellPassword").Value;
-  // ROUTE METERING EVENT TO REMOTE HG CELL
-  if (!celladdress.Contains("?") &amp;&amp; property.Name.StartsWith("Sensor."))
-  {
-    Net
-      .WithCredentials(cellusername, cellpassword)
-      .SignalModuleEvent(celladdress, module, property);
-  }
-  // returning true, will route event to other listeners
-  return true;
-});
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>76</Address>
-    <Name>Sensor.* events forwarding</Name>
-    <Description>Forwards devices' Sensor.* values changes to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program

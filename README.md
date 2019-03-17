@@ -15,11 +15,11 @@ Features
 * **Integrated drivers for X10 and Z-Wave devices**:
   ready to use solution for your home automation.
 
-* **Real and virtual energy metering with statistics**:
-  energy consumption awareness for optimizing costs and usage.
-
 * **UPnP / DLNA control point**:
   control media servers, players, speakers and smart TVs.
+
+* **Real and virtual energy metering with statistics**:
+  energy consumption awareness for optimizing costs and usage.
 
 * **Wizard Scripts**:
   no need to be a programmer, create scenarios using the
@@ -27,16 +27,22 @@ Features
    the *Wizard Script* program editor.
 
 * **Fully expandible and customizable**:
-  add new features and automation programs
+  add new features, drivers and automation programs
   trhough the [packages repository](https://github.com/genielabs/homegenie-packages/tree/master/packages).
 
 * **Localization**
   English, Italian, Spanish, French, Netherlands. More
   languages can by added by creating a simple JSON file.
 
-* **Password protected access**
+* **Password protected access and data encryption**
+   HTTP access with Digest authentication and encrypted 
+   configuration files.
 
 * **Configuration backup/restore and factory reset**
+
+* **Event and data stream**
+  integrated HTTP Server Sent Event stream (EventSource),
+  WebSocket service and events-push/module-export to any MQTT broker.
 
 * **Embeddable**:
   runs on low-energy and low-cost embedded systems such as
@@ -48,7 +54,7 @@ Features
 
 * **Programmable Automation Engine**:
   web based Program Editor and compiler with multi-language
-  support: C#, Javascript, Phyton and Ruby, Arduino Sketch.
+  support: C#, Javascript, Phyton and Arduino Sketch.
 
 * **Dynamic Web Service API and Helper Classes**:
   make your devices and services talk each other using a
@@ -62,9 +68,6 @@ Features
 * **Speech recognition / Voice Control (using Web Speech API)**
 
 * **Speech synthesys**
-
-* **Programmable InfraRed transceiver**:
-  use a common IR remote to control your automation system.
 
 
 ## Presentation site

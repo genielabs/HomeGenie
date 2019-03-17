@@ -40,6 +40,8 @@
       </ModuleParameter>
     </Settings>
     <SystemName>HAL</SystemName>
+    <Username>admin</Username>
+    <Password></Password>
     <Location>{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }</Location>
     <GUID></GUID>
     <EnableLogFile>true</EnableLogFile>
@@ -52,8 +54,6 @@
                 <Option Name="HomePath" Value="html" />
                 <Option Name="Host" Value="+" />
                 <Option Name="Port" Value="80" />
-                <Option Name="Username" Value="admin" />
-                <Option Name="Password" Value="" />
                 <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
                 <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
                 <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
@@ -61,6 +61,12 @@
                 <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png" />
                 <Option Name="UrlAlias.4" Value="hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png" />
                 <Option Name="EnableFileCaching" Value="false" />
+            </Options>
+        </Gateway>
+        <Gateway Name="WebSocketGateway" IsEnabled="true">
+            <Options>
+                <Option Name="Port" Value="8188" />
+                <Option Name="Authentication" Value="Token" />
             </Options>
         </Gateway>
     </Gateways>
