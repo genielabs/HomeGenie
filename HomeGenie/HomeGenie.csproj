@@ -123,15 +123,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MIG, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.1.1.4\lib\MIG.dll</HintPath>
+      <HintPath>packages\MIG.1.1.5\lib\MIG.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MIG.HomeAutomation, Version=1.0.7015.25923, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.HomeAutomation.1.1.1\lib\MIG.HomeAutomation.dll</HintPath>
+    <Reference Include="MIG.HomeAutomation, Version=1.0.7015.32937, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.HomeAutomation.1.1.4\lib\MIG.HomeAutomation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MIG.Protocols, Version=1.0.7015.25836, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.Protocols.1.1.1\lib\MIG.Protocols.dll</HintPath>
+    <Reference Include="MIG.Protocols, Version=1.0.7015.33000, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.Protocols.1.1.4\lib\MIG.Protocols.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MQTTnet, Version=2.8.5.0, Culture=neutral, PublicKeyToken=b69712f52770c0a7">
@@ -174,8 +174,8 @@
       <HintPath>packages\UDE.CSharp.1.1.0\lib\Ude.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="UPnP, Version=1.0.6945.32274, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\MIG.Protocols.1.1.1\lib\UPnP.dll</HintPath>
+    <Reference Include="UPnP, Version=1.0.7015.33368, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\MIG.Protocols.1.1.4\lib\UPnP.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e">
