@@ -77,6 +77,36 @@ namespace HomeGenie.Service
             }
             return dt.AddDays(-1 * diff).Date;
         }
+        public static DateTime Round(this DateTime d, RoundTo rt)
+        {
+            DateTime dtRounded = new DateTime();
+            switch (rt)
+            {
+                case RoundTo.Second:
+                    dtRounded = new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, d.Second);
+                    if (d.Millisecond >= 500) dtRounded = dtRounded.AddSeconds(1);
+                    break;
+                case RoundTo.Minute:
+                    dtRounded = new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, 0);
+                    if (d.Second >= 30) dtRounded = dtRounded.AddMinutes(1);
+                    break;
+                case RoundTo.Hour:
+                    dtRounded = new DateTime(d.Year, d.Month, d.Day, d.Hour, 0, 0);
+                    if (d.Minute >= 30) dtRounded = dtRounded.AddHours(1);
+                    break;
+                case RoundTo.Day:
+                    dtRounded = new DateTime(d.Year, d.Month, d.Day, 0, 0, 0);
+                    if (d.Hour >= 12) dtRounded = dtRounded.AddDays(1);
+                    break;
+            }
+
+            return dtRounded;
+        }
+
+        public enum RoundTo
+        {
+            Second, Minute, Hour, Day
+        }        
     }
 
     [Serializable()]

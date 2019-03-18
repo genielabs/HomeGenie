@@ -271,8 +271,9 @@ namespace HomeGenie.Service
                         {
                             if (relFile.browser_download_url.ToString().EndsWith(".tgz"))
                             {
-                                var releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-                                if (currentRelease.ReleaseDate < releaseDate && remoteUpdates.Count == 0)
+                                DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
+                                releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute);
+                                if (currentRelease.ReleaseDate.Round(DateTimeExtensions.RoundTo.Minute) < releaseDate && remoteUpdates.Count == 0)
                                 {
                                     var r = new ReleaseInfo();
                                     r.Name = githubRepository;
