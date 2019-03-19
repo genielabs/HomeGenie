@@ -114,8 +114,7 @@
             zuix.field('output').html(html+row);
             //writeToScreen(row);
 
-            var scroll = zuix.field('output').get();
-            scroll.scrollTop = scroll.scrollHeight;
+            scrollToBottom();
         }
 
         function onError(evt)
@@ -129,6 +128,11 @@
             pre.style.wordWrap = "break-word";
             pre.innerHTML = message;
             zuix.field('output').append(pre);
+            scrollToBottom()
+        }
+        function scrollToBottom() {
+            var scroll = zuix.field('output').get();
+            scroll.scrollTop = scroll.scrollHeight;
         }
 
         window.addEventListener("load", init, false);

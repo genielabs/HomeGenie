@@ -150,17 +150,17 @@ namespace HomeGenie.Automation.Scheduler
                     if (result != null && result.Exception != null && result.Exception.GetType() != typeof(TargetException))
                         homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler,
                             eventItem.Name, Properties.SchedulerScriptStatus,
-                            "Error (" + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ') + ")");
+                            eventItem.Name + ":Error (" + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ') + ")");
                 }
                 catch (ThreadAbortException)
                 {
                     programThread = null;
                     isRunning = false;
                     homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
-                        Properties.SchedulerScriptStatus, "Interrupted");
+                        Properties.SchedulerScriptStatus, eventItem.Name + ":Interrupted");
                 }
                 homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
-                    Properties.SchedulerScriptStatus, "End");
+                    Properties.SchedulerScriptStatus, eventItem.Name + ":End");
             });
 
             try
