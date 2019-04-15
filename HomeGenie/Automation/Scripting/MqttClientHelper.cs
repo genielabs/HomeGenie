@@ -49,9 +49,11 @@ namespace HomeGenie.Automation.Scripting
         private static MqttFactory factory = new MqttFactory();
         private NetworkCredential networkCredential = null;
         private MqttEndPoint endPoint = new MqttEndPoint();
-        private bool usingWebSockets = false;
+        private bool usingWebSockets;
 
-        private MqttClient mqttClient = null;
+        private MqttClient mqttClient;
+        private string subscribeTopic;
+        private Action<string, string> messageCallback;
 
         /// <summary>
         /// Sets the MQTT server to use.
@@ -103,6 +105,7 @@ namespace HomeGenie.Automation.Scripting
             mqttClient.Connected += (sender, args) =>
             {
                 callback();
+                if (subscribeTopic != null) mqttClient.SubscribeAsync(subscribeTopic);
             };
             mqttClient.Disconnected += (sender, args) =>
             {
@@ -125,6 +128,12 @@ namespace HomeGenie.Automation.Scripting
             {
                 var m = mqttClient;
                 mqttClient = null;
+                if (messageCallback != null)
+                {d .
+                    m.ApplicationMessageReceived -= MessageReceived;
+                    messageCallback = null;
+                }
+                subscribeTopic = null;
                 if (m.IsConnected) m.DisconnectAsync();
                 m.Dispose();
             }
@@ -138,14 +147,15 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
         public MqttClientHelper Subscribe(string topic, Action<string,string> callback)
         {
+            subscribeTopic = topic;
+            messageCallback = callback;
             if (mqttClient != null)
             {
-                mqttClient.ApplicationMessageReceived += (object sender, MqttApplicationMessageReceivedEventArgs args) =>
+                mqttClient.ApplicationMessageReceived += MessageReceived;
+                if (mqttClient.IsConnected)
                 {
-                    var msg = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
-                    callback(args.ApplicationMessage.Topic, msg);
-                };
-                mqttClient.SubscribeAsync(topic);
+                    mqttClient.SubscribeAsync(subscribeTopic);
+                }
             }
             return this;
         }
@@ -257,6 +267,12 @@ namespace HomeGenie.Automation.Scripting
                 builder.WithCredentials(networkCredential.UserName, networkCredential.Password);
             }
             return builder.Build();
+        }
+
+        public void MessageReceived(object sender, MqttApplicationMessageReceivedEventArgs args)
+        {
+            var msg = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
+            messageCallback(args.ApplicationMessage.Topic, msg);
         }
 
         #endregion

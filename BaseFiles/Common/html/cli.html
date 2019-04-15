@@ -50,7 +50,7 @@
         var websocket;
 
         // Listen for WebSocket events
-        fetch('http://192.168.2.104:8080/api/HomeAutomation.HomeGenie/Config/WebSocket.GetToken').then(function(response) {
+        fetch('/api/HomeAutomation.HomeGenie/Config/WebSocket.GetToken').then(function(response) {
             return response.json();
         }).then(function(data) {
             var token = data.ResponseValue;
