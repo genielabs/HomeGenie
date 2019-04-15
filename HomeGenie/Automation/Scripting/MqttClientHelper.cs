@@ -129,7 +129,7 @@ namespace HomeGenie.Automation.Scripting
                 var m = mqttClient;
                 mqttClient = null;
                 if (messageCallback != null)
-                {d .
+                {
                     m.ApplicationMessageReceived -= MessageReceived;
                     messageCallback = null;
                 }
