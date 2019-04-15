@@ -18,7 +18,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:19.021437Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:57:51.066375Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -43,7 +43,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:22.430086Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:57:54.580992Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -118,8 +118,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:27.461325Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:42.87568Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:57:59.608924Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:16.589428Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -294,8 +294,8 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:28.457328Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:42.875538Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -421,10 +421,169 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:28.925489Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:44.01726Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:04.606119Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:16.786914Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>//Program.Title = "Belking WeMo";
+Program.Setup(()=&gt;{
+    Program
+      .AddOption("WeMo.Refresh", "60", "1. Time in seconds between each refresh", "slider:1:120:1")
+      .AddOption("WeMo.MaxDevices", "10", "2. Number of WeMo devices", "slider:1:20:1")
+      // AddFeature will attach option to modules in HomeAutomation.WeMo device
+      .AddFeature("HomeAutomation.WeMo", "Switch,Light,Dimmer", "WeMo.IpAddress", "IP Address", "text")
+      .AddFeature("HomeAutomation.WeMo", "Switch,Light,Dimmer", "WeMo.AlarmAD", "Synchronize on/off with Alarm System armed status", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>const uint STATE_ON = 1;
+const uint STATE_OFF = 0;
+const string WEMO_DOMAIN = "HomeAutomation.WeMo";
+var WeMo_Refresh = Program.Option("WeMo.Refresh");
+var WeMo_MaxDevices = Program.Option("WeMo.MaxDevices");
+var WeMo_Modules = Modules.InDomain(WEMO_DOMAIN);
+var WeMo_Modules_AD = Modules.InDomain(WEMO_DOMAIN).WithFeature("WeMo.AlarmAD");
+
+// create virtual modules for HomeAutomation.WeMo domain
+for (int i = 1; i &lt;= WeMo_MaxDevices.DecimalValue; i++)
+{
+  Program.AddVirtualModule(WEMO_DOMAIN, i.ToString(), "Switch", "homegenie/generic/switch");
+}
+
+Action&lt;string, uint&gt; BinarySwitch = (string ipAddress, uint binaryState) =&gt;
+{
+  var request = Net.WebService("http://" + ipAddress + ":49153/upnp/control/basicevent1")
+    .AddHeader("Accept", "")
+    .AddHeader("Content-type", "text/xml; charset=\"utf-8\"")
+    .AddHeader("SOAPACTION", "\"urn:Belkin:service:basicevent:1#SetBinaryState\"")
+    .Post(
+    "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"&gt;&lt;s:Body&gt;&lt;u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"&gt;&lt;BinaryState&gt;" +
+    binaryState + "&lt;/BinaryState&gt;&lt;/u:SetBinaryState&gt;&lt;/s:Body&gt;&lt;/s:Envelope&gt;");
+  var result = request.GetData();
+  if (String.IsNullOrEmpty(result))
+  {
+    Program.Notify("ERROR: no response received!");
+  }
+};
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  // synchronize WeMo on/off status with Alarm System
+  if (module.Is("Security Alarm System") &amp;&amp; parameter.Is("Status.Level"))
+  {
+    WeMo_Modules_AD.Each((wemo) =&gt; {
+      var ip = wemo.Parameter("WeMo.IpAddress").Value;
+      if (ip.Length &gt; 8)
+      {
+        wemo.RaiseEvent("Status.Level", parameter.Value, "WeMo");
+        BinarySwitch(ip, parameter.DecimalValue == 0 ? STATE_OFF : STATE_ON);
+      }
+      return false;
+    });
+  }
+  // true =&gt; continue propagating the event to other listeners
+  return true;
+});
+
+When.WebServiceCallReceived(WEMO_DOMAIN, (args) =&gt; {
+  var cmd = new MigInterfaceCommand(args.ToString());
+  var module = Modules.InDomain(WEMO_DOMAIN).WithAddress(cmd.Address).Get();
+  var ipAddress = module.Parameter("WeMo.IpAddress").Value;
+  if (ipAddress.Length &gt;= 8)
+  {
+    switch (cmd.Command)
+    {
+      case "Control.On":
+      module.RaiseEvent("Status.Level", "1", "WeMo");
+      BinarySwitch(ipAddress, STATE_ON);
+      break;
+      case "Control.Off":
+      module.RaiseEvent("Status.Level", "0", "WeMo");
+      BinarySwitch(ipAddress, STATE_OFF);
+      break;
+      default:
+      // command not recognized
+      return new ResponseStatus(Status.Error);
+    }
+  }
+  else
+  {
+    module.RaiseEvent("Status.Error", "Module not configured!", "WeMo");
+  }
+  return new ResponseStatus(Status.Ok);
+});
+
+Action&lt;ModuleHelper&gt; pollWemoStatus = (module) =&gt;
+{
+  var ip = module.Parameter("WeMo.IpAddress").Value;
+  if (ip.Length &gt; 8)
+  {
+    var request2 = Net.WebService("http://" + ip + ":49153/upnp/control/basicevent1")
+      .AddHeader("Accept", "")
+      .AddHeader("Content-type", "text/xml; charset=\"utf-8\"")
+      .AddHeader("SOAPACTION", "\"urn:Belkin:service:basicevent:1#GetBinaryState\"")
+      .Post(
+      "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"&gt;&lt;s:Body&gt;&lt;u:GetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"&gt;&lt;BinaryState&gt;1&lt;/BinaryState&gt;&lt;/u:GetBinaryState&gt;&lt;/s:Body&gt;&lt;/s:Envelope&gt;");
+    var result2 = request2.GetData();
+
+    if (!result2.Contains("1") &amp;&amp; !result2.Contains("0"))
+    {
+      Program.Notify("ERROR: no response from " + ip + " (" + module.Instance.Address + ")");
+    }
+    else if (result2.Contains("0"))
+    {
+      if (module.IsOn)
+      {
+        module.RaiseEvent("Status.Level", "0", "WeMo");
+      }
+    }
+    else if (result2.Contains("1"))
+    {
+      if (module.IsOff)
+      {
+        module.RaiseEvent("Status.Level", "1", "WeMo");
+      }
+    }
+  }
+};
+
+while (Program.IsEnabled)
+{
+  WeMo_Modules.Each((wemo) =&gt; {
+    pollWemoStatus(wemo);
+    return false;
+  });
+  Pause(WeMo_Refresh.DecimalValue);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>30</Address>
+    <Name>WeMo</Name>
+    <Description>Belkin Wemo integration</Description>
+    <Group>Devices and Things</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.WeMo</ForDomains>
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>WeMo.IpAddress</Property>
+        <Description>IP Address</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.WeMo</ForDomains>
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>WeMo.AlarmAD</Property>
+        <Description>Synchronize on/off with Alarm System armed status</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// list the program as custom weather widget
@@ -655,8 +814,8 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
     <Group>Weather and Environment</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:28:59.20936Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2019-04-15T18:58:07.065827Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:16.911155Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -760,8 +919,8 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:36.812835Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:42.932578Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:08.269065Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:16.821345Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1095,8 +1254,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:37.913973Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.315845Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:09.145707Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:16.977312Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1223,8 +1382,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:38.486128Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:42.951986Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:09.845611Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:16.986001Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1256,8 +1415,8 @@ Program.GoBackground();
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:39.045239Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.180779Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:10.619407Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.010711Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1533,8 +1692,8 @@ device status and energy consumption.</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:39.657595Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.162602Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:11.727153Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.16216Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1680,8 +1839,8 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:39.984504Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:42.999737Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:12.271659Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.136961Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1827,8 +1986,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:40.623564Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.022435Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:12.859506Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.137093Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2078,7 +2237,7 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:41.240814Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:58:13.988633Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -2285,8 +2444,8 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:41.579036Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.5004Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:14.476385Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.265605Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2460,8 +2619,8 @@ Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; p
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:42.415533Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.150004Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:15.711598Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.283232Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2587,8 +2746,8 @@ When changing the number of zone sensors, program restart is required.</Descript
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:42.745294Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.157036Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:58:16.186454Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.426447Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2770,8 +2929,8 @@ function initialize() {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:18.411464Z</ActivationTime>
-    <TriggerTime>2019-03-08T10:02:43.814021Z</TriggerTime>
+    <ActivationTime>2019-04-15T18:57:49.742293Z</ActivationTime>
+    <TriggerTime>2019-04-15T18:58:17.987849Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2790,7 +2949,7 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:18.411604Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:57:49.742447Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:14.885738Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2812,7 +2971,7 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:18.411708Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:57:49.742646Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:32.233907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2837,7 +2996,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:18.411828Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:57:49.74284Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:29.486907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
@@ -2864,7 +3023,7 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-03-08T10:02:18.411939Z</ActivationTime>
+    <ActivationTime>2019-04-15T18:57:49.743056Z</ActivationTime>
     <TriggerTime>2019-03-06T15:16:30.255377Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
