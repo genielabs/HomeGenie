@@ -152,9 +152,10 @@ namespace HomeGenie.Automation.Scripting
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
             Log.Trace("SendMessage: called for recipients {0}", recipients);
-            var mailFrom = from;
-            var mailSubject = subject;
-            var mailBody = messageText;
+            NetworkCredential networkCredential;
+            string mailFrom = from;
+            string mailSubject = subject;
+            string mailBody = messageText;
             //
             Log.Trace("SendMessage: getting smtpSyncLock");
             lock (_smtpSyncLock)
@@ -177,25 +178,28 @@ namespace HomeGenie.Automation.Scripting
                         message.Attachments.Add(attachment);
                     }
                     //
-                    if (_mailService == "")
+                    string mailService = _mailService;
+                    if (String.IsNullOrEmpty(mailService))
                     {
                         // this is a System Parameter
                         var spSmtpServer = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpServer");
                         if (spSmtpServer != null)
                         {
-                            _mailService = spSmtpServer.Value;
+                            mailService = spSmtpServer.Value;
                         }
                     }
-                    if (_mailPort == -1)
+                    int mailPort = _mailPort;
+                    if (mailPort == -1)
                     {
                         // this is a System Parameter
                         var spSmtpPort = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpPort");
                         if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
                         {
-                            _mailPort = (int) spSmtpPort.DecimalValue;
+                            mailPort = (int) spSmtpPort.DecimalValue;
                         }
                     }
-                    if (!_mailSsl.HasValue)
+                    bool? mailSsl = _mailSsl;
+                    if (!mailSsl.HasValue)
                     {
                         // this is a System Parameter
                         var spSmtpUseSsl = _homegenie.Parameters.Find(mp => mp.Name == "Messaging.Email.SmtpUseSsl");
@@ -203,7 +207,7 @@ namespace HomeGenie.Automation.Scripting
                                                      spSmtpUseSsl.Value.ToLower() == "on" ||
                                                      spSmtpUseSsl.DecimalValue == 1))
                         {
-                            _mailSsl = true;
+                            mailSsl = true;
                         }
                     }
                     var credentials = _networkCredential;
@@ -229,24 +233,22 @@ namespace HomeGenie.Automation.Scripting
                         }
                     }
                     //
-
-                    using (var smtpClient = new SmtpClient(_mailService))
+                    using (var smtpClient = new SmtpClient(mailService))
                     {
                         try
                         {
                             smtpClient.Credentials = credentials;
                             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            if (_mailPort > 0)
+                            if (mailPort > 0)
                             {
-                                smtpClient.Port = _mailPort;
+                                smtpClient.Port = mailPort;
                             }
-                            smtpClient.EnableSsl = _mailSsl == true;
+                            smtpClient.EnableSsl = (mailSsl == true);
 
                             Log.Trace("SendMessage: going to send email {0} using mailService '{1}', port '{2}', credentials {3}, using SSL = {4}",
-                                message.ToString(), _mailService, _mailPort, credentials.ToString(), smtpClient.EnableSsl);
+                                message.ToString(), _mailService, _mailPort, credentials, smtpClient.EnableSsl);
                             smtpClient.Send(message);
                             Log.Trace("Email sent");
-                            _attachments.Clear();
                         }
                         catch (Exception ex)
                         {
@@ -258,12 +260,12 @@ namespace HomeGenie.Automation.Scripting
                         finally
                         {
                             Log.Trace("SendMessage: disposing smtpClient");
+                            _attachments.Clear();
                             smtpClient.Dispose();
                         }
                     }
                 }
             }
-
             return true;
         }
 
