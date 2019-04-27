@@ -258,7 +258,7 @@ namespace HomeGenie.Service
                     string releaseJson = client.DownloadString(githubReleases);
                     var deserializerSettings = new JsonSerializerSettings()
                     {
-                        DateParseHandling = Newtonsoft.Json.DateParseHandling.None
+                        DateParseHandling = DateParseHandling.None
                     };
                     dynamic releases = JsonConvert.DeserializeObject(releaseJson, deserializerSettings) as JArray;
                     if (remoteUpdates != null)
@@ -272,7 +272,7 @@ namespace HomeGenie.Service
                             if (relFile.browser_download_url.ToString().EndsWith(".tgz"))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-                                releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute);
+                                releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();
                                 if (currentRelease.ReleaseDate.Round(DateTimeExtensions.RoundTo.Minute) < releaseDate && remoteUpdates.Count == 0)
                                 {
                                     var r = new ReleaseInfo();

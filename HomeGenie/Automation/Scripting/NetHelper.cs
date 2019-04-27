@@ -152,15 +152,11 @@ namespace HomeGenie.Automation.Scripting
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
             Log.Trace("SendMessage: called for recipients {0}", recipients);
-            NetworkCredential networkCredential;
             string mailFrom = from;
             string mailSubject = subject;
             string mailBody = messageText;
-            //
-            Log.Trace("SendMessage: getting smtpSyncLock");
             lock (_smtpSyncLock)
             {
-                Log.Trace("SendMessage: got smtpSyncLock");
                 using (var message = new MailMessage())
                 {
                     var mailRecipients = recipients.Split(new[] {';', ','}, StringSplitOptions.RemoveEmptyEntries);
@@ -237,8 +233,10 @@ namespace HomeGenie.Automation.Scripting
                     {
                         try
                         {
-                            smtpClient.Credentials = credentials;
                             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtpClient.UseDefaultCredentials = false;
+                            smtpClient.Credentials = credentials;
+                            smtpClient.Timeout = 30000;
                             if (mailPort > 0)
                             {
                                 smtpClient.Port = mailPort;
@@ -246,13 +244,13 @@ namespace HomeGenie.Automation.Scripting
                             smtpClient.EnableSsl = (mailSsl == true);
 
                             Log.Trace("SendMessage: going to send email {0} using mailService '{1}', port '{2}', credentials {3}, using SSL = {4}",
-                                message.ToString(), _mailService, _mailPort, credentials, smtpClient.EnableSsl);
+                                message.ToString(), mailService, mailPort, credentials, smtpClient.EnableSsl);
                             smtpClient.Send(message);
                             Log.Trace("Email sent");
                         }
                         catch (Exception ex)
                         {
-                            Log.Trace(ex, "SendMessage: error sending email {0}");
+                            Log.Trace(ex, "SendMessage: error sending email to {0} ({1}:{2})", recipients, mailService, mailPort);
                             Log.Error(ex);
                             HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie_Automation, GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
                             return false;
