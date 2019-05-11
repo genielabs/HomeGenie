@@ -618,6 +618,9 @@ Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
   // Add values to standard Sensor.* parameters
   Program.Parameter("Sensor.Temperature").Value = data.temperature;
   Program.Parameter("Sensor.Temperature.Unit").Value = "Celsius";
+  Program.Parameter("Sensor.Humidity").Value = data.humidity;
+  Program.Parameter("Sensor.DayHi").Value = data.dayhi;
+  Program.Parameter("Sensor.DayLow").Value = data.daylow;	    
   Program.Parameter("Sensor.Pressure").Value = data.pressure;
   Program.Parameter("Sensor.Pressure.Unit").Value = "Mb";
   Program.Parameter("Sensor.Wind.Speed").Value = data.wind_speed;
@@ -709,6 +712,9 @@ Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
   data.temperature = weatherData.main.temp.ToString();
   data.temperature_min = weatherData.main.temp_min.ToString();
   data.temperature_max = weatherData.main.temp_max.ToString();
+  data.humidity = weatherData.main.humidity.ToString();
+  data.daylow = weatherData.main.temp_min.ToString();
+  data.dayhi = weatherData.main.temp_max.ToString();	    
   data.pressure = weatherData.main.pressure.ToString();
   var rain_1h_mm = "0";
   var rain_3h_mm = "0";
