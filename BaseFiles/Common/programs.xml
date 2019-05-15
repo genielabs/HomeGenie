@@ -642,6 +642,7 @@ Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
   Program.Parameter("Conditions.Forecast." + day + ".Temperature").Value = data.temperature;
   Program.Parameter("Conditions.Forecast." + day + ".Temperature.Min").Value = data.temperature_min;
   Program.Parameter("Conditions.Forecast." + day + ".Temperature.Max").Value = data.temperature_max;
+  Program.Parameter("Conditions.Forecast." + day + ".Humidity").Value = data.humidity;    
 };
 Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
   var icon = "unknonwn.png";
