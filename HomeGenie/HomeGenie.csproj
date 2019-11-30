@@ -134,8 +134,8 @@
       <HintPath>packages\MIG.Protocols.1.1.5\lib\MIG.Protocols.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MQTTnet, Version=2.8.5.0, Culture=neutral, PublicKeyToken=b69712f52770c0a7">
-      <HintPath>packages\MQTTnet.2.8.5\lib\net452\MQTTnet.dll</HintPath>
+    <Reference Include="MQTTnet, Version=3.0.8.0, Culture=neutral, PublicKeyToken=b69712f52770c0a7">
+      <HintPath>packages\MQTTnet.3.0.8\lib\net452\MQTTnet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NCrontab">
@@ -151,11 +151,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SerialPortLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\SerialPortLib.1.0.16\lib\SerialPortLib.dll</HintPath>
+      <HintPath>packages\SerialPortLib.1.0.18\lib\SerialPortLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SuperSocket.ClientEngine, Version=0.8.0.13, Culture=neutral, PublicKeyToken=ee9af13f57f00acc">
-      <HintPath>packages\SuperSocket.ClientEngine.Core.0.8.0.13\lib\net45\SuperSocket.ClientEngine.dll</HintPath>
+    <Reference Include="SuperSocket.ClientEngine, Version=0.10.0.0, Culture=neutral, PublicKeyToken=ee9af13f57f00acc">
+      <HintPath>packages\SuperSocket.ClientEngine.Core.0.10.0\lib\net45\SuperSocket.ClientEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -186,8 +186,8 @@
       <HintPath>packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebSocket4Net, Version=0.15.0.9, Culture=neutral, PublicKeyToken=eb4e154b696bf72a">
-      <HintPath>packages\WebSocket4Net.0.15.0\lib\net45\WebSocket4Net.dll</HintPath>
+    <Reference Include="WebSocket4Net, Version=0.15.2.11, Culture=neutral, PublicKeyToken=eb4e154b696bf72a">
+      <HintPath>packages\WebSocket4Net.0.15.2\lib\net45\WebSocket4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -238,7 +238,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ZWaveLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\ZWaveLib.1.0.18\lib\ZWaveLib.dll</HintPath>
+      <HintPath>packages\ZWaveLib.1.0.19\lib\ZWaveLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

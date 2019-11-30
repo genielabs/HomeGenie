@@ -935,7 +935,7 @@ namespace HomeGenie.Service
                     double bootStep = 100D / masterControlProgram.Programs.Count;
                     foreach (var program in masterControlProgram.Programs)
                     {
-                        masterControlProgram.CompileScript(program);
+                        masterControlProgram.ProgramCompile(program);
                         BootProgress += bootStep;
                     }
                     RebuildPrograms = false;

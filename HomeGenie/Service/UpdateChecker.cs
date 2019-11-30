@@ -842,7 +842,7 @@ namespace HomeGenie.Service
                             // Compile C# programs in order to generate new binary file
                             if (program.Type.ToLower() == "csharp")
                             {
-                                homegenie.ProgramManager.CompileScript(program);
+                                homegenie.ProgramManager.ProgramCompile(program);
                             }
 
                             if (!configChanged)

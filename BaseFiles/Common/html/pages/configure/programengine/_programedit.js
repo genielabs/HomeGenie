@@ -63,6 +63,14 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
                 return false;
             });
             //
+            $('#automation_program_clone_button').bind('click', function (event) {
+                $$.ProgramClone(function() {
+                    window.history.back();
+                });
+                window.history.back();
+                return true;
+            });
+            //
             $('#automation_program_delete_button').bind('click', function (event) {
                 HG.Ui.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
                 return true;
@@ -417,6 +425,23 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
             type: 'GET',
             success: function (response) {
                 $.mobile.loading('hide');
+            },
+            error: function (a, b, c) {
+                $.mobile.loading('hide');
+            }
+        });
+    };
+
+    $$.ProgramClone = function (callback) {
+        var pid = $$._CurrentProgram.Address;
+        $.mobile.loading('show', {text: 'Cloning program', textVisible: true, theme: 'a', html: ''});
+        $('#control_groupslist').empty();
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Clone' + '/' + pid + '/',
+            type: 'GET',
+            success: function (response) {
+                $.mobile.loading('hide');
+                if (callback) callback();
             },
             error: function (a, b, c) {
                 $.mobile.loading('hide');

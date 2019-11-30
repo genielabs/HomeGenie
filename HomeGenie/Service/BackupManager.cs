@@ -293,7 +293,7 @@ namespace HomeGenie.Service
                     }
                     else
                     {
-                        homegenie.ProgramManager.CompileScript(program);
+                        homegenie.ProgramManager.ProgramCompile(program);
                     }
                 }
                 else if (currentProgram != null && (program.Address < ProgramManager.USERSPACE_PROGRAMS_START || program.Address >= ProgramManager.PACKAGE_PROGRAMS_START))

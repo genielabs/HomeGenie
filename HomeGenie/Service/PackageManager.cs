@@ -471,7 +471,7 @@ namespace HomeGenie.Service
 
             if (newProgram.Type.ToLower() != "arduino")
             {
-                homegenie.ProgramManager.CompileScript(newProgram);
+                homegenie.ProgramManager.ProgramCompile(newProgram);
             }
             return newProgram;
         }

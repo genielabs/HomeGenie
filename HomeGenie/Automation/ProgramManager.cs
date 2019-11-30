@@ -104,7 +104,7 @@ namespace HomeGenie.Automation
             get { return schedulerService; }
         }
 
-        public List<ProgramError> CompileScript(ProgramBlock program)
+        public List<ProgramError> ProgramCompile(ProgramBlock program)
         {
             return program.Engine.Compile();
         }
@@ -165,6 +165,26 @@ namespace HomeGenie.Automation
             {
                 Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true);
             } catch { }
+        }
+
+        public ProgramBlock ProgramClone(int pid)
+        {
+            var program = ProgramGet(pid);
+            var copy = new ProgramBlock
+            {
+                Address = GeneratePid(),
+                Domain = program.Domain,
+                Type = program.Type,
+                Group = program.Group,
+                Name = "Copy of " + program.Name,
+                Description = program.Description,
+                ScriptSetup = program.ScriptSetup,
+                ScriptSource = program.ScriptSource,
+                AutoRestartEnabled = program.AutoRestartEnabled
+            };
+            ProgramAdd(copy);
+            ProgramCompile(copy);
+            return copy;
         }
 
         internal void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)

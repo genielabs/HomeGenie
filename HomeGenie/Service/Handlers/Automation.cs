@@ -303,6 +303,12 @@ namespace HomeGenie.Service.Handlers
                     request.ResponseData = new ResponseText(newProgram.Address.ToString());
                     break;
 
+                case "Programs.Clone":
+                    var copy = homegenie.ProgramManager.ProgramClone(int.Parse(migCommand.GetOption(0)));
+                    homegenie.UpdateProgramsDatabase();
+                    request.ResponseData = new ResponseText(copy.Address.ToString());
+                    break;
+
                 case "Programs.Delete":
                     currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
@@ -348,7 +354,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.Engine.StopProgram();
                         currentProgram.ScriptErrors = "";
                         //
-                        List<ProgramError> errors = homegenie.ProgramManager.CompileScript(currentProgram);
+                        List<ProgramError> errors = homegenie.ProgramManager.ProgramCompile(currentProgram);
                         //
                         currentProgram.IsEnabled = newProgram.IsEnabled && errors.Count == 0;
                         currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
