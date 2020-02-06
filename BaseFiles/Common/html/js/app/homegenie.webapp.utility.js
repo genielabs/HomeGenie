@@ -249,7 +249,10 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
             // display as Celsius
             temp = Math.round(temp * 10) / 10;
         }
-        return (temp * 1).toFixed(2);
+        // old line
+        // return (temp * 1).toFixed(2);
+        // new line - to round up to no decimal places
+        return (temp * 1).toFixed(0);        
     };
 
     $$.FormatTemperature = function (temp) {
@@ -258,11 +261,17 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
         if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
             // display as Fahrenheit
             temp = Math.round((temp * 1.8 + 32) * 10) / 10;
-            displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8457;';
+            // old line
+            // displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8457;';
+            // new line - to round up to no decimal places
+            displayvalue = (temp * 1).toFixed(0) + '&deg;';
         } else {
             // display as Celsius
             temp = Math.round(temp * 10) / 10;
-            displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8451;';
+            // old line
+            // displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8451;';
+            // new line - to round up to no decimal places
+            displayvalue = (temp * 1).toFixed(0) + '&deg;';
         }
         return displayvalue;
     };
