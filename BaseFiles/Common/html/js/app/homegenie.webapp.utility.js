@@ -252,7 +252,12 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
         // old line
         // return (temp * 1).toFixed(2);
         // new line - to round up to no decimal places
-        return (temp * 1).toFixed(0);        
+        //  when displaying temperature as 'F'
+        if (temperatureUnit == 'F') {
+            return (temp * 1).toFixed(0);
+        } else {
+            return (temp * 1).toFixed(2);
+        }
     };
 
     $$.FormatTemperature = function (temp) {
@@ -264,14 +269,12 @@ HG.WebApp.Utility = HG.WebApp.Utility || new function(){ var $$ = this;
             // old line
             // displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8457;';
             // new line - to round up to no decimal places
+            //  when displaying temperature as 'F'
             displayvalue = (temp * 1).toFixed(0) + '&deg;';
         } else {
             // display as Celsius
             temp = Math.round(temp * 10) / 10;
-            // old line
-            // displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8451;';
-            // new line - to round up to no decimal places
-            displayvalue = (temp * 1).toFixed(0) + '&deg;';
+            displayvalue = (temp * 1).toFixed(1) + '&deg;'; //'&#8451;';
         }
         return displayvalue;
     };
