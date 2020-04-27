@@ -191,7 +191,7 @@
                 HG.WebApp.WidgetEditor.RenderView(eventLog);
             }
             // when event is an automation program event or the 'Program.UiRefresh' one, we update the whole module
-            if ((module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') || eventLog.Property == 'Program.UiRefresh') {
+            if ((module.Type != 'Program' && module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') || eventLog.Property == 'Program.UiRefresh') {
                 HG.Configure.Modules.Get(module.Domain, module.Address, function (data) {
                     try {
                         var mod = eval('[' + data + ']')[0];

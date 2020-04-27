@@ -23,13 +23,15 @@ mkdir -p $target_folder
 if [ -d "${target_folder}" ]
 then
 
-    base_folder=$target_folder
+	base_folder=$target_folder
 	target_folder="${target_folder}/homegenie_${homegenie_version}_all"
 
 	mkdir -p "$target_folder/usr/local/bin/homegenie"
+	mkdir -p "$target_folder/etc/lirc/"
 
 	echo "\n- Copying files to '$target_folder'..."
 
+	cp ./lirc_options.conf "$target_folder/etc/lirc/"
 	cp -r $source_folder/* "$target_folder/usr/local/bin/homegenie/"
 	rm -rf "$target_folder/usr/local/bin/homegenie/log"
 
