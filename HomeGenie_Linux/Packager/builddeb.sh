@@ -31,7 +31,7 @@ then
 
 	echo "\n- Copying files to '$target_folder'..."
 
-	cp ./lirc_options.conf "$target_folder/etc/lirc/"
+	cp "$script_path/lirc_options.conf" "$target_folder/etc/lirc/"
 	cp -r $source_folder/* "$target_folder/usr/local/bin/homegenie/"
 	rm -rf "$target_folder/usr/local/bin/homegenie/log"
 
