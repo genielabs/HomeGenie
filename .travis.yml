@@ -21,7 +21,8 @@ after_success:
 after_failure: 
 deploy:
   provider: releases
-  secure: parI1iauFDB8fWAMrbFrH8G8n9wrCzWicG/Ax+OHMUyOvndbSqCbMge/0Wy7VKoea4rAItNzRU7Nyi3CuIPlPkyNJJt9CKe90qdnsdOhKTwHVjLnd/g8DbSR8R5rL5wWWbzrlDEhnfGWn9SQ9ueLLV3uV83zz/9TrJc88hP+2jl27GKlmXrVanacqUS8mo+IirAI7Ev+zrcpHgmbcpgh52YE6zqw5/oLZ/Lwryi/7+XfQyc5nldbn3vAKihgMaWSnBx+9VjutpEb776LgsEpg1AHfYCCZbeaw+SODZVQGXGtm5EngNGEyYtjicbO27LV6uocAmbWF6DcBpDU6YuTr2A4wMLNX9Uu+QUCGMXiYDReGBr4OQBbBy61cSytucUajuLfV3G65vEXonb9kFo2LFf1Ulxp2AHDE2FVhJIBQws+UFd2c+EJWDIXC85vayX1ngodNz85KujcV7/8QY6A2tp/gWZHk6Pb5fjtOt+0R3JA/jgY3AVb8GZ+MfvaTCSMhWkf8GUiH4ZEdflHhchmvMftcn/NVby7Sf+QMgbTh7gJ77Y46+dofQHSQvrld2RFcr3VdSXgWrvhyM9K0sLIwjcR8nI94sGM7trvT25C+Ogn7YpULVmbR3HtZrnjrN3iDkY2T+p4xVjypOkBqEPAeRYaIPF9KYEuGW2Og379LSk=
+  api_key:
+    secure: parI1iauFDB8fWAMrbFrH8G8n9wrCzWicG/Ax+OHMUyOvndbSqCbMge/0Wy7VKoea4rAItNzRU7Nyi3CuIPlPkyNJJt9CKe90qdnsdOhKTwHVjLnd/g8DbSR8R5rL5wWWbzrlDEhnfGWn9SQ9ueLLV3uV83zz/9TrJc88hP+2jl27GKlmXrVanacqUS8mo+IirAI7Ev+zrcpHgmbcpgh52YE6zqw5/oLZ/Lwryi/7+XfQyc5nldbn3vAKihgMaWSnBx+9VjutpEb776LgsEpg1AHfYCCZbeaw+SODZVQGXGtm5EngNGEyYtjicbO27LV6uocAmbWF6DcBpDU6YuTr2A4wMLNX9Uu+QUCGMXiYDReGBr4OQBbBy61cSytucUajuLfV3G65vEXonb9kFo2LFf1Ulxp2AHDE2FVhJIBQws+UFd2c+EJWDIXC85vayX1ngodNz85KujcV7/8QY6A2tp/gWZHk6Pb5fjtOt+0R3JA/jgY3AVb8GZ+MfvaTCSMhWkf8GUiH4ZEdflHhchmvMftcn/NVby7Sf+QMgbTh7gJ77Y46+dofQHSQvrld2RFcr3VdSXgWrvhyM9K0sLIwjcR8nI94sGM7trvT25C+Ogn7YpULVmbR3HtZrnjrN3iDkY2T+p4xVjypOkBqEPAeRYaIPF9KYEuGW2Og379LSk=
   file_glob: true
   file:
     - HomeGenie_Linux/Packager/Output/*
@@ -31,4 +32,3 @@ deploy:
     tags: true
     branch: master
     repo: genielabs/HomeGenie
-
