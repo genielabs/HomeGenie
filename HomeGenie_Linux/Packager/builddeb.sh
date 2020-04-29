@@ -4,8 +4,8 @@ homegenie_version="${1:-$(echo $TRAVIS_TAG | cut -d"v" -f 2)}"
 
 if [ -z "$homegenie_version" ]
 then
-    echo "Skipping: no version string passed and no env '\$TRAVIS_TAG' is set."
-    exit 1
+	echo "Skipping: no version string passed and no env '\$TRAVIS_TAG' is set."
+	exit 1
 fi
 set -x -e
 
@@ -27,11 +27,9 @@ then
 	target_folder="${target_folder}/homegenie_${homegenie_version}_all"
 
 	mkdir -p "$target_folder/usr/local/bin/homegenie"
-	mkdir -p "$target_folder/etc/lirc/"
 
 	echo "\n- Copying files to '$target_folder'..."
 
-	cp "$script_path/lirc_options.conf" "$target_folder/etc/lirc/"
 	cp -r $source_folder/* "$target_folder/usr/local/bin/homegenie/"
 	rm -rf "$target_folder/usr/local/bin/homegenie/log"
 
@@ -53,7 +51,6 @@ then
 	echo "- Fixing permissions..."
 
 	chmod -R 755 "$target_folder/DEBIAN"
-#	chmod +x "$target_folder/usr/local/bin/homegenie/startup.sh"
 
 	echo "\n- Building deb file...\n"
 
@@ -61,17 +58,16 @@ then
 
 	echo "\n... done!\n"
 
-    cd "$target_folder/usr/local/bin/"
-    tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
-    rm -rf "$target_folder"; break;
+	cd "$target_folder/usr/local/bin/"
+	tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
+	rm -rf "$target_folder"; break;
 	cd "$_cwd"
 
-    ls -la "${base_folder}"
-    
+ 	ls -la "${base_folder}"
+
 else
 
-    echo "Error: Directory '$target_folder' does not exists."
-    exit 1
+	echo "Error: Directory '$target_folder' does not exists."
+	exit 1
 
 fi
-

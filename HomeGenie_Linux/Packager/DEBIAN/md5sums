@@ -853,11 +853,9 @@ e386747ac38ab35f650d5677e13c144b  usr/local/bin/homegenie/NLog.config
 e33483b8ed739cd267f9a27ea266c87e  usr/local/bin/homegenie/Raspberry.IO.dll
 642c8a26dc0c0563c27d9983e2028c57  usr/local/bin/homegenie/UPnP.dll
 3d5995151ee4ef0b67ef7af38be0e9bc  usr/local/bin/homegenie/scheduler.xml
-fdc738a2e517b4d831aba51e4c6150cf  usr/local/bin/homegenie/Common.dll.mdb
 4aed18bed0821615ed494e332e770419  usr/local/bin/homegenie/archive.zip
 58308b485d4efac78c3d60909001d19f  usr/local/bin/homegenie/groups.xml
 8742ca673f11373aa5b26f966c03ef49  usr/local/bin/homegenie/LICENCE.TXT
-fa9dc146a5a5e5fd24afc7ec9101aeb3  usr/local/bin/homegenie/Common.dll
 e95d22037e3d84c40feea4f09e54c332  usr/local/bin/homegenie/lib/mig/p1db.xml
 7cb1f3efd246b15c79f2b1f5fe7f2705  usr/local/bin/homegenie/lib/mig/ZWaveLib.dll
 889e6c8e82057a817b05bd310befa307  usr/local/bin/homegenie/lib/mig/CM19Lib.dll
