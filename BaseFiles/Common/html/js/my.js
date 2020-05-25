@@ -8,14 +8,20 @@ fitRows._resetLayout = function() {
   this.maxY = 0;
   this._getMeasurement( 'gutter', 'outerWidth' );
   this.centerX = [];
+  this.centerX.length = 0;
   this.currentRow = 0;
   this.initializing = true;
-  for ( var i=0, len = this.items.length; i < len; i++ ) {
-      var item = this.items[i];
-      this._getItemLayoutPosition(item);
+  var items = this.items.slice();
+  items.sort( function(a, b) {
+    return +$(a.element).attr('data-index') < +$(b.element).attr('data-index') ? -1 :
+      +$(a.element).attr('data-index') > +$(b.element).attr('data-index') ? 1 : 0;
+  });
+  for (var i = 0; i < items.length; i++) {
+      this._getItemLayoutPosition(items[i]);
   }
   if (this.centerX.length > 0)
-    this.centerX[this.currentRow].offset = (this.isotope.size.innerWidth +this.gutter-this.x) / 2;
+    this.centerX[this.currentRow].offset = (this.isotope.size.innerWidth + this.gutter - this.x) / 2;
+  
   this.initializing = false;
   this.currentRow = 0;
 
@@ -30,7 +36,7 @@ fitRows._getItemLayoutPosition = function( item ) {
   var itemWidth = item.size.outerWidth + this.gutter;
   // if this element cannot fit in the current row
   var containerWidth = this.isotope.size.innerWidth + this.gutter;
-  if ( this.x !== 0 && itemWidth + this.x > containerWidth ) {
+  if (this.x !== 0 && itemWidth + this.x > containerWidth ) {
 
     if (this.initializing)
         this.centerX[this.currentRow].offset = (containerWidth-this.x) / 2;
@@ -40,8 +46,8 @@ fitRows._getItemLayoutPosition = function( item ) {
     this.y = this.maxY;
   }
 
-  if (this.initializing && this.x == 0) {
-    this.centerX.push({ offset: 0});
+  if (!this.centerX[this.currentRow]) {
+    this.centerX[this.currentRow] = { offset: 0 };
   }
   //if (this.centerX[this.currentRow].offset < 0)
   //  this.centerX[this.currentRow].offset = 0;
@@ -55,6 +61,37 @@ fitRows._getItemLayoutPosition = function( item ) {
   this.x += itemWidth;
 
   return position;
+};
+
+$.fn.swapNode = function(b) {
+    var a = this.get(0);
+    var aparent = a.parentNode;
+    var asibling = a.nextSibling === b ? a : a.nextSibling;
+    b.parentNode.insertBefore(a, b);
+    aparent.insertBefore(b, asibling);
+};
+
+$.fn.hitTestObject = function(selector, hitPercentageMin) {
+    if (hitPercentageMin == null) hitPercentageMin = 0.1; //default minimum hit percentage
+    var hitOffest = 5;
+    var compares = $(selector);
+    var l = this.size();
+    var m = compares.size();
+    for (var i = 0; i < l; i++) {
+        var bounds = this.get(i).getBoundingClientRect();
+        for (var j = 0; j < m; j++) {
+            var compare = compares.get(j).getBoundingClientRect();
+            if (!(bounds.right <= compare.left+hitOffest || bounds.left >= compare.right-hitOffest ||
+                bounds.bottom <= compare.top+hitOffest || bounds.top >= compare.bottom-hitOffest)) {
+                var collisionOffsetX = compare.width * hitPercentageMin;
+                var collisionOffsetY = compare.height * hitPercentageMin;
+                var hitsMinPercentage = !(bounds.right < compare.left+collisionOffsetX || bounds.left > compare.right-collisionOffsetX ||
+                                        bounds.bottom < compare.top+collisionOffsetY || bounds.top > compare.bottom-collisionOffsetY);
+                return hitsMinPercentage ? 2 : 1;
+            }
+        }
+    }
+    return false;
 };
 
 jQuery.cachedScript = function( url, options ) {
