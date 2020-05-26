@@ -4,7 +4,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     $$._widgetList = [];
     $$._renderModuleDelay = null;
     $$._renderModuleBusy = false;
-    $$._currentSwapElement = null;
     $$._placeHolder = $('<div class="freewall" style="background: white; opacity: 0.2; position: absolute;" data-index="-1"></div>');
     $$._grid = null;
     $$._groupmodules = { 'Index': 0, 'Name': 'Loading...', 'Modules': [] };
@@ -313,9 +312,11 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             $$._renderModuleBusy = false;
             $$._grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).isotope({
                 itemSelector: '.freewall',
-                layoutMode: 'fitRows'
+                layoutMode: 'fitRows',
             }).isotope().addClass('isotope');
-
+            $$._grid.on( 'arrangeComplete', function() {
+                $$._grid.find('.freewall').removeClass('drag-collide drag-collide-target');
+            });
             $$.UpdateWidgetsPosition();
             $$.UpdateActionsMenu();
             $.mobile.loading('hide');
@@ -342,45 +343,55 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                     $$._placeHolder.css('height', $item.height());
                     $$._placeHolder.insertBefore($item);
                     // remove dragged item
-                    $item.removeClass('freewall');
+                    $item.removeClass('freewall').addClass('drag-collide');
+                    $item.attr('old-z-index', $item.css('z-index'));
+                    $item.css('z-index', 1000);
                 });
                 $item.on('dragMove', function(event, pointer, moveVector) {
                     var gid = HG.WebApp.Data._CurrentGroupIndex;
                     var currentGroup = HG.WebApp.Data.Groups[gid];
-                    //console.log(pointer, event);
                     grid.find('.modules-grid-item').each(function(i2, gridItem2) {
                         if ($item.get(0) !== gridItem2) {
                             var hitTestResult = $item.hitTestObject(gridItem2, 0.5);
                             if (hitTestResult) {
-                                var swapElement = $(gridItem2).addClass('drag-collide');
-                                if ($$._currentSwapElement != null && $$._currentSwapElement.get(0) !== swapElement.get(0)) {
-                                    return;
-                                }
-                                if (hitTestResult === 2 && !swapElement.hasClass('drag-collide-swapped')) {
-                                    $$._currentSwapElement = swapElement;
-                                    swapElement.addClass('drag-collide-swapped');
-                                    // swap elements
-                                    var d1 = swapElement.attr('data-index');
-                                    var d2 = $item.attr('data-index');
-                                    var temp = currentGroup.Modules[d1];
-                                    currentGroup.Modules[d1] = currentGroup.Modules[d2];
-                                    currentGroup.Modules[d2] = temp;
-                                    $item.attr('data-index', d1);
-                                    swapElement.attr('data-index', d2);
-                                    $item.swapNode(gridItem2);
-                                    swapElement.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
-                                        swapElement.removeClass('drag-collide');
-                                        swapElement.removeClass('drag-collide-swapped');
-                                    });
-                                    // move placeholder div before new $item position ( i1 )
+                                var $target = $(gridItem2);
+                                // re-arrange elements (insert sourceIndex before/after targetIndex)
+                                var sourceIndex = +$item.attr('data-index');
+                                var targetIndex = +$target.attr('data-index');
+                                if (hitTestResult === 2 && !$target.hasClass('drag-collide-target')) {
+                                    $target.addClass('drag-collide drag-collide-target');
+                                    if ($item.index() < $target.index()) { // insert after
+                                        currentGroup.Modules.move(sourceIndex, targetIndex);
+                                        $item.insertAfter($target);
+                                    } else { // inser before
+                                        currentGroup.Modules.move(sourceIndex, targetIndex);
+                                        $item.insertBefore($target);
+                                    }
+                                    // move placeholder div before $item
                                     $$._placeHolder.insertBefore($item);
+                                    // update data-indexes
+                                    $item.attr('data-index', targetIndex);
+                                    grid.find('.freewall').each((function(is, nextElement) {
+                                        $(nextElement).attr('data-index', is);
+                                    }));
+                                    // wait for target element animation to complete
+                                    $target.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
+                                        $target.removeClass('drag-collide');
+                                        $target.removeClass('drag-collide-target');
+                                    });
                                     // relayout
-                                    $$._grid.isotope('reloadItems');
-                                    $$._grid.isotope();
+                                    if ($$._relayoutTimeout) {
+                                        clearTimeout($$._relayoutTimeout);
+                                    }
+                                    $$._relayoutTimeout = setTimeout(function() {
+                                        $$._grid.isotope('reloadItems');
+                                        $$._grid.isotope();
+                                    }, 350);
+                                    return false;
                                 }
                             } else {
                                 $(gridItem2).removeClass('drag-collide');
-                                $(gridItem2).removeClass('drag-collide-swapped');
+                                $(gridItem2).removeClass('drag-collide-target');
                             }
                         }
                     });
@@ -391,16 +402,16 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                     $$._placeHolder.css('transform', 'translate3d(0px, 0px, 0px)');
                     // restore dragged item
                     $$._grid.find('.freewall').removeClass('drag-collide');
-                    $item.addClass('freewall');
+                    $item.addClass('freewall').removeClass('drag-collide');
                     // relayout
                     $$._grid.isotope('reloadItems');
                     $$._grid.isotope();
-                    $$._currentSwapElement = null;
+                    $item.css('z-index', $item.attr('old-z-index'));
                 });
             }
         });
     };
-    $$.SortWidgets = function () {
+    $$.WidgetsManager = function () {
         $$.ShowAltToolbar(function () {
             $$.toolbarWidgetsSort.show('slideup');
         });
@@ -410,9 +421,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             var $item = $(gridItem);
             if (!$item.data('draggabilly')) {
                 $item.draggabilly({});
-                $item.on( 'dragMove', function(event, pointer, moveVector) {
-                    console.log(pointer, event);
-                });
             }
             // enable dragging
             $item.draggabilly('enable');
@@ -421,7 +429,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             $$.UpdateWidgetsPosition();
         }, 100);
     };
-    $$.SortWidgetsCancel = function() {
+    $$.WidgetsManagerCancel = function() {
         var grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
         grid.find('.modules-grid-item').each(function(i, gridItem) {
             var $item = $(gridItem);
@@ -433,7 +441,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             $$.HideAltToolbar();
         });
     };
-    $$.SaveWidgets = function () {
+    $$.WidgetsManagerSave = function () {
         $.mobile.loading('show');
         $.ajax({
             type: 'POST',
@@ -446,7 +454,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 $.mobile.loading('hide');
             }
         });
-        $$.SortWidgetsCancel(); // disable drag'n'drop
+        $$.WidgetsManagerCancel(); // disable drag'n'drop
         $$.toolbarWidgetsSort.hide('slidedown', function () {
             $$.HideAltToolbar();
         });

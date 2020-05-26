@@ -63,14 +63,6 @@ fitRows._getItemLayoutPosition = function( item ) {
   return position;
 };
 
-$.fn.swapNode = function(b) {
-    var a = this.get(0);
-    var aparent = a.parentNode;
-    var asibling = a.nextSibling === b ? a : a.nextSibling;
-    b.parentNode.insertBefore(a, b);
-    aparent.insertBefore(b, asibling);
-};
-
 $.fn.hitTestObject = function(selector, hitPercentageMin) {
     if (hitPercentageMin == null) hitPercentageMin = 0.1; //default minimum hit percentage
     var hitOffest = 5;
@@ -83,8 +75,8 @@ $.fn.hitTestObject = function(selector, hitPercentageMin) {
             var compare = compares.get(j).getBoundingClientRect();
             if (!(bounds.right <= compare.left+hitOffest || bounds.left >= compare.right-hitOffest ||
                 bounds.bottom <= compare.top+hitOffest || bounds.top >= compare.bottom-hitOffest)) {
-                var collisionOffsetX = compare.width * hitPercentageMin;
-                var collisionOffsetY = compare.height * hitPercentageMin;
+                var collisionOffsetX = bounds.width * hitPercentageMin;
+                var collisionOffsetY = bounds.height * hitPercentageMin;
                 var hitsMinPercentage = !(bounds.right < compare.left+collisionOffsetX || bounds.left > compare.right-collisionOffsetX ||
                                         bounds.bottom < compare.top+collisionOffsetY || bounds.top > compare.bottom-collisionOffsetY);
                 return hitsMinPercentage ? 2 : 1;
@@ -109,6 +101,10 @@ jQuery.cachedScript = function( url, options ) {
 };
 
 // Compatibility Polyfills and Shims
+
+Array.prototype.move = function(from, to) {
+    this.splice(to, 0, this.splice(from, 1)[0]);
+};
 
 /*! https://mths.be/startswith v0.2.0 by @mathias */
 if (!String.prototype.startsWith) {
