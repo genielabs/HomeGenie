@@ -2,8 +2,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
 
     $$._widgetConfiguration = [];
     $$._widgetList = [];
-    $$._renderModuleDelay = null;
-    $$._renderModuleBusy = false;
     $$._placeHolder = $('<div class="freewall" style="background: white; opacity: 0.2; position: absolute;" data-index="-1"></div>');
     $$._grid = null;
     $$._groupmodules = { 'Index': 0, 'Name': 'Loading...', 'Modules': [] };
@@ -48,10 +46,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             });
         });
         page.on('pagehide', function (e) {
-            // if it was loading, stop loading
-            if (widgetsloadtimer) clearTimeout(widgetsloadtimer);
-            if ($$._renderModuleDelay != null) clearTimeout($$._renderModuleDelay);
-            $$._renderModuleBusy = false;
             widgetsloadqueue = [];
             // hide wallpaper
             $$.field('div[data-ui-field="wallpaper"]', true).hide();
@@ -255,25 +249,14 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     var widgetsloadqueue = [];
-    var widgetsloadtimer = null;
-    $$.RenderNext = function() {
-        $$.RenderModule();
-        return;
-        if (widgetsloadqueue.length > 0) {
-            widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 0);
-        } else {
-            // TODO: widgets loading complete callback
-        }
-    };
     $$.RenderModule = function () {
-        clearTimeout(widgetsloadtimer);
         if (widgetsloadqueue.length > 0) {
             // extract and render element
             var rendermodule = widgetsloadqueue.splice(0, 1)[0];
             var widget = $$.field('#'+rendermodule.ElementId, true).data('homegenie.widget');
             if (widget != null && widget != 'undefined') {
                 HG.WebApp.WidgetEditor.RenderWidget('#'+rendermodule.ElementId, widget, widget.module);
-                $$.RenderNext();
+                $$.RenderModule();
             } else {
                 var html = '<div class="freewall modules-grid-item"><div id="' + rendermodule.ElementId + '" style="display:none" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
                 $$.GetWidget(rendermodule.Module.Widget, function (w) {
@@ -294,22 +277,21 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                                 // render widget view and load next widget
                                 var mod = rendermodule.Module;
                                 HG.WebApp.WidgetEditor.RenderWidget('#'+rendermodule.ElementId, mod.WidgetInstance, mod);
-                                $$.RenderNext();
+                                $$.RenderModule();
                             });
                         } else {
                             alert(rendermodule.Module.Widget + " Widget Instance Error:\n" + e);
                             // an error occurred, continue loading next widget
-                            $$.RenderNext();
+                            $$.RenderModule();
                         }
                     } else {
                         console.log(rendermodule.Module.Widget + " Widget Error.");
                         // an error occurred, continue loading next widget
-                        $$.RenderNext();
+                        $$.RenderModule();
                     }
                 });
             }
         } else {
-            $$._renderModuleBusy = false;
             $$._grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).isotope({
                 itemSelector: '.freewall',
                 layoutMode: 'fitRows',
@@ -317,7 +299,10 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             $$._grid.on( 'arrangeComplete', function() {
                 $$._grid.find('.freewall').removeClass('drag-collide drag-collide-target');
             });
-            $$.UpdateWidgetsPosition();
+            setTimeout(function() {
+                $$._grid.isotope('layout');
+            }, 50);
+            $$.SetupWidgetsDrag();
             $$.UpdateActionsMenu();
             $.mobile.loading('hide');
         }
@@ -325,7 +310,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
     
 
-    $$.UpdateWidgetsPosition = function () {
+    $$.SetupWidgetsDrag = function () {
         var grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
         grid.find('.modules-grid-item').each(function(i, gridItem) {
             var $item = $(gridItem);
@@ -370,7 +355,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                                     // move placeholder div before $item
                                     $$._placeHolder.insertBefore($item);
                                     // update data-indexes
-                                    $item.attr('data-index', targetIndex);
+                                    $item.attr('data-index', targetIndex); // (the element being dragged has `.freewall` class disabled)
                                     grid.find('.freewall').each((function(is, nextElement) {
                                         $(nextElement).attr('data-index', is);
                                     }));
@@ -425,18 +410,13 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             // enable dragging
             $item.draggabilly('enable');
         });
-        setTimeout(function() {
-            $$.UpdateWidgetsPosition();
-        }, 100);
     };
     $$.WidgetsManagerCancel = function() {
-        var grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
-        grid.find('.modules-grid-item').each(function(i, gridItem) {
+        $$._grid.find('.modules-grid-item').each(function(i, gridItem) {
             var $item = $(gridItem);
             // disable dragging
             $item.draggabilly('disable');
         });
-        $$.UpdateWidgetsPosition();
         $$.toolbarWidgetsSort.hide('slidedown', function () {
             $$.HideAltToolbar();
         });
@@ -527,14 +507,10 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.RenderGroupModules = function (groupIndex) {
-        if (widgetsloadqueue.length > 0 || $$._renderModuleBusy) {
-            if ($$._renderModuleDelay != null) clearTimeout($$._renderModuleDelay);
-            $$._renderModuleDelay = setTimeout(function(){ $$.RenderGroupModules(groupIndex); }, 500);
+        if (widgetsloadqueue.length > 0) {
+            $$.RenderGroupModules(groupIndex);
             return;
         }
-        //
-        $$._renderModuleDelay = null;
-        $$._renderModuleBusy = true;
         //
         $$._groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
         var grp = $$.field('#groupdiv_modules_' + $$._groupmodules.Index, true);
@@ -587,9 +563,8 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                 }
             }
         }
-        //
-        widgetsloadtimer = setTimeout(function(){ $$.RenderModule(); }, 10);
-        if (widgetsloadqueue.length == 0) {
+        $$.RenderModule();
+        if (widgetsloadqueue.length === 0) {
             $$.UpdateActionsMenu();
         }
     };

@@ -679,7 +679,42 @@
         $$.UpdateFeatures();
         //
         $$.field('#automation_group_module_edit', true).popup('open', {transition: 'pop', positionTo: 'window'});
+    };
 
+    $$._moduleEditCurrentFeatureIndex = 0;
+    $$._moduleEditFeatureCount = 0;
+    $$.ModuleEditFeaturePrev = function() {
+        $('#module_programs_featureprev').addClass('ui-disabled');
+        if ($$._moduleEditCurrentFeatureIndex > 0) {
+            var featureTitle = $$.field('#module_programs_featurelist', true).find('[id="module_programs_features_' + $$._moduleEditCurrentFeatureIndex + '"]');
+            featureTitle.hide();
+            $$._moduleEditCurrentFeatureIndex--;
+            featureTitle = $$.field('#module_programs_featurelist', true).find('[id="module_programs_features_' + $$._moduleEditCurrentFeatureIndex + '"]');
+            featureTitle.show();
+            $$.ShowFeatures(+featureTitle.attr('data-feature-program'));
+            if ($$._moduleEditCurrentFeatureIndex > 0) {
+                $('#module_programs_featureprev').removeClass('ui-disabled');
+            }
+            $('#module_programs_featurenext').removeClass('ui-disabled');
+        }
+        $('#module_programs_featurecount').html(($$._moduleEditCurrentFeatureIndex + 1) + '/' + $$._moduleEditFeatureCount);
+    };
+
+    $$.ModuleEditFeatureNext = function() {
+        $('#module_programs_featurenext').addClass('ui-disabled');
+        if ($$._moduleEditCurrentFeatureIndex < $$._moduleEditFeatureCount - 1) {
+            var featureTitle = $$.field('#module_programs_featurelist', true).find('[id="module_programs_features_' + $$._moduleEditCurrentFeatureIndex + '"]');
+            featureTitle.hide();
+            $$._moduleEditCurrentFeatureIndex++;
+            featureTitle = $$.field('#module_programs_featurelist', true).find('[id="module_programs_features_' + $$._moduleEditCurrentFeatureIndex + '"]');
+            featureTitle.show();
+            $$.ShowFeatures(+featureTitle.attr('data-feature-program'));
+            if ($$._moduleEditCurrentFeatureIndex < $$._moduleEditFeatureCount - 1) {
+                $('#module_programs_featurenext').removeClass('ui-disabled');
+            }
+            $('#module_programs_featureprev').removeClass('ui-disabled');
+        }
+        $('#module_programs_featurecount').html(($$._moduleEditCurrentFeatureIndex + 1) + '/' + $$._moduleEditFeatureCount);
     };
 
     $$.ShowFeatures = function (programid) {
@@ -701,12 +736,6 @@
                     handler.onChange = function (val) {
                         $$.FeatureUpdate(handler.context, val);
                     };
-                    $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
-                    if (refreshHandler != null)
-                        clearTimeout(refreshHandler);
-                    refreshHandler = setTimeout(function () {
-                        $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
-                    }, 300);
                 });
             }
         }
@@ -753,11 +782,14 @@
         $$.EditModule.Properties = Array(); // used to store "features" values
         //
         $$.field('#module_options_features', true).hide();
-        $$.field('#module_programs_featureset', true).empty();
+        $$.field('#module_programs_featurelist', true).empty();
         $$.field('#module_programs_features', true).empty();
         //
+        var html = '';
         var featureset = '';
         var selected = -1;
+        $$._moduleEditFeatureCount = 0;
+        $$._moduleEditCurrentFeatureIndex = 0;
         for (var p = 0; p < HG.WebApp.Data.Programs.length; p++) {
             var cprogram = -1;
             if (!HG.WebApp.Data.Programs[p].IsEnabled) continue;
@@ -776,8 +808,9 @@
                         prop.Description = features[f].Description;
                         // <prop>.Data is a special field to store extra data related to <prop> (eg. input form state)
                         var propData = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, property+'.Data');
-                        if (propData != null)
+                        if (propData != null) {
                             HG.WebApp.Utility.SetModulePropertyByName($$.EditModule, propData.Name, propData.Value);
+                        }
                         //
                         if (cprogram < 0) {
                             var address = HG.WebApp.Data.Programs[p].Address;
@@ -785,6 +818,10 @@
                             if (pname == '') pname = address;
                             pname = HG.WebApp.Locales.GetProgramLocaleString(address, 'Title', pname);
                             featureset += '<option value="' + p + '">' + pname + '</option>';
+
+                            html += '<span id="module_programs_features_' + $$._moduleEditFeatureCount + '" style="display: none" data-feature-program="' + p + '">' + pname + '</span>';
+                            $$._moduleEditFeatureCount++;
+
                             cprogram = p;
                             if (selected < 0) selected = p;
                         }
@@ -794,15 +831,24 @@
         }
         //
         if (featureset != '') {
-            $$.field('#module_programs_featureset', true).append(featureset);
-            $$.field('#module_programs_featureset', true).selectmenu('refresh', true);
+            $$.field('#module_programs_featurelist', true).append(html);
             $$.field('#module_options_features', true).show();
             //
             if (selected != -1) {
+                $$.field('#module_programs_featurelist', true).find('[data-feature-program=' + selected + ']').show();
                 $$.ShowFeatures(selected);
             }
+            //
+            $('#module_programs_featureprev').addClass('ui-disabled');
+            $('#module_programs_featurenext').addClass('ui-disabled')
+            if ($$._moduleEditFeatureCount > 1) {
+                $('#module_programs_featurenext').removeClass('ui-disabled');
+            }
+            $('#module_programs_featurecount').html(($$._moduleEditCurrentFeatureIndex + 1) + '/' + $$._moduleEditFeatureCount);
         }
-        $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
+        setTimeout( function() {
+            $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
+        }, 350);
     };
 
     $$.FeatureUpdate = function (context, value) {

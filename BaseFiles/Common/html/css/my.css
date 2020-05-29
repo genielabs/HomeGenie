@@ -701,6 +701,19 @@ div.ui-page-theme-a div.ui-body-inherit img.auto-invert, div.ui-bar-inherit img.
     margin-left: -20px;
 }
 
+#module_programs_featurelist {
+    max-height: 40px; overflow: hidden;
+    vertical-align: middle;
+    line-height: 20px;
+    font-size: 110%;
+    font-weight: bold;
+    margin-left: 8px;
+}
+#module_programs_featurelist span {
+    display: block;
+    text-align: center;
+}
+
 #page_automation_editprogram label {
     font-weight: bold;
     font-size: 11pt;

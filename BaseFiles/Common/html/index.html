@@ -97,8 +97,8 @@
     <script src="js/jqm-datebox.lang.utf8.min.js"></script>
 
     <!-- HomeGenie Javascript includes -->
-    <script src="js/homegenie.api.js?version=v1.2-beta.40"></script>
-    <script src="js/homegenie.webapp.js?version=v1.2-beta.40"></script>
+    <script src="js/homegenie.api.js?version=v1.3-stable.8"></script>
+    <script src="js/homegenie.webapp.js?version=v1.3-stable.8"></script>
 
     <!-- custom javascript --><!-- TODO: check wheter this can be deprecated/moved -->
     <script src="js/my.js?version=v1.2-beta.40"></script>
@@ -334,8 +334,15 @@
 
             <div id="module_options_3" style="margin-top:4px">
                 <div id="module_options_features">
-                    <label for="module_programs_featureset" data-locale-id="configure_module_featuresoptions">Features/Options</label>
-                    <select id="module_programs_featureset" onchange="HG.WebApp.GroupModules.ShowFeatures($(this).val())"></select>
+                    <div style="height: 44px; margin: 0; margin-top: 8px; margin-bottom: 12px; padding: 0; position: relative; border-bottom: 2px solid;">
+                        <label data-locale-id="configure_module_featuresoptions" style="padding-top: 12px">Features/Options</label>
+                        <label style="position: absolute; top:12px; right: 90px" id="module_programs_featurecount">1/5</label>
+                        <a id="module_programs_featureprev" href="javascript:HG.WebApp.GroupModules.ModuleEditFeaturePrev()" style="position: absolute; top:0; right: 40px" class="ui-btn ui-mini ui-corner-all ui-icon-arrow-l ui-btn-icon-notext">Previous</a>
+                        <a id="module_programs_featurenext" href="javascript:HG.WebApp.GroupModules.ModuleEditFeatureNext()" style="position: absolute; top:0; right: 0" class="ui-btn ui-mini ui-corner-all ui-icon-arrow-r ui-btn-icon-notext">Next</a>
+                    </div>
+
+                    <div id="module_programs_featurelist"></div>
+                    
                     <p id="module_programs_featuredesc" style="margin-left:10px;margin-right:10px;font-size:10pt;opacity:0.9"></p>
 
                     <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
