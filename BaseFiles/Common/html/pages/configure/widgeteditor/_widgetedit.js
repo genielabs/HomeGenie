@@ -153,6 +153,9 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
                     bindModuleSelect.append('<option value="' + m + '">' + name + '</option>');
                 }
             }
+            bindModuleSelect.change(function() {
+                $$.Run();
+            });
             bindModuleSelect.trigger('create');
             bindModuleSelect.val(selected);
             bindModuleSelect.selectmenu('refresh');
@@ -436,18 +439,20 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
             commonJs += "    };";
             commonJs += "    $$.setModule = function(module) {";
             commonJs += "        $$.module = module;";
-            commonJs += "        $$.module.prop = function(propName, value) {";
-            commonJs += "            var p = HG.WebApp.Utility.GetModulePropertyByName(this, propName);";
-            commonJs += "            if (typeof value != 'undefined')";
-            commonJs += "                p.Value = value;";
-            commonJs += "            return p;";
-            commonJs += "        };";
-            commonJs += "        $$.module.command = function(cmd, opt, callback) {";
-            commonJs += "            HG.Control.Modules.ServiceCall(cmd, this.Domain, this.Address, opt, function (response) { ";
-            commonJs += "                if (typeof callback == 'function')";
-            commonJs += "                    callback(response);";
-            commonJs += "            });";
-            commonJs += "        };";
+            commonJs += "        if ($$.module) {";
+            commonJs += "            $$.module.prop = function(propName, value) {";
+            commonJs += "                var p = HG.WebApp.Utility.GetModulePropertyByName(this, propName);";
+            commonJs += "                if (typeof value != 'undefined')";
+            commonJs += "                    p.Value = value;";
+            commonJs += "                return p;";
+            commonJs += "            };";
+            commonJs += "            $$.module.command = function(cmd, opt, callback) {";
+            commonJs += "                HG.Control.Modules.ServiceCall(cmd, this.Domain, this.Address, opt, function (response) { ";
+            commonJs += "                    if (typeof callback == 'function')";
+            commonJs += "                        callback(response);";
+            commonJs += "                });";
+            commonJs += "            };";
+            commonJs += "        }";
             commonJs += "    };";
             commonJs += "    $$._bind = function(cuid, module) {";
             commonJs += "        $$.setModule(module);";

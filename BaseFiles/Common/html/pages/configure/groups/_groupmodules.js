@@ -679,10 +679,16 @@
         $$.UpdateFeatures();
         //
         $$.field('#automation_group_module_edit', true).popup('open', {transition: 'pop', positionTo: 'window'});
+        // this is a work around to fix a positioning issue that only occurs when the pop-up opens for the first time
+        setTimeout(function() {
+            $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
+        }, 500);
+
     };
 
     $$._moduleEditCurrentFeatureIndex = 0;
     $$._moduleEditFeatureCount = 0;
+    $$._moduleEditRepositionTimeout = null;
     $$.ModuleEditFeaturePrev = function() {
         $('#module_programs_featureprev').addClass('ui-disabled');
         if ($$._moduleEditCurrentFeatureIndex > 0) {
@@ -691,7 +697,12 @@
             $$._moduleEditCurrentFeatureIndex--;
             featureTitle = $$.field('#module_programs_featurelist', true).find('[id="module_programs_features_' + $$._moduleEditCurrentFeatureIndex + '"]');
             featureTitle.show();
-            $$.ShowFeatures(+featureTitle.attr('data-feature-program'));
+            $$.ShowFeatures(+featureTitle.attr('data-feature-program'), function() {
+                // if ($$._moduleEditRepositionTimeout) clearTimeout($$._moduleEditRepositionTimeout);
+                // $$._moduleEditRepositionTimeout = setTimeout(function() {
+                //     $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
+                // }, 500);
+            });
             if ($$._moduleEditCurrentFeatureIndex > 0) {
                 $('#module_programs_featureprev').removeClass('ui-disabled');
             }
@@ -708,7 +719,12 @@
             $$._moduleEditCurrentFeatureIndex++;
             featureTitle = $$.field('#module_programs_featurelist', true).find('[id="module_programs_features_' + $$._moduleEditCurrentFeatureIndex + '"]');
             featureTitle.show();
-            $$.ShowFeatures(+featureTitle.attr('data-feature-program'));
+            $$.ShowFeatures(+featureTitle.attr('data-feature-program'), function() {
+                // if ($$._moduleEditRepositionTimeout) clearTimeout($$._moduleEditRepositionTimeout);
+                // $$._moduleEditRepositionTimeout = setTimeout(function() {
+                //     $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
+                // }, 500);
+            });
             if ($$._moduleEditCurrentFeatureIndex < $$._moduleEditFeatureCount - 1) {
                 $('#module_programs_featurenext').removeClass('ui-disabled');
             }
@@ -717,7 +733,7 @@
         $('#module_programs_featurecount').html(($$._moduleEditCurrentFeatureIndex + 1) + '/' + $$._moduleEditFeatureCount);
     };
 
-    $$.ShowFeatures = function (programid) {
+    $$.ShowFeatures = function (programid, callback) {
         $$.field('#module_programs_features', true).empty();
         var desc = HG.WebApp.Locales.GetProgramLocaleString(HG.WebApp.Data.Programs[programid].Address, 'Description', HG.WebApp.Data.Programs[programid].Description);
         $$.field('#module_programs_featuredesc', true).html(desc);
@@ -736,6 +752,12 @@
                     handler.onChange = function (val) {
                         $$.FeatureUpdate(handler.context, val);
                     };
+                    if (refreshHandler) {
+                        clearTimeout(refreshHandler);
+                    }
+                    refreshHandler = setTimeout(function() {
+                        if (callback) callback();
+                    }, 10);
                 });
             }
         }
@@ -778,7 +800,7 @@
         return isMatching;
     };
 
-    $$.UpdateFeatures = function () {
+    $$.UpdateFeatures = function (callback) {
         $$.EditModule.Properties = Array(); // used to store "features" values
         //
         $$.field('#module_options_features', true).hide();
@@ -836,7 +858,9 @@
             //
             if (selected != -1) {
                 $$.field('#module_programs_featurelist', true).find('[data-feature-program=' + selected + ']').show();
-                $$.ShowFeatures(selected);
+                $$.ShowFeatures(selected, function() {
+                    $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
+                });
             }
             //
             $('#module_programs_featureprev').addClass('ui-disabled');
@@ -846,9 +870,6 @@
             }
             $('#module_programs_featurecount').html(($$._moduleEditCurrentFeatureIndex + 1) + '/' + $$._moduleEditFeatureCount);
         }
-        setTimeout( function() {
-            $$.field('#automation_group_module_edit', true).popup('reposition', {positionTo: 'window'});
-        }, 350);
     };
 
     $$.FeatureUpdate = function (context, value) {

@@ -173,9 +173,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                 element.one('create', function() {
                     handler.element = element;
                     handler.context = context;
-                    setTimeout(function(){
-                        callback(handler);
-                    }, 200);
+                    callback(handler);
                     if (handler.init) {
                         handler.init(options);
                     }

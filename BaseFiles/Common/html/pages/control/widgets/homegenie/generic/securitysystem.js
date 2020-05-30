@@ -29,6 +29,7 @@ $$.onStart = function() {
 }
 
 $$.onRefresh = function () {
+  if (!$$.module) return;
   $$.ui.GetModuleIcon($$.module, function(imgPath){
     $$.field('icon').attr('src', imgPath);
     $$.widget.icon = imgPath;

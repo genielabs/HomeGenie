@@ -14,6 +14,7 @@ $$.onStart = function() {
 }
 
 $$.onRefresh = function () {
+  if (!$$.module) return;
   $$.field('name').html($$.module.Name + " (" + $$.module.DeviceType + ")");
   var description = ($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address;
   $$.field('description').html(description);

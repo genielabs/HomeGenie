@@ -65,7 +65,9 @@ $$.onStart = function() {
 
 // This method is called when the widget UI is request to refresh its view
 $$.onRefresh = function () {
-  $$.field('lbl-name').html($$.module.Name + " (" + $$.module.DeviceType + ")");
+  if ($$.module) {
+    $$.field('lbl-name').html($$.module.Name + " (" + $$.module.DeviceType + ")");
+  }
   $$.field('lbl-description').html('Hello World');
   $$.field('lbl-info').html('default widget template');
 }

@@ -110,6 +110,7 @@ $$.onStart = function() {
 
 $$.onRefresh = function() {
   $$.field('camerapicturepreview').attr('src', imageurl + '?');
+  if (!$$.module) return;
   $$.field('name').html($$.module.Name);
   $$.popup.field('name').html($$.module.Name);
   $$.field('description').html('Camera ' + $$.module.Address);

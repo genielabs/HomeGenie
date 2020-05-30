@@ -32,6 +32,7 @@ $$.onStart = function() {
 }
 
 $$.onRefresh = function () {
+  if (!$$.module) return;
   // Hide dimmer level if device type is switch
   if ($$.module.DeviceType == 'Switch' || $$.module.DeviceType == 'Light') {
     $$.field('level-div').hide();

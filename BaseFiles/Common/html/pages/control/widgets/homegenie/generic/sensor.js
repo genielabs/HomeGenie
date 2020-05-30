@@ -22,6 +22,7 @@ $$.onStart = function() {
 }
 
 $$.onRefresh = function () {
+  if (!$$.module) return;
   // Refresh UI fields
   $$.field('name').html($$.module.Name);
   $$.field('description').html(($$.module.Domain.substring($$.module.Domain.lastIndexOf('.') + 1)) + ' ' + $$.module.Address);
