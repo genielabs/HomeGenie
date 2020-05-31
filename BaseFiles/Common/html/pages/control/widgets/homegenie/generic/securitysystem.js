@@ -60,7 +60,9 @@ $$.onUpdate = function(parameter, value) {
 }
 
 $$.onStop = function() {
-  // TODO: ...
+  if ($$.refreshTimeout) {
+    clearTimeout($$.refreshTimeout);
+  }
 }
 
 

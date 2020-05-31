@@ -4,7 +4,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     $$._widgetList = [];
     $$._placeHolder = $('<div class="freewall" style="background: white; opacity: 0.2; position: absolute;" data-index="-1"></div>');
     $$._grid = null;
-    $$._groupmodules = { 'Index': 0, 'Name': 'Loading...', 'Modules': [] };
 
     $$.InitializePage = function () {
         var page = $$.getContainer();
@@ -474,8 +473,9 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         $$.field('#control_custom_actionmenu', true).empty();
         for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
             if (i == HG.WebApp.Data._CurrentGroupIndex) {
-                for (var m = 0; m < $$._groupmodules.Modules.length; m++) {
-                    var module = $$._groupmodules.Modules[m];
+                var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+                for (var m = 0; m < groupmodules.Modules.length; m++) {
+                    var module = groupmodules.Modules[m];
                     if (module.Widget == 'homegenie/generic/program') {
                         // add item to actions menu
                         $$.field('#control_custom_actionmenu', true).append('<li><a class="ui-btn ui-icon-fa-play-circle-o ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
@@ -488,10 +488,11 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
 
     $$.UpdateModuleWidget = function (domain, address, parameter, value) {
         for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-            for (var m = 0; m < $$._groupmodules.Modules.length; m++) {
-                var module = $$._groupmodules.Modules[m];
+            var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+            for (var m = 0; m < groupmodules.Modules.length; m++) {
+                var module = groupmodules.Modules[m];
                 if (module.Domain == domain && module.Address == address) {
-                    var uid = 'groupdiv_modules_' + $$._groupmodules.Index + '_module_' + $$.GetModuleUid(module);
+                    var uid = 'groupdiv_modules_' + groupmodules.Index + '_module_' + $$.GetModuleUid(module);
                     var cuid = '#' + uid;
                     var modui = $$.field(cuid, true);
                     var type = module.DeviceType + ''; type = type.toLowerCase();
@@ -512,10 +513,10 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             return;
         }
         //
-        $$._groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
-        var grp = $$.field('#groupdiv_modules_' + $$._groupmodules.Index, true);
-        for (var m = 0; m < $$._groupmodules.Modules.length; m++) {
-            var module = $$._groupmodules.Modules[m];
+        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
+        var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
+        for (var m = 0; m < groupmodules.Modules.length; m++) {
+            var module = groupmodules.Modules[m];
             var uid = (grp.attr('id') + '_module_' + $$.GetModuleUid(module));
             var cuid = '#' + uid;
             var modui = $$.field(cuid, true);
@@ -602,7 +603,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
 
     $$._RefreshGroupIndicators = function () {
         for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-            //$$._groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+            var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
             var grouploadkw = 0;
             var operating_lights = 0;
             var operating_switches = 0;
@@ -611,8 +612,9 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
             var group_luminance = null;
             var group_doorwindow = null;
             //
-            for (var m = 0; m < $$._groupmodules.Modules.length; m++) {
-                var module = $$._groupmodules.Modules[m];
+            var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
+            for (var m = 0; m < groupmodules.Modules.length; m++) {
+                var module = groupmodules.Modules[m];
                 var type = module.DeviceType + ''; type = type.toLowerCase();
                 //
                 var w = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
