@@ -530,58 +530,59 @@
     function automationpage_ConditionsRefresh() {
 
         $('#automation_program_conditions').empty();
-        var html = '';
-        for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length; i++) {
-            var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i];
-            var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition.Domain, condition.Target);
+        if (HG.WebApp.ProgramEdit._CurrentProgram.Conditions) {
+            var html = '';
+            for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length; i++) {
+                var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i];
+                var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition.Domain, condition.Target);
 
-            if (condition.ComparisonOperator == "-1") {
-                condition.ComparisonOperator = "LessThan";
+                if (condition.ComparisonOperator == "-1") {
+                    condition.ComparisonOperator = "LessThan";
+                }
+                else if (condition.ComparisonOperator == "0") {
+                    condition.ComparisonOperator = "Equals";
+                }
+                else if (condition.ComparisonOperator == "1") {
+                    condition.ComparisonOperator = "GreaterThan";
+                }
+                else if (condition.ComparisonOperator == "100") {
+                    condition.ComparisonOperator = "LogicOrJoint";
+                }
+                var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
+                var displayName = (module != null ? module.Name : '');
+                html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_ConditionChangeLine(' + i + ')">#' + lineNumber + '</div>';
+                if (condition.ComparisonOperator == 'LogicOrJoint')
+                {
+                    html += '<div class="ui-grid-b hg-wizard-grid" style="background-color:lightgray" onclick="automationpage_ConditionChangeLine(' + i + ')">';
+                    html += '<div class="ui-block-a">&nbsp;</div>'
+                    html += '<div class="ui-block-b" align="center">OR</div>'
+                    html += '<div class="ui-block-c">&nbsp;</div>'
+                    html += '</div>';
+                }
+                else
+                {
+                    html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
+                    html += '<div class="ui-block-a">&nbsp;' + condition.Domain + '/' + condition.Target + '</div>';
+                    html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
+                    html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
+                    html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';
+                    html += '<div class="ui-block-e">&nbsp;' + condition.ComparisonValue + '</div>';
+                    /*
+                    $('#automation_program_conditions').append('' +
+                        '<li data-context-value="' + i + '"><a>' +
+                        ' <span style="color:gray">' + condition.Domain.split('.')[1] + '</span>' +
+                        ' ' + condition.Target +
+                        ' <span style="color:gray">property</span> <b>' + pname + '</b>' +
+                        ' <span style="color:gray">' + condition.ComparisonOperator + '</span>' +
+                        ' <b>' + condition.ComparisonValue + '</b>' +
+                        '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-inline="true" data-transition="pop" href="#automation_condition_delete">Delete</a></li>');
+                    */
+                    html += '</div>';
+                }
             }
-            else if (condition.ComparisonOperator == "0") {
-                condition.ComparisonOperator = "Equals";
-            }
-            else if (condition.ComparisonOperator == "1") {
-                condition.ComparisonOperator = "GreaterThan";
-            }
-            else if (condition.ComparisonOperator == "100") {
-                condition.ComparisonOperator = "LogicOrJoint";
-            }
-            var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
-            var displayName = (module != null ? module.Name : '');
-            html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_ConditionChangeLine(' + i + ')">#' + lineNumber + '</div>';
-            if (condition.ComparisonOperator == 'LogicOrJoint')
-            {
-                html += '<div class="ui-grid-b hg-wizard-grid" style="background-color:lightgray" onclick="automationpage_ConditionChangeLine(' + i + ')">';
-                html += '<div class="ui-block-a">&nbsp;</div>'
-                html += '<div class="ui-block-b" align="center">OR</div>'
-                html += '<div class="ui-block-c">&nbsp;</div>'
-                html += '</div>';
-            }
-            else
-            {
-                html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
-                html += '<div class="ui-block-a">&nbsp;' + condition.Domain + '/' + condition.Target + '</div>';
-                html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
-                html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
-                html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';
-                html += '<div class="ui-block-e">&nbsp;' + condition.ComparisonValue + '</div>';
-                /*
-                $('#automation_program_conditions').append('' +
-                    '<li data-context-value="' + i + '"><a>' +
-                    ' <span style="color:gray">' + condition.Domain.split('.')[1] + '</span>' +
-                    ' ' + condition.Target +
-                    ' <span style="color:gray">property</span> <b>' + pname + '</b>' +
-                    ' <span style="color:gray">' + condition.ComparisonOperator + '</span>' +
-                    ' <b>' + condition.ComparisonValue + '</b>' +
-                    '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-inline="true" data-transition="pop" href="#automation_condition_delete">Delete</a></li>');
-                */
-                html += '</div>';
-            }
+            $('#automation_program_conditions').append(html);
+            $('#automation_program_conditions').trigger('create');
         }
-        $('#automation_program_conditions').append(html);
-        $('#automation_program_conditions').trigger('create');
-
     }
 
 

@@ -63,10 +63,30 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             $('#program_import_uploadframe').bind('load', function () {
                 $('#program_import_uploadfile').val('');
                 $.mobile.loading('hide');
-                $$.LoadPrograms(null);
+                $$.LoadPrograms();
             });
-
+            $('#btn_automationprograms_program_edit').bind('click', function() {
+                $$.EditProgram();
+                $.mobile.changePage($('#page_automation_editprogram'), {transition: 'fade', changeHash: true});
+            });
+            $('#btn_automationprograms_program_clone').bind('click', function (event) {
+                HG.WebApp.ProgramEdit.ProgramClone(function() {
+                    $$.LoadPrograms();
+                });
+                $('#automationprograms_list_programoptions').popup('close');
+                return true;
+            });
+            $('#btn_automationprograms_program_delete').bind('click', function (event) {
+                HG.Ui.SwitchPopup('#automationprograms_list_programoptions', '#automation_program_delete');
+                return true;
+            });
+            //
+            $('#configure_program_editoroptions').bind('click', function (event) {
+                $$.UpdateOptionsPopup();
+                return true;
+            });
         });
+        $('#automationprograms_list_programoptions').enhanceWithin().popup();
         page.on('pagebeforeshow', function (e) {
             $$.LoadPrograms();
         });
@@ -409,7 +429,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             if (pgroup != HG.WebApp.AutomationGroupsList._CurrentGroup) continue;
             //
             var pname = HG.WebApp.Locales.GetProgramLocaleString(progrm.Address, 'Title', progrm.Name);
-            var item = '<li data-icon="' + (progrm.IsEnabled ? 'check' : 'alert') + '">';
+            var item = '<li data-icon="bars">';
             item += '<a href="#" class="programitem" data-program-domain="' + progrm.Domain + '"  data-program-address="' + progrm.Address + '" data-program-index="' + i + '">';
             //
             var status = $$.GetProgramStatusColor(progrm);
@@ -425,7 +445,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             item += '   <h3 class="ui-li-heading"><img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ' + pname + '</h3>';
             item += '   <p class="ui-li-desc">' + descr + ' &nbsp;</p>';
             item += '</a>';
-            item += '<a href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(\'' + progrm.Address + '\')">' + (progrm.IsEnabled ? HG.WebApp.Locales.GetLocaleString('configure_programslist_tap_disable') : HG.WebApp.Locales.GetLocaleString('configure_programslist_tap_enable')) + '</a>';
+            item += '<a onclick="HG.WebApp.ProgramsList.ShowCurrentProgramMenu(this, \'' + progrm.Address + '\')">Options</a>';
             //
             item += '</li>';
             $('#configure_programslist').append(item);
@@ -433,10 +453,9 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         $('#configure_programslist').listview();
         $('#configure_programslist').listview('refresh');
         //
-        $('#configure_programslist li a.programitem').bind("click", function () {
+        $('#configure_programslist li a.programitem').bind('click', function () {
             HG.WebApp.ProgramEdit._CurrentProgram.Domain = $(this).attr('data-program-domain');
             HG.WebApp.ProgramEdit._CurrentProgram.Address = $(this).attr('data-program-address');
-            //$$.UpdateOptionsPopup();
             $$.EditProgram();
             $.mobile.changePage($('#page_automation_editprogram'), {transition: 'fade', changeHash: true});
         });
@@ -710,6 +729,23 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
         });
     };
 
+    $$.ShowCurrentProgramMenu = function (el, paddr) {
+        HG.WebApp.ProgramEdit._CurrentProgram = HG.WebApp.Utility.GetProgramByAddress(paddr);
+        $('#automationprograms_program_popup_title').html('Program <strong>' + HG.WebApp.ProgramEdit._CurrentProgram.Address + '</strong>');
+        if (HG.WebApp.ProgramEdit._CurrentProgram.IsEnabled) {
+            $('#btn_automationprograms_program_enable').hide();
+            $('#btn_automationprograms_program_disable').show();
+        } else {
+            $('#btn_automationprograms_program_enable').show();
+            $('#btn_automationprograms_program_disable').hide();
+        }
+        $('#automationprograms_list_programoptions')
+            .popup('open', {
+                positionTo: el,
+                transition: 'slideDown'
+            });
+    };
+    
     $$.ToggleProgramIsEnabled = function (paddr) {
         var cp = HG.WebApp.Utility.GetProgramByAddress(paddr);
         cp.IsEnabled = !cp.IsEnabled;

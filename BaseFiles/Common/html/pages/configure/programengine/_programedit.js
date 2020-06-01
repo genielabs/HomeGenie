@@ -35,11 +35,6 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
                 $('#automation_programtype_option_arduino').hide();
             }
             //
-            $('#program_delete_button').bind('click', function (event) {
-                $$.DeleteProgram($$._CurrentProgram.Address);
-                return true;
-            });
-            //
             $('#editprograms_backbutton').on('click', function () {
                 $$.CheckIsClean(function () {
                     $.mobile.pageContainer.pagecontainer('change', '#page_automation_programs');
@@ -248,6 +243,19 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
                     $.mobile.loading('hide');
                 });
             });
+        });
+        // initialize program delete popup that is also used in the programs list page
+        $('#automation_program_delete').enhanceWithin().popup();
+        // delete popup button is registered on initialize because this handler is also used for programs list page
+        $('#program_delete_button').bind('click', function (event) {
+            $$.DeleteProgram($$._CurrentProgram.Address, function() {
+                HG.WebApp.ProgramsList.LoadPrograms();
+                // if called from Edit Program page, go back to programs list page
+                setTimeout(function () {
+                    $.mobile.changePage($('#page_automation_programs'), {transition: 'fade', changeHash: true});
+                }, 200);
+            });
+            return true;
         });
     };
 
@@ -808,13 +816,11 @@ HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || new function () {
         });
     };
 
-    $$.DeleteProgram = function (program) {
+    $$.DeleteProgram = function (program, callback) {
         $.mobile.loading('show', {text: 'Deleting program', textVisible: true, theme: 'a', html: ''});
         HG.Automation.Programs.DeleteProgram(program, function () {
             $.mobile.loading('hide');
-            setTimeout(function () {
-                $.mobile.changePage($('#page_automation_programs'), {transition: 'fade', changeHash: true});
-            }, 200);
+            if (callback) callback();
         });
     };
 

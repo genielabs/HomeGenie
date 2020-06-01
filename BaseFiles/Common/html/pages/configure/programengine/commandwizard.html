@@ -446,36 +446,38 @@
 
     function automationpage_CommandsRefresh() {
         $('#automation_program_instructions').empty();
-        var html = '';
-        for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Commands.length; i++) {
-            var command = HG.WebApp.ProgramEdit._CurrentProgram.Commands[i];
-            var module = HG.WebApp.Utility.GetModuleByDomainAddress(command.Domain, command.Target);
-            var args = "";
-            if (command.CommandArguments != 'undefined') {
-                args = command.CommandArguments;
+        if (HG.WebApp.ProgramEdit._CurrentProgram.Commands) {
+            var html = '';
+            for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Commands.length; i++) {
+                var command = HG.WebApp.ProgramEdit._CurrentProgram.Commands[i];
+                var module = HG.WebApp.Utility.GetModuleByDomainAddress(command.Domain, command.Target);
+                var args = "";
+                if (command.CommandArguments != 'undefined') {
+                    args = command.CommandArguments;
+                }
+                var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
+                var displayName = (module != null ? module.Name : '');
+                html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_CommandChangeLine(' + i + ')">#' + lineNumber + '</div>';
+                html += '<div class="ui-grid-c hg-wizard-grid" onclick="automationpage_CommandEditLine(' + i + ')">';
+                html += '<div class="ui-block-a">&nbsp;' + command.Domain + '/' + command.Target + '</div>';
+                html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
+                html += '<div class="ui-block-c">&nbsp;' + command.CommandString + '</div>';
+                html += '<div class="ui-block-d">&nbsp;' + args + '</div>';
+                /*
+                $('#automation_program_instructions').append('' +
+                    '<li data-context-value="' + i + '"><a>' +
+                    ' <span style="color:gray">' + command.Domain.split('.')[1] + '</span>' +
+                    ' ' + command.Target + (module ? ' <span style="color:gray">' + module.DeviceType + '</span>' : ' <span style="color:gray">do</span>') +
+                    ' <b>' + command.CommandString.split('.')[1].toUpperCase() + '</b>' +
+                    ' ' +
+                    '<b>' + args + '</b>' +
+                    '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-transition="pop" href="#automation_command_delete">Delete</a></li>');
+                */
+                html += '</div>';
             }
-            var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
-            var displayName = (module != null ? module.Name : '');
-            html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_CommandChangeLine(' + i + ')">#' + lineNumber + '</div>';
-            html += '<div class="ui-grid-c hg-wizard-grid" onclick="automationpage_CommandEditLine(' + i + ')">';
-            html += '<div class="ui-block-a">&nbsp;' + command.Domain + '/' + command.Target + '</div>';
-            html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
-            html += '<div class="ui-block-c">&nbsp;' + command.CommandString + '</div>';
-            html += '<div class="ui-block-d">&nbsp;' + args + '</div>';
-            /*
-            $('#automation_program_instructions').append('' +
-                '<li data-context-value="' + i + '"><a>' +
-                ' <span style="color:gray">' + command.Domain.split('.')[1] + '</span>' +
-                ' ' + command.Target + (module ? ' <span style="color:gray">' + module.DeviceType + '</span>' : ' <span style="color:gray">do</span>') +
-                ' <b>' + command.CommandString.split('.')[1].toUpperCase() + '</b>' +
-                ' ' +
-                '<b>' + args + '</b>' +
-                '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-transition="pop" href="#automation_command_delete">Delete</a></li>');
-            */
-            html += '</div>';
+            $('#automation_program_instructions').append(html);
+            $('#automation_program_instructions').trigger('create');
         }
-        $('#automation_program_instructions').append(html);
-        $('#automation_program_instructions').trigger('create');
     }
 
 </script>
