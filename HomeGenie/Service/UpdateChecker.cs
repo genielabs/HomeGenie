@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -113,6 +113,7 @@ namespace HomeGenie.Service
         private const string releaseFile = "release_info.xml";
         private const string githubRepository = "HomeGenie";
         private string githubReleases = String.Format("https://api.github.com/repos/genielabs/{0}/releases", githubRepository);
+        private string releaseNameFilter = "-stable.";
         // TODO: deprecate this
         private const string endpointUrl = "http://www.homegenie.it/release_updates_v1_1.php";
 
@@ -161,7 +162,7 @@ namespace HomeGenie.Service
                 }
             } catch { }
             // verify against accepted certificate hash strings
-            if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors 
+            if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors
                 && acceptedCertificates.Contains(remoteCertificateHash))
             {
                 Console.WriteLine("Applied 'SSL certificates issue' work-around.");
@@ -269,7 +270,8 @@ namespace HomeGenie.Service
                     {
                         foreach(dynamic relFile in (rel.assets as JArray))
                         {
-                            if (relFile.browser_download_url.ToString().EndsWith(".tgz"))
+                            string relFileName = relFile.browser_download_url.ToString();
+                            if (relFileName.IndexOf(releaseNameFilter) > 0 && relFileName.EndsWith(".tgz"))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                                 releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();
@@ -416,11 +418,11 @@ namespace HomeGenie.Service
             {
                 var ri = GetReleaseFile(Path.Combine(destinationFolder, "homegenie", releaseFile));
                 ri.ReleaseDate = releaseInfo.ReleaseDate.ToUniversalTime();
-                XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo)); 
+                XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo));
                 using (TextWriter writer = new StreamWriter(Path.Combine(destinationFolder, "homegenie", releaseFile)))
                 {
-                    serializer.Serialize(writer, ri); 
-                } 
+                    serializer.Serialize(writer, ri);
+                }
             }
 
             return files;
@@ -539,7 +541,7 @@ namespace HomeGenie.Service
                     }
 
                     if (doNotCopy) continue;
-                    
+
                     // Update the file
                     if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so"))
                         restartRequired = true;
@@ -558,7 +560,7 @@ namespace HomeGenie.Service
                         LogMessage("+ Backup file '" + oldFile + "'");
 
                         // TODO: delete oldFilesPath before starting update
-                        //File.Delete(oldFile); 
+                        //File.Delete(oldFile);
 
                         if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll"))
                         {
@@ -615,7 +617,7 @@ namespace HomeGenie.Service
         {
             bool success = true;
             //
-            // add new modules groups 
+            // add new modules groups
             //
             try
             {
@@ -656,7 +658,7 @@ namespace HomeGenie.Service
         {
             bool success = true;
             //
-            // add new automation groups 
+            // add new automation groups
             //
             try
             {
@@ -838,7 +840,7 @@ namespace HomeGenie.Service
 
                             // Add the new program to the ProgramEngine
                             homegenie.ProgramManager.ProgramAdd(program);
-                            
+
                             // Compile C# programs in order to generate new binary file
                             if (program.Type.ToLower() == "csharp")
                             {

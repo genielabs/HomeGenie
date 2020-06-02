@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -55,7 +55,7 @@ namespace HomeGenie.Service
         public const string authenticationRealm = "HomeGenie Secure Zone";
 
         #endregion
-        
+
         #region Private Fields declaration
 
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
@@ -156,7 +156,7 @@ namespace HomeGenie.Service
 
             Start();
         }
-        
+
         public bool RebuildPrograms { get; set; }
 
         public void Start()
@@ -345,7 +345,7 @@ namespace HomeGenie.Service
             //
             // Macro Recording
             //
-            // TODO: find a better solution for this.... 
+            // TODO: find a better solution for this....
             // TODO: it was: migService_ServiceRequestPostProcess(this, new ProcessRequestEventArgs(cmd));
             // TODO: !IMPORTANT!
             if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && cmd != null && cmd.Command != null && (cmd.Command.StartsWith("Control.") || (cmd.Command.StartsWith("AvMedia.") && cmd.Command != "AvMedia.Browse" && cmd.Command != "AvMedia.GetUri")))
@@ -519,7 +519,7 @@ namespace HomeGenie.Service
 
         private void migService_InterfacePropertyChanged(object sender, InterfacePropertyChangedEventArgs args)
         {
-            
+
             // look for module associated to this event
             Module module = Modules.Find(o => o.Domain == args.EventData.Domain && o.Address == args.EventData.Source);
             if (module != null && args.EventData.Property != "")
@@ -728,6 +728,9 @@ namespace HomeGenie.Service
         /// </summary>
         public void Reload()
         {
+            // delete service address log file
+            File.Delete("serviceaddress.txt");
+
             migService.StopService();
 
             LoadConfiguration();
@@ -773,7 +776,7 @@ namespace HomeGenie.Service
                     webPort = 8080;
                 else
                     webPort++;
-                if (webPort <= 8090)
+                if (webPort <= 8180) // binding range [8080-8180]
                 {
                     webGateway.SetOption(WebServiceGatewayOptions.Port, webPort.ToString());
                     started = webGateway.Start();
@@ -783,14 +786,18 @@ namespace HomeGenie.Service
 
             if (started)
             {
+                string serviceHost = webGateway.GetOption(WebServiceGatewayOptions.Host).Value;
+                string servicePort = webGateway.GetOption(WebServiceGatewayOptions.Port).Value;
                 RaiseEvent(
                     Domains.HomeGenie_System,
                     Domains.HomeAutomation_HomeGenie,
                     SourceModule.Master,
                     "HomeGenie service ready",
                     Properties.SystemInfoHttpAddress,
-                    webGateway.GetOption(WebServiceGatewayOptions.Host).Value + ":" + webGateway.GetOption(WebServiceGatewayOptions.Port).Value
+                    serviceHost + ":" + servicePort
                 );
+                // log service address to file
+                File.WriteAllText("serviceaddress.txt", String.Format("HG_SERVICE_HOST={0}\nHG_SERVICE_PORT={1}\n", serviceHost, servicePort));
             }
             else
             {
@@ -988,15 +995,15 @@ namespace HomeGenie.Service
         {
             modules_RefreshAll();
         }
- 
+
         #endregion
 
         #region Internals for modules' structure update and sorting
 
         internal void modules_RefreshVirtualModules()
         {
-            lock (systemModules.LockObject) 
-            lock (virtualModules.LockObject) 
+            lock (systemModules.LockObject)
+            lock (virtualModules.LockObject)
             try
             {
                 //
@@ -1102,13 +1109,13 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshPrograms()
         {
-            lock (systemModules.LockObject) 
+            lock (systemModules.LockObject)
             try
             {
                 // Refresh ProgramEngine program modules
                 if (masterControlProgram != null)
                 {
-                    lock (masterControlProgram.Programs.LockObject) 
+                    lock (masterControlProgram.Programs.LockObject)
                     foreach (var program in masterControlProgram.Programs)
                     {
                         Module module = systemModules.Find(o => o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString());
