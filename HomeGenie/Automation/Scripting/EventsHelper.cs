@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -57,7 +57,7 @@ namespace HomeGenie.Automation.Scripting
         ///         Program.Say("HomeGenie is now ready!");
         ///         // returning false will prevent this event from being routed to other listeners
         ///         return false;
-        ///     }); 
+        ///     });
         /// </code></example>
         public EventsHelper SystemStarted(Func<bool> handler)
         {
@@ -65,7 +65,7 @@ namespace HomeGenie.Automation.Scripting
             program.Engine.SystemStarted = handler;
             return this;
         }
-        
+
         /// <summary>
         /// Call the specified `handler` when HomeGenie service is stopping.
         /// </summary>
@@ -80,7 +80,7 @@ namespace HomeGenie.Automation.Scripting
         ///         Program.Say("See ya soon!");
         ///         // returning true will route this event to other listeners
         ///         return true;
-        ///     }); 
+        ///     });
         /// </code></example>
         public EventsHelper SystemStopping(Func<bool> handler)
         {
@@ -88,7 +88,7 @@ namespace HomeGenie.Automation.Scripting
             program.Engine.SystemStopping = handler;
             return this;
         }
-        
+
         /// <summary>
         /// Call the specified `handler` when the program is beign stopped.
         /// </summary>
@@ -103,7 +103,7 @@ namespace HomeGenie.Automation.Scripting
         ///         Program.Say("Oh-oh! I'm quitting!");
         ///         // returning true will route this event to other listeners
         ///         return true;
-        ///     }); 
+        ///     });
         /// </code></example>
         public EventsHelper ProgramStopping(Func<bool> handler)
         {
@@ -130,7 +130,7 @@ namespace HomeGenie.Automation.Scripting
         ///             return false;
         ///         }
         ///         return true;
-        ///     }); 
+        ///     });
         /// </code></example>
         /// <seealso cref="ModuleParameterIsChanging"/>
         public EventsHelper ModuleParameterChanged(Func<ModuleHelper, ModuleParameter, bool> handler)
@@ -141,7 +141,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified `handler` function when a parameter of a module is changing. 
+        /// Call the specified `handler` function when a parameter of a module is changing.
         /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
@@ -160,7 +160,7 @@ namespace HomeGenie.Automation.Scripting
         ///         }
         ///         // continue event propagation
         ///         return true;
-        ///     }); 
+        ///     });
         /// </code></example>
         /// <seealso cref="ModuleParameterChanged"/>
         public EventsHelper ModuleParameterIsChanging(Func<ModuleHelper, ModuleParameter, bool> handler)
@@ -184,12 +184,12 @@ namespace HomeGenie.Automation.Scripting
         ///     When.WebServiceCallReceived( "Hello.World", (args) =>
         ///     {
         ///         var returnstring = "";
-        ///         if (args == "Greet")
+        ///         if (args == "Hello.World/Greet")
         ///         {
         ///             returnstring = "Hello HomeGenie World!";
         ///         }
         ///         return returnstring;
-        ///     }); 
+        ///     });
         /// </code>
         /// In the snippet above, if we wanted to create an "Hello World" program that respond to the custom API call:
         /// \n

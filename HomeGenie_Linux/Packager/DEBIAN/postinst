@@ -17,7 +17,7 @@ sudo /etc/init.d/homegenie start
 sleep 1
 while [ ! -f /usr/local/bin/homegenie/serviceaddress.txt ]; do sleep 1; echo "."; done
 sleep 1
-echo "HomeGenie service succesfully installed."
+echo "HomeGenie service successfully installed."
 while read LINE; do export "$LINE"; done < /usr/local/bin/homegenie/serviceaddress.txt
 if [ "$HG_SERVICE_HOST" = "+" ]; then
     HG_SERVICE_HOST="localhost";

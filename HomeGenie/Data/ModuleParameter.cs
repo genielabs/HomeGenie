@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -24,6 +24,8 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Xml.Serialization;
+
+using LiteDB;
 
 using Newtonsoft.Json;
 
@@ -44,7 +46,7 @@ namespace HomeGenie.Data
         //
         public ModuleParameter()
         {
-            // initialize 
+            // initialize
             Name = "";
             Value = "";
             Description = "";
@@ -56,7 +58,7 @@ namespace HomeGenie.Data
         /// Gets the statistics.
         /// </summary>
         /// <value>The statistics.</value>
-        [XmlIgnore, JsonIgnore]
+        [XmlIgnore, JsonIgnore, BsonIgnore]
         public ValueStatistics Statistics
         {
             get
@@ -99,12 +101,14 @@ namespace HomeGenie.Data
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
+        [BsonIgnore]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the field.
         /// </summary>
         /// <value>The type of the field.</value>
+        [BsonIgnore]
         public string FieldType { get; set; }
 
         /// <summary>
@@ -113,14 +117,14 @@ namespace HomeGenie.Data
         /// <value>The update time.</value>
         public DateTime UpdateTime { get; set; }
 
-        [XmlIgnore]
+        [XmlIgnore, BsonIgnore]
         public bool NeedsUpdate { get; set; }
 
         /// <summary>
         /// Gets the decimal value.
         /// </summary>
         /// <value>The decimal value.</value>
-        [XmlIgnore, JsonIgnore]
+        [XmlIgnore, JsonIgnore, BsonIgnore]
         public double DecimalValue
         {
             get
@@ -163,10 +167,10 @@ namespace HomeGenie.Data
         /// Gets the idle time (time elapsed since last update).
         /// </summary>
         /// <value>The idle time.</value>
-        [XmlIgnore, JsonIgnore]
+        [XmlIgnore, JsonIgnore, BsonIgnore]
         public double IdleTime
         {
-            get 
+            get
             {
                 return (DateTime.UtcNow - UpdateTime).TotalSeconds;
             }
@@ -175,4 +179,3 @@ namespace HomeGenie.Data
     }
 
 }
-

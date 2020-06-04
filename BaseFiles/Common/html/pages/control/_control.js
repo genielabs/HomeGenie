@@ -128,7 +128,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     $$.ConfigureGroup = function () {
         HG.WebApp.GroupsList.ConfigureGroup(HG.WebApp.Data._CurrentGroupIndex);
     };
-    
+
     $$.ShowAltToolbar = function(callback) {
         $$.field('#control_actionmenu', true).popup('close');
         $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
@@ -293,23 +293,102 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         } else {
             $$._grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true).isotope({
                 itemSelector: '.freewall',
-                layoutMode: 'fitRows',
-            }).isotope().addClass('isotope');
+                layoutMode: 'fitRows'
+            }).isotope({transitionDuration: '300ms'}).addClass('isotope');
             $$._grid.on( 'arrangeComplete', function() {
                 $$._grid.find('.freewall').removeClass('drag-collide drag-collide-target');
             });
             setTimeout(function() {
                 $$._grid.isotope('layout');
             }, 50);
-            $$.SetupWidgetsDrag();
             $$.UpdateActionsMenu();
             $.mobile.loading('hide');
         }
 
     };
-    
 
-    $$.SetupWidgetsDrag = function () {
+    $$.WidgetsManager_dragStartHandler = function(event, pointer) {
+        var $item = $(this);
+        // insert placeholder div before dragged element
+        $$._placeHolder.css('left', $item.css('left'));
+        $$._placeHolder.css('top', $item.css('top'));
+        $$._placeHolder.css('width', $item.width());
+        $$._placeHolder.css('height', $item.height());
+        $$._placeHolder.insertBefore($item);
+        // remove dragged item
+        $item.removeClass('freewall').addClass('drag-collide');
+        $item.attr('old-z-index', $item.css('z-index'));
+        $item.css('z-index', 1000);
+    };
+    $$.WidgetsManager_dragMoveHandler = function(event, pointer, moveVector) {
+        var $item = $(this);
+        var gid = HG.WebApp.Data._CurrentGroupIndex;
+        var currentGroup = HG.WebApp.Data.Groups[gid];
+        var grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
+        grid.find('.modules-grid-item').each(function(i2, gridItem2) {
+            if ($item.get(0) !== gridItem2) {
+                var hitTestResult = $item.hitTestObject(gridItem2, 0.5);
+                if (hitTestResult) {
+                    var $target = $(gridItem2);
+                    // re-arrange elements (insert sourceIndex before/after targetIndex)
+                    var sourceIndex = +$item.attr('data-index');
+                    var targetIndex = +$target.attr('data-index');
+                    if (hitTestResult === 2 && !$target.hasClass('drag-collide-target')) {
+                        $target.addClass('drag-collide drag-collide-target');
+                        if ($item.index() < $target.index()) { // insert after
+                            currentGroup.Modules.move(sourceIndex, targetIndex);
+                            $item.insertAfter($target);
+                        } else { // inser before
+                            currentGroup.Modules.move(sourceIndex, targetIndex);
+                            $item.insertBefore($target);
+                        }
+                        // move placeholder div before $item
+                        $$._placeHolder.insertBefore($item);
+                        // update data-indexes
+                        $item.attr('data-index', targetIndex); // (the element being dragged has `.freewall` class disabled)
+                        grid.find('.freewall').each((function(is, nextElement) {
+                            $(nextElement).attr('data-index', is);
+                        }));
+                        // wait for target element animation to complete
+                        $target.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
+                            $target.removeClass('drag-collide');
+                            $target.removeClass('drag-collide-target');
+                        });
+                        // relayout
+                        if ($$._relayoutTimeout) {
+                            clearTimeout($$._relayoutTimeout);
+                        }
+                        $$._relayoutTimeout = setTimeout(function() {
+                            $$._grid.isotope('reloadItems');
+                            $$._grid.isotope({transitionDuration: '300ms'});
+                        }, 350);
+                        return false;
+                    }
+                } else {
+                    $(gridItem2).removeClass('drag-collide');
+                    $(gridItem2).removeClass('drag-collide-target');
+                }
+            }
+        });
+    };
+    $$.WidgetsManager_dragEndHandler = function(event, pointer) {
+        var $item = $(this);
+        // remove placeholder div
+        $$._placeHolder.remove();
+        $$._placeHolder.css('transform', 'translate3d(0px, 0px, 0px)');
+        // restore dragged item
+        $$._grid.find('.freewall').removeClass('drag-collide');
+        $item.addClass('freewall').removeClass('drag-collide');
+        // relayout
+        $$._grid.isotope('reloadItems');
+        $$._grid.isotope({transitionDuration: '300ms'});
+        $item.css('z-index', $item.attr('old-z-index'));
+    };
+
+    $$.WidgetsManager = function () {
+        $$.ShowAltToolbar(function () {
+            $$.toolbarWidgetsSort.show('slideup');
+        });
         var grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
         grid.find('.modules-grid-item').each(function(i, gridItem) {
             var $item = $(gridItem);
@@ -318,104 +397,24 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
                     $item.attr('data-index', $item.index());
                 }
                 $item.draggabilly({});
-                $item.draggabilly('disable');
-                $item.on('dragStart', function(event, pointer) {
-                    // insert placeholder div before dragged element
-                    $$._placeHolder.css('left', $item.css('left'));
-                    $$._placeHolder.css('top', $item.css('top'));
-                    $$._placeHolder.css('width', $item.width());
-                    $$._placeHolder.css('height', $item.height());
-                    $$._placeHolder.insertBefore($item);
-                    // remove dragged item
-                    $item.removeClass('freewall').addClass('drag-collide');
-                    $item.attr('old-z-index', $item.css('z-index'));
-                    $item.css('z-index', 1000);
-                });
-                $item.on('dragMove', function(event, pointer, moveVector) {
-                    var gid = HG.WebApp.Data._CurrentGroupIndex;
-                    var currentGroup = HG.WebApp.Data.Groups[gid];
-                    grid.find('.modules-grid-item').each(function(i2, gridItem2) {
-                        if ($item.get(0) !== gridItem2) {
-                            var hitTestResult = $item.hitTestObject(gridItem2, 0.5);
-                            if (hitTestResult) {
-                                var $target = $(gridItem2);
-                                // re-arrange elements (insert sourceIndex before/after targetIndex)
-                                var sourceIndex = +$item.attr('data-index');
-                                var targetIndex = +$target.attr('data-index');
-                                if (hitTestResult === 2 && !$target.hasClass('drag-collide-target')) {
-                                    $target.addClass('drag-collide drag-collide-target');
-                                    if ($item.index() < $target.index()) { // insert after
-                                        currentGroup.Modules.move(sourceIndex, targetIndex);
-                                        $item.insertAfter($target);
-                                    } else { // inser before
-                                        currentGroup.Modules.move(sourceIndex, targetIndex);
-                                        $item.insertBefore($target);
-                                    }
-                                    // move placeholder div before $item
-                                    $$._placeHolder.insertBefore($item);
-                                    // update data-indexes
-                                    $item.attr('data-index', targetIndex); // (the element being dragged has `.freewall` class disabled)
-                                    grid.find('.freewall').each((function(is, nextElement) {
-                                        $(nextElement).attr('data-index', is);
-                                    }));
-                                    // wait for target element animation to complete
-                                    $target.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
-                                        $target.removeClass('drag-collide');
-                                        $target.removeClass('drag-collide-target');
-                                    });
-                                    // relayout
-                                    if ($$._relayoutTimeout) {
-                                        clearTimeout($$._relayoutTimeout);
-                                    }
-                                    $$._relayoutTimeout = setTimeout(function() {
-                                        $$._grid.isotope('reloadItems');
-                                        $$._grid.isotope();
-                                    }, 350);
-                                    return false;
-                                }
-                            } else {
-                                $(gridItem2).removeClass('drag-collide');
-                                $(gridItem2).removeClass('drag-collide-target');
-                            }
-                        }
-                    });
-                });
-                $item.on('dragEnd', function(event, pointer) {
-                    // remove placeholder div
-                    $$._placeHolder.remove();
-                    $$._placeHolder.css('transform', 'translate3d(0px, 0px, 0px)');
-                    // restore dragged item
-                    $$._grid.find('.freewall').removeClass('drag-collide');
-                    $item.addClass('freewall').removeClass('drag-collide');
-                    // relayout
-                    $$._grid.isotope('reloadItems');
-                    $$._grid.isotope();
-                    $item.css('z-index', $item.attr('old-z-index'));
-                });
-            }
-        });
-    };
-    $$.WidgetsManager = function () {
-        $$.ShowAltToolbar(function () {
-            $$.toolbarWidgetsSort.show('slideup');
-        });
-        //$$._packeryGrid.packery();
-        var grid = $$.field('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex, true);
-        grid.find('.modules-grid-item').each(function(i, gridItem) {
-            var $item = $(gridItem);
-            if (!$item.data('draggabilly')) {
-                $item.draggabilly({});
             }
             // enable dragging
-            $item.draggabilly('enable');
+            $item.on('dragStart', $$.WidgetsManager_dragStartHandler);
+            $item.on('dragMove', $$.WidgetsManager_dragMoveHandler);
+            $item.on('dragEnd', $$.WidgetsManager_dragEndHandler);
         });
     };
     $$.WidgetsManagerCancel = function() {
         $$._grid.find('.modules-grid-item').each(function(i, gridItem) {
             var $item = $(gridItem);
             // disable dragging
-            $item.draggabilly('disable');
+            $item.off('dragStart', $$.WidgetsManager_dragStartHandler);
+            $item.off('dragMove', $$.WidgetsManager_dragMoveHandler);
+            $item.off('dragEnd', $$.WidgetsManager_dragEndHandler);
+            $item.draggabilly('destroy');
         });
+        $$._grid.isotope('reloadItems');
+        $$._grid.isotope({transitionDuration: 0});
         $$.toolbarWidgetsSort.hide('slidedown', function () {
             $$.HideAltToolbar();
         });
@@ -508,11 +507,6 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.RenderGroupModules = function (groupIndex) {
-        if (widgetsloadqueue.length > 0) {
-            $$.RenderGroupModules(groupIndex);
-            return;
-        }
-        //
         var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
         var grp = $$.field('#groupdiv_modules_' + groupmodules.Index, true);
         for (var m = 0; m < groupmodules.Modules.length; m++) {
