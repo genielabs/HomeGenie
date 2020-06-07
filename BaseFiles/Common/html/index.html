@@ -67,8 +67,8 @@
     <script src="js/codemirror-4.03/addon/hint/xml-hint.js"></script>
     <script src="js/codemirror-4.03/addon/hint/html-hint.js"></script>
     <script src="js/codemirror-4.03/addon/edit/closebrackets.js"></script>
-    <script src="js/codemirror-4.03/addon/edit/matchbrackets.js"></script>    
-    <script src="js/codemirror-4.03/addon/edit/matchtags.js"></script>    
+    <script src="js/codemirror-4.03/addon/edit/matchbrackets.js"></script>
+    <script src="js/codemirror-4.03/addon/edit/matchtags.js"></script>
     <script src="js/codemirror-4.03/addon/fold/foldcode.js"></script>
     <script src="js/codemirror-4.03/addon/fold/foldgutter.js"></script>
     <script src="js/codemirror-4.03/addon/fold/brace-fold.js"></script>
@@ -77,7 +77,7 @@
     <script src="js/codemirror-4.03/addon/search/searchcursor.js"></script>
     <script src="js/codemirror-4.03/addon/search/search.js"></script>
     <script src="js/codemirror-4.03/addon/search/match-highlighter.js"></script>
-    
+
     <!-- other js frameworks and utils -->
     <script src="js/error-stack-parser.min.js"></script>
     <script src="js/stackframe.min.js"></script>
@@ -97,15 +97,15 @@
     <script src="js/jqm-datebox.lang.utf8.min.js"></script>
 
     <!-- HomeGenie Javascript includes -->
-    <script src="js/homegenie.api.js?version=v1.3-stable.8"></script>
-    <script src="js/homegenie.webapp.js?version=v1.3-stable.8"></script>
+    <script src="js/homegenie.api.js?version=v1.3-stable.10"></script>
+    <script src="js/homegenie.webapp.js?version=v1.3-stable.10"></script>
 
     <!-- custom javascript --><!-- TODO: check wheter this can be deprecated/moved -->
-    <script src="js/my.js?version=v1.2-beta.40"></script>
+    <script src="js/my.js?version=v1.3-stable.10"></script>
 
     <!-- local css definitions and overrides -->
-    <link rel="stylesheet" href="css/my.css?version=v1.2-beta.40" />
-    <link rel="stylesheet" href="css/fonts/hg-fonts.css?version=v1.2-beta.40" />
+    <link rel="stylesheet" href="css/my.css?version=v1.3-stable.10" />
+    <link rel="stylesheet" href="css/fonts/hg-fonts.css?version=v1.3-stable.10" />
 
     <script type="text/javascript">
 
@@ -243,15 +243,15 @@
             <p>#{text}</p>
         </div>
     </div>
-    
+
 <!-- BEGIN Global Popups -->
 
-        
+
     <!-- Confirm Popup -->
     <div id="actionconfirm_popup" class="ui-corner-all hg-popup-b" data-role="popup" data-title="Are you sure?" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <div data-role="header" class="ui-corner-top">
             <h3>Perform the selected action?</h3>
-        </div>    
+        </div>
         <div class="ui-content ui-corner-bottom">
             <p style="padding-left:20px;padding-right:20px;max-height:240px;overflow:hidden;overflow-y:auto;">This operation cannot be undone.</p>
             <div class="ui-grid-a">
@@ -259,15 +259,15 @@
                 <div class="ui-block-b" align="right"><a data-locale-id="common_command_proceed" id="actionconfirm_confirm_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" data-rel="back">Proceed</a></div>
             </div>
         </div>
-    </div>        
-    
+    </div>
+
     <!-- Event Popup Settings -->
     <div id="configure_popupsettings_edit" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_popupfilter_title">Event popup filters</h1>
         </div>
         <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
-        
+
             <ul data-role="listview" id="popupsettings_ignorelist">
                 <li data-role="list-divider">
                     <div class="ui-grid-b">
@@ -277,7 +277,7 @@
                     </div>
                 </li>
             </ul>
-        
+
         </div>
         <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
             <div class="ui-block-a">
@@ -285,8 +285,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <!-- Module Edit Popup -->
     <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -342,7 +342,7 @@
                     </div>
 
                     <div id="module_programs_featurelist"></div>
-                    
+
                     <p id="module_programs_featuredesc" style="margin-left:10px;margin-right:10px;font-size:10pt;opacity:0.9"></p>
 
                     <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
@@ -472,7 +472,7 @@
         <h3 data-ui-field="title" style="margin:5px;margin-top:0px">Fullscreen Editor</h3>
         <h4 data-ui-field="subtitle" style="margin:5px">...</h4>
         <div class="ui-shadow" style="position:absolute;top:100px;left:30px;right:30px;bottom:100px;"><textarea id="fullscreen_edit_text" style="width:100%;height:100%;border:0;margin:0"></textarea></div>
-        
+
         <div style="position:absolute;left:40px;bottom:20px">
             <h4 data-ui-field="namelabel"></h4>
             <div data-ui-field="nameinput" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset" style="position:relative;display:none;border-color:#fff">
@@ -481,7 +481,7 @@
         </div>
 
         <a data-ui-field="cancel" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:140px;bottom:20px">Cancel</a>
-        
+
         <a data-ui-field="confirm" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:40px;bottom:20px">Ok</a>
     </div>
 
@@ -504,7 +504,7 @@
         </ul>
         <br clear="all" />
         <div align="center" style="font-size:9pt;position:absolute;left:0;right:0;bottom:0;height:30px">
-            HomeGenie &copy; 2011-2019 
+            HomeGenie &copy; 2011-2019
             <a href="https://github.com/genielabs/HomeGenie" target="_blank">G-Labs</a>
         </div>
     </div><!-- /panel -->
@@ -551,18 +551,18 @@
         </div>
 
     </div>
-    
+
 <!--- Boot progress overlay -->
 
     <div id="bootprogress_overlay" style="position:fixed;top:0;left:0;right:0;bottom:0;background-color:white;opacity:0.85;z-index:10000">
-    
+
         <div class="centered-text">
             <div id="bootprogress_text"></div>
             <div id="bootprogress_bar_container">
                 <div id="bootprogress_bar"></div>
             </div>
         </div>
-    
+
     </div>
 
 </body>

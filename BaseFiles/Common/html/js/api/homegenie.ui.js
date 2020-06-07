@@ -129,7 +129,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
             'DoorLock',
         Shutter:
             'Shutter',
-        Siren: 
+        Siren:
             'Siren',
         MediaTransmitter:
             'MediaTransmitter',
@@ -151,8 +151,8 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
     };
 
     $$.GenerateWidget = function(fieldType, context, callback) {
-        // fieldType: 
-        //    widgets/text, widgets/password, widgets/checkbox, widgets/slider, 
+        // fieldType:
+        //    widgets/text, widgets/password, widgets/checkbox, widgets/slider,
         //    widgets/store.text, widgets/store.password, widgets/store.checkbox,
         //    widgets/store.list, store.edit
         //    core/popup.cronwizard
@@ -233,7 +233,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                 if (callback != null) callback(null);
             }
         });
-        return widgetWrapper; 
+        return widgetWrapper;
     };
 
     $$.GetModuleIcon = function(module, callback, elid) {
@@ -254,7 +254,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                 else // Compatibility fall-back for old widget format
                     icon = module.WidgetInstance.IconImage;
             } else {
-                // get reference to generic type widget 
+                // get reference to generic type widget
                 HG.WebApp.WidgetsList.GetWidgetIcon(widget, elid, callback);
                 return icon;
             }
@@ -263,11 +263,17 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
         return icon;
     };
 
-    $$.GetModuleDisplayName = function(module) {
+    $$.GetModuleDisplayName = function(module, short) {
         var name = module.Domain + ' ' + module.Address;
         try {
-            name = module.Name;
-            name += ' ('+module.Domain.substring(module.Domain.lastIndexOf('.')+1)+' '+module.Address+')';
+            if (module.Name && module.Name.length > 0) {
+                name = module.Name;
+                if (!short) {
+                    name += ' ('+module.Domain.substring(module.Domain.lastIndexOf('.')+1)+' '+module.Address+')';
+                }
+            } else {
+                name += module.Domain.substring(module.Domain.lastIndexOf('.')+1)+':'+module.Address;
+            }
             name = name.trim();
         } catch(e) { }
         return name;
@@ -343,7 +349,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
     $$.ConfigureProgram = function(module) {
         HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
         HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
-        HG.WebApp.ProgramsList.UpdateOptionsPopup();    
+        HG.WebApp.ProgramsList.UpdateOptionsPopup();
     }
 
     $$.GetParameterContext = function(module, parameter, value) {
@@ -365,7 +371,7 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
                 case ParameterType.Sensor_MotionDetect:
                     isStatusParam = true;
                     //hideable = true;
-                    if (parameter != ParameterType.Sensor_MotionDetect && 
+                    if (parameter != ParameterType.Sensor_MotionDetect &&
                         (parameter == ParameterType.Sensor_DoorWindow
                             || parameter == ParameterType.Status_DoorLock
                             || ((module != null && module.DeviceType != '') && (module.DeviceType == ModuleType.DoorWindow || module.DeviceType == ModuleType.DoorLock)))) {
@@ -534,27 +540,27 @@ HG.Ui.CreatePage = function(model, cuid) {
     var $$ = model;
     $$._fieldCache = [];
     $$.PageId = $$.pageId = cuid;
-    $$.getContainer = function() { 
+    $$.getContainer = function() {
         if (typeof $$.container == 'undefined')
-            $$.container = $('#'+$$.pageId); 
-        return $$.container; 
+            $$.container = $('#'+$$.pageId);
+        return $$.container;
     };
     $$.field = function(field, globalSearch) {
         var f = globalSearch ? '@'+field : field;
         var el = null;
         if (typeof $$._fieldCache[f] == 'undefined') {
             el = globalSearch ? $(field) : $$.container.find('[data-ui-field='+field+']');
-            if (el.length) 
+            if (el.length)
                 $$._fieldCache[f] = el;
         } else {
             el = $$._fieldCache[f];
         }
-        return el; 
+        return el;
     };
     $$.clearCache = function() {
         var obj = $$._fieldCache;
         for (var prop in obj) {
-            if (obj.hasOwnProperty(prop)) { delete obj[prop]; } 
+            if (obj.hasOwnProperty(prop)) { delete obj[prop]; }
         }
         $$._fieldCache = [];
     };

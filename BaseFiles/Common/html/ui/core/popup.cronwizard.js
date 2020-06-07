@@ -59,7 +59,7 @@ $$.bind = function() {
                 eachMonth.push($(this).val());
             });
             // update bound item data
-            if ($$.item.Name == '') 
+            if ($$.item.Name == '')
                 $$.item.Name = $$.cronName.val();
             $$.item.CronExpression = cronExpression;
             $$.item.Description = $$.element.find('[data-ui-field=cron-desc]').val();
@@ -103,13 +103,13 @@ $$.bind = function() {
         }
 
     });
-    
+
     // "each minute" control group
     var cg = $('<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" />');
     for(var d = 0; d < 60; d++) {
         var mn = d.toString(); if (mn.length==1) mn = '0'+mn;
         var cr = $('<input type="checkbox" id="minute-n-'+mn+'" value="'+d+'" /><label for="minute-n-'+mn+'">'+mn+'</label>');
-        cg.append(cr);    
+        cg.append(cr);
     }
     element.find('[data-ui-field*="minute-tab3"]').append(cg);
     element.find('[data-ui-field*="minute-tab3"]').trigger('create');
@@ -181,13 +181,13 @@ $$.bind = function() {
         });
         $$.buildCron();
     });
-    
+
     // hour ui
     cg = $('<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" />');
     for(var d = 0; d < 24; d++) {
         var hr = d.toString(); if (hr.length==1) hr = '0'+hr;
         var cr = $('<input type="checkbox" id="hour-n-'+hr+'" value="'+d+'" /><label for="hour-n-'+hr+'">'+hr+'</label>');
-        cg.append(cr);    
+        cg.append(cr);
     }
     element.find('[data-ui-field*="hour-tab3"]').append(cg);
     element.find('[data-ui-field*="hour-tab3"]').trigger('create');
@@ -196,7 +196,7 @@ $$.bind = function() {
         element.find('[data-ui-field*="hour-tab"]').hide(100);
         element.find('[data-ui-field="hour-tab'+$(this).val()+'"]').show(100);
         $$.buildCron();
-    });               
+    });
     // every hour value change
     $$.everyHourSlider = element.find('[data-ui-field="hour-tab2"]').find('input').on('change', function(){
         $$.buildCron();
@@ -208,22 +208,22 @@ $$.bind = function() {
         //});
         $$.buildCron();
     });
-    
+
     // day of month
     cg = $('<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" />');
     for(var d = 1; d <= 31; d++) {
         var hr = d.toString(); if (hr.length==1) hr = '0'+hr;
         var cr = $('<input type="checkbox" id="dayom-n-'+hr+'" value="'+d+'" /><label for="dayom-n-'+hr+'">'+hr+'</label>');
-        cg.append(cr);    
+        cg.append(cr);
     }
     element.find('[data-ui-field*="dayom-tab2"]').append(cg);
-    element.find('[data-ui-field*="dayom-tab2"]').trigger('create');        
+    element.find('[data-ui-field*="dayom-tab2"]').trigger('create');
     // day of month type select
     $$.dayomTypeSelect = element.find('[data-ui-field=dayom-type-select]').on('change', function(){
         element.find('[data-ui-field*="dayom-tab"]').hide(100);
         element.find('[data-ui-field="dayom-tab'+$(this).val()+'"]').show(100);
         $$.buildCron();
-    });               
+    });
     // each day of month selection change
     $$.eachDayomGroup = cg.on('change', function(){
         //$(this).find("input[type=checkbox]:checked").each(function() {
@@ -238,7 +238,7 @@ $$.bind = function() {
         //});
         $$.buildCron();
     });
-    
+
     // month
     // expression type select
     $$.monthTypeSelect = element.find('[data-ui-field=month-type-select]').on('change', function(){
@@ -414,7 +414,7 @@ $$.bind = function() {
     $$.modulesList = $$.element.find('[data-ui-field="modules-select"]');
 }
 
-$$.open = function(name) {
+$$.open = function(name, compactMode) {
     $$.item = {
         Name: '',
         CronExpression: '',
@@ -424,6 +424,7 @@ $$.open = function(name) {
         ProgramId: '', // <-- this field is deprecated since hg r522
         Script:''
     }
+    $$.element.removeClass('compact');
     if (typeof name != 'undefined' && name != '' && name != null) {
         $.mobile.loading('show');
         HG.Automation.Scheduling.Get(name, function (item) {
@@ -454,6 +455,10 @@ $$.open = function(name) {
                     $$.item.Data.time = [{ start: $$.item.Data.start, end: $$.item.Data.end }];
             }
             $$._init();
+            if (compactMode) {
+                $$.element.addClass('compact');
+                $$._setPanel('1');
+            }
             $$.element.popup('open');
             $.mobile.loading('hide');
         });
@@ -507,7 +512,7 @@ $$._init = function() {
     $$.timeEnd.val(moment().format('HH:mm'));
     $$.timeEnd.html(moment().format('LT'));
 
-    // occurrence 
+    // occurrence
     $$.minuteTypeSelect.val($$.item.Data.occur_min_type).selectmenu().trigger('change');
     $$.hourTypeSelect.val($$.item.Data.occur_hour_type).selectmenu().trigger('change');
     $$.dayomTypeSelect.val($$.item.Data.occur_dayom_type).selectmenu().trigger('change');
@@ -685,7 +690,7 @@ $$.updateGfx = function(gfx, items, max, scaleMax, offset, labelFn) {
         gfx.text(m*($$.gfxWidth/scaleMax)+4, 8, labelFn(m)).attr({fill:'white'});
     }
     gfx.rect(0, $$.gfxHeight/2, $$.gfxWidth, $$.gfxHeight).attr({
-        fill: "rgba(100, 100, 100, 50)", 
+        fill: "rgba(100, 100, 100, 50)",
         stroke: "rgb(0,0,0)",
         "stroke-width": 2
     });
@@ -694,18 +699,18 @@ $$.updateGfx = function(gfx, items, max, scaleMax, offset, labelFn) {
         var ex = v.to*($$.gfxWidth/max);
         if (sx > ex) {
             gfx.rect(0, $$.gfxHeight/2, ex, $$.gfxHeight).attr({
-                fill: "rgba(0, 255, 0, 50)", 
+                fill: "rgba(0, 255, 0, 50)",
                 stroke: "rgb(255,255,255)",
                 "stroke-width": 1
             });
             gfx.rect(sx, $$.gfxHeight/2, $$.gfxWidth-sx, $$.gfxHeight).attr({
-                fill: "rgba(0, 255, 0, 50)", 
+                fill: "rgba(0, 255, 0, 50)",
                 stroke: "rgb(255,255,255)",
                 "stroke-width": 1
             });
         } else {
             gfx.rect(sx, $$.gfxHeight/2, ex-sx+3, $$.gfxHeight).attr({
-                fill: "rgba(0, 255, 0, 50)", 
+                fill: "rgba(0, 255, 0, 50)",
                 stroke: "rgb(255,255,255)",
                 "stroke-width": 1
             });
@@ -730,7 +735,7 @@ $$.getMonthCron = function(dateFrom, dateTo, dayOccur, monthOccur) {
         cronItems.push(cron);
         if (mf > mt || mt-mf > 1 || (mf == mt && dt < df)) {
             var mfn = mf<12 ? mf+1 : 1;
-            var mtp = mt>1 ? mt-1 : 12;            
+            var mtp = mt>1 ? mt-1 : 12;
             cron = '* * * '+mfn+(mfn!=mtp?'-'+mtp:'')+' *';
             cronItems.push(cron);
         }
@@ -955,13 +960,13 @@ $$._buildCron = function() {
     var cm = '';
     if ($$.cronTypeSelect.val() == '2') {
         $.each(cronMonth, function(k,v) {
-            cm+='('+v+') : '; 
+            cm+='('+v+') : ';
         });
         cm = '[ '+cm.substring(0, cm.length-3)+' ]';
     }
     var ct = '';
     $.each(cronTime, function(k,v) {
-        ct+='('+v+') : '; 
+        ct+='('+v+') : ';
     });
     ct = ct.substring(0, ct.length-3);
     if (cronOccur != emptyOccur)

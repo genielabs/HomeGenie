@@ -138,15 +138,17 @@ function drawStats(mod) {
       try {
         var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
         $.plot($$.field('energystats'), [
-          { label: statsField.desc+'&nbsp;', data: dataSerie, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: true } }
+          { label: statsField.desc+'&nbsp;', data: dataSerie, lines: { show: true, lineWidth: 1.0 }, bars: { show: false }, splines: { show: false }, points: { show: true, symbol: function(ctx, x, y, radius, shadow) {
+                ctx.arc(x, y, 2, 0, shadow ? Math.PI : Math.PI * 2, false);
+          } } }
         ],
                {
-          yaxis: { 
-            show: true, min: yMin 
+          yaxis: {
+            show: true, min: yMin
           },
           xaxis: { mode: "time", useLocalTime: true, timeformat: (dateFormat == "MDY12" ? "%h%p" : "%h"), minTickSize: [2, "hour"], tickSize: [2, "hour"] },
           legend: { position: "nw", noColumns: 6, backgroundColor: 'rgba(0,0,0,0.4)' },
-          lines: { 
+          lines: {
             show: showlines, lineWidth: 1.0,
             fill: true,
             fillColor: { colors: [ { opacity: 0.0 }, { opacity: 1.0 } ] }
@@ -171,5 +173,5 @@ function drawStats(mod) {
       } catch (e) { }
 
     }
-  });    
+  });
 }
