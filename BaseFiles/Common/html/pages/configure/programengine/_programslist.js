@@ -253,6 +253,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
             for (var p = 0; p < arr.length; p++) {
                 var mp = arr[p];
                 if (typeof mp.FieldType != 'undefined' && mp.FieldType != null && mp.FieldType.trim() != '') {
+                    mp.Index = pc;
                     var context = {
                         parent: fieldparams,
                         program: cp,
@@ -633,7 +634,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 //
                 $('#automation_programname').val(currentProgram.Name);
                 $('#automation_programdescription').val(currentProgram.Description);
-                
+
                 $('#automation_program_autorestartenabled').prop('checked', currentProgram.AutoRestartEnabled);
                 $('#automation_program_autorestartenabled').checkboxradio();
                 $('#automation_program_autorestartenabled').checkboxradio('refresh');
@@ -745,7 +746,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
                 transition: 'slideDown'
             });
     };
-    
+
     $$.ToggleProgramIsEnabled = function (paddr) {
         var cp = HG.WebApp.Utility.GetProgramByAddress(paddr);
         cp.IsEnabled = !cp.IsEnabled;

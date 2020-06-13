@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 using MQTTnet;
 using MQTTnet.Client;
@@ -32,6 +31,8 @@ using MQTTnet.Client.Options;
 using MQTTnet.Formatter;
 using MQTTnet.Protocol;
 using MQTTnet.Server;
+
+using NLog;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -49,14 +50,15 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class MqttClientHelper
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private static readonly MqttFactory factory = new MqttFactory();
         private NetworkCredential networkCredential;
         private MqttEndPoint endPoint = new MqttEndPoint();
         private bool usingWebSockets;
-        private bool useSsl;
+        private bool useTls;
 
         private MqttClient mqttClient;
-        private readonly Dictionary<string, Action<string, string>> subscribeTopics = new Dictionary<string, Action<string, string>>();
+        private readonly Dictionary<string, Action<string, byte[]>> subscribeTopics = new Dictionary<string, Action<string, byte[]>>();
 
         /// <summary>
         /// Sets the MQTT server to use.
@@ -91,15 +93,62 @@ namespace HomeGenie.Automation.Scripting
             Connect(endPoint.Port, endPoint.ClientId, null);
             return this;
         }
-        
+
         /// <summary>
-        /// Connects to the MQTT server using the specified port and client identifier and a callback function in case of lost connection.
+        /// Connects to the MQTT server using the specified port and client identifier.
         /// </summary>
         /// <param name="port">MQTT server port.</param>
         /// <param name="clientId">The client identifier.</param>
-        /// <param name="callback">The name of callback function, like RefreshConnection</param>
-        /// <example>Action RefreshConnection = () => {...}</example>
-        public MqttClientHelper Connect(int port, string clientId, Action callback = null)
+        /// <param name="callback">Optional callback `Action&lt;bool&gt;` invoked when the connection status changed (the argument value will be true if connected, false otherwise)</param>
+        /// <example>
+        /// MqttClient
+        ///     .Service(server)
+        ///     .UsingWebSockets(useWebSockets)
+        ///     .Connect(port, clientid, (connected) => {
+        ///     MqttIsConnected = connected;
+        ///     if (connected) {
+        ///         Program.Notify("Connected!");
+        ///     } else {
+        ///         Program.Notify("Disconnected!");
+        ///     }
+        /// });
+        /// </example>
+        public MqttClientHelper Connect(int port, string clientId, Action<bool> callback = null)
+        {
+            Connect(port, clientId, null, callback);
+            return this;
+        }
+
+        /// <summary>
+        /// Connects to the MQTT server using the specified port / client identifier and the specified client options.
+        /// </summary>
+        /// <param name="port">MQTT server port.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="clientOptionsCallback">Callback `Action&lt;MqttClientOptionsBuilder&gt;` invoked before the connection is established to allow setting advanced connection options. See https://github.com/chkr1011/MQTTnet/wiki/Client for all available options.</param>
+        /// <param name="callback">Optional callback `Action&lt;bool&gt;` invoked when the connection status changed (the argument value will be true if connected, false otherwise)</param>
+        /// <example>
+        /// MqttClient
+        ///     .Service(server)
+        ///     .UsingWebSockets(useWebSockets)
+        ///     .Connect(port, clientid, (options) => {
+        ///        options.WithTls(new MqttClientOptionsBuilderTlsParameters {
+        ///            UseTls = true,
+        ///            CertificateValidationCallback = (X509Certificate x, X509Chain y, SslPolicyErrors z, IMqttClientOptions o) =>
+        ///            {
+        ///                // TODO: Check conditions of certificate by using above parameters.
+        ///                return true;
+        ///            }
+        ///        });
+        ///     }, (connected) => {
+        ///     MqttIsConnected = connected;
+        ///     if (connected) {
+        ///         Program.Notify("Connected!");
+        ///     } else {
+        ///         Program.Notify("Disconnected!");
+        ///     }
+        /// });
+        /// </example>
+        public MqttClientHelper Connect(int port, string clientId, Action<MqttClientOptionsBuilder> clientOptionsCallback, Action<bool> callback = null)
         {
             endPoint.Port = port;
             endPoint.ClientId = clientId;
@@ -109,24 +158,31 @@ namespace HomeGenie.Automation.Scripting
             {
                 if (callback != null)
                 {
-                    callback();
+                    callback(true);
                 }
-                foreach(KeyValuePair<string, Action<string, string>> subscription in subscribeTopics)
+                foreach(KeyValuePair<string, Action<string, byte[]>> subscription in subscribeTopics)
                 {
                     await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic(subscription.Key).Build());
                 }
             });
             mqttClient.UseDisconnectedHandler(async e =>
             {
-                Console.WriteLine(e.Exception.Message);
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                Connect(endPoint.Port, endPoint.ClientId, null);
+                Log.Debug(e.Exception,"MqttClient Error");
+                if (callback != null)
+                {
+                    callback(false);
+                }
             });
             mqttClient.UseApplicationMessageReceivedHandler(e => MessageReceived(e));
-            mqttClient.ConnectAsync(GetMqttOption(clientId));            
+            var clientOptionsBuilder = getMqttOptionsBuilder(clientId);
+            if (clientOptionsCallback != null)
+            {
+                clientOptionsCallback(clientOptionsBuilder);
+            }
+            mqttClient.ConnectAsync(clientOptionsBuilder.Build());
             return this;
         }
-        
+
         /// <summary>
         /// Disconnects from the MQTT server.
         /// </summary>
@@ -149,7 +205,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <param name="topic">Topic name.</param>
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
-        public MqttClientHelper Subscribe(string topic, Action<string,string> callback)
+        public MqttClientHelper Subscribe(string topic, Action<string, byte[]> callback)
         {
             if (!subscribeTopics.ContainsKey(topic))
             {
@@ -204,6 +260,19 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
+        /// Publish a message using advanced options.
+        /// </summary>
+        /// <param name="applicationMessage">`MqttApplicationMessage` instance (See https://github.com/chkr1011/MQTTnet/wiki/Client#publishing-messages for documentation).</param>
+        public MqttClientHelper Publish(MqttApplicationMessage applicationMessage)
+        {
+            if (mqttClient != null)
+            {
+                mqttClient.PublishAsync(applicationMessage);
+            }
+            return this;
+        }
+
+        /// <summary>
         /// Connect over WebSocket (default = false).
         /// </summary>
         /// <returns>NetHelper.</returns>
@@ -227,13 +296,13 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set whether to connect using SSL or not.
+        /// Set whether to connect using TLS/SSL or not.
         /// </summary>
-        /// <param name="useSsl">Use SSL.</param>
+        /// <param name="useTls">Use TLS/SSL.</param>
         /// <returns></returns>
-        public MqttClientHelper WithSsl(bool useSsl)
+        public MqttClientHelper WithTls(bool useTls)
         {
-            this.useSsl = useSsl;
+            this.useTls = useTls;
             return this;
         }
 
@@ -246,7 +315,7 @@ namespace HomeGenie.Automation.Scripting
 
         #region private helper methods
 
-        private IMqttClientOptions GetMqttOption(string clientId)
+        private MqttClientOptionsBuilder getMqttOptionsBuilder(string clientId)
         {
             var builder = new MqttClientOptionsBuilder()
                 .WithProtocolVersion(MqttProtocolVersion.V311)
@@ -262,9 +331,8 @@ namespace HomeGenie.Automation.Scripting
                     Topic = String.Format("/{0}/status", clientId),
                     Retain = true,
                     QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce
-                });
-                // TODO: ?
-                // .WithCleanSession();
+                })
+                .WithCleanSession();
             if (usingWebSockets)
             {
                 builder.WithWebSocketServer(endPoint.Address + ":" + endPoint.Port + "/mqtt");
@@ -277,20 +345,19 @@ namespace HomeGenie.Automation.Scripting
             {
                 builder.WithCredentials(networkCredential.UserName, networkCredential.Password);
             }
-            if (useSsl)
+            if (useTls)
             {
                 var tlsParameters = new MqttClientOptionsBuilderTlsParameters {UseTls = true};
                 builder.WithTls(tlsParameters);
             }
-            return builder.Build();
+            return builder;
         }
 
         private void MessageReceived(MqttApplicationMessageReceivedEventArgs args)
         {
-            
-            var msg = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
+            var msg = args.ApplicationMessage.Payload;
             var topic = args.ApplicationMessage.Topic;
-            foreach(KeyValuePair<string, Action<string, string>> subscription in subscribeTopics)
+            foreach(KeyValuePair<string, Action<string, byte[]>> subscription in subscribeTopics)
             {
                 if (!MqttTopicFilterComparer.IsMatch(topic, subscription.Key)) continue;
                 var callback = subscription.Value;

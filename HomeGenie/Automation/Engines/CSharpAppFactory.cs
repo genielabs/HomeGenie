@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -181,7 +181,7 @@ namespace HomeGenie.Automation.Scripting
                 //,TempFiles = new TempFileCollection {KeepFiles = true}
             };
 
-            // Mono runtime 2/3 compatibility fix 
+            // Mono runtime 2/3 compatibility fix
             // TODO: this may not be required anymore
             var relocateSystemAsm = false;
             var type = Type.GetType("Mono.Runtime");
@@ -235,6 +235,8 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("NetClientLib.dll");
 
             compilerParams.ReferencedAssemblies.Add("UPnP.dll");
+
+            compilerParams.ReferencedAssemblies.Add("MQTTnet.dll");
 
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {

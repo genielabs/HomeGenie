@@ -575,7 +575,7 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
         //$$.field('#control_groupsmenu', true).find("li:gt(0)").remove();
         $$.field('#control_groupsmenu', true).empty();
         for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-            var indicators = '<div class="ui-body-inherit ui-body-a" style="margin-top:6px;border:0"><div style="white-space:normal;max-width:230px" id="control_groupindicators_' + i + '"></div>';
+            var indicators = '<div class="ui-body-inherit ui-body-a" style="margin-top:6px;border:0"><div style="white-space:normal;max-width:290px" id="control_groupindicators_' + i + '"></div>';
             var item = $('<li data-context-idx="' + i + '" style="height:auto;cursor:pointer;font-size:12pt"><strong>' + HG.WebApp.Data.Groups[i].Name + '</strong>'+indicators+'</li>');
             item.on('click', function(){
                 var idx = $(this).attr('data-context-idx');

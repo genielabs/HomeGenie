@@ -4,7 +4,7 @@
     <ScriptSetup>Program.Setup(()=&gt;{
   Program.UseWidget("homegenie/generic/program");
 });</ScriptSetup>
-    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from 
+    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
   .OfDeviceType("Light,Dimmer")
@@ -28,7 +28,7 @@ Modules
   Program.UseWidget("homegenie/generic/program");
 });
 </ScriptSetup>
-    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from 
+    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
   .OfDeviceType("Light,Dimmer")
@@ -77,22 +77,22 @@ Modules
           }
           else
           {
-            module.Level = newlevel; 
+            module.Level = newlevel;
           }
           var message = String.Format("{0}&lt;br&gt;{1} set to {2}%", module.Instance.Name, module.Instance.Address, newlevel);
           Program.Notify(message);
-          // returning false, prevent from routing event to other listeners                  
+          // returning false, prevent from routing event to other listeners
           return false;
         }
       }
-      if (level.DecimalValue &gt; 0) 
+      if (level.DecimalValue &gt; 0)
       {
         memory.Value = level.Value;
-      } 
+      }
     }
   }
   // returning true, will route event to other listeners
-  return true; 
+  return true;
 });
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
@@ -150,7 +150,7 @@ var PARAM_UPNP_INFO_UDN = "UpnpDevice.Info.UDN";
 // List that holds allocated UPnP devices
 var upnpDevices = new Dictionary&lt;Module,UPnPDevice&gt;();
 
-Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{  
+Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
   // Create the UPnP device to control the 'module'
   var upnpDevice = UPnPDevice.CreateRootDevice(3600, 1, null);
   // use the same ID even when restarted
@@ -197,7 +197,7 @@ Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
     // Service ID
     "urn:Belkin:serviceId:basicevent1",
     // Service Type
-    "urn:Belkin:service:basicevent:1", 
+    "urn:Belkin:service:basicevent:1",
     // Standard Service?
     true,
     // Service Object Instance
@@ -229,7 +229,7 @@ Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
   upnpDevice.AddService(service);
   // Start the WeMo switch device UPnP simulator
   upnpDevice.StartDevice();
-  
+
   return upnpDevice;
 };
 
@@ -253,7 +253,7 @@ When.ModuleParameterChanged((m, p)=&gt;{
   }
   else if (upnpDevices.ContainsKey(m.Instance) &amp;&amp; p.Is("Status.Level"))
   {
-    // Update status level of the associated UPnP device 
+    // Update status level of the associated UPnP device
     upnpDevices[m.Instance].Services[0].SetStateVariable("BinaryState", (p.DecimalValue != 0));
   }
   return true;
@@ -309,14 +309,14 @@ Program.GoBackground();
   .AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5)
   .Run();
 </ScriptSetup>
-    <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt; 
+    <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
 {
   if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
   {
     return false;
   }
-  string webserviceurl = "http://" + 
-    Program.Option("BridgeAddress").Value + "/api/" + 
+  string webserviceurl = "http://" +
+    Program.Option("BridgeAddress").Value + "/api/" +
     Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
   Net.WebService(webserviceurl).Put( jsonargs ).Call();
   return true;
@@ -383,30 +383,30 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
       case "Control.ColorHsb":
         string[] values = parameter.Split(',');
         double transition = 5;
-        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
-        bridgeApiCall(lightNumber, "{ \"on\" : true" + 
-                      ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) + 
-                      ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) + 
-                      ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) + 
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10));
+        bridgeApiCall(lightNumber, "{ \"on\" : true" +
+                      ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) +
+                      ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) +
+                      ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) +
                       ", \"transitiontime\" : " + transition.ToString() +  "}");
         module.RaiseEvent("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
         module.RaiseEvent("Status.ColorHsb", parameter, "Hue Light");
-        break; 
+        break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
       case "Control.Alert":
         // eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
         string alertType = "select";
         if (parameter == "Long") {alertType = "lselect";}
         bridgeApiCall(lightNumber, "{\"alert\" : \"" + alertType + "\"}");
-        break; 
+        break;
     }
-    return new ResponseText("OK");    
-  } catch (Exception e) { 
+    return new ResponseText("OK");
+  } catch (Exception e) {
 
     Program.Notify("ERROR: "+e.Message);
 
   }
-  return new ResponseText("ERROR");    
+  return new ResponseText("ERROR");
 });
 Program.GoBackground();
 </ScriptSource>
@@ -414,7 +414,7 @@ Program.GoBackground();
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
     <Name>Philips Hue Bridge</Name>
-    <Description>Adds Philips Hue lights control capability to HomeGenie. 
+    <Description>Adds Philips Hue lights control capability to HomeGenie.
 In order for this to work, you must register "homegenie" username
 (default is "newdeveloper") with your Philips Hue Bridge first.
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
@@ -602,7 +602,7 @@ Program.Parameter("Conditions.City").Value = "";
 Program.Parameter("Conditions.Temperature").Value = "";
 Program.Parameter("Conditions.DisplayLocation").Value = "";
 Program.Parameter("Conditions.IconUrl").Value = "";
-Program.Parameter("Conditions.Description").Value = "";    
+Program.Parameter("Conditions.Description").Value = "";
 
 Program.Run();
 </ScriptSetup>
@@ -753,9 +753,9 @@ while (Program.IsEnabled)
   {
     try
     {
-      string webserviceurl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&amp;lang=" + language + "&amp;units=metric&amp;appid=" + apikey; 
+      string webserviceurl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&amp;lang=" + language + "&amp;units=metric&amp;appid=" + apikey;
       var weatherData = Net.WebService(webserviceurl).GetData();
- 
+
       var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset);
       var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise);
 
@@ -764,9 +764,9 @@ while (Program.IsEnabled)
 
       var data = CollectWeatherData(weatherData);
       UpdateWeatherParameters(data);
-      
+
       // get forecast data
-	  webserviceurl = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&amp;lang="+language+"&amp;units=metric&amp;appid=" + apikey; 
+	  webserviceurl = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&amp;lang="+language+"&amp;units=metric&amp;appid=" + apikey;
       var forecast = Net.WebService(webserviceurl).GetData();
 
       var forecastDay = 1;
@@ -776,7 +776,7 @@ while (Program.IsEnabled)
         var forecastTime = Utility.JavaTimeStampToDateTime(1000D*(int)fc.dt);
         if (forecastTime.Equals(nextDay)) {
           // collect forecast data for current forecastDay
-          
+
           var forecastData = CollectWeatherData(fc);
           UpdateForecastParameters(forecastDay, forecastData);
 
@@ -788,8 +788,8 @@ while (Program.IsEnabled)
       }
       Program.RaiseEvent("Program.UiRefresh", "Data Updated", "");
 
-    } 
-    catch (Exception e) 
+    }
+    catch (Exception e)
     {
 
       Program.Notify("ERROR: unable to get data from service. " + e.Message);
@@ -826,7 +826,7 @@ Program.Run();
 </ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
-  // basic get will returns current device level 
+  // basic get will returns current device level
   Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
     //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
     var nif = "";
@@ -872,7 +872,7 @@ Program.Run();
   .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Keep level below this value (%)", "slider:20:80:1")
   .Run();
 </ScriptSetup>
-    <ScriptSource>// We want to do further processing whenever a module changes 
+    <ScriptSource>// We want to do further processing whenever a module changes
 When.ModuleParameterChanged( (module, parameter) =&gt; {
   if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; parameter.Name == "Status.Level")
   {
@@ -884,7 +884,7 @@ When.ModuleParameterChanged( (module, parameter) =&gt; {
       newlevel = 40;
     }
     //
-    if (level.DecimalValue &gt; (newlevel / 100D)) 
+    if (level.DecimalValue &gt; (newlevel / 100D))
     {
       Program.Notify(module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
       module.Level = newlevel;
@@ -964,7 +964,7 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt; {
         module.RaiseEvent("Sensor.MotionDetect", "0", "Generic IP Camera");
         break;
     }
-  } catch (Exception e) { 
+  } catch (Exception e) {
     Program.Notify("IpCamera ERROR!", e.Message);
   }
   return data;
@@ -1023,7 +1023,7 @@ var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, param)=&gt
   evt.Value = param.Value;
   evt.Timestamp = param.UpdateTime;
   // remove any previous event of the same type (the history only keep the last occurrence of a same event)
-  history.RemoveAll(e =&gt; e.Domain == evt.Domain &amp;&amp; e.Address == evt.Address &amp;&amp; e.Parameter == evt.Parameter &amp;&amp; e.Value == evt.Value);    
+  history.RemoveAll(e =&gt; e.Domain == evt.Domain &amp;&amp; e.Address == evt.Address &amp;&amp; e.Parameter == evt.Parameter &amp;&amp; e.Value == evt.Value);
   history.Add(evt);
   // keeep size within historyLimit (minutes)
   while ((DateTime.UtcNow - history[history.Count - 1].Timestamp).TotalHours &gt; historyLimit)
@@ -1075,33 +1075,33 @@ var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
 // module events handling
 When.ModuleParameterChanged((module, parameter)=&gt; {
   bool moduleAlarmed = false;
-  if (module.HasFeature("HomeGenie.SecuritySensor") 
+  if (module.HasFeature("HomeGenie.SecuritySensor")
       &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value != "1"
       &amp;&amp; (   parameter.Name == "Status.Level"
           || parameter.Name == "Status.DoorLock"
           || parameter.Name == "Sensor.Generic"
-          || parameter.Name == "Sensor.Alarm" 
-          || parameter.Name == "Sensor.Tamper" 
-          || parameter.Name == "Sensor.MotionDetect" 
+          || parameter.Name == "Sensor.Alarm"
+          || parameter.Name == "Sensor.Tamper"
+          || parameter.Name == "Sensor.MotionDetect"
           || parameter.Name == "Sensor.DoorWindow"
-          || parameter.Name == "Sensor.Flood" 
-          || parameter.Name == "Sensor.Smoke" 
-          || parameter.Name == "Sensor.Heat" 
-          || parameter.Name == "Sensor.CarbonMonoxide" 
-          || parameter.Name == "Sensor.CarbonDioxide" )) 
+          || parameter.Name == "Sensor.Flood"
+          || parameter.Name == "Sensor.Smoke"
+          || parameter.Name == "Sensor.Heat"
+          || parameter.Name == "Sensor.CarbonMonoxide"
+          || parameter.Name == "Sensor.CarbonDioxide" ))
   {
     AddHistoryEvent(module.Instance, parameter);
-    if (parameter.DecimalValue &gt; 0 &amp;&amp; Program.Parameter("HomeGenie.SecurityArmed").Value != STATUS_DISARMED) 
+    if (parameter.DecimalValue &gt; 0 &amp;&amp; Program.Parameter("HomeGenie.SecurityArmed").Value != STATUS_DISARMED)
     {
       if (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_AWAY ||
           (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_HOME &amp;&amp; module.HasFeature("HomeGenie.SecurityTriggerHome")))
-        moduleAlarmed = true;      
+        moduleAlarmed = true;
     }
   }
   if (moduleAlarmed)
   {
     Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
-    Program.Parameter("HomeGenie.SecurityTriggerSource").Value = 
+    Program.Parameter("HomeGenie.SecurityTriggerSource").Value =
       module.Instance.Name + " " + parameter.Name + " (" +
       module.Instance.Domain + "." +
       module.Instance.Address + ")";
@@ -1148,9 +1148,9 @@ When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address
       }
       Program.UpdateModuleDatabase();
     }
-  } 
-  catch (Exception ex) 
-  { 
+  }
+  catch (Exception ex)
+  {
     res = new ResponseText("ERROR: " + ex.Message + " " + ex.StackTrace);
   }
   return res;
@@ -1190,7 +1190,7 @@ while (Program.IsEnabled)
     Program.RunAsyncTask(()=&gt;{
       while (Program.IsEnabled &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
       {
-        // flashing SecurityAlarm lights 
+        // flashing SecurityAlarm lights
         alarmModules.Toggle();
         Pause(1);
         alarmModules.Toggle();
@@ -1198,7 +1198,7 @@ while (Program.IsEnabled)
       }
       alarmModules.Off();
     });
-    
+
     // Sirens loop
     int sirenStatus = 0;
     while (Program.IsEnabled &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
@@ -1216,10 +1216,10 @@ while (Program.IsEnabled)
         // turn off sirens if max time was set and elapsed
         sirenModules.Off();
         sirenStatus = 2;
-      }            
+      }
     }
     sirenModules.Off();
-    watchTimer.Stop();    
+    watchTimer.Stop();
   }
   Pause(1);
 }
@@ -1267,7 +1267,7 @@ Program.Run();
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
   if (parameter.Name == "ZWaveNode.WakeUpNotify")
-  {     
+  {
     var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
     if (nodeinfo != null)
     {
@@ -1452,7 +1452,7 @@ Func&lt;bool&gt; updateTileData = ()=&gt; {
   }
   tileMessage += "&lt;/wp:Tile&gt; " + "&lt;/wp:Notification&gt;";
 
-  //var response = 
+  //var response =
   Net.WebService(notificationurl)
     .AddHeader("Content-type", "text/xml")
     .AddHeader("X-WindowsPhone-Target", "token")
@@ -1495,7 +1495,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
         "&lt;/wp:Toast&gt; " +
         "&lt;/wp:Notification&gt;";
 
-      //var response = 
+      //var response =
       Net.WebService(notificationurl)
         .AddHeader("Content-type", "text/xml")
         .AddHeader("X-WindowsPhone-Target", "toast")
@@ -1507,7 +1507,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   }
 
   // returning true, will route event to other listeners
-  return true; 
+  return true;
 
 });
 
@@ -1525,7 +1525,7 @@ while(Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
     <Name>Windows Phone Push Notification Service</Name>
-    <Description>Windows Phone push notification service. 
+    <Description>Windows Phone push notification service.
 It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
@@ -1588,7 +1588,7 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   monitorModules.Each((mod)=&gt;{
     if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0 || mod.Parameter("Status.Level").DecimalValue &gt; 0)
     {
-      if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes 
+      if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
         totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
       if (mod.HasFeature("EnergyManagement.MonitorStatus"))
       {
@@ -1598,7 +1598,7 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
         }
         else
         {
-          switchcount++;  
+          switchcount++;
         }
         devcount++;
       }
@@ -1606,7 +1606,7 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
     return false;
   });
   // Update kw and watt counters (every 60 seconds)
-  if ((DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt; 59) 
+  if ((DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt; 59)
   {
     counterUpdateTimestamp = DateTime.Now;
     var totalWattCounter = wattCounter.DecimalValue + (totalLoad / 60D);
@@ -1655,7 +1655,7 @@ while (Program.IsEnabled)
     UpdateEnergyLoad();
   }
   // Reset daily counters within first minute after midnight
-  if ((DateTime.Now - DateTime.Today).TotalSeconds &lt; 60 &amp;&amp; !midNightReset) 
+  if ((DateTime.Now - DateTime.Today).TotalSeconds &lt; 60 &amp;&amp; !midNightReset)
   {
     wattCounterToday.Value = "0";
     kwCounterToday.Value = "0";
@@ -1812,13 +1812,13 @@ When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
           break;
       }
       //
-      return "{ 'ResponseValue' : 'OK' }";    
+      return "{ 'ResponseValue' : 'OK' }";
     }
-  } catch (Exception e) { 
+  } catch (Exception e) {
 
     Program.Notify("ZWave MultiInstance module ERROR!", e.Message);
 
-  }  	
+  }
 
   return "";
 });
@@ -1902,7 +1902,7 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
                   mod.On();
                 }
               }
-              else	
+              else
               {
                 Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
                 mod.On();
@@ -1915,7 +1915,7 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
       }
     }
   }
-  
+
   return true;
 });
 
@@ -2003,16 +2003,19 @@ foreach (IPAddress ip in host.AddressList)
     localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
   }
 }
-Program
-  .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
-  .AddOption("ServerAddress", "", "1. MQTT server address", "text")
-  .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
-  .AddOption("WebSockets", "", "3. Connect using WebSockets", "checkbox")
-  .AddOption("ServerTopic", "#", "4. Topic", "text")
-  .AddOption("Username", "", "5. Username (optional)", "text")
-  .AddOption("Password", "", "6. Password (optional)", "text")
-  .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox")
-  .Run();
+Program.Setup(() =&gt; {
+  Program
+    .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
+    .AddOption("ServerAddress", "", "1. MQTT server address", "text")
+    .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
+    .AddOption("TLS", "", "3. Connect using TLS/SSL", "checkbox")
+    .AddOption("WebSockets", "", "4. Connect using WebSockets", "checkbox")
+    .AddOption("ServerTopic", "#", "5. Topic", "text")
+    .AddOption("Username", "", "6. Username (optional)", "text")
+    .AddOption("Password", "", "7. Password (optional)", "text")
+    .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox");
+});
+Program.Run();
 </ScriptSetup>
     <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
@@ -2021,6 +2024,7 @@ string clientid = Program.Option("ClientId").Value.Trim();
 string username = Program.Option("Username").Value.Trim();
 string password = Program.Option("Password").Value.Trim();
 bool useWebSockets = Program.Option("WebSockets").Value == "On" ? true : false;
+bool useTls = Program.Option("TLS").Value == "On" ? true : false;
 
 var MqttIsConnected = false;
 MqttClient.Reset();
@@ -2031,33 +2035,8 @@ if (server == "")
   Pause(5);
   return;
 }
-else
-{
-  Program.Notify("Connecting to '" + server + ":" + port + "' ...");
-  try
-  {
-    if (username != "")
-    {
-      MqttClient.WithCredentials(username, password);
-    }
 
-    MqttClient
-      .Service(server)
-      .UsingWebSockets(useWebSockets)
-      .Connect(port, clientid, ()=&gt;{
-        Program.Notify("Connected!");
-        MqttIsConnected = true;
-      });
-  }
-  catch (Exception e)
-  {
-    Program.Notify(e.Message);
-    Pause(5);
-    return;
-  }
-}
-
-MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
+MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
   var parts = mtopic.Split('/');
   var cid = parts[0];
   //
@@ -2068,6 +2047,8 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
       var domain = parts[1];
       var address = parts[2];
       var type = parts[3];
+      // convert binary message to string
+      string mpayload = Encoding.UTF8.GetString(bytespayload);
 
       var module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
 
@@ -2173,29 +2154,61 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   return true;
 });
 
-Program.GoBackground();
+while (Program.IsRunning) {
+  if (!MqttIsConnected) {
+    MqttIsConnected = true;
+    Program.Notify("Connecting to '" + server + ":" + port + "' ...");
+    try
+    {
+      if (username != "")
+      {
+        MqttClient.WithCredentials(username, password);
+      }
+
+      MqttClient
+        .Service(server)
+        .UsingWebSockets(useWebSockets)
+        .WithTls(useTls)
+        .Connect(port, clientid, (connected)=&gt;{
+          MqttIsConnected = connected;
+          if (connected) {
+              Program.Notify("Connected!");
+          } else {
+              Program.Notify("Disconnected!");
+          }
+        });
+    }
+    catch (Exception e)
+    {
+      Program.Notify(e.Message);
+      Pause(5);
+      return;
+    }
+  }
+  Pause(30);
+}
 </ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>77</Address>
-    <Name>MQTT Network</Name>
-    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+  <ScriptErrors />
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>77</Address>
+  <Name>MQTT Network</Name>
+  <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
       Other servers will automatically inherit the published module once an event is generated from it.</Description>
-    <Group>Interconnections</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes />
-        <Property>MQTT.SensorPublish</Property>
-        <Description>Publish this module events</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+  <Group>Interconnections</Group>
+  <Features>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes />
+      <Property>MQTT.SensorPublish</Property>
+      <Description>Publish this module events</Description>
+    </ProgramFeature>
+  </Features>
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime>2020-06-10T18:20:22.352937Z</ActivationTime>
+  <TriggerTime>2020-06-10T18:20:22.578661Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
@@ -2341,9 +2354,9 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
       }
       // Off
       switchModule.Off();
-    }  
-  } 
-  catch (Exception e) 
+    }
+  }
+  catch (Exception e)
   {
     Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "ERROR: " + e.Message);
   }
@@ -2359,7 +2372,7 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
       if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
       {
         var separatorIndex = domainAddress.LastIndexOf(':');
-        if (separatorIndex &gt; 0) 
+        if (separatorIndex &gt; 0)
         {
           var domain = domainAddress.Substring(0, separatorIndex).ToLower();
           var address = domainAddress.Substring(separatorIndex + 1).ToLower();
@@ -2456,7 +2469,7 @@ Program.Run();
 </ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
-  // basic get will returns current device level 
+  // basic get will returns current device level
   Modules.InDomain("HomeAutomation.ZWave").OfDeviceType("Thermostat").Each((module) =&gt; {
     Program.Notify("Z-Wave Thermostat Poll", "Polling thermostat " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
     module.Command("SensorMultiLevel.Get").Execute();
@@ -2493,7 +2506,7 @@ Program.Run();
 </ScriptSetup>
     <ScriptSource>while (Program.IsEnabled)
 {
-  // basic get will returns current device level 
+  // basic get will returns current device level
   Modules.WithFeature("HomeGenie.ZWaveMeterPoll").Each((module) =&gt; {
     //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
     module.Command("Meter.Get").Execute("2");
@@ -2548,28 +2561,28 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     var lastIdle = module.Parameter("IrController.LastIdle");
     var dimStep = dimmerInterval.DecimalValue;
 
-    if (irData.Value != "") 
+    if (irData.Value != "")
     {
       if (lastButton.Value != "" &amp;&amp; lastIdle.IdleTime &gt; 0.25 &amp;&amp; (irData.Value == dimmerUp.Value || irData.Value == dimmerDown.Value))
       {
         irControlModules.Each((m) =&gt; {
           var moduleButton = m.Parameter("HomeGenie.IRControler.IRCode");
-          if (moduleButton.Value == lastButton.Value) 
+          if (moduleButton.Value == lastButton.Value)
           {
             var level = m.Level * 100D;
-            if (irData.Value == dimmerUp.Value) 
+            if (irData.Value == dimmerUp.Value)
             {
               level += dimStep;
               m.Level = (level &gt;= 100 ? 100 : level);
               Program.Notify(m.Instance.Name + "&lt;br&gt;Bright (" + m.Level + ")");
             }
-            else if (irData.Value == dimmerDown.Value) 
+            else if (irData.Value == dimmerDown.Value)
             {
               level -= dimStep;
               m.Level = (level &lt;= 5 ? 5 : level);
               Program.Notify(m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
             }
-            lastIdle.Value = "0"; 
+            lastIdle.Value = "0";
           }
           return false; // do not break, continue iterating...
         });
@@ -2579,10 +2592,10 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
         if (lastIdle.IdleTime &gt; 0.5)
         irControlModules.Each((m) =&gt; {
           var moduleButton = m.Parameter("HomeGenie.IRControler.IRCode");
-          if (moduleButton.Value == irData.Value) 
+          if (moduleButton.Value == irData.Value)
           {
             lastButton.Value = irData.Value;
-            lastIdle.Value = "1"; 
+            lastIdle.Value = "1";
             m.Toggle();
             Program.Notify(m.Instance.Name + "&lt;br&gt;toggled.");
           }
@@ -2752,7 +2765,7 @@ When changing the number of zone sensors, program restart is required.</Descript
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>/* 
+    <ScriptSetup>/*
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
 || @version: 1.0
@@ -2784,7 +2797,7 @@ $$.program.addVirtualModule(_domain, "3", "Switch", "");
 $$.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
 
 $$.program.run();</ScriptSetup>
-    <ScriptSource>/* 
+    <ScriptSource>/*
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
 || @version: 1.0
@@ -2806,7 +2819,7 @@ initialize();
 $$.on.webServiceCallReceived(_domain, function(apiCall){
 
   var ac = $$.program.parseApiCall(apiCall);
-  // Example: 
+  // Example:
   //  if the "apiCall" was
   //    "http://&lt;homegenie_address&gt;/api/HomeAutomation.Demo/3/Control.Level/50/1000"
   //  then "ac" will have the following property values
@@ -2838,11 +2851,11 @@ $$.on.webServiceCallReceived(_domain, function(apiCall){
   }
 
   // beside the response, also return back requested data for debugging purpose
-  return JSON.stringify({ 
-    ResponseValue: response, 
-    ApiCall: apiCall, 
-    Domain: ac.domain, 
-    Address: ac.address, 
+  return JSON.stringify({
+    ResponseValue: response,
+    ApiCall: apiCall,
+    Domain: ac.domain,
+    Address: ac.address,
     Command: ac.command,
     Options: ac.optionsString,
     Option1: ac.getOption(0),

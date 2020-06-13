@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -158,7 +158,7 @@ namespace HomeGenie.Service.Handlers
                     }
                 }
                 catch
-                { 
+                {
                     // TODO: report exception
                 }
 
@@ -317,7 +317,7 @@ namespace HomeGenie.Service.Handlers
                                 Thread.Sleep(3000);
                             }
                         }
-                        else 
+                        else
                         {
                             homegenie.RaiseEvent(
                                 Domains.HomeGenie_System,
@@ -405,7 +405,7 @@ namespace HomeGenie.Service.Handlers
                         logpath = Path.Combine("log", "homegenie.log.bak");
                     }
                     else if (SystemLogger.Instance != null)
-                    {                        
+                    {
                         SystemLogger.Instance.FlushLog();
                     }
                     if (File.Exists(logpath))
@@ -443,7 +443,7 @@ namespace HomeGenie.Service.Handlers
                     // This applies both to 'Digest' and 'Basic' authentication methods.
                     string password = migCommand.GetOption(1) == "" ? "" : Digest.CreatePassword(defaultUser, HomeGenieService.authenticationRealm, migCommand.GetOption(1));
                     homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
-                        .SetOption(WebServiceGatewayOptions.Authentication, 
+                        .SetOption(WebServiceGatewayOptions.Authentication,
                             String.IsNullOrEmpty(password) ? WebAuthenticationSchema.None : WebAuthenticationSchema.Digest);
                     homegenie.SystemConfiguration.HomeGenie.Password = password;
                     homegenie.SaveData();
@@ -479,7 +479,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     var fileCaching = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
                         .GetOption(WebServiceGatewayOptions.EnableFileCaching);
-                    request.ResponseData = new ResponseText(fileCaching != null ? fileCaching.Value : "false");  
+                    request.ResponseData = new ResponseText(fileCaching != null ? fileCaching.Value : "false");
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetPort")
                 {
@@ -781,7 +781,7 @@ namespace HomeGenie.Service.Handlers
                 homegenie.UpdateModulesDatabase();
                 break;
 
-            case "Stores.List":    
+            case "Stores.List":
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                     if (module != null)
@@ -955,8 +955,23 @@ namespace HomeGenie.Service.Handlers
 
             case "Groups.Add":
                 string newGroupName = request.RequestText;
-                homegenie.GetGroups(migCommand.GetOption(0)).Add(new Group() { Name = newGroupName });
-                homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
+                if (newGroupName.Trim().Length > 0)
+                {
+                    var existingGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find((g) => g.Name == newGroupName);
+                    if (existingGroup == null)
+                    {
+                        homegenie.GetGroups(migCommand.GetOption(0)).Add(new Group() { Name = newGroupName });
+                        homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseText("ERROR: group '" + newGroupName + "' already exists.");
+                    }
+                }
+                else
+                {
+                    request.ResponseData = new ResponseText("ERROR: invalid group name '" + newGroupName + "' .");
+                }
                 break;
 
             case "Groups.Delete":
@@ -1190,7 +1205,7 @@ namespace HomeGenie.Service.Handlers
                     (request.Context.Data as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
                 }
                 break;
-                
+
             case "Widgets.Import":
                 {
                     string archiveFile = Path.Combine(tempFolderPath, "import_widget.zip");
@@ -1236,7 +1251,7 @@ namespace HomeGenie.Service.Handlers
             case "Package.List":
                 // TODO: get the list of installed packages...
                 break;
-                
+
             case "Package.Install":
                 {
                     string pkgFolderUrl = migCommand.GetOption(0);

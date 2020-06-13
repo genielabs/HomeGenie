@@ -1157,13 +1157,6 @@
         <UpdateTime>2019-01-16T02:57:30.679447Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Password</Name>
-        <Value />
-        <Description>6. Password (optional)</Description>
-        <FieldType>text</FieldType>
-        <UpdateTime>2019-01-16T02:57:26.248044Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>ConfigureOptions.ServerAddress</Name>
         <Value />
         <Description>1. MQTT server address</Description>
@@ -1178,25 +1171,39 @@
         <UpdateTime>2019-01-16T02:57:30.679903Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>ConfigureOptions.TLS</Name>
+        <Value/>
+        <Description>3. Connect using WebSockets</Description>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.WebSockets</Name>
+        <Value/>
+        <Description>4. Connect using TLS/SSL</Description>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>ConfigureOptions.ServerTopic</Name>
         <Value>j4pi82PQEHeb4jgboRapLw==</Value>
-        <Description>4. Topic</Description>
+        <Description>5. Topic</Description>
         <FieldType>text</FieldType>
         <UpdateTime>2019-01-16T02:57:30.680294Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Username</Name>
         <Value />
-        <Description>5. Username (optional)</Description>
+        <Description>6. Username (optional)</Description>
         <FieldType>text</FieldType>
         <UpdateTime>2019-01-16T02:57:26.248042Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.WebSockets</Name>
-        <Value/>
-        <Description>3. Connect using WebSockets</Description>
-        <FieldType>checkbox</FieldType>
-        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+        <Name>ConfigureOptions.Password</Name>
+        <Value />
+        <Description>7. Password (optional)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248044Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Notification</Name>

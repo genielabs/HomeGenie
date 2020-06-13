@@ -240,6 +240,10 @@ input[type=number] {
     max-width: 90%;
 }
 
+#automation_group_module_edit-popup {
+    width: 400px;
+}
+
 .hg-event-popup {
     position: fixed;
     background-color: black;
@@ -684,6 +688,10 @@ div.ui-page-theme-a div.ui-body-inherit img.auto-invert, div.ui-bar-inherit img.
 .hg-scheduler-table-row {
 }
 
+#groups_panel {
+    width: 300px;
+}
+
 #module_programs_featurelist {
     max-height: 40px; overflow: hidden;
     vertical-align: middle;
@@ -808,9 +816,12 @@ div.ui-page-theme-a .ui-icon-microphone:after {
 /**** media queries ****/
 
 /** Small Mobile **/
-@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+@media only screen and (max-width: 420px), only screen and (max-device-width: 420px) {
     .hg-event-popup {
         display: none;
+    }
+    #automation_group_module_edit-popup {
+        width: 360px;
     }
 }
 

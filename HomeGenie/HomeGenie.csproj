@@ -239,7 +239,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ZWaveLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\ZWaveLib.1.0.19\lib\ZWaveLib.dll</HintPath>
+      <HintPath>packages\ZWaveLib.1.0.20\lib\ZWaveLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
