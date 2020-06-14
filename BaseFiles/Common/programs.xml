@@ -985,24 +985,27 @@ Program.GoBackground();
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program
-  .UseWidget("homegenie/generic/securitysystem")
+    <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
+var alarmTypes = "Siren,Light,Dimmer,Switch";
+Program.Setup(() => {
+  Program
+    .UseWidget("homegenie/generic/securitysystem")
 
-  .AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox")
-  .AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecurityTriggerHome", "Also trigger when armed Home", "checkbox")
-  .AddFeature("", "Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox")
+    .AddFeature("", sensorTypes, "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox")
+    .AddFeature("", sensorTypes, "HomeGenie.SecurityTriggerHome", "Also trigger when armed Home", "checkbox")
+    .AddFeature("", alarmTypes, "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox")
 
-  .AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "slider:0:60:1")
-  .AddOption("System.SirenStartTime", "0", "2. Sirens Start Delay (seconds)", "slider:0:30:1")
-  .AddOption("System.SirenMaxTime", "30", "3. Sirens Max Time (seconds, 0=infinite)", "slider:0:1800:1")
+    .AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "slider:0:60:1")
+    .AddOption("System.SirenStartTime", "0", "2. Sirens Start Delay (seconds)", "slider:0:30:1")
+    .AddOption("System.SirenMaxTime", "30", "3. Sirens Max Time (seconds, 0=infinite)", "slider:0:1800:1")
 
-  .AddOption("Email.Recipients", "", "4. Comma separated list of recipients e-mails for alarm notifications", "text")
+    .AddOption("Email.Recipients", "", "4. Comma separated list of recipients e-mails for alarm notifications", "text")
 
-  .AddOption("Trigger.ArmedProgram", "", "5. Program to run when armed", "program.text")
-  .AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "program.text")
-  .AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "program.text")
-
-  .Run();
+    .AddOption("Trigger.ArmedProgram", "", "5. Program to run when armed", "program.text")
+    .AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "program.text")
+    .AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "program.text");
+});
+Program.Run();
 </ScriptSetup>
     <ScriptSource>//
 // init program parameters
@@ -1545,13 +1548,15 @@ Currently limited to one client channel.</Description>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program
-  .AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor")
-  .AddFeature("", "Light,Dimmer,Switch", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
-  .AddFeature("", "Light,Dimmer,Switch,Sensor", "EnergyManagement.MonitorWatts", "Monitor watts", "checkbox")
-  .Run();
+  <ScriptSetup>Program.Setup(() =&gt; {
+  Program
+    .AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor")
+    .AddFeature("", "Light,Dimmer,Switch : /Meter.Watts/", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor : /Meter.Watts/", "EnergyManagement.MonitorWatts", "Monitor watts", "checkbox");
+});
+Program.Run();
 </ScriptSetup>
-    <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+  <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
 var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
 var kwCounterToday = energyMonitor.Parameter("EnergyMonitor.KwCounter.Today");
 var wattCounter = energyMonitor.Parameter("EnergyMonitor.WattCounter");
@@ -1668,35 +1673,35 @@ while (Program.IsEnabled)
   Pause(2);
 }
 </ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>81</Address>
-    <Name>Energy Monitor</Name>
-    <Description>Collects and display information about
+  <ScriptErrors>[]</ScriptErrors>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>81</Address>
+  <Name>Energy Monitor</Name>
+  <Description>Collects and display information about
 device status and energy consumption.</Description>
-    <Group>Energy Management</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch</ForTypes>
-        <Property>EnergyManagement.MonitorStatus</Property>
-        <Description>Monitor status</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
-        <Property>EnergyManagement.MonitorWatts</Property>
-        <Description>Monitor watts</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:11.727153Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.16216Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
+  <Group>Energy Management</Group>
+  <Features>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes>Light,Dimmer,Switch : Meter.Watts</ForTypes>
+      <Property>EnergyManagement.MonitorStatus</Property>
+      <Description>Monitor status</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes>Light,Dimmer,Switch,Sensor : Meter.Watts</ForTypes>
+      <Property>EnergyManagement.MonitorWatts</Property>
+      <Description>Monitor watts</Description>
+    </ProgramFeature>
+  </Features>
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime>2020-06-13T14:52:27.994126Z</ActivationTime>
+  <TriggerTime>2020-06-13T14:52:28.404841Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>true</IsEnabled>
+</ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Run();
 </ScriptSetup>
@@ -2638,20 +2643,21 @@ Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; p
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("ZoneSensors.Count", "5", "Number of Zone Sensors", "slider:1:10:1")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>var FLD_ZONESENSORS_DOMAIN = "HomeGenie.ZoneSensors";
+  <ScriptSetup>Program.Setup(() =&gt; {
+  Program
+    .AddOption("ZoneSensors.Count", "5", "Number of Zone Sensors", "slider:1:10:1");
+});
+Program.Run();</ScriptSetup>
+  <ScriptSource>var FLD_ZONESENSORS_DOMAIN = "HomeGenie.ZoneSensors";
 var FLD_ZONESENSORS_ENABLE = "HomeGenie.ZoneSensors.Enable";
 
 var zonesCount = (int)Program.Option("ZoneSensors.Count").DecimalValue;
 if (zonesCount &lt; 1) zonesCount = 1;
 Program.AddVirtualModules(FLD_ZONESENSORS_DOMAIN, "Sensor", "homegenie/generic/sensor", 1, zonesCount);
-Program.AddFeature("!"+FLD_ZONESENSORS_DOMAIN, "", FLD_ZONESENSORS_ENABLE, "Include in Zone Sensors", "checkbox");
+Program.AddFeature("!"+FLD_ZONESENSORS_DOMAIN, ": /^Sensor\\./", FLD_ZONESENSORS_ENABLE, "Include in Zone Sensors", "checkbox");
 for (int s = 1; s &lt;= zonesCount; s++)
 {
-  Program.AddFeature("!"+FLD_ZONESENSORS_DOMAIN, "", FLD_ZONESENSORS_DOMAIN+"."+s, "Zone Sensor "+s, "checkbox");
+  Program.AddFeature("!"+FLD_ZONESENSORS_DOMAIN, " : /^Sensor\\./", FLD_ZONESENSORS_DOMAIN+"."+s, "Zone Sensor "+s, "checkbox");
 }
 
 When.ModuleParameterChanged((module, parameter)=&gt;{
@@ -2707,62 +2713,62 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>29</Address>
-    <Name>Zone Sensors</Name>
-    <Description>Adds an arbitrary number of Zone Sensors. Each of them can group multiple sensors into one logcal sensor.
+  <ScriptErrors>[]</ScriptErrors>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>29</Address>
+  <Name>Zone Sensors</Name>
+  <Description>Adds an arbitrary number of Zone Sensors. Each of them can group multiple sensors into one logcal sensor.
 When changing the number of zone sensors, program restart is required.</Description>
-    <Group>Devices and Things</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-        <ForTypes />
-        <Property>HomeGenie.ZoneSensors.Enable</Property>
-        <Description>Include in Zone Sensors</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-        <ForTypes />
-        <Property>HomeGenie.ZoneSensors.1</Property>
-        <Description>Zone Sensor 1</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-        <ForTypes />
-        <Property>HomeGenie.ZoneSensors.2</Property>
-        <Description>Zone Sensor 2</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-        <ForTypes />
-        <Property>HomeGenie.ZoneSensors.3</Property>
-        <Description>Zone Sensor 3</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-        <ForTypes />
-        <Property>HomeGenie.ZoneSensors.4</Property>
-        <Description>Zone Sensor 4</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-        <ForTypes />
-        <Property>HomeGenie.ZoneSensors.5</Property>
-        <Description>Zone Sensor 5</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:16.186454Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.426447Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+  <Group>Devices and Things</Group>
+  <Features>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+      <ForTypes>:^Sensor\.</ForTypes>
+      <Property>HomeGenie.ZoneSensors.Enable</Property>
+      <Description>Include in Zone Sensors</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+      <ForTypes>:^Sensor\.</ForTypes>
+      <Property>HomeGenie.ZoneSensors.1</Property>
+      <Description>Zone Sensor 1</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+      <ForTypes>:^Sensor\.</ForTypes>
+      <Property>HomeGenie.ZoneSensors.2</Property>
+      <Description>Zone Sensor 2</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+      <ForTypes>:^Sensor\.</ForTypes>
+      <Property>HomeGenie.ZoneSensors.3</Property>
+      <Description>Zone Sensor 3</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+      <ForTypes>:^Sensor\.</ForTypes>
+      <Property>HomeGenie.ZoneSensors.4</Property>
+      <Description>Zone Sensor 4</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+      <ForTypes>:^Sensor\.</ForTypes>
+      <Property>HomeGenie.ZoneSensors.5</Property>
+      <Description>Zone Sensor 5</Description>
+    </ProgramFeature>
+  </Features>
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime>2020-06-13T15:33:11.199313Z</ActivationTime>
+  <TriggerTime>2020-06-13T15:33:11.80293Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>/*
@@ -2998,7 +3004,7 @@ var temperature = multiSensor.parameter(_param);
 // simulate temperature changes over the time
 while($$.program.isRunning) {
   multiSensor.raiseEvent(_param, (temperature.decimalValue+(Math.random()-0.5)), "");
-  $$.pause(60*5); // pause 60*5 = 5 minutes
+  $$.pause(60); // pause 60 seconds
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -3025,7 +3031,7 @@ while($$.program.isRunning) {
   var lux = (luminance.decimalValue+((Math.random()-0.5)*50));
   if (lux &lt; 0) lux = 0;
   multiSensor.raiseEvent(_param, lux, "");
-  $$.pause(60*5); // pause 60*5 = 5 minutes
+  $$.pause(60); // pause 60 seconds
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>

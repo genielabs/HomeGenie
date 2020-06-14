@@ -732,6 +732,7 @@ HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || new function () { var $$ = th
 
     $$.ShowCurrentProgramMenu = function (el, paddr) {
         HG.WebApp.ProgramEdit._CurrentProgram = HG.WebApp.Utility.GetProgramByAddress(paddr);
+        HG.WebApp.ProgramEdit.RefreshProgramOptions();
         $('#automationprograms_program_popup_title').html('Program <strong>' + HG.WebApp.ProgramEdit._CurrentProgram.Address + '</strong>');
         if (HG.WebApp.ProgramEdit._CurrentProgram.IsEnabled) {
             $('#btn_automationprograms_program_enable').hide();

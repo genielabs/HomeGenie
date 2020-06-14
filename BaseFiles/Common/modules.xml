@@ -78,13 +78,6 @@
         <UpdateTime>2017-08-17T17:52:04.926573Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>VirtualMeter.Watts</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.926896Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>78</Value>
         <Description />
@@ -208,13 +201,6 @@
         <UpdateTime>2017-08-17T17:52:04.932262Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>VirtualMeter.Watts</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.932591Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>400</Value>
         <Description />
@@ -308,13 +294,6 @@
         <Description />
         <FieldType />
         <UpdateTime>2017-08-17T17:52:04.934544Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualMeter.Watts</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.934887Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -487,13 +466,6 @@
         <Description />
         <FieldType />
         <UpdateTime>2019-01-05T21:11:34.151959Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualMeter.Watts</Name>
-        <Value>p7qzGq0tASFINdhHedzWJA==</Value>
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.936976Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -2632,13 +2604,6 @@
         <Description />
         <FieldType />
         <UpdateTime>2017-08-17T17:52:04.967054Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualMeter.Watts</Name>
-        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
-        <Description />
-        <FieldType />
-        <UpdateTime>2017-08-17T17:52:04.967638Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>

@@ -646,9 +646,9 @@
         $$.EditModule.Type = $$.CurrentModule.Type;
         $$.EditModule.DeviceType = $$.CurrentModule.DeviceType;
         //
-        $$.EditModule.WMWatts = 0;
-        if (HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, 'VirtualMeter.Watts') != null) {
-            $$.EditModule.WMWatts = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, 'VirtualMeter.Watts').Value;
+        $$.EditModule.WMWatts = null;
+        if (HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, HG.Ui.ParameterType.VirtualMeter_Watts) != null) {
+            $$.EditModule.WMWatts = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, HG.Ui.ParameterType.VirtualMeter_Watts).Value;
         }
         //
         // disable option button if it's a virtual module
@@ -674,7 +674,12 @@
         HG.Ui.GetModuleIcon($$.CurrentModule, function (icon) {
             $$.field('#module_icon', true).attr('src', icon);
         });
-        $$.field('#module_vmwatts', true).val($$.EditModule.WMWatts > 0 ? $$.EditModule.WMWatts : '0');
+        var vmwatts = $$.field('#module_vmwatts', true);
+        if (!vmwatts.hasClass('ui-disabled')) {
+            vmwatts.val($$.EditModule.WMWatts > 0 ? $$.EditModule.WMWatts : '0');
+        } else {
+            vmwatts.val('');
+        }
         //
         $$.UpdateFeatures();
         //
@@ -764,6 +769,14 @@
     };
 
     $$.MatchValues = function (valueList, matchValue) {
+        // regexp matching
+        if (valueList.trim().startsWith('/')) {
+            valueList = valueList.replace(/^\/+|\/+$/g, '');
+            return matchValue.match(valueList);
+        }
+        // classic comma separated value list matching
+        valueList = valueList.toLowerCase();
+        matchValue = matchValue.toLowerCase();
         var inclusionList = [valueList];
         if (valueList.indexOf(',') > 0)
             inclusionList = valueList.split(',');
@@ -818,8 +831,26 @@
             var features = HG.WebApp.Data.Programs[p].Features;
             if (features.length > 0) {
                 for (var f = 0; f < features.length; f++) {
-                    var featurematch = $$.MatchValues(features[f].ForDomains.toLowerCase(), $$.EditModule.Domain.toLowerCase());
-                    featurematch = featurematch && $$.MatchValues(features[f].ForTypes.toLowerCase(), $$.EditModule.DeviceType.toLowerCase());
+                    var featurematch = $$.MatchValues(features[f].ForDomains, $$.EditModule.Domain);
+                    var forTypes = features[f].ForTypes;
+                    var forProperties = false;
+                    var pidx = forTypes.indexOf(':');
+                    if (pidx >= 0) {
+                        forProperties = forTypes.substring(pidx + 1).trim();
+                        forTypes = forTypes.substring(0, pidx).trim();
+                    }
+                    featurematch = featurematch && $$.MatchValues(forTypes, $$.EditModule.DeviceType);
+                    if (forProperties !== false) {
+                        var matchProperty = false;
+                        for (pidx = 0; pidx < $$.CurrentModule.Properties.length; pidx++) {
+                            var mp = $$.CurrentModule.Properties[pidx];
+                            if ($$.MatchValues(forProperties, mp.Name)) {
+                                matchProperty = true;
+                                break;
+                            }
+                        }
+                        featurematch = featurematch && matchProperty;
+                    }
                     if (featurematch) {
                         var property = features[f].Property;
                         var prop = HG.WebApp.Utility.GetModulePropertyByName($$.CurrentModule, property);

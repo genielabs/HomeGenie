@@ -114,12 +114,12 @@
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <h5 id="automationprograms_program_popup_title" align="center">Program Menu</h5>
     <ul data-role="listview" data-inset="false" style="min-width:210px;">
+        <li><a class="ui-btn ui-icon-fa-download ui-btn-icon-left" data-locale-id="configure_program_options_export" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Export</a></li>
+        <li><a id="btn_automationprograms_program_clone" class="ui-btn ui-icon-plus ui-btn-icon-left" data-locale-id="configure_editprogram_options_clone">Clone</a></li>
         <li><a id="btn_automationprograms_program_edit" class="ui-btn ui-icon-edit ui-btn-icon-left" data-locale-id="configure_editprogram_options_edit">Edit</a></li>
         <li><a id="btn_automationprograms_program_enable" class="ui-btn ui-icon-check ui-btn-icon-left" data-locale-id="configure_editprogram_options_enable" href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Enable</a></li>
         <li><a id="btn_automationprograms_program_disable" class="ui-btn ui-icon-alert ui-btn-icon-left" data-locale-id="configure_editprogram_options_disable" href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Disable</a></li>
-        <li><a id="btn_automationprograms_program_clone" class="ui-btn ui-icon-plus ui-btn-icon-left" data-locale-id="configure_editprogram_options_clone">Clone</a></li>
         <li><a id="btn_automationprograms_program_delete" class="ui-btn ui-icon-minus ui-btn-icon-left" data-locale-id="configure_editprogram_options_delete" data-position-to="window">Delete</a></li>
-        <li><a class="ui-btn ui-icon-fa-download ui-btn-icon-left" data-locale-id="configure_program_options_export" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Export</a></li>
     </ul>
 </div>
 

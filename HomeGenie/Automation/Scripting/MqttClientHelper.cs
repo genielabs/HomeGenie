@@ -127,6 +127,8 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="clientOptionsCallback">Callback `Action&lt;MqttClientOptionsBuilder&gt;` invoked before the connection is established to allow setting advanced connection options. See https://github.com/chkr1011/MQTTnet/wiki/Client for all available options.</param>
         /// <param name="callback">Optional callback `Action&lt;bool&gt;` invoked when the connection status changed (the argument value will be true if connected, false otherwise)</param>
         /// <example>
+        /// Example:
+        /// <code>
         /// MqttClient
         ///     .Service(server)
         ///     .UsingWebSockets(useWebSockets)
@@ -147,6 +149,7 @@ namespace HomeGenie.Automation.Scripting
         ///         Program.Notify("Disconnected!");
         ///     }
         /// });
+        /// </code>
         /// </example>
         public MqttClientHelper Connect(int port, string clientId, Action<MqttClientOptionsBuilder> clientOptionsCallback, Action<bool> callback = null)
         {

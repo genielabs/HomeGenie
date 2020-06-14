@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -63,15 +63,15 @@ namespace HomeGenie.Automation.Scripting
         /// Example:
         /// <code>
         ///  Program.Setup(()=>
-        ///  {              
+        ///  {
         ///      Program.AddOption(
         ///          "MaxLevel",
-        ///          "40", 
+        ///          "40",
         ///          "Keep level below the following value",
         ///          "slider:10:80");
         ///      Program.AddFeature(
         ///          "Dimmer",
-        ///          "EnergyManagement.EnergySavingMode", 
+        ///          "EnergyManagement.EnergySavingMode",
         ///          "Energy Saving Mode enabled light",
         ///          "checkbox");
         ///  }, 0);
@@ -228,7 +228,7 @@ namespace HomeGenie.Automation.Scripting
         /// <code>
         /// // ....
         /// var delay = Program.Option("OffDelay").DecimalValue;
-        /// Pause( delay ); 
+        /// Pause( delay );
         /// Modules.WithFeature("Timer.TurnOffDelay").Off();
         /// </code>
         /// </example>
@@ -246,10 +246,10 @@ namespace HomeGenie.Automation.Scripting
         /// ProgramHelper.
         /// </returns>
         /// <param name='forDomains'>
-        /// A string with comma separated list of module domains that will showing this input field. Use an empty string for all domains.
+        /// Expression based on module domain names, used to select what modules will be showing this feature field. This can be either a valid Regular Expression enclosed by '/' and '/' delimiters or a simple comma (or '|') separated list of domain names (prepend '!' to a name to exclude it).
         /// </param>
         /// <param name='forModuleTypes'>
-        /// A string with comma separated list of module types that will be showing this input field.
+        /// Expression based on module types and parameters names, used to select what modules will be showing this feature field. This must be in the format `&lt;types_expr&gt;[:&lt;parameters_expr&gt;]`. &lt;types_expr&gt; and &lt;parameters_expr&gt; can be either a valid Regular Expression enclosed by '/' and '/' delimiters or a simple comma (or '|') separated list of names (prepend '!' to a name to exclude it).
         /// </param>
         /// <param name='parameterName'>
         /// Name of the module parameter bound to this feature field.
@@ -421,7 +421,7 @@ namespace HomeGenie.Automation.Scripting
             else
             {
                 virtualModule.Domain = domain;
-                if (virtualModule.DeviceType == MIG.ModuleTypes.Generic) 
+                if (virtualModule.DeviceType == MIG.ModuleTypes.Generic)
                     virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
                 Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
             }
@@ -429,7 +429,7 @@ namespace HomeGenie.Automation.Scripting
             Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
             if (module != null)
             {
-                if (module.DeviceType == MIG.ModuleTypes.Generic) 
+                if (module.DeviceType == MIG.ModuleTypes.Generic)
                     module.DeviceType = virtualModule.DeviceType;
                 Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
             }
@@ -514,7 +514,7 @@ namespace HomeGenie.Automation.Scripting
                 else
                 {
                     virtualModule.Domain = domain;
-                    if (virtualModule.DeviceType == MIG.ModuleTypes.Generic) 
+                    if (virtualModule.DeviceType == MIG.ModuleTypes.Generic)
                         virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
                     Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
                 }
@@ -522,7 +522,7 @@ namespace HomeGenie.Automation.Scripting
                 Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
                 if (module != null)
                 {
-                    if (module.DeviceType == MIG.ModuleTypes.Generic) 
+                    if (module.DeviceType == MIG.ModuleTypes.Generic)
                         module.DeviceType = virtualModule.DeviceType;
                     Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
                 }
@@ -609,7 +609,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Raise a parameter event and set the parameter with the specified value. 
+        /// Raise a parameter event and set the parameter with the specified value.
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="parameter">Parameter name.</param>
@@ -644,7 +644,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Raise a module parameter event and set the parameter with the specified value. 
+        /// Raise a module parameter event and set the parameter with the specified value.
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="module">The module source of this event.</param>
@@ -709,9 +709,9 @@ namespace HomeGenie.Automation.Scripting
         /// <code>
         /// // sets an example program parameter
         /// Program.Parameter("MyProgram.ExampleParameter").Value = "Just testing...";
-        /// 
+        ///
         /// // read "Sensor.Temperature" parameter of the program named "DHT-11"
-        /// if (Program.WithName("DHT-11").Parameter("Sensor.Temperature").DecimalValue < 20 
+        /// if (Program.WithName("DHT-11").Parameter("Sensor.Temperature").DecimalValue < 20
         ///     && Modules.WithName("Heater").IsOff)
         /// {
         ///     Modules.WithName("Heater").On();
@@ -808,8 +808,8 @@ namespace HomeGenie.Automation.Scripting
         {
             this.initialized = false;
             // no control widget --> not visible
-            this.UseWidget(""); 
-            // remove all features 
+            this.UseWidget("");
+            // remove all features
             var program = GetProgramBlock();
             if (program != null)
             {

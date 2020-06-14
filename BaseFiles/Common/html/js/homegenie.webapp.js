@@ -3,7 +3,7 @@
 || Copyright: (c) 2010-2016 GenieLabs
 || Author   : Generoso Martello
 || E-Mail   : gene@homegenie.it
-*/ 
+*/
 
 //
 // namespace : HG.WebApp namespace
@@ -159,9 +159,10 @@ HG.WebApp = HG.WebApp || new function(){ var $$ = this;
         $('#module_update_button').bind('click', function (event) {
             $$.GroupModules.CurrentModule.Name = $$.GroupModules.EditModule.Name;
             $$.GroupModules.CurrentModule.DeviceType = $$.GroupModules.EditModule.DeviceType;
-            $$.Utility.SetModulePropertyByName($$.GroupModules.CurrentModule, 'VirtualMeter.Watts', $$.GroupModules.EditModule.WMWatts);
-            //TODO: find out why it's not setting NeedsUpdate flag to true for VirtualMeter.Watts
-            $$.Utility.SetModulePropertyByName($$.GroupModules.EditModule, 'VirtualMeter.Watts', $$.GroupModules.EditModule.WMWatts);
+            if ($$.GroupModules.EditModule.WMWatts != null) {
+                $$.Utility.SetModulePropertyByName($$.GroupModules.CurrentModule, HG.Ui.ParameterType.VirtualMeter_Watts, $$.GroupModules.EditModule.WMWatts);
+                $$.Utility.SetModulePropertyByName($$.GroupModules.EditModule, HG.Ui.ParameterType.VirtualMeter_Watts, $$.GroupModules.EditModule.WMWatts);
+            }
             //
             for (var p = 0; p < $$.GroupModules.EditModule.Properties.length; p++) {
                 var prop = $$.GroupModules.EditModule.Properties[p];

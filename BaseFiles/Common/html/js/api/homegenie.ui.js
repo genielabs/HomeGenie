@@ -150,6 +150,9 @@ HG.Ui = HG.Ui || new function(){ var $$ = this;
         }
     };
 
+    $$.ModuleType = ModuleType;
+    $$.ParameterType = ParameterType;
+
     $$.GenerateWidget = function(fieldType, context, callback) {
         // fieldType:
         //    widgets/text, widgets/password, widgets/checkbox, widgets/slider,

@@ -104,7 +104,7 @@
                     HG.Configure.Modules.Get(event.Domain, event.Source, function (data) {
                         try {
                             module = eval('[' + data + ']')[0];
-                            if (module != null) {
+                            if (module != null && HG.WebApp.Data.Modules) {
                                 HG.WebApp.Data.Modules.push(module);
                                 $$.SendEventToUi(module, event);
                                 console.log("...done.");
@@ -374,7 +374,7 @@
                 break;
         }
 
-        if (popupdata != null 
+        if (popupdata != null
                 && !$$.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property) && eventLog.Description.indexOf(':nopopup:') < 0
                 && !$$.IsBlacklisted(eventLog.Property)) {
             $$.ShowEventPopup(popupdata, eventLog);
