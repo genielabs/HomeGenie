@@ -150,6 +150,34 @@
       <HintPath>packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Raspberry.IO, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.IO.GeneralPurpose.2.4.3\lib\net40\Raspberry.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raspberry.IO.Components, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.IO.Components.2.4.3\lib\net40\Raspberry.IO.Components.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raspberry.IO.GeneralPurpose, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.IO.GeneralPurpose.2.4.3\lib\net40\Raspberry.IO.GeneralPurpose.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raspberry.IO.InterIntegratedCircuit, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.IO.InterIntegratedCircuit.2.4.3\lib\net40\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raspberry.IO.Interop, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.IO.GeneralPurpose.2.4.3\lib\net40\Raspberry.IO.Interop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raspberry.IO.SerialPeripheralInterface, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.IO.SerialPeripheralInterface.2.4.3\lib\net40\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raspberry.System, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\HG.Raspberry.System.2.1.1\lib\net40\Raspberry.System.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SerialPortLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>packages\SerialPortLib.1.0.18\lib\SerialPortLib.dll</HintPath>
       <Private>True</Private>
@@ -192,28 +220,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="Raspberry.System">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="Raspberry.IO.SerialPeripheralInterface">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.Interop">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.Interop.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.InterIntegratedCircuit">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.GeneralPurpose">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.Components">
-      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="KNXLib">
       <HintPath>..\Externals\knx.net\KNXLib.dll</HintPath>
