@@ -246,7 +246,6 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.SerialPeripheralInterface.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
-                compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
 
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.Geometry.dll"));
