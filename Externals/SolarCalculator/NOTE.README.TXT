@@ -1,4 +1,0 @@
-This version has been compiled from source in order to fix "SolarNoon" bug:
-- time was always set to current time instead of using "this.ForDate" (SolarTimes.cs file line 494)
-- fixed error in TimePastLocalMidnight date parsing not using CultureInfo("en-US") in DateTime.Parse (SolarTimes.cs file lines 229,231)
-

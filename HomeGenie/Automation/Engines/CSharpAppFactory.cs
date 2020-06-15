@@ -248,8 +248,8 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
             }
 
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.Geometry.dll"));
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Innovative.SolarCalculator.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.Geometry.Angle.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.SolarCalculator.dll"));
 
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);

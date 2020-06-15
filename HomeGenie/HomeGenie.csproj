@@ -77,8 +77,20 @@
       <HintPath>packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CronExpressionDescriptor, Version=2.15.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\CronExpressionDescriptor.2.15.0\lib\netstandard2.0\CronExpressionDescriptor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <HintPath>packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Innovative.Geometry.Angle, Version=3.0.4.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\Angle.3.0.4\lib\net461\Innovative.Geometry.Angle.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Innovative.SolarCalculator, Version=3.0.5.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\SolarCalculator.3.0.5\lib\net461\Innovative.SolarCalculator.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IronPython, Version=2.7.9.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1">
@@ -99,6 +111,10 @@
     </Reference>
     <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f">
       <HintPath>packages\Jint.2.11.58\lib\net45\Jint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="KNXLib, Version=1.1.10.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\KNX.net.1.1.10\lib\net40\KNXLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LibUsbDotNet, Version=2.2.8.104, Culture=neutral, PublicKeyToken=null">
@@ -138,9 +154,9 @@
       <HintPath>packages\MQTTnet.3.0.8\lib\net452\MQTTnet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NCrontab">
-      <HintPath>..\Externals\NCrontab\NCrontab.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="NCrontab, Version=3.3.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>packages\NCrontab.3.3.1\lib\net35\NCrontab.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -222,25 +238,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Core" />
-    <Reference Include="KNXLib">
-      <HintPath>..\Externals\knx.net\KNXLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnitsNet">
-      <HintPath>..\Externals\raspberry-sharp\UnitsNet.dll</HintPath>
-    </Reference>
-    <Reference Include="CronExpressionDescriptor">
-      <HintPath>..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Innovative.SolarCalculator">
-      <HintPath>..\Externals\SolarCalculator\Innovative.SolarCalculator.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Innovative.Geometry">
-      <HintPath>..\Externals\SolarCalculator\Innovative.Geometry.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="XTenLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>packages\XTenLib.1.0.15\lib\XTenLib.dll</HintPath>
       <Private>True</Private>

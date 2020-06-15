@@ -83,8 +83,9 @@ namespace HomeGenie.Automation.Scheduler
         {
             serviceChecker.Change((60 - DateTime.Now.Second) * 1000, Timeout.Infinite);
             var date = DateTime.Now;
-            foreach (var eventItem in events)
+            for (int e = 0; e < events.Count; e++)
             {
+                var eventItem = events[e];
                 if (!eventItem.IsEnabled) continue;
                 // execute items only once instead of repeating for the whole minute
                 string currentOccurrence = date.ToUniversalTime().ToString(FORMAT_DATETIME);
@@ -510,10 +511,15 @@ namespace HomeGenie.Automation.Scheduler
                 dateStart = dateStart.ToLocalTime();
             if (dateEnd.Kind != DateTimeKind.Local)
                 dateEnd = dateEnd.ToLocalTime();
-            var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
-            return !cronSchedule.IsError
-                ? cronSchedule.Value.GetNextOccurrences(dateStart.AddMinutes(-1), dateEnd).ToList()
-                : null;
+            try
+            {
+                var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
+                return cronSchedule.GetNextOccurrences(dateStart.AddMinutes(-1), dateEnd).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         private bool IsBetween(DateTime date, DateTime dateStart, DateTime dateEnd)

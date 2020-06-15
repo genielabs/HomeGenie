@@ -102,6 +102,12 @@
     <Content Include="html\pages\control\widgets\homegenie\environment\weather\images\weather-windy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="html\pages\control\widgets\homegenie\generic\mediatransmitter.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\homegenie\generic\mediatransmitter.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="LICENCE.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2822,26 +2828,6 @@
     <None Include="html\images\wallpapers\wallpaper_004.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll">
-      <Link>lib\shared\CronExpressionDescriptor.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\knx.net\KNXLib.dll">
-      <Link>lib\shared\KNXLib.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\knx.net\KNXLib.dll.mdb">
-      <Link>lib\shared\KNXLib.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\NCrontab\NCrontab.dll">
-      <Link>lib\shared\NCrontab.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\NCrontab\NCrontab.pdb">
-      <Link>lib\shared\NCrontab.pdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\images\wallpapers\wallpaper_005.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2873,46 +2859,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\de\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\de\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\es\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\es\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\fr\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\fr\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\it\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\it\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\nl\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\nl\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\no\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\no\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\ru\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\ru\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\tr\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\tr\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\uk\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\uk\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\zh-CHS\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\zh-CHS\CronExpressionDescriptor.resources.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\ui\widgets\timetable.js">
@@ -3105,10 +3051,6 @@
     <None Include="html\js\app\homegenie.webapp.utility.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\pt\CronExpressionDescriptor.resources.dll">
-      <Link>lib\shared\pt\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\images\wallpapers\wallpaper_008.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3161,14 +3103,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\js\locationpicker.jquery.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\SolarCalculator\Innovative.SolarCalculator.dll">
-      <Link>lib\shared\Innovative.SolarCalculator.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\SolarCalculator\Innovative.Geometry.dll">
-      <Link>lib\shared\Innovative.Geometry.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\configure\scheduler\templates\program.say.js">
@@ -3229,19 +3163,7 @@
     <Folder Include="lib\" />
     <Folder Include="html\images\icons\" />
     <Folder Include="html\images\wallpapers\" />
-    <Folder Include="lib\ape\" />
     <Folder Include="lib\mig\" />
-    <Folder Include="lib\shared\" />
-    <Folder Include="lib\shared\de\" />
-    <Folder Include="lib\shared\es\" />
-    <Folder Include="lib\shared\fr\" />
-    <Folder Include="lib\shared\it\" />
-    <Folder Include="lib\shared\nl\" />
-    <Folder Include="lib\shared\no\" />
-    <Folder Include="lib\shared\ru\" />
-    <Folder Include="lib\shared\tr\" />
-    <Folder Include="lib\shared\uk\" />
-    <Folder Include="lib\shared\zh-CHS\" />
     <Folder Include="html\css\font-awesome\" />
     <Folder Include="html\js\app\" />
     <Folder Include="html\pages\configure\scheduler\templates\" />
