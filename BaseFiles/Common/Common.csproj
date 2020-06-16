@@ -8,7 +8,7 @@
     <RootNamespace>Common</RootNamespace>
     <AssemblyName>Common</AssemblyName>
     <ReleaseVersion>1.2</ReleaseVersion>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
