@@ -136,7 +136,7 @@
                     entry.description = sv.Description;
                     entry.boundModules = sv.BoundModules;
                     entry.hasScript = (typeof sv.Script != 'undefined' && sv.Script != null && sv.Script.trim() != '');
-                    entry.requiresBoundModules = sv.BoundModules && (sv.Script && sv.Script.indexOf('$$.boundModules.') > 0);
+                    entry.requiresBoundModules = sv.BoundModules && (sv.Script && sv.Script.replace(/\s+|\n|\r$/g, '').indexOf('$$.boundModules.') > 0);
                     entry.prevOccurrence = 0;
                     entry.nextOccurrence = 0;
                 }

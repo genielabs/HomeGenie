@@ -2,7 +2,7 @@
     init: function(options) {
         this.program = this.context.program;
         this.module = this.context.module;
-        this.autoCompleteUrl = 'http://autocomplete.wunderground.com/aq?query=';
+        this.autoCompleteUrl = '/api/HomeAutomation.OpenWeatherMap/2.5/Search.Location/';
     },
     bind: function() {
         var element = this.element;
@@ -15,7 +15,7 @@
         var _this = this;
         var textInput = element.find('[data-ui-field=textinput]');
         textInput.val(context.parameter.Value);
-        textInput.on('change', function(evt){
+        textInput.on('change', function(evt) {
             if (typeof _this.onChange == 'function') {
                 _this.onChange($(this).val());
             }
@@ -32,16 +32,15 @@
             source: function (req, res){
                 $.ajax({
                    type: "GET",
-                   dataType: 'jsonp',
-                   crossDomain : true,
                    success: function(data){
                      var locations = [];
-                     $.each(data.RESULTS, function(k,v){
-                        locations.push(v.name);
+                     $.each(data, function(k,v) {
+                         var location = v.name + ', ' + v.sys.country;
+                         locations.push(location);
                      });
                      res(locations);
                    },
-                   url: _this.autoCompleteUrl+req.term+'&cb=?'
+                   url: _this.autoCompleteUrl + req.term
                 });
             },
             select: function (event, ui) {

@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -65,25 +65,28 @@ namespace HomeGenie.Automation
         public bool Enabled
         {
             get { return isEngineEnabled; }
-            set 
+            set
             {
                 bool wasEnabled = isEngineEnabled;
                 isEngineEnabled = value;
                 if (wasEnabled && !isEngineEnabled)
                 {
                     schedulerService.Stop();
-                    foreach (ProgramBlock program in automationPrograms)
+                    for (int p = 0; p < automationPrograms.Count; p++)
                     {
-                        program.Engine.StopScheduler();
+                        automationPrograms[p].Engine.StopScheduler();
                     }
                 }
                 else if (!wasEnabled && isEngineEnabled)
                 {
                     schedulerService.Start();
-                    foreach (ProgramBlock program in automationPrograms)
+                    for (int p = 0; p < automationPrograms.Count; p++)
                     {
+                        var program = automationPrograms[p];
                         if (program.IsEnabled)
+                        {
                             program.Engine.StartScheduler();
+                        }
                     }
                 }
             }
@@ -160,7 +163,7 @@ namespace HomeGenie.Automation
             catch
             {
             }
-            // remove arduino folder files 
+            // remove arduino folder files
             try
             {
                 Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true);

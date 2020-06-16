@@ -586,7 +586,7 @@ while (Program.IsEnabled)
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>// list the program as custom weather widget
+  <ScriptSetup>// list the program as custom weather widget
 Program.UseWidget( "homegenie/environment/weather" )
   // set input fields parameters
   // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
@@ -606,8 +606,7 @@ Program.Parameter("Conditions.Description").Value = "";
 
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>
-Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
+  <ScriptSource>Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
   Program.Parameter("Conditions.City").Value = data.city;
   Program.Parameter("Conditions.DisplayLocation").Value = data.city;
   Program.Parameter("Conditions.Country").Value = data.country;
@@ -743,13 +742,36 @@ Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
   return data;
 };
 
+When.WebServiceCallReceived("HomeAutomation.OpenWeatherMap", (args) =&gt; {
+  var request = Program.ParseApiCall(args);
+  if (request.Address == "2.5" &amp;&amp; request.Command == "Search.Location") {
+    var query = request.GetOption(0);
+    if (query.IndexOf("?") &gt; 0) {
+      query = query.Substring(0, query.IndexOf("?"));
+    }
+    string apikey = Program.Option("ApiKey").Value.Trim();
+    if (apikey.Contains("?") || apikey.Length == 0) {
+      // default OWM key
+      apikey = "439d4b804bc8187953eb36d2a8c26a02";
+    }
+    Program.Notify(apikey);
+    var result = Net.WebService("https://openweathermap.org/data/2.5/find?type=like&amp;sort=population&amp;cnt=10&amp;appid=" + apikey + "&amp;q=" + query).GetData();
+    var matches = new List&lt;dynamic&gt;();
+    foreach (var match in result.list) {
+      matches.Add(match);
+    }
+    return matches;
+  }
+  return new ResponseText("ERROR");
+});
+
 while (Program.IsEnabled)
 {
   string location = Program.Option("Location").Value;
   string language = Program.Option("Language").Value;
-  string apikey = Program.Option("ApiKey").Value;
+  string apikey = Program.Option("ApiKey").Value.Trim();
 
-  if (!apikey.Contains("?"))
+  if (!apikey.Contains("?") &amp;&amp; apikey.Length &gt; 0)
   {
     try
     {
@@ -804,20 +826,20 @@ while (Program.IsEnabled)
   Pause(delayMins*60);
 }
 </ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>34</Address>
-    <Name>OpenWeatherMap</Name>
-    <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
+  <ScriptErrors>[]</ScriptErrors>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>34</Address>
+  <Name>OpenWeatherMap</Name>
+  <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
 To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
 </Description>
-    <Group>Weather and Environment</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:07.065827Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:16.911155Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+  <Group>Weather and Environment</Group>
+  <Features />
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <ActivationTime>2020-06-16T12:21:21.143129Z</ActivationTime>
+  <TriggerTime>2020-06-16T12:21:21.711167Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
