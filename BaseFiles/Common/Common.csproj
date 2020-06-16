@@ -1247,7 +1247,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\images\indicators\uv.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\images\indicators\volume.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
