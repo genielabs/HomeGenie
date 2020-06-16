@@ -749,12 +749,7 @@ When.WebServiceCallReceived("HomeAutomation.OpenWeatherMap", (args) =&gt; {
     if (query.IndexOf("?") &gt; 0) {
       query = query.Substring(0, query.IndexOf("?"));
     }
-    string apikey = Program.Option("ApiKey").Value.Trim();
-    if (apikey.Contains("?") || apikey.Length == 0) {
-      // default OWM key
-      apikey = "439d4b804bc8187953eb36d2a8c26a02";
-    }
-    Program.Notify(apikey);
+    string apikey = "439d4b804bc8187953eb36d2a8c26a02";
     var result = Net.WebService("https://openweathermap.org/data/2.5/find?type=like&amp;sort=population&amp;cnt=10&amp;appid=" + apikey + "&amp;q=" + query).GetData();
     var matches = new List&lt;dynamic&gt;();
     foreach (var match in result.list) {
