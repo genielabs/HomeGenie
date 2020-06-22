@@ -164,7 +164,7 @@ namespace HomeGenie.Data
                 }
                 return JsonConvert.SerializeObject(data, new JsonSerializerSettings(){ Culture = CultureInfo.InvariantCulture });
             }
-            set => SetData(value);
+            set { SetData(value); }
         }
 
         /// <summary>
