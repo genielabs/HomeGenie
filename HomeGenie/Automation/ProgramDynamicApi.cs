@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -76,9 +76,9 @@ namespace HomeGenie
         public static object TryApiCall(MigInterfaceCommand command)
         {
             object response = "";
-            // Dynamic Interface API 
+            // Dynamic Interface API
             var registeredApi = command.Domain + "/" + command.Address + "/" + command.Command;
-            var handler = ProgramDynamicApi.Find(registeredApi);
+            var handler = Find(registeredApi);
             if (handler != null)
             {
                 // explicit command API handlers registered in the form <domain>/<address>/<command>
@@ -88,7 +88,7 @@ namespace HomeGenie
             }
             else
             {
-                handler = ProgramDynamicApi.FindMatching(command.OriginalRequest.Trim('/'));
+                handler = FindMatching(command.OriginalRequest.Trim('/'));
                 if (handler != null)
                 {
                     // other command API handlers

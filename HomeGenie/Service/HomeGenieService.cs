@@ -462,7 +462,7 @@ namespace HomeGenie.Service
             string source,
             string description,
             string property,
-            string value
+            object value
         )
         {
             var evt = migService.GetEvent(domain, source, description, property, value);
@@ -539,17 +539,10 @@ namespace HomeGenie.Service
                     parameter = Utility.ModuleParameterGet(module, args.EventData.Property);
                     if (parameter == null)
                     {
-                        parameter = new ModuleParameter() {
-                            Name = args.EventData.Property,
-                            Value = args.EventData.Value.ToString()
-                        };
+                        parameter = new ModuleParameter() { Name = args.EventData.Property };
                         module.Properties.Add(parameter);
-                        //parameter = Utility.ModuleParameterGet(module, args.EventData.Property);
                     }
-                    else
-                    {
-                        parameter.Value = args.EventData.Value.ToString();
-                    }
+                    parameter.SetData(args.EventData.Value);
                 }
                 catch (Exception ex)
                 {
@@ -557,10 +550,12 @@ namespace HomeGenie.Service
                 }
                 // Prevent event pump from blocking on other worker tasks
                 if (masterControlProgram != null)
-                Utility.RunAsyncTask(() =>
                 {
-                    masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
-                });
+                    Utility.RunAsyncTask(() =>
+                    {
+                        masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
+                    });
+                }
             }
             else
             {
@@ -640,7 +635,7 @@ namespace HomeGenie.Service
 
             // Let automation programs process the request; we append eventual POST data (RequestText) to the MigInterfaceCommand
             if (!String.IsNullOrWhiteSpace(args.Request.RequestText))
-                command = new MigInterfaceCommand(command.OriginalRequest + "/" + args.Request.RequestText);
+                command = new MigInterfaceCommand(command.OriginalRequest, args.Request.RequestData);
             args.Request.ResponseData = ProgramDynamicApi.TryApiCall(command);
 
             // Macro Recording
@@ -695,10 +690,14 @@ namespace HomeGenie.Service
                             if (parameter.Name != Properties.WidgetDisplayModule
                                 && parameter.Name != Properties.VirtualModuleParentId
                                 && parameter.Name != Properties.ProgramStatus
-                                && parameter.Name != Properties.RuntimeError)
+                                && parameter.Name != Properties.RuntimeError
+                                && parameter.GetData() is string)
                             {
-                                if (!string.IsNullOrEmpty(parameter.Value))
-                                    parameter.Value = StringCipher.Encrypt(parameter.Value, GetPassPhrase());
+                                string stringValue = parameter.Value;
+                                if (!string.IsNullOrEmpty(stringValue))
+                                {
+                                    parameter.Value = StringCipher.Encrypt(stringValue, GetPassPhrase());
+                                }
                             }
                         }
                     }
@@ -1376,12 +1375,18 @@ namespace HomeGenie.Service
                     // decrypt config data
                     foreach (var parameter in systemConfiguration.HomeGenie.Settings)
                     {
+                        // TODO: this is duplicate code
+                        string stringValue = parameter.Value;
                         try
                         {
-                            if (!string.IsNullOrEmpty(parameter.Value))
-                                parameter.Value = StringCipher.Decrypt(parameter.Value, GetPassPhrase());
+                            if (!String.IsNullOrEmpty(stringValue)) {
+                                parameter.Value = StringCipher.Decrypt(
+                                    stringValue,
+                                    GetPassPhrase()
+                                );
+                            }
                         }
-                        catch (Exception ex)
+                        catch(Exception ex)
                         {
                             _log.Error(ex);
                         }
@@ -1414,15 +1419,20 @@ namespace HomeGenie.Service
                     {
                         foreach (var parameter in module.Properties)
                         {
+                            // TODO: this is duplicate code
+                            string stringValue = parameter.Value;
                             try
                             {
-                                if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
-                                        parameter.Value,
+                                if (!String.IsNullOrEmpty(stringValue)) {
+                                    parameter.Value = StringCipher.Decrypt(
+                                    stringValue,
                                         GetPassPhrase()
                                     );
+                                }
                             }
-                            catch
+                            catch(Exception ex)
                             {
+                                // ignored
                             }
                         }
                     }

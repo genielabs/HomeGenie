@@ -74,7 +74,7 @@
             <a href="#page_configure_groups" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-left" style="margin:8px">Configure Groups and Modules</a>
         </div>
     </div>
-    
+
     <div data-ui-field="healnetwork_popup" class="ui-corner-all" data-position-to="window" data-transition="pop" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
@@ -100,7 +100,7 @@
     </div>
 
 </div>
-        
+
 <script type="text/javascript" language="javascript">
 HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
 
@@ -266,12 +266,12 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             }
     }
     },
-    
+
     ZWaveDiscovery: function() {
         this.DiscoveryPopup.popup('open');
         $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/', function (data) { });
     },
-    
+
     ZWaveHealNetwork: function () {
         this.HealNetworkPopup.popup('open');
         $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Controller.HealNetwork/', function (data) { });
@@ -297,7 +297,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             _this.NodeOperationPopup.find('[data-ui-field=close_button]').removeClass('ui-disabled');
         });
     },
-    
+
     ZWaveNodeRemove: function() {
         var _this = this;
         var titleString = HG.WebApp.Locales.GetLocaleString('remove_node', false, this.Locale);
@@ -318,7 +318,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             _this.NodeOperationPopup.find('[data-ui-field=close_button]').removeClass('ui-disabled');
         });
     },
-    
+
     ZWaveHardReset: function() {
         var _this = this;
         var titleString = HG.WebApp.Locales.GetLocaleString('hard_reset', false, this.Locale);
@@ -333,37 +333,37 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
     ZWaveUpdateP1Db: function() {
         var p1archive = encodeURIComponent('https://genielabs.github.io/HomeGenie/_hg_files/zwave/pepper1_device_archive.zip');
         $.mobile.loading('show', {text: 'Updating Pepper1 DB...', textVisible: true});
-        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Db.Update/' + p1archive, function (data) { 
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/' + this.Id + '/1/Db.Update/' + p1archive, function (data) {
             $.mobile.loading('hide');
         });
     },
-    
+
     Localize: function() {
         var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
         var userLang = HG.WebApp.Locales.GetUserLanguage();
         // English is the default locale
         var defaultLocale = {
-            "title": 
+            "title":
                  "ZWave Interface Options",
-            "device_port": 
+            "device_port":
                  "Device Port",
-            "common_tasks": 
+            "common_tasks":
                  "ZWave Common Tasks",
-            "add_node": 
+            "add_node":
                  "Add Node",
-            "remove_node": 
+            "remove_node":
                  "Remove Node",
-            "add_node_heading": 
+            "add_node_heading":
                  "Add/Remove Node",
-            "press_device_button": 
+            "press_device_button":
                  "Press the button on your device:",
-            "operation_timeout": 
-                 "this operation will timeout in 10 seconds.",
-            "add_node_close": 
+            "operation_timeout":
+                 "this operation will timeout in 30 seconds.",
+            "add_node_close":
                  "Close",
-            "discovery": 
+            "discovery":
                 "Discovery",
-            "discovery_heading": 
+            "discovery_heading":
                 "ZWave Discovery",
             "heal":
                 "Network Heal",
@@ -390,27 +390,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         {
         // German
         case 'de': locale = {
-            "title": 
+            "title":
                 "ZWave Schnittstelle Optionen",
-            "device_port": 
+            "device_port":
                 "Geraete Port",
-            "common_tasks": 
+            "common_tasks":
                 "ZWave Allgemeine Aufgaben",
-            "add_node": 
+            "add_node":
                 "Node Hinzufuegen",
-            "remove_node": 
+            "remove_node":
                 "Node Entfernen",
-            "add_node_heading": 
+            "add_node_heading":
                 "Hinzufuegen/Entfernen Node",
-            "press_device_button": 
+            "press_device_button":
                 "Druecken Sie die Taste auf Ihrem Geraet:",
-            "operation_timeout": 
-                "Dieser Vorgang wird nach einer Zeitueberschreitung nach 10 Sekunden beendet.",
-            "add_node_close": 
+            "operation_timeout":
+                "Dieser Vorgang wird nach einer Zeitueberschreitung nach 30 Sekunden beendet.",
+            "add_node_close":
                 "geschlossen",
-            "discovery": 
+            "discovery":
                 "Discovery",
-            "discovery_heading": 
+            "discovery_heading":
                 "ZWave Discovery",
             "heal":
                 "Network Heal",
@@ -434,27 +434,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             break;
         // Spanish
         case 'es': locale = {
-            "title": 
+            "title":
                 "Controlador ZWave",
-            "device_port": 
+            "device_port":
                 "Puerto del Controlador",
-            "common_tasks": 
+            "common_tasks":
                 "Acción ZWave",
-            "add_node": 
+            "add_node":
                 "Añadir modulo",
-            "remove_node": 
+            "remove_node":
                 "Suprimir modulo",
-            "add_node_heading": 
+            "add_node_heading":
                 "Añadir/Suprimir Modulo",
-            "press_device_button": 
+            "press_device_button":
                 "Pulsar sobre el botón del módulo:",
-            "operation_timeout": 
-                "Tienes 10 segundos.",
-            "add_node_close": 
+            "operation_timeout":
+                "Tienes 30 segundos.",
+            "add_node_close":
                 "Cerrar",
-            "discovery": 
+            "discovery":
                 "Discovery",
-            "discovery_heading": 
+            "discovery_heading":
                 "ZWave Discovery",
             "heal":
                 "Network Heal",
@@ -478,27 +478,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             break;
         // French
         case 'fr': locale = {
-            "title": 
+            "title":
                 "Contrôleur ZWave",
-            "device_port": 
+            "device_port":
                 "Port du Contrôleur",
-            "common_tasks": 
+            "common_tasks":
                 "Action ZWave",
-            "add_node": 
+            "add_node":
                 "Ajouter un module",
-            "remove_node": 
+            "remove_node":
                 "Supprimer un module",
-            "add_node_heading": 
+            "add_node_heading":
                 "Ajout/suppression d'un module",
-            "press_device_button": 
+            "press_device_button":
                 "Appuyer sur le bouton du module :",
-            "operation_timeout": 
-                "Vous avez 10 secondes...",
-            "add_node_close": 
+            "operation_timeout":
+                "Vous avez 30 secondes...",
+            "add_node_close":
                 "Fermer",
-            "discovery": 
+            "discovery":
                 "Découvrir",
-            "discovery_heading": 
+            "discovery_heading":
                 "Découverte ZWave",
             "heal":
                 "Network Heal",
@@ -522,27 +522,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             break;
         // Italian
         case 'it': locale = {
-            "title": 
+            "title":
                  "Interfaccia Z-Wave",
-            "device_port": 
+            "device_port":
                  "Porta Dispositivo",
-            "common_tasks": 
+            "common_tasks":
                  "Attivita' Z-Wave Comuni",
-            "add_node": 
+            "add_node":
                  "Aggiungi Nodo",
-            "remove_node": 
+            "remove_node":
                  "Rimuovi Nodo",
-            "add_node_heading": 
+            "add_node_heading":
                  "Agg./Rim. Nodo",
-            "press_device_button": 
+            "press_device_button":
                  "Premi il pulsante sul dispositivo:",
-            "operation_timeout": 
-                 "questa operazione scadrà entro 10 secondi.",
-            "add_node_close": 
+            "operation_timeout":
+                 "questa operazione scadrà entro 30 secondi.",
+            "add_node_close":
                  "Chiudi",
-            "discovery": 
+            "discovery":
                 "Ricerca",
-            "discovery_heading": 
+            "discovery_heading":
                 "Ricerca ZWave",
             "heal":
                 "Network Heal",
@@ -566,27 +566,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             break;
         // Dutch
         case 'nl': locale = {
-            "title": 
+            "title":
                 "ZWave Interface",
-            "device_port": 
+            "device_port":
                 "Apparaat poort",
-            "common_tasks": 
+            "common_tasks":
                 "ZWave gebruikelijke taken",
-            "add_node": 
+            "add_node":
                 "Node toevoegen",
-            "remove_node": 
+            "remove_node":
                 "Node verwijderen",
-            "add_node_heading": 
+            "add_node_heading":
                 "Node toevoegen/verwijderen",
-            "press_device_button": 
+            "press_device_button":
                 "Druk op de knop op uw apparaat:",
-            "operation_timeout": 
-                "deze actie stopt over 10 seconden.",
-            "add_node_close": 
+            "operation_timeout":
+                "deze actie stopt over 30 seconden.",
+            "add_node_close":
                 "Sluiten",
-            "discovery": 
+            "discovery":
                 "Discovery",
-            "discovery_heading": 
+            "discovery_heading":
                 "ZWave Discovery",
             "heal":
                 "Network Heal",
@@ -610,27 +610,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             break;
         // Russian
         case 'ru': locale = {
-            "title": 
+            "title":
                 "Опции интерфейса ZWave",
-            "device_port": 
+            "device_port":
                 "Порт устройства",
-            "common_tasks": 
+            "common_tasks":
                 "Основные задачи ZWave",
-            "add_node": 
+            "add_node":
                 "Добавить узел",
-            "remove_node": 
+            "remove_node":
                 "Удалить узел",
-            "add_node_heading": 
+            "add_node_heading":
                 "Добавить/Удалить узел",
-            "press_device_button": 
+            "press_device_button":
                 "Нажмите кнопку на устройстве:",
-            "operation_timeout": 
-                "таймаут операции - 10 секунд.",
-            "add_node_close": 
+            "operation_timeout":
+                "таймаут операции - 30 секунд.",
+            "add_node_close":
                 "Закрыть",
-            "discovery": 
+            "discovery":
                 "Обнаружение",
-            "discovery_heading": 
+            "discovery_heading":
                 "Обнаружение устройств ZWave",
             "heal":
                 "Network Heal",
@@ -654,27 +654,27 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             break;
         // Swedish
         case 'sv': locale = {
-            "title": 
+            "title":
                 "ZWave Gränssnitt Inställningar",
-            "device_port": 
+            "device_port":
                 "Enhets Port",
-            "common_tasks": 
+            "common_tasks":
                 "ZWave Uppgifter",
-            "add_node": 
+            "add_node":
                 "Lägg Till Nod",
-            "remove_node": 
+            "remove_node":
                 "Ta Bort Nod",
-            "add_node_heading": 
+            "add_node_heading":
                 "Lägg Till/Ta Bort Enhet",
-            "press_device_button": 
+            "press_device_button":
                 "Tryck på knappen para för att lägga till enhet:",
-            "operation_timeout": 
-                "denna åtgärd stängs ner inom 10 sekunder.",
-            "add_node_close": 
+            "operation_timeout":
+                "denna åtgärd stängs ner inom 30 sekunder.",
+            "add_node_close":
                 "Stäng",
-            "discovery": 
+            "discovery":
                 "Discovery",
-            "discovery_heading": 
+            "discovery_heading":
                 "ZWave Discovery",
             "heal":
                 "Network Heal",
@@ -700,6 +700,6 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         HG.WebApp.Locales.LocalizeElement(this.Configlet, locale);
         this.Locale = locale;
     }
-    
+
 };
 </script>

@@ -42,7 +42,8 @@ namespace HomeGenie.Data
         private ValueStatistics statistics;
         [NonSerialized]
         private DateTime requestUpdateTimestamp = DateTime.UtcNow;
-        private string parameterValue;
+        [NonSerialized]
+        private object data;
         //
         public ModuleParameter()
         {
@@ -75,26 +76,95 @@ namespace HomeGenie.Data
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the value.
+        /// Gets the data object.
         /// </summary>
-        /// <value>The value.</value>
+        /// <returns></returns>
+        public object GetData()
+        {
+            return data;
+        }
+
+        /// <summary>
+        /// If data is stored as a JSON serialized string, use this method to get the object instance specifying its type `T`.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>The data object as type `T`.</returns>
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // Sets the data as JSON serialized object
+        /// parameter.Value = "{ \"foo\": \"bar\", \"pippo\": \"pluto\" }";
+        /// var data = parameter.GetData<Dictionary<string,string>>();
+        /// foreach(var item in data) {
+        ///     // ...
+        /// }
+        /// </code>
+        /// </example>
+        public T GetData<T>()
+        {
+            if (data is string)
+            {
+                try
+                {
+                    data = JsonConvert.DeserializeObject<T>(
+                        Convert.ToString(data, CultureInfo.InvariantCulture),
+                        new JsonSerializerSettings() {Culture = CultureInfo.InvariantCulture}
+                    );
+                }
+                catch (Exception e)
+                {
+                    // ignored
+                }
+            }
+            return (T)data;
+        }
+
+        /// <summary>
+        /// Sets the data of this parameter.
+        /// </summary>
+        /// <param name="dataObject"></param>
+        public void SetData(object dataObject)
+        {
+            UpdateTime = DateTime.UtcNow;
+            data = dataObject;
+            if (data!= null)
+            {
+                // is this a numeric value that can be added for statistics?
+                string stringValue = Value;
+                double v;
+                if (!string.IsNullOrEmpty(stringValue) && double.TryParse(stringValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
+                {
+                    Statistics.AddValue(Name, v, UpdateTime);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the data of this parameter as string. If the value is a non-primitive object, set using the `setData` method, then the getter of `Value` will return the JSON serialized data.
+        /// </summary>
+        /// <value>The string value.</value>
         public string Value
         {
             get
             {
-                return parameterValue;
-            }
-            set
-            {
-                UpdateTime = DateTime.UtcNow;
-                parameterValue = value;
-                // is this a numeric value that can be added for statistics?
-                double v;
-                if (!string.IsNullOrEmpty(value) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
+                bool isNumber = data is sbyte
+                                || data is byte
+                                || data is short
+                                || data is ushort
+                                || data is int
+                                || data is uint
+                                || data is long
+                                || data is ulong
+                                || data is float
+                                || data is double
+                                || data is decimal;
+                if (isNumber || data is string)
                 {
-                    Statistics.AddValue(Name, v, this.UpdateTime);
+                    return Convert.ToString(data, CultureInfo.InvariantCulture);
                 }
+                return JsonConvert.SerializeObject(data, new JsonSerializerSettings(){ Culture = CultureInfo.InvariantCulture });
             }
+            set => SetData(value);
         }
 
         /// <summary>
@@ -129,8 +199,9 @@ namespace HomeGenie.Data
         {
             get
             {
+                string stringValue = Value;
                 double v = 0;
-                if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
+                if (!String.IsNullOrEmpty(stringValue) && !double.TryParse(stringValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
                 return v;
             }
         }

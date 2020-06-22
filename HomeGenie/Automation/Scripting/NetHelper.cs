@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -31,6 +31,8 @@ using System.Net.Mail;
 
 using System.Net.NetworkInformation;
 using System.Collections.Specialized;
+using System.Globalization;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -290,7 +292,7 @@ namespace HomeGenie.Automation.Scripting
         #region HTTP client
 
         /// <summary>
-        /// Set the web service URL to call. 
+        /// Set the web service URL to call.
         /// </summary>
         /// <returns>NetHelper.</returns>
         /// <param name="serviceUrl">Service URL.</param>
@@ -298,7 +300,7 @@ namespace HomeGenie.Automation.Scripting
         /// <example>
         /// Example:
         /// <code>
-        /// var iplocation = Net.WebService("http://freegeoip.net/json/").GetData(); 
+        /// var iplocation = Net.WebService("http://freegeoip.net/json/").GetData();
         /// Program.Notify("IP to Location", iplocation.city);
         /// </code>
         /// </example>
@@ -500,7 +502,7 @@ namespace HomeGenie.Automation.Scripting
             Utility.RunAsyncTask(() =>
             {
                 WebService(eventRouteUrl)
-                    .Put(JsonConvert.SerializeObject(new ModuleEvent(module.Instance, parameter), new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }))
+                    .Put(JsonConvert.SerializeObject(new ModuleEvent(module.Instance, parameter), new JsonSerializerSettings(){ Culture = CultureInfo.InvariantCulture }))
                     .Call();
             });
             return this;

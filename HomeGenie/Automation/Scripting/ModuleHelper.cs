@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -186,7 +186,7 @@ namespace HomeGenie.Automation.Scripting
             }
             return value;
         }
-                
+
         public StoreHelper Store(string storeName)
         {
             StoreHelper storage = null;
@@ -198,13 +198,13 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Raise a module parameter event and set the parameter with the specified value. 
+        /// Raise a module parameter event and set the parameter with the specified value.
         /// </summary>
         /// <returns>ModuleHelper.</returns>
         /// <param name="parameter">Parameter name.</param>
         /// <param name="value">The new parameter value to set.</param>
         /// <param name="description">Event description.</param>
-        public ModuleHelper RaiseEvent(string parameter, string value, string description)
+        public ModuleHelper RaiseEvent(string parameter, object value, string description)
         {
             try
             {

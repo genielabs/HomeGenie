@@ -12,12 +12,12 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it 
+ *     Project Homepage: http://homegenie.it
  */
 
 using System;
@@ -47,7 +47,7 @@ namespace HomeGenie.Automation.Engines
 
         public CSharpEngine(ProgramBlock pb) : base(pb)
         {
-            // TODO: SetShadowCopyPath/SetShadowCopyFiles methods are deprecated... 
+            // TODO: SetShadowCopyPath/SetShadowCopyFiles methods are deprecated...
             // TODO: create own AppDomain for "programDomain" instead of using CurrentDomain
             // TODO: and use AppDomainSetup to set shadow copy for each app domain
             // TODO: !!! verify AppDomain compatibility with mono !!!
@@ -202,7 +202,7 @@ namespace HomeGenie.Automation.Engines
             {
                 ProgramBlock.IsEnabled = true;
             }
-            
+
             return errors;
         }
 
@@ -246,8 +246,25 @@ namespace HomeGenie.Automation.Engines
                 ErrorNumber = "-1",
                 ErrorMessage = e.Message
             };
+            // determine error line number
             var st = new StackTrace(e, true);
-            error.Line = st.GetFrame(0).GetFileLineNumber();
+            var stackFrames = st.GetFrames();
+            if (stackFrames != null && stackFrames.Length > 0)
+            {
+                error.Line = stackFrames[0].GetFileLineNumber();
+                foreach (var frame in stackFrames)
+                {
+                    var declaringType = frame.GetMethod().DeclaringType;
+                    if (declaringType != null)
+                    {
+                        if (declaringType.FullName != null && declaringType.FullName.EndsWith("HomeGenie.Automation.Scripting.ScriptingInstance"))
+                        {
+                            error.Line = frame.GetFileLineNumber();
+                            break;
+                        }
+                    }
+                }
+            }
             if (isTriggerBlock)
             {
                 var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;

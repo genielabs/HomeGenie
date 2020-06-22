@@ -314,11 +314,11 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                 var dfrom = new Date($('#page_analyze_datefrom').datebox('getTheDate').getTime());
                 var dto = new Date($('#page_analyze_dateto').datebox('getTheDate').getTime());
                 dfrom.setHours(0, 0, 0, 0);
-                dto.setHours(23, 59, 59, 0);
+                dto.setHours(23, 59, 59, 999);
                 if ($$._CurrentModule != "All:") {
-                    
+
                     if (showtype == true) {
-                        
+
                         $.ajax({
                             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + $$._CurrentParameter + '/' + $$._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
                             type: 'GET',
@@ -418,9 +418,9 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                                 $.mobile.loading('hide');
                             }
                         });
-                        
+
                     } else {
-                        
+
                         $.ajax({
                             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDay/' + $$._CurrentParameter + '/' + $$._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
                             type: 'GET',
@@ -480,9 +480,9 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                             }
                         });
                     }
-                    
+
                 } else {
-                    
+
                     var dateFormat = HG.WebApp.Store.get('UI.DateFormat');
                     $.ajax({
                         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsMultiple/' + $$._CurrentParameter + '/' + $$._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
@@ -550,9 +550,9 @@ HG.WebApp.Statistics = HG.WebApp.Statistics || new function () { var $$ = this;
                     });
                 }
             });
-            
+
         } else {
-            
+
             HG.Statistics.ServiceCall('Global.CounterTotal', $$._CurrentParameter, '', function (total) {
                 $('#page_analyze_totalunits').val((total * 1).toFixed(2));
                 var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();

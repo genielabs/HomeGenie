@@ -51,7 +51,7 @@ namespace HomeGenie
             {
                 Utility.Say(sentence, locale, goAsync);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 HomeGenieService.LogError(e);
             }
@@ -93,7 +93,7 @@ namespace HomeGenie
 
                 Utility.Play(file);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 HomeGenieService.LogError(e);
             }
@@ -118,12 +118,25 @@ namespace HomeGenie
         /// Invoke an API command and get the result.
         /// </summary>
         /// <returns>The API command response.</returns>
-        /// <param name="apiCommand">Any MIG/APP API command withouth the `/api/` prefix.</param>
+        /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
         public object ApiCall(string apiCommand)
         {
             if (apiCommand.StartsWith("/api/"))
                 apiCommand = apiCommand.Substring(5);
             return homegenie.InterfaceControl(new MigInterfaceCommand(apiCommand));
+        }
+
+        /// <summary>
+        /// Invoke an API command and get the result.
+        /// </summary>
+        /// <returns>The API command response.</returns>
+        /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
+        /// <param name="data">Data object.</param>
+        public object ApiCall(string apiCommand, object data)
+        {
+            if (apiCommand.StartsWith("/api/"))
+                apiCommand = apiCommand.Substring(5);
+            return homegenie.InterfaceControl(new MigInterfaceCommand(apiCommand, data));
         }
 
         /// <summary>

@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -61,13 +61,20 @@ namespace HomeGenie.Data
                 var syscopy = this.DeepClone();
                 foreach (ModuleParameter p in syscopy.HomeGenie.Settings)
                 {
-                    try
+                    if (p.GetData() is string)
                     {
-                        if (!String.IsNullOrEmpty(p.Value))
-                            p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
-                    }
-                    catch
-                    {
+                        string stringValue = p.Value;
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(stringValue))
+                            {
+                                p.Value = StringCipher.Encrypt(stringValue, GetPassPhrase());
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // TODO: log
+                        }
                     }
                 }
                 string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
@@ -127,7 +134,7 @@ namespace HomeGenie.Data
             Username = "admin";
             Password = "";
         }
-        
+
         public string EnableLogFile { get; set; }
 
         [Serializable()]
@@ -151,11 +158,11 @@ namespace HomeGenie.Data
             }
 
             /// <summary>
-            /// Set constraints to protect the system. These are absolute constraints to protect the user experience (locked browser/server), but are not 
-            /// RECOMMENDED constraints. For example, StatisticsTimeResolutionSeconds less than 5*60 starts to make the graph 
-            /// look messy, but we still allow anything above 30 seconds in case advanced user wants it. Might want to keep 
+            /// Set constraints to protect the system. These are absolute constraints to protect the user experience (locked browser/server), but are not
+            /// RECOMMENDED constraints. For example, StatisticsTimeResolutionSeconds less than 5*60 starts to make the graph
+            /// look messy, but we still allow anything above 30 seconds in case advanced user wants it. Might want to keep
             /// recommended values reference later.
-            /// 
+            ///
             /// Should later throw error so UI can notify user?
             /// </summary>
             public void Validate()

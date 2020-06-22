@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -46,7 +46,7 @@ using Formatting = Newtonsoft.Json.Formatting;
 
 namespace HomeGenie.Service
 {
-    
+
     public static class SerializationExtensions
     {
         /// <summary>
@@ -106,7 +106,7 @@ namespace HomeGenie.Service
         public enum RoundTo
         {
             Second, Minute, Hour, Day
-        }        
+        }
     }
 
     [Serializable()]
@@ -192,7 +192,7 @@ namespace HomeGenie.Service
             }
             return success;
         }
-        
+
         public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
         {
             if (module == null)
@@ -203,22 +203,22 @@ namespace HomeGenie.Service
         {
             return parameters.Find(x => x.Name == propertyName);
         }
-        public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
+        public static ModuleParameter ModuleParameterSet(Module module, string propertyName, object propertyValue)
         {
             if (module == null)
                 return null;
             return ModuleParameterSet(module.Properties, propertyName, propertyValue);
         }
 
-        public static ModuleParameter ModuleParameterSet(TsList<ModuleParameter> parameters, string propertyName, string propertyValue)
+        public static ModuleParameter ModuleParameterSet(TsList<ModuleParameter> parameters, string propertyName, object propertyValue)
         {
             var parameter = parameters.Find(mpar => mpar.Name == propertyName);
             if (parameter == null)
             {
-                parameter = new ModuleParameter() { Name = propertyName, Value = propertyValue };
+                parameter = new ModuleParameter() { Name = propertyName };
                 parameters.Add(parameter);
             }
-            parameter.Value = propertyValue;
+            parameter.SetData(propertyValue);
             return parameter;
         }
 
@@ -300,7 +300,7 @@ namespace HomeGenie.Service
                 // TODO: report exception
             }
         }
-        
+
         private static string picoPath = "/usr/bin/pico2wave";
         public static void Say(string sentence, string locale, bool async = false)
         {
@@ -335,7 +335,7 @@ namespace HomeGenie.Service
                 }
             }
         }
-        
+
         public static void Play(string wavFile)
         {
 
@@ -413,7 +413,7 @@ namespace HomeGenie.Service
 
                     if (File.Exists(mp3File))
                         File.Delete(mp3File);
-                    
+
                     var stream = File.OpenWrite(mp3File);
                     stream.Write(audioData, 0, audioData.Length);
                     stream.Close();
@@ -457,8 +457,8 @@ namespace HomeGenie.Service
 
                 gzipStream.Close();
                 inStream.Close();
-            } 
-            catch (Exception e) 
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("UnTar error: " + e.Message);
             }
@@ -494,7 +494,7 @@ namespace HomeGenie.Service
 
                     if (File.Exists(target))
                         File.Delete(target);
-                    
+
                     byte[] buffer = new byte[4096];
                     Stream zipStream = zipFile.GetInputStream(zipEntry);
                     String fullZipToPath = Path.Combine(destinationFolder, filePath);
