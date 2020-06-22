@@ -92,8 +92,17 @@ namespace HomeGenie
                 if (handler != null)
                 {
                     // other command API handlers
-                    // receives the full request string
-                    response = handler(command.OriginalRequest.Trim('/'));
+                    if (command.Data == null || (command.Data is byte[] && (command.Data as byte[]).Length == 0))
+                    {
+                        // receives the full request as string if there is no `request.Data` payload
+                        handler(command.OriginalRequest.Trim('/'));
+                    }
+                    else
+                    {
+                        // receives the original MigInterfaceCommand if `request.Data` actually holds some data
+                        // TODO: this might be be the only entry point in future releases (line #98 and #87 cases will be deprecated)
+                        handler(command);
+                    }
                 }
             }
             return response;

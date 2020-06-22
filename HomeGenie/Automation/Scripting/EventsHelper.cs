@@ -171,29 +171,68 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Define a `handler` function to call when a web service call starting with `apiCall` is received.
-        /// This is used to create and handle user-defined web service API methods.
+        /// Define a `handler` function that will be called when a web service call starting with `apiCall` is received.
+        /// Use this to create user-defined web service API methods.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="apiCall">API call.</param>
         /// <param name="handler">Handler.</param>
         /// <remarks />
         /// <example>
-        /// Example:
+        /// API methods should respect the following format:
         /// <code>
-        ///     When.WebServiceCallReceived( "Hello.World", (args) =>
+        /// <domain>/<address>/<command>[/<option_0>[/.../<option_n>]]
+        /// </code>
+        /// For instance, a program that control Philips Hue lights will implement API methods like this:
+        /// <code>
+        ///     When.WebServiceCallReceived( "HomeAutomation.PhilipsHue", (args) =>
         ///     {
-        ///         var returnstring = "";
-        ///         if (args == "Hello.World/Greet")
-        ///         {
-        ///             returnstring = "Hello HomeGenie World!";
-        ///         }
-        ///         return returnstring;
+        ///         // handle the received request
         ///     });
         /// </code>
-        /// In the snippet above, if we wanted to create an "Hello World" program that respond to the custom API call:
-        /// \n
-        /// http://<hg_server_address>/api/Hello.World/Greet
+        ///
+        /// So an API call to set a Philips Hue light with address *3* to *50%* can be done via HTTP GET
+        /// <code>
+        /// GET /api/HomeAutomation.PhilipsHue/3/Control.Level/50
+        /// </code>
+        /// or from a csharp program
+        /// <code>
+        /// var responseObject = Program.ApiCall("HomeAutomation.PhilipsHue/3/Control.Level/50");
+        /// </code>
+        /// When this call is received by the handler, the object `args` passed to it must be parsed using `Program.ParseApiCall` method, which will return an object containing the following fields
+        /// <code>
+        /// var request = Program.ParseApiCall(args);
+        /// //  request -> {
+        /// //      Domain,         // (string)
+        /// //      Address,        // (string)
+        /// //      Command,        // (string)
+        /// //      Data,           // (object)
+        /// //      OriginalRequest // (string)
+        /// //  }
+        /// </code>
+        /// This object also provide a method `request.GetOption(<index>)` to get eventual options passed with this call.
+        ///
+        /// **Example**
+        /// <code>
+        ///     When.WebServiceCallReceived( "HomeAutomation.PhilipsHue", (args) =>
+        ///     {
+        ///         var request = Program.ParseApiCall(args);
+        ///         // request.Domain          -> "HomeAutomtion.PhilipsHue"
+        ///         // request.Address         -> 3
+        ///         // request.Command         -> Control.Level
+        ///         // request.GetOption(0)    -> 50
+        ///         // request.Data            -> null (not used in this case)
+        ///         // request.OriginalRequest -> "HomeAutomation.PhilipsHue/3/Control.Level/50"
+        ///         if (request.Domain == "HomeAutomtion.PhilipsHue" && request.Command == "Control.Level")
+        ///         {
+        ///             var deviceAddress = request.Address;
+        ///             var deviceLevel = request.GetOption(0); // the first option has index 0
+        ///             // TODO: set dimming level of light with address 'deviceAddress' to 'dimmerLevel' %
+        ///             return new ResponseText("OK");
+        ///         }
+        ///         return new ResponseText("ERROR");
+        ///     });
+        /// </code>
         /// </example>
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, object> handler)
         {

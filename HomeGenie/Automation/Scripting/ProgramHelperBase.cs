@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.IO;
 using System.Net;
@@ -10,6 +11,10 @@ using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie
 {
+    /// <summary>
+    /// Program Helper Base class.\n
+    /// Class instance accessor: **Program**
+    /// </summary>
     public class ProgramHelperBase
     {
         protected HomeGenieService homegenie;
@@ -111,7 +116,11 @@ namespace HomeGenie
         }
         public MigInterfaceCommand ParseApiCall(object apiCall)
         {
-            return ParseApiCall((string)apiCall);
+            if (apiCall is MigInterfaceCommand)
+            {
+                return (MigInterfaceCommand)apiCall;
+            }
+            return ParseApiCall(apiCall.ToString());
         }
 
         /// <summary>
