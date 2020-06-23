@@ -337,7 +337,7 @@ namespace HomeGenie.Service
             //
             // Route command to Automation Programs' Dynamic API
             var r = ProgramDynamicApi.TryApiCall(cmd);
-            if (r != null && !String.IsNullOrWhiteSpace(r.ToString()))
+            if (r != null)
             {
                 // Automation Programs can eventually override MIG response
                 response = r;
@@ -633,10 +633,12 @@ namespace HomeGenie.Service
                 systemConfiguration.Update();
             }
 
-            // Let automation programs process the request; we append eventual POST data (RequestText) to the MigInterfaceCommand
-            if (!String.IsNullOrWhiteSpace(args.Request.RequestText))
-                command = new MigInterfaceCommand(command.OriginalRequest, args.Request.RequestData);
-            args.Request.ResponseData = ProgramDynamicApi.TryApiCall(command);
+            // Let automation programs process this request too
+            var response = ProgramDynamicApi.TryApiCall(command);
+            if (response != null)
+            {
+                args.Request.ResponseData = response;
+            }
 
             // Macro Recording
             if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && command != null && command.Command != null && (command.Command.StartsWith("Control.") || (command.Command.StartsWith("AvMedia.") && command.Command != "AvMedia.Browse" && command.Command != "AvMedia.GetUri")))
