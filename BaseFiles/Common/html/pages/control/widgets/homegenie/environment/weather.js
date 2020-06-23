@@ -81,11 +81,11 @@
         var fDescription = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Description').Value;
         widget.find('[data-ui-field=forecast_' + f + '_desc]').html(fDescription);
 
-        var temperatureMin = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Temperature.Min').Value;
-        temperatureMin = parseFloat(HG.WebApp.Utility.GetLocaleTemperature(parseFloat(temperatureMin.replace(',','.'))));
+        var Humidity = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Humidity').Value;
+        humidity = parseFloat(HG.WebApp.Utility.GetLocaleTemperature(parseFloat(Humidity.replace(',','.'))));
         var temperatureMax = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Temperature.Max').Value;
         temperatureMax = parseFloat(HG.WebApp.Utility.GetLocaleTemperature(parseFloat(temperatureMax.replace(',','.'))));
-        widget.find('[data-ui-field=forecast_' + f + '_tmin]').html(temperatureMin + '&#8451;');
+        widget.find('[data-ui-field=forecast_' + f + '_tmin]').html(Humidity + '%');
         widget.find('[data-ui-field=forecast_' + f + '_tmax]').html(temperatureMax + '&#8451;');
 
         var displayDate = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Weekday').Value.substr(0, 3) + ', ';

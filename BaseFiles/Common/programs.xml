@@ -617,6 +617,9 @@ Program.Run();
   // Add values to standard Sensor.* parameters
   Program.Parameter("Sensor.Temperature").Value = data.temperature;
   Program.Parameter("Sensor.Temperature.Unit").Value = "Celsius";
+  Program.Parameter("Sensor.Humidity").Value = data.humidity;
+  Program.Parameter("Sensor.DayHi").Value = data.temperature_max;
+  Program.Parameter("Sensor.DayLow").Value = data.temperature_min;	    
   Program.Parameter("Sensor.Pressure").Value = data.pressure;
   Program.Parameter("Sensor.Pressure.Unit").Value = "Mb";
   Program.Parameter("Sensor.Wind.Speed").Value = data.wind_speed;
@@ -638,6 +641,7 @@ Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
   Program.Parameter("Conditions.Forecast." + day + ".Temperature").Value = data.temperature;
   Program.Parameter("Conditions.Forecast." + day + ".Temperature.Min").Value = data.temperature_min;
   Program.Parameter("Conditions.Forecast." + day + ".Temperature.Max").Value = data.temperature_max;
+  Program.Parameter("Conditions.Forecast." + day + ".Humidity").Value = data.humidity;    
 };
 Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
   var icon = "unknonwn.png";
@@ -708,6 +712,7 @@ Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
   data.temperature = weatherData.main.temp.ToString();
   data.temperature_min = weatherData.main.temp_min.ToString();
   data.temperature_max = weatherData.main.temp_max.ToString();
+  data.humidity = weatherData.main.humidity.ToString(); 	    
   data.pressure = weatherData.main.pressure.ToString();
   var rain_1h_mm = "0";
   var rain_3h_mm = "0";
