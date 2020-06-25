@@ -38,7 +38,7 @@ namespace HomeGenie.Data
             this.Address = module.Address;
             this.Description = module.Name;
             this.Parameter = parameter.Name;
-            this.Value = parameter.Value;
+            this.Value = parameter.GetData(); // get the raw object value
             this.Date = parameter.UpdateTime;
         }
         public string Domain { get; set; }

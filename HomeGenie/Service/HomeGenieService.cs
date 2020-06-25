@@ -30,7 +30,6 @@ using System.Xml.Serialization;
 
 using System.Net.Sockets;
 using System.Threading;
-using System.Xml;
 using OpenSource.UPnP;
 
 using HomeGenie.Automation;
@@ -44,6 +43,8 @@ using MIG.Gateways;
 using MIG.Gateways.Authentication;
 
 using NLog;
+
+using Module = HomeGenie.Data.Module;
 
 namespace HomeGenie.Service
 {
@@ -67,7 +68,9 @@ namespace HomeGenie.Service
         private UpdateChecker updateChecker;
         private BackupManager backupManager;
         private PackageManager packageManager;
+#if !NETCOREAPP
         private StatisticsLogger statisticsLogger;
+#endif
         // Internal data structures
         private TsList<Module> systemModules = new HomeGenie.Service.TsList<Module>();
         private TsList<Module> modulesGarbage = new HomeGenie.Service.TsList<Module>();
@@ -83,8 +86,9 @@ namespace HomeGenie.Service
 
         private Handlers.Config wshConfig;
         private Handlers.Automation wshAutomation;
+#if !NETCOREAPP
         private Handlers.Statistics wshStatistics;
-
+#endif
         #endregion
 
         #region Lifecycle
@@ -135,8 +139,10 @@ namespace HomeGenie.Service
                 );
             };
 
+#if !NETCOREAPP
             statisticsLogger = new StatisticsLogger(this);
             statisticsLogger.Start();
+#endif
 
             // Setup local UPnP device
             SetupUpnp();
@@ -214,7 +220,10 @@ namespace HomeGenie.Service
 
             // Stop HG helper services
             updateChecker.Stop();
+
+#if !NETCOREAPP
             statisticsLogger.Stop();
+#endif
 
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
@@ -308,11 +317,15 @@ namespace HomeGenie.Service
         {
             get { return packageManager; }
         }
+
+        #if !NETCOREAPP
         // Reference to Statistics
         public StatisticsLogger Statistics
         {
             get { return statisticsLogger; }
         }
+        #endif
+
         // Public utility methods
         public string GetHttpServicePort()
         {
@@ -595,11 +608,11 @@ namespace HomeGenie.Service
                 case "Automation":
                     wshAutomation.ProcessRequest(args.Request);
                     break;
-
+#if !NETCOREAPP
                 case "Statistics":
                     wshStatistics.ProcessRequest(args.Request);
                     break;
-
+#endif
                 }
             }
             else if (migCommand.Domain == Domains.HomeAutomation_HomeGenie_Automation)
@@ -886,8 +899,12 @@ namespace HomeGenie.Service
             try
             {
                 string programsDatabase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs.xml");
+
+#if !NETCOREAPP
                 // TODO: Deprecate Compat
                 Compat_526.FixProgramsDatabase(programsDatabase);
+#endif
+
                 var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
                 using (var reader = new StreamReader(programsDatabase))
                 {
@@ -1330,8 +1347,9 @@ namespace HomeGenie.Service
             // Setup web service handlers
             wshConfig = new Handlers.Config(this);
             wshAutomation = new Handlers.Automation(this);
+#if !NETCOREAPP
             wshStatistics = new Handlers.Statistics(this);
-
+#endif
             // Initialize MigService, gateways and interfaces
             migService = new MIG.MigService();
             migService.InterfaceModulesChanged += migService_InterfaceModulesChanged;
@@ -1515,7 +1533,9 @@ namespace HomeGenie.Service
                 systemConfiguration.HomeGenie.GUID = uniqueDeviceName = System.Guid.NewGuid().ToString();
                 systemConfiguration.Update();
                 // initialize database for first use
+#if !NETCOREAPP
                 statisticsLogger.ResetDatabase();
+#endif
             }
             //
             var localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");

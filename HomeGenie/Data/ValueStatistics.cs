@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -142,12 +142,14 @@ namespace HomeGenie.Data
 
         internal void AddValue(string fieldName, double value, DateTime timestamp)
         {
+#if !NETCOREAPP
             if (StatisticsLogger.IsValidField(fieldName))
             {
                 // add value for StatisticsLogger use
                 statValues.Add(new StatValue(value, timestamp));
             }
-            // "value" is the occurring event in this very moment, 
+#endif
+            // "value" is the occurring event in this very moment,
             // so "Current" is holding previous value right now
             if (Current.Value != value)
             {

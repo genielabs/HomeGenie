@@ -21,24 +21,31 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.CodeDom.Compiler;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
+#if NETCOREAPP
+using System.Diagnostics;
+using System.Dynamic;
+using System.Net;
+using System.Threading;
+using HomeGenie.Service;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CSharp.RuntimeBinder;
+#else
 using Microsoft.CSharp;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+#endif
 
 namespace HomeGenie.Automation.Engines
 {
     public static class CSharpAppFactory
     {
         public const int ConditionCodeOffset = 8;
-
-        public static int ProgramCodeOffset
-        {
-            get { return Includes.Count() + 15; }
-        }
 
         // TODO: move this to a config file
         private static readonly string[] Includes =
@@ -95,7 +102,13 @@ namespace HomeGenie.Automation.Engines
             "Utility = HomeGenie.Service.Utility"
         };
 
+        public static int ProgramCodeOffset => Includes.Count() + 15;
+
+#if NETCOREAPP
+        public static EmitResult CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
+#else
         public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
+#endif
         {
             var source = @"# pragma warning disable 0168 // variable declared but not used.
 # pragma warning disable 0219 // variable assigned but not used.
@@ -127,7 +140,7 @@ namespace HomeGenie.Automation.Scripting
         }
         #pragma warning restore 0162
 
-        private MethodRunResult Run(string PROGRAM_OPTIONS_STRING)
+        private HomeGenie.Automation.MethodRunResult Run(string PROGRAM_OPTIONS_STRING)
         {
             Exception ex = null;
             try
@@ -138,10 +151,10 @@ namespace HomeGenie.Automation.Scripting
             {
                 ex = e;
             }
-            return new MethodRunResult(){ Exception = ex, ReturnValue = null };
+            return new HomeGenie.Automation.MethodRunResult(){ Exception = ex, ReturnValue = null };
         }
 
-        private MethodRunResult Setup()
+        private HomeGenie.Automation.MethodRunResult Setup()
         {
             Exception ex = null;
             bool retval = false;
@@ -153,7 +166,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 ex = e;
             }
-            return new MethodRunResult(){ Exception = ex, ReturnValue = retval };
+            return new HomeGenie.Automation.MethodRunResult(){ Exception = ex, ReturnValue = retval };
         }
 
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
@@ -164,7 +177,82 @@ namespace HomeGenie.Automation.Scripting
                 .Replace("{using}", usingNs)
                 .Replace("{source}", scriptSource)
                 .Replace("{setup}", scriptSetup);
+#if NETCOREAPP
+            var dotNetCoreDir = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
+            var homeGenieDir = Path.GetDirectoryName(typeof(HomeGenieService).GetTypeInfo().Assembly.Location);
+            var compilation = CSharpCompilation.Create("a")
+                .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
+                .AddReferences(
 
+                    MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Enum).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Console).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Queryable).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Uri).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(HttpListener).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(DynamicObject).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Runtime.dll")),
+                    MetadataReference.CreateFromFile(Assembly.Load("netstandard").Location),
+                    MetadataReference.CreateFromFile(Assembly.Load("mscorlib").Location),
+                    MetadataReference.CreateFromFile(typeof(Thread).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Stopwatch).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Windows.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Threading.Thread.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
+
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Core.dll")),
+                    MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
+
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir,
+                        Path.Combine("lib", "mig", "CM19Lib.dll"))),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LiteDB.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NLog.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Newtonsoft.Json.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SerialPortLib.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NetClientLib.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UPnP.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MQTTnet.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.Components.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.GeneralPurpose.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir,
+                        "Raspberry.IO.InterIntegratedCircuit.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir,
+                        "Raspberry.IO.SerialPeripheralInterface.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.System.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Innovative.Geometry.Angle.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Innovative.SolarCalculator.dll"))
+                )
+                .AddSyntaxTrees(CSharpSyntaxTree.ParseText(source));
+
+            var assemblyPdbFile = outputDllFile + ".pdb";
+            using var assemblyStream = File.Open(outputDllFile, FileMode.Create, FileAccess.ReadWrite);
+            using var pdbStream = File.Open(assemblyPdbFile, FileMode.Create, FileAccess.ReadWrite);
+            var opts = new EmitOptions()
+                .WithPdbFilePath(assemblyPdbFile);
+            var pdbStreamHelper = pdbStream;
+
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                opts = opts.WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
+
+            var result = compilation.Emit(assemblyStream, pdbStreamHelper, options: opts);
+
+            if (result.Success)
+            {
+                // TODO:
+            }
+            else
+            {
+                // TODO:
+            }
+            return result;
+#else
             var providerOptions = new Dictionary<string, string>
             {
                 //{ "CompilerVersion", "v4.0" }
@@ -253,6 +341,7 @@ namespace HomeGenie.Automation.Scripting
 
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);
+#endif
         }
     }
 }

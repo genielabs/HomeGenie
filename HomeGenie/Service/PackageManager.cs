@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -369,7 +369,7 @@ namespace HomeGenie.Service
 
         public void AddWidgetMapping(string jsonMap)
         {
-            /* 
+            /*
                // example widget mapping
                [
                   {
@@ -392,7 +392,7 @@ namespace HomeGenie.Service
                 }
                 File.WriteAllText(mapConfigFile, JsonConvert.SerializeObject(mapList, Formatting.Indented));
             }
-            catch 
+            catch
             {
                 // TODO: report exception
             }
@@ -452,10 +452,12 @@ namespace HomeGenie.Service
                 Directory.Move(Path.Combine(destFolder, "src"), bundleFolder);
                 archiveName = Path.Combine(destFolder, "program.hgx");
             }
-            
+
+#if !NETCOREAPP
             // TODO: Deprecate Compat
             Compat_526.FixProgramsDatabase(archiveName);
-            
+#endif
+
             using (var reader = new StreamReader(archiveName))
             {
                 var serializer = new XmlSerializer(typeof(ProgramBlock));
@@ -521,7 +523,7 @@ namespace HomeGenie.Service
                     if (File.Exists(destFile))
                     {
                         try { File.Delete(destFile + ".old"); } catch { }
-                        try 
+                        try
                         {
                             File.Move(destFile, destFile + ".old");
                             File.Delete(destFile + ".old");

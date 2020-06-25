@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -71,6 +71,7 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "scheduler.xml");
             Utility.AddFileToZip(archiveName, "groups.xml");
             Utility.AddFileToZip(archiveName, "release_info.xml");
+#if !NETCOREAPP
             // Statistics db
             if (File.Exists(StatisticsLogger.STATISTICS_DB_FILE))
             {
@@ -78,6 +79,7 @@ namespace HomeGenie.Service
                 Utility.AddFileToZip(archiveName, StatisticsLogger.STATISTICS_DB_FILE);
                 homegenie.Statistics.OpenStatisticsDatabase();
             }
+#endif
             // Installed packages
             if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
                 Utility.AddFileToZip(archiveName, PackageManager.PACKAGE_LIST_FILE);
@@ -88,7 +90,7 @@ namespace HomeGenie.Service
                 foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
                 {
                     // exclude Pepper1 Db from backup (only the p1db_custom.xml file will be included)
-                    // in the future the p1db.xml file should be moved to a different path 
+                    // in the future the p1db.xml file should be moved to a different path
                     if (Path.GetFileName(f) != "p1db.xml")
                         Utility.AddFileToZip(archiveName, f);
                 }
@@ -149,6 +151,7 @@ namespace HomeGenie.Service
                 Properties.InstallProgressMessage,
                 "= Restored: Scheduler Events"
             );
+#if !NETCOREAPP
             // Statistics db
             if (File.Exists(Path.Combine(archiveFolder, StatisticsLogger.STATISTICS_DB_FILE)))
             {
@@ -162,6 +165,7 @@ namespace HomeGenie.Service
                     "= Restored: Statistics Database"
                 );
             }
+#endif
             // Remove all old non-system programs
             var rp = new List<ProgramBlock>();
             foreach (var program in homegenie.ProgramManager.Programs)
@@ -236,10 +240,11 @@ namespace HomeGenie.Service
             // Restore user-space automation programs
             serializer = new XmlSerializer(typeof(List<ProgramBlock>));
             string programsDatabase = Path.Combine(archiveFolder, "programs.xml");
-            
+
+#if !NETCOREAPP
             // TODO: Deprecate Compat
             Compat_526.FixProgramsDatabase(programsDatabase);
-
+#endif
             List<ProgramBlock> newProgramsData;
             using (var reader = new StreamReader(programsDatabase))
             {

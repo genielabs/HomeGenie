@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -26,12 +26,11 @@ using System.Xml.Serialization;
 
 using Newtonsoft.Json;
 
-using HomeGenie.Automation.Scripting;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Engines;
 
 namespace HomeGenie.Automation
-{    
+{
     public class MethodRunResult
     {
         public Exception Exception = null;

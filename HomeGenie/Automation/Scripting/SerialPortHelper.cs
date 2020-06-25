@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -22,7 +22,13 @@
 
 using System;
 using System.Text;
+#if NETCOREAPP
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using RJCP.IO.Ports;
+#else
 using System.IO.Ports;
+#endif
 
 using SerialPortLib;
 
@@ -45,7 +51,11 @@ namespace HomeGenie.Automation.Scripting
 
         public SerialPortHelper()
         {
+#if NETCOREAPP
+            serialPort = new SerialPortInput(new Logger<SerialPortInput>(new NullLoggerFactory()));
+#else
             serialPort = new SerialPortInput();
+#endif
         }
 
         /// <summary>
@@ -73,7 +83,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="baudRate">Baud rate.</param>
         /// <param name="stopBits">Stop Bits.</param>
         /// <param name="parity">Parity.</param>
-        /// 
+        ///
         public bool Connect(int baudRate, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
         {
             serialPort.MessageReceived += SerialPort_MessageReceived;

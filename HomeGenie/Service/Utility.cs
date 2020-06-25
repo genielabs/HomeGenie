@@ -468,7 +468,8 @@ namespace HomeGenie.Service
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)
         {
-            ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
+            ZipStrings.CodePage = Encoding.UTF8.CodePage;
+            // TODO: verify the new code above is working, otherwise restore this: -> ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
             List<string> extractedFiles = new List<string>();
             ZipFile zipFile = null;
             try
@@ -524,7 +525,8 @@ namespace HomeGenie.Service
 
         internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
         {
-            ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
+            ZipStrings.CodePage = Encoding.UTF8.CodePage;
+            // TODO: verify the new code above is working, otherwise restore this: -> ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
             if (!File.Exists(zipFilename))
             {
                 FileStream zfs = File.Create(zipFilename);

@@ -285,7 +285,7 @@ namespace HomeGenie.Automation
                             }
                         }
                     }
-                    catch (System.Exception ex)
+                    catch (Exception ex)
                     {
                         HomeGenieService.LogError(
                             program.Domain,

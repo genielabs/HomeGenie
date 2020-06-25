@@ -390,7 +390,9 @@ namespace HomeGenie.Service.Handlers
                         int sizeLimit = int.Parse(migCommand.GetOption(1));
                         homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = sizeLimit;
                         homegenie.SystemConfiguration.Update();
+#if !NETCOREAPP
                         homegenie.Statistics.SizeLimit = sizeLimit * 1024 * 1024;
+#endif
                     }
                     catch
                     {

@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -37,9 +37,81 @@ namespace HomeGenie
 
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
-            AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
 
+            // TODO: check CLI args
+            // TODO: if first argument is "deploy" then copy common files to the build output directory
+
+            if (args != null && args.Length == 1 && args[0] == "--post-build")
+            {
+
+#if NETCOREAPP
+                var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "BaseFiles", "Common");
+#else
+                var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "BaseFiles", "Common");
+#endif
+                //var destinationFolder = AppDomain.CurrentDomain.BaseDirectory;
+                if (Directory.Exists(assetsFolder))
+                {
+                    //LogMessage("= Copying new files...");
+                    foreach (string file in Directory.EnumerateFiles(assetsFolder, "*", SearchOption.AllDirectories))
+                    {
+                        string destinationFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(file).Replace(assetsFolder, "").TrimStart('/').TrimStart('\\'));
+                        string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                        if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                        {
+                            Directory.CreateDirectory(destinationFolder);
+                        }
+                        var sourceFile = new FileInfo(file);
+                        var destFile = new FileInfo(destinationFile);
+                        if (destFile.Exists)
+                        {
+                            if (sourceFile.LastWriteTime > destFile.LastWriteTime)
+                            {
+                                Console.WriteLine("Updating {0}", destinationFile);
+                                // now you can safely overwrite it
+                                sourceFile.CopyTo(destFile.FullName, true);
+                            }
+                            else
+                            {
+                                //Console.WriteLine("Skipping {0}", destinationFile);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Copying {0}", destinationFile);
+                            File.Copy(file, destinationFile);
+                        }
+                    }
+                }
+#if !NETCOREAPP
+                string externalLibs = Path.Combine("..", "..", "..", "..", "BaseFiles");
+                if (Environment.OSVersion.Platform == PlatformID.Unix)
+                {
+                    externalLibs = Path.Combine(externalLibs, "Linux");
+                }
+                else
+                {
+                    externalLibs = Path.Combine(externalLibs, "Windows");
+                }
+                foreach (string file in Directory.EnumerateFiles(externalLibs, "*", SearchOption.AllDirectories))
+                {
+                    string destinationFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(file).Replace(externalLibs, "").TrimStart('/').TrimStart('\\'));
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    var sourceFile = new FileInfo(file);
+                    var destFile = new FileInfo(destinationFile);
+                    sourceFile.CopyTo(destFile.FullName, true);
+                }
+#endif
+            }
+
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+#if !NETCOREAPP
+            AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
+#endif
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
 
             bool rebuildPrograms = PostInstallCheck();
@@ -61,28 +133,39 @@ namespace HomeGenie
                 {
                     "MIG.HomeAutomation.dll",
                     "MIG.Protocols.dll",
-                    "LibUsb.Common.dll",
-                    "LibUsbDotNet.LibUsbDotNet.dll",
+                    "libusb-1.0.so",
+                    "LibUsbDotNet.dll",
                     "XTenLib.dll",
                     "CM19Lib.dll",
                     "ZWaveLib.dll"
                 };
+                string migFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig");
+                if (!Directory.Exists(migFolder))
+                {
+                    Directory.CreateDirectory(migFolder);
+                }
                 foreach (var f in migFiles)
                 {
                     string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, f);
                     if (!File.Exists(source)) continue;
                     try
                     {
-                        string dest = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig", f);
+                        string dest = Path.Combine(migFolder, f);
                         if (File.Exists(dest)) File.Delete(dest);
+#if NETCOREAPP
+                        File.Copy(source, dest);
+#else
                         File.Move(source, dest);
+#endif
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
                     }
-                }                
-                // TODO: place any other post-install stuff here
+                }
+                //
+                // NOTE: place any other post-install stuff here
+                //
                 try
                 {
                     File.Delete(postInstallLock);
@@ -132,7 +215,7 @@ namespace HomeGenie
             Quit(false);
         }
 
-        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) 
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
             var logEntry = new MigEvent(
                 Domains.HomeAutomation_HomeGenie,
@@ -146,7 +229,7 @@ namespace HomeGenie
                 // try broadcast first (we don't want homegenie object to be passed, so use the domain string)
                 _homegenie.RaiseEvent(Domains.HomeGenie_System, logEntry);
             }
-            catch 
+            catch
             {
                 HomeGenieService.LogError(logEntry);
             }
@@ -155,5 +238,3 @@ namespace HomeGenie
     }
 
 }
-
-

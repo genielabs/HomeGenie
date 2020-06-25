@@ -30,6 +30,11 @@ using HomeGenie.Automation.Scripting;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 
+#if NETCOREAPP
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Emit;
+#endif
+
 namespace HomeGenie.Automation.Engines
 {
     public class CSharpEngine : ProgramEngineBase, IProgramEngine
@@ -43,10 +48,13 @@ namespace HomeGenie.Automation.Engines
         private MethodInfo _methodSetup;
         private Assembly _scriptAssembly;
 
+#if !NETCOREAPP
         private static bool _isShadowCopySet;
+#endif
 
         public CSharpEngine(ProgramBlock pb) : base(pb)
         {
+#if !NETCOREAPP
             // TODO: SetShadowCopyPath/SetShadowCopyFiles methods are deprecated...
             // TODO: create own AppDomain for "programDomain" instead of using CurrentDomain
             // TODO: and use AppDomainSetup to set shadow copy for each app domain
@@ -56,6 +64,7 @@ namespace HomeGenie.Automation.Engines
             var domain = AppDomain.CurrentDomain;
             domain.SetShadowCopyPath(Path.Combine(domain.BaseDirectory, "programs"));
             domain.SetShadowCopyFiles();
+#endif
         }
 
         public bool Load()
@@ -121,11 +130,57 @@ namespace HomeGenie.Automation.Engines
             // it is a lil' trick for mono compatibility
             // since it will be caching the assembly when using the same name
             // and use the old one instead of the new one
-            var tmpfile = Path.Combine("programs", Guid.NewGuid().ToString() + ".dll");
+            var tempFile = Path.Combine("programs", Guid.NewGuid().ToString() + ".dll");
+#if NETCOREAPP
+            EmitResult result = null;
+            try
+            {
+                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, tempFile);
+            }
+            catch (Exception ex)
+            {
+                // report errors during post-compilation process
+                //result.Errors.Add(new System.CodeDom.Compiler.CompilerError(ProgramBlock.Name, 0, 0, "-1", ex.Message));
+            }
+
+            if (result != null && !result.Success)
+            {
+                var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;
+                foreach (var diagnostic in result.Diagnostics)
+                {
+                    var errorRow = (diagnostic.Location.GetLineSpan().StartLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) + 1;
+                    var errorCol = diagnostic.Location.GetLineSpan().StartLinePosition.Character + 1;
+                    var blockType = CodeBlockEnum.CR;
+                    if (diagnostic.Severity == DiagnosticSeverity.Error)
+                    {
+                        if (errorRow >= sourceLines + CSharpAppFactory.ConditionCodeOffset)
+                        {
+                            errorRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
+                            blockType = CodeBlockEnum.TC;
+                        }
+                        errors.Add(new ProgramError
+                        {
+                            Line = errorRow,
+                            Column = errorCol,
+                            ErrorMessage = diagnostic.GetMessage(),
+                            ErrorNumber = diagnostic.Descriptor.Id,
+                            CodeBlock = blockType
+                        });
+                    }
+                    else
+                    {
+                        var warning = String.Format("{0},{1},{2}: {3}", blockType, errorRow, errorCol,
+                            diagnostic.GetMessage());
+                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning,
+                            warning);
+                    }
+                }
+            }
+#else
             var result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
-                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, tmpfile);
+                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, tempFile);
             }
             catch (Exception ex)
             {
@@ -165,32 +220,35 @@ namespace HomeGenie.Automation.Engines
                     }
                 }
             }
+#endif
 
             if (errors.Count != 0)
                 return errors;
 
             // move/copy new assembly files
             // rename temp file to production file
+#if !NETCOREAPP
             _scriptAssembly = result.CompiledAssembly;
+#endif
             try
             {
                 //string tmpfile = new Uri(value.CodeBase).LocalPath;
-                File.Move(tmpfile, this.AssemblyFile);
-                if (File.Exists(tmpfile + ".mdb"))
+                File.Move(tempFile, this.AssemblyFile);
+                if (File.Exists(tempFile + ".mdb"))
                 {
-                    File.Move(tmpfile + ".mdb", this.AssemblyFile + ".mdb");
+                    File.Move(tempFile + ".mdb", this.AssemblyFile + ".mdb");
                 }
-                if (File.Exists(tmpfile.Replace(".dll", ".mdb")))
+                if (File.Exists(tempFile.Replace(".dll", ".mdb")))
                 {
-                    File.Move(tmpfile.Replace(".dll", ".mdb"), this.AssemblyFile.Replace(".dll", ".mdb"));
+                    File.Move(tempFile.Replace(".dll", ".mdb"), this.AssemblyFile.Replace(".dll", ".mdb"));
                 }
-                if (File.Exists(tmpfile + ".pdb"))
+                if (File.Exists(tempFile + ".pdb"))
                 {
-                    File.Move(tmpfile + ".pdb", this.AssemblyFile + ".pdb");
+                    File.Move(tempFile + ".pdb", this.AssemblyFile + ".pdb");
                 }
-                if (File.Exists(tmpfile.Replace(".dll", ".pdb")))
+                if (File.Exists(tempFile.Replace(".dll", ".pdb")))
                 {
-                    File.Move(tmpfile.Replace(".dll", ".pdb"), this.AssemblyFile.Replace(".dll", ".pdb"));
+                    File.Move(tempFile.Replace(".dll", ".pdb"), this.AssemblyFile.Replace(".dll", ".pdb"));
                 }
             }
             catch (Exception ee)

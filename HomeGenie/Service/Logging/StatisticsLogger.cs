@@ -12,14 +12,14 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
-
+#if !NETCOREAPP
 using HomeGenie.Data;
 using System;
 using System.Collections.Generic;
@@ -358,8 +358,8 @@ namespace HomeGenie.Service.Logging
             string filter = "";
             string groupBy = "";
             var start = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00.000000");
-            dbCommand.Parameters.Add(new SQLiteParameter("@start", start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff"))); 
-            
+            dbCommand.Parameters.Add(new SQLiteParameter("@start", start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff")));
+
             if (!string.IsNullOrEmpty(domain) && !string.IsNullOrEmpty(address))
             {
                 // detailed module stats. We set our own aggregator. (Detailed red line in chart)
@@ -385,8 +385,8 @@ namespace HomeGenie.Service.Logging
             while (reader.Read())
             {
                 // If nothing is found in filter during aggregate, we get a row of all DBNulls. Skip the entry.
-                // NOTE: We got an exception before this check if HG sends a request for a param that has no results 
-                //       for the Parameter/TimeStart filter. We got single row of all DBNulls. 
+                // NOTE: We got an exception before this check if HG sends a request for a param that has no results
+                //       for the Parameter/TimeStart filter. We got single row of all DBNulls.
                 if (reader.IsDBNull(0))
                 {
                     continue;
@@ -521,10 +521,10 @@ namespace HomeGenie.Service.Logging
                 catch (Exception ex)
                 {
                     HomeGenieService.LogError(
-                        Domains.HomeAutomation_HomeGenie, 
-                        "Service.StatisticsLogger", 
-                        "Database Error", 
-                        "Exception.StackTrace", 
+                        Domains.HomeAutomation_HomeGenie,
+                        "Service.StatisticsLogger",
+                        "Database Error",
+                        "Exception.StackTrace",
                         String.Format("{0}: {1}", ex.Message, ex.StackTrace)
                     );
                 }
@@ -636,10 +636,10 @@ namespace HomeGenie.Service.Logging
                             catch (Exception ex)
                             {
                                 HomeGenieService.LogError(
-                                    Domains.HomeAutomation_HomeGenie, 
-                                    "Service.StatisticsLogger", 
-                                    "Database Error", 
-                                    "Exception.StackTrace", 
+                                    Domains.HomeAutomation_HomeGenie,
+                                    "Service.StatisticsLogger",
+                                    "Database Error",
+                                    "Exception.StackTrace",
                                     String.Format("{0}: {1}", ex.Message, ex.StackTrace)
                                 );
                                 // try close/reopen (perhaps some locking issue)
@@ -659,3 +659,4 @@ namespace HomeGenie.Service.Logging
 
     }
 }
+#endif

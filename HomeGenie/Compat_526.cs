@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*
@@ -20,6 +20,7 @@
  *     Project Homepage: http://homegenie.it
  */
 
+#if !NETCOREAPP
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -101,7 +102,7 @@ namespace HomeGenie
                             // Covert old wizard script to new format
                             programs[p].ScriptSource = wizardJson;
                             updated = true;
-                        } 
+                        }
                         else if (!String.IsNullOrEmpty(programsNew[p].ScriptCondition))
                         {
                             // Rename old 'ScriptCondition' field to 'ScriptSetup'
@@ -123,7 +124,7 @@ namespace HomeGenie
         private static string GetWizardScript(ProgramBlock program)
         {
             if (program.Type.ToLower() != "wizard" ||
-                (program.Conditions.Count <= 0 && program.Commands.Count <= 0)) 
+                (program.Conditions.Count <= 0 && program.Commands.Count <= 0))
                 return null;
             WizardEngine.WizardScript script = new WizardEngine.WizardScript(null)
             {
@@ -149,3 +150,4 @@ namespace HomeGenie
         public class ProgramCondition : ScriptCondition {}
     }
 }
+#endif

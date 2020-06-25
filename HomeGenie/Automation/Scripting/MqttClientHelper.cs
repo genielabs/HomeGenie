@@ -165,7 +165,7 @@ namespace HomeGenie.Automation.Scripting
                 }
                 foreach(KeyValuePair<string, Action<string, byte[]>> subscription in subscribeTopics)
                 {
-                    await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic(subscription.Key).Build());
+                    await mqttClient.SubscribeAsync(new MqttTopicFilter() { Topic = subscription.Key });
                 }
             });
             mqttClient.UseDisconnectedHandler(async e =>
