@@ -9,6 +9,8 @@ before_build:
 build:
   project: src/WindowsService/WindowsService.sln
   verbosity: detailed
+build_script:
+  - msbuild src/WindowsService/WindowsService.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 test:
 #  assemblies:
 #    only:
