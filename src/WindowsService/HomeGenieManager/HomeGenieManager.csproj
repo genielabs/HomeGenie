@@ -104,8 +104,9 @@
     <Reference Include="Ude, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\UDE.CSharp.1.1.0\lib\Ude.dll</HintPath>
     </Reference>
-    <Reference Include="UPnP, Version=1.0.7015.33368, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MIG.Protocols.1.1.5\lib\UPnP.dll</HintPath>
+    <Reference Include="UPnP, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\HomeGenie\packages\UPnP.1.0.1\lib\netstandard2.0\UPnP.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll</HintPath>
