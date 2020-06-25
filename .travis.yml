@@ -7,7 +7,7 @@ before_install:
   - sudo apt install apt-transport-https
   - echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
   - sudo apt update
-  - sudo apt install doxygen
+  - sudo apt install doxygen dotnet-runtime-3.0
 install:
   - nuget restore HomeGenie.sln
   - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
