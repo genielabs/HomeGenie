@@ -9,7 +9,7 @@ before_install:
   - sudo apt update
   - sudo apt install doxygen
 install:
-  - nuget restore HomeGenie_Linux.sln
+  - nuget restore HomeGenie.sln
   - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
 before_script: 
 script:
