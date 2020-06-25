@@ -18,7 +18,7 @@
 
   <Target Name="TestTarget" AfterTargets="Build">
     <Message Importance="High" Text="POST BUILD" />
-    <Exec Command="bin/Debug/netcoreapp3.0/HomeGenie --post-build" />
+    <Exec Command="$(ProjectDir)bin\Debug\netcoreapp3.0\HomeGenie --post-build" />
   </Target>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">

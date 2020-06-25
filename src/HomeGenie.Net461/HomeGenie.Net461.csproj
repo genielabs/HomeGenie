@@ -414,8 +414,8 @@
   </ItemGroup>
   <Target Name="TestTarget" AfterTargets="Build">
     <Message Importance="High" Text="POST BUILD" />
-    <Exec Command="mono bin/Debug/HomeGenie.exe --post-build" Condition=" '${MSBuildRuntimeType}' == 'Mono' " />
-    <Exec Command="bin/Debug/HomeGenie.exe --post-build" Condition=" '${MSBuildRuntimeType}' != 'Mono' " />
+    <Exec Command="mono $(ProjectDir)bin\Debug\HomeGenie.exe --post-build" Condition=" '${MSBuildRuntimeType}' == 'Mono' " />
+    <Exec Command="$(ProjectDir)bin\Debug\HomeGenie.exe --post-build" Condition=" '${MSBuildRuntimeType}' != 'Mono' " />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
