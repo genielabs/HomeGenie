@@ -5,9 +5,9 @@ branches:
 image: Visual Studio 2019
 configuration: Debug
 before_build:
-  - nuget restore HomeGenie.sln
+  - nuget restore HomeGenie.sln -SolutionDirectory src/WindowsService
 build:
-  project: HomeGenie.sln
+  project: src/WindowsService/WindowsService.sln
   verbosity: detailed
 test:
 #  assemblies:
