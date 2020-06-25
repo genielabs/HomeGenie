@@ -1,0 +1,51 @@
+﻿[
+    { 
+        "name": {
+            "en": "Turn On",
+            "it": "Accendi"
+        },
+        "script": "command.turn-on.js"
+    },
+    { 
+        "name": {
+            "en": "Turn Off",
+            "it": "Spegni"
+        },
+        "script": "command.turn-off.js"
+    },
+    { 
+        "name": {
+            "en": "Turn On/Off range",
+            "it": "Intervallo Accendi/Spegni"
+        },
+        "script": "command.turn-on-off.range.js"
+    },
+    { 
+        "name": {
+            "en": "Set Level",
+            "it": "Imposta livello"
+        },
+        "script": "command.set-level.js"
+    },
+    {
+        "name": {
+            "en": "Thermostat Mode",
+            "it": "Modalità termostato"
+        },
+        "script": "command.therm-heat.js"
+    },
+    {
+        "name": {
+            "en": "Thermostat Off",
+            "it": "Spegni termostato"
+        },
+        "script": "command.therm-off.js"
+    },
+    {
+        "name": {
+            "en": "Say",
+            "it": "Parla"
+        },
+        "script": "program.say.js"
+    }
+]

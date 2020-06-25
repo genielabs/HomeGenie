@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SystemConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HomeGenie>
+    <Settings>
+      <ModuleParameter>
+        <Name>Messaging.Email.Sender</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Messaging.Email.SmtpServer</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Messaging.Email.SmtpUserName</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Messaging.Email.SmtpPassword</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Messaging.Email.SmtpPort</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-04-19T10:24:58.6929279Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Messaging.Email.SmtpUseSsl</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-04-19T10:24:58.6939286Z</UpdateTime>
+      </ModuleParameter>
+    </Settings>
+    <SystemName>HAL</SystemName>
+    <Username>admin</Username>
+    <Password></Password>
+    <Location>{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }</Location>
+    <GUID></GUID>
+    <EnableLogFile>true</EnableLogFile>
+  </HomeGenie>
+  <MigService>
+    <Gateways>
+        <Gateway Name="WebServiceGateway" IsEnabled="true">
+            <Options>
+                <Option Name="BaseUrl" Value="/hg/html" />
+                <Option Name="HomePath" Value="html" />
+                <Option Name="Host" Value="+" />
+                <Option Name="Port" Value="80" />
+                <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
+                <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
+                <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
+                <Option Name="UrlAlias.2" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png" />
+                <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png" />
+                <Option Name="UrlAlias.4" Value="hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png" />
+                <Option Name="EnableFileCaching" Value="false" />
+            </Options>
+        </Gateway>
+        <Gateway Name="WebSocketGateway" IsEnabled="true">
+            <Options>
+                <Option Name="Port" Value="8188" />
+                <Option Name="Authentication" Value="Token" />
+            </Options>
+        </Gateway>
+    </Gateways>
+    <Interfaces>
+      <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="true">
+        <Options />
+      </Interface>
+      <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
+        <Options>
+          <Option Name="Port" Value="" />
+        </Options>
+      </Interface>
+      <Interface Domain="HomeAutomation.X10" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
+        <Options>
+          <Option Name="Port" Value="" />
+          <Option Name="HouseCodes" Value="A" />
+        </Options>
+      </Interface>
+    </Interfaces>
+  </MigService>
+</SystemConfiguration>

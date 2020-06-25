@@ -1,0 +1,74 @@
+﻿<style>
+  .media-play-btn {
+    border:solid 1px gray;
+    padding:3px;
+    font-size:9pt;
+    background:rgba(0, 200, 0, 0.5);
+    color:white;
+    margin-right:6px;
+    cursor:pointer;
+  }
+</style>
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
+    <div data-ui-field="name" style="display:block;font-weight:bold">Name</div>
+    <div data-ui-field="description" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">loading...</div>
+    <a data-ui-field="settings" data-role="button" data-icon="gear" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Features</a>
+  </div>
+  <div class="ui-grid-a" style="margin-top:14px">
+    <div class="ui-block-a">
+      <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/media.png" />
+    </div>
+    <div class="ui-block-b">
+      <div data-role="controlgroup" data-type="horizontal">
+        <a data-ui-field="browse" data-locale-id="media_server_browse" class="ui-btn ui-icon-bars ui-btn-icon-left" href="#">Browse</a>
+      </div>
+    </div>
+  </div>
+  <div align="center">
+    <h4 style="margin:4px"><strong>UPnP</strong>/<strong>DLNA</strong> Media Server</h4>
+  </div>
+  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+    <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+  </div>
+</div>
+
+<!-- widget popups and other ui elements follow -->
+<div data-ui-field="controlpopup" data-position-to="window" class="hg-widget-c" data-transition="pop" data-overlay-theme="b" style="min-width:640px">
+  <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+  <div style="margin:10px">
+    <!-- BEGIN - COMMON UI PART --->
+    <table>
+      <tr>
+        <td>
+          <img data-ui-field="icon" height="56" src="pages/control/widgets/homegenie/generic/images/media.png" />
+        </td>
+        <td>
+          <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+          <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+        </td>
+      </tr>
+    </table>
+    <div align="center">
+      <div class="ui-grid-a">
+        <div class="ui-block-a" style="width:30%">
+          <div data-role="content" class="ui-corner-bottom ui-content trapScroll" style="border:1px solid gray;height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+            <ul data-ui-field="browsecontent" data-role="listview" data-filter="false" data-filter-placeholder="search..."></ul>
+          </div>
+        </div>
+        <div class="ui-block-b" style="width:70%">
+          <div data-role="content" class="ui-corner-bottom ui-content trapScroll" style="border:1px solid gray;height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+            <ul data-ui-field="browsefiles" data-role="listview" data-filter="false" data-filter-placeholder="search...">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div data-ui-field="path" align="left" style="font-size:10pt;font-weight:bold;margin:4px;"></div>
+      <label>Play media to...</label>
+      <select data-ui-field="sendto">
+        <option>Media Receiver</option>
+        <option>This device</option>
+      </select>
+    </div>
+  </div>
+</div>

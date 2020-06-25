@@ -1,0 +1,174 @@
+{ "Programs": {
+
+"34": {
+    "Title":
+        "OpenWeatherMap",
+    "Description":
+        "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
+    "ConfigureOptions.Location":
+        "Città",
+    "ConfigureOptions.Language":
+        "Lingua (es. EN, IT, FR, DE, ...)",
+    "ConfigureOptions.UpdateInterval":
+        "Intervallo aggiornamento (minuti)",
+    "ConfigureOptions.ApiKey":
+        "OpenWeatherMap API key (APPID)"
+},
+
+"6": {
+    "Title": 
+        "Accendi tutte le luci",
+    "Description":
+        "Accende tutte le luci del gruppo selezionato."
+},
+
+"7": {
+    "Title": 
+        "Spegni tutte le luci",
+    "Description": 
+        "Spegne tutte le luci del gruppo selezionato."
+},
+
+"81": {
+    "Title":
+        "Energy Monitor",
+    "Description":
+        "Collects and display information about device status and energy consumption.",
+    "EnergyManagement.MonitorStatus":
+        "Monitor status",
+    "EnergyManagement.MonitorWatts":
+        "Monitor watts"
+},
+
+"82": {
+    "Title":
+        "Modalità risparmio energetico",
+    "Description":
+        "Se abilitato, assicura che il livello dei variatori non superi la percentuale configurata.",
+    "EnergyManagement.EnergySavingLevel":
+        "Livello massimo (%)",
+    "EnergyManagement.EnergySavingMode":
+        "Abilita modalità risparmio energetico"
+},
+
+"16": {
+    "Title":
+        "Memoria livello",
+    "Description":
+        "Memorizza e ripristina livello.",
+    "HomeGenie.LevelMemory":
+        "Ripristina l'ultimo livello all'accensione",
+    "HomeGenie.LevelMemory.SimulateOnly":
+        "Simula soltanto"
+},
+
+"35": {
+    "Title":
+        "On/Off pianificato",
+    "Description":
+        "Accensione/spegnimento del dispositivo utilizzando lo scheduler.",
+    "HomeGenie.ScheduleControl":
+        "Abilita accensione/spegnimento automatico",
+    "HomeGenie.ScheduleOn":
+        "Accendi",
+    "HomeGenie.ScheduleOff":
+        "Spegni"
+},
+
+"90": {
+    "Title":
+        "Sistema di allarme",
+    "Description":
+        "Sistema di allarme base",
+    "HomeGenie.SecurityAlarm":
+        "Usa come allarme/strobo",
+    "HomeGenie.SecuritySensor":
+        "Usa come sensore di sicurezza",
+    "ConfigureOptions.Email.Recipients":
+        "Elenco separato da virgola di destinatari e-mail per le notifiche di allarme",
+    "ConfigureOptions.System.ArmDelay":
+        "Ritardo inserimento allarme (seconds)",
+    "ConfigureOptions.System.SirenStartTime":
+        "Ritardo sirene/strobo (secondi)",
+    "ConfigureOptions.System.SirenMaxTime":
+        "Tempo massimo sirene/strobo (secondi, 0=infinito)",
+    "ConfigureOptions.Trigger.ArmedProgram":
+        "Programma da eseguire quando l'allarme viene inserito",
+    "ConfigureOptions.Trigger.DisarmedProgram":
+        "Programma da eseguire quando l'allarme viene disinserito",
+    "ConfigureOptions.Trigger.TriggeredProgram":
+        "Programma da eseguire quando scatta l'allarme"        
+},
+
+"145": {
+    "Title":
+        "Smart Lights",
+    "Description":
+        "Controlla il dispositivo con sensori di movimento e luce.",
+    "HomeGenie.SmartLights.Enable":
+        "Abilita controllo 'Smart Lights'",
+    "HomeGenie.SmartLights.OnMotionDetect":
+        "Controlla con sensore movimento (opzionale)",
+    "HomeGenie.SmartLights.CheckLuminosity":
+        "Controlla con sensore luce (opzionale)",
+    "HomeGenie.SmartLights.SwitchOffTimeout":
+        "Spegni dopo un periodo di inattività (secondi)",
+    "HomeGenie.SmartLights.MinLuminance":
+        "Accendi se la luminosità è inferiore a:",
+    "TimeTable.ExternalControl":
+        "Sincronizza con programmazione tabella oraria"
+},
+
+"8": {
+    "Title":
+        "Scenario alba",
+    "Description":
+        "Scenario di esempio per le luci Philips Hue.",
+    "Scenarios.SunriseColors":
+        "Collega a scenario Sunrise Colors"
+},
+
+"36": {
+    "Title":
+        "Tabella oraria",
+    "Description":
+        "Pianificazione termostati, luci, elettrodomestici e avvolgibili.",
+    "TimeTable.Weekend":
+        "Fine settimana",
+    "TimeTable.Workday":
+        "Giorni lavorativi",
+    "TimeTable.Holiday":
+        "Vacanze",
+    "TimeTable.Special":
+        "Giorni speciali",
+    "TimeTable.Enable":
+        "Abilita tabella oraria",
+    "TimeTable.Repeat":
+        "Ripeti il comando per l'intera durata",
+    "TimeTable.CheckDST":
+        "Abilita controllo ora legale",
+    "TimeTable.UI.NoProgram":
+        "nessun programma",
+    "TimeTable.UI.ProgramNr":
+        "programma #"
+},
+
+"112": {
+    "Title":
+        "Spegnimento automatico",
+    "Description":
+        "Spegnimento automatico del dispositivo dopo un certo tempo.",
+    "HomeGenie.TurnOffDelay":
+        "Ritardo spegimento automatico (secondi)"
+},
+
+"200": {
+    "Title":
+        "Servizio di notifiche push per Windows Phone",
+    "Description":
+        "Invia aggiornamenti 'toast' e 'tile' al client  Windows Phone.",
+    "MobileNotification.SendChanges":
+        "Notifiche push su client Windows Phone"
+}
+
+}}

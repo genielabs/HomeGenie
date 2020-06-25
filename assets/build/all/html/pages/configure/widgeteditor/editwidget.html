@@ -1,0 +1,159 @@
+<!-- Widget Editor -->
+<div data-role="page" id="page_widgeteditor_editwidget">
+    {include pages/header.html}
+
+    <img src="images/program.png" style="position:absolute;top:48px;left:20px;" width="64" />
+    <div style="position:absolute;font-size:10pt;top:34px;left:100px"><h2 data-ui-field="title-heading"></h2></div>
+
+    <div class="ui-content" style="cursor:default;text-align:left;position:absolute;border-top:0px;padding:10px;bottom:30px;top:120px;left:0px;right:0px;margin:0;padding-top:0;overflow-x:hidden;overflow-y:auto">
+
+        <div data-role="navbar" style="max-width:500px">
+            <ul>
+                <li><a data-ui-field="tab1-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(1)" data-ajax="false" data-locale-id="configure_widgeteditor_html">HTML</a></li>
+                <li><a data-ui-field="tab2-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(2)" data-ajax="false" data-locale-id="configure_widgeteditor_javascript">Javascript</a></li>
+                <!--li><a data-ui-field="tab3-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(3)" data-ajax="false" data-locale-id="configure_widget_resources">Resources</a></li-->
+            </ul>
+        </div>
+        <div class="ui-btn ui-btn-active ui-corner-all" style="text-align:left;position:absolute;margin:0;top:34px;bottom:10px;left:0;right:0;padding:5px;" data-theme="d">
+
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Run / Preview</a>
+            </div>
+            <div style="position:absolute;right:0;padding-right:100px;">
+                <label style="padding-left:20px;padding-top:14px;float:left" data-locale-id="configure_widgeteditor_bindtomodule">bind to module</label>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                    <select data-role="selectmenu" data-ui-field="bindmodule-sel"></select>
+                </div>
+
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                    <a data-ui-field="module-params-edit" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-bars" href="#">&nbsp;</a>
+                </div>
+            </div>
+
+            <div data-ui-field="tab1-div">
+            
+                <!-- html toolbar -->
+                <div data-ui-field="toolbar1-div">
+                </div>
+
+                <!-- html editor -->
+                <div style="margin-right:420px">
+                    <textarea id="widgeteditor_code_html" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
+                </div>
+
+            </div>
+
+            <div data-ui-field="tab2-div" style="display:none">
+            
+                <!-- html toolbar -->
+                <div data-ui-field="toolbar1-div">
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:10px;right:10px;position:absolute;margin:0" data-theme="f">
+                    <a data-ui-field="errors-btn" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-alert" href="#">Errors</a>
+                </div>
+
+                <!-- html editor -->
+                <div>
+                    <textarea id="widgeteditor_code_javascript" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
+                </div>
+                
+            </div>
+
+            <div data-ui-field="tab3-div" style="display:none">
+            
+                <p>Here it will be placed editor for language locales and image files... (work in progress)</p>
+                
+            </div>
+            
+            <div data-ui-field="preview-panel" class="ui-panel-wrapper ui-corner-right" style="position:absolute;width:420px;top:60px;right:8px;margin:0;bottom:8px;overflow:auto;cursor:default;display:table-cell">
+
+                <div align="center">
+                    <container><!-- this fake tag 'container' should prevent html errors to corrupt page structure -->
+                        <div data-ui-field="preview-div" style="padding-top:10px"></div>
+                    </container>
+                </div>
+
+            </div>
+            <div data-ui-field="split-bar" style="z-index:1000;position:absolute;width:5px;top:60px;bottom:8px;right:420px;background:yellow;overflow:hidden;cursor:ew-resize">&nbsp;</div>
+            
+        </div>
+
+    </div>
+    
+    
+
+    <div data-ui-field="notsaved-popup" class="ui-corner-all hg-popup-b" data-transition="pop" data-position-to="window" data-dismissible="false" data-overlay-theme="b">
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="configure_widgeteditor_hasmodification">Widget was modified!</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 data-locale-id="configure_program_savechangesprompt" class="ui-title">Do you want to save changes?</h3>
+            <p data-locale-id="configure_program_changeswillbelost"></p>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-ui-field="savecancel-btn" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_dontsave" data-inline="true" data-rel="back">No</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-ui-field="saveconfirm-btn" href="#" class="ui-btn ui-corner-all ui-icon-fa-save ui-btn-icon-left" data-locale-id="configure_program_saveconfirm" data-inline="true" data-rel="back" data-transition="flow">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-ui-field="delete-popup" class="ui-corner-all hg-popup-b" data-transition="pop" data-overlay-theme="b">
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="configure_widgeteditor_deletetitle">Delete Widget?</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 data-locale-id="configure_widgeteditor_deleteprompt" class="ui-title">Are you sure you want to delete this widget?</h3>
+            <p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_deletecancel" data-inline="true" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-ui-field="deleteconfirm-btn" href="#" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_program_deleteconfirm" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    
+
+    <div id="editwidget_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+            <li><a data-ui-field="delete-btn" class="ui-btn ui-icon-minus ui-btn-icon-right" data-locale-id="configure_program_options_delete" href="#">Delete</a></li>
+            <li><a data-ui-field="export-btn" class="ui-btn ui-icon-fa-download ui-btn-icon-right" data-locale-id="configure_program_options_export" href="#">Export</a></li>
+            <li><a data-ui-field="save-btn" class="ui-btn ui-icon-fa-save ui-btn-icon-right" data-locale-id="configure_program_options_save" href="#">Save</a></li>
+        </ul>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a data-ui-field="back-btn" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" href="#" data-rel="back">
+                        Back
+                    </a>
+                </li>
+                <li>
+                    <a data-ui-field="home-btn" href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#editwidget_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                        Actions
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div>
+
+<!-- hg page init script -->
+<script type="text/javascript">
+    HG.WebApp.WidgetEditor.InitializePage();
+</script>

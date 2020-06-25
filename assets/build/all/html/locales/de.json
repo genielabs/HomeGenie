@@ -1,0 +1,920 @@
+{
+    "home_menu_title":
+        "Home Menü",
+    "home_menu_control":
+        "Steuerung",
+    "home_menu_analyze":
+        "Auswertung",
+    "home_menu_configure":
+        "Konfiguration",
+    "homegenie_about_title":
+        "Über uns",
+    "control_groups_and_modules":
+        "Steuerung Gruppe<br>und Module",
+    "bottombar_button_home":
+        "Home",
+    "configure_program_bbaractions":
+        "Aktionen",
+    "control_macrorecord_discard":
+        "verwerfen",
+    "control_macrorecord_save":
+        "Speichern",
+    "analyze_statistics":
+        "Analyse<br>Statistik",
+    "analyze_total_watts_hourly":
+        "Total verbrauchte Watts in Stunden abschnitten",
+    "analyze_load_peak_last":
+        "Maximal verbrauch in den letzten 4 Stunden",
+    "configure_menu_title":
+        "Konfiguration",
+    "configure_menu_heading":
+        "Konfiguriere Menue",
+    "configure_groups_heading":
+        "Gruppen und<br>Modules",
+    "configure_menu_groups_modules":
+        "Gruppen und Module",
+    "configure_menu_automation":
+        "Automatisierung und Programme",
+    "configure_menu_system":
+        "Einstellungen",
+    "configure_menu_maintenance":
+        "Wartung",
+    "configure_automation_heading":
+        "<font style='color:gray'>Program</font><br>Groups",
+    "configure_group_newgroup":
+        "Neue Gruppe",
+    "configure_group_entergroupname":
+        "Geben Sie den neuen Gruppennamen:",
+    "configure_group_newgroupcancel":
+        "Abbrechen",
+    "bottombar_button_back":
+        "Zurück",
+    "configure_group_bottombar_group_add":
+        "Gruppe Hinzufügen",
+    "configure_group_group":
+        "Gruppen",
+    "configure_group_groupname":
+        "Namen",
+    "configure_group_groupwallpaper":
+        "Wallpaper",
+    "configure_group_modulelist":
+        "Module List",
+    "configure_group_deletegroup":
+        "Gruppe Löschen?",
+    "configure_group_deleteprompt":
+        "Sind Sie sicher das Sie diese Gruppe Löschen möchten?",
+    "configure_group_deletewarning":
+        "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "configure_group_deletecancel":
+        "Abbrechen",
+    "configure_group_deleteconfirm":
+        "Löschen",
+    "configure_group_addmodule":
+        "Neues Modul hinzufügen",
+    "configure_module_newmodulecancel":
+        "Abbrechen",
+    "configure_module_newmoduleconfirm":
+        "Hinzufügen",
+    "configure_module_propname":
+        "Name",
+    "configure_module_typelight":
+        "Licht",
+    "configure_module_typedimmer":
+        "Dimmer",
+    "configure_module_typeswitch":
+        "Schalter",
+    "configure_module_typesensor":
+        "Sensor",
+    "configure_module_typetemperature":
+        "Temperatur",
+    "configure_module_typesiren":
+        "Sirene",
+    "configure_module_typefan":
+        "Ventilator",
+    "configure_module_typethermostat":
+        "Thermostat",
+    "configure_module_typeshutter":
+        "Auslöser",
+    "configure_module_typedoorwindow":
+        "Tür/Fenster",
+    "configure_module_options":
+        "Setup",
+    "configure_module_optupdate":
+        "Update module",
+    "configure_module_optremove":
+        "Entferne von Gruppe",
+    "configure_group_bottombar_deletemodule":
+        "Gruppe Löschen",
+    "configure_group_bottombar_addmodule":
+        "Modul Hinzufügen",
+    "configure_program_automationtitle":
+        "Programmliste",
+    "configure_program_newprogram":
+        "Neues Programm",
+    "configure_program_enterprogramname":
+        "Geben Sie einen neuen Programmnamen ein:",
+    "configure_program_newprogramcancel":
+        "Abbrechen",
+    "configure_program_newprogramconfirm":
+        "Ok",
+    "configure_program_deletetitle":
+        "Programm Löschen?",
+    "configure_program_deleteprompt":
+        "Sind Sie sicher das Sie dieses Programm Loeschen wollen?",
+    "configure_program_deleteadvice":
+        "Diese Aktion kann nicht rueckgaengig gemacht werden.",
+    "configure_program_deletecancel":
+        "Abbrechen",
+    "configure_program_deleteconfirm":
+        "Löschen",
+    "configure_program_options":
+        "Optionen",
+    "configure_program_options_edit":
+        "Bearbeiten",
+    "configure_program_options_export":
+        "Export",
+    "configure_program_options_delete":
+        "Delete",
+    "configure_program_programgroup":
+        "Programm Gruppe",
+    "configure_program_programname":
+        "Programm Name",
+    "configure_program_programdescription":
+        "Programmbeschreibung",
+    "configure_program_programtype":
+        "Programm Art",
+    "configure_program_trigger":
+        "Programm auslösen",
+    "configure_program_conditionswitchestrue":
+        "Wenn die Bedingung Berechnung schaltet zu 'wahr'",
+    "configure_program_conditionswitchesfalse":
+        "Wenn die Bedingung Berechnung schaltet zu 'falsch'",
+    "configure_program_runonceconditiontrue":
+        "einmal ausgeführt, wenn die Bedingung Evaluierung liefert 'wahr'",
+    "configure_program_conditionistrue":
+        "Wenn die Bedingung Berechnung zurückgibt 'wahr'",
+    "configure_program_conditionisfalse":
+        "Wenn die Bedingung Berechnung zurückgibt 'falsch'",
+    "configure_program_programconditions":
+        "Programm Bedingungen",
+    "configure_program_conditionadd":
+        "Bedingungen Hinzufügen",
+    "configure_program_selectconditioncontext":
+        "Wähle Bedingungen Kontext",
+    "configure_program_wizardback":
+        "zurück",
+    "configure_program_selectoperator":
+        "Wählen Vergleichsoperator",
+    "configure_program_operatorless":
+        "Weniger Als",
+    "configure_program_operatorequal":
+        "Gleich",
+    "configure_program_operatorgreaterthan":
+        "Grösser Als",
+    "configure_program_selectvalue":
+        "Wähle Vergleichswert",
+    "configure_program_wizarddone":
+        "Erledigt",
+    "configure_program_deleteconditiontitle":
+        "Bedingung Löschen?",
+    "configure_program_deleteconditionprompt":
+        "Sind Sie sicher, dass Sie wirklich die Bedingungen und Erklaerung Loeschen moechten?",
+    "configure_program_deleteconditionadvice":
+        "Diese Aktion kann nicht rueckgaengig gemacht werden.",
+    "configure_program_instructions":
+        "Programmanweisungen",
+    "configure_program_instructionadd":
+        "Instruktionen Hinzufuegen",
+    "configure_program_selectcommandcontext":
+        "Wählen Sie den Befehl Kontext",
+    "configure_program_commandarguments":
+        "Befehlsargumente",
+    "configure_program_deleteinstructiontitle":
+        "Instruktionen Löschen?",
+    "configure_program_deleteinstructionprompt":
+        "Sind Sie sicher, dass Sie wirklich die Anweisung und Erklaerung Loeschen moechten??",
+    "configure_program_csharpprogram":
+        "C# Program",
+    "configure_program_savingtitle":
+        "Speichere Programm",
+    "configure_program_savingwait":
+        "Bitte warten...",
+    "configure_program_switchtypetitle":
+        "Wechsle Type?",
+    "configure_program_switchtypeprompt":
+        "Sind sie sicher das Sie dieses Programm aendern wollen?",
+    "configure_program_switchtypeadvice":
+        "Aktuelle Programm-Daten werden gelöscht.",
+    "configure_program_switchtypecancel":
+        "Abbrechen",
+    "configure_program_switchtypeconfirm":
+        "Wechseln",
+    "configure_program_options_run":
+        "Starten",
+    "configure_program_options_break":
+        "Stopp",
+    "configure_program_options_save":
+        "Speichern",
+    "configure_program_errorstitle":
+        "Fehler",
+    "configure_program_bbar_programeditruncode":
+        "Bearbeiten-Auslöse-Code",
+    "configure_automationgroup_newgroup":
+        "Neue Gruppe",
+    "configure_automationgroup_entergroupname":
+        "Geben Sie einen neuen Gruppennamen ein:",
+    "configure_automationgroup_newgroupcancel":
+        "Abbrechen",
+    "configure_automationgroup_bottombar_group_add":
+        "Gruppe Hinzufügen",
+    "configure_interfaces_heading":
+        "Einstellungen",
+    "configure_interfaces_optdisable":
+        "Deaktiviert",
+    "configure_interfaces_optenable":
+        "Aktiviert",
+    "configure_maintenance_heading":
+        "Wartung",
+    "configure_system_installpackage":
+        "Install Package",
+    "configure_system_packagemanager":
+        "Package Manager",
+    "configure_system_theme":
+        "Theme",
+    "configure_system_options":
+        "System Optionen",
+    "configure_system_serviceportis":
+        "Http service port ist",
+    "configure_system_serviceportchange":
+        "Wechsle Port",
+    "configure_security_passwordprotectedaccess":
+        "Passwort Geschützter Zugriff",
+    "configure_system_configanddata":
+        "Konfiguration und Daten",
+    "configure_maintenance_configuration":
+        "Konfiguration",
+    "configure_system_statistics":
+        "Statistik",
+    "configure_system_databasereset":
+        "Datenbank Reset",
+    "systemsettings_backuprestores1heading":
+        "Konfiguration wiederherstellen",
+    "configure_system_backuprestores1note":
+        "Wählen Automation Programme zur Wiederherstellung:",
+    "systemsettings_backuprestores1cancel":
+        "Abbrechen",
+    "systemsettings_backuprestores1confirm":
+        "Wiederherstellen",
+    "configure_system_serviceportheading":
+        "Http Service Port",
+    "configure_system_serviceportchangenote":
+        "Notiz: Nach dem Aendern des Ports muss der Server Neugestartet werden!",
+    "configure_system_serviceportcancel":
+        "Abbrechen",
+    "securitysettings_password_adminpassword":
+        "<b>'admin'</b> user password",
+    "securitysettings_password_changecancel":
+        "Abbrechen",
+    "securitysettings_password_changecommit":
+        "Festlegen",
+    "maintenance_configuration_factoryreset":
+        "Werkseinstellung?",
+    "configure_maintenance_resetprompt":
+        "Sind Sie sicher das Sie alles auf die Werkseinstellungen zurueck setzten wollen?",
+    "configure_maintenance_resetwarning":
+        "",
+    "configure_maintenance_resetproceed":
+        "Fortfahren",
+    "configure_maintenance_resetcancel":
+        "Abbrechen",
+    "home_voicerecognition_text_placeholder":
+        "Klicken Sie auf die Schaltfläche für die Sprachsteuerung oder geben Sie einen Satz...",
+    "home_voicerecognition_voice":
+        "Stimme",
+    "configure_menu_scheduler":
+        "Zeitplaner",
+    "configure_grouplist":
+        "Gruppen Liste",
+    "configure_schedulerservice_title":
+        "Ereignis<br />Zeitplaner",
+    "configure_scheduler_events":
+        "Geplante Ereignisse",
+    "configure_schedulerservice_bottombar_event_add":
+        "Ereignis hinzufügen",
+    "configure_schedulerservice_schedulerevent":
+        "Geplante Ereignisse",
+    "configure_schedulerservice_itemname":
+        "Name",
+    "configure_schedulerservice_itemcronexp":
+        "Cron Ausdruck",
+    "configure_schedulerservice_itemprogramid":
+        "Programm-ID oder Name (optional)",
+    "configure_schedulerservice_cancelitem":
+        "Abbrechen",
+    "configure_schedulerservice_deleteitem":
+        "löschen",
+    "configure_schedulerservice_updateitem":
+        "Aktualisierung",
+    "configure_system_updatemanager":
+        "Aktualisierung Manager",
+    "configure_system_updatemanager_updatecheck":
+        "Aktualisierung Prüfung",
+    "configure_system_updatemanager_installupdate":
+        "Installiere Aktualisierung",
+    "configure_system_updatemanager_no_updates":
+        "No updates available.",
+    "configure_system_updatemanager_updates_available":
+        "The following updates are available:",
+    "configure_system_restart_service":
+        "Dienst neu starten",
+    "configure_system_restart":
+        "Neustart",
+    "configure_system_loganddebug":
+        "Log Datei",
+    "configure_system_logdownload":
+        "Herunterladen",
+    "configure_system_logdownloadtoday":
+        "heute",
+    "configure_system_logdownloadyesterday":
+        "gestern",
+    "configure_system_httpsettings":
+        "HTTP Settings",
+    "configure_security_passwordprotectedaccess_set":
+        "einstellen",
+    "configure_security_passwordprotectedaccess_clear":
+        "löschen",
+    "configure_system_httpcache":
+        "Http Service Cache",
+    "configure_maintenance_configuration_info":
+        "<b>Notiz:</b> vor der Wiederherstellung einer Sicherungsdatei müssen Sie dem System das gleiche Passwort hinterlegen wie bei der erstellung der Sicherungsdatei",
+    "configure_maintenance_configuration_backup":
+        "Sicherungskopie",
+    "configure_maintenance_configuration_restore":
+        "wiederherstellen",
+    "configure_maintenance_configuration_factory_reset":
+        "Werkseinstellung",
+    "configure_system_modulescleanup":
+        "Module Bereinigung",
+    "configure_system_modulesselect":
+        "Wähle Module",
+    "configure_system_remotemodules":
+        "Remote Modules Routing",
+    "configure_system_modsroutingreset":
+        "zurücksetzten",
+    "configure_system_userinterface":
+        "Benutzeroberfläche",
+    "configure_system_eventshistory":
+        "Ereignisse Verlauf",
+    "home_about_version":
+        "version",
+    "home_about_codename":
+        "codename",
+    "home_about_motto":
+        "motto",
+    "home_about_concept":
+        "Konzept, Design, Ideen und Codierung<br /> by G-Labs",
+    "home_about_license":
+        "Lizenz",
+    "home_about_site":
+        "HomePage and Support",
+    "home_about_site_docs":
+        "Dokumentation",
+    "actions_menu":
+        "Aktionsmenü",
+    "control_group_configure":
+        "Configure Group",
+    "control_macrorecord_record_macro":
+        "Makro aufzeichnen",
+    "control_macrorecord_recording":
+        "Aufzeichnung...",
+    "control_macrorecord_description":
+        "Jeder ausgegebene Befehl wird aufgezeichnet und in ein <strong>Assistent Skript</strong>.<br>klicken <strong>Save</strong> Taste, wenn fertig.",
+    "control_macrorecord_close":
+        "schliessen",
+    "control_macrorecord_options":
+        "Optionen",
+    "control_macrorecord_options_pause":
+        "Pause zwischen den Befehlen",
+    "control_macrorecord_options_none":
+        "Keine",
+    "control_macrorecord_options_mimic":
+        "Mimic",
+    "control_macrorecord_options_fixed":
+        "fest",
+    "control_macrorecord_options_pauseduration":
+        "Feste Pause Sekunden",
+    "update_options_popup_loading":
+        "Lade Programmdaten",
+    "control_widget_notconfigured_title":
+        "Widget nicht konfiguriert",
+    "control_widget_notconfigured_text":
+        "Klicken Sie auf diese Schaltfläche, um die Konfiguration zu bearbeiten.",
+    "control_widget_notconfigured_button":
+        "schliessen",
+    "configure_program_options_details":
+        "Details",
+    "configure_program_options_restart":
+        "Neustart",
+    "configure_program_details_implemfeatures":
+        "implementierte Funktionen",
+    "configure_program_details_configoptions":
+        "Konfigurations-Optionen",
+    "configure_program_details_moduleparams":
+        "Module Parameters",
+    "configure_group_actionmenu_deletegroup":
+        "Gruppe löschen",
+    "configure_group_actionmenu_addseparatorlabel":
+        "Trennzeichen hinzufügen ",
+    "configure_group_actionmenu_addmodule":
+        "Modul hinzufügen",
+    "configure_separator_edit":
+        "Trennzeichen bearbeiten",
+    "configure_separator_label":
+        "Beschriftung",
+    "configure_separator_placeholder":
+        "Beschriftung einfügen",
+    "configure_module_optaddseparator":
+        "Aktualisierung",
+    "configure_module_parameters":
+        "Parameter",
+    "configure_module_parameters_delete":
+        "löschen",
+    "configure_module_parameters_save":
+        "Speichern",
+    "configure_module_parameters_linktitle":
+        "Modulparameter",
+    "configure_automationgroup_add":
+        "hinzufügen",
+    "configure_programslist_listtitle":
+        "Programmliste",
+    "configure_programslist_tap_disable":
+        "Tippen Sie auf das Programmum um es zu deaktivieren",
+    "configure_programslist_tap_enable":
+        "Tippen Sie auf Programm um es zu AKTIVIEREN",
+    "configure_programslist_deletegroup":
+        "Gruppe löschen",
+    "configure_programslist_importprogram":
+        "Programm Importieren",
+    "configure_programslist_addnewprogram":
+        "Neus Programm hinzufügen",
+    "configure_programslist_refreshlist":
+        "Liste aktualisieren",
+    "configure_programslist_import":
+        "Importieren",
+    "configure_program_summary":
+        "Zusammenfassung",
+    "configure_program_programcode":
+        "Programm-Code",
+    "configure_program_sketchcode":
+        "Sketch Code",
+    "configure_program_triggercode":
+        "Auslöser Code",
+    "configure_program_makefile":
+        "Dateierstellen",
+    "configure-editprogram-addcommand":
+        "Befehl Hinzufügen",
+    "configure-editprogram-addcondition":
+        "Bedingung hinzufügen",
+    "configure-editprogram-capture":
+        "Aufzeichnen",
+    "configure-editprogram-help":
+        "Hilfe",
+    "configure_program_triggertype":
+        "Auslöser",
+    "configure_editprogram_options_delete":
+        "Programm löschen",
+    "configure_editprogram_saving_succeed":
+        "Speichern erfolgreich.",
+    "configure_editprogram_saving":
+        "Aktualisierung von Programmdaten",
+    "configure_editprogram_error_updating":
+        "Fehler beim Aktualisieren des Programms!",
+    "configure_editprogram_compile":
+        "kompilieren",
+    "systemsettings_selectport_title":
+        "Mitteilung",
+    "systemsettings_selectport_placeholder":
+        "(Port auswählen...)",
+    "systemsettings_selectport_text":
+        "Bitte wähle einen Port das von diesem Gerät verwendet wird",
+    "systemsettings_selectport_button":
+        "schliessen",
+    "configure_group_newgroupconfirm":
+        "Ok",
+    "configure_module_optremoveseparator":
+        "entfernen",
+    "configure_program_selectcommandtarget":
+        "Wählen ein Befehlsziel",
+    "configure_program_selectcommandtoperform":
+        "Wähle den Befehl ausführen",
+    "configure_program_commandcustom":
+        "Benutzerdefinierte API-Befehl",
+    "configure_program_wizardproceed":
+        "verlaufen",
+    "configure_program_commandcapturetitle":
+        "Befehle Aufzeichnen",
+    "configure_program_waitingnewcommand":
+        "Warten auf neue Ereignisse...",
+    "configure_program_waitingnewcommandadvice":
+        "",
+    "configure_program_capturestop":
+        "Stopp",
+    "configure_program_wizard_editline_title":
+        "Bearbeitungszeile",
+    "configure_program_wizard_editcmdline_prompt":
+        "Verschieben oder löschen Linie<span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
+    "configure_program_wizard_editconline_prompt":
+        "Verschieben oder löschen Linie<span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
+    "configure_program_wizard_editline_number":
+        "Neue Zeilennummer",
+    "configure_program_wizard_editline_delete":
+        "löschen",
+    "configure_program_wizard_editline_change":
+        "bewegen",
+    "configure_program_selectconditionsubject":
+        "Wähle Bedingung Gegenstand",
+    "configure_program_selectconditionproperty":
+        "Wähle Vergleichs Eigenschaft",
+    "configure_program_conditioncapturetitle":
+        "Bedingungen Aufzeichnen ",
+    "configure_program_waitingnewcondition":
+        "Warten auf neue Ereignisse...",
+    "configure_program_waitingnewconditionadvice":
+        "",
+    "configure_program_options_update":
+        "Aktualisierung",
+    "configure_system_updateinstall":
+        "Aktualisierung installiert",
+    "configure_system_deletemodule":
+        "Module löschen",
+    "systemsettings_backuprestores1selectallnone":
+        "Auswählen Alle / Keine",
+    "securitysettings_password_setpassword":
+        "Kennwort festlegen",
+    "securitysettings_password_enterpassword":
+        "Geben Sie ein Kennwort für den Benutzer \"admin\" ein ",
+    "maintenance_configuration_servicerestart":
+        "Dienst neu starten?",
+    "configure_maintenance_restartprompt":
+        "Sind Sie sicher, dass Sie den Dienst neu starten wollen?",
+    "configure_maintenance_restartwarning":
+        "",
+    "configure_module_typemediareceiver":
+        "Medienempfänger",
+    "configure_module_typemediatransmitter":
+        "Media Transmitter",
+    "configure_module_featuresoptions":
+        "Funktionen/Optionen",
+    "configure_editprogram_files":
+        "Dateien",
+    "configure_program_newfile":
+        "Datei hinzufügen",
+    "configure_program_filename":
+        "Dateiname",
+    "configure_program_fileslist":
+        "Dateiliste",
+    "configure_program_fileslist_exit":
+        "beenden",
+    "configure_program_fileslist_delete":
+        "löschen",
+    "configure_program_fileslist_edit":
+        "bearbeiten",
+    "configure_program_fileslist_add":
+        "Hinzufügen",
+    "configure_program_hasmodification":
+        "Program was modified!",
+    "configure_program_savechangesprompt":
+        "Möchten Sie diese Änderungen speichern?",
+    "configure_program_changeswillbelost":
+        "",
+    "configure_program_dontsave":
+        "nein",
+    "configure_program_saveconfirm":
+        "Speichern",
+    "statistics_dataanalysis":
+        "Datenanalyse",
+    "statistics_counterexpense":
+        "Zähler und Kosten",
+    "analyze_statistics_datefrom":
+        "von",
+    "analyze_statistics_dateto":
+        "bis",
+    "analyze_statistics_costperunit":
+        "Kosten pro Einheit",
+    "analyze_statistics_overallcounter":
+        "Gesamtzähler",
+    "analyze_statistics_totalexpense":
+        "Gesamtkosten",
+    "configure_program_oroperator":
+        "OR operator",
+    "configure_system_statistics_clear":
+        "Löschen alle Statistikdaten",
+    "configure_system_statistics_databasemaxsize":
+        "Maximale Datenbankgröße ist",
+    "configure_system_statistics_changedatabasemaxsize":
+        "Wechseln",
+    "configure_system_statistics_databasemaxsizechange":
+        "maximale Größe (MB)",
+    "configure_system_statistics_databasemaxsizechange_cancel":
+        "Abbrechen",
+    "configure_system_statistics_databasemaxsizechange_commit":
+        "Wechseln",
+    "configure_popupfilter_title":
+        "Ereignis Kontext Filter",
+    "configure_popupfilter_optclose":
+        "schliessen",
+    "configure_system_blockedpopups":
+        "blockierte Pop-ups",
+    "configure_system_blockedpopups_edit":
+        "bearbeiten",
+    "configure_system_updateinstall_warning":
+        "Es wird dringend empfohlen, eine Sicherungskopie der Konfiguration zu machen, bevor Sie mit einer Aktualisierung fortfahren.",
+    "configure_automationgroup_widgeteditor":
+        "Widget Editor",
+    "configure_widgetlist_heading":
+        "<font style=\"color:gray\">Widgets</font><br />List</h3>",
+    "configure_widgetlist_importwidget":
+        "Importiere Widget",
+    "configure_widgetlist_import":
+        "Importieren",
+    "configure_widgetlist_add_popuptitle":
+        "Neues Widget",
+    "configure_widgetlist_add_widgetbrand":
+        "Marke",
+    "configure_widgetlist_add_widgetcategory":
+        "Kategorie",
+    "configure_widgetlist_add_widgetname":
+        "Name",
+    "configure_widgetlist_newwidgetconfirm":
+        "Hinzufügen",
+    "configure_widgetlist_action_import":
+        "Importieren",
+    "configure_widgetlist_action_addwidget":
+        "Widget hinzufügen",
+    "configure_widgeteditor_html":
+        "HTML",
+    "configure_widgeteditor_javascript":
+        "Javascript",
+    "configure_widgeteditor_previewupdate":
+        "Ausführen / Vorschau",
+    "configure_widgeteditor_hasmodification":
+        "Widget wurde geändert!",
+    "configure_widgeteditor_deletetitle":
+        "Widget löschen?",
+    "configure_widgeteditor_deleteprompt":
+        "Sind Sie sicher, dass Sie dieses Widget löschen wollen?",
+    "configure_widgetlist_list":
+        "Widget Liste",
+    "configure_widgeteditor_nobindmodule_title":
+        "Wähle ein Modul",
+    "configure_widgeteditor_nobindmodule_text":
+        "Kein gültiges Modul für die Datenbindung wurde gefunden, wählen Sie bitte eines aus.",
+    "configure_widgeteditor_nobindmodule_close":
+        "schliessen",
+    "configure_widgeteditor_bindtomodule":
+        "binden an das Modul",
+    "configure_widgeteditor_selectmodule_placeholder":
+        "(wähle ein Modul)",
+    "configure_widgeteditor_title":
+        "Widget editor",
+    "configure_widgeteditor_savinghtml":
+        "Speichert HTML...",
+    "configure_widgeteditor_savingjavascript":
+        "Speichert Javascript...",
+    "configure_interfaces_importdriver":
+        "Installiere Schnittstelle",
+    "configure_interfaces_download":
+        "Herunterladen und installieren",
+    "configure_interfaces_upload":
+        "hochladen und installieren",
+    "configure_interfaces_install":
+        "Installiere Schnittstelle",
+    "configure_interfaces_downloadfromurl":
+        "Herunterladen Paket von URL",
+    "configure_interfaces_uploadpackage":
+        "hochladen Paket von Datei",
+    "cronwizard_title":
+        "Cron event Wizard",
+    "cronwizard_tab_minute":
+        "Minute",
+    "cronwizard_tab_hour":
+        "Stunde",
+    "cronwizard_tab_dayofmonth":
+        "Tag des Monats",
+    "cronwizard_tab_month":
+        "Monat",
+    "cronwizard_tab_dayofweek":
+        "Day of week",
+    "cronwizard_event_willoccur":
+        "Dieses Ereignis tritt",
+    "cronwizard_minuteselect_everyminute":
+        "jede Minute",
+    "cronwizard_minuteselect_everysomeminute":
+        "jede &lt;n&gt; minute",
+    "cronwizard_minuteselect_eachselected":
+        "jede ausgewählte Minute",
+    "cronwizard_hourselect_everyhour":
+        "jede Stunde",
+    "cronwizard_hourselect_everysomehour":
+        "jede &lt;n&gt; Stunde",
+    "cronwizard_hourselect_eachselected":
+        "jeweils ausgewählt Stunde",
+    "cronwizard_dayselect_everyday":
+        "jeden Tag",
+    "cronwizard_dayselect_eachselected":
+        "jeden ausgewählten Tag",
+    "cronwizard_monthselect_everymonth":
+        "jeden Monat",
+    "cronwizard_monthselect_eachselected":
+        "jeden ausgewählten Monat",
+    "cronwizard_dayowselect_everydayow":
+        "jeden Tag der Woche",
+    "cronwizard_dayowselect_eachselected":
+        "jeweils ausgewählt Tag in der Woche",
+    "cronwizard_event_name":
+        "Event name",
+    "cronwizard_typeselect_standard":
+        "standard",
+    "cronwizard_typeselect_period":
+        "date period",
+    "cronwizard_typeselect_custom":
+        "custom cron expression",
+    "cronwizard_event_description":
+        "Description",
+    "cronwizard_date_from":
+        "from",
+    "cronwizard_date_to":
+        "to",
+    "cronwizard_time_exact":
+        "at exact time",
+    "cronwizard_time_range":
+        "during a time range",
+    "cronwizard_time_start":
+        "start",
+    "cronwizard_time_end":
+        "end",
+    "cronwizard_time_at":
+        "at",
+    "cronwizard_event_occurrence":
+        "Occurrence",
+    "cronwizard_event_cronexpr":
+        "Cron expression",
+    "cronwizard_event_runscript":
+        "Run script on event occurrence",
+    "cronwizard_description_from":
+        "from",
+    "cronwizard_description_to":
+        "to",
+    "cronwizard_description_on":
+        "on",
+    "cronwizard_description_starting":
+        "from",
+    "cronwizard_description_ending":
+        "to",
+    "cronwizard_description_at":
+        "at",
+    "cronwizard_occurrence_desc":
+        "Define occurrences of this event",
+    "cronwizard_modules_desc":
+        "Select modules that will be handled by this event script (optional)",
+    "cronwizard_script_desc":
+        "Enter JavaScript code that will be executed at every occurrence of this event (optional)",
+    "cronwizard_warning_nametooshort":
+        "Please enter a name of two or more characters.",
+    "cronwizard_warning_timeempty":
+        "Please add one or more time items.",
+    "cronwizard_script_addsnippet":
+        "[ add code snippet ]",
+    "cronwizard_eventtype_label":
+        "Event type",
+    "cronwizard_time_label":
+        "Time",
+    "cronwizard_add_time":
+        "Add",
+    "cronwizard_select_type":
+        "Type",
+    "cronwizard_select_modules":
+        "Modules",
+    "cronwizard_section_occurrence":
+        "Occurrence",
+    "cronwizard_section_modules":
+        "Modules",
+    "cronwizard_section_script":
+        "Script",
+    "configure_schedulerservice_editevents":
+        "Edit Events",
+    "configure_schedulerservice_calendarview":
+        "Calendar View",
+    "no_device_found_for_manufacturerId":
+        "No device info was found for manufacturer ID",
+    "configure_program_autorestart": 
+        "Auto restart program on failure",
+"##":
+"## COMMON LOCALES",
+"##":
+"##",
+    "common_month_jan":
+        "Jan",
+    "common_month_feb":
+        "Feb",
+    "common_month_mar":
+        "Mar",
+    "common_month_apr":
+        "Apr",
+    "common_month_may":
+        "Mai",
+    "common_month_jun":
+        "Jun",
+    "common_month_jul":
+        "Jul",
+    "common_month_aug":
+        "Aug",
+    "common_month_sep":
+        "Sep",
+    "common_month_oct":
+        "Okt",
+    "common_month_nov":
+        "Nov",
+    "common_month_dec":
+        "Dez",
+    "common_dayofweek_sun":
+        "So",
+    "common_dayofweek_mon":
+        "Mo",
+    "common_dayofweek_tue":
+        "Di",
+    "common_dayofweek_wed":
+        "Mi",
+    "common_dayofweek_thu":
+        "Do",
+    "common_dayofweek_fri":
+        "Fr",
+    "common_dayofweek_sat":
+        "Sa",
+    "common_command_cancel":
+        "Abbrechen",
+    "common_command_ok":
+        "Ok",
+    "common_command_proceed":
+        "fortfahren",
+    "common_command_save":
+        "Speichern",
+    "common_status_notset":
+        "Nicht gesetzt",
+    "common_voice_control":
+        "Voice Control",
+    "common_command_delete":
+        "Delete",
+    "common_command_upload":
+        "Upload",
+    "common_select_none":
+        "None",
+    "common_command_exit":
+        "Exit",
+    "common_command_close":
+        "Close",
+    "common_command_module":
+        "Module",
+    "common_command_modules":
+        "Modules",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Home",
+    "home_menu_groups":
+        "Gruppe",
+    "home_menu_statistics":
+        "Statistics",
+    "home_menu_automation":
+        "Automation",
+    "home_menu_programeditor":
+        "Programs",
+    "home_menu_widgeteditor":
+        "Widgets",
+    "home_menu_scheduler":
+        "Scheduler",
+    "home_menu_system":
+        "System",
+    "home_menu_settings":
+        "Settings",
+    "home_menu_maintenance":
+        "Maintenance",
+    "home_menu_about":
+        "Über uns",
+    "home_menu_about_homegenie":
+        "Über HomeGenie",
+    "home_menu_about_version":
+        "Version",
+    "home_menu_about_whatshot":
+        "What's hot",
+    "home_menu_about_userguide":
+        "Users Guide",
+    "home_menu_about_programming":
+        "Programming Guide",
+    "home_menu_about_forum":
+        "Users Forum",
+    "home_menu_about_support":
+        "Keep HomeGenie Up!"
+}

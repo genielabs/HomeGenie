@@ -1,0 +1,844 @@
+/* Fonts */
+
+body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oxygen', Thaoma, Arial, sans-serif !important;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+.inline {
+    display: inline-block !important;
+}
+
+.ui-datebox-container {
+    padding: 10px;
+}
+
+.label-small {
+    font-size: 10pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.caption {
+    font-size: 8pt;
+    text-transform: uppercase;
+}
+
+.title-normal {
+    font-size: 18pt;
+}
+
+.title-medium {
+    font-size: 24pt;
+}
+
+.title-big {
+    font-size: 36pt;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+div[data-ui-field="wallpaper"] {
+    background: url() center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.centered-text {
+    text-align: center;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    color: blue;
+}
+#bootprogress_text {
+    font-size: 20px;
+    margin: 8px;
+}
+#bootprogress_bar_container {
+    height: 48px;
+    border: solid 2px blue;
+    width: 60vw;
+    left: 20vw;
+    right: 20vw;
+    position: absolute;
+    display:none;
+    border-radius: 32px;
+}
+#bootprogress_bar {
+    height: 100%;
+    background: #03A9F4;
+    border-radius: 32px;
+}
+
+/* Code Mirror */
+
+#fullscreen_edit_box .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    display: block;
+    cursor: default;
+}
+
+#fullscreen_edit_box .CodeMirror-code span {
+    font-family: Courier New, Courier, monospace !important;
+    font-size: 12pt !important;
+    white-space: pre;
+    line-height: 16pt;
+}
+
+#fullscreen_edit_box .CodeMirror-linenumber {
+    padding-top: 3px;
+    font-size: 9pt;
+    font-family: Courier New, Courier, monospace !important;
+}
+
+#fullscreen_edit_box .CodeMirror-scroll {
+    overflow-x: auto;
+}
+
+#fullscreen_edit_box .CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: center;
+    background-repeat: repeat-x;
+}
+
+#page_widgeteditor_editwidget .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    position: absolute;
+    top: 60px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    display: block;
+    cursor: default;
+}
+
+#page_widgeteditor_editwidget .CodeMirror-code span {
+    font-family: Courier New, Courier, monospace !important;
+    font-size: 11pt !important;
+    white-space: pre;
+    line-height: 12pt;
+}
+
+#page_widgeteditor_editwidget .CodeMirror-linenumber {
+    font-size: 9pt;
+    font-family: Courier New, Courier, monospace !important;
+}
+
+#page_widgeteditor_editwidget .CodeMirror-scroll {
+    overflow-x: auto;
+}
+
+#page_widgeteditor_editwidget .CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: bottom;
+    background-repeat: repeat-x;
+}
+
+
+
+#page_automation_editprogram .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    position: absolute;
+    top: 44px;
+    bottom: 10px;
+    left: 5px;
+    right: 5px;
+    display: block;
+    cursor: default;
+}
+
+#page_automation_editprogram .CodeMirror-code span {
+    font-family: Courier New, Courier, monospace !important;
+    font-size: 11pt !important;
+    white-space: pre;
+    line-height: 12pt;
+}
+
+#page_automation_editprogram .CodeMirror-linenumber {
+    font-size: 9pt;
+    font-family: Courier New, Courier, monospace !important;
+}
+
+#page_automation_editprogram .CodeMirror-scroll {
+    overflow-x: auto;
+}
+
+#page_automation_editprogram .CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: bottom;
+    background-repeat: repeat-x;
+}
+
+#autorestartenabled .ui-checkbox {
+    display: inline-block;
+    margin-left: 4px;
+}
+
+#systemsettings_browserepo div[data-ui-field="description_text"] pre {
+    margin-left: 8px;
+    border-left: solid 2px gray;
+    padding-left: 8px;
+}
+
+#systemsettings_browserepo h4 {
+    font-weight: bold;
+}
+
+
+/* General purpose */
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.programline {
+    margin: 10px;
+}
+
+input[type=number] {
+    width: 70px;
+}
+
+.ui-slider-track {
+    margin-left: 100px;
+}
+
+
+/* HomeGenie UI */
+
+#systemsettings_updateinstall_popup-popup,
+#systemsettings_zwavediscovery_popup-popup {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+}
+
+#automationprograms_program_options-popup {
+    min-width: 280px;
+    max-width: 90%;
+}
+
+#automation_group_module_edit-popup {
+    width: 400px;
+}
+
+.hg-event-popup {
+    position: fixed;
+    background-color: black;
+    color: white;
+    font-family: monospace !important;
+    font-size: 9pt;
+    border: solid 2px rgba(200,200,200,0.75);
+    padding: 4px;
+    margin-top: 75px;
+    right: -300px;
+    width: 285px;
+    max-height: 100px;
+    opacity: 0.0;
+    z-index: 1973;
+}
+
+.hg-popup-a {
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.hg-popup-b {
+    min-width: 300px;
+    max-width: 600px;
+}
+
+.hg-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
+}
+
+.hg-program-options-scroll {
+    max-height: 280px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.hg-widget-a {
+    width: 260px;
+    margin: 10px;
+    min-height: 160px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.hg-widget-a2 {
+    width: 520px;
+    margin: 10px;
+    min-height: 160px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.hg-widget-b {
+    min-width: 260px;
+    max-width: 540px;
+    margin: 10px;
+    min-height: 180px;
+    position: relative;
+}
+
+.hg-widget-c {
+    width: auto;
+    margin: 10px;
+    min-height: 180px;
+    position: relative;
+}
+
+.hg-widget-a div[data-ui-field=description] {
+    font-size: 9pt !important;
+}
+
+.hg-widget-a div[data-ui-field=name] {
+    font-weight: bold !important;
+    font-size: 12pt !important;
+}
+
+.hg-widget-a div.ui-footer, .hg-widget-a2 div.ui-footer, .hg-widget-b div.ui-footer, .hg-widget-c div.ui-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 20px;
+}
+
+.hg-widget-a div.ui-header, .hg-widget-b div.ui-header {
+    height: 40px;
+}
+
+.hg-widget-header {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 18pt;
+    margin: 0;
+    padding: 0;
+}
+
+.hg-widget-footer {
+    padding-left: 5px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+}
+
+.hg-widget-group-title {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.hg-widget-container {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+
+    .hg-widget-container .ui-slider {
+        min-width: 120px;
+    }
+
+.hg-widget-icon {
+    margin-left: 20px;
+    height: 64px;
+}
+
+
+/* Indicators Icons */
+
+.hg-indicator-energy {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/energy-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-temperature {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/temperature-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-humidity {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/humidity-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-luminance {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/luminance-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-smoke {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/smoke-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-flood {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/flood-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-heat {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/heat-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-level {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/level-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-alarm {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/alarm-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-generic {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/generic-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-bulb {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/bulb-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-plug {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/plug-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-door {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/door-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+/* New indicator icons for MySensor integration
+	flow, volume, distance, infrared, uv
+*/
+.hg-indicator-flow, .hg-indicator-volume, .hg-indicator-distance, .hg-indicator-infrared, .hg-indicator-uv {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-flow {
+    background: url("../images/indicators/flow-black.png") no-repeat scroll 0 6px transparent;
+}
+
+.hg-indicator-volume {
+    background: url("../images/indicators/volume-black.png") no-repeat scroll 0 6px transparent;
+}
+
+.hg-indicator-distance {
+    background: url("../images/indicators/distance-black.png") no-repeat scroll 0 6px transparent;
+}
+
+.hg-indicator-infrared {
+    background: url("../images/indicators/infrared-black.png") no-repeat scroll 0 6px transparent;
+}
+
+.hg-indicator-uv {
+    background: url("../images/indicators/uv-black.png") no-repeat scroll 0 6px transparent;
+}
+
+/* END new Icons for MySensors*/
+
+
+/* Inverted icons for theme A */
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-energy, div.ui-bar-inherit span.hg-indicator-energy {
+    background: url("../images/indicators/energy.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-temperature, div.ui-bar-inherit span.hg-indicator-temperature {
+    background: url("../images/indicators/temperature.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity, div.ui-bar-inherit span.hg-indicator-humidity {
+    background: url("../images/indicators/humidity.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance, div.ui-bar-inherit span.hg-indicator-luminance {
+    background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-smoke, div.ui-bar-inherit span.hg-indicator-smoke {
+    background: url("../images/indicators/smoke.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-flood, div.ui-bar-inherit span.hg-indicator-flood {
+    background: url("../images/indicators/flood.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-heat, div.ui-bar-inherit span.hg-indicator-heat {
+    background: url("../images/indicators/heat.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm, div.ui-bar-inherit span.hg-indicator-alarm {
+    background: url("../images/indicators/alarm.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-generic, div.ui-bar-inherit span.hg-indicator-geniric {
+    background: url("../images/indicators/generic.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-level, div.ui-bar-inherit span.hg-indicator-level {
+    background: url("../images/indicators/level.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-bulb, div.ui-bar-inherit span.hg-indicator-bulb {
+    background: url("../images/indicators/bulb.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-plug, div.ui-bar-inherit span.hg-indicator-plug {
+    background: url("../images/indicators/plug.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inherit span.hg-indicator-door {
+    background: url("../images/indicators/door.png") no-repeat scroll 0 6px transparent;
+}
+
+/* MySensor Inverted Icons */
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-flow, div.ui-bar-inherit span.hg-indicator-flow {
+    background: url("../images/indicators/flow.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-volume, div.ui-bar-inherit span.hg-indicator-volume {
+    background: url("../images/indicators/volume.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-distance, div.ui-bar-inherit span.hg-indicator-distance {
+    background: url("../images/indicators/distance.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-infrared, div.ui-bar-inherit span.hg-indicator-infrared {
+    background: url("../images/indicators/infrared.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-uv, div.ui-bar-inherit span.hg-indicator-uv {
+    background: url("../images/indicators/uv.png") no-repeat scroll 0 6px transparent;
+}
+/* END MySensor Inverted Icons */
+
+.auto-invert {
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
+
+div.ui-page-theme-a div.ui-body-inherit img.auto-invert, div.ui-bar-inherit img.auto-invert {
+    filter: invert(0);
+    -webkit-filter: invert(0);
+}
+
+
+/* other customizations */
+
+.hg-wizard-capturebutton {
+    cursor: pointer;
+    position: absolute;
+    margin: 2px;
+    padding: 4px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    border: 1px solid green;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: darkgreen;
+}
+
+    .hg-wizard-capturebutton .active {
+        border: 1px solid lime;
+        background-color: green;
+    }
+
+.hg-wizard-grid {
+    background-color: white;
+    color: black;
+}
+
+    .hg-wizard-grid:hover {
+        background-color: yellow;
+        cursor: pointer;
+    }
+
+    .hg-wizard-grid div {
+        padding: 6px;
+        border-bottom: 1px solid lightgray;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+.hg-wizard-grid-linenumber {
+    width: 80px;
+    height: 26px;
+    padding-top: 7px;
+    float: left;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.hg-wizard-grid-linenumber:hover {
+    background-color: limegreen;
+    cursor: pointer;
+}
+
+.hg-scheduler-table-row {
+}
+
+#groups_panel {
+    width: 300px;
+}
+
+#module_programs_featurelist {
+    max-height: 40px; overflow: hidden;
+    vertical-align: middle;
+    line-height: 20px;
+    font-size: 110%;
+    font-weight: bold;
+    margin-left: 8px;
+}
+#module_programs_featurelist span {
+    display: block;
+    text-align: center;
+}
+
+#page_automation_editprogram label {
+    font-weight: bold;
+    font-size: 11pt;
+    font-variant: small-caps;
+}
+
+.ui-slider-track.ui-mini {
+    height: 12px;
+    top: 8px;
+    margin: 0px 15px 0px 90px; /* add this line to file */
+}
+
+div.ui-slider-switch.ui-mini {
+    height: 29px;
+    top: 0;
+    margin: .5em 0; /* add this line */
+}
+
+
+.ui-li-has-thumb .ui-btn {
+    min-height: 18px !important;
+    max-height: 18px !important;
+    height: 18px !important;
+    padding-left: 50px !important;
+}
+
+.ui-autocomplete {
+    z-index: 100000000 !important;
+}
+
+.ui-widget {
+    background-image: none;
+    opacity: 0.9;
+}
+/*.ui-menu-item { color: red; text-shadow: black; }*/
+.ui-slider {
+    min-width: 120px;
+}
+
+div[data-role=page]:not(input) {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.drag-collide {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+.freewall {
+    float: left;
+}
+
+/* Custom Icons */
+
+[class*=ui-block-] > a.ui-list-btn-option,
+.ui-list-btn-option {
+    height: 88px;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    border-right: 0;
+}
+
+[class*=ui-block-] > a.ui-list-btn-option-mini,
+.ui-list-btn-option-mini {
+    height: 44px;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    border-right: 0;
+}
+
+.ui-icon-microphone:after {
+    background-image: url("../images/icons/micro-black.png");
+    background-position: 3px 3px;
+}
+
+div.ui-page-theme-a .ui-icon-microphone:after {
+    background-image: url("../images/icons/micro-white.png");
+    background-position: 3px 3px;
+}
+
+.ui-datepicker {
+    font-size: 14pt;
+    height: 300px;
+    width: auto;
+}
+
+.ui-datepicker-calendar .ui-state-default, .ui-widget-content .ui-state-default {
+    background: none;
+}
+
+.ui-datepicker-calendar .ui-state-highlight, .ui-widget-content .ui-state-highlight {
+    color: yellow;
+    text-decoration: underline;
+}
+
+.ui-datepicker-year {
+    display: none;
+}
+
+/*** jQuery Mobile overrides ***/
+.ui-header .ui-title, .ui-footer .ui-title {
+    margin: 0 2%;
+}
+
+/**** media queries ****/
+
+/** Small Mobile **/
+@media only screen and (max-width: 420px), only screen and (max-device-width: 420px) {
+    .hg-event-popup {
+        display: none;
+    }
+    #automation_group_module_edit-popup {
+        width: 360px;
+    }
+}
+
+
+/** Mobile **/
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
+}
+
+/** Tablet **/
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+}
+
+/** Tablet (landscape) **/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+}
+
+/* google maps location auto-complete */
+.pac-container {
+    z-index: 100000;
+}

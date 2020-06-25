@@ -1,0 +1,161 @@
+/*
+    This file is part of HomeGenie Project source code.
+
+    HomeGenie is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    HomeGenie is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
+
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using HomeGenie.Service.Constants;
+using HomeGenie.Automation.Engines;
+
+namespace HomeGenie.Automation
+{
+    public class MethodRunResult
+    {
+        public Exception Exception = null;
+        public object ReturnValue = null;
+    }
+
+    [Serializable()]
+    public class ProgramBlock
+    {
+        private IProgramEngine programEngine;
+        private bool isProgramEnabled;
+        private string codeType = "";
+
+        // event delegates
+        public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
+        public event EnabledStateChangedEventHandler EnabledStateChanged;
+
+        // c# program public members
+        public string ScriptSetup { get; set; }
+        public string ScriptSource { get; set; }
+        public string ScriptErrors { get; set; }
+
+        // common public members
+        public string Domain  { get; set; }
+        public int Address  { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Group { get; set; }
+        public List<ProgramFeature> Features  { get; set; }
+        public bool AutoRestartEnabled { get; set; }
+
+        [XmlIgnore]
+        public bool WillRun { get; set; }
+        [XmlIgnore]
+        public bool IsRunning { get; set; }
+        [XmlIgnore]
+        public object OperationLock = new object();
+
+        public DateTime? ActivationTime { get; set; }
+        public DateTime? TriggerTime { get; set; }
+
+        public ProgramBlock()
+        {
+            // init stuff
+            Domain = Domains.HomeAutomation_HomeGenie_Automation;
+            Address = 0;
+            Features = new List<ProgramFeature>();
+
+            Type = "Wizard";
+            ScriptSetup = "";
+            ScriptSource = "";
+            ScriptErrors = "";
+            //
+            isProgramEnabled = false;
+            IsRunning = false;
+        }
+
+        public string Type
+        {
+            get { return codeType; }
+            set
+            {
+                bool changed = codeType != value;
+                codeType = value;
+                if (changed || programEngine == null)
+                {
+                    if (programEngine != null)
+                    {
+                        programEngine.Unload();
+                        programEngine = null;
+                    }
+                    switch (codeType.ToLower())
+                    {
+                        case "csharp":
+                            programEngine = new CSharpEngine(this);
+                            break;
+                        case "python":
+                            programEngine = new PythonEngine(this);
+                            break;
+                        case "javascript":
+                            programEngine = new JavascriptEngine(this);
+                            break;
+                        case "wizard":
+                            programEngine = new WizardEngine(this);
+                            break;
+                        case "arduino":
+                            programEngine = new ArduinoEngine(this);
+                            break;
+                        default:
+                            throw new NotImplementedException(
+                                string.Format("Program engine for type {0} is not implemented", codeType)
+                            );
+                    }
+                }
+            }
+        }
+
+        public bool IsEnabled
+        {
+            get { return isProgramEnabled; }
+            set
+            {
+                if (isProgramEnabled != value)
+                {
+                    isProgramEnabled = value;
+                    if (isProgramEnabled)
+                    {
+                        ActivationTime = DateTime.UtcNow;
+                        if (programEngine != null) programEngine.Load();
+                    }
+                    else
+                    {
+                        if (programEngine != null) programEngine.Unload();
+                    }
+
+                    if (EnabledStateChanged != null) EnabledStateChanged.Invoke(this, value);
+                }
+            }
+        }
+
+        [XmlIgnore, JsonIgnore]
+        public ProgramEngineBase Engine
+        {
+            get { return (ProgramEngineBase) programEngine; }
+        }
+    }
+}
+

@@ -1,0 +1,77 @@
+<div data-role="page" id="page_configure_interfaces">
+    {include pages/header.html}
+
+    <div class="ui-content">
+
+        <img src="images/interfaces.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_interfaces_heading">Settings</h3></div>
+
+        <div data-ui-field="interface_list"></div>
+
+    </div>
+        
+    <div data-ui-field="import-popup" class="ui-corner-all hg-popup-a" data-transition="pop" data-overlay-theme="b">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_interfaces_importdriver">Install Add-ons</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h4 data-locale-id="configure_interfaces_downloadfromurl">Download add-on package from URL</h4>
+            <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
+                <input data-ui-field="download-url" type="text" title="Add-on driver from URL" name="url" placeholder="(enter url)" />
+                <a data-ui-field="download-btn" data-locale-id="configure_interfaces_download" class="ui-btn ui-shadow ui-corner-all">Download &amp; install</a>
+            </fieldset>
+            <h4 data-locale-id="configure_interfaces_uploadpackage">Upload add-on package</h4>
+            <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
+                <form data-ui-field="import-form" target="interface_install_uploadframe" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Config/Interface.Import/" data-ajax="false">
+                    <input data-ui-field="upload-file" type="file" title="Add-on driver from file" name="file" />
+                </form>
+                <a data-ui-field="upload-btn" data-locale-id="configure_interfaces_upload" class="ui-btn ui-shadow ui-corner-all">Upload &amp; install</a>
+                <iframe data-ui-field="upload-frame" name="interface_install_uploadframe" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+            </fieldset>
+        </div>
+    </div> 
+
+    <div id="configure_system_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+            <li>
+                <a data-locale-id="configure_system_packagemanager" data-ui-field="package_install" href="#page_configure_maintenance" class="ui-btn ui-btn-a ui-btn-icon-right ui-icon-fa-download">
+                    Package Manager
+                </a>
+            </li>
+            <li>
+                <a data-locale-id="configure_interfaces_install" data-ui-field="interface_install" data-rel="back" class="ui-btn ui-icon-fa-file-zip-o u ui-btn-icon-right">
+                    Install Interface
+                </a>
+            </li>
+        </ul>
+    </div>
+        
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
+                    </a>
+                </li>
+                <li>
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#configure_system_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                        Actions
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div>
+<!-- hg page init script -->
+<script type="text/javascript">
+    HG.WebApp.SystemSettings.InitializePage();
+</script>

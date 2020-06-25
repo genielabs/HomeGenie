@@ -1,0 +1,131 @@
+<!-- Control -->
+<div data-ui-field="wallpaper" style="position:fixed;width:100%;height:100%;background-position:center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-o-background-size:cover;"></div>
+<div data-role="page" id="page_control" data-upload-dropzone="wallpaper" style="background:none">
+
+    <div id="control_macrorecord_optionspopup" class="hg-popup-a" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header"><h1 data-locale-id="control_macrorecord_options">Options</h1></div>
+        <div class="ui-content">
+            <h4 data-locale-id="control_macrorecord_options_pause">Pause Between commands</h4>
+            <div align="center">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <label data-locale-id="control_macrorecord_options_none" for="macrorecord_delay_none">None</label>
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_none" type="radio" data-icon="gear" data-iconpos="left" />
+                    <label data-locale-id="control_macrorecord_options_mimic" for="macrorecord_delay_mimic">Mimic</label>
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_mimic" type="radio" data-icon="gear" data-iconpos="left" />
+                    <label data-locale-id="control_macrorecord_options_fixed" for="macrorecord_delay_fixed">Fixed</label>
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_fixed" type="radio" data-icon="gear" data-iconpos="left" />
+                </fieldset>
+            </div>
+            <fieldset data-role="controlgroup">
+                <label data-locale-id="control_macrorecord_options_pauseduration" for="macrorecord_delay_seconds">Fixed pause seconds</label>
+                <input id="macrorecord_delay_seconds" type="number" step="0.1" min="0" value="0" />
+            </fieldset>
+        </div>
+    </div>
+
+    <div id="toolbar_control" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a id="control_bottombar_voice_button" data-locale-id="common_voice_control" class="ui-btn ui-icon-carat-u ui-btn-icon-left" href="#">
+                        Voice Control
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn ui-btn-icon-left ui-icon-fa-bar-chart" data-locale-id="home_menu_statistics" href="#page_analyze" data-transition="none">Statistics</a>
+                </li>
+                <li>
+                    <a data-locale-id="configure_program_bbaractions" class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#control_actionmenu" data-rel="popup" data-transition="slideup">
+                        Actions
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+
+        <div id="speechinput" class="ui-bar-inherit" style="display:none;position:absolute;bottom:0;margin-bottom:34px;left:0;right:0;padding-left:5px;padding-right:5px">
+            <table width="100%">
+                <tr>
+                    <td><input id="voicerecognition_text" data-locale-id="home_voicerecognition_text_placeholder" placeholder="Click the button for voice control or type a sentence..." /></td>
+                    <td width="1%"><a id="voicerecognition_button" data-locale-id="home_voicerecognition_voice" class="ui-btn ui-btn-icon-left ui-corner-all ui-icon-microphone" href="javascript:recognition.start()">Voice</a></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div id="toolbar_widgetssort" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a class="ui-btn ui-icon-delete ui-btn-icon-left" href="javascript:HG.WebApp.Control.WidgetsManagerCancel()" data-locale-id="control_widgetsmanager_cancel" href="#">
+                        Cancel
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn ui-icon-check ui-btn-icon-left" href="javascript:HG.WebApp.Control.WidgetsManagerSave()" data-locale-id="control_widgetsmanager_save">
+                        Save
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="toolbar_macrorecord" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a class="ui-btn ui-icon-delete ui-btn-icon-left" href="javascript:HG.WebApp.Control.RecordMacroDiscard()" data-locale-id="control_macrorecord_discard" href="#">
+                        Discard
+                    </a>
+                </li>
+                <li>
+                    <a id="btn_control_macrorecord" class="ui-btn ui-icon-check ui-btn-icon-left" href="javascript:HG.WebApp.Control.RecordMacroSave()" data-locale-id="control_macrorecord_save">
+                        Save
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn ui-icon-gear ui-btn-icon-right" href="#control_macrorecord_optionspopup" data-rel="popup" data-position-to="window" data-locale-id="control_macrorecord_options" data-transition="slideup">
+                        Options
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" align="left">
+        <div>
+            <a data-locale-id="home_menu_home" data-ui-field="homegenie_panel_button" href="#groups_panel" class="ui-btn ui-btn-icon-left ui-icon-home ui-mini ui-corner-all" style="margin:2px">Home</a>
+            <a data-locale-id="home_menu_configure" data-ui-field="homegenie_panel_button" href="#side_panel" class="ui-btn ui-btn-icon-left ui-icon-gear ui-mini ui-corner-all" style="margin:2px">Configure</a>
+        </div>
+        <div style="position:absolute;top:6px;left:-42px;margin-left:50%;margin-right:50%;font-family:Lobster !important;font-size:16pt">HomeGenie</div>
+        <div style="position:absolute;z-index:1000;width:100%;">
+            <div class="ui-bar-inherit" style="position:absolute;width:100%;height:30px;opacity:0.8;"></div>
+            <div class="ui-header ui-shadow ui-bar-inherit" style="display:inline-block;width:100%;background:transparent;">
+                <div>
+                    <p style="margin:1px;padding-left:8px;font-size:15pt;"><strong id="control_groupmenutitle">&nbsp;</strong></p>
+                </div>
+                <div style="position:absolute;right:10px;bottom:-3px;">
+                    <table style="vertical-align:middle"><tr id="control_groupindicators"></tr></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-content" style="margin:0;padding:0;padding-top:40px;padding-bottom:80px">
+        <div id="control_groupcontent" style="padding:0;margin:0">
+        </div>
+    </div>
+    <div id="control_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul id="control_custom_actionmenu" data-role="listview" data-inset="false" style="min-width:210px;"></ul>
+        <div class="ui-body-inherit" style="height:2px;width:100%;overflow:hidden;border:0">&nbsp;</div>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;" data-mini="true">
+            <li id="control_actionmenu_macrorecord" data-mini="true"><a data-locale-id="control_macrorecord_record_macro" class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true" href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
+            <li id="control_actionmenu_configuregroup"><a data-locale-id="control_group_configure" class="ui-btn ui-icon-grid ui-btn-icon-right" href="javascript:HG.WebApp.Control.ConfigureGroup();">Configure Group</a></li>
+            <li id="control_actionmenu_widgetsmanager" data-mini="true"><a data-locale-id="control_widgets_manager" class="ui-btn ui-icon-fa-arrows-alt ui-btn-icon-right" data-mini="true" href="javascript:HG.WebApp.Control.WidgetsManager()">Widgets Manager</a></li>
+        </ul>
+    </div>
+</div>
+<!-- hg page init script  -->
+<script type="text/javascript">
+    HG.WebApp.Control.InitializePage();
+</script>

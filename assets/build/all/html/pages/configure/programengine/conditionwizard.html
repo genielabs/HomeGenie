@@ -1,0 +1,591 @@
+<div id="automation_domain" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header">
+        <h1>Wizard (1/5)</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectconditioncontext" style="margin-top:-10px;font-weight:bold">Select condition context</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul id="automation_conditiontarget" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+            <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_target_popup">HomeGenie</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a data-locale-id="configure_program_deletecancel" data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" href="#">Cancel</a>
+            </div>
+            <div class="ui-block-b">
+                <a data-locale-id="configure_program_oroperator" id="condition_add_oroperator" class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all" href="#cancel">OR operator</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_target_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (2/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectconditionsubject" style="margin-top:-10px;font-weight:bold">Select condition subject</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul id="automation_condition_target" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.Ui.SwitchPopup('#automation_target_popup', '#automation_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_target_homegenie_parameter" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (3/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectconditionproperty" style="margin-top:-10px;font-weight:bold">Select comparison property</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul id="automation_condition_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.Ui.SwitchPopup('#automation_target_homegenie_parameter', '#automation_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_condition_type" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (4/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectoperator" style="margin-top:-10px;font-weight:bold">Select comparison operator</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul data-role="listview" data-inset="false" style="height:180px;max-height:180px;">
+            <li data-context-value="LessThan" id="configure_program_conditionlessthan"><a data-locale-id="configure_program_operatorless" data-rel="popup" href="#automation_condition_value">Less Than</a></li>
+            <li data-context-value="Equals"><a data-locale-id="configure_program_operatorequal" data-rel="popup" href="#automation_condition_value">Equals</a></li>
+            <li data-context-value="GreaterThan" id="configure_program_conditiongreaterthan"><a data-locale-id="configure_program_operatorgreaterthan" data-rel="popup" href="#automation_condition_value">Greater Than</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_type', '#automation_target_homegenie_parameter', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="automation_condition_value" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (5/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <fieldset data-role="controlgroup" data-type="vertical" style="height:134px;max-height:134px;">
+            <input type="text" name="value" id="comparison_value_input" onkeyup="build_condition()" value="" placeholder="value" />
+            <a onclick="HG.Ui.SwitchPopup('#automation_condition_value', '#automation_condition_value_domain', true)" class="ui-btn ui-corner-all">Module Parameter Value</a>
+        </fieldset>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value', '#automation_condition_type', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+            <div class="ui-block-b">
+                <a data-locale-id="configure_program_wizarddone" id="condition_completed" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="#cancel">Done</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_condition_value_domain" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (5/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul id="automation_conditionvalue_domain" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+            <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_target_popup">HomeGenie</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_condition_value_address" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (5/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul id="automation_conditionvalue_address" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a">
+            <div class="ui-block-a" align="center">
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_condition_value_property" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header"><h1>Wizard (5/5)</h1></div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
+            <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;margin-top:-10px;margin-bottom:10px;height:70px;"></p>
+        </div>
+        <ul id="automation_conditionvalue_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.Ui.SwitchPopup('#automation_condition_value_property', '#automation_condition_value_address', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="automation_capture_condition_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b" data-transition="pop">
+    <div data-role="header" class="ui-corner-top">
+        <h1 data-locale-id="configure_program_conditioncapturetitle">Capturing Conditions</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <h3 data-locale-id="configure_program_waitingnewcondition" class="ui-title">Waiting for new events...</h3>
+        <p data-locale-id="configure_program_waitingnewconditionadvice"></p>
+        <a data-locale-id="configure_program_capturestop" href="#" class="ui-btn ui-corner-all" data-inline="true" data-rel="back">Stop</a>
+    </div>
+</div>
+<div id="automation_condition_delete" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-overlay-theme="b">
+    <div data-role="header" class="ui-corner-top">
+        <h1 data-locale-id="configure_program_wizard_editline_title">Edit Line</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <p data-locale-id="configure_program_wizard_editconline_prompt">Move or delete line <span id="condition_linenumber_label" style="font-weight:bold"></span></p>
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <label data-locale-id="configure_program_wizard_editline_number" for="condition_linenumber_input">New line number</label>
+                <input id="condition_linenumber_input" type="range" min="1" max="1" name="value" value="1" placeholder="line number" />
+            </li>
+        </ul>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a data-locale-id="configure_program_wizard_editline_delete" id="condition_delete_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Delete</a>
+            </div>
+            <div class="ui-block-b">
+                <a data-locale-id="configure_program_wizard_editline_change" id="condition_move_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Move</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    //
+    var condition_targetdomain = '';
+    var condition_targetsubject = '';
+    var condition_targetparameter = '';
+    var condition_type = '';
+    var condition_value = '';
+    //
+    var selected_condition_index = -1;
+    //
+    $(document).ready(function (e) {
+
+        //
+        // automation pop wizard popups
+        $('#automation_domain').on('popupbeforeposition', function (event) {
+            condition_targetdomain = '';
+            condition_targetsubject = '';
+            condition_targetparameter = '';
+            condition_type = '';
+            condition_value = '';
+            //
+            $('#comparison_value_input').val('');
+            //
+            build_condition();
+        });
+
+        $('#automation_target_popup').on('popupbeforeposition', function (event) {
+            $('#automation_condition_target').listview().empty();
+            //
+            switch (condition_targetdomain) {
+                case 'HomeAutomation.HomeGenie':
+                    $('#automation_condition_target').append('<li data-context-value="Scheduler"><a>Scheduler</a></li>');
+                    break;
+                default:
+                    $('#automation_condition_target').append(automationpage_GetModulesListViewItems(condition_targetdomain, false));
+                    break;
+            }
+            $('#automation_condition_target').listview('refresh');
+            //
+            build_condition();
+        });
+
+        $('#automation_target_homegenie_parameter').on('popupbeforeposition', function (event) {
+            $('#automation_condition_property').listview().empty();
+            //
+            var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition_targetdomain, condition_targetsubject);
+            if (module != null && (module.Address == "RF" || module.Address == "IR")) {
+                $('#automation_condition_property').append('<li data-context-value="Receiver.RawData"><a>Receiver.RawData</a></li>');
+            }
+            else {
+                switch (condition_targetdomain) {
+                    case 'HomeAutomation.HomeGenie':
+                        //$('#automation_condition_property').append('<li data-context-value="Meter.WattsCounter"><a>Meter.WattsCounter</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Meter.WattsLoad"><a>Meter.WattsLoad</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Scheduler.TimeEvent"><a>Scheduler.TimeEvent</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Scheduler.TriggeredEvent"><a>Scheduler.TriggeredEvent</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.CronEvent"><a>Scheduler.CronEvent</a></li>');
+
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.Date"><a>Scheduler.Date</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.Time"><a>Scheduler.Time</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateTime"><a>Scheduler.DateTime</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateDay"><a>Scheduler.DateDay</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateMonth"><a>Scheduler.DateMonth</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateYear"><a>Scheduler.DateYear</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateDayOfWeek"><a>Scheduler.DateDayOfWeek</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateHour"><a>Scheduler.DateHour</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateMinute"><a>Scheduler.DateMinute</a></li>');
+
+                        //$('#automation_condition_property').append('<li data-context-value="Security.ArmedStatus"><a>Security.ArmedStatus</a></li>');
+                        break;
+                    default:
+                        if (module != null) {
+                            var comparable_props = HG.WebApp.ProgramEdit.GetModuleComparableProperties(module);
+                            for (var p = 0; p < comparable_props.length; p++) {
+                                var prop = comparable_props[p];
+                                $('#automation_condition_property').append('<li data-context-value="' + prop.Name + '"><a>' + prop.Name + '</a></li>');
+                            }
+                        }
+                        break;
+                }
+            }
+            $('#automation_condition_property').listview('refresh');
+            //
+            build_condition();
+        });
+
+        $('#automation_condition_type').on('popupbeforeposition', function (event) {
+            if (condition_targetparameter == 'Scheduler.TimeEvent' || condition_targetparameter == 'Receiver.RawData') {
+                $('#configure_program_conditionlessthan').hide();
+                $('#configure_program_conditiongreaterthan').hide();
+            }
+            else {
+                $('#configure_program_conditionlessthan').show();
+                $('#configure_program_conditiongreaterthan').show();
+            }
+            //
+            build_condition();
+        });
+
+        $('#automation_condition_value').on('popupbeforeposition', function (event) {
+            $('#comparison_value_input').val(condition_value);
+            build_command();
+        });
+        $('#automation_condition_delete').on('popupbeforeposition', function (event) {
+            $('#condition_linenumber_label').html('#' + (selected_condition_index + 1));
+            $('#condition_linenumber_input').val(selected_condition_index + 1);
+            $('#condition_linenumber_input').attr('max', HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length);
+            $('#condition_linenumber_input').slider('refresh');
+        });
+
+        //$('#automation_program_conditions').on('click', ' > li', function () {
+        //    selected_condition_index = $(this).index();
+        //});
+        $('#condition_delete_button').bind('click', function (event) {
+            if (selected_condition_index >= 0) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions.splice(selected_condition_index, 1);
+                automationpage_ConditionsRefresh();
+            }
+        });
+        $('#condition_move_button').bind('click', function (event) {
+            if (selected_condition_index >= 0 && newLine != selected_condition_index) {
+                var newLine = $('#condition_linenumber_input').val() - 1;
+                var conditions = HG.WebApp.ProgramEdit._CurrentProgram.Conditions;
+                var conditionObj = conditions[selected_condition_index];
+                var direction = (selected_condition_index > newLine ? -1 : +1);
+                for (var c = selected_condition_index; c != newLine; c += direction) {
+                    conditions[c] = conditions[c + direction];
+                }
+                conditions[newLine] = conditionObj;
+                automationpage_ConditionsRefresh();
+            }
+        });
+
+        $('#automation_conditiontarget').on('click', 'li', function () {
+            condition_targetdomain = $(this).attr('data-context-value');
+            HG.Ui.SwitchPopup('#automation_domain', '#automation_target_popup', true);
+        });
+
+        $('#automation_target_popup').on('click', 'li', function () {
+            condition_targetsubject = $(this).attr('data-context-value');
+            HG.Ui.SwitchPopup('#automation_target_popup', '#automation_target_homegenie_parameter', true);
+        });
+
+        $('#automation_target_homegenie_parameter').on('click', 'li', function () {
+            condition_targetparameter = $(this).attr('data-context-value')
+            HG.Ui.SwitchPopup('#automation_target_homegenie_parameter', '#automation_condition_type', true);
+        });
+
+        $('#automation_condition_type').on('click', 'li', function () {
+            condition_type = $(this).attr('data-context-value')
+            build_condition();
+            //
+            HG.Ui.SwitchPopup('#automation_condition_type', '#automation_condition_value', true);
+        });
+
+
+
+        $('#automation_conditionvalue_domain').on('click', 'li', function () {
+            var domain = $(this).attr('data-context-value');
+            //
+            $('#automation_conditionvalue_address').listview().empty();
+            //
+            $('#automation_conditionvalue_address').append(automationpage_GetModulesListViewItems(domain, false));
+            //
+            $('#automation_conditionvalue_address').listview('refresh');
+            //
+            build_condition();
+            //
+            HG.Ui.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value_address', true);
+        });
+
+
+        $('#automation_conditionvalue_address').on('click', 'li', function () {
+            var domain = $(this).attr('data-context-domain');
+            var address = $(this).attr('data-context-value');
+            //
+            $('#automation_conditionvalue_property').listview().empty();
+            //
+            var module = HG.WebApp.Utility.GetModuleByDomainAddress(domain, address);
+            if (module != null && (module.Address == "RF" || module.Address == "IR")) {
+                $('#automation_conditionvalue_property').append('<li data-context-value="Receiver.RawData"><a>Receiver.RawData</a></li>');
+            }
+            else if (module != null) {
+                var comparable_props = HG.WebApp.ProgramEdit.GetModuleComparableProperties(module);
+                for (var p = 0; p < comparable_props.length; p++) {
+                    var prop = comparable_props[p];
+                    $('#automation_conditionvalue_property').append('<li data-context-value=":' + module.Domain + '/' + module.Address + '/' + prop.Name + '"><a>' + prop.Name + '</a></li>');
+                }
+            }
+            $('#automation_conditionvalue_property').listview('refresh');
+            //
+            build_condition();
+            //
+            HG.Ui.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_property', true);
+        });
+
+        $('#automation_conditionvalue_property').on('click', 'li', function () {
+            condition_value = $(this).attr('data-context-value');
+            $('#comparison_value_input').val(condition_value);
+            //
+            build_condition();
+            //
+            HG.Ui.SwitchPopup('#automation_condition_value_property', '#automation_condition_value', true);
+        });
+
+        $('#comparison_value_input').on('keyup', function () {
+            condition_value = $('#comparison_value_input').val();
+            //
+            build_condition();
+        });
+        
+        $('#condition_add_oroperator').bind('click', function (event) {
+
+            conditionobj = {
+                'Domain': '',
+                'Target': '',
+                'Property': '',
+                'ComparisonOperator': 'LogicOrJoint',
+                'ComparisonValue': ''
+            };
+
+            if (selected_condition_index == -1) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
+            }
+            else {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions[selected_condition_index] = conditionobj;
+            }
+
+            automationpage_ConditionsRefresh();            
+        });
+
+        $('#condition_completed').on('click', function () {
+            condition_value = $('#comparison_value_input').val();
+
+            conditionobj = {
+                'Domain': condition_targetdomain,
+                'Target': condition_targetsubject,
+                'Property': condition_targetparameter,
+                'ComparisonOperator': condition_type,
+                'ComparisonValue': condition_value
+            };
+
+            if (selected_condition_index == -1) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
+            }
+            else {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions[selected_condition_index] = conditionobj;
+            }
+
+            automationpage_ConditionsRefresh();
+
+        });
+
+    });
+
+    function automationpage_WizardConditionAdd() {
+        selected_condition_index = -1;
+        $('#automation_domain').popup('open');
+    }
+
+    function automationpage_GetModulesListViewItems(domain, showall) {
+        var htmlopt = '';
+        var mods = HG.WebApp.ProgramEdit.GetDomainComparableModules(domain, showall);
+        for (var m = 0; m < mods.length; m++) {
+            htmlopt += '<li data-context-domain="' + mods[m].Domain + '" data-context-value="' + mods[m].Address + '"><a>' + mods[m].Address + ' (' + (mods[m].Name == null || mods[m].Name == '' ? mods[m].DeviceType : mods[m].Name) + ')' + '</a></li>'
+        }
+        return htmlopt;
+    }
+
+
+
+    function build_condition() {
+        var conditionstring = '... ?';
+
+        if (condition_targetdomain != '') {
+            conditionstring = condition_targetdomain;
+        }
+        if (condition_targetsubject != '') {
+            conditionstring += '<strong>/</strong>' + condition_targetsubject;
+        }
+        if (condition_targetparameter != '') {
+            conditionstring += '<br />&bull; <b>' + condition_targetparameter + '</b>';
+        }
+        if (condition_type != '') {
+            conditionstring += '<br />' + condition_type;
+        }
+        if (condition_value != '') {
+            var cval = condition_value;
+            if (cval[0] == ':') {
+                var path = cval.split('/');
+                var lastdot = path[0].lastIndexOf('.');
+                if (lastdot > 0) {
+                    cval = cval.substring(lastdot + 1);
+                }
+            }
+            conditionstring += '<br />&bull; <b>' + cval + '</b>';
+        }
+        $('body').find('[id=condition_wizard_text]').each(function () { $(this).html(conditionstring); });
+    }
+
+
+    function automationpage_ConditionChangeLine(lineNumber) {
+        selected_condition_index = lineNumber;
+        $('#automation_condition_delete').popup('open');
+    }
+
+    function automationpage_ConditionEditLine(lineNumber) {
+        selected_condition_index = lineNumber;
+        var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[lineNumber];
+        condition_targetdomain = condition.Domain;
+        condition_targetsubject = condition.Target;
+        condition_targetparameter = condition.Property;
+        condition_type = condition.ComparisonOperator;
+        condition_value = condition.ComparisonValue;
+        $('#automation_condition_value').popup('open');
+        build_condition();
+    }
+
+
+
+    function automationpage_ConditionsRefresh() {
+
+        $('#automation_program_conditions').empty();
+        if (HG.WebApp.ProgramEdit._CurrentProgram.Conditions) {
+            var html = '';
+            for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length; i++) {
+                var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i];
+                var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition.Domain, condition.Target);
+
+                if (condition.ComparisonOperator == "-1") {
+                    condition.ComparisonOperator = "LessThan";
+                }
+                else if (condition.ComparisonOperator == "0") {
+                    condition.ComparisonOperator = "Equals";
+                }
+                else if (condition.ComparisonOperator == "1") {
+                    condition.ComparisonOperator = "GreaterThan";
+                }
+                else if (condition.ComparisonOperator == "100") {
+                    condition.ComparisonOperator = "LogicOrJoint";
+                }
+                var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
+                var displayName = (module != null ? module.Name : '');
+                html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_ConditionChangeLine(' + i + ')">#' + lineNumber + '</div>';
+                if (condition.ComparisonOperator == 'LogicOrJoint')
+                {
+                    html += '<div class="ui-grid-b hg-wizard-grid" style="background-color:lightgray" onclick="automationpage_ConditionChangeLine(' + i + ')">';
+                    html += '<div class="ui-block-a">&nbsp;</div>'
+                    html += '<div class="ui-block-b" align="center">OR</div>'
+                    html += '<div class="ui-block-c">&nbsp;</div>'
+                    html += '</div>';
+                }
+                else
+                {
+                    html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
+                    html += '<div class="ui-block-a">&nbsp;' + condition.Domain + '/' + condition.Target + '</div>';
+                    html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
+                    html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
+                    html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';
+                    html += '<div class="ui-block-e">&nbsp;' + condition.ComparisonValue + '</div>';
+                    /*
+                    $('#automation_program_conditions').append('' +
+                        '<li data-context-value="' + i + '"><a>' +
+                        ' <span style="color:gray">' + condition.Domain.split('.')[1] + '</span>' +
+                        ' ' + condition.Target +
+                        ' <span style="color:gray">property</span> <b>' + pname + '</b>' +
+                        ' <span style="color:gray">' + condition.ComparisonOperator + '</span>' +
+                        ' <b>' + condition.ComparisonValue + '</b>' +
+                        '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-inline="true" data-transition="pop" href="#automation_condition_delete">Delete</a></li>');
+                    */
+                    html += '</div>';
+                }
+            }
+            $('#automation_program_conditions').append(html);
+            $('#automation_program_conditions').trigger('create');
+        }
+    }
+
+
+
+
+</script>

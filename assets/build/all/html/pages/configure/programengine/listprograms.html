@@ -1,0 +1,129 @@
+<!-- ProgramEngine - Program List -->
+<div data-role="page" id="page_automation_programs">
+    {include pages/header.html}
+
+    <div class="ui-content">
+        <img src="images/automation.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 id="configure_automation_group_title" style="position:absolute;bottom:30px;left:90px;" data-locale-id="configure_program_automationtitle"></h3></div>
+        <ul id="configure_programslist" data-role="listview"></ul>
+    </div>
+
+    <div id="automation_program_add" class="ui-corner-all hg-popup-b" data-role="popup" data-overlay-theme="b" data-position-to="window">
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_program_newprogram">Add Program</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 class="ui-title" data-locale-id="configure_program_enterprogramname">Program name</h3>
+            <input id="program_new_name" type="text" />
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_newprogramcancel" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a id="program_new_button" href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_program_newprogramconfirm" data-rel="back" data-transition="flow">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="automationprograms_group_delete" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b">
+        <div data-role="header" class="ui-corner-top">
+            <h2 data-locale-id="configure_group_deletegroup">Delete Group?</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 data-locale-id="configure_group_deleteprompt" class="ui-title">Are you sure you want to delete this group?</h3>
+            <p data-locale-id="configure_group_deletewarning">This action cannot be undone.</p>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_group_deletecancel" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a id="automationprograms_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_group_deleteconfirm" data-rel="back" data-transition="flow">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="automationprograms_program_delete" class="ui-corner-all" data-role="popup" data-overlay-theme="b">
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_program_deletetitle">Delete Program?</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 class="ui-title" data-locale-id="configure_program_deleteprompt">Are you sure you want to delete this program?</h3>
+            <p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a id="automationprograms_program_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_program_deleteconfirm" data-rel="back" data-transition="flow">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="automation_program_import" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_programslist_importprogram">Import Program</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
+                <form id="program_import_form" target="program_upload_frame" enctype="multipart/form-data" method="post" action="../../api/HomeAutomation.HomeGenie/Automation/Programs.Import/" data-ajax="false">
+                    <input id="program_import_uploadfile" type="file" title="Import program from XML file" name="file" />
+                </form>
+                <a data-locale-id="configure_programslist_import" id="program_import_button" href="#" class="ui-btn ui-shadow ui-corner-all">Import</a>
+                <iframe id="program_import_uploadframe" name="program_upload_frame" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+                <iframe id="program_import_downloadframe" name="program_download_frame" src="blank.html" style="display:none;width:0;height:0;border:0"></iframe>
+            </fieldset>
+        </div>
+    </div>
+    <div id="listprograms_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul data-role="listview" class="ui-listview" style="min-width:210px;">
+            <li><a id="btn_automationprograms_group_delete" data-locale-id="configure_programslist_deletegroup" class="ui-btn ui-btn-icon-right ui-icon-minus">Delete group</a></li>
+            <li><a id="btn_automation_program_import" data-locale-id="configure_programslist_importprogram" class="ui-btn ui-btn-icon-right ui-icon-fa-upload">Import program</a></li>
+            <li><a id="btn_automation_program_add" data-locale-id="configure_programslist_addnewprogram" class="ui-btn ui-btn-icon-right ui-icon-plus">Add new program</a></li>
+            <li><a id="btn_automation_program_refresh" data-locale-id="configure_programslist_refreshlist" class="ui-btn ui-btn-icon-right ui-icon-fa-refresh">Refresh list</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#page_configure_automationgroups" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back">
+                        Back
+                    </a>
+                </li>
+                <li>
+                    <a href="#page_control" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#listprograms_actionmenu" class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                        Actions
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div>
+
+<div id="automationprograms_list_programoptions" data-role="popup" data-overlay-theme="none">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <h5 id="automationprograms_program_popup_title" align="center">Program Menu</h5>
+    <ul data-role="listview" data-inset="false" style="min-width:210px;">
+        <li><a class="ui-btn ui-icon-fa-download ui-btn-icon-left" data-locale-id="configure_program_options_export" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Export</a></li>
+        <li><a id="btn_automationprograms_program_clone" class="ui-btn ui-icon-plus ui-btn-icon-left" data-locale-id="configure_editprogram_options_clone">Clone</a></li>
+        <li><a id="btn_automationprograms_program_edit" class="ui-btn ui-icon-edit ui-btn-icon-left" data-locale-id="configure_editprogram_options_edit">Edit</a></li>
+        <li><a id="btn_automationprograms_program_enable" class="ui-btn ui-icon-check ui-btn-icon-left" data-locale-id="configure_editprogram_options_enable" href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Enable</a></li>
+        <li><a id="btn_automationprograms_program_disable" class="ui-btn ui-icon-alert ui-btn-icon-left" data-locale-id="configure_editprogram_options_disable" href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Disable</a></li>
+        <li><a id="btn_automationprograms_program_delete" class="ui-btn ui-icon-minus ui-btn-icon-left" data-locale-id="configure_editprogram_options_delete" data-position-to="window">Delete</a></li>
+    </ul>
+</div>
+
+<!-- hg page init script -->
+<script type="text/javascript">
+    HG.WebApp.ProgramsList.InitializePage();
+</script>

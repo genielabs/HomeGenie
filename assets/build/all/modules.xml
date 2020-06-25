@@ -1,0 +1,2726 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfModule xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Module>
+    <Name>Thermostat</Name>
+    <Description />
+    <DeviceType>Thermostat</DeviceType>
+    <Domain>HomeAutomation.BasicThermostat</Domain>
+    <Address>1</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:39:21.412583Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:39:21.415819Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:39:21.419086Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:39:21.422892Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:39:21.424532Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:39:21.406061Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Temperature</Name>
+        <Value>rRAZBIpIrn4rorVjil3CnQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.9256Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.Mode</Name>
+        <Value>efeJUM9Jft3eGxbrMuFDjg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.925928Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.OperatingState</Name>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.92625Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.SetPoint.Heating</Name>
+        <Value>Apma0vFWxyYLbG9G0hLZng==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.926573Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>78</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867868Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualThermostat.SwitchModule</Name>
+        <Value>ug/UPzkooLMixWdNMmxKrFF7upi3yg4QfucST0HHlpM=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.927223Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualThermostat.TemperatureModule</Name>
+        <Value>ug/UPzkooLMixWdNMmxKrKGaoa3wOVHjeO07bm/mYms=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.927578Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/thermostat</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.404894Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Multi Sensor</Name>
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeAutomation.Demo</Domain>
+    <Address>1</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>HomeGenie.SecuritySensor</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.927905Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityTriggerHome</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:18:14.065731Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.928384Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:18:14.075292Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:18:14.080005Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:18:14.085821Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:18:14.087824Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.928714Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Luminance</Name>
+        <Value>H7r2AhR8FPpz5QmxovMc4Apx1kCyvJXstr1iniQFXII=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.931067Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.MotionDetect</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.93153Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Temperature</Name>
+        <Value>rRAZBIpIrn4rorVjil3CnQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.931873Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Battery</Name>
+        <Value>7BXCPbbywJhg08paoEJ+sg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.932262Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>400</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.86845Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.582997Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Door Sensor</Name>
+    <Description />
+    <DeviceType>DoorWindow</DeviceType>
+    <Domain>HomeAutomation.Demo</Domain>
+    <Address>2</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>HomeGenie.SecuritySensor</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.932925Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityTriggerHome</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.933248Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.933569Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:31:05.869807Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:31:05.879312Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:31:05.888759Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:31:05.889258Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.933899Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.DoorWindow</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.934222Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Battery</Name>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.934544Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>400</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.868605Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayIcon</Name>
+        <Value>E9WznBPefYB8nLZUqi7Cekglb1+MimNTJo/NJws2raEiDb+8lGvSG7AgpK6SJmqQaAa1geElQRDRTp2dSEt8ug==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.935224Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.646359Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Boiler Switch</Name>
+    <Description />
+    <DeviceType>Switch</DeviceType>
+    <Domain>HomeAutomation.Demo</Domain>
+    <Address>3</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.935558Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.935882Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.15076Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.IRCode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.154994Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityAlarm</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.171228Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.184087Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.173062Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.MinLuminance</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.187515Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.178998Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.191246Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.224369Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.224555Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.227611Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.230922Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.231097Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:46:21.219857Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Meter.Watts</Name>
+        <Value>JkkNaJnYX1KrWjzybs0aXg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.936308Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.936647Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.EmulateWemo</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T21:11:34.151343Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.Info.UDN</Name>
+        <Value>jxnhnFd4tARYeMGQOOmIh3x3Qt3fA821ZeSuX9JG8qiodNiXMDfPBC06KINqyRyq</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T21:11:34.151959Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>400</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.868655Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayIcon</Name>
+        <Value>E9WznBPefYB8nLZUqi7Cekglb1+MimNTJo/NJws2raEiDb+8lGvSG7AgpK6SJmqQ11C2VjHQ8woquD6r4tOBPSjs8v1DMvxJI1fuC/5bivQ=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.937329Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.736969Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Energy Monitor</Name>
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeAutomation.EnergyMonitor</Domain>
+    <Address>1</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EnergyMonitor.KwCounter</Name>
+        <Value>7izsS63lUWdTcqbl73WK5A==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.937659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.KwCounter.Today</Name>
+        <Value>7izsS63lUWdTcqbl73WK5A==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.937659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.KwLoad</Name>
+        <Value>4Fmfgj/yZ3JipvXEWu0f1w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.937987Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.OperatingDevices</Name>
+        <Value>M3m/88N37t16WUoTMlpS6g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.938311Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.OperatingLights</Name>
+        <Value>M3m/88N37t16WUoTMlpS6g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.938751Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.OperatingSwitches</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.93922Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.WattCounter</Name>
+        <Value>fJKEdvpBVYckfXMBhYbP0g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.939781Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.WattCounter.Today</Name>
+        <Value>fJKEdvpBVYckfXMBhYbP0g==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.939781Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.WattLoad</Name>
+        <Value>ipXZgEpSs6zm4BdGLrG/XQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.940198Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.UiRefresh</Name>
+        <Value>3um8K0XMFOEPgC7Npve+lSsmpf4IdUgwdksOBq6nq8U=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.940763Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>81</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867731Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/energymonitor</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:49:25.354598Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Group Lights ON</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>6</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.605442Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>6</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969023Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:45:15.535632Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Group Lights OFF</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>7</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.146905Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>7</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969036Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T19:26:31.5647654Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Sunrise Colors Scenario</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>8</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.605283Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>8</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969443Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-25T21:30:38.336888Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Level Memory</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>16</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>XE9to2Sm7dB2Q5DV4MqM8q6O8d7MAowN9yK58r/3jdLdZHAgEz9IfuJ3peWmSYveRwu5rXdw6w627PX1CJxGIQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.941345Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:58.427168Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>16</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969046Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:02.6764765Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Philips Hue Bridge</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>26</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.BridgeAddress</Name>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
+        <Description>Philips Hue Bridge IP Address</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.94189Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.BridgeUsername</Name>
+        <Value>pPx+IKgjmjrO7CTwAMY9jg==</Value>
+        <Description>Philips Hue Bridge API username</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.942225Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:57.68692Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>26</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969056Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:02.7024741Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Zone Sensors</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>29</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ZoneSensors.Count</Name>
+        <Value>Ri1VdDW6uIVO4CPS82EASw==</Value>
+        <Description>Number of Zone Sensors</Description>
+        <FieldType>slider:1:10:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.94255Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:57.931735Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:16:32.385116Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>OpenWeatherMap</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>34</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Astronomy.Sunrise</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.133644Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Astronomy.Sunset</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.133636Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.City</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.133651Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.Description</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.13369Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.DisplayLocation</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.133675Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.IconUrl</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:30.133682Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ApiKey</Name>
+        <Value>VGqXv2FlOtueeEb8myx1bw==</Value>
+        <Description>OpenWeatherMap API key (APPID)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.942876Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Language</Name>
+        <Value>Cn6VRtmascV3JQiOUKb3YQ==</Value>
+        <Description>Language</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.943207Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Location</Name>
+        <Value>London, UK</Value>
+        <Description>City name</Description>
+        <FieldType>wunderground.city</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.943546Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.UpdateInterval</Name>
+        <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
+        <Description>Update interval (minutes)</Description>
+        <FieldType>slider:15:1440:15</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.943871Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Interrupted</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:59.474009Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>34</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969134Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/environment/weather</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T19:26:31.5697656Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>IR/RF remote control events forwarding</Name>
+    <Description>Wizard Script</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>73</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellAddress</Name>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
+        <Description>1. Remote HG server address</Description>
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.944884Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellPassword</Name>
+        <Value />
+        <Description>3. Password</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:48:52.8379712Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellUsername</Name>
+        <Value />
+        <Description>2. Username</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:48:52.8379712Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:28.980868Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>73</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:17.9773696Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:48:52.8389698Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Meter.Watts events forwarding</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>74</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellAddress</Name>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
+        <Description>1. Remote HG server address</Description>
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.945209Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellPassword</Name>
+        <Value />
+        <Description>3. Password</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:48:56.6408587Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellUsername</Name>
+        <Value />
+        <Description>2. Username</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:48:56.6408587Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:28.982366Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>74</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:48:56.641858Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Status.Level events forwarding</Name>
+    <Description>Wizard Script</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>75</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellAddress</Name>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
+        <Description>1. Remote HG server address</Description>
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.945534Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellPassword</Name>
+        <Value />
+        <Description>3. Password</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellUsername</Name>
+        <Value />
+        <Description>2. Username</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:28.992263Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>75</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:21.5337947Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Sensor.* events forwarding</Name>
+    <Description>Wizard Script</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>76</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellAddress</Name>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
+        <Description>1. Remote HG server address</Description>
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.945858Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellPassword</Name>
+        <Value />
+        <Description>3. Password</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.CellUsername</Name>
+        <Value />
+        <Description>2. Username</Description>
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.025955Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>76</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:14.2670397Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>MQTT Network</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>77</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ClientId</Name>
+        <Value>R2njjiSVqhR7ZLYhgPLqXA==</Value>
+        <Description>0. Enter unique ID for this client</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.679447Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ServerAddress</Name>
+        <Value />
+        <Description>1. MQTT server address</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248031Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ServerPort</Name>
+        <Value>meJwjyLKoo9JY2kYx/ZR4g==</Value>
+        <Description>2. MQTT server port</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.679903Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.TLS</Name>
+        <Value/>
+        <Description>3. Connect using WebSockets</Description>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.WebSockets</Name>
+        <Value/>
+        <Description>4. Connect using TLS/SSL</Description>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ServerTopic</Name>
+        <Value>j4pi82PQEHeb4jgboRapLw==</Value>
+        <Description>5. Topic</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:30.680294Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Username</Name>
+        <Value />
+        <Description>6. Username (optional)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248042Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Password</Name>
+        <Value />
+        <Description>7. Password (optional)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2019-01-16T02:57:26.248044Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>UL/W8c0C3eum5GKmHT/IGqrJFNHnl599p9qIck5rp/zMkn7Czea54TC2SLUeiwtBZqCd5MP508KcQf3xMU7aLg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-16T02:57:30.681123Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-16T02:57:26.248328Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>77</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-14T20:41:16.979209Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-12T23:26:04.917821Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Basic Thermostat</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>78</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ThermostatsCount</Name>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
+        <Description>Virtual thermostats modules to create</Description>
+        <FieldType>slider:1:10:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.94683Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>v5pJfYH9t67TqtNvjgJhDv2n420khiuznpJyWisvXi7S3cBOmrYrVOQWi7gbtzdu1227n0uiaIv4ETKeHDpgWX6uGodNXNOKWOGEptCWJY/Rne3fHpL2pR2sjQAMzN1W</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.947164Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Interrupted</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.671352Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:37:50.55021Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Energy Monitor</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>81</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EnergyMonitor.KwCounter</Name>
+        <Value>brjQKghjAAmd8uyeI1dWKw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.947496Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.KwLoad</Name>
+        <Value>brjQKghjAAmd8uyeI1dWKw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.94782Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.OperatingDevices</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.94825Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Interrupted</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:02.598868Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>81</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969386Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:17.1650706Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Energy Saving Mode</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>82</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:58.485834Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>82</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969173Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:07.6652023Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Security Alarm System</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>90</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.Recipients</Name>
+        <Value />
+        <Description>4. Comma separated list of recipients e-mails for alarm notifications</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021697Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.System.ArmDelay</Name>
+        <Value>evhKWvO6ao3ifrLl95fkRA==</Value>
+        <Description>1. Arm Delay (seconds)</Description>
+        <FieldType>slider:0:60:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.948729Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.System.SirenMaxTime</Name>
+        <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
+        <Description>3. Sirens Max Time (seconds, 0=infinite)</Description>
+        <FieldType>slider:0:1800:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.949136Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.System.SirenStartTime</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description>2. Sirens Start Delay (seconds)</Description>
+        <FieldType>slider:0:30:1</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.949614Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Trigger.ArmedProgram</Name>
+        <Value />
+        <Description>5. Program to run when armed</Description>
+        <FieldType>program.text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021703Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Trigger.DisarmedProgram</Name>
+        <Value />
+        <Description>6. Program to run when disarmed</Description>
+        <FieldType>program.text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021708Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Trigger.TriggeredProgram</Name>
+        <Value />
+        <Description>7. Program to run when triggered</Description>
+        <FieldType>program.text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.021712Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityArmed</Name>
+        <Value>El1vkIroVao/8lV913MHdQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.950174Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityTriggered</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.950754Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Interrupted</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:00.529061Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.UiRefresh</Name>
+        <Value>49oBOPveu8cnZYdAYXlKbA==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.951235Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.951715Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>90</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969204Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/securitysystem</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T19:26:31.638769Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Query on Wake Up</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>91</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:58.426466Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>91</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969219Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:12.1634217Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Multi Instance/Channel  Virtual Modules</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>93</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:58.473693Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>93</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969404Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:17.1650706Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>E-Mail Account</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>142</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.Sender</Name>
+        <Value />
+        <Description>1. E-Mail address</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.057549Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpPassword</Name>
+        <Value />
+        <Description>4. SMTP password (optional)</Description>
+        <FieldType>password</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.057565Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpPort</Name>
+        <Value>eJbaQytfgHp7xJPm8Z/eJA==</Value>
+        <Description>5. SMTP Mail Server port</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.952108Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpServer</Name>
+        <Value />
+        <Description>2. SMTP Mail Server address</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.057559Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpUserName</Name>
+        <Value />
+        <Description>3. SMTP username (optional)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2017-08-17T17:32:30.057562Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpUseSsl</Name>
+        <Value>wO5wEfcHot5LVVYYRDaZ1w==</Value>
+        <Description>6. SMTP Mail Server use SSL</Description>
+        <FieldType>checkbox</FieldType>
+        <UpdateTime>2017-08-17T17:52:04.952441Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Interrupted</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:01.561525Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>142</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969254Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:13.1662119Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Smart Lights</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>145</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>rRzv2Q0ruHKSPd7evlDMZGEGDFkXugaGL04L91g271sb4vBcJzuvNzCJWhJRnV1gmW/HMIfD9oHrZzJPNEweIw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.95278Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Interrupted</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:03.629301Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>145</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969425Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:18.1648773Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Windows Phone Push Notification Service</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>200</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.018724Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>200</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-11-13T22:55:32.969368Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-04-11T15:54:14.1672813Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Virtual Modules Demo</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>400</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:51:58.302665Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:16:32.287178Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Demo - Toggle Door</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>401</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.300247Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-01T13:50:29.874035Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Demo - Motion Detected</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>402</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.31287Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-01T13:50:29.874061Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Demo - Simulate Temperature</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>403</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.320581Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-01T13:50:29.874085Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Demo - Simulate Luminance</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>404</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.335714Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-01T13:50:29.874111Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Remote Control</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>505</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerDownCode</Name>
+        <Value>yYAoIpgWG6o05SodrB50kw==</Value>
+        <Description>2. Dim button (enter code)</Description>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <UpdateTime>2018-12-19T01:53:33.541323Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerInterval</Name>
+        <Value>evhKWvO6ao3ifrLl95fkRA==</Value>
+        <Description>4. Dimming step</Description>
+        <FieldType>slider:5:50:5</FieldType>
+        <UpdateTime>2018-12-19T01:53:33.541488Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerUpCode</Name>
+        <Value>iIWYhk1toq6yVJaYMVGEuQ==</Value>
+        <Description>1. Bright button (enter code)</Description>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <UpdateTime>2018-12-19T01:53:33.541651Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2018-12-19T01:53:27.046206Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2015-06-24T17:22:15.463412Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Light 1</Name>
+    <Description />
+    <DeviceType>Dimmer</DeviceType>
+    <Domain>HomeAutomation.PhilipsHue</Domain>
+    <Address>1</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingLevel</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.296816Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingMode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.262767Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.954096Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.954446Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.315942Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.IRCode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.328386Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.95486Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.333536Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityAlarm</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.341524Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.364668Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.346761Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.MinLuminance</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.379783Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.361638Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.384783Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.399679Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.413911Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.419545Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.422699Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.432527Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:28.385067Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Meter.Watts</Name>
+        <Value>g7p3hDs+ZOXCxq5/sXxGjg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.955193Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Scenarios.SunriseColors</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.955577Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.ColorHsb</Name>
+        <Value>r0n3TaaTzY37ZtZX4xg53HD6ckcu5nz9nWDLfYAVFCE=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.955908Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>0rHG2vyZ7cOVwR3AGC1llg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.956231Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.MemoryLevel</Name>
+        <Value>0rHG2vyZ7cOVwR3AGC1llg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.956553Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualMeter.Watts</Name>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.956877Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>26</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867161Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/colorlight</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.211203Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Light 2</Name>
+    <Description />
+    <DeviceType>Dimmer</DeviceType>
+    <Domain>HomeAutomation.PhilipsHue</Domain>
+    <Address>2</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingLevel</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.732427Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingMode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.726514Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.957203Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.957524Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.738619Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.IRCode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.743442Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.957847Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.765107Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityAlarm</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.773132Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.805529Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.788601Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.MinLuminance</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.812162Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.793084Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.817064Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.828994Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.841031Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.855272Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.858634Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.871771Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:50:39.825427Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Meter.Watts</Name>
+        <Value>x0ZB7fkPAVZ5bVLayjDoOw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.958172Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Scenarios.SunriseColors</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.958502Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.ColorHsb</Name>
+        <Value>scF8VAU4sOjryaEj1FDqcZI7faas1qBVcNTQi+Sz1Fc=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.958829Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>twVIx3sXYzSaFq9smgxfvw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.959156Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.MemoryLevel</Name>
+        <Value>twVIx3sXYzSaFq9smgxfvw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.959491Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualMeter.Watts</Name>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.959814Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>26</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867276Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/colorlight</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.211286Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Porch Light</Name>
+    <Description />
+    <DeviceType>Dimmer</DeviceType>
+    <Domain>HomeAutomation.PhilipsHue</Domain>
+    <Address>3</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingLevel</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.966196Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.EnergySavingMode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.963836Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.960138Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.960466Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.968745Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.IRControler.IRCode</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.972483Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.960788Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.972953Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityAlarm</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.986754Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
+        <Value>ug/UPzkooLMixWdNMmxKrKGaoa3wOVHjeO07bm/mYms=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.961117Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.Enable</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.961445Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.LastEvent</Name>
+        <Value>mlUzwcP2vCW9JiaCtUXyTX/7ezZtAV46f+1rlO1L/zI=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.961772Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.MinLuminance</Name>
+        <Value>Fv6pSUnA/9WS7ebfeE3ZYQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.962095Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
+        <Value>ug/UPzkooLMixWdNMmxKrKGaoa3wOVHjeO07bm/mYms=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.9625Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:02.999258Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.1</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:03.028428Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.2</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:03.032331Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.3</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:03.037285Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.4</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:03.03902Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.5</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:03.040781Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.ZoneSensors.Enable</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-04-30T16:22:03.024407Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Meter.Watts</Name>
+        <Value>JkkNaJnYX1KrWjzybs0aXg==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.962826Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.EmulateWemo</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T20:58:51.231265Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>UpnpDevice.Info.UDN</Name>
+        <Value>EhIF43ElLs3hhBfGRKGaDkrlG843rvl/UnfvQ/AKXzIjZxrCESIO4owHGgcNOUao</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2019-01-05T20:58:51.231599Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Scenarios.SunriseColors</Name>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.963149Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.ColorHsb</Name>
+        <Value>9TBtMgGMsQwWeB1apCQ0iEAdLS9mGvphe12WigDzzDE=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.963482Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.963907Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.MemoryLevel</Name>
+        <Value>nmCzQYqlWd7fZ5CFFVSqlA==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.96424Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualMeter.Watts</Name>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.964601Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>26</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867448Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/colorlight</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.211353Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Light 4</Name>
+    <Description />
+    <DeviceType>Dimmer</DeviceType>
+    <Domain>HomeAutomation.PhilipsHue</Domain>
+    <Address>4</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-25T22:13:05.336747Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Scenarios.SunriseColors</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-25T22:13:05.336917Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualMeter.Watts</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.964937Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>26</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867535Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/colorlight</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.211395Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Light 5</Name>
+    <Description />
+    <DeviceType>Dimmer</DeviceType>
+    <Domain>HomeAutomation.PhilipsHue</Domain>
+    <Address>5</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>HomeGenie.LevelMemory</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-25T22:13:19.754302Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Scenarios.SunriseColors</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2014-07-25T22:13:19.754382Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualMeter.Watts</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.965302Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>26</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867624Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/colorlight</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.211441Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name>Zone 1</Name>
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeGenie.ZoneSensors</Domain>
+    <Address>1</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>HomeGenie.SecuritySensor</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-14T10:43:34.882195Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>HomeGenie.SecurityTriggerHome</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2016-05-14T10:43:34.912479Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.DoorWindow</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.965652Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Luminance</Name>
+        <Value>H7r2AhR8FPpz5QmxovMc4Apx1kCyvJXstr1iniQFXII=</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.966028Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.MotionDetect</Name>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.966481Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Temperature</Name>
+        <Value>rRAZBIpIrn4rorVjil3CnQ==</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.967054Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>29</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.867989Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.486884Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name />
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeGenie.ZoneSensors</Domain>
+    <Address>2</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>29</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.868063Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.486945Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name />
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeGenie.ZoneSensors</Domain>
+    <Address>3</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>29</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.868135Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.487009Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name />
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeGenie.ZoneSensors</Domain>
+    <Address>4</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>29</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.868205Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.487071Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+  <Module>
+    <Name />
+    <Description />
+    <DeviceType>Sensor</DeviceType>
+    <Domain>HomeGenie.ZoneSensors</Domain>
+    <Address>5</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>29</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:52:04.868275Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2017-08-17T17:32:29.48714Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
+</ArrayOfModule>

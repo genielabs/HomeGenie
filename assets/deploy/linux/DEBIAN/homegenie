@@ -1,0 +1,79 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          homegenie
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Run HomeGenie
+### END INIT INFO
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.0-6) to ensure that this file is present
+. /lib/lsb/init-functions
+
+NAME="homegenie"
+SCRIPTNAME=/etc/init.d/$NAME
+USER="root"
+PID_FILE="/tmp/homegenie.pid"
+INSTALL_PATH="/usr/local/bin"  # <------ CHANGE INSTALL PATH HERE IF NEEDED
+HOMEGENIE_FOLDER=$INSTALL_PATH/homegenie
+HOMEGENIESH=$HOMEGENIE_FOLDER/startup.sh
+
+# Wait for encrypted folder to be mounted
+#cat /etc/mtab | grep -q $INSTALL_PATH
+#while [ $? -ne 0 ] ; do
+#        sleep 5
+#        cat /etc/mtab | grep -q $INSTALL_PATH
+#done
+
+case "$1" in
+
+start)
+
+    start-stop-daemon --start --background --make-pidfile --pidfile $PID_FILE \
+                      --chuid $USER --exec $HOMEGENIESH -- $HOMEGENIE_FOLDER
+    log_success_msg "$NAME started"
+    ;;
+
+stop)
+
+    start-stop-daemon --stop --pidfile $PID_FILE \
+                      --retry 5
+    kill -s SIGINT $(ps aux | grep -v grep | grep HomeGenie.exe | awk '{print $2}')
+    log_success_msg "$NAME stopped"
+    ;;
+
+status)
+
+    ps -ef | grep -v grep | grep HomeGenie.exe
+    if [ $? -eq 1 ]
+    then
+        log_success_msg "$NAME not running"
+        exit 3
+    else
+        log_success_msg "$NAME is running"
+    fi
+
+    ;;
+
+restart)
+
+    $0 stop
+    $0 start
+    ;;
+
+
+*)
+
+    log_action_msg "Usage: $SCRIPTNAME {start|stop|status|restart}"
+    exit 2
+    ;;
+
+esac
+exit 0
+
+

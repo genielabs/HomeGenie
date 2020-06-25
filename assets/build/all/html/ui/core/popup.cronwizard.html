@@ -1,0 +1,394 @@
+<div class="ui-corner-all cronwiz-container" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
+
+    <div class="ui-corner-top" data-role="header">
+        <h2 data-locale-id="cronwizard_title">Cron event Wizard</h2>
+    </div>
+    <div style="position:absolute;top:40px;left:0;right:0;padding-left:14px;padding-right:14px;padding-top:4px;border-bottom:1px gray dotted;height:120px">
+        <div class="ui-grid-a ui-mini">
+            <div class="ui-block-a" style="padding-right:10px;">
+                <span data-locale-id="cronwizard_event_name" class="label-small">Event name</span><br/>
+                <input data-ui-field="cron-name" type="text" data-inline="true" />
+                <p data-ui-field="panel-desc">...</p>
+            </div>
+            <div class="ui-block-b" style="padding-left:10px;">
+                <span data-locale-id="cronwizard_event_description" class="label-small">Description</span><br/>
+                <textarea data-ui-field="cron-desc"
+                    data-role="none"
+                    class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"
+                    style="height:80px;max-height:80px;width:100%;font-size:10pt"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    .cronwiz-container {
+        width:720px;
+        position:relative;
+    }
+    .cronwiz-container .CodeMirror-code span {
+        font-family: Courier New, Courier, monospace !important;
+        font-size: 10pt !important;
+        white-space: pre;
+        line-height: 11pt;
+    }
+
+    .cronwiz-container .CodeMirror-linenumber {
+        font-size: 9pt;
+        font-family: Courier New, Courier, monospace !important;
+    }
+
+    .cronwiz-container .CodeMirror-scroll {
+        overflow-x: auto;
+    }
+
+    .cronwiz-panel {
+        width:100%;
+        height:260px;
+        padding-bottom:8px;
+        overflow:auto;
+        overflow-x:hidden;
+        margin-top:124px;
+    }
+    .hg-ui-checkbox {
+        float:right;
+        font-size:16pt;
+    }
+    .hg-ui-list-item {
+        cursor:pointer;
+    }
+    .hg-ui-list-item span {
+        float:left;
+    }
+    /* compact UI mode */
+    .cronwiz-container.compact {
+        width: 360px;
+    }
+    .compact .ui-grid-a .ui-block-a {
+        display: none;
+    }
+    .compact .ui-grid-a .ui-block-b {
+        width: 100% !important;
+    }
+    </style>
+
+    <div data-ui-field="panel-scheduling" class="cronwiz-panel">
+
+        <div data-ui-field="date-picker-div" style="z-index:1000;position:fixed;top:0;left:0;right:0;bottom:0;padding-top:80px" align="center">
+            <div class="ui-corner-all" style="position:absolute;background:rgba(200,200,200,0.6);left:0;top:0;right:0;bottom:0"></div>
+            <div><div><input data-ui-field="date-picker" type="text" data-role="none" /></div></div>
+            <div style="margin-top:60px"><div><div><input data-ui-field="time-picker" type="text" data-role="none" /></div></div></div>
+        </div>
+
+         <div data-locale-id="cronwizard_eventtype_label" class="label-small ui-bar-inherit" align="center">Event Type</div>
+         <div align="center" class="ui-mini">
+             <select data-ui-field="cron-type-select" data-inline="true">
+                 <option value="1" data-locale-id="cronwizard_typeselect_standard">standard</option>
+                 <option value="2" data-locale-id="cronwizard_typeselect_period">date period</option>
+                 <option value="3" data-locale-id="cronwizard_typeselect_custom">custom cron expression</option>
+             </select>
+         </div>
+
+        <div data-ui-field="wizard-container">
+
+            <div data-ui-field="options-tabs-0" class="ui-mini" style="margin:0;">
+
+                 <div data-ui-field="date-range" class="ui-grid-b" style="margin-bottom:10px">
+                  <div class="ui-block-a" align="center" style="width:27%;">
+                    <div data-locale-id="cronwizard_date_from" class="label-small">from</div>
+                    <div class="title-normal clickable" data-ui-field="date-from">May 12</div>
+                  </div>
+                  <div class="ui-block-b" style="padding-top:16px;width:46%">
+                    <div data-ui-field="gfx-months">&nbsp;</div>
+                  </div>
+                  <div class="ui-block-c" align="center" style="width:27%">
+                    <div data-locale-id="cronwizard_date_to" class="label-small">to</div>
+                    <div class="title-normal clickable" data-ui-field="date-to">May 12</div>
+                  </div>
+                </div>
+
+
+                <div data-ui-field="time-title" data-locale-id="cronwizard_time_label" class="label-small ui-bar-inherit" align="center">Time</div>
+                <div data-ui-field="time-list" style="margin-top:6px;padding-left:80px;padding-right:80px;font-size:12pt;line-height:24pt;">no time added.</div>
+                <div align="center" style="margin-top:8px"><div data-ui-field="gfx-time">&nbsp;</div></div>
+
+
+                 <div class="ui-grid-b">
+                  <div class="ui-block-a" align="center">
+                    <select data-ui-field="type" data-inline="true">
+                      <option data-locale-id="cronwizard_time_exact" value="0">at exact time</option>
+                      <option data-locale-id="cronwizard_time_range" value="1">during a time range</option>
+                    </select>
+                  </div>
+                  <div class="ui-block-b">
+                      <div class="ui-grid-b" data-ui-field="time-range" style="opacity:0.6">
+                          <div class="ui-block-a" align="center" style="width:40%">
+                            <div data-locale-id="cronwizard_time_start" class="label-small">Start</div>
+                            <div data-ui-field="time-start" class="title-medium clickable">12:00</div>
+                          </div>
+                          <div class="ui-block-b" align="center" style="width:20%">
+                            <div>&nbsp;</div>
+                            <i class="fa fa-long-arrow-right title-medium"></i>
+                          </div>
+                          <div class="ui-block-c" align="center" style="width:40%">
+                            <div data-locale-id="cronwizard_time_end" class="label-small">End</div>
+                            <div data-ui-field="time-end" class="title-medium clickable">18:45</div>
+                          </div>
+                      </div>
+                      <div data-ui-field="time-exact" align="center" style="opacity:0.6">
+                          <div data-locale-id="cronwizard_time_at" class="label-small">&nbsp;</div>
+                          <div data-ui-field="time-at" class="title-medium clickable">18:50</div>
+                      </div>
+                  </div>
+                  <div class="ui-block-c" align="center" data-mini="true">
+                      <a data-locale-id="cronwizard_add_time" href="#" class="ui-btn ui-corner-all ui-btn-icon-right ui-icon-plus ui-btn-inline ui-mini" data-ui-field="addtime-button">Add</a>
+                  </div>
+                </div>
+
+            </div>
+
+            <div align="center" class="ui-bar-inherit" style="margin-bottom:10px;margin-top:20px">
+                <span data-locale-id="cronwizard_event_occurrence" class="label-small">Occurrence</span>
+            </div>
+
+            <div class="ui-mini" style="margin:0;padding-left:20px;padding-right:20px">
+
+                <div data-ui-field="options-tabs-1" class="crontab-option-tab">
+
+                    <div align="center">
+                        <select data-ui-field="minute-type-select" data-inline="true">
+                            <option value="1" data-locale-id="cronwizard_minuteselect_everyminute">every minute</option>
+                            <option value="2" data-locale-id="cronwizard_minuteselect_everysomeminute">every n minute</option>
+                            <option value="3" data-locale-id="cronwizard_minuteselect_eachselected">each selected minute</option>
+                        </select>
+                    </div>
+
+                    <div data-ui-field="minute-tab1" align="center"></div>
+
+                    <div data-ui-field="minute-tab2" align="center">
+                        <input type="range" min="1" max="59" value="5" />
+                    </div>
+
+                    <div data-ui-field="minute-tab3" align="center"></div>
+
+                </div>
+
+                <div data-ui-field="options-tabs-2" class="crontab-option-tab">
+
+                    <div align="center">
+                        <select data-ui-field="hour-type-select" data-inline="true">
+                            <option value="1" data-locale-id="cronwizard_hourselect_everyhour">every hour</option>
+                            <option value="2" data-locale-id="cronwizard_hourselect_everysomehour">every n hour</option>
+                            <option value="3" data-locale-id="cronwizard_hourselect_eachselected">each selected hour</option>
+                        </select>
+                    </div>
+
+                    <div data-ui-field="hour-tab1" align="center"></div>
+
+                    <div data-ui-field="hour-tab2" align="center">
+                        <input type="range" min="1" max="23" value="1" />
+                    </div>
+
+                    <div data-ui-field="hour-tab3" align="center">
+
+
+                    </div>
+
+                </div>
+
+                <div data-ui-field="options-tabs-3" class="crontab-option-tab">
+
+                    <div align="center">
+                        <select data-ui-field="dayom-type-select" data-inline="true">
+                            <option value="1" data-locale-id="cronwizard_dayselect_everyday">every day</option>
+                            <option value="2" data-locale-id="cronwizard_dayselect_eachselected">each selected day</option>
+                            <option value="3" data-locale-id="cronwizard_dayowselect_eachselected">each selected day of week</option>
+                        </select>
+                    </div>
+
+                    <div data-ui-field="dayom-tab1" align="center"></div>
+
+                    <div data-ui-field="dayom-tab2" align="center">
+                    </div>
+
+                    <div data-ui-field="dayom-tab3" align="center">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="checkbox" id="dayow-n-00" value="0" /><label data-locale-id="common_dayofweek_sun" for="dayow-n-00">Sun</label>
+                            <input type="checkbox" id="dayow-n-01" value="1" /><label data-locale-id="common_dayofweek_mon" for="dayow-n-01">Mon</label>
+                            <input type="checkbox" id="dayow-n-02" value="2" /><label data-locale-id="common_dayofweek_tue" for="dayow-n-02">Tue</label>
+                            <input type="checkbox" id="dayow-n-03" value="3" /><label data-locale-id="common_dayofweek_wed" for="dayow-n-03">Wed</label>
+                            <input type="checkbox" id="dayow-n-04" value="4" /><label data-locale-id="common_dayofweek_thu" for="dayow-n-04">Thu</label>
+                            <input type="checkbox" id="dayow-n-05" value="5" /><label data-locale-id="common_dayofweek_fri" for="dayow-n-05">Fri</label>
+                            <input type="checkbox" id="dayow-n-06" value="6" /><label data-locale-id="common_dayofweek_sat" for="dayow-n-06">Sat</label>
+                        </fieldset>
+                    </div>
+
+                </div>
+
+                <div data-ui-field="options-tabs-4" class="crontab-option-tab">
+
+                    <div align="center">
+                        <select data-ui-field="month-type-select" data-inline="true">
+                            <option value="1" data-locale-id="cronwizard_monthselect_everymonth">every month</option>
+                            <option value="2" data-locale-id="cronwizard_monthselect_eachselected">each selected month</option>
+                        </select>
+                    </div>
+
+                    <div data-ui-field="month-tab1" align="center"></div>
+
+                    <div data-ui-field="month-tab2" align="center">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="checkbox" id="month-n-01" value="1" /><label data-locale-id="common_month_jan" for="month-n-01">Jan</label>
+                            <input type="checkbox" id="month-n-02" value="2" /><label data-locale-id="common_month_feb" for="month-n-02">Feb</label>
+                            <input type="checkbox" id="month-n-03" value="3" /><label data-locale-id="common_month_mar" for="month-n-03">Mar</label>
+                            <input type="checkbox" id="month-n-04" value="4" /><label data-locale-id="common_month_apr" for="month-n-04">Apr</label>
+                            <input type="checkbox" id="month-n-05" value="5" /><label data-locale-id="common_month_may" for="month-n-05">May</label>
+                            <input type="checkbox" id="month-n-06" value="6" /><label data-locale-id="common_month_jun" for="month-n-06">Jun</label>
+                            <input type="checkbox" id="month-n-07" value="7" /><label data-locale-id="common_month_jul" for="month-n-07">Jul</label>
+                            <input type="checkbox" id="month-n-08" value="8" /><label data-locale-id="common_month_aug" for="month-n-08">Aug</label>
+                            <input type="checkbox" id="month-n-09" value="9" /><label data-locale-id="common_month_sep" for="month-n-09">Sep</label>
+                            <input type="checkbox" id="month-n-10" value="10" /><label data-locale-id="common_month_oct" for="month-n-10">Oct</label>
+                            <input type="checkbox" id="month-n-11" value="11" /><label data-locale-id="common_month_nov" for="month-n-11">Nov</label>
+                            <input type="checkbox" id="month-n-12" value="12" /><label data-locale-id="common_month_dec" for="month-n-12">Dec</label>
+                        </fieldset>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div><!-- end wizard container -->
+
+        <div data-ui-field="cronexpr-container" class="ui-mini" style="margin-top:2em;padding-left:30px;padding-right:25px;">
+
+            <div data-locale-id="cronwizard_event_cronexpr" align="center" class="label-small" style="margin-bottom:4px;margin-right:10px;margin-left:10px">Cron expression</div>
+            <textarea data-ui-field="cron-expr"
+                                data-role="none"
+                                style="font-family:monospace;font-size:18pt"></textarea>
+
+        </div><!-- end custom cron expression container -->
+
+    </div>
+
+    <div data-ui-field="panel-modules">
+        <div class="ui-grid-a" style="margin-top:124px">
+            <div class="ui-block-a">
+                <ul data-ui-field="devicetypes-select" data-role="listview" data-icon="false">
+                    <li data-locale-id="cronwizard_select_type" data-role="list-divider" class="label-small">Select type</li>
+                </ul>
+            </div>
+            <div class="ui-block-b">
+                <ul data-ui-field="devicetypes-select" data-role="listview" data-icon="false">
+                    <li data-locale-id="cronwizard_select_modules" data-role="list-divider" class="label-small">Modules</li>
+                </ul>
+            </div>
+        </div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <ul data-ui-field="devicetypes-select" data-role="listview" data-icon="false" style="height:234px;overflow:auto;overflow-x:hidden">
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typelight">Light</span>
+                        <i value="Light" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typedimmer">Dimmer</span>
+                        <i value="Dimmer" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typeswitch">Switch</span>
+                        <i value="Switch" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typesensor">Sensor</span>
+                        <i value="Sensor" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typesiren">Siren</span>
+                        <i value="Siren" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typethermostat">Thermostat</span>
+                        <i value="Thermostat" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typeshutter">Shutter</span>
+                        <i value="Shutter" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typedoorwindow">Door/Window</span>
+                        <i value="DoorWindow" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typemediareceiver">Media Receiver</span>
+                        <i value="MediaReceiver" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_typemediatransmitter">Media Transmitter</span>
+                        <i value="MediaTransmitter" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                    <li class="hg-ui-list-item">
+                        <span data-locale-id="configure_module_doorlock">Door Lock</span>
+                        <i value="DoorLock" class="fa fa-square-o hg-ui-checkbox"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="ui-block-b">
+                <ul data-ui-field="modules-select" data-role="listview" style="height:234px;overflow:auto;overflow-x:hidden">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-ui-field="panel-script" class="cronwiz-panel" style="overflow:hidden">
+
+        <div data-ui-field="program-container" class="ui-mini" style="margin:0">
+
+            <div class="ui-bar-inherit" style="padding:0;margin:0;padding-top:1px">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:70%">
+                        <p data-locale-id="cronwizard_event_runscript" class="label-small" style="padding-left:1em;">Run script on event occurrence</p>
+                    </div>
+                    <div class="ui-block-b" align="right" style="width:30%">
+                        <select data-ui-field="templaes-list">
+                            <option data-locale-id="cronwizard_script_addsnippet" value="">[ add code snippet ]</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="padding-left:0px;">
+                <textarea data-ui-field="program-script"
+                                    data-role="none"
+                                    style="font-family:monospace;font-size:18pt"></textarea>
+            </div>
+
+        </div><!-- end program container -->
+
+    </div>
+
+    <div class="ui-footer ui-bar-inherit ui-corner-all" style="border-top:0;">
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a" class="ui-mini" style="width:65%">
+                <a data-ui-field="panel-occurrence-btn" href="#" class="ui-btn ui-corner-all ui-btn-active"><i class="fa fa-clock-o"></i> <span data-locale-id="cronwizard_section_occurrence">Occurence</span></a>
+                <i class="fa fa-long-arrow-right"></i>
+                <a data-ui-field="panel-modules-btn" href="#" class="ui-btn ui-corner-all"><i class="fa fa-cube"></i> <span data-locale-id="cronwizard_section_modules">Modules</span></a>
+                <i class="fa fa-long-arrow-right"></i>
+                <a data-ui-field="panel-script-btn" href="#" class="ui-btn ui-corner-all"><i class="fa fa-code"></i> <span data-locale-id="cronwizard_section_script">Script</span></a>
+            </div>
+            <div class="ui-block-b" style="width:35%">
+                <div align="right">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-back" data-locale-id="common_command_cancel">Cancel</a>
+                    <a data-ui-field="confirm-button" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-check" data-locale-id="common_command_save">Save</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+    .crontab-option-tab {
+        padding-left:1.5em;
+        padding-right:1.5em;
+        clear: both;
+    }
+    </style>
+</div>
