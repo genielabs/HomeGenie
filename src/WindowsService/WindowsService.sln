@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportLibraries", "Support
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientLib", "..\..\SupportLibraries\NetClientLib\NetClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie.Tests", "..\HomeGenie.Tests\HomeGenie.Tests.csproj", "{3BB93A6B-B847-4A2D-AF33-63909A29C15D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie.Tests", "..\..\HomeGenie.Tests\HomeGenie.Tests.csproj", "{3BB93A6B-B847-4A2D-AF33-63909A29C15D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
