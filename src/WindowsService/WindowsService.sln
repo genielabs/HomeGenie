@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenieManager", "HomeGen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportLibraries", "SupportLibraries", "{63A13BEF-B17E-43DE-A96C-D6A1433402DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientLib", "..\..\SupportLibraries\NetClientLib\NetClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientLib", "..\SupportLibraries\NetClientLib\NetClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

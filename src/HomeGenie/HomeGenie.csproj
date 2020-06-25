@@ -16,7 +16,12 @@
     <FileVersion>1.4.0</FileVersion>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
+  <Target Name="TestTarget" AfterTargets="Build">
+    <Message Importance="High" Text="POST BUILD" />
+    <Exec Command="bin/Debug/netcoreapp3.0/HomeGenie --post-build" />
+  </Target>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.1.0" />
     <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
     <PackageReference Include="System.Core" Version="3.5.21022.801" />
@@ -73,7 +78,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SupportLibraries\NetClientLib\NetClientLib.csproj" />
+    <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj" />
   </ItemGroup>
 
 </Project>
