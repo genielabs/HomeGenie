@@ -5,21 +5,22 @@ branches:
 image: Visual Studio 2019
 configuration: Debug
 before_build:
-  - nuget restore .\HomeGenie\packages.config -SolutionDirectory .\HomeGenie_Windows
+  - nuget restore HomeGenie.sln
 build:
-  project: .\HomeGenie_Windows\HomeGenie_VS10.sln
+  project: HomeGenie.sln
   verbosity: detailed
 test:
-  assemblies:
-    only:
-      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
-after_test:
+#  assemblies:
+#    only:
+#      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+#after_test:
+after_build:
 - cmd: >-
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
     
-    dir "HomeGenie\bin\Debug"
+    dir "src\HomeGenie.Net461\bin\Debug"
 
-    cd "HomeGenie_Windows\Packager\"
+    cd "src\WindowsService\Packager\"
 
     "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
 
