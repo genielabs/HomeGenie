@@ -2,7 +2,7 @@ version: 1.0.{build}
 branches:
   except:
   - gh-pages
-image: Visual Studio 2017
+image: Visual Studio 2019
 configuration: Debug
 before_build:
   - nuget restore HomeGenie.sln
@@ -25,7 +25,7 @@ after_build:
 
     cd "src\WindowsService\Packager\"
 
-    "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
+    "C:\Program Files (x86)\Inno Setup 6\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
 
     echo "Adding artifact"
 
