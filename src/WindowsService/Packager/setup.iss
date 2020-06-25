@@ -13,7 +13,7 @@ DefaultGroupName=HomeGenie
 Compression=lzma
 SolidCompression=yes
 ; Win2000 or higher
-MinVersion=5.0
+MinVersion=6.0
 LicenseFile=..\..\HomeGenie.Net461\bin\Debug\LICENCE.TXT
 ;InfoAfterFile=..\..\HomeGenie.Net461\bin\Debug\README.TXT
 
