@@ -35,52 +35,13 @@ namespace HomeGenie
         private static bool _isrunning = true;
         private static bool _restart = false;
 
-        static void DeployFiles(string inputFolder, string outputFolder)
-        {
-            //var destinationFolder = AppDomain.CurrentDomain.BaseDirectory;
-            if (Directory.Exists(inputFolder))
-            {
-                //LogMessage("= Copying new files...");
-                foreach (string file in Directory.EnumerateFiles(inputFolder, "*", SearchOption.AllDirectories))
-                {
-                    string destinationFolder = Path.Combine(outputFolder, Path.GetDirectoryName(file).Replace(inputFolder, "").TrimStart('/').TrimStart('\\'));
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
-                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
-                    {
-                        Directory.CreateDirectory(destinationFolder);
-                    }
-                    var sourceFile = new FileInfo(file);
-                    var destFile = new FileInfo(destinationFile);
-                    if (destFile.Exists)
-                    {
-                        if (sourceFile.LastWriteTime > destFile.LastWriteTime)
-                        {
-                            Console.WriteLine("Updating {0}", destinationFile);
-                            // now you can safely overwrite it
-                            sourceFile.CopyTo(destFile.FullName, true);
-                        }
-                        else
-                        {
-                            //Console.WriteLine("Skipping {0}", destinationFile);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Copying {0}", destinationFile);
-                        File.Copy(file, destinationFile);
-                    }
-                }
-            }
-
-        }
-
         static void Main(string[] args)
         {
 
             // TODO: check CLI args
             // TODO: if first argument is "deploy" then copy common files to the build output directory
 
-            if (args != null && args.Length == 1 && args[0] == "--post-build")
+            if (args != null && args.Length > 0 && args[0] == "--post-build")
             {
 
 #if NETCOREAPP
@@ -99,6 +60,10 @@ namespace HomeGenie
                     DeployFiles(Path.Combine(assetsFolder, "windows"), AppDomain.CurrentDomain.BaseDirectory);
                 }
 #endif
+                if (args.Length == 1)
+                {
+                    return;
+                }
             }
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
@@ -228,6 +193,44 @@ namespace HomeGenie
             }
         }
 
+        static void DeployFiles(string inputFolder, string outputFolder)
+        {
+            //var destinationFolder = AppDomain.CurrentDomain.BaseDirectory;
+            if (Directory.Exists(inputFolder))
+            {
+                //LogMessage("= Copying new files...");
+                foreach (string file in Directory.EnumerateFiles(inputFolder, "*", SearchOption.AllDirectories))
+                {
+                    string destinationFolder = Path.Combine(outputFolder, Path.GetDirectoryName(file).Replace(inputFolder, "").TrimStart('/').TrimStart('\\'));
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    var sourceFile = new FileInfo(file);
+                    var destFile = new FileInfo(destinationFile);
+                    if (destFile.Exists)
+                    {
+                        if (sourceFile.LastWriteTime > destFile.LastWriteTime)
+                        {
+                            Console.WriteLine("Updating {0}", destinationFile);
+                            // now you can safely overwrite it
+                            sourceFile.CopyTo(destFile.FullName, true);
+                        }
+                        else
+                        {
+                            //Console.WriteLine("Skipping {0}", destinationFile);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Copying {0}", destinationFile);
+                        File.Copy(file, destinationFile);
+                    }
+                }
+            }
+
+        }
     }
 
 }

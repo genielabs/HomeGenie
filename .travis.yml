@@ -14,8 +14,9 @@ install:
 before_script: 
 script:
 - msbuild /p:Configuration=Debug HomeGenie.sln
-- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+#- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_success:
+- mono src/HomeGenie.Net461/bin/Debug/HomeGenie.exe --post-build
 - assets/deploy/linux/builddeb.sh
 - cd assets/deploy/linux && sh doxygen.sh
 after_failure: 
