@@ -23,6 +23,8 @@ after_build:
 
     dir "src\HomeGenie.Net461\bin\Debug"
 
+    "src\HomeGenie.Net461\bin\Debug\HomeGenie.exe" --post-build
+
     cd "src\WindowsService\Packager\"
 
     "C:\Program Files (x86)\Inno Setup 6\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
