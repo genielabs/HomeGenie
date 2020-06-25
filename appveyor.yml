@@ -5,7 +5,7 @@ branches:
 image: Visual Studio 2019
 configuration: Debug
 before_build:
-  - nuget restore HomeGenie.sln -SolutionDirectory src/WindowsService
+  - nuget restore src/WindowsService/WindowsService.sln -SolutionDirectory src/WindowsService
 build:
   project: src/WindowsService/WindowsService.sln
   verbosity: detailed
@@ -17,7 +17,7 @@ test:
 after_build:
 - cmd: >-
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
-    
+
     dir "src\HomeGenie.Net461\bin\Debug"
 
     cd "src\WindowsService\Packager\"
