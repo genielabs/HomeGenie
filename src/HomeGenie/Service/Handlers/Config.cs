@@ -38,6 +38,11 @@ using System.Xml.Serialization;
 using Jint.Parser;
 using HomeGenie.Automation.Scripting;
 using Innovative.SolarCalculator;
+#if NETCOREAPP
+using RJCP.IO.Ports;
+#else
+using System.IO.Ports;
+#endif
 
 using MIG.Gateways;
 using MIG.Gateways.Authentication;
@@ -109,7 +114,11 @@ namespace HomeGenie.Service.Handlers
                 case "Hardware.SerialPorts":
                     if (Environment.OSVersion.Platform == PlatformID.Unix)
                     {
-                        var serialPorts = System.IO.Ports.SerialPort.GetPortNames();
+#if NETCOREAPP
+                        var serialPorts = SerialPortStream.GetPortNames();
+#else
+                        var serialPorts = SerialPort.GetPortNames();
+#endif
                         var portList = new List<string>();
                         for (int p = serialPorts.Length - 1; p >= 0; p--)
                         {
@@ -125,7 +134,11 @@ namespace HomeGenie.Service.Handlers
                     }
                     else
                     {
-                        var portNames = System.IO.Ports.SerialPort.GetPortNames();
+#if NETCOREAPP
+                        var portNames = SerialPortStream.GetPortNames();
+#else
+                        var portNames = SerialPort.GetPortNames();
+#endif
                         request.ResponseData = portNames;
                     }
                     break;
