@@ -8,7 +8,7 @@ before_build:
   - nuget restore .\HomeGenie\packages.config -SolutionDirectory .\HomeGenie_Windows
 build:
   project: .\HomeGenie_Windows\HomeGenie_VS10.sln
-  verbosity: minimal
+  verbosity: detailed
 test:
   assemblies:
     only:
