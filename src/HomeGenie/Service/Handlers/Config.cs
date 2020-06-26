@@ -406,9 +406,11 @@ namespace HomeGenie.Service.Handlers
 #if !NETCOREAPP
                         homegenie.Statistics.SizeLimit = sizeLimit * 1024 * 1024;
 #endif
+                        request.ResponseData = new ResponseStatus(Status.Ok);
                     }
                     catch
                     {
+                        request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
@@ -439,12 +441,14 @@ namespace HomeGenie.Service.Handlers
                     SystemLogger.Instance.OpenLog();
                     homegenie.SystemConfiguration.HomeGenie.EnableLogFile = "true";
                     homegenie.SystemConfiguration.Update();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.Disable")
                 {
                     SystemLogger.Instance.CloseLog();
                     homegenie.SystemConfiguration.HomeGenie.EnableLogFile = "false";
                     homegenie.SystemConfiguration.Update();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.IsEnabled")
                 {
@@ -462,6 +466,7 @@ namespace HomeGenie.Service.Handlers
                             String.IsNullOrEmpty(password) ? WebAuthenticationSchema.None : WebAuthenticationSchema.Digest);
                     homegenie.SystemConfiguration.HomeGenie.Password = password;
                     homegenie.SaveData();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "Security.ClearPassword")
                 {
@@ -469,6 +474,7 @@ namespace HomeGenie.Service.Handlers
                         .SetOption(WebServiceGatewayOptions.Authentication, WebAuthenticationSchema.None);
                     homegenie.SystemConfiguration.HomeGenie.Password = "";
                     homegenie.SaveData();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "Security.HasPassword")
                 {
@@ -488,7 +494,7 @@ namespace HomeGenie.Service.Handlers
                             .SetOption(WebServiceGatewayOptions.EnableFileCaching, "false");
                     }
                     homegenie.SystemConfiguration.Update();
-                    request.ResponseData = new ResponseText("OK");
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetWebCacheEnabled")
                 {
@@ -507,6 +513,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
                         .SetOption(WebServiceGatewayOptions.Port, migCommand.GetOption(1));
                     homegenie.SystemConfiguration.Update();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetHostHeader")
                 {
@@ -519,6 +526,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
                         .SetOption(WebServiceGatewayOptions.Host, migCommand.GetOption(1));
                     homegenie.SystemConfiguration.Update();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestore")
                 {
@@ -571,6 +579,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationReset")
                 {
                     homegenie.RestoreFactorySettings();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationBackup")
                 {
@@ -580,6 +589,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationLoad")
                 {
                     homegenie.SoftReload();
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 break;
 
@@ -724,10 +734,11 @@ namespace HomeGenie.Service.Handlers
                                 }
                             }
                         }
+                        request.ResponseData = new ResponseStatus(Status.Ok);
                     }
                     catch (Exception)
                     {
-                        //TODO: notify exception?
+                        request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
                 homegenie.UpdateModulesDatabase();//write modules
@@ -784,16 +795,15 @@ namespace HomeGenie.Service.Handlers
                     }
                     deletedParameters.Clear();
                 }
-                //
                 homegenie.UpdateModulesDatabase();
+                request.ResponseData = new ResponseStatus(Status.Ok);
                 break;
 
             case "Modules.Delete":
                 homegenie.Modules.RemoveAll(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                 homegenie.VirtualModules.RemoveAll(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
-                request.ResponseData = new ResponseText("OK");
-                //
                 homegenie.UpdateModulesDatabase();
+                request.ResponseData = new ResponseStatus(Status.Ok);
                 break;
 
             case "Stores.List":
@@ -810,7 +820,10 @@ namespace HomeGenie.Service.Handlers
                         response = response.TrimEnd(',') + "]";
                         request.ResponseData = response;
                     }
-
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error);
+                    }
                 }
                 break;
 
@@ -831,6 +844,10 @@ namespace HomeGenie.Service.Handlers
                         response = response.TrimEnd(',') + "]";
                         request.ResponseData = response;
                     }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error);
+                    }
                 }
                 break;
 
@@ -842,6 +859,11 @@ namespace HomeGenie.Service.Handlers
                         var name = migCommand.GetOption(3);
                         var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
                         store.List.RemoveAll(i => i.Name == name);
+                        request.ResponseData = new ResponseStatus(Status.Ok);
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
                 break;
@@ -853,6 +875,10 @@ namespace HomeGenie.Service.Handlers
                     {
                         var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
                         request.ResponseData = store.Get(migCommand.GetOption(3));
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
                 break;
@@ -866,6 +892,11 @@ namespace HomeGenie.Service.Handlers
                     {
                         var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
                         store.Get(migCommand.GetOption(3)).Value = itemData;
+                        request.ResponseData = new ResponseStatus(Status.Ok);
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
                 break;
@@ -886,6 +917,10 @@ namespace HomeGenie.Service.Handlers
                     jsonmodules = jsonmodules.TrimEnd(',', '\n');
                     jsonmodules += "]";
                     request.ResponseData = jsonmodules;
+                }
+                else
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error);
                 }
                 break;
             case "Groups.List":
@@ -909,7 +944,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     currentGroup.Name = newName;
                     homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));
-                    //cmd.response = JsonHelper.GetSimpleResponse("OK");
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else
                 {
@@ -1016,6 +1051,11 @@ namespace HomeGenie.Service.Handlers
                             }
                         }
                     }
+                    request.ResponseData = new ResponseStatus(Status.Ok);
+                }
+                else
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error);
                 }
                 break;
 
@@ -1035,6 +1075,7 @@ namespace HomeGenie.Service.Handlers
                     }
                 }
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
+                request.ResponseData = new ResponseStatus(Status.Ok);
                 break;
 
             case "Groups.WallpaperList":
@@ -1071,6 +1112,7 @@ namespace HomeGenie.Service.Handlers
                         wpGroup.Wallpaper = migCommand.GetOption(1);
                         homegenie.UpdateGroupsDatabase("Control");
                     }
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 break;
 
@@ -1082,7 +1124,7 @@ namespace HomeGenie.Service.Handlers
                     {
                         File.Delete(wallpaperFile);
                     }
-                    request.ResponseData = new ResponseText("OK");
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 break;
 
@@ -1230,11 +1272,11 @@ namespace HomeGenie.Service.Handlers
                     MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveFile);
                     if (homegenie.PackageManager.WidgetImport(archiveFile, importPath))
                     {
-                        request.ResponseData = new ResponseText("OK");
+                        request.ResponseData = new ResponseStatus(Status.Ok);
                     }
                     else
                     {
-                        request.ResponseData = new ResponseText("ERROR");
+                        request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
                 break;
@@ -1245,7 +1287,7 @@ namespace HomeGenie.Service.Handlers
                     var parser = new JavaScriptParser();
                     try
                     {
-                        request.ResponseData = new ResponseText("OK");
+                        request.ResponseData = new ResponseStatus(Status.Ok);
                         parser.Parse(widgetData);
                     }
                     catch (Jint.Parser.ParserException e)
@@ -1283,6 +1325,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Package.Uninstall":
                 // TODO: uninstall a package....
+                request.ResponseData = new ResponseStatus(Status.Error);
                 break;
 
             case "WebSocket.GetToken":

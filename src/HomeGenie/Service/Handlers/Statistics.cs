@@ -65,6 +65,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Database.Reset":
                 homegenie.Statistics.ResetDatabase();
+                request.ResponseData = new ResponseStatus(Status.Ok);
                 break;
             case "Configuration.Get":
                 // Just one at the moment.

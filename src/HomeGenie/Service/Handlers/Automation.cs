@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
 */
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
@@ -56,7 +56,10 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock newProgram;
             string sketchFile = "", sketchFolder = "";
             //
-            homegenie.ExecuteAutomationRequest(migCommand);
+            request.ResponseData = new ResponseStatus(Status.Ok);
+            if (homegenie.ExecuteAutomationRequest(migCommand)) {
+                // TODO: should it just return if the request has been already processed?
+            }
             if (migCommand.Command.StartsWith("Macro."))
             {
                 switch (migCommand.Command)
@@ -90,10 +93,16 @@ namespace HomeGenie.Service.Handlers
                         homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.Fixed;
                         homegenie.ProgramManager.MacroRecorder.DelaySeconds = secs;
                         break;
+                    default:
+                        request.ResponseData = new ResponseStatus(Status.Error);
+                        break;
                     }
                     break;
                 case "Macro.GetDelay":
                     request.ResponseData = "{ \"DelayType\" : \"" + homegenie.ProgramManager.MacroRecorder.DelayType + "\", \"DelayOptions\" : \"" + homegenie.ProgramManager.MacroRecorder.DelaySeconds + "\" }";
+                    break;
+                default:
+                    request.ResponseData = new ResponseStatus(Status.Error);
                     break;
                 }
             }
@@ -138,7 +147,7 @@ namespace HomeGenie.Service.Handlers
                     DateTime dateStart = DateTime.Today.ToUniversalTime();
                     string startFrom = migCommand.GetOption(1);
                     if (!String.IsNullOrWhiteSpace(startFrom))
-                        dateStart = Utility.JavascriptToDate(long.Parse(startFrom)); 
+                        dateStart = Utility.JavascriptToDate(long.Parse(startFrom));
                     List<dynamic> nextList = new List<dynamic>();
                     foreach (var ce in homegenie.ProgramManager.SchedulerService.Items)
                     {
@@ -167,8 +176,8 @@ namespace HomeGenie.Service.Handlers
                     break;
                 case "Scheduling.Describe":
                     var cronDescription = "";
-                    try { 
-                        cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0).Trim()); 
+                    try {
+                        cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0).Trim());
                         cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
                     } catch { }
                     request.ResponseData = new ResponseText(cronDescription);
@@ -176,6 +185,9 @@ namespace HomeGenie.Service.Handlers
                 case "Scheduling.SolarTimes":
                     var solarTimes = new SolarTimes(DateTime.Now, homegenie.ProgramManager.SchedulerService.Location["latitude"].Value, homegenie.ProgramManager.SchedulerService.Location["longitude"].Value);
                     request.ResponseData = solarTimes;
+                    break;
+                default:
+                    request.ResponseData = new ResponseStatus(Status.Error);
                     break;
                 }
             }
@@ -379,7 +391,7 @@ namespace HomeGenie.Service.Handlers
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(sketchFile));
                     request.ResponseData = new ResponseText(File.ReadAllText(sketchFile));
                     break;
-                    
+
                 case "Programs.Arduino.FileSave":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
@@ -408,7 +420,7 @@ namespace HomeGenie.Service.Handlers
                         request.ResponseData = new ResponseText("OK");
                     }
                     break;
-                    
+
                 case "Programs.Arduino.FileDelete":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
@@ -502,8 +514,14 @@ namespace HomeGenie.Service.Handlers
                         homegenie.UpdateProgramsDatabase();
                     }
                     break;
+                default:
+                    request.ResponseData = new ResponseStatus(Status.Error);
+                    break;
                 }
-
+            }
+            else
+            {
+                request.ResponseData = new ResponseStatus(Status.Error);
             }
         }
 
