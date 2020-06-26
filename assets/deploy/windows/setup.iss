@@ -14,8 +14,8 @@ Compression=lzma
 SolidCompression=yes
 ; Win2000 or higher
 MinVersion=6.0
-LicenseFile=..\..\src\HomeGenie.Net461\bin\Debug\LICENCE.TXT
-;InfoAfterFile=..\..\src\HomeGenie.Net461\bin\Debug\README.TXT
+LicenseFile=..\..\..\src\HomeGenie.Net461\bin\Debug\LICENCE.TXT
+;InfoAfterFile=..\..\..\src\HomeGenie.Net461\bin\Debug\README.TXT
 
 
 
@@ -169,13 +169,13 @@ begin
     else
       Result := False; //when older version present and not uninstalled
   end;
-  
+
   if not IsDotNetDetected('v4.5', 0) then begin
      MsgBox('HomeGenie requires Microsoft .NET Framework >= 4.5.'#13#13
          'Please use Windows Update to install this version,'#13
          'and then re-run the HomeGenie setup program.', mbInformation, MB_OK);
      Result := false;
-  end 
+  end
   else
      Result := true;
 
@@ -186,16 +186,16 @@ end;
 ;Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
 Source: ".\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_CM15"; Flags: ignoreversion recursesubdirs
 Source: ".\Drivers\USB_Transceiver\*"; DestDir: "{app}\Drivers\LibUsb_CM19"; Flags: ignoreversion recursesubdirs
-Source: "..\..\src\HomeGenie.Net461\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "..\..\src\HomeGenie.Net461\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
-Source: "..\..\src\HomeGenie.Net461\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
+Source: "..\..\..\src\HomeGenie.Net461\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "..\..\..\src\HomeGenie.Net461\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
+Source: "..\..\..\src\HomeGenie.Net461\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
 
 [InstallDelete]
 Type: files; Name: "{app}\SQLite.Interop.dll";
 
 [Tasks]
-;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
-;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
+;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
+;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}";
 
 [Icons]
 Name: "{group}\HomeGenie {%APPVEYOR_REPO_TAG_NAME|1.2-dev}"; Filename: "{app}\HomeGenieManager.exe"
