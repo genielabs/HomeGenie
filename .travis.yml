@@ -1,6 +1,6 @@
 language: csharp
 mono: latest
-dotnet: 3.0.3
+dotnet: 2.1.502
 dist: bionic
 solution: HomeGenie.sln
 before_install:
@@ -13,15 +13,14 @@ before_install:
 install:
   - nuget restore HomeGenie.sln
   - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
-before_script: 
+before_script:
 script:
 - msbuild /p:Configuration=Debug HomeGenie.sln
-#- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+#- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./src/HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_success:
-- mono src/HomeGenie.Net461/bin/Debug/HomeGenie.exe --post-build
 - assets/deploy/linux/builddeb.sh
 - cd assets/deploy/linux && sh doxygen.sh
-after_failure: 
+after_failure:
 deploy:
   provider: releases
   api_key:
