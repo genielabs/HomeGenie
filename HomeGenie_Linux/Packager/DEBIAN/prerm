@@ -1,5 +1,0 @@
-#!/bin/sh
-sudo /etc/init.d/homegenie stop
-sudo update-rc.d -f homegenie remove
-sudo rm /etc/init.d/homegenie
-#sudo rm -rf /usr/local/bin/homegenie
