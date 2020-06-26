@@ -1,5 +1,6 @@
 language: csharp
 mono: latest
+dotnet: 3.0.3
 dist: bionic
 solution: HomeGenie.sln
 before_install:
