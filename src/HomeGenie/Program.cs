@@ -38,32 +38,10 @@ namespace HomeGenie
         static void Main(string[] args)
         {
 
-            // TODO: check CLI args
-            // TODO: if first argument is "deploy" then copy common files to the build output directory
-
-            if (args != null && args.Length > 0 && args[0] == "--post-build")
+            if (args != null && args.Length == 1 && args[0] == "--post-build")
             {
-
-#if NETCOREAPP
-                var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "assets", "build");
-#else
-                var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "assets", "build");
-#endif
-                DeployFiles(Path.Combine(assetsFolder, "all"), AppDomain.CurrentDomain.BaseDirectory);
-#if !NETCOREAPP
-                if (Environment.OSVersion.Platform == PlatformID.Unix)
-                {
-                    DeployFiles(Path.Combine(assetsFolder, "linux"), AppDomain.CurrentDomain.BaseDirectory);
-                }
-                else
-                {
-                    DeployFiles(Path.Combine(assetsFolder, "windows"), AppDomain.CurrentDomain.BaseDirectory);
-                }
-#endif
-                if (args.Length == 1)
-                {
-                    return;
-                }
+                PostBuildTasks();
+                return;
             }
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
@@ -76,6 +54,29 @@ namespace HomeGenie
 
             _homegenie = new HomeGenieService(rebuildPrograms);
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
+        }
+
+        private static void PostBuildTasks()
+        {
+#if NETCOREAPP
+                var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "assets", "build");
+#else
+            var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "assets", "build");
+#endif
+            DeployFiles(Path.Combine(assetsFolder, "all"), AppDomain.CurrentDomain.BaseDirectory);
+#if !NETCOREAPP
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                DeployFiles(Path.Combine(assetsFolder, "linux"), AppDomain.CurrentDomain.BaseDirectory);
+            }
+            else
+            {
+                DeployFiles(Path.Combine(assetsFolder, "windows"), AppDomain.CurrentDomain.BaseDirectory);
+            }
+#endif
+            // TODO: !!!!!!!!!!!!!!!!!!
+            // TODO: move here code from `HomeGenie.Tests -> CI Deploy`
+            // TODO: !!!!!!!!!!!!!!!!!!
         }
 
         private static bool PostInstallCheck()

@@ -22,7 +22,7 @@ namespace HomeGenie.Tests
         [Test]
         public void CheckDeployVersionTest()
         {
-            string releaseFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "HomeGenie", "bin", "Debug", "release_info.xml");
+            string releaseFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "HomeGenie.Net461", "bin", "Debug", "release_info.xml");
             var releaseInfo = UpdateChecker.GetReleaseFile(releaseFile);
             Assert.NotNull(releaseInfo);
             // check for $TRAVIS_TAG or APPVEYOR_REPO_TAG_NAME
@@ -35,14 +35,14 @@ namespace HomeGenie.Tests
                 Assert.True(releaseTag.StartsWith("v"));
                 releaseInfo.Version = releaseTag;
                 // add 15 minutes to prevent github release date
-                // be greater than actual release build date 
+                // be greater than actual release build date
                 releaseInfo.ReleaseDate = DateTime.UtcNow.AddHours(0.25);
                 releaseInfo.Description = "HomeGenie "+releaseTag;
-                XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo)); 
+                XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo));
                 using (TextWriter writer = new StreamWriter(releaseFile))
                 {
-                    serializer.Serialize(writer, releaseInfo); 
-                }                 
+                    serializer.Serialize(writer, releaseInfo);
+                }
             }
             Assert.True(true);
         }

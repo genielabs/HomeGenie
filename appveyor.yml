@@ -13,10 +13,9 @@ build:
 build_script:
   - msbuild src/WindowsService/WindowsService.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 test:
-#  assemblies:
-#    only:
-#      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
-#after_test:
+  assemblies:
+    only:
+      - src/HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_build:
 - cmd: >-
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
