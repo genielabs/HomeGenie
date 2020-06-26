@@ -20,7 +20,7 @@ after_test:
 - cmd: >-
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
     dir "src\HomeGenie.Net461\bin\Debug"
-    cd "src\WindowsService\Packager\"
+    cd "assets\deploy\windows\"
     "C:\Program Files (x86)\Inno Setup 6\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
     echo "Adding artifact"
     appveyor PushArtifact "Output\HomeGenie_%APPVEYOR_REPO_TAG_NAME%.exe"

@@ -14,8 +14,8 @@ Compression=lzma
 SolidCompression=yes
 ; Win2000 or higher
 MinVersion=6.0
-LicenseFile=..\..\HomeGenie.Net461\bin\Debug\LICENCE.TXT
-;InfoAfterFile=..\..\HomeGenie.Net461\bin\Debug\README.TXT
+LicenseFile=..\..\src\HomeGenie.Net461\bin\Debug\LICENCE.TXT
+;InfoAfterFile=..\..\src\HomeGenie.Net461\bin\Debug\README.TXT
 
 
 
@@ -186,9 +186,9 @@ end;
 ;Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
 Source: ".\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_CM15"; Flags: ignoreversion recursesubdirs
 Source: ".\Drivers\USB_Transceiver\*"; DestDir: "{app}\Drivers\LibUsb_CM19"; Flags: ignoreversion recursesubdirs
-Source: "..\..\HomeGenie.Net461\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "..\..\HomeGenie.Net461\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
-Source: "..\..\HomeGenie.Net461\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
+Source: "..\..\src\HomeGenie.Net461\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "..\..\src\HomeGenie.Net461\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
+Source: "..\..\src\HomeGenie.Net461\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
 
 [InstallDelete]
 Type: files; Name: "{app}\SQLite.Interop.dll";
