@@ -9,7 +9,7 @@ before_install:
   - sudo apt update
   - sudo apt install doxygen snapd
   - sudo snap install dotnet-sdk --channel=3.1/stable --classic
-  - sudo snap install dotnet-runtime-31
+  - sudo snap alias dotnet-sdk.dotnet dotnet
 install:
   - nuget restore HomeGenie.sln
   - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
