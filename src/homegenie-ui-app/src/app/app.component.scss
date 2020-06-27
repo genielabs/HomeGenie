@@ -1,0 +1,16 @@
+@import "src/_variables.scss";
+
+:host {
+    height: 100vh;
+    color: $accent;
+    font-size: 300%;
+}
+
+small {
+    margin-top: 48px;
+    font-size: 30%;
+}
+
+.logo {
+    font-family: lobster;
+}

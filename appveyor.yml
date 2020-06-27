@@ -2,26 +2,33 @@ version: 1.0.{build}
 branches:
   except:
   - gh-pages
-image: Visual Studio 2015
+image: Visual Studio 2019
 configuration: Debug
 before_build:
-  - nuget restore .\HomeGenie\packages.config -SolutionDirectory .\HomeGenie_Windows
+  - nuget restore HomeGenie.sln
+  - nuget restore src/WindowsService/WindowsService.sln
 build:
-  project: .\HomeGenie_Windows\HomeGenie_VS10.sln
-  verbosity: minimal
+  project: src/WindowsService/WindowsService.sln
+  verbosity: detailed
+build_script:
+  - msbuild src/WindowsService/WindowsService.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 test:
   assemblies:
     only:
-      - HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+      - src/HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_test:
 - cmd: >-
+    echo "Packager and deploy will start in 30 seconds..."
+
+    sleep 30
+
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
-    
-    dir "HomeGenie\bin\Debug"
 
-    cd "HomeGenie_Windows\Packager\"
+    dir "src\HomeGenie.Net461\bin\Debug"
 
-    "C:\Program Files (x86)\Inno Setup 5\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
+    cd "assets\deploy\windows\"
+
+    "C:\Program Files (x86)\Inno Setup 6\iscc.exe" /Q /F"HomeGenie_%APPVEYOR_REPO_TAG_NAME%" setup.iss
 
     echo "Adding artifact"
 
@@ -37,4 +44,3 @@ deploy:
   prerelease: false
   on:
     appveyor_repo_tag: true
-

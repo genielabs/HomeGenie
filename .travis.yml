@@ -1,32 +1,34 @@
 language: csharp
 mono: latest
-dist: xenial
-solution: HomeGenie_Linux/HomeGenie_Linux.sln
+dist: bionic
+solution: HomeGenie.sln
 before_install:
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
   - sudo apt install apt-transport-https
-  - echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+  - echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
   - sudo apt update
-  - sudo apt install doxygen
+  - sudo apt install doxygen snapd
+  - sudo snap install dotnet-sdk --channel=3.1/stable --classic
+  - sudo snap alias dotnet-sdk.dotnet dotnet
 install:
-  - nuget restore HomeGenie_Linux/HomeGenie_Linux.sln
+  - nuget restore HomeGenie.sln
   - nuget install NUnit.ConsoleRunner -Version 3.9.0 -OutputDirectory testrunner
-before_script: 
+before_script:
 script:
-- xbuild /p:Configuration=Debug HomeGenie_Linux/HomeGenie_Linux.sln
-- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+  - msbuild /p:Configuration=Debug HomeGenie.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./src/HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
 after_success:
-- HomeGenie_Linux/Packager/builddeb.sh
-- sh doxygen.sh
-after_failure: 
+  - assets/deploy/linux/builddeb.sh
+  - cd assets/deploy/linux && sh doxygen.sh
+after_failure:
 deploy:
   provider: releases
   api_key:
     secure: parI1iauFDB8fWAMrbFrH8G8n9wrCzWicG/Ax+OHMUyOvndbSqCbMge/0Wy7VKoea4rAItNzRU7Nyi3CuIPlPkyNJJt9CKe90qdnsdOhKTwHVjLnd/g8DbSR8R5rL5wWWbzrlDEhnfGWn9SQ9ueLLV3uV83zz/9TrJc88hP+2jl27GKlmXrVanacqUS8mo+IirAI7Ev+zrcpHgmbcpgh52YE6zqw5/oLZ/Lwryi/7+XfQyc5nldbn3vAKihgMaWSnBx+9VjutpEb776LgsEpg1AHfYCCZbeaw+SODZVQGXGtm5EngNGEyYtjicbO27LV6uocAmbWF6DcBpDU6YuTr2A4wMLNX9Uu+QUCGMXiYDReGBr4OQBbBy61cSytucUajuLfV3G65vEXonb9kFo2LFf1Ulxp2AHDE2FVhJIBQws+UFd2c+EJWDIXC85vayX1ngodNz85KujcV7/8QY6A2tp/gWZHk6Pb5fjtOt+0R3JA/jgY3AVb8GZ+MfvaTCSMhWkf8GUiH4ZEdflHhchmvMftcn/NVby7Sf+QMgbTh7gJ77Y46+dofQHSQvrld2RFcr3VdSXgWrvhyM9K0sLIwjcR8nI94sGM7trvT25C+Ogn7YpULVmbR3HtZrnjrN3iDkY2T+p4xVjypOkBqEPAeRYaIPF9KYEuGW2Og379LSk=
   file_glob: true
   file:
-    - HomeGenie_Linux/Packager/Output/*
-    - Doxy/homegenie_api.tgz
+    - assets/deploy/linux/Output/*
+    - assets/deploy/linux/Doxy/homegenie_api.tgz
   skip_cleanup: true
   on:
     tags: true

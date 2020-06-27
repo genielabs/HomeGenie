@@ -5,7 +5,6 @@
 [Rr]eleases/
 [Bb]in/
 [Oo]bj/
-*/Packager/Output/
 
 # Temporary and local IDE/System files
 *.userprefs
@@ -19,5 +18,15 @@ Thumbs.db
 **/packages/*
 !**/packages/repositories.config
 
+
+# temporary (old structure files will be removed soon)
+
 HomeGenie_Windows/\.vs/
 Doxy/homegenie_api*
+*/Packager/Output/
+
+# new structure files
+
+assets/deploy/linux/Output/
+assets/deploy/linux/Doxy/homegenie_api*
+

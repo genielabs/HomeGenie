@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- This project will output netstandard2.0 and net461 assemblies -->
+    <NetStandardImplicitPackageVersion>2.0.3</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Company>G-Labs</Company>
+    <AssemblyVersion>1.4.0</AssemblyVersion>
+    <FileVersion>1.4.0</FileVersion>
+  </PropertyGroup>
+
+  <Target Name="TestTarget" AfterTargets="Build">
+    <Message Importance="High" Text="POST BUILD" />
+    <Exec Command="dotnet $(ProjectDir)bin\Debug\netcoreapp3.0\HomeGenie.dll --post-build" />
+  </Target>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.1.0" />
+    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
+    <PackageReference Include="System.Core" Version="3.5.21022.801" />
+    <PackageReference Include="System.IO.Ports" Version="4.7.0" />
+    <PackageReference Include="System.Net.Security" Version="4.3.2" />
+    <PackageReference Include="System.Net.WebSockets" Version="4.3.0" />
+    <PackageReference Include="System.Net.WebSockets.Client" Version="4.3.2" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Encoding" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.0" />
+    <PackageReference Include="SerialPortStream" Version="2.2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonMark.NET" Version="0.15.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="SharpZipLib" Version="1.0.0" />
+    <PackageReference Include="Angle" Version="3.0.4" />
+    <PackageReference Include="SolarCalculator" Version="3.0.5" />
+    <PackageReference Include="Jint" Version="2.11.58" />
+    <PackageReference Include="UDE.CSharp" Version="1.1.0" />
+    <PackageReference Include="CronExpressionDescriptor" Version="2.15.0" />
+    <PackageReference Include="DynamicLanguageRuntime" Version="1.2.3" />
+    <PackageReference Include="IronPython" Version="2.7.10" />
+    <PackageReference Include="LiteDB" Version="5.0.8" />
+    <PackageReference Include="NCrontab" Version="3.3.1" />
+    <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
+    <PackageReference Include="WebSocket4Net" Version="0.15.2" />
+    <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
+
+    <PackageReference Include="MQTTnet" Version="3.0.11" />
+    <PackageReference Include="KNX.net" Version="1.1.10" />
+
+    <PackageReference Include="LibUsbDotNet" Version="2.2.8" />
+    <PackageReference Include="SerialPortLib" Version="1.0.23" />
+    <PackageReference Include="XTenLib" Version="1.0.15" />
+
+    <PackageReference Include="MIG" Version="1.1.7" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.1.7" />
+    <PackageReference Include="MIG.Protocols" Version="1.1.9" />
+
+    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.3" />
+    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.3" />
+    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.3" />
+    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.3" />
+    <PackageReference Include="HG.Raspberry.System" Version="2.1.1" />
+
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj" />
+  </ItemGroup>
+
+</Project>

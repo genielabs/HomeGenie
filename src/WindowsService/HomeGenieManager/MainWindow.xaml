@@ -1,0 +1,45 @@
+﻿<Window x:Class="HomeGenieManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Topmost="True" ShowInTaskbar="False" WindowStyle="None" Width="280" Height="120" Background="Transparent" AllowsTransparency="True"
+        >
+    <Window.Resources>
+        <ContextMenu x:Key="NotifierContextMenu" Placement="Mouse" Opacity="1.0">
+            <MenuItem Name="MenuSupport" Header="Support" Click="MenuSupport_Click">
+                <MenuItem.Icon>
+                    <Image Source="Resources\menu_support.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Visibility="Collapsed" Name="MenuMessages" Header="Messages">
+                <MenuItem Header="Lights/Appliances" IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="Sensors" IsCheckable="True" IsChecked="True" />
+            </MenuItem>
+            <MenuItem Name="MenuOpenHomeGenie" Header="Open HomeGenie" Click="MenuOpenHomeGenie_Click">
+                <MenuItem.Icon>
+                    <Image Source="Resources\menu_home.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="StartStopMenu" Header="Start/Stop Service" Click="MenuStartStopService_Click">
+                <MenuItem.Icon>
+                    <Image Source="Resources\menu_startstop.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Name="MenuExit" Header="Exit" Click="MenuExit_Click">
+                <MenuItem.Icon>
+                    <Image Source="Resources\menu_exit.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
+    <Border CornerRadius="15" Background="Black" Opacity="0.85">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Foreground="Yellow" Margin="5">HomeGenie Notify</TextBlock>
+            <ScrollViewer Height="80">
+                <TextBlock Name="log" FontFamily="Tahoma" FontSize="6" Foreground="White" VerticalAlignment="Top" />
+            </ScrollViewer>
+
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,22 @@
+﻿<Window x:Class="HomeGenieManager.LoadingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LoadingDialog" Height="300" Width="300"
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        Background="Transparent"
+        ShowInTaskbar="False"
+        HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="00:00:02" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid>
+        <Image Source="Resources/genius.png"></Image>
+    </Grid>
+</Window>
