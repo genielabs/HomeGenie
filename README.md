@@ -86,6 +86,7 @@ cd src/HomeGenie.Net461/bin/Debug
 
 [JetBrains Rider](https://www.jetbrains.com/rider/) is the official IDE employed for developing this project.
 
+![JetBrains Logo](https://raw.githubusercontent.com/genielabs/HomeGenie/netcore/assets/github/jetbrains.svg)
 
 ### Related projects
 
