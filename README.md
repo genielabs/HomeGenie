@@ -2,79 +2,18 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/96xnyg3jmqx1tj9h?svg=true)](https://ci.appveyor.com/project/genemars/homegenie)
 
 # HomeGenie
-<small>Smart Home server for Windows, Linux and Mac.</small>
 
-![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/docs/dashboard_page_01.jpg)
+**Embeddable, Smart Home server for Windows, Mac and Linux.**
 
-Features
-========
+- Integrated drivers for X10, Z-Wave and ZigBee<sup>\*</sup> <small>(<sup>\*</sup>coming soon)</small>, GPIO, SPI, I2C
+- Works 100% off-line without relaying on any external cloud service
+- Widgets designer and powerful scripting engine with fluent API supporting `csharp`, `javascript`, `python`
+- Powerful scheduler supporting extended cron expressions (with variables, conditions and logical operators)
+- Voice and text message based control
+- Localization
+- Dashboards, groups, configuration backup, plugin repository and much more! 
 
-* **Modern, web based, responsive UI**:
-  works on every device, from desktop PCs to smart phones and tablets.
-
-* **Integrated drivers for X10 and Z-Wave devices**:
-  ready to use solution for your home automation.
-
-* **UPnP / DLNA control point**:
-  control media servers, players, speakers and smart TVs.
-
-* **Real and virtual energy metering with statistics**:
-  energy consumption awareness for optimizing costs and usage.
-
-* **Wizard Scripts**:
-  no need to be a programmer, create scenarios using the
-  "live macro recording" feature and fine tune them using
-   the *Wizard Script* program editor.
-
-* **Fully expandible and customizable**:
-  add new features, drivers and automation programs
-  trhough the [packages repository](https://github.com/genielabs/homegenie-packages/tree/master/packages).
-
-* **Localization**
-  English, Italian, Spanish, French, Netherlands. More
-  languages can by added by creating a simple JSON file.
-
-* **Password protected access and data encryption**
-   HTTP access with Digest authentication and encrypted 
-   configuration files.
-
-* **Configuration backup/restore and factory reset**
-
-* **Event and data stream**
-  integrated HTTP Server Sent Event stream (EventSource),
-  WebSocket service and events-push/module-export to any MQTT broker.
-
-* **Embeddable**:
-  runs on low-energy and low-cost embedded systems such as
-  Raspberry Pi.
-
-* **Customizable widgets and features**:
-  create new features and widgets that interact with your
-  devices and internet services.
-
-* **Programmable Automation Engine**:
-  web based Program Editor and compiler with multi-language
-  support: C#, Javascript, Phyton and Arduino Sketch.
-
-* **Dynamic Web Service API and Helper Classes**:
-  make your devices and services talk each other using a
-  common language over the net.
-
-* **Direct access to Raspberry Pi hardware**:
-  GPIO, SPI, I2C programming using an event driven model.
-
-* **Virtual modules**
-
-* **Speech recognition / Voice Control (using Web Speech API)**
-
-* **Speech synthesys**
-
-
-## Presentation site
-
-http://www.homegenie.it
-
-## User's guide and developer docs
+## Documentation
 
 https://genielabs.github.io/HomeGenie/
 
@@ -84,12 +23,71 @@ https://genielabs.github.io/HomeGenie/
 
 https://genielabs.github.io/HomeGenie/download.html
 
-## Contributing
+## Development
+
+### Contributing
 
 Read the [CONTRIBUTING.md](https://github.com/genielabs/HomeGenie/blob/master/CONTRIBUTING.md) file
 for information about contributing to this repository.
 
-## Related projects
+### Repository structure
+
+The main solution file is `HomeGenie.sln` that is located in the repository root.
+
+- `assets/build`
+common (all) and OS specific static files that are copied after the build process
+- `assets/deploy`
+OS specific files required for bundling and deploying the app redistributable
+- `src/HomeGenie`
+main application project files implemented as **netcore** app
+- `src/HomeGenie.Net461`
+**.net 4.6.1** project files sharing the same source code base from `src/HomeGenie` 
+- `src/HomeGenie.Tests`
+project implementing Unit Tests
+- `src/SupportLibraries` 
+support and utility libraries used by HomeGenie
+- `src/WindowsService`
+Windows specific solution for deploying HomeGenie as a Windows service
+- `src/homegenie-ui-app`
+This folder (currently in very early development stage) contains the new HomeGenie user interface implemented as a Angular 2 PWA.
+
+
+### Building from command line
+
+In order to build HomeGenie `msbuild` version >= 15 is required.
+
+From the repository root folder enter the command
+```
+msbuild /p:Configuration=Debug HomeGenie.sln
+```
+This will generate both the `netcore` and the `net461` version of HomeGenie app.
+
+**netcore** ->
+`src/HomeGenie/bin/Degbu/netcore3.0` 
+
+**net461** -> `src/HomeGenie.Net461/bin/Debug`
+
+
+### Running
+
+*netcore*
+```
+cd src/HomeGenie/bin/Debug/netcore3.0
+./HomeGenie # (or 'dotnet HomeGenie.dll')
+```
+
+*net461*
+```
+cd src/HomeGenie.Net461/bin/Debug
+./HomeGenie.exe # (or 'mono HomeGene.exe')
+```
+
+### Integrated Development Enviroment
+
+[JetBrains Rider](https://www.jetbrains.com/rider/) is the official IDE employed for developing this project.
+
+
+### Related projects
 
 - https://github.com/genielabs/homegenie-packages
 - https://github.com/genielabs/mig-service-dotnet
