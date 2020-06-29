@@ -315,7 +315,7 @@ export class HomegenieAdapter implements Adapter {
   private processEvent(event) {
     const moduleId = event.Domain + '/' + event.Source;
     const m = this.hgui.getModule(moduleId, this.id);
-    console.log('Module event', m);
+    console.log('Module event', m, event);
     if (m != null) {
       this.hgui.updateModuleField(
         m,

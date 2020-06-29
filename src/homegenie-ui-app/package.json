@@ -22,7 +22,9 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "@larscom/ngx-translate-module-loader": "^1.5.0",
     "@ngx-pwa/local-storage": "^10.0.0",
+    "@ngx-translate/core": "^13.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

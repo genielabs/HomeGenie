@@ -1,4 +1,9 @@
-<div fxFlex="grow" fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center" fxFlexFill>
-  <div><span class="logo">HomeGenie</span> UI</div>
-  <small>... WIP ...</small>
-</div>
+<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
+<nav>
+  <ul>
+    <li><a routerLink="/" routerLinkActive="active"><div>{{ 'Home' | translate }}</div></a></li>
+    <li><a routerLink="/setup" routerLinkActive="active">{{ 'Setup' | translate }}</a></li>
+  </ul>
+</nav>
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>
