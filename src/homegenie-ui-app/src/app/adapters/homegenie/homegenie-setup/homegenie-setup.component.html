@@ -5,6 +5,8 @@
         <mat-checkbox [checked]="drivers[i].IsEnabled" [(ngModel)]="drivers[i].IsEnabled">
             {{ "HOMEGENIE."+driver.Domain | translate }}
         </mat-checkbox>
+        <app-x10-setup-form *ngIf="driver.Domain === 'HomeAutomation.X10' && driver.IsEnabled"></app-x10-setup-form>
+        <app-zwave-setup-form *ngIf="driver.Domain === 'HomeAutomation.ZWave' && driver.IsEnabled"></app-zwave-setup-form>
     </div>
 </mat-step>
 <mat-step [stepControl]="secondFormGroup">

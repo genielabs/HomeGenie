@@ -47,7 +47,7 @@ export class FLD {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class HguiService implements OnDestroy {
   adapters: Array<Adapter> = [];
@@ -112,7 +112,7 @@ export class HguiService implements OnDestroy {
               } else {
                 // TODO: log 'adapter connected'
               }
-              this.onAdapterAdded.next(adapter);
+              this.addAdapter(adapter);
             });
           });
           subject.next(config);

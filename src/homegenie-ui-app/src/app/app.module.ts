@@ -17,6 +17,8 @@ import { AppComponent } from './app.component';
 
 import { HomegenieSetupComponent } from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+import { ZwaveSetupFormComponent } from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
+import { X10SetupFormComponent } from './adapters/homegenie/x10-setup-form/x10-setup-form.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient) {
   const baseTranslateUrl = './assets/i18n';
@@ -36,7 +38,9 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     HomegenieSetupComponent,
-    SplashScreenComponent
+    SplashScreenComponent,
+    ZwaveSetupFormComponent,
+    X10SetupFormComponent
   ],
   imports: [
     BrowserModule,

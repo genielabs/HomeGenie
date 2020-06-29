@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HguiService, CMD } from 'src/app/services/hgui/hgui.service';
+import { HomegenieAdapter } from '../homegenie-adapter';
+import { Adapter } from '../../adapter';
 
 @Component({
   selector: 'app-homegenie-setup',
@@ -25,24 +27,21 @@ export class HomegenieSetupComponent implements OnInit {
     const adapters = this.hgui.getAdapters();
     const homegenieAdapter = adapters.find((adapter) => adapter.className === 'HomegenieAdapter');
     if (homegenieAdapter) {
-      homegenieAdapter.control(null, CMD.Drivers.List, {}).subscribe((res) => {
-        console.log('Drivers', res);
-        this.drivers = res;
+      this.getInterfaceList(homegenieAdapter);
+    } else {
+      this.hgui.onAdapterAdded.subscribe((adapter) => {
+        if (adapter.className === 'HomegenieAdapter') {
+          this.getInterfaceList(adapter);
+        }
       });
     }
-    this.hgui.onAdapterAdded.subscribe((adapter) => {
-      if (adapter.className === 'HomegenieAdapter') {
-        console.log(adapter.options.config.connection)
-        adapter.control(null, CMD.Drivers.List, {}).subscribe((res) => {
-          console.log('Drivers', res);
-          this.drivers = res;
-        });
-      }
-    });
   }
 
-  enableDriverClicked(driver, e) {
-    console.log(e.target, e);
+  getInterfaceList(adapter: Adapter) {
+    adapter.control(null, CMD.Drivers.List, {}).subscribe((res) => {
+      console.log('Drivers', res, this.hgui);
+      this.drivers = res;
+    });
   }
 
 }
