@@ -1,7 +1,7 @@
 <mat-vertical-stepper [linear]="false" #stepper>
 <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-    <ng-template matStepLabel>{{ "HOMEGENIE.Interfaces and applications" | translate }}</ng-template>
+    <ng-template matStepLabel>{{ "HOMEGENIE.interfaces_and_applications" | translate }}</ng-template>
     <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
@@ -13,7 +13,7 @@
 </mat-step>
 <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-    <ng-template matStepLabel>Fill out your address</ng-template>
+    <ng-template matStepLabel>{{ "HOMEGENIE.select_modules" | translate }}</ng-template>
     <mat-form-field>
         <mat-label>Address</mat-label>
         <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
