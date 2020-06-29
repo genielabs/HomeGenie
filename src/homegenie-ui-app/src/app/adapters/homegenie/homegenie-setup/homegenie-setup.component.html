@@ -1,15 +1,11 @@
 <mat-vertical-stepper [linear]="false" #stepper>
-<mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+<mat-step>
     <ng-template matStepLabel>{{ "HOMEGENIE.interfaces_and_applications" | translate }}</ng-template>
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-    </mat-form-field>
-    <div>
-        <button mat-button matStepperNext>Next</button>
+    <div *ngFor="let driver of drivers; let i = index;">
+        <mat-checkbox [checked]="drivers[i].IsEnabled" [(ngModel)]="drivers[i].IsEnabled">
+            {{ "HOMEGENIE."+driver.Domain | translate }}
+        </mat-checkbox>
     </div>
-    </form>
 </mat-step>
 <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { HomegenieAdapter } from 'src/app/adapters/homegenie/homegenie-adapter';
 import AdapterFactory from './adapters/adapter-factory';
-import { HguiService } from './services/hgui/hgui.service';
+import { HguiService, CMD } from './services/hgui/hgui.service';
 
 @Component({
   selector: 'app-root',

@@ -16,13 +16,16 @@ export class CMD {
     On: 'Control.On',
     Off: 'Control.Off',
     Level: 'Control.Level',
-    Toggle: 'Control.Toggle',
+    Toggle: 'Control.Toggle'
+  };
+  static Drivers = {
+    List: 'Drivers.List'
   };
   static Options = {
-    Show: 'Options.Show',
+    Show: 'Options.Show'
   };
   static Programs = {
-    Toggle: 'Programs.Toggle',
+    Toggle: 'Programs.Toggle'
   };
 }
 export class FLD {
@@ -109,8 +112,8 @@ export class HguiService implements OnDestroy {
               } else {
                 // TODO: log 'adapter connected'
               }
+              this.onAdapterAdded.next(adapter);
             });
-            this.onAdapterAdded.next(adapter);
           });
           subject.next(config);
         } else {
@@ -168,7 +171,7 @@ export class HguiService implements OnDestroy {
     // create a new instance if 'adapterId' was not found and a 'typeName' was given
     if (className != null && adapter == null) {
       adapter = AdapterFactory.create(className, this);
-      this.addAdapter(adapter);
+      //this.addAdapter(adapter);
     }
     return adapter;
   }

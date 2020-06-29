@@ -1,4 +1,16 @@
 {
-    "interfaces_and_applications": "Interfaces and applications",
-    "select_modules": "Select modules"
+"0":"------------------------------------------",
+    "interfaces_and_applications":
+        "Interfaces and applications",
+    "Protocols.UPnP":
+        "UPnP controller",
+    "HomeAutomation.X10":
+        "X10 controller (CM11, CM15, CM19)",
+    "HomeAutomation.ZWave":
+        "Z-Wave USB stick",
+    "HomeAutomation.ZigBee":
+        "ZigBee USB stick",
+"1":"------------------------------------------",
+    "select_modules":
+        "Select modules"
 }

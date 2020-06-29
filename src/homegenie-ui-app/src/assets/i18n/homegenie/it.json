@@ -1,4 +1,16 @@
 {
-    "interfaces_and_applications": "Interfacce e applicazioni",
-    "select_modules": "Seleziona moduli"
+"0": "------------------------------------------",
+    "interfaces_and_applications":
+        "Interfacce e applicazioni",
+    "Protocols.UPnP":
+        "Controller UPnP",
+    "HomeAutomation.X10":
+        "Controller X10 (CM15, CM11, CM19)",
+    "HomeAutomation.ZWave":
+        "Pennetta USB Z-Wave",
+    "HomeAutomation.ZigBee":
+        "Pennetta USB ZigBee",
+"1": "------------------------------------------",
+    "select_modules":
+        "Seleziona moduli"
 }

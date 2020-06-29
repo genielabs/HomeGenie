@@ -15,7 +15,7 @@
 
 ## Documentation
 
-https://genielabs.github.io/HomeGenie/
+https://genielabs.github.io/HomeGenie
 
 ## Precompiled packages and install instructions
 

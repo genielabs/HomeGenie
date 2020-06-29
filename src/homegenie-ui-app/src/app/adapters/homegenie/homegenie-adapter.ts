@@ -125,7 +125,16 @@ export class HomegenieAdapter implements Adapter {
     const subject = new Subject<any>();
     //const moduleDetailDialog = zuix.context('module-detail');
     // adapter-specific implementation
-    if (command === CMD.Options.Show) {
+    if (command === CMD.Drivers.List) {
+      this.apiCall(
+        'HomeAutomation.HomeGenie/Config/Interfaces.ListConfig',
+        (status, res) => {
+          subject.next(res);
+          subject.complete();
+        }
+      );
+      return subject;
+    } else if (command === CMD.Options.Show) {
       // TODO: ... implement something like this
       //if (moduleDetailDialog.isOpen()) {
       //    moduleDetailDialog.close();
