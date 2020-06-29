@@ -19,6 +19,7 @@ import { HomegenieSetupComponent } from './adapters/homegenie/homegenie-setup/ho
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { ZwaveSetupFormComponent } from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
 import { X10SetupFormComponent } from './adapters/homegenie/x10-setup-form/x10-setup-form.component';
+import { SetupPageComponent } from './setup-page/setup-page.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient) {
   const baseTranslateUrl = './assets/i18n';
@@ -40,7 +41,8 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
     HomegenieSetupComponent,
     SplashScreenComponent,
     ZwaveSetupFormComponent,
-    X10SetupFormComponent
+    X10SetupFormComponent,
+    SetupPageComponent
   ],
   imports: [
     BrowserModule,

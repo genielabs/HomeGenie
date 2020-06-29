@@ -10,6 +10,8 @@
         "Pennetta USB Z-Wave",
     "HomeAutomation.ZigBee":
         "Pennetta USB ZigBee",
+    "device_port":
+        "Porta dispositivo",
 "1": "------------------------------------------",
     "select_modules":
         "Seleziona moduli"

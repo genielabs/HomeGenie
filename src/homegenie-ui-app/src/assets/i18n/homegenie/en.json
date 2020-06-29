@@ -10,6 +10,8 @@
         "Z-Wave USB stick",
     "HomeAutomation.ZigBee":
         "ZigBee USB stick",
+    "device_port":
+        "Device port",
 "1":"------------------------------------------",
     "select_modules":
         "Select modules"

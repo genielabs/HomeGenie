@@ -10,6 +10,8 @@ import { Adapter } from '../../adapter';
   styleUrls: ['./homegenie-setup.component.scss']
 })
 export class HomegenieSetupComponent implements OnInit {
+  @Input()
+  adapter: HomegenieAdapter;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
@@ -24,21 +26,13 @@ export class HomegenieSetupComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-    const adapters = this.hgui.getAdapters();
-    const homegenieAdapter = adapters.find((adapter) => adapter.className === 'HomegenieAdapter');
-    if (homegenieAdapter) {
-      this.getInterfaceList(homegenieAdapter);
-    } else {
-      this.hgui.onAdapterAdded.subscribe((adapter) => {
-        if (adapter.className === 'HomegenieAdapter') {
-          this.getInterfaceList(adapter);
-        }
-      });
+    if (this.adapter) {
+      this.getInterfaceList();
     }
   }
 
-  getInterfaceList(adapter: Adapter) {
-    adapter.control(null, CMD.Drivers.List, {}).subscribe((res) => {
+  getInterfaceList() {
+    this.adapter.control(null, CMD.Drivers.List, {}).subscribe((res) => {
       console.log('Drivers', res, this.hgui);
       this.drivers = res;
     });

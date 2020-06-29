@@ -1,1 +1,10 @@
-<p class="content">zwave-setup-form works!</p>
+<div class="content">
+    <mat-form-field>
+        <mat-label>{{ "HOMEGENIE.device_port" | translate }}</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let portName of serialPorts" [value]="portName">
+                {{portName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>    
+</div>

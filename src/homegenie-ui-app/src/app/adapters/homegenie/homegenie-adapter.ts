@@ -22,6 +22,13 @@ class ModuleParameter {
 }
 class Program {
   // TODO: ...
+  IsEnabled: boolean;
+  Features: any[];
+}
+
+class ApiResponse {
+  code: number;
+  response: any;
 }
 
 export class HomegenieAdapter implements Adapter {
@@ -74,8 +81,10 @@ export class HomegenieAdapter implements Adapter {
   connect(): Subject<any> {
     const subject = new Subject<any>();
     this.apiCall(
-      'HomeAutomation.HomeGenie/Config/Modules.List',
-      (status, mods: Array<Module>) => {
+      'HomeAutomation.HomeGenie/Config/Modules.List')
+      .subscribe((res) => {
+        const status = res.code;
+        const mods: Array<Module> = res.response;
         if (status == 200) {
           // filter out unsupported modules
           mods.map((m) => {
@@ -100,9 +109,10 @@ export class HomegenieAdapter implements Adapter {
               });
             }
           });
-          this.apiCall(
-            'HomeAutomation.HomeGenie/Config/Groups.List',
-            (status, groups: Array<Group>) => {
+          this.apiCall('HomeAutomation.HomeGenie/Config/Groups.List')
+            .subscribe((res) => {
+              const status = res.code;
+              const groups: Array<Group> = res.response;
               this._groups = groups;
               // finally connect to the real-time event stream
               if (this.EnableWebsocketStream) {
@@ -126,10 +136,9 @@ export class HomegenieAdapter implements Adapter {
     //const moduleDetailDialog = zuix.context('module-detail');
     // adapter-specific implementation
     if (command === CMD.Drivers.List) {
-      this.apiCall(
-        'HomeAutomation.HomeGenie/Config/Interfaces.ListConfig',
-        (status, res) => {
-          subject.next(res);
+      this.apiCall('HomeAutomation.HomeGenie/Config/Interfaces.ListConfig')
+        .subscribe((res) => {
+          subject.next(res.response);
           subject.complete();
         }
       );
@@ -143,11 +152,10 @@ export class HomegenieAdapter implements Adapter {
       // TODO: ....
       //hgui.showLoader(true);
       let module = this.getModule(m.id);
-      this.apiCall(
-        'HomeAutomation.HomeGenie/Automation/Programs.List',
-        (status, res) => {
-          this._programs = res;
-          res.map((p) => {
+      this.apiCall('HomeAutomation.HomeGenie/Automation/Programs.List')
+        .subscribe((res) => {
+          this._programs = res.response;
+          this._programs.map((p) => {
             if (p.IsEnabled && p.Features != null) {
               for (let i = 0; i < p.Features.length; i++) {
                 const f = p.Features[i];
@@ -192,22 +200,43 @@ export class HomegenieAdapter implements Adapter {
     if (m.type === 'program') {
       const programAddress = m.id.substring(m.id.lastIndexOf('/') + 1);
       options = programAddress + '/' + options;
-      this.apiCall(
-        `HomeAutomation.HomeGenie/Automation/${command}/${options}`,
-        (code, res) => {
-          // TODO: ... cp.log.info(code, res);
+      this.apiCall(`HomeAutomation.HomeGenie/Automation/${command}/${options}`)
+        .subscribe((res) => {
+          // TODO: ... cp.log.info(res);
           subject.next();
           subject.complete();
         }
       );
     } else {
-      this.apiCall(`${m.id}/${command}/${options}`, (code, res) => {
-        // TODO: ... cp.log.info(code, res);
+      this.apiCall(`${m.id}/${command}/${options}`)
+        .subscribe((res) => {
+        // TODO: ... cp.log.info(res);
         subject.next();
         subject.complete();
       });
     }
     return subject;
+  }
+
+  apiCall(apiMethod): Subject<ApiResponse> {
+    const subject = new Subject<ApiResponse>();
+    const oc = this.options.config.connection;
+    if (oc == null) return;
+    const url = this.getBaseUrl() + `api/${apiMethod}`;
+    // TODO: implement a global service logger
+    //cp.log.info(url);
+    this.hgui.http
+      .get(url, {
+        // TODO: basic authentication
+        //headers: {
+        //    Authorization: 'Basic ' + btoa(oc.credentials.username + ':' + oc.credentials.password)
+        //}
+      })
+      .subscribe((res) => {
+        subject.next({ code: 200, response: res });
+        subject.complete();
+      });
+      return subject;
   }
 
   private getModuleId(module: Module) {
@@ -228,11 +257,9 @@ export class HomegenieAdapter implements Adapter {
       this.webSocket.close();
     }
     const o = this.options.config.connection;
-    this.apiCall(
-      'HomeAutomation.HomeGenie/Config/WebSocket.GetToken',
-      (code, res) => {
-        const r = res;
-        console.log(`ws://${o.address}:8188/events?at=${r.ResponseValue}`);
+    this.apiCall('HomeAutomation.HomeGenie/Config/WebSocket.GetToken')
+    .subscribe((res) => {
+        const r = res.response;
         this.webSocket = new WebSocket(
           `ws://${o.address}:8188/events?at=${r.ResponseValue}`
         );
@@ -300,25 +327,6 @@ export class HomegenieAdapter implements Adapter {
       return;
     }
     return `http://${oc.address}:${oc.port}/`;
-  }
-
-  private apiCall(apiMethod, callback) {
-    console.log(this.options);
-    const oc = this.options.config.connection;
-    if (oc == null) return;
-    const url = this.getBaseUrl() + `api/${apiMethod}`;
-    // TODO: implement a global service logger
-    //cp.log.info(url);
-    this.hgui.http
-      .get(url, {
-        // TODO: basic authentication
-        //headers: {
-        //    Authorization: 'Basic ' + btoa(oc.credentials.username + ':' + oc.credentials.password)
-        //}
-      })
-      .subscribe((res) => {
-        callback(200, res);
-      });
   }
 
   private processEvent(event) {
