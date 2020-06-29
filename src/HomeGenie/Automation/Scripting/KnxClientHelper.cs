@@ -21,9 +21,8 @@
  */
 
 using System;
-
+using System.ComponentModel;
 using KNXLib;
-using KNXLib.DPT;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -48,6 +47,16 @@ namespace HomeGenie.Automation.Scripting
         private Action<string, string> statusReceived;
         private Action<string, string> eventReceived;
         private Action<bool> statusChanged;
+        private string actionMessageCode;
+
+        /// <summary>
+        /// Set the Action Message code.
+        /// </summary>
+        public KnxClientHelper ActionMessageCode(string actionMessageCode)
+        {
+            this.actionMessageCode = actionMessageCode;
+            return this;
+        }
 
         /// <summary>
         /// Set the endpoint to connect to.
@@ -89,7 +98,8 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="remotePort">Remote port.</param>
         public KnxClientHelper EndPoint(string localIp, int localPort, string remoteIp, int remotePort)
         {
-            knxEndPoint = new KnxEndPoint() {
+            knxEndPoint = new KnxEndPoint()
+            {
                 LocalIp = localIp,
                 LocalPort = localPort,
                 RemoteIp = remoteIp,
@@ -115,21 +125,28 @@ namespace HomeGenie.Automation.Scripting
             {
                 if (knxEndPoint.RemoteIp != null && knxEndPoint.LocalIp != null)
                 {
-                    knxClient = new KnxConnectionTunneling(knxEndPoint.RemoteIp, knxEndPoint.RemotePort, knxEndPoint.LocalIp, knxEndPoint.LocalPort);
+                    if (knxClient == null)
+                        knxClient = new KnxConnectionTunneling(knxEndPoint.RemoteIp, knxEndPoint.RemotePort, knxEndPoint.LocalIp, knxEndPoint.LocalPort);
                 }
                 else if (knxEndPoint.LocalIp != null && knxEndPoint.LocalPort > 0)
                 {
+                    if (knxClient == null)
                     knxClient = new KnxConnectionRouting(knxEndPoint.LocalIp, knxEndPoint.LocalPort);
                 }
                 else if (knxEndPoint.LocalIp != null && knxEndPoint.LocalPort == 0)
                 {
+                    if (knxClient == null)
                     knxClient = new KnxConnectionRouting(knxEndPoint.LocalIp);
                 }
                 else if (knxEndPoint.LocalPort > 0)
                 {
+                    if (knxClient == null)
                     knxClient = new KnxConnectionRouting(knxEndPoint.LocalPort);
                 }
             }
+            if (!string.IsNullOrWhiteSpace(actionMessageCode)) 
+                knxClient.ActionMessageCode = (byte)new ByteConverter().ConvertFromString(actionMessageCode);
+
             knxClient.Connect();
             knxClient.KnxConnectedDelegate += knxClient_Connected;
             knxClient.KnxDisconnectedDelegate += knxClient_Disconnected;
