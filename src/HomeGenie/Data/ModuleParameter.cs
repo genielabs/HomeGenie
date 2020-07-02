@@ -42,7 +42,6 @@ namespace HomeGenie.Data
         private ValueStatistics statistics;
         [NonSerialized]
         private DateTime requestUpdateTimestamp = DateTime.UtcNow;
-        [NonSerialized]
         private object data;
         //
         public ModuleParameter()

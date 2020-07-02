@@ -4,29 +4,34 @@
   <div mat-dialog-content>
     <div *ngFor="let m of modules;">
       <!-- node item card -->
-      <mat-card *ngIf="m">
-        {{ m.Address + '. ' + m.Name + ' (' + m.Description + ')' }}
-        <div>(more infos)</div>
-        <button mat-flat-button [disabled]="isNetworkBusy" (click)="nodeRemove($event)" style="float: right; display: block;">
+      <div *ngIf="m">
+        <strong>{{ m.Address + '. ' + m.Name + ' ' + m.DeviceType + ' (' + m.Description + ')' }}</strong>
+        <div *ngFor="let p of m.Properties">{{p.Name}} <small>{{p.Value}}</small></div>
+        <button mat-flat-button [ngStyle]="{ display: isNetworkBusy ? 'none' : '' }" (click)="nodeRemove($event)" style="float: right; display: block;">
           {{ "remove" | translate }}
           <mat-icon aria-hidden="false" aria-label="Remove node">remove_circle_outline</mat-icon>
         </button>
-      </mat-card>
+      </div>
     </div>
   </div>
   <div mat-dialog-actions *ngIf="currentPage === PageId.MANAGEMENT" fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-flat-button [disabled]="isNetworkBusy" (click)="discovery($event)" mat-dialog-close>
-      <mat-icon aria-hidden="false" aria-label="Add node">arrow_back</mat-icon>
-      {{ "exit" | translate }}
-    </button>
-    <button mat-flat-button [disabled]="isNetworkBusy" (click)="discovery($event)">
-      <mat-icon aria-hidden="false" aria-label="Add node">sync</mat-icon>
-      {{ "synchronize" | translate}}
-    </button>
-    <button mat-flat-button [disabled]="isNetworkBusy" (click)="nodeAdd($event)">
-      <mat-icon aria-hidden="false" aria-label="Add node">add_circle_outline</mat-icon>
-      {{ "add_device" | translate}}
-    </button>
+    <ng-container *ngIf="!isNetworkBusy">
+      <button mat-flat-button [disabled]="isNetworkBusy" (click)="discovery($event)" mat-dialog-close>
+        <mat-icon aria-hidden="false" aria-label="Add node">arrow_back</mat-icon>
+        {{ "exit" | translate }}
+      </button>
+      <button mat-flat-button [disabled]="isNetworkBusy" (click)="discovery($event)">
+        <mat-icon aria-hidden="false" aria-label="Add node">sync</mat-icon>
+        {{ "synchronize" | translate}}
+      </button>
+      <button mat-flat-button [disabled]="isNetworkBusy" (click)="nodeAdd($event)">
+        <mat-icon aria-hidden="false" aria-label="Add node">add_circle_outline</mat-icon>
+        {{ "add_device" | translate}}
+      </button>
+    </ng-container>
+    <ng-container *ngIf="isNetworkBusy" mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </ng-container>
   </div>
 </ng-container>
 

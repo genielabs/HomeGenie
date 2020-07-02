@@ -81,14 +81,11 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
         const operationStatus = e.event.Value.split(' ').splice(-1)[0];
         switch (operationStatus) {
           case 'Started': // Discovery Started
-            this.isNetworkBusy = true;
             break;
           case 'Complete': // Discovery Complete
-            this.isNetworkBusy = false;
             break;
           case 'NodeAddFailed': // Node <n> Status NodeAddFailed
           case 'NodeRemoveFailed': // Node <n> Status NodeRemoveFailed
-            // this.timeoutStop();
             break;
           case 'NodeAddReady': // Node <n> Status NodeAddReady
           case 'NodeRemoveReady': // Node <n> Status NodeRemoveReady
@@ -115,6 +112,7 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
   }
 
   discovery(e): void {
+    if (this.isNetworkBusy) { return; }
     this.isNetworkBusy = true;
     this.adapter.apiCall(ZWaveApi.Master.Controller.Discovery)
       .subscribe((res) => {
@@ -132,6 +130,7 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
     this.currentPage = PageId.MANAGEMENT;
   }
   nodeAdd(e): void {
+    if (this.isNetworkBusy) { return; }
     this.isNetworkBusy = true;
     this.operationTimeout = 0;
     this.operationNodeAddress = 0;
@@ -143,6 +142,7 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
     this.currentPage = PageId.NODE_ADD;
   }
   nodeRemove(e): void {
+    if (this.isNetworkBusy) { return; }
     this.isNetworkBusy = true;
     this.operationTimeout = 0;
     this.operationNodeAddress = 0;
