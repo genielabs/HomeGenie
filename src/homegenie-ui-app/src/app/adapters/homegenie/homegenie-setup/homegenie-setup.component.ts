@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HguiService, CMD } from 'src/app/services/hgui/hgui.service';
-import { HomegenieAdapter } from '../homegenie-adapter';
-import { Adapter } from '../../adapter';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HguiService} from 'src/app/services/hgui/hgui.service';
+import {HomegenieAdapter} from '../homegenie-adapter';
+import {HomegenieApi} from '../homegenie-api';
 
 @Component({
   selector: 'app-homegenie-setup',
@@ -16,14 +16,15 @@ export class HomegenieSetupComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   drivers: any[] = [];
-  
-  constructor(private hgui: HguiService, private _formBuilder: FormBuilder) {}
 
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
+  constructor(private hgui: HguiService, private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit(): void {
+    this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
+    this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
     if (this.adapter) {
@@ -31,11 +32,11 @@ export class HomegenieSetupComponent implements OnInit {
     }
   }
 
-  getInterfaceList() {
-    this.adapter.control(null, CMD.Drivers.List, {}).subscribe((res) => {
-      console.log('Drivers', res, this.hgui);
-      this.drivers = res;
-    });
+  getInterfaceList(): void {
+    this.adapter.apiCall(HomegenieApi.Config.Interfaces.List)
+      .subscribe((res) => {
+        console.log('Drivers', res, this.hgui);
+        this.drivers = res.response;
+      });
   }
-
 }

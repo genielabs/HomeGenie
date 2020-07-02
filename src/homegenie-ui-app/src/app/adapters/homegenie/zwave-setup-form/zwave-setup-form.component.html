@@ -1,10 +1,30 @@
-<div class="content">
-    <mat-form-field>
-        <mat-label>{{ "HOMEGENIE.device_port" | translate }}</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let portName of serialPorts" [value]="portName">
-                {{portName}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>    
+<div class="content" fxLayout="row wrap" fxLayoutGap="24px">
+    <div>
+        <label class="label">{{ "configuration" | translate }}</label>
+        <mat-form-field>
+            <mat-label>{{ "HOMEGENIE.device_port" | translate }}</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let portName of serialPorts" [value]="portName">
+                    {{portName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <label class="label">{{ "tools" | translate }}</label>
+        <div fxLayout="row wrap" fxLayoutGap="12px">
+            <button mat-flat-button (click)="onSynchronizeButtonClick($event)">
+                <mat-icon aria-hidden="false" aria-label="Discovery">settings</mat-icon>
+                {{ "HOMEGENIE.zwave_devices_button" | translate }}
+            </button>
+            <button mat-flat-button>
+                <mat-icon aria-hidden="false" aria-label="Heal network">healing</mat-icon>
+              {{ "HOMEGENIE.zwave_heal_network_button" | translate }}
+            </button>
+            <button mat-flat-button>
+                <mat-icon aria-hidden="false" aria-label="Factory reset" color="warn">warning</mat-icon>
+              {{ "HOMEGENIE.zwave_hard_reset_button" | translate }}
+            </button>
+        </div>
+    </div>
 </div>

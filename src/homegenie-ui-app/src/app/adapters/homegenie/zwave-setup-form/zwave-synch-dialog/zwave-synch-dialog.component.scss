@@ -1,0 +1,12 @@
+@import "src/_variables.scss";
+.progress-message {
+  text-align: center;
+  padding: 8px;
+  font-size: 80%;
+}
+.mat-dialog-actions {
+  min-width: 320px;
+}
+.color-accent {
+  color: $accent;
+}

@@ -238,7 +238,7 @@ namespace HomeGenie.Service
                 var resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties" });
                 settings.ContractResolver = resolver;
             }
-            return JsonConvert.SerializeObject(module, settings);
+            return JsonConvert.SerializeObject(module.Clone(), settings);
         }
 
         public static string JsonEncode(string fieldValue)

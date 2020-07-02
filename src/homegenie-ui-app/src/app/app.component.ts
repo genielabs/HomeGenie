@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { HomegenieAdapter } from 'src/app/adapters/homegenie/homegenie-adapter';
 import AdapterFactory from './adapters/adapter-factory';
-import { HguiService, CMD } from './services/hgui/hgui.service';
+import { HguiService } from './services/hgui/hgui.service';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +35,7 @@ export class AppComponent {
    * Creates a default configuration with one adapter (HomeGenie API adapter) pointing to localhost:8080
    * @param hgui HGUI service instance
    */
-  configure(hgui: HguiService) {
+  configure(hgui: HguiService): void {
     const homegenieAdapter = new HomegenieAdapter(hgui);
     homegenieAdapter.options = {
       config: {
@@ -57,15 +57,15 @@ export class AppComponent {
           // in HomeGenie Server group modules are just links, so we need to get the module instance from `moduleList`
           const module = homegenieAdapter.modules.find(
             (m) =>
-              m.Domain == moduleLink.Domain && m.Address == moduleLink.Address
+              m.Domain === moduleLink.Domain && m.Address === moduleLink.Address
           );
           // if the module type is not supported it won't be found in the modules list
-          if (module == null) return;
+          if (module == null) { return; }
           const moduleId = module.Domain + '/' + module.Address;
           const adapterId = homegenieAdapter.id;
           const hguiModule = hgui.addModule({
             id: moduleId,
-            adapterId: adapterId,
+            adapterId,
             type: module.DeviceType.toLowerCase(),
             name: module.Name,
             description: module.Description,

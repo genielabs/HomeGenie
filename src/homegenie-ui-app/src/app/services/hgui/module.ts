@@ -10,5 +10,5 @@ export class Module {
 export class ModuleField {
   key: string;
   value?: any;
-  timestamp?: number = 0;
+  timestamp = 0;
 }

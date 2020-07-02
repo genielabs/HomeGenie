@@ -2,5 +2,31 @@
     "home":
         "Home",
     "setup":
-        "Setup"
+        "Setup",
+    "exit":
+        "Exit",
+    "add":
+      "Add",
+    "remove":
+        "Remove",
+    "ok":
+        "Ok",
+    "cancel":
+        "Cancel",
+    "abort":
+        "Abort",
+    "retry":
+        "Retry",
+    "close":
+        "Close",
+    "configuration":
+        "Configuration",
+    "tools":
+        "Tools",
+    "synchronize":
+        "Synchronize",
+    "add_device":
+        "Add device",
+    "operation_failed":
+        "Operation failed"
 }

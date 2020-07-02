@@ -1,0 +1,114 @@
+<!-- network nodes list -->
+<ng-container *ngIf="currentPage === PageId.MANAGEMENT">
+  <h1 mat-dialog-title>{{ "HOMEGENIE.zwave_devices_title" | translate }}</h1>
+  <div mat-dialog-content>
+    <div *ngFor="let m of modules;">
+      <!-- node item card -->
+      <mat-card *ngIf="m">
+        {{ m.Address + '. ' + m.Name + ' (' + m.Description + ')' }}
+        <div>(more infos)</div>
+        <button mat-flat-button [disabled]="isNetworkBusy" (click)="nodeRemove($event)" style="float: right; display: block;">
+          {{ "remove" | translate }}
+          <mat-icon aria-hidden="false" aria-label="Remove node">remove_circle_outline</mat-icon>
+        </button>
+      </mat-card>
+    </div>
+  </div>
+  <div mat-dialog-actions *ngIf="currentPage === PageId.MANAGEMENT" fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-flat-button [disabled]="isNetworkBusy" (click)="discovery($event)" mat-dialog-close>
+      <mat-icon aria-hidden="false" aria-label="Add node">arrow_back</mat-icon>
+      {{ "exit" | translate }}
+    </button>
+    <button mat-flat-button [disabled]="isNetworkBusy" (click)="discovery($event)">
+      <mat-icon aria-hidden="false" aria-label="Add node">sync</mat-icon>
+      {{ "synchronize" | translate}}
+    </button>
+    <button mat-flat-button [disabled]="isNetworkBusy" (click)="nodeAdd($event)">
+      <mat-icon aria-hidden="false" aria-label="Add node">add_circle_outline</mat-icon>
+      {{ "add_device" | translate}}
+    </button>
+  </div>
+</ng-container>
+
+<!-- node add -->
+<ng-container *ngIf="currentPage === PageId.NODE_ADD">
+  <h1 mat-dialog-title>{{ "HOMEGENIE.node_inclusion" | translate }}</h1>
+  <div mat-dialog-content [ngSwitch]="status">
+
+    <div *ngSwitchCase="PageStatus.REQUEST" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <div>{{ "HOMEGENIE.enabling_node_inclusion" | translate }}</div>
+      <mat-spinner diameter="18"></mat-spinner>
+    </div>
+
+    <div *ngSwitchCase="PageStatus.READY">
+      <div *ngIf="operationNodeAddress === 0">
+        <p>{{ "HOMEGENIE.zwave_inclusion_message" | translate }}</p>
+        <mat-progress-bar *ngIf="isNetworkBusy" mode="buffer" [value]="isNetworkBusy ? (operationTimeout/operationTimeoutSeconds)*100 : 0"></mat-progress-bar>
+        <div class="progress-message">{{ "HOMEGENIE.zwave_task_duration_notice" | translate:translateParams }}</div>
+      </div>
+      <div *ngIf="operationNodeAddress !== 0" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+        <div [innerHTML]="'HOMEGENIE.zwave_adding_node' | translate:translateParams"></div>
+        <mat-spinner diameter="18"></mat-spinner>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="PageStatus.SUCCESS" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <div [innerHTML]="'HOMEGENIE.zwave_node_added' | translate:translateParams"></div>
+      <mat-icon aria-hidden="false" aria-label="Succeed" color="primary">check</mat-icon>
+    </div>
+
+    <div *ngSwitchCase="PageStatus.FAILURE" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <div>{{ "operation_failed" | translate }}</div>
+      <mat-icon aria-hidden="false" aria-label="Failed" color="warn">close</mat-icon>
+    </div>
+  </div>
+</ng-container>
+
+<!-- node remove -->
+<ng-container *ngIf="currentPage === PageId.NODE_REMOVE">
+  <div mat-dialog-content [ngSwitch]="status">
+    <h1 mat-dialog-title>{{ "HOMEGENIE.node_exclusion" | translate }}</h1>
+
+    <div *ngSwitchCase="PageStatus.REQUEST" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <div>{{ "HOMEGENIE.enabling_node_exclusion" | translate }}</div>
+      <mat-spinner diameter="18"></mat-spinner>
+    </div>
+
+    <div *ngSwitchCase="PageStatus.READY">
+      <div *ngIf="operationNodeAddress === 0">
+        <p>{{ "HOMEGENIE.zwave_exclusion_message" | translate }}</p>
+        <mat-progress-bar *ngIf="isNetworkBusy" mode="buffer" [value]="isNetworkBusy ? (operationTimeout/operationTimeoutSeconds)*100 : 0"></mat-progress-bar>
+        <div class="progress-message">{{ "HOMEGENIE.zwave_task_duration_notice" | translate:translateParams }}</div>
+      </div>
+      <div *ngIf="operationNodeAddress !== 0" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+        <div [innerHTML]="'HOMEGENIE.zwave_removing_node' | translate:translateParams"></div>
+        <mat-spinner diameter="18"></mat-spinner>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="PageStatus.SUCCESS" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <div [innerHTML]="'HOMEGENIE.zwave_node_removed' | translate:translateParams"></div>
+      <mat-icon aria-hidden="false" aria-label="Succeed" color="primary">check</mat-icon>
+    </div>
+
+    <div *ngSwitchCase="PageStatus.FAILURE" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <div>{{ "operation_failed" | translate }}</div>
+      <mat-icon aria-hidden="false" aria-label="Failed" color="warn">close</mat-icon>
+    </div>
+  </div>
+</ng-container>
+
+<!-- shared buttons in node add/remove -->
+<ng-container *ngIf="currentPage !== PageId.MANAGEMENT && !isNetworkBusy">
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-flat-button [ngStyle]="{ visibility: status === PageStatus.FAILURE ? 'visible' : 'hidden' }">
+      <mat-icon aria-hidden="false" aria-label="Retry add node" (click)="retryOperation($event)">refresh</mat-icon>
+      {{ "retry" | translate }}
+    </button>
+    <button mat-flat-button (click)="discovery()">
+      <!-- mat-icon aria-hidden="false" aria-label="Back to node list">close</mat-icon -->
+      <span *ngIf="status === PageStatus.FAILURE">{{ "cancel" | translate }}</span>
+      <span *ngIf="status === PageStatus.SUCCESS">{{ "ok" | translate }}</span>
+    </button>
+  </div>
+</ng-container>

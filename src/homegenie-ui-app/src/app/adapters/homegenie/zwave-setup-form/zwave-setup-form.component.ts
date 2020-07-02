@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HguiService } from 'src/app/services/hgui/hgui.service';
-import { FormBuilder } from '@angular/forms';
-import { HomegenieAdapter } from '../homegenie-adapter';
+import {Component, Input, OnInit} from '@angular/core';
+import {HomegenieAdapter} from '../homegenie-adapter';
+import {MatDialog} from '@angular/material/dialog';
+import {ZwaveSynchDialogComponent} from './zwave-synch-dialog/zwave-synch-dialog.component';
+import {HomegenieApi} from '../homegenie-api';
 
 @Component({
   selector: 'app-zwave-setup-form',
@@ -14,16 +15,26 @@ export class ZwaveSetupFormComponent implements OnInit {
 
   serialPorts: { value: string, content: string }[] = [];
 
-  constructor(private hgui: HguiService, private _formBuilder: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
     // TODO: get Z-Wave options
     console.log('Z-Wave options', this.adapter);
-    this.adapter.apiCall('HomeAutomation.HomeGenie/Config/Interfaces.Configure/Hardware.SerialPorts')
+    this.adapter.apiCall(HomegenieApi.Config.Interfaces.Configure.Hardware.SerialPorts)
       .subscribe((res) => {
-        //this.serialPorts = res.response.map((portName: string) => ({ value: portName, content: portName }));
         this.serialPorts = res.response;
-        console.log('!!!!!!!!!!!', this.serialPorts);
       });
+  }
+
+  onSynchronizeButtonClick(e): void {
+    this.dialog.open(ZwaveSynchDialogComponent, {
+      // height: '400px',
+      // width: '600px',
+      disableClose: true,
+      data: this.adapter
+    });
   }
 }

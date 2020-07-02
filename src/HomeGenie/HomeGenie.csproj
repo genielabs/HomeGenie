@@ -62,7 +62,7 @@
     <PackageReference Include="SerialPortLib" Version="1.0.23" />
     <PackageReference Include="XTenLib" Version="1.0.15" />
 
-    <PackageReference Include="MIG" Version="1.1.7" />
+    <PackageReference Include="MIG" Version="1.1.8" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.1.7" />
     <PackageReference Include="MIG.Protocols" Version="1.1.9" />
 

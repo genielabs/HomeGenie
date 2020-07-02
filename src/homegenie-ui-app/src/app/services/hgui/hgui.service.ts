@@ -11,15 +11,13 @@ import { Configuration, AdapterConfiguration } from './configuration';
 import { Group, ModuleReference } from './group';
 import { Module, ModuleField } from './module';
 
+// HomeGenieUI API
 export class CMD {
   static Control = {
     On: 'Control.On',
     Off: 'Control.Off',
     Level: 'Control.Level',
     Toggle: 'Control.Toggle'
-  };
-  static Drivers = {
-    List: 'Drivers.List'
   };
   static Options = {
     Show: 'Options.Show'
@@ -67,7 +65,7 @@ export class HguiService implements OnDestroy {
 
   constructor(public storage: StorageMap, public http: HttpClient) {}
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.saveConfiguration();
     this.onModuleAdded.complete();
     this.onModuleRemoved.complete();
@@ -171,7 +169,7 @@ export class HguiService implements OnDestroy {
     // create a new instance if 'adapterId' was not found and a 'typeName' was given
     if (className != null && adapter == null) {
       adapter = AdapterFactory.create(className, this);
-      //this.addAdapter(adapter);
+      // this.addAdapter(adapter);
     }
     return adapter;
   }
@@ -201,7 +199,7 @@ export class HguiService implements OnDestroy {
    */
   addGroup(name): Group {
     let group = this.getGroup(name);
-    if (group != null) return group;
+    if (group != null) { return group; }
     group = new Group();
     group.name = name;
     group.modules = [];
@@ -261,7 +259,7 @@ export class HguiService implements OnDestroy {
    */
   addModule(module: Module): Module {
     const m = this.getModule(module.id, module.adapterId);
-    if (m != null) return m;
+    if (m != null) { return m; }
     // TODO: module = zuix.observable(module).proxy;
     // TODO: subscribe to module events
     this.modules.push(module);
@@ -299,7 +297,7 @@ export class HguiService implements OnDestroy {
    * @param fieldKey The field key identifier
    */
   getModuleField(module: Module, fieldKey: string): ModuleField {
-    if (module.fields == null) return null;
+    if (module.fields == null) { return null; }
     return module.fields.find((f) => f.key === fieldKey);
   }
   /**
@@ -315,12 +313,12 @@ export class HguiService implements OnDestroy {
     value: any,
     timestamp: number
   ): any {
-    if (module.fields == null) module.fields = [];
+    if (module.fields == null) { module.fields = []; }
     let field = this.getModuleField(module, fieldKey);
     if (field != null && field.timestamp === timestamp) {
       return;
     } else if (field == null) {
-      field = { key: fieldKey };
+      field = { key: fieldKey, timestamp: 0 };
       module.fields.push(field);
     }
     field.value = value;

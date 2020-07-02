@@ -1,18 +1,49 @@
 {
-"0":"------------------------------------------",
-    "interfaces_and_applications":
-        "Interfaces and applications",
+" ": "-------------- INTERFACES ----------------",
+    "interfaces_configuration":
+        "Interfaces configuration",
     "Protocols.UPnP":
         "UPnP controller",
     "HomeAutomation.X10":
-        "X10 controller (CM11, CM15, CM19)",
+        "X10 controller",
     "HomeAutomation.ZWave":
-        "Z-Wave USB stick",
+        "Z-Wave controller",
     "HomeAutomation.ZigBee":
-        "ZigBee USB stick",
+        "ZigBee controller",
     "device_port":
         "Device port",
-"1":"------------------------------------------",
-    "select_modules":
-        "Select modules"
+" ":"----------- Z-WAVE INTERFACE -------------",
+    "zwave_devices_title":
+        "Z-Wave devices manager",
+    "zwave_devices_button":
+        "Devices management",
+    "zwave_heal_network_button":
+        "Heal network",
+    "zwave_hard_reset_button":
+        "Factory reset",
+    "node_inclusion":
+        "Add device",
+    "node_exclusion":
+        "Remove device",
+    "enabling_node_inclusion":
+        "Enabling node inclusion mode, please wait...",
+    "enabling_node_exclusion":
+        "Enabling node exclusion mode, please wait...",
+    "zwave_inclusion_message":
+        "Press the button on the device you want to add to this network.",
+    "zwave_exclusion_message":
+        "Press the button on the device you want to remove from this network.",
+    "zwave_task_duration_notice":
+        "This task might take up to {{ timeout }} seconds to complete.",
+    "zwave_adding_node":
+        "Adding device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
+    "zwave_removing_node":
+        "Removing device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
+    "zwave_node_added":
+        "Device <strong class=\"color-accent\">{{ node }}</strong> successfully added",
+    "zwave_node_removed":
+        "Device <strong class=\"color-accent\">{{ node }}</strong> has been removed",
+" ":"------------------------------------------",
+    "modules":
+        "Modules"
 }

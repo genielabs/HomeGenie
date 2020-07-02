@@ -1,35 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
-import { MaterialModule } from './material.module';
+import {MaterialModule} from './material.module';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { ModuleTranslateLoader, IModuleTranslationOptions } from '@larscom/ngx-translate-module-loader';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {IModuleTranslationOptions, ModuleTranslateLoader} from '@larscom/ngx-translate-module-loader';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
-import { HomegenieSetupComponent } from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
-import { SplashScreenComponent } from './splash-screen/splash-screen.component';
-import { ZwaveSetupFormComponent } from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
-import { X10SetupFormComponent } from './adapters/homegenie/x10-setup-form/x10-setup-form.component';
-import { SetupPageComponent } from './setup-page/setup-page.component';
+import {HomegenieSetupComponent} from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
+import {SplashScreenComponent} from './splash-screen/splash-screen.component';
+import {ZwaveSetupFormComponent} from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
+import {X10SetupFormComponent} from './adapters/homegenie/x10-setup-form/x10-setup-form.component';
+import {SetupPageComponent} from './setup-page/setup-page.component';
+import {ZwaveSynchDialogComponent} from './adapters/homegenie/zwave-setup-form/zwave-synch-dialog/zwave-synch-dialog.component';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
-export function moduleHttpLoaderFactory(http: HttpClient) {
+export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
-
   const options: IModuleTranslationOptions = {
     modules: [
       // final url: ./assets/i18n/en.json
-      { baseTranslateUrl },
+      {baseTranslateUrl},
       // final url: ./assets/i18n/homegenie/en.json
-      { moduleName: 'homegenie', baseTranslateUrl }
+      {moduleName: 'homegenie', baseTranslateUrl}
     ]
   };
   return new ModuleTranslateLoader(http, options);
@@ -42,7 +43,8 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
     SplashScreenComponent,
     ZwaveSetupFormComponent,
     X10SetupFormComponent,
-    SetupPageComponent
+    SetupPageComponent,
+    ZwaveSynchDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     MaterialModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'it',
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: moduleHttpLoaderFactory,
@@ -62,8 +64,11 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
 

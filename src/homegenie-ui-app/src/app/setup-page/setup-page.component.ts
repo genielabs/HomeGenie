@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HguiService } from '../services/hgui/hgui.service';
+import {Component, OnInit} from '@angular/core';
+import {HguiService} from '../services/hgui/hgui.service';
 
 @Component({
   selector: 'app-setup-page',
@@ -8,7 +8,8 @@ import { HguiService } from '../services/hgui/hgui.service';
 })
 export class SetupPageComponent implements OnInit {
 
-  constructor(public hgui: HguiService) { }
+  constructor(public hgui: HguiService) {
+  }
 
   ngOnInit(): void {
   }

@@ -1,7 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HomegenieAdapter } from '../homegenie-adapter';
-import { HguiService } from 'src/app/services/hgui/hgui.service';
-import { FormBuilder } from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {HomegenieAdapter} from '../homegenie-adapter';
 
 @Component({
   selector: 'app-x10-setup-form',
@@ -12,7 +10,8 @@ export class X10SetupFormComponent implements OnInit {
   @Input()
   adapter: HomegenieAdapter;
 
-  constructor(private hgui: HguiService, private _formBuilder: FormBuilder) {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     // TODO: get X10 options
