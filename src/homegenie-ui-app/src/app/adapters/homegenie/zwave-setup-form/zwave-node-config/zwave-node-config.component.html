@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <span>{{ module.name }}</span>
+  <strong>{{ module.id }}</strong>
+</div>
+<small>
+  {{ module.description }}
+</small>
+
+<div *ngFor="let f of module.fields">{{f.key}} <small>{{f.value}}</small></div>

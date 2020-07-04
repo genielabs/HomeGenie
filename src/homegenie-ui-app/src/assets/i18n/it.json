@@ -13,6 +13,8 @@
         "Ok",
     "cancel":
         "Annulla",
+    "back":
+        "Indietro",
     "abort":
         "Interrompi",
     "retry":
@@ -28,5 +30,7 @@
     "add_device":
         "Aggiungi dispositivo",
     "operation_failed":
-        "Operazione fallita"
+        "Operazione fallita",
+    "device_manager":
+        "Gestione dispositivi"
 }

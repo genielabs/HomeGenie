@@ -1,0 +1,12 @@
+<div *ngFor="let m of modules;">
+  <!-- node item card -->
+  <div *ngIf="m" matRipple class="list-item" (click)="onItemClick(m)">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span>{{ m.name + ' ' + m.type }}</span>
+      <strong>{{ m.id }}</strong>
+    </div>
+    <small>
+      {{ m.description }}
+    </small>
+  </div>
+</div>

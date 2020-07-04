@@ -13,6 +13,8 @@
         "Ok",
     "cancel":
         "Cancel",
+    "back":
+        "Back",
     "abort":
         "Abort",
     "retry":
@@ -28,5 +30,7 @@
     "add_device":
         "Add device",
     "operation_failed":
-        "Operation failed"
+        "Operation failed",
+    "device_manager":
+        "Device manager"
 }

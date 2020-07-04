@@ -14,15 +14,15 @@
         <label class="label">{{ "tools" | translate }}</label>
         <div fxLayout="row wrap" fxLayoutGap="12px">
             <button mat-flat-button (click)="onSynchronizeButtonClick($event)">
-                <mat-icon aria-hidden="false" aria-label="Discovery">settings</mat-icon>
-                {{ "HOMEGENIE.zwave_devices_button" | translate }}
+              <mat-icon aria-hidden="false">devices_other</mat-icon>
+              {{ "device_manager" | translate }}
             </button>
             <button mat-flat-button>
-                <mat-icon aria-hidden="false" aria-label="Heal network">healing</mat-icon>
+              <mat-icon aria-hidden="false">healing</mat-icon>
               {{ "HOMEGENIE.zwave_heal_network_button" | translate }}
             </button>
             <button mat-flat-button>
-                <mat-icon aria-hidden="false" aria-label="Factory reset" color="warn">warning</mat-icon>
+              <mat-icon aria-hidden="false" color="warn">warning</mat-icon>
               {{ "HOMEGENIE.zwave_hard_reset_button" | translate }}
             </button>
         </div>

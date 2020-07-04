@@ -3,7 +3,9 @@ import {Subject} from 'rxjs';
 import {Adapter} from '../adapter';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
 import {Module as HguiModule} from 'src/app/services/hgui/module';
-import {HomegenieApi, Module, Group, Program} from './homegenie-api';
+import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
+import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
+import {ZwaveAdapter} from './zwave-setup-form/zwave-adapter';
 
 export {Module, Group, Program};
 
@@ -29,10 +31,17 @@ export class HomegenieAdapter implements Adapter {
   private webSocket;
   private _programs: Array<Program> = [];
 
-  constructor(private hgui: HguiService) {
+  private _zwaveAdapter = new HomegenieZwaveAdapter(this);
+  get zwaveAdapter(): ZwaveAdapter {
+    return this._zwaveAdapter;
   }
 
-  private _id: string;
+  constructor(private _hgui: HguiService) {
+  }
+
+  get hgui(): HguiService {
+    return this._hgui;
+  }
 
   get id(): string {
     let address = '0.0.0.0';
@@ -83,12 +92,16 @@ export class HomegenieAdapter implements Adapter {
                   m.Name = domainShort + ' ' + m.Address;
                 }
                 this._modules.push(m);
-                // update fields of associated HGUI module
+
+
+                // TODO: optimize this
+
+                // update fields of associated HGUI module if exists
                 m.Properties.map((p) => {
                   const moduleId = m.Domain + '/' + m.Address;
-                  const module = this.hgui.getModule(moduleId, this.id);
+                  const module = this._hgui.getModule(moduleId, this.id);
                   if (module != null) {
-                    this.hgui.updateModuleField(
+                    this._hgui.updateModuleField(
                       module,
                       p.Name,
                       p.Value,
@@ -96,6 +109,8 @@ export class HomegenieAdapter implements Adapter {
                     );
                   }
                 });
+
+
               }
             });
             this.apiCall(HomegenieApi.Config.Groups.List)
@@ -207,7 +222,7 @@ export class HomegenieAdapter implements Adapter {
     const url = this.getBaseUrl() + `api/${apiMethod}`;
     // TODO: implement a global service logger
     // cp.log.info(url);
-    this.hgui.http
+    this._hgui.http
       .get(url, {
         // TODO: basic authentication
         // headers: {
@@ -221,8 +236,8 @@ export class HomegenieAdapter implements Adapter {
     return subject;
   }
 
-  reloadModules(): Subject<Array<any>> {
-    const subject = new Subject<any>();
+  reloadModules(): Subject<Array<Module>> {
+    const subject = new Subject<Array<Module>>();
     this.apiCall(HomegenieApi.Config.Modules.List)
       .subscribe((res) => {
           const status = res.code;
@@ -238,36 +253,51 @@ export class HomegenieAdapter implements Adapter {
                 if (m.Name === '') {
                   m.Name = domainShort + ' ' + m.Address;
                 }
-                this._modules.push(m);
-                // update fields of associated HGUI module
+                const moduleId = this.getModuleId(m);
+                const existingModule = this.getModule(moduleId);
+                if (existingModule) {
+                  // TODO: should update properties
+                } else {
+                  this._modules.push(m);
+                }
+
+                // TODO: optimize this
+
+                let hguiModule = this.hgui.getModule(moduleId, this.id);
+                if (hguiModule == null) {
+                  // add new module to HGUI modules if missing
+                  hguiModule = this.hgui.addModule({
+                    id: moduleId,
+                    adapterId: this.id,
+                    type: m.DeviceType.toLowerCase(),
+                    name: m.Name,
+                    description: m.Description,
+                    fields: [],
+                  });
+                }
+
+                // Update modules fields (hgui fields = hg Properties)
                 m.Properties.map((p) => {
-                  const moduleId = m.Domain + '/' + m.Address;
-                  const module = this.hgui.getModule(moduleId, this.id);
-                  if (module != null) {
-                    this.hgui.updateModuleField(
-                      module,
-                      p.Name,
-                      p.Value,
-                      p.UpdateTime
-                    );
-                  }
+                  this.hgui.updateModuleField(hguiModule, p.Name, p.Value, p.UpdateTime);
                 });
+
+
               }
             });
             subject.next(this._modules);
           } else {
-            subject.next(status);
+            subject.error(status);
           }
         }
       );
     return subject;
   }
 
-  private getModuleId(module: Module): string {
+  getModuleId(module: Module): string {
     return `${module.Domain}/${module.Address}`;
   }
 
-  private getModule(id: string): Module {
+  protected getModule(id: string): Module {
     const matchingModules = this._modules.filter(
       (i) => this.getModuleId(i) === id
     );
@@ -358,15 +388,31 @@ export class HomegenieAdapter implements Adapter {
 
   private processEvent(event): void {
     const moduleId = event.Domain + '/' + event.Source;
-    const m = this.hgui.getModule(moduleId, this.id);
+    const m = this._hgui.getModule(moduleId, this.id);
     this.onModuleEvent.next({module: m, event});
     if (m != null) {
-      this.hgui.updateModuleField(
+      this._hgui.updateModuleField(
         m,
         event.Property,
         event.Value,
         event.UnixTimestamp
       );
+    }
+    // update local hg-module
+    const module = this._modules.find((mod) => mod.Domain === event.Domain && mod.Address === event.Source);
+    if (module) {
+      let property: ModuleParameter = module.Properties.find((p) => p.Name === event.Property);
+      if (property == null) {
+        property = {
+          Name: event.Property,
+          Value: event.Value,
+          UpdateTime: event.UnixTimestamp
+        };
+        module.Properties.push(property);
+      } else {
+        property.Value = event.Value;
+        property.UpdateTime = event.UnixTimestamp;
+      }
     }
   }
 }

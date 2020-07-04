@@ -1,13 +1,14 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {HomegenieAdapter, Module} from '../../homegenie-adapter';
-import {ZWaveApi} from '../../homegenie-api';
 import {Subscription} from 'rxjs';
+import {Module} from '../../../../services/hgui/module';
+import {Adapter} from '../../../adapter';
 
 class PageId {
   static MANAGEMENT = 0;
-  static NODE_ADD = 1;
-  static NODE_REMOVE = 2;
+  static NODE_DETAILS = 1;
+  static NODE_ADD = 2;
+  static NODE_REMOVE = 3;
 }
 class PageStatus {
   static READY = 0;
@@ -25,6 +26,7 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
   isNetworkBusy: boolean;
 
   currentPage = PageId.MANAGEMENT;
+  currentModule: any;
   PageId = PageId;
   PageStatus = PageStatus;
   status = PageStatus.READY;
@@ -32,6 +34,8 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
   operationTimeoutSeconds = 30;
   operationNodeAddress = 0;
   modules: Array<Module> = [];
+
+  private subscriptions: Array<Subscription> = [];
 
   get translateParams(): any {
     return {
@@ -54,13 +58,48 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ZwaveSynchDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private adapter: HomegenieAdapter
+    @Inject(MAT_DIALOG_DATA) private adapter: Adapter
   ) {
   }
 
   ngOnInit(): void {
+    const zwaveAdapter = this.adapter.zwaveAdapter;
+    if (zwaveAdapter) {
+      this.subscriptions.push(zwaveAdapter.onDiscoveryStart.subscribe(() => {
+        this.isNetworkBusy = true;
+      }));
+      this.subscriptions.push(zwaveAdapter.onDiscoveryComplete.subscribe(() => {
+        this.isNetworkBusy = false;
+      }));
+      this.subscriptions.push(zwaveAdapter.onNodeAddReady.subscribe(() => {
+        this.status = PageStatus.READY;
+        this.timeoutStart(this.operationTimeoutSeconds);
+      }));
+      this.subscriptions.push(zwaveAdapter.onNodeAddStarted.subscribe((nodeId) => {
+        this.operationNodeAddress = nodeId;
+      }));
+      this.subscriptions.push(zwaveAdapter.onNodeAddDone.subscribe((nodeId) => {
+        this.operationNodeAddress = nodeId;
+      }));
+      this.subscriptions.push(zwaveAdapter.onNodeRemoveReady.subscribe(() => {
+        this.status = PageStatus.READY;
+        this.timeoutStart(this.operationTimeoutSeconds);
+      }));
+      this.subscriptions.push(zwaveAdapter.onNodeRemoveStarted.subscribe((nodeId) => {
+        this.operationNodeAddress = nodeId;
+      }));
+      this.subscriptions.push(zwaveAdapter.onNodeRemoveDone.subscribe((nodeId) => {
+        this.operationNodeAddress = nodeId;
+      }));
+      zwaveAdapter.discovery().subscribe((modules) => {
+        this.modules = modules;
+      });
+    } else {
+      // TODO: throw not implemented exception
+    }
+    /*
     this.moduleEventSubscription = this.adapter.onModuleEvent.subscribe((e) => {
-      if (this.isMasterNode(e.module) && e.event.Property === 'Controller.Status') {
+      if (this.isMasterNode(e.module as any) && e.event.Property === 'Controller.Status') {
         if (e.event.Value.startsWith('Added node ')) {
           const node = +e.event.Value.substring(11);
           if (node > 1) {
@@ -104,29 +143,18 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.discovery(null);
+    */
   }
 
   ngOnDestroy(): void {
-    this.moduleEventSubscription.unsubscribe();
+    this.subscriptions.map((s) => s.unsubscribe());
   }
 
   discovery(e): void {
     if (this.isNetworkBusy) { return; }
-    this.isNetworkBusy = true;
-    this.adapter.apiCall(ZWaveApi.Master.Controller.Discovery)
-      .subscribe((res) => {
-        this.adapter.reloadModules().subscribe(() => {
-          this.modules = this.adapter.modules.map((m) => {
-            if (m.Domain === 'HomeAutomation.ZWave') {
-              return m;
-            }
-          });
-          this.isNetworkBusy = false;
-        });
-        // TODO: ...
-        console.log(res);
-      });
+    this.adapter.zwaveAdapter.discovery().subscribe((modules) => {
+      this.modules = modules;
+    });
     this.currentPage = PageId.MANAGEMENT;
   }
   nodeAdd(e): void {
@@ -135,10 +163,9 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
     this.operationTimeout = 0;
     this.operationNodeAddress = 0;
     this.status = PageStatus.REQUEST;
-    this.adapter.apiCall(ZWaveApi.Master.Controller.NodeAdd)
-      .subscribe((res) => {
-        this.timeoutStop();
-      });
+    this.adapter.zwaveAdapter.addNode().subscribe((res) => {
+      this.timeoutStop();
+    });
     this.currentPage = PageId.NODE_ADD;
   }
   nodeRemove(e): void {
@@ -147,10 +174,9 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
     this.operationTimeout = 0;
     this.operationNodeAddress = 0;
     this.status = PageStatus.REQUEST;
-    this.adapter.apiCall(ZWaveApi.Master.Controller.NodeRemove)
-      .subscribe((res) => {
-        this.timeoutStop();
-      });
+    this.adapter.zwaveAdapter.removeNode().subscribe((res) => {
+      this.timeoutStop();
+    });
     this.currentPage = PageId.NODE_REMOVE;
   }
 
@@ -162,9 +188,11 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
     }
   }
 
-  private isMasterNode(module: Module): boolean {
-    return (module == null || (module.Domain === 'HomeAutomation.ZWave' && module.Address === '1'));
+  showNodeDetails(module: Module): void {
+    this.currentModule = module;
+    this.currentPage = PageId.NODE_DETAILS;
   }
+
   private timeoutStart(seconds: number): void {
     this.isNetworkBusy = true;
     this.operationTick();

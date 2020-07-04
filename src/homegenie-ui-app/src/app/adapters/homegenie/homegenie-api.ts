@@ -9,6 +9,7 @@ export class Module {
   Address: string;
   Name: string;
   DeviceType: string;
+  Description: string;
   Properties: Array<ModuleParameter>;
 }
 
@@ -56,15 +57,5 @@ export class HomegenieApi {
       List: 'HomeAutomation.HomeGenie/Automation/Programs.List'
     },
     Command: (command, options) => `HomeAutomation.HomeGenie/Automation/${command}/${options}`
-  };
-}
-
-export class ZWaveApi {
-  static Master = {
-    Controller: {
-      Discovery: 'HomeAutomation.ZWave/1/Controller.Discovery/',
-      NodeAdd: 'HomeAutomation.ZWave/1/Controller.NodeAdd',
-      NodeRemove: 'HomeAutomation.ZWave/1/Controller.NodeRemove',
-    }
   };
 }

@@ -13,10 +13,6 @@
     "device_port":
         "Device port",
 " ":"----------- Z-WAVE INTERFACE -------------",
-    "zwave_devices_title":
-        "Z-Wave devices manager",
-    "zwave_devices_button":
-        "Devices management",
     "zwave_heal_network_button":
         "Heal network",
     "zwave_hard_reset_button":
