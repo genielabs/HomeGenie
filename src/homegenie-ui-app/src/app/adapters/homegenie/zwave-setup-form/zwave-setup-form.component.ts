@@ -3,7 +3,7 @@ import {HomegenieAdapter, ResponseCode} from '../homegenie-adapter';
 import {MatDialog} from '@angular/material/dialog';
 import {ZwaveManagerDialogComponent} from '../../../components/zwave/zwave-manager-dialog/zwave-manager-dialog.component';
 import {HomegenieApi} from '../homegenie-api';
-import {ZWaveApi} from '../homegenie-zwave-api';
+import {HomegenieZwaveApi} from '../homegenie-zwave-api';
 
 @Component({
   selector: 'app-zwave-setup-form',
@@ -34,7 +34,7 @@ export class ZwaveSetupFormComponent implements OnInit {
           // TODO: ... log error
         }
       });
-    this.adapter.apiCall(ZWaveApi.Options.Get.Port).subscribe((res) => {
+    this.adapter.apiCall(HomegenieZwaveApi.Options.Get.Port).subscribe((res) => {
       if (res.code === ResponseCode.Success) {
         this.portName = res.response.ResponseValue;
       } else {
@@ -43,7 +43,7 @@ export class ZwaveSetupFormComponent implements OnInit {
     });
   }
   onPortChange(e): void {
-    this.adapter.apiCall(ZWaveApi.Options.Set.Port + `/${encodeURIComponent(this.portName)}`)
+    this.adapter.apiCall(HomegenieZwaveApi.Options.Set.Port + `/${encodeURIComponent(this.portName)}`)
       .subscribe((res) => {
         if (res.code === ResponseCode.Success) {
           console.log('ZWave Set Port', this.portName, res);

@@ -2,7 +2,7 @@
 <ng-container *ngIf="currentPage === PageId.MANAGEMENT">
   <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
     <div>
-      <button class="dialog-close-button" mat-icon-button (click)="discovery($event)" color="primary" mat-dialog-close>
+      <button class="dialog-close-button" mat-icon-button color="primary" mat-dialog-close>
         <mat-icon>arrow_back</mat-icon>
       </button>
       <span class="dialog-title">{{ "device_manager" | translate }}</span>
@@ -11,7 +11,7 @@
   </h1>
   <div mat-dialog-content class="overlay-container">
 
-    <app-zwave-node-list [modules]="modules" (itemClick)="showNodeDetails($event)"></app-zwave-node-list>
+    <app-zwave-node-list [modules]="modules" (itemClick)="showNodeConfig($event)"></app-zwave-node-list>
 
     <div class="overlay" *ngIf="isNetworkBusy">
       <mat-spinner mode="indeterminate" diameter="48"></mat-spinner>
@@ -29,9 +29,14 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="currentPage === PageId.NODE_DETAILS">
+<ng-container *ngIf="currentPage === PageId.NODE_CONFIG">
   <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
-    {{ "ZWAVE.node_details" | translate }}
+    <div>
+      <button class="dialog-close-button" mat-icon-button (click)="discovery($event)" color="primary">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="dialog-title">{{ "ZWAVE.node_config" | translate }}</span>
+    </div>
     <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
   </h1>
 
@@ -41,17 +46,13 @@
 
   </div>
   <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-button (click)="discovery()" color="primary">
-      <mat-icon>arrow_back</mat-icon>
-      <span>{{ "back" | translate }}</span>
-    </button>
     <button mat-button (click)="nodeRemove($event)" color="primary">
       <mat-icon color="warn">delete</mat-icon>
       <span>{{ "remove" | translate }}</span>
     </button>
     <button mat-button [disabled]="isNetworkBusy" color="primary">
-      <mat-icon>sync</mat-icon>
       {{ "synchronize" | translate }}
+      <mat-icon>sync</mat-icon>
     </button>
   </div>
 </ng-container>
@@ -131,7 +132,7 @@
 </ng-container>
 
 <!-- shared buttons in node add/remove -->
-<ng-container *ngIf="currentPage !== PageId.MANAGEMENT && currentPage !== PageId.NODE_DETAILS && !isNetworkBusy">
+<ng-container *ngIf="currentPage !== PageId.MANAGEMENT && currentPage !== PageId.NODE_CONFIG && !isNetworkBusy">
   <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-button (click)="retryOperation($event)" [ngStyle]="{ visibility: status === PageStatus.FAILURE ? 'visible' : 'hidden' }" color="primary">
       <mat-icon>refresh</mat-icon>

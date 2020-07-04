@@ -24,5 +24,7 @@
     "node_added":
         "Il dispositivo <strong class=\"color-accent\">{{ node }}</strong> è stato aggiunto",
     "node_removed":
-        "Il dispositivo <strong class=\"color-accent\">{{ node }}</strong> è stato rimosso"
+        "Il dispositivo <strong class=\"color-accent\">{{ node }}</strong> è stato rimosso",
+    "node_config":
+        "Configurazione dispositivo"
 }

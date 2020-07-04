@@ -2,7 +2,8 @@ import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
 import {Subject, Subscription} from 'rxjs';
 import {Module as HguiModule} from '../../services/hgui/module';
 import {HomegenieAdapter, Module} from './homegenie-adapter';
-import {ZWaveApi} from './homegenie-zwave-api';
+import {ZwaveApi} from '../../components/zwave/zwave-api';
+import {HomegenieZwaveApi} from './homegenie-zwave-api';
 
 export class HomegenieZwaveAdapter implements ZwaveAdapter {
   onDiscoveryComplete = new Subject<any>();
@@ -71,7 +72,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
   discovery(): Subject<Array<HguiModule>> {
     this.onDiscoveryStart.next();
     const subject = new Subject<Array<HguiModule>>();
-    this.hg.apiCall(ZWaveApi.Master.Controller.Discovery)
+    this.hg.apiCall(HomegenieZwaveApi.Master.Controller.Discovery)
       .subscribe((res) => {
         this.hg.reloadModules().subscribe((modules) => {
           const zwaveModules: Array<HguiModule> = modules.map((m) => {
@@ -114,7 +115,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
 
   addNode(): Subject<any> {
     const subject = new Subject<any>();
-    this.hg.apiCall(ZWaveApi.Master.Controller.NodeAdd)
+    this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeAdd)
       .subscribe((res) => {
         subject.next();
         subject.complete();
@@ -124,7 +125,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
 
   removeNode(): Subject<any> {
     const subject = new Subject<any>();
-    this.hg.apiCall(ZWaveApi.Master.Controller.NodeRemove)
+    this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeRemove)
       .subscribe((res) => {
         subject.next();
         subject.complete();
@@ -138,15 +139,15 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
   }
   private getDeviceInfo(module: Module): Subject<any> {
     const subject = new Subject<any>();
-    let nodeInfo: any = module.Properties.find((p) => p.Name === ZWaveApi.Property.NodeInfo);
-    let manufacturer: any = module.Properties.find((p) => p.Name === ZWaveApi.Property.ManufacturerSpecific);
-    let version: any = module.Properties.find((p) => p.Name === ZWaveApi.Property.VersionReport);
+    let nodeInfo: any = module.Properties.find((p) => p.Name === ZwaveApi.fields.NodeInfo);
+    let manufacturer: any = module.Properties.find((p) => p.Name === ZwaveApi.fields.ManufacturerSpecific);
+    let version: any = module.Properties.find((p) => p.Name === ZwaveApi.fields.VersionReport);
     if (nodeInfo && manufacturer && version) {
       nodeInfo = manufacturer.Value.split(' ');
       manufacturer = manufacturer.Value.toLowerCase();
       version = JSON.parse(version.Value);
       const applicationVersion = ('00' + version.ApplicationVersion).slice (-2) + '.' + ('00' + version.ApplicationSubVersion).slice (-2);
-      this.hg.apiCall(`${ZWaveApi.Master.Db.GetDevice}/${manufacturer}/${applicationVersion}`)
+      this.hg.apiCall(`${HomegenieZwaveApi.Master.Db.GetDevice}/${manufacturer}/${applicationVersion}`)
         .subscribe((res) => {
           let deviceInfo = JSON.parse(res.response.ResponseValue)[0];
           if (deviceInfo) {

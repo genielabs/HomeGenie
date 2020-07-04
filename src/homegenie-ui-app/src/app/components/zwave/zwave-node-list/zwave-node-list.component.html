@@ -2,8 +2,10 @@
   <!-- node item card -->
   <div *ngIf="m" matRipple class="list-item" (click)="onItemClick(m)">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <span>{{ m.name + ' ' + m.type }}</span>
-      <strong>{{ m.id }}</strong>
+      <div fxLayout="row" fxLayoutGap="8px">
+        <strong>{{ m.name }}</strong> <span>{{ m.type }}</span>
+      </div>
+      <strong>{{ m.id.split('/').slice(-1) }}</strong>
     </div>
     <small>
       {{ m.description }}

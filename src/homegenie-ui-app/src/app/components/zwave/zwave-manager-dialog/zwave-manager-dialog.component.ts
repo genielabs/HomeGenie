@@ -6,7 +6,7 @@ import {Adapter} from '../../../adapters/adapter';
 
 class PageId {
   static MANAGEMENT = 0;
-  static NODE_DETAILS = 1;
+  static NODE_CONFIG = 1;
   static NODE_ADD = 2;
   static NODE_REMOVE = 3;
 }
@@ -97,53 +97,6 @@ export class ZwaveManagerDialogComponent implements OnInit, OnDestroy {
     } else {
       // TODO: throw not implemented exception
     }
-    /*
-    this.moduleEventSubscription = this.adapter.onModuleEvent.subscribe((e) => {
-      if (this.isMasterNode(e.module as any) && e.event.Property === 'Controller.Status') {
-        if (e.event.Value.startsWith('Added node ')) {
-          const node = +e.event.Value.substring(11);
-          if (node > 1) {
-            this.operationNodeAddress = node;
-          }
-        } else if (e.event.Value.startsWith('Removed node ')) {
-          const node = +e.event.Value.substring(13);
-          if (node > 1) {
-            this.operationNodeAddress = node;
-          }
-        } else if (e.event.Value.indexOf('NodeAddStarted') > 0 || e.event.Value.indexOf('NodeRemoveStarted') > 0
-          || e.event.Value.indexOf('NodeAddDone') > 0 || e.event.Value.indexOf('NodeRemoveDone') > 0) {
-          const sourceNode = +e.event.Value.split(' ')[1];
-          if (sourceNode > 1) {
-            this.operationNodeAddress = sourceNode;
-          }
-        }
-        const operationStatus = e.event.Value.split(' ').splice(-1)[0];
-        switch (operationStatus) {
-          case 'Started': // Discovery Started
-            break;
-          case 'Complete': // Discovery Complete
-            break;
-          case 'NodeAddFailed': // Node <n> Status NodeAddFailed
-          case 'NodeRemoveFailed': // Node <n> Status NodeRemoveFailed
-            break;
-          case 'NodeAddReady': // Node <n> Status NodeAddReady
-          case 'NodeRemoveReady': // Node <n> Status NodeRemoveReady
-            this.status = PageStatus.READY;
-            this.timeoutStart(this.operationTimeoutSeconds);
-            break;
-          case 'NodeAddDone': // Node <n> Status NodeAddDone
-            // const sourceNode = +e.event.Value.split(' ')[1];
-            // if (sourceNode === 1) {
-            //   this.timeoutStop();
-            // }
-            break;
-          case 'NodeRemoveDone': // Node <n> Status NodeRemoveDone
-            // this.timeoutStop();
-            break;
-        }
-      }
-    });
-    */
   }
 
   ngOnDestroy(): void {
@@ -188,9 +141,9 @@ export class ZwaveManagerDialogComponent implements OnInit, OnDestroy {
     }
   }
 
-  showNodeDetails(module: Module): void {
+  showNodeConfig(module: Module): void {
     this.currentModule = module;
-    this.currentPage = PageId.NODE_DETAILS;
+    this.currentPage = PageId.NODE_CONFIG;
   }
 
   private timeoutStart(seconds: number): void {

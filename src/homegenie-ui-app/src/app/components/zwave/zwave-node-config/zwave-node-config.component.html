@@ -1,9 +1,31 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <span>{{ module.name }}</span>
-  <strong>{{ module.id }}</strong>
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="12px">
+
+  <div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="8px">
+        <strong>{{ module.name }}</strong> <span>{{ module.type }}</span>
+      </div>
+      <strong>{{ module.id.split('/').slice(-1) }}</strong>
+    </div>
+    <small>
+      {{ module.description }}
+    </small>
+  </div>
+
+  <div>
+    <h3>Implemented command classes</h3>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <div *ngFor="let cc of commandClasses">
+        <strong>{{ cc.id }}</strong> {{ cc.description }}
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>Configuration parameters</h3>
+  </div>
 </div>
-<small>
-  {{ module.description }}
-</small>
+
+<div>&nbsp;</div><div>&nbsp;</div>
 
 <div *ngFor="let f of module.fields">{{f.key}} <small>{{f.value}}</small></div>
