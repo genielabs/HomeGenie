@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Module} from '../../../../services/hgui/module';
+import {Module} from '../../../services/hgui/module';
 
 @Component({
   selector: 'app-zwave-node-list',

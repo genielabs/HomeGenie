@@ -5,7 +5,7 @@ import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
 import {Module as HguiModule} from 'src/app/services/hgui/module';
 import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
-import {ZwaveAdapter} from './zwave-setup-form/zwave-adapter';
+import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
 
 export {Module, Group, Program};
 

@@ -1,5 +1,5 @@
 import {Subject} from 'rxjs';
-import {Module} from '../../../services/hgui/module';
+import {Module} from '../../services/hgui/module';
 
 export interface ZwaveAdapter {
   onNodeAddReady: Subject<any>;

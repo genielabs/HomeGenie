@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HomegenieAdapter} from '../homegenie-adapter';
 import {MatDialog} from '@angular/material/dialog';
-import {ZwaveSynchDialogComponent} from './zwave-synch-dialog/zwave-synch-dialog.component';
+import {ZwaveManagerDialogComponent} from '../../../components/zwave/zwave-manager-dialog/zwave-manager-dialog.component';
 import {HomegenieApi} from '../homegenie-api';
 
 @Component({
@@ -30,7 +30,7 @@ export class ZwaveSetupFormComponent implements OnInit {
   }
 
   onSynchronizeButtonClick(e): void {
-    this.dialog.open(ZwaveSynchDialogComponent, {
+    this.dialog.open(ZwaveManagerDialogComponent, {
       // height: '400px',
       // width: '600px',
       disableClose: true,

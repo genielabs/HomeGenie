@@ -1,8 +1,8 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
-import {Module} from '../../../../services/hgui/module';
-import {Adapter} from '../../../adapter';
+import {Module} from '../../../services/hgui/module';
+import {Adapter} from '../../../adapters/adapter';
 
 class PageId {
   static MANAGEMENT = 0;
@@ -18,11 +18,11 @@ class PageStatus {
 }
 
 @Component({
-  selector: 'app-zwave-synch-dialog',
-  templateUrl: './zwave-synch-dialog.component.html',
-  styleUrls: ['./zwave-synch-dialog.component.scss']
+  selector: 'app-zwave-manager-dialog',
+  templateUrl: './zwave-manager-dialog.component.html',
+  styleUrls: ['./zwave-manager-dialog.component.scss']
 })
-export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
+export class ZwaveManagerDialogComponent implements OnInit, OnDestroy {
   isNetworkBusy: boolean;
 
   currentPage = PageId.MANAGEMENT;
@@ -57,7 +57,7 @@ export class ZwaveSynchDialogComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    public dialogRef: MatDialogRef<ZwaveSynchDialogComponent>,
+    public dialogRef: MatDialogRef<ZwaveManagerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private adapter: Adapter
   ) {
   }

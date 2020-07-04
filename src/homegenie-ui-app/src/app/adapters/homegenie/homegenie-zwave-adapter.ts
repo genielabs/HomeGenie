@@ -1,4 +1,4 @@
-import {ZwaveAdapter} from './zwave-setup-form/zwave-adapter';
+import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
 import {Subject, Subscription} from 'rxjs';
 import {Module as HguiModule} from '../../services/hgui/module';
 import {HomegenieAdapter, Module} from './homegenie-adapter';
