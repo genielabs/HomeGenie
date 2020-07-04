@@ -29,10 +29,9 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
   const baseTranslateUrl = './assets/i18n';
   const options: IModuleTranslationOptions = {
     modules: [
-      // final url: ./assets/i18n/en.json
       {baseTranslateUrl},
-      // final url: ./assets/i18n/homegenie/en.json
-      {moduleName: 'homegenie', baseTranslateUrl}
+      {moduleName: 'homegenie', baseTranslateUrl},
+      {moduleName: 'zwave', baseTranslateUrl}
     ]
   };
   return new ModuleTranslateLoader(http, options);

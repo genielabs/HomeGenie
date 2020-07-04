@@ -1,0 +1,28 @@
+{
+    "heal_network_button":
+        "Ripara network",
+    "hard_reset_button":
+        "Reset di fabbrica",
+    "node_inclusion":
+        "Aggiungi dispositivo",
+    "node_exclusion":
+        "Rimuovi dispositivo",
+    "enabling_node_inclusion":
+        "Abilitazione modalità inclusione nodo, attendere...",
+    "enabling_node_exclusion":
+        "Abilitazione modalità esclusione nodo, attendere...",
+    "inclusion_message":
+        "Premi il pulsante sul dispositivo che vuoi aggiungere a questa rete.",
+    "exclusion_message":
+        "Premi il pulsante sul dispositivo che vuoi rimuovere da questa rete.",
+    "task_duration_notice":
+        "Questa attività potrebbe impiegare fino a {{ timeout }} secondi.",
+    "adding_node":
+        "Aggiunta dispositivo <strong class=\"color-accent\">{{ node }}</strong> in corso, attendere...",
+    "removing_node":
+        "Rimozione dispositivo <strong class=\"color-accent\">{{ node }}</strong> in corso, attendere...",
+    "node_added":
+        "Il dispositivo <strong class=\"color-accent\">{{ node }}</strong> è stato aggiunto",
+    "node_removed":
+        "Il dispositivo <strong class=\"color-accent\">{{ node }}</strong> è stato rimosso"
+}

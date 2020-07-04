@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { HomegenieAdapter } from 'src/app/adapters/homegenie/homegenie-adapter';
 import AdapterFactory from './adapters/adapter-factory';
 import { HguiService } from './services/hgui/hgui.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,10 @@ import { HguiService } from './services/hgui/hgui.service';
 export class AppComponent {
   title = 'homegenie-ui-app';
 
-  constructor(hgui: HguiService) {
+  constructor(hgui: HguiService, translate: TranslateService) {
+    // Configure HGUI adapters
     AdapterFactory.setClasses({
+      // only HomeGenie adapter currently implemented
       HomegenieAdapter,
       // ...
     });

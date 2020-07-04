@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HomegenieAdapter} from '../homegenie-adapter';
+import {HomegenieAdapter, ResponseCode} from '../homegenie-adapter';
 import {MatDialog} from '@angular/material/dialog';
 import {ZwaveManagerDialogComponent} from '../../../components/zwave/zwave-manager-dialog/zwave-manager-dialog.component';
 import {HomegenieApi} from '../homegenie-api';
+import {ZWaveApi} from '../homegenie-zwave-api';
 
 @Component({
   selector: 'app-zwave-setup-form',
@@ -15,6 +16,8 @@ export class ZwaveSetupFormComponent implements OnInit {
 
   serialPorts: { value: string, content: string }[] = [];
 
+  portName = '/dev/ttyUSB0';
+
   constructor(
     public dialog: MatDialog
   ) {
@@ -25,10 +28,30 @@ export class ZwaveSetupFormComponent implements OnInit {
     console.log('Z-Wave options', this.adapter);
     this.adapter.apiCall(HomegenieApi.Config.Interfaces.Configure.Hardware.SerialPorts)
       .subscribe((res) => {
-        this.serialPorts = res.response;
+        if (res.code === ResponseCode.Success) {
+          this.serialPorts = res.response;
+        } else {
+          // TODO: ... log error
+        }
+      });
+    this.adapter.apiCall(ZWaveApi.Options.Get.Port).subscribe((res) => {
+      if (res.code === ResponseCode.Success) {
+        this.portName = res.response.ResponseValue;
+      } else {
+        // TODO: ... log error
+      }
+    });
+  }
+  onPortChange(e): void {
+    this.adapter.apiCall(ZWaveApi.Options.Set.Port + `/${encodeURIComponent(this.portName)}`)
+      .subscribe((res) => {
+        if (res.code === ResponseCode.Success) {
+          console.log('ZWave Set Port', this.portName, res);
+        } else {
+          // TODO: ... log error
+        }
       });
   }
-
   onSynchronizeButtonClick(e): void {
     this.dialog.open(ZwaveManagerDialogComponent, {
       // height: '400px',

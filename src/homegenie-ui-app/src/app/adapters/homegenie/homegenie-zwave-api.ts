@@ -1,4 +1,13 @@
 export class ZWaveApi {
+  // http://localhost:8080/api/MIGService.Interfaces/HomeAutomation.ZWave/Options.Get/Port//?_=1593868547757
+  static Options = {
+    Get: {
+      Port: 'MIGService.Interfaces/HomeAutomation.ZWave/Options.Get/Port'
+    },
+    Set: {
+      Port: 'MIGService.Interfaces/HomeAutomation.ZWave/Options.Set/Port'
+    }
+  };
   static Master = {
     Controller: {
       Discovery: 'HomeAutomation.ZWave/1/Controller.Discovery',

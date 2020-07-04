@@ -1,0 +1,28 @@
+{
+    "heal_network_button":
+        "Heal network",
+    "hard_reset_button":
+        "Factory reset",
+    "node_inclusion":
+        "Add device",
+    "node_exclusion":
+        "Remove device",
+    "enabling_node_inclusion":
+        "Enabling node inclusion mode, please wait...",
+    "enabling_node_exclusion":
+        "Enabling node exclusion mode, please wait...",
+    "inclusion_message":
+        "Press the button on the device you want to add to this network.",
+    "exclusion_message":
+        "Press the button on the device you want to remove from this network.",
+    "task_duration_notice":
+        "This task might take up to {{ timeout }} seconds to complete.",
+    "adding_node":
+        "Adding device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
+    "removing_node":
+        "Removing device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
+    "node_added":
+        "Device <strong class=\"color-accent\">{{ node }}</strong> successfully added",
+    "node_removed":
+        "Device <strong class=\"color-accent\">{{ node }}</strong> has been removed"
+}

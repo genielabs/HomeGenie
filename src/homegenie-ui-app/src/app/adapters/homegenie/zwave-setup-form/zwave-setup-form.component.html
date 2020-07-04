@@ -3,10 +3,8 @@
         <label class="label">{{ "configuration" | translate }}</label>
         <mat-form-field>
             <mat-label>{{ "HOMEGENIE.device_port" | translate }}</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let portName of serialPorts" [value]="portName">
-                    {{portName}}
-                </mat-option>
+            <mat-select [(value)]="portName" (selectionChange)="onPortChange($event)">
+                <mat-option *ngFor="let name of serialPorts" [value]="name">{{name}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -19,11 +17,11 @@
             </button>
             <button mat-flat-button>
               <mat-icon aria-hidden="false">healing</mat-icon>
-              {{ "HOMEGENIE.zwave_heal_network_button" | translate }}
+              {{ "ZWAVE.heal_network_button" | translate }}
             </button>
             <button mat-flat-button>
               <mat-icon aria-hidden="false" color="warn">warning</mat-icon>
-              {{ "HOMEGENIE.zwave_hard_reset_button" | translate }}
+              {{ "ZWAVE.hard_reset_button" | translate }}
             </button>
         </div>
     </div>

@@ -31,7 +31,7 @@
 
 <ng-container *ngIf="currentPage === PageId.NODE_DETAILS">
   <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
-    {{ "HOMEGENIE.node_details" | translate }}
+    {{ "ZWAVE.node_details" | translate }}
     <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
   </h1>
 
@@ -59,30 +59,30 @@
 <!-- node add -->
 <ng-container *ngIf="currentPage === PageId.NODE_ADD">
   <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
-    {{ "HOMEGENIE.node_inclusion" | translate }}
+    {{ "ZWAVE.node_inclusion" | translate }}
     <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
   </h1>
   <div mat-dialog-content [ngSwitch]="status">
 
     <div *ngSwitchCase="PageStatus.REQUEST" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-      <div>{{ "HOMEGENIE.enabling_node_inclusion" | translate }}</div>
+      <div>{{ "ZWAVE.enabling_node_inclusion" | translate }}</div>
       <mat-spinner diameter="18"></mat-spinner>
     </div>
 
     <div *ngSwitchCase="PageStatus.READY">
       <div *ngIf="operationNodeAddress === 0">
-        <p>{{ "HOMEGENIE.zwave_inclusion_message" | translate }}</p>
+        <p>{{ "ZWAVE.inclusion_message" | translate }}</p>
         <mat-progress-bar *ngIf="isNetworkBusy" mode="buffer" [value]="isNetworkBusy ? (operationTimeout/operationTimeoutSeconds)*100 : 0"></mat-progress-bar>
-        <div class="progress-message">{{ "HOMEGENIE.zwave_task_duration_notice" | translate:translateParams }}</div>
+        <div class="progress-message">{{ "ZWAVE.task_duration_notice" | translate:translateParams }}</div>
       </div>
       <div *ngIf="operationNodeAddress !== 0" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-        <div [innerHTML]="'HOMEGENIE.zwave_adding_node' | translate:translateParams"></div>
+        <div [innerHTML]="'ZWAVE.adding_node' | translate:translateParams"></div>
         <mat-spinner diameter="18"></mat-spinner>
       </div>
     </div>
 
     <div *ngSwitchCase="PageStatus.SUCCESS" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-      <div [innerHTML]="'HOMEGENIE.zwave_node_added' | translate:translateParams"></div>
+      <div [innerHTML]="'ZWAVE.node_added' | translate:translateParams"></div>
       <mat-icon color="primary">check</mat-icon>
     </div>
 
@@ -97,29 +97,29 @@
 <ng-container *ngIf="currentPage === PageId.NODE_REMOVE">
   <div mat-dialog-content [ngSwitch]="status">
     <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
-      {{ "HOMEGENIE.node_exclusion" | translate }}
+      {{ "ZWAVE.node_exclusion" | translate }}
       <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
     </h1>
 
     <div *ngSwitchCase="PageStatus.REQUEST" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-      <div>{{ "HOMEGENIE.enabling_node_exclusion" | translate }}</div>
+      <div>{{ "ZWAVE.enabling_node_exclusion" | translate }}</div>
       <mat-spinner diameter="18"></mat-spinner>
     </div>
 
     <div *ngSwitchCase="PageStatus.READY">
       <div *ngIf="operationNodeAddress === 0">
-        <p>{{ "HOMEGENIE.zwave_exclusion_message" | translate }}</p>
+        <p>{{ "ZWAVE.exclusion_message" | translate }}</p>
         <mat-progress-bar *ngIf="isNetworkBusy" mode="buffer" [value]="isNetworkBusy ? (operationTimeout/operationTimeoutSeconds)*100 : 0"></mat-progress-bar>
-        <div class="progress-message">{{ "HOMEGENIE.zwave_task_duration_notice" | translate:translateParams }}</div>
+        <div class="progress-message">{{ "ZWAVE.task_duration_notice" | translate:translateParams }}</div>
       </div>
       <div *ngIf="operationNodeAddress !== 0" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-        <div [innerHTML]="'HOMEGENIE.zwave_removing_node' | translate:translateParams"></div>
+        <div [innerHTML]="'ZWAVE.removing_node' | translate:translateParams"></div>
         <mat-spinner diameter="18"></mat-spinner>
       </div>
     </div>
 
     <div *ngSwitchCase="PageStatus.SUCCESS" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-      <div [innerHTML]="'HOMEGENIE.zwave_node_removed' | translate:translateParams"></div>
+      <div [innerHTML]="'ZWAVE.node_removed' | translate:translateParams"></div>
       <mat-icon color="primary">check</mat-icon>
     </div>
 

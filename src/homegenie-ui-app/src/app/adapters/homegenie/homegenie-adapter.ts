@@ -13,6 +13,9 @@ export class ApiResponse {
   code: number;
   response: any;
 }
+export enum ResponseCode {
+  Success = 200
+}
 
 export class HomegenieAdapter implements Adapter {
   className = 'HomegenieAdapter';
@@ -80,7 +83,7 @@ export class HomegenieAdapter implements Adapter {
       .subscribe((res) => {
           const status = res.code;
           const mods: Array<Module> = res.response;
-          if (+status === 200) {
+          if (+status === ResponseCode.Success) {
             this._modules.length = 0;
             // filter out unsupported modules
             mods.map((m) => {
@@ -230,7 +233,7 @@ export class HomegenieAdapter implements Adapter {
         // }
       })
       .subscribe((res) => {
-        subject.next({code: 200, response: res});
+        subject.next({code: ResponseCode.Success, response: res});
         subject.complete();
       });
     return subject;
@@ -242,7 +245,7 @@ export class HomegenieAdapter implements Adapter {
       .subscribe((res) => {
           const status = res.code;
           const mods: Array<Module> = res.response;
-          if (+status === 200) {
+          if (+status === ResponseCode.Success) {
             this._modules.length = 0;
             // filter out unsupported modules
             mods.map((m) => {

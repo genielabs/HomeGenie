@@ -12,33 +12,6 @@
         "ZigBee controller",
     "device_port":
         "Device port",
-" ":"----------- Z-WAVE INTERFACE -------------",
-    "zwave_heal_network_button":
-        "Heal network",
-    "zwave_hard_reset_button":
-        "Factory reset",
-    "node_inclusion":
-        "Add device",
-    "node_exclusion":
-        "Remove device",
-    "enabling_node_inclusion":
-        "Enabling node inclusion mode, please wait...",
-    "enabling_node_exclusion":
-        "Enabling node exclusion mode, please wait...",
-    "zwave_inclusion_message":
-        "Press the button on the device you want to add to this network.",
-    "zwave_exclusion_message":
-        "Press the button on the device you want to remove from this network.",
-    "zwave_task_duration_notice":
-        "This task might take up to {{ timeout }} seconds to complete.",
-    "zwave_adding_node":
-        "Adding device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
-    "zwave_removing_node":
-        "Removing device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
-    "zwave_node_added":
-        "Device <strong class=\"color-accent\">{{ node }}</strong> successfully added",
-    "zwave_node_removed":
-        "Device <strong class=\"color-accent\">{{ node }}</strong> has been removed",
 " ":"------------------------------------------",
     "modules":
         "Modules"
