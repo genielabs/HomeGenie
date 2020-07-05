@@ -1,10 +1,22 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Module, ModuleField} from '../../../services/hgui/module';
-import {ZwaveApi} from '../zwave-api';
+import {ZwaveApi, ZwaveConfigParam} from '../zwave-api';
+import {HguiService} from '../../../services/hgui/hgui.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
 export class CommandClass {
   id: any;
   description: string;
+}
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    console.log("ERROR STATE", control);
+    return true || !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
 }
 
 @Component({
@@ -14,21 +26,35 @@ export class CommandClass {
 })
 export class ZwaveNodeConfigComponent implements OnInit {
   @Input() module: Module;
-  constructor() { }
+  constructor(private hgui: HguiService) { }
   commandClasses: Array<CommandClass> = [];
+  configurationParameters: Array<ZwaveConfigParam> = [];
+  isNetworkBusy = true;
+  errorMatcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-    const nif: ModuleField = this.module.fields.find((f) => f.key === ZwaveApi.fields.NodeInfo);
-    if (nif) {
-      const nodeInformationFrame: string[] = nif.value.split(' ').slice(3);
-      this.commandClasses = nodeInformationFrame.map((c) => ({
-        id: c,
-        description: ZwaveApi.classes[c]
-      }));
-      console.log('NIF', nodeInformationFrame, this.commandClasses);
-    } else {
-      // TODO: should throw error
-    }
+    const adapter = this.hgui.getAdapter(this.module.adapterId);
+    adapter.zwaveAdapter.getCommandClasses(this.module).subscribe((classes) => {
+      this.commandClasses = classes;
+    });
+    this.isNetworkBusy = true;
+    adapter.zwaveAdapter.getConfigParams(this.module).subscribe((params) => {
+      this.configurationParameters = params;
+      this.isNetworkBusy = false;
+    });
   }
-
+  onConfigParameterChange(e, p: ZwaveConfigParam): void {
+    const adapter = this.hgui.getAdapter(this.module.adapterId);
+    p.status = 1; // status = 1 -> loading
+    if (e.target) e = e.target;
+    adapter.zwaveAdapter.setConfigParam(this.module, p.number, +e.value)
+      .subscribe((res) => {
+        if (res.response.ResponseValue === 'ERR_TIMEOUT') {
+          p.status = 2; // status = 2 -> error
+        } else {
+          p.field.value = res.response.ResponseValue;
+          p.status = 0; // status = 0 -> ok
+        }
+      });
+  }
 }

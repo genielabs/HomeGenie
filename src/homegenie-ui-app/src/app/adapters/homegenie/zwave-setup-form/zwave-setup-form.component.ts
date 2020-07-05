@@ -24,8 +24,6 @@ export class ZwaveSetupFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO: get Z-Wave options
-    console.log('Z-Wave options', this.adapter);
     this.adapter.apiCall(HomegenieApi.Config.Interfaces.Configure.Hardware.SerialPorts)
       .subscribe((res) => {
         if (res.code === ResponseCode.Success) {
@@ -43,7 +41,9 @@ export class ZwaveSetupFormComponent implements OnInit {
     });
   }
   onPortChange(e): void {
-    this.adapter.apiCall(HomegenieZwaveApi.Options.Set.Port + `/${encodeURIComponent(this.portName)}`)
+    const command = HomegenieZwaveApi.Options.Set.Port
+      .replace('{{portName}}', encodeURIComponent(this.portName));
+    this.adapter.apiCall(command)
       .subscribe((res) => {
         if (res.code === ResponseCode.Success) {
           console.log('ZWave Set Port', this.portName, res);

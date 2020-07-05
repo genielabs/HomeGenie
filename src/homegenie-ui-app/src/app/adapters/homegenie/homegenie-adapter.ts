@@ -323,24 +323,16 @@ export class HomegenieAdapter implements Adapter {
             `ws://${o.address}:8188/events?at=${r.ResponseValue}`
           );
           this.webSocket.onopen = (e) => {
-            // TODO: implement a global service logger
-            // cp.log.info('WebSocket connected.');
-            console.log('Websocket connected');
+            // TODO: not implemented
           };
           this.webSocket.onclose = (e) => {
-            // TODO: implement a global service logger
-            // cp.log.error('WebSocket closed.', e);
             setTimeout(this.connectWebSocket.bind(null), 1000);
           };
           this.webSocket.onmessage = (e) => {
             const event = JSON.parse(e.data);
-            // TODO: implement a global service logger
-            // cp.log.info('WebSocket data', event);
             this.processEvent(event);
           };
           this.webSocket.onerror = (e) => {
-            // TODO: implement a global service logger
-            // cp.log.error('WebSocket error.', e);
             setTimeout(this.connectWebSocket.bind(null), 1000);
           };
         }

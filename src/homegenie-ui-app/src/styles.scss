@@ -20,3 +20,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 12px;
     margin-bottom: 12px;
 }
+.color-accent {
+  color: $accent;
+}
+.color-primary {
+  color: $primary;
+}
+.color-warn {
+  color: $warn;
+}

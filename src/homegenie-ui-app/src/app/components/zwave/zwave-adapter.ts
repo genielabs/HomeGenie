@@ -1,5 +1,7 @@
 import {Subject} from 'rxjs';
-import {Module} from '../../services/hgui/module';
+import {Module as HguiModule, Module} from '../../services/hgui/module';
+import {ZwaveConfigParam} from './zwave-api';
+import {CommandClass} from './zwave-node-config/zwave-node-config.component';
 
 export interface ZwaveAdapter {
   onNodeAddReady: Subject<any>;
@@ -19,4 +21,10 @@ export interface ZwaveAdapter {
 
   listNodes(): Array<Module>;
   getNode(id: string): Module;
+
+  getCommandClasses(module: Module): Subject<Array<CommandClass>>;
+  getConfigParams(module: Module): Subject<Array<ZwaveConfigParam>>;
+
+  getConfigParam(module: HguiModule, parameterId: number): Subject<any>;
+  setConfigParam(module: HguiModule, parameterId: number, parameterValue: number): Subject<any>;
 }

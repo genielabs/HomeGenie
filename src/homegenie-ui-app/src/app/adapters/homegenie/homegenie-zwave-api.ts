@@ -4,7 +4,7 @@ export class HomegenieZwaveApi {
       Port: 'MIGService.Interfaces/HomeAutomation.ZWave/Options.Get/Port'
     },
     Set: {
-      Port: 'MIGService.Interfaces/HomeAutomation.ZWave/Options.Set/Port'
+      Port: 'MIGService.Interfaces/HomeAutomation.ZWave/Options.Set/Port/{{portName}}'
     }
   };
   static Master = {
@@ -20,6 +20,12 @@ export class HomegenieZwaveApi {
   static Node = {
     NodeInfo: {
       Get: 'HomeAutomation.ZWave/{{nodeId}}/Db.GetDevice'
+    }
+  };
+  static Config = {
+    Parameter: {
+      Get: '{{nodeId}}/Config.ParameterGet/{{parameterId}}',
+      Set: '{{nodeId}}/Config.ParameterSet/{{parameterId}}/{{parameterValue}}'
     }
   };
 }

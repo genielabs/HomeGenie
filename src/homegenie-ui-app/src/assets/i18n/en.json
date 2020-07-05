@@ -21,6 +21,10 @@
         "Retry",
     "close":
         "Close",
+    "value":
+        "Value",
+    "summary":
+        "Summary",
     "configuration":
         "Configuration",
     "tools":

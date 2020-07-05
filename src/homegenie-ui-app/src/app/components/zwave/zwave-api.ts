@@ -1,3 +1,5 @@
+import {ModuleField} from '../../services/hgui/module';
+
 export class ZwaveApi {
   public static fields = {
     Basic:
@@ -59,4 +61,13 @@ export class ZwaveApi {
     '9C': 'Sensor Alarm',
     '9D': 'Silence Alarm'
   };
+}
+export class ZwaveConfigParam {
+  number: any;
+  name: string;
+  description: string;
+  size: any;
+  type: { id: string, values: any };
+  field?: ModuleField;
+  status? = 0;
 }

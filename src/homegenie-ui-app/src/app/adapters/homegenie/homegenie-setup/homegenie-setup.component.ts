@@ -35,7 +35,6 @@ export class HomegenieSetupComponent implements OnInit {
   getInterfaceList(): void {
     this.adapter.apiCall(HomegenieApi.Config.Interfaces.List)
       .subscribe((res) => {
-        console.log('Drivers', res, this.hgui);
         this.drivers = res.response;
       });
   }

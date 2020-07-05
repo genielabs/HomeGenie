@@ -21,16 +21,15 @@ export class AppComponent {
       // ...
     });
     // testing HGUI service methods
-    hgui.onModuleAdded.subscribe((m) => console.log('Added module', m));
-    hgui.onGroupAdded.subscribe((g) => console.log('Added group', g));
-    hgui.onGroupModuleAdded.subscribe((e) => console.log('Added module to group', e.group, e.module));
-    hgui.onAdapterAdded.subscribe((adapter) => console.log('Added adapter', adapter));
+    // hgui.onModuleAdded.subscribe((m) => console.log('Added module', m));
+    // hgui.onGroupAdded.subscribe((g) => console.log('Added group', g));
+    // hgui.onGroupModuleAdded.subscribe((e) => console.log('Added module to group', e.group, e.module));
+    // hgui.onAdapterAdded.subscribe((adapter) => console.log('Added adapter', adapter));
     hgui.loadConfiguration().subscribe((config) => {
       if (config == null) {
-        console.log('Creating default configuration');
         this.configure(hgui);
       } else {
-        console.log('Config loaded', config);
+        // TODO: Config loaded
       }
     });
   }
