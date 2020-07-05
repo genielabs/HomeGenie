@@ -40,6 +40,20 @@ export class ZwaveNodeConfigComponent implements OnInit {
     this.isNetworkBusy = true;
     adapter.zwaveAdapter.getConfigParams(this.module).subscribe((params) => {
       this.configurationParameters = params;
+      params.map((cp) => {
+        if (cp.field.value == null || cp.field.value.length === 0) {
+          cp.status = 1; // 1 = loading
+          adapter.zwaveAdapter.getConfigParam(this.module, cp.number)
+            .subscribe((res) => {
+              cp.field.value = res.response.ResponseValue;
+              if (res.status === 200) {
+                cp.status = 0; // 0 = ok
+              } else {
+                cp.status = 2; // 1 = error
+              }
+            });
+        }
+      });
       this.isNetworkBusy = false;
     });
   }

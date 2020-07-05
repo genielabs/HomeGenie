@@ -29,3 +29,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .color-warn {
   color: $warn;
 }
+.color-todo-note {
+  color: orange;
+  font-size: 60%;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.5;
+}

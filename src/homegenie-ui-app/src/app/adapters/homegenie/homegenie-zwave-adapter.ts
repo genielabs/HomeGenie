@@ -79,22 +79,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
           const zwaveModules: Array<HguiModule> = modules.map((m) => {
             if (m.Domain === 'HomeAutomation.ZWave') {
               const moduleId = this.hg.getModuleId(m);
-              const hguiModule = this.hg.hgui.getModule(moduleId, this.hg.id);
-              this.getDeviceInfo(hguiModule).subscribe((info) => {
-                if (info) {
-                  let description = info.deviceDescription;
-                  try {
-                    description = this.getLocaleText(description.description);
-                    m.Description = description;
-                    hguiModule.description = description;
-                  } catch (e) {
-                    // noop
-                  }
-                  // brandName, productLine, productName
-                  // TODO: display device info
-                }
-              });
-              return hguiModule;
+              return this.hg.hgui.getModule(moduleId, this.hg.id);
             }
           });
           subject.next(zwaveModules);
@@ -239,12 +224,13 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     return subject;
   }
 
-  private isMasterNode(module: HguiModule): boolean {
-    // TODO: make this generic
-    return (module == null || (module.id === 'HomeAutomation.ZWave/1'));
-  }
-  private getDeviceInfo(module: HguiModule): Subject<any> {
+  getDeviceInfo(module: HguiModule): Subject<any> {
     const subject = new Subject<any>();
+    if (module == null) {
+      subject.next();
+      subject.complete();
+      return subject;
+    }
     let manufacturer: any = module.fields.find((p) => p.key === ZwaveApi.fields.ManufacturerSpecific);
     let version: any = module.fields.find((p) => p.key === ZwaveApi.fields.VersionReport);
     if (manufacturer && version) {
@@ -266,10 +252,16 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     }
     return subject;
   }
-  private getLocaleText(xmlNode: { lang: any }): string {
+
+ getLocaleText(xmlNode: { lang: any }): string {
     // TODO: implement lookup of current language and fallback to 'en'
     if (xmlNode) {
       return xmlNode.lang.find((f) => f['@xml:lang'] === 'en')['#text'];
     }
+  }
+
+  private isMasterNode(module: HguiModule): boolean {
+    // TODO: make this generic
+    return (module == null || (module.id === 'HomeAutomation.ZWave/1'));
   }
 }

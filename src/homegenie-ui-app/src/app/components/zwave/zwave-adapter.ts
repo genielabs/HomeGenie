@@ -21,6 +21,8 @@ export interface ZwaveAdapter {
 
   listNodes(): Array<Module>;
   getNode(id: string): Module;
+  getDeviceInfo(module: HguiModule): Subject<any>;
+  getLocaleText(langDefinitionObject: any): string;
 
   getCommandClasses(module: Module): Subject<Array<CommandClass>>;
   getConfigParams(module: Module): Subject<Array<ZwaveConfigParam>>;

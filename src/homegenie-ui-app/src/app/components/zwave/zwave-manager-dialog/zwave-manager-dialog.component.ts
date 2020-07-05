@@ -93,6 +93,21 @@ export class ZwaveManagerDialogComponent implements OnInit, OnDestroy {
       }));
       zwaveAdapter.discovery().subscribe((modules) => {
         this.modules = modules;
+        modules.map((m) => {
+          this.adapter.zwaveAdapter.getDeviceInfo(m).subscribe((info) => {
+            if (info) {
+              let description = info.deviceDescription;
+              try {
+                description = this.adapter.zwaveAdapter.getLocaleText(description.description);
+                m.description = description;
+              } catch (e) {
+                // noop
+              }
+              // brandName, productLine, productName
+              // TODO: display device info
+            }
+          });
+        });
       });
     } else {
       // TODO: throw not implemented exception

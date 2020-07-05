@@ -50,7 +50,7 @@
       <mat-icon color="warn">delete</mat-icon>
       <span>{{ "remove" | translate }}</span>
     </button>
-    <button mat-button [disabled]="isNetworkBusy" color="primary">
+    <button mat-button [disabled]="true || isNetworkBusy" color="primary">
       {{ "synchronize" | translate }}
       <mat-icon>sync</mat-icon>
     </button>

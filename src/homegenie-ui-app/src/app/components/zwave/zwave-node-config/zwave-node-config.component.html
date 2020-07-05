@@ -7,27 +7,29 @@
       </div>
       <strong>{{ module.id.split('/').slice(-1) }}</strong>
     </div>
-    <p>
+    <p class="color-primary">
       {{ module.description }}
     </p>
   </div>
 
   <div>
     <h3 class="color-accent">{{ "summary" | translate }}</h3>
-    // TODO: manufacturer specific, product brand and name, version, routing info, etc...
-    <div>
-      // TODO: also implement forms for Associations, Basic, Healing/Routing info, Meter
+    <div class="color-todo-note">
+      // TODO: manufacturer specific, product brand and name, version, routing info, etc...
     </div>
   </div>
 
   <div>
     <h3 class="color-accent">Implemented command classes</h3>
     <div fxLayout="row wrap" fxLayoutAlign="start center">
-      <div *ngFor="let cc of commandClasses" style="padding: 4px">
-        <span style="border: solid 1px gray; border-radius: 4px; padding: 2px; margin-right: 3px">{{ cc.id }}</span>
+      <button *ngFor="let cc of commandClasses" mat-button [disabled]="cc.description == null">
+        <strong>{{ cc.id }}</strong>&nbsp;
         <small *ngIf="cc.description == null" class="color-warn">missing handler</small>
-        <span *ngIf="cc.description">{{ cc.description }}</span>
-      </div>
+        <span *ngIf="cc.description" class="color-primary">{{ cc.description }}</span>
+      </button>
+    </div>
+    <div class="color-todo-note">
+      // TODO: also implement form controls to send commands for each command class
     </div>
   </div>
 
@@ -38,7 +40,7 @@
     </h3>
     <div *ngFor="let param of configurationParameters" fxLayout="column" fxLayoutAlign="start start" style="margin-left: 8px; margin-right: 8px;" fxLayoutGap="8px">
       <div>
-        <div><strong>{{ param.number }}</strong> {{ param.name }}</div>
+        <div><strong>{{ param.number }}</strong> - {{ param.name }}</div>
         <div class="color-primary">{{ param.description }}</div>
       </div>
        <div fxFlexAlign="end" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
@@ -60,13 +62,13 @@
            <mat-label>{{ "value" | translate }}</mat-label>
            <mat-select (selectionChange)="onConfigParameterChange($event, param)" [(value)]="param.field.value" [disabled]="param.status === 1">
              <mat-option *ngFor="let v of param.type.values" [value]="v.from.toString()">
-               <strong>{{ v.from }}</strong> {{ v.description }}
+               <strong>{{ v.from }}</strong> - {{ v.description }}
              </mat-option>
            </mat-select>
          </mat-form-field>
        </div>
     </div>
-    <div>
+    <div class="color-todo-note">
       // TODO: add form to set a custom parameter by arbitrary id/value
     </div>
   </div>
