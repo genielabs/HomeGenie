@@ -76,6 +76,8 @@ export class ZWaveAssociationGroup {
     this.field = groupField;
   }
   number: number;
+  description: string;
+  max: number;
   field: ModuleField;
   status? = 0; // 0 = ready, 1 = loading, 2 = error
 }

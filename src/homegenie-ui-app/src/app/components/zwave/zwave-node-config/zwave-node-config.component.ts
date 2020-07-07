@@ -17,12 +17,13 @@ export class CommandClass {
 })
 export class ZwaveNodeConfigComponent implements OnInit {
   @Input() module: Module;
-  constructor(private hgui: HguiService) { }
   associations: ZWaveAssociation;
   associationsSeparator: number[] = [ COMMA, ENTER ];
   commandClasses: Array<CommandClass> = [];
   configurationParameters: Array<ZwaveConfigParam> = [];
   isNetworkBusy = false;
+
+  constructor(private hgui: HguiService) { }
 
   ngOnInit(): void {
     this.syncAssociations();
@@ -62,29 +63,51 @@ export class ZwaveNodeConfigComponent implements OnInit {
       .subscribe();
   }
 
+  // TODO: move this method body to a new ZWaveApi method `getAssociationGroups`
   private syncAssociations(): void {
     // TODO: read from deviceInfo->assocGroups when availbale (including group description)
-    const count = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Count');
-    if (count) {
-      const adapter = this.hgui.getAdapter(this.module.adapterId);
-      this.associations = new ZWaveAssociation();
-      this.associations.count = +count.value === 0 ? 1 : +count.value;
-      const max = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Max');
-      if (max) {
-        this.associations.max = +max.value;
-      }
-      for (let g = 0; g < this.associations.count; g++) {
-        const groupField = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.' + (g + 1));
-        if (groupField) {
-          const group = new ZWaveAssociationGroup(this.associations.groups.length + 1, groupField);
-          adapter.zwaveAdapter.getAssociationGroup(this.module, group).subscribe((ag) => {
+    this.associations = null;
+    const adapter = this.hgui.getAdapter(this.module.adapterId);
+    adapter.zwaveAdapter.getDeviceInfo(this.module).subscribe((info) => {
+      if (info) {
+        let assocGroups = info.assocGroups.assocGroup;
+        if (assocGroups.length == null) {
+          assocGroups = [ assocGroups ];
+        }
+        this.associations = new ZWaveAssociation();
+        this.associations.count = assocGroups.length;
+        assocGroups.map((ag) => {
+          const n = +ag['@number'];
+          const groupField = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.' + n);
+          const group = new ZWaveAssociationGroup(n, groupField);
+          group.description = adapter.zwaveAdapter.getLocaleText(ag.description);
+          group.max = +ag['@maxNodes'];
+          adapter.zwaveAdapter.getAssociationGroup(this.module, group).subscribe((ag2) => {
             this.associations.groups.push(group);
           });
+        });
+      } else {
+        const count = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Count');
+        if (count) {
+          this.associations = new ZWaveAssociation();
+          this.associations.count = +count.value === 0 ? 1 : +count.value;
+          // TODO: should this be different for each group? (eg. 'ZwaveApi.fields.Associations + '.' + groupNumber + '.Max'
+          const max = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Max');
+          if (max) {
+            this.associations.max = +max.value;
+          }
+          for (let g = 0; g < this.associations.count; g++) {
+            const groupField = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.' + (g + 1));
+            if (groupField) {
+              const group = new ZWaveAssociationGroup(this.associations.groups.length + 1, groupField);
+              adapter.zwaveAdapter.getAssociationGroup(this.module, group).subscribe((ag) => {
+                this.associations.groups.push(group);
+              });
+            }
+          }
         }
       }
-    } else {
-      this.associations = null;
-    }
+    });
   }
   // TODO: make this cancellable (eventually)
   private syncConfigParams(): void {

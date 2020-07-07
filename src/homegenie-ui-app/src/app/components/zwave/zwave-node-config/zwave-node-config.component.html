@@ -33,16 +33,18 @@
     <h3 class="color-accent">Association groups</h3>
     <div class="color-primary">
       Send data reports from this device to the specified nodes. In order to be able to receive data from this sensor,
-      set reporting to node 1, the controller itself.
+      <strong>add node 1</strong> (the controller itself) to the status reports group.
     </div>
-    <small class="color-primary">(Associations count = {{ associations.count }}, max = {{ associations.max }})</small>
     <div style="margin-top: 8px;max-width:560px" fxLayout="column" fxLayoutAlign="center center">
       <div *ngFor="let group of associations.groups; let i = index" fxLayout="row"
            fxLayoutAlign="space-between stretch"
-           style="margin-bottom: 24px;" fxLayoutGap="16px">
+           fxLayoutGap="16px">
         <div fxLayout="column" fxLayoutAlign="start center">
-          <div><strong>Group {{ group.number }}</strong></div>
-          <div fxFlexFill fxLayoutAlign="center center" style="padding-bottom: 42px;">
+          <div>
+            <strong>Group {{ group.number }}</strong>
+            <div class="color-primary">{{ group.description }}&nbsp;</div>
+          </div>
+          <div fxLayoutAlign="start center">
             <mat-progress-spinner *ngIf="group.status === 1" mode="indeterminate" diameter="18"></mat-progress-spinner>
           </div>
         </div>
