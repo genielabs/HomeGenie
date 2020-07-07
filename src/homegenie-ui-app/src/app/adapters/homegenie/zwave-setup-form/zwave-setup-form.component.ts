@@ -52,13 +52,16 @@ export class ZwaveSetupFormComponent implements OnInit {
         }
       });
   }
-  onSynchronizeButtonClick(e): void {
-    this.dialog.open(ZwaveManagerDialogComponent, {
+  onDeviceManagerButtonClick(e): void {
+    const dialogRef = this.dialog.open(ZwaveManagerDialogComponent, {
       // height: '400px',
       // width: '600px',
       maxWidth: '800px',
       disableClose: true,
       data: this.adapter
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.adapter.hgui.saveConfiguration();
     });
   }
 }

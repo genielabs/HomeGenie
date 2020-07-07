@@ -86,6 +86,7 @@ export class HguiService implements OnDestroy {
           this.groups = config.groups;
           this.modules = [];
           config.modules.map((m) => {
+            m = new Module(m);
             this.modules.push(m);
             this.onModuleAdded.next(m);
           });

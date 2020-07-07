@@ -61,6 +61,9 @@ export class ZwaveApi {
     '9C': 'Sensor Alarm',
     '9D': 'Silence Alarm'
   };
+  static DataCache = {
+    deviceInfo: 'ZWaveApi.deviceInfo',
+  };
 }
 export class ZWaveAssociation {
   count: number;

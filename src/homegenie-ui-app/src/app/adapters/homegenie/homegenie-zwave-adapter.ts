@@ -1,11 +1,11 @@
 import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
-import {concat, Observable, Subject, Subscription} from 'rxjs';
+import {concat, Subject, Subscription} from 'rxjs';
 import {Module as HguiModule, ModuleField} from '../../services/hgui/module';
-import {ApiResponse, HomegenieAdapter, ResponseCode} from './homegenie-adapter';
+import {HomegenieAdapter} from './homegenie-adapter';
 import {ZwaveApi, ZWaveAssociationGroup, ZwaveConfigParam} from '../../components/zwave/zwave-api';
 import {HomegenieZwaveApi} from './homegenie-zwave-api';
 import {CommandClass} from '../../components/zwave/zwave-node-config/zwave-node-config.component';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 export class HomegenieZwaveAdapter implements ZwaveAdapter {
   onDiscoveryComplete = new Subject<any>();
@@ -251,6 +251,12 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
       subject.next();
       subject.complete();
       return subject;
+    } else if (module.data(ZwaveApi.DataCache.deviceInfo)) {
+      setTimeout(() => {
+        subject.next(module.data(ZwaveApi.DataCache.deviceInfo));
+        subject.complete();
+      });
+      return subject;
     }
     let manufacturer: any = module.fields.find((p) => p.key === ZwaveApi.fields.ManufacturerSpecific);
     let version: any = module.fields.find((p) => p.key === ZwaveApi.fields.VersionReport);
@@ -263,6 +269,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
           let deviceInfo = JSON.parse(res.response.ResponseValue)[0];
           if (deviceInfo && deviceInfo.ZWaveDevice) {
             deviceInfo = deviceInfo.ZWaveDevice;
+            module.data(ZwaveApi.DataCache.deviceInfo, deviceInfo);
             subject.next(deviceInfo);
           } else {
             subject.next(null);

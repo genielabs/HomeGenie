@@ -25,11 +25,11 @@ export class ZwaveNodeConfigComponent implements OnInit {
   isNetworkBusy = false;
 
   ngOnInit(): void {
+    this.syncAssociations();
+    this.syncConfigParams();
     const adapter = this.hgui.getAdapter(this.module.adapterId);
     adapter.zwaveAdapter.getCommandClasses(this.module).subscribe((classes) => {
       this.commandClasses = classes;
-      this.syncAssociations();
-      this.syncConfigParams();
     });
   }
 
@@ -63,6 +63,7 @@ export class ZwaveNodeConfigComponent implements OnInit {
   }
 
   private syncAssociations(): void {
+    // TODO: read from deviceInfo->assocGroups when availbale (including group description)
     const count = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Count');
     if (count) {
       const adapter = this.hgui.getAdapter(this.module.adapterId);
