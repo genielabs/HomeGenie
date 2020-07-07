@@ -1,4 +1,4 @@
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 import {Adapter} from '../adapter';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
@@ -6,6 +6,7 @@ import {Module as HguiModule} from 'src/app/services/hgui/module';
 import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
 import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
+import {concatMap, map, mergeMap, tap} from 'rxjs/operators';
 
 export {Module, Group, Program};
 
@@ -217,7 +218,6 @@ export class HomegenieAdapter implements Adapter {
   }
 
   apiCall(apiMethod): Subject<ApiResponse> {
-    const subject = new Subject<ApiResponse>();
     const oc = this.options.config.connection;
     if (oc == null) {
       return;
@@ -225,18 +225,16 @@ export class HomegenieAdapter implements Adapter {
     const url = this.getBaseUrl() + `api/${apiMethod}`;
     // TODO: implement a global service logger
     // cp.log.info(url);
-    this._hgui.http
+    return this._hgui.http
       .get(url, {
         // TODO: basic authentication
         // headers: {
         //    Authorization: 'Basic ' + btoa(oc.credentials.username + ':' + oc.credentials.password)
         // }
-      })
-      .subscribe((res) => {
-        subject.next({code: ResponseCode.Success, response: res});
-        subject.complete();
-      });
-    return subject;
+      }).pipe(
+        tap(() => console.log('HTTP request executed')),
+        map(res => ({code: ResponseCode.Success, response: res}))
+    ) as Subject<ApiResponse>;
   }
 
   reloadModules(): Subject<Array<Module>> {
@@ -318,9 +316,14 @@ export class HomegenieAdapter implements Adapter {
     const o = this.options.config.connection;
     this.apiCall(HomegenieApi.Config.WebSocket.GetToken)
       .subscribe((res) => {
+          let port = 8188; // default port
+          const oc = this.options.config.connection;
+          if (oc != null && oc.websocketPort) {
+            port = oc.websocketPort;
+          }
           const r = res.response;
           this.webSocket = new WebSocket(
-            `ws://${o.address}:8188/events?at=${r.ResponseValue}`
+            `ws://${o.address}:${port}/events?at=${r.ResponseValue}`
           );
           this.webSocket.onopen = (e) => {
             // TODO: not implemented
@@ -335,8 +338,7 @@ export class HomegenieAdapter implements Adapter {
           this.webSocket.onerror = (e) => {
             setTimeout(this.connectWebSocket.bind(null), 1000);
           };
-        }
-      );
+        });
   }
 
   private connectEventSource(): void {

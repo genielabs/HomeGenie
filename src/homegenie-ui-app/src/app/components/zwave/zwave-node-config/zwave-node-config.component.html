@@ -10,66 +10,135 @@
     <p class="color-primary">
       {{ module.description }}
     </p>
-  </div>
-
-  <div>
-    <h3 class="color-accent">{{ "summary" | translate }}</h3>
     <div class="color-todo-note">
       // TODO: manufacturer specific, product brand and name, version, routing info, etc...
+    </div>
+    <div class="color-todo-note">
+      // TODO: display widget for controlling / configuring device (the same widget used for the dashboard)
     </div>
   </div>
 
   <div>
-    <h3 class="color-accent">Implemented command classes</h3>
+    <h3 class="color-accent">Command classes</h3>
     <div fxLayout="row wrap" fxLayoutAlign="start center">
-      <button *ngFor="let cc of commandClasses" mat-button [disabled]="cc.description == null">
+      <button *ngFor="let cc of commandClasses" mat-button [disabled]="true || cc.description == null">
         <strong>{{ cc.id }}</strong>&nbsp;
         <small *ngIf="cc.description == null" class="color-warn">missing handler</small>
         <span *ngIf="cc.description" class="color-primary">{{ cc.description }}</span>
       </button>
     </div>
-    <div class="color-todo-note">
-      // TODO: also implement form controls to send commands for each command class
+  </div>
+
+  <div *ngIf="associations">
+    <h3 class="color-accent">Association groups</h3>
+    <div class="color-primary">
+      Send data reports from this device to the specified nodes. In order to be able to receive data from this sensor,
+      set reporting to node 1, the controller itself.
+    </div>
+    <small class="color-primary">(Associations count = {{ associations.count }}, max = {{ associations.max }})</small>
+    <div style="margin-top: 8px;max-width:560px" fxLayout="column" fxLayoutAlign="center center">
+      <div *ngFor="let group of associations.groups; let i = index" fxLayout="row"
+           fxLayoutAlign="space-between stretch"
+           style="margin-bottom: 24px;" fxLayoutGap="16px">
+        <div fxLayout="column" fxLayoutAlign="start center">
+          <div><strong>Group {{ group.number }}</strong></div>
+          <div fxFlexFill fxLayoutAlign="center center" style="padding-bottom: 42px;">
+            <mat-progress-spinner *ngIf="group.status === 1" mode="indeterminate" diameter="18"></mat-progress-spinner>
+          </div>
+        </div>
+        <div fxFlexAlign="end" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <mat-icon *ngIf="false" color="warn">error</mat-icon>
+          <mat-form-field>
+            <mat-chip-list #chipList style="width: 100%;">
+              <mat-chip *ngFor="let node of group.field.value.split(',')" [selectable]="false"
+                        [disabled]="group.status === 1 || node === 'None'"
+                        [removable]="node !== 'None'" (removed)="onGroupAssociationsRemove($event, group, node)">
+                {{node}}
+                <mat-icon matChipRemove *ngIf="node !== 'None'">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Sends reports to nodes"
+                     (blur)="onGroupAssociationsAdd($event, group)"
+                     [disabled]="group.status === 1"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="associationsSeparator"
+                     (matChipInputTokenEnd)="onGroupAssociationsAdd($event, group)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
     </div>
   </div>
 
   <div>
     <h3 class="color-accent" fxLayout="row" fxLayoutAlign="space-between center">
       <span>Configuration parameters</span>
-      <mat-progress-spinner mode="indeterminate" diameter="24" *ngIf="isNetworkBusy"></mat-progress-spinner>
+      <mat-progress-spinner mode="indeterminate" diameter="18" *ngIf="isNetworkBusy"></mat-progress-spinner>
     </h3>
-    <div *ngFor="let param of configurationParameters" fxLayout="column" fxLayoutAlign="start start" style="margin-left: 8px; margin-right: 8px;" fxLayoutGap="8px">
+    <div *ngFor="let param of configurationParameters" fxLayout="row" fxLayoutAlign="space-between start"
+         style="margin-bottom: 24px;" fxLayoutGap="8px">
       <div>
         <div><strong>{{ param.number }}</strong> - {{ param.name }}</div>
         <div class="color-primary">{{ param.description }}</div>
       </div>
-       <div fxFlexAlign="end" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-         <mat-icon *ngIf="param.status === 2" color="warn">error</mat-icon>
-         <mat-progress-spinner mode="indeterminate" diameter="24" *ngIf="param.status === 1"></mat-progress-spinner>
-         <mat-form-field *ngIf="param.type && param.type.id === 'range'">
-           <mat-label>Value</mat-label>
-           <input matInput placeholder="Parameter value" type="number" (change)="onConfigParameterChange($event, param)"
-                  [min]="param.type.values.from" [max]="param.type.values.to"
-                  [disabled]="param.status === 1"
-                  [errorStateMatcher]="errorMatcher"
-                  [(value)]="param.field.value">
-           <mat-hint align="end">
-             {{ param.type.values.from }} - {{ param.type.values.to }}
-             <span *ngIf="param.type.values.unit">({{ param.type.values.unit }})</span>
-           </mat-hint>
-         </mat-form-field>
-         <mat-form-field *ngIf="param.type && param.type.id === 'rangemapped'">
-           <mat-label>{{ "value" | translate }}</mat-label>
-           <mat-select (selectionChange)="onConfigParameterChange($event, param)" [(value)]="param.field.value" [disabled]="param.status === 1">
-             <mat-option *ngFor="let v of param.type.values" [value]="v.from.toString()">
-               <strong>{{ v.from }}</strong> - {{ v.description }}
-             </mat-option>
-           </mat-select>
-         </mat-form-field>
-       </div>
+      <div fxFlexAlign="end" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+        <mat-icon *ngIf="param.status === 2" color="warn">error</mat-icon>
+        <mat-progress-spinner mode="indeterminate" diameter="18" *ngIf="param.status === 1"></mat-progress-spinner>
+        <mat-form-field *ngIf="param.type && param.type.id === 'range'">
+          <mat-label>Value</mat-label>
+          <input matInput placeholder="Parameter value" type="number" (change)="onConfigParameterChange($event, param)"
+                 [min]="param.type.values.from" [max]="param.type.values.to"
+                 [disabled]="param.status === 1"
+                 [(value)]="param.field.value">
+          <mat-hint align="end">
+            {{ param.type.values.from }} - {{ param.type.values.to }}
+            <span *ngIf="param.type.values.unit">({{ param.type.values.unit }})</span>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field *ngIf="param.type && param.type.id === 'rangemapped'">
+          <mat-label>{{ "value" | translate }}</mat-label>
+          <mat-select (selectionChange)="onConfigParameterChange($event, param)" [(value)]="param.field.value"
+                      [disabled]="param.status === 1">
+            <mat-option *ngFor="let v of param.type.values" [value]="v.from.toString()">
+              <strong>{{ v.from }}</strong> - {{ v.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-    <div class="color-todo-note">
-      // TODO: add form to set a custom parameter by arbitrary id/value
+    <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="8px" style="margin-bottom:48px;">
+      <div>
+        <div fxLayout="row" fxLayoutAlign="ceneter start">
+          <mat-icon style="font-size: 120%; width: 20px; margin-right: 4px">edit</mat-icon>
+          <strong>Set custom parameter</strong>
+        </div>
+        <div class="color-primary">Enter configuration parameter number and the value to set.</div>
+      </div>
+      <div fxFlexAlign="end" fxFlex="0 1 auto" fxLayout="column" fxLayoutAlign="start end" style="padding-top: 6px">
+        <mat-form-field>
+          <mat-label>Parameter number</mat-label>
+          <input matInput placeholder="0" type="number"
+                 value=""
+                 required
+                 maxlength="3"
+                 [disabled]="false"
+                 (change)="onConfigParameterChange($event, null)">
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+          <mat-icon *ngIf="true" color="warn">error</mat-icon>
+          <mat-progress-spinner *ngIf="false" mode="indeterminate" diameter="18"></mat-progress-spinner>
+          <mat-form-field style="width: 132px">
+            <mat-label>Value</mat-label>
+            <input matInput placeholder="0" type="number"
+                   [disabled]="false"
+                   required
+                   maxlength="10"
+                   value="">
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="onConfigParameterChange($event, null)">
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,10 +1,11 @@
 import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
-import {Subject, Subscription} from 'rxjs';
+import {concat, Observable, Subject, Subscription} from 'rxjs';
 import {Module as HguiModule, ModuleField} from '../../services/hgui/module';
-import {HomegenieAdapter, Module} from './homegenie-adapter';
-import {ZwaveApi, ZwaveConfigParam} from '../../components/zwave/zwave-api';
+import {ApiResponse, HomegenieAdapter, ResponseCode} from './homegenie-adapter';
+import {ZwaveApi, ZWaveAssociationGroup, ZwaveConfigParam} from '../../components/zwave/zwave-api';
 import {HomegenieZwaveApi} from './homegenie-zwave-api';
 import {CommandClass} from '../../components/zwave/zwave-node-config/zwave-node-config.component';
+import {map, tap} from 'rxjs/operators';
 
 export class HomegenieZwaveAdapter implements ZwaveAdapter {
   onDiscoveryComplete = new Subject<any>();
@@ -99,23 +100,11 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
   }
 
   addNode(): Subject<any> {
-    const subject = new Subject<any>();
-    this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeAdd)
-      .subscribe((res) => {
-        subject.next();
-        subject.complete();
-      });
-    return subject;
+    return this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeAdd);
   }
 
   removeNode(): Subject<any> {
-    const subject = new Subject<any>();
-    this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeRemove)
-      .subscribe((res) => {
-        subject.next();
-        subject.complete();
-      });
-    return subject;
+    return this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeRemove);
   }
 
   getCommandClasses(module: HguiModule): Subject<Array<CommandClass>> {
@@ -195,33 +184,65 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     return subject;
   }
 
-  getConfigParam(module: HguiModule, parameterId: number): Subject<any> {
-    const subject = new Subject<any>();
-    // http://localhost:8080/api/HomeAutomation.ZWave/28/Config.ParameterGet/1/?_=1593868554165
+  getAssociationGroup(module: HguiModule, group: ZWaveAssociationGroup): Subject<number> {
+    const command = HomegenieZwaveApi.Associations.Get
+      .replace('{{nodeId}}', module.id)
+      .replace('{{groupId}}', group.number.toString());
+    group.status = 1; /* 1 = loading */
+    return this.hg.apiCall(command).pipe(
+      map(res => {
+          if (res.response && res.response.ResponseValue !== 'ERR_TIMEOUT') {
+            group.status = 0; // 0 = ok
+          } else {
+            group.status = 2; // 2 = error
+          }
+          return +res.response.ResponseValue;
+        }
+      )
+    ) as Subject<any>;
+  }
+  addAssociationGroup(module: HguiModule, group: ZWaveAssociationGroup, value: number): Subject<any> {
+    const command = HomegenieZwaveApi.Associations.Set
+      .replace('{{nodeId}}', module.id)
+      .replace('{{groupId}}', group.number.toString())
+      .replace('{{groupNode}}', value.toString());
+    group.status = 1; /* 1 = loading */
+    return concat(this.hg.apiCall(command), this.getAssociationGroup(module, group)) as Subject<any>;
+  }
+  removeAssociationGroup(module: HguiModule, group: ZWaveAssociationGroup, value: number): Subject<any> {
+    const command = HomegenieZwaveApi.Associations.Remove
+      .replace('{{nodeId}}', module.id)
+      .replace('{{groupId}}', group.number.toString())
+      .replace('{{groupNode}}', value.toString());
+    group.status = 1; /* 1 = loading */
+    return concat(this.hg.apiCall(command), this.getAssociationGroup(module, group)) as Subject<any>;
+  }
+
+  getConfigParam(module: HguiModule, parameter: ZwaveConfigParam): Subject<any> {
     const command = HomegenieZwaveApi.Config.Parameter.Get
       .replace('{{nodeId}}', module.id)
-      .replace('{{parameterId}}', parameterId.toString());
-    this.hg.apiCall(command)
-      .subscribe((res) => {
-        subject.next(res);
-        subject.complete();
-      });
-    return subject;
+      .replace('{{parameterId}}', parameter.number.toString());
+    parameter.status = 1; /* 1 = loading */
+    return this.hg.apiCall(command).pipe(
+        map(res => {
+            if (res.response && res.response.ResponseValue !== 'ERR_TIMEOUT') {
+              parameter.field.value = res.response.ResponseValue;
+              parameter.status = 0; // 0 = ok
+            } else {
+              parameter.status = 2; // 2 = error
+            }
+            return parameter;
+          }
+        )
+      ) as Subject<any>;
   }
-  setConfigParam(module: HguiModule, parameterId: number, parameterValue: number): Subject<any> {
-    const subject = new Subject<any>();
+  setConfigParam(module: HguiModule, parameter: ZwaveConfigParam): Subject<any> {
     const command = HomegenieZwaveApi.Config.Parameter.Set
       .replace('{{nodeId}}', module.id)
-      .replace('{{parameterId}}', parameterId.toString())
-      .replace('{{parameterValue}}', parameterValue.toString());
-    this.hg.apiCall(command)
-      .subscribe((res) => {
-        this.getConfigParam(module, parameterId).subscribe((res2) => {
-          subject.next(res2);
-          subject.complete();
-        });
-      });
-    return subject;
+      .replace('{{parameterId}}', parameter.number.toString())
+      .replace('{{parameterValue}}', parameter.field.value.toString());
+    parameter.status = 1; /* 1 = loading */
+    return concat(this.hg.apiCall(command), this.getConfigParam(module, parameter)) as Subject<any>;
   }
 
   getDeviceInfo(module: HguiModule): Subject<any> {
@@ -240,10 +261,12 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
       this.hg.apiCall(`${HomegenieZwaveApi.Master.Db.GetDevice}/${manufacturer}/${applicationVersion}`)
         .subscribe((res) => {
           let deviceInfo = JSON.parse(res.response.ResponseValue)[0];
-          if (deviceInfo) {
+          if (deviceInfo && deviceInfo.ZWaveDevice) {
             deviceInfo = deviceInfo.ZWaveDevice;
+            subject.next(deviceInfo);
+          } else {
+            subject.next(null);
           }
-          subject.next(deviceInfo);
           subject.complete();
         });
     } else {

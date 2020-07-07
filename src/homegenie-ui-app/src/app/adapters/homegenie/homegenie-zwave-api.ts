@@ -22,6 +22,11 @@ export class HomegenieZwaveApi {
       Get: 'HomeAutomation.ZWave/{{nodeId}}/Db.GetDevice'
     }
   };
+  static Associations = {
+    Get: '{{nodeId}}/Association.Get/{{groupId}}',
+    Set: '{{nodeId}}/Association.Set/{{groupId}}/{{groupNode}}',
+    Remove: '{{nodeId}}/Association.Remove/{{groupId}}/{{groupNode}}'
+  };
   static Config = {
     Parameter: {
       Get: '{{nodeId}}/Config.ParameterGet/{{parameterId}}',

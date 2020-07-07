@@ -1,6 +1,6 @@
 import {Subject} from 'rxjs';
 import {Module as HguiModule, Module} from '../../services/hgui/module';
-import {ZwaveConfigParam} from './zwave-api';
+import {ZWaveAssociationGroup, ZwaveConfigParam} from './zwave-api';
 import {CommandClass} from './zwave-node-config/zwave-node-config.component';
 
 export interface ZwaveAdapter {
@@ -24,9 +24,13 @@ export interface ZwaveAdapter {
   getDeviceInfo(module: HguiModule): Subject<any>;
   getLocaleText(langDefinitionObject: any): string;
 
+  getAssociationGroup(module: Module, group: ZWaveAssociationGroup): Subject<number>;
+  addAssociationGroup(module: Module, group: ZWaveAssociationGroup, value: number): any;
+  removeAssociationGroup(module: Module, group: ZWaveAssociationGroup, value: number): any;
+
   getCommandClasses(module: Module): Subject<Array<CommandClass>>;
   getConfigParams(module: Module): Subject<Array<ZwaveConfigParam>>;
 
-  getConfigParam(module: HguiModule, parameterId: number): Subject<any>;
-  setConfigParam(module: HguiModule, parameterId: number, parameterValue: number): Subject<any>;
+  getConfigParam(module: HguiModule, parameter: ZwaveConfigParam): Subject<any>;
+  setConfigParam(module: HguiModule, parameter: ZwaveConfigParam): Subject<any>;
 }

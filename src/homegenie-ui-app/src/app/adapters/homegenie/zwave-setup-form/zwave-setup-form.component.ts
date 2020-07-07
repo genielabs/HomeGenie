@@ -56,6 +56,7 @@ export class ZwaveSetupFormComponent implements OnInit {
     this.dialog.open(ZwaveManagerDialogComponent, {
       // height: '400px',
       // width: '600px',
+      maxWidth: '800px',
       disableClose: true,
       data: this.adapter
     });

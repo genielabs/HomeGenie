@@ -62,6 +62,20 @@ export class ZwaveApi {
     '9D': 'Silence Alarm'
   };
 }
+export class ZWaveAssociation {
+  count: number;
+  max: number;
+  groups: ZWaveAssociationGroup[] = [];
+}
+export class ZWaveAssociationGroup {
+  constructor(num: number, groupField: ModuleField) {
+    this.number = num;
+    this.field = groupField;
+  }
+  number: number;
+  field: ModuleField;
+  status? = 0; // 0 = ready, 1 = loading, 2 = error
+}
 export class ZwaveConfigParam {
   number: any;
   name: string;
@@ -69,5 +83,5 @@ export class ZwaveConfigParam {
   size: any;
   type: { id: string, values: any };
   field?: ModuleField;
-  status? = 0;
+  status? = 0; // 0 = ready, 1 = loading, 2 = error
 }

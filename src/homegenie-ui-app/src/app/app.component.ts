@@ -39,11 +39,25 @@ export class AppComponent {
    */
   configure(hgui: HguiService): void {
     const homegenieAdapter = new HomegenieAdapter(hgui);
+    // config for connection through angular proxy (see: 'src/proxy.conf.json')
+    /*
+    homegenieAdapter.options = {
+      config: {
+        connection: {
+          address: 'localhost',
+          port: 4200,
+          websocketPort: 4200
+        },
+      },
+    };
+    */
+    // config for direct connection to HG on port 8080
     homegenieAdapter.options = {
       config: {
         connection: {
           address: 'localhost',
           port: 8080,
+          websocketPort: 8188
         },
       },
     };
