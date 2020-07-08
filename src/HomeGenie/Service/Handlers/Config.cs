@@ -585,6 +585,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     homegenie.BackupManager.BackupConfiguration("html/homegenie_backup_config.zip");
                     (request.Context.Data as HttpListenerContext).Response.Redirect("/hg/html/homegenie_backup_config.zip");
+                    request.Handled = true;
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationLoad")
                 {
