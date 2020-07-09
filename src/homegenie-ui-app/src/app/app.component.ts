@@ -4,6 +4,7 @@ import { HomegenieAdapter } from 'src/app/adapters/homegenie/homegenie-adapter';
 import AdapterFactory from './adapters/adapter-factory';
 import { HguiService } from './services/hgui/hgui.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Module} from './services/hgui/module';
 
 @Component({
   selector: 'app-root',
@@ -79,17 +80,17 @@ export class AppComponent {
           if (module == null) { return; }
           const moduleId = module.Domain + '/' + module.Address;
           const adapterId = homegenieAdapter.id;
-          const hguiModule = hgui.addModule({
+          const hguiModule = hgui.addModule(new Module({
             id: moduleId,
             adapterId,
             type: module.DeviceType.toLowerCase(),
             name: module.Name,
             description: module.Description,
             fields: [],
-          });
+          }));
           // Update modules fields (hgui fields = hg Properties)
           module.Properties.map((p) => {
-            hgui.updateModuleField(hguiModule, p.Name, p.Value, p.UpdateTime);
+            hguiModule.field(p.Name, p.Value, p.UpdateTime);
           });
           hgui.addGroupModule(hguiGroup, hguiModule);
         });

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Module} from '../../../services/hgui/module';
+import {Module, ModuleField} from '../../../services/hgui/module';
 import {ZwaveApi, ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../zwave-api';
 import {HguiService} from '../../../services/hgui/hgui.service';
 import {concat, Subject} from 'rxjs';
@@ -17,21 +17,46 @@ export class CommandClass {
 })
 export class ZwaveNodeConfigComponent implements OnInit {
   @Input() module: Module;
+  moduleInfo: any;
+
   associations: ZWaveAssociation;
   associationsSeparator: number[] = [ COMMA, ENTER ];
   commandClasses: Array<CommandClass> = [];
   configurationParameters: Array<ZwaveConfigParam> = [];
+
+  customConfigParameter: ZwaveConfigParam;
+  customParameterNumber: any;
+  customParameterValue: any;
+
   isNetworkBusy = false;
 
   constructor(private hgui: HguiService) { }
 
   ngOnInit(): void {
-    this.syncAssociations();
-    this.syncConfigParams();
+    this.isNetworkBusy = true;
     const adapter = this.hgui.getAdapter(this.module.adapterId);
-    adapter.zwaveAdapter.getCommandClasses(this.module).subscribe((classes) => {
-      this.commandClasses = classes;
-    });
+    adapter.zwaveAdapter.getAssociations(this.module)
+      .subscribe((assocs) => {
+        this.associations = assocs;
+      }, (err) => { }, () => {
+        adapter.zwaveAdapter.getCommandClasses(this.module).subscribe((classes) => {
+          this.commandClasses = classes;
+          this.isNetworkBusy = false;
+          this.syncConfigParams();
+          // collect 'moduleInfo' data
+          this.moduleInfo = {};
+          const ms = this.module.field(ZwaveApi.fields.ManufacturerSpecific);
+          if (ms) {
+            this.moduleInfo.manufacturerSpecific = ms.value;
+            const deviceInfo = this.module.data(ZwaveApi.DataCache.deviceInfo);
+            if (deviceInfo) {
+              this.moduleInfo.brandName = deviceInfo.deviceDescription.brandName;
+              this.moduleInfo.productName = deviceInfo.deviceDescription.productName;
+              this.moduleInfo.productLine = deviceInfo.deviceDescription.productLine;
+            }
+          }
+        });
+      });
   }
 
   onConfigParameterChange(e, p: ZwaveConfigParam): void {
@@ -42,6 +67,35 @@ export class ZwaveNodeConfigComponent implements OnInit {
     adapter.zwaveAdapter
       .setConfigParam(this.module, p)
       .subscribe();
+  }
+  onCustomParameterSend(param: { number: number, value: number }): void {
+    const adapter = this.hgui.getAdapter(this.module.adapterId);
+    let p = this.configurationParameters.find((cp) => +cp.number === +param.number);
+    if (p == null) {
+      p = new ZwaveConfigParam();
+      p.number = param.number;
+    }
+    const key = ZwaveApi.fields.ConfigVariables + '.' + p.number;
+    let field = this.module.field(key);
+    if (field == null) {
+      field = new ModuleField();
+      field.key = key;
+    }
+    field.value = param.value;
+    p.field = field;
+    p.status = 1; // status = 1 -> loading
+    this.customConfigParameter = p;
+    adapter.zwaveAdapter
+      .setConfigParam(this.module, p)
+      .subscribe((res) => {
+        console.log('Custom parameter SET', res);
+        if (res && res.field) {
+          this.customParameterValue = +res.field.value;
+        } else {
+          // TODO: error?
+        }
+        this.syncConfigParams();
+      });
   }
 
   onGroupAssociationsAdd(e, group): void {
@@ -63,58 +117,11 @@ export class ZwaveNodeConfigComponent implements OnInit {
       .subscribe();
   }
 
-  // TODO: move this method body to a new ZWaveApi method `getAssociationGroups`
-  private syncAssociations(): void {
-    // TODO: read from deviceInfo->assocGroups when availbale (including group description)
-    this.associations = null;
-    const adapter = this.hgui.getAdapter(this.module.adapterId);
-    adapter.zwaveAdapter.getDeviceInfo(this.module).subscribe((info) => {
-      if (info) {
-        let assocGroups = info.assocGroups.assocGroup;
-        if (assocGroups.length == null) {
-          assocGroups = [ assocGroups ];
-        }
-        this.associations = new ZWaveAssociation();
-        this.associations.count = assocGroups.length;
-        assocGroups.map((ag) => {
-          const n = +ag['@number'];
-          const groupField = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.' + n);
-          const group = new ZWaveAssociationGroup(n, groupField);
-          group.description = adapter.zwaveAdapter.getLocaleText(ag.description);
-          group.max = +ag['@maxNodes'];
-          adapter.zwaveAdapter.getAssociationGroup(this.module, group).subscribe((ag2) => {
-            this.associations.groups.push(group);
-          });
-        });
-      } else {
-        const count = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Count');
-        if (count) {
-          this.associations = new ZWaveAssociation();
-          this.associations.count = +count.value === 0 ? 1 : +count.value;
-          // TODO: should this be different for each group? (eg. 'ZwaveApi.fields.Associations + '.' + groupNumber + '.Max'
-          const max = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.Max');
-          if (max) {
-            this.associations.max = +max.value;
-          }
-          for (let g = 0; g < this.associations.count; g++) {
-            const groupField = this.module.fields.find((f) => f.key === ZwaveApi.fields.Associations + '.' + (g + 1));
-            if (groupField) {
-              const group = new ZWaveAssociationGroup(this.associations.groups.length + 1, groupField);
-              adapter.zwaveAdapter.getAssociationGroup(this.module, group).subscribe((ag) => {
-                this.associations.groups.push(group);
-              });
-            }
-          }
-        }
-      }
-    });
-  }
   // TODO: make this cancellable (eventually)
   private syncConfigParams(): void {
     const adapter = this.hgui.getAdapter(this.module.adapterId);
     this.isNetworkBusy = true;
     adapter.zwaveAdapter.getConfigParams(this.module).subscribe((params) => {
-      this.isNetworkBusy = false;
       this.configurationParameters = params;
       const requestSequence: Subject<any>[] = [];
       params.map((cp) => {
@@ -131,7 +138,10 @@ export class ZwaveNodeConfigComponent implements OnInit {
           console.log(err);
         }, () => {
           // TODO: ?
+          this.isNetworkBusy = false;
         });
+      } else {
+        this.isNetworkBusy = false;
       }
     });
   }

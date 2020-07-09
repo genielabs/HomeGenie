@@ -105,12 +105,7 @@ export class HomegenieAdapter implements Adapter {
                   const moduleId = m.Domain + '/' + m.Address;
                   const module = this._hgui.getModule(moduleId, this.id);
                   if (module != null) {
-                    this._hgui.updateModuleField(
-                      module,
-                      p.Name,
-                      p.Value,
-                      p.UpdateTime
-                    );
+                    module.field(p.Name, p.Value, p.UpdateTime);
                   }
                 });
 
@@ -232,7 +227,7 @@ export class HomegenieAdapter implements Adapter {
         //    Authorization: 'Basic ' + btoa(oc.credentials.username + ':' + oc.credentials.password)
         // }
       }).pipe(
-        tap(() => console.log('HTTP request executed')),
+        // tap(() => console.log('HTTP request executed')),
         map(res => ({code: ResponseCode.Success, response: res}))
     ) as Subject<ApiResponse>;
   }
@@ -267,21 +262,20 @@ export class HomegenieAdapter implements Adapter {
                 let hguiModule = this.hgui.getModule(moduleId, this.id);
                 if (hguiModule == null) {
                   // add new module to HGUI modules if missing
-                  hguiModule = this.hgui.addModule({
+                  hguiModule = this.hgui.addModule(new HguiModule({
                     id: moduleId,
                     adapterId: this.id,
                     type: m.DeviceType.toLowerCase(),
                     name: m.Name,
                     description: m.Description,
                     fields: [],
-                  });
+                  }));
                 }
 
                 // Update modules fields (hgui fields = hg Properties)
                 m.Properties.map((p) => {
-                  this.hgui.updateModuleField(hguiModule, p.Name, p.Value, p.UpdateTime);
+                  hguiModule.field(p.Name, p.Value, p.UpdateTime);
                 });
-
 
               }
             });
@@ -388,12 +382,7 @@ export class HomegenieAdapter implements Adapter {
     const m = this._hgui.getModule(moduleId, this.id);
     this.onModuleEvent.next({module: m, event});
     if (m != null) {
-      this._hgui.updateModuleField(
-        m,
-        event.Property,
-        event.Value,
-        event.UnixTimestamp
-      );
+      m.field(event.Property, event.Value, event.UnixTimestamp);
     }
     // update local hg-module
     const module = this._modules.find((mod) => mod.Domain === event.Domain && mod.Address === event.Source);

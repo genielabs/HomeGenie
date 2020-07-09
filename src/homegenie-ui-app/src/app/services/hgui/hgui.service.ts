@@ -292,39 +292,6 @@ export class HguiService implements OnDestroy {
   hasModule(moduleId: string, adapterId: string): boolean {
     return this.getModule(moduleId, adapterId) != null;
   }
-  /**
-   * Gets a module field
-   * @param module The module to get the field from
-   * @param fieldKey The field key identifier
-   */
-  getModuleField(module: Module, fieldKey: string): ModuleField {
-    if (module.fields == null) { return null; }
-    return module.fields.find((f) => f.key === fieldKey);
-  }
-  /**
-   * Updates a module field value and timestamp. If the specified field does not exists, the a new field is added.
-   * @param module The module object
-   * @param fieldKey The field key identifier
-   * @param value The new field value
-   * @param timestamp The updated timestamp
-   */
-  updateModuleField(
-    module: Module,
-    fieldKey: string,
-    value: any,
-    timestamp: number
-  ): any {
-    if (module.fields == null) { module.fields = []; }
-    let field = this.getModuleField(module, fieldKey);
-    if (field != null && field.timestamp === timestamp) {
-      return;
-    } else if (field == null) {
-      field = { key: fieldKey, timestamp: 0 };
-      module.fields.push(field);
-    }
-    field.value = value;
-    field.timestamp = timestamp;
-  }
 
   /**
    * Gets the list of modules in actual HGUI configuration

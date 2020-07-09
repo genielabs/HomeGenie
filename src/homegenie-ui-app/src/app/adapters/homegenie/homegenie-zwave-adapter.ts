@@ -1,8 +1,8 @@
 import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
 import {concat, Subject, Subscription} from 'rxjs';
-import {Module as HguiModule, ModuleField} from '../../services/hgui/module';
+import {Module, ModuleField} from '../../services/hgui/module';
 import {HomegenieAdapter} from './homegenie-adapter';
-import {ZwaveApi, ZWaveAssociationGroup, ZwaveConfigParam} from '../../components/zwave/zwave-api';
+import {ZwaveApi, ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../../components/zwave/zwave-api';
 import {HomegenieZwaveApi} from './homegenie-zwave-api';
 import {CommandClass} from '../../components/zwave/zwave-node-config/zwave-node-config.component';
 import {map} from 'rxjs/operators';
@@ -71,13 +71,13 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
 
   // TODO: where should this 'this.moduleEventSubscription' be unsubscribed?
 
-  discovery(): Subject<Array<HguiModule>> {
+  discovery(): Subject<Array<Module>> {
     this.onDiscoveryStart.next();
-    const subject = new Subject<Array<HguiModule>>();
+    const subject = new Subject<Array<Module>>();
     this.hg.apiCall(HomegenieZwaveApi.Master.Controller.Discovery)
       .subscribe((res) => {
         this.hg.reloadModules().subscribe((modules) => {
-          const zwaveModules: Array<HguiModule> = modules.map((m) => {
+          const zwaveModules: Array<Module> = modules.map((m) => {
             if (m.Domain === 'HomeAutomation.ZWave') {
               const moduleId = this.hg.getModuleId(m);
               return this.hg.hgui.getModule(moduleId, this.hg.id);
@@ -91,11 +91,11 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     return subject;
   }
 
-  getNode(id: string): HguiModule {
+  getNode(id: string): Module {
     return undefined;
   }
 
-  listNodes(): Array<HguiModule> {
+  listNodes(): Array<Module> {
     return undefined;
   }
 
@@ -107,10 +107,10 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     return this.hg.apiCall(HomegenieZwaveApi.Master.Controller.NodeRemove);
   }
 
-  getCommandClasses(module: HguiModule): Subject<Array<CommandClass>> {
+  getCommandClasses(module: Module): Subject<Array<CommandClass>> {
     const subject = new Subject<Array<CommandClass>>();
     setTimeout(() => { // force async
-      const nif: ModuleField = module.fields.find((f) => f.key === ZwaveApi.fields.NodeInfo);
+      const nif: ModuleField = module.field(ZwaveApi.fields.NodeInfo);
       if (nif) {
         const nodeInformationFrame: string[] = nif.value.split(' ').slice(3);
         const commandClasses = nodeInformationFrame.map((c) => ({
@@ -127,7 +127,91 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     });
     return subject;
   }
-  getConfigParams(module: HguiModule): Subject<Array<ZwaveConfigParam>> {
+
+  getAssociations(module: Module): Subject<ZWaveAssociation> {
+    const subject = new Subject<ZWaveAssociation>();
+    let associations = null;
+    this.getDeviceInfo(module).subscribe((info) => {
+      // Read from deviceInfo->assocGroups when availbale (including group description)
+      if (info) {
+        let assocGroups = info.assocGroups.assocGroup;
+        if (assocGroups.length == null) {
+          assocGroups = [ assocGroups ];
+        }
+        associations = new ZWaveAssociation();
+        associations.count = assocGroups.length;
+        assocGroups.map((ag) => {
+          const n = +ag['@number'];
+          const groupField = module.field(ZwaveApi.fields.Associations + '.' + n);
+          const group = new ZWaveAssociationGroup(n, groupField);
+          group.description = this.getLocaleText(ag.description);
+          group.max = +ag['@maxNodes'];
+          this.getAssociationGroup(module, group).subscribe((ag2) => {
+            associations.groups.push(group);
+          });
+        });
+        subject.next(associations);
+      } else {
+        const count = module.field(ZwaveApi.fields.Associations + '.Count');
+        if (count) {
+          associations = new ZWaveAssociation();
+          associations.count = +count.value === 0 ? 1 : +count.value;
+          // TODO: should this be different for each group? (eg. 'ZwaveApi.fields.Associations + '.' + groupNumber + '.Max'
+          const max = module.field(ZwaveApi.fields.Associations + '.Max');
+          if (max) {
+            associations.max = +max.value;
+          }
+          for (let g = 0; g < associations.count; g++) {
+            const groupField = module.field(ZwaveApi.fields.Associations + '.' + (g + 1));
+            if (groupField) {
+              const group = new ZWaveAssociationGroup(associations.groups.length + 1, groupField);
+              this.getAssociationGroup(module, group).subscribe((ag) => {
+                associations.groups.push(group);
+              });
+            }
+          }
+          subject.next(associations);
+        }
+      }
+      subject.complete();
+    });
+    return subject;
+  }
+  getAssociationGroup(module: Module, group: ZWaveAssociationGroup): Subject<number> {
+    const command = HomegenieZwaveApi.Associations.Get
+      .replace('{{nodeId}}', module.id)
+      .replace('{{groupId}}', group.number.toString());
+    group.status = 1; /* 1 = loading */
+    return this.hg.apiCall(command).pipe(
+      map(res => {
+          if (res.response && res.response.ResponseValue !== 'ERR_TIMEOUT') {
+            group.status = 0; // 0 = ok
+          } else {
+            group.status = 2; // 2 = error
+          }
+          return +res.response.ResponseValue;
+        }
+      )
+    ) as Subject<any>;
+  }
+  addAssociationGroup(module: Module, group: ZWaveAssociationGroup, value: number): Subject<any> {
+    const command = HomegenieZwaveApi.Associations.Set
+      .replace('{{nodeId}}', module.id)
+      .replace('{{groupId}}', group.number.toString())
+      .replace('{{groupNode}}', value.toString());
+    group.status = 1; /* 1 = loading */
+    return concat(this.hg.apiCall(command), this.getAssociationGroup(module, group)) as Subject<any>;
+  }
+  removeAssociationGroup(module: Module, group: ZWaveAssociationGroup, value: number): Subject<any> {
+    const command = HomegenieZwaveApi.Associations.Remove
+      .replace('{{nodeId}}', module.id)
+      .replace('{{groupId}}', group.number.toString())
+      .replace('{{groupNode}}', value.toString());
+    group.status = 1; /* 1 = loading */
+    return concat(this.hg.apiCall(command), this.getAssociationGroup(module, group)) as Subject<any>;
+  }
+
+  getConfigParams(module: Module): Subject<Array<ZwaveConfigParam>> {
     const subject = new Subject<Array<ZwaveConfigParam>>();
     const params: Array<ZwaveConfigParam> = [];
     module.fields.map((f) => {
@@ -139,7 +223,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
           name: 'Generic parameter',
           description: 'No specifications available about this parameter.',
           size: null,
-          type: { id: 'range', values: { from: 0, to: 65535, description: '' } },
+          type: { id: 'range' },
           field: f
         } as ZwaveConfigParam);
       }
@@ -184,41 +268,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     return subject;
   }
 
-  getAssociationGroup(module: HguiModule, group: ZWaveAssociationGroup): Subject<number> {
-    const command = HomegenieZwaveApi.Associations.Get
-      .replace('{{nodeId}}', module.id)
-      .replace('{{groupId}}', group.number.toString());
-    group.status = 1; /* 1 = loading */
-    return this.hg.apiCall(command).pipe(
-      map(res => {
-          if (res.response && res.response.ResponseValue !== 'ERR_TIMEOUT') {
-            group.status = 0; // 0 = ok
-          } else {
-            group.status = 2; // 2 = error
-          }
-          return +res.response.ResponseValue;
-        }
-      )
-    ) as Subject<any>;
-  }
-  addAssociationGroup(module: HguiModule, group: ZWaveAssociationGroup, value: number): Subject<any> {
-    const command = HomegenieZwaveApi.Associations.Set
-      .replace('{{nodeId}}', module.id)
-      .replace('{{groupId}}', group.number.toString())
-      .replace('{{groupNode}}', value.toString());
-    group.status = 1; /* 1 = loading */
-    return concat(this.hg.apiCall(command), this.getAssociationGroup(module, group)) as Subject<any>;
-  }
-  removeAssociationGroup(module: HguiModule, group: ZWaveAssociationGroup, value: number): Subject<any> {
-    const command = HomegenieZwaveApi.Associations.Remove
-      .replace('{{nodeId}}', module.id)
-      .replace('{{groupId}}', group.number.toString())
-      .replace('{{groupNode}}', value.toString());
-    group.status = 1; /* 1 = loading */
-    return concat(this.hg.apiCall(command), this.getAssociationGroup(module, group)) as Subject<any>;
-  }
-
-  getConfigParam(module: HguiModule, parameter: ZwaveConfigParam): Subject<any> {
+  getConfigParam(module: Module, parameter: ZwaveConfigParam): Subject<any> {
     const command = HomegenieZwaveApi.Config.Parameter.Get
       .replace('{{nodeId}}', module.id)
       .replace('{{parameterId}}', parameter.number.toString());
@@ -236,7 +286,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
         )
       ) as Subject<any>;
   }
-  setConfigParam(module: HguiModule, parameter: ZwaveConfigParam): Subject<any> {
+  setConfigParam(module: Module, parameter: ZwaveConfigParam): Subject<any> {
     const command = HomegenieZwaveApi.Config.Parameter.Set
       .replace('{{nodeId}}', module.id)
       .replace('{{parameterId}}', parameter.number.toString())
@@ -245,7 +295,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     return concat(this.hg.apiCall(command), this.getConfigParam(module, parameter)) as Subject<any>;
   }
 
-  getDeviceInfo(module: HguiModule): Subject<any> {
+  getDeviceInfo(module: Module): Subject<any> {
     const subject = new Subject<any>();
     if (module == null) {
       subject.next();
@@ -258,8 +308,8 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
       });
       return subject;
     }
-    let manufacturer: any = module.fields.find((p) => p.key === ZwaveApi.fields.ManufacturerSpecific);
-    let version: any = module.fields.find((p) => p.key === ZwaveApi.fields.VersionReport);
+    let manufacturer: any = module.field(ZwaveApi.fields.ManufacturerSpecific);
+    let version: any = module.field(ZwaveApi.fields.VersionReport);
     if (manufacturer && version) {
       manufacturer = manufacturer.value.toLowerCase();
       version = JSON.parse(version.value);
@@ -290,8 +340,7 @@ export class HomegenieZwaveAdapter implements ZwaveAdapter {
     }
   }
 
-  private isMasterNode(module: HguiModule): boolean {
-    // TODO: make this generic
+  private isMasterNode(module: Module): boolean {
     return (module == null || (module.id === 'HomeAutomation.ZWave/1'));
   }
 }

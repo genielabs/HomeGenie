@@ -26,5 +26,35 @@
     "node_removed":
         "Device <strong class=\"color-accent\">{{ node }}</strong> has been removed",
     "node_config":
-        "Device configuration"
+        "Device configuration",
+    "brand":
+        "Brand",
+    "product":
+        "Product",
+    "manufacturer_specific":
+        "Manufacturer specific",
+    "routing_info":
+        "Routing Info",
+    "association_groups":
+        "Association groups",
+    "association_description":
+        "This devices sends reports to the nodes included in the association groups. In order to receive reports from this device, include node 1 (the controller) in the association groups.",
+    "associated_nodes":
+        "Associated nodes",
+    "enter_node_number":
+        "Enter node number",
+    "configuration_parameters":
+        "Configuration parameters",
+    "generic_parameter":
+        "Generic parameter",
+    "generic_parameter_description":
+        "Enter configuration parameter number and the value to set.",
+    "enter_parameter_number":
+        "Enter parameter number",
+    "enter_parameter_value":
+        "Enter parameter value",
+    "command_classes":
+        "Command classes",
+    "missing handler":
+        "Missing handler"
 }

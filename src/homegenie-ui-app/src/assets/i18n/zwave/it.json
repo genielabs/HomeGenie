@@ -26,5 +26,35 @@
     "node_removed":
         "Il dispositivo <strong class=\"color-accent\">{{ node }}</strong> è stato rimosso",
     "node_config":
-        "Configurazione dispositivo"
+        "Configurazione dispositivo",
+    "brand":
+        "Marca",
+    "product":
+        "Prodotto",
+    "manufacturer_specific":
+        "Specifica produttore",
+    "routing_info":
+        "Info Routing",
+    "association_groups":
+        "Gruppi di associazione",
+    "association_description":
+        "Questo dispositivo invia i rapporti ai nodi inclusi nei gruppi di associazione. Per ricevere dati da questo dispositivo, includi il nodo 1 (il controller) nei gruppi di associazione.",
+    "associated_nodes":
+        "Nodi associati",
+    "enter_node_number":
+        "Inserire numero nodo",
+    "configuration_parameters":
+        "Parametri configurazione",
+    "generic_parameter":
+        "Parametro generico",
+    "generic_parameter_description":
+        "Inserire il numero del parametro e il valore da impostare.",
+    "enter_parameter_number":
+        "Inserire numero parametro",
+    "enter_parameter_value":
+        "Inserire valore parametro",
+    "command_classes":
+        "Classi comando",
+    "missing handler":
+        "Gestore mancante"
 }

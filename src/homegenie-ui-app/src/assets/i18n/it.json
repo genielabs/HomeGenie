@@ -36,5 +36,11 @@
     "operation_failed":
         "Operazione fallita",
     "device_manager":
-        "Gestione dispositivi"
+        "Gestione dispositivi",
+    "group":
+        "Gruppo",
+    "parameter":
+        "Parametro",
+    "number":
+        "Numero"
 }

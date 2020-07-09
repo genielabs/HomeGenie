@@ -1,47 +1,48 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="12px">
 
-  <div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+
+    <h3 fxLayout="row" fxLayoutAlign="space-between center" style="margin: 0 0 8px;">
       <div fxLayout="row" fxLayoutGap="8px">
         <strong>{{ module.name }}</strong> <span>{{ module.type }}</span>
       </div>
       <strong>{{ module.id.split('/').slice(-1) }}</strong>
-    </div>
-    <p class="color-primary">
+    </h3>
+    <div>
       {{ module.description }}
-    </p>
-    <div class="color-todo-note">
-      // TODO: manufacturer specific, product brand and name, version, routing info, etc...
     </div>
+    <div *ngIf="moduleInfo" class="color-primary" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="12px">
+      <div *ngIf="moduleInfo.brandName">
+        <strong>{{ "ZWAVE.brand" | translate }}:</strong> {{ moduleInfo.brandName }}
+      </div>
+      <div *ngIf="moduleInfo.productName">
+        <strong>{{ "ZWAVE.product" | translate }}:</strong> {{ moduleInfo.productName }} ({{ moduleInfo.productLine }})
+      </div>
+      <div *ngIf="moduleInfo.manufacturerSpecific">
+        <strong>{{ "ZWAVE.manufacturer_specific" | translate }}:</strong> {{ moduleInfo.manufacturerSpecific }}
+      </div>
+      <div *ngIf="moduleInfo.routingInfo">
+        <strong>{{ "ZWAVE.routing_info" | translate }}:</strong> {{ moduleInfo.routingInfo }}
+      </div>
+    </div>
+
     <div class="color-todo-note">
       // TODO: display widget for controlling / configuring device (the same widget used for the dashboard)
     </div>
   </div>
 
-  <div>
-    <h3 class="color-accent">Command classes</h3>
-    <div fxLayout="row wrap" fxLayoutAlign="start center">
-      <button *ngFor="let cc of commandClasses" mat-button [disabled]="true || cc.description == null">
-        <strong>{{ cc.id }}</strong>&nbsp;
-        <small *ngIf="cc.description == null" class="color-warn">missing handler</small>
-        <span *ngIf="cc.description" class="color-primary">{{ cc.description }}</span>
-      </button>
-    </div>
-  </div>
-
   <div *ngIf="associations">
-    <h3 class="color-accent">Association groups</h3>
-    <div class="color-primary">
-      Send data reports from this device to the specified nodes. In order to be able to receive data from this sensor,
-      <strong>add node 1</strong> (the controller itself) to the status reports group.
+    <h3 class="color-accent">{{ "ZWAVE.association_groups" | translate }}</h3>
+    <div>
+      {{ "ZWAVE.association_description" | translate }}
     </div>
-    <div style="margin-top: 8px;max-width:560px" fxLayout="column" fxLayoutAlign="center center">
+    <div style="margin-top: 12px;max-width:560px" fxLayout="column" fxLayoutAlign="center center">
       <div *ngFor="let group of associations.groups; let i = index" fxLayout="row"
            fxLayoutAlign="space-between stretch"
            fxLayoutGap="16px">
         <div fxLayout="column" fxLayoutAlign="start center">
           <div>
-            <strong>Group {{ group.number }}</strong>
+            <strong>{{ "group" | translate}} {{ group.number }}</strong>
             <div class="color-primary">{{ group.description }}&nbsp;</div>
           </div>
           <div fxLayoutAlign="start center">
@@ -58,13 +59,16 @@
                 {{node}}
                 <mat-icon matChipRemove *ngIf="node !== 'None'">cancel</mat-icon>
               </mat-chip>
-              <input placeholder="Sends reports to nodes"
+              <input placeholder="{{ 'ZWAVE.associated_nodes' | translate }}"
                      (blur)="onGroupAssociationsAdd($event, group)"
                      [disabled]="group.status === 1"
                      [matChipInputFor]="chipList"
                      [matChipInputSeparatorKeyCodes]="associationsSeparator"
                      (matChipInputTokenEnd)="onGroupAssociationsAdd($event, group)">
             </mat-chip-list>
+            <mat-hint>
+              {{ "ZWAVE.enter_node_number" | translate }}
+            </mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -72,8 +76,8 @@
   </div>
 
   <div>
-    <h3 class="color-accent" fxLayout="row" fxLayoutAlign="space-between center">
-      <span>Configuration parameters</span>
+    <h3 class="color-accent" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <span>{{ "ZWAVE.configuration_parameters" | translate }}</span>
       <mat-progress-spinner mode="indeterminate" diameter="18" *ngIf="isNetworkBusy"></mat-progress-spinner>
     </h3>
     <div *ngFor="let param of configurationParameters" fxLayout="row" fxLayoutAlign="space-between start"
@@ -86,12 +90,13 @@
         <mat-icon *ngIf="param.status === 2" color="warn">error</mat-icon>
         <mat-progress-spinner mode="indeterminate" diameter="18" *ngIf="param.status === 1"></mat-progress-spinner>
         <mat-form-field *ngIf="param.type && param.type.id === 'range'">
-          <mat-label>Value</mat-label>
-          <input matInput placeholder="Parameter value" type="number" (change)="onConfigParameterChange($event, param)"
-                 [min]="param.type.values.from" [max]="param.type.values.to"
+          <mat-label>{{ "value" | translate }}</mat-label>
+          <input matInput placeholder="{{ 'value' | translate }}" type="number" (change)="onConfigParameterChange($event, param)"
+                 [min]="param.type.values != null ? param.type.values.from : ''"
+                 [max]="param.type.values != null ? param.type.values.to : ''"
                  [disabled]="param.status === 1"
                  [(value)]="param.field.value">
-          <mat-hint align="end">
+          <mat-hint *ngIf="param.type.values != null" align="end">
             {{ param.type.values.from }} - {{ param.type.values.to }}
             <span *ngIf="param.type.values.unit">({{ param.type.values.unit }})</span>
           </mat-hint>
@@ -107,46 +112,59 @@
         </mat-form-field>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="8px" style="margin-bottom:48px;">
+    <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="8px">
       <div>
         <div fxLayout="row" fxLayoutAlign="ceneter start">
-          <mat-icon style="font-size: 120%; width: 20px; margin-right: 4px">edit</mat-icon>
-          <strong>Set custom parameter</strong>
+          <mat-icon style="font-size: 120%; width: 20px;">edit</mat-icon>
+          <strong>{{ "ZWAVE.generic_parameter" | translate}}</strong>
         </div>
-        <div class="color-primary">Enter configuration parameter number and the value to set.</div>
+        <div class="color-primary">{{ "ZWAVE.generic_parameter_description" | translate }}</div>
       </div>
-      <div fxFlexAlign="end" fxFlex="0 1 auto" fxLayout="column" fxLayoutAlign="start end" style="padding-top: 6px">
+      <div fxFlexAlign="end" fxFlex="0 1 auto" fxLayout="column" fxLayoutGap="12px" fxLayoutAlign="start end" style="padding-top: 12px">
         <mat-form-field>
-          <mat-label>Parameter number</mat-label>
-          <input matInput placeholder="0" type="number"
-                 value=""
-                 required
-                 maxlength="3"
-                 [disabled]="false"
-                 (change)="onConfigParameterChange($event, null)">
+          <mat-label>{{ "number" | translate }}</mat-label>
+          <input matInput  id="paramNumber" name="paramNumber" #paramNumber="ngModel" [(ngModel)]="customParameterNumber"
+                 placeholder="123" type="number" required maxlength="3"
+                 [disabled]="customConfigParameter && customConfigParameter.status === 1">
+          <mat-hint>
+            {{ "ZWAVE.enter_parameter_number" | translate }}
+          </mat-hint>
         </mat-form-field>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
-          <mat-icon *ngIf="true" color="warn">error</mat-icon>
-          <mat-progress-spinner *ngIf="false" mode="indeterminate" diameter="18"></mat-progress-spinner>
+          <mat-icon *ngIf="customConfigParameter && customConfigParameter.status === 2" color="warn">error</mat-icon>
+          <mat-progress-spinner *ngIf="customConfigParameter && customConfigParameter.status === 1" mode="indeterminate" diameter="18"></mat-progress-spinner>
           <mat-form-field style="width: 132px">
-            <mat-label>Value</mat-label>
-            <input matInput placeholder="0" type="number"
-                   [disabled]="false"
+            <mat-label>{{ "value" | translate }}</mat-label>
+            <input matInput id="paramValue" name="paramValue" #paramValue="ngModel" [(ngModel)]="customParameterValue"
+                   placeholder="0" type="number"
+                   [disabled]="customConfigParameter && customConfigParameter.status === 1"
                    required
-                   maxlength="10"
-                   value="">
+                   maxlength="10">
+            <mat-hint>
+              {{ "ZWAVE.enter_parameter_value" | translate }}
+            </mat-hint>
           </mat-form-field>
-          <button mat-icon-button color="primary" (click)="onConfigParameterChange($event, null)">
+          <button mat-icon-button color="primary"
+                  [disabled]="customConfigParameter && customConfigParameter.status === 1 || !paramNumber.valid || !paramValue.valid "
+                  (click)="onCustomParameterSend({ number: paramNumber.value, value: paramValue.value })">
             <mat-icon>send</mat-icon>
           </button>
         </div>
       </div>
     </div>
+
+    <div>
+      <h3 class="color-accent">{{ "ZWAVE.command_classes" | translate }}</h3>
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <button *ngFor="let cc of commandClasses" mat-button [disabled]="true || cc.description == null">
+          <strong>{{ cc.id }}</strong>&nbsp;
+          <small *ngIf="cc.description == null" class="color-warn">{{ "ZWAVE.missing handler" | translate }}</small>
+          <span *ngIf="cc.description" class="color-primary">{{ cc.description }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 24px">&nbsp;</div>
+
   </div>
 </div>
-
-<!--
-<div>&nbsp;</div><div>&nbsp;</div>
-
-<div *ngFor="let f of module.fields">{{f.key}} <small>{{f.value}}</small></div>
--->

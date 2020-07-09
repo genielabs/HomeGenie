@@ -36,5 +36,11 @@
     "operation_failed":
         "Operation failed",
     "device_manager":
-        "Device manager"
+        "Device manager",
+    "group":
+        "Group",
+    "parameter":
+        "Parameter",
+    "number":
+        "Number"
 }
