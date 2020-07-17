@@ -1,12 +1,17 @@
+import {Adapter} from '../../adapters/adapter';
+import {Subject} from 'rxjs';
+import {CMD} from './hgui.service';
+
 export class Module {
   private dataStore?: any = {};
+  private _adapter?: Adapter;
   adapterId: string;
   id: string; // id ::= '<domain>:<address>';
   type: string;
   name: string;
   description: string;
   fields: Array<ModuleField>;
-  constructor(moduleData: Module) {
+  constructor(moduleData: Module | any) {
     this.adapterId = moduleData.adapterId;
     this.id = moduleData.id;
     this.type = moduleData.type;
@@ -37,6 +42,9 @@ export class Module {
     }
     return field;
   }
+  control(command: CMD, options: any): Subject<any> {
+    return this._adapter.control(this, command, options);
+  }
   /**
    * Gets the module data matching the given key or set it if the 'data' parameter was passed.
    * @param key The field key identifier
@@ -48,6 +56,14 @@ export class Module {
       return this;
     }
     return this.dataStore[key];
+  }
+
+  getAdapter?(): Adapter {
+    return this._adapter;
+  }
+
+  set adapter(adapter: Adapter) {
+    this._adapter = adapter;
   }
 }
 

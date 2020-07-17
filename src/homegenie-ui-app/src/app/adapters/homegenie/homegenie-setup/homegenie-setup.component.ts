@@ -17,7 +17,7 @@ export class HomegenieSetupComponent implements OnInit {
 
   drivers: any[] = [];
 
-  constructor(private hgui: HguiService, private formBuilder: FormBuilder) {
+  constructor(public hgui: HguiService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {

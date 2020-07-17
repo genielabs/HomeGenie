@@ -1,7 +1,7 @@
 import {Subject} from 'rxjs';
-import {Module as HguiModule, Module} from '../../services/hgui/module';
-import {ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from './zwave-api';
-import {CommandClass} from './zwave-node-config/zwave-node-config.component';
+import {Module as HguiModule, Module} from '../services/hgui/module';
+import {ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../api/zwave-api';
+import {CommandClass} from '../components/zwave/zwave-node-config/zwave-node-config.component';
 
 export interface ZwaveAdapter {
   onNodeAddReady: Subject<any>;

@@ -3,7 +3,7 @@
         <label class="label">{{ "configuration" | translate }}</label>
         <mat-form-field>
             <mat-label>{{ "HOMEGENIE.device_port" | translate }}</mat-label>
-            <mat-select [(value)]="portName" (selectionChange)="onPortChange($event)">
+            <mat-select [(value)]="portName" (selectionChange)="onPortChange($event)" required>
                 <mat-option *ngFor="let name of serialPorts" [value]="name">{{name}}</mat-option>
             </mat-select>
         </mat-form-field>

@@ -15,6 +15,8 @@ import {IModuleTranslationOptions, ModuleTranslateLoader} from '@larscom/ngx-tra
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import {HomegenieSetupComponent} from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';
 import {ZwaveSetupFormComponent} from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
@@ -24,6 +26,11 @@ import {ZwaveManagerDialogComponent} from './components/zwave/zwave-manager-dial
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {ZwaveNodeConfigComponent} from './components/zwave/zwave-node-config/zwave-node-config.component';
 import {ZwaveNodeListComponent} from './components/zwave/zwave-node-list/zwave-node-list.component';
+import { SwitchComponent } from './widgets/switch/switch.component';
+import { SensorComponent } from './widgets/sensor/sensor.component';
+import {SensorValueFormatterPipe} from './pipes/SensorValueFormatterPipe';
+import { DashboardGroupComponent } from './dashboard-group/dashboard-group.component';
+import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -47,7 +54,12 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     SetupPageComponent,
     ZwaveManagerDialogComponent,
     ZwaveNodeConfigComponent,
-    ZwaveNodeListComponent
+    ZwaveNodeListComponent,
+    SwitchComponent,
+    SensorComponent,
+    SensorValueFormatterPipe,
+    DashboardGroupComponent,
+    GroupListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +77,8 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
         useFactory: moduleHttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    AngularSvgIconModule.forRoot()
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}

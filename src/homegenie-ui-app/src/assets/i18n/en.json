@@ -25,6 +25,8 @@
         "Value",
     "summary":
         "Summary",
+    "settings":
+        "Settings",
     "configuration":
         "Configuration",
     "tools":
@@ -39,6 +41,8 @@
         "Device manager",
     "group":
         "Group",
+    "groups":
+        "Groups",
     "parameter":
         "Parameter",
     "number":

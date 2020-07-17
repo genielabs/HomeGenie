@@ -1,8 +1,8 @@
-import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
+import {ZwaveAdapter} from '../zwave-adapter';
 import {concat, Subject, Subscription} from 'rxjs';
 import {Module, ModuleField} from '../../services/hgui/module';
 import {HomegenieAdapter} from './homegenie-adapter';
-import {ZwaveApi, ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../../components/zwave/zwave-api';
+import {ZwaveApi, ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../../api/zwave-api';
 import {HomegenieZwaveApi} from './homegenie-zwave-api';
 import {CommandClass} from '../../components/zwave/zwave-node-config/zwave-node-config.component';
 import {map} from 'rxjs/operators';

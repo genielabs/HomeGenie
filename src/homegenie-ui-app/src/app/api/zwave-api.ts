@@ -1,4 +1,4 @@
-import {ModuleField} from '../../services/hgui/module';
+import {ModuleField} from '../services/hgui/module';
 
 export class ZwaveApi {
   public static fields = {

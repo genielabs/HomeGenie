@@ -5,8 +5,8 @@ import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
 import {Module as HguiModule} from 'src/app/services/hgui/module';
 import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
-import {ZwaveAdapter} from '../../components/zwave/zwave-adapter';
-import {concatMap, map, mergeMap, tap} from 'rxjs/operators';
+import {ZwaveAdapter} from '../zwave-adapter';
+import {map} from 'rxjs/operators';
 
 export {Module, Group, Program};
 
@@ -20,7 +20,7 @@ export enum ResponseCode {
 
 export class HomegenieAdapter implements Adapter {
   className = 'HomegenieAdapter';
-  onModuleEvent = new Subject<{ module: Module, event: any }>();
+  onModuleEvent = new Subject<{ module: HguiModule, event: any }>();
   private EnableWebsocketStream = true;
   private ImplementedWidgets = [
     'Dimmer',
@@ -205,11 +205,15 @@ export class HomegenieAdapter implements Adapter {
       this.apiCall(`${m.id}/${command}/${options}`)
         .subscribe((res) => {
           // TODO: ... cp.log.info(res);
-          subject.next();
+          subject.next(res);
           subject.complete();
         });
     }
     return subject;
+  }
+
+  getModuleIcon(module: HguiModule): string {
+    return this.getBaseUrl() + 'hg/html/pages/control/widgets/homegenie/generic/images/unknown.png';
   }
 
   apiCall(apiMethod): Subject<ApiResponse> {

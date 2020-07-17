@@ -25,6 +25,8 @@
         "Valore",
     "summary":
         "Sommario",
+    "settings":
+        "Impostazioni",
     "configuration":
         "Configurazione",
     "tools":
@@ -39,6 +41,8 @@
         "Gestione dispositivi",
     "group":
         "Gruppo",
+    "groups":
+        "Gruppi",
     "parameter":
         "Parametro",
     "number":

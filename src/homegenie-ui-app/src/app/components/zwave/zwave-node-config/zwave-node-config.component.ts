@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Module, ModuleField} from '../../../services/hgui/module';
-import {ZwaveApi, ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../zwave-api';
+import {ZwaveApi, ZWaveAssociation, ZWaveAssociationGroup, ZwaveConfigParam} from '../../../api/zwave-api';
 import {HguiService} from '../../../services/hgui/hgui.service';
 import {concat, Subject} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';

@@ -1,1 +1,22 @@
-<p class="content">x10-setup-form works!</p>
+<div class="content" fxLayout="row wrap" fxLayoutAlign="start end" fxLayoutGap="24px">
+  <div>
+    <label class="label">{{ "configuration" | translate }}</label>
+    <mat-form-field>
+      <mat-label>{{ "HOMEGENIE.device_port" | translate }}</mat-label>
+      <mat-select [(value)]="portName" (selectionChange)="onPortChange($event)" required>
+        <mat-option *ngFor="let port of serialPorts" [value]="port.value">{{port.content}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>House Codes</mat-label>
+      <mat-select multiple required
+                  [(value)]="houseCodes"
+                  (openedChange)="onHouseCodesOpenedChange($event)">
+        <mat-option *ngFor="let hc of houseCodesList"
+                    [value]="hc.code">{{ hc.code }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

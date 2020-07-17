@@ -1,0 +1,33 @@
+.mat-card-content {
+  position: absolute;
+  bottom: 12px;
+  top: 62px;
+  right: 12px;
+  left: 12px;
+}
+
+.mat-card-actions .mat-button {
+  margin: 0;
+}
+
+.example-card {
+  width: 280px;
+  height: 148px;
+  margin: 12px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.status-led {
+  display: inline-block;
+  margin: 12px;
+  width: 12px;
+  height: 6px;
+  background-color: darkgreen;
+}
+.active-led {
+  background-color: lime;
+}

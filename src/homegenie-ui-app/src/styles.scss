@@ -3,7 +3,6 @@
 html, body { min-height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "src/_variables.scss";
 /* customizations to material components */
 .mat-checkbox {
@@ -35,4 +34,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-transform: uppercase;
   text-align: center;
   opacity: 0.5;
+}
+.link-active {
+  background-color: rgba(0,0,0,0.05);
 }

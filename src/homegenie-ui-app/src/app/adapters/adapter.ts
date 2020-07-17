@@ -1,7 +1,7 @@
-import {Module} from '../services/hgui/module';
+import {Module as HguiModule, Module} from '../services/hgui/module';
 import {Subject} from 'rxjs';
-import {HguiService} from '../services/hgui/hgui.service';
-import {ZwaveAdapter} from '../components/zwave/zwave-adapter';
+import {CMD, HguiService} from '../services/hgui/hgui.service';
+import {ZwaveAdapter} from './zwave-adapter';
 
 export interface Adapter {
   hgui: HguiService;
@@ -12,9 +12,14 @@ export interface Adapter {
   groups: any;
   modules: any;
 
+  onModuleEvent?: Subject<{ module: Module, event: any }>;
+
   zwaveAdapter?: ZwaveAdapter;
+//  x10Adapter?: X10Adapter;
 
   connect(): Subject<any>;
 
-  control(module: Module, command: string, options: any): Subject<any>;
+  control(module: Module, command: CMD, options: any): Subject<any>;
+
+  getModuleIcon(module: HguiModule): string;
 }

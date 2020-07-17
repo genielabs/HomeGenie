@@ -28,17 +28,17 @@ export class ZwaveSetupFormComponent implements OnInit {
       .subscribe((res) => {
         if (res.code === ResponseCode.Success) {
           this.serialPorts = res.response;
+          this.adapter.apiCall(HomegenieZwaveApi.Options.Get.Port).subscribe((res2) => {
+            if (res2.code === ResponseCode.Success) {
+              this.portName = res2.response.ResponseValue;
+            } else {
+              // TODO: ... log error
+            }
+          });
         } else {
           // TODO: ... log error
         }
       });
-    this.adapter.apiCall(HomegenieZwaveApi.Options.Get.Port).subscribe((res) => {
-      if (res.code === ResponseCode.Success) {
-        this.portName = res.response.ResponseValue;
-      } else {
-        // TODO: ... log error
-      }
-    });
   }
   onPortChange(e): void {
     const command = HomegenieZwaveApi.Options.Set.Port

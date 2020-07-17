@@ -5,6 +5,7 @@ import AdapterFactory from './adapters/adapter-factory';
 import { HguiService } from './services/hgui/hgui.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Module} from './services/hgui/module';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,16 @@ import {Module} from './services/hgui/module';
 })
 export class AppComponent {
   title = 'homegenie-ui-app';
+  isNetworkBusy = false;
 
-  constructor(hgui: HguiService, translate: TranslateService) {
+  constructor(public hgui: HguiService, translate: TranslateService) {
     // Configure HGUI adapters
     AdapterFactory.setClasses({
       // only HomeGenie adapter currently implemented
       HomegenieAdapter,
       // ...
     });
+    this.isNetworkBusy = true;
     // testing HGUI service methods
     // hgui.onModuleAdded.subscribe((m) => console.log('Added module', m));
     // hgui.onGroupAdded.subscribe((g) => console.log('Added group', g));
@@ -28,9 +31,11 @@ export class AppComponent {
     // hgui.onAdapterAdded.subscribe((adapter) => console.log('Added adapter', adapter));
     hgui.loadConfiguration().subscribe((config) => {
       if (config == null) {
-        this.configure(hgui);
+        this.configure(hgui).subscribe((res) => {
+          this.isNetworkBusy = false;
+        });
       } else {
-        // TODO: Config loaded
+        this.isNetworkBusy = false;
       }
     });
   }
@@ -38,7 +43,8 @@ export class AppComponent {
    * Creates a default configuration with one adapter (HomeGenie API adapter) pointing to localhost:8080
    * @param hgui HGUI service instance
    */
-  configure(hgui: HguiService): void {
+  configure(hgui: HguiService): Subject<any> {
+    const subject = new Subject<any>();
     const homegenieAdapter = new HomegenieAdapter(hgui);
     // config for connection through angular proxy (see: 'src/proxy.conf.json')
     /*
@@ -97,7 +103,9 @@ export class AppComponent {
       });
       hgui.saveConfiguration().subscribe((config) => {
         console.log('Config saved', config);
+        subject.next(config);
       });
     });
+    return subject;
   }
 }

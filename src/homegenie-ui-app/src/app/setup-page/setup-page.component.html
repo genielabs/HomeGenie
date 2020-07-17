@@ -1,4 +1,4 @@
 <div *ngFor="let adapter of hgui.getAdapters(); let i = index;">
-    {{ adapter.className }} {{ adapter.id }}
-    <app-homegenie-setup *ngIf="adapter.className === 'HomegenieAdapter'" [adapter]="adapter"></app-homegenie-setup>
+  <small class="color-primary">{{ adapter.className }} ({{ adapter.id }})</small>
+  <app-homegenie-setup *ngIf="adapter.className === 'HomegenieAdapter'" [adapter]="adapter"></app-homegenie-setup>
 </div>

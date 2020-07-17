@@ -52,7 +52,7 @@ export class HguiService implements OnDestroy {
   groups: Array<Group> = [];
   modules: Array<Module> = [];
 
-  currentGroup = 0;
+  currentGroupIndex = 0;
 
   onModuleAdded = new Subject<Module>();
   onModuleRemoved = new Subject<Module>();
@@ -111,6 +111,9 @@ export class HguiService implements OnDestroy {
               } else {
                 // TODO: log 'adapter connected'
               }
+              this.modules.map((m) => {
+                m.adapter = adapter;
+              });
               this.addAdapter(adapter);
             });
           });
@@ -138,7 +141,7 @@ export class HguiService implements OnDestroy {
     });
     const config: Configuration = {
       groups: this.groups,
-      modules: this.modules,
+      modules: this.modules.map((m) => new Module(m)),
       adapters: adaptersConfig,
     };
     this.storage.set(this.configStorage, config).subscribe((status) => {
@@ -185,14 +188,14 @@ export class HguiService implements OnDestroy {
    * Gets the current group instance
    */
   getCurrentGroup(): Group {
-    return this.groups[this.currentGroup];
+    return this.groups[this.currentGroupIndex];
   }
   /**
    * Sets the current group
    * @param groupIndex The group index
    */
   setCurrentGroup(groupIndex: number): void {
-    this.currentGroup = groupIndex;
+    this.currentGroupIndex = groupIndex;
   }
   /**
    * Adds a new group to HGUI configuration
@@ -214,6 +217,16 @@ export class HguiService implements OnDestroy {
    */
   getGroup(name: string): Group {
     return this.groups.find((item) => item.name === name);
+  }
+
+  /**
+   * Gets modules of a given group
+   * @param group The Group instance
+   */
+  getGroupModules(group: Group): Array<Module> {
+    return group.modules.map((mr) => {
+      return this.modules.find((m) => m.id === mr.moduleId && m.adapterId === mr.adapterId);
+    });
   }
   /**
    * Removes the group with the specified name
@@ -261,8 +274,7 @@ export class HguiService implements OnDestroy {
   addModule(module: Module): Module {
     const m = this.getModule(module.id, module.adapterId);
     if (m != null) { return m; }
-    // TODO: module = zuix.observable(module).proxy;
-    // TODO: subscribe to module events
+    module.adapter = this.getAdapter(module.adapterId);
     this.modules.push(module);
     this.onModuleAdded.next(module);
     return module;
