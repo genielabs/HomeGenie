@@ -1,8 +1,10 @@
 <div *ngIf="group">
   <div fxLayout="row wrap" fxLayoutAlign="center center">
     <ng-container *ngFor="let module of hgui.getGroupModules(group)">
-      <app-switch *ngIf="module.type === 'switch' || module.type === 'dimmer' || module.type === 'light' || module.type === 'siren'" [module]="module"></app-switch>
-      <app-sensor *ngIf="module.type === 'sensor'" [module]="module"></app-sensor>
+      <app-switch *ngIf="module.type === 'switch' || module.type === 'dimmer' || module.type === 'light' || module.type === 'siren'"
+                  [module]="module" (showOptions)="onShowOptions(module)"></app-switch>
+      <app-sensor *ngIf="module.type === 'sensor'"
+                  [module]="module" (showOptions)="onShowOptions(module)"></app-sensor>
     </ng-container>
   </div>
 </div>

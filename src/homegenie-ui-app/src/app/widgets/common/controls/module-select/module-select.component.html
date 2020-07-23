@@ -1,0 +1,7 @@
+<p>{{ "HOMEGENIE.programs."+field.pid+"."+field.field.key | translate }}</p>
+<mat-form-field appearance="fill">
+  <mat-label>{{ "module" | translate }}</mat-label>
+  <mat-select [multiple]="false" (selectionChange)="onFieldChange($event, field)">
+    <mat-option *ngFor="let m of modules" [value]="m.id">{{m.name}}</mat-option>
+  </mat-select>
+</mat-form-field>

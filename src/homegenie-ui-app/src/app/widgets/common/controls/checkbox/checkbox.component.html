@@ -1,0 +1,5 @@
+<mat-checkbox *ngIf="field.type.id === 'checkbox'"
+              [checked]="value"
+              (change)="onFieldChange($event, field)">
+  {{ description }}
+</mat-checkbox>

@@ -1,0 +1,75 @@
+<h1 mat-dialog-title>{{ module.name }}</h1>
+<div>
+  (TODO: module summary - and foldable module widget maybe)
+</div>
+<div mat-dialog-content>
+
+  <mat-accordion class="example-headers-align" [multi]="false">
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Statistics
+        </mat-panel-title>
+        <mat-panel-description>
+          description ..
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        (TODO: module statistics and LOGS)
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Schedule
+        </mat-panel-title>
+        <mat-panel-description>
+          description ..
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        (TODO: module scheduling)
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngFor="let o of options">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ o.name }}
+        </mat-panel-title>
+        <!--
+        <mat-panel-description>
+        </mat-panel-description>
+        -->
+      </mat-expansion-panel-header>
+
+      <div>
+
+        <p>{{ o.description }}</p>
+
+        <div *ngFor="let f of o.features">
+          <app-text *ngIf="f.type.id === 'text'" [field]="f" (fieldChange)="onFieldChange($event)"></app-text>
+          <app-checkbox *ngIf="f.type.id === 'checkbox'" [field]="f" (fieldChange)="onFieldChange($event)"></app-checkbox>
+          <app-module-select *ngIf="f.type.id === 'module.text'" [field]="f" (fieldChange)="onFieldChange($event)"></app-module-select>
+          <app-slider *ngIf="f.type.id === 'slider'" [field]="f" (fieldChange)="onFieldChange($event)"></app-slider>
+          <app-program-select *ngIf="f.type.id === 'program.text'" [field]="f" (fieldChange)="onFieldChange($event)"></app-program-select>
+          <app-event-capture *ngIf="f.type.id === 'capture'" [field]="f" (fieldChange)="onFieldChange($event)"></app-event-capture>
+        </div>
+
+      </div>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+</div><!-- dialog content -->
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end start">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true">Apply</button>
+</mat-dialog-actions>

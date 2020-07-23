@@ -17,6 +17,8 @@ import {AppComponent} from './app.component';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
+import { CodeEditorModule } from '@ngstack/code-editor';
+
 import {HomegenieSetupComponent} from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';
 import {ZwaveSetupFormComponent} from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
@@ -31,6 +33,14 @@ import { SensorComponent } from './widgets/sensor/sensor.component';
 import {SensorValueFormatterPipe} from './pipes/SensorValueFormatterPipe';
 import { DashboardGroupComponent } from './dashboard-group/dashboard-group.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
+import { ProgramEditorComponent } from './automation/program-editor/program-editor.component';
+import { WidgetOptionsDialogComponent } from './widgets/common/widget-options-dialog/widget-options-dialog.component';
+import { CheckboxComponent } from './widgets/common/controls/checkbox/checkbox.component';
+import { ModuleSelectComponent } from './widgets/common/controls/module-select/module-select.component';
+import { ProgramSelectComponent } from './widgets/common/controls/program-select/program-select.component';
+import { SliderComponent } from './widgets/common/controls/slider/slider.component';
+import { TextComponent } from './widgets/common/controls/text/text.component';
+import { EventCaptureComponent } from './widgets/common/controls/event-capture/event-capture.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -59,7 +69,15 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     SensorComponent,
     SensorValueFormatterPipe,
     DashboardGroupComponent,
-    GroupListItemComponent
+    GroupListItemComponent,
+    ProgramEditorComponent,
+    WidgetOptionsDialogComponent,
+    CheckboxComponent,
+    ModuleSelectComponent,
+    ProgramSelectComponent,
+    SliderComponent,
+    TextComponent,
+    EventCaptureComponent
   ],
   imports: [
     BrowserModule,
@@ -71,14 +89,15 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     HttpClientModule,
     MaterialModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: 'it',
       loader: {
         provide: TranslateLoader,
         useFactory: moduleHttpLoaderFactory,
         deps: [HttpClient]
       }
     }),
-    AngularSvgIconModule.forRoot()
+    AngularSvgIconModule.forRoot(),
+    CodeEditorModule.forRoot()
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
@@ -87,4 +106,3 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
 })
 export class AppModule {
 }
-

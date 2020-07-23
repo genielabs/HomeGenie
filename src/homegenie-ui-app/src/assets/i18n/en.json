@@ -46,5 +46,9 @@
     "parameter":
         "Parameter",
     "number":
-        "Number"
+        "Number",
+    "module":
+        "Module",
+    "modules":
+        "Modules"
 }

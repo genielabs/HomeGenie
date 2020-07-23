@@ -218,16 +218,6 @@ export class HguiService implements OnDestroy {
   getGroup(name: string): Group {
     return this.groups.find((item) => item.name === name);
   }
-
-  /**
-   * Gets modules of a given group
-   * @param group The Group instance
-   */
-  getGroupModules(group: Group): Array<Module> {
-    return group.modules.map((mr) => {
-      return this.modules.find((m) => m.id === mr.moduleId && m.adapterId === mr.adapterId);
-    });
-  }
   /**
    * Removes the group with the specified name
    * @param name The group name
@@ -266,7 +256,15 @@ export class HguiService implements OnDestroy {
     this.onGroupModuleAdded.next({ group, module: m });
     return true;
   }
-
+  /**
+   * Gets modules of a given group
+   * @param group The Group instance
+   */
+  getGroupModules(group: Group): Array<Module> {
+    return group.modules.map((mr) => {
+      return this.modules.find((m) => m.id === mr.moduleId && m.adapterId === mr.adapterId);
+    });
+  }
   /**
    * Adds a new module to HGUI configutation
    * @param module The module to add

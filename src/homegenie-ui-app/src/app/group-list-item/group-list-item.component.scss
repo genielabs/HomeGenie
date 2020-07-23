@@ -1,6 +1,7 @@
 a {
   width: 100%;
   text-align: left;
+  margin-top: 12px;
 }
 .group-title {
 }
@@ -8,12 +9,15 @@ a {
   font-weight: bold;
 }
 .indicators {
+  padding-top: 6px;
+  padding-left: 24px;
 }
 .indicator-value {
-  font-size: 90%;
-  text-align: center;
-  width: 36px;
+  text-align: left;
   overflow-x: hidden;
   line-height: 24px;
   vertical-align: middle;
+  margin-left: 4px;
+  margin-right: 8px;
+  width: 48px;
 }

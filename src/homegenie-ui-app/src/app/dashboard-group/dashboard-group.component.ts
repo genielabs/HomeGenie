@@ -1,9 +1,13 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {HguiService} from '../services/hgui/hgui.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Group} from '../services/hgui/group';
+import {MatDialog} from '@angular/material/dialog';
+import {ZwaveManagerDialogComponent} from '../components/zwave/zwave-manager-dialog/zwave-manager-dialog.component';
+import {WidgetOptionsDialogComponent} from '../widgets/common/widget-options-dialog/widget-options-dialog.component';
+import {Module} from '../services/hgui/module';
 
 @Component({
   selector: 'app-dashboard-group',
@@ -12,19 +16,26 @@ import {Group} from '../services/hgui/group';
 })
 export class DashboardGroupComponent implements OnInit, OnDestroy {
   @Input()
-  group: Group;
+  group: Group = null;
 
-  private routeParamSubscription: Subscription;
+  private readonly routeParamSubscription: Subscription;
 
-  constructor(public hgui: HguiService, route: ActivatedRoute) {
-    this.routeParamSubscription = route.queryParams.subscribe(params => {
-      const name = params['group'];
+  constructor(public dialog: MatDialog, public hgui: HguiService, activatedRoute: ActivatedRoute, router: Router) {
+    this.routeParamSubscription = activatedRoute.params.subscribe(params => {
+      const name = params['name'];
       if (name) {
         this.group = hgui.getGroup(name);
-      } else {
-        this.group = hgui.groups[0];
       }
-      hgui.setCurrentGroup(hgui.groups.indexOf(this.group));
+      if (this.group == null) {
+        this.group = hgui.groups[0];
+        if (this.group) {
+          router.navigate(['/groups', this.group.name]);
+          return;
+        }
+      }
+      setTimeout(() => {
+        this.hgui.setCurrentGroup(this.hgui.groups.indexOf(this.group));
+      }, 500);
     });
   }
 
@@ -34,5 +45,19 @@ export class DashboardGroupComponent implements OnInit, OnDestroy {
     if (this.routeParamSubscription) {
       this.routeParamSubscription.unsubscribe();
     }
+  }
+
+  onShowOptions(module: Module): void {
+    console.log('onShowOptions')
+    const dialogRef = this.dialog.open(WidgetOptionsDialogComponent, {
+      // height: '400px',
+      // width: '600px',
+      maxWidth: '800px',
+      disableClose: false,
+      data: module
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      // TODO: ...
+    });
   }
 }

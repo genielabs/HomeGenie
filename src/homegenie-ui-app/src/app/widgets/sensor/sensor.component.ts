@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Module, ModuleField} from '../../services/hgui/module';
 import {Adapter} from '../../adapters/adapter';
 
@@ -10,6 +10,9 @@ import {Adapter} from '../../adapters/adapter';
 export class SensorComponent implements OnInit, OnDestroy {
   @Input()
   module: Module;
+  @Output()
+  showOptions: EventEmitter<any> = new EventEmitter();
+
   sensor: { field: ModuleField, unit: string };
 
   // TODO: create SensorValueFormatter pipe
@@ -35,6 +38,10 @@ export class SensorComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.stopTimeout();
+  }
+
+  onModuleOptionsClick(e): void {
+    this.showOptions.emit(null);
   }
 
   private startTimeout(): void {

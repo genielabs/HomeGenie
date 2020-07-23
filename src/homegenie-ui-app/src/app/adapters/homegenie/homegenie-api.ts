@@ -21,8 +21,18 @@ export class ModuleParameter {
 
 export class Program {
   // TODO: ...
+  Address: string;
+  Name: string;
+  Description: string;
   IsEnabled: boolean;
-  Features: any[];
+  Features: ProgramFeature[];
+}
+export class ProgramFeature {
+  Description: string;
+  FieldType: string;
+  ForDomains: string;
+  ForTypes: string;
+  Property: string;
 }
 
 export class HomegenieApi {

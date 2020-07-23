@@ -1,0 +1,17 @@
+<div *ngIf="!isBinary">
+  <div>
+    <span class="label">{{ description }}</span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="value">{{ slider.value }}</div>
+    <mat-slider fxFlex="grow" #slider thumbLabel tickInterval="1"
+                [min]="field.type.options[0]"
+                [max]="field.type.options[1]"
+                [step]="field.type.options[2] ? field.type.options[2] : 1"
+                [value]="value"
+                (change)="onFieldChange($event, field)"></mat-slider>
+  </div>
+</div>
+<div *ngIf="isBinary" fxLayout="row" fxLayoutAlign="start center">
+  <mat-slide-toggle>{{ description }}</mat-slide-toggle>
+</div>

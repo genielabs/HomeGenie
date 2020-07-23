@@ -1,8 +1,8 @@
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 
 import {Adapter} from '../adapter';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
-import {Module as HguiModule} from 'src/app/services/hgui/module';
+import {Module as HguiModule, ModuleField} from 'src/app/services/hgui/module';
 import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
 import {ZwaveAdapter} from '../zwave-adapter';
@@ -135,81 +135,20 @@ export class HomegenieAdapter implements Adapter {
 
   control(m: HguiModule, command: string, options: any): Subject<any> {
     const subject = new Subject<any>();
-    // const moduleDetailDialog = zuix.context('module-detail');
     // adapter-specific implementation
     if (command === CMD.Options.Show) {
-      // TODO: ... implement something like this
-      // if (moduleDetailDialog.isOpen()) {
-      //    moduleDetailDialog.close();
-      //    return;
-      // }
-      // TODO: ....
-      // hgui.showLoader(true);
-      const module = this.getModule(m.id);
-      this.apiCall(HomegenieApi.Automation.Programs.List)
-        .subscribe((res) => {
-            this._programs = res.response;
-            this._programs.map((p) => {
-              if (p.IsEnabled && p.Features != null) {
-                for (let i = 0; i < p.Features.length; i++) {
-                  const f = p.Features[i];
-                  f.ForTypes = f.ForTypes.replace('|', ',');
-                  f.ForDomains = f.ForDomains.replace('|', ',');
-                  let matchFeature =
-                    f.ForTypes.length === 0 ||
-                    `,${f.ForTypes},`.indexOf(`,${module.DeviceType},`) >= 0;
-                  matchFeature =
-                    matchFeature &&
-                    (f.ForDomains.length === 0 ||
-                      `,${f.ForDomains},`.indexOf(`,${module.Domain},`) >= 0);
-                  if (matchFeature) {
-                    // TODO: ....
-                    /*
-                    zuix.load('adapters/homegenie/options_view', {
-                        model: {
-                            name: p.Name,
-                            description: p.Description
-                        },
-                        ready: (ctx) => {
-                            zuix.context('module-detail').addOptionsView(ctx.view());
-                        }
-                    });
-                    */
-                    break;
-                  }
-                }
-              }
-              // TODO: hgui.hideLoader();
-            });
-            // show module options and statistics page
-            // TODO: ...
-            // zuix.context('module-detail')
-            //    .open(options.view);
-            subject.next();
-            subject.complete();
-          }
-        );
-      return subject;
+      // TODO: .... should show options forms ...
+      return this.getModuleFeatures(m);
     }
     if (m.type === 'program') {
+      // program API command
       const programAddress = m.id.substring(m.id.lastIndexOf('/') + 1);
       options = programAddress + '/' + options;
-      this.apiCall(HomegenieApi.Automation.Command(command, options))
-        .subscribe((res) => {
-            // TODO: ... cp.log.info(res);
-            subject.next();
-            subject.complete();
-          }
-        );
+      return this.apiCall(HomegenieApi.Automation.Command(command, options));
     } else {
-      this.apiCall(`${m.id}/${command}/${options}`)
-        .subscribe((res) => {
-          // TODO: ... cp.log.info(res);
-          subject.next(res);
-          subject.complete();
-        });
+      // module API command
+      return this.apiCall(`${m.id}/${command}/${options}`);
     }
-    return subject;
   }
 
   getModuleIcon(module: HguiModule): string {
@@ -404,5 +343,137 @@ export class HomegenieAdapter implements Adapter {
         property.UpdateTime = event.UnixTimestamp;
       }
     }
+  }
+
+  private MatchValues(valueList, matchValue): boolean {
+    // regexp matching
+    if (valueList.trim().startsWith('/')) {
+      valueList = valueList.replace(/^\/+|\/+$/g, '');
+      return matchValue.match(valueList);
+    }
+    // classic comma separated value list matching
+    valueList = valueList.toLowerCase();
+    matchValue = matchValue.toLowerCase();
+    let inclusionList = [valueList];
+    if (valueList.indexOf(',') > 0) {
+      inclusionList = valueList.split(',');
+    } else if (valueList.indexOf('|') > 0) {
+      inclusionList = valueList.split('|');
+    }
+    // build exclusion list and remove empty entries
+    const exclusionList = [];
+    for (let idx = 0; idx < inclusionList.length; idx++){
+      const val = inclusionList[idx];
+      if (val.trim().indexOf('!') === 0) {
+        inclusionList.splice(idx, 1);
+        exclusionList.push(val.trim().substring(1));
+      } else if (val.trim().length === 0) {
+        inclusionList.splice(idx, 1);
+      }
+    }
+    // check if matching
+    let isMatching = (inclusionList.length === 0);
+    for (let idx = 0; idx < inclusionList.length; idx++){
+      const val = inclusionList[idx];
+      if (val.trim() === matchValue.trim()) {
+        isMatching = true;
+        break;
+      }
+    }
+    // check if not in exclusion list
+    for (let idx = 0; idx < exclusionList.length; idx++){
+      const val = exclusionList[idx];
+      if (val.trim() === matchValue.trim()) {
+        isMatching = false;
+        break;
+      }
+    }
+    return isMatching;
+  }
+
+  private getModuleFeatures(m: HguiModule): Subject<any> {
+    const subject = new Subject<any>();
+    const module = this.getModule(m.id);
+    this.apiCall(HomegenieApi.Automation.Programs.List)
+      .subscribe((res) => {
+          const programFeatures = [];
+          this._programs = res.response;
+          this._programs.map((p) => {
+            if (p.IsEnabled && p.Features != null) {
+              const pf = {
+                id: p.Address,
+                name: p.Name,
+                description: p.Description,
+                features: []
+              };
+              for (let i = 0; i < p.Features.length; i++) {
+                const f = p.Features[i];
+                let featurematch = this.MatchValues(f.ForDomains, module.Domain);
+                let forTypes = f.ForTypes;
+                let forProperties: any = false;
+                const propertyFilterIndex = forTypes.indexOf(':');
+                if (propertyFilterIndex >= 0) {
+                  forProperties = forTypes.substring(propertyFilterIndex + 1).trim();
+                  forTypes = forTypes.substring(0, propertyFilterIndex).trim();
+                }
+                featurematch = featurematch && this.MatchValues(forTypes, module.DeviceType);
+                if (forProperties !== false) {
+                  let matchProperty = false;
+                  for (let idx = 0; idx < module.Properties.length; idx++) {
+                    const mp = module.Properties[idx];
+                    if (this.MatchValues(forProperties, mp.Name)) {
+                      matchProperty = true;
+                      break;
+                    }
+                  }
+                  featurematch = featurematch && matchProperty;
+                }
+/*
+                f.ForTypes = f.ForTypes.replace('|', ',');
+                f.ForDomains = f.ForDomains.replace('|', ',');
+                let matchFeature =
+                  f.ForTypes.length === 0 ||
+                  `,${f.ForTypes},`.indexOf(`,${module.DeviceType},`) >= 0;
+                matchFeature =
+                  matchFeature &&
+                  (f.ForDomains.length === 0 ||
+                    `,${f.ForDomains},`.indexOf(`,${module.Domain},`) >= 0);
+ */
+                if (featurematch) {
+                  const type = f.FieldType.split(':');
+                  let mf: ModuleField = m.field(f.Property);
+                  // add the field if does not exist
+                  if (mf == null) {
+                    mf = {
+                      key: f.Property,
+                      value: null,
+                      timestamp: null
+                    };
+                    m.fields.push(mf);
+                  }
+                  pf.features.push({
+                    pid: p.Address,
+                    field: mf,
+                    type: {
+                      id: type[0],
+                      options: type.slice(1)
+                    },
+                    name: p.Name,
+                    description: f.Description
+                  });
+                }
+              }
+              if (pf.features.length > 0) {
+                programFeatures.push(pf);
+              }
+            }
+            subject.next(programFeatures);
+            subject.complete();
+          });
+          subject.next();
+          subject.complete();
+        }
+      );
+    return subject;
   }
 }

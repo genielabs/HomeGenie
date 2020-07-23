@@ -14,5 +14,178 @@
         "Device port",
 " ":"------------------------------------------",
     "modules":
-        "Modules"
+        "Modules",
+" ": "------------------------------------------",
+  "programs": {
+    "34": {
+      "Title":
+          "OpenWeatherMap",
+      "Description":
+          "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
+      "ConfigureOptions.Location":
+          "City name",
+      "ConfigureOptions.Language":
+          "Language (eg. EN, IT, FR, DE, ...)",
+      "ConfigureOptions.UpdateInterval":
+          "Update interval (minutes)",
+      "ConfigureOptions.ApiKey":
+          "OpenWeatherMap API key (APPID)"
+    },
+
+    "6": {
+        "Title":
+            "All lights on",
+        "Description":
+            "Turn on all lights in the selected group."
+    },
+
+    "7": {
+        "Title":
+            "All lights off",
+        "Description":
+            "Turn off all lights in the selected group."
+    },
+
+    "81": {
+        "Title":
+            "Energy Monitor",
+        "Description":
+            "Collects and display information about device status and energy consumption.",
+        "EnergyManagement.MonitorStatus":
+            "Monitor status",
+        "EnergyManagement.MonitorWatts":
+            "Monitor watts"
+    },
+
+    "82": {
+        "Title":
+            "Energy Saving Mode",
+        "Description":
+            "When enabled, ensures that dimmer level is kept below the configured percentage value.",
+        "EnergyManagement.EnergySavingLevel":
+            "Max light level (%)",
+        "EnergyManagement.EnergySavingMode":
+            "Enable energy saving mode"
+    },
+
+    "16": {
+        "Title":
+            "Level Memory",
+        "Description":
+            "Store and recall last dimmer level.",
+        "HomeGenie.LevelMemory":
+            "Recall last light level when switched on",
+        "HomeGenie.LevelMemory.SimulateOnly":
+            "Simulate only"
+    },
+
+    "35": {
+        "Title":
+            "Scheduled On/Off",
+        "Description":
+            "Turn on/off a device using the scheduler.",
+        "HomeGenie.ScheduleControl":
+            "Enable scheduled on/off",
+        "HomeGenie.ScheduleOn":
+            "Turn on",
+        "HomeGenie.ScheduleOff":
+            "Turn off"
+    },
+
+    "90": {
+        "Title":
+            "Security Alarm System",
+        "Description":
+            "Basic security alarm system",
+        "HomeGenie.SecurityAlarm":
+            "Use as alarm/strobe",
+        "HomeGenie.SecuritySensor":
+            "Use as security sensor",
+        "ConfigureOptions.Email.Recipients":
+            "Comma separated list of recipients e-mails for alarm notifications",
+        "ConfigureOptions.System.ArmDelay":
+            "Arm delay (seconds)",
+        "ConfigureOptions.System.SirenStartTime":
+            "Sirens Start Delay (seconds)",
+        "ConfigureOptions.System.SirenMaxTime":
+            "Sirens max Time (seconds, 0=infinite)",
+        "ConfigureOptions.Trigger.ArmedProgram":
+            "Program to run when armed",
+        "ConfigureOptions.Trigger.DisarmedProgram":
+            "Program to run when disarmed",
+        "ConfigureOptions.Trigger.TriggeredProgram":
+            "Program to run when triggered"
+    },
+
+    "145": {
+        "Title":
+            "Smart Lights",
+        "Description":
+            "Control device by motion detection and enviroment light.",
+        "HomeGenie.SmartLights.Enable":
+            "Enable 'Smart Lights' control",
+        "HomeGenie.SmartLights.OnMotionDetect":
+            "Controlled by motion sensor (optional)",
+        "HomeGenie.SmartLights.CheckLuminosity":
+            "Controlled by light sensor (optional)",
+        "HomeGenie.SmartLights.SwitchOffTimeout":
+            "Turn off after inactivity timeout (seconds)",
+        "HomeGenie.SmartLights.MinLuminance":
+            "Turn on if luminance is below:",
+        "TimeTable.ExternalControl":
+            "Synchronize with Timetable scheduling"
+    },
+
+    "8": {
+        "Title":
+            "Sunrise Colors Scenario",
+        "Description":
+            "Example scenario for Philips Hue lights.",
+        "Scenarios.SunriseColors":
+            "Link to Sunrise Colors scenario"
+    },
+
+    "36": {
+        "Title":
+            "Timetable",
+        "Description":
+            "Schedule thermostats, lights and shutters.",
+        "TimeTable.Weekend":
+            "Week-end",
+        "TimeTable.Workday":
+            "Work days",
+        "TimeTable.Holiday":
+            "Holidays",
+        "TimeTable.Special":
+            "Special days",
+        "TimeTable.Enable":
+            "Enable timetable",
+        "TimeTable.Repeat":
+            "Repeat command for the whole duration",
+        "TimeTable.CheckDST":
+            "Enable Day Light Savings check",
+        "TimeTable.UI.NoProgram":
+            "no program",
+        "TimeTable.UI.ProgramNr":
+            "program #"
+    },
+
+    "112": {
+        "Title":
+            "Automatic turn off",
+        "Description":
+            "When device is turned on, automatically turn it off after a given delay.",
+        "HomeGenie.TurnOffDelay":
+            "Automatic turn off delay (seconds)"
+    },
+
+    "200": {
+        "Title":
+            "Windows Phone Push Notification Service",
+        "Description":
+            "Sends toast and tile updates to Windows Phone client.",
+        "MobileNotification.SendChanges":
+            "Push notifications to Windows Phone Client"
+    }
+  }
 }

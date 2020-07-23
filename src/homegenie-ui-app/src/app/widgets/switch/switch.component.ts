@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Module} from '../../services/hgui/module';
 import {CMD, FLD, HguiService} from '../../services/hgui/hgui.service';
 import {Adapter} from '../../adapters/adapter';
@@ -12,6 +12,9 @@ import {Subscription} from 'rxjs';
 export class SwitchComponent implements OnInit, OnDestroy {
   @Input()
   module: Module;
+  @Output()
+  showOptions: EventEmitter<any> = new EventEmitter();
+
   status = '';
 
   private ledTimeout: any = null;
@@ -50,15 +53,15 @@ export class SwitchComponent implements OnInit, OnDestroy {
     });
   }
 
+  onModuleOptionsClick(e): void {
+    this.showOptions.emit(null);
+  }
+
   onOnButtonClick(e): void {
-    this.module.control(CMD.Control.On, {}).subscribe((res) => {
-      console.log('onOnButtonClick', res);
-    });
+    this.module.control(CMD.Control.On).subscribe();
   }
   onOffButtonClick(e): void {
-    this.module.control(CMD.Control.Off, {}).subscribe((res) => {
-      console.log('onOffButtonClick', res);
-    });
+    this.module.control(CMD.Control.Off).subscribe();
   }
 
   private blinkLed(): void {

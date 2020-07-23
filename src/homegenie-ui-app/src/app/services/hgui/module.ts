@@ -27,7 +27,7 @@ export class Module {
    */
   field?(key: string, value?: any, timestamp?: any): any {
     if (timestamp == null) { timestamp = new Date().getTime(); }
-    const field = this.fields.find((f) => f.key === key);
+    const field = this.fields.find((f) => f.key.toLowerCase() === key.toLowerCase());
     if (field && value) {
       if (this.fields == null) { this.fields = []; }
       if (field.timestamp === timestamp) {
@@ -42,7 +42,7 @@ export class Module {
     }
     return field;
   }
-  control(command: CMD, options: any): Subject<any> {
+  control(command: CMD, options?: any): Subject<any> {
     return this._adapter.control(this, command, options);
   }
   /**

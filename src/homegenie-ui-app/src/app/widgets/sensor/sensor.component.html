@@ -3,7 +3,7 @@
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ module.name }}</mat-card-title>
     <mat-card-subtitle>{{ module.type }}</mat-card-subtitle>
-    <button mat-icon-button color="primary" style="position: absolute;right:8px; top:8px;">
+    <button mat-icon-button color="primary" style="position: absolute;right:8px; top:8px;" (click)="onModuleOptionsClick($event)">
       <mat-icon>menu</mat-icon>
     </button>
   </mat-card-header>
