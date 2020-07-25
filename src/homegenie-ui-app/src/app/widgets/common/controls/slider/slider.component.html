@@ -3,7 +3,7 @@
     <span class="label">{{ description }}</span>
   </div>
   <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="value">{{ slider.value }}</div>
+    <div *ngIf="isInitialized" class="value">{{ slider.value }}</div>
     <mat-slider fxFlex="grow" #slider thumbLabel tickInterval="1"
                 [min]="field.type.options[0]"
                 [max]="field.type.options[1]"

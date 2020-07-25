@@ -89,7 +89,7 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     HttpClientModule,
     MaterialModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'it',
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: moduleHttpLoaderFactory,

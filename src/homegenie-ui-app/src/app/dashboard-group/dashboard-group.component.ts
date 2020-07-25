@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {HguiService} from '../services/hgui/hgui.service';
+import {CMD, HguiService} from '../services/hgui/hgui.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -48,7 +48,6 @@ export class DashboardGroupComponent implements OnInit, OnDestroy {
   }
 
   onShowOptions(module: Module): void {
-    console.log('onShowOptions')
     const dialogRef = this.dialog.open(WidgetOptionsDialogComponent, {
       // height: '400px',
       // width: '600px',
@@ -56,8 +55,16 @@ export class DashboardGroupComponent implements OnInit, OnDestroy {
       disableClose: false,
       data: module
     });
-    dialogRef.afterClosed().subscribe(() => {
-      // TODO: ...
+    dialogRef.afterClosed().subscribe((changeList) => {
+      if (changeList) {
+        const changes: any = {};
+        changeList.forEach((c) => {
+          changes[c.field.key] = c.value;
+        });
+        module.control(CMD.Options.Set, changes).subscribe((res) => {
+          // TODO: ... logging
+        });
+      }
     });
   }
 }

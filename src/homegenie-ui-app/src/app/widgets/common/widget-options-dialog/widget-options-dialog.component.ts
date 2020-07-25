@@ -13,26 +13,29 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
 
   options: any[] = [];
   changes: { field: ModuleField, value: any }[] = [];
+  translationPrefix: string;
 
   constructor(
     private translate: TranslateService,
     public dialogRef: MatDialogRef<WidgetOptionsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public module: Module
-  ) { }
+  ) {
+    this.translationPrefix = module.getAdapter().translationPrefix;
+  }
 
   ngOnInit(): void {
-    this.module.control(CMD.Options.Show).subscribe((res: any[]) => {
-      console.log(res);
+    this.module.control(CMD.Options.Get).subscribe((res: any[]) => {
       this.options = res;
       setTimeout(() => {
         this.options.forEach((o) => {
-          const titleKey = `HOMEGENIE.programs.${o.id}.Title`;
+          const titleKey = `${this.translationPrefix}.$options.${o.id}.Title`;
+          console.log(titleKey);
           this.translate.get(titleKey).subscribe((tr) => {
             if (tr !== titleKey) {
               o.name = tr;
             }
           });
-          const descriptionKey = `HOMEGENIE.programs.${o.id}.Description`;
+          const descriptionKey = `${this.translationPrefix}.$options.${o.id}.Description`;
           this.translate.get(descriptionKey).subscribe((tr) => {
             if (tr !== descriptionKey) {
               o.description = tr;
@@ -43,12 +46,19 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    console.log(this.changes);
   }
 
   onFieldChange(e): void {
-    this.changes[e.field.key] = e;
-    console.log(e);
+    if (e.field.value === e.value) {
+      this.changes = this.changes.filter((c) => c.field.key !== e.field.key);
+    } else {
+      let change = this.changes.find((c) => c.field.key === e.field.key);
+      if (change) {
+        change.value = e.value;
+      } else {
+        this.changes.push(e);
+      }
+    }
   }
 
 }

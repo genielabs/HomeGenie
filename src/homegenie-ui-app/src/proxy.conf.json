@@ -2,11 +2,13 @@
     "/api/*": {
         "target": "http://localhost:8080",
         "secure": false,
+        "changeOrigin": true,
         "logLevel": "debug"
     },
     "/events": {
         "target": "http://localhost:8188",
         "secure": false,
+        "changeOrigin": true,
         "logLevel": "debug",
         "ws": true
     }

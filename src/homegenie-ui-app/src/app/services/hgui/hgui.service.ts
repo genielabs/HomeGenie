@@ -20,7 +20,8 @@ export class CMD {
     Toggle: 'Control.Toggle'
   };
   static Options = {
-    Show: 'Options.Show'
+    Get: 'Options.Get',
+    Set: 'Options.Set'
   };
   static Programs = {
     Toggle: 'Programs.Toggle'

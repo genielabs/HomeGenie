@@ -7,6 +7,7 @@ export interface Adapter {
   hgui: HguiService;
   className: string;
   id: string;
+  translationPrefix: string;
 
   options: any;
   groups: any;
@@ -19,7 +20,7 @@ export interface Adapter {
 
   connect(): Subject<any>;
 
-  control(module: Module, command: CMD, options: any): Subject<any>;
+  control(module: Module, command: CMD, options?: any): Subject<any>;
 
   getModuleIcon(module: HguiModule): string;
 }

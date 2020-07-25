@@ -53,7 +53,9 @@ export class HomegenieApi {
     },
     Modules: {
       // Get the list of modules
-      List: 'HomeAutomation.HomeGenie/Config/Modules.List'
+      List: 'HomeAutomation.HomeGenie/Config/Modules.List',
+      ParameterGet: 'HomeAutomation.HomeGenie/Config/Modules.ParameterGet',
+      ParameterSet: 'HomeAutomation.HomeGenie/Config/Modules.ParameterSet'
     },
     WebSocket: {
       // Get autorization token to connect to WebSocket service

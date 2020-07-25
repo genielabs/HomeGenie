@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { environment } from '../environments/environment';
+
 import { HomegenieAdapter } from 'src/app/adapters/homegenie/homegenie-adapter';
 import AdapterFactory from './adapters/adapter-factory';
 import { HguiService } from './services/hgui/hgui.service';
@@ -38,6 +40,9 @@ export class AppComponent {
         this.isNetworkBusy = false;
       }
     });
+    // set translation language
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|it/) ? browserLang : 'en');
   }
   /**
    * Creates a default configuration with one adapter (HomeGenie API adapter) pointing to localhost:8080
@@ -47,27 +52,31 @@ export class AppComponent {
     const subject = new Subject<any>();
     const homegenieAdapter = new HomegenieAdapter(hgui);
     // config for connection through angular proxy (see: 'src/proxy.conf.json')
-    /*
-    homegenieAdapter.options = {
-      config: {
-        connection: {
-          address: 'localhost',
-          port: 4200,
-          websocketPort: 4200
+
+    // TODO: following code is provisory, to be completed...
+    if (true || environment.production) {
+      // config for direct connection to HG on port 8080
+      homegenieAdapter.options = {
+        config: {
+          connection: {
+            address: 'localhost',
+            port: 8080,
+            websocketPort: 8188
+          },
         },
-      },
-    };
-    */
-    // config for direct connection to HG on port 8080
-    homegenieAdapter.options = {
-      config: {
-        connection: {
-          address: 'localhost',
-          port: 8080,
-          websocketPort: 8188
+      };
+    } else {
+      // config to proxy HG to local Angular http service
+      homegenieAdapter.options = {
+        config: {
+          connection: {
+            address: 'localhost',
+            port: 4200,
+            websocketPort: 4200
+          },
         },
-      },
-    };
+      };
+    }
     hgui.addAdapter(homegenieAdapter);
     homegenieAdapter.connect().subscribe(() => {
       console.log('connected', homegenieAdapter);

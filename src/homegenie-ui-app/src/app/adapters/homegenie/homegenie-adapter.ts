@@ -20,6 +20,7 @@ export enum ResponseCode {
 
 export class HomegenieAdapter implements Adapter {
   className = 'HomegenieAdapter';
+  translationPrefix = 'HOMEGENIE';
   onModuleEvent = new Subject<{ module: HguiModule, event: any }>();
   private EnableWebsocketStream = true;
   private ImplementedWidgets = [
@@ -133,12 +134,15 @@ export class HomegenieAdapter implements Adapter {
     return subject;
   }
 
-  control(m: HguiModule, command: string, options: any): Subject<any> {
-    const subject = new Subject<any>();
+  control(m: HguiModule, command: string, options?: any): Subject<any> {
     // adapter-specific implementation
-    if (command === CMD.Options.Show) {
-      // TODO: .... should show options forms ...
+    if (command === CMD.Options.Get) {
       return this.getModuleFeatures(m);
+    } else if (command === CMD.Options.Set) {
+      return this.apiCall(`${HomegenieApi.Config.Modules.ParameterSet}/${m.id}`, options);
+    }
+    if (options == null) {
+      options = '';
     }
     if (m.type === 'program') {
       // program API command
@@ -155,7 +159,7 @@ export class HomegenieAdapter implements Adapter {
     return this.getBaseUrl() + 'hg/html/pages/control/widgets/homegenie/generic/images/unknown.png';
   }
 
-  apiCall(apiMethod): Subject<ApiResponse> {
+  apiCall(apiMethod: string, postData?: any): Subject<ApiResponse> {
     const oc = this.options.config.connection;
     if (oc == null) {
       return;
@@ -163,16 +167,30 @@ export class HomegenieAdapter implements Adapter {
     const url = this.getBaseUrl() + `api/${apiMethod}`;
     // TODO: implement a global service logger
     // cp.log.info(url);
+    if (postData) {
+      return this._hgui.http
+        .post<any>(url, postData, {
+          // TODO: basic authentication
+          headers: {
+            'Content-Type' : 'application/json',
+            'Cache-Control': 'no-cache'
+          //    Authorization: 'Basic ' + btoa(oc.credentials.username + ':' + oc.credentials.password)
+          }
+        }).pipe(
+          // tap(() => console.log('HTTP request executed')),
+          map(res => ({code: ResponseCode.Success, response: res}))
+        ) as Subject<ApiResponse>;
+    }
     return this._hgui.http
       .get(url, {
         // TODO: basic authentication
-        // headers: {
+        headers: {
         //    Authorization: 'Basic ' + btoa(oc.credentials.username + ':' + oc.credentials.password)
-        // }
+        }
       }).pipe(
         // tap(() => console.log('HTTP request executed')),
         map(res => ({code: ResponseCode.Success, response: res}))
-    ) as Subject<ApiResponse>;
+      ) as Subject<ApiResponse>;
   }
 
   reloadModules(): Subject<Array<Module>> {
@@ -320,9 +338,9 @@ export class HomegenieAdapter implements Adapter {
     return `http://${oc.address}:${oc.port}/`;
   }
 
-  private processEvent(event): void {
+  private processEvent(event /*: MigEvent*/): void {
     const moduleId = event.Domain + '/' + event.Source;
-    const m = this._hgui.getModule(moduleId, this.id);
+    const m: HguiModule = this._hgui.getModule(moduleId, this.id);
     this.onModuleEvent.next({module: m, event});
     if (m != null) {
       m.field(event.Property, event.Value, event.UnixTimestamp);

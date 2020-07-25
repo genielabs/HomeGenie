@@ -16,7 +16,7 @@
     "modules":
         "Modules",
 " ": "------------------------------------------",
-  "programs": {
+  "$options": {
     "34": {
       "Title":
           "OpenWeatherMap",

@@ -8,13 +8,19 @@ import {Module} from '../../../../services/hgui/module';
   styleUrls: ['./module-select.component.scss']
 })
 export class ModuleSelectComponent implements OnInit {
+  translationPrefix: string;
+  @Input()
+  module: Module;
   @Input()
   field: any;
   @Output()
   fieldChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(public hgui: HguiService) { }
+  constructor(public hgui: HguiService) {}
 
+  get value(): string {
+    return this.field.field && this.field.field.value ? this.field.field.value.replace(':', '/') : '';
+  }
   get modules(): Array<Module> {
     if (this.field.type.options.length >= 3) {
       const fieldNames = this.field.type.options[2];
@@ -24,7 +30,9 @@ export class ModuleSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.field.type, this.field);
+    if (this.module) {
+      this.translationPrefix = this.module.getAdapter().translationPrefix;
+    }
   }
 
   onFieldChange(e, f): void {

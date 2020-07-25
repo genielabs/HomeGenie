@@ -28,7 +28,7 @@ export class Module {
   field?(key: string, value?: any, timestamp?: any): any {
     if (timestamp == null) { timestamp = new Date().getTime(); }
     const field = this.fields.find((f) => f.key.toLowerCase() === key.toLowerCase());
-    if (field && value) {
+    if (field && typeof value !== 'undefined') {
       if (this.fields == null) { this.fields = []; }
       if (field.timestamp === timestamp) {
         return this;
