@@ -158,7 +158,7 @@ namespace HomeGenie.Service.Handlers
                     if (String.IsNullOrWhiteSpace(downloadUrl))
                     {
                         // file uploaded by user
-                        MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, ifaceFileName);
+                        WebServiceUtility.SaveFile(request.RequestData, ifaceFileName);
                     }
                     else
                     {
@@ -281,7 +281,7 @@ namespace HomeGenie.Service.Handlers
                     string archivename = Path.Combine(tempFolderPath, "homegenie_update_file.tgz");
                     try
                     {
-                        MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archivename);
+                        WebServiceUtility.SaveFile(request.RequestData, archivename);
                         var files = Utility.UncompressTgz(archivename, tempFolderPath);
                         File.Delete(archivename);
                         string relInfo = Path.Combine(tempFolderPath, "homegenie", "release_info.xml");
@@ -535,7 +535,7 @@ namespace HomeGenie.Service.Handlers
                     string archivename = Path.Combine(tempFolderPath, "homegenie_restore_config.zip");
                     try
                     {
-                        MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archivename);
+                        WebServiceUtility.SaveFile(request.RequestData, archivename);
                         Utility.UncompressZip(archivename, tempFolderPath);
                         File.Delete(archivename);
                         request.ResponseData = new ResponseStatus(Status.Ok);
@@ -626,7 +626,19 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
-                    homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, migCommand.GetOption(2), migCommand.GetOption(3));
+                    if (request.RequestData.Length > 0)
+                    {
+                        string jsonData = Encoding.UTF8.GetString(request.RequestData);
+                        var changes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonData);
+                        foreach (var kv in changes)
+                        {
+                            homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, kv.Key, kv.Value);
+                        }
+                    }
+                    else
+                    {
+                        homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, migCommand.GetOption(2), migCommand.GetOption(3));
+                    }
                     request.ResponseData = new ResponseText("OK");
                 }
                 catch (Exception ex)
@@ -1095,7 +1107,7 @@ namespace HomeGenie.Service.Handlers
                     string wallpaperFile = "";
                     try
                     {
-                        wallpaperFile = MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, groupWallpapersPath);
+                        wallpaperFile = WebServiceUtility.SaveFile(request.RequestData, groupWallpapersPath);
                     }
                     catch
                     {
@@ -1270,7 +1282,7 @@ namespace HomeGenie.Service.Handlers
                     string importPath = Path.Combine(tempFolderPath, "import");
                     if (Directory.Exists(importPath))
                         Directory.Delete(importPath, true);
-                    MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveFile);
+                    WebServiceUtility.SaveFile(request.RequestData, archiveFile);
                     if (homegenie.PackageManager.WidgetImport(archiveFile, importPath))
                     {
                         request.ResponseData = new ResponseStatus(Status.Ok);
