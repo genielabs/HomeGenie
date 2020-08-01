@@ -1,0 +1,14 @@
+{
+  "stats.time_range":
+    "Intervallo",
+  "stats.last_hour":
+    "Ultima ora",
+  "stats.last_three_hours":
+    "Ultime 3 ore",
+  "stats.last_six_hours":
+    "Ultime 6 ore",
+  "stats.last_twelve_hours":
+    "Ultime 12 ore",
+  "stats.last_twentyfour_hours":
+    "Ultime 24 ore"
+}

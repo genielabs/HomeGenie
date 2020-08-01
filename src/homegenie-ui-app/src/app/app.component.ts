@@ -54,18 +54,19 @@ export class AppComponent {
     // config for connection through angular proxy (see: 'src/proxy.conf.json')
 
     // TODO: following code is provisory, to be completed...
-    if (true || environment.production) {
-      // config for direct connection to HG on port 8080
+    if (environment.production) {
+      // config for direct connection to HG API on the same http server as app
       homegenieAdapter.options = {
         config: {
           connection: {
+            localRoot: '/',
             address: 'localhost',
             port: 8080,
             websocketPort: 8188
           },
         },
       };
-    } else {
+    } else if (environment.proxy) {
       // config to proxy HG to local Angular http service
       homegenieAdapter.options = {
         config: {
@@ -73,6 +74,17 @@ export class AppComponent {
             address: 'localhost',
             port: 4200,
             websocketPort: 4200
+          },
+        },
+      };
+    } else {
+      // config for direct connection to HG API on different http server
+      homegenieAdapter.options = {
+        config: {
+          connection: {
+            address: 'localhost',
+            port: 8080,
+            websocketPort: 8188
           },
         },
       };

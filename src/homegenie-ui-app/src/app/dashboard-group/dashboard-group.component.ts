@@ -50,7 +50,8 @@ export class DashboardGroupComponent implements OnInit, OnDestroy {
   onShowOptions(module: Module): void {
     const dialogRef = this.dialog.open(WidgetOptionsDialogComponent, {
       // height: '400px',
-      // width: '600px',
+      width: '100%',
+      minWidth: '320px',
       maxWidth: '800px',
       disableClose: false,
       data: module

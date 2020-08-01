@@ -56,5 +56,7 @@
     "command_classes":
         "Command classes",
     "missing handler":
-        "Missing handler"
+        "Missing handler",
+    "refresh_ports_button":
+        "Refresh ports list"
 }

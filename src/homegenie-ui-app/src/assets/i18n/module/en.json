@@ -1,0 +1,14 @@
+{
+  "stats.time_range":
+    "Time range",
+  "stats.last_hour":
+    "Last hour",
+  "stats.last_three_hours":
+    "Last 3 hours",
+  "stats.last_six_hours":
+    "Last 6 hours",
+  "stats.last_twelve_hours":
+    "Last 12 hours",
+  "stats.last_twentyfour_hours":
+    "Last 24 hours"
+}

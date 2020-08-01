@@ -52,5 +52,25 @@
     "module":
         "Modulo",
     "modules":
-        "Moduli"
+        "Moduli",
+    "statistics":
+        "Statistiche",
+    "options":
+        "Opzioni",
+    "schedule":
+        "Pianificazione",
+    "combine":
+        "Combina",
+    "compare":
+        "Confronta",
+    "graph_mode":
+        "Tipo Grafico",
+    "show_fields":
+        "Campi",
+    "compare_modules":
+        "Confronta con",
+    "not_set":
+        "Non impostato",
+    "info":
+        "Info"
 }

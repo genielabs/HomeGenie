@@ -1,58 +1,47 @@
-<h1 mat-dialog-title>{{ module.name }}</h1>
-<div>
-  (TODO: module summary - and foldable module widget maybe)
-</div>
+<h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
+  <span>{{ module.name }}</span>
+  <button mat-icon-button fxFlexAlign="end" disabled>
+    <mat-icon>edit</mat-icon>
+  </button>
+</h1>
+
+<mat-tab-group (selectedIndexChange)="onSectionTabChange($event)">
+  <mat-tab [label]="'statistics' | translate">
+  </mat-tab>
+  <mat-tab [label]="'options' | translate">
+  </mat-tab>
+  <mat-tab [label]="'schedule' | translate" disabled="true">
+  </mat-tab>
+  <mat-tab [label]="'info' | translate">
+  </mat-tab>
+</mat-tab-group>
 <div mat-dialog-content>
 
-  <mat-accordion class="example-headers-align" [multi]="false">
+  <div [ngStyle]="{ display: sectionTab === 0 ? '' : 'none' }">
 
-    <mat-expansion-panel>
+      <app-chart [module]="module"></app-chart>
+
+      <!-- TODO: add logs as well -->
+
+  </div>
+
+  <mat-accordion [ngStyle]="{ display: sectionTab === 1 ? '' : 'none' }" [multi]="false">
+    <mat-expansion-panel *ngFor="let o of options; let i = index" [expanded]="i === 0">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Statistics
-        </mat-panel-title>
-        <mat-panel-description>
-          description ..
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <div>
-        (TODO: module statistics and LOGS)
-      </div>
-
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Schedule
-        </mat-panel-title>
-        <mat-panel-description>
-          description ..
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <div>
-        (TODO: module scheduling)
-      </div>
-
-    </mat-expansion-panel>
-
-    <mat-expansion-panel *ngFor="let o of options">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ o.name }}
+        <mat-panel-title fxLayout="row" fxLayoutAling="start center" fxLayoutGap="8px">
+          <mat-icon style="opacity: 0.4">settings</mat-icon>
+          <span>{{ o.name }}</span>
         </mat-panel-title>
         <!--
         <mat-panel-description>
+          {{ o.description }}
         </mat-panel-description>
         -->
       </mat-expansion-panel-header>
-
-      <div *ngIf="module">
+      <div *ngIf="module" fxLayout="column" fxLayoutGap="6px">
 
         <p>{{ o.description }}</p>
-
+        <!-- TODO: create a 'dynamic-control' component -->
         <div *ngFor="let f of o.features">
           <app-text *ngIf="f.type.id === 'text'"
                     [field]="f" (fieldChange)="onFieldChange($event)"
@@ -75,13 +64,26 @@
         </div>
 
       </div>
-
     </mat-expansion-panel>
-
   </mat-accordion>
+
+  <div [ngStyle]="{ display: sectionTab === 2 ? '' : 'none' }">
+    <h2>Schedule</h2>
+  </div>
+
+  <div [ngStyle]="{ display: sectionTab === 3 ? '' : 'none' }" style="min-height: 280px">
+    <div class="label">{{ "module_type" | translate }}</div>
+    <span class="smaller">{{ module.type }}</span>
+    <div class="label">{{ "module_adapter" | translate }}</div>
+    <span class="smaller">({{ module.adapterId }})</span>
+    <div *ngIf="module.description">
+      <div class="label">{{ "description" | translate }}</div>
+      <span>{{ module.description }}</span>
+    </div>
+  </div>
 
 </div><!-- dialog content -->
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end start">
-  <button mat-button mat-dialog-close>{{ "cancel" | translate }}</button>
+  <button mat-button mat-dialog-close>{{ "close" | translate }}</button>
   <button mat-button [mat-dialog-close]="changes" [disabled]="this.changes.length === 0">{{ "apply" | translate }}</button>
 </mat-dialog-actions>

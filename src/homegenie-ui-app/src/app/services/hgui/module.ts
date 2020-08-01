@@ -35,6 +35,9 @@ export class Module {
       }
       field.value = value;
       field.timestamp = timestamp;
+      if (this.getAdapter()) {
+        this.getAdapter().hgui.onModuleEvent.next({ module: this, event: field});
+      }
       return this;
     } else if (field == null && value) {
       this.fields.push({ key, value, timestamp });

@@ -52,7 +52,7 @@ export class HomegenieAdapter implements Adapter {
     let address = '0.0.0.0';
     const cfg = this.options.config;
     if (cfg != null && cfg.connection != null) {
-      address = cfg.connection.address + ':' + cfg.connection.port;
+      address = cfg.connection.localRoot ? 'local' : cfg.connection.address + ':' + cfg.connection.port;
     }
     return address;
   }
@@ -139,7 +139,9 @@ export class HomegenieAdapter implements Adapter {
     if (command === CMD.Options.Get) {
       return this.getModuleFeatures(m);
     } else if (command === CMD.Options.Set) {
-      return this.apiCall(`${HomegenieApi.Config.Modules.ParameterSet}/${m.id}`, options);
+      return this.apiCall(HomegenieApi.Config.Modules.ParameterSet(m), options);
+    } else if (command === CMD.Statistics.Field.Get) {
+      return this.apiCall(HomegenieApi.Config.Modules.StatisticsGet(m.id, options));
     }
     if (options == null) {
       options = '';
@@ -212,14 +214,14 @@ export class HomegenieAdapter implements Adapter {
                 }
                 const moduleId = this.getModuleId(m);
                 const existingModule = this.getModule(moduleId);
-                if (existingModule) {
-                  // TODO: should update properties
-                } else {
+                if (!existingModule) {
                   this._modules.push(m);
+                } else {
+                  existingModule.Properties = m.Properties;
                 }
 
                 // TODO: optimize this
-
+                // Export module to HGUI
                 let hguiModule = this.hgui.getModule(moduleId, this.id);
                 if (hguiModule == null) {
                   // add new module to HGUI modules if missing
@@ -335,7 +337,7 @@ export class HomegenieAdapter implements Adapter {
       // TODO: report 'connector not configured' error and exit
       return;
     }
-    return `http://${oc.address}:${oc.port}/`;
+    return oc.localRoot ? oc.localRoot : `http://${oc.address}:${oc.port}/`;
   }
 
   private processEvent(event /*: MigEvent*/): void {
@@ -426,7 +428,7 @@ export class HomegenieAdapter implements Adapter {
               };
               for (let i = 0; i < p.Features.length; i++) {
                 const f = p.Features[i];
-                let featurematch = this.MatchValues(f.ForDomains, module.Domain);
+                let matchFeature = this.MatchValues(f.ForDomains, module.Domain);
                 let forTypes = f.ForTypes;
                 let forProperties: any = false;
                 const propertyFilterIndex = forTypes.indexOf(':');
@@ -434,7 +436,7 @@ export class HomegenieAdapter implements Adapter {
                   forProperties = forTypes.substring(propertyFilterIndex + 1).trim();
                   forTypes = forTypes.substring(0, propertyFilterIndex).trim();
                 }
-                featurematch = featurematch && this.MatchValues(forTypes, module.DeviceType);
+                matchFeature = matchFeature && this.MatchValues(forTypes, module.DeviceType);
                 if (forProperties !== false) {
                   let matchProperty = false;
                   for (let idx = 0; idx < module.Properties.length; idx++) {
@@ -444,20 +446,9 @@ export class HomegenieAdapter implements Adapter {
                       break;
                     }
                   }
-                  featurematch = featurematch && matchProperty;
+                  matchFeature = matchFeature && matchProperty;
                 }
-/*
-                f.ForTypes = f.ForTypes.replace('|', ',');
-                f.ForDomains = f.ForDomains.replace('|', ',');
-                let matchFeature =
-                  f.ForTypes.length === 0 ||
-                  `,${f.ForTypes},`.indexOf(`,${module.DeviceType},`) >= 0;
-                matchFeature =
-                  matchFeature &&
-                  (f.ForDomains.length === 0 ||
-                    `,${f.ForDomains},`.indexOf(`,${module.Domain},`) >= 0);
- */
-                if (featurematch) {
+                if (matchFeature) {
                   const type = f.FieldType.split(':');
                   let mf: ModuleField = m.field(f.Property);
                   // add the field if does not exist

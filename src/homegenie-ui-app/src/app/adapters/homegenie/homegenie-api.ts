@@ -1,3 +1,5 @@
+import {Module as HguiModule, ModuleField} from 'src/app/services/hgui/module';
+
 export class Group {
   Name: string;
   Wallpaper: string;
@@ -49,25 +51,34 @@ export class HomegenieApi {
           // Get the list of available serial ports
           SerialPorts: 'HomeAutomation.HomeGenie/Config/Interfaces.Configure/Hardware.SerialPorts'
         }
-      }
+      },
+      Enable: (domain: string) =>
+        `MIGService.Interfaces/${domain}/IsEnabled.Set/1`,
+      Disable: (domain: string) =>
+        `MIGService.Interfaces/${domain}/IsEnabled.Set/0`,
     },
     Modules: {
       // Get the list of modules
       List: 'HomeAutomation.HomeGenie/Config/Modules.List',
-      ParameterGet: 'HomeAutomation.HomeGenie/Config/Modules.ParameterGet',
-      ParameterSet: 'HomeAutomation.HomeGenie/Config/Modules.ParameterSet'
+      ParameterGet: (module: HguiModule, parameter: string) =>
+        `HomeAutomation.HomeGenie/Config/Modules.ParameterGet/${module.id}/${parameter}`,
+      ParameterSet: (module: HguiModule, parameter?: string, value?: any) =>
+        `HomeAutomation.HomeGenie/Config/Modules.ParameterSet/${module.id}/${parameter}/${value}`,
+      // Get parameter statistics
+      StatisticsGet: (address: string, parameter: string) =>
+        `HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/${address}/${parameter}`
     },
     WebSocket: {
       // Get autorization token to connect to WebSocket service
       GetToken: 'HomeAutomation.HomeGenie/Config/WebSocket.GetToken'
-    },
-    Command: (command, options) => `HomeAutomation.HomeGenie/Config/${command}/${options}`
+    }
   };
   static Automation = {
     Programs: {
       // Get the list of programs
       List: 'HomeAutomation.HomeGenie/Automation/Programs.List'
     },
-    Command: (command, options) => `HomeAutomation.HomeGenie/Automation/${command}/${options}`
+    Command: (command: string, options: string) =>
+      `HomeAutomation.HomeGenie/Automation/${command}/${options}`
   };
 }

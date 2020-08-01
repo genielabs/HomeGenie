@@ -1,6 +1,6 @@
 <h2>{{ "HOMEGENIE.interfaces_configuration" | translate }}</h2>
 <div *ngFor="let driver of drivers; let i = index;">
-    <mat-checkbox [checked]="drivers[i].IsEnabled" [(ngModel)]="drivers[i].IsEnabled">
+    <mat-checkbox [checked]="drivers[i].IsEnabled" [(ngModel)]="drivers[i].IsEnabled" (change)="onDriverEnabledChange($event, driver)">
         {{ "HOMEGENIE."+driver.Domain | translate }}
     </mat-checkbox>
     <app-x10-setup-form *ngIf="driver.Domain === 'HomeAutomation.X10' && driver.IsEnabled" [adapter]="adapter"></app-x10-setup-form>

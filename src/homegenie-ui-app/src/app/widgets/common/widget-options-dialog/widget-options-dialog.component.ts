@@ -15,12 +15,18 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
   changes: { field: ModuleField, value: any }[] = [];
   translationPrefix: string;
 
+  sectionTab = 0;
+
   constructor(
     private translate: TranslateService,
     public dialogRef: MatDialogRef<WidgetOptionsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public module: Module
   ) {
-    this.translationPrefix = module.getAdapter().translationPrefix;
+    if (module.getAdapter()) {
+      this.translationPrefix = module.getAdapter().translationPrefix;
+    } else {
+      // TODO: log this exception
+    }
   }
 
   ngOnInit(): void {
@@ -29,7 +35,6 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.options.forEach((o) => {
           const titleKey = `${this.translationPrefix}.$options.${o.id}.Title`;
-          console.log(titleKey);
           this.translate.get(titleKey).subscribe((tr) => {
             if (tr !== titleKey) {
               o.name = tr;
@@ -59,6 +64,10 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
         this.changes.push(e);
       }
     }
+  }
+
+  onSectionTabChange(e): void {
+    this.sectionTab = e;
   }
 
 }

@@ -13,6 +13,8 @@ export class ModuleSelectComponent implements OnInit {
   module: Module;
   @Input()
   field: any;
+  @Input()
+  multiple: boolean = false;
   @Output()
   fieldChange: EventEmitter<any> = new EventEmitter();
 

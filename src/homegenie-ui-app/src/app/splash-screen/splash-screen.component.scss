@@ -1,8 +1,6 @@
-@import "src/_variables.scss";
-
 :host {
     height: 100vh;
-    color: $accent;
+    color: var(--accent);
     font-size: 300%;
 }
 
@@ -12,5 +10,5 @@ small {
 }
 
 .logo {
-    font-family: lobster;
+  font-family: lobster, serif;
 }

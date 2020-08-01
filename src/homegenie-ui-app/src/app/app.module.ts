@@ -19,6 +19,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { CodeEditorModule } from '@ngstack/code-editor';
 
+import { ChartsModule } from 'ng2-charts';
+
 import {HomegenieSetupComponent} from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';
 import {ZwaveSetupFormComponent} from './adapters/homegenie/zwave-setup-form/zwave-setup-form.component';
@@ -41,6 +43,8 @@ import { ProgramSelectComponent } from './widgets/common/controls/program-select
 import { SliderComponent } from './widgets/common/controls/slider/slider.component';
 import { TextComponent } from './widgets/common/controls/text/text.component';
 import { EventCaptureComponent } from './widgets/common/controls/event-capture/event-capture.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { DynamicWidgetComponent } from './widgets/dynamic-widget/dynamic-widget.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -48,7 +52,8 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     modules: [
       {baseTranslateUrl},
       {moduleName: 'homegenie', baseTranslateUrl},
-      {moduleName: 'zwave', baseTranslateUrl}
+      {moduleName: 'zwave', baseTranslateUrl},
+      {moduleName: 'module', baseTranslateUrl}
     ]
   };
   return new ModuleTranslateLoader(http, options);
@@ -77,7 +82,9 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     ProgramSelectComponent,
     SliderComponent,
     TextComponent,
-    EventCaptureComponent
+    EventCaptureComponent,
+    ChartComponent,
+    DynamicWidgetComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +104,8 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
       }
     }),
     AngularSvgIconModule.forRoot(),
-    CodeEditorModule.forRoot()
+    CodeEditorModule.forRoot(),
+    ChartsModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}

@@ -1,5 +1,3 @@
-@import "../../../variables";
-
 .mat-card-content {
   position: absolute;
   bottom: 12px;
@@ -17,12 +15,12 @@
   margin: 0;
   padding-top: 6px;
   font-size: 320%;
-  color: $primary;
+  color: var(--primary);
   padding-bottom: 6px;
 }
 .sensor-field {
   text-transform: uppercase;
-  color: $accent;
+  color: var(--accent);
 }
 
 .example-card {

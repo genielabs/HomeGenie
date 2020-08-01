@@ -32,6 +32,16 @@ export class HomegenieSetupComponent implements OnInit {
     }
   }
 
+  onDriverEnabledChange(e: any, driver: any): void {
+    console.log(e, driver);
+    this.adapter.apiCall(e.checked
+      ? HomegenieApi.Config.Interfaces.Enable(driver.Domain)
+      : HomegenieApi.Config.Interfaces.Disable(driver.Domain)
+    ).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
   getInterfaceList(): void {
     this.adapter.apiCall(HomegenieApi.Config.Interfaces.List)
       .subscribe((res) => {

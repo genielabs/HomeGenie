@@ -7,7 +7,7 @@
       </button>
       <span class="dialog-title">{{ "device_manager" | translate }}</span>
     </div>
-    <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
+    <img src="./assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
   </h1>
   <div mat-dialog-content class="overlay-container">
 
@@ -37,7 +37,7 @@
       </button>
       <span class="dialog-title">{{ "ZWAVE.node_config" | translate }}</span>
     </div>
-    <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
+    <img src="./assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
   </h1>
 
   <div mat-dialog-content>
@@ -61,7 +61,7 @@
 <ng-container *ngIf="currentPage === PageId.NODE_ADD">
   <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
     {{ "ZWAVE.node_inclusion" | translate }}
-    <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
+    <img src="./assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
   </h1>
   <div mat-dialog-content [ngSwitch]="status">
 
@@ -99,7 +99,7 @@
   <div mat-dialog-content [ngSwitch]="status">
     <h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between stretch">
       {{ "ZWAVE.node_exclusion" | translate }}
-      <img src="assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
+      <img src="./assets/images/zwave/zwave-logo.png" height="32" fxFlexAlign="center">
     </h1>
 
     <div *ngSwitchCase="PageStatus.REQUEST" style="overflow: hidden" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">

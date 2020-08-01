@@ -24,21 +24,7 @@ export class ZwaveSetupFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adapter.apiCall(HomegenieApi.Config.Interfaces.Configure.Hardware.SerialPorts)
-      .subscribe((res) => {
-        if (res.code === ResponseCode.Success) {
-          this.serialPorts = res.response;
-          this.adapter.apiCall(HomegenieZwaveApi.Options.Get.Port).subscribe((res2) => {
-            if (res2.code === ResponseCode.Success) {
-              this.portName = res2.response.ResponseValue;
-            } else {
-              // TODO: ... log error
-            }
-          });
-        } else {
-          // TODO: ... log error
-        }
-      });
+    this.loadPorts();
   }
   onPortChange(e): void {
     const command = HomegenieZwaveApi.Options.Set.Port
@@ -63,5 +49,23 @@ export class ZwaveSetupFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.adapter.hgui.saveConfiguration();
     });
+  }
+
+  public loadPorts(): void {
+    this.adapter.apiCall(HomegenieApi.Config.Interfaces.Configure.Hardware.SerialPorts)
+      .subscribe((res) => {
+        if (res.code === ResponseCode.Success) {
+          this.serialPorts = res.response;
+          this.adapter.apiCall(HomegenieZwaveApi.Options.Get.Port).subscribe((res2) => {
+            if (res2.code === ResponseCode.Success) {
+              this.portName = res2.response.ResponseValue;
+            } else {
+              // TODO: ... log error
+            }
+          });
+        } else {
+          // TODO: ... log error
+        }
+      });
   }
 }

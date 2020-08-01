@@ -3,7 +3,7 @@
 html, body { min-height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import "src/_variables.scss";
+@import "styles/settings/variables";
 /* customizations to material components */
 .mat-checkbox {
     display: block;
@@ -14,19 +14,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* other custom global styles */
 .label {
     display: block;
-    color: $accent;
+    color: var(--accent);
     font-size: 80%;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 .color-accent {
-  color: $accent;
+  color: var(--accent);
 }
 .color-primary {
-  color: $primary;
+  color: var(--primary);
 }
 .color-warn {
-  color: $warn;
+  color: var(--warn);
 }
 .color-todo-note {
   color: orange;

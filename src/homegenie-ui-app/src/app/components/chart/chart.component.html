@@ -1,0 +1,61 @@
+<div fxLayout="row wrap" fxLayoutAlign="start end" fxLayoutGap="24px" style="margin-top: 24px">
+
+  <div class="mode-control">
+    <div class="label">{{ "graph_mode" | translate }}</div>
+    <mat-radio-group fxLayout="row" fxLayoutGap="12px" [value]="graphMode" (change)="onGraphModeChanged($event)">
+      <mat-radio-button [value]="GraphMode.COMBINE_FIELDS">{{ "combine" | translate }}</mat-radio-button>
+      <mat-radio-button [value]="GraphMode.COMPARE_MODULES">{{ "compare" | translate }}</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div *ngIf="graphMode === GraphMode.COMBINE_FIELDS">
+    <mat-form-field>
+      <mat-label>{{ "show_fields" | translate }}</mat-label>
+      <mat-select [multiple]="true"
+                  [value]="selectedFields"
+                  (selectionChange)="onFieldChange($event)">
+        <mat-option *ngFor="let f of statsFields" [value]="f">{{f.key}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="graphMode === GraphMode.COMPARE_MODULES">
+    <mat-form-field>
+      <mat-label>{{ "show_fields" | translate }}</mat-label>
+      <mat-select [multiple]="false"
+                  [value]="selectedFields[0]"
+                  (selectionChange)="onFieldChange($event)">
+        <mat-option *ngFor="let f of statsFields" [value]="f">{{f.key}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-form-field *ngIf="graphMode === GraphMode.COMPARE_MODULES">
+    <mat-label>{{ "compare_modules" | translate }}</mat-label>
+    <mat-select [multiple]="true"
+                [value]="selectedModules"
+                (selectionChange)="onCompareModulesChange($event)">
+      <mat-option *ngFor="let m of comparableModules" [value]="m">{{m.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "MODULE.stats.time_range" | translate }}</mat-label>
+    <mat-select [multiple]="false"
+                [value]="selectedTimeRange"
+                (selectionChange)="onTimeRangeChange($event)">
+      <mat-option *ngFor="let r of timeRanges" [value]="r">{{ r.label | translate }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+<div style="display: block;" (window:resize)="onResize($event)">
+  <canvas *ngIf="!isResizing && hasStats" baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>

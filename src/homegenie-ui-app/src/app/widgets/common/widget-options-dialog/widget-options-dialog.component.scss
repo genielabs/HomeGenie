@@ -1,8 +1,17 @@
-@import "src/_variables.scss";
 h2 {
   margin-top: 24px;
 }
 .mat-expanded .mat-expansion-panel-header-title {
   font-weight: bold;
 }
+.mat-expanded .mat-expansion-panel-header-title .mat-icon {
+  display: none;
+}
 
+h1 {
+  margin: 0 !important;
+}
+span.smaller {
+  font-size: 12px;
+  margin-right: 8px;
+}

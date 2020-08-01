@@ -19,6 +19,11 @@ export class CMD {
     Level: 'Control.Level',
     Toggle: 'Control.Toggle'
   };
+  static Statistics = {
+    Field: {
+      Get: 'Statistics.Field.Get'
+    }
+  }
   static Options = {
     Get: 'Options.Get',
     Set: 'Options.Set'
@@ -57,6 +62,7 @@ export class HguiService implements OnDestroy {
 
   onModuleAdded = new Subject<Module>();
   onModuleRemoved = new Subject<Module>();
+  onModuleEvent = new Subject<{ module: Module, event: any }>()
   onGroupAdded = new Subject<Group>();
   onGroupRemoved = new Subject<Group>();
   onGroupModuleAdded = new Subject<{ group: Group; module: Module }>();
