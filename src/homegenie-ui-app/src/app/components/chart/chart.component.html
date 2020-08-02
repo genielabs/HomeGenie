@@ -11,7 +11,7 @@
   <div *ngIf="graphMode === GraphMode.COMBINE_FIELDS">
     <mat-form-field>
       <mat-label>{{ "show_fields" | translate }}</mat-label>
-      <mat-select [multiple]="true"
+      <mat-select [multiple]="true" required="true"
                   [value]="selectedFields"
                   (selectionChange)="onFieldChange($event)">
         <mat-option *ngFor="let f of statsFields" [value]="f">{{f.key}}</mat-option>
@@ -22,7 +22,7 @@
   <div *ngIf="graphMode === GraphMode.COMPARE_MODULES">
     <mat-form-field>
       <mat-label>{{ "show_fields" | translate }}</mat-label>
-      <mat-select [multiple]="false"
+      <mat-select [multiple]="false" required="true"
                   [value]="selectedFields[0]"
                   (selectionChange)="onFieldChange($event)">
         <mat-option *ngFor="let f of statsFields" [value]="f">{{f.key}}</mat-option>

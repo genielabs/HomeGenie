@@ -19,6 +19,9 @@ export class AppComponent {
   isNetworkBusy = false;
 
   constructor(public hgui: HguiService, translate: TranslateService) {
+    // Set translation language
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|it/) ? browserLang : 'en');
     // Configure HGUI adapters
     AdapterFactory.setClasses({
       // only HomeGenie adapter currently implemented
@@ -33,46 +36,42 @@ export class AppComponent {
     // hgui.onAdapterAdded.subscribe((adapter) => console.log('Added adapter', adapter));
     hgui.loadConfiguration().subscribe((config) => {
       if (config == null) {
-        this.configure(hgui).subscribe((res) => {
+        this.configureAsStandAlone(hgui).subscribe((res) => {
           this.isNetworkBusy = false;
         });
       } else {
         this.isNetworkBusy = false;
       }
     });
-    // set translation language
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|it/) ? browserLang : 'en');
   }
   /**
-   * Creates a default configuration with one adapter (HomeGenie API adapter) pointing to localhost:8080
+   * Creates a default configuration with one adapter (HomeGenie API adapter) (stand alone mode).
    * @param hgui HGUI service instance
    */
-  configure(hgui: HguiService): Subject<any> {
+  configureAsStandAlone(hgui: HguiService): Subject<any> {
     const subject = new Subject<any>();
     const homegenieAdapter = new HomegenieAdapter(hgui);
-    // config for connection through angular proxy (see: 'src/proxy.conf.json')
 
-    // TODO: following code is provisory, to be completed...
+    // TODO: following code is temporary, to be completed...
     if (environment.production) {
       // config for direct connection to HG API on the same http server as app
       homegenieAdapter.options = {
         config: {
           connection: {
             localRoot: '/',
-            address: 'localhost',
-            port: 8080,
+            address: hgui.getHostname(),
             websocketPort: 8188
           },
         },
       };
     } else if (environment.proxy) {
-      // config to proxy HG to local Angular http service
+      // config for connection through angular proxy (see: 'src/proxy.conf.json')
+      // to proxy HG API service to local Angular HTTP service (mg serve)
       homegenieAdapter.options = {
         config: {
           connection: {
-            address: 'localhost',
-            port: 4200,
+            address: hgui.getHostname(),
+            port: hgui.getHostPort(),
             websocketPort: 4200
           },
         },
@@ -89,6 +88,7 @@ export class AppComponent {
         },
       };
     }
+
     hgui.addAdapter(homegenieAdapter);
     homegenieAdapter.connect().subscribe(() => {
       console.log('connected', homegenieAdapter);

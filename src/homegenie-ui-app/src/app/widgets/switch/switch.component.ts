@@ -26,7 +26,6 @@ export class SwitchComponent implements OnInit, OnDestroy {
     if (this.module.getAdapter()) {
       this.eventSubscription = this.module.getAdapter().onModuleEvent.subscribe((e) => {
         if (e.module === this.module) {
-          console.log(e.event);
           this.blinkLed();
         }
       });

@@ -1,6 +1,12 @@
 {
   "stats.time_range":
     "Intervallo",
+  "stats.last_minute":
+    "Ultimo minuto",
+  "stats.last_ten_minutes":
+    "Ultimi 10 minuti",
+  "stats.last_half_hour":
+    "Ultima mezz'ora",
   "stats.last_hour":
     "Ultima ora",
   "stats.last_three_hours":

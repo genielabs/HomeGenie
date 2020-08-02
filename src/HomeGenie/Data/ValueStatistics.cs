@@ -102,6 +102,7 @@ namespace HomeGenie.Data
         public TsList<StatValue> History
         {
             get { return historyValues; }
+            set { historyValues = value; }
         }
 
         /// <summary>
@@ -192,6 +193,7 @@ namespace HomeGenie.Data
         internal List<StatValue> Values
         {
             get { return statValues; }
+            set { statValues = value; }
         }
 
     }

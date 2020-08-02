@@ -41,6 +41,7 @@ using ICSharpCode.SharpZipLib.Tar;
 
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json.Serialization;
 using Formatting = Newtonsoft.Json.Formatting;
 
@@ -110,10 +111,20 @@ namespace HomeGenie.Service
     }
 
     [Serializable()]
-    public class TsList<T> : System.Collections.Generic.List<T>
+    public class TsList<T> : List<T>
     {
         private object syncLock = new object();
 
+        public TsList(): base()
+        {
+               
+        }
+
+        public TsList(List<T> list): base(list)
+        {
+            
+        }
+        
         public object LockObject
         {
             get { return syncLock; }

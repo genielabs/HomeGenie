@@ -3,8 +3,7 @@ import {BaseChartDirective, Color, Label} from "ng2-charts";
 import {ChartDataSets, ChartOptions, ChartPoint} from "chart.js";
 import {Module, ModuleField} from "../../services/hgui/module";
 import {CMD, HguiService} from "../../services/hgui/hgui.service";
-import {concat, Observable, Subject, Subscription} from "rxjs";
-import {concatAll} from "rxjs/operators";
+import {concat, Subject, Subscription} from "rxjs";
 //import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 export class GraphMode {
@@ -28,6 +27,9 @@ export class ChartComponent implements OnInit {
   GraphMode = GraphMode;
 
   timeRanges: TimeRange[] = [
+    { value: 0.016, label: 'MODULE.stats.last_minute' },
+    { value: 0.083, label: 'MODULE.stats.last_ten_minutes' },
+    { value: 0.5, label: 'MODULE.stats.last_half_hour' },
     { value: 1, label: 'MODULE.stats.last_hour' },
     { value: 3, label: 'MODULE.stats.last_three_hours' },
     { value: 6, label: 'MODULE.stats.last_six_hours' },
@@ -43,6 +45,9 @@ export class ChartComponent implements OnInit {
   lineChartData: ChartDataSets[] = [];
   lineChartLabels: Label[] = [];
   lineChartOptions: (ChartOptions & { annotation: any }) = {
+    animation: {
+      duration: 10
+    },
     responsive: true,
     legend: {
       position: "bottom"
@@ -50,8 +55,11 @@ export class ChartComponent implements OnInit {
     scales: {
       xAxes: [{
         type: 'time',
+        ticks: {
+          autoSkip: true
+        },
         time: {
-          unit: 'hour'
+          unit: 'minute'
         }
       }]
       /*
@@ -129,14 +137,13 @@ export class ChartComponent implements OnInit {
   private resizeTimeout = null;
   private moduleEventsSubscription: Subscription;
 
-  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
+  @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
   constructor(public hgui: HguiService) {
     this.moduleEventsSubscription = hgui.onModuleEvent.subscribe((e) => {
       if (e.module === this.module || this.selectedModules.indexOf(e.module) >= 0) {
         const field = this.selectedFields.find((f) => f.key === e.event.key);
         if (field) {
-          console.log('APPEND DATA', e.module, e.event);
           let statIndex = 0;
           if (this.graphMode === GraphMode.COMBINE_FIELDS) {
             statIndex = this.selectedFields.indexOf(field);
@@ -145,12 +152,30 @@ export class ChartComponent implements OnInit {
               statIndex = this.selectedModules.indexOf(e.module);
             }
           }
-          if (this.lineChartData[statIndex]) {
-            this.lineChartData[statIndex].data.push({
+          const ds = this.lineChartData[statIndex];
+          if (ds && this.chart) {
+            const now = new Date().getTime();
+            const ds = this.chart.datasets[statIndex];
+            // add new data
+            ds.data = [{
               x: e.event.timestamp,
               y: e.event.value
-            } as any);
-            this.lineChartData = this.lineChartData.slice();
+            } as any].concat(ds.data);
+            /*
+            ds.data.push({
+              x: e.event.timestamp,
+              y: e.event.value
+            } as any)
+            */
+            // remove old data
+            ds.data = (ds.data as ChartPoint[])
+              .filter((cp) => now - (cp.x as number) < this.selectedTimeRange.value * 60 * 60 * 1000);
+            // update chart axis
+            const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
+            timeAxis.min = (ds.data[ds.data.length - 1] as ChartPoint).x as string;
+            timeAxis.max = e.event.timestamp;
+            // force refresh
+            ds.data = ds.data.slice();
           }
         }
       }
@@ -248,8 +273,9 @@ export class ChartComponent implements OnInit {
         const timeRangeStart = this.selectedTimeRange.value * 60 * 60 * 1000;
         const now = new Date().getTime();
         const data = res.response.History.filter((stat) => now - stat.UnixTimestamp <= timeRangeStart);
-        data.reverse();
+        //data.reverse();
         const fieldStats: ChartDataSets = {};
+        //fieldStats.lineTension = 0;
         fieldStats.label = labels[this.lineChartData.length];
         fieldStats.data = data.map((stat) => ({
           // TODO: the HG 'UnixTimestamp' field should be mapped to HGUI module's 'timestamp' field

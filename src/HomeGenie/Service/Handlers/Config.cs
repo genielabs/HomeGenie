@@ -653,9 +653,18 @@ namespace HomeGenie.Service.Handlers
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                     var parameter = Utility.ModuleParameterGet(module, migCommand.GetOption(2));
                     if (parameter != null)
-                        request.ResponseData = JsonConvert.SerializeObject(parameter.Statistics, Formatting.Indented);
+                    {
+                        // List is copied to prevent "Collection was modified" errors when serializing to JSON
+                        var stats = new ValueStatistics();
+                        // TODO: copy other properties
+                        stats.Values = new List<ValueStatistics.StatValue>(parameter.Statistics.Values);
+                        stats.History = new TsList<ValueStatistics.StatValue>(parameter.Statistics.History);
+                        request.ResponseData = JsonConvert.SerializeObject(stats, Formatting.Indented);
+                    }
                     else
+                    {
                         request.ResponseData = new ResponseText("ERROR: Unknown parameter '" + migCommand.GetOption(2) + "'");
+                    }
                 }
                 catch (Exception ex)
                 {

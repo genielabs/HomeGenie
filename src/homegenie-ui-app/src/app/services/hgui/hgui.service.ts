@@ -320,4 +320,11 @@ export class HguiService implements OnDestroy {
   isBusy(): boolean {
     return false;
   }
+
+  getHostPort(): string {
+    return window.location.port;
+  }
+  getHostname() : string {
+    return window.location.hostname;
+  }
 }
