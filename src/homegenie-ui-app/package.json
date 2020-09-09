@@ -29,7 +29,7 @@
     "angular-svg-icon": "^10.0.0",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.2",
-    "rxjs": "~6.6.0",
+    "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
