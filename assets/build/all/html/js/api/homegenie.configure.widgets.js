@@ -68,6 +68,8 @@ HG.Configure.Widgets = HG.Configure.Widgets || new function(){ var $$ = this;
                 if (callback) {
                     if (typeof data.ResponseValue != 'undefined')
                         data.ResponseValue = decodeURIComponent(data.ResponseValue);
+                    if (typeof data.Message != 'undefined')
+                        data.Message = decodeURIComponent(data.Message);
                     callback(data);
                 }
             },

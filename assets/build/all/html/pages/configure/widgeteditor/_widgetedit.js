@@ -481,8 +481,8 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
         $.mobile.loading('show', {text: 'Checking Javascript code...', textVisible: true, theme: 'a', html: ''});
         HG.Configure.Widgets.Parse(javascriptCode, function (msg) {
             $.mobile.loading('hide');
-            if (msg.ResponseValue != 'OK') {
-                var message = msg.ResponseValue;
+            if (msg.ResponseValue !== 'OK' && msg.Status !== 'Ok') {
+                var message = msg.ResponseValue || msg.Message;
                 var position = message.substr(message.indexOf('(') + 1);
                 position = position.substr(0, position.indexOf(')')).split(',');
                 message = message.substr(message.indexOf(':') + 2);
