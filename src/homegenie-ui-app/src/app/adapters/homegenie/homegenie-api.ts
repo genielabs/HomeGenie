@@ -18,6 +18,8 @@ export class Module {
 export class ModuleParameter {
   Name: string;
   Value: any;
+  Description?: string;
+  FieldType?: string;
   UpdateTime: number;
 }
 
@@ -26,7 +28,9 @@ export class Program {
   Address: string;
   Name: string;
   Description: string;
+  Group: string;
   IsEnabled: boolean;
+  IsRunning: boolean;
   Features: ProgramFeature[];
 }
 export class ProgramFeature {
@@ -63,7 +67,7 @@ export class HomegenieApi {
       ParameterGet: (module: HguiModule, parameter: string) =>
         `HomeAutomation.HomeGenie/Config/Modules.ParameterGet/${module.id}/${parameter}`,
       ParameterSet: (module: HguiModule, parameter?: string, value?: any) =>
-        `HomeAutomation.HomeGenie/Config/Modules.ParameterSet/${module.id}/${parameter}/${value}`,
+        `HomeAutomation.HomeGenie/Config/Modules.ParameterSet/${module.id}/${parameter || ''}/${value || ''}`,
       // Get parameter statistics
       StatisticsGet: (address: string, parameter: string) =>
         `HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/${address}/${parameter}`

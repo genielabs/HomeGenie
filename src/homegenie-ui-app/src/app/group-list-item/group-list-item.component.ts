@@ -40,7 +40,7 @@ export class GroupListItemComponent implements OnInit, OnDestroy {
     let count = 0;
     modules.forEach((m) => {
       const field = m.field(fieldName);
-      if (field) {
+      if (field && field.value) {
         averageValue += +(field.value.toString().replace(',', '.'));
         count++;
       }
@@ -54,7 +54,7 @@ export class GroupListItemComponent implements OnInit, OnDestroy {
     let totalValue = null;
     modules.forEach((m) => {
       const field = m.field(fieldName);
-      if (field) {
+      if (field && field.value) {
         totalValue += +(field.value.toString().replace(',', '.'));
       }
     });

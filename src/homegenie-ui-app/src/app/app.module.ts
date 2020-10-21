@@ -45,6 +45,7 @@ import { TextComponent } from './widgets/common/controls/text/text.component';
 import { EventCaptureComponent } from './widgets/common/controls/event-capture/event-capture.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { DynamicWidgetComponent } from './widgets/dynamic-widget/dynamic-widget.component';
+import { ProgramOptionsDialogComponent } from './widgets/common/program-options-dialog/program-options-dialog.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -84,7 +85,8 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     TextComponent,
     EventCaptureComponent,
     ChartComponent,
-    DynamicWidgetComponent
+    DynamicWidgetComponent,
+    ProgramOptionsDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,13 @@ import {Subject} from 'rxjs';
 
 import {Adapter} from '../adapter';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
-import {Module as HguiModule, ModuleField} from 'src/app/services/hgui/module';
+import {
+  Module as HguiModule,
+  ModuleFeatures,
+  ModuleField,
+  OptionField,
+  ProgramOptions
+} from 'src/app/services/hgui/module';
 import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
 import {ZwaveAdapter} from '../zwave-adapter';
@@ -31,6 +37,7 @@ export class HomegenieAdapter implements Adapter {
     'Program',
     'Sensor',
     'DoorWindow',
+//    "Thermostat"
   ];
   private eventSource;
   private webSocket;
@@ -100,15 +107,24 @@ export class HomegenieAdapter implements Adapter {
 
 
                 // TODO: optimize this
-
                 // update fields of associated HGUI module if exists
                 m.Properties.map((p) => {
                   const moduleId = m.Domain + '/' + m.Address;
-                  const module = this._hgui.getModule(moduleId, this.id);
-                  if (module != null) {
-                    module.field(p.Name, p.Value, p.UpdateTime);
+                  let module = this._hgui.getModule(moduleId, this.id);
+                  if (module == null) {
+                    // add new module to HGUI modules if missing
+                    module = this.hgui.addModule(new HguiModule({
+                      id: moduleId,
+                      adapterId: this.id,
+                      type: m.DeviceType.toLowerCase(),
+                      name: m.Name,
+                      description: m.Description,
+                      fields: [],
+                    }));
                   }
+                  module.field(p.Name, p.Value, p.UpdateTime);
                 });
+                // TODO: optimize this ^^^^
 
 
               }
@@ -137,7 +153,11 @@ export class HomegenieAdapter implements Adapter {
   control(m: HguiModule, command: string, options?: any): Subject<any> {
     // adapter-specific implementation
     if (command === CMD.Options.Get) {
-      return this.getModuleFeatures(m);
+      if (m.type === 'program') {
+        return this.getProgramOptions(m);
+      } else {
+        return this.getModuleFeatures(m);
+      }
     } else if (command === CMD.Options.Set) {
       return this.apiCall(HomegenieApi.Config.Modules.ParameterSet(m), options);
     } else if (command === CMD.Statistics.Field.Get) {
@@ -255,7 +275,7 @@ export class HomegenieAdapter implements Adapter {
     return `${module.Domain}/${module.Address}`;
   }
 
-  protected getModule(id: string): Module {
+  getModule(id: string): Module {
     const matchingModules = this._modules.filter(
       (i) => this.getModuleId(i) === id
     );
@@ -411,20 +431,60 @@ export class HomegenieAdapter implements Adapter {
     return isMatching;
   }
 
-  private getModuleFeatures(m: HguiModule): Subject<any> {
-    const subject = new Subject<any>();
+  private getProgramOptions(m: HguiModule): Subject<ProgramOptions> {
+    const subject = new Subject<ProgramOptions>();
+    const programModule = this.getModule(m.id);
+    if (!programModule) {
+      console.log('WARNING', 'No module associated with this program.');
+      setTimeout(() => {
+        subject.next();
+        subject.complete();
+      }, 10);
+    } else {
+      const configOptions = programModule.Properties.filter((p: ModuleParameter) => p.Name.startsWith('ConfigureOptions.'));
+      const options: OptionField[] = configOptions.map((o) => {
+        const fieldType = o.FieldType.split(':');
+        if (!m.field(o.Name)) {
+          console.log('WARNING', m, o.Name);
+        }
+        return {
+          pid: programModule.Address,
+          name: o.Name,
+          field: m.field(o.Name),
+          description: o.Description,
+          type: {
+            id: fieldType[0],
+            options: fieldType.slice(1)
+          },
+        } as OptionField;
+      });
+      setTimeout(() => {
+        subject.next({
+          id: programModule.Address,
+          name: programModule.Name,
+          description: programModule.Description,
+          items: options
+        });
+        subject.complete();
+      });
+    }
+    return subject;
+  }
+
+  private getModuleFeatures(m: HguiModule): Subject<ModuleFeatures[]> {
+    const subject = new Subject<ModuleFeatures[]>();
     const module = this.getModule(m.id);
     this.apiCall(HomegenieApi.Automation.Programs.List)
       .subscribe((res) => {
-          const programFeatures = [];
+          const programFeatures: ModuleFeatures[] = [];
           this._programs = res.response;
           this._programs.map((p) => {
             if (p.IsEnabled && p.Features != null) {
-              const pf = {
+              const pf: ModuleFeatures = {
                 id: p.Address,
                 name: p.Name,
                 description: p.Description,
-                features: []
+                items: [] as OptionField[]
               };
               for (let i = 0; i < p.Features.length; i++) {
                 const f = p.Features[i];
@@ -460,7 +520,7 @@ export class HomegenieAdapter implements Adapter {
                     };
                     m.fields.push(mf);
                   }
-                  pf.features.push({
+                  pf.items.push({
                     pid: p.Address,
                     field: mf,
                     type: {
@@ -472,7 +532,7 @@ export class HomegenieAdapter implements Adapter {
                   });
                 }
               }
-              if (pf.features.length > 0) {
+              if (pf.items.length > 0) {
                 programFeatures.push(pf);
               }
             }

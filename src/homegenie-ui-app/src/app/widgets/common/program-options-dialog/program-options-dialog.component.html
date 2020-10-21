@@ -1,0 +1,35 @@
+<h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
+  <span>{{ options.name }}</span>
+</h1>
+
+<div mat-dialog-content>
+
+  <p>{{ options.description }}</p>
+
+  <div *ngFor="let f of options.items">
+    <app-text *ngIf="f.type.id === 'text'"
+              [field]="f" (fieldChange)="onFieldChange($event)"
+              [module]="module"></app-text>
+    <app-checkbox *ngIf="f.type.id === 'checkbox'"
+                  [field]="f" (fieldChange)="onFieldChange($event)"
+                  [module]="module"></app-checkbox>
+    <app-module-select *ngIf="f.type.id === 'module.text'"
+                       [field]="f" (fieldChange)="onFieldChange($event)"
+                       [module]="module"></app-module-select>
+    <app-slider *ngIf="f.type.id === 'slider'"
+                [field]="f" (fieldChange)="onFieldChange($event)"
+                [module]="module"></app-slider>
+    <app-program-select *ngIf="f.type.id === 'program.text'"
+                        [field]="f" (fieldChange)="onFieldChange($event)"
+                        [module]="module"></app-program-select>
+    <app-event-capture *ngIf="f.type.id === 'capture'"
+                       [field]="f" (fieldChange)="onFieldChange($event)"
+                       [module]="module"></app-event-capture>
+  </div>
+
+</div>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end start">
+  <button mat-button mat-dialog-close>{{ "close" | translate }}</button>
+  <button mat-button [mat-dialog-close]="changes" [disabled]="this.changes.length === 0">{{ "apply" | translate }}</button>
+</mat-dialog-actions>

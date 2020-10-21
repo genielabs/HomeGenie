@@ -30,7 +30,7 @@ export class Module {
     const field = this.fields.find((f) => f.key.toLowerCase() === key.toLowerCase());
     if (field && typeof value !== 'undefined') {
       if (this.fields == null) { this.fields = []; }
-      if (field.timestamp === timestamp) {
+      if (field.timestamp === timestamp && field.value === value) {
         return this;
       }
       field.value = value;
@@ -39,7 +39,7 @@ export class Module {
         this.getAdapter().hgui.onModuleEvent.next({ module: this, event: field});
       }
       return this;
-    } else if (field == null && value) {
+    } else if (field == null && typeof value !== 'undefined') {
       this.fields.push({ key, value, timestamp });
       return this;
     }
@@ -74,4 +74,32 @@ export class ModuleField {
   key: string;
   value?: any;
   timestamp = 0;
+}
+
+export class OptionField {
+  pid: string;
+  field: any;
+  type: any;
+  name: string;
+  description: string;
+
+}
+
+export class OptionFieldType {
+  id: string;
+  options: string[];
+}
+
+export class ModuleFeatures {
+  public id: string;
+  public name: string;
+  public description: string;
+  public items: OptionField[];
+}
+
+export class ProgramOptions {
+  public id: string;
+  public name: string;
+  public description: string;
+  public items: OptionField[];
 }

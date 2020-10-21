@@ -149,7 +149,7 @@ export class ChartComponent implements OnInit {
             statIndex = this.selectedFields.indexOf(field);
           } else {
             if (e.module !== this.module) {
-              statIndex = this.selectedModules.indexOf(e.module);
+              statIndex = this.selectedModules.indexOf(e.module) + 1;
             }
           }
           const ds = this.lineChartData[statIndex];

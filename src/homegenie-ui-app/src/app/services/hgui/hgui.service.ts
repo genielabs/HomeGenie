@@ -289,7 +289,7 @@ export class HguiService implements OnDestroy {
    * @param moduleId The module id
    * @param adapterId The adapter id
    */
-  getModule(moduleId: string, adapterId: string): any {
+  getModule(moduleId: string, adapterId: string): Module {
     return this.modules.find(
       (item) => item.id === moduleId && item.adapterId === adapterId
     );

@@ -1,1 +1,4 @@
-<p>text works!</p>
+<mat-form-field>
+  <mat-label>{{ description }}</mat-label>
+  <input matInput placeholder="" value="{{ value }}" (change)="onFieldChange($event, field)">
+</mat-form-field>

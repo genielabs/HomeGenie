@@ -32,12 +32,14 @@ export class CheckboxComponent implements OnInit {
       this.translationPrefix = this.module.getAdapter().translationPrefix;
     }
     this._description = this.field.description;
-    const key = `${this.translationPrefix}.$options.${this.field.pid}.${this.field.field.key}`;
-    this.translate.get(key).subscribe((res) => {
-      if (res !== key) {
-        this._description = res;
-      }
-    });
+    if (this.field.field) {
+      const key = `${this.translationPrefix}.$options.${this.field.pid}.${this.field.field.key}`;
+      this.translate.get(key).subscribe((res) => {
+        if (res !== key) {
+          this._description = res;
+        }
+      });
+    }
   }
 
   onFieldChange(e, f): void {

@@ -42,7 +42,7 @@
 
         <p>{{ o.description }}</p>
         <!-- TODO: create a 'dynamic-control' component -->
-        <div *ngFor="let f of o.features">
+        <div *ngFor="let f of o.items">
           <app-text *ngIf="f.type.id === 'text'"
                     [field]="f" (fieldChange)="onFieldChange($event)"
                     [module]="module"></app-text>

@@ -1,25 +1,23 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Module, ModuleFeatures, ModuleField} from '../../../services/hgui/module';
-import {CMD} from '../../../services/hgui/hgui.service';
-import {TranslateService} from '@ngx-translate/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Module, ModuleField, ProgramOptions} from "../../../services/hgui/module";
+import {CMD} from "../../../services/hgui/hgui.service";
 
 @Component({
-  selector: 'app-widget-options-dialog',
-  templateUrl: './widget-options-dialog.component.html',
-  styleUrls: ['./widget-options-dialog.component.scss']
+  selector: 'app-program-options-dialog',
+  templateUrl: './program-options-dialog.component.html',
+  styleUrls: ['./program-options-dialog.component.scss']
 })
-export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
+export class ProgramOptionsDialogComponent implements OnInit {
 
-  options: ModuleFeatures[] = [];
+  options: ProgramOptions = new ProgramOptions();
   changes: { field: ModuleField, value: any }[] = [];
   translationPrefix: string;
 
-  sectionTab = 0;
-
   constructor(
     private translate: TranslateService,
-    public dialogRef: MatDialogRef<WidgetOptionsDialogComponent>,
+    public dialogRef: MatDialogRef<ProgramOptionsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public module: Module
   ) {
     if (module.getAdapter()) {
@@ -30,11 +28,10 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // populate module features list
-    this.module.control(CMD.Options.Get).subscribe((res: ModuleFeatures[]) => {
+    this.module.control(CMD.Options.Get).subscribe((res: ProgramOptions) => {
       this.options = res;
+      const o = this.options;
       setTimeout(() => {
-        this.options.forEach((o) => {
           const titleKey = `${this.translationPrefix}.$options.${o.id}.Title`;
           this.translate.get(titleKey).subscribe((tr) => {
             if (tr !== titleKey) {
@@ -47,11 +44,8 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
               o.description = tr;
             }
           });
-        });
       });
     });
-  }
-  ngOnDestroy(): void {
   }
 
   // TODO: move this method to a OptionsDialog base class
@@ -66,10 +60,6 @@ export class WidgetOptionsDialogComponent implements OnInit, OnDestroy {
         this.changes.push(e);
       }
     }
-  }
-
-  onSectionTabChange(e): void {
-    this.sectionTab = e;
   }
 
 }

@@ -18,7 +18,3 @@
   "stats.last_twentyfour_hours":
     "Last 24 hours"
 }
-
-{ value: 0.016, label: 'MODULE.stats.last_minute' },
-{ value: 0.083, label: 'MODULE.stats.last_five_minutes' },
-{ value: 0.5, label: 'MODULE.stats.last_half_hour' },

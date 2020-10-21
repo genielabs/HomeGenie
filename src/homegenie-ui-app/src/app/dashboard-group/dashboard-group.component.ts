@@ -1,11 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CMD, HguiService} from '../services/hgui/hgui.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 import {Group} from '../services/hgui/group';
 import {MatDialog} from '@angular/material/dialog';
-import {ZwaveManagerDialogComponent} from '../components/zwave/zwave-manager-dialog/zwave-manager-dialog.component';
 import {WidgetOptionsDialogComponent} from '../widgets/common/widget-options-dialog/widget-options-dialog.component';
 import {Module} from '../services/hgui/module';
 
