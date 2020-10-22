@@ -4,15 +4,14 @@ import {Adapter} from '../adapter';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
 import {
   Module as HguiModule,
-  ModuleFeatures,
-  ModuleField,
-  OptionField,
-  ProgramOptions
+  ModuleField, ModuleOptions, ModuleType,
+  OptionField
 } from 'src/app/services/hgui/module';
 import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
 import {ZwaveAdapter} from '../zwave-adapter';
 import {map} from 'rxjs/operators';
+import {Scenario} from "../../services/hgui/automation";
 
 export {Module, Group, Program};
 
@@ -150,23 +149,50 @@ export class HomegenieAdapter implements Adapter {
     return subject;
   }
 
+  system(command: string, options?: any): Subject<Scenario> {
+    const subject = new Subject<any>();
+    switch (command) {
+      case CMD.Automation.Scenarios.List:
+        this.apiCall(HomegenieApi.Automation.Programs.List)
+          .subscribe((res) => {
+            this._programs = res.response;
+            subject.next(this._programs.filter((p) => {
+              if (!p.IsEnabled) return;
+              const programModule = this.getModule(`${p.Domain}/${p.Address}`);
+              if (!programModule) return;
+              const hasProgramWidget = programModule.Properties
+                .find((prop) => prop.Name === 'Widget.DisplayModule' && prop.Value === 'homegenie/generic/program');
+              if (hasProgramWidget) return p;
+            }).map((p) => ({
+              id: `${p.Address}`,
+              name: p.Name,
+              description: p.Description
+            }) as Scenario));
+            subject.complete();
+          });
+    }
+    return subject;
+  }
+
   control(m: HguiModule, command: string, options?: any): Subject<any> {
     // adapter-specific implementation
-    if (command === CMD.Options.Get) {
-      if (m.type === 'program') {
-        return this.getProgramOptions(m);
-      } else {
-        return this.getModuleFeatures(m);
-      }
-    } else if (command === CMD.Options.Set) {
-      return this.apiCall(HomegenieApi.Config.Modules.ParameterSet(m), options);
-    } else if (command === CMD.Statistics.Field.Get) {
-      return this.apiCall(HomegenieApi.Config.Modules.StatisticsGet(m.id, options));
+    switch (command) {
+      case CMD.Options.Get:
+        if (m.type === ModuleType.Program) {
+          return this.getProgramOptions(m);
+        } else {
+          return this.getModuleFeatures(m);
+        }
+      case CMD.Options.Set:
+        return this.apiCall(HomegenieApi.Config.Modules.ParameterSet(m), options);
+      case CMD.Statistics.Field.Get:
+        return this.apiCall(HomegenieApi.Config.Modules.StatisticsGet(m.id, options));
     }
+
     if (options == null) {
       options = '';
     }
-    if (m.type === 'program') {
+    if (m.type === ModuleType.Program) {
       // program API command
       const programAddress = m.id.substring(m.id.lastIndexOf('/') + 1);
       options = programAddress + '/' + options;
@@ -431,8 +457,8 @@ export class HomegenieAdapter implements Adapter {
     return isMatching;
   }
 
-  private getProgramOptions(m: HguiModule): Subject<ProgramOptions> {
-    const subject = new Subject<ProgramOptions>();
+  private getProgramOptions(m: HguiModule): Subject<ModuleOptions> {
+    const subject = new Subject<ModuleOptions>();
     const programModule = this.getModule(m.id);
     if (!programModule) {
       console.log('WARNING', 'No module associated with this program.');
@@ -471,16 +497,16 @@ export class HomegenieAdapter implements Adapter {
     return subject;
   }
 
-  private getModuleFeatures(m: HguiModule): Subject<ModuleFeatures[]> {
-    const subject = new Subject<ModuleFeatures[]>();
+  private getModuleFeatures(m: HguiModule): Subject<ModuleOptions[]> {
+    const subject = new Subject<ModuleOptions[]>();
     const module = this.getModule(m.id);
     this.apiCall(HomegenieApi.Automation.Programs.List)
       .subscribe((res) => {
-          const programFeatures: ModuleFeatures[] = [];
+          const programFeatures: ModuleOptions[] = [];
           this._programs = res.response;
           this._programs.map((p) => {
             if (p.IsEnabled && p.Features != null) {
-              const pf: ModuleFeatures = {
+              const pf: ModuleOptions = {
                 id: p.Address,
                 name: p.Name,
                 description: p.Description,

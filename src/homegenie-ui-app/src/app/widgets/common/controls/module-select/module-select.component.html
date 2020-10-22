@@ -1,9 +1,9 @@
-<div class="label">{{ translationPrefix + ".$options." + field.pid + "." + field.field.key | translate }}</div>
+<div class="label">{{ description }}</div>
 <mat-form-field appearance="fill">
   <mat-label>{{ "module" | translate }}</mat-label>
   <mat-select [multiple]="multiple"
               [value]="value"
-              (selectionChange)="onFieldChange($event, field)">
+              (selectionChange)="onFieldChange($event)">
     <mat-option value="">{{ "not_set" | translate }}</mat-option>
     <mat-option *ngFor="let m of modules" [value]="m.id">{{m.name}}</mat-option>
   </mat-select>

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
+  <span>{{ options.name }}</span>
+</h1>
+
+<div mat-dialog-content>
+
+  <p>{{ options.description }}</p>
+
+  <div *ngFor="let f of options.items">
+    <app-dynamic-control [data]="f" [module]="module"
+                         (fieldChange)="onFieldChange($event)">
+    </app-dynamic-control>
+  </div>
+
+</div>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end start">
+  <button mat-button mat-dialog-close>{{ "close" | translate }}</button>
+  <button mat-button [mat-dialog-close]="changes" [disabled]="this.changes.length === 0">{{ "apply" | translate }}</button>
+</mat-dialog-actions>

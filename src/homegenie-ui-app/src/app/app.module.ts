@@ -36,16 +36,19 @@ import {SensorValueFormatterPipe} from './pipes/SensorValueFormatterPipe';
 import { DashboardGroupComponent } from './dashboard-group/dashboard-group.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 import { ProgramEditorComponent } from './automation/program-editor/program-editor.component';
-import { WidgetOptionsDialogComponent } from './widgets/common/widget-options-dialog/widget-options-dialog.component';
+import { WidgetOptionsDialogComponent } from './widgets/common/dialogs/widget-options-dialog/widget-options-dialog.component';
+import { ControlFieldBase } from './widgets/common/controls/control-field-base';
 import { CheckboxComponent } from './widgets/common/controls/checkbox/checkbox.component';
 import { ModuleSelectComponent } from './widgets/common/controls/module-select/module-select.component';
-import { ProgramSelectComponent } from './widgets/common/controls/program-select/program-select.component';
+import { ScenarioSelectComponent } from './widgets/common/controls/scenario-select/scenario-select.component';
 import { SliderComponent } from './widgets/common/controls/slider/slider.component';
 import { TextComponent } from './widgets/common/controls/text/text.component';
 import { EventCaptureComponent } from './widgets/common/controls/event-capture/event-capture.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { DynamicWidgetComponent } from './widgets/dynamic-widget/dynamic-widget.component';
-import { ProgramOptionsDialogComponent } from './widgets/common/program-options-dialog/program-options-dialog.component';
+import { ProgramOptionsDialogComponent } from './widgets/common/dialogs/program-options-dialog/program-options-dialog.component';
+import { OptionsDialogBase } from './widgets/common/dialogs/options-dialog-base';
+import { DynamicControlComponent } from './widgets/common/controls/dynamic-control/dynamic-control.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -78,15 +81,18 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     GroupListItemComponent,
     ProgramEditorComponent,
     WidgetOptionsDialogComponent,
+    ControlFieldBase,
     CheckboxComponent,
     ModuleSelectComponent,
-    ProgramSelectComponent,
+    ScenarioSelectComponent,
     SliderComponent,
     TextComponent,
     EventCaptureComponent,
     ChartComponent,
     DynamicWidgetComponent,
-    ProgramOptionsDialogComponent
+    ProgramOptionsDialogComponent,
+    OptionsDialogBase,
+    DynamicControlComponent
   ],
   imports: [
     BrowserModule,

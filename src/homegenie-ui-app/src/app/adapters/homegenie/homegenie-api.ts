@@ -25,6 +25,7 @@ export class ModuleParameter {
 
 export class Program {
   // TODO: ...
+  Domain: string;
   Address: string;
   Name: string;
   Description: string;
@@ -32,6 +33,9 @@ export class Program {
   IsEnabled: boolean;
   IsRunning: boolean;
   Features: ProgramFeature[];
+  Type: string;
+  ScriptSetup: string;
+  ScriptSource: string;
 }
 export class ProgramFeature {
   Description: string;

@@ -28,8 +28,17 @@ export class CMD {
     Get: 'Options.Get',
     Set: 'Options.Set'
   };
-  static Programs = {
-    Toggle: 'Programs.Toggle'
+  static Automation = {
+    Programs: {
+      List: 'Automation.Programs.List',
+      Run: 'Automation.Programs.Run',
+      Toggle: 'Automation.Programs.Toggle'
+    },
+    Scenarios: {
+      List: 'Automation.Scenarios.List',
+      Run: 'Automation.Scenarios.Run',
+      Toggle: 'Automation.Scenarios.Toggle'
+    }
   };
 }
 export class FLD {

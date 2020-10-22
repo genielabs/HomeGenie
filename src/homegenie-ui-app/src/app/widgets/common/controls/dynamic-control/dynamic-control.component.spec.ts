@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProgramSelectComponent } from './program-select.component';
+import { DynamicControlComponent } from './dynamic-control.component';
 
-describe('ProgramSelectComponent', () => {
-  let component: ProgramSelectComponent;
-  let fixture: ComponentFixture<ProgramSelectComponent>;
+describe('DynamicControlComponent', () => {
+  let component: DynamicControlComponent;
+  let fixture: ComponentFixture<DynamicControlComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramSelectComponent ]
+      declarations: [ DynamicControlComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProgramSelectComponent);
+    fixture = TestBed.createComponent(DynamicControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

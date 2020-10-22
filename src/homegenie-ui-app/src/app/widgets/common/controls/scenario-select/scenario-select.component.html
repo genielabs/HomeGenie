@@ -1,0 +1,8 @@
+<div class="label">{{ description }}</div>
+<mat-form-field>
+  <mat-label>{{ 'scenario' | translate }}</mat-label>
+  <mat-select [value]="value" (selectionChange)="onFieldChange($event)">
+    <mat-option value="">{{ "not_set" | translate }}</mat-option>
+    <mat-option *ngFor="let s of scenarios" [value]="s.id">{{ s.name }}</mat-option>
+  </mat-select>
+</mat-form-field>

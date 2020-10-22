@@ -1,25 +1,20 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Module} from "../../services/hgui/module";
-import {WidgetOptionsDialogComponent} from "../common/widget-options-dialog/widget-options-dialog.component";
-import {CMD} from "../../services/hgui/hgui.service";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Module, ModuleType} from "../../services/hgui/module";
 
 @Component({
   selector: 'app-dynamic-widget',
   templateUrl: './dynamic-widget.component.html',
   styleUrls: ['./dynamic-widget.component.scss']
 })
-export class DynamicWidgetComponent implements OnInit {
+export class DynamicWidgetComponent {
   @Input()
   module: Module;
   @Output()
   showOptions: EventEmitter<Module> = new EventEmitter();
 
-  constructor() { }
+  ModuleType = ModuleType;
 
-  ngOnInit(): void {
-  }
-
-  onShowOptions(): void {
+  onShowOptionsClick(): void {
     this.showOptions.emit(this.module);
   }
 }

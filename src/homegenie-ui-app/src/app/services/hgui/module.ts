@@ -70,10 +70,27 @@ export class Module {
   }
 }
 
+export class ModuleType {
+  static Program = 'program';
+  static Sensor = 'sensor';
+  static Dimmer = 'dimmer';
+  static Light = 'light';
+  static Color = 'color';
+  static Switch = 'switch';
+  static Siren = 'siren';
+}
+
 export class ModuleField {
   key: string;
   value?: any;
   timestamp = 0;
+}
+
+export class ModuleOptions {
+  public id: string;
+  public name: string;
+  public description: string;
+  public items: OptionField[];
 }
 
 export class OptionField {
@@ -88,18 +105,4 @@ export class OptionField {
 export class OptionFieldType {
   id: string;
   options: string[];
-}
-
-export class ModuleFeatures {
-  public id: string;
-  public name: string;
-  public description: string;
-  public items: OptionField[];
-}
-
-export class ProgramOptions {
-  public id: string;
-  public name: string;
-  public description: string;
-  public items: OptionField[];
 }

@@ -26,7 +26,7 @@
   </div>
 
   <mat-accordion [ngStyle]="{ display: sectionTab === 1 ? '' : 'none' }" [multi]="false">
-    <mat-expansion-panel *ngFor="let o of options; let i = index" [expanded]="i === 0">
+    <mat-expansion-panel *ngFor="let o of optionsList; let i = index" [expanded]="i === 0">
       <mat-expansion-panel-header>
         <mat-panel-title fxLayout="row" fxLayoutAling="start center" fxLayoutGap="8px">
           <mat-icon style="opacity: 0.4">settings</mat-icon>
@@ -41,26 +41,10 @@
       <div *ngIf="module" fxLayout="column" fxLayoutGap="6px">
 
         <p>{{ o.description }}</p>
-        <!-- TODO: create a 'dynamic-control' component -->
         <div *ngFor="let f of o.items">
-          <app-text *ngIf="f.type.id === 'text'"
-                    [field]="f" (fieldChange)="onFieldChange($event)"
-                    [module]="module"></app-text>
-          <app-checkbox *ngIf="f.type.id === 'checkbox'"
-                        [field]="f" (fieldChange)="onFieldChange($event)"
-                        [module]="module"></app-checkbox>
-          <app-module-select *ngIf="f.type.id === 'module.text'"
-                             [field]="f" (fieldChange)="onFieldChange($event)"
-                             [module]="module"></app-module-select>
-          <app-slider *ngIf="f.type.id === 'slider'"
-                      [field]="f" (fieldChange)="onFieldChange($event)"
-                      [module]="module"></app-slider>
-          <app-program-select *ngIf="f.type.id === 'program.text'"
-                              [field]="f" (fieldChange)="onFieldChange($event)"
-                              [module]="module"></app-program-select>
-          <app-event-capture *ngIf="f.type.id === 'capture'"
-                             [field]="f" (fieldChange)="onFieldChange($event)"
-                             [module]="module"></app-event-capture>
+          <app-dynamic-control [data]="f" [module]="module"
+                               (fieldChange)="onFieldChange($event)">
+          </app-dynamic-control>
         </div>
 
       </div>

@@ -1,0 +1,18 @@
+<app-text *ngIf="data.type.id === 'text'"
+          [data]="data" (fieldChange)="onFieldChange($event)"
+          [module]="module"></app-text>
+<app-checkbox *ngIf="data.type.id === 'checkbox'"
+              [data]="data" (fieldChange)="onFieldChange($event)"
+              [module]="module"></app-checkbox>
+<app-module-select *ngIf="data.type.id === 'module.text'"
+                   [data]="data" (fieldChange)="onFieldChange($event)"
+                   [module]="module"></app-module-select>
+<app-slider *ngIf="data.type.id === 'slider'"
+            [data]="data" (fieldChange)="onFieldChange($event)"
+            [module]="module"></app-slider>
+<app-scenario-select *ngIf="data.type.id === 'program.text' || data.type.id === 'scenario.select'"
+                     [data]="data" (fieldChange)="onFieldChange($event)"
+                     [module]="module"></app-scenario-select>
+<app-event-capture *ngIf="data.type.id === 'capture'"
+                   [data]="data" (fieldChange)="onFieldChange($event)"
+                   [module]="module"></app-event-capture>

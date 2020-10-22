@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Group} from '../services/hgui/group';
 import {MatDialog} from '@angular/material/dialog';
-import {WidgetOptionsDialogComponent} from '../widgets/common/widget-options-dialog/widget-options-dialog.component';
+import {WidgetOptionsDialogComponent} from '../widgets/common/dialogs/widget-options-dialog/widget-options-dialog.component';
 import {Module} from '../services/hgui/module';
 
 @Component({

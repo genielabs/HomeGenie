@@ -5,11 +5,11 @@
   <div fxLayout="row" fxLayoutAlign="start center">
     <div *ngIf="isInitialized" class="value">{{ slider.value }}</div>
     <mat-slider fxFlex="grow" #slider thumbLabel tickInterval="1"
-                [min]="field.type.options[0]"
-                [max]="field.type.options[1]"
-                [step]="field.type.options[2] ? field.type.options[2] : 1"
+                [min]="data.type.options[0]"
+                [max]="data.type.options[1]"
+                [step]="data.type.options[2] ? data.type.options[2] : 1"
                 [value]="value"
-                (change)="onFieldChange($event, field)"></mat-slider>
+                (change)="onFieldChange($event)"></mat-slider>
   </div>
 </div>
 <div *ngIf="isBinary" fxLayout="row" fxLayoutAlign="start center">
