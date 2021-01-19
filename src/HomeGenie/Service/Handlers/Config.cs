@@ -584,7 +584,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationBackup")
                 {
                     homegenie.BackupManager.BackupConfiguration("html/homegenie_backup_config.zip");
-                    (request.Context.Data as HttpListenerContext).Response.Redirect("/hg/html/homegenie_backup_config.zip");
+                    (request.Context.Data as HttpListenerContext).Response.Redirect("/hg/html/homegenie_backup_config.zip?" + DateTime.UtcNow.Ticks);
                     request.Handled = true;
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationLoad")
@@ -598,7 +598,7 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
-                    request.ResponseData = Utility.Module2Json(module, false);
+                    request.ResponseData = module == null ? null : Utility.Module2Json(module, false);
                 }
                 catch (Exception ex)
                 {
@@ -1090,10 +1090,12 @@ namespace HomeGenie.Service.Handlers
                     {
                         var group = homegenie.Groups.Find(z => z.Name == newGroups[i].Name);
                         group.Modules.Clear();
+                        newGroups[i].Modules.RemoveAll((mr) => mr.Address == null || mr.Domain == null);
                         group.Modules = newGroups[i].Modules;
                     }
                     catch
                     {
+                        // TODO: report exception
                     }
                 }
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups

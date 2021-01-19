@@ -4,7 +4,7 @@
 
 <div mat-dialog-content>
 
-  <p>{{ options.description }}</p>
+  <p class="color-primary" style="font-size: 120%; padding-bottom: 16px;">{{ options.description }}</p>
 
   <div *ngFor="let f of options.items">
     <app-dynamic-control [data]="f" [module]="module"

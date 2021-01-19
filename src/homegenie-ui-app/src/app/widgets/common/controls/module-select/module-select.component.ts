@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Module} from '../../../../services/hgui/module';
+import {Module, ModuleType} from '../../../../services/hgui/module';
 import {ControlFieldBase} from "../control-field-base";
 
 @Component({
@@ -19,6 +19,6 @@ export class ModuleSelectComponent extends ControlFieldBase implements OnInit {
       const fieldNames = this.data.type.options[2];
       return this.hgui.modules.filter((m) => m.fields.find((f) => new RegExp(`,${f.key},`, 'i').test(`,${fieldNames},`)));
     }
-    return [];
+    return this.hgui.modules.filter((m) => m.type !== ModuleType.Program);
   }
 }

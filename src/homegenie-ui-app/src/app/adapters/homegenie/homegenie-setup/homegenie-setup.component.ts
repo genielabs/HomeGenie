@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
-import {Group, HomegenieAdapter, Program} from '../homegenie-adapter';
+import {HomegenieAdapter, Program} from '../homegenie-adapter';
 import {HomegenieApi, ModuleParameter} from '../homegenie-api';
 import {ProgramOptionsDialogComponent} from "../../../widgets/common/dialogs/program-options-dialog/program-options-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -25,7 +25,7 @@ export class HomegenieSetupComponent implements OnInit {
   drivers: any[] = [];
   programsGroups: ProgramsGroup[] = [];
 
-  constructor(public hgui: HguiService, private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(public hgui: HguiService, private formBuilder: FormBuilder, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

@@ -104,7 +104,7 @@ export class ChartComponent implements OnInit {
     },
   };
   lineChartColors: Color[] = [
-    { // dark grey
+    { // blue
       backgroundColor: 'rgb(0,77,255)',
       borderColor: 'rgb(29,86,212)',
       pointBackgroundColor: 'rgba(0,77,255,.5)',
@@ -120,7 +120,7 @@ export class ChartComponent implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
-    { // grey
+    { // green
       backgroundColor: 'rgb(34,78,14)',
       borderColor: 'rgb(15,78,36)',
       pointBackgroundColor: 'rgba(34,78,14,.5)',
@@ -129,7 +129,7 @@ export class ChartComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  lineChartLegend = true;
+  lineChartLegend = false;
   lineChartType = 'line';
   lineChartPlugins = []; //[pluginAnnotations];
 
@@ -243,12 +243,12 @@ export class ChartComponent implements OnInit {
     this.showStats();
   }
 
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  // chart events
+  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 

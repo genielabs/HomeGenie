@@ -95,16 +95,25 @@ namespace HomeGenie.Data
 
         public object Clone()
         {
-            var stream = new MemoryStream();
-            var formatter = new BinaryFormatter();
+            try
+            {
+                var stream = new MemoryStream();
+                var formatter = new BinaryFormatter();
 
-            formatter.Serialize(stream, this);
+                formatter.Serialize(stream, this);
 
-            stream.Position = 0;
-            object obj = formatter.Deserialize(stream);
-            stream.Close();
+                stream.Position = 0;
+                object obj = formatter.Deserialize(stream);
+                stream.Close();
 
-            return obj;
+                return obj;
+            }
+            catch (Exception e)
+            {
+                // fallback to standard JSON serialization
+                Console.WriteLine(e.Message);
+                return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(this));
+            }
         }
 
     }

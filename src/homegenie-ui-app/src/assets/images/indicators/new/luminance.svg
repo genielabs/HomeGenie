@@ -1,0 +1,24 @@
+<svg id="b60597f0-836f-4a1c-ae38-46b2a7c4ed6a" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>sole 3</title>
+  <path d="M50,79.86A29.86,29.86,0,1,1,79.86,50,29.89,29.89,0,0,1,50,79.86Zm0-55.72A25.86,25.86,0,1,0,75.86,50,25.89,25.89,0,0,0,50,24.14Z"/>
+  <rect x="1" y="48" width="18.43" height="4"/>
+  <rect x="80.57" y="48" width="18.43" height="4"/>
+  <rect x="48" y="1" width="4" height="18.43"/>
+  <rect x="48" y="80.57" width="4" height="18.43"/>
+  <g>
+    <rect x="73.85" y="19.13" width="9.21" height="4" transform="translate(8.04 61.67) rotate(-45)" />
+    <rect x="16.93" y="76.05" width="9.21" height="4" transform="translate(-48.88 38.09) rotate(-45)" />
+  </g>
+  <g>
+    <rect x="16.93" y="76.05" width="9.21" height="4" transform="translate(-48.88 38.09) rotate(-45)" />
+    <rect x="73.85" y="19.13" width="9.21" height="4" transform="translate(8.04 61.67) rotate(-45)"/>
+  </g>
+  <g>
+    <rect x="76.46" y="73.45" width="4" height="9.21" transform="translate(-32.21 78.34) rotate(-45)"/>
+    <rect x="19.54" y="16.53" width="4" height="9.21" transform="translate(-8.64 21.42) rotate(-45)"/>
+  </g>
+  <g>
+    <rect x="19.54" y="16.53" width="4" height="9.21" transform="translate(-8.64 21.42) rotate(-45)"/>
+    <rect x="76.46" y="73.45" width="4" height="9.21" transform="translate(-32.21 78.34) rotate(-45)" />
+  </g>
+</svg>

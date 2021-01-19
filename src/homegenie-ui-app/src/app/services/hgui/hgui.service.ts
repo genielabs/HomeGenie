@@ -17,7 +17,8 @@ export class CMD {
     On: 'Control.On',
     Off: 'Control.Off',
     Level: 'Control.Level',
-    Toggle: 'Control.Toggle'
+    Toggle: 'Control.Toggle',
+    ColorHsb: 'Control.ColorHsb'
   };
   static Statistics = {
     Field: {
@@ -40,6 +41,11 @@ export class CMD {
       Toggle: 'Automation.Scenarios.Toggle'
     }
   };
+  static Widgets = {
+    WeatherForecast: {
+      GetData: 'Widgets.WeatherForecast.GetData'
+    }
+  };
 }
 export class FLD {
   static Meter = {
@@ -49,9 +55,19 @@ export class FLD {
     Humidity: 'Sensor.Humidity',
     Luminance: 'Sensor.Luminance',
     Temperature: 'Sensor.Temperature',
+    Pressure: 'Sensor.Pressure',
+    Wind: {
+      Speed: 'Sensor.Wind.Speed',
+      Direction: 'Sensor.Wind.Direction'
+    },
+    Precipitation: {
+      Rain: 'Sensor.Precipitation.Rain',
+      Snow: 'Sensor.Precipitation.Snow'
+    }
   };
   static Status = {
     Level: 'Status.Level',
+    ColorHsb: 'Status.ColorHsb',
   };
   static Program = {
     Status: 'Program.Status',
@@ -71,7 +87,7 @@ export class HguiService implements OnDestroy {
 
   onModuleAdded = new Subject<Module>();
   onModuleRemoved = new Subject<Module>();
-  onModuleEvent = new Subject<{ module: Module, event: any }>()
+  onModuleEvent = new Subject<{ module: Module, event: ModuleField }>()
   onGroupAdded = new Subject<Group>();
   onGroupRemoved = new Subject<Group>();
   onGroupModuleAdded = new Subject<{ group: Group; module: Module }>();

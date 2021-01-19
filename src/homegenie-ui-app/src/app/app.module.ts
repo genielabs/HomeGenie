@@ -4,7 +4,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+
+import { LayoutModule } from '@angular/cdk/layout';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {MaterialModule} from './material.module';
@@ -12,14 +14,20 @@ import {MaterialModule} from './material.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {IModuleTranslationOptions, ModuleTranslateLoader} from '@larscom/ngx-translate-module-loader';
 
+import {UnitsConvererModule} from 'ngx-units-converter'
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+
+import { MomentModule } from 'ngx-moment';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { CodeEditorModule } from '@ngstack/code-editor';
 
 import { ChartsModule } from 'ng2-charts';
+
+import { ReteModule } from 'rete-angular-render-plugin';
 
 import {HomegenieSetupComponent} from './adapters/homegenie/homegenie-setup/homegenie-setup.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';
@@ -32,7 +40,7 @@ import {ZwaveNodeConfigComponent} from './components/zwave/zwave-node-config/zwa
 import {ZwaveNodeListComponent} from './components/zwave/zwave-node-list/zwave-node-list.component';
 import { SwitchComponent } from './widgets/switch/switch.component';
 import { SensorComponent } from './widgets/sensor/sensor.component';
-import {SensorValueFormatterPipe} from './pipes/SensorValueFormatterPipe';
+import { SensorValueFormatterPipe } from './pipes/SensorValueFormatterPipe';
 import { DashboardGroupComponent } from './dashboard-group/dashboard-group.component';
 import { GroupListItemComponent } from './group-list-item/group-list-item.component';
 import { ProgramEditorComponent } from './automation/program-editor/program-editor.component';
@@ -49,6 +57,16 @@ import { DynamicWidgetComponent } from './widgets/dynamic-widget/dynamic-widget.
 import { ProgramOptionsDialogComponent } from './widgets/common/dialogs/program-options-dialog/program-options-dialog.component';
 import { OptionsDialogBase } from './widgets/common/dialogs/options-dialog-base';
 import { DynamicControlComponent } from './widgets/common/controls/dynamic-control/dynamic-control.component';
+
+import { MyReteEditorModule } from "./automation/visual-editor/rete.module";
+
+import { NgxColorsModule } from 'ngx-colors';
+import { ColorPickerDialogComponent } from './widgets/common/dialogs/color-picker-dialog/color-picker-dialog.component';
+import { ColorPickerModule } from '@iplab/ngx-color-picker';
+import { EnergyMonitorComponent } from './widgets/energy-monitor/energy-monitor.component';
+import { ThermostatComponent } from './widgets/thermostat/thermostat.component';
+import { AlarmSystemComponent } from './widgets/alarm-system/alarm-system.component';
+import { WeatherForecastComponent } from './widgets/weather-forecast/weather-forecast.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -92,7 +110,12 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     DynamicWidgetComponent,
     ProgramOptionsDialogComponent,
     OptionsDialogBase,
-    DynamicControlComponent
+    DynamicControlComponent,
+    ColorPickerDialogComponent,
+    EnergyMonitorComponent,
+    ThermostatComponent,
+    AlarmSystemComponent,
+    WeatherForecastComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +125,7 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     MaterialModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
@@ -111,9 +135,22 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
         deps: [HttpClient]
       }
     }),
+    MomentModule.forRoot(),
+    UnitsConvererModule,
     AngularSvgIconModule.forRoot(),
+
     CodeEditorModule.forRoot(),
-    ChartsModule
+
+    ChartsModule,
+
+    ReteModule,
+    MyReteEditorModule,
+    NgxColorsModule,
+
+    ColorPickerModule,
+
+    LayoutModule
+
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}

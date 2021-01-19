@@ -368,7 +368,7 @@ HG.WebApp.WidgetEditor = HG.WebApp.WidgetEditor || new function () { var $$ = th
         var page = $('#' + $$.PageId);
         var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
         var module = HG.WebApp.Data.Modules[bindModuleSelect.val()];
-        if (eventData != null && (eventData.Domain != module.Domain || eventData.Source != module.Address))
+        if (eventData != null && module != null && (eventData.Domain != module.Domain || eventData.Source != module.Address))
             return;
         $$.RenderWidget('#widget_preview_instance', $$._widgetInstance, module, eventData);
     };

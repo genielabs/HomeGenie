@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ModuleOptions} from '../../../../services/hgui/module';
+import {Component, OnInit} from '@angular/core';
+import {ModuleOptions} from '../../../../services/hgui/module-options';
 import {CMD} from '../../../../services/hgui/hgui.service';
 import {OptionsDialogBase} from "../options-dialog-base";
 
@@ -18,18 +18,7 @@ export class WidgetOptionsDialogComponent extends OptionsDialogBase implements O
       this.optionsList = res;
       setTimeout(() => {
         this.optionsList.forEach((o) => {
-          const titleKey = `${this.translationPrefix}.$options.${o.id}.Title`;
-          this.translate.get(titleKey).subscribe((tr) => {
-            if (tr !== titleKey) {
-              o.name = tr;
-            }
-          });
-          const descriptionKey = `${this.translationPrefix}.$options.${o.id}.Description`;
-          this.translate.get(descriptionKey).subscribe((tr) => {
-            if (tr !== descriptionKey) {
-              o.description = tr;
-            }
-          });
+          this.translateModuleOption(o);
         });
       });
     });

@@ -35,7 +35,7 @@
                    success: function(data){
                      var locations = [];
                      $.each(data, function(k,v) {
-                         var location = v.name + ', ' + v.sys.country;
+                         var location = v.description;
                          locations.push(location);
                      });
                      res(locations);

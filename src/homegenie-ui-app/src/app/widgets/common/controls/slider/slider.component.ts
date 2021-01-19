@@ -7,7 +7,6 @@ import {ControlFieldBase} from "../control-field-base";
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent extends ControlFieldBase implements OnInit {
-
   isInitialized = false;
 
   get default(): any {
@@ -22,4 +21,7 @@ export class SliderComponent extends ControlFieldBase implements OnInit {
     this.isInitialized = true;
   }
 
+  onFieldChange(e): void {
+    this.fieldChange.emit({ field: this.data.field, value: this.isBinary ? (e.checked ? 1 : 0) : e.value });
+  }
 }

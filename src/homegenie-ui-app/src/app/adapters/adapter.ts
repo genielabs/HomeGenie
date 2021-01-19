@@ -33,5 +33,5 @@ export interface Adapter {
 
   control(module: Module, command: CMD, options?: any): Subject<any>;
 
-  getModuleIcon(module: HguiModule): string;
+  getWidgetOptions(module: HguiModule): any;
 }

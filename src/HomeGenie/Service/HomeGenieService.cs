@@ -1165,9 +1165,9 @@ namespace HomeGenie.Service
                             systemModules.Add(module);
                         }
                         module.Name = program.Name;
+                        module.Description = program.Description;
                         module.Address = program.Address.ToString();
                         module.DeviceType = MIG.ModuleTypes.Program;
-                        //module.Description = "Wizard Script";
                     }
                     // Add "Scheduler" virtual module
                     //Module scheduler = systemModules.Find(o=> o.Domain == Domains.HomeAutomation_HomeGenie && o.Address == SourceModule.Scheduler);
@@ -1191,7 +1191,8 @@ namespace HomeGenie.Service
 
         internal void modules_Sort()
         {
-            lock (systemModules.LockObject) try
+            lock (systemModules.LockObject)
+            try
             {
                 // sort modules properties by name
                 foreach (var module in systemModules)

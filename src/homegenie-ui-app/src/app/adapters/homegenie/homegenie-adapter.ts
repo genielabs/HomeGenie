@@ -1,17 +1,26 @@
 import {Subject} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
 
 import {Adapter} from '../adapter';
-import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
+import {CMD, FLD, HguiService} from 'src/app/services/hgui/hgui.service';
 import {
   Module as HguiModule,
-  ModuleField, ModuleOptions, ModuleType,
-  OptionField
+  ModuleField,
+  ModuleType
 } from 'src/app/services/hgui/module';
-import {HomegenieApi, Module, Group, Program, ModuleParameter} from './homegenie-api';
+import {
+  ModuleOptions,
+  OptionField,
+  OptionFieldTypeId
+} from 'src/app/services/hgui/module-options';
+import {Group, HomegenieApi, Module, ModuleParameter, Program} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
 import {ZwaveAdapter} from '../zwave-adapter';
-import {map} from 'rxjs/operators';
 import {Scenario} from "../../services/hgui/automation";
+import {SensorData} from "../../widgets/sensor/sensor.component";
+import {WeatherForecastData} from "../../widgets/weather-forecast/weather-forecast.component";
+import {WidgetOptions} from "../../widgets/widget-options";
+import {EnergyMonitorData} from "../../widgets/energy-monitor/energy-monitor.component";
 
 export {Module, Group, Program};
 
@@ -36,7 +45,7 @@ export class HomegenieAdapter implements Adapter {
     'Program',
     'Sensor',
     'DoorWindow',
-//    "Thermostat"
+    "Thermostat"
   ];
   private eventSource;
   private webSocket;
@@ -126,6 +135,8 @@ export class HomegenieAdapter implements Adapter {
                 // TODO: optimize this ^^^^
 
 
+              } else {
+                console.log('@@@', 'Unsupported module type!', m);
               }
             });
             this.apiCall(HomegenieApi.Config.Groups.List)
@@ -160,9 +171,10 @@ export class HomegenieAdapter implements Adapter {
               if (!p.IsEnabled) return;
               const programModule = this.getModule(`${p.Domain}/${p.Address}`);
               if (!programModule) return;
-              const hasProgramWidget = programModule.Properties
-                .find((prop) => prop.Name === 'Widget.DisplayModule' && prop.Value === 'homegenie/generic/program');
-              if (hasProgramWidget) return p;
+              const programWidget = this.getModuleWidget(programModule);
+              if (programWidget && programWidget.Value === 'homegenie/generic/program') {
+                return p;
+              }
             }).map((p) => ({
               id: `${p.Address}`,
               name: p.Name,
@@ -203,8 +215,123 @@ export class HomegenieAdapter implements Adapter {
     }
   }
 
-  getModuleIcon(module: HguiModule): string {
-    return this.getBaseUrl() + 'hg/html/pages/control/widgets/homegenie/generic/images/unknown.png';
+  getWidgetOptions(module: HguiModule): WidgetOptions {
+    const m = this.getModule(module.id);
+    if (!m) return;
+    const widget = this.getModuleWidget(m);
+    // Return widget options from module widget...
+    if (widget) {
+      switch (widget.Value) {
+        case 'homegenie/generic/energymonitor':
+          return {
+            // TODO: create constant for this, eg: `HgUi.WidgetTypes.EnergyMonitor`
+            widget: 'energy-monitor',
+            icon: this.getModuleIcon(m),
+            data: {
+              wattLoad: module.field('EnergyMonitor.WattLoad'),
+              operatingLights: module.field('EnergyMonitor.OperatingLights'),
+              operatingAppliances: module.field('EnergyMonitor.OperatingSwitches'),
+              todayCounter: module.field('EnergyMonitor.KwCounter.Today'),
+              totalCounter: module.field('EnergyMonitor.KwCounter')
+            } as EnergyMonitorData
+          }
+        case 'homegenie/environment/weather':
+          // populate forecast data
+          const forecastData = [1, 2, 3].map((i) => {
+            const weekday = module.field(`Conditions.Forecast.${i}.Weekday`);
+            const day = module.field(`Conditions.Forecast.${i}.Day`);
+            const month = module.field(`Conditions.Forecast.${i}.Month`);
+            return {
+              date: `${weekday.value}, ${day.value} ${month.value}`,
+              // TODO: !!!!!!!! implement icon mapping !!!!!!!!!!
+              icon: module.field(`Conditions.Forecast.${i}.IconType`),
+              description: module.field(`Conditions.Forecast.${i}.Description`),
+              temperature: module.field(`Conditions.Forecast.${i}.Temperature`),
+              minC: module.field(`Conditions.Forecast.${i}.Temperature.Min`),
+              maxC: module.field(`Conditions.Forecast.${i}.Temperature.Max`)
+            }
+          });
+          // build WeatherForecastData structure
+          let data: WeatherForecastData = {
+            location: {
+              name: module.field('Conditions.City'),
+              country: module.field('Conditions.Country')
+            },
+            astronomy: {
+              sunrise: module.field('Astronomy.Sunrise'),
+              sunset: module.field('Astronomy.Sunset')
+            },
+            today: {
+              // TODO: FIX DATE
+              date: new Date(),
+              // TODO: !!!!!!!! implement icon mapping !!!!!!!!!!
+              icon: module.field(`Conditions.IconType`),
+              description: module.field('Conditions.Description'),
+              temperatureC: module.field(FLD.Sensor.Temperature),
+              pressureMb: module.field(FLD.Sensor.Pressure),
+              wind: {
+                speedKph: module.field(FLD.Sensor.Wind.Speed),
+                direction: module.field(FLD.Sensor.Wind.Direction)
+              },
+              precipitation: {
+                snowMm: module.field(FLD.Sensor.Precipitation.Snow),
+                rainMm: module.field(FLD.Sensor.Precipitation.Rain)
+              }
+            },
+            forecast: forecastData
+          };
+          return {
+            // TODO: create constant for this, eg: `HgUi.WidgetTypes.WeatherForecast`
+            widget: 'weather-forecast',
+            icon: this.getModuleIcon(m),
+            data
+          }
+        case 'homegenie/generic/thermostat':
+          return {
+            // TODO: create constant for this, eg: `HgUi.WidgetTypes.Thermostat`
+            widget: 'thermostat',
+            icon: this.getModuleIcon(m)
+          }
+      }
+    }
+    // ...or return widget options from module type
+    if (module.type === ModuleType.Sensor || module.type === ModuleType.DoorWindow) {
+      const sensorFields = module.fields.filter((f) => f.key.startsWith('Sensor.'));
+      return {
+        // TODO: create constant for this, eg: `HgUi.WidgetTypes.Sensor`
+        widget: 'sensor',
+        icon: this.getModuleIcon(m),
+        data: {
+          sensors: sensorFields.map((f) => ({
+            field: f,
+            unit: '' // TODO: implement locale unit support
+          }))
+        } as SensorData
+      }
+    } else if (
+      module.type === ModuleType.Switch ||
+      module.type === ModuleType.Dimmer ||
+      module.type === ModuleType.Light ||
+      module.type === ModuleType.Siren
+    ) {
+      const color = widget && widget.Value === 'homegenie/generic/colorlight';
+      let dimming = color || (module.type !== ModuleType.Light && module.type !== ModuleType.Switch);
+      return {
+        /*
+        the 'siwtch' widget is used for all switchable types,
+        including dimmers and color lights
+        // TODO: rename 'switch' to something else and
+        // TODO: implement a static WidgetType class
+        */
+        // TODO: create constant for this, eg: `HgUi.WidgetTypes.Dimmer` and `HgUi.WidgetTypes.Switch`
+        widget: 'switch',
+        icon: this.getModuleIcon(m),
+        features: {
+          color: color,
+          dimming: dimming
+        }
+      }
+    }
   }
 
   apiCall(apiMethod: string, postData?: any): Subject<ApiResponse> {
@@ -411,52 +538,6 @@ export class HomegenieAdapter implements Adapter {
     }
   }
 
-  private MatchValues(valueList, matchValue): boolean {
-    // regexp matching
-    if (valueList.trim().startsWith('/')) {
-      valueList = valueList.replace(/^\/+|\/+$/g, '');
-      return matchValue.match(valueList);
-    }
-    // classic comma separated value list matching
-    valueList = valueList.toLowerCase();
-    matchValue = matchValue.toLowerCase();
-    let inclusionList = [valueList];
-    if (valueList.indexOf(',') > 0) {
-      inclusionList = valueList.split(',');
-    } else if (valueList.indexOf('|') > 0) {
-      inclusionList = valueList.split('|');
-    }
-    // build exclusion list and remove empty entries
-    const exclusionList = [];
-    for (let idx = 0; idx < inclusionList.length; idx++){
-      const val = inclusionList[idx];
-      if (val.trim().indexOf('!') === 0) {
-        inclusionList.splice(idx, 1);
-        exclusionList.push(val.trim().substring(1));
-      } else if (val.trim().length === 0) {
-        inclusionList.splice(idx, 1);
-      }
-    }
-    // check if matching
-    let isMatching = (inclusionList.length === 0);
-    for (let idx = 0; idx < inclusionList.length; idx++){
-      const val = inclusionList[idx];
-      if (val.trim() === matchValue.trim()) {
-        isMatching = true;
-        break;
-      }
-    }
-    // check if not in exclusion list
-    for (let idx = 0; idx < exclusionList.length; idx++){
-      const val = exclusionList[idx];
-      if (val.trim() === matchValue.trim()) {
-        isMatching = false;
-        break;
-      }
-    }
-    return isMatching;
-  }
-
   private getProgramOptions(m: HguiModule): Subject<ModuleOptions> {
     const subject = new Subject<ModuleOptions>();
     const programModule = this.getModule(m.id);
@@ -479,11 +560,11 @@ export class HomegenieAdapter implements Adapter {
           field: m.field(o.Name),
           description: o.Description,
           type: {
-            id: fieldType[0],
-            options: fieldType.slice(1)
+            id: this.getHgUiFieldType(fieldType),
+            options: this.getHgUiFieldOptions(fieldType)
           },
         } as OptionField;
-      });
+      }).sort((a, b) => a.description > b.description ? 1 : -1);
       setTimeout(() => {
         subject.next({
           id: programModule.Address,
@@ -550,8 +631,8 @@ export class HomegenieAdapter implements Adapter {
                     pid: p.Address,
                     field: mf,
                     type: {
-                      id: type[0],
-                      options: type.slice(1)
+                      id: this.getHgUiFieldType(type),
+                      options: this.getHgUiFieldOptions(type)
                     },
                     name: p.Name,
                     description: f.Description
@@ -559,6 +640,7 @@ export class HomegenieAdapter implements Adapter {
                 }
               }
               if (pf.items.length > 0) {
+                //pf.items = pf.items.sort((a, b) => a.description > b.description ? 1 : -1);
                 programFeatures.push(pf);
               }
             }
@@ -570,5 +652,96 @@ export class HomegenieAdapter implements Adapter {
         }
       );
     return subject;
+  }
+
+  private getModuleWidget(m: Module) {
+    return m.Properties
+      .find((prop) => prop.Name === 'Widget.DisplayModule');
+  }
+
+  private getModuleIcon(m: Module): string {
+    return this.getBaseUrl() + 'hg/html/pages/control/widgets/homegenie/generic/images/unknown.png';
+  }
+
+  private MatchValues(valueList, matchValue): boolean {
+    // regexp matching
+    if (valueList.trim().startsWith('/')) {
+      valueList = valueList.replace(/^\/+|\/+$/g, '');
+      return matchValue.match(valueList);
+    }
+    // classic comma separated value list matching
+    valueList = valueList.toLowerCase();
+    matchValue = matchValue.toLowerCase();
+    let inclusionList = [valueList];
+    if (valueList.indexOf(',') > 0) {
+      inclusionList = valueList.split(',');
+    } else if (valueList.indexOf('|') > 0) {
+      inclusionList = valueList.split('|');
+    }
+    // build exclusion list and remove empty entries
+    const exclusionList = [];
+    for (let idx = 0; idx < inclusionList.length; idx++){
+      const val = inclusionList[idx];
+      if (val.trim().indexOf('!') === 0) {
+        inclusionList.splice(idx, 1);
+        exclusionList.push(val.trim().substring(1));
+      } else if (val.trim().length === 0) {
+        inclusionList.splice(idx, 1);
+      }
+    }
+    // check if matching
+    let isMatching = (inclusionList.length === 0);
+    for (let idx = 0; idx < inclusionList.length; idx++){
+      const val = inclusionList[idx];
+      if (val.trim() === matchValue.trim()) {
+        isMatching = true;
+        break;
+      }
+    }
+    // check if not in exclusion list
+    for (let idx = 0; idx < exclusionList.length; idx++){
+      const val = exclusionList[idx];
+      if (val.trim() === matchValue.trim()) {
+        isMatching = false;
+        break;
+      }
+    }
+    return isMatching;
+  }
+
+  private getHgUiFieldType(typeOptions: any[]): OptionFieldTypeId {
+    // map HG custom type to HGUI type
+    const typeId = typeOptions[0];
+    switch (typeId) {
+      case 'text':
+        return OptionFieldTypeId.Text;
+      case 'password':
+        return OptionFieldTypeId.Password;
+      case 'checkbox':
+        return OptionFieldTypeId.CheckBox;
+      case 'slider':
+        return OptionFieldTypeId.Slider;
+      case 'wunderground.city':
+        // add callback to populate autocomplete list (must return an Observable<string[]> with location names list)
+        typeOptions[1] = value => {
+          return this.apiCall('HomeAutomation.OpenWeatherMap/2.5/Search.Location/' + value)
+            .pipe(
+              // transform response to simple string array
+              map(o => o.response.map((l) => {
+                return l.description;
+              }))
+            );
+        };
+        return OptionFieldTypeId.Location;
+      case 'module.text':
+        return OptionFieldTypeId.ModuleSelect;
+      case 'program.text':
+        return OptionFieldTypeId.ScenarioSelect;
+      case 'capture':
+        return OptionFieldTypeId.FieldCapture;
+    }
+  }
+  private getHgUiFieldOptions(typeOptions: string[]): any[] {
+    return typeOptions.slice(1);
   }
 }

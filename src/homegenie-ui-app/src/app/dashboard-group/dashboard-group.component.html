@@ -1,5 +1,9 @@
 <div *ngIf="group">
   <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <app-dynamic-widget *ngFor="let module of hgui.getGroupModules(group)" [module]="module" (showOptions)="onShowOptions($event)"></app-dynamic-widget>
+    <app-dynamic-widget *ngFor="let module of hgui.getGroupModules(group)"
+                        [module]="module"
+                        [options]="module.getWidgetOptions()"
+                        (showOptions)="onShowOptions($event)">
+    </app-dynamic-widget>
   </div>
 </div>

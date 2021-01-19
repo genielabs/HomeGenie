@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ModuleOptions} from "../../../../services/hgui/module";
+import {ModuleOptions} from "../../../../services/hgui/module-options";
 import {CMD} from "../../../../services/hgui/hgui.service";
 import {OptionsDialogBase} from "../options-dialog-base";
 
@@ -9,7 +9,6 @@ import {OptionsDialogBase} from "../options-dialog-base";
   styleUrls: ['./program-options-dialog.component.scss']
 })
 export class ProgramOptionsDialogComponent extends OptionsDialogBase implements OnInit {
-
   options: ModuleOptions = new ModuleOptions();
 
   ngOnInit(): void {
@@ -17,20 +16,8 @@ export class ProgramOptionsDialogComponent extends OptionsDialogBase implements 
       this.options = res;
       const o = this.options;
       setTimeout(() => {
-          const titleKey = `${this.translationPrefix}.$options.${o.id}.Title`;
-          this.translate.get(titleKey).subscribe((tr) => {
-            if (tr !== titleKey) {
-              o.name = tr;
-            }
-          });
-          const descriptionKey = `${this.translationPrefix}.$options.${o.id}.Description`;
-          this.translate.get(descriptionKey).subscribe((tr) => {
-            if (tr !== descriptionKey) {
-              o.description = tr;
-            }
-          });
+        this.translateModuleOption(o);
       });
     });
   }
-
 }

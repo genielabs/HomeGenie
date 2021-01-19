@@ -1,3 +1,30 @@
+@import "src/styles/settings/variables";
+
+:host {
+  /*
+  ::ng-deep .mat-card {
+    box-shadow: none;
+  }
+  */
+  ::ng-deep .mat-card-avatar {
+    display: none;
+  }
+  ::ng-deep .mat-card-header-text {
+    margin-left: 0 !important;
+  }
+  ::ng-deep .mat-card-header {
+    max-height: 48px !important;
+  }
+}
+
+.widget-small {
+  width: 280px;
+  height: 148px;
+  margin: 12px;
+  box-shadow: none;
+  border: solid 1px rgba(100,100,100,0.15);
+}
+
 .mat-card-content {
   position: absolute;
   bottom: 12px;
@@ -14,19 +41,13 @@
   text-align: center;
   margin: 0;
   padding-top: 6px;
-  font-size: 320%;
-  color: var(--primary);
+  font-size: 250%;
+  color: mat-color($app-primary);
   padding-bottom: 6px;
 }
 .sensor-field {
   text-transform: uppercase;
-  color: var(--accent);
-}
-
-.example-card {
-  width: 280px;
-  height: 148px;
-  margin: 12px;
+  color: mat-color($app-accent);
 }
 
 .example-header-image {

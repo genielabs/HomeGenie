@@ -1,6 +1,9 @@
-import {Module, ModuleField, OptionField} from "../../../services/hgui/module";
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
+
+import {Module, ModuleField} from "../../../services/hgui/module";
+import {OptionField} from "../../../services/hgui/module-options";
 import {HguiService} from "../../../services/hgui/hgui.service";
 
 export class FieldChangeEvent {
@@ -23,7 +26,11 @@ export class ControlFieldBase implements OnInit {
   @Input()
   multiple: boolean = false;
 
-  constructor(private translate: TranslateService, public hgui: HguiService) {}
+  constructor(
+    protected _translate: TranslateService,
+    protected _snackBar: MatSnackBar,
+    public hgui: HguiService
+  ) { }
 
   private _description = '';
   get description(): string {
@@ -43,7 +50,7 @@ export class ControlFieldBase implements OnInit {
     this._description = this.data.description;
     if (this.data.field) {
       const key = `${this.translationPrefix}.$options.${this.data.pid}.${this.data.field.key}`;
-      this.translate.get(key).subscribe((res) => {
+      this._translate.get(key).subscribe((res) => {
         if (res !== key) {
           this._description = res;
         }
@@ -54,5 +61,4 @@ export class ControlFieldBase implements OnInit {
   onFieldChange(e): void {
     this.fieldChange.emit({ field: this.data.field, value: e.value });
   }
-
 }

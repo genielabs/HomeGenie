@@ -20,7 +20,7 @@ export class GroupListItemComponent implements OnInit, OnDestroy {
     this.update();
     this.updateTimeout = setInterval(() => {
       this.update();
-    }, 5000);
+    }, 1000);
   }
   ngOnDestroy(): void {
     clearInterval(this.updateTimeout);
@@ -61,9 +61,13 @@ export class GroupListItemComponent implements OnInit, OnDestroy {
     return totalValue;
   }
 
+  private getMostRecentValue(modules: Module[], fieldName: string): number | void {
+    // TODO: ...
+  }
+
   private getDeviceTypeCount(modules: Module[], deviceType: string): number | void {
     let count = null;
-    // TODO:
+    // TODO: ...
     return count;
   }
 

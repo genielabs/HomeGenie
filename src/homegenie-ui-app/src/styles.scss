@@ -5,6 +5,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import "styles/settings/variables";
 
+@import "~animate.css/animate.min.css";
+
 /* customizations to material components */
 .mat-checkbox {
     display: block;
@@ -15,19 +17,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* other custom global styles */
 .label {
     display: block;
-    color: var(--accent);
+    color: mat-color($app-accent);
     font-size: 80%;
     margin-top: 6px;
     margin-bottom: 6px;
 }
 .color-accent {
-  color: var(--accent);
+  color: mat-color($app-accent) !important;
 }
 .color-primary {
-  color: var(--primary);
+  color: mat-color($app-primary) !important;
 }
 .color-warn {
-  color: var(--warn);
+  color: mat-color($app-warn) !important;
 }
 .color-todo-note {
   color: orange;

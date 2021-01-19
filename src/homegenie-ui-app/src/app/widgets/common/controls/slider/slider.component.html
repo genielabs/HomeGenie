@@ -13,5 +13,7 @@
   </div>
 </div>
 <div *ngIf="isBinary" fxLayout="row" fxLayoutAlign="start center">
-  <mat-slide-toggle>{{ description }}</mat-slide-toggle>
+  <mat-slide-toggle
+    [checked]="value > 0"
+    (change)="onFieldChange($event)">{{ description }}</mat-slide-toggle>
 </div>

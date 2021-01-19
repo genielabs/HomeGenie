@@ -28,9 +28,9 @@
   <mat-accordion [ngStyle]="{ display: sectionTab === 1 ? '' : 'none' }" [multi]="false">
     <mat-expansion-panel *ngFor="let o of optionsList; let i = index" [expanded]="i === 0">
       <mat-expansion-panel-header>
-        <mat-panel-title fxLayout="row" fxLayoutAling="start center" fxLayoutGap="8px">
+        <mat-panel-title fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <mat-icon style="opacity: 0.4">settings</mat-icon>
-          <span>{{ o.name }}</span>
+          <span class="color-accent" style="font-size: 130%;">{{ o.name }}</span>
         </mat-panel-title>
         <!--
         <mat-panel-description>
@@ -40,7 +40,8 @@
       </mat-expansion-panel-header>
       <div *ngIf="module" fxLayout="column" fxLayoutGap="6px">
 
-        <p>{{ o.description }}</p>
+        <p class="color-primary" style="font-size: 120%; padding-bottom: 16px;">{{ o.description }}</p>
+
         <div *ngFor="let f of o.items">
           <app-dynamic-control [data]="f" [module]="module"
                                (fieldChange)="onFieldChange($event)">

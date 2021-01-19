@@ -27,7 +27,7 @@ export class Module {
    */
   field?(key: string, value?: any, timestamp?: any): any {
     if (timestamp == null) { timestamp = new Date().getTime(); }
-    const field = this.fields.find((f) => f.key.toLowerCase() === key.toLowerCase());
+    const field = this.fields.find((f) => f.key && f.key.toLowerCase() === key.toLowerCase());
     if (field && typeof value !== 'undefined') {
       if (this.fields == null) { this.fields = []; }
       if (field.timestamp === timestamp && field.value === value) {
@@ -64,6 +64,11 @@ export class Module {
   getAdapter?(): Adapter {
     return this._adapter;
   }
+  getWidgetOptions() {
+    if (this._adapter) {
+      return this._adapter.getWidgetOptions(this)
+    }
+  }
 
   set adapter(adapter: Adapter) {
     this._adapter = adapter;
@@ -78,31 +83,11 @@ export class ModuleType {
   static Color = 'color';
   static Switch = 'switch';
   static Siren = 'siren';
+  static DoorWindow = 'doorwindow';
 }
 
 export class ModuleField {
   key: string;
   value?: any;
   timestamp = 0;
-}
-
-export class ModuleOptions {
-  public id: string;
-  public name: string;
-  public description: string;
-  public items: OptionField[];
-}
-
-export class OptionField {
-  pid: string;
-  field: any;
-  type: any;
-  name: string;
-  description: string;
-
-}
-
-export class OptionFieldType {
-  id: string;
-  options: string[];
 }

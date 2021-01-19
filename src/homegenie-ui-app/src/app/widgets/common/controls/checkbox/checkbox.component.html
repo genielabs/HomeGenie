@@ -1,5 +1,3 @@
-<mat-checkbox *ngIf="data.type.id === 'checkbox'"
-              [checked]="value"
-              (change)="onFieldChange($event)">
+<mat-checkbox [checked]="value" (change)="onFieldChange($event)">
   {{ description }}
 </mat-checkbox>

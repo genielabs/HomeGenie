@@ -1,4 +1,20 @@
-<app-switch *ngIf="module.type === ModuleType.Switch || module.type === ModuleType.Dimmer || module.type === ModuleType.Light || module.type === ModuleType.Siren"
-            [module]="module" (showOptions)="onShowOptionsClick()"></app-switch>
-<app-sensor *ngIf="module.type === ModuleType.Sensor"
-            [module]="module" (showOptions)="onShowOptionsClick()"></app-sensor>
+<app-switch *ngIf="options && options.widget === 'switch'"
+            [module]="module"
+            [options]="options"
+            (showOptions)="onShowOptionsClick()"></app-switch>
+<app-sensor *ngIf="options && options.widget === 'sensor'"
+            [module]="module"
+            [options]="options"
+            (showOptions)="onShowOptionsClick()"></app-sensor>
+<app-energy-monitor *ngIf="options && options.widget === 'energy-monitor'"
+            [module]="module"
+            [options]="options"
+            (showOptions)="onShowOptionsClick()"></app-energy-monitor>
+<app-thermostat *ngIf="options && options.widget === 'thermostat'"
+                    [module]="module"
+                    [options]="options"
+                    (showOptions)="onShowOptionsClick()"></app-thermostat>
+<app-weather-forecast *ngIf="options && options.widget === 'weather-forecast'"
+                [module]="module"
+                [options]="options"
+                (showOptions)="onShowOptionsClick()"></app-weather-forecast>

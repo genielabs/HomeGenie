@@ -26,14 +26,20 @@ using HomeGenie.Automation;
 using HomeGenie.Service.Logging;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-using HomeGenie.Data;
+using System.Linq;
+using System.Text.RegularExpressions;
 using HomeGenie.Service.Constants;
+using Group = HomeGenie.Data.Group;
 
 namespace HomeGenie.Service
 {
     public class BackupManager
     {
         private HomeGenieService homegenie;
+        private readonly Regex dataFilesPattern = new Regex(
+            @"$(?<=\.(xml|json|config|cfg|db))",
+            RegexOptions.IgnoreCase
+        );
 
         public BackupManager(HomeGenieService hg)
         {
@@ -87,7 +93,10 @@ namespace HomeGenie.Service
             string migLibFolder = Path.Combine("lib", "mig");
             if (Directory.Exists(migLibFolder))
             {
-                foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
+                var files = Directory.EnumerateFiles(migLibFolder)
+                    .Where(f => dataFilesPattern.IsMatch(f))
+                    .ToList();
+                foreach (string f in files)
                 {
                     // exclude Pepper1 Db from backup (only the p1db_custom.xml file will be included)
                     // in the future the p1db.xml file should be moved to a different path
@@ -205,7 +214,10 @@ namespace HomeGenie.Service
             string migLibFolder = Path.Combine("lib", "mig");
             if (Directory.Exists(migLibFolder))
             {
-                foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
+                var files = Directory.EnumerateFiles(migLibFolder)
+                    .Where(f => dataFilesPattern.IsMatch(f))
+                    .ToList();
+                foreach (string f in files)
                 {
                     File.Delete(f);
                     homegenie.RaiseEvent(
@@ -222,7 +234,10 @@ namespace HomeGenie.Service
             migLibFolder = Path.Combine(archiveFolder, "lib", "mig");
             if (Directory.Exists(migLibFolder))
             {
-                foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
+                var files = Directory.EnumerateFiles(migLibFolder)
+                    .Where(f => dataFilesPattern.IsMatch(f))
+                    .ToList();
+                foreach (string f in files)
                 {
                     File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
                     homegenie.RaiseEvent(
