@@ -1,5 +1,62 @@
 :host {
-  display: block;
-  width: 280px;
+  ::ng-deep .mat-card-header-text {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 38px !important;
+  }
+  ::ng-deep .mat-card-header {
+    max-height: 48px !important;
+  }
+}
+
+.digits-display {
+  width: 148px;
+  max-width: 148px;
+  border: solid 1px rgba(100,100,100,0.15);
+  border-radius: 32px;
+}
+.display-panel {
+  width: 48px;
+}
+.set-point {
+  font-size: 120%;
   text-align: center;
+  width: 42px;
+  padding: 4px;
+  border: solid 1px rgba(100,100,100,0.15);
+  border-radius: 32px;
+}
+
+
+.text-big {
+  font-size: 300%;
+  line-height: 100%;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.label {
+  margin: 0;
+}
+
+span {
+  font-size: 9pt;
+}
+
+
+.widget-small {
+  width: 280px;
+  height: 296px;
+  margin: 12px;
+}
+
+.widget-big {
+  width: 320px;
+  height: 296px;
+  margin: 12px;
+}
+.widget-medium {
+  width: 280px;
+  height: 148px;
+  margin: 12px;
 }

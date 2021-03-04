@@ -1,8 +1,8 @@
 import {
-  Component,
+  Component, ElementRef,
   HostListener,
   OnDestroy,
-  OnInit
+  OnInit, ViewChild
 } from '@angular/core';
 
 import {Color, Label} from "ng2-charts";
@@ -26,7 +26,9 @@ export class EnergyMonitorData {
   styleUrls: ['./energy-monitor.component.scss']
 })
 export class EnergyMonitorComponent extends WidgetBase implements OnInit, OnDestroy {
-  status = '';
+  @ViewChild('primary', { static: true }) colorPrimary: ElementRef;
+  @ViewChild('accent', { static: true }) colorAccent: ElementRef;
+  @ViewChild('warn', { static: true }) colorWarn: ElementRef;
 
   isLoading = false;
 
@@ -168,16 +170,32 @@ export class EnergyMonitorComponent extends WidgetBase implements OnInit, OnDest
   private statsUpdateInterval = setInterval(this.updateStats.bind(this), 30000);
 
   ngOnInit(): void {
+
+    // get colors from current material theme
+    // TODO: possibly move this to a service or utility class
+    const primaryColor = getComputedStyle(this.colorPrimary.nativeElement).color;
+    const accentColor = getComputedStyle(this.colorAccent.nativeElement).color;
+    const warnColor = getComputedStyle(this.colorWarn.nativeElement).color;
+    // set chart colors using material theme palette
+    this.lineChartColors[0].backgroundColor =
+      this.lineChartColors[0].pointBackgroundColor = primaryColor.replace(')', ', 0.1)');
+    this.lineChartColors[0].borderColor =
+      this.lineChartColors[0].pointBorderColor = primaryColor;
+    this.lineChartColors[1].backgroundColor =
+      this.lineChartColors[1].pointBackgroundColor = accentColor.replace(')', ', 0.1)');
+    this.lineChartColors[1].borderColor =
+      this.lineChartColors[1].pointBorderColor = accentColor;
+    this.lineChartColors[2].backgroundColor =
+      this.lineChartColors[2].pointBackgroundColor = warnColor.replace(')', ', 0.1)');
+    this.lineChartColors[2].borderColor =
+      this.lineChartColors[2].pointBorderColor = warnColor;
+
     this.updateStats();
   }
   ngOnDestroy() {
     if (this.statsUpdateInterval) {
       clearInterval(this.statsUpdateInterval);
     }
-  }
-
-  onModuleOptionsClick(e): void {
-    this.showOptions.emit(null);
   }
 
   private updateStats(): void {

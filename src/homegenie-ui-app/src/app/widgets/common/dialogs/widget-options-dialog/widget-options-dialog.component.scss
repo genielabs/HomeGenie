@@ -1,17 +1,29 @@
-h2 {
-  margin-top: 24px;
+:host {
+  display: block;
+  ::ng-deep .mat-tab-label {
+  }
+  ::ng-deep .mat-ink-bar {
+    height: 4px !important;
+  }
 }
-.mat-expanded .mat-expansion-panel-header-title {
-  font-weight: bold;
+.mat-dialog-title {
+  height: 48px;
+  max-height: 48px;
+  margin: 0;
+  h2 {
+    padding: 0;
+    margin: 0;
+  }
 }
-.mat-expanded .mat-expansion-panel-header-title .mat-icon {
-  display: none;
+.mat-dialog-actions {
+  height: 48px;
+  max-height: 48px;
+  font-weight: normal;
+  padding: 0;
 }
-
-h1 {
-  margin: 0 !important;
-}
-span.smaller {
-  font-size: 12px;
-  margin-right: 8px;
+.mat-dialog-content {
+  margin: 0;
+  padding: 0 12px;
+  min-height: 280px;
+  max-height: calc(100vh - 100px);
 }

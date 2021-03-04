@@ -1,15 +1,13 @@
-<mat-card *ngIf="!isSmallScreen else compactView" class="widget-big mat-elevation-z4">
+<mat-card *ngIf="!isSmallScreen else compactView" class="widget-big mat-elevation-z3">
   <mat-card-header>
     <mat-card-title>{{ module.name }}</mat-card-title>
-    <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-      <!-- div class="status-led" [ngClass]="{ 'active-led': status === 'active' }"></div -->
-      <!-- span>{{ module.type }}</span -->
-      <!-- mat-icon color="primary">flash_on</mat-icon -->
-      <span>12.4 W</span>
+    <mat-card-subtitle>
+      <app-activity-status [module]="module"></app-activity-status>
     </mat-card-subtitle>
-    <button mat-icon-button style="opacity:0.35;position: absolute;right:8px; top:8px;" (click)="onModuleOptionsClick($event)">
-      <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
-    </button>
+    <app-widget-options-menu style="position: absolute;right:8px; top:8px;"
+                             [module]="module"
+                             (menuOptionSelect)="onMenuOptionSelected($event)">
+    </app-widget-options-menu>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="start stretch">
 
@@ -69,7 +67,7 @@
   </mat-card-content>
 </mat-card>
 <ng-template #compactView>
-  <mat-card class="widget-medium mat-elevation-z4">
+  <mat-card class="widget-medium mat-elevation-z3">
     <mat-card-header>
       <mat-card-title>{{ module.name }}</mat-card-title>
       <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -78,12 +76,20 @@
         <!-- mat-icon color="primary">flash_on</mat-icon -->
         <span>12.4 W</span>
       </mat-card-subtitle>
-      <button mat-icon-button style="opacity:0.35;position: absolute;right:8px; top:8px;" (click)="onModuleOptionsClick($event)">
-        <mat-icon fontSet="material-icons-outlined">tune</mat-icon>
-      </button>
+      <app-widget-options-menu style="position: absolute;right:8px; top:8px;"
+                               [module]="module"
+                               (menuOptionSelect)="onMenuOptionSelected($event)">
+      </app-widget-options-menu>
     </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutAlign="center stretch">
       {{ matcher.matches }}
+      <br>
+      // TODO: Energy Monitor compact view
     </mat-card-content>
   </mat-card>
 </ng-template>
+
+<!-- the following hidden div are used to get material theme colors from typescript -->
+<div #primary class="mat-button mat-primary" style="display:none"></div>
+<div #accent class="mat-button mat-accent" style="display:none"></div>
+<div #warn class="mat-button mat-warn" style="display:none"></div>

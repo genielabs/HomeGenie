@@ -54,19 +54,27 @@ import { TextComponent } from './widgets/common/controls/text/text.component';
 import { EventCaptureComponent } from './widgets/common/controls/event-capture/event-capture.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { DynamicWidgetComponent } from './widgets/dynamic-widget/dynamic-widget.component';
-import { ProgramOptionsDialogComponent } from './widgets/common/dialogs/program-options-dialog/program-options-dialog.component';
-import { OptionsDialogBase } from './widgets/common/dialogs/options-dialog-base';
+import { DynamicOptionsBase } from './widgets/common/parts/dynamic-options-base.component';
 import { DynamicControlComponent } from './widgets/common/controls/dynamic-control/dynamic-control.component';
+
+import { NgxSvgModule } from 'ngx-svg';
 
 import { MyReteEditorModule } from "./automation/visual-editor/rete.module";
 
 import { NgxColorsModule } from 'ngx-colors';
 import { ColorPickerDialogComponent } from './widgets/common/dialogs/color-picker-dialog/color-picker-dialog.component';
 import { ColorPickerModule } from '@iplab/ngx-color-picker';
+
 import { EnergyMonitorComponent } from './widgets/energy-monitor/energy-monitor.component';
 import { ThermostatComponent } from './widgets/thermostat/thermostat.component';
 import { AlarmSystemComponent } from './widgets/alarm-system/alarm-system.component';
 import { WeatherForecastComponent } from './widgets/weather-forecast/weather-forecast.component';
+import { ActivityStatusComponent } from './widgets/common/parts/activity-status/activity-status.component';
+import { ModuleOptionsComponent } from './widgets/common/parts/module-options/module-options.component';
+import { ProgramOptionsComponent } from './widgets/common/parts/program-options/program-options.component';
+import { WidgetOptionsMenuComponent } from './widgets/common/parts/widget-options-menu/widget-options-menu.component';
+import { ModuleSchedulingComponent } from './widgets/common/parts/module-scheduling/module-scheduling.component';
+import { SchedulingBarComponent } from './widgets/common/parts/scheduling-bar/scheduling-bar.component';
 
 export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader {
   const baseTranslateUrl = './assets/i18n';
@@ -108,14 +116,19 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
     EventCaptureComponent,
     ChartComponent,
     DynamicWidgetComponent,
-    ProgramOptionsDialogComponent,
-    OptionsDialogBase,
+    DynamicOptionsBase,
     DynamicControlComponent,
     ColorPickerDialogComponent,
     EnergyMonitorComponent,
     ThermostatComponent,
     AlarmSystemComponent,
-    WeatherForecastComponent
+    WeatherForecastComponent,
+    ActivityStatusComponent,
+    ModuleOptionsComponent,
+    ProgramOptionsComponent,
+    WidgetOptionsMenuComponent,
+    ModuleSchedulingComponent,
+    SchedulingBarComponent
   ],
   imports: [
     BrowserModule,
@@ -135,6 +148,7 @@ export function moduleHttpLoaderFactory(http: HttpClient): ModuleTranslateLoader
         deps: [HttpClient]
       }
     }),
+    NgxSvgModule,
     MomentModule.forRoot(),
     UnitsConvererModule,
     AngularSvgIconModule.forRoot(),

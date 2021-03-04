@@ -1,11 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { min-height: 100vh; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-@import "styles/settings/variables";
-
 @import "~animate.css/animate.min.css";
+
+@import '~@angular/material/theming';
+
+//@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@include mat-core();
+
+@import "src/assets/scss/functions";
+
+// You have to define one of those for every theme you offer
+@import "themes/dark-theme";
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+  @include generate-theme-vars($dark-theme);
+}
+@import "themes/light-theme";
+.light-theme {
+  @include angular-material-theme($light-theme);
+  @include generate-theme-vars($light-theme);
+}
+
+
+html, body { min-height: 100vh; }
+body {
+  background-color: var(--background-color);
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /* customizations to material components */
 .mat-checkbox {
@@ -17,19 +38,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* other custom global styles */
 .label {
     display: block;
-    color: mat-color($app-accent);
+    color: var(--accent-color);
     font-size: 80%;
     margin-top: 6px;
     margin-bottom: 6px;
 }
 .color-accent {
-  color: mat-color($app-accent) !important;
+  color: var(--accent-color) !important;
 }
 .color-primary {
-  color: mat-color($app-primary) !important;
+  color: var(--primary-color) !important;
 }
 .color-warn {
-  color: mat-color($app-warn) !important;
+  color: var(--warn-color) !important;
 }
 .color-todo-note {
   color: orange;
@@ -40,4 +61,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .link-active {
   background-color: rgba(0,0,0,0.05);
+}
+.translucent {
+  opacity: 0.5;
+}
+.dialog-no-padding .mat-dialog-container {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
 }

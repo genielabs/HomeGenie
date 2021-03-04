@@ -1,28 +1,55 @@
-import {Component, Inject} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Module, ModuleField} from "../../../services/hgui/module";
 import {TranslateService} from "@ngx-translate/core";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ModuleOptions} from "../../../services/hgui/module-options";
+import {CMD} from "../../../services/hgui/hgui.service";
 
 @Component({
-  selector: '-options-dialog-base',
+  selector: '-dynamic-options-base',
   template: 'no-ui'
 })
-export class OptionsDialogBase {
+export class DynamicOptionsBase implements OnInit{
+  @Input()
+  module: Module;
+  @Output()
+  changesUpdate = new EventEmitter<any[]>();
 
   changes: { field: ModuleField, value: any }[] = [];
+
+  optionsList: ModuleOptions[] = [];
   translationPrefix: string;
 
+  get isChanged(): boolean {
+    return this.changes.length > 0;
+  }
+
   constructor(
-    protected translate: TranslateService,
-    public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public module: Module
-  ) {
-    if (module.getAdapter()) {
-      this.translationPrefix = module.getAdapter().translationPrefix;
+    protected translate: TranslateService
+  ) { }
+
+  ngOnInit(): void {
+    if (this.module && this.module.getAdapter()) {
+      this.translationPrefix = this.module.getAdapter().translationPrefix;
+      // populate module features list
+      this.module.control(CMD.Options.Get).subscribe((res: ModuleOptions[]) => {
+        if (this.module.type === 'program') {
+          this.optionsList[0] = res as any;
+        } else {
+          this.optionsList = res;
+        }
+        setTimeout(() => {
+          this.optionsList.forEach((o) => {
+            this.translateModuleOption(o);
+          });
+        });
+      });
     } else {
       // TODO: log this exception
     }
+  }
+
+  applyChanges(): void {
+    throw new Error('Not implemented!');
   }
 
   onFieldChange(e): void {
@@ -36,6 +63,7 @@ export class OptionsDialogBase {
         this.changes.push(e);
       }
     }
+    this.changesUpdate.emit(this.changes);
   }
 
   protected translateModuleOption(o: ModuleOptions) {

@@ -20,6 +20,15 @@ export class CMD {
     Toggle: 'Control.Toggle',
     ColorHsb: 'Control.ColorHsb'
   };
+  static Thermostat = {
+    ModeSet: 'Thermostat.ModeSet',
+    ModeGet: 'Thermostat.ModeGet',
+    SetPointSet: 'Thermostat.SetPointSet',
+    SetPointGet: 'Thermostat.SetPointGet',
+    FanModeSet: 'Thermostat.FanModeSet',
+    FanStateGet: 'Thermostat.FanStateGet',
+    OperatingStateGet: 'Thermostat.OperatingStateGet'
+  }
   static Statistics = {
     Field: {
       Get: 'Statistics.Field.Get'
@@ -39,6 +48,10 @@ export class CMD {
       List: 'Automation.Scenarios.List',
       Run: 'Automation.Scenarios.Run',
       Toggle: 'Automation.Scenarios.Toggle'
+    },
+    Scheduling: {
+      List: 'Automation.Scheduling.List',
+      ListOccurrences: 'Automation.Scheduling.ListOccurrences'
     }
   };
   static Widgets = {
@@ -65,6 +78,15 @@ export class FLD {
       Snow: 'Sensor.Precipitation.Snow'
     }
   };
+  static Thermostat = {
+    Mode: 'Thermostat.Mode',
+    FanMode: 'Thermostat.FanMode',
+    OperatingState: 'Thermostat.OperatingState',
+    SetPoint: {
+      Heating: 'Thermostat.SetPoint.Heating',
+      Cooling: 'Thermostat.SetPoint.Cooling'
+    }
+  }
   static Status = {
     Level: 'Status.Level',
     ColorHsb: 'Status.ColorHsb',

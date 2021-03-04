@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseChartDirective, Color, Label} from "ng2-charts";
 import {ChartDataSets, ChartOptions, ChartPoint} from "chart.js";
 import {Module, ModuleField} from "../../services/hgui/module";
@@ -21,6 +21,10 @@ export class TimeRange {
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
+  @ViewChild('primary', { static: true }) colorPrimary: ElementRef;
+  @ViewChild('accent', { static: true }) colorAccent: ElementRef;
+  @ViewChild('warn', { static: true }) colorWarn: ElementRef;
+
   @Input()
   module: Module;
 
@@ -129,7 +133,7 @@ export class ChartComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  lineChartLegend = false;
+  lineChartLegend = true;
   lineChartType = 'line';
   lineChartPlugins = []; //[pluginAnnotations];
 
@@ -139,48 +143,7 @@ export class ChartComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
-  constructor(public hgui: HguiService) {
-    this.moduleEventsSubscription = hgui.onModuleEvent.subscribe((e) => {
-      if (e.module === this.module || this.selectedModules.indexOf(e.module) >= 0) {
-        const field = this.selectedFields.find((f) => f.key === e.event.key);
-        if (field) {
-          let statIndex = 0;
-          if (this.graphMode === GraphMode.COMBINE_FIELDS) {
-            statIndex = this.selectedFields.indexOf(field);
-          } else {
-            if (e.module !== this.module) {
-              statIndex = this.selectedModules.indexOf(e.module) + 1;
-            }
-          }
-          const ds = this.lineChartData[statIndex];
-          if (ds && this.chart) {
-            const now = new Date().getTime();
-            const ds = this.chart.datasets[statIndex];
-            // add new data
-            ds.data = [{
-              x: e.event.timestamp,
-              y: e.event.value
-            } as any].concat(ds.data);
-            /*
-            ds.data.push({
-              x: e.event.timestamp,
-              y: e.event.value
-            } as any)
-            */
-            // remove old data
-            ds.data = (ds.data as ChartPoint[])
-              .filter((cp) => now - (cp.x as number) < this.selectedTimeRange.value * 60 * 60 * 1000);
-            // update chart axis
-            const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
-            timeAxis.min = (ds.data[ds.data.length - 1] as ChartPoint).x as string;
-            timeAxis.max = e.event.timestamp;
-            // force refresh
-            ds.data = ds.data.slice();
-          }
-        }
-      }
-    });
-  }
+  constructor(public hgui: HguiService) {}
 
   get hasStats(): boolean {
     return this.lineChartLabels.length > 0;
@@ -191,6 +154,7 @@ export class ChartComponent implements OnInit {
       || f.key.toLowerCase().startsWith('sensor.')
       || f.key.toLowerCase().startsWith('statistics.')
       || f.key.toLowerCase().startsWith('status.')
+      || f.key.toLowerCase().startsWith('energymonitor.')
     );
   }
   get comparableModules(): Module[] {
@@ -210,6 +174,26 @@ export class ChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // get colors from current material theme
+    // TODO: possibly move this to a service or utility class
+    const primaryColor = getComputedStyle(this.colorPrimary.nativeElement).color;
+    const accentColor = getComputedStyle(this.colorAccent.nativeElement).color;
+    const warnColor = getComputedStyle(this.colorWarn.nativeElement).color;
+    // set chart colors using material theme palette
+    this.lineChartColors[0].backgroundColor =
+      this.lineChartColors[0].pointBackgroundColor = primaryColor.replace(')', ', 0.1)');
+    this.lineChartColors[0].borderColor =
+      this.lineChartColors[0].pointBorderColor = primaryColor;
+    this.lineChartColors[1].backgroundColor =
+      this.lineChartColors[1].pointBackgroundColor = accentColor.replace(')', ', 0.1)');
+    this.lineChartColors[1].borderColor =
+      this.lineChartColors[1].pointBorderColor = accentColor;
+    this.lineChartColors[2].backgroundColor =
+      this.lineChartColors[2].pointBackgroundColor = warnColor.replace(')', ', 0.1)');
+    this.lineChartColors[2].borderColor =
+      this.lineChartColors[2].pointBorderColor = warnColor;
+
     if (this.module) {
       let defaultField;
       if (this.statsFields.length > 0) {
@@ -218,6 +202,49 @@ export class ChartComponent implements OnInit {
       }
       this.showStats();
     }
+
+    // real-time chart update
+    this.moduleEventsSubscription = this.hgui.onModuleEvent.subscribe((e) => {
+      if (e.module === this.module || this.selectedModules.indexOf(e.module) >= 0) {
+        const field = this.selectedFields.find((f) => f.key === e.event.key);
+        if (field) {
+          let statIndex = 0;
+          if (this.graphMode === GraphMode.COMBINE_FIELDS) {
+            statIndex = this.selectedFields.indexOf(field);
+          } else {
+            if (e.module !== this.module) {
+              statIndex = this.selectedModules.indexOf(e.module) + 1;
+            }
+          }
+          const ds = this.lineChartData[statIndex];
+          if (ds && this.chart) {
+            const now = new Date().getTime();
+            const timeRangeStart = this.selectedTimeRange.value * 60 * 60 * 1000;
+            // update chart
+            const ds = this.chart.datasets[statIndex];
+            // prepend new data
+            const data: ChartPoint[] = [{
+              x: e.event.timestamp,
+              y: e.event.value
+            }];
+            // delete old data out of the selected time range
+            ds.data.forEach((p, i) => {
+              if (now - p.x <= timeRangeStart) {
+                data.push(p);
+              }
+            });
+            ds.data = data;
+            if (ds.data.length > 0) {
+              // update chart axis
+              const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
+              timeAxis.min = (ds.data[ds.data.length - 1] as ChartPoint).x as string;
+              timeAxis.max = e.event.timestamp;
+            }
+          }
+        }
+      }
+    });
+
   }
   ngOnDestroy(): void {
     this.moduleEventsSubscription && this.moduleEventsSubscription.unsubscribe();
@@ -253,6 +280,7 @@ export class ChartComponent implements OnInit {
   }
 
   private showStats(): void {
+    // get charts data
     const reqs: Subject<any>[] = [];
     const labels: string[] = [];
     this.selectedFields.forEach((f) => {
@@ -292,6 +320,16 @@ export class ChartComponent implements OnInit {
         this.lineChartLabels = this.getChartLabels();
         this.lineChartData = this.lineChartData.slice();
         this.lineChartColors = this.lineChartColors.slice();
+        // update chart axis
+        if (this.chart) {
+          this.lineChartData.map((ds) => {
+            if (ds.data.length > 0) {
+              const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
+              const x = (ds.data[ds.data.length - 1] as ChartPoint).x;
+              timeAxis.min = x as string;
+            }
+          });
+        }
       }
     });
   }

@@ -1,0 +1,13 @@
+<div *ngIf="optionsList.length > 0">
+
+    <p style="font-size: 120%; margin-top: 12px">
+      {{ optionsList[0].description }}
+    </p>
+
+    <div *ngFor="let f of optionsList[0].items">
+      <app-dynamic-control [data]="f" [module]="module"
+                           (fieldChange)="onFieldChange($event)">
+      </app-dynamic-control>
+    </div>
+
+</div>

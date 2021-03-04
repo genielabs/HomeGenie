@@ -1,20 +1,24 @@
 <app-switch *ngIf="options && options.widget === 'switch'"
             [module]="module"
             [options]="options"
-            (showOptions)="onShowOptionsClick()"></app-switch>
+            (showOptions)="onShowOptionsClick($event)"></app-switch>
 <app-sensor *ngIf="options && options.widget === 'sensor'"
             [module]="module"
             [options]="options"
-            (showOptions)="onShowOptionsClick()"></app-sensor>
+            (showOptions)="onShowOptionsClick($event)"></app-sensor>
 <app-energy-monitor *ngIf="options && options.widget === 'energy-monitor'"
             [module]="module"
             [options]="options"
-            (showOptions)="onShowOptionsClick()"></app-energy-monitor>
+            (showOptions)="onShowOptionsClick($event)"></app-energy-monitor>
 <app-thermostat *ngIf="options && options.widget === 'thermostat'"
-                    [module]="module"
-                    [options]="options"
-                    (showOptions)="onShowOptionsClick()"></app-thermostat>
+            [module]="module"
+            [options]="options"
+            (showOptions)="onShowOptionsClick($event)"></app-thermostat>
 <app-weather-forecast *ngIf="options && options.widget === 'weather-forecast'"
-                [module]="module"
-                [options]="options"
-                (showOptions)="onShowOptionsClick()"></app-weather-forecast>
+            [module]="module"
+            [options]="options"
+            (showOptions)="onShowOptionsClick($event)"></app-weather-forecast>
+<app-alarm-system *ngIf="options && options.widget === 'alarm-system'"
+            [module]="module"
+            [options]="options"
+            (showOptions)="onShowOptionsClick($event)"></app-alarm-system>

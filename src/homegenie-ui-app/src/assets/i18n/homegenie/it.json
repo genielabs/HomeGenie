@@ -97,7 +97,7 @@
           "Title":
               "Sistema di allarme",
           "Description":
-              "Sistema di allarme base",
+              "Includi dispositivo nel sistema di allarme",
           "HomeGenie.SecurityAlarm":
               "Usa come allarme/strobo",
           "HomeGenie.SecuritySensor":

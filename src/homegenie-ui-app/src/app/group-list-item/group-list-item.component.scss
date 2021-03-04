@@ -21,3 +21,13 @@ a {
   margin-right: 8px;
   width: 48px;
 }
+.svg-icon {
+  stroke: var(--text-color);
+  fill: var(--text-color);
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+  opacity: 0.75;
+  margin: 4px;
+}

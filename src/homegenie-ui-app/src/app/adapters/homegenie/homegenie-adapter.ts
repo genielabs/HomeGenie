@@ -16,7 +16,7 @@ import {
 import {Group, HomegenieApi, Module, ModuleParameter, Program} from './homegenie-api';
 import {HomegenieZwaveAdapter} from './homegenie-zwave-adapter';
 import {ZwaveAdapter} from '../zwave-adapter';
-import {Scenario} from "../../services/hgui/automation";
+import {Scenario, Schedule} from "../../services/hgui/automation";
 import {SensorData} from "../../widgets/sensor/sensor.component";
 import {WeatherForecastData} from "../../widgets/weather-forecast/weather-forecast.component";
 import {WidgetOptions} from "../../widgets/widget-options";
@@ -182,6 +182,40 @@ export class HomegenieAdapter implements Adapter {
             }) as Scenario));
             subject.complete();
           });
+        break;
+      case CMD.Automation.Scheduling.List:
+        this.apiCall(HomegenieApi.Automation.Scheduling.List)
+          .subscribe((res) => {
+            const list: Schedule[] = [];
+            res.response.forEach((s) => {
+              const boundDeviceTypes = s.BoundDevices.map((d) => d.toLowerCase());
+              const boundModules = s.BoundModules.map((m) => this.hgui.getModule(this.getModuleId(m), this.id));
+              let matching = s.IsEnabled;
+              // filter by device type if argument was supplied
+              if (options && options.type) {
+                matching = matching && boundDeviceTypes.indexOf(options.type) >= 0;
+              }
+              if (matching) {
+                list.push({
+                  id: s.Name,
+                  name: s.Name,
+                  description: s.Description,
+                  boundModules: boundModules,
+                  moduleTypes: boundDeviceTypes
+                } as Schedule)
+              }
+            });
+            subject.next(list);
+            subject.complete();
+          });
+        break;
+      case CMD.Automation.Scheduling.ListOccurrences:
+        this.apiCall(HomegenieApi.Automation.Scheduling.ListOccurrences(options.hourSpan, options.startTimestamp))
+          .subscribe((res) => {
+            subject.next(res.response);
+            subject.complete();
+          });
+        break;
     }
     return subject;
   }
@@ -286,10 +320,10 @@ export class HomegenieAdapter implements Adapter {
             icon: this.getModuleIcon(m),
             data
           }
-        case 'homegenie/generic/thermostat':
+        case 'homegenie/generic/securitysystem':
           return {
             // TODO: create constant for this, eg: `HgUi.WidgetTypes.Thermostat`
-            widget: 'thermostat',
+            widget: 'alarm-system',
             icon: this.getModuleIcon(m)
           }
       }
@@ -329,6 +363,18 @@ export class HomegenieAdapter implements Adapter {
         features: {
           color: color,
           dimming: dimming
+        }
+      }
+    } else if (module.type === ModuleType.Thermostat) {
+      return {
+        widget: 'thermostat',
+        icon: this.getModuleIcon(m),
+        features: {
+          cooling: true,
+          heating: true,
+          auto: true,
+          ecoMode: true,
+          fanMode: true
         }
       }
     }
@@ -432,8 +478,8 @@ export class HomegenieAdapter implements Adapter {
     const matchingModules = this._modules.filter(
       (i) => this.getModuleId(i) === id
     );
-    if (matchingModules.length === 1) {
-      return matchingModules[0];
+    if (matchingModules.length > 0) {
+      return matchingModules[matchingModules.length - 1];
     }
   }
 

@@ -1,0 +1,12 @@
+// Set variables to whatever colors you want for your app
+$light-theme-primary: mat-palette($mat-blue-gray, A400);
+$light-theme-accent: mat-palette($mat-blue);
+$light-theme-warn: mat-palette($mat-red);
+
+$light-theme: mat-light-theme(
+    $light-theme-primary,
+    $light-theme-accent,
+    $light-theme-warn
+);
+
+@include angular-material-theme($light-theme);

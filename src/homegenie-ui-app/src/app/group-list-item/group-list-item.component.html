@@ -6,30 +6,30 @@
   -->
   <span class="group-title">{{ group.name }}</span>
 </a>
-<div *ngIf="group.stats" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="4px" class="indicators">
-  <div *ngIf="group.stats.luminance" fxLayoutAlign="start start" fxLayoutGap="4px">
-    <svg-icon src="./assets/images/indicators/new/luminance.svg" [svgStyle]="{ 'fill': '#3f51b5', 'width': '24px', 'height': '24px' }"></svg-icon>
+<div *ngIf="group.stats" fxLayout="row wrap" fxLayoutAlign="start center" class="indicators">
+  <div *ngIf="group.stats.luminance" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <svg-icon src="./assets/images/indicators/luminance.svg" class="svg-icon" [svgStyle]="{ 'width': '24px', 'height': '24px' }"></svg-icon>
     <span class="indicator-value">{{ group.stats.luminance | sensorValueFormatter  }}</span>
   </div>
-  <div *ngIf="group.stats.temperature" fxLayoutAlign="start start" fxLayoutGap="4px">
+  <div *ngIf="group.stats.temperature" fxLayoutAlign="start center" fxLayoutGap="4px">
     <!-- mat-icon>wb_sunny</mat-icon -->
-    <svg-icon src="./assets/images/indicators/new/temperature.svg" [svgStyle]="{ 'fill': '#3f51b5', 'width': '24px', 'height': '24px' }"></svg-icon>
+    <svg-icon src="./assets/images/indicators/temperature.svg" class="svg-icon" [svgStyle]="{ 'width': '24px', 'height': '24px' }"></svg-icon>
     <span class="indicator-value">{{ group.stats.temperature | sensorValueFormatter }}</span>
   </div>
-  <div *ngIf="group.stats.humidity" fxLayoutAlign="start start" fxLayoutGap="4px">
-    <svg-icon src="./assets/images/indicators/new/humidity.svg" [svgStyle]="{ 'fill': '#3f51b5', 'width': '24px', 'height': '24px' }"></svg-icon>
+  <div *ngIf="group.stats.humidity" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <svg-icon src="./assets/images/indicators/humidity.svg" class="svg-icon" [svgStyle]="{ 'width': '24px', 'height': '24px' }"></svg-icon>
     <span class="indicator-value">{{ group.stats.humidity | sensorValueFormatter }}%</span>
   </div>
-  <div fxLayoutAlign="start start" fxLayoutGap="4px">
-    <svg-icon src="./assets/images/indicators/new/light.svg" [svgStyle]="{ 'fill': '#3f51b5', 'width': '24px', 'height': '24px' }"></svg-icon>
+  <div fxLayoutAlign="start center" fxLayoutGap="4px">
+    <svg-icon src="./assets/images/indicators/lightbulb.svg" class="svg-icon" [svgStyle]="{ 'width': '24px', 'height': '24px' }"></svg-icon>
     <span class="indicator-value">4</span>
   </div>
-  <div fxLayoutAlign="start start" fxLayoutGap="4px">
-    <svg-icon src="./assets/images/indicators/new/socket.svg" [svgStyle]="{ 'fill': '#3f51b5', 'width': '24px', 'height': '24px' }"></svg-icon>
+  <div fxLayoutAlign="start center" fxLayoutGap="4px">
+    <svg-icon src="./assets/images/indicators/socket.svg" class="svg-icon" [svgStyle]="{ 'width': '24px', 'height': '24px' }"></svg-icon>
     <span class="indicator-value">2</span>
   </div>
-  <div *ngIf="group.stats.watts" fxLayoutAlign="start start" fxLayoutGap="4px">
-    <svg-icon src="./assets/images/indicators/new/power.svg" [svgStyle]="{ 'fill': '#3f51b5', 'width': '24px', 'height': '24px' }"></svg-icon>
+  <div *ngIf="group.stats.watts" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <svg-icon src="./assets/images/indicators/power.svg" class="svg-icon"></svg-icon>
     <span class="indicator-value">{{ group.stats.watts | sensorValueFormatter }}</span>
   </div>
 </div>

@@ -1,11 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Module, ModuleField} from '../../services/hgui/module';
-import {CMD, FLD, HguiService} from '../../services/hgui/hgui.service';
-import {Subscription} from 'rxjs';
-import {MatDialog} from "@angular/material/dialog";
+import {Component, OnInit} from '@angular/core';
+import {ModuleField} from '../../services/hgui/module';
+import {CMD, FLD} from '../../services/hgui/hgui.service';
 import {ColorPickerDialogComponent} from "../common/dialogs/color-picker-dialog/color-picker-dialog.component";
 import {Color} from "@iplab/ngx-color-picker";
-import {WidgetOptions} from "../widget-options";
 import {WidgetBase} from "../widget-base";
 
 @Component({
@@ -13,23 +10,19 @@ import {WidgetBase} from "../widget-base";
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss']
 })
-export class SwitchComponent extends WidgetBase implements OnInit, OnDestroy {
+export class SwitchComponent extends WidgetBase implements OnInit {
 
-  status = '';
   colorPresets: ModuleField[] = [];
   colorPresetsCount = 4;
   currentPreset = -1;
 
   isLoading = false;
 
-  private ledTimeout: any = null;
-  private eventSubscription: Subscription;
-
   get level(): number {
     let l = null;
     const level = this.module.field(FLD.Status.Level);
     if (level) {
-      l = level.value.toString().replace(',', '.') * 100;
+      l = Math.round(level.value.toString().replace(',', '.') * 100);
     }
     return l;
   }
@@ -81,23 +74,6 @@ export class SwitchComponent extends WidgetBase implements OnInit, OnDestroy {
       }
       this.colorPresets.push(presetField);
     }
-    if (this.module.getAdapter()) {
-      this.eventSubscription = this.module.getAdapter().onModuleEvent.subscribe((e) => {
-        if (e.module === this.module) {
-          this.blinkLed();
-        }
-      });
-    }
-  }
-  ngOnDestroy(): void {
-    if (this.eventSubscription) {
-      this.eventSubscription.unsubscribe();
-      console.log('Unsubscribed module events.');
-    }
-  }
-
-  onModuleOptionsClick(e): void {
-    this.showOptions.emit(null);
   }
 
   onOnButtonClick(e): void {
@@ -193,13 +169,5 @@ export class SwitchComponent extends WidgetBase implements OnInit, OnDestroy {
     return (rgba.red * 0.299 + rgba.green * 0.587 + rgba.blue * 0.114) > 186
       ? '#000000'
       : '#FFFFFF';
-  }
-
-  private blinkLed(): void {
-    this.status = 'active';
-    clearTimeout(this.ledTimeout);
-    this.ledTimeout = setTimeout(() => {
-      this.status = 'idle';
-    }, 100);
   }
 }

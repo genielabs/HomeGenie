@@ -107,10 +107,6 @@ export class WeatherForecastComponent extends WidgetBase {
     */
   }
 
-  onModuleOptionsClick(e): void {
-    this.showOptions.emit(null);
-  }
-
   trackByFn(index, race) {
     return undefined;
   }

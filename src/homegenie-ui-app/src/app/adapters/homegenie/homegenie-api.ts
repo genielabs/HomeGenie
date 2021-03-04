@@ -87,6 +87,12 @@ export class HomegenieApi {
       List: 'HomeAutomation.HomeGenie/Automation/Programs.List'
     },
     Command: (command: string, options: string) =>
-      `HomeAutomation.HomeGenie/Automation/${command}/${options}`
+      `HomeAutomation.HomeGenie/Automation/${command}/${options}`,
+    Scheduling: {
+      // Get the list of scheduling items
+      List: 'HomeAutomation.HomeGenie/Automation/Scheduling.List',
+      ListOccurrences: (hourSpan: number, startTimestamp: number) =>
+        `HomeAutomation.HomeGenie/Automation/Scheduling.ListOccurrences/${hourSpan}/${startTimestamp}`
+    }
   };
 }

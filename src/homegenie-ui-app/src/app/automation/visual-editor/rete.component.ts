@@ -4,7 +4,7 @@ import { NodeEditor, Engine } from "rete";
 import { AngularRenderPlugin } from "rete-angular-render-plugin";
 import AreaPlugin from "rete-area-plugin";
 import ConnectionPlugin from "rete-connection-plugin";
-import ContextMenuPlugin from "rete-context-menu-plugin";
+//import ContextMenuPlugin from "rete-context-menu-plugin";
 import { NumComponent } from "./components/number-component";
 import { AddComponent } from "./components/add-component";
 
@@ -40,7 +40,7 @@ export class ReteComponent implements AfterViewInit {
     editor.use(ConnectionPlugin);
     console.log("AngularRenderPlugin", AngularRenderPlugin);
     editor.use(AngularRenderPlugin); //, { component: MyNodeComponent });
-    editor.use(ContextMenuPlugin);
+//    editor.use(ContextMenuPlugin);
 
     const engine = new Engine("demo@0.2.0");
 

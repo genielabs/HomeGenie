@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Module, ModuleField} from '../../services/hgui/module';
-import {WidgetOptions} from "../widget-options";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ModuleField} from '../../services/hgui/module';
 import {WidgetBase} from "../widget-base";
 
 export class SensorFieldData {
@@ -19,6 +18,7 @@ export class SensorData {
 })
 export class SensorComponent extends WidgetBase implements OnInit, OnDestroy {
   sensor: SensorFieldData;
+  statusText = '// TODO: status text and battery level';
 
   private refreshTimeout: any = null;
   private currentIndex = 0;
@@ -28,10 +28,6 @@ export class SensorComponent extends WidgetBase implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.stopTimeout();
-  }
-
-  onModuleOptionsClick(e): void {
-    this.showOptions.emit(null);
   }
 
   private startTimeout(): void {

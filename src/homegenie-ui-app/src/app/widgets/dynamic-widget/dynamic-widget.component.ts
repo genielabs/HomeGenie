@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Module, ModuleType} from "../../services/hgui/module";
+import {Module} from "../../services/hgui/module";
 
 @Component({
   selector: 'app-dynamic-widget',
@@ -17,7 +17,7 @@ export class DynamicWidgetComponent implements OnInit {
   ngOnInit() {
   }
 
-  onShowOptionsClick(): void {
-    this.showOptions.emit(this.module);
+  onShowOptionsClick(e): void {
+    this.showOptions.emit(e);
   }
 }

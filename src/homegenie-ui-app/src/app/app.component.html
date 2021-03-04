@@ -4,14 +4,14 @@
     <!--
     <img src="./assets/images/homegenie.png" width="40" height="40">
     -->
-    <svg-icon src="./assets/images/homegenie.svg" [svgStyle]="{ 'fill': '#fff', 'width': '40px', 'height': '40px' }"></svg-icon>
+    <svg-icon src="./assets/images/homegenie.svg" [svgStyle]="{ 'fill': headerTextColor, 'width': '40px', 'height': '40px' }"></svg-icon>
   </button>
-  <span style="margin-left: 8px">{{ hgui.getCurrentGroup() ? hgui.getCurrentGroup().name : 'HomeGenie' }}</span>
+  <span #headerText style="margin-left: 8px">{{ hgui.getCurrentGroup() ? hgui.getCurrentGroup().name : 'HomeGenie' }}</span>
   <span class="toolbar-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon">
+  <button mat-icon-button (click)="test1()" class="example-icon favorite-icon">
     <mat-icon>favorite</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon">
+  <button mat-icon-button (click)="test2()" class="example-icon">
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>
@@ -27,6 +27,12 @@
       </ul>
       <h3 class="section-title color-accent">{{ "settings" | translate }}</h3>
       <ul>
+        <li>
+          <a mat-button disabled="true">
+            <mat-icon color="primary">auto_fix_high</mat-icon>
+            <span style="margin-left: 8px">{{ 'automation' | translate }}</span>
+          </a>
+        </li>
         <li>
           <a mat-button disabled="true">
             <mat-icon color="primary">schedule</mat-icon>

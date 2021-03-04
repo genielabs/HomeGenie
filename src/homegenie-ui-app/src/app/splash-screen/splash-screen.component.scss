@@ -1,8 +1,6 @@
-@import "src/styles/settings/variables";
-
 :host {
     height: 100vh;
-    color: mat-color($app-accent);
+    color: var(--accent-color);
     font-size: 300%;
 }
 

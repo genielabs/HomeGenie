@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CMD, HguiService} from 'src/app/services/hgui/hgui.service';
 import {HomegenieAdapter, Program} from '../homegenie-adapter';
 import {HomegenieApi, ModuleParameter} from '../homegenie-api';
-import {ProgramOptionsDialogComponent} from "../../../widgets/common/dialogs/program-options-dialog/program-options-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {WidgetOptionsDialogComponent} from "../../../widgets/common/dialogs/widget-options-dialog/widget-options-dialog.component";
 
 class ProgramsGroup {
   public name: string;
@@ -94,25 +94,15 @@ export class HomegenieSetupComponent implements OnInit {
       console.log('WARNING', 'No module associated with this program.');
       return;
     }
-    const dialogRef = this.dialog.open(ProgramOptionsDialogComponent, {
-      // height: '400px',
+    // Show Module/Program Options
+    this.dialog.open(WidgetOptionsDialogComponent, {
+      panelClass: 'dialog-no-padding',
       width: '100%',
       minWidth: '320px',
-      maxWidth: '420px',
+      maxWidth: '576px',
       disableClose: false,
-      data: module
-    });
-    dialogRef.afterClosed().subscribe((changeList) => {
-      if (changeList) {
-        const changes: any = {};
-        changeList.forEach((c) => {
-          changes[c.field.key] = c.value;
-        });
-        // TODO:
-        module.control(CMD.Options.Set, changes).subscribe((res) => {
-          // TODO: ... logging
-        });
-      }
+      data: {module, option: 'settings'}
     });
   }
+
 }

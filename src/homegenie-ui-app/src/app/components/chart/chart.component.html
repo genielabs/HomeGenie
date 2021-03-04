@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="start end" fxLayoutGap="24px" style="margin-top: 24px">
+<div fxLayout="row wrap" fxLayoutAlign="start end" fxLayoutGap="24px">
 
   <div class="mode-control">
     <div class="label">{{ "graph_mode" | translate }}</div>
@@ -59,3 +59,11 @@
           (chartHover)="chartHovered($event)"
           (chartClick)="chartClicked($event)"></canvas>
 </div>
+<div *ngIf="!hasStats" fxLayout="column" fxLayoutAlign="center center" style="height: 210px">
+  <h2 class="color-warn">No data available in the selected time range.</h2>
+</div>
+
+<!-- the following hidden div are used to get material theme colors from typescript -->
+<div #primary class="mat-button mat-primary" style="display:none"></div>
+<div #accent class="mat-button mat-accent" style="display:none"></div>
+<div #warn class="mat-button mat-warn" style="display:none"></div>

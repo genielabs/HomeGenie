@@ -1,0 +1,26 @@
+<div #schedulingBarContainer class="bar-container">
+  <svg-container containerId="scheduling-bar-{{index}}" height="32">
+
+    <svg-line *ngFor="let hn of hours; let h = index"
+              [x0]="((availableWidth / 24) * h)" [x1]="((availableWidth / 24) * h) + 4"
+              y0="16" y1="20"
+              [classes]="['hour-tick']"></svg-line>
+    <svg-text *ngFor="let hn of hours; let h = index"
+              [x]="((availableWidth / 24) * h) + 4" y="2"
+              [text]="hn" size="8"
+              [classes]="['hour-tick-label']"></svg-text>
+    <!-- TODO: remove this line, this is just a work-around to draw in place the misplaced initial text ('00') -->
+    <svg-text x="4" y="16.5" text="00" size="8" [classes]="['hour-tick-label']"></svg-text>
+
+    <svg-rect *ngFor="let o of occurrences; let k = index"
+              [x]="o.x * availableWidth" y="2"
+              [width]="o.width * availableWidth" height="12"
+              [classes]="['rect-bar']"></svg-rect>
+    <svg-rect [width]="availableWidth" height="16"
+              [classes]="['rect-border']"></svg-rect>
+    <svg-rect x="1" y="1"
+              [width]="availableWidth - 2" height="14"
+              [classes]="['rect-background']"></svg-rect>
+
+  </svg-container>
+</div>

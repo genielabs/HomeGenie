@@ -4,6 +4,7 @@ import {WidgetOptions} from "./widget-options";
 import {MatDialog} from "@angular/material/dialog";
 import {HguiService} from "../services/hgui/hgui.service";
 import {MediaMatcher} from "@angular/cdk/layout";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: '-widget-base',
@@ -27,8 +28,18 @@ export class WidgetBase {
     return this.options ? this.options.data : {};
   }
 
-  constructor(protected dialog: MatDialog, protected hgui: HguiService, changeDetectorRef: ChangeDetectorRef, public mediaMatcher: MediaMatcher) {
+  constructor(
+    protected dialog: MatDialog,
+    protected hgui: HguiService,
+    changeDetectorRef: ChangeDetectorRef,
+    public mediaMatcher: MediaMatcher,
+    public translate: TranslateService
+  ) {
     this.matcher = this.mediaMatcher.matchMedia('(max-width: 500px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+  }
+
+  public onMenuOptionSelected(e): void {
+    this.showOptions.emit(e);
   }
 }

@@ -96,7 +96,7 @@
         "Title":
             "Security Alarm System",
         "Description":
-            "Basic security alarm system",
+            "Include device in the security alarm system",
         "HomeGenie.SecurityAlarm":
             "Use as alarm/strobe",
         "HomeGenie.SecuritySensor":

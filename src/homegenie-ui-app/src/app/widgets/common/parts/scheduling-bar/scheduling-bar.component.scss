@@ -1,0 +1,29 @@
+:host {
+  ::ng-deep .rect-background {
+    fill: var(--background-color);
+    color: var(--background-color);
+    opacity: 0.75;
+  }
+  ::ng-deep .rect-bar {
+    fill: var(--primary-color);
+    color: var(--primary-color);
+    opacity: 0.75;
+  }
+  ::ng-deep .rect-border {
+    fill: var(--accent-color);
+    color: var(--accent-color);
+    opacity: 0.75;
+  }
+  ::ng-deep .hour-tick {
+    stroke: var(--accent-color);
+    opacity: 1;
+  }
+  ::ng-deep .hour-tick-label {
+    fill: var(--primary-color);
+    color: var(--primary-color);
+    opacity: 1;
+  }
+}
+.bar-container {
+  margin-top: 4px;
+}

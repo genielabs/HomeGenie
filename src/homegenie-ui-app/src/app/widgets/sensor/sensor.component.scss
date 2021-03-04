@@ -1,11 +1,4 @@
-@import "src/styles/settings/variables";
-
 :host {
-  /*
-  ::ng-deep .mat-card {
-    box-shadow: none;
-  }
-  */
   ::ng-deep .mat-card-avatar {
     display: none;
   }
@@ -21,8 +14,6 @@
   width: 280px;
   height: 148px;
   margin: 12px;
-  box-shadow: none;
-  border: solid 1px rgba(100,100,100,0.15);
 }
 
 .mat-card-content {
@@ -42,12 +33,12 @@
   margin: 0;
   padding-top: 6px;
   font-size: 250%;
-  color: mat-color($app-primary);
+  color: var(--primary-color);
   padding-bottom: 6px;
 }
 .sensor-field {
   text-transform: uppercase;
-  color: mat-color($app-accent);
+  color: var(--accent-color);
 }
 
 .example-header-image {

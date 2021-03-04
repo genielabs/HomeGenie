@@ -1,22 +1,21 @@
-<mat-card class="widget-small mat-elevation-z4">
+<mat-card class="widget-small mat-elevation-z3">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image">
       <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
     </div>
     <mat-card-title>{{ module.name }}</mat-card-title>
-    <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-      <div class="status-led" [ngClass]="{ 'active-led': status === 'active' }"></div>
-      <!-- span>{{ module.type }}</span -->
-      <!-- mat-icon color="primary">flash_on</mat-icon -->
-      <span>12.4 W</span>
+    <mat-card-subtitle>
+      <app-activity-status [module]="module" [statusText]="level > 0 ? 'ON' : 'OFF'"></app-activity-status>
     </mat-card-subtitle>
-    <button mat-icon-button style="opacity:0.35;position: absolute;right:8px; top:8px;" (click)="onModuleOptionsClick($event)">
-      <mat-icon fontSet="material-icons-outlined">tune</mat-icon>
-    </button>
+    <app-widget-options-menu style="position: absolute;right:8px; top:8px;"
+                             [module]="module"
+                             (menuOptionSelect)="onMenuOptionSelected($event)">
+    </app-widget-options-menu>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="center stretch">
     <div *ngIf="options.features.dimming" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
       <mat-slider
+        matTooltip="Current level" matTooltipPosition="above"
         fxFlex="grow"
         (input)="onSliderInput($event)"
         [(value)]="level"
@@ -24,6 +23,7 @@
         tickInterval="1"
         min="0" max="100"></mat-slider>
       <mat-slide-toggle style="margin-left:8px"
+                        matTooltip="Toggle ON/OFF"
                         (click)="onToggleButtonClick($event)"
                         [checked]="level > 0"></mat-slide-toggle>
     </div>
@@ -39,6 +39,7 @@
            fxLayoutAlign="start center"
            fxLayoutGap="12px" style="border: solid 1px rgba(127, 127, 127, 0.5); border-radius: 24px; padding: 4px;">
         <button mat-icon-button style="width: 32px; height: 32px; border: solid 1px rgba(127, 127, 127, 0.5)"
+                matTooltip="Color preset {{i+1}}"
                 *ngFor="let preset of colorPresets; let i = index"
                 [ngStyle]="{ backgroundColor: preset.value }"
                 (click)="onPresetColorClick(i)">
@@ -47,6 +48,7 @@
         </button>
       </div>
       <button mat-icon-button
+              matTooltip="Current color"
               [ngStyle]="{ backgroundColor: color }"
               (click)="onColorClick()">
         <mat-icon *ngIf="this.currentPreset === -1"
@@ -54,21 +56,4 @@
       </button>
     </div>
   </mat-card-content>
-  <mat-card-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="6px" *ngIf="false">
-    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-      <mat-icon>home</mat-icon>
-    </button>
-    <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button disabled aria-label="Example icon button with a open in new tab icon">
-      <mat-icon>open_in_new</mat-icon>
-    </button>
-  </mat-card-actions>
 </mat-card>

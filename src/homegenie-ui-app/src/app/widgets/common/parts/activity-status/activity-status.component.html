@@ -1,0 +1,4 @@
+<div class="status-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="status-led" [ngClass]="{ 'active-led': isLedActive, 'error-led': errorText.length > 0 }"></div>
+  <div class="status-line">{{ errorText.length > 0 ? errorText : statusText }}</div>
+</div>

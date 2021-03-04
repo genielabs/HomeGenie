@@ -1,6 +1,7 @@
 import {Adapter} from '../../adapters/adapter';
 import {Subject} from 'rxjs';
 import {CMD} from './hgui.service';
+import {EventEmitter} from "@angular/core";
 
 export class Module {
   private dataStore?: any = {};
@@ -11,6 +12,8 @@ export class Module {
   name: string;
   description: string;
   fields: Array<ModuleField>;
+  error: EventEmitter<any>;
+  event: EventEmitter<any>
   constructor(moduleData: Module | any) {
     this.adapterId = moduleData.adapterId;
     this.id = moduleData.id;
@@ -18,6 +21,8 @@ export class Module {
     this.name = moduleData.name;
     this.description = moduleData.description;
     this.fields = moduleData.fields;
+    this.error = new EventEmitter<any>();
+    this.event = new EventEmitter<any>();
   }
   /**
    * Gets the module field matching the given key or set it if the 'value' parameter was passed.
@@ -35,6 +40,7 @@ export class Module {
       }
       field.value = value;
       field.timestamp = timestamp;
+      this.event.emit(field);
       if (this.getAdapter()) {
         this.getAdapter().hgui.onModuleEvent.next({ module: this, event: field});
       }
@@ -84,6 +90,7 @@ export class ModuleType {
   static Switch = 'switch';
   static Siren = 'siren';
   static DoorWindow = 'doorwindow';
+  static Thermostat = 'thermostat';
 }
 
 export class ModuleField {

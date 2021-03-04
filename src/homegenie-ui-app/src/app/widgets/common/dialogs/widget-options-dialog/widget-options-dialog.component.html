@@ -1,23 +1,24 @@
-<h1 mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
-  <span>{{ module.name }}</span>
-  <button mat-icon-button fxFlexAlign="end" disabled>
-    <mat-icon>edit</mat-icon>
-  </button>
-</h1>
+<h2 mat-dialog-title class="color-primary mat-elevation-z2" fxLayout="column" fxLayoutAlign="center stretch">
 
-<mat-tab-group (selectedIndexChange)="onSectionTabChange($event)">
-  <mat-tab [label]="'statistics' | translate">
-  </mat-tab>
-  <mat-tab [label]="'options' | translate">
-  </mat-tab>
-  <mat-tab [label]="'schedule' | translate" disabled="true">
-  </mat-tab>
-  <mat-tab [label]="'info' | translate">
-  </mat-tab>
-</mat-tab-group>
+  <div fxLayout="row" fxLayoutAlign="end center" style="padding-left: 12px; padding-right: 12px">
+    <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <h2>{{ module.name }}</h2>
+    </div>
+    <mat-icon *ngIf="showPage === 'statistics'">insights</mat-icon>
+    <mat-icon *ngIf="showPage === 'settings'">tune</mat-icon>
+    <div *ngIf="showPage === 'schedule'" fxLayout="row" fxLayoutAlign="end center">
+      <span>{{ selectedDate | amLocale:translate.currentLang | amDateFormat:'LL' }}</span>
+      <button mat-icon-button matTooltip="Preview a different day" color="primary">
+        <mat-icon>today</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</h2>
+
 <div mat-dialog-content>
 
-  <div [ngStyle]="{ display: sectionTab === 0 ? '' : 'none' }">
+  <div *ngIf="showPage === 'statistics'">
 
       <app-chart [module]="module"></app-chart>
 
@@ -25,50 +26,42 @@
 
   </div>
 
-  <mat-accordion [ngStyle]="{ display: sectionTab === 1 ? '' : 'none' }" [multi]="false">
-    <mat-expansion-panel *ngFor="let o of optionsList; let i = index" [expanded]="i === 0">
-      <mat-expansion-panel-header>
-        <mat-panel-title fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <mat-icon style="opacity: 0.4">settings</mat-icon>
-          <span class="color-accent" style="font-size: 130%;">{{ o.name }}</span>
-        </mat-panel-title>
-        <!--
-        <mat-panel-description>
-          {{ o.description }}
-        </mat-panel-description>
-        -->
-      </mat-expansion-panel-header>
-      <div *ngIf="module" fxLayout="column" fxLayoutGap="6px">
-
-        <p class="color-primary" style="font-size: 120%; padding-bottom: 16px;">{{ o.description }}</p>
-
-        <div *ngFor="let f of o.items">
-          <app-dynamic-control [data]="f" [module]="module"
-                               (fieldChange)="onFieldChange($event)">
-          </app-dynamic-control>
-        </div>
-
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <div [ngStyle]="{ display: sectionTab === 2 ? '' : 'none' }">
-    <h2>Schedule</h2>
+  <div *ngIf="showPage === 'settings' && module.type === 'program'">
+    <app-program-options #optionsHandler [module]="module"></app-program-options>
   </div>
+  <div *ngIf="showPage === 'settings' && module.type !== 'program'">
 
-  <div [ngStyle]="{ display: sectionTab === 3 ? '' : 'none' }" style="min-height: 280px">
     <div class="label">{{ "module_type" | translate }}</div>
-    <span class="smaller">{{ module.type }}</span>
+    <span>{{ module.type }}</span>
     <div class="label">{{ "module_adapter" | translate }}</div>
-    <span class="smaller">({{ module.adapterId }})</span>
+    <span>({{ module.adapterId }})</span>
     <div *ngIf="module.description">
       <div class="label">{{ "description" | translate }}</div>
       <span>{{ module.description }}</span>
     </div>
+
+    <div>&nbsp;</div>
+
+    <app-module-options #optionsHandler [module]="module"></app-module-options>
+
+  </div>
+
+  <div *ngIf="showPage === 'schedule'">
+    <app-module-scheduling #optionsHandler [module]="module"></app-module-scheduling>
   </div>
 
 </div><!-- dialog content -->
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end start">
-  <button mat-button mat-dialog-close>{{ "close" | translate }}</button>
-  <button mat-button [mat-dialog-close]="changes" [disabled]="this.changes.length === 0">{{ "apply" | translate }}</button>
+
+
+<mat-dialog-actions fxLayout="column" fxLayoutAlign="center stretch">
+
+  <div fxLayout="row" fxLayoutAlign="end center" style="margin-right: 16px;">
+
+    <button mat-button mat-dialog-close>{{ optionsHandler && optionsHandler.isChanged ? "cancel" : "close" | translate }}</button>
+    <button mat-button mat-dialog-close color="accent"
+            [ngStyle]="{ display: optionsHandler && optionsHandler.isChanged ? '' : 'none' }"
+            >{{ "apply" | translate }}</button>
+
+  </div>
+
 </mat-dialog-actions>

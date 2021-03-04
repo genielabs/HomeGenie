@@ -22,6 +22,6 @@ export class SliderComponent extends ControlFieldBase implements OnInit {
   }
 
   onFieldChange(e): void {
-    this.fieldChange.emit({ field: this.data.field, value: this.isBinary ? (e.checked ? 1 : 0) : e.value });
+    this.fieldChange.emit({ field: this.data.field, value: this.isBinary ? (e.checked ? 1 : 0) : e.value.toString() });
   }
 }

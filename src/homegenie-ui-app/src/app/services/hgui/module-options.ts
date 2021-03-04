@@ -1,3 +1,5 @@
+import {ModuleField} from "./module";
+
 export class ModuleOptions {
   public id: string;
   public name: string;
@@ -7,7 +9,7 @@ export class ModuleOptions {
 
 export class OptionField {
   pid: string;
-  field: any;
+  field: ModuleField;
   type: OptionFieldType;
   name: string;
   description: string;

@@ -1,1 +1,112 @@
-<p>thermostat works!</p>
+<mat-card class="widget-small mat-elevation-z3">
+  <mat-card-header>
+    <mat-card-title>
+      <div>{{ module.name }}</div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <app-activity-status [module]="module" [statusText]="currentMode"></app-activity-status>
+    </mat-card-subtitle>
+    <app-widget-options-menu style="position: absolute;right:8px; top:8px;"
+                             [module]="module"
+                             (menuOptionSelect)="onMenuOptionSelected($event)">
+    </app-widget-options-menu>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="start center">
+
+    <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+
+      <div class="display-panel" fxLayout="row" fxLayoutAlign="center center">
+
+        <mat-icon *ngIf="currentMode === 'Heat'" color="primary">local_fire_department</mat-icon>
+        <mat-icon *ngIf="currentMode === 'Cool'" color="primary">ac_unit</mat-icon>
+
+      </div>
+
+      <div>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="digits-display">
+          <div class="digits-container">
+            <h1 class="text-big color-primary">{{ temperature | sensorValueFormatter }}</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="display-panel" fxLayout="row" fxLayoutAlign="center center">
+
+        <mat-icon *ngIf="operatingState.startsWith('Pending')" color="primary" class="translucent">thumb_up_off_alt</mat-icon>
+        <mat-icon *ngIf="operatingState === 'Heating'" color="warn" class="animate__animated animate__slower animate__infinite animate__flash">upload</mat-icon>
+        <mat-icon *ngIf="operatingState === 'Cooling'" color="warn" class="animate__animated animate__slower animate__infinite animate__flash">download</mat-icon>
+
+      </div>
+
+    </div>
+
+
+    <div style="height: 48px">
+
+
+      <div *ngIf="operatingState !== 'Idle'" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+        <div class="label">Set point</div>
+        <mat-slider style="width: 164px"
+                    [max]="setPointMax"
+                    [min]="setPointMin"
+                    [step]="setPointStep"
+                    thumbLabel="thumbLabel"
+                    tickInterval="5"
+                    [(ngModel)]="setPoint"></mat-slider>
+        <div class="set-point color-primary">
+          {{ setPoint | sensorValueFormatter }}
+        </div>
+      </div>
+
+
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" style="min-height: 142px;">
+
+
+      <div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="16px">
+        <div>
+          <div class="label">Mode</div>
+          <mat-button-toggle-group name="thermostatMode" aria-label="Thermostat Mode" [(ngModel)]="currentMode">
+            <mat-button-toggle value="Off" title="Off">
+              <mat-icon fontSet="material-icons-outlined">not_interested</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="Heat" title="Heat" *ngIf="options.features.heating">
+              <mat-icon fontSet="material-icons-outlined">wb_sunny</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="Cool" title="Cool" *ngIf="options.features.cooling">
+              <mat-icon fontSet="material-icons-outlined">ac_unit</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="Auto" title="Auto" *ngIf="(options.features.heating && options.features.cooling) && options.features.auto">Auto</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div *ngIf="options.features.ecoMode">
+          <div class="label">Eco</div>
+          <mat-button-toggle title="Economy" [checked]="economyMode" (change)="economyMode = $event.source.checked">
+            <mat-icon fontSet="material-icons-outlined">eco</mat-icon>
+          </mat-button-toggle>
+        </div>
+        <div *ngIf="options.features.fanMode">
+          <div class="label">Fan</div>
+          <mat-button-toggle-group name="fanMode" aria-label="Fan Mode" [(ngModel)]="fanMode">
+            <mat-button-toggle value="OnLow" title="On">
+              <mat-icon fontSet="material-icons-outlined">check</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="Circulate" title="Circulate">
+              <mat-icon fontSet="material-icons-outlined">autorenew</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="AutoLow" title="Auto">Auto</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+  </mat-card-content>
+</mat-card>

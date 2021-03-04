@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Inject, ViewChild} from '@angular/core';
 
 import { environment } from '../environments/environment';
 
@@ -8,6 +8,7 @@ import { HguiService } from './services/hgui/hgui.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Module} from './services/hgui/module';
 import {Subject} from 'rxjs';
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,20 @@ import {Subject} from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('headerText', {static: true})
+  headerText;
   title = 'homegenie-ui-app';
   isNetworkBusy = false;
 
-  constructor(public hgui: HguiService, translate: TranslateService) {
+  get headerTextColor(): string {
+    let color = 'rgba(255, 255, 255, 0.5)';
+    if (this.headerText) {
+      color = getComputedStyle(this.headerText.nativeElement).color;
+    }
+    return color;
+  }
+
+  constructor(@Inject(DOCUMENT) private document: Document, public hgui: HguiService, translate: TranslateService) {
     // Set translation language
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|it/) ? browserLang : 'en');
@@ -128,5 +139,14 @@ export class AppComponent {
       });
     });
     return subject;
+  }
+
+  test1() {
+    this.document.body.classList.add('dark-theme');
+    this.document.body.classList.remove('light-theme');
+  }
+  test2() {
+    this.document.body.classList.add('light-theme');
+    this.document.body.classList.remove('dark-theme');
   }
 }

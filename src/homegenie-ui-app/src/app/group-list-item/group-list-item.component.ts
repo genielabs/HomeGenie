@@ -31,7 +31,7 @@ export class GroupListItemComponent implements OnInit, OnDestroy {
     const modules = this.hgui.getGroupModules(this.group);
     s.luminance = this.getAverageValue(modules, 'Sensor.Luminance');
     s.temperature = this.getAverageValue(modules, 'Sensor.Temperature');
-    s.humdity = this.getAverageValue(modules, 'Sensor.Humidity');
+    s.humidity = this.getAverageValue(modules, 'Sensor.Humidity');
     s.watts = this.getTotalValue(modules, 'Meter.Watts');
   }
 

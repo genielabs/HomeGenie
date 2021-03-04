@@ -1,1 +1,28 @@
-<p>alarm-system works!</p>
+<mat-card class="widget-small mat-elevation-z3">
+  <mat-card-header>
+    <mat-card-title>
+      <div>{{ module.name }}</div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <app-activity-status [module]="module" [statusText]="'// TODO: ...'"></app-activity-status>
+    </mat-card-subtitle>
+    <app-widget-options-menu style="position: absolute;right:8px; top:8px;"
+                             [module]="module"
+                             (menuOptionSelect)="onMenuOptionSelected($event)">
+    </app-widget-options-menu>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="start center">
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+      <button mat-button fxLayoutAlign="center center" fxLayoutGap="4px">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+      <button mat-button fxLayoutAlign="center center" fxLayoutGap="4px">
+        <mat-icon>lock</mat-icon>
+        Away
+      </button>
+    </div>
+
+  </mat-card-content>
+</mat-card>
