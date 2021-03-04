@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { WidgetOptionsDialogComponent } from './widget-options-dialog.component';
 
@@ -6,7 +6,7 @@ describe('WidgetOptionsDialogComponent', () => {
   let component: WidgetOptionsDialogComponent;
   let fixture: ComponentFixture<WidgetOptionsDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ WidgetOptionsDialogComponent ]
     })

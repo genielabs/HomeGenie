@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ColorPickerDialogComponent } from './color-picker-dialog.component';
 
@@ -6,7 +6,7 @@ describe('ColorPickerDialogComponent', () => {
   let component: ColorPickerDialogComponent;
   let fixture: ComponentFixture<ColorPickerDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ColorPickerDialogComponent ]
     })

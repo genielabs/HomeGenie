@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ZwaveManagerDialogComponent } from './zwave-synch-dialog.component';
 
@@ -6,7 +6,7 @@ describe('ZwaveSynchDialogComponent', () => {
   let component: ZwaveManagerDialogComponent;
   let fixture: ComponentFixture<ZwaveManagerDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ZwaveManagerDialogComponent ]
     })

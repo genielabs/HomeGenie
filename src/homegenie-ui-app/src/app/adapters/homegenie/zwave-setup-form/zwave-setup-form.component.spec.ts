@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ZwaveSetupFormComponent } from './zwave-setup-form.component';
 
@@ -6,7 +6,7 @@ describe('ZwaveSetupFormComponent', () => {
   let component: ZwaveSetupFormComponent;
   let fixture: ComponentFixture<ZwaveSetupFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ZwaveSetupFormComponent ]
     })
