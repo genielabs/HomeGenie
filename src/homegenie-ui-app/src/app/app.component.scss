@@ -50,4 +50,7 @@ nav ul {
 .toolbar-spacer {
   flex: 1 1 auto;
 }
-
+.mat-icon {
+  opacity: 0.65;
+  color: var(--text-color);
+}

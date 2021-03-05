@@ -170,7 +170,7 @@ export class ChartComponent implements OnInit {
     clearTimeout(this.resizeTimeout);
     this.resizeTimeout = setTimeout(() => {
       this.isResizing = false;
-    }, 10);
+    }, 500);
   }
 
   ngOnInit(): void {
@@ -234,12 +234,7 @@ export class ChartComponent implements OnInit {
               }
             });
             ds.data = data;
-            if (ds.data.length > 0) {
-              // update chart axis
-              const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
-              timeAxis.min = (ds.data[ds.data.length - 1] as ChartPoint).x as string;
-              timeAxis.max = e.event.timestamp;
-            }
+            this.updateChartAxis();
           }
         }
       }
@@ -321,17 +316,19 @@ export class ChartComponent implements OnInit {
         this.lineChartData = this.lineChartData.slice();
         this.lineChartColors = this.lineChartColors.slice();
         // update chart axis
-        if (this.chart) {
-          this.lineChartData.map((ds) => {
-            if (ds.data.length > 0) {
-              const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
-              const x = (ds.data[ds.data.length - 1] as ChartPoint).x;
-              timeAxis.min = x as string;
-            }
-          });
-        }
+        this.updateChartAxis();
       }
     });
+  }
+
+  private updateChartAxis() {
+    if (this.chart) {
+      const timeRangeStart = this.selectedTimeRange.value * 60 * 60 * 1000;
+      const now = new Date().getTime();
+      const timeAxis = this.chart.chart.config.options.scales.xAxes[0].ticks;
+      timeAxis.min = now - timeRangeStart;
+      timeAxis.max = now;
+    }
   }
 
   private getChartLabels(): Label[] {
