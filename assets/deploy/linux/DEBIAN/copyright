@@ -4,7 +4,7 @@ Upstream-Contact: Generoso Martello <gene@homegenie.it>
 Source: http://github.com/genielabs/HomeGenie
 
 Files: *
-Copyright: 2012-2014, GenieLabs <info@homegenie.it>
+Copyright: 2012-2021, GenieLabs <info@homegenie.it>
 License: GPL-3+ (source code), CC-BY-NC-3.0+ (media and distributables)
  HomeGenie Project and all of its components (eg. precompiled distributables,
  home site, documentation), exception made only and solely for its

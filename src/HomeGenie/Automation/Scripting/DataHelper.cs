@@ -21,7 +21,7 @@
  */
 
 using System;
-
+using System.IO;
 using LiteDB;
 
 using HomeGenie.Service;
@@ -35,6 +35,14 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class DataHelper
     {
+        HomeGenieService homegenie = null;
+        int myProgramId = -1;
+
+        public DataHelper(HomeGenieService hg, int programId)
+        {
+            homegenie = hg;
+            myProgramId = programId;
+        }
         
         /// <summary>
         /// Open and get a LiteDatabase instance. See LiteDB website http://www.litedb.org for documentation.
@@ -50,7 +58,21 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public LiteDatabase LiteDb(string fileName)
         {
-            return new LiteDatabase(fileName);
+            string dataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", myProgramId.ToString());
+            if (!Directory.Exists(dataFolder))
+            {
+                Directory.CreateDirectory(dataFolder);
+            }
+
+            if (!fileName.EndsWith(".db"))
+            {
+                fileName += ".db";
+            }
+            if (Path.GetFileNameWithoutExtension(fileName) + ".db" != fileName)
+            {
+                throw new ArgumentException("Invalid database name");
+            }
+            return new LiteDatabase(Path.Combine(dataFolder, fileName));
         }
 
     }

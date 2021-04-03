@@ -452,12 +452,6 @@ namespace HomeGenie.Service
                 Directory.Move(Path.Combine(destFolder, "src"), bundleFolder);
                 archiveName = Path.Combine(destFolder, "program.hgx");
             }
-
-#if !NETCOREAPP
-            // TODO: Deprecate Compat
-            Compat_526.FixProgramsDatabase(archiveName);
-#endif
-
             using (var reader = new StreamReader(archiveName))
             {
                 var serializer = new XmlSerializer(typeof(ProgramBlock));

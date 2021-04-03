@@ -17,9 +17,9 @@
 
 NAME="homegenie"
 SCRIPTNAME=/etc/init.d/$NAME
-USER="root"
+USER="homegenie"
 PID_FILE="/tmp/homegenie.pid"
-INSTALL_PATH="/usr/local/bin"  # <------ CHANGE INSTALL PATH HERE IF NEEDED
+INSTALL_PATH="/home"  # <------ CHANGE INSTALL PATH HERE IF NEEDED
 HOMEGENIE_FOLDER=$INSTALL_PATH/homegenie
 HOMEGENIESH=$HOMEGENIE_FOLDER/startup.sh
 

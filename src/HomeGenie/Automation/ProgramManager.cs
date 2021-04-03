@@ -226,7 +226,7 @@ namespace HomeGenie.Automation
         {
             var moduleEvent = (RoutedEvent)eventData;
             var moduleHelper = new Automation.Scripting.ModuleHelper(hgService, moduleEvent.Module);
-            string originalValue = moduleEvent.Parameter.Value;
+            var param = moduleEvent.Parameter.DeepClone();
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
@@ -235,17 +235,11 @@ namespace HomeGenie.Automation
                 {
                     if (program.Engine.ModuleIsChangingHandler != null)
                     {
-                        bool handled = !program.Engine.ModuleIsChangingHandler(moduleHelper, moduleEvent.Parameter);
+                        bool handled = !program.Engine.ModuleIsChangingHandler(moduleHelper, param);
                         if (handled)
                         {
                             // stop routing event if "false" is returned
-                            MigService.Log.Debug("Event propagation halted by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
-                            return false;
-                        }
-                        else  if (moduleEvent.Parameter.Value != originalValue)
-                        {
-                            // If manipulated, the event is not routed anymore.
-                            MigService.Log.Debug("Event propagation halted - parameter manipulated by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
+                            MigService.Log.Debug("Event propagation halted by automation program '{0}' ({1}) (Name={2})", program.Name, program.Address, param.Name);
                             return false;
                         }
                     }
@@ -257,8 +251,7 @@ namespace HomeGenie.Automation
         public void RoutePropertyChangedEvent(object eventData)
         {
             var moduleEvent = (RoutedEvent)eventData;
-            var moduleHelper = new Automation.Scripting.ModuleHelper(hgService, moduleEvent.Module);
-            string originalValue = moduleEvent.Parameter.Value;
+            var moduleHelper = new Scripting.ModuleHelper(hgService, moduleEvent.Module);
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
@@ -270,17 +263,12 @@ namespace HomeGenie.Automation
                         program.Engine.RoutedEventAck.Set();
                         if (program.Engine.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
                         {
-                            bool handled = !program.Engine.ModuleChangedHandler(moduleHelper, moduleEvent.Parameter);
+                            var param = moduleEvent.Parameter.DeepClone();
+                            bool handled = !program.Engine.ModuleChangedHandler(moduleHelper, param);
                             if (handled)
                             {
                                 // stop routing event if "false" is returned
-                                MigService.Log.Debug("Event propagation halted by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
-                                break;
-                            }
-                            else if (moduleEvent.Parameter.Value != originalValue)
-                            {
-                                // If manipulated, the event is not routed anymore.
-                                MigService.Log.Debug("Event propagation halted - parameter manipulated by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
+                                MigService.Log.Debug("Event propagation halted by automation program '{0}' ({1}) (Name={2})", program.Name, program.Address, param.Name);
                                 break;
                             }
                         }
@@ -319,7 +307,7 @@ namespace HomeGenie.Automation
                 hgService.modules_RefreshPrograms();
                 hgService.modules_RefreshVirtualModules();
             }
-            hgService.modules_Sort();
+            //hgService.modules_Sort();
         }
     }
 }

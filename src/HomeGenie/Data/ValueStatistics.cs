@@ -33,6 +33,13 @@ namespace HomeGenie.Data
     /// </summary>
     public class ValueStatistics
     {
+        private static readonly List<string> StatisticsFields = new List<string>() {
+            "Sensor.",
+            "Meter.",
+            "PowerMonitor.",
+            "Statistics."
+        };
+        
         /// <summary>
         /// Stat value.
         /// </summary>
@@ -73,6 +80,7 @@ namespace HomeGenie.Data
         private TsList<StatValue> historyValues;
         // historyLimit is expressed in minutes
         private int historyLimit = 60 * 24;
+        private int historyLimitSize = 10000;
         private StatValue lastEvent, lastOn, lastOff;
 
         public ValueStatistics()
@@ -93,6 +101,16 @@ namespace HomeGenie.Data
         {
             get { return historyLimit; }
             set { historyLimit = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the history limit.
+        /// </summary>
+        /// <value>The history limit.</value>
+        public int HistoryLimitSize
+        {
+            get { return historyLimitSize; }
+            set { historyLimitSize = value; }
         }
 
         /// <summary>
@@ -143,13 +161,12 @@ namespace HomeGenie.Data
 
         internal void AddValue(string fieldName, double value, DateTime timestamp)
         {
-#if !NETCOREAPP
-            if (StatisticsLogger.IsValidField(fieldName))
+
+            if (IsValidField(fieldName))
             {
                 // add value for StatisticsLogger use
                 statValues.Add(new StatValue(value, timestamp));
             }
-#endif
             // "value" is the occurring event in this very moment,
             // so "Current" is holding previous value right now
             if (Current.Value != value)
@@ -169,6 +186,10 @@ namespace HomeGenie.Data
             // keeep size within historyLimit (minutes)
             try
             {
+                if (historyValues.Count > historyLimitSize)
+                {
+                    historyValues.RemoveRange(historyLimitSize, historyValues.Count - historyLimitSize);
+                }
                 while ((DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
                 {
                     historyValues.RemoveAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes > historyLimit);
@@ -179,11 +200,26 @@ namespace HomeGenie.Data
             historyValues.Insert(0, new StatValue(value, timestamp));
         }
 
+        private static bool IsValidField(string field)
+        {
+            bool isValid = false;
+            foreach (string f in StatisticsFields)
+            {
+                if (field.StartsWith(f))
+                {
+                    isValid = true;
+                    break;
+                }
+            }
+            return isValid;
+        }
+
         /// <summary>
         /// Get resampled statistic values by averaging values for a given time range increment (eg 60 minutes)
         /// </summary>
         internal List<StatValue> GetResampledValues(int sampleWidth) // in minutes
         {
+            //historyValues.FindAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes < sampleWidth);
             // TODO: to be implemented
             return null;
         }

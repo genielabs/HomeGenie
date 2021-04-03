@@ -70,8 +70,9 @@ namespace HomeGenie.Automation.Scheduler
         {
             if (serviceChecker == null) return;
             serviceChecker.Dispose();
-            foreach (var eventItem in events)
+            for (int i = 0; i < events.Count; i++)
             {
+                var eventItem = events[i];                
                 if (eventItem.ScriptEngine != null)
                 {
                     eventItem.ScriptEngine.StopScript();
@@ -430,18 +431,23 @@ namespace HomeGenie.Automation.Scheduler
         {
             get
             {
-                if (String.IsNullOrWhiteSpace(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location))
-                    masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location =
-                        "{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
-                return (dynamic) JsonConvert.DeserializeObject(masterControlProgram.HomeGenie.SystemConfiguration
-                    .HomeGenie.Location);
+                dynamic location = "{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
+                if (masterControlProgram != null && String.IsNullOrWhiteSpace(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location)) {
+                    masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location = location;
+                }
+                else if (masterControlProgram != null)
+                {
+                    location = masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location;
+                }
+                return (dynamic) JsonConvert.DeserializeObject(location);
             }
         }
 
         public void OnModuleUpdate(object eventData)
         {
-            foreach (var item in events)
+            for (int i = 0; i < events.Count; i++)
             {
+                var item = events[i];
                 if (item.ScriptEngine != null)
                 {
                     item.ScriptEngine.RouteModuleEvent(eventData);
@@ -482,7 +488,7 @@ namespace HomeGenie.Automation.Scheduler
                     {
                         var start = occurs.Last();
                         var end = matchList.First();
-                        var inc = start.AddMinutes(1).AddSeconds(-start.Second).AddMilliseconds(-start.Millisecond);
+                        var inc = TruncateDate(start.AddMinutes(1));
                         while (end.ToUniversalTime().ToString(FORMAT_DATETIME) !=
                                inc.ToUniversalTime().ToString(FORMAT_DATETIME)
                         ) //(Math.Floor((end - inc).TotalMinutes) != 0)
@@ -544,7 +550,7 @@ namespace HomeGenie.Automation.Scheduler
                 sunrise = sunrise.AddMinutes(addMinutes);
                 if (IsBetween(sunrise, start, dateEnd))
                 {
-                    sunrise = sunrise.AddSeconds(-sunrise.Second).AddMilliseconds(-sunrise.Millisecond);
+                    sunrise = TruncateDate(sunrise);
                     evalNode.Occurrences.Add(sunrise);
                 }
                 start = start.AddHours(24);
@@ -563,7 +569,7 @@ namespace HomeGenie.Automation.Scheduler
                 sunset = sunset.AddMinutes(addMinutes);
                 if (IsBetween(sunset, start, dateEnd))
                 {
-                    sunset = sunset.AddSeconds(-sunset.Second).AddMilliseconds(-sunset.Millisecond);
+                    sunset = TruncateDate(sunset);
                     evalNode.Occurrences.Add(sunset);
                 }
                 start = start.AddHours(24);
@@ -582,12 +588,16 @@ namespace HomeGenie.Automation.Scheduler
                 solarNoon = solarNoon.AddMinutes(addMinutes);
                 if (IsBetween(solarNoon, start, dateEnd))
                 {
-                    solarNoon = solarNoon.AddSeconds(-solarNoon.Second)
-                        .AddMilliseconds(-solarNoon.Millisecond);
+                    solarNoon = TruncateDate(solarNoon);
                     evalNode.Occurrences.Add(solarNoon);
                 }
                 start = start.AddHours(24);
             }
+        }
+
+        private DateTime TruncateDate(DateTime d)
+        {
+            return d.AddSeconds(-d.Second).AddTicks(-(d.Ticks % TimeSpan.TicksPerSecond));
         }
     }
 }

@@ -76,16 +76,10 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "programs.xml");
             Utility.AddFileToZip(archiveName, "scheduler.xml");
             Utility.AddFileToZip(archiveName, "groups.xml");
-            Utility.AddFileToZip(archiveName, "release_info.xml");
-#if !NETCOREAPP
-            // Statistics db
-            if (File.Exists(StatisticsLogger.STATISTICS_DB_FILE))
+            if (File.Exists("release_info.xml"))
             {
-                homegenie.Statistics.CloseStatisticsDatabase();
-                Utility.AddFileToZip(archiveName, StatisticsLogger.STATISTICS_DB_FILE);
-                homegenie.Statistics.OpenStatisticsDatabase();
+                Utility.AddFileToZip(archiveName, "release_info.xml");
             }
-#endif
             // Installed packages
             if (File.Exists(PackageManager.PACKAGE_LIST_FILE))
                 Utility.AddFileToZip(archiveName, PackageManager.PACKAGE_LIST_FILE);
@@ -160,21 +154,6 @@ namespace HomeGenie.Service
                 Properties.InstallProgressMessage,
                 "= Restored: Scheduler Events"
             );
-#if !NETCOREAPP
-            // Statistics db
-            if (File.Exists(Path.Combine(archiveFolder, StatisticsLogger.STATISTICS_DB_FILE)))
-            {
-                File.Copy(Path.Combine(archiveFolder, StatisticsLogger.STATISTICS_DB_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, StatisticsLogger.STATISTICS_DB_FILE), true);
-                homegenie.RaiseEvent(
-                    Domains.HomeGenie_System,
-                    Domains.HomeGenie_BackupRestore,
-                    SourceModule.Master,
-                    "HomeGenie Backup Restore",
-                    Properties.InstallProgressMessage,
-                    "= Restored: Statistics Database"
-                );
-            }
-#endif
             // Remove all old non-system programs
             var rp = new List<ProgramBlock>();
             foreach (var program in homegenie.ProgramManager.Programs)
@@ -256,10 +235,6 @@ namespace HomeGenie.Service
             serializer = new XmlSerializer(typeof(List<ProgramBlock>));
             string programsDatabase = Path.Combine(archiveFolder, "programs.xml");
 
-#if !NETCOREAPP
-            // TODO: Deprecate Compat
-            Compat_526.FixProgramsDatabase(programsDatabase);
-#endif
             List<ProgramBlock> newProgramsData;
             using (var reader = new StreamReader(programsDatabase))
             {

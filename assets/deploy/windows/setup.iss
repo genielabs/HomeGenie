@@ -4,10 +4,10 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie {%APPVEYOR_REPO_TAG_NAME|1.2-dev}
+AppVerName=HomeGenie {%APPVEYOR_REPO_TAG_NAME|1.4-dev}
 AppPublisher=G-Labs
 AppPublisherURL=https://glabs.it
-AppVersion={%APPVEYOR_REPO_TAG_NAME|1.2-dev}
+AppVersion={%APPVEYOR_REPO_TAG_NAME|1.4-dev}
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
@@ -190,8 +190,8 @@ Source: "..\..\..\src\HomeGenie.Net461\bin\Debug\*"; DestDir: "{app}"; Flags: ig
 Source: "..\..\..\src\HomeGenie.Net461\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
 Source: "..\..\..\src\HomeGenie.Net461\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
 
-[InstallDelete]
-Type: files; Name: "{app}\SQLite.Interop.dll";
+//[InstallDelete]
+//Type: files; Name: "{app}\SQLite.Interop.dll";
 
 [Tasks]
 ;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";

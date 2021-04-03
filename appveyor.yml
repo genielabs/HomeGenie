@@ -3,7 +3,7 @@ branches:
   except:
   - gh-pages
 image: Visual Studio 2019
-configuration: Debug
+configuration: Release
 before_build:
   - nuget restore HomeGenie.sln
   - nuget restore src/WindowsService/WindowsService.sln
@@ -15,7 +15,7 @@ build_script:
 test:
   assemblies:
     only:
-      - src/HomeGenie.Tests/bin/Debug/HomeGenie.Tests.dll
+      - src/HomeGenie.Tests/bin/Release/HomeGenie.Tests.dll
 after_test:
 - cmd: >-
     echo "Packager and deploy will start in 30 seconds..."
@@ -24,7 +24,7 @@ after_test:
 
     echo "Bundling installer for HomeGenie %APPVEYOR_REPO_TAG_NAME%"
 
-    dir "src\HomeGenie.Net461\bin\Debug"
+    dir "src\HomeGenie.Net461\bin\Release"
 
     cd "assets\deploy\windows\"
 

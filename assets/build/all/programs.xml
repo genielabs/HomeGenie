@@ -18,7 +18,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:51.066375Z</ActivationTime>
+    <ActivationTime>2021-03-22T11:35:42.110096Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -43,7 +43,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:54.580992Z</ActivationTime>
+    <ActivationTime>2021-03-22T11:35:46.638737Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -118,8 +118,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:59.608924Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:16.589428Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:47.201061Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.197476Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -421,8 +421,8 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:04.606119Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:16.786914Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:50.675733Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.223102Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -557,7 +557,7 @@ while (Program.IsEnabled)
   Pause(WeMo_Refresh.DecimalValue);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>30</Address>
     <Name>WeMo</Name>
@@ -601,103 +601,104 @@ Program.Parameter("Astronomy.Sunrise").Value = "";
 Program.Parameter("Conditions.City").Value = "";
 Program.Parameter("Conditions.Temperature").Value = "";
 Program.Parameter("Conditions.DisplayLocation").Value = "";
-Program.Parameter("Conditions.IconUrl").Value = "";
+Program.Parameter("Conditions.IconType").Value = "";
 Program.Parameter("Conditions.Description").Value = "";
 
+Program.Parameter("EventsLogger.EnableLogging").Value = "On";
 Program.Run();
 </ScriptSetup>
   <ScriptSource>Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
-  Program.Parameter("Conditions.City").Value = data.city;
-  Program.Parameter("Conditions.DisplayLocation").Value = data.city;
-  Program.Parameter("Conditions.Country").Value = data.country;
-  Program.Parameter("Conditions.Description").Value = data.weather_description;
-  Program.Parameter("Conditions.IconUrl").Value = data.weather_icon;
-  Program.Parameter("Conditions.Status").Value = data.weather_status; // eg. cloudy, sunny, etc..
-  Program.Parameter("Conditions.LastUpdated").Value = data.update_dt;
+  Program.RaiseEvent("Conditions.City", data.city, "");
+  Program.RaiseEvent("Conditions.DisplayLocation", data.city, "");
+  Program.RaiseEvent("Conditions.Country", data.country, "");
+  Program.RaiseEvent("Conditions.Description", data.weather_description, "");
+  Program.RaiseEvent("Conditions.IconType", data.weather_icon, "");
+  Program.RaiseEvent("Conditions.Status", data.weather_status, ""); // eg. cloudy, sunny, etc..
+  Program.RaiseEvent("Conditions.LastUpdated", data.update_dt, "");
   // Add values to standard Sensor.* parameters
-  Program.Parameter("Sensor.Temperature").Value = data.temperature;
-  Program.Parameter("Sensor.Temperature.Unit").Value = "Celsius";
-  Program.Parameter("Sensor.Pressure").Value = data.pressure;
-  Program.Parameter("Sensor.Pressure.Unit").Value = "Mb";
-  Program.Parameter("Sensor.Wind.Speed").Value = data.wind_speed;
-  Program.Parameter("Sensor.Wind.Speed.Unit").Value = "Kph";
-  Program.Parameter("Sensor.Wind.Direction").Value = data.wind_direction;
-  Program.Parameter("Sensor.Precipitation.Rain").Value = data.rain_1h_mm;
-  Program.Parameter("Sensor.Precipitation.Rain.Unit").Value = "1h";
-  Program.Parameter("Sensor.Precipitation.Snow").Value = data.snow_1h_mm;
-  Program.Parameter("Sensor.Precipitation.Snow.Unit").Value = "1h";
+  Program.RaiseEvent("Sensor.Temperature", data.temperature, "");
+  Program.RaiseEvent("Sensor.Temperature.Unit", "Celsius", "");
+  Program.RaiseEvent("Sensor.Pressure", data.pressure, "");
+  Program.RaiseEvent("Sensor.Pressure.Unit", "Mb", "");
+  Program.RaiseEvent("Sensor.Wind.Speed", data.wind_speed, "");
+  Program.RaiseEvent("Sensor.Wind.Speed.Unit", "Kph", "");
+  Program.RaiseEvent("Sensor.Wind.Direction", data.wind_direction, "");
+  Program.RaiseEvent("Sensor.Precipitation.Rain", data.rain_1h_mm, "");
+  Program.RaiseEvent("Sensor.Precipitation.Rain.Unit", "1h", "");
+  Program.RaiseEvent("Sensor.Precipitation.Snow", data.snow_1h_mm, "");
+  Program.RaiseEvent("Sensor.Precipitation.Snow.Unit", "1h", "");
   // TODO: Program.Parameter("Sensor.UV").Value = "...";
 };
 Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
-  Program.Parameter("Conditions.Forecast." + day + ".Description").Value = data.weather_description;
-  Program.Parameter("Conditions.Forecast." + day + ".Year").Value = data.dt.Year.ToString("YYYY");
-  Program.Parameter("Conditions.Forecast." + day + ".Month").Value = data.dt.ToString("MMM");
-  Program.Parameter("Conditions.Forecast." + day + ".Day").Value = data.dt.ToString("dd");
-  Program.Parameter("Conditions.Forecast." + day + ".Weekday").Value = data.dt.ToString("dddd");
-  Program.Parameter("Conditions.Forecast." + day + ".IconUrl").Value = data.weather_icon;
-  Program.Parameter("Conditions.Forecast." + day + ".Temperature").Value = data.temperature;
-  Program.Parameter("Conditions.Forecast." + day + ".Temperature.Min").Value = data.temperature_min;
-  Program.Parameter("Conditions.Forecast." + day + ".Temperature.Max").Value = data.temperature_max;
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Description", data.weather_description, "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Year", data.dt.Year.ToString("YYYY"), "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Month", data.dt.ToString("MMM"), "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Day", data.dt.ToString("dd"), "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Weekday", data.dt.ToString("dddd"), "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".IconType", data.weather_icon, "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Temperature", data.temperature, "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Temperature.Min", data.temperature_min, "");
+  Program.RaiseEvent("Conditions.Forecast." + day + ".Temperature.Max", data.temperature_max, "");
 };
 Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
-  var icon = "unknonwn.png";
+  var icon = type;
   switch(type)
   {
-    case "01d": // 	clear sky
-    icon = "clear";
-    break;
-    case "02d": // 	few clouds
-    icon = "partlycloudy";
-    break;
-    case "03d": // scattered clouds
-    icon = "scatteredclouds";
-    break;
-    case "04d": // broken clouds (?)
-    icon = "cloudy";
-    break;
-    case "09d": // 	shower rain
-    icon = "showerrain";
-    break;
-    case "10d": // rain
-    icon = "rain";
-    break;
-    case "11d": // thunderstorms
-    icon = "thunderstorms";
-    break;
-    case "13d": // snow
-    icon = "snow";
-    break;
-    case "50d": // mist
-    icon = "hazy";
-    break;
+    case "clear": // 	clear sky
+      icon = "01d";
+      break;
+    case "partlycloudy": // 	few clouds
+      icon = "02d";
+      break;
+    case "scatteredclouds": // scattered clouds
+      icon = "03d";
+      break;
+    case "cloudy": // broken clouds (?)
+      icon = "04d";
+      break;
+    case "showerrain": // 	shower rain
+      icon = "09d";
+      break;
+    case "rain": // rain
+      icon = "10d";
+      break;
+    case "thunderstorms": // thunderstorms
+      icon = "11d";
+      break;
+    case "snow": // snow
+      icon = "13d";
+      break;
+    case "hazy": // mist
+      icon = "50d";
+      break;
     // Night icons
-    case "01n": // 	clear sky
-    icon = "clear_night";
-    break;
-    case "02n": // 	few clouds
-    icon = "partlycloudy_night";
-    break;
-    case "03n": // scattered clouds
-    icon = "scatteredclouds";
-    break;
-    case "04n": // broken clouds (?)
-    icon = "cloudy_night";
-    break;
-    case "09n": // 	shower rain
-    icon = "showerrain_night";
-    break;
-    case "10n": // rain
-    icon = "rain";
-    break;
-    case "11n": // thunderstorms
-    icon = "thunderstorms";
-    break;
-    case "13n": // snow
-    icon = "snow_night";
-    break;
-    case "50n": // mist
-    icon = "hazy";
-    break;
+    case "clear_night": // 	clear sky
+      icon = "01n";
+      break;
+    case "partlycloudy_night": // 	few clouds
+      icon = "02n";
+      break;
+    case "scatteredclouds_night": // scattered clouds
+      icon = "03n";
+      break;
+    case "cloudy_night": // broken clouds (?)
+      icon = "04n";
+      break;
+    case "showerrain_night": // 	shower rain
+      icon = "09n";
+      break;
+    case "rain_night": // rain
+      icon = "10n";
+      break;
+    case "thunderstorms_night": // thunderstorms
+      icon = "11n";
+      break;
+    case "snow_night": // snow
+      icon = "13n";
+      break;
+    case "hazy_night": // mist
+      icon = "50n";
+      break;
   }
   return icon;
 };
@@ -776,8 +777,8 @@ while (Program.IsEnabled)
       var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset);
       var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise);
 
-      Program.Parameter("Astronomy.Sunset").Value = TimeZoneInfo.ConvertTime(sunset, TimeZoneInfo.Local).ToShortTimeString();
-      Program.Parameter("Astronomy.Sunrise").Value = TimeZoneInfo.ConvertTime(sunrise, TimeZoneInfo.Local).ToShortTimeString();
+      Program.RaiseEvent("Astronomy.Sunset", TimeZoneInfo.ConvertTime(sunset, TimeZoneInfo.Local).ToShortTimeString(), "");
+      Program.RaiseEvent("Astronomy.Sunrise", TimeZoneInfo.ConvertTime(sunrise, TimeZoneInfo.Local).ToShortTimeString(), "");
 
       var data = CollectWeatherData(weatherData);
       UpdateWeatherParameters(data);
@@ -831,8 +832,8 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
   <Group>Weather and Environment</Group>
   <Features />
   <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2020-06-16T12:21:21.143129Z</ActivationTime>
-  <TriggerTime>2020-06-16T12:21:21.711167Z</TriggerTime>
+  <ActivationTime>2021-03-28T15:47:42.0936685Z</ActivationTime>
+  <TriggerTime>2021-03-28T15:47:42.1178686Z</TriggerTime>
   <Type>CSharp</Type>
   <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -936,8 +937,8 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:08.269065Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:16.821345Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:53.424125Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.246957Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1004,7 +1005,7 @@ Program.GoBackground();
   <ProgramBlock>
     <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
 var alarmTypes = "Siren,Light,Dimmer,Switch";
-Program.Setup(() => {
+Program.Setup(() =&gt; {
   Program
     .UseWidget("homegenie/generic/securitysystem")
 
@@ -1022,6 +1023,7 @@ Program.Setup(() => {
     .AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "program.text")
     .AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "program.text");
 });
+Program.Parameter("EventsLogger.EnableLogging").Value = "On";
 Program.Run();
 </ScriptSetup>
     <ScriptSource>//
@@ -1051,7 +1053,7 @@ var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, param)=&gt
     history.RemoveAll(sv =&gt; (DateTime.UtcNow - sv.Timestamp).TotalHours &gt; historyLimit);
   }
   // this event will cause the widget to update its data
-  Program.RaiseEvent("Program.UiRefresh", "Log updated", "");
+  Program.RaiseEvent("Program.UiRefresh", "refresh", "Security system sensor event");
 });
 
 var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
@@ -1120,11 +1122,12 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
   }
   if (moduleAlarmed)
   {
+    Program.RaiseEvent("HomeGenie.SecurityTriggerSource",
+                       	module.Instance.Name + " " + parameter.Name + " (" +
+                        module.Instance.Domain + "." +
+                        module.Instance.Address + ")", ""
+                      );
     Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
-    Program.Parameter("HomeGenie.SecurityTriggerSource").Value =
-      module.Instance.Name + " " + parameter.Name + " (" +
-      module.Instance.Domain + "." +
-      module.Instance.Address + ")";
     var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
     if (triggeredProgram != "")
     {
@@ -1166,7 +1169,9 @@ When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address
         	res = history; // objects are automatically serialized to JSON
         	break;
       }
-      Program.UpdateModuleDatabase();
+      if (request.Command != "Events.List") {
+      	Program.UpdateModuleDatabase();
+      }
     }
   }
   catch (Exception ex)
@@ -1254,14 +1259,14 @@ while (Program.IsEnabled)
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
+        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
         <Property>HomeGenie.SecuritySensor</Property>
         <Description>Use as Security Sensor</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor,DoorWindow,DoorLock</ForTypes>
+        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
         <Property>HomeGenie.SecurityTriggerHome</Property>
         <Description>Also trigger when armed Home</Description>
       </ProgramFeature>
@@ -1274,8 +1279,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:09.145707Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:16.977312Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:54.529825Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.334367Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1402,8 +1407,8 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:09.845611Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:16.986001Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:55.073254Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.303551Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1435,10 +1440,10 @@ Program.GoBackground();
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:10.619407Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.010711Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
@@ -1565,15 +1570,15 @@ Currently limited to one client channel.</Description>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-  <ScriptSetup>Program.Setup(() =&gt; {
+    <ScriptSetup>Program.Setup(() =&gt; {
   Program
     .AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor")
-    .AddFeature("", "Light,Dimmer,Switch : /Meter.Watts/", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
-    .AddFeature("", "Light,Dimmer,Switch,Sensor : /Meter.Watts/", "EnergyManagement.MonitorWatts", "Monitor watts", "checkbox");
+    .AddFeature("", "Light,Dimmer,Switch : /^Status.Level$/", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor : /^Meter.Watts$|^Status.Level$/", "EnergyManagement.MonitorWatts", "Monitor watts", "checkbox");
 });
 Program.Run();
 </ScriptSetup>
-  <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+    <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
 var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
 var kwCounterToday = energyMonitor.Parameter("EnergyMonitor.KwCounter.Today");
 var wattCounter = energyMonitor.Parameter("EnergyMonitor.WattCounter");
@@ -1597,21 +1602,42 @@ var monitorModules = Modules.WithFeature("EnergyManagement.MonitorStatus,EnergyM
 var updateRequired = false;
 var counterUpdateTimestamp = DateTime.Now;
 
+var raiseEvent = new Func&lt;ModuleParameter,bool&gt;((p) =&gt; {
+  energyMonitor.RaiseEvent(p.Name, p.Value, "");
+  return true;
+});
+
 When.ModuleParameterChanged((module, property) =&gt; {
-  if (module.HasFeature("EnergyManagement.MonitorStatus") || module.HasFeature("EnergyManagement.MonitorWatts"))
-	updateRequired = true;
+  if (module.HasFeature("EnergyManagement.MonitorStatus") || module.HasFeature("EnergyManagement.MonitorWatts")) {
+    if (property.Is("Status.Level") || property.Is("Meter.Watts")) {
+		updateRequired = true;
+    }
+  }
   // returning true, will route event to other listeners
   return true;
 });
 
+double counterUpdateInterval = 10;
 var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   var totalLoad = 0d;
   int devcount = 0, lightcount = 0, switchcount = 0;
+  var now = DateTime.UtcNow;
+  bool updateCounter = (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= counterUpdateInterval;
   monitorModules.Each((mod)=&gt;{
     if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0 || mod.Parameter("Status.Level").DecimalValue &gt; 0)
     {
       if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
-        totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
+      {
+        if (updateCounter) {
+          var avgWatt = mod.Parameter("Meter.Watts").Statistics.History
+            .FindAll(sv =&gt; (sv.Timestamp - now).TotalSeconds &lt; counterUpdateInterval)
+            .Select(sv =&gt; sv.Value)
+            .Average();
+          totalLoad += avgWatt;
+        } else {
+          totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
+        }
+      }
       if (mod.HasFeature("EnergyManagement.MonitorStatus"))
       {
         if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer"))
@@ -1628,22 +1654,32 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
     return false;
   });
   // Update kw and watt counters (every 60 seconds)
-  if ((DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt; 59)
+  if (updateCounter)
   {
     counterUpdateTimestamp = DateTime.Now;
-    var totalWattCounter = wattCounter.DecimalValue + (totalLoad / 60D);
-    wattCounter.Value = (totalWattCounter).ToString("0.000", CultureInfo.InvariantCulture);
-    kwCounter.Value = (totalWattCounter / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
-    var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60D);
-    wattCounterToday.Value = (todayWattCounter).ToString("0.000", CultureInfo.InvariantCulture);
-    kwCounterToday.Value = (todayWattCounter / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
+    var totalWattCounter = wattCounter.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
+    wattCounter.SetData(totalWattCounter);
+    kwCounter.SetData(totalWattCounter / 1000D);
+    var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
+    wattCounterToday.SetData(todayWattCounter);
+    kwCounterToday.SetData(todayWattCounter / 1000D);
+    raiseEvent(wattCounter);
+    raiseEvent(kwCounter);
+    raiseEvent(wattCounterToday);
+    raiseEvent(kwCounterToday);
   }
   // Update current load/devices stats
   kwLoad.Value = (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
+  raiseEvent(kwLoad);
   wattLoad.Value = totalLoad.ToString("0.000", CultureInfo.InvariantCulture);
+  raiseEvent(wattLoad);
   operatingDevices.Value = devcount.ToString("0");
+  raiseEvent(operatingDevices);
   operatingLights.Value = lightcount.ToString("0");
+  raiseEvent(operatingLights);
   operatingSwitches.Value = switchcount.ToString("0");
+  raiseEvent(operatingSwitches);
+  // TODO: deprecate Program.UiRefresh field
   energyMonitor.RaiseEvent("Program.UiRefresh", "Energy Monitor data updated", "");
   return true;
 });
@@ -1672,7 +1708,7 @@ When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
 var midNightReset = false;
 while (Program.IsEnabled)
 {
-  if (updateRequired || (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt; 59) {
+  if (updateRequired || (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= 6) {
   	updateRequired = false;
     UpdateEnergyLoad();
   }
@@ -1687,38 +1723,38 @@ while (Program.IsEnabled)
   {
     midNightReset = false;
   }
-  Pause(2);
+  Pause(5);
 }
 </ScriptSource>
-  <ScriptErrors>[]</ScriptErrors>
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>81</Address>
-  <Name>Energy Monitor</Name>
-  <Description>Collects and display information about
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>81</Address>
+    <Name>Energy Monitor</Name>
+    <Description>Collects and display information about
 device status and energy consumption.</Description>
-  <Group>Energy Management</Group>
-  <Features>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes>Light,Dimmer,Switch : Meter.Watts</ForTypes>
-      <Property>EnergyManagement.MonitorStatus</Property>
-      <Description>Monitor status</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes>Light,Dimmer,Switch,Sensor : Meter.Watts</ForTypes>
-      <Property>EnergyManagement.MonitorWatts</Property>
-      <Description>Monitor watts</Description>
-    </ProgramFeature>
-  </Features>
-  <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2020-06-13T14:52:27.994126Z</ActivationTime>
-  <TriggerTime>2020-06-13T14:52:28.404841Z</TriggerTime>
-  <Type>CSharp</Type>
-  <IsEnabled>true</IsEnabled>
-</ProgramBlock>
+    <Group>Energy Management</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch : /^Status.Level$/</ForTypes>
+        <Property>EnergyManagement.MonitorStatus</Property>
+        <Description>Monitor status</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Sensor : /^Meter.Watts$|^Status.Level$/</ForTypes>
+        <Property>EnergyManagement.MonitorWatts</Property>
+        <Description>Monitor watts</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-03-22T11:35:56.692695Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.402106Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Run();
 </ScriptSetup>
@@ -1861,8 +1897,8 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:12.271659Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.136961Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:57.25539Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.361112Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2008,8 +2044,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:12.859506Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.137093Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:57.872984Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.37837Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2210,27 +2246,27 @@ while (Program.IsRunning) {
   Pause(30);
 }
 </ScriptSource>
-  <ScriptErrors />
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>77</Address>
-  <Name>MQTT Network</Name>
-  <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>77</Address>
+    <Name>MQTT Network</Name>
+    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
       Other servers will automatically inherit the published module once an event is generated from it.</Description>
-  <Group>Interconnections</Group>
-  <Features>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes />
-      <Property>MQTT.SensorPublish</Property>
-      <Description>Publish this module events</Description>
-    </ProgramFeature>
-  </Features>
-  <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2020-06-10T18:20:22.352937Z</ActivationTime>
-  <TriggerTime>2020-06-10T18:20:22.578661Z</TriggerTime>
-  <Type>CSharp</Type>
-  <IsEnabled>false</IsEnabled>
+    <Group>Interconnections</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes />
+        <Property>MQTT.SensorPublish</Property>
+        <Description>Publish this module events</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
@@ -2272,7 +2308,7 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:13.988633Z</ActivationTime>
+    <ActivationTime>2021-03-22T11:35:59.04763Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -2442,7 +2478,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
     }
     break;
   }
-  return new ResponseText(res);
+  return res != "ERROR" ? new ResponseText(res) : null;
 });
 
 while (Program.IsEnabled)
@@ -2479,8 +2515,8 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:14.476385Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.265605Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:59.693366Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.424761Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2654,18 +2690,18 @@ Dim/Bright buttons can be defined in &lt;b&gt;Configure-&gt;Settings&lt;/b&gt; p
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:58:15.711598Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.283232Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:36:01.295955Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.436729Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-  <ScriptSetup>Program.Setup(() =&gt; {
+    <ScriptSetup>Program.Setup(() =&gt; {
   Program
     .AddOption("ZoneSensors.Count", "5", "Number of Zone Sensors", "slider:1:10:1");
 });
 Program.Run();</ScriptSetup>
-  <ScriptSource>var FLD_ZONESENSORS_DOMAIN = "HomeGenie.ZoneSensors";
+    <ScriptSource>var FLD_ZONESENSORS_DOMAIN = "HomeGenie.ZoneSensors";
 var FLD_ZONESENSORS_ENABLE = "HomeGenie.ZoneSensors.Enable";
 
 var zonesCount = (int)Program.Option("ZoneSensors.Count").DecimalValue;
@@ -2730,62 +2766,62 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 
 Program.GoBackground();
 </ScriptSource>
-  <ScriptErrors>[]</ScriptErrors>
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>29</Address>
-  <Name>Zone Sensors</Name>
-  <Description>Adds an arbitrary number of Zone Sensors. Each of them can group multiple sensors into one logcal sensor.
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>29</Address>
+    <Name>Zone Sensors</Name>
+    <Description>Adds an arbitrary number of Zone Sensors. Each of them can group multiple sensors into one logcal sensor.
 When changing the number of zone sensors, program restart is required.</Description>
-  <Group>Devices and Things</Group>
-  <Features>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-      <ForTypes>:^Sensor\.</ForTypes>
-      <Property>HomeGenie.ZoneSensors.Enable</Property>
-      <Description>Include in Zone Sensors</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-      <ForTypes>:^Sensor\.</ForTypes>
-      <Property>HomeGenie.ZoneSensors.1</Property>
-      <Description>Zone Sensor 1</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-      <ForTypes>:^Sensor\.</ForTypes>
-      <Property>HomeGenie.ZoneSensors.2</Property>
-      <Description>Zone Sensor 2</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-      <ForTypes>:^Sensor\.</ForTypes>
-      <Property>HomeGenie.ZoneSensors.3</Property>
-      <Description>Zone Sensor 3</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-      <ForTypes>:^Sensor\.</ForTypes>
-      <Property>HomeGenie.ZoneSensors.4</Property>
-      <Description>Zone Sensor 4</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
-      <ForTypes>:^Sensor\.</ForTypes>
-      <Property>HomeGenie.ZoneSensors.5</Property>
-      <Description>Zone Sensor 5</Description>
-    </ProgramFeature>
-  </Features>
-  <AutoRestartEnabled>false</AutoRestartEnabled>
-  <ActivationTime>2020-06-13T15:33:11.199313Z</ActivationTime>
-  <TriggerTime>2020-06-13T15:33:11.80293Z</TriggerTime>
-  <Type>CSharp</Type>
-  <IsEnabled>true</IsEnabled>
+    <Group>Security</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes>: /^Sensor\./</ForTypes>
+        <Property>HomeGenie.ZoneSensors.Enable</Property>
+        <Description>Include in Zone Sensors</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes> : /^Sensor\./</ForTypes>
+        <Property>HomeGenie.ZoneSensors.1</Property>
+        <Description>Zone Sensor 1</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes> : /^Sensor\./</ForTypes>
+        <Property>HomeGenie.ZoneSensors.2</Property>
+        <Description>Zone Sensor 2</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes>:^Sensor\.</ForTypes>
+        <Property>HomeGenie.ZoneSensors.3</Property>
+        <Description>Zone Sensor 3</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes>:^Sensor\.</ForTypes>
+        <Property>HomeGenie.ZoneSensors.4</Property>
+        <Description>Zone Sensor 4</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>!HomeGenie.ZoneSensors</ForDomains>
+        <ForTypes>:^Sensor\.</ForTypes>
+        <Property>HomeGenie.ZoneSensors.5</Property>
+        <Description>Zone Sensor 5</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-03-22T11:36:01.855949Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.51155Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>/*
@@ -2801,7 +2837,7 @@ When changing the number of zone sensors, program restart is required.</Descript
 ||   http://genielabs.github.io/HomeGenie/api/mig/overview.html
 */
 
-var _domain = "HomeAutomation.Demo";
+const _domain = "HomeAutomation.Demo";
 
 // Add a temperature and luminance sensor
 $$.program.addVirtualModule(_domain, "1", "Sensor", "");
@@ -2833,7 +2869,7 @@ $$.program.run();</ScriptSetup>
 ||   http://genielabs.github.io/HomeGenie/api/mig/overview.html
 */
 
-var _domain = "HomeAutomation.Demo";
+const _domain = "HomeAutomation.Demo";
 $$.modules = $$.modules.inDomain(_domain);
 
 initialize();
@@ -2841,7 +2877,7 @@ initialize();
 // handle API call for this domain
 $$.on.webServiceCallReceived(_domain, function(apiCall){
 
-  var ac = $$.program.parseApiCall(apiCall);
+  const ac = $$.program.parseApiCall(apiCall);
   // Example:
   //  if the "apiCall" was
   //    "http://&lt;homegenie_address&gt;/api/HomeAutomation.Demo/3/Control.Level/50/1000"
@@ -2853,9 +2889,9 @@ $$.on.webServiceCallReceived(_domain, function(apiCall){
   //    ac.getOption(0) = "50"
   //    ac.getOption(1) = "1000"
 
-  var response = "ERROR";
+  const response = "ERROR";
   // get the module addressed by the API call
-  var mod = $$.modules.withAddress(ac.address).get();
+  const mod = $$.modules.withAddress(ac.address).get();
   if (mod.isOfDeviceType("Switch")) {
     switch (ac.command) {
       case 'Control.On':
@@ -2892,7 +2928,7 @@ $$.program.goBackground();
 // let's give some default properties to virtual modules
 function initialize() {
   // Multi Sensor
-  var multiSensor = $$.modules.withAddress("1").get();
+  const multiSensor = $$.modules.withAddress("1").get();
   if (multiSensor.instance.name == "")
     multiSensor.instance.name = 'Multi Sensor';
   if (multiSensor.parameter("Sensor.Temperature").value == "")
@@ -2902,13 +2938,13 @@ function initialize() {
   if (multiSensor.parameter("Sensor.MotionDetect").value == "")
     multiSensor.parameter("Sensor.MotionDetect").value = "0";
   // Door Window
-  var doorWindow = $$.modules.withAddress("2").get();
+  const doorWindow = $$.modules.withAddress("2").get();
   if (doorWindow.instance.name == "")
     doorWindow.instance.name = "Door Sensor";
   if (doorWindow.parameter("Sensor.DoorWindow").value == "")
     doorWindow.parameter("Sensor.DoorWindow").value = "1";
   // Boiler Switch
-  var boilerSwitch = $$.modules.withAddress("3").get();
+  const boilerSwitch = $$.modules.withAddress("3").get();
   if (boilerSwitch.instance.name == "")
     boilerSwitch.instance.name = "Boiler Switch";
   if (boilerSwitch.parameter("Status.Level").value == "")
@@ -2965,8 +3001,8 @@ function initialize() {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:49.742293Z</ActivationTime>
-    <TriggerTime>2019-04-15T18:58:17.987849Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:41.290568Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.60233Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2985,8 +3021,8 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:49.742447Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:16:14.885738Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:41.291035Z</ActivationTime>
+    <TriggerTime>2021-03-21T17:04:29.679982Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3007,8 +3043,8 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:49.742646Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:16:32.233907Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:41.291171Z</ActivationTime>
+    <TriggerTime>2021-03-21T17:04:30.556091Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3024,7 +3060,7 @@ while($$.program.isRunning) {
   $$.pause(60); // pause 60 seconds
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>403</Address>
     <Name>Demo - Simulate Temperature</Name>
@@ -3032,8 +3068,8 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:49.74284Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:16:29.486907Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:41.291251Z</ActivationTime>
+    <TriggerTime>2021-03-20T20:42:56.812907Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3051,7 +3087,7 @@ while($$.program.isRunning) {
   $$.pause(60); // pause 60 seconds
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>404</Address>
     <Name>Demo - Simulate Luminance</Name>
@@ -3059,9 +3095,229 @@ while($$.program.isRunning) {
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2019-04-15T18:57:49.743056Z</ActivationTime>
-    <TriggerTime>2019-03-06T15:16:30.255377Z</TriggerTime>
+    <ActivationTime>2021-03-22T11:35:41.29133Z</ActivationTime>
+    <TriggerTime>2021-03-20T20:42:57.105683Z</TriggerTime>
     <Type>Javascript</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(()=&gt; {
+  Program
+    .UseWidget("homegenie/generic/program")
+    .AddFeature("", "Sensor", "Simulator.Sensor.Temperature", "Temperature sensor", "checkbox")
+    .AddFeature("", "Sensor", "Simulator.Sensor.Humidity", "Humidity sensor", "checkbox")
+    .AddFeature("", "Sensor", "Simulator.Sensor.Luminance", "Light sensor", "checkbox")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Meter.Watts", "Watts meter", "checkbox")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Meter.Watts.Max", "Watts meter max power", "slider:1:2500:1:10")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Sensor.DataFrequency", "Simulator emit frequency", "slider:0.5:60:0.5:30");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>// CSharp Automation Program Plugin
+
+const string TEMPERATURE_FIELD = "Sensor.Temperature";
+const string LUMINANCE_FIELD = "Sensor.Luminance";
+const string HUMIDITY_FIELD = "Sensor.Humidity";
+const string WATTS_FIELD = "Meter.Watts";
+const string EMIT_FREQUENCY_FIELD = "Simulator.Sensor.DataFrequency";
+
+while (Program.IsRunning) {
+  Pause(0.25);
+
+  // Sensor.Temperature
+  var featureModules = Modules.WithFeature("Simulator." + TEMPERATURE_FIELD);
+  featureModules.Each( (module) =&gt; {
+    var frequency = module.Parameter(EMIT_FREQUENCY_FIELD);
+    var field = module.Parameter(TEMPERATURE_FIELD);
+    if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
+      double variation = (new Random().NextDouble() - 0.5) / 5;
+      double value = field.DecimalValue + variation;
+      module.RaiseEvent(TEMPERATURE_FIELD, Math.Round(value, 3), "Sensor simulartor emitted value");
+    }
+    return false; // continue iterating
+  });
+
+  // Sensor.Humidity
+  featureModules = Modules.WithFeature("Simulator." + HUMIDITY_FIELD);
+  featureModules.Each( (module) =&gt; {
+    var frequency = module.Parameter(EMIT_FREQUENCY_FIELD);
+    var field = module.Parameter(HUMIDITY_FIELD);
+    if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
+      double variation = (new Random().NextDouble() - 0.5) * 5;
+      double value = (int)field.DecimalValue + variation;
+      if (value &lt; 5) value = 5;
+      if (value &gt; 95) value = 95;
+      module.RaiseEvent(HUMIDITY_FIELD, Math.Round(value, 3), "Sensor simulartor emitted value");
+    }
+    return false; // continue iterating
+  });
+
+  // Sensor.Luminance
+  featureModules = Modules.WithFeature("Simulator." + LUMINANCE_FIELD);
+  featureModules.Each( (module) =&gt; {
+    var frequency = module.Parameter(EMIT_FREQUENCY_FIELD);
+    var field = module.Parameter(LUMINANCE_FIELD);
+    if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
+      double variation = (new Random().NextDouble() - 0.5) * 200;
+      double value = (int)field.DecimalValue + variation;
+      if (value &lt; 0) value = 0;
+      if (value &gt; 1000) value = 1000;
+      module.RaiseEvent(LUMINANCE_FIELD, value, "Sensor simulartor emitted value");
+    }
+    return false; // continue iterating
+  });
+
+  // Meter.Watts
+  featureModules = Modules.WithFeature("Simulator." + WATTS_FIELD);
+  featureModules.Each( (module) =&gt; {
+    var frequency = module.Parameter(EMIT_FREQUENCY_FIELD);
+    var powerMax = module.Parameter("Simulator." + WATTS_FIELD + ".Max");
+    var level = module.Parameter("Status.Level");
+    var field = module.Parameter(WATTS_FIELD);
+    if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue &amp;&amp; powerMax.DecimalValue &gt; 0) {
+      double value = powerMax.DecimalValue * (level != null ? level.DecimalValue : 0);
+      if (value &gt; 0) {
+        double variation = (new Random().NextDouble() - 0.5) / 2;
+        value += variation;
+      }
+      if (value &gt; 0 || field.DecimalValue != 0) {
+	      module.RaiseEvent(WATTS_FIELD, Math.Round(value, 3), "Sensor simulartor emitted value");
+      }
+    }
+    return false; // continue iterating
+  });
+}
+</ScriptSource>
+    <ScriptErrors />
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>410</Address>
+    <Name>Sensor Simulator</Name>
+    <Description>Simulate realtime data from a sensor</Description>
+    <Group>Demo</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor</ForTypes>
+        <Property>Simulator.Sensor.Temperature</Property>
+        <Description>Temperature sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor</ForTypes>
+        <Property>Simulator.Sensor.Humidity</Property>
+        <Description>Humidity sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor</ForTypes>
+        <Property>Simulator.Sensor.Luminance</Property>
+        <Description>Light sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>Simulator.Meter.Watts</Property>
+        <Description>Watts meter</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:1:2500:1:1</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>Simulator.Meter.Watts.Max</Property>
+        <Description>Watts meter max power</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0.5:60:0.5:30</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>Simulator.Sensor.DataFrequency</Property>
+        <Description>Simulator emit frequency</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-03-22T11:36:02.492263Z</ActivationTime>
+    <TriggerTime>2021-03-22T11:36:03.653674Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+  Program.AddFeature("", "", "EventsLogger.EnableLogging", "Enable events logging", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var loggableModules = Modules.WithFeature("EventsLogger.EnableLogging");
+
+When.ProgramStopping(() =&gt; {
+//  db.Dispose(); 
+  return true;
+});
+
+When.ModuleParameterChanged((mod, p) =&gt; {
+  var m = mod.Get().Instance;
+  if (loggableModules.SelectedModules.Contains(m)) {
+    lock(mod.Get().Instance)
+    using (var db = Data.LiteDb(m.Domain+"@"+m.Address+"-events-log")) {
+      db.Pragma("LIMIT_SIZE", 2097152);
+      var col = db.GetCollection&lt;LoggerEvent&gt;("events");
+      col.EnsureIndex(x =&gt; x.Domain);
+      col.EnsureIndex(x =&gt; x.Address);
+      col.EnsureIndex(x =&gt; x.Parameter);
+      try {
+        col.Insert(new LoggerEvent(m, p));
+      } catch (Exception e) {
+        // insert error, remove some data
+        var col2 = db.GetCollection("events");
+        var data_list = col2.Find(Query.All(), 0, 100);
+        foreach (var row in data_list) 
+        {
+          col2.Delete(row["_id"]);
+        }        
+        // retry insert
+        col.Insert(new LoggerEvent(m, p));
+      }
+    }
+  }
+  return true;
+});
+
+When.WebServiceCallReceived("HomeGenie.EventsLogger", (args) =&gt; {
+  var cmd = Program.ParseApiCall(args);
+  var moduleDomain = cmd.Address;
+  var moduleAddress = cmd.Command;
+  var module = Modules.InDomain(moduleDomain).WithAddress(moduleAddress);
+  var parameter = cmd.GetOption(0);
+  lock(module.Get().Instance)
+  using (var db = Data.LiteDb(moduleDomain+"@"+moduleAddress+"-events-log")) {
+    db.Pragma("LIMIT_SIZE", 2097152);
+    var col = db.GetCollection&lt;LoggerEvent&gt;("events");
+    var results = col.Query()
+      .Where(x =&gt; x.Parameter == parameter)
+      .OrderByDescending(x =&gt; x.Date)
+      //.Select(x =&gt; new { x.Name, NameUpper = x.Name.ToUpper() }) // &lt;-- transform data
+      .Limit(100)
+      .ToList();
+  	return results;
+  }
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>100</Address>
+    <Name>Events logging</Name>
+    <Description />
+    <Group>Security</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-03-22T11:58:21.882048Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

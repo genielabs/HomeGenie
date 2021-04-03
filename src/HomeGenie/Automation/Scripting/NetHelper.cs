@@ -494,20 +494,6 @@ namespace HomeGenie.Automation.Scripting
 
         #endregion
 
-        // TODO: add autodoc comment (HG Event forwarding)
-        public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
-        {
-            var eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + _homegenie.GetHttpServicePort();
-            // propagate event to remote hg endpoint
-            Utility.RunAsyncTask(() =>
-            {
-                WebService(eventRouteUrl)
-                    .Put(JsonConvert.SerializeObject(new ModuleEvent(module.Instance, parameter), new JsonSerializerSettings(){ Culture = CultureInfo.InvariantCulture }))
-                    .Call();
-            });
-            return this;
-        }
-
         /// <summary>
         /// Use provided credentials when connecting.
         /// </summary>

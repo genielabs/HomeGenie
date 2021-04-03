@@ -333,7 +333,7 @@ namespace HomeGenie.Automation.Scripting
                     if (selected && this.withFeature != null && this.withFeature != "")
                     {
                         var parameter = module.Properties.Find(p => GetArgumentsList(this.withFeature).Contains(p.Name));
-                        if (parameter == null || parameter.Value != "On")
+                        if (parameter == null || (parameter.Value != "On" && parameter.DecimalValue == 0))
                         {
                             selected = false;
                         }

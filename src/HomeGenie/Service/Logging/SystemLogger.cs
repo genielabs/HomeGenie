@@ -152,7 +152,9 @@ namespace HomeGenie.Service.Logging
             var versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             string version = versionInfo.FileVersion;
             string logDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
-            string logFile = assembly.ManifestModule.Name.ToLower().Replace(".exe", ".log");
+            string logFile = assembly.ManifestModule.Name.ToLower()
+                .Replace(".exe", ".log")
+                .Replace(".dll", ".log");
             string logPath = Path.Combine(logDir, logFile);
             if (!Directory.Exists(logDir))
             {

@@ -37,6 +37,7 @@ using System.Threading;
 using System.Xml.Serialization;
 using Jint.Parser;
 using HomeGenie.Automation.Scripting;
+using HomeGenie.Data.UI;
 using Innovative.SolarCalculator;
 #if NETCOREAPP
 using RJCP.IO.Ports;
@@ -392,27 +393,6 @@ namespace HomeGenie.Service.Handlers
                     }
                     request.ResponseData = new ResponseText(resultMessage);
                 }
-                else if (migCommand.GetOption(0) == "Statistics.GetStatisticsDatabaseMaximumSize")
-                {
-                    request.ResponseData = new ResponseText(homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes.ToString());
-                }
-                else if (migCommand.GetOption(0) == "Statistics.SetStatisticsDatabaseMaximumSize")
-                {
-                    try
-                    {
-                        int sizeLimit = int.Parse(migCommand.GetOption(1));
-                        homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = sizeLimit;
-                        homegenie.SystemConfiguration.Update();
-#if !NETCOREAPP
-                        homegenie.Statistics.SizeLimit = sizeLimit * 1024 * 1024;
-#endif
-                        request.ResponseData = new ResponseStatus(Status.Ok);
-                    }
-                    catch
-                    {
-                        request.ResponseData = new ResponseStatus(Status.Error);
-                    }
-                }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {
                     string csvlog = "";
@@ -606,6 +586,104 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Modules.FeaturesGet":
+                {
+                    var module = homegenie.Modules.Find(m =>
+                        m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        var res = new List<ModuleOptions>();
+                        for (int pn = 0; pn < homegenie.ProgramManager.Programs.Count; pn++)
+                        {
+                            var p = homegenie.ProgramManager.Programs[pn];
+                            if (!p.IsEnabled || p.Features == null) continue;
+                            var pf = new ModuleOptions()
+                            {
+                                id = p.Address.ToString(),
+                                name = p.Name,
+                                description = p.Description,
+                                items = new List<OptionField>()
+                            };
+                            for (int i = 0; i < p.Features.Count; i++)
+                            {
+                                var f = p.Features[i];
+                                bool matchFeature = Utility.MatchValues(f.ForDomains, module.Domain);
+                                string forTypes = f.ForTypes;
+                                string forProperties = null;
+                                int propertyFilterIndex = forTypes.IndexOf(':');
+                                if (propertyFilterIndex >= 0)
+                                {
+                                    forProperties = forTypes.Substring(propertyFilterIndex + 1).Trim();
+                                    forTypes = forTypes.Substring(0, propertyFilterIndex).Trim();
+                                }
+                                matchFeature = matchFeature && Utility.MatchValues(forTypes, module.DeviceType.ToString());
+                                if (forProperties != null)
+                                {
+                                    bool matchProperty = false;
+                                    for (int idx = 0; idx < module.Properties.Count; idx++)
+                                    {
+                                        var mp = module.Properties[idx];
+                                        if (Utility.MatchValues(forProperties, mp.Name))
+                                        {
+                                            matchProperty = true;
+                                            break;
+                                        }
+                                    }
+
+                                    matchFeature = matchFeature && matchProperty;
+                                }
+
+                                if (!matchFeature) continue;
+                                string[] type = f.FieldType.Split(':');
+                                string defaultFieldValue = "";
+                                if (type.Length > 1 && type[0] == "slider") // this is currently the only field with default value option
+                                {
+                                    defaultFieldValue = type.Length > 3 ? type[3] : type[1];
+                                }
+                                var mf = Utility.ModuleParameterGet(module, f.Property);
+                                // add the field if does not exist
+                                if (mf == null)
+                                {
+                                    mf = new ModuleParameter()
+                                    {
+                                        ParentId = p.Address,
+                                        Name = f.Property,
+                                        Description = f.Description,
+                                        FieldType =  f.FieldType,
+                                        Value = defaultFieldValue
+                                    };
+                                    module.Properties.Add(mf);
+                                }
+                                // add matching item
+                                pf.items.Add(new OptionField()
+                                {
+                                    pid = p.Address.ToString(),
+                                    field = new ModuleField()
+                                    {
+                                        key = mf.Name,
+                                        value = mf.Value,
+                                        timestamp = mf.UpdateTime.ToString("o")
+                                    },
+                                    type = new OptionFieldType()
+                                    {
+                                        id = type[0],
+                                        options = type.Skip(1).ToList<object>()
+                                    },
+                                    name = p.Name,
+                                    description = f.Description
+                                });
+                            }
+                            if (pf.items.Count > 0) {
+                                // pf.items.Sort((i1, i2) => (i1.description).CompareTo(i2.description));
+                                res.Add(pf);
+                            }
+                            res.Sort((pf1, pf2) => (pf1.name).CompareTo(pf2.name));
+                        }
+                        // this should be serialized automatically but implicit serialization returns empty items
+                        request.ResponseData = JsonConvert.SerializeObject(res);
+                    }
+                }
+                break;
             case "Modules.ParameterGet":
                 try
                 {
@@ -614,11 +692,11 @@ namespace HomeGenie.Service.Handlers
                     if (parameter != null)
                         request.ResponseData = JsonConvert.SerializeObject(parameter, Formatting.Indented);
                     else
-                        request.ResponseData = new ResponseText("ERROR: Unknown parameter '" + migCommand.GetOption(2) + "'");
+                        request.ResponseData = new ResponseStatus(Status.Error, "Unknown parameter '" + migCommand.GetOption(2) + "'");
                 }
                 catch (Exception ex)
                 {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -639,11 +717,11 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, migCommand.GetOption(2), migCommand.GetOption(3));
                     }
-                    request.ResponseData = new ResponseText("OK");
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 catch (Exception ex)
                 {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -663,12 +741,12 @@ namespace HomeGenie.Service.Handlers
                     }
                     else
                     {
-                        request.ResponseData = new ResponseText("ERROR: Unknown parameter '" + migCommand.GetOption(2) + "'");
+                        request.ResponseData = new ResponseStatus(Status.Error, "Unknown parameter '" + migCommand.GetOption(2) + "'");
                     }
                 }
                 catch (Exception ex)
                 {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -680,22 +758,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
-                }
-                break;
-
-            case "Modules.RoutingReset":
-                try
-                {
-                    for (int m = 0; m < homegenie.Modules.Count; m++)
-                    {
-                        homegenie.Modules[m].RoutingNode = "";
-                    }
-                    request.ResponseData = new ResponseText("OK");
-                }
-                catch (Exception ex)
-                {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -763,12 +826,38 @@ namespace HomeGenie.Service.Handlers
                         request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
-                homegenie.UpdateModulesDatabase();//write modules
+                homegenie.UpdateModulesDatabase();
+                break;
+
+            case "Modules.UpdateInfo": // updates Name, Description and optionally device type
+                {
+                    var data = JsonConvert.DeserializeObject<dynamic>(request.RequestText);
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        module.Name = data.name;
+                        module.Description = data.description;
+                        try
+                        {
+                            module.DeviceType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), data.type.ToString(), true);
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            // TODO: check what's wrong here...
+                        }
+                        homegenie.UpdateModulesDatabase();
+                        request.ResponseData = new ResponseStatus(Status.Ok);
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "No such module.");
+                    }
+                }
                 break;
 
             case "Modules.Update":
-                string streamContent = request.RequestText;
-                var newModule = JsonConvert.DeserializeObject<Module>(streamContent);
+                var newModule = JsonConvert.DeserializeObject<Module>(request.RequestText);
                 var currentModule = homegenie.Modules.Find(p => p.Domain == newModule.Domain && p.Address == newModule.Address);
                 //
                 if (currentModule == null)
@@ -780,42 +869,38 @@ namespace HomeGenie.Service.Handlers
                     currentModule.Name = newModule.Name;
                     currentModule.Description = newModule.Description;
                     currentModule.DeviceType = newModule.DeviceType;
-                    foreach (var newParameter in newModule.Properties)
+                    if (newModule.Properties != null)
                     {
-                        var currentParameter = currentModule.Properties.Find(mp => mp.Name == newParameter.Name);
-                        if (currentParameter == null)
+                        foreach (var newParameter in newModule.Properties)
                         {
-                            currentModule.Properties.Add(newParameter);
-                            homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
-                        }
-                        else if (newParameter.NeedsUpdate)
-                        {
-                            // reset current reporting Watts if VMWatts field is set to 0
-                            if (newParameter.Name == Properties.VirtualMeterWatts && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
+                            var currentParameter = currentModule.Properties.Find(mp => mp.Name == newParameter.Name);
+                            if (currentParameter == null)
                             {
-                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, Properties.MeterWatts, "0.0");
+                                currentModule.Properties.Add(newParameter);
+                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
                             }
-                            else if (newParameter.Value != currentParameter.Value)
+                            // TODO: "NeedsUpdate" field should be deprecated soon
+                            else if (newParameter.NeedsUpdate && newParameter.Value != currentParameter.Value)
                             {
                                 homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
                             }
                         }
-                    }
-                    // look for deleted properties
-                    var deletedParameters = new List<ModuleParameter>();
-                    foreach (var parameter in currentModule.Properties)
-                    {
-                        var currentParameter = newModule.Properties.Find(mp => mp.Name == parameter.Name);
-                        if (currentParameter == null)
+                        // look for deleted properties
+                        var deletedParameters = new List<ModuleParameter>();
+                        foreach (var parameter in currentModule.Properties)
                         {
-                            deletedParameters.Add(parameter);
+                            var currentParameter = newModule.Properties.Find(mp => mp.Name == parameter.Name);
+                            if (currentParameter == null)
+                            {
+                                deletedParameters.Add(parameter);
+                            }
                         }
+                        foreach (var parameter in deletedParameters)
+                        {
+                            currentModule.Properties.Remove(parameter);
+                        }
+                        deletedParameters.Clear();
                     }
-                    foreach (var parameter in deletedParameters)
-                    {
-                        currentModule.Properties.Remove(parameter);
-                    }
-                    deletedParameters.Clear();
                 }
                 homegenie.UpdateModulesDatabase();
                 request.ResponseData = new ResponseStatus(Status.Ok);
@@ -828,6 +913,8 @@ namespace HomeGenie.Service.Handlers
                 request.ResponseData = new ResponseStatus(Status.Ok);
                 break;
 
+            
+// TODO: deprecate "Stores" API
             case "Stores.List":
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
@@ -923,6 +1010,8 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            
+            
             case "Groups.ModulesList":
                 var theGroup = homegenie.Groups.Find(z => z.Name.ToLower() == migCommand.GetOption(0).Trim().ToLower());
                 if (theGroup != null)
@@ -952,76 +1041,84 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
             case "Groups.Rename":
-                string oldName = migCommand.GetOption(1);
-                string newName = request.RequestText;
-                var currentGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(g => g.Name == oldName);
-                var newGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(g => g.Name == newName);
-                // ensure that the new group name is not already defined
-                if (newGroup == null && currentGroup != null)
                 {
-                    currentGroup.Name = newName;
-                    homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));
-                    request.ResponseData = new ResponseStatus(Status.Ok);
-                }
-                else
-                {
-                    request.ResponseData = new ResponseText("New name already in use.");
+                    string groupType = migCommand.GetOption(0); // 'Automation' or 'Control'
+                    string oldName = migCommand.GetOption(1);
+                    string newName = request.RequestText;
+                    var currentGroup = homegenie.GetGroups(groupType).Find(g => g.Name == oldName);
+                    var newGroup = homegenie.GetGroups(groupType).Find(g => g.Name == newName);
+                    // ensure that the new group name is not already defined
+                    if (newGroup == null && currentGroup != null)
+                    {
+                        currentGroup.Name = newName;
+                        homegenie.UpdateGroupsDatabase(groupType);
+                        request.ResponseData = new ResponseStatus(Status.Ok);
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "Group '" + newName + "' already exists.");
+                    }
                 }
                 break;
 
             case "Groups.Sort":
                 {
+                    string groupType = migCommand.GetOption(0); // 'Automation' or 'Control'
                     var newGroupList = new List<Group>();
-                    string[] newPositionOrder = request.RequestText.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] newPositionOrder =
+                        request.RequestText.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
                     for (int i = 0; i < newPositionOrder.Length; i++)
                     {
-                        newGroupList.Add(homegenie.GetGroups(migCommand.GetOption(0))[int.Parse(newPositionOrder[i])]);
+                        newGroupList.Add(homegenie.GetGroups(groupType)[int.Parse(newPositionOrder[i])]);
                     }
-                    homegenie.GetGroups(migCommand.GetOption(0)).Clear();
-                    homegenie.GetGroups(migCommand.GetOption(0)).RemoveAll(g => true);
-                    homegenie.GetGroups(migCommand.GetOption(0)).AddRange(newGroupList);
-                    homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));
-                }
-                try
-                {
-                    request.ResponseData = homegenie.GetGroups(migCommand.GetOption(0));
-                }
-                catch (Exception ex)
-                {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    homegenie.GetGroups(groupType).Clear();
+                    homegenie.GetGroups(groupType).RemoveAll(g => true);
+                    homegenie.GetGroups(groupType).AddRange(newGroupList);
+                    homegenie.UpdateGroupsDatabase(groupType);
+                    try
+                    {
+                        request.ResponseData = homegenie.GetGroups(groupType);
+                    }
+                    catch (Exception ex)
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
+                    }
                 }
                 break;
 
             case "Groups.SortModules":
                 {
+                    string groupType = migCommand.GetOption(0); // 'Automation' or 'Control'
                     string groupName = migCommand.GetOption(1);
                     Group sortGroup = null;
-                    sortGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(zn => zn.Name == groupName);
+                    sortGroup = homegenie.GetGroups(groupType).Find(zn => zn.Name == groupName);
                     if (sortGroup != null)
                     {
                         var newModulesReference = new List<ModuleReference>();
-                        string[] newPositionOrder = request.RequestText.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] newPositionOrder =
+                            request.RequestText.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
                         for (int i = 0; i < newPositionOrder.Length; i++)
                         {
                             newModulesReference.Add(sortGroup.Modules[int.Parse(newPositionOrder[i])]);
                         }
+
                         sortGroup.Modules.Clear();
                         sortGroup.Modules = newModulesReference;
-                        homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));
+                        homegenie.UpdateGroupsDatabase(groupType);
                     }
-                }
-                try
-                {
-                    request.ResponseData = homegenie.GetGroups(migCommand.GetOption(0));
-                }
-                catch (Exception ex)
-                {
-                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                    try
+                    {
+                        request.ResponseData = homegenie.GetGroups(groupType);
+                    }
+                    catch (Exception ex)
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
+                    }
                 }
                 break;
 
@@ -1029,79 +1126,92 @@ namespace HomeGenie.Service.Handlers
                 string newGroupName = request.RequestText;
                 if (newGroupName.Trim().Length > 0)
                 {
-                    var existingGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find((g) => g.Name == newGroupName);
+                    string groupType = migCommand.GetOption(0); // 'Automation' or 'Control'
+                    var existingGroup = homegenie.GetGroups(groupType).Find((g) => g.Name == newGroupName);
                     if (existingGroup == null)
                     {
-                        homegenie.GetGroups(migCommand.GetOption(0)).Add(new Group() { Name = newGroupName });
-                        homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
+                        homegenie.GetGroups(groupType).Add(new Group() { Name = newGroupName });
+                        homegenie.UpdateGroupsDatabase(groupType);//write groups
+                        request.ResponseData = new ResponseStatus(Status.Ok);
                     }
                     else
                     {
-                        request.ResponseData = new ResponseText("ERROR: group '" + newGroupName + "' already exists.");
+                        request.ResponseData = new ResponseStatus(Status.Error, "Group '" + newGroupName + "' already exists.");
                     }
                 }
                 else
                 {
-                    request.ResponseData = new ResponseText("ERROR: invalid group name '" + newGroupName + "' .");
+                    request.ResponseData = new ResponseStatus(Status.Error, "Group name cannot be empty.");
                 }
                 break;
 
             case "Groups.Delete":
-                string deletedGroupName = request.RequestText;
-                Group deletedGroup = null;
-                try
                 {
-                    deletedGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(zn => zn.Name == deletedGroupName);
-                }
-                catch
-                {
-                }
-                //
-                if (deletedGroup != null)
-                {
-                    homegenie.GetGroups(migCommand.GetOption(0)).Remove(deletedGroup);
-                    homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
-                    if (migCommand.GetOption(0).ToLower() == "automation")
+                    string groupType = migCommand.GetOption(0); // 'Automation' or 'Control'
+                    string deletedGroupName = request.RequestText;
+                    Group deletedGroup = null;
+                    try
                     {
-                        var groupPrograms = homegenie.ProgramManager.Programs.FindAll(p => p.Group.ToLower() == deletedGroup.Name.ToLower());
-                        if (groupPrograms != null)
+                        deletedGroup = homegenie.GetGroups(groupType).Find(zn => zn.Name == deletedGroupName);
+                    }
+                    catch
+                    {
+                    }
+
+                    //
+                    if (deletedGroup != null)
+                    {
+                        homegenie.GetGroups(groupType).Remove(deletedGroup);
+                        homegenie.UpdateGroupsDatabase(groupType); //write groups
+                        if (groupType.ToLower() == "automation")
                         {
-                            // delete group association from programs
-                            foreach (ProgramBlock program in groupPrograms)
+                            var groupPrograms =
+                                homegenie.ProgramManager.Programs.FindAll(p =>
+                                    p.Group.ToLower() == deletedGroup.Name.ToLower());
+                            if (groupPrograms != null)
                             {
-                                program.Group = "";
+                                // delete group association from programs
+                                foreach (ProgramBlock program in groupPrograms)
+                                {
+                                    program.Group = "";
+                                }
                             }
                         }
+
+                        request.ResponseData = new ResponseStatus(Status.Ok);
                     }
-                    request.ResponseData = new ResponseStatus(Status.Ok);
-                }
-                else
-                {
-                    request.ResponseData = new ResponseStatus(Status.Error);
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "Group with name '" + deletedGroupName + "' not found.");
+                    }
                 }
                 break;
 
             case "Groups.Save":
-                string jsonGroups = request.RequestText;
-                var newGroups = JsonConvert.DeserializeObject<List<Group>>(jsonGroups);
-                for (int i = 0; i < newGroups.Count; i++)
                 {
-                    try
+                    string groupType = migCommand.GetOption(0); // 'Automation' or 'Control'
+                    string jsonGroups = request.RequestText;
+                    var newGroups = JsonConvert.DeserializeObject<List<Group>>(jsonGroups);
+                    for (int i = 0; i < newGroups.Count; i++)
                     {
-                        var group = homegenie.Groups.Find(z => z.Name == newGroups[i].Name);
-                        group.Modules.Clear();
-                        newGroups[i].Modules.RemoveAll((mr) => mr.Address == null || mr.Domain == null);
-                        group.Modules = newGroups[i].Modules;
+                        try
+                        {
+                            var group = homegenie.Groups.Find(z => z.Name == newGroups[i].Name);
+                            group.Modules.Clear();
+                            newGroups[i].Modules.RemoveAll((mr) => mr.Address == null || mr.Domain == null);
+                            group.Modules = newGroups[i].Modules;
+                        }
+                        catch
+                        {
+                            // TODO: report exception
+                        }
                     }
-                    catch
-                    {
-                        // TODO: report exception
-                    }
+                    homegenie.UpdateGroupsDatabase(groupType); //write groups
+                    request.ResponseData = new ResponseStatus(Status.Ok);
                 }
-                homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
-                request.ResponseData = new ResponseStatus(Status.Ok);
                 break;
 
+// TODO: deprecate Wallpaper API
             case "Groups.WallpaperList":
                 List<string> wallpaperList = new List<string>();
                 var images = Directory.GetFiles(groupWallpapersPath);
@@ -1151,6 +1261,8 @@ namespace HomeGenie.Service.Handlers
                     request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 break;
+
+// TODO: Widgets API will be deprecated as soon as the new UI is out
 
             case "Widgets.List":
                 List<string> widgetsList = new List<string>();
@@ -1321,6 +1433,10 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            
+// TODO: Widgets API will be deprecated as soon as the new UI is out
+
+            
             case "Package.Get":
                 {
                     string pkgFolderUrl = migCommand.GetOption(0);

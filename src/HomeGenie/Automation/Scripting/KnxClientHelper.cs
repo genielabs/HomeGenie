@@ -36,14 +36,14 @@ namespace HomeGenie.Automation.Scripting
     {
         public class KnxEndPoint
         {
-            public string LocalIp = null;
-            public int LocalPort = 0;
-            public string RemoteIp = null;
-            public int RemotePort = 0;
+            public string LocalIp;
+            public int LocalPort;
+            public string RemoteIp;
+            public int RemotePort;
         }
 
-        private KnxConnection knxClient = null;
-        private KnxEndPoint knxEndPoint = null;
+        private KnxConnection knxClient;
+        private KnxEndPoint knxEndPoint;
         private Action<string, string> statusReceived;
         private Action<string, string> eventReceived;
         private Action<bool> statusChanged;
@@ -131,21 +131,30 @@ namespace HomeGenie.Automation.Scripting
                 else if (knxEndPoint.LocalIp != null && knxEndPoint.LocalPort > 0)
                 {
                     if (knxClient == null)
-                    knxClient = new KnxConnectionRouting(knxEndPoint.LocalIp, knxEndPoint.LocalPort);
+                    {
+                        knxClient = new KnxConnectionRouting(knxEndPoint.LocalIp, knxEndPoint.LocalPort);
+                    }
                 }
                 else if (knxEndPoint.LocalIp != null && knxEndPoint.LocalPort == 0)
                 {
                     if (knxClient == null)
-                    knxClient = new KnxConnectionRouting(knxEndPoint.LocalIp);
+                    {
+                        knxClient = new KnxConnectionRouting(knxEndPoint.LocalIp);
+                    }
                 }
                 else if (knxEndPoint.LocalPort > 0)
                 {
                     if (knxClient == null)
-                    knxClient = new KnxConnectionRouting(knxEndPoint.LocalPort);
+                    {
+                        knxClient = new KnxConnectionRouting(knxEndPoint.LocalPort);
+                    }
                 }
             }
-            if (!string.IsNullOrWhiteSpace(actionMessageCode)) 
+
+            if (!string.IsNullOrWhiteSpace(actionMessageCode))
+            {
                 knxClient.ActionMessageCode = (byte)new ByteConverter().ConvertFromString(actionMessageCode);
+            }
 
             knxClient.Connect();
             knxClient.KnxConnectedDelegate += knxClient_Connected;
@@ -268,7 +277,7 @@ namespace HomeGenie.Automation.Scripting
         public object ConvertFromDpt(string type, object data)
         {
             object result;
-            if (data.GetType() == typeof(String))
+            if (data is string)
             {
                 result = knxClient.FromDataPoint(type, (String)data);
             }

@@ -1,8 +1,9 @@
 #!/bin/sh
 #
 # Usage: startup_debug.sh <homegenie_folder_path>
-# Example: ./startup_debug.sh /usr/local/bin/homegenie
+# Example: ./startup_debug.sh /home/homegenie
 #
+HG_USER="homegenie"
 cd "`dirname \"$0\"`"
 ENCFIX=""
 #ENCFIX="LC_NUMERIC=en_US LC_MONETARY=en_US LC_MEASUREMENT=en_US "
@@ -20,10 +21,10 @@ EXITCODE="1"
 while [ "$EXITCODE" = "1" ]; do
     if [ -z "$1" ]
     then
-        sudo $MONO HomeGenie.exe 
+        $MONO HomeGenie.exe
     else
         cd $1
-        sudo $MONO HomeGenie.exe >/dev/null  2>&1 
+        $MONO HomeGenie.exe >/dev/null  2>&1
     fi
     EXITCODE="$?"
     echo "Exit code: $EXITCODE"

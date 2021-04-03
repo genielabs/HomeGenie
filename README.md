@@ -36,6 +36,8 @@ The main solution file is `HomeGenie.sln` that is located in the repository root
 
 - `assets/build`
 common (all) and OS specific static files that are copied after the build process
+- `assets/build/all/app`
+  This folder contains the new HomeGenie user interface (YOT) implemented as a Angular 11 PWA (currently in very early development stage).
 - `assets/deploy`
 OS specific files required for bundling and deploying the app redistributable
 - `src/HomeGenie`
@@ -48,9 +50,6 @@ project implementing Unit Tests
 support and utility libraries used by HomeGenie
 - `src/WindowsService`
 Windows specific solution for deploying HomeGenie as a Windows service
-- `src/homegenie-ui-app`
-This folder (currently in very early development stage) contains the new HomeGenie user interface implemented as a Angular 2 PWA.
-
 
 ### Building from command line
 
@@ -63,7 +62,7 @@ msbuild /p:Configuration=Debug HomeGenie.sln
 This will generate both the `netcore` and the `net461` version of HomeGenie app.
 
 **netcore** ->
-`src/HomeGenie/bin/Degbu/netcore3.0` 
+`src/HomeGenie/bin/Degbu/netcore3.1` 
 
 **net461** -> `src/HomeGenie.Net461/bin/Debug`
 
@@ -72,7 +71,7 @@ This will generate both the `netcore` and the `net461` version of HomeGenie app.
 
 *netcore*
 ```
-cd src/HomeGenie/bin/Debug/netcore3.0
+cd src/HomeGenie/bin/Debug/netcore3.1
 ./HomeGenie # (or 'dotnet HomeGenie.dll')
 ```
 
@@ -98,6 +97,7 @@ cd src/HomeGenie.Net461/bin/Debug
 - https://github.com/genielabs/HomeGenie-Android
 - https://github.com/genielabs/HomeGenie-WindowsPhone
 - https://github.com/genielabs/homegenie-mini
+- https://github.com/genielabs/yot
 
 ------
 

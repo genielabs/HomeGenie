@@ -535,10 +535,10 @@ namespace HomeGenie.Service
                             break;
                         }
                     }
-                    else if (destinationFile.EndsWith("homegenie_stats.db"))
-                    {
-                        doNotCopy = true;
-                    }
+//                    else if (destinationFile.EndsWith("homegenie_stats.db"))
+//                    {
+//                        doNotCopy = true;
+//                    }
 
                     if (doNotCopy) continue;
 

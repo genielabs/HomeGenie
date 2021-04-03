@@ -1,0 +1,8 @@
+{
+  "$alarm_system": {
+    "arm_home":
+      "Home",
+    "arm_away":
+      "Away"
+  }
+}

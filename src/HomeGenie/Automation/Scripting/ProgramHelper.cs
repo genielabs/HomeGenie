@@ -180,7 +180,7 @@ namespace HomeGenie.Automation.Scripting
 
             RelocateProgramModule();
             homegenie.modules_RefreshVirtualModules();
-            homegenie.modules_Sort();
+            //homegenie.modules_Sort();
 
             return this;
         }
@@ -210,6 +210,7 @@ namespace HomeGenie.Automation.Scripting
             if (parameter.Value == "") parameter.Value = defaultValue;
             parameter.Description = description;
             parameter.FieldType = type;
+            parameter.ParentId = myProgramId; // TODO ....
             return this;
         }
 
@@ -435,7 +436,7 @@ namespace HomeGenie.Automation.Scripting
             }
             //
             homegenie.modules_RefreshVirtualModules();
-            homegenie.modules_Sort();
+            //homegenie.modules_Sort();
             return this;
         }
 
@@ -461,7 +462,7 @@ namespace HomeGenie.Automation.Scripting
             }
             //
             homegenie.modules_RefreshVirtualModules();
-            homegenie.modules_Sort();
+            //homegenie.modules_Sort();
             return this;
         }
 
@@ -529,7 +530,7 @@ namespace HomeGenie.Automation.Scripting
 
             }
             homegenie.modules_RefreshVirtualModules();
-            homegenie.modules_Sort();
+            //homegenie.modules_Sort();
             return this;
         }
 
@@ -615,7 +616,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="parameter">Parameter name.</param>
         /// <param name="value">The new parameter value to set.</param>
         /// <param name="description">Event description.</param>
-        public ProgramHelper RaiseEvent(string parameter, string value, string description)
+        public ProgramHelper RaiseEvent(string parameter, object value, string description)
         {
             if (programModule == null) RelocateProgramModule();
             try

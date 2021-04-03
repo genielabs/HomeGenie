@@ -179,6 +179,9 @@ namespace HomeGenie.Data
         /// <value>The type of the field.</value>
         [BsonIgnore]
         public string FieldType { get; set; }
+        
+        [JsonIgnore, BsonIgnore]
+        public int ParentId { get; set; }
 
         /// <summary>
         /// Gets the update time.
@@ -186,6 +189,7 @@ namespace HomeGenie.Data
         /// <value>The update time.</value>
         public DateTime UpdateTime { get; set; }
 
+        // TODO: deprecate this field
         [XmlIgnore, BsonIgnore]
         public bool NeedsUpdate { get; set; }
 

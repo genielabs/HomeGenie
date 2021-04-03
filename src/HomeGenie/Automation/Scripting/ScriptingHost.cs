@@ -49,7 +49,7 @@ namespace HomeGenie.Automation.Scripting
             hgService = hg;
             Net = new NetHelper(hgService);
             Program = new ProgramHelper(hgService, programId);
-            Data = new DataHelper();
+            Data = new DataHelper(hgService, programId);
             When = new EventsHelper(hgService, programId);
             SerialPort = new SerialPortHelper();
             TcpClient = new TcpClientHelper();

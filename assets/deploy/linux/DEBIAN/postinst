@@ -1,12 +1,29 @@
 #!/bin/sh
 
-# copy startup scripts and set proper flags
-sudo cp /usr/local/bin/homegenie/DEBIAN/homegenie /etc/init.d/
+# local vars
+HG_USER="homegenie"
+HOME_FOLDER="/home/$HG_USER"
+
+# add user homegenie
+sudo useradd $HG_USER
+sudo gpasswd -a $HG_USER dialout
+
+# fix folder permissions
+sudo chown -R $HG_USER:$HG_USER $HOME_FOLDER
+
+# fix GPIO permissions
+sudo chgrp -R dialout /sys/class/gpio
+sudo chmod -R g+rw /sys/class/gpio
+
+# copy service startup scripts and fix home folder permissions
+sudo cp $HOME_FOLDER/DEBIAN/homegenie /etc/init.d/
+sudo chown $HG_USER:$HG_USER /etc/init.d/homegenie
 sudo chmod +x /etc/init.d/homegenie
-sudo cp /usr/local/bin/homegenie/DEBIAN/startup.sh /usr/local/bin/homegenie/
-sudo chmod +x /usr/local/bin/homegenie/startup.sh
-sudo cp /usr/local/bin/homegenie/DEBIAN/startup_debug.sh /usr/local/bin/homegenie/
-sudo chmod +x /usr/local/bin/homegenie/startup_debug.sh
+sudo cp $HOME_FOLDER/DEBIAN/startup.sh $HOME_FOLDER/
+sudo chmod +x $HOME_FOLDER/startup.sh
+sudo cp $HOME_FOLDER/DEBIAN/startup_debug.sh $HOME_FOLDER/
+sudo chmod +x $HOME_FOLDER/startup_debug.sh
+sudo chown -R $HG_USER:$HG_USER $HOME_FOLDER
 sudo update-rc.d -f homegenie defaults
 
 # start homegenie service

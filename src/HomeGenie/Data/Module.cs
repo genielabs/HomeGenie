@@ -76,11 +76,9 @@ namespace HomeGenie.Data
         /// <value>The properties.</value>
         public TsList<ModuleParameter> Properties { get; set; }
 
+        // TODO: deprecate 'Stores' field!!! (DataHelper/LiteDb can be used now to store data for a module) 
         [JsonIgnore]
         public TsList<Store> Stores { get; set; }
-
-        public string RoutingNode { get; set; }
-        // "<ip>:<port>" || ""
 
         public Module()
         {
@@ -90,7 +88,6 @@ namespace HomeGenie.Data
             DeviceType = MIG.ModuleTypes.Generic;
             Properties = new TsList<ModuleParameter>();
             Stores = new TsList<Store>();
-            RoutingNode = "";
         }
 
         public object Clone()

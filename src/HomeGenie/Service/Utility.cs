@@ -28,8 +28,10 @@ using System.Dynamic;
 using System.IO;
 using System.Net;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
@@ -378,6 +380,71 @@ namespace HomeGenie.Service
 
         }
 
+        public static bool MatchValues(string valueList, string matchValue)
+        {
+            // regexp matching
+            if (valueList.Trim().StartsWith("/"))
+            {
+                valueList = Regex.Replace(valueList, "^\\/+|\\/+$", "");
+                Match m = Regex.Match(matchValue, valueList);
+                return m.Success;
+            }
+
+            // classic comma separated value list matching
+            valueList = valueList.ToLower();
+            matchValue = matchValue.ToLower();
+            var inclusionList = new List<string> {valueList};
+            if (valueList.IndexOf(',') > 0)
+            {
+                inclusionList = valueList.Split(',').ToList();
+            }
+            else if (valueList.IndexOf('|') > 0)
+            {
+                inclusionList = valueList.Split('|').ToList();
+            }
+
+            // build exclusion list and remove empty entries
+            var exclusionList = new List<string>();
+            for (int idx = 0; idx < inclusionList.Count; idx++)
+            {
+                string val = inclusionList[idx];
+                if (val.Trim().IndexOf('!') == 0)
+                {
+                    inclusionList.RemoveAt(idx);
+                    exclusionList.Add(val.Trim().Substring(1));
+                }
+                else if (val.Trim().Length == 0)
+                {
+                    inclusionList.RemoveAt(idx);
+                }
+            }
+
+            // check if matching
+            bool isMatching = (inclusionList.Count == 0);
+            for (int idx = 0; idx < inclusionList.Count; idx++)
+            {
+                string val = inclusionList[idx];
+                if (val.Trim() == matchValue.Trim())
+                {
+                    isMatching = true;
+                    break;
+                }
+            }
+
+            // check if not in exclusion list
+            for (int idx = 0; idx < exclusionList.Count; idx++)
+            {
+                string val = exclusionList[idx];
+                if (val.Trim() == matchValue.Trim())
+                {
+                    isMatching = false;
+                    break;
+                }
+            }
+
+            return isMatching;
+        }
+
         #region Private helper methods
 
         [DllImport("winmm.dll", SetLastError = true)]
@@ -616,7 +683,6 @@ namespace HomeGenie.Service
         }
 
         #endregion
-
     }
 
     public class DynamicXmlParser : DynamicObject

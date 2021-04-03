@@ -1,0 +1,24 @@
+{
+  "name": "HomeGenie YoT",
+  "short_name": "YoT",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./index.html",
+  "icons": [{
+      "src": "icons/android-launchericon-144-144.png",
+      "sizes": "144x144",
+      "type": "image\/png"
+    },
+    {
+      "src": "icons/android-launchericon-192-192.png",
+      "sizes": "192x192",
+      "type": "image\/png"
+    },
+    {
+      "src": "icons/android-launchericon-512-512.png",
+      "sizes": "512x512",
+      "type": "image\/png"
+    }]
+}

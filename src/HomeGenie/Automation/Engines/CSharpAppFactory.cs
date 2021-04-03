@@ -199,6 +199,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Assembly.Load("mscorlib").Location),
                     MetadataReference.CreateFromFile(typeof(Thread).GetTypeInfo().Assembly.Location),
                     MetadataReference.CreateFromFile(typeof(Stopwatch).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(System.Linq.Enumerable).GetTypeInfo().Assembly.Location),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Windows.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Threading.Thread.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),

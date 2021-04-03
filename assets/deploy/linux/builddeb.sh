@@ -9,13 +9,16 @@ then
 fi
 set -x -e
 
+hg_user="homegenie"
 script_path="$( cd "$(dirname "$0")" ; pwd -P )"
-source_folder="$( cd "${script_path}/../../../src/HomeGenie.Net461/bin/Debug" ; pwd -P )"
+source_folder="$( cd "${script_path}/../../../src/HomeGenie.Net461/bin/Release" ; pwd -P )"
 target_folder="${script_path}/Output"
+deploy_folder="home/"
 
 echo "Packaging HomeGenie $homegenie_version"
 echo "Source: $source_folder"
 echo "Destination: $target_folder"
+echo "Deploy folder: $deploy_folder"
 
 _cwd="$PWD"
 mkdir -p $target_folder
@@ -26,27 +29,27 @@ then
 	base_folder=$target_folder
 	target_folder="${target_folder}/homegenie_${homegenie_version}_all"
 
-	mkdir -p "$target_folder/usr/local/bin/homegenie"
+	mkdir -p "$target_folder/$deploy_folder/homegenie"
 
 	echo "\n- Copying files to '$target_folder'..."
 
-	cp -r $source_folder/* "$target_folder/usr/local/bin/homegenie/"
-	rm -rf "$target_folder/usr/local/bin/homegenie/log"
+	cp -r $source_folder/* "$target_folder/$deploy_folder/homegenie/"
+	rm -rf "$target_folder/$deploy_folder/homegenie/log"
 
 	echo "\n- Generating md5sums in DEBIAN folder..."
 	cd "$target_folder"
-	find "./usr/local/bin/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "\"usr/local/bin/homegenie/%P\" " | xargs md5sum > "$script_path/DEBIAN/md5sums"
+	find "./$deploy_folder/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "\"$deploy_folder/homegenie/%P\" " | xargs md5sum > "$script_path/DEBIAN/md5sums"
 	hg_installed_size=`du -s ./usr | cut -f1`
 	echo "  installed size: $hg_installed_size"
 	cd "$script_path"
 
 	echo "- Copying updated DEBIAN folder..."
 	cp -r ./DEBIAN "$target_folder/"
-	cp -r ./DEBIAN "$target_folder/usr/local/bin/homegenie/"
+	cp -r ./DEBIAN "$target_folder/$deploy_folder/homegenie/"
 	sed -i s/%version%/$homegenie_version/g "$target_folder/DEBIAN/control"
-	sed -i s/%version%/$homegenie_version/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
+	sed -i s/%version%/$homegenie_version/g "$target_folder/$deploy_folder/homegenie/DEBIAN/control"
 	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/DEBIAN/control"
-	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/usr/local/bin/homegenie/DEBIAN/control"
+	sed -i s/%installed_size%/$hg_installed_size/g "$target_folder/$deploy_folder/homegenie/DEBIAN/control"
 
 	echo "- Fixing permissions..."
 
@@ -58,7 +61,7 @@ then
 
 	echo "\n... done!\n"
 
-	cd "$target_folder/usr/local/bin/"
+	cd "$target_folder/$deploy_folder/"
 	tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
 	rm -rf "$target_folder"; break;
 	cd "$_cwd"

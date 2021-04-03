@@ -24,17 +24,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HomeGenie.Service;
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
-using Microsoft.Scripting.Hosting;
-using Microsoft.Scripting;
 using CronExpressionDescriptor;
 using HomeGenie.Automation.Engines;
+using HomeGenie.Data;
+using HomeGenie.Data.UI;
 using Innovative.SolarCalculator;
 
 namespace HomeGenie.Service.Handlers
@@ -126,6 +125,38 @@ namespace HomeGenie.Service.Handlers
                         item.BoundModules = newSchedule.BoundModules;
                     homegenie.UpdateSchedulerDatabase();
                     break;
+                case "Scheduling.ModuleUpdate":
+                    var mod = homegenie.Modules.Find((m) =>
+                        m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (mod == null) break;
+                    var scheduling = JsonConvert.DeserializeObject<dynamic>(request.RequestText);
+                    for (int i = 0; i < scheduling.include.Count; i++)
+                    {
+                        string name = scheduling.include[i].Value.ToString();
+                        var schedulerItem = homegenie.ProgramManager.SchedulerService.Get(name);
+                        if (schedulerItem != null)
+                        {
+                            schedulerItem.BoundModules.RemoveAll((mr) =>
+                                mr.Domain == mod.Domain && mr.Address == mod.Address);
+                            schedulerItem.BoundModules.Add(new ModuleReference()
+                            {
+                                Domain = mod.Domain,
+                                Address = mod.Address
+                            });
+                        }
+                    }
+                    for (int i = 0; i < scheduling.exclude.Count; i++)
+                    {
+                        string name = scheduling.exclude[i].Value.ToString();
+                        var schedulerItem = homegenie.ProgramManager.SchedulerService.Get(name);
+                        if (schedulerItem != null)
+                        {
+                            schedulerItem.BoundModules.RemoveAll((mr) =>
+                                mr.Domain == mod.Domain && mr.Address == mod.Address);
+                        }
+                    }
+                    homegenie.UpdateSchedulerDatabase();
+                    break;
                 case "Scheduling.Delete":
                     homegenie.ProgramManager.SchedulerService.Remove(migCommand.GetOption(0));
                     homegenie.UpdateSchedulerDatabase();
@@ -149,8 +180,9 @@ namespace HomeGenie.Service.Handlers
                     if (!String.IsNullOrWhiteSpace(startFrom))
                         dateStart = Utility.JavascriptToDate(long.Parse(startFrom));
                     List<dynamic> nextList = new List<dynamic>();
-                    foreach (var ce in homegenie.ProgramManager.SchedulerService.Items)
+                    for (int s = 0; s < homegenie.ProgramManager.SchedulerService.Items.Count; s++)
                     {
+                        var ce = homegenie.ProgramManager.SchedulerService.Items[s];
                         if (!ce.IsEnabled)
                             continue;
                         var evt = new { Name = ce.Name, Description = ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
@@ -377,7 +409,7 @@ namespace HomeGenie.Service.Handlers
                     //
                     homegenie.modules_RefreshPrograms();
                     homegenie.modules_RefreshVirtualModules();
-                    homegenie.modules_Sort();
+                    //homegenie.modules_Sort();
                     break;
 
                 case "Programs.Arduino.FileLoad":
@@ -512,6 +544,47 @@ namespace HomeGenie.Service.Handlers
                         {
                         }
                         homegenie.UpdateProgramsDatabase();
+                    }
+                    break;
+                case "Programs.OptionsGet":
+                    var programModule = homegenie.Modules.Find(m =>
+                        m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (programModule != null)
+                    {
+                        var options = new List<OptionField>();
+                        var programOptions = new ModuleOptions()
+                        {
+                            id = programModule.Address,
+                            name = programModule.Name,
+                            description = programModule.Description,
+                            items = options
+                        };
+                        programModule.Properties.ForEach((o) =>
+                        {
+                            if (o.Name.StartsWith("ConfigureOptions."))
+                            {
+                                var fieldType = o.FieldType.Split(':');
+                                options.Add(new OptionField()
+                                {
+                                    pid = programModule.Address,
+                                    type = new OptionFieldType()
+                                    {
+                                        id = fieldType[0],
+                                        options = fieldType.Skip(1).ToList<object>()
+                                    },
+                                    name = o.Name,
+                                    description = o.Description,
+                                    field = new ModuleField()
+                                    {
+                                        key = o.Name,
+                                        value = o.Value,
+                                        timestamp = o.UpdateTime.ToString("o") 
+                                    }
+                                });
+                            }
+                        });
+                        options.Sort((o1, o2) => (o1.description).CompareTo(o2.description));
+                        request.ResponseData = JsonConvert.SerializeObject(programOptions);
                     }
                     break;
                 default:

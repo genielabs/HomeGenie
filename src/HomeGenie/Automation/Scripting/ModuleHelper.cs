@@ -21,7 +21,7 @@
  */
 
 using System;
-
+using System.Threading;
 using HomeGenie.Data;
 using HomeGenie.Service;
 
@@ -150,7 +150,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="feature">Feature.</param>
         public bool HasFeature(string feature)
         {
-            var parameter = Service.Utility.ModuleParameterGet(module, feature);
+            var parameter = Utility.ModuleParameterGet(module, feature);
             return (parameter != null && !String.IsNullOrWhiteSpace(parameter.Value));
         }
 
@@ -161,7 +161,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="parameter">Parameter.</param>
         public bool HasParameter(string parameter)
         {
-            return (Service.Utility.ModuleParameterGet(module, parameter) != null);
+            return (Utility.ModuleParameterGet(module, parameter) != null);
         }
 
         /// <summary>
@@ -173,15 +173,27 @@ namespace HomeGenie.Automation.Scripting
             ModuleParameter value = null;
             if (this.module != null)
             {
-                try
+                int retry = 10; // 500ms max
+                while (value == null && retry > 0)
                 {
-                    value = Service.Utility.ModuleParameterGet(this.module, parameter);
+                    value = Utility.ModuleParameterGet(this.module, parameter);
+                    // TODO: sometimes ModuleParameterGet returns null even if a parameter exists!
+                    // TODO: not sure why is this bug occurring (threading issue?), but it's solved by retrying getting the value
+                    // TODO: consider this just as a temporary work-around, further investigation required
+                    if (value == null)
+                    {
+                        Thread.Sleep(50);
+                        retry--;
+                    }
                 }
-                catch { }
+                if (parameter == "Simulator.Sensor.DataFrequency" && value == null)
+                {
+                    Console.WriteLine(this.Instance.Name, parameter, value);
+                }
                 // create parameter if does not exists
                 if (value == null)
                 {
-                    value = Service.Utility.ModuleParameterSet(this.module, parameter, "");
+                    value = Utility.ModuleParameterSet(this.module, parameter, "");
                 }
             }
             return value;

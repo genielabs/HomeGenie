@@ -51,7 +51,7 @@ namespace HomeGenie.Automation.Scripting
     public class MqttClientHelper
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        private static readonly MqttFactory factory = new MqttFactory();
+        private static readonly MqttFactory Factory = new MqttFactory();
         private NetworkCredential networkCredential;
         private MqttEndPoint endPoint = new MqttEndPoint();
         private bool usingWebSockets;
@@ -156,7 +156,7 @@ namespace HomeGenie.Automation.Scripting
             endPoint.Port = port;
             endPoint.ClientId = clientId;
             Disconnect();
-            mqttClient = (MqttClient)factory.CreateMqttClient();
+            mqttClient = (MqttClient)Factory.CreateMqttClient();
             mqttClient.UseConnectedHandler(async e =>
             {
                 if (callback != null)
@@ -177,7 +177,7 @@ namespace HomeGenie.Automation.Scripting
                 }
             });
             mqttClient.UseApplicationMessageReceivedHandler(e => MessageReceived(e));
-            var clientOptionsBuilder = getMqttOptionsBuilder(clientId);
+            var clientOptionsBuilder = GetMqttOptionsBuilder(clientId);
             if (clientOptionsCallback != null)
             {
                 clientOptionsCallback(clientOptionsBuilder);
@@ -318,7 +318,7 @@ namespace HomeGenie.Automation.Scripting
 
         #region private helper methods
 
-        private MqttClientOptionsBuilder getMqttOptionsBuilder(string clientId)
+        private MqttClientOptionsBuilder GetMqttOptionsBuilder(string clientId)
         {
             var builder = new MqttClientOptionsBuilder()
                 .WithProtocolVersion(MqttProtocolVersion.V311)
