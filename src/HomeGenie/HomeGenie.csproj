@@ -18,10 +18,10 @@
 
   <Target Name="TestTarget" AfterTargets="Build">
     <Message Importance="High" Text="POST BUILD" />
-    <Exec Command="dotnet $(ProjectDir)bin\Debug\netcoreapp3.0\HomeGenie.dll --post-build" />
+    <Exec Command="dotnet $(ProjectDir)bin\Debug\netcoreapp3.1\HomeGenie.dll --post-build" />
   </Target>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
     <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
     <PackageReference Include="System.Core" Version="3.5.21022.801" />
     <PackageReference Include="System.Net.Security" Version="4.3.2" />
