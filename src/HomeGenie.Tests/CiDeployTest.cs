@@ -22,8 +22,13 @@ namespace HomeGenie.Tests
         [Test]
         public void CheckDeployVersionTest()
         {
-            string releaseFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "HomeGenie.Net461", "bin", "Debug", "release_info.xml");
+            string releaseFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "HomeGenie.Net461", "bin", "Release", "release_info.xml");
             var releaseInfo = UpdateChecker.GetReleaseFile(releaseFile);
+            if (releaseInfo == null)
+            {
+                releaseFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "HomeGenie.Net461", "bin", "Debug", "release_info.xml");
+                releaseInfo = UpdateChecker.GetReleaseFile(releaseFile);
+            }
             Assert.NotNull(releaseInfo);
             // check for $TRAVIS_TAG or APPVEYOR_REPO_TAG_NAME
             // to determine if this is a new release, if so
