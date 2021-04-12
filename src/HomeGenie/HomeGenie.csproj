@@ -18,7 +18,7 @@
 
   <Target Name="TestTarget" AfterTargets="Build">
     <Message Importance="High" Text="POST BUILD" />
-    <Exec Command="dotnet $(OutputPath)\HomeGenie.dll --post-build" />
+    <Exec Command="dotnet ..\..\dist\HomeGenie.dll --post-build" />
   </Target>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
@@ -63,7 +63,7 @@
     <PackageReference Include="SerialPortLib" Version="1.0.23" />
     <PackageReference Include="XTenLib" Version="1.0.15" />
 
-    <PackageReference Include="MIG" Version="1.1.8" />
+    <PackageReference Include="MIG" Version="1.1.9" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.1.7" />
     <PackageReference Include="MIG.Protocols" Version="1.1.9" />
 

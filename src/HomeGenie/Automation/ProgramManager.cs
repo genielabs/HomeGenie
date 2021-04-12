@@ -154,6 +154,7 @@ namespace HomeGenie.Automation
             program.IsEnabled = false;
             automationPrograms.Remove(program);
             // delete program files
+            // TODO: implement also deleting of data/programs/<pid> folder!
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
             // remove csharp assembly
             try
@@ -176,6 +177,7 @@ namespace HomeGenie.Automation
             var copy = new ProgramBlock
             {
                 Address = GeneratePid(),
+                PackageInfo = program.PackageInfo,
                 Domain = program.Domain,
                 Type = program.Type,
                 Group = program.Group,

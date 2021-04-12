@@ -17,11 +17,25 @@
 " ":"--------------- PROGRAMS ------------------",
     "programs":
         "Programs",
+    "packages":
+        "Packages",
+    "installed_packages":
+        "Installed packages",
+    "repositories":
+        "Repositories",
+    "upload_package":
+        "Upload package",
+    "create_package":
+        "Create new package",
+    "programs_version":
+        "Programs version",
 " ":"---------- MODULES AND GROUPS -------------",
     "modules_groups":
-        "Modules and groups",
+        "Groups and modules",
     "groups":
       "Groups",
+    "group_modules":
+      "Modules in '{{name}}' group",
     "modules":
         "Modules",
     "empty_group":

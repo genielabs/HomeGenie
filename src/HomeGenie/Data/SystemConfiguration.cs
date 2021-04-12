@@ -35,6 +35,7 @@ namespace HomeGenie.Data
     [Serializable()]
     public class SystemConfiguration
     {
+        private object configWriteLock = new object();
         private string passphrase = "";
 
         // TODO: change this to use standard event delegates model
@@ -85,10 +86,13 @@ namespace HomeGenie.Data
                 System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
                 ws.Indent = true;
                 ws.Encoding = Encoding.UTF8;
-                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(syscopy.GetType());
-                using (var wri = System.Xml.XmlWriter.Create(fname, ws))
+                XmlSerializer x = new XmlSerializer(syscopy.GetType());
+                lock (configWriteLock)
                 {
-                    x.Serialize(wri, syscopy);
+                    using (var wri = System.Xml.XmlWriter.Create(fname, ws))
+                    {
+                        x.Serialize(wri, syscopy);
+                    }
                 }
                 success = true;
             }

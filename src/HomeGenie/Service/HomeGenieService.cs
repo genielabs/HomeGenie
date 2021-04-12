@@ -920,8 +920,9 @@ namespace HomeGenie.Service
                 if (RebuildPrograms)
                 {
                     double bootStep = 100D / masterControlProgram.Programs.Count;
-                    foreach (var program in masterControlProgram.Programs)
+                    for (int p = 0; p < masterControlProgram.Programs.Count; p++)
                     {
+                        var program = masterControlProgram.Programs[p];
                         masterControlProgram.ProgramCompile(program);
                         BootProgress += bootStep;
                     }
@@ -991,6 +992,7 @@ namespace HomeGenie.Service
                 //
                 foreach (var virtualModule in virtualModules)
                 {
+                    if (!virtualModule.IsActive) continue;
                     ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
                     if (program == null) continue;
                     //
@@ -1108,11 +1110,11 @@ namespace HomeGenie.Service
                             systemModules.Remove(module);
                             continue;
                         }
-                        else if (module == null && !program.IsEnabled)
+                        if (module == null && !program.IsEnabled)
                         {
                             continue;
                         }
-                        else if (module == null)
+                        if (module == null)
                         {
                             // add module for the program
                             module = new Module();

@@ -58,7 +58,7 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public LiteDatabase LiteDb(string fileName)
         {
-            string dataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", myProgramId.ToString());
+            string dataFolder = Path.Combine(Utility.GetDataFolder(), "programs", myProgramId.ToString());
             if (!Directory.Exists(dataFolder))
             {
                 Directory.CreateDirectory(dataFolder);

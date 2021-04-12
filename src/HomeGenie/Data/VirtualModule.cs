@@ -25,6 +25,7 @@ namespace HomeGenie.Data
     public class VirtualModule : Module
     {
         public string ParentId { get; set; }
+        public bool IsActive = true;
 
         public VirtualModule() : base()
         {

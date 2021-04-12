@@ -38,6 +38,25 @@ namespace HomeGenie.Automation
     }
 
     [Serializable()]
+    public class ProgramPackageInfo
+    {
+        [JsonProperty("repository")]
+        public string Repository { get; set; }
+        [JsonProperty("packageId")]
+        public string PackageId { get; set; }
+        [JsonProperty("packageVersion")]
+        public string PackageVersion { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
+        [JsonProperty("version")]
+        public string Version { get; set; }
+        [JsonProperty("required")]
+        public bool Required { get; set; }
+        [JsonProperty("checksum")]
+        public string Checksum { get; set; }
+    }
+
+    [Serializable()]
     public class ProgramBlock
     {
         private IProgramEngine programEngine;
@@ -54,6 +73,7 @@ namespace HomeGenie.Automation
         public string ScriptErrors { get; set; }
 
         // common public members
+        public ProgramPackageInfo PackageInfo { get; set; }
         public string Domain  { get; set; }
         public int Address  { get; set; }
         public string Name { get; set; }
@@ -75,6 +95,7 @@ namespace HomeGenie.Automation
         public ProgramBlock()
         {
             // init stuff
+            PackageInfo = new ProgramPackageInfo();
             Domain = Domains.HomeAutomation_HomeGenie_Automation;
             Address = 0;
             Features = new List<ProgramFeature>();

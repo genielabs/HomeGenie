@@ -113,18 +113,6 @@ namespace HomeGenie.Automation.Scripting
             Pause(seconds);
         }
 
-        [Obsolete("Use Program.Run(bool) instead")]
-        public void SetConditionTrue()
-        {
-            ExecuteProgramCode = true;
-        }
-
-        [Obsolete("Use Program.Run(bool) instead")]
-        public void SetConditionFalse()
-        {
-            ExecuteProgramCode = false;
-        }
-
         public void Reset()
         {
             try

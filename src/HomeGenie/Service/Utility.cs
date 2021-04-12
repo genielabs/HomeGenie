@@ -43,7 +43,6 @@ using ICSharpCode.SharpZipLib.Tar;
 
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json.Serialization;
 using Formatting = Newtonsoft.Json.Formatting;
 
@@ -312,6 +311,17 @@ namespace HomeGenie.Service
             {
                 // TODO: report exception
             }
+        }
+
+        public static string GetObjectChecksum(Object obj)
+        {
+            string hash;
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create()) {
+                hash = BitConverter.ToString(
+                    md5.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj)))
+                ).Replace("-", String.Empty);
+            }
+            return hash;
         }
 
         private static string picoPath = "/usr/bin/pico2wave";
@@ -683,6 +693,11 @@ namespace HomeGenie.Service
         }
 
         #endregion
+
+        public static string GetDataFolder()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
+        }
     }
 
     public class DynamicXmlParser : DynamicObject

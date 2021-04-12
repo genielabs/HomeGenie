@@ -72,6 +72,17 @@ namespace HomeGenie.Service.Handlers
             string response = "";
             switch (migCommand.Command)
             {
+            case "WebSocket.GetToken":
+                string token = "";
+                var webSocketGateway = (WebSocketGateway)homegenie.MigService.GetGateway(Gateways.WebSocketGateway);
+                if (webSocketGateway != null)
+                {
+                    // authorization token will be valid for 10 seconds
+                    token = webSocketGateway.GetAuthorizationToken(10).Value;
+                }
+                request.ResponseData = new ResponseText(token);
+                break;
+
             case "Interfaces.List":
                 response = "[ ";
                 foreach (var migInterface in homegenie.Interfaces)
@@ -123,13 +134,19 @@ namespace HomeGenie.Service.Handlers
                         var portList = new List<string>();
                         for (int p = serialPorts.Length - 1; p >= 0; p--)
                         {
+#if NETCOREAPP
+#else
                             if (serialPorts[p].Contains("/ttyS")
                                 || serialPorts[p].Contains("/ttyUSB")
                                 || serialPorts[p].Contains("/ttyAMA")// RaZberry
                                 || serialPorts[p].Contains("/ttyACM"))  // ZME_UZB1
                             {
+#endif
                                 portList.Add(serialPorts[p]);
+#if NETCOREAPP
+#else
                             }
+#endif
                         }
                         request.ResponseData = portList;
                     }
@@ -638,7 +655,7 @@ namespace HomeGenie.Service.Handlers
                                 string defaultFieldValue = "";
                                 if (type.Length > 1 && type[0] == "slider") // this is currently the only field with default value option
                                 {
-                                    defaultFieldValue = type.Length > 3 ? type[3] : type[1];
+                                    defaultFieldValue = type.Length > 4 ? type[4] : type[1];
                                 }
                                 var mf = Utility.ModuleParameterGet(module, f.Property);
                                 // add the field if does not exist
@@ -1434,9 +1451,74 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             
-// TODO: Widgets API will be deprecated as soon as the new UI is out
+// TODO: Widgets API ^^^^ will be deprecated as soon as the new UI is out
 
-            
+            #region New PackageManager API
+
+            case "Packages.List":
+                request.ResponseData = homegenie.PackageManager.GetPackagesList();
+                break;
+
+            case "Packages.Bundle":
+                var packageInfo = JsonConvert.DeserializeObject<PackageData>(request.RequestText);
+                string bundleFile = homegenie.PackageManager.CreatePackage(packageInfo);
+                if (bundleFile != null)
+                {
+                    request.ResponseData = File.ReadAllBytes(bundleFile);
+                    File.Delete(bundleFile);
+                }
+                else
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error);
+                }
+                break;
+
+            case "Packages.Upload":
+            {
+                string fileName = migCommand.GetOption(0);
+                fileName = Path.Combine(Utility.GetTmpFolder(), fileName);
+                WebServiceUtility.SaveFile(request.RequestData, fileName);
+                request.ResponseData = homegenie.PackageManager.AddPackage(fileName);
+            }
+            break;
+
+            case "Packages.Install":
+            {
+                var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", migCommand.GetOption(0),
+                    migCommand.GetOption(1), "package.json");
+                if (homegenie.PackageManager.InstallPackage(packageFile))
+                {
+                    request.ResponseData = new ResponseStatus(Status.Ok);
+                }
+                else
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error);
+                }
+            }
+            break;
+
+            case "Packages.Uninstall":
+            {
+                var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", migCommand.GetOption(0),
+                    migCommand.GetOption(1), "package.json");
+                if (homegenie.PackageManager.UninstallPackage(packageFile))
+                {
+                    request.ResponseData = new ResponseStatus(Status.Ok);
+                }
+                else
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error);
+                }
+            }
+            break;
+
+            #endregion
+
+
+            // TODO: Following Old Package Manager API TO BE DEPRECATED
+
+            #region Old Package Manager API 
+
             case "Package.Get":
                 {
                     string pkgFolderUrl = migCommand.GetOption(0);
@@ -1459,6 +1541,7 @@ namespace HomeGenie.Service.Handlers
                         homegenie.UpdateProgramsDatabase();
                         homegenie.SaveData();
                     }
+                    // TODO: convert to ResponseStatus !!!
                     request.ResponseData = new ResponseText(success ? "OK" : "ERROR");
                 }
                 break;
@@ -1467,17 +1550,9 @@ namespace HomeGenie.Service.Handlers
                 // TODO: uninstall a package....
                 request.ResponseData = new ResponseStatus(Status.Error);
                 break;
-
-            case "WebSocket.GetToken":
-                string token = "";
-                var webSocketGateway = (WebSocketGateway)homegenie.MigService.GetGateway(Gateways.WebSocketGateway);
-                if (webSocketGateway != null)
-                {
-                    // authorization token will be valid for 10 seconds
-                    token = webSocketGateway.GetAuthorizationToken(10).Value;
-                }
-                request.ResponseData = new ResponseText(token);
-                break;
+            
+            #endregion
+            
             }
         }
 

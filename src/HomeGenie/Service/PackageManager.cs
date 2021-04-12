@@ -22,11 +22,11 @@
 
 using System;
 using System.IO;
-using System.Net;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 
 using HomeGenie.Automation;
+using HomeGenie.Automation.Scheduler;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 
@@ -37,6 +37,50 @@ using Newtonsoft.Json.Linq;
 
 namespace HomeGenie.Service
 {
+    [Serializable()]
+    public class PackageData
+    {
+        [JsonProperty("repository")]
+        public string Repository { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
+        [JsonProperty("version")]
+        public string Version { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        [JsonProperty("programs")]
+        public List<PackageDataItem> Programs { get; set; }
+        [JsonProperty("modules")]
+        public List<PackageDataItem> Modules { get; set; }
+        [JsonProperty("groups")]
+        public List<PackageDataItem> Groups { get; set; }
+        [JsonProperty("schedules")]
+        public List<PackageDataItem> Schedules { get; set; }
+    }
+
+    [Serializable()]
+    public class PackageDataItem
+    {
+        [JsonProperty("repository")]
+        public string Repository { get; set; }
+        [JsonProperty("packageId")]
+        public string PackageId { get; set; }
+        [JsonProperty("packageVersion")]
+        public string PackageVersion { get; set; }
+        [JsonProperty("hid")]
+        public string Hid { get; set; } // internal homegenie id used for this package item 
+        [JsonProperty("id")]
+        public string Id { get; set; } // unique identifier for this package item
+        [JsonProperty("required")]
+        public bool Required { get; set; }
+        [JsonProperty("version")]
+        public string Version { get; set; }
+        [JsonProperty("checksum")]
+        public string Checksum { get; set; }
+        [JsonProperty("installed")]
+        public bool Installed { get; set; }
+    }
+
     public class PackageManager
     {
         private HomeGenieService homegenie;
@@ -49,6 +93,401 @@ namespace HomeGenie.Service
             homegenie = hg;
             widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "pages", "control", "widgets");
         }
+
+
+        #region New Methods
+
+        public List<PackageData> GetPackagesList()
+        {
+            var packagesList = new List<PackageData>();
+            // create PackageData by scanning all ./data/packages folders
+            string packagesFolder = Path.Combine(Utility.GetDataFolder(), "packages");
+            string[] repositories = Directory.GetDirectories(packagesFolder);
+            foreach (string repository in repositories)
+            {
+                string repoFolder = Path.Combine(packagesFolder, repository);
+                string[] packages = Directory.GetDirectories(repoFolder);
+                foreach (string package in packages)
+                {
+                    string packageFile = Path.Combine(repoFolder, package, "package.json");
+                    var pd = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
+                    packagesList.Add(pd);
+                }
+            }
+            // sort list by repository / package /
+            packagesList.Sort((a, b) =>
+            {
+                if (a.Repository != b.Repository)
+                {
+                    return String.Compare(a.Repository, b.Repository, StringComparison.Ordinal);
+                }
+                return String.Compare(a.Id, b.Id, StringComparison.Ordinal);
+            });
+            packagesList.ForEach((pkg) =>
+            {
+                pkg.Groups.Sort((p1, p2) =>
+                {
+                    if (p1.Required != p2.Required)
+                    {
+                        return p2.Required.CompareTo(p1.Required);
+                    }
+                    return String.Compare(p1.Id, p2.Id, StringComparison.Ordinal);
+                });
+                pkg.Programs.Sort((p1, p2) =>
+                {
+                    if (p1.Required != p2.Required)
+                    {
+                        return p2.Required.CompareTo(p1.Required);
+                    }
+                    return String.Compare(p1.Id, p2.Id, StringComparison.Ordinal);
+                });
+                pkg.Schedules.Sort((p1, p2) =>
+                {
+                    if (p1.Required != p2.Required)
+                    {
+                        return p2.Required.CompareTo(p1.Required);
+                    }
+                    return String.Compare(p1.Id, p2.Id, StringComparison.Ordinal);
+                });
+                // set the 'Installed' flag
+                pkg.Programs.ForEach((p) =>
+                {
+                    var installedInstances = homegenie.ProgramManager.Programs
+                        .FindAll((pr) => pr.PackageInfo.Repository == p.Repository && pr.PackageInfo.PackageId == p.PackageId && pr.PackageInfo.Id == p.Id);
+                    p.Installed = (installedInstances.Count > 0);
+                    // TODO: should also check version/checksum and report if different
+                    // TODO: should also check version/checksum and report if different
+                });
+                pkg.Schedules.ForEach((s) =>
+                {
+                    var sch = homegenie.ProgramManager.SchedulerService.Get(s.Hid);
+                    s.Installed = (sch != null);
+                });
+                pkg.Groups.ForEach((g) =>
+                {
+                    var grp = homegenie.Groups.Find((gr) => gr.Name == g.Hid);
+                    g.Installed = (grp != null);
+                });
+            });
+            return packagesList;
+        }
+
+        public bool InstallPackage(string packageFile)
+    {
+            var packageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
+            string repositoryFolder = Path.Combine(Utility.GetDataFolder(), "packages", packageData.Repository);
+            string programsDatabase = Path.Combine(repositoryFolder, packageData.Id, "programs.xml");
+            ProgramBlock programToInstall;
+            var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
+            using (var reader = new StreamReader(programsDatabase))
+            {
+                var programs = (List<ProgramBlock>)serializer.Deserialize(reader);
+                foreach (var item in packageData.Programs)
+                {
+                    if (item.Repository != packageData.Repository || item.PackageId != packageData.Id)
+                    {
+                        // external dependency
+                        // TODO: external dependency are not automatically installed
+                        // TODO: should report to user
+                        continue;
+                    }
+                    programToInstall = programs.Find((p) => p.Address.ToString() == item.Hid);
+                    var installedInstances = homegenie.ProgramManager.Programs
+                        .FindAll((p) => p.PackageInfo.Repository == item.Repository && p.PackageInfo.PackageId == item.PackageId && p.PackageInfo.Id == item.Id);
+                    if (installedInstances.Count > 0)
+                    {
+                        Console.WriteLine("Installing program " + JsonConvert.SerializeObject(item) + item.Hid);
+                        // update program code
+                        var install = programToInstall;
+                        installedInstances.ForEach((p) =>
+                        {
+                            p.Description = install.Description;
+                            p.ScriptSetup = install.ScriptSetup;
+                            p.ScriptSource = install.ScriptSource;
+                            p.PackageInfo.Checksum = item.Checksum;
+                            homegenie.ProgramManager.ProgramCompile(p);
+                        });
+                    }
+                    else if (programToInstall != null)
+                    {
+                        // add automation group if does not exist
+                        if (!String.IsNullOrEmpty(programToInstall.Group))
+                        {
+                            bool programGroupExists = homegenie.AutomationGroups.Find((ag) => ag.Name == programToInstall.Group) != null;
+                            if (!programGroupExists)
+                            {
+                                homegenie.AutomationGroups.Add(new Group()
+                                {
+                                    Name = programToInstall.Group
+                                });
+                                homegenie.UpdateGroupsDatabase("Automation");
+                            }
+                        }
+                        // add the new programm
+                        int newProgramId = int.Parse(item.Hid);
+                        var prg = homegenie.ProgramManager.ProgramGet(newProgramId);
+                        if (prg != null)
+                        {
+                            // assign a new id if the standard id is already taken
+                            newProgramId = homegenie.ProgramManager.GeneratePid();
+                        }
+                        // not installed, install it
+                        programToInstall.Address = newProgramId;
+                        homegenie.ProgramManager.ProgramAdd(programToInstall);
+                        homegenie.ProgramManager.ProgramCompile(programToInstall);
+                    }
+                    else
+                    {
+                        // TODO: this should never happen, maybe add reporting
+                    }
+                }
+                homegenie.UpdateProgramsDatabase();
+            }
+            string modulesDatabase = Path.Combine(repositoryFolder, packageData.Id, "modules.xml");
+            if (File.Exists(modulesDatabase))
+            {
+                serializer = new XmlSerializer(typeof(List<Module>));
+                using (var reader = new StreamReader(modulesDatabase))
+                {
+                    var modules = (List<Module>)serializer.Deserialize(reader);
+                    foreach (var module in modules)
+                    {
+                        homegenie.Modules.RemoveAll((m) => m.Domain == module.Domain && module.Address == m.Address);
+                        homegenie.Modules.Add(module);
+                    }
+                    homegenie.UpdateModulesDatabase();
+                }
+            }
+            string groupsDatabase = Path.Combine(repositoryFolder, packageData.Id, "groups.xml");
+            if (File.Exists(groupsDatabase))
+            {
+                serializer = new XmlSerializer(typeof(List<Group>));
+                using (var reader = new StreamReader(groupsDatabase))
+                {
+                    var pkgGroups = (List<Group>)serializer.Deserialize(reader);
+                    foreach (var group in pkgGroups)
+                    {
+                        bool exists = homegenie.Groups.Find((g) => g.Name == group.Name) != null;
+                        if (!exists)
+                        {
+                            homegenie.Groups.Add(group);
+                        }
+                        // merge modules
+                        var targetGroup = homegenie.Groups.Find((g) => g.Name == group.Name);
+                        foreach (var mr in group.Modules)
+                        {
+                            exists = targetGroup.Modules.Find((tmr) =>
+                                tmr.Domain == mr.Domain && tmr.Address == mr.Address) != null;
+                            if (!exists)
+                            {
+                                targetGroup.Modules.Add(mr);
+                            }
+                        }
+                    }
+                    homegenie.UpdateGroupsDatabase("");
+                }
+            }
+            return true;
+        }
+
+        public bool UninstallPackage(string packageFile)
+        {
+            var packageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
+            foreach (var item in packageData.Programs)
+            {
+                var installedInstances = homegenie.ProgramManager.Programs
+                    .FindAll((p) => p.PackageInfo.Repository == packageData.Repository && p.PackageInfo.PackageId == packageData.Id && p.PackageInfo.Id == item.Id);
+                if (installedInstances.Count > 0)
+                {
+                    // remove programs
+                    installedInstances.ForEach((p) =>
+                    {
+                        homegenie.ProgramManager.ProgramRemove(p);
+                    });
+                }
+                // TODO: should also remove modules from groups?
+                // TODO: should also remove groups and schedules?
+            }
+            return true;
+        }
+
+        public string CreatePackage(PackageData package)
+        {
+            string programsFile = Path.Combine(Utility.GetTmpFolder(), "programs.xml");
+            string modulesFile = Path.Combine(Utility.GetTmpFolder(), "modules.xml");
+            string groupsFile = Path.Combine(Utility.GetTmpFolder(), "groups.xml");
+            string schedulesFile = Path.Combine(Utility.GetTmpFolder(), "schedules.xml");
+            string packageFile = Path.Combine(Utility.GetTmpFolder(), "package.json");
+            string bundleFile = Path.Combine(Utility.GetTmpFolder(), package.Id + "-" + package.Version + ".zip");
+            try
+            {
+                // Clean-up
+                File.Delete(programsFile);
+                File.Delete(packageFile);
+                File.Delete(bundleFile);
+                // collect programs and modules
+                bool saveProgramsRequired = false;
+                var packagePrograms = new List<ProgramBlock>();
+                var packageModules = new List<Module>();
+                foreach (var item in package.Programs)
+                {
+                    if (item.Repository != package.Repository || item.PackageId != package.Id)
+                    {
+                        // item is an external dependency belonging to some other repository/package
+                        continue;
+                    }
+                    var program = homegenie.ProgramManager.ProgramGet(int.Parse(item.Hid));
+                    if (program != null)
+                    {
+                        saveProgramsRequired = true;
+                        //if (program.PackageInfo.Repository == null)
+                        {
+                            program.PackageInfo.Repository = package.Repository;
+                        }
+                        //if (program.PackageInfo.PackageId == null)
+                        {
+                            program.PackageInfo.PackageId = package.Id;
+                        }
+                        // update package version only if repository/package id match
+                        if (program.PackageInfo.Repository  == package.Repository && program.PackageInfo.PackageId == package.Id)
+                        {
+                            program.PackageInfo.PackageVersion = package.Version;
+                        }
+                        if (program.PackageInfo.Id == null)
+                        {
+                            program.PackageInfo.Id = item.Id;
+                        }
+                        program.PackageInfo.Version = item.Version;
+                        program.PackageInfo.Required = item.Required;
+                        item.Checksum = program.PackageInfo.Checksum = Utility.GetObjectChecksum(new
+                        {
+                            setup = program.ScriptSetup,
+                            source = program.ScriptSource
+                        });
+                        packagePrograms.Add(program);
+                        // lookup for modules belonging to this program
+                        packageModules.AddRange(homegenie.Modules.FindAll((m) =>
+                        {
+                            var vm = Utility.ModuleParameterGet(m, Properties.VirtualModuleParentId);
+                            return (m.Domain == Domains.HomeAutomation_HomeGenie && m.Address == program.Address.ToString())
+                                   || (vm != null && vm.Value == program.Address.ToString());
+                        }));
+                    }
+                }
+                Utility.UpdateXmlDatabase(packagePrograms, programsFile, null);
+                Utility.UpdateXmlDatabase(packageModules, modulesFile, null);
+                // collect control groups
+                var packageGroups = new List<Group>();
+                foreach (var item in package.Groups)
+                {
+                    var group = homegenie.GetGroups("Control").Find((g) => g.Name == item.Hid);
+                    if (group != null)
+                    {
+                        packageGroups.Add(group);
+                    }
+                }
+                Utility.UpdateXmlDatabase(packageGroups, groupsFile, null);
+                // collect schedules
+                var packageSchedules = new List<SchedulerItem>();
+                foreach (var item in package.Schedules)
+                {
+                    var schedule = homegenie.ProgramManager.SchedulerService.Get(item.Hid);
+                    if (schedule != null)
+                    {
+                        packageSchedules.Add(schedule);
+                    }
+                }
+                Utility.UpdateXmlDatabase(packageSchedules, schedulesFile, null);
+                // add files to zip bundle
+                File.WriteAllText(packageFile, JsonConvert.SerializeObject(package));
+                Utility.AddFileToZip(bundleFile, packageFile,"package.json" );
+                Utility.AddFileToZip(bundleFile, programsFile, "programs.xml");
+                Utility.AddFileToZip(bundleFile, modulesFile,"modules.xml" );
+                Utility.AddFileToZip(bundleFile, groupsFile,"groups.xml" );
+                Utility.AddFileToZip(bundleFile, schedulesFile,"schedules.xml" );
+                // move files to package folder in data/packages
+                string packageFolder = Path.Combine(Utility.GetDataFolder(), "packages", package.Repository, package.Id);
+                Utility.FolderCleanUp(packageFolder);
+                File.Move(packageFile, Path.Combine(packageFolder, "package.json"));
+                File.Move(programsFile, Path.Combine(packageFolder, "programs.xml"));
+                File.Move(modulesFile, Path.Combine(packageFolder, "modules.xml"));
+                File.Move(groupsFile, Path.Combine(packageFolder, "groups.xml"));
+                File.Move(schedulesFile, Path.Combine(packageFolder, "schedules.xml"));
+                // update programs db if required
+                if (saveProgramsRequired)
+                {
+                    homegenie.UpdateProgramsDatabase();
+                }
+            }
+            catch (Exception e)
+            {
+                homegenie.RaiseEvent(
+                    Domains.HomeGenie_System,
+                    Domains.HomeGenie_PackageInstaller,
+                    SourceModule.Master,
+                    "HomeGenie Package Installer",
+                    Properties.InstallProgressMessage,
+                    "= Error: " + e.Message
+                );
+                return null;
+            }
+            // TODO: cleanup temp files and folders
+            return bundleFile;
+        }
+
+        public PackageData AddPackage(string archiveFileName)
+        {
+            // uncompress and verify package content
+            string tempFolder = Path.Combine(Utility.GetTmpFolder(), Path.GetFileNameWithoutExtension(archiveFileName));
+            Utility.FolderCleanUp(tempFolder);
+            Utility.UncompressZip(archiveFileName, tempFolder);
+            string packageJson = File.ReadAllText(Path.Combine(tempFolder, "package.json"));
+            var packageData = JsonConvert.DeserializeObject<PackageData>(packageJson);
+            // TODO: Data normalization and check
+            string programsDatabase = Path.Combine(tempFolder, "programs.xml");
+            var serializer1 = new XmlSerializer(typeof(List<ProgramBlock>));
+            using (var reader = new StreamReader(programsDatabase))
+            {
+                // verify if package data checksum matches the one in programs.xml file
+                var programs = (List<ProgramBlock>) serializer1.Deserialize(reader);
+                foreach (var prg in packageData.Programs)
+                {
+                    // Get the program from programs.xml
+                    var p1 = programs.Find((p) => p.Address.ToString() == prg.Hid);
+                    if (p1 != null)
+                    {
+                        p1.PackageInfo.Checksum = Utility.GetObjectChecksum(new
+                        {
+                            setup = p1.ScriptSetup,
+                            source = p1.ScriptSource
+                        });
+                        if (p1.PackageInfo.Checksum != prg.Checksum)
+                        {
+                            //TODO: Integrity check failed, should abort package importing
+                            //Console.WriteLine(p1.PackageInfo.Checksum);
+                            //Console.WriteLine(prg.Checksum);
+                        }
+                    }
+                }
+            }
+            // copy the extracted package folder to the repository folder
+            string repositoryFolder = Path.Combine(Utility.GetDataFolder(), "packages", packageData.Repository);
+            if (!Directory.Exists(repositoryFolder))
+            {
+                Directory.CreateDirectory(repositoryFolder);
+            }
+            string pkgFolder = Path.Combine(repositoryFolder, packageData.Id);
+            if (Directory.Exists(pkgFolder))
+            {
+                Directory.Delete(pkgFolder, true);
+            }
+            Directory.Move(tempFolder, pkgFolder);
+            return packageData;
+        }
+
+        
+        #endregion
+        
 
         public bool InstallPackage(string pkgFolderUrl, string tempFolderPath)
         {
