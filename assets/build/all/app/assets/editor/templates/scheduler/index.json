@@ -1,0 +1,90 @@
+﻿[
+    {
+        "name": {
+            "en": "Turn On",
+            "it": "Accendi"
+        },
+        "script": "command.turn-on.js"
+    },
+    {
+        "name": {
+            "en": "Turn Off",
+            "it": "Spegni"
+        },
+        "script": "command.turn-off.js"
+    },
+    {
+        "name": {
+            "en": "Set Level",
+            "it": "Imposta livello"
+        },
+        "script": "command.set-level.js",
+        "config": {
+          "mode": [ "Heat", "HeatEconomy", "Cool", "CoolEconomy" ]
+        }
+    },
+    {
+        "name": {
+            "en": "Thermostat Mode",
+            "it": "Modalità termostato"
+        },
+        "script": "command.thermostat-mode.js",
+        "config": {
+          "mode": {
+            "name": {
+              "en": "Mode",
+              "it": "Modalità"
+            },
+            "type": "select",
+            "options": [
+              {
+                "key": "Off",
+                "value": {
+                  "en": "Off",
+                  "it": "Spento"
+                }
+              },
+              {
+                "key": "Heat",
+                "value": {
+                  "en": "Heat",
+                  "it": "Caldo"
+                }
+              },
+              {
+                "key": "HeatEconomy",
+                "value": {
+                  "en": "Heat Economy",
+                  "it": "Caldo Economia"
+                }
+              },
+              {
+                "key": "Cool",
+                "value": {
+                  "en": "Cool",
+                  "it": "Freddo"
+                }
+              },
+              {
+                "key": "CoolEconomy",
+                "value": {
+                  "en": "Cool Economy",
+                  "it": "Freddo Economia"
+                }
+              }
+            ],
+            "value": "Off"
+          }
+        }
+    },
+    {
+        "name": {
+            "en": "Say",
+            "it": "Parla"
+        },
+        "script": "program.say.js",
+        "input": {
+          "message": "text-input"
+        }
+    }
+]

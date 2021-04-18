@@ -23,7 +23,6 @@
 using System;
 using System.IO;
 using HomeGenie.Automation;
-using HomeGenie.Service.Logging;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Linq;

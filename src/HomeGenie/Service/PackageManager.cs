@@ -287,6 +287,21 @@ namespace HomeGenie.Service
                     homegenie.UpdateGroupsDatabase("");
                 }
             }
+            string scheduleDatabase = Path.Combine(repositoryFolder, packageData.Id, "schedules.xml");
+            if (File.Exists(scheduleDatabase))
+            {
+                serializer = new XmlSerializer(typeof(List<SchedulerItem>));
+                using (var reader = new StreamReader(scheduleDatabase))
+                {
+                    var pkgSchedules = (List<SchedulerItem>)serializer.Deserialize(reader);
+                    foreach (var schedule in pkgSchedules)
+                    {
+                        homegenie.ProgramManager.SchedulerService.Remove(schedule.Name);
+                        homegenie.ProgramManager.SchedulerService.Items.Add(schedule);
+                    }
+                    homegenie.UpdateSchedulerDatabase();
+                }
+            }
             return true;
         }
 

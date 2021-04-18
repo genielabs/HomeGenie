@@ -40,6 +40,15 @@
         "Moduli",
     "empty_group":
         "Non ci sono moduli in questo gruppo.",
+" ":"---------- SCHEDULER -------------",
+    "scheduler_wizard":
+        "Scheduler Wizard",
+    "scheduler_event":
+        "Evento",
+    "time_schedule":
+        "Orario",
+    "occurrence":
+        "Occorrenza",
 " ": "------------------------------------------",
     "$options":
     {

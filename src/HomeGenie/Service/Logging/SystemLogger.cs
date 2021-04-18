@@ -102,19 +102,29 @@ namespace HomeGenie.Service.Logging
             {
                 lastFlushed = DateTime.Now;
                 //TODO: rename file with timestamp, compress it and open a new one
-                // or simply keep max 2 days renaming old one to <logfile>.old
+                //      or simply keep max 2 days renaming old one to <logfile>.old
                 CloseLog();
                 //
                 var assembly = Assembly.GetExecutingAssembly();
                 string logDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
-                string logFile = assembly.ManifestModule.Name.ToLower().Replace(".exe", ".log");
+                string logFile = assembly.ManifestModule.Name.ToLower()
+                    .Replace(".exe", ".log")
+                    .Replace(".dll", ".log"); // netcore
                 string logPath = Path.Combine(logDir, logFile);
                 string logFileBackup = logPath + ".bak";
-                if (File.Exists(logFileBackup))
+                try
                 {
-                    File.Delete(logFileBackup);
+                    if (File.Exists(logFileBackup))
+                    {
+                        File.Delete(logFileBackup);
+                    }
+
+                    File.Move(logPath, logFileBackup);
                 }
-                File.Move(logPath, logFileBackup);
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: LogWriter could not move old log - " + e.Message + "\n" + e.StackTrace);
+                }
                 //
                 OpenLog();
                 return true;
