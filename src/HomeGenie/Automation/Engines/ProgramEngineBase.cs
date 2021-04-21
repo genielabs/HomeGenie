@@ -86,7 +86,14 @@ namespace HomeGenie.Automation.Engines
                 {
                     RoutedEventAck.Set();
                     if (!_startupThread.Join(1000))
+                    {
+#if NETCOREAPP
+                        // _programThread.Abort(); => System.PlatformNotSupportedException: Thread abort is not supported on this platform.
+                        _startupThread.Interrupt();
+#else
                         _startupThread.Abort();
+#endif
+                    }
                 }
                 catch
                 {
