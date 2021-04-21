@@ -159,6 +159,13 @@ namespace HomeGenie.Automation.Scheduler
                     homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
                         Properties.SchedulerScriptStatus, eventItem.Name + ":Interrupted");
                 }
+                catch (ThreadInterruptedException)
+                {
+                    programThread = null;
+                    isRunning = false;
+                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
+                        Properties.SchedulerScriptStatus, eventItem.Name + ":Interrupted");
+                }
                 homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
                     Properties.SchedulerScriptStatus, eventItem.Name + ":End");
             });
