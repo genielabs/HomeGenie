@@ -120,9 +120,13 @@ namespace HomeGenie.Service.Handlers
                         newSchedule.Script
                     );
                     if (newSchedule.BoundDevices != null)
+                    {
                         item.BoundDevices = newSchedule.BoundDevices;
+                    }
                     if (newSchedule.BoundModules != null)
+                    {
                         item.BoundModules = newSchedule.BoundModules;
+                    }
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.ModuleUpdate":
@@ -179,31 +183,56 @@ namespace HomeGenie.Service.Handlers
                     string startFrom = migCommand.GetOption(1);
                     if (!String.IsNullOrWhiteSpace(startFrom))
                         dateStart = Utility.JavascriptToDate(long.Parse(startFrom));
+                    string cronExpression = migCommand.GetOption(2);
                     List<dynamic> nextList = new List<dynamic>();
-                    for (int s = 0; s < homegenie.ProgramManager.SchedulerService.Items.Count; s++)
+                    if (!String.IsNullOrEmpty(cronExpression))
                     {
-                        var ce = homegenie.ProgramManager.SchedulerService.Items[s];
-                        if (!ce.IsEnabled)
-                            continue;
-                        var evt = new { Name = ce.Name, Description = ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
+                        var evt = new
+                        {
+                            CronExpression = cronExpression,
+                            Occurrences = new List<double>()
+                        };
                         var d = dateStart;
                         var dateEnd = dateStart.AddHours(hours);
-                        var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, ce.CronExpression);
+                        var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, cronExpression);
                         occurs.Sort();
                         foreach (var dt in occurs)
                         {
                             evt.Occurrences.Add(Utility.DateToJavascript(dt.ToUniversalTime()));
                         }
                         if (evt.Occurrences.Count > 0)
+                        {
                             nextList.Add(evt);
+                        }
+                        
+                    }
+                    else
+                    {
+                        for (int s = 0; s < homegenie.ProgramManager.SchedulerService.Items.Count; s++)
+                        {
+                            var ce = homegenie.ProgramManager.SchedulerService.Items[s];
+                            if (!ce.IsEnabled)
+                                continue;
+                            var evt = new { ce.Name, ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
+                            var d = dateStart;
+                            var dateEnd = dateStart.AddHours(hours);
+                            var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, ce.CronExpression);
+                            occurs.Sort();
+                            foreach (var dt in occurs)
+                            {
+                                evt.Occurrences.Add(Utility.DateToJavascript(dt.ToUniversalTime()));
+                            }
+                            if (evt.Occurrences.Count > 0)
+                            {
+                                nextList.Add(evt);
+                            }
+                        }
                     }
                     request.ResponseData = nextList;
                     break;
                 case "Scheduling.List":
-                    homegenie.ProgramManager.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
-                    {
-                        return s1.Name.CompareTo(s2.Name);
-                    });
+                    homegenie.ProgramManager.SchedulerService
+                        .Items.Sort((s1, s2) => String.Compare(s1.Name, s2.Name, StringComparison.Ordinal));
                     request.ResponseData = homegenie.ProgramManager.SchedulerService.Items;
                     break;
                 case "Scheduling.Describe":

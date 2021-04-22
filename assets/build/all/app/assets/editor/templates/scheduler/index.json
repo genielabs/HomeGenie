@@ -20,7 +20,19 @@
         },
         "script": "command.set-level.js",
         "config": {
-          "mode": [ "Heat", "HeatEconomy", "Cool", "CoolEconomy" ]
+          "level": {
+            "name": {
+              "en": "Level",
+              "it": "Livello"
+            },
+            "type": "slider",
+            "options": {
+              "min": 0,
+              "max": 100,
+              "step": 1
+            },
+            "value": 0
+          }
         }
     },
     {
@@ -83,8 +95,18 @@
             "it": "Parla"
         },
         "script": "program.say.js",
-        "input": {
-          "message": "text-input"
+        "config": {
+          "message": {
+            "name": {
+              "en": "Message",
+              "it": "Messaggio"
+            },
+            "options": {
+              "maxLength": 200
+            },
+            "type": "text",
+            "value": ""
+          }
         }
     }
 ]

@@ -1,1 +1,1 @@
-﻿$$.program.say('Hello World!');
+﻿$$.program.say($sentence$);

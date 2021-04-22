@@ -43,12 +43,86 @@
 " ":"---------- SCHEDULER -------------",
     "scheduler_wizard":
         "Scheduler Wizard",
-    "scheduler_event":
+    "schedule_event":
         "Evento",
+    "schedule_action":
+        "Azione",
+    "schedule_occurrence_preview":
+        "Anteprima occorrenza",
     "time_schedule":
         "Orario",
     "occurrence":
         "Occorrenza",
+    "cronwizard_description_on":
+        "il",
+    "cronwizard_description_from":
+        "dal",
+    "cronwizard_description_to":
+        "al",
+    "cronwizard_description_starting":
+        "dalle",
+    "cronwizard_description_ending":
+        "fino alle",
+    "cronwizard_description_at":
+        "alle",
+    "cronwizard_add_time_slot":
+        "Aggiungi fascia oraria",
+    "cronwizard_add_exact_time":
+        "Aggiungi ora esatta",
+    "cronwizard_start_time":
+        "Ora inizio",
+    "cronwizard_end_time":
+        "Ora fine",
+    "cronwizard_minutes":
+        "Minuti",
+    "cronwizard_hours":
+        "Ore",
+    "cronwizard_days":
+        "Giorni",
+    "cronwizard_months":
+        "Mesi",
+    "cronwizard_minuteselect_everyminute":
+        "Ogni minuto",
+    "cronwizard_minuteselect_everynthminute":
+        "Ogni <n> minuti",
+    "cronwizard_minuteselect_selectedminutes":
+        "Minuti selezionati",
+    "cronwizard_hourselect_everyhour":
+        "Ogni ora",
+    "cronwizard_hourselect_everynthhour":
+        "Ogni <n> ore",
+    "cronwizard_hourselect_selectedhours":
+        "Ore selezionate",
+    "cronwizard_dayselect_everyday":
+        "Ogni giorno",
+    "cronwizard_dayselect_selecteddays":
+        "Giorni selezionati",
+    "cronwizard_dayowselect_selecteddaysow":
+        "Giorni della settimana selezionati",
+    "cronwizard_monthselect_everymonth":
+        "Ogni mese",
+    "cronwizard_monthselect_selectedmonths":
+        "Mesi selezionati",
+    "cronwizard_bindings_define_types_and_modules":
+        "Definire tipi e moduli soggetti a questa pianificazione (opzionale)",
+    "cronwizard_bindings_select_types":
+        "Seleziona tipi",
+    "cronwizard_action_set_action_to_execute":
+        "Imposta l'azione da eseguire alle occorrenze di questo evento",
+    "cronwizard_action_preset_actions":
+        "Azioni preimpostate",
+    "cronwizard_action_preset_every_occurrence":
+        "Ad ogni occorrenza",
+    "cronwizard_action_preset_slot_start":
+        "All'inizio di una fascia oraria",
+    "cronwizard_action_preset_slot_end":
+        "Alla fine di una fascia oraria",
+    "cronwizard_action_custom_script":
+        "Script personalizzato",
+    "cronwizard_action_no_action":
+        "Nessuna azione",
+    "cronwizard_action_schedule_variable_hint":
+        "Utilizza <span class=\"color-primary\">@{{name}}</span> come variabile nelle espressioni cron o utilizza <span class=\"color-primary\">Scheduler.IsScheduling(\"{{name}}\")</span> nei programmi di automazione per fare riferimento a questo evento.",
 " ": "------------------------------------------",
     "$options":
     {

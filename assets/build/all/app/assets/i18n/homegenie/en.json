@@ -43,12 +43,86 @@
 " ":"---------- SCHEDULER -------------",
     "scheduler_wizard":
         "Scheduler Wizard",
-    "scheduler_event":
+    "schedule_event":
         "Event",
+    "schedule_action":
+        "Action",
+    "schedule_occurrence_preview":
+        "Occurrence preview",
     "time_schedule":
         "Schedule",
     "occurrence":
         "Occurrence",
+    "cronwizard_description_on":
+        "on",
+    "cronwizard_description_from":
+        "from",
+    "cronwizard_description_to":
+        "to",
+    "cronwizard_description_starting":
+        "starting at",
+    "cronwizard_description_ending":
+        "and ending at",
+    "cronwizard_description_at":
+        "at",
+    "cronwizard_add_time_slot":
+        "Add time slot",
+    "cronwizard_add_exact_time":
+        "Add exact time",
+    "cronwizard_start_time":
+        "Start time",
+    "cronwizard_end_time":
+        "End time",
+    "cronwizard_minutes":
+        "Minutes",
+    "cronwizard_hours":
+        "Hours",
+    "cronwizard_days":
+        "Days",
+    "cronwizard_months":
+        "Months",
+    "cronwizard_minuteselect_everyminute":
+        "Every minute",
+    "cronwizard_minuteselect_everynthminute":
+        "Every <n> minutes",
+    "cronwizard_minuteselect_selectedminutes":
+        "Selected minutes",
+    "cronwizard_hourselect_everyhour":
+        "Every hour",
+    "cronwizard_hourselect_everynthhour":
+        "Every <n> hours",
+    "cronwizard_hourselect_selectedhours":
+        "Selected hours",
+    "cronwizard_dayselect_everyday":
+        "Every day",
+    "cronwizard_dayselect_selecteddays":
+        "Selected days",
+    "cronwizard_dayowselect_selecteddaysow":
+        "Selected days of week",
+    "cronwizard_monthselect_everymonth":
+        "Every month",
+    "cronwizard_monthselect_selectedmonths":
+        "Selected months",
+    "cronwizard_bindings_define_types_and_modules":
+        "Define types and modules that are subject to this schedule (optional)",
+    "cronwizard_bindings_select_types":
+        "Select types",
+    "cronwizard_action_set_action_to_execute":
+        "Set action to execute on occurrences of this event",
+    "cronwizard_action_preset_actions":
+        "Preset actions",
+    "cronwizard_action_preset_every_occurrence":
+        "On every occurrence",
+    "cronwizard_action_preset_slot_start":
+        "At start of a time slot",
+    "cronwizard_action_preset_slot_end":
+        "At end of a time slot",
+    "cronwizard_action_custom_script":
+        "Custom action script",
+    "cronwizard_action_no_action":
+        "No action",
+    "cronwizard_action_schedule_variable_hint":
+        "Use <span class=\"color-primary\">@{{name}}</span> as a variable in cron expressions or use <span class=\"color-primary\">Scheduler.IsScheduling(\"{{name}}\")</span> in automation programs to reference this event.",
 " ": "------------------------------------------",
   "$options": {
     "34": {

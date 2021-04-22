@@ -5,7 +5,7 @@ class SchedulerApi {
   get modules(): ModulesManager;
   get boundModules(): ModulesManager;
   // ProgramHelperBase
-  program: any;
+  program: ProgramHelper;
   // SettingsHelper
   settings: any;
   // NetHelper
@@ -30,7 +30,82 @@ class SchedulerApi {
   onNext(): boolean;
   onPrevious(): boolean;
   data(key: string, value?: any);
-  onUpdate(handler: () => any);
+  onUpdate(handler: (module: ModuleHelper, parameter: ModuleParameter) => any);
+}
+
+class ProgramHelper {
+  /**
+   * Playbacks a synthesized voice message from speaker.
+   * @param sentence Message to output.
+   * @param locale Language locale string (eg. "en-US", "it-IT", "en-GB", "nl-NL",...).
+   * @param goAsync If true, the command will be executed asyncronously.
+   * @remarks
+   * @example
+   * Example:
+   * @code
+   * Program.Say("The garage door has been opened", "en-US");
+   */
+  say(sentence: string, locale: string = null, goAsync = false): ProgramHelper;
+
+  /**
+   * Playbacks a wave file.
+   * @param waveUrl URL of the audio wave file to play.
+   */
+  play(waveUrl: string): ProgramHelper;
+
+  /**
+   * Parses the given (api call) string as a `MigInterfaceCommand` object.
+   * @returns  The mig command.
+   * @param apiCall Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").
+   */
+  parseApiCall(apiCall: string): MigInterfaceCommand;
+
+  /**
+   * Invoke an API command and get the result.
+   * @returns  The API command response.
+   * @param apiCommand Any MIG/APP API command without the `/api/` prefix.
+   * @param data Data object.
+   */
+  apiCall(apiCommand: string, data?: any): any;
+
+  /**
+   * Executes a function asynchronously.
+   * @returns
+   * The Thread object of this asynchronous task.
+   * <param name='functionBlock'>
+   * Function name or inline delegate.
+   */
+  runAsyncTask(functionBlock: () => {}): Thread;
+
+  /**
+   * Executes the specified Automation Program.
+   * <param name='programId'>
+   * Program name or ID.
+   * <param name='options'>
+   * Program options.
+   */
+  run(programId: string, options?: string): void;
+
+  /**
+   * Wait until the given program is not running.
+   * @returns  ProgramHelper.
+   * @param programId Program address or name.
+   */
+  waitFor(programId: string): ProgramHelper;
+
+  /**
+   * Returns a reference to the ProgramHelper of a program.
+   * @returns  ProgramHelper.
+   * @param programAddress Program address (id).
+   */
+  withAddress(programAddress: number): ProgramHelper;
+
+  /**
+   * Returns a reference to the ProgramHelper of a program.
+   * @returns  ProgramHelper.
+   * @param programName Program name.
+   */
+  withName(programName: string): ProgramHelper;
 }
 
 class SerialPortHelper {
