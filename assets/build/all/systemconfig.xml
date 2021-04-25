@@ -3,6 +3,12 @@
   <HomeGenie>
     <Settings>
       <ModuleParameter>
+        <Name>Location.Service.Key</Name>
+        <Value>dgXpCoaiULRaJB5xXWOPcu8e3P9sxkSGvdAdAl2Y+UNJAZpm7pwLZvJYP7JwRLER</Value>
+        <Description />
+        <UpdateTime>2014-04-19T10:24:58.6939286Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>Messaging.Email.Sender</Name>
         <Value />
         <Description />

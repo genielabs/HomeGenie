@@ -431,15 +431,16 @@ namespace HomeGenie.Automation.Scheduler
         {
             get
             {
+                var homeGenieConfig = masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie;
                 dynamic location = "{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
                 if (masterControlProgram != null && String.IsNullOrWhiteSpace(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location)) {
-                    masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location = location;
+                    homeGenieConfig.Location = location;
                 }
                 else if (masterControlProgram != null)
                 {
-                    location = masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location;
+                    location = homeGenieConfig.Location;
                 }
-                return (dynamic) JsonConvert.DeserializeObject(location);
+                return JsonConvert.DeserializeObject(location);
             }
         }
 

@@ -56,6 +56,7 @@ namespace HomeGenie.Service.Handlers
         private string widgetBasePath;
         private string tempFolderPath;
         private string groupWallpapersPath;
+        private NetHelper netHelper;
 
         public Config(HomeGenieService hg)
         {
@@ -63,6 +64,7 @@ namespace HomeGenie.Service.Handlers
             tempFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder());
             widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "pages", "control", "widgets");
             groupWallpapersPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "images", "wallpapers");
+            netHelper = new NetHelper(homegenie);
         }
 
         public void ProcessRequest(MigClientRequest request)
@@ -265,6 +267,32 @@ namespace HomeGenie.Service.Handlers
                             errorArgs.ErrorContext.Handled = true;
                         } });
                     (request.ResponseData as dynamic).sunData = JsonConvert.DeserializeObject(sunData);
+                }
+                else if (migCommand.GetOption(0) == "Location.Search")
+                {
+                    string query = migCommand.GetOption(1);
+                    var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
+                        .Find((cfg) => cfg.Is("Location.Service.Key"));
+                    string googleApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + query + "&types=(cities)&key=" + apiKey.Value;
+                    var result = netHelper.WebService(googleApiUrl).GetData();
+                    var matches = new List<dynamic>();
+                    foreach (var match in result.predictions) {
+                        matches.Add(match);
+                    }
+                    request.ResponseData = matches;
+                }
+                else if (migCommand.GetOption(0) == "Location.GeoCode")
+                {
+                    string query = migCommand.GetOption(1);
+                    var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
+                        .Find((cfg) => cfg.Is("Location.Service.Key"));
+                    string googleApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=" + apiKey.Value;
+                    var result = netHelper.WebService(googleApiUrl).GetData();
+                    var matches = new List<dynamic>();
+                    foreach (var match in result.results) {
+                        matches.Add(match);
+                    }
+                    request.ResponseData = matches;
                 }
                 else if (migCommand.GetOption(0) == "Service.Restart")
                 {

@@ -1,9 +1,14 @@
 const $$ = new SchedulerApi();
 
 class SchedulerApi {
-  // ModulesManager
-  get modules(): ModulesManager;
+  /**
+   * Modules bound to this event.
+   */
   get boundModules(): ModulesManager;
+  /**
+   * Modules Helper.
+   */
+  get modules(): ModulesManager;
   // ProgramHelperBase
   program: ProgramHelper;
   // SettingsHelper
@@ -25,10 +30,25 @@ class SchedulerApi {
   // Events helper
   event: any;
   // Miscellaneous functions
+  /**
+   * Pause for the given amount of seconds.
+   * @param seconds
+   */
   pause(seconds: number);
+  /**
+   * Delay for the given amount of seconds. (alias of `pause(..)`)
+   * @param seconds
+   */
   delay(seconds: number); // alias of 'pause'
+  /**
+   * Returns `true` if this event will also occur on next minute, `false` otherwise.
+   */
   onNext(): boolean;
+  /**
+   * Returns `true` if this event did also occur on previous minute, `false` otherwise,
+   */
   onPrevious(): boolean;
+  // ---
   data(key: string, value?: any);
   onUpdate(handler: (module: ModuleHelper, parameter: ModuleParameter) => any);
 }

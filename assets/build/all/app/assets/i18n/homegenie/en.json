@@ -1,6 +1,21 @@
 {
-    "system_configuration":
-        "System configuration",
+" ": "--------------- SETUP WIZ -----------------",
+    "welcome_to_homegenie":
+        "Welcome to HomeGenie!",
+    "welcome_subtitle":
+        "The programmable automation system",
+    "not_configured_yet":
+        "System is not configured yet. This setup wizard will help you in getting your system up and running in a few steps.",
+    "system_config_start_with_base_and_backup":
+        "Base setup with restore from backup file",
+    "system_config_start_with_default_setup":
+        "Default setup",
+    "system_config_start_with_default_setup_and_demo":
+        "Default setup and demo (simulated devices activity)",
+    "system_config_additional_features":
+        "Additional features",
+    "system_config_manual_setup":
+        "Manual setup",
 " ": "-------------- INTERFACES ----------------",
     "interfaces":
         "Interfaces",
@@ -60,9 +75,9 @@
     "cronwizard_description_to":
         "to",
     "cronwizard_description_starting":
-        "starting at",
+        "from",
     "cronwizard_description_ending":
-        "and ending at",
+        "to",
     "cronwizard_description_at":
         "at",
     "cronwizard_add_time_slot":
@@ -144,14 +159,14 @@
         "Title":
             "All lights on",
         "Description":
-            "Turn on all lights in the selected group."
+            "Turn on all lights in the given group."
     },
 
     "7": {
         "Title":
             "All lights off",
         "Description":
-            "Turn off all lights in the selected group."
+            "Turn off all lights in the given group."
     },
 
     "81": {
@@ -162,14 +177,14 @@
         "EnergyManagement.MonitorStatus":
             "Monitor status",
         "EnergyManagement.MonitorWatts":
-            "Monitor watts"
+            "Monitor energy consumption"
     },
 
     "82": {
         "Title":
             "Energy Saving Mode",
         "Description":
-            "When enabled, ensures that dimmer level is kept below the configured percentage value.",
+            "Keeps dimmers level below a configurable percentage value.",
         "EnergyManagement.EnergySavingLevel":
             "Max light level (%)",
         "EnergyManagement.EnergySavingMode":
@@ -187,24 +202,11 @@
             "Simulate only"
     },
 
-    "35": {
-        "Title":
-            "Scheduled On/Off",
-        "Description":
-            "Turn on/off a device using the scheduler.",
-        "HomeGenie.ScheduleControl":
-            "Enable scheduled on/off",
-        "HomeGenie.ScheduleOn":
-            "Turn on",
-        "HomeGenie.ScheduleOff":
-            "Turn off"
-    },
-
     "90": {
         "Title":
             "Security Alarm System",
         "Description":
-            "Include device in the security alarm system",
+            "Security alarm system",
         "HomeGenie.SecurityAlarm":
             "Use as alarm/strobe",
         "HomeGenie.SecuritySensor":
@@ -227,11 +229,11 @@
 
     "145": {
         "Title":
-            "Smart Lights",
+            "Smart Device",
         "Description":
-            "Control device by motion detection and enviroment light.",
+            "Auto switch a device on/off based on sensing motion and environment light.",
         "HomeGenie.SmartLights.Enable":
-            "Enable 'Smart Lights' control",
+            "Enable 'Smart Device'",
         "HomeGenie.SmartLights.OnMotionDetect":
             "Controlled by motion sensor (optional)",
         "HomeGenie.SmartLights.CheckLuminosity":
@@ -239,61 +241,17 @@
         "HomeGenie.SmartLights.SwitchOffTimeout":
             "Turn off after inactivity timeout (seconds)",
         "HomeGenie.SmartLights.MinLuminance":
-            "Turn on if luminance is below:",
-        "TimeTable.ExternalControl":
-            "Synchronize with Timetable scheduling"
+            "Turn on if luminance is below:"
     },
 
     "8": {
         "Title":
             "Sunrise Colors Scenario",
         "Description":
-            "Example scenario for Philips Hue lights.",
+            "Example scenario for color lights.",
         "Scenarios.SunriseColors":
             "Link to Sunrise Colors scenario"
-    },
-
-    "36": {
-        "Title":
-            "Timetable",
-        "Description":
-            "Schedule thermostats, lights and shutters.",
-        "TimeTable.Weekend":
-            "Week-end",
-        "TimeTable.Workday":
-            "Work days",
-        "TimeTable.Holiday":
-            "Holidays",
-        "TimeTable.Special":
-            "Special days",
-        "TimeTable.Enable":
-            "Enable timetable",
-        "TimeTable.Repeat":
-            "Repeat command for the whole duration",
-        "TimeTable.CheckDST":
-            "Enable Day Light Savings check",
-        "TimeTable.UI.NoProgram":
-            "no program",
-        "TimeTable.UI.ProgramNr":
-            "program #"
-    },
-
-    "112": {
-        "Title":
-            "Automatic turn off",
-        "Description":
-            "When device is turned on, automatically turn it off after a given delay.",
-        "HomeGenie.TurnOffDelay":
-            "Automatic turn off delay (seconds)"
-    },
-
-    "200": {
-        "Title":
-            "Windows Phone Push Notification Service",
-        "Description":
-            "Sends toast and tile updates to Windows Phone client.",
-        "MobileNotification.SendChanges":
-            "Push notifications to Windows Phone Client"
     }
+
   }
 }

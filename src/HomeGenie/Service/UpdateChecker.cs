@@ -119,7 +119,6 @@ namespace HomeGenie.Service
 
         private ReleaseInfo currentRelease;
         private List<ReleaseInfo> remoteUpdates;
-        private Timer checkInterval;
         private const string updateFolder = "_update";
 
         private HomeGenieService homegenie;
@@ -179,13 +178,7 @@ namespace HomeGenie.Service
         public UpdateChecker(HomeGenieService hg)
         {
             homegenie = hg;
-            //
-            checkInterval = new Timer(1000 * 60 * 60 * 24); // 24 hours interval between update checks
-            checkInterval.AutoReset = true;
-            checkInterval.Elapsed += checkInterval_Elapsed;
-            //
             remoteUpdates = new List<ReleaseInfo>();
-
             // TODO: SSL connection certificate validation:
             // TODO: this is just an hack to fix certificate issues happening sometimes on api.github.com site,
             // TODO: not meant to be used in production enviroment
@@ -214,12 +207,11 @@ namespace HomeGenie.Service
         public void Start()
         {
             Check();
-            checkInterval.Start();
         }
 
         public void Stop()
         {
-            checkInterval.Stop();
+            // noop
         }
 
         public static ReleaseInfo GetReleaseFile(string file)
@@ -397,7 +389,7 @@ namespace HomeGenie.Service
                 }
             }
 
-            // Unarchive (unzip)
+            // un-archive (unzip)
             if (ArchiveDownloadUpdate != null)
                 ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
 

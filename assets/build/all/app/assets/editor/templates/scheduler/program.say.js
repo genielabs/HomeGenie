@@ -1,1 +1,1 @@
-﻿$$.program.say($sentence$);
+﻿$$.program.say('$message$');

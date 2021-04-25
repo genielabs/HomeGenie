@@ -161,9 +161,8 @@ namespace HomeGenie.Service.Handlers
                     }
                     homegenie.UpdateSchedulerDatabase();
                     break;
-                case "Scheduling.Delete":
-                    homegenie.ProgramManager.SchedulerService.Remove(migCommand.GetOption(0));
-                    homegenie.UpdateSchedulerDatabase();
+                case "Scheduling.Get":
+                    request.ResponseData = homegenie.ProgramManager.SchedulerService.Get(migCommand.GetOption(0));
                     break;
                 case "Scheduling.Enable":
                     homegenie.ProgramManager.SchedulerService.Enable(migCommand.GetOption(0));
@@ -173,8 +172,9 @@ namespace HomeGenie.Service.Handlers
                     homegenie.ProgramManager.SchedulerService.Disable(migCommand.GetOption(0));
                     homegenie.UpdateSchedulerDatabase();
                     break;
-                case "Scheduling.Get":
-                    request.ResponseData = homegenie.ProgramManager.SchedulerService.Get(migCommand.GetOption(0));
+                case "Scheduling.Delete":
+                    homegenie.ProgramManager.SchedulerService.Remove(migCommand.GetOption(0));
+                    homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.ListOccurrences":
                     int hours = 24;

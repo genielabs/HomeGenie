@@ -1,1 +1,1 @@
-$$.program.run($program$);
+$$.program.run('$program$', '$options$');
