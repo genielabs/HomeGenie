@@ -86,7 +86,14 @@ namespace HomeGenie.Automation.Engines
                 {
                     RoutedEventAck.Set();
                     if (!_startupThread.Join(1000))
+                    {
+#if NETCOREAPP
+                        // _programThread.Abort(); => System.PlatformNotSupportedException: Thread abort is not supported on this platform.
+                        _startupThread.Interrupt();
+#else
                         _startupThread.Abort();
+#endif
+                    }
                 }
                 catch
                 {
@@ -132,7 +139,8 @@ namespace HomeGenie.Automation.Engines
                     _programThread = null;
                     ProgramBlock.IsRunning = false;
                     if (result != null && result.Exception != null &&
-                        result.Exception.GetType() != typeof(TargetException))
+                        result.Exception.GetType() != typeof(TargetException) &&
+                        result.Exception.GetType() != typeof(ThreadInterruptedException))
                     {
                         // runtime error occurred, script is being disabled
                         // so user can notice and fix it
@@ -148,6 +156,19 @@ namespace HomeGenie.Automation.Engines
                         ProgramBlock.IsEnabled ? "Idle" : "Stopped");
                 }
                 catch (ThreadAbortException)
+                {
+                    _programThread = null;
+                    ProgramBlock.IsRunning = false;
+                    if (HomeGenie.ProgramManager != null)
+                    {
+                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(
+                            ProgramBlock,
+                            Properties.ProgramStatus,
+                            "Interrupted"
+                        );
+                    }
+                }
+                catch (ThreadInterruptedException)
                 {
                     _programThread = null;
                     ProgramBlock.IsRunning = false;
@@ -209,7 +230,14 @@ namespace HomeGenie.Automation.Engines
             try
             {
                 if (!_programThread.Join(1000))
+                {
+#if NETCOREAPP
+                    // _programThread.Abort(); => System.PlatformNotSupportedException: Thread abort is not supported on this platform.
+                    _programThread.Interrupt();
+#else
                     _programThread.Abort();
+#endif
+                }
             }
             catch
             {
@@ -326,7 +354,7 @@ namespace HomeGenie.Automation.Engines
                 catch (Exception ex)
                 {
                     // a runtime error occured
-                    if (ex.GetType() == typeof(TargetException) || ex is ThreadAbortException)
+                    if (ex.GetType() == typeof(TargetException) || ex is ThreadAbortException || ex is ThreadInterruptedException)
                         return isConditionSatisfied && ProgramBlock.IsEnabled;
                     List<ProgramError> error = new List<ProgramError>() {GetFormattedError(ex, true)};
                     ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);

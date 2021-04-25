@@ -147,12 +147,23 @@ namespace HomeGenie.Automation.Scheduler
                     }
                     programThread = null;
                     isRunning = false;
-                    if (result != null && result.Exception != null && result.Exception.GetType() != typeof(TargetException))
+                    if (result != null && result.Exception != null &&
+                        result.Exception.GetType() != typeof(TargetException) &&
+                        result.Exception.GetType() != typeof(ThreadInterruptedException))
+                    {
                         homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler,
                             eventItem.Name, Properties.SchedulerScriptStatus,
                             eventItem.Name + ":Error (" + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' ') + ")");
+                    }
                 }
                 catch (ThreadAbortException)
+                {
+                    programThread = null;
+                    isRunning = false;
+                    homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
+                        Properties.SchedulerScriptStatus, eventItem.Name + ":Interrupted");
+                }
+                catch (ThreadInterruptedException)
                 {
                     programThread = null;
                     isRunning = false;
@@ -181,7 +192,14 @@ namespace HomeGenie.Automation.Scheduler
                 try
                 {
                     if (!programThread.Join(1000))
+                    {
+#if NETCOREAPP
+                        // _programThread.Abort(); => System.PlatformNotSupportedException: Thread abort is not supported on this platform.
+                        programThread.Interrupt();
+#else
                         programThread.Abort();
+#endif
+                    }
                 }
                 catch
                 {
