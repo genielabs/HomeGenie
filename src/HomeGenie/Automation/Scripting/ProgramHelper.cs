@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Dynamic;
 using System.Globalization;
@@ -53,7 +54,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Execute a setup function when the program is enabled. It is meant to be used in the "Startup Code" to execute only once
+        /// Execute a setup function when the program is enabled. It is meant to be used in the "Setup Code" to execute only once
         /// the instructions contained in the passed function. It is mainly used for setting program configuration fields, parameters and features.
         /// </summary>
         /// <param name="functionBlock">Function name or inline delegate.</param>
@@ -135,7 +136,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Run the program as soon as the "Startup Code" exits. This command is meant to be used in the "Startup Code".
+        /// Run the program as soon as the "Setup Code" exits. This command is meant to be used in the "Setup Code".
         /// </summary>
         /// <param name="willRun">If set to <c>true</c> will run.</param>
         public void Run(bool willRun)
@@ -175,11 +176,16 @@ namespace HomeGenie.Automation.Scripting
 
             module.Name = (program != null ? program.Name : "");
             module.Domain = myProgramDomain;
-            Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
 
-            RelocateProgramModule();
-            homegenie.modules_RefreshVirtualModules();
-            //homegenie.modules_Sort();
+            var widgetModule = Utility.ModuleParameterGet(module, Properties.WidgetDisplayModule);
+            if (widgetModule == null || widgetModule.Value != widget)
+            {
+                Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
+                //RaiseEvent(Properties.WidgetDisplayModule, widget, "");
+                RelocateProgramModule();
+                homegenie.modules_RefreshVirtualModules();
+                //homegenie.modules_Sort();
+            }
 
             return this;
         }
@@ -327,61 +333,6 @@ namespace HomeGenie.Automation.Scripting
             return feature;
         }
 
-        #region DEPRECATED
-
-        [Obsolete("use 'Program.UseWidget(<widget>)' instead")]
-        public ProgramHelper AddControlWidget(string widget)
-        {
-            this.UseWidget(widget);
-            return this;
-        }
-
-        [Obsolete("use 'Program.AddOption(<field>, <defaultValue>, <description>, <type>)' instead")]
-        public ProgramHelper AddInputField(string field, string defaultValue, string description)
-        {
-            this.AddOption(field, defaultValue, description, "text");
-            return this;
-        }
-
-        [Obsolete("use 'Program.Option' instead")]
-        public ModuleParameter InputField(string field)
-        {
-            return this.Parameter("ConfigureOptions." + field);
-        }
-
-        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, \"checkbox\")' instead")]
-        public ProgramHelper AddFeature(
-            string forDomains,
-            string forModuleTypes,
-            string propertyName,
-            string description
-        )
-        {
-            return AddFeature(forDomains, forModuleTypes, propertyName, description, "checkbox");
-        }
-        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, <type>)' instead")]
-        public ProgramHelper AddFeature(string forModuleTypes, string propertyName, string description) // default type = checkbox
-        {
-            return AddFeature("", forModuleTypes, propertyName, description, "checkbox");
-        }
-        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, \"text\")' instead")]
-        public ProgramHelper AddFeatureTextInput(
-            string forDomain,
-            string forModuleTypes,
-            string propertyName,
-            string description
-        )
-        {
-            return AddFeature(forDomain, forModuleTypes, propertyName, description, "text");
-        }
-        [Obsolete("use 'AddFeature(\"\", <forTypes>, <forPropertyName>, <description>, \"text\")' instead")]
-        public ProgramHelper AddFeatureTextInput(string forModuleTypes, string propertyName, string description)
-        {
-            return AddFeature("", forModuleTypes, propertyName, description, "text");
-        }
-
-        #endregion DEPRECATED
-
         /// <summary>
         /// Adds a new virtual module to the system.
         /// </summary>
@@ -426,17 +377,20 @@ namespace HomeGenie.Automation.Scripting
                     virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
                 Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
             }
+            //
+            homegenie.modules_RefreshVirtualModules();
+            homegenie.modules_Sort();
             // update real module device type and widget
             Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
             if (module != null)
             {
                 if (module.DeviceType == MIG.ModuleTypes.Generic)
+                {
                     module.DeviceType = virtualModule.DeviceType;
+                }
                 Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
+                //homegenie.RaiseEvent(this, module.Domain, module.Address, "", Properties.WidgetDisplayModule, widget);
             }
-            //
-            homegenie.modules_RefreshVirtualModules();
-            //homegenie.modules_Sort();
             return this;
         }
 
@@ -483,18 +437,11 @@ namespace HomeGenie.Automation.Scripting
             int endAddress
         )
         {
+            var vmList = new List<VirtualModule>();
             for (int x = startAddress; x <= endAddress; x++)
             {
-
                 VirtualModule virtualModule = null;
-                try
-                {
-                    virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == x.ToString());
-                }
-                catch
-                {
-                }
-                //
+                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == x.ToString());
                 if (virtualModule == null)
                 {
                     virtualModule = new VirtualModule() {
@@ -520,18 +467,25 @@ namespace HomeGenie.Automation.Scripting
                         virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
                     Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
                 }
+                vmList.Add(virtualModule);
+            }
+            homegenie.modules_RefreshVirtualModules();
+            homegenie.modules_Sort();
+            foreach (var virtualModule in vmList)
+            {
                 // update real module device type and widget
                 Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
                 if (module != null)
                 {
                     if (module.DeviceType == MIG.ModuleTypes.Generic)
+                    {
                         module.DeviceType = virtualModule.DeviceType;
+                    }
                     Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
+                    homegenie.RaiseEvent(this, module.Domain, module.Address, "", Properties.WidgetDisplayModule, widget);
                 }
-
+                
             }
-            homegenie.modules_RefreshVirtualModules();
-            //homegenie.modules_Sort();
             return this;
         }
 
@@ -646,42 +600,6 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Raise a module parameter event and set the parameter with the specified value.
-        /// </summary>
-        /// <returns>ProgramHelper.</returns>
-        /// <param name="module">The module source of this event.</param>
-        /// <param name="parameter">Parameter name.</param>
-        /// <param name="value">The new parameter value to set.</param>
-        /// <param name="description">Event description.</param>
-        [Obsolete("Use <module>.RaiseEvent instead.")]
-        public ProgramHelper RaiseEvent(ModuleHelper module, string parameter, string value, string description)
-        {
-            // TODO: deprecate this method, use ModuleHelper.RaiseEvent instead
-            try
-            {
-                var actionEvent = homegenie.MigService.GetEvent(
-                    module.Instance.Domain,
-                    module.Instance.Address,
-                    description,
-                    parameter,
-                    value
-                );
-                homegenie.RaiseEvent(myProgramId, actionEvent);
-            }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogError(
-                    programModule.Domain,
-                    programModule.Address,
-                    ex.Message,
-                    "Exception.StackTrace",
-                    ex.StackTrace
-                );
-            }
-            return this;
-        }
-
-        /// <summary>
         /// This command is usually put at the end of the "Program Code". It is the equivalent of an infinite noop loop.
         /// </summary>
         public void GoBackground()
@@ -713,7 +631,7 @@ namespace HomeGenie.Automation.Scripting
         /// Program.Parameter("MyProgram.ExampleParameter").Value = "Just testing...";
         ///
         /// // read "Sensor.Temperature" parameter of the program named "DHT-11"
-        /// if (Program.WithName("DHT-11").Parameter("Sensor.Temperature").DecimalValue < 20
+        /// if (Program.WithName("DHT-11").Parameter("Sensor.Temperature").DecimalValue &lt; 20
         ///     && Modules.WithName("Heater").IsOff)
         /// {
         ///     Modules.WithName("Heater").On();
@@ -726,7 +644,7 @@ namespace HomeGenie.Automation.Scripting
             ModuleParameter parameter = null;
             try
             {
-                parameter = Service.Utility.ModuleParameterGet(programModule, parameterName);
+                parameter = Utility.ModuleParameterGet(programModule, parameterName);
             }
             catch
             {
@@ -735,7 +653,7 @@ namespace HomeGenie.Automation.Scripting
             // create parameter if does not exists
             if (parameter == null)
             {
-                parameter = Service.Utility.ModuleParameterSet(programModule, parameterName, "");
+                parameter = Utility.ModuleParameterSet(programModule, parameterName, "");
             }
             return parameter;
         }
@@ -821,7 +739,7 @@ namespace HomeGenie.Automation.Scripting
             // set virtual modules generated by this program to inactive state
             homegenie.VirtualModules.ForEach((vm) =>
             {
-                if (vm.ParentId == myProgramId.ToString(CultureInfo.InvariantCulture))
+                if (vm.Domain != programModule.Domain && vm.Address != programModule.Address && vm.ParentId == myProgramId.ToString(CultureInfo.InvariantCulture))
                 {
                     vm.IsActive = false;
                 }

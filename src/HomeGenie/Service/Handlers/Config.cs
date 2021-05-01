@@ -71,6 +71,12 @@ namespace HomeGenie.Service.Handlers
         {
             var migCommand = request.Command;
 
+            string remoteEndpoint = "local";
+            if (request.Context != null && request.Context.Data != null)
+            {
+                remoteEndpoint = (request.Context.Data as HttpListenerContext).Request.RemoteEndPoint.ToString();
+            }
+
             string response = "";
             switch (migCommand.Command)
             {
@@ -746,6 +752,7 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             case "Modules.ParameterSet":
+                string desc = $"Set via API from {remoteEndpoint}";
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
@@ -755,12 +762,12 @@ namespace HomeGenie.Service.Handlers
                         var changes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonData);
                         foreach (var kv in changes)
                         {
-                            homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, kv.Key, kv.Value);
+                            homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, desc, kv.Key, kv.Value);
                         }
                     }
                     else
                     {
-                        homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, module.Description, migCommand.GetOption(2), migCommand.GetOption(3));
+                        homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, desc, migCommand.GetOption(2), migCommand.GetOption(3));
                     }
                     request.ResponseData = new ResponseStatus(Status.Ok);
                 }
@@ -916,18 +923,19 @@ namespace HomeGenie.Service.Handlers
                     currentModule.DeviceType = newModule.DeviceType;
                     if (newModule.Properties != null)
                     {
+                        string description = $"Set via API from {remoteEndpoint}";
                         foreach (var newParameter in newModule.Properties)
                         {
                             var currentParameter = currentModule.Properties.Find(mp => mp.Name == newParameter.Name);
                             if (currentParameter == null)
                             {
                                 currentModule.Properties.Add(newParameter);
-                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
+                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, description, newParameter.Name, newParameter.Value);
                             }
                             // TODO: "NeedsUpdate" field should be deprecated soon
                             else if (newParameter.NeedsUpdate && newParameter.Value != currentParameter.Value)
                             {
-                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, currentModule.Description, newParameter.Name, newParameter.Value);
+                                homegenie.RaiseEvent(Domains.HomeGenie_System, currentModule.Domain, currentModule.Address, description, newParameter.Name, newParameter.Value);
                             }
                         }
                         // look for deleted properties

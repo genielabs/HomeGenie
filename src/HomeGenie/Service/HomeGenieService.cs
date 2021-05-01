@@ -657,6 +657,54 @@ namespace HomeGenie.Service
                 {
                     // Due to encrypted values, we must clone modules before encrypting and saving
                     var clonedModules = systemModules.DeepClone();
+                    // add virtual modules
+                    for (int i = 0; i < virtualModules.Count; i++)
+                    {
+                        var virtualModule = virtualModules[i];
+                        var module = clonedModules
+                            .Find(m => m.Domain == virtualModule.Domain && m.Address == virtualModule.Address);
+                        
+                        if (module != null)
+                        {
+                            continue;
+                        }
+
+                        // add new module
+                        module = new Module();
+                        clonedModules.Add(module);
+                        // copy properties from virtual module
+                        foreach (var p in virtualModule.Properties)
+                        {
+                            module.Properties.Add(p);
+                        }
+
+                        // module inherits props from associated virtual module
+                        module.Domain = virtualModule.Domain;
+                        module.Address = virtualModule.Address;
+                        if (module.DeviceType == MIG.ModuleTypes.Generic && virtualModule.DeviceType != ModuleTypes.Generic)
+                        {
+                            module.DeviceType = virtualModule.DeviceType;
+                        }
+                        // associated module's name of an automation program cannot be changed
+                        if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
+                        {
+                            module.Name = virtualModule.Name;
+                        }
+                        if (module.Description == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Description != ""))
+                        {
+                            module.Description = virtualModule.Description;
+                        }
+                        //
+                        //if (virtualModule.ParentId != virtualModule.Address)
+                        {
+                            Utility.ModuleParameterSet(
+                                module,
+                                Properties.VirtualModuleParentId,
+                                virtualModule.ParentId
+                            );
+                        }
+                    }
+                    
                     foreach (var module in clonedModules)
                     {
                         foreach (var parameter in module.Properties)
@@ -880,11 +928,30 @@ namespace HomeGenie.Service
                     ex.StackTrace
                 );
             }
-            // remove modules with a parentId not found in loaded programs (orphan virtual modules)
-            systemModules.RemoveAll((m) =>
+            // restore virtual modules list 
+            systemModules.ForEach((m) =>
             {
-                var parentId = Utility.ModuleParameterGet(m, "VirtualModule.ParentId");
-                return parentId != null && masterControlProgram.Programs.Find((p) => p.Address.ToString() == parentId.Value) == null;
+                var parentId = Utility.ModuleParameterGet(m, Properties.VirtualModuleParentId);
+                if (parentId == null)
+                {
+                    return;
+                }
+                var program = masterControlProgram.Programs.Find((p) => p.Address.ToString() == parentId.Value);
+                if (program != null)
+                {
+                    var virtualModule = new VirtualModule
+                    {
+                        ParentId = program.Address.ToString(),
+                        Domain = m.Domain,
+                        Address = m.Address,
+                        Name = m.Name,
+                        Description = m.Description,
+                        DeviceType = m.DeviceType,
+                        Properties = m.Properties.DeepClone(),
+                        Stores = m.Stores.DeepClone()
+                    };
+                    virtualModules.Add(virtualModule);
+                }
             });
             //
             // load last saved scheduler items data into masterControlProgram.SchedulerService.Items list
@@ -986,8 +1053,6 @@ namespace HomeGenie.Service
                 {
                     if (!virtualModule.IsActive) continue;
                     ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
-                    if (program == null) continue;
-                    //
                     Module module = Modules.Find(o => {
                         // main program module...
                         bool found = (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address && o.Address == virtualModule.ParentId);
@@ -999,37 +1064,38 @@ namespace HomeGenie.Service
                         }
                         return found;
                     });
-                    if (!program.IsEnabled)
+                    if (module != null && (program == null || 
+                                           (!program.IsEnabled
+                                            && (module.Domain != program.Domain
+                                             || module.Address != program.Address.ToString()))))
                     {
-                        if (module != null && virtualModule.ParentId != module.Address)
-                        {
-                            // copy instance module properties to virtualmodules before removing
-                            virtualModule.Name = module.Name;
-                            virtualModule.DeviceType = module.DeviceType;
-                            virtualModule.Properties.Clear();
-                            foreach (var p in module.Properties)
-                            {
-                                virtualModule.Properties.Add(p);
-                            }
-                            systemModules.Remove(module);
-                        }
+                        // copy instance module properties to virtual modules before removing
+                        virtualModule.Name = module.Name;
+                        virtualModule.Description = module.Description;
+                        virtualModule.DeviceType = module.DeviceType;
+                        //virtualModule.Properties.Clear();
+                        virtualModule.Properties = module.Properties.DeepClone();
+                        virtualModule.Stores = module.Stores.DeepClone();
+                        //foreach (var p in module.Properties)
+                        //{
+                        //    virtualModule.Properties.Add(p);
+                        //}
+                        systemModules.Remove(module);
                         continue;
                     }
-                    //else if (virtualModule.ParentId == virtualModule.Address)
-                    //{
-                    //    continue;
-                    //}
 
                     if (module == null)
                     {
                         // add new module
                         module = new Module();
                         systemModules.Add(module);
+                        module.Properties = virtualModule.Properties.DeepClone();
+                        module.Stores = virtualModule.Stores.DeepClone();
                         // copy properties from virtualmodules
-                        foreach (var p in virtualModule.Properties)
-                        {
-                            module.Properties.Add(p);
-                        }
+                        //foreach (var p in virtualModule.Properties)
+                        //{
+                        //    module.Properties.Add(p);
+                        //}
                     }
 
                     // module inherits props from associated virtual module
@@ -1049,7 +1115,7 @@ namespace HomeGenie.Service
                         module.Description = virtualModule.Description;
                     }
                     //
-                    if (virtualModule.ParentId != virtualModule.Address)
+                    //if (virtualModule.ParentId != virtualModule.Address)
                     {
                         Utility.ModuleParameterSet(
                             module,
@@ -1383,10 +1449,10 @@ namespace HomeGenie.Service
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(HomeGenie.Service.TsList<Module>));
+                var serializer = new XmlSerializer(typeof(TsList<Module>));
                 using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml")))
                 {
-                    var modules = (HomeGenie.Service.TsList<Module>)serializer.Deserialize(reader);
+                    var modules = (TsList<Module>)serializer.Deserialize(reader);
                     foreach (var module in modules)
                     {
                         foreach (var parameter in module.Properties)

@@ -426,6 +426,11 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.IsEnabled = false;
                         currentProgram.Engine.StopProgram();
                         currentProgram.ScriptErrors = "";
+                        homegenie.ProgramManager.RaiseProgramModuleEvent(
+                            currentProgram,
+                            Properties.RuntimeError,
+                            ""
+                        );
                         //
                         List<ProgramError> errors = homegenie.ProgramManager.ProgramCompile(currentProgram);
                         //

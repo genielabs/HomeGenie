@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSchedulerItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SchedulerItem>
+    <Name>Behavior.SensorTimeout</Name>
+    <CronExpression>(* * * * *) % (@Holidays.Summer : @Holidays.Winter)</CronExpression>
+    <Description>Turn off if no activity is detected from a sensor. Turn on as soon as new activity is detected. Sensor and timeout can be configured from script code (not active during holidays),</Description>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"script","template":{"forEach":{},"forStart":{},"forEnd":{}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
+    <IsEnabled>false</IsEnabled>
+    <Script>const timeout = 1;
+const domain = "HomeAutomation.Demo";
+const address = "1";
+const parameter = "Sensor.MotionDetect";
+
+var idleTime = 0;
+var sensor = $$.modules.inDomain(domain).withAddress(address).get();
+if (sensor.exists)
+  idleTime = sensor.parameter(parameter).idleTime;
+
+if (idleTime &gt; timeout*60 &amp;&amp; $$.data('status') == '' &amp;&amp; $$.boundModules.isOn) {
+  $$.boundModules.off();
+  $$.data('status', 'restore');
+} else if (idleTime &lt; timeout*60 &amp;&amp; $$.data('status') == 'restore') {
+  $$.boundModules.on();
+  $$.data('status', '');
+}
+
+$$.onUpdate(function(m,p){
+  if (m.instance.domain == domain &amp;&amp; m.instance.address == address
+      &amp;&amp; p.name == parameter &amp;&amp; $$.data('status') == 'restore') {
+    $$.boundModules.on();
+    $$.data('status', '');
+  }
+});</Script>
+    <BoundDevices>
+      <string>Dimmer</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>2</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+    </BoundModules>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Holidays.Summer</Name>
+    <CronExpression>[ (* * 6-31 8 *) : (* * 1-3 9 *) ]</CronExpression>
+    <Description>From August 6th to September 3rd</Description>
+    <Data>{"itemType":"2","from":"2016-08-06","to":"2016-09-03","time":[],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"1","occur_month_sel":[]}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script />
+    <BoundDevices />
+    <BoundModules />
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Holidays.Winter</Name>
+    <CronExpression>[ (* * 18-31 12 *) : (* * 1-6 1 *) : (* * * 0 *) ]</CronExpression>
+    <Description>From December 18th to January 6th</Description>
+    <Data>{"itemType":"2","from":"2016-12-18","to":"2016-01-06","time":[],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"1","occur_month_sel":[]}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script />
+    <BoundDevices />
+    <BoundModules />
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Lights.Outdoor.On</Name>
+    <CronExpression>(@SolarTimes.Sunset + 30 &gt; @SolarTimes.Sunrise - 60)
+ %
+(@Holidays.Summer : @Holidays.Winter)</CronExpression>
+    <Description>Turn on half an hour after sunset until one hour before sunrise, then turn off (not active during holidays).</Description>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.turn-on.js"},"forEnd":{"enabled":true,"script":"command.turn-off.js"}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of occurrences range
+
+  $$.boundModules.on();
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of occurrences range
+
+  $$.boundModules.off();
+
+} else {
+  // this is for each other occurrences
+
+  //{each}//
+}
+    </Script>
+    <BoundDevices>
+      <string>Dimmer</string>
+      <string>Light</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>3</Address>
+        <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+    </BoundModules>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Thermostat.Cool</Name>
+    <CronExpression>(@SolarTimes.SolarNoon - 120 &gt; @SolarTimes.SolarNoon + 120) ; * * * 7,8 *</CronExpression>
+    <Description>Set thermostat mode to 'Cool' in July and August, two hours before solar noon until two hours after.</Description>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Cool"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('Cool');
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+
+} else {
+  // this is for each other occurrences
+
+  //{each}//
+}
+    </Script>
+    <BoundDevices>
+      <string>Thermostat</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+    </BoundModules>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Thermostat.Cool.Economy</Name>
+    <CronExpression>(@SolarTimes.SolarNoon - 120 &gt; @SolarTimes.SolarNoon + 120) ; * * * 6,9 *</CronExpression>
+    <Description>Set thermostat mode to 'Cool Economy' in June and September, two hours before solar noon until two hours after.</Description>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"CoolEconomy"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('CoolEconomy');
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+
+} else {
+  // this is for each other occurrences
+
+  //{each}//
+}
+    </Script>
+    <BoundDevices>
+      <string>Thermostat</string>
+    </BoundDevices>
+    <BoundModules />
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Thermostat.Heat</Name>
+    <CronExpression>(* * * 1,2,3,12 *) ; [ ((0 7 * * *) &gt; (0 11 * * *)) : ((0 16 * * *) &gt; (0 23 * * *)) ]</CronExpression>
+    <Description>From December to March, from 07:00 to 11:00 and from 16:00 to 23:00</Description>
+    <Data>{"itemType":1,"time":[{"start":"07:00","end":"11:00"},{"start":"16:00","end":"23:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["1","2","3","12"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Heat"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('Heat');
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+
+} else {
+  // this is for each other occurrences
+
+  //{each}//
+}
+    </Script>
+    <BoundDevices>
+      <string>Thermostat</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+    </BoundModules>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Thermostat.Heat.Economy</Name>
+    <CronExpression>(* * * 4,11 *) ; [ ((0 7 * * *) &gt; (0 10 * * *)) : ((0 20 * * *) &gt; (0 22 * * *)) ]</CronExpression>
+    <Description>Only in April and November, from 07:00 to 10:00 and from 20:00 to 22:00</Description>
+    <Data>{"itemType":1,"time":[{"start":"07:00","end":"10:00"},{"start":"20:00","end":"22:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["4","11"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"HeatEconomy"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('HeatEconomy');
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of occurrences range
+
+  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+
+} else {
+  // this is for each other occurrences
+
+  //{each}//
+}
+    </Script>
+    <BoundDevices>
+      <string>Thermostat</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+    </BoundModules>
+  </SchedulerItem>
+</ArrayOfSchedulerItem>

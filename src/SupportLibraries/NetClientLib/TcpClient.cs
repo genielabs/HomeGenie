@@ -96,7 +96,14 @@ namespace NetClientLib
             }
             if (receiverTask != null && !receiverTask.Join(2000))
             {
-                try { receiverTask.Abort(); } catch { }
+                try
+                {
+#if NETSTANDARD2_0
+                    receiverTask.Interrupt();
+#else
+                    receiverTask.Abort();
+#endif
+                } catch { }
             }
             receiverTask = null;
         }

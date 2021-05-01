@@ -287,13 +287,22 @@ namespace HomeGenie.Automation.Engines
             while (HomeGenie.ProgramManager.Enabled && ProgramBlock.IsEnabled)
             {
                 // if no event is received this will ensure that the StartupCode is run at least every minute for checking scheduler conditions if any
-                RoutedEventAck.WaitOne((60 - DateTime.Now.Second) * 1000);
+                try
+                {
+                    RoutedEventAck.WaitOne((60 - DateTime.Now.Second) * 1000);
+                }
+                catch (Exception e)
+                {
+                    _log.Error(e.Message, "Error in program scheduler",
+                        ProgramBlock.Address);
+                    //throw;
+                }
                 // the startup code is not evaluated while the program is running
                 if (ProgramBlock.IsRunning || !ProgramBlock.IsEnabled || !HomeGenie.ProgramManager.Enabled)
                 {
                     continue;
                 }
-                else if (WillProgramRun())
+                if (WillProgramRun())
                 {
                     if ((DateTime.Now - lastProgramRunTs).TotalMilliseconds < 100)
                         loopPreventCount++;

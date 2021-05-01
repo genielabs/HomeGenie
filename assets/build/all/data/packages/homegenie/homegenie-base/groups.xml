@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Group>
+    <Name>Dashboard</Name>
+    <Wallpaper>wallpaper_010.jpg</Wallpaper>
+    <Modules>
+      <ModuleReference>
+        <Address>34</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>90</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.BasicThermostat</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.EnergyMonitor</Domain>
+      </ModuleReference>
+    </Modules>
+  </Group>
+</ArrayOfGroup>

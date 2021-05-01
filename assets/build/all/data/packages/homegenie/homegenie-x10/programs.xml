@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature("", "Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on", "checkbox")
+  .AddFeature("", "Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only", "checkbox")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>When.ModuleParameterChanged( (module, parameter) =&gt; {
+  // stores the Status.MemoryLevel value for recalling last light dimmer level
+  // when switched on
+  if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; parameter.Name == "Status.Level")
+  {
+    var level = module.Parameter("Status.Level");
+    var memory = module.Parameter("Status.MemoryLevel");
+    //
+    if (level.DecimalValue != level.Statistics.Last.Value)
+    {
+      bool justswitchedon = (level.Statistics.Last.Value == 0 &amp;&amp; level.DecimalValue &gt; 0);
+      if (justswitchedon)
+      {
+        // set current level to memory level if different
+        if (level.DecimalValue != memory.DecimalValue &amp;&amp; memory.DecimalValue &gt; 0)
+        {
+          var newlevel = (int)(memory.DecimalValue * 100);
+          if (module.HasFeature("HomeGenie.LevelMemory.SimulateOnly"))
+          {
+            module.RaiseEvent("Status.Level", memory.Value, "Memory Level");
+          }
+          else
+          {
+            module.Level = newlevel;
+          }
+          var message = String.Format("{0}&lt;br&gt;{1} set to {2}%", module.Instance.Name, module.Instance.Address, newlevel);
+          Program.Notify(message);
+          // returning false, prevent from routing event to other listeners
+          return false;
+        }
+      }
+      if (level.DecimalValue &gt; 0)
+      {
+        memory.Value = level.Value;
+      }
+    }
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-x10</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>level-memory</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>267C0417C1B2D5297AF80A9394ED24DB</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>16</Address>
+    <Name>Level Memory</Name>
+    <Description>Store and recall last dimmer level when device is switched on.</Description>
+    <Group>Lights</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory</Property>
+        <Description>Recall last light level when switched on</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory.SimulateOnly</Property>
+        <Description>Simulate only</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2021-04-09T17:56:25.1901789Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

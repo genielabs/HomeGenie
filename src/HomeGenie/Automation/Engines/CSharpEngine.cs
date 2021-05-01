@@ -130,7 +130,7 @@ namespace HomeGenie.Automation.Engines
             // it is a lil' trick for mono compatibility
             // since it will be caching the assembly when using the same name
             // and use the old one instead of the new one
-            var tempFile = Path.Combine("programs", Guid.NewGuid().ToString() + ".dll");
+            var tempFile = Path.Combine("programs", Guid.NewGuid() + ".dll");
 #if NETCOREAPP
             EmitResult result = null;
             try
@@ -139,8 +139,17 @@ namespace HomeGenie.Automation.Engines
             }
             catch (Exception ex)
             {
-                // report errors during post-compilation process
-                //result.Errors.Add(new System.CodeDom.Compiler.CompilerError(ProgramBlock.Name, 0, 0, "-1", ex.Message));
+                // report unexpected error during compilation process
+                errors.Add(new ProgramError
+                {
+                    Line = 0,
+                    Column = 0,
+                    EndLine = 0,
+                    EndColumn = 0,
+                    ErrorMessage = ex.Message,
+                    ErrorNumber = ex.Source,
+                    CodeBlock = CodeBlockEnum.CR
+                });
             }
 
             if (result != null && !result.Success)
@@ -149,7 +158,9 @@ namespace HomeGenie.Automation.Engines
                 foreach (var diagnostic in result.Diagnostics)
                 {
                     var errorRow = (diagnostic.Location.GetLineSpan().StartLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) + 1;
+                    var errorEndRow = (diagnostic.Location.GetLineSpan().EndLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) + 1;
                     var errorCol = diagnostic.Location.GetLineSpan().StartLinePosition.Character + 1;
+                    var errorEndCol = diagnostic.Location.GetLineSpan().EndLinePosition.Character + 1;
                     var blockType = CodeBlockEnum.CR;
                     if (diagnostic.Severity == DiagnosticSeverity.Error)
                     {
@@ -162,6 +173,8 @@ namespace HomeGenie.Automation.Engines
                         {
                             Line = errorRow,
                             Column = errorCol,
+                            EndLine = errorEndRow,
+                            EndColumn = errorEndCol,
                             ErrorMessage = diagnostic.GetMessage(),
                             ErrorNumber = diagnostic.Descriptor.Id,
                             CodeBlock = blockType
@@ -206,6 +219,8 @@ namespace HomeGenie.Automation.Engines
                         {
                             Line = errorRow,
                             Column = error.Column,
+                            EndLine = errorRow,
+                            EndColumn = error.Column + 1,
                             ErrorMessage = error.ErrorText,
                             ErrorNumber = error.ErrorNumber,
                             CodeBlock = blockType

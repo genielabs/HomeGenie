@@ -1,0 +1,729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+  Program.AddFeature("", "", "EventsLogger.EnableLogging", "Enable events logging", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var loggableModules = Modules.WithFeature("EventsLogger.EnableLogging");
+
+When.ProgramStopping(() =&gt; {
+//  db.Dispose(); 
+  return true;
+});
+
+When.ModuleParameterChanged((mod, p) =&gt; {
+  var m = mod.Get().Instance;
+  if (loggableModules.SelectedModules.Contains(m)) {
+    lock(mod.Get().Instance)
+    using (var db = Data.LiteDb(m.Domain+"@"+m.Address+"-events-log")) {
+      db.Pragma("LIMIT_SIZE", 2097152);
+      var col = db.GetCollection&lt;LoggerEvent&gt;("events");
+      col.EnsureIndex(x =&gt; x.Domain);
+      col.EnsureIndex(x =&gt; x.Address);
+      col.EnsureIndex(x =&gt; x.Parameter);
+      try {
+        col.Insert(new LoggerEvent(m, p));
+      } catch (Exception e) {
+        // insert error, remove some data
+        var col2 = db.GetCollection("events");
+        var data_list = col2.Find(Query.All(), 0, 100);
+        foreach (var row in data_list) 
+        {
+          col2.Delete(row["_id"]);
+        }        
+        // retry insert
+        col.Insert(new LoggerEvent(m, p));
+      }
+    }
+  }
+  return true;
+});
+
+When.WebServiceCallReceived("HomeGenie.EventsLogger", (args) =&gt; {
+  var cmd = Program.ParseApiCall(args);
+  var moduleDomain = cmd.Address;
+  var moduleAddress = cmd.Command;
+  var module = Modules.InDomain(moduleDomain).WithAddress(moduleAddress);
+  var parameter = cmd.GetOption(0);
+  lock(module.Get().Instance)
+  using (var db = Data.LiteDb(moduleDomain+"@"+moduleAddress+"-events-log")) {
+    db.Pragma("LIMIT_SIZE", 2097152);
+    var col = db.GetCollection&lt;LoggerEvent&gt;("events");
+    var results = col.Query()
+      .Where(x =&gt; x.Parameter == parameter)
+      .OrderByDescending(x =&gt; x.Date)
+      //.Select(x =&gt; new { x.Name, NameUpper = x.Name.ToUpper() }) // &lt;-- transform data
+      .Limit(100)
+      .ToList();
+  	return results;
+  }
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>events-logging</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>25467F93E2AA07645AE54E5D5BB9587E</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>100</Address>
+    <Name>Events logging</Name>
+    <Description />
+    <Group>Security</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes />
+        <Property>EventsLogger.EnableLogging</Property>
+        <Description>Enable events logging</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2021-04-11T12:51:10.2974391Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddOption("Email.Sender", "", "1. E-Mail address", "text")
+  .AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text")
+  .AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text")
+  .AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "password")
+  .AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text")
+  .AddOption("Email.SmtpUseSsl", "false", "6. SMTP Mail Server use SSL", "checkbox")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>// detect when an option of this program is changed and store the new value to system settings
+When.ModuleParameterChanged((module, parameter)=&gt;{
+  if (module.Instance.Equals(Program.Module) &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+	var settingName = parameter.Name.Substring(17); // skip "ConfigureOptions." part
+    Settings.Parameter("Messaging."+settingName).Value = parameter.Value;
+  }
+  return true;
+});
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>e-mail-account</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>8A42A1D70C35CF3C855AF8761795F5B7</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>142</Address>
+    <Name>E-Mail Account</Name>
+    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <Group>Messaging and Social</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>IPHostEntry host;
+string localIP = "1";
+host = Dns.GetHostEntry(Dns.GetHostName());
+foreach (IPAddress ip in host.AddressList)
+{
+  if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+  {
+    localIP = ip.ToString();
+    localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
+  }
+}
+Program.Setup(() =&gt; {
+  Program
+    .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
+    .AddOption("ServerAddress", "", "1. MQTT server address", "text")
+    .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
+    .AddOption("TLS", "", "3. Connect using TLS/SSL", "checkbox")
+    .AddOption("WebSockets", "", "4. Connect using WebSockets", "checkbox")
+    .AddOption("ServerTopic", "#", "5. Topic", "text")
+    .AddOption("Username", "", "6. Username (optional)", "text")
+    .AddOption("Password", "", "7. Password (optional)", "text")
+    .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
+int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
+string topic = Program.Option("ServerTopic").Value.Trim();
+string clientid = Program.Option("ClientId").Value.Trim();
+string username = Program.Option("Username").Value.Trim();
+string password = Program.Option("Password").Value.Trim();
+bool useWebSockets = Program.Option("WebSockets").Value == "On" ? true : false;
+bool useTls = Program.Option("TLS").Value == "On" ? true : false;
+
+var MqttIsConnected = false;
+MqttClient.Reset();
+
+if (server == "")
+{
+  Program.Notify("Please configure server address");
+  Pause(5);
+  return;
+}
+
+MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
+  var parts = mtopic.Split('/');
+  var cid = parts[0];
+  //
+  if (parts.Length == 4)
+  {
+    try
+    {
+      var domain = parts[1];
+      var address = parts[2];
+      var type = parts[3];
+      // convert binary message to string
+      string mpayload = Encoding.UTF8.GetString(bytespayload);
+
+      var module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
+
+      switch (type)
+      {
+        case "command":
+        if (domain == "MQTT.Listeners" &amp;&amp; address == clientid)
+        {
+          var cmdobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
+          var targetmodule = Modules.InDomain(cmdobj.Domain.ToString()).WithAddress(cmdobj.Address.ToString());
+          if (targetmodule.Get().Instance != null)
+          {
+            string command = cmdobj.Command.ToString();
+            switch (command)
+            {
+              case "Module.Describe":
+              var modinstance = targetmodule.Get().Instance;
+              MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Service.Utility.Module2Json(modinstance, false));
+              break;
+              default:
+              targetmodule.Command(command).Execute();
+              break;
+            }
+          }
+        }
+        break;
+        case "description":
+        if (cid != clientid &amp;&amp; module.Instance != null)
+        {
+          var modobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
+          module.Instance.Name = modobj.Name;
+          module.Instance.Description = modobj.Description;
+          module.Instance.DeviceType = modobj.DeviceType;
+          var parentid = module.Parameter("VirtualModule.ParentId").Value;
+          module.Instance.Properties = modobj.Properties;
+          module.Parameter("VirtualModule.ParentId").Value = parentid;
+          module.Parameter("MQTT.SourceNode").Value = cid;
+          Program.Notify("Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
+        }
+        break;
+        case "event":
+        if (cid != clientid)
+        {
+          var property = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
+          if (module.Instance == null)
+          {
+            Program.AddVirtualModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
+            module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
+          }
+          else if (!module.HasParameter("MQTT.SourceNode"))
+          {
+            MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");
+          }
+          module.RaiseEvent(property.Name, property.Value, "");
+        }
+        break;
+      }
+    } catch (Exception e) {
+      Program.Notify("ERROR: " + e.Message);
+      MqttIsConnected = false;
+    }
+  }
+  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload);
+});
+
+When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
+  string[] reqs = ((string)args).Split('/');
+  string domain = reqs[0];
+  string address = reqs[1];
+  var commands = new List&lt;string&gt;(reqs);
+  // remove domain and address to obtain the command parts only
+  commands.RemoveAt(0); commands.RemoveAt(0);
+  string command = String.Join("/", commands.ToArray());
+  try
+  {
+    int mqttend = domain.IndexOf(".");
+    int mqttdel = domain.IndexOf(":");
+    var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
+    domain = domain.Substring(mqttend + 1);
+    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
+    return new ResponseText("OK");
+  } catch (Exception e) {
+    Program.Notify("ERROR: " + e.Message);
+    MqttIsConnected = false;
+  }
+  return new ResponseText("ERROR");
+});
+
+// We want to do further processing whenever a module changes
+When.ModuleParameterChanged( (module, property) =&gt; {
+  if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
+  {
+    try{
+      byte[] bytes = Encoding.Default.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property));
+      string payload = Encoding.UTF8.GetString(bytes);
+      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property)));
+    } catch  (Exception e){
+      Program.Notify("ERROR: " + e.Message);
+      MqttIsConnected = false;
+    }
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
+while (Program.IsRunning) {
+  if (!MqttIsConnected) {
+    MqttIsConnected = true;
+    Program.Notify("Connecting to '" + server + ":" + port + "' ...");
+    try
+    {
+      if (username != "")
+      {
+        MqttClient.WithCredentials(username, password);
+      }
+
+      MqttClient
+        .Service(server)
+        .UsingWebSockets(useWebSockets)
+        .WithTls(useTls)
+        .Connect(port, clientid, (connected)=&gt;{
+          MqttIsConnected = connected;
+          if (connected) {
+              Program.Notify("Connected!");
+          } else {
+              Program.Notify("Disconnected!");
+          }
+        });
+    }
+    catch (Exception e)
+    {
+      Program.Notify(e.Message);
+      Pause(5);
+      return;
+    }
+  }
+  Pause(30);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>mqtt-network</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>CA0536636E4E97A1AE581C43156DAADA</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>77</Address>
+    <Name>MQTT Network</Name>
+    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+      Other servers will automatically inherit the published module once an event is generated from it.</Description>
+    <Group>Interconnections</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes />
+        <Property>MQTT.SensorPublish</Property>
+        <Description>Publish this module events</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>// list the program as custom weather widget
+Program.UseWidget( "homegenie/environment/weather" )
+  // set input fields parameters
+  // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+  .AddOption("Location", "London, UK", "City name", "wunderground.city")
+  .AddOption("Language", "EN", "Language", "text")
+  .AddOption("ApiKey", "?", "OpenWeatherMap API key (APPID)", "text")
+  .AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15:15");
+
+// initialize widget program parameters
+Program.Parameter("Astronomy.Sunset").Value = "";
+Program.Parameter("Astronomy.Sunrise").Value = "";
+Program.Parameter("Conditions.City").Value = "";
+Program.Parameter("Conditions.Temperature").Value = "";
+Program.Parameter("Conditions.DisplayLocation").Value = "";
+Program.Parameter("Conditions.IconType").Value = "";
+Program.Parameter("Conditions.Description").Value = "";
+
+Program.Parameter("EventsLogger.EnableLogging").Value = "On";
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
+  Program
+    .RaiseEvent("Conditions.City", data.city, "")
+    .RaiseEvent("Conditions.DisplayLocation", data.city, "")
+    .RaiseEvent("Conditions.Country", data.country, "")
+    .RaiseEvent("Conditions.Description", data.weather_description, "")
+    .RaiseEvent("Conditions.IconType", data.weather_icon, "")
+    .RaiseEvent("Conditions.Status", data.weather_status, "") // eg. cloudy, sunny, etc..
+    .RaiseEvent("Conditions.LastUpdated", data.update_dt, "")
+    // Add values to standard Sensor.* parameters
+    .RaiseEvent("Sensor.Temperature", data.temperature, "")
+    .RaiseEvent("Sensor.Temperature.Unit", "Celsius", "")
+    .RaiseEvent("Sensor.Pressure", data.pressure, "")
+    .RaiseEvent("Sensor.Pressure.Unit", "Mb", "")
+    .RaiseEvent("Sensor.Wind.Speed", data.wind_speed, "")
+    .RaiseEvent("Sensor.Wind.Speed.Unit", "Kph", "")
+    .RaiseEvent("Sensor.Wind.Direction", data.wind_direction, "")
+    .RaiseEvent("Sensor.Precipitation.Rain", data.rain_1h_mm, "")
+    .RaiseEvent("Sensor.Precipitation.Rain.Unit", "1h", "")
+    .RaiseEvent("Sensor.Precipitation.Snow", data.snow_1h_mm, "")
+    .RaiseEvent("Sensor.Precipitation.Snow.Unit", "1h", "");
+  // TODO: Program.Parameter("Sensor.UV").Value = "...";
+};
+Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
+  Program
+    .RaiseEvent("Conditions.Forecast." + day + ".Description", data.weather_description, "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Year", data.dt.Year.ToString("YYYY"), "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Month", data.dt.ToString("MMM"), "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Day", data.dt.ToString("dd"), "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Weekday", data.dt.ToString("dddd"), "")
+    .RaiseEvent("Conditions.Forecast." + day + ".IconType", data.weather_icon, "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Temperature", data.temperature, "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Temperature.Min", data.temperature_min, "")
+    .RaiseEvent("Conditions.Forecast." + day + ".Temperature.Max", data.temperature_max, "");
+};
+Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
+  var icon = type;
+  switch(type)
+  {
+    case "clear": // 	clear sky
+      icon = "01d";
+      break;
+    case "partlycloudy": // 	few clouds
+      icon = "02d";
+      break;
+    case "scatteredclouds": // scattered clouds
+      icon = "03d";
+      break;
+    case "cloudy": // broken clouds (?)
+      icon = "04d";
+      break;
+    case "showerrain": // 	shower rain
+      icon = "09d";
+      break;
+    case "rain": // rain
+      icon = "10d";
+      break;
+    case "thunderstorms": // thunderstorms
+      icon = "11d";
+      break;
+    case "snow": // snow
+      icon = "13d";
+      break;
+    case "hazy": // mist
+      icon = "50d";
+      break;
+    // Night icons
+    case "clear_night": // 	clear sky
+      icon = "01n";
+      break;
+    case "partlycloudy_night": // 	few clouds
+      icon = "02n";
+      break;
+    case "scatteredclouds_night": // scattered clouds
+      icon = "03n";
+      break;
+    case "cloudy_night": // broken clouds (?)
+      icon = "04n";
+      break;
+    case "showerrain_night": // 	shower rain
+      icon = "09n";
+      break;
+    case "rain_night": // rain
+      icon = "10n";
+      break;
+    case "thunderstorms_night": // thunderstorms
+      icon = "11n";
+      break;
+    case "snow_night": // snow
+      icon = "13n";
+      break;
+    case "hazy_night": // mist
+      icon = "50n";
+      break;
+  }
+  return icon;
+};
+Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
+  dynamic data = new ExpandoObject();
+  data.dt = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.dt);
+  data.update_dt = data.dt.ToLongDateString() + " " + TimeZoneInfo.ConvertTime(data.dt, TimeZoneInfo.Local).ToLongTimeString();
+  data.temperature = weatherData.main.temp.ToString();
+  data.temperature_min = weatherData.main.temp_min.ToString();
+  data.temperature_max = weatherData.main.temp_max.ToString();
+  data.pressure = weatherData.main.pressure.ToString();
+  var rain_1h_mm = "0";
+  var rain_3h_mm = "0";
+  if (weatherData.rain != null) {
+    if (weatherData.rain["1h"] != null)
+      rain_1h_mm = weatherData.rain["1h"].ToString();
+    if (weatherData.rain["3h"] != null)
+      rain_3h_mm = weatherData.rain["3h"].ToString();
+  }
+  data.rain_1h_mm = rain_1h_mm;
+  var snow_1h_mm = "0";
+  var snow_3h_mm = "0";
+  if (weatherData.snow != null) {
+    if (weatherData.snow["1h"] != null)
+      snow_1h_mm = weatherData.snow["1h"].ToString();
+    if (weatherData.snow["3h"] != null)
+      snow_3h_mm = weatherData.snow["3h"].ToString();
+  }
+  data.snow_1h_mm = snow_1h_mm;
+  data.wind_speed = weatherData.wind.speed.ToString();
+  data.wind_direction = "";
+  if (weatherData.wind.deg != null)
+  	data.wind_direction = weatherData.wind.deg.ToString();
+  data.weather_status = weatherData.weather[0].main.ToString();
+  data.weather_description = weatherData.weather[0].description.ToString();
+  data.weather_icon = GetWeatherIcon(weatherData.weather[0].icon.ToString());
+  // city and country fields are not present in forecast data
+  if (weatherData.name != null)
+  	data.city = weatherData.name.ToString();
+  if (weatherData.sys != null &amp;&amp; weatherData.sys.country != null)
+  	data.country = weatherData.sys.country.ToString();
+  return data;
+};
+
+bool reconfigureRequired = false;
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Get().Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  return true;
+});
+
+while (Program.IsRunning)
+{
+  string location = Program.Option("Location").Value;
+  string language = Program.Option("Language").Value;
+  string apikey = Program.Option("ApiKey").Value.Trim();
+
+  if (!apikey.Contains("?") &amp;&amp; apikey.Length &gt; 0)
+  {
+    try
+    {
+      string webserviceurl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&amp;lang=" + language + "&amp;units=metric&amp;appid=" + apikey;
+      var weatherData = Net.WebService(webserviceurl).GetData();
+
+      var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset);
+      var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise);
+
+      Program.RaiseEvent("Astronomy.Sunset", TimeZoneInfo.ConvertTime(sunset, TimeZoneInfo.Local).ToShortTimeString(), "");
+      Program.RaiseEvent("Astronomy.Sunrise", TimeZoneInfo.ConvertTime(sunrise, TimeZoneInfo.Local).ToShortTimeString(), "");
+
+      var data = CollectWeatherData(weatherData);
+      UpdateWeatherParameters(data);
+
+      // get forecast data
+	  webserviceurl = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&amp;lang="+language+"&amp;units=metric&amp;appid=" + apikey;
+      var forecast = Net.WebService(webserviceurl).GetData();
+
+      var forecastDay = 1;
+      var nextDay = DateTime.UtcNow.AddDays(1); nextDay = nextDay.Date + new TimeSpan(12, 0, 0);
+      foreach(var fc in forecast.list)
+      {
+        var forecastTime = Utility.JavaTimeStampToDateTime(1000D*(int)fc.dt);
+        if (forecastTime.Equals(nextDay)) {
+          // collect forecast data for current forecastDay
+
+          var forecastData = CollectWeatherData(fc);
+          UpdateForecastParameters(forecastDay, forecastData);
+
+          nextDay = nextDay.AddDays(1);
+          forecastDay++;
+        }
+        // process up to 3 days
+        if (forecastDay &gt; 3) break;
+      }
+      //Program.RaiseEvent("Program.UiRefresh", "Data Updated", "");
+
+    }
+    catch (Exception e)
+    {
+
+      Program.Notify("ERROR: unable to get data from service. " + e.Message);
+      Console.WriteLine( e.Message );
+      Pause(10);
+
+    }
+  }
+  //
+  var delayMins = Program.Option("UpdateInterval").DecimalValue;
+  if (delayMins &lt; 1) delayMins = 1;
+  double pauseBeforeNextUpdate = delayMins*60; // seconds
+  while (pauseBeforeNextUpdate-- &gt; 0 &amp;&amp; !reconfigureRequired) {
+	  Pause(1);
+  }
+  reconfigureRequired = false;
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>openweathermap</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>3394BD9B246D56990AF3A25B5305F995</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>34</Address>
+    <Name>OpenWeatherMap</Name>
+    <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
+To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
+</Description>
+    <Group>Weather and Environment</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-05-01T23:06:33.0513173Z</ActivationTime>
+    <TriggerTime>2021-05-01T23:06:33.2312829Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.RemoteControl.Enable", "Enable remote control", "checkbox")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.RemoteControl.IRCode", "Toggle button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerUpCode", "ButtonUp", "1. Bright button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerDownCode", "ButtonDown", "2. Dim button (enter code)", "capture:Receiver.RawData")
+  .AddOption("DimmerInterval", "10", "4. Dimming step", "slider:5:50:5")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>var dimmerInterval = Program.Option("DimmerInterval");
+var dimmerUp = Program.Option("DimmerUpCode");
+var dimmerDown = Program.Option("DimmerDownCode");
+var irControlModules = Modules.WithFeature("HomeGenie.RemoteControl.Enable");
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if(parameter.Name == "Receiver.RawData" )
+  {
+    var irData = parameter;
+    var lastButton = module.Parameter("IrController.LastButton");
+    var lastIdle = module.Parameter("IrController.LastIdle");
+    var dimStep = dimmerInterval.DecimalValue;
+
+    if (irData.Value != "")
+    {
+      if (lastButton.Value != "" &amp;&amp; lastIdle.IdleTime &gt; 0.25 &amp;&amp; (irData.Value == dimmerUp.Value || irData.Value == dimmerDown.Value))
+      {
+        irControlModules.Each((m) =&gt; {
+          var moduleButton = m.Parameter("HomeGenie.RemoteControl.IRCode");
+          if (moduleButton.Value == lastButton.Value)
+          {
+            var level = m.Level * 100D;
+            if (irData.Value == dimmerUp.Value)
+            {
+              level += dimStep;
+              m.Level = (level &gt;= 100 ? 100 : level);
+              Program.Notify(m.Instance.Name + "&lt;br&gt;Bright (" + m.Level + ")");
+            }
+            else if (irData.Value == dimmerDown.Value)
+            {
+              level -= dimStep;
+              m.Level = (level &lt;= 5 ? 5 : level);
+              Program.Notify(m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
+            }
+            lastIdle.Value = "0";
+          }
+          return false; // do not break, continue iterating...
+        });
+      }
+      else
+      {
+        if (lastIdle.IdleTime &gt; 0.5)
+        irControlModules.Each((m) =&gt; {
+          var moduleButton = m.Parameter("HomeGenie.RemoteControl.IRCode");
+          if (moduleButton.Value == irData.Value)
+          {
+            lastButton.Value = irData.Value;
+            lastIdle.Value = "1";
+            m.Toggle();
+            Program.Notify(m.Instance.Name + "&lt;br&gt;toggled.");
+          }
+          return false; // do not break, continue iterating...
+        });
+      }
+    }
+  }
+  return true;
+});
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>remote-control</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>5D20D969AEC010F6034669F4D1672E7C</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>505</Address>
+    <Name>Remote Control</Name>
+    <Description>Toggle and dim the module using a remote controller (IR or RF).</Description>
+    <Group>Lights</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.RemoteControl.Enable</Property>
+        <Description>Enable remote control</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.RemoteControl.IRCode</Property>
+        <Description>Toggle button (enter code)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2021-04-11T12:51:10.2889982Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

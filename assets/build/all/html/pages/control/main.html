@@ -32,9 +32,11 @@
                         Voice Control
                     </a>
                 </li>
+	        <!--
                 <li>
                     <a class="ui-btn ui-btn-icon-left ui-icon-fa-bar-chart" data-locale-id="home_menu_statistics" href="#page_analyze" data-transition="none">Statistics</a>
                 </li>
+                -->
                 <li>
                     <a data-locale-id="configure_program_bbaractions" class="ui-btn ui-icon-fa-tasks ui-btn-icon-right" href="#control_actionmenu" data-rel="popup" data-transition="slideup">
                         Actions
@@ -111,6 +113,29 @@
 
     <div class="ui-content" style="margin:0;padding:0;padding-top:40px;padding-bottom:80px">
         <div id="control_groupcontent" style="padding:0;margin:0">
+
+            <div style="display: flex;flex-direction: column; align-content: center; align-items: center; flex: 1 1 0">
+                <div style="max-width: 560px">
+                    <p>
+                        Welcome to HomeGenie YoT! This is a transitory alpha release of the new upcoming version.
+                        Some parts of the system might not work anymore using the old UI, while some other parts
+                        might not be yet implemented in the new UI.
+                    </p>
+                    <p>
+                        Start configuring HomeGenie using the new UI, you can eventually restore a configuration backup later using the old UI.
+                    </p>
+                    <p>
+                        Feel free to send your feedback and suggestions in the <a href="https://github.com/genielabs/HomeGenie/discussions" target="_blank">HomeGenie discussion board</a>.
+                    </p>
+                    <p>
+                        Thanks for trying out HomeGenie YoT =)
+                    </p>
+                    <div data-role="controlgroup" data-theme="c" data-mini="true" style="margin: 24px">
+                        <a class="ui-btn ui-btn-b ui-corner-all ui-icon-action ui-btn-icon-left" onclick="document.location.replace('/app/?12345')">Open the new UI</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div id="control_actionmenu" data-role="popup" data-overlay-theme="b">

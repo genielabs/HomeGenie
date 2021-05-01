@@ -62,12 +62,6 @@ namespace HomeGenie.Automation.Scripting
             return (module.Name.ToLower() == name.ToLower());
         }
 
-        [Obsolete("Use 'Exists' instead")]
-        public bool WasFound
-        {
-            get { return module != null; }
-        }
-
         /// <summary>
         /// Gets a value indicating whether this <see cref="HomeGenie.Automation.Scripting.ModuleHelper"/> has a valid module instance.
         /// </summary>
@@ -193,7 +187,7 @@ namespace HomeGenie.Automation.Scripting
                 // create parameter if does not exists
                 if (value == null)
                 {
-                    value = Utility.ModuleParameterSet(this.module, parameter, "");
+                    value = Utility.ModuleParameterSet(module, parameter, "");
                 }
             }
             return value;

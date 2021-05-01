@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Module>
+    <Name>E-Mail Account</Name>
+    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>142</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.Sender</Name>
+        <Value />
+        <Description>1. E-Mail address</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2017-08-17T17:32:30.057549Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpPassword</Name>
+        <Value />
+        <Description>4. SMTP password (optional)</Description>
+        <FieldType>password</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2017-08-17T17:32:30.057565Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpPort</Name>
+        <Value>25</Value>
+        <Description>5. SMTP Mail Server port</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1495351Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpServer</Name>
+        <Value />
+        <Description>2. SMTP Mail Server address</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2017-08-17T17:32:30.057559Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpUserName</Name>
+        <Value />
+        <Description>3. SMTP username (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2017-08-17T17:32:30.057562Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Email.SmtpUseSsl</Name>
+        <Value>false</Value>
+        <Description>6. SMTP Mail Server use SSL</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1496099Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1868526Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>142</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2014-11-13T22:55:32.969254Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2014-04-11T15:54:13.1662119Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>MQTT Network</Name>
+    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
+      Other servers will automatically inherit the published module once an event is generated from it.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>77</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ClientId</Name>
+        <Value>hg-104</Value>
+        <Description>0. Enter unique ID for this client</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1480263Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Password</Name>
+        <Value />
+        <Description>7. Password (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2019-01-16T02:57:26.248044Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ServerAddress</Name>
+        <Value />
+        <Description>1. MQTT server address</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2019-01-16T02:57:26.248031Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ServerPort</Name>
+        <Value>1883</Value>
+        <Description>2. MQTT server port</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1480711Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ServerTopic</Name>
+        <Value>#</Value>
+        <Description>5. Topic</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.148141Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.TLS</Name>
+        <Value />
+        <Description>3. Connect using WebSockets</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Username</Name>
+        <Value />
+        <Description>6. Username (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2019-01-16T02:57:26.248042Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.WebSockets</Name>
+        <Value />
+        <Description>4. Connect using TLS/SSL</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>{"Title":"MQTT","Message":"Please configure server address"}</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.148219Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1888619Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>77</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2014-07-14T20:41:16.979209Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2014-07-12T23:26:04.917821Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>OpenWeatherMap</Name>
+    <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
+To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>34</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Astronomy.Sunrise</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884955Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Astronomy.Sunset</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884951Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.City</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884959Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.Description</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.288497Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.DisplayLocation</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884965Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.IconType</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884968Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.IconUrl</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2017-08-17T17:32:30.133682Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Conditions.Temperature</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884962Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ApiKey</Name>
+        <Value>?</Value>
+        <Description>OpenWeatherMap API key (APPID)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>34</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1477116Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Language</Name>
+        <Value>EN</Value>
+        <Description>Language</Description>
+        <FieldType>text</FieldType>
+        <ParentId>34</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1477595Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Location</Name>
+        <Value>London, UK</Value>
+        <Description>City name</Description>
+        <FieldType>wunderground.city</FieldType>
+        <ParentId>34</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1478014Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.UpdateInterval</Name>
+        <Value>30</Value>
+        <Description>Update interval (minutes)</Description>
+        <FieldType>slider:15:1440:15:15</FieldType>
+        <ParentId>34</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.1478441Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EventsLogger.EnableLogging</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.2884974Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Stopped</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.3948209Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value>CR: Object reference not set to an instance of an object.</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-04-11T12:51:10.3747196Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>34</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2014-11-13T22:55:32.969134Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/environment/weather</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2014-04-11T19:26:31.5697656Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+</ArrayOfModule>

@@ -21,10 +21,10 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
 #if NETCOREAPP
 using System.Diagnostics;
 using System.Dynamic;
@@ -38,7 +38,6 @@ using Microsoft.CSharp.RuntimeBinder;
 #else
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
 #endif
 
 namespace HomeGenie.Automation.Engines
@@ -48,7 +47,7 @@ namespace HomeGenie.Automation.Engines
         public const int ConditionCodeOffset = 8;
 
         // TODO: move this to a config file
-        private static readonly string[] Includes =
+        private static readonly List<string> Includes = new List<string>()
         {
             "System",
             "System.Text",
@@ -61,6 +60,13 @@ namespace HomeGenie.Automation.Engines
             "System.Threading",
             "System.Security.Cryptography",
             "System.Security.Cryptography.X509Certificates",
+#if NETCOREAPP
+            "System.Device.Gpio",
+            "System.Device.I2c",
+            "Iot.Device",
+            "Iot.Device.Common",
+            "UnitsNet",
+#endif
             "Newtonsoft.Json",
             "Newtonsoft.Json.Linq",
             "HomeGenie",
@@ -76,6 +82,7 @@ namespace HomeGenie.Automation.Engines
             "Innovative.SolarCalculator",
             "LiteDB",
             "OpenSource.UPnP",
+#if !NETCOREAPP
             "Raspberry",
             "Raspberry.Timers",
             "Raspberry.IO",
@@ -104,6 +111,7 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.GeneralPurpose.Configuration",
             "Raspberry.IO.InterIntegratedCircuit",
             "Raspberry.IO.SerialPeripheralInterface",
+#endif
             "Utility = HomeGenie.Service.Utility"
         };
 
@@ -177,7 +185,11 @@ namespace HomeGenie.Automation.Scripting
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
 }";
-            var usingNs = String.Join(" ", Includes.Select(x => String.Format("using {0};" + Environment.NewLine, x)));
+            var userIncludes = new List<string>();
+            scriptSetup = GetUserIncludes(scriptSetup, ref userIncludes);
+            scriptSource = GetUserIncludes(scriptSource, ref userIncludes);
+            var usingNs = String.Join(" ", Includes.Concat(userIncludes)
+                .Select(x => String.Format("using {0};" + Environment.NewLine, x)));
             source = source
                 .Replace("{using}", usingNs)
                 .Replace("{source}", scriptSource)
@@ -208,6 +220,12 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
+                    
+                    // Microsoft IoT Framework
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "System.Device.Gpio.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UnitsNet.dll")),
+                    
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
 
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
@@ -335,15 +353,12 @@ namespace HomeGenie.Automation.Scripting
 
             compilerParams.ReferencedAssemblies.Add("MQTTnet.dll");
 
-            //if (Raspberry.Board.Current.IsRaspberryPi)
-            {
-                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
-                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");
-                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.GeneralPurpose.dll");
-                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
-                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.SerialPeripheralInterface.dll");
-                compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
-            }
+            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
+            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");
+            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.GeneralPurpose.dll");
+            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
+            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.SerialPeripheralInterface.dll");
+            compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
 
             compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.Geometry.Angle.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.SolarCalculator.dll"));
@@ -351,6 +366,28 @@ namespace HomeGenie.Automation.Scripting
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);
 #endif
+        }
+
+        /**
+         * Parse custom "using" pre-processor directive to allow including namespaces in HG programs
+         */
+        private static string GetUserIncludes(string codeBlock, ref List<string> userIncludes)
+        {
+            if (userIncludes == null) userIncludes = new List<string>();
+            var setupLines = codeBlock.Split('\n');
+            codeBlock = "";
+            foreach (var setupLine in setupLines)
+            {
+                if (setupLine.StartsWith("#using "))
+                {
+                    userIncludes.Add(setupLine.Substring(7));
+                }
+                else
+                {
+                    codeBlock += setupLine + "\n";
+                }
+            }
+            return codeBlock;
         }
     }
 }

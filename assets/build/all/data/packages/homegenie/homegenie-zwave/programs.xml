@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program.AddOption("PollInterval", "120", "Poll Interval (seconds)", "text");
+//Program.AddFeature("HomeAutomation.ZWave", "Thermostat", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>while (Program.IsRunning)
+{
+  // basic get will returns current device level
+  Modules.InDomain("HomeAutomation.ZWave").OfDeviceType("Thermostat").Each((module) =&gt; {
+    Program.Notify("Z-Wave Thermostat Poll", "Polling thermostat " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    module.Command("SensorMultiLevel.Get").Execute();
+    Pause(Program.Option("PollInterval").DecimalValue);
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var pause = Program.Option("PollInterval").DecimalValue;
+  if (pause &lt; 15)
+  {
+    pause = 15;
+    Program.Notify("Z-Wave Thermostat Poll", "Poll interval seconds must be &gt;= 15!");
+  }
+  Pause(pause);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-zwave</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>z-wave-thermostat-poll</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>1589D2553788127ACE679F6E2736DDE3</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>92</Address>
+    <Name>Z-Wave Thermostat Poll</Name>
+    <Description />
+    <Group>Z-Wave</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpAlwaysAwake", "Set node as always awake", "checkbox");
+Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpSleep", "Send to sleep after given delay (seconds, 0=disabled)", "slider:0:60:1");
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
+
+  if (parameter.Name == "ZWaveNode.WakeUpNotify")
+  {
+    var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
+    if (nodeinfo != null)
+    {
+      // nif contains all command classes supported by this module
+      string nif = " " + nodeinfo.Value + " ";
+      if (nif.Contains(" 84 ") || nif.Contains(" 25 ") || nif.Contains(" 26 ") || nif.Contains(" 43 "))
+      {
+        if (nif.Contains(" 60 ")) // MultiInstance
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " MultiInstance Get");
+          // query first 4 instances
+          for (int instance = 1; instance &lt; 4; instance ++)
+          {
+            if (nif.Contains(" 30 ")) // Sensor Binary
+            {
+              module.Command("MultiInstance.Get").Execute("Sensor.Binary/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 31 ")) // Sensor MultiLevel
+            {
+              module.Command("MultiInstance.Get").Execute("Sensor.MultiLevel/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 25 ")) // Switch Binary
+            {
+              module.Command("MultiInstance.Get").Execute("Switch.Binary/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 26 ")) // Switch MultiLevel
+            {
+              module.Command("MultiInstance.Get").Execute("Switch.MultiLevel/" + instance);
+              Pause(.2);
+            }
+          }
+        }
+        else if (nif.Contains(" 27 ")) // Any switch
+        {
+          if (nif.Contains(" 26 "))
+            Pause(3); // Pause 3 second to ensure dimmers get to final value
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
+          module.Command("Basic.Get").Execute();
+          Pause(.2);
+        }
+        //
+        // query Thermostat set point
+        if (nif.Contains(" 43 ")) // Thermostat
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Thermostat SetPoint Get Heating");
+          module.Command("Thermostat.SetPointGet").Execute("Heating");
+          Pause(.2);
+        }
+        //
+        // query Battery level
+        if (nif.Contains(" 80 ")) // Battery
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Battery Get");
+          module.Command("Battery.Get").Execute();
+          Pause(.2);
+        }
+        //
+        // query Basic value
+        if (nif.Contains(" 20 ")) // Basic
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
+          module.Command("Basic.Get").Execute();
+          Pause(.2);
+        }
+        if (module.HasFeature("HomeGenie.ZWaveWakeUpAlwaysAwake"))
+        {
+          module.Command("WakeUp.SetAlwaysAwake").Set("1");
+        }
+        else
+        {
+          module.Command("WakeUp.SetAlwaysAwake").Set("0");
+	      // no more info, send the node to sleep
+          var sendToSleepDelay = module.Parameter("HomeGenie.ZWaveWakeUpSleep").DecimalValue;
+          if (sendToSleepDelay &gt; 0)
+          {
+            Pause(sendToSleepDelay);
+            Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Send to Sleep");
+            module.Command("WakeUp.SendToSleep").Execute();
+          }
+        }
+      }
+    }
+  }
+
+  return true; // continue processing event
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-zwave</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>query-on-wake-up</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>5436D28A4776BE3006CD9F6239B9B882</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>91</Address>
+    <Name>Query on Wake Up</Name>
+    <Description>Query sensors' data and battery level when a node wakes up.</Description>
+    <Group>Z-Wave</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>DoorWindow,DoorLock,Thermostat,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveWakeUpAlwaysAwake</Property>
+        <Description>Set node as always awake</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:60:1</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>DoorWindow,DoorLock,Thermostat,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveWakeUpSleep</Property>
+        <Description>Send to sleep after given delay (seconds, 0=disabled)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2021-04-09T17:56:25.2467049Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Run();
+</ScriptSetup>
+    <ScriptSource>var checkVirtualModules = new Func&lt;ModuleHelper, bool&gt;((module)=&gt;{
+  var defaultType = "Switch";
+  var parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchBinary.Count");
+  if (parameter.DecimalValue == 0)
+  {
+    // if not SwitchBinary, try SwitchMultilevel
+    defaultType = "Dimmer";
+    parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchMultiLevel.Count");
+  }
+  // ADD A VIRTUAL MODULE FOR EACH INSTANCE
+  for (int m = 1; m &lt;= parameter.DecimalValue; m++)
+  {
+    string address = module.Instance.Address + "." + m.ToString();
+    var virtualModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(address).Get();
+    if (!virtualModule.Exists)
+    {
+      Program.AddVirtualModule("HomeAutomation.ZWave", address, defaultType, "");
+      Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
+    }
+  }
+  return true;
+});
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  lock(this)
+    if (!parameter.Name.EndsWith(".Count") &amp;&amp; (parameter.Name.StartsWith("ZWaveNode.MultiInstance.SwitchMultiLevel.") || parameter.Name.StartsWith("ZWaveNode.MultiInstance.SwitchBinary.")))
+  {
+    var path = parameter.Name.Split('.');
+    //var eventType = path[2]; 	// "SwitchMultiLevel" or "SwitchBinary"
+    var instance = path[3];		// the instance number
+
+    var id = 0;
+    if (int.TryParse(instance, out id))
+    {
+      var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(module.Instance.Address + "." + instance).Get();
+      virtualmodule.RaiseEvent("Status.Level", parameter.Value, "ZWaveNode");
+    }
+
+  }
+  else if (parameter.Name == "ZWaveNode.NodeInfo")
+  {
+    var nif = (" " + parameter.Value + " "); // node information frame
+    if (nif.Contains(" 60 ")) // MultiInstance/Channel
+    {
+      // ReQUEST instances count
+      if (nif.Contains(" 25 ")) // 0x25 Switch Binary
+      {
+        module.Command("MultiInstance.GetCount").Execute("Switch.Binary");
+      }
+      if (nif.Contains(" 26 ")) // 0x26 Switch MultiLevel
+      {
+        module.Command("MultiInstance.GetCount").Execute("Switch.MultiLevel");
+      }
+      checkVirtualModules(module);
+    }
+  }
+
+  return true; // continue processing event
+});
+
+When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
+
+  string[] reqs = ((string)args).Split('/');
+  //string domain = reqs[0];
+  try
+  {
+    string nodeid = reqs[1];
+    string instance = "";
+    string command = reqs[2];
+    string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+    //
+    // Check if it's a node supporting MultiInstance/Channel
+    // if the node address is in the form &lt;mainnode_id&gt;.&lt;instance&gt;
+    // then this is a command for a multiinstance virtual module
+    if (nodeid.IndexOf('.') &gt; 0)
+    {
+      instance = nodeid.Substring(nodeid.IndexOf('.') + 1);
+      nodeid = nodeid.Substring(0, nodeid.IndexOf('.'));
+    }
+    if (instance != "")
+    {
+      var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid + "." + instance).Get();
+      var parentmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid).Get();
+      //
+      switch(command)
+      {
+        case "Control.On":
+          parentmodule.Command("MultiInstance.Set").Execute("Switch.Binary/" + instance + "/255");
+          virtualmodule.RaiseEvent("Status.Level", "1", "ZWaveNode");
+          break;
+        case "Control.Off":
+          parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
+          virtualmodule.RaiseEvent("Status.Level", "0", "ZWaveNode");
+          break;
+        case "Control.Toggle":
+          if (virtualmodule.Parameter("Status.Level").DecimalValue == 0)
+          {
+            parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/255");
+            virtualmodule.RaiseEvent("Status.Level", "1", "ZWaveNode");
+          }
+          else
+          {
+            parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
+            virtualmodule.RaiseEvent("Status.Level", "0", "ZWaveNode");
+          }
+          break;
+        case "Control.Level":
+          parentmodule.Command("MultiInstance.Set").Set("Switch.MultiLevel/" + instance + "/" + parameter);
+          virtualmodule.RaiseEvent("Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
+          break;
+      }
+      //
+      return "{ 'ResponseValue' : 'OK' }";
+    }
+  } catch (Exception e) {
+
+    Program.Notify("ZWave MultiInstance module ERROR!", e.Message);
+
+  }
+
+  return "";
+});
+
+// setup multi channel virtual modules at startup
+Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
+  checkVirtualModules(module);
+  return false;
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors>[{"Line":60,"Column":0,"ErrorMessage":"Object reference not set to an instance of an object.","ErrorNumber":"-1","CodeBlock":"CR"}]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-zwave</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>multi-instance-channel-virtual-modules</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>BA80A50AA3B121D792D140F456CC88B0</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>93</Address>
+    <Name>Multi Instance/Channel Virtual Modules</Name>
+    <Description>Adds a virtual module for each instance of a multi instance node.
+It requires that a manufacturer specific get has been issued on the node.</Description>
+    <Group>Z-Wave</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.AddOption("PollInterval", "45", "Poll Interval (seconds)", "text");
+Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Sensor", "HomeGenie.ZWaveMeterPoll", "Poll meter Watt", "checkbox");
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>while (Program.IsRunning)
+{
+  // basic get will returns current device level
+  Modules.WithFeature("HomeGenie.ZWaveMeterPoll").Each((module) =&gt; {
+    //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    module.Command("Meter.Get").Execute("2");
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var delay = Program.Option("PollInterval").DecimalValue;
+  if (delay &lt; 5) delay = 5;
+  Pause(delay);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-zwave</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>meter-watt-poll</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>A87BCC98A13AD4F136BF36DA7FDFEA8F</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>40</Address>
+    <Name>Meter Watt Poll</Name>
+    <Description>Periodically reads instant Watt value from meter devices</Description>
+    <Group>Z-Wave</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveMeterPoll</Property>
+        <Description>Poll meter Watt</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
+Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>while (Program.IsRunning)
+{
+  // basic get will returns current device level
+  Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
+    //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    var nif = "";
+    // node information frame
+    if (module.HasParameter("ZWaveNode.NodeInfo"))
+      nif = (" " + module.Parameter("ZWaveNode.NodeInfo").Value + " ");
+    if (nif.Contains(" 26 ")) // 0x26 Switch MultiLevel
+    {
+      module.Command("SwitchMultilevel.Get").Execute();
+    }
+    else if (nif.Contains(" 25 ")) // 0x25 Switch Binary
+    {
+      module.Command("SwitchBinary.Get").Execute();
+    }
+    else
+    {
+      module.Command("Basic.Get").Execute();
+    }
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var delay = Program.Option("PollInterval").DecimalValue;
+  if (delay &lt; 5) delay = 5;
+  Pause(delay);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-zwave</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>level-poll</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>C766AF050FE3837AEBF22B30E87361C7</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>39</Address>
+    <Name>Level Poll</Name>
+    <Description>Periodically query lights and switches level.</Description>
+    <Group>Z-Wave</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

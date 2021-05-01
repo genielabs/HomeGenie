@@ -95,6 +95,10 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.ShowGroup = function (gid) {
+    	if (HG.WebApp.Data.Groups.length === 0 || HG.WebApp.Data.Groups[gid] == null) {
+    	    // TODO: maybe it should redirect to maintenance page
+            return;
+    	}
         $.mobile.loading('show');
         HG.WebApp.Data._CurrentGroup = HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
         HG.WebApp.Data._CurrentGroupIndex = gid;
@@ -188,6 +192,10 @@ HG.WebApp.Control = HG.WebApp.Control || new function() { var $$ = this;
     };
 
     $$.RenderGroups = function () {
+        if (HG.WebApp.Data.Groups.length === 0) {
+            // TODO: maybe it should redirect to maintenance page
+            return;
+        }
         // destroy any previous instance of isotope
         $.each($$.field('#control_groupcontent', true).find('div[class=isotope]'), function(i, l){
             $(this).isotope('destroy');

@@ -1,0 +1,1352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddOption("ThermostatsCount", "1", "Virtual thermostats modules to create", "slider:1:10:1")
+  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature")
+  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>const int HOLDING_MODE_DIFF = 1;
+const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
+const string PARAMETER_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
+const string PARAMETER_SWITCH_MODULE = "VirtualThermostat.SwitchModule";
+const string EVENT_DESCRIPTION = "Basic Thermostat";
+
+var thermostatsCount = (int)Program.Option("ThermostatsCount").DecimalValue;
+if (thermostatsCount &lt;= 0) thermostatsCount = 1;
+Program.AddVirtualModules(MODULES_DOMAIN, "Thermostat", "homegenie/generic/thermostat", 1, thermostatsCount);
+var thermostatModules = Modules.InDomain(MODULES_DOMAIN).OfDeviceType("Thermostat");
+
+var holdingMode = new bool[thermostatsCount];
+
+var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
+
+  var temperature = thermostat.Parameter("Sensor.Temperature");
+  var operatingState = thermostat.Parameter("Thermostat.OperatingState");
+  var thermostatMode = thermostat.Parameter("Thermostat.Mode");
+  var heatSetPoint = thermostat.Parameter("Thermostat.SetPoint.Heating");
+  var index = int.Parse(thermostat.Instance.Address) - 1;
+  string domainAddress = "";
+  string domain = "";
+  string address = "";
+  try
+  {
+    // Get a reference to the temperature module
+    domainAddress = thermostat.Parameter(PARAMETER_TEMPERATURE_MODULE).Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
+    {
+      thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+      Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid temperature module.");
+      return false;
+    }
+    // Update Thermostat module Temperature field
+    temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
+
+    // get a reference to the switch/relay module
+    domain = address = "";
+    domainAddress = thermostat.Parameter(PARAMETER_SWITCH_MODULE).Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
+    {
+      thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+      Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid switch module.");
+      return false;
+    }
+
+    // Heat Mode logic
+    if (thermostatMode.Value == "Heat")
+    {
+      if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue - (holdingMode[index] ? HOLDING_MODE_DIFF : 0))
+      {
+        if (switchModule.IsOff) holdingMode[index] = false;
+        if (operatingState.Value != "Heating")
+        {
+          thermostat.RaiseEvent("Thermostat.OperatingState", "Heating", EVENT_DESCRIPTION);
+        }
+        // Heating
+        if (switchModule.IsOff &amp;&amp; switchModule.Get().Parameter("Status.Level").IdleTime &gt; 60) switchModule.On();
+      }
+      else
+      {
+        if (switchModule.IsOn) holdingMode[index] = true;
+        if (operatingState.Value != "PendingHeat")
+        {
+          thermostat.RaiseEvent("Thermostat.OperatingState", "PendingHeat", EVENT_DESCRIPTION);
+        }
+        // Waiting
+        if (switchModule.IsOn &amp;&amp; switchModule.Get().Parameter("Status.Level").IdleTime &gt; 60) switchModule.Off();
+      }
+    }
+    else
+    {
+      if (operatingState.Value != "Off" &amp;&amp; operatingState.Value != "Idle")
+      {
+        thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+        holdingMode[index] = false;
+      }
+      // Off
+      if (switchModule.IsOn &amp;&amp; switchModule.Get().Parameter("Status.Level").IdleTime &gt; 60) switchModule.Off();
+    }
+  }
+  catch (Exception e)
+  {
+    Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "ERROR: " + e.Message);
+  }
+
+  return true;
+});
+
+When.ModuleParameterChanged((module, parameter)=&gt;{
+  if (parameter.Is("Sensor.Temperature"))
+  {
+    thermostatModules.Each((thermostat)=&gt;{
+      var domainAddress = thermostat.Parameter(PARAMETER_TEMPERATURE_MODULE).Value;
+      if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+      {
+        var separatorIndex = domainAddress.LastIndexOf(':');
+        if (separatorIndex &gt; 0)
+        {
+          var domain = domainAddress.Substring(0, separatorIndex).ToLower();
+          var address = domainAddress.Substring(separatorIndex + 1).ToLower();
+          if (module.Instance.Domain.ToLower() == domain &amp;&amp; module.Instance.Address.ToLower() == address)
+          {
+            thermostat.RaiseEvent("Sensor.Temperature", parameter.Value, EVENT_DESCRIPTION);
+            ThermostatLogicRun(thermostat);
+          }
+        }
+      }
+      return false;
+    });
+  }
+  return true;
+});
+
+// implement Web API calls as defined in the Thermostat widget
+When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
+  var request = Program.ParseApiCall(args);
+  var option = request.GetOption(0);
+  var thermostat = Modules.InDomain(MODULES_DOMAIN).WithAddress(request.Address).Get();
+  if (!thermostat.Exists) return null;
+  var index = int.Parse(thermostat.Instance.Address) - 1;
+  var res = "ERROR"; // default response text
+  switch (request.Command)
+  {
+    case "Thermostat.SetPointSet":
+    // Basic thermostat currently only supports Heating mode
+    if (option == "Heating")
+    {
+      var setPoint = request.GetOption(1);
+      thermostat.RaiseEvent("Thermostat.SetPoint.Heating", setPoint, EVENT_DESCRIPTION);
+      holdingMode[index] = false;
+      ThermostatLogicRun(thermostat);
+      res = "OK";
+    }
+    break;
+    case "Thermostat.ModeSet":
+    // Currently supported modes are Off or Heat
+    if (option == "Off" || option == "Heat")
+    {
+      thermostat.RaiseEvent("Thermostat.Mode", option, EVENT_DESCRIPTION);
+      holdingMode[index] = false;
+      ThermostatLogicRun(thermostat);
+      res = "OK";
+    }
+    break;
+  }
+  return res != "ERROR" ? new ResponseText(res) : null;
+});
+
+while (Program.IsRunning)
+{
+  thermostatModules.Each((thermostat)=&gt;{
+    ThermostatLogicRun(thermostat);
+    return false;
+  });
+  Pause(120);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>basic-thermostat</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>07B7E8E7E7C220E10F6523EA62DC1798</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>78</Address>
+    <Name>Basic Thermostat</Name>
+    <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
+Temperature/Switch modules must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5 .
+Basic Thermostats can also be used with the Timetable scheduler widget.</Description>
+    <Group>Weather and Environment</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>module.text:any:any:sensor.temperature</FieldType>
+        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForTypes>Thermostat</ForTypes>
+        <Property>VirtualThermostat.TemperatureModule</Property>
+        <Description>Module to read temperature from</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
+        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForTypes>Thermostat</ForTypes>
+        <Property>VirtualThermostat.SwitchModule</Property>
+        <Description>Module to switch on/off on set point</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T01:32:27.4760845Z</ActivationTime>
+    <TriggerTime>2021-04-14T01:32:27.4999594Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+  Program
+    .AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor")
+    .AddFeature("", "Light,Dimmer,Switch : /^Status.Level$/", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor : /^Meter.Watts$|^Status.Level$/", "EnergyManagement.MonitorWatts", "Monitor energy consumption", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
+var kwCounterToday = energyMonitor.Parameter("EnergyMonitor.KwCounter.Today");
+var wattCounter = energyMonitor.Parameter("EnergyMonitor.WattCounter");
+var wattCounterToday = energyMonitor.Parameter("EnergyMonitor.WattCounter.Today");
+var kwLoad = energyMonitor.Parameter("EnergyMonitor.KwLoad");
+var wattLoad = energyMonitor.Parameter("EnergyMonitor.WattLoad");
+var operatingDevices = energyMonitor.Parameter("EnergyMonitor.OperatingDevices");
+var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
+var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches");
+
+// initialize
+energyMonitor.Instance.Name = "Energy Monitor";
+kwLoad.Value = "0";
+wattLoad.Value = "0";
+operatingDevices.Value = "0";
+operatingLights.Value = "0";
+operatingSwitches.Value = "0";
+
+// select all modules supporting metering
+var monitorModules = Modules.WithFeature("EnergyManagement.MonitorStatus,EnergyManagement.MonitorWatts");
+var updateRequired = false;
+var counterUpdateTimestamp = DateTime.Now;
+
+var raiseEvent = new Func&lt;ModuleParameter,bool&gt;((p) =&gt; {
+  energyMonitor.RaiseEvent(p.Name, p.Value, "");
+  return true;
+});
+
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.HasFeature("EnergyManagement.MonitorStatus") || module.HasFeature("EnergyManagement.MonitorWatts")) {
+    if (property.Is("Status.Level") || property.Is("Meter.Watts")) {
+		updateRequired = true;
+    }
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
+double counterUpdateInterval = 10;
+var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
+  var totalLoad = 0d;
+  int devcount = 0, lightcount = 0, switchcount = 0;
+  var now = DateTime.UtcNow;
+  bool updateCounter = (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= counterUpdateInterval;
+  monitorModules.Each((mod)=&gt;{
+    if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0 || mod.Parameter("Status.Level").DecimalValue &gt; 0)
+    {
+      if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
+      {
+        if (updateCounter) {
+          var avgWatt = mod.Parameter("Meter.Watts").Statistics.History
+            .FindAll(sv =&gt; (sv.Timestamp - now).TotalSeconds &lt; counterUpdateInterval)
+            .Select(sv =&gt; sv.Value)
+            .Average();
+          totalLoad += avgWatt;
+        } else {
+          totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
+        }
+      }
+      if (mod.HasFeature("EnergyManagement.MonitorStatus"))
+      {
+        if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer"))
+        {
+          lightcount++;
+        }
+        else
+        {
+          switchcount++;
+        }
+        devcount++;
+      }
+    }
+    return false;
+  });
+  // Update kw and watt counters (every 60 seconds)
+  if (updateCounter)
+  {
+    counterUpdateTimestamp = DateTime.Now;
+    var totalWattCounter = wattCounter.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
+    wattCounter.SetData(totalWattCounter);
+    kwCounter.SetData(totalWattCounter / 1000D);
+    var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
+    wattCounterToday.SetData(todayWattCounter);
+    kwCounterToday.SetData(todayWattCounter / 1000D);
+    raiseEvent(wattCounter);
+    raiseEvent(kwCounter);
+    raiseEvent(wattCounterToday);
+    raiseEvent(kwCounterToday);
+  }
+  // Update current load/devices stats
+  kwLoad.Value = (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
+  raiseEvent(kwLoad);
+  wattLoad.Value = totalLoad.ToString("0.000", CultureInfo.InvariantCulture);
+  raiseEvent(wattLoad);
+  operatingDevices.Value = devcount.ToString("0");
+  raiseEvent(operatingDevices);
+  operatingLights.Value = lightcount.ToString("0");
+  raiseEvent(operatingLights);
+  operatingSwitches.Value = switchcount.ToString("0");
+  raiseEvent(operatingSwitches);
+  // TODO: deprecate Program.UiRefresh field
+  energyMonitor.RaiseEvent("Program.UiRefresh", "Energy Monitor data updated", "");
+  return true;
+});
+
+When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
+  var api = new MigInterfaceCommand((string)args);
+  if (api.Command == "Counter.Reset")
+  {
+    kwCounter.Value = "0";
+    wattCounter.Value = "0";
+    UpdateEnergyLoad();
+  }
+  dynamic response = new System.Dynamic.ExpandoObject();
+  response.KiloWattLoad = kwLoad.Value;
+  response.KiloWattCouter = kwCounter.Value;
+  response.WattCounter = wattCounter.Value;
+  response.KiloWattCounterToday = kwCounterToday.Value;
+  response.WattCounterToday = wattCounterToday.Value;
+  response.WattLoad = wattLoad.Value;
+  response.OperatingDevices = operatingDevices.Value;
+  response.OperatingLights = operatingLights.Value;
+  response.OperatingSwitches = operatingSwitches.Value;
+  return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(response) + "]";
+});
+
+var midNightReset = false;
+while (Program.IsRunning)
+{
+  if (updateRequired || (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= 6) {
+  	updateRequired = false;
+    UpdateEnergyLoad();
+  }
+  // Reset daily counters within first minute after midnight
+  if ((DateTime.Now - DateTime.Today).TotalSeconds &lt; 60 &amp;&amp; !midNightReset)
+  {
+    wattCounterToday.Value = "0";
+    kwCounterToday.Value = "0";
+    midNightReset = true;
+  }
+  else if ((DateTime.Now - DateTime.Today).TotalSeconds &gt;= 60 &amp;&amp; midNightReset)
+  {
+    midNightReset = false;
+  }
+  Pause(5);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>energy-monitor</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>348DE8E8F5C6FA0C281761556D369269</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>81</Address>
+    <Name>Energy Monitor</Name>
+    <Description>Collects and display information about
+device status and energy consumption.</Description>
+    <Group>Energy Management</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch : /^Status.Level$/</ForTypes>
+        <Property>EnergyManagement.MonitorStatus</Property>
+        <Description>Monitor status</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Sensor : /^Meter.Watts$|^Status.Level$/</ForTypes>
+        <Property>EnergyManagement.MonitorWatts</Property>
+        <Description>Monitor energy consumption</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.5418476Z</ActivationTime>
+    <TriggerTime>2021-04-14T00:46:19.3619184Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingMode", "Enable energy saving mode", "checkbox")
+  .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Max light level (%)", "slider:20:80:1")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>// We want to do further processing whenever a module changes
+When.ModuleParameterChanged( (module, parameter) =&gt; {
+  if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; parameter.Name == "Status.Level")
+  {
+    var level = module.Parameter("Status.Level");
+    var newlevel = module.Parameter("EnergyManagement.EnergySavingLevel").DecimalValue;
+    if (newlevel &lt;= 0)
+    {
+      module.Parameter("EnergyManagement.EnergySavingLevel").Value = "40";
+      newlevel = 40;
+    }
+    //
+    if (level.DecimalValue &gt; (newlevel / 100D))
+    {
+      Program.Notify(module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
+      module.Level = newlevel;
+      return false;
+    }
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>energy-saving-mode</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>73AAA567A6E3089179C0BB3F87081D0A</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>82</Address>
+    <Name>Energy Saving Mode</Name>
+    <Description>Keeps dimmers level below a configurable percentage value.</Description>
+    <Group>Energy Management</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>EnergyManagement.EnergySavingMode</Property>
+        <Description>Enable energy saving mode</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:20:80:1</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>EnergyManagement.EnergySavingLevel</Property>
+        <Description>Max light level (%)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.6046128Z</ActivationTime>
+    <TriggerTime>2021-04-14T00:46:19.3337909Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(()=&gt;{
+  Program.UseWidget("homegenie/generic/program");
+});
+</ScriptSetup>
+    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from
+Modules
+  .InGroup( PROGRAM_OPTIONS_STRING )
+  .OfDeviceType("Light,Dimmer")
+  //.IterationDelay(0.35)
+  .Off();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>group-lights-off</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>3792BD9252297DB19896EDE974D5B6D1</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>7</Address>
+    <Name>Group Lights OFF</Name>
+    <Description>Turn off all the lights in the given group.</Description>
+    <Group>Scenarios</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.6541602Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(()=&gt;{
+  Program.UseWidget("homegenie/generic/program");
+});</ScriptSetup>
+    <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from
+Modules
+  .InGroup( PROGRAM_OPTIONS_STRING )
+  .OfDeviceType("Light,Dimmer")
+  //.IterationDelay(0.35)
+  .On();</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>group-lights-on</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>16377299BEDA72753C854BDC05390091</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>6</Address>
+    <Name>Group Lights ON</Name>
+    <Description>Turn on all the lights in the given group.</Description>
+    <Group>Scenarios</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.7102264Z</ActivationTime>
+    <TriggerTime>2021-04-14T00:58:58.5210201Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
+  .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
+  // Create 5 virtual modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5
+  // "Dimmer" is the type and "GenericColorLight" is the widget to be used to display the virtual module
+  // See directory "html/pages/control/widgets/" for widget list
+  .AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5)
+  .Run();
+</ScriptSetup>
+    <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
+{
+  if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
+  {
+    return false;
+  }
+  string webserviceurl = "http://" +
+    Program.Option("BridgeAddress").Value + "/api/" +
+    Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
+  Net.WebService(webserviceurl).Put( jsonargs ).Call();
+  return true;
+};
+
+var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
+  dynamic color = new ExpandoObject();
+  string[] parts = hsb.Split(',');
+  color.H = (parts[0] != "" ? parts[0] : "1");
+  color.S = (parts.Length &gt; 1 &amp;&amp; parts[1] != "" ? parts[1] : "0");
+  color.B = (parts.Length &gt; 2 &amp;&amp; parts[2] != "" ? parts[2] : "1");
+  return color;
+});
+
+// - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
+When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
+  var request = Program.ParseApiCall(args);
+  try
+  {
+    string lightNumber = request.Address;
+    string parameter = Uri.UnescapeDataString(request.GetOption(0));
+	var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
+    var module = hueModules.WithAddress(lightNumber).Get();
+    //
+    switch(request.Command)
+    {
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+      case "Control.On":
+        {
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          module.RaiseEvent("Status.Level", color.B, "Hue Light");
+        }
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+      case "Control.Off":
+        bridgeApiCall(lightNumber, "{ \"on\" : false }");
+        module.RaiseEvent("Status.Level", "0", "Hue Light");
+        break;
+      case "Control.Toggle":
+        if (module.Parameter("Status.Level").DecimalValue == 0)
+        {
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          module.RaiseEvent("Status.Level", color.B, "Hue Light");
+        }
+        else
+        {
+          bridgeApiCall(lightNumber, "{ \"on\" : false }");
+          module.RaiseEvent("Status.Level", "0", "Hue Light");
+        }
+        break;
+      case "Control.Level":
+        {
+          if (module.IsOff) bridgeApiCall(lightNumber, "{ \"on\" : true }");
+          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
+          module.RaiseEvent("Status.ColorHsb", color.H+','+color.S+','+bri, "Hue Light");
+          module.RaiseEvent("Status.Level", bri, "Hue Light");
+        }
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+      case "Control.ColorHsb":
+        string[] values = parameter.Split(',');
+        double transition = 5;
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10));
+        bridgeApiCall(lightNumber, "{ \"on\" : true" +
+                      ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) +
+                      ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) +
+                      ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) +
+                      ", \"transitiontime\" : " + transition.ToString() +  "}");
+        module.RaiseEvent("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
+        module.RaiseEvent("Status.ColorHsb", parameter, "Hue Light");
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
+      case "Control.Alert":
+        // eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
+        string alertType = "select";
+        if (parameter == "Long") {alertType = "lselect";}
+        bridgeApiCall(lightNumber, "{\"alert\" : \"" + alertType + "\"}");
+        break;
+    }
+    return new ResponseText("OK");
+  } catch (Exception e) {
+
+    Program.Notify("ERROR: "+e.Message);
+
+  }
+  return new ResponseText("ERROR");
+});
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>philips-hue-bridge</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>22FE096E6945CDB52AA21B01FBEEC88D</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>26</Address>
+    <Name>Philips Hue Bridge</Name>
+    <Description>Simple Philips Hue lights integration.
+In order to enable the connection to the gateway, register "homegenie" username
+(default is "newdeveloper") in your Philips Hue Bridge.
+For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
+    <Group>Devices and Things</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.7844992Z</ActivationTime>
+    <TriggerTime>2021-04-14T00:46:19.3740808Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
+var alarmTypes = "Siren,Light,Dimmer,Switch";
+Program.Setup(() =&gt; {
+  Program
+    .UseWidget("homegenie/generic/securitysystem")
+
+    .AddFeature("", sensorTypes, "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox")
+    .AddFeature("", sensorTypes, "HomeGenie.SecurityTriggerHome", "Also trigger when armed Home", "checkbox")
+    .AddFeature("", alarmTypes, "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox")
+
+    .AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "slider:0:60:1")
+    .AddOption("System.SirenStartTime", "0", "2. Sirens Start Delay (seconds)", "slider:0:30:1")
+    .AddOption("System.SirenMaxTime", "30", "3. Sirens Max Time (seconds, 0=infinite)", "slider:0:1800:1")
+
+    .AddOption("Email.Recipients", "", "4. Comma separated list of recipients e-mails for alarm notifications", "text")
+
+    .AddOption("Trigger.ArmedProgram", "", "5. Program to run when armed", "program.text")
+    .AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "program.text")
+    .AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "program.text");
+});
+Program.Parameter("EventsLogger.EnableLogging").Value = "On";
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>//
+// init program parameters
+//
+var STATUS_DISARMED = "Disarmed";
+var STATUS_ARMED_AWAY = "Away";
+var STATUS_ARMED_HOME = "Home";
+
+// Events History
+var history = new List&lt;dynamic&gt;();
+var historyLimit = 24; // hours
+var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, param)=&gt;{
+  dynamic evt = new ExpandoObject();
+  evt.Domain = mod.Domain;
+  evt.Address = mod.Address;
+  evt.Name = mod.Name;
+  evt.Parameter = param.Name;
+  evt.Value = param.Value;
+  evt.Timestamp = param.UpdateTime;
+  // remove any previous event of the same type (the history only keep the last occurrence of a same event)
+  history.RemoveAll(e =&gt; e.Domain == evt.Domain &amp;&amp; e.Address == evt.Address &amp;&amp; e.Parameter == evt.Parameter &amp;&amp; e.Value == evt.Value);
+  history.Add(evt);
+  // keeep size within historyLimit (minutes)
+  while ((DateTime.UtcNow - history[history.Count - 1].Timestamp).TotalHours &gt; historyLimit)
+  {
+    history.RemoveAll(sv =&gt; (DateTime.UtcNow - sv.Timestamp).TotalHours &gt; historyLimit);
+  }
+  // this event will cause the widget to update its data
+  Program.RaiseEvent("Program.UiRefresh", "refresh", "Security system sensor event");
+});
+
+var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
+  Program.RunAsyncTask(()=&gt; {
+    if (Program.Parameter("Status.Level").Value == "0")
+    {
+      // disarming
+      Program.RaiseEvent("HomeGenie.SecurityTriggered", "0", "Security System");
+    }
+    else
+    {
+      // arming
+      Pause( Program.Option("System.ArmDelay").DecimalValue );
+    }
+    var status = "";
+    if (Program.Parameter("Status.Level").Value == "0")
+      status = STATUS_DISARMED;
+    else
+      status = (armHome ? STATUS_ARMED_HOME : STATUS_ARMED_AWAY);
+    Program.RaiseEvent("HomeGenie.SecurityArmed", status, "Security System");
+    // run armed/disarmed program
+    if (Program.Parameter("Status.Level").Value != "0")
+    {
+      var armedProgram = Program.Option("Trigger.ArmedProgram").Value;
+      if (armedProgram != "")
+      {
+        Program.Run(armedProgram);
+      }
+    }
+    else
+    {
+      var disarmedProgram = Program.Option("Trigger.DisarmedProgram").Value;
+      if (disarmedProgram != "")
+      {
+        Program.Run(disarmedProgram);
+      }
+    }
+  });
+});
+
+// module events handling
+When.ModuleParameterChanged((module, parameter)=&gt; {
+  bool moduleAlarmed = false;
+  if (module.HasFeature("HomeGenie.SecuritySensor")
+      &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value != "1"
+      &amp;&amp; (   parameter.Name == "Status.Level"
+          || parameter.Name == "Status.DoorLock"
+          || parameter.Name == "Sensor.Generic"
+          || parameter.Name == "Sensor.Alarm"
+          || parameter.Name == "Sensor.Tamper"
+          || parameter.Name == "Sensor.MotionDetect"
+          || parameter.Name == "Sensor.DoorWindow"
+          || parameter.Name == "Sensor.Flood"
+          || parameter.Name == "Sensor.Smoke"
+          || parameter.Name == "Sensor.Heat"
+          || parameter.Name == "Sensor.CarbonMonoxide"
+          || parameter.Name == "Sensor.CarbonDioxide" ))
+  {
+    AddHistoryEvent(module.Instance, parameter);
+    if (parameter.DecimalValue &gt; 0 &amp;&amp; Program.Parameter("HomeGenie.SecurityArmed").Value != STATUS_DISARMED)
+    {
+      if (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_AWAY ||
+          (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_HOME &amp;&amp; module.HasFeature("HomeGenie.SecurityTriggerHome")))
+        moduleAlarmed = true;
+    }
+  }
+  if (moduleAlarmed)
+  {
+    Program.RaiseEvent("HomeGenie.SecurityTriggerSource",
+                       	module.Instance.Name + " " + parameter.Name + " (" +
+                        module.Instance.Domain + "." +
+                        module.Instance.Address + ")", ""
+                      );
+    Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
+    var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
+    if (triggeredProgram != "")
+    {
+      Program.Run(triggeredProgram);
+    }
+    return false;
+  }
+  return true;
+});
+
+// web service calls handling
+When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args) =&gt; {
+  var request = Program.ParseApiCall(args);
+  object res = null;
+  try
+  {
+    if (request.Address == Program.Module.Address)
+    {
+      switch(request.Command)
+      {
+        case "Control.On":
+        case "Control.ArmAway":
+        	Program.RaiseEvent("Status.Level", "1", "Security System");
+        	_armdisarm(false);
+        	res = new ResponseText("ARMING AWAY");
+        	break;
+        case "Control.ArmHome":
+        	Program.RaiseEvent("Status.Level", "1", "Security System");
+        	_armdisarm(true);
+        	res = new ResponseText("ARMING HOME");
+        	break;
+        case "Control.Off":
+        case "Control.Disarm":
+        	Program.RaiseEvent("Status.Level", "0", "Security System");
+        	_armdisarm(false);
+        	res = new ResponseText("DISARMED");
+        	break;
+        case "Events.List":
+        	res = history; // objects are automatically serialized to JSON
+        	break;
+      }
+      if (request.Command != "Events.List") {
+      	Program.UpdateModuleDatabase();
+      }
+    }
+  }
+  catch (Exception ex)
+  {
+    res = new ResponseText("ERROR: " + ex.Message + " " + ex.StackTrace);
+  }
+  return res;
+});
+
+// main program loop
+var sirenModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren");
+var alarmModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light");
+
+if (Program.Parameter("Status.Level").Value != "0") {
+  var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
+  if (triggeredProgram != "")
+  {
+    Program.Run(triggeredProgram);
+  }
+}
+
+while (Program.IsRunning)
+{
+  if (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
+  {
+    var watchTimer = new System.Diagnostics.Stopwatch();
+    watchTimer.Start();
+
+    // send e-mail
+    var subject = "HomeGenie Security System Alarmed";
+    var messagetext = "Security System Alarm triggered by " + Program.Parameter("HomeGenie.SecurityTriggerSource").Value;
+    var recipients = Program.Option("Email.Recipients").Value;
+    if (recipients != "")
+    {
+      Program.RunAsyncTask(()=&gt;{
+        Net.SendMessage(recipients, subject, messagetext);
+      });
+    }
+
+    // Flashing lights thread starts asynchronously
+    Program.RunAsyncTask(()=&gt;{
+      while (Program.IsRunning &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
+      {
+        // flashing SecurityAlarm lights
+        alarmModules.Toggle();
+        Pause(1);
+        alarmModules.Toggle();
+        Pause(1);
+      }
+      alarmModules.Off();
+    });
+
+    // Sirens loop
+    int sirenStatus = 0;
+    while (Program.IsRunning &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
+    {
+      if (sirenStatus == 0 &amp;&amp; watchTimer.Elapsed.TotalSeconds &gt;= Program.Option("System.SirenStartTime").DecimalValue)
+      {
+        watchTimer.Stop();
+        sirenModules.On();
+        watchTimer = new System.Diagnostics.Stopwatch();
+        watchTimer.Start();
+        sirenStatus = 1;
+      }
+      else if (sirenStatus == 1 &amp;&amp; Program.Option("System.SirenMaxTime").DecimalValue &gt; 0 &amp;&amp; watchTimer.Elapsed.TotalSeconds &gt;= Program.Option("System.SirenMaxTime").DecimalValue)
+      {
+        // turn off sirens if max time was set and elapsed
+        sirenModules.Off();
+        sirenStatus = 2;
+      }
+    }
+    sirenModules.Off();
+    watchTimer.Stop();
+  }
+  Pause(1);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>security-alarm-system</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>C0676AC35E0B08BF6A045310BA7388CD</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>90</Address>
+    <Name>Security Alarm System</Name>
+    <Description>Security Alarm System</Description>
+    <Group>Security</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
+        <Property>HomeGenie.SecuritySensor</Property>
+        <Description>Use as Security Sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
+        <Property>HomeGenie.SecurityTriggerHome</Property>
+        <Description>Also trigger when armed Home</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.SecurityAlarm</Property>
+        <Description>Use as Security Alarm</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.8725795Z</ActivationTime>
+    <TriggerTime>2021-04-14T00:46:19.4142798Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:1")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
+var MOT_SENSOR_NAME = "HomeGenie.SmartLights.OnMotionDetect";
+var LUM_SENSOR_NAME = "HomeGenie.SmartLights.CheckLuminosity";
+var TURNOFF_TIMEOUT = "HomeGenie.SmartLights.SwitchOffTimeout";
+var MIN_LUMINANCE = "HomeGenie.SmartLights.MinLuminance";
+var LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
+
+var smart_devices = Modules.WithFeature(SMART_LIGHT_ENABLE);
+
+var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
+  dynamic v = new ExpandoObject();
+  v.Domain = "0";
+  v.Address = "0";
+  if (domainAddress.IndexOf(":") &gt; 0)
+  {
+    v.Domain = domainAddress.Substring(0, domainAddress.LastIndexOf(':'));
+    v.Address = domainAddress.Substring(domainAddress.LastIndexOf(':') + 1);
+  }
+  return v;
+});
+
+When.ModuleParameterIsChanging((module, parameter) =&gt; {
+
+  if (module.IsOfDeviceType("Sensor"))
+  {
+    if (parameter.Name == "Sensor.MotionDetect" || parameter.Name == "Status.Level")
+    {
+      var motionlevel = parameter.DecimalValue;
+      if (motionlevel &gt; 0)
+      {
+        smart_devices.Each((mod)=&gt; {
+
+          var da = GetDomainAddress(mod.Parameter(MOT_SENSOR_NAME).Value);
+          if (da.Domain == module.Instance.Domain &amp;&amp; da.Address == module.Instance.Address)
+          {
+            mod.Parameter(LAST_EVENT).Value = DateTime.UtcNow.Ticks.ToString();
+            //if (mod.IsOff)
+            {
+              da = GetDomainAddress(mod.Parameter(LUM_SENSOR_NAME).Value);
+              var lumsensor = Modules.InDomain(da.Domain).WithAddress(da.Address).Get();
+              if (lumsensor.Instance != null)
+              {
+                var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
+                if (luminosity &lt; mod.Parameter(MIN_LUMINANCE).DecimalValue)
+                {
+                  Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                  mod.On();
+                }
+              }
+              else
+              {
+                Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                mod.On();
+              }
+            }
+          }
+
+          return false;
+        });
+      }
+    }
+  }
+
+  return true;
+});
+
+while (Program.IsRunning)
+{
+  smart_devices.Each((mod)=&gt; {
+    var timeout = mod.Parameter(TURNOFF_TIMEOUT).DecimalValue;
+    // default timeout is 30 seconds
+    if (timeout == 0) timeout = 30;
+    if (mod.IsOn)
+    {
+      var lastevent = mod.Parameter(LAST_EVENT).UpdateTime;
+      var lastupdate = mod.Parameter("Status.Level").UpdateTime;
+      var checktime = lastevent.Ticks;
+      if (checktime &lt; lastupdate.Ticks) checktime = lastupdate.Ticks;
+      var elapsed = new TimeSpan(DateTime.UtcNow.Ticks - checktime);
+      if (elapsed.TotalSeconds &gt; timeout) {
+        Program.Notify(mod.Instance.Address + " " + mod.Instance.Name + "&lt;br&gt;switched OFF.");
+        mod.Off();
+      }
+    }
+    return false;
+  });
+  Pause(5);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>smart-lights</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>99900D1C407397E55F8C129BE5BBBF9E</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>145</Address>
+    <Name>Smart Device</Name>
+    <Description>Auto switch a device on/off based on sensing motion and environment light.</Description>
+    <Group>Lights</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.Enable</Property>
+        <Description>Enable Smart Light Control</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:sensor:status.level,sensor.motiondetect</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
+        <Description>Controlled by motion sensor (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:any:sensor.luminance</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.CheckLuminosity</Property>
+        <Description>Controlled by luminance sensor (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:0:1000:1</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.MinLuminance</Property>
+        <Description>Trigger if luminance is below</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:30:3600:30</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>
+        <Description>Turn off after inactivity timeout (seconds)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:18.9646916Z</ActivationTime>
+    <TriggerTime>2021-04-14T00:46:19.3989695Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(()=&gt;{
+  Program
+    .AddFeature("HomeAutomation.PhilipsHue", "Dimmer", "Scenarios.SunriseColors", "Link to Sunrise Colors Scenario", "checkbox")
+  	.UseWidget("homegenie/generic/program");
+});</ScriptSetup>
+    <ScriptSource>// CSharp Automation Program Plugin
+
+// Initialize scenario
+var colorLights = Modules.WithFeature("Scenarios.SunriseColors")
+  .Off()
+  .Command("Control.ColorHsb");
+
+// First transition to red, 5 seconds
+colorLights.Set("0,1,.8,5");
+Pause(5);
+
+// Second transition to orange, 5 seconds
+colorLights.Set("0.08,1,.8,5");
+Pause(5);
+
+// Last transition to bright white, 10 seconds
+colorLights.Set("0.13,0,1,10");
+Pause(10);</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>sunrise-colors-scenario</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>ED5BE41BABA46071CD88D300AD0A6F9C</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>8</Address>
+    <Name>Sunrise Colors Scenario</Name>
+    <Description>Example scenario for color lights.</Description>
+    <Group>Scenarios</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.PhilipsHue</ForDomains>
+        <ForTypes>Dimmer</ForTypes>
+        <Property>Scenarios.SunriseColors</Property>
+        <Description>Link to Sunrise Colors Scenario</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime>2021-04-14T00:46:19.0238274Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>//Program.Title = "Belking WeMo";
+Program.Setup(()=&gt;{
+    Program
+      .AddOption("WeMo.Refresh", "60", "1. Time in seconds between each refresh", "slider:1:120:1")
+      .AddOption("WeMo.MaxDevices", "10", "2. Number of WeMo devices", "slider:1:20:1")
+      // AddFeature will attach option to modules in HomeAutomation.WeMo device
+      .AddFeature("HomeAutomation.WeMo", "Switch,Light,Dimmer", "WeMo.IpAddress", "IP Address", "text")
+      .AddFeature("HomeAutomation.WeMo", "Switch,Light,Dimmer", "WeMo.AlarmAD", "Synchronize on/off with Alarm System armed status", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>const uint STATE_ON = 1;
+const uint STATE_OFF = 0;
+const string WEMO_DOMAIN = "HomeAutomation.WeMo";
+var WeMo_Refresh = Program.Option("WeMo.Refresh");
+var WeMo_MaxDevices = Program.Option("WeMo.MaxDevices");
+var WeMo_Modules = Modules.InDomain(WEMO_DOMAIN);
+var WeMo_Modules_AD = Modules.InDomain(WEMO_DOMAIN).WithFeature("WeMo.AlarmAD");
+
+// create virtual modules for HomeAutomation.WeMo domain
+for (int i = 1; i &lt;= WeMo_MaxDevices.DecimalValue; i++)
+{
+  Program.AddVirtualModule(WEMO_DOMAIN, i.ToString(), "Switch", "homegenie/generic/switch");
+}
+
+Action&lt;string, uint&gt; BinarySwitch = (string ipAddress, uint binaryState) =&gt;
+{
+  var request = Net.WebService("http://" + ipAddress + ":49153/upnp/control/basicevent1")
+    .AddHeader("Accept", "")
+    .AddHeader("Content-type", "text/xml; charset=\"utf-8\"")
+    .AddHeader("SOAPACTION", "\"urn:Belkin:service:basicevent:1#SetBinaryState\"")
+    .Post(
+    "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"&gt;&lt;s:Body&gt;&lt;u:SetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"&gt;&lt;BinaryState&gt;" +
+    binaryState + "&lt;/BinaryState&gt;&lt;/u:SetBinaryState&gt;&lt;/s:Body&gt;&lt;/s:Envelope&gt;");
+  var result = request.GetData();
+  if (String.IsNullOrEmpty(result))
+  {
+    Program.Notify("ERROR: no response received!");
+  }
+};
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  // synchronize WeMo on/off status with Alarm System
+  if (module.Is("Security Alarm System") &amp;&amp; parameter.Is("Status.Level"))
+  {
+    WeMo_Modules_AD.Each((wemo) =&gt; {
+      var ip = wemo.Parameter("WeMo.IpAddress").Value;
+      if (ip.Length &gt; 8)
+      {
+        wemo.RaiseEvent("Status.Level", parameter.Value, "WeMo");
+        BinarySwitch(ip, parameter.DecimalValue == 0 ? STATE_OFF : STATE_ON);
+      }
+      return false;
+    });
+  }
+  // true =&gt; continue propagating the event to other listeners
+  return true;
+});
+
+When.WebServiceCallReceived(WEMO_DOMAIN, (args) =&gt; {
+  var cmd = new MigInterfaceCommand(args.ToString());
+  var module = Modules.InDomain(WEMO_DOMAIN).WithAddress(cmd.Address).Get();
+  var ipAddress = module.Parameter("WeMo.IpAddress").Value;
+  if (ipAddress.Length &gt;= 8)
+  {
+    switch (cmd.Command)
+    {
+      case "Control.On":
+      module.RaiseEvent("Status.Level", "1", "WeMo");
+      BinarySwitch(ipAddress, STATE_ON);
+      break;
+      case "Control.Off":
+      module.RaiseEvent("Status.Level", "0", "WeMo");
+      BinarySwitch(ipAddress, STATE_OFF);
+      break;
+      default:
+      // command not recognized
+      return new ResponseStatus(Status.Error);
+    }
+  }
+  else
+  {
+    module.RaiseEvent("Status.Error", "Module not configured!", "WeMo");
+  }
+  return new ResponseStatus(Status.Ok);
+});
+
+Action&lt;ModuleHelper&gt; pollWemoStatus = (module) =&gt;
+{
+  var ip = module.Parameter("WeMo.IpAddress").Value;
+  if (ip.Length &gt; 8)
+  {
+    var request2 = Net.WebService("http://" + ip + ":49153/upnp/control/basicevent1")
+      .AddHeader("Accept", "")
+      .AddHeader("Content-type", "text/xml; charset=\"utf-8\"")
+      .AddHeader("SOAPACTION", "\"urn:Belkin:service:basicevent:1#GetBinaryState\"")
+      .Post(
+      "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"&gt;&lt;s:Body&gt;&lt;u:GetBinaryState xmlns:u=\"urn:Belkin:service:basicevent:1\"&gt;&lt;BinaryState&gt;1&lt;/BinaryState&gt;&lt;/u:GetBinaryState&gt;&lt;/s:Body&gt;&lt;/s:Envelope&gt;");
+    var result2 = request2.GetData();
+
+    if (!result2.Contains("1") &amp;&amp; !result2.Contains("0"))
+    {
+      Program.Notify("ERROR: no response from " + ip + " (" + module.Instance.Address + ")");
+    }
+    else if (result2.Contains("0"))
+    {
+      if (module.IsOn)
+      {
+        module.RaiseEvent("Status.Level", "0", "WeMo");
+      }
+    }
+    else if (result2.Contains("1"))
+    {
+      if (module.IsOff)
+      {
+        module.RaiseEvent("Status.Level", "1", "WeMo");
+      }
+    }
+  }
+};
+
+while (Program.IsRunning)
+{
+  WeMo_Modules.Each((wemo) =&gt; {
+    pollWemoStatus(wemo);
+    return false;
+  });
+  Pause(WeMo_Refresh.DecimalValue);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>wemo</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>B3BDC23A3BF20C2503ED9D85234E4B03</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>30</Address>
+    <Name>WeMo</Name>
+    <Description>Belkin Wemo integration</Description>
+    <Group>Devices and Things</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.WeMo</ForDomains>
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>WeMo.IpAddress</Property>
+        <Description>IP Address</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.WeMo</ForDomains>
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>WeMo.AlarmAD</Property>
+        <Description>Synchronize on/off with Alarm System armed status</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

@@ -173,7 +173,14 @@ namespace NetClientLib
 
         private void DisconnectReceiver()
         {
-            try { receiverTask.Abort(); }
+            try
+            {
+#if NETSTANDARD2_0
+                receiverTask.Interrupt();
+#else
+                receiverTask.Abort();
+#endif
+            }
             catch { }
             receiverTask = null;
             try

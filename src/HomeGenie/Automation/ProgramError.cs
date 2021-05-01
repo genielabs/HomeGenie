@@ -9,6 +9,8 @@ namespace HomeGenie.Automation
     {
         public int Line { get; set; }
         public int Column { get; set; }
+        public int EndLine { get; set; }
+        public int EndColumn { get; set; }
         public string ErrorMessage { get; set; }
         public string ErrorNumber { get; set; }
 
