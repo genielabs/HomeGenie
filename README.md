@@ -7,11 +7,11 @@
 
 - Integrated drivers for X10, Z-Wave and ZigBee<sup>\*</sup> <small>(<sup>\*</sup>coming soon)</small>, GPIO, SPI, I2C
 - Works 100% off-line without relaying on any external cloud service
-- Widgets designer and powerful scripting engine with fluent API supporting `csharp`, `javascript`, `python`
+- Powerful scripting engine with fluent API supporting `csharp` and `javascript`
 - Powerful scheduler supporting extended cron expressions (with variables, conditions and logical operators)
 - Voice and text message based control
 - Localization
-- Dashboards, groups, configuration backup, plugin repository and much more! 
+- Dashboards, groups, configuration backup, packages repository and much more! 
 
 ## Documentation
 

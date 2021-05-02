@@ -56,14 +56,6 @@
         <UpdateTime>2021-04-11T12:51:10.1496099Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Added</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1868526Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>142</Value>
         <Description />
@@ -161,14 +153,6 @@
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2021-04-11T12:51:10.148219Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Added</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1888619Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -301,22 +285,6 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2021-04-11T12:51:10.2884974Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Stopped</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.3948209Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Runtime.Error</Name>
-        <Value>CR: Object reference not set to an instance of an object.</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.3747196Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>

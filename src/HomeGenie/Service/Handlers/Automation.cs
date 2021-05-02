@@ -404,10 +404,11 @@ namespace HomeGenie.Service.Handlers
                     {
                         newProgram.Address = homegenie.ProgramManager.GeneratePid();
                         homegenie.ProgramManager.ProgramAdd(newProgram);
+                        currentProgram = newProgram;
                     }
                     else
                     {
-                        var typeChanged = !string.Equals(currentProgram.Type, newProgram.Type, StringComparison.CurrentCultureIgnoreCase);
+                        bool typeChanged = !string.Equals(currentProgram.Type, newProgram.Type, StringComparison.CurrentCultureIgnoreCase);
                         currentProgram.Type = newProgram.Type;
                         currentProgram.Group = newProgram.Group;
                         currentProgram.Name = newProgram.Name;
@@ -432,20 +433,23 @@ namespace HomeGenie.Service.Handlers
                             ""
                         );
                         //
-                        List<ProgramError> errors = homegenie.ProgramManager.ProgramCompile(currentProgram);
-                        //
+                        List<ProgramError> errors = homegenie.ProgramManager
+                            .ProgramCompile(currentProgram);
                         currentProgram.IsEnabled = newProgram.IsEnabled && errors.Count == 0;
                         currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
                         request.ResponseData = currentProgram.ScriptErrors;
                     }
-                    //
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Ok);
+                    }
                     homegenie.UpdateProgramsDatabase();
                     //
                     homegenie.modules_RefreshPrograms();
                     homegenie.modules_RefreshVirtualModules();
                     //homegenie.modules_Sort();
                     break;
-
+                
                 case "Programs.Arduino.FileLoad":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
                     sketchFile = migCommand.GetOption(1);

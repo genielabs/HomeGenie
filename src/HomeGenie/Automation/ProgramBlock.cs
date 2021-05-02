@@ -128,9 +128,6 @@ namespace HomeGenie.Automation
                         case "csharp":
                             programEngine = new CSharpEngine(this);
                             break;
-                        case "python":
-                            programEngine = new PythonEngine(this);
-                            break;
                         case "javascript":
                             programEngine = new JavascriptEngine(this);
                             break;

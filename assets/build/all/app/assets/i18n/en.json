@@ -41,6 +41,8 @@
   "modules": "Modules",
   "statistics": "Statistics",
   "options": "Options",
+  "scenes": "Scenes",
+  "applications": "Applications",
   "schedule": "Schedule",
   "scheduling_on": "Scheduling on {{date}}",
   "scheduling_no_occurrences": "No occurrences in the selected day.",
