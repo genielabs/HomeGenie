@@ -81,6 +81,7 @@ namespace HomeGenie.Automation
         public string Group { get; set; }
         public List<ProgramFeature> Features  { get; set; }
         public bool AutoRestartEnabled { get; set; }
+        public bool Cloneable { get; set; }
 
         [XmlIgnore]
         public bool WillRun { get; set; }
@@ -88,9 +89,6 @@ namespace HomeGenie.Automation
         public bool IsRunning { get; set; }
         [XmlIgnore]
         public object OperationLock = new object();
-
-        public DateTime? ActivationTime { get; set; }
-        public DateTime? TriggerTime { get; set; }
 
         public ProgramBlock()
         {
@@ -156,7 +154,6 @@ namespace HomeGenie.Automation
                     isProgramEnabled = value;
                     if (isProgramEnabled)
                     {
-                        ActivationTime = DateTime.UtcNow;
                         if (programEngine != null) programEngine.Load();
                     }
                     else

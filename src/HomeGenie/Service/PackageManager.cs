@@ -912,7 +912,10 @@ namespace HomeGenie.Service
                 newProgram = (ProgramBlock)serializer.Deserialize(reader);
             }
             newProgram.Address = newPid;
-            newProgram.Group = groupName;
+            if (!String.IsNullOrEmpty(groupName))
+            {
+                newProgram.Group = groupName;
+            }
             homegenie.ProgramManager.ProgramAdd(newProgram);
 
             newProgram.IsEnabled = false;

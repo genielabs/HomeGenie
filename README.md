@@ -81,7 +81,7 @@ cd src/HomeGenie.Net461/bin/Debug
 ./HomeGenie.exe # (or 'mono HomeGene.exe')
 ```
 
-### Integrated Development Enviroment
+### Integrated Development Environment
 
 [JetBrains Rider](https://www.jetbrains.com/rider/) is the official IDE employed for developing this project.
 

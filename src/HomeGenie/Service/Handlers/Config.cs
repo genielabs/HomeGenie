@@ -464,6 +464,9 @@ namespace HomeGenie.Service.Handlers
                             csvlog = sr.ReadToEnd();
                         }
                     }
+                    (request.Context.Data as HttpListenerContext).Response.AddHeader(
+                        "Content-Type", "application/octet-stream; charset=utf-8"
+                    );
                     (request.Context.Data as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment;filename=homegenie_log_" + migCommand.GetOption(1) + ".csv");
                     request.ResponseData = csvlog;
                 }
@@ -614,6 +617,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationBackup")
                 {
+                    // TODO: deprecate 'redirect', implement as response stream with content-disposition 'attachment'
                     homegenie.BackupManager.BackupConfiguration("html/homegenie_backup_config.zip");
                     (request.Context.Data as HttpListenerContext).Response.Redirect("/hg/html/homegenie_backup_config.zip?" + DateTime.UtcNow.Ticks);
                     request.Handled = true;
@@ -1447,6 +1451,9 @@ namespace HomeGenie.Service.Handlers
                     Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, widgetParts[2] + ".js"), Path.Combine(outputPath, widgetParts[2] + ".js"));
                     //
                     byte[] bundleData = File.ReadAllBytes(widgetBundle);
+                    (request.Context.Data as HttpListenerContext).Response.AddHeader(
+                        "Content-Type", "application/octet-stream; charset=utf-8"
+                    );
                     (request.Context.Data as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment; filename=\"" + widgetPath.Replace('/', '_') + ".zip\"");
                     (request.Context.Data as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
                 }

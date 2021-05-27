@@ -80,8 +80,6 @@ namespace HomeGenie.Automation.Engines
         public void Unload()
         {
             Reset();
-            ProgramBlock.ActivationTime = null;
-            ProgramBlock.TriggerTime = null;
             if (_programDomain == null) return;
             // Unloading program app domain...
             try

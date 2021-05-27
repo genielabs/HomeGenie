@@ -149,7 +149,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.Components, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.Components.2.4.3\lib\net40\Raspberry.IO.Components.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.Components.2.4.4\lib\net40\Raspberry.IO.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.GeneralPurpose, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
@@ -220,6 +220,10 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -227,6 +231,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="Ude, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\UDE.CSharp.1.1.0\lib\Ude.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UnitsNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f8601875a1f041da">
+      <HintPath>..\..\packages\UnitsNet.4.89.1\lib\net40\UnitsNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="UPnP, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

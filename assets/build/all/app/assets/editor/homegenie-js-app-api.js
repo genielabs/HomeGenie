@@ -1,7 +1,6 @@
 const $$ = new ProgramApi();
 
 class ProgramApi {
-  get boundModules(): ModulesManager;
   /**
    * Modules Helper.
    */
@@ -355,7 +354,7 @@ class SerialPortHelper {
    * @param parity Parity.
    *
    */
-  Connect(baudRate, stopBits, parity): boolean;
+  connect(baudRate, stopBits, parity): boolean;
 
   /**Disconnects the serial port. */
   disconnect(): SerialPortHelper;

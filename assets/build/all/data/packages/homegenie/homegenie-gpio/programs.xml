@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup />
+    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+#using Raspberry.IO.Components.Sensors.Temperature.Dht
+
+var measurePin = ConnectorPin.P1Pin16; // GPIO#23
+var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+  
+// it makes program to respond to webservices calls:
+// - http://&lt;hg_address&gt;/api/Components.DHT11/0/Sensor.Temperature
+When.WebServiceCallReceived("Components.DHT11/0/Sensor.Temperature", ( args ) =&gt; {
+  return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+});
+// - http://&lt;hg_address&gt;/api/Components.DHT11/0/Sensor.Humidity
+When.WebServiceCallReceived("Components.DHT11/0/Sensor.Humidity", ( args ) =&gt; {
+  return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
+});
+
+while (Program.IsEnabled)
+{
+  using (var pin = driver.InOut(measurePin))
+    using (var dhtConnection = new Dht11Connection(pin))
+  {
+    var data = dhtConnection.GetData();
+    if (data != null)
+    {
+      // data read succesfully
+      Program.RaiseEvent("Sensor.Humidity", data.RelativeHumidity.Percent.ToString(CultureInfo.InvariantCulture), "DHT-11 Sensor");
+      Program.RaiseEvent("Sensor.Temperature", data.Temperature.DegreesCelsius.ToString(CultureInfo.InvariantCulture), "DHT-11 Sensor");
+    }
+  }
+
+  var pause = Program.Option("UpdateInterval").DecimalValue;
+  if (pause == 0) pause = 600; // default pause is 10 minutes
+  Pause(pause);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-gpio</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>dht-11-sensor</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>3793CA0113B794738B6B04F77113941C</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>70</Address>
+    <Name>DHT-11 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-11 with data pin on GPIO#23. 
+Edit program code line #1 to change the data pin GPIO.
+See example video at http://homegenie.it/docs/diy/eden.php .</Description>
+    <Group>Raspberry Pi</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup />
+    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+#using Raspberry.IO.Components.Sensors.Temperature.Dht
+
+var measurePin = ConnectorPin.P1Pin7; // GPIO#4
+var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
+// it makes program to respond to webservices calls:
+// - http://&lt;hg_address&gt;/api/Components.DHT22/0/Sensor.Temperature
+When.WebServiceCallReceived("Components.DHT22/0/Sensor.Temperature", ( args ) =&gt; {
+  return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+});
+// - http://&lt;hg_address&gt;/api/Components.DHT22/0/Sensor.Humidity
+When.WebServiceCallReceived("Components.DHT22/0/Sensor.Humidity", ( args ) =&gt; {
+  return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
+});
+
+while (Program.IsEnabled)
+{
+  using (var pin = driver.InOut(measurePin))
+    using (var dhtConnection = new Dht22Connection(pin))
+  {
+    var data = dhtConnection.GetData();
+    if (data != null)
+    {
+      // data read succesfully
+      Program.RaiseEvent("Sensor.Humidity", data.RelativeHumidity.Percent.ToString(CultureInfo.InvariantCulture), "DHT-22 Sensor");
+      Program.RaiseEvent("Sensor.Temperature", data.Temperature.DegreesCelsius.ToString(CultureInfo.InvariantCulture), "DHT-22 Sensor");
+    }
+  }
+
+  var pause = Program.Option("UpdateInterval").DecimalValue;
+  if (pause == 0) pause = 600; // default pause is 10 minutes
+  Pause(pause);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-gpio</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>dht-22-sensor</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>43D058923BC1CFF5800513FAF3A97CF4</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>63</Address>
+    <Name>DHT-22 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
+Edit program code line #1 to change the data pin GPIO.
+</Description>
+    <Group>Raspberry Pi</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup />
+    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+
+var moduleDomain = "RaspberryPi.Gpio";
+
+var pinMapping = new List&lt;dynamic&gt;();
+// read GPIO configuration
+var gpio4  = Program.Option("GPIO4").Value.ToLower();
+var gpio17 = Program.Option("GPIO17").Value.ToLower();
+var gpio18 = Program.Option("GPIO18").Value.ToLower();
+var gpio21 = Program.Option("GPIO21").Value.ToLower();
+var gpio22 = Program.Option("GPIO22").Value.ToLower();
+var gpio23 = Program.Option("GPIO23").Value.ToLower();
+var gpio24 = Program.Option("GPIO24").Value.ToLower();
+var gpio25 = Program.Option("GPIO25").Value.ToLower();
+
+// add configured GPIOs to a list that will be used to configure the connection
+if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio4.StartsWith("!") });
+if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio17.StartsWith("!") });
+if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio18.StartsWith("!") });
+if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio21.StartsWith("!") });
+if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio22.StartsWith("!") });
+if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio23.StartsWith("!") });
+if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio24.StartsWith("!") });
+if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio25.StartsWith("!") });
+
+// Setup the connection to the GPIOs
+var configuration = new PinConfiguration[pinMapping.Count];
+for (int p = 0; p &lt; pinMapping.Count; p++)
+{
+  var pc = pinMapping[p];
+  if (pc.Direction == PinDirection.Input)
+  {
+    configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+    if (pc.Config.EndsWith("+"))
+    {
+      ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
+    }
+    else if (pc.Config.EndsWith("-"))
+    {
+      ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
+    }
+    Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
+  }
+  else
+  {
+    configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+    ((OutputPinConfiguration)configuration[p]).Reversed = pc.Reversed;
+    Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+  }
+  configuration[p].Name = pc.Address;
+}
+
+// Allocate GPIO connection and listen for events coming from GPIO pins
+GpioConnection connection = null;
+try
+{
+  connection = new GpioConnection(configuration);
+}
+catch 
+{
+  Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
+  Pause(10);
+  return;
+}
+
+var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
+  var address = args.Configuration.Name;
+  var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+  module.RaiseEvent("Status.Level", 
+                     args.Enabled == !args.Configuration.Reversed ? "1" : "0",
+                     address);
+
+});
+connection.PinStatusChanged += pinChanged;
+
+When.ProgramStopping(()=&gt;{
+  connection.PinStatusChanged -= pinChanged;
+  ((IDisposable)connection).Dispose();
+  return true;
+});
+
+// read and store current pins status
+for (int p = 0; p &lt; pinMapping.Count; p++)
+{
+  var pc = pinMapping[p];
+  var address = pc.Address;
+  var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+  module.Parameter("Status.Level").Value = (connection[address] == !pc.Reversed ? "1" : "0");
+}
+
+// implement web serice API Control.On, Control.Off, Control.Toggle 
+// for the domain RaspberryPi.GPIO
+When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; {
+  string[] reqs = ((string)args).Split('/');
+  var errorMessage = "";
+  try
+  {
+    string address = reqs[1];
+    string command = reqs[2];
+    //
+    switch(command)
+    {
+      // eg. http://hg_address/api/RaspberryPi.GPIO/1/Control.On
+      case "Control.On":
+      connection[address] = true;
+      break;
+      // eg. http://hg_address/api/RaspberryPi.GPIO/3/Control.Off
+      case "Control.Off":
+      connection[address] = false;
+      break;
+      // eg. http://hg_address/api/RaspberryPi.GPIO/9/Control.Toggle
+      case "Control.Toggle":
+      connection.Toggle(address);
+      break;
+    }
+    //
+    return "{ 'ResponseValue' : 'OK' }";    
+  } 
+  catch (Exception ex) 
+  { 
+    errorMessage = ex.Message + " " + ex.StackTrace;
+  }
+  // unable to process request
+  return "{ 'ResponseValue' : 'ERROR " + errorMessage + "' }";
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-gpio</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>gpio-modules</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>E06CA8A7C9CF7D3823D5B27642D2F4EF</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>100</Address>
+    <Name>GPIO Modules</Name>
+    <Description>Raspberry Pi GPIO mapped to HG modules.
+Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
+Use IN+ to activate the internal PullUp resistor or IN- to activate the internal PullDown resistor.
+Use !OUT or !IN to Reverse the pin level On = 0 and Off = 1.
+GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
+GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
+</Description>
+    <Group>Raspberry Pi</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.AddOption("LedsCount", "1", "Number of chained RGB leds", "text");
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+#using Raspberry.IO.Components.Leds.GroveRgb
+
+// Domain
+string appDomain = "HomeAutomation.GroveRGB";
+// Params
+int ledsCount = (int)Program.Option("LedsCount").DecimalValue;
+// Grove RGB modules
+var rgbModules = Modules.InDomain(appDomain);
+// Grove RGB Led GPIO settings
+//var driver = new FileGpioConnectionDriver();
+var driver = new GpioConnectionDriver();
+var gpioOut1 = new GpioOutputBinaryPin(driver, ConnectorPin.P1Pin13.ToProcessor());
+var gpioOut2 = new GpioOutputBinaryPin(driver, ConnectorPin.P1Pin07.ToProcessor());
+var groveRgb = new GroveRgbConnection(gpioOut1, gpioOut2, ledsCount);
+// Allocate virtual modules for this app
+Program.AddVirtualModules(appDomain, "Dimmer", "homegenie/generic/colorlight", 1, ledsCount);
+// Default delay
+double defaultDelay = 500;
+
+// State object
+var timings = new dynamic[ledsCount];
+
+var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
+  dynamic color = new ExpandoObject();
+  string[] parts = hsb.Split(',');
+  color.H = double.Parse(parts[0] != "" ? parts[0] : "1", CultureInfo.InvariantCulture);
+  color.S = double.Parse(parts.Length &gt; 1 &amp;&amp; parts[1] != "" ? parts[1] : "0", CultureInfo.InvariantCulture);
+  color.B = double.Parse(parts.Length &gt; 2 &amp;&amp; parts[2] != "" ? parts[2] : "1", CultureInfo.InvariantCulture);
+  return color;
+});
+
+var GetValueAt = new Func&lt;double,double,double,double,double&gt;((from, to, duration, offset)=&gt;{
+  double range = (to-from);
+  return from+(range/duration*offset);
+});
+
+var updateLeds = new Func&lt;bool&gt;(()=&gt;{
+  bool iterateNext;
+  while(Program.IsRunning) {
+    do {
+      iterateNext = false;
+      for(int lednumber = 0; lednumber &lt; ledsCount; lednumber++) {
+	  	lock (timings[lednumber]) {
+          var item = timings[lednumber];
+          if (item == null || item.timeEnd == null) continue;
+          var timeSpan = new TimeSpan(item.timeEnd.Ticks-DateTime.Now.Ticks);
+          if (timeSpan.TotalMilliseconds &gt; 0 &amp;&amp; timeSpan.TotalMilliseconds &lt;= item.duration) {
+            var h = GetValueAt(item.currentColor.H, item.color.H, item.duration, item.duration-timeSpan.TotalMilliseconds);
+            var s = GetValueAt(item.currentColor.S, item.color.S, item.duration, item.duration-timeSpan.TotalMilliseconds);
+            var v = GetValueAt(item.currentColor.B, item.color.B, item.duration, item.duration-timeSpan.TotalMilliseconds);
+            var t = new Thread(()=&gt;{
+              groveRgb.SetColor(lednumber, RgbColor.FromHsv(h, s, v));
+            });
+            t.Start();
+            if (!t.Join(3500)) {
+              Program.Notify("Grove RGB ERROR:A", "I/O error");
+              t.Abort();
+            }
+            iterateNext = true;
+            //groveRgb.SetColor(lednumber, RgbColor.FromHsv(h, s, v));
+            //iterateNext = true;
+          } else if (timeSpan.TotalMilliseconds &lt;= 0) {
+            var t = new Thread(()=&gt;{
+              groveRgb.SetColor(lednumber, RgbColor.FromHsv(item.color.H, item.color.S, item.color.B));
+            });
+            t.Start();
+            if (!t.Join(3500)) {
+              Program.Notify("Grove RGB ERROR:A", "I/O error\n"+Math.Round(item.color.H, 5));
+              t.Abort();
+            } else item.timeEnd = null;
+            //groveRgb.SetColor(lednumber, RgbColor.FromHsv(item.color.H, item.color.S, item.color.B));
+          }
+  		}
+      }
+    } while (iterateNext &amp;&amp; Program.IsRunning);
+    Pause(0.200);
+  }
+  return true;
+});
+
+var setColor = new Func&lt;int,dynamic,double,bool&gt;((lednumber, color, duration)=&gt;{
+  lock (timings[lednumber]) {
+    var item = timings[lednumber];
+    item.currentColor = GetHsb(item.module.Parameter("Status.ColorHsb").Value);
+    if (item.module.Level == 0) {
+      item.currentColor.H = 0;
+      item.currentColor.S = 1;
+      item.currentColor.B = 0;
+    }
+    item.color = color;
+    item.duration = duration;
+    item.timeEnd = DateTime.Now.AddMilliseconds(duration);
+  }
+  return true;
+});
+
+// Initialize modules
+for(int x = 0; x &lt; ledsCount; x++)
+{
+  var module = rgbModules.WithAddress((x+1).ToString()).Get();
+  if (module.Parameter("Status.ColorHsb").Value == "")
+  {
+    module.Parameter("Status.ColorHsb").Value = "1,0,1";
+  }
+  var currentColor = GetHsb(module.Parameter("Status.ColorHsb").Value);
+  if (module.Parameter("Status.Level").DecimalValue == 0)
+  {
+    currentColor.B = 0d;
+  }
+  var item = timings[x] = new ExpandoObject();
+  item.module = rgbModules.WithAddress((x+1).ToString()).Get();
+  setColor(x, currentColor, defaultDelay);
+}
+
+// Release GPIO driver if app is being stopped
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)groveRgb).Dispose();
+  return true;
+});
+
+// API calls handling
+When.WebServiceCallReceived(appDomain, (args) =&gt; {
+  try
+  {
+    var apiCall = Program.ParseApiCall(args.ToString());
+    string lightnumber = apiCall.Address;
+    var module = rgbModules.WithAddress(lightnumber).Get();
+    int lightId = int.Parse(lightnumber) - 1;
+    var currentColor = GetHsb(module.Parameter("Status.ColorHsb").Value);
+    switch(apiCall.Command)
+    {
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.GroveRGB/&lt;light_number&gt;/Control.On
+      case "Control.On":
+        setColor(lightId, currentColor, defaultDelay);
+        module.RaiseEvent("Status.Level", currentColor.B.ToString(), "Groove RGB Led");
+        module.RaiseEvent("Status.ColorHsb", module.Parameter("Status.ColorHsb").Value, "Color Light");
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.GroveRGB/&lt;light_number&gt;/Control.Off
+      case "Control.Off":
+        currentColor.B = 0d;
+        setColor(lightId, currentColor, defaultDelay);
+        module.RaiseEvent("Status.Level", "0", "Groove RGB Led");
+        break;
+      case "Control.Toggle":
+        if (module.Parameter("Status.Level").DecimalValue == 0)
+        {
+          setColor(lightId, currentColor, 0);
+          module.RaiseEvent("Status.Level", currentColor.B.ToString(), "Groove RGB Led");
+          module.RaiseEvent("Status.ColorHsb", module.Parameter("Status.ColorHsb").Value, "Color Light");
+        }
+        else
+        {
+          currentColor.B = 0d;
+          setColor(lightId, currentColor, defaultDelay);
+          module.RaiseEvent("Status.Level", "0", "Groove RGB Led");
+        }
+        break;
+      case "Control.Level":
+        double level = (double.Parse(apiCall.GetOption(0)) / 100D);
+        currentColor.B = level;
+        setColor(lightId, currentColor, defaultDelay);
+        module.RaiseEvent("Status.Level", level.ToString(), "Groove RGB Led");
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.GroveRGB/&lt;led_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+      case "Control.ColorHsb":
+        string[] values = apiCall.GetOption(0).Split(',');
+        double transition = defaultDelay;
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 1000)); 
+        var color = GetHsb(apiCall.GetOption(0));
+        setColor(lightId, color, transition);
+        module.RaiseEvent("Status.Level", color.B.ToString(), "Groove RGB Led");
+        module.RaiseEvent("Status.ColorHsb", apiCall.GetOption(0), "Color Light");
+        break; 
+    }
+    return new ResponseText("OK "+module.Parameter("Status.ColorHsb").Value+"  --  "+currentColor.H);
+    //return timings;
+  } 
+  catch (Exception e) 
+  { 
+    Program.Notify("Grove RGB ERROR:2", e.Message);
+  }
+  return new ResponseText("ERROR");
+}); 
+
+// Start leds driver thread
+updateLeds();
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-gpio</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>grove-chainable-rgb-led</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>D8E04976081AC5A43A0227DF2D583101</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>1000</Address>
+    <Name>Grove - Chainable RGB Led</Name>
+    <Description>Chainable RGB color leds modules wired to GPIO#4 and GPIO#21/27 (power with 3v3).
+http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
+    <Group>Raspberry Pi</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

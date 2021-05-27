@@ -264,14 +264,15 @@ namespace HomeGenie.Service.Handlers
                 case "Programs.Import":
                     string archiveName = "homegenie_program_import.hgx";
                     if (File.Exists(archiveName))
+                    {
                         File.Delete(archiveName);
-                    //
-                    MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveName);
+                    }
+                    MIG.Gateways.WebServiceUtility
+                        .SaveFile(request.RequestData, archiveName);
                     int newPid = homegenie.ProgramManager.GeneratePid();
                     newProgram = homegenie.PackageManager.ProgramImport(newPid, archiveName, migCommand.GetOption(0));
                     homegenie.UpdateProgramsDatabase();
-                    //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
-                    request.ResponseData = newProgram.Address.ToString();
+                    request.ResponseData = new ResponseText(newProgram.Address.ToString());
                     break;
 
                 case "Programs.Export":
@@ -286,6 +287,10 @@ namespace HomeGenie.Service.Handlers
                     var writer = System.Xml.XmlWriter.Create(builder, writerSettings);
                     programSerializer.Serialize(writer, currentProgram);
                     writer.Close();
+                    //
+                    (request.Context.Data as HttpListenerContext).Response.AddHeader(
+                        "Content-Type", "application/octet-stream; charset=utf-8"
+                    );
                     //
                     if (currentProgram.Type.ToLower() == "arduino")
                     {
@@ -365,11 +370,20 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Add":
-                    newProgram = new ProgramBlock() {
-                        Group = migCommand.GetOption(0),
-                        Name = streamContent,
-                        Type = "Wizard"
-                    };
+                    try
+                    {
+                        // This works with HG > 1.4.x 
+                        newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
+                    }
+                    catch (Exception e)
+                    {
+                        // this is for backward compatibility with HG v1.3.x
+                        newProgram = new ProgramBlock() {
+                            Group = migCommand.GetOption(0),
+                            Name = streamContent,
+                            Type = "CSharp"
+                        };
+                    }
                     newProgram.Address = homegenie.ProgramManager.GeneratePid();
                     homegenie.ProgramManager.ProgramAdd(newProgram);
                     homegenie.UpdateProgramsDatabase();
@@ -377,7 +391,8 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Clone":
-                    var copy = homegenie.ProgramManager.ProgramClone(int.Parse(migCommand.GetOption(0)));
+                    var copy = homegenie.ProgramManager
+                        .ProgramClone(int.Parse(migCommand.GetOption(0)), migCommand.GetOption(1));
                     homegenie.UpdateProgramsDatabase();
                     request.ResponseData = new ResponseText(copy.Address.ToString());
                     break;
@@ -414,8 +429,11 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.Name = newProgram.Name;
                         currentProgram.Description = newProgram.Description;
                         currentProgram.AutoRestartEnabled = newProgram.AutoRestartEnabled;
+                        currentProgram.Cloneable = newProgram.Cloneable;
                         if (typeChanged)
+                        {
                             currentProgram.Engine.SetHost(homegenie);
+                        }
                         currentProgram.IsEnabled = newProgram.IsEnabled;
                         currentProgram.ScriptSetup = newProgram.ScriptSetup;
                         currentProgram.ScriptSource = newProgram.ScriptSource;

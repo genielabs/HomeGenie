@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Module>
+    <Name>DHT-22 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
+Edit program code line #1 to change the data pin GPIO.
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>63</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:16:38.2616333Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-04T00:55:26.494094Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>63</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:22:38.4370676Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-04T00:49:24.6588297Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>GPIO Modules</Name>
+    <Description>Raspberry Pi GPIO mapped to HG modules.
+Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
+Use IN+ to activate the internal PullUp resistor or IN- to activate the internal PullDown resistor.
+Use !OUT or !IN to Reverse the pin level On = 0 and Off = 1.
+GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
+GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>100</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:16:38.2115563Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-03T23:11:18.7192766Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>100</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:22:38.437323Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-03T23:07:34.0723366Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Grove - Chainable RGB Led</Name>
+    <Description>Chainable RGB color leds modules wired to GPIO#4 and GPIO#21/27 (power with 3v3).
+http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>1000</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.LedsCount</Name>
+        <Value>1</Value>
+        <Description>Number of chained RGB leds</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:16:37.1127928Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Added</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:16:38.2471999Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-03T23:39:44.9192346Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>1000</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-09T21:22:38.4376671Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-05-03T23:38:31.3715055Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+</ArrayOfModule>

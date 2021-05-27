@@ -65,7 +65,6 @@ namespace HomeGenie.Automation.Engines
             "System.Device.I2c",
             "Iot.Device",
             "Iot.Device.Common",
-            "UnitsNet",
 #endif
             "Newtonsoft.Json",
             "Newtonsoft.Json.Linq",
@@ -112,6 +111,7 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.InterIntegratedCircuit",
             "Raspberry.IO.SerialPeripheralInterface",
 #endif
+            "UnitsNet", // used both by Raspberry.IO and Microsoft.IoT 
             "Utility = HomeGenie.Service.Utility"
         };
 
@@ -359,6 +359,7 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.SerialPeripheralInterface.dll");
             compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
+            compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
 
             compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.Geometry.Angle.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.SolarCalculator.dll"));

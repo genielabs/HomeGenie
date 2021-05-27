@@ -121,8 +121,6 @@ namespace HomeGenie.Automation.Engines
             ProgramBlock.IsRunning = true;
             HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Running");
 
-            ProgramBlock.TriggerTime = DateTime.UtcNow;
-
             _programThread = new Thread(() =>
             {
                 try
@@ -297,7 +295,7 @@ namespace HomeGenie.Automation.Engines
                         ProgramBlock.Address);
                     //throw;
                 }
-                // the startup code is not evaluated while the program is running
+                // the setup code is not evaluated while the program is running the main code
                 if (ProgramBlock.IsRunning || !ProgramBlock.IsEnabled || !HomeGenie.ProgramManager.Enabled)
                 {
                     continue;
@@ -334,10 +332,10 @@ namespace HomeGenie.Automation.Engines
         private bool WillProgramRun()
         {
             bool isConditionSatisfied = false;
-            // evaluate and get result from the code
-            lock (ProgramBlock.OperationLock)
+            // evaluate and get result from the setup code
+            try
             {
-                try
+                lock (ProgramBlock.OperationLock)
                 {
                     ProgramBlock.WillRun = false;
                     //
@@ -348,7 +346,7 @@ namespace HomeGenie.Automation.Engines
                         // so user can notice and fix it
                         var error = new List<ProgramError> {GetFormattedError(result.Exception, true)};
                         ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        _log.Error(result.Exception, "Error while evaluating condition in program {0}",
+                        _log.Error(result.Exception, "Error while running setup code in program {0}",
                             ProgramBlock.Address);
                         HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
                             PrepareExceptionMessage(CodeBlockEnum.TC, result.Exception));
@@ -360,17 +358,17 @@ namespace HomeGenie.Automation.Engines
                         isConditionSatisfied = (result != null ? (bool) result.ReturnValue : false);
                     }
                 }
-                catch (Exception ex)
-                {
-                    // a runtime error occured
-                    if (ex.GetType() == typeof(TargetException) || ex is ThreadAbortException || ex is ThreadInterruptedException)
-                        return isConditionSatisfied && ProgramBlock.IsEnabled;
-                    List<ProgramError> error = new List<ProgramError>() {GetFormattedError(ex, true)};
-                    ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                    HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
-                        PrepareExceptionMessage(CodeBlockEnum.TC, ex));
-                    TryToAutoRestart();
-                }
+            }
+            catch (Exception ex)
+            {
+                // a runtime error occured
+                if (ex.GetType() == typeof(TargetException) || ex is ThreadAbortException || ex is ThreadInterruptedException)
+                    return isConditionSatisfied && ProgramBlock.IsEnabled;
+                List<ProgramError> error = new List<ProgramError>() {GetFormattedError(ex, true)};
+                ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                    PrepareExceptionMessage(CodeBlockEnum.TC, ex));
+                TryToAutoRestart();
             }
 
             return isConditionSatisfied && ProgramBlock.IsEnabled;
