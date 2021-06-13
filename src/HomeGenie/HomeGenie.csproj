@@ -69,10 +69,10 @@
     <PackageReference Include="MIG.HomeAutomation" Version="1.1.7" />
     <PackageReference Include="MIG.Protocols" Version="1.1.9" />
 
-    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.4" />
-    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.3" />
-    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.3" />
-    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.3" />
+    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.5" />
+    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.4" />
+    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.4" />
+    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.4" />
     <PackageReference Include="HG.Raspberry.System" Version="2.1.1" />
 
     <PackageReference Include="NUnit" Version="3.13.1" />

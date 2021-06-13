@@ -1,5 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfModule xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Module>
+    <Name>DHT-11 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-11 with data pin on GPIO#23. 
+Edit program code line #1 to change the data pin GPIO.
+See example video at http://homegenie.it/docs/diy/eden.php .</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>70</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.UpdateInterval</Name>
+        <Value>600</Value>
+        <Description>Update Interval (seconds)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>70</ParentId>
+        <UpdateTime>2021-06-08T08:49:02.935623Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Disabled</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-06-08T08:49:03.023763Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>70</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-06-08T08:50:43.865758Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2021-06-08T08:49:02.935584Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
   <Module>
     <Name>DHT-22 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
@@ -10,20 +54,20 @@ Edit program code line #1 to change the data pin GPIO.
     <Address>63</Address>
     <Properties>
       <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Added</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:16:38.2616333Z</UpdateTime>
+        <Name>ConfigureOptions.UpdateInterval</Name>
+        <Value>600</Value>
+        <Description>Update Interval (seconds)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>63</ParentId>
+        <UpdateTime>2021-06-08T08:46:10.611756Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Runtime.Error</Name>
-        <Value />
+        <Name>Program.Status</Name>
+        <Value>Disabled</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-04T00:55:26.494094Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:46:10.779764Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -31,15 +75,15 @@ Edit program code line #1 to change the data pin GPIO.
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:22:38.4370676Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:50:43.865509Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
-        <Value />
+        <Value>homegenie/generic/sensor</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-04T00:49:24.6588297Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:46:10.611569Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -58,12 +102,76 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
     <Address>100</Address>
     <Properties>
       <ModuleParameter>
+        <Name>ConfigureOptions.GPIO17</Name>
+        <Value>OFF</Value>
+        <Description>GPIO17 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:07.576159Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO18</Name>
+        <Value>OFF</Value>
+        <Description>GPIO18 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:07.57617Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO21</Name>
+        <Value>OFF</Value>
+        <Description>GPIO21 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:28.303776Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO22</Name>
+        <Value>OFF</Value>
+        <Description>GPIO22 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:28.334111Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO23</Name>
+        <Value>OFF</Value>
+        <Description>GPIO23 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:28.361273Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO24</Name>
+        <Value>OFF</Value>
+        <Description>GPIO24 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:28.373059Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO25</Name>
+        <Value>OFF</Value>
+        <Description>GPIO25 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:35:28.385209Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO4</Name>
+        <Value>OFF</Value>
+        <Description>GPIO04 (IN, OUT or OFF)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>100</ParentId>
+        <UpdateTime>2021-06-08T08:37:10.074456Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Added</Value>
+        <Value>Disabled</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:16:38.2115563Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:44:04.119533Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -71,7 +179,7 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-03T23:11:18.7192766Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:37:21.090145Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -79,7 +187,7 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:22:38.437323Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:50:43.865593Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -98,39 +206,31 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
 http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1000</Address>
+    <Address>62</Address>
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.LedsCount</Name>
         <Value>1</Value>
         <Description>Number of chained RGB leds</Description>
         <FieldType>text</FieldType>
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:16:37.1127928Z</UpdateTime>
+        <ParentId>62</ParentId>
+        <UpdateTime>2021-06-08T08:34:46.921701Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Added</Value>
+        <Value>Disabled</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:16:38.2471999Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Runtime.Error</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2021-05-03T23:39:44.9192346Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:50:43.867422Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
-        <Value>1000</Value>
+        <Value>62</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-05-09T21:22:38.4376671Z</UpdateTime>
+        <UpdateTime>2021-06-08T08:50:43.865688Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

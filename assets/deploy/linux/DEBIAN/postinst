@@ -27,15 +27,15 @@ sudo chown -R $HG_USER:$HG_USER $HOME_FOLDER
 sudo update-rc.d -f homegenie defaults
 
 # start homegenie service
-sudo rm -f /usr/local/bin/homegenie/serviceaddress.txt
+sudo rm -f $HOME_FOLDER/serviceaddress.txt
 sudo /etc/init.d/homegenie start
 
 # wait for homegenie service to come up
 sleep 1
-while [ ! -f /usr/local/bin/homegenie/serviceaddress.txt ]; do sleep 1; echo "."; done
+while [ ! -f $HOME_FOLDER/serviceaddress.txt ]; do sleep 1; echo "."; done
 sleep 1
 echo "HomeGenie service successfully installed."
-while read LINE; do export "$LINE"; done < /usr/local/bin/homegenie/serviceaddress.txt
+while read LINE; do export "$LINE"; done < $HOME_FOLDER/serviceaddress.txt
 if [ "$HG_SERVICE_HOST" = "+" ]; then
     HG_SERVICE_HOST="localhost";
 fi

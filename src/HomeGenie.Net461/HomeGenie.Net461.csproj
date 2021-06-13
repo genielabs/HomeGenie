@@ -145,27 +145,27 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.3\lib\net40\Raspberry.IO.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.4\lib\net40\Raspberry.IO.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.Components, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.Components.2.4.4\lib\net40\Raspberry.IO.Components.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.Components.2.4.5\lib\net40\Raspberry.IO.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.GeneralPurpose, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.3\lib\net40\Raspberry.IO.GeneralPurpose.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.4\lib\net40\Raspberry.IO.GeneralPurpose.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.InterIntegratedCircuit, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.InterIntegratedCircuit.2.4.3\lib\net40\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.InterIntegratedCircuit.2.4.4\lib\net40\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.Interop, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.3\lib\net40\Raspberry.IO.Interop.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.4\lib\net40\Raspberry.IO.Interop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.SerialPeripheralInterface, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.SerialPeripheralInterface.2.4.3\lib\net40\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.SerialPeripheralInterface.2.4.4\lib\net40\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.System, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">

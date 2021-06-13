@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
-    <ScriptSetup />
+    <ScriptSetup>// set the widget that will display this program data (temperature, humidity).
+Program.Setup(() =&gt; {
+    Program
+        .UseWidget("homegenie/generic/sensor")
+        .AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
+});
+Program.Run();
+</ScriptSetup>
     <ScriptSource>#using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Sensors.Temperature.Dht
 
@@ -50,7 +57,7 @@ while (Program.IsEnabled)
       <Id>dht-11-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>3793CA0113B794738B6B04F77113941C</Checksum>
+      <Checksum>4A468BCC51E69F135E34DB064A915A09</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>70</Address>
@@ -61,11 +68,19 @@ See example video at http://homegenie.it/docs/diy/eden.php .</Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup />
+    <ScriptSetup>// set the widget that will display this program data (temperature,humidity).
+Program.Setup(()=&gt;{
+    Program
+        .UseWidget("homegenie/generic/sensor")
+        .AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
+});
+Program.Run();
+</ScriptSetup>
     <ScriptSource>#using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Sensors.Temperature.Dht
 
@@ -114,7 +129,7 @@ while (Program.IsEnabled)
       <Id>dht-22-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>43D058923BC1CFF5800513FAF3A97CF4</Checksum>
+      <Checksum>FE052530BA3F380C53F8E1D0BC61DC2F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>63</Address>
@@ -125,11 +140,23 @@ Edit program code line #1 to change the data pin GPIO.
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup />
+    <ScriptSetup>Program.Setup(() =&gt; {
+    Program.AddOption("GPIO4",  "OUT", "GPIO04 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO17", "OFF", "GPIO17 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO18", "OFF", "GPIO18 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO21", "OUT", "GPIO21 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO22", "OUT", "GPIO22 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO23", "OUT", "GPIO23 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO24", "OUT", "GPIO24 (IN, OUT or OFF)", "text")
+        .AddOption("GPIO25", "OUT", "GPIO25 (IN, OUT or OFF)", "text");
+});
+Program.Run();
+</ScriptSetup>
     <ScriptSource>#using Raspberry.IO.GeneralPurpose
 
 var moduleDomain = "RaspberryPi.Gpio";
@@ -265,7 +292,7 @@ Program.GoBackground();</ScriptSource>
       <Id>gpio-modules</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>E06CA8A7C9CF7D3823D5B27642D2F4EF</Checksum>
+      <Checksum>89AF870E241C0034DA1AB7033F575C39</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>100</Address>
@@ -280,11 +307,14 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.AddOption("LedsCount", "1", "Number of chained RGB leds", "text");
+    <ScriptSetup>Program.Setup(() =&gt; {
+    Program.AddOption("LedsCount", "1", "Number of chained RGB leds", "text");
+});
 Program.Run();
 </ScriptSetup>
     <ScriptSource>#using Raspberry.IO.GeneralPurpose
@@ -483,16 +513,17 @@ updateLeds();
       <Id>grove-chainable-rgb-led</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>D8E04976081AC5A43A0227DF2D583101</Checksum>
+      <Checksum>7B9697EDAEC1E7F367ABE4A9B45F3E5B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1000</Address>
+    <Address>62</Address>
     <Name>Grove - Chainable RGB Led</Name>
     <Description>Chainable RGB color leds modules wired to GPIO#4 and GPIO#21/27 (power with 3v3).
 http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
