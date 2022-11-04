@@ -13,15 +13,9 @@
     <Company>G-Labs</Company>
     <AssemblyVersion>1.4.0</AssemblyVersion>
     <FileVersion>1.4.0</FileVersion>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RuntimeIdentifiers>win8-arm;linux-arm;win10-x64;osx.10.11-x64;linux-x64</RuntimeIdentifiers>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-<!--
-  <Target Name="TestTarget" AfterTargets="Build">
-    <Message Importance="High" Text="POST BUILD" />
-    <Exec Command="dotnet $(OutputPath)\HomeGenie.dll - -post-build" />
-  </Target>
-  -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
     <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
     <PackageReference Include="System.Core" Version="3.5.21022.801" />
@@ -54,7 +48,7 @@
     <PackageReference Include="LiteDB" Version="5.0.10" />
     <PackageReference Include="NCrontab" Version="3.3.1" />
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
-    <PackageReference Include="UnitsNet" Version="4.89.1" />
+    <PackageReference Include="UnitsNet" Version="4.94.0" />
     <PackageReference Include="WebSocket4Net" Version="0.15.2" />
     <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
 
@@ -69,19 +63,23 @@
     <PackageReference Include="MIG.HomeAutomation" Version="1.1.7" />
     <PackageReference Include="MIG.Protocols" Version="1.1.9" />
 
-    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.5" />
-    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.4" />
-    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.4" />
-    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.4" />
+    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.7" />
+    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.5" />
+    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.5" />
+    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.5" />
     <PackageReference Include="HG.Raspberry.System" Version="2.1.1" />
 
     <PackageReference Include="NUnit" Version="3.13.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.10.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="$(OutputPath)\HomeGenie --post-build" />
+  </Target>
 
 </Project>

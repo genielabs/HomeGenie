@@ -87,8 +87,9 @@ namespace HomeGenie.Automation.Scripting
                     // mark config options to determine unused ones
                     if (programModule != null)
                     {
-                        foreach (var parameter in programModule.Properties)
+                        for (var p = 0; p < programModule.Properties.Count; p++)
                         {
+                            var parameter = programModule.Properties[p];
                             if (parameter.Name.StartsWith("ConfigureOptions."))
                             {
                                 parameter.Description = null;
@@ -771,6 +772,25 @@ namespace HomeGenie.Automation.Scripting
                 }
                 return false;
             });  
+            return this;
+        }
+
+        public ProgramHelperBase Restart()
+        {
+            var program = GetProgramBlock();
+            if (program != null)
+            {
+                program.IsEnabled = false;
+                try
+                {
+                    program.Engine.StopProgram();
+                }
+                catch
+                {
+                }
+                program.IsEnabled = true;
+                homegenie.UpdateProgramsDatabase();
+            }
             return this;
         }
 

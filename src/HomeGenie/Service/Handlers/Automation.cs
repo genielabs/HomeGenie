@@ -192,7 +192,6 @@ namespace HomeGenie.Service.Handlers
                             CronExpression = cronExpression,
                             Occurrences = new List<double>()
                         };
-                        var d = dateStart;
                         var dateEnd = dateStart.AddHours(hours);
                         var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, cronExpression);
                         occurs.Sort();
@@ -204,7 +203,6 @@ namespace HomeGenie.Service.Handlers
                         {
                             nextList.Add(evt);
                         }
-                        
                     }
                     else
                     {

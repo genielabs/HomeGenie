@@ -7,11 +7,11 @@
     "not_configured_yet":
         "Il sistema non è ancora configurato. Questa procedura di installazione guidata ti aiuterà a configurarlo in pochi passaggi.",
     "system_config_start_with_base_and_backup":
-        "Impostazioni base con rispristino da un file di backup",
+        "Rispristino da un file di backup",
     "system_config_start_with_default_setup":
         "Configurazione predefinita",
-    "system_config_start_with_default_setup_and_demo":
-        "Configurazione predefinita con demo (attività dispositivi simulata)",
+    "system_config_include_demo":
+      "Includi demo con attività dispositivi simulata",
     "system_config_additional_features":
         "Funzionalità aggiuntive",
     "system_config_manual_setup":

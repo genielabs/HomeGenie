@@ -74,7 +74,7 @@ namespace HomeGenie.Data
                         }
                         catch (Exception ex)
                         {
-                            // TODO: log
+                            MIG.MigService.Log.Error(ex);
                         }
                     }
                 }

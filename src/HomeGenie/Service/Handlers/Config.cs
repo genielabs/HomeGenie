@@ -263,7 +263,6 @@ namespace HomeGenie.Service.Handlers
                 }
                 if (migCommand.GetOption(0) == "Location.Get")
                 {
-                    request.ResponseData = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location) as dynamic;
                     var location = homegenie.ProgramManager.SchedulerService.Location;
                     var sun = new SolarTimes(DateTime.UtcNow.ToLocalTime(), location["latitude"].Value, location["longitude"].Value);
                     var sunData = JsonConvert.SerializeObject(sun, Formatting.Indented,
@@ -272,6 +271,7 @@ namespace HomeGenie.Service.Handlers
                             var currentError = errorArgs.ErrorContext.Error.Message;
                             errorArgs.ErrorContext.Handled = true;
                         } });
+                    request.ResponseData = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location);
                     (request.ResponseData as dynamic).sunData = JsonConvert.DeserializeObject(sunData);
                 }
                 else if (migCommand.GetOption(0) == "Location.Search")
@@ -286,6 +286,16 @@ namespace HomeGenie.Service.Handlers
                         matches.Add(match);
                     }
                     request.ResponseData = matches;
+                }
+                else if (migCommand.GetOption(0) == "Location.Lookup")
+                {
+                    string query = migCommand.GetOption(1);
+                    var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
+                        .Find((cfg) => cfg.Is("Location.Service.Key"));
+                    http://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&sensor=true&key=YOUR_KEY
+                    string googleApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + query + "&types=(cities)&sensor=true&key=" + apiKey.Value;
+                    var result = netHelper.WebService(googleApiUrl).GetData();
+                    request.ResponseData = result;
                 }
                 else if (migCommand.GetOption(0) == "Location.GeoCode")
                 {
@@ -515,6 +525,7 @@ namespace HomeGenie.Service.Handlers
                     var password = homegenie.SystemConfiguration.HomeGenie.Password;
                     request.ResponseData = new ResponseText(String.IsNullOrEmpty(password) ? "0" : "1");
                 }
+                // TODO: deprecate 'HttpService.Get/SetWebCacheEnabled'
                 else if (migCommand.GetOption(0) == "HttpService.SetWebCacheEnabled")
                 {
                     if (migCommand.GetOption(1) == "1")
@@ -532,6 +543,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "HttpService.GetWebCacheEnabled")
                 {
+                    // TODO: deprecate this "Web Caching" mode both in HG and MIG
                     var fileCaching = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
                         .GetOption(WebServiceGatewayOptions.EnableFileCaching);
                     request.ResponseData = new ResponseText(fileCaching != null ? fileCaching.Value : "false");
@@ -572,10 +584,27 @@ namespace HomeGenie.Service.Handlers
                         WebServiceUtility.SaveFile(request.RequestData, archivename);
                         Utility.UncompressZip(archivename, tempFolderPath);
                         File.Delete(archivename);
-                        request.ResponseData = new ResponseStatus(Status.Ok);
+                        // check if it's a valid system backup file
+                        var serializer = new XmlSerializer(typeof(SystemConfiguration));
+                        var reader = new StreamReader(Path.Combine(tempFolderPath, "systemconfig.xml"));
+                        var systemConfig = (SystemConfiguration)serializer.Deserialize(reader);
+                        reader.Close();
+                        request.ResponseData = new ResponseStatus(Status.Ok, JsonConvert.SerializeObject(new
+                        {
+                            SystemName = systemConfig.HomeGenie.SystemName,
+                            RequirePassword = systemConfig.HomeGenie.Password.Length > 0,
+                            ServicePort = systemConfig.MigService.GetGateway("WebServiceGateway").Options.Find(o => o.Name == "Port").Value,
+                            ServiceHost = systemConfig.MigService.GetGateway("WebServiceGateway").Options.Find(o => o.Name == "Host").Value,
+                            Interfaces = systemConfig.MigService.Interfaces.FindAll(i => i.IsEnabled).ConvertAll(i => new
+                            {
+                                Domain = i.Domain,
+                                Description = i.Description
+                            })
+                        }));
                     }
                     catch
                     {
+                        Utility.FolderCleanUp(tempFolderPath);
                         request.ResponseData = new ResponseStatus(Status.Error);
                     }
                 }
@@ -617,15 +646,64 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationBackup")
                 {
-                    // TODO: deprecate 'redirect', implement as response stream with content-disposition 'attachment'
-                    homegenie.BackupManager.BackupConfiguration("html/homegenie_backup_config.zip");
-                    (request.Context.Data as HttpListenerContext).Response.Redirect("/hg/html/homegenie_backup_config.zip?" + DateTime.UtcNow.Ticks);
-                    request.Handled = true;
+                    string backupFileName = Path.Combine("html", "homegenie_backup_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".zip");
+                    homegenie.BackupManager.BackupConfiguration(backupFileName);
+                    byte[] bundleData = File.ReadAllBytes(backupFileName);
+                    File.Delete(backupFileName);
+                    (request.Context.Data as HttpListenerContext).Response.AddHeader(
+                        "Content-Type", "application/octet-stream; charset=utf-8"
+                    );
+                    (request.Context.Data as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment; filename=\"" + Path.GetFileName(backupFileName) + "\"");
+                    (request.Context.Data as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationLoad")
                 {
                     homegenie.SoftReload();
                     request.ResponseData = new ResponseStatus(Status.Ok);
+                }
+                else if (migCommand.GetOption(0) == "System.Info")
+                {
+                    var port = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .GetOption(WebServiceGatewayOptions.Port);
+                    var host = homegenie.MigService.GetGateway(Gateways.WebServiceGateway)
+                        .GetOption(WebServiceGatewayOptions.Host);
+                    var passwordProtected = !String.IsNullOrEmpty(homegenie.SystemConfiguration.HomeGenie.Password);
+                    var loggingEnabled = homegenie.SystemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true");
+                    var logFilePath = Path.Combine("log", "homegenie.log");
+                    double? loggingLast = File.Exists(logFilePath) ?
+                        Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath)) : null;
+                    double? loggingPrevious = File.Exists(logFilePath + ".bak") ?
+                        Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath + ".bak")) : null;
+                    request.ResponseData = new
+                    {
+                        Version = homegenie.UpdateChecker.GetCurrentRelease(),
+                        Platform = Environment.OSVersion.Platform.ToString(),
+                        TimeZoneId = TimeZoneInfo.Local.Id,
+                        TimeZone = TimeZoneInfo.Local.StandardName,
+                        UtcOffset = TimeZoneInfo.Local.BaseUtcOffset.TotalMinutes,
+                        Configuration = new
+                        {
+                            Service = new
+                            {
+                                Port = port != null ? port.Value : "8080",
+                                Host = host != null ? host.Value : "*",
+                                AuthPassword = passwordProtected,
+                                AuthUsername = homegenie.SystemConfiguration.HomeGenie.Username
+                            },
+                            Logging = new
+                            {
+                                Enabled = loggingEnabled,
+                                LastLog = loggingLast,
+                                PreviousLog = loggingPrevious
+                            }
+                            // TODO: add more config fields if required
+                            // - location info
+                            // - start time and uptime
+                            // - software update status (updated, update available, installed packages, programs, modules..)
+                            // - last backup date
+                            // - etc...
+                        }
+                    };
                 }
                 break;
 

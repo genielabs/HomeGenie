@@ -432,8 +432,8 @@ namespace HomeGenie.Automation.Scheduler
             get
             {
                 var homeGenieConfig = masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie;
-                dynamic location = "{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
-                if (masterControlProgram != null && String.IsNullOrWhiteSpace(masterControlProgram.HomeGenie.SystemConfiguration.HomeGenie.Location)) {
+                dynamic location = "{ name: 'Rome, RM, Italy', latitude: 41.90278349999999, longitude: 12.496365500000024 }";
+                if (masterControlProgram != null && (String.IsNullOrWhiteSpace(homeGenieConfig.Location) || homeGenieConfig.Location == "{}")) {
                     homeGenieConfig.Location = location;
                 }
                 else if (masterControlProgram != null)
@@ -491,7 +491,8 @@ namespace HomeGenie.Automation.Scheduler
                         var end = matchList.First();
                         var inc = TruncateDate(start.AddMinutes(1));
                         while (end.ToUniversalTime().ToString(FORMAT_DATETIME) !=
-                               inc.ToUniversalTime().ToString(FORMAT_DATETIME)
+                               inc.ToUniversalTime().ToString(FORMAT_DATETIME) &&
+                               inc.Ticks < end.Ticks
                         ) //(Math.Floor((end - inc).TotalMinutes) != 0)
                         {
                             occurs.Add(inc);

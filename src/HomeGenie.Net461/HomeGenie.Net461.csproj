@@ -132,8 +132,8 @@
       <HintPath>..\..\packages\NCrontab.3.3.1\lib\net35\NCrontab.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c">
@@ -145,27 +145,27 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.4\lib\net40\Raspberry.IO.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.5\lib\net40\Raspberry.IO.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.Components, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.Components.2.4.5\lib\net40\Raspberry.IO.Components.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.Components.2.4.7\lib\net40\Raspberry.IO.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.GeneralPurpose, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.4\lib\net40\Raspberry.IO.GeneralPurpose.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.5\lib\net40\Raspberry.IO.GeneralPurpose.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.InterIntegratedCircuit, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.InterIntegratedCircuit.2.4.4\lib\net40\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.InterIntegratedCircuit.2.4.5\lib\net40\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.Interop, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.4\lib\net40\Raspberry.IO.Interop.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.GeneralPurpose.2.4.5\lib\net40\Raspberry.IO.Interop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.IO.SerialPeripheralInterface, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\HG.Raspberry.IO.SerialPeripheralInterface.2.4.4\lib\net40\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
+      <HintPath>..\..\packages\HG.Raspberry.IO.SerialPeripheralInterface.2.4.5\lib\net40\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Raspberry.System, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
@@ -233,8 +233,8 @@
       <HintPath>..\..\packages\UDE.CSharp.1.1.0\lib\Ude.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="UnitsNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f8601875a1f041da">
-      <HintPath>..\..\packages\UnitsNet.4.89.1\lib\net40\UnitsNet.dll</HintPath>
+    <Reference Include="UnitsNet, Version=3.46.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\UnitsNet.3.46.1\lib\net35\UnitsNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="UPnP, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

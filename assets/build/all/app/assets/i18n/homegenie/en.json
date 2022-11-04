@@ -7,11 +7,11 @@
     "not_configured_yet":
         "System is not configured yet. This setup wizard will help you in getting your system up and running in a few steps.",
     "system_config_start_with_base_and_backup":
-        "Base setup with restore from backup file",
+        "Restore from backup file",
     "system_config_start_with_default_setup":
         "Default setup",
-    "system_config_start_with_default_setup_and_demo":
-        "Default setup and demo (simulated devices activity)",
+    "system_config_include_demo":
+        "Include demo with simulated device activity",
     "system_config_additional_features":
         "Additional features",
     "system_config_manual_setup":

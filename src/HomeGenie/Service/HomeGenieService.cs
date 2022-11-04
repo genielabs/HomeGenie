@@ -681,28 +681,14 @@ namespace HomeGenie.Service
                         // module inherits props from associated virtual module
                         module.Domain = virtualModule.Domain;
                         module.Address = virtualModule.Address;
-                        if (module.DeviceType == MIG.ModuleTypes.Generic && virtualModule.DeviceType != ModuleTypes.Generic)
-                        {
-                            module.DeviceType = virtualModule.DeviceType;
-                        }
-                        // associated module's name of an automation program cannot be changed
-                        if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
-                        {
-                            module.Name = virtualModule.Name;
-                        }
-                        if (module.Description == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Description != ""))
-                        {
-                            module.Description = virtualModule.Description;
-                        }
-                        //
-                        //if (virtualModule.ParentId != virtualModule.Address)
-                        {
-                            Utility.ModuleParameterSet(
-                                module,
-                                Properties.VirtualModuleParentId,
-                                virtualModule.ParentId
-                            );
-                        }
+                        module.DeviceType = virtualModule.DeviceType;
+                        module.Name = virtualModule.Name;
+                        module.Description = virtualModule.Description;
+                        Utility.ModuleParameterSet(
+                            module,
+                            Properties.VirtualModuleParentId,
+                            virtualModule.ParentId
+                        );
                     }
                     
                     foreach (var module in clonedModules)
@@ -1076,10 +1062,6 @@ namespace HomeGenie.Service
                         //virtualModule.Properties.Clear();
                         virtualModule.Properties = module.Properties.DeepClone();
                         virtualModule.Stores = module.Stores.DeepClone();
-                        //foreach (var p in module.Properties)
-                        //{
-                        //    virtualModule.Properties.Add(p);
-                        //}
                         systemModules.Remove(module);
                         continue;
                     }
@@ -1091,11 +1073,6 @@ namespace HomeGenie.Service
                         systemModules.Add(module);
                         module.Properties = virtualModule.Properties.DeepClone();
                         module.Stores = virtualModule.Stores.DeepClone();
-                        // copy properties from virtualmodules
-                        //foreach (var p in virtualModule.Properties)
-                        //{
-                        //    module.Properties.Add(p);
-                        //}
                     }
 
                     // module inherits props from associated virtual module
@@ -1114,15 +1091,11 @@ namespace HomeGenie.Service
                     {
                         module.Description = virtualModule.Description;
                     }
-                    //
-                    //if (virtualModule.ParentId != virtualModule.Address)
-                    {
-                        Utility.ModuleParameterSet(
-                            module,
-                            Properties.VirtualModuleParentId,
-                            virtualModule.ParentId
-                        );
-                    }
+                    Utility.ModuleParameterSet(
+                        module,
+                        Properties.VirtualModuleParentId,
+                        virtualModule.ParentId
+                    );
                     var virtualModuleWidget = Utility.ModuleParameterGet(virtualModule, Properties.WidgetDisplayModule);
                     var moduleWidget = Utility.ModuleParameterGet(module, Properties.WidgetDisplayModule);
                     // if a widget is specified on virtual module then we force module to display using this
@@ -1187,10 +1160,10 @@ namespace HomeGenie.Service
                             }
                             systemModules.Add(module);
                         }
+                        module.Address = program.Address.ToString();
+                        module.DeviceType = ModuleTypes.Program;
                         module.Name = program.Name;
                         module.Description = program.Description;
-                        module.Address = program.Address.ToString();
-                        module.DeviceType = MIG.ModuleTypes.Program;
                     }
                     // Add "Scheduler" virtual module
                     //Module scheduler = systemModules.Find(o=> o.Domain == Domains.HomeAutomation_HomeGenie && o.Address == SourceModule.Scheduler);

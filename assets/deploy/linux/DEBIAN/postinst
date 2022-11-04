@@ -7,13 +7,14 @@ HOME_FOLDER="/home/$HG_USER"
 # add user homegenie
 sudo useradd $HG_USER
 sudo gpasswd -a $HG_USER dialout
+sudo gpasswd -a $HG_USER gpio
 
 # fix folder permissions
 sudo chown -R $HG_USER:$HG_USER $HOME_FOLDER
 
 # fix GPIO permissions
-sudo chgrp -R dialout /sys/class/gpio
-sudo chmod -R g+rw /sys/class/gpio
+#sudo chgrp -R dialout /sys/class/gpio
+#sudo chmod -R g+rw /sys/class/gpio
 
 # copy service startup scripts and fix home folder permissions
 sudo cp $HOME_FOLDER/DEBIAN/homegenie /etc/init.d/

@@ -2,6 +2,7 @@
   "home": "Home",
   "setup": "Configurazione",
   "preferences": "Preferenze",
+  "logging": "Logging",
   "exit": "Esci",
   "add": "Aggiungi",
   "remove": "Rimuovi",
@@ -113,5 +114,8 @@
   "clone_program": "Clona programma",
   "add_new_program": "Aggiungi nuovo programma",
   "new_program": "Nuovo programma",
-  "no_data_received_yet": "In attesa dati"
+  "no_data_received_yet": "In attesa dati",
+  "backup_and_restore": "Backup e ripristino",
+  "software_updates": "Aggiornamenti software",
+  "service_settings": "Impostazioni servizio"
 }

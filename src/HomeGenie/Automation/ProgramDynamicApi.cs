@@ -46,7 +46,7 @@ namespace HomeGenie
             Func<object, object> handler = null;
             for (int i = 0; i < dynamicApi.Keys.Count; i++)
             {
-                if (request.StartsWith(dynamicApi.Keys.ElementAt(i)))
+                if (dynamicApi.Keys.ElementAt(i) != null && request.StartsWith(dynamicApi.Keys.ElementAt(i)))
                 {
                     handler = dynamicApi[dynamicApi.Keys.ElementAt(i)];
                     break;

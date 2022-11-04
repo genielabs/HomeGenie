@@ -672,13 +672,13 @@ namespace HomeGenie.Service
 
         public static DateTime JavascriptToDate(long timestamp)
         {
-            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             return (baseDate.AddMilliseconds(timestamp));
         }
 
         public static DateTime JavascriptToDateUtc(double timestamp)
         {
-            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             return (baseDate.AddMilliseconds(timestamp).ToUniversalTime());
         }
 

@@ -268,13 +268,6 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                 HG.Configure.System.ServiceCall("Service.Restart", function (data) {
                 });
             });
-            //
-            $('#maintenance_configuration_backupbutton').bind('click', function () {
-                //$.mobile.loading('show');
-                //HG.Configure.System.ServiceCall("System.ConfigurationBackup", function (data) {
-                //    $.mobile.loading('hide');
-                //});
-            });
             $('#maintenance_configuration_restorebutton').bind('click', function () {
                 if ($('#restore_configuration_uploadfile').val() == "") {
                     alert('Select a file to restore first');
@@ -324,9 +317,6 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || new function () { var $$ = this
                         $$.RestoreProgramList += ',' + $(this).attr('data-program') + ',';
                     });
                 }
-            });
-            $('#maintenance_configuration_backupbutton').bind('click', function () {
-                window.open(location.protocol + '../../api/HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup');
             });
             $('#restore_configuration_uploadframe').bind('load', function (evt) {
                 if ($('#restore_configuration_uploadfile').val() == "")

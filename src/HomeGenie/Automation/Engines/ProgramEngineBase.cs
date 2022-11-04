@@ -110,11 +110,9 @@ namespace HomeGenie.Automation.Engines
             if (ProgramBlock.IsRunning)
                 return;
 
-            // TODO: since if !program.IsRunning also thread should be null
-            // TODO: so this is probably useless here and could be removed?
+            // This seems to occur only when restoring from a backup
             if (_programThread != null)
             {
-                Debugger.Break();
                 StopProgram();
             }
 
@@ -145,13 +143,18 @@ namespace HomeGenie.Automation.Engines
                         var error = new List<ProgramError> {GetFormattedError(result.Exception, false)};
                         ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
                         _log.Error(result.Exception, "Error while running program {0}", ProgramBlock.Address);
-                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
-                            PrepareExceptionMessage(CodeBlockEnum.CR, result.Exception));
-
+                        if (HomeGenie.ProgramManager != null)
+                        {
+                            HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                                PrepareExceptionMessage(CodeBlockEnum.CR, result.Exception));
+                        }
                         TryToAutoRestart();
                     }
-                    HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus,
-                        ProgramBlock.IsEnabled ? "Idle" : "Stopped");
+                    if (HomeGenie.ProgramManager != null)
+                    {
+                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus,
+                            ProgramBlock.IsEnabled ? "Idle" : "Stopped");
+                    }
                 }
                 catch (ThreadAbortException)
                 {

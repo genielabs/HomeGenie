@@ -121,7 +121,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting SerialPort");
+                _log.Error(ex, "Error in resetting SerialPort: " + ex.Message);
             }
 
             try
@@ -130,7 +130,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting TcpClient");
+                _log.Error(ex, "Error in resetting TcpClient: " + ex.Message);
             }
 
             try
@@ -139,7 +139,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting UdpClient");
+                _log.Error(ex, "Error in resetting UdpClient: " + ex.Message);
             }
 
             try
@@ -148,7 +148,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting Net");
+                _log.Error(ex, "Error in resetting Net: " + ex.Message);
             }
 
             try
@@ -157,7 +157,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting MqttClient");
+                _log.Error(ex, "Error in resetting MqttClient: " + ex.Message);
             }
 
             try
@@ -166,7 +166,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting KnxClient");
+                _log.Error(ex, "Error in resetting KnxClient: " + ex.Message);
             }
 
             try
@@ -175,7 +175,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "Error in resetting Program");
+                _log.Error(ex, "Error in resetting Program: " + ex.Message);
             }
         }
 
