@@ -670,10 +670,16 @@ namespace HomeGenie.Service.Handlers
                     var passwordProtected = !String.IsNullOrEmpty(homegenie.SystemConfiguration.HomeGenie.Password);
                     var loggingEnabled = homegenie.SystemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true");
                     var logFilePath = Path.Combine("log", "homegenie.log");
-                    double? loggingLast = File.Exists(logFilePath) ?
-                        Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath)) : null;
-                    double? loggingPrevious = File.Exists(logFilePath + ".bak") ?
-                        Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath + ".bak")) : null;
+                    Double? loggingLast = null;
+                    if (File.Exists(logFilePath))
+                    {
+                        loggingLast = Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath));
+                    }
+                    Double? loggingPrevious = null;
+                    if (File.Exists(logFilePath + ".bak"))
+                    {
+                        loggingPrevious = Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath + ".bak"));
+                    }
                     var startTime = System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime();
                     request.ResponseData = new
                     {
