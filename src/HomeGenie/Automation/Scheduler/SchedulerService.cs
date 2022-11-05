@@ -491,8 +491,8 @@ namespace HomeGenie.Automation.Scheduler
                         var end = matchList.First();
                         var inc = TruncateDate(start.AddMinutes(1));
                         while (end.ToUniversalTime().ToString(FORMAT_DATETIME) !=
-                               inc.ToUniversalTime().ToString(FORMAT_DATETIME) &&
-                               inc.Ticks < end.Ticks
+                               inc.ToUniversalTime().ToString(FORMAT_DATETIME) /* &&
+                               inc.Ticks < end.Ticks */
                         ) //(Math.Floor((end - inc).TotalMinutes) != 0)
                         {
                             occurs.Add(inc);
