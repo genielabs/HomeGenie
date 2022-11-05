@@ -117,5 +117,6 @@
   "no_data_received_yet": "Waiting for data",
   "backup_and_restore": "Backup and restore",
   "software_updates": "Software updates",
-  "service_settings": "Service settings"
+  "service_configuration": "Service configuration",
+  "http_settings": "HTTP settings"
 }

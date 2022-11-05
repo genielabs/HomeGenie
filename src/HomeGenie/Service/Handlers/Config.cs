@@ -674,6 +674,7 @@ namespace HomeGenie.Service.Handlers
                         Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath)) : null;
                     double? loggingPrevious = File.Exists(logFilePath + ".bak") ?
                         Utility.DateToJavascript(File.GetCreationTimeUtc(logFilePath + ".bak")) : null;
+                    var startTime = System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime();
                     request.ResponseData = new
                     {
                         Version = homegenie.UpdateChecker.GetCurrentRelease(),
@@ -681,6 +682,10 @@ namespace HomeGenie.Service.Handlers
                         TimeZoneId = TimeZoneInfo.Local.Id,
                         TimeZone = TimeZoneInfo.Local.StandardName,
                         UtcOffset = TimeZoneInfo.Local.BaseUtcOffset.TotalMinutes,
+                        Process = new
+                        {
+                            StartTime = Utility.DateToJavascript(startTime) 
+                        },
                         Configuration = new
                         {
                             Service = new
@@ -695,7 +700,8 @@ namespace HomeGenie.Service.Handlers
                                 Enabled = loggingEnabled,
                                 LastLog = loggingLast,
                                 PreviousLog = loggingPrevious
-                            }
+                            },
+                            Location = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location)
                             // TODO: add more config fields if required
                             // - location info
                             // - start time and uptime
