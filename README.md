@@ -41,7 +41,7 @@ common (all) and OS specific static files that are copied after the build proces
 - `assets/deploy`
 OS specific files required for bundling and deploying the app redistributable
 - `src/HomeGenie`
-main application project files implemented as **netcore** app
+main application project files implemented as **net6** app
 - `src/HomeGenie.Net461`
 **.net 4.6.1** project files sharing the same source code base from `src/HomeGenie` 
 - `src/HomeGenie.Tests`
@@ -59,19 +59,19 @@ From the repository root folder enter the command
 ```
 msbuild /p:Configuration=Debug HomeGenie.sln
 ```
-This will generate both the `netcore` and the `net461` version of HomeGenie app.
+This will generate both the `net6` and the `net461` version of HomeGenie app.
 
-**netcore** ->
-`src/HomeGenie/bin/Degbu/netcore3.1` 
+**net6** ->
+`src/HomeGenie/bin/Degbu/net6` 
 
 **net461** -> `src/HomeGenie.Net461/bin/Debug`
 
 
 ### Running
 
-*netcore*
+*net6*
 ```
-cd src/HomeGenie/bin/Debug/netcore3.1
+cd src/HomeGenie/bin/Debug/net
 ./HomeGenie # (or 'dotnet HomeGenie.dll')
 ```
 
@@ -85,8 +85,8 @@ cd src/HomeGenie.Net461/bin/Debug
 
 [JetBrains Rider](https://www.jetbrains.com/rider/) is the official IDE employed for developing this project.
 
-![JetBrains Logo](https://raw.githubusercontent.com/genielabs/HomeGenie/netcore/assets/github/jetbrains.svg)
-![JetBrains Rider Logo](https://raw.githubusercontent.com/genielabs/HomeGenie/netcore/assets/github/rider-logo.svg)
+![JetBrains Logo](https://raw.githubusercontent.com/genielabs/HomeGenie/master/assets/github/jetbrains.svg)
+![JetBrains Rider Logo](https://raw.githubusercontent.com/genielabs/HomeGenie/master/assets/github/rider-logo.svg)
 
 ### Related projects
 
