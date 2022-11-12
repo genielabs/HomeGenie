@@ -17,7 +17,15 @@ namespace NetClientLib
             Stop();
             onvifDiscovery = new Discovery();
             cancellationTokenSource = new CancellationTokenSource();
-           await onvifDiscovery.Discover (1, OnNewDevice, cancellationTokenSource.Token);
+            try
+            {
+                await onvifDiscovery.Discover(1, OnNewDevice, cancellationTokenSource.Token);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                // TODO: should report error
+            }
         }
 
         public void Stop()

@@ -684,6 +684,7 @@ namespace HomeGenie.Service.Handlers
                     request.ResponseData = new
                     {
                         Version = homegenie.UpdateChecker.GetCurrentRelease(),
+                        Runtime = Environment.Version,
                         Platform = Environment.OSVersion.Platform.ToString(),
                         TimeZoneId = TimeZoneInfo.Local.Id,
                         TimeZone = TimeZoneInfo.Local.StandardName,
