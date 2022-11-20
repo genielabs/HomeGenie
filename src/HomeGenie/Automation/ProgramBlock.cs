@@ -71,6 +71,7 @@ namespace HomeGenie.Automation
         public string ScriptSetup { get; set; }
         public string ScriptSource { get; set; }
         public string ScriptErrors { get; set; }
+        public string Data { get; set; }
 
         // common public members
         public ProgramPackageInfo PackageInfo { get; set; }
@@ -98,7 +99,7 @@ namespace HomeGenie.Automation
             Address = 0;
             Features = new List<ProgramFeature>();
 
-            Type = "Wizard";
+            Type = "csharp";
             ScriptSetup = "";
             ScriptSource = "";
             ScriptErrors = "";
@@ -124,12 +125,14 @@ namespace HomeGenie.Automation
                     switch (codeType.ToLower())
                     {
                         case "csharp":
+                        case "visual":
                             programEngine = new CSharpEngine(this);
                             break;
                         case "javascript":
                             programEngine = new JavascriptEngine(this);
                             break;
                         case "wizard":
+                            // TODO: deprecate "wizard" type and WizardEngine
                             programEngine = new WizardEngine(this);
                             break;
                         case "arduino":

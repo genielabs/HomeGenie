@@ -435,6 +435,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.IsEnabled = newProgram.IsEnabled;
                         currentProgram.ScriptSetup = newProgram.ScriptSetup;
                         currentProgram.ScriptSource = newProgram.ScriptSource;
+                        currentProgram.Data = newProgram.Data;
                     }
                     //
                     if (migCommand.Command == "Programs.Compile")

@@ -78,7 +78,7 @@ namespace HomeGenie.Automation
             var program = new ProgramBlock();
             program.Name = "New Macro";
             program.Address = masterControlProgram.GeneratePid();
-            program.Type = "Wizard";
+            program.Type = "Wizard"; // TODO:  USE NEW "Visual" type programs
             WizardEngine.WizardScript wizardScript = ((WizardEngine)program.Engine).Script;
             foreach (var migCommand in macroCommands)
             {
