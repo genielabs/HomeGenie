@@ -302,7 +302,15 @@ namespace HomeGenie.Automation.Engines
         {
             if (_scriptAssembly != null && _methodReset != null)
             {
-                _methodReset.Invoke(_scriptInstance, null);
+                try
+                {
+                    _methodReset.Invoke(_scriptInstance, null);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+//                    throw;
+                }
             }
         }
 

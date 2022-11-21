@@ -802,6 +802,12 @@ namespace HomeGenie.Automation.Scripting
             try
             {
                 programModule = homegenie.Modules.Find(rm => rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
+                var program = GetProgramBlock();
+                if (program != null && programModule != null)
+                {
+                    programModule.Name = program.Name;
+                    programModule.Description = program.Description;
+                }
             }
             catch (Exception ex)
             {
