@@ -201,9 +201,10 @@ namespace HomeGenie
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
             if (program != null) // && program.Address != myProgramId)
             {
-                while (!program.IsRunning)
-                    Thread.Sleep(1000);
-                Thread.Sleep(1000);
+                while (program.IsRunning)
+                {
+                    Thread.Sleep(500);
+                }
             }
             return this;
         }
