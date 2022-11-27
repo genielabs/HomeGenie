@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>// set the widget that will display this program data (temperature, humidity).
 Program.Setup(() =&gt; {
@@ -9,7 +9,10 @@ Program.Setup(() =&gt; {
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+    <ScriptSource>// Based on RaspberrySharp libraries for programming GPIO/I2C/SPI devices
+// Docs https://github.com/genemars/raspberry-sharp-io
+
+#using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Sensors.Temperature.Dht
 
 var measurePin = ConnectorPin.P1Pin16; // GPIO#23
@@ -52,15 +55,15 @@ while (Program.IsEnabled)
     <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
-      <PackageId>homegenie-gpio</PackageId>
+      <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>dht-11-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>4A468BCC51E69F135E34DB064A915A09</Checksum>
+      <Checksum>6D2DF9C0ADEB6A5146A108705C89E0D2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>70</Address>
+    <Address>1002</Address>
     <Name>DHT-11 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-11 with data pin on GPIO#23. 
 Edit program code line #1 to change the data pin GPIO.
@@ -81,7 +84,10 @@ Program.Setup(()=&gt;{
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+    <ScriptSource>// Based on RaspberrySharp libraries for programming GPIO/I2C/SPI devices
+// Docs https://github.com/genemars/raspberry-sharp-io
+
+#using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Sensors.Temperature.Dht
 
 var measurePin = ConnectorPin.P1Pin7; // GPIO#4
@@ -124,15 +130,15 @@ while (Program.IsEnabled)
     <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
-      <PackageId>homegenie-gpio</PackageId>
+      <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>dht-22-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>FE052530BA3F380C53F8E1D0BC61DC2F</Checksum>
+      <Checksum>00C3BF35FC8AC4CD77E791D891BA13E3</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>63</Address>
+    <Address>1003</Address>
     <Name>DHT-22 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
 Edit program code line #1 to change the data pin GPIO.
@@ -152,7 +158,10 @@ Edit program code line #1 to change the data pin GPIO.
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+    <ScriptSource>// Based on RaspberrySharp libraries for programming GPIO/I2C/SPI devices
+// Docs https://github.com/genemars/raspberry-sharp-io
+
+#using Raspberry.IO.GeneralPurpose
 
 if (Program.Option("Gpio.Pin").Value != "") {
   if (Program.Parameter("ConfigureStatus.Warning").Value != "") {
@@ -231,18 +240,18 @@ When.ModuleParameterChanged((module, property) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
-      <PackageId>homegenie-gpio</PackageId>
+      <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>gpio-input-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>C2F7A461EDDAB898661C748F9BE33B2D</Checksum>
+      <Checksum>330E463F1AEDF47E0E7C39C4CECFAC90</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>102</Address>
+    <Address>1004</Address>
     <Name>GPIO Input Sensor</Name>
     <Description>Shows status of a GPIO input pin</Description>
     <Group>Raspberry Pi</Group>
@@ -250,7 +259,7 @@ Program.GoBackground();
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt; {
@@ -260,7 +269,10 @@ Program.GoBackground();
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+    <ScriptSource>// Based on RaspberrySharp libraries for programming GPIO/I2C/SPI devices
+// Docs https://github.com/genemars/raspberry-sharp-io
+
+#using Raspberry.IO.GeneralPurpose
 
 if (Program.Option("Gpio.Pin").Value != "") {
   if (Program.Parameter("ConfigureStatus.Warning").Value != "") {
@@ -367,18 +379,18 @@ When.ModuleParameterChanged((module, property) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
-      <PackageId>homegenie-gpio</PackageId>
+      <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>gpio-output-switch</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>1AE5DBF791713209AE6E9D37FD66C0AB</Checksum>
+      <Checksum>FDB3F6A069A54790939A311F91E2C6DD</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>101</Address>
+    <Address>1005</Address>
     <Name>GPIO Output Switch</Name>
     <Description>Controls a GPIO output pin</Description>
     <Group>Raspberry Pi</Group>
@@ -394,7 +406,10 @@ Program.GoBackground();
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>#using Raspberry.IO.GeneralPurpose
+    <ScriptSource>// Based on RaspberrySharp libraries for programming GPIO/I2C/SPI devices
+// Docs https://github.com/genemars/raspberry-sharp-io
+
+#using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Leds.GroveRgb
 
 // Domain
@@ -585,15 +600,15 @@ updateLeds();
     <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
-      <PackageId>homegenie-gpio</PackageId>
+      <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>grove-chainable-rgb-led</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>7B9697EDAEC1E7F367ABE4A9B45F3E5B</Checksum>
+      <Checksum>5370E9829F38FE4FA517362F3BA8AFE5</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>62</Address>
+    <Address>1006</Address>
     <Name>Grove - Chainable RGB Led</Name>
     <Description>Chainable RGB color leds modules wired to GPIO#4 and GPIO#21/27 (power with 3v3).
 http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>

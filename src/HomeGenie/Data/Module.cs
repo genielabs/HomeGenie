@@ -85,7 +85,7 @@ namespace HomeGenie.Data
             Name = "";
             Address = "";
             Description = "";
-            DeviceType = MIG.ModuleTypes.Generic;
+            DeviceType = ModuleTypes.Generic;
             Properties = new TsList<ModuleParameter>();
             Stores = new TsList<Store>();
         }

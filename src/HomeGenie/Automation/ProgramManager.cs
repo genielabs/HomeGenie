@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.IO;
 using System.Linq;
@@ -118,7 +119,7 @@ namespace HomeGenie.Automation
         {
             int pid = USERSPACE_PROGRAMS_START;
             var userPrograms = automationPrograms
-                .FindAll(p => p.Address >= ProgramManager.USERSPACE_PROGRAMS_START && p.Address < ProgramManager.PACKAGE_PROGRAMS_START)
+                .FindAll(p => p.Address >= USERSPACE_PROGRAMS_START && p.Address < PACKAGE_PROGRAMS_START)
                 .OrderBy(p => p.Address);
             foreach (ProgramBlock program in userPrograms)
             {
@@ -154,16 +155,17 @@ namespace HomeGenie.Automation
             program.IsEnabled = false;
             automationPrograms.Remove(program);
             // delete program files
-            // TODO: implement also deleting of data/programs/<pid> folder!
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
             // remove csharp assembly
             try
             {
                 File.Delete(Path.Combine(file, program.Address + ".dll"));
+                File.Delete(Path.Combine(file, program.Address + ".dll.pdb"));
             }
             catch
             {
             }
+            // TODO: implement also deleting of data/programs/<pid> folder!
             // remove arduino folder files
             try
             {
@@ -199,8 +201,15 @@ namespace HomeGenie.Automation
             if (programModule != null)
             {
                 Utility.ModuleParameterSet(programModule, property, value);
-                hgService.RaiseEvent(program.Address, programModule.Domain, programModule.Address, "Automation Program", property, value);
             }
+            hgService.RaiseEvent(
+                program.Address, 
+                Domains.HomeAutomation_HomeGenie_Automation, 
+                program.Address.ToString(CultureInfo.InvariantCulture), 
+                "Automation Program", 
+                property, 
+                value
+            );
         }
 
         #region Module/Interface Events handling and propagation
@@ -305,8 +314,8 @@ namespace HomeGenie.Automation
             }
             else
             {
-                program.Engine.StopScheduler();
                 RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Disabled");
+                program.Engine.StopScheduler();
                 hgService.modules_RefreshPrograms();
                 hgService.modules_RefreshVirtualModules();
             }

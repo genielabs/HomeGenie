@@ -177,7 +177,7 @@ while (Program.IsRunning)
   Pause(120);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -211,8 +211,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T01:32:27.4760845Z</ActivationTime>
-    <TriggerTime>2021-04-14T01:32:27.4999594Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -237,7 +236,9 @@ var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
 var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches");
 
 // initialize
-energyMonitor.Instance.Name = "Energy Monitor";
+if (energyMonitor.Instance.Name == "") {
+  energyMonitor.Instance.Name = "Energy Monitor";
+}
 kwLoad.Value = "0";
 wattLoad.Value = "0";
 operatingDevices.Value = "0";
@@ -381,7 +382,7 @@ while (Program.IsRunning)
       <Id>energy-monitor</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>348DE8E8F5C6FA0C281761556D369269</Checksum>
+      <Checksum>2268237AFFFF06DBD75F0F3BD219017C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -406,8 +407,7 @@ device status and energy consumption.</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.5418476Z</ActivationTime>
-    <TriggerTime>2021-04-14T00:46:19.3619184Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -449,7 +449,7 @@ Program.GoBackground();
       <Id>energy-saving-mode</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>73AAA567A6E3089179C0BB3F87081D0A</Checksum>
+      <Checksum>5B475B31BDCCBFB693D0D7FEEB2D39CF</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>82</Address>
@@ -473,8 +473,7 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.6046128Z</ActivationTime>
-    <TriggerTime>2021-04-14T00:46:19.3337909Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -507,8 +506,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.6541602Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -539,8 +537,7 @@ Modules
     <Group>Scenarios</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.7102264Z</ActivationTime>
-    <TriggerTime>2021-04-14T00:58:58.5210201Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -675,8 +672,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.7844992Z</ActivationTime>
-    <TriggerTime>2021-04-14T00:46:19.3740808Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -966,8 +962,7 @@ while (Program.IsRunning)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.8725795Z</ActivationTime>
-    <TriggerTime>2021-04-14T00:46:19.4142798Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1122,8 +1117,7 @@ while (Program.IsRunning)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:18.9646916Z</ActivationTime>
-    <TriggerTime>2021-04-14T00:46:19.3989695Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1176,8 +1170,7 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-14T00:46:19.0238274Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1344,8 +1337,7 @@ while (Program.IsRunning)
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>

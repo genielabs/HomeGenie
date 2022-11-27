@@ -84,11 +84,11 @@ namespace HomeGenie.Automation
         public bool AutoRestartEnabled { get; set; }
         public bool Cloneable { get; set; }
 
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public bool WillRun { get; set; }
         [XmlIgnore]
         public bool IsRunning { get; set; }
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public object OperationLock = new object();
 
         public ProgramBlock()

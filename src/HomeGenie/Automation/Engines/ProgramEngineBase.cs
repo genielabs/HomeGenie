@@ -384,7 +384,10 @@ namespace HomeGenie.Automation.Engines
                 Thread.Sleep(2000); // sleep 2 secs to avoid fast fail loops
                 ProgramBlock.IsEnabled = true;
             }
-            else ProgramBlock.IsEnabled = false;
+            else
+            {
+                ProgramBlock.IsEnabled = false;
+            }
         }
 
         private static string PrepareExceptionMessage(CodeBlockEnum codeType, Exception ex)

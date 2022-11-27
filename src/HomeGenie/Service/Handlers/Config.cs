@@ -986,7 +986,21 @@ namespace HomeGenie.Service.Handlers
                         module.Description = data.description;
                         try
                         {
-                            module.DeviceType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), data.type.ToString(), true);
+                            var deviceType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), data.type.ToString(), true);
+                            if (deviceType != ModuleTypes.Program)
+                            {
+                                module.DeviceType = deviceType;
+                            }
+                            else if (module.Domain == Domains.HomeAutomation_HomeGenie_Automation)
+                            {
+                                var program = homegenie.ProgramManager.Programs.Find((p) => p.Address.ToString() == module.Address);
+                                if (program != null)
+                                {
+                                    program.Name = module.Name;
+                                    program.Description = module.Description;
+                                    homegenie.UpdateProgramsDatabase();
+                                }
+                            }
                         }
                         catch(Exception e)
                         {

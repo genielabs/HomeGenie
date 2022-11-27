@@ -32,12 +32,12 @@
 " ":"--------------- PROGRAMS ------------------",
     "programs":
         "Programmi",
+    "repositories":
+      "Repository",
     "packages":
         "Pacchetti",
     "installed_packages":
         "Pacchetti installati",
-    "repositories":
-        "Repositories",
     "upload_package":
         "Carica pacchetto",
     "create_package":
@@ -49,8 +49,16 @@
         "Gruppi e moduli",
     "groups":
         "Gruppi",
+    "add_group":
+      "Aggiungi gruppo",
+    "edit_group":
+      "Modifica gruppo",
+    "delete_group":
+      "Rimuovi group",
+    "dashboard_from_group":
+      "Crea una dashboard da questo gruppo",
     "group_modules":
-      "Moduli nel gruppo '{{name}}'",
+      "Moduli in questo gruppo",
     "modules":
         "Moduli",
     "empty_group":

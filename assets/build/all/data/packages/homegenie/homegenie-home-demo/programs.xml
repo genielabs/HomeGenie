@@ -73,15 +73,7 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>// CSharp Automation Program Plugin
-
-var onvifClient = new OnvifClient();
-onvifClient.OnOnvifDeviceDiscovered = (device) =&gt; {
-  Program.Notify(device.Model, device.Address);
-};
-onvifClient.Start();
-
-const string TEMPERATURE_FIELD = "Sensor.Temperature";
+    <ScriptSource>const string TEMPERATURE_FIELD = "Sensor.Temperature";
 const string LUMINANCE_FIELD = "Sensor.Luminance";
 const string HUMIDITY_FIELD = "Sensor.Humidity";
 const string WATTS_FIELD = "Meter.Watts";

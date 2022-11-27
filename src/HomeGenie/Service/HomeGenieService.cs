@@ -357,8 +357,18 @@ namespace HomeGenie.Service
                 jsonModules = "[";
                 for (int m = 0; m < systemModules.Count; m++)// Module m in Modules)
                 {
-                    jsonModules += Utility.Module2Json(systemModules[m], hideProperties) + ",\n";
-                    //System.Threading.Thread.Sleep(1);
+                    var module = systemModules[m];
+                    if (module.DeviceType == ModuleTypes.Program)
+                    {
+                        int.TryParse(module.Address, out var pid);
+                        var program = masterControlProgram.ProgramGet(pid);
+                        if (program == null || !program.IsEnabled)
+                        {
+                            // hide program modules if program does not exists or is disabled
+                            continue;
+                        }
+                    }
+                    jsonModules += Utility.Module2Json(module, hideProperties) + ",\n";
                 }
                 jsonModules = jsonModules.TrimEnd(',', '\n');
                 jsonModules += "]";
@@ -1009,6 +1019,7 @@ namespace HomeGenie.Service
             // Uncompress factory settings and restart HG service
             Utility.UncompressZip("homegenie_factory_config.zip", AppDomain.CurrentDomain.BaseDirectory);
             Reload();
+            virtualModules.Clear();
             SaveData();
         }
 
@@ -1070,24 +1081,23 @@ namespace HomeGenie.Service
                     {
                         // add new module
                         module = new Module();
-                        systemModules.Add(module);
                         module.Properties = virtualModule.Properties.DeepClone();
                         module.Stores = virtualModule.Stores.DeepClone();
+                        systemModules.Add(module);
                     }
 
                     // module inherits props from associated virtual module
                     module.Domain = virtualModule.Domain;
                     module.Address = virtualModule.Address;
-                    if (module.DeviceType == MIG.ModuleTypes.Generic && virtualModule.DeviceType != ModuleTypes.Generic)
+                    if (module.DeviceType == ModuleTypes.Generic && virtualModule.DeviceType != ModuleTypes.Generic)
                     {
                         module.DeviceType = virtualModule.DeviceType;
                     }
-                    // associated module's name of an automation program cannot be changed
-                    if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
+                    if (module.Name == "")
                     {
                         module.Name = virtualModule.Name;
                     }
-                    if (module.Description == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Description != ""))
+                    if (module.Description == "")
                     {
                         module.Description = virtualModule.Description;
                     }
@@ -1150,8 +1160,12 @@ namespace HomeGenie.Service
                         if (module == null)
                         {
                             // add module for the program
-                            module = new Module();
-                            module.Domain = Domains.HomeAutomation_HomeGenie_Automation;
+                            module = new Module
+                            {
+                                Domain = Domains.HomeAutomation_HomeGenie_Automation,
+                                Name = program.Name,
+                                Description = program.Description
+                            };
                             if (program.Type.ToLower() == "visual" || program.Type.ToLower() == "wizard")
                             {
                                 Utility.ModuleParameterSet(
@@ -1164,8 +1178,6 @@ namespace HomeGenie.Service
                         }
                         module.Address = program.Address.ToString();
                         module.DeviceType = ModuleTypes.Program;
-                        module.Name = program.Name;
-                        module.Description = program.Description;
                     }
                     // Add "Scheduler" virtual module
                     //Module scheduler = systemModules.Find(o=> o.Domain == Domains.HomeAutomation_HomeGenie && o.Address == SourceModule.Scheduler);

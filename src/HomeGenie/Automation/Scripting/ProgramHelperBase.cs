@@ -185,26 +185,23 @@ namespace HomeGenie
         public void Run(string programId, string options)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
-            if (program != null && !program.IsRunning) //  && program.Address != myProgramId
+            if (program is { IsRunning: false })
             {
                 program.Engine.StartProgram(options);
             }
         }
 
         /// <summary>
-        /// Wait until the given program is not running.
+        /// Wait until the given program is running. This is intended to be used with programs that run for at least one second once started.
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="programId">Program address or name.</param>
         public ProgramHelperBase WaitFor(string programId)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
-            if (program != null) // && program.Address != myProgramId)
+            while (program is { IsRunning: false })
             {
-                while (program.IsRunning)
-                {
-                    Thread.Sleep(500);
-                }
+                Thread.Sleep(500);
             }
             return this;
         }

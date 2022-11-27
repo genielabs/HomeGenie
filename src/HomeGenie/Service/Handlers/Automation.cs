@@ -375,6 +375,7 @@ namespace HomeGenie.Service.Handlers
                     }
                     catch (Exception e)
                     {
+                        // TODO: deprecate this 
                         // this is for backward compatibility with HG v1.3.x
                         newProgram = new ProgramBlock() {
                             Group = migCommand.GetOption(0),
@@ -382,10 +383,17 @@ namespace HomeGenie.Service.Handlers
                             Type = "CSharp"
                         };
                     }
-                    newProgram.Address = homegenie.ProgramManager.GeneratePid();
-                    homegenie.ProgramManager.ProgramAdd(newProgram);
-                    homegenie.UpdateProgramsDatabase();
-                    request.ResponseData = new ResponseText(newProgram.Address.ToString());
+                    if (newProgram != null)
+                    {
+                        newProgram.Address = homegenie.ProgramManager.GeneratePid();
+                        if (newProgram.Type.ToLower() == "visual" || newProgram.Type.ToLower() == "csharp")
+                        {
+                            (newProgram.Engine as CSharpEngine)?.CleanupFiles();
+                        }
+                        homegenie.ProgramManager.ProgramAdd(newProgram);
+                        homegenie.UpdateProgramsDatabase();
+                        request.ResponseData = new ResponseText(newProgram.Address.ToString());
+                    }
                     break;
 
                 case "Programs.Clone":
@@ -701,15 +709,14 @@ namespace HomeGenie.Service.Handlers
                 else
                 {
                     if (!program.IsEnabled)
+                    {
                         program.IsEnabled = true;
+                    }
                     try
                     {
                         program.Engine.StartProgram(options);
                     }
-                    catch
-                    {
-                    }
-                    ;
+                    catch { }
                 }
             }
             return program;

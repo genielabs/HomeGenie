@@ -108,21 +108,7 @@ namespace HomeGenie.Automation.Engines
             ProgramBlock.ScriptErrors = "";
             ProgramBlock.IsEnabled = false;
 
-            // clean up old assembly files
-            try
-            {
-                // If the file to be deleted does not exist, no exception is thrown.
-                File.Delete(AssemblyFile);
-                File.Delete(AssemblyFile + ".mdb");
-                File.Delete(AssemblyFile.Replace(".dll", ".mdb"));
-                File.Delete(AssemblyFile + ".pdb");
-                File.Delete(AssemblyFile.Replace(".dll", ".pdb"));
-            }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogError(ex);
-            }
-
+            CleanupFiles();
 
             // DO NOT CHANGE THE FOLLOWING LINES OF CODE
             // it is a lil' trick for mono compatibility
@@ -314,6 +300,23 @@ namespace HomeGenie.Automation.Engines
             }
         }
 
+        public void CleanupFiles()
+        {
+            // clean up old assembly files
+            try
+            {
+                // If the file to be deleted does not exist, no exception is thrown.
+                File.Delete(AssemblyFile);
+                File.Delete(AssemblyFile + ".mdb");
+                File.Delete(AssemblyFile.Replace(".dll", ".mdb"));
+                File.Delete(AssemblyFile + ".pdb");
+                File.Delete(AssemblyFile.Replace(".dll", ".pdb"));
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogError(ex);
+            }
+        }
 
         public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
         {

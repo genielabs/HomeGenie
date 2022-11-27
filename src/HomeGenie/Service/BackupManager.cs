@@ -305,6 +305,7 @@ namespace HomeGenie.Service
                 Properties.InstallProgressMessage,
                 "= Status: Backup Restore " + (success ? "Successful" : "Errors")
             );
+            homegenie.VirtualModules.Clear();
             homegenie.SaveData();
 
             return success;
