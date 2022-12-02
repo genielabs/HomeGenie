@@ -64,6 +64,8 @@ namespace HomeGenie.Service.Constants
         // commonly used parameters
         public const string StatusLevel
             = "Status.Level";
+        public const string StatusColorHsb
+            = "Status.Color";
         public const string MeterAny
             = "Meter.";
         public const string MeterWatts

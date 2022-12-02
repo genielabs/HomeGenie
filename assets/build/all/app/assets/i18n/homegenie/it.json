@@ -146,6 +146,43 @@
         "Nessuna azione",
     "cronwizard_action_schedule_variable_hint":
         "Utilizza <span class=\"color-primary\">@{{name}}</span> come variabile nelle espressioni cron o utilizza <span class=\"color-primary\">Scheduler.IsScheduling(\"{{name}}\")</span> nei programmi di automazione per fare riferimento a questo evento.",
+" ":"--------------- PROGRAM EDITOR ------------------",
+  "save_and_build":
+    "Salva e compila",
+  "toggle_widgets_preview":
+    "Mostra/Nascondi anteprima widgets",
+  "stop_program":
+    "Interrompi programma",
+  "run_program":
+    "Esegui programma",
+  "program_status_idle":
+    "Inattivo",
+  "program_status_running":
+    "In esecuzione",
+  "program_status_background":
+    "Background",
+  "program_status_stopped":
+    "Interrotto",
+  "program_status_disabled":
+    "Disabilitato",
+  "program_status_enabled":
+    "Abilitato",
+  "automation_programming_guide":
+    "Guida alla programmazione",
+  "tap_to_disable":
+    "Tocca per disabilitare",
+  "tap_to_enable":
+    "Tocca per abilitare",
+  "program_data":
+    "Dati programma",
+  "visual_code":
+    "Codice visuale",
+  "generated_code":
+    "Codice generato",
+  "setup_code":
+    "Setup",
+  "main_code":
+    "Main",
 " ": "------------------------------------------",
     "$options":
     {

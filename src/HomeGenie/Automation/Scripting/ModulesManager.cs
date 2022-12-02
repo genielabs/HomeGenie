@@ -81,7 +81,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager InDomain(string domains)
         {
-            this.inDomain = domains;
+            inDomain = domains;
             return this;
         }
 
@@ -100,7 +100,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager WithAddress(string addresses)
         {
-            this.withAddress = addresses;
+            withAddress = addresses;
             return this;
         }
 
@@ -119,7 +119,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager WithName(string moduleNames)
         {
-            this.withName = moduleNames;
+            withName = moduleNames;
             return this;
         }
 
@@ -138,7 +138,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager OfDeviceType(string deviceTypes)
         {
-            this.ofDeviceType = deviceTypes;
+            ofDeviceType = deviceTypes;
             return this;
         }
 
@@ -156,7 +156,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager InGroup(string groups)
         {
-            this.inGroup = groups;
+            inGroup = groups;
             return this;
         }
 
@@ -176,7 +176,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager WithParameter(string parameters)
         {
-            this.withParameter = parameters;
+            withParameter = parameters;
             return this;
         }
 
@@ -195,7 +195,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager WithFeature(string features)
         {
-            this.withFeature = features;
+            withFeature = features;
             return this;
         }
 
@@ -214,7 +214,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager WithoutFeature(string features)
         {
-            this.withoutFeature = features;
+            withoutFeature = features;
             return this;
         }
 
@@ -311,45 +311,45 @@ namespace HomeGenie.Automation.Scripting
                 {
                     var module = Modules[cm];
                     bool selected = true;
-                    if (selected && this.inDomain != null && this.inDomain != "" && GetArgumentsList(this.inDomain.ToLower()).Contains(module.Domain.ToLower()) == false)
+                    if (selected && inDomain != null && inDomain != "" && GetArgumentsList(inDomain.ToLower()).Contains(module.Domain.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && this.withAddress != null && this.withAddress != "" && GetArgumentsList(this.withAddress.ToLower()).Contains(module.Address.ToLower()) == false)
+                    if (selected && withAddress != null && withAddress != "" && GetArgumentsList(withAddress.ToLower()).Contains(module.Address.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && this.withName != null && this.withName != "" && GetArgumentsList(this.withName.ToLower()).Contains(module.Name.ToLower()) == false)
+                    if (selected && withName != null && withName != "" && GetArgumentsList(withName.ToLower()).Contains(module.Name.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && this.withParameter != null && this.withParameter != "")
+                    if (selected && withParameter != null && withParameter != "")
                     {
-                        if (module.Properties.Find(p => GetArgumentsList(this.withParameter).Contains(p.Name)) == null)
+                        if (module.Properties.Find(p => GetArgumentsList(withParameter).Contains(p.Name)) == null)
                         {
                             selected = false;
                         }
                     }
-                    if (selected && this.withFeature != null && this.withFeature != "")
+                    if (selected && withFeature != null && withFeature != "")
                     {
-                        var parameter = module.Properties.Find(p => GetArgumentsList(this.withFeature).Contains(p.Name));
+                        var parameter = module.Properties.Find(p => GetArgumentsList(withFeature).Contains(p.Name));
                         if (parameter == null || (parameter.Value != "On" && parameter.DecimalValue == 0))
                         {
                             selected = false;
                         }
                     }
-                    if (selected && this.withoutFeature != null && this.withoutFeature != "")
+                    if (selected && withoutFeature != null && withoutFeature != "")
                     {
-                        var parameter = module.Properties.Find(p => GetArgumentsList(this.withoutFeature).Contains(p.Name));
+                        var parameter = module.Properties.Find(p => GetArgumentsList(withoutFeature).Contains(p.Name));
                         if (parameter != null && parameter.Value == "On")
                         {
                             selected = false;
                         }
                     }
-                    if (selected && this.inGroup != null && this.inGroup != "")
+                    if (selected && inGroup != null && inGroup != "")
                     {
                         selected = false;
-                        var groups = GetArgumentsList(this.inGroup);
+                        var groups = GetArgumentsList(inGroup);
                         foreach (string group in groups)
                         {
                             var theGroup = homegenie.Groups.Find(z => z.Name.ToLower() == group.Trim().ToLower());
@@ -366,10 +366,10 @@ namespace HomeGenie.Automation.Scripting
                             }
                         }
                     }
-                    if (selected && this.ofDeviceType != null && this.ofDeviceType != "")
+                    if (selected && ofDeviceType != null && ofDeviceType != "")
                     {
                         selected = false;
-                        var deviceTypes = GetArgumentsList(this.ofDeviceType);
+                        var deviceTypes = GetArgumentsList(ofDeviceType);
                         foreach (string dtype in deviceTypes)
                         {
                             if (module.DeviceType.ToString().ToLower() == dtype.Trim().ToLower())
@@ -430,7 +430,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager Command(string command)
         {
-            this.command = command;
+            command = command;
             return this;
         }
 
@@ -454,7 +454,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModulesManager IterationDelay(double delaySeconds)
         {
-            this.iterationDelay = delaySeconds;
+            iterationDelay = delaySeconds;
             return this;
         }
 
@@ -464,7 +464,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="options">Options.</param>
         public object GetValue(string options = "")
         {
-            this.commandOptions = options;
+            commandOptions = options;
             object response = null;
             // execute this command context
             var selectedModules = SelectedModules;
@@ -504,8 +504,8 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>ModulesManager</returns>
         public ModulesManager Set()
         {
-            this.commandOptions = "0";
-            return Set(this.commandOptions);
+            commandOptions = "0";
+            return Set(commandOptions);
         }
 
         /// <summary>
@@ -515,7 +515,7 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>ModulesManager</returns>
         public ModulesManager Set(string options)
         {
-            this.commandOptions = options;
+            commandOptions = options;
             // execute this command context
             if (command != "")
             {
@@ -621,8 +621,33 @@ namespace HomeGenie.Automation.Scripting
             }
             set
             {
-                this.command = Commands.Control.ControlLevel;
-                this.Set(value.ToString(CultureInfo.InvariantCulture));
+                command = Commands.Control.ControlLevel;
+                Set(value.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets "Status.ColorHsb" parameter of selected modules. If more than one module is selected, when reading this property the first module color is returned.
+        /// </summary>
+        /// <value>The HSB color string (eg. "0.3130718,0.986,0.65").</value>
+        /// <remarks />
+        public string ColorHsb
+        {
+            get
+            {
+                // TODO: find a way to return average color value if more than one module is selected
+                var module = Get().Instance;
+                if (module != null)
+                {
+                    var parameter = Utility.ModuleParameterGet(module, Properties.StatusColorHsb);
+                    return parameter != null ? parameter.Value : "";
+                }
+                return "";
+            }
+            set
+            {
+                command = Commands.Control.ControlColorHsb;
+                Set(value);
             }
         }
 
@@ -782,7 +807,7 @@ namespace HomeGenie.Automation.Scripting
             int count = 0;
             foreach (var module in SelectedModules)
             {
-                var p = Service.Utility.ModuleParameterGet(module, parameter);
+                var p = Utility.ModuleParameterGet(module, parameter);
                 if (p != null)
                 {
                     averageValue += p.DecimalValue;
@@ -828,9 +853,9 @@ namespace HomeGenie.Automation.Scripting
 
         private void DelayIteration()
         {
-            if (this.iterationDelay > 0)
+            if (iterationDelay > 0)
             {
-                System.Threading.Thread.Sleep((int)(this.iterationDelay * 1000D));
+                System.Threading.Thread.Sleep((int)(iterationDelay * 1000D));
             }
         }
 

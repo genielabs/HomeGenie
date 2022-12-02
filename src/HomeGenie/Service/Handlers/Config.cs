@@ -1363,8 +1363,9 @@ namespace HomeGenie.Service.Handlers
                             newGroups[i].Modules.RemoveAll((mr) => mr.Address == null || mr.Domain == null);
                             group.Modules = newGroups[i].Modules;
                         }
-                        catch
+                        catch(Exception e)
                         {
+                            Console.WriteLine(e);
                             // TODO: report exception
                         }
                     }

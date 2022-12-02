@@ -46,6 +46,8 @@ namespace HomeGenie.Service.Constants
                 = "Control.Off";
             public const string ControlLevel
                 = "Control.Level";
+            public const string ControlColorHsb
+                = "Control.ColorHsb";
             public const string ControlToggle
                 = "Control.Toggle";
         }
