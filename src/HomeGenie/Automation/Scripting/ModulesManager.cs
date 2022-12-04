@@ -315,22 +315,22 @@ namespace HomeGenie.Automation.Scripting
                     {
                         selected = false;
                     }
-                    if (selected && withAddress != null && withAddress != "" && GetArgumentsList(withAddress.ToLower()).Contains(module.Address.ToLower()) == false)
+                    if (selected && !string.IsNullOrEmpty(withAddress) && GetArgumentsList(withAddress.ToLower()).Contains(module.Address.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && withName != null && withName != "" && GetArgumentsList(withName.ToLower()).Contains(module.Name.ToLower()) == false)
+                    if (selected && !string.IsNullOrEmpty(withName) && GetArgumentsList(withName.ToLower()).Contains(module.Name.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && withParameter != null && withParameter != "")
+                    if (selected && !string.IsNullOrEmpty(withParameter))
                     {
                         if (module.Properties.Find(p => GetArgumentsList(withParameter).Contains(p.Name)) == null)
                         {
                             selected = false;
                         }
                     }
-                    if (selected && withFeature != null && withFeature != "")
+                    if (selected && !string.IsNullOrEmpty(withFeature))
                     {
                         var parameter = module.Properties.Find(p => GetArgumentsList(withFeature).Contains(p.Name));
                         if (parameter == null || (parameter.Value != "On" && parameter.DecimalValue == 0))
@@ -338,7 +338,7 @@ namespace HomeGenie.Automation.Scripting
                             selected = false;
                         }
                     }
-                    if (selected && withoutFeature != null && withoutFeature != "")
+                    if (selected && !string.IsNullOrEmpty(withoutFeature))
                     {
                         var parameter = module.Properties.Find(p => GetArgumentsList(withoutFeature).Contains(p.Name));
                         if (parameter != null && parameter.Value == "On")
@@ -346,7 +346,7 @@ namespace HomeGenie.Automation.Scripting
                             selected = false;
                         }
                     }
-                    if (selected && inGroup != null && inGroup != "")
+                    if (selected && !string.IsNullOrEmpty(inGroup))
                     {
                         selected = false;
                         var groups = GetArgumentsList(inGroup);
@@ -366,7 +366,7 @@ namespace HomeGenie.Automation.Scripting
                             }
                         }
                     }
-                    if (selected && ofDeviceType != null && ofDeviceType != "")
+                    if (selected && !string.IsNullOrEmpty(ofDeviceType))
                     {
                         selected = false;
                         var deviceTypes = GetArgumentsList(ofDeviceType);
@@ -417,7 +417,7 @@ namespace HomeGenie.Automation.Scripting
         /// Select an API command to be executed for selected modules. To perform the selected command, Execute or Set method must be invoked.
         /// </summary>
         /// <returns>ModulesManager</returns>
-        /// <param name="command">API command to be performed.</param>
+        /// <param name="cmd">API command to be performed.</param>
         /// <remarks />
         /// <example>
         /// Example:
@@ -428,9 +428,9 @@ namespace HomeGenie.Automation.Scripting
         /// Modules.OfDeviceType("Dimmer").Command("Control.Level").Set("50");
         /// </code>
         /// </example>
-        public ModulesManager Command(string command)
+        public ModulesManager Command(string cmd)
         {
-            command = command;
+            command = cmd;
             return this;
         }
 

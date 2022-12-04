@@ -4,13 +4,12 @@
     <ScriptSetup>Program
   .AddOption("ThermostatsCount", "1", "Virtual thermostats modules to create", "slider:1:10:1")
   .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature")
-  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.HeatingSwitchModule", "Heating switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.CoolingSwitchModule", "Cooling switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
   .Run();
 </ScriptSetup>
-    <ScriptSource>const int HOLDING_MODE_DIFF = 1;
-const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
+    <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
 const string PARAMETER_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
-const string PARAMETER_SWITCH_MODULE = "VirtualThermostat.SwitchModule";
 const string EVENT_DESCRIPTION = "Basic Thermostat";
 
 var thermostatsCount = (int)Program.Option("ThermostatsCount").DecimalValue;
@@ -18,14 +17,77 @@ if (thermostatsCount &lt;= 0) thermostatsCount = 1;
 Program.AddVirtualModules(MODULES_DOMAIN, "Thermostat", "homegenie/generic/thermostat", 1, thermostatsCount);
 var thermostatModules = Modules.InDomain(MODULES_DOMAIN).OfDeviceType("Thermostat");
 
-var holdingMode = new bool[thermostatsCount];
-
-var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
-
+//var holdingMode = new bool[thermostatsCount];
+var currentMode = "";
+var lastNotification = "";
+var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&gt; {
+  var modePrefix = mode.Substring(0, 4);
   var temperature = thermostat.Parameter("Sensor.Temperature");
   var operatingState = thermostat.Parameter("Thermostat.OperatingState");
   var thermostatMode = thermostat.Parameter("Thermostat.Mode");
-  var heatSetPoint = thermostat.Parameter("Thermostat.SetPoint.Heating");
+  var setPoint = thermostat.Parameter("Thermostat.SetPoint." + modePrefix + "ing");
+  var index = int.Parse(thermostat.Instance.Address) - 1;
+
+  // get a reference to the switch/relay module
+  string domainAddress = "";
+  string domain = "";
+  string address = "";
+  domain = address = "";
+  domainAddress = thermostat.Parameter("VirtualThermostat." + modePrefix + "ingSwitchModule").Value;
+  if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+  {
+    domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+    address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+  }
+  var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+  if (thermostatMode.Value != "Off" &amp;&amp; (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null) &amp;&amp; lastNotification != thermostatMode.Value)
+  {
+    lastNotification = thermostatMode.Value;
+    thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+    Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "A switch for the mode '" + modePrefix + "' is not set.");
+    return false;
+  }
+  // Mode logic
+  if (thermostatMode.Value == mode)
+  {
+    var setPointReached = true;
+    if (mode.StartsWith("Heat")) {
+      setPointReached = temperature.DecimalValue &gt;= setPoint.DecimalValue;
+    } else if (mode.StartsWith("Cool")) {
+      setPointReached = temperature.DecimalValue &lt;= setPoint.DecimalValue;
+    }
+    if (!setPointReached)
+    {
+      if (operatingState.Value != modePrefix + "ing")
+      {
+        thermostat.RaiseEvent("Thermostat.OperatingState", modePrefix + "ing", EVENT_DESCRIPTION);
+      }
+      // Turn switch module ON
+      switchModule.On();
+    }
+    else
+    {
+      if (operatingState.Value != "Pending" + mode)
+      {
+        thermostat.RaiseEvent("Thermostat.OperatingState", "Pending" + mode, EVENT_DESCRIPTION);
+      }
+      // Waiting
+      switchModule.Off();
+    }
+  }
+  else
+  {
+    if (operatingState.Value != "Off" &amp;&amp; operatingState.Value != "Idle")
+    {
+      thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+    }
+    switchModule.Off();
+  }
+  return true;
+});
+var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
+  var temperature = thermostat.Parameter("Sensor.Temperature");
+  var thermostatMode = thermostat.Parameter("Thermostat.Mode");
   var index = int.Parse(thermostat.Instance.Address) - 1;
   string domainAddress = "";
   string domain = "";
@@ -48,56 +110,15 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
     }
     // Update Thermostat module Temperature field
     temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
-
-    // get a reference to the switch/relay module
-    domain = address = "";
-    domainAddress = thermostat.Parameter(PARAMETER_SWITCH_MODULE).Value;
-    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    // Run the Heating/Cooling logic
+    if (thermostatMode.Value != "Off" &amp;&amp; currentMode != thermostatMode.Value)
     {
-      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
-      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+      currentMode = thermostatMode.Value;
+      lastNotification = "";
     }
-    var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
-    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
+    if (!String.IsNullOrEmpty(currentMode))
     {
-      thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
-      Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid switch module.");
-      return false;
-    }
-
-    // Heat Mode logic
-    if (thermostatMode.Value == "Heat")
-    {
-      if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue - (holdingMode[index] ? HOLDING_MODE_DIFF : 0))
-      {
-        if (switchModule.IsOff) holdingMode[index] = false;
-        if (operatingState.Value != "Heating")
-        {
-          thermostat.RaiseEvent("Thermostat.OperatingState", "Heating", EVENT_DESCRIPTION);
-        }
-        // Heating
-        if (switchModule.IsOff &amp;&amp; switchModule.Get().Parameter("Status.Level").IdleTime &gt; 60) switchModule.On();
-      }
-      else
-      {
-        if (switchModule.IsOn) holdingMode[index] = true;
-        if (operatingState.Value != "PendingHeat")
-        {
-          thermostat.RaiseEvent("Thermostat.OperatingState", "PendingHeat", EVENT_DESCRIPTION);
-        }
-        // Waiting
-        if (switchModule.IsOn &amp;&amp; switchModule.Get().Parameter("Status.Level").IdleTime &gt; 60) switchModule.Off();
-      }
-    }
-    else
-    {
-      if (operatingState.Value != "Off" &amp;&amp; operatingState.Value != "Idle")
-      {
-        thermostat.RaiseEvent("Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
-        holdingMode[index] = false;
-      }
-      // Off
-      if (switchModule.IsOn &amp;&amp; switchModule.Get().Parameter("Status.Level").IdleTime &gt; 60) switchModule.Off();
+      RunLogic(thermostat, currentMode);
     }
   }
   catch (Exception e)
@@ -144,26 +165,24 @@ When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
   switch (request.Command)
   {
     case "Thermostat.SetPointSet":
-    // Basic thermostat currently only supports Heating mode
-    if (option == "Heating")
+    if (option == "Thermostat.SetPoint.Heating" || option == "Thermostat.SetPoint.Cooling"
+        || option == "Thermostat.SetPoint.HeatingEconomy" || option == "Thermostat.SetPoint.CoolingEconomy")
     {
       var setPoint = request.GetOption(1);
-      thermostat.RaiseEvent("Thermostat.SetPoint.Heating", setPoint, EVENT_DESCRIPTION);
-      holdingMode[index] = false;
+      thermostat.RaiseEvent(option, setPoint, EVENT_DESCRIPTION);
       ThermostatLogicRun(thermostat);
       res = "OK";
     }
     break;
     case "Thermostat.ModeSet":
-    // Currently supported modes are Off or Heat
-    if (option == "Off" || option == "Heat")
+    if (option == "Off" || option == "Heat" || option == "HeatEconomy" || option == "Cool" || option == "CoolEconomy")
     {
       thermostat.RaiseEvent("Thermostat.Mode", option, EVENT_DESCRIPTION);
-      holdingMode[index] = false;
       ThermostatLogicRun(thermostat);
       res = "OK";
     }
     break;
+    // TODO: also implement 'Thermostat.FanModeSet'
   }
   return res != "ERROR" ? new ResponseText(res) : null;
 });
@@ -174,10 +193,10 @@ while (Program.IsRunning)
     ThermostatLogicRun(thermostat);
     return false;
   });
-  Pause(120);
+  Pause(60);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -185,7 +204,7 @@ while (Program.IsRunning)
       <Id>basic-thermostat</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>07B7E8E7E7C220E10F6523EA62DC1798</Checksum>
+      <Checksum>692A00E137A7373CF0094AC13D8A8481</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
@@ -206,8 +225,15 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
         <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
         <ForTypes>Thermostat</ForTypes>
-        <Property>VirtualThermostat.SwitchModule</Property>
-        <Description>Module to switch on/off on set point</Description>
+        <Property>VirtualThermostat.HeatingSwitchModule</Property>
+        <Description>Heating switch</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
+        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForTypes>Thermostat</ForTypes>
+        <Property>VirtualThermostat.CoolingSwitchModule</Property>
+        <Description>Cooling switch</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
