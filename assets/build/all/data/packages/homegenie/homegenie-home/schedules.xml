@@ -111,12 +111,12 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
   // this is start of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('Cool');
+  $$.boundModules.command('Thermostat.ModeSet').submit('Cool');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
   // this is end of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
 
 } else {
   // this is for each other occurrences
@@ -144,12 +144,12 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
   // this is start of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('CoolEconomy');
+  $$.boundModules.command('Thermostat.ModeSet').submit('CoolEconomy');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
   // this is end of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
 
 } else {
   // this is for each other occurrences
@@ -172,12 +172,12 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
   // this is start of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('Heat');
+  $$.boundModules.command('Thermostat.ModeSet').submit('Heat');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
   // this is end of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
 
 } else {
   // this is for each other occurrences
@@ -205,12 +205,12 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
   // this is start of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('HeatEconomy');
+  $$.boundModules.command('Thermostat.ModeSet').submit('HeatEconomy');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
   // this is end of occurrences range
 
-  $$.boundModules.command('Thermostat.ModeSet').set('Off');
+  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
 
 } else {
   // this is for each other occurrences

@@ -22,10 +22,11 @@ var currentMode = "";
 var lastNotification = "";
 var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&gt; {
   var modePrefix = mode.Substring(0, 4);
+  var economySuffix = (mode != modePrefix) ? "Economy" : "";
   var temperature = thermostat.Parameter("Sensor.Temperature");
   var operatingState = thermostat.Parameter("Thermostat.OperatingState");
   var thermostatMode = thermostat.Parameter("Thermostat.Mode");
-  var setPoint = thermostat.Parameter("Thermostat.SetPoint." + modePrefix + "ing");
+  var setPoint = thermostat.Parameter("Thermostat.SetPoint." + modePrefix + "ing" + economySuffix);
   var index = int.Parse(thermostat.Instance.Address) - 1;
 
   // get a reference to the switch/relay module
@@ -165,11 +166,11 @@ When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
   switch (request.Command)
   {
     case "Thermostat.SetPointSet":
-    if (option == "Thermostat.SetPoint.Heating" || option == "Thermostat.SetPoint.Cooling"
-        || option == "Thermostat.SetPoint.HeatingEconomy" || option == "Thermostat.SetPoint.CoolingEconomy")
+    if (option == "Heating" || option == "Cooling"
+        || option == "HeatingEconomy" || option == "CoolingEconomy")
     {
       var setPoint = request.GetOption(1);
-      thermostat.RaiseEvent(option, setPoint, EVENT_DESCRIPTION);
+      thermostat.RaiseEvent("Thermostat.SetPoint." + option, setPoint, EVENT_DESCRIPTION);
       ThermostatLogicRun(thermostat);
       res = "OK";
     }
@@ -196,7 +197,7 @@ while (Program.IsRunning)
   Pause(60);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -204,7 +205,7 @@ while (Program.IsRunning)
       <Id>basic-thermostat</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>692A00E137A7373CF0094AC13D8A8481</Checksum>
+      <Checksum>69E174801FFFBB2EC98F44ECCF0E6BD7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
@@ -332,29 +333,47 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   {
     counterUpdateTimestamp = DateTime.Now;
     var totalWattCounter = wattCounter.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
-    wattCounter.SetData(totalWattCounter);
-    kwCounter.SetData(totalWattCounter / 1000D);
-    var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
-    wattCounterToday.SetData(todayWattCounter);
-    kwCounterToday.SetData(todayWattCounter / 1000D);
-    raiseEvent(wattCounter);
-    raiseEvent(kwCounter);
-    raiseEvent(wattCounterToday);
-    raiseEvent(kwCounterToday);
+    if (totalWattCounter != wattCounter.DecimalValue)
+    {
+      wattCounter.SetData(totalWattCounter);
+      raiseEvent(wattCounter);
+      kwCounter.SetData(totalWattCounter / 1000D);
+      raiseEvent(kwCounter);
+      var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
+      wattCounterToday.SetData(todayWattCounter);
+      raiseEvent(wattCounterToday);
+      kwCounterToday.SetData(todayWattCounter / 1000D);
+      raiseEvent(kwCounterToday);
+    }
   }
   // Update current load/devices stats
-  kwLoad.Value = (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
-  raiseEvent(kwLoad);
-  wattLoad.Value = totalLoad.ToString("0.000", CultureInfo.InvariantCulture);
-  raiseEvent(wattLoad);
-  operatingDevices.Value = devcount.ToString("0");
-  raiseEvent(operatingDevices);
-  operatingLights.Value = lightcount.ToString("0");
-  raiseEvent(operatingLights);
-  operatingSwitches.Value = switchcount.ToString("0");
-  raiseEvent(operatingSwitches);
-  // TODO: deprecate Program.UiRefresh field
-  energyMonitor.RaiseEvent("Program.UiRefresh", "Energy Monitor data updated", "");
+  var load = totalLoad.ToString("0.000", CultureInfo.InvariantCulture);
+  if (wattLoad.Value != load)
+  {
+    wattLoad.Value = load;
+    raiseEvent(wattLoad);
+  }
+  load = (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
+  if (kwLoad.Value != load)
+  {
+    kwLoad.Value = load;
+    raiseEvent(kwLoad);
+  }
+  if (operatingDevices.DecimalValue != devcount)
+  {
+    operatingDevices.Value = devcount.ToString("0");
+    raiseEvent(operatingDevices);
+  }
+  if (operatingLights.DecimalValue != lightcount)
+  {
+    operatingLights.Value = lightcount.ToString("0");
+    raiseEvent(operatingLights);
+  }
+  if (operatingSwitches.DecimalValue != switchcount)
+  {
+    operatingSwitches.Value = switchcount.ToString("0");
+    raiseEvent(operatingSwitches);
+  }
   return true;
 });
 
@@ -382,7 +401,7 @@ When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
 var midNightReset = false;
 while (Program.IsRunning)
 {
-  if (updateRequired || (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= 6) {
+  if (updateRequired || (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= 60) {
   	updateRequired = false;
     UpdateEnergyLoad();
   }
@@ -408,7 +427,7 @@ while (Program.IsRunning)
       <Id>energy-monitor</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>2268237AFFFF06DBD75F0F3BD219017C</Checksum>
+      <Checksum>EBADAB41EDE517A6C329CA81FD78FA59</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -606,7 +625,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
   {
     string lightNumber = request.Address;
     string parameter = Uri.UnescapeDataString(request.GetOption(0));
-	var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
+	  var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
     var module = hueModules.WithAddress(lightNumber).Get();
     //
     switch(request.Command)
@@ -686,7 +705,7 @@ Program.GoBackground();
       <Id>philips-hue-bridge</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>22FE096E6945CDB52AA21B01FBEEC88D</Checksum>
+      <Checksum>C20E863155395D7D495833366B9A8303</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>

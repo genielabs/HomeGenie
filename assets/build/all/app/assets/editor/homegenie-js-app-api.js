@@ -268,7 +268,7 @@ class ProgramHelper {
    * @code
    * Program.Notify("Hello {0} {1}!", [firstName, lastName]);
    */
-  notify(message: string, paramList: any[]): ProgramHelper;
+  notify(message: string, paramList?: any[]): ProgramHelper;
 
   /**
    * Display UI notification message from current program.
@@ -281,7 +281,7 @@ class ProgramHelper {
    * @code
    * Program.Notify("Test Program", "Hello world!");
    */
-  notify(title: string, message: string, paramList: any[]): ProgramHelper;
+  notify(title: string, message: string, paramList?: any[]): ProgramHelper;
 
   /**
    * Raise a parameter event and set the parameter with the specified value.
@@ -756,6 +756,21 @@ class ModulesManager {
    * @returns  ModulesManager
    */
   set(options?: string): ModulesManager;
+
+  /**
+   * Submits the command previously specified with `Command` method.
+   * @param callback Optional callback that will be called, for each module in the selection, with the result of the issued command.
+   * @returns  ModulesManager
+   */
+  submit(callback?: (module: Module, result: any) => void);
+
+  /**
+   * Submits the command previously specified with `Command` method, passing to it the options given by the `options` parameter.
+   * @param options A string containing a slash separated list of options to be passed to the selected command.
+   * @param callback Optional callback that will be called, for each module in the selection, with the result of the issued command.
+   * @returns  ModulesManager
+   */
+  submit(options: string, callback?: (module: Module, result: any) => void);
 
   /**
    * Turn on all selected modules.

@@ -483,6 +483,7 @@ namespace HomeGenie.Automation.Scripting
         /// Execute current command for all selected modules.
         /// </summary>
         /// <returns>ModulesManager</returns>
+        [Obsolete("This method is deprecated, use Submit() instead.")]
         public ModulesManager Execute()
         {
             return Set();
@@ -493,6 +494,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <param name="options">A string containing options to be passed to the selected command.</param>
         /// <returns>ModulesManager</returns>
+        [Obsolete("This method is deprecated, use Submit(string options) instead.")]
         public ModulesManager Execute(string options)
         {
             return Set(options);
@@ -502,6 +504,7 @@ namespace HomeGenie.Automation.Scripting
         /// Alias for Execute()
         /// </summary>
         /// <returns>ModulesManager</returns>
+        [Obsolete("This method is deprecated, use Submit() instead.")]
         public ModulesManager Set()
         {
             commandOptions = "0";
@@ -513,6 +516,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <param name="options">A string containing options to be passed to the selected command.</param>
         /// <returns>ModulesManager</returns>
+        [Obsolete("This method is deprecated, use Submit(string options) instead.")]
         public ModulesManager Set(string options)
         {
             commandOptions = options;
@@ -525,6 +529,53 @@ namespace HomeGenie.Automation.Scripting
                         module,
                         new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandOptions)
                     );
+                    DelayIteration();
+                }
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Submits the command previously specified with `Command` method.
+        /// </summary>
+        /// <param name="callback">Optional callback that will be called, for each module in the selection, with the result of the issued command.</param>
+        /// <returns>ModulesManager</returns>
+        public ModulesManager Submit(Action<Module, object> callback = null)
+        {
+            commandOptions = "0";
+            return Submit(commandOptions, callback);
+        }
+        // the following redundant method definition is for Jint compatibility (JavaScript engine)
+        public ModulesManager Submit()
+        {
+            return Submit(null);
+        }
+
+        /// <summary>
+        /// Submits the command previously specified with `Command` method, passing to it the options given by the `options` parameter.
+        /// </summary>
+        /// <param name="options">A string containing a slash separated list of options to be passed to the selected command.</param>
+        /// <param name="callback">Optional callback that will be called, for each module in the selection, with the result of the issued command.</param>
+        /// <returns>ModulesManager</returns>
+        public ModulesManager Submit(string options, Action<Module, object> callback = null)
+        {
+            commandOptions = options;
+            // execute this command context
+            if (command != "")
+            {
+                foreach (var module in SelectedModules)
+                {
+                    var response = InterfaceControl(
+                        module,
+                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandOptions)
+                    );
+                    if (callback != null)
+                    {
+                        Utility.RunAsyncTask(() =>
+                        {
+                            callback(module, response);
+                        });
+                    }
                     DelayIteration();
                 }
             }
