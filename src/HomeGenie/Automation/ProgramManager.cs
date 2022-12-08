@@ -26,7 +26,7 @@ using System.Globalization;
 using System.Threading;
 using System.IO;
 using System.Linq;
-
+using HomeGenie.Automation.Engines;
 using MIG;
 
 using HomeGenie.Automation.Scheduler;
@@ -134,6 +134,11 @@ namespace HomeGenie.Automation
 
         public void ProgramAdd(ProgramBlock program)
         {
+            if (program.Type.ToLower() == "wizard")
+            {
+                // TODO: convert Wizard Scripts (old HG < 1.4) to Visual Code (new in HG >= 1.4)
+                WizardEngine.ConvertToVisualCode(hgService, program);
+            }
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
             program.Engine.SetHost(hgService);

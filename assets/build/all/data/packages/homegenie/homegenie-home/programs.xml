@@ -625,7 +625,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
   {
     string lightNumber = request.Address;
     string parameter = Uri.UnescapeDataString(request.GetOption(0));
-	  var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
+    var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
     var module = hueModules.WithAddress(lightNumber).Get();
     //
     switch(request.Command)
@@ -681,7 +681,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
       case "Control.Alert":
-        // eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
+        // eg. Modules.WithName("Light 1").Command("Control.Alert").Submit(); for a short alert Submit("Long"); for a 30 second alert
         string alertType = "select";
         if (parameter == "Long") {alertType = "lselect";}
         bridgeApiCall(lightNumber, "{\"alert\" : \"" + alertType + "\"}");
@@ -705,7 +705,7 @@ Program.GoBackground();
       <Id>philips-hue-bridge</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>C20E863155395D7D495833366B9A8303</Checksum>
+      <Checksum>322145612FB39175AA9B8AAF3F70B149</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
@@ -1180,17 +1180,17 @@ var colorLights = Modules.WithFeature("Scenarios.SunriseColors")
   .Command("Control.ColorHsb");
 
 // First transition to red, 5 seconds
-colorLights.Set("0,1,.8,5");
+colorLights.Submit("0,1,.8,5");
 Pause(5);
 
 // Second transition to orange, 5 seconds
-colorLights.Set("0.08,1,.8,5");
+colorLights.Submit("0.08,1,.8,5");
 Pause(5);
 
 // Last transition to bright white, 10 seconds
-colorLights.Set("0.13,0,1,10");
+colorLights.Submit("0.13,0,1,10");
 Pause(10);</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -1198,7 +1198,7 @@ Pause(10);</ScriptSource>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>ED5BE41BABA46071CD88D300AD0A6F9C</Checksum>
+      <Checksum>B44FEDF2EE15EAACB1EF012D7D7A8F16</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>

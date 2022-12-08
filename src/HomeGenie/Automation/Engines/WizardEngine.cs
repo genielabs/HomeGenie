@@ -24,7 +24,7 @@ using System;
 using System.Threading;
 using System.Globalization;
 using System.Collections.Generic;
-
+using System.Dynamic;
 using Newtonsoft.Json;
 
 using MIG;
@@ -62,6 +62,188 @@ namespace HomeGenie.Automation.Engines
                 }
             }
         }
+
+        public static void ConvertToVisualCode(HomeGenieService homegenie, ProgramBlock program)
+        {
+                const string visualCodeBlock = @"{{
+                  ""blocks"": {{
+                    ""languageVersion"": 0,
+                    ""blocks"": [{0}{1}]
+                  }}
+                }}";
+                const string setupBlock = @"{{
+                  ""type"": ""setup_code"",
+                  ""id"": ""{0}"",
+                  ""inputs"": {{
+                    ""SETUP"": {1}
+                  }}
+                }}";
+                const string mainBlock = @"{{
+                  ""type"": ""main_code"",
+                  ""id"": ""{0}"",
+                  ""inputs"": {{
+                    ""MAIN"": {1}
+                  }}
+                }}";
+                // TODO: convert old "wizard" type programs to "visual" (VPL)
+                var script = new WizardScript(program);
+                // Setup block
+                // --> script.Conditions
+                // --> script.ConditionType
+                // Main block
+                dynamic previousBlock = null;
+                dynamic rootBlock = null;
+                string selectedModuleAddress = "";
+                int id = 0;
+                foreach (var command in script.Commands)
+                {
+                    dynamic commandBlock = new ExpandoObject();
+                    dynamic block = new ExpandoObject();
+                    commandBlock.block = block;
+                    block.id = "C" + id++;
+                    block.fields = new ExpandoObject();
+                    if (command.Domain == Domains.HomeAutomation_HomeGenie && command.Target == "Automation")
+                    {
+                        switch (command.CommandString)
+                        {
+                            case "Program.Run":
+                                block.type = "program_run";
+                                string pid1 = command.CommandArguments;
+                                var prg1 = homegenie.ProgramManager.Programs
+                                    .Find(p => p.Address.ToString() == pid1 || p.Name == pid1);
+                                block.fields.PROGRAM = prg1 != null ? prg1.Address.ToString(CultureInfo.InvariantCulture) : "";
+                                break;
+                            case "Program.WaitFor":
+                                block.type = "program_wait_for";
+                                string pid2 = command.CommandArguments;
+                                var prg2 = homegenie.ProgramManager.Programs
+                                    .Find(p => p.Address.ToString() == pid2 || p.Name == pid2);
+                                block.fields.PROGRAM = prg2 != null ? prg2.Address.ToString(CultureInfo.InvariantCulture) : "";
+                                break;
+                            case "Program.Pause":
+                                block.type = "program_pause";
+                                double.TryParse(command.CommandArguments, out var seconds);
+                                block.inputs = new ExpandoObject();
+                                block.inputs.SECONDS = new ExpandoObject();
+                                block.inputs.SECONDS.shadow = new ExpandoObject();
+                                block.inputs.SECONDS.shadow.type = "math_number";
+                                block.inputs.SECONDS.shadow.id = "I" + id++;
+                                block.inputs.SECONDS.shadow.fields = new ExpandoObject();
+                                block.inputs.SECONDS.shadow.fields.NUM = seconds;
+                                break;
+                            case "Program.Repeat":
+                                // TODO: currently not supported
+                                break;
+                            case "Program.Play":
+                                block.type = "program_play";
+                                block.inputs = new ExpandoObject();
+                                block.inputs.MEDIA_URL = new ExpandoObject();
+                                block.inputs.MEDIA_URL.shadow = new ExpandoObject();
+                                block.inputs.MEDIA_URL.shadow.type = "text";
+                                block.inputs.MEDIA_URL.shadow.id = "I" + id++;
+                                block.inputs.MEDIA_URL.shadow.fields = new ExpandoObject();
+                                block.inputs.MEDIA_URL.shadow.fields.TEXT = command.CommandArguments;
+                                break;
+                            case "Program.Say":
+                                block.type = "program_say";
+                                block.inputs = new ExpandoObject();
+                                block.inputs.SENTENCE = new ExpandoObject();
+                                block.inputs.SENTENCE.shadow = new ExpandoObject();
+                                block.inputs.SENTENCE.shadow.type = "text";
+                                block.inputs.SENTENCE.shadow.id = "I" + id++;
+                                block.inputs.SENTENCE.shadow.fields = new ExpandoObject();
+                                block.inputs.SENTENCE.shadow.fields.TEXT = command.CommandArguments;
+                                break;
+                        }
+                        if (previousBlock != null)
+                        {
+                            previousBlock.block.next = commandBlock;
+                        }
+                        else
+                        {
+                            rootBlock = commandBlock;
+                        }
+                    }
+                    else
+                    {
+                        dynamic moduleSelectBlock = new ExpandoObject();
+                        dynamic selectBlock = new ExpandoObject();
+                        moduleSelectBlock.block = selectBlock;
+                        selectBlock.type = "module_select";
+                        selectBlock.id = "M" + id++;
+                        selectBlock.fields = new ExpandoObject();
+                        selectBlock.fields.MODULE = $"{command.Domain}:{command.Target}";
+                        selectBlock.next = commandBlock;
+                        switch (command.CommandString)
+                        {
+                            case Commands.Control.ControlOn:
+                                block.type = "control_on";
+                                break;
+                            case Commands.Control.ControlOff:
+                                block.type = "control_off";
+                                break;
+                            case Commands.Control.ControlToggle:
+                                block.type = "control_toggle";
+                                break;
+                            case Commands.Control.ControlLevel:
+                                block.type = "control_level";
+                                double.TryParse(command.CommandArguments, out var level);
+                                block.fields.LEVEL = level;
+                                break;
+                            case Commands.Control.ControlColorHsb:
+                                block.type = "control_color";
+                                var hsb = command.CommandArguments.Split(',');
+                                string htmlColor = "";
+                                try
+                                {
+                                    htmlColor = Utility.HtmlColorFromHsb(
+                                        double.Parse(hsb[0], CultureInfo.InvariantCulture),
+                                        double.Parse(hsb[1], CultureInfo.InvariantCulture),
+                                        double.Parse(hsb[2], CultureInfo.InvariantCulture)
+                                    );
+                                } catch { }
+                                block.fields.COLOR = htmlColor;
+                                break;
+                            // TODO: implement Thermostat commands
+                            default:
+                                block.type = "custom_command";
+                                block.fields.COMMAND = command.CommandString;
+                                block.fields.OPTIONS = command.CommandArguments;
+                                break;
+                        }
+                        if (previousBlock != null)
+                        {
+                            previousBlock.block.next = selectedModuleAddress != selectBlock.fields.MODULE
+                                ? moduleSelectBlock : commandBlock;
+                        }
+                        else
+                        {
+                            rootBlock = moduleSelectBlock;
+                        }
+                        selectedModuleAddress = selectBlock.fields.MODULE; 
+                    }
+                    previousBlock = commandBlock;
+                }
+                foreach (var condition in script.Conditions)
+                {
+                    // TODO: wizard script conditions currently not supported
+                    /*
+                     * - Scheduler.TimeEvent / Scheduler.CronEvent (same)
+                     * - OR operator
+                     * - Property value comparison against given value or other module's property
+                     */
+                }
+                program.ScriptSetup = "";
+                program.ScriptSource = "";
+                program.Type = "visual";
+                string jsonBlocks = String.Format(
+                    visualCodeBlock,
+                    "", // "String.Format(setupBlock, "B0", "\"\"") + ",",
+                    String.Format(mainBlock, "B1", JsonConvert.SerializeObject(rootBlock))
+                );
+                program.Data = jsonBlocks;
+        }
+
 
         private ScriptingHost hgScriptingHost;
         private WizardScript script;
@@ -323,7 +505,7 @@ namespace HomeGenie.Automation.Engines
             }
             //
             // if the comparison value starts with ":", then the value is read from another module property
-            // eg: ":HomeAutomation.X10/B3/Level"
+            // eg: ":HomeAutomation.X10/B3/Status.Level"
             //
             if (comparisonValue.StartsWith(":"))
             {
@@ -337,7 +519,7 @@ namespace HomeGenie.Automation.Engines
                     var targetModule = HomeGenie.Modules.Find(m => m.Domain == domain && m.Address == address);
                     if (targetModule == null)
                     {
-                        // abbreviated path, eg: ":X10/B3/Level"
+                        // try with abbreviated path then, eg: ":X10/B3/Status.Level"
                         targetModule =
                             HomeGenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
                     }

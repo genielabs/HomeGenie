@@ -1,6 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
+    <ScriptSetup>Program
+  .AddOption("Email.Sender", "", "1. E-Mail address", "text")
+  .AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text")
+  .AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text")
+  .AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "password")
+  .AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text")
+  .AddOption("Email.SmtpUseSsl", "false", "6. SMTP Mail Server use SSL", "checkbox")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>// detect when an option of this program is changed and store the new value to system settings
+When.ModuleParameterChanged((module, parameter)=&gt;{
+  if (module.Instance.Equals(Program.Module) &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+	var settingName = parameter.Name.Substring(17); // skip "ConfigureOptions." part
+    Settings.Parameter("Messaging."+settingName).Value = parameter.Value;
+  }
+  return true;
+});
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>e-mail-account</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>8A42A1D70C35CF3C855AF8761795F5B7</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>142</Address>
+    <Name>E-Mail Account</Name>
+    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <Group>Messaging and Social</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
   Program.AddFeature("", "", "EventsLogger.EnableLogging", "Enable events logging", "checkbox");
 });
@@ -88,50 +129,7 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2021-04-11T12:51:10.2974391Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("Email.Sender", "", "1. E-Mail address", "text")
-  .AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text")
-  .AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text")
-  .AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "password")
-  .AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text")
-  .AddOption("Email.SmtpUseSsl", "false", "6. SMTP Mail Server use SSL", "checkbox")
-  .Run();
-</ScriptSetup>
-    <ScriptSource>// detect when an option of this program is changed and store the new value to system settings
-When.ModuleParameterChanged((module, parameter)=&gt;{
-  if (module.Instance.Equals(Program.Module) &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
-	var settingName = parameter.Name.Substring(17); // skip "ConfigureOptions." part
-    Settings.Parameter("Messaging."+settingName).Value = parameter.Value;
-  }
-  return true;
-});
-Program.GoBackground();
-</ScriptSource>
-    <ScriptErrors />
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
-      <Id>e-mail-account</Id>
-      <Version>1.0.0</Version>
-      <Required>true</Required>
-      <Checksum>8A42A1D70C35CF3C855AF8761795F5B7</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>142</Address>
-    <Name>E-Mail Account</Name>
-    <Description>Store e-mail account information for sending/receiving emails.</Description>
-    <Group>Messaging and Social</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -213,7 +211,7 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
               MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Service.Utility.Module2Json(modinstance, false));
               break;
               default:
-              targetmodule.Command(command).Execute();
+              targetmodule.Command(command).Submit();
               break;
             }
           }
@@ -340,7 +338,7 @@ while (Program.IsRunning) {
       <Id>mqtt-network</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>CA0536636E4E97A1AE581C43156DAADA</Checksum>
+      <Checksum>3A4D0C87F1A9065EBD2146B45F0175F7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -358,8 +356,7 @@ while (Program.IsRunning) {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -596,7 +593,7 @@ while (Program.IsRunning)
   reconfigureRequired = false;
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
@@ -615,8 +612,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
     <Group>Weather and Environment</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-05-01T23:06:33.0513173Z</ActivationTime>
-    <TriggerTime>2021-05-01T23:06:33.2312829Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -697,7 +693,7 @@ Program.GoBackground();
       <Id>remote-control</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>5D20D969AEC010F6034669F4D1672E7C</Checksum>
+      <Checksum>C3A9D4C396DE2FCBE7AE633AAA0556FA</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
@@ -721,8 +717,7 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2021-04-11T12:51:10.2889982Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

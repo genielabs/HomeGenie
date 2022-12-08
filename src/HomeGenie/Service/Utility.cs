@@ -454,6 +454,24 @@ namespace HomeGenie.Service
 
             return isMatching;
         }
+        
+        public static string HtmlColorFromHsb(double hue, double saturation, double brightness)
+        {
+            hue *= 360;
+            int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
+            double f = hue / 60 - Math.Floor(hue / 60);
+            brightness *= 255;
+            int v = Convert.ToInt32(brightness);
+            int p = Convert.ToInt32(brightness * (1 - saturation));
+            int q = Convert.ToInt32(brightness * (1 - f * saturation));
+            int t = Convert.ToInt32(brightness * (1 - (1 - f) * saturation));
+            if (hi == 0) return $"#{v:X2}{t:X2}{p:X2}";
+            if (hi == 1) return $"#{q:X2}{v:X2}{p:X2}";
+            if (hi == 2) return $"#{p:X2}{v:X2}{t:X2}";
+            if (hi == 3) return $"#{p:X2}{q:X2}{v:X2}";
+            if (hi == 4) return $"#{t:X2}{p:X2}{v:X2}";
+            return $"#{v:X2}{p:X2}{q:X2}";
+        }
 
         #region Private helper methods
 
