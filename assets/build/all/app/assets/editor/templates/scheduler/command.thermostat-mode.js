@@ -1,1 +1,3 @@
-﻿$$.boundModules.command('Thermostat.ModeSet').submit('$mode$');
+﻿$$.boundModules
+  .command('Thermostat.ModeSet')
+  .submit('$mode$');

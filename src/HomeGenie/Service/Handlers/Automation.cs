@@ -192,7 +192,7 @@ namespace HomeGenie.Service.Handlers
                             CronExpression = cronExpression,
                             Occurrences = new List<double>()
                         };
-                        var dateEnd = dateStart.AddHours(hours);
+                        var dateEnd = dateStart.AddHours(hours).AddSeconds(-1);
                         var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, cronExpression);
                         occurs.Sort();
                         foreach (var dt in occurs)
@@ -213,7 +213,7 @@ namespace HomeGenie.Service.Handlers
                                 continue;
                             var evt = new { ce.Name, ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
                             var d = dateStart;
-                            var dateEnd = dateStart.AddHours(hours);
+                            var dateEnd = dateStart.AddHours(hours).AddSeconds(-1);
                             var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, ce.CronExpression);
                             occurs.Sort();
                             foreach (var dt in occurs)

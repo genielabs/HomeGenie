@@ -224,12 +224,51 @@ class ProgramHelper {
   feature(parameterName: string): ProgramFeature;
 
   /**
+   * Adds a new module to the system.
+   * @returns  ProgramHelper.
+   * @param domain Domain.
+   * @param address Address.
+   * @param type Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).
+   * @param widget Empty string or the path of the widget to be associated to the module. (optional)
+   * @param implementFeatures Allow only features explicitly declared in this list. (optional)
+   */
+  addModule(domain: string, address: string, type: string, widget?: string, implementFeatures?: string[]): ProgramHelper;
+
+  /**
+   * Remove a module from the system.
+   * @returns  ProgramHelper.
+   * @param domain Domain.
+   * @param address Address.
+   */
+  removeModule(domain: string, address: string): ProgramHelper;
+
+  /**
+   * Adds a new set of modules to the system.
+   * @returns  ProgramHelper.
+   * @param domain Domain.
+   * @param startAddress Start address (numeric).
+   * @param endAddress End address (numeric).
+   * @param type Type.
+   * @param widget? Widget to display these modules with. (optional)
+   * @param implementFeatures Allow only features explicitly declared in this list. (optional)
+   */
+  addModules(
+    domain: string,
+    startAddress: number,
+    endAddress: number,
+    type: string,
+    widget?: string,
+    implementFeatures?: string[]
+  ): ProgramHelper;
+
+  /**
    * Adds a new virtual module to the system.
    * @returns  ProgramHelper.
    * @param domain Domain.
    * @param address Address.
    * @param type Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).
-   * @param widget Empty string or the path of the widget to be associated to the virtual module.
+   * @param widget Widget to display this module with. (optional)
+   * @deprecated Use {@link addModule `addModule(..)`} instead.
    */
   addVirtualModule(domain: string, address: string, type: string, widget: string): ProgramHelper;
 
@@ -238,6 +277,7 @@ class ProgramHelper {
    * @returns  ProgramHelper.
    * @param domain Domain.
    * @param address Address.
+   * @deprecated Use {@link removeModule `removeModule(..)`} instead.
    */
   removeVirtualModule(domain: string, address: string): ProgramHelper;
 
@@ -249,6 +289,7 @@ class ProgramHelper {
    * @param widget Empty string or the path of the widget to be associated to the virtual module.
    * @param startAddress Start address (numeric).
    * @param endAddress End address (numeric).
+   * @deprecated Use {@link addModules `addModules(..)`} instead.
    */
   addVirtualModules(
     domain: string,
@@ -284,11 +325,21 @@ class ProgramHelper {
   notify(title: string, message: string, paramList?: any[]): ProgramHelper;
 
   /**
+   * Emits a new parameter value.
+   * @returns  ModuleHelper.
+   * @param parameter Parameter name.
+   * @param value The new parameter value to set.
+   * @param description Event description. (optional)
+   */
+  emit(parameter: string, value: any, description?: string): ModuleHelper;
+
+  /**
    * Raise a parameter event and set the parameter with the specified value.
    * @returns  ProgramHelper.
    * @param parameter Parameter name.
    * @param value The new parameter value to set.
    * @param description Event description.
+   * @deprecated Use {@link emit `emit(..)`} instead.
    */
   raiseEvent(parameter: string, value: any, description: string): ProgramHelper;
 
@@ -529,11 +580,21 @@ class ModuleHelper extends ModulesManager {
   store(storeName: string): StoreHelper;
 
   /**
+   * Emits a new parameter value.
+   * @returns  ModuleHelper.
+   * @param parameter Parameter name.
+   * @param value The new parameter value to set.
+   * @param description Event description. (optional)
+   */
+  emit(parameter: string, value: any, description?: string): ModuleHelper;
+
+  /**
    * Raise a module parameter event and set the parameter with the specified value.
    * @returns  ModuleHelper.
    * @param parameter Parameter name.
    * @param value The new parameter value to set.
    * @param description Event description.
+   * @deprecated Use {@link emit `emit(..)`} instead.
    */
   raiseEvent(parameter: string, value: any, description: string): ModuleHelper;
 
@@ -747,6 +808,7 @@ class ModulesManager {
    * Execute current command with specified options.
    * @param options A string containing options to be passed to the selected command.
    * @returns  ModulesManager
+   * @deprecated Use {@link submit `submit(..)`} instead.
    */
   execute(options?: string): ModulesManager;
 
@@ -754,6 +816,7 @@ class ModulesManager {
    * Alias for Execute(options)
    * @param options A string containing options to be passed to the selected command.
    * @returns  ModulesManager
+   * @deprecated Use {@link submit `submit(..)`} instead.
    */
   set(options?: string): ModulesManager;
 
@@ -813,6 +876,12 @@ class ModulesManager {
    * @value  @c  true if at least one module in the current selection is off; otherwise, @c  false.
    */
   isOff: boolean;
+
+  /**
+   * Gets or sets "Status.ColorHsb" parameter of selected modules. If more than one module is selected, when reading this property the first module color is returned.
+   * @value @hsb The HSB color string (eg. "0.3130718,0.986,0.65").
+   */
+  colorHsb: string
 
   /**
    * Gets "alarm" status ("Sensor.Alarm" > 0).

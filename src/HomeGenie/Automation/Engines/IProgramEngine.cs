@@ -36,6 +36,6 @@ namespace HomeGenie.Automation.Engines
 
         void Reset();
 
-        ProgramError GetFormattedError(Exception e, bool isTriggerBlock);
+        ProgramError GetFormattedError(Exception e, bool isSetupBlock);
     }
 }

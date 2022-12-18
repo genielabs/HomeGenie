@@ -56,18 +56,13 @@
     <Gateways>
         <Gateway Name="WebServiceGateway" IsEnabled="true">
             <Options>
-                <Option Name="BaseUrl" Value="/hg/html" />
-                <Option Name="HomePath" Value="html" />
+                <Option Name="BaseUrl" Value="/app" />
+                <Option Name="HomePath" Value="" />
                 <Option Name="Host" Value="+" />
                 <Option Name="Port" Value="80" />
-                <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
-                <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
-                <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
-                <Option Name="UrlAlias.2" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png" />
-                <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png" />
-                <Option Name="UrlAlias.4" Value="hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png" />
-                <Option Name="UrlAlias.5" Value="app/*:app/index.html" />
+                <Option Name="UrlAlias.1" Value="app/*:app/index.html" />
                 <Option Name="EnableFileCaching" Value="false" />
+                <Option Name="AuthenticationRealm" Value="HomeGenie Secure Zone" />
             </Options>
         </Gateway>
         <Gateway Name="WebSocketGateway" IsEnabled="true">

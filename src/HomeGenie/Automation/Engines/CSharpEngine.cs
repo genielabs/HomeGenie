@@ -318,11 +318,11 @@ namespace HomeGenie.Automation.Engines
             }
         }
 
-        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isSetupBlock)
         {
             var error = new ProgramError()
             {
-                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
+                CodeBlock = isSetupBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",
@@ -347,7 +347,7 @@ namespace HomeGenie.Automation.Engines
                     }
                 }
             }
-            if (isTriggerBlock)
+            if (isSetupBlock)
             {
                 var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;
                 error.Line -= (CSharpAppFactory.ConditionCodeOffset + CSharpAppFactory.ProgramCodeOffset + sourceLines);

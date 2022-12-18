@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 
@@ -257,7 +256,7 @@ namespace HomeGenie.Automation.Engines
             throw new NotImplementedException();
         }
 
-        public virtual ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public virtual ProgramError GetFormattedError(Exception e, bool isSetupBlock)
         {
             throw new NotImplementedException();
         }

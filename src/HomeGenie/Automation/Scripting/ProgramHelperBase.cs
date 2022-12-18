@@ -37,8 +37,8 @@ namespace HomeGenie
         /// Playbacks a synthesized voice message from speaker.
         /// </summary>
         /// <param name="sentence">Message to output.</param>
-        /// <param name="locale">Language locale string (eg. "en-US", "it-IT", "en-GB", "nl-NL",...).</param>
-        /// <param name="goAsync">If true, the command will be executed asyncronously.</param>
+        /// <param name="locale">Language locale string (eg. "en-US", "it-IT", "en-GB", "nl-NL",...). (optional)</param>
+        /// <param name="goAsync">If true, the command will be executed asynchronously. (optional, default = false)</param>
         /// <remarks />
         /// <example>
         /// Example:
@@ -61,15 +61,6 @@ namespace HomeGenie
                 HomeGenieService.LogError(e);
             }
             return this;
-        }
-        // these redundant method definitions are for Jint compatibility
-        public ProgramHelperBase Say(string sentence)
-        {
-            return Say(sentence, null, false);
-        }
-        public ProgramHelperBase Say(string sentence, string locale)
-        {
-            return Say(sentence, locale, false);
         }
 
         /// <summary>
@@ -128,20 +119,8 @@ namespace HomeGenie
         /// </summary>
         /// <returns>The API command response.</returns>
         /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
-        public object ApiCall(string apiCommand)
-        {
-            if (apiCommand.StartsWith("/api/"))
-                apiCommand = apiCommand.Substring(5);
-            return homegenie.InterfaceControl(new MigInterfaceCommand(apiCommand));
-        }
-
-        /// <summary>
-        /// Invoke an API command and get the result.
-        /// </summary>
-        /// <returns>The API command response.</returns>
-        /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
-        /// <param name="data">Data object.</param>
-        public object ApiCall(string apiCommand, object data)
+        /// <param name="data">Data object. (optional)</param>
+        public object ApiCall(string apiCommand, object data = null)
         {
             if (apiCommand.StartsWith("/api/"))
                 apiCommand = apiCommand.Substring(5);
@@ -168,21 +147,10 @@ namespace HomeGenie
         /// <param name='programId'>
         /// Program name or ID.
         /// </param>
-        public void Run(string programId)
-        {
-            Run(programId, "");
-        }
-
-        /// <summary>
-        /// Executes the specified Automation Program.
-        /// </summary>
-        /// <param name='programId'>
-        /// Program name or ID.
-        /// </param>
         /// <param name='options'>
-        /// Program options.
+        /// Program options. (optional)
         /// </param>
-        public void Run(string programId, string options)
+        public void Run(string programId, string options = null)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
             if (program != null && !program.IsRunning)

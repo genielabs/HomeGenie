@@ -44,6 +44,9 @@
         "Create new package",
     "programs_version":
         "Programs version",
+" ":"---------- MAINTENANCE -------------",
+    "http_settings":
+        "HTTP settings",
 " ":"---------- MODULES AND GROUPS -------------",
     "modules_groups":
         "Groups and modules",

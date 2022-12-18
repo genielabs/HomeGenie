@@ -29,7 +29,7 @@ using System.Text;
 using System.Xml.Serialization;
 
 using System.Net.Sockets;
-using System.Threading;
+using System.Threading.Tasks;
 using OpenSource.UPnP;
 
 using HomeGenie.Automation;
@@ -88,6 +88,7 @@ namespace HomeGenie.Service
 
         #region Lifecycle
 
+        private bool systemStarted;
         public HomeGenieService(bool rebuildPrograms = false)
         {
             RebuildPrograms = rebuildPrograms;
@@ -139,39 +140,9 @@ namespace HomeGenie.Service
 
             // it will check every 24 hours
             updateChecker.Start();
-
-            // Thread.Sleep(5000);
-
-            Start();
         }
 
         public bool RebuildPrograms { get; set; }
-
-        public void Start()
-        {
-            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STARTED");
-            // Signal "SystemStarted" event to automation programs
-            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
-            {
-                try
-                {
-                    var pb = masterControlProgram.Programs[p];
-                    if (pb.IsEnabled)
-                    {
-                        if (pb.Engine.SystemStarted != null)
-                        {
-                            if (!pb.Engine.SystemStarted())
-                            // stop routing this event to other listeners
-                            break;
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    LogError(e);
-                }
-            }
-        }
 
         public void Stop()
         {
@@ -541,10 +512,10 @@ namespace HomeGenie.Service
                 // Prevent event pump from blocking on other worker tasks
                 if (masterControlProgram != null)
                 {
-                    Utility.RunAsyncTask(() =>
+                    Task.Run(() =>
                     {
                         masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
-                    });
+                    }); 
                 }
             }
             else
@@ -968,7 +939,7 @@ namespace HomeGenie.Service
             // force re-generation of Modules list
             modules_RefreshAll();
             // run remaining operations in the background
-            Utility.RunAsyncTask(() =>
+            Task.Run(() =>
             {
                 BootProgress = 0;
                 // Rebuild automation programs if required
@@ -986,6 +957,33 @@ namespace HomeGenie.Service
                 // enable automation programs engine
                 masterControlProgram.Enabled = true;
                 BootProgress = 100;
+
+                if (!systemStarted)
+                {
+                    RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STARTED");
+                    // Signal "SystemStarted" event to automation programs
+                    for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+                    {
+                        try
+                        {
+                            var pb = masterControlProgram.Programs[p];
+                            if (pb.IsEnabled)
+                            {
+                                if (pb.Engine.SystemStarted != null)
+                                {
+                                    if (!pb.Engine.SystemStarted())
+                                        // stop routing this event to other listeners
+                                        break;
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            LogError(e);
+                        }
+                    }
+                    systemStarted = true;
+                }
             });
         }
 

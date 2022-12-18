@@ -4,5 +4,11 @@
       "In casa",
     "arm_away":
       "Fuori"
+  },
+  "$section_label": {
+    "label":"Etichetta",
+    "indicators": "Indicatori",
+    "lights_control": "Luci",
+    "switches_control": "Interruttori"
   }
 }

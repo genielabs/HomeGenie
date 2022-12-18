@@ -93,6 +93,7 @@ namespace HomeGenie.Automation.Engines
                 // Main block
                 dynamic previousBlock = null;
                 dynamic rootBlock = null;
+                dynamic repeatBlock = null;
                 string selectedModuleAddress = "";
                 int id = 0;
                 foreach (var command in script.Commands)
@@ -132,7 +133,20 @@ namespace HomeGenie.Automation.Engines
                                 block.inputs.SECONDS.shadow.fields.NUM = seconds;
                                 break;
                             case "Program.Repeat":
-                                // TODO: currently not supported
+                                block.type = "controls_repeat";
+                                block.fields.TIMES = command.CommandArguments;
+                                block.inputs = new ExpandoObject();
+                                if (repeatBlock != null)
+                                {
+                                    block.inputs.DO = repeatBlock.block.next;
+                                    previousBlock = repeatBlock;
+                                }
+                                else
+                                {
+                                    block.inputs.DO = rootBlock;
+                                    previousBlock = null;
+                                }
+                                repeatBlock = commandBlock;
                                 break;
                             case "Program.Play":
                                 block.type = "program_play";
@@ -203,6 +217,12 @@ namespace HomeGenie.Automation.Engines
                                     );
                                 } catch { }
                                 block.fields.COLOR = htmlColor;
+                                double duration = 0.25;
+                                if (hsb.Length > 3)
+                                {
+                                    double.TryParse(hsb[3], NumberStyles.Float, CultureInfo.InvariantCulture, out duration);
+                                }
+                                block.fields.DURATION = duration;
                                 break;
                             // TODO: implement Thermostat commands
                             default:
@@ -236,12 +256,15 @@ namespace HomeGenie.Automation.Engines
                 program.ScriptSetup = "";
                 program.ScriptSource = "";
                 program.Type = "visual";
-                string jsonBlocks = String.Format(
-                    visualCodeBlock,
-                    "", // "String.Format(setupBlock, "B0", "\"\"") + ",",
-                    String.Format(mainBlock, "B1", JsonConvert.SerializeObject(rootBlock))
-                );
-                program.Data = jsonBlocks;
+                if (rootBlock != null)
+                {
+                    string jsonBlocks = String.Format(
+                        visualCodeBlock,
+                        "", // "String.Format(setupBlock, "B0", "\"\"") + ",",
+                        String.Format(mainBlock, "B1", JsonConvert.SerializeObject(rootBlock))
+                    );
+                    program.Data = jsonBlocks;
+                }
         }
 
 
@@ -316,11 +339,11 @@ namespace HomeGenie.Automation.Engines
             if (hgScriptingHost != null) hgScriptingHost.Reset();
         }
 
-        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isSetupBlock)
         {
             ProgramError error = new ProgramError()
             {
-                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
+                CodeBlock = isSetupBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",

@@ -79,7 +79,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public void Setup(Action functionBlock)
         {
-            lock(setupLock)
+            lock (setupLock)
             {
                 if (!this.initialized)
                 {
@@ -96,6 +96,7 @@ namespace HomeGenie.Automation.Scripting
                             }
                         }
                     }
+
                     homegenie.RaiseEvent(
                         myProgramId,
                         myProgramDomain,
@@ -110,7 +111,8 @@ namespace HomeGenie.Automation.Scripting
                     // remove deprecated config options
                     if (programModule != null)
                     {
-                        var parameterList = programModule.Properties.FindAll(mp => mp.Name.StartsWith("ConfigureOptions."));
+                        var parameterList =
+                            programModule.Properties.FindAll(mp => mp.Name.StartsWith("ConfigureOptions."));
                         foreach (var parameter in parameterList)
                         {
                             if (parameter.Name.StartsWith("ConfigureOptions.") && parameter.Description == null)
@@ -119,7 +121,8 @@ namespace HomeGenie.Automation.Scripting
                             }
                         }
                     }
-                    this.initialized = true;
+
+                    initialized = true;
 
                     homegenie.modules_RefreshPrograms();
                     homegenie.modules_RefreshVirtualModules();
@@ -148,6 +151,7 @@ namespace HomeGenie.Automation.Scripting
                 program.WillRun = willRun;
             }
         }
+
         // this "dupe" is required to avoid issues with JavaScript engine method resolution as optional/default parameters are not well supported at the time
         public void Run()
         {
@@ -162,10 +166,13 @@ namespace HomeGenie.Automation.Scripting
         public ProgramHelper UseWidget(string widget)
         {
             var program = GetProgramBlock();
-            var module = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
+            var module = homegenie.VirtualModules.Find(rm =>
+                rm.ParentId == myProgramId.ToString() && rm.Domain == myProgramDomain &&
+                rm.Address == myProgramId.ToString());
             if (module == null)
             {
-                module = new VirtualModule() {
+                module = new VirtualModule()
+                {
                     ParentId = myProgramId.ToString(),
                     Domain = myProgramDomain,
                     Address = myProgramId.ToString(),
@@ -278,7 +285,7 @@ namespace HomeGenie.Automation.Scripting
         {
             var program = GetProgramBlock();
             ProgramFeature feature = null;
-            //
+
             try
             {
                 feature = program.Features.Find(f => f.Property == parameterName);
@@ -293,12 +300,13 @@ namespace HomeGenie.Automation.Scripting
                     ex.StackTrace
                 );
             }
-            //
+
             if (feature == null)
             {
                 feature = new ProgramFeature();
                 program.Features.Add(feature);
             }
+
             feature.FieldType = type;
             feature.Property = parameterName;
             feature.Description = description;
@@ -315,7 +323,7 @@ namespace HomeGenie.Automation.Scripting
         {
             var program = GetProgramBlock();
             ProgramFeature feature = null;
-            //
+
             try
             {
                 feature = program.Features.Find(f => f.Property == parameterName);
@@ -330,65 +338,34 @@ namespace HomeGenie.Automation.Scripting
                     ex.StackTrace
                 );
             }
-            //
+
             return feature;
         }
 
         /// <summary>
-        /// Adds a new virtual module to the system.
+        /// Adds a new module to the system.
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="domain">Domain.</param>
         /// <param name="address">Address.</param>
         /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).</param>
-        /// <param name="widget">Empty string or the path of the widget to be associated to the virtual module.</param>
-        public ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)
+        /// <param name="widget">Widget to display this modules with.</param>
+        /// <param name="implementedFeatures">Allow only features explicitly declared in this list</param>
+        public ProgramHelper AddModule(string domain, string address, string type, string widget = "", string[] implementedFeatures = null)
         {
-            VirtualModule virtualModule = null;
-            try
-            {
-                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
-            }
-            catch
-            {
-            }
-            //
-            if (virtualModule == null)
-            {
-                virtualModule = new VirtualModule() {
-                    ParentId = myProgramId.ToString(),
-                    Domain = domain,
-                    Address = address,
-                    DeviceType = (MIG.ModuleTypes)Enum.Parse(
-                        typeof(MIG.ModuleTypes),
-                        type
-                    )
-                };
-                virtualModule.Properties.Add(new ModuleParameter() {
-                    Name = Properties.WidgetDisplayModule,
-                    Value = widget
-                });
-                homegenie.VirtualModules.Add(virtualModule);
-            }
-            else
-            {
-                virtualModule.IsActive = true;
-                virtualModule.Domain = domain;
-                if (virtualModule.DeviceType == MIG.ModuleTypes.Generic)
-                    virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
-                Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
-            }
-            //
+            VirtualModule virtualModule = AddProgramModule(domain, address, type, widget, implementedFeatures);
             homegenie.modules_RefreshVirtualModules();
             homegenie.modules_Sort();
             // update real module device type and widget
-            Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
+            Module module =
+                homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
             if (module != null)
             {
                 if (module.DeviceType == MIG.ModuleTypes.Generic)
                 {
                     module.DeviceType = virtualModule.DeviceType;
                 }
+
                 Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
                 //homegenie.RaiseEvent(this, module.Domain, module.Address, "", Properties.WidgetDisplayModule, widget);
             }
@@ -396,78 +373,27 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Remove a virtual module from the system.
+        /// Adds a new set of modules to the system.
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="domain">Domain.</param>
-        /// <param name="address">Address.</param>
-        public ProgramHelper RemoveVirtualModule(string domain, string address)
-        {
-            VirtualModule oldModule = null;
-            try
-            {
-                oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
-            }
-            catch
-            {
-            }
-            if (oldModule != null)
-            {
-                homegenie.VirtualModules.Remove(oldModule);
-            }
-            //
-            homegenie.modules_RefreshVirtualModules();
-            //homegenie.modules_Sort();
-            return this;
-        }
-
-        /// <summary>
-        /// Adds a new set of virtual modules to the system.
-        /// </summary>
-        /// <returns>ProgramHelper.</returns>
-        /// <param name="domain">Domain.</param>
-        /// <param name="type">Type.</param>
-        /// <param name="widget">Empty string or the path of the widget to be associated to the virtual module.</param>
         /// <param name="startAddress">Start address (numeric).</param>
         /// <param name="endAddress">End address (numeric).</param>
-        public ProgramHelper AddVirtualModules(
+        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).</param>
+        /// <param name="widget">Widget to display these modules with.</param>
+        /// <param name="implementedFeatures">Allow only features explicitly declared in this list</param>
+        public ProgramHelper AddModules(
             string domain,
-            string type,
-            string widget,
             int startAddress,
-            int endAddress
-        )
+            int endAddress,
+            string type,
+            string widget = "",
+            string[] implementedFeatures = null)
         {
             var vmList = new List<VirtualModule>();
             for (int x = startAddress; x <= endAddress; x++)
             {
-                VirtualModule virtualModule = null;
-                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == x.ToString());
-                if (virtualModule == null)
-                {
-                    virtualModule = new VirtualModule() {
-                        ParentId = myProgramId.ToString(),
-                        Domain = domain,
-                        Address = x.ToString(),
-                        DeviceType = (MIG.ModuleTypes)Enum.Parse(
-                            typeof(MIG.ModuleTypes),
-                            type
-                        )
-                    };
-                    virtualModule.Properties.Add(new ModuleParameter() {
-                        Name = Properties.WidgetDisplayModule,
-                        Value = widget
-                    });
-                    homegenie.VirtualModules.Add(virtualModule);
-                }
-                else
-                {
-                    virtualModule.IsActive = true;
-                    virtualModule.Domain = domain;
-                    if (virtualModule.DeviceType == MIG.ModuleTypes.Generic)
-                        virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
-                    Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
-                }
+                VirtualModule virtualModule = AddProgramModule(domain, x.ToString(), type, widget, implementedFeatures);
                 vmList.Add(virtualModule);
             }
             homegenie.modules_RefreshVirtualModules();
@@ -487,6 +413,84 @@ namespace HomeGenie.Automation.Scripting
                 }
                 
             }
+            return this;
+        }
+
+        /// <summary>
+        /// Remove a module from the system.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="address">Address.</param>
+        public ProgramHelper RemoveModule(string domain, string address)
+        {
+            VirtualModule oldModule = null;
+            try
+            {
+                oldModule = homegenie.VirtualModules.Find(rm =>
+                    rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
+            }
+            catch
+            {
+            }
+
+            if (oldModule != null)
+            {
+                homegenie.VirtualModules.Remove(oldModule);
+            }
+
+            //
+            homegenie.modules_RefreshVirtualModules();
+            //homegenie.modules_Sort();
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a new virtual module to the system.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="address">Address.</param>
+        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).</param>
+        /// <param name="widget">Empty string or the path of the widget to be associated to the virtual module.</param>
+        [Obsolete("This method is deprecated, use AddModule(...) instead.")]
+        public ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)
+        {
+            AddModule(domain, address, type, widget);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a new set of virtual modules to the system.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="type">Type.</param>
+        /// <param name="widget">Empty string or the path of the widget to be associated to the virtual module.</param>
+        /// <param name="startAddress">Start address (numeric).</param>
+        /// <param name="endAddress">End address (numeric).</param>
+        [Obsolete("This method is deprecated, use AddModules(...) instead.")]
+        public ProgramHelper AddVirtualModules(
+            string domain,
+            string type,
+            string widget,
+            int startAddress,
+            int endAddress)
+        {
+            AddModules(domain, startAddress, endAddress, type, widget);
+            return this;
+        }
+
+        /// <summary>
+        /// Remove a virtual module from the system.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="address">Address.</param>
+        [Obsolete("This method is deprecated, use RemoveModule(...) instead.")]
+        public ProgramHelper RemoveVirtualModule(string domain, string address)
+        {
+            RemoveModule(domain, address);
             return this;
         }
 
@@ -566,13 +570,13 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Raise a parameter event and set the parameter with the specified value.
+        /// Emits a new parameter value.
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="parameter">Parameter name.</param>
         /// <param name="value">The new parameter value to set.</param>
-        /// <param name="description">Event description.</param>
-        public ProgramHelper RaiseEvent(string parameter, object value, string description)
+        /// <param name="description">Event description. (optional)</param>
+        public ProgramHelper Emit(string parameter, object value, string description = "")
         {
             if (programModule == null) RelocateProgramModule();
             try
@@ -597,6 +601,20 @@ namespace HomeGenie.Automation.Scripting
                     ex.StackTrace
                 );
             }
+            return this;
+        }
+
+        /// <summary>
+        /// Raise a parameter event and set the parameter with the specified value.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="parameter">Parameter name.</param>
+        /// <param name="value">The new parameter value to set.</param>
+        /// <param name="description">Event description.</param>
+        [Obsolete("This method is deprecated, use Emit(..) instead.")]
+        public ProgramHelper RaiseEvent(string parameter, object value, string description)
+        {
+            Emit(parameter, value, description);
             return this;
         }
 
@@ -819,6 +837,50 @@ namespace HomeGenie.Automation.Scripting
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             return program;
+        }
+
+        private VirtualModule AddProgramModule(string domain, string address, string type, string widget, string[] implementedFeatures = null)
+        {
+            VirtualModule virtualModule = null;
+            try
+            {
+                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
+            }
+            catch
+            {
+            }
+            //
+            if (virtualModule == null)
+            {
+                virtualModule = new VirtualModule() {
+                    ParentId = myProgramId.ToString(),
+                    Domain = domain,
+                    Address = address,
+                    DeviceType = (MIG.ModuleTypes)Enum.Parse(
+                        typeof(MIG.ModuleTypes),
+                        type
+                    )
+                };
+                virtualModule.Properties.Add(new ModuleParameter() {
+                    Name = Properties.WidgetDisplayModule,
+                    Value = widget
+                });
+                homegenie.VirtualModules.Add(virtualModule);
+            }
+            else
+            {
+                virtualModule.IsActive = true;
+                virtualModule.Domain = domain;
+                if (virtualModule.DeviceType == MIG.ModuleTypes.Generic)
+                    virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
+                Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
+            }
+
+            if (implementedFeatures != null)
+            {
+                virtualModule.ImplementFeatures = new List<string>(implementedFeatures);
+            }
+            return virtualModule;
         }
 
     }

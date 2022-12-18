@@ -38,7 +38,7 @@
     <PackageReference Include="SharpZipLib" Version="1.0.0" />
     <PackageReference Include="Angle" Version="3.1.0" />
     <PackageReference Include="SolarCalculator" Version="3.1.0" />
-    <PackageReference Include="Jint" Version="2.11.58" />
+    <PackageReference Include="Jint" Version="3.0.0-beta-2044" />
     <PackageReference Include="System.Device.Gpio" Version="2.2.0" />
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />

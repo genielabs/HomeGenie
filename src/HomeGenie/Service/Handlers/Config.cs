@@ -34,8 +34,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Jint.Parser;
+using Esprima;
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data.UI;
 using Innovative.SolarCalculator;
@@ -259,7 +260,7 @@ namespace HomeGenie.Service.Handlers
                         homegenie.SaveData();
                         success = true;
                     } catch { }
-                    request.ResponseData = new ResponseText(success ? "OK" : "ERROR");
+                    request.ResponseData = new ResponseStatus(success ? Status.Ok : Status.Error);
                 }
                 if (migCommand.GetOption(0) == "Location.Get")
                 {
@@ -292,7 +293,6 @@ namespace HomeGenie.Service.Handlers
                     string query = migCommand.GetOption(1);
                     var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
                         .Find((cfg) => cfg.Is("Location.Service.Key"));
-                    http://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&sensor=true&key=YOUR_KEY
                     string googleApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + query + "&types=(cities)&sensor=true&key=" + apiKey.Value;
                     var result = netHelper.WebService(googleApiUrl).GetData();
                     request.ResponseData = result;
@@ -312,20 +312,20 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "Service.Restart")
                 {
-                    Program.Quit(true);
-                    request.ResponseData = new ResponseText("OK");
+                    RestartService();
+                    request.ResponseData = new ResponseStatus(Status.Ok, "RESTART");
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.UpdatesList")
                 {
                     if (homegenie.UpdateChecker.RemoteUpdates != null)
                         request.ResponseData = homegenie.UpdateChecker.RemoteUpdates;
                     else
-                        request.ResponseData = new ResponseText("ERROR");
+                        request.ResponseData = new ResponseStatus(Status.Error);
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.Check")
                 {
                     bool checkSuccess = homegenie.UpdateChecker.Check();
-                    request.ResponseData = new ResponseText(checkSuccess ? "OK" : "ERROR");
+                    request.ResponseData = new ResponseStatus(checkSuccess ? Status.Ok : Status.Error);
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.ManualUpdate")
                 {
@@ -337,114 +337,110 @@ namespace HomeGenie.Service.Handlers
                         Properties.InstallProgressMessage,
                         "Receiving update file"
                     );
-                    bool success = false;
+                    var responseStatus = Status.Ok;
+                    string responseMessage = "";
                     // file uploaded by user
                     Utility.FolderCleanUp(tempFolderPath);
-                    string archivename = Path.Combine(tempFolderPath, "homegenie_update_file.tgz");
+                    string archiveName = Path.Combine(tempFolderPath, "homegenie_update_file.tgz");
                     try
                     {
-                        WebServiceUtility.SaveFile(request.RequestData, archivename);
-                        var files = Utility.UncompressTgz(archivename, tempFolderPath);
-                        File.Delete(archivename);
+                        WebServiceUtility.SaveFile(request.RequestData, archiveName);
+                        var files = Utility.UncompressTgz(archiveName, tempFolderPath);
+                        File.Delete(archiveName);
                         string relInfo = Path.Combine(tempFolderPath, "homegenie", "release_info.xml");
                         if (File.Exists(relInfo))
                         {
                             var updateRelease = UpdateChecker.GetReleaseFile(relInfo);
                             var currentRelease = homegenie.UpdateChecker.GetCurrentRelease();
-                            if (updateRelease.ReleaseDate >= currentRelease.ReleaseDate)
+                            if (currentRelease == null || updateRelease.ReleaseDate >= currentRelease.ReleaseDate)
                             {
                                 string installPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_update", "files");
                                 Utility.FolderCleanUp(installPath);
                                 Directory.Move(Path.Combine(tempFolderPath, "homegenie"), Path.Combine(installPath, "homegenie"));
                                 var installStatus = homegenie.UpdateChecker.InstallFiles();
-                                if (installStatus != UpdateChecker.InstallStatus.Error)
+                                if (installStatus == UpdateChecker.InstallStatus.Error)
                                 {
-                                    success = true;
+                                    responseStatus = Status.Error;
+                                }
+                                else
+                                {
                                     if (installStatus == UpdateChecker.InstallStatus.RestartRequired)
                                     {
-                                        homegenie.RaiseEvent(
-                                            Domains.HomeGenie_System,
-                                            Domains.HomeGenie_UpdateChecker,
-                                            SourceModule.Master,
-                                            "HomeGenie Manual Update",
-                                            Properties.InstallProgressMessage,
-                                            "HomeGenie will now restart."
-                                        );
-                                        Program.Quit(true);
+                                        responseMessage = "RESTART";
+                                        RestartService();
                                     }
                                     else
                                     {
                                         homegenie.RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "UPDATED");
-                                        Thread.Sleep(3000);
                                     }
                                 }
                             }
                             else
                             {
+                                responseStatus = Status.Error;
+                                responseMessage = "Installed release is newer than update file";
                                 homegenie.RaiseEvent(
                                     Domains.HomeGenie_System,
                                     Domains.HomeGenie_UpdateChecker,
                                     SourceModule.Master,
                                     "HomeGenie Manual Update",
                                     Properties.InstallProgressMessage,
-                                    "ERROR: Installed release is newer than update file"
+                                    "ERROR: " + responseMessage
                                 );
-                                Thread.Sleep(3000);
                             }
                         }
                         else
                         {
+                            responseStatus = Status.Error;
+                            responseMessage = "Invalid update file";
                             homegenie.RaiseEvent(
                                 Domains.HomeGenie_System,
                                 Domains.HomeGenie_UpdateChecker,
                                 SourceModule.Master,
                                 "HomeGenie Manual Update",
                                 Properties.InstallProgressMessage,
-                                "ERROR: Invalid update file"
+                                "ERROR: " + responseMessage
                             );
-                            Thread.Sleep(3000);
                         }
                     }
                     catch (Exception e)
                     {
+                        responseStatus = Status.Error;
+                        responseMessage = "Exception occurred (" + e.Message + ")";
                         homegenie.RaiseEvent(
                             Domains.HomeGenie_System,
                             Domains.HomeGenie_UpdateChecker,
                             SourceModule.Master,
                             "HomeGenie Update Checker",
                             Properties.InstallProgressMessage,
-                            "ERROR: Exception occurred ("+e.Message+")"
+                            "ERROR: " + responseMessage
                         );
-                        Thread.Sleep(3000);
                     }
-                    request.ResponseData = new ResponseStatus(success ? Status.Ok : Status.Error);
+                    request.ResponseData = new ResponseStatus(responseStatus, responseMessage);
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.DownloadUpdate")
                 {
-                    var resultMessage = "ERROR";
+                    var responseStatus = Status.Ok;
                     bool success = homegenie.UpdateChecker.DownloadUpdateFiles();
-                    if (success) resultMessage = "OK";
-                    request.ResponseData = new ResponseText(resultMessage);
+                    if (!success) responseStatus = Status.Error;
+                    request.ResponseData = new ResponseStatus(responseStatus);
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.InstallUpdate")
                 {
-                    string resultMessage = "OK";
+                    var responseStatus = Status.Ok;
+                    string responseMessage = "";
                     homegenie.SaveData();
                     var installStatus = homegenie.UpdateChecker.InstallFiles();
                     if (installStatus == UpdateChecker.InstallStatus.Error)
                     {
-                        resultMessage = "ERROR";
+                        responseStatus = Status.Error;
                     }
                     else
                     {
                         if (installStatus == UpdateChecker.InstallStatus.RestartRequired)
                         {
-                            resultMessage = "RESTART";
-                            Utility.RunAsyncTask(() =>
-                            {
-                                Thread.Sleep(2000);
-                                Program.Quit(true);
-                            });
+                            responseMessage = "RESTART";
+                            RestartService();
                         }
                         else
                         {
@@ -452,7 +448,7 @@ namespace HomeGenie.Service.Handlers
                             homegenie.UpdateChecker.Check();
                         }
                     }
-                    request.ResponseData = new ResponseText(resultMessage);
+                    request.ResponseData = new ResponseStatus(responseStatus, responseMessage);
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {
@@ -683,7 +679,7 @@ namespace HomeGenie.Service.Handlers
                     var startTime = System.Diagnostics.Process.GetCurrentProcess().StartTime.ToUniversalTime();
                     request.ResponseData = new
                     {
-                        Version = homegenie.UpdateChecker.GetCurrentRelease(),
+                        Release = homegenie.UpdateChecker.GetCurrentRelease(),
                         Runtime = Environment.Version,
                         Platform = Environment.OSVersion.Platform.ToString(),
                         TimeZoneId = TimeZoneInfo.Local.Id,
@@ -738,6 +734,21 @@ namespace HomeGenie.Service.Handlers
                         m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                     if (module != null)
                     {
+                        var implementedFeatures = new List<string>();
+                        // check explicit features list if it's a virtual module
+                        var parentId = Utility.ModuleParameterGet(
+                            module,
+                            Properties.VirtualModuleParentId
+                        );
+                        if (parentId != null)
+                        {
+                            var virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == parentId.Value && rm.Domain == module.Domain && rm.Address == module.Address);
+                            if (virtualModule != null)
+                            {
+                                Console.WriteLine("'VIRTUAL MODULE' {0}:{1}", virtualModule.Domain, virtualModule.Address);
+                                implementedFeatures = virtualModule.ImplementFeatures;
+                            }
+                        }
                         var res = new List<ModuleOptions>();
                         for (int pn = 0; pn < homegenie.ProgramManager.Programs.Count; pn++)
                         {
@@ -753,30 +764,45 @@ namespace HomeGenie.Service.Handlers
                             for (int i = 0; i < p.Features.Count; i++)
                             {
                                 var f = p.Features[i];
-                                bool matchFeature = Utility.MatchValues(f.ForDomains, module.Domain);
-                                string forTypes = f.ForTypes;
-                                string forProperties = null;
-                                int propertyFilterIndex = forTypes.IndexOf(':');
-                                if (propertyFilterIndex >= 0)
+                                bool matchFeature = false;
+                                // check if module declares implemented features explicitly
+                                // in this case only features declared by this module will be shown
+                                foreach (var implementedFeature in implementedFeatures)
                                 {
-                                    forProperties = forTypes.Substring(propertyFilterIndex + 1).Trim();
-                                    forTypes = forTypes.Substring(0, propertyFilterIndex).Trim();
+                                    matchFeature = Utility.MatchValues(implementedFeature, f.Property);
                                 }
-                                matchFeature = matchFeature && Utility.MatchValues(forTypes, module.DeviceType.ToString());
-                                if (forProperties != null)
+                                if (implementedFeatures.Count > 0 && !matchFeature)
                                 {
-                                    bool matchProperty = false;
-                                    for (int idx = 0; idx < module.Properties.Count; idx++)
+                                    continue;
+                                }
+                                // otherwise, check if module matches program's features filters (ForDomain, ForTypes/PropertyFilter) 
+                                if (!matchFeature)
+                                {
+                                    matchFeature = Utility.MatchValues(f.ForDomains, module.Domain);
+                                    string forTypes = f.ForTypes;
+                                    string forProperties = null;
+                                    int propertyFilterIndex = forTypes.IndexOf(':');
+                                    if (propertyFilterIndex >= 0)
                                     {
-                                        var mp = module.Properties[idx];
-                                        if (Utility.MatchValues(forProperties, mp.Name))
-                                        {
-                                            matchProperty = true;
-                                            break;
-                                        }
+                                        forProperties = forTypes.Substring(propertyFilterIndex + 1).Trim();
+                                        forTypes = forTypes.Substring(0, propertyFilterIndex).Trim();
                                     }
+                                    matchFeature = matchFeature && Utility.MatchValues(forTypes, module.DeviceType.ToString());
+                                    if (forProperties != null)
+                                    {
+                                        bool matchProperty = false;
+                                        for (int idx = 0; idx < module.Properties.Count; idx++)
+                                        {
+                                            var mp = module.Properties[idx];
+                                            if (Utility.MatchValues(forProperties, mp.Name))
+                                            {
+                                                matchProperty = true;
+                                                break;
+                                            }
+                                        }
 
-                                    matchFeature = matchFeature && matchProperty;
+                                        matchFeature = matchFeature && matchProperty;
+                                    }
                                 }
 
                                 if (!matchFeature) continue;
@@ -1590,9 +1616,9 @@ namespace HomeGenie.Service.Handlers
                     try
                     {
                         request.ResponseData = new ResponseStatus(Status.Ok);
-                        parser.Parse(widgetData);
+                        parser.ParseScript(widgetData);
                     }
-                    catch (Jint.Parser.ParserException e)
+                    catch (ParserException e)
                     {
                         request.ResponseData = new ResponseText("ERROR (" + e.LineNumber + "," + e.Column + "): " + e.Description);
                     }
@@ -1703,6 +1729,15 @@ namespace HomeGenie.Service.Handlers
             #endregion
             
             }
+        }
+
+        private void RestartService()
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(1000);
+                Program.Quit(true);
+            });
         }
 
     }

@@ -22,7 +22,7 @@
 
 using System;
 using System.Threading;
-
+using System.Threading.Tasks;
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
 using HomeGenie.Service;
@@ -107,7 +107,7 @@ namespace HomeGenie.Automation.Scheduler
                         schedulerItem.Name);
                 }
             });
-            ThreadPool.QueueUserWorkItem(callback);
+            Task.Run(() => callback);
         }
 
         public SchedulerScriptingHost OnModuleUpdate(Action<ModuleHelper, ModuleParameter> handler)

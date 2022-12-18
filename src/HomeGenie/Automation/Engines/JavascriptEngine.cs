@@ -22,11 +22,11 @@
 
 using System;
 using System.Collections.Generic;
-
+using Esprima;
 using Jint;
-using Jint.Parser;
 
 using HomeGenie.Automation.Scripting;
+using Jint.Runtime;
 
 namespace HomeGenie.Automation.Engines
 {
@@ -63,6 +63,9 @@ namespace HomeGenie.Automation.Engines
           delay: function(seconds) { this.pause(seconds); }
         }
         ";
+        
+        private int setupCodeLineOffset;
+        private int mainCodeLineOffset;
 
         public JavascriptEngine(ProgramBlock pb) : base(pb)
         {
@@ -71,6 +74,7 @@ namespace HomeGenie.Automation.Engines
         public void Unload()
         {
             Reset();
+            scriptEngine?.Dispose();
             scriptEngine = null;
             hgScriptingHost = null;
         }
@@ -82,23 +86,37 @@ namespace HomeGenie.Automation.Engines
             if (HomeGenie == null)
                 return false;
 
-            scriptEngine = new Engine();
+            scriptEngine = new Engine(options => options.AllowClr());
 
             hgScriptingHost = new ScriptingHost();
             hgScriptingHost.SetHost(HomeGenie, ProgramBlock.Address);
             scriptEngine.SetValue("hg", hgScriptingHost);
+            string script = initScript + "\nfunction __setup__() {\n";
+            setupCodeLineOffset = script.Split('\n').Length - 1; 
+            script += ProgramBlock.ScriptSetup + "\n}\n";
+            script += "function __main__() {\n";
+            mainCodeLineOffset = script.Split('\n').Length - 1;
+            script += ProgramBlock.ScriptSource + "\n}\n";
+            try
+            {
+                scriptEngine.Execute(script);
+            }
+            catch (Exception e)
+            {
+                // TODO: report errors
+                Console.WriteLine(e.Message);
+            }
             return true;
         }
 
         public override MethodRunResult Setup()
         {
             MethodRunResult result = null;
-            string jsScript = initScript + ProgramBlock.ScriptSetup;
             result = new MethodRunResult();
             try
             {
                 var sh = (scriptEngine.GetValue("hg").ToObject() as ScriptingHost);
-                scriptEngine.Execute(jsScript);
+                scriptEngine.Execute("__setup__();");
                 result.ReturnValue = sh.ExecuteProgramCode || ProgramBlock.WillRun;
             }
             catch (Exception e)
@@ -111,12 +129,11 @@ namespace HomeGenie.Automation.Engines
         public override MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
-            var jsScript = initScript + ProgramBlock.ScriptSource;
             //scriptEngine.Options.AllowClr(false);
             result = new MethodRunResult();
             try
             {
-                scriptEngine.Execute(jsScript);
+                scriptEngine.Execute("__main__();");
             }
             catch (Exception e)
             {
@@ -130,65 +147,59 @@ namespace HomeGenie.Automation.Engines
             if (hgScriptingHost != null) hgScriptingHost.Reset();
         }
 
-        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isSetupBlock)
         {
-            ProgramError error = new ProgramError()
+            ProgramError error = new ProgramError();
+            try
             {
-                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
-                Column = 0,
-                Line = 0,
-                ErrorNumber = "-1",
-                ErrorMessage = e.Message
-            };
+                error = new ProgramError()
+                {
+                    CodeBlock = isSetupBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
+                    Column = (e as JavaScriptException).Location.Start.Column,
+                    Line = (e as JavaScriptException).Location.Start.Line -
+                           (isSetupBlock ? setupCodeLineOffset : mainCodeLineOffset),
+                    ErrorNumber = "-1",
+                    ErrorMessage = e.Message
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(e.Message + " -- " + ex.Message);
+            }
+
             return error;
         }
 
         public override List<ProgramError> Compile()
         {
             List<ProgramError> errors = new List<ProgramError>();
-            JavaScriptParser jp = new JavaScriptParser(false);
+            JavaScriptParser jp = new JavaScriptParser();
             //ParserOptions po = new ParserOptions();
+            // Setup code
             try
             {
-                jp.Parse(ProgramBlock.ScriptSetup);
+                jp.ParseScript(ProgramBlock.ScriptSetup);
             }
-            catch (Exception e)
+            catch (ParserException e)
             {
-                // TODO: parse error message
-                if (e.Message.Contains(":"))
-                {
-                    string[] error = e.Message.Split(':');
-                    string message = error[1];
-                    if (message != "hg is not defined") // TODO: find a better solution for this
-                    {
-                        int line = Int32.Parse(error[0].Split(' ')[1]);
-                        errors.Add(new ProgramError()
-                        {
-                            Line = line,
-                            ErrorMessage = message,
-                            CodeBlock = CodeBlockEnum.TC
-                        });
-                    }
-                }
-            }
-            //
-            try
-            {
-                jp.Parse(ProgramBlock.ScriptSource);
-            }
-            catch (Exception e)
-            {
-                // TODO: parse error message
-                if (!e.Message.Contains(":")) return errors;
-                string[] error = e.Message.Split(':');
-                string message = error[1];
-                // TODO: find a better solution for this "hg is not defined" check
-                if (message == "hg is not defined") return errors;
-                int line = Int32.Parse(error[0].Split(' ')[1]);
                 errors.Add(new ProgramError()
                 {
-                    Line = line,
-                    ErrorMessage = message,
+                    Line = e.LineNumber,
+                    ErrorMessage = e.Message,
+                    CodeBlock = CodeBlockEnum.TC
+                });
+            }
+            // Main code
+            try
+            {
+                jp.ParseScript(ProgramBlock.ScriptSource);
+            }
+            catch (ParserException e)
+            {
+                errors.Add(new ProgramError()
+                {
+                    Line = e.LineNumber,
+                    ErrorMessage = e.Message,
                     CodeBlock = CodeBlockEnum.CR
                 });
             }

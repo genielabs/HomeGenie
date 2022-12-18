@@ -20,14 +20,17 @@
  *     Project Homepage: http://homegenie.it
  */
 
+using System.Collections.Generic;
+
 namespace HomeGenie.Data
 {
     public class VirtualModule : Module
     {
         public string ParentId { get; set; }
         public bool IsActive = true;
+        public List<string> ImplementFeatures = new List<string>();
 
-        public VirtualModule() : base()
+        public VirtualModule()
         {
             ParentId = "";
         }

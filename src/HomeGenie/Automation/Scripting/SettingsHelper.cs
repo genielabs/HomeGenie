@@ -49,7 +49,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="parameter">Parameter.</param>
         public ModuleParameter Parameter(string parameter)
         {
-            var systemParameter = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == parameter; });
+            var systemParameter = homegenie.Parameters.Find(mp => mp.Name == parameter);
             // create parameter if does not exists
             if (systemParameter == null)
             {

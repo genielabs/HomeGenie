@@ -4,5 +4,11 @@
       "Home",
     "arm_away":
       "Away"
+  },
+  "$section_label": {
+    "label":"Label",
+    "indicators": "Indicators",
+    "lights_control": "Lights",
+    "switches_control": "Switches"
   }
 }

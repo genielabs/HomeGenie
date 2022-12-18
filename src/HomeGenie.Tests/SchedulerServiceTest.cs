@@ -17,7 +17,7 @@ namespace HomeGenie.Tests
         public void OneTimeSetup()
         {
             _scheduler = new SchedulerService(null);
-            _start = new DateTime(2017, 01, 01);
+            _start = new DateTime(2022, 01, 01);
         }
 
         [Test]
@@ -34,6 +34,7 @@ namespace HomeGenie.Tests
         [TestCase("(30 22 * * *) > (49 22 * * *)", 20)]
         [TestCase("(50 23 * * *) > (9 0 * * *)", 20)]
         [TestCase("(50 23 * * *) > (9 1 * * *)", 80)]
+        [TestCase("(0 0 * * *) > (59 23 * * *)", 1440)]
         public void CronExpressionWithSpan(string expression, int expectedOccurrences)
         {
             var occurrences = GetOccurrencesForDate(_scheduler, _start, expression);
@@ -87,7 +88,8 @@ namespace HomeGenie.Tests
         private static List<DateTime> GetOccurrencesForDate(SchedulerService scheduler, DateTime date, string expression)
         {
             date = DateTime.SpecifyKind(date, DateTimeKind.Local);
-            return scheduler.GetScheduling(date.Date, date.Date.AddHours(24).AddMinutes(-1), expression);
+            Console.WriteLine("Date range {0} - {1}", date.Date, date.Date.AddHours(24).AddSeconds(-1));
+            return scheduler.GetScheduling(date.Date, date.Date.AddHours(24).AddSeconds(-1), expression);
         }
 
         private void DisplayOccurrences(string cronExpression, List<DateTime> occurences)

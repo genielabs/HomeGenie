@@ -24,11 +24,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
-using System.Threading;
 using System.Reflection;
 using System.Text;
-
-using HomeGenie.Data;
+using System.Threading.Tasks;
 
 namespace HomeGenie.Service.Logging
 {
@@ -81,7 +79,7 @@ namespace HomeGenie.Service.Logging
         public void WriteToLog(String logEntry)
         {
             standardOutput.WriteLine(logEntry);
-            ThreadPool.QueueUserWorkItem(new WaitCallback((state)=>{
+            Task.Run(() => {
                 lock (logQueue)
                 {
                     // Lock the queue while writing to prevent contention for the log file
@@ -92,7 +90,7 @@ namespace HomeGenie.Service.Logging
                         FlushLog();
                     }
                 }
-            }));
+            });
         }
 
         private bool DoPeriodicFlush()

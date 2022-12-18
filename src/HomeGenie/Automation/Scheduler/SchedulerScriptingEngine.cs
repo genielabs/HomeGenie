@@ -103,10 +103,7 @@ namespace HomeGenie.Automation.Scheduler
         {
             homegenie = hg;
             eventItem = item;
-            scriptEngine = new Engine();
             hgScriptingHost.SetHost(homegenie, item);
-            scriptEngine.SetValue("hg", hgScriptingHost);
-            scriptEngine.SetValue("event", eventItem);
         }
 
         public void Dispose()
@@ -127,6 +124,14 @@ namespace HomeGenie.Automation.Scheduler
             if (programThread != null)
                 StopScript();
 
+            if (scriptEngine == null)
+            {
+                scriptEngine = new Engine();
+                scriptEngine.SetValue("hg", hgScriptingHost);
+                scriptEngine.SetValue("event", eventItem);
+                scriptEngine.Execute(InitScript + "\nfunction __action__() {\n" + eventItem.Script + "\n}\n");
+            }
+            
             isRunning = true;
             homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
                 Properties.SchedulerScriptStatus, eventItem.Name + ":Start");
@@ -138,7 +143,7 @@ namespace HomeGenie.Automation.Scheduler
                     MethodRunResult result = null;
                     try
                     {
-                        scriptEngine.Execute(InitScript + eventItem.Script);
+                        scriptEngine.Execute("__action__();");
                     }
                     catch (Exception ex)
                     {
@@ -187,6 +192,8 @@ namespace HomeGenie.Automation.Scheduler
         public void StopScript()
         {
             isRunning = false;
+            scriptEngine?.Dispose();
+            scriptEngine = null;
             if (programThread != null)
             {
                 try
@@ -206,11 +213,8 @@ namespace HomeGenie.Automation.Scheduler
                 }
                 programThread = null;
             }
-            if (hgScriptingHost != null)
-            {
-                hgScriptingHost.OnModuleUpdate(null);
-                hgScriptingHost.Reset();
-            }
+            hgScriptingHost?.OnModuleUpdate(null);
+            hgScriptingHost?.Reset();
         }
 
         public void RouteModuleEvent(object eventData)

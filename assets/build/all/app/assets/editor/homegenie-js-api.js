@@ -314,11 +314,21 @@ class ModuleHelper extends ModulesManager {
   store(storeName: string): StoreHelper;
 
   /**
+   * Emits a new parameter value.
+   * @returns  ModuleHelper.
+   * @param parameter Parameter name.
+   * @param value The new parameter value to set.
+   * @param description Event description. (optional)
+   */
+  emit(parameter: string, value: any, description?: string): ModuleHelper;
+
+  /**
    * Raise a module parameter event and set the parameter with the specified value.
    * @returns  ModuleHelper.
    * @param parameter Parameter name.
    * @param value The new parameter value to set.
    * @param description Event description.
+   * @deprecated Use {@link emit `emit(..)`} instead.
    */
   raiseEvent(parameter: string, value: any, description: string): ModuleHelper;
 
@@ -532,6 +542,7 @@ class ModulesManager {
    * Execute current command with specified options.
    * @param options A string containing options to be passed to the selected command.
    * @returns  ModulesManager
+   * @deprecated Use {@link submit `submit(..)`} instead.
    */
   execute(options?: string): ModulesManager;
 
@@ -539,6 +550,7 @@ class ModulesManager {
    * Alias for Execute(options)
    * @param options A string containing options to be passed to the selected command.
    * @returns  ModulesManager
+   * @deprecated Use {@link submit `submit(..)`} instead.
    */
   set(options?: string): ModulesManager;
 
@@ -598,6 +610,12 @@ class ModulesManager {
    * @value  @c  true if at least one module in the current selection is off; otherwise, @c  false.
    */
   isOff: boolean;
+
+  /**
+   * Gets or sets "Status.ColorHsb" parameter of selected modules. If more than one module is selected, when reading this property the first module color is returned.
+   * @value @hsb The HSB color string (eg. "0.3130718,0.986,0.65").
+   */
+  colorHsb: string
 
   /**
    * Gets "alarm" status ("Sensor.Alarm" > 0).

@@ -29,6 +29,7 @@ using HomeGenie.Data;
 using MIG;
 using HomeGenie.Service.Constants;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -414,7 +415,7 @@ namespace HomeGenie.Automation.Scripting
         #region Commands
 
         /// <summary>
-        /// Select an API command to be executed for selected modules. To perform the selected command, Execute or Set method must be invoked.
+        /// Select an API command to be executed for selected modules. To perform the selected command, `Submit` method must be called.
         /// </summary>
         /// <returns>ModulesManager</returns>
         /// <param name="cmd">API command to be performed.</param>
@@ -425,7 +426,7 @@ namespace HomeGenie.Automation.Scripting
         /// // turn on all modues of "Light" type
         /// Modules.OfDeviceType("Light").Command("Control.On").Execute();
         /// // set all dimmers to 50%
-        /// Modules.OfDeviceType("Dimmer").Command("Control.Level").Set("50");
+        /// Modules.OfDeviceType("Dimmer").Command("Control.Level").Submit("50");
         /// </code>
         /// </example>
         public ModulesManager Command(string cmd)
@@ -435,7 +436,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Used before a command (*Set*, *Execute*, *On*, *Off*, *Toggle*, ...), it will put a pause after performing the command for each module in the current selection. 
+        /// Used before a command (*Submit*, *On*, *Off*, *Toggle*, ...), it will put a pause after performing the command for each module in the current selection. 
         /// </summary>
         /// <returns>ModulesManager</returns>
         /// <param name="delaySeconds">Delay seconds.</param>
@@ -449,7 +450,7 @@ namespace HomeGenie.Automation.Scripting
         ///     .OfDeviceType("Dimmer")
         ///     .Command("Control.Level")
         ///     .IterationDelay(0.1)
-        ///     .Set(40);
+        ///     .Submit("40");
         /// </code>
         /// </example>
         public ModulesManager IterationDelay(double delaySeconds)
@@ -540,7 +541,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <param name="callback">Optional callback that will be called, for each module in the selection, with the result of the issued command.</param>
         /// <returns>ModulesManager</returns>
-        public ModulesManager Submit(Action<Module, object> callback = null)
+        public ModulesManager Submit(Action<Module, object> callback)
         {
             commandOptions = "0";
             return Submit(commandOptions, callback);
@@ -571,10 +572,7 @@ namespace HomeGenie.Automation.Scripting
                     );
                     if (callback != null)
                     {
-                        Utility.RunAsyncTask(() =>
-                        {
-                            callback(module, response);
-                        });
+                        Task.Run(() => callback(module, response));
                     }
                     DelayIteration();
                 }
@@ -673,7 +671,7 @@ namespace HomeGenie.Automation.Scripting
             set
             {
                 command = Commands.Control.ControlLevel;
-                Set(value.ToString(CultureInfo.InvariantCulture));
+                Submit(value.ToString(CultureInfo.InvariantCulture));
             }
         }
 
@@ -698,7 +696,7 @@ namespace HomeGenie.Automation.Scripting
             set
             {
                 command = Commands.Control.ControlColorHsb;
-                Set(value);
+                Submit(value);
             }
         }
 

@@ -4,7 +4,7 @@ self.importScripts([
   'https://cdnjs.cloudflare.com/ajax/libs/typescript/2.8.3/typescript.min.js'
 ]);
 
-const PACKAGES_SOURCE = 'http://localhost:4200/assets/editor'; // 'https://unpkg.com';
+const PACKAGES_SOURCE = 'https://localhost:4200/assets/editor'; // 'https://unpkg.com';
 
 const resolved = {};
 const downloaded = {};

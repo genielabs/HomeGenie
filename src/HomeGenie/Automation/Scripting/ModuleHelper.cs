@@ -34,7 +34,7 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class ModuleHelper : ModulesManager
     {
-        private HomeGenie.Data.Module module = null;
+        private Module module;
 
         public ModuleHelper(HomeGenieService hg, Module module)
             : base(hg)
@@ -42,11 +42,11 @@ namespace HomeGenie.Automation.Scripting
             this.module = module;
         }
 
-        public override TsList<HomeGenie.Data.Module> SelectedModules
+        public override TsList<Module> SelectedModules
         {
             get
             {
-                var selectedModules = new TsList<Data.Module>();
+                var selectedModules = new TsList<Module>();
                 selectedModules.Add(module);
                 return selectedModules;
             }
@@ -204,13 +204,13 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Raise a module parameter event and set the parameter with the specified value.
+        /// Emits a new parameter value.
         /// </summary>
         /// <returns>ModuleHelper.</returns>
         /// <param name="parameter">Parameter name.</param>
         /// <param name="value">The new parameter value to set.</param>
-        /// <param name="description">Event description.</param>
-        public ModuleHelper RaiseEvent(string parameter, object value, string description)
+        /// <param name="description">Event description. (optional)</param>
+        public ModuleHelper Emit(string parameter, object value, string description = "")
         {
             try
             {
@@ -233,6 +233,19 @@ namespace HomeGenie.Automation.Scripting
                     ex.StackTrace
                 );
             }
+            return this;
+        }
+        /// <summary>
+        /// Raise a module parameter event and set the parameter with the specified value.
+        /// </summary>
+        /// <returns>ModuleHelper.</returns>
+        /// <param name="parameter">Parameter name.</param>
+        /// <param name="value">The new parameter value to set.</param>
+        /// <param name="description">Event description.</param>
+        [Obsolete("This method is deprecated, use Emit(..) instead.")]
+        public ModuleHelper RaiseEvent(string parameter, object value, string description)
+        {
+            Emit(parameter, value, description);
             return this;
         }
     }

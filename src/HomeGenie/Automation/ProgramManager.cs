@@ -23,9 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Threading;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using HomeGenie.Automation.Engines;
 using MIG;
 
@@ -233,9 +233,9 @@ namespace HomeGenie.Automation
             if (RoutePropertyBeforeChangeEvent(routedEvent))
             {
                 // Route event to Programs->ModuleChangedHandler
-                ThreadPool.QueueUserWorkItem(new WaitCallback(RoutePropertyChangedEvent), routedEvent);
+                Task.Run(() => RoutePropertyChangedEvent(routedEvent));
                 // Route event to SchedulerService->OnModuleUpdate
-                ThreadPool.QueueUserWorkItem(new WaitCallback(schedulerService.OnModuleUpdate), routedEvent);
+                Task.Run(() => schedulerService.OnModuleUpdate(routedEvent));
             }
         }
 

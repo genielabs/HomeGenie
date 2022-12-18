@@ -239,9 +239,9 @@ namespace HomeGenie.Automation.Scheduler
             int recursionCount = 0)
         {
             // align time
-            dateStart = dateStart.AddSeconds((double) -dateStart.Second).AddMilliseconds(-dateStart.Millisecond);
-            dateEnd = dateEnd.AddSeconds((double) -dateEnd.Second).AddMilliseconds(-dateEnd.Millisecond);
-
+            dateStart = dateStart.AddSeconds(-dateStart.Second).AddMilliseconds(-dateStart.Millisecond);
+            dateEnd = dateEnd.AddSeconds(-dateEnd.Second).AddMilliseconds(-dateEnd.Millisecond)
+                .AddSeconds(59).AddMilliseconds(999);
             // '[' and ']' are just aesthetic alias for '(' and ')'
             cronExpression = cronExpression.Replace("[", "(").Replace("]", ")");
 
@@ -491,9 +491,10 @@ namespace HomeGenie.Automation.Scheduler
                         var end = matchList.First();
                         var inc = TruncateDate(start.AddMinutes(1));
                         while (end.ToUniversalTime().ToString(FORMAT_DATETIME) !=
-                               inc.ToUniversalTime().ToString(FORMAT_DATETIME) /* &&
-                               inc.Ticks < end.Ticks */
-                        ) //(Math.Floor((end - inc).TotalMinutes) != 0)
+                               inc.ToUniversalTime().ToString(FORMAT_DATETIME)
+                               &&
+                               start.ToUniversalTime().ToString(FORMAT_DATETIME) !=
+                               inc.ToUniversalTime().ToString(FORMAT_DATETIME))
                         {
                             occurs.Add(inc);
                             if (inc.Hour == 23 && inc.Minute == 59)

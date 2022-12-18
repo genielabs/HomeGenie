@@ -58,6 +58,7 @@
   "scheduling_others": "Other events",
   "scheduling_disabled": "Disabled",
   "scheduling_add_new_event": "Add new event",
+  "not_scheduled_day": "Not scheduled in the selected day.",
   "sunrise": "Sunrise",
   "solar_noon": "Noon",
   "sunset": "Sunset",
@@ -117,6 +118,5 @@
   "no_data_received_yet": "Waiting for data",
   "backup_and_restore": "Backup and restore",
   "software_updates": "Software updates",
-  "service_configuration": "Service configuration",
-  "http_settings": "HTTP settings"
+  "service_configuration": "Service configuration"
 }

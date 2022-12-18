@@ -97,11 +97,11 @@ namespace HomeGenie.Automation.Engines
         {
         }
 
-        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isSetupBlock)
         {
             ProgramError error = new ProgramError()
             {
-                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
+                CodeBlock = isSetupBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",

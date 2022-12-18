@@ -64,8 +64,8 @@ namespace HomeGenie.Service
 
         public ArchiveDownloadEventArgs(ReleaseInfo releaseInfo, ArchiveDownloadStatus status)
         {
-            this.ReleaseInfo = releaseInfo;
-            this.Status = status;
+            ReleaseInfo = releaseInfo;
+            Status = status;
         }
     }
 
@@ -114,8 +114,6 @@ namespace HomeGenie.Service
         private const string githubRepository = "HomeGenie";
         private string githubReleases = String.Format("https://api.github.com/repos/genielabs/{0}/releases", githubRepository);
         private string releaseNameFilter = "-stable.";
-        // TODO: deprecate this
-        private const string endpointUrl = "http://www.homegenie.it/release_updates_v1_1.php";
 
         private ReleaseInfo currentRelease;
         private List<ReleaseInfo> remoteUpdates;
@@ -258,16 +256,16 @@ namespace HomeGenie.Service
                         remoteUpdates.Clear();
                     else
                         remoteUpdates = new List<ReleaseInfo>();
-                    foreach(var rel in releases)
+                    foreach (var rel in releases)
                     {
-                        foreach(dynamic relFile in (rel.assets as JArray))
+                        foreach (dynamic relFile in ((JArray)rel.assets))
                         {
                             string relFileName = relFile.browser_download_url.ToString();
-                            if (relFileName.IndexOf(releaseNameFilter) > 0 && relFileName.EndsWith(".tgz"))
+                            if (relFileName.IndexOf(releaseNameFilter, StringComparison.Ordinal) > 0 && relFileName.EndsWith(".tgz"))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                                 releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();
-                                if (currentRelease.ReleaseDate.Round(DateTimeExtensions.RoundTo.Minute) < releaseDate && remoteUpdates.Count == 0)
+                                if (currentRelease != null && currentRelease.ReleaseDate.Round(DateTimeExtensions.RoundTo.Minute) < releaseDate && remoteUpdates.Count == 0)
                                 {
                                     var r = new ReleaseInfo();
                                     r.Name = githubRepository;
@@ -280,7 +278,7 @@ namespace HomeGenie.Service
                                     r.ReleaseDate = releaseDate;
                                     remoteUpdates.Add(r);
                                 }
-                                else if (currentRelease.ReleaseDate < releaseDate)
+                                else if (currentRelease != null && currentRelease.ReleaseDate < releaseDate)
                                 {
                                     string relInfo = String.Format("\r\n\r\n[{0} {1:yyyy-MM-dd}]\r\n{2}", rel.tag_name.ToString(), releaseDate, rel.body.ToString());
                                     remoteUpdates[0].ReleaseNote += relInfo;
@@ -527,10 +525,10 @@ namespace HomeGenie.Service
                             break;
                         }
                     }
-//                    else if (destinationFile.EndsWith("homegenie_stats.db"))
-//                    {
-//                        doNotCopy = true;
-//                    }
+                    else if (destinationFile.EndsWith(".pdb"))
+                    {
+                        doNotCopy = true;
+                    }
 
                     if (doNotCopy) continue;
 

@@ -94,6 +94,9 @@ MIT
 @angular/router
 MIT
 
+@angular/service-worker
+MIT
+
 @blockly/field-slider
 Apache-2.0
 
