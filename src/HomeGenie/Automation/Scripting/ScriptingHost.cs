@@ -40,7 +40,6 @@ namespace HomeGenie.Automation.Scripting
     public class ScriptingHost
     {
         private HomeGenieService hgService;
-        internal bool ExecuteProgramCode;
         private static Logger _log = LogManager.GetCurrentClassLogger();
 
 

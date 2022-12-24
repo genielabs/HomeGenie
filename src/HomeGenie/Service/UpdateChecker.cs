@@ -921,7 +921,7 @@ namespace HomeGenie.Service
                 }
                 else
                 {
-                    throw e;
+                    throw;
                 }
             }
             return result;

@@ -1,1 +1,0 @@
-﻿$$.program.say('Hello World!');

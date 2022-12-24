@@ -250,7 +250,7 @@ namespace HomeGenie.Service
                 var resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties" });
                 settings.ContractResolver = resolver;
             }
-            return JsonConvert.SerializeObject(module.Clone(), settings);
+            return JsonConvert.SerializeObject(module, settings);
         }
 
         public static string JsonEncode(string fieldValue)
@@ -552,7 +552,7 @@ namespace HomeGenie.Service
                 Stream inStream = File.OpenRead(archiveName);
                 Stream gzipStream = new GZipInputStream(inStream);
 
-                TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
+                TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream, Encoding.Default);
                 tarArchive.ProgressMessageEvent += (archive, entry, message) => {
                     extractedFiles.Add(entry.Name);
                 };
@@ -574,14 +574,13 @@ namespace HomeGenie.Service
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)
         {
-            ZipStrings.CodePage = Encoding.UTF8.CodePage;
-            // TODO: verify the new code above is working, otherwise restore this: -> ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
             List<string> extractedFiles = new List<string>();
             ZipFile zipFile = null;
             try
             {
                 FileStream fs = File.OpenRead(archiveName);
                 zipFile = new ZipFile(fs);
+                zipFile.StringCodec = StringCodec.FromCodePage(Encoding.UTF8.CodePage);
                 //if (!String.IsNullOrEmpty(password)) {
                 //    zf.Password = password;  // AES encrypted entries are handled automatically
                 //}
@@ -631,12 +630,10 @@ namespace HomeGenie.Service
 
         internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
         {
-            ZipStrings.CodePage = Encoding.UTF8.CodePage;
-            // TODO: verify the new code above is working, otherwise restore this: -> ZipConstants.DefaultCodePage = System.Text.Encoding.UTF8.CodePage;
             if (!File.Exists(zipFilename))
             {
                 FileStream zfs = File.Create(zipFilename);
-                ZipOutputStream zipStream = new ZipOutputStream(zfs);
+                ZipOutputStream zipStream = new ZipOutputStream(zfs, StringCodec.FromCodePage(Encoding.UTF8.CodePage));
                 zipStream.SetLevel(3); //0-9, 9 being the highest level of compression
                 /*
                 // NOTE: commented code because this is raising an error "Extra data extended Zip64 information length is invalid"

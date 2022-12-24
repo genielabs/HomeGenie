@@ -24,15 +24,15 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
-
+using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Client;
-using MQTTnet.Client.Options;
 using MQTTnet.Formatter;
+using MQTTnet.Packets;
 using MQTTnet.Protocol;
-using MQTTnet.Server;
 
 using NLog;
+using MqttClient = MQTTnet.Client.MqttClient;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -157,7 +157,7 @@ namespace HomeGenie.Automation.Scripting
             endPoint.ClientId = clientId;
             Disconnect();
             mqttClient = (MqttClient)Factory.CreateMqttClient();
-            mqttClient.UseConnectedHandler(async e =>
+            mqttClient.ConnectedAsync += async e =>
             {
                 if (callback != null)
                 {
@@ -167,16 +167,21 @@ namespace HomeGenie.Automation.Scripting
                 {
                     await mqttClient.SubscribeAsync(new MqttTopicFilter() { Topic = subscription.Key });
                 }
-            });
-            mqttClient.UseDisconnectedHandler(async e =>
+            };
+            mqttClient.DisconnectedAsync += e =>
             {
-                Log.Debug(e.Exception,"MqttClient Error");
+                Log.Debug((Exception)e.Exception, "MqttClient Error");
                 if (callback != null)
                 {
                     callback(false);
                 }
-            });
-            mqttClient.UseApplicationMessageReceivedHandler(e => MessageReceived(e));
+                return Task.CompletedTask;
+            };
+            mqttClient.ApplicationMessageReceivedAsync += e =>
+            {
+                MessageReceived(e);
+                return Task.CompletedTask;
+            };
             var clientOptionsBuilder = GetMqttOptionsBuilder(clientId);
             if (clientOptionsCallback != null)
             {
@@ -243,7 +248,13 @@ namespace HomeGenie.Automation.Scripting
         {
             if (mqttClient != null)
             {
-                mqttClient.PublishAsync(topic, message, MqttQualityOfServiceLevel.AtLeastOnce, false);
+                mqttClient.PublishAsync(new MqttApplicationMessage()
+                {
+                    Topic  =topic,
+                    Payload = Encoding.UTF8.GetBytes(message),
+                    QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
+                    Retain = false
+                });
             }
             return this;
         }
@@ -257,7 +268,13 @@ namespace HomeGenie.Automation.Scripting
         {
             if (mqttClient != null)
             {
-                mqttClient.PublishAsync(topic, Encoding.UTF8.GetString(message), MqttQualityOfServiceLevel.AtLeastOnce, false);
+                mqttClient.PublishAsync(new MqttApplicationMessage()
+                {
+                    Topic  =topic,
+                    Payload = message,
+                    QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
+                    Retain = false
+                });
             }
             return this;
         }
@@ -323,18 +340,12 @@ namespace HomeGenie.Automation.Scripting
             var builder = new MqttClientOptionsBuilder()
                 .WithProtocolVersion(MqttProtocolVersion.V311)
                 .WithKeepAlivePeriod(TimeSpan.FromSeconds(5))
-                .WithCommunicationTimeout(TimeSpan.FromSeconds(15))
+                .WithTimeout(TimeSpan.FromSeconds(15))
                 .WithClientId(clientId)
                 // this message will be sent to all clients
                 // subscribed to <clientId>/status topic
                 // if this client gets disconnected
-                .WithWillMessage(new MqttApplicationMessage
-                {
-                    Payload = Encoding.UTF8.GetBytes("disconnected"),
-                    Topic = String.Format("/{0}/status", clientId),
-                    Retain = true,
-                    QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce
-                })
+                .WithWillPayload("disconnected")
                 .WithCleanSession();
             if (usingWebSockets)
             {
@@ -362,7 +373,7 @@ namespace HomeGenie.Automation.Scripting
             var topic = args.ApplicationMessage.Topic;
             foreach(KeyValuePair<string, Action<string, byte[]>> subscription in subscribeTopics)
             {
-                if (!MqttTopicFilterComparer.IsMatch(topic, subscription.Key)) continue;
+                if (MqttTopicFilterComparer.Compare(topic, subscription.Key) != MqttTopicFilterCompareResult.IsMatch) continue;
                 var callback = subscription.Value;
                 if (callback != null)
                 {

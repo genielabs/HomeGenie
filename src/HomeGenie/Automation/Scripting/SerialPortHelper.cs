@@ -22,13 +22,7 @@
 
 using System;
 using System.Text;
-#if NETCOREAPP
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using RJCP.IO.Ports;
-#else
 using System.IO.Ports;
-#endif
 
 using SerialPortLib;
 
@@ -51,11 +45,7 @@ namespace HomeGenie.Automation.Scripting
 
         public SerialPortHelper()
         {
-#if NETCOREAPP
-            serialPort = new SerialPortInput(new Logger<SerialPortInput>(new NullLoggerFactory()));
-#else
             serialPort = new SerialPortInput();
-#endif
         }
 
         /// <summary>

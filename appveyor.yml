@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 1.1.{build}
 branches:
   except:
   - gh-pages
@@ -35,12 +35,12 @@ after_test:
     appveyor PushArtifact "Output\HomeGenie_%APPVEYOR_REPO_TAG_NAME%.exe"
 
 deploy:
-  release: $(APPVEYOR_REPO_TAG_NAME)
-  description: 'HomeGenie $(APPVEYOR_REPO_TAG_NAME)'
-  provider: GitHub
-  auth_token:
-    secure:  1aMBEFi1qBAoV4H+LYx7hoVLgXJfndGoQ8I8qjLsoxXNA1zS+zgQHi2zVlRrmw1v
-  draft: false
-  prerelease: false
-  on:
-    appveyor_repo_tag: true
+  - release: $(APPVEYOR_REPO_TAG_NAME)
+  - description: 'HomeGenie $(APPVEYOR_REPO_TAG_NAME)'
+  - provider: GitHub
+  - auth_token:
+      secure: q0rRgZDDKmOASUrMCHGUlPh34wIipSYKWJiDeiwftkB7hLH/QyYhNL5MckCyse+1
+  - draft: false
+  - prerelease: false
+  - on:
+      appveyor_repo_tag: true

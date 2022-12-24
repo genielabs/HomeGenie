@@ -37,7 +37,7 @@ namespace HomeGenie.Data
     /// Module instance.
     /// </summary>
     [Serializable()]
-    public class Module : ICloneable
+    public class Module
     {
         /// <summary>
         /// Gets or sets the name.
@@ -88,29 +88,6 @@ namespace HomeGenie.Data
             DeviceType = ModuleTypes.Generic;
             Properties = new TsList<ModuleParameter>();
             Stores = new TsList<Store>();
-        }
-
-        public object Clone()
-        {
-            try
-            {
-                var stream = new MemoryStream();
-                var formatter = new BinaryFormatter();
-
-                formatter.Serialize(stream, this);
-
-                stream.Position = 0;
-                object obj = formatter.Deserialize(stream);
-                stream.Close();
-
-                return obj;
-            }
-            catch (Exception e)
-            {
-                // fallback to standard JSON serialization
-                Console.WriteLine(e.Message);
-                return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(this));
-            }
         }
 
     }

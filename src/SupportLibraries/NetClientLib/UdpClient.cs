@@ -175,11 +175,7 @@ namespace NetClientLib
         {
             try
             {
-#if NETSTANDARD2_0
                 receiverTask.Interrupt();
-#else
-                receiverTask.Abort();
-#endif
             }
             catch { }
             receiverTask = null;

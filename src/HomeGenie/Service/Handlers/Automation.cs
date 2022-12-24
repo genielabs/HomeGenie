@@ -22,6 +22,7 @@ using HomeGenie.Automation;
 using MIG;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -182,7 +183,7 @@ namespace HomeGenie.Service.Handlers
                     DateTime dateStart = DateTime.Today.ToUniversalTime();
                     string startFrom = migCommand.GetOption(1);
                     if (!String.IsNullOrWhiteSpace(startFrom))
-                        dateStart = Utility.JavascriptToDate(long.Parse(startFrom));
+                        dateStart = DateTime.Parse(startFrom, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal).ToUniversalTime(); //Utility.JavascriptToDate(long.Parse(startFrom));
                     string cronExpression = migCommand.GetOption(2);
                     List<dynamic> nextList = new List<dynamic>();
                     if (!String.IsNullOrEmpty(cronExpression))
@@ -190,6 +191,7 @@ namespace HomeGenie.Service.Handlers
                         var evt = new
                         {
                             CronExpression = cronExpression,
+                            StartDate = dateStart,
                             Occurrences = new List<double>()
                         };
                         var dateEnd = dateStart.AddHours(hours).AddSeconds(-1);
@@ -211,7 +213,14 @@ namespace HomeGenie.Service.Handlers
                             var ce = homegenie.ProgramManager.SchedulerService.Items[s];
                             if (!ce.IsEnabled)
                                 continue;
-                            var evt = new { ce.Name, ce.Description, RunScript = !String.IsNullOrWhiteSpace(ce.Script), Occurrences = new List<double>() };
+                            var evt = new
+                            {
+                                ce.Name,
+                                ce.Description,
+                                RunScript = !String.IsNullOrWhiteSpace(ce.Script),
+                                StartDate = dateStart,
+                                Occurrences = new List<double>()
+                            };
                             var d = dateStart;
                             var dateEnd = dateStart.AddHours(hours).AddSeconds(-1);
                             var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, ce.CronExpression);

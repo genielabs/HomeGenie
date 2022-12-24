@@ -1,0 +1,9 @@
+{
+  "additionalProbingPaths": [
+    "bin",
+    "lib",
+    "lib/ape",
+    "Lib/mig",
+    "lib/shared"
+  ]
+}

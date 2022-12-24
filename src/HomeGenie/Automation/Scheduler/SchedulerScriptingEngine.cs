@@ -200,12 +200,7 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     if (!programThread.Join(1000))
                     {
-#if NETCOREAPP
-                        // _programThread.Abort(); => System.PlatformNotSupportedException: Thread abort is not supported on this platform.
                         programThread.Interrupt();
-#else
-                        programThread.Abort();
-#endif
                     }
                 }
                 catch

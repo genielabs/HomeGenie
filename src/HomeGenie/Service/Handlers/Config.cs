@@ -40,11 +40,7 @@ using Esprima;
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data.UI;
 using Innovative.SolarCalculator;
-#if NETCOREAPP
-using RJCP.IO.Ports;
-#else
 using System.IO.Ports;
-#endif
 
 using MIG.Gateways;
 using MIG.Gateways.Authentication;
@@ -135,37 +131,17 @@ namespace HomeGenie.Service.Handlers
                 case "Hardware.SerialPorts":
                     if (Environment.OSVersion.Platform == PlatformID.Unix)
                     {
-#if NETCOREAPP
-                        var serialPorts = SerialPortStream.GetPortNames();
-#else
                         var serialPorts = SerialPort.GetPortNames();
-#endif
                         var portList = new List<string>();
                         for (int p = serialPorts.Length - 1; p >= 0; p--)
                         {
-#if NETCOREAPP
-#else
-                            if (serialPorts[p].Contains("/ttyS")
-                                || serialPorts[p].Contains("/ttyUSB")
-                                || serialPorts[p].Contains("/ttyAMA")// RaZberry
-                                || serialPorts[p].Contains("/ttyACM"))  // ZME_UZB1
-                            {
-#endif
-                                portList.Add(serialPorts[p]);
-#if NETCOREAPP
-#else
-                            }
-#endif
+                            portList.Add(serialPorts[p]);
                         }
                         request.ResponseData = portList;
                     }
                     else
                     {
-#if NETCOREAPP
-                        var portNames = SerialPortStream.GetPortNames();
-#else
                         var portNames = SerialPort.GetPortNames();
-#endif
                         request.ResponseData = portNames;
                     }
                     break;
@@ -642,7 +618,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationBackup")
                 {
-                    string backupFileName = Path.Combine("html", "homegenie_backup_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".zip");
+                    string backupFileName = Path.Combine(Utility.GetTmpFolder(), "homegenie_backup_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".zip");
                     homegenie.BackupManager.BackupConfiguration(backupFileName);
                     byte[] bundleData = File.ReadAllBytes(backupFileName);
                     File.Delete(backupFileName);
@@ -685,6 +661,7 @@ namespace HomeGenie.Service.Handlers
                         TimeZoneId = TimeZoneInfo.Local.Id,
                         TimeZone = TimeZoneInfo.Local.StandardName,
                         UtcOffset = TimeZoneInfo.Local.BaseUtcOffset.TotalMinutes,
+                        LocalTime = DateTime.Now.ToString("o"),
                         Process = new
                         {
                             StartTime = Utility.DateToJavascript(startTime) 

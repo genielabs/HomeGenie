@@ -117,7 +117,7 @@ namespace HomeGenie.Automation.Engines
             {
                 var sh = (scriptEngine.GetValue("hg").ToObject() as ScriptingHost);
                 scriptEngine.Execute("__setup__();");
-                result.ReturnValue = sh.ExecuteProgramCode || ProgramBlock.WillRun;
+                result.ReturnValue = ProgramBlock.WillRun;
             }
             catch (Exception e)
             {
