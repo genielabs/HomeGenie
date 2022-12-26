@@ -25,7 +25,9 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Build release
-        run: dotnet publish -c release -f net472 ./HomeGenie.sln
+        run: |
+          dotnet publish -c release -f net472 ./HomeGenie.sln
+          cp -arv ./assets/build/all/* ./src/HomeGenie/bin/Release/net472/publish/
 
       - name: Zip portable release
         run: |
@@ -41,11 +43,53 @@ jobs:
           ./assets/deploy/linux/builddeb.sh
           cd ./assets/deploy/linux && sh doxygen.sh
           mv Output/* ../../../src/HomeGenie/bin/Release/net472/artifacts/
-          
-      - uses: actions/upload-artifact@v3
+          mv Doxy/homegenie_api.tgz ../../../src/HomeGenie/bin/Release/net472/artifacts/
+
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.zip
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.tgz
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_api.tgz
+
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
         with:
-          path: |
-            ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.zip
-            ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.tgz
-            ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
-            ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_api.tgz
+          draft: false
+          prerelease: false
+          release_name: ${{ env.RELEASE_VERSION }}
+          tag_name: ${{ github.ref }}
+#          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload linux debian artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
+          asset_path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
+          asset_name: homegenie_${{ env.VERSION_NUMBER }}_all.deb
+          asset_content_type: application/vnd.debian.binary-package
+
+      - name: upload portable artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.zip
+          asset_path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.zip
+          asset_name: homegenie_${{ env.VERSION_NUMBER }}.zip
+          asset_content_type: application/zip
+

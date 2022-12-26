@@ -104,6 +104,8 @@
   "fullscreen": "Fullscreen",
   "arrange_widgets": "Arrange widgets",
   "dashboards": "Dashboards",
+  "no_dashboards_configured": "No dashboards configured yet.",
+  "import_groups_as_dashboards": "Import from server",
   "add_new_dashboard": "Add new dashboard",
   "delete_dashboard": "Delete dashboard",
   "empty_dashboard": "Empty dashboard.",

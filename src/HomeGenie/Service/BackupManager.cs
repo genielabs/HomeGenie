@@ -26,8 +26,11 @@ using HomeGenie.Automation;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using HomeGenie.Data;
 using HomeGenie.Service.Constants;
+using HomeGenie.Service.Logging;
 using Group = HomeGenie.Data.Group;
 
 namespace HomeGenie.Service
@@ -311,14 +314,34 @@ namespace HomeGenie.Service
             return success;
         }
 
-        // Backward compatibility method for HG < 1.1
-        private bool UpdateSystemConfig(string configPath)
+        private bool UpdateSystemConfig(string backupConfigPath)
         {
-            string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
-            File.Copy(Path.Combine(configPath, "systemconfig.xml"), configFile, true);
-            return true;
+            SystemConfiguration systemConfiguration;
+            try
+            {
+                var backupConfigFile = Path.Combine(backupConfigPath, "systemconfig.xml");
+                var serializer = new XmlSerializer(typeof(SystemConfiguration));
+                using (var reader = new StreamReader(backupConfigFile))
+                {
+                    systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
+                    systemConfiguration.MigService.Gateways = homegenie.SystemConfiguration.MigService.Gateways;
+                }
+                string systemConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
+                var ws = new System.Xml.XmlWriterSettings();
+                ws.Indent = true;
+                ws.Encoding = Encoding.UTF8;
+                XmlSerializer x = new XmlSerializer(systemConfiguration.GetType());
+                using (var wri = System.Xml.XmlWriter.Create(systemConfigFile, ws))
+                {
+                    x.Serialize(wri, systemConfiguration);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO: report error 
+            }
+            return false;
         }
-
     }
 }
-

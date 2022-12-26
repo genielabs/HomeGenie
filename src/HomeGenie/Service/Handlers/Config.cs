@@ -574,7 +574,7 @@ namespace HomeGenie.Service.Handlers
                             })
                         }));
                     }
-                    catch
+                    catch (Exception e)
                     {
                         Utility.FolderCleanUp(tempFolderPath);
                         request.ResponseData = new ResponseStatus(Status.Error);

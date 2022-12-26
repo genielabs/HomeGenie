@@ -83,7 +83,7 @@ namespace HomeGenie.Data
                 {
                     File.Delete(fname);
                 }
-                System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
+                var ws = new System.Xml.XmlWriterSettings();
                 ws.Indent = true;
                 ws.Encoding = Encoding.UTF8;
                 XmlSerializer x = new XmlSerializer(syscopy.GetType());

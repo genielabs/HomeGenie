@@ -10,8 +10,8 @@ Recommends: ca-certificates-mono
 Suggests: arduino-mk, empty-expect
 Installed-Size: %installed_size%
 Maintainer: Generoso Martello <gene@homegenie.it>
-Homepage: http://www.homegenie.it
+Homepage: https://www.homegenie.it
 Conflicts: 
 Replaces: 
 Provides: 
-Description: HomeGenie - open source, programmable, home automation server for smart connected devices and applications.
+Description: HomeGenie - open source, programmable, automation server for smart connected devices and applications.

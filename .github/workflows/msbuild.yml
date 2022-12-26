@@ -31,4 +31,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Build release
-      run: dotnet publish -c release -f net472 ./HomeGenie.sln
+      run: |
+        dotnet publish -c release -f net472 ./HomeGenie.sln
+        cp -arv ./assets/build/all/* ./src/HomeGenie/bin/Release/net472/publish/
+        ls -la ./src/HomeGenie/bin/Release/net472/publish/
