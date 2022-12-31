@@ -11,7 +11,7 @@ set -x -e
 
 hg_user="homegenie"
 script_path="$( cd "$(dirname "$0")" ; pwd -P )"
-source_folder="$( cd "${script_path}/../../../src/HomeGenie/bin/Release/net472/homegenie" ; pwd -P )"
+source_folder="$( cd "${script_path}/../../../src/HomeGenie/bin/Release/homegenie" ; pwd -P )"
 target_folder="${script_path}/Output"
 deploy_folder="home"
 

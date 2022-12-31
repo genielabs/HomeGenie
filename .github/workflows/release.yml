@@ -52,7 +52,6 @@ jobs:
           mv net472 homegenie
           zip "homegenie_$VERSION_NUMBER_net472.zip" -r homegenie
           mv "homegenie_$VERSION_NUMBER_net472.zip" ./artifacts/
-          rm -rf homegenie
           cd net6.0
           mv linux-arm homegenie
           zip "homegenie_$VERSION_NUMBER_linux-arm.zip" -r homegenie
@@ -80,8 +79,8 @@ jobs:
           sudo apt-get install doxygen
           ./assets/deploy/linux/builddeb.sh
           cd ./assets/deploy/linux && sh doxygen.sh
-          mv Output/* ../../../src/HomeGenie/bin/Release/net472/artifacts/
-          mv Doxy/homegenie_api.tgz ../../../src/HomeGenie/bin/Release/net472/artifacts/
+          mv Output/* ../../../src/HomeGenie/bin/Release/artifacts/
+          mv Doxy/homegenie_api.tgz ../../../src/HomeGenie/bin/Release/artifacts/
 
 #      - uses: actions/upload-artifact@v3
 #        with:
