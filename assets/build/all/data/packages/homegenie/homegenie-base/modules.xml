@@ -2,7 +2,7 @@
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Module>
     <Name>E-Mail Account</Name>
-    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <Description>Stores e-mail account information used for sending/receiving emails programatically.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>142</Address>
@@ -13,7 +13,7 @@
         <Description>1. E-Mail address</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2017-08-17T17:32:30.057549Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:42.5388986Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpPassword</Name>
@@ -21,7 +21,7 @@
         <Description>4. SMTP password (optional)</Description>
         <FieldType>password</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2017-08-17T17:32:30.057565Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:42.5389016Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpPort</Name>
@@ -29,7 +29,7 @@
         <Description>5. SMTP Mail Server port</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1495351Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:34.3586627Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpServer</Name>
@@ -37,7 +37,7 @@
         <Description>2. SMTP Mail Server address</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2017-08-17T17:32:30.057559Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:42.5388998Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpUserName</Name>
@@ -45,7 +45,7 @@
         <Description>3. SMTP username (optional)</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2017-08-17T17:32:30.057562Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:42.5389005Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpUseSsl</Name>
@@ -53,7 +53,7 @@
         <Description>6. SMTP Mail Server use SSL</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1496099Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:34.3587934Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -61,7 +61,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2014-11-13T22:55:32.969254Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:41.44944Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -75,9 +75,27 @@
     <Stores />
   </Module>
   <Module>
+    <Name>Events logging</Name>
+    <Description>Records device activity.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>95</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Background</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T13:13:03.4284703Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
     <Name>MQTT Network</Name>
-    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
-      Other servers will automatically inherit the published module once an event is generated from it.</Description>
+    <Description>Share device with other HomeGenie servers connected to the same MQTT service.
+All HomeGenie servers will automatically inherit a shared module once an event is emitted from it.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -88,7 +106,7 @@
         <Description>0. Enter unique ID for this client</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1480263Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:34.1776554Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Password</Name>
@@ -112,7 +130,7 @@
         <Description>2. MQTT server port</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1480711Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:34.1777588Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerTopic</Name>
@@ -120,7 +138,7 @@
         <Description>5. Topic</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.148141Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:34.1778712Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.TLS</Name>
@@ -152,7 +170,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.148219Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:34.1779696Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -160,7 +178,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2014-07-14T20:41:16.979209Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:58.20143Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -175,8 +193,9 @@
   </Module>
   <Module>
     <Name>OpenWeatherMap</Name>
-    <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
-To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
+    <Description>Weather and forecast information from Open Weather Map service.
+To activate this widget enter a valid API key.
+Follow instructions at https://openweathermap.org/appid to get a free API key.
 </Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -188,7 +207,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884955Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133045Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Astronomy.Sunset</Name>
@@ -196,7 +215,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884951Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133042Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.City</Name>
@@ -204,7 +223,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884959Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133048Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.Description</Name>
@@ -212,7 +231,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.288497Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.613306Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.DisplayLocation</Name>
@@ -220,7 +239,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884965Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133055Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.IconType</Name>
@@ -228,7 +247,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884968Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133057Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.IconUrl</Name>
@@ -244,39 +263,39 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884962Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133052Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ApiKey</Name>
         <Value>?</Value>
         <Description>OpenWeatherMap API key (APPID)</Description>
         <FieldType>text</FieldType>
-        <ParentId>34</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1477116Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:03:34.1406635Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Language</Name>
         <Value>EN</Value>
         <Description>Language</Description>
         <FieldType>text</FieldType>
-        <ParentId>34</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1477595Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:03:34.1407732Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Location</Name>
         <Value>London, UK</Value>
         <Description>City name</Description>
         <FieldType>wunderground.city</FieldType>
-        <ParentId>34</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1478014Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:03:34.1408779Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.UpdateInterval</Name>
         <Value>30</Value>
         <Description>Update interval (minutes)</Description>
         <FieldType>slider:15:1440:15:15</FieldType>
-        <ParentId>34</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.1478441Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:03:34.140982Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -284,7 +303,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-11T12:51:10.2884974Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:03:45.6133066Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -292,7 +311,7 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2014-11-13T22:55:32.969134Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:02:24.0285449Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -301,6 +320,48 @@ To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2014-04-11T19:26:31.5697656Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Remote Control</Name>
+    <Description>Toggle and dim the device using a remote controller (IR or RF).</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>505</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerDownCode</Name>
+        <Value>ButtonDown</Value>
+        <Description>2. Dim button (enter code)</Description>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T13:13:04.7998213Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerInterval</Name>
+        <Value>10</Value>
+        <Description>4. Dimming step</Description>
+        <FieldType>slider:5:50:5</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T13:13:04.7998233Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerUpCode</Name>
+        <Value>ButtonUp</Value>
+        <Description>1. Bright button (enter code)</Description>
+        <FieldType>capture:Receiver.RawData</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T13:13:04.7998097Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Background</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T13:13:04.8178793Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />

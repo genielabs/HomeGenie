@@ -47,8 +47,8 @@ using GpioController controller = new();
 
 // Pin-change event handler
 PinChangeEventHandler pinValueChangeHandler = (sender, pinChange) =&gt; {
-    var level = pinChange.ChangeType == PinEventTypes.Falling ? "0" : "1";
-    mod.RaiseEvent("Status.Level", level, "GPIO Event");
+    var level = pinChange.ChangeType == PinEventTypes.Falling ? 0 : 1;
+    mod.Emit("Status.Level", level, "GPIO Event");
 };
 
 // Pin allocation/deallocation logic
@@ -56,11 +56,11 @@ var allocatePin = (int pin) =&gt; {
     var pinMode = (PinMode)Program.Option("GPIO.Pin.Mode").DecimalValue;
     if (pinMode == PinMode.Output)
     {
-        mod.RaiseEvent("Widget.DisplayModule", "homegenie/generic/switch", "");
+        mod.Emit("Widget.DisplayModule", "homegenie/generic/switch");
     }
     else
     {
-        mod.RaiseEvent("Widget.DisplayModule", "homegenie/generic/sensor", "");
+        mod.Emit("Widget.DisplayModule", "homegenie/generic/sensor");
     }
     if (allocatedPin &gt; 0)
     {
@@ -77,7 +77,7 @@ var allocatePin = (int pin) =&gt; {
         } catch {}
     }
     if (pin &lt;= 0) {
-        Program.Notify("Please select GPIO pin to use");
+        Program.Notify("Set GPIO pin to use from program/widget settings.");
         return;
     }
     try
@@ -94,21 +94,32 @@ var allocatePin = (int pin) =&gt; {
     }
 };
 
+var controlOn = new Action&lt;ModuleHelper&gt;((mod) =&gt; {
+    controller.Write(allocatedPin, PinValue.High);
+    mod.Emit("Status.Level", 1);
+});
+var controlOff = new Action&lt;ModuleHelper&gt;((mod) =&gt; {
+    controller.Write(allocatedPin, PinValue.Low);
+    mod.Emit("Status.Level", 0);
+});
+
 // Handle web service API
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args) =&gt; {
     var request = Program.ParseApiCall(args);
     if (request.Command == "Control.Toggle") {
-        // todo:
-        return null;
+        if (mod.Level == 0) {
+            controlOn(mod);
+        } else {
+            controlOff(mod);
+        }
+        return new ResponseStatus(Status.Ok);
     }
     if (request.Command == "Control.On") {
-        controller.Write(allocatedPin, PinValue.High);
-        mod.RaiseEvent("Status.Level", "1", "");
+        controlOn(mod);
         return new ResponseStatus(Status.Ok);
     }
     if (request.Command == "Control.Off") {
-        controller.Write(allocatedPin, PinValue.Low);
-        mod.RaiseEvent("Status.Level", "0", "");
+        controlOff(mod);
         return new ResponseStatus(Status.Ok);
     }
     return null;
@@ -136,7 +147,7 @@ allocatePin(pin);
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-net</PackageId>
@@ -144,7 +155,7 @@ Program.GoBackground();
       <Id>gpio-binary-switch-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>A546C87E9EB9C531ED7C72A0EE303204</Checksum>
+      <Checksum>46817C793471A7FD0F6CDE4735B9CE19</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>

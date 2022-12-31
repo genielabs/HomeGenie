@@ -1,6 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Module>
+    <Name>Demo - Motion Detected</Name>
+    <Description>Simulates motion detection of "Virtual Modules Demo" sensor.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>402</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:34:36.0558714Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-27T20:24:13.8870668Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>402</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:02:24.0287448Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-27T16:35:53.711011Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Demo - Toggle Door</Name>
+    <Description>Simulates door open/close of "Virtual Modules Demo" sensor.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>401</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Idle</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:07:09.2987396Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-27T20:34:51.404377Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>401</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:02:24.0287569Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/program</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-27T16:35:53.7201713Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
     <Name>Multi Sensor</Name>
     <Description />
     <DeviceType>Sensor</DeviceType>
@@ -13,7 +97,7 @@
         <Description>Enable events logging</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5189116Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8340787Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecuritySensor</Name>
@@ -21,7 +105,7 @@
         <Description>Use as Security Sensor</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5189606Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8341885Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggerHome</Name>
@@ -33,19 +117,19 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Humidity</Name>
-        <Value>5.178</Value>
+        <Value>8.012</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:36:46.3312304Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:10:24.0200463Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Luminance</Name>
-        <Value>69.29133915775053</Value>
+        <Value>794</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:36:46.3353659Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:10:24.0249329Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.MotionDetect</Name>
@@ -53,15 +137,15 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:58:05.3309512Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8345558Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
-        <Value>23.776</Value>
+        <Value>10.546</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:36:46.3279135Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:10:23.7626374Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -77,7 +161,7 @@
         <Description>Watts meter max power</Description>
         <FieldType>slider:1:2500:1:10</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5192632Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8347679Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
@@ -85,7 +169,7 @@
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5193399Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8349164Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.Humidity</Name>
@@ -93,7 +177,7 @@
         <Description>Humidity sensor</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5194129Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8350527Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.Luminance</Name>
@@ -101,7 +185,7 @@
         <Description>Light sensor</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5194645Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8351624Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.Temperature</Name>
@@ -109,7 +193,7 @@
         <Description>Temperature sensor</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5195173Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8352686Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -135,7 +219,7 @@
         <Description>Enable events logging</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5196008Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8476009Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecuritySensor</Name>
@@ -143,7 +227,7 @@
         <Description>Use as Security Sensor</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5196573Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8477057Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggerHome</Name>
@@ -151,7 +235,7 @@
         <Description>Also trigger when armed Home</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5197169Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8478003Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.DoorWindow</Name>
@@ -159,7 +243,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:07:19.6597065Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:07:09.2874278Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Battery</Name>
@@ -167,7 +251,7 @@
         <Description>Set battery level</Description>
         <FieldType>slider:0:100:1</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5198331Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8480087Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -192,16 +276,16 @@
         <Value>On</Value>
         <Description>Monitor status</Description>
         <FieldType>checkbox</FieldType>
-        <ParentId>81</ParentId>
-        <UpdateTime>2021-04-14T01:03:09.6920614Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:34:14.8600756Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.MonitorWatts</Name>
         <Value>On</Value>
         <Description>Monitor watts</Description>
         <FieldType>checkbox</FieldType>
-        <ParentId>81</ParentId>
-        <UpdateTime>2021-04-14T01:03:09.6962599Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:34:14.8602032Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -209,7 +293,7 @@
         <Description>Enable events logging</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:03:09.6881727Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8603188Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.IRControler.Enable</Name>
@@ -257,7 +341,7 @@
         <Description>Trigger if luminance is below</Description>
         <FieldType>slider:0:1000:1</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5199751Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8604356Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
@@ -273,15 +357,15 @@
         <Description>Turn off after inactivity timeout (seconds)</Description>
         <FieldType>slider:30:3600:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5200615Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8605996Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>0</Value>
+        <Value>400.026</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:33:10.6214483Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:10:24.0284772Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -289,7 +373,7 @@
         <Description>Watts meter</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5202182Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8608181Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts.Max</Name>
@@ -297,7 +381,7 @@
         <Description>Watts meter max power</Description>
         <FieldType>slider:1:2500:1:10</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5202769Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8609124Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
@@ -305,7 +389,7 @@
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T00:46:15.5203601Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:34:14.8610161Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
@@ -313,7 +397,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:35:10.1079264Z</UpdateTime>
+        <UpdateTime>2022-12-31T14:26:56.4623246Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>

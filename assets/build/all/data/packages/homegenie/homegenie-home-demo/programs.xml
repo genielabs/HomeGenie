@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
-    <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
-    <ScriptSource>var _domain = "HomeAutomation.Demo";
-var _param = "Sensor.MotionDetect";
-var motion = $$.modules.inDomain(_domain).withAddress("1").get();
-var currentValue = motion.parameter(_param).decimalValue;
-motion.raiseEvent(_param, "1", "");
+    <ScriptSetup>$$.program
+  .useWidget('homegenie/generic/program');
+</ScriptSetup>
+    <ScriptSource>var motionDetect = "Sensor.MotionDetect";
+var motionSensor = $$.modules.inDomain("HomeAutomation.Demo").withAddress("1").get();
+//var currentValue = motion.parameter(motionDetect).decimalValue;
+motionSensor.emit(motionDetect, "1");
 $$.pause(1);
-motion.raiseEvent(_param, "0", "");</ScriptSource>
+motionSensor.emit(motionDetect, "0");
+</ScriptSource>
     <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -17,28 +19,27 @@ motion.raiseEvent(_param, "0", "");</ScriptSource>
       <Id>demo-motion-detected</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>510A2517408D920496BBD0E68AC612DB</Checksum>
+      <Checksum>F3B18A9C7079F70A5922954F239AA714</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>402</Address>
     <Name>Demo - Motion Detected</Name>
-    <Description>Simulate motion detection</Description>
+    <Description>Simulates motion detection of "Virtual Modules Demo" sensor.</Description>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-11T18:12:58.4517153Z</ActivationTime>
-    <TriggerTime>2021-04-10T16:30:06.5962259Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
-    <ScriptSource>var _domain = "HomeAutomation.Demo";
-var _param = "Sensor.DoorWindow";
-var door = $$.modules.inDomain(_domain).withAddress("2").get();
-var currentValue = door.parameter(_param).decimalValue;
-door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
-    <ScriptErrors />
+    <ScriptSource>var doorWindow = "Sensor.DoorWindow";
+var doorSensor = $$.modules.inDomain("HomeAutomation.Demo").withAddress("2").get();
+var currentValue = doorSensor.parameter(doorWindow).decimalValue;
+doorSensor.emit(doorWindow, currentValue == 0 ? "1" : "0", "");
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
@@ -46,34 +47,59 @@ door.raiseEvent(_param, currentValue == 0 ? "1" : "0", "");</ScriptSource>
       <Id>demo-toggle-door</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>2E5DF0B267635B6046229E346F395935</Checksum>
+      <Checksum>78D0FEA69ED327F2B257B13BBD5159D3</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>401</Address>
     <Name>Demo - Toggle Door</Name>
-    <Description>Toogle door window sensor value</Description>
+    <Description>Simulates door open/close of "Virtual Modules Demo" sensor.</Description>
     <Group>Demo</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-11T18:12:58.4519215Z</ActivationTime>
-    <TriggerTime>2021-04-10T16:30:03.0303148Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.Setup(()=&gt; {
+    <ScriptSetup>/*
+|| @title: Sensor Simulator
+|| @author: Generoso Martello
+|| @version: 1.0
+|| @updated: 2019-01-01 01:01
+|| @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
+||
+|| HomeGenie API reference
+||   https://homegenie.it/content/devs/programs/
+||   https://homegenie.it/api/ape/annotated.html
+||   https://homegenie.it/api/mig/overview.html
+*/
+
+Program.Setup(()=&gt; {
   Program
     .UseWidget("homegenie/generic/program")
     .AddFeature("", "Sensor", "Simulator.Sensor.Temperature", "Temperature sensor", "checkbox")
     .AddFeature("", "Sensor", "Simulator.Sensor.Humidity", "Humidity sensor", "checkbox")
     .AddFeature("", "Sensor", "Simulator.Sensor.Luminance", "Light sensor", "checkbox")
     .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Meter.Watts", "Watts meter", "checkbox")
-    .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Meter.Watts.Max", "Watts meter max power", "slider:1:2500:1:10")
+    .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Meter.Watts.Max", "Max Watt power", "slider:1:2500:1:10")
     .AddFeature("", "Light,Dimmer,Switch,Sensor", "Simulator.Sensor.DataFrequency", "Simulator emit frequency", "slider:0.5:60:0.5:30");
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>const string TEMPERATURE_FIELD = "Sensor.Temperature";
+    <ScriptSource>/*
+|| @title: Sensor Simulator
+|| @author: Generoso Martello
+|| @version: 1.0
+|| @updated: 2019-01-01 01:01
+|| @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
+||
+|| HomeGenie API reference
+||   https://homegenie.it/content/devs/programs/
+||   https://homegenie.it/api/ape/annotated.html
+||   https://homegenie.it/api/mig/overview.html
+*/
+
+const string TEMPERATURE_FIELD = "Sensor.Temperature";
 const string LUMINANCE_FIELD = "Sensor.Luminance";
 const string HUMIDITY_FIELD = "Sensor.Humidity";
 const string WATTS_FIELD = "Meter.Watts";
@@ -90,7 +116,7 @@ while (Program.IsRunning) {
     if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
       double variation = (new Random().NextDouble() - 0.5) / 5;
       double value = field.DecimalValue + variation;
-      module.RaiseEvent(TEMPERATURE_FIELD, Math.Round(value, 3), "Sensor simulartor emitted value");
+      module.Emit(TEMPERATURE_FIELD, Math.Round(value, 3));
     }
     return false; // continue iterating
   });
@@ -105,7 +131,7 @@ while (Program.IsRunning) {
       double value = (int)field.DecimalValue + variation;
       if (value &lt; 5) value = 5;
       if (value &gt; 95) value = 95;
-      module.RaiseEvent(HUMIDITY_FIELD, Math.Round(value, 3), "Sensor simulartor emitted value");
+      module.Emit(HUMIDITY_FIELD, Math.Round(value, 3));
     }
     return false; // continue iterating
   });
@@ -117,10 +143,10 @@ while (Program.IsRunning) {
     var field = module.Parameter(LUMINANCE_FIELD);
     if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
       double variation = (new Random().NextDouble() - 0.5) * 200;
-      double value = (int)field.DecimalValue + variation;
+      double value = Math.Round(field.DecimalValue + variation, 0);
       if (value &lt; 0) value = 0;
       if (value &gt; 1000) value = 1000;
-      module.RaiseEvent(LUMINANCE_FIELD, value, "Sensor simulartor emitted value");
+      module.Emit(LUMINANCE_FIELD, value);
     }
     return false; // continue iterating
   });
@@ -138,8 +164,11 @@ while (Program.IsRunning) {
         double variation = (new Random().NextDouble() - 0.5) / 2;
         value += variation;
       }
+      if (field.DecimalValue == 0 &amp;&amp; value &gt; 0) {
+        module.Emit(WATTS_FIELD, 0);
+      }
       if (value &gt; 0 || field.DecimalValue != 0) {
-	      module.RaiseEvent(WATTS_FIELD, Math.Round(value, 3), "Sensor simulartor emitted value");
+	      module.Emit(WATTS_FIELD, Math.Round(value, 3));
       }
     }
     return false; // continue iterating
@@ -154,12 +183,12 @@ while (Program.IsRunning) {
       <Id>sensor-simulator</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>AA5256EA315EA76F6E0479A93110B6C1</Checksum>
+      <Checksum>488B858E3235AF428CE62978B302E478</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>410</Address>
     <Name>Sensor Simulator</Name>
-    <Description>Simulate realtime data from a sensor</Description>
+    <Description>Emit random sensor values.</Description>
     <Group>Demo</Group>
     <Features>
       <ProgramFeature>
@@ -195,7 +224,7 @@ while (Program.IsRunning) {
         <ForDomains />
         <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
         <Property>Simulator.Meter.Watts.Max</Property>
-        <Description>Watts meter max power</Description>
+        <Description>Max Watt power</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
@@ -206,166 +235,165 @@ while (Program.IsRunning) {
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-11T18:12:58.5336539Z</ActivationTime>
-    <TriggerTime>2021-04-11T18:12:58.5537721Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// Add "Emulate UPnP device" feature
-Program.AddFeature(
-  description:
-    // Description of this feature
-  	"Emulate UPnP device (WeMo)",
-  parameterName:
-    // Name of the module's parameter where to store this feature data
-  	"UpnpDevice.EmulateWemo",
-  type:
-    // Display in the UI as a checkbox
-  	"checkbox",
-  forDomains:
-    // Show this feature for all domains
-  	"",
-  forModuleTypes:
-    // Show this feature for all module types
-  	"Switch,Light,Dimmer"
-);
-// Run the 'Program Code'
-Program.Run();
-</ScriptSetup>
+      Program.AddFeature(
+      description:
+      // Description of this feature
+      "Emulate UPnP device (WeMo)",
+      parameterName:
+      // Name of the module's parameter where to store this feature data
+      "UpnpDevice.EmulateWemo",
+      type:
+      // Display in the UI as a checkbox
+      "checkbox",
+      forDomains:
+      // Show this feature for all domains
+      "",
+      forModuleTypes:
+      // Show this feature for all module types
+      "Switch,Light,Dimmer"
+      );
+      // Run the 'Program Code'
+      Program.Run();
+    </ScriptSetup>
     <ScriptSource>var FEATURE_EMULATE_WEMO = "UpnpDevice.EmulateWemo";
-var PARAM_UPNP_INFO_UDN = "UpnpDevice.Info.UDN";
-// List that holds allocated UPnP devices
-var upnpDevices = new Dictionary&lt;Module,UPnPDevice&gt;();
+      var PARAM_UPNP_INFO_UDN = "UpnpDevice.Info.UDN";
+      // List that holds allocated UPnP devices
+      var upnpDevices = new Dictionary&lt;Module,UPnPDevice&gt;();
 
-Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
-  // Create the UPnP device to control the 'module'
-  var upnpDevice = UPnPDevice.CreateRootDevice(3600, 1, null);
-  // use the same ID even when restarted
-  if (module.HasParameter(PARAM_UPNP_INFO_UDN))
-  {
-    upnpDevice.UniqueDeviceName = module.Parameter(PARAM_UPNP_INFO_UDN).Value;
-  }
-  else
-  {
-    module.Parameter(PARAM_UPNP_INFO_UDN).Value = upnpDevice.UniqueDeviceName;
-  }
-  upnpDevice.ModelNumber = "3.1234";
-  // Socket, Lightswitch - TODO: Insight, Motion
-  var modelName = "";
-  if (module.Instance.DeviceType == ModuleTypes.Light || module.Instance.DeviceType == ModuleTypes.Dimmer)
-  {
-    modelName = "Lightswitch";
-    upnpDevice.StandardDeviceType = "urn:Belkin:device:lightswitch";
-    upnpDevice.ModelDescription = "Belkin Light Switch 1.0";
-  }
-  else
-  {
-    modelName = "Socket";
-    upnpDevice.StandardDeviceType = "urn:Belkin:device:controllee";
-    upnpDevice.ModelDescription = "Belkin Plugin Socket 1.0";
-  }
-  upnpDevice.ModelName = modelName;
-  // Prepend modelName (device type) to the UDN
-  upnpDevice.UniqueDeviceName = modelName + "-" + upnpDevice.UniqueDeviceName;
-  upnpDevice.FriendlyName = module.Instance.Name;
-  upnpDevice.Manufacturer = "Belkin International Inc.";
-  upnpDevice.ManufacturerURL = "http://www.belkin.com";
-  upnpDevice.Major = 1; upnpDevice.Minor = 0;
-  upnpDevice.SerialNumber = "EMU-1234567890";
-  upnpDevice.UserAgentTag = "redsonic";
+      Func&lt;ModuleHelper, UPnPDevice&gt; createUpnpModule = (module)=&gt;{
+      // Create the UPnP device to control the 'module'
+      var upnpDevice = UPnPDevice.CreateRootDevice(3600, 1, null);
+      // use the same ID even when restarted
+      if (module.HasParameter(PARAM_UPNP_INFO_UDN))
+      {
+      upnpDevice.UniqueDeviceName = module.Parameter(PARAM_UPNP_INFO_UDN).Value;
+      }
+      else
+      {
+      module.Parameter(PARAM_UPNP_INFO_UDN).Value = upnpDevice.UniqueDeviceName;
+      }
+      upnpDevice.ModelNumber = "3.1234";
+      // Socket, Lightswitch - TODO: Insight, Motion
+      var modelName = "";
+      if (module.Instance.DeviceType == ModuleTypes.Light || module.Instance.DeviceType == ModuleTypes.Dimmer)
+      {
+      modelName = "Lightswitch";
+      upnpDevice.StandardDeviceType = "urn:Belkin:device:lightswitch";
+      upnpDevice.ModelDescription = "Belkin Light Switch 1.0";
+      }
+      else
+      {
+      modelName = "Socket";
+      upnpDevice.StandardDeviceType = "urn:Belkin:device:controllee";
+      upnpDevice.ModelDescription = "Belkin Plugin Socket 1.0";
+      }
+      upnpDevice.ModelName = modelName;
+      // Prepend modelName (device type) to the UDN
+      upnpDevice.UniqueDeviceName = modelName + "-" + upnpDevice.UniqueDeviceName;
+      upnpDevice.FriendlyName = module.Instance.Name;
+      upnpDevice.Manufacturer = "Belkin International Inc.";
+      upnpDevice.ManufacturerURL = "http://www.belkin.com";
+      upnpDevice.Major = 1; upnpDevice.Minor = 0;
+      upnpDevice.SerialNumber = "EMU-1234567890";
+      upnpDevice.UserAgentTag = "redsonic";
 
-  // Create an instance of the BasicEvent service
-  dynamic instance = new ExpandoObject();
+      // Create an instance of the BasicEvent service
+      dynamic instance = new ExpandoObject();
 
-  // Declare the "BasicEvent1" service
-  var service = new UPnPService(
-    // Version
-    1.0,
-    // Service ID
-    "urn:Belkin:serviceId:basicevent1",
-    // Service Type
-    "urn:Belkin:service:basicevent:1",
-    // Standard Service?
-    true,
-    // Service Object Instance
-    instance
-  );
-  service.ControlURL = "/upnp/control/basicevent1";
-  service.EventURL = "/upnp/event/basicevent1";
-  service.SCPDURL = "/eventservice.xml";
+      // Declare the "BasicEvent1" service
+      var service = new UPnPService(
+      // Version
+      1.0,
+      // Service ID
+      "urn:Belkin:serviceId:basicevent1",
+      // Service Type
+      "urn:Belkin:service:basicevent:1",
+      // Standard Service?
+      true,
+      // Service Object Instance
+      instance
+      );
+      service.ControlURL = "/upnp/control/basicevent1";
+      service.EventURL = "/upnp/event/basicevent1";
+      service.SCPDURL = "/eventservice.xml";
 
-  string stateVarName = "BinaryState";
-  var stateVariable = new UPnPStateVariable(stateVarName, typeof(bool), true);
-  stateVariable.AddAssociation("GetBinaryState", stateVarName);
-  stateVariable.AddAssociation("SetBinaryState", stateVarName);
-  stateVariable.Value = false;
-  service.AddStateVariable(stateVariable);
+      string stateVarName = "BinaryState";
+      var stateVariable = new UPnPStateVariable(stateVarName, typeof(bool), true);
+      stateVariable.AddAssociation("GetBinaryState", stateVarName);
+      stateVariable.AddAssociation("SetBinaryState", stateVarName);
+      stateVariable.Value = false;
+      service.AddStateVariable(stateVariable);
 
-  instance.GetBinaryState = new Func&lt;bool&gt;(() =&gt; (bool)service.GetStateVariable(stateVarName) /* module.IsOn */);
-  instance.SetBinaryState = new Action&lt;int&gt;((BinaryState) =&gt; {
-    service.SetStateVariable(stateVarName, BinaryState != 0);
-    if (BinaryState == 1) module.On();
-    else module.Off();
-  });
+      instance.GetBinaryState = new Func&lt;bool&gt;(() =&gt; (bool)service.GetStateVariable(stateVarName) /* module.IsOn */);
+      instance.SetBinaryState = new Action&lt;int&gt;((BinaryState) =&gt; {
+      service.SetStateVariable(stateVarName, BinaryState != 0);
+      if (BinaryState == 1) module.On();
+      else module.Off();
+      });
 
-  // Add the methods
-  service.AddMethod("GetBinaryState", stateVarName);
-  service.AddMethod("SetBinaryState", stateVarName);
+      // Add the methods
+      service.AddMethod("GetBinaryState", stateVarName);
+      service.AddMethod("SetBinaryState", stateVarName);
 
-  // Add the service
-  upnpDevice.AddService(service);
-  // Start the WeMo switch device UPnP simulator
-  upnpDevice.StartDevice();
+      // Add the service
+      upnpDevice.AddService(service);
+      // Start the WeMo switch device UPnP simulator
+      upnpDevice.StartDevice();
 
-  return upnpDevice;
-};
+      return upnpDevice;
+      };
 
-When.ModuleParameterChanged((m, p)=&gt;{
-  // The checkbox option "UpnpDevice.EmulateWemo" has been changed
-  if (p.Is(FEATURE_EMULATE_WEMO))
-  {
-    // Remove the UPnP device if already allocated
-    if (upnpDevices.ContainsKey(m.Instance))
-    {
+      When.ModuleParameterChanged((m, p)=&gt;{
+      // The checkbox option "UpnpDevice.EmulateWemo" has been changed
+      if (p.Is(FEATURE_EMULATE_WEMO))
+      {
+      // Remove the UPnP device if already allocated
+      if (upnpDevices.ContainsKey(m.Instance))
+      {
       upnpDevices[m.Instance].StopDevice();
       upnpDevices.Remove(m.Instance);
       Program.Notify("Removed UPnP device for {0}", m.Instance.Name);
-    }
-    // Check if the option is ON (not empty = On)
-    if (!String.IsNullOrEmpty(p.Value))
-    {
+      }
+      // Check if the option is ON (not empty = On)
+      if (!String.IsNullOrEmpty(p.Value))
+      {
       Program.Notify("Added UPnP device for {0}", m.Instance.Name);
       upnpDevices.Add(m.Instance, createUpnpModule(m));
-    }
-  }
-  else if (upnpDevices.ContainsKey(m.Instance) &amp;&amp; p.Is("Status.Level"))
-  {
-    // Update status level of the associated UPnP device
-    upnpDevices[m.Instance].Services[0].SetStateVariable("BinaryState", (p.DecimalValue != 0));
-  }
-  return true;
-});
+      }
+      }
+      else if (upnpDevices.ContainsKey(m.Instance) &amp;&amp; p.Is("Status.Level"))
+      {
+      // Update status level of the associated UPnP device
+      upnpDevices[m.Instance].Services[0].SetStateVariable("BinaryState", (p.DecimalValue != 0));
+      }
+      return true;
+      });
 
-When.ProgramStopping(()=&gt;{
-  // Stop allocated UPnP devices
-  foreach(var upnp in upnpDevices.Values)
-  {
-    Program.Notify("Removed UPnP device for {0}", upnp.FriendlyName);
-    upnp.StopDevice();
-  }
-  return true;
-});
+      When.ProgramStopping(()=&gt;{
+      // Stop allocated UPnP devices
+      foreach(var upnp in upnpDevices.Values)
+      {
+      Program.Notify("Removed UPnP device for {0}", upnp.FriendlyName);
+      upnp.StopDevice();
+      }
+      return true;
+      });
 
-// Allocates UPnP devices for modules with this option active
-Modules.WithFeature(FEATURE_EMULATE_WEMO).Each((m)=&gt;{
-  upnpDevices.Add(m.Instance, createUpnpModule(m));
-  return false; // continue iterating
-});
+      // Allocates UPnP devices for modules with this option active
+      Modules.WithFeature(FEATURE_EMULATE_WEMO).Each((m)=&gt;{
+      upnpDevices.Add(m.Instance, createUpnpModule(m));
+      return false; // continue iterating
+      });
 
-// Continue running the program in the background
-Program.GoBackground();
-</ScriptSource>
+      // Continue running the program in the background
+      Program.GoBackground();
+    </ScriptSource>
     <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -374,7 +402,7 @@ Program.GoBackground();
       <Id>upnp-emulation</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>DC59654E7BFDF7E794C0011DF5FA390A</Checksum>
+      <Checksum>286D159B4B7B621C6220BA719C083C5F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>20</Address>
@@ -391,8 +419,7 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -405,30 +432,31 @@ Program.GoBackground();
 || @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
 ||
 || HomeGenie API reference
-||   http://genielabs.github.io/HomeGenie/programs.html
-||   http://genielabs.github.io/HomeGenie/api/ape/annotated.html
-||   http://genielabs.github.io/HomeGenie/api/mig/overview.html
+||   https://homegenie.it/content/devs/programs/
+||   https://homegenie.it/api/ape/annotated.html
+||   https://homegenie.it/api/mig/overview.html
 */
 
 const _domain = "HomeAutomation.Demo";
 
 // Add a temperature and luminance sensor
-$$.program.addVirtualModule(_domain, "1", "Sensor", "");
-$$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Set temperature value", "slider:-50:100:0.5");
-$$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Set luminance value", "slider:0:1000:1");
-$$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Set motion detection status", "slider:0:1:1");
-$$.program.addFeature(_domain, "Sensor", "Status.Battery", "Set battery level", "slider:0:100:1");
+$$.program.addModule(_domain, "1", "Sensor");
+$$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Temperature value", "slider:-50:100:0.5");
+$$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Luminance value", "slider:0:1000:1");
+$$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Motion detection status", "slider:0:1:1");
+$$.program.addFeature(_domain, "Sensor", "Status.Battery", "Battery level", "slider:0:100:1");
 
 // Add a doorwindow sensor
-$$.program.addVirtualModule(_domain, "2", "DoorWindow", "");
-$$.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Set door/window status", "slider:0:1:1");
-$$.program.addFeature(_domain, "DoorWindow", "Status.Battery", "Set battery level", "slider:0:100:1");
+$$.program.addModule(_domain, "2", "DoorWindow");
+$$.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Door/Window sensor status (open/closed)", "slider:0:1:1");
+$$.program.addFeature(_domain, "DoorWindow", "Status.Battery", "Battery level", "slider:0:100:1");
 
 // Add an on/off switch
-$$.program.addVirtualModule(_domain, "3", "Switch", "");
-$$.program.addFeature(_domain, "Switch", "Status.Level", "Set switch on/off", "slider:0:1:1");
+$$.program.addModule(_domain, "3", "Switch");
+$$.program.addFeature(_domain, "Switch", "Status.Level", "Switch status (on/off)", "slider:0:1:1");
 
-$$.program.run();</ScriptSetup>
+$$.program.run();
+</ScriptSetup>
     <ScriptSource>/*
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
@@ -437,22 +465,22 @@ $$.program.run();</ScriptSetup>
 || @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
 ||
 || HomeGenie API reference
-||   http://genielabs.github.io/HomeGenie/programs.html
-||   http://genielabs.github.io/HomeGenie/api/ape/annotated.html
-||   http://genielabs.github.io/HomeGenie/api/mig/overview.html
+||   https://homegenie.it/content/devs/programs/
+||   https://homegenie.it/api/ape/annotated.html
+||   https://homegenie.it/api/mig/overview.html
 */
 
-const _domain = "HomeAutomation.Demo";
-const demoModules = $$.modules.inDomain(_domain);
+const domain = "HomeAutomation.Demo";
+const demoModules = $$.modules.inDomain(domain);
 
 initialize();
 
 // handle API call for this domain
-$$.on.webServiceCallReceived(_domain, function(apiCall) {
+$$.on.webServiceCallReceived(domain, function(apiCall) {
 
   const ac = $$.program.parseApiCall(apiCall);
   // Example:
-  //  if the "apiCall" was
+  //  if the "apiCall" is
   //    "http://&lt;homegenie_address&gt;/api/HomeAutomation.Demo/3/Control.Level/50/1000"
   //  then "ac" will have the following property values
   //    ac.domain = "HomeAutomation.Demo"
@@ -468,15 +496,15 @@ $$.on.webServiceCallReceived(_domain, function(apiCall) {
   if (mod.isOfDeviceType("Switch")) {
     switch (ac.command) {
       case 'Control.On':
-        mod.raiseEvent("Status.Level", "1", "");
+        mod.emit("Status.Level", "1");
         response = "OK";
         break;
       case 'Control.Off':
-        mod.raiseEvent("Status.Level", "0", "");
+        mod.emit("Status.Level", "0");
         response = "OK";
         break;
       case 'Control.Toggle':
-        mod.raiseEvent("Status.Level", mod.level != 0 ? "0" : "1", "");
+        mod.emit("Status.Level", mod.level != 0 ? "0" : "1");
         response = "OK";
         break;
     }
@@ -539,12 +567,12 @@ function initialize() {
       <Id>virtual-modules-demo</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>81DE5321631D963E21AB421C7D3BD644</Checksum>
+      <Checksum>58D0E86C8BCDED68557C087C18811444</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>400</Address>
     <Name>Virtual Modules Demo</Name>
-    <Description>Virtual modules demo for testing and evaluating purpose: Multi Sensor, Door Window, Switch</Description>
+    <Description>Manually set values of the virtual device.</Description>
     <Group>Demo</Group>
     <Features>
       <ProgramFeature>
@@ -552,47 +580,46 @@ function initialize() {
         <ForDomains>HomeAutomation.Demo</ForDomains>
         <ForTypes>Sensor</ForTypes>
         <Property>Sensor.Temperature</Property>
-        <Description>Set temperature value</Description>
+        <Description>Temperature value</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:1000:1</FieldType>
         <ForDomains>HomeAutomation.Demo</ForDomains>
         <ForTypes>Sensor</ForTypes>
         <Property>Sensor.Luminance</Property>
-        <Description>Set luminance value</Description>
+        <Description>Luminance value</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:1:1</FieldType>
         <ForDomains>HomeAutomation.Demo</ForDomains>
         <ForTypes>Sensor</ForTypes>
         <Property>Sensor.MotionDetect</Property>
-        <Description>Set motion detection status</Description>
+        <Description>Motion detection status</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:100:1</FieldType>
         <ForDomains>HomeAutomation.Demo</ForDomains>
         <ForTypes>DoorWindow</ForTypes>
         <Property>Status.Battery</Property>
-        <Description>Set battery level</Description>
+        <Description>Battery level</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:1:1</FieldType>
         <ForDomains>HomeAutomation.Demo</ForDomains>
         <ForTypes>DoorWindow</ForTypes>
         <Property>Sensor.DoorWindow</Property>
-        <Description>Set door/window status</Description>
+        <Description>Door/Window sensor status (open/closed)</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:1:1</FieldType>
         <ForDomains>HomeAutomation.Demo</ForDomains>
         <ForTypes>Switch</ForTypes>
         <Property>Status.Level</Property>
-        <Description>Set switch on/off</Description>
+        <Description>Switch status (on/off)</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime>2021-04-11T18:12:58.4523374Z</ActivationTime>
-    <TriggerTime>2021-04-11T18:12:58.6225217Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

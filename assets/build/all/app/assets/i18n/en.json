@@ -86,6 +86,7 @@
   "voltage": "Voltage",
   "theme": "Theme",
   "units": "Units",
+  "command_code": "Command code",
   "notifications": "Notifications",
   "language": "Language",
   "change_language": "Change language",

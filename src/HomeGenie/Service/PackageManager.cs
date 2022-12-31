@@ -24,7 +24,7 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-
+using System.Linq;
 using HomeGenie.Automation;
 using HomeGenie.Automation.Scheduler;
 using HomeGenie.Data;
@@ -384,8 +384,23 @@ namespace HomeGenie.Service
                         packageModules.AddRange(homegenie.Modules.FindAll((m) =>
                         {
                             var vm = Utility.ModuleParameterGet(m, Properties.VirtualModuleParentId);
-                            return (m.Domain == Domains.HomeAutomation_HomeGenie && m.Address == program.Address.ToString())
-                                   || (vm != null && vm.Value == program.Address.ToString());
+                            bool isProgramModule = (m.Domain == Domains.HomeAutomation_HomeGenie_Automation &&
+                                                    m.Address == program.Address.ToString());
+                            bool isMatch = isProgramModule
+                                           || (vm != null && vm.Value == program.Address.ToString());
+                            return isMatch;
+                        }).Select(module =>
+                        {
+                            bool isProgramModule = (module.Domain == Domains.HomeAutomation_HomeGenie_Automation &&
+                                                    module.Address == program.Address.ToString());
+                            if (isProgramModule)
+                            {
+                                var pm = module.DeepClone();
+                                pm.Name = program.Name;
+                                pm.Description = program.Description;
+                                return pm;
+                            }
+                            return module;
                         }));
                     }
                 }
@@ -398,7 +413,19 @@ namespace HomeGenie.Service
                     var group = homegenie.GetGroups("Control").Find((g) => g.Name == item.Hid);
                     if (group != null)
                     {
-                        packageGroups.Add(group);
+                        var g = group.DeepClone();
+                        g.Modules.RemoveAll(mr =>
+                        {
+                            bool isPackageModule = false;
+                            var module = homegenie.Modules.Find(m => mr.Domain == m.Domain && mr.Address == m.Address);
+                            if (module != null)
+                            {
+                                isPackageModule = packageModules.Find(m => m.Domain == module.Domain && m.Address == module.Address) !=
+                                    null;
+                            }
+                            return module == null || !isPackageModule;
+                        });
+                        packageGroups.Add(g);
                     }
                 }
                 Utility.UpdateXmlDatabase(packageGroups, groupsFile, null);

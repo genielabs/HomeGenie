@@ -33,7 +33,7 @@ Program.GoBackground();
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>142</Address>
     <Name>E-Mail Account</Name>
-    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <Description>Stores e-mail account information used for sending/receiving emails programatically.</Description>
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -117,7 +117,7 @@ Program.GoBackground();
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>95</Address>
     <Name>Events logging</Name>
-    <Description />
+    <Description>Records device activity.</Description>
     <Group>Security</Group>
     <Features>
       <ProgramFeature>
@@ -244,7 +244,7 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
           {
             MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");
           }
-          module.RaiseEvent(property.Name, property.Value, "");
+          module.Emit(property.Name, property.Value);
         }
         break;
       }
@@ -338,13 +338,13 @@ while (Program.IsRunning) {
       <Id>mqtt-network</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>3A4D0C87F1A9065EBD2146B45F0175F7</Checksum>
+      <Checksum>E59AAAEB2F0BFBBECC6BF2748F848AED</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
-    <Description>Share modules with other HomeGenie servers connected to the same MQTT network.
-      Other servers will automatically inherit the published module once an event is generated from it.</Description>
+    <Description>Share device with other HomeGenie servers connected to the same MQTT service.
+All HomeGenie servers will automatically inherit a shared module once an event is emitted from it.</Description>
     <Group>Interconnections</Group>
     <Features>
       <ProgramFeature>
@@ -384,38 +384,38 @@ Program.Run();
 </ScriptSetup>
     <ScriptSource>Action&lt;dynamic&gt; UpdateWeatherParameters = (data) =&gt; {
   Program
-    .RaiseEvent("Conditions.City", data.city, "")
-    .RaiseEvent("Conditions.DisplayLocation", data.city, "")
-    .RaiseEvent("Conditions.Country", data.country, "")
-    .RaiseEvent("Conditions.Description", data.weather_description, "")
-    .RaiseEvent("Conditions.IconType", data.weather_icon, "")
-    .RaiseEvent("Conditions.Status", data.weather_status, "") // eg. cloudy, sunny, etc..
-    .RaiseEvent("Conditions.LastUpdated", data.update_dt, "")
+    .Emit("Conditions.City", data.city)
+    .Emit("Conditions.DisplayLocation", data.city)
+    .Emit("Conditions.Country", data.country)
+    .Emit("Conditions.Description", data.weather_description)
+    .Emit("Conditions.IconType", data.weather_icon)
+    .Emit("Conditions.Status", data.weather_status) // eg. cloudy, sunny, etc..
+    .Emit("Conditions.LastUpdated", data.update_dt)
     // Add values to standard Sensor.* parameters
-    .RaiseEvent("Sensor.Temperature", data.temperature, "")
-    .RaiseEvent("Sensor.Temperature.Unit", "Celsius", "")
-    .RaiseEvent("Sensor.Pressure", data.pressure, "")
-    .RaiseEvent("Sensor.Pressure.Unit", "Mb", "")
-    .RaiseEvent("Sensor.Wind.Speed", data.wind_speed, "")
-    .RaiseEvent("Sensor.Wind.Speed.Unit", "Kph", "")
-    .RaiseEvent("Sensor.Wind.Direction", data.wind_direction, "")
-    .RaiseEvent("Sensor.Precipitation.Rain", data.rain_1h_mm, "")
-    .RaiseEvent("Sensor.Precipitation.Rain.Unit", "1h", "")
-    .RaiseEvent("Sensor.Precipitation.Snow", data.snow_1h_mm, "")
-    .RaiseEvent("Sensor.Precipitation.Snow.Unit", "1h", "");
+    .Emit("Sensor.Temperature", data.temperature)
+    .Emit("Sensor.Temperature.Unit", "Celsius")
+    .Emit("Sensor.Pressure", data.pressure)
+    .Emit("Sensor.Pressure.Unit", "Mb")
+    .Emit("Sensor.Wind.Speed", data.wind_speed)
+    .Emit("Sensor.Wind.Speed.Unit", "Kph")
+    .Emit("Sensor.Wind.Direction", data.wind_direction)
+    .Emit("Sensor.Precipitation.Rain", data.rain_1h_mm)
+    .Emit("Sensor.Precipitation.Rain.Unit", "1h")
+    .Emit("Sensor.Precipitation.Snow", data.snow_1h_mm)
+    .Emit("Sensor.Precipitation.Snow.Unit", "1h");
   // TODO: Program.Parameter("Sensor.UV").Value = "...";
 };
 Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
   Program
-    .RaiseEvent("Conditions.Forecast." + day + ".Description", data.weather_description, "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Year", data.dt.Year.ToString("YYYY"), "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Month", data.dt.ToString("MMM"), "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Day", data.dt.ToString("dd"), "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Weekday", data.dt.ToString("dddd"), "")
-    .RaiseEvent("Conditions.Forecast." + day + ".IconType", data.weather_icon, "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Temperature", data.temperature, "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Temperature.Min", data.temperature_min, "")
-    .RaiseEvent("Conditions.Forecast." + day + ".Temperature.Max", data.temperature_max, "");
+    .Emit("Conditions.Forecast." + day + ".Description", data.weather_description)
+    .Emit("Conditions.Forecast." + day + ".Year", data.dt.Year.ToString("YYYY"))
+    .Emit("Conditions.Forecast." + day + ".Month", data.dt.ToString("MMM"))
+    .Emit("Conditions.Forecast." + day + ".Day", data.dt.ToString("dd"))
+    .Emit("Conditions.Forecast." + day + ".Weekday", data.dt.ToString("dddd"))
+    .Emit("Conditions.Forecast." + day + ".IconType", data.weather_icon)
+    .Emit("Conditions.Forecast." + day + ".Temperature", data.temperature)
+    .Emit("Conditions.Forecast." + day + ".Temperature.Min", data.temperature_min)
+    .Emit("Conditions.Forecast." + day + ".Temperature.Max", data.temperature_max);
 };
 Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
   var icon = type;
@@ -544,8 +544,8 @@ while (Program.IsRunning)
       var sunset = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunset);
       var sunrise = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.sys.sunrise);
 
-      Program.RaiseEvent("Astronomy.Sunset", TimeZoneInfo.ConvertTime(sunset, TimeZoneInfo.Local).ToShortTimeString(), "");
-      Program.RaiseEvent("Astronomy.Sunrise", TimeZoneInfo.ConvertTime(sunrise, TimeZoneInfo.Local).ToShortTimeString(), "");
+      Program.Emit("Astronomy.Sunset", TimeZoneInfo.ConvertTime(sunset, TimeZoneInfo.Local).ToShortTimeString());
+      Program.Emit("Astronomy.Sunrise", TimeZoneInfo.ConvertTime(sunrise, TimeZoneInfo.Local).ToShortTimeString());
 
       var data = CollectWeatherData(weatherData);
       UpdateWeatherParameters(data);
@@ -571,7 +571,7 @@ while (Program.IsRunning)
         // process up to 3 days
         if (forecastDay &gt; 3) break;
       }
-      //Program.RaiseEvent("Program.UiRefresh", "Data Updated", "");
+      //Program.Emit("Program.UiRefresh", "Data Updated");
 
     }
     catch (Exception e)
@@ -601,13 +601,14 @@ while (Program.IsRunning)
       <Id>openweathermap</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>3394BD9B246D56990AF3A25B5305F995</Checksum>
+      <Checksum>F22CC262E2D8B59CF3C97348D552398E</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
     <Name>OpenWeatherMap</Name>
-    <Description>Current weather and forecast information from &lt;strong&gt;Open Weather Map&lt;/strong&gt; service.
-To activate this widget enter a valid &lt;strong&gt;API key&lt;/strong&gt; below. Follow instructions from &lt;u&gt;https://openweathermap.org/appid&lt;/u&gt; to get your free API key.
+    <Description>Weather and forecast information from Open Weather Map service.
+To activate this widget enter a valid API key.
+Follow instructions at https://openweathermap.org/appid to get a free API key.
 </Description>
     <Group>Weather and Environment</Group>
     <Features />
@@ -698,7 +699,7 @@ Program.GoBackground();
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
     <Name>Remote Control</Name>
-    <Description>Toggle and dim the module using a remote controller (IR or RF).</Description>
+    <Description>Toggle and dim the device using a remote controller (IR or RF).</Description>
     <Group>Lights</Group>
     <Features>
       <ProgramFeature>

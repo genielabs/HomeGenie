@@ -194,20 +194,6 @@
     "\"Setup\" code is empty.\n\nUse the \"Visual code\" editor to generate this code:\n- Open the category \"Program\" from the command palette on the left\n- Drag a block of type \"Setup\" in the visual code workspace\n- Add inside it other code blocks to determine the conditions that will trigger \"Main\" code execution\n\nThis code gets evaluated everytime a new event occurs and at least once a minute.",
 " ": "------------------------------------------",
   "$options": {
-    "34": {
-      "Title":
-          "OpenWeatherMap",
-      "Description":
-          "Current weather and forecast information from <strong>OpenWeatherMap</strong> service.\nTo activate this widget enter a valid <strong>API key</strong> below. Follow instructions from <u>https://openweathermap.org/appid</u> to get your free API key.",
-      "ConfigureOptions.Location":
-          "City name",
-      "ConfigureOptions.Language":
-          "Language (eg. EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval":
-          "Update interval (minutes)",
-      "ConfigureOptions.ApiKey":
-          "OpenWeatherMap API key (APPID)"
-    },
 
     "6": {
         "Title":
@@ -223,11 +209,46 @@
             "Turn off all lights in the given group."
     },
 
+    "16": {
+      "Title":
+      "Level Memory",
+      "Description":
+      "Store and recall last dimmer level.",
+      "HomeGenie.LevelMemory":
+      "Recall last light level when switched on",
+      "HomeGenie.LevelMemory.SimulateOnly":
+      "Simulate only"
+    },
+
+    "34": {
+      "Title":
+      "OpenWeatherMap",
+      "Description":
+      "Weather and forecast information from Open Weather Map service.\nTo activate this widget enter a valid API key.\nFollow instructions at https://openweathermap.org/appid to get a free API key.",
+      "ConfigureOptions.Location":
+      "City name",
+      "ConfigureOptions.Language":
+      "Language (eg. EN, IT, FR, DE, ...)",
+      "ConfigureOptions.UpdateInterval":
+      "Update interval (minutes)",
+      "ConfigureOptions.ApiKey":
+      "OpenWeatherMap API key (APPID)"
+    },
+
+    "78": {
+      "Title": "Smart Thermostat",
+      "Description": "Use any temperature sensor and smart switch to implement thermostat functionality.",
+      "VirtualThermostat.TemperatureModule": "Temperature sensor",
+      "VirtualThermostat.HeatingSwitchModule": "Heating switch",
+      "VirtualThermostat.CoolingSwitchModule": "Cooling switch",
+      "ConfigureOptions.ThermostatsCount": "Number of thermostats"
+    },
+
     "81": {
         "Title":
             "Energy Monitor",
         "Description":
-            "Collects and display information about device status and energy consumption.",
+            "Generate statistics on energy consumption and usage of devices.",
         "EnergyManagement.MonitorStatus":
             "Monitor status",
         "EnergyManagement.MonitorWatts":
@@ -238,29 +259,18 @@
         "Title":
             "Energy Saving Mode",
         "Description":
-            "Keeps dimmers level below a configurable percentage value.",
+            "Keep the light level below a configurable percentage.",
         "EnergyManagement.EnergySavingLevel":
             "Max light level (%)",
         "EnergyManagement.EnergySavingMode":
-            "Enable energy saving mode"
-    },
-
-    "16": {
-        "Title":
-            "Level Memory",
-        "Description":
-            "Store and recall last dimmer level.",
-        "HomeGenie.LevelMemory":
-            "Recall last light level when switched on",
-        "HomeGenie.LevelMemory.SimulateOnly":
-            "Simulate only"
+            "Enable"
     },
 
     "90": {
         "Title":
             "Security Alarm System",
         "Description":
-            "Security alarm system",
+            "",
         "HomeGenie.SecurityAlarm":
             "Use as alarm/strobe",
         "HomeGenie.SecuritySensor":
@@ -281,11 +291,49 @@
             "Program to run when triggered"
     },
 
+    "95": {
+      "Title": "Events logging",
+      "Description": "Record device activity.",
+      "EventsLogger.EnableLogging": "Enable"
+    },
+
+    "400": {
+      "Title": "Virtual Modules Demo",
+      "Description": "Manually set values of the virtual device.",
+      "Sensor.Temperature": "Temperature value",
+      "Sensor.Luminance": "Luminance value",
+      "Sensor.MotionDetect": "Motion detection status",
+      "Status.Battery": "Battery level",
+      "Sensor.DoorWindow": "Door/Window sensor status (open/closed)",
+      "Status.Level": "Switch status (on/off)"
+    },
+
+    "410": {
+      "Title": "Sensor simulator",
+      "Description": "Emit random sensor values.",
+      "Simulator.Sensor.Temperature": "Temperature sensor",
+      "Simulator.Sensor.Humidity": "Humidity sensor",
+      "Simulator.Sensor.Luminance": "Light sensor",
+      "Simulator.Meter.Watts": "Watts meter",
+      "Simulator.Meter.Watts.Max": "Max Watt power",
+      "Simulator.Sensor.DataFrequency": "Simulator emit frequency"
+    },
+
+    "505": {
+      "Title": "Remote Control",
+      "Description": "Control the device using a remote (IR or RF).",
+      "HomeGenie.RemoteControl.Enable": "Enable",
+      "HomeGenie.RemoteControl.IRCode": "Toggle button",
+      "ConfigureOptions.DimmerUpCode": "Brighter button",
+      "ConfigureOptions.DimmerDownCode": "Dimmer button",
+      "ConfigureOptions.DimmerInterval": "Bright/Dim step"
+    },
+
     "145": {
         "Title":
             "Smart Device",
         "Description":
-            "Auto switch a device on/off based on sensing motion and environment light.",
+            "Turn on/off the device based on motion detection and ambient light.",
         "HomeGenie.SmartLights.Enable":
             "Enable 'Smart Device'",
         "HomeGenie.SmartLights.OnMotionDetect":
@@ -302,7 +350,7 @@
         "Title":
             "Sunrise Colors Scenario",
         "Description":
-            "Example scenario for color lights.",
+            "Example \"Sunrise\" scenario for color changing LED lights.",
         "Scenarios.SunriseColors":
             "Link to Sunrise Colors scenario"
     }

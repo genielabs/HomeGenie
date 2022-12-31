@@ -8,18 +8,6 @@
         <Address>34</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
-      <ModuleReference>
-        <Address>90</Address>
-        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>1</Address>
-        <Domain>HomeAutomation.BasicThermostat</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>1</Address>
-        <Domain>HomeAutomation.EnergyMonitor</Domain>
-      </ModuleReference>
     </Modules>
   </Group>
 </ArrayOfGroup>

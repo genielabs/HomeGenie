@@ -1,164 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Module>
-    <Name>Thermostat</Name>
-    <Description />
-    <DeviceType>Thermostat</DeviceType>
-    <Domain>HomeAutomation.BasicThermostat</Domain>
-    <Address>1</Address>
-    <Properties>
-      <ModuleParameter>
-        <Name>EventsLogger.EnableLogging</Name>
-        <Value>On</Value>
-        <Description>Enable events logging</Description>
-        <FieldType>checkbox</FieldType>
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4232797Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Sensor.Temperature</Name>
-        <Value>26.203</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:17.7782289Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Thermostat.Mode</Name>
-        <Value>Off</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4236389Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Thermostat.OperatingState</Name>
-        <Value>Idle</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:24:17.3941559Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Thermostat.SetPoint.Heating</Name>
-        <Value>21</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4239052Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Thermostat.SetPoint.HeatingEconomy</Name>
-        <Value>19</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4239052Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Thermostat.SetPoint.Cooling</Name>
-        <Value>22</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4239052Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Thermostat.SetPoint.CoolingEconomy</Name>
-        <Value>24</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4239052Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualModule.ParentId</Name>
-        <Value>78</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885106Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualThermostat.HeatingSwitchModule</Name>
-        <Value>HomeAutomation.Demo:3</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4811251Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualThermostat.TemperatureModule</Name>
-        <Value>HomeAutomation.Demo:1</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.4812383Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/thermostat</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.7654534Z</UpdateTime>
-      </ModuleParameter>
-    </Properties>
-    <Stores />
-  </Module>
-  <Module>
-    <Name>Basic Thermostat</Name>
-    <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
-Temperature/Switch modules must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5 .
-Basic Thermostats can also be used with the Timetable scheduler widget.</Description>
-    <DeviceType>Program</DeviceType>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>78</Address>
-    <Properties>
-      <ModuleParameter>
-        <Name>ConfigureOptions.ThermostatsCount</Name>
-        <Value>1</Value>
-        <Description>Virtual thermostats modules to create</Description>
-        <FieldType>slider:1:10:1</FieldType>
-        <ParentId>78</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8083548Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Notification</Name>
-        <Value>{"Title":"Basic Thermostat 1","Message":"Please specify a valid temperature module."}</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:24:17.4935817Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Running</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.5491808Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualModule.ParentId</Name>
-        <Value>78</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:16:33.3683638Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T18:13:13.7010485Z</UpdateTime>
-      </ModuleParameter>
-    </Properties>
-    <Stores />
-  </Module>
-  <Module>
     <Name>Energy Monitor</Name>
     <Description />
     <DeviceType>Sensor</DeviceType>
@@ -167,75 +9,75 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
     <Properties>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter</Name>
-        <Value>0.005031476883038755</Value>
+        <Value>0.7756059963283899</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:11.1092147Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:45.1545783Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter.Today</Name>
-        <Value>0.005031476883038755</Value>
+        <Value>0.7756059963283899</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:11.1419118Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:45.1720894Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
-        <Value>0.031</Value>
+        <Value>0.398</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.2212089Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:45.1889077Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
-        <Value>2</Value>
+        <Value>1</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.2968544Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:02:29.1173109Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingLights</Name>
-        <Value>2</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.3066145Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyMonitor.OperatingSwitches</Name>
         <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.3133518Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:02:24.0752406Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyMonitor.OperatingSwitches</Name>
+        <Value>1</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:02:29.1214219Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattCounter</Name>
-        <Value>5.031476883038755</Value>
+        <Value>775.6059963283899</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:11.1023041Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:45.1486784Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattCounter.Today</Name>
-        <Value>5.031476883038755</Value>
+        <Value>775.6059963283899</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:11.1151482Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:45.165794Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattLoad</Name>
-        <Value>31.325</Value>
+        <Value>398.099</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.2579673Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:45.1800554Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -251,7 +93,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.3188377Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:37.9925295Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -267,7 +109,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description>Watts meter max power</Description>
         <FieldType>slider:1:2500:1:10</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.5468087Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:37.9926355Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
@@ -275,7 +117,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.5469336Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:37.9927473Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.Humidity</Name>
@@ -307,7 +149,7 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885152Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0572952Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -315,15 +157,14 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:15:34.0483661Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:02:24.024475Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Energy Monitor</Name>
-    <Description>Collects and display information about
-device status and energy consumption.</Description>
+    <Description>Generate statistics on energy consumption and usage of devices.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -334,7 +175,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:15:34.0603505Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:02:24.0349947Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -342,7 +183,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:15:30.5495646Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:02:23.495714Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -350,7 +191,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:16:33.3683672Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0574532Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -365,7 +206,7 @@ device status and energy consumption.</Description>
   </Module>
   <Module>
     <Name>Energy Saving Mode</Name>
-    <Description>Keeps dimmers level below a configurable percentage value.</Description>
+    <Description>Keeps light level below a configurable percentage value.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>82</Address>
@@ -376,7 +217,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.7337405Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:56.860121Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -402,7 +243,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8442249Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:57.3103605Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -410,7 +251,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885191Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573053Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -436,7 +277,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8444929Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:57.639474Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -444,7 +285,7 @@ device status and energy consumption.</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885228Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573124Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -460,9 +301,8 @@ device status and energy consumption.</Description>
   <Module>
     <Name>Philips Hue Bridge</Name>
     <Description>Simple Philips Hue lights integration.
-In order to enable the connection to the gateway, register "homegenie" username
-(default is "newdeveloper") in your Philips Hue Bridge.
-For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
+The default user to connect to the Hue Bridge (V1) is "newdeveloper" and should be already enabled. In order to enable a different username (e.g. "homegenie"),  see instructions at:
+https://www.burgestrand.se/hue-api/api/auth/registration</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
@@ -472,16 +312,16 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Value>192.168.0.?</Value>
         <Description>Philips Hue Bridge IP Address</Description>
         <FieldType>text</FieldType>
-        <ParentId>26</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.7107474Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.1464485Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.BridgeUsername</Name>
         <Value>newdeveloper</Value>
         <Description>Philips Hue Bridge API username</Description>
         <FieldType>text</FieldType>
-        <ParentId>26</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.7109735Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.1465515Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -531,7 +371,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1837146Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5460571Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.MonitorWatts</Name>
@@ -539,7 +379,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.183822Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5461615Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -547,7 +387,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Enable events logging</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1839235Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5462571Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.IRControler.Enable</Name>
@@ -571,7 +411,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1840264Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5463526Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
@@ -631,11 +471,11 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>19.465</Value>
+        <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.8537621Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5464473Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -643,7 +483,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1842521Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5465717Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -651,7 +491,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Watts meter</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.18436Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5466683Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts.Max</Name>
@@ -659,7 +499,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Watts meter max power</Description>
         <FieldType>slider:1:2500:1:10</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1844665Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5467656Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
@@ -667,23 +507,23 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1845736Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5469116Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>0.3130718954248361,1,0.65</Value>
+        <Value>0.041666666666666664,0.8702928870292886,0.47</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1846807Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5470155Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0.65</Value>
+        <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.1847844Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5471144Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
@@ -699,7 +539,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885277Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573225Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -707,7 +547,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8436252Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:58.3107271Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -741,7 +581,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.21198Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5723327Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.MonitorWatts</Name>
@@ -749,7 +589,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2121205Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5724423Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -757,7 +597,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Enable events logging</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2122601Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5725421Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.IRControler.Enable</Name>
@@ -781,7 +621,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2123864Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5726413Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
@@ -841,11 +681,11 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>11.8</Value>
+        <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:34:16.9010719Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5727407Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -853,7 +693,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2126862Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5728548Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -861,7 +701,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Watts meter</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2128215Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5729553Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts.Max</Name>
@@ -869,7 +709,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Watts meter max power</Description>
         <FieldType>slider:1:2500:1:10</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2129409Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5730551Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
@@ -877,7 +717,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2130691Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5731594Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
@@ -885,15 +725,15 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2132001Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5732844Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0.4</Value>
+        <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2133237Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5734718Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
@@ -901,7 +741,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2134519Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5736768Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -909,7 +749,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885324Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573316Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -917,7 +757,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8442795Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:58.3391366Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -951,7 +791,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2383785Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.599209Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.MonitorWatts</Name>
@@ -959,7 +799,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2386967Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5993135Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -967,7 +807,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Enable events logging</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2388741Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5994101Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.IRControler.Enable</Name>
@@ -991,7 +831,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2390116Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.599507Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory.SimulateOnly</Name>
@@ -1031,7 +871,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2391637Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5996054Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
@@ -1039,15 +879,15 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2393046Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5997047Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.LastEvent</Name>
-        <Value>637536948955347575</Value>
+        <Value>638077874275542494</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2394465Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5998035Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.MinLuminance</Name>
@@ -1055,7 +895,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2396877Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.5999224Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
@@ -1063,7 +903,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2398542Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6000212Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
@@ -1079,7 +919,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:13:54.3012923Z</UpdateTime>
+        <UpdateTime>2022-12-31T17:51:18.0705113Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -1087,7 +927,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2401785Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6002141Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -1095,7 +935,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Watts meter</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2404368Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6003098Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts.Max</Name>
@@ -1103,23 +943,23 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description>Watts meter max power</Description>
         <FieldType>slider:1:2500:1:10</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2407272Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6004069Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
-        <Value>1</Value>
+        <Value>0.5</Value>
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2409974Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6005097Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>0.041666666666666664,0.8702928870292886,0.5</Value>
+        <Value>0.2880952380952381,0.7,0.4</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:13:22.2723856Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6006132Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
@@ -1127,7 +967,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:13:53.1545394Z</UpdateTime>
+        <UpdateTime>2022-12-31T17:51:17.5357351Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
@@ -1135,7 +975,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2417776Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6008245Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>UpnpDevice.EmulateWemo</Name>
@@ -1143,7 +983,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2420318Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6009331Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>UpnpDevice.Info.UDN</Name>
@@ -1151,7 +991,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:01.2422649Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6010409Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1159,7 +999,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885377Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573436Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1167,7 +1007,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8598136Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:58.4420816Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -1201,7 +1041,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885418Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573514Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1209,7 +1049,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.933214Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:58.4678477Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -1243,7 +1083,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885457Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573589Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1251,14 +1091,14 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:03.0236913Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:58.4718627Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Security Alarm System</Name>
-    <Description>Security Alarm System</Description>
+    <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1268,56 +1108,56 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Value />
         <Description>4. Comma separated list of recipients e-mails for alarm notifications</Description>
         <FieldType>text</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8809016Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:59.4384155Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.ArmDelay</Name>
         <Value>10</Value>
         <Description>1. Arm Delay (seconds)</Description>
         <FieldType>slider:0:60:1</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8838637Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.3022104Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.SirenMaxTime</Name>
         <Value>30</Value>
         <Description>3. Sirens Max Time (seconds, 0=infinite)</Description>
         <FieldType>slider:0:1800:1</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8839851Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.3023223Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.SirenStartTime</Name>
         <Value>0</Value>
         <Description>2. Sirens Start Delay (seconds)</Description>
         <FieldType>slider:0:30:1</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8840882Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.3024128Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.ArmedProgram</Name>
         <Value />
         <Description>5. Program to run when armed</Description>
         <FieldType>program.text</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8809024Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:59.4384174Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.DisarmedProgram</Name>
         <Value />
         <Description>6. Program to run when disarmed</Description>
         <FieldType>program.text</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8809028Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:59.4384187Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.TriggeredProgram</Name>
         <Value />
         <Description>7. Program to run when triggered</Description>
         <FieldType>program.text</FieldType>
-        <ParentId>90</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.8809036Z</UpdateTime>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:59.43842Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -1325,7 +1165,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.962948Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:59.4932896Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityArmed</Name>
@@ -1333,7 +1173,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8842907Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.3025913Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggered</Name>
@@ -1341,7 +1181,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8843909Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.3026775Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -1357,7 +1197,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:00.8969923Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.3162464Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1365,7 +1205,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885503Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.0573681Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1380,7 +1220,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
   </Module>
   <Module>
     <Name>Smart Device</Name>
-    <Description>Auto switch a device on/off based on sensing motion and environment light.</Description>
+    <Description>Turns on/off a device based on motion detection and ambient light.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -1391,7 +1231,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:13:53.138217Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.3771669Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -1399,7 +1239,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:02.9630674Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:11:01.217313Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1407,14 +1247,187 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:16:33.3683867Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:59.2338677Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Thermostat</Name>
+    <Description />
+    <DeviceType>Thermostat</DeviceType>
+    <Domain>HomeAutomation.BasicThermostat</Domain>
+    <Address>1</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EventsLogger.EnableLogging</Name>
+        <Value>On</Value>
+        <Description>Enable events logging</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:37.918906Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Temperature</Name>
+        <Value>10.012</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:35:48.1841725Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.Mode</Name>
+        <Value>Heat</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T16:16:54.4776924Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.OperatingState</Name>
+        <Value>Heating</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T16:45:22.6308444Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.SetPoint.Cooling</Name>
+        <Value>22</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:37.9195495Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.SetPoint.CoolingEconomy</Name>
+        <Value>24</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:37.9197131Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.SetPoint.Heating</Name>
+        <Value>20</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T16:51:24.8505158Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Thermostat.SetPoint.HeatingEconomy</Name>
+        <Value>19</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:37.9199751Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>78</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:35:14.0573825Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualThermostat.CoolingSwitchModule</Name>
+        <Value />
+        <Description>Cooling switch</Description>
+        <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-27T22:59:26.0986618Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualThermostat.HeatingSwitchModule</Name>
+        <Value>HomeAutomation.Demo:3</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:37.9387349Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualThermostat.TemperatureModule</Name>
+        <Value>HomeAutomation.Demo:1</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:37.9388531Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/thermostat</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T16:36:30.868415Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Smart Thermostat</Name>
+    <Description>Use any temperature sensor and smart switch to implement thermostat functionality.
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>78</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ThermostatsCount</Name>
+        <Value>1</Value>
+        <Description>Number of thermostats to create</Description>
+        <FieldType>slider:1:10:1</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.2274051Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>{"Title":"Basic Thermostat 1","Message":"A switch for the mode 'Cool' is not set."}</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T15:46:24.6605484Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T16:36:30.8298756Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T16:36:30.4771523Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>78</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-31T18:35:14.0574468Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-11-26T18:13:13.7010485Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Sunrise Colors Scenario</Name>
-    <Description>Example scenario for color lights.</Description>
+    <Description>Example "Sunrise" scenario for color lights.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>
@@ -1425,7 +1438,15 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:12:03.154667Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:11:01.6011916Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T13:36:00.9772646Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1433,7 +1454,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T22:33:27.1885541Z</UpdateTime>
+        <UpdateTime>2022-12-31T18:35:14.057375Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
