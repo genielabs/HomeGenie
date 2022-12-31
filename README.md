@@ -1,5 +1,4 @@
 ![example workflow](https://github.com/genielabs/HomeGenie/actions/workflows/msbuild.yml/badge.svg)
-[![Build status](https://ci.appveyor.com/api/projects/status/96xnyg3jmqx1tj9h?svg=true)](https://ci.appveyor.com/project/genemars/homegenie)
 
 # HomeGenie
 
