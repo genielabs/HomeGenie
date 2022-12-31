@@ -4,6 +4,7 @@
         <Nullable>disable</Nullable>
         <IsPackable>false</IsPackable>
         <TargetFrameworks>net472;net6.0</TargetFrameworks>
+        <SuppressWindowsPlatformTargetingRequiredError>true</SuppressWindowsPlatformTargetingRequiredError>
     </PropertyGroup>
 
     <ItemGroup>
