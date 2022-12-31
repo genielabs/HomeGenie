@@ -50,29 +50,32 @@ jobs:
           cd ./src/HomeGenie/bin/Release/
           mkdir artifacts
           mv net472 homegenie
-          zip "homegenie_$VERSION_NUMBER_net472.zip" -r homegenie
-          mv "homegenie_$VERSION_NUMBER_net472.zip" ./artifacts/
+          zip homegenie_${{ env.VERSION_NUMBER }}_net472.zip -r homegenie
+          mv homegenie_${{ env.VERSION_NUMBER }}_net472.zip ./artifacts/
           cd net6.0
           mv linux-arm homegenie
-          zip "homegenie_$VERSION_NUMBER_linux-arm.zip" -r homegenie
-          mv "homegenie_$VERSION_NUMBER_linux-arm.zip" ../artifacts/
+          zip homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip -r homegenie
+          mv homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip ../artifacts/
           rm -rf homegenie
           mv linux-arm64 homegenie
-          zip "homegenie_$VERSION_NUMBER_linux-arm64.zip" -r homegenie
-          mv "homegenie_$VERSION_NUMBER_linux-arm64.zip" ../artifacts/
+          zip homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip -r homegenie
+          mv homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip ../artifacts/
           rm -rf homegenie
           mv osx-x64 homegenie
-          zip "homegenie_$VERSION_NUMBER_osx-x64.zip" -r homegenie
-          mv "homegenie_$VERSION_NUMBER_osx-x64.zip" ../artifacts/
+          zip homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip -r homegenie
+          mv homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip" ../artifacts/
           rm -rf homegenie
           mv linux-x64 homegenie
-          zip "homegenie_$VERSION_NUMBER_linux-x64.zip" -r homegenie
-          mv "homegenie_$VERSION_NUMBER_linux-x64.zip" ../artifacts/
+          zip homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip -r homegenie
+          mv homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip ../artifacts/
           rm -rf homegenie
           mv win-x64 homegenie
-          zip "homegenie_$VERSION_NUMBER_win-x64.zip" -r homegenie
-          mv "homegenie_$VERSION_NUMBER_win-x64.zip" ../artifacts/
+          zip homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip -r homegenie
+          mv homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip ../artifacts/
           rm -rf homegenie
+          cd ..
+          pwd
+          ls -la ./artifacts/
 
       - name: Build debian package and docs
         run: |
