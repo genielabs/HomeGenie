@@ -82,100 +82,17 @@ jobs:
           mv Output/* ../../../src/HomeGenie/bin/Release/artifacts/
           mv Doxy/homegenie_api.tgz ../../../src/HomeGenie/bin/Release/artifacts/
 
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.zip
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}.tgz
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          path: ./src/HomeGenie/bin/Release/net472/artifacts/homegenie_api.tgz
-
-      - name: release
-        uses: actions/create-release@v1
-        id: create_release
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          draft: false
-          prerelease: false
-          release_name: ${{ env.RELEASE_VERSION }}
-          tag_name: ${{ github.ref }}
-#          body_path: CHANGELOG.md
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
-      - name: upload linux debian artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_net472_all.deb
-          asset_content_type: application/vnd.debian.binary-package
-
-      - name: upload portable artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_net472.zip
-          asset_content_type: application/zip
-
-      - name: upload portable artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip
-          asset_content_type: application/zip
-
-      - name: upload portable artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip
-          asset_content_type: application/zip
-
-      - name: upload portable artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip
-          asset_content_type: application/zip
-
-      - name: upload portable artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip
-          asset_content_type: application/zip
-
-      - name: upload portable artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip
-          asset_path: ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip
-          asset_name: homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip
-          asset_content_type: application/zip
+          files: |
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}.tgz
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_api.tgz
