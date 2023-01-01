@@ -63,7 +63,7 @@ jobs:
           rm -rf homegenie
           mv osx-x64 homegenie
           zip homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip" ../artifacts/
+          mv homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip ../artifacts/
           rm -rf homegenie
           mv linux-x64 homegenie
           zip homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip -r homegenie
