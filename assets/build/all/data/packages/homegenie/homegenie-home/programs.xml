@@ -1038,7 +1038,12 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
     // Run the Heating/Cooling logic
     if (thermostatMode.Value != "Off" &amp;&amp; currentMode != thermostatMode.Value)
     {
-      currentMode = thermostatMode.Value;
+      var newMode = thermostatMode.Value;
+      if (currentMode.Length &gt; 0) {
+        thermostatMode.Value = "Off";
+        RunLogic(thermostat, currentMode);
+      }
+      currentMode = thermostatMode.Value = newMode;
       lastNotification = "";
     }
     if (!String.IsNullOrEmpty(currentMode))
@@ -1055,6 +1060,11 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
 });
 
 When.ModuleParameterChanged((module, parameter)=&gt;{
+  if (module.Get().Instance == Program.Module &amp;&amp; parameter.Name == "ConfigureOptions.ThermostatsCount")
+  {
+    Program.Restart();
+    return true;
+  }
   if (parameter.Is("Sensor.Temperature"))
   {
     thermostatModules.Each((thermostat)=&gt;{
@@ -1121,7 +1131,7 @@ while (Program.IsRunning)
   Pause(60);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -1129,7 +1139,7 @@ while (Program.IsRunning)
       <Id>basic-thermostat</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>D5616BD2DBE2A375ED2EF4E1DA6FD728</Checksum>
+      <Checksum>839C3585195B1E1B54B77127FFD7E976</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>

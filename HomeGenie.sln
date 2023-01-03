@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie", "src\HomeGenie\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientLib", "src\SupportLibraries\NetClientLib\NetClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie.Tests", "HomeGenie.Tests\HomeGenie.Tests.csproj", "{F27AB162-F760-47CD-A77B-283E4E5601EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie.Tests", "src\HomeGenie.Tests\HomeGenie.Tests.csproj", "{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,12 +28,12 @@ Global
 		{318D2523-3C8B-4273-B1EA-DE339868403C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{318D2523-3C8B-4273-B1EA-DE339868403C}.Default|Any CPU.ActiveCfg = Debug|Any CPU
 		{318D2523-3C8B-4273-B1EA-DE339868403C}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{F27AB162-F760-47CD-A77B-283E4E5601EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F27AB162-F760-47CD-A77B-283E4E5601EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F27AB162-F760-47CD-A77B-283E4E5601EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F27AB162-F760-47CD-A77B-283E4E5601EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F27AB162-F760-47CD-A77B-283E4E5601EE}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{F27AB162-F760-47CD-A77B-283E4E5601EE}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C6934F-FD27-4357-AF8F-1AD9900B0E8E}.Default|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{318D2523-3C8B-4273-B1EA-DE339868403C} = {63A13BEF-B17E-43DE-A96C-D6A1433402DA}

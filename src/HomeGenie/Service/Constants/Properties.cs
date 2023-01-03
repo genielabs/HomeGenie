@@ -48,14 +48,16 @@ namespace HomeGenie.Service.Constants
             = "Scheduler.ScriptStatus";
         public const string SchedulerTriggeredEvent
             = "Scheduler.TriggeredEvent";
+        public const string ProgramEvent
+            = "Program.Event";
         public const string ProgramStatus
             = "Program.Status";
+        public const string ProgramNotification
+            = "Program.Notification";
         public const string RuntimeError
             = "Runtime.Error";
         public const string CompilerWarning
             = "Compiler.Warning";
-        public const string ProgramNotification
-            = "Program.Notification";
         public const string InstallProgressMessage
             = "InstallProgress.Message";
         public const string InstallProgressUpdate

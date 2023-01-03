@@ -26,23 +26,31 @@ jobs:
 
       - name: Build release
         run: |
+          dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net6.0
+          cat ./src/HomeGenie/release_info.xml 
           dotnet publish --framework net472 --configuration Release
           rm -rf ./src/HomeGenie/bin/Release/net472/publish
+          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net472/
           ls -la ./src/HomeGenie/bin/Release/net472/
           dotnet publish --configuration Release --framework net6.0 --runtime linux-arm   --self-contained
           rm -rf ./src/HomeGenie/bin/Release/net6.0/linux-arm/publish
+          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/linux-arm/
           ls -la ./src/HomeGenie/bin/Release/net6.0/linux-arm
           dotnet publish --configuration Release --framework net6.0 --runtime linux-arm64 --self-contained
           rm -rf ./src/HomeGenie/bin/Release/net6.0/linux-arm64/publish
+          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/linux-arm64/
           ls -la ./src/HomeGenie/bin/Release/net6.0/linux-arm64
           dotnet publish --configuration Release --framework net6.0 --runtime osx-x64     --self-contained
           rm -rf ./src/HomeGenie/bin/Release/net6.0/osx-x64/publish
+          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/osx-x64/
           ls -la ./src/HomeGenie/bin/Release/net6.0/osx-x64
           dotnet publish --configuration Release --framework net6.0 --runtime linux-x64   --self-contained
           rm -rf ./src/HomeGenie/bin/Release/net6.0/linux-x64/publish
+          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/linux-x64/
           ls -la ./src/HomeGenie/bin/Release/net6.0/linux-x64
           dotnet publish --configuration Release --framework net6.0 --runtime win-x64     --self-contained
           rm -rf ./src/HomeGenie/bin/Release/net6.0/win-x64/publish
+          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/win-x64/
           ls -la ./src/HomeGenie/bin/Release/net6.0/win-x64
 
       - name: Zip release bundles

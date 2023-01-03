@@ -1,11 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
-    <ScriptSetup>// set the widget that will display this program data (temperature, humidity).
+    <ScriptSetup>var gpio_pins = new string[]{
+	"GPIO17 (pin 11)=11",
+	"GPIO27 (pin 13)=13",
+	"GPIO22 (pin 15)=15",
+
+	"GPIO4 (pin 7)=7",
+	"GPIO5 (pin 29)=29",
+	"GPIO6 (pin 31)=31",
+	"GPIO13 (pin 33)=33",
+	"GPIO19 (pin 35)=35",
+	"GPIO26 (pin 37)=37",
+
+	"GPIO23 (pin 16)=16",
+	"GPIO24 (pin 18)=18",
+	"GPIO25 (pin 22)=22",
+
+	"GPIO12 (pin 32)=32",
+	"GPIO16 (pin 36)=36",
+//	"GPIO20 (pin 38)=38", // &lt;-- this pin seems to be used by the system
+	"GPIO21 (pin 40)=40"
+};
+
 Program.Setup(() =&gt; {
-    Program
-        .UseWidget("homegenie/generic/sensor")
-        .AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
+  Program
+    .AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
+    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:30:3600:30");
 });
 Program.Run();
 </ScriptSetup>
@@ -15,7 +36,13 @@ Program.Run();
 #using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Sensors.Temperature.Dht
 
-var measurePin = ConnectorPin.P1Pin16; // GPIO#23
+var pinName = "P1Pin" + Program.Option("GPIO.Pin").Value;
+if (pinName.Length &lt; 6) {
+  Program.Notify("Data pin not selected. Configure from settings.");
+  Pause(10);
+  return;
+}
+var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
 var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
 
 When.ProgramStopping(()=&gt;{
@@ -33,6 +60,15 @@ When.WebServiceCallReceived("Components.DHT11/0/Sensor.Humidity", ( args ) =&gt;
   return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
 });
 
+// restart and reconfigure if a configuration parameter changed
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    Program.Restart();
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
 while (Program.IsEnabled)
 {
   using (var pin = driver.InOut(measurePin))
@@ -42,13 +78,18 @@ while (Program.IsEnabled)
     if (data != null)
     {
       // data read succesfully
-      Program.RaiseEvent("Sensor.Humidity", data.RelativeHumidity.Percent.ToString(CultureInfo.InvariantCulture), "DHT-11 Sensor");
-      Program.RaiseEvent("Sensor.Temperature", data.Temperature.DegreesCelsius.ToString(CultureInfo.InvariantCulture), "DHT-11 Sensor");
+      Program
+        .Emit("Sensor.Humidity", data.RelativeHumidity.Percent.ToString(CultureInfo.InvariantCulture))
+        .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius.ToString(CultureInfo.InvariantCulture));
+    }
+    else
+    {
+      Program.Notify("Could not read data from sensor.");
     }
   }
 
   var pause = Program.Option("UpdateInterval").DecimalValue;
-  if (pause == 0) pause = 600; // default pause is 10 minutes
+  if (pause == 0) pause = 60; // default pause is 1 minute
   Pause(pause);
 }
 </ScriptSource>
@@ -60,10 +101,10 @@ while (Program.IsEnabled)
       <Id>dht-11-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>6D2DF9C0ADEB6A5146A108705C89E0D2</Checksum>
+      <Checksum>59A1EDF8D06B34771DC1855BF566A4BE</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1002</Address>
+    <Address>601</Address>
     <Name>DHT-11 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-11 with data pin on GPIO#23. 
 Edit program code line #1 to change the data pin GPIO.
@@ -71,16 +112,37 @@ See example video at http://homegenie.it/docs/diy/eden.php .</Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
+    <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>// set the widget that will display this program data (temperature,humidity).
-Program.Setup(()=&gt;{
-    Program
-        .UseWidget("homegenie/generic/sensor")
-        .AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
+    <ScriptSetup>var gpio_pins = new string[]{
+	"GPIO17 (pin 11)=11",
+	"GPIO27 (pin 13)=13",
+	"GPIO22 (pin 15)=15",
+
+	"GPIO4 (pin 7)=7",
+	"GPIO5 (pin 29)=29",
+	"GPIO6 (pin 31)=31",
+	"GPIO13 (pin 33)=33",
+	"GPIO19 (pin 35)=35",
+	"GPIO26 (pin 37)=37",
+
+	"GPIO23 (pin 16)=16",
+	"GPIO24 (pin 18)=18",
+	"GPIO25 (pin 22)=22",
+
+	"GPIO12 (pin 32)=32",
+	"GPIO16 (pin 36)=36",
+//	"GPIO20 (pin 38)=38", // &lt;-- this pin seems to be used by the system
+	"GPIO21 (pin 40)=40"
+};
+
+Program.Setup(() =&gt; {
+  Program
+    .AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
+    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:30:3600:30");
 });
 Program.Run();
 </ScriptSetup>
@@ -90,7 +152,13 @@ Program.Run();
 #using Raspberry.IO.GeneralPurpose
 #using Raspberry.IO.Components.Sensors.Temperature.Dht
 
-var measurePin = ConnectorPin.P1Pin7; // GPIO#4
+var pinName = "P1Pin" + Program.Option("GPIO.Pin").Value;
+if (pinName.Length &lt; 6) {
+  Program.Notify("Data pin not selected. Configure from settings.");
+  Pause(10);
+  return;
+}
+var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
 var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
 
 When.ProgramStopping(()=&gt;{
@@ -108,6 +176,15 @@ When.WebServiceCallReceived("Components.DHT22/0/Sensor.Humidity", ( args ) =&gt;
   return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
 });
 
+// restart and reconfigure if a configuration parameter changed
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    Program.Restart();
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
 while (Program.IsEnabled)
 {
   using (var pin = driver.InOut(measurePin))
@@ -117,13 +194,16 @@ while (Program.IsEnabled)
     if (data != null)
     {
       // data read succesfully
-      Program.RaiseEvent("Sensor.Humidity", data.RelativeHumidity.Percent.ToString(CultureInfo.InvariantCulture), "DHT-22 Sensor");
-      Program.RaiseEvent("Sensor.Temperature", data.Temperature.DegreesCelsius.ToString(CultureInfo.InvariantCulture), "DHT-22 Sensor");
+      Program
+        .Emit("Sensor.Humidity", data.RelativeHumidity.Percent.ToString(CultureInfo.InvariantCulture))
+        .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius.ToString(CultureInfo.InvariantCulture));
+    } else {
+      Program.Notify("Could not read data from sensor.");
     }
   }
 
   var pause = Program.Option("UpdateInterval").DecimalValue;
-  if (pause == 0) pause = 600; // default pause is 10 minutes
+  if (pause == 0) pause = 60; // default pause is 1 minute
   Pause(pause);
 }
 </ScriptSource>
@@ -135,125 +215,14 @@ while (Program.IsEnabled)
       <Id>dht-22-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>00C3BF35FC8AC4CD77E791D891BA13E3</Checksum>
+      <Checksum>ABBEDF56D19E34D42DABFD8A6BDBBB52</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1003</Address>
+    <Address>602</Address>
     <Name>DHT-22 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
 Edit program code line #1 to change the data pin GPIO.
 </Description>
-    <Group>Raspberry Pi</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program.Setup(()=&gt; {
-  Program.UseWidget("homegenie/generic/sensor")
-         .AddOption("Gpio.Pin", "", "Pin number", "text")
-         .AddOption("Gpio.Reversed", "", "Reverse level status", "checkbox");
-});
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>// Based on RaspberrySharp libraries for programming GPIO/I2C/SPI devices
-// Docs https://github.com/genemars/raspberry-sharp-io
-
-#using Raspberry.IO.GeneralPurpose
-
-if (Program.Option("Gpio.Pin").Value != "") {
-  if (Program.Parameter("ConfigureStatus.Warning").Value != "") {
-    Program.RaiseEvent("ConfigureStatus.Warning", "", "");
-  }
-
-  var pinName = "P1Pin" + Program.Option("Gpio.Pin").Value;
-  var pin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
-  // TODO: also implement "Gpio.Reversed" option
-  // Set GPIO pin configuration
-  var pinConnection = new InputPinConfiguration(PinMapping.ToProcessor(pin));
-  pinConnection.Resistor = PinResistor.PullUp; // or PullDown
-  pinConnection.Reversed = false;
-  pinConnection.Name = pinName;
-  var cfg = new PinConfiguration[1] {
-      pinConnection
-  };
-  // Allocate GPIO connection
-  GpioConnection connection = null;
-  try
-  {
-    // Create GPIO connection with default driver
-    connection = new GpioConnection(cfg);
-    // -- OR -- set the GPIO connection driver manually
-    //var settings = new GpioConnectionSettings();
-    //settings.Driver = new FileGpioConnectionDriver();
-    //connection = new GpioConnection(settings, cfg);
-  }
-  catch (Exception e)
-  {
-    // An error occurred
-    Program.Notify("GPIO Error (" + pinName + ")", e.Message);
-    Pause(10);
-    return; // exit and restart program
-  }
-
-  // Add virtual module for this switch
-  const string moduleDomain = "RaspberryPi.GPIO";
-  Program.AddVirtualModule(moduleDomain, pinName, "Sensor", "homegenie/generic/sensor");
-  var switchModule = Modules.InDomain(moduleDomain).WithAddress(pinName).Get();
-
-  // Listen and report pin status changes
-  var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
-    var address = args.Configuration.Name;
-    switchModule.RaiseEvent(
-      "Status.Level",
-      args.Enabled == !args.Configuration.Reversed ? "1" : "0",
-      address
-    );
-  });
-  connection.PinStatusChanged += pinChanged;
-
-  // release allocated resources when program is stopping
-  When.ProgramStopping(()=&gt;{
-    connection.PinStatusChanged -= pinChanged;
-    ((IDisposable)connection).Dispose();
-    return true;
-  });
-
-  // read and store current pins status
-  switchModule.Parameter("Status.Level").Value = connection[pinName] ? "1" : "0";
-} else {
-  if (Program.Parameter("ConfigureStatus.Warning").Value == "") {
-    Program.RaiseEvent("ConfigureStatus.Warning", "Input pin number not specified", "");
-  }
-}
-
-// restart and reconfigure if a configuration parameter changed
-When.ModuleParameterChanged((module, property) =&gt; {
-  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
-    Program.Restart();
-  }
-  // returning true, will route event to other listeners
-  return true;
-});
-
-Program.GoBackground();
-</ScriptSource>
-    <ScriptErrors />
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-iot-sharp</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
-      <Id>gpio-input-sensor</Id>
-      <Version>1.0.0</Version>
-      <Required>false</Required>
-      <Checksum>330E463F1AEDF47E0E7C39C4CECFAC90</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1004</Address>
-    <Name>GPIO Input Sensor</Name>
-    <Description>Shows status of a GPIO input pin</Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -262,10 +231,33 @@ Program.GoBackground();
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.Setup(()=&gt; {
-  Program.UseWidget("homegenie/generic/switch")
-         .AddOption("Gpio.Pin", "", "Pin number", "text")
-         .AddOption("Gpio.Reversed", "", "Reverse level status", "checkbox");
+    <ScriptSetup>var gpio_pins = new string[]{
+	"GPIO17 (pin 11)=11",
+	"GPIO27 (pin 13)=13",
+	"GPIO22 (pin 15)=15",
+
+	"GPIO4 (pin 7)=7",
+	"GPIO5 (pin 29)=29",
+	"GPIO6 (pin 31)=31",
+	"GPIO13 (pin 33)=33",
+	"GPIO19 (pin 35)=35",
+	"GPIO26 (pin 37)=37",
+
+	"GPIO23 (pin 16)=16",
+	"GPIO24 (pin 18)=18",
+	"GPIO25 (pin 22)=22",
+
+	"GPIO12 (pin 32)=32",
+	"GPIO16 (pin 36)=36",
+//	"GPIO20 (pin 38)=38", // &lt;-- this pin seems to be used by the system
+	"GPIO21 (pin 40)=40"
+};
+
+Program.Setup(()=&gt; {
+  Program
+	.AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
+	.AddOption("GPIO.Pin.Reversed", "", "Reverse level status", "checkbox")
+	.AddOption("GPIO.Pin.Mode", "1", "Pin mode", "select:Output=1,Input=0,Input pull-down=2,Input pull-up=3");
 });
 Program.Run();
 </ScriptSetup>
@@ -274,68 +266,80 @@ Program.Run();
 
 #using Raspberry.IO.GeneralPurpose
 
-if (Program.Option("Gpio.Pin").Value != "") {
-  if (Program.Parameter("ConfigureStatus.Warning").Value != "") {
-    Program.RaiseEvent("ConfigureStatus.Warning", "", "");
-  }
+var pinMode = Program.Option("GPIO.Pin.Mode").DecimalValue;
+// pinMode == 0 -&gt; Input
+// pinMode == 1 -&gt; Output
+// pinMode == 2 -&gt; Input pull-down
+// pinMode == 3 -&gt; Input pull-up
+var pinName = "P1Pin" + Program.Option("GPIO.Pin").Value;
+if (pinName.Length &lt; 6) {
+  Program.Notify("GPIO pin not selected. Configure from settings.");
+  Pause(10);
+  return;
+}
+var pin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
+// Set GPIO pin configuration
+var pinConnection = (PinConfiguration)(pinMode == 1
+  ? new OutputPinConfiguration(PinMapping.ToProcessor(pin))
+  : new InputPinConfiguration(PinMapping.ToProcessor(pin)));
+if (pinMode == 2) ((InputPinConfiguration)pinConnection).Resistor = PinResistor.PullDown;
+if (pinMode == 3) ((InputPinConfiguration)pinConnection).Resistor = PinResistor.PullUp;
+pinConnection.Name = pinName;
+pinConnection.Reversed = Program.Option("GPIO.Pin.Reversed").Value == "On";
+var cfg = new PinConfiguration[1] {
+    pinConnection
+};
 
-  var pinName = "P1Pin" + Program.Option("Gpio.Pin").Value;
-  var pin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
-  // TODO: also implement "Gpio.Reversed" option
-  // Set GPIO pin configuration
-  PinConfiguration pinConnection = new OutputPinConfiguration(PinMapping.ToProcessor(pin));
-  pinConnection.Name = pinName;
-  pinConnection.Reversed = false;
-  var cfg = new PinConfiguration[1] {
-      pinConnection
-  };
-  // Allocate GPIO connection
-  GpioConnection connection = null;
-  try
-  {
-    // Create GPIO connection with default driver
-    connection = new GpioConnection(cfg);
-    // -- OR -- set the GPIO connection driver manually
-    //var settings = new GpioConnectionSettings();
-    //settings.Driver = new FileGpioConnectionDriver();
-    //connection = new GpioConnection(settings, cfg);
-  }
-  catch (Exception e)
-  {
-    // An error occurred
-    Program.Notify("GPIO Error (" + pinName + ")", e.Message);
-    Pause(10);
-    return; // exit and restart program
-  }
+// Add virtual module for this switch
+const string moduleDomain = "RaspberryPi.GPIO";
+Program.AddModule(moduleDomain, Program.Option("GPIO.Pin").Value, "Switch", "homegenie/generic/switch");
+var mod = Modules.InDomain(moduleDomain).WithAddress(pinName).Get();
 
-  // Add virtual module for this switch
-  const string moduleDomain = "RaspberryPi.GPIO";
-  Program.AddVirtualModule(moduleDomain, pinName, "Switch", "homegenie/generic/switch");
-  var switchModule = Modules.InDomain(moduleDomain).WithAddress(pinName).Get();
+// Allocate GPIO connection
+GpioConnection connection = null;
+try
+{
+  // Create GPIO connection with default driver
+  connection = new GpioConnection(cfg);
+  // -- OR -- set the GPIO connection driver manually
+  //var settings = new GpioConnectionSettings();
+  //settings.Driver = new FileGpioConnectionDriver();
+  //connection = new GpioConnection(settings, cfg);
+}
+catch (Exception e)
+{
+  // An error occurred
+  Program.Notify($"GPIO pin {pinName}", $"Error: {e.Message}");
+  Pause(10);
+  return; // exit and restart program
+}
 
-  // Listen and report pin status changes
-  var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
-    var address = args.Configuration.Name;
-    switchModule.RaiseEvent(
-      "Status.Level",
-      args.Enabled == !args.Configuration.Reversed ? "1" : "0",
-      address
-    );
-  });
-  connection.PinStatusChanged += pinChanged;
+// Listen and report pin status changes
+var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
+  var address = args.Configuration.Name;
+  mod.Emit(
+    "Status.Level",
+    args.Enabled ? "1" : "0",
+    address
+  );
+});
+connection.PinStatusChanged += pinChanged;
 
-  // release allocated resources when program is stopping
-  When.ProgramStopping(()=&gt;{
-    connection.PinStatusChanged -= pinChanged;
-    ((IDisposable)connection).Dispose();
-    return true;
-  });
+// release allocated resources when program is stopping
+When.ProgramStopping(()=&gt;{
+  connection.PinStatusChanged -= pinChanged;
+  ((IDisposable)connection).Dispose();
+  return true;
+});
 
-  // read and store current pins status
-  switchModule.Parameter("Status.Level").Value = connection[pinName] ? "1" : "0";
+// read and store current pins status
+mod.Parameter("Status.Level").Value = connection[pinName] ? "1" : "0";
 
+if (pinMode == 1) { // Output
+  mod.Instance.DeviceType = ModuleTypes.Switch;
+  mod.Emit("Widget.DisplayModule", "homegenie/generic/switch");
   // implement serice API 'Control.On', 'Control.Off', 'Control.Toggle' to control this GPIO
-  var moduleServiceUrl = switchModule.Instance.Domain + "/" + switchModule.Instance.Address;
+  var moduleServiceUrl = mod.Instance.Domain + "/" + mod.Instance.Address;
   When.WebServiceCallReceived(moduleServiceUrl, ( args ) =&gt; {
     var request = Program.ParseApiCall(args);
     try
@@ -362,10 +366,9 @@ if (Program.Option("Gpio.Pin").Value != "") {
     }
     return null;
   });
-} else {
-  if (Program.Parameter("ConfigureStatus.Warning").Value == "") {
-    Program.RaiseEvent("ConfigureStatus.Warning", "Output pin number not specified.", "");
-  }
+} else { // Input
+    mod.Instance.DeviceType = ModuleTypes.Sensor;
+    mod.Emit("Widget.DisplayModule", "homegenie/generic/sensor");
 }
 
 // restart and reconfigure if a configuration parameter changed
@@ -379,20 +382,22 @@ When.ModuleParameterChanged((module, property) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
-      <Id>gpio-output-switch</Id>
+      <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>FDB3F6A069A54790939A311F91E2C6DD</Checksum>
+      <Checksum>5731CE509399BDA8390D8BBC20501649</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1005</Address>
-    <Name>GPIO Output Switch</Name>
-    <Description>Controls a GPIO output pin</Description>
+    <Address>600</Address>
+    <Name>GPIO Pin</Name>
+    <Description>Configurable GPIO pin as binary input sensor or output switch.
+(RaspberrySharp.IO)
+</Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -608,7 +613,7 @@ updateLeds();
       <Checksum>5370E9829F38FE4FA517362F3BA8AFE5</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1006</Address>
+    <Address>603</Address>
     <Name>Grove - Chainable RGB Led</Name>
     <Description>Chainable RGB color leds modules wired to GPIO#4 and GPIO#21/27 (power with 3v3).
 http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>

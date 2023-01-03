@@ -35,6 +35,10 @@
         <Domain>HomeAutomation.PhilipsHue</Domain>
       </ModuleReference>
       <ModuleReference>
+        <Address>Automation</Address>
+        <Domain>HomeGenie.UI.Separator</Domain>
+      </ModuleReference>
+      <ModuleReference>
         <Address>6</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
