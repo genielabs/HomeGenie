@@ -820,13 +820,13 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
                 var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
                 if (luminosity &lt; mod.Parameter(MIN_LUMINANCE).DecimalValue)
                 {
-                  Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                  Program.Notify("Sensor '" + module.Instance.Name + "' switched ON '" + mod.Instance.Name + "' (" + mod.Instance.Address + ")");
                   mod.On();
                 }
               }
               else
               {
-                Program.Notify(module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                Program.Notify("Sensor '" + module.Instance.Name + "' switched ON '" + mod.Instance.Name + "' (" + mod.Instance.Address + ")");
                 mod.On();
               }
             }
@@ -849,13 +849,8 @@ while (Program.IsRunning)
     if (timeout == 0) timeout = 30;
     if (mod.IsOn)
     {
-      var lastevent = mod.Parameter(LAST_EVENT).UpdateTime;
-      var lastupdate = mod.Parameter("Status.Level").UpdateTime;
-      var checktime = lastevent.Ticks;
-      if (checktime &lt; lastupdate.Ticks) checktime = lastupdate.Ticks;
-      var elapsed = new TimeSpan(DateTime.UtcNow.Ticks - checktime);
-      if (elapsed.TotalSeconds &gt; timeout) {
-        Program.Notify(mod.Instance.Address + " " + mod.Instance.Name + "&lt;br&gt;switched OFF.");
+      if (mod.Parameter("Status.Level").IdleTime &gt; timeout) {
+        Program.Notify("'" + mod.Instance.Name + "' (" + mod.Instance.Address + ") switched OFF for inactivity timeout.");
         mod.Off();
       }
     }
@@ -864,15 +859,15 @@ while (Program.IsRunning)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
-      <Id>smart-lights</Id>
+      <Id>smart-device</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>99900D1C407397E55F8C129BE5BBBF9E</Checksum>
+      <Checksum>B5AD0D1901B26BFB336454BC131F43C2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -1131,12 +1126,12 @@ while (Program.IsRunning)
   Pause(60);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
-      <Id>basic-thermostat</Id>
+      <Id>smart-thermostat</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
       <Checksum>839C3585195B1E1B54B77127FFD7E976</Checksum>
@@ -1184,9 +1179,13 @@ while (Program.IsRunning)
     <ScriptSource>// CSharp Automation Program Plugin
 
 // Initialize scenario
-var colorLights = Modules.WithFeature("Scenarios.SunriseColors")
+var colorLights = Modules
+  .WithFeature("Scenarios.SunriseColors")
   .Off()
-  .Command("Control.ColorHsb");
+  .Command("Control.ColorHsb")
+  .Submit("0,1,0.05,0.1");
+
+Pause(2);
 
 // First transition to red, 5 seconds
 colorLights.Submit("0,1,.8,5");
@@ -1207,7 +1206,7 @@ Pause(10);</ScriptSource>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>C71F047D0880D1FE723FF85EB451C113</Checksum>
+      <Checksum>ED5FD4C9B1531010B3662CFB2FA636C0</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>

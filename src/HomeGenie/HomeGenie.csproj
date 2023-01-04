@@ -43,7 +43,7 @@
     <PackageReference Include="MQTTnet" Version="4.1.4.563" />
     <PackageReference Include="SerialPortLib" Version="1.1.1" />
 
-    <PackageReference Include="MIG" Version="1.2.5" />
+    <PackageReference Include="MIG" Version="1.2.6" />
     <PackageReference Include="MIG.Protocols" Version="1.2.1" />
 
     <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.9" />

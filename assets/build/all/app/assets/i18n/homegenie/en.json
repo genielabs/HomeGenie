@@ -196,17 +196,13 @@
   "$options": {
 
     "6": {
-        "Title":
-            "All lights on",
-        "Description":
-            "Turn on all lights in the given group."
+        "Title": "All lights on",
+        "Description": "Turn on all lights in the given group."
     },
 
     "7": {
-        "Title":
-            "All lights off",
-        "Description":
-            "Turn off all lights in the given group."
+        "Title": "All lights off",
+        "Description": "Turn off all lights in the given group."
     },
 
     "16": {
@@ -306,6 +302,16 @@
       "Status.Battery": "Battery level",
       "Sensor.DoorWindow": "Door/Window sensor status (open/closed)",
       "Status.Level": "Switch status (on/off)"
+    },
+
+    "401": {
+      "Title": "Demo - Toggle Door",
+      "Description": "Simulates door open/closed of demo door-window sensor."
+    },
+
+    "402": {
+      "Title": "Demo - Motion Detected",
+      "Description": "Simulates motion detection of demo multi-sensor."
     },
 
     "410": {

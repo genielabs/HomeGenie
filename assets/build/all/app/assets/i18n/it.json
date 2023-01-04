@@ -122,6 +122,8 @@
   "clone_program": "Clona programma",
   "add_new_program": "Aggiungi nuovo programma",
   "new_program": "Nuovo programma",
+  "disable_program": "Disattiva",
+  "configure_program": "Configura",
   "no_data_received_yet": "In attesa dati",
   "backup_and_restore": "Backup e ripristino",
   "software_updates": "Aggiornamenti software",

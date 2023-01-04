@@ -165,7 +165,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
-        <Value>0.5</Value>
+        <Value>1</Value>
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>

@@ -309,6 +309,16 @@
         "Status.Level": "Stato interruttore (acceso/spento)"
       },
 
+      "401": {
+        "Title": "Demo - Porta aperta/chiusa",
+        "Description": "Simula apertura/chiusura porta del sensore porta-finestra demo."
+      },
+
+      "402": {
+        "Title": "Demo - Rileva movimento",
+        "Description": "Simula rilevamento movimento del multi-sensore demo."
+      },
+
       "410": {
         "Title": "Simulatore sensore",
         "Description": "Genera valori sensore casuali.",

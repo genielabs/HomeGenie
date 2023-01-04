@@ -46,7 +46,7 @@ Program.Run();
 var pinMode = (PinMode)Program.Option("GPIO.Pin.Mode").DecimalValue;
 int pin = (int)Program.Option("GPIO.Pin").DecimalValue;
 if (pin &lt;= 0) {
-    Program.Notify("GPIO pin not set. Configure from settings.");
+    Program.Notify("GPIO pin not selected. [program_configure,program_disable]");
     Pause(10);
     return;
 }
@@ -141,7 +141,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-net</PackageId>
@@ -149,7 +149,7 @@ Program.GoBackground();
       <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>4234167A8D376FE30AC8FAC0B447C392</Checksum>
+      <Checksum>6F5D22E597CF667BD80769C4BB671D0F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>

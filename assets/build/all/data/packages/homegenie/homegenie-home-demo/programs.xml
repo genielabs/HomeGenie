@@ -39,7 +39,7 @@ var doorSensor = $$.modules.inDomain("HomeAutomation.Demo").withAddress("2").get
 var currentValue = doorSensor.parameter(doorWindow).decimalValue;
 doorSensor.emit(doorWindow, currentValue == 0 ? "1" : "0", "");
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
@@ -76,7 +76,6 @@ doorSensor.emit(doorWindow, currentValue == 0 ? "1" : "0", "");
 
 Program.Setup(()=&gt; {
   Program
-    .UseWidget("homegenie/generic/program")
     .AddFeature("", "Sensor", "Simulator.Sensor.Temperature", "Temperature sensor", "checkbox")
     .AddFeature("", "Sensor", "Simulator.Sensor.Humidity", "Humidity sensor", "checkbox")
     .AddFeature("", "Sensor", "Simulator.Sensor.Luminance", "Light sensor", "checkbox")
@@ -183,7 +182,7 @@ while (Program.IsRunning) {
       <Id>sensor-simulator</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>488B858E3235AF428CE62978B302E478</Checksum>
+      <Checksum>0099623ED5E21B2B343E6D0989617E56</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>410</Address>

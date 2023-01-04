@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1672702086938,
+  "timestamp": 1672875362094,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,11 +15,11 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.1c4a82a7e01cadf5.js",
+        "/app/main.2190347d578b0732.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.710b144f4805f4b0.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
-        "/app/styles.2a2ec851e1022121.css"
+        "/app/styles.01d0686c443814d4.css"
       ],
       "patterns": []
     },
@@ -362,10 +362,10 @@
     "/app/assets/fonts/Roboto-Latin-300.woff": "fec6225507c70951797db15985fe0bf87195d6ee",
     "/app/assets/fonts/Roboto-Latin-400.woff": "fec6225507c70951797db15985fe0bf87195d6ee",
     "/app/assets/fonts/Roboto-Latin-500.woff": "7416b5d46c615d2786a604d71d334b605d41cc73",
-    "/app/assets/i18n/en.json": "ec465fc6b37b9b7fc31747dff0824ac9b5299c92",
-    "/app/assets/i18n/homegenie/en.json": "b607060d23c4f590dd5fb61538da4d74d0ae098c",
-    "/app/assets/i18n/homegenie/it.json": "8ff12c9c8884af7544d432be1e807a8694df10c4",
-    "/app/assets/i18n/it.json": "9d32a56c3332104ae26d0a030614df62086fea31",
+    "/app/assets/i18n/en.json": "b94f7485a36d3316dd5a43d1bd712b34f6bcf021",
+    "/app/assets/i18n/homegenie/en.json": "8201bd76642315d88017321b77995a4a6a34c1b1",
+    "/app/assets/i18n/homegenie/it.json": "168e53b0be219d8abf30bc787635151d172fdbfc",
+    "/app/assets/i18n/it.json": "1f61e6836506d2f1d569eebaa17c3d6127f6c86f",
     "/app/assets/i18n/module/en.json": "78357e1e0adcee2b80c71e596cc1f9581a22d8e9",
     "/app/assets/i18n/module/it.json": "cc900e710937c4f3d003f85e6943409bbdc4d2b3",
     "/app/assets/i18n/widgets/en.json": "81775f6536411948d4d4c6e054a768a21793ab24",
@@ -630,12 +630,12 @@
     "/app/assets/widgets/weather/images_alt/weather.svg": "73ab65b876b20b345dd8f397550fcf9226cad7c1",
     "/app/assets/widgets/weather/style.css": "1b70730e73885cc0ee83566eaf584008d34e2255",
     "/app/assets/workers/typings-worker.js": "be92b854a22224e5f740eafedea86523affc1ff2",
-    "/app/index.html": "917053893418e2a8f57a9e7ce048aa08db904f3c",
-    "/app/main.1c4a82a7e01cadf5.js": "9ccfbcca8bf9b0f00c1ed7037abdbc08b15409e9",
+    "/app/index.html": "8c13f375ad99aee4a6609c9bb99ee147638aa945",
+    "/app/main.2190347d578b0732.js": "ecac267e18b5552619e8b0dff73c1644dd2405c5",
     "/app/manifest.webmanifest": "d47bb07a495e27ddf072f8702df373f79b4eb183",
     "/app/polyfills.710b144f4805f4b0.js": "594a5ea1b9d3f9cbc4f363eca84eda2c8bb8a901",
     "/app/runtime.b92e2ca178ebbf4a.js": "b50d841a4c50d466c34aab3267d3fb4afe87dede",
-    "/app/styles.2a2ec851e1022121.css": "12b5e3778df4278479dc966d4af5ea6d459a5285"
+    "/app/styles.01d0686c443814d4.css": "ab1888a63ae950e6793f596add344c0b67f5611d"
   },
   "navigationUrls": [
     {

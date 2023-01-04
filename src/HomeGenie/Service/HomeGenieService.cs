@@ -1046,7 +1046,7 @@ namespace HomeGenie.Service
                 //
                 foreach (var virtualModule in virtualModules)
                 {
-                    if (!virtualModule.IsActive) continue;
+                    if (!virtualModule.IsActive || masterControlProgram == null) continue;
                     ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
                     Module module = Modules.Find(o => {
                         // main program module...
