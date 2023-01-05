@@ -367,7 +367,6 @@ namespace HomeGenie.Automation.Scripting
                 }
                 Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
             }
-            homegenie.RaiseEvent(this, myProgramDomain, myProgramId.ToString(), "", Properties.ProgramEvent, $"MODULE_ADDED {domain}:{address}");
             return this;
         }
 
@@ -410,7 +409,6 @@ namespace HomeGenie.Automation.Scripting
                     Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
                     homegenie.RaiseEvent(this, module.Domain, module.Address, "", Properties.WidgetDisplayModule, widget);
                 }
-                homegenie.RaiseEvent(this, myProgramDomain, myProgramId.ToString(), "", Properties.ProgramEvent, $"MODULE_ADDED {virtualModule.Domain}:{virtualModule.Address}");
             }
             return this;
         }
@@ -881,6 +879,7 @@ namespace HomeGenie.Automation.Scripting
                     Value = widget
                 });
                 homegenie.VirtualModules.Add(virtualModule);
+                homegenie.RaiseEvent(this, myProgramDomain, myProgramId.ToString(), "", Properties.ProgramEvent, $"MODULE_ADDED {virtualModule.Domain}:{virtualModule.Address}");
             }
             else
             {

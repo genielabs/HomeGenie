@@ -12,7 +12,7 @@ var gpio_pins = new string[]{
 	"GPIO27 (pin 13)=27",
 	"GPIO22 (pin 15)=22",
 
-	"GPIO4 (pin 7)=7",
+	"GPIO4 (pin 7)=4",
 	"GPIO5 (pin 29)=5",
 	"GPIO6 (pin 31)=6",
 	"GPIO13 (pin 33)=13",
@@ -149,7 +149,7 @@ Program.GoBackground();
       <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>6F5D22E597CF667BD80769C4BB671D0F</Checksum>
+      <Checksum>795FF6FB11DE1010D18E755A4EF50A95</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>

@@ -91,7 +91,7 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -294,8 +294,9 @@ var cfg = new PinConfiguration[1] {
 
 // Add virtual module for this switch
 const string moduleDomain = "RaspberryPi.GPIO";
-Program.AddModule(moduleDomain, Program.Option("GPIO.Pin").Value, "Switch", "homegenie/generic/switch");
-var mod = Modules.InDomain(moduleDomain).WithAddress(pinName).Get();
+string moduleAddress = PinMapping.ToProcessor(pin).ToString().Substring(3); // get GPIO#
+Program.AddModule(moduleDomain, moduleAddress, "Switch", "homegenie/generic/switch");
+var mod = Modules.InDomain(moduleDomain).WithAddress(moduleAddress).Get();
 
 // Allocate GPIO connection
 GpioConnection connection = null;
@@ -375,7 +376,7 @@ if (pinMode == 1) { // Output
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -383,7 +384,7 @@ Program.GoBackground();
       <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>8C68A50941978859D4133B34B168CA7B</Checksum>
+      <Checksum>305F46ABBF0DC22F1DC4630DC48E65DA</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>600</Address>
