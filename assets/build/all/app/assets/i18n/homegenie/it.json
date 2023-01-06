@@ -271,7 +271,7 @@
           "Title":
               "Sistema di allarme",
           "Description":
-              "",
+              "Usa sensori e altri dispositivi per implementare un sistema di allarme.",
           "HomeGenie.SecurityAlarm":
               "Usa come allarme/strobo",
           "HomeGenie.SecuritySensor":
@@ -320,7 +320,7 @@
       },
 
       "410": {
-        "Title": "Simulatore sensore",
+        "Title": "Simula sensore",
         "Description": "Genera valori sensore casuali.",
         "Simulator.Sensor.Temperature": "Sensore temperatura",
         "Simulator.Sensor.Humidity": "Sensore umidità",

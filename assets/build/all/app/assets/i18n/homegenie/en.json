@@ -266,7 +266,7 @@
         "Title":
             "Security Alarm System",
         "Description":
-            "",
+            "Use sensors and other devices to implement a security alarm system.",
         "HomeGenie.SecurityAlarm":
             "Use as alarm/strobe",
         "HomeGenie.SecuritySensor":

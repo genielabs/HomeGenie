@@ -723,7 +723,7 @@ while (Program.IsRunning)
   Pause(1);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -736,7 +736,7 @@ while (Program.IsRunning)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
     <Name>Security Alarm System</Name>
-    <Description />
+    <Description>Use sensors and other devices to implement a security alarm system.</Description>
     <Group>Security</Group>
     <Features>
       <ProgramFeature>
@@ -859,7 +859,7 @@ while (Program.IsRunning)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>

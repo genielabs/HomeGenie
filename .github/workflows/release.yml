@@ -105,5 +105,5 @@ jobs:
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
-            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}.tgz
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_update.tgz
             ./src/HomeGenie/bin/Release/artifacts/homegenie_api.tgz
