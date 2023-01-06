@@ -62,7 +62,7 @@ then
 	echo "\n... done!\n"
 
 	cd "$target_folder/$deploy_folder/"
-	tar -czvf "${base_folder}/homegenie_${homegenie_version}.tgz" homegenie
+	tar -czvf "${base_folder}/homegenie_${homegenie_version}_update.tgz" homegenie
 	rm -rf "$target_folder"; break;
 	cd "$_cwd"
 

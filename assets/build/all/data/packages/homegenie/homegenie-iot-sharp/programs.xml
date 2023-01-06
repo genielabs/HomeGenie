@@ -45,22 +45,23 @@ When.ModuleParameterChanged((module, property) =&gt; {
   return true;
 });
 
+var notificationButtons = " [program_configure,program_disable]";
 var pinName = "P1Pin" + Program.Option("GPIO.Pin").Value;
 if (pinName.Length &lt; 6) {
-  Program.Notify("Data pin not selected. [program_configure,program_disable]");
+  Program.Notify("Data pin not selected." + notificationButtons);
   Pause(10);
   return;
 }
 
+var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
 var moduleDomain = "Components.DHT11";
-var moduleAddress = Program.Option("GPIO.Pin").Value;
+var moduleAddress = PinMapping.ToProcessor(measurePin).ToString().Substring(3); // get GPIO#
 
 Program.AddModule(moduleDomain, moduleAddress, "Sensor");
 var dhtModule = Modules
     .InDomain(moduleDomain)
     .WithAddress(moduleAddress).Get();
 
-var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
 while (Program.IsEnabled)
 {
   try {
@@ -78,12 +79,12 @@ while (Program.IsEnabled)
       }
       else
       {
-        Program.Notify("Could not read data from sensor.");
+        Program.Notify("Could not read data from sensor." + notificationButtons);
       }
     }
     driver.Release(measurePin.ToProcessor());
   } catch (Exception e) {
-    Program.Notify("Error: " + e.Message);
+    Program.Notify("Error: " + e.Message + notificationButtons);
   }
 
   var pause = Program.Option("UpdateInterval").DecimalValue;
@@ -99,7 +100,7 @@ while (Program.IsEnabled)
       <Id>dht-11-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>3234723AF61E1E52FD1B134162E88093</Checksum>
+      <Checksum>5B3725F5FE83220E35714F1975D96E08</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>601</Address>
@@ -111,7 +112,7 @@ while (Program.IsEnabled)
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>var gpio_pins = new string[]{
@@ -158,22 +159,23 @@ When.ModuleParameterChanged((module, property) =&gt; {
   return true;
 });
 
+var notificationButtons = " [program_configure,program_disable]";
 var pinName = "P1Pin" + Program.Option("GPIO.Pin").Value;
 if (pinName.Length &lt; 6) {
-  Program.Notify("Data pin not selected. [program_configure,program_disable]");
+  Program.Notify("Data pin not selected." + notificationButtons);
   Pause(10);
   return;
 }
 
+var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
 var moduleDomain = "Components.DHT22";
-var moduleAddress = Program.Option("GPIO.Pin").Value;
+var moduleAddress = PinMapping.ToProcessor(measurePin).ToString().Substring(3); // get GPIO#
 
 Program.AddModule(moduleDomain, moduleAddress, "Sensor");
 var dhtModule = Modules
     .InDomain(moduleDomain)
     .WithAddress(moduleAddress).Get();
 
-var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
 while (Program.IsEnabled)
 {
   try {
@@ -189,19 +191,19 @@ while (Program.IsEnabled)
           .Emit("Sensor.Humidity", data.RelativeHumidity.Percent)
           .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius);
       } else {
-        Program.Notify("Could not read data from sensor.");
+        Program.Notify("Could not read data from sensor." + notificationButtons);
       }
     }
     driver.Release(measurePin.ToProcessor());
   } catch (Exception e) {
-    Program.Notify("Error: " + e.Message);
+    Program.Notify("Error: " + e.Message + notificationButtons);
   }
   var pause = Program.Option("UpdateInterval").DecimalValue;
   if (pause == 0) pause = 60; // default pause is 1 minute
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -209,7 +211,7 @@ while (Program.IsEnabled)
       <Id>dht-22-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>32EC4F6125839F3530864EB9A1D66F0E</Checksum>
+      <Checksum>E9C49D8CC86C290E29DFA814CBEDC004</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>602</Address>
@@ -221,7 +223,7 @@ while (Program.IsEnabled)
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>var gpio_pins = new string[]{
@@ -376,7 +378,7 @@ if (pinMode == 1) { // Output
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -388,7 +390,7 @@ Program.GoBackground();
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>600</Address>
-    <Name>GPIO Pin</Name>
+    <Name>GPIO Pin v.1</Name>
     <Description>Configurable GPIO pin as binary input sensor or output switch.
 (RaspberrySharp.IO)
 </Description>

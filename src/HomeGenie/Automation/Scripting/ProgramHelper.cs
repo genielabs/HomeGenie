@@ -798,7 +798,6 @@ namespace HomeGenie.Automation.Scripting
                             virtualModule.Properties.Add(p);
                         }
                     }
-                    homegenie.RaiseEvent(this, myProgramDomain, myProgramId.ToString(), "", Properties.ProgramEvent, $"MODULE_REMOVED {m.Domain}:{m.Address}");
                     return true;
                 }
                 return false;

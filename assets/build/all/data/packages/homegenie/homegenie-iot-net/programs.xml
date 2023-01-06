@@ -42,11 +42,21 @@ Program.Run();
 // Device Bindings:
 //   https://github.com/dotnet/iot/blob/main/src/devices/README.md
 
+// Restart when the Pin configuration changes
+When.ModuleParameterChanged((module, parameter) =&gt; {
+    if (module.Get().Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.GPIO.Pin"))
+    {
+        Program.Restart();
+    }
+    return true;
+});
+
 // Pin allocation/deallocation
+var notificationButtons = " [program_configure,program_disable]";
 var pinMode = (PinMode)Program.Option("GPIO.Pin.Mode").DecimalValue;
 int pin = (int)Program.Option("GPIO.Pin").DecimalValue;
 if (pin &lt;= 0) {
-    Program.Notify("GPIO pin not selected. [program_configure,program_disable]");
+    Program.Notify("GPIO pin not selected." + notificationButtons);
     Pause(10);
     return;
 }
@@ -75,7 +85,7 @@ try
         pinValueChangeHandler
     );        
 } catch(Exception e) {
-    Program.Notify("Error opening GPIO " + pin + ": " + e.Message);
+    Program.Notify("Error opening GPIO " + pin + ": " + e.Message + notificationButtons);
     Pause(10);
     return;
 }
@@ -122,26 +132,9 @@ else
     mod.Emit("Widget.DisplayModule", "homegenie/generic/sensor");
 }
 
-// Reallocate GPIO connection when the Pin configuration changes
-When.ModuleParameterChanged((module, parameter) =&gt; {
-    if (module.Get().Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.GPIO.Pin"))
-    {
-        int pin = (int)module.Parameter("ConfigureOptions.GPIO.Pin").DecimalValue;
-        if (pin == 0)
-        {
-            Program.Notify("Please select GPIO pin to use");
-        }
-        else
-        {
-            Program.Restart();
-        }
-    }
-    return true;
-});
-
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-net</PackageId>
@@ -149,11 +142,11 @@ Program.GoBackground();
       <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>795FF6FB11DE1010D18E755A4EF50A95</Checksum>
+      <Checksum>0AFBB9E097E528D743ADB886F0EC5035</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>
-    <Name>GPIO Pin</Name>
+    <Name>GPIO Pin v.2</Name>
     <Description>Configurable GPIO pin as binary input sensor or output switch.
 (.NET IoT bindings)
 </Description>

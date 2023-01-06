@@ -771,8 +771,8 @@ while (Program.IsRunning)
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
   .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:1")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:50:300")
+  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30:30")
   .Run();
 </ScriptSetup>
     <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
@@ -867,7 +867,7 @@ while (Program.IsRunning)
       <Id>smart-device</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>B5AD0D1901B26BFB336454BC131F43C2</Checksum>
+      <Checksum>650F5EB6A0A23A98048743DF3C5868AE</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -897,14 +897,14 @@ while (Program.IsRunning)
         <Description>Controlled by luminance sensor (optional)</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>slider:0:1000:1</FieldType>
+        <FieldType>slider:0:1000:50:300</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.SmartLights.MinLuminance</Property>
         <Description>Trigger if luminance is below</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>slider:30:3600:30</FieldType>
+        <FieldType>slider:30:3600:30:30</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>

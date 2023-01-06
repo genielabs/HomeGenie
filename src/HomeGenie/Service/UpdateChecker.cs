@@ -1,4 +1,4 @@
-﻿﻿/*
+﻿/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -113,7 +113,6 @@ namespace HomeGenie.Service
         private const string releaseFile = "release_info.xml";
         private const string githubRepository = "HomeGenie";
         private string githubReleases = String.Format("https://api.github.com/repos/genielabs/{0}/releases", githubRepository);
-        private string releaseNameFilter = "-stable.";
 
         private ReleaseInfo currentRelease;
         private List<ReleaseInfo> remoteUpdates;
@@ -261,7 +260,7 @@ namespace HomeGenie.Service
                         foreach (dynamic relFile in ((JArray)rel.assets))
                         {
                             string relFileName = relFile.browser_download_url.ToString();
-                            if (relFileName.IndexOf(releaseNameFilter, StringComparison.Ordinal) > 0 && relFileName.EndsWith(".tgz"))
+                            if (relFileName.StartsWith("homegenie_") && relFileName.EndsWith("_update.tgz"))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                                 releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();

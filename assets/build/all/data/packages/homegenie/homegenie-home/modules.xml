@@ -447,7 +447,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.MinLuminance</Name>
-        <Value />
+        <Value>300</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -463,7 +463,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
+        <Value>30</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -657,7 +657,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.MinLuminance</Name>
-        <Value />
+        <Value>300</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -673,7 +673,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
+        <Value>30</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -907,7 +907,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
-        <Value />
+        <Value>30</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -947,7 +947,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Sensor.DataFrequency</Name>
-        <Value>0.5</Value>
+        <Value>1</Value>
         <Description>Simulator emit frequency</Description>
         <FieldType>slider:0.5:60:0.5:30</FieldType>
         <ParentId>0</ParentId>
