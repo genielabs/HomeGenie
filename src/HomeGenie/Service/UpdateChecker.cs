@@ -260,7 +260,7 @@ namespace HomeGenie.Service
                         foreach (dynamic relFile in ((JArray)rel.assets))
                         {
                             string relFileName = relFile.browser_download_url.ToString();
-                            if (relFileName.StartsWith("homegenie_") && relFileName.EndsWith("_update.tgz"))
+                            if (relFileName.IndexOf("/homegenie_", StringComparison.Ordinal) > 0 && relFileName.EndsWith("_update.tgz"))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                                 releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();
