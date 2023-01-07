@@ -60,7 +60,7 @@ namespace HomeGenie.Service
         public static T DeepClone<T>(this T source)
         {
             // Don't serialize a null object, simply return the default for that object
-            if (Object.ReferenceEquals(source, null))
+            if (ReferenceEquals(source, null))
             {
                 return default(T);
             }
@@ -250,7 +250,7 @@ namespace HomeGenie.Service
                 var resolver = new IgnorePropertyContractResolver(new List<string>{ "Properties" });
                 settings.ContractResolver = resolver;
             }
-            return JsonConvert.SerializeObject(module, settings);
+            return JsonConvert.SerializeObject(module.Clone(), settings);
         }
 
         public static string JsonEncode(string fieldValue)

@@ -90,6 +90,11 @@ namespace HomeGenie.Data
             Stores = new TsList<Store>();
         }
 
+        public Module Clone()
+        {
+            return (Module)MemberwiseClone();
+        }
+
     }
 }
 
