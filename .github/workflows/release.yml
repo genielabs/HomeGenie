@@ -26,9 +26,7 @@ jobs:
       - name: Zip release bundles
         run: |
           ./assets/deploy/linux/pack-all.sh
-          cd ..
-          pwd
-          ls -la ./artifacts/
+          ls -la ./src/HomeGenie/bin/Release/artifacts/
 
       - name: Build debian package and docs
         run: |
