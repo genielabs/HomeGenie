@@ -30,7 +30,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using HomeGenie.Service.Logging;
 using Group = HomeGenie.Data.Group;
 
 namespace HomeGenie.Service
@@ -180,11 +179,34 @@ namespace HomeGenie.Service
             {
                 File.Copy(Path.Combine(archiveFolder, PackageManager.PACKAGE_LIST_FILE), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PackageManager.PACKAGE_LIST_FILE), true);
                 // Restore packages from "installed_packages.json"
-                string installFolder = Path.Combine(archiveFolder, "pkg");
                 List<dynamic> pkgList = homegenie.PackageManager.LoadInstalledPackages();
                 foreach (var pkg in pkgList)
                 {
-                    success = success && homegenie.PackageManager.InstallPackage(pkg.folder_url.ToString(), installFolder);
+                    bool installed;
+                    string packageId = "";
+                    if (pkg.folder_url != null)
+                    {
+                        // TODO: old package format --- to be deprecated
+                        string installFolder = Path.Combine(archiveFolder, "pkg");
+                        packageId = pkg.folder_url.ToString();
+                        installed = homegenie.PackageManager.InstallPackageOld(packageId, installFolder);
+                        success = success && installed;
+                    }
+                    else
+                    {
+                        packageId = pkg.repository.ToString() + "/" + pkg.package.ToString();
+                        installed = homegenie.PackageManager.InstallPackage(pkg.repository.ToString(), pkg.package.ToString());
+                        success = success && installed;
+                    }
+                    homegenie.RaiseEvent(
+                        Domains.HomeGenie_System,
+                        Domains.HomeGenie_BackupRestore,
+                        SourceModule.Master,
+                        "HomeGenie Backup Restore",
+                        Properties.InstallProgressMessage,
+                        installed ? "= Restored: Package '" + packageId + "'"
+                            : "= Error: Could not restore package '" + packageId + "'"
+                    );
                 }
             }
             // Update program database after package restore

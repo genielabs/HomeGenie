@@ -52,6 +52,8 @@ namespace HomeGenie.Service
 
         public DateTime ReleaseDate { get; set; }
 
+        public string Runtime { get; set; }
+
         public string DownloadUrl;
         public bool RequireRestart;
         public bool UpdateBreak;
@@ -260,7 +262,7 @@ namespace HomeGenie.Service
                         foreach (dynamic relFile in ((JArray)rel.assets))
                         {
                             string relFileName = relFile.browser_download_url.ToString();
-                            if (relFileName.IndexOf("/homegenie_", StringComparison.Ordinal) > 0 && relFileName.EndsWith("_update.tgz"))
+                            if (relFileName.IndexOf("/homegenie_", StringComparison.Ordinal) > 0 && relFileName.EndsWith($"_{currentRelease.Runtime}.zip"))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                                 releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();
@@ -275,6 +277,7 @@ namespace HomeGenie.Service
                                     r.UpdateBreak = true; // TODO: store this flag somewhere in the github entry
                                     r.DownloadUrl = relFile.browser_download_url.ToString();
                                     r.ReleaseDate = releaseDate;
+                                    r.Runtime = currentRelease.Runtime;
                                     remoteUpdates.Add(r);
                                 }
                                 else if (currentRelease != null && currentRelease.ReleaseDate < releaseDate)
@@ -391,7 +394,9 @@ namespace HomeGenie.Service
                 ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
 
             bool errorOccurred = false;
-            var files = Utility.UncompressTgz(archiveName, destinationFolder);
+            var files = archiveName.EndsWith(".tgz")
+                ? Utility.UncompressTgz(archiveName, destinationFolder)
+                : Utility.UncompressZip(archiveName, destinationFolder);
             errorOccurred = (files.Count == 0);
 
             if (ArchiveDownloadUpdate != null)
@@ -488,7 +493,7 @@ namespace HomeGenie.Service
                     if (!processFile) continue;
 
                     // Some files needs to be handled differently than just copying
-                    if (destinationFile.EndsWith(".xml") && File.Exists(destinationFile))
+                    if ((destinationFile.EndsWith(".xml") || destinationFile.EndsWith(".json")) && File.Exists(destinationFile))
                     {
                         switch (destinationFile)
                         {
@@ -518,13 +523,16 @@ namespace HomeGenie.Service
                                 doNotCopy = true;
                                 status = UpdateSystemConfig(file) ? InstallStatus.Success : InstallStatus.Error;;
                                 break;
+                            case "installed_packages.json":
+                                doNotCopy = true;
+                                break;
                         }
                         if (status == InstallStatus.Error)
                         {
                             break;
                         }
                     }
-                    else if (destinationFile.EndsWith(".pdb"))
+                    else if (destinationFile == "HomeGenie" || destinationFile.EndsWith(".pdb"))
                     {
                         doNotCopy = true;
                     }

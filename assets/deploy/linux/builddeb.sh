@@ -27,7 +27,7 @@ if [ -d "${target_folder}" ]
 then
 
 	base_folder=$target_folder
-	target_folder="${target_folder}/homegenie_${homegenie_version}_all"
+	target_folder="${target_folder}/homegenie_${homegenie_version}_net472"
 
 	mkdir -p "$target_folder/$deploy_folder/homegenie"
 
@@ -61,9 +61,9 @@ then
 
 	echo "\n... done!\n"
 
-	cd "$target_folder/$deploy_folder/"
-	tar -czvf "${base_folder}/homegenie_${homegenie_version}_update.tgz" homegenie
-	rm -rf "$target_folder"; break;
+#	cd "$target_folder/$deploy_folder/"
+#	tar -czvf "${base_folder}/homegenie_${homegenie_version}_update.tgz" homegenie
+#	rm -rf "$target_folder"; break;
 	cd "$_cwd"
 
  	ls -la "${base_folder}"

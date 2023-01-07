@@ -1636,9 +1636,9 @@ namespace HomeGenie.Service.Handlers
 
             case "Packages.Install":
             {
-                var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", migCommand.GetOption(0),
-                    migCommand.GetOption(1), "package.json");
-                if (homegenie.PackageManager.InstallPackage(packageFile))
+                var repository = migCommand.GetOption(0);
+                var package = migCommand.GetOption(1);
+                if (homegenie.PackageManager.InstallPackage(repository, package))
                 {
                     request.ResponseData = new ResponseStatus(Status.Ok);
                 }
@@ -1651,9 +1651,9 @@ namespace HomeGenie.Service.Handlers
 
             case "Packages.Uninstall":
             {
-                var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", migCommand.GetOption(0),
-                    migCommand.GetOption(1), "package.json");
-                if (homegenie.PackageManager.UninstallPackage(packageFile))
+                var repository = migCommand.GetOption(0);
+                var package = migCommand.GetOption(1);
+                if (homegenie.PackageManager.UninstallPackage(repository, package))
                 {
                     request.ResponseData = new ResponseStatus(Status.Ok);
                 }
@@ -1674,7 +1674,7 @@ namespace HomeGenie.Service.Handlers
             case "Package.Get":
                 {
                     string pkgFolderUrl = migCommand.GetOption(0);
-                    var pkg = homegenie.PackageManager.GetInstalledPackage(pkgFolderUrl);
+                    var pkg = homegenie.PackageManager.GetInstalledPackageOld(pkgFolderUrl);
                     request.ResponseData = pkg;
                 }
                 break;
@@ -1687,7 +1687,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     string pkgFolderUrl = migCommand.GetOption(0);
                     string installFolder = Path.Combine(tempFolderPath, "pkg");
-                    bool success = homegenie.PackageManager.InstallPackage(pkgFolderUrl, installFolder);
+                    bool success = homegenie.PackageManager.InstallPackageOld(pkgFolderUrl, installFolder);
                     if (success)
                     {
                         homegenie.UpdateProgramsDatabase();

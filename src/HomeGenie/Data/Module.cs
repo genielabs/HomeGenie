@@ -92,7 +92,17 @@ namespace HomeGenie.Data
 
         public Module Clone()
         {
-            return (Module)MemberwiseClone();
+            var module = new Module()
+            {
+                Domain = Domain,
+                Address = Address,
+                DeviceType = DeviceType,
+                Name = Name,
+                Description = Description,
+                Properties = new TsList<ModuleParameter>(Properties),
+                Stores = new TsList<Store>(Stores)
+            };
+            return module;
         }
 
     }

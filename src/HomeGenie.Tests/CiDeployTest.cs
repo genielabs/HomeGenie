@@ -36,7 +36,7 @@ namespace HomeGenie.Tests
                 // add 15 minutes to prevent github release date
                 // be greater than actual release build date
                 releaseInfo.ReleaseDate = DateTime.UtcNow.AddHours(0.25);
-                releaseInfo.Description = "HomeGenie "+releaseTag;
+                releaseInfo.Description = "HomeGenie " + releaseTag;
                 XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo));
                 using (TextWriter writer = new StreamWriter(releaseFile))
                 {

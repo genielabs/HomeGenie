@@ -5,4 +5,5 @@
   <Description>Latest public release.</Description>
   <ReleaseNote></ReleaseNote>
   <ReleaseDate>2022-12-31T23:00:00.0000Z</ReleaseDate>
+  <Runtime>%runtime%</Runtime>
 </ReleaseInfo>

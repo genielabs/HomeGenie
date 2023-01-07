@@ -24,6 +24,7 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using HomeGenie.Automation;
 using HomeGenie.Automation.Scheduler;
@@ -172,8 +173,10 @@ namespace HomeGenie.Service
             return packagesList;
         }
 
-        public bool InstallPackage(string packageFile)
+        public bool InstallPackage(string repository, string package)
     {
+            var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", repository,
+                package, "package.json");
             var packageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
             string repositoryFolder = Path.Combine(Utility.GetDataFolder(), "packages", packageData.Repository);
             string programsDatabase = Path.Combine(repositoryFolder, packageData.Id, "programs.xml");
@@ -302,11 +305,21 @@ namespace HomeGenie.Service
                     homegenie.UpdateSchedulerDatabase();
                 }
             }
+
+            dynamic pkgData = new ExpandoObject();
+            pkgData.repository = repository;
+            pkgData.package = package;
+            pkgData.version = packageData.Version;
+            pkgData.install_date = DateTime.UtcNow;
+            AddInstalledPackage(pkgData);
+
             return true;
         }
 
-        public bool UninstallPackage(string packageFile)
+        public bool UninstallPackage(string repository, string package)
         {
+            var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", repository,
+                package, "package.json");
             var packageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
             foreach (var item in packageData.Programs)
             {
@@ -323,6 +336,7 @@ namespace HomeGenie.Service
                 // TODO: should also remove modules from groups?
                 // TODO: should also remove groups and schedules?
             }
+            RemoveInstalledPackage(repository, package);
             return true;
         }
 
@@ -531,7 +545,7 @@ namespace HomeGenie.Service
         #endregion
         
 
-        public bool InstallPackage(string pkgFolderUrl, string tempFolderPath)
+        public bool InstallPackageOld(string pkgFolderUrl, string tempFolderPath)
         {
             string installFolder = Path.Combine(tempFolderPath, "pkg");
             dynamic pkgData = null;
@@ -780,7 +794,7 @@ namespace HomeGenie.Service
             {
                 pkgData.folder_url = pkgFolderUrl;
                 pkgData.install_date = DateTime.UtcNow;
-                AddInstalledPackage(pkgData);
+                AddInstalledPackageOld(pkgData);
                 homegenie.RaiseEvent(
                     Domains.HomeGenie_System,
                     Domains.HomeGenie_PackageInstaller,
@@ -805,20 +819,9 @@ namespace HomeGenie.Service
             return success;
         }
 
-        public dynamic GetInstalledPackage(string pkgFolderUrl)
-        {
-            List<dynamic> pkgList = LoadInstalledPackages();
-            return pkgList.Find(p => p.folder_url.ToString() == pkgFolderUrl);
-        }
-
-        public void AddInstalledPackage(dynamic pkgObject)
-        {
-            List<dynamic> pkgList = LoadInstalledPackages();
-            pkgList.RemoveAll(p => p.folder_url.ToString() == pkgObject.folder_url.ToString());
-            pkgList.Add(pkgObject);
-            File.WriteAllText(PackageManager.PACKAGE_LIST_FILE, JsonConvert.SerializeObject(pkgList, Formatting.Indented));
-        }
-
+        
+        
+        
         public List<dynamic> LoadInstalledPackages()
         {
             List<dynamic> pkgList = new List<dynamic>();
@@ -834,6 +837,38 @@ namespace HomeGenie.Service
                 }
             }
             return pkgList;
+        }
+
+        public void AddInstalledPackage(dynamic pkgObject)
+        {
+            List<dynamic> pkgList = LoadInstalledPackages();
+            pkgList.RemoveAll(p =>
+                p.repository.ToString() == pkgObject.repository.ToString()
+                && p.package.ToString() == pkgObject.package.ToString());
+            pkgList.Add(pkgObject);
+            File.WriteAllText(PackageManager.PACKAGE_LIST_FILE, JsonConvert.SerializeObject(pkgList, Formatting.Indented));
+        }
+        public void RemoveInstalledPackage(string repository, string package)
+        {
+            List<dynamic> pkgList = LoadInstalledPackages();
+            pkgList.RemoveAll(p =>
+                p.repository.ToString() == repository
+                && p.package.ToString() == package);
+            File.WriteAllText(PackageManager.PACKAGE_LIST_FILE, JsonConvert.SerializeObject(pkgList, Formatting.Indented));
+        }
+
+        public dynamic GetInstalledPackageOld(string pkgFolderUrl)
+        {
+            List<dynamic> pkgList = LoadInstalledPackages();
+            return pkgList.Find(p => p.folder_url.ToString() == pkgFolderUrl);
+        }
+
+        public void AddInstalledPackageOld(dynamic pkgObject)
+        {
+            List<dynamic> pkgList = LoadInstalledPackages();
+            pkgList.RemoveAll(p => p.folder_url.ToString() == pkgObject.folder_url.ToString());
+            pkgList.Add(pkgObject);
+            File.WriteAllText(PackageManager.PACKAGE_LIST_FILE, JsonConvert.SerializeObject(pkgList, Formatting.Indented));
         }
 
         public Interface GetInterfaceConfig(string configFile)

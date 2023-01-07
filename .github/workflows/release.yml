@@ -12,13 +12,6 @@ jobs:
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo "VERSION_NUMBER=$(echo ${GITHUB_REF#refs/*/} | cut -d"v" -f 2)" >> $GITHUB_ENV
 
-      - name: Test
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
-          echo $VERSION_NUMBER
-          echo ${{ env.VERSION_NUMBER }}
-
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
@@ -27,60 +20,12 @@ jobs:
       - name: Build release
         run: |
           dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net6.0
-          cat ./src/HomeGenie/release_info.xml 
-          dotnet publish --framework net472 --configuration Release
-          rm -rf ./src/HomeGenie/bin/Release/net472/publish
-          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net472/
-          ls -la ./src/HomeGenie/bin/Release/net472/
-          dotnet publish --configuration Release --framework net6.0 --runtime linux-arm   --self-contained
-          rm -rf ./src/HomeGenie/bin/Release/net6.0/linux-arm/publish
-          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net6.0/linux-arm/
-          ls -la ./src/HomeGenie/bin/Release/net6.0/linux-arm
-          dotnet publish --configuration Release --framework net6.0 --runtime linux-arm64 --self-contained
-          rm -rf ./src/HomeGenie/bin/Release/net6.0/linux-arm64/publish
-          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net6.0/linux-arm64/
-          ls -la ./src/HomeGenie/bin/Release/net6.0/linux-arm64
-          dotnet publish --configuration Release --framework net6.0 --runtime osx-x64     --self-contained
-          rm -rf ./src/HomeGenie/bin/Release/net6.0/osx-x64/publish
-          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net6.0/osx-x64/
-          ls -la ./src/HomeGenie/bin/Release/net6.0/osx-x64
-          dotnet publish --configuration Release --framework net6.0 --runtime linux-x64   --self-contained
-          rm -rf ./src/HomeGenie/bin/Release/net6.0/linux-x64/publish
-          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net6.0/linux-x64/
-          ls -la ./src/HomeGenie/bin/Release/net6.0/linux-x64
-          dotnet publish --configuration Release --framework net6.0 --runtime win-x64     --self-contained
-          rm -rf ./src/HomeGenie/bin/Release/net6.0/win-x64/publish
-          cp ./src/HomeGenie/release_info.xml ./src/HomeGenie/bin/Release/net6.0/win-x64/
-          ls -la ./src/HomeGenie/bin/Release/net6.0/win-x64
+          cat ./src/HomeGenie/release_info.xml
+          ./assets/deploy/linux/build-all.sh
 
       - name: Zip release bundles
         run: |
-          cd ./src/HomeGenie/bin/Release/
-          mkdir artifacts
-          mv net472 homegenie
-          zip homegenie_${{ env.VERSION_NUMBER }}_net472.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_net472.zip ./artifacts/
-          cd net6.0
-          mv linux-arm homegenie
-          zip homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_linux-arm.zip ../artifacts/
-          rm -rf homegenie
-          mv linux-arm64 homegenie
-          zip homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_linux-arm64.zip ../artifacts/
-          rm -rf homegenie
-          mv osx-x64 homegenie
-          zip homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip ../artifacts/
-          rm -rf homegenie
-          mv linux-x64 homegenie
-          zip homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip ../artifacts/
-          rm -rf homegenie
-          mv win-x64 homegenie
-          zip homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip -r homegenie
-          mv homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip ../artifacts/
-          rm -rf homegenie
+          ./assets/deploy/linux/pack-all.sh
           cd ..
           pwd
           ls -la ./artifacts/
@@ -104,6 +49,5 @@ jobs:
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
-            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_all.deb
-            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_update.tgz
+            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.deb
             ./src/HomeGenie/bin/Release/artifacts/homegenie_api.tgz
