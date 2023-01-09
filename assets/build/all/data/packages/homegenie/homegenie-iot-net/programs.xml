@@ -61,7 +61,7 @@ if (pin &lt;= 0) {
     return;
 }
 
-var moduleDomain = "RasperryPi.GPIO";
+var moduleDomain = "RaspberryPi.GPIO";
 var moduleAddress = pin.ToString();
 Program.AddModule(moduleDomain, moduleAddress, pinMode == PinMode.Output ? "Switch" : "Sensor");
 var mod = Modules
@@ -134,7 +134,7 @@ else
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-net</PackageId>
@@ -142,7 +142,7 @@ Program.GoBackground();
       <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>0AFBB9E097E528D743ADB886F0EC5035</Checksum>
+      <Checksum>8D2DE2B78F2CC89AA63523DFA3624457</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>

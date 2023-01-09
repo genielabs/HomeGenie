@@ -60,6 +60,7 @@ namespace HomeGenie.Service
             // Add USER-SPACE program files (only for arduino-type programs)
             foreach (var program in homegenie.ProgramManager.Programs)
             {
+                // TODO: deprecate Arduino??
                 if (program.Type.ToLower() == "arduino" && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START))
                 {
                     string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
@@ -95,14 +96,38 @@ namespace HomeGenie.Service
                 {
                     // exclude Pepper1 Db from backup (only the p1db_custom.xml file will be included)
                     // in the future the p1db.xml file should be moved to a different path
+                    // TODO: "p1db.xml" is now deprecated, this check could be removed
                     if (Path.GetFileName(f) != "p1db.xml")
                         Utility.AddFileToZip(archiveName, f);
                 }
+            }
+            // Backup files explicitly declared by programs using `Data.AddToSystemBackup(..)` method
+            var programs = homegenie.ProgramManager.Programs
+                .Where(p => p.BackupFiles.Count > 0);
+            foreach (var p in programs)
+            {
+                p.BackupFiles.ForEach((bf) =>
+                {
+                    string relativePath = Utility.GetRelativePath(Directory.GetCurrentDirectory(), bf);
+                    if (Directory.Exists(relativePath))
+                    {
+                        var directoryFiles = Directory.EnumerateFiles(bf, "*", SearchOption.AllDirectories);
+                        foreach (string file in directoryFiles)
+                        {
+                            Utility.AddFileToZip(archiveName, file);
+                        }
+                    }
+                    else if (File.Exists(relativePath))
+                    {
+                        Utility.AddFileToZip(archiveName, relativePath);
+                    }
+                });
             }
         }
 
         public bool RestoreConfiguration(string archiveFolder, string selectedPrograms)
         {
+            selectedPrograms = "," + selectedPrograms + ",";
             bool success = true;
             // Import automation groups
             List<Group> automationGroups;
@@ -242,17 +267,45 @@ namespace HomeGenie.Service
                     .ToList();
                 foreach (string f in files)
                 {
-                    File.Copy(f, Path.Combine("lib", "mig", Path.GetFileName(f)), true);
+                    string destinationFile = Path.Combine("lib", "mig", Path.GetFileName(f));
+                    File.Copy(f, destinationFile, true);
                     homegenie.RaiseEvent(
                         Domains.HomeGenie_System,
                         Domains.HomeGenie_BackupRestore,
                         SourceModule.Master,
                         "HomeGenie Backup Restore",
                         Properties.InstallProgressMessage,
-                        "= Restored: '" + Path.Combine("lib", "mig", Path.GetFileName(f)) + "'"
+                        "= Restored: '" + destinationFile + "'"
                     );
                 }
             }
+            
+            // Restore programs' data folder files
+            string backupDataFolder = Path.Combine(archiveFolder, Utility.GetDataFolder(), "programs");
+            if (Directory.Exists(backupDataFolder))
+            {
+                string dataFolder = Path.Combine(Utility.GetDataFolder(), "programs"); 
+                foreach (string file in Directory.EnumerateFiles(backupDataFolder, "*", SearchOption.AllDirectories))
+                {
+                    string destinationFolder = Path.GetDirectoryName(file).Replace(backupDataFolder, "").TrimStart('/').TrimStart('\\');
+                    destinationFolder = Path.Combine(dataFolder, destinationFolder);
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/').TrimStart('\\');
+                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    File.Copy(file, destinationFile, true);
+                    homegenie.RaiseEvent(
+                        Domains.HomeGenie_System,
+                        Domains.HomeGenie_BackupRestore,
+                        SourceModule.Master,
+                        "HomeGenie Backup Restore",
+                        Properties.InstallProgressMessage,
+                        "= Restored: '" + destinationFile + "'"
+                    );
+                }
+            }
+            
             // Soft-reload system configuration from newly restored files and save config
             homegenie.SoftReload();
             // Restore user-space automation programs

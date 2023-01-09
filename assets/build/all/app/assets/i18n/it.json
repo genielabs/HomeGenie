@@ -91,6 +91,7 @@
   "language": "Lingua",
   "change_language": "Cambia lingua",
   "autodetect": "Rileva automaticamente",
+  "active_client_configuration": "Configurazione client attiva",
   "regional_settings": "Impostazioni regionali",
   "regional_settings_info": "La località verrà usata dal sistema per calolare l'ora solare.",
   "location": "Località",

@@ -847,8 +847,7 @@ namespace HomeGenie.Automation.Scripting
 
         private ProgramBlock GetProgramBlock()
         {
-            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            return program;
+            return homegenie.ProgramManager.GetProgram(myProgramId);
         }
 
         private VirtualModule AddProgramModule(string domain, string address, string type, string widget, string[] implementedFeatures = null)

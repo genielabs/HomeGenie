@@ -43,6 +43,21 @@ namespace HomeGenie.Automation.Scripting
             homegenie = hg;
             myProgramId = programId;
         }
+
+        /// <summary>
+        /// Gets the path of program's data folder.
+        /// </summary>
+        /// <param name="fixedName">Get a shareable folder with the given fixed name.</param>
+        /// <returns></returns>
+        public string GetFolder(string fixedName = null)
+        {
+            string dataFolder = Path.Combine(Utility.GetDataFolder(), "programs", String.IsNullOrEmpty(fixedName) ? myProgramId.ToString() : fixedName);
+            if (!Directory.Exists(dataFolder))
+            {
+                Directory.CreateDirectory(dataFolder);
+            }
+            return Utility.GetRelativePath(Directory.GetCurrentDirectory(), dataFolder);
+        }
         
         /// <summary>
         /// Open and get a LiteDatabase instance. See LiteDB website http://www.litedb.org for documentation.
@@ -58,12 +73,6 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public LiteDatabase LiteDb(string fileName)
         {
-            string dataFolder = Path.Combine(Utility.GetDataFolder(), "programs", myProgramId.ToString());
-            if (!Directory.Exists(dataFolder))
-            {
-                Directory.CreateDirectory(dataFolder);
-            }
-
             if (!fileName.EndsWith(".db"))
             {
                 fileName += ".db";
@@ -72,8 +81,39 @@ namespace HomeGenie.Automation.Scripting
             {
                 throw new ArgumentException("Invalid database name");
             }
-            return new LiteDatabase(Path.Combine(dataFolder, fileName));
+            return new LiteDatabase(Path.Combine(GetFolder(), fileName));
         }
 
+        /// <summary>
+        /// Sets additional file or folder to be added to the system backup file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool AddToSystemBackup(string path)
+        {
+            var programBlock = homegenie.ProgramManager.GetProgram(myProgramId);
+            if (programBlock != null)
+            {
+                path = Utility.GetRelativePath(Directory.GetCurrentDirectory(), path);
+                if (!programBlock.BackupFiles.Exists(bf => bf == path))
+                {
+                    programBlock.BackupFiles.Add(path);
+                    return true;
+                } 
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Removes an additional file or folder from the system backup file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool RemoveFromSystemBackup(string path)
+        {
+            path = Utility.GetRelativePath(Directory.GetCurrentDirectory(), path);
+            var programBlock = homegenie.ProgramManager.GetProgram(myProgramId);
+            return programBlock != null && programBlock.BackupFiles.Remove(path);
+        }
     }
 }

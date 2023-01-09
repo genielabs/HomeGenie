@@ -722,7 +722,22 @@ namespace HomeGenie.Service
 
         public static string GetDataFolder()
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
+            return "data";
+        }
+        public static string GetRelativePath(string folder, string filePath)
+        {
+            if (!Path.IsPathRooted(filePath))
+            {
+                return filePath;
+            }
+            Uri pathUri = new Uri(filePath);
+            // Folders must end in a slash
+            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                folder += Path.DirectorySeparatorChar;
+            }
+            Uri folderUri = new Uri(folder);
+            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
         }
     }
 

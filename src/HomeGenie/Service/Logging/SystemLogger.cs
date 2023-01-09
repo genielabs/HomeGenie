@@ -78,7 +78,15 @@ namespace HomeGenie.Service.Logging
         /// <param name="message">The message to write to the log</param>
         public void WriteToLog(String logEntry)
         {
-            standardOutput.WriteLine(logEntry);
+            try
+            {
+                standardOutput.WriteLine(logEntry);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                //throw;
+            }
             Task.Run(() => {
                 lock (logQueue)
                 {

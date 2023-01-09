@@ -200,6 +200,11 @@ namespace HomeGenie.Automation
             return copy;
         }
 
+        public ProgramBlock GetProgram(int programId)
+        {
+            return automationPrograms.Find(p => p.Address.ToString() == programId.ToString());
+        }
+
         internal void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
         {
             var programModule = hgService.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());

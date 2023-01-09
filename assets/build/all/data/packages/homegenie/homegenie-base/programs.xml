@@ -722,4 +722,70 @@ Program.GoBackground();
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>var dataFolder = Data.GetFolder("client-presets");
+Data.AddToSystemBackup(dataFolder);
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var dataFolder = Data.GetFolder("client-presets");
+
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsList", (args) =&gt; {
+    var files = Directory.GetFiles(dataFolder);
+    return files.Select(f =&gt; Path.GetFileNameWithoutExtension(f));
+});
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsAdd/", (args) =&gt; {
+    var command = Program.ParseApiCall(args);
+    if (command.Data != null) {
+        var configuration = System.Text.Encoding.Default.GetString(command.Data as byte[]);
+        var presetName = command.GetOption(0);
+        if (String.IsNullOrEmpty(presetName)) {
+            presetName = "default";
+        }
+        var dataFile = Path.Combine(dataFolder, presetName + ".json");
+        File.WriteAllText(dataFile, configuration);
+    }
+    return new ResponseStatus(Status.Ok);
+});
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsGet/", (args) =&gt; {
+    var command = Program.ParseApiCall(args);
+    var presetName = command.GetOption(0);
+    if (String.IsNullOrEmpty(presetName)) {
+        presetName = "default";
+    }
+    var dataFile = Path.Combine(dataFolder, presetName + ".json");
+    return File.ReadAllText(dataFile);
+});
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsDelete/", (args) =&gt; {
+    var command = Program.ParseApiCall(args);
+    var presetName = command.GetOption(0);
+    if (String.IsNullOrEmpty(presetName)) {
+        return new ResponseStatus(Status.Error);
+    }
+    var dataFile = Path.Combine(dataFolder, presetName + ".json");
+    File.Delete(dataFile);
+    return new ResponseStatus(Status.Ok);
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>client-configs</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>5C52128B070889C0E5703CBB1979988E</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>111</Address>
+    <Name>Client Configs</Name>
+    <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
 </ArrayOfProgramBlock>

@@ -106,11 +106,10 @@ namespace HomeGenie.Service
             string[] repositories = Directory.GetDirectories(packagesFolder);
             foreach (string repository in repositories)
             {
-                string repoFolder = Path.Combine(packagesFolder, repository);
-                string[] packages = Directory.GetDirectories(repoFolder);
+                string[] packages = Directory.GetDirectories(repository);
                 foreach (string package in packages)
                 {
-                    string packageFile = Path.Combine(repoFolder, package, "package.json");
+                    string packageFile = Path.Combine(package, "package.json");
                     var pd = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
                     packagesList.Add(pd);
                 }

@@ -57,10 +57,12 @@
         <Gateway Name="WebServiceGateway" IsEnabled="true">
             <Options>
                 <Option Name="BaseUrl" Value="/app" />
-                <Option Name="HomePath" Value="" />
+                <Option Name="HomePath" Value="app" />
                 <Option Name="Host" Value="+" />
                 <Option Name="Port" Value="80" />
                 <Option Name="UrlAlias.1" Value="app/*:app/index.html" />
+                <Option Name="UrlAlias.2" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
+                <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/*:app/assets/widgets/compat/images/*" />
                 <Option Name="EnableFileCaching" Value="false" />
                 <Option Name="AuthenticationRealm" Value="HomeGenie Secure Zone" />
             </Options>

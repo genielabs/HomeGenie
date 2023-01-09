@@ -174,6 +174,8 @@ namespace HomeGenie.Automation
         {
             get { return (ProgramEngineBase) programEngine; }
         }
+
+        [XmlIgnore, JsonIgnore]
+        internal List<string> BackupFiles = new List<string>();
     }
 }
-
