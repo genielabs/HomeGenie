@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
-    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.10" />
+    <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.11" />
     <PackageReference Include="Iot.Device.Bindings" Version="2.2.0" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.7" />
@@ -46,9 +46,9 @@
     <PackageReference Include="MIG" Version="1.2.7" />
     <PackageReference Include="MIG.Protocols" Version="1.2.1" />
 
-    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.10" />
-    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.10" />
-    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.10" />
+    <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.11" />
+    <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.11" />
+    <PackageReference Include="HG.Raspberry.IO.InterIntegratedCircuit" Version="2.4.11" />
     <PackageReference Include="HG.Raspberry.System" Version="2.1.2" />
 
     <PackageReference Include="NUnit" Version="3.13.3" />

@@ -138,10 +138,6 @@ namespace HomeGenie.Automation
                         case "arduino":
                             programEngine = new ArduinoEngine(this);
                             break;
-                        default:
-                            throw new NotImplementedException(
-                                string.Format("Program engine for type {0} is not implemented", codeType)
-                            );
                     }
                 }
             }
