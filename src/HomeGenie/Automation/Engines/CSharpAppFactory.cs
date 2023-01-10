@@ -233,8 +233,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
 
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir,
-                        Path.Combine("lib", "mig", "CM19Lib.dll"))),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "CM19Lib.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LiteDB.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NLog.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Newtonsoft.Json.dll")),
@@ -339,7 +338,7 @@ namespace HomeGenie.Automation.Scripting
 
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MIG.dll");
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "mig", "CM19Lib.dll"));
+            compilerParams.ReferencedAssemblies.Add("CM19Lib.dll");
             compilerParams.ReferencedAssemblies.Add("LiteDB.dll");
             compilerParams.ReferencedAssemblies.Add("NLog.dll");
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
