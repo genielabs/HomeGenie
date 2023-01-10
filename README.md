@@ -4,7 +4,7 @@
 
 **Programmable Automation and Smart Home server for Windows, Mac and Linux (and Raspbian too =)).**
 
-- Integrated drivers for X10, Z-Wave and ZigBee<sup>\*</sup> <small>(<sup>\*</sup>coming soon)</small>, GPIO, SPI, I2C
+- Integrated drivers for X10, ZigBee, Z-Wave, GPIO, SPI, I2C
 - Works 100% off-line without relaying on any external cloud service
 - Scripting engine with fluent API programmable using `csharp`, `javascript`
 - Scheduler service supporting extended cron expressions (with variables, conditions and logical operators)

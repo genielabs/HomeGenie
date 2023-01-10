@@ -56,7 +56,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 Directory.CreateDirectory(dataFolder);
             }
-            return Utility.GetRelativePath(Directory.GetCurrentDirectory(), dataFolder);
+            return Utility.GetRelativePath(AppDomain.CurrentDomain.BaseDirectory, dataFolder);
         }
         
         /// <summary>
@@ -94,7 +94,7 @@ namespace HomeGenie.Automation.Scripting
             var programBlock = homegenie.ProgramManager.GetProgram(myProgramId);
             if (programBlock != null)
             {
-                path = Utility.GetRelativePath(Directory.GetCurrentDirectory(), path);
+                path = Utility.GetRelativePath(AppDomain.CurrentDomain.BaseDirectory, path);
                 if (!programBlock.BackupFiles.Exists(bf => bf == path))
                 {
                     programBlock.BackupFiles.Add(path);
@@ -111,7 +111,7 @@ namespace HomeGenie.Automation.Scripting
         /// <returns></returns>
         public bool RemoveFromSystemBackup(string path)
         {
-            path = Utility.GetRelativePath(Directory.GetCurrentDirectory(), path);
+            path = Utility.GetRelativePath(AppDomain.CurrentDomain.BaseDirectory, path);
             var programBlock = homegenie.ProgramManager.GetProgram(myProgramId);
             return programBlock != null && programBlock.BackupFiles.Remove(path);
         }

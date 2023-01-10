@@ -78,15 +78,20 @@
       <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="true">
         <Options />
       </Interface>
-      <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
-        <Options>
-          <Option Name="Port" Value="" />
-        </Options>
-      </Interface>
       <Interface Domain="HomeAutomation.X10" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="A" />
+        </Options>
+      </Interface>
+      <Interface Domain="HomeAutomation.ZigBee" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
+        <Options>
+          <Option Name="Port" Value="" />
+        </Options>
+      </Interface>
+      <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
+        <Options>
+          <Option Name="Port" Value="" />
         </Options>
       </Interface>
     </Interfaces>

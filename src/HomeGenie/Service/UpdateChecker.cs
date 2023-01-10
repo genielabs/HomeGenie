@@ -449,7 +449,7 @@ namespace HomeGenie.Service
                     bool doNotCopy = false;
 
                     string destinationFolder = Path.GetDirectoryName(file).Replace(newFilesPath, "").TrimStart('/').TrimStart('\\');
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/').TrimStart('\\');
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory).ToArray()).TrimStart('/').TrimStart('\\');
 
                     // Update file only if different from local one
                     bool processFile = false;

@@ -625,20 +625,10 @@ namespace HomeGenie.Automation.Scripting
                 var levelParameter = Utility.ModuleParameterGet(module, Properties.StatusLevel);
                 if (levelParameter != null)
                 {
-                    if (levelParameter.Value == "0")
-                    {
-                        InterfaceControl(
-                            module,
-                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOn)
-                        );
-                    }
-                    else
-                    {
-                        InterfaceControl(
-                            module,
-                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOff)
-                        );
-                    }
+                    InterfaceControl(
+                        module,
+                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlToggle)
+                    );
                     DelayIteration();
                 }
             }

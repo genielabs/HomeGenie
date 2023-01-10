@@ -37,13 +37,6 @@ namespace HomeGenie
 
         static void Main(string[] args)
         {
-
-            if (args != null && args.Length == 1 && args[0] == "--post-build")
-            {
-                PostBuildTasks();
-                return;
-            }
-
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 #if !NETCOREAPP
             AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
@@ -56,29 +49,6 @@ namespace HomeGenie
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
         }
 
-        private static void PostBuildTasks()
-        {
-#if NETCOREAPP
-                var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "assets", "build");
-#else
-            var assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "assets", "build");
-#endif
-            DeployFiles(Path.Combine(assetsFolder, "all"), AppDomain.CurrentDomain.BaseDirectory);
-#if !NETCOREAPP
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                DeployFiles(Path.Combine(assetsFolder, "linux"), AppDomain.CurrentDomain.BaseDirectory);
-            }
-            else
-            {
-                DeployFiles(Path.Combine(assetsFolder, "windows"), AppDomain.CurrentDomain.BaseDirectory);
-            }
-#endif
-            // TODO: !!!!!!!!!!!!!!!!!!
-            // TODO: move here code from `HomeGenie.Tests -> CI Deploy`
-            // TODO: !!!!!!!!!!!!!!!!!!
-        }
-
         private static bool PostInstallCheck()
         {
             bool firstTimeInstall = false;
@@ -86,42 +56,6 @@ namespace HomeGenie
             if (File.Exists(postInstallLock))
             {
                 firstTimeInstall = true;
-                // Move MIG interface plugins from root folder to lib/mig
-                // TODO: find a better solution to this
-                string[] migFiles =
-                {
-                    "MIG.HomeAutomation.dll",
-                    "MIG.Protocols.dll",
-                    "libusb-1.0.so",
-                    "LibUsbDotNet.dll",
-                    "XTenLib.dll",
-                    "CM19Lib.dll",
-                    "ZWaveLib.dll"
-                };
-                string migFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib", "mig");
-                if (!Directory.Exists(migFolder))
-                {
-                    Directory.CreateDirectory(migFolder);
-                }
-                foreach (var f in migFiles)
-                {
-                    string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, f);
-                    if (!File.Exists(source)) continue;
-                    try
-                    {
-                        string dest = Path.Combine(migFolder, f);
-                        if (File.Exists(dest)) File.Delete(dest);
-#if NETCOREAPP
-                        File.Copy(source, dest);
-#else
-                        File.Move(source, dest);
-#endif
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
-                    }
-                }
                 //
                 // NOTE: place any other post-install stuff here
                 //
@@ -193,45 +127,5 @@ namespace HomeGenie
                 HomeGenieService.LogError(logEntry);
             }
         }
-
-        static void DeployFiles(string inputFolder, string outputFolder)
-        {
-            //var destinationFolder = AppDomain.CurrentDomain.BaseDirectory;
-            if (Directory.Exists(inputFolder))
-            {
-                //LogMessage("= Copying new files...");
-                foreach (string file in Directory.EnumerateFiles(inputFolder, "*", SearchOption.AllDirectories))
-                {
-                    string destinationFolder = Path.Combine(outputFolder, Path.GetDirectoryName(file).Replace(inputFolder, "").TrimStart('/').TrimStart('\\'));
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
-                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
-                    {
-                        Directory.CreateDirectory(destinationFolder);
-                    }
-                    var sourceFile = new FileInfo(file);
-                    var destFile = new FileInfo(destinationFile);
-                    if (destFile.Exists)
-                    {
-                        if (sourceFile.LastWriteTime > destFile.LastWriteTime)
-                        {
-                            Console.WriteLine("Updating {0}", destinationFile);
-                            // now you can safely overwrite it
-                            sourceFile.CopyTo(destFile.FullName, true);
-                        }
-                        else
-                        {
-                            //Console.WriteLine("Skipping {0}", destinationFile);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Copying {0}", destinationFile);
-                        File.Copy(file, destinationFile);
-                    }
-                }
-            }
-
-        }
     }
-
 }

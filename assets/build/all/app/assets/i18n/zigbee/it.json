@@ -1,0 +1,12 @@
+{
+  "node_inclusion":
+    "Aggiungi dispositivo",
+  "node_exclusion":
+    "Rimuovi dispositivo",
+  "operation_timed_out":
+    "Operazione scaduta.",
+  "node_added":
+    "Aggiunto con successo nodo",
+  "turn_on_device_to_add":
+    "Accendi il dispositivo da aggiungere ..."
+}

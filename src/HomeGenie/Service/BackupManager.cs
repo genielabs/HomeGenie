@@ -108,7 +108,7 @@ namespace HomeGenie.Service
             {
                 p.BackupFiles.ForEach((bf) =>
                 {
-                    string relativePath = Utility.GetRelativePath(Directory.GetCurrentDirectory(), bf);
+                    string relativePath = Utility.GetRelativePath(AppDomain.CurrentDomain.BaseDirectory, bf);
                     if (Directory.Exists(relativePath))
                     {
                         var directoryFiles = Directory.EnumerateFiles(bf, "*", SearchOption.AllDirectories);
@@ -289,7 +289,7 @@ namespace HomeGenie.Service
                 {
                     string destinationFolder = Path.GetDirectoryName(file).Replace(backupDataFolder, "").TrimStart('/').TrimStart('\\');
                     destinationFolder = Path.Combine(dataFolder, destinationFolder);
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/').TrimStart('\\');
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory).ToArray()).TrimStart('/').TrimStart('\\');
                     if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
                     {
                         Directory.CreateDirectory(destinationFolder);

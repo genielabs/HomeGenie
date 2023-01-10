@@ -70,6 +70,7 @@ namespace HomeGenie.Automation.Scheduler
         {
             if (serviceChecker == null) return;
             serviceChecker.Dispose();
+            serviceChecker = null;
             for (int i = 0; i < events.Count; i++)
             {
                 var eventItem = events[i];                
@@ -82,6 +83,7 @@ namespace HomeGenie.Automation.Scheduler
 
         private void CheckScheduledEvents(object state)
         {
+            if (serviceChecker == null) return; // disposed by Stop()
             serviceChecker.Change((60 - DateTime.Now.Second) * 1000, Timeout.Infinite);
             var date = DateTime.Now;
             for (int e = 0; e < events.Count; e++)
