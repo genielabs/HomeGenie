@@ -175,11 +175,23 @@ namespace HomeGenie.Service
             updateChecker.Stop();
 
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "MIG Service STOPPING");
-            if (migService != null) migService.StopService();
+            if (migService != null)
+            {
+                try
+                {
+                    migService.StopService();
+                }
+                catch (Exception e)
+                {
+                    LogError(e);
+                }
+            }
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "MIG Service STOPPED");
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "ProgramEngine STOPPING");
             if (masterControlProgram != null)
+            {
                 masterControlProgram.Enabled = false;
+            }
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "ProgramEngine STOPPED");
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STOPPED");
 
