@@ -195,16 +195,6 @@
 " ": "------------------------------------------",
   "$options": {
 
-    "6": {
-        "Title": "All lights on",
-        "Description": "Turn on all lights in the given group."
-    },
-
-    "7": {
-        "Title": "All lights off",
-        "Description": "Turn off all lights in the given group."
-    },
-
     "16": {
       "Title":
       "Level Memory",

@@ -22,7 +22,7 @@
     "Protocols.UPnP":
         "Controller UPnP",
     "HomeAutomation.X10":
-        "Controller X10 (CM15, CM11, CM19)",
+        "Controller X10",
     "HomeAutomation.ZWave":
         "Controller Z-Wave",
     "HomeAutomation.ZigBee":
@@ -195,20 +195,6 @@
 " ": "------------------------------------------",
     "$options":
     {
-
-      "6": {
-          "Title":
-              "Accendi tutte le luci",
-          "Description":
-              "Accende tutte le luci del gruppo specificato."
-      },
-
-      "7": {
-          "Title":
-              "Spegni tutte le luci",
-          "Description":
-              "Spegne tutte le luci del gruppo specificato."
-      },
 
       "16": {
         "Title":
