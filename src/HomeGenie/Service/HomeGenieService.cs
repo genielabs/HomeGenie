@@ -41,7 +41,7 @@ using HomeGenie.Automation.Scheduler;
 using MIG;
 using MIG.Gateways;
 using MIG.Gateways.Authentication;
-
+using MIG.Interfaces.HomeAutomation.Commons;
 using NLog;
 
 using Module = HomeGenie.Data.Module;
@@ -398,7 +398,7 @@ namespace HomeGenie.Service
                 for (int m = 0; m < group.Modules.Count; m++)
                 {
                     var module = Modules.Find(mod => mod.Domain == group.Modules[m].Domain && mod.Address == group.Modules[m].Address);
-                    if (module != null && (module.DeviceType == MIG.ModuleTypes.Light || module.DeviceType == MIG.ModuleTypes.Dimmer))
+                    if (module != null && (module.DeviceType == ModuleTypes.Light || module.DeviceType == ModuleTypes.Dimmer))
                     {
                         try
                         {
@@ -1335,9 +1335,9 @@ namespace HomeGenie.Service
                         {
                             module.Description = migModule.Description;
                         }
-                        if (module.DeviceType == ModuleTypes.Generic)
+                        if (module.DeviceType == ModuleTypes.Generic && migModule.CustomData != null && migModule.CustomData.Type != null)
                         {
-                            module.DeviceType = migModule.ModuleType;
+                            module.DeviceType = migModule.CustomData.Type;
                         }
                     }
                 }

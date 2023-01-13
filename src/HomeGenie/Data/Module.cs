@@ -21,15 +21,12 @@
  */
 
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-using MIG;
-
 using HomeGenie.Service;
+using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace HomeGenie.Data
 {

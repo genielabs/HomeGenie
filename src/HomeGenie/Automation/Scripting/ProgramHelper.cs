@@ -30,6 +30,7 @@ using Newtonsoft.Json;
 using HomeGenie.Data;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
+using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -177,7 +178,7 @@ namespace HomeGenie.Automation.Scripting
                     Domain = myProgramDomain,
                     Address = myProgramId.ToString(),
                     Name = (program != null ? program.Name : ""),
-                    DeviceType = MIG.ModuleTypes.Program
+                    DeviceType = ModuleTypes.Program
                 };
                 homegenie.VirtualModules.Add(module);
             }
@@ -361,7 +362,7 @@ namespace HomeGenie.Automation.Scripting
                 homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
             if (module != null)
             {
-                if (module.DeviceType == MIG.ModuleTypes.Generic)
+                if (module.DeviceType == ModuleTypes.Generic)
                 {
                     module.DeviceType = virtualModule.DeviceType;
                 }
@@ -402,7 +403,7 @@ namespace HomeGenie.Automation.Scripting
                 Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
                 if (module != null)
                 {
-                    if (module.DeviceType == MIG.ModuleTypes.Generic)
+                    if (module.DeviceType == ModuleTypes.Generic)
                     {
                         module.DeviceType = virtualModule.DeviceType;
                     }
@@ -867,8 +868,8 @@ namespace HomeGenie.Automation.Scripting
                     ParentId = myProgramId.ToString(),
                     Domain = domain,
                     Address = address,
-                    DeviceType = (MIG.ModuleTypes)Enum.Parse(
-                        typeof(MIG.ModuleTypes),
+                    DeviceType = (ModuleTypes)Enum.Parse(
+                        typeof(ModuleTypes),
                         type
                     )
                 };
@@ -883,8 +884,8 @@ namespace HomeGenie.Automation.Scripting
             {
                 virtualModule.IsActive = true;
                 virtualModule.Domain = domain;
-                if (virtualModule.DeviceType == MIG.ModuleTypes.Generic)
-                    virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
+                if (virtualModule.DeviceType == ModuleTypes.Generic)
+                    virtualModule.DeviceType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), type);
                 Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
             }
 

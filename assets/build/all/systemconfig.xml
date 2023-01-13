@@ -71,6 +71,7 @@
             <Options>
                 <Option Name="Port" Value="8188" />
                 <Option Name="Authentication" Value="Token" />
+                <Option Name="MessagePack" Value="true" />
             </Options>
         </Gateway>
     </Gateways>

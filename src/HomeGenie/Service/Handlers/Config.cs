@@ -44,6 +44,7 @@ using System.IO.Ports;
 
 using MIG.Gateways;
 using MIG.Gateways.Authentication;
+using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -69,7 +70,7 @@ namespace HomeGenie.Service.Handlers
             var migCommand = request.Command;
 
             string remoteEndpoint = "local";
-            if (request.Context != null && request.Context.Data != null)
+            if (request.Context != null && request.Context.Data is HttpListenerContext)
             {
                 remoteEndpoint = (request.Context.Data as HttpListenerContext).Request.RemoteEndPoint.ToString();
             }
