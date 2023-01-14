@@ -76,6 +76,7 @@ namespace HomeGenie.Automation.Engines
             "NetClientLib",
             "OnvifDiscovery.Models",
             "MIG",
+            "MIG.Interfaces.HomeAutomation.Commons",
             "CM19Lib", "X10 = CM19Lib.X10",
             "Innovative.Geometry",
             "Innovative.SolarCalculator",
@@ -233,6 +234,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
 
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.HomeAutomation.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "CM19Lib.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LiteDB.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NLog.dll")),
@@ -338,6 +340,7 @@ namespace HomeGenie.Automation.Scripting
 
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MIG.dll");
+            compilerParams.ReferencedAssemblies.Add("MIG.HomeAutomation.dll");
             compilerParams.ReferencedAssemblies.Add("CM19Lib.dll");
             compilerParams.ReferencedAssemblies.Add("LiteDB.dll");
             compilerParams.ReferencedAssemblies.Add("NLog.dll");
