@@ -26,7 +26,7 @@
 Program.Setup(() =&gt; {
   Program
     .AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
-    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:30:3600:30");
+    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:10:3600:10");
 });
 Program.Run();
 </ScriptSetup>
@@ -54,9 +54,14 @@ if (pinName.Length &lt; 6) {
 }
 
 var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
+var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+When.ProgramStopping(() =&gt; {
+  driver.Release(measurePin.ToProcessor());
+  return true;
+});
+
 var moduleDomain = "Components.DHT11";
 var moduleAddress = PinMapping.ToProcessor(measurePin).ToString().Substring(3); // get GPIO#
-
 Program.AddModule(moduleDomain, moduleAddress, "Sensor");
 var dhtModule = Modules
     .InDomain(moduleDomain)
@@ -65,24 +70,24 @@ var dhtModule = Modules
 while (Program.IsEnabled)
 {
   try {
-    var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
     using (var pin = driver.InOut(measurePin))
       using (var dhtConnection = new Dht11Connection(pin))
     {
       var data = dhtConnection.GetData();
       if (data != null)
       {
-        // data read succesfully
-        dhtModule
-          .Emit("Sensor.Humidity", data.RelativeHumidity.Percent)
-          .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius);
+        if (data.RelativeHumidity.Percent != 0 || data.Temperature.DegreesCelsius != 0) {
+          // data read succesfully
+          dhtModule
+            .Emit("Sensor.Humidity", data.RelativeHumidity.Percent)
+            .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius);
+        }
       }
       else
       {
         Program.Notify("Could not read data from sensor." + notificationButtons);
       }
     }
-    driver.Release(measurePin.ToProcessor());
   } catch (Exception e) {
     Program.Notify("Error: " + e.Message + notificationButtons);
   }
@@ -92,7 +97,7 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -100,7 +105,7 @@ while (Program.IsEnabled)
       <Id>dht-11-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>5B3725F5FE83220E35714F1975D96E08</Checksum>
+      <Checksum>1B2951CC86E791301D1DE75EE00D7964</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>601</Address>
@@ -140,7 +145,7 @@ while (Program.IsEnabled)
 Program.Setup(() =&gt; {
   Program
     .AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
-    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:30:3600:30");
+    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:10:3600:10");
 });
 Program.Run();
 </ScriptSetup>
@@ -168,33 +173,42 @@ if (pinName.Length &lt; 6) {
 }
 
 var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
+var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+When.ProgramStopping(() =&gt; {
+  driver.Release(measurePin.ToProcessor());
+  return true;
+});
+
 var moduleDomain = "Components.DHT22";
 var moduleAddress = PinMapping.ToProcessor(measurePin).ToString().Substring(3); // get GPIO#
-
 Program.AddModule(moduleDomain, moduleAddress, "Sensor");
 var dhtModule = Modules
     .InDomain(moduleDomain)
     .WithAddress(moduleAddress).Get();
 
+DhtData previousData = null;
 while (Program.IsEnabled)
 {
   try {
-    var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
     using (var pin = driver.InOut(measurePin))
       using (var dhtConnection = new Dht22Connection(pin))
     {
       var data = dhtConnection.GetData();
       if (data != null)
       {
-        // data read succesfully
-        dhtModule
-          .Emit("Sensor.Humidity", data.RelativeHumidity.Percent)
-          .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius);
+        if (previousData == null
+          || (Math.Abs(data.RelativeHumidity.Percent - previousData.RelativeHumidity.Percent) &lt; 20
+            &amp;&amp; (Math.Abs(data.Temperature.DegreesCelsius - previousData.Temperature.DegreesCelsius) &lt; 8))) {
+          // data read succesfully
+          dhtModule
+            .Emit("Sensor.Humidity", data.RelativeHumidity.Percent)
+            .Emit("Sensor.Temperature", data.Temperature.DegreesCelsius);
+        }
+        previousData = data;
       } else {
         Program.Notify("Could not read data from sensor." + notificationButtons);
       }
     }
-    driver.Release(measurePin.ToProcessor());
   } catch (Exception e) {
     Program.Notify("Error: " + e.Message + notificationButtons);
   }
@@ -211,7 +225,7 @@ while (Program.IsEnabled)
       <Id>dht-22-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>E9C49D8CC86C290E29DFA814CBEDC004</Checksum>
+      <Checksum>D5C6224E2C6EDAA2132B226F6F838124</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>602</Address>

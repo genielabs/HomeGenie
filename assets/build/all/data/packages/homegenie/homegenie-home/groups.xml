@@ -9,7 +9,7 @@
       </ModuleReference>
       <ModuleReference>
         <Address>1</Address>
-        <Domain>HomeAutomation.BasicThermostat</Domain>
+        <Domain>HomeAutomation.SmartThermostat</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>1</Address>

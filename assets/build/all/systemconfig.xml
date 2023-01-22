@@ -63,6 +63,7 @@
                 <Option Name="UrlAlias.1" Value="app/*:app/index.html" />
                 <Option Name="UrlAlias.2" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
                 <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/*:app/assets/widgets/compat/images/*" />
+                <Option Name="UrlAlias.4" Value="widgets/*:app/../data/widgets/*" />
                 <Option Name="EnableFileCaching" Value="false" />
                 <Option Name="AuthenticationRealm" Value="HomeGenie Secure Zone" />
             </Options>

@@ -372,54 +372,6 @@ namespace HomeGenie.Service
             return jsonModules;
         }
 
-        // TODO: move this to a better location
-        public bool ExecuteAutomationRequest(MigInterfaceCommand command)
-        {
-            string levelValue, commandValue;
-            // check for certain commands
-            if (command.Command == Commands.Groups.GroupsLightsOff)
-            {
-                levelValue = "0";
-                commandValue = Commands.Control.ControlOff;
-            }
-            else if (command.Command == Commands.Groups.GroupsLightsOn)
-            {
-                levelValue = "1";
-                commandValue = Commands.Control.ControlOn;
-            }
-            else
-            {
-                return false;
-            }
-            //loop, turning off lights
-            try
-            {
-                var group = Groups.Find(z => z.Name == command.GetOption(0));
-                for (int m = 0; m < group.Modules.Count; m++)
-                {
-                    var module = Modules.Find(mod => mod.Domain == group.Modules[m].Domain && mod.Address == group.Modules[m].Address);
-                    if (module != null && (module.DeviceType == ModuleTypes.Light || module.DeviceType == ModuleTypes.Dimmer))
-                    {
-                        try
-                        {
-                            var icmd = new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + commandValue);
-                            InterfaceControl(icmd);
-                            Service.Utility.ModuleParameterGet(module, Properties.StatusLevel).Value = levelValue;
-                        }
-                        catch (Exception e)
-                        {
-                            LogError(e);
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                // TODO: handle exception here
-            }
-            return true;
-        }
-
         #endregion
 
         #region MIG Events Propagation / Logging

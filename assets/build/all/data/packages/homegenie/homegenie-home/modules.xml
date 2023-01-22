@@ -9,27 +9,27 @@
     <Properties>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter</Name>
-        <Value>0.7756059963283899</Value>
+        <Value>2.093338255092591</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:45.1545783Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:31.9455922Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter.Today</Name>
-        <Value>0.7756059963283899</Value>
+        <Value>0.15666697243827157</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:45.1720894Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:31.945708Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
-        <Value>0.398</Value>
+        <Value>0.400</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:45.1889077Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:09:07.9714234Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
@@ -37,7 +37,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:29.1173109Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:54:35.6348957Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingLights</Name>
@@ -45,7 +45,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:24.0752406Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:54:35.6349186Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingSwitches</Name>
@@ -53,31 +53,31 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:29.1214219Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:09:07.9715323Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattCounter</Name>
-        <Value>775.6059963283899</Value>
+        <Value>2093.338255092591</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:45.1486784Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:31.9454937Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattCounter.Today</Name>
-        <Value>775.6059963283899</Value>
+        <Value>156.66697243827159</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:45.165794Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:31.9456509Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.WattLoad</Name>
-        <Value>398.099</Value>
+        <Value>400.058</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:45.1800554Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:31.9457697Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -149,7 +149,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0572952Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5359683Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -157,7 +157,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:24.024475Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:29:30.6957521Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -175,7 +175,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:24.0349947Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:29:30.6959879Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -183,7 +183,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:23.495714Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:29:30.5523506Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -191,7 +191,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0574532Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.536223Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -251,7 +251,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573053Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5359749Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -285,7 +285,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573124Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5359788Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -294,6 +294,48 @@
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2022-11-26T17:29:34.5734293Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>KNX client</Name>
+    <Description>Control KNX device</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>27</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.KnxLocalIp</Name>
+        <Value />
+        <Description>Local endpoint IP address (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T20:49:57.1067398Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.KnxLocalPort</Name>
+        <Value />
+        <Description>Local endpoint port (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T20:49:57.1067409Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.KnxRemoteIp</Name>
+        <Value />
+        <Description>Remote endpoint IP address (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T20:49:57.1067416Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.KnxRemotePort</Name>
+        <Value />
+        <Description>Remote endpoint port (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T20:49:57.1067421Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -539,7 +581,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573225Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5359851Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -547,7 +589,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:58.3107271Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:28:49.5102877Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -749,7 +791,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573316Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5359931Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -757,7 +799,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:58.3391366Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:28:49.510388Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -919,7 +961,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T17:51:18.0705113Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:54:31.8243182Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
@@ -967,7 +1009,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T17:51:17.5357351Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:54:32.5679114Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
@@ -999,7 +1041,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573436Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5360003Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1007,7 +1049,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:58.4420816Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:28:49.5104209Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -1041,7 +1083,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573514Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5360061Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1049,7 +1091,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:58.4678477Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:28:49.5104451Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -1083,7 +1125,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573589Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.536012Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1091,14 +1133,14 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:58.4718627Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:28:49.5104672Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Security Alarm System</Name>
-    <Description />
+    <Description>Use sensors and other devices to implement a security alarm system.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1109,7 +1151,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description>4. Comma separated list of recipients e-mails for alarm notifications</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:59.4384155Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0765509Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.ArmDelay</Name>
@@ -1141,7 +1183,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description>5. Program to run when armed</Description>
         <FieldType>program.text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:59.4384174Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0765517Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.DisarmedProgram</Name>
@@ -1149,7 +1191,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description>6. Program to run when disarmed</Description>
         <FieldType>program.text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:59.4384187Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0765523Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.TriggeredProgram</Name>
@@ -1157,7 +1199,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description>7. Program to run when triggered</Description>
         <FieldType>program.text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:59.43842Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.076553Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -1165,7 +1207,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:59.4932896Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0977162Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityArmed</Name>
@@ -1205,7 +1247,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573681Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5360177Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -1220,7 +1262,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
   </Module>
   <Module>
     <Name>Smart Device</Name>
-    <Description>Turns on/off a device based on motion detection and ambient light.</Description>
+    <Description>Turns on/off the device based on motion detection and ambient light.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -1247,7 +1289,34 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:59.2338677Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5362408Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Smart Thermostat</Name>
+    <Description>Use any temperature sensor and smart switch to implement thermostat functionality.
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>78</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ThermostatsCount</Name>
+        <Value>1</Value>
+        <Description>Number of thermostats to create</Description>
+        <FieldType>slider:1:10:1</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.2274051Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>78</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T23:23:09.5362448Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -1256,7 +1325,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
     <Name>Thermostat</Name>
     <Description />
     <DeviceType>Thermostat</DeviceType>
-    <Domain>HomeAutomation.BasicThermostat</Domain>
+    <Domain>HomeAutomation.SmartThermostat</Domain>
     <Address>1</Address>
     <Properties>
       <ModuleParameter>
@@ -1269,11 +1338,11 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
-        <Value>10.012</Value>
+        <Value>12.355</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:48.1841725Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:31.6417565Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.Mode</Name>
@@ -1281,7 +1350,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T16:16:54.4776924Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:09:00.4917733Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.OperatingState</Name>
@@ -1289,7 +1358,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T16:45:22.6308444Z</UpdateTime>
+        <UpdateTime>2023-01-21T18:09:01.4684484Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.SetPoint.Cooling</Name>
@@ -1329,7 +1398,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0573825Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.5360234Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualThermostat.CoolingSwitchModule</Name>
@@ -1367,65 +1436,6 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
     <Stores />
   </Module>
   <Module>
-    <Name>Smart Thermostat</Name>
-    <Description>Use any temperature sensor and smart switch to implement thermostat functionality.
-</Description>
-    <DeviceType>Program</DeviceType>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>78</Address>
-    <Properties>
-      <ModuleParameter>
-        <Name>ConfigureOptions.ThermostatsCount</Name>
-        <Value>1</Value>
-        <Description>Number of thermostats to create</Description>
-        <FieldType>slider:1:10:1</FieldType>
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:38.2274051Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Notification</Name>
-        <Value>{"Title":"Basic Thermostat 1","Message":"A switch for the mode 'Cool' is not set."}</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T15:46:24.6605484Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Running</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T16:36:30.8298756Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Runtime.Error</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T16:36:30.4771523Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualModule.ParentId</Name>
-        <Value>78</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.0574468Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-11-26T18:13:13.7010485Z</UpdateTime>
-      </ModuleParameter>
-    </Properties>
-    <Stores />
-  </Module>
-  <Module>
     <Name>Sunrise Colors Scenario</Name>
     <Description>Example "Sunrise" scenario for color lights.</Description>
     <DeviceType>Program</DeviceType>
@@ -1438,7 +1448,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:11:01.6011916Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:33:25.2606728Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -1446,7 +1456,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T13:36:00.9772646Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:33:25.1834277Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1454,7 +1464,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:35:14.057375Z</UpdateTime>
+        <UpdateTime>2023-01-21T23:23:09.536029Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

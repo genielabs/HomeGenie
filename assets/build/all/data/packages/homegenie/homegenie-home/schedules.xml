@@ -33,6 +33,7 @@ $$.onUpdate(function(m,p){
 });</Script>
     <BoundDevices>
       <string>Dimmer</string>
+      <string>Color</string>
     </BoundDevices>
     <BoundModules>
       <ModuleReference>
@@ -92,6 +93,7 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     </Script>
     <BoundDevices>
       <string>Dimmer</string>
+      <string>Color</string>
       <string>Light</string>
     </BoundDevices>
     <BoundModules>
@@ -130,7 +132,7 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     <BoundModules>
       <ModuleReference>
         <Address>1</Address>
-        <Domain>HomeAutomation.BasicThermostat</Domain>
+        <Domain>HomeAutomation.SmartThermostat</Domain>
       </ModuleReference>
     </BoundModules>
   </SchedulerItem>
@@ -191,7 +193,7 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     <BoundModules>
       <ModuleReference>
         <Address>1</Address>
-        <Domain>HomeAutomation.BasicThermostat</Domain>
+        <Domain>HomeAutomation.SmartThermostat</Domain>
       </ModuleReference>
     </BoundModules>
   </SchedulerItem>
@@ -224,7 +226,7 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     <BoundModules>
       <ModuleReference>
         <Address>1</Address>
-        <Domain>HomeAutomation.BasicThermostat</Domain>
+        <Domain>HomeAutomation.SmartThermostat</Domain>
       </ModuleReference>
     </BoundModules>
   </SchedulerItem>

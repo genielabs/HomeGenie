@@ -590,7 +590,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOn)
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Service.API.Automation.Control.On)
                 );
                 DelayIteration();
             }
@@ -607,7 +607,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlOff)
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Service.API.Automation.Control.Off)
                 );
                 DelayIteration();
             }
@@ -627,7 +627,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     InterfaceControl(
                         module,
-                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Commands.Control.ControlToggle)
+                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + Service.API.Automation.Control.Toggle)
                     );
                     DelayIteration();
                 }
@@ -660,7 +660,7 @@ namespace HomeGenie.Automation.Scripting
             }
             set
             {
-                command = Commands.Control.ControlLevel;
+                command = Service.API.Automation.Control.Level;
                 Submit(value.ToString(CultureInfo.InvariantCulture));
             }
         }
@@ -685,7 +685,7 @@ namespace HomeGenie.Automation.Scripting
             }
             set
             {
-                command = Commands.Control.ControlColorHsb;
+                command = Service.API.Automation.Control.ColorHsb;
                 Submit(value);
             }
         }

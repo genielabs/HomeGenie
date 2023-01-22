@@ -1,3 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Module>
+    <Name>GPIO Pin v.1</Name>
+    <Description>Configurable GPIO pin as binary input sensor or output switch.
+(RaspberrySharp.IO)
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>600</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO.Pin</Name>
+        <Value />
+        <Description>Pin number</Description>
+        <FieldType>select:GPIO17 (pin 11)=11,GPIO27 (pin 13)=13,GPIO22 (pin 15)=15,GPIO4 (pin 7)=7,GPIO5 (pin 29)=29,GPIO6 (pin 31)=31,GPIO13 (pin 33)=33,GPIO19 (pin 35)=35,GPIO26 (pin 37)=37,GPIO23 (pin 16)=16,GPIO24 (pin 18)=18,GPIO25 (pin 22)=22,GPIO12 (pin 32)=32,GPIO16 (pin 36)=36,GPIO21 (pin 40)=40</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T16:26:49.1282543Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO.Pin.Mode</Name>
+        <Value>1</Value>
+        <Description>Pin mode</Description>
+        <FieldType>select:Output=1,Input=0,Input pull-down=2,Input pull-up=3</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T16:26:49.1282563Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO.Pin.Reversed</Name>
+        <Value />
+        <Description>Reverse pin value</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T16:26:49.1282554Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
 </ArrayOfModule>

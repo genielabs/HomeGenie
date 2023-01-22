@@ -123,6 +123,13 @@ namespace HomeGenie.Service
                     }
                 });
             }
+            // Backup custom widgets
+            string widgetsFolder = Path.Combine(Utility.GetDataFolder(), "widgets");
+            var widgetFiles = Directory.EnumerateFiles(widgetsFolder, "*", SearchOption.AllDirectories);
+            foreach (string file in widgetFiles)
+            {
+                Utility.AddFileToZip(archiveName, file);
+            }
         }
 
         public bool RestoreConfiguration(string archiveFolder, string selectedPrograms)
@@ -238,8 +245,12 @@ namespace HomeGenie.Service
             homegenie.UpdateProgramsDatabase();
             // Update system config
             UpdateSystemConfig(archiveFolder);
-            // Remove old MIG Interfaces config/data files (lib/mig/*.xml)
-            string migLibFolder = Path.Combine("lib", "mig");
+
+
+
+            #region OLD_CODE for compatibility with HG 1.3 -- TO BE DEPRECATED
+            // Remove old MIG Interfaces config/data files (data/mig/*.xml)
+            string migLibFolder = Path.Combine(Utility.GetDataFolder(), "mig");
             if (Directory.Exists(migLibFolder))
             {
                 var files = Directory.EnumerateFiles(migLibFolder)
@@ -258,7 +269,7 @@ namespace HomeGenie.Service
                     );
                 }
             }
-            // Restore MIG configuration/data files if present (from backup folder lib/mig/*.xml)
+            // Restore MIG configuration/data files if present (from backup folder data/mig/*.xml)
             migLibFolder = Path.Combine(archiveFolder, "lib", "mig");
             if (Directory.Exists(migLibFolder))
             {
@@ -267,45 +278,67 @@ namespace HomeGenie.Service
                     .ToList();
                 foreach (string f in files)
                 {
-                    string destinationFile = Path.Combine("lib", "mig", Path.GetFileName(f));
-                    File.Copy(f, destinationFile, true);
-                    homegenie.RaiseEvent(
-                        Domains.HomeGenie_System,
-                        Domains.HomeGenie_BackupRestore,
-                        SourceModule.Master,
-                        "HomeGenie Backup Restore",
-                        Properties.InstallProgressMessage,
-                        "= Restored: '" + destinationFile + "'"
-                    );
-                }
-            }
-            
-            // Restore programs' data folder files
-            string backupDataFolder = Path.Combine(archiveFolder, Utility.GetDataFolder(), "programs");
-            if (Directory.Exists(backupDataFolder))
-            {
-                string dataFolder = Path.Combine(Utility.GetDataFolder(), "programs"); 
-                foreach (string file in Directory.EnumerateFiles(backupDataFolder, "*", SearchOption.AllDirectories))
-                {
-                    string destinationFolder = Path.GetDirectoryName(file).Replace(backupDataFolder, "").TrimStart('/').TrimStart('\\');
-                    destinationFolder = Path.Combine(dataFolder, destinationFolder);
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory).ToArray()).TrimStart('/').TrimStart('\\');
-                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    string destinationFile = Path.Combine(Utility.GetDataFolder(), "mig", Path.GetFileName(f));
+                    try
                     {
-                        Directory.CreateDirectory(destinationFolder);
+                        File.Copy(f, destinationFile, true);
+                        homegenie.RaiseEvent(
+                            Domains.HomeGenie_System,
+                            Domains.HomeGenie_BackupRestore,
+                            SourceModule.Master,
+                            "HomeGenie Backup Restore",
+                            Properties.InstallProgressMessage,
+                            "= Restored: '" + destinationFile + "'"
+                        );
                     }
-                    File.Copy(file, destinationFile, true);
-                    homegenie.RaiseEvent(
-                        Domains.HomeGenie_System,
-                        Domains.HomeGenie_BackupRestore,
-                        SourceModule.Master,
-                        "HomeGenie Backup Restore",
-                        Properties.InstallProgressMessage,
-                        "= Restored: '" + destinationFile + "'"
-                    );
+                    catch (Exception e)
+                    {
+                        homegenie.RaiseEvent(
+                            Domains.HomeGenie_System,
+                            Domains.HomeGenie_BackupRestore,
+                            SourceModule.Master,
+                            "HomeGenie Backup Restore",
+                            Properties.InstallProgressMessage,
+                            "= Error: " + e.Message + "'"
+                        );
+                    }
                 }
             }
+            #endregion
             
+            
+
+            // Restore data folder files (programs' data, mig interfaces config files, and widgets)
+            var dataFolders = new List<string> { "programs", "widgets", "mig" };
+            foreach (var folder in dataFolders)
+            {
+                string backupDataFolder = Path.Combine(archiveFolder, Utility.GetDataFolder(), folder);
+                if (Directory.Exists(backupDataFolder))
+                {
+                    string dataFolder = Path.Combine(Utility.GetDataFolder(), folder); 
+                    // TODO: should remove destination folder before copying from backup files? 
+                    foreach (string file in Directory.EnumerateFiles(backupDataFolder, "*", SearchOption.AllDirectories))
+                    {
+                        string destinationFolder = Path.GetDirectoryName(file).Replace(backupDataFolder, "").TrimStart('/').TrimStart('\\');
+                        destinationFolder = Path.Combine(dataFolder, destinationFolder);
+                        string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory).ToArray()).TrimStart('/').TrimStart('\\');
+                        if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                        {
+                            Directory.CreateDirectory(destinationFolder);
+                        }
+                        File.Copy(file, destinationFile, true);
+                        homegenie.RaiseEvent(
+                            Domains.HomeGenie_System,
+                            Domains.HomeGenie_BackupRestore,
+                            SourceModule.Master,
+                            "HomeGenie Backup Restore",
+                            Properties.InstallProgressMessage,
+                            "= Restored: '" + destinationFile + "'"
+                        );
+                    }
+                }
+            }
+
             // Soft-reload system configuration from newly restored files and save config
             homegenie.SoftReload();
             // Restore user-space automation programs

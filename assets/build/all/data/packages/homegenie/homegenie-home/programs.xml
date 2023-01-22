@@ -4,8 +4,8 @@
     <ScriptSetup>Program.Setup(() =&gt; {
   Program
     .AddModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor", new string[]{"EventsLogger.EnableLogging"})
-    .AddFeature("", "Light,Dimmer,Switch : /^Status.Level$/", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
-    .AddFeature("", "Light,Dimmer,Switch,Sensor : /^Meter.Watts$|^Status.Level$/", "EnergyManagement.MonitorWatts", "Monitor energy consumption", "checkbox");
+    .AddFeature("", "Light,Dimmer,Color,Switch : /^Status.Level$/", "EnergyManagement.MonitorStatus", "Monitor status", "checkbox")
+    .AddFeature("", "Light,Dimmer,Color,Switch,Sensor : /^Meter.Watts$|^Status.Level$/", "EnergyManagement.MonitorWatts", "Monitor energy consumption", "checkbox");
 });
 Program.Run();
 </ScriptSetup>
@@ -62,18 +62,20 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
       if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
       {
         if (updateCounter) {
+          double defaultValue = mod.Parameter("Meter.Watts").Statistics.Last.Value;
           var avgWatt = mod.Parameter("Meter.Watts").Statistics.History
-            .FindAll(sv =&gt; (sv.Timestamp - now).TotalSeconds &lt; counterUpdateInterval)
+            .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; counterUpdateInterval)
             .Select(sv =&gt; sv.Value)
+            .DefaultIfEmpty(defaultValue)
             .Average();
           totalLoad += avgWatt;
-        } else {
+        } else if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0) {
           totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
         }
       }
       if (mod.HasFeature("EnergyManagement.MonitorStatus"))
       {
-        if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer"))
+        if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer") || mod.IsOfDeviceType("Color"))
         {
           lightcount++;
         }
@@ -185,7 +187,7 @@ while (Program.IsRunning)
       <Id>energy-monitor</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>A117DE93C3530A5AC805DF5491CE36D6</Checksum>
+      <Checksum>1229548E1506A15D22938492F8E4DC71</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -196,14 +198,14 @@ while (Program.IsRunning)
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Light,Dimmer,Switch : /^Status.Level$/</ForTypes>
+        <ForTypes>Light,Dimmer,Color,Switch : /^Status.Level$/</ForTypes>
         <Property>EnergyManagement.MonitorStatus</Property>
         <Description>Monitor status</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Sensor : /^Meter.Watts$|^Status.Level$/</ForTypes>
+        <ForTypes>Light,Dimmer,Color,Switch,Sensor : /^Meter.Watts$|^Status.Level$/</ForTypes>
         <Property>EnergyManagement.MonitorWatts</Property>
         <Description>Monitor energy consumption</Description>
       </ProgramFeature>
@@ -215,8 +217,8 @@ while (Program.IsRunning)
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingMode", "Enable energy saving mode", "checkbox")
-  .AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Max light level (%)", "slider:20:80:1")
+  .AddFeature("", "Dimmer,Color", "EnergyManagement.EnergySavingMode", "Enable energy saving mode", "checkbox")
+  .AddFeature("", "Dimmer,Color", "EnergyManagement.EnergySavingLevel", "Max light level (%)", "slider:20:80:1")
   .Run();
 </ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes
@@ -251,7 +253,7 @@ Program.GoBackground();
       <Id>energy-saving-mode</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>5B475B31BDCCBFB693D0D7FEEB2D39CF</Checksum>
+      <Checksum>AAAB9731E77D7A96B006BE2A775C3E3C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>82</Address>
@@ -262,14 +264,14 @@ Program.GoBackground();
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Dimmer</ForTypes>
+        <ForTypes>Dimmer,Color</ForTypes>
         <Property>EnergyManagement.EnergySavingMode</Property>
         <Description>Enable energy saving mode</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:20:80:1</FieldType>
         <ForDomains />
-        <ForTypes>Dimmer</ForTypes>
+        <ForTypes>Dimmer,Color</ForTypes>
         <Property>EnergyManagement.EnergySavingLevel</Property>
         <Description>Max light level (%)</Description>
       </ProgramFeature>
@@ -287,7 +289,7 @@ Program.GoBackground();
     <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
-  .OfDeviceType("Light,Dimmer")
+  .OfDeviceType("Light,Dimmer,Color")
   //.IterationDelay(0.35)
   .Off();
 </ScriptSource>
@@ -299,7 +301,7 @@ Modules
       <Id>group-lights-off</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>3792BD9252297DB19896EDE974D5B6D1</Checksum>
+      <Checksum>7D803341AE53424AD5D171A3571A8AA1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>7</Address>
@@ -319,7 +321,7 @@ Modules
     <ScriptSource>// `PROGRAM_OPTIONS_STRING` will contain the name of the group where this program is run from
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
-  .OfDeviceType("Light,Dimmer")
+  .OfDeviceType("Light,Dimmer,Color")
   //.IterationDelay(0.35)
   .On();</ScriptSource>
     <ScriptErrors />
@@ -330,7 +332,7 @@ Modules
       <Id>group-lights-on</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>16377299BEDA72753C854BDC05390091</Checksum>
+      <Checksum>68F0B3BE4A06D6EF05CEAA161F8D4153</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>6</Address>
@@ -344,12 +346,169 @@ Modules
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
+    <ScriptSetup>const string MODULES_DOMAIN = "HomeAutomation.KNX";
+const string ADDRESS_PROPERTY = "KNX.Address";
+
+Program
+  .AddOption("KnxLocalIp", "", "Local endpoint IP address (optional)", "text")
+  .AddOption("KnxLocalPort","", "Local endpoint port (optional)", "text")
+  .AddOption("KnxRemoteIp", "", "Remote endpoint IP address (optional)", "text")
+  .AddOption("KnxRemotePort","", "Remote endpoint port (optional)", "text")
+  // Create 5 modules with the domain "HomeAutomation.KNX" and with address from 1 to 5
+  .AddModules(MODULES_DOMAIN, 1, 5, "Light")
+  .AddFeature(MODULES_DOMAIN, "Dimmer,Light,Sensor,Color,Switch", ADDRESS_PROPERTY, "KNX Address", "text")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.KNX";
+const string ADDRESS_PROPERTY = "KNX.Address";
+
+var localIp = Program.Option("KnxLocalIp").Value;
+var localPort = (int)Program.Option("KnxLocalPort").DecimalValue;
+var remoteIp = Program.Option("KnxRemoteIp").Value;
+var remotePort = (int)Program.Option("KnxRemotePort").DecimalValue;
+
+var knx = KnxClient;
+if (!String.IsNullOrWhiteSpace(localIp) &amp;&amp; !String.IsNullOrWhiteSpace(remoteIp))
+{
+  knx.EndPoint(localIp, localPort &gt; 0 ? localPort : 3671, remoteIp, remotePort &gt; 0 ? remotePort : 3671);
+}
+else if (!String.IsNullOrWhiteSpace(localIp))
+{
+  if (localPort &gt; 0)  
+  {
+    knx.EndPoint(localIp, localPort);
+  }
+  else
+  {
+    knx.EndPoint(localIp);
+  }
+}
+
+var knxModules = Modules.InDomain(MODULES_DOMAIN);
+try
+{
+  knx
+    .Connect()
+    .OnStatusReceived((address, state) =&gt; { 
+      knxModules.Each((module) =&gt; {
+        if (module.Parameter(ADDRESS_PROPERTY).Value == address) {
+          module.Emit("Status.Level", (state != null &amp;&amp; (int)state[0] &gt; 0) ? "1" : "0");
+          return true; // break the iteration
+        }
+        return false;
+      });
+    })
+    .OnEventReceived((address, state) =&gt; {
+      knxModules.Each((module) =&gt; {
+        if (module.Parameter(ADDRESS_PROPERTY).Value == address) {
+          // TODO: this actually should consider device type in order to determine the parameter kind
+          // (e.g. "Status.Level", "Sensor.Temperature", "Status.Color", etc..)
+          // see KNXLib docs -&gt; https://github.com/lifeemotions/knx.net/blob/master/README.md
+          module.Emit("Status.Level", (state != null &amp;&amp; (int)state[0] &gt; 0) ? "1" : "0");
+          return true; // break the iteration
+        }
+        return false;
+      });
+    });
+}
+catch (Exception e)
+{
+  Program.Notify(e.Message + " [program_configure,program_disable]");
+}
+
+
+// restart and reconfigure if a configuration parameter changed
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    Program.Restart();
+  }
+  else if (module.Instance.Domain == MODULES_DOMAIN &amp;&amp; property.Is(ADDRESS_PROPERTY))
+  {
+    var address = property.Value;
+    if (address.Length &gt; 0) {
+      knx.RequestStatus(address);
+    }
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
+// - http://&lt;hg_address&gt;/api/HomeAutomation.KNX/...
+When.WebServiceCallReceived(MODULES_DOMAIN, ( args ) =&gt; {
+  var request = Program.ParseApiCall(args);
+  try
+  {
+    var module = knxModules.WithAddress(request.Address).Get();
+    var knxAddress = module.Parameter(ADDRESS_PROPERTY);
+    if (knxAddress == null || String.IsNullOrEmpty(knxAddress.Value))
+    {
+      Program.Notify($"KNX address of module '{request.Address}' is not configured.");
+      return new ResponseStatus(Status.Error, $"KNX address of module '{request.Address}' is not configured.");
+    }
+    switch(request.Command)
+    {
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.KNX/&lt;light_number&gt;/Control.On
+      case "Control.On":
+        module.Emit("Status.Level", "1");
+        knx.Action(knxAddress.Value, true);
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.KNX/&lt;light_number&gt;/Control.Off
+      case "Control.Off":
+        module.Emit("Status.Level", "0");
+        knx.Action(knxAddress.Value, false);
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.KNX/&lt;light_number&gt;/Control.Toggle
+      case "Control.Toggle":
+        if (module.IsOff)
+        {
+          module.Emit("Status.Level", "1");
+          knx.Action(knxAddress.Value, true);
+        }
+        else
+        {
+          module.Emit("Status.Level", "0");
+          knx.Action(knxAddress.Value, false);
+        }
+        break;
+    }
+    return new ResponseStatus(Status.Ok);
+  } catch (Exception e) { 
+    Program.Notify(MODULES_DOMAIN + " ERROR!", e.Message);
+    return new ResponseStatus(Status.Error, e.Message);
+  }
+  return null;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>knx-client</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>766D249254B26A3F402F93978A2B5C75</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>27</Address>
+    <Name>KNX client</Name>
+    <Description>Control KNX device</Description>
+    <Group>Devices and Things</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program
   .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
   .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
   // Creates 5 modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5.
   // "Dimmer" is the device type and "homegenie/generic/colorlight" the widget to be used to display the modules.
-  .AddModules("HomeAutomation.PhilipsHue", 1, 5, "Dimmer", "homegenie/generic/colorlight")
+  .AddModules("HomeAutomation.PhilipsHue", 1, 5, "Color", "homegenie/generic/colorlight")
   .Run();
 </ScriptSetup>
     <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
@@ -389,37 +548,37 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
       case "Control.On":
         {
-          bridgeApiCall(lightNumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           module.Emit("Status.Level", color.B);
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
         }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
       case "Control.Off":
-        bridgeApiCall(lightNumber, "{ \"on\" : false }");
         module.Emit("Status.Level", "0");
+        bridgeApiCall(lightNumber, "{ \"on\" : false }");
         break;
       case "Control.Toggle":
         if (module.Parameter("Status.Level").DecimalValue == 0)
         {
-          bridgeApiCall(lightNumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           module.Emit("Status.Level", color.B);
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
         }
         else
         {
-          bridgeApiCall(lightNumber, "{ \"on\" : false }");
           module.Emit("Status.Level", "0");
+          bridgeApiCall(lightNumber, "{ \"on\" : false }");
         }
         break;
       case "Control.Level":
         {
           if (module.IsOff) bridgeApiCall(lightNumber, "{ \"on\" : true }");
-          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
           var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
           module.Emit("Status.ColorHsb", color.H+','+color.S+','+bri);
           module.Emit("Status.Level", bri);
+          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
         }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;,&lt;transition_duration&gt;
@@ -427,13 +586,13 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         string[] values = parameter.Split(',');
         double transition = 5;
         if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10));
+        module.Emit("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString());
+        module.Emit("Status.ColorHsb", parameter);
         bridgeApiCall(lightNumber, "{ \"on\" : true" +
                       ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) +
                       ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) +
                       ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) +
                       ", \"transitiontime\" : " + transition.ToString() +  "}");
-        module.Emit("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString());
-        module.Emit("Status.ColorHsb", parameter);
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
       case "Control.Alert":
@@ -461,7 +620,7 @@ Program.GoBackground();
       <Id>philips-hue-bridge</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>3D244844E9B362B99F52C3526C4E63C4</Checksum>
+      <Checksum>F62275CA67C55EDA613E1D0B2E98CEF7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
@@ -478,7 +637,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
-var alarmTypes = "Siren,Light,Dimmer,Switch";
+var alarmTypes = "Siren,Light,Dimmer,Color,Switch";
 Program.Setup(() =&gt; {
   Program
     .UseWidget("homegenie/generic/securitysystem")
@@ -657,7 +816,7 @@ When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address
 
 // main program loop
 var sirenModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren");
-var alarmModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light");
+var alarmModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light,Color");
 
 if (Program.Parameter("Status.Level").Value != "0") {
   var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
@@ -723,7 +882,7 @@ while (Program.IsRunning)
   Pause(1);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -731,7 +890,7 @@ while (Program.IsRunning)
       <Id>security-alarm-system</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>09DA9F1A74FA681E81226056F6006E62</Checksum>
+      <Checksum>8B8A7545B054508BF4C97A61130B54ED</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -756,7 +915,7 @@ while (Program.IsRunning)
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
+        <ForTypes>Siren,Light,Dimmer,Color,Switch</ForTypes>
         <Property>HomeGenie.SecurityAlarm</Property>
         <Description>Use as Security Alarm</Description>
       </ProgramFeature>
@@ -768,11 +927,11 @@ while (Program.IsRunning)
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:50:300")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30:30")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:50:300")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30:30")
   .Run();
 </ScriptSetup>
     <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
@@ -867,7 +1026,7 @@ while (Program.IsRunning)
       <Id>smart-device</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>650F5EB6A0A23A98048743DF3C5868AE</Checksum>
+      <Checksum>E1280D0D1275FFDDD9BD37BC8294E144</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -878,35 +1037,35 @@ while (Program.IsRunning)
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.Enable</Property>
         <Description>Enable Smart Light Control</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>module.text:any:sensor:status.level,sensor.motiondetect</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
         <Description>Controlled by motion sensor (optional)</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>module.text:any:any:sensor.luminance</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.CheckLuminosity</Property>
         <Description>Controlled by luminance sensor (optional)</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:1000:50:300</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.MinLuminance</Property>
         <Description>Trigger if luminance is below</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:30:3600:30:30</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>
         <Description>Turn off after inactivity timeout (seconds)</Description>
       </ProgramFeature>
@@ -919,12 +1078,12 @@ while (Program.IsRunning)
   <ProgramBlock>
     <ScriptSetup>Program
   .AddOption("ThermostatsCount", "1", "Number of thermostats to create", "slider:1:10:1")
-  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Temperature sensor", "module.text:any:any:sensor.temperature")
-  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.HeatingSwitchModule", "Heating switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
-  .AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.CoolingSwitchModule", "Cooling switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .AddFeature("HomeAutomation.SmartThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Temperature sensor", "module.text:any:any:sensor.temperature")
+  .AddFeature("HomeAutomation.SmartThermostat", "Thermostat", "VirtualThermostat.HeatingSwitchModule", "Heating switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .AddFeature("HomeAutomation.SmartThermostat", "Thermostat", "VirtualThermostat.CoolingSwitchModule", "Cooling switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
   .Run();
 </ScriptSetup>
-    <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
+    <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.SmartThermostat";
 const string PARAMETER_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
 
 var thermostatsCount = (int)Program.Option("ThermostatsCount").DecimalValue;
@@ -960,7 +1119,7 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
   {
     lastNotification = thermostatMode.Value;
     thermostat.Emit("Thermostat.OperatingState", "Idle");
-    Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "A switch for the mode '" + modePrefix + "' is not set.");
+    Program.Notify("Smart Thermostat " + thermostat.Instance.Address, "A switch for the mode '" + modePrefix + "' is not set.");
     return false;
   }
   // Mode logic
@@ -1025,7 +1184,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
     if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
     {
       thermostat.Emit("Thermostat.OperatingState", "Idle");
-      //Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid temperature module.");
+      //Program.Notify("Smart Thermostat " + thermostat.Instance.Address, "Please specify a valid temperature module.");
       return false;
     }
     // Update Thermostat module Temperature field
@@ -1048,7 +1207,7 @@ var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
   }
   catch (Exception e)
   {
-    Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "ERROR: " + e.Message);
+    Program.Notify("Smart Thermostat " + thermostat.Instance.Address, "ERROR: " + e.Message);
   }
 
   return true;
@@ -1134,7 +1293,7 @@ while (Program.IsRunning)
       <Id>smart-thermostat</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>839C3585195B1E1B54B77127FFD7E976</Checksum>
+      <Checksum>276D670FED58045040F27EF16A3A4269</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
@@ -1145,21 +1304,21 @@ while (Program.IsRunning)
     <Features>
       <ProgramFeature>
         <FieldType>module.text:any:any:sensor.temperature</FieldType>
-        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForDomains>HomeAutomation.SmartThermostat</ForDomains>
         <ForTypes>Thermostat</ForTypes>
         <Property>VirtualThermostat.TemperatureModule</Property>
         <Description>Temperature sensor</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
-        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForDomains>HomeAutomation.SmartThermostat</ForDomains>
         <ForTypes>Thermostat</ForTypes>
         <Property>VirtualThermostat.HeatingSwitchModule</Property>
         <Description>Heating switch</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>module.text:any:switch,light,dimmer,thermostat,shutter:any</FieldType>
-        <ForDomains>HomeAutomation.BasicThermostat</ForDomains>
+        <ForDomains>HomeAutomation.SmartThermostat</ForDomains>
         <ForTypes>Thermostat</ForTypes>
         <Property>VirtualThermostat.CoolingSwitchModule</Property>
         <Description>Cooling switch</Description>
@@ -1173,9 +1332,10 @@ while (Program.IsRunning)
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
   Program
-    .AddFeature("HomeAutomation.PhilipsHue", "Dimmer", "Scenarios.SunriseColors", "Include device in Sunrise Colors Scenario", "checkbox")
+    .AddFeature("HomeAutomation.PhilipsHue", "Color", "Scenarios.SunriseColors", "Include device in Sunrise Colors Scenario", "checkbox")
   	.UseWidget("homegenie/generic/program");
-});</ScriptSetup>
+});
+</ScriptSetup>
     <ScriptSource>// CSharp Automation Program Plugin
 
 // Initialize scenario
@@ -1206,7 +1366,7 @@ Pause(10);</ScriptSource>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>ED5FD4C9B1531010B3662CFB2FA636C0</Checksum>
+      <Checksum>4DC00BFFABDD4DE798CAA703227391F9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>
@@ -1217,7 +1377,7 @@ Pause(10);</ScriptSource>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains>HomeAutomation.PhilipsHue</ForDomains>
-        <ForTypes>Dimmer</ForTypes>
+        <ForTypes>Color</ForTypes>
         <Property>Scenarios.SunriseColors</Property>
         <Description>Include device in Sunrise Colors Scenario</Description>
       </ProgramFeature>

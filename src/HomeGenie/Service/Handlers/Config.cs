@@ -60,7 +60,7 @@ namespace HomeGenie.Service.Handlers
         {
             homegenie = hg;
             tempFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder());
-            widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "pages", "control", "widgets");
+            widgetBasePath = Path.Combine(Utility.GetDataFolder(), "widgets");
             groupWallpapersPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "images", "wallpapers");
             netHelper = new NetHelper(homegenie);
         }
@@ -1433,6 +1433,19 @@ namespace HomeGenie.Service.Handlers
 
             case "Widgets.List":
                 List<string> widgetsList = new List<string>();
+                var directoryFiles = Directory.EnumerateFiles(widgetBasePath, "*", SearchOption.AllDirectories);
+                foreach (string file in directoryFiles)
+                {
+                    if (file.EndsWith(".html"))
+                    {
+                        string widgetName = file.Substring(widgetBasePath.Length + 1);
+                        widgetName = widgetName.Substring(0, widgetName.Length - 5);
+                        widgetsList.Add(widgetName);
+                    }
+                }
+                widgetsList.Sort((w1, w2) => String.Compare(w1, w2, StringComparison.Ordinal) + (w1.IndexOf("/", StringComparison.Ordinal) - w2.IndexOf("/", StringComparison.Ordinal)));
+                request.ResponseData = widgetsList;
+                /*
                 var groups = Directory.GetDirectories(widgetBasePath);
                 for (int d = 0; d < groups.Length; d++)
                 {
@@ -1449,6 +1462,7 @@ namespace HomeGenie.Service.Handlers
                     }
                 }
                 request.ResponseData = widgetsList;
+                */
                 break;
 
             case "Widgets.Add":

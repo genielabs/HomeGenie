@@ -1,0 +1,92 @@
+:host {
+  border: solid #afafaf09;
+  border-radius: 12px;
+  font-weight: lighter;
+  height: 180px;
+}
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+  width: 280px;
+  height: 180px;
+}
+.button {
+  border: solid 6px #e7e7e7;
+  border-radius: 64px;
+  background-color: #408322;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 32px;
+  box-shadow: rgba(0, 0, 0, 0.75) 0 4px 8px 0;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+}
+.button.pressed {
+  border: solid 6px #dbffdb;
+  background-color: #0fb000;
+  width: 62px;
+  height: 62px;
+  box-shadow: rgba(0, 80, 0, 0.5) 0 2px 6px 0;
+}
+.button:active {
+  width: 62px;
+  height: 62px;
+  box-shadow: rgba(0, 80, 0, 0.5) 0 2px 6px 0;
+}
+.button.pressed:active {
+  width: 61px;
+  height: 61px;
+  box-shadow: rgba(0, 80, 0, 0.35) 0 1px 3px 0;
+}
+.button .button-icon {
+  opacity: 0.25;
+  margin: 8px
+}
+.button.pressed .button-icon {
+  fill: white;
+  opacity: 0.6;
+}
+
+.button-shadow {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 32px;
+  border-radius: 64px;
+  box-shadow: rgba(0, 80, 0, 0.35) 0 2px 4px 0 inset;
+}
+
+.label {
+  position: absolute;
+  bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 32px;
+  line-height: 32px;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 180%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.6;
+}
+.message {
+  position: absolute;
+  bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 32px;
+  line-height: 32px;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.6;
+  color: orangered;
+}
+

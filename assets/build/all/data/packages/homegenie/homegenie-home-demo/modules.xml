@@ -29,7 +29,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:24.0287448Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0991203Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -71,7 +71,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:24.0287569Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0991039Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -117,19 +117,19 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Humidity</Name>
-        <Value>8.012</Value>
+        <Value>5</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:10:24.0200463Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:37:29.7963775Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Luminance</Name>
-        <Value>794</Value>
+        <Value>197</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:10:24.0249329Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:37:29.7971633Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.MotionDetect</Name>
@@ -141,11 +141,11 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
-        <Value>10.546</Value>
+        <Value>12.526</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:10:23.7626374Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:37:29.7954735Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -201,7 +201,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:36:46.3418406Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0991365Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -259,7 +259,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:36:46.341892Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0991486Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -361,11 +361,11 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>400.026</Value>
+        <Value>400.134</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:10:24.0284772Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:37:29.798488Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
@@ -393,11 +393,11 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>1</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T14:26:56.4623246Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:37:29.8082541Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -405,7 +405,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2021-04-14T01:36:46.3419461Z</UpdateTime>
+        <UpdateTime>2023-01-21T15:34:31.0991582Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />

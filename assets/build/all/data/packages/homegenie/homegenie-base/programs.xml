@@ -1,6 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
+    <ScriptSetup>var dataFolder = Data.GetFolder("client-presets");
+Data.AddToSystemBackup(dataFolder);
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var dataFolder = Data.GetFolder("client-presets");
+
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsList", (args) =&gt; {
+    var files = Directory.GetFiles(dataFolder);
+    return files.Select(f =&gt; Path.GetFileNameWithoutExtension(f));
+});
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsAdd/", (args) =&gt; {
+    var command = Program.ParseApiCall(args);
+    if (command.Data != null) {
+        var configuration = System.Text.Encoding.Default.GetString(command.Data as byte[]);
+        var presetName = command.GetOption(0);
+        if (String.IsNullOrEmpty(presetName)) {
+            presetName = "default";
+        }
+        var dataFile = Path.Combine(dataFolder, presetName + ".json");
+        File.WriteAllText(dataFile, configuration);
+    }
+    return new ResponseStatus(Status.Ok);
+});
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsGet/", (args) =&gt; {
+    var command = Program.ParseApiCall(args);
+    var presetName = command.GetOption(0);
+    if (String.IsNullOrEmpty(presetName)) {
+        presetName = "default";
+    }
+    var dataFile = Path.Combine(dataFolder, presetName + ".json");
+    return File.ReadAllText(dataFile);
+});
+When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsDelete/", (args) =&gt; {
+    var command = Program.ParseApiCall(args);
+    var presetName = command.GetOption(0);
+    if (String.IsNullOrEmpty(presetName)) {
+        return new ResponseStatus(Status.Error);
+    }
+    var dataFile = Path.Combine(dataFolder, presetName + ".json");
+    File.Delete(dataFile);
+    return new ResponseStatus(Status.Ok);
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>client-configs</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>5C52128B070889C0E5703CBB1979988E</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>111</Address>
+    <Name>Client Configs</Name>
+    <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program
   .AddOption("Email.Sender", "", "1. E-Mail address", "text")
   .AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text")
@@ -619,8 +685,8 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.RemoteControl.Enable", "Enable remote control", "checkbox")
-  .AddFeature("", "Switch,Light,Dimmer", "HomeGenie.RemoteControl.IRCode", "Toggle button (enter code)", "capture:Receiver.RawData")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.RemoteControl.Enable", "Enable remote control", "checkbox")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.RemoteControl.IRCode", "Toggle button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerUpCode", "ButtonUp", "1. Bright button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerDownCode", "ButtonDown", "2. Dim button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerInterval", "10", "4. Dimming step", "slider:5:50:5")
@@ -686,7 +752,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 });
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
@@ -694,7 +760,7 @@ Program.GoBackground();
       <Id>remote-control</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>C3A9D4C396DE2FCBE7AE633AAA0556FA</Checksum>
+      <Checksum>3CCE84C3D6FAFC582974FA8A189B3665</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
@@ -705,14 +771,14 @@ Program.GoBackground();
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.RemoteControl.Enable</Property>
         <Description>Enable remote control</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>capture:Receiver.RawData</FieldType>
         <ForDomains />
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.RemoteControl.IRCode</Property>
         <Description>Toggle button (enter code)</Description>
       </ProgramFeature>
@@ -720,72 +786,6 @@ Program.GoBackground();
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>var dataFolder = Data.GetFolder("client-presets");
-Data.AddToSystemBackup(dataFolder);
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>var dataFolder = Data.GetFolder("client-presets");
-
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsList", (args) =&gt; {
-    var files = Directory.GetFiles(dataFolder);
-    return files.Select(f =&gt; Path.GetFileNameWithoutExtension(f));
-});
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsAdd/", (args) =&gt; {
-    var command = Program.ParseApiCall(args);
-    if (command.Data != null) {
-        var configuration = System.Text.Encoding.Default.GetString(command.Data as byte[]);
-        var presetName = command.GetOption(0);
-        if (String.IsNullOrEmpty(presetName)) {
-            presetName = "default";
-        }
-        var dataFile = Path.Combine(dataFolder, presetName + ".json");
-        File.WriteAllText(dataFile, configuration);
-    }
-    return new ResponseStatus(Status.Ok);
-});
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsGet/", (args) =&gt; {
-    var command = Program.ParseApiCall(args);
-    var presetName = command.GetOption(0);
-    if (String.IsNullOrEmpty(presetName)) {
-        presetName = "default";
-    }
-    var dataFile = Path.Combine(dataFolder, presetName + ".json");
-    return File.ReadAllText(dataFile);
-});
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsDelete/", (args) =&gt; {
-    var command = Program.ParseApiCall(args);
-    var presetName = command.GetOption(0);
-    if (String.IsNullOrEmpty(presetName)) {
-        return new ResponseStatus(Status.Error);
-    }
-    var dataFile = Path.Combine(dataFolder, presetName + ".json");
-    File.Delete(dataFile);
-    return new ResponseStatus(Status.Ok);
-});
-
-Program.GoBackground();
-</ScriptSource>
-    <ScriptErrors />
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
-      <Id>client-configs</Id>
-      <Version>1.0.0</Version>
-      <Required>true</Required>
-      <Checksum>5C52128B070889C0E5703CBB1979988E</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>111</Address>
-    <Name>Client Configs</Name>
-    <Group>Utilities</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
-    <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

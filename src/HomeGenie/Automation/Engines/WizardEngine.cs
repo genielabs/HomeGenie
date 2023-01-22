@@ -34,6 +34,7 @@ using HomeGenie.Service.Constants;
 using HomeGenie.Service;
 using HomeGenie.Data;
 using HomeGenie.Automation.Engines.WizardScript;
+using Control = HomeGenie.Service.API.Automation.Control;
 
 namespace HomeGenie.Automation.Engines
 {
@@ -190,21 +191,21 @@ namespace HomeGenie.Automation.Engines
                         selectBlock.next = commandBlock;
                         switch (command.CommandString)
                         {
-                            case Commands.Control.ControlOn:
+                            case Control.On:
                                 block.type = "control_on";
                                 break;
-                            case Commands.Control.ControlOff:
+                            case Control.Off:
                                 block.type = "control_off";
                                 break;
-                            case Commands.Control.ControlToggle:
+                            case Control.Toggle:
                                 block.type = "control_toggle";
                                 break;
-                            case Commands.Control.ControlLevel:
+                            case Control.Level:
                                 block.type = "control_level";
                                 double.TryParse(command.CommandArguments, out var level);
                                 block.fields.LEVEL = level;
                                 break;
-                            case Commands.Control.ControlColorHsb:
+                            case Control.ColorHsb:
                                 block.type = "control_color";
                                 var hsb = command.CommandArguments.Split(',');
                                 string htmlColor = "";
@@ -497,13 +498,14 @@ namespace HomeGenie.Automation.Engines
                             }
                             hgScriptingHost.Program.Say(sentence, language);
                             break;
+                        /*
                         default:
                             var programCommand = commands[x];
                             string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" +
                                               programCommand.CommandString + "/" +
                                               programCommand.CommandArguments;
                             HomeGenie.ExecuteAutomationRequest(new MigInterfaceCommand(wrequest));
-                            break;
+                            break;*/ // deprecated - HG 1.4
                     }
                 }
                 else

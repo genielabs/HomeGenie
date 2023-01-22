@@ -36,6 +36,9 @@ using HomeGenie.Automation.Engines;
 using HomeGenie.Data;
 using HomeGenie.Data.UI;
 using Innovative.SolarCalculator;
+using MIG.Interfaces.HomeAutomation.Commons;
+using Control = HomeGenie.Service.API.Automation.Control;
+using Groups = HomeGenie.Service.API.Automation.Groups;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -57,9 +60,6 @@ namespace HomeGenie.Service.Handlers
             string sketchFile = "", sketchFolder = "";
             //
             request.ResponseData = new ResponseStatus(Status.Ok);
-            if (homegenie.ExecuteAutomationRequest(migCommand)) {
-                // TODO: should it just return if the request has been already processed?
-            }
             if (migCommand.Command.StartsWith("Macro."))
             {
                 switch (migCommand.Command)
@@ -104,6 +104,48 @@ namespace HomeGenie.Service.Handlers
                 default:
                     request.ResponseData = new ResponseStatus(Status.Error);
                     break;
+                }
+            }
+            else if (migCommand.Command.StartsWith("Groups."))
+            {
+                string levelValue = "0", commandValue = null;
+                switch (migCommand.Command)
+                {
+                    case Groups.LightsOff:
+                        commandValue = Control.Off;
+                        break;
+                    case Groups.LightsOn:
+                        levelValue = "1";
+                        commandValue = Control.On;
+                        break;
+                }
+                if (commandValue != null)
+                {
+                    try
+                    {
+                        var group = homegenie.Groups.Find(z => z.Name == migCommand.GetOption(0));
+                        for (int m = 0; m < group.Modules.Count; m++)
+                        {
+                            var module = homegenie.Modules.Find(mod => mod.Domain == group.Modules[m].Domain && mod.Address == group.Modules[m].Address);
+                            if (module != null && (module.DeviceType == ModuleTypes.Light || module.DeviceType == ModuleTypes.Dimmer))
+                            {
+                                try
+                                {
+                                    var icmd = new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + commandValue);
+                                    homegenie.InterfaceControl(icmd);
+                                    Utility.ModuleParameterGet(module, Properties.StatusLevel).Value = levelValue;
+                                }
+                                catch (Exception e)
+                                {
+                                    MigService.Log.Error(e);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // TODO: handle exception here
+                    }
                 }
             }
             else if (migCommand.Command.StartsWith("Scheduling."))
