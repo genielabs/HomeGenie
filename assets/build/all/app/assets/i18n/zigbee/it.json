@@ -8,5 +8,7 @@
   "node_added":
     "Aggiunto con successo nodo",
   "turn_on_device_to_add":
-    "Accendi il dispositivo da aggiungere ..."
+    "Accendi il dispositivo da aggiungere ...",
+  "soft_reset_button":
+    "Soft reset"
 }

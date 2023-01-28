@@ -23,6 +23,7 @@
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.7" />
     <PackageReference Include="MIG" Version="1.2.9" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.2.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="SerialPortStream" Version="2.4.0" />
     <PackageReference Include="SharpZipLib" Version="1.4.1" />
@@ -42,7 +43,6 @@
 
     <PackageReference Include="MQTTnet" Version="4.1.4.563" />
     <PackageReference Include="SerialPortLib" Version="1.1.1" />
-    <PackageReference Include="MIG.HomeAutomation" Version="1.2.5" />
     <PackageReference Include="MIG.Protocols" Version="1.2.3" />
 
     <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.11" />

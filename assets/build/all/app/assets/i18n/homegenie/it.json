@@ -29,6 +29,10 @@
         "Controller ZigBee",
     "device_port":
         "Porta dispositivo",
+    "device_driver":
+        "Driver",
+    "controller":
+        "Controller",
 " ":"--------------- PROGRAMS ------------------",
     "programs":
         "Programmi",

@@ -1247,23 +1247,22 @@ namespace HomeGenie.Service
             if (migService.Configuration.GetInterface(iface.GetDomain()).IsEnabled)
             {
                 var interfaceModules = iface.GetModules();
+                // delete removed modules
+                var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain() && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
+                foreach (var mod in deleted)
+                {
+                    // only "real" modules defined by mig interfaces are considered
+                    var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
+                    if (virtualParam == null || virtualParam.DecimalValue == 0)
+                    {
+                        Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
+                        if (garbaged != null) modulesGarbage.Remove(garbaged);
+                        modulesGarbage.Add(mod);
+                        systemModules.Remove(mod);
+                    }
+                }
                 if (interfaceModules.Count > 0)
                 {
-                    // delete removed modules
-                    var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain() && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
-                    foreach (var mod in deleted)
-                    {
-                        // only "real" modules defined by mig interfaces are considered
-                        var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
-                        if (virtualParam == null || virtualParam.DecimalValue == 0)
-                        {
-                            Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
-                            if (garbaged != null) modulesGarbage.Remove(garbaged);
-                            modulesGarbage.Add(mod);
-                            systemModules.Remove(mod);
-                        }
-                    }
-                    //
                     foreach (var migModule in interfaceModules)
                     {
                         Module module = systemModules.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);

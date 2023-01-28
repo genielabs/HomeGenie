@@ -442,7 +442,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, ( args ) =&gt; {
     var knxAddress = module.Parameter(ADDRESS_PROPERTY);
     if (knxAddress == null || String.IsNullOrEmpty(knxAddress.Value))
     {
-      Program.Notify($"KNX address of module '{request.Address}' is not configured.");
+      Program.Notify($"MODULE_NOT_CONFIGURED {MODULES_DOMAIN}:{request.Address} [module_configure]");
       return new ResponseStatus(Status.Error, $"KNX address of module '{request.Address}' is not configured.");
     }
     switch(request.Command)
@@ -481,7 +481,7 @@ When.WebServiceCallReceived(MODULES_DOMAIN, ( args ) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -489,7 +489,7 @@ Program.GoBackground();
       <Id>knx-client</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>766D249254B26A3F402F93978A2B5C75</Checksum>
+      <Checksum>9E03DC9D3A2024A1555BD7915025279B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>27</Address>
@@ -1332,7 +1332,7 @@ while (Program.IsRunning)
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
   Program
-    .AddFeature("HomeAutomation.PhilipsHue", "Color", "Scenarios.SunriseColors", "Include device in Sunrise Colors Scenario", "checkbox")
+    .AddFeature("", "Color", "Scenarios.SunriseColors", "Include device in Sunrise Colors Scenario", "checkbox")
   	.UseWidget("homegenie/generic/program");
 });
 </ScriptSetup>
@@ -1366,7 +1366,7 @@ Pause(10);</ScriptSource>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>4DC00BFFABDD4DE798CAA703227391F9</Checksum>
+      <Checksum>D458C036ED67E0E29925A4193318FC09</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>
@@ -1376,7 +1376,7 @@ Pause(10);</ScriptSource>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
-        <ForDomains>HomeAutomation.PhilipsHue</ForDomains>
+        <ForDomains />
         <ForTypes>Color</ForTypes>
         <Property>Scenarios.SunriseColors</Property>
         <Description>Include device in Sunrise Colors Scenario</Description>
@@ -1533,22 +1533,7 @@ while (Program.IsRunning)
     <Name>WeMo</Name>
     <Description>Belkin Wemo integration</Description>
     <Group>Devices and Things</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>HomeAutomation.WeMo</ForDomains>
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>WeMo.IpAddress</Property>
-        <Description>IP Address</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>HomeAutomation.WeMo</ForDomains>
-        <ForTypes>Switch,Light,Dimmer</ForTypes>
-        <Property>WeMo.AlarmAD</Property>
-        <Description>Synchronize on/off with Alarm System armed status</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>

@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Dynamic;
 using System.Globalization;
@@ -858,8 +859,9 @@ namespace HomeGenie.Automation.Scripting
             {
                 virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
             }
-            catch
+            catch (Exception e)
             {
+                Debugger.Break();
             }
             //
             if (virtualModule == null)
@@ -878,7 +880,6 @@ namespace HomeGenie.Automation.Scripting
                     Value = widget
                 });
                 homegenie.VirtualModules.Add(virtualModule);
-                homegenie.RaiseEvent(this, myProgramDomain, myProgramId.ToString(), "", Properties.ProgramEvent, $"MODULE_ADDED {virtualModule.Domain}:{virtualModule.Address}");
             }
             else
             {
@@ -888,6 +889,7 @@ namespace HomeGenie.Automation.Scripting
                     virtualModule.DeviceType = (ModuleTypes)Enum.Parse(typeof(ModuleTypes), type);
                 Utility.ModuleParameterSet(virtualModule, Properties.WidgetDisplayModule, widget);
             }
+            homegenie.RaiseEvent(this, myProgramDomain, myProgramId.ToString(), "", Properties.ProgramEvent, $"MODULE_ADDED {virtualModule.Domain}:{virtualModule.Address}");
 
             if (implementedFeatures != null)
             {

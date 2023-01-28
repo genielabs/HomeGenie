@@ -54,9 +54,21 @@ if (pinName.Length &lt; 6) {
 }
 
 var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
-var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+// Allocate GPIO connection
+IGpioConnectionDriver connection = null;
+try
+{
+  connection = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+}
+catch (Exception e)
+{
+  // An error occurred
+  Program.Notify($"Error: {e.Message}" + notificationButtons);
+  Pause(10);
+  return; // exit and restart program
+}
 When.ProgramStopping(() =&gt; {
-  driver.Release(measurePin.ToProcessor());
+  connection.Release(measurePin.ToProcessor());
   return true;
 });
 
@@ -70,7 +82,7 @@ var dhtModule = Modules
 while (Program.IsEnabled)
 {
   try {
-    using (var pin = driver.InOut(measurePin))
+    using (var pin = connection.InOut(measurePin))
       using (var dhtConnection = new Dht11Connection(pin))
     {
       var data = dhtConnection.GetData();
@@ -97,7 +109,7 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -105,7 +117,7 @@ while (Program.IsEnabled)
       <Id>dht-11-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>1B2951CC86E791301D1DE75EE00D7964</Checksum>
+      <Checksum>AC52909A4CDB90577D0C49243DA842D6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>601</Address>
@@ -117,7 +129,7 @@ while (Program.IsEnabled)
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>var gpio_pins = new string[]{
@@ -173,9 +185,21 @@ if (pinName.Length &lt; 6) {
 }
 
 var measurePin = (ConnectorPin)Enum.Parse(typeof(ConnectorPin), pinName);
-var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+// Allocate GPIO connection
+IGpioConnectionDriver connection = null;
+try
+{
+  connection = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
+}
+catch (Exception e)
+{
+  // An error occurred
+  Program.Notify($"Error: {e.Message}" + notificationButtons);
+  Pause(10);
+  return; // exit and restart program
+}
 When.ProgramStopping(() =&gt; {
-  driver.Release(measurePin.ToProcessor());
+  connection.Release(measurePin.ToProcessor());
   return true;
 });
 
@@ -190,7 +214,7 @@ DhtData previousData = null;
 while (Program.IsEnabled)
 {
   try {
-    using (var pin = driver.InOut(measurePin))
+    using (var pin = connection.InOut(measurePin))
       using (var dhtConnection = new Dht22Connection(pin))
     {
       var data = dhtConnection.GetData();
@@ -217,7 +241,7 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -225,7 +249,7 @@ while (Program.IsEnabled)
       <Id>dht-22-sensor</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>D5C6224E2C6EDAA2132B226F6F838124</Checksum>
+      <Checksum>5925C145E74334B443865C478BD1B053</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>602</Address>
@@ -328,7 +352,7 @@ try
 catch (Exception e)
 {
   // An error occurred
-  Program.Notify($"GPIO pin {pinName}", $"Error: {e.Message}");
+  Program.Notify($"GPIO pin {pinName}", $"Error: {e.Message} [program_configure,program_disable]");
   Pause(10);
   return; // exit and restart program
 }
@@ -392,7 +416,7 @@ if (pinMode == 1) { // Output
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
@@ -400,7 +424,7 @@ Program.GoBackground();
       <Id>gpio-pin</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>305F46ABBF0DC22F1DC4630DC48E65DA</Checksum>
+      <Checksum>FF229B864EB12AF16991CE21381C3C2C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>600</Address>
@@ -549,7 +573,7 @@ When.ProgramStopping(()=&gt;{
 When.WebServiceCallReceived(appDomain, (args) =&gt; {
   try
   {
-    var apiCall = Program.ParseApiCall(args.ToString());
+    var apiCall = Program.ParseApiCall(args);
     string lightnumber = apiCall.Address;
     var module = rgbModules.WithAddress(lightnumber).Get();
     int lightId = int.Parse(lightnumber) - 1;
@@ -620,7 +644,7 @@ updateLeds();
       <Id>grove-chainable-rgb-led</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>68682FAA31D4BE1B5A6BD92C8117D644</Checksum>
+      <Checksum>976EF0172CC8E832B1791976CA387D98</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>603</Address>

@@ -89,6 +89,7 @@
       <Interface Domain="HomeAutomation.ZigBee" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
+          <Option Name="Driver" Value="conbee" />
         </Options>
       </Interface>
       <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">

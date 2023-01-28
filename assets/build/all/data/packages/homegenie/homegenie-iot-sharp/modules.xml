@@ -1,6 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Module>
+    <Name>DHT-11 Sensor</Name>
+    <Description>Read temperature and humidity from a DHT-11 connected to GPIO.
+</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>601</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO.Pin</Name>
+        <Value />
+        <Description>Pin number</Description>
+        <FieldType>select:GPIO17 (pin 11)=11,GPIO27 (pin 13)=13,GPIO22 (pin 15)=15,GPIO4 (pin 7)=7,GPIO5 (pin 29)=29,GPIO6 (pin 31)=31,GPIO13 (pin 33)=33,GPIO19 (pin 35)=35,GPIO26 (pin 37)=37,GPIO23 (pin 16)=16,GPIO24 (pin 18)=18,GPIO25 (pin 22)=22,GPIO12 (pin 32)=32,GPIO16 (pin 36)=36,GPIO21 (pin 40)=40</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-26T21:38:31.0527597Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.UpdateInterval</Name>
+        <Value>60</Value>
+        <Description>Update Interval (seconds)</Description>
+        <FieldType>slider:10:3600:10</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-26T19:42:34.604394Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>601</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-26T21:39:55.6911083Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
     <Name>GPIO Pin v.1</Name>
     <Description>Configurable GPIO pin as binary input sensor or output switch.
 (RaspberrySharp.IO)
@@ -15,7 +50,7 @@
         <Description>Pin number</Description>
         <FieldType>select:GPIO17 (pin 11)=11,GPIO27 (pin 13)=13,GPIO22 (pin 15)=15,GPIO4 (pin 7)=7,GPIO5 (pin 29)=29,GPIO6 (pin 31)=31,GPIO13 (pin 33)=33,GPIO19 (pin 35)=35,GPIO26 (pin 37)=37,GPIO23 (pin 16)=16,GPIO24 (pin 18)=18,GPIO25 (pin 22)=22,GPIO12 (pin 32)=32,GPIO16 (pin 36)=36,GPIO21 (pin 40)=40</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T16:26:49.1282543Z</UpdateTime>
+        <UpdateTime>2023-01-26T21:38:07.1603078Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO.Pin.Mode</Name>
