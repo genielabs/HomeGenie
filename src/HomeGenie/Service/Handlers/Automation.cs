@@ -606,7 +606,7 @@ namespace HomeGenie.Service.Handlers
                             ""
                         );
                         currentProgram.IsEnabled = true;
-                        System.Threading.Thread.Sleep(500);
+                        //System.Threading.Thread.Sleep(500);
                         ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
                     }
                     break;

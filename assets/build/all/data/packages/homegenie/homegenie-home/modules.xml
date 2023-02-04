@@ -387,7 +387,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
   <Module>
     <Name>Light 1</Name>
     <Description />
-    <DeviceType>Dimmer</DeviceType>
+    <DeviceType>Color</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
     <Address>1</Address>
     <Properties>
@@ -583,21 +583,13 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <ParentId>0</ParentId>
         <UpdateTime>2023-01-21T23:23:09.5359851Z</UpdateTime>
       </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/colorlight</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T15:28:49.5102877Z</UpdateTime>
-      </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Light 2</Name>
     <Description />
-    <DeviceType>Dimmer</DeviceType>
+    <DeviceType>Color</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
     <Address>2</Address>
     <Properties>
@@ -793,21 +785,13 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <ParentId>0</ParentId>
         <UpdateTime>2023-01-21T23:23:09.5359931Z</UpdateTime>
       </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/colorlight</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T15:28:49.510388Z</UpdateTime>
-      </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Porch Light</Name>
     <Description />
-    <DeviceType>Dimmer</DeviceType>
+    <DeviceType>Color</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
     <Address>3</Address>
     <Properties>
@@ -1043,21 +1027,13 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <ParentId>0</ParentId>
         <UpdateTime>2023-01-21T23:23:09.5360003Z</UpdateTime>
       </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/colorlight</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T15:28:49.5104209Z</UpdateTime>
-      </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Light 4</Name>
     <Description />
-    <DeviceType>Dimmer</DeviceType>
+    <DeviceType>Color</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
     <Address>4</Address>
     <Properties>
@@ -1085,21 +1061,13 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <ParentId>0</ParentId>
         <UpdateTime>2023-01-21T23:23:09.5360061Z</UpdateTime>
       </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/colorlight</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T15:28:49.5104451Z</UpdateTime>
-      </ModuleParameter>
     </Properties>
     <Stores />
   </Module>
   <Module>
     <Name>Light 5</Name>
     <Description />
-    <DeviceType>Dimmer</DeviceType>
+    <DeviceType>Color</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
     <Address>5</Address>
     <Properties>
@@ -1126,14 +1094,6 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2023-01-21T23:23:09.536012Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/colorlight</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T15:28:49.5104672Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />

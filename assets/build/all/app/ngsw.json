@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1674946287804,
+  "timestamp": 1675518702579,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,11 +15,11 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.e7066cd807d8d771.js",
+        "/app/main.cf0b19e5c8c90785.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.710b144f4805f4b0.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
-        "/app/styles.01d0686c443814d4.css"
+        "/app/styles.0a7cdf6d6458bf45.css"
       ],
       "patterns": []
     },
@@ -705,13 +705,13 @@
     "/app/assets/widgets/weather/images_alt/thunder.svg": "fb088a704d2185e14cf5f9ab1523f546deb258b7",
     "/app/assets/widgets/weather/images_alt/weather.svg": "73ab65b876b20b345dd8f397550fcf9226cad7c1",
     "/app/assets/widgets/weather/style.css": "1b70730e73885cc0ee83566eaf584008d34e2255",
-    "/app/assets/workers/typings-worker.js": "be92b854a22224e5f740eafedea86523affc1ff2",
-    "/app/index.html": "deac41c0207fa179f6acd15a146f0bb808019feb",
-    "/app/main.e7066cd807d8d771.js": "1056597328c688d4f992731ff9e8d1672727f5e3",
+    "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
+    "/app/index.html": "b107c47ef74fb4692c386d3f920f783987351eec",
+    "/app/main.cf0b19e5c8c90785.js": "4e3ea9327614d30b6edeacd0bce7394d3886f09b",
     "/app/manifest.webmanifest": "d47bb07a495e27ddf072f8702df373f79b4eb183",
     "/app/polyfills.710b144f4805f4b0.js": "594a5ea1b9d3f9cbc4f363eca84eda2c8bb8a901",
     "/app/runtime.b92e2ca178ebbf4a.js": "b50d841a4c50d466c34aab3267d3fb4afe87dede",
-    "/app/styles.01d0686c443814d4.css": "ab1888a63ae950e6793f596add344c0b67f5611d"
+    "/app/styles.0a7cdf6d6458bf45.css": "c0638b793226adb7a74e21e3c1a971803f567f91"
   },
   "navigationUrls": [
     {

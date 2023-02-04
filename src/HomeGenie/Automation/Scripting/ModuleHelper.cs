@@ -165,8 +165,9 @@ namespace HomeGenie.Automation.Scripting
         public ModuleParameter Parameter(string parameter)
         {
             ModuleParameter value = null;
-            if (this.module != null)
+            if (module != null)
             {
+                /*
                 int retry = 10; // 500ms max
                 while (value == null && retry > 0)
                 {
@@ -180,10 +181,8 @@ namespace HomeGenie.Automation.Scripting
                         retry--;
                     }
                 }
-                if (parameter == "Simulator.Sensor.DataFrequency" && value == null)
-                {
-                    Console.WriteLine(this.Instance.Name, parameter, value);
-                }
+                */
+                value = Utility.ModuleParameterGet(module, parameter);
                 // create parameter if does not exists
                 if (value == null)
                 {
