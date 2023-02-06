@@ -30,6 +30,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
+using MIG.Config;
 using Group = HomeGenie.Data.Group;
 
 namespace HomeGenie.Service
@@ -244,7 +245,7 @@ namespace HomeGenie.Service
             // Update program database after package restore
             homegenie.UpdateProgramsDatabase();
             // Update system config
-            UpdateSystemConfig(archiveFolder);
+            UpdateSystemConfig(archiveFolder, homegenie.SystemConfiguration.MigService.Gateways);
 
 
 
@@ -422,7 +423,7 @@ namespace HomeGenie.Service
             return success;
         }
 
-        private bool UpdateSystemConfig(string backupConfigPath)
+        public bool UpdateSystemConfig(string backupConfigPath, List<Gateway>  gateways)
         {
             SystemConfiguration systemConfiguration;
             try
@@ -432,7 +433,7 @@ namespace HomeGenie.Service
                 using (var reader = new StreamReader(backupConfigFile))
                 {
                     systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
-                    systemConfiguration.MigService.Gateways = homegenie.SystemConfiguration.MigService.Gateways;
+                    systemConfiguration.MigService.Gateways = gateways;
                 }
                 string systemConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
                 var ws = new System.Xml.XmlWriterSettings();

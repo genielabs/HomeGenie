@@ -37,21 +37,25 @@
       const splashScreen = document.querySelector('#splash-screen');
       setTimeout(checkInstalled, 500);
       function checkInstalled() {
-        const dbName = 'ngStorage';
-        indexedDB.databases().then(r => {
-          const ngd = r.find(db => db.name === 'ngStorage');
-          if (!ngd) {
-            splashScreen.style['display'] = '';
-            setTimeout(checkInstalled, 500);
-          } else {
-            splashScreen.style['display'] = 'none';
-          }
-        });
+        if (indexedDB.databases) {
+          const dbName = 'ngStorage';
+          indexedDB.databases().then(r => {
+            const ngd = r.find(db => db.name === dbName);
+            if (!ngd) {
+              splashScreen.style['display'] = '';
+              setTimeout(checkInstalled, 500);
+            } else {
+              splashScreen.style['display'] = 'none';
+            }
+          });
+        } else {
+          splashScreen.style['display'] = 'none';
+        }
       }
     </script>
 
   </div>
 
-<script src="runtime.b92e2ca178ebbf4a.js" type="module"></script><script src="polyfills.710b144f4805f4b0.js" type="module"></script><script src="main.cf0b19e5c8c90785.js" type="module"></script>
+<script src="runtime.b92e2ca178ebbf4a.js" type="module"></script><script src="polyfills.710b144f4805f4b0.js" type="module"></script><script src="main.8f35e491f37594f8.js" type="module"></script>
 
 </body></html>

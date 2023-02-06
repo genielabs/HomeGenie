@@ -980,6 +980,9 @@ namespace HomeGenie.Service
             RebuildPrograms = true;
             // Uncompress factory settings and restart HG service
             Utility.UncompressZip("homegenie_factory_config.zip", AppDomain.CurrentDomain.BaseDirectory);
+            // Keep current MIG gateways settings
+            var gatewaysConfig = SystemConfiguration.MigService.Gateways;
+            backupManager.UpdateSystemConfig(AppDomain.CurrentDomain.BaseDirectory, gatewaysConfig);
             Reload();
             virtualModules.Clear();
             SaveData();
