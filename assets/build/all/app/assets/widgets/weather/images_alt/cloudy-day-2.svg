@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- (c) ammap.com | SVG weather icons -->
 <svg
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="64"
-    height="64"
-    viewbox="0 0 64 64">
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewbox="0 0 64 64">
     <defs>
         <filter id="blur" width="200%" height="200%">
             <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
@@ -14,9 +13,9 @@
             <feComponentTransfer>
                 <feFuncA type="linear" slope="0.05"/>
             </feComponentTransfer>
-            <feMerge> 
+            <feMerge>
                 <feMergeNode/>
-                <feMergeNode in="SourceGraphic"/> 
+                <feMergeNode in="SourceGraphic"/>
             </feMerge>
         </filter>
         <style type="text/css"><![CDATA[
@@ -172,5 +171,5 @@
             </g>
         </g>
     </g>
-    
+
 </svg>

@@ -978,11 +978,25 @@ namespace HomeGenie.Service
                 masterControlProgram = null;
             } catch { }
             RebuildPrograms = true;
-            // Uncompress factory settings and restart HG service
+            // Unzip factory settings and restart HG service
             Utility.UncompressZip("homegenie_factory_config.zip", AppDomain.CurrentDomain.BaseDirectory);
             // Keep current MIG gateways settings
             var gatewaysConfig = SystemConfiguration.MigService.Gateways;
             backupManager.UpdateSystemConfig(AppDomain.CurrentDomain.BaseDirectory, gatewaysConfig);
+            // delete programs' data
+            string programsDataFolder = Path.Combine(Utility.GetDataFolder(), "programs");
+            if (Directory.Exists(programsDataFolder))
+            {
+                try
+                {
+                    Directory.Delete(programsDataFolder, true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            // Reload and save new config
             Reload();
             virtualModules.Clear();
             SaveData();

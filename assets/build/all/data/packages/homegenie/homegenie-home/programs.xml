@@ -506,10 +506,27 @@ Program.GoBackground();
     <ScriptSetup>Program
   .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
   .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
-  // Creates 5 modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5.
-  // "Dimmer" is the device type and "homegenie/generic/colorlight" the widget to be used to display the modules.
-  .AddModules("HomeAutomation.PhilipsHue", 1, 5, "Color", "homegenie/generic/colorlight")
-  .Run();
+  .AddOption("LightsCount", "5", "Number of lights", "slider:1:32:1:5");
+
+Program.AddModules(
+  // domain
+  "HomeAutomation.PhilipsHue",
+  // modules numbering (from, to)
+  1, (int)Program.Option("LightsCount").DecimalValue,
+  // type and widget
+  "Color", "homegenie/generic/colorlight"
+);
+
+// restart and reconfigure if a configuration parameter changed
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    Program.Restart();
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
+Program.Run();
 </ScriptSetup>
     <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
 {
@@ -520,7 +537,7 @@ Program.GoBackground();
   string webserviceurl = "http://" +
     Program.Option("BridgeAddress").Value + "/api/" +
     Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
-  Net.WebService(webserviceurl).Put( jsonargs ).Call();
+  Program.RunAsyncTask(() =&gt; Net.WebService(webserviceurl).Put( jsonargs ).Call());
   return true;
 };
 
@@ -610,9 +627,10 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
   }
   return new ResponseText("ERROR");
 });
+
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -620,7 +638,7 @@ Program.GoBackground();
       <Id>philips-hue-bridge</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>F62275CA67C55EDA613E1D0B2E98CEF7</Checksum>
+      <Checksum>274832ADB134D21C40215C9BDDBA21CF</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
