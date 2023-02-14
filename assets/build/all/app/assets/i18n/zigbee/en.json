@@ -8,7 +8,7 @@
   "node_added":
     "Successfully added node",
   "turn_on_device_to_add":
-    "Turn on the device to add ...",
+    "Switch on the device and press the pairing button for 5 seconds if required",
   "soft_reset_button":
     "Soft reset"
 }

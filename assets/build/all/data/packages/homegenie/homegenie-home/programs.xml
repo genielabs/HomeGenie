@@ -630,7 +630,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -946,9 +946,9 @@ while (Program.IsRunning)
   <ProgramBlock>
     <ScriptSetup>Program
   .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox")
-  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
   .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
-  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:50:300")
+  .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.MinLuminance", "Trigger if luminance is below", "slider:0:1000:10:300")
   .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:30:3600:30:30")
   .Run();
 </ScriptSetup>
@@ -975,7 +975,7 @@ var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
 
 When.ModuleParameterIsChanging((module, parameter) =&gt; {
 
-  if (module.IsOfDeviceType("Sensor"))
+  if (module.IsOfDeviceType("Sensor|DoorWindow"))
   {
     if (parameter.Name == "Sensor.MotionDetect" || parameter.Name == "Status.Level")
     {
@@ -1036,7 +1036,7 @@ while (Program.IsRunning)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
@@ -1044,7 +1044,7 @@ while (Program.IsRunning)
       <Id>smart-device</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>E1280D0D1275FFDDD9BD37BC8294E144</Checksum>
+      <Checksum>444BD23C74ECDE7BD7B358E7C77A3DE3</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -1064,7 +1064,7 @@ while (Program.IsRunning)
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
-        <Description>Controlled by motion sensor (optional)</Description>
+        <Description>Controlled by sensor (optional)</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>module.text:any:any:sensor.luminance</FieldType>
@@ -1074,7 +1074,7 @@ while (Program.IsRunning)
         <Description>Controlled by luminance sensor (optional)</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>slider:0:1000:50:300</FieldType>
+        <FieldType>slider:0:1000:10:300</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.MinLuminance</Property>
