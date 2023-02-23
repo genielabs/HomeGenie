@@ -17,7 +17,7 @@
 
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
+ *     Project Homepage: https://homegenie.it
  */
 
 using System;
@@ -44,7 +44,7 @@ namespace HomeGenie.Automation.Engines
 {
     public static class CSharpAppFactory
     {
-        public const int ConditionCodeOffset = 8;
+        public const int ConditionCodeOffset = 7;
 
         // TODO: move this to a config file
         private static readonly List<string> Includes = new List<string>()
@@ -116,7 +116,7 @@ namespace HomeGenie.Automation.Engines
             "Utility = HomeGenie.Service.Utility"
         };
 
-        public static int ProgramCodeOffset => Includes.Count() + 15;
+        public static int ProgramCodeOffset => Includes.Count() + 11;
 
 #if NETCOREAPP
         public static EmitResult CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
@@ -135,10 +135,13 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class ScriptingInstance : ScriptingHost
     {
+//////////////////////////////////////////////////////////////////
+{context}
+//////////////////////////////////////////////////////////////////
+
         private void RunCode(string PROGRAM_OPTIONS_STRING)
         {
 //////////////////////////////////////////////////////////////////
-// NOTE: user code start line is 16 *** please add new code after this method, do not alter start line! ***
 {source}
 //////////////////////////////////////////////////////////////////
         }
@@ -147,7 +150,6 @@ namespace HomeGenie.Automation.Scripting
         private bool SetupCode()
         {
 //////////////////////////////////////////////////////////////////
-// NOTE: user code start line is ??? *** please add new code after this method, do not alter start line! ***
 {setup}
 //////////////////////////////////////////////////////////////////
             return false;
@@ -186,15 +188,12 @@ namespace HomeGenie.Automation.Scripting
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
 }";
-            var userIncludes = new List<string>();
-            scriptSetup = GetUserIncludes(scriptSetup, ref userIncludes);
-            scriptSource = GetUserIncludes(scriptSource, ref userIncludes);
-            var usingNs = String.Join(" ", Includes.Concat(userIncludes)
-                .Select(x => String.Format("using {0};" + Environment.NewLine, x)));
+            var parsedCode = ParseCode(scriptSetup, scriptSource);
             source = source
-                .Replace("{using}", usingNs)
-                .Replace("{source}", scriptSource)
-                .Replace("{setup}", scriptSetup);
+                .Replace("{using}", parsedCode.UsingNamespaces)
+                .Replace("{source}", parsedCode.MainCode)
+                .Replace("{setup}", parsedCode.SetupCode)
+                .Replace("{context}", parsedCode.ContextCode);
 #if NETCOREAPP
             var dotNetCoreDir = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
             var homeGenieDir = Path.GetDirectoryName(typeof(HomeGenieService).GetTypeInfo().Assembly.Location);
@@ -371,26 +370,96 @@ namespace HomeGenie.Automation.Scripting
 #endif
         }
 
+        public static ParseCodeResult ParseCode(string scriptSetup, string scriptSource)
+        {
+            var userIncludes = new List<string>();
+            var scriptContext = "";
+            scriptSetup = GetIncludes(scriptSetup, ref userIncludes);
+            scriptSetup = GetContext(scriptSetup, ref scriptContext);
+            scriptSource = GetIncludes(scriptSource, ref userIncludes);
+            var usingNs = String.Join(" ", Includes.Concat(userIncludes)
+                .Select(x => String.Format("using {0};" + Environment.NewLine, x)));
+            return new ParseCodeResult()
+            {
+                UsingNamespaces = usingNs,
+                UserIncludes = userIncludes,
+                ContextCode = scriptContext,
+                MainCode = scriptSource,
+                SetupCode = scriptSetup
+            };
+        }
+        
         /**
          * Parse custom "using" pre-processor directive to allow including namespaces in HG programs
          */
-        private static string GetUserIncludes(string codeBlock, ref List<string> userIncludes)
+        private static string GetIncludes(string codeBlock, ref List<string> userIncludes)
         {
             if (userIncludes == null) userIncludes = new List<string>();
-            var setupLines = codeBlock.Split('\n');
+            var codeBlockLines = codeBlock.Split('\n');
             codeBlock = "";
-            foreach (var setupLine in setupLines)
+            foreach (var codeLine in codeBlockLines)
             {
-                if (setupLine.StartsWith("#using "))
+                if (codeLine.StartsWith("#using "))
                 {
-                    userIncludes.Add(setupLine.Substring(7));
+                    userIncludes.Add(codeLine.Substring(7));
+                    codeBlock += "//" + codeLine + "\n";
                 }
                 else
                 {
-                    codeBlock += setupLine + "\n";
+                    codeBlock += codeLine + "\n";
                 }
             }
             return codeBlock;
+        }
+
+        private static string GetContext(string codeBlock, ref string contextCode)
+        {
+            var codeBlockLines = codeBlock.Split('\n');
+            codeBlock = "";
+            bool contextOpen = false;
+            int currentLine = 0;
+            foreach (var codeLine in codeBlockLines)
+            {
+                if (contextOpen)
+                {
+                    if ((codeLine.Trim() + " ").StartsWith("#endregion "))
+                    {
+                        contextOpen = false;
+                    }
+                    contextCode += codeLine + "\n";
+                }
+                else if ((codeLine.Trim() + " ").StartsWith("#region program-context "))
+                {
+                    if (currentLine == 0)
+                    {
+                        contextOpen = true;
+                    }
+                    else
+                    {
+                        throw new Exception("Directive '#region program-context' must be on first line");
+                    }
+                    contextCode += codeLine + "\n";
+                }
+                else
+                {
+                    codeBlock += codeLine + "\n";
+                }
+                currentLine++;
+            }
+            if (contextOpen)
+            {
+                throw new Exception("Missing #endregion preprocessor directive");
+            }
+            return codeBlock;
+        }
+
+        public class ParseCodeResult
+        {
+            public string UsingNamespaces { get; set; }
+            public string ContextCode { get; set; }
+            public string MainCode { get; set; }
+            public string SetupCode { get; set; }
+            public List<string> UserIncludes { get; set; }
         }
     }
 }

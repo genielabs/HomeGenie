@@ -20,10 +20,12 @@
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.11" />
     <PackageReference Include="Iot.Device.Bindings" Version="2.2.0" />
+    <PackageReference Include="IronPython" Version="3.4.0" />
+    <PackageReference Include="IronPython.StdLib" Version="3.4.0" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.7" />
     <PackageReference Include="MIG" Version="1.2.9" />
-    <PackageReference Include="MIG.HomeAutomation" Version="1.2.14" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.2.16" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="SerialPortStream" Version="2.4.0" />
     <PackageReference Include="SharpZipLib" Version="1.4.1" />

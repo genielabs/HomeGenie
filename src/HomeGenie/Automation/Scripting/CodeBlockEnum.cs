@@ -10,6 +10,11 @@
         /// <summary>
         /// Program code
         /// </summary>
-        CR
+        CR,
+        
+        /// <summary>
+        /// Program class context
+        /// </summary>
+        PC
     }
 }

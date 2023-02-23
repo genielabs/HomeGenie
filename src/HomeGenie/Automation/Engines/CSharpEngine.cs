@@ -17,7 +17,7 @@
 
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
+ *     Project Homepage: https://homegenie.it
  */
 
 using System;
@@ -132,27 +132,58 @@ namespace HomeGenie.Automation.Engines
                     EndColumn = 0,
                     ErrorMessage = ex.Message,
                     ErrorNumber = ex.Source,
-                    CodeBlock = CodeBlockEnum.CR
+                    CodeBlock = CodeBlockEnum.PC
                 });
             }
 
             if (result != null && !result.Success)
             {
-                var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;
+                var parsedCode = CSharpAppFactory.ParseCode(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource);
+                var contextLines = parsedCode.ContextCode.Split('\n').Length;
+                var sourceLines = parsedCode.MainCode.Split('\n').Length;
                 foreach (var diagnostic in result.Diagnostics)
                 {
-                    var errorRow = (diagnostic.Location.GetLineSpan().StartLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) + 1;
-                    var errorEndRow = (diagnostic.Location.GetLineSpan().EndLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) + 1;
+                    var errorRow = (diagnostic.Location.GetLineSpan().StartLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) - parsedCode.UserIncludes.Count;
+                    var errorEndRow = (diagnostic.Location.GetLineSpan().EndLinePosition.Line - CSharpAppFactory.ProgramCodeOffset) - parsedCode.UserIncludes.Count;
                     var errorCol = diagnostic.Location.GetLineSpan().StartLinePosition.Character + 1;
                     var errorEndCol = diagnostic.Location.GetLineSpan().EndLinePosition.Character + 1;
-                    var blockType = CodeBlockEnum.CR;
-                    if (diagnostic.Severity == DiagnosticSeverity.Error)
+                    if (errorRow <= 0)
                     {
+                        errors.Add(new ProgramError
+                        {
+                            Line = 0,
+                            Column = 0,
+                            EndLine = 0,
+                            EndColumn = 0,
+                            ErrorMessage = diagnostic.GetMessage(),
+                            ErrorNumber = diagnostic.Descriptor.Id,
+                            CodeBlock = CodeBlockEnum.PC
+                        });
+                        continue;
+                    }
+                    var blockType = CodeBlockEnum.CR;
+                    if (errorRow <= contextLines)
+                    {
+                        blockType = CodeBlockEnum.TC;
+                    }
+                    else
+                    {
+                        errorRow -= 6;
+                        errorEndRow -= 6;
                         if (errorRow >= sourceLines + CSharpAppFactory.ConditionCodeOffset)
                         {
                             errorRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
+                            errorEndRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
                             blockType = CodeBlockEnum.TC;
                         }
+                        else
+                        {
+                            errorRow -= contextLines - 1;
+                            errorEndRow -= contextLines - 1;
+                        }
+                    }
+                    if (diagnostic.Severity == DiagnosticSeverity.Error)
+                    {
                         errors.Add(new ProgramError
                         {
                             Line = errorRow,

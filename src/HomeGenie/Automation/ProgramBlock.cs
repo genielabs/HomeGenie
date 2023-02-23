@@ -17,7 +17,7 @@
 
 /*
 *     Author: Generoso Martello <gene@homegenie.it>
-*     Project Homepage: http://homegenie.it
+*     Project Homepage: https://homegenie.it
 */
 
 using System;
@@ -127,6 +127,9 @@ namespace HomeGenie.Automation
                         case "csharp":
                         case "visual":
                             programEngine = new CSharpEngine(this);
+                            break;
+                        case "python":
+                            programEngine = new PythonEngine(this);
                             break;
                         case "javascript":
                             programEngine = new JavascriptEngine(this);

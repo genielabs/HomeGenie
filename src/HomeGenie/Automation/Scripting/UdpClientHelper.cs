@@ -17,7 +17,7 @@
 
 /*
  *     Author: smeghead http://www.homegenie.it/forum/index.php?topic=474.msg2666#msg2666
- *     Project Homepage: http://homegenie.it
+ *     Project Homepage: https://homegenie.it
  */
 
 using System;

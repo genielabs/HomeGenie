@@ -16,7 +16,7 @@
 */
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
+ *     Project Homepage: https://homegenie.it
  */
 using HomeGenie.Automation;
 using MIG;
@@ -430,8 +430,7 @@ namespace HomeGenie.Service.Handlers
                         // this is for backward compatibility with HG v1.3.x
                         newProgram = new ProgramBlock() {
                             Group = migCommand.GetOption(0),
-                            Name = streamContent,
-                            Type = "CSharp"
+                            Name = streamContent
                         };
                     }
                     if (newProgram != null)
