@@ -6,7 +6,7 @@
 
 - Integrated drivers for X10, ZigBee, Z-Wave, GPIO, SPI, I2C
 - Works 100% off-line without relaying on any external cloud service
-- Scripting engine with fluent API programmable using `csharp`, `javascript`
+- Scripting engine with fluent API programmable using `csharp`, `javascript`, `python`
 - Scheduler service supporting extended cron expressions (with variables, conditions and logical operators)
 - Voice and text message based control
 - Localization
