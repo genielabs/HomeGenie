@@ -1,9 +1,9 @@
 ---
 name: Question
 about: Write your question about HomeGenie
-title: "[QUESTION]"
+title:
 labels: question
-assignees: ''
+assignees:
 
 ---
 

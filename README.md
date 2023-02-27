@@ -2,7 +2,7 @@
 
 # HomeGenie
 
-**Programmable Automation and Smart Home server for Windows, Mac and Linux (and Raspbian too =)).**
+**The programmable automation system for smart devices and applications**
 
 - Integrated drivers for X10, ZigBee, Z-Wave, GPIO, SPI, I2C
 - Works 100% off-line without relaying on any external cloud service

@@ -32,41 +32,11 @@ File a new *[question issue](https://github.com/genielabs/HomeGenie/issues/new?l
 
 #### **Do you want to contribute to the HomeGenie documentation?**
 
-The documentation site source code is available from the **[gh-pages](https://github.com/genielabs/HomeGenie/tree/gh-pages)** branch, you can
-contribute following same rules used for the main repo.
+Source code of the documentation site is available from  **[homegenie.it](https://github.com/genielabs/homegenie.it)** repository.
 
 #### **Coding styles and conventions**
 
 This project follows *Microsoft .Net* [coding conventions](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) and [naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions).
-
-#### **Getting started with HomeGenie source code**
-
-Clone [**HomeGenie repository**](https://github.com/genielabs/HomeGenie).
-
-##### Building and debugging
-
-You can use one of the following IDEs:
-
-- **MonoDevelop / Xamarin Studio**
-- **Microsoft Visual Studio**
-- **JetBrains Rider**
-
-**Linux**
-- Open the *HomeGenie_Linux/HomeGenie_Linux.sln* solution file
-- Prepare base files by building the *BaseFiles/Linux* project
-- Build/Debug the main *HomeGenie* project
-- To bundle a debian setup package, build the *Packger* project (even if this appear to be disabled, it will lauch a script in a terminal window)
-
-**Windows**
-- Open the *HomeGenie_Windows/HomeGenie_VS10.sln* solution file
-- Prepare base files by building the *BaseFiles/Windows* project
-- Build/Run/Debug the main *HomeGenie* project
-- To bundle a setup package, open and run the InnoSetup file located in the *HomeGenie_Windows/Packager* folder.
-
-**Mac**
-- Open the *HomeGenie_Mac/HomeGenie_Mac.sln* solution file
-- Build/Debug the main *HomeGenie* project
-- no setup packaging currently supported for Mac
 
 ##### Releasing a new version
 

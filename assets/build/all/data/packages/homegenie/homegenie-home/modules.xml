@@ -1298,7 +1298,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
-        <Value>12.355</Value>
+        <Value>18.75</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
