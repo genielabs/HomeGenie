@@ -869,6 +869,7 @@ namespace HomeGenie.Service.Handlers
                         homegenie.RaiseEvent(Domains.HomeGenie_System, module.Domain, module.Address, desc, migCommand.GetOption(2), migCommand.GetOption(3));
                     }
                     request.ResponseData = new ResponseStatus(Status.Ok);
+                    homegenie.UpdateModulesDatabase();                    
                 }
                 catch (Exception ex)
                 {
