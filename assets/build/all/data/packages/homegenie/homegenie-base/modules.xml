@@ -56,6 +56,14 @@
         <UpdateTime>2022-12-28T17:03:34.3587934Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Background</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:03:34.3587934Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>142</Value>
         <Description />
@@ -304,6 +312,14 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2022-12-28T17:03:45.6133066Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:03:34.3587934Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>

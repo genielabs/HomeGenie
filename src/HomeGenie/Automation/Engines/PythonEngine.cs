@@ -36,6 +36,9 @@ namespace HomeGenie.Automation.Engines
         private ScriptEngine scriptEngine;
         private ScriptScope scriptScope;
         private ScriptingHost hgScriptingHost;
+        
+        private int setupCodeLineOffset;
+        private int mainCodeLineOffset;
 
         public PythonEngine(ProgramBlock pb) : base(pb)
         {
@@ -67,23 +70,50 @@ namespace HomeGenie.Automation.Engines
             dynamic scope = scriptScope = scriptEngine.CreateScope();
             scope.hg = hgScriptingHost;
 
+            
+            string script = "\ndef __setup__():\n";
+            setupCodeLineOffset = script.Split('\n').Length - 1;
+            foreach (var line in ProgramBlock.ScriptSetup.Split('\n'))
+            {
+                if (line.Trim().Length > 0) script += $"    {line}\n";
+            }
+            script += "    pass\n\n";
+            script += "def __main__():\n";
+            mainCodeLineOffset = script.Split('\n').Length - 1;
+            foreach (var line in ProgramBlock.ScriptSource.Split('\n'))
+            {
+                if (line.Trim().Length > 0) script += $"    {line}\n";
+            }
+            script += "    pass\n\n";
+            try
+            {
+                scriptEngine.Execute(script, scriptScope);
+            }
+            catch (Exception e)
+            {
+                // TODO: report errors
+                Console.WriteLine(e.Message);
+            }
+
+            
+            
             return true;
         }
 
         public override MethodRunResult Setup()
         {
             MethodRunResult result = null;
-            string pythonScript = ProgramBlock.ScriptSetup;
             result = new MethodRunResult();
+            result.ReturnValue = false;
             try
             {
-                var sh = (scriptScope as dynamic).hg as ScriptingHost;
-                scriptEngine.Execute(pythonScript, scriptScope);
+                if (scriptEngine == null) Load();
+                scriptEngine.Execute("__setup__()", scriptScope);
                 result.ReturnValue = ProgramBlock.WillRun;
             }
             catch (Exception e)
             {
-                result.Exception = e;
+                if (scriptEngine != null) result.Exception = e;
             }
             return result;
         }
@@ -91,15 +121,14 @@ namespace HomeGenie.Automation.Engines
         public override MethodRunResult Run(string options)
         {
             MethodRunResult result = null;
-            string pythonScript = ProgramBlock.ScriptSource;
             result = new MethodRunResult();
             try
             {
-                scriptEngine.Execute(pythonScript, scriptScope);
+                scriptEngine.Execute("__main__()", scriptScope);
             }
             catch (Exception e)
             {
-                result.Exception = e;
+                if (scriptEngine != null) result.Exception = e;
             }
             return result;
         }
@@ -109,22 +138,25 @@ namespace HomeGenie.Automation.Engines
             if (hgScriptingHost != null) hgScriptingHost.Reset();
         }
 
-        public override ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        public override ProgramError GetFormattedError(Exception e, bool isSetupBlock)
         {
             ProgramError error = new ProgramError()
             {
-                CodeBlock = isTriggerBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
+                CodeBlock = isSetupBlock ? CodeBlockEnum.TC : CodeBlockEnum.CR,
                 Column = 0,
                 Line = 0,
                 ErrorNumber = "-1",
                 ErrorMessage = e.Message
             };
-            string[] message = scriptEngine.GetService<ExceptionOperations>().FormatException(e).Split(',');
-            if (message.Length > 2)
+            if (scriptEngine != null)
             {
-                int line = 0;
-                Int32.TryParse(message[1].Substring(5), out line);
-                error.Line = line;
+                string[] message = scriptEngine.GetService<ExceptionOperations>().FormatException(e).Split(',');
+                if (message.Length > 3)
+                {
+                    int line;
+                    Int32.TryParse(message[3].Substring(5), out line);
+                    error.Line = line - (isSetupBlock ? setupCodeLineOffset : mainCodeLineOffset);
+                }
             }
             return error;
         }
@@ -132,6 +164,7 @@ namespace HomeGenie.Automation.Engines
         public override List<ProgramError> Compile()
         {
             Load();
+            ProgramBlock.ScriptErrors = "";
             string setupCode = String.IsNullOrEmpty(ProgramBlock.ScriptSetup) ? "" : ProgramBlock.ScriptSetup;
             string mainCode = String.IsNullOrEmpty(ProgramBlock.ScriptSource) ? "" : ProgramBlock.ScriptSource;
             List<ProgramError> errors = new List<ProgramError>();

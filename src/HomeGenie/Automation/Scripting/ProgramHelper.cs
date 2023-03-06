@@ -191,8 +191,11 @@ namespace HomeGenie.Automation.Scripting
             if (widgetModule == null || widgetModule.Value != widget)
             {
                 Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
-                //RaiseEvent(Properties.WidgetDisplayModule, widget, "");
                 RelocateProgramModule();
+                if (programModule != null)
+                {
+                    Utility.ModuleParameterSet(programModule, Properties.WidgetDisplayModule, widget);
+                }
                 homegenie.modules_RefreshVirtualModules();
                 //homegenie.modules_Sort();
             }

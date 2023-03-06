@@ -580,11 +580,7 @@ namespace HomeGenie.Service
             {
                 FileStream fs = File.OpenRead(archiveName);
                 zipFile = new ZipFile(fs);
-#if !NETCOREAPP                
-                ZipStrings.CodePage = Encoding.UTF8.CodePage;
-#else
                 zipFile.StringCodec = StringCodec.FromCodePage(Encoding.UTF8.CodePage);
-#endif
                 //if (!String.IsNullOrEmpty(password)) {
                 //    zf.Password = password;  // AES encrypted entries are handled automatically
                 //}
@@ -634,17 +630,10 @@ namespace HomeGenie.Service
 
         internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
         {
-#if !NETCOREAPP                
-            ZipStrings.CodePage = Encoding.UTF8.CodePage;
-#endif
             if (!File.Exists(zipFilename))
             {
                 FileStream zfs = File.Create(zipFilename);
-#if !NETCOREAPP                
-                ZipOutputStream zipStream = new ZipOutputStream(zfs);
-#else
                 ZipOutputStream zipStream = new ZipOutputStream(zfs, StringCodec.FromCodePage(Encoding.UTF8.CodePage));
-#endif
                 zipStream.SetLevel(3); //0-9, 9 being the highest level of compression
                 /*
                 // NOTE: commented code because this is raising an error "Extra data extended Zip64 information length is invalid"

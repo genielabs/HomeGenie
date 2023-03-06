@@ -1271,6 +1271,14 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
         <UpdateTime>2022-12-28T17:10:38.2274051Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T23:23:09.5362448Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>78</Value>
         <Description />

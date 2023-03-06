@@ -8,12 +8,13 @@
     <RuntimeIdentifiers>win8-arm;linux-arm;win10-x64;osx.10.11-x64;linux-x64</RuntimeIdentifiers>
     <SuppressWindowsPlatformTargetingRequiredError>true</SuppressWindowsPlatformTargetingRequiredError>
     <TargetFrameworks>net472;net6.0</TargetFrameworks>
+    <!-- allow Machine Learning libs ML.NET compile on ARM architectures as well -->
+    <EnableMLUnsupportedPlatformTargetCheck>false</EnableMLUnsupportedPlatformTargetCheck>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <PackageReference Include="CronExpressionDescriptor" Version="1.21.2" />
     <PackageReference Include="NLog" Version="5.1.0" />
-    <PackageReference Include="SharpZipLib" Version="1.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,10 +26,10 @@
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.7" />
     <PackageReference Include="MIG" Version="1.2.9" />
-    <PackageReference Include="MIG.HomeAutomation" Version="1.2.16" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.2.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="SerialPortStream" Version="2.4.1" />
-    <PackageReference Include="SharpZipLib" Version="1.4.1" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="Angle" Version="3.2.1" />
     <PackageReference Include="SolarCalculator" Version="3.2.1" />
     <PackageReference Include="Jint" Version="3.0.0-beta-2044" />
@@ -45,7 +46,7 @@
 
     <PackageReference Include="MQTTnet" Version="4.1.4.563" />
     <PackageReference Include="SerialPortLib" Version="1.1.1" />
-    <PackageReference Include="MIG.Protocols" Version="1.2.3" />
+    <PackageReference Include="MIG.Protocols" Version="1.2.5" />
 
     <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.11" />
     <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.11" />
@@ -53,7 +54,7 @@
     <PackageReference Include="HG.Raspberry.System" Version="2.1.2" />
 
     <PackageReference Include="NUnit" Version="3.13.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="ZWaveLib" Version="1.1.1" />
 

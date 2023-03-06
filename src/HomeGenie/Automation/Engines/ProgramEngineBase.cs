@@ -294,6 +294,7 @@ namespace HomeGenie.Automation.Engines
                 }
                 if (WillProgramRun())
                 {
+                    ProgramBlock.WillRun = false;
                     if ((DateTime.Now - lastProgramRunTs).TotalMilliseconds < 100)
                         loopPreventCount++;
                     else
@@ -329,8 +330,6 @@ namespace HomeGenie.Automation.Engines
             {
                 lock (ProgramBlock.OperationLock)
                 {
-                    ProgramBlock.WillRun = false;
-                    //
                     var result = Setup();
                     if (result != null && result.Exception != null)
                     {

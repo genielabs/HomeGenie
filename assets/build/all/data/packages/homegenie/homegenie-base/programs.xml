@@ -54,13 +54,14 @@ Program.GoBackground();
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>client-configs</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
       <Checksum>AC96494FCA5A5E953B728A669BAF7CA3</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>111</Address>
-    <Name>Client Configs</Name>
+    <Name>Client configuration</Name>
+    <Description>Implements API for managing client's configuration profiles that are used to store client's UI and dashboards settings.</Description>
     <Group>Utilities</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -241,7 +242,7 @@ MqttClient.Reset();
 
 if (server == "")
 {
-  Program.Notify("Please configure server address");
+  Program.Notify("MQTT endpoint is not configured. [program_configure,program_disable]");
   Pause(5);
   return;
 }
@@ -404,9 +405,9 @@ while (Program.IsRunning) {
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>E59AAAEB2F0BFBBECC6BF2748F848AED</Checksum>
+      <Checksum>60A252D5988007FD051C58E78ACDDA5D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>

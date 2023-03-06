@@ -25,6 +25,14 @@
         <UpdateTime>2023-01-26T19:42:34.604394Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-26T21:39:55.6911083Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>601</Value>
         <Description />
@@ -65,6 +73,14 @@
         <Value />
         <Description>Reverse pin value</Description>
         <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-01-21T16:26:49.1282554Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Background</Value>
+        <Description />
+        <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2023-01-21T16:26:49.1282554Z</UpdateTime>
       </ModuleParameter>

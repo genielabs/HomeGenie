@@ -2,7 +2,7 @@
 
 # HomeGenie
 
-**The programmable automation system for smart devices and applications**
+**The programmable automation intelligence**
 
 - Integrated drivers for X10, ZigBee, Z-Wave, GPIO, SPI, I2C
 - Works 100% off-line without relaying on any external cloud service

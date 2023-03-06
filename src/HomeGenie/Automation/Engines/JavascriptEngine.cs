@@ -113,15 +113,16 @@ namespace HomeGenie.Automation.Engines
         {
             MethodRunResult result = null;
             result = new MethodRunResult();
+            result.ReturnValue = false;
             try
             {
-                var sh = (scriptEngine.GetValue("hg").ToObject() as ScriptingHost);
+                if (scriptEngine == null) Load();
                 scriptEngine.Execute("__setup__();");
                 result.ReturnValue = ProgramBlock.WillRun;
             }
             catch (Exception e)
             {
-                result.Exception = e;
+                if (scriptEngine != null) result.Exception = e;
             }
             return result;
         }
@@ -137,7 +138,7 @@ namespace HomeGenie.Automation.Engines
             }
             catch (Exception e)
             {
-                result.Exception = e;
+                if (scriptEngine != null) result.Exception = e;
             }
             return result;
         }
@@ -175,6 +176,7 @@ namespace HomeGenie.Automation.Engines
             List<ProgramError> errors = new List<ProgramError>();
             JavaScriptParser jp = new JavaScriptParser();
             //ParserOptions po = new ParserOptions();
+            ProgramBlock.ScriptErrors = "";
             // Setup code
             try
             {

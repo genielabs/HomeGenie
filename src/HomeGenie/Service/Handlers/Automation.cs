@@ -400,7 +400,7 @@ namespace HomeGenie.Service.Handlers
                     {
                         string c1 = p1.Name + " " + p1.Address;
                         string c2 = p2.Name + " " + p2.Address;
-                        return c1.CompareTo(c2);
+                        return String.Compare(c1, c2, StringComparison.Ordinal);
                     });
                     request.ResponseData = programList;
                     break;
@@ -439,7 +439,9 @@ namespace HomeGenie.Service.Handlers
                         if (newProgram.Type.ToLower() == "visual" || newProgram.Type.ToLower() == "csharp")
                         {
                             (newProgram.Engine as CSharpEngine)?.CleanupFiles();
+                            (newProgram.Engine as CSharpEngine)?.Compile();
                         }
+                        newProgram.IsEnabled = true;
                         homegenie.ProgramManager.ProgramAdd(newProgram);
                         homegenie.UpdateProgramsDatabase();
                         request.ResponseData = new ResponseText(newProgram.Address.ToString());
@@ -599,13 +601,13 @@ namespace HomeGenie.Service.Handlers
                     {
                         // clear any runtime errors before running
                         currentProgram.ScriptErrors = "";
+                        /*
                         homegenie.ProgramManager.RaiseProgramModuleEvent(
                             currentProgram,
                             Properties.RuntimeError,
                             ""
-                        );
+                        );*/
                         currentProgram.IsEnabled = true;
-                        //System.Threading.Thread.Sleep(500);
                         ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
                     }
                     break;
@@ -696,7 +698,7 @@ namespace HomeGenie.Service.Handlers
                                 });
                             }
                         });
-                        options.Sort((o1, o2) => (o1.description).CompareTo(o2.description));
+                        options.Sort((o1, o2) => String.Compare((o1.description), o2.description, StringComparison.Ordinal));
                         request.ResponseData = JsonConvert.SerializeObject(programOptions);
                     }
                     break;
@@ -779,8 +781,10 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock program = homegenie.ProgramManager.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
+                bool wasEnabled = program.IsEnabled; 
                 program.IsEnabled = false;
                 program.Engine.StopProgram();
+                program.IsEnabled = wasEnabled;
                 homegenie.UpdateProgramsDatabase();
             }
             return program;

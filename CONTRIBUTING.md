@@ -42,11 +42,12 @@ This project follows *Microsoft .Net* [coding conventions](https://docs.microsof
 
 To release a new version push a new tag using the format:
 
-`v<major>.<minor>-{stable|rc|beta|alpha}.<build>`
+`v<major>.<minor>.<patch>-{rc|beta|alpha}.<build>`
 
-example: `v1.1-stable.527`
+example: `v1.4.0-beta.25`
 
-When a new tag is submitted the CI system will build the project, run tests and package assets (.deb, .tgz, .exe distribution files). Assets will be also uploaded to the new release on GitHub repository.
+When a new tag is submitted the CI system will build the project, run tests and package assets.
+Assets will be also uploaded to the new release on GitHub repository.
 
 
 #### Join HomeGenie team!

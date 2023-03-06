@@ -176,6 +176,8 @@
     "Disabled",
   "program_status_enabled":
     "Enabled",
+  "program_status_broken":
+    "Broken",
   "automation_programming_guide":
     "Programming guide'",
   "tap_to_disable":
