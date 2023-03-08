@@ -68,7 +68,7 @@ hosting operating system.
 
 ```bash
 sudo useradd homegenie
-sudo cp -ar ./path-to-extracted-folder/homegenie/* /home/homegenie/
+sudo cp -ar ./path-to-extracted-folder/homegenie /home/homegenie
 sudo chown -R homegenie:homegenie /home/homegenie
 ```
 
