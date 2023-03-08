@@ -41,26 +41,90 @@ Download the `.zip` archive corresponding to the hosting operating system:
 
 https://github.com/genielabs/HomeGenie/releases
 
-Unzip the archive file and run the `./HomeGenie` command to start the service:
+Unzip the archive file. A new `homegenie` folder will be created.
 
-```shell
+
+### Running in a terminal
+
+Set the current directory to `homegenie` and run the `./HomeGenie` command:
+
+```bash
 cd homegenie
 ./HomeGenie
 ```
 
-HomeGenie UI is now accessible with a web browser:
+To stop the application press `CTRL + C`
 
-`http://<server_address>:<port>/`
 
-where `<server_address>` is the name or ip of the host where *HomeGenie* was installed and `<port>`
-is the port on which is listening for web requests (default port is `8080`).
+### Running as a system service
 
----
+HomeGenie can be installed as a service. The procedure is different depending on the
+hosting operating system.
+
+#### Recommended procedure for Linux
+
+1) Add a specific user for the service and copy the content of `homegenie` folder
+   to the new user home directory:
+
+```bash
+sudo useradd homegenie
+sudo cp -ar ./path-to-extracted-folder/homegenie/* /home/homegenie/
+sudo chown -R homegenie:homegenie /home/homegenie
+```
+
+2) Create the file `/etc/systemd/system/homegenie.service` with the following content:
+```bash
+[Unit]
+Description=HomeGenie
+
+[Service]
+Type=notify
+User=homegenie
+WorkingDirectory=/home/homegenie/
+ExecStart=/home/homegenie/HomeGenie
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3) Refresh `SystemD` configuration
+```bash
+sudo systemctl daemon-reload
+```
+
+4) Start the service and enable <em>HomeGenie</em> to auto-start on next system boot:
+```bash
+sudo systemctl start homegenie.service
+sudo systemctl enable homegenie.service
+```
+
+Other possible commands are `stop` and `disable`.
+
+
+See also:
+- [Create Linux Service](https://devblogs.microsoft.com/dotnet/net-core-and-systemd/#create-unit-files) (SystemD)
+- [Create Windows Service](https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service#create-the-windows-service)
+
+
+### Accessing the UI
+
+HomeGenie user interface can be accessed from any web browser entering the url
+
+&nbsp;&nbsp;&nbsp;&nbsp; `http://<server_ip>:<port>/`
+
+Where `server_ip` is the IP address of the machine where HomeGenie is running and `port` can be *80*
+or the first available port starting from *8080*.
+<small>(ex. *http://192.168.1.150:8080/*)</small>
+
+The `port` settings can be changed either from the maintenance page
+or editing the `systemconfig.xml` file located in the application folder.
+
+
+### Optional post-installation steps
 
 Depending on the hosting operating system, it might be required to run additional steps
 in order to allow the service to access the **Serial port**, **USB** devices and **GPIO** hardware.
-
-### Common additional steps
 
 To enable **audio playack** and **voice synthesis**:
 ```shell
@@ -75,16 +139,10 @@ To use **X10 Home Automation** hardware:
 sudo apt-get install libusb-1.0-0 libusb-1.0-0-dev
 ```
 
-To grant access to the **Serial port** and/or **GPIO** to the current user:
+To grant access to the **Serial port** and/or **GPIO** to the `homegenie` user:
 ```shell
-sudo gpasswd -a $USER dialout
-sudo gpasswd -a $USER gpio
-```
-
-It's recommended that a dedicated user is added for running a service, but as a last resort, if you are still getting `access denied`
-error while trying to access connected hardware, run `./HomeGenie` service using `sudo`:
-```
-sudo ./HomeGenie
+sudo gpasswd -a homegenie dialout
+sudo gpasswd -a homegenie gpio
 ```
 
 
@@ -132,6 +190,7 @@ Windows specific solution for deploying HomeGenie as a Windows service (deprecat
 - https://github.com/genielabs/HomeGenie-WindowsPhone
 - https://github.com/genielabs/homegenie-mini
 - https://github.com/genielabs/yot
+- https://github.com/zuixjs/zuix
 
 ------
 

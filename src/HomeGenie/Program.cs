@@ -21,21 +21,21 @@
  */
 
 using System;
-using System.IO;
-
+using System.Threading.Tasks;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MIG;
 
 namespace HomeGenie
 {
     class Program
     {
-        private static HomeGenieService _homegenie = null;
-        private static bool _isrunning = true;
-        private static bool _restart = false;
+        private static IHost _serviceHost;
+        private const string ServiceName = "HomeGenie";
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 #if !NETCOREAPP
@@ -43,63 +43,46 @@ namespace HomeGenie
 #endif
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
 
-            bool rebuildPrograms = PostInstallCheck();
 
-            _homegenie = new HomeGenieService(rebuildPrograms);
-            do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
-        }
-
-        private static bool PostInstallCheck()
-        {
-            bool firstTimeInstall = false;
-            string postInstallLock = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "postinstall.lock");
-            if (File.Exists(postInstallLock))
+#if NETCOREAPP
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                firstTimeInstall = true;
-                //
-                // NOTE: place any other post-install stuff here
-                //
-                try
-                {
-                    File.Delete(postInstallLock);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("{0}\n{1}\n", e.Message, e.StackTrace);
-                }
+                _serviceHost = Host.CreateDefaultBuilder(args)
+                    .UseSystemd()
+                    .ConfigureServices((hostContext, services) => { services.AddHostedService<ServiceWorker>(); })
+                    .Build();
             }
-            return firstTimeInstall;
+#endif
+            if (Environment.OSVersion.Platform != PlatformID.Unix && Environment.OSVersion.Platform != PlatformID.MacOSX)
+            {
+                _serviceHost = Host.CreateDefaultBuilder(args)
+                    .UseWindowsService(options =>
+                    {
+                        options.ServiceName = ServiceName;
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHostedService<ServiceWorker>();
+                    })
+                    .Build();
+            }
+            
+            if (_serviceHost == null)
+            {
+                _serviceHost = new LocalServiceHost(new ServiceWorker());
+            }
+            await _serviceHost
+                .RunAsync();
         }
 
         internal static void Quit(bool restartService)
         {
-            _restart = restartService;
-            ShutDown();
-            _isrunning = false;
-        }
-
-        private static void ShutDown()
-        {
+            ServiceWorker._restart = restartService;
             Console.Write("HomeGenie is now exiting...\n");
-            //
-            if (_homegenie != null)
-            {
-                _homegenie.Stop();
-                _homegenie = null;
-            }
-            //
-            int exitCode = 0;
-            if (_restart)
-            {
-                exitCode = 1;
-                Console.Write("\n\n...RESTART!\n\n");
-            }
-            else
-            {
-                Console.Write("\n\n...QUIT!\n\n");
-            }
-            //
-            Environment.Exit(exitCode);
+            _serviceHost
+                .StopAsync()
+                .Wait();
+            Environment.Exit(restartService ? 1 : 0);
         }
 
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -119,8 +102,8 @@ namespace HomeGenie
             );
             try
             {
-                // try broadcast first (we don't want homegenie object to be passed, so use the domain string)
-                _homegenie.RaiseEvent(Domains.HomeGenie_System, logEntry);
+                // try broadcast first
+                ServiceWorker._homegenie.RaiseEvent(Domains.HomeGenie_System, logEntry);
             }
             catch
             {

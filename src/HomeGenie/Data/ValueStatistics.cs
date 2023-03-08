@@ -22,9 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using HomeGenie.Service;
-using HomeGenie.Service.Logging;
 
 namespace HomeGenie.Data
 {
@@ -33,13 +31,6 @@ namespace HomeGenie.Data
     /// </summary>
     public class ValueStatistics
     {
-        private static readonly List<string> StatisticsFields = new List<string>() {
-            "Sensor.",
-            "Meter.",
-            "PowerMonitor.",
-            "Statistics."
-        };
-        
         /// <summary>
         /// Stat value.
         /// </summary>
@@ -76,7 +67,6 @@ namespace HomeGenie.Data
             }
         }
 
-        private List<StatValue> statValues;
         private TsList<StatValue> historyValues;
         // historyLimit is expressed in minutes
         private int historyLimit = 60 * 24;
@@ -85,12 +75,10 @@ namespace HomeGenie.Data
 
         public ValueStatistics()
         {
-            LastProcessedTimestamp = DateTime.UtcNow;
-            statValues = new List<StatValue>();
-            statValues.Add(new StatValue(0, LastProcessedTimestamp));
-            lastEvent = lastOn = lastOff = new StatValue(0, LastProcessedTimestamp);
+            var initValue = new StatValue(0, DateTime.UtcNow);
+            lastEvent = lastOn = lastOff = initValue;
             historyValues = new TsList<StatValue>();
-            historyValues.Add(lastEvent);
+            historyValues.Add(initValue);
         }
 
         /// <summary>
@@ -129,7 +117,7 @@ namespace HomeGenie.Data
         /// <value>The current.</value>
         public StatValue Current
         {
-            get { return historyValues[0]; }
+            get { return historyValues.Count > 0 ? historyValues[0] : null; }
         }
 
         /// <summary>
@@ -161,12 +149,6 @@ namespace HomeGenie.Data
 
         internal void AddValue(string fieldName, double value, DateTime timestamp)
         {
-
-            if (IsValidField(fieldName))
-            {
-                // add value for StatisticsLogger use
-                statValues.Add(new StatValue(value, timestamp));
-            }
             // "value" is the occurring event in this very moment,
             // so "Current" is holding previous value right now
             if (Current.Value != value)
@@ -183,7 +165,7 @@ namespace HomeGenie.Data
                     lastOn = new StatValue(value, timestamp);
                 }
             }
-            // keeep size within historyLimit (minutes)
+            // keep size within historyLimit (minutes)
             try
             {
                 if (historyValues.Count > historyLimitSize)
@@ -200,20 +182,6 @@ namespace HomeGenie.Data
             historyValues.Insert(0, new StatValue(value, timestamp));
         }
 
-        private static bool IsValidField(string field)
-        {
-            bool isValid = false;
-            foreach (string f in StatisticsFields)
-            {
-                if (field.StartsWith(f))
-                {
-                    isValid = true;
-                    break;
-                }
-            }
-            return isValid;
-        }
-
         /// <summary>
         /// Get resampled statistic values by averaging values for a given time range increment (eg 60 minutes)
         /// </summary>
@@ -223,14 +191,5 @@ namespace HomeGenie.Data
             // TODO: to be implemented
             return null;
         }
-
-        // These fields are used by StatisticsLogger
-        internal DateTime LastProcessedTimestamp;
-        internal List<StatValue> Values
-        {
-            get { return statValues; }
-            set { statValues = value; }
-        }
-
     }
 }
