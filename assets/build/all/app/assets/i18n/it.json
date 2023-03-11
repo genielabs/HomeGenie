@@ -68,6 +68,8 @@
   "combine": "Combina",
   "compare": "Confronta",
   "graph_mode": "Tipo Grafico",
+  "data_filter": "Filtro dati",
+  "data_filter_none": "(nessuno)",
   "show_fields": "Campi",
   "compare_modules": "Confronta con",
   "not_set": "Non impostato",

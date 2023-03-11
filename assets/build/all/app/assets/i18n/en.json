@@ -68,6 +68,8 @@
   "combine": "Combine",
   "compare": "Compare",
   "graph_mode": "Graph Mode",
+  "data_filter": "Data filter",
+  "data_filter_none": "(none)",
   "show_fields": "Fields",
   "compare_modules": "Compare with",
   "not_set": "Not set",

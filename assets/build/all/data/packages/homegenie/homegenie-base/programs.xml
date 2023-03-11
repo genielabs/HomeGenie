@@ -791,4 +791,176 @@ Program.GoBackground();
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>#region program-context
+
+#using NWaves.Filters
+#using NWaves.Operations
+
+const int windowSize = 9;
+
+ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
+    startTime = (long)startTime;
+    endTime = (long)endTime;
+    var timeSpan = (endTime - startTime);
+    var timeSpanMin = (timeSpan / 2);
+
+    // Copy parameter values history to a new object
+    var stats = new ValueStatistics() {
+        History = new TsList&lt;ValueStatistics.StatValue&gt;(
+            parameter.Statistics.History
+                .Where(sv =&gt; sv.UnixTimestamp &gt;= startTime - timeSpanMin &amp;&amp; sv.UnixTimestamp &lt;= endTime)
+                    .ToList()
+        )
+    };
+    stats.History.Reverse();
+
+    // Process time series
+    if (startTime &gt; 0 &amp;&amp; stats.History.Count &gt; 0)
+    {
+        var stepMs = (timeSpan / chartWidth);
+        if (stepMs &lt; 1000) stepMs = 1000;
+        var resampledList = new List&lt;ValueStatistics.StatValue&gt;();
+        var cts = stats.History.First().UnixTimestamp;
+        cts -= (cts % stepMs);
+        cts -= stepMs;
+        var sum = 0D;
+        var count = 0;
+        int i = 0;
+        var itemTimestamp = DateTime.UtcNow;
+        while (i &lt; stats.History.Count)
+        {
+            var item = stats.History[i];
+            if (item.UnixTimestamp &gt;= cts)
+            {
+                var resampled = new ValueStatistics.StatValue(
+                    sum / count,
+                    itemTimestamp
+                );
+                resampledList.Add(resampled);
+                sum =0; count = 0;
+                cts += stepMs;
+            }
+            sum += item.Value;
+            itemTimestamp = item.Timestamp;
+            count++;
+            i++;
+        }
+        stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(resampledList);
+    }
+    return stats;
+}
+
+ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
+    var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
+
+    // Process time series
+    var samples = stats.History
+        .Select(sv =&gt; (float)sv.Value)
+        .ToArray();
+    var signal = new DiscreteSignal(50/*Hz sampling rate*/, samples);
+    var smoothedSignal = filter.ApplyTo(signal);
+    var lst = new List&lt;ValueStatistics.StatValue&gt;();
+    int boundsGap = (windowSize - 1) / 2;
+    for (int c = 0; c &lt; stats.History.Count - boundsGap; c++)
+    {
+        var sv = stats.History[c];
+        lst.Add(new ValueStatistics.StatValue(smoothedSignal[c + boundsGap], sv.Timestamp));
+    }
+
+    stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(lst);
+    return stats;
+}
+
+#endregion
+
+Program.Run();</ScriptSetup>
+    <ScriptSource>When.WebServiceCallReceived("DataProcessing.Filters/List/Series", (args) =&gt; {
+    return new string[]{
+        "SimpleAverage",
+        "MovingAverage",
+        "SavitzkyGolay"
+    };
+});
+
+When.WebServiceCallReceived("DataProcessing.Filters/Series/SimpleAverage", (args) =&gt; {
+    var request = Program.ParseApiCall(args);
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+
+        var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
+        stats.History.Reverse();
+        return stats;
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+When.WebServiceCallReceived("DataProcessing.Filters/Series/MovingAverage", (args) =&gt; {
+    var request = Program.ParseApiCall(args);
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+
+        var filter = new MovingAverageFilter(windowSize);
+        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
+        stats.History.Reverse();
+        return stats;
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+When.WebServiceCallReceived("DataProcessing.Filters/Series/SavitzkyGolay", (args) =&gt; {
+    var request = Program.ParseApiCall(args);
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+
+        var filter = new SavitzkyGolayFilter(windowSize);
+        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
+        stats.History.Reverse();
+        return stats;
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>time-series-filters</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>749ED822713EF777CDDAE4E60D2F22E2</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>570</Address>
+    <Name>Time Series Filters</Name>
+    <Description>Example filters for time series that can be used in the statistics view.
+</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
 </ArrayOfProgramBlock>

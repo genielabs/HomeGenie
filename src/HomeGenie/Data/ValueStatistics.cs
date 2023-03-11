@@ -78,7 +78,6 @@ namespace HomeGenie.Data
             var initValue = new StatValue(0, DateTime.UtcNow);
             lastEvent = lastOn = lastOff = initValue;
             historyValues = new TsList<StatValue>();
-            historyValues.Add(initValue);
         }
 
         /// <summary>
@@ -151,7 +150,7 @@ namespace HomeGenie.Data
         {
             // "value" is the occurring event in this very moment,
             // so "Current" is holding previous value right now
-            if (Current.Value != value)
+            if (Current != null && Current.Value != value)
             {
                 lastEvent = new StatValue(Current.Value, Current.Timestamp);
                 if (value == 0 && lastEvent.Value > 0)

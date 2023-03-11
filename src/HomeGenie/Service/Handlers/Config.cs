@@ -886,13 +886,13 @@ namespace HomeGenie.Service.Handlers
                     double.TryParse(migCommand.GetOption(3), out startTime);
                     double endTime = 0;
                     double.TryParse(migCommand.GetOption(4), out endTime);
-                    double chartWidth = 0;
-                    double.TryParse(migCommand.GetOption(5), out chartWidth);
                     if (parameter != null)
                     {
                         // List is copied to prevent "Collection was modified" errors when serializing to JSON
-                        var stats = new ValueStatistics();
-                        stats.History = new TsList<ValueStatistics.StatValue>(parameter.Statistics.History);
+                        var stats = new ValueStatistics()
+                        {
+                            History = new TsList<ValueStatistics.StatValue>(parameter.Statistics.History)
+                        };
                         if (startTime > 0 && stats.History.Count > 0)
                         {
                             stats.History = new TsList<ValueStatistics.StatValue>(
@@ -900,32 +900,6 @@ namespace HomeGenie.Service.Handlers
                                     .Where(sv => sv.UnixTimestamp >= startTime && sv.UnixTimestamp <= endTime)
                                     .ToList()
                             );
-                        }
-                        if (chartWidth > 0)
-                        {
-                            var data = stats.History;
-                            double windowSize = Math.Round(data.Count / chartWidth);
-                            if (windowSize > 1) {
-                                var resampledList = new TsList<ValueStatistics.StatValue>();
-                                for(int i = 0; i < data.Count / windowSize; i++) {
-                                    int si = (int)Math.Round(i * windowSize);
-                                    double c = windowSize;
-                                    if (si + c >= data.Count) c = data.Count - si;
-                                    var sample = data.GetRange(si, (int)c);
-                                    if (sample.Count > 0)
-                                    {
-                                        var resampled = new ValueStatistics.StatValue(
-                                            sample.Select(sv => sv.Value)
-                                                .Average(),
-                                            new DateTime((long)sample.Select(sv => (double)sv.Timestamp.Ticks)
-                                                .Average())
-                                        );
-                                        resampledList.Add(resampled);
-                                    }
-                                }
-                                stats.History = resampledList;
-                            }
-
                         }
                         request.ResponseData = JsonConvert.SerializeObject(stats, Formatting.Indented);
                     }

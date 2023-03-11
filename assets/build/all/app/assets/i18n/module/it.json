@@ -1,20 +1,28 @@
 {
   "stats.time_range":
     "Intervallo",
-  "stats.last_minute":
-    "Ultimo minuto",
-  "stats.last_ten_minutes":
-    "Ultimi 10 minuti",
-  "stats.last_half_hour":
-    "Ultima mezz'ora",
-  "stats.last_hour":
-    "Ultima ora",
-  "stats.last_three_hours":
-    "Ultime 3 ore",
-  "stats.last_six_hours":
-    "Ultime 6 ore",
-  "stats.last_twelve_hours":
-    "Ultime 12 ore",
-  "stats.last_twentyfour_hours":
-    "Ultime 24 ore"
+  "stats.one_second":
+    "Un secondo",
+  "stats.five_seconds":
+    "5 secondi",
+  "stats.ten_seconds":
+    "10 secondi",
+  "stats.half_minute":
+    "30 secondi",
+  "stats.one_minute":
+    "Un minuto",
+  "stats.ten_minutes":
+    "10 minuti",
+  "stats.half_hour":
+    "30 minuti",
+  "stats.one_hour":
+    "Un'ora",
+  "stats.three_hours":
+    "3 ore",
+  "stats.six_hours":
+    "6 ore",
+  "stats.twelve_hours":
+    "12 ore",
+  "stats.twentyfour_hours":
+    "24 ore"
 }

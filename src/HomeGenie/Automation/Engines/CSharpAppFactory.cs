@@ -82,6 +82,11 @@ namespace HomeGenie.Automation.Engines
             "Innovative.SolarCalculator",
             "LiteDB",
             "OpenSource.UPnP",
+            "NWaves.Signals",
+            "NWaves.Filters",
+            "NWaves.Filters.Base",
+            "NWaves.Operations",
+            "NWaves.Utils",
 #if !NETCOREAPP
             "Raspberry",
             "Raspberry.Timers",
@@ -226,6 +231,9 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UnitsNet.dll")),
                     
+                    // Data / Signal processing
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NWaves.dll")),
+                    
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
 
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
@@ -353,6 +361,8 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("UPnP.dll");
 
             compilerParams.ReferencedAssemblies.Add("MQTTnet.dll");
+                    
+            compilerParams.ReferencedAssemblies.Add("NWaves.dll");
 
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");

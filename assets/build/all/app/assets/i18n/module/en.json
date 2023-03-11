@@ -1,20 +1,28 @@
 {
   "stats.time_range":
     "Time range",
-  "stats.last_minute":
-    "Last minute",
-  "stats.last_ten_minutes":
-    "Last 10 minutes",
-  "stats.last_half_hour":
-    "Last 30 minutes",
-  "stats.last_hour":
-    "Last hour",
-  "stats.last_three_hours":
-    "Last 3 hours",
-  "stats.last_six_hours":
-    "Last 6 hours",
-  "stats.last_twelve_hours":
-    "Last 12 hours",
-  "stats.last_twentyfour_hours":
-    "Last 24 hours"
+  "stats.one_second":
+    "One second",
+  "stats.five_seconds":
+    "5 seconds",
+  "stats.ten_seconds":
+    "10 seconds",
+  "stats.half_minute":
+    "30 seconds",
+  "stats.one_minute":
+    "One minute",
+  "stats.ten_minutes":
+    "10 minutes",
+  "stats.half_hour":
+    "30 minutes",
+  "stats.one_hour":
+    "One hour",
+  "stats.three_hours":
+    "3 hours",
+  "stats.six_hours":
+    "6 hours",
+  "stats.twelve_hours":
+    "12 hours",
+  "stats.twentyfour_hours":
+    "24 hours"
 }

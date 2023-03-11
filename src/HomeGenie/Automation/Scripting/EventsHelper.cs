@@ -122,7 +122,7 @@ namespace HomeGenie.Automation.Scripting
         /// <example>
         /// Example:
         /// <code>
-        ///     When.ModuleParameterChange( (module, parameter) =>
+        ///     When.ModuleParameterChanged( (module, parameter) =>
         ///     {
         ///         if (module.Is("Kitchen Motion Sensor") && parameter.Is("Status.Level"))
         ///         {
