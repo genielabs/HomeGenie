@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>var dataFolder = Data.GetFolder("client-presets");
 Data.AddToSystemBackup(dataFolder);
@@ -792,10 +792,51 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>#region program-context
+    <ScriptSetup>Program.UseWidget("homegenie/generic/sensor");
+//Program.Run();</ScriptSetup>
+    <ScriptSource>#using NWaves.Signals.Builders
 
-#using NWaves.Filters
-#using NWaves.Operations
+DiscreteSignal sinusoid = 
+    new SineBuilder()
+        .SetParameter("frequency", 200/*Hz*/)
+        .SetParameter("phase", Math.PI)
+        .OfLength(50)
+        .SampledAt(5000/*Hz*/)
+        .Build();
+
+var samples = new List&lt;float&gt;(sinusoid.Samples);
+while (Program.IsRunning)
+{
+    foreach (var s in samples)
+    {
+        Program.Emit("Sensor.SineWave", (s * 8) + 8);
+        Pause(.05);
+    }
+}
+</ScriptSource>
+    <ScriptErrors />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>sine-wave-signal</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>E399C55B9D64FCBD38E9B2254066159A</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>900</Address>
+    <Name>SineWave Signal</Name>
+    <Description>Example</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>#region program-context
 
 const int windowSize = 9;
 
@@ -816,7 +857,7 @@ ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double start
     stats.History.Reverse();
 
     // Process time series
-    if (startTime &gt; 0 &amp;&amp; stats.History.Count &gt; 0)
+    if (startTime &gt; 0 &amp;&amp; stats.History.Count &gt; 0 &amp;&amp; chartWidth &lt; stats.History.Count)
     {
         var stepMs = (timeSpan / chartWidth);
         if (stepMs &lt; 1000) stepMs = 1000;
@@ -941,15 +982,15 @@ When.WebServiceCallReceived("DataProcessing.Filters/Series/SavitzkyGolay", (args
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>time-series-filters</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>749ED822713EF777CDDAE4E60D2F22E2</Checksum>
+      <Checksum>CB0B3531765B9FEFD9E62D8FC8729EC0</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>570</Address>

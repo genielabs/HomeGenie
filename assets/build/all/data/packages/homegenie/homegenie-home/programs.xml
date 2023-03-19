@@ -10,11 +10,8 @@
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
-var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
-var kwCounterToday = energyMonitor.Parameter("EnergyMonitor.KwCounter.Today");
 var wattCounter = energyMonitor.Parameter("EnergyMonitor.WattCounter");
 var wattCounterToday = energyMonitor.Parameter("EnergyMonitor.WattCounter.Today");
-var kwLoad = energyMonitor.Parameter("EnergyMonitor.KwLoad");
 var wattLoad = energyMonitor.Parameter("EnergyMonitor.WattLoad");
 var operatingDevices = energyMonitor.Parameter("EnergyMonitor.OperatingDevices");
 var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
@@ -24,7 +21,6 @@ var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches
 if (energyMonitor.Instance.Name == "") {
   energyMonitor.Instance.Name = "Energy Monitor";
 }
-kwLoad.Value = "0";
 wattLoad.Value = "0";
 operatingDevices.Value = "0";
 operatingLights.Value = "0";
@@ -43,7 +39,7 @@ var emit = new Func&lt;ModuleParameter,bool&gt;((p) =&gt; {
 When.ModuleParameterChanged((module, property) =&gt; {
   if (module.HasFeature("EnergyManagement.MonitorStatus") || module.HasFeature("EnergyManagement.MonitorWatts")) {
     if (property.Is("Status.Level") || property.Is("Meter.Watts")) {
-		updateRequired = true;
+		  updateRequired = true;
     }
   }
   // returning true, will route event to other listeners
@@ -56,7 +52,7 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   int devcount = 0, lightcount = 0, switchcount = 0;
   var now = DateTime.UtcNow;
   bool updateCounter = (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= counterUpdateInterval;
-  monitorModules.Each((mod)=&gt;{
+  monitorModules.Each((mod) =&gt; {
     if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0 || mod.Parameter("Status.Level").DecimalValue &gt; 0)
     {
       if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
@@ -97,13 +93,9 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
     {
       wattCounter.SetData(totalWattCounter);
       emit(wattCounter);
-      kwCounter.SetData(totalWattCounter / 1000D);
-      emit(kwCounter);
       var todayWattCounter = wattCounterToday.DecimalValue + (totalLoad / 60 / (60 / counterUpdateInterval));
       wattCounterToday.SetData(todayWattCounter);
       emit(wattCounterToday);
-      kwCounterToday.SetData(todayWattCounter / 1000D);
-      emit(kwCounterToday);
     }
   }
   // Update current load/devices stats
@@ -112,12 +104,6 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   {
     wattLoad.Value = load;
     emit(wattLoad);
-  }
-  load = (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture);
-  if (kwLoad.Value != load)
-  {
-    kwLoad.Value = load;
-    emit(kwLoad);
   }
   if (operatingDevices.DecimalValue != devcount)
   {
@@ -141,15 +127,11 @@ When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
   var api = new MigInterfaceCommand((string)args);
   if (api.Command == "Counter.Reset")
   {
-    kwCounter.Value = "0";
     wattCounter.Value = "0";
     UpdateEnergyLoad();
   }
   dynamic response = new System.Dynamic.ExpandoObject();
-  response.KiloWattLoad = kwLoad.Value;
-  response.KiloWattCouter = kwCounter.Value;
   response.WattCounter = wattCounter.Value;
-  response.KiloWattCounterToday = kwCounterToday.Value;
   response.WattCounterToday = wattCounterToday.Value;
   response.WattLoad = wattLoad.Value;
   response.OperatingDevices = operatingDevices.Value;
@@ -169,7 +151,6 @@ while (Program.IsRunning)
   if ((DateTime.Now - DateTime.Today).TotalSeconds &lt; 60 &amp;&amp; !midNightReset)
   {
     wattCounterToday.Value = "0";
-    kwCounterToday.Value = "0";
     midNightReset = true;
   }
   else if ((DateTime.Now - DateTime.Today).TotalSeconds &gt;= 60 &amp;&amp; midNightReset)
@@ -187,7 +168,7 @@ while (Program.IsRunning)
       <Id>energy-monitor</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>1229548E1506A15D22938492F8E4DC71</Checksum>
+      <Checksum>D4C14402B765351518F1FEB31DE3B812</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -1036,7 +1017,7 @@ while (Program.IsRunning)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>

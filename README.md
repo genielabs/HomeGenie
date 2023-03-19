@@ -16,6 +16,9 @@
 - Customizable client configurations that can be saved and recalled quickly from the UI preferences 
 
 
+![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/homegenie_dashboard_01.jpg)
+
+
 ## Documentation
 
 https://genielabs.github.io/HomeGenie

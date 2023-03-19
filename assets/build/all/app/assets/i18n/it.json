@@ -32,6 +32,7 @@
   "add_device": "Aggiungi dispositivo",
   "operation_failed": "Operazione fallita",
   "device_manager": "Gestione dispositivi",
+  "title": "Titolo",
   "name": "Nome",
   "enter_name": "Inserire nome",
   "description": "Descrizione",
@@ -70,8 +71,9 @@
   "graph_mode": "Tipo Grafico",
   "data_filter": "Filtro dati",
   "data_filter_none": "(nessuno)",
-  "show_fields": "Campi",
+  "field": "Campo",
   "compare_modules": "Confronta con",
+  "compact_mode": "Modalità compatta",
   "not_set": "Non impostato",
   "enable": "Abilita",
   "disable": "Disabilita",
@@ -130,5 +132,9 @@
   "no_data_received_yet": "In attesa dati",
   "backup_and_restore": "Backup e ripristino",
   "software_updates": "Aggiornamenti software",
-  "service_configuration": "Configurazione servizio"
+  "service_configuration": "Configurazione servizio",
+  "add_data_source": "Agg. sorgente dati",
+  "edit_data_source": "Modifica sorgente dati",
+  "add_to_dashboard": "Agg. a dashboard",
+  "fill": "Riempi"
 }

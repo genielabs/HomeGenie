@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>$$.program
   .useWidget('homegenie/generic/program');
@@ -115,7 +115,7 @@ while (Program.IsRunning) {
     if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
       double variation = (new Random().NextDouble() - 0.5) / 5;
       double value = field.DecimalValue + variation;
-      module.Emit(TEMPERATURE_FIELD, Math.Round(value, 3));
+      module.Emit(TEMPERATURE_FIELD, Math.Round(value, 2));
     }
     return false; // continue iterating
   });
@@ -126,11 +126,11 @@ while (Program.IsRunning) {
     var frequency = module.Parameter(EMIT_FREQUENCY_FIELD);
     var field = module.Parameter(HUMIDITY_FIELD);
     if (frequency.DecimalValue &gt; 0 &amp;&amp; field.IdleTime &gt;= frequency.DecimalValue) {
-      double variation = (new Random().NextDouble() - 0.5) * 5;
+      double variation = (new Random().NextDouble() - (Math.PI / 10)) * 3;
       double value = (int)field.DecimalValue + variation;
-      if (value &lt; 5) value = 5;
+      if (value &lt; 15) value = 15;
       if (value &gt; 95) value = 95;
-      module.Emit(HUMIDITY_FIELD, Math.Round(value, 3));
+      module.Emit(HUMIDITY_FIELD, Math.Round(value, 2));
     }
     return false; // continue iterating
   });
@@ -167,7 +167,7 @@ while (Program.IsRunning) {
         module.Emit(WATTS_FIELD, 0);
       }
       if (value &gt; 0 || field.DecimalValue != 0) {
-	      module.Emit(WATTS_FIELD, Math.Round(value, 3));
+	      module.Emit(WATTS_FIELD, Math.Round(value, 2));
       }
     }
     return false; // continue iterating
@@ -180,9 +180,9 @@ while (Program.IsRunning) {
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>sensor-simulator</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>FB1F5FEDE8AB344E90D3E1A79D125245</Checksum>
+      <Checksum>074FE56AE267E244A7EE9AF332455FC1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>410</Address>
@@ -441,6 +441,7 @@ const _domain = "HomeAutomation.Demo";
 // Add a temperature and luminance sensor
 $$.program.addModule(_domain, "1", "Sensor");
 $$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Temperature value", "slider:-50:100:0.5");
+$$.program.addFeature(_domain, "Sensor", "Sensor.Humidity", "Humidity value", "slider:10:100:5");
 $$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Luminance value", "slider:0:1000:1");
 $$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Motion detection status", "slider:0:1:1");
 $$.program.addFeature(_domain, "Sensor", "Status.Battery", "Battery level", "slider:0:100:1");
@@ -564,9 +565,9 @@ function initialize() {
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>virtual-modules-demo</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>58D0E86C8BCDED68557C087C18811444</Checksum>
+      <Checksum>A4DC8271C0C079DC35D46A8755F5AAE5</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>400</Address>
@@ -580,6 +581,13 @@ function initialize() {
         <ForTypes>Sensor</ForTypes>
         <Property>Sensor.Temperature</Property>
         <Description>Temperature value</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:10:100:5</FieldType>
+        <ForDomains>HomeAutomation.Demo</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>Sensor.Humidity</Property>
+        <Description>Humidity value</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:0:1000:1</FieldType>

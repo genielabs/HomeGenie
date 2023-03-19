@@ -8,30 +8,6 @@
     <Address>1</Address>
     <Properties>
       <ModuleParameter>
-        <Name>EnergyMonitor.KwCounter</Name>
-        <Value>2.093338255092591</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T23:23:31.9455922Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyMonitor.KwCounter.Today</Name>
-        <Value>0.15666697243827157</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T23:23:31.945708Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>EnergyMonitor.KwLoad</Name>
-        <Value>0.400</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2023-01-21T18:09:07.9714234Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
         <Value>1</Value>
         <Description />

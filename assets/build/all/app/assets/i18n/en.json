@@ -32,6 +32,7 @@
   "add_device": "Add device",
   "operation_failed": "Operation failed",
   "device_manager": "Device manager",
+  "title": "Title",
   "name": "Name",
   "enter_name": "Enter name",
   "description": "Description",
@@ -70,8 +71,9 @@
   "graph_mode": "Graph Mode",
   "data_filter": "Data filter",
   "data_filter_none": "(none)",
-  "show_fields": "Fields",
+  "field": "Field",
   "compare_modules": "Compare with",
+  "compact_mode": "Compact mode",
   "not_set": "Not set",
   "enable": "Enable",
   "disable": "Disable",
@@ -130,5 +132,9 @@
   "no_data_received_yet": "Waiting for data",
   "backup_and_restore": "Backup and restore",
   "software_updates": "Software updates",
-  "service_configuration": "Service configuration"
+  "service_configuration": "Service configuration",
+  "add_data_source": "Add data source",
+  "edit_data_source": "Edit data source",
+  "add_to_dashboard": "Add to dashboard",
+  "fill": "Fill"
 }

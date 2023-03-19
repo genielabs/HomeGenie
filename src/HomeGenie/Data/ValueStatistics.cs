@@ -70,7 +70,7 @@ namespace HomeGenie.Data
         private TsList<StatValue> historyValues;
         // historyLimit is expressed in minutes
         private int historyLimit = 60 * 24;
-        private int historyLimitSize = 10000;
+        private int historyLimitSize = 86400;
         private StatValue lastEvent, lastOn, lastOff;
 
         public ValueStatistics()
