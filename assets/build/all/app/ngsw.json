@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1679250327466,
+  "timestamp": 1679256640583,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.114b2ad8ed67078d.js",
+        "/app/main.1a8cb6604fca82d6.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.710b144f4805f4b0.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
@@ -724,8 +724,8 @@
     "/app/assets/widgets/weather/images_alt/weather.svg": "c719c09048977fd40688272316b35ddf1bdf89e8",
     "/app/assets/widgets/weather/style.css": "1b70730e73885cc0ee83566eaf584008d34e2255",
     "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
-    "/app/index.html": "d0d8f4f35b61035cfc3852bddfccd2d051c182c3",
-    "/app/main.114b2ad8ed67078d.js": "634ae7d69ffb7b8110abd22776212db7d5152caa",
+    "/app/index.html": "b75d5d1fdf0f3a57d39ec2f771fa64e4ec2c9f25",
+    "/app/main.1a8cb6604fca82d6.js": "6d63d94a1772c5f5cab8db97dec95872fef562bb",
     "/app/manifest.webmanifest": "d47bb07a495e27ddf072f8702df373f79b4eb183",
     "/app/polyfills.710b144f4805f4b0.js": "594a5ea1b9d3f9cbc4f363eca84eda2c8bb8a901",
     "/app/runtime.b92e2ca178ebbf4a.js": "b50d841a4c50d466c34aab3267d3fb4afe87dede",
