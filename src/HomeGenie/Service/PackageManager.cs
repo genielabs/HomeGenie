@@ -213,6 +213,7 @@ namespace HomeGenie.Service
                             p.ScriptSource = install.ScriptSource;
                             p.ScriptContext = install.ScriptContext;
                             p.Data = install.Data;
+                            p.PackageInfo.Version = item.Version;
                             p.PackageInfo.Checksum = item.Checksum;
                             homegenie.ProgramManager.ProgramCompile(p);
                         });
