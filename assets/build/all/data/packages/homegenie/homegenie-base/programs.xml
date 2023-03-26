@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>var dataFolder = Data.GetFolder(PresetsFolder);
 Data.AddToSystemBackup(dataFolder);
@@ -230,7 +230,7 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
     return stats;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -478,7 +478,7 @@ string GetDbName()
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
       <Checksum>9E70AE138C65E2830D39139BB65DF36B</Checksum>
     </PackageInfo>
@@ -490,7 +490,7 @@ string GetDbName()
 </Description>
     <Group>Data Processing</Group>
     <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <AutoRestartEnabled>true</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -1129,7 +1129,7 @@ Program.GoBackground();
 const string dataApiUrl = "DataProcessing.Statistics/MyStat";
 
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

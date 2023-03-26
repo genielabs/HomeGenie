@@ -739,7 +739,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0.6</Value>
+        <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -965,7 +965,7 @@ https://www.burgestrand.se/hue-api/api/auth/registration</Description>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0.35</Value>
+        <Value>0</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
