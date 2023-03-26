@@ -879,6 +879,8 @@ namespace HomeGenie.Service
         {
             bool unchanged = (oldProgram.ScriptSetup == newProgram.ScriptSetup) &&
                              (oldProgram.ScriptSource == newProgram.ScriptSource) &&
+                             (oldProgram.ScriptContext == newProgram.ScriptContext) &&
+                             (oldProgram.Data == newProgram.Data) &&
                              (oldProgram.Name == newProgram.Name) &&
                              (oldProgram.Description == newProgram.Description) &&
                              (oldProgram.Group == newProgram.Group) &&

@@ -44,6 +44,7 @@ namespace HomeGenie.Automation.Engines
 {
     public static class CSharpAppFactory
     {
+        public const int ContextCodeOffset = 7;
         public const int ConditionCodeOffset = 7;
 
         // TODO: move this to a config file
@@ -124,9 +125,9 @@ namespace HomeGenie.Automation.Engines
         public static int ProgramCodeOffset => Includes.Count() + 11;
 
 #if NETCOREAPP
-        public static EmitResult CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
+        public static EmitResult CompileScript(string scriptSetup, string scriptSource, string scriptContext, string outputDllFile)
 #else
-        public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string outputDllFile)
+        public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string scriptContext, string outputDllFile)
 #endif
         {
             var source = @"# pragma warning disable 0168 // variable declared but not used.
@@ -193,7 +194,7 @@ namespace HomeGenie.Automation.Scripting
         public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
 }";
-            var parsedCode = ParseCode(scriptSetup, scriptSource);
+            var parsedCode = ParseCode(scriptSetup, scriptSource, scriptContext);
             source = source
                 .Replace("{using}", parsedCode.UsingNamespaces)
                 .Replace("{source}", parsedCode.MainCode)
@@ -380,12 +381,13 @@ namespace HomeGenie.Automation.Scripting
 #endif
         }
 
-        public static ParseCodeResult ParseCode(string scriptSetup, string scriptSource)
+        public static ParseCodeResult ParseCode(string scriptSetup, string scriptSource, string scriptContext)
         {
             var userIncludes = new List<string>();
-            var scriptContext = "";
+            //var scriptContext = "";
             scriptSetup = GetIncludes(scriptSetup, ref userIncludes);
-            scriptSetup = GetContext(scriptSetup, ref scriptContext);
+            //scriptSetup = GetContext(scriptSetup, ref scriptContext);
+            scriptContext = GetIncludes(scriptContext, ref userIncludes);
             scriptSource = GetIncludes(scriptSource, ref userIncludes);
             var usingNs = String.Join(" ", Includes.Concat(userIncludes)
                 .Select(x => String.Format("using {0};" + Environment.NewLine, x)));
@@ -418,47 +420,6 @@ namespace HomeGenie.Automation.Scripting
                 {
                     codeBlock += codeLine + "\n";
                 }
-            }
-            return codeBlock;
-        }
-
-        private static string GetContext(string codeBlock, ref string contextCode)
-        {
-            var codeBlockLines = codeBlock.Split('\n');
-            codeBlock = "";
-            bool contextOpen = false;
-            int currentLine = 0;
-            foreach (var codeLine in codeBlockLines)
-            {
-                if (contextOpen)
-                {
-                    if ((codeLine.Trim() + " ").StartsWith("#endregion "))
-                    {
-                        contextOpen = false;
-                    }
-                    contextCode += codeLine + "\n";
-                }
-                else if ((codeLine.Trim() + " ").StartsWith("#region program-context "))
-                {
-                    if (currentLine == 0)
-                    {
-                        contextOpen = true;
-                    }
-                    else
-                    {
-                        throw new Exception("Directive '#region program-context' must be on first line");
-                    }
-                    contextCode += codeLine + "\n";
-                }
-                else
-                {
-                    codeBlock += codeLine + "\n";
-                }
-                currentLine++;
-            }
-            if (contextOpen)
-            {
-                throw new Exception("Missing #endregion preprocessor directive");
             }
             return codeBlock;
         }

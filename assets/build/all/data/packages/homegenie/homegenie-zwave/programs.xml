@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
 Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
@@ -34,15 +34,17 @@ Program.Run();
   Pause(delay);
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-zwave</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>level-poll</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>C766AF050FE3837AEBF22B30E87361C7</Checksum>
+      <Checksum>E0D77BA0EE015C9BEFB333609455CF5D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>39</Address>
@@ -74,15 +76,17 @@ Program.Run();
   Pause(delay);
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-zwave</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>meter-watt-poll</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>A87BCC98A13AD4F136BF36DA7FDFEA8F</Checksum>
+      <Checksum>71AA3A8390F290989429C807C7B17DF6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>40</Address>
@@ -236,15 +240,17 @@ Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
 });
 
 Program.GoBackground();</ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-zwave</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>multi-instance-channel-virtual-modules</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>BA80A50AA3B121D792D140F456CC88B0</Checksum>
+      <Checksum>1967855F81775BD59729CC3E2BE35432</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>93</Address>
@@ -358,15 +364,17 @@ Program.Run();
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptContext />
+    <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-zwave</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>query-on-wake-up</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>6F6F34BA830DE13BFB883F2A402B1EFE</Checksum>
+      <Checksum>01610B331E18D10255479AE6131B403B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>91</Address>
@@ -418,15 +426,17 @@ Program.Run();
   Pause(pause);
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-zwave</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>z-wave-thermostat-poll</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>1589D2553788127ACE679F6E2736DDE3</Checksum>
+      <Checksum>ED4C961D73959320E68598B7F6EFC08B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>92</Address>

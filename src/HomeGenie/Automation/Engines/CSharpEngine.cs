@@ -119,7 +119,7 @@ namespace HomeGenie.Automation.Engines
             EmitResult result = null;
             try
             {
-                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, tempFile);
+                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, ProgramBlock.ScriptContext, tempFile);
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace HomeGenie.Automation.Engines
 
             if (result != null && !result.Success)
             {
-                var parsedCode = CSharpAppFactory.ParseCode(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource);
+                var parsedCode = CSharpAppFactory.ParseCode(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, ProgramBlock.ScriptContext);
                 var contextLines = parsedCode.ContextCode.Split('\n').Length;
                 var sourceLines = parsedCode.MainCode.Split('\n').Length;
                 foreach (var diagnostic in result.Diagnostics)
@@ -208,7 +208,7 @@ namespace HomeGenie.Automation.Engines
             var result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
-                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, tempFile);
+                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, ProgramBlock.ScriptContext, tempFile);
             }
             catch (Exception ex)
             {
@@ -219,14 +219,24 @@ namespace HomeGenie.Automation.Engines
             if (result.Errors.Count > 0)
             {
                 var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;
+                var contextLines = CSharpAppFactory.ContextCodeOffset + ProgramBlock.ScriptContext.Split('\n').Length;
                 foreach (System.CodeDom.Compiler.CompilerError error in result.Errors)
                 {
                     var errorRow = (error.Line - CSharpAppFactory.ProgramCodeOffset);
                     var blockType = CodeBlockEnum.CR;
-                    if (errorRow >= sourceLines + CSharpAppFactory.ConditionCodeOffset)
+                    if (errorRow >=  contextLines + sourceLines + CSharpAppFactory.ConditionCodeOffset)
                     {
-                        errorRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
+                        errorRow -= (contextLines + 1 + sourceLines + CSharpAppFactory.ConditionCodeOffset);
                         blockType = CodeBlockEnum.TC;
+                    }
+                    else if (errorRow <= contextLines)
+                    {
+                        errorRow -= 1;
+                        blockType = CodeBlockEnum.PC;
+                    }
+                    else
+                    {
+                        errorRow -= contextLines;
                     }
                     if (!error.IsWarning)
                     {
@@ -367,7 +377,7 @@ namespace HomeGenie.Automation.Engines
                 error.Line = stackFrames[0].GetFileLineNumber();
                 foreach (var frame in stackFrames)
                 {
-                    var declaringType = frame.GetMethod().DeclaringType;
+                    var declaringType = frame.GetMethod()?.DeclaringType;
                     if (declaringType != null)
                     {
                         if (declaringType.FullName != null && declaringType.FullName.EndsWith("HomeGenie.Automation.Scripting.ScriptingInstance"))

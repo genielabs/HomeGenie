@@ -234,13 +234,14 @@ namespace HomeGenie.Automation.Scripting
         ///     });
         /// </code>
         /// </example>
+        [Obsolete("This method is deprecated, use Api.Handle(...) instead.")]
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, object> handler)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             program.Engine.RegisterDynamicApi(apiCall, handler);
             return this;
         }
-
+        [Obsolete("This method is deprecated, use Api.Handle(...) instead.")]
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, string> handler)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());

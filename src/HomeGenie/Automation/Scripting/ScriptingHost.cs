@@ -49,6 +49,7 @@ namespace HomeGenie.Automation.Scripting
             Net = new NetHelper(hgService);
             Program = new ProgramHelper(hgService, programId);
             Data = new DataHelper(hgService, programId);
+            Api = new ApiHelper(hgService, programId);
             When = new EventsHelper(hgService, programId);
             SerialPort = new SerialPortHelper();
             TcpClient = new TcpClientHelper();
@@ -80,6 +81,9 @@ namespace HomeGenie.Automation.Scripting
 
         public DataHelper Data { get; private set; }
 
+        public ApiHelper Api { get; private set; }
+
+        // TODO: deprecate this alias
         public EventsHelper Events
         {
             get

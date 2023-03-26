@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
-    <ScriptSetup>var dataFolder = Data.GetFolder("client-presets");
+    <ScriptSetup>var dataFolder = Data.GetFolder(PresetsFolder);
 Data.AddToSystemBackup(dataFolder);
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>var dataFolder = Data.GetFolder("client-presets");
+    <ScriptSource>var dataFolder = Data.GetFolder(PresetsFolder);
 
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsList", (args) =&gt; {
+Api.Handle($"{apiBaseUrl}List", (args) =&gt; {
     var files = Directory.GetFiles(dataFolder);
     return files.Select(f =&gt; Path.GetFileNameWithoutExtension(f));
 });
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsAdd/", (args) =&gt; {
-    var command = Program.ParseApiCall(args);
+Api.Handle($"{apiBaseUrl}Add/", (args) =&gt; {
+    var command = Api.Parse(args);
     if (command.Data != null) {
         var configuration = System.Text.Encoding.Default.GetString(command.Data as byte[]);
         var presetName = command.GetOption(0);
@@ -24,8 +24,8 @@ When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsAdd/"
     }
     return new ResponseStatus(Status.Ok);
 });
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsGet/", (args) =&gt; {
-    var command = Program.ParseApiCall(args);
+Api.Handle($"{apiBaseUrl}Get/", (args) =&gt; {
+    var command = Api.Parse(args);
     var presetName = command.GetOption(0);
     if (String.IsNullOrEmpty(presetName)) {
         presetName = "default";
@@ -35,8 +35,8 @@ When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsGet/"
     if (File.Exists(dataFile)) config = File.ReadAllText(dataFile);
     return config;
 });
-When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsDelete/", (args) =&gt; {
-    var command = Program.ParseApiCall(args);
+Api.Handle($"{apiBaseUrl}Delete/", (args) =&gt; {
+    var command = Api.Parse(args);
     var presetName = command.GetOption(0);
     if (String.IsNullOrEmpty(presetName)) {
         return new ResponseStatus(Status.Error);
@@ -48,21 +48,204 @@ When.WebServiceCallReceived("HomeAutomation.HomeGenie/Config/Client.PresetsDelet
 
 Program.GoBackground();
 </ScriptSource>
+    <ScriptContext>const string PresetsFolder = "client-presets";
+const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
+</ScriptContext>
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>client-configs</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>AC96494FCA5A5E953B728A669BAF7CA3</Checksum>
+      <Checksum>0BE01D06C8342351AC31E74439BA6022</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>111</Address>
     <Name>Client configuration</Name>
     <Description>Implements API for managing client's configuration profiles that are used to store client's UI and dashboards settings.</Description>
     <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+    .Implements("@Statistics:Provider", apiUrl)
+    .Run();
+</ScriptSetup>
+    <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
+    return new {
+        dataApi = dataApiUrl,
+        scale = "time",
+        filters = new string[] {
+            "SimpleAverage",
+            "MovingAverage",
+            "SavitzkyGolay"
+        }
+    };
+});
+
+Api.Handle($"{dataApiUrl}/SimpleAverage", (args) =&gt; {
+    var request = Api.Parse(args);
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+
+        var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
+        stats.History.Reverse();
+        return stats;
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+Api.Handle($"{dataApiUrl}/MovingAverage", (args) =&gt; {
+    var request = Api.Parse(args);
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+
+        var filter = new MovingAverageFilter(windowSize);
+        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
+        stats.History.Reverse();
+        return stats;
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+Api.Handle($"{dataApiUrl}/SavitzkyGolay", (args) =&gt; {
+    var request = Api.Parse(args);
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+
+        var filter = new SavitzkyGolayFilter(windowSize);
+        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
+        stats.History.Reverse();
+        return stats;
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>const string apiUrl = "Statistics.Providers/DataMonitor";
+const string dataApiUrl = "DataProcessing.Filters/Series";
+
+const int windowSize = 9;
+
+ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
+    startTime = (long)startTime;
+    endTime = (long)endTime;
+
+    // Copy parameter values history to a new object
+    var stats = new ValueStatistics() {
+        History = new TsList&lt;ValueStatistics.StatValue&gt;(
+            parameter.Statistics.History
+                .Where(sv =&gt; sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
+                    .ToList()
+        )
+    };
+    stats.History.Reverse();
+
+    // Process time series
+    if (startTime &gt; 0 &amp;&amp; stats.History.Count &gt; 0 &amp;&amp; chartWidth &lt; stats.History.Count)
+    {
+        var cts = stats.History.First().UnixTimestamp;
+        var cte = stats.History.Last().UnixTimestamp;
+        var stepMs = ((endTime - startTime) / chartWidth) * ((cte - cts) / (endTime - startTime));
+        if (stepMs &lt; 1000) stepMs = 1000;
+        var resampledList = new List&lt;ValueStatistics.StatValue&gt;();
+        cts -= (cts % stepMs);
+        cts -= stepMs;
+        var sum = 0D;
+        var count = 0;
+        int i = 0;
+        var itemTimestamp = DateTime.UtcNow;
+        while (i &lt; stats.History.Count)
+        {
+            var item = stats.History[i];
+            if (item.UnixTimestamp &gt;= cts)
+            {
+                var resampled = new ValueStatistics.StatValue(
+                    sum / count,
+                    itemTimestamp
+                );
+                resampledList.Add(resampled);
+                sum =0; count = 0;
+                cts += stepMs;
+            }
+            sum += item.Value;
+            itemTimestamp = item.Timestamp;
+            count++;
+            i++;
+        }
+        stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(resampledList);
+    }
+    return stats;
+}
+
+ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
+    var timeSpan = (endTime - startTime);
+    var timeSpanMin = (timeSpan / 2);
+    var stats = ApplySimpleAverageFilter(parameter, startTime - timeSpanMin, endTime + timeSpanMin, chartWidth);
+
+    // Process time series
+    var samples = stats.History
+        .Select(sv =&gt; (float)sv.Value)
+        .ToArray();
+    var signal = new DiscreteSignal(50/*Hz sampling rate*/, samples);
+    var smoothedSignal = filter.ApplyTo(signal);
+    var lst = new List&lt;ValueStatistics.StatValue&gt;();
+    int boundsGap = (windowSize - 1) / 2;
+    for (int c = 0; c &lt; stats.History.Count - boundsGap; c++)
+    {
+        var sv = stats.History[c];
+        if (sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
+        {
+            lst.Add(new ValueStatistics.StatValue(smoothedSignal[c + boundsGap], sv.Timestamp));
+        }
+    }
+
+    stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(lst);
+    return stats;
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>stats-data-monitor</Id>
+      <Version>1.0.3</Version>
+      <Required>true</Required>
+      <Checksum>AE4B2FDE10AC697C6C1B1D227D0A6AD9</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>570</Address>
+    <Name>Data Monitor</Name>
+    <Description>Real-time data visualization and monitoring.</Description>
+    <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
@@ -89,15 +272,17 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 });
 Program.GoBackground();
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>e-mail-account</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>8A42A1D70C35CF3C855AF8761795F5B7</Checksum>
+      <Checksum>DEFD8C14DEA9489EB027AB9C3C7CFAEF</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>142</Address>
@@ -111,12 +296,212 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
+    <ScriptSetup>Program.Implements(
+    "@Statistics:Provider",
+    apiUrl,
+    new {
+        mode = "select_module",
+        field = "Meter.Watts.Hour",
+        type = "bar",
+        title = "W/h"
+    }
+).Run();
+</ScriptSetup>
+    <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
+    return new {
+        dataApi = apiDataUrl,
+        scale = "linear",
+        labels = new string[] {
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun"
+        }
+    };
+});
+
+Api.Handle(apiDataUrl, (args) =&gt; {
+    var request = Api.Parse(args);
+    return GetWeeklyStats(request.Domain, request.Address);
+    /*
+    return new double[] {
+        1, 2, 3, 4, 5, 6, 7
+    };
+    */
+});
+
+while (Program.IsRunning)
+{
+
+    // Calculates for each module average Watt consumption every hour
+    var now = DateTime.UtcNow;
+    var monitorModules = Modules.WithFeature("EnergyManagement.MonitorWatts");
+    monitorModules.Each((mod) =&gt; {
+
+        double defaultValue = mod.Parameter("Meter.Watts").Statistics.Current.Value;
+
+        var records = mod.Parameter("Meter.Watts").Statistics.History
+            .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; UpdateInterval);
+        var avgWatt = records
+            .Select(sv =&gt; sv.Value)
+            .DefaultIfEmpty(defaultValue)
+            .Average();
+
+        mod.Emit("Meter.Watts.Hour", avgWatt);
+
+        // store to database
+        UpdateDatabase(mod.Instance, "Meter.Watts.Hour", avgWatt);
+
+        return false;
+
+    });
+
+    // Update stats every minute
+    Pause(60); 
+
+}
+</ScriptSource>
+    <ScriptContext>const string apiUrl = "Statistics.Providers/WeeklyStats";
+const string apiDataUrl = "DataProcessing.Statistics/Weekly/Meter.Watts.Hour";
+
+const int UpdateInterval = 3600; // 1 hour
+const string DbTable = "weekly";
+
+class WeeklyStat {
+    [BsonId]
+    public Int32 ID { get; set; }
+    public string Domain { get; set; }
+    public string Address { get; set; }
+    public byte DayHour { get; set; }
+    public byte WeekDay { get; set; }
+    public ushort YearWeek { get; set; }
+    public string Parameter { get; set; }
+    public double WattsHour { get; set; }
+
+    public WeeklyStat() {}
+    public WeeklyStat(string domain, string address, string p, double v, ushort weekOfYear, byte dayOfWeek, byte hourOfDay)
+    {
+        Domain = domain;
+        Address = address;
+        Parameter = p;
+        WattsHour = v;
+        YearWeek = weekOfYear;
+        WeekDay = dayOfWeek;
+        DayHour = hourOfDay;
+    }
+}
+
+bool UpdateDatabase(Module m, string p, double v)
+{
+    UpdateWeeklyStat(m.Domain, m.Address, p, v, (ushort)ISOWeek.GetWeekOfYear(DateTime.UtcNow), (byte)DateTime.UtcNow.DayOfWeek, (byte)DateTime.UtcNow.Hour);
+    return true;
+}
+
+bool UpdateWeeklyStat(string domain, string address, string parameter, double wattsHour, ushort weekOfYear, byte dayOfWeek, byte hourOfDay)
+{
+    using(var db = Data.LiteDb(GetDbName()))
+    {
+        var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
+        stats.EnsureIndex(x =&gt; x.Domain);
+        stats.EnsureIndex(x =&gt; x.Address);
+        stats.EnsureIndex(x =&gt; x.DayHour);
+        stats.EnsureIndex(x =&gt; x.WeekDay);
+        stats.EnsureIndex(x =&gt; x.Parameter);
+        var record = stats.FindOne(x =&gt;
+                        x.Domain == domain
+                        &amp;&amp; x.Address == address
+                        &amp;&amp; x.Parameter == parameter
+                        &amp;&amp; x.YearWeek == weekOfYear
+                        &amp;&amp; x.WeekDay == dayOfWeek
+                        &amp;&amp; x.DayHour == hourOfDay
+                    );
+        if (record == null)
+        {
+            stats.Insert(new WeeklyStat(
+                domain,
+                address,
+                parameter,
+                wattsHour,
+                weekOfYear,
+                dayOfWeek,
+                hourOfDay
+            ));
+        }
+        else
+        {
+            record.WattsHour = wattsHour;
+            stats.Update(record);
+        }
+    }
+    return true;
+}
+
+double[] GetWeeklyStats(string domain, string address)
+{
+    var results = new double[7];
+    lock(this)
+    using(var db = Data.LiteDb(GetDbName()))
+    {
+        var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
+        stats.EnsureIndex(x =&gt; x.Domain);
+        stats.EnsureIndex(x =&gt; x.Address);
+        stats.EnsureIndex(x =&gt; x.DayHour);
+        stats.EnsureIndex(x =&gt; x.WeekDay);
+        stats.EnsureIndex(x =&gt; x.Parameter);
+        for (byte i = 0; i &lt; results.Length; i++)
+        {
+            var avg = stats
+                .Find(x =&gt; x.Domain == domain &amp;&amp; x.Address == address &amp;&amp; x.WeekDay == i)
+                .Sum(x =&gt; x.WattsHour);
+//                .Select(x =&gt; x.WattsHour)
+//                .DefaultIfEmpty(0)
+//                .Average();
+            results[i == 0 ? 6 : i - 1] = avg / 24;
+//            results[i == 0 ? 6 : i - 1] = avg;
+        }
+    }
+    return results;
+}
+
+string GetDbName()
+{
+    return $"energy_use_{DateTime.UtcNow.Year}.db";
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>energy-use-statistics</Id>
+      <Version>1.0.1</Version>
+      <Required>false</Required>
+      <Checksum>9E70AE138C65E2830D39139BB65DF36B</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>571</Address>
+    <Name>Energy use statistics</Name>
+    <Description>Monitors and collects data on energy consumption. Also implements a bar chart to visualize data.
+
+</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
-  Program.AddFeature("", "", "EventsLogger.EnableLogging", "Enable events logging", "checkbox");
+  Program.AddFeature("", "", EventsLoggingFeature, "Enable events logging", "checkbox");
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>var loggableModules = Modules.WithFeature("EventsLogger.EnableLogging");
+    <ScriptSource>var loggableModules = Modules.WithFeature(EventsLoggingFeature);
 
 When.ProgramStopping(() =&gt; {
 //  db.Dispose(); 
@@ -151,8 +536,8 @@ When.ModuleParameterChanged((mod, p) =&gt; {
   return true;
 });
 
-When.WebServiceCallReceived("HomeGenie.EventsLogger", (args) =&gt; {
-  var cmd = Program.ParseApiCall(args);
+Api.Handle("HomeGenie.EventsLogger", (args) =&gt; {
+  var cmd = Api.Parse(args);
   var moduleDomain = cmd.Address;
   var moduleAddress = cmd.Command;
   var module = Modules.InDomain(moduleDomain).WithAddress(moduleAddress);
@@ -173,15 +558,17 @@ When.WebServiceCallReceived("HomeGenie.EventsLogger", (args) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
+    <ScriptContext>const string EventsLoggingFeature = "EventsLogger.EnableLogging";</ScriptContext>
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>events-logging</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>25467F93E2AA07645AE54E5D5BB9587E</Checksum>
+      <Checksum>45CFE6FF025BD92488BBDBE491C4C98D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>95</Address>
@@ -242,7 +629,7 @@ MqttClient.Reset();
 
 if (server == "")
 {
-  Program.Notify("MQTT endpoint is not configured. [program_configure,program_disable]");
+  Program.Notify($"MQTT endpoint is not configured. {OptionButtons}");
   Pause(5);
   return;
 }
@@ -318,21 +705,18 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
         break;
       }
     } catch (Exception e) {
-      Program.Notify("ERROR: " + e.Message);
+      Program.Notify($"ERROR: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
     }
   }
   //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload);
 });
 
-When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
-  string[] reqs = ((string)args).Split('/');
-  string domain = reqs[0];
-  string address = reqs[1];
-  var commands = new List&lt;string&gt;(reqs);
-  // remove domain and address to obtain the command parts only
-  commands.RemoveAt(0); commands.RemoveAt(0);
-  string command = String.Join("/", commands.ToArray());
+Api.Handle("MQTT:", ( args ) =&gt; {
+  var request = Api.Parse(args);
+  var domain = request.Domain;
+  var address = request.Address;
+  string command = $"{request.Command}/{request.OptionsString}";
   try
   {
     int mqttend = domain.IndexOf(".");
@@ -342,7 +726,7 @@ When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
     MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
     return new ResponseText("OK");
   } catch (Exception e) {
-    Program.Notify("ERROR: " + e.Message);
+    Program.Notify($"ERROR: {e.Message} {OptionButtons}");
     MqttIsConnected = false;
   }
   return new ResponseText("ERROR");
@@ -357,7 +741,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
       string payload = Encoding.UTF8.GetString(bytes);
       MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property)));
     } catch  (Exception e){
-      Program.Notify("ERROR: " + e.Message);
+      Program.Notify($"ERROR: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
     }
   }
@@ -391,7 +775,7 @@ while (Program.IsRunning) {
     }
     catch (Exception e)
     {
-      Program.Notify(e.Message);
+      Program.Notify($"{e.Message} {OptionButtons}");
       Pause(5);
       return;
     }
@@ -399,15 +783,18 @@ while (Program.IsRunning) {
   Pause(30);
 }
 </ScriptSource>
+    <ScriptContext>const string OptionButtons = "[program_configure,program_disable]";
+</ScriptContext>
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>60A252D5988007FD051C58E78ACDDA5D</Checksum>
+      <Checksum>06086F482484213E85FF494C08B342D8</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -662,15 +1049,17 @@ while (Program.IsRunning)
   reconfigureRequired = false;
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>openweathermap</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>F22CC262E2D8B59CF3C97348D552398E</Checksum>
+      <Checksum>F93D3B0AEC9971C1C79D70FDE007888B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
@@ -684,6 +1073,82 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>// This method is used to register this program as a Chart provider
+Program.Implements(
+    "@Statistics:Provider",
+    apiUrl,
+     // the following param's value can be:
+     // --&gt; "select_module", "select_property" or "select_none"
+    new {
+        mode = "select_none",
+        legend = true
+    }
+).Run();
+</ScriptSetup>
+    <ScriptSource>// This API method will be called by the chart component
+// to get the configuration of the chart to generate
+Api.Handle(apiUrl, (args) =&gt; {
+    return new {
+        // API url to call to get updated chart data from this program
+        dataApi = dataApiUrl,
+        // Chart configuration
+        scale = "linear",
+        type = "pie",
+        title = "kW/h today",
+        labels = new string[] {
+            "🍗 Oven",
+            "🔥 Boiler",
+            "🥵 Heater",
+            "🍹 Living Room",
+            "📖 Study"
+        },
+        colors = new string[] {
+            "rgb(197,137,64)",
+            "rgb(229,186,115)",
+            "rgb(250,234,177)",
+            "rgb(255,247,218)",
+            "rgb(255,253,244)"
+        }
+    };
+});
+
+// API method implementation
+Api.Handle(dataApiUrl, (args) =&gt; {
+    // Just a demo, return fixed data
+    return new double[] {
+        500, 400, 300, 200, 100
+    };
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>const string apiUrl = "Statistics.Providers/ExamplePieChart";
+const string dataApiUrl = "DataProcessing.Statistics/MyStat";
+
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>pie-chart-stats-example</Id>
+      <Version>1.0.1</Version>
+      <Required>false</Required>
+      <Checksum>763ECA79BE331FBA5AF3A75CF28C7BE7</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>572</Address>
+    <Name>Pie Chart Stats example</Name>
+    <Description>Example chart provider that renders as a pie chart with static data.</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -755,15 +1220,17 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 });
 Program.GoBackground();
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>remote-control</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>3CCE84C3D6FAFC582974FA8A189B3665</Checksum>
+      <Checksum>BDF7FC5E982D8A588267A989636AA6B6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
@@ -814,189 +1281,22 @@ while (Program.IsRunning)
     }
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>sine-wave-signal</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>E399C55B9D64FCBD38E9B2254066159A</Checksum>
+      <Checksum>7FB7ADAF989FC6DCE596C8218E10A80A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>900</Address>
     <Name>SineWave Signal</Name>
     <Description>Example</Description>
-    <Group>Data Processing</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
-    <Type>csharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>#region program-context
-
-const int windowSize = 9;
-
-ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
-    startTime = (long)startTime;
-    endTime = (long)endTime;
-    var timeSpan = (endTime - startTime);
-    var timeSpanMin = (timeSpan / 2);
-
-    // Copy parameter values history to a new object
-    var stats = new ValueStatistics() {
-        History = new TsList&lt;ValueStatistics.StatValue&gt;(
-            parameter.Statistics.History
-                .Where(sv =&gt; sv.UnixTimestamp &gt;= startTime - timeSpanMin &amp;&amp; sv.UnixTimestamp &lt;= endTime)
-                    .ToList()
-        )
-    };
-    stats.History.Reverse();
-
-    // Process time series
-    if (startTime &gt; 0 &amp;&amp; stats.History.Count &gt; 0 &amp;&amp; chartWidth &lt; stats.History.Count)
-    {
-        var stepMs = (timeSpan / chartWidth);
-        if (stepMs &lt; 1000) stepMs = 1000;
-        var resampledList = new List&lt;ValueStatistics.StatValue&gt;();
-        var cts = stats.History.First().UnixTimestamp;
-        cts -= (cts % stepMs);
-        cts -= stepMs;
-        var sum = 0D;
-        var count = 0;
-        int i = 0;
-        var itemTimestamp = DateTime.UtcNow;
-        while (i &lt; stats.History.Count)
-        {
-            var item = stats.History[i];
-            if (item.UnixTimestamp &gt;= cts)
-            {
-                var resampled = new ValueStatistics.StatValue(
-                    sum / count,
-                    itemTimestamp
-                );
-                resampledList.Add(resampled);
-                sum =0; count = 0;
-                cts += stepMs;
-            }
-            sum += item.Value;
-            itemTimestamp = item.Timestamp;
-            count++;
-            i++;
-        }
-        stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(resampledList);
-    }
-    return stats;
-}
-
-ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
-    var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
-
-    // Process time series
-    var samples = stats.History
-        .Select(sv =&gt; (float)sv.Value)
-        .ToArray();
-    var signal = new DiscreteSignal(50/*Hz sampling rate*/, samples);
-    var smoothedSignal = filter.ApplyTo(signal);
-    var lst = new List&lt;ValueStatistics.StatValue&gt;();
-    int boundsGap = (windowSize - 1) / 2;
-    for (int c = 0; c &lt; stats.History.Count - boundsGap; c++)
-    {
-        var sv = stats.History[c];
-        lst.Add(new ValueStatistics.StatValue(smoothedSignal[c + boundsGap], sv.Timestamp));
-    }
-
-    stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(lst);
-    return stats;
-}
-
-#endregion
-
-Program.Run();</ScriptSetup>
-    <ScriptSource>When.WebServiceCallReceived("DataProcessing.Filters/List/Series", (args) =&gt; {
-    return new string[]{
-        "SimpleAverage",
-        "MovingAverage",
-        "SavitzkyGolay"
-    };
-});
-
-When.WebServiceCallReceived("DataProcessing.Filters/Series/SimpleAverage", (args) =&gt; {
-    var request = Program.ParseApiCall(args);
-    var module = Modules.InDomain(request.Domain)
-                        .WithAddress(request.Address)
-                        .Get();
-    if (module.Exists) {
-        var parameter = module.Parameter(request.Command);
-        var startTime = double.Parse(request.GetOption(0));
-        var endTime = double.Parse(request.GetOption(1));
-        var chartWidth = double.Parse(request.GetOption(2));
-
-        var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
-        stats.History.Reverse();
-        return stats;
-    }
-    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
-});
-
-When.WebServiceCallReceived("DataProcessing.Filters/Series/MovingAverage", (args) =&gt; {
-    var request = Program.ParseApiCall(args);
-    var module = Modules.InDomain(request.Domain)
-                        .WithAddress(request.Address)
-                        .Get();
-    if (module.Exists) {
-        var parameter = module.Parameter(request.Command);
-        var startTime = double.Parse(request.GetOption(0));
-        var endTime = double.Parse(request.GetOption(1));
-        var chartWidth = double.Parse(request.GetOption(2));
-
-        var filter = new MovingAverageFilter(windowSize);
-        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
-        stats.History.Reverse();
-        return stats;
-    }
-    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
-});
-
-When.WebServiceCallReceived("DataProcessing.Filters/Series/SavitzkyGolay", (args) =&gt; {
-    var request = Program.ParseApiCall(args);
-    var module = Modules.InDomain(request.Domain)
-                        .WithAddress(request.Address)
-                        .Get();
-    if (module.Exists) {
-        var parameter = module.Parameter(request.Command);
-        var startTime = double.Parse(request.GetOption(0));
-        var endTime = double.Parse(request.GetOption(1));
-        var chartWidth = double.Parse(request.GetOption(2));
-
-        var filter = new SavitzkyGolayFilter(windowSize);
-        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
-        stats.History.Reverse();
-        return stats;
-    }
-    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
-});
-
-Program.GoBackground();
-</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
-      <Id>time-series-filters</Id>
-      <Version>1.0.1</Version>
-      <Required>true</Required>
-      <Checksum>CB0B3531765B9FEFD9E62D8FC8729EC0</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>570</Address>
-    <Name>Time Series Filters</Name>
-    <Description>Example filters for time series that can be used in the statistics view.
-</Description>
     <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>

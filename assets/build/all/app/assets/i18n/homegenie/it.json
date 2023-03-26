@@ -194,6 +194,8 @@
     "Setup",
   "main_code":
     "Main",
+  "context_code":
+    "Context",
   "main_code_empty_note":
     "Il codice \"Main\" è vuoto.\n\nUsa l'editor di \"Codice visuale\" per generare questo codice:\n- Apri la categoria \"Programma\" dalla tavolozza dei comandi sulla sinistra\n- Trascina un blocco di tipo \"Main\" nell'area di lavoro del codice visuale\n- Aggiungi al suo interno altri blocchi di codice per implementare le azioni e la logica di questo programma\n\nIl programma \"Main\" può essere eseguito manualmente o avviato automaticamente sulla base delle condizioni eventualmente specificate nel codice \"Setup\".",
   "setup_code_empty_note":

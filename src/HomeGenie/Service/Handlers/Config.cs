@@ -1093,7 +1093,7 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             
-// TODO: deprecate "Stores" API
+// TODO: consider deprecating "Stores" API
             case "Stores.List":
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
@@ -1666,7 +1666,12 @@ namespace HomeGenie.Service.Handlers
             {
                 var repository = migCommand.GetOption(0);
                 var package = migCommand.GetOption(1);
-                if (homegenie.PackageManager.InstallPackage(repository, package))
+                var installList = new List<string>();
+                if (!String.IsNullOrEmpty(request.RequestText))
+                {
+                    installList = JsonConvert.DeserializeObject<List<string>>(request.RequestText);
+                }
+                if (homegenie.PackageManager.InstallPackage(repository, package, installList))
                 {
                     request.ResponseData = new ResponseStatus(Status.Ok);
                 }

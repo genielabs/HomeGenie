@@ -137,5 +137,13 @@
   "edit_data_source": "Edit data source",
   "add_to_dashboard": "Add to dashboard",
   "fill": "Fill",
-  "label": "Label"
+  "label": "Label",
+  "chart_type": "Chart type",
+  "line_chart": "Lines",
+  "bar_chart": "Bars",
+  "scatter_chart": "Scatter",
+  "data_monitor": "Data monitor",
+  "add_chart": "Add chart",
+  "restore_original": "Restore original",
+  "upgrade": "Upgrade"
 }

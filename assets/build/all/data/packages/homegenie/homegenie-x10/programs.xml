@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>Program
   .AddFeature("", "Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on", "checkbox")
@@ -47,15 +47,17 @@
   return true;
 });
 Program.GoBackground();</ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-x10</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>level-memory</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>267C0417C1B2D5297AF80A9394ED24DB</Checksum>
+      <Checksum>3EC76463DD10E7D76A2482FDC427CBFC</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>16</Address>
@@ -79,8 +81,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2021-04-09T17:56:25.1901789Z</TriggerTime>
+    <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

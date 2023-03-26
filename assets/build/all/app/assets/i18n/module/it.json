@@ -24,5 +24,7 @@
   "stats.twelve_hours":
     "12 ore",
   "stats.twentyfour_hours":
-    "24 ore"
+    "24 ore",
+  "stats.chart_provider":
+    "Chart provider"
 }

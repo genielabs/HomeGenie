@@ -192,6 +192,8 @@ namespace HomeGenie.Automation
                 Description = program.Description,
                 ScriptSetup = program.ScriptSetup,
                 ScriptSource = program.ScriptSource,
+                ScriptContext = program.ScriptContext,
+                Data = program.Data,
                 AutoRestartEnabled = program.AutoRestartEnabled,
                 IsEnabled = program.IsEnabled
             };

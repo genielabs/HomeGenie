@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>// Based .NET IoT Libraries
 // Documentation:
@@ -95,18 +95,18 @@ if (pinMode == PinMode.Output)
     mod.Instance.DeviceType = ModuleTypes.Switch;
     mod.Emit("Widget.DisplayModule", "homegenie/generic/switch");
 
-    var controlOn = new Action&lt;ModuleHelper&gt;((mod) =&gt; {
+    var controlOn = new Action&lt;ModuleHelper&gt;((m) =&gt; {
         controller.Write(pin, PinValue.High);
-        mod.Emit("Status.Level", 1);
+        m.Emit("Status.Level", 1);
     });
-    var controlOff = new Action&lt;ModuleHelper&gt;((mod) =&gt; {
+    var controlOff = new Action&lt;ModuleHelper&gt;((m) =&gt; {
         controller.Write(pin, PinValue.Low);
-        mod.Emit("Status.Level", 0);
+        m.Emit("Status.Level", 0);
     });
 
     // Handle web service API
-    When.WebServiceCallReceived(moduleDomain + "/" + moduleAddress, (args) =&gt; {
-        var request = Program.ParseApiCall(args);
+    Api.Handle(moduleDomain + "/" + moduleAddress, (args) =&gt; {
+        var request = Api.Parse(args);
         if (request.Command == "Control.Toggle") {
             if (mod.Level == 0) {
                 controlOn(mod);
@@ -134,15 +134,17 @@ else
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptContext />
+    <ScriptErrors>[{"Line":33,"Column":6,"EndLine":33,"EndColumn":7,"ErrorMessage":"Unexpected symbol `GpioController', expecting `('","ErrorNumber":"CS1525","CodeBlock":"CR"},{"Line":33,"Column":38,"EndLine":33,"EndColumn":39,"ErrorMessage":"Unexpected symbol `)', expecting `(' or `type'","ErrorNumber":"CS1525","CodeBlock":"CR"},{"Line":37,"Column":62,"EndLine":37,"EndColumn":63,"ErrorMessage":"Unexpected symbol `?'","ErrorNumber":"CS1525","CodeBlock":"CR"}]</ScriptErrors>
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-net</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>gpio-pin</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>8D2DE2B78F2CC89AA63523DFA3624457</Checksum>
+      <Checksum>7EFCCA46A94A656A65E9393588A20880</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>
@@ -155,6 +157,6 @@ Program.GoBackground();
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

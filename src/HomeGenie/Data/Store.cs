@@ -36,16 +36,16 @@ namespace HomeGenie
 
         public Store()
         {
-            this.Name = "";
-            this.Description = "";
-            this.Data = new TsList<ModuleParameter>();
+            Name = "";
+            Description = "";
+            Data = new TsList<ModuleParameter>();
         }
 
         public Store(string name, string description = "")
         {
-            this.Name = name;
-            this.Description = description;
-            this.Data = new TsList<ModuleParameter>();
+            Name = name;
+            Description = description;
+            Data = new TsList<ModuleParameter>();
         }
     }
 }

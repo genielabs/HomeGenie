@@ -137,5 +137,13 @@
   "edit_data_source": "Modifica sorgente dati",
   "add_to_dashboard": "Agg. a dashboard",
   "fill": "Riempi",
-  "label": "Etichetta"
+  "label": "Etichetta",
+  "chart_type": "Tipo grafico",
+  "line_chart": "Linee",
+  "bar_chart": "Barre",
+  "scatter_chart": "Scatter",
+  "data_monitor": "Monitor dati",
+  "add_chart": "Aggiungi grafico",
+  "restore_original": "Ripristina originale",
+  "upgrade": "Aggiorna"
 }

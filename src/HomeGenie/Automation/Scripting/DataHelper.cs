@@ -36,7 +36,7 @@ namespace HomeGenie.Automation.Scripting
     public class DataHelper
     {
         HomeGenieService homegenie = null;
-        int myProgramId = -1;
+        int myProgramId;
 
         public DataHelper(HomeGenieService hg, int programId)
         {

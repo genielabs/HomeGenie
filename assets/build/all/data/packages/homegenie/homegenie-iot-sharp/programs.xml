@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>var gpio_pins = new string[]{
 	"GPIO17 (pin 11)=11",
@@ -109,15 +109,17 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>dht-11-sensor</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>AC52909A4CDB90577D0C49243DA842D6</Checksum>
+      <Checksum>1DC4570DC1AECD6D769FA45E700A779A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>601</Address>
@@ -241,15 +243,17 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
+    <ScriptContext />
     <ScriptErrors />
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>dht-22-sensor</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>5925C145E74334B443865C478BD1B053</Checksum>
+      <Checksum>0AA70E63CF56377C3CC51AA27E59027C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>602</Address>
@@ -383,8 +387,8 @@ if (pinMode == 1) { // Output
   mod.Emit("Widget.DisplayModule", "homegenie/generic/switch");
   // implement serice API 'Control.On', 'Control.Off', 'Control.Toggle' to control this GPIO
   var moduleServiceUrl = mod.Instance.Domain + "/" + mod.Instance.Address;
-  When.WebServiceCallReceived(moduleServiceUrl, ( args ) =&gt; {
-    var request = Program.ParseApiCall(args);
+  Api.Handle(moduleServiceUrl, ( args ) =&gt; {
+    var request = Api.Parse(args);
     try
     {
       //string address = request.Address;
@@ -416,15 +420,17 @@ if (pinMode == 1) { // Output
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptContext />
+    <ScriptErrors>[{"Line":30,"Column":5,"EndLine":30,"EndColumn":6,"ErrorMessage":"Type of conditional expression cannot be determined because there is no implicit conversion between `Raspberry.IO.GeneralPurpose.OutputPinConfiguration' and `Raspberry.IO.GeneralPurpose.InputPinConfiguration'","ErrorNumber":"CS0173","CodeBlock":"CR"},{"Line":32,"Column":58,"EndLine":32,"EndColumn":59,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"},{"Line":33,"Column":58,"EndLine":33,"EndColumn":59,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"},{"Line":34,"Column":15,"EndLine":34,"EndColumn":16,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"},{"Line":35,"Column":15,"EndLine":35,"EndColumn":16,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"}]</ScriptErrors>
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>gpio-pin</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>FF229B864EB12AF16991CE21381C3C2C</Checksum>
+      <Checksum>B3FCA74A18E76F8585DB8F99690D2F95</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>600</Address>
@@ -437,7 +443,7 @@ Program.GoBackground();
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
@@ -570,10 +576,10 @@ When.ProgramStopping(()=&gt;{
 });
 
 // API calls handling
-When.WebServiceCallReceived(appDomain, (args) =&gt; {
+Api.Handle(appDomain, (args) =&gt; {
   try
   {
-    var apiCall = Program.ParseApiCall(args);
+    var apiCall = Api.Parse(args);
     string lightnumber = apiCall.Address;
     var module = rgbModules.WithAddress(lightnumber).Get();
     int lightId = int.Parse(lightnumber) - 1;
@@ -636,15 +642,17 @@ When.WebServiceCallReceived(appDomain, (args) =&gt; {
 // Start leds driver thread
 updateLeds();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptContext />
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>grove-chainable-rgb-led</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>976EF0172CC8E832B1791976CA387D98</Checksum>
+      <Checksum>2857E8107836A8C67921DEE4F475E9FC</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>603</Address>

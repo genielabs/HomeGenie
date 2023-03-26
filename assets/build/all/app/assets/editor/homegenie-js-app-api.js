@@ -23,8 +23,10 @@ class ProgramApi {
   knx: any;
   // SchedulerHelper
   scheduler: SchedulerHelper;
-  // Events helper
-  event: any;
+  // Events helper (hg.When)
+  on: EventsHelper;
+  // API Helper
+  api: ApiHelper;
   // Miscellaneous functions
   /**
    * Pause for the given amount of seconds.
@@ -36,7 +38,29 @@ class ProgramApi {
    * @param seconds
    */
   delay(seconds: number); // alias of 'pause'
-  on: EventsHelper;
+}
+
+class EventsHelper {
+  // TODO: ...
+}
+
+class ApiHelper {
+  handle(apiCall: string, handler: function);
+
+  /**
+   * Parses the given (api call) string as a `MigInterfaceCommand` object.
+   * @returns  The mig command.
+   * @param apiCall Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").
+   */
+  parse(apiCall: string): MigInterfaceCommand;
+
+  /**
+   * Invoke an API command and get the result.
+   * @returns  The API command response.
+   * @param apiCommand Any MIG/APP API command without the `/api/` prefix.
+   * @param data Data object.
+   */
+  call(apiCommand: string, data?: any): any;
 }
 
 class ProgramHelper {
@@ -88,6 +112,7 @@ class ProgramHelper {
    * Parses the given (api call) string as a `MigInterfaceCommand` object.
    * @returns  The mig command.
    * @param apiCall Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").
+   * @deprecated Use $$.api.parse(..) instead
    */
   parseApiCall(apiCall: string): MigInterfaceCommand;
 
@@ -96,6 +121,7 @@ class ProgramHelper {
    * @returns  The API command response.
    * @param apiCommand Any MIG/APP API command without the `/api/` prefix.
    * @param data Data object.
+   * @deprecated Use $$.api.call(..) instead
    */
   apiCall(apiCommand: string, data?: any): any;
 

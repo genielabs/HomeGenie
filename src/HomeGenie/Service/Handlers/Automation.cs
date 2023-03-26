@@ -418,6 +418,26 @@ namespace HomeGenie.Service.Handlers
                     }
                     break;
 
+                case "Programs.Implements":
+                    var implementingList = new List<ProgramBlock>(homegenie.ProgramManager
+                        .Programs
+                        .FindAll(p => p.ImplementedInterfaces
+                            .Exists(i => i.Identifier == migCommand.GetOption(0))
+                        )
+                    );
+                    implementingList.Sort(delegate(ProgramBlock p1, ProgramBlock p2)
+                    {
+                        string c1 = p1.Name + " " + p1.Address;
+                        string c2 = p2.Name + " " + p2.Address;
+                        return String.Compare(c1, c2, StringComparison.Ordinal);
+                    });
+                    request.ResponseData = implementingList.Select(p => new
+                    {
+                        Program = p,
+                        ImplementedInterface = p.ImplementedInterfaces.Find(i => i.Identifier == migCommand.GetOption(0))
+                    });
+                    break;
+
                 case "Programs.Add":
                     try
                     {
@@ -495,6 +515,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.IsEnabled = newProgram.IsEnabled;
                         currentProgram.ScriptSetup = newProgram.ScriptSetup;
                         currentProgram.ScriptSource = newProgram.ScriptSource;
+                        currentProgram.ScriptContext = newProgram.ScriptContext;
                         currentProgram.Data = newProgram.Data;
                     }
                     //

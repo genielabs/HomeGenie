@@ -37,6 +37,13 @@ namespace HomeGenie.Automation
         public object ReturnValue = null;
     }
 
+    public class ImplementedInterface
+    {
+        public string Identifier;
+        public string ApiUrl;
+        public object Options;
+    }
+
     [Serializable()]
     public class ProgramPackageInfo
     {
@@ -63,6 +70,8 @@ namespace HomeGenie.Automation
         private bool isProgramEnabled;
         private string codeType = "";
 
+        internal List<ImplementedInterface> ImplementedInterfaces = new List<ImplementedInterface>();
+
         // event delegates
         public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
         public event EnabledStateChangedEventHandler EnabledStateChanged;
@@ -70,6 +79,7 @@ namespace HomeGenie.Automation
         // c# program public members
         public string ScriptSetup { get; set; }
         public string ScriptSource { get; set; }
+        public string ScriptContext { get; set; }
         public string ScriptErrors { get; set; }
         public string Data { get; set; }
 
@@ -102,6 +112,8 @@ namespace HomeGenie.Automation
             Type = "csharp";
             ScriptSetup = "";
             ScriptSource = "";
+            ScriptContext = "";
+            Data = "";
             ScriptErrors = "";
             //
             isProgramEnabled = false;

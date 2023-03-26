@@ -42,8 +42,10 @@ namespace HomeGenie.Automation.Engines
           settings: hg.settings,
           // NetHelper
           net: hg.net,
-          //  ProgramHelper
+          // ProgramHelper
           program: hg.program,
+          // ApiHelper
+          api: hg.api,
           // EventsHelper
           on: hg.when,
           // SerialPortHelper

@@ -172,7 +172,7 @@ namespace HomeGenie.Service
             return packagesList;
         }
 
-        public bool InstallPackage(string repository, string package)
+        public bool InstallPackage(string repository, string package, List<string> installList = null)
     {
             var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", repository,
                 package, "package.json");
@@ -186,6 +186,11 @@ namespace HomeGenie.Service
                 var programs = (List<ProgramBlock>)serializer.Deserialize(reader);
                 foreach (var item in packageData.Programs)
                 {
+                    if (installList != null && installList.Count > 0 && !installList.Contains(item.Id))
+                    {
+                        // if installList is given, then install only listed programs.
+                        continue;
+                    }
                     if (item.Repository != packageData.Repository || item.PackageId != packageData.Id)
                     {
                         // external dependency
@@ -206,6 +211,8 @@ namespace HomeGenie.Service
                             p.Description = install.Description;
                             p.ScriptSetup = install.ScriptSetup;
                             p.ScriptSource = install.ScriptSource;
+                            p.ScriptContext = install.ScriptContext;
+                            p.Data = install.Data;
                             p.PackageInfo.Checksum = item.Checksum;
                             homegenie.ProgramManager.ProgramCompile(p);
                         });
@@ -390,7 +397,9 @@ namespace HomeGenie.Service
                         item.Checksum = program.PackageInfo.Checksum = Utility.GetObjectChecksum(new
                         {
                             setup = program.ScriptSetup,
-                            source = program.ScriptSource
+                            source = program.ScriptSource,
+                            context = program.ScriptContext,
+                            data = program.Data
                         });
                         packagePrograms.Add(program);
                         // lookup for modules belonging to this program
@@ -514,7 +523,9 @@ namespace HomeGenie.Service
                         p1.PackageInfo.Checksum = Utility.GetObjectChecksum(new
                         {
                             setup = p1.ScriptSetup,
-                            source = p1.ScriptSource
+                            source = p1.ScriptSource,
+                            context = p1.ScriptContext,
+                            data = p1.Data
                         });
                         if (p1.PackageInfo.Checksum != prg.Checksum)
                         {
@@ -882,6 +893,8 @@ namespace HomeGenie.Service
             return iface;
         }
 
+        
+        // TODO: deprecate this
         public void AddWidgetMapping(string jsonMap)
         {
             /*

@@ -101,10 +101,12 @@ namespace HomeGenie
         /// </summary>
         /// <returns>The mig command.</returns>
         /// <param name="apiCall">Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").</param>
+        [Obsolete("This method is deprecated, use Api.Parse(...) instead.")]
         public MigInterfaceCommand ParseApiCall(string apiCall)
         {
             return new MigInterfaceCommand(apiCall);
         }
+        [Obsolete("This method is deprecated, use Api.Parse(...) instead.")]
         public MigInterfaceCommand ParseApiCall(object apiCall)
         {
             if (apiCall is MigInterfaceCommand)
@@ -120,6 +122,7 @@ namespace HomeGenie
         /// <returns>The API command response.</returns>
         /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
         /// <param name="data">Data object. (optional)</param>
+        [Obsolete("This method is deprecated, use Api.Call(...) instead.")]
         public object ApiCall(string apiCommand, object data = null)
         {
             if (apiCommand.StartsWith("/api/"))

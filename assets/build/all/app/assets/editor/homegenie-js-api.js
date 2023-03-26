@@ -27,7 +27,7 @@ class SchedulerApi {
   knx: any;
   // SchedulerHelper
   scheduler: SchedulerHelper;
-  // Events helper
+  // The scheduler event item
   event: any;
   // Miscellaneous functions
   /**

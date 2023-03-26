@@ -66,6 +66,7 @@ namespace HomeGenie.Automation.Scheduler
           // Miscellaneous functions
           pause: function(seconds) { hg.pause(seconds); },
           delay: function(seconds) { this.pause(seconds); },
+          // The scheduler event
           event: hg.event
         };
         $$.onNext = function() {

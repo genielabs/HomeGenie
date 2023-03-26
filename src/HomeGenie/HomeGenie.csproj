@@ -34,13 +34,13 @@
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="Angle" Version="3.2.1" />
     <PackageReference Include="SolarCalculator" Version="3.2.1" />
-    <PackageReference Include="Jint" Version="3.0.0-beta-2044" />
+    <PackageReference Include="Jint" Version="3.0.0-beta-2048" />
     <PackageReference Include="System.Device.Gpio" Version="2.2.0" />
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageReference Include="CronExpressionDescriptor" Version="2.19.0" />
-    <PackageReference Include="LiteDB" Version="5.0.15" />
+    <PackageReference Include="LiteDB" Version="5.0.16" />
     <PackageReference Include="NCrontab" Version="3.3.1" />
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
     <PackageReference Include="UnitsNet" Version="4.149.0" />
