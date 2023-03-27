@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
   Program
@@ -161,7 +161,7 @@ while (Program.IsRunning)
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -467,7 +467,7 @@ Program.GoBackground();
     <ScriptContext>const string MODULES_DOMAIN = "HomeAutomation.KNX";
 const string ADDRESS_PROPERTY = "KNX.Address";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -618,7 +618,7 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -886,7 +886,7 @@ while (Program.IsRunning)
 const string STATUS_ARMED_AWAY = "Away";
 const string STATUS_ARMED_HOME = "Home";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -932,7 +932,7 @@ const string STATUS_ARMED_HOME = "Home";
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddFeature("", "", SMART_DEVICE_ENABLE, "Enable Smart Light Control", "checkbox")
+  .AddFeature("", SMART_DEVICE_TYPES, SMART_DEVICE_ENABLE, "Enable Smart Light Control", "checkbox")
   .AddFeature("", SMART_DEVICE_TYPES, SMART_DEVICE_MOTION_DETECT, "Controlled by sensor (optional)", "module.text:any:sensor:status.level,sensor.motiondetect")
   .AddFeature("", SMART_DEVICE_TYPES, SMART_DEVICE_CHECK_LUMINOSITY, "Controlled by luminance sensor (optional)", "module.text:any:any:sensor.luminance")
   .AddFeature("", SMART_DEVICE_TYPES, SMART_DEVICE_MIN_LUMINANCE, "Trigger if luminance is below", "slider:0:1000:10:300")
@@ -1033,9 +1033,9 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>smart-device</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>803FB6C560762812E936D13DB70267AA</Checksum>
+      <Checksum>780B640438C9E7438A505478A660358D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -1046,7 +1046,7 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes />
+        <ForTypes>Switch,Light,Dimmer,Color</ForTypes>
         <Property>HomeGenie.SmartLights.Enable</Property>
         <Description>Enable Smart Light Control</Description>
       </ProgramFeature>
@@ -1294,7 +1294,7 @@ while (Program.IsRunning)
     <ScriptContext>const string MODULES_DOMAIN = "HomeAutomation.SmartThermostat";
 const string FEATURE_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1369,7 +1369,7 @@ Pause(5);
 colorLights.Submit("0.13,0,1,10");
 Pause(10);</ScriptSource>
     <ScriptContext>const string FEATURE_SUNRISE_COLORS = "Scenarios.SunriseColors";</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1531,7 +1531,7 @@ while (Program.IsRunning)
 const uint STATE_OFF = 0;
 const string WEMO_DOMAIN = "HomeAutomation.WeMo";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

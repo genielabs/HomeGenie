@@ -166,6 +166,8 @@
     "Added",
   "program_status_idle":
     "Idle",
+  "program_status_setup":
+    "Setup",
   "program_status_running":
     "Running",
   "program_status_background":

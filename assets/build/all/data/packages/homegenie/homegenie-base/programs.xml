@@ -74,9 +74,9 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program
-    .Implements("@Statistics:Provider", apiUrl)
-    .Run();
+    <ScriptSetup>Program.Implements("@Statistics:Provider", apiUrl, new {
+    icon = "legend_toggle"
+}).Run();
 </ScriptSetup>
     <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
     return new {
@@ -230,7 +230,7 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
     return stats;
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -239,7 +239,7 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
       <Id>stats-data-monitor</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>AE4B2FDE10AC697C6C1B1D227D0A6AD9</Checksum>
+      <Checksum>C43D945F1D855C164EA2FECB6927A093</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>570</Address>
@@ -303,7 +303,8 @@ Program.GoBackground();
         mode = "select_module",
         field = "Meter.Watts.Hour",
         type = "bar",
-        title = "W/h"
+        title = "W/h",
+        icon = "analytics"
     }
 ).Run();
 </ScriptSetup>
@@ -396,12 +397,13 @@ class WeeklyStat {
 
 bool UpdateDatabase(Module m, string p, double v)
 {
-    UpdateWeeklyStat(m.Domain, m.Address, p, v, (ushort)ISOWeek.GetWeekOfYear(DateTime.UtcNow), (byte)DateTime.UtcNow.DayOfWeek, (byte)DateTime.UtcNow.Hour);
+    UpdateWeeklyStat(m.Domain, m.Address, p, v, (ushort)ISOWeek.GetWeekOfYear(DateTime.Now), (byte)DateTime.Now.DayOfWeek, (byte)DateTime.Now.Hour);
     return true;
 }
 
 bool UpdateWeeklyStat(string domain, string address, string parameter, double wattsHour, ushort weekOfYear, byte dayOfWeek, byte hourOfDay)
 {
+    lock(this)
     using(var db = Data.LiteDb(GetDbName()))
     {
         var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
@@ -468,7 +470,7 @@ double[] GetWeeklyStats(string domain, string address)
 
 string GetDbName()
 {
-    return $"energy_use_{DateTime.UtcNow.Year}.db";
+    return $"energy_use_{DateTime.Now.Year}.db";
 }
 </ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
@@ -478,9 +480,9 @@ string GetDbName()
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>false</Required>
-      <Checksum>9E70AE138C65E2830D39139BB65DF36B</Checksum>
+      <Checksum>0512B3ACEC9F1E119B14AF07F952F92F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
@@ -1084,7 +1086,8 @@ Program.Implements(
      // --&gt; "select_module", "select_property" or "select_none"
     new {
         mode = "select_none",
-        legend = true
+        legend = true,
+        icon = "pie_chart"
     }
 ).Run();
 </ScriptSetup>
@@ -1129,7 +1132,7 @@ Program.GoBackground();
 const string dataApiUrl = "DataProcessing.Statistics/MyStat";
 
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1138,7 +1141,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>763ECA79BE331FBA5AF3A75CF28C7BE7</Checksum>
+      <Checksum>8B4B14BE32EBB0547A142489DF72CF43</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>572</Address>
