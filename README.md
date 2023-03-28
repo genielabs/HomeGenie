@@ -102,7 +102,7 @@ sudo systemctl start homegenie.service
 sudo systemctl enable homegenie.service
 ```
 
-Other possible commands are `stop` and `disable`.
+Other possible commands are `status`, `stop` and `disable`.
 
 
 See also:
@@ -141,6 +141,15 @@ To use **X10 Home Automation** hardware:
 ```shell
 sudo apt-get install libusb-1.0-0 libusb-1.0-0-dev
 ```
+
+To grant access to **CM15/CM19** USB devices to the `homegenie` user, create a new
+*udev* rules file called `/etc/udev/rules.d/98-cm15_cm19.rules` and add the following lines to it:
+```shell
+# CM15 AND CM19 X10 controllers
+ATTRS{idVendor}=="0bc7", ATTRS{idProduct}=="0001", MODE="0660", GROUP="homegenie"
+ATTRS{idVendor}=="0bc7", ATTRS{idProduct}=="0002", MODE="0660", GROUP="homegenie"
+```
+then unplug and plug the device again.
 
 To grant access to the **Serial port** and/or **GPIO** to the `homegenie` user:
 ```shell
