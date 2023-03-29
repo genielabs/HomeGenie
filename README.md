@@ -129,33 +129,32 @@ or editing the `systemconfig.xml` file located in the application folder.
 Depending on the hosting operating system, it might be required to run additional steps
 in order to allow the service to access the **Serial port**, **USB** devices and **GPIO** hardware.
 
-To enable **audio playack** and **voice synthesis**:
+#### Enabling **audio playback** and **voice synthesis**:
 ```shell
 # Audio playback utilities
 sudo apt-get install alsa-utils lame
-# Embedded speech syntesys engine
+# Embedded speech synthesis engine
 sudo apt-get install libttspico-utils
 ```
 
-To use **X10 Home Automation** hardware:
+#### Granting access to the **Serial port** and/or **GPIO** to the *homegenie* user:
+```shell
+sudo gpasswd -a homegenie dialout
+sudo gpasswd -a homegenie gpio
+```
+
+#### Enabling CM15/CM19 USB controller for X10 home automation:
 ```shell
 sudo apt-get install libusb-1.0-0 libusb-1.0-0-dev
 ```
-
-To grant access to **CM15/CM19** USB devices to the `homegenie` user, create a new
-*udev* rules file called `/etc/udev/rules.d/98-cm15_cm19.rules` and add the following lines to it:
+then, to grant access to **CM15/CM19** USB devices to the *homegenie* user, create a new text file
+with the name `/etc/udev/rules.d/98-cm15_cm19.rules` and add the following lines to it:
 ```shell
 # CM15 AND CM19 X10 controllers
 ATTRS{idVendor}=="0bc7", ATTRS{idProduct}=="0001", MODE="0660", GROUP="homegenie"
 ATTRS{idVendor}=="0bc7", ATTRS{idProduct}=="0002", MODE="0660", GROUP="homegenie"
 ```
-then unplug and plug the device again.
-
-To grant access to the **Serial port** and/or **GPIO** to the `homegenie` user:
-```shell
-sudo gpasswd -a homegenie dialout
-sudo gpasswd -a homegenie gpio
-```
+save the file and unplug and plug the device again.
 
 
 ## Development
@@ -208,5 +207,11 @@ Windows specific solution for deploying HomeGenie as a Windows service (deprecat
 
 ### Disclaimer
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
