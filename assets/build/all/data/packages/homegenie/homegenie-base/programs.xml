@@ -444,6 +444,7 @@ bool UpdateWeeklyStat(string domain, string address, string parameter, double wa
 double[] GetWeeklyStats(string domain, string address)
 {
     var results = new double[7];
+    var weekOfYear = (ushort)ISOWeek.GetWeekOfYear(DateTime.Now);
     lock(this)
     using(var db = Data.LiteDb(GetDbName()))
     {
@@ -456,13 +457,16 @@ double[] GetWeeklyStats(string domain, string address)
         for (byte i = 0; i &lt; results.Length; i++)
         {
             var avg = stats
-                .Find(x =&gt; x.Domain == domain &amp;&amp; x.Address == address &amp;&amp; x.WeekDay == i)
+                .Find(x =&gt; x.Domain == domain
+                        &amp;&amp; x.Address == address
+                        &amp;&amp; x.YearWeek == weekOfYear
+                        &amp;&amp; x.WeekDay == i)
                 .Sum(x =&gt; x.WattsHour);
 //                .Select(x =&gt; x.WattsHour)
 //                .DefaultIfEmpty(0)
 //                .Average();
-            results[i == 0 ? 6 : i - 1] = avg / 24;
 //            results[i == 0 ? 6 : i - 1] = avg;
+            results[i == 0 ? 6 : i - 1] = avg / 24;
         }
     }
     return results;
@@ -480,9 +484,9 @@ string GetDbName()
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>false</Required>
-      <Checksum>0512B3ACEC9F1E119B14AF07F952F92F</Checksum>
+      <Checksum>38005DD51B26530999D8A2E85FD69B92</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
@@ -1305,6 +1309,6 @@ while (Program.IsRunning)
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

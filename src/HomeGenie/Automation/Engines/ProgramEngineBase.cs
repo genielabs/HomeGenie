@@ -267,7 +267,7 @@ namespace HomeGenie.Automation.Engines
         #endregion
 
         private int loopPreventCount = 0;
-        private int loopPreventMax = 5;
+        private readonly int loopPreventMax = 50;
         private DateTime lastProgramRunTs = DateTime.Now;
 
         private void CheckProgramSchedule()
@@ -295,7 +295,7 @@ namespace HomeGenie.Automation.Engines
                 if (WillProgramRun())
                 {
                     ProgramBlock.WillRun = false;
-                    if ((DateTime.Now - lastProgramRunTs).TotalMilliseconds < 100)
+                    if ((DateTime.Now - lastProgramRunTs).TotalMilliseconds < 20)
                         loopPreventCount++;
                     else
                         loopPreventCount = 0;

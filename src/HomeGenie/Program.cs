@@ -103,7 +103,7 @@ namespace HomeGenie
             try
             {
                 // try broadcast first
-                ServiceWorker._homegenie.RaiseEvent(Domains.HomeGenie_System, logEntry);
+                ServiceWorker._homegenie?.RaiseEvent(Domains.HomeGenie_System, logEntry);
             }
             catch
             {
