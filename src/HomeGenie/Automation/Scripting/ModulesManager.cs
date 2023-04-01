@@ -480,31 +480,18 @@ namespace HomeGenie.Automation.Scripting
             return response;
         }
 
-        /// <summary>
-        /// Execute current command for all selected modules.
-        /// </summary>
-        /// <returns>ModulesManager</returns>
         [Obsolete("This method is deprecated, use Submit() instead.")]
         public ModulesManager Execute()
         {
             return Set();
         }
 
-        /// <summary>
-        /// Execute current command with specified options.
-        /// </summary>
-        /// <param name="options">A string containing options to be passed to the selected command.</param>
-        /// <returns>ModulesManager</returns>
         [Obsolete("This method is deprecated, use Submit(string options) instead.")]
         public ModulesManager Execute(string options)
         {
             return Set(options);
         }
 
-        /// <summary>
-        /// Alias for Execute()
-        /// </summary>
-        /// <returns>ModulesManager</returns>
         [Obsolete("This method is deprecated, use Submit() instead.")]
         public ModulesManager Set()
         {
@@ -512,11 +499,6 @@ namespace HomeGenie.Automation.Scripting
             return Set(commandOptions);
         }
 
-        /// <summary>
-        /// Alias for Execute(options)
-        /// </summary>
-        /// <param name="options">A string containing options to be passed to the selected command.</param>
-        /// <returns>ModulesManager</returns>
         [Obsolete("This method is deprecated, use Submit(string options) instead.")]
         public ModulesManager Set(string options)
         {

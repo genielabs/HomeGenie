@@ -234,13 +234,7 @@ namespace HomeGenie.Automation.Scripting
             }
             return this;
         }
-        /// <summary>
-        /// Raise a module parameter event and set the parameter with the specified value.
-        /// </summary>
-        /// <returns>ModuleHelper.</returns>
-        /// <param name="parameter">Parameter name.</param>
-        /// <param name="value">The new parameter value to set.</param>
-        /// <param name="description">Event description.</param>
+
         [Obsolete("This method is deprecated, use Emit(..) instead.")]
         public ModuleHelper RaiseEvent(string parameter, object value, string description)
         {

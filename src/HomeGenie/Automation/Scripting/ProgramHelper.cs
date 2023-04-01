@@ -495,14 +495,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
         
-        /// <summary>
-        /// Adds a new virtual module to the system.
-        /// </summary>
-        /// <returns>ProgramHelper.</returns>
-        /// <param name="domain">Domain.</param>
-        /// <param name="address">Address.</param>
-        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).</param>
-        /// <param name="widget">Empty string or the path of the widget to be associated to the virtual module.</param>
         [Obsolete("This method is deprecated, use AddModule(...) instead.")]
         public ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)
         {
@@ -510,15 +502,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        /// <summary>
-        /// Adds a new set of virtual modules to the system.
-        /// </summary>
-        /// <returns>ProgramHelper.</returns>
-        /// <param name="domain">Domain.</param>
-        /// <param name="type">Type.</param>
-        /// <param name="widget">Empty string or the path of the widget to be associated to the virtual module.</param>
-        /// <param name="startAddress">Start address (numeric).</param>
-        /// <param name="endAddress">End address (numeric).</param>
         [Obsolete("This method is deprecated, use AddModules(...) instead.")]
         public ProgramHelper AddVirtualModules(
             string domain,
@@ -531,12 +514,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        /// <summary>
-        /// Remove a virtual module from the system.
-        /// </summary>
-        /// <returns>ProgramHelper.</returns>
-        /// <param name="domain">Domain.</param>
-        /// <param name="address">Address.</param>
         [Obsolete("This method is deprecated, use RemoveModule(...) instead.")]
         public ProgramHelper RemoveVirtualModule(string domain, string address)
         {
@@ -654,13 +631,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        /// <summary>
-        /// Raise a parameter event and set the parameter with the specified value.
-        /// </summary>
-        /// <returns>ProgramHelper.</returns>
-        /// <param name="parameter">Parameter name.</param>
-        /// <param name="value">The new parameter value to set.</param>
-        /// <param name="description">Event description.</param>
         [Obsolete("This method is deprecated, use Emit(..) instead.")]
         public ProgramHelper RaiseEvent(string parameter, object value, string description)
         {

@@ -96,11 +96,6 @@ namespace HomeGenie
             return this;
         }
 
-        /// <summary>
-        /// Parses the given (api call) string as a `MigInterfaceCommand` object.
-        /// </summary>
-        /// <returns>The mig command.</returns>
-        /// <param name="apiCall">Api Command (eg. "HomeAutomation.X10/A5/Control.Level/50").</param>
         [Obsolete("This method is deprecated, use Api.Parse(...) instead.")]
         public MigInterfaceCommand ParseApiCall(string apiCall)
         {
@@ -116,12 +111,6 @@ namespace HomeGenie
             return ParseApiCall(apiCall.ToString());
         }
 
-        /// <summary>
-        /// Invoke an API command and get the result.
-        /// </summary>
-        /// <returns>The API command response.</returns>
-        /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
-        /// <param name="data">Data object. (optional)</param>
         [Obsolete("This method is deprecated, use Api.Call(...) instead.")]
         public object ApiCall(string apiCommand, object data = null)
         {
