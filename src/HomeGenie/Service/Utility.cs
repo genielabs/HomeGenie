@@ -473,6 +473,18 @@ namespace HomeGenie.Service
             return $"#{v:X2}{p:X2}{q:X2}";
         }
 
+        public static string ToCamelCase(string str)
+        {
+            var words = str.Split(new[] { "_", "-", " " }, StringSplitOptions.RemoveEmptyEntries);
+            var leadWord = Regex.Replace(words[0], @"([A-Z])([A-Z]+|[a-z0-9]+)($|[A-Z]\w*)",
+                m => m.Groups[1].Value.ToLower() + m.Groups[2].Value.ToLower() + m.Groups[3].Value);
+            var tailWords = new List<string>(words)
+                .Skip(1)
+                .Select(word => char.ToUpper(word[0]) + word.Substring(1))
+                .ToArray();
+            return leadWord + string.Join(string.Empty, tailWords);
+        }
+
         #region Private helper methods
 
         [DllImport("winmm.dll", SetLastError = true)]

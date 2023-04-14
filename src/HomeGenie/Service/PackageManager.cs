@@ -92,7 +92,7 @@ namespace HomeGenie.Service
         public PackageManager(HomeGenieService hg)
         {
             homegenie = hg;
-            widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "pages", "control", "widgets");
+            widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "widgets");
         }
 
 
@@ -894,38 +894,6 @@ namespace HomeGenie.Service
             return iface;
         }
 
-        
-        // TODO: deprecate this
-        public void AddWidgetMapping(string jsonMap)
-        {
-            /*
-               // example widget mapping
-               [
-                  {
-                      Description     : "Z-Wave.Me Floor Thermostat",
-                      Widget          : "Bounz/Z-Wave.Me/thermostat",
-                      MatchProperty   : "ZWaveNode.ManufacturerSpecific",
-                      MatchValue      : "0115:0024:0001"
-                  }
-               ]
-            */
-            string mapConfigFile = "html/pages/control/widgets/configuration.json";
-            var mapList = JArray.Parse(File.ReadAllText(mapConfigFile)).ToObject<List<dynamic>>();
-            var widgetMap = JArray.Parse(jsonMap).ToObject<List<dynamic>>();
-            try
-            {
-                foreach (var map in widgetMap)
-                {
-                    mapList.RemoveAll(m => m.MatchProperty.ToString() == map.MatchProperty.ToString() && m.MatchValue.ToString() == map.MatchValue.ToString());
-                    mapList.Add(map);
-                }
-                File.WriteAllText(mapConfigFile, JsonConvert.SerializeObject(mapList, Formatting.Indented));
-            }
-            catch
-            {
-                // TODO: report exception
-            }
-        }
 
         public bool WidgetImport(string archiveFile, string importPath)
         {
@@ -934,14 +902,10 @@ namespace HomeGenie.Service
             List<string> extractedFiles = Utility.UncompressZip(archiveFile, importPath);
             if (File.Exists(Path.Combine(importPath, widgetInfoFile)))
             {
-                // Read "widget.info" and, if a mapping is present, add it to "html/pages/control/widgets/configuration.json"
-                var mapping = File.ReadAllText(Path.Combine(importPath, widgetInfoFile));
-                if (mapping.StartsWith("["))
-                    AddWidgetMapping(mapping);
                 foreach (string f in extractedFiles)
                 {
                     // copy only files contained in sub-folders, avoid copying zip-root files
-                    if (Path.GetDirectoryName(f) != "")
+                    if (Path.GetDirectoryName(f) != "" && f != widgetInfoFile)
                     {
                         string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
                         if (!Directory.Exists(destFolder))

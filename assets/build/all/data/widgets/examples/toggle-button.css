@@ -12,15 +12,16 @@
   place-content: center;
   width: 280px;
   height: 180px;
+  margin-top: 24px;
 }
 .button {
-  border: solid 6px #e7e7e7;
+  border: solid 6px #c7dbca;
   border-radius: 64px;
-  background-color: #408322;
+  background-color: #4b8630;
   width: 64px;
   height: 64px;
   margin-bottom: 32px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0 4px 8px 0;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 4px 6px 0;
   cursor: pointer;
   transition: all 100ms ease-in-out;
 }

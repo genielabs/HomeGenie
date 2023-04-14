@@ -1,0 +1,35 @@
+const fieldName = 'Sensor.Temperature';
+
+class DisplayTemperature extends ControllerInstance {
+
+    onCreate() {
+
+        const viewModel = this.model();
+        viewModel.unit = utils.preferences.units.temperature;
+
+        // the bound module selected by the user
+        const bm = this.boundModule;
+
+        // the temperature field of the bound module
+        const field = bm?.field(fieldName);
+
+        if (bm && field) {
+
+            const formatValue = utils.format.fieldValue;
+            viewModel.title = bm.name;
+            viewModel.temperature = formatValue(field);
+
+            // subscribe to field events to update temperature value as it changes
+            this.subscribe(field, () => {
+                viewModel.temperature = formatValue(field);
+            });
+
+        } else {
+
+            utils.ui.tooltip('Set a bound module to enable this widget.', {duration: 5000});
+
+        }
+
+    }
+
+}

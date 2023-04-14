@@ -50,11 +50,11 @@ namespace HomeGenie.Service.Handlers
 {
     public class Config
     {
-        private HomeGenieService homegenie;
-        private string widgetBasePath;
-        private string tempFolderPath;
-        private string groupWallpapersPath;
-        private NetHelper netHelper;
+        private readonly HomeGenieService homegenie;
+        private readonly string widgetBasePath;
+        private readonly string tempFolderPath;
+        private readonly string groupWallpapersPath;
+        private readonly NetHelper netHelper;
 
         public Config(HomeGenieService hg)
         {
@@ -1442,16 +1442,14 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
-// TODO: Widgets API will be deprecated as soon as the new UI is out
-
             case "Widgets.List":
                 List<string> widgetsList = new List<string>();
                 var directoryFiles = Directory.EnumerateFiles(widgetBasePath, "*", SearchOption.AllDirectories);
                 foreach (string file in directoryFiles)
                 {
-                    if (file.EndsWith(".html"))
+                    string widgetName = file.Substring(widgetBasePath.Length + 1);
+                    if (widgetName.EndsWith(".html") && !widgetName.StartsWith(".template."))
                     {
-                        string widgetName = file.Substring(widgetBasePath.Length + 1);
                         widgetName = widgetName.Substring(0, widgetName.Length - 5);
                         widgetsList.Add(widgetName);
                     }
@@ -1481,25 +1479,29 @@ namespace HomeGenie.Service.Handlers
             case "Widgets.Add":
                 {
                     var status = Status.Error;
-                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
-                    string[] widgetParts = widgetPath.Split('/');
-                    widgetParts[0] = new String(widgetParts[0].Where(Char.IsLetter).ToArray()).ToLower();
-                    widgetParts[1] = new String(widgetParts[1].Where(Char.IsLetter).ToArray()).ToLower();
-                    widgetParts[2] = new String(widgetParts[2].Where(Char.IsLetter).ToArray()).ToLower();
-                    if (!String.IsNullOrWhiteSpace(widgetParts[0]) && !String.IsNullOrWhiteSpace(widgetParts[1]) && !String.IsNullOrWhiteSpace(widgetParts[2]))
+                    string widgetId = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    if (!String.IsNullOrWhiteSpace(widgetId))
                     {
-                        string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                        string filePath = Path.Combine(widgetBasePath, GetWidgetFolderPath(widgetId));
                         if (!Directory.Exists(filePath))
                         {
                             Directory.CreateDirectory(filePath);
                         }
                         // copy widget template into the new widget
-                        var htmlFile = Path.Combine(filePath, widgetParts[2] + ".html");
-                        var jsFile = Path.Combine(filePath, widgetParts[2] + ".js");
-                        if (!File.Exists(htmlFile) && !File.Exists(jsFile))
+                        string baseName = GetWidgetFileBaseName(widgetId);
+                        var htmlFile = Path.Combine(filePath, baseName + ".html");
+                        var cssFile = Path.Combine(filePath, baseName + ".css");
+                        var jsFile = Path.Combine(filePath, baseName + ".js");
+                        if (!File.Exists(htmlFile) && !File.Exists(cssFile) && !File.Exists(jsFile))
                         {
-                            File.Copy(Path.Combine(widgetBasePath, "template.html"), htmlFile);
-                            File.Copy(Path.Combine(widgetBasePath, "template.js"), jsFile);
+                            File.Copy(Path.Combine(widgetBasePath, ".template.html"), htmlFile);
+                            File.Copy(Path.Combine(widgetBasePath, ".template.css"), cssFile);
+                            //File.Copy(Path.Combine(widgetBasePath, ".template.js"), jsFile);
+                            var jsTemplate = File.ReadAllText(Path.Combine(widgetBasePath, ".template.js"));
+                            var className = Utility.ToCamelCase(baseName);
+                            className = char.ToUpper(className[0]) + className.Substring(1);
+                            jsTemplate = jsTemplate.Replace("{{ComponentName}}", className);
+                            File.WriteAllText(jsFile, jsTemplate);
                             status = Status.Ok;
                         }
                     }
@@ -1513,25 +1515,22 @@ namespace HomeGenie.Service.Handlers
                     string widgetData = request.RequestText;
                     string fileType = migCommand.GetOption(0);
                     string widgetPath = migCommand.GetOption(1); // eg. homegenie/generic/dimmer
-                    string[] widgetParts = widgetPath.Split('/');
-                    string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                    string filePath = Path.Combine(widgetBasePath, GetWidgetFolderPath(widgetPath));
                     if (!Directory.Exists(filePath))
                     {
                         Directory.CreateDirectory(filePath);
                     }
                     switch (fileType)
                     {
-                    // html/javascript source
+                    // html/css/javascript source
                     case "html":
                     case "js":
-                        using (TextWriter widgetWriter = new StreamWriter(Path.Combine(filePath, widgetParts[2] + "." + fileType)))
+                    case "css":
+                        using (TextWriter widgetWriter = new StreamWriter(Path.Combine(filePath, GetWidgetFileBaseName(widgetPath) + "." + fileType)))
                         {
                             widgetWriter.Write(widgetData);
                         }
                         status = Status.Ok;
-                        break;
-                    // style sheet file
-                    case "css":
                         break;
                     // locale file
                     case "json":
@@ -1550,11 +1549,15 @@ namespace HomeGenie.Service.Handlers
                 {
                     var status = Status.Error;
                     string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
-                    string[] widgetParts = widgetPath.Split('/');
-                    string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1], widgetParts[2] + ".");
+                    string filePath = Path.Combine(widgetBasePath, widgetPath + ".");
                     if (File.Exists(filePath + "html"))
                     {
                         File.Delete(filePath + "html");
+                        status = Status.Ok;
+                    }
+                    if (File.Exists(filePath + "css"))
+                    {
+                        File.Delete(filePath + "css");
                         status = Status.Ok;
                     }
                     if (File.Exists(filePath + "js"))
@@ -1568,31 +1571,36 @@ namespace HomeGenie.Service.Handlers
 
             case "Widgets.Export":
                 {
-                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
-                    string[] widgetParts = widgetPath.Split('/');
-                    string widgetBundle = Path.Combine(tempFolderPath, "export", widgetPath.Replace('/', '_') + ".zip");
+                    string widgetId = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string widgetBundle = Path.Combine(tempFolderPath, "export", widgetId.Replace('/', '_') + ".zip");
+                    string archiveFolder = Path.GetDirectoryName(widgetBundle);
                     if (File.Exists(widgetBundle))
                     {
                         File.Delete(widgetBundle);
                     }
-                    else if (!Directory.Exists(Path.GetDirectoryName(widgetBundle)))
+                    else if (!Directory.Exists(archiveFolder))
                     {
-                        Directory.CreateDirectory(Path.GetDirectoryName(widgetBundle));
+                        Directory.CreateDirectory(archiveFolder);
                     }
-                    string inputPath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
-                    string outputPath = Path.Combine(widgetParts[0], widgetParts[1]);
+                    string outputPath = GetWidgetFolderPath(widgetId);
+                    string inputPath = Path.Combine(widgetBasePath, outputPath);
+                    string baseName = GetWidgetFileBaseName(widgetId);
+                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, baseName + ".html"), Path.Combine(outputPath, baseName + ".html"));
+                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, baseName + ".css"), Path.Combine(outputPath, baseName + ".css"));
+                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, baseName + ".js"), Path.Combine(outputPath, baseName + ".js"));
+                    // add widget.info data file
                     string infoFilePath = Path.Combine(inputPath, "widget.info");
-                    File.WriteAllText(infoFilePath, "HomeGenie exported widget.");
+                    File.WriteAllText(infoFilePath, "{}\n");
                     Utility.AddFileToZip(widgetBundle, infoFilePath, "widget.info");
-                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, widgetParts[2] + ".html"), Path.Combine(outputPath, widgetParts[2] + ".html"));
-                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, widgetParts[2] + ".js"), Path.Combine(outputPath, widgetParts[2] + ".js"));
+                    File.Delete(infoFilePath);
                     //
                     byte[] bundleData = File.ReadAllBytes(widgetBundle);
-                    (request.Context.Data as HttpListenerContext).Response.AddHeader(
+                    var httpContext = (request.Context.Data as HttpListenerContext);
+                    httpContext.Response.AddHeader(
                         "Content-Type", "application/octet-stream; charset=utf-8"
                     );
-                    (request.Context.Data as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment; filename=\"" + widgetPath.Replace('/', '_') + ".zip\"");
-                    (request.Context.Data as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
+                    httpContext.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + widgetId.Replace('/', '_') + ".zip\"");
+                    httpContext.Response.OutputStream.Write(bundleData, 0, bundleData.Length);
                 }
                 break;
 
@@ -1625,13 +1633,10 @@ namespace HomeGenie.Service.Handlers
                     }
                     catch (ParserException e)
                     {
-                        request.ResponseData = new ResponseText("ERROR (" + e.LineNumber + "," + e.Column + "): " + e.Description);
+                        request.ResponseData = new ResponseStatus(Status.Error, JsonConvert.SerializeObject(e.Error));
                     }
                 }
                 break;
-
-            
-// TODO: Widgets API ^^^^ will be deprecated as soon as the new UI is out
 
             #region New PackageManager API
 
@@ -1748,6 +1753,20 @@ namespace HomeGenie.Service.Handlers
                 Thread.Sleep(1000);
                 Program.Quit(true);
             });
+        }
+
+        private string GetWidgetFolderPath(string widgetId)
+        {
+            string[] widgetParts = widgetId.Split('/');
+            return String.Join(
+                Path.PathSeparator.ToString(),
+                widgetParts.Take(widgetParts.Length - 1));
+        }
+
+        private string GetWidgetFileBaseName(string widgetId)
+        {
+            string[] widgetParts = widgetId.Split('/');
+            return widgetParts.Last();
         }
 
     }

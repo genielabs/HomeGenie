@@ -1,30 +1,29 @@
-/* globals zuix */
-'use strict';
+class ToggleButton extends ControllerInstance {
 
-/**
- * ToggleButton example class.
- *
- * @constructor
- * @this {ContextController}
- */
-function ToggleButton() {
-  this.create = onCreate;
 
-  /** @type Module */
-  let module = null;
+  onCreate() {
 
-  function onCreate() {
-    // the bound module
-    module = this.options().module;
-    this.model().title = module ? module.name : '';
-    const statusLevel = module ? module.field('Status.Level') : null;
-    this.expose({
-      level: () => statusLevel ? +statusLevel.value : 0,
-      toggle: () => module ? module.control('Control.Toggle') : null,
-      module
+    // the bound module selected by the user
+    const bm = this.boundModule;
+
+    // sets the content of the #title field
+    this.model().title = bm ? bm.name : '';
+
+    // store a reference to the module level (on/off status)
+    const statusLevel = bm ? bm.field('Status.Level') : null;
+
+    // declare fields visible in the view template scripting scope
+    this.declare({
+      // toggles the bound module on/off
+      toggle: () => bm?.control('Control.Toggle'),
+      // adds button "pressed" class if level is > 0
+      buttonState: ($el) => (statusLevel?.value > 0)
+          ? $el.addClass('pressed')
+          : $el.removeClass('pressed'),
+      // is bound module selected?
+      bound: bm != null,
     });
+
   }
+
 }
-
-module.exports = ToggleButton;
-
