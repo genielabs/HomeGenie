@@ -2,6 +2,7 @@
   text-align: center;
   border: solid #afafaf09;
   border-radius: 12px;
+  height: 100%;
 }
 .header {
     display: -webkit-flex;

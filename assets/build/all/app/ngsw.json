@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1681507389932,
+  "timestamp": 1681985864810,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,11 +15,11 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.4884f142c43c6e61.js",
+        "/app/main.c9284a8cd4918b66.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.a360d6e45b80c065.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
-        "/app/scripts.91aebdfb349f8150.js",
+        "/app/scripts.3aa1273ecb44d668.js",
         "/app/styles.562dd7c35033f25a.css"
       ],
       "patterns": []
@@ -414,10 +414,10 @@
     "/app/assets/fonts/Roboto-Latin-300.woff": "fec6225507c70951797db15985fe0bf87195d6ee",
     "/app/assets/fonts/Roboto-Latin-400.woff": "fec6225507c70951797db15985fe0bf87195d6ee",
     "/app/assets/fonts/Roboto-Latin-500.woff": "7416b5d46c615d2786a604d71d334b605d41cc73",
-    "/app/assets/i18n/en.json": "d38f457360fcf5621834e8a2617c858abec47c78",
+    "/app/assets/i18n/en.json": "e28a242c89aae47a54db6c23dcb301169fa883d7",
     "/app/assets/i18n/homegenie/en.json": "d1ad3d5b2b385ade4de6b8d053c0c5c54635cf56",
     "/app/assets/i18n/homegenie/it.json": "421d23c18c8cf469c10716b1cf5c226ce2c207ca",
-    "/app/assets/i18n/it.json": "52d3ae7c0a08a17680674fa02a2681bc4f55f178",
+    "/app/assets/i18n/it.json": "5808ff5d944fcee6ad98de429ba94af204fddb8b",
     "/app/assets/i18n/module/en.json": "bd1f58f6eeb2e8213bc5dbe316d1252db8aa436f",
     "/app/assets/i18n/module/it.json": "35c4ef9b17591c0ef0283317a3f226c666d908f9",
     "/app/assets/i18n/widgets/en.json": "81775f6536411948d4d4c6e054a768a21793ab24",
@@ -729,12 +729,12 @@
     "/app/assets/widgets/weather/images_alt/thunder.svg": "2ace7038dfd663330cecc350d680ef08206d62ff",
     "/app/assets/widgets/weather/images_alt/weather.svg": "c719c09048977fd40688272316b35ddf1bdf89e8",
     "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
-    "/app/index.html": "b1e9d385d9370c76e04d0c6b030c3cd84be75c8e",
-    "/app/main.4884f142c43c6e61.js": "7ee6d15fc9bae19937ef0cf52e353829bc66c2ea",
+    "/app/index.html": "e4cda17713a763bfabb21a91f0111d333f1c3d4a",
+    "/app/main.c9284a8cd4918b66.js": "307dd539a46951ddb6fe26a881e2ba2c02b6eae4",
     "/app/manifest.webmanifest": "d47bb07a495e27ddf072f8702df373f79b4eb183",
     "/app/polyfills.a360d6e45b80c065.js": "f317e1a3e4bb6a84068c7e1845a2ce8b2f956ee7",
     "/app/runtime.b92e2ca178ebbf4a.js": "b50d841a4c50d466c34aab3267d3fb4afe87dede",
-    "/app/scripts.91aebdfb349f8150.js": "b14e1d1ebe6a6ae8f9cc2eafc9748283678b20c3",
+    "/app/scripts.3aa1273ecb44d668.js": "ea2db298a484ec28e6cddba14f7c61a35e826caa",
     "/app/styles.562dd7c35033f25a.css": "3a0eb631fad94d39c8ca951e277288436f02e07a"
   },
   "navigationUrls": [

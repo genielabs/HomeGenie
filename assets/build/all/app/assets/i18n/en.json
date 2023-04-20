@@ -81,6 +81,7 @@
   "enable": "Enable",
   "disable": "Disable",
   "info": "Info",
+  "fields": "Fields",
   "unit": "Unit",
   "temperature": "Temperature",
   "power": "Power",

@@ -1112,51 +1112,65 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshPrograms()
         {
-            lock (systemModules.LockObject)
-            try
-            {
                 // Refresh ProgramEngine program modules
                 if (masterControlProgram != null)
                 {
+                    var modules = new List<Module>(systemModules);
                     lock (masterControlProgram.Programs.LockObject)
                     foreach (var program in masterControlProgram.Programs)
                     {
-                        Module module = systemModules.Find(o => o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString());
-                        if (module != null && (program.Type.ToLower() == "visual" || program.Type.ToLower() == "wizard") && !program.IsEnabled)
+                        try
                         {
-                            // TODO: deprecate "wizard" programs
-                            
-                            // we don't remove non-wizard programs to keep configuration options
-                            // TODO: ?? should use modulesGarbage in order to allow correct removing/restoring of all program types ??
-                            // TODO: ?? (but it will loose config options when hg is restarted because modulesGarbage it's not saved) ??
-                            systemModules.Remove(module);
-                            continue;
-                        }
-                        if (module == null && !program.IsEnabled)
-                        {
-                            continue;
-                        }
-                        if (module == null)
-                        {
-                            // add module for the program
-                            module = new Module
+                            Module module = modules.Find(o => o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString());
+                            if (module != null && (program.Type.ToLower() == "visual" || program.Type.ToLower() == "wizard") && !program.IsEnabled)
                             {
-                                Domain = Domains.HomeAutomation_HomeGenie_Automation,
-                                Name = program.Name,
-                                Description = program.Description
-                            };
-                            if (program.Type.ToLower() == "visual" || program.Type.ToLower() == "wizard")
-                            {
-                                Utility.ModuleParameterSet(
-                                    module,
-                                    Properties.WidgetDisplayModule,
-                                    "homegenie/generic/program"
-                                );
+                                // TODO: deprecate "wizard" programs
+                                
+                                // only removes program's module if the program kind is "scenario",
+                                // while keep it for other types in order to hold program's configuration
+                                // that is stored as module's parameters
+                                lock (systemModules.LockObject)
+                                    systemModules.Remove(module);
+                                continue;
                             }
-                            systemModules.Add(module);
+                            if (module == null && !program.IsEnabled)
+                            {
+                                continue;
+                            }
+                            if (module == null)
+                            {
+                                // add module for the program
+                                module = new Module
+                                {
+                                    Domain = Domains.HomeAutomation_HomeGenie_Automation,
+                                    Name = program.Name,
+                                    Description = program.Description
+                                };
+                                if (program.Type.ToLower() == "visual" || program.Type.ToLower() == "wizard")
+                                {
+                                    // set the widget used for programs of type "scenario"
+                                    Utility.ModuleParameterSet(
+                                        module,
+                                        Properties.WidgetDisplayModule,
+                                        "homegenie/generic/program"
+                                    );
+                                }
+                                lock (systemModules.LockObject)
+                                    systemModules.Add(module);
+                            }
+                            module.Address = program.Address.ToString();
+                            module.DeviceType = ModuleTypes.Program;
                         }
-                        module.Address = program.Address.ToString();
-                        module.DeviceType = ModuleTypes.Program;
+                        catch (Exception ex)
+                        {
+                            LogError(
+                                Domains.HomeAutomation_HomeGenie,
+                                "modules_RefreshPrograms()",
+                                ex.Message,
+                                "Exception.StackTrace",
+                                ex.StackTrace
+                            );
+                        }
                     }
                     // Add "Scheduler" virtual module
                     //Module scheduler = systemModules.Find(o=> o.Domain == Domains.HomeAutomation_HomeGenie && o.Address == SourceModule.Scheduler);
@@ -1165,26 +1179,15 @@ namespace HomeGenie.Service
                     //    systemModules.Add(scheduler);
                     //}
                 }
-            }
-            catch (Exception ex)
-            {
-                LogError(
-                    Domains.HomeAutomation_HomeGenie,
-                    "modules_RefreshPrograms()",
-                    ex.Message,
-                    "Exception.StackTrace",
-                    ex.StackTrace
-                );
-            }
         }
 
         internal void modules_Sort()
         {
-            lock (systemModules.LockObject)
             try
             {
+                var modules = new List<Module>(systemModules);
                 // sort modules properties by name
-                foreach (var module in systemModules)
+                foreach (var module in modules)
                 {
                     module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
                     {
@@ -1202,7 +1205,7 @@ namespace HomeGenie.Service
                 //
                 // sort modules
                 //
-                ////systemModules.Sort((Module m1, Module m2) => String.Compare((m1.Domain + ":" + m1.Address.PadLeft(8, '0')), m2.Domain + ":" + m2.Address.PadLeft(8, '0'), StringComparison.Ordinal));
+                lock (systemModules.LockObject)
                 systemModules.Sort((Module m1, Module m2) =>
                 {
                     int c = -1;
@@ -1255,8 +1258,6 @@ namespace HomeGenie.Service
             // Refresh other HG modules
             modules_RefreshPrograms();
             modules_RefreshVirtualModules();
-
-            //modules_Sort();
         }
 
         private void modules_RefreshInterface(MigInterface iface)

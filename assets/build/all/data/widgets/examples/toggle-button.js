@@ -23,7 +23,7 @@ class ToggleButton extends ControllerInstance {
       // is bound module selected?
       bound: bm != null,
     });
-
+//zuix.componentize(this.view());
   }
 
 }

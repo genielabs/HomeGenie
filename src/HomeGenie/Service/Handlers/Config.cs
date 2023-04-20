@@ -877,6 +877,35 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Modules.ParameterDelete":
+                try
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    var parameterName = migCommand.GetOption(2);
+                    if (parameterName != null)
+                    {
+                        var count = module.Properties.RemoveAll((param) => param.Name == parameterName);
+                        if (count > 0)
+                        {
+                            request.ResponseData = new ResponseStatus(Status.Ok);
+                        }
+                        else
+                        {
+                            request.ResponseData = new ResponseStatus(Status.Error, "Property \"" + parameterName + "\" does not exist.");                            
+                        }
+                    }
+                    else
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "Expecting parameter name.");                            
+                    }
+                    homegenie.UpdateModulesDatabase();                    
+                }
+                catch (Exception ex)
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error, ex.Message + "\n\n" + ex.StackTrace);
+                }
+                break;
+
             case "Modules.StatisticsGet":
                 try
                 {
