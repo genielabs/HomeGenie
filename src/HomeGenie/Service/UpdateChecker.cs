@@ -540,7 +540,7 @@ namespace HomeGenie.Service
                     if (doNotCopy) continue;
 
                     // Update the file
-                    if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so"))
+                    if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so") || destinationFile.EndsWith(".dylib"))
                         restartRequired = true;
 
                     if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
@@ -559,7 +559,7 @@ namespace HomeGenie.Service
                         // TODO: delete oldFilesPath before starting update
                         //File.Delete(oldFile);
 
-                        if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so"))
+                        if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so") || destinationFile.EndsWith(".dylib"))
                         {
                             // this will allow replace of new exe and dll files
                             File.Move(destinationFile, oldFile);
