@@ -559,7 +559,7 @@ namespace HomeGenie.Service
                         // TODO: delete oldFilesPath before starting update
                         //File.Delete(oldFile);
 
-                        if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll"))
+                        if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so"))
                         {
                             // this will allow replace of new exe and dll files
                             File.Move(destinationFile, oldFile);
