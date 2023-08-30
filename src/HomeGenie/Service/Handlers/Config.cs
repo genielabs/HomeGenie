@@ -1523,15 +1523,22 @@ namespace HomeGenie.Service.Handlers
                         var jsFile = Path.Combine(filePath, baseName + ".js");
                         if (!File.Exists(htmlFile) && !File.Exists(cssFile) && !File.Exists(jsFile))
                         {
-                            File.Copy(Path.Combine(widgetBasePath, ".template.html"), htmlFile);
-                            File.Copy(Path.Combine(widgetBasePath, ".template.css"), cssFile);
-                            //File.Copy(Path.Combine(widgetBasePath, ".template.js"), jsFile);
-                            var jsTemplate = File.ReadAllText(Path.Combine(widgetBasePath, ".template.js"));
-                            var className = Utility.ToCamelCase(baseName);
-                            className = char.ToUpper(className[0]) + className.Substring(1);
-                            jsTemplate = jsTemplate.Replace("{{ComponentName}}", className);
-                            File.WriteAllText(jsFile, jsTemplate);
-                            status = Status.Ok;
+                            try
+                            {
+                                File.Copy(Path.Combine(widgetBasePath, ".template.html"), htmlFile);
+                                File.Copy(Path.Combine(widgetBasePath, ".template.css"), cssFile);
+                                //File.Copy(Path.Combine(widgetBasePath, ".template.js"), jsFile);
+                                var jsTemplate = File.ReadAllText(Path.Combine(widgetBasePath, ".template.js"));
+                                var className = Utility.ToCamelCase(baseName);
+                                className = char.ToUpper(className[0]) + className.Substring(1);
+                                jsTemplate = jsTemplate.Replace("{{ComponentName}}", className);
+                                File.WriteAllText(jsFile, jsTemplate);
+                                status = Status.Ok;
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
                         }
                     }
                     request.ResponseData = new ResponseStatus(status);

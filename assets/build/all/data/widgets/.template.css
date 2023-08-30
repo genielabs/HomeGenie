@@ -1,0 +1,9 @@
+:host {
+    border: solid 1px;
+    border-radius: 12px;
+}
+.container {
+    background: var(--background-color);
+    min-height: 120px;
+}
+

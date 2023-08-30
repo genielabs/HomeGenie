@@ -4,7 +4,7 @@ Section: web
 Priority: optional
 Architecture: all
 Essential: no
-Depends: mono-runtime, libmono-corlib4.5-cil, libmono-system-web4.0-cil, libmono-system-numerics4.0-cil, libmono-system-serviceprocess4.0-cil, libmono-system-data4.0-cil, libmono-system-core4.0-cil, libmono-system-servicemodel4.0a-cil, libmono-windowsbase4.0-cil, libmono-system-runtime-serialization-formatters-soap4.0-cil, libmono-system-runtime-serialization4.0-cil, libmono-system-xml-linq4.0-cil, mono-dmcs | mono-mcs, libusb-1.0-0, libusb-1.0-0-dev, alsa-utils, lame, libv4l-0
+Depends: mono-runtime, libmono-corlib4.5-cil, libmono-system-web4.0-cil, libmono-system-numerics4.0-cil, libmono-system-serviceprocess4.0-cil, libmono-system-data4.0-cil, libmono-system-core4.0-cil, libmono-system-servicemodel4.0a-cil, libmono-windowsbase4.0-cil, libmono-system-runtime-serialization-formatters-soap4.0-cil, libmono-system-runtime-serialization4.0-cil, libmono-system-xml-linq4.0-cil, mono-dmcs | mono-mcs, libusb-1.0-0, libusb-1.0-0-dev, alsa-utils, lame, libv4l-0, mono-devel
 Pre-Depends: mono-runtime 
 Recommends: ca-certificates-mono 
 Suggests: arduino-mk, empty-expect
@@ -14,4 +14,4 @@ Homepage: https://www.homegenie.it
 Conflicts: 
 Replaces: 
 Provides: 
-Description: HomeGenie - open source, programmable, automation server for smart connected devices and applications.
+Description: HomeGenie - the programmable automation intelligence

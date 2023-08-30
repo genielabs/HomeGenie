@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>var gpio_pins = new string[]{
 	"GPIO17 (pin 11)=11",
@@ -421,7 +421,7 @@ if (pinMode == 1) { // Output
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[{"Line":30,"Column":5,"EndLine":30,"EndColumn":6,"ErrorMessage":"Type of conditional expression cannot be determined because there is no implicit conversion between `Raspberry.IO.GeneralPurpose.OutputPinConfiguration' and `Raspberry.IO.GeneralPurpose.InputPinConfiguration'","ErrorNumber":"CS0173","CodeBlock":"CR"},{"Line":32,"Column":58,"EndLine":32,"EndColumn":59,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"},{"Line":33,"Column":58,"EndLine":33,"EndColumn":59,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"},{"Line":34,"Column":15,"EndLine":34,"EndColumn":16,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"},{"Line":35,"Column":15,"EndLine":35,"EndColumn":16,"ErrorMessage":"The left-hand side of an assignment must be a variable, a property or an indexer","ErrorNumber":"CS0131","CodeBlock":"CR"}]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -472,7 +472,7 @@ var groveRgb = new GroveRgbConnection(gpioOut1, gpioOut2, ledsCount);
 // Allocate color light modules for this app
 Program.AddModules(appDomain, 1, ledsCount, "Dimmer", "homegenie/generic/colorlight");
 // Default delay
-double defaultDelay = 500;
+double defaultDelay = 400;
 
 // State object
 var timings = new dynamic[ledsCount];
@@ -497,7 +497,8 @@ var updateLeds = new Func&lt;bool&gt;(()=&gt;{
     do {
       iterateNext = false;
       for(int lednumber = 0; lednumber &lt; ledsCount; lednumber++) {
-	  	lock (timings[lednumber]) {
+	  	//lock (timings[lednumber])
+       {
           var item = timings[lednumber];
           if (item == null || item.timeEnd == null) continue;
           var timeSpan = new TimeSpan(item.timeEnd.Ticks-DateTime.Now.Ticks);
@@ -505,43 +506,29 @@ var updateLeds = new Func&lt;bool&gt;(()=&gt;{
             var h = GetValueAt(item.currentColor.H, item.color.H, item.duration, item.duration-timeSpan.TotalMilliseconds);
             var s = GetValueAt(item.currentColor.S, item.color.S, item.duration, item.duration-timeSpan.TotalMilliseconds);
             var v = GetValueAt(item.currentColor.B, item.color.B, item.duration, item.duration-timeSpan.TotalMilliseconds);
-            var t = new Thread(()=&gt;{
-              groveRgb.SetColor(lednumber, RgbColor.FromHsv(h, s, v));
-            });
-            t.Start();
-            if (!t.Join(3500)) {
-              Program.Notify("Grove RGB ERROR:A", "I/O error");
-              t.Abort();
-            }
+            groveRgb.SetColor(lednumber, RgbColor.FromHsv(h, s, v));
             iterateNext = true;
-            //groveRgb.SetColor(lednumber, RgbColor.FromHsv(h, s, v));
-            //iterateNext = true;
           } else if (timeSpan.TotalMilliseconds &lt;= 0) {
-            var t = new Thread(()=&gt;{
-              groveRgb.SetColor(lednumber, RgbColor.FromHsv(item.color.H, item.color.S, item.color.B));
-            });
-            t.Start();
-            if (!t.Join(3500)) {
-              Program.Notify("Grove RGB ERROR:A", "I/O error\n"+Math.Round(item.color.H, 5));
-              t.Abort();
-            } else item.timeEnd = null;
-            //groveRgb.SetColor(lednumber, RgbColor.FromHsv(item.color.H, item.color.S, item.color.B));
+            item.timeEnd = null;
+            groveRgb.SetColor(lednumber, RgbColor.FromHsv(item.color.H, item.color.S, item.color.B));
           }
   		}
       }
+      Pause(0.050);
     } while (iterateNext &amp;&amp; Program.IsRunning);
-    Pause(0.200);
+    Pause(0.250);
   }
   return true;
 });
 
 var setColor = new Func&lt;int,dynamic,double,bool&gt;((lednumber, color, duration)=&gt;{
-  lock (timings[lednumber]) {
+  //lock (timings[lednumber])
+   {
     var item = timings[lednumber];
     item.currentColor = GetHsb(item.module.Parameter("Status.ColorHsb").Value);
     if (item.module.Level == 0) {
-      item.currentColor.H = 0;
-      item.currentColor.S = 1;
+      //item.currentColor.H = 0;
+      //item.currentColor.S = 1;
       item.currentColor.B = 0;
     }
     item.color = color;
@@ -601,9 +588,9 @@ Api.Handle(appDomain, (args) =&gt; {
       case "Control.Toggle":
         if (module.Parameter("Status.Level").DecimalValue == 0)
         {
-          setColor(lightId, currentColor, 0);
+          setColor(lightId, currentColor, defaultDelay);
           module.Emit("Status.Level", currentColor.B);
-          module.Emit("Status.ColorHsb", module.Parameter("Status.ColorHsb").Value);
+          //module.Emit("Status.ColorHsb", module.Parameter("Status.ColorHsb").Value);
         }
         else
         {
@@ -622,7 +609,7 @@ Api.Handle(appDomain, (args) =&gt; {
       case "Control.ColorHsb":
         string[] values = apiCall.GetOption(0).Split(',');
         double transition = defaultDelay;
-        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 1000)); 
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3], CultureInfo.InvariantCulture)*1000)); 
         var color = GetHsb(apiCall.GetOption(0));
         setColor(lightId, color, transition);
         module.Emit("Status.Level", color.B);
@@ -650,9 +637,9 @@ updateLeds();
       <PackageId>homegenie-iot-sharp</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>grove-chainable-rgb-led</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>2857E8107836A8C67921DEE4F475E9FC</Checksum>
+      <Checksum>3BEF6E4F5199163AD625115E33A6E29B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>603</Address>

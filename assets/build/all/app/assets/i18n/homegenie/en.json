@@ -218,7 +218,7 @@
 
     "34": {
       "Title":
-      "OpenWeatherMap",
+      "Weather Forecast",
       "Description":
       "Weather and forecast information from Open Weather Map service.\nTo activate this widget enter a valid API key.\nFollow instructions at https://openweathermap.org/appid to get a free API key.",
       "ConfigureOptions.Location":
@@ -330,9 +330,9 @@
       "Description": "Control the device using a remote (IR or RF).",
       "HomeGenie.RemoteControl.Enable": "Enable",
       "HomeGenie.RemoteControl.IRCode": "Toggle button",
-      "ConfigureOptions.DimmerUpCode": "Brighter button",
-      "ConfigureOptions.DimmerDownCode": "Dimmer button",
-      "ConfigureOptions.DimmerInterval": "Bright/Dim step"
+      "ConfigureOptions.DimmerUpCode": "Brightness increase button",
+      "ConfigureOptions.DimmerDownCode": "Brightness decrease button",
+      "ConfigureOptions.DimmerInterval": "Dimming step"
     },
 
     "145": {

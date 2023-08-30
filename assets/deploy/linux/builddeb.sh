@@ -57,7 +57,7 @@ then
 
 	echo "\n- Building deb file...\n"
 
-	dpkg-deb --build "$target_folder"
+	dpkg-deb -Zxz --build "$target_folder"
 
 	echo "\n... done!\n"
 

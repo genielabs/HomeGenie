@@ -14,7 +14,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <PackageReference Include="CronExpressionDescriptor" Version="1.21.2" />
-    <PackageReference Include="NLog" Version="5.1.0" />
+    <PackageReference Include="NLog" Version="5.1.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.7" />
-    <PackageReference Include="MIG" Version="1.2.9" />
+    <PackageReference Include="MIG" Version="1.2.11" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.2.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SerialPortStream" Version="2.4.1" />
@@ -44,11 +44,10 @@
     <PackageReference Include="NCrontab" Version="3.3.1" />
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
     <PackageReference Include="UnitsNet" Version="4.149.0" />
-    <PackageReference Include="WebSocket4Net" Version="0.15.2" />
 
     <PackageReference Include="MQTTnet" Version="4.1.4.563" />
     <PackageReference Include="SerialPortLib" Version="1.1.1" />
-    <PackageReference Include="MIG.Protocols" Version="1.2.5" />
+    <PackageReference Include="MIG.Protocols" Version="1.2.8" />
 
     <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.11" />
     <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.11" />

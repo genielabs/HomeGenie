@@ -171,7 +171,7 @@ namespace HomeGenie.Data
                 {
                     historyValues.RemoveRange(historyLimitSize, historyValues.Count - historyLimitSize);
                 }
-                while ((DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
+                while (historyValues.Count > 0 && (DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
                 {
                     historyValues.RemoveAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes > historyLimit);
                 }

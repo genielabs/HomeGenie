@@ -1,6 +1,7 @@
 ![example workflow](https://github.com/genielabs/HomeGenie/actions/workflows/msbuild.yml/badge.svg)
 
 # HomeGenie
+https://homegenie.it
 
 **The programmable automation intelligence**
 
@@ -51,7 +52,7 @@ Unzip the archive file. A new `homegenie` folder will be created.
 
 Set the current directory to `homegenie` and run the `./HomeGenie` command:
 
-```bash
+```shell
 cd homegenie
 ./HomeGenie
 ```
@@ -69,14 +70,14 @@ hosting operating system.
 1) Add a specific user for the service and copy the content of `homegenie` folder
    to the new user home directory:
 
-```bash
+```shell
 sudo useradd homegenie
 sudo cp -ar ./path-to-extracted-folder/homegenie /home/homegenie
 sudo chown -R homegenie:homegenie /home/homegenie
 ```
 
 2) Create the file `/etc/systemd/system/homegenie.service` with the following content:
-```bash
+```shell
 [Unit]
 Description=HomeGenie
 
@@ -92,12 +93,12 @@ WantedBy=multi-user.target
 ```
 
 3) Refresh `SystemD` configuration
-```bash
+```shell
 sudo systemctl daemon-reload
 ```
 
 4) Start the service and enable <em>HomeGenie</em> to auto-start on next system boot:
-```bash
+```shell
 sudo systemctl start homegenie.service
 sudo systemctl enable homegenie.service
 ```
@@ -120,8 +121,15 @@ Where `server_ip` is the IP address of the machine where HomeGenie is running an
 or the first available port starting from *8080*.
 <small>(ex. *http://192.168.1.150:8080/*)</small>
 
+To find out which port number the service is running on, enter the following command from the `homegenie` folder:
+
+```shell
+cat serviceaddress.txt
+```
+
 The `port` settings can be changed either from the maintenance page
 or editing the `systemconfig.xml` file located in the application folder.
+The service must be stopped when editing the configuration file manually.
 
 
 ### Optional post-installation steps

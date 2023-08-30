@@ -219,7 +219,7 @@
 
       "34": {
         "Title":
-        "OpenWeatherMap",
+        "Weather Forecast",
         "Description":
         "Informazioni meteo e previsioni dal servizio Open Weather Map.\nPer attivare questo widget inserisci una chiave API valida.\nSegui le istruzioni su https://openweathermap.org/appid per ottenere una chiave API gratuita.",
         "ConfigureOptions.Location":
