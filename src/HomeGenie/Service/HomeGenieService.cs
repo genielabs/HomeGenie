@@ -1466,7 +1466,7 @@ namespace HomeGenie.Service
             host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                if (ip.AddressFamily == AddressFamily.InterNetwork && !ip.ToString().StartsWith("127.") && !ip.ToString().StartsWith("::1"))
                 {
                     localIP = ip.ToString();
                     break;
@@ -1481,18 +1481,23 @@ namespace HomeGenie.Service
             }
             //
             string presentationUrl = "http://" + address + ":" + bindport;
-            //string friendlyName = "HomeGenie: " + Environment.MachineName;
             string manufacturer = "G-Labs";
-            string manufacturerUrl = "http://genielabs.github.io/HomeGenie/";
+            string manufacturerUrl = "https://github.com/genielabs";
             string modelName = "HomeGenie";
-            string modelDescription = "HomeGenie Home Automation Server";
-            //string modelURL = "https://homegenie.it/";
-            string modelNumber = "HG-1";
+            string modelDescription = "HomeGenie Automation Server";
+            string friendlyName = modelName + ": " + Environment.MachineName;
+            string modelUrl = "https://homegenie.it/";
+            string version = "1";
+            if (updateChecker.GetCurrentRelease() != null)
+            {
+                version = updateChecker.GetCurrentRelease().Version;
+            }
+            string modelNumber = "HG-" + version;
             string standardDeviceType = "HomeAutomationServer";
             string uniqueDeviceName = systemConfiguration.HomeGenie.GUID;
             if (String.IsNullOrEmpty(uniqueDeviceName))
             {
-                systemConfiguration.HomeGenie.GUID = uniqueDeviceName = System.Guid.NewGuid().ToString();
+                systemConfiguration.HomeGenie.GUID = uniqueDeviceName = Guid.NewGuid().ToString();
                 systemConfiguration.Update();
             }
             //
@@ -1503,14 +1508,14 @@ namespace HomeGenie.Service
                 localDevice.HasPresentation = true;
                 localDevice.PresentationURL = presentationUrl;
             }
-            localDevice.FriendlyName = modelName + ": " + Environment.MachineName;
+            localDevice.FriendlyName = friendlyName;
             localDevice.Manufacturer = manufacturer;
             localDevice.ManufacturerURL = manufacturerUrl;
             localDevice.ModelName = modelName;
             localDevice.ModelDescription = modelDescription;
-            if (Uri.IsWellFormedUriString(manufacturerUrl, UriKind.Absolute))
+            if (Uri.IsWellFormedUriString(modelUrl, UriKind.Absolute))
             {
-                localDevice.ModelURL = new Uri(manufacturerUrl);
+                localDevice.ModelURL = new Uri(modelUrl);
             }
             localDevice.ModelNumber = modelNumber;
             localDevice.StandardDeviceType = standardDeviceType;
