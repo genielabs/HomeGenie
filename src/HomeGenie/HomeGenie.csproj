@@ -12,40 +12,46 @@
     <EnableMLUnsupportedPlatformTargetCheck>false</EnableMLUnsupportedPlatformTargetCheck>
   </PropertyGroup>
 
+  <!-- .NET FramwWork -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <PackageReference Include="CronExpressionDescriptor" Version="1.21.2" />
     <PackageReference Include="NLog" Version="5.1.3" />
+  </ItemGroup>
+
+  <!-- .NET (dotnet) -->
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net472' ">
+    <PackageReference Include="System.ObjectModel" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="HG.NWaves" Version="0.9.6" />
     <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.11" />
-    <PackageReference Include="Iot.Device.Bindings" Version="2.2.0" />
-    <PackageReference Include="IronPython" Version="3.4.0" />
-    <PackageReference Include="IronPython.StdLib" Version="3.4.0" />
+    <PackageReference Include="Iot.Device.Bindings" Version="3.0.0" />
+    <PackageReference Include="IronPython" Version="3.4.1" />
+    <PackageReference Include="IronPython.StdLib" Version="3.4.1" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.7" />
-    <PackageReference Include="MIG" Version="1.2.11" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.2" />
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.11" />
+    <PackageReference Include="MIG" Version="1.2.15" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.2.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SerialPortStream" Version="2.4.1" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
-    <PackageReference Include="Angle" Version="3.2.1" />
-    <PackageReference Include="SolarCalculator" Version="3.2.1" />
-    <PackageReference Include="Jint" Version="3.0.0-beta-2048" />
-    <PackageReference Include="System.Device.Gpio" Version="2.2.0" />
+    <PackageReference Include="Angle" Version="3.3.0" />
+    <PackageReference Include="SolarCalculator" Version="3.3.0" />
+    <PackageReference Include="Jint" Version="3.0.0-beta-2051" />
+    <PackageReference Include="System.Device.Gpio" Version="3.0.0" />
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
-    <PackageReference Include="CronExpressionDescriptor" Version="2.19.0" />
-    <PackageReference Include="LiteDB" Version="5.0.16" />
-    <PackageReference Include="NCrontab" Version="3.3.1" />
+    <PackageReference Include="CronExpressionDescriptor" Version="2.21.0" />
+    <PackageReference Include="LiteDB" Version="5.0.17" />
+    <PackageReference Include="NCrontab" Version="3.3.3" />
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
-    <PackageReference Include="UnitsNet" Version="4.149.0" />
+    <PackageReference Include="UnitsNet" Version="5.32.0" />
 
-    <PackageReference Include="MQTTnet" Version="4.1.4.563" />
+    <PackageReference Include="MQTTnet" Version="4.2.1.781" />
     <PackageReference Include="SerialPortLib" Version="1.1.1" />
     <PackageReference Include="MIG.Protocols" Version="1.2.8" />
 
@@ -55,7 +61,7 @@
     <PackageReference Include="HG.Raspberry.System" Version="2.1.2" />
 
     <PackageReference Include="NUnit" Version="3.13.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="ZWaveLib" Version="1.1.1" />
 

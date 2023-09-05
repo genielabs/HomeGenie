@@ -251,7 +251,7 @@ namespace HomeGenie.Automation.Scripting
                 mqttClient.PublishAsync(new MqttApplicationMessage()
                 {
                     Topic  =topic,
-                    Payload = Encoding.UTF8.GetBytes(message),
+                    PayloadSegment = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message)),
                     QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
                     Retain = false
                 });
@@ -271,7 +271,7 @@ namespace HomeGenie.Automation.Scripting
                 mqttClient.PublishAsync(new MqttApplicationMessage()
                 {
                     Topic  =topic,
-                    Payload = message,
+                    PayloadSegment = new ArraySegment<byte>(message),
                     QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
                     Retain = false
                 });
@@ -350,6 +350,8 @@ namespace HomeGenie.Automation.Scripting
             if (usingWebSockets)
             {
                 builder.WithWebSocketServer(endPoint.Address + ":" + endPoint.Port + "/mqtt");
+                // TODO: WARNING -- upgrading to MQTTnet 4.3.0.858 WebSocket connection won't work anymore
+                //builder.WithWebSocketServer(o => o.WithUri(endPoint.Address + ":" + endPoint.Port + "/mqtt"));
             }
             else
             {
@@ -363,13 +365,15 @@ namespace HomeGenie.Automation.Scripting
             {
                 var tlsParameters = new MqttClientOptionsBuilderTlsParameters {UseTls = true};
                 builder.WithTls(tlsParameters);
+                // TODO: WARNING -- upgrading to MQTTnet 4.3.0.858 WebSocket connection won't work anymore
+                //builder.WithTlsOptions(o => o.UseTls());
             }
             return builder;
         }
 
         private void MessageReceived(MqttApplicationMessageReceivedEventArgs args)
         {
-            var msg = args.ApplicationMessage.Payload;
+            var msg = args.ApplicationMessage.PayloadSegment.Array;
             var topic = args.ApplicationMessage.Topic;
             foreach(KeyValuePair<string, Action<string, byte[]>> subscription in subscribeTopics)
             {

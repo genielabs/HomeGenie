@@ -59,6 +59,7 @@ namespace HomeGenie.Automation.Engines
             "System.Dynamic",
             "System.Net",
             "System.Threading",
+            "System.Threading.Tasks",
             "System.Security.Cryptography",
             "System.Security.Cryptography.X509Certificates",
 #if NETCOREAPP
@@ -75,6 +76,7 @@ namespace HomeGenie.Automation.Engines
             "HomeGenie.Automation",
             "HomeGenie.Data",
             "NetClientLib",
+            "OnvifDiscovery",
             "OnvifDiscovery.Models",
             "MIG",
             "MIG.Interfaces.HomeAutomation.Commons",
@@ -238,6 +240,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
 
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ObjectModel.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Core.dll")),
                     MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
 
@@ -328,11 +331,7 @@ namespace HomeGenie.Automation.Scripting
                     switch (assemblyName.Name.ToLower())
                     {
                         case "system":
-                            compilerParams.ReferencedAssemblies.Add(assembly.Location);
-                            break;
                         case "system.core":
-                            compilerParams.ReferencedAssemblies.Add(assembly.Location);
-                            break;
                         case "microsoft.csharp":
                             compilerParams.ReferencedAssemblies.Add(assembly.Location);
                             break;
