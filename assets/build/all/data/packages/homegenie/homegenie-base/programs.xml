@@ -496,7 +496,7 @@ string GetDbName()
 </Description>
     <Group>Data Processing</Group>
     <Features />
-    <AutoRestartEnabled>true</AutoRestartEnabled>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>

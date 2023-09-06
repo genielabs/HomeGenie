@@ -253,6 +253,7 @@ namespace HomeGenie.Service
             return JsonConvert.SerializeObject(module.Clone(), settings);
         }
 
+        // TODO: deprecate this method if not used
         public static string JsonEncode(string fieldValue)
         {
             if (fieldValue == null)

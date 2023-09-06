@@ -33,7 +33,7 @@
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.2" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.11" />
-    <PackageReference Include="MIG" Version="1.2.15" />
+    <PackageReference Include="MIG" Version="1.2.16" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.2.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SerialPortStream" Version="2.4.1" />

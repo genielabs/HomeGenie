@@ -50,7 +50,7 @@
     <Password></Password>
     <Location>{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }</Location>
     <GUID></GUID>
-    <EnableLogFile>true</EnableLogFile>
+    <EnableLogFile>false</EnableLogFile>
   </HomeGenie>
   <MigService>
     <Gateways>
