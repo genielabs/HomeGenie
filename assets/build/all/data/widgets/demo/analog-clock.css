@@ -1,0 +1,43 @@
+.clock {
+    position: relative;
+    width: 110px; height: 110px;
+    margin: 24px; padding: 24px;
+    background-image: url('https://zuixjs.org/images/examples/clock.png');
+    background-size: cover;
+}
+.clock-hand {
+    position: absolute;
+    width: 4px;
+    border: solid 1px #aaa;
+    border-radius: 12px;
+    transition: transform .3s ease-in;
+    transform-origin: 3px 3px;
+    top: calc(50% - 1px); left: calc(50% - 1px);
+    box-shadow: 0 0, 0 0 2px 1px #888;
+}
+.seconds {
+    width: 2px; height: 45px;
+    transform-origin: 2px 2px;
+    top: calc(50%); left: calc(50%);
+    opacity: 0.5;
+    background-color: #222;
+}
+.minutes {
+    height: 45px;
+    opacity: 0.75;
+    background-color: green;
+}
+.hours {
+    height: 35px;
+    opacity: 0.75;
+    background-color: brown;
+}
+.cap {
+    position: absolute;
+    width: 5px; height: 5px;
+    transform: translate(-1px, -1px);
+    top: 50%; left: 50%;
+    border: solid 1px #555;
+    border-radius: 32px;
+    background: wheat;
+}

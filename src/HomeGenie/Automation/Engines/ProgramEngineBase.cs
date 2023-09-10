@@ -224,7 +224,7 @@ namespace HomeGenie.Automation.Engines
             if (_programThread == null) return;
             try
             {
-                if (!_programThread.Join(1000))
+                if (!_programThread.Join(15000))
                 {
                     _programThread.Interrupt();
                 }

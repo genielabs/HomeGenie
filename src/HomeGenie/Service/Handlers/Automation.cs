@@ -646,13 +646,7 @@ namespace HomeGenie.Service.Handlers
                     if (currentProgram != null)
                     {
                         currentProgram.IsEnabled = false;
-                        try
-                        {
-                            currentProgram.Engine.StopProgram();
-                        }
-                        catch
-                        {
-                        }
+                        currentProgram.Engine.StopProgram();
                         currentProgram.IsEnabled = true;
                         homegenie.UpdateProgramsDatabase();
                     }
@@ -672,13 +666,7 @@ namespace HomeGenie.Service.Handlers
                     if (currentProgram != null)
                     {
                         currentProgram.IsEnabled = false;
-                        try
-                        {
-                            currentProgram.Engine.StopProgram();
-                        }
-                        catch
-                        {
-                        }
+                        currentProgram.Engine.StopProgram();
                         homegenie.UpdateProgramsDatabase();
                     }
                     break;

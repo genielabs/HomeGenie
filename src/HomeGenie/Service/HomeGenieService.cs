@@ -615,20 +615,8 @@ namespace HomeGenie.Service
                         }
 
                         // add new module
-                        module = new Module();
+                        module = virtualModule.DeepClone();
                         clonedModules.Add(module);
-                        // copy properties from virtual module
-                        foreach (var p in virtualModule.Properties)
-                        {
-                            module.Properties.Add(p);
-                        }
-
-                        // module inherits props from associated virtual module
-                        module.Domain = virtualModule.Domain;
-                        module.Address = virtualModule.Address;
-                        module.DeviceType = virtualModule.DeviceType;
-                        module.Name = virtualModule.Name;
-                        module.Description = virtualModule.Description;
                         Utility.ModuleParameterSet(
                             module,
                             Properties.VirtualModuleParentId,

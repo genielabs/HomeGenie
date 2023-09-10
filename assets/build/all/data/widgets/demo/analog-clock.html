@@ -1,0 +1,17 @@
+<div class="clock">
+
+    <div class="minutes clock-hand"
+         @set="minutesCss($this)"
+         @delay="1000"></div>
+
+    <div class="hours clock-hand"
+         @set="hoursCss($this)"
+         @delay="15000"></div>
+
+    <div class="seconds clock-hand"
+         @set="secondsCss($this)"
+         @delay="1000"></div>
+
+    <div class="cap"></div>
+
+</div>
