@@ -51,9 +51,9 @@
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
     <PackageReference Include="UnitsNet" Version="5.32.0" />
 
-    <PackageReference Include="MQTTnet" Version="4.2.1.781" />
+    <PackageReference Include="MQTTnet" Version="4.3.1.873" />
     <PackageReference Include="SerialPortLib" Version="1.1.1" />
-    <PackageReference Include="MIG.Protocols" Version="1.2.8" />
+    <PackageReference Include="MIG.Protocols" Version="1.2.9" />
 
     <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.11" />
     <PackageReference Include="HG.Raspberry.IO.GeneralPurpose" Version="2.4.11" />

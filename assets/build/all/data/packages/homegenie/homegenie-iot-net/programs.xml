@@ -99,7 +99,7 @@ try {
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -184,43 +184,52 @@ var dhtModule = Modules
     .InDomain(moduleDomain)
     .WithAddress(moduleAddress).Get();
 
+DhtData previousData = null;
 while (Program.IsEnabled)
 {
+  try {
 
+    using (Dht22 dht = new Dht22(pin))
+    {
+        Temperature temperature = default;
+        RelativeHumidity humidity = default;
+        bool success = dht.TryReadHumidity(out humidity)
+                        &amp;&amp; dht.TryReadTemperature(out temperature);
+        if (success)
+        {
+            // data read succesfully
+            if (previousData == null
+              || (Math.Abs(humidity.Percent - previousData.Humidity.Percent) &lt; 20
+                &amp;&amp; (Math.Abs(temperature.DegreesCelsius - previousData.Temperature.DegreesCelsius) &lt; 8)))
+            {
+              dhtModule
+                .Emit("Sensor.Humidity", humidity.Percent)
+                .Emit("Sensor.Temperature", temperature.DegreesCelsius);
+            }
+            previousData = new DhtData() {
+              Temperature = temperature,
+              Humidity = humidity
+            };
+        }
+        else
+        {
+            Program.Notify("Could not read data from sensor." + notificationButtons);
+        }
+    }
 
-try {
-
-
-  using (Dht22 dht = new Dht22(pin))
-  {
-      Temperature temperature = default;
-      RelativeHumidity humidity = default;
-      bool success = dht.TryReadHumidity(out humidity)
-                      &amp;&amp; dht.TryReadTemperature(out temperature);
-      if (success)
-      {
-          // data read succesfully
-          dhtModule
-            .Emit("Sensor.Humidity", humidity.Percent)
-            .Emit("Sensor.Temperature", temperature.DegreesCelsius);
-      }
-      else
-      {
-          Program.Notify("Could not read data from sensor." + notificationButtons);
-      }
+  } catch (Exception e) {
+    Program.Notify("Error." + e.Message);
   }
-
-} catch (Exception e) {
-  Program.Notify("Error." + e.Message);
-}
-
 
   var pause = Program.Option("UpdateInterval").DecimalValue;
   if (pause == 0) pause = 60; // default pause is 1 minute
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptContext />
+    <ScriptContext>class DhtData {
+    public Temperature Temperature;
+    public RelativeHumidity Humidity;
+}</ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
@@ -228,9 +237,9 @@ try {
       <PackageId>homegenie-iot-net</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>dht-22-sensor</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>9B9C74DB0A228896C6BB2877D21B2200</Checksum>
+      <Checksum>08ACE658D82D76A0F2813D8FDFC7C274</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>702</Address>
