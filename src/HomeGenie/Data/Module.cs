@@ -21,7 +21,7 @@
  */
 
 using System;
-
+using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -33,6 +33,7 @@ namespace HomeGenie.Data
     /// <summary>
     /// Module instance.
     /// </summary>
+    [XmlInclude(typeof(VirtualModule))]
     [Serializable()]
     public class Module
     {

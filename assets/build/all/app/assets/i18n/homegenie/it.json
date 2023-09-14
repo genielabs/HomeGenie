@@ -172,7 +172,11 @@
     "In esecuzione",
   "program_status_background":
     "Background",
+  "program_status_stopping":
+    "Stopping",
   "program_status_stopped":
+    "Stopped",
+  "program_status_interrupted":
     "Interrotto",
   "program_status_disabled":
     "Disabilitato",
@@ -180,6 +184,8 @@
     "Abilitato",
   "program_status_broken":
     "Broken",
+  "program_status_compile":
+    "Compilazione",
   "automation_programming_guide":
     "Guida alla programmazione",
   "tap_to_disable":

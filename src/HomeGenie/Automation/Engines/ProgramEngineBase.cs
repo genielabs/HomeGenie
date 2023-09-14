@@ -222,6 +222,7 @@ namespace HomeGenie.Automation.Engines
             ((IProgramEngine) this).Unload();
 
             if (_programThread == null) return;
+            HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Stopping");
             try
             {
                 if (!_programThread.Join(15000))

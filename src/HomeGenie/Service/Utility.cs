@@ -197,6 +197,7 @@ namespace HomeGenie.Service
             catch (Exception e)
             {
                 if (callback != null) callback(items.GetType(), e);
+                Debug.WriteLine(e.ToString());
             }
             finally
             {

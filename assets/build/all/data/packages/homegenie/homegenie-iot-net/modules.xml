@@ -1,20 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Module>
-    <Name>DHT-11 Sensor IoT</Name>
-    <Description>Read temperature and humidity from a DHT-11 connected to GPIO.
+    <Name>DHT-xx Sensor</Name>
+    <Description>Read temperature and humidity from a DHT-xx connected to GPIO.
 </Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>701</Address>
     <Properties>
       <ModuleParameter>
-        <Name>ConfigureOptions.GPIO.Pin</Name>
-        <Value />
-        <Description>Pin number</Description>
-        <FieldType>select:GPIO17 (pin 11)=17,GPIO27 (pin 13)=27,GPIO22 (pin 15)=22,GPIO4 (pin 7)=4,GPIO5 (pin 29)=5,GPIO6 (pin 31)=6,GPIO13 (pin 33)=13,GPIO19 (pin 35)=19,GPIO26 (pin 37)=26,GPIO23 (pin 16)=23,GPIO24 (pin 18)=24,GPIO25 (pin 22)=25,GPIO12 (pin 32)=12,GPIO16 (pin 36)=16,GPIO21 (pin 40)=21</FieldType>
+        <Name>ConfigureOptions.DHT.Device</Name>
+        <Value></Value>
+        <Description>DHT Device</Description>
+        <FieldType>select:DHT-10=10,DHT-11=11,DHT-12=12,DHT-21=21,DHT-22=22</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2023-09-10T19:21:58.9506147Z</UpdateTime>
+        <UpdateTime>2023-09-14T16:36:23.0162594Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.GPIO.Pin</Name>
+        <Value></Value>
+        <Description>Pin number</Description>
+        <FieldType>select:I2C (DHT-10 and DHT-12 only)=1,GPIO17 (pin 11)=17,GPIO27 (pin 13)=27,GPIO22 (pin 15)=22,GPIO4 (pin 7)=4,GPIO5 (pin 29)=5,GPIO6 (pin 31)=6,GPIO13 (pin 33)=13,GPIO19 (pin 35)=19,GPIO26 (pin 37)=26,GPIO23 (pin 16)=23,GPIO24 (pin 18)=24,GPIO25 (pin 22)=25,GPIO12 (pin 32)=12,GPIO16 (pin 36)=16,GPIO21 (pin 40)=21</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-09-14T16:36:23.0164225Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.UpdateInterval</Name>
@@ -25,12 +33,20 @@
         <UpdateTime>2023-09-10T19:18:16.8321314Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Program.Notification</Name>
-        <Value>{"Title":"DHT-11 Sensor IoT","Message":"Data pin not selected. [program_configure,program_disable]"}</Value>
+        <Name>Program.Event</Name>
+        <Value>MODULE_ADDED Components.DHT11:16</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2023-09-10T19:22:39.0487788Z</UpdateTime>
+        <UpdateTime>2023-09-14T16:36:26.6456265Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>{"Title":"DHT-XX Sensor","Message":"Error.Opening pins requires root permissions."}</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2023-09-14T16:38:26.7744719Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -38,7 +54,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2023-09-10T19:22:39.0384164Z</UpdateTime>
+        <UpdateTime>2023-09-14T16:36:26.6341266Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -46,7 +62,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2023-09-10T19:21:58.5073868Z</UpdateTime>
+        <UpdateTime>2023-09-14T16:35:35.8762875Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -54,7 +70,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2023-09-10T19:22:18.661793Z</UpdateTime>
+        <UpdateTime>2023-09-14T16:37:57.6541104Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

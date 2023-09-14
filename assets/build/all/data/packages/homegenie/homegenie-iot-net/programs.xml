@@ -2,6 +2,8 @@
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>var gpio_pins = new string[]{
+	"I2C (DHT-10 and DHT-12 only)=1",
+
 	"GPIO17 (pin 11)=17",
 	"GPIO27 (pin 13)=27",
 	"GPIO22 (pin 15)=22",
@@ -23,130 +25,17 @@
 	"GPIO21 (pin 40)=21"
 };
 
-Program.Setup(() =&gt; {
-  Program
-    .AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
-    .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:10:3600:10");
-});
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>// Based .NET IoT Libraries
-// Documentation:
-//   https://learn.microsoft.com/en-us/dotnet/iot/intro
-// Device Bindings:
-//   https://github.com/dotnet/iot/blob/main/src/devices/README.md
-
-#using Iot.Device.DHTxx
-
-// restart and reconfigure if a configuration parameter changed
-When.ModuleParameterChanged((module, property) =&gt; {
-  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
-    Program.Restart();
-  }
-  // returning true, will route event to other listeners
-  return true;
-});
-
-var notificationButtons = " [program_configure,program_disable]";
-var pin = (int)Program.Option("GPIO.Pin").DecimalValue;
-if (pin &lt;= 0) {
-  Program.Notify("Data pin not selected." + notificationButtons);
-  Pause(10);
-  return;
-}
-
-var moduleDomain = "Components.DHT11";
-var moduleAddress = pin.ToString(); // get GPIO#
-Program.AddModule(moduleDomain, moduleAddress, "Sensor");
-var dhtModule = Modules
-    .InDomain(moduleDomain)
-    .WithAddress(moduleAddress).Get();
-
-while (Program.IsEnabled)
-{
-
-
-try {
-
-
-  using (Dht11 dht = new Dht11(pin))
-  {
-      Temperature temperature = default;
-      RelativeHumidity humidity = default;
-      bool success = dht.TryReadHumidity(out humidity)
-                      &amp;&amp; dht.TryReadTemperature(out temperature);
-      if (success)
-      {
-          // data read succesfully
-          dhtModule
-            .Emit("Sensor.Humidity", humidity.Percent)
-            .Emit("Sensor.Temperature", temperature.DegreesCelsius);
-      }
-      else
-      {
-          Program.Notify("Could not read data from sensor." + notificationButtons);
-      }
-  }
-
-} catch (Exception e) {
-  Program.Notify("Error." + e.Message);
-}
-
-
-  var pause = Program.Option("UpdateInterval").DecimalValue;
-  if (pause == 0) pause = 60; // default pause is 1 minute
-  Pause(pause);
-}
-</ScriptSource>
-    <ScriptContext />
-    <ScriptErrors />
-    <Data />
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-iot-net</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
-      <Id>dht-11-sensor</Id>
-      <Version>1.0.0</Version>
-      <Required>false</Required>
-      <Checksum>17935A6F55B291167A8255830C967134</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>701</Address>
-    <Name>DHT-11 Sensor IoT</Name>
-    <Description>Read temperature and humidity from a DHT-11 connected to GPIO.
-</Description>
-    <Group>Raspberry Pi</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>true</Cloneable>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>var gpio_pins = new string[]{
-	"GPIO17 (pin 11)=17",
-	"GPIO27 (pin 13)=27",
-	"GPIO22 (pin 15)=22",
-
-	"GPIO4 (pin 7)=4",
-	"GPIO5 (pin 29)=5",
-	"GPIO6 (pin 31)=6",
-	"GPIO13 (pin 33)=13",
-	"GPIO19 (pin 35)=19",
-	"GPIO26 (pin 37)=26",
-
-	"GPIO23 (pin 16)=23",
-	"GPIO24 (pin 18)=24",
-	"GPIO25 (pin 22)=25",
-
-	"GPIO12 (pin 32)=12",
-	"GPIO16 (pin 36)=16",
-//	"GPIO20 (pin 38)=20", // &lt;-- this pin seems to be used by the system
-	"GPIO21 (pin 40)=21"
+var sensor_devices = new string[]{
+	"DHT-10=10",
+	"DHT-11=11",
+	"DHT-12=12",
+	"DHT-21=21",
+	"DHT-22=22",
 };
 
 Program.Setup(() =&gt; {
   Program
+    .AddOption("DHT.Device", "", "DHT Device", "select:" + string.Join(",", sensor_devices))
     .AddOption("GPIO.Pin", "", "Pin number", "select:" + string.Join(",", gpio_pins))
     .AddOption("UpdateInterval", "60", "Update Interval (seconds)", "slider:10:3600:10");
 });
@@ -157,8 +46,11 @@ Program.Run();
 //   https://learn.microsoft.com/en-us/dotnet/iot/intro
 // Device Bindings:
 //   https://github.com/dotnet/iot/blob/main/src/devices/README.md
+// DHT-XX documentation
+//   https://github.com/dotnet/iot/tree/main/src/devices/Dhtxx
 
 #using Iot.Device.DHTxx
+
 
 // restart and reconfigure if a configuration parameter changed
 When.ModuleParameterChanged((module, property) =&gt; {
@@ -170,6 +62,14 @@ When.ModuleParameterChanged((module, property) =&gt; {
 });
 
 var notificationButtons = " [program_configure,program_disable]";
+
+var sensorType = (int)Program.Option("DHT.Device").DecimalValue;
+if (sensorType &lt;= 0) {
+  Program.Notify("DHT device type not selected." + notificationButtons);
+  Pause(10);
+  return;
+}
+
 var pin = (int)Program.Option("GPIO.Pin").DecimalValue;
 if (pin &lt;= 0) {
   Program.Notify("Data pin not selected." + notificationButtons);
@@ -177,19 +77,19 @@ if (pin &lt;= 0) {
   return;
 }
 
-var moduleDomain = "Components.DHT22";
+var moduleDomain = "Components.DHT" + sensorType;
 var moduleAddress = pin.ToString(); // get GPIO#
 Program.AddModule(moduleDomain, moduleAddress, "Sensor");
 var dhtModule = Modules
     .InDomain(moduleDomain)
     .WithAddress(moduleAddress).Get();
 
-DhtData previousData = null;
 while (Program.IsEnabled)
 {
+
   try {
 
-    using (Dht22 dht = new Dht22(pin))
+    using (DhtBase dht = AllocateSensor(sensorType, pin))
     {
         Temperature temperature = default;
         RelativeHumidity humidity = default;
@@ -198,18 +98,9 @@ while (Program.IsEnabled)
         if (success)
         {
             // data read succesfully
-            if (previousData == null
-              || (Math.Abs(humidity.Percent - previousData.Humidity.Percent) &lt; 20
-                &amp;&amp; (Math.Abs(temperature.DegreesCelsius - previousData.Temperature.DegreesCelsius) &lt; 8)))
-            {
-              dhtModule
-                .Emit("Sensor.Humidity", humidity.Percent)
-                .Emit("Sensor.Temperature", temperature.DegreesCelsius);
-            }
-            previousData = new DhtData() {
-              Temperature = temperature,
-              Humidity = humidity
-            };
+            dhtModule
+              .Emit("Sensor.Humidity", humidity.Percent)
+              .Emit("Sensor.Temperature", temperature.DegreesCelsius);
         }
         else
         {
@@ -226,32 +117,58 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptContext>class DhtData {
-    public Temperature Temperature;
-    public RelativeHumidity Humidity;
-}</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptContext>#using Iot.Device.DHTxx
+
+DhtBase AllocateSensor(int sensorType, int pin) {
+    switch(sensorType) {
+        case 10:
+        {
+            I2cConnectionSettings settings = new I2cConnectionSettings(1, Dht10.DefaultI2cAddress);
+            I2cDevice device = I2cDevice.Create(settings);
+            return new Dht10(device);
+        }
+        case 11:
+            return new Dht11(pin);
+        case 12:
+            if (pin == 1)
+            {
+                // I2C
+                I2cConnectionSettings settings = new I2cConnectionSettings(1, Dht12.DefaultI2cAddress);
+                I2cDevice device = I2cDevice.Create(settings);
+                return new Dht12(device);
+            }
+            else return new Dht12(pin);
+        case 21:
+            return new Dht21(pin);
+        case 22:
+            return new Dht22(pin);
+        default:
+            return new Dht11(pin);
+    }
+}
+</ScriptContext>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-iot-net</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
-      <Id>dht-22-sensor</Id>
-      <Version>1.0.1</Version>
+      <Id>dht-xx-sensor</Id>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>08ACE658D82D76A0F2813D8FDFC7C274</Checksum>
+      <Checksum>CA36EB2FA7C8E903EC36CA6D9B2E7C05</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>702</Address>
-    <Name>DHT-22 Sensor IoT</Name>
-    <Description>Read temperature and humidity from a DHT-22 connected to GPIO.
+    <Address>701</Address>
+    <Name>DHT-xx Sensor</Name>
+    <Description>Read temperature and humidity from a DHT-11 connected to GPIO.
 </Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// Based .NET IoT Libraries
@@ -350,11 +267,9 @@ if (pinMode == PinMode.Output)
 
     var controlOn = new Action&lt;ModuleHelper&gt;((m) =&gt; {
         controller.Write(pin, PinValue.High);
-        m.Emit("Status.Level", 1);
     });
     var controlOff = new Action&lt;ModuleHelper&gt;((m) =&gt; {
         controller.Write(pin, PinValue.Low);
-        m.Emit("Status.Level", 0);
     });
 
     // Handle web service API
@@ -395,9 +310,9 @@ Program.GoBackground();
       <PackageId>homegenie-iot-net</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>gpio-pin</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>7EFCCA46A94A656A65E9393588A20880</Checksum>
+      <Checksum>CE7FE0EF45504546FE390746848AEE9F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>700</Address>

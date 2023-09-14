@@ -108,6 +108,9 @@ namespace HomeGenie.Automation.Engines
             ProgramBlock.ScriptErrors = "";
             ProgramBlock.IsEnabled = false;
 
+            HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus,
+                "Compile");
+
             CleanupFiles();
 
             // DO NOT CHANGE THE FOLLOWING LINES OF CODE

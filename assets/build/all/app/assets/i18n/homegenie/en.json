@@ -172,14 +172,20 @@
     "Running",
   "program_status_background":
     "Background",
+  "program_status_stopping":
+    "Stopping",
   "program_status_stopped":
     "Stopped",
+  "program_status_interrupted":
+    "Interrupted",
   "program_status_disabled":
     "Disabled",
   "program_status_enabled":
     "Enabled",
   "program_status_broken":
     "Broken",
+  "program_status_compile":
+    "Compile",
   "automation_programming_guide":
     "Programming guide'",
   "tap_to_disable":
