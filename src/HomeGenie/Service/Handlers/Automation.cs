@@ -456,13 +456,14 @@ namespace HomeGenie.Service.Handlers
                     if (newProgram != null)
                     {
                         newProgram.Address = homegenie.ProgramManager.GeneratePid();
+                        // add new program: this must be done before compiling, otherwise will throw an error due to HomeGenie service reference not set
+                        homegenie.ProgramManager.ProgramAdd(newProgram);
                         if (newProgram.Type.ToLower() == "visual" || newProgram.Type.ToLower() == "csharp")
                         {
                             (newProgram.Engine as CSharpEngine)?.CleanupFiles();
                             (newProgram.Engine as CSharpEngine)?.Compile();
                         }
                         newProgram.IsEnabled = true;
-                        homegenie.ProgramManager.ProgramAdd(newProgram);
                         homegenie.UpdateProgramsDatabase();
                         request.ResponseData = new ResponseText(newProgram.Address.ToString());
                     }
