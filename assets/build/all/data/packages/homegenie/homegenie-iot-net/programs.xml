@@ -147,7 +147,7 @@ DhtBase AllocateSensor(int sensorType, int pin) {
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -161,7 +161,7 @@ DhtBase AllocateSensor(int sensorType, int pin) {
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>701</Address>
     <Name>DHT-xx Sensor</Name>
-    <Description>Read temperature and humidity from a DHT-11 connected to GPIO.
+    <Description>Read temperature and humidity from a DHT-xx connected to GPIO or I2C.
 </Description>
     <Group>Raspberry Pi</Group>
     <Features />
@@ -303,7 +303,7 @@ else
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -318,7 +318,6 @@ Program.GoBackground();
     <Address>700</Address>
     <Name>GPIO Pin v.2</Name>
     <Description>Configurable GPIO pin as binary input sensor or output switch.
-(.NET IoT bindings)
 </Description>
     <Group>Raspberry Pi</Group>
     <Features />

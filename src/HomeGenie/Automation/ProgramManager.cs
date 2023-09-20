@@ -140,6 +140,9 @@ namespace HomeGenie.Automation
                 WizardEngine.ConvertToVisualCode(hgService, program);
             }
             automationPrograms.Add(program);
+            // remove cached modules of deleted programs that had same address of this new one
+            HomeGenie.VirtualModules.RemoveAll((pm) =>
+                pm.Address == program.Address.ToString() || pm.ParentId == program.Address.ToString());
             program.EnabledStateChanged += program_EnabledStateChanged;
             program.Engine.SetHost(hgService);
             RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Added");
@@ -159,6 +162,9 @@ namespace HomeGenie.Automation
             RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Removed");
             program.IsEnabled = false;
             automationPrograms.Remove(program);
+            // delete virtual modules
+            HomeGenie.VirtualModules.RemoveAll((pm) =>
+                pm.Address == program.Address.ToString() || pm.ParentId == program.Address.ToString());
             // delete program files
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
             // remove csharp assembly

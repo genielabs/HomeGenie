@@ -198,6 +198,13 @@ namespace HomeGenie
             return programHelper;
         }
 
+        /// <summary>
+        /// Check for system updates. If an update is available it will be notified in the UI.
+        /// </summary>
+        public void UpdateCheck()
+        {
+            homegenie.UpdateChecker.Check();
+        }
     }
 }
 
