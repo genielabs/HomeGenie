@@ -1101,6 +1101,7 @@ namespace HomeGenie.Service
         internal void modules_RefreshPrograms()
         {
                 // Refresh ProgramEngine program modules
+                lock (systemModules.LockObject)
                 if (masterControlProgram != null)
                 {
                     var modules = new List<Module>(systemModules);
@@ -1117,8 +1118,7 @@ namespace HomeGenie.Service
                                 // only removes program's module if the program kind is "scenario",
                                 // while keep it for other types in order to hold program's configuration
                                 // that is stored as module's parameters
-                                lock (systemModules.LockObject)
-                                    systemModules.Remove(module);
+                                systemModules.Remove(module);
                                 continue;
                             }
                             if (module == null && !program.IsEnabled)
@@ -1143,8 +1143,7 @@ namespace HomeGenie.Service
                                         "homegenie/generic/program"
                                     );
                                 }
-                                lock (systemModules.LockObject)
-                                    systemModules.Add(module);
+                                systemModules.Add(module);
                             }
                             module.Address = program.Address.ToString();
                             module.DeviceType = ModuleTypes.Program;
@@ -1230,7 +1229,11 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshAll()
         {
-            systemModules.RemoveAll(m => m == null); // <-- dunno why but sometimes it happen to have null entries causing exceptions
+            lock (systemModules.LockObject)
+            {
+                systemModules.RemoveAll(m =>
+                    m == null); // <-- dunno why but sometimes it happen to have null entries causing exceptions
+            }
 
             // Refresh all MIG modules
             foreach (var iface in migService.Interfaces)
@@ -1250,67 +1253,70 @@ namespace HomeGenie.Service
 
         private void modules_RefreshInterface(MigInterface iface)
         {
-            if (migService.Configuration.GetInterface(iface.GetDomain()).IsEnabled)
+            lock (systemModules.LockObject)
             {
-                var interfaceModules = iface.GetModules();
-                // delete removed modules
-                var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain() && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
-                foreach (var mod in deleted)
+                if (migService.Configuration.GetInterface(iface.GetDomain()).IsEnabled)
                 {
-                    // only "real" modules defined by mig interfaces are considered
-                    var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
-                    if (virtualParam == null || virtualParam.DecimalValue == 0)
+                    var interfaceModules = iface.GetModules();
+                    // delete removed modules
+                    var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain() && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
+                    foreach (var mod in deleted)
                     {
-                        Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
-                        if (garbaged != null) modulesGarbage.Remove(garbaged);
-                        modulesGarbage.Add(mod);
-                        systemModules.Remove(mod);
-                    }
-                }
-                if (interfaceModules.Count > 0)
-                {
-                    foreach (var migModule in interfaceModules)
-                    {
-                        Module module = systemModules.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
-                        if (module == null)
+                        // only "real" modules defined by mig interfaces are considered
+                        var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
+                        if (virtualParam == null || virtualParam.DecimalValue == 0)
                         {
-                            // try restoring from garbage
-                            module = modulesGarbage.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
-                            if (module != null)
-                            {
-                                systemModules.Add(module);
-                            }
-                            else
-                            {
-                                module = new Module();
-                                module.Domain = migModule.Domain;
-                                module.Address = migModule.Address;
-                                systemModules.Add(module);
-                            }
-                        }
-                        if (String.IsNullOrEmpty(module.Description))
-                        {
-                            module.Description = migModule.Description;
-                        }
-                        if (module.DeviceType == ModuleTypes.Generic && migModule.CustomData != null && migModule.CustomData.Type != null)
-                        {
-                            module.DeviceType = migModule.CustomData.Type;
+                            Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
+                            if (garbaged != null) modulesGarbage.Remove(garbaged);
+                            modulesGarbage.Add(mod);
+                            systemModules.Remove(mod);
                         }
                     }
-                }
-            }
-            else
-            {
-                var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain());
-                foreach (var mod in deleted)
-                {
-                    var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
-                    if (virtualParam == null || virtualParam.DecimalValue == 0)
+                    if (interfaceModules.Count > 0)
                     {
-                        Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
-                        if (garbaged != null) modulesGarbage.Remove(garbaged);
-                        modulesGarbage.Add(mod);
-                        systemModules.Remove(mod);
+                        foreach (var migModule in interfaceModules)
+                        {
+                            Module module = systemModules.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
+                            if (module == null)
+                            {
+                                // try restoring from garbage
+                                module = modulesGarbage.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
+                                if (module != null)
+                                {
+                                    systemModules.Add(module);
+                                }
+                                else
+                                {
+                                    module = new Module();
+                                    module.Domain = migModule.Domain;
+                                    module.Address = migModule.Address;
+                                    systemModules.Add(module);
+                                }
+                            }
+                            if (String.IsNullOrEmpty(module.Description))
+                            {
+                                module.Description = migModule.Description;
+                            }
+                            if (module.DeviceType == ModuleTypes.Generic && migModule.CustomData != null && migModule.CustomData.Type != null)
+                            {
+                                module.DeviceType = migModule.CustomData.Type;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain());
+                    foreach (var mod in deleted)
+                    {
+                        var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
+                        if (virtualParam == null || virtualParam.DecimalValue == 0)
+                        {
+                            Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
+                            if (garbaged != null) modulesGarbage.Remove(garbaged);
+                            modulesGarbage.Add(mod);
+                            systemModules.Remove(mod);
+                        }
                     }
                 }
             }
@@ -1429,8 +1435,30 @@ namespace HomeGenie.Service
                         }
                     }
                     modulesGarbage.Clear();
-                    systemModules.Clear();
-                    systemModules = modules;
+                    // prevent duplicates
+                    lock (systemModules.LockObject)
+                    {
+                        systemModules.Clear();
+                        foreach (var m in modules)
+                        {
+                            Module module = systemModules.Find(o => o.Domain == m.Domain && o.Address == m.Address);
+                            if (module == null)
+                            {
+                                systemModules.Add(m);
+                            }
+                            else
+                            {
+                                var warningEvent = new MigEvent(
+                                    Domains.HomeAutomation_HomeGenie,
+                                    "LoadModules()",
+                                    "Ignoring module duplicate",
+                                    "SystemMessage.Warning",
+                                    m.Domain + ":" + m.Address
+                                );
+                                MigService.Log.Warn(warningEvent);
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
