@@ -208,6 +208,12 @@
     "\"Main\" code is empty.\n\nUse the \"Visual code\" editor to generate this code:\n- Open the category \"Program\" from the command palette on the left\n- Drag a block of type \"Main\" in the visual code workspace\n- Add inside it other code blocks to implement actions and logic of this program\n\nThe program \"Main\" can be either run manually or auto-started based on conditions eventually given in the Setup code.",
   "setup_code_empty_note":
     "\"Setup\" code is empty.\n\nUse the \"Visual code\" editor to generate this code:\n- Open the category \"Program\" from the command palette on the left\n- Drag a block of type \"Setup\" in the visual code workspace\n- Add inside it other code blocks to determine the conditions that will trigger \"Main\" code execution\n\nThis code gets evaluated everytime a new event occurs and at least once a minute.",
+  "capture_commands":
+    "Capture commands",
+  "capture_commands_pause":
+    "Commands pause",
+  "select_modules":
+    "Select modules",
 " ": "------------------------------------------",
   "$options": {
 
