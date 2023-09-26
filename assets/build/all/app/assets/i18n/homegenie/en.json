@@ -210,10 +210,14 @@
     "\"Setup\" code is empty.\n\nUse the \"Visual code\" editor to generate this code:\n- Open the category \"Program\" from the command palette on the left\n- Drag a block of type \"Setup\" in the visual code workspace\n- Add inside it other code blocks to determine the conditions that will trigger \"Main\" code execution\n\nThis code gets evaluated everytime a new event occurs and at least once a minute.",
   "capture_commands":
     "Capture commands",
+  "capture_commands_description":
+    "Add all commands performed manually on widgets to the program.",
   "capture_commands_pause":
-    "Commands pause",
-  "select_modules":
-    "Select modules",
+    "Pause between commands",
+  "capture_pause_none":
+    "None",
+  "capture_pause_asis":
+    "As is",
 " ": "------------------------------------------",
   "$options": {
 

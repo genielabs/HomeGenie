@@ -305,16 +305,6 @@ namespace HomeGenie.Service
                 // Automation Programs can eventually override MIG response
                 response = r;
             }
-            //
-            // Macro Recording
-            //
-            // TODO: find a better solution for this....
-            // TODO: it was: migService_ServiceRequestPostProcess(this, new ProcessRequestEventArgs(cmd));
-            // TODO: !IMPORTANT!
-            if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && cmd != null && cmd.Command != null && (cmd.Command.StartsWith("Control.") || (cmd.Command.StartsWith("AvMedia.") && cmd.Command != "AvMedia.Browse" && cmd.Command != "AvMedia.GetUri")))
-            {
-                masterControlProgram.MacroRecorder.AddCommand(cmd);
-            }
             return response;
         }
 
@@ -556,12 +546,6 @@ namespace HomeGenie.Service
             if (response != null)
             {
                 args.Request.ResponseData = response;
-            }
-
-            // Macro Recording
-            if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && command != null && command.Command != null && (command.Command.StartsWith("Control.") || (command.Command.StartsWith("AvMedia.") && command.Command != "AvMedia.Browse" && command.Command != "AvMedia.GetUri")))
-            {
-                masterControlProgram.MacroRecorder.AddCommand(command);
             }
         }
 

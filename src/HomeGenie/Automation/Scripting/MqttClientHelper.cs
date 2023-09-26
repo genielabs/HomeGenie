@@ -349,9 +349,7 @@ namespace HomeGenie.Automation.Scripting
                 .WithCleanSession();
             if (usingWebSockets)
             {
-                builder.WithWebSocketServer(endPoint.Address + ":" + endPoint.Port + "/mqtt");
-                // TODO: WARNING -- upgrading to MQTTnet 4.3.0.858 WebSocket connection won't work anymore
-                //builder.WithWebSocketServer(o => o.WithUri(endPoint.Address + ":" + endPoint.Port + "/mqtt"));
+                builder.WithWebSocketServer(o => o.WithUri(endPoint.Address + ":" + endPoint.Port + "/mqtt"));
             }
             else
             {
@@ -363,10 +361,7 @@ namespace HomeGenie.Automation.Scripting
             }
             if (useTls)
             {
-                var tlsParameters = new MqttClientOptionsBuilderTlsParameters {UseTls = true};
-                builder.WithTls(tlsParameters);
-                // TODO: WARNING -- upgrading to MQTTnet 4.3.0.858 WebSocket connection won't work anymore
-                //builder.WithTlsOptions(o => o.UseTls());
+                builder.WithTlsOptions(o => o.UseTls());
             }
             return builder;
         }

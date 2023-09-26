@@ -41,9 +41,7 @@ namespace HomeGenie.Automation
         private readonly TsList<ProgramBlock> automationPrograms = new TsList<ProgramBlock>();
         private readonly HomeGenieService hgService;
         private readonly SchedulerService schedulerService;
-        private readonly MacroRecorder macroRecorder;
 
-        //private object lockObject = new object();
         private bool isEngineEnabled;
 
         public const int USERSPACE_PROGRAMS_START = 1000;
@@ -59,7 +57,6 @@ namespace HomeGenie.Automation
         public ProgramManager(HomeGenieService hg)
         {
             hgService = hg;
-            macroRecorder = new MacroRecorder(this);
             schedulerService = new SchedulerService(this);
         }
 
@@ -96,11 +93,6 @@ namespace HomeGenie.Automation
         public HomeGenieService HomeGenie
         {
             get { return hgService; }
-        }
-
-        public MacroRecorder MacroRecorder
-        {
-            get { return macroRecorder; }
         }
 
         public SchedulerService SchedulerService

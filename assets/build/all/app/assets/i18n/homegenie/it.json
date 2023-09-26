@@ -210,10 +210,14 @@
     "Il codice \"Setup\" è vuoto.\n\nUsa l'editor di \"Codice visuale\" per generare questo codice:\n- Apri la categoria \"Programma\" dalla tavolozza dei comandi sulla sinistra\n- Trascina un blocco di tipo \"Setup\" nell'area di lavoro del codice visuale\n- Aggiungi al suo interno altri blocchi di codice per stabilire le condizioni che innescheranno l'avvio automatico del codice \"Main\"\n\nQuesto codice viene valutato ogni volta che si verifica un evento ed almeno una volta al minuto.",
   "capture_commands":
     "Cattura comandi",
+  "capture_commands_description":
+    "Aggiungi al programma tutti i comandi eseguiti manualmente sui widget.",
   "capture_commands_pause":
-    "Pausa comandi",
-  "select_modules":
-    "Seleziona moduli",
+    "Pausa tra i comandi",
+  "capture_pause_none":
+    "Nessuna",
+  "capture_pause_asis":
+    "Così com'è",
 " ": "------------------------------------------",
     "$options":
     {

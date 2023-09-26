@@ -60,53 +60,7 @@ namespace HomeGenie.Service.Handlers
             string sketchFile = "", sketchFolder = "";
             //
             request.ResponseData = new ResponseStatus(Status.Ok);
-            if (migCommand.Command.StartsWith("Macro."))
-            {
-                switch (migCommand.Command)
-                {
-                case "Macro.Record":
-                    homegenie.ProgramManager.MacroRecorder.RecordingEnable();
-                    break;
-                case "Macro.Save":
-                    newProgram = homegenie.ProgramManager.MacroRecorder.SaveMacro(migCommand.GetOption(1));
-                    request.ResponseData = newProgram.Address.ToString();
-                    break;
-                case "Macro.Discard":
-                    homegenie.ProgramManager.MacroRecorder.RecordingDisable();
-                    break;
-                case "Macro.SetDelay":
-                    switch (migCommand.GetOption(0).ToLower())
-                    {
-                    case "none":
-                        homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.None;
-                        break;
-
-                    case "mimic":
-                        homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.Mimic;
-                        break;
-
-                    case "fixed":
-                        double secs = double.Parse(
-                            migCommand.GetOption(1),
-                            System.Globalization.CultureInfo.InvariantCulture
-                        );
-                        homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.Fixed;
-                        homegenie.ProgramManager.MacroRecorder.DelaySeconds = secs;
-                        break;
-                    default:
-                        request.ResponseData = new ResponseStatus(Status.Error);
-                        break;
-                    }
-                    break;
-                case "Macro.GetDelay":
-                    request.ResponseData = "{ \"DelayType\" : \"" + homegenie.ProgramManager.MacroRecorder.DelayType + "\", \"DelayOptions\" : \"" + homegenie.ProgramManager.MacroRecorder.DelaySeconds + "\" }";
-                    break;
-                default:
-                    request.ResponseData = new ResponseStatus(Status.Error);
-                    break;
-                }
-            }
-            else if (migCommand.Command.StartsWith("Groups."))
+            if (migCommand.Command.StartsWith("Groups."))
             {
                 string levelValue = "0", commandValue = null;
                 switch (migCommand.Command)
