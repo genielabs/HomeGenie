@@ -98,8 +98,6 @@ namespace HomeGenie.Automation
         public bool WillRun { get; set; }
         [XmlIgnore]
         public bool IsRunning { get; set; }
-        [XmlIgnore, JsonIgnore]
-        public object OperationLock = new object();
 
         public ProgramBlock()
         {

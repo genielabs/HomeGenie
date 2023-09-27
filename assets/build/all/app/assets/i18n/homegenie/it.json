@@ -162,6 +162,8 @@
     "Interrompi programma",
   "run_program":
     "Esegui programma",
+  "enable_to_run_program":
+    "Abilita il programma per eseguirlo",
   "program_status_added":
     "Aggiunto",
   "program_status_idle":

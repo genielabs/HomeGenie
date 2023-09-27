@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
@@ -110,6 +111,9 @@ namespace HomeGenie.Automation.Engines
                 StopProgram();
             }
 
+            if (!ProgramBlock.IsEnabled)
+                return;
+            
             ProgramBlock.IsRunning = true;
             HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Running");
 
@@ -187,7 +191,6 @@ namespace HomeGenie.Automation.Engines
                 StopProgram();
                 HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Idle");
             }
-            lastProgramRunTs = DateTime.Now;
         }
 
         public void StopProgram()
@@ -267,10 +270,6 @@ namespace HomeGenie.Automation.Engines
 
         #endregion
 
-        private int loopPreventCount = 0;
-        private readonly int loopPreventMax = 50;
-        private DateTime lastProgramRunTs = DateTime.Now;
-
         private void CheckProgramSchedule()
         {
             // set initial state to signaled
@@ -293,33 +292,15 @@ namespace HomeGenie.Automation.Engines
                 {
                     continue;
                 }
-                if (WillProgramRun())
+                // Run asynchronously to prevent RoutedEventAck loops
+                Task.Run(() =>
                 {
-                    ProgramBlock.WillRun = false;
-                    if ((DateTime.Now - lastProgramRunTs).TotalMilliseconds < 20)
-                        loopPreventCount++;
-                    else
-                        loopPreventCount = 0;
-                    if (loopPreventCount < loopPreventMax)
-                        StartProgram(null);
-                    else
+                    if (ProgramBlock.IsEnabled && WillProgramRun())
                     {
-                        var errorMessage = "Program has been disabled because it was looping/spawning too fast.";
-                        List<ProgramError> error = new List<ProgramError>()
-                        {
-                            new ProgramError()
-                            {
-                                CodeBlock = CodeBlockEnum.TC,
-                                ErrorNumber = "0",
-                                ErrorMessage = errorMessage
-                            }
-                        };
-                        ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        ProgramBlock.IsEnabled = false;
-                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
-                            CodeBlockEnum.TC + errorMessage);
+                        ProgramBlock.WillRun = false;
+                        StartProgram(null);
                     }
-                }
+                }).Wait();
             }
         }
 
@@ -329,40 +310,38 @@ namespace HomeGenie.Automation.Engines
             // evaluate and get result from the setup code
             try
             {
-                lock (ProgramBlock.OperationLock)
+                var result = Setup();
+                if (result != null && result.Exception != null)
                 {
-                    var result = Setup();
-                    if (result != null && result.Exception != null)
-                    {
-                        // runtime error occurred, script is being disabled
-                        // so user can notice and fix it
-                        var error = new List<ProgramError> {GetFormattedError(result.Exception, true)};
-                        ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        _log.Error(result.Exception, "Error while running setup code in program {0}",
-                            ProgramBlock.Address);
-                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
-                            PrepareExceptionMessage(CodeBlockEnum.TC, result.Exception));
+                    // runtime error occurred, script is being disabled
+                    // so user can notice and fix it
+                    var error = new List<ProgramError> {GetFormattedError(result.Exception, true)};
+                    ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
+                    _log.Error(result.Exception, "Error while running setup code in program {0}",
+                        ProgramBlock.Address);
+                    HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                        PrepareExceptionMessage(CodeBlockEnum.TC, result.Exception));
 
-                        TryToAutoRestart();
-                    }
-                    else
-                    {
-                        isConditionSatisfied = (result != null ? (bool) result.ReturnValue : false);
-                    }
+                    TryToAutoRestart();
+                }
+                else
+                {
+                    isConditionSatisfied = (result != null ? (bool) result.ReturnValue : false);
                 }
             }
             catch (Exception ex)
             {
-                // a runtime error occured
                 if (ex.GetType() == typeof(TargetException) || ex is ThreadAbortException || ex is ThreadInterruptedException)
+                {
                     return isConditionSatisfied && ProgramBlock.IsEnabled;
+                }
+                // a runtime error occured
                 List<ProgramError> error = new List<ProgramError>() {GetFormattedError(ex, true)};
                 ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
                 HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
                     PrepareExceptionMessage(CodeBlockEnum.TC, ex));
                 TryToAutoRestart();
             }
-
             return isConditionSatisfied && ProgramBlock.IsEnabled;
         }
 

@@ -162,6 +162,8 @@
     "Stop program",
   "run_program":
     "Run program",
+  "enable_to_run_program":
+    "Enable program in order to run it",
   "program_status_added":
     "Added",
   "program_status_idle":
