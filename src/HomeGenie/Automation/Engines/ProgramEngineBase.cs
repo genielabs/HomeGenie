@@ -283,7 +283,7 @@ namespace HomeGenie.Automation.Engines
                 }
                 catch (Exception e)
                 {
-                    _log.Error(e.Message, "Error in program scheduler",
+                    _log.Error(e.Message, "Program Scheduler Exception",
                         ProgramBlock.Address);
                     //throw;
                 }
@@ -293,14 +293,23 @@ namespace HomeGenie.Automation.Engines
                     continue;
                 }
                 // Run asynchronously to prevent RoutedEventAck loops
-                Task.Run(() =>
+                try
                 {
-                    if (ProgramBlock.IsEnabled && WillProgramRun())
+                    Task.Run(() =>
                     {
-                        ProgramBlock.WillRun = false;
-                        StartProgram(null);
-                    }
-                }).Wait();
+                        if (ProgramBlock.IsEnabled && WillProgramRun())
+                        {
+                            ProgramBlock.WillRun = false;
+                            StartProgram(null);
+                        }
+                    }).Wait();
+                }
+                catch (Exception e)
+                {
+                    _log.Error(e.Message, "Program Scheduler Exception",
+                        ProgramBlock.Address);
+                    //throw;
+                }
             }
         }
 
