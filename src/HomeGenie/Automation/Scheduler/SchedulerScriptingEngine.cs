@@ -179,7 +179,7 @@ namespace HomeGenie.Automation.Scheduler
                 homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
                     Properties.SchedulerScriptStatus, eventItem.Name + ":End");
             });
-
+            programThread.IsBackground = true;
             try
             {
                 programThread.Start();

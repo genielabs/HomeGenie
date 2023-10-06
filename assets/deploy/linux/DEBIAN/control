@@ -10,7 +10,7 @@ Recommends: ca-certificates-mono
 Suggests: arduino-mk, empty-expect
 Installed-Size: %installed_size%
 Maintainer: Generoso Martello <gene@homegenie.it>
-Homepage: https://www.homegenie.it
+Homepage: https://homegenie.it
 Conflicts: 
 Replaces: 
 Provides: 

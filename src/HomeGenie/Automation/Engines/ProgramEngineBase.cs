@@ -75,6 +75,7 @@ namespace HomeGenie.Automation.Engines
             StopScheduler();
             HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Idle");
             _startupThread = new Thread(CheckProgramSchedule);
+            _startupThread.IsBackground = true;
             _startupThread.Start();
         }
 
@@ -181,7 +182,7 @@ namespace HomeGenie.Automation.Engines
                     }
                 }
             });
-
+            _programThread.IsBackground = true;
             try
             {
                 _programThread.Start();
@@ -228,7 +229,7 @@ namespace HomeGenie.Automation.Engines
             HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Stopping");
             try
             {
-                if (!_programThread.Join(HomeGenie.ProgramManager.Enabled ? 15000: 1000))
+                if (!_programThread.Join(HomeGenie.ProgramManager.Enabled ? 5000: 1000))
                 {
                     _programThread.Interrupt();
                 }

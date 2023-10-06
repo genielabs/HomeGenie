@@ -695,6 +695,7 @@ namespace HomeGenie.Service
                     HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             });
+            asyncTask.IsBackground = true;
             asyncTask.Start();
             return asyncTask;
         }
