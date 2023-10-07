@@ -93,7 +93,16 @@ namespace HomeGenie.Service
         {
             RebuildPrograms = rebuildPrograms;
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            EnableOutputRedirect();
+            try
+            {
+                EnableOutputRedirect();
+            }
+            catch (Exception e)
+            {
+                // this happens when running as a Windows Service,
+                // output can't be redirected due to:
+                // IOException: "The handle is invalid."
+            }
 
             InitializeSystem();
             Reload();
