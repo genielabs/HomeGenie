@@ -515,7 +515,9 @@ When.ModuleParameterChanged((module, property) =&gt; {
 
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
+    <ScriptSource>var accessLock = new object();
+
+Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
 {
   if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
   {
@@ -524,7 +526,12 @@ Program.Run();
   string webserviceurl = "http://" +
     Program.Option("BridgeAddress").Value + "/api/" +
     Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
-  Program.RunAsyncTask(() =&gt; Net.WebService(webserviceurl).Put( jsonargs ).Call());
+  Program.RunAsyncTask(() =&gt; {
+    lock(accessLock)
+    {
+      Net.WebService(webserviceurl).Put( jsonargs ).Call();
+    }
+  });
   return true;
 };
 
@@ -589,14 +596,14 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
       case "Control.ColorHsb":
         string[] values = parameter.Split(',');
         double transition = 5;
-        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10));
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3], CultureInfo.InvariantCulture) * 10));
         module.Emit("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString());
         module.Emit("Status.ColorHsb", parameter);
         bridgeApiCall(lightNumber, "{ \"on\" : true" +
                       ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) +
                       ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) +
                       ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) +
-                      ", \"transitiontime\" : " + transition.ToString() +  "}");
+                      ", \"transitiontime\" : " + transition.ToString(CultureInfo.InvariantCulture) +  "}");
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
       case "Control.Alert":
@@ -618,16 +625,16 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>philips-hue-bridge</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>23192414D258639D4A3331C918322549</Checksum>
+      <Checksum>085015A81EDA88B1EB73413C5212B558</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
@@ -1026,7 +1033,7 @@ const string SMART_DEVICE_SWITCH_OFF_TIMEOUT = "HomeGenie.SmartLights.SwitchOffT
 
 const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

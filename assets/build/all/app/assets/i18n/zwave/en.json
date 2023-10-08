@@ -58,5 +58,15 @@
     "missing handler":
         "Missing handler",
     "refresh_ports_button":
-        "Refresh ports list"
+        "Refresh ports list",
+    "calibration":
+        "Calibration",
+    "calibrate":
+        "Calibrate",
+    "edit_calibration_parameter":
+        "Edit calibration parameter number",
+    "calibration_parameter_not_set":
+        "Calibration parameter number is not set",
+    "calibration_parameter_number":
+        "Parameter number (see device manual)"
 }

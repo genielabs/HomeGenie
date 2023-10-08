@@ -58,5 +58,15 @@
     "missing handler":
         "Gestore mancante",
     "refresh_ports_button":
-        "Aggiorna elenco porte"
+        "Aggiorna elenco porte",
+    "calibration":
+        "Calibrazione",
+    "calibrate":
+        "Calibra",
+    "edit_calibration_parameter":
+        "Modifica numero parametro calibrazione",
+    "calibration_parameter_not_set":
+        "Numero parametro per la calibrazione non impostato",
+    "calibration_parameter_number":
+        "Numero parametro (vedi manuale dispositivo)"
 }
