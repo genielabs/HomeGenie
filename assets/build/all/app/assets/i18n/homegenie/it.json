@@ -133,6 +133,12 @@
         "Ogni mese",
     "cronwizard_monthselect_selectedmonths":
         "Mesi selezionati",
+    "cronwizard_schedule_set_exact_time":
+      "Imposta ora evento.",
+    "cronwizard_schedule_set_slot_start":
+      "Imposta inizio fascia oraria.",
+    "cronwizard_schedule_set_slot_end":
+      "Inizio alle {{start}}.<br>\nImposta fine fascia oraria.",
     "cronwizard_bindings_define_types_and_modules":
         "Definire tipi e moduli soggetti a questa pianificazione (opzionale)",
     "cronwizard_bindings_select_types":

@@ -133,6 +133,12 @@
         "Every month",
     "cronwizard_monthselect_selectedmonths":
         "Selected months",
+    "cronwizard_schedule_set_exact_time":
+      "Set schedule time.",
+    "cronwizard_schedule_set_slot_start":
+      "Set slot start time.",
+    "cronwizard_schedule_set_slot_end":
+      "Starting at {{start}}.<br>\nSet slot end time.",
     "cronwizard_bindings_define_types_and_modules":
         "Define types and modules that are subject to this schedule (optional)",
     "cronwizard_bindings_select_types":
