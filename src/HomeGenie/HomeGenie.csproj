@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.2" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.11" />
     <PackageReference Include="MIG" Version="1.2.17" />
-    <PackageReference Include="MIG.HomeAutomation" Version="1.2.20" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.2.21" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SerialPortStream" Version="2.4.1" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />

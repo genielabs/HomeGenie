@@ -50,7 +50,7 @@
     <Password></Password>
     <Location>{ name: 'Rome, RM, Italia', latitude: 41.90278349999999, longitude: 12.496365500000024 }</Location>
     <GUID></GUID>
-    <EnableLogFile>false</EnableLogFile>
+    <EnableLogFile>true</EnableLogFile>
   </HomeGenie>
   <MigService>
     <Gateways>
@@ -89,6 +89,8 @@
       <Interface Domain="HomeAutomation.ZigBee" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
+          <Option Name="BaudRate" Value="115200" />
+          <Option Name="FlowControl" Value="0" />
           <Option Name="Driver" Value="conbee" />
         </Options>
       </Interface>

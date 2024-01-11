@@ -31,6 +31,8 @@
         "Porta dispositivo",
     "device_driver":
         "Driver",
+    "flow_control":
+      "Controllo flusso",
     "controller":
         "Controller",
 " ":"--------------- PROGRAMS ------------------",

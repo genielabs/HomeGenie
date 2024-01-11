@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1698777446449,
+  "timestamp": 1704998975781,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.dc8d1bb9433b984a.js",
+        "/app/main.816b6944b06a984b.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.a360d6e45b80c065.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
@@ -445,8 +445,8 @@
     "/app/assets/fonts/Roboto-Latin-400.woff": "fec6225507c70951797db15985fe0bf87195d6ee",
     "/app/assets/fonts/Roboto-Latin-500.woff": "7416b5d46c615d2786a604d71d334b605d41cc73",
     "/app/assets/i18n/en.json": "7b8c1483aff99283392e63621ca654477b7778ac",
-    "/app/assets/i18n/homegenie/en.json": "c05ab675a0d5cf0b73f6550fdc65d3ffc0441cc2",
-    "/app/assets/i18n/homegenie/it.json": "03ad155f8e92023517469e3214c4ca40036bcc41",
+    "/app/assets/i18n/homegenie/en.json": "a7d6453d30d27c14456af31c6ea99f8018349eb6",
+    "/app/assets/i18n/homegenie/it.json": "17b3a8172a4728c0dbc5558e247bf486a03f6d86",
     "/app/assets/i18n/it.json": "ca28e2cbd55046a4c8ccc2fab22c7bb30f35fc25",
     "/app/assets/i18n/module/en.json": "bd1f58f6eeb2e8213bc5dbe316d1252db8aa436f",
     "/app/assets/i18n/module/it.json": "35c4ef9b17591c0ef0283317a3f226c666d908f9",
@@ -759,8 +759,8 @@
     "/app/assets/widgets/weather/images_alt/thunder.svg": "2ace7038dfd663330cecc350d680ef08206d62ff",
     "/app/assets/widgets/weather/images_alt/weather.svg": "c719c09048977fd40688272316b35ddf1bdf89e8",
     "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
-    "/app/index.html": "ae13195d8182a3820f7ab542911d4b9af7451fcc",
-    "/app/main.dc8d1bb9433b984a.js": "9dbeed8d55b81b4d9c5e59f342eb34a744c3dc29",
+    "/app/index.html": "870fd4f509cbf553b47b640cededfc6ea6c6a122",
+    "/app/main.816b6944b06a984b.js": "0f90a07ca0454a85e89d39e991b55f67f35307f4",
     "/app/manifest.webmanifest": "d47bb07a495e27ddf072f8702df373f79b4eb183",
     "/app/polyfills.a360d6e45b80c065.js": "f317e1a3e4bb6a84068c7e1845a2ce8b2f956ee7",
     "/app/runtime.b92e2ca178ebbf4a.js": "b50d841a4c50d466c34aab3267d3fb4afe87dede",
