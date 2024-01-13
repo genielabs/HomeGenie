@@ -1501,8 +1501,8 @@ namespace HomeGenie.Service
             {
                 version = updateChecker.GetCurrentRelease().Version;
             }
-            string modelNumber = "HG-" + version;
-            string standardDeviceType = "HomeAutomationServer";
+            string modelNumber = version;
+            string standardDeviceType = "urn:schemas-glabs-it:device:HomeAutomationServer:1"; //"HomeAutomationServer";
             string uniqueDeviceName = systemConfiguration.HomeGenie.GUID;
             if (String.IsNullOrEmpty(uniqueDeviceName))
             {
