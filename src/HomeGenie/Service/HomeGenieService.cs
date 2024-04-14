@@ -472,13 +472,20 @@ namespace HomeGenie.Service
                 {
                     LogError(ex);
                 }
-                // Prevent event pump from blocking on other worker tasks
+                // Route event to Master Control Program =)
                 if (masterControlProgram != null)
                 {
+                    // Prevent event pump from blocking on other worker tasks
                     Task.Run(() =>
                     {
                         masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
                     }); 
+                }
+                // check if event routing has been disabled for this module
+                var eventsDisable = Utility.ModuleParameterGet(module, Properties.EventsDisable);
+                if (eventsDisable != null && eventsDisable.Value == "1")
+                {
+                    args.EventData.Disabled = true;
                 }
             }
             else
@@ -1267,13 +1274,16 @@ namespace HomeGenie.Service
                     }
                     if (interfaceModules.Count > 0)
                     {
-                        foreach (var migModule in interfaceModules)
+                        for (var i = 0; i < interfaceModules.Count; i++)
                         {
-                            Module module = systemModules.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
+                            var migModule = interfaceModules[i];
+                            Module module = systemModules.Find(o =>
+                                o.Domain == migModule.Domain && o.Address == migModule.Address);
                             if (module == null)
                             {
                                 // try restoring from garbage
-                                module = modulesGarbage.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
+                                module = modulesGarbage.Find(o =>
+                                    o.Domain == migModule.Domain && o.Address == migModule.Address);
                                 if (module != null)
                                 {
                                     systemModules.Add(module);
@@ -1286,11 +1296,14 @@ namespace HomeGenie.Service
                                     systemModules.Add(module);
                                 }
                             }
+
                             if (String.IsNullOrEmpty(module.Description))
                             {
                                 module.Description = migModule.Description;
                             }
-                            if (module.DeviceType == ModuleTypes.Generic && migModule.CustomData != null && migModule.CustomData.Type != null)
+
+                            if (module.DeviceType == ModuleTypes.Generic && migModule.CustomData != null &&
+                                migModule.CustomData.Type != null)
                             {
                                 module.DeviceType = migModule.CustomData.Type;
                             }
@@ -1502,7 +1515,7 @@ namespace HomeGenie.Service
                 version = updateChecker.GetCurrentRelease().Version;
             }
             string modelNumber = version;
-            string standardDeviceType = "urn:schemas-glabs-it:device:HomeAutomationServer:1"; //"HomeAutomationServer";
+            string standardDeviceType = "HomeAutomationServer";  // "urn:schemas-glabs-it:device:HomeAutomationServer:1"
             string uniqueDeviceName = systemConfiguration.HomeGenie.GUID;
             if (String.IsNullOrEmpty(uniqueDeviceName))
             {

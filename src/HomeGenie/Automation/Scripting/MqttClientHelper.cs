@@ -250,7 +250,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 mqttClient.PublishAsync(new MqttApplicationMessage()
                 {
-                    Topic  =topic,
+                    Topic = topic,
                     PayloadSegment = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message)),
                     QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
                     Retain = false
@@ -270,7 +270,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 mqttClient.PublishAsync(new MqttApplicationMessage()
                 {
-                    Topic  =topic,
+                    Topic = topic,
                     PayloadSegment = new ArraySegment<byte>(message),
                     QualityOfServiceLevel = MqttQualityOfServiceLevel.AtLeastOnce,
                     Retain = false

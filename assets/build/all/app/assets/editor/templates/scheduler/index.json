@@ -37,6 +37,24 @@
   },
   {
     "name": {
+      "en": "Set Color",
+      "it": "Imposta colore"
+    },
+    "script": "command.set-color.js",
+    "config": {
+      "color": {
+        "name": {
+          "en": "Color",
+          "it": "Colore"
+        },
+        "type": "color",
+        "value": "#ff00ff",
+        "transform": "rgb:hsb"
+      }
+    }
+  },
+  {
+    "name": {
       "en": "Thermostat Mode",
       "it": "Modalità termostato"
     },

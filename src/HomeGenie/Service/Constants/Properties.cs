@@ -62,6 +62,8 @@ namespace HomeGenie.Service.Constants
             = "InstallProgress.Message";
         public const string InstallProgressUpdate
             = "InstallProgress.Update";
+        public const string EventsDisable
+            = "Events.Disable";
 
         // commonly used parameters
         public const string StatusLevel

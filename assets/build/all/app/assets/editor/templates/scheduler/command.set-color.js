@@ -1,0 +1,1 @@
+﻿$$.boundModules.colorHsb = '$color$';

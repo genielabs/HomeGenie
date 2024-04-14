@@ -131,7 +131,7 @@ namespace HomeGenie.Automation.Scheduler
             get
             {
                 var boundModulesManager = new ModulesManager(homegenie);
-                boundModulesManager.ModulesListCallback = new Func<ModulesManager, TsList<Module>>((sender) =>
+                boundModulesManager.ModulesListCallback = (sender) =>
                 {
                     TsList<Module> modules = new TsList<Module>();
                     foreach (var m in schedulerItem.BoundModules)
@@ -141,7 +141,7 @@ namespace HomeGenie.Automation.Scheduler
                             modules.Add(mod);
                     }
                     return modules;
-                });
+                };
                 return boundModulesManager;
             }
         }
