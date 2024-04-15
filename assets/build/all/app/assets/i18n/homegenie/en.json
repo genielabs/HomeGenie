@@ -161,7 +161,46 @@
         "No action",
     "cronwizard_action_schedule_variable_hint":
         "Use <span class=\"color-primary\">@{{name}}</span> as a variable in cron expressions or use <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in automation programs to reference this event.",
-" ":"--------------- PROGRAM EDITOR ------------------",
+" ":"--------------- SCHEDULER WIZARD ----------------",
+    "scheduler_preset_action_command_turn_on":
+        "Turn on",
+    "scheduler_preset_action_command_turn_off":
+        "Turn off",
+    "scheduler_preset_action_command_set_level":
+        "Set level",
+    "scheduler_preset_action_config_level":
+        "Level",
+    "scheduler_preset_action_command_set_color":
+        "Set color",
+    "scheduler_preset_action_config_color":
+        "Color",
+    "scheduler_preset_action_command_thermostat_mode":
+        "Thermostat mode",
+    "scheduler_preset_action_config_mode":
+        "Mode",
+    "scheduler_preset_action_config_mode_on":
+        "On",
+    "scheduler_preset_action_config_mode_off":
+        "Off",
+    "scheduler_preset_action_config_mode_heat":
+        "Heat",
+    "scheduler_preset_action_config_mode_heat_eco":
+        "Heat economy",
+    "scheduler_preset_action_config_mode_cool":
+        "Cool",
+    "scheduler_preset_action_config_mode_cool_eco":
+        "Cool economy",
+    "scheduler_preset_action_program_run":
+        "Run program",
+    "scheduler_preset_action_config_program":
+        "Program",
+    "scheduler_preset_action_config_options":
+        "Options",
+    "scheduler_preset_action_program_say":
+        "Say",
+    "scheduler_preset_action_config_message":
+        "Message",
+" ":"---------------- PROGRAM EDITOR -----------------",
   "save_and_build":
     "Save and build",
   "toggle_widgets_preview":

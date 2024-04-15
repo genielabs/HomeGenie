@@ -250,6 +250,10 @@ namespace HomeGenie.Service.Handlers
                     var solarTimes = new SolarTimes(DateTime.Now, homegenie.ProgramManager.SchedulerService.Location["latitude"].Value, homegenie.ProgramManager.SchedulerService.Location["longitude"].Value);
                     request.ResponseData = solarTimes;
                     break;
+                case "Scheduling.Templates":
+                    string templatesIndexPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app", "assets", "scheduler", "preset-actions.json");
+                    request.ResponseData = File.ReadAllText(templatesIndexPath);
+                    break;
                 default:
                     request.ResponseData = new ResponseStatus(Status.Error);
                     break;

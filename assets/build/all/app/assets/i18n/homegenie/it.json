@@ -161,6 +161,45 @@
         "Nessuna azione",
     "cronwizard_action_schedule_variable_hint":
         "Utilizza <span class=\"color-primary\">@{{name}}</span> come variabile nelle espressioni cron o utilizza <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> nei programmi di automazione per fare riferimento a questo evento.",
+" ":"--------------- SCHEDULER WIZARD ----------------",
+    "scheduler_preset_action_command_turn_on":
+        "Accendi",
+    "scheduler_preset_action_command_turn_off":
+        "Spegni",
+    "scheduler_preset_action_command_set_level":
+        "Imposta livello",
+    "scheduler_preset_action_config_level":
+        "Livello",
+    "scheduler_preset_action_command_set_color":
+        "Imposta colore",
+    "scheduler_preset_action_config_color":
+        "Colore",
+    "scheduler_preset_action_command_thermostat_mode":
+        "Imposta termostato",
+    "scheduler_preset_action_config_mode":
+        "Modalità",
+    "scheduler_preset_action_config_mode_on":
+        "Acceso",
+    "scheduler_preset_action_config_mode_off":
+        "Spento",
+    "scheduler_preset_action_config_mode_heat":
+        "Caldo",
+    "scheduler_preset_action_config_mode_heat_eco":
+        "Caldo eco",
+    "scheduler_preset_action_config_mode_cool":
+        "Freddo",
+    "scheduler_preset_action_config_mode_cool_eco":
+        "Freddo eco",
+    "scheduler_preset_action_program_run":
+        "Esegui programma",
+    "scheduler_preset_action_config_program":
+        "Programma",
+    "scheduler_preset_action_config_options":
+        "Opzioni",
+    "scheduler_preset_action_program_say":
+        "Parla",
+    "scheduler_preset_action_config_message":
+        "Messaggio",
 " ":"--------------- PROGRAM EDITOR ------------------",
   "save_and_build":
     "Salva e compila",
