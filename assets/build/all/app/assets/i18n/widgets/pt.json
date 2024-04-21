@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Lar",
+    "arm_away": "Ausente"
+  },
+  "$section_label": {
+    "label": "Rótulo",
+    "indicators": "Indicadores",
+    "lights_control": "Luzes",
+    "switches_control": "Comuta"
+  }
+}

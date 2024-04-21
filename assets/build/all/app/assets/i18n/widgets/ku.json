@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Xane",
+    "arm_away": "Serve"
+  },
+  "$section_label": {
+    "label": "Awanasî",
+    "indicators": "Indicators",
+    "lights_control": "Lights",
+    "switches_control": "Switches"
+  }
+}

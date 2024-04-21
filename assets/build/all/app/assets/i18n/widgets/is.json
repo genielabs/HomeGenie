@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Heim",
+    "arm_away": "Burt"
+  },
+  "$section_label": {
+    "label": "Merki",
+    "indicators": "Vísar",
+    "lights_control": "Ljós",
+    "switches_control": "Rofar"
+  }
+}

@@ -60,7 +60,6 @@
   "start": "Start",
   "stop": "Stop",
   "schedule": "Schedule",
-  "scheduling_on": "Scheduling on {{date}}",
   "scheduling_preview_day": "Preview a different day",
   "scheduling_no_occurrences": "No occurrences in the selected day.",
   "scheduling_events": "Scheduled events",

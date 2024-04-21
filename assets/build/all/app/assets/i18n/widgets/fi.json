@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Koti",
+    "arm_away": "Pois"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Indikaattorit",
+    "lights_control": "Valot",
+    "switches_control": "Kytkimet"
+  }
+}

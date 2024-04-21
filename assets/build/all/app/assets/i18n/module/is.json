@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Tímabil",
+  "stats.one_second": "Ein sekúnda",
+  "stats.five_seconds": "5 sekúndur",
+  "stats.ten_seconds": "10 sekúndur",
+  "stats.half_minute": "30 sekúndur",
+  "stats.one_minute": "Ein mínúta",
+  "stats.ten_minutes": "10 mínútur",
+  "stats.half_hour": "30 mínútur",
+  "stats.one_hour": "Ein klukkustund",
+  "stats.three_hours": "3 klst",
+  "stats.six_hours": "6 klst",
+  "stats.twelve_hours": "12 tímar",
+  "stats.twentyfour_hours": "24 klukkustundir",
+  "stats.chart_provider": "Myndaveita"
+}

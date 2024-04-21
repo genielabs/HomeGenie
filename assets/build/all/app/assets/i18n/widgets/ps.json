@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "کور",
+    "arm_away": "لرې"
+  },
+  "$section_label": {
+    "label": "لیبل",
+    "indicators": "شاخصونه",
+    "lights_control": "څراغونه",
+    "switches_control": "سویچونه"
+  }
+}

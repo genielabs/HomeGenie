@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "ගෙදර",
+    "arm_away": "ඉවතට"
+  },
+  "$section_label": {
+    "label": "ලේබලය",
+    "indicators": "දර්ශක",
+    "lights_control": "පහන්",
+    "switches_control": "ස්විචයන්"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Voeg toestel toe",
+  "node_exclusion": "Verwijder apparaat",
+  "operation_timed_out": "Er is een time-out opgetreden in de bewerking.",
+  "node_added": "Knooppunt succesvol toegevoegd",
+  "turn_on_device_to_add": "Schakel het apparaat in en druk indien nodig de koppelingsknop gedurende 5 seconden in",
+  "soft_reset_button": "Zachte reset"
+}

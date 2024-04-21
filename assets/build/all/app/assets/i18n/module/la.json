@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Tempus range",
+  "stats.one_second": "Una secunda",
+  "stats.five_seconds": "V seconds",
+  "stats.ten_seconds": "X seconds",
+  "stats.half_minute": "XXX seconds",
+  "stats.one_minute": "Unum minutum",
+  "stats.ten_minutes": "X minuta",
+  "stats.half_hour": "XXX minuta",
+  "stats.one_hour": "Unus hora",
+  "stats.three_hours": "III horas",
+  "stats.six_hours": "VI horas",
+  "stats.twelve_hours": "XII horis",
+  "stats.twentyfour_hours": "XXIV horas",
+  "stats.chart_provider": "Chart provider"
+}

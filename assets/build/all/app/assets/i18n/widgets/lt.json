@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Namai",
+    "arm_away": "Toli"
+  },
+  "$section_label": {
+    "label": "Etiketė",
+    "indicators": "Rodikliai",
+    "lights_control": "Šviesos",
+    "switches_control": "Jungikliai"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Casa",
+    "arm_away": "Lluny"
+  },
+  "$section_label": {
+    "label": "Etiqueta",
+    "indicators": "Indicadors",
+    "lights_control": "Llums",
+    "switches_control": "Interruptors"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "itthon",
+    "arm_away": "El"
+  },
+  "$section_label": {
+    "label": "Címke",
+    "indicators": "Mutatók",
+    "lights_control": "Lámpák",
+    "switches_control": "Kapcsolók"
+  }
+}

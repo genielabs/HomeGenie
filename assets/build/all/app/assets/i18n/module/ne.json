@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "समय दायरा",
+  "stats.one_second": "एक सेकेन्ड",
+  "stats.five_seconds": "५ सेकेन्ड",
+  "stats.ten_seconds": "१० सेकेन्ड",
+  "stats.half_minute": "३० सेकेन्ड",
+  "stats.one_minute": "एक मिनेट",
+  "stats.ten_minutes": "१० मिनेट",
+  "stats.half_hour": "30 मिनेट",
+  "stats.one_hour": "एक घण्टा",
+  "stats.three_hours": "3 घण्टा",
+  "stats.six_hours": "६ घण्टा",
+  "stats.twelve_hours": "१२ घण्टा",
+  "stats.twentyfour_hours": "24 घण्टा",
+  "stats.chart_provider": "चार्ट प्रदायक"
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Interval de timp",
+  "stats.one_second": "O secundă",
+  "stats.five_seconds": "5 secunde",
+  "stats.ten_seconds": "10 secunde",
+  "stats.half_minute": "30 de secunde",
+  "stats.one_minute": "Un minut",
+  "stats.ten_minutes": "10 minute",
+  "stats.half_hour": "30 minute",
+  "stats.one_hour": "O ora",
+  "stats.three_hours": "3 ore",
+  "stats.six_hours": "6 ore",
+  "stats.twelve_hours": "12 ore",
+  "stats.twentyfour_hours": "24 de ore",
+  "stats.chart_provider": "Furnizor de diagrame"
+}

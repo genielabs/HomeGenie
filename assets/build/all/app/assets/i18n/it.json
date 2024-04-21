@@ -60,7 +60,6 @@
   "start": "Avvia",
   "stop": "Interrompi",
   "schedule": "Pianificazione",
-  "scheduling_on": "Pianificazione del {{date}}",
   "scheduling_preview_day": "Mostra un altro giorno",
   "scheduling_events": "Eventi programmati",
   "scheduling_no_occurrences": "Nessuna occorrenza nel giorno selezionato.",

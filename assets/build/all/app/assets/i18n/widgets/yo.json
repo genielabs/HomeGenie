@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Ile",
+    "arm_away": "Kuro"
+  },
+  "$section_label": {
+    "label": "Aami",
+    "indicators": "Awọn itọkasi",
+    "lights_control": "Awọn imọlẹ",
+    "switches_control": "Yipada"
+  }
+}

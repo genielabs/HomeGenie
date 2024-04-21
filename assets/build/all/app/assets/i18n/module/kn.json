@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "ಸಮಯ ಶ್ರೇಣಿ",
+  "stats.one_second": "ಒಂದು ಕ್ಷಣ",
+  "stats.five_seconds": "5 ಸೆಕೆಂಡುಗಳು",
+  "stats.ten_seconds": "10 ಸೆಕೆಂಡುಗಳು",
+  "stats.half_minute": "30 ಸೆಕೆಂಡುಗಳು",
+  "stats.one_minute": "ಒಂದು ನಿಮಿಷ",
+  "stats.ten_minutes": "10 ನಿಮಿಷಗಳು",
+  "stats.half_hour": "30 ನಿಮಿಷಗಳು",
+  "stats.one_hour": "ಒಂದು ಗಂಟೆ",
+  "stats.three_hours": "3 ಗಂಟೆಗಳು",
+  "stats.six_hours": "6 ಗಂಟೆಗಳು",
+  "stats.twelve_hours": "12 ಗಂಟೆಗಳು",
+  "stats.twentyfour_hours": "24 ಗಂಟೆಗಳು",
+  "stats.chart_provider": "ಚಾರ್ಟ್ ಒದಗಿಸುವವರು"
+}

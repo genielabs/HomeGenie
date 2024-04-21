@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Dhachaigh",
+    "arm_away": "Air falbh"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Comharran",
+    "lights_control": "Solais",
+    "switches_control": "Switches"
+  }
+}

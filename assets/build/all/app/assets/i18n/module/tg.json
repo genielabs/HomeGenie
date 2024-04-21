@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Диапазони вақт",
+  "stats.one_second": "Як сония",
+  "stats.five_seconds": "5 сония",
+  "stats.ten_seconds": "10 сония",
+  "stats.half_minute": "30 сония",
+  "stats.one_minute": "Як дақиқа",
+  "stats.ten_minutes": "10 дақиқа",
+  "stats.half_hour": "30 дақиқа",
+  "stats.one_hour": "Як соат",
+  "stats.three_hours": "3 соат",
+  "stats.six_hours": "6 соат",
+  "stats.twelve_hours": "12 соат",
+  "stats.twentyfour_hours": "24 соат",
+  "stats.chart_provider": "Таъминкунандаи диаграмма"
+}

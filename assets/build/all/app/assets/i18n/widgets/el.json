@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Σπίτι",
+    "arm_away": "Μακριά"
+  },
+  "$section_label": {
+    "label": "Επιγραφή",
+    "indicators": "δείκτες",
+    "lights_control": "Φώτα",
+    "switches_control": "Διακόπτες"
+  }
+}

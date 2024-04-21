@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Дома",
+    "arm_away": "Далеку"
+  },
+  "$section_label": {
+    "label": "Етикета",
+    "indicators": "Индикатори",
+    "lights_control": "Светла",
+    "switches_control": "Прекинувачи"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Kainga",
+    "arm_away": "atu"
+  },
+  "$section_label": {
+    "label": "Tapanga",
+    "indicators": "Tohutohu",
+    "lights_control": "Nga rama",
+    "switches_control": "Whakawhiti"
+  }
+}

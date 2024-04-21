@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Heim",
+    "arm_away": "Weg"
+  },
+  "$section_label": {
+    "label": "Etikett",
+    "indicators": "Indikatoren",
+    "lights_control": "Beleuchtung",
+    "switches_control": "Schalter"
+  }
+}

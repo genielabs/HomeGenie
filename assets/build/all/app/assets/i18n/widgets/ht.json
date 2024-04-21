@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Lakay",
+    "arm_away": "Touye"
+  },
+  "$section_label": {
+    "label": "Mete etikèt sou",
+    "indicators": "Endikatè",
+    "lights_control": "Limyè",
+    "switches_control": "Chanjman"
+  }
+}

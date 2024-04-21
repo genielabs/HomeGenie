@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "ຊ່ວງເວລາ",
+  "stats.one_second": "ຫນຶ່ງວິນາທີ",
+  "stats.five_seconds": "5 ວິນາທີ",
+  "stats.ten_seconds": "10 ວິນາທີ",
+  "stats.half_minute": "30 ວິນາທີ",
+  "stats.one_minute": "ຫນຶ່ງ​ນາ​ທີ",
+  "stats.ten_minutes": "10 ນາທີ",
+  "stats.half_hour": "30 ນາທີ",
+  "stats.one_hour": "ຫນຶ່ງຊົ່ວໂມງ",
+  "stats.three_hours": "3 ຊົ່ວໂມງ",
+  "stats.six_hours": "6 ຊົ່ວໂມງ",
+  "stats.twelve_hours": "12 ຊົ່ວໂມງ",
+  "stats.twentyfour_hours": "24 ຊົ່ວໂມງ",
+  "stats.chart_provider": "ຜູ້ໃຫ້ບໍລິການຕາຕະລາງ"
+}

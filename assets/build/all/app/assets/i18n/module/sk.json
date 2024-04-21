@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Časové rozpätie",
+  "stats.one_second": "Jedna sekunda",
+  "stats.five_seconds": "5 sekúnd",
+  "stats.ten_seconds": "10 sekúnd",
+  "stats.half_minute": "30 sekúnd",
+  "stats.one_minute": "Jedna minúta",
+  "stats.ten_minutes": "10 minút",
+  "stats.half_hour": "30 minút",
+  "stats.one_hour": "Jedna hodina",
+  "stats.three_hours": "3 hodiny",
+  "stats.six_hours": "6 hodín",
+  "stats.twelve_hours": "12 hodín",
+  "stats.twentyfour_hours": "24 hodín",
+  "stats.chart_provider": "Poskytovateľ grafov"
+}

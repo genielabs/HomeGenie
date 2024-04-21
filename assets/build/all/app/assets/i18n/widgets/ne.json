@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "घर",
+    "arm_away": "टाढा"
+  },
+  "$section_label": {
+    "label": "लेबल",
+    "indicators": "सूचकहरू",
+    "lights_control": "बत्तीहरू",
+    "switches_control": "स्विचहरू"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Mājas",
+    "arm_away": "Prom"
+  },
+  "$section_label": {
+    "label": "Etiķete",
+    "indicators": "Rādītāji",
+    "lights_control": "Gaismas",
+    "switches_control": "Slēdži"
+  }
+}

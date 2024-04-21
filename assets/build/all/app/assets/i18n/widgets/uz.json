@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Uy",
+    "arm_away": "Uzoqda"
+  },
+  "$section_label": {
+    "label": "Yorliq",
+    "indicators": "Ko'rsatkichlar",
+    "lights_control": "Chiroqlar",
+    "switches_control": "Kalitlar"
+  }
+}

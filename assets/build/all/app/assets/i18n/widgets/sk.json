@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Domov",
+    "arm_away": "Preč"
+  },
+  "$section_label": {
+    "label": "Označenie",
+    "indicators": "Ukazovatele",
+    "lights_control": "Svetlá",
+    "switches_control": "Prepínače"
+  }
+}

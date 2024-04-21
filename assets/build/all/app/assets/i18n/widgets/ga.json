@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Baile",
+    "arm_away": "Amach"
+  },
+  "$section_label": {
+    "label": "Lipéad",
+    "indicators": "Táscairí",
+    "lights_control": "Soilse",
+    "switches_control": "Lasca"
+  }
+}

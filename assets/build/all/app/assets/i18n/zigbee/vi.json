@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Thêm thiết bị",
+  "node_exclusion": "Gỡ bỏ thiết bị",
+  "operation_timed_out": "Chiến dịch kết thúc.",
+  "node_added": "Đã thêm nút thành công",
+  "turn_on_device_to_add": "Bật thiết bị và nhấn nút ghép nối trong 5 giây nếu cần",
+  "soft_reset_button": "Thiết lập lại mềm"
+}

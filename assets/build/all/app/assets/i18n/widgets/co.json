@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "A casa",
+    "arm_away": "Via"
+  },
+  "$section_label": {
+    "label": "Etichetta",
+    "indicators": "Indicatori",
+    "lights_control": "Luci",
+    "switches_control": "Cambia"
+  }
+}

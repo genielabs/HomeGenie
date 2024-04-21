@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "ئۆي",
+    "arm_away": "يىراق"
+  },
+  "$section_label": {
+    "label": "بەلگە",
+    "indicators": "كۆرسەتكۈچ",
+    "lights_control": "چىراغ",
+    "switches_control": "ئالماشتۇرغۇچ"
+  }
+}

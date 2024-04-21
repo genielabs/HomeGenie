@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Cihaz ekle",
+  "node_exclusion": "Aygıtı kaldır",
+  "operation_timed_out": "Operasyon zaman aşımına uğradı.",
+  "node_added": "Düğüm başarıyla eklendi",
+  "turn_on_device_to_add": "Cihazı açın ve gerekirse eşleştirme düğmesine 5 saniye basın",
+  "soft_reset_button": "Yazılım sıfırlama"
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Дом",
+    "arm_away": "Прочь"
+  },
+  "$section_label": {
+    "label": "Этикетка",
+    "indicators": "Индикаторы",
+    "lights_control": "Свет",
+    "switches_control": "Переключатели"
+  }
+}

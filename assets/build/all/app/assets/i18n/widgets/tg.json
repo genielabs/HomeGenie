@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Хона",
+    "arm_away": "Дур"
+  },
+  "$section_label": {
+    "label": "Нишон",
+    "indicators": "Нишондиҳандаҳо",
+    "lights_control": "Чароғҳо",
+    "switches_control": "Гузаришҳо"
+  }
+}

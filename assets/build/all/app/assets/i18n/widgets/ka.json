@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "მთავარი",
+    "arm_away": "მოშორებით"
+  },
+  "$section_label": {
+    "label": "ლეიბლი",
+    "indicators": "ინდიკატორები",
+    "lights_control": "განათებები",
+    "switches_control": "გადამრთველები"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "హోమ్",
+    "arm_away": "దూరంగా"
+  },
+  "$section_label": {
+    "label": "లేబుల్",
+    "indicators": "సూచికలు",
+    "lights_control": "లైట్లు",
+    "switches_control": "స్విచ్‌లు"
+  }
+}

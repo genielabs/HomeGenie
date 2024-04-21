@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Addere fabrica",
+  "node_exclusion": "Remove fabrica",
+  "operation_timed_out": "Operatio opportuno.",
+  "node_added": "Feliciter additae nodi",
+  "turn_on_device_to_add": "Switch in fabrica et premere HYMENAEOS button pro V seconds, si requiratur",
+  "soft_reset_button": "mollis reset"
+}

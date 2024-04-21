@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "گهر",
+    "arm_away": "پري"
+  },
+  "$section_label": {
+    "label": "ليبل",
+    "indicators": "اشارا",
+    "lights_control": "روشنيون",
+    "switches_control": "سوئچز"
+  }
+}

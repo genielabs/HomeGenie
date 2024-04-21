@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Дыяпазон часу",
+  "stats.one_second": "Адна секунда",
+  "stats.five_seconds": "5 секунд",
+  "stats.ten_seconds": "10 секунд",
+  "stats.half_minute": "30 секунд",
+  "stats.one_minute": "Адна хвіліна",
+  "stats.ten_minutes": "10 хвілін",
+  "stats.half_hour": "30 хвілін",
+  "stats.one_hour": "Адна гадзіна",
+  "stats.three_hours": "3 гадзіны",
+  "stats.six_hours": "6 гадзін",
+  "stats.twelve_hours": "12 гадзін",
+  "stats.twentyfour_hours": "24 гадзіны",
+  "stats.chart_provider": "Пастаўшчык дыяграм"
+}

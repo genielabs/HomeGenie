@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Временски опсег",
+  "stats.one_second": "Една секунда",
+  "stats.five_seconds": "5 секунди",
+  "stats.ten_seconds": "10 секунди",
+  "stats.half_minute": "30 секунди",
+  "stats.one_minute": "Една минута",
+  "stats.ten_minutes": "10 минути",
+  "stats.half_hour": "30 минути",
+  "stats.one_hour": "Еден час",
+  "stats.three_hours": "3 часа",
+  "stats.six_hours": "6 часа",
+  "stats.twelve_hours": "12 часа",
+  "stats.twentyfour_hours": "24 часа",
+  "stats.chart_provider": "Давател на графикони"
+}

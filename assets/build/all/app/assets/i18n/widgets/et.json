@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Kodu",
+    "arm_away": "Eemal"
+  },
+  "$section_label": {
+    "label": "Silt",
+    "indicators": "Näitajad",
+    "lights_control": "Valgus",
+    "switches_control": "Lülitid"
+  }
+}

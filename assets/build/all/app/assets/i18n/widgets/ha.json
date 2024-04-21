@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Gida",
+    "arm_away": "Away"
+  },
+  "$section_label": {
+    "label": "Lakabi",
+    "indicators": "Manuniya",
+    "lights_control": "Haske",
+    "switches_control": "Sauyawa"
+  }
+}

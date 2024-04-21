@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Doheem",
+    "arm_away": "Wech"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Indicateuren",
+    "lights_control": "Luuchten",
+    "switches_control": "Schalter"
+  }
+}

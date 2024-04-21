@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Ekhaya",
+    "arm_away": "Kude"
+  },
+  "$section_label": {
+    "label": "Ileyibhile",
+    "indicators": "Iimpawu",
+    "lights_control": "Izibane",
+    "switches_control": "Iiswitshi"
+  }
+}

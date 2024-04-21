@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "मुख्यपृष्ठ",
+    "arm_away": "लांब"
+  },
+  "$section_label": {
+    "label": "लेबल",
+    "indicators": "निर्देशक",
+    "lights_control": "दिवे",
+    "switches_control": "स्विचेस"
+  }
+}

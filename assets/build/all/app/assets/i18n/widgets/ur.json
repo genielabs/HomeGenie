@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "گھر",
+    "arm_away": "دور"
+  },
+  "$section_label": {
+    "label": "لیبل",
+    "indicators": "اشارے",
+    "lights_control": "لائٹس",
+    "switches_control": "سوئچ کرتا ہے۔"
+  }
+}

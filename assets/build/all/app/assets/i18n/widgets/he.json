@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "בית",
+    "arm_away": "רָחוֹק"
+  },
+  "$section_label": {
+    "label": "תווית",
+    "indicators": "אינדיקטורים",
+    "lights_control": "אורות",
+    "switches_control": "מתגים"
+  }
+}

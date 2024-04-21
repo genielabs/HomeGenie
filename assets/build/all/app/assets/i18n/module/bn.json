@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "সময় পরিসীমা",
+  "stats.one_second": "এক সেকেন্ড",
+  "stats.five_seconds": "5 সেকেন্ড",
+  "stats.ten_seconds": "10 সেকেন্ড",
+  "stats.half_minute": "30 সেকেন্ড",
+  "stats.one_minute": "এক মিনিট",
+  "stats.ten_minutes": "10 মিনিট",
+  "stats.half_hour": "30 মিনিট",
+  "stats.one_hour": "এক ঘন্টা",
+  "stats.three_hours": "3 ঘন্টা",
+  "stats.six_hours": "6 ঘন্টা",
+  "stats.twelve_hours": "1 ২ ঘণ্টা",
+  "stats.twentyfour_hours": "২ 4 ঘন্টা",
+  "stats.chart_provider": "চার্ট প্রদানকারী"
+}

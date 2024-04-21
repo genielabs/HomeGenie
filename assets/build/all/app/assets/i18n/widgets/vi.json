@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Trang chủ",
+    "arm_away": "Xa"
+  },
+  "$section_label": {
+    "label": "Nhãn",
+    "indicators": "Các chỉ số",
+    "lights_control": "đèn",
+    "switches_control": "Công tắc"
+  }
+}

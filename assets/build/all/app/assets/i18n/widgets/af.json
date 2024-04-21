@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Tuis",
+    "arm_away": "Weg"
+  },
+  "$section_label": {
+    "label": "Etiket",
+    "indicators": "Aanwysers",
+    "lights_control": "Ligte",
+    "switches_control": "Skakelaars"
+  }
+}

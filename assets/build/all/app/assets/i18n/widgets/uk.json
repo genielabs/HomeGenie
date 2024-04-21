@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "додому",
+    "arm_away": "геть"
+  },
+  "$section_label": {
+    "label": "Мітка",
+    "indicators": "Індикатори",
+    "lights_control": "вогні",
+    "switches_control": "Перемикачі"
+  }
+}

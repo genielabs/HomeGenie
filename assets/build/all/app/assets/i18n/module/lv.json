@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Laika diapazons",
+  "stats.one_second": "Vienu sekundi",
+  "stats.five_seconds": "5 sekundes",
+  "stats.ten_seconds": "10 sekundes",
+  "stats.half_minute": "30 sekundes",
+  "stats.one_minute": "Viena minūte",
+  "stats.ten_minutes": "10 minūtes",
+  "stats.half_hour": "30 minūtes",
+  "stats.one_hour": "Viena stunda",
+  "stats.three_hours": "3 stundas",
+  "stats.six_hours": "6 stundas",
+  "stats.twelve_hours": "12 stundas",
+  "stats.twentyfour_hours": "24 stundas",
+  "stats.chart_provider": "Diagrammas nodrošinātājs"
+}

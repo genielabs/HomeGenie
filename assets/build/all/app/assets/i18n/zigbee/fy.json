@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Add apparaat",
+  "node_exclusion": "Fuortsmite apparaat",
+  "operation_timed_out": "Operaasje time-out.",
+  "node_added": "Node tafoege mei súkses",
+  "turn_on_device_to_add": "Skeakelje it apparaat yn en druk as nedich 5 sekonden op de koppelingsknop",
+  "soft_reset_button": "Soft reset"
+}

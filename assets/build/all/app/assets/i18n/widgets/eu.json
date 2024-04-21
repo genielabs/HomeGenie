@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Hasiera",
+    "arm_away": "Kanpoan"
+  },
+  "$section_label": {
+    "label": "Etiketa",
+    "indicators": "Adierazleak",
+    "lights_control": "Argiak",
+    "switches_control": "Etengailuak"
+  }
+}

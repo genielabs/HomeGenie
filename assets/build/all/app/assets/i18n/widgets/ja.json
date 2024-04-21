@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "家",
+    "arm_away": "離れて"
+  },
+  "$section_label": {
+    "label": "ラベル",
+    "indicators": "指標",
+    "lights_control": "ライト",
+    "switches_control": "スイッチ"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "시간 범위",
+  "stats.one_second": "일초",
+  "stats.five_seconds": "5 초",
+  "stats.ten_seconds": "10 초",
+  "stats.half_minute": "30 초",
+  "stats.one_minute": "1분",
+  "stats.ten_minutes": "10 분",
+  "stats.half_hour": "30 분",
+  "stats.one_hour": "한 시간",
+  "stats.three_hours": "3 시간",
+  "stats.six_hours": "6 시간",
+  "stats.twelve_hours": "12 시간",
+  "stats.twentyfour_hours": "24 시간",
+  "stats.chart_provider": "차트 제공자"
+}

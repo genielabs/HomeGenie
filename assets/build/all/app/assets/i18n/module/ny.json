@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Nthawi yosiyana",
+  "stats.one_second": "Sekondi imodzi",
+  "stats.five_seconds": "5 masekondi",
+  "stats.ten_seconds": "10 masekondi",
+  "stats.half_minute": "30 masekondi",
+  "stats.one_minute": "Mphindi imodzi",
+  "stats.ten_minutes": "Mphindi 10",
+  "stats.half_hour": "Mphindi 30",
+  "stats.one_hour": "Ola limodzi",
+  "stats.three_hours": "3 maola",
+  "stats.six_hours": "6 maola",
+  "stats.twelve_hours": "12 maola",
+  "stats.twentyfour_hours": "24 maola",
+  "stats.chart_provider": "Wopereka ma chart"
+}

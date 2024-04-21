@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Aiga",
+    "arm_away": "Alu ese"
+  },
+  "$section_label": {
+    "label": "Fa'ailoga",
+    "indicators": "Fa'ailoga",
+    "lights_control": "Molī",
+    "switches_control": "Suiga"
+  }
+}

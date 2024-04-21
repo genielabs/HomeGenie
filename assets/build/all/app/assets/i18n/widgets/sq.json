@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Shtëpi",
+    "arm_away": "Larg"
+  },
+  "$section_label": {
+    "label": "Etiketa",
+    "indicators": "Treguesit",
+    "lights_control": "Dritat",
+    "switches_control": "Çelësat"
+  }
+}

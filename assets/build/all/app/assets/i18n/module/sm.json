@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Va'aiga taimi",
+  "stats.one_second": "Tasi le sekone",
+  "stats.five_seconds": "5 sekone",
+  "stats.ten_seconds": "10 sekone",
+  "stats.half_minute": "30 sekone",
+  "stats.one_minute": "Tasi le minute",
+  "stats.ten_minutes": "10 minute",
+  "stats.half_hour": "30 minute",
+  "stats.one_hour": "E tasi le itula",
+  "stats.three_hours": "3 itula",
+  "stats.six_hours": "6 itula",
+  "stats.twelve_hours": "12 itula",
+  "stats.twentyfour_hours": "24 itula",
+  "stats.chart_provider": "Tuuina atu siata"
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "సమయ పరిధి",
+  "stats.one_second": "ఒక్క క్షణం",
+  "stats.five_seconds": "5 సెకన్లు",
+  "stats.ten_seconds": "10 సెకన్లు",
+  "stats.half_minute": "30 సెకన్లు",
+  "stats.one_minute": "ఒక్క నిమిషం",
+  "stats.ten_minutes": "10 నిమిషాల",
+  "stats.half_hour": "30 నిముషాలు",
+  "stats.one_hour": "ఒక గంట",
+  "stats.three_hours": "3 గంటలు",
+  "stats.six_hours": "6 గంటలు",
+  "stats.twelve_hours": "12 గంటలు",
+  "stats.twentyfour_hours": "24 గంటలు",
+  "stats.chart_provider": "చార్ట్ ప్రొవైడర్"
+}

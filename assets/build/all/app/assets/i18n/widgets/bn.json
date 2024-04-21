@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "বাড়ি",
+    "arm_away": "দূরে"
+  },
+  "$section_label": {
+    "label": "লেবেল",
+    "indicators": "সূচক",
+    "lights_control": "আলো",
+    "switches_control": "সুইচ"
+  }
+}

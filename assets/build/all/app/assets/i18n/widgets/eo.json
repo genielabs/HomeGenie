@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Hejmo",
+    "arm_away": "For"
+  },
+  "$section_label": {
+    "label": "Etikedo",
+    "indicators": "Indikiloj",
+    "lights_control": "Lumoj",
+    "switches_control": "Ŝaltiloj"
+  }
+}

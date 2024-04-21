@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Tāpiri taputapu",
+  "node_exclusion": "Tangohia te taputapu",
+  "operation_timed_out": "Kua pau te mahi.",
+  "node_added": "I angitū te tāpiri kōpuku",
+  "turn_on_device_to_add": "Whakawhitihia te taputapu ka pehi i te paatene takirua mo te 5 hēkona ki te hiahiatia",
+  "soft_reset_button": "Te tautuhi ngawari"
+}

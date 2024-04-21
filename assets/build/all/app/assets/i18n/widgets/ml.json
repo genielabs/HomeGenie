@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "വീട്",
+    "arm_away": "ദൂരെ"
+  },
+  "$section_label": {
+    "label": "ലേബൽ",
+    "indicators": "സൂചകങ്ങൾ",
+    "lights_control": "വിളക്കുകൾ",
+    "switches_control": "സ്വിച്ചുകൾ"
+  }
+}

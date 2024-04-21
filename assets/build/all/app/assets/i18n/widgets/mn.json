@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Гэр",
+    "arm_away": "Алс"
+  },
+  "$section_label": {
+    "label": "Шошго",
+    "indicators": "Үзүүлэлтүүд",
+    "lights_control": "Гэрэл",
+    "switches_control": "Шилжүүлэгч"
+  }
+}

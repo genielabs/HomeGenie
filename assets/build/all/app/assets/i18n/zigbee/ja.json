@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "デバイスを追加",
+  "node_exclusion": "デバイスを削除",
+  "operation_timed_out": "操作がタイムアウトしました。",
+  "node_added": "ノードが正常に追加されました",
+  "turn_on_device_to_add": "デバイスの電源を入れ、必要に応じてペアリング ボタンを 5 秒間押します",
+  "soft_reset_button": "ソフトリセット"
+}

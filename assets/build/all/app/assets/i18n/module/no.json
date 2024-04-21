@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Tidsramme",
+  "stats.one_second": "Ett sekund",
+  "stats.five_seconds": "5 sekunder",
+  "stats.ten_seconds": "10 sekunder",
+  "stats.half_minute": "30 sekunder",
+  "stats.one_minute": "Et minutt",
+  "stats.ten_minutes": "10 minutter",
+  "stats.half_hour": "30 minutter",
+  "stats.one_hour": "En time",
+  "stats.three_hours": "3 timer",
+  "stats.six_hours": "6 timer",
+  "stats.twelve_hours": "12 timer",
+  "stats.twentyfour_hours": "24 timer",
+  "stats.chart_provider": "Kartleverandør"
+}

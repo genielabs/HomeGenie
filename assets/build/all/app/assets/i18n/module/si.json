@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "කාල පරාසය",
+  "stats.one_second": "එක තත්පරයක්",
+  "stats.five_seconds": "තත්පර 5 යි",
+  "stats.ten_seconds": "තත්පර 10 යි",
+  "stats.half_minute": "තත්පර 30 යි",
+  "stats.one_minute": "විනාඩියක්",
+  "stats.ten_minutes": "විනාඩි 10 යි",
+  "stats.half_hour": "මිනිත්තු 30 ක්",
+  "stats.one_hour": "පැයක්",
+  "stats.three_hours": "පැය 3",
+  "stats.six_hours": "පැය 6 යි",
+  "stats.twelve_hours": "පැය 12 යි",
+  "stats.twentyfour_hours": "පැය 24",
+  "stats.chart_provider": "ප්‍රස්ථාර සපයන්නා"
+}

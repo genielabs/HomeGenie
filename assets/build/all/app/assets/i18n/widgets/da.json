@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Hjem",
+    "arm_away": "Væk"
+  },
+  "$section_label": {
+    "label": "Etiket",
+    "indicators": "Indikatorer",
+    "lights_control": "Lys",
+    "switches_control": "Afbrydere"
+  }
+}

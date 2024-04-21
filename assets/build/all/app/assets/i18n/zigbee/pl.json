@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Dodaj urządzenie",
+  "node_exclusion": "Odłącz urządzenie",
+  "operation_timed_out": "Upłynął limit czasu operacji.",
+  "node_added": "Pomyślnie dodano węzeł",
+  "turn_on_device_to_add": "Włącz urządzenie i w razie potrzeby naciśnij przycisk parowania na 5 sekund",
+  "soft_reset_button": "Miękki reset"
+}

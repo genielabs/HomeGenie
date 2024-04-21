@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Phạm vi thời gian",
+  "stats.one_second": "Một giây",
+  "stats.five_seconds": "5 giây",
+  "stats.ten_seconds": "10 giây",
+  "stats.half_minute": "30 giây",
+  "stats.one_minute": "Một phút",
+  "stats.ten_minutes": "10 phút",
+  "stats.half_hour": "30 phút",
+  "stats.one_hour": "Một giờ",
+  "stats.three_hours": "3 giờ",
+  "stats.six_hours": "6 tiếng",
+  "stats.twelve_hours": "12 giờ",
+  "stats.twentyfour_hours": "24 giờ",
+  "stats.chart_provider": "Nhà cung cấp biểu đồ"
+}

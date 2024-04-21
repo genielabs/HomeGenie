@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "സമയ പരിധി",
+  "stats.one_second": "ഒരു നിമിഷം",
+  "stats.five_seconds": "5 സെക്കൻഡ്",
+  "stats.ten_seconds": "10 സെക്കൻഡ്",
+  "stats.half_minute": "30 സെക്കൻഡ്",
+  "stats.one_minute": "ഒരു നിമിഷം",
+  "stats.ten_minutes": "10 മിനിറ്റ്",
+  "stats.half_hour": "30 മിനിറ്റ്",
+  "stats.one_hour": "ഒരു മണിക്കൂര്",
+  "stats.three_hours": "3 മണിക്കൂർ",
+  "stats.six_hours": "6 മണിക്കൂർ",
+  "stats.twelve_hours": "12 മണിക്കൂർ",
+  "stats.twentyfour_hours": "24 മണിക്കൂർ",
+  "stats.chart_provider": "ചാർട്ട് ദാതാവ്"
+}

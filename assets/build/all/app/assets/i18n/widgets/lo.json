@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "ບ້ານ",
+    "arm_away": "ຫ່າງ"
+  },
+  "$section_label": {
+    "label": "ປ້າຍກຳກັບ",
+    "indicators": "ຕົວຊີ້ວັດ",
+    "lights_control": "ແສງໄຟ",
+    "switches_control": "ສະວິດ"
+  }
+}

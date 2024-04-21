@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "ਸਮਾਂ ਸੀਮਾ",
+  "stats.one_second": "ਇੱਕ ਸਕਿੰਟ",
+  "stats.five_seconds": "5 ਸਕਿੰਟ",
+  "stats.ten_seconds": "10 ਸਕਿੰਟ",
+  "stats.half_minute": "30 ਸਕਿੰਟ",
+  "stats.one_minute": "ਇੱਕ ਮਿੰਟ",
+  "stats.ten_minutes": "10 ਮਿੰਟ",
+  "stats.half_hour": "30 ਮਿੰਟ",
+  "stats.one_hour": "ਇਕ ਘੰਟਾ",
+  "stats.three_hours": "3 ਘੰਟੇ",
+  "stats.six_hours": "6 ਘੰਟੇ",
+  "stats.twelve_hours": "12 ਘੰਟੇ",
+  "stats.twentyfour_hours": "24 ਘੰਟੇ",
+  "stats.chart_provider": "ਚਾਰਟ ਪ੍ਰਦਾਤਾ"
+}

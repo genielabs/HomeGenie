@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "اضف جهاز",
+  "node_exclusion": "إنزع الجهاز",
+  "operation_timed_out": "انتهى وقت العملية.",
+  "node_added": "تمت إضافة العقدة بنجاح",
+  "turn_on_device_to_add": "قم بتشغيل الجهاز واضغط على زر الإقران لمدة 5 ثوانٍ إذا لزم الأمر",
+  "soft_reset_button": "إعادة تشغيل رقيقة"
+}

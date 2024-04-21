@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "အိမ်",
+    "arm_away": "ကွာ"
+  },
+  "$section_label": {
+    "label": "တံဆိပ်",
+    "indicators": "အညွှန်းများ",
+    "lights_control": "မီးရောင်",
+    "switches_control": "ခလုတ်များ"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Ụlọ",
+    "arm_away": "Wepụ"
+  },
+  "$section_label": {
+    "label": "Labelụ",
+    "indicators": "Ihe ngosi",
+    "lights_control": "Ọkụ",
+    "switches_control": "Mgbanwe"
+  }
+}

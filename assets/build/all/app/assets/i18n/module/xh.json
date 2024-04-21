@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Uluhlu lwexesha",
+  "stats.one_second": "Umzuzwana omnye",
+  "stats.five_seconds": "5 imizuzwana",
+  "stats.ten_seconds": "Imizuzwana eyi-10",
+  "stats.half_minute": "Imizuzwana engama-30",
+  "stats.one_minute": "Umzuzu omnye",
+  "stats.ten_minutes": "Imizuzu eli-10",
+  "stats.half_hour": "Imizuzu engama-30",
+  "stats.one_hour": "Iyrure enye",
+  "stats.three_hours": "iiyure ezi-3",
+  "stats.six_hours": "iiyure ezi-6",
+  "stats.twelve_hours": "iiyure ezili-12",
+  "stats.twentyfour_hours": "iiyure ezingama-24",
+  "stats.chart_provider": "Umboneleli wetshathi"
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Үй",
+    "arm_away": "Алыста"
+  },
+  "$section_label": {
+    "label": "Белги",
+    "indicators": "Көрсөткүчтөр",
+    "lights_control": "Жарыктар",
+    "switches_control": "Которгучтар"
+  }
+}

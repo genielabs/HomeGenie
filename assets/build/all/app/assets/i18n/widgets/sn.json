@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Kumba",
+    "arm_away": "Kure"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Indicators",
+    "lights_control": "Mwenje",
+    "switches_control": "Swichi"
+  }
+}

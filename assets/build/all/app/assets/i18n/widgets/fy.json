@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Thús",
+    "arm_away": "Fuort"
+  },
+  "$section_label": {
+    "label": "Etiket",
+    "indicators": "Yndikatoaren",
+    "lights_control": "Ljochten",
+    "switches_control": "Switches"
+  }
+}

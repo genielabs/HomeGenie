@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Lisää laite",
+  "node_exclusion": "Poista laite",
+  "operation_timed_out": "Toiminta aikakatkaistiin.",
+  "node_added": "Solmun lisäys onnistui",
+  "turn_on_device_to_add": "Kytke laite päälle ja paina tarvittaessa pariliitospainiketta 5 sekunnin ajan",
+  "soft_reset_button": "Pehmeä nollaus"
+}

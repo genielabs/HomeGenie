@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "บ้าน",
+    "arm_away": "ห่างออกไป"
+  },
+  "$section_label": {
+    "label": "ฉลาก",
+    "indicators": "ตัวชี้วัด",
+    "lights_control": "ไฟ",
+    "switches_control": "สวิตช์"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "家",
+    "arm_away": "离开"
+  },
+  "$section_label": {
+    "label": "标签",
+    "indicators": "指标",
+    "lights_control": "灯",
+    "switches_control": "开关"
+  }
+}

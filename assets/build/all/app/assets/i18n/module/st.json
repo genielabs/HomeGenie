@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Nako ea nako",
+  "stats.one_second": "Motsotsoana o le mong",
+  "stats.five_seconds": "5 metsotsoana",
+  "stats.ten_seconds": "10 metsotsoana",
+  "stats.half_minute": "metsotsoana e 30",
+  "stats.one_minute": "Motsotso o le mong",
+  "stats.ten_minutes": "Metsotso e 10",
+  "stats.half_hour": "Metsotso e 30",
+  "stats.one_hour": "Hora e le 'ngoe",
+  "stats.three_hours": "Lihora tse 3",
+  "stats.six_hours": "Lihora tse 6",
+  "stats.twelve_hours": "Lihora tse 12",
+  "stats.twentyfour_hours": "Lihora tse 24",
+  "stats.chart_provider": "Mofani oa lichate"
+}

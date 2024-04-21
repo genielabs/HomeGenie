@@ -16,15 +16,15 @@
     "exclusion_message":
         "Press the button on the device you want to remove from this network.",
     "task_duration_notice":
-        "This task might take up to {{ timeout }} seconds to complete.",
+        "This task might take up to <strong>{{timeout}}</strong> seconds to complete.",
     "adding_node":
-        "Adding device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
+        "Adding device <strong class=\"color-accent\">{{node}}</strong>, please wait...",
     "removing_node":
-        "Removing device <strong class=\"color-accent\">{{ node }}</strong>, please wait...",
+        "Removing device <strong class=\"color-accent\">{{node}}</strong>, please wait...",
     "node_added":
-        "Device <strong class=\"color-accent\">{{ node }}</strong> successfully added",
+        "Device <strong class=\"color-accent\">{{node}}</strong> successfully added",
     "node_removed":
-        "Device <strong class=\"color-accent\">{{ node }}</strong> has been removed",
+        "Device <strong class=\"color-accent\">{{node}}</strong> has been removed",
     "node_config":
         "Device configuration",
     "brand":

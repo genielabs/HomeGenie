@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Dar",
+    "arm_away": "Bogħod"
+  },
+  "$section_label": {
+    "label": "Tikketta",
+    "indicators": "Indikaturi",
+    "lights_control": "Dwal",
+    "switches_control": "Swiċċijiet"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Acasă",
+    "arm_away": "Departe"
+  },
+  "$section_label": {
+    "label": "Eticheta",
+    "indicators": "Indicatori",
+    "lights_control": "Lumini",
+    "switches_control": "Comutatoare"
+  }
+}

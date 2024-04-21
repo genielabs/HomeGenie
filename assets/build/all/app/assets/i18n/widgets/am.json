@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "ቤት",
+    "arm_away": "ራቅ"
+  },
+  "$section_label": {
+    "label": "መለያ",
+    "indicators": "አመላካቾች",
+    "lights_control": "መብራቶች",
+    "switches_control": "መቀየሪያዎች"
+  }
+}

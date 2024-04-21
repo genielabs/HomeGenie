@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Tiid berik",
+  "stats.one_second": "Ien sekonde",
+  "stats.five_seconds": "5 sekonden",
+  "stats.ten_seconds": "10 sekonden",
+  "stats.half_minute": "30 sekonden",
+  "stats.one_minute": "Ien minút",
+  "stats.ten_minutes": "10 minúten",
+  "stats.half_hour": "30 minuten",
+  "stats.one_hour": "Ien oere",
+  "stats.three_hours": "3 oeren",
+  "stats.six_hours": "6 oeren",
+  "stats.twelve_hours": "12 oeren",
+  "stats.twentyfour_hours": "24 oeren",
+  "stats.chart_provider": "Chart provider"
+}

@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "an-trano",
+    "arm_away": "lasa"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "tondro",
+    "lights_control": "jiro",
+    "switches_control": "Switches"
+  }
+}

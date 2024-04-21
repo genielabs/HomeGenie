@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Guriga",
+    "arm_away": "Ka fog"
+  },
+  "$section_label": {
+    "label": "Summada",
+    "indicators": "Tilmaamayaal",
+    "lights_control": "Nalalka",
+    "switches_control": "Gawaarida"
+  }
+}

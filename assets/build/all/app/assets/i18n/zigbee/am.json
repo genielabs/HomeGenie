@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "መሣሪያ ያክሉ",
+  "node_exclusion": "መሣሪያን ያስወግዱ",
+  "operation_timed_out": "ክዋኔው አልቋል።",
+  "node_added": "በተሳካ ሁኔታ የተጨመረው መስቀለኛ መንገድ",
+  "turn_on_device_to_add": "መሣሪያውን ያብሩ እና አስፈላጊ ከሆነ የማጣመጃ አዝራሩን ለ 5 ሰከንዶች ይጫኑ",
+  "soft_reset_button": "ለስላሳ ዳግም ማስጀመር"
+}

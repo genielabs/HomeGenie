@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Dom",
+    "arm_away": "U gostima"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Indikatori",
+    "lights_control": "Svjetla",
+    "switches_control": "Prekidači"
+  }
+}

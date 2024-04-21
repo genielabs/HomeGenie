@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Временной диапазон",
+  "stats.one_second": "Одна секунда",
+  "stats.five_seconds": "5 секунд",
+  "stats.ten_seconds": "10 секунд",
+  "stats.half_minute": "30 секунд",
+  "stats.one_minute": "Одна минута",
+  "stats.ten_minutes": "10 минут",
+  "stats.half_hour": "30 минут",
+  "stats.one_hour": "Один час",
+  "stats.three_hours": "3 часа",
+  "stats.six_hours": "6 часов",
+  "stats.twelve_hours": "12 часов",
+  "stats.twentyfour_hours": "24 часа",
+  "stats.chart_provider": "Поставщик диаграмм"
+}

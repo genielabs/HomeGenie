@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "дадому",
+    "arm_away": "Прэч"
+  },
+  "$section_label": {
+    "label": "Этыкетка",
+    "indicators": "Паказчыкі",
+    "lights_control": "Агні",
+    "switches_control": "Выключальнікі"
+  }
+}

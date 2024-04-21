@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "Ev",
+    "arm_away": "Uzak"
+  },
+  "$section_label": {
+    "label": "Etiket",
+    "indicators": "Göstergeler",
+    "lights_control": "Işıklar",
+    "switches_control": "Anahtarlar"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Masafa ya muda",
+  "stats.one_second": "Sekunde moja",
+  "stats.five_seconds": "5 sekunde",
+  "stats.ten_seconds": "Sekunde 10",
+  "stats.half_minute": "Sekunde 30",
+  "stats.one_minute": "Dakika moja",
+  "stats.ten_minutes": "dakika 10",
+  "stats.half_hour": "Dakika 30",
+  "stats.one_hour": "Saa moja",
+  "stats.three_hours": "Saa 3",
+  "stats.six_hours": "6 masaa",
+  "stats.twelve_hours": "Saa 12",
+  "stats.twentyfour_hours": "Saa 24",
+  "stats.chart_provider": "Mtoa huduma wa chati"
+}

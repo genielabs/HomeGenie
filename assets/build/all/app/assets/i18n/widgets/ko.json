@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "집",
+    "arm_away": "떨어져 있는"
+  },
+  "$section_label": {
+    "label": "상표",
+    "indicators": "지표",
+    "lights_control": "등",
+    "switches_control": "스위치"
+  }
+}

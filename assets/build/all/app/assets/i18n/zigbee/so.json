@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Ku dar qalab",
+  "node_exclusion": "Ka saar qalabka",
+  "operation_timed_out": "Hawlgalku wuu dhammaaday.",
+  "node_added": "Si guul leh loogu daray noodhka",
+  "turn_on_device_to_add": "Daar qalabka oo taabo badhanka lammaanaynta 5 ilbiriqsi haddii loo baahdo",
+  "soft_reset_button": "Dib u dejin jilicsan"
+}

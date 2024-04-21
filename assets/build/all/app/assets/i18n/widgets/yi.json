@@ -1,0 +1,12 @@
+{
+  "$alarm_system": {
+    "arm_home": "היים",
+    "arm_away": "אוועק"
+  },
+  "$section_label": {
+    "label": "לאַבעל",
+    "indicators": "ינדיקאַטאָרס",
+    "lights_control": "לייץ",
+    "switches_control": "סוויטשיז"
+  }
+}
