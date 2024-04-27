@@ -8,7 +8,7 @@
   "system_config_include_demo": "Kenyelletsa demo e nang le ts'ebetso e etsisitsoeng ea sesebelisoa",
   "system_config_additional_features": "Lintlha tse ling",
   "system_config_manual_setup": "Ho seta ka letsoho",
-  "interfaces": "Li-interface",
+  "interfaces": "Likopano",
   "Protocols.UPnP": "Molaoli oa UPnP",
   "HomeAutomation.X10": "X10 molaoli",
   "HomeAutomation.ZWave": "Molaoli oa Z-Wave",
@@ -36,6 +36,9 @@
   "empty_group": "Ha ho li-module sehlopheng sena.",
   "scheduler_wizard": "Setsebi sa Kemiso",
   "schedule_event": "Ketsahalo",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Nako ea matsatsi",
+  "schedule_type_cron": "Tlhaloso ea Cron",
   "schedule_action": "Ketso",
   "schedule_occurrence_preview": "ponelopele ea ketsahalo",
   "time_schedule": "Kemiso",
@@ -82,7 +85,7 @@
   "scheduler_preset_action_command_turn_off": "Koala",
   "scheduler_preset_action_command_set_level": "Beha boemo",
   "scheduler_preset_action_config_level": "Boemo",
-  "scheduler_preset_action_command_set_color": "Beha mmala",
+  "scheduler_preset_action_command_set_color": "Beha 'mala",
   "scheduler_preset_action_config_color": "Mmala",
   "scheduler_preset_action_command_thermostat_mode": "Mokhoa oa Thermostat",
   "scheduler_preset_action_config_mode": "Mokhoa",
@@ -95,7 +98,7 @@
   "scheduler_preset_action_program_run": "Tsamaisa lenaneo",
   "scheduler_preset_action_config_program": "Lenaneo",
   "scheduler_preset_action_config_options": "Dikgetho",
-  "scheduler_preset_action_program_say": "Bolela",
+  "scheduler_preset_action_program_say": "Bua",
   "scheduler_preset_action_config_message": "Molaetsa",
   "save_and_build": "Boloka le ho haha",
   "toggle_widgets_preview": "Fetolela tlhahlobo ea li-widget",
@@ -132,14 +135,14 @@
   "capture_pause_asis": "Joalo ka ha ho le joalo",
   "$options": {
     "16": {
-      "Title": "Memori ea Boemo",
+      "Title": "Mehopolo ea Boemo",
       "Description": "Boloka 'me u hopole boemo ba ho qetela ba dimmer.",
       "HomeGenie.LevelMemory": "Hopola boemo ba lebone la ho qetela ha o butswe",
       "HomeGenie.LevelMemory.SimulateOnly": "Etsisa feela"
     },
     "34": {
       "Title": "Boemo ba Leholimo",
-      "Description": "Lintlha tsa boemo ba leholimo le bolepi ba leholimo ho tsoa ts'ebeletso ea Open Weather Map.\nHo kenya sesebelisoa sena, kenya konopo e nepahetseng ea API.\nLatela litaelo ho https://openweathermap.org/appid ho fumana senotlolo sa mahala sa API.",
+      "Description": "Lintlha tsa boemo ba leholimo le boemo ba leholimo ho tsoa ts'ebeletso ea Open Weather Map.\nHo kenya widget ena tshebetsong, kenya konopo e nepahetseng ya API.\nLatela litaelo ho https://openweathermap.org/appid ho fumana senotlolo sa mahala sa API.",
       "ConfigureOptions.Location": "Lebitso la toropo",
       "ConfigureOptions.Language": "Puo (mohlala. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Nako ea ntlafatso (metsotso)",
@@ -166,7 +169,7 @@
       "EnergyManagement.EnergySavingMode": "Thusa"
     },
     "90": {
-      "Title": "Tshireletso Alarm System",
+      "Title": "Sistimi ea Alamo ea Tšireletso",
       "Description": "Sebelisa li-sensor le lisebelisoa tse ling ho kenya tšebetsong alamo ea ts'ireletso.",
       "HomeGenie.SecurityAlarm": "Sebelisa joalo ka alamo/strobe",
       "HomeGenie.SecuritySensor": "Sebelisa e le sensor ea tšireletso",
@@ -227,7 +230,7 @@
       "HomeGenie.SmartLights.OnMotionDetect": "E laoloa ke sensor (ho ikhethela)",
       "HomeGenie.SmartLights.CheckLuminosity": "E laoloa ke sensor ea leseli (ho ikhethela)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Koala ka mor'a nako ea ho se sebetse (metsotsoana)",
-      "HomeGenie.SmartLights.MinLuminance": "Bulela haeba leseli le ka tlase:"
+      "HomeGenie.SmartLights.MinLuminance": "Bulela haeba leseli le le ka tlase:"
     },
     "8": {
       "Title": "Mebala ea ho chaba ha Letsatsi",

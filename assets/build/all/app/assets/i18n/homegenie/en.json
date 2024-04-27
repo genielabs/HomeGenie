@@ -77,6 +77,12 @@
         "Scheduler Wizard",
     "schedule_event":
         "Event",
+    "schedule_type_standard":
+        "Standard",
+    "schedule_type_range":
+        "Date range",
+    "schedule_type_cron":
+        "Cron expression",
     "schedule_action":
         "Action",
     "schedule_occurrence_preview":

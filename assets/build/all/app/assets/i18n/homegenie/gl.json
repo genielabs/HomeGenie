@@ -36,6 +36,9 @@
   "empty_group": "Non hai módulos neste grupo.",
   "scheduler_wizard": "Asistente do programador",
   "schedule_event": "Evento",
+  "schedule_type_standard": "Estándar",
+  "schedule_type_range": "Intervalo de datas",
+  "schedule_type_cron": "Expresión cron",
   "schedule_action": "Acción",
   "schedule_occurrence_preview": "Vista previa de ocorrencias",
   "time_schedule": "Horario",
@@ -123,7 +126,7 @@
   "setup_code": "Montar",
   "main_code": "Principal",
   "context_code": "Contexto",
-  "main_code_empty_note": "O código \"Principal\" está baleiro.\n\nUse o editor \"Código visual\" para xerar este código:\n- Abre a categoría \"Programa\" na paleta de comandos da esquerda\n- Arrastra un bloque do tipo \"Principal\" no espazo de traballo do código visual\n- Engadir no seu interior outros bloques de código para implementar accións e lóxica deste programa\n\nO programa \"Principal\" pódese executar manualmente ou iniciarse automaticamente en función das condicións que se indiquen no código de configuración.",
+  "main_code_empty_note": "O código \"principal\" está baleiro.\n\nUse o editor \"Código visual\" para xerar este código:\n- Abre a categoría \"Programa\" na paleta de comandos da esquerda\n- Arrastra un bloque de tipo \"Principal\" no espazo de traballo do código visual\n- Engadir no seu interior outros bloques de código para implementar accións e lóxica deste programa\n\nO programa \"Principal\" pódese executar manualmente ou iniciarse automaticamente en función das condicións que se dean eventualmente no código de configuración.",
   "setup_code_empty_note": "O código \"Configuración\" está baleiro.\n\nUse o editor \"Código visual\" para xerar este código:\n- Abre a categoría \"Programa\" na paleta de comandos da esquerda\n- Arrastra un bloque do tipo \"Configuración\" no espazo de traballo do código visual\n- Engade no seu interior outros bloques de código para determinar as condicións que desencadearán a execución do código \"Principal\".\n\nEste código avalíase cada vez que se produce un novo evento e polo menos unha vez por minuto.",
   "capture_commands": "Capturar comandos",
   "capture_commands_description": "Engade todos os comandos realizados manualmente en widgets ao programa.",
@@ -232,7 +235,7 @@
     "8": {
       "Title": "Escenario das cores do amencer",
       "Description": "Exemplo de escenario \"Sunrise\" para luces LED que cambian de cor.",
-      "Scenarios.SunriseColors": "Ligazón ao escenario Sunrise Colors"
+      "Scenarios.SunriseColors": "Ligazón ao escenario Sunrise Cores"
     }
   }
 }

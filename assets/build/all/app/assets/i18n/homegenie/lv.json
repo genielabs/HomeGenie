@@ -36,6 +36,9 @@
   "empty_group": "Šajā grupā nav moduļu.",
   "scheduler_wizard": "Plānotāja vednis",
   "schedule_event": "Pasākums",
+  "schedule_type_standard": "Standarta",
+  "schedule_type_range": "Datumu diapazons",
+  "schedule_type_cron": "Krona izteiksme",
   "schedule_action": "Darbība",
   "schedule_occurrence_preview": "Notikuma priekšskatījums",
   "time_schedule": "Grafiks",
@@ -97,7 +100,7 @@
   "scheduler_preset_action_config_options": "Iespējas",
   "scheduler_preset_action_program_say": "Sakiet",
   "scheduler_preset_action_config_message": "Ziņa",
-  "save_and_build": "Saglabājiet un veidojiet",
+  "save_and_build": "Saglabāt un veidot",
   "toggle_widgets_preview": "Pārslēgt logrīku priekšskatījumu",
   "stop_program": "Pārtraukt programmu",
   "run_program": "Palaist programmu",
@@ -161,7 +164,7 @@
     },
     "82": {
       "Title": "Enerģijas taupīšanas režīms",
-      "Description": "Turiet apgaismojuma līmeni zem konfigurējamas procentuālās vērtības.",
+      "Description": "Saglabājiet apgaismojuma līmeni zem konfigurējamas procentuālās vērtības.",
       "EnergyManagement.EnergySavingLevel": "Maksimālais apgaismojuma līmenis (%)",
       "EnergyManagement.EnergySavingMode": "Iespējot"
     },
@@ -199,7 +202,7 @@
     },
     "402": {
       "Title": "Demonstrācija — noteikta kustība",
-      "Description": "Simulē demonstrācijas multi-sensora kustības noteikšanu."
+      "Description": "Simulē demonstrācijas vairāku sensoru kustības noteikšanu."
     },
     "410": {
       "Title": "Sensoru simulators",
@@ -224,7 +227,7 @@
       "Title": "Viedā ierīce",
       "Description": "Ieslēdziet/izslēdziet ierīci, pamatojoties uz kustības noteikšanu un apkārtējo apgaismojumu.",
       "HomeGenie.SmartLights.Enable": "Iespējot viedierīci",
-      "HomeGenie.SmartLights.OnMotionDetect": "Vada ar sensoru (pēc izvēles)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Kontrolē ar sensoru (pēc izvēles)",
       "HomeGenie.SmartLights.CheckLuminosity": "Kontrolē ar gaismas sensoru (pēc izvēles)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Izslēgt pēc neaktivitātes taimauta (sekundēs)",
       "HomeGenie.SmartLights.MinLuminance": "Ieslēdziet, ja spilgtums ir zemāks:"

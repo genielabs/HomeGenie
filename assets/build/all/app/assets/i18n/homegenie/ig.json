@@ -36,6 +36,9 @@
   "empty_group": "Enweghị modul n'ime otu a.",
   "scheduler_wizard": "Ọkachamara nhazi oge",
   "schedule_event": "Ihe omume",
+  "schedule_type_standard": "Ọkọlọtọ",
+  "schedule_type_range": "Oke ụbọchị",
+  "schedule_type_cron": "Okwu cron",
   "schedule_action": "Omume",
   "schedule_occurrence_preview": "Nlele ihe omume",
   "time_schedule": "Nhazi oge",
@@ -116,14 +119,14 @@
   "program_status_compile": "Gbakọta",
   "automation_programming_guide": "Ntuziaka mmemme'",
   "tap_to_disable": "Pịa iji gbanyụọ",
-  "tap_to_enable": "Kpatụ iji gbanye",
+  "tap_to_enable": "Pịa iji mee ka ọ gbanye",
   "program_data": "Data mmemme",
   "visual_code": "Koodu anya",
   "generated_code": "Koodu ewepụtara",
   "setup_code": "Melite",
   "main_code": "Isi",
   "context_code": "Okwu",
-  "main_code_empty_note": "Koodu \"isi\" abaghị uru.\n\nJiri nchịkọta akụkọ \"Visual code\" ka ịmepụta koodu a:\n- Mepee otu \"Mmemme\" site na palette iwu n'aka ekpe\n- Dọrọ ngọngọ nke ụdị \"Main\" na oghere ọrụ koodu anya\n- Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji mejuputa omume na mgbagha nke mmemme a\n\nEnwere ike iji aka mee mmemme \"Main\" ma ọ bụ malite na akpaghị aka dabere na ọnọdụ emechara nyere na koodu Mbido.",
+  "main_code_empty_note": "Koodu \"Main\" abaghị uru.\n\nJiri nchịkọta akụkọ \"Visual code\" ka ịmepụta koodu a:\n- Mepee otu \"Mmemme\" site na palette iwu n'aka ekpe\n- Dọrọ ngọngọ nke ụdị \"Main\" na oghere ọrụ koodu anya\n- Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji mejuputa omume na mgbagha nke mmemme a\n\nEnwere ike iji aka na-agba \"Main\" mmemme ahụ ma ọ bụ malite na akpaghị aka dabere na ọnọdụ emechara nyere na koodu Ntọala.",
   "setup_code_empty_note": "Koodu \"Ntọala\" efu.\n\nJiri nchịkọta akụkọ \"Visual code\" ka ịmepụta koodu a:\n- Mepee otu \"Mmemme\" site na palette iwu n'aka ekpe\n- Dọrọ ngọngọ nke ụdị \"Ntọala\" na oghere ọrụ koodu anya\n- Tinye n'ime ya ngọngọ koodu ndị ọzọ iji chọpụta ọnọdụ ga-akpalite mmebe koodu \"Isi\".\n\nA na-enyocha koodu a oge ọ bụla ihe omume ọhụrụ mere na opekata mpe otu ugboro n'otu nkeji.",
   "capture_commands": "Weghara iwu",
   "capture_commands_description": "Tinye iwu niile ejiri aka mee na wijetị na mmemme ahụ.",
@@ -175,7 +178,7 @@
       "ConfigureOptions.System.SirenStartTime": "Sirens Malite igbu oge (sekọnd)",
       "ConfigureOptions.System.SirenMaxTime": "Oge Sirens max (sekọnd, 0= enweghi ngwụcha)",
       "ConfigureOptions.Trigger.ArmedProgram": "Mmemme na-agba ọsọ mgbe eji ngwa agha",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Mmemme na-agba ọsọ mgbe a tọhapụrụ ya",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Mmemme ga-agba ọsọ mgbe a tọhapụrụ ya",
       "ConfigureOptions.Trigger.TriggeredProgram": "Mmemme ga-agba ọsọ mgbe akpalitere"
     },
     "95": {
@@ -231,7 +234,7 @@
     },
     "8": {
       "Title": "Ihe ngosi agba ọwụwa anyanwụ",
-      "Description": "Ọmụmaatụ \"Ọwụwa Anyanwụ\" ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
+      "Description": "Ihe atụ \"Ọwụwa anyanwụ\" dị n'ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
       "Scenarios.SunriseColors": "Njikọ na ọnọdụ ọdịda anyanwụ agba"
     }
   }

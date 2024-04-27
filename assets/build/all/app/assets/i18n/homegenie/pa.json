@@ -5,7 +5,7 @@
   "not_configured_yet": "ਸਿਸਟਮ ਅਜੇ ਕੌਂਫਿਗਰ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ। ਇਹ ਸੈੱਟਅੱਪ ਵਿਜ਼ਾਰਡ ਤੁਹਾਡੇ ਸਿਸਟਮ ਨੂੰ ਕੁਝ ਕਦਮਾਂ ਵਿੱਚ ਚਾਲੂ ਕਰਨ ਅਤੇ ਚਲਾਉਣ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰੇਗਾ।",
   "system_config_start_with_base_and_backup": "ਬੈਕਅੱਪ ਫਾਈਲ ਤੋਂ ਰੀਸਟੋਰ ਕਰੋ",
   "system_config_start_with_default_setup": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੈੱਟਅੱਪ",
-  "system_config_include_demo": "ਸਿਮੂਲੇਟਿਡ ਡਿਵਾਈਸ ਗਤੀਵਿਧੀ ਦੇ ਨਾਲ ਡੈਮੋ ਸ਼ਾਮਲ ਕਰੋ",
+  "system_config_include_demo": "ਸਿਮੂਲੇਟਡ ਡਿਵਾਈਸ ਗਤੀਵਿਧੀ ਦੇ ਨਾਲ ਡੈਮੋ ਸ਼ਾਮਲ ਕਰੋ",
   "system_config_additional_features": "ਵਾਧੂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ",
   "system_config_manual_setup": "ਮੈਨੁਅਲ ਸੈੱਟਅੱਪ",
   "interfaces": "ਇੰਟਰਫੇਸ",
@@ -36,6 +36,9 @@
   "empty_group": "ਇਸ ਸਮੂਹ ਵਿੱਚ ਕੋਈ ਮਾਡਿਊਲ ਨਹੀਂ ਹਨ।",
   "scheduler_wizard": "ਸ਼ਡਿਊਲਰ ਵਿਜ਼ਾਰਡ",
   "schedule_event": "ਘਟਨਾ",
+  "schedule_type_standard": "ਮਿਆਰੀ",
+  "schedule_type_range": "ਮਿਤੀ ਰੇਂਜ",
+  "schedule_type_cron": "ਕਰੋਨ ਸਮੀਕਰਨ",
   "schedule_action": "ਐਕਸ਼ਨ",
   "schedule_occurrence_preview": "ਘਟਨਾ ਦੀ ਝਲਕ",
   "time_schedule": "ਸਮਾਸੂਚੀ, ਕਾਰਜ - ਕ੍ਰਮ",
@@ -139,7 +142,7 @@
     },
     "34": {
       "Title": "ਮੋਸਮ ਪੂਰਵ ਜਾਣਕਾਰੀ",
-      "Description": "ਓਪਨ ਵੈਦਰ ਮੈਪ ਸੇਵਾ ਤੋਂ ਮੌਸਮ ਅਤੇ ਪੂਰਵ ਅਨੁਮਾਨ ਦੀ ਜਾਣਕਾਰੀ।\nਇਸ ਵਿਜੇਟ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰਨ ਲਈ ਇੱਕ ਵੈਧ API ਕੁੰਜੀ ਦਾਖਲ ਕਰੋ।\nਮੁਫ਼ਤ API ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ https://openweathermap.org/appid 'ਤੇ ਹਿਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।",
+      "Description": "ਓਪਨ ਵੈਦਰ ਮੈਪ ਸੇਵਾ ਤੋਂ ਮੌਸਮ ਅਤੇ ਪੂਰਵ ਅਨੁਮਾਨ ਦੀ ਜਾਣਕਾਰੀ।\nਇਸ ਵਿਜੇਟ ਨੂੰ ਸਰਗਰਮ ਕਰਨ ਲਈ ਇੱਕ ਵੈਧ API ਕੁੰਜੀ ਦਾਖਲ ਕਰੋ।\nਮੁਫ਼ਤ API ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ https://openweathermap.org/appid 'ਤੇ ਹਿਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।",
       "ConfigureOptions.Location": "ਸ਼ਹਿਰ ਦਾ ਨਾਮ",
       "ConfigureOptions.Language": "ਭਾਸ਼ਾ (ਉਦਾਹਰਨ ਲਈ EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "ਅੱਪਡੇਟ ਅੰਤਰਾਲ (ਮਿੰਟ)",
@@ -160,7 +163,7 @@
       "EnergyManagement.MonitorWatts": "ਊਰਜਾ ਦੀ ਖਪਤ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ"
     },
     "82": {
-      "Title": "ਊਰਜਾ ਬਚਾਉਣ ਮੋਡ",
+      "Title": "ਊਰਜਾ ਬਚਤ ਮੋਡ",
       "Description": "ਰੋਸ਼ਨੀ ਦੇ ਪੱਧਰ ਨੂੰ ਸੰਰਚਨਾਯੋਗ ਪ੍ਰਤੀਸ਼ਤ ਤੋਂ ਹੇਠਾਂ ਰੱਖੋ।",
       "EnergyManagement.EnergySavingLevel": "ਅਧਿਕਤਮ ਰੋਸ਼ਨੀ ਦਾ ਪੱਧਰ (%)",
       "EnergyManagement.EnergySavingMode": "ਯੋਗ ਕਰੋ"

@@ -36,6 +36,9 @@
   "empty_group": "Nuk ka module në këtë grup.",
   "scheduler_wizard": "Magjistari i programuesit",
   "schedule_event": "Ngjarja",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Gama e datave",
+  "schedule_type_cron": "Shprehje Cron",
   "schedule_action": "Veprimi",
   "schedule_occurrence_preview": "Pamja paraprake e ngjarjes",
   "time_schedule": "Orari",
@@ -123,8 +126,8 @@
   "setup_code": "Konfigurimi",
   "main_code": "Kryesor",
   "context_code": "Kontekst",
-  "main_code_empty_note": "Kodi \"Kryesor\" është bosh.\n\nPërdorni redaktorin \"Visual code\" për të gjeneruar këtë kod:\n- Hapni kategorinë \"Program\" nga paleta e komandave në të majtë\n- Zvarrit një bllok të tipit \"Main\" në hapësirën e punës të kodit vizual\n- Shtoni brenda tij blloqe të tjera kodi për të zbatuar veprimet dhe logjikën e këtij programi\n\nProgrami \"Main\" mund të ekzekutohet manualisht ose automatikisht bazuar në kushtet e dhëna përfundimisht në kodin e konfigurimit.",
-  "setup_code_empty_note": "Kodi \"Setup\" është bosh.\n\nPërdorni redaktorin \"Visual code\" për të gjeneruar këtë kod:\n- Hapni kategorinë \"Program\" nga paleta e komandave në të majtë\n- Zvarritni një bllok të tipit \"Setup\" në hapësirën e punës të kodit vizual\n- Shtoni brenda tij blloqe të tjera kodi për të përcaktuar kushtet që do të shkaktojnë ekzekutimin e kodit \"Kryesor\".\n\nKy kod vlerësohet sa herë që ndodh një ngjarje e re dhe të paktën një herë në minutë.",
+  "main_code_empty_note": "Kodi \"Kryesor\" është bosh.\n\nPërdorni redaktorin \"Visual code\" për të gjeneruar këtë kod:\n- Hapni kategorinë \"Program\" nga paleta e komandave në të majtë\n- Zvarritni një bllok të tipit \"Main\" në hapësirën e punës të kodit vizual\n- Shtoni brenda tij blloqe të tjera kodi për të zbatuar veprimet dhe logjikën e këtij programi\n\nProgrami \"Main\" mund të ekzekutohet manualisht ose automatikisht bazuar në kushtet e dhëna përfundimisht në kodin e konfigurimit.",
+  "setup_code_empty_note": "Kodi \"Setup\" është bosh.\n\nPërdorni redaktorin \"Visual code\" për të gjeneruar këtë kod:\n- Hapni kategorinë \"Program\" nga paleta e komandave në të majtë\n- Zvarrit një bllok të tipit \"Setup\" në hapësirën e punës të kodit vizual\n- Shtoni brenda tij blloqe të tjera kodi për të përcaktuar kushtet që do të shkaktojnë ekzekutimin e kodit \"Kryesor\".\n\nKy kod vlerësohet sa herë që ndodh një ngjarje e re dhe të paktën një herë në minutë.",
   "capture_commands": "Kapni komandat",
   "capture_commands_description": "Shtoni në program të gjitha komandat e kryera me dorë në widget.",
   "capture_commands_pause": "Pushoni midis komandave",
@@ -147,7 +150,7 @@
     },
     "78": {
       "Title": "Termostat i zgjuar",
-      "Description": "Përdorni çdo sensor të temperaturës dhe çelës inteligjent për të zbatuar funksionalitetin e termostatit.",
+      "Description": "Përdorni çdo sensor të temperaturës dhe çelës inteligjent për të zbatuar funksionin e termostatit.",
       "VirtualThermostat.TemperatureModule": "Sensor temperature",
       "VirtualThermostat.HeatingSwitchModule": "Çelësi i ngrohjes",
       "VirtualThermostat.CoolingSwitchModule": "Çelësi i ftohjes",
@@ -191,7 +194,7 @@
       "Sensor.MotionDetect": "Statusi i zbulimit të lëvizjes",
       "Status.Battery": "Niveli i baterisë",
       "Sensor.DoorWindow": "Gjendja e sensorit të dyerve/dritareve (e hapur/e mbyllur)",
-      "Status.Level": "Statusi i ndërrimit (ndezur/fikur)"
+      "Status.Level": "Statusi i kyçjes (ndezur/fikur)"
     },
     "401": {
       "Title": "Demo - Toggle Door",

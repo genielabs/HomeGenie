@@ -36,6 +36,9 @@
   "empty_group": "Không có mô-đun nào trong nhóm này.",
   "scheduler_wizard": "Trình hướng dẫn lập lịch",
   "schedule_event": "Sự kiện",
+  "schedule_type_standard": "Tiêu chuẩn",
+  "schedule_type_range": "Phạm vi ngày",
+  "schedule_type_cron": "Biểu thức cron",
   "schedule_action": "Hoạt động",
   "schedule_occurrence_preview": "Xem trước sự cố",
   "time_schedule": "Lịch trình",
@@ -67,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Tháng đã chọn",
   "cronwizard_schedule_set_exact_time": "Đặt thời gian sự kiện.",
   "cronwizard_schedule_set_slot_start": "Đặt thời gian bắt đầu khe thời gian.",
-  "cronwizard_schedule_set_slot_end": "Bắt đầu lúc {{start}}.<br>\nĐặt kết thúc khe thời gian.",
+  "cronwizard_schedule_set_slot_end": "Bắt đầu lúc {{start}}.<br>\nĐặt thời gian kết thúc.",
   "cronwizard_bindings_define_types_and_modules": "Xác định các loại và mô-đun tuân theo lịch trình này (tùy chọn)",
   "cronwizard_bindings_select_types": "Chọn loại",
   "cronwizard_action_set_action_to_execute": "Đặt hành động để thực thi khi xảy ra sự kiện này",
@@ -156,7 +159,7 @@
     "81": {
       "Title": "Giám sát năng lượng",
       "Description": "Tạo số liệu thống kê về mức tiêu thụ năng lượng và việc sử dụng thiết bị.",
-      "EnergyManagement.MonitorStatus": "Theo dõi trạng thái",
+      "EnergyManagement.MonitorStatus": "Giám sát trạng thái",
       "EnergyManagement.MonitorWatts": "Giám sát mức tiêu thụ năng lượng"
     },
     "82": {

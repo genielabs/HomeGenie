@@ -6,7 +6,7 @@
   "system_config_start_with_base_and_backup": "Ibalik mula sa backup na file",
   "system_config_start_with_default_setup": "Default na setup",
   "system_config_include_demo": "Isama ang demo na may simulate na aktibidad ng device",
-  "system_config_additional_features": "Karagdagang mga tampok",
+  "system_config_additional_features": "Mga karagdagang tampok",
   "system_config_manual_setup": "Manu-manong pag-setup",
   "interfaces": "Mga interface",
   "Protocols.UPnP": "UPnP controller",
@@ -36,6 +36,9 @@
   "empty_group": "Walang mga module sa pangkat na ito.",
   "scheduler_wizard": "Scheduler Wizard",
   "schedule_event": "Kaganapan",
+  "schedule_type_standard": "Pamantayan",
+  "schedule_type_range": "Saklaw ng petsa",
+  "schedule_type_cron": "Cron expression",
   "schedule_action": "Aksyon",
   "schedule_occurrence_preview": "Preview ng pangyayari",
   "time_schedule": "Iskedyul",
@@ -51,7 +54,7 @@
   "cronwizard_start_time": "Oras ng simula",
   "cronwizard_end_time": "Oras ng pagtatapos",
   "cronwizard_minutes": "Mga minuto",
-  "cronwizard_hours": "Oras",
+  "cronwizard_hours": "Mga oras",
   "cronwizard_days": "Mga araw",
   "cronwizard_months": "mga buwan",
   "cronwizard_minuteselect_everyminute": "Bawat minuto",
@@ -139,7 +142,7 @@
     },
     "34": {
       "Title": "Ulat panahon",
-      "Description": "Weather at impormasyon ng forecast mula sa serbisyo ng Open Weather Map.\nUpang i-activate ang widget na ito maglagay ng wastong API key.\nSundin ang mga tagubilin sa https://openweathermap.org/appid para makakuha ng libreng API key.",
+      "Description": "Taya ng panahon at impormasyon ng forecast mula sa serbisyo ng Open Weather Map.\nUpang i-activate ang widget na ito, maglagay ng wastong API key.\nSundin ang mga tagubilin sa https://openweathermap.org/appid para makakuha ng libreng API key.",
       "ConfigureOptions.Location": "Pangalan ng lungsod",
       "ConfigureOptions.Language": "Wika (hal. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "I-update ang pagitan (minuto)",
@@ -188,14 +191,14 @@
       "Description": "Manu-manong itakda ang mga halaga ng virtual device.",
       "Sensor.Temperature": "Halaga ng temperatura",
       "Sensor.Luminance": "Halaga ng luminance",
-      "Sensor.MotionDetect": "Katayuan ng pag-detect ng paggalaw",
+      "Sensor.MotionDetect": "Katayuan ng pagtukoy ng paggalaw",
       "Status.Battery": "Antas ng baterya",
       "Sensor.DoorWindow": "Katayuan ng sensor ng pinto/window (bukas/sarado)",
       "Status.Level": "Lumipat ng katayuan (on/off)"
     },
     "401": {
       "Title": "Demo - I-toggle ang Pinto",
-      "Description": "Ginagaya ang pagbukas/pagsara ng pinto ng demo door-window sensor."
+      "Description": "Ginagaya ang pagbukas/sarado ng pinto ng demo door-window sensor."
     },
     "402": {
       "Title": "Demo - Nakita ang Paggalaw",

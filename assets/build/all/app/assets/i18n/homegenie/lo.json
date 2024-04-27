@@ -36,6 +36,9 @@
   "empty_group": "ບໍ່ມີໂມດູນຢູ່ໃນກຸ່ມນີ້.",
   "scheduler_wizard": "ຕົວຊ່ວຍສ້າງຕາຕະລາງ",
   "schedule_event": "ເຫດການ",
+  "schedule_type_standard": "ມາດຕະຖານ",
+  "schedule_type_range": "ຊ່ວງວັນທີ",
+  "schedule_type_cron": "ການສະແດງອອກ Cron",
   "schedule_action": "ການປະຕິບັດ",
   "schedule_occurrence_preview": "ຕົວຢ່າງການປະກົດຕົວ",
   "time_schedule": "ຕາຕະລາງ",
@@ -70,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "ເລີ່ມຕົ້ນທີ່ {{start}}.<br>\nຕັ້ງເວລາສິ້ນສຸດ.",
   "cronwizard_bindings_define_types_and_modules": "ກໍານົດປະເພດແລະໂມດູນທີ່ຂຶ້ນກັບຕາຕະລາງນີ້ (ທາງເລືອກ)",
   "cronwizard_bindings_select_types": "ເລືອກປະເພດ",
-  "cronwizard_action_set_action_to_execute": "ກໍານົດການປະຕິບັດເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
+  "cronwizard_action_set_action_to_execute": "ກໍານົດການດໍາເນີນການເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
   "cronwizard_action_preset_actions": "ຄຳສັ່ງທີ່ຕັ້ງໄວ້ລ່ວງໜ້າ",
   "cronwizard_action_preset_every_occurrence": "ໃນທຸກໆເຫດການ",
   "cronwizard_action_preset_slot_start": "ໃນຕອນເລີ່ມຕົ້ນຂອງເວລາ",
@@ -139,7 +142,7 @@
     },
     "34": {
       "Title": "ພະ​ຍາ​ກອນ​ອາ​ກາດ",
-      "Description": "ຂໍ້ມູນສະພາບອາກາດ ແລະພະຍາກອນອາກາດຈາກການບໍລິການແຜນທີ່ສະພາບອາກາດເປີດ.\nເພື່ອເປີດໃຊ້ວິດເຈັດນີ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ.\nປະຕິບັດຕາມຄໍາແນະນໍາຢູ່ https://openweathermap.org/appid ເພື່ອຮັບລະຫັດ API ຟຣີ.",
+      "Description": "ຂໍ້ມູນສະພາບອາກາດ ແລະພະຍາກອນອາກາດຈາກບໍລິການແຜນທີ່ສະພາບອາກາດເປີດ.\nເພື່ອເປີດໃຊ້ວິດເຈັດນີ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ.\nປະຕິບັດຕາມຄໍາແນະນໍາທີ່ https://openweathermap.org/appid ເພື່ອຮັບລະຫັດ API ຟຣີ.",
       "ConfigureOptions.Location": "ຊື່ເມືອງ",
       "ConfigureOptions.Language": "ພາສາ (ເຊັ່ນ: EN, IT, FR, DE, ... )",
       "ConfigureOptions.UpdateInterval": "ອັບເດດໄລຍະຫ່າງ (ນາທີ)",
@@ -188,7 +191,7 @@
       "Description": "ຕັ້ງຄ່າຂອງອຸປະກອນສະເໝືອນດ້ວຍຕົນເອງ.",
       "Sensor.Temperature": "ຄ່າອຸນຫະພູມ",
       "Sensor.Luminance": "ຄ່າຄວາມສະຫວ່າງ",
-      "Sensor.MotionDetect": "ສະຖານະກວດຈັບການເຄື່ອນໄຫວ",
+      "Sensor.MotionDetect": "ສະຖານະການກວດຈັບການເຄື່ອນໄຫວ",
       "Status.Battery": "ລະດັບຫມໍ້ໄຟ",
       "Sensor.DoorWindow": "ສະຖານະເຊັນເຊີປະຕູ/ປ່ອງຢ້ຽມ (ເປີດ/ປິດ)",
       "Status.Level": "ສະຫຼັບສະຖານະ (ເປີດ/ປິດ)"
@@ -202,13 +205,13 @@
       "Description": "ຈຳລອງການກວດຈັບການເຄື່ອນໄຫວຂອງຫຼາຍເຊັນເຊີ demo."
     },
     "410": {
-      "Title": "ເຊັນເຊີຈຳລອງ",
+      "Title": "ເຄື່ອງຈຳລອງເຊັນເຊີ",
       "Description": "ປ່ອຍຄ່າເຊັນເຊີແບບສຸ່ມ.",
       "Simulator.Sensor.Temperature": "ເຊັນເຊີອຸນຫະພູມ",
       "Simulator.Sensor.Humidity": "ເຊັນເຊີຄວາມຊຸ່ມຊື່ນ",
       "Simulator.Sensor.Luminance": "ເຊັນເຊີແສງ",
       "Simulator.Meter.Watts": "ວັດວັດ",
-      "Simulator.Meter.Watts.Max": "ພະລັງງານສູງສຸດ",
+      "Simulator.Meter.Watts.Max": "ພະລັງງານສູງສຸດຂອງວັດ",
       "Simulator.Sensor.DataFrequency": "ຕົວຈຳລອງປ່ອຍຄວາມຖີ່"
     },
     "505": {

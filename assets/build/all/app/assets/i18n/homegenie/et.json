@@ -26,7 +26,7 @@
   "programs_version": "Programmide versioon",
   "http_settings": "HTTP seaded",
   "modules_groups": "Rühmad ja moodulid",
-  "groups": "Rühmad",
+  "groups": "Grupid",
   "add_group": "Lisa grupp",
   "edit_group": "Redigeeri gruppi",
   "delete_group": "Kustuta grupp",
@@ -36,6 +36,9 @@
   "empty_group": "Selles rühmas pole mooduleid.",
   "scheduler_wizard": "Planeerija viisard",
   "schedule_event": "Sündmus",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Kuupäevavahemik",
+  "schedule_type_cron": "Croni väljend",
   "schedule_action": "Tegevus",
   "schedule_occurrence_preview": "Esinemise eelvaade",
   "time_schedule": "Ajakava",
@@ -142,7 +145,7 @@
       "Description": "Ilma- ja ilmaennustusteave teenusest Open Weather Map.\nSelle vidina aktiveerimiseks sisestage kehtiv API võti.\nTasuta API-võtme hankimiseks järgige juhiseid aadressil https://openweathermap.org/appid.",
       "ConfigureOptions.Location": "Linna nimi",
       "ConfigureOptions.Language": "Keel (nt EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval": "Värskendamise intervall (minutid)",
+      "ConfigureOptions.UpdateInterval": "Värskendusintervall (minutid)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API võti (APPID)"
     },
     "78": {
@@ -174,7 +177,7 @@
       "ConfigureOptions.System.ArmDelay": "Käe käe viivitus (sekundites)",
       "ConfigureOptions.System.SirenStartTime": "Sireenide käivitamise viivitus (sekundites)",
       "ConfigureOptions.System.SirenMaxTime": "Sireenide maksimaalne aeg (sekundites, 0 = lõpmatu)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Programm, mis töötab valves olles",
+      "ConfigureOptions.Trigger.ArmedProgram": "Programm töötab, kui see on relvastatud",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programm, mis käivitatakse valvest vabastamisel",
       "ConfigureOptions.Trigger.TriggeredProgram": "Käivitamisel käivitatav programm"
     },
@@ -189,7 +192,7 @@
       "Sensor.Temperature": "Temperatuuri väärtus",
       "Sensor.Luminance": "Heleduse väärtus",
       "Sensor.MotionDetect": "Liikumistuvastuse olek",
-      "Status.Battery": "Aku tase",
+      "Status.Battery": "Aku laetuse tase",
       "Sensor.DoorWindow": "Ukse/akna anduri olek (avatud/suletud)",
       "Status.Level": "Lüliti olek (sisse/välja)"
     },

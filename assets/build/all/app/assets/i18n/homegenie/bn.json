@@ -36,6 +36,9 @@
   "empty_group": "এই গ্রুপে কোন মডিউল নেই।",
   "scheduler_wizard": "সময়সূচী উইজার্ড",
   "schedule_event": "ঘটনা",
+  "schedule_type_standard": "স্ট্যান্ডার্ড",
+  "schedule_type_range": "তারিখের পরিসীমা",
+  "schedule_type_cron": "ক্রোন এক্সপ্রেশন",
   "schedule_action": "কর্ম",
   "schedule_occurrence_preview": "ঘটনার পূর্বরূপ",
   "time_schedule": "সময়সূচী",
@@ -77,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "একটি সময় স্লট শেষে",
   "cronwizard_action_custom_script": "কাস্টম অ্যাকশন স্ক্রিপ্ট",
   "cronwizard_action_no_action": "কোন কর্ম",
-  "cronwizard_action_schedule_variable_hint": "ক্রন এক্সপ্রেশনে একটি পরিবর্তনশীল হিসাবে <span class=\"color-primary\">@{{name}}</span> ব্যবহার করুন বা <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}) ব্যবহার করুন \")</span> এই ইভেন্টের উল্লেখ করার জন্য অটোমেশন প্রোগ্রামে।",
+  "cronwizard_action_schedule_variable_hint": "ক্রন এক্সপ্রেশনে একটি পরিবর্তনশীল হিসাবে <span class=\"color-primary\">@{{name}}</span> ব্যবহার করুন বা <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}) ব্যবহার করুন \")</span> এই ইভেন্টের উল্লেখ করতে অটোমেশন প্রোগ্রামে।",
   "scheduler_preset_action_command_turn_on": "চালু করা",
   "scheduler_preset_action_command_turn_off": "বন্ধ কর",
   "scheduler_preset_action_command_set_level": "স্তর সেট করুন",
@@ -97,7 +100,7 @@
   "scheduler_preset_action_config_options": "অপশন",
   "scheduler_preset_action_program_say": "বলুন",
   "scheduler_preset_action_config_message": "বার্তা",
-  "save_and_build": "সংরক্ষণ করুন এবং নির্মাণ করুন",
+  "save_and_build": "সংরক্ষণ এবং নির্মাণ",
   "toggle_widgets_preview": "উইজেট প্রিভিউ টগল করুন",
   "stop_program": "প্রোগ্রাম বন্ধ করুন",
   "run_program": "প্রোগ্রাম চালু করুন",
@@ -133,7 +136,7 @@
   "$options": {
     "16": {
       "Title": "লেভেল মেমরি",
-      "Description": "শেষ ম্লান স্তর সংরক্ষণ করুন এবং প্রত্যাহার করুন।",
+      "Description": "সঞ্চয় করুন এবং শেষ অনুজ্জ্বল স্তর প্রত্যাহার করুন।",
       "HomeGenie.LevelMemory": "সুইচ অন করার সময় শেষ আলোর স্তরটি স্মরণ করুন",
       "HomeGenie.LevelMemory.SimulateOnly": "শুধুমাত্র অনুকরণ"
     },
@@ -156,7 +159,7 @@
     "81": {
       "Title": "এনার্জি মনিটর",
       "Description": "শক্তি খরচ এবং ডিভাইসের ব্যবহারের পরিসংখ্যান তৈরি করুন।",
-      "EnergyManagement.MonitorStatus": "মনিটর অবস্থা",
+      "EnergyManagement.MonitorStatus": "অবস্থা পর্যবেক্ষণ করুন",
       "EnergyManagement.MonitorWatts": "শক্তি খরচ নিরীক্ষণ"
     },
     "82": {
@@ -166,7 +169,7 @@
       "EnergyManagement.EnergySavingMode": "সক্ষম করুন"
     },
     "90": {
-      "Title": "নিরাপত্তা এলার্ম সিস্টেম",
+      "Title": "নিরাপত্তা অ্যালার্ম সিস্টেম",
       "Description": "একটি নিরাপত্তা অ্যালার্ম সিস্টেম বাস্তবায়ন করতে সেন্সর এবং অন্যান্য ডিভাইস ব্যবহার করুন।",
       "HomeGenie.SecurityAlarm": "অ্যালার্ম/স্ট্রোব হিসেবে ব্যবহার করুন",
       "HomeGenie.SecuritySensor": "নিরাপত্তা সেন্সর হিসাবে ব্যবহার করুন",
@@ -186,7 +189,7 @@
     "400": {
       "Title": "ভার্চুয়াল মডিউল ডেমো",
       "Description": "ভার্চুয়াল ডিভাইসের মান ম্যানুয়ালি সেট করুন।",
-      "Sensor.Temperature": "তাপমাত্রার মান",
+      "Sensor.Temperature": "তাপমাত্রা মান",
       "Sensor.Luminance": "আলোকিত মান",
       "Sensor.MotionDetect": "গতি সনাক্তকরণ স্থিতি",
       "Status.Battery": "ব্যাটারি স্তর",

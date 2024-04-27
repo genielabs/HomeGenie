@@ -36,6 +36,9 @@
   "empty_group": "Aucun module dans ce groupe.",
   "scheduler_wizard": "Assistant Planificateur",
   "schedule_event": "Événement",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Plage de dates",
+  "schedule_type_cron": "Expression Cron",
   "schedule_action": "Action",
   "schedule_occurrence_preview": "Aperçu de l'occurrence",
   "time_schedule": "Calendrier",
@@ -147,7 +150,7 @@
     },
     "78": {
       "Title": "Thermostat intelligent",
-      "Description": "Utilisez n’importe quel capteur de température et interrupteur intelligent pour mettre en œuvre la fonctionnalité du thermostat.",
+      "Description": "Utilisez n'importe quel capteur de température et interrupteur intelligent pour mettre en œuvre la fonctionnalité du thermostat.",
       "VirtualThermostat.TemperatureModule": "Capteur de température",
       "VirtualThermostat.HeatingSwitchModule": "Interrupteur de chauffage",
       "VirtualThermostat.CoolingSwitchModule": "Interrupteur de refroidissement",

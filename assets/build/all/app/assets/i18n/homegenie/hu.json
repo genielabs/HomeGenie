@@ -36,6 +36,9 @@
   "empty_group": "Nincsenek modulok ebben a csoportban.",
   "scheduler_wizard": "Ütemező varázsló",
   "schedule_event": "Esemény",
+  "schedule_type_standard": "Alapértelmezett",
+  "schedule_type_range": "Időintervallum",
+  "schedule_type_cron": "Cron kifejezés",
   "schedule_action": "Akció",
   "schedule_occurrence_preview": "Előfordulás előnézete",
   "time_schedule": "Menetrend",
@@ -74,7 +77,7 @@
   "cronwizard_action_preset_actions": "Előre beállított műveletek",
   "cronwizard_action_preset_every_occurrence": "Minden előfordulásnál",
   "cronwizard_action_preset_slot_start": "Egy időrés kezdetén",
-  "cronwizard_action_preset_slot_end": "Egy idősáv végén",
+  "cronwizard_action_preset_slot_end": "Egy időrés végén",
   "cronwizard_action_custom_script": "Egyéni műveleti szkript",
   "cronwizard_action_no_action": "Nincs művelet",
   "cronwizard_action_schedule_variable_hint": "Használja a <span class=\"color-primary\">@{{name}}</span> változót a cron kifejezésekben, vagy használja a <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span> az automatizálási programokban, hogy hivatkozzon erre az eseményre.",
@@ -195,7 +198,7 @@
     },
     "401": {
       "Title": "Demo - Toggle Door",
-      "Description": "A bemutató ajtó-ablak érzékelő ajtónyitást/zárását szimulálja."
+      "Description": "Az ajtó nyitását/zárását szimulálja a bemutató ajtó-ablak érzékelővel."
     },
     "402": {
       "Title": "Demo – Mozgás észlelve",
@@ -224,7 +227,7 @@
       "Title": "Intelligens eszköz",
       "Description": "Kapcsolja be/ki a készüléket a mozgásérzékelés és a környezeti fény alapján.",
       "HomeGenie.SmartLights.Enable": "Az „okoseszköz” engedélyezése",
-      "HomeGenie.SmartLights.OnMotionDetect": "Érzékelővel vezérelhető (opcionális)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Szenzorral vezérelhető (opcionális)",
       "HomeGenie.SmartLights.CheckLuminosity": "Fényérzékelővel vezérelhető (opcionális)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Kikapcsolás inaktivitási időtúllépés után (másodpercben)",
       "HomeGenie.SmartLights.MinLuminance": "Kapcsolja be, ha a fényerő kisebb:"

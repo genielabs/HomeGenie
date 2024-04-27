@@ -36,6 +36,9 @@
   "empty_group": "このグループにはモジュールがありません。",
   "scheduler_wizard": "スケジューラウィザード",
   "schedule_event": "イベント",
+  "schedule_type_standard": "標準",
+  "schedule_type_range": "日付範囲",
+  "schedule_type_cron": "クロン式",
   "schedule_action": "アクション",
   "schedule_occurrence_preview": "発生プレビュー",
   "time_schedule": "スケジュール",
@@ -46,7 +49,7 @@
   "cronwizard_description_starting": "から",
   "cronwizard_description_ending": "に",
   "cronwizard_description_at": "で",
-  "cronwizard_add_time_slot": "時間枠を追加する",
+  "cronwizard_add_time_slot": "時間帯を追加する",
   "cronwizard_add_exact_time": "正確な時間を追加",
   "cronwizard_start_time": "始まる時間",
   "cronwizard_end_time": "終了時間",
@@ -127,7 +130,7 @@
   "setup_code_empty_note": "「セットアップ」コードが空です。\n\n「ビジュアル コード」エディタを使用して、このコードを生成します。\n- 左側のコマンドパレットからカテゴリ「プログラム」を開きます\n- ビジュアル コード ワークスペースで「Setup」タイプのブロックをドラッグします。\n- 内部に他のコード ブロックを追加して、「メイン」コードの実行をトリガーする条件を決定します。\n\nこのコードは、新しいイベントが発生するたびに、少なくとも 1 分に 1 回評価されます。",
   "capture_commands": "キャプチャコマンド",
   "capture_commands_description": "ウィジェット上で手動で実行されるすべてのコマンドをプログラムに追加します。",
-  "capture_commands_pause": "コマンド間の一時停止",
+  "capture_commands_pause": "コマンド間で一時停止する",
   "capture_pause_none": "なし",
   "capture_pause_asis": "そのまま",
   "$options": {
@@ -176,7 +179,7 @@
       "ConfigureOptions.System.SirenMaxTime": "サイレン最大時間 (秒、0=無限)",
       "ConfigureOptions.Trigger.ArmedProgram": "武装時に実行するプログラム",
       "ConfigureOptions.Trigger.DisarmedProgram": "解除時に実行するプログラム",
-      "ConfigureOptions.Trigger.TriggeredProgram": "トリガー時に実行するプログラム"
+      "ConfigureOptions.Trigger.TriggeredProgram": "トリガーされたときに実行するプログラム"
     },
     "95": {
       "Title": "イベントログ",

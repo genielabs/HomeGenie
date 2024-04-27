@@ -36,6 +36,9 @@
   "empty_group": "Nenhum módulo neste grupo.",
   "scheduler_wizard": "Assistente do Agendador",
   "schedule_event": "Evento",
+  "schedule_type_standard": "Padrão",
+  "schedule_type_range": "Período",
+  "schedule_type_cron": "Expressão Cron",
   "schedule_action": "Ação",
   "schedule_occurrence_preview": "Visualização da ocorrência",
   "time_schedule": "Agendar",
@@ -226,12 +229,12 @@
       "HomeGenie.SmartLights.Enable": "Habilite ‘Dispositivo Inteligente’",
       "HomeGenie.SmartLights.OnMotionDetect": "Controlado por sensor (opcional)",
       "HomeGenie.SmartLights.CheckLuminosity": "Controlado por sensor de luz (opcional)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Desligar após tempo limite de inatividade (segundos)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Desligar após o tempo limite de inatividade (segundos)",
       "HomeGenie.SmartLights.MinLuminance": "Ative se a luminância estiver abaixo:"
     },
     "8": {
       "Title": "Cenário de cores do nascer do sol",
-      "Description": "Exemplo de cenário \"Sunrise\" para luzes LED que mudam de cor.",
+      "Description": "Exemplo de cenário \"Nascer do sol\" para luzes LED que mudam de cor.",
       "Scenarios.SunriseColors": "Link para o cenário Sunrise Colors"
     }
   }

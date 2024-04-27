@@ -1,7 +1,7 @@
 {
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Merħba għal HomeGenie!",
-  "welcome_subtitle": "L-intelliġenza tal-awtomazzjoni programmabbli",
+  "welcome_subtitle": "L-intelliġenza ta 'awtomazzjoni programmabbli",
   "not_configured_yet": "Is-sistema għadha mhix ikkonfigurata. Dan is-setup wizard jgħinek biex is-sistema tiegħek tibda taħdem fi ftit passi.",
   "system_config_start_with_base_and_backup": "Irrestawra mill-fajl tal-backup",
   "system_config_start_with_default_setup": "Setup default",
@@ -36,8 +36,11 @@
   "empty_group": "L-ebda moduli f'dan il-grupp.",
   "scheduler_wizard": "Wizard tal-Iskedatur",
   "schedule_event": "Avveniment",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Firxa tad-data",
+  "schedule_type_cron": "Cron espressjoni",
   "schedule_action": "Azzjoni",
-  "schedule_occurrence_preview": "Previżjoni tal-okkorrenza",
+  "schedule_occurrence_preview": "Preview tal-okkorrenza",
   "time_schedule": "Skeda",
   "occurrence": "okkorrenza",
   "cronwizard_description_on": "fuq",
@@ -75,7 +78,7 @@
   "cronwizard_action_preset_every_occurrence": "Fuq kull okkorrenza",
   "cronwizard_action_preset_slot_start": "Fil-bidu ta' ħin",
   "cronwizard_action_preset_slot_end": "Fi tmiem slot ta’ ħin",
-  "cronwizard_action_custom_script": "Iskrittura ta' azzjoni personalizzata",
+  "cronwizard_action_custom_script": "Iskrittura ta 'azzjoni personalizzata",
   "cronwizard_action_no_action": "Ebda azzjoni",
   "cronwizard_action_schedule_variable_hint": "Uża <span class=\"color-primary\">@{{name}}</span> bħala varjabbli fl-espressjonijiet cron jew uża <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span>fi programmi ta' awtomazzjoni biex jirreferu għal dan l-avveniment.",
   "scheduler_preset_action_command_turn_on": "Ixgħel",
@@ -151,7 +154,7 @@
       "VirtualThermostat.TemperatureModule": "Sensor tat-temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Swiċċ tat-tisħin",
       "VirtualThermostat.CoolingSwitchModule": "Swiċċ li jkessaħ",
-      "ConfigureOptions.ThermostatsCount": "Numru ta' termostati"
+      "ConfigureOptions.ThermostatsCount": "Numru ta' termostats"
     },
     "81": {
       "Title": "Monitor tal-Enerġija",
@@ -163,7 +166,7 @@
       "Title": "Modalità Iffrankar tal-Enerġija",
       "Description": "Żomm il-livell tad-dawl taħt persentaġġ konfigurabbli.",
       "EnergyManagement.EnergySavingLevel": "Livell massimu tad-dawl (%)",
-      "EnergyManagement.EnergySavingMode": "Ippermettiet"
+      "EnergyManagement.EnergySavingMode": "Attiva"
     },
     "90": {
       "Title": "Sistema ta' Allarm tas-Sigurtà",
@@ -181,7 +184,7 @@
     "95": {
       "Title": "Logging ta' avvenimenti",
       "Description": "Irreġistra l-attività tal-apparat.",
-      "EventsLogger.EnableLogging": "Ippermettiet"
+      "EventsLogger.EnableLogging": "Attiva"
     },
     "400": {
       "Title": "Moduli Virtwali Demo",
@@ -214,7 +217,7 @@
     "505": {
       "Title": "Kontroll mill-bogħod",
       "Description": "Ikkontrolla l-apparat billi tuża remot (IR jew RF).",
-      "HomeGenie.RemoteControl.Enable": "Ippermettiet",
+      "HomeGenie.RemoteControl.Enable": "Attiva",
       "HomeGenie.RemoteControl.IRCode": "Toggle buttuna",
       "ConfigureOptions.DimmerUpCode": "Buttuna żieda fil-luminożità",
       "ConfigureOptions.DimmerDownCode": "Buttuna għat-tnaqqis tal-luminożità",

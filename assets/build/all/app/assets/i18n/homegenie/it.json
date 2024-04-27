@@ -77,7 +77,13 @@
         "Scheduler Wizard",
     "schedule_event":
         "Evento",
-    "schedule_action":
+    "schedule_type_standard":
+        "Standard",
+    "schedule_type_range":
+        "Intervallo date",
+    "schedule_type_cron":
+        "Espressione Cron",
+  "schedule_action":
         "Azione",
     "schedule_occurrence_preview":
         "Anteprima occorrenza",
@@ -284,7 +290,7 @@
 
       "34": {
         "Title":
-        "Weather Forecast",
+        "Meteo",
         "Description":
         "Informazioni meteo e previsioni dal servizio Open Weather Map.\nPer attivare questo widget inserisci una chiave API valida.\nSegui le istruzioni su https://openweathermap.org/appid per ottenere una chiave API gratuita.",
         "ConfigureOptions.Location":
@@ -298,7 +304,7 @@
       },
 
       "78": {
-        "Title": "Smart Thermostat",
+        "Title": "Termostato Smart",
         "Description": "Usa un qualsiasi sensore di temperatura e interruttore smart per implementare le funzionalità di un termostato.",
         "VirtualThermostat.TemperatureModule": "Sensore di temperatura",
         "VirtualThermostat.HeatingSwitchModule": "Interruttore Heating",
@@ -308,7 +314,7 @@
 
       "81": {
           "Title":
-              "Energy Monitor",
+              "Monitor Energia",
           "Description":
               "Generare statistiche sul consumo energetico e sull'utilizzo dei dispositivi.",
           "EnergyManagement.MonitorStatus":

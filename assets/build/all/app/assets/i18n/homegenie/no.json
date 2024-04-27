@@ -36,6 +36,9 @@
   "empty_group": "Ingen moduler i denne gruppen.",
   "scheduler_wizard": "Planleggerveiviser",
   "schedule_event": "Begivenhet",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Datointervall",
+  "schedule_type_cron": "Cron uttrykk",
   "schedule_action": "Handling",
   "schedule_occurrence_preview": "Forhåndsvisning av forekomst",
   "time_schedule": "Rute",
@@ -194,7 +197,7 @@
       "Status.Level": "Byttestatus (på/av)"
     },
     "401": {
-      "Title": "Demo - Toggle Door",
+      "Title": "Demo - Slå dør",
       "Description": "Simulerer dør åpen/lukket av demo dør-vindu sensor."
     },
     "402": {

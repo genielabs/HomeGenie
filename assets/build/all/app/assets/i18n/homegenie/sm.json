@@ -24,18 +24,21 @@
   "upload_package": "La'u atu le afifi",
   "create_package": "Fausia le afifi fou",
   "programs_version": "Polokalama version",
-  "http_settings": "Fa'atonuga HTTP",
+  "http_settings": "Fa'atonu HTTP",
   "modules_groups": "Vaega ma modules",
   "groups": "Vaega",
   "add_group": "Faaopoopo vaega",
   "edit_group": "Fa'atonu vaega",
   "delete_group": "Aveese vaega",
-  "dashboard_from_group": "Fausia se dashboard mai lenei vaega",
-  "group_modules": "Module i lenei vaega",
+  "dashboard_from_group": "Fausia se dashboard mai le vaega lea",
+  "group_modules": "Modules i lenei vaega",
   "modules": "Modules",
   "empty_group": "Leai ni modules i lenei vaega.",
   "scheduler_wizard": "Fa'atonu Fa'atonu",
   "schedule_event": "Mea na tupu",
+  "schedule_type_standard": "Tulaga",
+  "schedule_type_range": "Va'aiga aso",
+  "schedule_type_cron": "Fa'aaliga Cron",
   "schedule_action": "Gaioiga",
   "schedule_occurrence_preview": "Fa'aaliga muamua",
   "time_schedule": "Fa'atonuga",
@@ -70,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Amata ile {{start}}.<br>\nSeti le fa'ai'uga ole taimi.",
   "cronwizard_bindings_define_types_and_modules": "Fa'amatala ituaiga ma modules e fa'atatau i lenei fa'atulagaga (filifiliga)",
   "cronwizard_bindings_select_types": "Filifili ituaiga",
-  "cronwizard_action_set_action_to_execute": "Fa'atu le gaioiga e fa'atino i mea tutupu o lenei mea",
+  "cronwizard_action_set_action_to_execute": "Fa'atulaga se gaioiga e fa'atino i mea e tutupu i lenei mea",
   "cronwizard_action_preset_actions": "Fa'atonu gaioiga",
   "cronwizard_action_preset_every_occurrence": "I mea uma e tutupu",
   "cronwizard_action_preset_slot_start": "I le amataga o se taimi avanoa",
@@ -87,7 +90,7 @@
   "scheduler_preset_action_command_thermostat_mode": "Faiga vevela",
   "scheduler_preset_action_config_mode": "Faiga",
   "scheduler_preset_action_config_mode_on": "luga",
-  "scheduler_preset_action_config_mode_off": "Ta'ese",
+  "scheduler_preset_action_config_mode_off": "Tape",
   "scheduler_preset_action_config_mode_heat": "Avela",
   "scheduler_preset_action_config_mode_heat_eco": "Tamaoaiga vevela",
   "scheduler_preset_action_config_mode_cool": "Sekia",
@@ -123,8 +126,8 @@
   "setup_code": "Seti",
   "main_code": "Autu",
   "context_code": "Si'osi'omaga",
-  "main_code_empty_note": "\"Main\" code e gaogao.\n\nFa'aaogā le fa'atonu \"Visual code\" e fa'atupu ai lenei fa'ailoga:\n- Tatala le vaega \"Polokalame\" mai le palette poloaiga i le agavale\n- Toso se poloka o le ituaiga \"Main\" i le vaʻaiga faʻailoga galuega\n- Fa'aopoopo i totonu isi poloka fa'ailoga e fa'atino ai gaioiga ma fa'atatau o lenei polokalame\n\nO le polokalame \"Main\" e mafai ona fa'atino ma le lima po'o le auto-amata e fa'atatau i tu'utu'uga mulimuli ane tu'uina atu i le Setup code.",
-  "setup_code_empty_note": "\"Setup\" code e avanoa.\n\nFa'aaogā le fa'atonu \"Visual code\" e fa'atupu ai lenei fa'ailoga:\n- Tatala le vaega \"Polokalame\" mai le palette poloaiga i le agavale\n- Toso se poloka o le ituaiga \"Setup\" i totonu o le vaʻaiga code workspace\n- Faʻaopoopo i totonu isi poloka poloka e fuafua ai tulaga e faʻaosoina ai le faʻatinoina o le code \"Main\".\n\nE su'esu'eina lenei tulafono i taimi uma e tupu ai se mea fou ma ia le itiiti ifo ma le tasi i le minute.",
+  "main_code_empty_note": "\"Main\" code e gaogao.\n\nFa'aaogā le fa'atonu \"Visual code\" e fa'atupu ai le fa'ailoga lenei:\n- Tatala le vaega \"Polokalame\" mai le palette poloaiga i le agavale\n- Toso se poloka o le ituaiga \"Main\" i le vaʻaiga faʻailoga galuega\n- Fa'aopoopo i totonu isi poloka fa'ailoga e fa'atino ai gaioiga ma manatu o lenei polokalame\n\nO le polokalame \"Main\" e mafai ona fa'atino ma le lima po'o le auto-amata e fa'atatau i tulaga mulimuli ane tu'uina atu i le Setup code.",
+  "setup_code_empty_note": "\"Setup\" code e avanoa.\n\nFa'aaogā le fa'atonu \"Visual code\" e fa'atupu ai le fa'ailoga lenei:\n- Tatala le vaega \"Polokalame\" mai le palette poloaiga i le agavale\n- Toso se poloka o le ituaiga \"Setup\" i le va'aiga fa'ailoga galuega\n- Faʻaopoopo i totonu isi poloka poloka e fuafua ai tulaga e faʻaosoina ai le faʻatinoina o le code \"Main\".\n\nE su'esu'eina lenei tulafono i taimi uma e tupu ai se mea fou ma ia le itiiti ifo ma le tasi i le minute.",
   "capture_commands": "Pu'e poloaiga",
   "capture_commands_description": "Fa'aopoopo uma fa'atonuga e faia ma le lima i luga o widgets i le polokalame.",
   "capture_commands_pause": "Taofi i le va o poloaiga",
@@ -139,7 +142,7 @@
     },
     "34": {
       "Title": "Va'aiga o le Tau",
-      "Description": "Tau ma fa'amatalaga fa'amatalaga mai le tautua Open Weather Map.\nIna ia fa'agaoioia lenei widget ulufale i se ki API aoga.\nMulimuli i faatonuga ile https://openweathermap.org/appid e maua ai se ki API e leai se totogi.",
+      "Description": "Fa'amatalaga o le tau ma fa'amatalaga mai le auaunaga Open Weather Map.\nIna ia fa'agaoioia lenei widget ulufale i se ki API aoga.\nMulimuli i faatonuga ile https://openweathermap.org/appid e maua ai se ki API e leai se totogi.",
       "ConfigureOptions.Location": "igoa ole aai",
       "ConfigureOptions.Language": "Gagana (eg. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Fa'afou le va (minute)",
@@ -147,7 +150,7 @@
     },
     "78": {
       "Title": "Smart Thermostat",
-      "Description": "Fa'aaogā so'o se mea e iloa ai le vevela ma se ki fa'aoga atamai e fa'atino ai galuega fa'atino.",
+      "Description": "Fa'aaogā so'o se mea e iloa ai le vevela ma se suiga atamai e fa'atino ai galuega fa'atino.",
       "VirtualThermostat.TemperatureModule": "Su'e vevela",
       "VirtualThermostat.HeatingSwitchModule": "Ki fa'avevela",
       "VirtualThermostat.CoolingSwitchModule": "Kisi fa'alili",
@@ -195,7 +198,7 @@
     },
     "401": {
       "Title": "Fa'aaliga - Togi Faitotoa",
-      "Description": "Fa'ata'ita'i le faitoto'a matala/tapuni o fa'ata'alo faitoto'a-fa'amalama sensor."
+      "Description": "Fa'ata'ita'i faitoto'a tatala/tapuni o fa'ata'ita'iga fa'amalama faitoto'a fa'amalama."
     },
     "402": {
       "Title": "Fa'ata'ita'iga - Fa'ailoa Gaioiga",
@@ -223,14 +226,14 @@
     "145": {
       "Title": "Masini Atamai",
       "Description": "Ki/tapē le masini e fa'atatau i le su'esu'eina o le gaioi ma le malamalama fa'aola.",
-      "HomeGenie.SmartLights.Enable": "Fa'aola 'Masini Atamai'",
+      "HomeGenie.SmartLights.Enable": "Fa'agaoi le 'Masini Atamai'",
       "HomeGenie.SmartLights.OnMotionDetect": "Pulea e le masini (filifiliga)",
       "HomeGenie.SmartLights.CheckLuminosity": "Pulea e le malamalama malamalama (filifiliga)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Tape pe a uma le taimi e le toaga ai (sekona)",
-      "HomeGenie.SmartLights.MinLuminance": "Ki'i pe a iai le malamalama i lalo:"
+      "HomeGenie.SmartLights.MinLuminance": "Fa'aola pe afai o lo'o i lalo le malamalama:"
     },
     "8": {
-      "Title": "Fa'aaliga o Lanu o le La",
+      "Title": "Fa'ata'ita'iga o Lanu o le La",
       "Description": "Fa'ata'ita'iga \"Sunrise\" fa'ata'ita'iga mo moli e sui ai lanu.",
       "Scenarios.SunriseColors": "So'oga ile ata ole Sunrise Colors"
     }

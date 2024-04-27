@@ -36,6 +36,9 @@
   "empty_group": "ಈ ಗುಂಪಿನಲ್ಲಿ ಮಾಡ್ಯೂಲ್‌ಗಳಿಲ್ಲ.",
   "scheduler_wizard": "ಶೆಡ್ಯೂಲರ್ ವಿಝಾರ್ಡ್",
   "schedule_event": "ಈವೆಂಟ್",
+  "schedule_type_standard": "ಪ್ರಮಾಣಿತ",
+  "schedule_type_range": "ದಿನಾಂಕ ವ್ಯಾಪ್ತಿ",
+  "schedule_type_cron": "ಕ್ರಾನ್ ಅಭಿವ್ಯಕ್ತಿ",
   "schedule_action": "ಕ್ರಿಯೆ",
   "schedule_occurrence_preview": "ಸಂಭವಿಸುವಿಕೆಯ ಪೂರ್ವವೀಕ್ಷಣೆ",
   "time_schedule": "ವೇಳಾಪಟ್ಟಿ",
@@ -218,7 +221,7 @@
       "HomeGenie.RemoteControl.IRCode": "ಟಾಗಲ್ ಬಟನ್",
       "ConfigureOptions.DimmerUpCode": "ಹೊಳಪು ಹೆಚ್ಚಿಸುವ ಬಟನ್",
       "ConfigureOptions.DimmerDownCode": "ಹೊಳಪು ಇಳಿಕೆ ಬಟನ್",
-      "ConfigureOptions.DimmerInterval": "ಮಬ್ಬಾಗಿಸುವ ಹಂತ"
+      "ConfigureOptions.DimmerInterval": "ಮಬ್ಬಾಗಿಸುವಿಕೆಯ ಹೆಜ್ಜೆ"
     },
     "145": {
       "Title": "ಸ್ಮಾರ್ಟ್ ಸಾಧನ",
@@ -227,11 +230,11 @@
       "HomeGenie.SmartLights.OnMotionDetect": "ಸಂವೇದಕದಿಂದ ನಿಯಂತ್ರಿಸಲ್ಪಡುತ್ತದೆ (ಐಚ್ಛಿಕ)",
       "HomeGenie.SmartLights.CheckLuminosity": "ಬೆಳಕಿನ ಸಂವೇದಕದಿಂದ ನಿಯಂತ್ರಿಸಲ್ಪಡುತ್ತದೆ (ಐಚ್ಛಿಕ)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "ನಿಷ್ಕ್ರಿಯತೆಯ ಅವಧಿ ಮುಗಿದ ನಂತರ ಆಫ್ ಮಾಡಿ (ಸೆಕೆಂಡ್‌ಗಳು)",
-      "HomeGenie.SmartLights.MinLuminance": "ಪ್ರಕಾಶವು ಕೆಳಗಿದ್ದರೆ ಆನ್ ಮಾಡಿ:"
+      "HomeGenie.SmartLights.MinLuminance": "ಪ್ರಕಾಶಮಾನವು ಕೆಳಗಿದ್ದರೆ ಆನ್ ಮಾಡಿ:"
     },
     "8": {
       "Title": "ಸೂರ್ಯೋದಯ ಬಣ್ಣಗಳ ಸನ್ನಿವೇಶ",
-      "Description": "ಎಲ್ಇಡಿ ದೀಪಗಳನ್ನು ಬಣ್ಣ ಬದಲಾಯಿಸುವ ಉದಾಹರಣೆ \"ಸೂರ್ಯೋದಯ\" ಸನ್ನಿವೇಶ.",
+      "Description": "ಎಲ್ಇಡಿ ದೀಪಗಳನ್ನು ಬದಲಾಯಿಸುವ ಬಣ್ಣಕ್ಕೆ ಉದಾಹರಣೆ \"ಸೂರ್ಯೋದಯ\" ಸನ್ನಿವೇಶ.",
       "Scenarios.SunriseColors": "ಸೂರ್ಯೋದಯ ಬಣ್ಣಗಳ ಸನ್ನಿವೇಶಕ್ಕೆ ಲಿಂಕ್"
     }
   }

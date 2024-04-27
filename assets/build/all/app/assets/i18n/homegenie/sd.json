@@ -2,7 +2,7 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "HomeGenie ۾ ڀليڪار!",
   "welcome_subtitle": "پروگرام قابل آٽوميشن انٽيليجنس",
-  "not_configured_yet": "سسٽم اڃا تائين ترتيب نه ڏني وئي آهي. هي سيٽ اپ مددگار توهان جي سسٽم کي حاصل ڪرڻ ۽ چند قدمن ۾ هلائڻ ۾ مدد ڏيندو.",
+  "not_configured_yet": "سسٽم اڃا تائين ترتيب نه ڏني وئي آهي. هي سيٽ اپ مددگار توهان جي سسٽم کي حاصل ڪرڻ ۽ چند قدمن ۾ هلائڻ ۾ مدد ڪندو.",
   "system_config_start_with_base_and_backup": "بيڪ اپ فائل مان بحال ڪريو",
   "system_config_start_with_default_setup": "ڊفالٽ سيٽ اپ",
   "system_config_include_demo": "سميلٽ ڊيوائس سرگرمي سان گڏ ڊيمو شامل ڪريو",
@@ -36,6 +36,9 @@
   "empty_group": "هن گروپ ۾ ڪو به ماڊل ناهي.",
   "scheduler_wizard": "شيڊيولر مددگار",
   "schedule_event": "واقعو",
+  "schedule_type_standard": "معياري",
+  "schedule_type_range": "تاريخ جي حد",
+  "schedule_type_cron": "ڪرون اظهار",
   "schedule_action": "عمل",
   "schedule_occurrence_preview": "واقعن جو ڏيک",
   "time_schedule": "شيڊول",
@@ -77,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "هڪ وقت جي سلاٽ جي آخر ۾",
   "cronwizard_action_custom_script": "ڪسٽم ايڪشن اسڪرپٽ",
   "cronwizard_action_no_action": "ڪوبه عمل ناهي",
-  "cronwizard_action_schedule_variable_hint": "استعمال ڪريو <span class=\"color-primary\">@{{name}}</span> کي ڪرون ايڪسپريس ۾ متغير طور يا استعمال ڪريو <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span> آٽوميشن پروگرامن ۾ هن واقعي جي حوالي سان.",
+  "cronwizard_action_schedule_variable_hint": "استعمال ڪريو <span class=\"color-primary\">@{{name}}</span> ڪرون ايڪسپريسشن ۾ متغير طور يا استعمال ڪريو <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span> آٽوميشن پروگرامن ۾ هن واقعي جي حوالي سان.",
   "scheduler_preset_action_command_turn_on": "هلايو",
   "scheduler_preset_action_command_turn_off": "بند ڪريو",
   "scheduler_preset_action_command_set_level": "سطح مقرر ڪريو",
@@ -141,7 +144,7 @@
       "Title": "موسمي اڳڪٿي",
       "Description": "اوپن ويدر ميپ سروس مان موسم ۽ اڳڪٿي جي ڄاڻ.\nھن ويجيٽ کي چالو ڪرڻ لاءِ ھڪ صحيح API چيڪ داخل ڪريو.\nھدايتن تي عمل ڪريو https://openweathermap.org/appid مفت API ڪي حاصل ڪرڻ لاءِ.",
       "ConfigureOptions.Location": "شهر جو نالو",
-      "ConfigureOptions.Language": "ٻولي (مثال طور EN, IT, FR, DE, ...)",
+      "ConfigureOptions.Language": "ٻولي (مثال طور. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "اپڊيٽ وقفو (منٽ)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API key (APPID)"
     },
@@ -195,7 +198,7 @@
     },
     "401": {
       "Title": "Demo - ٽوگل دروازو",
-      "Description": "ڊيمو دروازا-ونڊو سينسر جي دروازن کي کليل/بند ڪري ٿو."
+      "Description": "ڊيمو دروازا-ونڊو سينسر جي کليل/بند ٿيل دروازن کي نقل ڪري ٿو."
     },
     "402": {
       "Title": "Demo - موشن معلوم ڪيو ويو",

@@ -21,7 +21,7 @@
   "repositories": "Repositories",
   "packages": "Pakketten",
   "installed_packages": "Ynstallearre pakketten",
-  "upload_package": "Upload pakket",
+  "upload_package": "Pakket uploade",
   "create_package": "Meitsje nij pakket",
   "programs_version": "Programs ferzje",
   "http_settings": "HTTP ynstellings",
@@ -36,6 +36,9 @@
   "empty_group": "Gjin modules yn dizze groep.",
   "scheduler_wizard": "Scheduler Wizard",
   "schedule_event": "Barren",
+  "schedule_type_standard": "Standert",
+  "schedule_type_range": "Datum berik",
+  "schedule_type_cron": "Cron útdrukking",
   "schedule_action": "Aksje",
   "schedule_occurrence_preview": "Foarbyld fan foarkommen",
   "time_schedule": "Skema",
@@ -70,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Begjinnend by {{start}}.<br>\nStel tiid slot ein.",
   "cronwizard_bindings_define_types_and_modules": "Definiearje soarten en modules dy't ûnderwurpen binne oan dit skema (opsjoneel)",
   "cronwizard_bindings_select_types": "Selektearje soarten",
-  "cronwizard_action_set_action_to_execute": "Stel aksje yn om út te fieren op foarfallen fan dit barren",
+  "cronwizard_action_set_action_to_execute": "Stel aksje yn om út te fieren op foarkommen fan dit evenemint",
   "cronwizard_action_preset_actions": "Foarynstelde aksjes",
   "cronwizard_action_preset_every_occurrence": "Op elke foarfal",
   "cronwizard_action_preset_slot_start": "By it begjin fan in tiid slot",
@@ -123,17 +126,17 @@
   "setup_code": "Opsette",
   "main_code": "Foarnaamste",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Main\" koade is leech.\n\nBrûk de \"Visuele koade\" bewurker om dizze koade te generearjen:\n- Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant\n- Sleep in blok fan it type \"Main\" yn 'e wurkromte foar fisuele koade\n- Foegje oare koadeblokken deryn ta om aksjes en logika fan dit programma út te fieren\n\nIt programma \"Main\" kin ofwol mei de hân of auto-start wurde útfierd op basis fan betingsten dy't úteinlik jûn wurde yn 'e Setup-koade.",
-  "setup_code_empty_note": "\"Setup\" koade is leech.\n\nBrûk de \"Visuele koade\" bewurker om dizze koade te generearjen:\n- Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant\n- Sleep in blok fan it type \"Setup\" yn 'e wurkromte foar fisuele koade\n- Foegje oare koadeblokken deryn ta om de betingsten te bepalen dy't de útfiering fan \"Main\" koade sille triggerje\n\nDizze koade wurdt evaluearre elke kear as in nij evenemint bart en op syn minst ien kear yn 'e minút.",
+  "main_code_empty_note": "\"Main\" koade is leech.\n\nBrûk de \"Visuele koade\" bewurker om dizze koade te generearjen:\n- Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant\n- Sleep in blok fan it type \"Main\" yn 'e wurkromte foar fisuele koade\n- Foegje oare koadeblokken deryn ta om aksjes en logika fan dit programma út te fieren\n\nIt programma \"Main\" kin ofwol mei de hân of automatysk starte wurde op basis fan betingsten dy't úteinlik jûn wurde yn 'e Setup-koade.",
+  "setup_code_empty_note": "\"Setup\" koade is leech.\n\nBrûk de \"Visuele koade\" bewurker om dizze koade te generearjen:\n- Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant\n- Sleep in blok fan it type \"Setup\" yn 'e wurkromte foar fisuele koade\n- Foegje deryn oare koadeblokken ta om de betingsten te bepalen dy't de útfiering fan \"Main\" koade sille trigger\n\nDizze koade wurdt evaluearre elke kear as in nij evenemint plakfynt en op syn minst ien kear yn 'e minút.",
   "capture_commands": "Capture kommando",
   "capture_commands_description": "Foegje alle kommando's mei de hân op widgets ta oan it programma.",
-  "capture_commands_pause": "Pauze tusken kommando's",
+  "capture_commands_pause": "Paus tusken kommando's",
   "capture_pause_none": "Gjin",
   "capture_pause_asis": "Sa't is",
   "$options": {
     "16": {
       "Title": "Level Unthâld",
-      "Description": "Bewarje en ûnthâld lêste dimmer nivo.",
+      "Description": "Bewarje en ûnthâlde lêste dimmer nivo.",
       "HomeGenie.LevelMemory": "Recall lêste ljocht nivo doe't ynskeakele",
       "HomeGenie.LevelMemory.SimulateOnly": "Allinnich simulearje"
     },
@@ -147,11 +150,11 @@
     },
     "78": {
       "Title": "Smart termostaat",
-      "Description": "Brûk elke temperatuersensor en tûke switch om thermostaatfunksjonaliteit te ymplementearjen.",
+      "Description": "Brûk elke temperatuersensor en tûke switch om thermostaatfunksjonaliteit út te fieren.",
       "VirtualThermostat.TemperatureModule": "Temperatuer sensor",
       "VirtualThermostat.HeatingSwitchModule": "Ferwaarming switch",
       "VirtualThermostat.CoolingSwitchModule": "Cooling switch",
-      "ConfigureOptions.ThermostatsCount": "Oantal thermostats"
+      "ConfigureOptions.ThermostatsCount": "Oantal thermostaten"
     },
     "81": {
       "Title": "Enerzjy Monitor",
@@ -170,7 +173,7 @@
       "Description": "Brûk sensoren en oare apparaten om in befeiligingsalarmsysteem út te fieren.",
       "HomeGenie.SecurityAlarm": "Brûk as alarm / strobe",
       "HomeGenie.SecuritySensor": "Brûk as feiligens sensor",
-      "ConfigureOptions.Email.Recipients": "Komma-skieden list mei e-postberjochten fan ûntfangers foar alarmnotifikaasjes",
+      "ConfigureOptions.Email.Recipients": "Komma-skieden list fan e-postberjochten fan ûntfangers foar alarmnotifikaasjes",
       "ConfigureOptions.System.ArmDelay": "Armfertraging (sekonden)",
       "ConfigureOptions.System.SirenStartTime": "Sirenes start fertraging (sekonden)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenes max Tiid (sekonden, 0 = ûneinich)",
@@ -185,13 +188,13 @@
     },
     "400": {
       "Title": "Firtuele Modules Demo",
-      "Description": "Werden fan it firtuele apparaat manuell ynstelle.",
+      "Description": "Hânmjittich ynstelle wearden fan de firtuele apparaat.",
       "Sensor.Temperature": "Temperatuer wearde",
       "Sensor.Luminance": "Luminânsje wearde",
       "Sensor.MotionDetect": "Bewegingsdeteksjestatus",
       "Status.Battery": "Batterij nivo",
       "Sensor.DoorWindow": "Doar-/finstersensorstatus (iepen/sletten)",
-      "Status.Level": "Status skeakelje (oan/út)"
+      "Status.Level": "Skeakelje status (oan/út)"
     },
     "401": {
       "Title": "Demo - Toggle Door",
@@ -213,7 +216,7 @@
     },
     "505": {
       "Title": "Ôfstansbetsjinning",
-      "Description": "Behearskje it apparaat mei in ôfstân (IR of RF).",
+      "Description": "Kontrolearje it apparaat mei in ôfstân (IR of RF).",
       "HomeGenie.RemoteControl.Enable": "Ynskeakelje",
       "HomeGenie.RemoteControl.IRCode": "Skeakelje knop",
       "ConfigureOptions.DimmerUpCode": "Knop foar ferheging fan helderheid",

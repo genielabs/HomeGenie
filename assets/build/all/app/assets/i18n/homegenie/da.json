@@ -36,6 +36,9 @@
   "empty_group": "Ingen moduler i denne gruppe.",
   "scheduler_wizard": "Scheduler Wizard",
   "schedule_event": "Begivenhed",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Datointerval",
+  "schedule_type_cron": "Cron udtryk",
   "schedule_action": "Handling",
   "schedule_occurrence_preview": "Forhåndsvisning af forekomst",
   "time_schedule": "Tidsplan",
@@ -175,7 +178,7 @@
       "ConfigureOptions.System.SirenStartTime": "Sirenernes startforsinkelse (sekunder)",
       "ConfigureOptions.System.SirenMaxTime": "Sirener maks. tid (sekunder, 0=uendelig)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program til at køre, når tilkoblet",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Program til at køre, når det er frakoblet",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Program til at køre, når de er frakoblet",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program til at køre, når det udløses"
     },
     "95": {

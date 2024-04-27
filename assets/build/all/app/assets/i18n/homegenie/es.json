@@ -36,6 +36,9 @@
   "empty_group": "No hay módulos en este grupo.",
   "scheduler_wizard": "Asistente del programador",
   "schedule_event": "Evento",
+  "schedule_type_standard": "Estándar",
+  "schedule_type_range": "Rango de fechas",
+  "schedule_type_cron": "expresión cron",
   "schedule_action": "Acción",
   "schedule_occurrence_preview": "Vista previa de ocurrencia",
   "time_schedule": "Cronograma",
@@ -180,7 +183,7 @@
     },
     "95": {
       "Title": "Registro de eventos",
-      "Description": "Registra la actividad del dispositivo.",
+      "Description": "Registre la actividad del dispositivo.",
       "EventsLogger.EnableLogging": "Permitir"
     },
     "400": {

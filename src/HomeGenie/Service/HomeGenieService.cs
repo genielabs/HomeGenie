@@ -443,7 +443,6 @@ namespace HomeGenie.Service
 
         private void migService_InterfacePropertyChanged(object sender, InterfacePropertyChangedEventArgs args)
         {
-
             // look for module associated to this event
             Module module = Modules.Find(o => o.Domain == args.EventData.Domain && o.Address == args.EventData.Source);
             if (module != null && args.EventData.Property != "")

@@ -36,6 +36,9 @@
   "empty_group": "មិនមានម៉ូឌុលនៅក្នុងក្រុមនេះទេ។",
   "scheduler_wizard": "អ្នកជំនួយការអ្នករៀបចំកាលវិភាគ",
   "schedule_event": "ព្រឹត្តិការណ៍",
+  "schedule_type_standard": "ស្តង់ដារ",
+  "schedule_type_range": "ជួរកាលបរិច្ឆេទ",
+  "schedule_type_cron": "កន្សោម Cron",
   "schedule_action": "សកម្មភាព",
   "schedule_occurrence_preview": "ការ​មើល​ការ​កើត​ឡើង​ជា​មុន​",
   "time_schedule": "កាលវិភាគ",
@@ -209,7 +212,7 @@
       "Simulator.Sensor.Luminance": "ឧបករណ៍ចាប់សញ្ញាពន្លឺ",
       "Simulator.Meter.Watts": "វ៉ាត់ម៉ែត្រ",
       "Simulator.Meter.Watts.Max": "ថាមពលអតិបរមាវ៉ាត់",
-      "Simulator.Sensor.DataFrequency": "កម្មវិធីត្រាប់តាមបញ្ចេញប្រេកង់"
+      "Simulator.Sensor.DataFrequency": "ក្លែងធ្វើបញ្ចេញប្រេកង់"
     },
     "505": {
       "Title": "តេឡេ",

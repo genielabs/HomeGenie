@@ -33,11 +33,14 @@
   "dashboard_from_group": "ဤအဖွဲ့မှ ဒက်ရှ်ဘုတ်တစ်ခု ဖန်တီးပါ။",
   "group_modules": "ဤအုပ်စုရှိ မော်ဂျူးများ",
   "modules": "မော်ဂျူးများ",
-  "empty_group": "ဤအုပ်စုတွင် module များမရှိပါ။",
+  "empty_group": "ဤအဖွဲ့တွင် module မရှိပါ။",
   "scheduler_wizard": "အစီအစဉ်ဆွဲသူ Wizard",
   "schedule_event": "ပွဲ",
+  "schedule_type_standard": "စံ",
+  "schedule_type_range": "ရက်စွဲအပိုင်းအခြား",
+  "schedule_type_cron": "Cron စကားရပ်",
   "schedule_action": "အက်ရှင်",
-  "schedule_occurrence_preview": "ဖြစ်ပျက်မှု အကြိုကြည့်ရှုခြင်း။",
+  "schedule_occurrence_preview": "ဖြစ်ပျက်မှု အကြိုကြည့်ရှုမှု",
   "time_schedule": "အချိန်ဇယား",
   "occurrence": "ဖြစ်ပျက်မှု",
   "cronwizard_description_on": "on",
@@ -199,7 +202,7 @@
     },
     "402": {
       "Title": "သရုပ်ပြ - လှုပ်ရှားမှုကို တွေ့ရှိထားသည်။",
-      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို အတုယူသည်။"
+      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို တုပသည်။"
     },
     "410": {
       "Title": "အာရုံခံခြင်း simulator",
@@ -212,17 +215,17 @@
       "Simulator.Sensor.DataFrequency": "Simulator သည် ကြိမ်နှုန်းကို ထုတ်လွှတ်သည်။"
     },
     "505": {
-      "Title": "အဝေးထိန်းစနစ်",
+      "Title": "အဝေးထိန်း",
       "Description": "အဝေးထိန်း (IR သို့မဟုတ် RF) ကို အသုံးပြု၍ စက်ပစ္စည်းကို ထိန်းချုပ်ပါ။",
       "HomeGenie.RemoteControl.Enable": "ဖွင့်ပါ။",
       "HomeGenie.RemoteControl.IRCode": "ခလုတ်နှိပ်ပါ။",
       "ConfigureOptions.DimmerUpCode": "တောက်ပမှုတိုးရန်ခလုတ်",
-      "ConfigureOptions.DimmerDownCode": "တောက်ပမှုကို လျှော့ချရန် ခလုတ်",
+      "ConfigureOptions.DimmerDownCode": "အလင်းအမှောင် ခလုတ်",
       "ConfigureOptions.DimmerInterval": "မှိန်းနေမိသည်။"
     },
     "145": {
       "Title": "စမတ်ကိရိယာ",
-      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်ပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
+      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်အပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
       "HomeGenie.SmartLights.Enable": "'စမတ်စက်ပစ္စည်း' ကို ဖွင့်ပါ",
       "HomeGenie.SmartLights.OnMotionDetect": "အာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
       "HomeGenie.SmartLights.CheckLuminosity": "အလင်းအာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -232,7 +235,7 @@
     "8": {
       "Title": "နေထွက်အရောင်များ ဇာတ်လမ်း",
       "Description": "အရောင်ပြောင်း LED မီးများအတွက် \"နေထွက်\" မြင်ကွင်း ဥပမာ။",
-      "Scenarios.SunriseColors": "Sunrise Colors မြင်ကွင်းသို့ လင့်ခ်ချိတ်ပါ။"
+      "Scenarios.SunriseColors": "Sunrise Colours အခြေအနေသို့ လင့်ခ်ချိတ်ပါ။"
     }
   }
 }

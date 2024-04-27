@@ -36,6 +36,9 @@
   "empty_group": "No hi ha mòduls en aquest grup.",
   "scheduler_wizard": "Assistent del programador",
   "schedule_event": "Esdeveniment",
+  "schedule_type_standard": "Estàndard",
+  "schedule_type_range": "Interval de dates",
+  "schedule_type_cron": "Expressió cron",
   "schedule_action": "Acció",
   "schedule_occurrence_preview": "Vista prèvia de l'ocurrència",
   "time_schedule": "Horari",
@@ -72,12 +75,12 @@
   "cronwizard_bindings_select_types": "Seleccioneu tipus",
   "cronwizard_action_set_action_to_execute": "Estableix l'acció per executar-se en casos d'aquest esdeveniment",
   "cronwizard_action_preset_actions": "Accions predeterminades",
-  "cronwizard_action_preset_every_occurrence": "En cada ocurrència",
+  "cronwizard_action_preset_every_occurrence": "En cada esdeveniment",
   "cronwizard_action_preset_slot_start": "A l'inici d'una franja horària",
   "cronwizard_action_preset_slot_end": "Al final d'una franja horària",
   "cronwizard_action_custom_script": "Script d'acció personalitzat",
   "cronwizard_action_no_action": "Sense acció",
-  "cronwizard_action_schedule_variable_hint": "Utilitzeu <span class=\"color-primary\">@{{name}}</span> com a variable en expressions cron o utilitzeu <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span> als programes d'automatització per fer referència a aquest esdeveniment.",
+  "cronwizard_action_schedule_variable_hint": "Utilitzeu <span class=\"color-primary\">@{{name}}</span> com a variable a les expressions cron o utilitzeu <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span> als programes d'automatització per fer referència a aquest esdeveniment.",
   "scheduler_preset_action_command_turn_on": "Encendre",
   "scheduler_preset_action_command_turn_off": "Tanca",
   "scheduler_preset_action_command_set_level": "Estableix el nivell",
@@ -170,7 +173,7 @@
       "Description": "Utilitzeu sensors i altres dispositius per implementar un sistema d'alarma de seguretat.",
       "HomeGenie.SecurityAlarm": "Ús com a alarma/estroboscopi",
       "HomeGenie.SecuritySensor": "Ús com a sensor de seguretat",
-      "ConfigureOptions.Email.Recipients": "Llista separada per comes de correus electrònics de destinataris per a notificacions d'alarma",
+      "ConfigureOptions.Email.Recipients": "Llista separada per comes dels correus electrònics dels destinataris per a les notificacions d'alarma",
       "ConfigureOptions.System.ArmDelay": "Retard del braç (segons)",
       "ConfigureOptions.System.SirenStartTime": "Retard d'inici de sirenes (segons)",
       "ConfigureOptions.System.SirenMaxTime": "Temps màxim de les sirenes (segons, 0=infinit)",
@@ -198,7 +201,7 @@
       "Description": "Simula la porta oberta/tancada del sensor de demostració de la porta-finestra."
     },
     "402": {
-      "Title": "Demo - S'ha detectat moviment",
+      "Title": "Demostració - S'ha detectat moviment",
       "Description": "Simula la detecció de moviment del multisensor de demostració."
     },
     "410": {
@@ -213,7 +216,7 @@
     },
     "505": {
       "Title": "Control remot",
-      "Description": "Controleu el dispositiu amb un comandament a distància (IR o RF).",
+      "Description": "Controla el dispositiu amb un comandament a distància (IR o RF).",
       "HomeGenie.RemoteControl.Enable": "Activa",
       "HomeGenie.RemoteControl.IRCode": "Botó de commutació",
       "ConfigureOptions.DimmerUpCode": "Botó per augmentar la brillantor",

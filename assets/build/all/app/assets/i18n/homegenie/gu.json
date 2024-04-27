@@ -36,11 +36,14 @@
   "empty_group": "આ જૂથમાં કોઈ મોડ્યુલ નથી.",
   "scheduler_wizard": "શેડ્યૂલર વિઝાર્ડ",
   "schedule_event": "ઘટના",
+  "schedule_type_standard": "ધોરણ",
+  "schedule_type_range": "તારીખ શ્રેણી",
+  "schedule_type_cron": "ક્રોન અભિવ્યક્તિ",
   "schedule_action": "ક્રિયા",
   "schedule_occurrence_preview": "ઘટના પૂર્વાવલોકન",
   "time_schedule": "અનુસૂચિ",
   "occurrence": "ઘટના",
-  "cronwizard_description_on": "ચાલુ",
+  "cronwizard_description_on": "પર",
   "cronwizard_description_from": "થી",
   "cronwizard_description_to": "પ્રતિ",
   "cronwizard_description_starting": "થી",
@@ -51,7 +54,7 @@
   "cronwizard_start_time": "પ્રારંભ સમય",
   "cronwizard_end_time": "સમાપ્તિ સમય",
   "cronwizard_minutes": "મિનિટ",
-  "cronwizard_hours": "કલાક",
+  "cronwizard_hours": "કલાકો",
   "cronwizard_days": "દિવસ",
   "cronwizard_months": "મહિનાઓ",
   "cronwizard_minuteselect_everyminute": "દર મિનિટે",
@@ -115,7 +118,7 @@
   "program_status_broken": "તૂટેલી",
   "program_status_compile": "કમ્પાઇલ કરો",
   "automation_programming_guide": "પ્રોગ્રામિંગ માર્ગદર્શિકા'",
-  "tap_to_disable": "અક્ષમ કરવા માટે ટેપ કરો",
+  "tap_to_disable": "અક્ષમ કરવા માટે ટૅપ કરો",
   "tap_to_enable": "સક્ષમ કરવા માટે ટેપ કરો",
   "program_data": "પ્રોગ્રામ ડેટા",
   "visual_code": "વિઝ્યુઅલ કોડ",
@@ -124,7 +127,7 @@
   "main_code": "મુખ્ય",
   "context_code": "સંદર્ભ",
   "main_code_empty_note": "\"મુખ્ય\" કોડ ખાલી છે.\n\nઆ કોડ જનરેટ કરવા માટે \"વિઝ્યુઅલ કોડ\" એડિટરનો ઉપયોગ કરો:\n- ડાબી બાજુના આદેશ પેલેટમાંથી \"પ્રોગ્રામ\" શ્રેણી ખોલો\n- વિઝ્યુઅલ કોડ વર્કસ્પેસમાં \"મુખ્ય\" પ્રકારનો બ્લોક ખેંચો\n- આ પ્રોગ્રામની ક્રિયાઓ અને તર્કને અમલમાં મૂકવા માટે તેની અંદર અન્ય કોડ બ્લોક્સ ઉમેરો\n\nપ્રોગ્રામ \"મુખ્ય\" ક્યાં તો મેન્યુઅલી ચલાવી શકાય છે અથવા આખરે સેટઅપ કોડમાં આપેલી શરતોના આધારે સ્વતઃ શરૂ થઈ શકે છે.",
-  "setup_code_empty_note": "\"સેટઅપ\" કોડ ખાલી છે.\n\nઆ કોડ જનરેટ કરવા માટે \"વિઝ્યુઅલ કોડ\" એડિટરનો ઉપયોગ કરો:\n- ડાબી બાજુના આદેશ પેલેટમાંથી \"પ્રોગ્રામ\" શ્રેણી ખોલો\n- વિઝ્યુઅલ કોડ વર્કસ્પેસમાં \"સેટઅપ\" પ્રકારના બ્લોકને ખેંચો\n- \"મુખ્ય\" કોડ એક્ઝેક્યુશનને ટ્રિગર કરતી શરતો નક્કી કરવા માટે તેની અંદર અન્ય કોડ બ્લોક્સ ઉમેરો\n\nજ્યારે પણ કોઈ નવી ઘટના બને છે ત્યારે અને ઓછામાં ઓછા એક મિનિટમાં આ કોડનું મૂલ્યાંકન કરવામાં આવે છે.",
+  "setup_code_empty_note": "\"સેટઅપ\" કોડ ખાલી છે.\n\nઆ કોડ જનરેટ કરવા માટે \"વિઝ્યુઅલ કોડ\" એડિટરનો ઉપયોગ કરો:\n- ડાબી બાજુના આદેશ પેલેટમાંથી \"પ્રોગ્રામ\" શ્રેણી ખોલો\n- વિઝ્યુઅલ કોડ વર્કસ્પેસમાં \"સેટઅપ\" પ્રકારના બ્લોકને ખેંચો\n- \"મુખ્ય\" કોડ એક્ઝિક્યુશનને ટ્રિગર કરતી શરતો નક્કી કરવા માટે તેની અંદર અન્ય કોડ બ્લોક્સ ઉમેરો\n\nજ્યારે પણ કોઈ નવી ઘટના બને છે ત્યારે અને ઓછામાં ઓછા એક મિનિટમાં આ કોડનું મૂલ્યાંકન કરવામાં આવે છે.",
   "capture_commands": "કેપ્ચર આદેશો",
   "capture_commands_description": "પ્રોગ્રામમાં વિજેટ્સ પર મેન્યુઅલી કરવામાં આવતા તમામ આદેશો ઉમેરો.",
   "capture_commands_pause": "આદેશો વચ્ચે થોભો",
@@ -134,7 +137,7 @@
     "16": {
       "Title": "લેવલ મેમરી",
       "Description": "છેલ્લા ડિમર લેવલને સ્ટોર કરો અને રિકોલ કરો.",
-      "HomeGenie.LevelMemory": "જ્યારે ચાલુ હોય ત્યારે છેલ્લું પ્રકાશ સ્તર યાદ કરો",
+      "HomeGenie.LevelMemory": "જ્યારે સ્વિચ ચાલુ હોય ત્યારે છેલ્લું લાઇટ લેવલ યાદ કરો",
       "HomeGenie.LevelMemory.SimulateOnly": "માત્ર અનુકરણ કરો"
     },
     "34": {
@@ -155,7 +158,7 @@
     },
     "81": {
       "Title": "એનર્જી મોનિટર",
-      "Description": "ઉર્જા વપરાશ અને ઉપકરણોના ઉપયોગ અંગેના આંકડા બનાવો.",
+      "Description": "ઉર્જા વપરાશ અને ઉપકરણોના વપરાશ અંગેના આંકડા બનાવો.",
       "EnergyManagement.MonitorStatus": "મોનિટર સ્થિતિ",
       "EnergyManagement.MonitorWatts": "ઉર્જા વપરાશનું નિરીક્ષણ કરો"
     },
@@ -176,7 +179,7 @@
       "ConfigureOptions.System.SirenMaxTime": "સાયરન્સનો મહત્તમ સમય (સેકન્ડ, 0=અનંત)",
       "ConfigureOptions.Trigger.ArmedProgram": "સશસ્ત્ર હોય ત્યારે ચલાવવા માટેનો પ્રોગ્રામ",
       "ConfigureOptions.Trigger.DisarmedProgram": "જ્યારે નિઃશસ્ત્ર હોય ત્યારે ચલાવવા માટેનો પ્રોગ્રામ",
-      "ConfigureOptions.Trigger.TriggeredProgram": "જ્યારે ટ્રિગર થાય ત્યારે ચલાવવા માટેનો પ્રોગ્રામ"
+      "ConfigureOptions.Trigger.TriggeredProgram": "ટ્રિગર થાય ત્યારે ચલાવવા માટેનો પ્રોગ્રામ"
     },
     "95": {
       "Title": "ઇવેન્ટ્સ લૉગિંગ",
@@ -209,7 +212,7 @@
       "Simulator.Sensor.Luminance": "લાઇટ સેન્સર",
       "Simulator.Meter.Watts": "વોટ્સ મીટર",
       "Simulator.Meter.Watts.Max": "મેક્સ વોટ પાવર",
-      "Simulator.Sensor.DataFrequency": "સિમ્યુલેટર ઉત્સર્જન આવર્તન"
+      "Simulator.Sensor.DataFrequency": "સિમ્યુલેટર એમિટ ફ્રીક્વન્સી"
     },
     "505": {
       "Title": "દૂરસ્થ નિયંત્રણ",
@@ -218,7 +221,7 @@
       "HomeGenie.RemoteControl.IRCode": "ટૉગલ બટન",
       "ConfigureOptions.DimmerUpCode": "તેજ વધારો બટન",
       "ConfigureOptions.DimmerDownCode": "બ્રાઇટનેસ ઘટાડવાનું બટન",
-      "ConfigureOptions.DimmerInterval": "ઝાંખું પગલું"
+      "ConfigureOptions.DimmerInterval": "ડિમિંગ પગલું"
     },
     "145": {
       "Title": "સ્માર્ટ ઉપકરણ",
@@ -231,7 +234,7 @@
     },
     "8": {
       "Title": "સૂર્યોદય રંગો દૃશ્ય",
-      "Description": "રંગ બદલવાની એલઇડી લાઇટ માટે \"સૂર્યોદય\" દૃશ્યનું ઉદાહરણ.",
+      "Description": "રંગ બદલવાની LED લાઇટ માટે \"સૂર્યોદય\" દૃશ્યનું ઉદાહરણ.",
       "Scenarios.SunriseColors": "સનરાઇઝ કલર્સ સિનારીયોની લિંક"
     }
   }

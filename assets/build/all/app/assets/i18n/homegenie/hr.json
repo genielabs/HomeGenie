@@ -1,7 +1,7 @@
 {
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Dobrodošli u HomeGenie!",
-  "welcome_subtitle": "Programabilna inteligencija automatizacije",
+  "welcome_subtitle": "Programabilna automatizirana inteligencija",
   "not_configured_yet": "Sustav još nije konfiguriran. Ovaj čarobnjak za postavljanje pomoći će vam da pokrenete i pokrenete svoj sustav u nekoliko koraka.",
   "system_config_start_with_base_and_backup": "Vrati iz datoteke sigurnosne kopije",
   "system_config_start_with_default_setup": "Zadana postavka",
@@ -36,6 +36,9 @@
   "empty_group": "Nema modula u ovoj grupi.",
   "scheduler_wizard": "Čarobnjak za raspored",
   "schedule_event": "Događaj",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Raspon datuma",
+  "schedule_type_cron": "Cron izraz",
   "schedule_action": "Akcijski",
   "schedule_occurrence_preview": "Pregled pojavljivanja",
   "time_schedule": "Raspored",
@@ -139,7 +142,7 @@
     },
     "34": {
       "Title": "Vremenska prognoza",
-      "Description": "Informacije o vremenu i prognozi iz usluge Open Weather Map.\nZa aktiviranje ovog widgeta unesite važeći API ključ.\nSlijedite upute na https://openweathermap.org/appid kako biste dobili besplatni API ključ.",
+      "Description": "Informacije o vremenu i prognozi iz servisa Open Weather Map.\nZa aktiviranje ovog widgeta unesite važeći API ključ.\nSlijedite upute na https://openweathermap.org/appid kako biste dobili besplatni API ključ.",
       "ConfigureOptions.Location": "Ime grada",
       "ConfigureOptions.Language": "Jezik (npr. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Interval ažuriranja (minute)",

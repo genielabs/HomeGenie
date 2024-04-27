@@ -36,6 +36,9 @@
   "empty_group": "Tiada modul dalam kumpulan ini.",
   "scheduler_wizard": "Wizard Penjadual",
   "schedule_event": "Peristiwa",
+  "schedule_type_standard": "Standard",
+  "schedule_type_range": "Julat tarikh",
+  "schedule_type_cron": "Ungkapan Cron",
   "schedule_action": "Tindakan",
   "schedule_occurrence_preview": "Pratonton kejadian",
   "time_schedule": "Jadual",
@@ -64,7 +67,7 @@
   "cronwizard_dayselect_selecteddays": "Hari yang dipilih",
   "cronwizard_dayowselect_selecteddaysow": "Hari yang dipilih dalam minggu",
   "cronwizard_monthselect_everymonth": "Setiap bulan",
-  "cronwizard_monthselect_selectedmonths": "Bulan terpilih",
+  "cronwizard_monthselect_selectedmonths": "Bulan yang dipilih",
   "cronwizard_schedule_set_exact_time": "Tetapkan masa acara.",
   "cronwizard_schedule_set_slot_start": "Tetapkan permulaan slot masa.",
   "cronwizard_schedule_set_slot_end": "Bermula pada {{start}}.<br>\nTetapkan tamat slot masa.",
@@ -132,7 +135,7 @@
   "capture_pause_asis": "Seperti yang ada",
   "$options": {
     "16": {
-      "Title": "Memori Tahap",
+      "Title": "Tahap Memori",
       "Description": "Simpan dan ingat semula tahap malap terakhir.",
       "HomeGenie.LevelMemory": "Ingat tahap cahaya terakhir apabila dihidupkan",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan sahaja"
@@ -170,7 +173,7 @@
       "Description": "Gunakan penderia dan peranti lain untuk melaksanakan sistem penggera keselamatan.",
       "HomeGenie.SecurityAlarm": "Gunakan sebagai penggera/strob",
       "HomeGenie.SecuritySensor": "Gunakan sebagai sensor keselamatan",
-      "ConfigureOptions.Email.Recipients": "Senarai penerima e-mel yang dipisahkan koma untuk pemberitahuan penggera",
+      "ConfigureOptions.Email.Recipients": "Senarai penerima yang dipisahkan koma e-mel untuk pemberitahuan penggera",
       "ConfigureOptions.System.ArmDelay": "Kelewatan lengan (saat)",
       "ConfigureOptions.System.SirenStartTime": "Kelewatan Mula Siren (saat)",
       "ConfigureOptions.System.SirenMaxTime": "Masa maks siren (saat, 0=tak terhingga)",
@@ -215,7 +218,7 @@
       "Title": "Alat kawalan jauh",
       "Description": "Kawal peranti menggunakan alat kawalan jauh (IR atau RF).",
       "HomeGenie.RemoteControl.Enable": "Dayakan",
-      "HomeGenie.RemoteControl.IRCode": "Butang togol",
+      "HomeGenie.RemoteControl.IRCode": "Togol butang",
       "ConfigureOptions.DimmerUpCode": "Butang peningkatan kecerahan",
       "ConfigureOptions.DimmerDownCode": "Butang penurunan kecerahan",
       "ConfigureOptions.DimmerInterval": "Langkah memalapkan"

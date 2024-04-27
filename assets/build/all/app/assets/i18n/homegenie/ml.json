@@ -36,6 +36,9 @@
   "empty_group": "ഈ ഗ്രൂപ്പിൽ മൊഡ്യൂളുകളൊന്നുമില്ല.",
   "scheduler_wizard": "ഷെഡ്യൂളർ വിസാർഡ്",
   "schedule_event": "സംഭവം",
+  "schedule_type_standard": "സ്റ്റാൻഡേർഡ്",
+  "schedule_type_range": "തീയതി പരിധി",
+  "schedule_type_cron": "ക്രോൺ എക്സ്പ്രഷൻ",
   "schedule_action": "ആക്ഷൻ",
   "schedule_occurrence_preview": "സംഭവത്തിൻ്റെ പ്രിവ്യൂ",
   "time_schedule": "പട്ടിക",
@@ -133,7 +136,7 @@
   "$options": {
     "16": {
       "Title": "ലെവൽ മെമ്മറി",
-      "Description": "അവസാന ഡിമ്മർ ലെവൽ സംഭരിക്കുകയും തിരിച്ചുവിളിക്കുകയും ചെയ്യുക.",
+      "Description": "അവസാന ഡിമ്മർ ലെവൽ സംഭരിക്കുകയും ഓർമ്മിക്കുകയും ചെയ്യുക.",
       "HomeGenie.LevelMemory": "സ്വിച്ച് ഓണാക്കിയപ്പോൾ അവസാനത്തെ ലൈറ്റ് ലെവൽ ഓർക്കുക",
       "HomeGenie.LevelMemory.SimulateOnly": "അനുകരിക്കുക മാത്രം"
     },
@@ -216,8 +219,8 @@
       "Description": "ഒരു റിമോട്ട് (IR അല്ലെങ്കിൽ RF) ഉപയോഗിച്ച് ഉപകരണം നിയന്ത്രിക്കുക.",
       "HomeGenie.RemoteControl.Enable": "പ്രവർത്തനക്ഷമമാക്കുക",
       "HomeGenie.RemoteControl.IRCode": "ടോഗിൾ ബട്ടൺ",
-      "ConfigureOptions.DimmerUpCode": "തെളിച്ചം വർദ്ധിപ്പിക്കുക ബട്ടൺ",
-      "ConfigureOptions.DimmerDownCode": "തെളിച്ചം കുറയ്ക്കുന്നതിനുള്ള ബട്ടൺ",
+      "ConfigureOptions.DimmerUpCode": "തെളിച്ചം കൂട്ടാനുള്ള ബട്ടൺ",
+      "ConfigureOptions.DimmerDownCode": "തെളിച്ചം കുറയ്ക്കൽ ബട്ടൺ",
       "ConfigureOptions.DimmerInterval": "മങ്ങിക്കുന്ന ഘട്ടം"
     },
     "145": {

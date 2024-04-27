@@ -26,7 +26,7 @@
   "programs_version": "Vèsyon pwogram yo",
   "http_settings": "Paramèt HTTP",
   "modules_groups": "Gwoup ak modil",
-  "groups": "Gwoup yo",
+  "groups": "Gwoup",
   "add_group": "Ajoute gwoup",
   "edit_group": "Edit gwoup",
   "delete_group": "Efase gwoup la",
@@ -36,6 +36,9 @@
   "empty_group": "Pa gen modil nan gwoup sa a.",
   "scheduler_wizard": "Sòsye orè",
   "schedule_event": "Evènman",
+  "schedule_type_standard": "Estanda",
+  "schedule_type_range": "Dat seri",
+  "schedule_type_cron": "ekspresyon Cron",
   "schedule_action": "Aksyon",
   "schedule_occurrence_preview": "Preview ensidan an",
   "time_schedule": "Orè",
@@ -62,12 +65,12 @@
   "cronwizard_hourselect_selectedhours": "Lè yo chwazi",
   "cronwizard_dayselect_everyday": "Chak jou",
   "cronwizard_dayselect_selecteddays": "Jou seleksyone yo",
-  "cronwizard_dayowselect_selecteddaysow": "Chwazi jou nan semèn nan",
+  "cronwizard_dayowselect_selecteddaysow": "Jou seleksyone nan semèn nan",
   "cronwizard_monthselect_everymonth": "Chak mwa",
   "cronwizard_monthselect_selectedmonths": "Mwa chwazi yo",
   "cronwizard_schedule_set_exact_time": "Mete tan evènman an.",
   "cronwizard_schedule_set_slot_start": "Mete plas tan kòmanse.",
-  "cronwizard_schedule_set_slot_end": "Kòmanse nan {{kòmanse}}.<br>\nMete fen plas tan.",
+  "cronwizard_schedule_set_slot_end": "Apati {{kòmanse}}.<br>\nMete fen plas tan.",
   "cronwizard_bindings_define_types_and_modules": "Defini kalite ak modil ki sijè a orè sa a (si ou vle)",
   "cronwizard_bindings_select_types": "Chwazi kalite yo",
   "cronwizard_action_set_action_to_execute": "Mete aksyon pou egzekite sou evènman sa a",
@@ -98,7 +101,7 @@
   "scheduler_preset_action_program_say": "Di",
   "scheduler_preset_action_config_message": "Mesaj",
   "save_and_build": "Sove ak bati",
-  "toggle_widgets_preview": "Aktivite aperçu widgets",
+  "toggle_widgets_preview": "Aktive aperçu widgets",
   "stop_program": "Sispann pwogram",
   "run_program": "Kouri pwogram lan",
   "enable_to_run_program": "Pèmèt pwogram nan nan lòd yo kouri li",
@@ -126,7 +129,7 @@
   "main_code_empty_note": "Kòd \"Principal\" vid.\n\nSèvi ak editè \"Visual Code\" pou jenere kòd sa a:\n- Louvri kategori \"Pwogram\" nan palèt lòd sou bò gòch la\n- Trennen yon blòk ki kalite \"Principal\" nan espas travay la kòd vizyèl\n- Ajoute anndan li lòt blòk kòd pou aplike aksyon ak lojik pwogram sa a\n\nPwogram \"Pwensipal\" la ka swa kouri manyèlman oswa oto-kòmanse baze sou kondisyon evantyèlman yo bay nan kòd la Enstalasyon.",
   "setup_code_empty_note": "Kòd \"Enstalasyon\" vid.\n\nSèvi ak editè \"Visual Code\" pou jenere kòd sa a:\n- Louvri kategori \"Pwogram\" nan palèt lòd sou bò gòch la\n- Trennen yon blòk nan kalite \"Enstalasyon\" nan espas travay la kòd vizyèl\n- Ajoute andedan li lòt blòk kòd pou detèmine kondisyon ki pral deklanche \"Principal\" ekzekisyon kòd\n\nKòd sa a vin evalye chak fwa yon nouvo evènman rive ak omwen yon fwa pa minit.",
   "capture_commands": "Capture kòmandman",
-  "capture_commands_description": "Ajoute tout kòmandman ki fèt manyèlman sou widgets nan pwogram nan.",
+  "capture_commands_description": "Ajoute tout kòmandman yo fè manyèlman sou widgets nan pwogram nan.",
   "capture_commands_pause": "Pran yon poz ant kòmandman yo",
   "capture_pause_none": "Okenn",
   "capture_pause_asis": "Kòm se",
@@ -187,14 +190,14 @@
       "Title": "Modil Virtual Demo",
       "Description": "Manyèlman mete valè aparèy vityèl la.",
       "Sensor.Temperature": "Valè tanperati",
-      "Sensor.Luminance": "Valè luminans",
+      "Sensor.Luminance": "Valè luminance",
       "Sensor.MotionDetect": "Estati deteksyon mouvman",
       "Status.Battery": "Nivo batri",
       "Sensor.DoorWindow": "Estati Capteur Pòt/Fenèt (louvri/fèmen)",
       "Status.Level": "Chanje estati (on/off)"
     },
     "401": {
-      "Title": "Demo - baskile pòt",
+      "Title": "Demo - aktive pòt",
       "Description": "Simulation pòt louvri/fèmen de démonstration detèktè pòt-fenèt."
     },
     "402": {
@@ -231,7 +234,7 @@
     },
     "8": {
       "Title": "Sunrise Koulè Senaryo",
-      "Description": "Egzanp senaryo \"Sunrise\" pou limyè ki ap dirije ki chanje koulè.",
+      "Description": "Egzanp \"Sunrise\" senaryo pou chanje koulè ki ap dirije limyè.",
       "Scenarios.SunriseColors": "Link nan senaryo Sunrise Colors"
     }
   }

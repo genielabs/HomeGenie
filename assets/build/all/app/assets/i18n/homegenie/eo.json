@@ -21,7 +21,7 @@
   "repositories": "Deponejoj",
   "packages": "Pakoj",
   "installed_packages": "Instalitaj pakoj",
-  "upload_package": "Alŝutu pakon",
+  "upload_package": "Alŝutu pakaĵon",
   "create_package": "Krei novan pakon",
   "programs_version": "Programoj versio",
   "http_settings": "HTTP-agordoj",
@@ -36,6 +36,9 @@
   "empty_group": "Neniuj moduloj en ĉi tiu grupo.",
   "scheduler_wizard": "Scheduler Sorĉisto",
   "schedule_event": "Evento",
+  "schedule_type_standard": "Normo",
+  "schedule_type_range": "Datintervalo",
+  "schedule_type_cron": "Cron esprimo",
   "schedule_action": "Ago",
   "schedule_occurrence_preview": "Antaŭrigardo de okazo",
   "time_schedule": "Horaro",
@@ -47,7 +50,7 @@
   "cronwizard_description_ending": "al",
   "cronwizard_description_at": "ĉe",
   "cronwizard_add_time_slot": "Aldonu tempon",
-  "cronwizard_add_exact_time": "Aldonu precizan tempon",
+  "cronwizard_add_exact_time": "Aldonu ĝustan tempon",
   "cronwizard_start_time": "Komenca tempo",
   "cronwizard_end_time": "Fintempo",
   "cronwizard_minutes": "Minutoj",
@@ -199,7 +202,7 @@
     },
     "402": {
       "Title": "Demo - Moviĝo Detektita",
-      "Description": "Simulas moviĝan detekton de pruva multsensilo."
+      "Description": "Simulas moviĝan detekton de demo-multi-sensilo."
     },
     "410": {
       "Title": "Sensila simulilo",

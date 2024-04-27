@@ -313,8 +313,7 @@ namespace HomeGenie.Automation.Scheduler
                 }
                 else if (currentExpression.StartsWith("@"))
                 {
-                    // TODO example
-                    // @SolarTimes.Sunset + 30
+                    // example: @SolarTimes.Sunset + 30
                     var start = dateStart;
                     var addMinutes = 0;
                     if (currentExpression.IndexOf('+') > 0)
@@ -524,7 +523,6 @@ namespace HomeGenie.Automation.Scheduler
 
         private bool IsBetween(DateTime date, DateTime dateStart, DateTime dateEnd)
         {
-            // TODO why is it comparing like a strings???
             var dsr = String.CompareOrdinal(date.ToUniversalTime().ToString(FORMAT_DATETIME),
                           dateStart.ToUniversalTime().ToString(FORMAT_DATETIME)) >= 0;
             var der = String.CompareOrdinal(date.ToUniversalTime().ToString(FORMAT_DATETIME),

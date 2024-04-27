@@ -2,7 +2,7 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "ወደ HomeGenie እንኳን በደህና መጡ!",
   "welcome_subtitle": "በፕሮግራም ሊሰራ የሚችል አውቶሜሽን ብልህነት",
-  "not_configured_yet": "ስርዓቱ ገና አልተዋቀረም። ይህ የማዋቀር ጠንቋይ ስርዓትዎን በጥቂት እርምጃዎች እንዲያነሱ እና እንዲሰሩ ይረዳዎታል።",
+  "not_configured_yet": "ስርዓቱ ገና አልተዋቀረም። ይህ የማዋቀር ጠንቋይ ስርዓትዎን በጥቂት እርምጃዎች እንዲሰሩ እና እንዲሰሩ ይረዳዎታል።",
   "system_config_start_with_base_and_backup": "ከመጠባበቂያ ፋይል ወደነበረበት መልስ",
   "system_config_start_with_default_setup": "ነባሪ ማዋቀር",
   "system_config_include_demo": "ማሳያን ከተመሳሰለ የመሣሪያ እንቅስቃሴ ጋር ያካትቱ",
@@ -36,6 +36,9 @@
   "empty_group": "በዚህ ቡድን ውስጥ ምንም ሞጁሎች የሉም።",
   "scheduler_wizard": "መርሐግብር አዋቂ",
   "schedule_event": "ክስተት",
+  "schedule_type_standard": "መደበኛ",
+  "schedule_type_range": "የቀን ክልል",
+  "schedule_type_cron": "ክሮን አገላለጽ",
   "schedule_action": "ድርጊት",
   "schedule_occurrence_preview": "የክስተት ቅድመ እይታ",
   "time_schedule": "መርሐግብር",
@@ -67,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "የተመረጡ ወራት",
   "cronwizard_schedule_set_exact_time": "የክስተቱን ጊዜ ያዘጋጁ።",
   "cronwizard_schedule_set_slot_start": "የሰዓት ማስገቢያ ጅምር ያዘጋጁ።",
-  "cronwizard_schedule_set_slot_end": "ከ{{star}} ጀምሮ።<br>\nየሰዓት ማስገቢያ ማብቂያን ያዘጋጁ።",
+  "cronwizard_schedule_set_slot_end": "ከ{{start}} ጀምሮ።<br>\nየሰዓት ማስገቢያ ማብቂያን ያዘጋጁ።",
   "cronwizard_bindings_define_types_and_modules": "ለዚህ መርሐግብር ተገዢ የሆኑትን ዓይነቶች እና ሞጁሎችን ይግለጹ (አማራጭ)",
   "cronwizard_bindings_select_types": "ዓይነቶችን ይምረጡ",
   "cronwizard_action_set_action_to_execute": "የዚህ ክስተት ክስተቶችን ለማስፈጸም እርምጃ ያዘጋጁ",
@@ -147,7 +150,7 @@
     },
     "78": {
       "Title": "ስማርት ቴርሞስታት",
-      "Description": "ቴርሞስታት ተግባራዊነትን ለመተግበር ማንኛውንም የሙቀት ዳሳሽ እና ብልጥ ማብሪያ / ማጥፊያ ይጠቀሙ።",
+      "Description": "ቴርሞስታት ተግባርን ተግባራዊ ለማድረግ ማንኛውንም የሙቀት ዳሳሽ እና ብልጥ መቀየሪያ ይጠቀሙ።",
       "VirtualThermostat.TemperatureModule": "የሙቀት ዳሳሽ",
       "VirtualThermostat.HeatingSwitchModule": "ማሞቂያ መቀየሪያ",
       "VirtualThermostat.CoolingSwitchModule": "የማቀዝቀዣ መቀየሪያ",
@@ -227,11 +230,11 @@
       "HomeGenie.SmartLights.OnMotionDetect": "በዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
       "HomeGenie.SmartLights.CheckLuminosity": "በብርሃን ዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "የእንቅስቃሴ-አልባነት ጊዜ ካለቀ በኋላ ያጥፉ (ሰከንዶች)",
-      "HomeGenie.SmartLights.MinLuminance": "መብራቱ ከታች ከሆነ ያብሩ:"
+      "HomeGenie.SmartLights.MinLuminance": "መብራቱ ከዚህ በታች ከሆነ ያብሩ፦"
     },
     "8": {
       "Title": "የፀሐይ መውጫ ቀለሞች ሁኔታ",
-      "Description": "የ LED መብራቶችን ቀለም ለመቀየር የ\"ፀሐይ መውጫ\" ምሳሌ።",
+      "Description": "የ LED መብራቶችን ቀለም ለመቀየር የ\"ፀሐይ መውጫ\" ሁኔታ።",
       "Scenarios.SunriseColors": "ወደ የፀሐይ መውጫ ቀለሞች ሁኔታ አገናኝ"
     }
   }

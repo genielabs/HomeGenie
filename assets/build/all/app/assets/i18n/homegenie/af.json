@@ -36,6 +36,9 @@
   "empty_group": "Geen modules in hierdie groep nie.",
   "scheduler_wizard": "Skeduleerder Wizard",
   "schedule_event": "Gebeurtenis",
+  "schedule_type_standard": "Standaard",
+  "schedule_type_range": "Datum reeks",
+  "schedule_type_cron": "Cron uitdrukking",
   "schedule_action": "Aksie",
   "schedule_occurrence_preview": "Voorkomsvoorskou",
   "time_schedule": "Skedule",
@@ -139,7 +142,7 @@
     },
     "34": {
       "Title": "Weervoorspelling",
-      "Description": "Weer- en voorspellinginligting van Open Weather Map-diens.\nVoer 'n geldige API-sleutel in om hierdie legstuk te aktiveer.\nVolg instruksies by https://openweathermap.org/appid om 'n gratis API-sleutel te kry.",
+      "Description": "Weer en voorspelling inligting van Open Weather Map diens.\nVoer 'n geldige API-sleutel in om hierdie legstuk te aktiveer.\nVolg instruksies by https://openweathermap.org/appid om 'n gratis API-sleutel te kry.",
       "ConfigureOptions.Location": "Stad Naam",
       "ConfigureOptions.Language": "Taal (bv. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Opdateringsinterval (minute)",
@@ -166,7 +169,7 @@
       "EnergyManagement.EnergySavingMode": "Aktiveer"
     },
     "90": {
-      "Title": "Sekuriteit alarmstelsel",
+      "Title": "Sekuriteit Alarm Stelsel",
       "Description": "Gebruik sensors en ander toestelle om 'n sekuriteitsalarmstelsel te implementeer.",
       "HomeGenie.SecurityAlarm": "Gebruik as alarm/strobe",
       "HomeGenie.SecuritySensor": "Gebruik as sekuriteitsensor",
@@ -217,7 +220,7 @@
       "HomeGenie.RemoteControl.Enable": "Aktiveer",
       "HomeGenie.RemoteControl.IRCode": "Wissel knoppie",
       "ConfigureOptions.DimmerUpCode": "Knoppie om helderheid te verhoog",
-      "ConfigureOptions.DimmerDownCode": "Knoppie om helderheid te verminder",
+      "ConfigureOptions.DimmerDownCode": "Knoppie om die helderheid te verminder",
       "ConfigureOptions.DimmerInterval": "Verdoof stap"
     },
     "145": {
