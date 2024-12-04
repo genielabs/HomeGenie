@@ -135,7 +135,7 @@ namespace HomeGenie.Automation.Scripting
                 NetHelper netHelper = new NetHelper(homegenie);
                 netHelper
                     .WebService($"http://localhost:{port}/api/{apiCommand}")
-                    .Put(JsonConvert.SerializeObject(data));
+                    .Put(data?.ToString());
                 var username = homegenie.SystemConfiguration.HomeGenie.Username;
                 var password = homegenie.SystemConfiguration.HomeGenie.Password;
                 if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
