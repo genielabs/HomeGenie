@@ -22,7 +22,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Get the specified parameterName from the Store.
+        /// Gets the specified parameterName from the Store.
         /// </summary>
         /// <param name="parameterName">Parameter name.</param>
         public ModuleParameter Get(string parameterName)
@@ -52,7 +52,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Remove the specified parameterName from the Store.
+        /// Removes the specified parameterName from the Store.
         /// </summary>
         /// <param name="parameterName">Parameter name.</param>
         public StoreHelper Remove(string parameterName)
@@ -63,7 +63,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Remove all parameters from this store.
+        /// Removes all parameters from this store.
         /// </summary>
         public void Reset()
         {

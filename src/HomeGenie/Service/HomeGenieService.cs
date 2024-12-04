@@ -69,8 +69,8 @@ namespace HomeGenie.Service
         private PackageManager packageManager;
 
         // Internal data structures
-        private TsList<Module> systemModules = new HomeGenie.Service.TsList<Module>();
-        private TsList<Module> modulesGarbage = new HomeGenie.Service.TsList<Module>();
+        private TsList<Module> systemModules = new TsList<Module>();
+        private TsList<Module> modulesGarbage = new TsList<Module>();
         private TsList<VirtualModule> virtualModules = new TsList<VirtualModule>();
         private List<Group> automationGroups = new List<Group>();
         private List<Group> controlGroups = new List<Group>();
@@ -509,43 +509,8 @@ namespace HomeGenie.Service
         {
             if (args.Request.Context.Source != ContextSource.WebServiceGateway && args.Request.Context.Source != ContextSource.WebSocketGateway)
                 return;
-
-            var migCommand = args.Request.Command;
-            // HomeGenie Web Service domain API
-            if (migCommand.Domain == Domains.HomeAutomation_HomeGenie)
-            {
-                // domain == HomeAutomation.HomeGenie
-                switch (migCommand.Address)
-                {
-                    case "Config":
-                        wshConfig.ProcessRequest(args.Request);
-                        break;
-                    case "Automation":
-                        wshAutomation.ProcessRequest(args.Request);
-                        break;
-                }
-            }
-            else if (migCommand.Domain == Domains.HomeAutomation_HomeGenie_Automation)
-            {
-                int n;
-                bool nodeIdIsNumeric = int.TryParse(migCommand.Address, out n);
-                if (nodeIdIsNumeric)
-                {
-                    switch (migCommand.Command)
-                    {
-
-                    case "Control.Run":
-                        wshAutomation.ProgramRun(migCommand.Address, migCommand.GetOption(0));
-                        break;
-
-                    case "Control.Break":
-                        wshAutomation.ProgramBreak(migCommand.Address);
-                        break;
-
-                    }
-                }
-            }
-
+            
+            HandleSystemApiRequest(args.Request);
         }
 
         private void migService_ServiceRequestPostProcess(object sender, ProcessRequestEventArgs args)
@@ -1331,6 +1296,45 @@ namespace HomeGenie.Service
 
         #region Private utility methods
 
+        private void HandleSystemApiRequest(MigClientRequest request)
+        {
+            var migCommand = request.Command;
+            // HomeGenie Web Service domain API
+            if (migCommand.Domain == Domains.HomeAutomation_HomeGenie)
+            {
+                // domain == HomeAutomation.HomeGenie
+                switch (migCommand.Address)
+                {
+                    case "Config":
+                        wshConfig.ProcessRequest(request);
+                        break;
+                    case "Automation":
+                        wshAutomation.ProcessRequest(request);
+                        break;
+                }
+            }
+            else if (migCommand.Domain == Domains.HomeAutomation_HomeGenie_Automation)
+            {
+                int n;
+                bool nodeIdIsNumeric = int.TryParse(migCommand.Address, out n);
+                if (nodeIdIsNumeric)
+                {
+                    switch (migCommand.Command)
+                    {
+
+                        case "Control.Run":
+                            wshAutomation.ProgramRun(migCommand.Address, migCommand.GetOption(0));
+                            break;
+
+                        case "Control.Break":
+                            wshAutomation.ProgramBreak(migCommand.Address);
+                            break;
+
+                    }
+                }
+            }
+        }
+
         private void InitializeSystem()
         {
             // Setup web service handlers
@@ -1370,6 +1374,12 @@ namespace HomeGenie.Service
                     else
                     {
                         SystemLogger.Instance.CloseLog();
+                    }
+                    // Generate new System UID if required
+                    if (String.IsNullOrEmpty(systemConfiguration.HomeGenie.GUID))
+                    {
+                        systemConfiguration.HomeGenie.GUID = Guid.NewGuid().ToString();
+                        systemConfiguration.Update();
                     }
                     // configure MIG
                     migService.Configuration = systemConfiguration.MigService;
@@ -1516,11 +1526,6 @@ namespace HomeGenie.Service
             string modelNumber = version;
             string standardDeviceType = "HomeAutomationServer";  // "urn:schemas-glabs-it:device:HomeAutomationServer:1"
             string uniqueDeviceName = systemConfiguration.HomeGenie.GUID;
-            if (String.IsNullOrEmpty(uniqueDeviceName))
-            {
-                systemConfiguration.HomeGenie.GUID = uniqueDeviceName = Guid.NewGuid().ToString();
-                systemConfiguration.Update();
-            }
             //
             var localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");
             //hgdevice.Icon = null;

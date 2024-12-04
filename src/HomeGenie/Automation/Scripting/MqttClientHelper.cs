@@ -209,7 +209,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Subscribe the specified topic.
+        /// Subscribes the specified topic.
         /// </summary>
         /// <param name="topic">Topic name.</param>
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
@@ -227,7 +227,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Unsubscribe the specified topic.
+        /// Unsubscribes the specified topic.
         /// </summary>
         /// <param name="topic">Topic name.</param>
         public MqttClientHelper Unsubscribe(string topic)
@@ -316,7 +316,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set whether to connect using TLS/SSL or not.
+        /// Sets whether to connect using TLS/SSL or not.
         /// </summary>
         /// <param name="useTls">Use TLS/SSL.</param>
         /// <returns></returns>

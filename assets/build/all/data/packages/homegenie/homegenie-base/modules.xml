@@ -102,27 +102,18 @@
   </Module>
   <Module>
     <Name>MQTT Network</Name>
-    <Description>Share device with other HomeGenie servers connected to the same MQTT service.
-All HomeGenie servers will automatically inherit a shared module once an event is emitted from it.</Description>
+    <Description>Connect to an MQTT broker to use HomeGenie Panel app from anywhere via Internet or to share devices with other HomeGenie servers on the same MQTT network.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ClientId</Name>
-        <Value>hg-104</Value>
+        <Value />
         <Description>0. Enter unique ID for this client</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:03:34.1776554Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.Password</Name>
-        <Value />
-        <Description>7. Password (optional)</Description>
-        <FieldType>text</FieldType>
-        <ParentId>0</ParentId>
-        <UpdateTime>2019-01-16T02:57:26.248044Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:17.7906317Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerAddress</Name>
@@ -130,7 +121,7 @@ All HomeGenie servers will automatically inherit a shared module once an event i
         <Description>1. MQTT server address</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2019-01-16T02:57:26.248031Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:17.7906451Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerPort</Name>
@@ -141,44 +132,52 @@ All HomeGenie servers will automatically inherit a shared module once an event i
         <UpdateTime>2022-12-28T17:03:34.1777588Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.ServerTopic</Name>
-        <Value>#</Value>
-        <Description>5. Topic</Description>
-        <FieldType>text</FieldType>
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:03:34.1778712Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>ConfigureOptions.TLS</Name>
         <Value />
-        <Description>3. Connect using WebSockets</Description>
+        <Description>3. Connect using TLS/SSL</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.Username</Name>
-        <Value />
-        <Description>6. Username (optional)</Description>
-        <FieldType>text</FieldType>
-        <ParentId>0</ParentId>
-        <UpdateTime>2019-01-16T02:57:26.248042Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:17.7906476Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.WebSockets</Name>
         <Value />
-        <Description>4. Connect using TLS/SSL</Description>
+        <Description>4. Connect using WebSockets</Description>
         <FieldType>checkbox</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2019-01-16T02:57:30.680659Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:17.790649Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Username</Name>
+        <Value />
+        <Description>5. Username (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:32:17.7906507Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Password</Name>
+        <Value />
+        <Description>6. Password (optional)</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:32:17.7906517Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ImportExternal</Name>
+        <Value />
+        <Description>7. Import external modules</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:32:17.7906528Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Notification</Name>
-        <Value>{"Title":"MQTT","Message":"Please configure server address"}</Value>
+        <Value>{"Title":"MQTT Network","Message":"MQTT endpoint is not configured. [program_configure,program_disable]"}</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:03:34.1779696Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:22.9048277Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -186,7 +185,7 @@ All HomeGenie servers will automatically inherit a shared module once an event i
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:03:58.20143Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:48.6521481Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -194,7 +193,7 @@ All HomeGenie servers will automatically inherit a shared module once an event i
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2014-07-12T23:26:04.917821Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:13.3390681Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -327,7 +326,7 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2022-12-31T18:02:24.0285449Z</UpdateTime>
+        <UpdateTime>2024-12-04T17:32:48.652035Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

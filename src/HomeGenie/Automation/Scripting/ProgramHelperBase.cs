@@ -34,6 +34,20 @@ namespace HomeGenie
         }
 
         /// <summary>
+        /// Get the UID of this HomeGenie instance.
+        /// </summary>
+        /// <value>
+        /// The unique identifier string of this system.
+        /// </value>
+        public String SystemId
+        {
+            get
+            {
+                return homegenie.SystemConfiguration.HomeGenie.GUID;
+            }
+        }
+
+        /// <summary>
         /// Playbacks a synthesized voice message from speaker.
         /// </summary>
         /// <param name="sentence">Message to output.</param>
@@ -199,7 +213,7 @@ namespace HomeGenie
         }
 
         /// <summary>
-        /// Check for system updates. If an update is available it will be notified in the UI.
+        /// Checks for system updates. If an update is available it will be notified in the UI.
         /// </summary>
         public void UpdateCheck()
         {

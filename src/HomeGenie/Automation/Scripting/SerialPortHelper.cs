@@ -60,7 +60,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Connect the serial port (@115200bps).
+        /// Connects to the serial port (@115200bps).
         /// </summary>
         public bool Connect()
         {
@@ -68,7 +68,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Connect the serial port at the specified speed.
+        /// Connects to the serial port at the specified speed.
         /// </summary>
         /// <param name="baudRate">Baud rate.</param>
         /// <param name="stopBits">Stop Bits.</param>

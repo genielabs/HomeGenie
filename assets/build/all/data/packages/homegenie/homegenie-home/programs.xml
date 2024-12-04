@@ -1,6 +1,165 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
+    <ScriptSetup>Program
+  .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
+  .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
+  .AddOption("LightsCount", "5", "Number of lights", "slider:1:32:1:5");
+
+Program.AddModules(
+  // domain
+  "HomeAutomation.PhilipsHue",
+  // modules numbering (from, to)
+  1, (int)Program.Option("LightsCount").DecimalValue,
+  // type and widget
+  "Color", "homegenie/generic/colorlight"
+);
+
+// restart and reconfigure if a configuration parameter changed
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    Program.Restart();
+  }
+  // returning true, will route event to other listeners
+  return true;
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var accessLock = new object();
+
+Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
+{
+  if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
+  {
+    return false;
+  }
+  string webserviceurl = "http://" +
+    Program.Option("BridgeAddress").Value + "/api/" +
+    Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
+  Program.RunAsyncTask(() =&gt; {
+    lock(accessLock)
+    {
+      Net.WebService(webserviceurl).Put( jsonargs ).Call();
+    }
+  });
+  return true;
+};
+
+var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
+  dynamic color = new ExpandoObject();
+  string[] parts = hsb.Split(',');
+  color.H = (parts[0] != "" ? parts[0] : "1");
+  color.S = (parts.Length &gt; 1 &amp;&amp; parts[1] != "" ? parts[1] : "0");
+  color.B = (parts.Length &gt; 2 &amp;&amp; parts[2] != "" ? parts[2] : "1");
+  return color;
+});
+
+// - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
+Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
+  var request = Api.Parse(args);
+  try
+  {
+    string lightNumber = request.Address;
+    string parameter = Uri.UnescapeDataString(request.GetOption(0));
+    var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
+    var module = hueModules.WithAddress(lightNumber).Get();
+    //
+    switch(request.Command)
+    {
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+      case "Control.On":
+        {
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          module.Emit("Status.Level", color.B);
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
+        }
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+      case "Control.Off":
+        module.Emit("Status.Level", "0");
+        bridgeApiCall(lightNumber, "{ \"on\" : false }");
+        break;
+      case "Control.Toggle":
+        if (module.Parameter("Status.Level").DecimalValue == 0)
+        {
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          module.Emit("Status.Level", color.B);
+          bridgeApiCall(lightNumber, "{ \"on\" : true }");
+        }
+        else
+        {
+          module.Emit("Status.Level", "0");
+          bridgeApiCall(lightNumber, "{ \"on\" : false }");
+        }
+        break;
+      case "Control.Level":
+        {
+          if (module.IsOff) bridgeApiCall(lightNumber, "{ \"on\" : true }");
+          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
+          var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
+          module.Emit("Status.ColorHsb", color.H+','+color.S+','+bri);
+          module.Emit("Status.Level", bri);
+          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+        }
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;,&lt;transition_duration&gt;
+      case "Control.ColorHsb":
+        string[] values = parameter.Split(',');
+        double transition = 5;
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3], CultureInfo.InvariantCulture) * 10));
+        module.Emit("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString());
+        module.Emit("Status.ColorHsb", parameter);
+        bridgeApiCall(lightNumber, "{ \"on\" : true" +
+                      ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) +
+                      ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) +
+                      ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) +
+                      ", \"transitiontime\" : " + transition.ToString(CultureInfo.InvariantCulture) +  "}");
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
+      case "Control.Alert":
+        // eg. Modules.WithName("Light 1").Command("Control.Alert").Submit(); for a short alert Submit("Long"); for a 30 second alert
+        string alertType = "select";
+        if (parameter == "Long") {alertType = "lselect";}
+        bridgeApiCall(lightNumber, "{\"alert\" : \"" + alertType + "\"}");
+        break;
+    }
+    return new ResponseText("OK");
+  } catch (Exception e) {
+
+    Program.Notify("ERROR: "+e.Message);
+
+  }
+  return new ResponseText("ERROR");
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext />
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.1</PackageVersion>
+      <Id>philips-hue-bridge</Id>
+      <Version>1.0.3</Version>
+      <Required>false</Required>
+      <Checksum>085015A81EDA88B1EB73413C5212B558</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>26</Address>
+    <Name>Color Lights</Name>
+    <Description>Example Philips Hue lights integration using HTTP API (V1).
+The default user to connect to the bridge is "newdeveloper" and it should be already enabled.</Description>
+    <Group>Devices and Things</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
   Program
     .AddModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor", new string[]{"EventsLogger.EnableLogging"})
@@ -166,7 +325,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>energy-monitor</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -234,7 +393,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>energy-saving-mode</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -284,7 +443,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>group-lights-off</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -317,7 +476,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>group-lights-on</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -472,7 +631,7 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>knx-client</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -488,166 +647,6 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ScriptSetup>Program
-  .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
-  .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
-  .AddOption("LightsCount", "5", "Number of lights", "slider:1:32:1:5");
-
-Program.AddModules(
-  // domain
-  "HomeAutomation.PhilipsHue",
-  // modules numbering (from, to)
-  1, (int)Program.Option("LightsCount").DecimalValue,
-  // type and widget
-  "Color", "homegenie/generic/colorlight"
-);
-
-// restart and reconfigure if a configuration parameter changed
-When.ModuleParameterChanged((module, property) =&gt; {
-  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
-    Program.Restart();
-  }
-  // returning true, will route event to other listeners
-  return true;
-});
-
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>var accessLock = new object();
-
-Func&lt;string, string, bool&gt; bridgeApiCall = (string lightnum, string jsonargs) =&gt;
-{
-  if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
-  {
-    return false;
-  }
-  string webserviceurl = "http://" +
-    Program.Option("BridgeAddress").Value + "/api/" +
-    Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
-  Program.RunAsyncTask(() =&gt; {
-    lock(accessLock)
-    {
-      Net.WebService(webserviceurl).Put( jsonargs ).Call();
-    }
-  });
-  return true;
-};
-
-var GetHsb = new Func&lt;string,dynamic&gt;((hsb)=&gt;{
-  dynamic color = new ExpandoObject();
-  string[] parts = hsb.Split(',');
-  color.H = (parts[0] != "" ? parts[0] : "1");
-  color.S = (parts.Length &gt; 1 &amp;&amp; parts[1] != "" ? parts[1] : "0");
-  color.B = (parts.Length &gt; 2 &amp;&amp; parts[2] != "" ? parts[2] : "1");
-  return color;
-});
-
-// - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
-Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
-  var request = Api.Parse(args);
-  try
-  {
-    string lightNumber = request.Address;
-    string parameter = Uri.UnescapeDataString(request.GetOption(0));
-    var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
-    var module = hueModules.WithAddress(lightNumber).Get();
-    //
-    switch(request.Command)
-    {
-      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
-      case "Control.On":
-        {
-          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
-          module.Emit("Status.Level", color.B);
-          bridgeApiCall(lightNumber, "{ \"on\" : true }");
-        }
-        break;
-      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
-      case "Control.Off":
-        module.Emit("Status.Level", "0");
-        bridgeApiCall(lightNumber, "{ \"on\" : false }");
-        break;
-      case "Control.Toggle":
-        if (module.Parameter("Status.Level").DecimalValue == 0)
-        {
-          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
-          module.Emit("Status.Level", color.B);
-          bridgeApiCall(lightNumber, "{ \"on\" : true }");
-        }
-        else
-        {
-          module.Emit("Status.Level", "0");
-          bridgeApiCall(lightNumber, "{ \"on\" : false }");
-        }
-        break;
-      case "Control.Level":
-        {
-          if (module.IsOff) bridgeApiCall(lightNumber, "{ \"on\" : true }");
-          var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
-          var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
-          module.Emit("Status.ColorHsb", color.H+','+color.S+','+bri);
-          module.Emit("Status.Level", bri);
-          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
-        }
-        break;
-      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;,&lt;transition_duration&gt;
-      case "Control.ColorHsb":
-        string[] values = parameter.Split(',');
-        double transition = 5;
-        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3], CultureInfo.InvariantCulture) * 10));
-        module.Emit("Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString());
-        module.Emit("Status.ColorHsb", parameter);
-        bridgeApiCall(lightNumber, "{ \"on\" : true" +
-                      ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) +
-                      ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) +
-                      ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) +
-                      ", \"transitiontime\" : " + transition.ToString(CultureInfo.InvariantCulture) +  "}");
-        break;
-      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
-      case "Control.Alert":
-        // eg. Modules.WithName("Light 1").Command("Control.Alert").Submit(); for a short alert Submit("Long"); for a 30 second alert
-        string alertType = "select";
-        if (parameter == "Long") {alertType = "lselect";}
-        bridgeApiCall(lightNumber, "{\"alert\" : \"" + alertType + "\"}");
-        break;
-    }
-    return new ResponseText("OK");
-  } catch (Exception e) {
-
-    Program.Notify("ERROR: "+e.Message);
-
-  }
-  return new ResponseText("ERROR");
-});
-
-Program.GoBackground();
-</ScriptSource>
-    <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
-    <Data />
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
-      <Id>philips-hue-bridge</Id>
-      <Version>1.0.2</Version>
-      <Required>false</Required>
-      <Checksum>085015A81EDA88B1EB73413C5212B558</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>26</Address>
-    <Name>Philips Hue Bridge</Name>
-    <Description>Simple Philips Hue lights integration.
-The default user to connect to the Hue Bridge (V1) is "newdeveloper" and should be already enabled. In order to enable a different username (e.g. "homegenie"),  see instructions at:
-https://www.burgestrand.se/hue-api/api/auth/registration</Description>
-    <Group>Devices and Things</Group>
-    <Features />
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
@@ -898,7 +897,7 @@ const string STATUS_ARMED_HOME = "Home";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>security-alarm-system</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1038,7 +1037,7 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>smart-device</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1306,7 +1305,7 @@ const string FEATURE_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>smart-thermostat</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1381,7 +1380,7 @@ Pause(10);</ScriptSource>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1543,7 +1542,7 @@ const string WEMO_DOMAIN = "HomeAutomation.WeMo";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>wemo</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>

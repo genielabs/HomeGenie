@@ -44,7 +44,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified `handler` after HomeGenie service started.
+        /// Calls the specified `handler` after HomeGenie service started.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -67,7 +67,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified `handler` when HomeGenie service is stopping.
+        /// Calls the specified `handler` when HomeGenie service is stopping.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -90,7 +90,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified `handler` when the program is beign stopped.
+        /// Calls the specified `handler` when the program is beign stopped.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -113,7 +113,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified `handler` function when a parameter of a module changed.
+        /// Calls the specified `handler` function when a parameter of a module changed.
         /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
@@ -141,7 +141,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified `handler` function when a parameter of a module is changing.
+        /// Calls the specified `handler` function when a parameter of a module is changing.
         /// If either the `handler` returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>

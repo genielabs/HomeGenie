@@ -50,7 +50,7 @@ namespace HomeGenie.Automation.Scripting
         private string actionMessageCode;
 
         /// <summary>
-        /// Set the Action Message code.
+        /// Sets the Action Message code.
         /// </summary>
         public KnxClientHelper ActionMessageCode(string actionMessageCode)
         {
@@ -59,7 +59,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set the endpoint to connect to.
+        /// Sets the endpoint to connect to.
         /// </summary>
         /// <param name="host">Endpoint address.</param>
         /// <param name="port">Endpoint port.</param>
@@ -70,7 +70,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set the endpoint to connect to.
+        /// Sets the endpoint to connect to.
         /// </summary>
         /// <param name="host">Endpoint address.</param>
         public KnxClientHelper EndPoint(string host)
@@ -80,7 +80,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set the endpoint to connect to.
+        /// Sets the endpoint to connect to.
         /// </summary>
         /// <param name="port">Endpoint port.</param>
         public KnxClientHelper EndPoint(int port)
@@ -90,7 +90,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set the endpoint to connect to using tunneling.
+        /// Sets the endpoint to connect to using tunneling.
         /// </summary>
         /// <param name="localIp">Local IP.</param>
         /// <param name="localPort">Local port.</param>
@@ -109,7 +109,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Connect to the remote host using the specified port.
+        /// Connects to the remote host using the specified port.
         /// </summary>
         public KnxClientHelper Connect()
         {
@@ -182,7 +182,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Send action data to the specified address.
+        /// Sends action data to the specified address.
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="data">boolean action value.</param>
@@ -193,7 +193,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Send action data to the specified address.
+        /// Sends action data to the specified address.
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="data">int action value.</param>
@@ -204,7 +204,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Send action data to the specified address.
+        /// Sends action data to the specified address.
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="data">byte action value.</param>
@@ -215,7 +215,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Send action data to the specified address.
+        /// Sends action data to the specified address.
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="data">byte array action value.</param>
@@ -226,7 +226,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Send action data to the specified address.
+        /// Sends action data to the specified address.
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="data">string action value.</param>
@@ -237,7 +237,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Send action data to the specified address.
+        /// Sends action data to the specified address.
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="data">generic object action value.</param>

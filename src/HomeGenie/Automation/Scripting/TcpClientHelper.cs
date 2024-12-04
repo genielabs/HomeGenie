@@ -62,7 +62,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Connect to the server using the specified port.
+        /// Connects to the server using the specified port.
         /// </summary>
         /// <param name="port">Port number.</param>
         public bool Connect(int port)

@@ -85,7 +85,7 @@ namespace HomeGenie.Automation.Scripting
         #region SMTP client
 
         /// <summary>
-        /// Set the SMTP server address for sending emails.
+        /// Sets the SMTP server address for sending emails.
         /// If "E-Mail Account" program has been already configured, this method can be used to specify a different SMTP server to use for Net.SendMessage method.
         /// </summary>
         /// <returns>NetHelper.</returns>
@@ -97,7 +97,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Set the SMTP server address for sending emails.
+        /// Sets the SMTP server address for sending emails.
         /// If "E-Mail Account" program has been already configured, this method can be used to specify a different SMTP server to use for Net.SendMessage method.
         /// </summary>
         /// <returns>NetHelper.</returns>
@@ -292,7 +292,7 @@ namespace HomeGenie.Automation.Scripting
         #region HTTP client
 
         /// <summary>
-        /// Set the web service URL to call.
+        /// Sets the web service URL to call.
         /// </summary>
         /// <returns>NetHelper.</returns>
         /// <param name="serviceUrl">Service URL.</param>
@@ -347,7 +347,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the web service url.
+        /// Calls the web service url.
         /// </summary>
         /// <returns>String containing the server response.</returns>
         public string Call()
@@ -394,7 +394,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the web service url and returns the server response.
+        /// Calls the web service url and returns the server response.
         /// </summary>
         /// <returns>The returned value can be a simple string or an object containing all fields mapped from the JSON/XML response (see Net.WebService example).</returns>
         public dynamic GetData()
@@ -421,7 +421,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the web service url and returns the server response as binary data.
+        /// Calls the web service url and returns the server response as binary data.
         /// </summary>
         /// <returns>Byte array containing the raw server response.</returns>
         public byte[] GetBytes()
@@ -495,7 +495,7 @@ namespace HomeGenie.Automation.Scripting
         #endregion
 
         /// <summary>
-        /// Use provided credentials when connecting.
+        /// Uses provided credentials when connecting.
         /// </summary>
         /// <returns>NetHelper.</returns>
         /// <param name="user">Username.</param>

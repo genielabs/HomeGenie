@@ -661,7 +661,7 @@ namespace HomeGenie.Service.Handlers
                         Platform = Environment.OSVersion.Platform.ToString(),
                         TimeZoneId = TimeZoneInfo.Local.Id,
                         TimeZone = TimeZoneInfo.Local.StandardName,
-                        UtcOffset = TimeZoneInfo.Local.BaseUtcOffset.TotalMinutes,
+                        UtcOffset = TimeZoneInfo.Local.BaseUtcOffset.TotalMinutes + (TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.Now) ? 60 : 0),
                         LocalTime = DateTime.Now.ToString("o"),
                         Process = new
                         {
@@ -683,12 +683,6 @@ namespace HomeGenie.Service.Handlers
                                 PreviousLog = loggingPrevious
                             },
                             Location = JsonConvert.DeserializeObject(homegenie.SystemConfiguration.HomeGenie.Location)
-                            // TODO: add more config fields if required
-                            // - location info
-                            // - start time and uptime
-                            // - software update status (updated, update available, installed packages, programs, modules..)
-                            // - last backup date
-                            // - etc...
                         }
                     };
                 }

@@ -60,7 +60,7 @@ namespace HomeGenie.Automation.Scripting
         }
         
         /// <summary>
-        /// Open and get a LiteDatabase instance. See LiteDB website http://www.litedb.org for documentation.
+        /// Opens and gets a LiteDatabase instance. See LiteDB website http://www.litedb.org for documentation.
         /// </summary>
         /// <returns>LiteDatabase</returns>
         /// <param name="fileName">The database file name.</param>

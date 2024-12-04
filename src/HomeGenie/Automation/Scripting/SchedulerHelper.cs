@@ -47,7 +47,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Select the schedule with the specified name.
+        /// Selects the schedule with the specified name.
         /// </summary>
         /// <param name="name">Name.</param>
         public SchedulerHelper WithName(string name)
@@ -57,7 +57,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Get the selected schedule instance.
+        /// Gets the selected schedule instance.
         /// </summary>
         public SchedulerItem Get()
         {
@@ -65,7 +65,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Add/Modify the schedule with the previously selected name.
+        /// Adds/Modifies the schedule with the previously selected name.
         /// </summary>
         /// <param name="cronExpression">Cron expression.</param>
         public SchedulerHelper SetSchedule(string cronExpression)

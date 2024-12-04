@@ -1,11 +1,14 @@
 using System;
 using HomeGenie.Service;
+using HomeGenie.Service.Constants;
 using MIG;
+using Newtonsoft.Json;
+using WebSocketSharp;
 
 namespace HomeGenie.Automation.Scripting
 {
     /// <summary>
-    /// Api Helper class.\n
+    /// API Helper class.\n
     /// Class instance accessor: **Api**
     /// </summary>
     [Serializable]
@@ -21,8 +24,8 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Define a `handler` function that will be called when a web service call starting with `apiCall` is received.
-        /// Use this to create user-defined web service API methods.
+        /// Defines a `handler` function that will be called when a web service call starting with `apiCall` is received.
+        /// Use this to add user-defined web service API methods.
         /// </summary>
         /// <returns>ApiHelper</returns>
         /// <param name="apiCall">API call.</param>
@@ -65,7 +68,7 @@ namespace HomeGenie.Automation.Scripting
         ///
         /// **Example**
         /// <code>
-        ///     Api.Parse( "HomeAutomation.PhilipsHue", (args) =>
+        ///     Api.Handle( "HomeAutomation.PhilipsHue", (args) =>
         ///     {
         ///         var request = Api.Parse(args);
         ///         // request.Domain          -> "HomeAutomation.PhilipsHue"
@@ -115,7 +118,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Invoke an API command and get the result.
+        /// Invokes an API command and gets the result.
         /// </summary>
         /// <returns>The API command response.</returns>
         /// <param name="apiCommand">Any MIG/APP API command without the `/api/` prefix.</param>
@@ -124,7 +127,31 @@ namespace HomeGenie.Automation.Scripting
         {
             if (apiCommand.StartsWith("/api/"))
                 apiCommand = apiCommand.Substring(5);
-            return homegenie.InterfaceControl(new MigInterfaceCommand(apiCommand, data));
+            var result = homegenie.InterfaceControl(new MigInterfaceCommand(apiCommand, data));
+            // Try system API if not handled as MigInterfaceCommand
+            if (result == null && (apiCommand.StartsWith($"{Domains.HomeAutomation_HomeGenie}/") || apiCommand.StartsWith($"{Domains.HomeAutomation_HomeGenie_Automation}/")))
+            {
+                string port = homegenie.GetHttpServicePort();
+                NetHelper netHelper = new NetHelper(homegenie);
+                netHelper
+                    .WebService($"http://localhost:{port}/api/{apiCommand}")
+                    .Put(JsonConvert.SerializeObject(data));
+                var username = homegenie.SystemConfiguration.HomeGenie.Username;
+                var password = homegenie.SystemConfiguration.HomeGenie.Password;
+                if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
+                {
+                    netHelper.WithCredentials(
+                        username,
+                        password
+                    );
+                }
+                result = netHelper.GetData();
+                if (result != null && result.ToString().IsNullOrEmpty())
+                {
+                    result = null;
+                }
+            }
+            return result;
         }
 
     }

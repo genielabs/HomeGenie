@@ -56,7 +56,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -230,12 +230,12 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
     return stats;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -278,7 +278,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -477,12 +477,12 @@ string GetDbName()
     return $"energy_use_{DateTime.Now.Year}.db";
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.4</Version>
       <Required>false</Required>
@@ -570,7 +570,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -596,34 +596,23 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>IPHostEntry host;
-string localIP = "1";
-host = Dns.GetHostEntry(Dns.GetHostName());
-foreach (IPAddress ip in host.AddressList)
-{
-  if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-  {
-    localIP = ip.ToString();
-    localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
-  }
-}
-Program.Setup(() =&gt; {
+    <ScriptSetup>Program.Setup(() =&gt; {
   Program
-    .AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text")
+    .AddOption("ClientId", Program.SystemId, "0. Enter unique ID for this client", "text")
     .AddOption("ServerAddress", "", "1. MQTT server address", "text")
     .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
     .AddOption("TLS", "", "3. Connect using TLS/SSL", "checkbox")
     .AddOption("WebSockets", "", "4. Connect using WebSockets", "checkbox")
-    .AddOption("ServerTopic", "#", "5. Topic", "text")
-    .AddOption("Username", "", "6. Username (optional)", "text")
-    .AddOption("Password", "", "7. Password (optional)", "text")
+    .AddOption("Username", "", "5. Username (optional)", "text")
+    .AddOption("Password", "", "6. Password (optional)", "text")
+    .AddOption("ImportExternal", "", "7. Import external modules", "checkbox")
     .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox");
 });
 Program.Run();
 </ScriptSetup>
     <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
-string topic = Program.Option("ServerTopic").Value.Trim();
+string topic = "#"; // Program.Option("ServerTopic").Value.Trim();
 string clientid = Program.Option("ClientId").Value.Trim();
 string username = Program.Option("Username").Value.Trim();
 string password = Program.Option("Password").Value.Trim();
@@ -633,14 +622,12 @@ bool useTls = Program.Option("TLS").Value == "On" ? true : false;
 var MqttIsConnected = false;
 MqttClient.Reset();
 
-if (server == "")
-{
-  Program.Notify($"MQTT endpoint is not configured. {OptionButtons}");
-  Pause(5);
-  return;
+string subscribeTopic = clientid + "/" + topic;
+if (Program.Option("ImportExternal").Value == "On") {
+  subscribeTopic = topic;
 }
 
-MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
+MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
   var parts = mtopic.Split('/');
   var cid = parts[0];
   //
@@ -651,6 +638,7 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
       var domain = parts[1];
       var address = parts[2];
       var type = parts[3];
+
       // convert binary message to string
       string mpayload = Encoding.UTF8.GetString(bytespayload);
 
@@ -661,7 +649,7 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
         case "command":
         if (domain == "MQTT.Listeners" &amp;&amp; address == clientid)
         {
-          var cmdobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
+          var cmdobj = JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
           var targetmodule = Modules.InDomain(cmdobj.Domain.ToString()).WithAddress(cmdobj.Address.ToString());
           if (targetmodule.Get().Instance != null)
           {
@@ -679,10 +667,18 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
           }
         }
         break;
+
+        case "request":
+        var reqobj = JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
+        var result = Api.Call(reqobj.Request.ToString(), reqobj.Data);
+        // send response with result
+        MqttClient.Publish(cid + "/" + clientid + "/" + reqobj.TransactionId.ToString() + "/response", JsonConvert.SerializeObject(result));
+        break;
+
         case "description":
         if (cid != clientid &amp;&amp; module.Instance != null)
         {
-          var modobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
+          var modobj = JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
           module.Instance.Name = modobj.Name;
           module.Instance.Description = modobj.Description;
           module.Instance.DeviceType = modobj.DeviceType;
@@ -693,13 +689,14 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
           Program.Notify("Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
         }
         break;
+
         case "event":
         if (cid != clientid)
         {
-          var property = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
+          var property = JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
           if (module.Instance == null)
           {
-            Program.AddVirtualModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
+            Program.AddModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
             module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
           }
           else if (!module.HasParameter("MQTT.SourceNode"))
@@ -711,7 +708,7 @@ MqttClient.Subscribe(topic, (mtopic, bytespayload) =&gt; {
         break;
       }
     } catch (Exception e) {
-      Program.Notify($"ERROR: {e.Message} {OptionButtons}");
+      Program.Notify($"ERROR #1: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
     }
   }
@@ -732,22 +729,25 @@ Api.Handle("MQTT:", ( args ) =&gt; {
     MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
     return new ResponseText("OK");
   } catch (Exception e) {
-    Program.Notify($"ERROR: {e.Message} {OptionButtons}");
+    Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
     MqttIsConnected = false;
   }
   return new ResponseText("ERROR");
 });
 
-// We want to do further processing whenever a module changes
 When.ModuleParameterChanged( (module, property) =&gt; {
+  if (module.Get().Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    Program.Restart();
+    return true;
+  }
   if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
   {
     try{
-      byte[] bytes = Encoding.Default.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property));
+      byte[] bytes = Encoding.Default.GetBytes(JsonConvert.SerializeObject(property));
       string payload = Encoding.UTF8.GetString(bytes);
-      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(property)));
+      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(property)));
     } catch  (Exception e){
-      Program.Notify($"ERROR: {e.Message} {OptionButtons}");
+      //Program.Notify($"ERROR: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
     }
   }
@@ -755,7 +755,23 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   return true;
 });
 
+// Validate configuration
+
+if (String.IsNullOrEmpty(clientid))
+{
+  clientid = Program.Option("ClientId").Value = Program.SystemId;
+}
+if (String.IsNullOrEmpty(server))
+{
+  Program.Notify($"MQTT endpoint is not configured. {OptionButtons}");
+  Pause(5);
+  return;
+}
+
 while (Program.IsRunning) {
+
+  // Connect to MQTT
+
   if (!MqttIsConnected) {
     MqttIsConnected = true;
     Program.Notify("Connecting to '" + server + ":" + port + "' ...");
@@ -786,7 +802,9 @@ while (Program.IsRunning) {
       return;
     }
   }
+
   Pause(30);
+
 }
 </ScriptSource>
     <ScriptContext>const string OptionButtons = "[program_configure,program_disable]";
@@ -796,17 +814,16 @@ while (Program.IsRunning) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>06086F482484213E85FF494C08B342D8</Checksum>
+      <Checksum>545A8E1E29703DBAA4A75049292B3AC9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
-    <Description>Share device with other HomeGenie servers connected to the same MQTT service.
-All HomeGenie servers will automatically inherit a shared module once an event is emitted from it.</Description>
+    <Description>Connect to an MQTT broker to use HomeGenie Panel app from anywhere via Internet or to share devices with other HomeGenie servers on the same MQTT network.</Description>
     <Group>Interconnections</Group>
     <Features>
       <ProgramFeature>
@@ -818,9 +835,9 @@ All HomeGenie servers will automatically inherit a shared module once an event i
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
+    <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// list the program as custom weather widget
@@ -1061,7 +1078,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1136,12 +1153,12 @@ Program.GoBackground();
 const string dataApiUrl = "DataProcessing.Statistics/MyStat";
 
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1233,7 +1250,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1294,7 +1311,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>

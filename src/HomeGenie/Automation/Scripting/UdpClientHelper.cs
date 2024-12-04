@@ -60,8 +60,9 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Connect to the remote using the specified port.
+        /// Connects to the remote using the specified port and returns true if successful, false otherwise.
         /// </summary>
+        /// <returns>bool</returns>
         /// <param name="port">Port number.</param>
         public bool Receiver(int port)
         {
