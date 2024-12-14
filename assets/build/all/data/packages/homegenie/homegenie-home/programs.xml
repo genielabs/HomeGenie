@@ -136,12 +136,12 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>philips-hue-bridge</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -325,7 +325,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-monitor</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -393,7 +393,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-saving-mode</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -426,6 +426,113 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
+    <ScriptSetup>Program
+  .AddModules("Media.IpCamera", 1, 10, "Sensor", "homegenie/generic/camerainput")
+  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
+  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Fps", "Max frames per second", "slider:1:20:1:5")
+  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text")
+  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
+for (int cam = 1; cam &lt; 10; cam++)
+{
+  var module = cameraModules.WithAddress(cam.ToString()).Get();
+  module.Parameter("Image.URL").Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
+}
+
+// - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/...
+Api.Handle("Media.IpCamera/", ( args ) =&gt; {
+  var request = Api.Parse(args);
+  //string domain = reqs[0];
+  object data = "{ 'ResponseValue' : 'ERROR' }";
+  try
+  {
+    string cameraaddress = request.Address;
+    string command = request.Command;
+
+    var module = cameraModules.WithAddress(cameraaddress).Get();
+    //
+    switch(command)
+    {
+      // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/Camera.GetPicture
+      case "Camera.GetPicture":
+        data = Net
+          .WebService(module.Parameter("IpCamera.ImageURL").Value)
+          .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
+          .GetBytes();
+        break;
+      case "Camera.MotionDetected":
+        data = "{ 'ResponseValue' : 'OK' }";
+        // blink Sensor.MotionDetect parameter
+        module.Emit("Sensor.MotionDetect", "255", "Generic IP Camera");
+        Pause(1);
+        module.Emit("Sensor.MotionDetect", "0", "Generic IP Camera");
+        break;
+    }
+  } catch (Exception e) { 
+
+    Program.Notify("IpCamera ERROR!", e.Message);
+
+  }
+  return data;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext />
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>generic-ip-camera</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>C22A9B8FFC02DD67904D0FC1345CCB06</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>88</Address>
+    <Name>Generic IP Camera</Name>
+    <Description>Generic IP Camera driver.</Description>
+    <Group>Devices and Things</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.ImageURL</Property>
+        <Description>Camera image API URL (see your camera docs)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:1:20:1:5</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.Fps</Property>
+        <Description>Max frames per second</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.Username</Property>
+        <Description>Username (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>password</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.Password</Property>
+        <Description>Password (optional)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
   Program.UseWidget("homegenie/generic/program");
 });
@@ -443,7 +550,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>group-lights-off</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -476,7 +583,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>group-lights-on</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -631,7 +738,7 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>knx-client</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -897,7 +1004,7 @@ const string STATUS_ARMED_HOME = "Home";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>security-alarm-system</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1037,7 +1144,7 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>smart-device</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1305,7 +1412,7 @@ const string FEATURE_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>smart-thermostat</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1380,7 +1487,7 @@ Pause(10);</ScriptSource>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1542,7 +1649,7 @@ const string WEMO_DOMAIN = "HomeAutomation.WeMo";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>wemo</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>

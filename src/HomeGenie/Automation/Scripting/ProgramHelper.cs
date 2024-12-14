@@ -286,7 +286,17 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModuleParameter Option(string field)
         {
-            return this.Parameter("ConfigureOptions." + field);
+            if (programModule == null) RelocateProgramModule();
+            ModuleParameter parameter = null;
+            try
+            {
+                parameter = Utility.ModuleParameterGet(programModule, "ConfigureOptions." + field);
+            }
+            catch
+            {
+                // TODO: report exception
+            }
+            return parameter;
         }
 
         /// <summary>

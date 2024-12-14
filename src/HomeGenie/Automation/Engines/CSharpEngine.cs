@@ -167,7 +167,7 @@ namespace HomeGenie.Automation.Engines
                     var blockType = CodeBlockEnum.CR;
                     if (errorRow <= contextLines)
                     {
-                        blockType = CodeBlockEnum.TC;
+                        blockType = CodeBlockEnum.PC;
                     }
                     else
                     {
@@ -179,7 +179,7 @@ namespace HomeGenie.Automation.Engines
                             errorEndRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
                             blockType = CodeBlockEnum.TC;
                         }
-                        else
+                        if (contextLines > 0)
                         {
                             errorRow -= contextLines - 1;
                             errorEndRow -= contextLines - 1;

@@ -170,7 +170,7 @@ namespace HomeGenie.Automation.Scripting
             };
             mqttClient.DisconnectedAsync += e =>
             {
-                Log.Debug((Exception)e.Exception, "MqttClient Error");
+                Log.Debug(e.Exception, "MqttClient Error");
                 if (callback != null)
                 {
                     callback(false);

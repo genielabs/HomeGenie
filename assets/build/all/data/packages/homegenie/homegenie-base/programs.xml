@@ -56,7 +56,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -235,7 +235,7 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -278,7 +278,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -482,7 +482,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.4</Version>
       <Required>false</Required>
@@ -570,7 +570,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -601,36 +601,67 @@ Program.GoBackground();
     .AddOption("ClientId", Program.SystemId, "0. Enter unique ID for this client", "text")
     .AddOption("ServerAddress", "", "1. MQTT server address", "text")
     .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
-    .AddOption("TLS", "", "3. Connect using TLS/SSL", "checkbox")
+    .AddOption("Encryption", "On", "3. End 11 to end messge encryption (E2EE)", "checkbox")
+    .AddOption("EncryptionKey", "", "Encryption key", "hidden")
     .AddOption("WebSockets", "", "4. Connect using WebSockets", "checkbox")
-    .AddOption("Username", "", "5. Username (optional)", "text")
-    .AddOption("Password", "", "6. Password (optional)", "text")
-    .AddOption("ImportExternal", "", "7. Import external modules", "checkbox")
+    .AddOption("TLS", "", "5. Connect using TLS/SSL", "checkbox")
+    .AddOption("Username", "", "6. Username (optional)", "text")
+    .AddOption("Password", "", "7. Password (optional)", "text")
+    .AddOption("ImportExternal", "", "8. Import external modules", "checkbox")
     .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox");
 });
+
+encryptionKey = Program.Option("EncryptionKey").Value;
+
 Program.Run();
 </ScriptSetup>
     <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
-string topic = "#"; // Program.Option("ServerTopic").Value.Trim();
 string clientid = Program.Option("ClientId").Value.Trim();
 string username = Program.Option("Username").Value.Trim();
 string password = Program.Option("Password").Value.Trim();
 bool useWebSockets = Program.Option("WebSockets").Value == "On" ? true : false;
 bool useTls = Program.Option("TLS").Value == "On" ? true : false;
+bool enableEncryption = Program.Option("Encryption").Value == "On" ? true : false;
 
 var MqttIsConnected = false;
 MqttClient.Reset();
 
-string subscribeTopic = clientid + "/" + topic;
-if (Program.Option("ImportExternal").Value == "On") {
-  subscribeTopic = topic;
+// key used for encryption
+byte[] key = Encoding.UTF8.GetBytes(Program.SystemId);
+
+string subscribeTopic = clientid + "/#";
+if (enableEncryption) {
+  subscribeTopic = encryptTopic(clientid, key) + "/#";
 }
+if (Program.Option("ImportExternal").Value == "On") {
+  subscribeTopic = "/#";
+}
+
+var publishBytes = (string cid, string topic, byte[] payload) =&gt; {
+  if (enableEncryption) {
+    topic = encryptTopic(cid, key) + "/" + encryptTopic(topic, key);
+    payload = encryptionFilter(payload, key);
+  } else {
+    topic = cid + "/" + topic;
+  }
+  MqttClient.Publish(topic, payload);
+};
+
+var publish = (string cid, string topic, string message) =&gt; {
+  publishBytes(cid, topic, Encoding.UTF8.GetBytes(message));
+};
 
 MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
   var parts = mtopic.Split('/');
   var cid = parts[0];
-  //
+  if (parts.Length == 2) { // encrypted topic
+    cid = decryptTopic(cid, key);
+    mtopic = decryptTopic(parts[1], key);
+    mtopic = cid + "/" + mtopic;
+    parts = mtopic.Split('/');
+    bytespayload = encryptionFilter(bytespayload, key);
+  }
   if (parts.Length == 4)
   {
     try
@@ -658,10 +689,18 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
             {
               case "Module.Describe":
               var modinstance = targetmodule.Get().Instance;
-              MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Service.Utility.Module2Json(modinstance, false));
+              publish(clientid, modinstance.Domain + "/" + modinstance.Address + "/description", Service.Utility.Module2Json(modinstance, false));
               break;
               default:
-              targetmodule.Command(command).Submit();
+              var m = targetmodule.Get().Instance;
+              var apiCommand = m.Domain + "/" + m.Address + "/" + command;
+              var result = Api.Call(apiCommand, cmdobj.Data);
+              try {
+                result = (byte[])result;
+                publishBytes(cid, clientid + "/" + cmdobj.TransactionId.ToString() + "/response", (byte[])result);
+              } catch (Exception e) {
+                publish(cid, clientid + "/" + cmdobj.TransactionId.ToString() + "/response", JsonConvert.SerializeObject(result));
+              }
               break;
             }
           }
@@ -670,9 +709,22 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
 
         case "request":
         var reqobj = JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
-        var result = Api.Call(reqobj.Request.ToString(), reqobj.Data);
-        // send response with result
-        MqttClient.Publish(cid + "/" + clientid + "/" + reqobj.TransactionId.ToString() + "/response", JsonConvert.SerializeObject(result));
+        try {
+          var result = Api.Call(reqobj.Request.ToString(), reqobj.Data);
+          // send response with result
+          //if (result != "null") {
+            try {
+              result = (byte[])result;
+              publishBytes(cid, clientid + "/" + reqobj.TransactionId.ToString() + "/response", (byte[])result);
+            } catch (Exception e) {
+              publish(cid, clientid + "/" + reqobj.TransactionId.ToString() + "/response", JsonConvert.SerializeObject(result));
+            }
+          //} else {
+          //  publish(cid, clientid + "/" + reqobj.TransactionId.ToString() + "/response", JsonConvert.SerializeObject(result));
+          //}
+        } catch (Exception e) {
+          Program.Notify(e.Message);
+        }
         break;
 
         case "description":
@@ -701,7 +753,7 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
           }
           else if (!module.HasParameter("MQTT.SourceNode"))
           {
-            MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");
+            publish(clientid, "MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");
           }
           module.Emit(property.Name, property.Value);
         }
@@ -726,7 +778,7 @@ Api.Handle("MQTT:", ( args ) =&gt; {
     int mqttdel = domain.IndexOf(":");
     var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
     domain = domain.Substring(mqttend + 1);
-    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
+    publish(clientid, "MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
     return new ResponseText("OK");
   } catch (Exception e) {
     Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
@@ -737,15 +789,15 @@ Api.Handle("MQTT:", ( args ) =&gt; {
 
 When.ModuleParameterChanged( (module, property) =&gt; {
   if (module.Get().Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
-    Program.Restart();
+    if (Program.IsRunning) Program.Restart();
     return true;
   }
-  if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
+  if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
   {
     try{
       byte[] bytes = Encoding.Default.GetBytes(JsonConvert.SerializeObject(property));
       string payload = Encoding.UTF8.GetString(bytes);
-      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(property)));
+      publishBytes(clientid, module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(property)));
     } catch  (Exception e){
       //Program.Notify($"ERROR: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
@@ -808,17 +860,70 @@ while (Program.IsRunning) {
 }
 </ScriptSource>
     <ScriptContext>const string OptionButtons = "[program_configure,program_disable]";
+static string encryptionKey = "";
+
+static string encryptTopic(string topic, byte[] clientKey) {
+    byte[] t = Encoding.UTF8.GetBytes(topic);
+    t = encryptionFilter(t, clientKey);
+
+    string encryptedTopic = Convert.ToBase64String(t);
+    encryptedTopic = encryptedTopic.Replace("/", "%");
+    encryptedTopic = encryptedTopic.Replace("+", "&amp;");
+
+    return encryptedTopic;
+}
+
+static string decryptTopic(string topic, byte[] clientKey) {
+    topic = topic.Replace("%", "/");
+    topic = topic.Replace("&amp;", "+");
+    byte[] encryptedTopic = Convert.FromBase64String(topic);
+    return Encoding.UTF8.GetString(encryptionFilter(encryptedTopic, clientKey));
+}
+
+static byte[] encryptionFilter(byte[] payload, byte[] clientKey) {
+    if (!String.IsNullOrEmpty(encryptionKey)) {
+        byte[] output = new byte[256];
+        byte[] k = Convert.FromBase64String(encryptionKey);
+        k = andFilter(k, clientKey);
+        payload = xorFilter(payload, k);
+    }
+    return payload;
+}
+
+static byte[] xorFilter(byte[] payload, byte[] clientKey) {
+    if (clientKey.Length &gt; 0) {
+        for (int c = 0; c &lt; payload.Length; c++) {
+            byte k = clientKey[c % clientKey.Length];
+            byte i = payload[c];
+            byte o = (byte)(k ^ i);
+            payload[c] = o;
+        }
+    }
+    return payload;
+}
+
+static byte[] andFilter(byte[] payload, byte[] clientKey) {
+    if (clientKey.Length &gt; 0) {
+        for (int c = 0; c &lt; payload.Length; c++) {
+            byte k = clientKey[c % clientKey.Length];
+            byte i = payload[c];
+            byte o = (byte)(k &amp; i);
+            payload[c] = o;
+        }
+    }
+    return payload;
+}
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>545A8E1E29703DBAA4A75049292B3AC9</Checksum>
+      <Checksum>8179F946BCC55D8E2F8BB8F920A1BB00</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -1078,7 +1183,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1158,7 +1263,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1250,7 +1355,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1311,7 +1416,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
