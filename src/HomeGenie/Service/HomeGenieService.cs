@@ -455,7 +455,7 @@ namespace HomeGenie.Service
                 // we found associated module in HomeGenie.Modules
 
                 // Update/Add the module parameter as needed
-                ModuleParameter parameter = null;
+                ModuleParameter parameter;
                 try
                 {
                     // Lookup for the existing module parameter

@@ -32,11 +32,11 @@
     <PackageReference Include="HG.NWaves" Version="0.9.6" />
     <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.11" />
     <PackageReference Include="Iot.Device.Bindings" Version="3.2.0" />
-    <PackageReference Include="IronPython" Version="3.4.1" />
-    <PackageReference Include="IronPython.StdLib" Version="3.4.1" />
+    <PackageReference Include="IronPython" Version="3.4.2" />
+    <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.2" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.3" />
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.13" />
     <PackageReference Include="MIG" Version="1.2.18" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.2.21" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -80,7 +80,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="6.0.1" />
   </ItemGroup>
 
   <Target Name="CopyFiles" AfterTargets="Build">

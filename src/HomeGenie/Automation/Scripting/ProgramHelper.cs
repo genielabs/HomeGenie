@@ -43,12 +43,12 @@ namespace HomeGenie.Automation.Scripting
     public class ProgramHelper : ProgramHelperBase
     {
         private Module programModule;
-        private int myProgramId = -1;
+        private int myProgramId;
         private string myProgramDomain = Domains.HomeAutomation_HomeGenie_Automation;
         private object setupLock = new object();
 
         // whether 'Setup' has been executed
-        private bool initialized = false;
+        private bool initialized;
 
         public ProgramHelper(HomeGenieService hg, int programId) : base(hg)
         {
@@ -83,15 +83,14 @@ namespace HomeGenie.Automation.Scripting
         {
             lock (setupLock)
             {
-                if (!this.initialized)
+                if (!initialized)
                 {
-                    if (programModule == null) RelocateProgramModule();
                     // mark config options to determine unused ones
-                    if (programModule != null)
+                    if (Module != null)
                     {
-                        for (var p = 0; p < programModule.Properties.Count; p++)
+                        for (var p = 0; p < Module.Properties.Count; p++)
                         {
-                            var parameter = programModule.Properties[p];
+                            var parameter = Module.Properties[p];
                             if (parameter.Name.StartsWith("ConfigureOptions."))
                             {
                                 parameter.Description = null;
@@ -111,15 +110,15 @@ namespace HomeGenie.Automation.Scripting
                     functionBlock();
 
                     // remove deprecated config options
-                    if (programModule != null)
+                    if (Module != null)
                     {
                         var parameterList =
-                            programModule.Properties.FindAll(mp => mp.Name.StartsWith("ConfigureOptions."));
+                            Module.Properties.FindAll(mp => mp.Name.StartsWith("ConfigureOptions."));
                         foreach (var parameter in parameterList)
                         {
                             if (parameter.Name.StartsWith("ConfigureOptions.") && parameter.Description == null)
                             {
-                                programModule.Properties.Remove(parameter);
+                                Module.Properties.Remove(parameter);
                             }
                         }
                     }
@@ -191,10 +190,9 @@ namespace HomeGenie.Automation.Scripting
             if (widgetModule == null || widgetModule.Value != widget)
             {
                 Utility.ModuleParameterSet(module, Properties.WidgetDisplayModule, widget);
-                RelocateProgramModule();
-                if (programModule != null)
+                if (Module != null)
                 {
-                    Utility.ModuleParameterSet(programModule, Properties.WidgetDisplayModule, widget);
+                    Utility.ModuleParameterSet(Module, Properties.WidgetDisplayModule, widget);
                 }
                 homegenie.modules_RefreshVirtualModules();
                 //homegenie.modules_Sort();
@@ -253,11 +251,11 @@ namespace HomeGenie.Automation.Scripting
         /// </param>
         /// <param name='type'>
         /// The type of this option (eg. "text", "password", "cron.text", ...). Each type can have different initialization options
-        /// that are specified as ":" separated items. See html/ui/widgets folder for a list of possible types/options.
+        /// that are specified as a list of items separated by a ":" colon.
         /// </param>
         public ProgramHelper AddOption(string field, string defaultValue, string description, string type)
         {
-            var parameter = this.Parameter("ConfigureOptions." + field);
+            var parameter = Parameter("ConfigureOptions." + field);
             if (parameter.Value == "") parameter.Value = defaultValue;
             parameter.Description = description;
             parameter.FieldType = type;
@@ -286,11 +284,10 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModuleParameter Option(string field)
         {
-            if (programModule == null) RelocateProgramModule();
             ModuleParameter parameter = null;
             try
             {
-                parameter = Utility.ModuleParameterGet(programModule, "ConfigureOptions." + field);
+                parameter = Utility.ModuleParameterGet(Module, "ConfigureOptions." + field);
             }
             catch
             {
@@ -615,24 +612,23 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="description">Event description. (optional)</param>
         public ProgramHelper Emit(string parameter, object value, string description = "")
         {
-            if (programModule == null) RelocateProgramModule();
             try
             {
                 var actionEvent = homegenie.MigService.GetEvent(
-                    programModule.Domain,
-                    programModule.Address,
+                    Module.Domain,
+                    Module.Address,
                     description,
                     parameter,
                     value
                 );
                 homegenie.RaiseEvent(myProgramId, actionEvent);
-                //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
+                //homegenie.SignalModulePropertyChange(this, Module, actionEvent);
             }
             catch (Exception ex)
             {
                 HomeGenieService.LogError(
-                    programModule.Domain,
-                    programModule.Address,
+                    Module.Domain,
+                    Module.Address,
                     ex.Message,
                     "Exception.StackTrace",
                     ex.StackTrace
@@ -689,11 +685,10 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModuleParameter Parameter(string parameterName)
         {
-            if (programModule == null) RelocateProgramModule();
             ModuleParameter parameter = null;
             try
             {
-                parameter = Utility.ModuleParameterGet(programModule, parameterName);
+                parameter = Utility.ModuleParameterGet(Module, parameterName);
             }
             catch
             {
@@ -702,7 +697,7 @@ namespace HomeGenie.Automation.Scripting
             // create parameter if does not exists
             if (parameter == null)
             {
-                parameter = Utility.ModuleParameterSet(programModule, parameterName, "");
+                parameter = Utility.ModuleParameterSet(Module, parameterName, "");
             }
             return parameter;
         }
@@ -714,10 +709,9 @@ namespace HomeGenie.Automation.Scripting
         public StoreHelper Store(string storeName)
         {
             StoreHelper storage = null;
-            if (programModule == null) RelocateProgramModule();
-            if (this.programModule != null)
+            if (Module != null)
             {
-                storage = new StoreHelper(this.programModule.Stores, storeName);
+                storage = new StoreHelper(Module.Stores, storeName);
             }
             return storage;
         }
@@ -760,7 +754,30 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                RelocateProgramModule();
+
+                if (programModule == null || programModule != homegenie.Modules.Find(rm =>
+                        rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString(CultureInfo.InvariantCulture)))
+                {
+                    // force automation modules regeneration
+                    homegenie.modules_RefreshPrograms();
+                    //
+                    try
+                    {
+                        programModule = homegenie.Modules.Find(rm =>
+                            rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString(CultureInfo.InvariantCulture));
+                    }
+                    catch (Exception ex)
+                    {
+                        HomeGenieService.LogError(
+                            myProgramDomain,
+                            myProgramId.ToString(CultureInfo.InvariantCulture),
+                            ex.Message,
+                            "Exception.StackTrace",
+                            ex.StackTrace
+                        );
+                    }
+                }
+                
                 return programModule;
             }
         }
@@ -791,7 +808,7 @@ namespace HomeGenie.Automation.Scripting
             // set virtual modules generated by this program to inactive state
             homegenie.VirtualModules.ForEach((vm) =>
             {
-                if ((programModule == null || (vm.Domain != programModule.Domain && vm.Address != programModule.Address)) && vm.ParentId == myProgramId.ToString(CultureInfo.InvariantCulture))
+                if ((Module == null || (vm.Domain != Module.Domain && vm.Address != Module.Address)) && vm.ParentId == myProgramId.ToString(CultureInfo.InvariantCulture))
                 {
                     vm.IsActive = false;
                 }
@@ -822,7 +839,7 @@ namespace HomeGenie.Automation.Scripting
                     return true;
                 }
                 return false;
-            });  
+            });
             return this;
         }
 
@@ -845,26 +862,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        private void RelocateProgramModule()
-        {
-            // force automation modules regeneration
-            homegenie.modules_RefreshPrograms();
-            //
-            try
-            {
-                programModule = homegenie.Modules.Find(rm => rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
-            }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogError(
-                    myProgramDomain,
-                    myProgramId.ToString(),
-                    ex.Message,
-                    "Exception.StackTrace",
-                    ex.StackTrace
-                );
-            }
-        }
 
         private ProgramBlock GetProgramBlock()
         {

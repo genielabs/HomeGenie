@@ -264,7 +264,7 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
 </ScriptSetup>
     <ScriptSource>// detect when an option of this program is changed and store the new value to system settings
 When.ModuleParameterChanged((module, parameter)=&gt;{
-  if (module.Instance.Equals(Program.Module) &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
 	var settingName = parameter.Name.Substring(17); // skip "ConfigureOptions." part
     Settings.Parameter("Messaging."+settingName).Value = parameter.Value;
   }
@@ -282,7 +282,7 @@ Program.GoBackground();
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>DEFD8C14DEA9489EB027AB9C3C7CFAEF</Checksum>
+      <Checksum>D5ED1400F10DBDA875BE6EDCE779EB46</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>142</Address>
@@ -601,7 +601,7 @@ Program.GoBackground();
     .AddOption("ClientId", Program.SystemId, "0. Enter unique ID for this client", "text")
     .AddOption("ServerAddress", "", "1. MQTT server address", "text")
     .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
-    .AddOption("Encryption", "On", "3. End 11 to end messge encryption (E2EE)", "checkbox")
+    .AddOption("Encryption", "On", "3. End-to-end message encryption (E2EE)", "checkbox")
     .AddOption("EncryptionKey", "", "Encryption key", "hidden")
     .AddOption("WebSockets", "", "4. Connect using WebSockets", "checkbox")
     .AddOption("TLS", "", "5. Connect using TLS/SSL", "checkbox")
@@ -788,7 +788,7 @@ Api.Handle("MQTT:", ( args ) =&gt; {
 });
 
 When.ModuleParameterChanged( (module, property) =&gt; {
-  if (module.Get().Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
     if (Program.IsRunning) Program.Restart();
     return true;
   }
@@ -838,7 +838,7 @@ while (Program.IsRunning) {
         .Service(server)
         .UsingWebSockets(useWebSockets)
         .WithTls(useTls)
-        .Connect(port, clientid, (connected)=&gt;{
+        .Connect(port, Guid.NewGuid().ToString(), (connected)=&gt; {
           MqttIsConnected = connected;
           if (connected) {
               Program.Notify("Connected!");
@@ -914,16 +914,16 @@ static byte[] andFilter(byte[] payload, byte[] clientKey) {
     return payload;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
       <Required>true</Required>
-      <Checksum>8179F946BCC55D8E2F8BB8F920A1BB00</Checksum>
+      <Checksum>F094BE66EB6D274C53A9BF53E20C1D62</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -1106,7 +1106,7 @@ Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
 
 bool reconfigureRequired = false;
 When.ModuleParameterChanged((module, parameter) =&gt; {
-  if (module.Get().Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
     reconfigureRequired = true;
   }
   return true;
@@ -1187,7 +1187,7 @@ while (Program.IsRunning)
       <Id>openweathermap</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>F93D3B0AEC9971C1C79D70FDE007888B</Checksum>
+      <Checksum>4B044176D2110D4A1DC97E6B00B5442C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>

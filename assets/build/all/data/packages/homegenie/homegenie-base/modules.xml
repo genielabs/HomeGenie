@@ -132,6 +132,22 @@
         <UpdateTime>2022-12-28T17:03:34.1777588Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>ConfigureOptions.Encryption</Name>
+        <Value>On</Value>
+        <Description>3. End-to-end message encryption (E2EE)</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:32:17.7906451Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.EncryptionKey</Name>
+        <Value />
+        <Description>0. End-to-end encryption key</Description>
+        <FieldType>hidden</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:32:17.7906451Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>ConfigureOptions.TLS</Name>
         <Value />
         <Description>3. Connect using TLS/SSL</Description>
