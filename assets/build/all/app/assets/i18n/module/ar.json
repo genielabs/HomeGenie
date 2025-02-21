@@ -1,7 +1,7 @@
 {
   "stats.time_range": "النطاق الزمني",
   "stats.one_second": "ثانية واحدة",
-  "stats.five_seconds": "5 ثوان",
+  "stats.five_seconds": "5 ثواني",
   "stats.ten_seconds": "10 ثواني",
   "stats.half_minute": "30 ثانية",
   "stats.one_minute": "دقيقة واحدة",
@@ -12,5 +12,5 @@
   "stats.six_hours": "6 ساعات",
   "stats.twelve_hours": "12 ساعة",
   "stats.twentyfour_hours": "24 ساعة",
-  "stats.chart_provider": "مزود الرسم البياني"
+  "stats.chart_provider": "مزود المخططات"
 }

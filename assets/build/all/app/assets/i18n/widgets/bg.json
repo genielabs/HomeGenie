@@ -1,6 +1,6 @@
 {
   "$alarm_system": {
-    "arm_home": "У дома",
+    "arm_home": "Начало",
     "arm_away": "Далеч"
   },
   "$section_label": {

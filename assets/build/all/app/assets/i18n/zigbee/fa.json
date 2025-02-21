@@ -1,7 +1,7 @@
 {
-  "node_inclusion": "افزودن دستگاه",
-  "node_exclusion": "دستگاه را خارج کنید",
-  "operation_timed_out": "وقت انجام عملیات به پایان رسید.",
+  "node_inclusion": "دستگاه را اضافه کنید",
+  "node_exclusion": "دستگاه را بردارید",
+  "operation_timed_out": "زمان عملیات به پایان رسید.",
   "node_added": "گره با موفقیت اضافه شد",
   "turn_on_device_to_add": "دستگاه را روشن کنید و در صورت نیاز دکمه جفت شدن را به مدت 5 ثانیه فشار دهید",
   "soft_reset_button": "تنظیم مجدد نرم"

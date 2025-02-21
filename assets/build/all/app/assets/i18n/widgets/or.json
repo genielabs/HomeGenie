@@ -1,12 +1,12 @@
 {
   "$alarm_system": {
     "arm_home": "ଘର",
-    "arm_away": "ଦୂର"
+    "arm_away": "ବାହାରେ"
   },
   "$section_label": {
-    "label": "ଲେବଲ୍ |",
-    "indicators": "ସୂଚକ",
-    "lights_control": "ଆଲୋକ",
-    "switches_control": "ସୁଇଚ୍"
+    "label": "ଲେବଲ୍",
+    "indicators": "ସୂଚକଗୁଡ଼ିକ",
+    "lights_control": "ଲାଇଟ୍",
+    "switches_control": "ସ୍ୱିଚ୍‌ଗୁଡ଼ିକ"
   }
 }

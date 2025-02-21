@@ -1,16 +1,16 @@
 {
   "stats.time_range": "Tijdsbestek",
-  "stats.one_second": "Een seconde",
+  "stats.one_second": "Eén seconde",
   "stats.five_seconds": "5 seconden",
   "stats.ten_seconds": "10 seconden",
   "stats.half_minute": "30 seconden",
-  "stats.one_minute": "Een minuut",
+  "stats.one_minute": "Eén minuut",
   "stats.ten_minutes": "10 minuten",
   "stats.half_hour": "30 minuten",
   "stats.one_hour": "Een uur",
   "stats.three_hours": "3 uur",
   "stats.six_hours": "6 uur",
-  "stats.twelve_hours": "12 uren",
+  "stats.twelve_hours": "12 uur",
   "stats.twentyfour_hours": "24 uur",
-  "stats.chart_provider": "Kaartaanbieder"
+  "stats.chart_provider": "Grafiekprovider"
 }

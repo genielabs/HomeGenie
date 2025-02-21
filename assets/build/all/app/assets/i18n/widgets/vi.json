@@ -6,7 +6,7 @@
   "$section_label": {
     "label": "Nhãn",
     "indicators": "Các chỉ số",
-    "lights_control": "đèn",
+    "lights_control": "Đèn",
     "switches_control": "Công tắc"
   }
 }

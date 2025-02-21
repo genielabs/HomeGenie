@@ -620,7 +620,11 @@ namespace HomeGenie.Service
 
         public bool UpdateProgramsDatabase()
         {
-            return Utility.UpdateXmlDatabase(masterControlProgram.Programs, "programs.xml", UpdateDatabaseErrorHandler);
+            lock (masterControlProgram.Programs.LockObject)
+            {
+                return Utility.UpdateXmlDatabase(masterControlProgram.Programs, "programs.xml",
+                    UpdateDatabaseErrorHandler);
+            }
         }
 
         public bool UpdateSchedulerDatabase()
@@ -1361,9 +1365,30 @@ namespace HomeGenie.Service
                 systemConfiguration.OnUpdate -= systemConfiguration_OnUpdate;
             try
             {
-                // load config
+                // load config - restore backup if config file is zero-length
+                string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
+                string configBakPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.bak.xml");
+                try
+                {
+                    if (!File.Exists(configPath))
+                    {
+                        File.Copy(configBakPath, configPath,true);
+                    }
+                    else
+                    {
+                        long length = new FileInfo(configPath).Length;
+                        if (length == 0 && File.Exists(configBakPath))
+                        {
+                            File.Copy(configBakPath, configPath,true);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
                 var serializer = new XmlSerializer(typeof(SystemConfiguration));
-                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml")))
+                using (var reader = new StreamReader(configPath))
                 {
                     systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
                     // setup logging

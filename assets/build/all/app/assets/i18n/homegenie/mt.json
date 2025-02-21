@@ -40,7 +40,7 @@
   "schedule_type_range": "Firxa tad-data",
   "schedule_type_cron": "Cron espressjoni",
   "schedule_action": "Azzjoni",
-  "schedule_occurrence_preview": "Preview tal-okkorrenza",
+  "schedule_occurrence_preview": "Previżjoni tal-okkorrenza",
   "time_schedule": "Skeda",
   "occurrence": "okkorrenza",
   "cronwizard_description_on": "fuq",
@@ -58,10 +58,10 @@
   "cronwizard_days": "Jiem",
   "cronwizard_months": "Xhur",
   "cronwizard_minuteselect_everyminute": "Kull minuta",
-  "cronwizard_minuteselect_everynthminute": "Kull <n> minuti",
+  "cronwizard_minuteselect_everynthminute": "Kull minuta partikolari",
   "cronwizard_minuteselect_selectedminutes": "Minuti magħżula",
   "cronwizard_hourselect_everyhour": "Kull siegħa",
-  "cronwizard_hourselect_everynthhour": "Kull <n> sigħat",
+  "cronwizard_hourselect_everynthhour": "Kull sigħat partikolari",
   "cronwizard_hourselect_selectedhours": "Sigħat magħżula",
   "cronwizard_dayselect_everyday": "Kuljum",
   "cronwizard_dayselect_selecteddays": "Ġranet magħżula",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Xhur magħżula",
   "cronwizard_schedule_set_exact_time": "Issettja l-ħin tal-avveniment.",
   "cronwizard_schedule_set_slot_start": "Issettja l-bidu tas-slot tal-ħin.",
-  "cronwizard_schedule_set_slot_end": "Jibda fi {{start}}.<br>\nIssettja t-tmiem tal-islott tal-ħin.",
+  "cronwizard_schedule_set_slot_end": "Nibda mill- {{start}} .<span class=\"notranslate\"><br/></span> Issettja t-tmiem tal-islott tal-ħin.",
   "cronwizard_bindings_define_types_and_modules": "Iddefinixxi tipi u moduli li huma suġġetti għal din l-iskeda (mhux obbligatorju)",
   "cronwizard_bindings_select_types": "Agħżel it-tipi",
   "cronwizard_action_set_action_to_execute": "Issettja azzjoni biex tesegwixxi fuq okkorrenzi ta' dan l-avveniment",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Fi tmiem slot ta’ ħin",
   "cronwizard_action_custom_script": "Iskrittura ta 'azzjoni personalizzata",
   "cronwizard_action_no_action": "Ebda azzjoni",
-  "cronwizard_action_schedule_variable_hint": "Uża <span class=\"color-primary\">@{{name}}</span> bħala varjabbli fl-espressjonijiet cron jew uża <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span>fi programmi ta' awtomazzjoni biex jirreferu għal dan l-avveniment.",
+  "cronwizard_action_schedule_variable_hint": "Uża <span class=\"notranslate color-primary\">@ {{name}}</span> bħala varjabbli fl-espressjonijiet cron jew uża <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> fi programmi ta' awtomazzjoni biex tirreferi għal dan l-avveniment.",
   "scheduler_preset_action_command_turn_on": "Ixgħel",
   "scheduler_preset_action_command_turn_off": "Itfi",
   "scheduler_preset_action_command_set_level": "Issettja l-livell",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Għid",
   "scheduler_preset_action_config_message": "Messaġġ",
   "save_and_build": "Issejvja u tibni",
-  "toggle_widgets_preview": "Aqleb il-previżjoni tal-widgets",
+  "toggle_widgets_preview": "Toggle widgets preview",
   "stop_program": "Waqqaf il-programm",
   "run_program": "Mexxi programm",
   "enable_to_run_program": "Ippermetti l-programm sabiex imexxih",
@@ -126,8 +126,8 @@
   "setup_code": "Setup",
   "main_code": "Prinċipali",
   "context_code": "Kuntest",
-  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt.\n\nUża l-editur tal-\"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi:\n- Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug\n- Drag blokk tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali\n- Żid ġewwa fih blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm\n\nIl-programm \"Main\" jista 'jitħaddem manwalment jew jinbeda awtomatikament ibbażat fuq kundizzjonijiet eventwalment mogħtija fil-kodiċi Setup.",
-  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt.\n\nUża l-editur tal-\"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi:\n- Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug\n- Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali\n- Żid ġewwa fih blokki oħra ta 'kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\".\n\nDan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba fil-minuta.",
+  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm Il-programm \"Main\" jista 'jitħaddem manwalment jew awtomatikament ibbażat fuq kundizzjonijiet eventwalment mogħtija fil-kodiċi Setup.",
+  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra ta 'kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba kull minuta.",
   "capture_commands": "Qbid kmandi",
   "capture_commands_description": "Żid il-kmandi kollha mwettqa manwalment fuq widgets mal-programm.",
   "capture_commands_pause": "Pawża bejn il-kmandi",
@@ -142,11 +142,25 @@
     },
     "34": {
       "Title": "Tbassir tat-Temp",
-      "Description": "Informazzjoni dwar it-temp u t-tbassir mis-servizz Open Weather Map.\nBiex tattiva dan il-widget daħħal ċavetta API valida.\nSegwi l-istruzzjonijiet fuq https://openweathermap.org/appid biex tikseb ċavetta API b'xejn.",
+      "Description": "Informazzjoni dwar it-temp u t-tbassir mis-servizz Open Weather Map. Biex tattiva dan il-widget daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://openweathermap.org/appid biex tikseb ċavetta API b'xejn.",
       "ConfigureOptions.Location": "Isem il-belt",
       "ConfigureOptions.Language": "Lingwa (eż. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervall tal-aġġornament (minuti)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API key (APPID)"
+    },
+    "77": {
+      "Title": "Netwerk MQTT",
+      "Description": "Qabbad ma' sensar MQTT biex tuża l-app HomeGenie Panel minn kullimkien permezz tal-Internet jew biex tgħaqqad it-tagħmir HomeGenie fuq l-istess netwerk MQTT.",
+      "MQTT.SensorPublish": "Ippubblika avvenimenti emessi minn dan il-modulu",
+      "ConfigureOptions.ClientId": "Id-Klijent.",
+      "ConfigureOptions.ServerAddress": "Indirizz tas-server",
+      "ConfigureOptions.ServerPort": "Port tas-server",
+      "ConfigureOptions.Encryption": "Ippermetti l-kriptaġġ minn tarf sa tarf (E2EE)",
+      "ConfigureOptions.WebSockets": "Uża WebSockets",
+      "ConfigureOptions.TLS": "Ippermetti TLS/SSL",
+      "ConfigureOptions.Username": "Username (mhux obbligatorju)",
+      "ConfigureOptions.Password": "Password (mhux obbligatorju)",
+      "ConfigureOptions.ImportExternal": "Importa moduli esterni"
     },
     "78": {
       "Title": "Termostat intelliġenti",
@@ -166,7 +180,7 @@
       "Title": "Modalità Iffrankar tal-Enerġija",
       "Description": "Żomm il-livell tad-dawl taħt persentaġġ konfigurabbli.",
       "EnergyManagement.EnergySavingLevel": "Livell massimu tad-dawl (%)",
-      "EnergyManagement.EnergySavingMode": "Attiva"
+      "EnergyManagement.EnergySavingMode": "Ippermettiet"
     },
     "90": {
       "Title": "Sistema ta' Allarm tas-Sigurtà",
@@ -184,7 +198,7 @@
     "95": {
       "Title": "Logging ta' avvenimenti",
       "Description": "Irreġistra l-attività tal-apparat.",
-      "EventsLogger.EnableLogging": "Attiva"
+      "EventsLogger.EnableLogging": "Ippermettiet"
     },
     "400": {
       "Title": "Moduli Virtwali Demo",
@@ -227,14 +241,14 @@
       "Title": "Apparat Smart",
       "Description": "Ixgħel/itfi l-apparat ibbażat fuq l-iskoperta tal-moviment u d-dawl ambjentali.",
       "HomeGenie.SmartLights.Enable": "Ippermetti 'Apparat Intelliġenti'",
-      "HomeGenie.SmartLights.OnMotionDetect": "Ikkontrollat ​​minn sensor (mhux obbligatorju)",
-      "HomeGenie.SmartLights.CheckLuminosity": "Ikkontrollat ​​minn sensorju tad-dawl (mhux obbligatorju)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Ikkontrollat minn sensor (mhux obbligatorju)",
+      "HomeGenie.SmartLights.CheckLuminosity": "Ikkontrollat minn sensorju tad-dawl (mhux obbligatorju)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Itfi wara timeout ta' inattività (sekondi)",
       "HomeGenie.SmartLights.MinLuminance": "Ixgħel jekk il-luminanza hija taħt:"
     },
     "8": {
       "Title": "Xenarju tal-Kuluri tat-Tlugħ ix-Xemx",
-      "Description": "Eżempju ta 'xenarju \"Tlugħ ix-xemx\" għal dwal LED li jinbidlu l-kulur.",
+      "Description": "Eżempju ta' xenarju ta' \"Tlugħ ix-Xemx\" għal dwal LED li jinbidlu l-kulur.",
       "Scenarios.SunriseColors": "Link għax-xenarju ta' Sunrise Colors"
     }
   }

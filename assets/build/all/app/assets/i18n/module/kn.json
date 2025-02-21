@@ -1,6 +1,6 @@
 {
-  "stats.time_range": "ಸಮಯ ಶ್ರೇಣಿ",
-  "stats.one_second": "ಒಂದು ಕ್ಷಣ",
+  "stats.time_range": "ಸಮಯದ ವ್ಯಾಪ್ತಿ",
+  "stats.one_second": "ಒಂದು ಸೆಕೆಂಡ್",
   "stats.five_seconds": "5 ಸೆಕೆಂಡುಗಳು",
   "stats.ten_seconds": "10 ಸೆಕೆಂಡುಗಳು",
   "stats.half_minute": "30 ಸೆಕೆಂಡುಗಳು",
@@ -12,5 +12,5 @@
   "stats.six_hours": "6 ಗಂಟೆಗಳು",
   "stats.twelve_hours": "12 ಗಂಟೆಗಳು",
   "stats.twentyfour_hours": "24 ಗಂಟೆಗಳು",
-  "stats.chart_provider": "ಚಾರ್ಟ್ ಒದಗಿಸುವವರು"
+  "stats.chart_provider": "ಚಾರ್ಟ್ ಪೂರೈಕೆದಾರರು"
 }

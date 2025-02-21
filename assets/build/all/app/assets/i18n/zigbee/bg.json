@@ -1,5 +1,5 @@
 {
-  "node_inclusion": "Добави устройство",
+  "node_inclusion": "Добавете устройство",
   "node_exclusion": "Премахнете устройството",
   "operation_timed_out": "Операцията изтече.",
   "node_added": "Успешно добавен възел",

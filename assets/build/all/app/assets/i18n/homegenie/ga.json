@@ -1,11 +1,11 @@
 {
-  " ": "------------------------------------------",
+  " ": "--------------------------------------",
   "welcome_to_homegenie": "Fáilte go HomeGenie!",
   "welcome_subtitle": "An fhaisnéis uathoibrithe ríomhchláraithe",
   "not_configured_yet": "Níl an córas cumraithe fós. Cabhróidh an draoi cumraíochta seo leat do chóras a chur ar bun agus a fheidhmiú i roinnt céimeanna.",
   "system_config_start_with_base_and_backup": "Athchóirigh ó chomhad cúltaca",
   "system_config_start_with_default_setup": "Socrú réamhshocraithe",
-  "system_config_include_demo": "Cuir taispeántas san áireamh le gníomhaíocht gléas insamhladh",
+  "system_config_include_demo": "Cuir taispeántas san áireamh le gníomhaíocht gléas ionsamhlaithe",
   "system_config_additional_features": "Gnéithe breise",
   "system_config_manual_setup": "Socrú láimhe",
   "interfaces": "Comhéadain",
@@ -45,9 +45,9 @@
   "occurrence": "Tarlú",
   "cronwizard_description_on": "ar",
   "cronwizard_description_from": "ó",
-  "cronwizard_description_to": "chun",
+  "cronwizard_description_to": "chuig",
   "cronwizard_description_starting": "ó",
-  "cronwizard_description_ending": "chun",
+  "cronwizard_description_ending": "chuig",
   "cronwizard_description_at": "ag",
   "cronwizard_add_time_slot": "Cuir sliotán ama leis",
   "cronwizard_add_exact_time": "Cuir am cruinn leis",
@@ -58,10 +58,10 @@
   "cronwizard_days": "Laethanta",
   "cronwizard_months": "Míonna",
   "cronwizard_minuteselect_everyminute": "Gach nóiméad",
-  "cronwizard_minuteselect_everynthminute": "Gach <n> nóiméad",
+  "cronwizard_minuteselect_everynthminute": "Gach nóiméad tugtha",
   "cronwizard_minuteselect_selectedminutes": "Nóiméid roghnaithe",
   "cronwizard_hourselect_everyhour": "Gach uair an chloig",
-  "cronwizard_hourselect_everynthhour": "Gach <n> uair an chloig",
+  "cronwizard_hourselect_everynthhour": "Gach uair an chloig ar leith",
   "cronwizard_hourselect_selectedhours": "Uaireanta roghnaithe",
   "cronwizard_dayselect_everyday": "Gach lá",
   "cronwizard_dayselect_selecteddays": "Laethanta roghnaithe",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Míonna roghnaithe",
   "cronwizard_schedule_set_exact_time": "Socraigh am imeachta.",
   "cronwizard_schedule_set_slot_start": "Socraigh am tosaithe sliotán.",
-  "cronwizard_schedule_set_slot_end": "Ag tosú ag {{start}}.<br>\nSocraigh deireadh sliotán ama.",
+  "cronwizard_schedule_set_slot_end": "Ag tosú ag {{start}} .<span class=\"notranslate\"><br/></span> Socraigh deireadh sliotán ama.",
   "cronwizard_bindings_define_types_and_modules": "Sainmhínigh na cineálacha agus na modúil atá faoi réir an sceidil seo (roghnach)",
   "cronwizard_bindings_select_types": "Roghnaigh cineálacha",
   "cronwizard_action_set_action_to_execute": "Socraigh gníomh le rith ar tharluithe an imeachta seo",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Ag deireadh sliotán ama",
   "cronwizard_action_custom_script": "Script gnímh saincheaptha",
   "cronwizard_action_no_action": "Gan gníomh",
-  "cronwizard_action_schedule_variable_hint": "Úsáid <span class=\"color-primary\">@{{name}}</span> mar athróg i sloinn cron nó úsáid <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}} \")</span> i gcláir uathoibrithe chun tagairt a dhéanamh don imeacht seo.",
+  "cronwizard_action_schedule_variable_hint": "Úsáid <span class=\"notranslate color-primary\">@ {{name}}</span> mar athróg i sloinn cron nó úsáid <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> i gcláir uathoibrithe chun tagairt a dhéanamh don imeacht seo.",
   "scheduler_preset_action_command_turn_on": "Cas ar",
   "scheduler_preset_action_command_turn_off": "Múch",
   "scheduler_preset_action_command_set_level": "Socraigh leibhéal",
@@ -113,7 +113,7 @@
   "program_status_stopping": "Ag stopadh",
   "program_status_stopped": "Stopadh",
   "program_status_interrupted": "Cur isteach",
-  "program_status_disabled": "Faoi mhíchumas",
+  "program_status_disabled": "faoi mhíchumas",
   "program_status_enabled": "Cumasaithe",
   "program_status_broken": "Briste",
   "program_status_compile": "Tiomsú",
@@ -124,10 +124,10 @@
   "visual_code": "Cóid amhairc",
   "generated_code": "Cód ginte",
   "setup_code": "Socrú",
-  "main_code": "Priomh",
+  "main_code": "Príomh-",
   "context_code": "Comhthéacs",
-  "main_code_empty_note": "Tá cód \"Príomh\" folamh.\n\nÚsáid an t-eagarthóir \"Cód Amhairc\" chun an cód seo a ghiniúint:\n- Oscail an chatagóir \"Clár\" ón pailéad orduithe ar thaobh na láimhe clé\n- Tarraing bloc den chineál \"Príomh\" i spás oibre an chóid amhairc\n- Cuir bloic cód eile taobh istigh de chun gníomhartha agus loighic an chláir seo a chur i bhfeidhm\n\nIs féidir an clár \"Príomh\" a reáchtáil de láimh nó go huathoibríoch bunaithe ar na coinníollacha a thugtar sa chód Socraithe faoi dheireadh.",
-  "setup_code_empty_note": "Tá cód \"Socrú\" folamh.\n\nÚsáid an t-eagarthóir \"Cód Amhairc\" chun an cód seo a ghiniúint:\n- Oscail an chatagóir \"Clár\" ón pailéad orduithe ar thaobh na láimhe clé\n- Tarraing bloc den chineál \"Socrú\" i spás oibre an chóid amhairc\n- Cuir taobh istigh de bloic cód eile chun a chinneadh na coinníollacha a spreagfaidh \"Príomh\" forghníomhú cód\n\nDéantar an cód seo a mheas gach uair a tharlaíonn imeacht nua agus uair sa nóiméad ar a laghad.",
+  "main_code_empty_note": "Tá cód \"Príomh\" folamh. Bain úsáid as an eagarthóir \"Cód Amhairc\" chun an cód seo a ghiniúint: - Oscail an chatagóir \"Clár\" ón bpailéad ordaithe ar thaobh na láimhe clé - Tarraing bloc den chineál \"Príomh\" sa spás oibre cód amhairc - Cuir taobh istigh de bloic cód eile chun gníomhartha agus loighic an chláir seo a chur i bhfeidhm Is féidir an clár \"Príomh\" a reáchtáil de láimh nó go huathoibríoch bunaithe ar choinníollacha a thugtar sa chód Socraithe.",
+  "setup_code_empty_note": "Tá cód \"Socrú\" folamh. Bain úsáid as an eagarthóir \"Cód Amhairc\" chun an cód seo a ghiniúint: - Oscail an chatagóir \"Clár\" ón bpailéad ordaithe ar thaobh na láimhe clé - Tarraing bloc den chineál \"Socrú\" i spás oibre an chóid amhairc - Cuir bloic cód eile taobh istigh de chun na coinníollacha a chuirfidh tús le forghníomhú cód \"Príomh\" a chinneadh. Déantar meastóireacht ar an gcód seo gach uair a tharlaíonn imeacht nua agus uair sa nóiméad ar a laghad.",
   "capture_commands": "Gabháil orduithe",
   "capture_commands_description": "Cuir na horduithe go léir a dhéantar de láimh ar ghiuirléidí leis an gclár.",
   "capture_commands_pause": "Sos idir orduithe",
@@ -141,12 +141,26 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Insamhail amháin"
     },
     "34": {
-      "Title": "Réamhaisnéis na haimsire",
-      "Description": "Faisnéis aimsire agus réamhaisnéise ón tseirbhís Léarscáileanna Aimsire Oscailte.\nCuir isteach eochair API bhailí chun an ghiuirléid seo a ghníomhachtú.\nLean na treoracha ag https://openweathermap.org/appid chun eochair API saor in aisce a fháil.",
+      "Title": "Réamhaisnéis na hAimsire",
+      "Description": "Faisnéis aimsire agus réamhaisnéise ón tseirbhís Léarscáileanna Aimsire Oscailte. Cuir isteach eochair API bhailí chun an ghiuirléid seo a ghníomhachtú. Lean na treoracha ag https://openweathermap.org/appid chun eochair API saor in aisce a fháil.",
       "ConfigureOptions.Location": "Ainm cathrach",
       "ConfigureOptions.Language": "Teanga (m.sh. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Eatramh nuashonraithe (nóiméid)",
       "ConfigureOptions.ApiKey": "Eochair API OpenWeatherMap (APPID)"
+    },
+    "77": {
+      "Title": "Líonra MQTT",
+      "Description": "Ceangail le bróicéir MQTT chun aip Painéal HomeGenie a úsáid ó áit ar bith tríd an Idirlíon nó chun feistí HomeGenie a idirnascadh ar an líonra MQTT céanna.",
+      "MQTT.SensorPublish": "Foilsigh teagmhais arna hastú ag an modúl seo",
+      "ConfigureOptions.ClientId": "Aitheantas an Chliaint.",
+      "ConfigureOptions.ServerAddress": "Seoladh freastalaí",
+      "ConfigureOptions.ServerPort": "Port freastalaí",
+      "ConfigureOptions.Encryption": "Cumasaigh criptiú ceann go ceann (E2EE)",
+      "ConfigureOptions.WebSockets": "Úsáid WebSockets",
+      "ConfigureOptions.TLS": "Cumasaigh TLS/SSL",
+      "ConfigureOptions.Username": "Ainm úsáideora (roghnach)",
+      "ConfigureOptions.Password": "Pasfhocal (roghnach)",
+      "ConfigureOptions.ImportExternal": "Iompórtáil modúil seachtracha"
     },
     "78": {
       "Title": "Teirmeastat Cliste",
@@ -163,7 +177,7 @@
       "EnergyManagement.MonitorWatts": "Monatóireacht a dhéanamh ar ídiú fuinnimh"
     },
     "82": {
-      "Title": "Mód Sábháil Fuinnimh",
+      "Title": "Mód Coigilt Fuinnimh",
       "Description": "Coinnigh an leibhéal solais faoi bhun céatadán configurable.",
       "EnergyManagement.EnergySavingLevel": "Uasleibhéal solais (%)",
       "EnergyManagement.EnergySavingMode": "Cumasaigh"
@@ -201,7 +215,7 @@
       "Description": "Insamhladh an doras oscailte/dúnta de bhraiteoir taispeána dorais-fuinneog."
     },
     "402": {
-      "Title": "Taispeántas - Braitheadh ​​Tairiscint",
+      "Title": "Taispeántas - Braitheadh Tairiscint",
       "Description": "Insamhladh ar bhrath gluaisne ilbhraiteoir taispeána."
     },
     "410": {
@@ -215,7 +229,7 @@
       "Simulator.Sensor.DataFrequency": "Insamhlóir minicíocht astaíonn"
     },
     "505": {
-      "Title": "Cianrialtán",
+      "Title": "Cianrialú",
       "Description": "Rialú an gléas ag baint úsáide as cian (IR nó RF).",
       "HomeGenie.RemoteControl.Enable": "Cumasaigh",
       "HomeGenie.RemoteControl.IRCode": "Scoránaigh an cnaipe",

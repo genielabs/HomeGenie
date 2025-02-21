@@ -643,7 +643,7 @@ namespace HomeGenie.Automation.Scripting
             set
             {
                 command = Service.API.Automation.Control.Level;
-                Submit(value.ToString(CultureInfo.InvariantCulture));
+                Submit((value * 100).ToString(CultureInfo.InvariantCulture));
             }
         }
 

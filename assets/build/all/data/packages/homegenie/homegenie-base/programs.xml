@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>var dataFolder = Data.GetFolder(PresetsFolder);
 Data.AddToSystemBackup(dataFolder);
@@ -456,17 +456,21 @@ double[] GetWeeklyStats(string domain, string address)
         stats.EnsureIndex(x =&gt; x.Parameter);
         for (byte i = 0; i &lt; results.Length; i++)
         {
-            var avg = stats
+            var sumValues = stats
                 .Find(x =&gt; x.Domain == domain
                         &amp;&amp; x.Address == address
                         &amp;&amp; x.YearWeek == weekOfYear
-                        &amp;&amp; x.WeekDay == i)
-                .Sum(x =&gt; x.WattsHour);
-//                .Select(x =&gt; x.WattsHour)
-//                .DefaultIfEmpty(0)
-//                .Average();
-//            results[i == 0 ? 6 : i - 1] = avg;
-            results[i == 0 ? 6 : i - 1] = avg / 24;
+                        &amp;&amp; x.WeekDay == i);
+//                .Sum(x =&gt; x.WattsHour); // &lt;-- this doesn't work with Mono runtime 
+            double sum = 0;
+            foreach(var s in sumValues) {
+                sum += s.WattsHour;
+            }
+            /*    .Select(x =&gt; x.WattsHour)
+                  .DefaultIfEmpty(0)
+                  .Average();*/
+            double avg = sum / 24.0;
+            results[i == 0 ? 6 : i - 1] = avg;
         }
     }
     return results;
@@ -484,9 +488,9 @@ string GetDbName()
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>false</Required>
-      <Checksum>38005DD51B26530999D8A2E85FD69B92</Checksum>
+      <Checksum>86D69533E0D3CF36B570979B676193B0</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
@@ -598,17 +602,16 @@ Program.GoBackground();
   <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
   Program
-    .AddOption("ClientId", Program.SystemId, "0. Enter unique ID for this client", "text")
+    .AddOption("ClientId", Program.SystemId, "0. Unique ID for this client", "text")
     .AddOption("ServerAddress", "", "1. MQTT server address", "text")
     .AddOption("ServerPort", "1883", "2. MQTT server port", "text")
-    .AddOption("Encryption", "On", "3. End-to-end message encryption (E2EE)", "checkbox")
+    .AddOption("Encryption", "", "3. End-to-end message encryption (E2EE)", "checkbox")
     .AddOption("EncryptionKey", "", "Encryption key", "hidden")
-    .AddOption("WebSockets", "", "4. Connect using WebSockets", "checkbox")
-    .AddOption("TLS", "", "5. Connect using TLS/SSL", "checkbox")
+    .AddOption("WebSockets", "", "4. Use WebSockets", "checkbox")
+    .AddOption("TLS", "", "5. Enable TLS/SSL", "checkbox")
     .AddOption("Username", "", "6. Username (optional)", "text")
     .AddOption("Password", "", "7. Password (optional)", "text")
-    .AddOption("ImportExternal", "", "8. Import external modules", "checkbox")
-    .AddFeature("", "", "MQTT.SensorPublish", "Publish this module events", "checkbox");
+    .AddOption("ImportExternal", "", "8. Import external modules", "checkbox");
 });
 
 encryptionKey = Program.Option("EncryptionKey").Value;
@@ -620,12 +623,18 @@ int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
 string clientid = Program.Option("ClientId").Value.Trim();
 string username = Program.Option("Username").Value.Trim();
 string password = Program.Option("Password").Value.Trim();
-bool useWebSockets = Program.Option("WebSockets").Value == "On" ? true : false;
-bool useTls = Program.Option("TLS").Value == "On" ? true : false;
-bool enableEncryption = Program.Option("Encryption").Value == "On" ? true : false;
+bool useWebSockets = Program.Option("WebSockets").Value == "On";
+bool useTls = Program.Option("TLS").Value == "On";
+bool enableEncryption = Program.Option("Encryption").Value == "On";
+bool importExternal = Program.Option("ImportExternal").Value == "On";
+if (importExternal) {
+  Program.Option("Encryption").Value = "";
+  enableEncryption = false;
+}
 
 var MqttIsConnected = false;
 MqttClient.Reset();
+Program.Emit("MQTT.Status", "configure");
 
 // key used for encryption
 byte[] key = Encoding.UTF8.GetBytes(Program.SystemId);
@@ -634,11 +643,14 @@ string subscribeTopic = clientid + "/#";
 if (enableEncryption) {
   subscribeTopic = encryptTopic(clientid, key) + "/#";
 }
-if (Program.Option("ImportExternal").Value == "On") {
-  subscribeTopic = "/#";
+if (importExternal) {
+  subscribeTopic = "#";
+} else {
+  // export MQTT-published modules
+  Program.AddFeature("", "", "MQTT.SensorPublish", "Publish events emitted by this module", "checkbox");
 }
 
-var publishBytes = (string cid, string topic, byte[] payload) =&gt; {
+Action&lt;string, string, byte[]&gt; publishBytes = (string cid, string topic, byte[] payload) =&gt; {
   if (enableEncryption) {
     topic = encryptTopic(cid, key) + "/" + encryptTopic(topic, key);
     payload = encryptionFilter(payload, key);
@@ -648,8 +660,35 @@ var publishBytes = (string cid, string topic, byte[] payload) =&gt; {
   MqttClient.Publish(topic, payload);
 };
 
-var publish = (string cid, string topic, string message) =&gt; {
+Action&lt;string, string, string&gt; publish = (string cid, string topic, string message) =&gt; {
   publishBytes(cid, topic, Encoding.UTF8.GetBytes(message));
+};
+
+Action&lt;string&gt; apiHandle = (string cid) =&gt; {
+  Api.Handle("MQTT:" + cid, ( args ) =&gt; {
+    var request = Api.Parse(args);
+    var domain = request.Domain;
+    var address = request.Address;
+    string command = $"{request.Command}/{request.OptionsString}";
+    try
+    {
+      int mqttend = domain.IndexOf(".");
+      int mqttdel = domain.IndexOf(":");
+      var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
+      domain = domain.Substring(mqttend + 1);
+
+      var cmd = new MigInterfaceCommand(domain + "/" + address + "/" + command, request.Data);
+      byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(cmd));
+      string payload = Encoding.UTF8.GetString(bytes);
+      publish(clientid, "MQTT.Listeners/" + mqttdest + "/command", payload);
+
+      return new ResponseText("OK");
+    } catch (Exception e) {
+      Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
+      MqttIsConnected = false;
+    }
+    return new ResponseText("ERROR");
+  });
 };
 
 MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
@@ -738,18 +777,19 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
           module.Instance.Properties = modobj.Properties;
           module.Parameter("VirtualModule.ParentId").Value = parentid;
           module.Parameter("MQTT.SourceNode").Value = cid;
-          Program.Notify("Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
+          //Program.Notify("Imported remote module " + module.Instance.Domain + " " + module.Instance.Address);
         }
         break;
 
         case "event":
-        if (cid != clientid)
+        if (cid != clientid &amp;&amp; importExternal)
         {
           var property = JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
           if (module.Instance == null)
           {
             Program.AddModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
             module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
+            apiHandle(cid);
           }
           else if (!module.HasParameter("MQTT.SourceNode"))
           {
@@ -764,27 +804,6 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
       MqttIsConnected = false;
     }
   }
-  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload);
-});
-
-Api.Handle("MQTT:", ( args ) =&gt; {
-  var request = Api.Parse(args);
-  var domain = request.Domain;
-  var address = request.Address;
-  string command = $"{request.Command}/{request.OptionsString}";
-  try
-  {
-    int mqttend = domain.IndexOf(".");
-    int mqttdel = domain.IndexOf(":");
-    var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
-    domain = domain.Substring(mqttend + 1);
-    publish(clientid, "MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");
-    return new ResponseText("OK");
-  } catch (Exception e) {
-    Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
-    MqttIsConnected = false;
-  }
-  return new ResponseText("ERROR");
 });
 
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -792,12 +811,11 @@ When.ModuleParameterChanged( (module, property) =&gt; {
     if (Program.IsRunning) Program.Restart();
     return true;
   }
-  if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
+  if (!importExternal &amp;&amp; module.HasFeature("MQTT.SensorPublish") &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
   {
     try{
-      byte[] bytes = Encoding.Default.GetBytes(JsonConvert.SerializeObject(property));
-      string payload = Encoding.UTF8.GetString(bytes);
-      publishBytes(clientid, module.Instance.Domain + "/" + module.Instance.Address + "/event", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(property)));
+      byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(property));
+      publishBytes(clientid, module.Instance.Domain + "/" + module.Instance.Address + "/event", bytes);
     } catch  (Exception e){
       //Program.Notify($"ERROR: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
@@ -820,6 +838,33 @@ if (String.IsNullOrEmpty(server))
   return;
 }
 
+Action&lt;string&gt; importModules = (string serverAddress) =&gt; {
+  try {
+    var domain = "HomeAutomation.HomeGenie";
+    var data = Net
+      .WebService($"http://{serverAddress}/api/{domain}/Config/Modules.List")
+      .GetData();
+    List&lt;Module&gt; modules = JsonConvert.DeserializeObject&lt;List&lt;Module&gt;&gt;(data.ToString());
+    var mini = modules.Find(md =&gt; md.Domain == domain &amp;&amp; (md.Address == "mini" || md.Address == "system"));
+    var systemInfo = mini.Properties.Find(p =&gt; p.Name == "System.Info");
+    dynamic info = JsonConvert.DeserializeObject(systemInfo.Value);
+    string cid = info.Id;
+    apiHandle(cid);
+    foreach (var m in modules) {
+      string type = m.DeviceType.ToString();
+      if (type == "Program") continue;
+      Program.AddModule("MQTT:" + cid + "." + m.Domain, m.Address, type, "");
+      publish(clientid, "MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + m.Domain + "', 'Address' : '" + m.Address + "', 'Command' : 'Module.Describe' }");
+    }
+  } catch (Exception e) {
+    Program.Notify($"{e.Message}");
+  }
+};
+if (!importExternal)
+{
+  apiHandle("");
+}
+
 while (Program.IsRunning) {
 
   // Connect to MQTT
@@ -827,6 +872,7 @@ while (Program.IsRunning) {
   if (!MqttIsConnected) {
     MqttIsConnected = true;
     Program.Notify("Connecting to '" + server + ":" + port + "' ...");
+    Program.Emit("MQTT.Status", "connecting");
     try
     {
       if (username != "")
@@ -842,8 +888,14 @@ while (Program.IsRunning) {
           MqttIsConnected = connected;
           if (connected) {
               Program.Notify("Connected!");
+              Program.Emit("MQTT.Status", "connected");
+              if (importExternal) 
+              {
+                importModules(server);
+              }
           } else {
               Program.Notify("Disconnected!");
+              Program.Emit("MQTT.Status", "disconnected");
           }
         });
     }
@@ -921,14 +973,14 @@ static byte[] andFilter(byte[] payload, byte[] clientKey) {
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
       <Required>true</Required>
-      <Checksum>F094BE66EB6D274C53A9BF53E20C1D62</Checksum>
+      <Checksum>0CA2694034713BC867D3695C77729011</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
-    <Description>Connect to an MQTT broker to use HomeGenie Panel app from anywhere via Internet or to share devices with other HomeGenie servers on the same MQTT network.</Description>
+    <Description>Connect to an MQTT broker to use HomeGenie Panel app from anywhere via Internet or to interconnect HomeGenie devices on the same MQTT network.</Description>
     <Group>Interconnections</Group>
     <Features>
       <ProgramFeature>
@@ -936,7 +988,7 @@ static byte[] andFilter(byte[] payload, byte[] clientKey) {
         <ForDomains />
         <ForTypes />
         <Property>MQTT.SensorPublish</Property>
-        <Description>Publish this module events</Description>
+        <Description>Publish events emitted by this module</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -1286,7 +1338,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
   .AddFeature("", "Switch,Light,Dimmer,Color", "HomeGenie.RemoteControl.IRCode", "Toggle button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerUpCode", "ButtonUp", "1. Bright button (enter code)", "capture:Receiver.RawData")
   .AddOption("DimmerDownCode", "ButtonDown", "2. Dim button (enter code)", "capture:Receiver.RawData")
-  .AddOption("DimmerInterval", "10", "4. Dimming step", "slider:5:50:5")
+  .AddOption("DimmerInterval", "10", "4. Dimming step %", "slider:5:50:5")
   .Run();
 </ScriptSetup>
     <ScriptSource>var dimmerInterval = Program.Option("DimmerInterval");
@@ -1300,7 +1352,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     var irData = parameter;
     var lastButton = module.Parameter("IrController.LastButton");
     var lastIdle = module.Parameter("IrController.LastIdle");
-    var dimStep = dimmerInterval.DecimalValue;
+    var dimStep = dimmerInterval.DecimalValue / 100D;
 
     if (irData.Value != "")
     {
@@ -1310,17 +1362,17 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
           var moduleButton = m.Parameter("HomeGenie.RemoteControl.IRCode");
           if (moduleButton.Value == lastButton.Value)
           {
-            var level = m.Level * 100D;
+            var level = m.Level;
             if (irData.Value == dimmerUp.Value)
             {
               level += dimStep;
-              m.Level = (level &gt;= 100 ? 100 : level);
+              m.Level = (level &gt;= 1 ? 1 : level);
               Program.Notify(m.Instance.Name + "&lt;br&gt;Bright (" + m.Level + ")");
             }
             else if (irData.Value == dimmerDown.Value)
             {
               level -= dimStep;
-              m.Level = (level &lt;= 5 ? 5 : level);
+              m.Level = (level &lt;= 0.05 ? 0.05 : level);
               Program.Notify(m.Instance.Name + "&lt;br&gt;Dim (" + m.Level + ")");
             }
             lastIdle.Value = "0";
@@ -1357,9 +1409,9 @@ Program.GoBackground();
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>remote-control</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>BDF7FC5E982D8A588267A989636AA6B6</Checksum>
+      <Checksum>F55B4203889EEC49B831E1F1AF765BCD</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
@@ -1391,6 +1443,8 @@ Program.GoBackground();
     <ScriptSetup>Program.UseWidget("homegenie/generic/sensor");
 //Program.Run();</ScriptSetup>
     <ScriptSource>#using NWaves.Signals.Builders
+// For NWaves DSP library documentation see:
+// https://github.com/ar1st0crat/NWaves?tab=readme-ov-file
 
 DiscreteSignal sinusoid = 
     new SineBuilder()
@@ -1405,8 +1459,15 @@ while (Program.IsRunning)
 {
     foreach (var s in samples)
     {
-        Program.Emit("Sensor.SineWave", (s * 8) + 8);
-        Pause(.05);
+        double v = (s * .5) + .5;
+        Program.Emit("Sensor.SineWave", v);
+        // synchronize level of a module with sinewave value [0.0 .. 1.0]
+        /*
+        Modules
+            .WithName("My module name")
+            .Level = v;
+        */
+        Pause(.2);
     }
 }
 </ScriptSource>
@@ -1420,7 +1481,7 @@ while (Program.IsRunning)
       <Id>sine-wave-signal</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>7FB7ADAF989FC6DCE596C8218E10A80A</Checksum>
+      <Checksum>F1B6DB2FD949FE29E31F0183ACFE5B3B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>900</Address>

@@ -4,7 +4,7 @@
     "arm_away": "Weg"
   },
   "$section_label": {
-    "label": "Etiket",
+    "label": "Label",
     "indicators": "Indicatoren",
     "lights_control": "Lichten",
     "switches_control": "Schakelaars"

@@ -1,10 +1,10 @@
 {
-  "stats.time_range": "Aikahaarukka",
+  "stats.time_range": "Aikaväli",
   "stats.one_second": "Yksi sekunti",
   "stats.five_seconds": "5 sekuntia",
   "stats.ten_seconds": "10 sekuntia",
   "stats.half_minute": "30 sekuntia",
-  "stats.one_minute": "Yksi minuutti",
+  "stats.one_minute": "Minuutti",
   "stats.ten_minutes": "10 minuuttia",
   "stats.half_hour": "30 minuuttia",
   "stats.one_hour": "Yksi tunti",

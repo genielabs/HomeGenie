@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "-----------------------------------------",
   "welcome_to_homegenie": "Takulandilani ku HomeGenie!",
   "welcome_subtitle": "The programmable automation intelligence",
   "not_configured_yet": "Dongosolo silinakonzedwe panobe. Wizard yokhazikitsira iyi ikuthandizani kuti mukhazikitse dongosolo lanu ndikuyenda pang'onopang'ono.",
@@ -8,7 +8,7 @@
   "system_config_include_demo": "Phatikizani chiwonetsero chokhala ndi zida zoyeserera",
   "system_config_additional_features": "Zowonjezera",
   "system_config_manual_setup": "Kukonzekera pamanja",
-  "interfaces": "Zolumikizana",
+  "interfaces": "Zolumikizirana",
   "Protocols.UPnP": "Woyang'anira UPnP",
   "HomeAutomation.X10": "Mtsogoleri wa X10",
   "HomeAutomation.ZWave": "Z-Wave controller",
@@ -20,7 +20,7 @@
   "programs": "Mapulogalamu",
   "repositories": "Zosungirako",
   "packages": "Phukusi",
-  "installed_packages": "Phukusi loyikidwa",
+  "installed_packages": "Phukusi anaika",
   "upload_package": "Kwezani phukusi",
   "create_package": "Pangani phukusi latsopano",
   "programs_version": "Mtundu wa mapulogalamu",
@@ -58,10 +58,10 @@
   "cronwizard_days": "Masiku",
   "cronwizard_months": "Miyezi",
   "cronwizard_minuteselect_everyminute": "Mphindi iliyonse",
-  "cronwizard_minuteselect_everynthminute": "Mphindi <n> iliyonse",
+  "cronwizard_minuteselect_everynthminute": "Mphindi iliyonse",
   "cronwizard_minuteselect_selectedminutes": "Mphindi zosankhidwa",
   "cronwizard_hourselect_everyhour": "Ola lililonse",
-  "cronwizard_hourselect_everynthhour": "Maola <n> aliwonse",
+  "cronwizard_hourselect_everynthhour": "Maola aliwonse",
   "cronwizard_hourselect_selectedhours": "Maola osankhidwa",
   "cronwizard_dayselect_everyday": "Tsiku lililonse",
   "cronwizard_dayselect_selecteddays": "Masiku osankhidwa",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Miyezi yosankhidwa",
   "cronwizard_schedule_set_exact_time": "Khazikitsani nthawi yochitika.",
   "cronwizard_schedule_set_slot_start": "Khazikitsani nthawi yoyambira.",
-  "cronwizard_schedule_set_slot_end": "Kuyambira pa {{start}}.<br>\nKhazikitsani nthawi yomaliza.",
+  "cronwizard_schedule_set_slot_end": "Kuyambira {{start}} .<span class=\"notranslate\"><br/></span> Khazikitsani nthawi yomaliza.",
   "cronwizard_bindings_define_types_and_modules": "Tanthauzirani mitundu ndi ma module omwe ali pansi pa ndondomekoyi (posankha)",
   "cronwizard_bindings_select_types": "Sankhani mitundu",
   "cronwizard_action_set_action_to_execute": "Khazikitsani zomwe zichitike zikachitika",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Pamapeto pa nthawi",
   "cronwizard_action_custom_script": "Script zochita mwamakonda",
   "cronwizard_action_no_action": "Palibe chochita",
-  "cronwizard_action_schedule_variable_hint": "Gwiritsani ntchito <span class=\"color-primary\">@{{name}}</span> monga kusintha kwa mawu a cron kapena gwiritsani ntchito <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}). \")</span> m'mapulogalamu odzipangira okha kuti afotokoze chochitikachi.",
+  "cronwizard_action_schedule_variable_hint": "Gwiritsani ntchito <span class=\"notranslate color-primary\">@ {{name}}</span> monga kusintha kwa mawu a cron kapena gwiritsani ntchito <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> mumapulogalamu ongodzipangira okha kuti muwonetse chochitikachi.",
   "scheduler_preset_action_command_turn_on": "Yatsani",
   "scheduler_preset_action_command_turn_off": "Zimitsa",
   "scheduler_preset_action_command_set_level": "Khazikitsani mlingo",
@@ -126,8 +126,8 @@
   "setup_code": "Khazikitsa",
   "main_code": "Main",
   "context_code": "Nkhani",
-  "main_code_empty_note": "Khodi \"Yaikulu\" ilibe kanthu.\n\nGwiritsani ntchito \"Visual code\" mkonzi kupanga code iyi:\n- Tsegulani gulu la \"Pulogalamu\" kuchokera pamndandanda wamalamulo kumanzere\n- Kokani chipika chamtundu wa \"Main\" pamalo ogwirira ntchito\n- Onjezani mkati mwake ma code ena kuti mukwaniritse zochitika ndi malingaliro a pulogalamuyi\n\nPulogalamu \"Yaikulu\" imatha kuyendetsedwa pamanja kapena kungoyambira pawokha malinga ndi zomwe zimaperekedwa mu Khodi yokhazikitsa.",
-  "setup_code_empty_note": "Khodi ya \"kukhazikitsa\" ilibe kanthu.\n\nGwiritsani ntchito \"Visual code\" mkonzi kupanga code iyi:\n- Tsegulani gulu la \"Pulogalamu\" kuchokera pamndandanda wamalamulo kumanzere\n- Kokani chipika chamtundu wa \"Setup\" pamalo ogwirira ntchito\n- Onjezani mkati mwake midadada ina kuti mudziwe zomwe zingayambitse \"Main\" ma code\n\nKhodi iyi imawunikidwa nthawi iliyonse chochitika chatsopano chikachitika komanso kamodzi pa mphindi imodzi.",
+  "main_code_empty_note": "Khodi \"Yaikulu\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Pulogalamu\" kuchokera pamndandanda wamalamulo kumanzere - Kokani chipika chamtundu wa \"Main\" pamalo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mugwiritse ntchito ndi malingaliro a pulogalamuyi.",
+  "setup_code_empty_note": "Khodi ya \"kukhazikitsa\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Program\" kuchokera pamawu olamula kumanzere - Kokani chipika chamtundu wa \"Setup\" mu malo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mudziwe zomwe zingayambitse \"Main\" kukhazikitsa kachidindo Code iyi imawunikiridwa nthawi iliyonse chochitika chatsopano chichitika komanso kamodzi pa mphindi imodzi.",
   "capture_commands": "Jambulani malamulo",
   "capture_commands_description": "Onjezani malamulo onse opangidwa pamanja pa ma widget ku pulogalamuyi.",
   "capture_commands_pause": "Imani kaye pakati pa malamulo",
@@ -142,11 +142,25 @@
     },
     "34": {
       "Title": "Weather Forecast",
-      "Description": "Zanyengo ndi zolosera zochokera ku ntchito ya Open Weather Map.\nKuti mutsegule widget iyi lowetsani kiyi yolondola ya API.\nTsatirani malangizo pa https://openweathermap.org/appid kuti mupeze kiyi yaulere ya API.",
+      "Description": "Zanyengo ndi zolosera zochokera ku ntchito ya Open Weather Map. Kuti mutsegule widget iyi lowetsani kiyi yolondola ya API. Tsatirani malangizo pa https://openweathermap.org/appid kuti mupeze kiyi yaulere ya API.",
       "ConfigureOptions.Location": "Dzina lamzinda",
       "ConfigureOptions.Language": "Chiyankhulo (monga EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Nthawi yosinthira (mphindi)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API key (APPID)"
+    },
+    "77": {
+      "Title": "Mtengo MQTT",
+      "Description": "Lumikizanani ndi broker wa MQTT kuti mugwiritse ntchito pulogalamu ya HomeGenie Panel kuchokera kulikonse kudzera pa intaneti kapena kulumikiza zida za HomeGenie pa netiweki yomweyo ya MQTT.",
+      "MQTT.SensorPublish": "Sindikizani zochitika zomwe zatulutsidwa ndi gawoli",
+      "ConfigureOptions.ClientId": "Id ya kasitomala.",
+      "ConfigureOptions.ServerAddress": "Adilesi ya seva",
+      "ConfigureOptions.ServerPort": "Doko la seva",
+      "ConfigureOptions.Encryption": "Yambitsani kubisa kumapeto mpaka kumapeto (E2EE)",
+      "ConfigureOptions.WebSockets": "Gwiritsani ntchito WebSockets",
+      "ConfigureOptions.TLS": "Yambitsani TLS/SSL",
+      "ConfigureOptions.Username": "Dzina lolowera (posankha)",
+      "ConfigureOptions.Password": "Mawu achinsinsi (posankha)",
+      "ConfigureOptions.ImportExternal": "Lowetsani ma module akunja"
     },
     "78": {
       "Title": "Smart Thermostat",
@@ -163,7 +177,7 @@
       "EnergyManagement.MonitorWatts": "Yang'anirani momwe mungagwiritsire ntchito mphamvu"
     },
     "82": {
-      "Title": "Njira Yopulumutsa Mphamvu",
+      "Title": "Njira Yopulumutsira Mphamvu",
       "Description": "Sungani mlingo wa kuwala pansi pa chiwerengero chosinthika.",
       "EnergyManagement.EnergySavingLevel": "Mulingo wopepuka kwambiri (%)",
       "EnergyManagement.EnergySavingMode": "Yambitsani"
@@ -173,7 +187,7 @@
       "Description": "Gwiritsani ntchito masensa ndi zida zina kukhazikitsa ma alarm system.",
       "HomeGenie.SecurityAlarm": "Gwiritsani ntchito ngati alamu/strobe",
       "HomeGenie.SecuritySensor": "Gwiritsani ntchito ngati sensor yachitetezo",
-      "ConfigureOptions.Email.Recipients": "Mndandanda wolekanitsidwa wa koma wa olandila maimelo azidziwitso zama alarm",
+      "ConfigureOptions.Email.Recipients": "Mndandanda wolekanitsidwa wa koma wa olandira maimelo a zidziwitso zama alarm",
       "ConfigureOptions.System.ArmDelay": "Kuchedwa kwa mkono (masekondi)",
       "ConfigureOptions.System.SirenStartTime": "Sirens Yayamba Kuchedwa (masekondi)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (masekondi, 0=infinite)",
@@ -198,7 +212,7 @@
     },
     "401": {
       "Title": "Chiwonetsero - Toggle Door",
-      "Description": "Imatengera chitseko chotseguka / chotsekedwa cha sensor yazenera lazenera."
+      "Description": "Imatengera chitseko chotseguka / chotsekedwa cha sensor yawindo lazenera."
     },
     "402": {
       "Title": "Chiwonetsero - Zoyenda Zapezeka",
@@ -206,7 +220,7 @@
     },
     "410": {
       "Title": "Sensor simulator",
-      "Description": "Tumizani ma sensa osasinthika.",
+      "Description": "Tumizani makonda a sensor mwachisawawa.",
       "Simulator.Sensor.Temperature": "Sensa ya kutentha",
       "Simulator.Sensor.Humidity": "Sensa ya chinyezi",
       "Simulator.Sensor.Luminance": "Sensa yowala",
@@ -225,7 +239,7 @@
     },
     "145": {
       "Title": "Smart Chipangizo",
-      "Description": "Yatsani/zimitsani chipangizochi potengera kuzindikira koyenda ndi kuwala kozungulira.",
+      "Description": "Yatsani/zimitsani chipangizochi potengera kuzindikira koyenda komanso kuwala kozungulira.",
       "HomeGenie.SmartLights.Enable": "Yambitsani 'Smart Chipangizo'",
       "HomeGenie.SmartLights.OnMotionDetect": "Imayendetsedwa ndi sensa (posankha)",
       "HomeGenie.SmartLights.CheckLuminosity": "Kuwongoleredwa ndi sensa yowala (posankha)",

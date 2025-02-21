@@ -1,13 +1,13 @@
 {
-  " ": "------------------------------------------",
+  " ": "-------------------------------------------------",
   "welcome_to_homegenie": "Nnọọ na HomeGenie!",
   "welcome_subtitle": "The programmable akpaaka ọgụgụ isi",
-  "not_configured_yet": "Ahazibeghị sistemụ ma. Ọkachamara ntọlite ​​​​a ga-enyere gị aka n'ịkwalite sistemụ gị ma na-arụ ọrụ na usoro ole na ole.",
-  "system_config_start_with_base_and_backup": "Weghachi na faịlụ ndabere",
-  "system_config_start_with_default_setup": "Ntọlite ​​mbụ",
+  "not_configured_yet": "Ahazibeghị sistemụ ma. Ọkachamara ntọlite a ga-enyere gị aka n'ịkwalite sistemụ gị ma na-arụ ọrụ na usoro ole na ole.",
+  "system_config_start_with_base_and_backup": "Weghachi na ndabere faịlụ",
+  "system_config_start_with_default_setup": "Ntọlite mbụ",
   "system_config_include_demo": "Tinye ihe ngosi nwere mmemme ngwaọrụ emepụtara",
   "system_config_additional_features": "Atụmatụ ndị ọzọ",
-  "system_config_manual_setup": "Ntọlite ​​ntuziaka",
+  "system_config_manual_setup": "Ntọlite ntuziaka",
   "interfaces": "Ọnụ ụzọ",
   "Protocols.UPnP": "UPnP njikwa",
   "HomeAutomation.X10": "Onye njikwa X10",
@@ -41,7 +41,7 @@
   "schedule_type_cron": "Okwu cron",
   "schedule_action": "Omume",
   "schedule_occurrence_preview": "Nlele ihe omume",
-  "time_schedule": "Nhazi oge",
+  "time_schedule": "Usoro ihe omume",
   "occurrence": "Ihe omume",
   "cronwizard_description_on": "na",
   "cronwizard_description_from": "si",
@@ -58,10 +58,10 @@
   "cronwizard_days": "Ụbọchị",
   "cronwizard_months": "Ọnwa ole",
   "cronwizard_minuteselect_everyminute": "Kwa nkeji",
-  "cronwizard_minuteselect_everynthminute": "Nkeji <n> ọ bụla",
+  "cronwizard_minuteselect_everynthminute": "Nkeji ọ bụla nyere",
   "cronwizard_minuteselect_selectedminutes": "Nkeji ahọpụtara",
   "cronwizard_hourselect_everyhour": "Oge awa ọ bụla",
-  "cronwizard_hourselect_everynthhour": "Kwa elekere <n>",
+  "cronwizard_hourselect_everynthhour": "Oge awa ọ bụla nyere",
   "cronwizard_hourselect_selectedhours": "Oge awa ahọpụtara",
   "cronwizard_dayselect_everyday": "Kwa ụbọchị",
   "cronwizard_dayselect_selecteddays": "Ụbọchị ahọpụtara",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Ọnwa ndị ahọpụtara",
   "cronwizard_schedule_set_exact_time": "Tọọ oge mmemme.",
   "cronwizard_schedule_set_slot_start": "Tọọ mmalite mmalite oge.",
-  "cronwizard_schedule_set_slot_end": "Bido na {{start}}.<br>\nTọọ njedebe oghere oge.",
+  "cronwizard_schedule_set_slot_end": "Malite na {{start}} .<span class=\"notranslate\"><br/></span> Tọọ njedebe oghere oge.",
   "cronwizard_bindings_define_types_and_modules": "Kọwaa ụdị na modul ndị dabere na nhazi oge a (nhọrọ)",
   "cronwizard_bindings_select_types": "Họrọ ụdị",
   "cronwizard_action_set_action_to_execute": "Tọọ ihe iji mezuo ihe omume a",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Na njedebe nke oghere oge",
   "cronwizard_action_custom_script": "Edemede omume omenala",
   "cronwizard_action_no_action": "Enweghị omume",
-  "cronwizard_action_schedule_variable_hint": "Jiri <span class=\"color-primary\">@{{name}}</span> dị ka mgbanwe na okwu cron ma ọ bụ jiri <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}) \")</span> na mmemme akpaaka iji rụtụ aka na mmemme a.",
+  "cronwizard_action_schedule_variable_hint": "Jiri <span class=\"notranslate color-primary\">@ {{name}}</span> dị ka mgbanwe na okwu cron ma ọ bụ jiri <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> na mmemme akpaaka iji rụtụ aka na mmemme a.",
   "scheduler_preset_action_command_turn_on": "Gbanwuo",
   "scheduler_preset_action_command_turn_off": "Gbanyụọ",
   "scheduler_preset_action_command_set_level": "Tọọ ọkwa",
@@ -126,8 +126,8 @@
   "setup_code": "Melite",
   "main_code": "Isi",
   "context_code": "Okwu",
-  "main_code_empty_note": "Koodu \"Main\" abaghị uru.\n\nJiri nchịkọta akụkọ \"Visual code\" ka ịmepụta koodu a:\n- Mepee otu \"Mmemme\" site na palette iwu n'aka ekpe\n- Dọrọ ngọngọ nke ụdị \"Main\" na oghere ọrụ koodu anya\n- Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji mejuputa omume na mgbagha nke mmemme a\n\nEnwere ike iji aka na-agba \"Main\" mmemme ahụ ma ọ bụ malite na akpaghị aka dabere na ọnọdụ emechara nyere na koodu Ntọala.",
-  "setup_code_empty_note": "Koodu \"Ntọala\" efu.\n\nJiri nchịkọta akụkọ \"Visual code\" ka ịmepụta koodu a:\n- Mepee otu \"Mmemme\" site na palette iwu n'aka ekpe\n- Dọrọ ngọngọ nke ụdị \"Ntọala\" na oghere ọrụ koodu anya\n- Tinye n'ime ya ngọngọ koodu ndị ọzọ iji chọpụta ọnọdụ ga-akpalite mmebe koodu \"Isi\".\n\nA na-enyocha koodu a oge ọ bụla ihe omume ọhụrụ mere na opekata mpe otu ugboro n'otu nkeji.",
+  "main_code_empty_note": "Koodu \"isi\" abaghị uru. Jiri onye nchịkọta akụkọ \"Visual code\" mepụta koodu a: - Mepee ụdị \"Mmemme\" site na palette iwu dị n'aka ekpe - Dọrọ ngọngọ nke ụdị \"Main\" na oghere ọrụ koodu - Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji mejuputa omume na mgbagha nke usoro ihe omume a.",
+  "setup_code_empty_note": "Koodu \"Ntọala\" efu. Jiri onye nchịkọta akụkọ \"Visual code\" mepụta koodu a: - Mepee ụdị \"Mmemme\" site na palette iwu dị n'aka ekpe - Dọrọ ngọngọ nke ụdị \"Ntọala\" na oghere ọrụ koodu anya - Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji chọpụta ọnọdụ ndị ga-akpalite \"Isi\" koodu ogbugbu a na-enyocha koodu a oge ọ bụla ihe omume ọhụrụ mere na ọ dịkarịa ala otu ugboro n'otu nkeji.",
   "capture_commands": "Weghara iwu",
   "capture_commands_description": "Tinye iwu niile ejiri aka mee na wijetị na mmemme ahụ.",
   "capture_commands_pause": "Kwụsị n'etiti iwu",
@@ -142,11 +142,25 @@
     },
     "34": {
       "Title": "Amụma ihu igwe",
-      "Description": "Ozi ihu igwe na amụma sitere na ọrụ mapụ ihu igwe mepere emepe.\nIji rụọ ọrụ wijetị a, tinye igodo API bara uru.\nSoro ntuziaka na https://openweathermap.org/appid iji nweta igodo API efu.",
+      "Description": "Ozi ihu igwe na amụma sitere na ọrụ mapụ ihu igwe mepere emepe. Iji rụọ ọrụ wijetị a, tinye igodo API bara uru. Soro ntuziaka na https://openweathermap.org/appid iji nweta igodo API efu.",
       "ConfigureOptions.Location": "Aha obodo",
       "ConfigureOptions.Language": "Asụsụ (dịka EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Melite nkeji oge (nkeji)",
       "ConfigureOptions.ApiKey": "igodo API OpenWeatherMap (APPID)"
+    },
+    "77": {
+      "Title": "MQTT netwọkụ",
+      "Description": "Jikọọ na onye na-ere ahịa MQTT ka iji ngwa HomeGenie Panel site na ebe ọ bụla site na ịntanetị ma ọ bụ jikọọ ngwaọrụ HomeGenie n'otu netwọkụ MQTT.",
+      "MQTT.SensorPublish": "Bipụta mmemme nke modul a wepụtara",
+      "ConfigureOptions.ClientId": "Id onye ahịa.",
+      "ConfigureOptions.ServerAddress": "Adreesị nkesa",
+      "ConfigureOptions.ServerPort": "ọdụ ụgbọ mmiri sava",
+      "ConfigureOptions.Encryption": "Kwado izo ya ezo na ngwụcha ruo ngwụcha (E2EE)",
+      "ConfigureOptions.WebSockets": "Jiri WebSockets",
+      "ConfigureOptions.TLS": "Kwado TLS/SSL",
+      "ConfigureOptions.Username": "Aha njirimara (nhọrọ)",
+      "ConfigureOptions.Password": "Okwuntughe (nhọrọ)",
+      "ConfigureOptions.ImportExternal": "Bubata modul mpụga"
     },
     "78": {
       "Title": "Smart Thermostat",
@@ -178,7 +192,7 @@
       "ConfigureOptions.System.SirenStartTime": "Sirens Malite igbu oge (sekọnd)",
       "ConfigureOptions.System.SirenMaxTime": "Oge Sirens max (sekọnd, 0= enweghi ngwụcha)",
       "ConfigureOptions.Trigger.ArmedProgram": "Mmemme na-agba ọsọ mgbe eji ngwa agha",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Mmemme ga-agba ọsọ mgbe a tọhapụrụ ya",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Mmemme na-agba ọsọ mgbe a tọhapụrụ ya",
       "ConfigureOptions.Trigger.TriggeredProgram": "Mmemme ga-agba ọsọ mgbe akpalitere"
     },
     "95": {
@@ -198,7 +212,7 @@
     },
     "401": {
       "Title": "Ihe ngosi - Gbanwee ọnụ ụzọ",
-      "Description": "Na-emepe ọnụ ụzọ mepere/emechi nke ihe mmetụta ọnụ ụzọ-window ngosi."
+      "Description": "Simulates ụzọ mepere/emechi nke ihe mmetụta ọnụ ụzọ-window ngosi."
     },
     "402": {
       "Title": "Ihe ngosi - Achọpụtara ngagharị",
@@ -234,7 +248,7 @@
     },
     "8": {
       "Title": "Ihe ngosi agba ọwụwa anyanwụ",
-      "Description": "Ihe atụ \"Ọwụwa anyanwụ\" dị n'ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
+      "Description": "Ọmụmaatụ \"Ọwụwa Anyanwụ\" ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
       "Scenarios.SunriseColors": "Njikọ na ọnọdụ ọdịda anyanwụ agba"
     }
   }

@@ -58,10 +58,10 @@
   "cronwizard_days": "Mazuva",
   "cronwizard_months": "Mwedzi",
   "cronwizard_minuteselect_everyminute": "Maminiti ose",
-  "cronwizard_minuteselect_everynthminute": "Ese <n> maminetsi",
+  "cronwizard_minuteselect_everynthminute": "Maminitsi ese akapihwa",
   "cronwizard_minuteselect_selectedminutes": "Maminitsi akasarudzwa",
   "cronwizard_hourselect_everyhour": "Awa imwe neimwe",
-  "cronwizard_hourselect_everynthhour": "Maawa ose <n>",
+  "cronwizard_hourselect_everynthhour": "Maawa ese akapihwa",
   "cronwizard_hourselect_selectedhours": "Maawa akasarudzwa",
   "cronwizard_dayselect_everyday": "Mazuva ese",
   "cronwizard_dayselect_selecteddays": "Mazuva akasarudzwa",
@@ -70,9 +70,9 @@
   "cronwizard_monthselect_selectedmonths": "Mwedzi yakasarudzwa",
   "cronwizard_schedule_set_exact_time": "Seta nguva yechiitiko.",
   "cronwizard_schedule_set_slot_start": "Gadzirisa nguva yekutanga.",
-  "cronwizard_schedule_set_slot_end": "Kutanga pa{{start}}.<br>\nSeta nguva yekupedzisira.",
+  "cronwizard_schedule_set_slot_end": "Kutanga {{start}} .<span class=\"notranslate\"><br/></span> Seta nguva yekupedzisira.",
   "cronwizard_bindings_define_types_and_modules": "Tsanangura mhando nemamodule ari pasi pechirongwa ichi (sarudzo)",
-  "cronwizard_bindings_select_types": "Sarudza mhando",
+  "cronwizard_bindings_select_types": "Sarudza marudzi",
   "cronwizard_action_set_action_to_execute": "Ronga chiito chekuita pane zvinoitika zvechiitiko ichi",
   "cronwizard_action_preset_actions": "Preset zviito",
   "cronwizard_action_preset_every_occurrence": "Pane zvese zvinoitika",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Pakupera kwenguva",
   "cronwizard_action_custom_script": "Manyorero echiito echinyakare",
   "cronwizard_action_no_action": "Hapana kuita",
-  "cronwizard_action_schedule_variable_hint": "Shandisa <span class=\"color-primary\">@{{name}}</span> sechinhu chinosiyana mumataurirwo e-cron kana shandisa <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}} \")</span> muzvirongwa zve otomatiki kuratidza chiitiko ichi.",
+  "cronwizard_action_schedule_variable_hint": "Shandisa <span class=\"notranslate color-primary\">@ {{name}}</span> sechinhu chinosiyana mumataurirwo e cron kana shandisa <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> muzvirongwa zve otomatiki kuratidza chiitiko ichi.",
   "scheduler_preset_action_command_turn_on": "Batidza",
   "scheduler_preset_action_command_turn_off": "Dzima",
   "scheduler_preset_action_command_set_level": "Set level",
@@ -126,8 +126,8 @@
   "setup_code": "Gadzirira",
   "main_code": "Main",
   "context_code": "Context",
-  "main_code_empty_note": "\"Main\" kodhi haina chinhu.\n\nShandisa \"Visual code\" mupepeti kugadzira iyi kodhi:\n- Vhura chikamu \"Chirongwa\" kubva pane yekuraira palette kuruboshwe\n- Dhonza block yemhando \"Main\" mune yekuona kodhi nzvimbo yekushanda\n- Wedzera mukati mayo mamwe kodhi mabhuraki kuita zviito uye pfungwa dzechirongwa ichi\n\nIyo purogiramu \"Main\" inogona kunge ichimhanya nemaoko kana auto-kutanga zvichienderana nemamiriro anozopihwa muSetup kodhi.",
-  "setup_code_empty_note": "\"Setup\" kodhi haina chinhu.\n\nShandisa \"Visual code\" mupepeti kugadzira iyi kodhi:\n- Vhura chikamu \"Chirongwa\" kubva pane yekuraira palette kuruboshwe\n- Dhonza block yemhando \"Setup\" mune yekuona kodhi nzvimbo yekushanda\n- Wedzera mukati mayo mamwe mabhuraki ekodhi kuti uone mamiriro ayo anokonzeresa \"Main\" kodhi kuuraya\n\nIyi kodhi inoongororwa pese panoitika chiitiko chitsva uye kamwechete paminiti.",
+  "main_code_empty_note": "\"Main\" kodhi haina chinhu. Shandisa \"Visual code\" mupepeti kugadzira iyi kodhi: - Vhura chikamu che \"Chirongwa\" kubva pane yekuraira palette kuruboshwe - Dhonza bhuroka yerudzi \"Main\" mune yekuona kodhi nzvimbo yekushandira - Wedzera mukati mayo mamwe mabhuraki ekodhi kuita zviito uye pfungwa dzechirongwa ichi Chirongwa \"Main\" chinogona kunge chichiitwa nemaoko kana auto-kutanga zvichienderana nemamiriro anozopihwa muSetup kodhi.",
+  "setup_code_empty_note": "\"Setup\" kodhi haina chinhu. Shandisa \"Visual code\" mupepeti kugadzira iyi kodhi: - Vhura chikamu che \"Chirongwa\" kubva pane yekuraira palette kuruboshwe - Dhonza bhuroka yemhando \"Setup\" munzvimbo yekuona kodhi yebasa - Wedzera mukati mayo mamwe mabhuraki ekodhi kuti uone mamiriro anokonzeresa \"Main\" kuuraya kodhi Iyi kodhi inoongororwa pese panoitika chiitiko chitsva uye kamwechete paminiti.",
   "capture_commands": "Tora mirairo",
   "capture_commands_description": "Wedzera mirairo yese yakaitwa nemaoko pamajeti kuchirongwa.",
   "capture_commands_pause": "Imbomira pakati pemirairo",
@@ -141,12 +141,26 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simulate chete"
     },
     "34": {
-      "Title": "Mamiriro ekunze",
-      "Description": "Mamiriro ekunze uye ruzivo rwekufanotaura kubva kuOpen Weather Mepu sevhisi.\nKuti uvhure widget iyi isa kiyi yeAPI inoshanda.\nTevedza mirairo pa https://openweathermap.org/appid kuti uwane kiyi yemahara API.",
+      "Title": "Weather Forecast",
+      "Description": "Mamiriro ekunze uye ruzivo rwekufanotaura kubva kuOpen Weather Mepu sevhisi. Kuti uvhure widget iyi isa kiyi yeAPI inoshanda. Tevedza mirairo pa https://openweathermap.org/appid kuti uwane kiyi yemahara API.",
       "ConfigureOptions.Location": "Zita reguta",
       "ConfigureOptions.Language": "Mutauro (semuenzaniso. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Gadzirisa nguva (maminitsi)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API kiyi (APPID)"
+    },
+    "77": {
+      "Title": "Network MQTT",
+      "Description": "Batanidza kune MQTT bhuroka kushandisa HomeGenie Panel app kubva chero kupi neInternet kana kubatanidza HomeGenie zvishandiso pane imwecheteyo MQTT network.",
+      "MQTT.SensorPublish": "Shambadzira zviitiko zvinoburitswa nemodule iyi",
+      "ConfigureOptions.ClientId": "Client Id.",
+      "ConfigureOptions.ServerAddress": "Sevha kero",
+      "ConfigureOptions.ServerPort": "Server port",
+      "ConfigureOptions.Encryption": "Gonesa encryption yekupedzisira-ku-kuguma (E2EE)",
+      "ConfigureOptions.WebSockets": "Shandisa WebSockets",
+      "ConfigureOptions.TLS": "Gonesa TLS/SSL",
+      "ConfigureOptions.Username": "Username (sarudzo)",
+      "ConfigureOptions.Password": "Password (optional)",
+      "ConfigureOptions.ImportExternal": "Tumira kunze mamodule"
     },
     "78": {
       "Title": "Smart Thermostat",
@@ -164,7 +178,7 @@
     },
     "82": {
       "Title": "Energy Saving Mode",
-      "Description": "Chengetedza mwero wechiedza pazasi pezana rinogadziriswa.",
+      "Description": "Chengetedza mwero wechiedza pazasi pechikamu chinogadziriswa.",
       "EnergyManagement.EnergySavingLevel": "Mwero wechiedza chikuru (%)",
       "EnergyManagement.EnergySavingMode": "Enable"
     },
@@ -209,10 +223,10 @@
       "Description": "Emit random sensor values.",
       "Simulator.Sensor.Temperature": "Tembiricha sensor",
       "Simulator.Sensor.Humidity": "Humidity sensor",
-      "Simulator.Sensor.Luminance": "Chiedza sensor",
+      "Simulator.Sensor.Luminance": "Light sensor",
       "Simulator.Meter.Watts": "Watts mita",
       "Simulator.Meter.Watts.Max": "Max Watt simba",
-      "Simulator.Sensor.DataFrequency": "Simulator inoburitsa frequency"
+      "Simulator.Sensor.DataFrequency": "Simulator emit frequency"
     },
     "505": {
       "Title": "Remote Control",
@@ -229,7 +243,7 @@
       "HomeGenie.SmartLights.Enable": "Vhura 'Smart Device'",
       "HomeGenie.SmartLights.OnMotionDetect": "Inodzorwa ne sensor (sarudzo)",
       "HomeGenie.SmartLights.CheckLuminosity": "Inodzorwa nechiedza sensor (sarudzo)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Dzima mushure mekutadza kuita basa (masekondi)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Dzima mushure menguva yekusaita basa (masekondi)",
       "HomeGenie.SmartLights.MinLuminance": "Batidza kana luminance iri pazasi:"
     },
     "8": {

@@ -1,6 +1,6 @@
 {
   "heal_network_button": "Heal netværk",
-  "hard_reset_button": "Gendan fabriksindstillinger",
+  "hard_reset_button": "Fabriksindstilling",
   "node_inclusion": "Tilføj enhed",
   "node_exclusion": "Fjern enheden",
   "enabling_node_inclusion": "Aktiverer node-inkluderingstilstand, vent venligst...",
@@ -8,10 +8,10 @@
   "inclusion_message": "Tryk på knappen på den enhed, du vil føje til dette netværk.",
   "exclusion_message": "Tryk på knappen på den enhed, du vil fjerne fra dette netværk.",
   "task_duration_notice": "Denne opgave kan tage op til <strong>{{timeout}}</strong> sekunder at fuldføre.",
-  "adding_node": "Tilføjer enhed <strong class=\"color-accent\">{{node}}</strong>, vent venligst...",
-  "removing_node": "Fjerner enheden <strong class=\"color-accent\">{{node}}</strong>, vent venligst...",
-  "node_added": "Enheden <strong class=\"color-accent\">{{node}}</strong> blev tilføjet",
-  "node_removed": "Enheden <strong class=\"color-accent\">{{node}}</strong> er blevet fjernet",
+  "adding_node": "Tilføjer <strong class=\"color-accent\">{{node}}</strong> , vent venligst...",
+  "removing_node": "Fjerner <strong class=\"color-accent\">{{node}}</strong> , vent venligst...",
+  "node_added": "<strong class=\"color-accent\">{{node}}</strong> blev tilføjet",
+  "node_removed": "<strong class=\"color-accent\">{{node}}</strong> er blevet fjernet",
   "node_config": "Enhedskonfiguration",
   "brand": "Mærke",
   "product": "Produkt",
@@ -27,11 +27,11 @@
   "enter_parameter_number": "Indtast parameternummer",
   "enter_parameter_value": "Indtast parameterværdi",
   "command_classes": "Kommando klasser",
-  "missing handler": "Missing handler",
+  "missing handler": "Manglende handler",
   "refresh_ports_button": "Opdater portlisten",
   "calibration": "Kalibrering",
   "calibrate": "Kalibrer",
   "edit_calibration_parameter": "Rediger kalibreringsparameternummer",
   "calibration_parameter_not_set": "Kalibreringsparameternummer er ikke indstillet",
-  "calibration_parameter_number": "Parameternummer (se apparatets manual)"
+  "calibration_parameter_number": "Parameternummer (se enhedsmanualen)"
 }

@@ -1,10 +1,10 @@
 {
-  "stats.time_range": "Tidsramme",
+  "stats.time_range": "Tidsrom",
   "stats.one_second": "Ett sekund",
   "stats.five_seconds": "5 sekunder",
   "stats.ten_seconds": "10 sekunder",
   "stats.half_minute": "30 sekunder",
-  "stats.one_minute": "Et minutt",
+  "stats.one_minute": "Ett minutt",
   "stats.ten_minutes": "10 minutter",
   "stats.half_hour": "30 minutter",
   "stats.one_hour": "En time",

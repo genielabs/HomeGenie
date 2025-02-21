@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>Program
   .AddFeature("", "Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on", "checkbox")
@@ -22,10 +22,10 @@
         // set current level to memory level if different
         if (level.DecimalValue != memory.DecimalValue &amp;&amp; memory.DecimalValue &gt; 0)
         {
-          var newlevel = (int)(memory.DecimalValue * 100);
+          var newlevel = memory.DecimalValue;
           if (module.HasFeature("HomeGenie.LevelMemory.SimulateOnly"))
           {
-            module.RaiseEvent("Status.Level", memory.Value, "Memory Level");
+            module.Emit("Status.Level", memory.Value, "Memory Level");
           }
           else
           {
@@ -48,16 +48,16 @@
 });
 Program.GoBackground();</ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-x10</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>level-memory</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>3EC76463DD10E7D76A2482FDC427CBFC</Checksum>
+      <Checksum>90DB940D4129E2726E30ABA9F4C82ACE</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>16</Address>

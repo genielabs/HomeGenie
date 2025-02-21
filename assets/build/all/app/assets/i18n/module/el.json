@@ -1,16 +1,16 @@
 {
-  "stats.time_range": "Εύρος χρόνου",
-  "stats.one_second": "Ενα δευτερόλεπτο",
+  "stats.time_range": "Χρονικό εύρος",
+  "stats.one_second": "Ένα δευτερόλεπτο",
   "stats.five_seconds": "5 δευτερόλεπτα",
   "stats.ten_seconds": "10 δευτερόλεπτα",
   "stats.half_minute": "30 δευτερόλεπτα",
-  "stats.one_minute": "Ενα λεπτό",
+  "stats.one_minute": "Ένα λεπτό",
   "stats.ten_minutes": "10 λεπτά",
   "stats.half_hour": "30 λεπτά",
-  "stats.one_hour": "Μία ώρα",
+  "stats.one_hour": "Μια ώρα",
   "stats.three_hours": "3 ώρες",
   "stats.six_hours": "6 ώρες",
-  "stats.twelve_hours": "12 ΩΡΕΣ",
+  "stats.twelve_hours": "12 ώρες",
   "stats.twentyfour_hours": "24 ώρες",
   "stats.chart_provider": "Πάροχος γραφημάτων"
 }

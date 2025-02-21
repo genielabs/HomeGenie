@@ -58,10 +58,10 @@
   "cronwizard_days": "Matsatsi",
   "cronwizard_months": "Likhoeli",
   "cronwizard_minuteselect_everyminute": "Motsotso o mong le o mong",
-  "cronwizard_minuteselect_everynthminute": "Metsotso e meng le e meng <n>",
+  "cronwizard_minuteselect_everynthminute": "Metsotso e 'ngoe le e 'ngoe e fanoeng",
   "cronwizard_minuteselect_selectedminutes": "Metsotso e khethiloeng",
   "cronwizard_hourselect_everyhour": "Hora e 'ngoe le e 'ngoe",
-  "cronwizard_hourselect_everynthhour": "Lihora tse ling le tse ling tse <n>",
+  "cronwizard_hourselect_everynthhour": "Lihora tse ling le tse ling",
   "cronwizard_hourselect_selectedhours": "Lihora tse khethiloeng",
   "cronwizard_dayselect_everyday": "Letsatsi le letsatsi",
   "cronwizard_dayselect_selecteddays": "Matsatsi a khethiloeng",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Likhoeli tse khethiloeng",
   "cronwizard_schedule_set_exact_time": "Beha nako ea ketsahalo.",
   "cronwizard_schedule_set_slot_start": "Beha nako ea ho qala.",
-  "cronwizard_schedule_set_slot_end": "E qala ka {{start}}.<br>\nBeha pheletso ea nako.",
+  "cronwizard_schedule_set_slot_end": "Ho qala {{start}} .<span class=\"notranslate\"><br/></span> Beha pheletso ea nako.",
   "cronwizard_bindings_define_types_and_modules": "Hlalosa mefuta le limmojule tse ipapisitseng le kemiso ena (ka boikhethelo)",
   "cronwizard_bindings_select_types": "Khetha mefuta",
   "cronwizard_action_set_action_to_execute": "Beha ketso eo u ka e etsang ho latela liketsahalo tsa ketsahalo ena",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Qetellong ea nako",
   "cronwizard_action_custom_script": "Sengoliloeng sa ketso",
   "cronwizard_action_no_action": "Ha ho ketso",
-  "cronwizard_action_schedule_variable_hint": "Sebelisa <span class=\"color-primary\">@{{name}}</span> joalo ka mokhoa oa ho feto-fetoha ha mantsoe a cron kapa sebelisa <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}). \")</span> mananeong a boiketsetso ho bua ka ketsahalo ena.",
+  "cronwizard_action_schedule_variable_hint": "Sebelisa <span class=\"notranslate color-primary\">@ {{name}}</span> e le ntho e feto-fetohang ho cron kapa sebelisa <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> mananeong a ikemetseng ho supa ketsahalo ena.",
   "scheduler_preset_action_command_turn_on": "Bulela",
   "scheduler_preset_action_command_turn_off": "Koala",
   "scheduler_preset_action_command_set_level": "Beha boemo",
@@ -126,8 +126,8 @@
   "setup_code": "Tlhophiso",
   "main_code": "Ka sehloohong",
   "context_code": "Moelelo",
-  "main_code_empty_note": "Khoutu ea \"Moholo\" ha e na letho.\n\nSebelisa \"Visual code\" ho hlahisa khoutu ena:\n- Bula sehlopha \"Lenaneo\" ho tsoa phaleteng ea litaelo ka letsohong le letšehali\n- Hula mofuta oa \"Main\" sebakeng sa ts'ebetso sa khoutu ea pono\n- Eketsa ka hare ho eona li-blocks tse ling ho kenya tšebetsong liketso le mabaka a lenaneo lena\n\nLenaneo \"Main\" le ka tsamaisoa ka letsoho kapa la qala ka boiketsetso ho latela maemo a tla qetella a fanoe ka khoutu ea Setup.",
-  "setup_code_empty_note": "\"Setapo\" khoutu ha e na letho.\n\nSebelisa \"Visual code\" ho hlahisa khoutu ena:\n- Bula sehlopha \"Lenaneo\" ho tsoa phaleteng ea litaelo ka letsohong le letšehali\n- Hula mofuta oa \"Setup\" sebakeng sa ts'ebetso sa khoutu ea pono\n- Eketsa ka hare ho eona li-blocks tse ling ho fumana maemo a tla etsa hore \"Main\" a etsoe ka khoutu\n\nKhoutu ena e hlahlojoa nako le nako ha ketsahalo e ncha e etsahala mme bonyane hang ka motsotso.",
+  "main_code_empty_note": "Khoutu ea \"Main\" ha e na letho. Sebelisa \"Visual Code\" mohlophisi ho hlahisa khoutu ena: - Bula sehlopha sa \"Lenaneo\" ho tloha phaleteng ea litaelo ka ho le letšehali - Hula mofuta oa \"Main\" sebakeng sa ts'ebetso ea khoutu ea pono - Eketsa ka hare ho eona li-code tse ling ho kenya ts'ebetsong liketso le logic ea lenaneo lena Lenaneo la \"Main\" le ka tsamaisoa ka letsoho kapa la qalisoa ho latela maemo a qetellang a fanoe ka khoutu ea Setup.",
+  "setup_code_empty_note": "\"Setapo\" khoutu ha e na letho. Sebelisa \"Visual Code\" mohlophisi ho hlahisa khoutu ena: - Bula sehlopha \"Lenaneo\" ho tloha phaleteng ea litaelo ka ho le letšehali - Hula mofuta oa \"Setup\" sebakeng sa ts'ebetso ea khoutu ea pono - Eketsa ka hare ho eona li-code tse ling ho fumana maemo a tla etsa hore \"Main\" a phethe khoutu ena e hlahlojoa nako le nako ha ketsahalo e ncha e etsahala le bonyane hang ka motsotso.",
   "capture_commands": "Tšoara litaelo",
   "capture_commands_description": "Kenya litaelo tsohle tse etsoang ka letsoho ho li-widget lenaneong.",
   "capture_commands_pause": "Emisa pakeng tsa litaelo",
@@ -142,11 +142,25 @@
     },
     "34": {
       "Title": "Boemo ba Leholimo",
-      "Description": "Lintlha tsa boemo ba leholimo le boemo ba leholimo ho tsoa ts'ebeletso ea Open Weather Map.\nHo kenya widget ena tshebetsong, kenya konopo e nepahetseng ya API.\nLatela litaelo ho https://openweathermap.org/appid ho fumana senotlolo sa mahala sa API.",
+      "Description": "Lintlha tsa boemo ba leholimo le boemo ba leholimo ho tsoa ts'ebeletso ea Open Weather Map. Ho kenya widget ena tshebetsong, kenya konopo e nepahetseng ya API. Latela litaelo ho https://openweathermap.org/appid ho fumana senotlolo sa mahala sa API.",
       "ConfigureOptions.Location": "Lebitso la toropo",
       "ConfigureOptions.Language": "Puo (mohlala. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Nako ea ntlafatso (metsotso)",
       "ConfigureOptions.ApiKey": "Senotlolo sa OpenWeatherMap API (APPID)"
+    },
+    "77": {
+      "Title": "Marang-rang a MQTT",
+      "Description": "Hokela ho morekisi oa MQTT ho sebelisa app ea HomeGenie Panel ho tsoa kae kapa kae ka Marang-rang kapa ho hokela lisebelisoa tsa HomeGenie marangrang a tšoanang a MQTT.",
+      "MQTT.SensorPublish": "Phatlalatsa liketsahalo tse hlahisoang ke mojule ona",
+      "ConfigureOptions.ClientId": "Id ea moreki.",
+      "ConfigureOptions.ServerAddress": "Aterese ea seva",
+      "ConfigureOptions.ServerPort": "Boema-kepe ba seva",
+      "ConfigureOptions.Encryption": "Lumella mokhoa oa ho ngola oa ho qetela (E2EE)",
+      "ConfigureOptions.WebSockets": "Sebelisa WebSockets",
+      "ConfigureOptions.TLS": "E nolofalletsa TLS/SSL",
+      "ConfigureOptions.Username": "Username (boikhethelo)",
+      "ConfigureOptions.Password": "Lekunutu (boikhethelo)",
+      "ConfigureOptions.ImportExternal": "Kenya li-module tsa kantle"
     },
     "78": {
       "Title": "Smart Thermostat",
@@ -169,7 +183,7 @@
       "EnergyManagement.EnergySavingMode": "Thusa"
     },
     "90": {
-      "Title": "Sistimi ea Alamo ea Tšireletso",
+      "Title": "Tshireletso Alarm System",
       "Description": "Sebelisa li-sensor le lisebelisoa tse ling ho kenya tšebetsong alamo ea ts'ireletso.",
       "HomeGenie.SecurityAlarm": "Sebelisa joalo ka alamo/strobe",
       "HomeGenie.SecuritySensor": "Sebelisa e le sensor ea tšireletso",
@@ -182,7 +196,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Lenaneo le tla sebetsa ha le hlohlelletsoa"
     },
     "95": {
-      "Title": "Ho rengoa ha liketsahalo",
+      "Title": "Ho rema liketsahalo",
       "Description": "Rekota tšebetso ea sesebelisoa.",
       "EventsLogger.EnableLogging": "Thusa"
     },

@@ -6,7 +6,7 @@
   "$section_label": {
     "label": "상표",
     "indicators": "지표",
-    "lights_control": "등",
+    "lights_control": "허파",
     "switches_control": "스위치"
   }
 }

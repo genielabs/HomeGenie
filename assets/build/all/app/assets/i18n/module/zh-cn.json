@@ -1,16 +1,16 @@
 {
   "stats.time_range": "时间范围",
-  "stats.one_second": "一秒",
-  "stats.five_seconds": "5秒",
-  "stats.ten_seconds": "10秒",
-  "stats.half_minute": "30秒",
-  "stats.one_minute": "等一下",
-  "stats.ten_minutes": "10分钟",
-  "stats.half_hour": "30分钟",
+  "stats.one_second": "一秒钟",
+  "stats.five_seconds": "5 秒",
+  "stats.ten_seconds": "10 秒",
+  "stats.half_minute": "30 秒",
+  "stats.one_minute": "一分钟",
+  "stats.ten_minutes": "10 分钟",
+  "stats.half_hour": "30 分钟",
   "stats.one_hour": "一小时",
-  "stats.three_hours": "3小时",
-  "stats.six_hours": "6个小时",
-  "stats.twelve_hours": "12小时",
-  "stats.twentyfour_hours": "24小时",
-  "stats.chart_provider": "图表提供商"
+  "stats.three_hours": "3 小时",
+  "stats.six_hours": "6 小时",
+  "stats.twelve_hours": "12 小时",
+  "stats.twentyfour_hours": "24 小时",
+  "stats.chart_provider": "图表提供者"
 }

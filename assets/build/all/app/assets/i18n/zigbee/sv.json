@@ -4,5 +4,5 @@
   "operation_timed_out": "Operationen tog timeout.",
   "node_added": "Noden har lagts till",
   "turn_on_device_to_add": "Slå på enheten och tryck på ihopparningsknappen i 5 sekunder om det behövs",
-  "soft_reset_button": "Mjuk omstart"
+  "soft_reset_button": "Mjuk återställning"
 }

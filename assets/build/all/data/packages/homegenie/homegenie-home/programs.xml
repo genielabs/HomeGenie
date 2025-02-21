@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>Program
   .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
@@ -365,19 +365,19 @@ while (Program.IsRunning)
 </ScriptSetup>
     <ScriptSource>// We want to do further processing whenever a module changes
 When.ModuleParameterChanged( (module, parameter) =&gt; {
-  if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; parameter.Name == "Status.Level")
+  if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer,Color") &amp;&amp; parameter.Name == "Status.Level")
   {
     var level = module.Parameter("Status.Level");
-    var newlevel = module.Parameter("EnergyManagement.EnergySavingLevel").DecimalValue;
+    var newlevel = module.Parameter("EnergyManagement.EnergySavingLevel").DecimalValue / 100D;
     if (newlevel &lt;= 0)
     {
       module.Parameter("EnergyManagement.EnergySavingLevel").Value = "40";
-      newlevel = 40;
+      newlevel = 0.4;
     }
     //
-    if (level.DecimalValue &gt; (newlevel / 100D))
+    if (level.DecimalValue &gt; newlevel)
     {
-      Program.Notify(module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
+      Program.Notify(module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + (newlevel * 100) + "%");
       module.Level = newlevel;
       return false;
     }
@@ -395,9 +395,9 @@ Program.GoBackground();
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-saving-mode</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>2D5D06DBA4DE7F33BD2790472D167C69</Checksum>
+      <Checksum>7F4A95D6264BF3E1B30F3C31DC8144B4</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>82</Address>
@@ -429,6 +429,7 @@ Program.GoBackground();
     <ScriptSetup>Program
   .AddModules("Media.IpCamera", 1, 10, "Sensor", "homegenie/generic/camerainput")
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
+  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.UseProxy", "Get images via proxy", "checkbox")
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Fps", "Max frames per second", "slider:1:20:1:5")
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text")
   .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password")
@@ -481,16 +482,16 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>generic-ip-camera</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>C22A9B8FFC02DD67904D0FC1345CCB06</Checksum>
+      <Checksum>8428BA3B80AD180FFA54FCE92FD47EA0</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
@@ -504,6 +505,13 @@ Program.GoBackground();
         <ForTypes>Sensor</ForTypes>
         <Property>IpCamera.ImageURL</Property>
         <Description>Camera image API URL (see your camera docs)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.UseProxy</Property>
+        <Description>Get images via proxy</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>slider:1:20:1:5</FieldType>
@@ -1529,10 +1537,10 @@ var WeMo_MaxDevices = Program.Option("WeMo.MaxDevices");
 var WeMo_Modules = Modules.InDomain(WEMO_DOMAIN);
 var WeMo_Modules_AD = Modules.InDomain(WEMO_DOMAIN).WithFeature("WeMo.AlarmAD");
 
-// create virtual modules for HomeAutomation.WeMo domain
+// create modules for HomeAutomation.WeMo domain
 for (int i = 1; i &lt;= WeMo_MaxDevices.DecimalValue; i++)
 {
-  Program.AddVirtualModule(WEMO_DOMAIN, i.ToString(), "Switch", "homegenie/generic/switch");
+  Program.AddModule(WEMO_DOMAIN, i.ToString(), "Switch", "homegenie/generic/switch");
 }
 
 Action&lt;string, uint&gt; BinarySwitch = (string ipAddress, uint binaryState) =&gt;
@@ -1644,16 +1652,16 @@ while (Program.IsRunning)
 const uint STATE_OFF = 0;
 const string WEMO_DOMAIN = "HomeAutomation.WeMo";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>wemo</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>3ABAA7AD2F1CC7B496C3C4F76122F0BF</Checksum>
+      <Checksum>5892ED5654494A8EBF66941168AF8FDD</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>30</Address>

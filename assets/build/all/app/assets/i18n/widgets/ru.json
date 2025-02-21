@@ -6,7 +6,7 @@
   "$section_label": {
     "label": "Этикетка",
     "indicators": "Индикаторы",
-    "lights_control": "Свет",
+    "lights_control": "Огни",
     "switches_control": "Переключатели"
   }
 }

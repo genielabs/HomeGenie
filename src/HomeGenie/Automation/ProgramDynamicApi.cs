@@ -30,55 +30,54 @@ namespace HomeGenie
 {
     public static class ProgramDynamicApi
     {
-        private static Dictionary<string, Func<object, object>> dynamicApi = new Dictionary<string, Func<object, object>>();
+        private static readonly Dictionary<string, Func<object, object>> DynamicApi = new Dictionary<string, Func<object, object>>();
+        private static readonly object DynamicApiLock = new object();
 
         public static Func<object, object> Find(string request)
         {
             Func<object, object> handler = null;
-            if (dynamicApi.ContainsKey(request))
+            if (DynamicApi.ContainsKey(request))
             {
-                handler = dynamicApi[request];
+                handler = DynamicApi[request];
             }
             return handler;
         }
         public static Func<object, object> FindMatching(string request)
         {
-            Func<object, object> handler = null;
-            for (int i = 0; i < dynamicApi.Keys.Count; i++)
+            string matchingPath = "";
+            for (int i = 0; i < DynamicApi.Keys.Count; i++)
             {
                 string apiPath = null;
                 try
                 {
-                    apiPath = dynamicApi.Keys.ElementAt(i);
+                    apiPath = DynamicApi.Keys.ElementAt(i);
                 }
                 catch
                 {
                     // ignored
                 }
-                if (apiPath != null && request.StartsWith(apiPath))
+                if (apiPath != null && request.StartsWith(apiPath) && matchingPath.Length < apiPath.Length)
                 {
-                    handler = dynamicApi[apiPath];
-                    break;
+                    matchingPath = apiPath;
                 }
             }
-            return handler;
+            return matchingPath.Length > 0 ? DynamicApi[matchingPath] : null;
         }
         public static void Register(string request, Func<object, object> handlerfn)
         {
-            if (dynamicApi.ContainsKey(request))
+            lock (DynamicApiLock)
             {
-                dynamicApi[request] = handlerfn;
-            }
-            else
-            {
-                dynamicApi.Add(request, handlerfn);
+                DynamicApi[request] = handlerfn;
             }
         }
         public static void UnRegister(string request)
         {
-            if (dynamicApi.ContainsKey(request))
+            if (DynamicApi.ContainsKey(request))
             {
-                dynamicApi.Remove(request);
+                lock (DynamicApiLock)
+                {
+                    DynamicApi.Remove(request);
+                }
             }
         }
 
@@ -94,26 +93,22 @@ namespace HomeGenie
                 var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
                 return handler(args);
             }
+
             // else
             handler = FindMatching(command.OriginalRequest.Trim('/'));
-            if (handler != null)
+            if (handler == null) return null;
+
+            // other command API handlers
+            if (command.Data == null || (command.Data is byte[] && (command.Data as byte[]).Length == 0))
             {
-                // other command API handlers
-                if (command.Data == null || (command.Data is byte[] && (command.Data as byte[]).Length == 0))
-                {
-                    // receives the full request as string if there is no `request.Data` payload
-                    return handler(command.OriginalRequest.Trim('/'));
-                }
-                else
-                {
-                    // receives the original MigInterfaceCommand if `request.Data` actually holds some data
-                    // TODO: this might be be the only entry point in future releases (line #98 and #87 cases will be deprecated)
-                    return handler(command);
-                }
+                // receives the full request as string if there is no `request.Data` payload
+                return handler(command.OriginalRequest.Trim('/'));
             }
-            return null;
+
+            // receives the original MigInterfaceCommand if `request.Data` actually holds some data
+            // TODO: this might be be the only entry point in future releases (line #98 and #87 cases will be deprecated)
+            return handler(command);
         }
 
     }
 }
-

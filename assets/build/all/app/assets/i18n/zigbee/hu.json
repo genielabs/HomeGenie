@@ -1,7 +1,7 @@
 {
   "node_inclusion": "Eszköz hozzáadása",
-  "node_exclusion": "Eszköz eltávolítása",
-  "operation_timed_out": "A művelet kifutott az időből.",
+  "node_exclusion": "Távolítsa el az eszközt",
+  "operation_timed_out": "A művelet lejárt.",
   "node_added": "A csomópont sikeresen hozzáadva",
   "turn_on_device_to_add": "Kapcsolja be a készüléket, és tartsa lenyomva a párosítás gombot 5 másodpercig, ha szükséges",
   "soft_reset_button": "Soft reset"

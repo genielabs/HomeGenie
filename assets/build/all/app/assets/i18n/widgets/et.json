@@ -6,7 +6,7 @@
   "$section_label": {
     "label": "Silt",
     "indicators": "Näitajad",
-    "lights_control": "Valgus",
+    "lights_control": "Tuled",
     "switches_control": "Lülitid"
   }
 }

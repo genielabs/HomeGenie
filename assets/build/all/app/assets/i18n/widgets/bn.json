@@ -1,6 +1,6 @@
 {
   "$alarm_system": {
-    "arm_home": "বাড়ি",
+    "arm_home": "হোম",
     "arm_away": "দূরে"
   },
   "$section_label": {

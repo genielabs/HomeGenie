@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "----------------------------------------------",
   "welcome_to_homegenie": "Сардэчна запрашаем у HomeGenie!",
   "welcome_subtitle": "Праграмуемы інтэлект аўтаматызацыі",
   "not_configured_yet": "Сістэма яшчэ не настроена. Гэты майстар наладкі дапаможа вам наладзіць і запусціць вашу сістэму за некалькі крокаў.",
@@ -58,10 +58,10 @@
   "cronwizard_days": "дзён",
   "cronwizard_months": "месяцы",
   "cronwizard_minuteselect_everyminute": "Кожную хвіліну",
-  "cronwizard_minuteselect_everynthminute": "Кожныя <n> хвілін",
+  "cronwizard_minuteselect_everynthminute": "Кожныя дадзены хвіліны",
   "cronwizard_minuteselect_selectedminutes": "Выбраныя хвіліны",
   "cronwizard_hourselect_everyhour": "Кожную гадзіну",
-  "cronwizard_hourselect_everynthhour": "Кожныя <n> гадзін",
+  "cronwizard_hourselect_everynthhour": "Кожныя зададзеныя гадзіны",
   "cronwizard_hourselect_selectedhours": "Выбраныя гадзіны",
   "cronwizard_dayselect_everyday": "Кожны дзень",
   "cronwizard_dayselect_selecteddays": "Выбраныя дні",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Выбраныя месяцы",
   "cronwizard_schedule_set_exact_time": "Усталюйце час падзеі.",
   "cronwizard_schedule_set_slot_start": "Усталюйце пачатак часовага інтэрвалу.",
-  "cronwizard_schedule_set_slot_end": "Пачатак у {{пачатак}}.<br>\nЗадаць канец часовага інтэрвалу.",
+  "cronwizard_schedule_set_slot_end": "Пачынаючы з {{start}} .<span class=\"notranslate\"><br/></span> Задаць канец часовага інтэрвалу.",
   "cronwizard_bindings_define_types_and_modules": "Вызначце тыпы і модулі, якія падпарадкоўваюцца гэтаму раскладу (неабавязкова)",
   "cronwizard_bindings_select_types": "Выберыце тыпы",
   "cronwizard_action_set_action_to_execute": "Усталюйце дзеянне для выканання пры ўзнікненні гэтай падзеі",
@@ -79,9 +79,9 @@
   "cronwizard_action_preset_slot_start": "У пачатку часовага інтэрвалу",
   "cronwizard_action_preset_slot_end": "У канцы часовага інтэрвалу",
   "cronwizard_action_custom_script": "Карыстацкі скрыпт дзеянняў",
-  "cronwizard_action_no_action": "Ніякіх дзеянняў",
-  "cronwizard_action_schedule_variable_hint": "Выкарыстоўвайце <span class=\"color-primary\">@{{name}}</span> у якасці зменнай у выразах cron або выкарыстоўвайце <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}) \")</span> у праграмах аўтаматызацыі для спасылкі на гэту падзею.",
-  "scheduler_preset_action_command_turn_on": "Уключыць",
+  "cronwizard_action_no_action": "Без дзеянняў",
+  "cronwizard_action_schedule_variable_hint": "Выкарыстоўвайце <span class=\"notranslate color-primary\">@ {{name}}</span> у якасці зменнай у выразах cron або выкарыстоўвайце <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> у праграмах аўтаматызацыі для спасылкі на гэту падзею.",
+  "scheduler_preset_action_command_turn_on": "Уключыце",
   "scheduler_preset_action_command_turn_off": "Выключыць",
   "scheduler_preset_action_command_set_level": "Усталюйце ўзровень",
   "scheduler_preset_action_config_level": "Узровень",
@@ -107,7 +107,7 @@
   "enable_to_run_program": "Уключыце праграму, каб запусціць яе",
   "program_status_added": "Дададзена",
   "program_status_idle": "Бяздзейны",
-  "program_status_setup": "Усталяваць",
+  "program_status_setup": "Настройка",
   "program_status_running": "Бег",
   "program_status_background": "Фон",
   "program_status_stopping": "Прыпынак",
@@ -123,34 +123,48 @@
   "program_data": "Дадзеныя праграмы",
   "visual_code": "Візуальны код",
   "generated_code": "Згенераваны код",
-  "setup_code": "Усталяваць",
+  "setup_code": "Настройка",
   "main_code": "Асноўны",
   "context_code": "Кантэкст",
-  "main_code_empty_note": "Код «Галоўны» пусты.\n\nВыкарыстоўвайце рэдактар ​​\"Візуальны код\", каб стварыць гэты код:\n- Адкрыйце катэгорыю «Праграма» з палітры каманд злева\n- Перацягнуць блок тыпу \"Main\" у працоўную вобласць візуальнага кода\n- Дадайце ў яго іншыя блокі кода для рэалізацыі дзеянняў і логікі гэтай праграмы\n\nПраграма \"Галоўная\" можа запускацца альбо ўручную, альбо аўтаматычна запускацца ў залежнасці ад умоў, у канчатковым выніку зададзеных у кодзе ўстаноўкі.",
-  "setup_code_empty_note": "Код «Настройка» пусты.\n\nВыкарыстоўвайце рэдактар ​​\"Візуальны код\", каб стварыць гэты код:\n- Адкрыйце катэгорыю «Праграма» з палітры каманд злева\n- Перацягнуць блок тыпу «Setup» у працоўную вобласць візуальнага кода\n- Дадайце ў яго іншыя блокі кода, каб вызначыць умовы, якія будуць запускаць выкананне «Асноўнага» кода\n\nГэты код ацэньваецца кожны раз, калі адбываецца новая падзея і не радзей за адзін раз у хвіліну.",
-  "capture_commands": "Захоп каманд",
-  "capture_commands_description": "Дадайце ў праграму ўсе каманды, выкананыя ўручную на віджэтах.",
+  "main_code_empty_note": "Код «Галоўны» пусты. Выкарыстоўвайце рэдактар \"Візуальны код\", каб згенераваць гэты код: - Адкрыйце катэгорыю \"Праграма\" з палітры каманд злева - Перацягніце блок тыпу \"Main\" у працоўную вобласць візуальнага кода - Дадайце ўнутр яго іншыя блокі кода для рэалізацыі дзеянняў і логікі гэтай праграмы. Праграму \"Main\" можна альбо запускаць уручную, альбо аўтаматычна запускаць у залежнасці ад умоў, у канчатковым выніку зададзеных у кодзе ўстаноўкі.",
+  "setup_code_empty_note": "Код «Настройка» пусты. Скарыстайцеся рэдактарам «Візуальны код», каб згенераваць гэты код: - Адкрыйце катэгорыю «Праграма» з палітры каманд злева - Перацягніце блок тыпу «Настройка» ў працоўную вобласць візуальнага кода - Дадайце ўнутр яго іншыя блокі кода, каб вызначыць умовы, якія будуць запускаць выкананне «Асноўнага» кода. Гэты код ацэньваецца кожны раз, калі адбываецца новая падзея і не радзей за адзін раз у хвіліну.",
+  "capture_commands": "Каманды захопу",
+  "capture_commands_description": "Дадайце ў праграму ўсе каманды, якія выконваюцца ўручную на віджэтах.",
   "capture_commands_pause": "Паўза паміж камандамі",
   "capture_pause_none": "Няма",
-  "capture_pause_asis": "Як",
+  "capture_pause_asis": "Як ёсць",
   "$options": {
     "16": {
       "Title": "Узровень памяці",
       "Description": "Захаваць і выклікаць апошні ўзровень дыммера.",
-      "HomeGenie.LevelMemory": "Выклікаць апошні ўзровень асветленасці пры ўключэнні",
+      "HomeGenie.LevelMemory": "Запомніць апошні ўзровень асветленасці пры ўключэнні",
       "HomeGenie.LevelMemory.SimulateOnly": "Толькі сімуляваць"
     },
     "34": {
       "Title": "Прагноз надвор'я",
-      "Description": "Інфармацыя пра надвор'е і прагноз з сэрвісу Open Weather Map.\nКаб актываваць гэты віджэт, увядзіце сапраўдны ключ API.\nВыконвайце інструкцыі на https://openweathermap.org/appid, каб атрымаць бясплатны ключ API.",
+      "Description": "Інфармацыя пра надвор'е і прагноз з сэрвісу Open Weather Map. Каб актываваць гэты віджэт, увядзіце сапраўдны ключ API. Выконвайце інструкцыі на https://openweathermap.org/appid, каб атрымаць бясплатны ключ API.",
       "ConfigureOptions.Location": "Назва горада",
       "ConfigureOptions.Language": "Мова (напрыклад, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Інтэрвал абнаўлення (хвілін)",
       "ConfigureOptions.ApiKey": "Ключ API OpenWeatherMap (APPID)"
     },
+    "77": {
+      "Title": "Сетка MQTT",
+      "Description": "Падключыцеся да брокера MQTT, каб выкарыстоўваць прыкладанне HomeGenie Panel з любога месца праз Інтэрнэт або злучыць прылады HomeGenie у адной сетцы MQTT.",
+      "MQTT.SensorPublish": "Публікацыя падзей, выдадзеных гэтым модулем",
+      "ConfigureOptions.ClientId": "Ідэнтыфікатар кліента.",
+      "ConfigureOptions.ServerAddress": "Адрас сервера",
+      "ConfigureOptions.ServerPort": "Порт сервера",
+      "ConfigureOptions.Encryption": "Уключыць скразное шыфраванне (E2EE)",
+      "ConfigureOptions.WebSockets": "Выкарыстоўвайце WebSockets",
+      "ConfigureOptions.TLS": "Уключыць TLS/SSL",
+      "ConfigureOptions.Username": "Імя карыстальніка (неабавязкова)",
+      "ConfigureOptions.Password": "Пароль (неабавязкова)",
+      "ConfigureOptions.ImportExternal": "Імпарт знешніх модуляў"
+    },
     "78": {
       "Title": "Разумны тэрмастат",
-      "Description": "Выкарыстоўвайце любы датчык тэмпературы і разумны выключальнік, каб рэалізаваць функцыянальнасць тэрмастата.",
+      "Description": "Выкарыстоўвайце любы датчык тэмпературы і разумны выключальнік, каб уключыць функцыянальнасць тэрмастата.",
       "VirtualThermostat.TemperatureModule": "Датчык тэмпературы",
       "VirtualThermostat.HeatingSwitchModule": "Выключальнік ацяплення",
       "VirtualThermostat.CoolingSwitchModule": "Выключальнік астуджэння",
@@ -183,7 +197,7 @@
     },
     "95": {
       "Title": "Запіс падзей",
-      "Description": "Запісвайце актыўнасць прылады.",
+      "Description": "Запіс актыўнасці прылады.",
       "EventsLogger.EnableLogging": "Уключыць"
     },
     "400": {
@@ -194,11 +208,11 @@
       "Sensor.MotionDetect": "Статус выяўлення руху",
       "Status.Battery": "Узровень зарада батарэі",
       "Sensor.DoorWindow": "Стан датчыка дзвярэй/акна (адкрыты/зачынены)",
-      "Status.Level": "Статус пераключальніка (уключана/выключана)"
+      "Status.Level": "Стан пераключальніка (уключана/выключана)"
     },
     "401": {
       "Title": "Дэманстрацыя - пераключэнне дзвярэй",
-      "Description": "Імітуе адчыненне/зачыненне дзвярэй дэманстрацыйнага датчыка дзвярэй і вокнаў."
+      "Description": "Імітуе адчыненне/закрыццё дзвярэй дэманстрацыйнага датчыка дзвярэй і вокнаў."
     },
     "402": {
       "Title": "Дэманстрацыя - рух выяўлены",

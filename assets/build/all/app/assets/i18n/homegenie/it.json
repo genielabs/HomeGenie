@@ -146,7 +146,7 @@
     "cronwizard_schedule_set_slot_start":
       "Imposta inizio fascia oraria.",
     "cronwizard_schedule_set_slot_end":
-      "Inizio alle {{start}}.<br>\nImposta fine fascia oraria.",
+      "Inizio alle {{start}}.<br/>\nImposta fine fascia oraria.",
     "cronwizard_bindings_define_types_and_modules":
         "Definire tipi e moduli soggetti a questa pianificazione (opzionale)",
     "cronwizard_bindings_select_types":
@@ -303,6 +303,21 @@
         "OpenWeatherMap API key (APPID)"
       },
 
+      "77": {
+        "Title": "Network MQTT",
+        "Description": "Connettiti a un broker MQTT per utilizzare l'app HomeGenie Panel da qualsiasi luogo tramite Internet o per interconnettere i dispositivi HomeGenie sulla stessa rete MQTT.",
+        "MQTT.SensorPublish": "Pubblica gli eventi emessi da questo modulo",
+        "ConfigureOptions.ClientId": "Identificativo client",
+        "ConfigureOptions.ServerAddress": "Indirizzo server",
+        "ConfigureOptions.ServerPort": "Porta server",
+        "ConfigureOptions.Encryption": "Abilita crittografia end-to-end (E2EE)",
+        "ConfigureOptions.WebSockets": "Utilizza WebSockets",
+        "ConfigureOptions.TLS": "Abilita TLS/SSL",
+        "ConfigureOptions.Username": "Nome utente (opzionale)",
+        "ConfigureOptions.Password": "Password (opzionale)",
+        "ConfigureOptions.ImportExternal": "Importa i moduli esterni"
+      },
+
       "78": {
         "Title": "Termostato Smart",
         "Description": "Usa un qualsiasi sensore di temperatura e interruttore smart per implementare le funzionalità di un termostato.",
@@ -316,7 +331,7 @@
           "Title":
               "Monitor Energia",
           "Description":
-              "Generare statistiche sul consumo energetico e sull'utilizzo dei dispositivi.",
+              "Genera statistiche sul consumo energetico e sull'utilizzo dei dispositivi.",
           "EnergyManagement.MonitorStatus":
               "Monitora stato",
           "EnergyManagement.MonitorWatts":

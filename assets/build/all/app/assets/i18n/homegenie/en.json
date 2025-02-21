@@ -122,13 +122,13 @@
     "cronwizard_minuteselect_everyminute":
         "Every minute",
     "cronwizard_minuteselect_everynthminute":
-        "Every <n> minutes",
+        "Every given minutes",
     "cronwizard_minuteselect_selectedminutes":
         "Selected minutes",
     "cronwizard_hourselect_everyhour":
         "Every hour",
     "cronwizard_hourselect_everynthhour":
-        "Every <n> hours",
+        "Every given hours",
     "cronwizard_hourselect_selectedhours":
         "Selected hours",
     "cronwizard_dayselect_everyday":
@@ -146,7 +146,7 @@
     "cronwizard_schedule_set_slot_start":
       "Set time slot start.",
     "cronwizard_schedule_set_slot_end":
-      "Starting at {{start}}.<br>\nSet time slot end.",
+      "Starting at {{start}}.<span class=\"notranslate\"><br/></span>\nSet time slot end.",
     "cronwizard_bindings_define_types_and_modules":
         "Define types and modules that are subject to this schedule (optional)",
     "cronwizard_bindings_select_types":
@@ -166,7 +166,7 @@
     "cronwizard_action_no_action":
         "No action",
     "cronwizard_action_schedule_variable_hint":
-        "Use <span class=\"color-primary\">@{{name}}</span> as a variable in cron expressions or use <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in automation programs to reference this event.",
+        "Use <span class=\"notranslate color-primary\">@{{name}}</span> as a variable in cron expressions or use <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in automation programs to reference this event.",
 " ":"--------------- SCHEDULER WIZARD ----------------",
     "scheduler_preset_action_command_turn_on":
         "Turn on",
@@ -300,6 +300,21 @@
       "Update interval (minutes)",
       "ConfigureOptions.ApiKey":
       "OpenWeatherMap API key (APPID)"
+    },
+
+    "77": {
+      "Title": "Network MQTT",
+      "Description": "Connect to an MQTT broker to use HomeGenie Panel app from anywhere via Internet or to interconnect HomeGenie devices on the same MQTT network.",
+      "MQTT.SensorPublish": "Publish events emitted by this module",
+      "ConfigureOptions.ClientId": "Client Id.",
+      "ConfigureOptions.ServerAddress": "Server address",
+      "ConfigureOptions.ServerPort": "Server port",
+      "ConfigureOptions.Encryption": "Enable end-to-end encryption (E2EE)",
+      "ConfigureOptions.WebSockets": "Use WebSockets",
+      "ConfigureOptions.TLS": "Enable TLS/SSL",
+      "ConfigureOptions.Username": "Username (optional)",
+      "ConfigureOptions.Password": "Password (optional)",
+      "ConfigureOptions.ImportExternal": "Import external modules"
     },
 
     "78": {

@@ -849,6 +849,14 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null && module.Domain.StartsWith("MQTT:"))
+                    {
+                        var domain = module.Domain.Substring(module.Domain.IndexOf(".", StringComparison.Ordinal) + 1);
+                        var command = new MigInterfaceCommand(module.Domain.Replace(domain, Domains.HomeAutomation_HomeGenie) + "/Config/Modules.ParameterSet/" + domain + "/" + module.Address + "/", Encoding.UTF8.GetString(request.RequestData));
+                        ProgramDynamicApi.TryApiCall(command);
+                        request.ResponseData = new ResponseStatus(Status.Ok);
+                        return;
+                    }
                     if (request.RequestData.Length > 0)
                     {
                         string jsonData = Encoding.UTF8.GetString(request.RequestData);

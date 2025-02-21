@@ -1,8 +1,8 @@
 {
-  "node_inclusion": "기기 추가",
-  "node_exclusion": "장치를 제거",
+  "node_inclusion": "장치 추가",
+  "node_exclusion": "장치 제거",
   "operation_timed_out": "작업 시간이 초과되었습니다.",
-  "node_added": "노드를 추가했습니다.",
-  "turn_on_device_to_add": "장치를 켜고 필요한 경우 페어링 버튼을 5초 동안 누르십시오.",
+  "node_added": "노드가 성공적으로 추가되었습니다",
+  "turn_on_device_to_add": "필요한 경우 기기를 켜고 페어링 버튼을 5초간 누르세요.",
   "soft_reset_button": "소프트 리셋"
 }

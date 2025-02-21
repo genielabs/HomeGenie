@@ -21,6 +21,8 @@
  */
 
 using System;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
@@ -38,11 +40,11 @@ namespace HomeGenie
         static async Task Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
 #if !NETCOREAPP
             AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
 #endif
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
-
+            Console.CancelKeyPress += Console_CancelKeyPress;
 
 #if NETCOREAPP
             if (Environment.OSVersion.Platform == PlatformID.Unix)
@@ -77,18 +79,39 @@ namespace HomeGenie
 
         internal static void Quit(bool restartService)
         {
-            ServiceWorker._restart = restartService;
+            ServiceWorker.Restart = restartService;
             Console.Write("HomeGenie is now exiting...\n");
             _serviceHost
                 .StopAsync()
-                .Wait();
+                .Wait(60000);
             Environment.Exit(restartService ? 1 : 0);
         }
 
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
+            e.Cancel = true;
+            // create a copy of config file before shutting down the app
+            try
+            {
+                File.Copy("systemconfig.xml", "systemconfig.bak.xml",true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             Console.WriteLine("\n\nProgram interrupted!\n");
             Quit(false);
+        }
+        
+        private static void OnProcessExit(object sender, EventArgs e)
+        {
+            try
+            {
+                while (ServiceWorker.HomeGenie != null)
+                {
+                    Thread.Sleep(1000);
+                }
+            } catch { /* ignored */ }
         }
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
@@ -103,7 +126,7 @@ namespace HomeGenie
             try
             {
                 // try broadcast first
-                ServiceWorker._homegenie?.RaiseEvent(Domains.HomeGenie_System, logEntry);
+                ServiceWorker.HomeGenie?.RaiseEvent(Domains.HomeGenie_System, logEntry);
             }
             catch
             {

@@ -1,8 +1,8 @@
 {
-  " ": "------------------------------------------",
+  " ": "----------------------------------",
   "welcome_to_homegenie": "Хуш омадед ба HomeGenie!",
   "welcome_subtitle": "Интеллектуалии автоматикунонии барномарезишаванда",
-  "not_configured_yet": "Система ҳанӯз танзим нашудааст. Ин устоди насбкунӣ ба шумо дар чанд қадам ба кор даровардани системаи шумо кӯмак мекунад.",
+  "not_configured_yet": "Система ҳанӯз танзим нашудааст. Ин устоди танзимот ба шумо дар чанд қадам ба кор даровардани системаи шумо кӯмак мекунад.",
   "system_config_start_with_base_and_backup": "Аз файли эҳтиётӣ барқарор кунед",
   "system_config_start_with_default_setup": "Танзимоти пешфарз",
   "system_config_include_demo": "Намоишро бо фаъолияти симулятсияи дастгоҳ дохил кунед",
@@ -58,10 +58,10 @@
   "cronwizard_days": "Рузхо",
   "cronwizard_months": "Моххо",
   "cronwizard_minuteselect_everyminute": "Ҳар дақиқа",
-  "cronwizard_minuteselect_everynthminute": "Ҳар <n> дақиқа",
+  "cronwizard_minuteselect_everynthminute": "Ҳар дақиқаи додашуда",
   "cronwizard_minuteselect_selectedminutes": "Дақиқаҳои интихобшуда",
   "cronwizard_hourselect_everyhour": "Хар соат",
-  "cronwizard_hourselect_everynthhour": "Ҳар <n> соат",
+  "cronwizard_hourselect_everynthhour": "Ҳар соати додашуда",
   "cronwizard_hourselect_selectedhours": "Соатҳои интихобшуда",
   "cronwizard_dayselect_everyday": "Ҳар рӯз",
   "cronwizard_dayselect_selecteddays": "Рӯзҳои интихобшуда",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Моҳҳои интихобшуда",
   "cronwizard_schedule_set_exact_time": "Вақти ҳодисаро таъин кунед.",
   "cronwizard_schedule_set_slot_start": "Оғози вақтро таъин кунед.",
-  "cronwizard_schedule_set_slot_end": "Сар аз {{start}}.<br>\nАнҷоми вақтро таъин кунед.",
+  "cronwizard_schedule_set_slot_end": "Сар аз {{start}} .<span class=\"notranslate\"><br/></span> Анҷоми вақтро таъин кунед.",
   "cronwizard_bindings_define_types_and_modules": "Муайян кардани намудҳо ва модулҳое, ки ба ин ҷадвал тобеъанд (ихтиёрӣ)",
   "cronwizard_bindings_select_types": "Навъҳоро интихоб кунед",
   "cronwizard_action_set_action_to_execute": "Барои иҷро кардани рӯйдодҳои ин ҳодиса амал таъин кунед",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Дар охири фосилаи вақт",
   "cronwizard_action_custom_script": "Скрипти амали фармоишӣ",
   "cronwizard_action_no_action": "Амал нест",
-  "cronwizard_action_schedule_variable_hint": "<span class=\"color-primary\">@{{name}}</span>-ро ҳамчун тағирёбанда дар ифодаҳои cron истифода баред ё <span class=\"color-primary\">Scheduler.IsScheduling(\"@{{name}}\"-ро истифода баред \")</span> дар барномаҳои автоматизатсия барои истинод ба ин ҳодиса.",
+  "cronwizard_action_schedule_variable_hint": "Барои истинод ба ин ҳодиса, <span class=\"notranslate color-primary\">@ {{name}}</span> ҳамчун тағирёбанда дар ифодаҳои cron истифода баред ё <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> дар барномаҳои автоматизатсия истифода баред.",
   "scheduler_preset_action_command_turn_on": "Даргирондан",
   "scheduler_preset_action_command_turn_off": "Хомӯш кардан",
   "scheduler_preset_action_command_set_level": "Сатҳи муқаррар кунед",
@@ -111,7 +111,7 @@
   "program_status_running": "Давидан",
   "program_status_background": "Замина",
   "program_status_stopping": "Истисно",
-  "program_status_stopped": "Истод",
+  "program_status_stopped": "Истед",
   "program_status_interrupted": "Қатъ карда шуд",
   "program_status_disabled": "Маъюб",
   "program_status_enabled": "Фаъол",
@@ -126,8 +126,8 @@
   "setup_code": "Ташкил кардан",
   "main_code": "Асосӣ",
   "context_code": "Контекст",
-  "main_code_empty_note": "Рамзи \"асосӣ\" холӣ аст.\n\nБарои тавлиди ин код муҳаррири \"Кодҳои визуалӣ\"-ро истифода баред:\n- Категорияи \"Барнома\" -ро аз палитраи фармон дар тарафи чап кушоед\n- Блоки навъи \"Асосӣ\" -ро дар фазои кории рамзи визуалӣ кашед\n- Барои амалӣ намудани амалҳо ва мантиқи ин барнома дар дохили он блокҳои дигари кодро илова кунед\n\nБарномаи \"Асосӣ\" метавонад ба таври дастӣ ё худкор дар асоси шартҳое, ки дар коди танзимот дода шудааст, оғоз карда шавад.",
-  "setup_code_empty_note": "Рамзи \"Танзим\" холӣ аст.\n\nБарои тавлиди ин код муҳаррири \"Кодҳои визуалӣ\"-ро истифода баред:\n- Категорияи \"Барнома\" -ро аз палитраи фармон дар тарафи чап кушоед\n- Блоки навъи \"Танзим\" -ро дар фазои кории рамзи визуалӣ кашед\n- Дар дохили он блокҳои дигари кодро илова кунед, то шароитҳоеро, ки иҷроиши коди \"Асосӣ\"-ро оғоз мекунанд, муайян кунед\n\nИн рамз ҳар дафъае, ки ҳодисаи нав рух медиҳад ва ҳадди аққал як маротиба дар як дақиқа арзёбӣ мешавад.",
+  "main_code_empty_note": "Рамзи \"асосӣ\" холӣ аст. Барои тавлиди ин код муҳаррири \"Кодҳои визуалӣ\"-ро истифода баред: - Категорияи \"Барнома\" -ро аз палитраи фармон дар тарафи чап кушоед - Блоки навъи \"Main\" -ро дар фазои кории коди визуалӣ кашед - Дар дохили он блокҳои дигари кодро барои амалисозии амалҳо ва мантиқи ин барнома илова кунед.",
+  "setup_code_empty_note": "Рамзи \"Танзим\" холӣ аст. Барои тавлиди ин код муҳаррири \"Кодҳои визуалӣ\"-ро истифода баред: - Аз палитраи фармон дар тарафи чап категорияи \"Барнома\" -ро кушоед - Блоки навъи \"Танзим\" -ро дар фазои кории коди визуалӣ кашед - Дар дохили он блокҳои дигари кодро илова кунед, то шароитҳоеро, ки иҷроиши коди \"Асосӣ\" ба вуҷуд меоранд.",
   "capture_commands": "Фармонҳои забт",
   "capture_commands_description": "Ҳама фармонҳоеро, ки дар виджетҳо дастӣ иҷро мешаванд, ба барнома илова кунед.",
   "capture_commands_pause": "Таваққуф байни фармонҳо",
@@ -142,11 +142,25 @@
     },
     "34": {
       "Title": "Пешгӯии обу ҳаво",
-      "Description": "Маълумоти обу ҳаво ва пешгӯӣ аз хидмати Харитаи обу ҳавои кушод.\nБарои фаъол кардани ин виджет калиди дурусти API-ро ворид кунед.\nДастурҳоро дар https://openweathermap.org/appid иҷро кунед, то калиди ройгони API гиред.",
+      "Description": "Маълумоти обу ҳаво ва пешгӯӣ аз хидмати Харитаи обу ҳавои кушод. Барои фаъол кардани ин виджет калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API дастурҳоро дар https://openweathermap.org/appid иҷро кунед.",
       "ConfigureOptions.Location": "Номи шаҳр",
-      "ConfigureOptions.Language": "Забон (масалан, EN, IT, FR, DE, ...)",
+      "ConfigureOptions.Language": "Забон (масалан. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Фосилаи навсозӣ (дақиқа)",
       "ConfigureOptions.ApiKey": "Калиди API OpenWeatherMap (APPID)"
+    },
+    "77": {
+      "Title": "Шабакаи MQTT",
+      "Description": "Ба брокери MQTT пайваст шавед, то барномаи HomeGenie Panelро аз ҳама ҷо тавассути Интернет истифода баред ё дастгоҳҳои HomeGenie-ро дар як шабакаи MQTT пайваст кунед.",
+      "MQTT.SensorPublish": "Интишори рӯйдодҳои аз ҷониби ин модул баровардашуда",
+      "ConfigureOptions.ClientId": "Id муштарӣ.",
+      "ConfigureOptions.ServerAddress": "Суроғаи сервер",
+      "ConfigureOptions.ServerPort": "Порти сервер",
+      "ConfigureOptions.Encryption": "Рамзгузории охири ба охирро фаъол созед (E2EE)",
+      "ConfigureOptions.WebSockets": "WebSockets -ро истифода баред",
+      "ConfigureOptions.TLS": "TLS/SSL-ро фаъол созед",
+      "ConfigureOptions.Username": "Номи корбар (ихтиёрӣ)",
+      "ConfigureOptions.Password": "Рамз (ихтиёрӣ)",
+      "ConfigureOptions.ImportExternal": "Воридоти модулҳои беруна"
     },
     "78": {
       "Title": "Термостат интеллектуалӣ",
@@ -202,7 +216,7 @@
     },
     "402": {
       "Title": "Намоиш - Ҳаракат муайян карда шуд",
-      "Description": "Муайян кардани ҳаракати сенсори бисёрсоҳаи намоиширо тақлид мекунад."
+      "Description": "Муайянкунии ҳаракати сенсори бисёрсоҳаи намоиширо тақлид мекунад."
     },
     "410": {
       "Title": "Симулятори сенсор",
@@ -234,7 +248,7 @@
     },
     "8": {
       "Title": "Сенарияи рангҳои тулӯи офтоб",
-      "Description": "Намунаи сенарияи \"Офтоб\" барои чароғҳои LED тағирёбанда.",
+      "Description": "Намунаи сенарияи \"Офтоби офтоб\" барои чароғҳои LED ивазкунандаи ранг.",
       "Scenarios.SunriseColors": "Истинод ба сенарияи рангҳои офтобӣ"
     }
   }

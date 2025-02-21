@@ -6,7 +6,7 @@
   "$section_label": {
     "label": "Etykieta",
     "indicators": "Wskaźniki",
-    "lights_control": "Światła",
+    "lights_control": "Ślepia",
     "switches_control": "Przełączniki"
   }
 }

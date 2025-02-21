@@ -12,6 +12,10 @@ jobs:
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo "VERSION_NUMBER=$(echo ${GITHUB_REF#refs/*/} | cut -d"v" -f 2)" >> $GITHUB_ENV
 
+      - name: Get Head Commit Message
+        id: get_head_commit_message
+        run: git log -1 --no-merges --pretty=%B > release_message.txt
+
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
@@ -37,7 +41,7 @@ jobs:
           mv Doxy/homegenie_api.tgz ../../../src/HomeGenie/bin/Release/artifacts/
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
@@ -49,3 +53,5 @@ jobs:
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.deb
             ./src/HomeGenie/bin/Release/artifacts/homegenie_api.tgz
+          body_path: release_message.txt
+          generate_release_notes: true

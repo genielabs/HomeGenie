@@ -1,7 +1,7 @@
 {
   "$alarm_system": {
-    "arm_home": "मुख्यपृष्ठ",
-    "arm_away": "लांब"
+    "arm_home": "मुखपृष्ठ",
+    "arm_away": "दूर"
   },
   "$section_label": {
     "label": "लेबल",

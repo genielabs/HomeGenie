@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
 Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
@@ -35,7 +35,7 @@ Program.Run();
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -110,7 +110,7 @@ Program.Run();
   <ProgramBlock>
     <ScriptSetup>Program.Run();
 </ScriptSetup>
-    <ScriptSource>var checkVirtualModules = new Func&lt;ModuleHelper, bool&gt;((module)=&gt;{
+    <ScriptSource>var checkZWaveModules = new Func&lt;ModuleHelper, bool&gt;((module)=&gt;{
   var defaultType = "Switch";
   var parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchBinary.Count");
   if (parameter.DecimalValue == 0)
@@ -119,15 +119,15 @@ Program.Run();
     defaultType = "Dimmer";
     parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchMultiLevel.Count");
   }
-  // ADD A VIRTUAL MODULE FOR EACH INSTANCE
+  // ADD A Z-WAVE MODULE FOR EACH INSTANCE
   for (int m = 1; m &lt;= parameter.DecimalValue; m++)
   {
     string address = module.Instance.Address + "." + m.ToString();
-    var virtualModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(address).Get();
-    if (!virtualModule.Exists)
+    var zwaveModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(address).Get();
+    if (!zwaveModule.Exists)
     {
-      Program.AddVirtualModule("HomeAutomation.ZWave", address, defaultType, "");
-      Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
+      Program.AddModule("HomeAutomation.ZWave", address, defaultType, "");
+      Program.Notify("MultiChannel Z-Wave", "Adding z-wave module " + address);
     }
   }
   return true;
@@ -144,8 +144,8 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     var id = 0;
     if (int.TryParse(instance, out id))
     {
-      var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(module.Instance.Address + "." + instance).Get();
-      virtualmodule.RaiseEvent("Status.Level", parameter.Value, "ZWaveNode");
+      var zwaveModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(module.Instance.Address + "." + instance).Get();
+      zwaveModule.Emit("Status.Level", parameter.Value, "ZWaveNode");
     }
 
   }
@@ -163,14 +163,14 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
       {
         module.Command("MultiInstance.GetCount").Execute("Switch.MultiLevel");
       }
-      checkVirtualModules(module);
+      checkZWaveModules(module);
     }
   }
 
   return true; // continue processing event
 });
 
-When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
+Api.Handle("HomeAutomation.ZWave", (args) =&gt; {
 
   string[] reqs = ((string)args).Split('/');
   //string domain = reqs[0];
@@ -183,7 +183,7 @@ When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
     //
     // Check if it's a node supporting MultiInstance/Channel
     // if the node address is in the form &lt;mainnode_id&gt;.&lt;instance&gt;
-    // then this is a command for a multiinstance virtual module
+    // then this is a command for a multiinstance zwave module
     if (nodeid.IndexOf('.') &gt; 0)
     {
       instance = nodeid.Substring(nodeid.IndexOf('.') + 1);
@@ -191,34 +191,34 @@ When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
     }
     if (instance != "")
     {
-      var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid + "." + instance).Get();
+      var zwaveModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid + "." + instance).Get();
       var parentmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid).Get();
       //
       switch(command)
       {
         case "Control.On":
           parentmodule.Command("MultiInstance.Set").Execute("Switch.Binary/" + instance + "/255");
-          virtualmodule.RaiseEvent("Status.Level", "1", "ZWaveNode");
+          zwaveModule.Emit("Status.Level", "1", "ZWaveNode");
           break;
         case "Control.Off":
           parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
-          virtualmodule.RaiseEvent("Status.Level", "0", "ZWaveNode");
+          zwaveModule.Emit("Status.Level", "0", "ZWaveNode");
           break;
         case "Control.Toggle":
-          if (virtualmodule.Parameter("Status.Level").DecimalValue == 0)
+          if (zwaveModule.Parameter("Status.Level").DecimalValue == 0)
           {
             parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/255");
-            virtualmodule.RaiseEvent("Status.Level", "1", "ZWaveNode");
+            zwaveModule.Emit("Status.Level", "1", "ZWaveNode");
           }
           else
           {
             parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
-            virtualmodule.RaiseEvent("Status.Level", "0", "ZWaveNode");
+            zwaveModule.Emit("Status.Level", "0", "ZWaveNode");
           }
           break;
         case "Control.Level":
           parentmodule.Command("MultiInstance.Set").Set("Switch.MultiLevel/" + instance + "/" + parameter);
-          virtualmodule.RaiseEvent("Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
+          zwaveModule.Emit("Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
           break;
       }
       //
@@ -233,24 +233,24 @@ When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
   return "";
 });
 
-// setup multi channel virtual modules at startup
+// setup multi channel zwave modules at startup
 Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
-  checkVirtualModules(module);
+  checkZWaveModules(module);
   return false;
 });
 
 Program.GoBackground();</ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-zwave</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>multi-instance-channel-virtual-modules</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>1967855F81775BD59729CC3E2BE35432</Checksum>
+      <Checksum>3DFF9798EED71CB9336FA5E8C74CE9B7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>93</Address>
@@ -262,7 +262,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.AddFeature("HomeAutomation.ZWave", "DoorWindow,DoorLock,Thermostat,Sensor", "HomeGenie.ZWaveWakeUpAlwaysAwake", "Set node as always awake", "checkbox");

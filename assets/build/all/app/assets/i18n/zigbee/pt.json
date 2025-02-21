@@ -1,7 +1,7 @@
 {
-  "node_inclusion": "Adicionar Dispositivo",
+  "node_inclusion": "Adicionar dispositivo",
   "node_exclusion": "Remover dispositivo",
-  "operation_timed_out": "A operação expirou.",
+  "operation_timed_out": "Tempo limite da operação esgotado.",
   "node_added": "Nó adicionado com sucesso",
   "turn_on_device_to_add": "Ligue o dispositivo e pressione o botão de emparelhamento por 5 segundos, se necessário",
   "soft_reset_button": "Reinicialização suave"
