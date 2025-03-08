@@ -1,7 +1,7 @@
 {
-  " ": "----------------------------------",
+  " ": "------------------------------------",
   "welcome_to_homegenie": "HomeGenie-д тавтай морил!",
-  "welcome_subtitle": "програмчлагдсан автоматжуулалтын оюун ухаан",
+  "welcome_subtitle": "Програмчлагдах автоматжуулалтын оюун ухаан",
   "not_configured_yet": "Системийг хараахан тохируулаагүй байна. Энэхүү тохиргооны шидтэн нь хэдхэн алхмаар системээ ажиллуулахад тань туслах болно.",
   "system_config_start_with_base_and_backup": "Нөөц файлаас сэргээх",
   "system_config_start_with_default_setup": "Өгөгдмөл тохиргоо",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "-аас",
   "cronwizard_description_ending": "руу",
   "cronwizard_description_at": "цагт",
-  "cronwizard_add_time_slot": "Хугацаа нэмэх",
+  "cronwizard_add_time_slot": "Цагийн зай нэмнэ үү",
   "cronwizard_add_exact_time": "Тодорхой цагийг нэмнэ үү",
   "cronwizard_start_time": "Эхлэх цаг",
   "cronwizard_end_time": "Дуусах цаг",
@@ -94,7 +94,7 @@
   "scheduler_preset_action_config_mode_heat": "Дулаан",
   "scheduler_preset_action_config_mode_heat_eco": "Дулааны хэмнэлттэй",
   "scheduler_preset_action_config_mode_cool": "Сайхан байна",
-  "scheduler_preset_action_config_mode_cool_eco": "Сайхан эдийн засаг",
+  "scheduler_preset_action_config_mode_cool_eco": "Сэрүүн эдийн засаг",
   "scheduler_preset_action_program_run": "Програмыг ажиллуулах",
   "scheduler_preset_action_config_program": "Програм",
   "scheduler_preset_action_config_options": "Сонголтууд",
@@ -136,9 +136,16 @@
   "$options": {
     "16": {
       "Title": "Түвшин санах ой",
-      "Description": "Сүүлийн бүдэгрүүлэгчийн түвшинг хадгалж, эргүүлэн татах.",
+      "Description": "Сүүлийн бүдэгрүүлэгчийн түвшинг хадгалж, эргэн санах.",
       "HomeGenie.LevelMemory": "Асаах үед сүүлийн гэрлийн түвшинг эргэн санах",
       "HomeGenie.LevelMemory.SimulateOnly": "Зөвхөн дуурайх"
+    },
+    "26": {
+      "Title": "Өнгөт гэрэл",
+      "Description": "HTTP API (V1) ашиглан Philips Hue гэрлийг нэгтгэх жишээ. Гүүрт холбогдох анхдагч хэрэглэгч нь \"шинэ хөгжүүлэгч\" бөгөөд үүнийг аль хэдийн идэвхжүүлсэн байх ёстой.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP хаяг",
+      "ConfigureOptions.BridgeUsername": "Хэрэглэгчийн нэр",
+      "ConfigureOptions.LightsCount": "Гэрлийн тоо"
     },
     "34": {
       "Title": "Цаг агаарын урьдчилсан мэдээ",
@@ -149,7 +156,7 @@
       "ConfigureOptions.ApiKey": "OpenWeatherMap API түлхүүр (APPID)"
     },
     "77": {
-      "Title": "MQTT сүлжээ",
+      "Title": "Сүлжээний MQTT",
       "Description": "MQTT брокертой холбогдож HomeGenie Panel програмыг хаанаас ч интернэтээр дамжуулан ашиглах эсвэл HomeGenie төхөөрөмжүүдийг ижил MQTT сүлжээнд холбох боломжтой.",
       "MQTT.SensorPublish": "Энэ модулийн үйл явдлуудыг нийтлэх",
       "ConfigureOptions.ClientId": "Үйлчлүүлэгчийн дугаар.",
@@ -182,14 +189,24 @@
       "EnergyManagement.EnergySavingLevel": "Хамгийн их гэрлийн түвшин (%)",
       "EnergyManagement.EnergySavingMode": "Идэвхжүүлэх"
     },
+    "88": {
+      "Title": "Ерөнхий IP камер",
+      "Description": "IP камераас дүрсний тэжээлийг харуулах/чиглүүлэх.",
+      "IpCamera.ImageURL": "Камерын зургийн API URL (камерынхаа баримт бичгийг харна уу)",
+      "IpCamera.Username": "Хэрэглэгчийн нэр (заавал биш)",
+      "IpCamera.Password": "Нууц үг (заавал биш)",
+      "Widget.Config.fps": "Секундэд фрэйм",
+      "Widget.Config.size": "Виджетийн хэмжээ"
+    },
     "90": {
       "Title": "Аюулгүй байдлын дохиоллын систем",
       "Description": "Аюулгүй байдлын дохиоллын системийг хэрэгжүүлэхийн тулд мэдрэгч болон бусад төхөөрөмжийг ашигла.",
       "HomeGenie.SecurityAlarm": "Сэрүүлэг/strobe болгон ашиглах",
+      "HomeGenie.SecurityTriggerHome": "Мөн Home зэвсэглэсэн үед өдөөдөг",
       "HomeGenie.SecuritySensor": "Аюулгүй байдлын мэдрэгч болгон ашиглах",
-      "ConfigureOptions.Email.Recipients": "Сэрүүлгийн мэдэгдлийн хүлээн авагчийн и-мэйлүүдийн таслалаар тусгаарлагдсан жагсаалт",
+      "ConfigureOptions.Email.Recipients": "Сэрүүлгийн мэдэгдлийн хүлээн авагчийн имэйлийн таслалаар тусгаарлагдсан жагсаалт",
       "ConfigureOptions.System.ArmDelay": "Гарын саатал (секунд)",
-      "ConfigureOptions.System.SirenStartTime": "Дуут дохио эхлэх саатал (секунд)",
+      "ConfigureOptions.System.SirenStartTime": "Сирена эхлэх саатал (секунд)",
       "ConfigureOptions.System.SirenMaxTime": "Дуут дохионы хамгийн их цаг (секунд, 0=хязгааргүй)",
       "ConfigureOptions.Trigger.ArmedProgram": "Зэвсэглэсэн үед ажиллах програм",
       "ConfigureOptions.Trigger.DisarmedProgram": "Зэвсэглээгүй үед ажиллах програм",
@@ -200,6 +217,10 @@
       "Description": "Төхөөрөмжийн үйл ажиллагааг бүртгэх.",
       "EventsLogger.EnableLogging": "Идэвхжүүлэх"
     },
+    "111": {
+      "Title": "Үйлчлүүлэгчийн тохиргоо",
+      "Description": "UI болон хяналтын самбарын тохиргоог хадгалахад ашигладаг үйлчлүүлэгчийн тохиргооны профайлыг удирдах API-г хэрэгжүүлдэг."
+    },
     "400": {
       "Title": "Виртуал модулиудын үзүүлэн",
       "Description": "Виртуал төхөөрөмжийн утгыг гараар тохируулах.",
@@ -208,10 +229,10 @@
       "Sensor.MotionDetect": "Хөдөлгөөн илрүүлэх төлөв",
       "Status.Battery": "Батерейны түвшин",
       "Sensor.DoorWindow": "Хаалга/Цонхны мэдрэгчийн төлөв (нээлттэй/хаалттай)",
-      "Status.Level": "Төлөв сэлгэх (асаах/унтраах)"
+      "Status.Level": "Статус сэлгэх (асаах/унтраах)"
     },
     "401": {
-      "Title": "Демо - Хаалга сэлгэх",
+      "Title": "Демо - Хаалгыг асаах/унтраах",
       "Description": "Демо хаалга-цонхны мэдрэгчтэй хаалгыг онгойлгож/хаалтыг дуурайлган хийдэг."
     },
     "402": {
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Гэрэлтүүлгийг бууруулах товчлуур",
       "ConfigureOptions.DimmerInterval": "Бүдгэрэх алхам"
     },
+    "142": {
+      "Title": "И-мэйл данс",
+      "Description": "Имэйл илгээх/хүлээн авахдаа системийн программуудад ашигладаг цахим шуудангийн бүртгэлийн мэдээллийг хадгалдаг.",
+      "ConfigureOptions.Email.Sender": "1. И-мэйл хаяг",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP серверийн хаяг",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP хэрэглэгчийн нэр (заавал биш)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP нууц үг (заавал биш)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP серверийн порт",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP сервер нь SSL ашигладаг"
+    },
     "145": {
       "Title": "Ухаалаг төхөөрөмж",
       "Description": "Хөдөлгөөн мэдрэгч болон орчны гэрэлд тулгуурлан төхөөрөмжийг асаах/унтраах.",
@@ -250,6 +281,13 @@
       "Title": "Нар мандах өнгөний хувилбар",
       "Description": "Өнгө өөрчлөх LED гэрлийн \"Нар мандах\" хувилбарын жишээ.",
       "Scenarios.SunriseColors": "Sunrise Colors хувилбарын холбоос"
+    },
+    "910": {
+      "Title": "Объект илрүүлэх",
+      "Description": "Урьдчилан бэлтгэгдсэн YOLO11 загварыг ашиглан объектуудыг илрүүлэх.",
+      "ML.ObjectDetection": "Объект илрүүлэхийг идэвхжүүлэх",
+      "ML.ObjectDetection.TriggerDetect": "Сэрүүлгийг өдөөх зүйлсийн таслалаар тусгаарлагдсан жагсаалт (англи хэл дээр). (жишээ нь: муур, нохой, хүн, үүргэвч, чемодан)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 загварын файлын зам (.onnx)"
     }
   }
 }

@@ -71,7 +71,7 @@
   "cronwizard_schedule_set_exact_time": "நிகழ்வு நேரத்தை அமைக்கவும்.",
   "cronwizard_schedule_set_slot_start": "தொடக்க நேர இடைவெளியை அமைக்கவும்.",
   "cronwizard_schedule_set_slot_end": "{{start}} தொடங்குகிறது.<span class=\"notranslate\"><br/></span> நேர இடைவெளி முடிவை அமைக்கவும்.",
-  "cronwizard_bindings_define_types_and_modules": "இந்த அட்டவணைக்கு உட்பட்ட வகைகள் மற்றும் தொகுதிக்கூறுகளை வரையறுக்கவும் (விரும்பினால்)",
+  "cronwizard_bindings_define_types_and_modules": "இந்த அட்டவணைக்கு உட்பட்ட வகைகள் மற்றும் தொகுதிகளை வரையறுக்கவும் (விரும்பினால்)",
   "cronwizard_bindings_select_types": "வகைகளைத் தேர்ந்தெடுக்கவும்",
   "cronwizard_action_set_action_to_execute": "இந்த நிகழ்வின் நிகழ்வுகளில் செயல்படுத்த வேண்டிய செயலை அமைக்கவும்.",
   "cronwizard_action_preset_actions": "முன்னமைக்கப்பட்ட செயல்கள்",
@@ -118,8 +118,8 @@
   "program_status_broken": "உடைந்தது",
   "program_status_compile": "தொகுக்கவும்",
   "automation_programming_guide": "நிரலாக்க வழிகாட்டி'",
-  "tap_to_disable": "முடக்க தட்டவும்",
-  "tap_to_enable": "இயக்க தட்டவும்",
+  "tap_to_disable": "முடக்க கிளிக் செய்யவும்.",
+  "tap_to_enable": "இயக்க கிளிக் செய்யவும்.",
   "program_data": "நிரல் தரவு",
   "visual_code": "காட்சி குறியீடு",
   "generated_code": "உருவாக்கப்பட்ட குறியீடு",
@@ -139,6 +139,13 @@
       "Description": "கடைசி மங்கலான அளவைச் சேமித்து நினைவுபடுத்தவும்.",
       "HomeGenie.LevelMemory": "சுவிட்ச் ஆன் செய்தபோது கடைசி ஒளி அளவை நினைவுபடுத்து.",
       "HomeGenie.LevelMemory.SimulateOnly": "உருவகப்படுத்து மட்டும்"
+    },
+    "26": {
+      "Title": "வண்ண விளக்குகள்",
+      "Description": "எடுத்துக்காட்டு HTTP API (V1) ஐப் பயன்படுத்தி Philips Hue விளக்குகள் ஒருங்கிணைப்பு. பிரிட்ஜுடன் இணைக்க இயல்புநிலை பயனர் \"newdeveloper\" ஆவார், மேலும் அது ஏற்கனவே இயக்கப்பட்டிருக்க வேண்டும்.",
+      "ConfigureOptions.BridgeAddress": "பிலிப்ஸ் ஹியூ பிரிட்ஜ் (V1) ஐபி முகவரி",
+      "ConfigureOptions.BridgeUsername": "பயனர்பெயர்",
+      "ConfigureOptions.LightsCount": "விளக்குகளின் எண்ணிக்கை"
     },
     "34": {
       "Title": "வானிலை முன்னறிவிப்பு",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "அதிகபட்ச ஒளி நிலை (%)",
       "EnergyManagement.EnergySavingMode": "இயக்கு"
     },
+    "88": {
+      "Title": "பொதுவான ஐபி கேமரா",
+      "Description": "ஒரு IP கேமராவிலிருந்து பட ஊட்டத்தைக் காட்சிப்படுத்துதல்/வழிப்படுத்துதல்.",
+      "IpCamera.ImageURL": "கேமரா பட API URL (உங்கள் கேமரா ஆவணங்களைக் காண்க)",
+      "IpCamera.Username": "பயனர்பெயர் (விரும்பினால்)",
+      "IpCamera.Password": "கடவுச்சொல் (விரும்பினால்)",
+      "Widget.Config.fps": "வினாடிக்கு பிரேம்கள்",
+      "Widget.Config.size": "விட்ஜெட் அளவு"
+    },
     "90": {
       "Title": "பாதுகாப்பு அலாரம் அமைப்பு",
       "Description": "பாதுகாப்பு எச்சரிக்கை அமைப்பை செயல்படுத்த சென்சார்கள் மற்றும் பிற சாதனங்களைப் பயன்படுத்தவும்.",
       "HomeGenie.SecurityAlarm": "அலாரம்/ஸ்ட்ரோப்பாகப் பயன்படுத்தவும்",
+      "HomeGenie.SecurityTriggerHome": "ஆயுதம் ஏந்தும்போதும் தூண்டுகிறது முகப்பு",
       "HomeGenie.SecuritySensor": "பாதுகாப்பு உணரியாகப் பயன்படுத்தவும்",
       "ConfigureOptions.Email.Recipients": "எச்சரிக்கை அறிவிப்புகளுக்கான பெறுநர்களின் மின்னஞ்சல்களின் காற்புள்ளியால் பிரிக்கப்பட்ட பட்டியல்.",
       "ConfigureOptions.System.ArmDelay": "கை தாமதம் (வினாடிகள்)",
@@ -200,6 +217,10 @@
       "Description": "சாதன செயல்பாட்டைப் பதிவுசெய்.",
       "EventsLogger.EnableLogging": "இயக்கு"
     },
+    "111": {
+      "Title": "கிளையன்ட் உள்ளமைவு",
+      "Description": "UI மற்றும் டாஷ்போர்டு அமைப்புகளைச் சேமிக்கப் பயன்படுத்தப்படும் கிளையண்டின் உள்ளமைவு சுயவிவரங்களை நிர்வகிப்பதற்கான API ஐ செயல்படுத்துகிறது."
+    },
     "400": {
       "Title": "மெய்நிகர் தொகுதிகள் டெமோ",
       "Description": "மெய்நிகர் சாதனத்தின் மதிப்புகளை கைமுறையாக அமைக்கவும்.",
@@ -211,7 +232,7 @@
       "Status.Level": "நிலையை மாற்று (ஆன்/ஆஃப்)"
     },
     "401": {
-      "Title": "டெமோ - டோர் மாற்று",
+      "Title": "டெமோ - டோக்கிள் டோர்",
       "Description": "டெமோ கதவு-ஜன்னல் சென்சாரின் கதவு திறந்த/மூடப்படுவதை உருவகப்படுத்துகிறது."
     },
     "402": {
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "பிரகாசத்தைக் குறைப்பதற்கான பொத்தான்",
       "ConfigureOptions.DimmerInterval": "மங்கலான படி"
     },
+    "142": {
+      "Title": "மின்னஞ்சல் கணக்கு",
+      "Description": "மின்னஞ்சல்களை அனுப்ப/பெறுவதற்கு கணினி நிரல்களால் பயன்படுத்தப்படும் மின்னஞ்சல் கணக்குத் தகவலைச் சேமிக்கிறது.",
+      "ConfigureOptions.Email.Sender": "1. மின்னஞ்சல் முகவரி",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP சர்வர் முகவரி",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP பயனர்பெயர் (விரும்பினால்)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP கடவுச்சொல் (விரும்பினால்)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP சர்வர் போர்ட்",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP சர்வர் SSL ஐப் பயன்படுத்துகிறது"
+    },
     "145": {
       "Title": "ஸ்மார்ட் சாதனம்",
       "Description": "இயக்கம் கண்டறிதல் மற்றும் சுற்றுப்புற ஒளியின் அடிப்படையில் சாதனத்தை இயக்கவும்/முடக்கவும்.",
@@ -250,6 +281,13 @@
       "Title": "சூரிய உதய நிறங்களின் காட்சி",
       "Description": "நிறம் மாறும் LED விளக்குகளுக்கான \"சூரிய உதயம்\" காட்சிக்கான எடுத்துக்காட்டு.",
       "Scenarios.SunriseColors": "சன்ரைஸ் கலர்ஸ் காட்சிக்கான இணைப்பு"
+    },
+    "910": {
+      "Title": "பொருள் கண்டறிதல்",
+      "Description": "முன் பயிற்சி பெற்ற YOLO11 மாதிரியைப் பயன்படுத்தி பொருட்களைக் கண்டறியவும்.",
+      "ML.ObjectDetection": "பொருள் கண்டறிதலை இயக்கு",
+      "ML.ObjectDetection.TriggerDetect": "அலாரத்தைத் தூண்டும் விஷயங்களின் காற்புள்ளியால் பிரிக்கப்பட்ட பட்டியல் (ஆங்கிலத்தில்). (எ.கா: பூனை, நாய், நபர், முதுகுப்பை, சூட்கேஸ்)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 மாதிரி கோப்பின் பாதை (.onnx)"
     }
   }
 }

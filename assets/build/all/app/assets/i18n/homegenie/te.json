@@ -118,8 +118,8 @@
   "program_status_broken": "విరిగిపోయింది",
   "program_status_compile": "కంపైల్ చేయండి",
   "automation_programming_guide": "ప్రోగ్రామింగ్ గైడ్'",
-  "tap_to_disable": "నిలిపివేయడానికి నొక్కండి",
-  "tap_to_enable": "ప్రారంభించడానికి నొక్కండి",
+  "tap_to_disable": "నిలిపివేయడానికి క్లిక్ చేయండి",
+  "tap_to_enable": "ప్రారంభించడానికి క్లిక్ చేయండి",
   "program_data": "ప్రోగ్రామ్ డేటా",
   "visual_code": "దృశ్య కోడ్",
   "generated_code": "రూపొందించిన కోడ్",
@@ -139,6 +139,13 @@
       "Description": "చివరి డిమ్మర్ స్థాయిని నిల్వ చేసి గుర్తుకు తెచ్చుకోండి.",
       "HomeGenie.LevelMemory": "స్విచ్ ఆన్ చేసినప్పుడు చివరి కాంతి స్థాయిని గుర్తుకు తెచ్చుకోండి",
       "HomeGenie.LevelMemory.SimulateOnly": "అనుకరణ మాత్రమే"
+    },
+    "26": {
+      "Title": "రంగు లైట్లు",
+      "Description": "ఉదాహరణ HTTP API (V1) ఉపయోగించి ఫిలిప్స్ హ్యూ లైట్ల ఇంటిగ్రేషన్. బ్రిడ్జ్‌కి కనెక్ట్ కావడానికి డిఫాల్ట్ వినియోగదారు \"న్యూడెవలపర్\" మరియు ఇది ఇప్పటికే ప్రారంభించబడి ఉండాలి.",
+      "ConfigureOptions.BridgeAddress": "ఫిలిప్స్ హ్యూ బ్రిడ్జ్ (V1) IP చిరునామా",
+      "ConfigureOptions.BridgeUsername": "యూజర్ పేరు",
+      "ConfigureOptions.LightsCount": "లైట్ల సంఖ్య"
     },
     "34": {
       "Title": "వాతావరణ సూచన",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "గరిష్ట కాంతి స్థాయి (%)",
       "EnergyManagement.EnergySavingMode": "ప్రారంభించు"
     },
+    "88": {
+      "Title": "సాధారణ IP కెమెరా",
+      "Description": "IP కెమెరా నుండి ఇమేజ్ ఫీడ్‌ను ప్రదర్శించు/మార్గం చేయు.",
+      "IpCamera.ImageURL": "కెమెరా ఇమేజ్ API URL (మీ కెమెరా డాక్స్ చూడండి)",
+      "IpCamera.Username": "యూజర్ పేరు (ఐచ్ఛికం)",
+      "IpCamera.Password": "పాస్‌వర్డ్ (ఐచ్ఛికం)",
+      "Widget.Config.fps": "సెకనుకు ఫ్రేమ్‌లు",
+      "Widget.Config.size": "విడ్జెట్ పరిమాణం"
+    },
     "90": {
       "Title": "భద్రతా అలారం వ్యవస్థ",
       "Description": "భద్రతా అలారం వ్యవస్థను అమలు చేయడానికి సెన్సార్లు మరియు ఇతర పరికరాలను ఉపయోగించండి.",
       "HomeGenie.SecurityAlarm": "అలారం/స్ట్రోబ్‌గా ఉపయోగించండి",
+      "HomeGenie.SecurityTriggerHome": "ఆయుధంగా ఉన్నప్పుడు కూడా ట్రిగ్గర్ చేస్తుంది హోమ్",
       "HomeGenie.SecuritySensor": "భద్రతా సెన్సార్‌గా ఉపయోగించండి",
       "ConfigureOptions.Email.Recipients": "అలారం నోటిఫికేషన్‌ల కోసం కామాతో వేరు చేయబడిన గ్రహీతల ఇ-మెయిల్‌ల జాబితా",
       "ConfigureOptions.System.ArmDelay": "చేయి ఆలస్యం (సెకన్లు)",
@@ -199,6 +216,10 @@
       "Title": "ఈవెంట్‌ల లాగింగ్",
       "Description": "పరికర కార్యాచరణను రికార్డ్ చేయండి.",
       "EventsLogger.EnableLogging": "ప్రారంభించు"
+    },
+    "111": {
+      "Title": "క్లయింట్ కాన్ఫిగరేషన్",
+      "Description": "UI మరియు డాష్‌బోర్డ్ సెట్టింగ్‌లను నిల్వ చేయడానికి ఉపయోగించే క్లయింట్ యొక్క కాన్ఫిగరేషన్ ప్రొఫైల్‌లను నిర్వహించడానికి APIని అమలు చేస్తుంది."
     },
     "400": {
       "Title": "వర్చువల్ మాడ్యూల్స్ డెమో",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "ప్రకాశం తగ్గింపు బటన్",
       "ConfigureOptions.DimmerInterval": "డిమ్మింగ్ స్టెప్"
     },
+    "142": {
+      "Title": "ఈ-మెయిల్ ఖాతా",
+      "Description": "ఈమెయిల్‌లను పంపడానికి/స్వీకరించడానికి సిస్టమ్ ప్రోగ్రామ్‌లు ఉపయోగించే ఈ-మెయిల్ ఖాతా సమాచారాన్ని నిల్వ చేస్తుంది.",
+      "ConfigureOptions.Email.Sender": "1. ఇ-మెయిల్ చిరునామా",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP సర్వర్ చిరునామా",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP వినియోగదారు పేరు (ఐచ్ఛికం)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP పాస్‌వర్డ్ (ఐచ్ఛికం)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP సర్వర్ పోర్ట్",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP సర్వర్ SSLని ఉపయోగిస్తుంది"
+    },
     "145": {
       "Title": "స్మార్ట్ పరికరం",
       "Description": "మోషన్ డిటెక్షన్ మరియు యాంబియంట్ లైట్ ఆధారంగా పరికరాన్ని ఆన్/ఆఫ్ చేయండి.",
@@ -250,6 +281,13 @@
       "Title": "సూర్యోదయ రంగుల దృశ్యం",
       "Description": "రంగు మార్చే LED లైట్ల కోసం \"సూర్యోదయం\" దృశ్యానికి ఉదాహరణ.",
       "Scenarios.SunriseColors": "సన్‌రైజ్ కలర్స్ దృశ్యానికి లింక్"
+    },
+    "910": {
+      "Title": "వస్తువు గుర్తింపు",
+      "Description": "ముందుగా శిక్షణ పొందిన YOLO11 మోడల్‌ని ఉపయోగించి వస్తువులను గుర్తించండి.",
+      "ML.ObjectDetection": "వస్తువుల గుర్తింపును ప్రారంభించండి",
+      "ML.ObjectDetection.TriggerDetect": "అలారం మోగించే వస్తువుల జాబితా (ఇంగ్లీషులో) కామాతో వేరు చేయబడింది. (ఉదా: పిల్లి, కుక్క, వ్యక్తి, బ్యాక్‌ప్యాక్, సూట్‌కేస్)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
     }
   }
 }

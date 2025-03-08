@@ -21,17 +21,17 @@
   "association_description": "Stu dispositivu manda rapporti à i nodi inclusi in i gruppi di associu. Per riceve rapporti da stu dispusitivu, include u node 1 (u controller) in i gruppi di associu.",
   "associated_nodes": "Nodi assuciati",
   "enter_node_number": "Inserite u numeru di nodu",
-  "configuration_parameters": "Paràmetri di cunfigurazione",
+  "configuration_parameters": "Parametri di cunfigurazione",
   "generic_parameter": "Parametru genericu",
   "generic_parameter_description": "Inserite u numeru di paràmetru di cunfigurazione è u valore da stabilisce.",
   "enter_parameter_number": "Inserite u numeru di paràmetru",
   "enter_parameter_value": "Inserite u valore di u paràmetru",
-  "command_classes": "Classi di cummandu",
+  "command_classes": "Classi di cumandamentu",
   "missing handler": "Un gestore mancante",
   "refresh_ports_button": "Refresh list ports",
   "calibration": "Calibrazione",
   "calibrate": "Calibrate",
   "edit_calibration_parameter": "Edite u numeru di paràmetru di calibrazione",
   "calibration_parameter_not_set": "U numeru di paràmetru di calibrazione ùn hè micca stabilitu",
-  "calibration_parameter_number": "U numeru di paràmetru (vede u manual di u dispusitivu)"
+  "calibration_parameter_number": "Numeru di paràmetru (vede u manual di u dispusitivu)"
 }

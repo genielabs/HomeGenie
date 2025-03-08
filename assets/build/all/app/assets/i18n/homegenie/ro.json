@@ -2,7 +2,7 @@
   " ": "-------------------------------------------",
   "welcome_to_homegenie": "Bun venit la HomeGenie!",
   "welcome_subtitle": "Inteligența de automatizare programabilă",
-  "not_configured_yet": "Sistemul nu este încă configurat. Acest expert de configurare vă va ajuta să vă puneți sistemul în funcțiune în câțiva pași.",
+  "not_configured_yet": "Sistemul nu este încă configurat. Acest asistent de configurare vă va ajuta să vă puneți sistemul în funcțiune în câțiva pași.",
   "system_config_start_with_base_and_backup": "Restaurați din fișierul de rezervă",
   "system_config_start_with_default_setup": "Configurare implicită",
   "system_config_include_demo": "Includeți demonstrație cu activitatea simulată a dispozitivului",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "din",
   "cronwizard_description_ending": "la",
   "cronwizard_description_at": "la",
-  "cronwizard_add_time_slot": "Adăugați intervalul orar",
+  "cronwizard_add_time_slot": "Adăugați intervalul de timp",
   "cronwizard_add_exact_time": "Adăugați ora exactă",
   "cronwizard_start_time": "Ora de începere",
   "cronwizard_end_time": "Ora de sfârșit",
@@ -118,8 +118,8 @@
   "program_status_broken": "rupt",
   "program_status_compile": "Compila",
   "automation_programming_guide": "Ghid de programare'",
-  "tap_to_disable": "Atingeți pentru a dezactiva",
-  "tap_to_enable": "Atingeți pentru a activa",
+  "tap_to_disable": "Faceți clic pentru a dezactiva",
+  "tap_to_enable": "Faceți clic pentru a activa",
   "program_data": "Datele programului",
   "visual_code": "Cod vizual",
   "generated_code": "Cod generat",
@@ -139,6 +139,13 @@
       "Description": "Stocați și reamintiți ultimul nivel de dimmer.",
       "HomeGenie.LevelMemory": "Reamintim ultimul nivel de lumină când este pornit",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulează doar"
+    },
+    "26": {
+      "Title": "Lumini colorate",
+      "Description": "Exemplu de integrare a luminilor Philips Hue folosind API-ul HTTP (V1). Utilizatorul implicit care se conectează la bridge este „newdeveloper” și ar trebui să fie deja activat.",
+      "ConfigureOptions.BridgeAddress": "Adresă IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Nume de utilizator",
+      "ConfigureOptions.LightsCount": "Numărul de lumini"
     },
     "34": {
       "Title": "Prognoza meteo",
@@ -160,7 +167,7 @@
       "ConfigureOptions.TLS": "Activați TLS/SSL",
       "ConfigureOptions.Username": "Nume de utilizator (opțional)",
       "ConfigureOptions.Password": "Parolă (opțional)",
-      "ConfigureOptions.ImportExternal": "Importă module externe"
+      "ConfigureOptions.ImportExternal": "Importați module externe"
     },
     "78": {
       "Title": "Termostat inteligent",
@@ -182,16 +189,26 @@
       "EnergyManagement.EnergySavingLevel": "Nivel maxim de lumină (%)",
       "EnergyManagement.EnergySavingMode": "Permite"
     },
+    "88": {
+      "Title": "Cameră IP generică",
+      "Description": "Afișează/direcționează fluxul de imagini de la o cameră IP.",
+      "IpCamera.ImageURL": "Adresa URL API pentru imaginea camerei (consultați documentele camerei dvs.)",
+      "IpCamera.Username": "Nume de utilizator (opțional)",
+      "IpCamera.Password": "Parolă (opțional)",
+      "Widget.Config.fps": "Cadre pe secundă",
+      "Widget.Config.size": "Dimensiunea widgetului"
+    },
     "90": {
       "Title": "Sistem de alarma de securitate",
       "Description": "Utilizați senzori și alte dispozitive pentru a implementa un sistem de alarmă de securitate.",
       "HomeGenie.SecurityAlarm": "Utilizați ca alarmă/stroboscop",
+      "HomeGenie.SecurityTriggerHome": "Se declanșează și când este armat Acasă",
       "HomeGenie.SecuritySensor": "Utilizați ca senzor de securitate",
       "ConfigureOptions.Email.Recipients": "Listă de e-mail-uri ale destinatarilor, separate prin virgulă, pentru notificările de alarmă",
       "ConfigureOptions.System.ArmDelay": "Întârziere armare (secunde)",
       "ConfigureOptions.System.SirenStartTime": "Întârziere pornire sirene (secunde)",
       "ConfigureOptions.System.SirenMaxTime": "Timp maxim sirene (secunde, 0=infinit)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Programul de rulat când este armat",
+      "ConfigureOptions.Trigger.ArmedProgram": "Program pentru a rula când este armat",
       "ConfigureOptions.Trigger.DisarmedProgram": "Program de rulat când este dezarmat",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program să ruleze atunci când este declanșat"
     },
@@ -199,6 +216,10 @@
       "Title": "Înregistrare evenimente",
       "Description": "Înregistrați activitatea dispozitivului.",
       "EventsLogger.EnableLogging": "Permite"
+    },
+    "111": {
+      "Title": "Configurarea clientului",
+      "Description": "Implementează API pentru gestionarea profilurilor de configurare ale clientului care sunt utilizate pentru a stoca setările UI și tablourile de bord."
     },
     "400": {
       "Title": "Demo de module virtuale",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Buton de reducere a luminozității",
       "ConfigureOptions.DimmerInterval": "Etapa de atenuare"
     },
+    "142": {
+      "Title": "Cont de e-mail",
+      "Description": "Stochează informațiile contului de e-mail utilizate de programele de sistem pentru trimiterea/primirea e-mailurilor.",
+      "ConfigureOptions.Email.Sender": "1. Adresă de e-mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresa serverului SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nume de utilizator SMTP (opțional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Parola SMTP (opțional)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port server SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Serverul SMTP utilizează SSL"
+    },
     "145": {
       "Title": "Dispozitiv inteligent",
       "Description": "Porniți/opriți dispozitivul pe baza detectării mișcării și a luminii ambientale.",
@@ -250,6 +281,13 @@
       "Title": "Scenariul culorilor răsăritului",
       "Description": "Exemplu de scenariu „Răsărit” pentru lumini LED care schimbă culoarea.",
       "Scenarios.SunriseColors": "Link către scenariul Sunrise Colors"
+    },
+    "910": {
+      "Title": "Detectarea obiectelor",
+      "Description": "Detectați obiecte folosind un model YOLO11 pre-antrenat.",
+      "ML.ObjectDetection": "Activați detectarea obiectelor",
+      "ML.ObjectDetection.TriggerDetect": "Listă de lucruri separate prin virgulă (în engleză) care vor declanșa alarma. (ex: pisică, câine, persoană, rucsac, valiză)",
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
     }
   }
 }

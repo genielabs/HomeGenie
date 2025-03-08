@@ -5,7 +5,7 @@
   "not_configured_yet": "Níl an córas cumraithe fós. Cabhróidh an draoi cumraíochta seo leat do chóras a chur ar bun agus a fheidhmiú i roinnt céimeanna.",
   "system_config_start_with_base_and_backup": "Athchóirigh ó chomhad cúltaca",
   "system_config_start_with_default_setup": "Socrú réamhshocraithe",
-  "system_config_include_demo": "Cuir taispeántas san áireamh le gníomhaíocht gléas ionsamhlaithe",
+  "system_config_include_demo": "Cuir taispeántas san áireamh le gníomhaíocht gléas insamhladh",
   "system_config_additional_features": "Gnéithe breise",
   "system_config_manual_setup": "Socrú láimhe",
   "interfaces": "Comhéadain",
@@ -118,8 +118,8 @@
   "program_status_broken": "Briste",
   "program_status_compile": "Tiomsú",
   "automation_programming_guide": "Treoir ríomhchlárúcháin'",
-  "tap_to_disable": "Tapáil chun é a dhíchumasú",
-  "tap_to_enable": "Tapáil chun é a chumasú",
+  "tap_to_disable": "Cliceáil chun é a dhíchumasú",
+  "tap_to_enable": "Cliceáil chun é a chumasú",
   "program_data": "Sonraí cláir",
   "visual_code": "Cóid amhairc",
   "generated_code": "Cód ginte",
@@ -139,6 +139,13 @@
       "Description": "Déan an leibhéal dimmer deireanach a stóráil agus a thabhairt chun cuimhne.",
       "HomeGenie.LevelMemory": "Athghairm an leibhéal solais deiridh nuair a cuireadh ar siúl é",
       "HomeGenie.LevelMemory.SimulateOnly": "Insamhail amháin"
+    },
+    "26": {
+      "Title": "Soilse datha",
+      "Description": "Sampla Comhtháthú soilse Philips Hue ag baint úsáide as HTTP API (V1). Is é \"newdeveloper\" an t-úsáideoir réamhshocraithe chun ceangal leis an droichead agus ba cheart go mbeadh sé cumasaithe cheana féin.",
+      "ConfigureOptions.BridgeAddress": "Seoladh IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Ainm úsáideora",
+      "ConfigureOptions.LightsCount": "Líon na soilse"
     },
     "34": {
       "Title": "Réamhaisnéis na hAimsire",
@@ -177,20 +184,30 @@
       "EnergyManagement.MonitorWatts": "Monatóireacht a dhéanamh ar ídiú fuinnimh"
     },
     "82": {
-      "Title": "Mód Coigilt Fuinnimh",
+      "Title": "Mód Sábháil Fuinnimh",
       "Description": "Coinnigh an leibhéal solais faoi bhun céatadán configurable.",
       "EnergyManagement.EnergySavingLevel": "Uasleibhéal solais (%)",
       "EnergyManagement.EnergySavingMode": "Cumasaigh"
+    },
+    "88": {
+      "Title": "Ceamara IP cineálach",
+      "Description": "Fotha íomhá a thaispeáint/a chur ar aghaidh ó cheamara IP.",
+      "IpCamera.ImageURL": "URL API íomhá ceamara (féach do dhoiciméid ceamara)",
+      "IpCamera.Username": "Ainm úsáideora (roghnach)",
+      "IpCamera.Password": "Pasfhocal (roghnach)",
+      "Widget.Config.fps": "Frámaí in aghaidh an tsoicind",
+      "Widget.Config.size": "Méid ghiuirléid"
     },
     "90": {
       "Title": "Córas Aláraim Slándála",
       "Description": "Úsáid braiteoirí agus gléasanna eile chun córas aláraim slándála a chur i bhfeidhm.",
       "HomeGenie.SecurityAlarm": "Úsáid mar aláram/strobe",
+      "HomeGenie.SecurityTriggerHome": "Chomh maith leis sin triggers nuair a Baile armtha",
       "HomeGenie.SecuritySensor": "Bain úsáid as mar braiteoir slándála",
       "ConfigureOptions.Email.Recipients": "Liosta de na faighteoirí r-phoist scartha le camóga le haghaidh fógraí aláraim",
       "ConfigureOptions.System.ArmDelay": "Moill láimhe (soicindí)",
       "ConfigureOptions.System.SirenStartTime": "Moill Tosaigh Sirens (soicindí)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirens uas Am (soicindí, 0= gan teorainn)",
+      "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (soicindí, 0= gan teorainn)",
       "ConfigureOptions.Trigger.ArmedProgram": "Clár a rith nuair a arm",
       "ConfigureOptions.Trigger.DisarmedProgram": "Clár a rith nuair a dí-armáil",
       "ConfigureOptions.Trigger.TriggeredProgram": "Clár a rith nuair a spreagthach"
@@ -199,6 +216,10 @@
       "Title": "Logáil imeachtaí",
       "Description": "Taifead gníomhaíocht gléas.",
       "EventsLogger.EnableLogging": "Cumasaigh"
+    },
+    "111": {
+      "Title": "Cumraíocht an chliaint",
+      "Description": "Cuireann API i bhfeidhm chun próifílí cumraíochta an chliaint a bhainistiú a úsáidtear chun socruithe Chomhéadain agus deais a stóráil."
     },
     "400": {
       "Title": "Taispeántas modúil fíorúil",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Cnaipe laghduithe gile",
       "ConfigureOptions.DimmerInterval": "Céim dimming"
     },
+    "142": {
+      "Title": "Cuntas r-phoist",
+      "Description": "Stórálann sé eolas cuntais ríomhphoist a úsáideann cláir chórais chun ríomhphoist a sheoladh/a fháil.",
+      "ConfigureOptions.Email.Sender": "1. Seoladh r-phoist",
+      "ConfigureOptions.Email.SmtpServer": "2. Seoladh freastalaí SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Ainm úsáideora SMTP (roghnach)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Pasfhocal SMTP (roghnach)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port freastalaí SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Úsáideann freastalaí SMTP SSL"
+    },
     "145": {
       "Title": "Gléas Cliste",
       "Description": "Cas air/as an gléas bunaithe ar bhrath gluaisne agus solas comhthimpeallach.",
@@ -250,6 +281,13 @@
       "Title": "Cás Dathanna Éirí na Gréine",
       "Description": "Sampla cás \"Éirí na gréine\" le haghaidh soilse stiúir a athraíonn dath.",
       "Scenarios.SunriseColors": "Nasc le cás Sunrise Colours"
+    },
+    "910": {
+      "Title": "Brath réad",
+      "Description": "Bain úsáid as samhail YOLO11 réamh-oilte chun réada a bhrath.",
+      "ML.ObjectDetection": "Cumasaigh rudaí a bhrath",
+      "ML.ObjectDetection.TriggerDetect": "Liosta de na rudaí atá scartha le camóga (i mBéarla) a spreagfaidh an t-aláram. (m.sh.: cat, madra, duine, mála droma, mála taistil)",
+      "ConfigureOptions.Yolo.ModelPath": "Conair an chomhaid mhúnla YOLO11 (.onnx)"
     }
   }
 }

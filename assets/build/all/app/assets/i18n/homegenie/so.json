@@ -2,8 +2,8 @@
   " ": "-----",
   "welcome_to_homegenie": "Ku soo dhawoow HomeGenie!",
   "welcome_subtitle": "Sirdoonka Automation-ka ee la baran karo",
-  "not_configured_yet": "Nidaamka weli ma habaysan Wizard habaynta ayaa kaa caawin doona in aad nidaamkaaga kor u qaaddo oo aad ku socoto dhawr tillaabo.",
-  "system_config_start_with_base_and_backup": "Ka soo celi faylka kaydka",
+  "not_configured_yet": "Nidaamka weli ma habaysan Saaxir habaynta ayaa kaa caawin doona in aad nidaamkaaga kor u qaaddo oo aad ku socoto dhawr tillaabo.",
+  "system_config_start_with_base_and_backup": "Ka soo celinta faylka kaydka",
   "system_config_start_with_default_setup": "Dejinta asalka ah",
   "system_config_include_demo": "Ku dar demo oo leh hawsha aaladda la matalay",
   "system_config_additional_features": "Tilmaamo dheeri ah",
@@ -12,7 +12,7 @@
   "Protocols.UPnP": "Xakamaynta UPnP",
   "HomeAutomation.X10": "X10 xakameeyaha",
   "HomeAutomation.ZWave": "Xakameeyaha Z-Wave",
-  "HomeAutomation.ZigBee": "Xakameeyaha ZigBee",
+  "HomeAutomation.ZigBee": "Xakamaynta ZigBee",
   "device_port": "Dekedda aaladda",
   "device_driver": "Darawal",
   "flow_control": "Xakamaynta socodka",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "ka",
   "cronwizard_description_ending": "ku",
   "cronwizard_description_at": "at",
-  "cronwizard_add_time_slot": "Ku dar wakhti boos",
+  "cronwizard_add_time_slot": "Ku darso booska waqtiga",
   "cronwizard_add_exact_time": "Ku dar wakhti sax ah",
   "cronwizard_start_time": "Waqtiga bilawga",
   "cronwizard_end_time": "Waqtiga dhamaadka",
@@ -61,11 +61,11 @@
   "cronwizard_minuteselect_everynthminute": "Daqiiqado kasta oo la siiyo",
   "cronwizard_minuteselect_selectedminutes": "Daqiiqado la doortay",
   "cronwizard_hourselect_everyhour": "Saacad kasta",
-  "cronwizard_hourselect_everynthhour": "Saacad kasta oo la bixiyo",
+  "cronwizard_hourselect_everynthhour": "Saacad kasta oo la siiyo",
   "cronwizard_hourselect_selectedhours": "Saacadaha la doortay",
   "cronwizard_dayselect_everyday": "Maalin walba",
   "cronwizard_dayselect_selecteddays": "Maalmo la doortay",
-  "cronwizard_dayowselect_selecteddaysow": "Maalmaha toddobaadka ee la doortay",
+  "cronwizard_dayowselect_selecteddaysow": "Maalmaha toddobaadka la doortay",
   "cronwizard_monthselect_everymonth": "Bil walba",
   "cronwizard_monthselect_selectedmonths": "Bilaha la doortay",
   "cronwizard_schedule_set_exact_time": "Deji wakhtiga dhacdada",
@@ -76,9 +76,9 @@
   "cronwizard_action_set_action_to_execute": "Deji tallaabo aad ku fuliso dhacdooyinka dhacdadan",
   "cronwizard_action_preset_actions": "Ficilada hore loo dhigay",
   "cronwizard_action_preset_every_occurrence": "Dhacdo kasta",
-  "cronwizard_action_preset_slot_start": "Bilawga wakhti goynta",
+  "cronwizard_action_preset_slot_start": "Bilawga wakhtiga boosaska",
   "cronwizard_action_preset_slot_end": "Dhamaadka wakhtiga booska",
-  "cronwizard_action_custom_script": "Qoraal ficil gaar ah",
+  "cronwizard_action_custom_script": "Qoraalka ficilka gaarka ah",
   "cronwizard_action_no_action": "Wax ficil ah ma jiro",
   "cronwizard_action_schedule_variable_hint": "U isticmaal <span class=\"notranslate color-primary\">@ {{name}}</span> doorsoome ahaan tibaaxaha cron ama isticmaal <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> barnaamijyada otomaatiga ah si aad u tixraacdo dhacdadan.",
   "scheduler_preset_action_command_turn_on": "Daar",
@@ -106,7 +106,7 @@
   "run_program": "Orod barnaamijka",
   "enable_to_run_program": "Daar barnaamijka si aad u socodsiiso",
   "program_status_added": "Lagu daray",
-  "program_status_idle": "Iidle",
+  "program_status_idle": "Shaqo la'aan",
   "program_status_setup": "Dejinta",
   "program_status_running": "ordaya",
   "program_status_background": "Asalkii hore",
@@ -118,8 +118,8 @@
   "program_status_broken": "jabay",
   "program_status_compile": "Ururi",
   "automation_programming_guide": "Hagaha barnaamijka'",
-  "tap_to_disable": "Taabo si aad u damiso",
-  "tap_to_enable": "Taabo si aad awood ugu yeelatid",
+  "tap_to_disable": "Guji si aad u damiso",
+  "tap_to_enable": "Guji si aad karti ugu yeelato",
   "program_data": "Xogta barnaamijka",
   "visual_code": "Koodhka muuqaalka",
   "generated_code": "Koodhka la sameeyay",
@@ -132,7 +132,7 @@
   "capture_commands_description": "Ku dar dhammaan amarada gacanta lagu sameeyay barnaamijka.",
   "capture_commands_pause": "Haki inta u dhaxaysa amarada",
   "capture_pause_none": "Midna",
-  "capture_pause_asis": "Sida ay tahay",
+  "capture_pause_asis": "Siday tahay",
   "$options": {
     "16": {
       "Title": "Heerka Xusuusta",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Dib u soo celi heerarkii nalka ee u dambeeyay marka la shido",
       "HomeGenie.LevelMemory.SimulateOnly": "Isku day kaliya"
     },
+    "26": {
+      "Title": "Nalalka midabka",
+      "Description": "Tusaale Philips Hue nalalka is dhexgalka isticmaalaya HTTP API (V1). Isticmaalaha caadiga ah ee ku xidha buundada waa \"horumariyaha cusub\" waana in mar hore la furo.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) ciwaanka IP",
+      "ConfigureOptions.BridgeUsername": "Magaca isticmaale",
+      "ConfigureOptions.LightsCount": "Tirada nalalka"
+    },
     "34": {
       "Title": "Saadaasha Cimilada",
-      "Description": "Macluumaadka cimilada iyo saadaasha adeega Khariidadda Cimilada Furan. Si aad u dhaqaajiso widget-kan geli furaha API sax ah. Raac tilmaamaha https://openweathermap.org/appid si aad u hesho furaha API oo bilaash ah.",
+      "Description": "Macluumaadka cimilada iyo saadaasha adeega Khariidadda Cimilada Furan. Si aad u dhaqaajiso widget-kan gali furaha API sax ah. Raac tilmaamaha https://openweathermap.org/appid si aad u hesho furaha API oo bilaash ah.",
       "ConfigureOptions.Location": "Magaca magaalada",
       "ConfigureOptions.Language": "Luuqadda (tusaale. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Cusbooneysii inta u dhaxaysa (daqiiqado)",
@@ -159,7 +166,7 @@
       "ConfigureOptions.WebSockets": "Isticmaal WebSockets",
       "ConfigureOptions.TLS": "Daar TLS/SSL",
       "ConfigureOptions.Username": "Magaca isticmaale (ikhtiyaar)",
-      "ConfigureOptions.Password": "Furaha (ikhtiyaarka)",
+      "ConfigureOptions.Password": "Furaha (ikhtiyaar)",
       "ConfigureOptions.ImportExternal": "Soo rar qaybaha dibadda"
     },
     "78": {
@@ -182,12 +189,22 @@
       "EnergyManagement.EnergySavingLevel": "Heerka iftiinka ugu sarreeya (%)",
       "EnergyManagement.EnergySavingMode": "Daar"
     },
+    "88": {
+      "Title": "Kamarada IP-ga guud",
+      "Description": "Muujinta/muuska sawirka kaamirada IP-ga",
+      "IpCamera.ImageURL": "Sawirka kamaradda API URL (eeg dukumentiyada kamaradaada)",
+      "IpCamera.Username": "Magaca isticmaale (ikhtiyaar)",
+      "IpCamera.Password": "Furaha (ikhtiyaar)",
+      "Widget.Config.fps": "Frames ilbiriqsikii",
+      "Widget.Config.size": "Cabbirka widget"
+    },
     "90": {
       "Title": "Nidaamka Alaarmiga Amniga",
       "Description": "Isticmaal dareemayaasha iyo aaladaha kale si aad u hirgeliso nidaamka digniinta amniga.",
       "HomeGenie.SecurityAlarm": "U adeegso qaylo-dhaan / xinjir ahaan",
-      "HomeGenie.SecuritySensor": "U isticmaal sida dareemaha amniga",
-      "ConfigureOptions.Email.Recipients": "Liiska fariimaha e-mail-ka qaataha u kala saaraya wargelinta digniinta",
+      "HomeGenie.SecurityTriggerHome": "Sido kale kiciya marka guriga la hubeeyo",
+      "HomeGenie.SecuritySensor": "Isticmaal sida dareemaha amniga",
+      "ConfigureOptions.Email.Recipients": "Liiska fariimaha e-mail-ka qaataha u kala saaraya ogeysiisyada digniinta",
       "ConfigureOptions.System.ArmDelay": "Dib u dhigista gacanta (ilbiriqsi)",
       "ConfigureOptions.System.SirenStartTime": "Daahinta Bilawga Sirens (ilbiriqsi)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (ilbiriqsiyo, 0= aan xad lahayn)",
@@ -199,6 +216,10 @@
       "Title": "Dhacdooyinka gaynta",
       "Description": "Diiwaangeli hawsha qalabka",
       "EventsLogger.EnableLogging": "Daar"
+    },
+    "111": {
+      "Title": "Qaabeynta macmiilka",
+      "Description": "Waxay fulisaa API si ay u maamusho profile-ka qaabaynta macmiilka ee loo isticmaalo in lagu kaydiyo UI iyo setboards."
     },
     "400": {
       "Title": "Modules Virtual Demo",
@@ -212,7 +233,7 @@
     },
     "401": {
       "Title": "Demo - Toggle Albaabka",
-      "Description": "Waxay u ekaysiisay albaabka furan/xiran ee dareenka daaqada albaabka."
+      "Description": "Waxay u ekaysiisay albaabka furan/xiran ee dareenka albaabka-daaqadda."
     },
     "402": {
       "Title": "Muujinta - Mooshinka waa la ogaaday",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "badhanka dhimista iftiinka",
       "ConfigureOptions.DimmerInterval": "Tilaabada dhumucda"
     },
+    "142": {
+      "Title": "E-mail account",
+      "Description": "Waxay kaydisaa macluumaadka akoontiga iimaylka ee ay isticmaalaan barnaamijyada nidaamka dirida/mayliyada.",
+      "ConfigureOptions.Email.Sender": "1. Ciwaanka iimaylka",
+      "ConfigureOptions.Email.SmtpServer": "2. Ciwaanka serverka SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP username (ikhtiyaar)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP erayga sirta ah (ikhtiyaar)",
+      "ConfigureOptions.Email.SmtpPort": "5. Dekedda serverka SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Adeegga SMTP wuxuu isticmaalaa SSL"
+    },
     "145": {
       "Title": "Aalad Wacan",
       "Description": "Daar/dami aaladda iyadoo lagu salaynayo ogaanshaha dhaqdhaqaaqa iyo iftiinka agagaaraha.",
@@ -244,12 +275,19 @@
       "HomeGenie.SmartLights.OnMotionDetect": "Waxaa gacanta ku haya dareeme (ikhtiyaar)",
       "HomeGenie.SmartLights.CheckLuminosity": "Waxaa gacanta ku haya dareenka iftiinka (ikhtiyaar)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Demi ka dib wakhtiga hawl la'aanta (ilbiriqsi)",
-      "HomeGenie.SmartLights.MinLuminance": "Daar haddii iftiinku hoos yaallo:"
+      "HomeGenie.SmartLights.MinLuminance": "Daar haddii nalka uu hooseeyo:"
     },
     "8": {
       "Title": "Muuqaalka Midabbada Qorrax-u-soo-baxa",
       "Description": "Tusaale \"Sunrise\" seenyo loogu talagalay midab beddelka nalalka LED.",
-      "Scenarios.SunriseColors": "Isku xirka muuqaalka Midabka Qorrax-u-soo-baxa"
+      "Scenarios.SunriseColors": "Isku xirka muuqaalka Midabka Qorrax-u-soobax"
+    },
+    "910": {
+      "Title": "Ogaanshaha shayga",
+      "Description": "Soo ogow walxaha addoo isticmaalaya qaabka YOLO11 horay loo tababaray.",
+      "ML.ObjectDetection": "Daar ogaanshaha walxaha",
+      "ML.ObjectDetection.TriggerDetect": "Liiska walxaha kala-saaran (Ingiriisi) ee kicin doona qaylo-dhaanta. (tusaale: bisad, eey, qof, shandad dhabarka, shandad)",
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
     }
   }
 }

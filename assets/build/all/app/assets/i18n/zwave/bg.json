@@ -9,7 +9,7 @@
   "exclusion_message": "Натиснете бутона на устройството, което искате да премахнете от тази мрежа.",
   "task_duration_notice": "Изпълнението на тази задача може да отнеме до <strong>{{timeout}}</strong> секунди.",
   "adding_node": "Добавя се <strong class=\"color-accent\">{{node}}</strong> устройство, моля, изчакайте...",
-  "removing_node": "Премахва се <strong class=\"color-accent\">{{node}}</strong> устройството, моля, изчакайте...",
+  "removing_node": "<strong class=\"color-accent\">{{node}}</strong> на устройството се премахва, моля, изчакайте...",
   "node_added": "<strong class=\"color-accent\">{{node}}</strong> на устройството е добавен успешно",
   "node_removed": "<strong class=\"color-accent\">{{node}}</strong> на устройството е премахнат",
   "node_config": "Конфигурация на устройството",

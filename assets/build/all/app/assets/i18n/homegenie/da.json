@@ -118,8 +118,8 @@
   "program_status_broken": "Ødelagt",
   "program_status_compile": "Udarbejde",
   "automation_programming_guide": "Programmeringsvejledning'",
-  "tap_to_disable": "Tryk for at deaktivere",
-  "tap_to_enable": "Tryk for at aktivere",
+  "tap_to_disable": "Klik for at deaktivere",
+  "tap_to_enable": "Klik for at aktivere",
   "program_data": "Program data",
   "visual_code": "Visuel kode",
   "generated_code": "Genereret kode",
@@ -127,7 +127,7 @@
   "main_code": "Hoved",
   "context_code": "Sammenhæng",
   "main_code_empty_note": "\"Main\"-koden er tom. Brug \"Visuel kode\"-editoren til at generere denne kode: - Åbn kategorien \"Program\" fra kommandopaletten til venstre - Træk en blok af typen \"Main\" i det visuelle kodearbejdsområde - Tilføj andre kodeblokke i den for at implementere handlinger og logik i dette program Programmet \"Main\" kan enten køres manuelt eller autostartes baseret på betingelser, der til sidst er angivet i opsætningskoden.",
-  "setup_code_empty_note": "\"Setup\"-koden er tom. Brug \"Visuel kode\"-editoren til at generere denne kode: - Åbn kategorien \"Program\" fra kommandopaletten til venstre - Træk en blok af typen \"Opsætning\" i det visuelle kodearbejdsområde - Tilføj andre kodeblokke i den for at bestemme de forhold, der vil udløse \"Hoved\"-kodeeksekvering Denne kode evalueres hver gang en ny hændelse indtræffer og mindst én gang i minuttet.",
+  "setup_code_empty_note": "\"Setup\"-koden er tom. Brug \"Visuel kode\"-editoren til at generere denne kode: - Åbn kategorien \"Program\" fra kommandopaletten til venstre - Træk en blok af typen \"Opsætning\" i det visuelle kodearbejdsområde - Tilføj andre kodeblokke i den for at bestemme betingelserne, der vil udløse \"Hovedkodeeksekvering\" Denne kode bliver evalueret hver gang en ny hændelse indtræffer og mindst én gang i minuttet.",
   "capture_commands": "Optag kommandoer",
   "capture_commands_description": "Tilføj alle kommandoer udført manuelt på widgets til programmet.",
   "capture_commands_pause": "Pause mellem kommandoer",
@@ -137,8 +137,15 @@
     "16": {
       "Title": "Niveau Hukommelse",
       "Description": "Gem og genkald sidste lysdæmperniveau.",
-      "HomeGenie.LevelMemory": "Hent sidste lysniveau, når den er tændt",
+      "HomeGenie.LevelMemory": "Hent det sidste lysniveau, når den er tændt",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuler kun"
+    },
+    "26": {
+      "Title": "Farvede lys",
+      "Description": "Eksempel Philips Hue-lysintegration ved hjælp af HTTP API (V1). Standardbrugeren til at oprette forbindelse til broen er \"newdeveloper\", og den burde allerede være aktiveret.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adresse",
+      "ConfigureOptions.BridgeUsername": "Brugernavn",
+      "ConfigureOptions.LightsCount": "Antal lys"
     },
     "34": {
       "Title": "Vejrudsigt",
@@ -182,23 +189,37 @@
       "EnergyManagement.EnergySavingLevel": "Maks lysniveau (%)",
       "EnergyManagement.EnergySavingMode": "Aktiver"
     },
+    "88": {
+      "Title": "Generisk IP-kamera",
+      "Description": "Vis/rut billedfeed fra et IP-kamera.",
+      "IpCamera.ImageURL": "Camera image API URL (se dine kameradokumenter)",
+      "IpCamera.Username": "Brugernavn (valgfrit)",
+      "IpCamera.Password": "Adgangskode (valgfrit)",
+      "Widget.Config.fps": "Frames per sekund",
+      "Widget.Config.size": "Widget størrelse"
+    },
     "90": {
       "Title": "Sikkerhedsalarmsystem",
       "Description": "Brug sensorer og andre enheder til at implementere et sikkerhedsalarmsystem.",
       "HomeGenie.SecurityAlarm": "Bruges som alarm/blitz",
+      "HomeGenie.SecurityTriggerHome": "Udløses også, når væbnet Hjem",
       "HomeGenie.SecuritySensor": "Bruges som sikkerhedssensor",
       "ConfigureOptions.Email.Recipients": "Kommasepareret liste over modtageres e-mails til alarmmeddelelser",
       "ConfigureOptions.System.ArmDelay": "Tilkoblingsforsinkelse (sekunder)",
       "ConfigureOptions.System.SirenStartTime": "Sirenernes startforsinkelse (sekunder)",
       "ConfigureOptions.System.SirenMaxTime": "Sirener maks. tid (sekunder, 0=uendelig)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program til at køre, når tilkoblet",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Program til at køre, når de er frakoblet",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Program til at køre, når det er frakoblet",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program til at køre, når det udløses"
     },
     "95": {
       "Title": "Hændelseslogning",
       "Description": "Registrer enhedsaktivitet.",
       "EventsLogger.EnableLogging": "Aktiver"
+    },
+    "111": {
+      "Title": "Klientkonfiguration",
+      "Description": "Implementerer API til styring af klientens konfigurationsprofiler, der bruges til at gemme UI- og dashboardindstillinger."
     },
     "400": {
       "Title": "Demo af virtuelle moduler",
@@ -234,8 +255,18 @@
       "HomeGenie.RemoteControl.Enable": "Aktiver",
       "HomeGenie.RemoteControl.IRCode": "Skift knap",
       "ConfigureOptions.DimmerUpCode": "Knap til at øge lysstyrken",
-      "ConfigureOptions.DimmerDownCode": "Knap til sænkning af lysstyrke",
+      "ConfigureOptions.DimmerDownCode": "Knap til at reducere lysstyrken",
       "ConfigureOptions.DimmerInterval": "Dæmpningstrin"
+    },
+    "142": {
+      "Title": "E-mail konto",
+      "Description": "Gemmer e-mail-kontooplysninger, der bruges af systemprogrammer til at sende/modtage e-mails.",
+      "ConfigureOptions.Email.Sender": "1. E-mailadresse",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP-serveradresse",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP-brugernavn (valgfrit)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-adgangskode (valgfrit)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-serverport",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-server bruger SSL"
     },
     "145": {
       "Title": "Smart enhed",
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors Scenario",
       "Description": "Eksempel \"Sunrise\"-scenarie for farveskiftende LED-lys.",
       "Scenarios.SunriseColors": "Link til Sunrise Colors-scenariet"
+    },
+    "910": {
+      "Title": "Objektdetektion",
+      "Description": "Registrer objekter ved hjælp af en præ-trænet YOLO11-model.",
+      "ML.ObjectDetection": "Aktiver genkendelse af objekter",
+      "ML.ObjectDetection.TriggerDetect": "Kommasepareret liste over ting (på engelsk), der vil udløse alarmen. (fx: kat, hund, person, rygsæk, kuffert)",
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
     }
   }
 }

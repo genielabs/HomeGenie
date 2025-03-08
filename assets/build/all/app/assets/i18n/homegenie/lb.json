@@ -5,10 +5,10 @@
   "not_configured_yet": "System ass nach net konfiguréiert. Dëse Setup-Assistent hëlleft Iech fir Äre System an e puer Schrëtt ze lafen.",
   "system_config_start_with_base_and_backup": "Restauréieren aus Backupsatellit Fichier",
   "system_config_start_with_default_setup": "Standard Astellung",
-  "system_config_include_demo": "Enthält Demo mat simuléierter Apparataktivitéit",
+  "system_config_include_demo": "Enthält Demo mat simuléierten Apparataktivitéit",
   "system_config_additional_features": "Zousätzlech Funktiounen",
   "system_config_manual_setup": "Manuell Setup",
-  "interfaces": "Schnëttplazen",
+  "interfaces": "Interfaces",
   "Protocols.UPnP": "UPnP Controller",
   "HomeAutomation.X10": "X10 Controller",
   "HomeAutomation.ZWave": "Z-Wave Controller",
@@ -37,7 +37,7 @@
   "scheduler_wizard": "Scheduler Wizard",
   "schedule_event": "Event",
   "schedule_type_standard": "Standard",
-  "schedule_type_range": "Datum Range",
+  "schedule_type_range": "Datum Gamme",
   "schedule_type_cron": "Cron Ausdrock",
   "schedule_action": "Aktioun",
   "schedule_occurrence_preview": "Optriede Virschau",
@@ -118,15 +118,15 @@
   "program_status_broken": "Gebrach",
   "program_status_compile": "Kompiléieren",
   "automation_programming_guide": "Programméiere Guide'",
-  "tap_to_disable": "Tippen fir auszeschalten",
-  "tap_to_enable": "Tippen fir z'aktivéieren",
+  "tap_to_disable": "Klickt fir auszeschalten",
+  "tap_to_enable": "Klickt fir z'aktivéieren",
   "program_data": "Programm Daten",
   "visual_code": "Visuell Code",
   "generated_code": "Generéiert Code",
   "setup_code": "Setup",
   "main_code": "Main",
   "context_code": "Kontext",
-  "main_code_empty_note": "\"Main\" Code ass eidel. Benotzt den \"Visual Code\" Editor fir dëse Code ze generéieren: - Öffnen d'Kategorie \"Programm\" vun der Kommandopalette op der lénker Säit - Drag e Block vum Typ \"Main\" an der visueller Code Aarbechtsberäich - Füügt dobannen aner Codeblocken fir Aktiounen a Logik vun dësem Programm ëmzesetzen.",
+  "main_code_empty_note": "\"Main\" Code ass eidel. Benotzt den \"Visual Code\" Editor fir dëse Code ze generéieren: - Öffnen d'Kategorie \"Programm\" vun der Kommandopalette op der lénker Säit - Drag e Block vum Typ \"Main\" an der visueller Code Aarbechtsberäich - Füügt dobannen aner Codeblocken fir d'Aktiounen an d'Logik vun dësem Programm ëmzesetzen De Programm \"Main\" kann entweder manuell lafen oder automatesch gestart ginn baséiert op Bedéngungen, déi eventuell am Setup Code uginn.",
   "setup_code_empty_note": "\"Setup\" Code ass eidel. Benotzt den \"Visual Code\" Editor fir dëse Code ze generéieren: - Öffnen d'Kategorie \"Programm\" vun der Kommandopalette op der lénker Säit - Drag e Block vum Typ \"Setup\" an der visueller Code Aarbechtsberäich - Füügt dobannen aner Codeblocken derbäi fir d'Konditiounen ze bestëmmen déi d'\"Main\" Code Ausféierung ausléisen Dëse Code gëtt all Kéier bewäert wann en neit Event geschitt an op d'mannst eemol d'Minutt.",
   "capture_commands": "Capture Kommandoen",
   "capture_commands_description": "Füügt all Kommandoen manuell op Widgets un de Programm.",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Erënneren lescht Liichtjoer Niveau wann ageschalt",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuléieren nëmmen"
     },
+    "26": {
+      "Title": "Faarf Luuchten",
+      "Description": "Beispill Philips Hue Luuchten Integratioun mat HTTP API (V1). De Standard Benotzer fir mat der Bréck ze verbannen ass \"newdeveloper\" an et sollt scho aktivéiert sinn.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP Adress",
+      "ConfigureOptions.BridgeUsername": "Benotzernumm",
+      "ConfigureOptions.LightsCount": "Zuel vun Luuchten"
+    },
     "34": {
       "Title": "Wiederprevisioun",
-      "Description": "Wieder a Prognoseninformatioun vum Open Weather Map Service. Fir dëse Widget z'aktivéieren gitt e gültege API Schlëssel. Follegt d'Instruktioune op https://openweathermap.org/appid fir e gratis API Schlëssel ze kréien.",
+      "Description": "Wieder a Prognoseninformatioun vum Open Weather Map Service. Fir dëse Widget z'aktivéieren, gitt e gültege API Schlëssel. Follegt d'Instruktioune op https://openweathermap.org/appid fir e gratis API Schlëssel ze kréien.",
       "ConfigureOptions.Location": "Stad Numm",
       "ConfigureOptions.Language": "Sprooch (z.B. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Update Intervall (Minuten)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Max Liichtniveau (%)",
       "EnergyManagement.EnergySavingMode": "Aktivéieren"
     },
+    "88": {
+      "Title": "Generesch IP Kamera",
+      "Description": "Display / route Bildfeed vun enger IP Kamera.",
+      "IpCamera.ImageURL": "Kamera Bild API URL (kuckt Är Kamera Dokumenter)",
+      "IpCamera.Username": "Benotzernumm (optional)",
+      "IpCamera.Password": "Passwuert (optional)",
+      "Widget.Config.fps": "Frames pro Sekonn",
+      "Widget.Config.size": "Widget Gréisst"
+    },
     "90": {
       "Title": "Sécherheet Alarm System",
       "Description": "Benotzt Sensoren an aner Apparater fir e Sécherheetsalarmsystem ëmzesetzen.",
       "HomeGenie.SecurityAlarm": "Benotzt als Alarm / Strobe",
+      "HomeGenie.SecurityTriggerHome": "Ausléist och wann bewaffnet Heem",
       "HomeGenie.SecuritySensor": "Benotzt als Sécherheetssensor",
       "ConfigureOptions.Email.Recipients": "Komma getrennt Lëscht vun den Empfänger E-Maile fir Alarm Notifikatiounen",
       "ConfigureOptions.System.ArmDelay": "Arm Verzögerung (Sekonnen)",
@@ -199,6 +216,10 @@
       "Title": "Event Logbicher",
       "Description": "Rekord Apparat Aktivitéit.",
       "EventsLogger.EnableLogging": "Aktivéieren"
+    },
+    "111": {
+      "Title": "Client Configuratioun",
+      "Description": "Implementéiert API fir d'Konfiguratiounsprofile vum Client ze managen déi benotzt gi fir UI an Dashboards Astellungen ze späicheren."
     },
     "400": {
       "Title": "Virtuell Moduler Demo",
@@ -220,7 +241,7 @@
     },
     "410": {
       "Title": "Sensor Simulator",
-      "Description": "Emit zoufälleg Sensor Wäerter.",
+      "Description": "Emittéiert zoufälleg Sensor Wäerter.",
       "Simulator.Sensor.Temperature": "Temperatur Sensor",
       "Simulator.Sensor.Humidity": "Fiichtegkeet Sensor",
       "Simulator.Sensor.Luminance": "Liicht Sensor",
@@ -237,9 +258,19 @@
       "ConfigureOptions.DimmerDownCode": "Hellegkeet Ofsenkung Knäppchen",
       "ConfigureOptions.DimmerInterval": "Dimming Schrëtt"
     },
+    "142": {
+      "Title": "E-Mail Kont",
+      "Description": "Späichert E-Mail Kontoinformatioun déi vu Systemprogrammer benotzt gëtt fir E-Mailen ze schécken / ze kréien.",
+      "ConfigureOptions.Email.Sender": "1. E-Mail Adress",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP Server Adress",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP Benotzernumm (optional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP Passwuert (optional)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP Server Hafen",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP Server benotzen SSL"
+    },
     "145": {
       "Title": "Smart Apparat",
-      "Description": "Schalt den Apparat un / aus op Basis vu Bewegungserkennung an Ambient Liicht.",
+      "Description": "Schalt den Apparat un / aus op Basis vu Bewegungserkennung an Ambientlicht.",
       "HomeGenie.SmartLights.Enable": "Aktivéiert 'Smart Device'",
       "HomeGenie.SmartLights.OnMotionDetect": "Kontrolléiert duerch Sensor (optional)",
       "HomeGenie.SmartLights.CheckLuminosity": "Kontrolléiert duerch Liichtsensor (optional)",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Sonnenopgang Faarwen Szenario",
-      "Description": "Beispill \"Sunrise\" Szenario fir Faarf änneren LED Luuchten.",
+      "Description": "Beispill \"Sonnenopgang\" Szenario fir Faarf änneren LED Luuchten.",
       "Scenarios.SunriseColors": "Link zu Sunrise Faarwen Szenario"
+    },
+    "910": {
+      "Title": "Objekterkennung",
+      "Description": "Entdeckt Objete mat engem pre-trainéierten YOLO11 Modell.",
+      "ML.ObjectDetection": "Aktivéiert Objekterkennung",
+      "ML.ObjectDetection.TriggerDetect": "Komma-getrennt Lëscht vu Saachen (op Englesch) déi den Alarm ausléisen. (zB: Kaz, Hond, Persoun, Rucksak, Koffer)",
+      "ConfigureOptions.Yolo.ModelPath": "Wee vum YOLO11 Modelldatei (.onnx)"
     }
   }
 }

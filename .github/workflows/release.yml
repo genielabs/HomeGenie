@@ -19,11 +19,11 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 9.x
 
       - name: Build release
         run: |
-          dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net6.0
+          dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net9.0
           cat ./src/HomeGenie/release_info.xml
           ./assets/deploy/linux/build-all.sh
 

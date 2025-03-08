@@ -19,7 +19,7 @@
   "routing_info": "Routing Info",
   "association_groups": "Föreningsgrupper",
   "association_description": "Denna enhet skickar rapporter till noderna som ingår i associeringsgrupperna. För att ta emot rapporter från denna enhet, inkludera nod 1 (kontrollanten) i associeringsgrupperna.",
-  "associated_nodes": "Tillhörande noder",
+  "associated_nodes": "Associerade noder",
   "enter_node_number": "Ange nodnummer",
   "configuration_parameters": "Konfigurationsparametrar",
   "generic_parameter": "Generisk parameter",

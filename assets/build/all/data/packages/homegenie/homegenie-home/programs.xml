@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text")
-  .AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text")
+  .AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge (V1) IP address", "text")
+  .AddOption("BridgeUsername","newdeveloper", "Username", "text")
   .AddOption("LightsCount", "5", "Number of lights", "slider:1:32:1:5");
 
 Program.AddModules(
@@ -145,7 +145,7 @@ Program.GoBackground();
       <Id>philips-hue-bridge</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
-      <Checksum>085015A81EDA88B1EB73413C5212B558</Checksum>
+      <Checksum>DCE0B39D4DFCABC808C8640D673894D6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
@@ -426,23 +426,32 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program
-  .AddModules("Media.IpCamera", 1, 10, "Sensor", "homegenie/generic/camerainput")
-  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
-  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.UseProxy", "Get images via proxy", "checkbox")
-  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Fps", "Max frames per second", "slider:1:20:1:5")
-  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text")
-  .AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password")
-  .Run();
+    <ScriptSetup>const string domain = "Media.IpCamera";
+const string widget = "homegenie/generic/camerainput";
+const string filter = $"Sensor:Widget.DisplayModule={widget}";
+Program.Setup(() =&gt; {
+  Program
+    .AddModules(domain, 1, 10, "Sensor", widget)
+    .AddFeature(domain, filter, "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
+    .AddFeature(domain, filter, "Widget.Config.fps", "Max frames per second", "slider:1:20:1:5")
+    .AddFeature(domain, filter, "IpCamera.Username", "Username (optional)", "text")
+    .AddFeature(domain, filter, "IpCamera.Password", "Password (optional)", "password")
+    .AddFeature(domain, filter, "Widget.Config.size", "Widget size", "select:small=small,medium=medium,large=big,auto=auto");
+});
+Program.Run();
 </ScriptSetup>
     <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
 for (int cam = 1; cam &lt; 10; cam++)
 {
   var module = cameraModules.WithAddress(cam.ToString()).Get();
-  module.Parameter("Image.URL").Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
+  var cameraUrl = module.Parameter("IpCamera.ImageURL");
+  if (String.IsNullOrEmpty(cameraUrl?.Value))
+  {
+    cameraUrl.Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
+  }
 }
 
-// - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/...
+// - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;camera_address&gt;/...
 Api.Handle("Media.IpCamera/", ( args ) =&gt; {
   var request = Api.Parse(args);
   //string domain = reqs[0];
@@ -456,7 +465,7 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
     //
     switch(command)
     {
-      // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/Camera.GetPicture
+      // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;camera_address&gt;/Camera.GetPicture
       case "Camera.GetPicture":
         data = Net
           .WebService(module.Parameter("IpCamera.ImageURL").Value)
@@ -466,7 +475,7 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
       case "Camera.MotionDetected":
         data = "{ 'ResponseValue' : 'OK' }";
         // blink Sensor.MotionDetect parameter
-        module.Emit("Sensor.MotionDetect", "255", "Generic IP Camera");
+        module.Emit("Sensor.MotionDetect", "1", "Generic IP Camera");
         Pause(1);
         module.Emit("Sensor.MotionDetect", "0", "Generic IP Camera");
         break;
@@ -491,54 +500,18 @@ Program.GoBackground();
       <Id>generic-ip-camera</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>8428BA3B80AD180FFA54FCE92FD47EA0</Checksum>
+      <Checksum>DC42BC9DA16E2B79CD687197FF293CE9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
     <Name>Generic IP Camera</Name>
-    <Description>Generic IP Camera driver.</Description>
+    <Description>Generic IP camera module.</Description>
     <Group>Devices and Things</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.ImageURL</Property>
-        <Description>Camera image API URL (see your camera docs)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.UseProxy</Property>
-        <Description>Get images via proxy</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:1:20:1:5</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.Fps</Property>
-        <Description>Max frames per second</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.Username</Property>
-        <Description>Username (optional)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>password</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.Password</Property>
-        <Description>Password (optional)</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
@@ -764,6 +737,146 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+  Program
+      .AddFeature("", "Sensor:Widget.DisplayModule=homegenie/generic/camerainput", "ML.ObjectDetection", "Enable objects detection", "checkbox")
+      .AddFeature(
+          "",
+          "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+          "ML.ObjectDetection.TriggerDetect",
+          "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
+          "text"
+      ).AddOption("Yolo.ModelPath", Data.GetFolder() + "/yolo11n.onnx", "Path of YOLO11 model file (.onnx)", "text");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var inputModules = Modules.WithFeature("ML.ObjectDetection");
+
+// Restart program if configuration has been changed to apply new settings.
+When.ModuleParameterChanged( (module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    if (Program.IsRunning) Program.Restart();
+    return true;
+  }
+  return true;
+});
+
+var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
+if (String.IsNullOrEmpty(yoloModelPath))
+{
+    Program.Notify($"Configure the path of YOLO11 'detect' model (.onnx file). {OptionButtons}");
+    Pause(5);
+    return;
+}
+
+
+// For details about this implemention see
+// *ML.net* and *YoloSharp* documentation
+
+
+while (Program.IsRunning)
+{
+    if (inputModules.SelectedModules.Count == 0) {
+        Pause(2);
+        continue;
+    }
+    inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+
+        try 
+        {
+            using var detectPredictor = new YoloPredictor(yoloModelPath);
+
+            var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
+
+            //Console.WriteLine($"Result: {result}");
+            //Console.WriteLine($"Speed:  {result.Speed}");
+
+            var jsonResults = JsonConvert.SerializeObject(result);
+            var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
+            // Emit json data for the video player (overlay data)
+            module.Emit("Widget.Data.VideoPlayer.Overlay", jsonResults);
+
+            // Emit "Sensor.ObjectDetect" event if anything
+            // mathing the configured "TriggerDetect" list
+            // was detected in the scene.
+            string[] matchList = module
+                .Parameter("ML.ObjectDetection.TriggerDetect")?.Value?.Split(',')
+                .Select(p =&gt; p.Trim()).ToArray();
+            if (matchList.Length &gt; 0)
+            {
+                var matchedSubjects = new List&lt;string&gt;();
+                foreach (var r in result)
+                {
+                    var subject = r.Name.Name;
+                    if (matchList.Contains(subject) &amp;&amp; !matchedSubjects.Contains(subject))
+                    {
+                        matchedSubjects.Add(subject);
+                    }
+                }
+                if (matchedSubjects.Count &gt; 0)
+                {
+                    // trigger alarm    
+                    module.Emit("Sensor.ObjectDetect", "1");
+                    module.Emit("Sensor.ObjectDetect.Subject", String.Join(", ", matchedSubjects.ToArray()));
+                    Pause(.1);
+                    module.Emit("Sensor.ObjectDetect", "0");
+                }
+
+            }
+
+        } catch (Exception e) {
+            //Console.WriteLine(e.Message);
+            Pause(2);
+        }
+
+    });
+
+    // pause half a second between each processed frame
+    Pause(.5);
+}
+</ScriptSource>
+    <ScriptContext>const string OptionButtons = "[program_configure,program_disable]";
+</ScriptContext>
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>object-detection</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>63030842108DA6154C3BEF4315DC96A5</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>910</Address>
+    <Name>Object Detection</Name>
+    <Description>Detect objects using a pre-trained YOLO11 model.
+</Description>
+    <Group>Data Processing</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.ObjectDetection</Property>
+        <Description>Enable objects detection</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.ObjectDetection.TriggerDetect</Property>
+        <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
 var alarmTypes = "Siren,Light,Dimmer,Color,Switch";
 Program.Setup(() =&gt; {
@@ -858,6 +971,7 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
           || parameter.Name == "Sensor.Generic"
           || parameter.Name == "Sensor.Alarm"
           || parameter.Name == "Sensor.Tamper"
+          || parameter.Name == "Sensor.ObjectDetect"
           || parameter.Name == "Sensor.MotionDetect"
           || parameter.Name == "Sensor.DoorWindow"
           || parameter.Name == "Sensor.Flood"
@@ -1007,16 +1121,16 @@ while (Program.IsRunning)
 const string STATUS_ARMED_AWAY = "Away";
 const string STATUS_ARMED_HOME = "Home";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>security-alarm-system</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>143756F2490B4D36496A87B92DDC33A7</Checksum>
+      <Checksum>8A0DECD513D880B3AC7D3F1819AC4633</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1652,7 +1766,7 @@ while (Program.IsRunning)
 const uint STATE_OFF = 0;
 const string WEMO_DOMAIN = "HomeAutomation.WeMo";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

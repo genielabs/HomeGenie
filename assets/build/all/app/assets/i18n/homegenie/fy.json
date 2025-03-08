@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Begjin by it {{start}} .<span class=\"notranslate\"><br/></span> Stel tiid slot ein.",
   "cronwizard_bindings_define_types_and_modules": "Definiearje soarten en modules dy't ûnderwurpen binne oan dit skema (opsjoneel)",
   "cronwizard_bindings_select_types": "Selektearje soarten",
-  "cronwizard_action_set_action_to_execute": "Stel aksje yn om út te fieren op foarfallen fan dit barren",
+  "cronwizard_action_set_action_to_execute": "Stel aksje yn om út te fieren op foarkommen fan dit barren",
   "cronwizard_action_preset_actions": "Foarynstelde aksjes",
   "cronwizard_action_preset_every_occurrence": "Op elke foarfal",
   "cronwizard_action_preset_slot_start": "By it begjin fan in tiid slot",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Sizze",
   "scheduler_preset_action_config_message": "Berjocht",
   "save_and_build": "Bewarje en bouwe",
-  "toggle_widgets_preview": "Widgetfoarbyld wikselje",
+  "toggle_widgets_preview": "Skeakelje widgetfoarbyld",
   "stop_program": "Stopje programma",
   "run_program": "Programma útfiere",
   "enable_to_run_program": "Aktivearje programma om it út te fieren",
@@ -118,8 +118,8 @@
   "program_status_broken": "Brutsen",
   "program_status_compile": "Kompilearje",
   "automation_programming_guide": "Programming guide'",
-  "tap_to_disable": "Tik om út te skeakeljen",
-  "tap_to_enable": "Tik om yn te skeakeljen",
+  "tap_to_disable": "Klikje om út te skeakeljen",
+  "tap_to_enable": "Klikje om yn te skeakeljen",
   "program_data": "Programma gegevens",
   "visual_code": "Visual koade",
   "generated_code": "Generearre koade",
@@ -127,7 +127,7 @@
   "main_code": "Foarnaamste",
   "context_code": "Kontekst",
   "main_code_empty_note": "\"Main\" koade is leech. Brûk de \"Visuele koade\" bewurker om dizze koade te generearjen: - Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant - Sleep in blok fan type \"Main\" yn 'e fisuele koade wurkromte - Foegje oare koadeblokken deryn ta om aksjes en logika fan dit programma te ymplementearjen.",
-  "setup_code_empty_note": "\"Setup\" koade is leech. Brûk de \"Visuele koade\" bewurker om dizze koade te generearjen: - Iepenje de kategory \"Programma\" fanút it kommandopalet oan 'e lofterkant - Sleep in blok fan type \"Setup\" yn 'e fisuele koade-wurkromte - Foegje oare koadeblokken deryn ta om de betingsten te bepalen dy't de útfiering fan 'Main' koade sille triggerje.",
+  "setup_code_empty_note": "\"Setup\" koade is leech. Brûk de \"Visuele koade\"-bewurker om dizze koade te generearjen: - Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant - Sleep in blok fan type \"Setup\" yn 'e fisuele koade-wurkromte - Foegje oare koadeblokken deryn ta om de betingsten te bepalen dy't de útfiering fan 'Main' koade sille triggerje.",
   "capture_commands": "Capture kommando",
   "capture_commands_description": "Foegje alle kommando's mei de hân op widgets ta oan it programma.",
   "capture_commands_pause": "Paus tusken kommando's",
@@ -140,10 +140,17 @@
       "HomeGenie.LevelMemory": "Recall lêste ljocht nivo doe't ynskeakele",
       "HomeGenie.LevelMemory.SimulateOnly": "Allinnich simulearje"
     },
+    "26": {
+      "Title": "Kleur ljochten",
+      "Description": "Foarbyld Philips Hue-ljochtyntegraasje mei HTTP API (V1). De standert brûker om te ferbinen mei de brêge is \"newdeveloper\" en it moat al ynskeakele wêze.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adres",
+      "ConfigureOptions.BridgeUsername": "Brûkersnamme",
+      "ConfigureOptions.LightsCount": "Oantal ljochten"
+    },
     "34": {
       "Title": "Wettervorhersage",
       "Description": "Wetter- en waarberjochtynformaasje fan Open Weather Map-tsjinst. Fier in jildige API-kaai yn om dizze widget te aktivearjen. Folgje ynstruksjes op https://openweathermap.org/appid om in fergese API-kaai te krijen.",
-      "ConfigureOptions.Location": "Stêdsnamme",
+      "ConfigureOptions.Location": "Stêd namme",
       "ConfigureOptions.Language": "Taal (bgl. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Update ynterval (minuten)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API-kaai (APPID)"
@@ -164,7 +171,7 @@
     },
     "78": {
       "Title": "Smart termostaat",
-      "Description": "Brûk elke temperatuersensor en tûke switch om thermostaatfunksjonaliteit te ymplementearjen.",
+      "Description": "Brûk elke temperatuersensor en tûke switch om thermostaatfunksjonaliteit út te fieren.",
       "VirtualThermostat.TemperatureModule": "Temperatuer sensor",
       "VirtualThermostat.HeatingSwitchModule": "Ferwaarming switch",
       "VirtualThermostat.CoolingSwitchModule": "Cooling switch",
@@ -182,23 +189,37 @@
       "EnergyManagement.EnergySavingLevel": "Maksimum ljochtnivo (%)",
       "EnergyManagement.EnergySavingMode": "Ynskeakelje"
     },
+    "88": {
+      "Title": "Generic IP kamera",
+      "Description": "Display / rûte ôfbylding feed fan in IP kamera.",
+      "IpCamera.ImageURL": "Kamera-ôfbylding API URL (sjoch jo kamera-dokuminten)",
+      "IpCamera.Username": "Brûkersnamme (opsjoneel)",
+      "IpCamera.Password": "Wachtwurd (opsjoneel)",
+      "Widget.Config.fps": "Frames per sekonde",
+      "Widget.Config.size": "Widget grutte"
+    },
     "90": {
       "Title": "Feiligens Alarmsysteem",
       "Description": "Brûk sensoren en oare apparaten om in befeiligingsalarmsysteem út te fieren.",
       "HomeGenie.SecurityAlarm": "Brûk as alarm / strobe",
+      "HomeGenie.SecurityTriggerHome": "Trigger ek as bewapene Thús",
       "HomeGenie.SecuritySensor": "Brûk as feiligens sensor",
       "ConfigureOptions.Email.Recipients": "Komma-skieden list mei e-postberjochten fan ûntfangers foar alarmnotifikaasjes",
       "ConfigureOptions.System.ArmDelay": "Armfertraging (sekonden)",
       "ConfigureOptions.System.SirenStartTime": "Sirenes start fertraging (sekonden)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenes max Tiid (sekonden, 0 = ûneinich)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programma om te rinnen as bewapene",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Programma om te rinnen as it útskeakele is",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Programma om te rinnen as útskeakele",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programma om te rinnen as trigger"
     },
     "95": {
       "Title": "Eveneminten logging",
       "Description": "Record apparaat aktiviteit.",
       "EventsLogger.EnableLogging": "Ynskeakelje"
+    },
+    "111": {
+      "Title": "Client konfiguraasje",
+      "Description": "Implementearret API foar it behearen fan konfiguraasjeprofilen fan kliïnten dy't wurde brûkt om UI- en dashboardynstellingen op te slaan."
     },
     "400": {
       "Title": "Firtuele Modules Demo",
@@ -207,8 +228,8 @@
       "Sensor.Luminance": "Luminânsje wearde",
       "Sensor.MotionDetect": "Bewegingsdeteksjestatus",
       "Status.Battery": "Batterij nivo",
-      "Sensor.DoorWindow": "Doar-/finstersensorstatus (iepen/sletten)",
-      "Status.Level": "Status skeakelje (oan/út)"
+      "Sensor.DoorWindow": "Doar / finster sensor status (iepen / sluten)",
+      "Status.Level": "Skeakelje status (oan/út)"
     },
     "401": {
       "Title": "Demo - Toggle Door",
@@ -230,12 +251,22 @@
     },
     "505": {
       "Title": "Remote Control",
-      "Description": "Kontrolearje it apparaat mei in ôfstân (IR of RF).",
+      "Description": "Behearskje it apparaat mei in ôfstân (IR of RF).",
       "HomeGenie.RemoteControl.Enable": "Ynskeakelje",
       "HomeGenie.RemoteControl.IRCode": "Skeakelje knop",
       "ConfigureOptions.DimmerUpCode": "Knop foar ferheging fan helderheid",
       "ConfigureOptions.DimmerDownCode": "Knop foar fermindering fan helderheid",
       "ConfigureOptions.DimmerInterval": "Dimmen stap"
+    },
+    "142": {
+      "Title": "E-post akkount",
+      "Description": "Bewarret ynformaasje oer e-post akkount brûkt troch systeemprogramma's foar it ferstjoeren/ûntfangen fan e-post.",
+      "ConfigureOptions.Email.Sender": "1. E-postadres",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP tsjinner adres",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP brûkersnamme (opsjoneel)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-wachtwurd (opsjoneel)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP tsjinner haven",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-tsjinner brûke SSL"
     },
     "145": {
       "Title": "Smart apparaat",
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors Senario",
       "Description": "Foarbyld \"Sunrise\" senario foar kleur feroarjende LED-ljochten.",
       "Scenarios.SunriseColors": "Link nei Sunrise Colors senario"
+    },
+    "910": {
+      "Title": "Objektdeteksje",
+      "Description": "Detektearje objekten mei in pre-trained YOLO11-model.",
+      "ML.ObjectDetection": "Objektdeteksje ynskeakelje",
+      "ML.ObjectDetection.TriggerDetect": "Komma-skieden list mei dingen (yn it Ingelsk) dy't it alaarm sille trigger. (bgl: kat, hûn, persoan, rêchsek, koffer)",
+      "ConfigureOptions.Yolo.ModelPath": "Paad fan YOLO11-modelbestân (.onnx)"
     }
   }
 }

@@ -17,7 +17,7 @@
   "device_driver": "Driver",
   "flow_control": "Kontrol ng daloy",
   "controller": "Controller",
-  "programs": "Mga programa",
+  "programs": "Mga Programa",
   "repositories": "Mga repositoryo",
   "packages": "Mga package",
   "installed_packages": "Mga naka-install na pakete",
@@ -38,7 +38,7 @@
   "schedule_event": "Kaganapan",
   "schedule_type_standard": "Pamantayan",
   "schedule_type_range": "Saklaw ng petsa",
-  "schedule_type_cron": "Ekspresyon ng cron",
+  "schedule_type_cron": "Cron expression",
   "schedule_action": "Aksyon",
   "schedule_occurrence_preview": "Preview ng pangyayari",
   "time_schedule": "Iskedyul",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Sa pagtatapos ng isang puwang ng oras",
   "cronwizard_action_custom_script": "Custom na script ng aksyon",
   "cronwizard_action_no_action": "Walang aksyon",
-  "cronwizard_action_schedule_variable_hint": "Gamitin <span class=\"notranslate color-primary\">@ {{name}}</span> bilang variable sa mga expression ng cron o gamitin <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> sa mga automation program para i-reference ang event na ito.",
+  "cronwizard_action_schedule_variable_hint": "Gamitin <span class=\"notranslate color-primary\">@ {{name}}</span> bilang variable sa mga cron expression o gamitin <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> sa mga automation program para i-reference ang event na ito.",
   "scheduler_preset_action_command_turn_on": "I-on",
   "scheduler_preset_action_command_turn_off": "Patayin",
   "scheduler_preset_action_command_set_level": "Itakda ang antas",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "I-toggle ang preview ng mga widget",
   "stop_program": "Itigil ang programa",
   "run_program": "Patakbuhin ang programa",
-  "enable_to_run_program": "Paganahin ang program upang patakbuhin ito",
+  "enable_to_run_program": "Paganahin ang programa upang patakbuhin ito",
   "program_status_added": "Idinagdag",
   "program_status_idle": "Idle",
   "program_status_setup": "Setup",
@@ -118,12 +118,12 @@
   "program_status_broken": "Nasira",
   "program_status_compile": "Mag-compile",
   "automation_programming_guide": "Gabay sa programming'",
-  "tap_to_disable": "I-tap para i-disable",
-  "tap_to_enable": "I-tap para paganahin",
+  "tap_to_disable": "I-click upang huwag paganahin",
+  "tap_to_enable": "I-click upang paganahin",
   "program_data": "Data ng programa",
   "visual_code": "Visual code",
   "generated_code": "Binuo na code",
-  "setup_code": "Pag-setup",
+  "setup_code": "Setup",
   "main_code": "Pangunahing",
   "context_code": "Konteksto",
   "main_code_empty_note": "Walang laman ang \"Pangunahing\" code. Gamitin ang editor ng \"Visual code\" upang buuin ang code na ito: - Buksan ang kategoryang \"Programa\" mula sa command palette sa kaliwa - I-drag ang isang bloke ng uri ng \"Main\" sa workspace ng visual code - Magdagdag sa loob nito ng iba pang mga bloke ng code upang ipatupad ang mga aksyon at lohika ng program na ito Ang program na \"Main\" ay maaaring manual na patakbuhin o awtomatikong simulan batay sa mga kondisyon na kalaunan ay ibinigay sa Setup code.",
@@ -132,7 +132,7 @@
   "capture_commands_description": "Idagdag ang lahat ng mga utos na ginawa nang manu-mano sa mga widget sa programa.",
   "capture_commands_pause": "I-pause sa pagitan ng mga utos",
   "capture_pause_none": "wala",
-  "capture_pause_asis": "Tulad ng",
+  "capture_pause_asis": "gaya ng",
   "$options": {
     "16": {
       "Title": "Antas ng Memorya",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Alalahanin ang huling antas ng ilaw kapag naka-on",
       "HomeGenie.LevelMemory.SimulateOnly": "Gayahin lamang"
     },
+    "26": {
+      "Title": "Mga kulay na ilaw",
+      "Description": "Halimbawa Philips Hue lights integration gamit ang HTTP API (V1). Ang default na user na kumonekta sa tulay ay \"newdeveloper\" at dapat ay naka-enable na ito.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP address",
+      "ConfigureOptions.BridgeUsername": "Username",
+      "ConfigureOptions.LightsCount": "Bilang ng mga ilaw"
+    },
     "34": {
       "Title": "Pagtataya ng Panahon",
-      "Description": "Weather at impormasyon ng forecast mula sa serbisyo ng Open Weather Map. Upang i-activate ang widget na ito maglagay ng wastong API key. Sundin ang mga tagubilin sa https://openweathermap.org/appid para makakuha ng libreng API key.",
+      "Description": "Weather at impormasyon ng forecast mula sa serbisyo ng Open Weather Map. Upang i-activate ang widget na ito, maglagay ng wastong API key. Sundin ang mga tagubilin sa https://openweathermap.org/appid para makakuha ng libreng API key.",
       "ConfigureOptions.Location": "Pangalan ng lungsod",
       "ConfigureOptions.Language": "Wika (hal. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "I-update ang pagitan (minuto)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Max na antas ng liwanag (%)",
       "EnergyManagement.EnergySavingMode": "Paganahin"
     },
+    "88": {
+      "Title": "Pangkalahatang IP camera",
+      "Description": "Ipakita/ruta ang feed ng imahe mula sa isang IP camera.",
+      "IpCamera.ImageURL": "URL ng API ng larawan ng camera (tingnan ang iyong mga doc ng camera)",
+      "IpCamera.Username": "Username (opsyonal)",
+      "IpCamera.Password": "Password (opsyonal)",
+      "Widget.Config.fps": "Mga frame bawat segundo",
+      "Widget.Config.size": "Laki ng widget"
+    },
     "90": {
       "Title": "Security Alarm System",
       "Description": "Gumamit ng mga sensor at iba pang device para magpatupad ng security alarm system.",
       "HomeGenie.SecurityAlarm": "Gamitin bilang alarma/strobe",
+      "HomeGenie.SecurityTriggerHome": "Nagti-trigger din kapag armadong Home",
       "HomeGenie.SecuritySensor": "Gamitin bilang sensor ng seguridad",
       "ConfigureOptions.Email.Recipients": "Pinaghiwalay ng kuwit ang listahan ng mga tatanggap ng mga e-mail para sa mga abiso ng alarma",
       "ConfigureOptions.System.ArmDelay": "Pagkaantala ng braso (segundo)",
@@ -200,12 +217,16 @@
       "Description": "I-record ang aktibidad ng device.",
       "EventsLogger.EnableLogging": "Paganahin"
     },
+    "111": {
+      "Title": "Configuration ng kliyente",
+      "Description": "Nagpapatupad ng API para sa pamamahala ng mga profile ng configuration ng kliyente na ginagamit upang mag-imbak ng mga setting ng UI at mga dashboard."
+    },
     "400": {
       "Title": "Demo ng Virtual Module",
       "Description": "Manu-manong itakda ang mga halaga ng virtual device.",
       "Sensor.Temperature": "Halaga ng temperatura",
       "Sensor.Luminance": "Halaga ng luminance",
-      "Sensor.MotionDetect": "Katayuan ng pagtukoy ng paggalaw",
+      "Sensor.MotionDetect": "Katayuan ng pag-detect ng paggalaw",
       "Status.Battery": "Antas ng baterya",
       "Sensor.DoorWindow": "Katayuan ng sensor ng pinto/window (bukas/sarado)",
       "Status.Level": "Lumipat ng katayuan (on/off)"
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Button ng pagbaba ng liwanag",
       "ConfigureOptions.DimmerInterval": "Pagdidilim na hakbang"
     },
+    "142": {
+      "Title": "E-mail account",
+      "Description": "Nag-iimbak ng impormasyon ng e-mail account na ginagamit ng mga program ng system para sa pagpapadala/pagtanggap ng mga email.",
+      "ConfigureOptions.Email.Sender": "1. E-Mail address",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP server address",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP username (opsyonal)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP password (opsyonal)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP server port",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ng SSL ang SMTP server"
+    },
     "145": {
       "Title": "Smart Device",
       "Description": "I-on/i-off ang device batay sa motion detection at ambient light.",
@@ -249,7 +280,14 @@
     "8": {
       "Title": "Sunrise Colors Scenario",
       "Description": "Halimbawang senaryo ng \"Sunrise\" para sa pagpapalit ng kulay ng mga LED na ilaw.",
-      "Scenarios.SunriseColors": "Mag-link sa senaryo ng Sunrise Colors"
+      "Scenarios.SunriseColors": "Link sa Sunrise Colors scenario"
+    },
+    "910": {
+      "Title": "Pagtuklas ng bagay",
+      "Description": "Mag-detect ng mga bagay gamit ang isang pre-trained na modelo ng YOLO11.",
+      "ML.ObjectDetection": "Paganahin ang pagtuklas ng mga bagay",
+      "ML.ObjectDetection.TriggerDetect": "Listahan ng mga bagay na pinaghihiwalay ng kuwit (sa English) na magti-trigger ng alarma. (hal: pusa, aso, tao, backpack, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
     }
   }
 }

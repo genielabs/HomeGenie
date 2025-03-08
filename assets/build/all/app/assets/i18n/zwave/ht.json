@@ -18,7 +18,7 @@
   "manufacturer_specific": "Manifakti espesifik",
   "routing_info": "Enfòmasyon sou routage",
   "association_groups": "Gwoup asosyasyon yo",
-  "association_description": "Aparèy sa yo voye rapò bay nœuds ki enkli nan gwoup asosyasyon yo. Yo nan lòd yo resevwa rapò ki soti nan aparèy sa a, enkli ne 1 (kontwolè a) nan gwoup asosyasyon yo.",
+  "association_description": "Aparèy sa yo voye rapò bay nœuds ki enkli nan gwoup asosyasyon yo. Yo nan lòd yo resevwa rapò ki soti nan aparèy sa a, enkli ne 1 (kontwolè a) nan gwoup yo asosyasyon.",
   "associated_nodes": "Nœuds ki asosye yo",
   "enter_node_number": "Antre nimewo ne",
   "configuration_parameters": "Paramèt konfigirasyon",

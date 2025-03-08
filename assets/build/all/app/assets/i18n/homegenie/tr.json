@@ -118,8 +118,8 @@
   "program_status_broken": "Kırık",
   "program_status_compile": "Derlemek",
   "automation_programming_guide": "Programlama kılavuzu'",
-  "tap_to_disable": "Devre dışı bırakmak için dokunun",
-  "tap_to_enable": "Etkinleştirmek için dokunun",
+  "tap_to_disable": "Devre dışı bırakmak için tıklayın",
+  "tap_to_enable": "Etkinleştirmek için tıklayın",
   "program_data": "Program verileri",
   "visual_code": "Görsel kod",
   "generated_code": "Oluşturulan kod",
@@ -139,6 +139,13 @@
       "Description": "Son dimmer seviyesini kaydedin ve geri çağırın.",
       "HomeGenie.LevelMemory": "Açıldığında son ışık seviyesini hatırla",
       "HomeGenie.LevelMemory.SimulateOnly": "Sadece simüle et"
+    },
+    "26": {
+      "Title": "Renkli ışıklar",
+      "Description": "HTTP API (V1) kullanan örnek Philips Hue ışık entegrasyonu. Köprüye bağlanmak için varsayılan kullanıcı \"newdeveloper\"dır ve zaten etkinleştirilmiş olmalıdır.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adresi",
+      "ConfigureOptions.BridgeUsername": "Kullanıcı adı",
+      "ConfigureOptions.LightsCount": "Işık sayısı"
     },
     "34": {
       "Title": "Hava tahmini",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimum ışık seviyesi (%)",
       "EnergyManagement.EnergySavingMode": "Olanak vermek"
     },
+    "88": {
+      "Title": "Genel IP kamera",
+      "Description": "IP kameradan gelen görüntü akışını görüntüleyin/yönlendirin.",
+      "IpCamera.ImageURL": "Kamera görüntü API URL'si (kamera belgelerinize bakın)",
+      "IpCamera.Username": "Kullanıcı adı (isteğe bağlı)",
+      "IpCamera.Password": "Şifre (isteğe bağlı)",
+      "Widget.Config.fps": "Saniyedeki kare sayısı",
+      "Widget.Config.size": "Widget boyutu"
+    },
     "90": {
       "Title": "Güvenlik Alarm Sistemi",
       "Description": "Güvenlik alarm sistemini uygulamak için sensörler ve diğer cihazları kullanın.",
       "HomeGenie.SecurityAlarm": "Alarm/flaş olarak kullanın",
+      "HomeGenie.SecurityTriggerHome": "Ayrıca Ana Sayfa silahlandırıldığında da tetiklenir",
       "HomeGenie.SecuritySensor": "Güvenlik sensörü olarak kullanın",
       "ConfigureOptions.Email.Recipients": "Alarm bildirimleri için alıcı e-postalarının virgülle ayrılmış listesi",
       "ConfigureOptions.System.ArmDelay": "Kol gecikmesi (saniye)",
@@ -199,6 +216,10 @@
       "Title": "Olayların kaydı",
       "Description": "Cihaz etkinliğini kaydedin.",
       "EventsLogger.EnableLogging": "Olanak vermek"
+    },
+    "111": {
+      "Title": "İstemci yapılandırması",
+      "Description": "Kullanıcı arayüzü ve pano ayarlarını depolamak için kullanılan istemci yapılandırma profillerini yönetmek için API uygular."
     },
     "400": {
       "Title": "Sanal Modüller Demosu",
@@ -237,9 +258,19 @@
       "ConfigureOptions.DimmerDownCode": "Parlaklık azaltma düğmesi",
       "ConfigureOptions.DimmerInterval": "Karartma adımı"
     },
+    "142": {
+      "Title": "E-posta hesabı",
+      "Description": "Sistem programlarının e-posta göndermek/almak için kullandığı e-posta hesap bilgilerini depolar.",
+      "ConfigureOptions.Email.Sender": "1. E-posta adresi",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP sunucu adresi",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP kullanıcı adı (isteğe bağlı)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP şifresi (isteğe bağlı)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP sunucu portu",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP sunucusu SSL kullanır"
+    },
     "145": {
       "Title": "Akıllı cihaz",
-      "Description": "Hareket algılama ve ortam ışığına göre cihazı açıp kapatın.",
+      "Description": "Hareket algılama ve ortam ışığına göre cihazı açıp/kapatabilirsiniz.",
       "HomeGenie.SmartLights.Enable": "'Akıllı Cihaz'ı etkinleştirin",
       "HomeGenie.SmartLights.OnMotionDetect": "Sensörle kontrol edilir (isteğe bağlı)",
       "HomeGenie.SmartLights.CheckLuminosity": "Işık sensörü ile kontrol edilir (isteğe bağlı)",
@@ -250,6 +281,13 @@
       "Title": "Gündoğumu Renkleri Senaryosu",
       "Description": "Renk değiştiren LED ışıklar için örnek \"Gündoğumu\" senaryosu.",
       "Scenarios.SunriseColors": "Sunrise Colors senaryosuna bağlantı"
+    },
+    "910": {
+      "Title": "Nesne algılama",
+      "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri tespit edin.",
+      "ML.ObjectDetection": "Nesne algılamayı etkinleştir",
+      "ML.ObjectDetection.TriggerDetect": "Alarmı tetikleyecek şeylerin (İngilizce) virgülle ayrılmış listesi. (örneğin: kedi, köpek, kişi, sırt çantası, bavul)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
     }
   }
 }

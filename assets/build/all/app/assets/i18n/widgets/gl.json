@@ -1,7 +1,7 @@
 {
   "$alarm_system": {
     "arm_home": "Casa",
-    "arm_away": "Lonxe"
+    "arm_away": "Fóra"
   },
   "$section_label": {
     "label": "Etiqueta",

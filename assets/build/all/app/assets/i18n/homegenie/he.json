@@ -1,6 +1,6 @@
 {
   " ": "------------------------------------------",
-  "welcome_to_homegenie": "ברוכים הבאים אל HomeGenie!",
+  "welcome_to_homegenie": "ברוכים הבאים ל-HomeGenie!",
   "welcome_subtitle": "מודיעין האוטומציה הניתנת לתכנות",
   "not_configured_yet": "המערכת עדיין לא מוגדרת. אשף התקנה זה יעזור לך להפעיל את המערכת שלך בכמה שלבים.",
   "system_config_start_with_base_and_backup": "שחזר מקובץ גיבוי",
@@ -29,7 +29,7 @@
   "groups": "קבוצות",
   "add_group": "הוסף קבוצה",
   "edit_group": "ערוך קבוצה",
-  "delete_group": "מחק את הקבוצה",
+  "delete_group": "מחק קבוצה",
   "dashboard_from_group": "צור לוח מחוונים מקבוצה זו",
   "group_modules": "מודולים בקבוצה זו",
   "modules": "מודולים",
@@ -118,8 +118,8 @@
   "program_status_broken": "שָׁבוּר",
   "program_status_compile": "לְלַקֵט",
   "automation_programming_guide": "מדריך תכנות'",
-  "tap_to_disable": "הקש כדי להשבית",
-  "tap_to_enable": "הקש כדי להפעיל",
+  "tap_to_disable": "לחץ כדי להשבית",
+  "tap_to_enable": "לחץ כדי להפעיל",
   "program_data": "נתוני תוכנית",
   "visual_code": "קוד חזותי",
   "generated_code": "קוד שנוצר",
@@ -139,6 +139,13 @@
       "Description": "אחסן והיזכר ברמת העמעום האחרונה.",
       "HomeGenie.LevelMemory": "זכור את רמת האור האחרונה בעת ההפעלה",
       "HomeGenie.LevelMemory.SimulateOnly": "הדמיה בלבד"
+    },
+    "26": {
+      "Title": "אורות צבעוניים",
+      "Description": "דוגמה לשילוב נורות Philips Hue באמצעות HTTP API (V1). משתמש ברירת המחדל להתחבר לגשר הוא \"newdeveloper\" והוא אמור להיות מופעל כבר.",
+      "ConfigureOptions.BridgeAddress": "כתובת IP של Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "שם משתמש",
+      "ConfigureOptions.LightsCount": "מספר נורות"
     },
     "34": {
       "Title": "תחזית מזג האוויר",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "רמת אור מקסימלית (%)",
       "EnergyManagement.EnergySavingMode": "לְאַפשֵׁר"
     },
+    "88": {
+      "Title": "מצלמת IP גנרית",
+      "Description": "הצגת/נתב הזנת תמונה ממצלמת IP.",
+      "IpCamera.ImageURL": "כתובת ה-API של תמונת מצלמה (ראה מסמכי המצלמה שלך)",
+      "IpCamera.Username": "שם משתמש (אופציונלי)",
+      "IpCamera.Password": "סיסמא (אופציונלי)",
+      "Widget.Config.fps": "פריימים לשנייה",
+      "Widget.Config.size": "גודל ווידג'ט"
+    },
     "90": {
       "Title": "מערכת אזעקה אבטחה",
       "Description": "השתמש בחיישנים והתקנים אחרים כדי ליישם מערכת אזעקה אבטחה.",
       "HomeGenie.SecurityAlarm": "השתמש כאזעקה/הסטרוב",
+      "HomeGenie.SecurityTriggerHome": "מופעל גם כאשר הוא חמוש בבית",
       "HomeGenie.SecuritySensor": "השתמש כחיישן אבטחה",
       "ConfigureOptions.Email.Recipients": "רשימה מופרדת בפסיק של הודעות דואר אלקטרוני של נמענים עבור התראות אזעקה",
       "ConfigureOptions.System.ArmDelay": "עיכוב זרוע (שניות)",
@@ -200,6 +217,10 @@
       "Description": "הקלט את פעילות המכשיר.",
       "EventsLogger.EnableLogging": "לְאַפשֵׁר"
     },
+    "111": {
+      "Title": "תצורת לקוח",
+      "Description": "מיישמת API לניהול פרופילי התצורה של הלקוח המשמשים לאחסון הגדרות ממשק משתמש ולוחות מחוונים."
+    },
     "400": {
       "Title": "הדגמת מודולים וירטואליים",
       "Description": "הגדר באופן ידני ערכים של המכשיר הוירטואלי.",
@@ -211,7 +232,7 @@
       "Status.Level": "מצב מתג (הפעלה/כיבוי)"
     },
     "401": {
-      "Title": "הדגמה - Toggle Door",
+      "Title": "הדגמה - החלפת דלת",
       "Description": "מדמה דלת פתוחה/סגורה של חיישן דלת-חלון הדגמה."
     },
     "402": {
@@ -220,12 +241,12 @@
     },
     "410": {
       "Title": "סימולטור חיישנים",
-      "Description": "פלט ערכי חיישן אקראיים.",
+      "Description": "פליט ערכי חיישן אקראיים.",
       "Simulator.Sensor.Temperature": "חיישן טמפרטורה",
       "Simulator.Sensor.Humidity": "חיישן לחות",
       "Simulator.Sensor.Luminance": "חיישן אור",
       "Simulator.Meter.Watts": "מד וואט",
-      "Simulator.Meter.Watts.Max": "כוח ואט מקסימלי",
+      "Simulator.Meter.Watts.Max": "עוצמת וואט מקסימלית",
       "Simulator.Sensor.DataFrequency": "תדירות פליטת סימולטור"
     },
     "505": {
@@ -233,9 +254,19 @@
       "Description": "שלטו במכשיר באמצעות שלט (IR או RF).",
       "HomeGenie.RemoteControl.Enable": "לְאַפשֵׁר",
       "HomeGenie.RemoteControl.IRCode": "לחצן החלף",
-      "ConfigureOptions.DimmerUpCode": "כפתור הגברת בהירות",
+      "ConfigureOptions.DimmerUpCode": "לחצן הגברת בהירות",
       "ConfigureOptions.DimmerDownCode": "לחצן להפחתת בהירות",
       "ConfigureOptions.DimmerInterval": "שלב עמעום"
+    },
+    "142": {
+      "Title": "חשבון דואר אלקטרוני",
+      "Description": "מאחסן מידע על חשבון דואר אלקטרוני המשמש את תוכניות המערכת לשליחת/קבלת דואר אלקטרוני.",
+      "ConfigureOptions.Email.Sender": "1. כתובת דואר אלקטרוני",
+      "ConfigureOptions.Email.SmtpServer": "2. כתובת שרת SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. שם משתמש SMTP (אופציונלי)",
+      "ConfigureOptions.Email.SmtpPassword": "4. סיסמת SMTP (אופציונלי)",
+      "ConfigureOptions.Email.SmtpPort": "5. יציאת שרת SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. שרת SMTP השתמש ב-SSL"
     },
     "145": {
       "Title": "מכשיר חכם",
@@ -250,6 +281,13 @@
       "Title": "תרחיש צבעי הזריחה",
       "Description": "דוגמה לתרחיש \"זריחה\" עבור נורות LED המשתנות צבע.",
       "Scenarios.SunriseColors": "קישור לתרחיש Sunrise Colors"
+    },
+    "910": {
+      "Title": "זיהוי אובייקטים",
+      "Description": "זיהוי עצמים באמצעות מודל YOLO11 מיומן מראש.",
+      "ML.ObjectDetection": "אפשר זיהוי אובייקטים",
+      "ML.ObjectDetection.TriggerDetect": "רשימה מופרדת בפסיקים של דברים (באנגלית) שיפעילו את האזעקה. (למשל: חתול, כלב, אדם, תרמיל, מזוודה)",
+      "ConfigureOptions.Yolo.ModelPath": "נתיב של קובץ דגם YOLO11 (.onnx)"
     }
   }
 }

@@ -18,7 +18,7 @@
   "manufacturer_specific": "Fabrikatzailearen espezifikoa",
   "routing_info": "Ibilbideari buruzko informazioa",
   "association_groups": "Elkarteko taldeak",
-  "association_description": "Gailu honek txostenak bidaltzen ditu elkarte-taldeetan sartzen diren nodoetara. Gailu honen txostenak jasotzeko, sartu 1. nodoa (kontrolatzailea) elkarte-taldeetan.",
+  "association_description": "Gailu honek txostenak bidaltzen ditu elkarte-taldeetan sartzen diren nodoetara. Gailu honen txostenak jasotzeko, sartu 1. nodoa (kontrolagailua) elkarte-taldeetan.",
   "associated_nodes": "Elkartutako nodoak",
   "enter_node_number": "Idatzi nodoaren zenbakia",
   "configuration_parameters": "Konfigurazio-parametroak",

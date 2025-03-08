@@ -66,7 +66,7 @@
   "cronwizard_dayselect_everyday": "Gach latha",
   "cronwizard_dayselect_selecteddays": "Làithean taghte",
   "cronwizard_dayowselect_selecteddaysow": "Làithean na seachdain air an taghadh",
-  "cronwizard_monthselect_everymonth": "Gach mìos",
+  "cronwizard_monthselect_everymonth": "A h-uile mìos",
   "cronwizard_monthselect_selectedmonths": "Mìosan taghte",
   "cronwizard_schedule_set_exact_time": "Suidhich àm tachartais.",
   "cronwizard_schedule_set_slot_start": "Suidhich àm tòiseachaidh slot.",
@@ -118,8 +118,8 @@
   "program_status_broken": "Briste",
   "program_status_compile": "Cruinnich",
   "automation_programming_guide": "Stiùireadh prògramadh'",
-  "tap_to_disable": "Tap air gus a chur à comas",
-  "tap_to_enable": "Tap air gus a chomasachadh",
+  "tap_to_disable": "Cliog gus a chur à comas",
+  "tap_to_enable": "Cliog gus a chomasachadh",
   "program_data": "Dàta prògram",
   "visual_code": "Còd lèirsinneach",
   "generated_code": "Còd air a chruthachadh",
@@ -139,6 +139,13 @@
       "Description": "Glèidh agus cuir air ais an ìre lasachaidh mu dheireadh.",
       "HomeGenie.LevelMemory": "Cuimhnich an ìre solais mu dheireadh nuair a thèid a chuir air",
       "HomeGenie.LevelMemory.SimulateOnly": "Samhlachadh a-mhàin"
+    },
+    "26": {
+      "Title": "Solais dath",
+      "Description": "Eisimpleir Amalachadh solais Philips Hue a’ cleachdadh HTTP API (V1). Is e “newdeveloper” an cleachdaiche bunaiteach airson ceangal ris an drochaid agus bu chòir dha a bhith air a chomasachadh mu thràth.",
+      "ConfigureOptions.BridgeAddress": "Seòladh IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Ainm-cleachdaidh",
+      "ConfigureOptions.LightsCount": "Àireamh de sholais"
     },
     "34": {
       "Title": "Tuairmse na h-aimsire",
@@ -164,7 +171,7 @@
     },
     "78": {
       "Title": "Teirmeastat glic",
-      "Description": "Cleachd sensor teothachd sam bith agus tionndadh snasail gus gnìomhachd teirmeastat a chuir an gnìomh.",
+      "Description": "Cleachd sensor teodhachd agus tionndadh snasail gus gnìomhachd teirmeastat a chuir an gnìomh.",
       "VirtualThermostat.TemperatureModule": "Sensor teòthachd",
       "VirtualThermostat.HeatingSwitchModule": "Tionndadh teasachaidh",
       "VirtualThermostat.CoolingSwitchModule": "Tionndadh fuarachaidh",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Ìre solais as àirde (%)",
       "EnergyManagement.EnergySavingMode": "Dèan comas"
     },
+    "88": {
+      "Title": "Camara IP coitcheann",
+      "Description": "Biadhadh ìomhaigh taisbeanaidh / slighe bho chamara IP.",
+      "IpCamera.ImageURL": "URL API ìomhaigh camara (faic na docaichean camara agad)",
+      "IpCamera.Username": "Ainm-cleachdaidh (roghainneil)",
+      "IpCamera.Password": "Facal-faire (roghainneil)",
+      "Widget.Config.fps": "Frèam airson gach diog",
+      "Widget.Config.size": "Meud widget"
+    },
     "90": {
       "Title": "Siostam rabhaidh tèarainteachd",
       "Description": "Cleachd mothachairean agus innealan eile gus siostam rabhaidh tèarainteachd a chuir an gnìomh.",
       "HomeGenie.SecurityAlarm": "Cleachd mar inneal-rabhaidh / strobe",
+      "HomeGenie.SecurityTriggerHome": "Cuideachd piobrachadh nuair dachaigh armaichte",
       "HomeGenie.SecuritySensor": "Cleachd mar sensor tèarainteachd",
       "ConfigureOptions.Email.Recipients": "Liosta sgaraichte le cromag de luchd-faighinn puist-d airson fiosan rabhaidh",
       "ConfigureOptions.System.ArmDelay": "Dàil gàirdein (diogan)",
@@ -199,6 +216,10 @@
       "Title": "Clàradh thachartasan",
       "Description": "Clàraich gnìomhachd inneal.",
       "EventsLogger.EnableLogging": "Dèan comas"
+    },
+    "111": {
+      "Title": "Suidheachadh teachdaiche",
+      "Description": "A’ cur an gnìomh API airson a bhith a’ riaghladh pròifilean rèiteachaidh teachdaiche a thathas a’ cleachdadh gus roghainnean UI agus deas-bhòrd a stòradh."
     },
     "400": {
       "Title": "Modalan mas-fhìor demo",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Putan lughdachadh soilleireachd",
       "ConfigureOptions.DimmerInterval": "Ceum lasachaidh"
     },
+    "142": {
+      "Title": "Cunntas post-d",
+      "Description": "A’ stòradh fiosrachadh cunntais post-d a bhios prògraman siostam a’ cleachdadh airson post-d a chuir/fhaighinn.",
+      "ConfigureOptions.Email.Sender": "1. Seòladh puist-d",
+      "ConfigureOptions.Email.SmtpServer": "2. Seòladh frithealaiche SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Ainm-cleachdaidh SMTP (roghainneil)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Facal-faire SMTP (roghainneil)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port frithealaiche SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Cleachd frithealaiche SMTP SSL"
+    },
     "145": {
       "Title": "Inneal Glic",
       "Description": "Tionndaidh air / dheth an inneal stèidhichte air lorg gluasad agus solas àrainneachd.",
@@ -250,6 +281,13 @@
       "Title": "Scenarios Dhathan èirigh na grèine",
       "Description": "Eisimpleir suidheachadh \"Sunrise\" airson solais LED ag atharrachadh dath.",
       "Scenarios.SunriseColors": "Ceangal ri suidheachadh Sunrise Colours"
+    },
+    "910": {
+      "Title": "Dearbhadh nì",
+      "Description": "Lorg nithean a’ cleachdadh modal YOLO11 ro-thrèanadh.",
+      "ML.ObjectDetection": "Dèan comas air lorg nithean",
+      "ML.ObjectDetection.TriggerDetect": "Liosta de rudan air an sgaradh le cromag (ann am Beurla) a bhrosnaicheas an inneal-rabhaidh. (m.e.: cat, cù, duine, baga-droma, màileid)",
+      "ConfigureOptions.Yolo.ModelPath": "Slighe faidhle modail YOLO11 (.onnx)"
     }
   }
 }

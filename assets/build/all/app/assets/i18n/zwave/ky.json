@@ -1,5 +1,5 @@
 {
-  "heal_network_button": "Тармакты айыктыруу",
+  "heal_network_button": "Айыктыруу тармагын",
   "hard_reset_button": "Заводдук абалга кайтаруу",
   "node_inclusion": "Түзмөк кошуу",
   "node_exclusion": "Түзмөктү алып салуу",
@@ -17,7 +17,7 @@
   "product": "Продукт",
   "manufacturer_specific": "Өндүрүүчүнүн өзгөчөлүгү",
   "routing_info": "Маршруттук маалымат",
-  "association_groups": "Ассоциациялык топтор",
+  "association_groups": "Ассоциация топтору",
   "association_description": "Бул аппараттар ассоциация топторуна кирген түйүндөргө отчетторду жөнөтөт. Бул түзмөктөн отчетторду алуу үчүн 1 түйүн (контроллер) бирикме топторуна кошуңуз.",
   "associated_nodes": "Байланышкан түйүндөр",
   "enter_node_number": "Түйүн номерин киргизиңиз",
@@ -31,7 +31,7 @@
   "refresh_ports_button": "Порттордун тизмесин жаңыртуу",
   "calibration": "Калибрлөө",
   "calibrate": "Калибрлөө",
-  "edit_calibration_parameter": "Калибрлөө параметринин номерин түзөтүңүз",
+  "edit_calibration_parameter": "Калибрлөө параметринин номерин түзөтүү",
   "calibration_parameter_not_set": "Калибрлөө параметринин номери коюлган эмес",
   "calibration_parameter_number": "Параметр номери (түзмөктүн нускамасын караңыз)"
 }

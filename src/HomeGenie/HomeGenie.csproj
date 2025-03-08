@@ -7,12 +7,19 @@
     <FileVersion>1.4.0</FileVersion>
     <RuntimeIdentifiers>win-arm;linux-arm;win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
     <SuppressWindowsPlatformTargetingRequiredError>true</SuppressWindowsPlatformTargetingRequiredError>
-    <TargetFrameworks>net472;net6.0</TargetFrameworks>
+    <TargetFrameworks>net472;net6.0;net9.0</TargetFrameworks>
     <!--
     <SelfContained>true</SelfContained>
     -->
     <!-- allow Machine Learning libs ML.NET compile on ARM architectures as well -->
     <EnableMLUnsupportedPlatformTargetCheck>false</EnableMLUnsupportedPlatformTargetCheck>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RuntimeIdentifiers>linux-x64;win-x64;linux-arm64</RuntimeIdentifiers>
+    <!--
+    <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows>
+    <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+    <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+    -->
   </PropertyGroup>
 
   <!-- .NET FramwWork -->
@@ -28,9 +35,28 @@
   </ItemGroup>
 
   <!-- .NET (dotnet) -->
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net472' ">
+  <ItemGroup Condition="'$(TargetFramework)' != 'net472'">
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+    <PackageReference Include="Microsoft.ML" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.CpuMath" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.ImageAnalytics" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.20.2" />
+    <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.Probabilistic" Version="0.4.2403.801" />
+    <PackageReference Include="Microsoft.ML.Probabilistic.Compiler" Version="0.4.2403.801" />
+    <PackageReference Include="Microsoft.ML.Probabilistic.Learners" Version="0.4.2403.801" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="9.0.2" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
   </ItemGroup>
+
+  <!-- HomeGenie with GPU support requires +400MB of files and CUDA binaries - currently to be tested -->
+  <!--
+  <ItemGroup Condition="'$(TargetFramework)' != 'net472' and '$(RuntimeIdentifier)' != 'linux-arm' and '$(RuntimeIdentifier)' != 'linux-arm64'">
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.20.1" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu.Linux" Version="1.20.1" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu.Windows" Version="1.20.1" />
+  </ItemGroup>
+  -->
 
   <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
@@ -41,7 +67,8 @@
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.2" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.13" />
     <PackageReference Include="MIG" Version="1.2.21" />
     <PackageReference Include="MIG.HomeAutomation" Version="1.2.22" />
@@ -53,13 +80,14 @@
     <PackageReference Include="Jint" Version="4.2.0" />
     <PackageReference Include="System.Device.Gpio" Version="3.2.0" />
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.Memory" Version="4.6.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageReference Include="CronExpressionDescriptor" Version="2.38.0" />
     <PackageReference Include="LiteDB" Version="5.0.21" />
     <PackageReference Include="NCrontab" Version="3.3.3" />
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
-    <PackageReference Include="UnitsNet" Version="5.69.0" />
+    <PackageReference Include="UnitsNet" Version="5.70.0" />
 
     <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
     <PackageReference Include="SerialPortLib" Version="1.1.2" />
@@ -81,12 +109,13 @@
     <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Files Include="$(ProjectDir)../../assets/build/all/**" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0' and '$(RuntimeIdentifier)' != 'linux-arm'">
+    <PackageReference Include="YoloSharp" Version="6.0.2" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="6.0.1" />
+  <!-- Copy assets to target folder -->
+  <ItemGroup>
+    <Files Include="$(ProjectDir)../../assets/build/all/**" />
   </ItemGroup>
 
   <Target Name="CopyFiles" AfterTargets="Build">

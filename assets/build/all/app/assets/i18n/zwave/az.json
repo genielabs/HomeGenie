@@ -1,5 +1,5 @@
 {
-  "heal_network_button": "Şəbəkənin sağalması",
+  "heal_network_button": "Şəbəkəni sağaltmaq",
   "hard_reset_button": "Zavod parametrlərinə sıfırlama",
   "node_inclusion": "Cihaz əlavə edin",
   "node_exclusion": "Cihazı çıxarın",
@@ -19,7 +19,7 @@
   "routing_info": "Marşrut məlumatı",
   "association_groups": "Assosiasiya qrupları",
   "association_description": "Bu qurğular assosiasiya qruplarına daxil olan qovşaqlara hesabatlar göndərir. Bu cihazdan hesabatları qəbul etmək üçün qovşağı 1 (nəzarətçi) birləşmə qruplarına daxil edin.",
-  "associated_nodes": "Əlaqədar qovşaqlar",
+  "associated_nodes": "Əlaqəli qovşaqlar",
   "enter_node_number": "Düyün nömrəsini daxil edin",
   "configuration_parameters": "Konfiqurasiya parametrləri",
   "generic_parameter": "Ümumi parametr",

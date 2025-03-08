@@ -7,7 +7,7 @@
   "enabling_node_exclusion": "Omogočanje načina izključitve vozlišča, počakajte ...",
   "inclusion_message": "Pritisnite gumb na napravi, ki jo želite dodati v to omrežje.",
   "exclusion_message": "Pritisnite gumb na napravi, ki jo želite odstraniti iz tega omrežja.",
-  "task_duration_notice": "Dokončanje te naloge lahko traja do <strong>{{timeout}}</strong> sekund.",
+  "task_duration_notice": "Dokončanje te naloge lahko traja do <strong>{{timeout}}</strong> omejitve.",
   "adding_node": "Dodajanje <strong class=\"color-accent\">{{node}}</strong> naprave, počakajte ...",
   "removing_node": "Odstranjevanje <strong class=\"color-accent\">{{node}}</strong> naprave, počakajte ...",
   "node_added": "<strong class=\"color-accent\">{{node}}</strong> naprave je bilo uspešno dodano",

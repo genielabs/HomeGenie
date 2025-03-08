@@ -1,5 +1,5 @@
 {
-  "heal_network_button": "نیٹ ورک کو ٹھیک کریں۔",
+  "heal_network_button": "ٹھیک نیٹ ورک",
   "hard_reset_button": "فیکٹری ری سیٹ",
   "node_inclusion": "ڈیوائس شامل کریں۔",
   "node_exclusion": "ڈیوائس کو ہٹا دیں۔",
@@ -7,7 +7,7 @@
   "enabling_node_exclusion": "نوڈ کے اخراج موڈ کو فعال کیا جا رہا ہے، براہ کرم انتظار کریں...",
   "inclusion_message": "اس آلہ پر بٹن دبائیں جسے آپ اس نیٹ ورک میں شامل کرنا چاہتے ہیں۔",
   "exclusion_message": "اس آلہ پر بٹن دبائیں جسے آپ اس نیٹ ورک سے ہٹانا چاہتے ہیں۔",
-  "task_duration_notice": "اس کام کو مکمل ہونے میں <strong>{{timeout}}</strong> سیکنڈ تک کا وقت لگ سکتا ہے۔",
+  "task_duration_notice": "اس کام کو مکمل ہونے میں <strong>{{timeout}}</strong> سیکنڈ تک لگ سکتا ہے۔",
   "adding_node": "ڈیوائس <strong class=\"color-accent\">{{node}}</strong> شامل کیا جا رہا ہے، براہ کرم انتظار کریں...",
   "removing_node": "ڈیوائس <strong class=\"color-accent\">{{node}}</strong> کو ہٹایا جا رہا ہے، براہ کرم انتظار کریں...",
   "node_added": "ڈیوائس <strong class=\"color-accent\">{{node}}</strong> کامیابی کے ساتھ شامل ہو گیا۔",

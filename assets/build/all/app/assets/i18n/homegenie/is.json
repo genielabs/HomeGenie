@@ -29,7 +29,7 @@
   "groups": "Hópar",
   "add_group": "Bæta við hópi",
   "edit_group": "Breyta hóp",
-  "delete_group": "Eyða hóp",
+  "delete_group": "Eyða hópi",
   "dashboard_from_group": "Búðu til mælaborð úr þessum hópi",
   "group_modules": "Einingar í þessum hópi",
   "modules": "Einingar",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "frá",
   "cronwizard_description_ending": "til",
   "cronwizard_description_at": "kl",
-  "cronwizard_add_time_slot": "Bættu við tímalotu",
+  "cronwizard_add_time_slot": "Bættu við tímaramma",
   "cronwizard_add_exact_time": "Bættu við nákvæmum tíma",
   "cronwizard_start_time": "Upphafstími",
   "cronwizard_end_time": "Lokatími",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Valdir mánuðir",
   "cronwizard_schedule_set_exact_time": "Stilltu viðburðartíma.",
   "cronwizard_schedule_set_slot_start": "Stilltu upphafstíma.",
-  "cronwizard_schedule_set_slot_end": "Byrjar á {{start}} .<span class=\"notranslate\"><br/></span> Stilltu tímalok.",
+  "cronwizard_schedule_set_slot_end": "Byrjar á {{start}} .<span class=\"notranslate\"><br/></span> Stilltu lok tímaramma.",
   "cronwizard_bindings_define_types_and_modules": "Skilgreindu tegundir og einingar sem falla undir þessa áætlun (valfrjálst)",
   "cronwizard_bindings_select_types": "Veldu tegundir",
   "cronwizard_action_set_action_to_execute": "Stilltu aðgerð til að framkvæma á tilvik þessa atburðar",
@@ -118,10 +118,10 @@
   "program_status_broken": "Brotið",
   "program_status_compile": "Settu saman",
   "automation_programming_guide": "Forritunarleiðbeiningar'",
-  "tap_to_disable": "Bankaðu til að slökkva á",
-  "tap_to_enable": "Pikkaðu til að virkja",
+  "tap_to_disable": "Smelltu til að slökkva á",
+  "tap_to_enable": "Smelltu til að virkja",
   "program_data": "Dagskrá gögn",
-  "visual_code": "Sjónræn kóða",
+  "visual_code": "Sjónrænn kóða",
   "generated_code": "Búinn til kóða",
   "setup_code": "Uppsetning",
   "main_code": "Aðal",
@@ -139,6 +139,13 @@
       "Description": "Geymdu og minntu á síðasta dimmer-stig.",
       "HomeGenie.LevelMemory": "Muna síðasta ljósstig þegar kveikt er á því",
       "HomeGenie.LevelMemory.SimulateOnly": "Herma aðeins"
+    },
+    "26": {
+      "Title": "Litaljós",
+      "Description": "Dæmi Philips Hue ljósasamþætting með HTTP API (V1). Sjálfgefinn notandi til að tengjast brúnni er \"newdeveloper\" og það ætti að vera þegar virkt.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP tölu",
+      "ConfigureOptions.BridgeUsername": "Notendanafn",
+      "ConfigureOptions.LightsCount": "Fjöldi ljósa"
     },
     "34": {
       "Title": "Veðurspá",
@@ -174,7 +181,7 @@
       "Title": "Orkuskjár",
       "Description": "Búðu til tölfræði um orkunotkun og notkun tækja.",
       "EnergyManagement.MonitorStatus": "Fylgjast með stöðu",
-      "EnergyManagement.MonitorWatts": "Fylgstu með orkunotkun"
+      "EnergyManagement.MonitorWatts": "Fylgjast með orkunotkun"
     },
     "82": {
       "Title": "Orkusparnaðarstilling",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Hámarks ljósstyrkur (%)",
       "EnergyManagement.EnergySavingMode": "Virkja"
     },
+    "88": {
+      "Title": "Almenn IP myndavél",
+      "Description": "Sýna/beina myndstraumi frá IP myndavél.",
+      "IpCamera.ImageURL": "Myndavélarforritaskil vefslóðar (sjá myndavélarskjölin þín)",
+      "IpCamera.Username": "Notandanafn (valfrjálst)",
+      "IpCamera.Password": "Lykilorð (valfrjálst)",
+      "Widget.Config.fps": "Rammar á sekúndu",
+      "Widget.Config.size": "Stærð græju"
+    },
     "90": {
       "Title": "Öryggisviðvörunarkerfi",
       "Description": "Notaðu skynjara og önnur tæki til að innleiða öryggisviðvörunarkerfi.",
-      "HomeGenie.SecurityAlarm": "Notaðu sem viðvörun/glampa",
+      "HomeGenie.SecurityAlarm": "Notist sem viðvörun/glampi",
+      "HomeGenie.SecurityTriggerHome": "Virkar líka þegar vopnað er Heim",
       "HomeGenie.SecuritySensor": "Notaðu sem öryggisskynjara",
       "ConfigureOptions.Email.Recipients": "Kommuaðskilinn listi yfir tölvupósta viðtakenda fyrir viðvörunartilkynningar",
       "ConfigureOptions.System.ArmDelay": "Töf á armi (sekúndur)",
@@ -199,6 +216,10 @@
       "Title": "Atburðaskráning",
       "Description": "Taktu upp virkni tækisins.",
       "EventsLogger.EnableLogging": "Virkja"
+    },
+    "111": {
+      "Title": "Uppsetning viðskiptavinar",
+      "Description": "Innleiðir API til að stjórna stillingarsniðum viðskiptavinarins sem eru notuð til að geyma stillingar notendaviðmóts og mælaborða."
     },
     "400": {
       "Title": "Sýndareiningar kynningu",
@@ -219,7 +240,7 @@
       "Description": "Hermir eftir hreyfiskynjun kynningar fjölskynjara."
     },
     "410": {
-      "Title": "Skynjari hermir",
+      "Title": "Skynjarhermir",
       "Description": "Gefa frá sér slembimælisgildi.",
       "Simulator.Sensor.Temperature": "Hitaskynjari",
       "Simulator.Sensor.Humidity": "Rakaskynjari",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Hnappur til að minnka birtustig",
       "ConfigureOptions.DimmerInterval": "Dimmþrep"
     },
+    "142": {
+      "Title": "Tölvupóstreikningur",
+      "Description": "Geymir upplýsingar um tölvupóstreikning sem notuð eru af kerfisforritum til að senda/móttaka tölvupóst.",
+      "ConfigureOptions.Email.Sender": "1. Tölvupóstfang",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP miðlara heimilisfang",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP notendanafn (valfrjálst)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP lykilorð (valfrjálst)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP miðlara tengi",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP þjónn notar SSL"
+    },
     "145": {
       "Title": "Snjalltæki",
       "Description": "Kveiktu/slökktu á tækinu byggt á hreyfiskynjun og umhverfisljósi.",
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors atburðarás",
       "Description": "Dæmi um \"Sólarupprás\" atburðarás fyrir litabreytandi LED ljós.",
       "Scenarios.SunriseColors": "Tengill á Sunrise Colors atburðarás"
+    },
+    "910": {
+      "Title": "Hlutagreining",
+      "Description": "Finndu hluti með því að nota fyrirfram þjálfað YOLO11 líkan.",
+      "ML.ObjectDetection": "Virkja greiningu á hlutum",
+      "ML.ObjectDetection.TriggerDetect": "Kommuaðskilinn listi yfir hluti (á ensku) sem kallar á vekjarann. (td: köttur, hundur, manneskja, bakpoki, ferðataska)",
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO11 líkanskrár (.onnx)"
     }
   }
 }

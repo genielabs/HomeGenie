@@ -89,7 +89,7 @@
   "scheduler_preset_action_config_color": "Mtundu",
   "scheduler_preset_action_command_thermostat_mode": "Thermostat mode",
   "scheduler_preset_action_config_mode": "Mode",
-  "scheduler_preset_action_config_mode_on": "Pa",
+  "scheduler_preset_action_config_mode_on": "Yambani",
   "scheduler_preset_action_config_mode_off": "Kuzimitsa",
   "scheduler_preset_action_config_mode_heat": "Kutentha",
   "scheduler_preset_action_config_mode_heat_eco": "Kutentha kwachuma",
@@ -119,7 +119,7 @@
   "program_status_compile": "Lembani",
   "automation_programming_guide": "Pulogalamu yamapulogalamu'",
   "tap_to_disable": "Dinani kuti muyimitse",
-  "tap_to_enable": "Dinani kuti mutsegule",
+  "tap_to_enable": "Dinani kuti muyambitse",
   "program_data": "Deta ya pulogalamu",
   "visual_code": "Kodi zowoneka",
   "generated_code": "Kodi yopangidwa",
@@ -139,6 +139,13 @@
       "Description": "Sungani ndikukumbukira mulingo womaliza wa dimmer.",
       "HomeGenie.LevelMemory": "Kumbukirani mulingo womaliza wowunikira mukayatsa",
       "HomeGenie.LevelMemory.SimulateOnly": "Yezerani kokha"
+    },
+    "26": {
+      "Title": "Magetsi amtundu",
+      "Description": "Chitsanzo cha kuyatsa kwa Philips Hue pogwiritsa ntchito HTTP API (V1). Wosakhazikika woti alumikizane ndi mlatho ndi \"wopanga zatsopano\" ndipo uyenera kukhala woyatsidwa kale.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adilesi",
+      "ConfigureOptions.BridgeUsername": "Dzina lolowera",
+      "ConfigureOptions.LightsCount": "Chiwerengero cha magetsi"
     },
     "34": {
       "Title": "Weather Forecast",
@@ -177,15 +184,25 @@
       "EnergyManagement.MonitorWatts": "Yang'anirani momwe mungagwiritsire ntchito mphamvu"
     },
     "82": {
-      "Title": "Njira Yopulumutsira Mphamvu",
-      "Description": "Sungani mlingo wa kuwala pansi pa chiwerengero chosinthika.",
+      "Title": "Njira Yopulumutsa Mphamvu",
+      "Description": "Sungani mulingo wa kuwala pansi pa kuchuluka kosinthika.",
       "EnergyManagement.EnergySavingLevel": "Mulingo wopepuka kwambiri (%)",
       "EnergyManagement.EnergySavingMode": "Yambitsani"
+    },
+    "88": {
+      "Title": "generic IP kamera",
+      "Description": "Onetsani / mayendedwe azithunzi kuchokera ku kamera ya IP.",
+      "IpCamera.ImageURL": "Ulalo wa chithunzi cha kamera (onani zolemba za kamera yanu)",
+      "IpCamera.Username": "Dzina lolowera (posankha)",
+      "IpCamera.Password": "Mawu achinsinsi (posankha)",
+      "Widget.Config.fps": "Mafelemu pamphindikati",
+      "Widget.Config.size": "Kukula kwa widget"
     },
     "90": {
       "Title": "Security Alamu System",
       "Description": "Gwiritsani ntchito masensa ndi zida zina kukhazikitsa ma alarm system.",
       "HomeGenie.SecurityAlarm": "Gwiritsani ntchito ngati alamu/strobe",
+      "HomeGenie.SecurityTriggerHome": "Komanso kuyambitsa pamene zida Home",
       "HomeGenie.SecuritySensor": "Gwiritsani ntchito ngati sensor yachitetezo",
       "ConfigureOptions.Email.Recipients": "Mndandanda wolekanitsidwa wa koma wa olandira maimelo a zidziwitso zama alarm",
       "ConfigureOptions.System.ArmDelay": "Kuchedwa kwa mkono (masekondi)",
@@ -193,12 +210,16 @@
       "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (masekondi, 0=infinite)",
       "ConfigureOptions.Trigger.ArmedProgram": "Pulogalamu yoyendetsa pamene muli ndi zida",
       "ConfigureOptions.Trigger.DisarmedProgram": "Pulogalamu yoyambira ikachotsedwa",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Pulogalamu yoyambira ikayambika"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Pulogalamu yoyambira ikatsegulidwa"
     },
     "95": {
       "Title": "Kudula zochitika",
       "Description": "Lembani zochita za chipangizo.",
       "EventsLogger.EnableLogging": "Yambitsani"
+    },
+    "111": {
+      "Title": "Kusintha kwa kasitomala",
+      "Description": "Imakhazikitsa API yoyang'anira ma profailo a kasitomala omwe amagwiritsidwa ntchito kusunga UI ndi ma dashboards."
     },
     "400": {
       "Title": "Chiwonetsero cha Virtual Modules",
@@ -212,7 +233,7 @@
     },
     "401": {
       "Title": "Chiwonetsero - Toggle Door",
-      "Description": "Imatengera chitseko chotseguka / chotsekedwa cha sensor yawindo lazenera."
+      "Description": "Imatengera chitseko chotseguka / chotsekedwa cha sensor yazenera lazenera."
     },
     "402": {
       "Title": "Chiwonetsero - Zoyenda Zapezeka",
@@ -237,9 +258,19 @@
       "ConfigureOptions.DimmerDownCode": "Kuwala kuchepetsa batani",
       "ConfigureOptions.DimmerInterval": "Dimming sitepe"
     },
+    "142": {
+      "Title": "Akaunti ya imelo",
+      "Description": "Imasunga zidziwitso zamaakaunti a imelo omwe amagwiritsidwa ntchito ndi mapulogalamu otumizira/kulandira maimelo.",
+      "ConfigureOptions.Email.Sender": "1. Imelo adilesi",
+      "ConfigureOptions.Email.SmtpServer": "2. Adilesi ya seva ya SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP lolowera (posankha)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP mawu achinsinsi (posankha)",
+      "ConfigureOptions.Email.SmtpPort": "5. Doko la seva la SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Seva ya SMTP imagwiritsa ntchito SSL"
+    },
     "145": {
       "Title": "Smart Chipangizo",
-      "Description": "Yatsani/zimitsani chipangizochi potengera kuzindikira koyenda komanso kuwala kozungulira.",
+      "Description": "Yatsani/zimitsani chipangizochi potengera kuzindikira koyenda ndi kuwala kozungulira.",
       "HomeGenie.SmartLights.Enable": "Yambitsani 'Smart Chipangizo'",
       "HomeGenie.SmartLights.OnMotionDetect": "Imayendetsedwa ndi sensa (posankha)",
       "HomeGenie.SmartLights.CheckLuminosity": "Kuwongoleredwa ndi sensa yowala (posankha)",
@@ -250,6 +281,13 @@
       "Title": "Mtundu wa Sunrise Colours",
       "Description": "Chitsanzo \"Kutuluka kwa Dzuwa\" pakusintha mitundu ya nyali za LED.",
       "Scenarios.SunriseColors": "Lumikizani ku zochitika za Sunrise Colors"
+    },
+    "910": {
+      "Title": "Kuzindikira kwa chinthu",
+      "Description": "Dziwani zinthu pogwiritsa ntchito mtundu wa YOLO11 wophunzitsidwa kale.",
+      "ML.ObjectDetection": "Yambitsani kuzindikira zinthu",
+      "ML.ObjectDetection.TriggerDetect": "Mndandanda wazinthu zosiyanitsidwa ndi koma (mu Chingerezi) zomwe zingayambitse alamu. (monga: mphaka, galu, munthu, chikwama, sutikesi)",
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
     }
   }
 }

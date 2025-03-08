@@ -55,7 +55,7 @@
   "cronwizard_end_time": "Sluttid",
   "cronwizard_minutes": "Minutter",
   "cronwizard_hours": "Timer",
-  "cronwizard_days": "Dager",
+  "cronwizard_days": "dager",
   "cronwizard_months": "Måneder",
   "cronwizard_minuteselect_everyminute": "Hvert minutt",
   "cronwizard_minuteselect_everynthminute": "Hvert gitt minutt",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Si",
   "scheduler_preset_action_config_message": "Beskjed",
   "save_and_build": "Lagre og bygg",
-  "toggle_widgets_preview": "Slå av widgets forhåndsvisning",
+  "toggle_widgets_preview": "Slå av forhåndsvisning av widgets",
   "stop_program": "Stopp programmet",
   "run_program": "Kjør programmet",
   "enable_to_run_program": "Aktiver programmet for å kjøre det",
@@ -118,16 +118,16 @@
   "program_status_broken": "Brukket",
   "program_status_compile": "Kompiler",
   "automation_programming_guide": "Programmeringsveiledning'",
-  "tap_to_disable": "Trykk for å deaktivere",
-  "tap_to_enable": "Trykk for å aktivere",
+  "tap_to_disable": "Klikk for å deaktivere",
+  "tap_to_enable": "Klikk for å aktivere",
   "program_data": "Programdata",
   "visual_code": "Visuell kode",
   "generated_code": "Generert kode",
   "setup_code": "Oppsett",
   "main_code": "Hoved",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Hovedkode\" er tom. Bruk \"Visuell kode\"-editoren for å generere denne koden: - Åpne kategorien \"Program\" fra kommandopaletten til venstre - Dra en blokk av typen \"Main\" i det visuelle kodearbeidsområdet - Legg til andre kodeblokker for å implementere handlinger og logikk til dette programmet Programmet \"Main\" kan enten kjøres manuelt eller automatisk startes basert på betingelsene som til slutt er gitt i oppsettkoden.",
-  "setup_code_empty_note": "\"Setup\"-koden er tom. Bruk \"Visuell kode\"-editoren for å generere denne koden: - Åpne kategorien \"Program\" fra kommandopaletten til venstre - Dra en blokk av typen \"Oppsett\" i arbeidsområdet for visuell kode - Legg til andre kodeblokker i den for å bestemme forholdene som vil utløse kjøring av \"Hovedkode\" Denne koden blir evaluert hver gang en ny hendelse inntreffer og minst en gang i minuttet.",
+  "main_code_empty_note": "\"Hovedkode\" er tom. Bruk \"Visuell kode\"-editoren for å generere denne koden: - Åpne kategorien \"Program\" fra kommandopaletten til venstre - Dra en blokk av typen \"Main\" i det visuelle kodearbeidsområdet - Legg til andre kodeblokker for å implementere handlinger og logikk til dette programmet Programmet \"Main\" kan enten kjøres manuelt eller autostartes basert på betingelsene som til slutt er gitt i oppsettkoden.",
+  "setup_code_empty_note": "\"Setup\"-koden er tom. Bruk \"Visuell kode\"-editoren for å generere denne koden: - Åpne kategorien \"Program\" fra kommandopaletten til venstre - Dra en blokk av typen \"Oppsett\" i det visuelle kodearbeidsområdet - Legg til andre kodeblokker i den for å bestemme forholdene som vil utløse kjøring av \"Hovedkode\" Denne koden blir evaluert hver gang en ny hendelse inntreffer og minst en gang i minuttet.",
   "capture_commands": "Ta opp kommandoer",
   "capture_commands_description": "Legg til alle kommandoer som utføres manuelt på widgets til programmet.",
   "capture_commands_pause": "Pause mellom kommandoer",
@@ -139,6 +139,13 @@
       "Description": "Lagre og hent siste dimmernivå.",
       "HomeGenie.LevelMemory": "Hent siste lysnivå når den er slått på",
       "HomeGenie.LevelMemory.SimulateOnly": "Bare simuler"
+    },
+    "26": {
+      "Title": "Fargelys",
+      "Description": "Eksempel Philips Hue-lysintegrasjon ved hjelp av HTTP API (V1). Standardbrukeren for å koble til broen er \"newdeveloper\", og den skal allerede være aktivert.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adresse",
+      "ConfigureOptions.BridgeUsername": "Brukernavn",
+      "ConfigureOptions.LightsCount": "Antall lys"
     },
     "34": {
       "Title": "Værmelding",
@@ -174,7 +181,7 @@
       "Title": "Energimonitor",
       "Description": "Generer statistikk over energiforbruk og bruk av enheter.",
       "EnergyManagement.MonitorStatus": "Overvåk status",
-      "EnergyManagement.MonitorWatts": "Overvåk energiforbruket"
+      "EnergyManagement.MonitorWatts": "Overvåke energiforbruket"
     },
     "82": {
       "Title": "Energisparemodus",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maks lysnivå (%)",
       "EnergyManagement.EnergySavingMode": "Aktiver"
     },
+    "88": {
+      "Title": "Generisk IP-kamera",
+      "Description": "Vis/rut bildefeed fra et IP-kamera.",
+      "IpCamera.ImageURL": "Camera image API URL (se kameradokumentene dine)",
+      "IpCamera.Username": "Brukernavn (valgfritt)",
+      "IpCamera.Password": "Passord (valgfritt)",
+      "Widget.Config.fps": "Bilder per sekund",
+      "Widget.Config.size": "Widget-størrelse"
+    },
     "90": {
       "Title": "Sikkerhetsalarmsystem",
       "Description": "Bruk sensorer og andre enheter for å implementere et sikkerhetsalarmsystem.",
       "HomeGenie.SecurityAlarm": "Brukes som alarm/strobe",
+      "HomeGenie.SecurityTriggerHome": "Utløses også når væpnet Hjem",
       "HomeGenie.SecuritySensor": "Brukes som sikkerhetssensor",
       "ConfigureOptions.Email.Recipients": "Kommadelt liste over mottakers e-post for alarmvarsler",
       "ConfigureOptions.System.ArmDelay": "Tilkoblingsforsinkelse (sekunder)",
@@ -200,6 +217,10 @@
       "Description": "Registrer enhetsaktivitet.",
       "EventsLogger.EnableLogging": "Aktiver"
     },
+    "111": {
+      "Title": "Klientkonfigurasjon",
+      "Description": "Implementerer API for å administrere klientens konfigurasjonsprofiler som brukes til å lagre UI- og dashboardinnstillinger."
+    },
     "400": {
       "Title": "Demo av virtuelle moduler",
       "Description": "Still inn verdiene for den virtuelle enheten manuelt.",
@@ -211,7 +232,7 @@
       "Status.Level": "Byttestatus (på/av)"
     },
     "401": {
-      "Title": "Demo - Slå dør",
+      "Title": "Demo - Toggle Door",
       "Description": "Simulerer dør åpen/lukket av demo dør-vindu sensor."
     },
     "402": {
@@ -226,7 +247,7 @@
       "Simulator.Sensor.Luminance": "Lyssensor",
       "Simulator.Meter.Watts": "Watt meter",
       "Simulator.Meter.Watts.Max": "Maks Watt effekt",
-      "Simulator.Sensor.DataFrequency": "Simulatoren sender ut frekvens"
+      "Simulator.Sensor.DataFrequency": "Simulator utsender frekvens"
     },
     "505": {
       "Title": "Fjernkontroll",
@@ -235,7 +256,17 @@
       "HomeGenie.RemoteControl.IRCode": "Veksleknapp",
       "ConfigureOptions.DimmerUpCode": "Knapp for å øke lysstyrken",
       "ConfigureOptions.DimmerDownCode": "Knapp for å redusere lysstyrken",
-      "ConfigureOptions.DimmerInterval": "Dimming trinn"
+      "ConfigureOptions.DimmerInterval": "Dimmtrinn"
+    },
+    "142": {
+      "Title": "E-postkonto",
+      "Description": "Lagrer e-postkontoinformasjon som brukes av systemprogrammer for å sende/motta e-post.",
+      "ConfigureOptions.Email.Sender": "1. E-postadresse",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP-serveradresse",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP-brukernavn (valgfritt)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-passord (valgfritt)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-serverport",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-server bruker SSL"
     },
     "145": {
       "Title": "Smart enhet",
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors Scenario",
       "Description": "Eksempel \"Soloppgang\"-scenario for fargeskiftende LED-lys.",
       "Scenarios.SunriseColors": "Link til Sunrise Colors scenario"
+    },
+    "910": {
+      "Title": "Objektdeteksjon",
+      "Description": "Oppdag objekter ved hjelp av en forhåndstrent YOLO11-modell.",
+      "ML.ObjectDetection": "Aktiver gjenkjenning av objekter",
+      "ML.ObjectDetection.TriggerDetect": "Kommaseparert liste over ting (på engelsk) som vil utløse alarmen. (f.eks: katt, hund, person, ryggsekk, koffert)",
+      "ConfigureOptions.Yolo.ModelPath": "Banen til YOLO11-modellfilen (.onnx)"
     }
   }
 }

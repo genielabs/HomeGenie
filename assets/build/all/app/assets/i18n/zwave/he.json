@@ -18,7 +18,7 @@
   "manufacturer_specific": "ספציפי ליצרן",
   "routing_info": "מידע ניתוב",
   "association_groups": "קבוצות אגודה",
-  "association_description": "מכשיר זה שולח דוחות לצמתים הכלולים בקבוצות השיוך. על מנת לקבל דוחות מהתקן זה, כלול את צומת 1 (הבקר) בקבוצות השיוך.",
+  "association_description": "מכשיר זה שולח דוחות לצמתים הכלולים בקבוצות השיוך. על מנת לקבל דוחות ממכשיר זה, כלול את צומת 1 (הבקר) בקבוצות השיוך.",
   "associated_nodes": "צמתים קשורים",
   "enter_node_number": "הזן את מספר הצומת",
   "configuration_parameters": "פרמטרי תצורה",

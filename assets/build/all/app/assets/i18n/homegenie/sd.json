@@ -33,7 +33,7 @@
   "dashboard_from_group": "هن گروپ مان هڪ ڊيش بورڊ ٺاهيو",
   "group_modules": "هن گروپ ۾ ماڊلز",
   "modules": "ماڊيولز",
-  "empty_group": "هن گروپ ۾ ڪو به ماڊل ناهي.",
+  "empty_group": "هن گروپ ۾ ڪو به ماڊيول ناهي.",
   "scheduler_wizard": "شيڊولر مددگار",
   "schedule_event": "تقريب",
   "schedule_type_standard": "معياري",
@@ -87,7 +87,7 @@
   "scheduler_preset_action_config_level": "سطح",
   "scheduler_preset_action_command_set_color": "رنگ مقرر ڪريو",
   "scheduler_preset_action_config_color": "رنگ",
-  "scheduler_preset_action_command_thermostat_mode": "ٿرموسٽٽ موڊ",
+  "scheduler_preset_action_command_thermostat_mode": "ٿرموسٽيٽ موڊ",
   "scheduler_preset_action_config_mode": "موڊ",
   "scheduler_preset_action_config_mode_on": "تي",
   "scheduler_preset_action_config_mode_off": "بند",
@@ -118,8 +118,8 @@
   "program_status_broken": "ٽٽل",
   "program_status_compile": "مرتب ڪريو",
   "automation_programming_guide": "پروگرامنگ گائيڊ'",
-  "tap_to_disable": "غير فعال ڪرڻ لاءِ ٽيپ ڪريو",
-  "tap_to_enable": "فعال ڪرڻ لاءِ ٽيپ ڪريو",
+  "tap_to_disable": "غير فعال ڪرڻ لاءِ ڪلڪ ڪريو",
+  "tap_to_enable": "فعال ڪرڻ لاءِ ڪلڪ ڪريو",
   "program_data": "پروگرام ڊيٽا",
   "visual_code": "بصري ڪوڊ",
   "generated_code": "ٺاهيل ڪوڊ",
@@ -139,6 +139,13 @@
       "Description": "آخري ڊمر ليول کي ذخيرو ڪريو ۽ ياد ڪريو.",
       "HomeGenie.LevelMemory": "جڏهن سوئچ آن ڪيو وڃي ته آخري روشني جي سطح کي ياد ڪريو",
       "HomeGenie.LevelMemory.SimulateOnly": "صرف نقل ڪريو"
+    },
+    "26": {
+      "Title": "رنگين بتيون",
+      "Description": "مثال طور، HTTP API (V1) استعمال ڪندي فلپس هيو لائيٽس انٽيگريشن. پل سان ڳنڍڻ لاءِ ڊفالٽ استعمال ڪندڙ \"newdeveloper\" آهي ۽ اهو اڳ ۾ ئي فعال هجڻ گهرجي.",
+      "ConfigureOptions.BridgeAddress": "فلپس هيو برج (V1) IP پتو",
+      "ConfigureOptions.BridgeUsername": "استعمال ڪندڙ جو نالو",
+      "ConfigureOptions.LightsCount": "بتين جو تعداد"
     },
     "34": {
       "Title": "موسم جي اڳڪٿي",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "وڌ ۾ وڌ روشني جي سطح (٪)",
       "EnergyManagement.EnergySavingMode": "فعال ڪريو"
     },
+    "88": {
+      "Title": "عام IP ڪئميرا",
+      "Description": "IP ڪئميرا مان تصوير فيڊ ڏيکاريو/روٽ ڪريو.",
+      "IpCamera.ImageURL": "ڪئميرا تصوير API URL (پنهنجي ڪئميرا دستاويز ڏسو)",
+      "IpCamera.Username": "استعمال ڪندڙ جو نالو (اختياري)",
+      "IpCamera.Password": "پاسورڊ (اختياري)",
+      "Widget.Config.fps": "فريم في سيڪنڊ",
+      "Widget.Config.size": "ويجيٽ سائيز"
+    },
     "90": {
       "Title": "سيڪيورٽي الارم سسٽم",
       "Description": "سيڪيورٽي الارم سسٽم لاڳو ڪرڻ لاءِ سينسر ۽ ٻيا ڊوائيس استعمال ڪريو.",
       "HomeGenie.SecurityAlarm": "الارم/اسٽروب طور استعمال ڪريو",
+      "HomeGenie.SecurityTriggerHome": "جڏهن هٿياربند گهر ۾ هجي ته اهو پڻ شروع ٿئي ٿو",
       "HomeGenie.SecuritySensor": "سيڪيورٽي سينسر طور استعمال ڪريو",
       "ConfigureOptions.Email.Recipients": "الارم اطلاعن لاءِ وصول ڪندڙن جي ڪاما سان الڳ ٿيل اي ميلن جي فهرست",
       "ConfigureOptions.System.ArmDelay": "بازو جي دير (سيڪنڊ)",
@@ -200,11 +217,15 @@
       "Description": "ڊوائيس جي سرگرمي کي رڪارڊ ڪريو.",
       "EventsLogger.EnableLogging": "فعال ڪريو"
     },
+    "111": {
+      "Title": "ڪلائنٽ جي ترتيب",
+      "Description": "ڪلائنٽ جي ترتيب واري پروفائلز کي منظم ڪرڻ لاءِ API لاڳو ڪري ٿو جيڪي UI ۽ ڊيش بورڊ سيٽنگون اسٽور ڪرڻ لاءِ استعمال ٿين ٿا."
+    },
     "400": {
       "Title": "ورچوئل ماڊيولز ڊيمو",
       "Description": "ورچوئل ڊيوائس جا قدر دستي طور تي مقرر ڪريو.",
       "Sensor.Temperature": "گرمي پد جو قدر",
-      "Sensor.Luminance": "روشني جو قدر",
+      "Sensor.Luminance": "روشني جي قيمت",
       "Sensor.MotionDetect": "حرڪت جي ڳولا جي حيثيت",
       "Status.Battery": "بيٽري جي سطح",
       "Sensor.DoorWindow": "دروازي/دريءَ جي سينسر جي حيثيت (کليل/بند)",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "چمڪ گهٽائڻ وارو بٽڻ",
       "ConfigureOptions.DimmerInterval": "ڊمنگ قدم"
     },
+    "142": {
+      "Title": "اي ميل اڪائونٽ",
+      "Description": "سسٽم پروگرامن پاران اي ميل موڪلڻ/ وصول ڪرڻ لاءِ استعمال ٿيندڙ اي ميل اڪائونٽ جي معلومات کي محفوظ ڪري ٿو.",
+      "ConfigureOptions.Email.Sender": "1. اي ميل پتو",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP سرور ايڊريس",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP يوزر نالو (اختياري)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP پاسورڊ (اختياري)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP سرور پورٽ",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP سرور SSL استعمال ڪري ٿو"
+    },
     "145": {
       "Title": "سمارٽ ڊيوائس",
       "Description": "حرڪت جي ڳولا ۽ ماحول جي روشني جي بنياد تي ڊوائيس کي آن/آف ڪريو.",
@@ -250,6 +281,13 @@
       "Title": "سج اڀرڻ جا رنگ منظرنامو",
       "Description": "رنگ بدلائيندڙ ايل اي ڊي لائيٽن لاءِ \"سج اڀرڻ\" جو مثال منظرنامو.",
       "Scenarios.SunriseColors": "سج اڀرندڙ رنگن جي منظرنامي جو لنڪ"
+    },
+    "910": {
+      "Title": "شئي جي ڳولا",
+      "Description": "اڳ ۾ تربيت يافته YOLO11 ماڊل استعمال ڪندي شين کي ڳوليو.",
+      "ML.ObjectDetection": "شين جي ڳولا کي فعال ڪريو",
+      "ML.ObjectDetection.TriggerDetect": "ڪاما سان الڳ ٿيل شين جي فهرست (انگريزي ۾) جيڪي الارم کي متحرڪ ڪنديون. (مثال طور: ٻلي، ڪتو، ماڻهو، بيڪ پيڪ، سوٽ ڪيس)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڊل فائل جو رستو (.onnx)"
     }
   }
 }

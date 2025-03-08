@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ٹائم سلاٹ کے اختتام پر",
   "cronwizard_action_custom_script": "حسب ضرورت ایکشن اسکرپٹ",
   "cronwizard_action_no_action": "کوئی کارروائی نہیں۔",
-  "cronwizard_action_schedule_variable_hint": "اس ایونٹ کا حوالہ دینے کے لیے <span class=\"notranslate color-primary\">@ {{name}}</span> کرون ایکسپریشنز میں متغیر کے طور پر استعمال کریں یا <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> آٹومیشن پروگرامز میں استعمال کریں۔",
+  "cronwizard_action_schedule_variable_hint": "کرون ایکسپریشنز میں متغیر کے طور پر <span class=\"notranslate color-primary\">@ {{name}}</span> استعمال کریں یا اس ایونٹ کا حوالہ دینے کے لیے آٹومیشن پروگرامز میں <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> کا استعمال کریں۔",
   "scheduler_preset_action_command_turn_on": "آن کریں۔",
   "scheduler_preset_action_command_turn_off": "بند کر دیں۔",
   "scheduler_preset_action_command_set_level": "سطح طے کریں۔",
@@ -118,8 +118,8 @@
   "program_status_broken": "ٹوٹا ہوا",
   "program_status_compile": "مرتب کرنا",
   "automation_programming_guide": "پروگرامنگ گائیڈ",
-  "tap_to_disable": "غیر فعال کرنے کے لیے تھپتھپائیں۔",
-  "tap_to_enable": "چالو کرنے کے لیے تھپتھپائیں۔",
+  "tap_to_disable": "غیر فعال کرنے کے لیے کلک کریں۔",
+  "tap_to_enable": "فعال کرنے کے لیے کلک کریں۔",
   "program_data": "پروگرام کا ڈیٹا",
   "visual_code": "بصری کوڈ",
   "generated_code": "تیار کردہ کوڈ",
@@ -140,17 +140,24 @@
       "HomeGenie.LevelMemory": "آن ہونے پر روشنی کی آخری سطح کو یاد کریں۔",
       "HomeGenie.LevelMemory.SimulateOnly": "صرف نقل کریں۔"
     },
+    "26": {
+      "Title": "رنگین لائٹس",
+      "Description": "HTTP API (V1) کا استعمال کرتے ہوئے Philips Hue لائٹس انضمام کی مثال۔ پل سے جڑنے کے لیے پہلے سے طے شدہ صارف \"نیو ڈویلپر\" ہے اور اسے پہلے سے فعال ہونا چاہیے۔",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP پتہ",
+      "ConfigureOptions.BridgeUsername": "صارف نام",
+      "ConfigureOptions.LightsCount": "لائٹس کی تعداد"
+    },
     "34": {
       "Title": "موسم کی پیشن گوئی",
       "Description": "اوپن ویدر میپ سروس سے موسم اور پیشن گوئی کی معلومات۔ اس ویجیٹ کو چالو کرنے کے لیے ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://openweathermap.org/appid پر ہدایات پر عمل کریں۔",
       "ConfigureOptions.Location": "شہر کا نام",
       "ConfigureOptions.Language": "زبان (مثلاً EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval": "اپ ڈیٹ کا وقفہ (منٹ)",
+      "ConfigureOptions.UpdateInterval": "اپ ڈیٹ وقفہ (منٹ)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API کلید (APPID)"
     },
     "77": {
       "Title": "نیٹ ورک MQTT",
-      "Description": "انٹرنیٹ کے ذریعے کہیں سے بھی HomeGenie Panel ایپ استعمال کرنے کے لیے یا اسی MQTT نیٹ ورک پر HomeGenie ڈیوائسز کو آپس میں جوڑنے کے لیے MQTT بروکر سے جڑیں۔",
+      "Description": "انٹرنیٹ کے ذریعے کہیں سے بھی HomeGenie Panel ایپ استعمال کرنے یا اسی MQTT نیٹ ورک پر HomeGenie ڈیوائسز کو آپس میں جوڑنے کے لیے MQTT بروکر سے جڑیں۔",
       "MQTT.SensorPublish": "اس ماڈیول سے خارج ہونے والے واقعات شائع کریں۔",
       "ConfigureOptions.ClientId": "کلائنٹ کی شناخت۔",
       "ConfigureOptions.ServerAddress": "سرور کا پتہ",
@@ -182,15 +189,25 @@
       "EnergyManagement.EnergySavingLevel": "زیادہ سے زیادہ روشنی کی سطح (%)",
       "EnergyManagement.EnergySavingMode": "فعال کریں۔"
     },
+    "88": {
+      "Title": "عام آئی پی کیمرہ",
+      "Description": "آئی پی کیمرے سے تصویری فیڈ ڈسپلے/روٹ کریں۔",
+      "IpCamera.ImageURL": "کیمرہ امیج API URL (اپنے کیمرے کے دستاویزات دیکھیں)",
+      "IpCamera.Username": "صارف نام (اختیاری)",
+      "IpCamera.Password": "پاس ورڈ (اختیاری)",
+      "Widget.Config.fps": "فریم فی سیکنڈ",
+      "Widget.Config.size": "ویجیٹ کا سائز"
+    },
     "90": {
       "Title": "سیکیورٹی الارم سسٹم",
       "Description": "سیکیورٹی الارم سسٹم کو نافذ کرنے کے لیے سینسر اور دیگر آلات استعمال کریں۔",
       "HomeGenie.SecurityAlarm": "الارم/اسٹروب کے طور پر استعمال کریں۔",
+      "HomeGenie.SecurityTriggerHome": "مسلح ہونے پر ہوم کو بھی متحرک کرتا ہے۔",
       "HomeGenie.SecuritySensor": "سیکیورٹی سینسر کے طور پر استعمال کریں۔",
-      "ConfigureOptions.Email.Recipients": "الارم کی اطلاعات کے لیے وصول کنندگان کی ای میلز کی کوما سے الگ کردہ فہرست",
+      "ConfigureOptions.Email.Recipients": "الارم کی اطلاعات کے لیے وصول کنندگان کے ای میلز کی کوما سے الگ کردہ فہرست",
       "ConfigureOptions.System.ArmDelay": "بازو میں تاخیر (سیکنڈ)",
       "ConfigureOptions.System.SirenStartTime": "سائرن شروع ہونے میں تاخیر (سیکنڈ)",
-      "ConfigureOptions.System.SirenMaxTime": "سائرن کا زیادہ سے زیادہ وقت (سیکنڈ، 0 = لامحدود)",
+      "ConfigureOptions.System.SirenMaxTime": "سائرن کا زیادہ سے زیادہ وقت (سیکنڈ، 0=لامحدود)",
       "ConfigureOptions.Trigger.ArmedProgram": "مسلح ہونے پر چلانے کا پروگرام",
       "ConfigureOptions.Trigger.DisarmedProgram": "غیر مسلح ہونے پر چلانے کے لیے پروگرام",
       "ConfigureOptions.Trigger.TriggeredProgram": "ٹرگر ہونے پر چلانے کے لیے پروگرام"
@@ -199,6 +216,10 @@
       "Title": "واقعات کی لاگنگ",
       "Description": "آلہ کی سرگرمی ریکارڈ کریں۔",
       "EventsLogger.EnableLogging": "فعال کریں۔"
+    },
+    "111": {
+      "Title": "کلائنٹ کی ترتیب",
+      "Description": "کلائنٹ کے کنفیگریشن پروفائلز کو منظم کرنے کے لیے API کو لاگو کرتا ہے جو UI اور ڈیش بورڈز کی ترتیبات کو اسٹور کرنے کے لیے استعمال ہوتے ہیں۔"
     },
     "400": {
       "Title": "ورچوئل ماڈیولز ڈیمو",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "چمک کم کرنے کا بٹن",
       "ConfigureOptions.DimmerInterval": "مدھم قدم"
     },
+    "142": {
+      "Title": "ای میل اکاؤنٹ",
+      "Description": "ای میل اکاؤنٹ کی معلومات کو اسٹور کرتا ہے جو سسٹم پروگرامز کے ذریعے ای میلز بھیجنے/ وصول کرنے کے لیے استعمال ہوتا ہے۔",
+      "ConfigureOptions.Email.Sender": "1. ای میل ایڈریس",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP سرور کا پتہ",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP صارف نام (اختیاری)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP پاس ورڈ (اختیاری)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP سرور پورٹ",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP سرور SSL استعمال کرتا ہے۔"
+    },
     "145": {
       "Title": "اسمارٹ ڈیوائس",
       "Description": "حرکت کا پتہ لگانے اور محیط روشنی کی بنیاد پر آلہ کو آن/آف کریں۔",
@@ -250,6 +281,13 @@
       "Title": "طلوع آفتاب کے رنگوں کا منظر",
       "Description": "رنگ بدلنے والی ایل ای ڈی لائٹس کے لیے مثال \"سورج\" کا منظر۔",
       "Scenarios.SunriseColors": "سن رائز کلرز کے منظر نامے کا لنک"
+    },
+    "910": {
+      "Title": "آبجیکٹ کا پتہ لگانا",
+      "Description": "پہلے سے تربیت یافتہ YOLO11 ماڈل کا استعمال کرتے ہوئے اشیاء کا پتہ لگائیں۔",
+      "ML.ObjectDetection": "اشیاء کا پتہ لگانے کو فعال کریں۔",
+      "ML.ObjectDetection.TriggerDetect": "کوما سے الگ کردہ چیزوں کی فہرست (انگریزی میں) جو الارم کو متحرک کرے گی۔ (مثال کے طور پر: بلی، کتا، شخص، بیگ، سوٹ کیس)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڈل فائل کا راستہ (.onnx)"
     }
   }
 }

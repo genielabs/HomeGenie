@@ -176,7 +176,7 @@ namespace HomeGenie.Automation
             } catch { }
         }
 
-        public ProgramBlock ProgramClone(int pid, string newName = null)
+        public ProgramBlock ProgramClone(int pid, string newName = null, string newDescription = null)
         {
             var program = ProgramGet(pid);
             var copy = new ProgramBlock
@@ -186,8 +186,8 @@ namespace HomeGenie.Automation
                 Domain = program.Domain,
                 Type = program.Type,
                 Group = program.Group,
-                Name = String.IsNullOrEmpty(newName) ? "Copy of " + program.Name : newName,
-                Description = program.Description,
+                Name = newName ?? "Copy of " + program.Name,
+                Description = newDescription ?? program.Description,
                 ScriptSetup = program.ScriptSetup,
                 ScriptSource = program.ScriptSource,
                 ScriptContext = program.ScriptContext,

@@ -38,7 +38,7 @@
   "schedule_event": "Událost",
   "schedule_type_standard": "Norma",
   "schedule_type_range": "Období",
-  "schedule_type_cron": "Cronův výraz",
+  "schedule_type_cron": "Cron výraz",
   "schedule_action": "Akce",
   "schedule_occurrence_preview": "Náhled výskytu",
   "time_schedule": "Naplánovat",
@@ -119,7 +119,7 @@
   "program_status_compile": "Kompilovat",
   "automation_programming_guide": "průvodce programováním'",
   "tap_to_disable": "Klepnutím zakážete",
-  "tap_to_enable": "Klepnutím povolíte",
+  "tap_to_enable": "Kliknutím povolíte",
   "program_data": "Data programu",
   "visual_code": "Vizuální kód",
   "generated_code": "Vygenerovaný kód",
@@ -127,7 +127,7 @@
   "main_code": "Hlavní",
   "context_code": "Kontext",
   "main_code_empty_note": "\"Hlavní\" kód je prázdný. Pomocí editoru \"Visual code\" vygenerujte tento kód: - Otevřete kategorii \"Program\" z palety příkazů vlevo - Přetáhněte blok typu \"Main\" na pracovní plochu vizuálního kódu - Přidejte do něj další bloky kódu pro implementaci akcí a logiky tohoto programu Program \"Main\" lze spustit buď ručně, nebo automaticky na základě podmínek případně uvedených v kódu nastavení.",
-  "setup_code_empty_note": "Kód \"Nastavení\" je prázdný. Pomocí editoru \"Visual code\" vygenerujte tento kód: - Otevřete kategorii \"Program\" z palety příkazů vlevo - Přetáhněte blok typu \"Setup\" na pracovní plochu vizuálního kódu - Přidejte do něj další bloky kódu, abyste určili podmínky, které spustí spuštění \"Hlavního\" kódu Tento kód se vyhodnotí pokaždé, když nastane nová událost a alespoň jednou za minutu.",
+  "setup_code_empty_note": "Kód \"Nastavení\" je prázdný. Pomocí editoru \"Visual code\" vygenerujte tento kód: - Otevřete kategorii \"Program\" z palety příkazů vlevo - Přetáhněte blok typu \"Setup\" na pracovní plochu vizuálního kódu - Přidejte do něj další bloky kódu, abyste určili podmínky, které spustí spuštění \"Hlavního\" kódu Tento kód se vyhodnotí pokaždé, když dojde k nové události a alespoň jednou za minutu.",
   "capture_commands": "Zachyťte příkazy",
   "capture_commands_description": "Přidejte do programu všechny příkazy prováděné ručně na widgetech.",
   "capture_commands_pause": "Pauza mezi příkazy",
@@ -139,6 +139,13 @@
       "Description": "Uložte a vyvolejte poslední úroveň stmívače.",
       "HomeGenie.LevelMemory": "Vyvolat poslední úroveň osvětlení při zapnutí",
       "HomeGenie.LevelMemory.SimulateOnly": "Pouze simulovat"
+    },
+    "26": {
+      "Title": "Barevná světla",
+      "Description": "Příklad integrace světel Philips Hue pomocí HTTP API (V1). Výchozí uživatel pro připojení k mostu je „newdeveloper“ a měl by být již povolen.",
+      "ConfigureOptions.BridgeAddress": "IP adresa Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Uživatelské jméno",
+      "ConfigureOptions.LightsCount": "Počet světel"
     },
     "34": {
       "Title": "Předpověď počasí",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maximální úroveň osvětlení (%)",
       "EnergyManagement.EnergySavingMode": "Umožnit"
     },
+    "88": {
+      "Title": "Obecná IP kamera",
+      "Description": "Zobrazení/směrování přenosu obrazu z IP kamery.",
+      "IpCamera.ImageURL": "Adresa URL rozhraní API obrázku fotoaparátu (viz dokumenty k fotoaparátu)",
+      "IpCamera.Username": "uživatelské jméno (volitelné)",
+      "IpCamera.Password": "Heslo (volitelné)",
+      "Widget.Config.fps": "Snímky za sekundu",
+      "Widget.Config.size": "Velikost widgetu"
+    },
     "90": {
       "Title": "Bezpečnostní poplachový systém",
       "Description": "Použijte senzory a další zařízení k implementaci bezpečnostního poplašného systému.",
       "HomeGenie.SecurityAlarm": "Použití jako alarm/stroboskop",
+      "HomeGenie.SecurityTriggerHome": "Spouští se také při aktivaci Home",
       "HomeGenie.SecuritySensor": "Použití jako bezpečnostní senzor",
       "ConfigureOptions.Email.Recipients": "Čárkami oddělený seznam příjemců e-mailů pro upozornění na alarm",
       "ConfigureOptions.System.ArmDelay": "Zpoždění paže (sekundy)",
@@ -199,6 +216,10 @@
       "Title": "Protokolování událostí",
       "Description": "Zaznamenejte aktivitu zařízení.",
       "EventsLogger.EnableLogging": "Umožnit"
+    },
+    "111": {
+      "Title": "Konfigurace klienta",
+      "Description": "Implementuje rozhraní API pro správu konfiguračních profilů klienta, které se používají k ukládání nastavení uživatelského rozhraní a řídicích panelů."
     },
     "400": {
       "Title": "Demo virtuálních modulů",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Tlačítko snížení jasu",
       "ConfigureOptions.DimmerInterval": "Krok stmívání"
     },
+    "142": {
+      "Title": "E-mailový účet",
+      "Description": "Ukládá informace o e-mailovém účtu používané systémovými programy pro odesílání a přijímání e-mailů.",
+      "ConfigureOptions.Email.Sender": "1. E-mailová adresa",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresa serveru SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Uživatelské jméno SMTP (volitelné)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Heslo SMTP (volitelné)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port serveru SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP server používá SSL"
+    },
     "145": {
       "Title": "Chytré zařízení",
       "Description": "Zapnutí/vypnutí zařízení na základě detekce pohybu a okolního světla.",
@@ -250,6 +281,13 @@
       "Title": "Scénář barev východu slunce",
       "Description": "Příklad scénáře „Východ slunce“ pro LED světla měnící barvu.",
       "Scenarios.SunriseColors": "Odkaz na scénář Sunrise Colors"
+    },
+    "910": {
+      "Title": "Detekce objektů",
+      "Description": "Detekujte objekty pomocí předem trénovaného modelu YOLO11.",
+      "ML.ObjectDetection": "Povolit detekci objektů",
+      "ML.ObjectDetection.TriggerDetect": "Čárkami oddělený seznam věcí (v angličtině), které spustí alarm. (např.: kočka, pes, osoba, batoh, kufr)",
+      "ConfigureOptions.Yolo.ModelPath": "Cesta souboru modelu YOLO11 (.onnx)"
     }
   }
 }

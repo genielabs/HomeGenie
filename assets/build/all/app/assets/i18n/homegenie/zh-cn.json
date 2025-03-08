@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "在一个时间段结束时",
   "cronwizard_action_custom_script": "自定义动作脚本",
   "cronwizard_action_no_action": "没有行动",
-  "cronwizard_action_schedule_variable_hint": "在 cron 表达式中使用<span class=\"notranslate color-primary\">@ {{name}}</span>作为变量，或者在自动化程序中使用<span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span>来引用此事件。",
+  "cronwizard_action_schedule_variable_hint": "在 cron 表达式中使用<span class=\"notranslate color-primary\">@ {{name}}</span>作为变量，或在自动化程序中使用<span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span>来引用此事件。",
   "scheduler_preset_action_command_turn_on": "打开",
   "scheduler_preset_action_command_turn_off": "关",
   "scheduler_preset_action_command_set_level": "设置级别",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "开启时回忆上次的灯光亮度",
       "HomeGenie.LevelMemory.SimulateOnly": "仅模拟"
     },
+    "26": {
+      "Title": "彩色灯光",
+      "Description": "使用 HTTP API (V1) 的示例飞利浦 Hue 灯集成。连接到桥接器的默认用户是“newdeveloper”，并且应该已经启用。",
+      "ConfigureOptions.BridgeAddress": "飞利浦 Hue Bridge (V1) IP 地址",
+      "ConfigureOptions.BridgeUsername": "用户名",
+      "ConfigureOptions.LightsCount": "灯数"
+    },
     "34": {
       "Title": "天气预报",
       "Description": "来自 Open Weather Map 服务的天气和预报信息。要激活此小部件，请输入有效的 API 密钥。按照 https://openweathermap.org/appid 上的说明获取免费 API 密钥。",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "最大光照水平 (%)",
       "EnergyManagement.EnergySavingMode": "使能够"
     },
+    "88": {
+      "Title": "通用网络摄像机",
+      "Description": "显示/路由来自 IP 摄像机的图像馈送。",
+      "IpCamera.ImageURL": "相机图像 API URL（请参阅相机文档）",
+      "IpCamera.Username": "用户名（可选）",
+      "IpCamera.Password": "密码（可选）",
+      "Widget.Config.fps": "每秒帧数",
+      "Widget.Config.size": "小部件大小"
+    },
     "90": {
       "Title": "安全警报系统",
       "Description": "使用传感器和其他设备实施安全警报系统。",
       "HomeGenie.SecurityAlarm": "用作警报/频闪灯",
+      "HomeGenie.SecurityTriggerHome": "武装主页时也会触发",
       "HomeGenie.SecuritySensor": "用作安全传感器",
       "ConfigureOptions.Email.Recipients": "以逗号分隔的警报通知收件人电子邮件列表",
       "ConfigureOptions.System.ArmDelay": "布防延时（秒）",
@@ -199,6 +216,10 @@
       "Title": "事件记录",
       "Description": "记录设备活动。",
       "EventsLogger.EnableLogging": "使能够"
+    },
+    "111": {
+      "Title": "客户端配置",
+      "Description": "实现用于管理用于存储 UI 和仪表板设置的客户端配置文件的 API。"
     },
     "400": {
       "Title": "虚拟模块演示",
@@ -230,12 +251,22 @@
     },
     "505": {
       "Title": "遥控",
-      "Description": "使用遥控器（红外线 (IR) 或射频 (RF)）控制设备。",
+      "Description": "使用遥控器（IR 或 RF）控制设备。",
       "HomeGenie.RemoteControl.Enable": "使能够",
       "HomeGenie.RemoteControl.IRCode": "切换按钮",
       "ConfigureOptions.DimmerUpCode": "亮度增加按钮",
       "ConfigureOptions.DimmerDownCode": "亮度降低按钮",
       "ConfigureOptions.DimmerInterval": "调光步骤"
+    },
+    "142": {
+      "Title": "电子邮件账户",
+      "Description": "存储系统程序用于发送/接收电子邮件的电子邮件帐户信息。",
+      "ConfigureOptions.Email.Sender": "1. 电子邮件地址",
+      "ConfigureOptions.Email.SmtpServer": "2.SMTP 服务器地址",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP 用户名（可选）",
+      "ConfigureOptions.Email.SmtpPassword": "4.SMTP 密码（可选）",
+      "ConfigureOptions.Email.SmtpPort": "5.SMTP 服务器端口",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP 服务器使用 SSL"
     },
     "145": {
       "Title": "智能设备",
@@ -250,6 +281,13 @@
       "Title": "日出色彩场景",
       "Description": "变色 LED 灯的“日出”场景示例。",
       "Scenarios.SunriseColors": "链接至日出色彩场景"
+    },
+    "910": {
+      "Title": "物体检测",
+      "Description": "使用预先训练的 YOLO11 模型检测物体。",
+      "ML.ObjectDetection": "启用物体检测",
+      "ML.ObjectDetection.TriggerDetect": "以逗号分隔的将触发警报的事物列表（英文）。（例如：猫、狗、人、背包、手提箱）",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
     }
   }
 }

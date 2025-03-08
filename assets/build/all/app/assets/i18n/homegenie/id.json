@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">{{@ name}}</span> sebagai variabel dalam ekspresi cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> dalam program otomatisasi untuk merujuk peristiwa ini.",
   "scheduler_preset_action_command_turn_on": "Menyalakan",
   "scheduler_preset_action_command_turn_off": "Mematikan",
-  "scheduler_preset_action_command_set_level": "Atur level",
+  "scheduler_preset_action_command_set_level": "Mengatur level",
   "scheduler_preset_action_config_level": "Tingkat",
   "scheduler_preset_action_command_set_color": "Mengatur warna",
   "scheduler_preset_action_config_color": "Warna",
@@ -95,7 +95,7 @@
   "scheduler_preset_action_config_mode_heat_eco": "Ekonomi panas",
   "scheduler_preset_action_config_mode_cool": "Dingin",
   "scheduler_preset_action_config_mode_cool_eco": "Ekonomi yang keren",
-  "scheduler_preset_action_program_run": "Jalankan program",
+  "scheduler_preset_action_program_run": "Jalankan programnya",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Pilihan",
   "scheduler_preset_action_program_say": "Mengatakan",
@@ -103,7 +103,7 @@
   "save_and_build": "Simpan dan bangun",
   "toggle_widgets_preview": "Alihkan pratinjau widget",
   "stop_program": "Hentikan program",
-  "run_program": "Jalankan program",
+  "run_program": "Jalankan programnya",
   "enable_to_run_program": "Aktifkan program untuk menjalankannya",
   "program_status_added": "Ditambahkan",
   "program_status_idle": "Menganggur",
@@ -118,8 +118,8 @@
   "program_status_broken": "Rusak",
   "program_status_compile": "Menyusun",
   "automation_programming_guide": "Panduan pemrograman",
-  "tap_to_disable": "Ketuk untuk menonaktifkan",
-  "tap_to_enable": "Ketuk untuk mengaktifkan",
+  "tap_to_disable": "Klik untuk menonaktifkan",
+  "tap_to_enable": "Klik untuk mengaktifkan",
   "program_data": "Data program",
   "visual_code": "Kode visual",
   "generated_code": "Kode yang dihasilkan",
@@ -139,6 +139,13 @@
       "Description": "Menyimpan dan memanggil kembali level peredup terakhir.",
       "HomeGenie.LevelMemory": "Ingat level lampu terakhir saat dinyalakan",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan saja"
+    },
+    "26": {
+      "Title": "Lampu warna",
+      "Description": "Contoh integrasi lampu Philips Hue menggunakan HTTP API (V1). Pengguna default untuk terhubung ke bridge adalah \"newdeveloper\" dan seharusnya sudah diaktifkan.",
+      "ConfigureOptions.BridgeAddress": "Alamat IP Jembatan Philips Hue (V1)",
+      "ConfigureOptions.BridgeUsername": "Nama belakang",
+      "ConfigureOptions.LightsCount": "Jumlah lampu"
     },
     "34": {
       "Title": "Ramalan cuaca",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Tingkat cahaya maksimum (%)",
       "EnergyManagement.EnergySavingMode": "Memungkinkan"
     },
+    "88": {
+      "Title": "Kamera IP generik",
+      "Description": "Menampilkan/mengalihkan umpan gambar dari kamera IP.",
+      "IpCamera.ImageURL": "URL API gambar kamera (lihat dokumen kamera Anda)",
+      "IpCamera.Username": "Nama pengguna (opsional)",
+      "IpCamera.Password": "Kata sandi (opsional)",
+      "Widget.Config.fps": "Bingkai per detik",
+      "Widget.Config.size": "Ukuran widget"
+    },
     "90": {
       "Title": "Sistem Alarm Keamanan",
       "Description": "Gunakan sensor dan perangkat lain untuk menerapkan sistem alarm keamanan.",
       "HomeGenie.SecurityAlarm": "Gunakan sebagai alarm/strobo",
+      "HomeGenie.SecurityTriggerHome": "Juga terpicu saat dipersenjatai Beranda",
       "HomeGenie.SecuritySensor": "Gunakan sebagai sensor keamanan",
       "ConfigureOptions.Email.Recipients": "Daftar penerima email yang dipisahkan koma untuk pemberitahuan alarm",
       "ConfigureOptions.System.ArmDelay": "Penundaan lengan (detik)",
@@ -199,6 +216,10 @@
       "Title": "Pencatatan peristiwa",
       "Description": "Merekam aktivitas perangkat.",
       "EventsLogger.EnableLogging": "Memungkinkan"
+    },
+    "111": {
+      "Title": "Konfigurasi klien",
+      "Description": "Menerapkan API untuk mengelola profil konfigurasi klien yang digunakan untuk menyimpan pengaturan UI dan dasbor."
     },
     "400": {
       "Title": "Demo Modul Virtual",
@@ -216,7 +237,7 @@
     },
     "402": {
       "Title": "Demo - Gerakan Terdeteksi",
-      "Description": "Mensimulasikan deteksi gerakan pada multisensor demo."
+      "Description": "Mensimulasikan deteksi gerakan pada demo multi-sensor."
     },
     "410": {
       "Title": "Simulator sensor",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Tombol pengurangan kecerahan",
       "ConfigureOptions.DimmerInterval": "Langkah peredupan"
     },
+    "142": {
+      "Title": "Akun email",
+      "Description": "Menyimpan informasi akun e-mail yang digunakan oleh program sistem untuk mengirim/menerima email.",
+      "ConfigureOptions.Email.Sender": "1. Alamat email",
+      "ConfigureOptions.Email.SmtpServer": "2. Alamat server SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nama pengguna SMTP (opsional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Kata sandi SMTP (opsional)",
+      "ConfigureOptions.Email.SmtpPort": "5.Port server SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Server SMTP menggunakan SSL"
+    },
     "145": {
       "Title": "Perangkat Cerdas",
       "Description": "Nyalakan/matikan perangkat berdasarkan deteksi gerakan dan cahaya sekitar.",
@@ -250,6 +281,13 @@
       "Title": "Skenario Warna Matahari Terbit",
       "Description": "Contoh skenario \"Sunrise\" untuk lampu LED yang berubah warna.",
       "Scenarios.SunriseColors": "Tautan ke skenario Warna Matahari Terbit"
+    },
+    "910": {
+      "Title": "Deteksi objek",
+      "Description": "Mendeteksi objek menggunakan model YOLO11 yang telah dilatih sebelumnya.",
+      "ML.ObjectDetection": "Aktifkan deteksi objek",
+      "ML.ObjectDetection.TriggerDetect": "Daftar hal-hal (dalam bahasa Inggris) yang dipisahkan koma yang akan memicu alarm. (misalnya: kucing, anjing, orang, ransel, koper)",
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
     }
   }
 }

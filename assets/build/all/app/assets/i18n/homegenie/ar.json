@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "تذكر مستوى الضوء الأخير عند تشغيله",
       "HomeGenie.LevelMemory.SimulateOnly": "محاكاة فقط"
     },
+    "26": {
+      "Title": "أضواء ملونة",
+      "Description": "مثال على دمج مصابيح Philips Hue باستخدام واجهة برمجة التطبيقات HTTP (الإصدار 1). المستخدم الافتراضي للاتصال بالجسر هو \"newdeveloper\" ويجب أن يكون ممكّنًا بالفعل.",
+      "ConfigureOptions.BridgeAddress": "عنوان IP لجسر Philips Hue (V1)",
+      "ConfigureOptions.BridgeUsername": "اسم المستخدم",
+      "ConfigureOptions.LightsCount": "عدد الأضواء"
+    },
     "34": {
       "Title": "توقعات الطقس",
       "Description": "معلومات الطقس والتنبؤات من خدمة Open Weather Map. لتفعيل هذه الأداة، أدخل مفتاح API صالحًا. اتبع التعليمات الموجودة على https://openweathermap.org/appid للحصول على مفتاح API مجاني.",
@@ -182,15 +189,25 @@
       "EnergyManagement.EnergySavingLevel": "الحد الأقصى لمستوى الضوء (%)",
       "EnergyManagement.EnergySavingMode": "يُمكَِن"
     },
+    "88": {
+      "Title": "كاميرا IP عامة",
+      "Description": "عرض/توجيه تغذية الصورة من كاميرا IP.",
+      "IpCamera.ImageURL": "عنوان URL لواجهة برمجة التطبيقات لصورة الكاميرا (راجع مستندات الكاميرا الخاصة بك)",
+      "IpCamera.Username": "اسم المستخدم (اختياري)",
+      "IpCamera.Password": "كلمة المرور (اختياري)",
+      "Widget.Config.fps": "إطارات في الثانية",
+      "Widget.Config.size": "حجم القطعة"
+    },
     "90": {
       "Title": "نظام إنذار الأمان",
       "Description": "استخدم أجهزة الاستشعار والأجهزة الأخرى لتنفيذ نظام إنذار أمني.",
       "HomeGenie.SecurityAlarm": "استخدمها كإنذار/ضوء ساطع",
+      "HomeGenie.SecurityTriggerHome": "يتم تشغيله أيضًا عند تسليحه",
       "HomeGenie.SecuritySensor": "استخدم كجهاز استشعار أمني",
       "ConfigureOptions.Email.Recipients": "قائمة منفصلة بفواصل لمستلمي رسائل البريد الإلكتروني لإشعارات التنبيه",
       "ConfigureOptions.System.ArmDelay": "تأخير الذراع (ثانية)",
       "ConfigureOptions.System.SirenStartTime": "تأخير بدء صفارات الإنذار (بالثواني)",
-      "ConfigureOptions.System.SirenMaxTime": "صفارات الإنذار الحد الأقصى للوقت (ثواني، 0=لانهائي)",
+      "ConfigureOptions.System.SirenMaxTime": "أقصى وقت لصافرات الإنذار (ثواني، 0=لا نهائي)",
       "ConfigureOptions.Trigger.ArmedProgram": "برنامج يتم تشغيله عند التسليح",
       "ConfigureOptions.Trigger.DisarmedProgram": "برنامج يتم تشغيله عند نزع السلاح",
       "ConfigureOptions.Trigger.TriggeredProgram": "برنامج يتم تشغيله عند تشغيله"
@@ -199,6 +216,10 @@
       "Title": "تسجيل الأحداث",
       "Description": "تسجيل نشاط الجهاز.",
       "EventsLogger.EnableLogging": "يُمكَِن"
+    },
+    "111": {
+      "Title": "تكوين العميل",
+      "Description": "تنفيذ واجهة برمجة التطبيقات لإدارة ملفات تعريف تكوين العميل المستخدمة لتخزين إعدادات واجهة المستخدم ولوحات المعلومات."
     },
     "400": {
       "Title": "عرض توضيحي للوحدات الافتراضية",
@@ -225,8 +246,8 @@
       "Simulator.Sensor.Humidity": "مستشعر الرطوبة",
       "Simulator.Sensor.Luminance": "مستشعر الضوء",
       "Simulator.Meter.Watts": "عداد الوات",
-      "Simulator.Meter.Watts.Max": "أقصى قوة واط",
-      "Simulator.Sensor.DataFrequency": "جهاز محاكاة يصدر ترددًا"
+      "Simulator.Meter.Watts.Max": "الحد الأقصى للطاقة",
+      "Simulator.Sensor.DataFrequency": "محاكاة ينبعث منها التردد"
     },
     "505": {
       "Title": "جهاز التحكم عن بعد",
@@ -236,6 +257,16 @@
       "ConfigureOptions.DimmerUpCode": "زر زيادة السطوع",
       "ConfigureOptions.DimmerDownCode": "زر تقليل السطوع",
       "ConfigureOptions.DimmerInterval": "خطوة التعتيم"
+    },
+    "142": {
+      "Title": "حساب البريد الإلكتروني",
+      "Description": "يخزن معلومات حساب البريد الإلكتروني التي تستخدمها برامج النظام لإرسال/استقبال رسائل البريد الإلكتروني.",
+      "ConfigureOptions.Email.Sender": "1. عنوان البريد الإلكتروني",
+      "ConfigureOptions.Email.SmtpServer": "2. عنوان خادم SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. اسم مستخدم SMTP (اختياري)",
+      "ConfigureOptions.Email.SmtpPassword": "4. كلمة مرور SMTP (اختياري)",
+      "ConfigureOptions.Email.SmtpPort": "5. منفذ خادم SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. خادم SMTP يستخدم SSL"
     },
     "145": {
       "Title": "جهاز ذكي",
@@ -250,6 +281,13 @@
       "Title": "سيناريو ألوان شروق الشمس",
       "Description": "مثال على سيناريو \"شروق الشمس\" لأضواء LED متغيرة اللون.",
       "Scenarios.SunriseColors": "رابط إلى سيناريو ألوان شروق الشمس"
+    },
+    "910": {
+      "Title": "كشف الأشياء",
+      "Description": "اكتشاف الكائنات باستخدام نموذج YOLO11 المدرب مسبقًا.",
+      "ML.ObjectDetection": "تمكين اكتشاف الكائنات",
+      "ML.ObjectDetection.TriggerDetect": "قائمة مفصولة بفواصل للأشياء (باللغة الإنجليزية) التي من شأنها أن تؤدي إلى تشغيل المنبه. (على سبيل المثال: قطة، كلب، شخص، حقيبة ظهر، حقيبة سفر)",
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO11 (.onnx)"
     }
   }
 }

@@ -37,7 +37,7 @@
   "scheduler_wizard": "Сцхедулер Визард",
   "schedule_event": "Догађај",
   "schedule_type_standard": "Стандард",
-  "schedule_type_range": "Опсег датума",
+  "schedule_type_range": "Период",
   "schedule_type_cron": "Црон израз",
   "schedule_action": "Акција",
   "schedule_occurrence_preview": "Преглед појављивања",
@@ -118,8 +118,8 @@
   "program_status_broken": "Сломљена",
   "program_status_compile": "Цомпиле",
   "automation_programming_guide": "Водич за програмирање'",
-  "tap_to_disable": "Додирните да бисте онемогућили",
-  "tap_to_enable": "Додирните да бисте омогућили",
+  "tap_to_disable": "Кликните да бисте онемогућили",
+  "tap_to_enable": "Кликните да бисте омогућили",
   "program_data": "Подаци о програму",
   "visual_code": "Визуелни код",
   "generated_code": "Генерисани код",
@@ -136,9 +136,16 @@
   "$options": {
     "16": {
       "Title": "Меморија нивоа",
-      "Description": "Сачувајте и позовите последњи ниво затамњивања.",
+      "Description": "Сачувајте и позовите последњи ниво димера.",
       "HomeGenie.LevelMemory": "Присетите се последњег нивоа светла када је укључен",
       "HomeGenie.LevelMemory.SimulateOnly": "Само симулирати"
+    },
+    "26": {
+      "Title": "Светла у боји",
+      "Description": "Пример интеграције Пхилипс Хуе светла помоћу ХТТП АПИ-ја (В1). Подразумевани корисник за повезивање са мостом је \"невдевелопер\" и требало би да је већ омогућен.",
+      "ConfigureOptions.BridgeAddress": "ИП адреса Пхилипс Хуе Бридге (В1).",
+      "ConfigureOptions.BridgeUsername": "Корисничко име",
+      "ConfigureOptions.LightsCount": "Број светала"
     },
     "34": {
       "Title": "Временска прогноза",
@@ -172,7 +179,7 @@
     },
     "81": {
       "Title": "Енерги Монитор",
-      "Description": "Генеришите статистику потрошње енергије и коришћења уређаја.",
+      "Description": "Генеришите статистику о потрошњи енергије и коришћењу уређаја.",
       "EnergyManagement.MonitorStatus": "Монитор статус",
       "EnergyManagement.MonitorWatts": "Пратите потрошњу енергије"
     },
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Максимални ниво светлости (%)",
       "EnergyManagement.EnergySavingMode": "Омогући"
     },
+    "88": {
+      "Title": "Генеричка ИП камера",
+      "Description": "Прикажите/усмерите слику са ИП камере.",
+      "IpCamera.ImageURL": "УРЛ АПИ-ја за слике камере (погледајте документе своје камере)",
+      "IpCamera.Username": "Корисничко име (опционо)",
+      "IpCamera.Password": "Лозинка (опционо)",
+      "Widget.Config.fps": "Број кадрова у секунди",
+      "Widget.Config.size": "Величина виџета"
+    },
     "90": {
       "Title": "Сигурносни алармни систем",
       "Description": "Користите сензоре и друге уређаје за имплементацију сигурносног алармног система.",
-      "HomeGenie.SecurityAlarm": "Користи се као аларм/строб",
+      "HomeGenie.SecurityAlarm": "Користи се као аларм/стробоскоп",
+      "HomeGenie.SecurityTriggerHome": "Такође се активира када је наоружан Дом",
       "HomeGenie.SecuritySensor": "Користи се као сигурносни сензор",
       "ConfigureOptions.Email.Recipients": "Листа е-порука прималаца одвојених зарезима за обавештења о аларму",
       "ConfigureOptions.System.ArmDelay": "Кашњење активирања (секунде)",
@@ -200,11 +217,15 @@
       "Description": "Снимите активност уређаја.",
       "EventsLogger.EnableLogging": "Омогући"
     },
+    "111": {
+      "Title": "Конфигурација клијента",
+      "Description": "Имплементира АПИ за управљање профилима конфигурације клијента који се користе за чување подешавања корисничког интерфејса и контролне табле."
+    },
     "400": {
       "Title": "Демо виртуелних модула",
       "Description": "Ручно подесите вредности виртуелног уређаја.",
       "Sensor.Temperature": "Вредност температуре",
-      "Sensor.Luminance": "Вредност осветљења",
+      "Sensor.Luminance": "Вредност осветљености",
       "Sensor.MotionDetect": "Статус детекције покрета",
       "Status.Battery": "Ниво батерије",
       "Sensor.DoorWindow": "Статус сензора врата/прозора (отворено/затворено)",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Дугме за смањење осветљености",
       "ConfigureOptions.DimmerInterval": "Корак затамњивања"
     },
+    "142": {
+      "Title": "Е-маил налог",
+      "Description": "Чува информације о налогу е-поште које користе системски програми за слање/пријем е-поште.",
+      "ConfigureOptions.Email.Sender": "1. Адреса електронске поште",
+      "ConfigureOptions.Email.SmtpServer": "2. Адреса СМТП сервера",
+      "ConfigureOptions.Email.SmtpUserName": "3. СМТП корисничко име (опционо)",
+      "ConfigureOptions.Email.SmtpPassword": "4. СМТП лозинка (опционо)",
+      "ConfigureOptions.Email.SmtpPort": "5. Порт СМТП сервера",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. СМТП сервер користи ССЛ"
+    },
     "145": {
       "Title": "Смарт Девице",
       "Description": "Укључите/искључите уређај на основу детекције покрета и амбијенталног светла.",
@@ -250,6 +281,13 @@
       "Title": "Сценарио Сунрисе Цолорс",
       "Description": "Пример сценарија „Излазак сунца“ за ЛЕД светла која мењају боју.",
       "Scenarios.SunriseColors": "Веза до сценарија Сунрисе Цолорс"
+    },
+    "910": {
+      "Title": "Детекција објеката",
+      "Description": "Откријте објекте користећи унапред обучени модел ИОЛО11.",
+      "ML.ObjectDetection": "Омогућите откривање објеката",
+      "ML.ObjectDetection.TriggerDetect": "Листа ствари раздвојених зарезима (на енглеском) које ће покренути аларм. (нпр. мачка, пас, особа, ранац, кофер)",
+      "ConfigureOptions.Yolo.ModelPath": "Путања датотеке модела ИОЛО11 (.оннк)"
     }
   }
 }

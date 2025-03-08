@@ -118,8 +118,8 @@
   "program_status_broken": "തകർന്നു",
   "program_status_compile": "സമാഹരിക്കുക",
   "automation_programming_guide": "പ്രോഗ്രാമിംഗ് ഗൈഡ്'",
-  "tap_to_disable": "പ്രവർത്തനരഹിതമാക്കാൻ ടാപ്പ് ചെയ്യുക",
-  "tap_to_enable": "പ്രവർത്തനക്ഷമമാക്കാൻ ടാപ്പ് ചെയ്യുക",
+  "tap_to_disable": "പ്രവർത്തനരഹിതമാക്കാൻ ക്ലിക്ക് ചെയ്യുക",
+  "tap_to_enable": "പ്രാപ്തമാക്കാൻ ക്ലിക്കുചെയ്യുക",
   "program_data": "പ്രോഗ്രാം ഡാറ്റ",
   "visual_code": "വിഷ്വൽ കോഡ്",
   "generated_code": "ജനറേറ്റ് ചെയ്ത കോഡ്",
@@ -139,6 +139,13 @@
       "Description": "അവസാന ഡിമ്മർ ലെവൽ സംഭരിക്കുകയും തിരിച്ചുവിളിക്കുകയും ചെയ്യുക.",
       "HomeGenie.LevelMemory": "സ്വിച്ച് ഓൺ ചെയ്യുമ്പോൾ അവസാന ലൈറ്റ് ലെവൽ ഓർമ്മിക്കുക",
       "HomeGenie.LevelMemory.SimulateOnly": "സിമുലേറ്റ് മാത്രം"
+    },
+    "26": {
+      "Title": "കളർ ലൈറ്റുകൾ",
+      "Description": "ഉദാഹരണം HTTP API (V1) ഉപയോഗിച്ചുള്ള Philips Hue ലൈറ്റുകളുടെ സംയോജനം. ബ്രിഡ്ജിലേക്ക് കണക്റ്റുചെയ്യേണ്ട ഡിഫോൾട്ട് ഉപയോക്താവ് \"newdeveloper\" ആണ്, അത് ഇതിനകം തന്നെ പ്രവർത്തനക്ഷമമാക്കിയിരിക്കണം.",
+      "ConfigureOptions.BridgeAddress": "ഫിലിപ്സ് ഹ്യൂ ബ്രിഡ്ജ് (V1) ഐപി വിലാസം",
+      "ConfigureOptions.BridgeUsername": "ഉപയോക്തൃനാമം",
+      "ConfigureOptions.LightsCount": "ലൈറ്റുകളുടെ എണ്ണം"
     },
     "34": {
       "Title": "കാലാവസ്ഥാ പ്രവചനം",
@@ -182,15 +189,25 @@
       "EnergyManagement.EnergySavingLevel": "പരമാവധി പ്രകാശ നില (%)",
       "EnergyManagement.EnergySavingMode": "പ്രാപ്തമാക്കുക"
     },
+    "88": {
+      "Title": "സാധാരണ ഐപി ക്യാമറകൾ",
+      "Description": "ഒരു IP ക്യാമറയിൽ നിന്നുള്ള ഇമേജ് ഫീഡ് പ്രദർശിപ്പിക്കുക/റൂട്ട് ചെയ്യുക.",
+      "IpCamera.ImageURL": "ക്യാമറ ഇമേജ് API URL (നിങ്ങളുടെ ക്യാമറ ഡോക്‌സ് കാണുക)",
+      "IpCamera.Username": "ഉപയോക്തൃനാമം (ഓപ്ഷണൽ)",
+      "IpCamera.Password": "പാസ്‌വേഡ് (ഓപ്ഷണൽ)",
+      "Widget.Config.fps": "ഫ്രെയിമുകൾ / സെക്കൻഡ്",
+      "Widget.Config.size": "വിജറ്റ് വലുപ്പം"
+    },
     "90": {
       "Title": "സുരക്ഷാ അലാറം സിസ്റ്റം",
       "Description": "സുരക്ഷാ അലാറം സംവിധാനം നടപ്പിലാക്കാൻ സെൻസറുകളും മറ്റ് ഉപകരണങ്ങളും ഉപയോഗിക്കുക.",
       "HomeGenie.SecurityAlarm": "അലാറം/സ്ട്രോബ് ആയി ഉപയോഗിക്കുക",
+      "HomeGenie.SecurityTriggerHome": "ആയുധധാരിയാകുമ്പോൾ ഹോം ട്രിഗർ ചെയ്യുന്നു",
       "HomeGenie.SecuritySensor": "സുരക്ഷാ സെൻസറായി ഉപയോഗിക്കുക",
       "ConfigureOptions.Email.Recipients": "അലാറം അറിയിപ്പുകൾക്കായി സ്വീകർത്താക്കളുടെ ഇ-മെയിലുകളുടെ കോമയാൽ വേർതിരിച്ച ലിസ്റ്റ്",
       "ConfigureOptions.System.ArmDelay": "കൈ കാലതാമസം (സെക്കൻഡ്)",
       "ConfigureOptions.System.SirenStartTime": "സൈറണുകളുടെ ആരംഭ കാലതാമസം (സെക്കൻഡ്)",
-      "ConfigureOptions.System.SirenMaxTime": "സൈറണുകൾ പരമാവധി സമയം (സെക്കൻഡ്, 0 = അനന്തം)",
+      "ConfigureOptions.System.SirenMaxTime": "സൈറണുകളുടെ പരമാവധി സമയം (സെക്കൻഡ്, 0 = അനന്തം)",
       "ConfigureOptions.Trigger.ArmedProgram": "ആയുധം ധരിച്ചിരിക്കുമ്പോൾ പ്രവർത്തിപ്പിക്കാനുള്ള പ്രോഗ്രാം",
       "ConfigureOptions.Trigger.DisarmedProgram": "നിരായുധീകരിക്കുമ്പോൾ പ്രവർത്തിപ്പിക്കാനുള്ള പ്രോഗ്രാം",
       "ConfigureOptions.Trigger.TriggeredProgram": "ട്രിഗർ ചെയ്യുമ്പോൾ പ്രവർത്തിപ്പിക്കേണ്ട പ്രോഗ്രാം"
@@ -199,6 +216,10 @@
       "Title": "ഇവന്റുകൾ ലോഗിംഗ്",
       "Description": "ഉപകരണ പ്രവർത്തനം രേഖപ്പെടുത്തുക.",
       "EventsLogger.EnableLogging": "പ്രാപ്തമാക്കുക"
+    },
+    "111": {
+      "Title": "ക്ലയന്റ് കോൺഫിഗറേഷൻ",
+      "Description": "UI, ഡാഷ്‌ബോർഡ് ക്രമീകരണങ്ങൾ സംഭരിക്കാൻ ഉപയോഗിക്കുന്ന ക്ലയന്റിന്റെ കോൺഫിഗറേഷൻ പ്രൊഫൈലുകൾ കൈകാര്യം ചെയ്യുന്നതിനായി API നടപ്പിലാക്കുന്നു."
     },
     "400": {
       "Title": "വെർച്വൽ മൊഡ്യൂളുകൾ ഡെമോ",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "തെളിച്ചം കുറയ്ക്കൽ ബട്ടൺ",
       "ConfigureOptions.DimmerInterval": "ഡിമ്മിംഗ് സ്റ്റെപ്പ്"
     },
+    "142": {
+      "Title": "ഇ-മെയിൽ അക്കൗണ്ട്",
+      "Description": "ഇമെയിലുകൾ അയയ്ക്കുന്നതിനും സ്വീകരിക്കുന്നതിനും സിസ്റ്റം പ്രോഗ്രാമുകൾ ഉപയോഗിക്കുന്ന ഇ-മെയിൽ അക്കൗണ്ട് വിവരങ്ങൾ സംഭരിക്കുന്നു.",
+      "ConfigureOptions.Email.Sender": "1. ഇ-മെയിൽ വിലാസം",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP സെർവർ വിലാസം",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP ഉപയോക്തൃനാമം (ഓപ്ഷണൽ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP പാസ്‌വേഡ് (ഓപ്ഷണൽ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP സെർവർ പോർട്ട്",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP സെർവർ SSL ഉപയോഗിക്കുന്നു"
+    },
     "145": {
       "Title": "സ്മാർട്ട് ഉപകരണം",
       "Description": "ചലന കണ്ടെത്തലും ആംബിയന്റ് ലൈറ്റും അടിസ്ഥാനമാക്കി ഉപകരണം ഓൺ/ഓഫ് ചെയ്യുക.",
@@ -250,6 +281,13 @@
       "Title": "സൂര്യോദയ നിറങ്ങളുടെ രംഗം",
       "Description": "നിറം മാറ്റുന്ന LED ലൈറ്റുകളുടെ \"സൂര്യോദയ\" രംഗത്തിന്റെ ഉദാഹരണം.",
       "Scenarios.SunriseColors": "സൺറൈസ് കളേഴ്‌സ് സാഹചര്യത്തിലേക്കുള്ള ലിങ്ക്"
+    },
+    "910": {
+      "Title": "വസ്തു കണ്ടെത്തൽ",
+      "Description": "മുൻകൂട്ടി പരിശീലിപ്പിച്ച YOLO11 മോഡൽ ഉപയോഗിച്ച് വസ്തുക്കളെ കണ്ടെത്തുക.",
+      "ML.ObjectDetection": "വസ്തുക്കൾ കണ്ടെത്തൽ പ്രാപ്തമാക്കുക",
+      "ML.ObjectDetection.TriggerDetect": "അലാറം ട്രിഗർ ചെയ്യുന്ന കാര്യങ്ങളുടെ കോമയാൽ വേർതിരിച്ച ലിസ്റ്റ് (ഇംഗ്ലീഷിൽ). (ഉദാ: പൂച്ച, നായ, വ്യക്തി, ബാക്ക്പാക്ക്, സ്യൂട്ട്കേസ്)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 മോഡൽ ഫയലിന്റെ (.onnx) പാത"
     }
   }
 }

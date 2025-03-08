@@ -94,6 +94,7 @@
   "saving_settings": "सेटिंग्स सहेजना",
   "operations_in_progress": "कार्य प्रगति पर",
   "connection_error": "संपर्क त्रुटि",
+  "no_video_signal": "कोई वीडियो सिग्नल नहीं",
   "error_loading_config": "कॉन्फ़िगरेशन लोड करते समय त्रुटि",
   "error_occurred": "एक त्रुटि पाई गई",
   "info": "जानकारी",
@@ -299,5 +300,19 @@
   "weather_data": "मौसम डेटा",
   "energy_monitor": "ऊर्जा मॉनिटर",
   "video_source": "वीडियो स्रोत",
-  "custom_widget": "कस्टम विजेट"
+  "custom_widget": "कस्टम विजेट",
+  "contextual_help": "प्रासंगिक सहायता",
+  "homegenie_website": "होमजीनी वेब",
+  "video_source_description": "वीडियो स्रोत प्रकार, पता, FPS और विजेट आकार सेट करें।",
+  "source_type": "वीडियो स्रोत प्रकार",
+  "http_address": "HTTP पता",
+  "frames_per_seconds": "फ्रेम प्रति सेकंड",
+  "widget_size": "विजेट का आकार",
+  "live_streaming": "सीधा आ रहा है",
+  "video_file": "वीडियो फाइल",
+  "image_refresh": "छवि फ़ीड",
+  "large": "बड़ा",
+  "medium": "मध्यम",
+  "small": "छोटा",
+  "auto": "स्वचालित"
 }

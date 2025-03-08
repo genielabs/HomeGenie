@@ -3,7 +3,7 @@
   "welcome_to_homegenie": "Nnọọ na HomeGenie!",
   "welcome_subtitle": "The programmable akpaaka ọgụgụ isi",
   "not_configured_yet": "Ahazibeghị sistemụ ma. Ọkachamara ntọlite a ga-enyere gị aka n'ịkwalite sistemụ gị ma na-arụ ọrụ na usoro ole na ole.",
-  "system_config_start_with_base_and_backup": "Weghachi na ndabere faịlụ",
+  "system_config_start_with_base_and_backup": "Weghachi na faịlụ ndabere",
   "system_config_start_with_default_setup": "Ntọlite mbụ",
   "system_config_include_demo": "Tinye ihe ngosi nwere mmemme ngwaọrụ emepụtara",
   "system_config_additional_features": "Atụmatụ ndị ọzọ",
@@ -15,7 +15,7 @@
   "HomeAutomation.ZigBee": "ZigBee njikwa",
   "device_port": "ọdụ ụgbọ mmiri",
   "device_driver": "Onye ọkwọ ụgbọ ala",
-  "flow_control": "Njikwa ọsọ",
+  "flow_control": "Njikwa mmiri",
   "controller": "Onye njikwa",
   "programs": "Mmemme",
   "repositories": "Ebe nchekwa",
@@ -119,14 +119,14 @@
   "program_status_compile": "Gbakọta",
   "automation_programming_guide": "Ntuziaka mmemme'",
   "tap_to_disable": "Pịa iji gbanyụọ",
-  "tap_to_enable": "Pịa iji mee ka ọ gbanye",
+  "tap_to_enable": "Pịa ka ị gbanye",
   "program_data": "Data mmemme",
   "visual_code": "Koodu anya",
   "generated_code": "Koodu ewepụtara",
   "setup_code": "Melite",
   "main_code": "Isi",
   "context_code": "Okwu",
-  "main_code_empty_note": "Koodu \"isi\" abaghị uru. Jiri onye nchịkọta akụkọ \"Visual code\" mepụta koodu a: - Mepee ụdị \"Mmemme\" site na palette iwu dị n'aka ekpe - Dọrọ ngọngọ nke ụdị \"Main\" na oghere ọrụ koodu - Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji mejuputa omume na mgbagha nke usoro ihe omume a.",
+  "main_code_empty_note": "Koodu \"Main\" abaghị uru. Jiri onye nchịkọta akụkọ \"Visual code\" mepụta koodu a: - Mepee ụdị \"Mmemme\" site na palette iwu dị n'aka ekpe - Dọrọ ngọngọ nke ụdị \"Main\" na oghere ọrụ koodu - Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji mejuputa omume na mgbagha nke usoro ihe omume a.",
   "setup_code_empty_note": "Koodu \"Ntọala\" efu. Jiri onye nchịkọta akụkọ \"Visual code\" mepụta koodu a: - Mepee ụdị \"Mmemme\" site na palette iwu dị n'aka ekpe - Dọrọ ngọngọ nke ụdị \"Ntọala\" na oghere ọrụ koodu anya - Tinye n'ime ya ihe mgbochi koodu ndị ọzọ iji chọpụta ọnọdụ ndị ga-akpalite \"Isi\" koodu ogbugbu a na-enyocha koodu a oge ọ bụla ihe omume ọhụrụ mere na ọ dịkarịa ala otu ugboro n'otu nkeji.",
   "capture_commands": "Weghara iwu",
   "capture_commands_description": "Tinye iwu niile ejiri aka mee na wijetị na mmemme ahụ.",
@@ -139,6 +139,13 @@
       "Description": "Chekwaa ma cheta ọkwa dimmer ikpeazụ.",
       "HomeGenie.LevelMemory": "Cheta ọkwa ọkụ ikpeazụ mgbe agbanyere ya",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuly naanị"
+    },
+    "26": {
+      "Title": "Agba ọkụ",
+      "Description": "Ọmụmaatụ Philips Hue ọkụ nchikota site na iji HTTP API (V1). Onye ọrụ ndabara iji jikọọ na akwa mmiri bụ \"onye nrụpụta ọhụrụ\" na ekwesịrị ịgbanye ya.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) adreesị IP",
+      "ConfigureOptions.BridgeUsername": "Aha njirimara",
+      "ConfigureOptions.LightsCount": "Ọnụọgụ ọkụ"
     },
     "34": {
       "Title": "Amụma ihu igwe",
@@ -182,23 +189,37 @@
       "EnergyManagement.EnergySavingLevel": "Ọkwa ọkụ kacha (%)",
       "EnergyManagement.EnergySavingMode": "Kwado"
     },
+    "88": {
+      "Title": "Igwefoto IP izugbe",
+      "Description": "Gosipụta/nri ihe onyonyo ụzọ site na igwefoto IP.",
+      "IpCamera.ImageURL": "URL API igwefoto (lee dọkụmentị igwefoto gị)",
+      "IpCamera.Username": "Aha njirimara (nhọrọ)",
+      "IpCamera.Password": "Okwuntughe (nhọrọ)",
+      "Widget.Config.fps": "Frames kwa nkeji",
+      "Widget.Config.size": "Ogo wijetị"
+    },
     "90": {
       "Title": "Sistemụ mkpu nchekwa",
       "Description": "Jiri sensọ na ngwaọrụ ndị ọzọ mejuputa sistemụ mkpu nchekwa.",
       "HomeGenie.SecurityAlarm": "Jiri dị ka mkpu/strobe",
+      "HomeGenie.SecurityTriggerHome": "Na-akpalikwa mgbe a na-eji ngwá agha n'ụlọ",
       "HomeGenie.SecuritySensor": "Jiri dị ka ihe nchekwa ihe mmetụta",
       "ConfigureOptions.Email.Recipients": "E-mail ndị nnata kewapụrụ rịkọm maka ọkwa mkpu",
       "ConfigureOptions.System.ArmDelay": "Oge igbu oge (sekọnd abụọ)",
       "ConfigureOptions.System.SirenStartTime": "Sirens Malite igbu oge (sekọnd)",
       "ConfigureOptions.System.SirenMaxTime": "Oge Sirens max (sekọnd, 0= enweghi ngwụcha)",
       "ConfigureOptions.Trigger.ArmedProgram": "Mmemme na-agba ọsọ mgbe eji ngwa agha",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Mmemme na-agba ọsọ mgbe a tọhapụrụ ya",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Mmemme ga-agba ọsọ mgbe a tọhapụrụ ya",
       "ConfigureOptions.Trigger.TriggeredProgram": "Mmemme ga-agba ọsọ mgbe akpalitere"
     },
     "95": {
       "Title": "Ndekọ ihe omume",
       "Description": "Dekọọ ọrụ ngwaọrụ.",
       "EventsLogger.EnableLogging": "Kwado"
+    },
+    "111": {
+      "Title": "Nhazi onye ahịa",
+      "Description": "Na-eme API maka ijikwa profaịlụ nhazi onye ahịa nke a na-eji chekwaa UI na ntọala dashboards."
     },
     "400": {
       "Title": "Ihe ngosi Module Virtual",
@@ -237,19 +258,36 @@
       "ConfigureOptions.DimmerDownCode": "Bọtịnụ mbelata ihie",
       "ConfigureOptions.DimmerInterval": "Nzọụkwụ na-ebelata"
     },
+    "142": {
+      "Title": "Akaụntụ e-mail",
+      "Description": "Na-echekwa ozi akaụntụ email nke mmemme sistemụ na-eji maka izipu/nata ozi-e.",
+      "ConfigureOptions.Email.Sender": "1. adreesị ozi-e",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP adreesị nkesa",
+      "ConfigureOptions.Email.SmtpUserName": "3. Aha njirimara SMTP (nhọrọ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP paswọọdụ (nhọrọ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP ọdụ ụgbọ mmiri",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP nkesa na-eji SSL"
+    },
     "145": {
       "Title": "Ngwa smart",
-      "Description": "Gbanyụọ/ gbanyụọ ngwaọrụ dabere na nchọpụta ngagharị na ọkụ gburugburu.",
+      "Description": "Gbanyụọ/ gbanyụọ ngwaọrụ dabere na nchọpụta ngagharị yana ọkụ gburugburu.",
       "HomeGenie.SmartLights.Enable": "Kwado 'Ngwaọrụ smart'",
       "HomeGenie.SmartLights.OnMotionDetect": "Ihe mmetụta na-achịkwa (nhọrọ)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ihe mmetụta ọkụ na-achịkwa (nhọrọ)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Gbanyụọ ka oge nkwụsịghị ọrụ (sekọnd)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Gbanyụọ ka oge nkwụsịghị ọrụ (nkeji abụọ)",
       "HomeGenie.SmartLights.MinLuminance": "Gbanye ma ọ bụrụ na luminance dị n'okpuru:"
     },
     "8": {
       "Title": "Ihe ngosi agba ọwụwa anyanwụ",
-      "Description": "Ọmụmaatụ \"Ọwụwa Anyanwụ\" ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
+      "Description": "Ihe atụ \"Ọwụwa anyanwụ\" dị n'ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
       "Scenarios.SunriseColors": "Njikọ na ọnọdụ ọdịda anyanwụ agba"
+    },
+    "910": {
+      "Title": "Nchọpụta ihe",
+      "Description": "Chọpụta ihe n'iji ụdị YOLO11 a zụrụ azụ.",
+      "ML.ObjectDetection": "Kwado nchọpụta ihe",
+      "ML.ObjectDetection.TriggerDetect": "Ndepụta ihe ndị kewapụrụ rịkọm (na Bekee) ga-akpalite mkpu. (dịka ọmụmaatụ: pusi, nkịta, mmadụ, akpa azụ, akpa)",
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
     }
   }
 }

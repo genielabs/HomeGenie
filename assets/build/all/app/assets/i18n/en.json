@@ -94,6 +94,7 @@
   "saving_settings": "Saving settings",
   "operations_in_progress": "Operations in progress",
   "connection_error": "Connection error",
+  "no_video_signal": "No video signal",
   "error_loading_config": "Error loading configuration",
   "error_occurred": "An error occurred",
   "info": "Info",
@@ -299,5 +300,19 @@
   "weather_data": "Weather Data",
   "energy_monitor": "Energy Monitor",
   "video_source": "Video Source",
-  "custom_widget": "Custom Widget"
+  "custom_widget": "Custom Widget",
+  "contextual_help": "Contextual Help",
+  "homegenie_website": "HomeGenie Web",
+  "video_source_description": "Set video source type, address, FPS and widget size.",
+  "source_type": "Video source type",
+  "http_address": "HTTP address",
+  "frames_per_seconds": "Frames per seconds",
+  "widget_size": "Widget size",
+  "live_streaming": "Live streaming",
+  "video_file": "Video file",
+  "image_refresh": "Image feed",
+  "large": "Large",
+  "medium": "Medium",
+  "small": "Small",
+  "auto": "Automatic"
 }

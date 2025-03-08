@@ -94,6 +94,7 @@
   "saving_settings": "تەڭشەكلەرنى ساقلاش",
   "operations_in_progress": "مەشغۇلاتلار داۋاملىشىۋاتىدۇ",
   "connection_error": "ئۇلىنىش خاتالىقى",
+  "no_video_signal": "سىن سىگنالى يوق",
   "error_loading_config": "سەپلەش خاتالىقى",
   "error_occurred": "خاتالىق كۆرۈلدى",
   "info": "ئۇچۇر",
@@ -299,5 +300,19 @@
   "weather_data": "ھاۋارايى سانلىق مەلۇماتلىرى",
   "energy_monitor": "Energy Monitor",
   "video_source": "Video Source",
-  "custom_widget": "ئىختىيارى كىچىك قورال"
+  "custom_widget": "ئىختىيارى كىچىك قورال",
+  "contextual_help": "مەزمۇن ياردىمى",
+  "homegenie_website": "HomeGenie تورى",
+  "video_source_description": "سىن مەنبە تىپى ، ئادرېس ، FPS ۋە كىچىك قوراللارنىڭ چوڭ-كىچىكلىكىنى بەلگىلەڭ.",
+  "source_type": "سىن مەنبە تىپى",
+  "http_address": "HTTP ئادرېسى",
+  "frames_per_seconds": "سېكۇنتتا رامكا",
+  "widget_size": "كىچىك قورالنىڭ چوڭلۇقى",
+  "live_streaming": "Live streaming",
+  "video_file": "سىن ھۆججىتى",
+  "image_refresh": "رەسىم يەم",
+  "large": "چوڭ",
+  "medium": "ئوتتۇراھال",
+  "small": "كىچىك",
+  "auto": "ئاپتوماتىك"
 }

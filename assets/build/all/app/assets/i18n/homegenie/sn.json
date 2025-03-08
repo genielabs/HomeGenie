@@ -10,7 +10,7 @@
   "system_config_manual_setup": "Manual setup",
   "interfaces": "Interfaces",
   "Protocols.UPnP": "UPnP controller",
-  "HomeAutomation.X10": "X10 mutongi",
+  "HomeAutomation.X10": "X10 controller",
   "HomeAutomation.ZWave": "Z-Wave controller",
   "HomeAutomation.ZigBee": "ZigBee controller",
   "device_port": "Device port",
@@ -118,8 +118,8 @@
   "program_status_broken": "Yakaputsika",
   "program_status_compile": "Compile",
   "automation_programming_guide": "Chirongwa chechirongwa'",
-  "tap_to_disable": "Tinya kuti udzime",
-  "tap_to_enable": "Tinya kuti ugone kugonesa",
+  "tap_to_disable": "Dzvanya kuti udzime",
+  "tap_to_enable": "Dzvanya kuti ugone kugonesa",
   "program_data": "Data yepurogiramu",
   "visual_code": "Visual code",
   "generated_code": "Yakagadzirwa kodhi",
@@ -139,6 +139,13 @@
       "Description": "Chengetedza uye rangarira yekupedzisira dimmer level.",
       "HomeGenie.LevelMemory": "Recall last light level pawakabatidzwa",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulate chete"
+    },
+    "26": {
+      "Title": "Mwenje yemavara",
+      "Description": "Muenzaniso Philips Hue mwenje wekubatanidza uchishandisa HTTP API (V1). Mushandisi weiyo default kubatanidza kune bhiriji ndeye \"nyowani\" uye inofanirwa kunge yatogoneswa.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP kero",
+      "ConfigureOptions.BridgeUsername": "Username",
+      "ConfigureOptions.LightsCount": "Nhamba yemwenje"
     },
     "34": {
       "Title": "Weather Forecast",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Mwero wechiedza chikuru (%)",
       "EnergyManagement.EnergySavingMode": "Enable"
     },
+    "88": {
+      "Title": "Generic IP kamera",
+      "Description": "Ratidza / nzira yemufananidzo feed kubva kune IP kamera.",
+      "IpCamera.ImageURL": "Kamera mufananidzo API URL (ona kamera docs yako)",
+      "IpCamera.Username": "Username (sarudzo)",
+      "IpCamera.Password": "Password (optional)",
+      "Widget.Config.fps": "Mafuremu pasekondi",
+      "Widget.Config.size": "Widget size"
+    },
     "90": {
       "Title": "Chengetedzo Alarm System",
       "Description": "Shandisa masensa uye mamwe maturusi kuita chengetedzo alarm system.",
       "HomeGenie.SecurityAlarm": "Shandisa searamu/strobe",
+      "HomeGenie.SecurityTriggerHome": "Zvakare zvinokonzeresa kana armed Home",
       "HomeGenie.SecuritySensor": "Shandisa se sensor yekuchengetedza",
       "ConfigureOptions.Email.Recipients": "Comma yakapatsanura runyorwa rwevanogamuchira mae-mail ezviziviso zvealarm",
       "ConfigureOptions.System.ArmDelay": "Kunonoka kweruoko (masekondi)",
@@ -200,6 +217,10 @@
       "Description": "Rekodha chiitiko chemudziyo.",
       "EventsLogger.EnableLogging": "Enable"
     },
+    "111": {
+      "Title": "Client configuration",
+      "Description": "Inoshandisa API yekugadzirisa maprofiles emutengi ayo anoshandiswa kuchengetedza UI nemadhibhodhi marongero."
+    },
     "400": {
       "Title": "Virtual Modules Demo",
       "Description": "Seta nemaoko kukosha kweiyo virtual mudziyo.",
@@ -207,7 +228,7 @@
       "Sensor.Luminance": "Luminance value",
       "Sensor.MotionDetect": "Mamiriro ekuona mafambiro",
       "Status.Battery": "Battery level",
-      "Sensor.DoorWindow": "Door / Window sensor mamiriro (yakavhurika / yakavharwa)",
+      "Sensor.DoorWindow": "Door / Window sensor chimiro (yakavhurika / yakavharwa)",
       "Status.Level": "Chinja chimiro (batidza/kudzima)"
     },
     "401": {
@@ -223,10 +244,10 @@
       "Description": "Emit random sensor values.",
       "Simulator.Sensor.Temperature": "Tembiricha sensor",
       "Simulator.Sensor.Humidity": "Humidity sensor",
-      "Simulator.Sensor.Luminance": "Light sensor",
+      "Simulator.Sensor.Luminance": "Chiedza sensor",
       "Simulator.Meter.Watts": "Watts mita",
       "Simulator.Meter.Watts.Max": "Max Watt simba",
-      "Simulator.Sensor.DataFrequency": "Simulator emit frequency"
+      "Simulator.Sensor.DataFrequency": "Simulator inoburitsa frequency"
     },
     "505": {
       "Title": "Remote Control",
@@ -236,6 +257,16 @@
       "ConfigureOptions.DimmerUpCode": "Bhatani rekuwedzera kupenya",
       "ConfigureOptions.DimmerDownCode": "Bhatani rekudzikisa kupenya",
       "ConfigureOptions.DimmerInterval": "Dimming step"
+    },
+    "142": {
+      "Title": "E-mail account",
+      "Description": "Inochengetedza ruzivo rweakaundi ye-e-mail inoshandiswa nehurongwa zvirongwa zvekutumira/kugamuchira maemail.",
+      "ConfigureOptions.Email.Sender": "1. E-mail kero",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP server kero",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP zita rekushandisa (optional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP password (optional)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP server port",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP server inoshandisa SSL"
     },
     "145": {
       "Title": "Smart Device",
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors Scenario",
       "Description": "Muenzaniso \"Kubuda kwezuva\" mamiriro ekuchinja mavara e LED.",
       "Scenarios.SunriseColors": "Batanidza kune Sunrise Colors mamiriro"
+    },
+    "910": {
+      "Title": "Kuonekwa kwechinhu",
+      "Description": "Tsvaga zvinhu uchishandisa yakadzidziswa YOLO11 modhi.",
+      "ML.ObjectDetection": "Ita kuti zvinhu zvionekwe",
+      "ML.ObjectDetection.TriggerDetect": "Comma-yakapatsanurwa runyorwa rwezvinhu (muchiRungu) izvo zvinomutsa alarm. (semuenzaniso: katsi, imbwa, munhu, bhegi, bhegi)",
+      "ConfigureOptions.Yolo.ModelPath": "Nzira yeYOLO11 modhi faira (.onnx)"
     }
   }
 }

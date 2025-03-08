@@ -118,15 +118,15 @@
   "program_status_broken": "Sulaužytas",
   "program_status_compile": "Sukompiliuoti",
   "automation_programming_guide": "programavimo vadovas'",
-  "tap_to_disable": "Bakstelėkite, kad išjungtumėte",
-  "tap_to_enable": "Bakstelėkite, kad įjungtumėte",
+  "tap_to_disable": "Spustelėkite, kad išjungtumėte",
+  "tap_to_enable": "Spustelėkite, kad įgalintumėte",
   "program_data": "Programos duomenys",
   "visual_code": "Vaizdinis kodas",
   "generated_code": "Sugeneruotas kodas",
   "setup_code": "Sąranka",
   "main_code": "Pagrindinis",
   "context_code": "Kontekstas",
-  "main_code_empty_note": "„Pagrindinis“ kodas tuščias. Norėdami sugeneruoti šį kodą, naudokite „Visual code“ redaktorių: - Atidarykite kategoriją \"Programa\" iš komandų paletės kairėje - Vilkite \"Pagrindinis\" tipo bloką į vaizdinio kodo darbo sritį - Įtraukite į jį kitus kodo blokus, kad įgyvendintumėte šios programos veiksmus ir logiką.",
+  "main_code_empty_note": "„Pagrindinis“ kodas tuščias. Norėdami sugeneruoti šį kodą, naudokite redaktorių „Vaizdinis kodas“: - Atidarykite kategoriją \"Programa\" iš komandų paletės kairėje - Vilkite \"Pagrindinis\" tipo bloką į vaizdinio kodo darbo sritį - Įtraukite į jį kitus kodo blokus, kad įgyvendintumėte šios programos veiksmus ir logiką.",
   "setup_code_empty_note": "„Sąrankos“ kodas tuščias. Norėdami sugeneruoti šį kodą, naudokite redagavimo priemonę „Vaizdinis kodas“: - Atidarykite kategoriją \"Programa\" iš komandų paletės kairėje - Vilkite \"Setup\" tipo bloką vaizdinio kodo darbo srityje - Įtraukite į jį kitus kodo blokus, kad nustatytumėte sąlygas, kurios suaktyvins \"Pagrindinio\" kodo vykdymą. Šis kodas įvertinamas kiekvieną kartą, kai įvyksta naujas įvykis ir bent kartą per minutę.",
   "capture_commands": "Užfiksuoti komandas",
   "capture_commands_description": "Į programą įtraukite visas rankiniu būdu valdikliuose atliktas komandas.",
@@ -137,8 +137,15 @@
     "16": {
       "Title": "Lygio atmintis",
       "Description": "Išsaugokite ir prisiminkite paskutinį reguliatoriaus lygį.",
-      "HomeGenie.LevelMemory": "Prisiminkite paskutinį šviesos lygį, kai įjungta",
+      "HomeGenie.LevelMemory": "Prisiminkite paskutinį apšvietimo lygį, kai įjungta",
       "HomeGenie.LevelMemory.SimulateOnly": "Tik imituoti"
+    },
+    "26": {
+      "Title": "Spalvoti šviestuvai",
+      "Description": "„Philips Hue“ lempučių integravimo naudojant HTTP API (V1) pavyzdys. Numatytasis vartotojas, norintis prisijungti prie tilto, yra „newdeveloper“ ir jis jau turėtų būti įjungtas.",
+      "ConfigureOptions.BridgeAddress": "„Philips Hue Bridge“ (V1) IP adresas",
+      "ConfigureOptions.BridgeUsername": "Vartotojo vardas",
+      "ConfigureOptions.LightsCount": "Žibintų skaičius"
     },
     "34": {
       "Title": "Orų prognozė",
@@ -182,16 +189,26 @@
       "EnergyManagement.EnergySavingLevel": "Maksimalus apšvietimo lygis (%)",
       "EnergyManagement.EnergySavingMode": "Įgalinti"
     },
+    "88": {
+      "Title": "Bendra IP kamera",
+      "Description": "Rodyti / nukreipti vaizdo kanalą iš IP kameros.",
+      "IpCamera.ImageURL": "Kameros vaizdo API URL (žr. fotoaparato dokumentus)",
+      "IpCamera.Username": "Vartotojo vardas (neprivaloma)",
+      "IpCamera.Password": "Slaptažodis (neprivaloma)",
+      "Widget.Config.fps": "Kadrai per sekundę",
+      "Widget.Config.size": "Valdiklio dydis"
+    },
     "90": {
       "Title": "Apsaugos signalizacijos sistema",
       "Description": "Apsaugos signalizacijos sistemai įdiegti naudokite jutiklius ir kitus prietaisus.",
       "HomeGenie.SecurityAlarm": "Naudoti kaip signalizaciją/blykstę",
+      "HomeGenie.SecurityTriggerHome": "Taip pat suveikia, kai yra ginkluoti Namai",
       "HomeGenie.SecuritySensor": "Naudokite kaip apsaugos jutiklį",
       "ConfigureOptions.Email.Recipients": "Kableliais atskirtas aliarmo pranešimų gavėjų el. laiškų sąrašas",
       "ConfigureOptions.System.ArmDelay": "Rankos delsa (sekundėmis)",
       "ConfigureOptions.System.SirenStartTime": "Sirenų paleidimo delsa (sekundėmis)",
       "ConfigureOptions.System.SirenMaxTime": "Maksimalus sirenų laikas (sekundėmis, 0 = begalinis)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Programa, skirta paleisti, kai įjungtas",
+      "ConfigureOptions.Trigger.ArmedProgram": "Programa, skirta paleisti, kai įjungta",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa, kuri paleista išjungus apsaugą",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programa, kuri paleidžiama, kai suveikia"
     },
@@ -199,6 +216,10 @@
       "Title": "Įvykių registravimas",
       "Description": "Įrašykite įrenginio veiklą.",
       "EventsLogger.EnableLogging": "Įgalinti"
+    },
+    "111": {
+      "Title": "Kliento konfigūracija",
+      "Description": "Diegiama API, skirta valdyti kliento konfigūracijos profilius, kurie naudojami vartotojo sąsajos ir prietaisų skydelių nustatymams saugoti."
     },
     "400": {
       "Title": "Virtualių modulių demonstracija",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Ryškumo mažinimo mygtukas",
       "ConfigureOptions.DimmerInterval": "Pritemdymo žingsnis"
     },
+    "142": {
+      "Title": "El. pašto paskyra",
+      "Description": "Saugo el. pašto paskyros informaciją, kurią sistemos programos naudoja el. laiškams siųsti/gauti.",
+      "ConfigureOptions.Email.Sender": "1. El. pašto adresas",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP serverio adresas",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP naudotojo vardas (neprivaloma)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP slaptažodis (neprivaloma)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP serverio prievadas",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP serveris naudoja SSL"
+    },
     "145": {
       "Title": "Išmanusis įrenginys",
       "Description": "Įjunkite / išjunkite įrenginį pagal judesio aptikimą ir aplinkos apšvietimą.",
@@ -250,6 +281,13 @@
       "Title": "Saulėtekio spalvų scenarijus",
       "Description": "„Saulėtekio“ scenarijaus, skirto keičiančių LED lempučių spalvas, pavyzdys.",
       "Scenarios.SunriseColors": "Nuoroda į Saulėtekio spalvų scenarijų"
+    },
+    "910": {
+      "Title": "Objekto aptikimas",
+      "Description": "Aptikkite objektus naudodami iš anksto paruoštą YOLO11 modelį.",
+      "ML.ObjectDetection": "Įgalinti objektų aptikimą",
+      "ML.ObjectDetection.TriggerDetect": "Kableliais atskirtas dalykų sąrašas (anglų kalba), kurie suaktyvins aliarmą. (pvz.: katė, šuo, žmogus, kuprinė, lagaminas)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo kelias (.onnx)"
     }
   }
 }

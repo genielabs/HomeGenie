@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Vaqt oralig'i oxirida",
   "cronwizard_action_custom_script": "Maxsus harakat skripti",
   "cronwizard_action_no_action": "Hech qanday harakat yo'q",
-  "cronwizard_action_schedule_variable_hint": "Ushbu hodisaga havola qilish uchun cron ifodalarida <span class=\"notranslate color-primary\">@ {{name}}</span> oʻzgaruvchi sifatida foydalaning yoki avtomatlashtirish dasturlarida <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> foydalaning.",
+  "cronwizard_action_schedule_variable_hint": "Cron ifodalarida oʻzgaruvchi sifatida <span class=\"notranslate color-primary\">@ {{name}}</span> foydalaning yoki ushbu hodisaga havola qilish uchun avtomatlashtirish dasturlarida <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> foydalaning.",
   "scheduler_preset_action_command_turn_on": "Yoqish; ishga tushirish",
   "scheduler_preset_action_command_turn_off": "O'chirib qo'yish",
   "scheduler_preset_action_command_set_level": "Darajani o'rnatish",
@@ -118,7 +118,7 @@
   "program_status_broken": "Buzilgan",
   "program_status_compile": "Kompilyatsiya qilish",
   "automation_programming_guide": "Dasturlash bo'yicha qo'llanma'",
-  "tap_to_disable": "Oʻchirish uchun bosing",
+  "tap_to_disable": "O'chirish uchun bosing",
   "tap_to_enable": "Yoqish uchun bosing",
   "program_data": "Dastur ma'lumotlari",
   "visual_code": "Vizual kod",
@@ -139,6 +139,13 @@
       "Description": "Oxirgi dimmer darajasini saqlang va eslang.",
       "HomeGenie.LevelMemory": "Yoqilganda oxirgi yorug'lik darajasini eslang",
       "HomeGenie.LevelMemory.SimulateOnly": "Faqat simulyatsiya"
+    },
+    "26": {
+      "Title": "Rangli chiroqlar",
+      "Description": "HTTP API (V1) yordamida Philips Hue chiroqlari integratsiyasiga misol. Ko'prikka ulanish uchun standart foydalanuvchi \"yangi ishlab chiquvchi\" bo'lib, u allaqachon yoqilgan bo'lishi kerak.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP manzili",
+      "ConfigureOptions.BridgeUsername": "Foydalanuvchi nomi",
+      "ConfigureOptions.LightsCount": "Chiroqlar soni"
     },
     "34": {
       "Title": "Ob-havo ma'lumoti",
@@ -167,7 +174,7 @@
       "Description": "Termostat funksiyasini amalga oshirish uchun har qanday harorat sensori va aqlli kalitdan foydalaning.",
       "VirtualThermostat.TemperatureModule": "Harorat sensori",
       "VirtualThermostat.HeatingSwitchModule": "Isitish kaliti",
-      "VirtualThermostat.CoolingSwitchModule": "Sovutish kaliti",
+      "VirtualThermostat.CoolingSwitchModule": "Sovutish tugmasi",
       "ConfigureOptions.ThermostatsCount": "Termostatlar soni"
     },
     "81": {
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimal yorug'lik darajasi (%)",
       "EnergyManagement.EnergySavingMode": "Yoqish"
     },
+    "88": {
+      "Title": "Umumiy IP kamera",
+      "Description": "IP kameradan tasvir tasmasini ko'rsatish/yo'naltirish.",
+      "IpCamera.ImageURL": "Kamera tasviri API URL manzili (kamerangiz hujjatlarini koʻring)",
+      "IpCamera.Username": "Foydalanuvchi nomi (ixtiyoriy)",
+      "IpCamera.Password": "Parol (ixtiyoriy)",
+      "Widget.Config.fps": "Kadrlar soniyasiga",
+      "Widget.Config.size": "Vidjet hajmi"
+    },
     "90": {
       "Title": "Xavfsizlik signalizatsiya tizimi",
       "Description": "Xavfsizlik signalizatsiya tizimini amalga oshirish uchun sensorlar va boshqa qurilmalardan foydalaning.",
       "HomeGenie.SecurityAlarm": "Signal/strob sifatida foydalaning",
+      "HomeGenie.SecurityTriggerHome": "Uy qurollanganda ham ishga tushadi",
       "HomeGenie.SecuritySensor": "Xavfsizlik sensori sifatida foydalaning",
       "ConfigureOptions.Email.Recipients": "Signal bildirishnomalari uchun qabul qiluvchilarning elektron xatlari vergul bilan ajratilgan roʻyxati",
       "ConfigureOptions.System.ArmDelay": "Qo'lning kechikishi (sekundlar)",
@@ -199,6 +216,10 @@
       "Title": "Voqealar jurnali",
       "Description": "Qurilma faoliyatini yozib oling.",
       "EventsLogger.EnableLogging": "Yoqish"
+    },
+    "111": {
+      "Title": "Mijoz konfiguratsiyasi",
+      "Description": "UI va asboblar paneli sozlamalarini saqlash uchun ishlatiladigan mijozning konfiguratsiya profillarini boshqarish uchun APIni amalga oshiradi."
     },
     "400": {
       "Title": "Virtual modullar demo",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Yorqinlikni pasaytirish tugmasi",
       "ConfigureOptions.DimmerInterval": "Karartma bosqichi"
     },
+    "142": {
+      "Title": "Elektron pochta hisobi",
+      "Description": "Tizim dasturlari tomonidan elektron pochta xabarlarini yuborish/qabul qilish uchun foydalaniladigan elektron pochta qayd yozuvi maʼlumotlarini saqlaydi.",
+      "ConfigureOptions.Email.Sender": "1. Elektron pochta manzili",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP server manzili",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP foydalanuvchi nomi (ixtiyoriy)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP paroli (ixtiyoriy)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP server porti",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP serveri SSL dan foydalanadi"
+    },
     "145": {
       "Title": "Aqlli qurilma",
       "Description": "Harakatni aniqlash va atrof-muhit yorug'ligi asosida qurilmani yoqing/o'chiring.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Quyosh chiqishi ranglari stsenariysi",
-      "Description": "Rangni o'zgartiruvchi LED chiroqlari uchun \"Sunrise\" stsenariysi misoli.",
+      "Description": "Rangni o'zgartiruvchi LED yoritgichlar uchun \"Sunrise\" stsenariysi misoli.",
       "Scenarios.SunriseColors": "Sunrise Colors stsenariysiga havola"
+    },
+    "910": {
+      "Title": "Ob'ektni aniqlash",
+      "Description": "Oldindan o'rgatilgan YOLO11 modeli yordamida ob'ektlarni aniqlang.",
+      "ML.ObjectDetection": "Ob'ektlarni aniqlashni yoqish",
+      "ML.ObjectDetection.TriggerDetect": "Signalni ishga tushiradigan narsalarning vergul bilan ajratilgan ro'yxati (ingliz tilida). (masalan: mushuk, it, odam, ryukzak, chamadon)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
     }
   }
 }

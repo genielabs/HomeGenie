@@ -2,10 +2,10 @@
   " ": "-------------------------------------",
   "welcome_to_homegenie": "HomeGenie-ə xoş gəlmisiniz!",
   "welcome_subtitle": "Proqramlaşdırıla bilən avtomatlaşdırma kəşfiyyatı",
-  "not_configured_yet": "Sistem hələ konfiqurasiya olunmayıb. Bu quraşdırma ustası bir neçə addımda sisteminizi işə salmaqda sizə kömək edəcək.",
+  "not_configured_yet": "Sistem hələ konfiqurasiya olunmayıb. Bu quraşdırma ustası sisteminizi bir neçə addımda işə salmaqda sizə kömək edəcək.",
   "system_config_start_with_base_and_backup": "Yedek fayldan bərpa edin",
   "system_config_start_with_default_setup": "Defolt quraşdırma",
-  "system_config_include_demo": "Simulyasiya edilmiş cihaz fəaliyyəti ilə demonu daxil edin",
+  "system_config_include_demo": "Simulyasiya edilmiş cihaz fəaliyyəti ilə demo əlavə edin",
   "system_config_additional_features": "Əlavə xüsusiyyətlər",
   "system_config_manual_setup": "Manual quraşdırma",
   "interfaces": "İnterfeyslər",
@@ -40,13 +40,13 @@
   "schedule_type_range": "Tarix aralığı",
   "schedule_type_cron": "Cron ifadəsi",
   "schedule_action": "Fəaliyyət",
-  "schedule_occurrence_preview": "Hadisəyə ön baxış",
+  "schedule_occurrence_preview": "Hadisənin önizləməsi",
   "time_schedule": "Cədvəl",
   "occurrence": "Baş vermə",
   "cronwizard_description_on": "haqqında",
-  "cronwizard_description_from": "-dan",
+  "cronwizard_description_from": "-dən",
   "cronwizard_description_to": "üçün",
-  "cronwizard_description_starting": "-dan",
+  "cronwizard_description_starting": "-dən",
   "cronwizard_description_ending": "üçün",
   "cronwizard_description_at": "saat",
   "cronwizard_add_time_slot": "Vaxt intervalı əlavə edin",
@@ -71,7 +71,7 @@
   "cronwizard_schedule_set_exact_time": "Tədbir vaxtını təyin edin.",
   "cronwizard_schedule_set_slot_start": "Başlanğıc vaxt aralığını təyin edin.",
   "cronwizard_schedule_set_slot_end": "{{start}} başlayaraq.<span class=\"notranslate\"><br/></span> Vaxt aralığının sonunu təyin edin.",
-  "cronwizard_bindings_define_types_and_modules": "Bu cədvələ tabe olan növləri və modulları müəyyən edin (isteğe bağlı)",
+  "cronwizard_bindings_define_types_and_modules": "Bu cədvələ tabe olan növləri və modulları müəyyənləşdirin (isteğe bağlı)",
   "cronwizard_bindings_select_types": "Növləri seçin",
   "cronwizard_action_set_action_to_execute": "Bu hadisənin baş verməsinə dair icra etmək üçün fəaliyyət təyin edin",
   "cronwizard_action_preset_actions": "Əvvəlcədən təyin edilmiş hərəkətlər",
@@ -118,16 +118,16 @@
   "program_status_broken": "Sınıq",
   "program_status_compile": "Tərtib et",
   "automation_programming_guide": "Proqramlaşdırma bələdçisi'",
-  "tap_to_disable": "Deaktiv etmək üçün toxunun",
-  "tap_to_enable": "Aktivləşdirmək üçün toxunun",
+  "tap_to_disable": "Deaktiv etmək üçün klikləyin",
+  "tap_to_enable": "Aktivləşdirmək üçün klikləyin",
   "program_data": "Proqram məlumatları",
   "visual_code": "Vizual kod",
   "generated_code": "Yaradılmış kod",
   "setup_code": "Quraşdırma",
   "main_code": "Əsas",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Əsas\" kod boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Solda yerləşən komandalar palitrasından \"Proqram\" kateqoriyasını açın - Vizual kodun iş sahəsində \"Əsas\" tipli bloku sürükləyin - Bu proqramın hərəkətlərini və məntiqini həyata keçirmək üçün içərisinə başqa kod blokları əlavə edin \"Əsas\" proqramı nəhayət Quraşdırma kodunda verilmiş şərtlərə əsasən əl ilə işlədilə və ya avtomatik işə salına bilər.",
-  "setup_code_empty_note": "\"Quraşdırma\" kodu boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Soldakı əmrlər palitrasından \"Proqram\" kateqoriyasını açın - Vizual kodun iş sahəsində \"Quraşdırma\" tipli bloku sürükləyin - \"Əsas\" kodun icrasına səbəb olacaq şərtləri müəyyən etmək üçün onun içinə digər kod bloklarını əlavə edin. Bu kod hər dəfə yeni hadisə baş verəndə və ən azı dəqiqədə bir dəfə qiymətləndirilir.",
+  "main_code_empty_note": "\"Əsas\" kod boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Solda yerləşən komandalar palitrasından \"Proqram\" kateqoriyasını açın - Vizual kod iş sahəsində \"Əsas\" tipli bloku sürükləyin - Bu proqramın hərəkətlərini və məntiqini həyata keçirmək üçün içərisinə başqa kod bloklarını əlavə edin \"Əsas\" proqramı nəhayət Quraşdırma kodunda verilmiş şərtlərə əsasən ya əl ilə işlədilə, ya da avtomatik işə sala bilər.",
+  "setup_code_empty_note": "\"Quraşdırma\" kodu boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Sol tərəfdəki komandalar palitrasından \"Proqram\" kateqoriyasını açın - Vizual kodun iş sahəsində \"Setup\" tipli bloku sürükləyin - \"Əsas\" kodun icrasına səbəb olacaq şərtləri müəyyən etmək üçün onun içinə digər kod bloklarını əlavə edin. Bu kod hər dəfə yeni hadisə baş verəndə və ən azı dəqiqədə bir dəfə qiymətləndirilir.",
   "capture_commands": "Çəkmə əmrləri",
   "capture_commands_description": "Vidcetlərdə əl ilə yerinə yetirilən bütün əmrləri proqrama əlavə edin.",
   "capture_commands_pause": "Əmrlər arasında fasilə",
@@ -139,6 +139,13 @@
       "Description": "Son dimmer səviyyəsini saxlayın və geri çağırın.",
       "HomeGenie.LevelMemory": "Yandırıldıqda son işıq səviyyəsini xatırlayın",
       "HomeGenie.LevelMemory.SimulateOnly": "Yalnız simulyasiya edin"
+    },
+    "26": {
+      "Title": "Rəngli işıqlar",
+      "Description": "HTTP API (V1) istifadə edərək Philips Hue işıqlarının inteqrasiyasına nümunə. Körpüyə qoşulmaq üçün standart istifadəçi \"yeni tərtibatçıdır\" və o, artıq aktivləşdirilməlidir.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP ünvanı",
+      "ConfigureOptions.BridgeUsername": "İstifadəçi adı",
+      "ConfigureOptions.LightsCount": "İşıqların sayı"
     },
     "34": {
       "Title": "Hava Proqnozu",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimum işıq səviyyəsi (%)",
       "EnergyManagement.EnergySavingMode": "Aktivləşdirin"
     },
+    "88": {
+      "Title": "Ümumi IP kamera",
+      "Description": "IP kameradan görüntü axını göstərin/marşrutun.",
+      "IpCamera.ImageURL": "Kamera şəkli API URL (kamera sənədlərinizə baxın)",
+      "IpCamera.Username": "İstifadəçi adı (isteğe bağlı)",
+      "IpCamera.Password": "Parol (isteğe bağlı)",
+      "Widget.Config.fps": "Saniyədə kadrlar",
+      "Widget.Config.size": "Widget ölçüsü"
+    },
     "90": {
       "Title": "Təhlükəsizlik Siqnal Sistemi",
       "Description": "Təhlükəsizlik siqnalizasiya sistemini həyata keçirmək üçün sensorlar və digər cihazlardan istifadə edin.",
       "HomeGenie.SecurityAlarm": "Siqnal/strob kimi istifadə edin",
+      "HomeGenie.SecurityTriggerHome": "Həmçinin Home silahlı olduqda tetikler",
       "HomeGenie.SecuritySensor": "Təhlükəsizlik sensoru kimi istifadə edin",
       "ConfigureOptions.Email.Recipients": "Siqnal bildirişləri üçün alıcıların e-poçtlarının vergüllə ayrılmış siyahısı",
       "ConfigureOptions.System.ArmDelay": "Qol gecikməsi (saniyə)",
@@ -199,6 +216,10 @@
       "Title": "Hadisələrin qeydi",
       "Description": "Cihaz fəaliyyətini qeyd edin.",
       "EventsLogger.EnableLogging": "Aktivləşdirin"
+    },
+    "111": {
+      "Title": "Müştəri konfiqurasiyası",
+      "Description": "UI və tablosuna parametrləri saxlamaq üçün istifadə edilən müştərinin konfiqurasiya profillərini idarə etmək üçün API tətbiq edir."
     },
     "400": {
       "Title": "Virtual modulların nümayişi",
@@ -220,13 +241,13 @@
     },
     "410": {
       "Title": "Sensor simulyatoru",
-      "Description": "Təsadüfi sensor dəyərləri buraxın.",
+      "Description": "Təsadüfi sensor dəyərlərini buraxın.",
       "Simulator.Sensor.Temperature": "Temperatur sensoru",
       "Simulator.Sensor.Humidity": "Rütubət sensoru",
       "Simulator.Sensor.Luminance": "İşıq sensoru",
       "Simulator.Meter.Watts": "Vatt metr",
       "Simulator.Meter.Watts.Max": "Maks Watt gücü",
-      "Simulator.Sensor.DataFrequency": "Simulyator yayma tezliyi"
+      "Simulator.Sensor.DataFrequency": "Simulyator emissiya tezliyi"
     },
     "505": {
       "Title": "Uzaqdan İdarəetmə",
@@ -237,10 +258,20 @@
       "ConfigureOptions.DimmerDownCode": "Parlaqlığı azaltmaq düyməsi",
       "ConfigureOptions.DimmerInterval": "Qaralma addımı"
     },
+    "142": {
+      "Title": "E-poçt hesabı",
+      "Description": "Sistem proqramları tərəfindən e-poçtların göndərilməsi/qəbul edilməsi üçün istifadə olunan e-poçt hesabı məlumatlarını saxlayır.",
+      "ConfigureOptions.Email.Sender": "1. E-poçt ünvanı",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP server ünvanı",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP istifadəçi adı (isteğe bağlı)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP parolu (isteğe bağlı)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP server portu",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP server SSL istifadə edir"
+    },
     "145": {
       "Title": "Ağıllı Cihaz",
       "Description": "Hərəkət aşkarlanması və ətraf işığına əsasən cihazı yandırın/söndürün.",
-      "HomeGenie.SmartLights.Enable": "\"Ağıllı Cihaz\"ı aktivləşdirin",
+      "HomeGenie.SmartLights.Enable": "'Ağıllı Cihaz'ı aktivləşdirin",
       "HomeGenie.SmartLights.OnMotionDetect": "Sensor tərəfindən idarə olunur (isteğe bağlı)",
       "HomeGenie.SmartLights.CheckLuminosity": "İşıq sensoru ilə idarə olunur (isteğe bağlı)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Hərəkətsizlik fasiləsindən sonra söndürün (saniyələr)",
@@ -250,6 +281,13 @@
       "Title": "Günəşin Doğuşu Rəngləri Ssenarisi",
       "Description": "Rəng dəyişdirən LED işıqlar üçün \"Günəşin doğuşu\" ssenarisi nümunəsi.",
       "Scenarios.SunriseColors": "Sunrise Colors ssenarisinə keçid"
+    },
+    "910": {
+      "Title": "Obyekt aşkarlanması",
+      "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri aşkar edin.",
+      "ML.ObjectDetection": "Obyektlərin aşkarlanmasını aktivləşdirin",
+      "ML.ObjectDetection.TriggerDetect": "Siqnalı işə salacaq şeylərin vergüllə ayrılmış siyahısı (ingilis dilində). (məsələn: pişik, it, adam, kürək çantası, çamadan)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
     }
   }
 }

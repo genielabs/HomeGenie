@@ -5,7 +5,7 @@
   "not_configured_yet": "სისტემა ჯერ არ არის კონფიგურირებული. დაყენების ეს ოსტატი დაგეხმარებათ თქვენი სისტემის ამოქმედებაში რამდენიმე ნაბიჯით.",
   "system_config_start_with_base_and_backup": "აღდგენა სარეზერვო ფაილიდან",
   "system_config_start_with_default_setup": "ნაგულისხმევი დაყენება",
-  "system_config_include_demo": "დემო ჩართვა მოწყობილობის სიმულირებული აქტივობით",
+  "system_config_include_demo": "ჩართეთ დემო სიმულირებული მოწყობილობის აქტივობით",
   "system_config_additional_features": "დამატებითი ფუნქციები",
   "system_config_manual_setup": "ხელით დაყენება",
   "interfaces": "ინტერფეისები",
@@ -95,7 +95,7 @@
   "scheduler_preset_action_config_mode_heat_eco": "სითბოს ეკონომია",
   "scheduler_preset_action_config_mode_cool": "მაგარია",
   "scheduler_preset_action_config_mode_cool_eco": "მაგარი ეკონომია",
-  "scheduler_preset_action_program_run": "პროგრამის გაშვება",
+  "scheduler_preset_action_program_run": "გაუშვით პროგრამა",
   "scheduler_preset_action_config_program": "პროგრამა",
   "scheduler_preset_action_config_options": "ოფციები",
   "scheduler_preset_action_program_say": "თქვი",
@@ -118,8 +118,8 @@
   "program_status_broken": "გატეხილი",
   "program_status_compile": "შედგენა",
   "automation_programming_guide": "პროგრამირების სახელმძღვანელო\"",
-  "tap_to_disable": "შეეხეთ გასათიშად",
-  "tap_to_enable": "შეეხეთ ჩასართავად",
+  "tap_to_disable": "დააწკაპუნეთ გასათიშად",
+  "tap_to_enable": "დააწკაპუნეთ გასააქტიურებლად",
   "program_data": "პროგრამის მონაცემები",
   "visual_code": "ვიზუალური კოდი",
   "generated_code": "გენერირებული კოდი",
@@ -140,12 +140,19 @@
       "HomeGenie.LevelMemory": "გაიხსენეთ ბოლო განათების დონე ჩართვისას",
       "HomeGenie.LevelMemory.SimulateOnly": "მხოლოდ სიმულაცია"
     },
+    "26": {
+      "Title": "ფერადი ნათურები",
+      "Description": "მაგალითი Philips Hue lights ინტეგრაციის HTTP API (V1) გამოყენებით. ხიდთან დასაკავშირებლად ნაგულისხმევი მომხმარებელი არის \"newdeveloper\" და ის უკვე ჩართული უნდა იყოს.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP მისამართი",
+      "ConfigureOptions.BridgeUsername": "მომხმარებლის სახელი",
+      "ConfigureOptions.LightsCount": "განათების რაოდენობა"
+    },
     "34": {
       "Title": "ამინდის პროგნოზი",
       "Description": "ამინდისა და პროგნოზის ინფორმაცია ღია ამინდის რუქის სერვისიდან. ამ ვიჯეტის გასააქტიურებლად შეიყვანეთ მოქმედი API გასაღები. მიჰყევით ინსტრუქციას https://openweathermap.org/appid, რომ მიიღოთ უფასო API გასაღები.",
       "ConfigureOptions.Location": "ქალაქის სახელი",
       "ConfigureOptions.Language": "ენა (მაგ. EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval": "განახლების ინტერვალი (წუთი)",
+      "ConfigureOptions.UpdateInterval": "განახლების ინტერვალი (წუთები)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API გასაღები (APPID)"
     },
     "77": {
@@ -158,7 +165,7 @@
       "ConfigureOptions.Encryption": "ჩართეთ ბოლოდან ბოლომდე დაშიფვრა (E2EE)",
       "ConfigureOptions.WebSockets": "გამოიყენეთ WebSockets",
       "ConfigureOptions.TLS": "ჩართეთ TLS/SSL",
-      "ConfigureOptions.Username": "მომხმარებლის სახელი (სურვილისამებრ)",
+      "ConfigureOptions.Username": "მომხმარებლის სახელი (არასავალდებულო)",
       "ConfigureOptions.Password": "პაროლი (სურვილისამებრ)",
       "ConfigureOptions.ImportExternal": "გარე მოდულების იმპორტი"
     },
@@ -178,14 +185,24 @@
     },
     "82": {
       "Title": "ენერგიის დაზოგვის რეჟიმი",
-      "Description": "შეინახეთ განათების დონე კონფიგურირებადი პროცენტის ქვემოთ.",
+      "Description": "შეინახეთ განათების დონე რეგულირებადი პროცენტის ქვემოთ.",
       "EnergyManagement.EnergySavingLevel": "განათების მაქსიმალური დონე (%)",
       "EnergyManagement.EnergySavingMode": "ჩართვა"
+    },
+    "88": {
+      "Title": "ზოგადი IP კამერა",
+      "Description": "გამოსახულების ჩვენება/მარშრუტი IP კამერიდან.",
+      "IpCamera.ImageURL": "კამერის სურათის API URL (იხილეთ თქვენი კამერის დოკუმენტები)",
+      "IpCamera.Username": "მომხმარებლის სახელი (სურვილისამებრ)",
+      "IpCamera.Password": "პაროლი (სურვილისამებრ)",
+      "Widget.Config.fps": "კადრები წამში",
+      "Widget.Config.size": "ვიჯეტის ზომა"
     },
     "90": {
       "Title": "უსაფრთხოების სიგნალიზაციის სისტემა",
       "Description": "გამოიყენეთ სენსორები და სხვა მოწყობილობები უსაფრთხოების განგაშის სისტემის დასაყენებლად.",
       "HomeGenie.SecurityAlarm": "გამოიყენეთ როგორც სიგნალიზაცია/სტრობო",
+      "HomeGenie.SecurityTriggerHome": "ასევე ამოქმედდება სახლის შეიარაღებისას",
       "HomeGenie.SecuritySensor": "გამოიყენეთ როგორც უსაფრთხოების სენსორი",
       "ConfigureOptions.Email.Recipients": "მძიმით გამოყოფილი მიმღებთა ელ.წერილების სია განგაშის შეტყობინებებისთვის",
       "ConfigureOptions.System.ArmDelay": "მკლავის დაყოვნება (წამები)",
@@ -199,6 +216,10 @@
       "Title": "მოვლენების აღრიცხვა",
       "Description": "მოწყობილობის აქტივობის ჩაწერა.",
       "EventsLogger.EnableLogging": "ჩართვა"
+    },
+    "111": {
+      "Title": "კლიენტის კონფიგურაცია",
+      "Description": "ახორციელებს API-ს კლიენტის კონფიგურაციის პროფილების სამართავად, რომლებიც გამოიყენება UI და დაფების პარამეტრების შესანახად."
     },
     "400": {
       "Title": "ვირტუალური მოდულების დემო",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "სიკაშკაშის შემცირების ღილაკი",
       "ConfigureOptions.DimmerInterval": "ჩაბნელების ნაბიჯი"
     },
+    "142": {
+      "Title": "ელექტრონული ფოსტის ანგარიში",
+      "Description": "ინახავს ელ.ფოსტის ანგარიშის ინფორმაციას, რომელსაც სისტემური პროგრამები იყენებენ ელ.ფოსტის გაგზავნისთვის/მიღებისთვის.",
+      "ConfigureOptions.Email.Sender": "1. ელექტრონული ფოსტის მისამართი",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP სერვერის მისამართი",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP მომხმარებლის სახელი (სურვილისამებრ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP პაროლი (სურვილისამებრ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP სერვერის პორტი",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP სერვერი იყენებს SSL-ს"
+    },
     "145": {
       "Title": "ჭკვიანი მოწყობილობა",
       "Description": "ჩართეთ/გამორთეთ მოწყობილობა მოძრაობის ამოცნობისა და გარემოს განათების საფუძველზე.",
@@ -250,6 +281,13 @@
       "Title": "მზის ამოსვლის ფერების სცენარი",
       "Description": "მაგალითი \"მზის ამოსვლის\" სცენარი ფერის შეცვლის LED განათებისთვის.",
       "Scenarios.SunriseColors": "ბმული Sunrise Colors სცენართან"
+    },
+    "910": {
+      "Title": "ობიექტების გამოვლენა",
+      "Description": "აღმოაჩინე ობიექტები წინასწარ გაწვრთნილი YOLO11 მოდელის გამოყენებით.",
+      "ML.ObjectDetection": "ობიექტების ამოცნობის ჩართვა",
+      "ML.ObjectDetection.TriggerDetect": "მძიმით გამოყოფილი ნივთების სია (ინგლისურად), რომლებიც გააქტიურებენ განგაშს. (მაგ: კატა, ძაღლი, ადამიანი, ზურგჩანთა, ჩემოდანი)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 მოდელის ფაილის გზა (.onnx)"
     }
   }
 }

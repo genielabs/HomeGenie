@@ -113,13 +113,13 @@
   "program_status_stopping": "Stop",
   "program_status_stopped": "Gestop",
   "program_status_interrupted": "Onderbreek",
-  "program_status_disabled": "Gestrem",
+  "program_status_disabled": "Gedeaktiveer",
   "program_status_enabled": "Geaktiveer",
   "program_status_broken": "Gebreek",
   "program_status_compile": "Stel saam",
   "automation_programming_guide": "Programmeringsgids'",
-  "tap_to_disable": "Tik om te deaktiveer",
-  "tap_to_enable": "Tik om te aktiveer",
+  "tap_to_disable": "Klik om te deaktiveer",
+  "tap_to_enable": "Klik om te aktiveer",
   "program_data": "Program data",
   "visual_code": "Visuele kode",
   "generated_code": "Gegenereerde kode",
@@ -138,7 +138,14 @@
       "Title": "Vlak Geheue",
       "Description": "Berg en herroep laaste dowwervlak.",
       "HomeGenie.LevelMemory": "Herroep die laaste ligvlak wanneer dit aangeskakel is",
-      "HomeGenie.LevelMemory.SimulateOnly": "Simuleer slegs"
+      "HomeGenie.LevelMemory.SimulateOnly": "Slegs simuleer"
+    },
+    "26": {
+      "Title": "Kleur ligte",
+      "Description": "Voorbeeld Philips Hue-ligte-integrasie met behulp van HTTP API (V1). Die verstek gebruiker om aan die brug te koppel is \"newdeveloper\" en dit behoort reeds geaktiveer te wees.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adres",
+      "ConfigureOptions.BridgeUsername": "Gebruikersnaam",
+      "ConfigureOptions.LightsCount": "Aantal ligte"
     },
     "34": {
       "Title": "Weervoorspelling",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimum ligvlak (%)",
       "EnergyManagement.EnergySavingMode": "Aktiveer"
     },
+    "88": {
+      "Title": "Generiese IP-kamera",
+      "Description": "Vertoon/roeteer beeldvoer vanaf 'n IP-kamera.",
+      "IpCamera.ImageURL": "Kamera beeld API URL (sien jou kamera dokumente)",
+      "IpCamera.Username": "Gebruikersnaam (opsioneel)",
+      "IpCamera.Password": "Wagwoord (opsioneel)",
+      "Widget.Config.fps": "Rame per sekonde",
+      "Widget.Config.size": "Widget grootte"
+    },
     "90": {
-      "Title": "Sekuriteit alarmstelsel",
+      "Title": "Sekuriteit Alarm Stelsel",
       "Description": "Gebruik sensors en ander toestelle om 'n sekuriteitsalarmstelsel te implementeer.",
       "HomeGenie.SecurityAlarm": "Gebruik as alarm/strobe",
+      "HomeGenie.SecurityTriggerHome": "Snellers ook wanneer Tuis gewapen is",
       "HomeGenie.SecuritySensor": "Gebruik as sekuriteitsensor",
       "ConfigureOptions.Email.Recipients": "Komma-geskeide lys van ontvangers se e-posse vir alarmkennisgewings",
       "ConfigureOptions.System.ArmDelay": "Arm vertraging (sekondes)",
@@ -200,10 +217,14 @@
       "Description": "Teken toestelaktiwiteit op.",
       "EventsLogger.EnableLogging": "Aktiveer"
     },
+    "111": {
+      "Title": "Kliënt konfigurasie",
+      "Description": "Implementeer API vir die bestuur van kliënt se konfigurasieprofiele wat gebruik word om UI- en kontroleskerminstellings te stoor."
+    },
     "400": {
       "Title": "Virtuele Modules Demo",
       "Description": "Stel waardes van die virtuele toestel handmatig in.",
-      "Sensor.Temperature": "Temperatuur waarde",
+      "Sensor.Temperature": "Temperatuurwaarde",
       "Sensor.Luminance": "Luminansie waarde",
       "Sensor.MotionDetect": "Bewegingsopsporingstatus",
       "Status.Battery": "Batteryvlak",
@@ -223,7 +244,7 @@
       "Description": "Stuur ewekansige sensorwaardes uit.",
       "Simulator.Sensor.Temperature": "Temperatuur sensor",
       "Simulator.Sensor.Humidity": "Humiditeit sensor",
-      "Simulator.Sensor.Luminance": "Lig sensor",
+      "Simulator.Sensor.Luminance": "Ligsensor",
       "Simulator.Meter.Watts": "Watt meter",
       "Simulator.Meter.Watts.Max": "Max Watt krag",
       "Simulator.Sensor.DataFrequency": "Simulator uitstraal frekwensie"
@@ -234,8 +255,18 @@
       "HomeGenie.RemoteControl.Enable": "Aktiveer",
       "HomeGenie.RemoteControl.IRCode": "Wissel knoppie",
       "ConfigureOptions.DimmerUpCode": "Knoppie om helderheid te verhoog",
-      "ConfigureOptions.DimmerDownCode": "Knoppie om helderheid te verminder",
+      "ConfigureOptions.DimmerDownCode": "Knoppie om die helderheid te verminder",
       "ConfigureOptions.DimmerInterval": "Verdoof stap"
+    },
+    "142": {
+      "Title": "E-pos rekening",
+      "Description": "Stoor e-pos rekeninginligting wat deur stelselprogramme gebruik word om e-posse te stuur/ontvang.",
+      "ConfigureOptions.Email.Sender": "1. E-pos adres",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP-bedieneradres",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP-gebruikernaam (opsioneel)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-wagwoord (opsioneel)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-bedienerpoort",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-bediener gebruik SSL"
     },
     "145": {
       "Title": "Slim toestel",
@@ -250,6 +281,13 @@
       "Title": "Sonsopkoms Kleure Scenario",
       "Description": "Voorbeeld \"Sonsopkoms\"-scenario vir kleurveranderende LED-ligte.",
       "Scenarios.SunriseColors": "Skakel na Sunrise Colors scenario"
+    },
+    "910": {
+      "Title": "Voorwerpopsporing",
+      "Description": "Bespeur voorwerpe deur 'n vooraf-opgeleide YOLO11-model te gebruik.",
+      "ML.ObjectDetection": "Aktiveer voorwerpopsporing",
+      "ML.ObjectDetection.TriggerDetect": "Komma-geskeide lys van dinge (in Engels) wat die alarm sal aktiveer. (bv: kat, hond, persoon, rugsak, tas)",
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modellêer (.onnx)"
     }
   }
 }

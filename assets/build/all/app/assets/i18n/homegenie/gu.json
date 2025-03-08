@@ -118,8 +118,8 @@
   "program_status_broken": "તૂટેલું",
   "program_status_compile": "કમ્પાઇલ કરો",
   "automation_programming_guide": "પ્રોગ્રામિંગ માર્ગદર્શિકા'",
-  "tap_to_disable": "અક્ષમ કરવા માટે ટેપ કરો",
-  "tap_to_enable": "સક્ષમ કરવા માટે ટૅપ કરો",
+  "tap_to_disable": "અક્ષમ કરવા માટે ક્લિક કરો",
+  "tap_to_enable": "સક્ષમ કરવા માટે ક્લિક કરો",
   "program_data": "પ્રોગ્રામ ડેટા",
   "visual_code": "વિઝ્યુઅલ કોડ",
   "generated_code": "જનરેટ કરેલો કોડ",
@@ -139,6 +139,13 @@
       "Description": "છેલ્લા ડિમર સ્તરને સંગ્રહિત કરો અને યાદ કરો.",
       "HomeGenie.LevelMemory": "ચાલુ હોય ત્યારે છેલ્લું પ્રકાશ સ્તર યાદ કરો",
       "HomeGenie.LevelMemory.SimulateOnly": "ફક્ત અનુકરણ કરો"
+    },
+    "26": {
+      "Title": "રંગીન લાઇટ્સ",
+      "Description": "HTTP API (V1) નો ઉપયોગ કરીને ફિલિપ્સ હ્યુ લાઇટ્સ ઇન્ટિગ્રેશનનું ઉદાહરણ. બ્રિજ સાથે કનેક્ટ થવા માટેનો ડિફોલ્ટ વપરાશકર્તા \"newdeveloper\" છે અને તે પહેલાથી જ સક્ષમ હોવો જોઈએ.",
+      "ConfigureOptions.BridgeAddress": "ફિલિપ્સ હ્યુ બ્રિજ (V1) IP સરનામું",
+      "ConfigureOptions.BridgeUsername": "વપરાશકર્તા નામ",
+      "ConfigureOptions.LightsCount": "લાઇટની સંખ્યા"
     },
     "34": {
       "Title": "હવામાન આગાહી",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "મહત્તમ પ્રકાશ સ્તર (%)",
       "EnergyManagement.EnergySavingMode": "સક્ષમ કરો"
     },
+    "88": {
+      "Title": "સામાન્ય IP કેમેરા",
+      "Description": "IP કેમેરામાંથી ઇમેજ ફીડ ડિસ્પ્લે/રૂટ કરો.",
+      "IpCamera.ImageURL": "કેમેરા છબી API URL (તમારા કેમેરા દસ્તાવેજો જુઓ)",
+      "IpCamera.Username": "વપરાશકર્તા નામ (વૈકલ્પિક)",
+      "IpCamera.Password": "પાસવર્ડ (વૈકલ્પિક)",
+      "Widget.Config.fps": "ફ્રેમ પ્રતિ સેકન્ડ",
+      "Widget.Config.size": "વિજેટનું કદ"
+    },
     "90": {
       "Title": "સુરક્ષા એલાર્મ સિસ્ટમ",
       "Description": "સુરક્ષા એલાર્મ સિસ્ટમ લાગુ કરવા માટે સેન્સર અને અન્ય ઉપકરણોનો ઉપયોગ કરો.",
       "HomeGenie.SecurityAlarm": "એલાર્મ/સ્ટ્રોબ તરીકે ઉપયોગ કરો",
+      "HomeGenie.SecurityTriggerHome": "સશસ્ત્ર હોય ત્યારે પણ ટ્રિગર થાય છે હોમ",
       "HomeGenie.SecuritySensor": "સુરક્ષા સેન્સર તરીકે ઉપયોગ કરો",
       "ConfigureOptions.Email.Recipients": "એલાર્મ સૂચનાઓ માટે પ્રાપ્તકર્તાઓના ઇ-મેઇલ્સની અલ્પવિરામથી અલગ સૂચિ",
       "ConfigureOptions.System.ArmDelay": "હાથ વિલંબ (સેકન્ડ)",
@@ -199,6 +216,10 @@
       "Title": "ઇવેન્ટ્સ લોગિંગ",
       "Description": "ઉપકરણ પ્રવૃત્તિ રેકોર્ડ કરો.",
       "EventsLogger.EnableLogging": "સક્ષમ કરો"
+    },
+    "111": {
+      "Title": "ક્લાયંટ ગોઠવણી",
+      "Description": "UI અને ડેશબોર્ડ સેટિંગ્સ સ્ટોર કરવા માટે ઉપયોગમાં લેવાતા ક્લાયંટના રૂપરેખાંકન પ્રોફાઇલ્સના સંચાલન માટે API લાગુ કરે છે."
     },
     "400": {
       "Title": "વર્ચ્યુઅલ મોડ્યુલ્સ ડેમો",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "તેજ ઘટાડવાનું બટન",
       "ConfigureOptions.DimmerInterval": "ઝાંખું કરવાનું પગલું"
     },
+    "142": {
+      "Title": "ઈ-મેલ એકાઉન્ટ",
+      "Description": "સિસ્ટમ પ્રોગ્રામ્સ દ્વારા ઇમેઇલ મોકલવા/પ્રાપ્ત કરવા માટે ઉપયોગમાં લેવાતી ઇમેઇલ એકાઉન્ટ માહિતી સંગ્રહિત કરે છે.",
+      "ConfigureOptions.Email.Sender": "૧. ઈ-મેલ સરનામું",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP સર્વર સરનામું",
+      "ConfigureOptions.Email.SmtpUserName": "૩. SMTP વપરાશકર્તા નામ (વૈકલ્પિક)",
+      "ConfigureOptions.Email.SmtpPassword": "૪. SMTP પાસવર્ડ (વૈકલ્પિક)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP સર્વર પોર્ટ",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP સર્વર SSL નો ઉપયોગ કરે છે"
+    },
     "145": {
       "Title": "સ્માર્ટ ડિવાઇસ",
       "Description": "ગતિ શોધ અને આસપાસના પ્રકાશના આધારે ઉપકરણ ચાલુ/બંધ કરો.",
@@ -250,6 +281,13 @@
       "Title": "સૂર્યોદય રંગોનો પરિદ્દશ્ય",
       "Description": "રંગ બદલતી LED લાઇટ માટે \"સૂર્યોદય\" દૃશ્યનું ઉદાહરણ.",
       "Scenarios.SunriseColors": "સનરાઇઝ કલર્સ દૃશ્યની લિંક"
+    },
+    "910": {
+      "Title": "ઑબ્જેક્ટ શોધ",
+      "Description": "પૂર્વ-પ્રશિક્ષિત YOLO11 મોડેલનો ઉપયોગ કરીને વસ્તુઓ શોધો.",
+      "ML.ObjectDetection": "ઑબ્જેક્ટ શોધ સક્ષમ કરો",
+      "ML.ObjectDetection.TriggerDetect": "અલ્પવિરામથી અલગ કરેલી વસ્તુઓની યાદી (અંગ્રેજીમાં) જે એલાર્મ વાગશે. (દા.ત.: બિલાડી, કૂતરો, વ્યક્તિ, બેકપેક, સુટકેસ)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
     }
   }
 }

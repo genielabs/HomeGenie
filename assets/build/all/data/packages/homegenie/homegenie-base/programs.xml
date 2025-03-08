@@ -287,7 +287,7 @@ Program.GoBackground();
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>142</Address>
     <Name>E-Mail Account</Name>
-    <Description>Stores e-mail account information used for sending/receiving emails programatically.</Description>
+    <Description>Stores e-mail account info used by system programs for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -632,6 +632,8 @@ if (importExternal) {
   enableEncryption = false;
 }
 
+var ResponseList = new Dictionary&lt;String, object&gt;();
+
 var MqttIsConnected = false;
 MqttClient.Reset();
 Program.Emit("MQTT.Status", "configure");
@@ -675,15 +677,62 @@ Action&lt;string&gt; apiHandle = (string cid) =&gt; {
       int mqttend = domain.IndexOf(".");
       int mqttdel = domain.IndexOf(":");
       var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
+      var mqttsrc = Program.SystemId;
       domain = domain.Substring(mqttend + 1);
-
-      var cmd = new MigInterfaceCommand(domain + "/" + address + "/" + command, request.Data);
+      // send request
+      var cmd = new MqttCommand(mqttsrc, domain + "/" + address + "/" + command, request.Data);
+      var tid = cmd.TransactionId;
       byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(cmd));
       string payload = Encoding.UTF8.GetString(bytes);
       publish(clientid, "MQTT.Listeners/" + mqttdest + "/command", payload);
-
-      return new ResponseText("OK");
+      // wait for response
+      var res = new ResponseText("ERROR");
+      lock (operationLock) ResponseList.Add(tid, res);
+      SpinWait.SpinUntil(() =&gt; {
+        bool notReady = true;
+        try {
+          notReady = ResponseList[tid] != res;
+        } catch {}
+        return notReady;
+      }, 10000);
+      var response = ResponseList[tid];
+      lock (operationLock) ResponseList.Remove(tid);
+      return response;
     } catch (Exception e) {
+      Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
+      MqttIsConnected = false;
+    }
+    return new ResponseText("ERROR");
+  });
+  Api.Handle("HomeAutomation.HomeGenie/Config/Modules.UpdateInfo/MQTT:" + cid, ( args ) =&gt; {
+    var request = Api.Parse(args);
+    var domain = request.GetOption(0);
+    var address = request.GetOption(1);
+    try
+    {
+      int mqttend = domain.IndexOf(".");
+      int mqttdel = domain.IndexOf(":");
+      var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
+      var mqttsrc = Program.SystemId;
+      domain = domain.Substring(mqttend + 1);
+      string command = $"{request.Domain}/{request.Address}/{request.Command}/{domain}/{address}";
+      string jsonPayload = System.Text.Encoding.UTF8.GetString((System.Byte[])request.Data);
+      // send request
+      var cmd = new MqttCommand(mqttsrc, command, jsonPayload);
+      var tid = cmd.TransactionId;
+      byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(cmd));
+      string payload = Encoding.UTF8.GetString(bytes);
+      publish(clientid, "MQTT.Listeners/" + mqttdest + "/command", payload);
+      // wait for response
+      var res = new ResponseText("ERROR");
+      ResponseList.Add(tid, res);
+      SpinWait.SpinUntil(() =&gt; ResponseList[tid] != res, 10000);
+      var response = ResponseList[tid];
+      ResponseList.Remove(tid);
+      return response;
+    }
+    catch (Exception e)
+    {
       Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
       MqttIsConnected = false;
     }
@@ -708,7 +757,6 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
       var domain = parts[1];
       var address = parts[2];
       var type = parts[3];
-
       // convert binary message to string
       string mpayload = Encoding.UTF8.GetString(bytespayload);
 
@@ -796,6 +844,18 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
             publish(clientid, "MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");
           }
           module.Emit(property.Name, property.Value);
+        }
+        break;
+
+        case "response":
+        if (cid == clientid)
+        {
+          var tid = address;
+          var responseBody = mpayload;
+          if (ResponseList.ContainsKey(tid))
+          {
+              ResponseList[tid] = bytespayload;
+          }
         }
         break;
       }
@@ -913,6 +973,7 @@ while (Program.IsRunning) {
 </ScriptSource>
     <ScriptContext>const string OptionButtons = "[program_configure,program_disable]";
 static string encryptionKey = "";
+static object operationLock = new object();
 
 static string encryptTopic(string topic, byte[] clientKey) {
     byte[] t = Encoding.UTF8.GetBytes(topic);
@@ -965,36 +1026,37 @@ static byte[] andFilter(byte[] payload, byte[] clientKey) {
     }
     return payload;
 }
+
+class MqttCommand: MigInterfaceCommand {
+    public MqttCommand(string cid, string request, object data): base(request, data) {
+        ClientId = cid;
+        TransactionId = Guid.NewGuid().ToString();
+    }
+    public string ClientId {get; set;} = "";
+    public string TransactionId {get; set;} = "";
+}
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
       <Required>true</Required>
-      <Checksum>0CA2694034713BC867D3695C77729011</Checksum>
+      <Checksum>8039FD4B260BE2D178732A35DBCC16A5</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
     <Description>Connect to an MQTT broker to use HomeGenie Panel app from anywhere via Internet or to interconnect HomeGenie devices on the same MQTT network.</Description>
     <Group>Interconnections</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes />
-        <Property>MQTT.SensorPublish</Property>
-        <Description>Publish events emitted by this module</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// list the program as custom weather widget
@@ -1463,11 +1525,13 @@ while (Program.IsRunning)
         Program.Emit("Sensor.SineWave", v);
         // synchronize level of a module with sinewave value [0.0 .. 1.0]
         /*
-        Modules
-            .WithName("My module name")
-            .Level = v;
+        Program.RunAsyncTask(()=&gt;{
+            Modules
+                .WithAddress("S4")
+                .Level = v;
+        });
         */
-        Pause(.2);
+        Pause(.1);
     }
 }
 </ScriptSource>
@@ -1479,9 +1543,9 @@ while (Program.IsRunning)
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>sine-wave-signal</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>F1B6DB2FD949FE29E31F0183ACFE5B3B</Checksum>
+      <Checksum>8A7B7859913E6B47738A6E0FE1EEF77D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>900</Address>

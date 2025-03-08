@@ -171,19 +171,19 @@ namespace HomeGenie.Automation.Engines
                     }
                     else
                     {
-                        errorRow -= 6;
-                        errorEndRow -= 6;
+                        errorRow -= (contextLines - 1 + 6);
+                        errorEndRow -= (contextLines - 1 + 6);
                         if (errorRow >= sourceLines + CSharpAppFactory.ConditionCodeOffset)
                         {
                             errorRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
                             errorEndRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
                             blockType = CodeBlockEnum.TC;
                         }
-                        if (contextLines > 0)
-                        {
-                            errorRow -= contextLines - 1;
-                            errorEndRow -= contextLines - 1;
-                        }
+                        //if (contextLines > 0)
+                        //{
+                        //    errorRow -= contextLines - 1;
+                        //    errorEndRow -= contextLines - 1;
+                        //}
                     }
                     if (diagnostic.Severity == DiagnosticSeverity.Error)
                     {
@@ -221,33 +221,53 @@ namespace HomeGenie.Automation.Engines
 
             if (result.Errors.Count > 0)
             {
-                var sourceLines = ProgramBlock.ScriptSource.Split('\n').Length;
-                var contextLines = CSharpAppFactory.ContextCodeOffset + ProgramBlock.ScriptContext.Split('\n').Length;
+                var parsedCode = CSharpAppFactory.ParseCode(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, ProgramBlock.ScriptContext);
+                var contextLines = parsedCode.ContextCode.Split('\n').Length;
+                var sourceLines = parsedCode.MainCode.Split('\n').Length;
                 foreach (System.CodeDom.Compiler.CompilerError error in result.Errors)
                 {
-                    var errorRow = (error.Line - CSharpAppFactory.ProgramCodeOffset);
-                    var blockType = CodeBlockEnum.CR;
-                    if (errorRow >=  contextLines + sourceLines + CSharpAppFactory.ConditionCodeOffset)
+                    var errorRow = (error.Line - CSharpAppFactory.ProgramCodeOffset) - parsedCode.UserIncludes.Count - 1;
+                    var errorCol = error.Column + 1;
+                    if (errorRow <= 0)
                     {
-                        errorRow -= (contextLines + 1 + sourceLines + CSharpAppFactory.ConditionCodeOffset);
-                        blockType = CodeBlockEnum.TC;
+                        errors.Add(new ProgramError
+                        {
+                            Line = 0,
+                            EndLine = 0,
+                            Column = 0,
+                            EndColumn = 0,
+                            ErrorMessage = error.ErrorText,
+                            ErrorNumber = error.ErrorNumber,
+                            CodeBlock = CodeBlockEnum.PC
+                        });
+                        continue;
                     }
-                    else if (errorRow <= contextLines)
+                    var blockType = CodeBlockEnum.CR;
+                    if (errorRow <= contextLines)
                     {
-                        errorRow -= 1;
                         blockType = CodeBlockEnum.PC;
                     }
                     else
                     {
-                        errorRow -= contextLines;
+                        errorRow -= (contextLines - 1 + 6);
+                        if (errorRow >= sourceLines + CSharpAppFactory.ConditionCodeOffset)
+                        {
+                            errorRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
+                            blockType = CodeBlockEnum.TC;
+                        }
+                        //if (contextLines > 0)
+                        //{
+                        //    errorRow -= contextLines - 1;
+                        //    errorEndRow -= contextLines - 1;
+                        //}
                     }
                     if (!error.IsWarning)
                     {
                         errors.Add(new ProgramError
                         {
                             Line = errorRow,
-                            Column = error.Column,
                             EndLine = errorRow,
+                            Column = errorCol,
                             EndColumn = error.Column + 1,
                             ErrorMessage = error.ErrorText,
                             ErrorNumber = error.ErrorNumber,
@@ -256,7 +276,7 @@ namespace HomeGenie.Automation.Engines
                     }
                     else
                     {
-                        var warning = String.Format("{0},{1},{2}: {3}", blockType, errorRow, error.Column,
+                        var warning = String.Format("{0},{1},{2}: {3}", blockType, errorRow, errorCol,
                             error.ErrorText);
                         HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning,
                             warning);

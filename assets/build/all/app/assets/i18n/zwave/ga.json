@@ -11,7 +11,7 @@
   "adding_node": "<strong class=\"color-accent\">{{node}}</strong> gléis á chur leis , fan go fóill...",
   "removing_node": "<strong class=\"color-accent\">{{node}}</strong> an ghléis á bhaint , fan go fóill...",
   "node_added": "Cuireadh <strong class=\"color-accent\">{{node}}</strong> gléis leis go rathúil",
-  "node_removed": "Tá <strong class=\"color-accent\">{{node}}</strong> an ghléis bainte",
+  "node_removed": "Baineadh <strong class=\"color-accent\">{{node}}</strong> an ghléis",
   "node_config": "Cumraíocht gléas",
   "brand": "Branda",
   "product": "Táirge",

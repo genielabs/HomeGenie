@@ -118,8 +118,8 @@
   "program_status_broken": "مات شوی",
   "program_status_compile": "تالیف کول",
   "automation_programming_guide": "د پروګرام کولو لارښود'",
-  "tap_to_disable": "د غیر فعالولو لپاره ټایپ کړئ",
-  "tap_to_enable": "د فعالولو لپاره ټایپ کړئ",
+  "tap_to_disable": "د غیر فعالولو لپاره کلیک وکړئ",
+  "tap_to_enable": "د فعالولو لپاره کلیک وکړئ",
   "program_data": "د پروګرام معلومات",
   "visual_code": "بصري کوډ",
   "generated_code": "تولید شوی کوډ",
@@ -139,6 +139,13 @@
       "Description": "د وروستي تیاره کچه ذخیره او یاد کړئ.",
       "HomeGenie.LevelMemory": "کله چې چالان شو نو د رڼا وروستۍ کچه یاد کړئ",
       "HomeGenie.LevelMemory.SimulateOnly": "یوازې سمولیټ کړئ"
+    },
+    "26": {
+      "Title": "رنګین څراغونه",
+      "Description": "د HTTP API (V1) په کارولو سره د فلپس هیو څراغونو ادغام مثال. د پل سره د نښلولو لپاره ډیفالټ کارونکی \"newdeveloper\" دی او دا باید دمخه فعال شوی وي.",
+      "ConfigureOptions.BridgeAddress": "د فیلیپس هیو برج (V1) IP پته",
+      "ConfigureOptions.BridgeUsername": "کارن نوم",
+      "ConfigureOptions.LightsCount": "د څراغونو شمېر"
     },
     "34": {
       "Title": "د هوا وړاندوینه",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "د رڼا اعظمي کچه (٪)",
       "EnergyManagement.EnergySavingMode": "فعالول"
     },
+    "88": {
+      "Title": "عمومي IP کیمره",
+      "Description": "د آی پي کیمرې څخه د عکس فیډ ښودل/روټ کول.",
+      "IpCamera.ImageURL": "د کیمرې انځور API URL (ستاسو د کیمرې اسناد وګورئ)",
+      "IpCamera.Username": "کارن نوم (اختیاري)",
+      "IpCamera.Password": "پټنوم (اختیاري)",
+      "Widget.Config.fps": "په ثانیه کې چوکاټونه",
+      "Widget.Config.size": "د ویجیټ اندازه"
+    },
     "90": {
       "Title": "د امنیت الارم سیسټم",
       "Description": "د امنیتي الارم سیسټم پلي کولو لپاره سینسرونه او نور وسایل وکاروئ.",
       "HomeGenie.SecurityAlarm": "د الارم/سټروب په توګه وکاروئ",
+      "HomeGenie.SecurityTriggerHome": "همدارنګه کله چې وسله وال وي نو پیل کوي",
       "HomeGenie.SecuritySensor": "د امنیتي سینسر په توګه وکاروئ",
       "ConfigureOptions.Email.Recipients": "د الارم خبرتیاو لپاره د ترلاسه کونکو بریښنالیکونو کوما جلا شوی لیست",
       "ConfigureOptions.System.ArmDelay": "د لاس ځنډ (ثانیې)",
@@ -199,6 +216,10 @@
       "Title": "د پیښو ثبت کول",
       "Description": "د وسیلې فعالیت ثبت کړئ.",
       "EventsLogger.EnableLogging": "فعالول"
+    },
+    "111": {
+      "Title": "د مراجعینو ترتیب",
+      "Description": "د مراجعینو د ترتیب پروفایلونو اداره کولو لپاره API پلي کوي چې د UI او ډشبورډ ترتیباتو ذخیره کولو لپاره کارول کیږي."
     },
     "400": {
       "Title": "د مجازی ماډلونو ډیمو",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "د روښانتیا کمولو تڼۍ",
       "ConfigureOptions.DimmerInterval": "د کمولو ګام"
     },
+    "142": {
+      "Title": "د برېښنالیک حساب",
+      "Description": "د برېښنالیک حساب معلومات ذخیره کوي چې د سیسټم پروګرامونو لخوا د برېښنالیکونو لیږلو/ترلاسه کولو لپاره کارول کیږي.",
+      "ConfigureOptions.Email.Sender": "۱. د برېښنالیک پته",
+      "ConfigureOptions.Email.SmtpServer": "۲. د SMTP سرور پته",
+      "ConfigureOptions.Email.SmtpUserName": "۳. د SMTP کارن نوم (اختیاري)",
+      "ConfigureOptions.Email.SmtpPassword": "۴. د SMTP پټنوم (اختیاري)",
+      "ConfigureOptions.Email.SmtpPort": "۵. د SMTP سرور پورټ",
+      "ConfigureOptions.Email.SmtpUseSsl": "۶. د SMTP سرور SSL کاروي"
+    },
     "145": {
       "Title": "سمارټ وسیله",
       "Description": "د حرکت کشف او محیطي رڼا پراساس وسیله چالان/بند کړئ.",
@@ -250,6 +281,13 @@
       "Title": "د لمر ختو رنګونو سناریو",
       "Description": "د رنګ بدلولو LED څراغونو لپاره د \"لمر راختلو\" سناریو مثال.",
       "Scenarios.SunriseColors": "د لمر خاته رنګونو سناریو ته لینک"
+    },
+    "910": {
+      "Title": "د شیانو کشف",
+      "Description": "د مخکې له مخکې روزل شوي YOLO11 ماډل په کارولو سره شیان کشف کړئ.",
+      "ML.ObjectDetection": "د شیانو کشف فعال کړئ",
+      "ML.ObjectDetection.TriggerDetect": "د کوما سره جلا شوي د شیانو لیست (په انګلیسي کې) چې الارم به پیل کړي. (د مثال په توګه: پیشو، سپی، سړی، بیک پیک، سوټ کیس)",
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
     }
   }
 }

@@ -50,7 +50,7 @@
   "cronwizard_description_ending": "към",
   "cronwizard_description_at": "при",
   "cronwizard_add_time_slot": "Добавете времеви интервал",
-  "cronwizard_add_exact_time": "Добавете точно време",
+  "cronwizard_add_exact_time": "Добавете точен час",
   "cronwizard_start_time": "Начален час",
   "cronwizard_end_time": "Краен час",
   "cronwizard_minutes": "минути",
@@ -87,7 +87,7 @@
   "scheduler_preset_action_config_level": "Ниво",
   "scheduler_preset_action_command_set_color": "Задайте цвят",
   "scheduler_preset_action_config_color": "Цвят",
-  "scheduler_preset_action_command_thermostat_mode": "Термостатен режим",
+  "scheduler_preset_action_command_thermostat_mode": "Режим термостат",
   "scheduler_preset_action_config_mode": "Режим",
   "scheduler_preset_action_config_mode_on": "включено",
   "scheduler_preset_action_config_mode_off": "Изкл",
@@ -118,15 +118,15 @@
   "program_status_broken": "Счупен",
   "program_status_compile": "Компилирайте",
   "automation_programming_guide": "Ръководство за програмиране'",
-  "tap_to_disable": "Докоснете, за да деактивирате",
-  "tap_to_enable": "Докоснете, за да активирате",
+  "tap_to_disable": "Кликнете, за да деактивирате",
+  "tap_to_enable": "Кликнете, за да активирате",
   "program_data": "Програмни данни",
   "visual_code": "Визуален код",
   "generated_code": "Генериран код",
   "setup_code": "Настройка",
   "main_code": "Основен",
   "context_code": "Контекст",
-  "main_code_empty_note": "\"Главен\" код е празен. Използвайте редактора \"Визуален код\", за да генерирате този код: - Отворете категорията \"Програма\" от командната палитра вляво - Плъзнете блок от тип \"Главен\" в работното пространство на визуалния код - Добавете вътре в него други кодови блокове, за да приложите действия и логика на тази програма. Програмата \"Главна\" може да бъде стартирана ръчно или автоматично въз основа на условия, евентуално дадени в кода за настройка.",
+  "main_code_empty_note": "\"Главен\" код е празен. Използвайте редактора \"Визуален код\", за да генерирате този код: - Отворете категорията \"Програма\" от командната палитра вляво - Плъзнете блок от тип \"Главен\" в работното пространство на визуалния код - Добавете вътре в него други кодови блокове, за да реализирате действията и логиката на тази програма. Програмата \"Основна\" може да бъде стартирана ръчно или автоматично въз основа на условия, евентуално дадени в кода за настройка.",
   "setup_code_empty_note": "Кодът за настройка е празен. Използвайте редактора \"Визуален код\", за да генерирате този код: - Отворете категорията \"Програма\" от командната палитра вляво - Плъзнете блок от тип \"Настройка\" в работното пространство на визуалния код - Добавете вътре в него други кодови блокове, за да определите условията, които ще задействат изпълнението на \"Основния\" код. Този код се оценява всеки път, когато възникне ново събитие и поне веднъж на минута.",
   "capture_commands": "Команди за улавяне",
   "capture_commands_description": "Добавете всички команди, изпълнявани ръчно върху джаджи към програмата.",
@@ -135,10 +135,17 @@
   "capture_pause_asis": "Както е",
   "$options": {
     "16": {
-      "Title": "Памет на ниво",
+      "Title": "Ниво Памет",
       "Description": "Запазете и извикайте последното ниво на димера.",
       "HomeGenie.LevelMemory": "Извикване на последното ниво на светлина при включване",
       "HomeGenie.LevelMemory.SimulateOnly": "Само симулиране"
+    },
+    "26": {
+      "Title": "Цветни светлини",
+      "Description": "Пример за интегриране на светлини Philips Hue чрез HTTP API (V1). Потребителят по подразбиране за свързване към моста е \"newdeveloper\" и трябва вече да е активиран.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP адрес",
+      "ConfigureOptions.BridgeUsername": "Потребителско име",
+      "ConfigureOptions.LightsCount": "Брой светлини"
     },
     "34": {
       "Title": "Прогноза за времето",
@@ -182,13 +189,23 @@
       "EnergyManagement.EnergySavingLevel": "Максимално ниво на светлина (%)",
       "EnergyManagement.EnergySavingMode": "Активирайте"
     },
+    "88": {
+      "Title": "Обща IP камера",
+      "Description": "Показване/насочване на подаване на изображение от IP камера.",
+      "IpCamera.ImageURL": "URL адрес на приложния програмен интерфейс (API) за изображение на камера (вижте документите на вашата камера)",
+      "IpCamera.Username": "потребителско име (по избор)",
+      "IpCamera.Password": "Парола (по избор)",
+      "Widget.Config.fps": "Кадри в секунда",
+      "Widget.Config.size": "Размер на джаджата"
+    },
     "90": {
       "Title": "Охранителна алармена система",
       "Description": "Използвайте сензори и други устройства за внедряване на алармена система за сигурност.",
       "HomeGenie.SecurityAlarm": "Използвайте като аларма/строб",
+      "HomeGenie.SecurityTriggerHome": "Също така се задейства, когато е активиран Home",
       "HomeGenie.SecuritySensor": "Използвайте като сензор за сигурност",
       "ConfigureOptions.Email.Recipients": "Разделен със запетаи списък с имейли на получатели за алармени известия",
-      "ConfigureOptions.System.ArmDelay": "Забавяне на активирането (секунди)",
+      "ConfigureOptions.System.ArmDelay": "Закъснение при активиране (секунди)",
       "ConfigureOptions.System.SirenStartTime": "Забавяне при стартиране на сирените (секунди)",
       "ConfigureOptions.System.SirenMaxTime": "Максимално време на сирените (секунди, 0=безкрайно)",
       "ConfigureOptions.Trigger.ArmedProgram": "Програма за стартиране, когато е въоръжен",
@@ -199,6 +216,10 @@
       "Title": "Регистриране на събития",
       "Description": "Записвайте дейността на устройството.",
       "EventsLogger.EnableLogging": "Активирайте"
+    },
+    "111": {
+      "Title": "Конфигурация на клиента",
+      "Description": "Внедрява API за управление на конфигурационни профили на клиента, които се използват за съхраняване на настройките на потребителския интерфейс и таблата за управление."
     },
     "400": {
       "Title": "Демонстрация на виртуални модули",
@@ -225,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Сензор за влажност",
       "Simulator.Sensor.Luminance": "Сензор за светлина",
       "Simulator.Meter.Watts": "Ватметър",
-      "Simulator.Meter.Watts.Max": "Максимална мощност във ватове",
+      "Simulator.Meter.Watts.Max": "Максимална мощност в ватове",
       "Simulator.Sensor.DataFrequency": "Честота на излъчване на симулатора"
     },
     "505": {
@@ -236,6 +257,16 @@
       "ConfigureOptions.DimmerUpCode": "Бутон за увеличаване на яркостта",
       "ConfigureOptions.DimmerDownCode": "Бутон за намаляване на яркостта",
       "ConfigureOptions.DimmerInterval": "Стъпка на затъмняване"
+    },
+    "142": {
+      "Title": "Имейл акаунт",
+      "Description": "Съхранява информация за имейл акаунта, използван от системните програми за изпращане/получаване на имейли.",
+      "ConfigureOptions.Email.Sender": "1. E-Mail адрес",
+      "ConfigureOptions.Email.SmtpServer": "2. Адрес на SMTP сървър",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP потребителско име (по избор)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP парола (по избор)",
+      "ConfigureOptions.Email.SmtpPort": "5. Порт на SMTP сървъра",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP сървърът използва SSL"
     },
     "145": {
       "Title": "Умно устройство",
@@ -250,6 +281,13 @@
       "Title": "Сценарий за цветовете на изгрева",
       "Description": "Примерен сценарий \"Изгрев\" за LED светлини с промяна на цвета.",
       "Scenarios.SunriseColors": "Връзка към сценария Sunrise Colors"
+    },
+    "910": {
+      "Title": "Откриване на обект",
+      "Description": "Откривайте обекти с помощта на предварително обучен модел YOLO11.",
+      "ML.ObjectDetection": "Разрешете откриването на обекти",
+      "ML.ObjectDetection.TriggerDetect": "Разделен със запетаи списък с неща (на английски), които ще задействат алармата. (напр.: котка, куче, човек, раница, куфар)",
+      "ConfigureOptions.Yolo.ModelPath": "Път на файл с модел YOLO11 (.onnx)"
     }
   }
 }

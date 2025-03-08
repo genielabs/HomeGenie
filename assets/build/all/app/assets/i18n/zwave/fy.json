@@ -7,7 +7,7 @@
   "enabling_node_exclusion": "Knooppuntútslutingsmodus ynskeakelje, wachtsje asjebleaft...",
   "inclusion_message": "Druk op de knop op it apparaat dat jo taheakje wolle oan dit netwurk.",
   "exclusion_message": "Druk op de knop op it apparaat dat jo fan dit netwurk fuortsmite wolle.",
-  "task_duration_notice": "Dizze taak kin oant sekonden <strong>{{timeout}}</strong> om te foltôgjen.",
+  "task_duration_notice": "Dizze taak kin oant sekonden <strong>{{timeout}}</strong> duorje om te foltôgjen.",
   "adding_node": "<strong class=\"color-accent\">{{node}}</strong> tafoegje, wachtsje asjebleaft...",
   "removing_node": "<strong class=\"color-accent\">{{node}}</strong> fuortsmite, wachtsje asjebleaft...",
   "node_added": "<strong class=\"color-accent\">{{node}}</strong> mei súkses tafoege",

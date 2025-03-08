@@ -21,14 +21,14 @@
   "repositories": "Deponejoj",
   "packages": "Pakoj",
   "installed_packages": "Instalitaj pakoj",
-  "upload_package": "Alŝutu pakon",
+  "upload_package": "Alŝutu pakaĵon",
   "create_package": "Krei novan pakon",
   "programs_version": "Programoj versio",
   "http_settings": "HTTP-agordoj",
   "modules_groups": "Grupoj kaj moduloj",
   "groups": "Grupoj",
   "add_group": "Aldonu grupon",
-  "edit_group": "Redaktu grupon",
+  "edit_group": "Redakti grupon",
   "delete_group": "Forigi grupon",
   "dashboard_from_group": "Kreu panelon el ĉi tiu grupo",
   "group_modules": "Moduloj en ĉi tiu grupo",
@@ -118,8 +118,8 @@
   "program_status_broken": "Rompita",
   "program_status_compile": "Kompilu",
   "automation_programming_guide": "Gvidilo pri programado'",
-  "tap_to_disable": "Frapu por malŝalti",
-  "tap_to_enable": "Frapu por ebligi",
+  "tap_to_disable": "Klaku por malŝalti",
+  "tap_to_enable": "Klaku por ebligi",
   "program_data": "Programaj datumoj",
   "visual_code": "Vida kodo",
   "generated_code": "Generita kodo",
@@ -127,7 +127,7 @@
   "main_code": "Ĉefa",
   "context_code": "Kunteksto",
   "main_code_empty_note": "\"Ĉefa\" kodo estas malplena. Uzu la redaktilon \"Vida kodo\" por generi ĉi tiun kodon: - Malfermu la kategorion \"Programo\" el la komanda paletro maldekstre - Trenu blokon de tipo \"Ĉefa\" en la laborspaco de vida kodo - Aldonu en ĝi aliajn kodblokojn por efektivigi agojn kaj logikon de ĉi tiu programo La programo \"Ĉefa\" povas esti rulita mane aŭ aŭtomate laŭ kondiĉoj eventuale donitaj en la Agordokodo.",
-  "setup_code_empty_note": "\"Agorda\" kodo estas malplena. Uzu la redaktilon \"Vida kodo\" por generi ĉi tiun kodon: - Malfermu la kategorion \"Programo\" el la komanda paletro maldekstre - Trenu blokon de tipo \"Agordu\" en la laborspacon de vida kodo - Aldonu en ĝi aliajn kodblokojn por determini la kondiĉojn, kiuj ekigos la \"Ĉefa\" kodo-ekzekuton. Ĉi tiu kodo estas taksata ĉiufoje kiam nova evento okazas kaj almenaŭ unufoje ĉiuminute.",
+  "setup_code_empty_note": "\"Agorda\" kodo estas malplena. Uzu la redaktilon \"Vida kodo\" por generi ĉi tiun kodon: - Malfermu la kategorion \"Programo\" el la komanda paletro maldekstre - Trenu blokon de tipo \"Agordu\" en la laborspacon de vida kodo - Aldonu en ĝi aliajn kodblokojn por determini la kondiĉojn, kiuj ekfunkciigos la \"Ĉefa\" kodon. Ĉi tiu kodo estas taksata ĉiufoje kiam nova evento okazas kaj almenaŭ unufoje ĉiuminute.",
   "capture_commands": "Kapti komandojn",
   "capture_commands_description": "Aldonu ĉiujn komandojn faritajn permane sur fenestraĵoj al la programo.",
   "capture_commands_pause": "Paŭzo inter komandoj",
@@ -139,6 +139,13 @@
       "Description": "Konservu kaj memoru la lastan malklaran nivelon.",
       "HomeGenie.LevelMemory": "Memoru la lastan lumnivelon kiam ŝaltite",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuli nur"
+    },
+    "26": {
+      "Title": "Koloraj lumoj",
+      "Description": "Ekzemplo Philips Hue lumigas integriĝon uzante HTTP-API (V1). La defaŭlta uzanto por konekti al la ponto estas \"nova programisto\" kaj ĝi devus esti jam ebligita.",
+      "ConfigureOptions.BridgeAddress": "IP-adreso de Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Uzantnomo",
+      "ConfigureOptions.LightsCount": "Nombro de lumoj"
     },
     "34": {
       "Title": "Veterprognozo",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimuma lumnivelo (%)",
       "EnergyManagement.EnergySavingMode": "Ebligu"
     },
+    "88": {
+      "Title": "Ĝenerala IP-fotilo",
+      "Description": "Montru/vojigi bildfluon de IP-fotilo.",
+      "IpCamera.ImageURL": "URL de la API de fotila bildo (vidu viajn fotilajn dokumentojn)",
+      "IpCamera.Username": "Uzantnomo (laŭvola)",
+      "IpCamera.Password": "Pasvorto (laŭvola)",
+      "Widget.Config.fps": "Kadroj por sekundo",
+      "Widget.Config.size": "Fenestraĵo grandeco"
+    },
     "90": {
       "Title": "Sekureca Alarma Sistemo",
       "Description": "Uzu sensilojn kaj aliajn aparatojn por efektivigi sekurecan alarmsistemon.",
       "HomeGenie.SecurityAlarm": "Uzu kiel alarmo/strobo",
+      "HomeGenie.SecurityTriggerHome": "Ankaŭ ekigas kiam armite Hejme",
       "HomeGenie.SecuritySensor": "Uzu kiel sekurecan sensilon",
       "ConfigureOptions.Email.Recipients": "Komo apartigita listo de ricevantoj retpoŝtoj por alarmaj sciigoj",
       "ConfigureOptions.System.ArmDelay": "Prokrasto de brako (sekundoj)",
@@ -200,6 +217,10 @@
       "Description": "Registru agado de aparato.",
       "EventsLogger.EnableLogging": "Ebligu"
     },
+    "111": {
+      "Title": "Klienta agordo",
+      "Description": "Realigas API por administri la agordajn profilojn de kliento, kiuj estas uzataj por stoki UI kaj panelajn agordojn."
+    },
     "400": {
       "Title": "Virtualaj Moduloj Demo",
       "Description": "Mane agordu valorojn de la virtuala aparato.",
@@ -208,7 +229,7 @@
       "Sensor.MotionDetect": "Stato de detekto de moviĝo",
       "Status.Battery": "Bateria nivelo",
       "Sensor.DoorWindow": "Statuso de sensilo pordo/fenestro (malferma/fermita)",
-      "Status.Level": "Ŝalti staton (ŝaltita/malŝaltita)"
+      "Status.Level": "Ŝalti statuson (ŝaltita/malŝaltita)"
     },
     "401": {
       "Title": "Demo - Baskuligi Pordon",
@@ -216,7 +237,7 @@
     },
     "402": {
       "Title": "Demo - Moviĝo Detektita",
-      "Description": "Simulas moviĝan detekton de pruva multsensilo."
+      "Description": "Simulas moviĝan detekton de demo-multi-sensilo."
     },
     "410": {
       "Title": "Sensila simulilo",
@@ -237,19 +258,36 @@
       "ConfigureOptions.DimmerDownCode": "Butono malpliigo de brilo",
       "ConfigureOptions.DimmerInterval": "Mallumiganta paŝo"
     },
+    "142": {
+      "Title": "Retpoŝta konto",
+      "Description": "Stokas informojn pri retpoŝta konto uzataj de sistemaj programoj por sendi/ricevi retpoŝtojn.",
+      "ConfigureOptions.Email.Sender": "1. Retpoŝta adreso",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP servilo adreso",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP uzantnomo (laŭvola)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-pasvorto (laŭvola)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-servila haveno",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-servilo uzu SSL"
+    },
     "145": {
       "Title": "Inteligenta Aparato",
       "Description": "Ŝaltu/malŝaltu la aparaton surbaze de moviĝ-detekto kaj ĉirkaŭa lumo.",
       "HomeGenie.SmartLights.Enable": "Ebligu 'Smart Aparato'",
       "HomeGenie.SmartLights.OnMotionDetect": "Kontrolita per sensilo (laŭvola)",
       "HomeGenie.SmartLights.CheckLuminosity": "Kontrolita per lumsensilo (laŭvola)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Malŝalti post senaktiveco (sekundoj)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Malŝaltu post senaktiveco (sekundoj)",
       "HomeGenie.SmartLights.MinLuminance": "Ŝaltu se lumeco estas sub:"
     },
     "8": {
       "Title": "Sunleviĝo Koloroj Scenaro",
       "Description": "Ekzemplo \"Sunleviĝo\" scenaro por kolorŝanĝaj LED-lumoj.",
       "Scenarios.SunriseColors": "Ligo al Sunleviĝaj Koloroj-scenaro"
+    },
+    "910": {
+      "Title": "Objekta detekto",
+      "Description": "Detektu objektojn uzante antaŭtrejnitan modelon YOLO11.",
+      "ML.ObjectDetection": "Ebligu la detekton de objektoj",
+      "ML.ObjectDetection.TriggerDetect": "Komo-separata listo de aferoj (en la angla) kiuj ekigos la alarmon. (ekz.: kato, hundo, persono, tornistro, valizo)",
+      "ConfigureOptions.Yolo.ModelPath": "Vojo de YOLO11 modeldosiero (.onnx)"
     }
   }
 }

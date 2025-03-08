@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "från",
   "cronwizard_description_ending": "till",
   "cronwizard_description_at": "på",
-  "cronwizard_add_time_slot": "Lägg till tidlucka",
+  "cronwizard_add_time_slot": "Lägg till tidslucka",
   "cronwizard_add_exact_time": "Lägg till exakt tid",
   "cronwizard_start_time": "Starttid",
   "cronwizard_end_time": "Sluttid",
@@ -78,7 +78,7 @@
   "cronwizard_action_preset_every_occurrence": "Vid varje händelse",
   "cronwizard_action_preset_slot_start": "Vid början av en tidslucka",
   "cronwizard_action_preset_slot_end": "I slutet av en tidslucka",
-  "cronwizard_action_custom_script": "Anpassat åtgärdsskript",
+  "cronwizard_action_custom_script": "Anpassat handlingsskript",
   "cronwizard_action_no_action": "Ingen åtgärd",
   "cronwizard_action_schedule_variable_hint": "Använd <span class=\"notranslate color-primary\">@ {{name}}</span> som en variabel i cron-uttryck eller använd <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> i automationsprogram för att referera till denna händelse.",
   "scheduler_preset_action_command_turn_on": "Sätta på",
@@ -118,8 +118,8 @@
   "program_status_broken": "Bruten",
   "program_status_compile": "Sammanställa",
   "automation_programming_guide": "Programmeringsguide'",
-  "tap_to_disable": "Tryck för att inaktivera",
-  "tap_to_enable": "Tryck för att aktivera",
+  "tap_to_disable": "Klicka för att inaktivera",
+  "tap_to_enable": "Klicka för att aktivera",
   "program_data": "Programdata",
   "visual_code": "Visuell kod",
   "generated_code": "Genererad kod",
@@ -127,7 +127,7 @@
   "main_code": "Main",
   "context_code": "Sammanhang",
   "main_code_empty_note": "\"Main\"-koden är tom. Använd \"Visuell kod\"-editorn för att generera den här koden: - Öppna kategorin \"Program\" från kommandopaletten till vänster - Dra ett block av typen \"Main\" i den visuella kodens arbetsyta - Lägg till andra kodblock i det för att implementera åtgärder och logik för detta program Programmet \"Main\" kan antingen köras manuellt eller autostartas baserat på villkor som så småningom ges i installationskoden.",
-  "setup_code_empty_note": "\"Setup\"-koden är tom. Använd \"Visuell kod\"-editorn för att generera den här koden: - Öppna kategorin \"Program\" från kommandopaletten till vänster - Dra ett block av typen \"Setup\" i den visuella kodens arbetsyta - Lägg till andra kodblock inuti det för att bestämma villkoren som kommer att trigga \"Main\" kodexekvering Denna kod utvärderas varje gång en ny händelse inträffar och minst en gång i minuten.",
+  "setup_code_empty_note": "\"Setup\"-koden är tom. Använd \"Visuell kod\"-editorn för att generera den här koden: - Öppna kategorin \"Program\" från kommandopaletten till vänster - Dra ett block av typen \"Setup\" i den visuella kodens arbetsyta - Lägg till andra kodblock i den för att bestämma villkoren som kommer att trigga \"Main\"-kodexekvering Denna kod utvärderas varje gång en ny händelse inträffar och minst en gång i minuten.",
   "capture_commands": "Fånga kommandon",
   "capture_commands_description": "Lägg till alla kommandon som utförs manuellt på widgets till programmet.",
   "capture_commands_pause": "Pausa mellan kommandon",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Hämta den senaste ljusnivån när den slås på",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulera endast"
     },
+    "26": {
+      "Title": "Färgljus",
+      "Description": "Exempel Philips Hue-ljusintegration med HTTP API (V1). Standardanvändaren för att ansluta till bryggan är \"newdeveloper\" och den bör redan vara aktiverad.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adress",
+      "ConfigureOptions.BridgeUsername": "Användarnamn",
+      "ConfigureOptions.LightsCount": "Antal lampor"
+    },
     "34": {
       "Title": "Väderprognos",
-      "Description": "Väder- och prognosinformation från tjänsten Open Weather Map. För att aktivera denna widget anger du en giltig API-nyckel. Följ instruktionerna på https://openweathermap.org/appid för att få en gratis API-nyckel.",
+      "Description": "Väder- och prognosinformation från Open Weather Map-tjänsten. För att aktivera denna widget anger du en giltig API-nyckel. Följ instruktionerna på https://openweathermap.org/appid för att få en gratis API-nyckel.",
       "ConfigureOptions.Location": "Stadsnamn",
       "ConfigureOptions.Language": "Språk (t.ex. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Uppdateringsintervall (minuter)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Max ljusnivå (%)",
       "EnergyManagement.EnergySavingMode": "Aktivera"
     },
+    "88": {
+      "Title": "Generisk IP-kamera",
+      "Description": "Visa/dirigera bildflöde från en IP-kamera.",
+      "IpCamera.ImageURL": "Camera image API URL (se dina kameradokument)",
+      "IpCamera.Username": "Användarnamn (valfritt)",
+      "IpCamera.Password": "Lösenord (valfritt)",
+      "Widget.Config.fps": "Bildrutor per sekund",
+      "Widget.Config.size": "Widgetstorlek"
+    },
     "90": {
       "Title": "Säkerhetslarmsystem",
       "Description": "Använd sensorer och andra enheter för att implementera ett säkerhetslarmsystem.",
       "HomeGenie.SecurityAlarm": "Använd som larm/blixt",
+      "HomeGenie.SecurityTriggerHome": "Utlöses även när den är beväpnad Hemma",
       "HomeGenie.SecuritySensor": "Använd som säkerhetssensor",
       "ConfigureOptions.Email.Recipients": "Kommaseparerad lista över mottagares e-postmeddelanden för larmmeddelanden",
       "ConfigureOptions.System.ArmDelay": "Armeringsfördröjning (sekunder)",
@@ -199,6 +216,10 @@
       "Title": "Händelseloggning",
       "Description": "Spela in enhetsaktivitet.",
       "EventsLogger.EnableLogging": "Aktivera"
+    },
+    "111": {
+      "Title": "Klientkonfiguration",
+      "Description": "Implementerar API för att hantera klientens konfigurationsprofiler som används för att lagra användargränssnitt och instrumentpanelsinställningar."
     },
     "400": {
       "Title": "Demo av virtuella moduler",
@@ -216,7 +237,7 @@
     },
     "402": {
       "Title": "Demo - Rörelseupptäckt",
-      "Description": "Simulerar rörelsedetektering av demo-multisensor."
+      "Description": "Simulerar rörelsedetektering av demo multisensor."
     },
     "410": {
       "Title": "Sensorsimulator",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Knapp för att minska ljusstyrkan",
       "ConfigureOptions.DimmerInterval": "Dimningssteg"
     },
+    "142": {
+      "Title": "E-postkonto",
+      "Description": "Lagrar information om e-postkonto som används av systemprogram för att skicka/ta emot e-post.",
+      "ConfigureOptions.Email.Sender": "1. E-postadress",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP-serveradress",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP-användarnamn (valfritt)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-lösenord (valfritt)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-serverport",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-server använder SSL"
+    },
     "145": {
       "Title": "Smart enhet",
       "Description": "Slå på/stänga av enheten baserat på rörelsedetektering och omgivande ljus.",
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors Scenario",
       "Description": "Exempel \"Sunrise\"-scenario för färgskiftande LED-lampor.",
       "Scenarios.SunriseColors": "Länk till Sunrise Colors scenario"
+    },
+    "910": {
+      "Title": "Objektdetektering",
+      "Description": "Upptäck objekt med en förtränad YOLO11-modell.",
+      "ML.ObjectDetection": "Aktivera objektdetektering",
+      "ML.ObjectDetection.TriggerDetect": "Kommaseparerad lista över saker (på engelska) som kommer att utlösa larmet. (t.ex.: katt, hund, person, ryggsäck, resväska)",
+      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO11-modellfil (.onnx)"
     }
   }
 }

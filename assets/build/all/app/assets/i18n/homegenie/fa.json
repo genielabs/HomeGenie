@@ -1,7 +1,7 @@
 {
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "به HomeGenie خوش آمدید!",
-  "welcome_subtitle": "هوشمندی اتوماسیون قابل برنامه ریزی",
+  "welcome_subtitle": "هوش اتوماسیون قابل برنامه ریزی",
   "not_configured_yet": "سیستم هنوز پیکربندی نشده است. این جادوگر راه اندازی به شما در راه اندازی و راه اندازی سیستم خود در چند مرحله کمک می کند.",
   "system_config_start_with_base_and_backup": "بازیابی از فایل پشتیبان",
   "system_config_start_with_default_setup": "تنظیم پیش فرض",
@@ -22,7 +22,7 @@
   "packages": "بسته ها",
   "installed_packages": "بسته های نصب شده",
   "upload_package": "بسته را بارگذاری کنید",
-  "create_package": "پکیج جدید ایجاد کنید",
+  "create_package": "بسته جدید ایجاد کنید",
   "programs_version": "نسخه برنامه ها",
   "http_settings": "تنظیمات HTTP",
   "modules_groups": "گروه ها و ماژول ها",
@@ -64,7 +64,7 @@
   "cronwizard_hourselect_everynthhour": "هر ساعت معین",
   "cronwizard_hourselect_selectedhours": "ساعات انتخابی",
   "cronwizard_dayselect_everyday": "هر روز",
-  "cronwizard_dayselect_selecteddays": "روزهای انتخاب شده",
+  "cronwizard_dayselect_selecteddays": "روزهای منتخب",
   "cronwizard_dayowselect_selecteddaysow": "روزهای انتخابی هفته",
   "cronwizard_monthselect_everymonth": "هر ماه",
   "cronwizard_monthselect_selectedmonths": "ماه های منتخب",
@@ -118,8 +118,8 @@
   "program_status_broken": "شکسته",
   "program_status_compile": "کامپایل کنید",
   "automation_programming_guide": "راهنمای برنامه نویسی",
-  "tap_to_disable": "برای غیرفعال کردن ضربه بزنید",
-  "tap_to_enable": "برای فعال کردن ضربه بزنید",
+  "tap_to_disable": "برای غیرفعال کردن کلیک کنید",
+  "tap_to_enable": "برای فعال کردن کلیک کنید",
   "program_data": "داده های برنامه",
   "visual_code": "کد بصری",
   "generated_code": "کد تولید شده",
@@ -127,7 +127,7 @@
   "main_code": "اصلی",
   "context_code": "زمینه",
   "main_code_empty_note": "کد \"اصلی\" خالی است. از ویرایشگر \"Visual code\" برای تولید این کد استفاده کنید: - باز کردن دسته \"برنامه\" از پالت دستور در سمت چپ - یک بلوک از نوع \"Main\" را در فضای کاری کد تصویری بکشید - داخل آن بلوک های کد دیگر را برای اجرای اقدامات و منطق این برنامه اضافه کنید.",
-  "setup_code_empty_note": "کد \"Setup\" خالی است. برای تولید این کد از ویرایشگر \"Visual code\" استفاده کنید: - دسته \"برنامه\" را از پالت دستور در سمت چپ باز کنید - یک بلوک از نوع \"Setup\" را در فضای کاری کد تصویری بکشید - داخل آن بلوک های کد دیگر را اضافه کنید تا شرایطی را تعیین کنید که اجرای کد \"اصلی\" را آغاز می کند. این کد هر بار که یک رویداد جدید رخ می دهد و حداقل یک بار در دقیقه ارزیابی می شود.",
+  "setup_code_empty_note": "کد \"Setup\" خالی است. برای تولید این کد از ویرایشگر \"Visual code\" استفاده کنید: - دسته \"برنامه\" را از پالت فرمان سمت چپ باز کنید - یک بلوک از نوع \"Setup\" را در فضای کاری کد تصویری بکشید - داخل آن بلوک های کد دیگر را اضافه کنید تا شرایطی را که باعث اجرای کد \"اصلی\" می شود، تعیین کنید. این کد هر بار که یک رویداد جدید رخ می دهد و حداقل یک بار در دقیقه ارزیابی می شود.",
   "capture_commands": "گرفتن دستورات",
   "capture_commands_description": "تمام دستورات انجام شده به صورت دستی روی ویجت ها را به برنامه اضافه کنید.",
   "capture_commands_pause": "مکث بین دستورات",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "هنگام روشن شدن آخرین سطح نور را به خاطر بیاورید",
       "HomeGenie.LevelMemory.SimulateOnly": "فقط شبیه سازی"
     },
+    "26": {
+      "Title": "چراغ های رنگی",
+      "Description": "مثال ادغام Philips Hue lights با استفاده از HTTP API (V1). کاربر پیش‌فرض برای اتصال به پل «newdeveloper» است و باید قبلاً فعال شده باشد.",
+      "ConfigureOptions.BridgeAddress": "آدرس IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "نام کاربری",
+      "ConfigureOptions.LightsCount": "تعداد چراغ ها"
+    },
     "34": {
       "Title": "پیش بینی آب و هوا",
       "Description": "اطلاعات آب و هوا و پیش بینی از سرویس نقشه هواشناسی باز. برای فعال کردن این ویجت یک کلید API معتبر وارد کنید. دستورالعمل ها را در https://openweathermap.org/appid دنبال کنید تا یک کلید API رایگان دریافت کنید.",
@@ -150,7 +157,7 @@
     },
     "77": {
       "Title": "شبکه MQTT",
-      "Description": "برای استفاده از برنامه HomeGenie Panel از هر نقطه از طریق اینترنت یا برای اتصال دستگاه های HomeGenie در همان شبکه MQTT به یک کارگزار MQTT متصل شوید.",
+      "Description": "برای استفاده از برنامه HomeGenie Panel از هر کجا از طریق اینترنت یا برای اتصال دستگاه های HomeGenie در همان شبکه MQTT، به یک کارگزار MQTT متصل شوید.",
       "MQTT.SensorPublish": "رویدادهای منتشر شده توسط این ماژول را منتشر کنید",
       "ConfigureOptions.ClientId": "شناسه مشتری",
       "ConfigureOptions.ServerAddress": "آدرس سرور",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "حداکثر سطح نور (%)",
       "EnergyManagement.EnergySavingMode": "فعال کردن"
     },
+    "88": {
+      "Title": "دوربین IP عمومی",
+      "Description": "نمایش/مسیر تغذیه تصویر از دوربین IP.",
+      "IpCamera.ImageURL": "URL API تصویر دوربین (به اسناد دوربین خود مراجعه کنید)",
+      "IpCamera.Username": "نام کاربری (اختیاری)",
+      "IpCamera.Password": "رمز عبور (اختیاری)",
+      "Widget.Config.fps": "فریم در ثانیه",
+      "Widget.Config.size": "اندازه ویجت"
+    },
     "90": {
       "Title": "سیستم هشدار امنیتی",
-      "Description": "از سنسورها و سایر دستگاه ها برای اجرای یک سیستم هشدار امنیتی استفاده کنید.",
+      "Description": "از سنسورها و سایر دستگاه ها برای پیاده سازی یک سیستم هشدار امنیتی استفاده کنید.",
       "HomeGenie.SecurityAlarm": "به عنوان زنگ هشدار / بارق استفاده کنید",
+      "HomeGenie.SecurityTriggerHome": "همچنین هنگام مسلح شدن به خانه فعال می شود",
       "HomeGenie.SecuritySensor": "استفاده به عنوان سنسور امنیتی",
       "ConfigureOptions.Email.Recipients": "فهرستی از ایمیل‌های گیرندگان برای اعلان‌های هشدار جدا شده با کاما",
       "ConfigureOptions.System.ArmDelay": "تاخیر بازو (ثانیه)",
@@ -199,6 +216,10 @@
       "Title": "ثبت رویدادها",
       "Description": "ثبت فعالیت دستگاه",
       "EventsLogger.EnableLogging": "فعال کردن"
+    },
+    "111": {
+      "Title": "پیکربندی مشتری",
+      "Description": "API را برای مدیریت نمایه‌های پیکربندی مشتری که برای ذخیره تنظیمات UI و داشبورد استفاده می‌شوند، پیاده‌سازی می‌کند."
     },
     "400": {
       "Title": "نسخه ی نمایشی ماژول های مجازی",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "دکمه کاهش روشنایی",
       "ConfigureOptions.DimmerInterval": "مرحله کم نور"
     },
+    "142": {
+      "Title": "حساب ایمیل",
+      "Description": "اطلاعات حساب ایمیل مورد استفاده توسط برنامه های سیستم برای ارسال/دریافت ایمیل را ذخیره می کند.",
+      "ConfigureOptions.Email.Sender": "1. آدرس ایمیل",
+      "ConfigureOptions.Email.SmtpServer": "2. آدرس سرور SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. نام کاربری SMTP (اختیاری)",
+      "ConfigureOptions.Email.SmtpPassword": "4. رمز عبور SMTP (اختیاری)",
+      "ConfigureOptions.Email.SmtpPort": "5. پورت سرور SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. سرور SMTP از SSL استفاده می کند"
+    },
     "145": {
       "Title": "دستگاه هوشمند",
       "Description": "دستگاه را بر اساس تشخیص حرکت و نور محیط روشن/خاموش کنید.",
@@ -250,6 +281,13 @@
       "Title": "سناریوی رنگ های طلوع خورشید",
       "Description": "نمونه ای از سناریوی \"طلوع خورشید\" برای تغییر رنگ چراغ های LED.",
       "Scenarios.SunriseColors": "پیوند به سناریوی Sunrise Colors"
+    },
+    "910": {
+      "Title": "تشخیص اشیا",
+      "Description": "اشیاء را با استفاده از مدل YOLO11 از پیش آموزش دیده تشخیص دهید.",
+      "ML.ObjectDetection": "فعال کردن تشخیص اشیاء",
+      "ML.ObjectDetection.TriggerDetect": "فهرست چیزهایی که با کاما از هم جدا شده اند (به زبان انگلیسی) که زنگ را به صدا در می آورند. (به عنوان مثال: گربه، سگ، شخص، کوله پشتی، چمدان)",
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
     }
   }
 }

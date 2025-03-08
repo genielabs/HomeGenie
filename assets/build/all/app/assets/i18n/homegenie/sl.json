@@ -23,7 +23,7 @@
   "installed_packages": "Nameščeni paketi",
   "upload_package": "Naloži paket",
   "create_package": "Ustvari nov paket",
-  "programs_version": "Različica programov",
+  "programs_version": "Različica programa",
   "http_settings": "nastavitve HTTP",
   "modules_groups": "Skupine in moduli",
   "groups": "Skupine",
@@ -118,8 +118,8 @@
   "program_status_broken": "Zlomljena",
   "program_status_compile": "Prevedi",
   "automation_programming_guide": "Vodnik za programiranje'",
-  "tap_to_disable": "Tapnite za onemogočanje",
-  "tap_to_enable": "Tapnite, da omogočite",
+  "tap_to_disable": "Kliknite za onemogočanje",
+  "tap_to_enable": "Kliknite, da omogočite",
   "program_data": "Programski podatki",
   "visual_code": "Vizualna koda",
   "generated_code": "Ustvarjena koda",
@@ -132,7 +132,7 @@
   "capture_commands_description": "V program dodajte vse ročno izvedene ukaze na gradnikih.",
   "capture_commands_pause": "Premor med ukazi",
   "capture_pause_none": "Noben",
-  "capture_pause_asis": "Tako kot je",
+  "capture_pause_asis": "Kot je",
   "$options": {
     "16": {
       "Title": "Stopnja pomnilnika",
@@ -140,13 +140,20 @@
       "HomeGenie.LevelMemory": "Ob vklopu prikliči zadnjo stopnjo svetlobe",
       "HomeGenie.LevelMemory.SimulateOnly": "Samo simulacija"
     },
+    "26": {
+      "Title": "Barvne luči",
+      "Description": "Primer integracije luči Philips Hue z uporabo HTTP API (V1). Privzeti uporabnik za povezavo z mostom je \"newdeveloper\" in mora biti že omogočen.",
+      "ConfigureOptions.BridgeAddress": "Naslov IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Uporabniško ime",
+      "ConfigureOptions.LightsCount": "Število luči"
+    },
     "34": {
       "Title": "Vremenska napoved",
       "Description": "Informacije o vremenu in napovedi iz storitve Open Weather Map. Za aktiviranje tega pripomočka vnesite veljaven ključ API. Sledite navodilom na https://openweathermap.org/appid, da dobite brezplačen ključ API.",
       "ConfigureOptions.Location": "Ime mesta",
       "ConfigureOptions.Language": "Jezik (npr. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Interval posodabljanja (minute)",
-      "ConfigureOptions.ApiKey": "Ključ API-ja OpenWeatherMap (APPID)"
+      "ConfigureOptions.ApiKey": "Ključ API OpenWeatherMap (APPID)"
     },
     "77": {
       "Title": "Omrežje MQTT",
@@ -173,7 +180,7 @@
     "81": {
       "Title": "Monitor energije",
       "Description": "Ustvari statistiko o porabi energije in uporabi naprav.",
-      "EnergyManagement.MonitorStatus": "Spremljajte stanje",
+      "EnergyManagement.MonitorStatus": "Nadzor stanja",
       "EnergyManagement.MonitorWatts": "Spremljajte porabo energije"
     },
     "82": {
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Največja raven svetlobe (%)",
       "EnergyManagement.EnergySavingMode": "Omogoči"
     },
+    "88": {
+      "Title": "Generična IP kamera",
+      "Description": "Prikaz/usmerjanje vira slike iz kamere IP.",
+      "IpCamera.ImageURL": "URL API-ja za sliko fotoaparata (glejte dokumentacijo fotoaparata)",
+      "IpCamera.Username": "uporabniško ime (neobvezno)",
+      "IpCamera.Password": "Geslo (neobvezno)",
+      "Widget.Config.fps": "Sličic na sekundo",
+      "Widget.Config.size": "Velikost pripomočka"
+    },
     "90": {
       "Title": "Varnostni alarmni sistem",
       "Description": "Uporabite senzorje in druge naprave za izvedbo varnostnega alarmnega sistema.",
       "HomeGenie.SecurityAlarm": "Uporabite kot alarm/stroboskop",
+      "HomeGenie.SecurityTriggerHome": "Sproži se tudi, ko je oborožen Domov",
       "HomeGenie.SecuritySensor": "Uporabite kot varnostni senzor",
       "ConfigureOptions.Email.Recipients": "Seznam e-poštnih sporočil prejemnikov za alarmna obvestila, ločen z vejicami",
       "ConfigureOptions.System.ArmDelay": "Zakasnitev vklopa (sekunde)",
@@ -200,6 +217,10 @@
       "Description": "Beležite dejavnost naprave.",
       "EventsLogger.EnableLogging": "Omogoči"
     },
+    "111": {
+      "Title": "Konfiguracija odjemalca",
+      "Description": "Implementira API za upravljanje konfiguracijskih profilov odjemalca, ki se uporabljajo za shranjevanje nastavitev uporabniškega vmesnika in nadzornih plošč."
+    },
     "400": {
       "Title": "Predstavitev virtualnih modulov",
       "Description": "Ročno nastavite vrednosti virtualne naprave.",
@@ -211,7 +232,7 @@
       "Status.Level": "Stanje stikala (vklop/izklop)"
     },
     "401": {
-      "Title": "Demo - Preklopna vrata",
+      "Title": "Demo - preklopna vrata",
       "Description": "Simulira odprta/zaprta vrata demo senzorja za vrata in okna."
     },
     "402": {
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Gumb za zmanjšanje svetlosti",
       "ConfigureOptions.DimmerInterval": "Korak zatemnitve"
     },
+    "142": {
+      "Title": "E-poštni račun",
+      "Description": "Shranjuje podatke o e-poštnem računu, ki ga uporabljajo sistemski programi za pošiljanje/prejemanje e-pošte.",
+      "ConfigureOptions.Email.Sender": "1. E-poštni naslov",
+      "ConfigureOptions.Email.SmtpServer": "2. Naslov strežnika SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Uporabniško ime SMTP (neobvezno)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Geslo SMTP (neobvezno)",
+      "ConfigureOptions.Email.SmtpPort": "5. Vrata strežnika SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Strežnik SMTP uporablja SSL"
+    },
     "145": {
       "Title": "Pametna naprava",
       "Description": "Vklop/izklop naprave na podlagi zaznavanja gibanja in svetlobe okolice.",
@@ -250,6 +281,13 @@
       "Title": "Scenarij barv sončnega vzhoda",
       "Description": "Primer scenarija \"Sončni vzhod\" za LED luči, ki spreminjajo barvo.",
       "Scenarios.SunriseColors": "Povezava do scenarija Sunrise Colors"
+    },
+    "910": {
+      "Title": "Zaznavanje predmetov",
+      "Description": "Zaznavanje predmetov z vnaprej usposobljenim modelom YOLO11.",
+      "ML.ObjectDetection": "Omogoči zaznavanje predmetov",
+      "ML.ObjectDetection.TriggerDetect": "Z vejicami ločen seznam stvari (v angleščini), ki bodo sprožile alarm. (npr. mačka, pes, oseba, nahrbtnik, kovček)",
+      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
     }
   }
 }

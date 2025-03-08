@@ -2,8 +2,8 @@
   " ": "-------------------------------------------",
   "welcome_to_homegenie": "Καλώς ήρθατε στο HomeGenie!",
   "welcome_subtitle": "Η προγραμματιζόμενη ευφυΐα αυτοματισμού",
-  "not_configured_yet": "Το σύστημα δεν έχει ρυθμιστεί ακόμα. Αυτός ο οδηγός εγκατάστασης θα σας βοηθήσει να θέσετε το σύστημά σας σε λειτουργία σε μερικά βήματα.",
-  "system_config_start_with_base_and_backup": "Επαναφορά από το αρχείο αντιγράφου ασφαλείας",
+  "not_configured_yet": "Το σύστημα δεν έχει ρυθμιστεί ακόμα. Αυτός ο οδηγός εγκατάστασης θα σας βοηθήσει να θέσετε σε λειτουργία το σύστημά σας σε μερικά βήματα.",
+  "system_config_start_with_base_and_backup": "Επαναφορά από αρχείο αντιγράφου ασφαλείας",
   "system_config_start_with_default_setup": "Προεπιλεγμένη ρύθμιση",
   "system_config_include_demo": "Συμπεριλάβετε επίδειξη με προσομοιωμένη δραστηριότητα συσκευής",
   "system_config_additional_features": "Πρόσθετα χαρακτηριστικά",
@@ -118,8 +118,8 @@
   "program_status_broken": "Σπασμένος",
   "program_status_compile": "Συντάσσω",
   "automation_programming_guide": "Οδηγός προγραμματισμού\"",
-  "tap_to_disable": "Πατήστε για απενεργοποίηση",
-  "tap_to_enable": "Πατήστε για ενεργοποίηση",
+  "tap_to_disable": "Κάντε κλικ για απενεργοποίηση",
+  "tap_to_enable": "Κάντε κλικ για ενεργοποίηση",
   "program_data": "Δεδομένα προγράμματος",
   "visual_code": "Οπτικός κώδικας",
   "generated_code": "Δημιουργήθηκε κώδικας",
@@ -128,7 +128,7 @@
   "context_code": "Συμφραζόμενα",
   "main_code_empty_note": "Ο κωδικός \"κύριος\" είναι κενός. Χρησιμοποιήστε το πρόγραμμα επεξεργασίας \"Visual code\" για να δημιουργήσετε αυτόν τον κώδικα: - Ανοίξτε την κατηγορία \"Program\" από την παλέτα εντολών στα αριστερά - Σύρετε ένα μπλοκ τύπου \"Main\" στον χώρο εργασίας οπτικού κώδικα - Προσθέστε μέσα σε αυτό άλλα μπλοκ κώδικα για να εφαρμόσετε ενέργειες και λογική αυτού του προγράμματος.",
   "setup_code_empty_note": "Ο κωδικός \"Ρύθμιση\" είναι κενός. Χρησιμοποιήστε το πρόγραμμα επεξεργασίας \"Visual code\" για να δημιουργήσετε αυτόν τον κώδικα: - Ανοίξτε την κατηγορία \"Program\" από την παλέτα εντολών στα αριστερά - Σύρετε ένα μπλοκ τύπου \"Setup\" στον χώρο εργασίας οπτικού κώδικα - Προσθέστε μέσα σε αυτό άλλα μπλοκ κώδικα για να προσδιορίσετε τις συνθήκες που θα ενεργοποιήσουν την εκτέλεση κώδικα \"Κύριος\" Αυτός ο κωδικός αξιολογείται κάθε φορά που εμφανίζεται ένα νέο συμβάν και τουλάχιστον μία φορά το λεπτό.",
-  "capture_commands": "Καταγραφή εντολών",
+  "capture_commands": "Λήψη εντολών",
   "capture_commands_description": "Προσθέστε όλες τις εντολές που εκτελούνται χειροκίνητα σε widget στο πρόγραμμα.",
   "capture_commands_pause": "Παύση μεταξύ εντολών",
   "capture_pause_none": "Κανένας",
@@ -139,6 +139,13 @@
       "Description": "Αποθηκεύστε και ανακαλέστε το τελευταίο επίπεδο dimmer.",
       "HomeGenie.LevelMemory": "Ανακαλέστε το τελευταίο επίπεδο φωτός όταν είναι ενεργοποιημένο",
       "HomeGenie.LevelMemory.SimulateOnly": "Μόνο προσομοίωση"
+    },
+    "26": {
+      "Title": "Έγχρωμα φώτα",
+      "Description": "Παράδειγμα ενσωμάτωσης φώτων Philips Hue χρησιμοποιώντας HTTP API (V1). Ο προεπιλεγμένος χρήστης για σύνδεση στη γέφυρα είναι \"newdeveloper\" και θα πρέπει να είναι ήδη ενεργοποιημένος.",
+      "ConfigureOptions.BridgeAddress": "Διεύθυνση IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Όνομα χρήστη",
+      "ConfigureOptions.LightsCount": "Αριθμός φώτων"
     },
     "34": {
       "Title": "Πρόγνωση καιρού",
@@ -174,7 +181,7 @@
       "Title": "Ενεργειακό Monitor",
       "Description": "Δημιουργήστε στατιστικά στοιχεία για την κατανάλωση ενέργειας και τη χρήση συσκευών.",
       "EnergyManagement.MonitorStatus": "Παρακολούθηση κατάστασης",
-      "EnergyManagement.MonitorWatts": "Παρακολουθήστε την κατανάλωση ενέργειας"
+      "EnergyManagement.MonitorWatts": "Παρακολούθηση της κατανάλωσης ενέργειας"
     },
     "82": {
       "Title": "Λειτουργία εξοικονόμησης ενέργειας",
@@ -182,16 +189,26 @@
       "EnergyManagement.EnergySavingLevel": "Μέγιστο επίπεδο φωτισμού (%)",
       "EnergyManagement.EnergySavingMode": "Καθιστώ ικανό"
     },
+    "88": {
+      "Title": "Γενική κάμερα IP",
+      "Description": "Εμφάνιση/δρομολόγηση τροφοδοσίας εικόνας από κάμερα IP.",
+      "IpCamera.ImageURL": "URL API εικόνας κάμερας (δείτε τα έγγραφα της κάμερας)",
+      "IpCamera.Username": "Όνομα χρήστη (προαιρετικό)",
+      "IpCamera.Password": "Κωδικός πρόσβασης (προαιρετικό)",
+      "Widget.Config.fps": "Καρέ ανά δευτερόλεπτο",
+      "Widget.Config.size": "Μέγεθος widget"
+    },
     "90": {
       "Title": "Σύστημα Συναγερμού Ασφαλείας",
       "Description": "Χρησιμοποιήστε αισθητήρες και άλλες συσκευές για να εφαρμόσετε ένα σύστημα συναγερμού ασφαλείας.",
       "HomeGenie.SecurityAlarm": "Χρησιμοποιήστε ως συναγερμό/στροβοσκόπιο",
+      "HomeGenie.SecurityTriggerHome": "Επίσης ενεργοποιείται όταν είναι οπλισμένο Home",
       "HomeGenie.SecuritySensor": "Χρήση ως αισθητήρας ασφαλείας",
       "ConfigureOptions.Email.Recipients": "Λίστα με κόμματα με e-mail παραληπτών για ειδοποιήσεις συναγερμού",
       "ConfigureOptions.System.ArmDelay": "Καθυστέρηση βραχίονα (δευτερόλεπτα)",
       "ConfigureOptions.System.SirenStartTime": "Καθυστέρηση έναρξης σειρήνων (δευτερόλεπτα)",
       "ConfigureOptions.System.SirenMaxTime": "Μέγιστος χρόνος σειρήνων (δευτερόλεπτα, 0=άπειρο)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Πρόγραμμα για εκτέλεση όταν είναι οπλισμένο",
+      "ConfigureOptions.Trigger.ArmedProgram": "Το πρόγραμμα για εκτέλεση όταν είναι οπλισμένο",
       "ConfigureOptions.Trigger.DisarmedProgram": "Πρόγραμμα για εκτέλεση όταν είναι αφοπλισμένο",
       "ConfigureOptions.Trigger.TriggeredProgram": "Πρόγραμμα για εκτέλεση όταν ενεργοποιηθεί"
     },
@@ -199,6 +216,10 @@
       "Title": "Καταγραφή συμβάντων",
       "Description": "Καταγράψτε τη δραστηριότητα της συσκευής.",
       "EventsLogger.EnableLogging": "Καθιστώ ικανό"
+    },
+    "111": {
+      "Title": "Διαμόρφωση πελάτη",
+      "Description": "Υλοποιεί το API για τη διαχείριση των προφίλ διαμόρφωσης του πελάτη που χρησιμοποιούνται για την αποθήκευση ρυθμίσεων διεπαφής χρήστη και πίνακες εργαλείων."
     },
     "400": {
       "Title": "Επίδειξη εικονικών μονάδων",
@@ -230,12 +251,22 @@
     },
     "505": {
       "Title": "Τηλεχειριστήριο",
-      "Description": "Ελέγξτε τη συσκευή χρησιμοποιώντας ένα τηλεχειριστήριο (IR ή RF).",
+      "Description": "Ελέγξτε τη συσκευή χρησιμοποιώντας τηλεχειριστήριο (IR ή RF).",
       "HomeGenie.RemoteControl.Enable": "Καθιστώ ικανό",
       "HomeGenie.RemoteControl.IRCode": "Κουμπί εναλλαγής",
       "ConfigureOptions.DimmerUpCode": "Κουμπί αύξησης φωτεινότητας",
       "ConfigureOptions.DimmerDownCode": "Κουμπί μείωσης φωτεινότητας",
       "ConfigureOptions.DimmerInterval": "Βήμα θαμπώματος"
+    },
+    "142": {
+      "Title": "Λογαριασμός e-mail",
+      "Description": "Αποθηκεύει πληροφορίες λογαριασμού e-mail που χρησιμοποιούνται από προγράμματα συστήματος για την αποστολή/λήψη email.",
+      "ConfigureOptions.Email.Sender": "1. Διεύθυνση ηλεκτρονικού ταχυδρομείου",
+      "ConfigureOptions.Email.SmtpServer": "2. Διεύθυνση διακομιστή SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Όνομα χρήστη SMTP (προαιρετικό)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Κωδικός πρόσβασης SMTP (προαιρετικό)",
+      "ConfigureOptions.Email.SmtpPort": "5. Θύρα διακομιστή SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Ο διακομιστής SMTP χρησιμοποιεί SSL"
     },
     "145": {
       "Title": "Έξυπνη Συσκευή",
@@ -250,6 +281,13 @@
       "Title": "Σενάριο Sunrise Colors",
       "Description": "Παράδειγμα σεναρίου \"Sunrise\" για φώτα LED που αλλάζουν χρώμα.",
       "Scenarios.SunriseColors": "Σύνδεση με το σενάριο Sunrise Colors"
+    },
+    "910": {
+      "Title": "Ανίχνευση αντικειμένων",
+      "Description": "Εντοπίστε αντικείμενα χρησιμοποιώντας ένα προεκπαιδευμένο μοντέλο YOLO11.",
+      "ML.ObjectDetection": "Ενεργοποίηση ανίχνευσης αντικειμένων",
+      "ML.ObjectDetection.TriggerDetect": "Λίστα με κόμματα (στα αγγλικά) που θα ενεργοποιήσουν τον συναγερμό. (π.χ.: γάτα, σκύλος, άτομο, σακίδιο, βαλίτσα)",
+      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή αρχείου μοντέλου YOLO11 (.onnx)"
     }
   }
 }

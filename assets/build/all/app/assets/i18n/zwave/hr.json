@@ -4,7 +4,7 @@
   "node_inclusion": "Dodaj uređaj",
   "node_exclusion": "Uklonite uređaj",
   "enabling_node_inclusion": "Omogućivanje načina uključivanja čvora, pričekajte...",
-  "enabling_node_exclusion": "Omogućavanje načina isključivanja čvora, molimo pričekajte...",
+  "enabling_node_exclusion": "Omogućivanje načina isključivanja čvorova, molimo pričekajte...",
   "inclusion_message": "Pritisnite gumb na uređaju koji želite dodati ovoj mreži.",
   "exclusion_message": "Pritisnite gumb na uređaju koji želite ukloniti iz ove mreže.",
   "task_duration_notice": "Za dovršetak ovog zadatka može biti potrebno do <strong>{{timeout}}</strong> ograničenja.",

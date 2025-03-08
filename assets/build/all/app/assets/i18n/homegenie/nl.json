@@ -2,10 +2,10 @@
   " ": "---------------------------------------",
   "welcome_to_homegenie": "Welkom bij HomeGenie!",
   "welcome_subtitle": "De programmeerbare automatiseringsintelligentie",
-  "not_configured_yet": "Systeem is nog niet geconfigureerd. Deze installatiewizard helpt u om uw systeem in een paar stappen op te starten en te laten werken.",
+  "not_configured_yet": "Systeem is nog niet geconfigureerd. Deze installatiewizard helpt u om uw systeem in een paar stappen aan de praat te krijgen.",
   "system_config_start_with_base_and_backup": "Herstellen van back-upbestand",
   "system_config_start_with_default_setup": "Standaardinstelling",
-  "system_config_include_demo": "Demo toevoegen met gesimuleerde apparaatactiviteit",
+  "system_config_include_demo": "Demo met gesimuleerde apparaatactiviteit toevoegen",
   "system_config_additional_features": "Extra functies",
   "system_config_manual_setup": "Handmatige installatie",
   "interfaces": "Interfaces",
@@ -102,7 +102,7 @@
   "scheduler_preset_action_config_message": "Bericht",
   "save_and_build": "Opslaan en bouwen",
   "toggle_widgets_preview": "Widgetvoorbeeld in-/uitschakelen",
-  "stop_program": "Stop programma",
+  "stop_program": "Programma stoppen",
   "run_program": "Programma uitvoeren",
   "enable_to_run_program": "Schakel het programma in om het uit te kunnen voeren",
   "program_status_added": "Toegevoegd",
@@ -118,8 +118,8 @@
   "program_status_broken": "Gebroken",
   "program_status_compile": "Compileren",
   "automation_programming_guide": "Programmeerhandleiding",
-  "tap_to_disable": "Tik om uit te schakelen",
-  "tap_to_enable": "Tik om in te schakelen",
+  "tap_to_disable": "Klik om uit te schakelen",
+  "tap_to_enable": "Klik om in te schakelen",
   "program_data": "Programmagegevens",
   "visual_code": "Visuele code",
   "generated_code": "Gegenereerde code",
@@ -139,6 +139,13 @@
       "Description": "Opslaan en oproepen van het laatste dimmerniveau.",
       "HomeGenie.LevelMemory": "Laatste lichtniveau oproepen bij inschakelen",
       "HomeGenie.LevelMemory.SimulateOnly": "Alleen simuleren"
+    },
+    "26": {
+      "Title": "Kleur lichten",
+      "Description": "Voorbeeld van integratie van Philips Hue-lampen met behulp van HTTP API (V1). De standaardgebruiker om verbinding te maken met de bridge is \"newdeveloper\" en deze zou al ingeschakeld moeten zijn.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adres",
+      "ConfigureOptions.BridgeUsername": "Gebruikersnaam",
+      "ConfigureOptions.LightsCount": "Aantal lampen"
     },
     "34": {
       "Title": "Weersverwachting",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maximaal lichtniveau (%)",
       "EnergyManagement.EnergySavingMode": "Inschakelen"
     },
+    "88": {
+      "Title": "Algemene IP-camera",
+      "Description": "Beeldfeed van een IP-camera weergeven/routeren.",
+      "IpCamera.ImageURL": "Camera-afbeelding API-URL (zie uw cameradocumentatie)",
+      "IpCamera.Username": "Gebruikersnaam (optioneel)",
+      "IpCamera.Password": "Wachtwoord (optioneel)",
+      "Widget.Config.fps": "Frames per seconde",
+      "Widget.Config.size": "Widgetgrootte"
+    },
     "90": {
       "Title": "Beveiligingsalarmsysteem",
       "Description": "Gebruik sensoren en andere apparaten om een beveiligingsalarmsysteem te implementeren.",
       "HomeGenie.SecurityAlarm": "Gebruik als alarm/stroboscoop",
+      "HomeGenie.SecurityTriggerHome": "Wordt ook geactiveerd wanneer Home is ingeschakeld",
       "HomeGenie.SecuritySensor": "Gebruik als beveiligingssensor",
       "ConfigureOptions.Email.Recipients": "Door komma's gescheiden lijst met ontvangers van e-mails voor alarmmeldingen",
       "ConfigureOptions.System.ArmDelay": "Armvertraging (seconden)",
@@ -199,6 +216,10 @@
       "Title": "Gebeurtenissen loggen",
       "Description": "Registreer de activiteit van het apparaat.",
       "EventsLogger.EnableLogging": "Inschakelen"
+    },
+    "111": {
+      "Title": "Clientconfiguratie",
+      "Description": "Implementeert een API voor het beheren van de configuratieprofielen van de klant die worden gebruikt om UI- en dashboardinstellingen op te slaan."
     },
     "400": {
       "Title": "Virtuele modules demo",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Knop voor het verlagen van de helderheid",
       "ConfigureOptions.DimmerInterval": "Dimmen stap"
     },
+    "142": {
+      "Title": "E-mailaccount",
+      "Description": "Slaat e-mailaccountgegevens op die door systeemprogramma's worden gebruikt voor het verzenden/ontvangen van e-mails.",
+      "ConfigureOptions.Email.Sender": "1. E-mailadres",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP-serveradres",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP-gebruikersnaam (optioneel)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP-wachtwoord (optioneel)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-serverpoort",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-server gebruikt SSL"
+    },
     "145": {
       "Title": "Slim apparaat",
       "Description": "Schakel het apparaat in/uit op basis van bewegingsdetectie en omgevingslicht.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Zonsopgangkleuren Scenario",
-      "Description": "Voorbeeldscenario 'Zonsopgang' voor kleurveranderende LED-lampen.",
+      "Description": "Voorbeeldscenario 'Zonsopgang' voor LED-verlichting die van kleur verandert.",
       "Scenarios.SunriseColors": "Link naar Sunrise Colors-scenario"
+    },
+    "910": {
+      "Title": "Objectdetectie",
+      "Description": "Detecteer objecten met behulp van een vooraf getraind YOLO11-model.",
+      "ML.ObjectDetection": "Objectdetectie inschakelen",
+      "ML.ObjectDetection.TriggerDetect": "Door komma's gescheiden lijst met dingen (in het Engels) die het alarm activeren. (bijv.: kat, hond, persoon, rugzak, koffer)",
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
     }
   }
 }

@@ -18,7 +18,7 @@
   "manufacturer_specific": "Tootjapõhine",
   "routing_info": "Marsruutimise teave",
   "association_groups": "Ühingurühmad",
-  "association_description": "See seade saadab aruandeid seostusrühmadesse kuuluvatele sõlmedele. Sellelt seadmelt aruannete saamiseks kaasake sõlm 1 (kontroller) seoserühmadesse.",
+  "association_description": "See seade saadab aruandeid seoserühmadesse kaasatud sõlmedele. Sellelt seadmelt aruannete saamiseks kaasake sõlm 1 (kontroller) seoserühmadesse.",
   "associated_nodes": "Seotud sõlmed",
   "enter_node_number": "Sisestage sõlme number",
   "configuration_parameters": "Konfiguratsiooni parameetrid",
@@ -33,5 +33,5 @@
   "calibrate": "Kalibreerige",
   "edit_calibration_parameter": "Kalibreerimisparameetri numbri muutmine",
   "calibration_parameter_not_set": "Kalibreerimisparameetri number pole määratud",
-  "calibration_parameter_number": "Parameetri number (vt seadme kasutusjuhendit)"
+  "calibration_parameter_number": "Parameetri number (vt seadme juhendit)"
 }

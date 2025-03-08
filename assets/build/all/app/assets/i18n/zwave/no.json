@@ -26,7 +26,7 @@
   "generic_parameter_description": "Angi konfigurasjonsparameternummeret og verdien som skal angis.",
   "enter_parameter_number": "Skriv inn parameternummer",
   "enter_parameter_value": "Angi parameterverdi",
-  "command_classes": "Kommandoklasser",
+  "command_classes": "Kommando klasser",
   "missing handler": "Savnet handler",
   "refresh_ports_button": "Oppdater portlisten",
   "calibration": "Kalibrering",

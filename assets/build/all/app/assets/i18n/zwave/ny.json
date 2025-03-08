@@ -11,7 +11,7 @@
   "adding_node": "Mukuwonjezera <strong class=\"color-accent\">{{node}}</strong> ya chipangizo , chonde dikirani...",
   "removing_node": "Kuchotsa <strong class=\"color-accent\">{{node}}</strong> ya chipangizo , chonde dikirani...",
   "node_added": "<strong class=\"color-accent\">{{node}}</strong> ya chipangizo anawonjezedwa bwino",
-  "node_removed": "<strong class=\"color-accent\">{{node}}</strong> ya chipangizo yachotsedwa",
+  "node_removed": "<strong class=\"color-accent\">{{node}}</strong> ya chipangizo chachotsedwa",
   "node_config": "Kusintha kwa chipangizo",
   "brand": "Mtundu",
   "product": "Zogulitsa",
@@ -31,7 +31,7 @@
   "refresh_ports_button": "Tsitsaninso mndandanda wamadoko",
   "calibration": "Kuwongolera",
   "calibrate": "Sinthani",
-  "edit_calibration_parameter": "Sinthani nambala yoyezera nambala",
+  "edit_calibration_parameter": "Sinthani nambala yoyezera",
   "calibration_parameter_not_set": "Nambala yoyezera magawo sinakhazikitsidwe",
   "calibration_parameter_number": "Nambala ya parameter (onani buku lazida)"
 }

@@ -26,7 +26,7 @@
   "programs_version": "Programmide versioon",
   "http_settings": "HTTP seaded",
   "modules_groups": "Rühmad ja moodulid",
-  "groups": "Grupid",
+  "groups": "Rühmad",
   "add_group": "Lisa grupp",
   "edit_group": "Redigeeri gruppi",
   "delete_group": "Kustuta grupp",
@@ -118,8 +118,8 @@
   "program_status_broken": "Katki",
   "program_status_compile": "Koostada",
   "automation_programming_guide": "Programmeerimisjuhend\"",
-  "tap_to_disable": "Puudutage keelamiseks",
-  "tap_to_enable": "Puudutage lubamiseks",
+  "tap_to_disable": "Klõpsake keelamiseks",
+  "tap_to_enable": "Klõpsake lubamiseks",
   "program_data": "Programmi andmed",
   "visual_code": "Visuaalne kood",
   "generated_code": "Loodud kood",
@@ -127,7 +127,7 @@
   "main_code": "Peamine",
   "context_code": "Kontekst",
   "main_code_empty_note": "\"Põhi\" kood on tühi. Kasutage selle koodi genereerimiseks redaktorit \"Visuaalne kood\": - Avage vasakpoolsest käsupaletist kategooria \"Programm\" - Lohistage visuaalse koodi tööruumis \"Põhi\" tüüpi plokk - Lisage selle sisse muud koodiplokid, et rakendada selle programmi toiminguid ja loogikat. Programmi \"Põhi\" saab käivitada käsitsi või automaatselt, sõltuvalt häälestuskoodis lõpuks antud tingimustest.",
-  "setup_code_empty_note": "\"Seadistamise\" kood on tühi. Kasutage selle koodi genereerimiseks redaktorit \"Visuaalne kood\": - Avage vasakpoolsest käsupaletist kategooria \"Programm\" - Lohistage visuaalse koodi tööruumis \"Seadistamise\" tüüpi plokk - Lisage selle sisse muud koodiplokid, et määrata kindlaks tingimused, mis käivitavad \"Pea\" koodi täitmise. Seda koodi hinnatakse iga kord, kui toimub uus sündmus ja vähemalt kord minutis.",
+  "setup_code_empty_note": "\"Seadistamise\" kood on tühi. Kasutage selle koodi genereerimiseks redaktorit \"Visuaalne kood\": - Avage vasakpoolses käsupaletis kategooria \"Programm\" - Lohistage visuaalse koodi tööruumis \"Seadistamise\" tüüpi plokk - Lisage selle sisse muud koodiplokid, et määrata kindlaks tingimused, mis käivitavad \"Pea\" koodi täitmise. Seda koodi hinnatakse iga kord, kui toimub uus sündmus ja vähemalt kord minutis.",
   "capture_commands": "Käskude hõivamine",
   "capture_commands_description": "Lisage programmi kõik vidinatega käsitsi tehtud käsud.",
   "capture_commands_pause": "Paus käskude vahel",
@@ -140,22 +140,29 @@
       "HomeGenie.LevelMemory": "Tuletage meelde viimane valgustuse tase sisselülitamisel",
       "HomeGenie.LevelMemory.SimulateOnly": "Ainult simuleerida"
     },
+    "26": {
+      "Title": "Värvilised tuled",
+      "Description": "Philips Hue'i tulede integreerimise näide HTTP API (V1) abil. Vaikekasutaja sillaga ühenduse loomiseks on \"uusarendaja\" ja see peaks olema juba lubatud.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-aadress",
+      "ConfigureOptions.BridgeUsername": "Kasutajanimi",
+      "ConfigureOptions.LightsCount": "Tulede arv"
+    },
     "34": {
       "Title": "Ilmateade",
       "Description": "Ilma- ja ilmaennustusteave teenusest Open Weather Map. Selle vidina aktiveerimiseks sisestage kehtiv API võti. Tasuta API-võtme hankimiseks järgige juhiseid aadressil https://openweathermap.org/appid.",
       "ConfigureOptions.Location": "Linna nimi",
       "ConfigureOptions.Language": "Keel (nt EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval": "Värskendusintervall (minutid)",
+      "ConfigureOptions.UpdateInterval": "Värskendamise intervall (minutid)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API võti (APPID)"
     },
     "77": {
       "Title": "Võrk MQTT",
       "Description": "Ühendage MQTT maakleriga, et kasutada HomeGenie paneeli rakendust kõikjal Interneti kaudu või ühendada HomeGenie seadmeid samas MQTT võrgus.",
-      "MQTT.SensorPublish": "Avalda selle mooduli väljastatud sündmused",
+      "MQTT.SensorPublish": "Avaldage selle mooduli väljastatud sündmused",
       "ConfigureOptions.ClientId": "Kliendi ID.",
       "ConfigureOptions.ServerAddress": "Serveri aadress",
       "ConfigureOptions.ServerPort": "Serveri port",
-      "ConfigureOptions.Encryption": "Luba täielik krüptimine (E2EE)",
+      "ConfigureOptions.Encryption": "Luba täielik krüpteerimine (E2EE)",
       "ConfigureOptions.WebSockets": "Kasutage WebSocketsi",
       "ConfigureOptions.TLS": "Luba TLS/SSL",
       "ConfigureOptions.Username": "Kasutajanimi (valikuline)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimaalne valgustase (%)",
       "EnergyManagement.EnergySavingMode": "Luba"
     },
+    "88": {
+      "Title": "Üldine IP-kaamera",
+      "Description": "Kuva/marsruuti pildivoog IP-kaamerast.",
+      "IpCamera.ImageURL": "Kaamera pildi API URL (vaadake oma kaamera dokumente)",
+      "IpCamera.Username": "Kasutajanimi (valikuline)",
+      "IpCamera.Password": "Parool (valikuline)",
+      "Widget.Config.fps": "Kaadreid sekundis",
+      "Widget.Config.size": "Vidina suurus"
+    },
     "90": {
       "Title": "Turvaalarmsüsteem",
       "Description": "Turvasignalisatsiooni rakendamiseks kasutage andureid ja muid seadmeid.",
-      "HomeGenie.SecurityAlarm": "Kasuta alarmina/strobina",
+      "HomeGenie.SecurityAlarm": "Kasuta äratuse/strobina",
+      "HomeGenie.SecurityTriggerHome": "Käivitub ka relvastatud Kodus",
       "HomeGenie.SecuritySensor": "Kasuta turvasensorina",
       "ConfigureOptions.Email.Recipients": "Komadega eraldatud häireteadete e-kirjade adressaatide loend",
       "ConfigureOptions.System.ArmDelay": "Käe käe viivitus (sekundites)",
@@ -199,6 +216,10 @@
       "Title": "Sündmuste logimine",
       "Description": "Salvestage seadme tegevus.",
       "EventsLogger.EnableLogging": "Luba"
+    },
+    "111": {
+      "Title": "Kliendi konfiguratsioon",
+      "Description": "Rakendab API kliendi konfiguratsiooniprofiilide haldamiseks, mida kasutatakse kasutajaliidese ja armatuurlaudade sätete salvestamiseks."
     },
     "400": {
       "Title": "Virtuaalsete moodulite demo",
@@ -220,7 +241,7 @@
     },
     "410": {
       "Title": "Sensori simulaator",
-      "Description": "Väljastada juhuslikud anduri väärtused.",
+      "Description": "Anduri juhuslike väärtuste väljastamine.",
       "Simulator.Sensor.Temperature": "Temperatuuriandur",
       "Simulator.Sensor.Humidity": "Niiskuse andur",
       "Simulator.Sensor.Luminance": "Valgusandur",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Heleduse vähendamise nupp",
       "ConfigureOptions.DimmerInterval": "Hämardamise samm"
     },
+    "142": {
+      "Title": "E-posti konto",
+      "Description": "Salvestab e-posti konto teabe, mida süsteemiprogrammid kasutavad meilide saatmiseks/vastuvõtmiseks.",
+      "ConfigureOptions.Email.Sender": "1. E-posti aadress",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP-serveri aadress",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP kasutajanimi (valikuline)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP parool (valikuline)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP-serveri port",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-server kasutab SSL-i"
+    },
     "145": {
       "Title": "Nutikas seade",
       "Description": "Lülitage seade sisse/välja, lähtudes liikumistuvastusest ja ümbritsevast valgusest.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Päikesetõusu värvide stsenaarium",
-      "Description": "Päikesetõusu stsenaariumi näide värvimuutvate LED-tulede jaoks.",
+      "Description": "Näidis \"Päikesetõusu\" stsenaarium värvi muutvate LED-tulede jaoks.",
       "Scenarios.SunriseColors": "Link Sunrise Colorsi stsenaariumile"
+    },
+    "910": {
+      "Title": "Objekti tuvastamine",
+      "Description": "Tuvastage objekte, kasutades eelkoolitatud YOLO11 mudelit.",
+      "ML.ObjectDetection": "Objektide tuvastamise lubamine",
+      "ML.ObjectDetection.TriggerDetect": "Komadega eraldatud loend asjadest (inglise keeles), mis häire käivitavad. (nt: kass, koer, inimene, seljakott, kohver)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudeli faili tee (.onnx)"
     }
   }
 }

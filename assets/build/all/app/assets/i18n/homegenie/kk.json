@@ -61,7 +61,7 @@
   "cronwizard_minuteselect_everynthminute": "Әр берілген минут",
   "cronwizard_minuteselect_selectedminutes": "Таңдалған минуттар",
   "cronwizard_hourselect_everyhour": "Әр сағат сайын",
-  "cronwizard_hourselect_everynthhour": "Әрбір берілген сағат",
+  "cronwizard_hourselect_everynthhour": "Әр берілген сағат",
   "cronwizard_hourselect_selectedhours": "Таңдалған сағаттар",
   "cronwizard_dayselect_everyday": "Күн сайын",
   "cronwizard_dayselect_selecteddays": "Таңдалған күндер",
@@ -75,7 +75,7 @@
   "cronwizard_bindings_select_types": "Түрлерді таңдаңыз",
   "cronwizard_action_set_action_to_execute": "Осы оқиғаның орын алуында орындалатын әрекетті орнатыңыз",
   "cronwizard_action_preset_actions": "Алдын ала орнатылған әрекеттер",
-  "cronwizard_action_preset_every_occurrence": "Әрбір оқиғада",
+  "cronwizard_action_preset_every_occurrence": "Әрбір оқиға бойынша",
   "cronwizard_action_preset_slot_start": "Уақыт аралығының басында",
   "cronwizard_action_preset_slot_end": "Уақыт аралығының соңында",
   "cronwizard_action_custom_script": "Арнаулы әрекет сценарийі",
@@ -112,14 +112,14 @@
   "program_status_background": "Фон",
   "program_status_stopping": "Тоқтау",
   "program_status_stopped": "Тоқтады",
-  "program_status_interrupted": "Үзілген",
+  "program_status_interrupted": "Үзілді",
   "program_status_disabled": "Өшірілген",
   "program_status_enabled": "Қосылған",
   "program_status_broken": "Сынған",
   "program_status_compile": "Құрастыру",
-  "automation_programming_guide": "Бағдарламалау жөніндегі нұсқаулық'",
-  "tap_to_disable": "Өшіру үшін түртіңіз",
-  "tap_to_enable": "Қосу үшін түртіңіз",
+  "automation_programming_guide": "Бағдарламалау жөніндегі нұсқаулық»",
+  "tap_to_disable": "Өшіру үшін басыңыз",
+  "tap_to_enable": "Қосу үшін басыңыз",
   "program_data": "Бағдарлама деректері",
   "visual_code": "Визуалды код",
   "generated_code": "Жасалған код",
@@ -127,7 +127,7 @@
   "main_code": "Негізгі",
   "context_code": "Контекст",
   "main_code_empty_note": "«Негізгі» код бос. Осы кодты генерациялау үшін «Көрнекі код» редакторын пайдаланыңыз: - Сол жақтағы пәрмендер палитрасынан «Бағдарлама» санатын ашыңыз - Визуалды кодтың жұмыс кеңістігінде «Негізгі» типті блокты сүйреңіз - Осы бағдарламаның әрекеттері мен логикасын жүзеге асыру үшін оның ішіне басқа код блоктарын қосыңыз «Негізгі» бағдарламасын орнату кодында берілген шарттар негізінде қолмен немесе автоматты түрде іске қосуға болады.",
-  "setup_code_empty_note": "\"Орнату\" коды бос. Осы кодты жасау үшін «Көрнекі код» редакторын пайдаланыңыз: - Сол жақтағы пәрмендер палитрасынан «Бағдарлама» санатын ашыңыз - Визуалды кодтың жұмыс кеңістігінде «Орнату» типті блокты сүйреңіз - «Негізгі» кодты орындауды іске қосатын шарттарды анықтау үшін оның ішіне басқа код блоктарын қосыңыз Бұл код жаңа оқиға болған сайын және кемінде минутына бір рет бағаланады.",
+  "setup_code_empty_note": "\"Орнату\" коды бос. Осы кодты жасау үшін «Көрнекі код» редакторын пайдаланыңыз: - Сол жақтағы пәрмендер палитрасынан «Бағдарлама» санатын ашыңыз - Визуалды кодтың жұмыс кеңістігінде «Орнату» типті блокты сүйреңіз - «Негізгі» кодты орындауға бастайтын шарттарды анықтау үшін оның ішіне басқа код блоктарын қосыңыз Бұл код жаңа оқиға болған сайын және кемінде минутына бір рет бағаланады.",
   "capture_commands": "Түсіру пәрмендері",
   "capture_commands_description": "Виджеттерде қолмен орындалатын барлық пәрмендерді бағдарламаға қосыңыз.",
   "capture_commands_pause": "Пәрмендер арасында үзіліс",
@@ -139,6 +139,13 @@
       "Description": "Соңғы диммер деңгейін сақтаңыз және қайта шақырыңыз.",
       "HomeGenie.LevelMemory": "Қосылған кезде соңғы жарық деңгейін еске түсіріңіз",
       "HomeGenie.LevelMemory.SimulateOnly": "Тек имитациялау"
+    },
+    "26": {
+      "Title": "Түсті шамдар",
+      "Description": "HTTP API (V1) арқылы Philips Hue шамдарын біріктіру мысалы. Көпірге қосылу үшін әдепкі пайдаланушы «жаңа әзірлеуші» болып табылады және ол әлдеқашан қосылған болуы керек.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP мекенжайы",
+      "ConfigureOptions.BridgeUsername": "Пайдаланушы аты",
+      "ConfigureOptions.LightsCount": "Шамдар саны"
     },
     "34": {
       "Title": "Ауа райы болжамы",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Максималды жарық деңгейі (%)",
       "EnergyManagement.EnergySavingMode": "Қосу"
     },
+    "88": {
+      "Title": "Жалпы IP камера",
+      "Description": "IP камерасынан кескін беруді көрсету/бағыттау.",
+      "IpCamera.ImageURL": "Камера кескінінің API URL мекенжайы (камера құжаттарын қараңыз)",
+      "IpCamera.Username": "Пайдаланушы аты (міндетті емес)",
+      "IpCamera.Password": "Құпия сөз (міндетті емес)",
+      "Widget.Config.fps": "Секундына кадр саны",
+      "Widget.Config.size": "Виджет өлшемі"
+    },
     "90": {
       "Title": "Қауіпсіздік дабыл жүйесі",
       "Description": "Қауіпсіздік дабыл жүйесін енгізу үшін сенсорларды және басқа құрылғыларды пайдаланыңыз.",
       "HomeGenie.SecurityAlarm": "Дабыл/строб ретінде пайдаланыңыз",
+      "HomeGenie.SecurityTriggerHome": "Сондай-ақ, Home қаруланған кезде іске қосылады",
       "HomeGenie.SecuritySensor": "Қауіпсіздік сенсоры ретінде пайдаланыңыз",
       "ConfigureOptions.Email.Recipients": "Дабыл хабарландырулары үшін алушылардың электрондық пошталарының үтірмен бөлінген тізімі",
       "ConfigureOptions.System.ArmDelay": "Қолды кідірту (секунд)",
@@ -199,6 +216,10 @@
       "Title": "Оқиғаларды тіркеу",
       "Description": "Құрылғы әрекетін жазып алыңыз.",
       "EventsLogger.EnableLogging": "Қосу"
+    },
+    "111": {
+      "Title": "Клиент конфигурациясы",
+      "Description": "UI және бақылау тақталары параметрлерін сақтау үшін пайдаланылатын клиенттің конфигурация профильдерін басқаруға арналған API іске асырады."
     },
     "400": {
       "Title": "Виртуалды модульдердің көрсетілімі",
@@ -237,11 +258,21 @@
       "ConfigureOptions.DimmerDownCode": "Жарықтықты азайту түймесі",
       "ConfigureOptions.DimmerInterval": "Күңгірттеу қадамы"
     },
+    "142": {
+      "Title": "Электрондық пошта тіркелгісі",
+      "Description": "Электрондық хаттарды жіберу/қабылдау үшін жүйелік бағдарламалар пайдаланатын электрондық пошта тіркелгісінің ақпаратын сақтайды.",
+      "ConfigureOptions.Email.Sender": "1. Электрондық пошта мекенжайы",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP серверінің мекенжайы",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP пайдаланушы аты (міндетті емес)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP құпия сөзі (міндетті емес)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP серверінің порты",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP сервері SSL пайдаланады"
+    },
     "145": {
       "Title": "Смарт құрылғы",
       "Description": "Қозғалыс анықтау және қоршаған жарық негізінде құрылғыны қосыңыз/өшіріңіз.",
       "HomeGenie.SmartLights.Enable": "«Смарт құрылғыны» қосу",
-      "HomeGenie.SmartLights.OnMotionDetect": "Сенсор арқылы басқарылады (қосымша)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Сенсор арқылы басқарылады (міндетті емес)",
       "HomeGenie.SmartLights.CheckLuminosity": "Жарық сенсорымен басқарылады (қосымша)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Әрекетсіздік күту уақытынан кейін өшіру (секундтар)",
       "HomeGenie.SmartLights.MinLuminance": "Жарықтандыру төменде болса, қосыңыз:"
@@ -249,7 +280,14 @@
     "8": {
       "Title": "Күннің шығуы түстерінің сценарийі",
       "Description": "Түсті өзгертетін жарықдиодты шамдарға арналған «Күннің шығуы» сценарийінің мысалы.",
-      "Scenarios.SunriseColors": "Күннің шығуы түстерінің сценарийіне сілтеме"
+      "Scenarios.SunriseColors": "Күннің шығу түстері сценарийіне сілтеме"
+    },
+    "910": {
+      "Title": "Объектіні анықтау",
+      "Description": "Алдын ала дайындалған YOLO11 үлгісін пайдаланып нысандарды анықтаңыз.",
+      "ML.ObjectDetection": "Нысандарды анықтауды қосыңыз",
+      "ML.ObjectDetection.TriggerDetect": "Дабылды қосатын заттардың үтірмен бөлінген тізімі (ағылшын тілінде). (мысалы: мысық, ит, адам, рюкзак, чемодан)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгі файлының жолы (.onnx)"
     }
   }
 }

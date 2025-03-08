@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "Prepnúť náhľad miniaplikácií",
   "stop_program": "Zastaviť program",
   "run_program": "Spustite program",
-  "enable_to_run_program": "Povoľte program, aby ste ho mohli spustiť",
+  "enable_to_run_program": "Ak chcete program spustiť, povoľte ho",
   "program_status_added": "Pridané",
   "program_status_idle": "Nečinný",
   "program_status_setup": "Nastavenie",
@@ -118,8 +118,8 @@
   "program_status_broken": "Zlomený",
   "program_status_compile": "Zostavte",
   "automation_programming_guide": "Sprievodca programovaním\"",
-  "tap_to_disable": "Klepnutím zakážete",
-  "tap_to_enable": "Klepnutím povolíte",
+  "tap_to_disable": "Kliknutím zakážete",
+  "tap_to_enable": "Kliknutím povolíte",
   "program_data": "Údaje programu",
   "visual_code": "Vizuálny kód",
   "generated_code": "Vygenerovaný kód",
@@ -127,7 +127,7 @@
   "main_code": "Hlavné",
   "context_code": "Kontext",
   "main_code_empty_note": "\"Hlavný\" kód je prázdny. Na vygenerovanie tohto kódu použite editor \"Visual code\": - Otvorte kategóriu \"Program\" z palety príkazov vľavo - Presuňte blok typu \"Main\" na pracovnú plochu vizuálneho kódu - Pridajte doň ďalšie bloky kódu na implementáciu akcií a logiky tohto programu Program \"Main\" je možné spustiť manuálne alebo automaticky na základe podmienok, ktoré sú prípadne uvedené v kóde nastavenia.",
-  "setup_code_empty_note": "Kód \"Nastavenie\" je prázdny. Na vygenerovanie tohto kódu použite editor \"Vizuálneho kódu\": - Otvorte kategóriu \"Program\" z palety príkazov naľavo - Presuňte blok typu \"Nastavenie\" do pracovného priestoru vizuálneho kódu - Pridajte doň ďalšie bloky kódu na určenie podmienok, ktoré spustia spustenie \"Hlavného\" kódu Tento kód sa vyhodnotí vždy, keď nastane nová udalosť a aspoň raz za minútu.",
+  "setup_code_empty_note": "Kód \"Nastavenie\" je prázdny. Na vygenerovanie tohto kódu použite editor \"Vizuálneho kódu\": - Otvorte kategóriu \"Program\" z palety príkazov vľavo - Presuňte blok typu \"Nastavenie\" do pracovného priestoru vizuálneho kódu - Pridajte doň ďalšie bloky kódu na určenie podmienok, ktoré spustia spustenie \"Hlavného\" kódu Tento kód sa vyhodnotí vždy, keď nastane nová udalosť a aspoň raz za minútu.",
   "capture_commands": "Zachytiť príkazy",
   "capture_commands_description": "Pridajte do programu všetky príkazy vykonávané ručne na widgetoch.",
   "capture_commands_pause": "Pauza medzi príkazmi",
@@ -137,12 +137,19 @@
     "16": {
       "Title": "Pamäť úrovne",
       "Description": "Uložte a vyvolajte poslednú úroveň stmievača.",
-      "HomeGenie.LevelMemory": "Vyvolanie poslednej úrovne osvetlenia pri zapnutí",
+      "HomeGenie.LevelMemory": "Vyvolajte poslednú úroveň osvetlenia pri zapnutí",
       "HomeGenie.LevelMemory.SimulateOnly": "Iba simulovať"
+    },
+    "26": {
+      "Title": "Farebné svetlá",
+      "Description": "Príklad integrácie svetiel Philips Hue pomocou HTTP API (V1). Predvolený používateľ na pripojenie k mostu je „newdeveloper“ a mal by byť už povolený.",
+      "ConfigureOptions.BridgeAddress": "IP adresa Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Používateľské meno",
+      "ConfigureOptions.LightsCount": "Počet svetiel"
     },
     "34": {
       "Title": "Predpoveď počasia",
-      "Description": "Informácie o počasí a predpovedi zo služby Open Weather Map. Ak chcete aktivovať tento widget, zadajte platný kľúč API. Ak chcete získať bezplatný kľúč API, postupujte podľa pokynov na stránke https://openweathermap.org/appid.",
+      "Description": "Informácie o počasí a predpovedi zo služby Open Weather Map. Ak chcete aktivovať tento widget, zadajte platný kľúč API. Postupujte podľa pokynov na stránke https://openweathermap.org/appid a získajte bezplatný kľúč API.",
       "ConfigureOptions.Location": "Názov mesta",
       "ConfigureOptions.Language": "Jazyk (napr. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Interval aktualizácie (v minútach)",
@@ -182,11 +189,21 @@
       "EnergyManagement.EnergySavingLevel": "Maximálna úroveň osvetlenia (%)",
       "EnergyManagement.EnergySavingMode": "Povoliť"
     },
+    "88": {
+      "Title": "Všeobecná IP kamera",
+      "Description": "Zobrazte/smerujte obraz z IP kamery.",
+      "IpCamera.ImageURL": "Webová adresa rozhrania API obrázka fotoaparátu (pozrite si dokumentáciu k fotoaparátu)",
+      "IpCamera.Username": "Používateľské meno (voliteľné)",
+      "IpCamera.Password": "Heslo (voliteľné)",
+      "Widget.Config.fps": "Počet snímok za sekundu",
+      "Widget.Config.size": "Veľkosť widgetu"
+    },
     "90": {
       "Title": "Bezpečnostný poplachový systém",
-      "Description": "Použite senzory a ďalšie zariadenia na implementáciu bezpečnostného poplachového systému.",
+      "Description": "Použite senzory a iné zariadenia na implementáciu bezpečnostného poplachového systému.",
       "HomeGenie.SecurityAlarm": "Použite ako alarm/stroboskop",
-      "HomeGenie.SecuritySensor": "Použite ako bezpečnostný senzor",
+      "HomeGenie.SecurityTriggerHome": "Spustí sa aj pri aktivácii Home",
+      "HomeGenie.SecuritySensor": "Použiť ako bezpečnostný senzor",
       "ConfigureOptions.Email.Recipients": "Čiarkami oddelený zoznam príjemcov e-mailov pre upozornenia na alarm",
       "ConfigureOptions.System.ArmDelay": "Oneskorenie ramena (sekundy)",
       "ConfigureOptions.System.SirenStartTime": "Oneskorenie spustenia sirén (sekundy)",
@@ -199,6 +216,10 @@
       "Title": "Protokolovanie udalostí",
       "Description": "Zaznamenajte aktivitu zariadenia.",
       "EventsLogger.EnableLogging": "Povoliť"
+    },
+    "111": {
+      "Title": "Konfigurácia klienta",
+      "Description": "Implementuje API na správu konfiguračných profilov klienta, ktoré sa používajú na ukladanie nastavení používateľského rozhrania a panelov."
     },
     "400": {
       "Title": "Ukážka virtuálnych modulov",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Tlačidlo na zníženie jasu",
       "ConfigureOptions.DimmerInterval": "Stmievací krok"
     },
+    "142": {
+      "Title": "E-mailový účet",
+      "Description": "Ukladá informácie o e-mailovom účte, ktoré používajú systémové programy na odosielanie/prijímanie e-mailov.",
+      "ConfigureOptions.Email.Sender": "1. E-mailová adresa",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresa servera SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Používateľské meno SMTP (voliteľné)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Heslo SMTP (voliteľné)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port servera SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Server SMTP používa protokol SSL"
+    },
     "145": {
       "Title": "Inteligentné zariadenie",
       "Description": "Zapnutie/vypnutie zariadenia na základe detekcie pohybu a okolitého svetla.",
@@ -250,6 +281,13 @@
       "Title": "Scenár farieb východu slnka",
       "Description": "Príklad scenára „Východ slnka“ pre LED svetlá meniace farbu.",
       "Scenarios.SunriseColors": "Odkaz na scenár Sunrise Colors"
+    },
+    "910": {
+      "Title": "Detekcia objektov",
+      "Description": "Detekujte objekty pomocou vopred trénovaného modelu YOLO11.",
+      "ML.ObjectDetection": "Povoliť detekciu objektov",
+      "ML.ObjectDetection.TriggerDetect": "Čiarkami oddelený zoznam vecí (v angličtine), ktoré spustia alarm. (napr.: mačka, pes, osoba, batoh, kufor)",
+      "ConfigureOptions.Yolo.ModelPath": "Cesta súboru modelu YOLO11 (.onnx)"
     }
   }
 }

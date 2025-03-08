@@ -65,7 +65,7 @@
   "cronwizard_hourselect_selectedhours": "Lè yo chwazi",
   "cronwizard_dayselect_everyday": "Chak jou",
   "cronwizard_dayselect_selecteddays": "Jou seleksyone yo",
-  "cronwizard_dayowselect_selecteddaysow": "Chwazi jou nan semèn nan",
+  "cronwizard_dayowselect_selecteddaysow": "Jou seleksyone nan semèn nan",
   "cronwizard_monthselect_everymonth": "Chak mwa",
   "cronwizard_monthselect_selectedmonths": "Mwa chwazi yo",
   "cronwizard_schedule_set_exact_time": "Mete tan evènman an.",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Di",
   "scheduler_preset_action_config_message": "Mesaj",
   "save_and_build": "Sove ak bati",
-  "toggle_widgets_preview": "Aktivite aperçu widgets",
+  "toggle_widgets_preview": "Aktive aperçu widgets",
   "stop_program": "Sispann pwogram",
   "run_program": "Kouri pwogram lan",
   "enable_to_run_program": "Pèmèt pwogram nan nan lòd yo kouri li",
@@ -118,18 +118,18 @@
   "program_status_broken": "Kase",
   "program_status_compile": "Konpile",
   "automation_programming_guide": "Gid pwogramasyon'",
-  "tap_to_disable": "Tape pou enfim",
-  "tap_to_enable": "Tape pou pèmèt",
+  "tap_to_disable": "Klike pou enfim",
+  "tap_to_enable": "Klike pou pèmèt",
   "program_data": "Done pwogram yo",
   "visual_code": "Kòd vizyèl",
   "generated_code": "Jenere kòd",
   "setup_code": "Enstalasyon",
   "main_code": "Prensipal",
   "context_code": "Kontèks",
-  "main_code_empty_note": "Kòd \"Principal\" vid. Sèvi ak editè \"Kod vizyèl\" pou jenere kòd sa a: - Louvri kategori \"Pwogram\" nan palèt kòmand ki sou bò gòch la - Trennen yon blòk ki kalite \"Principal\" nan espas travay kòd vizyèl la - Ajoute andedan li lòt blòk kòd pou aplike aksyon ak lojik pwogram sa a.",
+  "main_code_empty_note": "Kòd \"Principal\" vid. Sèvi ak editè \"Kod vizyèl\" la pou jenere kòd sa a: - Louvri kategori \"Pwogram\" nan palèt kòmand ki sou bò gòch la - Trennen yon blòk ki kalite \"Principal\" nan espas travay kòd vizyèl la - Ajoute andedan li lòt blòk kòd pou aplike aksyon ak lojik pwogram sa a Pwogram \"Pwensipal\" la ka swa kouri manyèlman oswa oto-kòmanse dapre kondisyon ki evantyèlman yo bay nan kòd konfigirasyon an.",
   "setup_code_empty_note": "Kòd \"Enstalasyon\" vid. Sèvi ak editè \"Kod vizyèl\" la pou jenere kòd sa a: - Louvri kategori \"Pwogram\" nan palèt kòmand ki sou bò gòch la - Trennen yon blòk kalite \"Enstalasyon\" nan espas travay kòd vizyèl la - Ajoute andedan li lòt blòk kòd pou detèmine kondisyon ki pral deklanche kòd \"Principal\" Kòd sa a evalye chak fwa yon nouvo evènman rive e omwen yon fwa pa minit.",
   "capture_commands": "Capture kòmandman",
-  "capture_commands_description": "Ajoute tout kòmandman ki fèt manyèlman sou widgets nan pwogram nan.",
+  "capture_commands_description": "Ajoute tout kòmandman yo fè manyèlman sou widgets nan pwogram nan.",
   "capture_commands_pause": "Pran yon poz ant kòmandman yo",
   "capture_pause_none": "Okenn",
   "capture_pause_asis": "Kòm se",
@@ -139,6 +139,13 @@
       "Description": "Sere epi sonje dènye nivo gradateur.",
       "HomeGenie.LevelMemory": "Sonje dènye nivo limyè lè limen",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulation sèlman"
+    },
+    "26": {
+      "Title": "Limyè koulè",
+      "Description": "Egzanp Philips Hue limyè entegrasyon lè l sèvi avèk HTTP API (V1). Itilizatè a default pou konekte ak pon an se \"nouvodevlopè\" epi li ta dwe deja pèmèt.",
+      "ConfigureOptions.BridgeAddress": "Adrès IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Non itilizatè",
+      "ConfigureOptions.LightsCount": "Kantite limyè"
     },
     "34": {
       "Title": "Pwedi tan",
@@ -155,7 +162,7 @@
       "ConfigureOptions.ClientId": "Kliyan Id.",
       "ConfigureOptions.ServerAddress": "Adrès sèvè",
       "ConfigureOptions.ServerPort": "Pò sèvè",
-      "ConfigureOptions.Encryption": "Pèmèt chifreman bout-a-fen (E2EE)",
+      "ConfigureOptions.Encryption": "Pèmèt chifreman fen-a-fen (E2EE)",
       "ConfigureOptions.WebSockets": "Sèvi ak WebSockets",
       "ConfigureOptions.TLS": "Pèmèt TLS/SSL",
       "ConfigureOptions.Username": "Non itilizatè (si ou vle)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Nivo limyè maksimòm (%)",
       "EnergyManagement.EnergySavingMode": "Pèmèt"
     },
+    "88": {
+      "Title": "Jenerik kamera IP",
+      "Description": "Montre/route manje imaj ki soti nan yon kamera IP.",
+      "IpCamera.ImageURL": "URL API imaj kamera (gade dokiman kamera w yo)",
+      "IpCamera.Username": "Non itilizatè (si ou vle)",
+      "IpCamera.Password": "Modpas (si ou vle)",
+      "Widget.Config.fps": "Ankadreman pou chak segonn",
+      "Widget.Config.size": "Widget gwosè"
+    },
     "90": {
       "Title": "Sistèm alam sekirite",
       "Description": "Sèvi ak detèktè ak lòt aparèy pou aplike yon sistèm alam sekirite.",
       "HomeGenie.SecurityAlarm": "Itilize kòm alam/strobe",
+      "HomeGenie.SecurityTriggerHome": "Tou deklannche lè ame Kay",
       "HomeGenie.SecuritySensor": "Itilize kòm Capteur sekirite",
       "ConfigureOptions.Email.Recipients": "Lis imel ki separe moun k ap resevwa yo pou notifikasyon alam yo",
       "ConfigureOptions.System.ArmDelay": "Reta bra (segonn)",
@@ -200,18 +217,22 @@
       "Description": "Ekri aktivite aparèy la.",
       "EventsLogger.EnableLogging": "Pèmèt"
     },
+    "111": {
+      "Title": "Konfigirasyon kliyan an",
+      "Description": "Aplike API pou jere pwofil konfigirasyon kliyan yo ki itilize pou estoke paramèt UI ak tablodbò yo."
+    },
     "400": {
       "Title": "Modil Virtual Demo",
       "Description": "Manyèlman mete valè aparèy vityèl la.",
       "Sensor.Temperature": "Valè tanperati",
-      "Sensor.Luminance": "Valè luminans",
+      "Sensor.Luminance": "Valè luminance",
       "Sensor.MotionDetect": "Estati deteksyon mouvman",
       "Status.Battery": "Nivo batri",
       "Sensor.DoorWindow": "Estati Capteur Pòt/Fenèt (louvri/fèmen)",
       "Status.Level": "Chanje estati (on/off)"
     },
     "401": {
-      "Title": "Demo - aktive pòt",
+      "Title": "Demo - baskile pòt",
       "Description": "Simulation pòt louvri/fèmen de démonstration detèktè pòt-fenèt."
     },
     "402": {
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Bouton diminye klète",
       "ConfigureOptions.DimmerInterval": "Etap gradyasyon"
     },
+    "142": {
+      "Title": "E-Mail kont",
+      "Description": "Sere enfòmasyon sou kont imèl pwogram sistèm yo itilize pou voye/resevwa imèl.",
+      "ConfigureOptions.Email.Sender": "1. E-Mail adrès",
+      "ConfigureOptions.Email.SmtpServer": "2. adrès sèvè SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Non itilizatè SMTP (si ou vle)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP modpas (si ou vle)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP sèvè pò",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP sèvè sèvi ak SSL"
+    },
     "145": {
       "Title": "Aparèy entelijan",
       "Description": "Limen / etenn aparèy la ki baze sou deteksyon mouvman ak limyè anbyen.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Sunrise Koulè Senaryo",
-      "Description": "Egzanp senaryo \"Sunrise\" pou limyè ki ap dirije ki chanje koulè.",
+      "Description": "Egzanp \"Sunrise\" senaryo pou chanje koulè ki ap dirije limyè.",
       "Scenarios.SunriseColors": "Link nan senaryo Sunrise Colors"
+    },
+    "910": {
+      "Title": "Deteksyon objè",
+      "Description": "Detekte objè lè l sèvi avèk yon modèl YOLO11 pre-antre.",
+      "ML.ObjectDetection": "Pèmèt deteksyon objè yo",
+      "ML.ObjectDetection.TriggerDetect": "Lis bagay ki separe ak vigil (nan lang angle) ki pral deklanche alam la. (egzanp: chat, chen, moun, sakado, valiz)",
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 (.onnx)"
     }
   }
 }

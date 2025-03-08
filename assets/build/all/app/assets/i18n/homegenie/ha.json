@@ -37,7 +37,7 @@
   "scheduler_wizard": "Mayen Jadawalin",
   "schedule_event": "Lamarin",
   "schedule_type_standard": "Daidaitawa",
-  "schedule_type_range": "Kwanan kwanan wata",
+  "schedule_type_range": "Kewayon kwanan wata",
   "schedule_type_cron": "Maganar Cron",
   "schedule_action": "Aiki",
   "schedule_occurrence_preview": "Duban abin da ya faru",
@@ -77,7 +77,7 @@
   "cronwizard_action_preset_actions": "Ayyukan da aka saita",
   "cronwizard_action_preset_every_occurrence": "A kan kowane abin da ya faru",
   "cronwizard_action_preset_slot_start": "A farkon lokacin rani",
-  "cronwizard_action_preset_slot_end": "A ƙarshen lokacin ramin",
+  "cronwizard_action_preset_slot_end": "A karshen lokacin ramin",
   "cronwizard_action_custom_script": "Rubutun ayyuka na al'ada",
   "cronwizard_action_no_action": "Babu aiki",
   "cronwizard_action_schedule_variable_hint": "Yi amfani da <span class=\"notranslate color-primary\">@ {{name}}</span> azaman mai canzawa a cikin maganganun cron ko amfani da <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> a cikin shirye-shiryen sarrafa kansa don yin la'akari da wannan taron.",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "Zabuka",
   "scheduler_preset_action_program_say": "Ka ce",
   "scheduler_preset_action_config_message": "Sako",
-  "save_and_build": "Ajiye ku gina",
+  "save_and_build": "Ajiye kuma gina",
   "toggle_widgets_preview": "Juya samfotin widget din",
   "stop_program": "Tsaida shirin",
   "run_program": "Run shirin",
@@ -118,8 +118,8 @@
   "program_status_broken": "Karye",
   "program_status_compile": "Tara",
   "automation_programming_guide": "Jagorar shirye-shirye'",
-  "tap_to_disable": "Matsa don kashewa",
-  "tap_to_enable": "Matsa don kunna",
+  "tap_to_disable": "Danna don kashewa",
+  "tap_to_enable": "Danna don kunna",
   "program_data": "Bayanan shirin",
   "visual_code": "Lambar gani",
   "generated_code": "Ƙirƙirar code",
@@ -139,6 +139,13 @@
       "Description": "Ajiye kuma tuno matakin dimmer na ƙarshe.",
       "HomeGenie.LevelMemory": "Tuna matakin haske na ƙarshe lokacin da aka kunna",
       "HomeGenie.LevelMemory.SimulateOnly": "Yi kwaikwayon kawai"
+    },
+    "26": {
+      "Title": "Hasken launi",
+      "Description": "Misali Haɗin fitilun Philips Hue ta amfani da HTTP API (V1). Tsohuwar mai amfani don haɗawa da gadar shine \"sabon mai haɓakawa\" kuma ya kamata a riga an kunna shi.",
+      "ConfigureOptions.BridgeAddress": "Adireshin IP na Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Sunan mai amfani",
+      "ConfigureOptions.LightsCount": "Yawan fitilu"
     },
     "34": {
       "Title": "Hasashen Yanayi",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Matsakaicin matakin haske (%)",
       "EnergyManagement.EnergySavingMode": "Kunna"
     },
+    "88": {
+      "Title": "Generic IP kamara",
+      "Description": "Nuna/ ciyarwar hoton hanya daga kyamarar IP.",
+      "IpCamera.ImageURL": "Hoton API URL (duba takardun kamara)",
+      "IpCamera.Username": "Sunan mai amfani (na zaɓi)",
+      "IpCamera.Password": "Kalmar wucewa (na zaɓi)",
+      "Widget.Config.fps": "Frames a sakan daya",
+      "Widget.Config.size": "Girman widget"
+    },
     "90": {
       "Title": "Tsarin Ƙararrawar Tsaro",
       "Description": "Yi amfani da na'urori masu auna firikwensin da sauran na'urori don aiwatar da tsarin ƙararrawa na tsaro.",
       "HomeGenie.SecurityAlarm": "Yi amfani azaman ƙararrawa/strobe",
+      "HomeGenie.SecurityTriggerHome": "Hakanan yana haifar da lokacin da makamai Gida",
       "HomeGenie.SecuritySensor": "Yi amfani azaman firikwensin tsaro",
       "ConfigureOptions.Email.Recipients": "Jerin waƙafi ya raba jerin imel ɗin masu karɓa don sanarwar ƙararrawa",
       "ConfigureOptions.System.ArmDelay": "Jinkirin hannu (dakika)",
@@ -199,6 +216,10 @@
       "Title": "Shigar abubuwa",
       "Description": "Yi rikodin ayyukan na'urar.",
       "EventsLogger.EnableLogging": "Kunna"
+    },
+    "111": {
+      "Title": "Tsarin abokin ciniki",
+      "Description": "Yana aiwatar da API don sarrafa bayanan bayanan abokin ciniki waɗanda ake amfani da su don adana saitunan UI da dashboards."
     },
     "400": {
       "Title": "Virtual Modules Demo",
@@ -237,11 +258,21 @@
       "ConfigureOptions.DimmerDownCode": "Maɓallin rage haske",
       "ConfigureOptions.DimmerInterval": "Dimming mataki"
     },
+    "142": {
+      "Title": "Asusun Imel",
+      "Description": "Ana adana bayanan asusun imel ɗin da shirye-shiryen tsarin ke amfani da shi don aikawa da karɓar imel.",
+      "ConfigureOptions.Email.Sender": "1. Adireshin Imel",
+      "ConfigureOptions.Email.SmtpServer": "2. Adireshin uwar garken SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Sunan mai amfani na SMTP (na zaɓi)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP kalmar sirri (na zaɓi)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP tashar jiragen ruwa",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP uwar garken amfani da SSL"
+    },
     "145": {
       "Title": "Na'urar Wayo",
       "Description": "Kunna/kashe na'urar bisa ga gano motsi da hasken yanayi.",
       "HomeGenie.SmartLights.Enable": "Kunna 'Smart Device'",
-      "HomeGenie.SmartLights.OnMotionDetect": "Sarrafa ta hanyar firikwensin (na zaɓi)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Sarrafa ta firikwensin (na zaɓi)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ana sarrafa ta ta firikwensin haske (na zaɓi)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Kashe bayan rashin aiki (daƙiƙa)",
       "HomeGenie.SmartLights.MinLuminance": "Kunna idan hasken yana ƙasa:"
@@ -250,6 +281,13 @@
       "Title": "Halin Launuka na fitowar rana",
       "Description": "Misali \"Sunrise\" yanayin yanayin canza launi na LED.",
       "Scenarios.SunriseColors": "Hanyar haɗi zuwa yanayin Launuka na Rana"
+    },
+    "910": {
+      "Title": "Gano abu",
+      "Description": "Gano abubuwa ta amfani da ƙirar YOLO11 da aka riga aka horar.",
+      "ML.ObjectDetection": "Kunna gano abubuwa",
+      "ML.ObjectDetection.TriggerDetect": "Jerin abubuwan da aka raba waƙafi (a cikin Ingilishi) waɗanda zasu kunna ƙararrawa. (misali: cat, kare, mutum, jakar baya, akwati)",
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
     }
   }
 }

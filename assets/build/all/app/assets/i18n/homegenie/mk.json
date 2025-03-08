@@ -1,6 +1,6 @@
 {
   " ": "-------------------------------------------",
-  "welcome_to_homegenie": "Добредојдовте во HomeGenie!",
+  "welcome_to_homegenie": "Добре дојдовте во HomeGenie!",
   "welcome_subtitle": "Интелигенција за програмабилна автоматизација",
   "not_configured_yet": "Системот сè уште не е конфигуриран. Овој волшебник за поставување ќе ви помогне да го активирате и стартувате вашиот систем во неколку чекори.",
   "system_config_start_with_base_and_backup": "Врати од резервна датотека",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Избрани месеци",
   "cronwizard_schedule_set_exact_time": "Поставете време на настанот.",
   "cronwizard_schedule_set_slot_start": "Поставете почеток на временскиот слот.",
-  "cronwizard_schedule_set_slot_end": "Почнувајќи од {{start}} .<span class=\"notranslate\"><br/></span> Поставете го крајот на времето.",
+  "cronwizard_schedule_set_slot_end": "Почнувајќи од {{start}} .<span class=\"notranslate\"><br/></span> Поставете крај на временскиот слот.",
   "cronwizard_bindings_define_types_and_modules": "Дефинирајте типови и модули кои се предмет на овој распоред (изборно)",
   "cronwizard_bindings_select_types": "Изберете типови",
   "cronwizard_action_set_action_to_execute": "Поставете дејство за извршување на појавите на овој настан",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "Опции",
   "scheduler_preset_action_program_say": "Кажи",
   "scheduler_preset_action_config_message": "Порака",
-  "save_and_build": "Заштедете и изградете",
+  "save_and_build": "Зачувај и изгради",
   "toggle_widgets_preview": "Вклучете го прегледот на виџетите",
   "stop_program": "Стоп програма",
   "run_program": "Стартувај програма",
@@ -118,8 +118,8 @@
   "program_status_broken": "Скршени",
   "program_status_compile": "Состави",
   "automation_programming_guide": "Водич за програмирање\"",
-  "tap_to_disable": "Допрете за да се оневозможи",
-  "tap_to_enable": "Допрете за да овозможите",
+  "tap_to_disable": "Кликнете за да се оневозможи",
+  "tap_to_enable": "Кликнете за да овозможите",
   "program_data": "Програмски податоци",
   "visual_code": "Визуелен код",
   "generated_code": "Генериран код",
@@ -136,9 +136,16 @@
   "$options": {
     "16": {
       "Title": "Ниво на меморија",
-      "Description": "Чувајте го и отповикајте го последното ниво на затемнување.",
+      "Description": "Складирајте и вратете се на последното ниво на затемнување.",
       "HomeGenie.LevelMemory": "Потсетете се на последното ниво на светлина кога е вклучено",
       "HomeGenie.LevelMemory.SimulateOnly": "Само симулирајте"
+    },
+    "26": {
+      "Title": "Светла во боја",
+      "Description": "Пример интеграција на светлата на Philips Hue користејќи HTTP API (V1). Стандардниот корисник за поврзување со мостот е „newdeveloper“ и треба да е веќе овозможен.",
+      "ConfigureOptions.BridgeAddress": "IP адреса на Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Корисничко име",
+      "ConfigureOptions.LightsCount": "Број на светла"
     },
     "34": {
       "Title": "Временска прогноза",
@@ -164,7 +171,7 @@
     },
     "78": {
       "Title": "Паметен термостат",
-      "Description": "Користете кој било сензор за температура и паметен прекинувач за да ја имплементирате функционалноста на термостатот.",
+      "Description": "Користете кој било температурен сензор и паметен прекинувач за да ја имплементирате функционалноста на термостатот.",
       "VirtualThermostat.TemperatureModule": "Сензор за температура",
       "VirtualThermostat.HeatingSwitchModule": "Прекинувач за греење",
       "VirtualThermostat.CoolingSwitchModule": "Прекинувач за ладење",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Максимално ниво на светлина (%)",
       "EnergyManagement.EnergySavingMode": "Овозможи"
     },
+    "88": {
+      "Title": "Генеричка IP камера",
+      "Description": "Прикажување/насочување на довод на слики од IP камера.",
+      "IpCamera.ImageURL": "URL на API на сликата на камерата (видете ги вашите документи на камерата)",
+      "IpCamera.Username": "Корисничко име (изборно)",
+      "IpCamera.Password": "Лозинка (изборно)",
+      "Widget.Config.fps": "Рамки во секунда",
+      "Widget.Config.size": "Големина на виџетот"
+    },
     "90": {
       "Title": "Безбедносен алармен систем",
       "Description": "Користете сензори и други уреди за да имплементирате безбедносен алармен систем.",
       "HomeGenie.SecurityAlarm": "Користете како аларм/строб",
+      "HomeGenie.SecurityTriggerHome": "Исто така, се активира кога е вооружен Дома",
       "HomeGenie.SecuritySensor": "Користете како безбедносен сензор",
       "ConfigureOptions.Email.Recipients": "Список на е-пошта одвоени со запирки за известувања за аларм",
       "ConfigureOptions.System.ArmDelay": "Доцнење на раката (секунди)",
@@ -193,12 +210,16 @@
       "ConfigureOptions.System.SirenMaxTime": "Максимално време на сирени (секунди, 0=бесконечно)",
       "ConfigureOptions.Trigger.ArmedProgram": "Програма за работа кога е вооружен",
       "ConfigureOptions.Trigger.DisarmedProgram": "Програма за работа кога е разоружана",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Програма за работа кога ќе се активира"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Програма што ќе работи кога ќе се активира"
     },
     "95": {
       "Title": "Евиденција на настани",
       "Description": "Снимајте ја активноста на уредот.",
       "EventsLogger.EnableLogging": "Овозможи"
+    },
+    "111": {
+      "Title": "Конфигурација на клиентот",
+      "Description": "Имплементира API за управување со конфигурациските профили на клиентот што се користат за складирање на поставките за интерфејс и контролни табли."
     },
     "400": {
       "Title": "Демо за виртуелни модули",
@@ -220,12 +241,12 @@
     },
     "410": {
       "Title": "Симулатор на сензори",
-      "Description": "Емитуваат случајни вредности на сензорот.",
+      "Description": "Емитувајте случајни вредности на сензорот.",
       "Simulator.Sensor.Temperature": "Сензор за температура",
       "Simulator.Sensor.Humidity": "Сензор за влажност",
       "Simulator.Sensor.Luminance": "Сензор за светлина",
       "Simulator.Meter.Watts": "Мерач на вати",
-      "Simulator.Meter.Watts.Max": "Макс Ват моќност",
+      "Simulator.Meter.Watts.Max": "Макс Ват моќ",
       "Simulator.Sensor.DataFrequency": "Фреквенција на емитување на симулатор"
     },
     "505": {
@@ -236,6 +257,16 @@
       "ConfigureOptions.DimmerUpCode": "Копче за зголемување на осветленоста",
       "ConfigureOptions.DimmerDownCode": "Копче за намалување на осветленоста",
       "ConfigureOptions.DimmerInterval": "Чекор за затемнување"
+    },
+    "142": {
+      "Title": "Сметка за е-пошта",
+      "Description": "Складира информации за сметката за е-пошта што ги користат системските програми за испраќање/примање е-пошта.",
+      "ConfigureOptions.Email.Sender": "1. Е-пошта адреса",
+      "ConfigureOptions.Email.SmtpServer": "2. Адреса на серверот SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Корисничко име SMTP (опционално)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Лозинка SMTP (опционално)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP сервер порта",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP серверот користи SSL"
     },
     "145": {
       "Title": "Паметен уред",
@@ -250,6 +281,13 @@
       "Title": "Сценарио за бои на изгрејсонце",
       "Description": "Пример сценарио „Изгрејсонце“ за промена на бојата на LED светлата.",
       "Scenarios.SunriseColors": "Врска до сценариото за бои на изгрејсонце"
+    },
+    "910": {
+      "Title": "Откривање на објекти",
+      "Description": "Откријте предмети користејќи претходно обучен YOLO11 модел.",
+      "ML.ObjectDetection": "Овозможи откривање објекти",
+      "ML.ObjectDetection.TriggerDetect": "Список одделен со запирки на работи (на англиски) што ќе го активира алармот. (на пр: мачка, куче, лице, ранец, куфер)",
+      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO11 (.onnx)"
     }
   }
 }

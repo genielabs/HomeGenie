@@ -18,7 +18,7 @@
   "manufacturer_specific": "Fabrikant beschwéiert",
   "routing_info": "Routing Info",
   "association_groups": "Association Gruppen",
-  "association_description": "Dës Geräter schéckt Berichter un d'Noden, déi an den Associatiounsgruppen abegraff sinn. Fir Berichter vun dësem Apparat ze kréien, enthält Node 1 (de Controller) an den Associatiounsgruppen.",
+  "association_description": "Dës Geräter schéckt Berichter un d'Noden, déi an den Associatiounsgruppen abegraff sinn. Fir Berichter vun dësem Apparat ze kréien, enthält den Node 1 (de Controller) an den Associatiounsgruppen.",
   "associated_nodes": "Associéierten Noden",
   "enter_node_number": "Gitt Node Nummer",
   "configuration_parameters": "Configuratioun Parameteren",
@@ -32,6 +32,6 @@
   "calibration": "Eechung",
   "calibrate": "Kalibréieren",
   "edit_calibration_parameter": "Änneren Eechung Parameter Zuel",
-  "calibration_parameter_not_set": "Kalibrierungsparameternummer ass net gesat",
+  "calibration_parameter_not_set": "Kalibrierungsparameternummer ass net agestallt",
   "calibration_parameter_number": "Parameternummer (kuckt Geräthandbuch)"
 }

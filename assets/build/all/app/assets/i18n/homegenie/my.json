@@ -33,7 +33,7 @@
   "dashboard_from_group": "ဤအဖွဲ့မှ ဒက်ရှ်ဘုတ်တစ်ခု ဖန်တီးပါ။",
   "group_modules": "ဤအုပ်စုရှိ မော်ဂျူးများ",
   "modules": "မော်ဂျူးများ",
-  "empty_group": "ဤအုပ်စုတွင် module များမရှိပါ။",
+  "empty_group": "ဤအဖွဲ့တွင် module မရှိပါ။",
   "scheduler_wizard": "အစီအစဉ်ဆွဲသူ Wizard",
   "schedule_event": "ပွဲ",
   "schedule_type_standard": "စံ",
@@ -97,7 +97,7 @@
   "scheduler_preset_action_config_mode_cool_eco": "စီးပွားရေးအေးတယ်။",
   "scheduler_preset_action_program_run": "ပရိုဂရမ်ကို လုပ်ဆောင်ပါ။",
   "scheduler_preset_action_config_program": "အစီအစဉ်",
-  "scheduler_preset_action_config_options": "ရွေးချယ်မှုများ",
+  "scheduler_preset_action_config_options": "ရွေးချယ်စရာများ",
   "scheduler_preset_action_program_say": "ဆိုပါတော့",
   "scheduler_preset_action_config_message": "မက်ဆေ့ချ်",
   "save_and_build": "သိမ်းဆည်းပြီး တည်ဆောက်ပါ။",
@@ -118,8 +118,8 @@
   "program_status_broken": "ကျိုးသည်။",
   "program_status_compile": "လုပ်ကြပါ။",
   "automation_programming_guide": "ပရိုဂရမ်လမ်းညွှန်''",
-  "tap_to_disable": "ပိတ်ရန် တို့ပါ။",
-  "tap_to_enable": "ဖွင့်ရန် တို့ပါ။",
+  "tap_to_disable": "ပိတ်ရန်နှိပ်ပါ။",
+  "tap_to_enable": "ဖွင့်ရန် နှိပ်ပါ။",
   "program_data": "ပရိုဂရမ်ဒေတာ",
   "visual_code": "အမြင်ကုဒ်",
   "generated_code": "ကုဒ်ထုတ်ပေးသည်။",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "ဖွင့်ထားသောအခါ နောက်ဆုံးမီးအဆင့်ကို ပြန်သတိရပါ။",
       "HomeGenie.LevelMemory.SimulateOnly": "အတုယူရန်သာ"
     },
+    "26": {
+      "Title": "အရောင်အလင်းများ",
+      "Description": "ဥပမာ Philips Hue သည် HTTP API (V1) ကို အသုံးပြု၍ မီးလုံးများ ပေါင်းစပ်မှု။ တံတားသို့ ချိတ်ဆက်ရန် မူရင်းအသုံးပြုသူမှာ \"newdeveloper\" ဖြစ်ပြီး ၎င်းကို ဖွင့်ထားပြီးဖြစ်သင့်သည်။",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP လိပ်စာ",
+      "ConfigureOptions.BridgeUsername": "အသုံးပြုသူအမည်",
+      "ConfigureOptions.LightsCount": "မီးလုံးအရေအတွက်"
+    },
     "34": {
       "Title": "မိုးလေဝသခန့်မှန်းချက်",
       "Description": "Open Weather Map ဝန်ဆောင်မှုမှ မိုးလေဝသနှင့် ခန့်မှန်းချက် အချက်အလက်။ ဤဝစ်ဂျက်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://openweathermap.org/appid တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
@@ -150,12 +157,12 @@
     },
     "77": {
       "Title": "ကွန်ရက် MQTT",
-      "Description": "အင်တာနက်မှတဆင့် မည်သည့်နေရာမှမဆို HomeGenie Panel အက်ပ်ကို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
+      "Description": "အင်တာနက်မှတစ်ဆင့် HomeGenie Panel အက်ပ်ကို မည်သည့်နေရာမှမဆို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
       "MQTT.SensorPublish": "ဤ module မှထုတ်လွှတ်သောဖြစ်ရပ်များကိုထုတ်ဝေပါ။",
-      "ConfigureOptions.ClientId": "ဖောက်သည် ID။",
+      "ConfigureOptions.ClientId": "သုံးစွဲသူ ID။",
       "ConfigureOptions.ServerAddress": "ဆာဗာလိပ်စာ",
       "ConfigureOptions.ServerPort": "ဆာဗာဆိပ်ကမ်း",
-      "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်းကို ဖွင့်ပါ (E2EE)",
+      "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်း (E2EE) ကို ဖွင့်ပါ",
       "ConfigureOptions.WebSockets": "WebSockets ကိုသုံးပါ။",
       "ConfigureOptions.TLS": "TLS/SSL ကိုဖွင့်ပါ။",
       "ConfigureOptions.Username": "အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -166,7 +173,7 @@
       "Title": "စမတ် အပူချိန်ထိန်းကိရိယာ",
       "Description": "အပူချိန်ထိန်းကိရိယာလုပ်ဆောင်ချက်ကို အကောင်အထည်ဖော်ရန် မည်သည့်အပူချိန်အာရုံခံကိရိယာနှင့် စမတ်ခလုတ်ကိုမဆို အသုံးပြုပါ။",
       "VirtualThermostat.TemperatureModule": "အပူချိန်အာရုံခံကိရိယာ",
-      "VirtualThermostat.HeatingSwitchModule": "အပူပေးခလုတ်",
+      "VirtualThermostat.HeatingSwitchModule": "အပူခလုတ်",
       "VirtualThermostat.CoolingSwitchModule": "အအေးခံခလုတ်",
       "ConfigureOptions.ThermostatsCount": "အပူချိန်ထိန်းကိရိယာ အရေအတွက်"
     },
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "အများဆုံးအလင်းအဆင့် (%)",
       "EnergyManagement.EnergySavingMode": "ဖွင့်ပါ။"
     },
+    "88": {
+      "Title": "ယေဘူယျ IP ကင်မရာ",
+      "Description": "IP ကင်မရာမှ ရုပ်ပုံဖိဒ်ကို ပြသ/လမ်းကြောင်းပြပါ။",
+      "IpCamera.ImageURL": "ကင်မရာပုံ API URL (သင့်ကင်မရာစာရွက်စာတမ်းကိုကြည့်ပါ)",
+      "IpCamera.Username": "အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
+      "IpCamera.Password": "စကားဝှက် (ချန်လှပ်ထားနိုင်သည်)",
+      "Widget.Config.fps": "စက္ကန့်အလိုက်ဘောင်များ",
+      "Widget.Config.size": "ဝစ်ဂျက်အရွယ်အစား"
+    },
     "90": {
       "Title": "လုံခြုံရေးအချက်ပေးစနစ်",
       "Description": "လုံခြုံရေးအချက်ပေးစနစ်တစ်ခုကို အကောင်အထည်ဖော်ရန် အာရုံခံကိရိယာများနှင့် အခြားစက်ပစ္စည်းများကို အသုံးပြုပါ။",
       "HomeGenie.SecurityAlarm": "နှိုးစက်/စထရိုဘီအဖြစ် အသုံးပြုပါ။",
+      "HomeGenie.SecurityTriggerHome": "ဒါကိုလည်း လက်နက်ကိုင်တပ်ဖွဲ့က ပင်မစာမျက်နှာမှာ ထားလိုက်တာ",
       "HomeGenie.SecuritySensor": "လုံခြုံရေးအာရုံခံကိရိယာအဖြစ် အသုံးပြုပါ။",
       "ConfigureOptions.Email.Recipients": "နှိုးစက်သတိပေးချက်များအတွက် လက်ခံသူအီးမေးလ်များစာရင်းကို ကော်မာခွဲထားသည်။",
       "ConfigureOptions.System.ArmDelay": "လက်နှောင့်နှေးခြင်း (စက္ကန့်)",
@@ -199,6 +216,10 @@
       "Title": "အဖြစ်အပျက်များကို မှတ်တမ်းတင်ခြင်း။",
       "Description": "စက်ပစ္စည်းလှုပ်ရှားမှုကို မှတ်တမ်းတင်ပါ။",
       "EventsLogger.EnableLogging": "ဖွင့်ပါ။"
+    },
+    "111": {
+      "Title": "လိုင်းဖွဲ့စည်းမှု",
+      "Description": "UI နှင့် ဒက်ရှ်ဘုတ်ဆက်တင်များကို သိမ်းဆည်းရန် အသုံးပြုသည့် client ၏ ဖွဲ့စည်းမှုပုံစံပရိုဖိုင်များကို စီမံခန့်ခွဲရန်အတွက် API ကို အကောင်အထည်ဖော်ပါ။"
     },
     "400": {
       "Title": "Virtual Modules သရုပ်ပြ",
@@ -216,7 +237,7 @@
     },
     "402": {
       "Title": "သရုပ်ပြ - လှုပ်ရှားမှုကို တွေ့ရှိထားသည်။",
-      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို တုပသည်။"
+      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို အတုယူသည်။"
     },
     "410": {
       "Title": "အာရုံခံခြင်း simulator",
@@ -237,9 +258,19 @@
       "ConfigureOptions.DimmerDownCode": "တောက်ပမှုကို လျှော့ချရန် ခလုတ်",
       "ConfigureOptions.DimmerInterval": "မှိန်းနေမိသည်။"
     },
+    "142": {
+      "Title": "အီးမေးလ်အကောင့်",
+      "Description": "အီးမေးလ်များပေးပို့ခြင်း/လက်ခံခြင်းအတွက် စနစ်ပရိုဂရမ်များမှ အသုံးပြုသော အီးမေးလ်အကောင့်အချက်အလက်ကို သိမ်းဆည်းသည်။",
+      "ConfigureOptions.Email.Sender": "1. အီးမေးလ်လိပ်စာ",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP ဆာဗာလိပ်စာ",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP စကားဝှက် (ချန်လှပ်ထားနိုင်သည်)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP ဆာဗာ ဆိပ်ကမ်း",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP ဆာဗာသည် SSL ကို အသုံးပြုသည်။"
+    },
     "145": {
       "Title": "စမတ်ကိရိယာ",
-      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်ပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
+      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်အပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
       "HomeGenie.SmartLights.Enable": "'စမတ်စက်ပစ္စည်း' ကို ဖွင့်ပါ",
       "HomeGenie.SmartLights.OnMotionDetect": "အာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
       "HomeGenie.SmartLights.CheckLuminosity": "အလင်းအာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -249,7 +280,14 @@
     "8": {
       "Title": "နေထွက်အရောင်များ ဇာတ်လမ်း",
       "Description": "အရောင်ပြောင်း LED မီးများအတွက် \"နေထွက်\" မြင်ကွင်း ဥပမာ။",
-      "Scenarios.SunriseColors": "Sunrise Colors မြင်ကွင်းသို့ လင့်ခ်ချိတ်ပါ။"
+      "Scenarios.SunriseColors": "Sunrise Colours အခြေအနေသို့ လင့်ခ်ချိတ်ပါ။"
+    },
+    "910": {
+      "Title": "အရာဝတ္ထု ထောက်လှမ်းခြင်း။",
+      "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO11 မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများကို ရှာဖွေပါ။",
+      "ML.ObjectDetection": "အရာဝတ္ထုများကို သိရှိခြင်းအား ဖွင့်ပါ။",
+      "ML.ObjectDetection.TriggerDetect": "နှိုးစက်ကို အစပျိုးပေးမည့် ကော်မာ-ခြားထားသော အရာများစာရင်း (အင်္ဂလိပ်လို)။ (ဥပမာ- ကြောင်၊ ခွေး၊ လူ၊ ကျောပိုးအိတ်၊ ခရီးဆောင်အိတ်)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
     }
   }
 }

@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "ukusuka",
   "cronwizard_description_ending": "ukuya",
   "cronwizard_description_at": "e",
-  "cronwizard_add_time_slot": "Yongeza ixesha slot",
+  "cronwizard_add_time_slot": "Yongeza ixesha elibekiweyo",
   "cronwizard_add_exact_time": "Yongeza ixesha elichanekileyo",
   "cronwizard_start_time": "Ixesha lokuqala",
   "cronwizard_end_time": "Ixesha lokuphela",
@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Ukuqala {{start}} .<span class=\"notranslate\"><br/></span> Seta ixesha lokuphela kwexesha.",
   "cronwizard_bindings_define_types_and_modules": "Chaza iindidi kunye neemodyuli eziphantsi kolu cwangciso (ukhetho)",
   "cronwizard_bindings_select_types": "Khetha iintlobo",
-  "cronwizard_action_set_action_to_execute": "Cwangcisa inyathelo lokuphumeza kwiziganeko zalo msitho",
+  "cronwizard_action_set_action_to_execute": "Cwangcisa inyathelo lokuphumeza kwiziganeko zesi siganeko",
   "cronwizard_action_preset_actions": "Iintshukumo ezicwangcisiweyo",
   "cronwizard_action_preset_every_occurrence": "Kuyo yonke into eyenzekayo",
   "cronwizard_action_preset_slot_start": "Ekuqaleni kwexesha lokuphumla",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Khumbula inqanaba lokugqibela lokukhanya xa lilayitiwe",
       "HomeGenie.LevelMemory.SimulateOnly": "Ukulinganisa kuphela"
     },
+    "26": {
+      "Title": "Izibane zombala",
+      "Description": "Umzekelo uPhilips Hue izibane udibaniso usebenzisa HTTP API (V1). Umsebenzisi omiselweyo wokuqhagamshela kwibhulorho \"ngumphuhlisi omtsha\" kwaye kufuneka ukuba sele yenziwe yasebenza.",
+      "ConfigureOptions.BridgeAddress": "I-Philips Hue Bridge (V1) idilesi ye-IP",
+      "ConfigureOptions.BridgeUsername": "Igama lomsebenzisi",
+      "ConfigureOptions.LightsCount": "Inani lezibane"
+    },
     "34": {
       "Title": "Uqikelelo lwemozulu",
-      "Description": "Imozulu kunye nolwazi loqikelelo oluvela kwinkonzo yeMephu yeMozulu eVulekileyo. Ukwenza le widget isebenze faka iqhosha elisebenzayo le-API. Landela imiyalelo ku-https://openweathermap.org/appid ukufumana isitshixo se-API sasimahla.",
+      "Description": "Imozulu kunye nolwazi loqikelelo oluvela kwinkonzo yeMephu yeMozulu eVulekileyo. Ukuvula le widget faka iqhosha elisebenzayo le-API. Landela imiyalelo ku-https://openweathermap.org/appid ukufumana isitshixo sasimahla se-API.",
       "ConfigureOptions.Location": "Igama lesixeko",
       "ConfigureOptions.Language": "Ulwimi (umz. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Hlaziya isithuba (imizuzu)",
@@ -178,14 +185,24 @@
     },
     "82": {
       "Title": "Imowudi yokonga amandla",
-      "Description": "Gcina umgangatho wokukhanya ngaphantsi kwepesenti eqwalaselweyo.",
+      "Description": "Gcina umgangatho wokukhanya ungaphantsi kwepesenti elungisekayo.",
       "EnergyManagement.EnergySavingLevel": "Inqanaba lokukhanya okukhulu (%)",
       "EnergyManagement.EnergySavingMode": "Vulela"
+    },
+    "88": {
+      "Title": "Generic IP camera",
+      "Description": "Bonisa/indlela yokufundisa umfanekiso ovela kwikhamera ye-IP.",
+      "IpCamera.ImageURL": "I-URL yomfanekiso wekhamera (bona amaxwebhu ekhamera yakho)",
+      "IpCamera.Username": "Igama lomsebenzisi (uyazikhethela)",
+      "IpCamera.Password": "Igama lokugqithisa (uyazikhethela)",
+      "Widget.Config.fps": "Iifreyimu ngesekhondi",
+      "Widget.Config.size": "Ubungakanani beWidget"
     },
     "90": {
       "Title": "Inkqubo yeAlam yoKhuseleko",
       "Description": "Sebenzisa izixhobo zoluvo kunye nezinye izixhobo ukuphumeza inkqubo ye-alam yokhuseleko.",
       "HomeGenie.SecurityAlarm": "Sebenzisa njenge-alam/strobe",
+      "HomeGenie.SecurityTriggerHome": "Kwakhona zixhokonxa xa uxhobile Ekhaya",
       "HomeGenie.SecuritySensor": "Sebenzisa njengenzwa yokhuseleko",
       "ConfigureOptions.Email.Recipients": "Uluhlu olwahluliweyo lwekoma lwabamkeli bee-imeyile zezaziso ze-alam",
       "ConfigureOptions.System.ArmDelay": "Ukulibaziseka kwengalo (imizuzwana)",
@@ -199,6 +216,10 @@
       "Title": "Ukugawulwa kweziganeko",
       "Description": "Rekhoda umsebenzi wesixhobo.",
       "EventsLogger.EnableLogging": "Vulela"
+    },
+    "111": {
+      "Title": "Ubumbeko lomxumi",
+      "Description": "Iphumeza i-API yokulawula iiprofayili zoqwalaselo lomxhasi ezisetyenziselwa ukugcina i-UI kunye nezicwangciso zedashboard."
     },
     "400": {
       "Title": "Idemo yeeModyuli ezibonakalayo",
@@ -237,19 +258,36 @@
       "ConfigureOptions.DimmerDownCode": "Iqhosha lokunciphisa ukukhanya",
       "ConfigureOptions.DimmerInterval": "Inyathelo lokuncipha"
     },
+    "142": {
+      "Title": "Iakhawunti ye-imeyile",
+      "Description": "Ugcina iinkcukacha zeakhawunti ye-imeyile esetyenziswa ziinkqubo zesistim yokuthumela/yokufumana ii-imeyile.",
+      "ConfigureOptions.Email.Sender": "1. Idilesi ye-imeyile",
+      "ConfigureOptions.Email.SmtpServer": "2. Idilesi yeseva ye-SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Igama lomsebenzisi le-SMTP (ukhetho)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Iphasiwedi ye-SMTP (ukhetho)",
+      "ConfigureOptions.Email.SmtpPort": "5. I-server ye-SMTP port",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Umncedisi we-SMTP usebenzisa i-SSL"
+    },
     "145": {
       "Title": "Isixhobo esihlakaniphile",
       "Description": "Vula/cima isixhobo ngokusekwe ekubhaqweni kwentshukumo kunye nokukhanya kwendawo.",
       "HomeGenie.SmartLights.Enable": "Vula 'Isixhobo esiSmart'",
-      "HomeGenie.SmartLights.OnMotionDetect": "Ilawulwa sisivamvo (ukhetho)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Ilawulwa nguluvo (ukhetho)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ilawulwa sisivamvo sokukhanya (ukhetho)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Cima emva kwexesha lokungasebenzi (imizuzwana)",
       "HomeGenie.SmartLights.MinLuminance": "Layita ukuba ukukhanya kungezantsi:"
     },
     "8": {
-      "Title": "IMilalo yokuphuma kwelanga",
+      "Title": "IMilalo yokuPhuma kwelanga",
       "Description": "Umzekelo \"Ukuphuma kwelanga\" kwimeko yokutshintsha umbala wezibane ze-LED.",
       "Scenarios.SunriseColors": "Ikhonkco kwimiba yokuPhuma kweMibala"
+    },
+    "910": {
+      "Title": "Ukufunyanwa kwento",
+      "Description": "Khangela izinto usebenzisa imodeli ye-YOLO11 eqeqeshwe kwangaphambili.",
+      "ML.ObjectDetection": "Yenza ukubonwa kwezinto",
+      "ML.ObjectDetection.TriggerDetect": "Uluhlu olwahlulwe ngekoma lezinto (ngesiNgesi) oluzakuvusa isivusi. (umzekelo: ikati, inja, umntu, ubhaka, isutikheyisi)",
+      "ConfigureOptions.Yolo.ModelPath": "Indlela yefayile yomfuziselo weYOLO11 (.onnx)"
     }
   }
 }

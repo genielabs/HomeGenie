@@ -2,9 +2,9 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Benvenuti à HomeGenie!",
   "welcome_subtitle": "L'intelligenza di l'automatizazione programabile",
-  "not_configured_yet": "U sistema ùn hè ancu cunfiguratu. Stu assistente di installazione vi aiuterà à mette u vostru sistema in funzione in pochi passi.",
+  "not_configured_yet": "U sistema ùn hè ancu cunfiguratu. Stu assistente di cunfigurazione vi aiuterà à mette in opera u vostru sistema in pochi passi.",
   "system_config_start_with_base_and_backup": "Risturà da u schedariu di salvezza",
-  "system_config_start_with_default_setup": "Configurazione predefinita",
+  "system_config_start_with_default_setup": "Configurazione predeterminata",
   "system_config_include_demo": "Includite demo cù attività simulata di u dispositivu",
   "system_config_additional_features": "Funzioni supplementari",
   "system_config_manual_setup": "Configurazione manuale",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "À a fine di un intervallu di tempu",
   "cronwizard_action_custom_script": "Scrittura d'azzione persunalizata",
   "cronwizard_action_no_action": "Nisuna azione",
-  "cronwizard_action_schedule_variable_hint": "Aduprate <span class=\"notranslate color-primary\">@ {{name}}</span> cum'è variabile in l'espressioni cron o utilizate <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> in i prugrammi d'automatizazione per riferite stu avvenimentu.",
+  "cronwizard_action_schedule_variable_hint": "Aduprate <span class=\"notranslate color-primary\">@ {{name}}</span> cum'è variabile in espressioni cron o utilizate <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> in i prugrammi d'automatizazione per riferite stu avvenimentu.",
   "scheduler_preset_action_command_turn_on": "Accende",
   "scheduler_preset_action_command_turn_off": "Chjode",
   "scheduler_preset_action_command_set_level": "Stallà u livellu",
@@ -92,10 +92,10 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Off",
   "scheduler_preset_action_config_mode_heat": "Calore",
-  "scheduler_preset_action_config_mode_heat_eco": "Ecunumia di calore",
+  "scheduler_preset_action_config_mode_heat_eco": "Ecunumia di u calore",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Ecunumia fresca",
-  "scheduler_preset_action_program_run": "Eseguite u prugramma",
+  "scheduler_preset_action_program_run": "Run prugrammu",
   "scheduler_preset_action_config_program": "prugramma",
   "scheduler_preset_action_config_options": "Opzioni",
   "scheduler_preset_action_program_say": "Dì",
@@ -103,7 +103,7 @@
   "save_and_build": "Salvà è custruisce",
   "toggle_widgets_preview": "Cambia l'anteprima di i widgets",
   "stop_program": "Stop u prugramma",
-  "run_program": "Eseguite u prugramma",
+  "run_program": "Run prugrammu",
   "enable_to_run_program": "Attivà u prugramma in modu di eseguisce",
   "program_status_added": "Aggiuntu",
   "program_status_idle": "Idle",
@@ -118,8 +118,8 @@
   "program_status_broken": "Ruttu",
   "program_status_compile": "Cumpilà",
   "automation_programming_guide": "guida di prugrammazione'",
-  "tap_to_disable": "Toccate per disattivà",
-  "tap_to_enable": "Tap per attivà",
+  "tap_to_disable": "Cliccate per disattivà",
+  "tap_to_enable": "Cliccate per attivà",
   "program_data": "Dati di prugramma",
   "visual_code": "codice visuale",
   "generated_code": "codice generatu",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Ricordate l'ultimu livellu di luce quandu hè accesa",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulate solu"
     },
+    "26": {
+      "Title": "Luci di culore",
+      "Description": "Esempiu di integrazione di luci Philips Hue cù l'API HTTP (V1). L'utilizatore predeterminatu per cunnette à u ponte hè \"nuvellu sviluppatore\" è deve esse digià attivatu.",
+      "ConfigureOptions.BridgeAddress": "Indirizzu IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Nome d'utilizatore",
+      "ConfigureOptions.LightsCount": "Numero di luci"
+    },
     "34": {
       "Title": "Previsioni Meteo",
-      "Description": "Meteo è informazioni di previsione da u serviziu Open Weather Map. Per attivà stu widget inserite una chjave API valida. Segui l'istruzzioni à https://openweathermap.org/appid per uttene una chjave API gratuita.",
+      "Description": "Meteo è informazioni di previsione da u serviziu Open Weather Map. Per attivà stu widget inserite una chjave API valida. Segui l'istruzzioni in https://openweathermap.org/appid per uttene una chjave API gratuita.",
       "ConfigureOptions.Location": "Nome di a cità",
       "ConfigureOptions.Language": "Lingua (es. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervallu d'aghjurnamentu (minuti)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Livellu massimu di luce (%)",
       "EnergyManagement.EnergySavingMode": "Attivà"
     },
+    "88": {
+      "Title": "Camera IP generica",
+      "Description": "Mostra / indirizza l'alimentazione di l'imagine da una camera IP.",
+      "IpCamera.ImageURL": "URL di l'API di l'imaghjini di a camera (vede i vostri documenti di càmera)",
+      "IpCamera.Username": "Nome d'utilizatore (opcional)",
+      "IpCamera.Password": "Password (opzionale)",
+      "Widget.Config.fps": "Frames per seconda",
+      "Widget.Config.size": "Dimensione di u widget"
+    },
     "90": {
       "Title": "Sistema d'Alarma di Sicurezza",
       "Description": "Aduprate sensori è altri dispositi per implementà un sistema di alarme di sicurità.",
       "HomeGenie.SecurityAlarm": "Aduprà cum'è alarme / stroboscopiu",
+      "HomeGenie.SecurityTriggerHome": "Si attiva ancu quandu armatu Home",
       "HomeGenie.SecuritySensor": "Aduprà cum'è sensore di sicurità",
       "ConfigureOptions.Email.Recipients": "Lista separata da virgule di e-mail di destinatari per notificazioni di alarme",
       "ConfigureOptions.System.ArmDelay": "ritardu di u bracciu (secondi)",
@@ -200,19 +217,23 @@
       "Description": "Registra l'attività di u dispusitivu.",
       "EventsLogger.EnableLogging": "Attivà"
     },
+    "111": {
+      "Title": "Cunfigurazione di u cliente",
+      "Description": "Implementa l'API per a gestione di i profili di cunfigurazione di u cliente chì sò usati per almacenà paràmetri di UI è dashboards."
+    },
     "400": {
       "Title": "Moduli Virtual Demo",
       "Description": "Definite manualmente i valori di u dispusitivu virtuale.",
       "Sensor.Temperature": "Valore di temperatura",
       "Sensor.Luminance": "Valore di luminanza",
-      "Sensor.MotionDetect": "Statu di rilevazione di muvimentu",
+      "Sensor.MotionDetect": "Status di rilevazione di muvimentu",
       "Status.Battery": "Livellu di batterie",
       "Sensor.DoorWindow": "Statu di sensore di porta / finestra (apertu / chjusu)",
       "Status.Level": "Cambia u statu (on/off)"
     },
     "401": {
       "Title": "Demo - Toggle Porta",
-      "Description": "Simula a porta aperta / chjusa di u sensoru di porta-finestra demo."
+      "Description": "Simula a porta aperta / chjusa di u sensore di porta-finestra demo."
     },
     "402": {
       "Title": "Demo - Muvimentu rilevatu",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Pulsante di diminuzione di luminosità",
       "ConfigureOptions.DimmerInterval": "Passu di dimming"
     },
+    "142": {
+      "Title": "contu E-Mail",
+      "Description": "Memorizza l'infurmazione di u contu di e-mail utilizatu da i prugrammi di u sistema per mandà / riceve email.",
+      "ConfigureOptions.Email.Sender": "1. Indirizzu E-Mail",
+      "ConfigureOptions.Email.SmtpServer": "2. indirizzu servore SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nome d'utilizatore SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Password SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPort": "5. portu servore SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Servitore SMTP aduprà SSL"
+    },
     "145": {
       "Title": "Dispositivu intelligente",
       "Description": "Accende / spegne u dispusitivu basatu nantu à a rilevazione di muvimentu è a luce ambientale.",
@@ -250,6 +281,13 @@
       "Title": "Scenariu di culori di l'alba",
       "Description": "Esempiu di scenariu \"Sunrise\" per luci LED cambianti di culore.",
       "Scenarios.SunriseColors": "Link à u scenariu Sunrise Colors"
+    },
+    "910": {
+      "Title": "Rilevamentu di l'ughjettu",
+      "Description": "Detectà l'ogetti cù un mudellu YOLO11 pre-addestratu.",
+      "ML.ObjectDetection": "Habilita a rilevazione di l'uggetti",
+      "ML.ObjectDetection.TriggerDetect": "Lista di cose separate da virgula (in inglese) chì attivanu l'alarma. (per esempiu: gattu, cane, persona, saccu, valigia)",
+      "ConfigureOptions.Yolo.ModelPath": "Percorsu di u schedariu mudellu YOLO11 (.onnx)"
     }
   }
 }

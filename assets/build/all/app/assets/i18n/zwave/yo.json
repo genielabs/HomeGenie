@@ -4,7 +4,7 @@
   "node_inclusion": "Fi ẹrọ kun",
   "node_exclusion": "Yọ ẹrọ kuro",
   "enabling_node_inclusion": "Nṣiṣẹ ipo ifisi ipade, jọwọ duro...",
-  "enabling_node_exclusion": "Nmu ipo iyasoto node ṣiṣẹ, jọwọ duro...",
+  "enabling_node_exclusion": "Ṣiṣe ipo iyasoto ipade, jọwọ duro...",
   "inclusion_message": "Tẹ bọtini lori ẹrọ ti o fẹ fikun si nẹtiwọki yii.",
   "exclusion_message": "Tẹ bọtini lori ẹrọ ti o fẹ yọ kuro lati inu nẹtiwọki yii.",
   "task_duration_notice": "Iṣẹ-ṣiṣe yii le gba to iṣẹju-aaya <strong>{{timeout}}</strong> lati pari.",

@@ -62,7 +62,7 @@
   "cronwizard_minuteselect_selectedminutes": "Minutat e zgjedhura",
   "cronwizard_hourselect_everyhour": "Çdo orë",
   "cronwizard_hourselect_everynthhour": "Çdo orë të dhëna",
-  "cronwizard_hourselect_selectedhours": "Orët e zgjedhura",
+  "cronwizard_hourselect_selectedhours": "Orë të zgjedhura",
   "cronwizard_dayselect_everyday": "Çdo ditë",
   "cronwizard_dayselect_selecteddays": "Ditët e zgjedhura",
   "cronwizard_dayowselect_selecteddaysow": "Ditët e zgjedhura të javës",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Muajt e zgjedhur",
   "cronwizard_schedule_set_exact_time": "Vendosni kohën e ngjarjes.",
   "cronwizard_schedule_set_slot_start": "Cakto fillimin e slotit kohor.",
-  "cronwizard_schedule_set_slot_end": "Duke filluar në {{start}} .<span class=\"notranslate\"><br/></span> Cakto fundin e slotit kohor.",
+  "cronwizard_schedule_set_slot_end": "Duke filluar në {{start}} .<span class=\"notranslate\"><br/></span> Cakto fundin e periudhës kohore.",
   "cronwizard_bindings_define_types_and_modules": "Përcaktoni llojet dhe modulet që i nënshtrohen këtij orari (opsionale)",
   "cronwizard_bindings_select_types": "Zgjidhni llojet",
   "cronwizard_action_set_action_to_execute": "Cakto veprimin për të ekzekutuar në dukuritë e kësaj ngjarjeje",
@@ -118,8 +118,8 @@
   "program_status_broken": "E thyer",
   "program_status_compile": "Përpiloni",
   "automation_programming_guide": "Udhëzues programimi'",
-  "tap_to_disable": "Trokit për ta çaktivizuar",
-  "tap_to_enable": "Trokit për ta aktivizuar",
+  "tap_to_disable": "Kliko për të çaktivizuar",
+  "tap_to_enable": "Kliko për të aktivizuar",
   "program_data": "Të dhënat e programit",
   "visual_code": "Kodi vizual",
   "generated_code": "Kodi i gjeneruar",
@@ -128,7 +128,7 @@
   "context_code": "Konteksti",
   "main_code_empty_note": "Kodi \"Kryesor\" është bosh. Përdorni redaktorin \"Visual code\" për të gjeneruar këtë kod: - Hapni kategorinë \"Program\" nga paleta e komandave në të majtë - Zvarritni një bllok të tipit \"Main\" në hapësirën e punës të kodit vizual - Shtoni brenda tij blloqe të tjera kodi për të zbatuar veprimet dhe logjikën e këtij programi. Programi \"Main\" mund të ekzekutohet manualisht ose të fillojë automatikisht bazuar në kushtet që jepen përfundimisht në kodin e instalimit.",
   "setup_code_empty_note": "Kodi \"Setup\" është bosh. Përdorni redaktorin \"Visual code\" për të gjeneruar këtë kod: - Hapni kategorinë \"Program\" nga paleta e komandave në të majtë - Zvarritni një bllok të tipit \"Setup\" në hapësirën e punës të kodit vizual - Shtoni brenda tij blloqe të tjera kodi për të përcaktuar kushtet që do të shkaktojnë ekzekutimin e kodit \"Kryesor\" Ky kod vlerësohet sa herë që ndodh një ngjarje e re dhe të paktën një herë në minutë.",
-  "capture_commands": "Kap komandat",
+  "capture_commands": "Kapni komandat",
   "capture_commands_description": "Shtoni në program të gjitha komandat e kryera me dorë në widget.",
   "capture_commands_pause": "Pushoni midis komandave",
   "capture_pause_none": "Asnjë",
@@ -140,13 +140,20 @@
       "HomeGenie.LevelMemory": "Kujtoni nivelin e fundit të dritës kur ndizet",
       "HomeGenie.LevelMemory.SimulateOnly": "Vetëm simuloni"
     },
+    "26": {
+      "Title": "Dritat me ngjyra",
+      "Description": "Shembull integrimi i dritave Philips Hue duke përdorur HTTP API (V1). Përdoruesi i parazgjedhur për t'u lidhur me urën është \"zhvilluesi i ri\" dhe duhet të jetë tashmë i aktivizuar.",
+      "ConfigureOptions.BridgeAddress": "Adresa IP e Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Emri i përdoruesit",
+      "ConfigureOptions.LightsCount": "Numri i dritave"
+    },
     "34": {
       "Title": "Parashikimi i motit",
-      "Description": "Informacioni i motit dhe parashikimit nga shërbimi Open Weather Map. Për të aktivizuar këtë miniaplikacion, futni një çelës të vlefshëm API. Ndiqni udhëzimet në https://openweathermap.org/appid për të marrë një çelës falas API.",
+      "Description": "Informacioni i motit dhe parashikimit nga shërbimi i Hapur Harta e Motit. Për të aktivizuar këtë miniaplikacion, futni një çelës të vlefshëm API. Ndiqni udhëzimet në https://openweathermap.org/appid për të marrë një çelës falas API.",
       "ConfigureOptions.Location": "Emri i qytetit",
       "ConfigureOptions.Language": "Gjuha (p.sh. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervali i përditësimit (minuta)",
-      "ConfigureOptions.ApiKey": "Çelësi i OpenWeatherMap API (APPID)"
+      "ConfigureOptions.ApiKey": "Çelësi API i OpenWeatherMap (APPID)"
     },
     "77": {
       "Title": "Rrjeti MQTT",
@@ -155,7 +162,7 @@
       "ConfigureOptions.ClientId": "ID-ja e klientit.",
       "ConfigureOptions.ServerAddress": "Adresa e serverit",
       "ConfigureOptions.ServerPort": "Porta e serverit",
-      "ConfigureOptions.Encryption": "Aktivizo enkriptimin nga skaji në fund (E2EE)",
+      "ConfigureOptions.Encryption": "Aktivizo enkriptimin nga fundi në fund (E2EE)",
       "ConfigureOptions.WebSockets": "Përdorni WebSockets",
       "ConfigureOptions.TLS": "Aktivizo TLS/SSL",
       "ConfigureOptions.Username": "Emri i përdoruesit (opsionale)",
@@ -172,7 +179,7 @@
     },
     "81": {
       "Title": "Monitor i Energjisë",
-      "Description": "Gjeneroni statistika mbi konsumin e energjisë dhe përdorimin e pajisjeve.",
+      "Description": "Gjeneroni statistika për konsumin e energjisë dhe përdorimin e pajisjeve.",
       "EnergyManagement.MonitorStatus": "Monitoroni statusin",
       "EnergyManagement.MonitorWatts": "Monitoroni konsumin e energjisë"
     },
@@ -182,15 +189,25 @@
       "EnergyManagement.EnergySavingLevel": "Niveli maksimal i dritës (%)",
       "EnergyManagement.EnergySavingMode": "Aktivizo"
     },
+    "88": {
+      "Title": "Kamera e përgjithshme IP",
+      "Description": "Shfaq/drejto furnizimin e imazhit nga një kamerë IP.",
+      "IpCamera.ImageURL": "URL-ja e API-së së imazhit të kamerës (shih dokumentet e kamerës)",
+      "IpCamera.Username": "Emri i përdoruesit (opsionale)",
+      "IpCamera.Password": "Fjalëkalimi (opsionale)",
+      "Widget.Config.fps": "Korniza për sekondë",
+      "Widget.Config.size": "Madhësia e miniaplikacionit"
+    },
     "90": {
       "Title": "Sistemi i alarmit të sigurisë",
       "Description": "Përdorni sensorë dhe pajisje të tjera për të zbatuar një sistem alarmi sigurie.",
       "HomeGenie.SecurityAlarm": "Përdorni si alarm/strob",
+      "HomeGenie.SecurityTriggerHome": "Shkakton gjithashtu kur armatosur Home",
       "HomeGenie.SecuritySensor": "Përdorni si sensor sigurie",
       "ConfigureOptions.Email.Recipients": "Lista e e-mail-eve të marrësve të ndarë me presje për njoftimet e alarmit",
       "ConfigureOptions.System.ArmDelay": "Vonesa e krahut (sekonda)",
       "ConfigureOptions.System.SirenStartTime": "Vonesa e fillimit të sirenave (sekonda)",
-      "ConfigureOptions.System.SirenMaxTime": "Koha maksimale e sirenave (sekonda, 0 = pafund)",
+      "ConfigureOptions.System.SirenMaxTime": "Koha maksimale e sirenave (sekonda, 0=pafund)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program për të ekzekutuar kur është i armatosur",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programi për të ekzekutuar kur çarmatoset",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programi për të ekzekutuar kur aktivizohet"
@@ -200,6 +217,10 @@
       "Description": "Regjistroni aktivitetin e pajisjes.",
       "EventsLogger.EnableLogging": "Aktivizo"
     },
+    "111": {
+      "Title": "Konfigurimi i klientit",
+      "Description": "Zbaton API për menaxhimin e profileve të konfigurimit të klientit që përdoren për të ruajtur cilësimet e ndërfaqes së përdoruesit dhe paneleve të kontrollit."
+    },
     "400": {
       "Title": "Demoja e moduleve virtuale",
       "Description": "Vendosni manualisht vlerat e pajisjes virtuale.",
@@ -207,7 +228,7 @@
       "Sensor.Luminance": "Vlera e ndriçimit",
       "Sensor.MotionDetect": "Statusi i zbulimit të lëvizjes",
       "Status.Battery": "Niveli i baterisë",
-      "Sensor.DoorWindow": "Gjendja e sensorit të derës/dritares (e hapur/e mbyllur)",
+      "Sensor.DoorWindow": "Gjendja e sensorit të dyerve/dritareve (e hapur/e mbyllur)",
       "Status.Level": "Statusi i kyçjes (ndezur/fikur)"
     },
     "401": {
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Butoni i uljes së ndriçimit",
       "ConfigureOptions.DimmerInterval": "Hapi i zbehjes"
     },
+    "142": {
+      "Title": "Llogari e-mail",
+      "Description": "Ruan informacionin e llogarisë së postës elektronike të përdorur nga programet e sistemit për dërgimin/marrja e emaileve.",
+      "ConfigureOptions.Email.Sender": "1. Adresa e postës elektronike",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresa e serverit SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Emri i përdoruesit SMTP (opsionale)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Fjalëkalimi SMTP (opsionale)",
+      "ConfigureOptions.Email.SmtpPort": "5. Porta e serverit SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Serveri SMTP përdor SSL"
+    },
     "145": {
       "Title": "Pajisje inteligjente",
       "Description": "Aktivizoni/fikni pajisjen bazuar në zbulimin e lëvizjes dhe dritën e ambientit.",
@@ -250,6 +281,13 @@
       "Title": "Skenari i ngjyrave të lindjes së diellit",
       "Description": "Shembull i skenarit \"Sunrise\" për ndryshimin e ngjyrave të dritave LED.",
       "Scenarios.SunriseColors": "Lidhja me skenarin Sunrise Colors"
+    },
+    "910": {
+      "Title": "Zbulimi i objekteve",
+      "Description": "Zbuloni objekte duke përdorur një model YOLO11 të para-stërvitur.",
+      "ML.ObjectDetection": "Aktivizo zbulimin e objekteve",
+      "ML.ObjectDetection.TriggerDetect": "Lista e gjërave të ndara me presje (në anglisht) që do të shkaktojnë alarmin. (p.sh.: mace, qen, person, çantë shpine, valixhe)",
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
     }
   }
 }

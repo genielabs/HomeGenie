@@ -21,7 +21,7 @@
   "repositories": "ບ່ອນເກັບມ້ຽນ",
   "packages": "ການຫຸ້ມຫໍ່",
   "installed_packages": "ແພັກເກດທີ່ຕິດຕັ້ງແລ້ວ",
-  "upload_package": "ອັບໂຫຼດແພັກເກດ",
+  "upload_package": "ອັບໂຫຼດຊຸດ",
   "create_package": "ສ້າງຊຸດໃຫມ່",
   "programs_version": "ສະບັບໂປຣແກຣມ",
   "http_settings": "ການຕັ້ງຄ່າ HTTP",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "ທາງເລືອກ",
   "scheduler_preset_action_program_say": "ເວົ້າ",
   "scheduler_preset_action_config_message": "ຂໍ້ຄວາມ",
-  "save_and_build": "ຊ່ວຍ​ປະ​ຢັດ​ແລະ​ການ​ກໍ່​ສ້າງ​",
+  "save_and_build": "ບັນທຶກແລະສ້າງ",
   "toggle_widgets_preview": "ສະຫຼັບການສະແດງຕົວຢ່າງວິກເຈັດ",
   "stop_program": "ຢຸດໂຄງການ",
   "run_program": "ດໍາເນີນໂຄງການ",
@@ -118,8 +118,8 @@
   "program_status_broken": "ຫັກ",
   "program_status_compile": "ລວບລວມ",
   "automation_programming_guide": "ຄູ່ມືການຂຽນໂປຼແກຼມ'",
-  "tap_to_disable": "ແຕະເພື່ອປິດການໃຊ້ງານ",
-  "tap_to_enable": "ແຕະເພື່ອເປີດໃຊ້ງານ",
+  "tap_to_disable": "ຄລິກເພື່ອປິດການໃຊ້ງານ",
+  "tap_to_enable": "ຄລິກເພື່ອເປີດໃຊ້",
   "program_data": "ຂໍ້ມູນໂຄງການ",
   "visual_code": "ລະຫັດສາຍຕາ",
   "generated_code": "ລະຫັດທີ່ສ້າງຂຶ້ນ",
@@ -139,6 +139,13 @@
       "Description": "ເກັບຮັກສາແລະຈື່ຈໍາລະດັບ dimmer ສຸດທ້າຍ.",
       "HomeGenie.LevelMemory": "ຈື່ລະດັບແສງສຸດທ້າຍເມື່ອເປີດ",
       "HomeGenie.LevelMemory.SimulateOnly": "ຈຳລອງເທົ່ານັ້ນ"
+    },
+    "26": {
+      "Title": "ແສງສີ",
+      "Description": "ຕົວຢ່າງການເຊື່ອມໂຍງໄຟ Philips Hue ໂດຍໃຊ້ HTTP API (V1). ຜູ້ໃຊ້ເລີ່ມຕົ້ນທີ່ຈະເຊື່ອມຕໍ່ກັບຂົວແມ່ນ \"ຜູ້ພັດທະນາໃຫມ່\" ແລະມັນຄວນຈະຖືກເປີດໃຊ້ແລ້ວ.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) ທີ່ຢູ່ IP",
+      "ConfigureOptions.BridgeUsername": "ຊື່ຜູ້ໃຊ້",
+      "ConfigureOptions.LightsCount": "ຈໍານວນໄຟ"
     },
     "34": {
       "Title": "ພະຍາກອນອາກາດ",
@@ -182,12 +189,22 @@
       "EnergyManagement.EnergySavingLevel": "ລະດັບຄວາມສະຫວ່າງສູງສຸດ (%)",
       "EnergyManagement.EnergySavingMode": "ເປີດໃຊ້"
     },
+    "88": {
+      "Title": "ກ້ອງຖ່າຍຮູບ IP ທົ່ວໄປ",
+      "Description": "ສະແດງ/ກຳນົດເສັ້ນທາງຟີດຮູບພາບຈາກກ້ອງ IP.",
+      "IpCamera.ImageURL": "ຮູບພາບ API URL ຂອງກ້ອງຖ່າຍຮູບ (ເບິ່ງເອກະສານກ້ອງຖ່າຍຮູບຂອງທ່ານ)",
+      "IpCamera.Username": "ຊື່ຜູ້ໃຊ້ (ທາງເລືອກ)",
+      "IpCamera.Password": "ລະຫັດຜ່ານ (ທາງເລືອກ)",
+      "Widget.Config.fps": "ເຟຣມຕໍ່ວິນາທີ",
+      "Widget.Config.size": "ຂະໜາດວິດເຈັດ"
+    },
     "90": {
       "Title": "ລະບົບເຕືອນໄພຄວາມປອດໄພ",
       "Description": "ໃຊ້ເຊັນເຊີແລະອຸປະກອນອື່ນໆເພື່ອປະຕິບັດລະບົບເຕືອນໄພຄວາມປອດໄພ.",
       "HomeGenie.SecurityAlarm": "ໃຊ້ເປັນໂມງປຸກ/strobe",
+      "HomeGenie.SecurityTriggerHome": "ຍັງກະຕຸ້ນໃນເວລາທີ່ປະກອບອາວຸດຫນ້າທໍາອິດ",
       "HomeGenie.SecuritySensor": "ໃຊ້ເປັນເຊັນເຊີຄວາມປອດໄພ",
-      "ConfigureOptions.Email.Recipients": "ໝາຍຈຸດທີ່ແຍກອອກລາຍຊື່ຜູ້ຮັບອີເມວສຳລັບການແຈ້ງເຕືອນ",
+      "ConfigureOptions.Email.Recipients": "ເຄື່ອງໝາຍຈຸດທີ່ແຍກອອກລາຍຊື່ຜູ້ຮັບອີເມລສຳລັບການແຈ້ງເຕືອນ",
       "ConfigureOptions.System.ArmDelay": "ຊັກຊ້າແຂນ (ວິນາທີ)",
       "ConfigureOptions.System.SirenStartTime": "Sirens ເລີ່ມ Delay (ວິນາທີ)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens ສູງສຸດທີ່ໃຊ້ເວລາ (ວິນາທີ, 0=infinite)",
@@ -200,12 +217,16 @@
       "Description": "ບັນທຶກການເຄື່ອນໄຫວຂອງອຸປະກອນ.",
       "EventsLogger.EnableLogging": "ເປີດໃຊ້"
     },
+    "111": {
+      "Title": "ການຕັ້ງຄ່າລູກຄ້າ",
+      "Description": "ປະຕິບັດ API ສໍາລັບການຈັດການໂປຣໄຟລ໌ການຕັ້ງຄ່າຂອງລູກຄ້າທີ່ຖືກນໍາໃຊ້ເພື່ອເກັບຮັກສາການຕັ້ງຄ່າ UI ແລະ dashboards."
+    },
     "400": {
       "Title": "ການສາທິດໂມດູນສະເໝືອນ",
       "Description": "ຕັ້ງຄ່າຂອງອຸປະກອນສະເໝືອນດ້ວຍຕົນເອງ.",
       "Sensor.Temperature": "ຄ່າອຸນຫະພູມ",
       "Sensor.Luminance": "ຄ່າຄວາມສະຫວ່າງ",
-      "Sensor.MotionDetect": "ສະຖານະກວດຈັບການເຄື່ອນໄຫວ",
+      "Sensor.MotionDetect": "ສະຖານະການກວດຈັບການເຄື່ອນໄຫວ",
       "Status.Battery": "ລະດັບຫມໍ້ໄຟ",
       "Sensor.DoorWindow": "ສະຖານະເຊັນເຊີປະຕູ/ປ່ອງຢ້ຽມ (ເປີດ/ປິດ)",
       "Status.Level": "ສະຫຼັບສະຖານະ (ເປີດ/ປິດ)"
@@ -225,7 +246,7 @@
       "Simulator.Sensor.Humidity": "ເຊັນເຊີຄວາມຊຸ່ມຊື່ນ",
       "Simulator.Sensor.Luminance": "ເຊັນເຊີແສງ",
       "Simulator.Meter.Watts": "ວັດວັດ",
-      "Simulator.Meter.Watts.Max": "ພະລັງງານສູງສຸດຂອງວັດ",
+      "Simulator.Meter.Watts.Max": "ພະລັງງານສູງສຸດ",
       "Simulator.Sensor.DataFrequency": "ຕົວຈຳລອງປ່ອຍຄວາມຖີ່"
     },
     "505": {
@@ -236,6 +257,16 @@
       "ConfigureOptions.DimmerUpCode": "ປຸ່ມເພີ່ມຄວາມສະຫວ່າງ",
       "ConfigureOptions.DimmerDownCode": "ປຸ່ມຫຼຸດຄວາມສະຫວ່າງ",
       "ConfigureOptions.DimmerInterval": "ຂັ້ນຕອນ dimming"
+    },
+    "142": {
+      "Title": "ບັນຊີອີເມລ",
+      "Description": "ເກັບ​ຮັກ​ສາ​ຂໍ້​ມູນ​ບັນ​ຊີ​ອີ​ເມລ​ທີ່​ໃຊ້​ໂດຍ​ໂຄງ​ການ​ລະ​ບົບ​ສໍາ​ລັບ​ການ​ສົ່ງ / ການ​ຮັບ​ອີ​ເມລ​໌​.",
+      "ConfigureOptions.Email.Sender": "1. ທີ່ຢູ່ອີເມລ",
+      "ConfigureOptions.Email.SmtpServer": "2. ທີ່ຢູ່ເຊີບເວີ SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. ຊື່ຜູ້ໃຊ້ SMTP (ທາງເລືອກ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. ລະຫັດຜ່ານ SMTP (ທາງເລືອກ)",
+      "ConfigureOptions.Email.SmtpPort": "5. ພອດເຊີບເວີ SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. ເຊີບເວີ SMTP ໃຊ້ SSL"
     },
     "145": {
       "Title": "ອຸປະກອນອັດສະລິຍະ",
@@ -249,7 +280,14 @@
     "8": {
       "Title": "ສະຖານະການສີຂອງແສງຕາເວັນ",
       "Description": "ຕົວຢ່າງສະຖານະການ \"ຕາເວັນຂຶ້ນ\" ສໍາລັບໄຟ LED ປ່ຽນສີ.",
-      "Scenarios.SunriseColors": "ເຊື່ອມຕໍ່ກັບສະຖານະການສີ Sunrise"
+      "Scenarios.SunriseColors": "ເຊື່ອມຕໍ່ກັບສະຖານະການ Sunrise Colors"
+    },
+    "910": {
+      "Title": "ກວດຫາວັດຖຸ",
+      "Description": "ກວດຫາວັດຖຸໂດຍໃຊ້ຕົວແບບ YOLO11 ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
+      "ML.ObjectDetection": "ເປີດໃຊ້ການກວດຫາວັດຖຸ",
+      "ML.ObjectDetection.TriggerDetect": "ລາຍຊື່ສິ່ງຕ່າງໆທີ່ຂັ້ນດ້ວຍເຄື່ອງໝາຍຈຸດ (ໃນພາສາອັງກິດ) ທີ່ຈະກະຕຸ້ນເຕືອນ. (ເຊັ່ນ: cat, dog, person, backpack, suitcase)",
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
     }
   }
 }

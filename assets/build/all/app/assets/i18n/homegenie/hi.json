@@ -118,8 +118,8 @@
   "program_status_broken": "टूटा हुआ",
   "program_status_compile": "संकलन",
   "automation_programming_guide": "प्रोग्रामिंग गाइड'",
-  "tap_to_disable": "अक्षम करने के लिए टैप करें",
-  "tap_to_enable": "सक्षम करने के लिए टैप करें",
+  "tap_to_disable": "अक्षम करने के लिए क्लिक करें",
+  "tap_to_enable": "सक्षम करने के लिए क्लिक करें",
   "program_data": "कार्यक्रम डेटा",
   "visual_code": "दृश्य कोड",
   "generated_code": "उत्पन्न कोड",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "स्विच ऑन करते समय अंतिम प्रकाश स्तर को याद करें",
       "HomeGenie.LevelMemory.SimulateOnly": "केवल अनुकरण करें"
     },
+    "26": {
+      "Title": "रंगीन रोशनी",
+      "Description": "HTTP API (V1) का उपयोग करके Philips Hue लाइट्स एकीकरण का उदाहरण। ब्रिज से कनेक्ट करने के लिए डिफ़ॉल्ट उपयोगकर्ता \"newdeveloper\" है और इसे पहले से ही सक्षम किया जाना चाहिए।",
+      "ConfigureOptions.BridgeAddress": "फिलिप्स ह्यू ब्रिज (V1) आईपी पता",
+      "ConfigureOptions.BridgeUsername": "उपयोगकर्ता नाम",
+      "ConfigureOptions.LightsCount": "रोशनी की संख्या"
+    },
     "34": {
       "Title": "मौसम पूर्वानुमान",
       "Description": "ओपन वेदर मैप सेवा से मौसम और पूर्वानुमान की जानकारी। इस विजेट को सक्रिय करने के लिए एक मान्य API कुंजी दर्ज करें। निःशुल्क API कुंजी प्राप्त करने के लिए https://openweathermap.org/appid पर दिए गए निर्देशों का पालन करें।",
@@ -149,7 +156,7 @@
       "ConfigureOptions.ApiKey": "OpenWeatherMap API कुंजी (APPID)"
     },
     "77": {
-      "Title": "नेटवर्क एमक्यूटीटी",
+      "Title": "नेटवर्क MQTT",
       "Description": "इंटरनेट के माध्यम से कहीं से भी HomeGenie पैनल ऐप का उपयोग करने के लिए या समान MQTT नेटवर्क पर HomeGenie डिवाइसों को आपस में जोड़ने के लिए MQTT ब्रोकर से कनेक्ट करें।",
       "MQTT.SensorPublish": "इस मॉड्यूल द्वारा उत्सर्जित ईवेंट प्रकाशित करें",
       "ConfigureOptions.ClientId": "ग्राहक आईडी.",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "अधिकतम प्रकाश स्तर (%)",
       "EnergyManagement.EnergySavingMode": "सक्षम"
     },
+    "88": {
+      "Title": "सामान्य आईपी कैमरा",
+      "Description": "आईपी कैमरे से छवि फ़ीड प्रदर्शित/रूट करना।",
+      "IpCamera.ImageURL": "कैमरा छवि API URL (अपने कैमरे के दस्तावेज़ देखें)",
+      "IpCamera.Username": "उपयोगकर्ता नाम (वैकल्पिक)",
+      "IpCamera.Password": "पासवर्ड (वैकल्पिक)",
+      "Widget.Config.fps": "प्रति सेकंड फ्रेम",
+      "Widget.Config.size": "विजेट का आकार"
+    },
     "90": {
       "Title": "सुरक्षा अलार्म प्रणाली",
       "Description": "सुरक्षा अलार्म प्रणाली को लागू करने के लिए सेंसर और अन्य उपकरणों का उपयोग करें।",
       "HomeGenie.SecurityAlarm": "अलार्म/स्ट्रोब के रूप में उपयोग करें",
+      "HomeGenie.SecurityTriggerHome": "सशस्त्र होने पर भी ट्रिगर होता है होम",
       "HomeGenie.SecuritySensor": "सुरक्षा सेंसर के रूप में उपयोग करें",
       "ConfigureOptions.Email.Recipients": "अलार्म अधिसूचनाओं के लिए प्राप्तकर्ताओं के ईमेल की अल्पविराम से अलग की गई सूची",
       "ConfigureOptions.System.ArmDelay": "आर्म विलंब (सेकंड)",
@@ -199,6 +216,10 @@
       "Title": "इवेंट लॉगिंग",
       "Description": "डिवाइस गतिविधि रिकॉर्ड करें.",
       "EventsLogger.EnableLogging": "सक्षम"
+    },
+    "111": {
+      "Title": "क्लाइंट कॉन्फ़िगरेशन",
+      "Description": "क्लाइंट के कॉन्फ़िगरेशन प्रोफाइल को प्रबंधित करने के लिए API को कार्यान्वित करता है जिसका उपयोग UI और डैशबोर्ड सेटिंग्स को संग्रहीत करने के लिए किया जाता है।"
     },
     "400": {
       "Title": "वर्चुअल मॉड्यूल डेमो",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "चमक कम करने वाला बटन",
       "ConfigureOptions.DimmerInterval": "मंद करने का चरण"
     },
+    "142": {
+      "Title": "ई-मेल खाता",
+      "Description": "ईमेल भेजने/प्राप्त करने के लिए सिस्टम प्रोग्राम द्वारा उपयोग की जाने वाली ईमेल खाता जानकारी संग्रहीत करता है।",
+      "ConfigureOptions.Email.Sender": "1. ई-मेल पता",
+      "ConfigureOptions.Email.SmtpServer": "2. एसएमटीपी सर्वर पता",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP उपयोगकर्ता नाम (वैकल्पिक)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP पासवर्ड (वैकल्पिक)",
+      "ConfigureOptions.Email.SmtpPort": "5. एसएमटीपी सर्वर पोर्ट",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP सर्वर SSL का उपयोग करता है"
+    },
     "145": {
       "Title": "स्मार्ट डिवाइस",
       "Description": "गति का पता लगाने और परिवेशीय प्रकाश के आधार पर डिवाइस को चालू/बंद करें।",
@@ -250,6 +281,13 @@
       "Title": "सूर्योदय रंग परिदृश्य",
       "Description": "रंग बदलने वाली एलईडी लाइटों के लिए उदाहरण \"सूर्योदय\" परिदृश्य।",
       "Scenarios.SunriseColors": "सूर्योदय रंग परिदृश्य के लिए लिंक"
+    },
+    "910": {
+      "Title": "वस्तु पहचान",
+      "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडल का उपयोग करके वस्तुओं का पता लगाएं।",
+      "ML.ObjectDetection": "ऑब्जेक्ट पहचान सक्षम करें",
+      "ML.ObjectDetection.TriggerDetect": "अल्पविराम से अलग की गई चीजों की सूची (अंग्रेजी में) जो अलार्म को ट्रिगर करेंगी। (उदाहरण: बिल्ली, कुत्ता, व्यक्ति, बैग, सूटकेस)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडल फ़ाइल का पथ (.onnx)"
     }
   }
 }

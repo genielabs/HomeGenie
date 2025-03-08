@@ -717,7 +717,6 @@ namespace HomeGenie.Service.Handlers
                             var virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == parentId.Value && rm.Domain == module.Domain && rm.Address == module.Address);
                             if (virtualModule != null)
                             {
-                                Console.WriteLine("'VIRTUAL MODULE' {0}:{1}", virtualModule.Domain, virtualModule.Address);
                                 implementedFeatures = virtualModule.ImplementFeatures;
                             }
                         }
@@ -753,7 +752,14 @@ namespace HomeGenie.Service.Handlers
                                     matchFeature = Utility.MatchValues(f.ForDomains, module.Domain);
                                     string forTypes = f.ForTypes;
                                     string forProperties = null;
+                                    string compareProperties = null;
                                     int propertyFilterIndex = forTypes.IndexOf(':');
+                                    int propertyCompareIndex = forTypes.IndexOf('=');
+                                    if (propertyCompareIndex > propertyFilterIndex)
+                                    {
+                                        compareProperties = forTypes.Substring(propertyCompareIndex + 1);
+                                        forTypes = forTypes.Substring(0, propertyCompareIndex);
+                                    }
                                     if (propertyFilterIndex >= 0)
                                     {
                                         forProperties = forTypes.Substring(propertyFilterIndex + 1).Trim();
@@ -768,7 +774,7 @@ namespace HomeGenie.Service.Handlers
                                             var mp = module.Properties[idx];
                                             if (Utility.MatchValues(forProperties, mp.Name))
                                             {
-                                                matchProperty = true;
+                                                matchProperty = (compareProperties != null) ? mp.Value.Equals(compareProperties) : true;
                                                 break;
                                             }
                                         }

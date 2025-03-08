@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "በጊዜ ክፍተት መጨረሻ",
   "cronwizard_action_custom_script": "ብጁ የድርጊት ስክሪፕት",
   "cronwizard_action_no_action": "ምንም እርምጃ የለም።",
-  "cronwizard_action_schedule_variable_hint": "በክሮን አገላለጾች ውስጥ <span class=\"notranslate color-primary\">@ {{name}}</span> እንደ ተለዋዋጭ ይጠቀሙ ወይም ይህንን ክስተት ለማጣቀስ በአውቶሜሽን ፕሮግራሞች ውስጥ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ይጠቀሙ።",
+  "cronwizard_action_schedule_variable_hint": "በክሮን አገላለጾች ውስጥ <span class=\"notranslate color-primary\">@ {{name}}</span> እንደ ተለዋዋጭ ይጠቀሙ ወይም ይህንን ክስተት ለማጣቀስ በአውቶማቲክ ፕሮግራሞች ውስጥ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ይጠቀሙ።",
   "scheduler_preset_action_command_turn_on": "ማዞር",
   "scheduler_preset_action_command_turn_off": "አጥፋ",
   "scheduler_preset_action_command_set_level": "ደረጃ አዘጋጅ",
@@ -118,8 +118,8 @@
   "program_status_broken": "የተሰበረ",
   "program_status_compile": "ማጠናቀር",
   "automation_programming_guide": "የፕሮግራም መመሪያ",
-  "tap_to_disable": "ለማሰናከል መታ ያድርጉ",
-  "tap_to_enable": "ለማንቃት መታ ያድርጉ",
+  "tap_to_disable": "ለማሰናከል ጠቅ ያድርጉ",
+  "tap_to_enable": "ለማንቃት ጠቅ ያድርጉ",
   "program_data": "የፕሮግራም ውሂብ",
   "visual_code": "የእይታ ኮድ",
   "generated_code": "የመነጨ ኮድ",
@@ -129,7 +129,7 @@
   "main_code_empty_note": "\"ዋና\" ኮድ ባዶ ነው። ይህንን ኮድ ለማመንጨት የ\"Visual code\" አርታዒን ይጠቀሙ: - በግራ በኩል ካለው የትዕዛዝ ቤተ-ስዕል \"ፕሮግራም\" የሚለውን ምድብ ይክፈቱ - በምስላዊ ኮድ የስራ ቦታ ውስጥ \"ዋና\" የሚለውን ዓይነት ብሎክ ይጎትቱ - የዚህን ፕሮግራም ድርጊቶች እና አመክንዮዎች ለመተግበር በውስጡ ሌሎች የኮድ እገዳዎችን ይጨምሩ ፕሮግራሙ \"ዋና\" ውሎ አድሮ በማዋቀር ኮድ ውስጥ በተሰጡ ሁኔታዎች ላይ በመመስረት በእጅ ሊሰራ ወይም በራሱ ሊጀምር ይችላል.",
   "setup_code_empty_note": "\"ማዋቀር\" ኮድ ባዶ ነው። ይህንን ኮድ ለማመንጨት የ\"Visual code\" አርታዒን ይጠቀሙ፡ - በግራ በኩል ካለው የትዕዛዝ ቤተ-ስዕል ላይ \"ፕሮግራም\" የሚለውን ምድብ ይክፈቱ - በምስላዊ ኮድ የስራ ቦታ ላይ ያለውን \"ማዋቀር\" አይነት ብሎክ ይጎትቱ - \"ዋና\" ኮድ አፈፃፀምን የሚቀሰቅሱትን ሁኔታዎች ለመወሰን በውስጡ ሌሎች የኮድ ብሎኮችን ይጨምሩ ይህ ኮድ አዲስ ክስተት በተፈጠረ ቁጥር እና ቢያንስ በደቂቃ አንድ ጊዜ ይገመገማል።",
   "capture_commands": "ትዕዛዞችን ይያዙ",
-  "capture_commands_description": "በመግብሮች ላይ በእጅ የተከናወኑትን ሁሉንም ትዕዛዞች ወደ ፕሮግራሙ ያክሉ።",
+  "capture_commands_description": "በፕሮግራሙ ላይ በእጅ የተከናወኑ ሁሉንም ትዕዛዞች በመግብሮች ላይ ያክሉ።",
   "capture_commands_pause": "በትእዛዞች መካከል ለአፍታ አቁም",
   "capture_pause_none": "ምንም",
   "capture_pause_asis": "እንዳለ",
@@ -139,6 +139,13 @@
       "Description": "የመጨረሻውን የዲመር ደረጃ ያከማቹ እና ያስታውሱ።",
       "HomeGenie.LevelMemory": "ሲበራ የመጨረሻውን የብርሃን ደረጃ አስታውስ",
       "HomeGenie.LevelMemory.SimulateOnly": "አስመስሎ ብቻ"
+    },
+    "26": {
+      "Title": "የቀለም መብራቶች",
+      "Description": "የኤችቲቲፒ ኤፒአይ (V1) በመጠቀም የ Philips Hue መብራቶች ውህደት ምሳሌ። ከድልድዩ ጋር የሚገናኘው ነባሪ ተጠቃሚ \"አዲስ ገንቢ\" ነው እና አስቀድሞ መንቃት አለበት።",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) አይፒ አድራሻ",
+      "ConfigureOptions.BridgeUsername": "የተጠቃሚ ስም",
+      "ConfigureOptions.LightsCount": "የመብራት ብዛት"
     },
     "34": {
       "Title": "የአየር ሁኔታ ትንበያ",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "ከፍተኛው የብርሃን ደረጃ (%)",
       "EnergyManagement.EnergySavingMode": "አንቃ"
     },
+    "88": {
+      "Title": "አጠቃላይ የአይፒ ካሜራ",
+      "Description": "ከአይፒ ካሜራ የምስል ምግብን አሳይ/መንገድ።",
+      "IpCamera.ImageURL": "የካሜራ ምስል API URL (የካሜራ ሰነዶችዎን ይመልከቱ)",
+      "IpCamera.Username": "የተጠቃሚ ስም (አማራጭ)",
+      "IpCamera.Password": "የይለፍ ቃል (አማራጭ)",
+      "Widget.Config.fps": "ክፈፎች በሰከንድ",
+      "Widget.Config.size": "የመግብር መጠን"
+    },
     "90": {
       "Title": "የደህንነት ማንቂያ ስርዓት",
       "Description": "የደህንነት ማንቂያ ስርዓትን ለመተግበር ዳሳሾችን እና ሌሎች መሳሪያዎችን ይጠቀሙ።",
       "HomeGenie.SecurityAlarm": "እንደ ማንቂያ/ስትሮብ ይጠቀሙ",
+      "HomeGenie.SecurityTriggerHome": "ቤት ሲታጠቅም ያስነሳል።",
       "HomeGenie.SecuritySensor": "እንደ የደህንነት ዳሳሽ ይጠቀሙ",
       "ConfigureOptions.Email.Recipients": "ለማንቂያ ደወል የተቀባዮች ኢሜይሎች ዝርዝር በነጠላ ሰረዝ ተለያይቷል።",
       "ConfigureOptions.System.ArmDelay": "የክንድ መዘግየት (ሰከንዶች)",
@@ -200,11 +217,15 @@
       "Description": "የመሳሪያውን እንቅስቃሴ ይመዝግቡ።",
       "EventsLogger.EnableLogging": "አንቃ"
     },
+    "111": {
+      "Title": "የደንበኛ ውቅር",
+      "Description": "የዩአይ እና ዳሽቦርድ ቅንብሮችን ለማከማቸት የደንበኛ ውቅር መገለጫዎችን ለማስተዳደር ኤፒአይን ይተገብራል።"
+    },
     "400": {
       "Title": "ምናባዊ ሞጁሎች ማሳያ",
       "Description": "የቨርቹዋል መሳሪያ እሴቶችን በእጅ ያዘጋጁ።",
       "Sensor.Temperature": "የሙቀት ዋጋ",
-      "Sensor.Luminance": "የብርሃን ዋጋ",
+      "Sensor.Luminance": "የማብራት ዋጋ",
       "Sensor.MotionDetect": "የእንቅስቃሴ ማወቂያ ሁኔታ",
       "Status.Battery": "የባትሪ ደረጃ",
       "Sensor.DoorWindow": "የበር/መስኮት ዳሳሽ ሁኔታ (ክፍት/ዝግ)",
@@ -237,9 +258,19 @@
       "ConfigureOptions.DimmerDownCode": "የብሩህነት ቅነሳ ቁልፍ",
       "ConfigureOptions.DimmerInterval": "የማደብዘዝ ደረጃ"
     },
+    "142": {
+      "Title": "የኢሜል መለያ",
+      "Description": "በስርዓት ፕሮግራሞች ኢሜይሎችን ለመላክ/መቀበል የሚጠቀሙበትን የኢ-ሜል መለያ መረጃ ያከማቻል።",
+      "ConfigureOptions.Email.Sender": "1. የኢሜል አድራሻ",
+      "ConfigureOptions.Email.SmtpServer": "2. የ SMTP አገልጋይ አድራሻ",
+      "ConfigureOptions.Email.SmtpUserName": "3. የSMTP ተጠቃሚ ስም (አማራጭ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. የSMTP ይለፍ ቃል (አማራጭ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP አገልጋይ ወደብ",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. የSMTP አገልጋይ SSLን ይጠቀማል"
+    },
     "145": {
       "Title": "ዘመናዊ መሣሪያ",
-      "Description": "በእንቅስቃሴ ማወቂያ እና በድባብ ብርሃን መሰረት መሳሪያውን ያብሩ/ያጥፉት።",
+      "Description": "በእንቅስቃሴ ማወቂያ እና በድባብ ብርሃን መሰረት መሳሪያውን ያብሩ/ያጥፉ።",
       "HomeGenie.SmartLights.Enable": "'ስማርት መሳሪያ'ን አንቃ",
       "HomeGenie.SmartLights.OnMotionDetect": "በዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
       "HomeGenie.SmartLights.CheckLuminosity": "በብርሃን ዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
@@ -250,6 +281,13 @@
       "Title": "የፀሐይ መውጫ ቀለሞች ሁኔታ",
       "Description": "የ LED መብራቶችን ቀለም ለመቀየር የ\"ፀሐይ መውጫ\" ሁኔታ።",
       "Scenarios.SunriseColors": "ወደ የፀሐይ መውጫ ቀለሞች ሁኔታ አገናኝ"
+    },
+    "910": {
+      "Title": "የነገር መለየት",
+      "Description": "አስቀድሞ የሰለጠነ YOLO11 ሞዴል በመጠቀም ነገሮችን ያግኙ።",
+      "ML.ObjectDetection": "የነገሮችን መለየት አንቃ",
+      "ML.ObjectDetection.TriggerDetect": "ማንቂያውን የሚያነቃቁ በነጠላ ሰረዝ የተለዩ የነገሮች ዝርዝር (በእንግሊዘኛ)። (ለምሳሌ፡ ድመት፣ ውሻ፣ ሰው፣ ቦርሳ፣ ሻንጣ)",
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Merħba għal HomeGenie!",
-  "welcome_subtitle": "L-intelliġenza ta 'awtomazzjoni programmabbli",
+  "welcome_subtitle": "L-intelliġenza tal-awtomazzjoni programmabbli",
   "not_configured_yet": "Is-sistema għadha mhix ikkonfigurata. Dan is-setup wizard jgħinek biex is-sistema tiegħek tibda taħdem fi ftit passi.",
   "system_config_start_with_base_and_backup": "Irrestawra mill-fajl tal-backup",
   "system_config_start_with_default_setup": "Setup default",
@@ -40,7 +40,7 @@
   "schedule_type_range": "Firxa tad-data",
   "schedule_type_cron": "Cron espressjoni",
   "schedule_action": "Azzjoni",
-  "schedule_occurrence_preview": "Previżjoni tal-okkorrenza",
+  "schedule_occurrence_preview": "Preview tal-okkorrenza",
   "time_schedule": "Skeda",
   "occurrence": "okkorrenza",
   "cronwizard_description_on": "fuq",
@@ -70,8 +70,8 @@
   "cronwizard_monthselect_selectedmonths": "Xhur magħżula",
   "cronwizard_schedule_set_exact_time": "Issettja l-ħin tal-avveniment.",
   "cronwizard_schedule_set_slot_start": "Issettja l-bidu tas-slot tal-ħin.",
-  "cronwizard_schedule_set_slot_end": "Nibda mill- {{start}} .<span class=\"notranslate\"><br/></span> Issettja t-tmiem tal-islott tal-ħin.",
-  "cronwizard_bindings_define_types_and_modules": "Iddefinixxi tipi u moduli li huma suġġetti għal din l-iskeda (mhux obbligatorju)",
+  "cronwizard_schedule_set_slot_end": "Tibda mill- {{start}} .<span class=\"notranslate\"><br/></span> Issettja t-tmiem tal-islott tal-ħin.",
+  "cronwizard_bindings_define_types_and_modules": "Iddefinixxi tipi u moduli li huma soġġetti għal din l-iskeda (mhux obbligatorju)",
   "cronwizard_bindings_select_types": "Agħżel it-tipi",
   "cronwizard_action_set_action_to_execute": "Issettja azzjoni biex tesegwixxi fuq okkorrenzi ta' dan l-avveniment",
   "cronwizard_action_preset_actions": "Azzjonijiet issettjati minn qabel",
@@ -118,16 +118,16 @@
   "program_status_broken": "Imkisser",
   "program_status_compile": "Ikkompila",
   "automation_programming_guide": "Gwida għall-ipprogrammar'",
-  "tap_to_disable": "Tektek biex tiddiżattiva",
-  "tap_to_enable": "Tektek biex tippermetti",
+  "tap_to_disable": "Ikklikkja biex tiddiżattiva",
+  "tap_to_enable": "Ikklikkja biex tippermetti",
   "program_data": "Data tal-programm",
   "visual_code": "Kodiċi viżwali",
   "generated_code": "Kodiċi ġġenerat",
   "setup_code": "Setup",
   "main_code": "Prinċipali",
   "context_code": "Kuntest",
-  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm Il-programm \"Main\" jista 'jitħaddem manwalment jew awtomatikament ibbażat fuq kundizzjonijiet eventwalment mogħtija fil-kodiċi Setup.",
-  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra ta 'kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba kull minuta.",
+  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm.",
+  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur tal-\"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokk tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra tal-kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba fil-minuta.",
   "capture_commands": "Qbid kmandi",
   "capture_commands_description": "Żid il-kmandi kollha mwettqa manwalment fuq widgets mal-programm.",
   "capture_commands_pause": "Pawża bejn il-kmandi",
@@ -139,6 +139,13 @@
       "Description": "Aħżen u fakkar l-aħħar livell tad-dimmer.",
       "HomeGenie.LevelMemory": "Ifakkar l-aħħar livell tad-dawl meta jinxtegħel",
       "HomeGenie.LevelMemory.SimulateOnly": "Issimula biss"
+    },
+    "26": {
+      "Title": "Dwal tal-kulur",
+      "Description": "Eżempju ta 'integrazzjoni tad-dwal Philips Hue bl-użu ta' HTTP API (V1). L-utent default li jikkonnettja mal-pont huwa \"newdeveloper\" u għandu jkun diġà attivat.",
+      "ConfigureOptions.BridgeAddress": "Indirizz IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Isem tal-utent",
+      "ConfigureOptions.LightsCount": "Numru ta' dwal"
     },
     "34": {
       "Title": "Tbassir tat-Temp",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Livell massimu tad-dawl (%)",
       "EnergyManagement.EnergySavingMode": "Ippermettiet"
     },
+    "88": {
+      "Title": "Kamera IP ġenerika",
+      "Description": "Wiri/għalf ta' l-immaġni tar-rotta minn kamera IP.",
+      "IpCamera.ImageURL": "URL tal-API tal-immaġni tal-kamera (ara d-dokumenti tal-kamera tiegħek)",
+      "IpCamera.Username": "Username (mhux obbligatorju)",
+      "IpCamera.Password": "Password (mhux obbligatorju)",
+      "Widget.Config.fps": "Frejms kull sekonda",
+      "Widget.Config.size": "Daqs tal-widget"
+    },
     "90": {
       "Title": "Sistema ta' Allarm tas-Sigurtà",
       "Description": "Uża sensuri u apparat ieħor biex timplimenta sistema ta 'allarm tas-sigurtà.",
       "HomeGenie.SecurityAlarm": "Uża bħala allarm/strobe",
+      "HomeGenie.SecurityTriggerHome": "Jqajjem ukoll meta l-dar armat",
       "HomeGenie.SecuritySensor": "Uża bħala sensor tas-sigurtà",
       "ConfigureOptions.Email.Recipients": "Lista separata b'virgola ta' e-mails tar-riċevituri għal notifiki ta' allarm",
       "ConfigureOptions.System.ArmDelay": "Dewmien tad-driegħ (sekondi)",
@@ -199,6 +216,10 @@
       "Title": "Logging ta' avvenimenti",
       "Description": "Irreġistra l-attività tal-apparat.",
       "EventsLogger.EnableLogging": "Ippermettiet"
+    },
+    "111": {
+      "Title": "Konfigurazzjoni tal-klijent",
+      "Description": "Jimplimenta API għall-ġestjoni tal-profili tal-konfigurazzjoni tal-klijent li jintużaw biex jaħżnu s-settings tal-UI u tad-dashboards."
     },
     "400": {
       "Title": "Moduli Virtwali Demo",
@@ -231,11 +252,21 @@
     "505": {
       "Title": "Kontroll mill-bogħod",
       "Description": "Ikkontrolla l-apparat billi tuża remot (IR jew RF).",
-      "HomeGenie.RemoteControl.Enable": "Attiva",
+      "HomeGenie.RemoteControl.Enable": "Ippermettiet",
       "HomeGenie.RemoteControl.IRCode": "Toggle buttuna",
       "ConfigureOptions.DimmerUpCode": "Buttuna żieda fil-luminożità",
       "ConfigureOptions.DimmerDownCode": "Buttuna għat-tnaqqis tal-luminożità",
       "ConfigureOptions.DimmerInterval": "Pass li jbaxxi"
+    },
+    "142": {
+      "Title": "Kont tal-E-Mail",
+      "Description": "Taħżen l-informazzjoni tal-kont tal-email użata mill-programmi tas-sistema biex tibgħat/jirċievi emails.",
+      "ConfigureOptions.Email.Sender": "1. Indirizz elettroniku",
+      "ConfigureOptions.Email.SmtpServer": "2. Indirizz tas-server SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Isem tal-utent SMTP (mhux obbligatorju)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Password SMTP (mhux obbligatorju)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port tas-server SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP server uża SSL"
     },
     "145": {
       "Title": "Apparat Smart",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Xenarju tal-Kuluri tat-Tlugħ ix-Xemx",
-      "Description": "Eżempju ta' xenarju ta' \"Tlugħ ix-Xemx\" għal dwal LED li jinbidlu l-kulur.",
+      "Description": "Eżempju ta 'xenarju \"Tlugħ ix-xemx\" għal dwal LED li jinbidlu l-kulur.",
       "Scenarios.SunriseColors": "Link għax-xenarju ta' Sunrise Colors"
+    },
+    "910": {
+      "Title": "Sejbien ta' oġġetti",
+      "Description": "Issib oġġetti billi tuża mudell YOLO11 imħarreġ minn qabel.",
+      "ML.ObjectDetection": "Jippermettu l-iskoperta ta 'oġġetti",
+      "ML.ObjectDetection.TriggerDetect": "Lista separata b'virgola ta' affarijiet (bl-Ingliż) li se jikkawżaw l-allarm. (eż.: qattus, kelb, persuna, backpack, bagalja)",
+      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
     }
   }
 }

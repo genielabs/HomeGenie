@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Meses seleccionados",
   "cronwizard_schedule_set_exact_time": "Establece a hora do evento.",
   "cronwizard_schedule_set_slot_start": "Establecer o inicio da franxa horaria.",
-  "cronwizard_schedule_set_slot_end": "Comezando polo {{start}} .<span class=\"notranslate\"><br/></span> Establecer o final da franxa horaria.",
+  "cronwizard_schedule_set_slot_end": "Comezando polo {{start}} .<span class=\"notranslate\"><br/></span> Establecer o final do intervalo de tempo.",
   "cronwizard_bindings_define_types_and_modules": "Definir tipos e módulos que están suxeitos a esta programación (opcional)",
   "cronwizard_bindings_select_types": "Selecciona tipos",
   "cronwizard_action_set_action_to_execute": "Establece a acción para executar nas ocorrencias deste evento",
@@ -79,7 +79,7 @@
   "cronwizard_action_preset_slot_start": "No inicio dunha franxa horaria",
   "cronwizard_action_preset_slot_end": "Ao final dunha franxa horaria",
   "cronwizard_action_custom_script": "Script de acción personalizado",
-  "cronwizard_action_no_action": "Sen acción",
+  "cronwizard_action_no_action": "Ningunha acción",
   "cronwizard_action_schedule_variable_hint": "Use <span class=\"notranslate color-primary\">@ {{name}}</span> como variable nas expresións cron ou use <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> nos programas de automatización para facer referencia a este evento.",
   "scheduler_preset_action_command_turn_on": "Acende",
   "scheduler_preset_action_command_turn_off": "Apague",
@@ -118,8 +118,8 @@
   "program_status_broken": "Roto",
   "program_status_compile": "Compilar",
   "automation_programming_guide": "guía de programación'",
-  "tap_to_disable": "Toca para desactivar",
-  "tap_to_enable": "Toca para activar",
+  "tap_to_disable": "Fai clic para desactivar",
+  "tap_to_enable": "Fai clic para activar",
   "program_data": "Datos do programa",
   "visual_code": "Código visual",
   "generated_code": "Código xerado",
@@ -139,6 +139,13 @@
       "Description": "Almacenar e recuperar o último nivel de atenuador.",
       "HomeGenie.LevelMemory": "Recorda o último nivel de luz cando estea acendido",
       "HomeGenie.LevelMemory.SimulateOnly": "Só simular"
+    },
+    "26": {
+      "Title": "Luces de cores",
+      "Description": "Exemplo de integración de luces Philips Hue mediante a API HTTP (V1). O usuario predeterminado para conectarse á ponte é \"newdeveloper\" e xa debería estar activado.",
+      "ConfigureOptions.BridgeAddress": "Enderezo IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Nome de usuario",
+      "ConfigureOptions.LightsCount": "Número de luces"
     },
     "34": {
       "Title": "Previsión do tempo",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Nivel de luz máximo (%)",
       "EnergyManagement.EnergySavingMode": "Activar"
     },
+    "88": {
+      "Title": "Cámara IP genérica",
+      "Description": "Mostrar/enrutar a fonte de imaxe desde unha cámara IP.",
+      "IpCamera.ImageURL": "URL da API da imaxe da cámara (consulta os documentos da cámara)",
+      "IpCamera.Username": "Nome de usuario (opcional)",
+      "IpCamera.Password": "Contrasinal (opcional)",
+      "Widget.Config.fps": "Cadros por segundo",
+      "Widget.Config.size": "Tamaño do widget"
+    },
     "90": {
       "Title": "Sistema de alarma de seguridade",
       "Description": "Use sensores e outros dispositivos para implementar un sistema de alarma de seguridade.",
       "HomeGenie.SecurityAlarm": "Use como alarma/estroboscópico",
+      "HomeGenie.SecurityTriggerHome": "Tamén se dispara cando está armado Home",
       "HomeGenie.SecuritySensor": "Use como sensor de seguridade",
       "ConfigureOptions.Email.Recipients": "Lista separada por comas dos correos electrónicos dos destinatarios para as notificacións de alarma",
       "ConfigureOptions.System.ArmDelay": "Retraso do armamento (segundos)",
@@ -199,6 +216,10 @@
       "Title": "Rexistro de eventos",
       "Description": "Gravar a actividade do dispositivo.",
       "EventsLogger.EnableLogging": "Activar"
+    },
+    "111": {
+      "Title": "Configuración do cliente",
+      "Description": "Implementa a API para xestionar os perfís de configuración do cliente que se usan para almacenar a configuración da interface de usuario e dos paneis."
     },
     "400": {
       "Title": "Demostración de módulos virtuais",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Botón de diminución do brillo",
       "ConfigureOptions.DimmerInterval": "Paso de atenuación"
     },
+    "142": {
+      "Title": "Conta de correo electrónico",
+      "Description": "Almacena a información da conta de correo electrónico utilizada polos programas do sistema para enviar/recibir correos electrónicos.",
+      "ConfigureOptions.Email.Sender": "1. Enderezo de correo electrónico",
+      "ConfigureOptions.Email.SmtpServer": "2. Enderezo do servidor SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nome de usuario SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Contrasinal SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPort": "5. Porto do servidor SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. O servidor SMTP usa SSL"
+    },
     "145": {
       "Title": "Dispositivo intelixente",
       "Description": "Acende/apaga o dispositivo en función da detección de movemento e da luz ambiental.",
@@ -250,6 +281,13 @@
       "Title": "Escenario das cores do amencer",
       "Description": "Exemplo de escenario \"Sunrise\" para luces LED que cambian de cor.",
       "Scenarios.SunriseColors": "Ligazón ao escenario Sunrise Cores"
+    },
+    "910": {
+      "Title": "Detección de obxectos",
+      "Description": "Detecta obxectos usando un modelo YOLO11 adestrado previamente.",
+      "ML.ObjectDetection": "Activar a detección de obxectos",
+      "ML.ObjectDetection.TriggerDetect": "Lista separada por comas de cousas (en inglés) que activarán a alarma. (ex.: gato, can, persoa, mochila, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "Ruta do ficheiro do modelo YOLO11 (.onnx)"
     }
   }
 }

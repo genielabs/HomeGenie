@@ -1,10 +1,10 @@
 {
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "Hûn bi xêr hatin HomeGenie!",
-  "welcome_subtitle": "Aqilmendiya otomatîkî ya bernamekirî",
+  "welcome_subtitle": "Zehmetiya xweseriya bernamekirî",
   "not_configured_yet": "Pergal hêj nehatiye mîheng kirin. Ev sêrbazê sazkirinê dê ji we re bibe alîkar ku hûn di çend gavan de pergala xwe saz bikin û bixebitin.",
   "system_config_start_with_base_and_backup": "Ji pelê hilanînê vegerîne",
-  "system_config_start_with_default_setup": "Sazkirina xwerû",
+  "system_config_start_with_default_setup": "Sazkirina standard",
   "system_config_include_demo": "Bi çalakiya cîhaza simulkirî re demoyê têxe",
   "system_config_additional_features": "taybetmendiyên Additional",
   "system_config_manual_setup": "setup Manual",
@@ -22,7 +22,7 @@
   "packages": "Packages",
   "installed_packages": "Pakêtên sazkirî",
   "upload_package": "Pakêtê barkirin",
-  "create_package": "Pakêtek nû çêbikin",
+  "create_package": "Pakêtek nû ava bikin",
   "programs_version": "Guhertoya bernameyê",
   "http_settings": "Mîhengên HTTP",
   "modules_groups": "Kom û modul",
@@ -95,7 +95,7 @@
   "scheduler_preset_action_config_mode_heat_eco": "Aboriya germê",
   "scheduler_preset_action_config_mode_cool": "Xwînsar",
   "scheduler_preset_action_config_mode_cool_eco": "Aboriya sar",
-  "scheduler_preset_action_program_run": "Bernameyê bixebitin",
+  "scheduler_preset_action_program_run": "Bernameyê bimeşînin",
   "scheduler_preset_action_config_program": "Bername",
   "scheduler_preset_action_config_options": "Vebijêrk",
   "scheduler_preset_action_program_say": "Gotin",
@@ -103,7 +103,7 @@
   "save_and_build": "Save û ava bike",
   "toggle_widgets_preview": "Pêşdîtina widgetan biguhezîne",
   "stop_program": "Bernameyê rawestîne",
-  "run_program": "Bernameyê bixebitin",
+  "run_program": "Bernameyê bimeşînin",
   "enable_to_run_program": "Ji bo ku bernameyê bimeşîne çalak bike",
   "program_status_added": "Zêde kirin",
   "program_status_idle": "Bêçalak",
@@ -140,12 +140,19 @@
       "HomeGenie.LevelMemory": "Dema ku tê guheztin asta ronahiya paşîn bi bîr bînin",
       "HomeGenie.LevelMemory.SimulateOnly": "Tenê simulasyon bikin"
     },
+    "26": {
+      "Title": "Roniyên rengîn",
+      "Description": "Mînak entegrasyona roniyên Philips Hue bi karanîna HTTP API (V1). Bikarhênera xwerû ya ku bi pirê ve girêdide \"newdeveloper\" e û divê ew jixwe were çalak kirin.",
+      "ConfigureOptions.BridgeAddress": "Navnîşana IP ya Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Navê bikarhêner",
+      "ConfigureOptions.LightsCount": "Hejmara çirayan"
+    },
     "34": {
       "Title": "Rewşa hewayê",
       "Description": "Agahdariya hewa û pêşbîniyê ji karûbarê Nexşeya hewaya vekirî. Ji bo çalakkirina vê widgetê mifteyek API-ya derbasdar têkevin. Rêbernameyên li https://openweathermap.org/appid bişopînin da ku mifteyek API-ya belaş bistînin.",
       "ConfigureOptions.Location": "Navê bajêr",
-      "ConfigureOptions.Language": "Ziman (mînak. EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval": "Navbera nûvekirinê (deqe)",
+      "ConfigureOptions.Language": "Ziman (mînak EN, IT, FR, DE, ...)",
+      "ConfigureOptions.UpdateInterval": "Navbera nûvekirinê (deqeyan)",
       "ConfigureOptions.ApiKey": "Bişkojka API-ya OpenWeatherMap (APPID)"
     },
     "77": {
@@ -178,21 +185,31 @@
     },
     "82": {
       "Title": "Mode Saving Energy",
-      "Description": "Asta ronahiyê li jêr rêjeyek mîhengkirî bihêlin.",
+      "Description": "Asta ronahiyê li jêr rêjeya mîhengkirî bihêlin.",
       "EnergyManagement.EnergySavingLevel": "Asta ronahiyê ya herî zêde (%)",
       "EnergyManagement.EnergySavingMode": "Bikêrkirin"
+    },
+    "88": {
+      "Title": "Kamera IP-ya gelemperî",
+      "Description": "Ji kamerayek IP-ê vekêşana wêneyê nîşan bide / rêve bike.",
+      "IpCamera.ImageURL": "URL-ya API-ya wêneya kamerayê (belgeyên kameraya xwe bibînin)",
+      "IpCamera.Username": "Navê bikarhêner (vebijarkî)",
+      "IpCamera.Password": "Şîfre (vebijarkî)",
+      "Widget.Config.fps": "Frames per second",
+      "Widget.Config.size": "Mezinahiya widgetê"
     },
     "90": {
       "Title": "Sîstema Alarm Ewlekariyê",
       "Description": "Sensor û amûrên din bikar bînin ku pergala alarmê ya ewlehiyê bicîh bikin.",
       "HomeGenie.SecurityAlarm": "Wekî alarm / strobe bikar bînin",
+      "HomeGenie.SecurityTriggerHome": "Di heman demê de dema ku Xanî çekdar dike jî dest pê dike",
       "HomeGenie.SecuritySensor": "Wekî senzorê ewlehiyê bikar bînin",
       "ConfigureOptions.Email.Recipients": "Ji bo agahdariya alarmê navnîşa e-nameyên wergiran ji hev veqetand",
       "ConfigureOptions.System.ArmDelay": "Derengiya milê (çirkeyan)",
-      "ConfigureOptions.System.SirenStartTime": "Derengiya Destpêkê ya Sîrenan (çirkeyan)",
+      "ConfigureOptions.System.SirenStartTime": "Derengiya Destpêkirina Sîrenan (çirk)",
       "ConfigureOptions.System.SirenMaxTime": "Dema herî zêde ya sîrenan (çirk, 0 = bêdawî)",
       "ConfigureOptions.Trigger.ArmedProgram": "Bername ku dema çekdar bimeşe",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Bername ku dema bêçek were xebitandin",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Bername ku gava bêçek were xebitandin",
       "ConfigureOptions.Trigger.TriggeredProgram": "Bername ji bo xebitandinê dema ku were destpêkirin"
     },
     "95": {
@@ -200,10 +217,14 @@
       "Description": "Çalakiya cîhazê tomar bikin.",
       "EventsLogger.EnableLogging": "Bikêrkirin"
     },
+    "111": {
+      "Title": "Veavakirina Client",
+      "Description": "API-ê ji bo birêvebirina profîlên mîhengê yên xerîdar ên ku ji bo hilanîna mîhengên UI û dashboardê têne bikar anîn bicîh tîne."
+    },
     "400": {
       "Title": "Demo Modulên Virtual",
       "Description": "Bi destan nirxên cîhaza virtual saz bikin.",
-      "Sensor.Temperature": "Nirxa germê",
+      "Sensor.Temperature": "Nirxa germahiyê",
       "Sensor.Luminance": "Nirxa ronahiyê",
       "Sensor.MotionDetect": "Rewşa tespîtkirina tevgerê",
       "Status.Battery": "Asta pîlê",
@@ -224,7 +245,7 @@
       "Simulator.Sensor.Temperature": "Sensorê germê",
       "Simulator.Sensor.Humidity": "Sensorê humidity",
       "Simulator.Sensor.Luminance": "Sensor ronahiyê",
-      "Simulator.Meter.Watts": "Watts metre",
+      "Simulator.Meter.Watts": "Metre watts",
       "Simulator.Meter.Watts.Max": "Hêza Max Watt",
       "Simulator.Sensor.DataFrequency": "Simulator frekansa derdixe"
     },
@@ -232,10 +253,20 @@
       "Title": "Remote Control",
       "Description": "Amûrê bi karanîna dûr (IR an RF) kontrol bikin.",
       "HomeGenie.RemoteControl.Enable": "Bikêrkirin",
-      "HomeGenie.RemoteControl.IRCode": "Bişkojka veguhertinê",
+      "HomeGenie.RemoteControl.IRCode": "Bişkojka bişkojka",
       "ConfigureOptions.DimmerUpCode": "Bişkoka zêdekirina ronahiyê",
       "ConfigureOptions.DimmerDownCode": "Bişkoka kêmkirina ronahiyê",
       "ConfigureOptions.DimmerInterval": "Pêngava tarîbûnê"
+    },
+    "142": {
+      "Title": "Hesabê E-Mail",
+      "Description": "Agahdariya hesabê e-nameyê ku ji hêla bernameyên pergalê ve ji bo şandina / wergirtina e-nameyê têne bikar anîn hilîne.",
+      "ConfigureOptions.Email.Sender": "1. Navnîşana E-Mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Navnîşana servera SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Navê bikarhêner SMTP (vebijarkî)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Şîfreya SMTP (vebijarkî)",
+      "ConfigureOptions.Email.SmtpPort": "5. port server SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Pêşkêşkara SMTP SSL bikar tîne"
     },
     "145": {
       "Title": "Device Smart",
@@ -244,12 +275,19 @@
       "HomeGenie.SmartLights.OnMotionDetect": "Ji hêla sensor ve tê kontrol kirin (vebijarkî)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ji hêla sensora ronahiyê ve tê kontrol kirin (vebijarkî)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Piştî dema neçalaktiyê (çirkeyan) veqete",
-      "HomeGenie.SmartLights.MinLuminance": "Ger ronahiya li jêr e çalak bike:"
+      "HomeGenie.SmartLights.MinLuminance": "Ger ronahî li jêr be çalak bike:"
     },
     "8": {
       "Title": "Senaryoya Colors Sunrise",
       "Description": "Mînak senaryoya \"Sunrise\" ji bo guheztina rengê roniyên LED.",
       "Scenarios.SunriseColors": "Girêdana senaryoya Sunrise Colors"
+    },
+    "910": {
+      "Title": "Object detection",
+      "Description": "Tiştan bi karanîna modelek YOLO11-a pêş-perwerdekirî kifş bikin.",
+      "ML.ObjectDetection": "Vedîtina tiştan çalak bike",
+      "ML.ObjectDetection.TriggerDetect": "Lîsteya ji hev veqetandî ya tiştên (bi Îngilîzî) ku dê alarmê derxînin. (mînak: pisîk, kûçik, kes, çente, valîz)",
+      "ConfigureOptions.Yolo.ModelPath": "Rêya pelê modela YOLO11 (.onnx)"
     }
   }
 }

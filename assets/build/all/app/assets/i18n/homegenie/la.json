@@ -55,9 +55,9 @@
   "cronwizard_end_time": "Tempus finis",
   "cronwizard_minutes": "Minuta",
   "cronwizard_hours": "Horae",
-  "cronwizard_days": "Dierum",
+  "cronwizard_days": "diebus",
   "cronwizard_months": "Menses",
-  "cronwizard_minuteselect_everyminute": "Omni momento",
+  "cronwizard_minuteselect_everyminute": "Singulis minutis",
   "cronwizard_minuteselect_everynthminute": "Omne datum minuta",
   "cronwizard_minuteselect_selectedminutes": "Electus minuta",
   "cronwizard_hourselect_everyhour": "Omnis hora",
@@ -118,8 +118,8 @@
   "program_status_broken": "Fracti",
   "program_status_compile": "Compile",
   "automation_programming_guide": "Programming dux'",
-  "tap_to_disable": "ICTUS ut disable",
-  "tap_to_enable": "ICTUS ut enable",
+  "tap_to_disable": "Click inactivandi",
+  "tap_to_enable": "Click to enable",
   "program_data": "Programma notitia",
   "visual_code": "Visual code",
   "generated_code": "Code generatae",
@@ -139,6 +139,13 @@
       "Description": "Copia et revocato obscuriore gradu ultimo.",
       "HomeGenie.LevelMemory": "Revocare ultimo gradu cum switched super",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulate solum"
+    },
+    "26": {
+      "Title": "Lumina color",
+      "Description": "Exemplum Philippi Hue in lumina integrationis utens HTTP API (V1). Usor default ad pontem coniungere est \"newdeveloper\" et iam parari debet.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP oratio",
+      "ConfigureOptions.BridgeUsername": "Username",
+      "ConfigureOptions.LightsCount": "Luminum numerus"
     },
     "34": {
       "Title": "Tempestas Praedictio",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Max lux gradu (%)",
       "EnergyManagement.EnergySavingMode": "Admitte"
     },
+    "88": {
+      "Title": "IP camera",
+      "Description": "Ostentationem/itinere imaginem pascere ab IP camera.",
+      "IpCamera.ImageURL": "Camera imago API URL (videatur camera soUicitudo)",
+      "IpCamera.Username": "Usoris (libitum)",
+      "IpCamera.Password": "Password (libitum)",
+      "Widget.Config.fps": "Tabulae per secundam",
+      "Widget.Config.size": "Widget magnitudine"
+    },
     "90": {
       "Title": "Securitatis metum Ratio",
       "Description": "Utere sensoriis et aliis machinis ad systema terrorem securitatis efficiendum.",
       "HomeGenie.SecurityAlarm": "Utere ad terrorem / strobe",
+      "HomeGenie.SecurityTriggerHome": "Etiam triggers cum armatis Home",
       "HomeGenie.SecuritySensor": "Utere ut securitatem sensorem",
       "ConfigureOptions.Email.Recipients": "Comma separata album recipientium Al-ad terrorem notificationes",
       "ConfigureOptions.System.ArmDelay": "Brachium mora (seconds)",
@@ -199,6 +216,10 @@
       "Title": "Events logging",
       "Description": "Record fabrica actio.",
       "EventsLogger.EnableLogging": "Admitte"
+    },
+    "111": {
+      "Title": "Configuratione clientis",
+      "Description": "Effectus API ad administrandi huius figurae figuram quae UI et ashboardas occasus condere solent."
     },
     "400": {
       "Title": "Virtual Modules Demo",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Splendor decrementum button",
       "ConfigureOptions.DimmerInterval": "Hebetare gradum"
     },
+    "142": {
+      "Title": "E-Mail rationem",
+      "Description": "Stores e-mail rationem info adhibuit programmata systematis mittendi/acceptio emails.",
+      "ConfigureOptions.Email.Sender": "1. E-Mail oratio",
+      "ConfigureOptions.Email.SmtpServer": "2. ESMTP servo oratio",
+      "ConfigureOptions.Email.SmtpUserName": "3. ESMTP username (libitum)",
+      "ConfigureOptions.Email.SmtpPassword": "4. ESMTP password (libitum)",
+      "ConfigureOptions.Email.SmtpPort": "5. ESMTP servo portum",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. ESMTP servo usum SSL"
+    },
     "145": {
       "Title": "Dolor Fabrica",
       "Description": "Conversus in/off fabrica secundum motum detectionis et lucis ambientis.",
@@ -250,6 +281,13 @@
       "Title": "Ortus Colores varius",
       "Description": "Exemplum \"Ortus\" missionis pro colore mutato DUCTUS lumina.",
       "Scenarios.SunriseColors": "Link to Ortus Colores sem"
+    },
+    "910": {
+      "Title": "Object deprehensio",
+      "Description": "Objects deprehendere utens exemplar praecomprehensum YOLO11.",
+      "ML.ObjectDetection": "Admitte obiecti deprehensio",
+      "ML.ObjectDetection.TriggerDetect": "Comma-separatis rerum indice (anglice) id terrorem trigger. (eg: cattus, canis, persona, mantica, vidulus)",
+      "ConfigureOptions.Yolo.ModelPath": "Iter YOLO11 exemplar lima (.onnx)"
     }
   }
 }

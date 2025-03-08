@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "කාල පරාසයක් අවසානයේ",
   "cronwizard_action_custom_script": "අභිරුචි ක්‍රියා ස්ක්‍රිප්ට්",
   "cronwizard_action_no_action": "ක්‍රියාමාර්ගයක් නැත",
-  "cronwizard_action_schedule_variable_hint": "ක්‍රෝන් ප්‍රකාශනවල <span class=\"notranslate color-primary\">@ {{name}}</span> විචල්‍යයක් ලෙස භාවිතා කරන්න හෝ මෙම සිදුවීම යොමු කිරීමට ස්වයංක්‍රීයකරණ වැඩසටහන් වල <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> භාවිතා කරන්න.",
+  "cronwizard_action_schedule_variable_hint": "ක්‍රෝන් ප්‍රකාශනවල <span class=\"notranslate color-primary\">@ {{name}}</span> විචල්‍යයක් ලෙස භාවිතා කරන්න හෝ මෙම සිදුවීම යොමු කිරීමට ස්වයංක්‍රීයකරණ වැඩසටහන්වල <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> භාවිතා කරන්න.",
   "scheduler_preset_action_command_turn_on": "ක්රියාත්මක කරන්න",
   "scheduler_preset_action_command_turn_off": "නිවා දමන්න",
   "scheduler_preset_action_command_set_level": "මට්ටම සකසන්න",
@@ -118,8 +118,8 @@
   "program_status_broken": "කැඩුණු",
   "program_status_compile": "සම්පාදනය කරන්න",
   "automation_programming_guide": "ක්‍රමලේඛන මාර්ගෝපදේශය'",
-  "tap_to_disable": "අබල කිරීමට තට්ටු කරන්න",
-  "tap_to_enable": "සබල කිරීමට තට්ටු කරන්න",
+  "tap_to_disable": "අබල කිරීමට ක්ලික් කරන්න",
+  "tap_to_enable": "සබල කිරීමට ක්ලික් කරන්න",
   "program_data": "වැඩසටහන් දත්ත",
   "visual_code": "දෘශ්‍ය කේතය",
   "generated_code": "ජනනය කළ කේතය",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "ක්‍රියාත්මක කළ විට අවසාන ආලෝක මට්ටම සිහිපත් කරන්න",
       "HomeGenie.LevelMemory.SimulateOnly": "අනුකරණය පමණි"
     },
+    "26": {
+      "Title": "වර්ණ ලයිට්",
+      "Description": "උදාහරණය HTTP API (V1) භාවිතයෙන් Philips Hue ආලෝක ඒකාබද්ධ කිරීම. පාලමට සම්බන්ධ වීමට පෙරනිමි පරිශීලකයා \"newdeveloper\" වන අතර එය දැනටමත් සක්‍රීය කර තිබිය යුතුය.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP ලිපිනය",
+      "ConfigureOptions.BridgeUsername": "පරිශීලක නාමය",
+      "ConfigureOptions.LightsCount": "ආලෝක ගණන"
+    },
     "34": {
       "Title": "කාලගුණ අනාවැකිය",
       "Description": "විවෘත කාලගුණ සිතියම් සේවාවෙන් කාලගුණ සහ පුරෝකථන තොරතුරු. මෙම විජට් එක සක්‍රිය කිරීමට වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://openweathermap.org/appid හි උපදෙස් අනුගමනය කරන්න.",
@@ -155,7 +162,7 @@
       "ConfigureOptions.ClientId": "සේවාදායක හැඳුනුම්පත.",
       "ConfigureOptions.ServerAddress": "සේවාදායක ලිපිනය",
       "ConfigureOptions.ServerPort": "සේවාදායක තොට",
-      "ConfigureOptions.Encryption": "අන්තයේ සිට අගට සංකේතනය සබල කරන්න (E2EE)",
+      "ConfigureOptions.Encryption": "අන්තයේ සිට අන්තයට සංකේතනය සබල කරන්න (E2EE)",
       "ConfigureOptions.WebSockets": "වෙබ්සොකට් භාවිතා කරන්න",
       "ConfigureOptions.TLS": "TLS/SSL සබල කරන්න",
       "ConfigureOptions.Username": "පරිශීලක නාමය (විකල්ප)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "උපරිම ආලෝක මට්ටම (%)",
       "EnergyManagement.EnergySavingMode": "සක්‍රීය කරන්න"
     },
+    "88": {
+      "Title": "සාමාන්‍ය IP කැමරාව",
+      "Description": "IP කැමරාවකින් රූප සංග්‍රහය සංදර්ශනය/මාර්ගගත කරන්න.",
+      "IpCamera.ImageURL": "කැමරා රූප API URL (ඔබගේ කැමරා ලේඛන බලන්න)",
+      "IpCamera.Username": "පරිශීලක නාමය (විකල්ප)",
+      "IpCamera.Password": "මුරපදය (විකල්ප)",
+      "Widget.Config.fps": "තත්පරයට රාමු",
+      "Widget.Config.size": "විජට් ප්‍රමාණය"
+    },
     "90": {
       "Title": "ආරක්ෂක අනතුරු ඇඟවීමේ පද්ධතිය",
       "Description": "ආරක්ෂක අනතුරු ඇඟවීමේ පද්ධතියක් ක්‍රියාත්මක කිරීම සඳහා සංවේදක සහ අනෙකුත් උපාංග භාවිතා කරන්න.",
       "HomeGenie.SecurityAlarm": "අනතුරු ඇඟවීමක්/ස්ට්‍රෝබ් එකක් ලෙස භාවිතා කරන්න",
+      "HomeGenie.SecurityTriggerHome": "සන්නද්ධ වූ විට Home ද ක්‍රියාරම්භ කරයි",
       "HomeGenie.SecuritySensor": "ආරක්ෂක සංවේදකයක් ලෙස භාවිතා කරන්න",
       "ConfigureOptions.Email.Recipients": "අනතුරු ඇඟවීමේ දැනුම්දීම් සඳහා කොමාවෙන් වෙන් කරන ලද ලබන්නන්ගේ විද්‍යුත් තැපැල් ලැයිස්තුව",
       "ConfigureOptions.System.ArmDelay": "බාහු ප්‍රමාදය (තත්පර)",
@@ -199,6 +216,10 @@
       "Title": "සිදුවීම් ලොග් කිරීම",
       "Description": "උපාංග ක්‍රියාකාරකම් වාර්තා කරන්න.",
       "EventsLogger.EnableLogging": "සක්‍රීය කරන්න"
+    },
+    "111": {
+      "Title": "සේවාදායක වින්‍යාසය",
+      "Description": "UI සහ උපකරණ පුවරු සැකසුම් ගබඩා කිරීමට භාවිතා කරන සේවාලාභියාගේ වින්‍යාස පැතිකඩ කළමනාකරණය කිරීම සඳහා API ක්‍රියාත්මක කරයි."
     },
     "400": {
       "Title": "අතථ්‍ය මොඩියුල නිරූපණය",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "දීප්තිය අඩු කිරීමේ බොත්තම",
       "ConfigureOptions.DimmerInterval": "අඳුරු කිරීමේ පියවර"
     },
+    "142": {
+      "Title": "විද්‍යුත් තැපැල් ගිණුම",
+      "Description": "පද්ධති වැඩසටහන් මඟින් විද්‍යුත් තැපැල් යැවීමට/ලැබීමට භාවිතා කරන විද්‍යුත් තැපැල් ගිණුම් තොරතුරු ගබඩා කරයි.",
+      "ConfigureOptions.Email.Sender": "1. විද්‍යුත් තැපැල් ලිපිනය",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP සේවාදායක ලිපිනය",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP පරිශීලක නාමය (විකල්ප)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP මුරපදය (විකල්ප)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP සේවාදායක වරාය",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP සේවාදායකය SSL භාවිතා කරයි"
+    },
     "145": {
       "Title": "ස්මාර්ට් උපාංගය",
       "Description": "චලන අනාවරණය සහ අවට ආලෝකය මත පදනම්ව උපාංගය සක්‍රිය/අක්‍රිය කරන්න.",
@@ -250,6 +281,13 @@
       "Title": "හිරු උදාව වර්ණ දර්ශනය",
       "Description": "වර්ණ වෙනස් කරන LED ලාම්පු සඳහා \"හිරු උදාව\" අවස්ථාවකට උදාහරණයක්.",
       "Scenarios.SunriseColors": "සන්රයිස් වර්ණ දර්ශනයට සබැඳිය"
+    },
+    "910": {
+      "Title": "වස්තු අනාවරණය",
+      "Description": "පෙර පුහුණු කළ YOLO11 ආකෘතියක් භාවිතයෙන් වස්තූන් හඳුනා ගන්න.",
+      "ML.ObjectDetection": "වස්තු අනාවරණය සබල කරන්න",
+      "ML.ObjectDetection.TriggerDetect": "අනතුරු ඇඟවීම අවුලුවන දේවල් (ඉංග්‍රීසියෙන්) කොමාවෙන් වෙන් කරන ලද ලැයිස්තුව. (උදා: පූසා, බල්ලා, පුද්ගලයා, බෑගය, ගමන් මල්ල)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ (.onnx) මාර්ගය"
     }
   }
 }

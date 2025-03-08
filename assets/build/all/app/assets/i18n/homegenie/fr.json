@@ -118,8 +118,8 @@
   "program_status_broken": "Cassé",
   "program_status_compile": "Compiler",
   "automation_programming_guide": "Guide de programmation",
-  "tap_to_disable": "Appuyez pour désactiver",
-  "tap_to_enable": "Appuyez pour activer",
+  "tap_to_disable": "Cliquez pour désactiver",
+  "tap_to_enable": "Cliquez pour activer",
   "program_data": "Données du programme",
   "visual_code": "Code visuel",
   "generated_code": "Code généré",
@@ -139,6 +139,13 @@
       "Description": "Stocker et rappeler le dernier niveau de gradation.",
       "HomeGenie.LevelMemory": "Rappelle le dernier niveau d'éclairage lors de l'allumage",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuler uniquement"
+    },
+    "26": {
+      "Title": "Lumières colorées",
+      "Description": "Exemple d'intégration des éclairages Philips Hue à l'aide de l'API HTTP (V1). L'utilisateur par défaut pour se connecter au pont est « newdeveloper » et il doit déjà être activé.",
+      "ConfigureOptions.BridgeAddress": "Adresse IP du pont Philips Hue (V1)",
+      "ConfigureOptions.BridgeUsername": "Nom d'utilisateur",
+      "ConfigureOptions.LightsCount": "Nombre de lumières"
     },
     "34": {
       "Title": "Prévisions météorologiques",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Niveau de lumière maximal (%)",
       "EnergyManagement.EnergySavingMode": "Activer"
     },
+    "88": {
+      "Title": "Caméra IP générique",
+      "Description": "Afficher/acheminer le flux d'images d'une caméra IP.",
+      "IpCamera.ImageURL": "URL de l'API d'image de la caméra (consultez la documentation de votre caméra)",
+      "IpCamera.Username": "Nom d'utilisateur (facultatif)",
+      "IpCamera.Password": "Mot de passe (facultatif)",
+      "Widget.Config.fps": "Images par seconde",
+      "Widget.Config.size": "Taille du widget"
+    },
     "90": {
       "Title": "Système d'alarme de sécurité",
       "Description": "Utilisez des capteurs et d’autres dispositifs pour mettre en œuvre un système d’alarme de sécurité.",
       "HomeGenie.SecurityAlarm": "Utiliser comme alarme/stroboscope",
+      "HomeGenie.SecurityTriggerHome": "Se déclenche également lorsqu'il est armé Accueil",
       "HomeGenie.SecuritySensor": "Utiliser comme capteur de sécurité",
       "ConfigureOptions.Email.Recipients": "Liste séparée par des virgules des e-mails des destinataires pour les notifications d'alarme",
       "ConfigureOptions.System.ArmDelay": "Délai d'armement (secondes)",
@@ -199,6 +216,10 @@
       "Title": "Enregistrement des événements",
       "Description": "Enregistrer l'activité de l'appareil.",
       "EventsLogger.EnableLogging": "Activer"
+    },
+    "111": {
+      "Title": "Configuration du client",
+      "Description": "Implémente l'API pour gérer les profils de configuration du client qui sont utilisés pour stocker les paramètres de l'interface utilisateur et des tableaux de bord."
     },
     "400": {
       "Title": "Démo des modules virtuels",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Bouton de diminution de la luminosité",
       "ConfigureOptions.DimmerInterval": "Étape de gradation"
     },
+    "142": {
+      "Title": "Compte de messagerie",
+      "Description": "Stocke les informations de compte de messagerie utilisées par les programmes système pour envoyer/recevoir des e-mails.",
+      "ConfigureOptions.Email.Sender": "1. Adresse e-mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresse du serveur SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nom d'utilisateur SMTP (facultatif)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Mot de passe SMTP (facultatif)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port du serveur SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Le serveur SMTP utilise SSL"
+    },
     "145": {
       "Title": "Appareil intelligent",
       "Description": "Allumer/éteindre l'appareil en fonction de la détection de mouvement et de la lumière ambiante.",
@@ -250,6 +281,13 @@
       "Title": "Scénario de couleurs du lever du soleil",
       "Description": "Exemple de scénario « Lever de soleil » pour les lumières LED à changement de couleur.",
       "Scenarios.SunriseColors": "Lien vers le scénario Sunrise Colors"
+    },
+    "910": {
+      "Title": "Détection d'objets",
+      "Description": "Détectez des objets à l'aide d'un modèle YOLO11 pré-entraîné.",
+      "ML.ObjectDetection": "Activer la détection d'objets",
+      "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex : chat, chien, personne, sac à dos, valise)",
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
     }
   }
 }

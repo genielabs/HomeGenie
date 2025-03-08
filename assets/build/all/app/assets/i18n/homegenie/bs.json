@@ -2,7 +2,7 @@
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "Dobrodošli u HomeGenie!",
   "welcome_subtitle": "Programabilna automatska inteligencija",
-  "not_configured_yet": "Sistem još nije konfigurisan. Ovaj čarobnjak za podešavanje će vam pomoći da pokrenete svoj sistem i pokrenete ga u nekoliko koraka.",
+  "not_configured_yet": "Sistem još nije konfigurisan. Ovaj čarobnjak za podešavanje će vam pomoći da pokrenete sistem i pokrenete ga u nekoliko koraka.",
   "system_config_start_with_base_and_backup": "Vraćanje iz rezervne kopije",
   "system_config_start_with_default_setup": "Default setup",
   "system_config_include_demo": "Uključite demo sa simuliranom aktivnošću uređaja",
@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Isključeno",
   "scheduler_preset_action_config_mode_heat": "Toplota",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomičnost toplote",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomija toplote",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Cool ekonomičnost",
   "scheduler_preset_action_program_run": "Pokreni program",
@@ -105,7 +105,7 @@
   "stop_program": "Zaustavi program",
   "run_program": "Pokreni program",
   "enable_to_run_program": "Omogućite program da biste ga pokrenuli",
-  "program_status_added": "Dodano",
+  "program_status_added": "Dodato",
   "program_status_idle": "Idle",
   "program_status_setup": "Setup",
   "program_status_running": "Trčanje",
@@ -118,8 +118,8 @@
   "program_status_broken": "Slomljena",
   "program_status_compile": "Compile",
   "automation_programming_guide": "Vodič za programiranje'",
-  "tap_to_disable": "Dodirnite da onemogućite",
-  "tap_to_enable": "Dodirnite da omogućite",
+  "tap_to_disable": "Kliknite da onemogućite",
+  "tap_to_enable": "Kliknite da biste omogućili",
   "program_data": "Programski podaci",
   "visual_code": "Vizuelni kod",
   "generated_code": "Generisani kod",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "Prisjetite se posljednjeg nivoa svjetla kada je uključen",
       "HomeGenie.LevelMemory.SimulateOnly": "Samo simulirati"
     },
+    "26": {
+      "Title": "Svetla u boji",
+      "Description": "Primjer integracije Philips Hue svjetla pomoću HTTP API-ja (V1). Zadani korisnik za povezivanje na most je \"newdeveloper\" i on bi već trebao biti omogućen.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adresa",
+      "ConfigureOptions.BridgeUsername": "Korisničko ime",
+      "ConfigureOptions.LightsCount": "Broj svjetala"
+    },
     "34": {
       "Title": "Vremenska prognoza",
       "Description": "Informacije o vremenu i prognozi iz usluge Open Weather Map. Da biste aktivirali ovaj widget, unesite važeći API ključ. Slijedite upute na https://openweathermap.org/appid da dobijete besplatni API ključ.",
@@ -150,7 +157,7 @@
     },
     "77": {
       "Title": "Mrežni MQTT",
-      "Description": "Povežite se s MQTT brokerom kako biste koristili aplikaciju HomeGenie Panel s bilo kojeg mjesta putem interneta ili za međusobno povezivanje HomeGenie uređaja na istoj MQTT mreži.",
+      "Description": "Povežite se s MQTT brokerom da biste koristili aplikaciju HomeGenie Panel s bilo kojeg mjesta putem interneta ili za međusobno povezivanje HomeGenie uređaja na istoj MQTT mreži.",
       "MQTT.SensorPublish": "Objavite događaje koje emituje ovaj modul",
       "ConfigureOptions.ClientId": "Id. klijenta.",
       "ConfigureOptions.ServerAddress": "Adresa servera",
@@ -160,11 +167,11 @@
       "ConfigureOptions.TLS": "Omogućite TLS/SSL",
       "ConfigureOptions.Username": "Korisničko ime (opcionalno)",
       "ConfigureOptions.Password": "Lozinka (opcionalno)",
-      "ConfigureOptions.ImportExternal": "Uvoz eksternih modula"
+      "ConfigureOptions.ImportExternal": "Uvezite eksterne module"
     },
     "78": {
       "Title": "Smart Thermostat",
-      "Description": "Koristite bilo koji senzor temperature i pametni prekidač za implementaciju funkcionalnosti termostata.",
+      "Description": "Koristite bilo koji temperaturni senzor i pametni prekidač za implementaciju funkcionalnosti termostata.",
       "VirtualThermostat.TemperatureModule": "Senzor temperature",
       "VirtualThermostat.HeatingSwitchModule": "Prekidač za grijanje",
       "VirtualThermostat.CoolingSwitchModule": "Prekidač za hlađenje",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksimalni nivo svetlosti (%)",
       "EnergyManagement.EnergySavingMode": "Omogući"
     },
+    "88": {
+      "Title": "Generička IP kamera",
+      "Description": "Prikažite/usmjerite feed slike sa IP kamere.",
+      "IpCamera.ImageURL": "URL API slike kamere (pogledajte dokumente vaše kamere)",
+      "IpCamera.Username": "Korisničko ime (opcionalno)",
+      "IpCamera.Password": "Lozinka (opcionalno)",
+      "Widget.Config.fps": "Broj sličica u sekundi",
+      "Widget.Config.size": "Veličina vidžeta"
+    },
     "90": {
       "Title": "Sigurnosni alarmni sistem",
       "Description": "Koristite senzore i druge uređaje za implementaciju sigurnosnog alarmnog sistema.",
       "HomeGenie.SecurityAlarm": "Koristi se kao alarm/strob",
+      "HomeGenie.SecurityTriggerHome": "Također se aktivira kada je naoružan Dom",
       "HomeGenie.SecuritySensor": "Koristi se kao sigurnosni senzor",
       "ConfigureOptions.Email.Recipients": "Lista e-poruka primalaca odvojenih zarezima za obaveštenja o alarmu",
       "ConfigureOptions.System.ArmDelay": "Kašnjenje aktiviranja (sekunde)",
@@ -200,10 +217,14 @@
       "Description": "Snimite aktivnost uređaja.",
       "EventsLogger.EnableLogging": "Omogući"
     },
+    "111": {
+      "Title": "Konfiguracija klijenta",
+      "Description": "Implementira API za upravljanje konfiguracijskim profilima klijenta koji se koriste za pohranu postavki korisničkog sučelja i nadzornih ploča."
+    },
     "400": {
       "Title": "Demo virtuelnih modula",
       "Description": "Ručno postavite vrijednosti virtuelnog uređaja.",
-      "Sensor.Temperature": "Temperaturna vrijednost",
+      "Sensor.Temperature": "Vrijednost temperature",
       "Sensor.Luminance": "Vrijednost osvjetljenja",
       "Sensor.MotionDetect": "Status detekcije pokreta",
       "Status.Battery": "Nivo baterije",
@@ -237,12 +258,22 @@
       "ConfigureOptions.DimmerDownCode": "Dugme za smanjenje svjetline",
       "ConfigureOptions.DimmerInterval": "Korak zatamnjivanja"
     },
+    "142": {
+      "Title": "E-mail nalog",
+      "Description": "Pohranjuje informacije o nalogu e-pošte koje koriste sistemski programi za slanje/primanje e-pošte.",
+      "ConfigureOptions.Email.Sender": "1. E-mail adresa",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresa SMTP servera",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP korisničko ime (opciono)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP lozinka (opciono)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port SMTP servera",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP server koristi SSL"
+    },
     "145": {
       "Title": "Smart Device",
       "Description": "Uključite/isključite uređaj na osnovu detekcije pokreta i ambijentalnog svjetla.",
       "HomeGenie.SmartLights.Enable": "Omogućite 'Pametni uređaj'",
       "HomeGenie.SmartLights.OnMotionDetect": "Kontrolisano senzorom (opciono)",
-      "HomeGenie.SmartLights.CheckLuminosity": "Kontrolirano svjetlosnim senzorom (opcionalno)",
+      "HomeGenie.SmartLights.CheckLuminosity": "Kontrolirano svjetlosnim senzorom (opciono)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Isključi nakon isteka neaktivnosti (sekunde)",
       "HomeGenie.SmartLights.MinLuminance": "Uključite ako je osvjetljenje ispod:"
     },
@@ -250,6 +281,13 @@
       "Title": "Sunrise Colors Scenario",
       "Description": "Primjer scenarija \"izlaska sunca\" za LED svjetla koja mijenjaju boju.",
       "Scenarios.SunriseColors": "Veza do scenarija Sunrise Colors"
+    },
+    "910": {
+      "Title": "Detekcija objekata",
+      "Description": "Otkrijte objekte koristeći prethodno obučeni model YOLO11.",
+      "ML.ObjectDetection": "Omogućite otkrivanje objekata",
+      "ML.ObjectDetection.TriggerDetect": "Lista stvari razdvojenih zarezima (na engleskom) koje će pokrenuti alarm. (npr. mačka, pas, osoba, ruksak, kofer)",
+      "ConfigureOptions.Yolo.ModelPath": "Putanja datoteke modela YOLO11 (.onnx)"
     }
   }
 }

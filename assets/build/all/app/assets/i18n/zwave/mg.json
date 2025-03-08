@@ -18,7 +18,7 @@
   "manufacturer_specific": "Manufacturer manokana",
   "routing_info": "Routing Info",
   "association_groups": "Vondrona fikambanana",
-  "association_description": "Ity fitaovana ity dia mandefa tatitra any amin'ireo nodes tafiditra ao amin'ny vondrona fikambanana. Mba hahazoana tatitra avy amin'ity fitaovana ity, ampidiro ny node 1 (ny controller) ao amin'ny vondrona fikambanana.",
+  "association_description": "Ity fitaovana ity dia mandefa tatitra any amin'ireo nodes tafiditra ao amin'ny vondrona fikambanana. Mba hahazoana tatitra avy amin'ity fitaovana ity dia ampidiro ny node 1 (ny controller) ao amin'ny vondrona fikambanana.",
   "associated_nodes": "Nodes mifandray",
   "enter_node_number": "Ampidiro ny laharan'ny node",
   "configuration_parameters": "Paramètre config",

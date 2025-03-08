@@ -7,7 +7,7 @@
   "enabling_node_exclusion": "Mendayakan mod pengecualian nod, sila tunggu...",
   "inclusion_message": "Tekan butang pada peranti yang ingin anda tambahkan pada rangkaian ini.",
   "exclusion_message": "Tekan butang pada peranti yang ingin anda alih keluar daripada rangkaian ini.",
-  "task_duration_notice": "Tugasan ini mungkin mengambil masa sehingga <strong>{{timeout}}</strong> saat untuk diselesaikan.",
+  "task_duration_notice": "Tugasan ini mungkin mengambil masa sehingga saat <strong>{{timeout}}</strong> untuk diselesaikan.",
   "adding_node": "Menambah <strong class=\"color-accent\">{{node}}</strong> peranti , sila tunggu...",
   "removing_node": "Mengalih keluar <strong class=\"color-accent\">{{node}}</strong> peranti , sila tunggu...",
   "node_added": "<strong class=\"color-accent\">{{node}}</strong> peranti berjaya ditambahkan",

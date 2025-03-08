@@ -118,8 +118,8 @@
   "program_status_broken": "고장난",
   "program_status_compile": "엮다",
   "automation_programming_guide": "프로그래밍 가이드'",
-  "tap_to_disable": "비활성화하려면 탭하세요",
-  "tap_to_enable": "탭하여 활성화하세요",
+  "tap_to_disable": "비활성화하려면 클릭하세요",
+  "tap_to_enable": "클릭하여 활성화하세요",
   "program_data": "프로그램 데이터",
   "visual_code": "시각적 코드",
   "generated_code": "생성된 코드",
@@ -137,8 +137,15 @@
     "16": {
       "Title": "레벨 메모리",
       "Description": "마지막 디머 레벨을 저장하고 불러옵니다.",
-      "HomeGenie.LevelMemory": "전원을 켰을 때 마지막 조명 레벨을 불러옵니다.",
+      "HomeGenie.LevelMemory": "켜졌을 때 마지막 조명 레벨을 불러옵니다.",
       "HomeGenie.LevelMemory.SimulateOnly": "시뮬레이션만"
+    },
+    "26": {
+      "Title": "컬러 조명",
+      "Description": "HTTP API(V1)를 사용한 Philips Hue 조명 통합의 예. 브릿지에 연결하는 기본 사용자는 \"newdeveloper\"이며 이미 활성화되어 있어야 합니다.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge(V1) IP 주소",
+      "ConfigureOptions.BridgeUsername": "사용자 이름",
+      "ConfigureOptions.LightsCount": "조명의 개수"
     },
     "34": {
       "Title": "날씨 예보",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "최대 조도(%)",
       "EnergyManagement.EnergySavingMode": "할 수 있게 하다"
     },
+    "88": {
+      "Title": "일반 IP 카메라",
+      "Description": "IP 카메라에서 이미지 피드를 표시/라우팅합니다.",
+      "IpCamera.ImageURL": "카메라 이미지 API URL(카메라 문서 참조)",
+      "IpCamera.Username": "사용자 이름(선택사항)",
+      "IpCamera.Password": "비밀번호(선택사항)",
+      "Widget.Config.fps": "초당 프레임",
+      "Widget.Config.size": "위젯 크기"
+    },
     "90": {
       "Title": "보안 알람 시스템",
       "Description": "센서와 기타 장치를 사용하여 보안 경보 시스템을 구현합니다.",
       "HomeGenie.SecurityAlarm": "알람/스트로브로 사용",
+      "HomeGenie.SecurityTriggerHome": "홈이 무장되어 있을 때도 트리거됩니다.",
       "HomeGenie.SecuritySensor": "보안 센서로 활용",
       "ConfigureOptions.Email.Recipients": "알람 알림을 위한 수신자 이메일의 쉼표로 구분된 목록",
       "ConfigureOptions.System.ArmDelay": "암 지연(초)",
@@ -199,6 +216,10 @@
       "Title": "이벤트 로깅",
       "Description": "장치 활동을 기록합니다.",
       "EventsLogger.EnableLogging": "할 수 있게 하다"
+    },
+    "111": {
+      "Title": "클라이언트 구성",
+      "Description": "UI 및 대시보드 설정을 저장하는 데 사용되는 클라이언트의 구성 프로필을 관리하기 위한 API를 구현합니다."
     },
     "400": {
       "Title": "가상 모듈 데모",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "밝기 감소 버튼",
       "ConfigureOptions.DimmerInterval": "디밍 단계"
     },
+    "142": {
+      "Title": "이메일 계정",
+      "Description": "시스템 프로그램에서 이메일을 보내고 받는 데 사용하는 이메일 계정 정보를 저장합니다.",
+      "ConfigureOptions.Email.Sender": "1. 이메일 주소",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP 서버 주소",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP 사용자 이름(선택 사항)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP 비밀번호 (선택사항)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP 서버 포트",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP 서버는 SSL을 사용합니다."
+    },
     "145": {
       "Title": "스마트 기기",
       "Description": "동작 감지 및 주변 조명에 따라 장치를 켜거나 끕니다.",
@@ -250,6 +281,13 @@
       "Title": "일출 색상 시나리오",
       "Description": "색상이 변하는 LED 조명에 대한 \"일출\" 시나리오의 예입니다.",
       "Scenarios.SunriseColors": "Sunrise Colors 시나리오 링크"
+    },
+    "910": {
+      "Title": "객체 감지",
+      "Description": "사전 학습된 YOLO11 모델을 사용하여 객체를 감지합니다.",
+      "ML.ObjectDetection": "객체 감지 활성화",
+      "ML.ObjectDetection.TriggerDetect": "경보를 발동할 수 있는 물건들의 쉼표로 구분된 목록(영어) (예: 고양이, 개, 사람, 백팩, 가방)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 모델 파일(.onnx)의 경로"
     }
   }
 }

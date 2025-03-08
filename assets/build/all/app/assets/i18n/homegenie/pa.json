@@ -118,8 +118,8 @@
   "program_status_broken": "ਟੁੱਟਿਆ ਹੋਇਆ",
   "program_status_compile": "ਕੰਪਾਇਲ ਕਰੋ",
   "automation_programming_guide": "ਪ੍ਰੋਗਰਾਮਿੰਗ ਗਾਈਡ'",
-  "tap_to_disable": "ਬੰਦ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ",
-  "tap_to_enable": "ਚਾਲੂ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ",
+  "tap_to_disable": "ਬੰਦ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+  "tap_to_enable": "ਚਾਲੂ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
   "program_data": "ਪ੍ਰੋਗਰਾਮ ਡੇਟਾ",
   "visual_code": "ਵਿਜ਼ੂਅਲ ਕੋਡ",
   "generated_code": "ਤਿਆਰ ਕੀਤਾ ਕੋਡ",
@@ -139,6 +139,13 @@
       "Description": "ਆਖਰੀ ਡਿਮਰ ਲੈਵਲ ਨੂੰ ਸਟੋਰ ਕਰੋ ਅਤੇ ਯਾਦ ਕਰੋ।",
       "HomeGenie.LevelMemory": "ਚਾਲੂ ਹੋਣ 'ਤੇ ਆਖਰੀ ਲਾਈਟ ਲੈਵਲ ਯਾਦ ਕਰੋ",
       "HomeGenie.LevelMemory.SimulateOnly": "ਸਿਰਫ਼ ਸਿਮੂਲੇਟ ਕਰੋ"
+    },
+    "26": {
+      "Title": "ਰੰਗੀਨ ਲਾਈਟਾਂ",
+      "Description": "HTTP API (V1) ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ Philips Hue ਲਾਈਟਾਂ ਦੇ ਏਕੀਕਰਨ ਦੀ ਉਦਾਹਰਣ। ਬ੍ਰਿਜ ਨਾਲ ਜੁੜਨ ਲਈ ਡਿਫੌਲਟ ਉਪਭੋਗਤਾ \"newdeveloper\" ਹੈ ਅਤੇ ਇਹ ਪਹਿਲਾਂ ਹੀ ਸਮਰੱਥ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।",
+      "ConfigureOptions.BridgeAddress": "ਫਿਲਿਪਸ ਹਿਊ ਬ੍ਰਿਜ (V1) IP ਪਤਾ",
+      "ConfigureOptions.BridgeUsername": "ਯੂਜ਼ਰਨੇਮ",
+      "ConfigureOptions.LightsCount": "ਲਾਈਟਾਂ ਦੀ ਗਿਣਤੀ"
     },
     "34": {
       "Title": "ਮੌਸਮ ਦੀ ਭਵਿੱਖਬਾਣੀ",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "ਵੱਧ ਤੋਂ ਵੱਧ ਰੌਸ਼ਨੀ ਦਾ ਪੱਧਰ (%)",
       "EnergyManagement.EnergySavingMode": "ਯੋਗ ਬਣਾਓ"
     },
+    "88": {
+      "Title": "ਆਮ IP ਕੈਮਰਾ",
+      "Description": "ਇੱਕ IP ਕੈਮਰੇ ਤੋਂ ਚਿੱਤਰ ਫੀਡ ਡਿਸਪਲੇ/ਰੂਟ ਕਰੋ।",
+      "IpCamera.ImageURL": "ਕੈਮਰਾ ਚਿੱਤਰ API URL (ਆਪਣੇ ਕੈਮਰਾ ਦਸਤਾਵੇਜ਼ ਵੇਖੋ)",
+      "IpCamera.Username": "ਯੂਜ਼ਰਨੇਮ (ਵਿਕਲਪਿਕ)",
+      "IpCamera.Password": "ਪਾਸਵਰਡ (ਵਿਕਲਪਿਕ)",
+      "Widget.Config.fps": "ਫਰੇਮ ਪ੍ਰਤੀ ਸਕਿੰਟ",
+      "Widget.Config.size": "ਵਿਜੇਟ ਆਕਾਰ"
+    },
     "90": {
       "Title": "ਸੁਰੱਖਿਆ ਅਲਾਰਮ ਸਿਸਟਮ",
       "Description": "ਸੁਰੱਖਿਆ ਅਲਾਰਮ ਸਿਸਟਮ ਲਾਗੂ ਕਰਨ ਲਈ ਸੈਂਸਰਾਂ ਅਤੇ ਹੋਰ ਯੰਤਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
       "HomeGenie.SecurityAlarm": "ਅਲਾਰਮ/ਸਟ੍ਰੋਬ ਵਜੋਂ ਵਰਤੋਂ",
+      "HomeGenie.SecurityTriggerHome": "ਹਥਿਆਰਬੰਦ ਹੋਣ 'ਤੇ ਵੀ ਚਾਲੂ ਹੁੰਦਾ ਹੈ ਘਰ",
       "HomeGenie.SecuritySensor": "ਸੁਰੱਖਿਆ ਸੈਂਸਰ ਵਜੋਂ ਵਰਤੋਂ",
       "ConfigureOptions.Email.Recipients": "ਅਲਾਰਮ ਸੂਚਨਾਵਾਂ ਲਈ ਪ੍ਰਾਪਤਕਰਤਾਵਾਂ ਦੀਆਂ ਈਮੇਲਾਂ ਦੀ ਕਾਮੇ ਨਾਲ ਵੱਖ ਕੀਤੀ ਸੂਚੀ",
       "ConfigureOptions.System.ArmDelay": "ਬਾਂਹ ਦੀ ਦੇਰੀ (ਸਕਿੰਟ)",
@@ -199,6 +216,10 @@
       "Title": "ਇਵੈਂਟ ਲੌਗਿੰਗ",
       "Description": "ਡਿਵਾਈਸ ਗਤੀਵਿਧੀ ਰਿਕਾਰਡ ਕਰੋ।",
       "EventsLogger.EnableLogging": "ਯੋਗ ਬਣਾਓ"
+    },
+    "111": {
+      "Title": "ਕਲਾਇੰਟ ਸੰਰਚਨਾ",
+      "Description": "ਕਲਾਇੰਟ ਦੇ ਕੌਂਫਿਗਰੇਸ਼ਨ ਪ੍ਰੋਫਾਈਲਾਂ ਦੇ ਪ੍ਰਬੰਧਨ ਲਈ API ਲਾਗੂ ਕਰਦਾ ਹੈ ਜੋ UI ਅਤੇ ਡੈਸ਼ਬੋਰਡ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸਟੋਰ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾਂਦੇ ਹਨ।"
     },
     "400": {
       "Title": "ਵਰਚੁਅਲ ਮੋਡੀਊਲ ਡੈਮੋ",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "ਚਮਕ ਘਟਾਉਣ ਵਾਲਾ ਬਟਨ",
       "ConfigureOptions.DimmerInterval": "ਮੱਧਮ ਕਰਨ ਦਾ ਕਦਮ"
     },
+    "142": {
+      "Title": "ਈ-ਮੇਲ ਖਾਤਾ",
+      "Description": "ਸਿਸਟਮ ਪ੍ਰੋਗਰਾਮਾਂ ਦੁਆਰਾ ਈਮੇਲ ਭੇਜਣ/ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਈ-ਮੇਲ ਖਾਤਾ ਜਾਣਕਾਰੀ ਨੂੰ ਸਟੋਰ ਕਰਦਾ ਹੈ।",
+      "ConfigureOptions.Email.Sender": "1. ਈ-ਮੇਲ ਪਤਾ",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP ਸਰਵਰ ਪਤਾ",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP ਯੂਜ਼ਰਨੇਮ (ਵਿਕਲਪਿਕ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP ਪਾਸਵਰਡ (ਵਿਕਲਪਿਕ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP ਸਰਵਰ ਪੋਰਟ",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP ਸਰਵਰ SSL ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ"
+    },
     "145": {
       "Title": "ਸਮਾਰਟ ਡਿਵਾਈਸ",
       "Description": "ਗਤੀ ਖੋਜ ਅਤੇ ਅੰਬੀਨਟ ਰੋਸ਼ਨੀ ਦੇ ਆਧਾਰ 'ਤੇ ਡਿਵਾਈਸ ਨੂੰ ਚਾਲੂ/ਬੰਦ ਕਰੋ।",
@@ -250,6 +281,13 @@
       "Title": "ਸੂਰਜ ਚੜ੍ਹਨ ਦੇ ਰੰਗਾਂ ਦਾ ਦ੍ਰਿਸ਼",
       "Description": "ਰੰਗ ਬਦਲਣ ਵਾਲੀਆਂ LED ਲਾਈਟਾਂ ਲਈ \"ਸੂਰਜ ਚੜ੍ਹਨ\" ਦ੍ਰਿਸ਼ ਦੀ ਉਦਾਹਰਣ।",
       "Scenarios.SunriseColors": "ਸਨਰਾਈਜ਼ ਕਲਰਸ ਦ੍ਰਿਸ਼ ਦਾ ਲਿੰਕ"
+    },
+    "910": {
+      "Title": "ਵਸਤੂ ਖੋਜ",
+      "Description": "ਪਹਿਲਾਂ ਤੋਂ ਸਿਖਲਾਈ ਪ੍ਰਾਪਤ YOLO11 ਮਾਡਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਵਸਤੂਆਂ ਦਾ ਪਤਾ ਲਗਾਓ।",
+      "ML.ObjectDetection": "ਵਸਤੂਆਂ ਦੀ ਖੋਜ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ",
+      "ML.ObjectDetection.TriggerDetect": "ਕਾਮੇ ਨਾਲ ਵੱਖ ਕੀਤੀਆਂ ਚੀਜ਼ਾਂ ਦੀ ਸੂਚੀ (ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ) ਜੋ ਅਲਾਰਮ ਨੂੰ ਚਾਲੂ ਕਰਨਗੀਆਂ। (ਜਿਵੇਂ: ਬਿੱਲੀ, ਕੁੱਤਾ, ਵਿਅਕਤੀ, ਬੈਕਪੈਕ, ਸੂਟਕੇਸ)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ"
     }
   }
 }

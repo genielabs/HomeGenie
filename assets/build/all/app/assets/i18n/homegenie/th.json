@@ -118,8 +118,8 @@
   "program_status_broken": "แตกหัก",
   "program_status_compile": "รวบรวม",
   "automation_programming_guide": "คู่มือการเขียนโปรแกรม",
-  "tap_to_disable": "แตะเพื่อปิดการใช้งาน",
-  "tap_to_enable": "แตะเพื่อเปิดใช้งาน",
+  "tap_to_disable": "คลิกเพื่อปิดการใช้งาน",
+  "tap_to_enable": "คลิกเพื่อเปิดใช้งาน",
   "program_data": "ข้อมูลโปรแกรม",
   "visual_code": "โค้ดภาพ",
   "generated_code": "สร้างรหัสแล้ว",
@@ -127,7 +127,7 @@
   "main_code": "หลัก",
   "context_code": "บริบท",
   "main_code_empty_note": "รหัส \"Main\" ว่างเปล่า ใช้ตัวแก้ไข \"รหัสภาพ\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"โปรแกรม\" จากแถบคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Main\" ในพื้นที่ทำงานของรหัสภาพ - เพิ่มบล็อกรหัสอื่นๆ เข้าไปเพื่อนำการทำงานและตรรกะของโปรแกรมนี้ไปใช้งาน โปรแกรม \"Main\" สามารถรันด้วยตนเองหรือเริ่มอัตโนมัติได้ขึ้นอยู่กับเงื่อนไขที่กำหนดไว้ในรหัสการติดตั้ง",
-  "setup_code_empty_note": "รหัส \"Setup\" ว่างเปล่า ใช้ตัวแก้ไข \"Visual code\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"Program\" จากแถบคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Setup\" ในพื้นที่ทำงานของรหัสภาพ - เพิ่มบล็อกรหัสอื่นๆ ลงไปเพื่อกำหนดเงื่อนไขที่จะทริกเกอร์การทำงานของรหัส \"Main\" รหัสนี้จะได้รับการประเมินทุกครั้งที่มีเหตุการณ์ใหม่เกิดขึ้น และอย่างน้อยหนึ่งครั้งต่อนาที",
+  "setup_code_empty_note": "รหัส \"Setup\" ว่างเปล่า ใช้ตัวแก้ไข \"Visual code\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"Program\" จากแถบคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Setup\" ในพื้นที่ทำงานของรหัสภาพ - เพิ่มบล็อกรหัสอื่นๆ เข้าไปเพื่อกำหนดเงื่อนไขที่จะทริกเกอร์การทำงานของรหัส \"Main\" รหัสนี้จะได้รับการประเมินทุกครั้งที่มีเหตุการณ์ใหม่เกิดขึ้น และอย่างน้อยหนึ่งครั้งต่อนาที",
   "capture_commands": "คำสั่งจับภาพ",
   "capture_commands_description": "เพิ่มคำสั่งทั้งหมดที่ดำเนินการด้วยตนเองบนวิดเจ็ตลงในโปรแกรม",
   "capture_commands_pause": "หยุดชั่วคราวระหว่างคำสั่ง",
@@ -139,6 +139,13 @@
       "Description": "จัดเก็บและเรียกคืนระดับหรี่ไฟครั้งสุดท้าย",
       "HomeGenie.LevelMemory": "เรียกคืนระดับแสงสุดท้ายเมื่อเปิดเครื่อง",
       "HomeGenie.LevelMemory.SimulateOnly": "จำลองเท่านั้น"
+    },
+    "26": {
+      "Title": "ไฟสี",
+      "Description": "ตัวอย่างการรวมไฟ Philips Hue เข้ากับ HTTP API (V1) ผู้ใช้เริ่มต้นในการเชื่อมต่อกับบริดจ์คือ \"newdeveloper\" และควรเปิดใช้งานไว้แล้ว",
+      "ConfigureOptions.BridgeAddress": "ที่อยู่ IP ของ Philips Hue Bridge (V1)",
+      "ConfigureOptions.BridgeUsername": "ชื่อผู้ใช้",
+      "ConfigureOptions.LightsCount": "จำนวนไฟ"
     },
     "34": {
       "Title": "พยากรณ์อากาศ",
@@ -167,7 +174,7 @@
       "Description": "ใช้เซ็นเซอร์วัดอุณหภูมิและสวิตช์อัจฉริยะเพื่อใช้งานฟังก์ชันเทอร์โมสตัท",
       "VirtualThermostat.TemperatureModule": "เซ็นเซอร์วัดอุณหภูมิ",
       "VirtualThermostat.HeatingSwitchModule": "สวิตซ์ทำความร้อน",
-      "VirtualThermostat.CoolingSwitchModule": "สวิตซ์ระบายความร้อน",
+      "VirtualThermostat.CoolingSwitchModule": "สวิตซ์ปรับความเย็น",
       "ConfigureOptions.ThermostatsCount": "จำนวนเทอร์โมสตัท"
     },
     "81": {
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "ระดับแสงสูงสุด (%)",
       "EnergyManagement.EnergySavingMode": "เปิดใช้งาน"
     },
+    "88": {
+      "Title": "กล้อง IP ทั่วไป",
+      "Description": "แสดง/กำหนดเส้นทางการฟีดภาพจากกล้อง IP",
+      "IpCamera.ImageURL": "URL API ของภาพจากกล้อง (ดูเอกสารเกี่ยวกับกล้องของคุณ)",
+      "IpCamera.Username": "ชื่อผู้ใช้ (ไม่บังคับ)",
+      "IpCamera.Password": "รหัสผ่าน (ไม่จำเป็น)",
+      "Widget.Config.fps": "เฟรมต่อวินาที",
+      "Widget.Config.size": "ขนาดวิดเจ็ต"
+    },
     "90": {
       "Title": "ระบบสัญญาณกันขโมย",
       "Description": "ใช้เซ็นเซอร์และอุปกรณ์อื่นๆ เพื่อติดตั้งระบบแจ้งเตือนความปลอดภัย",
       "HomeGenie.SecurityAlarm": "ใช้เป็นสัญญาณเตือน/ไฟกระพริบ",
+      "HomeGenie.SecurityTriggerHome": "ยังทริกเกอร์เมื่อติดอาวุธที่บ้าน",
       "HomeGenie.SecuritySensor": "ใช้เป็นเซนเซอร์ตรวจจับความปลอดภัย",
       "ConfigureOptions.Email.Recipients": "รายชื่อผู้รับอีเมลที่คั่นด้วยจุลภาคสำหรับการแจ้งเตือนภัย",
       "ConfigureOptions.System.ArmDelay": "ความล่าช้าของแขน (วินาที)",
@@ -193,12 +210,16 @@
       "ConfigureOptions.System.SirenMaxTime": "เวลาสูงสุดของไซเรน (วินาที, 0=อนันต์)",
       "ConfigureOptions.Trigger.ArmedProgram": "โปรแกรมที่จะรันเมื่อติดอาวุธ",
       "ConfigureOptions.Trigger.DisarmedProgram": "โปรแกรมที่จะรันเมื่อไม่มีอาวุธ",
-      "ConfigureOptions.Trigger.TriggeredProgram": "โปรแกรมที่จะทำงานเมื่อมีการทริกเกอร์"
+      "ConfigureOptions.Trigger.TriggeredProgram": "โปรแกรมที่จะรันเมื่อถูกทริกเกอร์"
     },
     "95": {
       "Title": "การบันทึกเหตุการณ์",
       "Description": "บันทึกกิจกรรมอุปกรณ์",
       "EventsLogger.EnableLogging": "เปิดใช้งาน"
+    },
+    "111": {
+      "Title": "การกำหนดค่าไคลเอนต์",
+      "Description": "นำ API มาใช้สำหรับการจัดการโปรไฟล์การกำหนดค่าของไคลเอนต์ที่ใช้ในการจัดเก็บการตั้งค่า UI และแดชบอร์ด"
     },
     "400": {
       "Title": "การสาธิตโมดูลเสมือนจริง",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "ปุ่มลดความสว่าง",
       "ConfigureOptions.DimmerInterval": "ขั้นตอนการหรี่แสง"
     },
+    "142": {
+      "Title": "บัญชีอีเมล์",
+      "Description": "จัดเก็บข้อมูลบัญชีอีเมลที่ใช้โดยโปรแกรมระบบในการส่ง/รับอีเมล",
+      "ConfigureOptions.Email.Sender": "1. ที่อยู่อีเมล",
+      "ConfigureOptions.Email.SmtpServer": "2. ที่อยู่เซิร์ฟเวอร์ SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. ชื่อผู้ใช้ SMTP (ไม่บังคับ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. รหัสผ่าน SMTP (ทางเลือก)",
+      "ConfigureOptions.Email.SmtpPort": "5. พอร์ตเซิร์ฟเวอร์ SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. เซิร์ฟเวอร์ SMTP ใช้ SSL"
+    },
     "145": {
       "Title": "อุปกรณ์อัจฉริยะ",
       "Description": "เปิด/ปิดอุปกรณ์ตามการตรวจจับการเคลื่อนไหวและแสงโดยรอบ",
@@ -250,6 +281,13 @@
       "Title": "สถานการณ์สีพระอาทิตย์ขึ้น",
       "Description": "ตัวอย่างสถานการณ์ \"พระอาทิตย์ขึ้น\" สำหรับไฟ LED ที่เปลี่ยนสี",
       "Scenarios.SunriseColors": "ลิงก์ไปยังฉาก Sunrise Colors"
+    },
+    "910": {
+      "Title": "การตรวจจับวัตถุ",
+      "Description": "ตรวจจับวัตถุโดยใช้โมเดล YOLO11 ที่ได้รับการฝึกอบรมล่วงหน้า",
+      "ML.ObjectDetection": "เปิดใช้งานการตรวจจับวัตถุ",
+      "ML.ObjectDetection.TriggerDetect": "รายการสิ่งของที่คั่นด้วยจุลภาค (เป็นภาษาอังกฤษ) ที่จะทำให้เกิดการเตือนภัย (เช่น แมว สุนัข คน กระเป๋าเป้ กระเป๋าเดินทาง)",
+      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO11 (.onnx)"
     }
   }
 }

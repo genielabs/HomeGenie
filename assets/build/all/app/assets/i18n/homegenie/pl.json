@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "Przypomnij sobie ostatni poziom światła po włączeniu",
       "HomeGenie.LevelMemory.SimulateOnly": "Tylko symulacja"
     },
+    "26": {
+      "Title": "Kolorowe światła",
+      "Description": "Przykład integracji oświetlenia Philips Hue przy użyciu HTTP API (V1). Domyślnym użytkownikiem do łączenia się z mostem jest „newdeveloper” i powinien być już włączony.",
+      "ConfigureOptions.BridgeAddress": "Adres IP mostka Philips Hue (V1)",
+      "ConfigureOptions.BridgeUsername": "Nazwa użytkownika",
+      "ConfigureOptions.LightsCount": "Liczba świateł"
+    },
     "34": {
       "Title": "Prognoza pogody",
       "Description": "Informacje o pogodzie i prognozach z serwisu Open Weather Map. Aby aktywować ten widget, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://openweathermap.org/appid, aby uzyskać bezpłatny klucz API.",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Maksymalny poziom światła (%)",
       "EnergyManagement.EnergySavingMode": "Włączać"
     },
+    "88": {
+      "Title": "Ogólna kamera IP",
+      "Description": "Wyświetlanie/kierowanie obrazu z kamery IP.",
+      "IpCamera.ImageURL": "Adres URL interfejsu API obrazu z kamery (zobacz dokumentację aparatu)",
+      "IpCamera.Username": "Nazwa użytkownika (opcjonalnie)",
+      "IpCamera.Password": "Hasło (opcjonalne)",
+      "Widget.Config.fps": "Klatki na sekundę",
+      "Widget.Config.size": "Rozmiar widżetu"
+    },
     "90": {
       "Title": "System alarmowy",
       "Description": "Użyj czujników i innych urządzeń, aby wdrożyć system alarmowy.",
       "HomeGenie.SecurityAlarm": "Używaj jako alarmu/stroboskopu",
+      "HomeGenie.SecurityTriggerHome": "Aktywuje się również po uzbrojeniu Home",
       "HomeGenie.SecuritySensor": "Użyj jako czujnika bezpieczeństwa",
       "ConfigureOptions.Email.Recipients": "Lista adresów e-mail odbiorców powiadomień alarmowych rozdzielona przecinkami",
       "ConfigureOptions.System.ArmDelay": "Opóźnienie uzbrojenia (sekundy)",
@@ -199,6 +216,10 @@
       "Title": "Rejestrowanie zdarzeń",
       "Description": "Rejestruj aktywność urządzenia.",
       "EventsLogger.EnableLogging": "Włączać"
+    },
+    "111": {
+      "Title": "Konfiguracja klienta",
+      "Description": "Implementuje API do zarządzania profilami konfiguracji klienta, które służą do przechowywania ustawień interfejsu użytkownika i pulpitu nawigacyjnego."
     },
     "400": {
       "Title": "Demonstracja modułów wirtualnych",
@@ -230,12 +251,22 @@
     },
     "505": {
       "Title": "Zdalne sterowanie",
-      "Description": "Sterowanie urządzeniem odbywa się za pomocą pilota (IR lub RF).",
+      "Description": "Sterowanie urządzeniem odbywa się za pomocą pilota (podczerwień lub RF).",
       "HomeGenie.RemoteControl.Enable": "Włączać",
       "HomeGenie.RemoteControl.IRCode": "Przycisk przełączania",
       "ConfigureOptions.DimmerUpCode": "Przycisk zwiększania jasności",
       "ConfigureOptions.DimmerDownCode": "Przycisk zmniejszania jasności",
       "ConfigureOptions.DimmerInterval": "Stopień ściemniania"
+    },
+    "142": {
+      "Title": "Konto e-mail",
+      "Description": "Przechowuje informacje o kontach e-mail używanych przez programy systemowe do wysyłania/odbierania wiadomości e-mail.",
+      "ConfigureOptions.Email.Sender": "1. Adres e-mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Adres serwera SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nazwa użytkownika SMTP (opcjonalnie)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Hasło SMTP (opcjonalnie)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port serwera SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Serwer SMTP używa SSL"
     },
     "145": {
       "Title": "Urządzenie inteligentne",
@@ -250,6 +281,13 @@
       "Title": "Scenariusz kolorów wschodu słońca",
       "Description": "Przykładowy scenariusz „Wschód słońca” dla świateł LED zmieniających kolor.",
       "Scenarios.SunriseColors": "Link do scenariusza Sunrise Colors"
+    },
+    "910": {
+      "Title": "Wykrywanie obiektów",
+      "Description": "Wykrywaj obiekty przy użyciu wstępnie wytrenowanego modelu YOLO11.",
+      "ML.ObjectDetection": "Włącz wykrywanie obiektów",
+      "ML.ObjectDetection.TriggerDetect": "Lista rzeczy (w języku angielskim), rozdzielonych przecinkami, które mogą wywołać alarm. (np.: kot, pies, osoba, plecak, walizka)",
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
     }
   }
 }

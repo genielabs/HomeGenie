@@ -118,8 +118,8 @@
   "program_status_broken": "Roto",
   "program_status_compile": "Compilar",
   "automation_programming_guide": "Guía de programación",
-  "tap_to_disable": "Toque para desactivar",
-  "tap_to_enable": "Toque para habilitar",
+  "tap_to_disable": "Haga clic para desactivar",
+  "tap_to_enable": "Haga clic para habilitar",
   "program_data": "Datos del programa",
   "visual_code": "Código visual",
   "generated_code": "Código generado",
@@ -129,7 +129,7 @@
   "main_code_empty_note": "El código \"Principal\" está vacío. Utilice el editor \"Código visual\" para generar este código: - Abra la categoría \"Programa\" desde la paleta de comandos de la izquierda - Arrastre un bloque de tipo \"Principal\" en el espacio de trabajo del código visual - Agregue dentro de él otros bloques de código para implementar las acciones y la lógica de este programa El programa \"Principal\" se puede ejecutar manualmente o iniciar automáticamente según las condiciones que se indiquen en el código de configuración.",
   "setup_code_empty_note": "El código \"Setup\" está vacío. Utilice el editor \"Visual code\" para generar este código: - Abra la categoría \"Program\" desde la paleta de comandos de la izquierda - Arrastre un bloque de tipo \"Setup\" en el espacio de trabajo de código visual - Agregue dentro de él otros bloques de código para determinar las condiciones que activarán la ejecución del código \"Main\" Este código se evalúa cada vez que ocurre un nuevo evento y al menos una vez por minuto.",
   "capture_commands": "Comandos de captura",
-  "capture_commands_description": "Agrega todos los comandos ejecutados manualmente en los widgets al programa.",
+  "capture_commands_description": "Añade todos los comandos ejecutados manualmente en los widgets al programa.",
   "capture_commands_pause": "Pausa entre comandos",
   "capture_pause_none": "Ninguno",
   "capture_pause_asis": "Tal como es",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Recordar el último nivel de luz al encender",
       "HomeGenie.LevelMemory.SimulateOnly": "Simular solamente"
     },
+    "26": {
+      "Title": "Luces de colores",
+      "Description": "Ejemplo de integración de luces Philips Hue mediante API HTTP (V1). El usuario predeterminado para conectarse al puente es \"newdeveloper\" y ya debería estar habilitado.",
+      "ConfigureOptions.BridgeAddress": "Dirección IP del puente Philips Hue (V1)",
+      "ConfigureOptions.BridgeUsername": "Nombre de usuario",
+      "ConfigureOptions.LightsCount": "Número de luces"
+    },
     "34": {
       "Title": "Pronóstico del tiempo",
-      "Description": "Información meteorológica y de previsiones meteorológicas del servicio Open Weather Map. Para activar este widget, introduzca una clave API válida. Siga las instrucciones en https://openweathermap.org/appid para obtener una clave API gratuita.",
+      "Description": "Información meteorológica y de previsión del tiempo del servicio Open Weather Map. Para activar este widget, introduzca una clave API válida. Siga las instrucciones en https://openweathermap.org/appid para obtener una clave API gratuita.",
       "ConfigureOptions.Location": "Nombre de la ciudad",
       "ConfigureOptions.Language": "Idioma (por ejemplo, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervalo de actualización (minutos)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Nivel máximo de luz (%)",
       "EnergyManagement.EnergySavingMode": "Permitir"
     },
+    "88": {
+      "Title": "Cámara IP genérica",
+      "Description": "Mostrar/enrutar la transmisión de imágenes desde una cámara IP.",
+      "IpCamera.ImageURL": "URL de la API de imágenes de la cámara (consulte la documentación de su cámara)",
+      "IpCamera.Username": "Nombre de usuario (opcional)",
+      "IpCamera.Password": "Contraseña (opcional)",
+      "Widget.Config.fps": "Fotogramas por segundo",
+      "Widget.Config.size": "Tamaño del widget"
+    },
     "90": {
       "Title": "Sistema de alarma de seguridad",
       "Description": "Utilice sensores y otros dispositivos para implementar un sistema de alarma de seguridad.",
       "HomeGenie.SecurityAlarm": "Usar como alarma/luz estroboscópica",
+      "HomeGenie.SecurityTriggerHome": "También se activa cuando está armado Inicio",
       "HomeGenie.SecuritySensor": "Utilizar como sensor de seguridad",
       "ConfigureOptions.Email.Recipients": "Lista separada por comas de correos electrónicos de destinatarios para notificaciones de alarma",
       "ConfigureOptions.System.ArmDelay": "Retardo del brazo (segundos)",
@@ -199,6 +216,10 @@
       "Title": "Registro de eventos",
       "Description": "Registrar la actividad del dispositivo.",
       "EventsLogger.EnableLogging": "Permitir"
+    },
+    "111": {
+      "Title": "Configuración del cliente",
+      "Description": "Implementa API para administrar los perfiles de configuración del cliente que se utilizan para almacenar configuraciones de UI y paneles."
     },
     "400": {
       "Title": "Demostración de módulos virtuales",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Botón para disminuir el brillo",
       "ConfigureOptions.DimmerInterval": "Paso de atenuación"
     },
+    "142": {
+      "Title": "Cuenta de correo electrónico",
+      "Description": "Almacena información de la cuenta de correo electrónico utilizada por los programas del sistema para enviar/recibir correos electrónicos.",
+      "ConfigureOptions.Email.Sender": "1. Dirección de correo electrónico",
+      "ConfigureOptions.Email.SmtpServer": "2. Dirección del servidor SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nombre de usuario SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Contraseña SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPort": "5. Puerto del servidor SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. El servidor SMTP utiliza SSL"
+    },
     "145": {
       "Title": "Dispositivo inteligente",
       "Description": "Enciende/apaga el dispositivo según la detección de movimiento y la luz ambiental.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Escenario de colores del amanecer",
-      "Description": "Ejemplo de escenario de \"Amanecer\" para luces LED que cambian de color.",
+      "Description": "Ejemplo de escenario \"Amanecer\" para luces LED que cambian de color.",
       "Scenarios.SunriseColors": "Enlace al escenario Colores del amanecer"
+    },
+    "910": {
+      "Title": "Detección de objetos",
+      "Description": "Detecta objetos utilizando un modelo YOLO11 previamente entrenado.",
+      "ML.ObjectDetection": "Habilitar detección de objetos",
+      "ML.ObjectDetection.TriggerDetect": "Lista separada por comas de cosas (en inglés) que activarán la alarma. (p. ej.: gato, perro, persona, mochila, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
     }
   }
 }

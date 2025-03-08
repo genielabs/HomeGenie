@@ -118,8 +118,8 @@
   "program_status_broken": "Vỡ",
   "program_status_compile": "Biên dịch",
   "automation_programming_guide": "Hướng dẫn lập trình'",
-  "tap_to_disable": "Nhấn để vô hiệu hóa",
-  "tap_to_enable": "Nhấn để bật",
+  "tap_to_disable": "Nhấp để vô hiệu hóa",
+  "tap_to_enable": "Nhấp để kích hoạt",
   "program_data": "Dữ liệu chương trình",
   "visual_code": "Mã hình ảnh",
   "generated_code": "Mã đã tạo",
@@ -139,6 +139,13 @@
       "Description": "Lưu trữ và gọi lại mức độ mờ gần nhất.",
       "HomeGenie.LevelMemory": "Nhớ lại mức ánh sáng cuối cùng khi bật",
       "HomeGenie.LevelMemory.SimulateOnly": "Chỉ mô phỏng"
+    },
+    "26": {
+      "Title": "Đèn màu",
+      "Description": "Ví dụ tích hợp đèn Philips Hue bằng HTTP API (V1). Người dùng mặc định để kết nối với cầu nối là \"newdeveloper\" và người dùng này phải được bật.",
+      "ConfigureOptions.BridgeAddress": "Địa chỉ IP của Philips Hue Bridge (V1)",
+      "ConfigureOptions.BridgeUsername": "Tên người dùng",
+      "ConfigureOptions.LightsCount": "Số lượng đèn"
     },
     "34": {
       "Title": "Dự báo thời tiết",
@@ -178,14 +185,24 @@
     },
     "82": {
       "Title": "Chế độ tiết kiệm năng lượng",
-      "Description": "Giữ mức độ ánh sáng dưới mức phần trăm có thể cấu hình được.",
+      "Description": "Giữ mức độ ánh sáng dưới một tỷ lệ phần trăm có thể cấu hình được.",
       "EnergyManagement.EnergySavingLevel": "Mức độ ánh sáng tối đa (%)",
       "EnergyManagement.EnergySavingMode": "Cho phép"
+    },
+    "88": {
+      "Title": "Camera IP thông dụng",
+      "Description": "Hiển thị/định tuyến hình ảnh từ camera IP.",
+      "IpCamera.ImageURL": "URL API hình ảnh camera (xem tài liệu camera của bạn)",
+      "IpCamera.Username": "Tên người dùng (tùy chọn)",
+      "IpCamera.Password": "Mật khẩu (tùy chọn)",
+      "Widget.Config.fps": "Khung hình mỗi giây",
+      "Widget.Config.size": "Kích thước tiện ích"
     },
     "90": {
       "Title": "Hệ thống báo động an ninh",
       "Description": "Sử dụng cảm biến và các thiết bị khác để triển khai hệ thống báo động an ninh.",
-      "HomeGenie.SecurityAlarm": "Sử dụng như báo thức/nhấp nháy",
+      "HomeGenie.SecurityAlarm": "Sử dụng như báo thức/đèn nháy",
+      "HomeGenie.SecurityTriggerHome": "Cũng kích hoạt khi được trang bị Trang chủ",
       "HomeGenie.SecuritySensor": "Sử dụng như cảm biến an ninh",
       "ConfigureOptions.Email.Recipients": "Danh sách email của người nhận được phân tách bằng dấu phẩy để nhận thông báo cảnh báo",
       "ConfigureOptions.System.ArmDelay": "Độ trễ của cánh tay (giây)",
@@ -199,6 +216,10 @@
       "Title": "Ghi nhật ký sự kiện",
       "Description": "Ghi lại hoạt động của thiết bị.",
       "EventsLogger.EnableLogging": "Cho phép"
+    },
+    "111": {
+      "Title": "Cấu hình máy khách",
+      "Description": "Triển khai API để quản lý hồ sơ cấu hình của máy khách được sử dụng để lưu trữ cài đặt giao diện người dùng và bảng thông tin."
     },
     "400": {
       "Title": "Bản demo mô-đun ảo",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Nút giảm độ sáng",
       "ConfigureOptions.DimmerInterval": "Bước làm mờ"
     },
+    "142": {
+      "Title": "Tài khoản E-mail",
+      "Description": "Lưu trữ thông tin tài khoản email được các chương trình hệ thống sử dụng để gửi/nhận email.",
+      "ConfigureOptions.Email.Sender": "1. Địa chỉ E-mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Địa chỉ máy chủ SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Tên người dùng SMTP (tùy chọn)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Mật khẩu SMTP (tùy chọn)",
+      "ConfigureOptions.Email.SmtpPort": "5. Cổng máy chủ SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Máy chủ SMTP sử dụng SSL"
+    },
     "145": {
       "Title": "Thiết bị thông minh",
       "Description": "Bật/tắt thiết bị dựa trên phát hiện chuyển động và ánh sáng xung quanh.",
@@ -250,6 +281,13 @@
       "Title": "Kịch bản màu sắc mặt trời mọc",
       "Description": "Ví dụ về kịch bản \"Bình minh\" cho đèn LED đổi màu.",
       "Scenarios.SunriseColors": "Liên kết đến kịch bản Sunrise Colors"
+    },
+    "910": {
+      "Title": "Phát hiện đối tượng",
+      "Description": "Phát hiện vật thể bằng mô hình YOLO11 đã được đào tạo trước.",
+      "ML.ObjectDetection": "Bật phát hiện đối tượng",
+      "ML.ObjectDetection.TriggerDetect": "Danh sách các thứ được phân tách bằng dấu phẩy (bằng tiếng Anh) sẽ kích hoạt báo động. (ví dụ: mèo, chó, người, ba lô, vali)",
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
     }
   }
 }

@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ۋاقىت ئاخىرلاشقاندا",
   "cronwizard_action_custom_script": "ئىختىيارى ھەرىكەت قوليازمىسى",
   "cronwizard_action_no_action": "ھەرىكەت يوق",
-  "cronwizard_action_schedule_variable_hint": "Cron ئىپادىلەش ئۇسۇلىدا ئۆزگەرگۈچى مىقدار <span class=\"notranslate color-primary\">{{@ name}}</span> ئىشلىتىڭ ياكى <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ئاپتوماتىك پروگراممىدا ئىشلىتىڭ.",
+  "cronwizard_action_schedule_variable_hint": "Cron ئىپادىلەش ئۇسۇلىدا ئۆزگەرگۈچى مىقدار <span class=\"notranslate color-primary\">{{@ name}}</span> ئىشلىتىڭ ياكى <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ئاپتوماتىك پروگراممىلاردا ئىشلىتىڭ.",
   "scheduler_preset_action_command_turn_on": "قوزغىتىڭ",
   "scheduler_preset_action_command_turn_off": "تاقاش",
   "scheduler_preset_action_command_set_level": "سەۋىيە بەلگىلەڭ",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "ئاچقاندا ئاخىرقى يورۇقلۇق دەرىجىسىنى ئەسلەڭ",
       "HomeGenie.LevelMemory.SimulateOnly": "پەقەت تەقلىد قىلىڭ"
     },
+    "26": {
+      "Title": "رەڭلىك چىراغ",
+      "Description": "مىسال Philips Hue HTTP API (V1) ئارقىلىق بىر گەۋدىلەشتۈرۈلگەن. كۆۋرۈككە ئۇلىنىدىغان سۈكۈتتىكى ئىشلەتكۈچى «يېڭى ئاچقۇچى» بولۇپ ، ئۇ ئاللىبۇرۇن قوزغىتىلغان بولۇشى كېرەك.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP ئادرېسى",
+      "ConfigureOptions.BridgeUsername": "ئىشلەتكۈچى ئىسمى",
+      "ConfigureOptions.LightsCount": "چىراغ سانى"
+    },
     "34": {
       "Title": "ھاۋارايىدىن ئالدىن مەلۇمات",
       "Description": "ئوچۇق ھاۋارايى خەرىتىسى مۇلازىمىتىدىكى ھاۋارايى ۋە ئالدىن مەلۇمات. بۇ كىچىك قورالنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API كۇنۇپكىسىنى كىرگۈزۈڭ. ھەقسىز API ئاچقۇچىغا ئېرىشىش ئۈچۈن https://openweathermap.org/appid دىكى كۆرسەتمىلەرگە ئەگىشىڭ.",
@@ -159,7 +166,7 @@
       "ConfigureOptions.WebSockets": "WebSockets نى ئىشلىتىڭ",
       "ConfigureOptions.TLS": "TLS / SSL نى قوزغىتىڭ",
       "ConfigureOptions.Username": "ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
-      "ConfigureOptions.Password": "پارول (ئىختىيارى)",
+      "ConfigureOptions.Password": "پارول (ئىختىيارىي)",
       "ConfigureOptions.ImportExternal": "سىرتقى مودۇللارنى ئەكىرىڭ"
     },
     "78": {
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "ئەڭ يۇقىرى يورۇقلۇق دەرىجىسى (%)",
       "EnergyManagement.EnergySavingMode": "قوزغىتىش"
     },
+    "88": {
+      "Title": "ئادەتتىكى IP كامېرا",
+      "Description": "IP كامېراسىدىن كۆرسىتىش / لىنىيىلىك رەسىم يەملىرى.",
+      "IpCamera.ImageURL": "كامېرا رەسىمى API URL (كامېرا ھۆججىتىڭىزنى كۆرۈڭ)",
+      "IpCamera.Username": "ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
+      "IpCamera.Password": "پارول (ئىختىيارى)",
+      "Widget.Config.fps": "سېكۇنتتا رامكا",
+      "Widget.Config.size": "كىچىك قورالنىڭ چوڭلۇقى"
+    },
     "90": {
       "Title": "بىخەتەرلىك ئاگاھلاندۇرۇش سىستېمىسى",
       "Description": "سېنزور ۋە باشقا ئۈسكۈنىلەرنى ئىشلىتىپ بىخەتەرلىك ئاگاھلاندۇرۇش سىستېمىسىنى يولغا قويۇڭ.",
       "HomeGenie.SecurityAlarm": "ئاگاھلاندۇرۇش / ستروب سۈپىتىدە ئىشلىتىڭ",
+      "HomeGenie.SecurityTriggerHome": "قوراللانغان ئۆيدە قوزغايدۇ",
       "HomeGenie.SecuritySensor": "بىخەتەرلىك سېنزورى سۈپىتىدە ئىشلىتىڭ",
       "ConfigureOptions.Email.Recipients": "پەش ئارقىلىق ئاگاھلاندۇرۇش ئۇقتۇرۇشى تاپشۇرۇۋالغۇچىلارنىڭ ئېلېكترونلۇق خەت ساندۇقى",
       "ConfigureOptions.System.ArmDelay": "قول كېچىكىش (سېكۇنت)",
@@ -200,6 +217,10 @@
       "Description": "ئۈسكۈنىنىڭ پائالىيىتىنى خاتىرىلەڭ.",
       "EventsLogger.EnableLogging": "قوزغىتىش"
     },
+    "111": {
+      "Title": "خېرىدارلارنىڭ سەپلىمىسى",
+      "Description": "UI ۋە باشقۇرۇش تاختىسىنىڭ تەڭشىكىنى ساقلاشقا ئىشلىتىلىدىغان خېرىدارلارنىڭ سەپلىمە ئارخىپىنى باشقۇرۇش ئۈچۈن API نى يولغا قويىدۇ."
+    },
     "400": {
       "Title": "Virtual Modules Demo",
       "Description": "مەۋھۇم ئۈسكۈنىنىڭ قىممىتىنى قولدا بەلگىلەڭ.",
@@ -208,18 +229,18 @@
       "Sensor.MotionDetect": "ھەرىكەتنى بايقاش ھالىتى",
       "Status.Battery": "باتارېيە سەۋىيىسى",
       "Sensor.DoorWindow": "ئىشىك / كۆزنەك سېنزور ھالىتى (ئوچۇق / يېپىق)",
-      "Status.Level": "Switch status (on / off)"
+      "Status.Level": "ئالماشتۇرۇش ھالىتى (on / off)"
     },
     "401": {
       "Title": "Demo - ئىشىكنى تاقاش",
-      "Description": "ئىشىك ئىشىك دېرىزىسىنىڭ سېنزورىنىڭ ئوچۇق / يېپىقلىقىنى تەقلىد قىلىدۇ."
+      "Description": "ئىشىك ئىشىك دېرىزىسىنىڭ سېنزورىنىڭ ئىشىكنى ئوچۇق / يېپىق قىلىپ تەقلىد قىلىدۇ."
     },
     "402": {
       "Title": "Demo - ھەرىكەت بايقالدى",
       "Description": "Demo كۆپ سېنزورنىڭ ھەرىكەت بايقاشنى تەقلىد قىلىدۇ."
     },
     "410": {
-      "Title": "سېنزور تەقلىدچىسى",
+      "Title": "سېنزور تەقلىدلىگۈچىسى",
       "Description": "ئىختىيارى سېنزور قىممىتىنى چىقىرىڭ.",
       "Simulator.Sensor.Temperature": "تېمپېراتۇرا سېنزورى",
       "Simulator.Sensor.Humidity": "نەملىك سېنزورى",
@@ -237,10 +258,20 @@
       "ConfigureOptions.DimmerDownCode": "يورۇقلۇقنى ئازايتىش كۇنۇپكىسى",
       "ConfigureOptions.DimmerInterval": "Dimming step"
     },
+    "142": {
+      "Title": "ئېلېكترونلۇق خەت ھېساباتى",
+      "Description": "ئېلېكترونلۇق خەت ئەۋەتىش / قوبۇل قىلىش ئۈچۈن سىستېما پروگراممىلىرى ئىشلىتىدىغان ئېلېكترونلۇق خەت ھېسابات ئۇچۇرلىرىنى ساقلايدۇ.",
+      "ConfigureOptions.Email.Sender": "1. ئېلېكترونلۇق خەت ئادرېسى",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP مۇلازىمېتىر ئادرېسى",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP پارولى (ئىختىيارىي)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP مۇلازىمېتىر ئېغىزى",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP مۇلازىمېتىرى SSL نى ئىشلىتىدۇ"
+    },
     "145": {
       "Title": "Smart Device",
       "Description": "ھەرىكەتنى بايقاش ۋە مۇھىت نۇرىغا ئاساسەن ئۈسكۈنىنى قوزغىتىڭ ياكى ئېتىپ قويۇڭ.",
-      "HomeGenie.SmartLights.Enable": "«ئەقلىي ئىقتىدارلىق ئۈسكۈنە» نى قوزغىتىڭ",
+      "HomeGenie.SmartLights.Enable": "«ئەقلىي ئىقتىدارلىق ئۈسكۈنى» نى قوزغىتىڭ",
       "HomeGenie.SmartLights.OnMotionDetect": "سېنزور تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارىي)",
       "HomeGenie.SmartLights.CheckLuminosity": "نۇر سېنزورى تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارى)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "ھەرىكەتسىز ۋاقىت (سېكۇنت) دىن كېيىن ئېتىۋېتىڭ.",
@@ -250,6 +281,13 @@
       "Title": "قۇياش نۇرى رەڭگى",
       "Description": "رەڭنى ئۆزگەرتىش LED چىرىغىنىڭ مىسالى.",
       "Scenarios.SunriseColors": "قۇياش نۇرى رەڭگىگە ئۇلىنىش"
+    },
+    "910": {
+      "Title": "ئوبيېكتنى بايقاش",
+      "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
+      "ML.ObjectDetection": "جىسىملارنى بايقاشنى قوزغىتىڭ",
+      "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار تىزىملىكى (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
     }
   }
 }

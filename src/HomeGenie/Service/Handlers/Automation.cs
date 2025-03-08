@@ -429,7 +429,7 @@ namespace HomeGenie.Service.Handlers
 
                 case "Programs.Clone":
                     var copy = homegenie.ProgramManager
-                        .ProgramClone(int.Parse(migCommand.GetOption(0)), migCommand.GetOption(1));
+                        .ProgramClone(int.Parse(migCommand.GetOption(0)), migCommand.GetOption(1), migCommand.GetOption(2));
                     homegenie.UpdateProgramsDatabase();
                     request.ResponseData = new ResponseText(copy.Address.ToString());
                     break;

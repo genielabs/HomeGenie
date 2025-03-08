@@ -20,7 +20,7 @@
   "association_groups": "Gruppi ta' assoċjazzjoni",
   "association_description": "Dan l-apparat jibgħat rapporti lin-nodi inklużi fil-gruppi ta 'assoċjazzjoni. Sabiex tirċievi rapporti minn dan l-apparat, inkludi node 1 (il-kontrollur) fil-gruppi ta 'assoċjazzjoni.",
   "associated_nodes": "Nodi assoċjati",
-  "enter_node_number": "Daħħal in-numru tan-node",
+  "enter_node_number": "Daħħal in-numru tan-nodu",
   "configuration_parameters": "Parametri tal-konfigurazzjoni",
   "generic_parameter": "Parametru ġeneriku",
   "generic_parameter_description": "Daħħal in-numru tal-parametru tal-konfigurazzjoni u l-valur li trid issettja.",

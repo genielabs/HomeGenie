@@ -9,7 +9,7 @@
   "exclusion_message": "دکمه روی دستگاهی را که می خواهید از این شبکه حذف کنید فشار دهید.",
   "task_duration_notice": "انجام این کار ممکن است تا چند ثانیه <strong>{{timeout}}</strong> بکشد.",
   "adding_node": "در حال افزودن <strong class=\"color-accent\">{{node}}</strong> دستگاه، لطفاً صبر کنید...",
-  "removing_node": "در حال حذف <strong class=\"color-accent\">{{node}}</strong> دستگاه، لطفاً صبر کنید...",
+  "removing_node": "در حال حذف <strong class=\"color-accent\">{{node}}</strong> دستگاه، لطفا صبر کنید...",
   "node_added": "<strong class=\"color-accent\">{{node}}</strong> دستگاه با موفقیت اضافه شد",
   "node_removed": "<strong class=\"color-accent\">{{node}}</strong> دستگاه حذف شده است",
   "node_config": "پیکربندی دستگاه",

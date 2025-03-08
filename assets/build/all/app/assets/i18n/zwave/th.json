@@ -30,7 +30,7 @@
   "missing handler": "ขาดตัวจัดการ",
   "refresh_ports_button": "รีเฟรชรายการพอร์ต",
   "calibration": "การสอบเทียบ",
-  "calibrate": "การสอบเทียบ",
+  "calibrate": "การปรับเทียบ",
   "edit_calibration_parameter": "แก้ไขหมายเลขพารามิเตอร์การสอบเทียบ",
   "calibration_parameter_not_set": "ไม่ได้ตั้งค่าหมายเลขพารามิเตอร์การสอบเทียบ",
   "calibration_parameter_number": "หมายเลขพารามิเตอร์ (ดูคู่มืออุปกรณ์)"

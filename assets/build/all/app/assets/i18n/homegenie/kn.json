@@ -118,8 +118,8 @@
   "program_status_broken": "ಮುರಿದಿದೆ",
   "program_status_compile": "ಕಂಪೈಲ್ ಮಾಡಿ",
   "automation_programming_guide": "ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ'",
-  "tap_to_disable": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ",
-  "tap_to_enable": "ಸಕ್ರಿಯಗೊಳಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ",
+  "tap_to_disable": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+  "tap_to_enable": "ಸಕ್ರಿಯಗೊಳಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
   "program_data": "ಕಾರ್ಯಕ್ರಮ ಡೇಟಾ",
   "visual_code": "ದೃಶ್ಯ ಕೋಡ್",
   "generated_code": "ರಚಿಸಲಾದ ಕೋಡ್",
@@ -139,6 +139,13 @@
       "Description": "ಕೊನೆಯ ಡಿಮ್ಮರ್ ಮಟ್ಟವನ್ನು ಸಂಗ್ರಹಿಸಿ ಮತ್ತು ಮರುಪಡೆಯಿರಿ.",
       "HomeGenie.LevelMemory": "ಸ್ವಿಚ್ ಆನ್ ಮಾಡಿದಾಗ ಕೊನೆಯ ಬೆಳಕಿನ ಮಟ್ಟವನ್ನು ನೆನಪಿಸಿಕೊಳ್ಳಿ",
       "HomeGenie.LevelMemory.SimulateOnly": "ಅನುಕರಿಸಿ ಮಾತ್ರ"
+    },
+    "26": {
+      "Title": "ಬಣ್ಣದ ದೀಪಗಳು",
+      "Description": "ಉದಾಹರಣೆ HTTP API (V1) ಬಳಸಿಕೊಂಡು ಫಿಲಿಪ್ಸ್ ಹ್ಯೂ ಲೈಟ್‌ಗಳ ಏಕೀಕರಣ. ಬ್ರಿಡ್ಜ್‌ಗೆ ಸಂಪರ್ಕಿಸಲು ಡೀಫಾಲ್ಟ್ ಬಳಕೆದಾರ \"ನ್ಯೂಡೆವಲಪರ್\" ಆಗಿದ್ದಾರೆ ಮತ್ತು ಅದನ್ನು ಈಗಾಗಲೇ ಸಕ್ರಿಯಗೊಳಿಸಬೇಕು.",
+      "ConfigureOptions.BridgeAddress": "ಫಿಲಿಪ್ಸ್ ಹ್ಯೂ ಬ್ರಿಡ್ಜ್ (V1) ಐಪಿ ವಿಳಾಸ",
+      "ConfigureOptions.BridgeUsername": "ಬಳಕೆದಾರಹೆಸರು",
+      "ConfigureOptions.LightsCount": "ದೀಪಗಳ ಸಂಖ್ಯೆ"
     },
     "34": {
       "Title": "ಹವಾಮಾನ ಮುನ್ಸೂಚನೆ",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "ಗರಿಷ್ಠ ಬೆಳಕಿನ ಮಟ್ಟ (%)",
       "EnergyManagement.EnergySavingMode": "ಸಕ್ರಿಯಗೊಳಿಸಿ"
     },
+    "88": {
+      "Title": "ಸಾಮಾನ್ಯ ಐಪಿ ಕ್ಯಾಮೆರಾ",
+      "Description": "IP ಕ್ಯಾಮೆರಾದಿಂದ ಚಿತ್ರದ ಫೀಡ್ ಅನ್ನು ಪ್ರದರ್ಶಿಸಿ/ಮಾರ್ಗ ಮಾಡಿ.",
+      "IpCamera.ImageURL": "ಕ್ಯಾಮೆರಾ ಇಮೇಜ್ API URL (ನಿಮ್ಮ ಕ್ಯಾಮೆರಾ ಡಾಕ್ಸ್ ನೋಡಿ)",
+      "IpCamera.Username": "ಬಳಕೆದಾರಹೆಸರು (ಐಚ್ಛಿಕ)",
+      "IpCamera.Password": "ಪಾಸ್‌ವರ್ಡ್ (ಐಚ್ಛಿಕ)",
+      "Widget.Config.fps": "ಪ್ರತಿ ಸೆಕೆಂಡಿಗೆ ಚೌಕಟ್ಟುಗಳು",
+      "Widget.Config.size": "ವಿಜೆಟ್ ಗಾತ್ರ"
+    },
     "90": {
       "Title": "ಭದ್ರತಾ ಅಲಾರ್ಮ್ ವ್ಯವಸ್ಥೆ",
       "Description": "ಭದ್ರತಾ ಎಚ್ಚರಿಕೆ ವ್ಯವಸ್ಥೆಯನ್ನು ಕಾರ್ಯಗತಗೊಳಿಸಲು ಸಂವೇದಕಗಳು ಮತ್ತು ಇತರ ಸಾಧನಗಳನ್ನು ಬಳಸಿ.",
       "HomeGenie.SecurityAlarm": "ಅಲಾರಾಂ/ಸ್ಟ್ರೋಬ್ ಆಗಿ ಬಳಸಿ",
+      "HomeGenie.SecurityTriggerHome": "ಹೋಮ್ ಅನ್ನು ಶಸ್ತ್ರಸಜ್ಜಿತಗೊಳಿಸಿದಾಗ ಸಹ ಪ್ರಚೋದಿಸುತ್ತದೆ",
       "HomeGenie.SecuritySensor": "ಭದ್ರತಾ ಸಂವೇದಕವಾಗಿ ಬಳಸಿ",
       "ConfigureOptions.Email.Recipients": "ಎಚ್ಚರಿಕೆ ಅಧಿಸೂಚನೆಗಳಿಗಾಗಿ ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಟ್ಟ ಸ್ವೀಕರಿಸುವವರ ಇ-ಮೇಲ್ ಪಟ್ಟಿ",
       "ConfigureOptions.System.ArmDelay": "ತೋಳಿನ ವಿಳಂಬ (ಸೆಕೆಂಡುಗಳು)",
@@ -199,6 +216,10 @@
       "Title": "ಈವೆಂಟ್‌ಗಳ ಲಾಗಿಂಗ್",
       "Description": "ಸಾಧನದ ಚಟುವಟಿಕೆಯನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಿ.",
       "EventsLogger.EnableLogging": "ಸಕ್ರಿಯಗೊಳಿಸಿ"
+    },
+    "111": {
+      "Title": "ಕ್ಲೈಂಟ್ ಕಾನ್ಫಿಗರೇಶನ್",
+      "Description": "UI ಮತ್ತು ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗಳ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸಂಗ್ರಹಿಸಲು ಬಳಸಲಾಗುವ ಕ್ಲೈಂಟ್‌ನ ಕಾನ್ಫಿಗರೇಶನ್ ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಲು API ಅನ್ನು ಕಾರ್ಯಗತಗೊಳಿಸುತ್ತದೆ."
     },
     "400": {
       "Title": "ವರ್ಚುವಲ್ ಮಾಡ್ಯೂಲ್‌ಗಳ ಡೆಮೊ",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "ಹೊಳಪು ಕಡಿಮೆ ಮಾಡುವ ಬಟನ್",
       "ConfigureOptions.DimmerInterval": "ಮಬ್ಬಾಗಿಸುವ ಹಂತ"
     },
+    "142": {
+      "Title": "ಇ-ಮೇಲ್ ಖಾತೆ",
+      "Description": "ಇಮೇಲ್‌ಗಳನ್ನು ಕಳುಹಿಸಲು/ಸ್ವೀಕರಿಸಲು ಸಿಸ್ಟಮ್ ಪ್ರೋಗ್ರಾಂಗಳು ಬಳಸುವ ಇ-ಮೇಲ್ ಖಾತೆ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸುತ್ತದೆ.",
+      "ConfigureOptions.Email.Sender": "1. ಇ-ಮೇಲ್ ವಿಳಾಸ",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP ಸರ್ವರ್ ವಿಳಾಸ",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP ಬಳಕೆದಾರಹೆಸರು (ಐಚ್ಛಿಕ)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP ಪಾಸ್‌ವರ್ಡ್ (ಐಚ್ಛಿಕ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP ಸರ್ವರ್ ಪೋರ್ಟ್",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP ಸರ್ವರ್ SSL ಅನ್ನು ಬಳಸುತ್ತದೆ"
+    },
     "145": {
       "Title": "ಸ್ಮಾರ್ಟ್ ಸಾಧನ",
       "Description": "ಚಲನೆಯ ಪತ್ತೆ ಮತ್ತು ಸುತ್ತುವರಿದ ಬೆಳಕನ್ನು ಆಧರಿಸಿ ಸಾಧನವನ್ನು ಆನ್/ಆಫ್ ಮಾಡಿ.",
@@ -250,6 +281,13 @@
       "Title": "ಸೂರ್ಯೋದಯ ಬಣ್ಣಗಳ ಸನ್ನಿವೇಶ",
       "Description": "ಬಣ್ಣ ಬದಲಾಯಿಸುವ LED ದೀಪಗಳಿಗೆ \"ಸೂರ್ಯೋದಯ\" ಸನ್ನಿವೇಶದ ಉದಾಹರಣೆ.",
       "Scenarios.SunriseColors": "ಸನ್‌ರೈಸ್ ಕಲರ್ಸ್ ಸನ್ನಿವೇಶಕ್ಕೆ ಲಿಂಕ್"
+    },
+    "910": {
+      "Title": "ವಸ್ತು ಪತ್ತೆ",
+      "Description": "ಪೂರ್ವ ತರಬೇತಿ ಪಡೆದ YOLO11 ಮಾದರಿಯನ್ನು ಬಳಸಿಕೊಂಡು ವಸ್ತುಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.",
+      "ML.ObjectDetection": "ವಸ್ತುಗಳ ಪತ್ತೆಹಚ್ಚುವಿಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+      "ML.ObjectDetection.TriggerDetect": "ಅಲಾರಾಂ ಅನ್ನು ಪ್ರಚೋದಿಸುವ ವಸ್ತುಗಳ ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಲಾದ ಪಟ್ಟಿ (ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ). (ಉದಾ: ಬೆಕ್ಕು, ನಾಯಿ, ವ್ಯಕ್ತಿ, ಬೆನ್ನುಹೊರೆ, ಸೂಟ್‌ಕೇಸ್)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)"
     }
   }
 }

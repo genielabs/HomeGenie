@@ -4,7 +4,7 @@
   "node_inclusion": "Wedzera mudziyo",
   "node_exclusion": "Bvisa mudziyo",
   "enabling_node_inclusion": "Kugonesa node inclusion mode, ndapota mira...",
-  "enabling_node_exclusion": "Kugonesa node yekubvisa modhi, ndapota mira...",
+  "enabling_node_exclusion": "Kugonesa node yekusabvisa modhi, ndapota mira...",
   "inclusion_message": "Dzvanya bhatani pane mudziyo waunoda kuwedzera kune iyi network.",
   "exclusion_message": "Dzvanya bhatani pamudziyo waunoda kubvisa kubva kune iyi network.",
   "task_duration_notice": "Basa iri rinogona kutora kusvika <strong>{{timeout}}</strong> kwemasekonzi kuti ripere.",

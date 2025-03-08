@@ -19,7 +19,7 @@
   "routing_info": "Informacije o rutiranju",
   "association_groups": "Grupe udruženja",
   "association_description": "Ovaj uređaj šalje izvještaje čvorovima uključenim u asocijacijske grupe. Da biste primali izvještaje sa ovog uređaja, uključite čvor 1 (kontrolor) u grupe asocijacija.",
-  "associated_nodes": "Povezani čvorovi",
+  "associated_nodes": "Pridruženi čvorovi",
   "enter_node_number": "Unesite broj čvora",
   "configuration_parameters": "Parametri konfiguracije",
   "generic_parameter": "Generički parametar",

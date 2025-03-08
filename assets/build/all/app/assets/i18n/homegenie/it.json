@@ -122,13 +122,13 @@
     "cronwizard_minuteselect_everyminute":
         "Ogni minuto",
     "cronwizard_minuteselect_everynthminute":
-        "Ogni <n> minuti",
+        "Ogni n. minuti",
     "cronwizard_minuteselect_selectedminutes":
         "Minuti selezionati",
     "cronwizard_hourselect_everyhour":
         "Ogni ora",
     "cronwizard_hourselect_everynthhour":
-        "Ogni <n> ore",
+        "Ogni n. ore",
     "cronwizard_hourselect_selectedhours":
         "Ore selezionate",
     "cronwizard_dayselect_everyday":
@@ -244,9 +244,9 @@
   "automation_programming_guide":
     "Guida alla programmazione",
   "tap_to_disable":
-    "Tocca per disabilitare",
+    "Clicca per disabilitare",
   "tap_to_enable":
-    "Tocca per abilitare",
+    "Clicca per abilitare",
   "program_data":
     "Dati programma",
   "visual_code":
@@ -274,179 +274,247 @@
   "capture_pause_asis":
     "Così com'è",
 " ": "------------------------------------------",
-    "$options":
-    {
+    "$options": {
 
-      "16": {
-        "Title":
-        "Memoria livello",
-        "Description":
-        "Memorizza e ripristina livello.",
-        "HomeGenie.LevelMemory":
-        "Ripristina l'ultimo livello all'accensione",
-        "HomeGenie.LevelMemory.SimulateOnly":
-        "Simula soltanto"
-      },
+    "16": {
+      "Title":
+      "Memoria livello",
+      "Description":
+      "Memorizza e ripristina livello.",
+      "HomeGenie.LevelMemory":
+      "Ripristina l'ultimo livello all'accensione",
+      "HomeGenie.LevelMemory.SimulateOnly":
+      "Simula soltanto"
+    },
 
-      "34": {
-        "Title":
+    "26": {
+      "Title":
+        "Luci colorate",
+      "Description":
+        "Esempio di integrazione delle luci Philips Hue tramite HTTP API (V1).\nL'utente predefinito per connettersi al bridge è \"newdeveloper\" e dovrebbe essere già abilitato.",
+      "ConfigureOptions.BridgeAddress":
+        "Indirizzo IP Philips Hue Bridge (V1)",
+      "ConfigureOptions.BridgeUsername":
+        "Nome utente",
+      "ConfigureOptions.LightsCount":
+        "Numero di luci"
+    },
+
+    "34": {
+      "Title":
         "Meteo",
-        "Description":
+      "Description":
         "Informazioni meteo e previsioni dal servizio Open Weather Map.\nPer attivare questo widget inserisci una chiave API valida.\nSegui le istruzioni su https://openweathermap.org/appid per ottenere una chiave API gratuita.",
-        "ConfigureOptions.Location":
+      "ConfigureOptions.Location":
         "Città",
-        "ConfigureOptions.Language":
+      "ConfigureOptions.Language":
         "Lingua (es. EN, IT, FR, DE, ...)",
-        "ConfigureOptions.UpdateInterval":
+      "ConfigureOptions.UpdateInterval":
         "Intervallo aggiornamento (minuti)",
-        "ConfigureOptions.ApiKey":
+      "ConfigureOptions.ApiKey":
         "OpenWeatherMap API key (APPID)"
-      },
+    },
 
-      "77": {
-        "Title": "Network MQTT",
-        "Description": "Connettiti a un broker MQTT per utilizzare l'app HomeGenie Panel da qualsiasi luogo tramite Internet o per interconnettere i dispositivi HomeGenie sulla stessa rete MQTT.",
-        "MQTT.SensorPublish": "Pubblica gli eventi emessi da questo modulo",
-        "ConfigureOptions.ClientId": "Identificativo client",
-        "ConfigureOptions.ServerAddress": "Indirizzo server",
-        "ConfigureOptions.ServerPort": "Porta server",
-        "ConfigureOptions.Encryption": "Abilita crittografia end-to-end (E2EE)",
-        "ConfigureOptions.WebSockets": "Utilizza WebSockets",
-        "ConfigureOptions.TLS": "Abilita TLS/SSL",
-        "ConfigureOptions.Username": "Nome utente (opzionale)",
-        "ConfigureOptions.Password": "Password (opzionale)",
-        "ConfigureOptions.ImportExternal": "Importa i moduli esterni"
-      },
+    "77": {
+      "Title": "Network MQTT",
+      "Description": "Connettiti a un broker MQTT per utilizzare l'app HomeGenie Panel da qualsiasi luogo tramite Internet o per interconnettere i dispositivi HomeGenie sulla stessa rete MQTT.",
+      "MQTT.SensorPublish": "Pubblica gli eventi emessi da questo modulo",
+      "ConfigureOptions.ClientId": "Identificativo client",
+      "ConfigureOptions.ServerAddress": "Indirizzo server",
+      "ConfigureOptions.ServerPort": "Porta server",
+      "ConfigureOptions.Encryption": "Abilita crittografia end-to-end (E2EE)",
+      "ConfigureOptions.WebSockets": "Utilizza WebSockets",
+      "ConfigureOptions.TLS": "Abilita TLS/SSL",
+      "ConfigureOptions.Username": "Nome utente (opzionale)",
+      "ConfigureOptions.Password": "Password (opzionale)",
+      "ConfigureOptions.ImportExternal": "Importa i moduli esterni"
+    },
 
-      "78": {
-        "Title": "Termostato Smart",
-        "Description": "Usa un qualsiasi sensore di temperatura e interruttore smart per implementare le funzionalità di un termostato.",
-        "VirtualThermostat.TemperatureModule": "Sensore di temperatura",
-        "VirtualThermostat.HeatingSwitchModule": "Interruttore Heating",
-        "VirtualThermostat.CoolingSwitchModule": "Interruttore Cooling",
-        "ConfigureOptions.ThermostatsCount": "Numero di termostati"
-      },
+    "78": {
+      "Title": "Termostato Smart",
+      "Description": "Usa un qualsiasi sensore di temperatura e interruttore smart per implementare le funzionalità di un termostato.",
+      "VirtualThermostat.TemperatureModule": "Sensore di temperatura",
+      "VirtualThermostat.HeatingSwitchModule": "Interruttore Heating",
+      "VirtualThermostat.CoolingSwitchModule": "Interruttore Cooling",
+      "ConfigureOptions.ThermostatsCount": "Numero di termostati"
+    },
 
-      "81": {
-          "Title":
-              "Monitor Energia",
-          "Description":
-              "Genera statistiche sul consumo energetico e sull'utilizzo dei dispositivi.",
-          "EnergyManagement.MonitorStatus":
-              "Monitora stato",
-          "EnergyManagement.MonitorWatts":
-              "Monitora consumo energetico"
-      },
+    "81": {
+        "Title":
+            "Monitor Energia",
+        "Description":
+            "Genera statistiche sul consumo energetico e sull'utilizzo dei dispositivi.",
+        "EnergyManagement.MonitorStatus":
+            "Monitora stato",
+        "EnergyManagement.MonitorWatts":
+            "Monitora consumo energetico"
+    },
 
-      "82": {
-          "Title":
-              "Modalità risparmio energetico",
-          "Description":
-              "Mantiene il livello della luce al di sotto di una percentuale configurabile.",
-          "EnergyManagement.EnergySavingLevel":
-              "Livello massimo (%)",
-          "EnergyManagement.EnergySavingMode":
-              "Abilita"
-      },
+    "82": {
+        "Title":
+            "Modalità risparmio energetico",
+        "Description":
+            "Mantiene il livello della luce al di sotto di una percentuale configurabile.",
+        "EnergyManagement.EnergySavingLevel":
+            "Livello massimo (%)",
+        "EnergyManagement.EnergySavingMode":
+            "Abilita"
+    },
 
-      "90": {
-          "Title":
-              "Sistema di allarme",
-          "Description":
-              "Usa sensori e altri dispositivi per implementare un sistema di allarme.",
-          "HomeGenie.SecurityAlarm":
-              "Usa come allarme/strobo",
-          "HomeGenie.SecuritySensor":
-              "Usa come sensore di sicurezza",
-          "ConfigureOptions.Email.Recipients":
-              "Elenco separato da virgola di destinatari e-mail per le notifiche di allarme",
-          "ConfigureOptions.System.ArmDelay":
-              "Ritardo inserimento allarme (seconds)",
-          "ConfigureOptions.System.SirenStartTime":
-              "Ritardo sirene/strobo (secondi)",
-          "ConfigureOptions.System.SirenMaxTime":
-              "Tempo massimo sirene/strobo (secondi, 0=infinito)",
-          "ConfigureOptions.Trigger.ArmedProgram":
-              "Programma da eseguire quando l'allarme viene inserito",
-          "ConfigureOptions.Trigger.DisarmedProgram":
-              "Programma da eseguire quando l'allarme viene disinserito",
-          "ConfigureOptions.Trigger.TriggeredProgram":
-              "Programma da eseguire quando scatta l'allarme"
-      },
+    "88": {
+      "Title":
+          "Telecamera IP generica",
+      "Description":
+          "Visualizza/invia un feed di immagini proveniente da una telecamera IP.",
+      "IpCamera.ImageURL":
+          "Indirizzo URL API immagine telecamera (vedere doc. telecamera)",
+      "IpCamera.Username":
+          "Nome utente (opzionale)",
+      "IpCamera.Password":
+          "Password (opzionale)",
+      "Widget.Config.fps":
+          "Fotogrammi al secondo",
+      "Widget.Config.size":
+          "Dimensione widget"
+    },
 
-      "95": {
-        "Title": "Log eventi",
-        "Description": "Registra attività del dispositivo.",
-        "EventsLogger.EnableLogging": "Abilita"
-      },
+    "90": {
+        "Title":
+            "Sistema di allarme",
+        "Description":
+            "Usa sensori e altri dispositivi per implementare un sistema di allarme.",
+        "HomeGenie.SecurityAlarm":
+            "Usa come allarme/strobo",
+        "HomeGenie.SecurityTriggerHome":
+            "Attiva allarme anche quando armato 'In casa'",
+        "HomeGenie.SecuritySensor":
+            "Usa come sensore di sicurezza",
+        "ConfigureOptions.Email.Recipients":
+            "Elenco separato da virgola di destinatari e-mail per le notifiche di allarme",
+        "ConfigureOptions.System.ArmDelay":
+            "Ritardo inserimento allarme (seconds)",
+        "ConfigureOptions.System.SirenStartTime":
+            "Ritardo sirene/strobo (secondi)",
+        "ConfigureOptions.System.SirenMaxTime":
+            "Tempo massimo sirene/strobo (secondi, 0=infinito)",
+        "ConfigureOptions.Trigger.ArmedProgram":
+            "Programma da eseguire quando l'allarme viene inserito",
+        "ConfigureOptions.Trigger.DisarmedProgram":
+            "Programma da eseguire quando l'allarme viene disinserito",
+        "ConfigureOptions.Trigger.TriggeredProgram":
+            "Programma da eseguire quando scatta l'allarme"
+    },
 
-      "400": {
-        "Title": "Demo Moduli Virtuali",
-        "Description": "Imposta manualmente i valori del dispositivo virtuale.",
-        "Sensor.Temperature": "Valore temperatura",
-        "Sensor.Luminance": "Valore luminosità",
-        "Sensor.MotionDetect": "Stato rilevamentto movimento",
-        "Status.Battery": "Livello batteria",
-        "Sensor.DoorWindow": "Stato sensore porta/finiestra (aperto/chiuso)",
-        "Status.Level": "Stato interruttore (acceso/spento)"
-      },
+    "95": {
+      "Title": "Log eventi",
+      "Description": "Registra attività del dispositivo.",
+      "EventsLogger.EnableLogging": "Abilita"
+    },
 
-      "401": {
-        "Title": "Demo - Porta aperta/chiusa",
-        "Description": "Simula apertura/chiusura porta del sensore porta-finestra demo."
-      },
+    "111": {
+      "Title": "Configurazione client",
+      "Description": "Implementa l'API per la gestione dei profili di configurazione del cliente utilizzati per memorizzare le impostazioni dell'interfaccia utente e delle dashboard."
+    },
 
-      "402": {
-        "Title": "Demo - Rileva movimento",
-        "Description": "Simula rilevamento movimento del multi-sensore demo."
-      },
+    "400": {
+      "Title": "Demo Moduli Virtuali",
+      "Description": "Imposta manualmente i valori del dispositivo virtuale.",
+      "Sensor.Temperature": "Valore temperatura",
+      "Sensor.Luminance": "Valore luminosità",
+      "Sensor.MotionDetect": "Stato rilevamentto movimento",
+      "Status.Battery": "Livello batteria",
+      "Sensor.DoorWindow": "Stato sensore porta/finiestra (aperto/chiuso)",
+      "Status.Level": "Stato interruttore (acceso/spento)"
+    },
 
-      "410": {
-        "Title": "Simula sensore",
-        "Description": "Genera valori sensore casuali.",
-        "Simulator.Sensor.Temperature": "Sensore temperatura",
-        "Simulator.Sensor.Humidity": "Sensore umidità",
-        "Simulator.Sensor.Luminance": "Sensore luce",
-        "Simulator.Meter.Watts": "Misuratore Watt",
-        "Simulator.Meter.Watts.Max": "Potenza massima Watt",
-        "Simulator.Sensor.DataFrequency": "Frequenza valori generati"
-      },
+    "401": {
+      "Title": "Demo - Porta aperta/chiusa",
+      "Description": "Simula apertura/chiusura porta del sensore porta-finestra demo."
+    },
 
-      "505": {
-        "Title": "Telecomando",
-        "Description": "Controlla il dispositivo usando un telcomando (IR or RF).",
-        "HomeGenie.RemoteControl.Enable": "Abilita",
-        "HomeGenie.RemoteControl.IRCode": "Pulsante accendi/spegni",
-        "ConfigureOptions.DimmerUpCode": "Pulsante per aumentare luminosità",
-        "ConfigureOptions.DimmerDownCode": "Pulsante per diminuire luminosità",
-        "ConfigureOptions.DimmerInterval": "Incremento"
-      },
+    "402": {
+      "Title": "Demo - Rileva movimento",
+      "Description": "Simula rilevamento movimento del multi-sensore demo."
+    },
 
-      "145": {
-          "Title":
-              "Smart Device",
-          "Description":
-              "Accende/Spegne il dispositivo in base al movimento e alla luce ambientale.",
-          "HomeGenie.SmartLights.Enable":
-              "Abilita 'Smart Device'",
-          "HomeGenie.SmartLights.OnMotionDetect":
-              "Controlla con sensore (opzionale)",
-          "HomeGenie.SmartLights.CheckLuminosity":
-              "Controlla con sensore luce (opzionale)",
-          "HomeGenie.SmartLights.SwitchOffTimeout":
-              "Spegni dopo un periodo di inattività (secondi)",
-          "HomeGenie.SmartLights.MinLuminance":
-              "Accendi se la luminosità è inferiore a"
-      },
+    "410": {
+      "Title": "Simula sensore",
+      "Description": "Genera valori sensore casuali.",
+      "Simulator.Sensor.Temperature": "Sensore temperatura",
+      "Simulator.Sensor.Humidity": "Sensore umidità",
+      "Simulator.Sensor.Luminance": "Sensore luce",
+      "Simulator.Meter.Watts": "Misuratore Watt",
+      "Simulator.Meter.Watts.Max": "Potenza massima Watt",
+      "Simulator.Sensor.DataFrequency": "Frequenza valori generati"
+    },
 
-      "8": {
-          "Title":
-              "Scenario alba",
-          "Description":
-              "Scenario \"Alba\" di esempio per luci LED colorate.",
-          "Scenarios.SunriseColors":
-              "Collega a scenario Sunrise Colors"
-      }
+    "505": {
+      "Title": "Telecomando",
+      "Description": "Controlla il dispositivo usando un telcomando (IR or RF).",
+      "HomeGenie.RemoteControl.Enable": "Abilita",
+      "HomeGenie.RemoteControl.IRCode": "Pulsante accendi/spegni",
+      "ConfigureOptions.DimmerUpCode": "Pulsante per aumentare luminosità",
+      "ConfigureOptions.DimmerDownCode": "Pulsante per diminuire luminosità",
+      "ConfigureOptions.DimmerInterval": "Incremento"
+    },
 
+    "142": {
+        "Title":
+            "Account di posta elettronica",
+        "Description":
+            "Memorizza le informazioni dell'account e-mail utilizzato dai programmi di sistema per inviare/ricevere e-mail.",
+        "ConfigureOptions.Email.Sender":
+            "1. Indirizzo e-mail",
+        "ConfigureOptions.Email.SmtpServer":
+            "2. Indirizzo del server SMTP",
+        "ConfigureOptions.Email.SmtpUserName":
+            "3. Nome utente SMTP (facoltativo)",
+        "ConfigureOptions.Email.SmtpPassword":
+            "4. Password SMTP (facoltativa)",
+        "ConfigureOptions.Email.SmtpPort":
+            "5. Porta del server SMTP",
+        "ConfigureOptions.Email.SmtpUseSsl":
+            "6. Il server SMTP utilizza SSL"
+    },
+
+    "145": {
+        "Title":
+            "Smart Device",
+        "Description":
+            "Accende/Spegne il dispositivo in base al movimento e alla luce ambientale.",
+        "HomeGenie.SmartLights.Enable":
+            "Abilita 'Smart Device'",
+        "HomeGenie.SmartLights.OnMotionDetect":
+            "Controlla con sensore (opzionale)",
+        "HomeGenie.SmartLights.CheckLuminosity":
+            "Controlla con sensore luce (opzionale)",
+        "HomeGenie.SmartLights.SwitchOffTimeout":
+            "Spegni dopo un periodo di inattività (secondi)",
+        "HomeGenie.SmartLights.MinLuminance":
+            "Accendi se la luminosità è inferiore a"
+    },
+
+    "8": {
+        "Title":
+            "Scenario alba",
+        "Description":
+            "Scenario \"Alba\" di esempio per luci LED colorate.",
+        "Scenarios.SunriseColors":
+            "Collega a scenario Sunrise Colors"
+    },
+
+    "910": {
+      "Title":
+        "Rilevamento oggetti",
+      "Description":
+        "Rileva oggetti utilizzando un modello YOLO11 pre-trained.",
+      "ML.ObjectDetection":
+        "Abilita rilevamento oggetti",
+      "ML.ObjectDetection.TriggerDetect":
+        "Elenco separato da virgole di cose (in Inglese) che fanno scattare l'allarme. (e.g.: cat, dog, person, backpack, suitcase)",
+      "ConfigureOptions.Yolo.ModelPath":
+        "Percorso file del modello YOLO11 (.onnx)"
     }
+
+  }
 }

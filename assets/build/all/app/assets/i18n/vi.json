@@ -94,6 +94,7 @@
   "saving_settings": "Lưu cài đặt",
   "operations_in_progress": "Hoạt động đang tiến hành",
   "connection_error": "Lỗi kết nối",
+  "no_video_signal": "Không có tín hiệu video",
   "error_loading_config": "Lỗi khi tải cấu hình",
   "error_occurred": "Đã xảy ra lỗi",
   "info": "Thông tin",
@@ -299,5 +300,19 @@
   "weather_data": "Dữ liệu thời tiết",
   "energy_monitor": "Màn hình năng lượng",
   "video_source": "Nguồn Video",
-  "custom_widget": "Tiện ích tùy chỉnh"
+  "custom_widget": "Tiện ích tùy chỉnh",
+  "contextual_help": "Trợ giúp theo ngữ cảnh",
+  "homegenie_website": "Trang chủGenie Web",
+  "video_source_description": "Đặt loại nguồn video, địa chỉ, FPS và kích thước tiện ích.",
+  "source_type": "Loại nguồn video",
+  "http_address": "Địa chỉ HTTP",
+  "frames_per_seconds": "Khung hình mỗi giây",
+  "widget_size": "Kích thước tiện ích",
+  "live_streaming": "Phát trực tiếp",
+  "video_file": "Tập tin video",
+  "image_refresh": "Nguồn cấp hình ảnh",
+  "large": "Lớn",
+  "medium": "Trung bình",
+  "small": "Bé nhỏ",
+  "auto": "Tự động"
 }

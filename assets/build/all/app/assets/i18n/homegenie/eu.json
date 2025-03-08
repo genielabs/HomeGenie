@@ -2,7 +2,7 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Ongi etorri HomeGenie-ra!",
   "welcome_subtitle": "Automatizazio adimen programagarria",
-  "not_configured_yet": "Sistema ez dago oraindik konfiguratuta. Konfigurazio morroi honek zure sistema martxan jartzen lagunduko dizu urrats batzuetan.",
+  "not_configured_yet": "Sistema ez dago oraindik konfiguratuta. Konfigurazio morroi honek zure sistema martxan jartzen lagunduko dizu urrats gutxitan.",
   "system_config_start_with_base_and_backup": "Berreskuratu babeskopia fitxategitik",
   "system_config_start_with_default_setup": "Lehenetsitako konfigurazioa",
   "system_config_include_demo": "Sartu demoa gailuaren jarduera simulatuarekin",
@@ -57,7 +57,7 @@
   "cronwizard_hours": "Orduak",
   "cronwizard_days": "Egunak",
   "cronwizard_months": "Hilabeteak",
-  "cronwizard_minuteselect_everyminute": "Minutu bakoitzean",
+  "cronwizard_minuteselect_everyminute": "Minutu bakoitza",
   "cronwizard_minuteselect_everynthminute": "Emandako minutu bakoitzean",
   "cronwizard_minuteselect_selectedminutes": "Hautatutako minutuak",
   "cronwizard_hourselect_everyhour": "Orduro",
@@ -118,19 +118,19 @@
   "program_status_broken": "Hautsita",
   "program_status_compile": "Konpilatu",
   "automation_programming_guide": "Programazio gida'",
-  "tap_to_disable": "Sakatu desgaitzeko",
-  "tap_to_enable": "Sakatu gaitzeko",
+  "tap_to_disable": "Egin klik desgaitzeko",
+  "tap_to_enable": "Egin klik gaitzeko",
   "program_data": "Programaren datuak",
   "visual_code": "Ikusizko kodea",
   "generated_code": "Sortutako kodea",
   "setup_code": "Konfigurazioa",
   "main_code": "Nagusia",
   "context_code": "Testuingurua",
-  "main_code_empty_note": "\"Nagusia\" kodea hutsik dago. Erabili \"Kode bisuala\" editorea kode hau sortzeko: - Ireki \"Programa\" kategoria ezkerreko komandoen paletatik - Arrastatu \"Nagusia\" motako bloke bat ikusizko kodearen lan-eremuan - Gehitu horren barruan beste kode bloke batzuk programa honen ekintzak eta logika ezartzeko. \"Nagusia\" programa eskuz edo automatikoki abiarazi daiteke Konfigurazio kodean emandako baldintzen arabera.",
+  "main_code_empty_note": "\"Nagusia\" kodea hutsik dago. Erabili \"Kode bisuala\" editorea kode hau sortzeko: - Ireki \"Programa\" kategoria ezkerreko komandoen paletatik - Arrastatu \"Nagusia\" motako bloke bat ikusizko kodearen lan-eremuan - Gehitu horren barruan beste kode bloke batzuk programa honen ekintzak eta logika ezartzeko. \"Nagusia\" programa eskuz exekutatu edo automatikoki abiarazi daiteke Konfigurazio kodean emandako baldintzen arabera.",
   "setup_code_empty_note": "\"Konfigurazioa\" kodea hutsik dago. Erabili \"Kode bisuala\" editorea kode hau sortzeko: - Ireki \"Programa\" kategoria ezkerreko komandoen paletatik - Arrastatu \"Konfigurazioa\" motako bloke bat ikusizko kodearen lan-eremuan - Gehitu horren barruan beste kode bloke batzuk kode \"Nagusia\" exekuzioa abiaraziko duten baldintzak zehazteko Kode hau gertaera berri bat gertatzen den bakoitzean eta gutxienez minutu batean behin ebaluatzen da.",
   "capture_commands": "Harrapatu komandoak",
   "capture_commands_description": "Gehitu widget-etan eskuz egindako komando guztiak programara.",
-  "capture_commands_pause": "Pausa komandoen artean",
+  "capture_commands_pause": "Aginduen artean pausatu",
   "capture_pause_none": "Bat ere ez",
   "capture_pause_asis": "Dagoen bezala",
   "$options": {
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Gogoratu azken argi-maila piztuta dagoenean",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulatu bakarrik"
     },
+    "26": {
+      "Title": "Koloretako argiak",
+      "Description": "Adibidea Philips Hue argien integrazioa HTTP APIa erabiliz (V1). Zubira konektatzeko erabiltzaile lehenetsia \"berria garatzailea\" da eta dagoeneko gaituta egon beharko luke.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP helbidea",
+      "ConfigureOptions.BridgeUsername": "Erabiltzaile izena",
+      "ConfigureOptions.LightsCount": "Argi kopurua"
+    },
     "34": {
       "Title": "Eguraldi Iragarpena",
-      "Description": "Eguraldiaren eta iragarpenen informazioa Open Weather Map zerbitzutik. Widget hau aktibatzeko, sartu baliozko API gako bat. Jarraitu argibideak https://openweathermap.org/appid helbidean doako API gako bat lortzeko.",
+      "Description": "Eguraldia eta iragarpenen informazioa Open Weather Map zerbitzutik. Widget hau aktibatzeko, sartu baliozko API gako bat. Jarraitu argibideak https://openweathermap.org/appid helbidean doako API gako bat lortzeko.",
       "ConfigureOptions.Location": "Hiriaren izena",
       "ConfigureOptions.Language": "Hizkuntza (adibidez. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Eguneratzeko tartea (minutuak)",
@@ -174,7 +181,7 @@
       "Title": "Energia Monitorea",
       "Description": "Sortu energia-kontsumoari eta gailuen erabilerari buruzko estatistikak.",
       "EnergyManagement.MonitorStatus": "Monitorearen egoera",
-      "EnergyManagement.MonitorWatts": "Energia-kontsumoa kontrolatzea"
+      "EnergyManagement.MonitorWatts": "Kontrolatu energia-kontsumoa"
     },
     "82": {
       "Title": "Energia aurrezteko modua",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Argi-maila maximoa (%)",
       "EnergyManagement.EnergySavingMode": "Gaitu"
     },
+    "88": {
+      "Title": "IP kamera generikoa",
+      "Description": "Bistaratu/bideratu IP kamera batetik irudien jarioa.",
+      "IpCamera.ImageURL": "Kameraren irudiaren APIaren URLa (ikusi zure kameraren dokumentuak)",
+      "IpCamera.Username": "Erabiltzaile izena (aukerakoa)",
+      "IpCamera.Password": "Pasahitza (aukerakoa)",
+      "Widget.Config.fps": "Fotograma segundoko",
+      "Widget.Config.size": "Widgetaren tamaina"
+    },
     "90": {
       "Title": "Segurtasun Alarma Sistema",
-      "Description": "Erabili sentsoreak eta beste gailu batzuk segurtasun-alarma sistema bat ezartzeko.",
+      "Description": "Erabili sentsoreak eta beste gailu batzuk segurtasun-alarma-sistema bat ezartzeko.",
       "HomeGenie.SecurityAlarm": "Erabili alarma/estroboscopio gisa",
+      "HomeGenie.SecurityTriggerHome": "Etxea armatuta dagoenean ere abiarazten da",
       "HomeGenie.SecuritySensor": "Erabili segurtasun sentsore gisa",
       "ConfigureOptions.Email.Recipients": "Alarma jakinarazpenetarako hartzaileen mezu elektronikoen zerrenda komaz bereizita",
       "ConfigureOptions.System.ArmDelay": "Besoaren atzerapena (segundoak)",
@@ -200,12 +217,16 @@
       "Description": "Grabatu gailuaren jarduera.",
       "EventsLogger.EnableLogging": "Gaitu"
     },
+    "111": {
+      "Title": "Bezeroaren konfigurazioa",
+      "Description": "Interfazea eta aginte-panelen ezarpenak gordetzeko erabiltzen diren bezeroen konfigurazio-profilak kudeatzeko APIa ezartzen du."
+    },
     "400": {
       "Title": "Modulu birtualen demoa",
       "Description": "Ezarri eskuz gailu birtualaren balioak.",
       "Sensor.Temperature": "Tenperaturaren balioa",
       "Sensor.Luminance": "Luminantza-balioa",
-      "Sensor.MotionDetect": "Mugimendua hautemateko egoera",
+      "Sensor.MotionDetect": "Mugimenduak hautemateko egoera",
       "Status.Battery": "Bateria maila",
       "Sensor.DoorWindow": "Ate/Leiho sentsorearen egoera (ireki/itxita)",
       "Status.Level": "Aldatu egoera (aktibatu/desaktibatu)"
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Distira gutxitzeko botoia",
       "ConfigureOptions.DimmerInterval": "Iluntzeko urratsa"
     },
+    "142": {
+      "Title": "Posta elektronikoko kontua",
+      "Description": "Sistemako programek mezu elektronikoak bidaltzeko/jasotzeko erabiltzen duten posta-kontuaren informazioa gordetzen du.",
+      "ConfigureOptions.Email.Sender": "1. Helbide elektronikoa",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP zerbitzariaren helbidea",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP erabiltzaile-izena (aukerakoa)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP pasahitza (aukerakoa)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP zerbitzariaren ataka",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP zerbitzariak SSL erabiltzen du"
+    },
     "145": {
       "Title": "Gailu adimenduna",
       "Description": "Piztu/itzali gailua mugimendua hautemateko eta giro-argiaren arabera.",
@@ -250,6 +281,13 @@
       "Title": "Egunsentiaren koloreen eszenatokia",
       "Description": "Adibidea \"Eguzkia\" agertokia kolorea aldatzeko LED argietarako.",
       "Scenarios.SunriseColors": "Esteka Sunrise Colors eszenatokira"
+    },
+    "910": {
+      "Title": "Objektuak hautematea",
+      "Description": "Detektatu objektuak aldez aurretik trebatutako YOLO11 eredua erabiliz.",
+      "ML.ObjectDetection": "Gaitu objektuak hautematea",
+      "ML.ObjectDetection.TriggerDetect": "Alarma piztuko duten gauzen zerrenda komaz bereizita (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 eredu-fitxategiaren bidea (.onnx)"
     }
   }
 }

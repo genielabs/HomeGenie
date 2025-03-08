@@ -13,7 +13,7 @@
   "HomeAutomation.X10": "X10 molaoli",
   "HomeAutomation.ZWave": "Molaoli oa Z-Wave",
   "HomeAutomation.ZigBee": "Mookameli oa ZigBee",
-  "device_port": "Kou ea sesebelisoa",
+  "device_port": "Kou ea lisebelisoa",
   "device_driver": "Mokhanni",
   "flow_control": "Taolo ea phallo",
   "controller": "Molaoli",
@@ -98,7 +98,7 @@
   "scheduler_preset_action_program_run": "Tsamaisa lenaneo",
   "scheduler_preset_action_config_program": "Lenaneo",
   "scheduler_preset_action_config_options": "Dikgetho",
-  "scheduler_preset_action_program_say": "Bua",
+  "scheduler_preset_action_program_say": "Bolela",
   "scheduler_preset_action_config_message": "Molaetsa",
   "save_and_build": "Boloka le ho haha",
   "toggle_widgets_preview": "Fetolela tlhahlobo ea li-widget",
@@ -118,15 +118,15 @@
   "program_status_broken": "E robehile",
   "program_status_compile": "Kopanya",
   "automation_programming_guide": "Tataiso ea mananeo'",
-  "tap_to_disable": "Tlanya ho tima",
-  "tap_to_enable": "Tlanya ho bulela",
+  "tap_to_disable": "Tobetsa ho tima",
+  "tap_to_enable": "Tobetsa ho bulela",
   "program_data": "Lintlha tsa lenaneo",
   "visual_code": "Khoutu ea pono",
   "generated_code": "E hlahisitsoe khoutu",
   "setup_code": "Tlhophiso",
   "main_code": "Ka sehloohong",
   "context_code": "Moelelo",
-  "main_code_empty_note": "Khoutu ea \"Main\" ha e na letho. Sebelisa \"Visual Code\" mohlophisi ho hlahisa khoutu ena: - Bula sehlopha sa \"Lenaneo\" ho tloha phaleteng ea litaelo ka ho le letšehali - Hula mofuta oa \"Main\" sebakeng sa ts'ebetso ea khoutu ea pono - Eketsa ka hare ho eona li-code tse ling ho kenya ts'ebetsong liketso le logic ea lenaneo lena Lenaneo la \"Main\" le ka tsamaisoa ka letsoho kapa la qalisoa ho latela maemo a qetellang a fanoe ka khoutu ea Setup.",
+  "main_code_empty_note": "Khoutu ea \"Moholo\" ha e na letho. Sebelisa \"Visual Code\" mohlophisi ho hlahisa khoutu ena: - Bula sehlopha sa \"Lenaneo\" ho tloha phaleteng ea litaelo ka ho le letšehali - Hula mofuta oa \"Main\" sebakeng sa ts'ebetso ea khoutu ea pono - Eketsa ka hare ho eona li-code tse ling ho kenya ts'ebetsong liketso le logic ea lenaneo lena Lenaneo la \"Main\" le ka tsamaisoa ka letsoho kapa la qalisoa ho latela maemo a qetellang a fanoe ka khoutu ea Setup.",
   "setup_code_empty_note": "\"Setapo\" khoutu ha e na letho. Sebelisa \"Visual Code\" mohlophisi ho hlahisa khoutu ena: - Bula sehlopha \"Lenaneo\" ho tloha phaleteng ea litaelo ka ho le letšehali - Hula mofuta oa \"Setup\" sebakeng sa ts'ebetso ea khoutu ea pono - Eketsa ka hare ho eona li-code tse ling ho fumana maemo a tla etsa hore \"Main\" a phethe khoutu ena e hlahlojoa nako le nako ha ketsahalo e ncha e etsahala le bonyane hang ka motsotso.",
   "capture_commands": "Tšoara litaelo",
   "capture_commands_description": "Kenya litaelo tsohle tse etsoang ka letsoho ho li-widget lenaneong.",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Hopola boemo ba lebone la ho qetela ha o butswe",
       "HomeGenie.LevelMemory.SimulateOnly": "Etsisa feela"
     },
+    "26": {
+      "Title": "Mabone a mebala",
+      "Description": "Mohlala oa ho kopanya mabone a Philips Hue ho sebelisa HTTP API (V1). Mosebelisi ea kamehla oa ho hokela borokho ke \"moetsi e mocha\" 'me o lokela ho se o ntse o le teng.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) aterese ea IP",
+      "ConfigureOptions.BridgeUsername": "Username",
+      "ConfigureOptions.LightsCount": "Palo ea mabone"
+    },
     "34": {
       "Title": "Boemo ba Leholimo",
-      "Description": "Lintlha tsa boemo ba leholimo le boemo ba leholimo ho tsoa ts'ebeletso ea Open Weather Map. Ho kenya widget ena tshebetsong, kenya konopo e nepahetseng ya API. Latela litaelo ho https://openweathermap.org/appid ho fumana senotlolo sa mahala sa API.",
+      "Description": "Lintlha tsa boemo ba leholimo le boemo ba leholimo ho tsoa ts'ebeletso ea Open Weather Map. Ho kenya sesebelisoa sena, kenya konopo e nepahetseng ea API. Latela litaelo ho https://openweathermap.org/appid ho fumana senotlolo sa mahala sa API.",
       "ConfigureOptions.Location": "Lebitso la toropo",
       "ConfigureOptions.Language": "Puo (mohlala. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Nako ea ntlafatso (metsotso)",
@@ -178,14 +185,24 @@
     },
     "82": {
       "Title": "Mokhoa oa ho boloka matla",
-      "Description": "Boloka boemo ba khanya bo ka tlase ho peresente e ka lokisehang.",
+      "Description": "Boloka boemo ba khanya ka tlase ho peresente e ka lokisehang.",
       "EnergyManagement.EnergySavingLevel": "Leseli le phahameng haholo (%)",
       "EnergyManagement.EnergySavingMode": "Thusa"
     },
+    "88": {
+      "Title": "Khamera e tloaelehileng ea IP",
+      "Description": "Bonts'a/phepelo ea litšoantšo ho tsoa ho kh'amera ea IP.",
+      "IpCamera.ImageURL": "URL ea setšoantšo sa khamera (sheba litokomane tsa khamera ea hau)",
+      "IpCamera.Username": "Username (boikhethelo)",
+      "IpCamera.Password": "Lekunutu (boikhethelo)",
+      "Widget.Config.fps": "Liforeimi ka motsotsoana",
+      "Widget.Config.size": "Boholo ba widget"
+    },
     "90": {
-      "Title": "Tshireletso Alarm System",
+      "Title": "Sistimi ea Alamo ea Tšireletso",
       "Description": "Sebelisa li-sensor le lisebelisoa tse ling ho kenya tšebetsong alamo ea ts'ireletso.",
       "HomeGenie.SecurityAlarm": "Sebelisa joalo ka alamo/strobe",
+      "HomeGenie.SecurityTriggerHome": "E boetse e qala ha a hlometse Lehae",
       "HomeGenie.SecuritySensor": "Sebelisa e le sensor ea tšireletso",
       "ConfigureOptions.Email.Recipients": "Lenane le arohaneng la likoma la ba amohelang mangolo-tsoibila bakeng sa litsebiso tsa alamo",
       "ConfigureOptions.System.ArmDelay": "Ho lieha ha letsoho (metsotsoana)",
@@ -196,9 +213,13 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Lenaneo le tla sebetsa ha le hlohlelletsoa"
     },
     "95": {
-      "Title": "Ho rema liketsahalo",
+      "Title": "Ho rengoa ha liketsahalo",
       "Description": "Rekota tšebetso ea sesebelisoa.",
       "EventsLogger.EnableLogging": "Thusa"
+    },
+    "111": {
+      "Title": "Tlhophiso ya moreki",
+      "Description": "E kenya tshebetsong API bakeng sa ho laola diprofaele tsa tlhophiso tsa moreki tse sebediswang ho boloka UI le dipeakanyo tsa dashboards."
     },
     "400": {
       "Title": "Demo ea Virtual Modules",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Konopo ea ho fokotsa khanya",
       "ConfigureOptions.DimmerInterval": "Mohato oa ho fifala"
     },
+    "142": {
+      "Title": "Ak'haonte ea E-mail",
+      "Description": "E boloka lintlha tsa ak'haonte ea lengolo-tsoibila tse sebelisoang ke mananeo a sistimi bakeng sa ho romella/ho amohela mangolo-tsoibila.",
+      "ConfigureOptions.Email.Sender": "1. Aterese ea E-mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Aterese ea seva ea SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Lebitso la mosebelisi la SMTP (boikhethelo)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Lekunutu la SMTP (boikhethelo)",
+      "ConfigureOptions.Email.SmtpPort": "5. Boema-kepe ba seva sa SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Seva ea SMTP e sebelisa SSL"
+    },
     "145": {
       "Title": "Sesebelisoa sa Smart",
       "Description": "Bulela/tima sesebelisoa ho ipapisitsoe le ho lemoha motsamao le leseli le tikolohong.",
@@ -250,6 +281,13 @@
       "Title": "Mebala ea ho chaba ha Letsatsi",
       "Description": "Mohlala \"ho chaba ha letsatsi\" bakeng sa mabone a LED a fetolang mebala.",
       "Scenarios.SunriseColors": "Khokahano le boemo ba Mebala e Hlabosang"
+    },
+    "910": {
+      "Title": "Ho lemoha ntho",
+      "Description": "Lemoha lintho u sebelisa mofuta oa YOLO11 o koetlisitsoeng esale pele.",
+      "ML.ObjectDetection": "Lumella ho lemoha lintho",
+      "ML.ObjectDetection.TriggerDetect": "Lenane la lintho tse arohaneng ka likoma (ka Senyesemane) tse tla tsosa alamo. (mohlala: katse, ntja, motho, mokotla, sutuk'heise)",
+      "ConfigureOptions.Yolo.ModelPath": "Tsela ea faele ea mohlala ea YOLO11 (.onnx)"
     }
   }
 }

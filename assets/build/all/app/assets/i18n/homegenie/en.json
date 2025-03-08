@@ -244,9 +244,9 @@
   "automation_programming_guide":
     "Programming guide'",
   "tap_to_disable":
-    "Tap to disable",
+    "Click to disable",
   "tap_to_enable":
-    "Tap to enable",
+    "Click to enable",
   "program_data":
     "Program data",
   "visual_code":
@@ -285,6 +285,19 @@
       "Recall last light level when switched on",
       "HomeGenie.LevelMemory.SimulateOnly":
       "Simulate only"
+    },
+
+    "26": {
+      "Title":
+        "Color lights",
+      "Description":
+        "Example Philips Hue lights integration using HTTP API (V1).\nThe default user to connect to the bridge is \"newdeveloper\" and it should be already enabled.",
+      "ConfigureOptions.BridgeAddress":
+        "Philips Hue Bridge (V1) IP address",
+      "ConfigureOptions.BridgeUsername":
+        "Username",
+      "ConfigureOptions.LightsCount":
+        "Number of lights"
     },
 
     "34": {
@@ -348,6 +361,23 @@
             "Enable"
     },
 
+    "88": {
+      "Title":
+          "Generic IP camera",
+      "Description":
+          "Display/route image feed from an IP camera.",
+      "IpCamera.ImageURL":
+          "Camera image API URL (see your camera docs)",
+      "IpCamera.Username":
+          "Username (optional)",
+      "IpCamera.Password":
+          "Password (optional)",
+      "Widget.Config.fps":
+          "Frames per second",
+      "Widget.Config.size":
+          "Widget size"
+    },
+
     "90": {
         "Title":
             "Security Alarm System",
@@ -355,6 +385,8 @@
             "Use sensors and other devices to implement a security alarm system.",
         "HomeGenie.SecurityAlarm":
             "Use as alarm/strobe",
+        "HomeGenie.SecurityTriggerHome":
+            "Also triggers when armed Home",
         "HomeGenie.SecuritySensor":
             "Use as security sensor",
         "ConfigureOptions.Email.Recipients":
@@ -377,6 +409,11 @@
       "Title": "Events logging",
       "Description": "Record device activity.",
       "EventsLogger.EnableLogging": "Enable"
+    },
+
+    "111": {
+      "Title": "Client configuration",
+      "Description": "Implements API for managing client's configuration profiles that are used to store UI and dashboards settings."
     },
 
     "400": {
@@ -421,6 +458,25 @@
       "ConfigureOptions.DimmerInterval": "Dimming step"
     },
 
+    "142": {
+        "Title":
+            "E-Mail account",
+        "Description":
+            "Stores e-mail account info used by system programs for sending/receiving emails.",
+        "ConfigureOptions.Email.Sender":
+            "1. E-Mail address",
+        "ConfigureOptions.Email.SmtpServer":
+            "2. SMTP server address",
+        "ConfigureOptions.Email.SmtpUserName":
+            "3. SMTP username (optional)",
+        "ConfigureOptions.Email.SmtpPassword":
+            "4. SMTP password (optional)",
+        "ConfigureOptions.Email.SmtpPort":
+            "5. SMTP server port",
+        "ConfigureOptions.Email.SmtpUseSsl":
+            "6. SMTP server use SSL"
+    },
+
     "145": {
         "Title":
             "Smart Device",
@@ -445,6 +501,19 @@
             "Example \"Sunrise\" scenario for color changing LED lights.",
         "Scenarios.SunriseColors":
             "Link to Sunrise Colors scenario"
+    },
+
+    "910": {
+      "Title":
+        "Object detection",
+      "Description":
+        "Detect objects using a pre-trained YOLO11 model.",
+      "ML.ObjectDetection":
+        "Enable objects detection",
+      "ML.ObjectDetection.TriggerDetect":
+        "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
+      "ConfigureOptions.Yolo.ModelPath":
+        "Path of YOLO11 model file (.onnx)"
     }
 
   }

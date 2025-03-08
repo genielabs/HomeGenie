@@ -118,15 +118,15 @@
   "program_status_broken": "Quebrado",
   "program_status_compile": "Compilar",
   "automation_programming_guide": "Guia de programação'",
-  "tap_to_disable": "Toque para desabilitar",
-  "tap_to_enable": "Toque para habilitar",
+  "tap_to_disable": "Clique para desabilitar",
+  "tap_to_enable": "Clique para habilitar",
   "program_data": "Dados do programa",
   "visual_code": "Código visual",
   "generated_code": "Código gerado",
   "setup_code": "Configurar",
   "main_code": "Principal",
   "context_code": "Contexto",
-  "main_code_empty_note": "O código \"Main\" está vazio. Use o editor \"Visual code\" para gerar este código: - Abra a categoria \"Program\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Main\" no espaço de trabalho do código visual - Adicione dentro dele outros blocos de código para implementar ações e lógica deste programa O programa \"Main\" pode ser executado manualmente ou iniciado automaticamente com base nas condições eventualmente fornecidas no código de configuração.",
+  "main_code_empty_note": "O código \"Main\" está vazio. Use o editor \"Visual code\" para gerar este código: - Abra a categoria \"Program\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Main\" no espaço de trabalho do código visual - Adicione dentro dele outros blocos de código para implementar ações e lógica deste programa O programa \"Main\" pode ser executado manualmente ou iniciado automaticamente com base em condições eventualmente fornecidas no código de configuração.",
   "setup_code_empty_note": "O código \"Setup\" está vazio. Use o editor \"Visual code\" para gerar este código: - Abra a categoria \"Program\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Setup\" no espaço de trabalho do código visual - Adicione dentro dele outros blocos de código para determinar as condições que acionarão a execução do código \"Main\" Este código é avaliado toda vez que um novo evento ocorre e pelo menos uma vez por minuto.",
   "capture_commands": "Comandos de captura",
   "capture_commands_description": "Adicione todos os comandos executados manualmente em widgets ao programa.",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "Lembrar do último nível de luz quando ligado",
       "HomeGenie.LevelMemory.SimulateOnly": "Simular apenas"
     },
+    "26": {
+      "Title": "Luzes coloridas",
+      "Description": "Exemplo de integração de luzes Philips Hue usando HTTP API (V1). O usuário padrão para conectar-se à bridge é \"newdeveloper\" e ele já deve estar habilitado.",
+      "ConfigureOptions.BridgeAddress": "Endereço IP da Philips Hue Bridge (V1)",
+      "ConfigureOptions.BridgeUsername": "Nome de usuário",
+      "ConfigureOptions.LightsCount": "Número de luzes"
+    },
     "34": {
       "Title": "Previsão do tempo",
       "Description": "Informações de clima e previsão do tempo do serviço Open Weather Map. Para ativar este widget, insira uma chave de API válida. Siga as instruções em https://openweathermap.org/appid para obter uma chave de API gratuita.",
@@ -152,7 +159,7 @@
       "Title": "Rede MQTT",
       "Description": "Conecte-se a um broker MQTT para usar o aplicativo HomeGenie Panel de qualquer lugar via Internet ou para interconectar dispositivos HomeGenie na mesma rede MQTT.",
       "MQTT.SensorPublish": "Publicar eventos emitidos por este módulo",
-      "ConfigureOptions.ClientId": "Id do cliente.",
+      "ConfigureOptions.ClientId": "ID do cliente.",
       "ConfigureOptions.ServerAddress": "Endereço do servidor",
       "ConfigureOptions.ServerPort": "Porta do servidor",
       "ConfigureOptions.Encryption": "Habilitar criptografia de ponta a ponta (E2EE)",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Nível máximo de luz (%)",
       "EnergyManagement.EnergySavingMode": "Habilitar"
     },
+    "88": {
+      "Title": "Câmera IP genérica",
+      "Description": "Exibir/rotear feed de imagem de uma câmera IP.",
+      "IpCamera.ImageURL": "URL da API de imagem da câmera (consulte a documentação da sua câmera)",
+      "IpCamera.Username": "Nome de usuário (opcional)",
+      "IpCamera.Password": "Senha (opcional)",
+      "Widget.Config.fps": "Quadros por segundo",
+      "Widget.Config.size": "Tamanho do widget"
+    },
     "90": {
       "Title": "Sistema de alarme de segurança",
       "Description": "Use sensores e outros dispositivos para implementar um sistema de alarme de segurança.",
       "HomeGenie.SecurityAlarm": "Usar como alarme/estroboscópio",
+      "HomeGenie.SecurityTriggerHome": "Também dispara quando armado Home",
       "HomeGenie.SecuritySensor": "Use como sensor de segurança",
       "ConfigureOptions.Email.Recipients": "Lista separada por vírgulas de e-mails de destinatários para notificações de alarme",
       "ConfigureOptions.System.ArmDelay": "Atraso do braço (segundos)",
@@ -199,6 +216,10 @@
       "Title": "Registro de eventos",
       "Description": "Registre a atividade do dispositivo.",
       "EventsLogger.EnableLogging": "Habilitar"
+    },
+    "111": {
+      "Title": "Configuração do cliente",
+      "Description": "Implementa API para gerenciar perfis de configuração do cliente que são usados para armazenar configurações de interface do usuário e painéis."
     },
     "400": {
       "Title": "Demonstração de módulos virtuais",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Botão de diminuição de brilho",
       "ConfigureOptions.DimmerInterval": "Passo de escurecimento"
     },
+    "142": {
+      "Title": "Conta de e-mail",
+      "Description": "Armazena informações de contas de e-mail usadas por programas do sistema para enviar/receber e-mails.",
+      "ConfigureOptions.Email.Sender": "1. Endereço de e-mail",
+      "ConfigureOptions.Email.SmtpServer": "2. Endereço do servidor SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Nome de usuário SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Senha SMTP (opcional)",
+      "ConfigureOptions.Email.SmtpPort": "5. Porta do servidor SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. O servidor SMTP usa SSL"
+    },
     "145": {
       "Title": "Dispositivo inteligente",
       "Description": "Liga/desliga o dispositivo com base na detecção de movimento e na luz ambiente.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Cenário de cores do nascer do sol",
-      "Description": "Exemplo de cenário \"Nascer do Sol\" para luzes LED que mudam de cor.",
+      "Description": "Exemplo de cenário \"Sunrise\" para luzes LED que mudam de cor.",
       "Scenarios.SunriseColors": "Link para o cenário Sunrise Colors"
+    },
+    "910": {
+      "Title": "Detecção de objetos",
+      "Description": "Detecte objetos usando um modelo YOLO11 pré-treinado.",
+      "ML.ObjectDetection": "Habilitar detecção de objetos",
+      "ML.ObjectDetection.TriggerDetect": "Lista separada por vírgulas de coisas (em inglês) que dispararão o alarme. (por exemplo: gato, cachorro, pessoa, mochila, mala)",
+      "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   " ": "------------------------------------------------",
   "welcome_to_homegenie": "Dobrodošli u HomeGenie!",
-  "welcome_subtitle": "Programabilna inteligencija automatizacije",
+  "welcome_subtitle": "Programabilna automatizirana inteligencija",
   "not_configured_yet": "Sustav još nije konfiguriran. Ovaj čarobnjak za postavljanje pomoći će vam da pokrenete i pokrenete svoj sustav u nekoliko koraka.",
   "system_config_start_with_base_and_backup": "Vrati iz datoteke sigurnosne kopije",
   "system_config_start_with_default_setup": "Zadana postavka",
@@ -118,8 +118,8 @@
   "program_status_broken": "Slomljen",
   "program_status_compile": "Sastaviti",
   "automation_programming_guide": "Vodič za programiranje'",
-  "tap_to_disable": "Dodirnite za onemogućavanje",
-  "tap_to_enable": "Dodirnite za uključivanje",
+  "tap_to_disable": "Kliknite za onemogućavanje",
+  "tap_to_enable": "Kliknite da omogućite",
   "program_data": "Programski podaci",
   "visual_code": "Vizualni kod",
   "generated_code": "Generirani kod",
@@ -127,7 +127,7 @@
   "main_code": "Glavni",
   "context_code": "Kontekst",
   "main_code_empty_note": "\"Glavni\" kod je prazan. Upotrijebite uređivač \"Vizualni kod\" za generiranje ovog koda: - Otvorite kategoriju \"Program\" iz palete naredbi na lijevoj strani - Povucite blok tipa \"Glavni\" u radni prostor vizualnog koda - Dodajte unutar njega druge blokove koda za implementaciju radnji i logike ovog programa. Program \"Glavni\" može se pokrenuti ručno ili automatski na temelju uvjeta koji su eventualno navedeni u kodu za postavljanje.",
-  "setup_code_empty_note": "\"Setup\" kod je prazan. Upotrijebite uređivač \"Vizualni kod\" za generiranje ovog koda: - Otvorite kategoriju \"Program\" iz palete naredbi na lijevoj strani - Povucite blok tipa \"Postavljanje\" u radni prostor vizualnog koda - Dodajte unutar njega druge blokove koda kako biste odredili uvjete koji će pokrenuti izvršenje \"Glavnog\" koda. Ovaj se kod procjenjuje svaki put kada se dogodi novi događaj, a najmanje jednom u minuti.",
+  "setup_code_empty_note": "\"Setup\" kod je prazan. Upotrijebite uređivač \"Vizualni kod\" za generiranje ovog koda: - Otvorite kategoriju \"Program\" iz palete naredbi na lijevoj strani - Povucite blok tipa \"Postavljanje\" u radni prostor vizualnog koda - Dodajte unutar njega druge blokove koda da odredite uvjete koji će pokrenuti izvršenje \"Glavnog\" koda. Ovaj se kod procjenjuje svaki put kada se dogodi novi događaj, a najmanje jednom u minuti.",
   "capture_commands": "Naredbe za snimanje",
   "capture_commands_description": "Dodajte sve naredbe koje se ručno izvode na widgetima u program.",
   "capture_commands_pause": "Pauza između naredbi",
@@ -140,9 +140,16 @@
       "HomeGenie.LevelMemory": "Pozovi posljednju razinu svjetla kada je uključeno",
       "HomeGenie.LevelMemory.SimulateOnly": "Samo simulacija"
     },
+    "26": {
+      "Title": "Svjetla u boji",
+      "Description": "Primjer integracije svjetala Philips Hue pomoću HTTP API-ja (V1). Zadani korisnik za spajanje na most je \"newdeveloper\" i trebao bi biti već omogućen.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adresa",
+      "ConfigureOptions.BridgeUsername": "Korisničko ime",
+      "ConfigureOptions.LightsCount": "Broj svjetala"
+    },
     "34": {
       "Title": "Vremenska prognoza",
-      "Description": "Informacije o vremenu i prognozi iz servisa Open Weather Map. Za aktiviranje ovog widgeta unesite važeći API ključ. Slijedite upute na https://openweathermap.org/appid kako biste dobili besplatni API ključ.",
+      "Description": "Informacije o vremenu i prognozi iz usluge Open Weather Map. Za aktiviranje ovog widgeta unesite važeći API ključ. Slijedite upute na https://openweathermap.org/appid kako biste dobili besplatni API ključ.",
       "ConfigureOptions.Location": "Ime grada",
       "ConfigureOptions.Language": "Jezik (npr. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Interval ažuriranja (minute)",
@@ -164,7 +171,7 @@
     },
     "78": {
       "Title": "Pametni termostat",
-      "Description": "Koristite bilo koji temperaturni senzor i pametni prekidač za implementaciju funkcije termostata.",
+      "Description": "Koristite bilo koji senzor temperature i pametni prekidač za implementaciju funkcije termostata.",
       "VirtualThermostat.TemperatureModule": "Senzor temperature",
       "VirtualThermostat.HeatingSwitchModule": "Prekidač za grijanje",
       "VirtualThermostat.CoolingSwitchModule": "Prekidač za hlađenje",
@@ -182,11 +189,21 @@
       "EnergyManagement.EnergySavingLevel": "Maksimalna razina svjetla (%)",
       "EnergyManagement.EnergySavingMode": "Omogućiti"
     },
+    "88": {
+      "Title": "Generička IP kamera",
+      "Description": "Prikaz/usmjeravanje feeda slike s IP kamere.",
+      "IpCamera.ImageURL": "URL API-ja slike kamere (pogledajte dokumente svoje kamere)",
+      "IpCamera.Username": "korisničko ime (nije obavezno)",
+      "IpCamera.Password": "Lozinka (nije obavezno)",
+      "Widget.Config.fps": "Broj sličica u sekundi",
+      "Widget.Config.size": "Veličina widgeta"
+    },
     "90": {
       "Title": "Sigurnosni alarmni sustav",
       "Description": "Koristite senzore i druge uređaje za implementaciju sigurnosnog alarmnog sustava.",
       "HomeGenie.SecurityAlarm": "Koristite kao alarm/stroboskop",
-      "HomeGenie.SecuritySensor": "Koristi se kao sigurnosni senzor",
+      "HomeGenie.SecurityTriggerHome": "Također se aktivira kada je naoružan Home",
+      "HomeGenie.SecuritySensor": "Koristite kao sigurnosni senzor",
       "ConfigureOptions.Email.Recipients": "Popis e-poruka primatelja za obavijesti o alarmu odvojen zarezima",
       "ConfigureOptions.System.ArmDelay": "Odgoda aktiviranja (sekunde)",
       "ConfigureOptions.System.SirenStartTime": "Odgoda početka sirene (sekunde)",
@@ -197,8 +214,12 @@
     },
     "95": {
       "Title": "Zapisivanje događaja",
-      "Description": "Snimanje aktivnosti uređaja.",
+      "Description": "Bilježite aktivnost uređaja.",
       "EventsLogger.EnableLogging": "Omogućiti"
+    },
+    "111": {
+      "Title": "Konfiguracija klijenta",
+      "Description": "Implementira API za upravljanje konfiguracijskim profilima klijenta koji se koriste za pohranu postavki korisničkog sučelja i nadzornih ploča."
     },
     "400": {
       "Title": "Demonstracija virtualnih modula",
@@ -212,7 +233,7 @@
     },
     "401": {
       "Title": "Demo - Preklopna vrata",
-      "Description": "Simulira otvaranje/zatvaranje vrata demo senzora vrata-prozora."
+      "Description": "Simulira otvaranje/zatvaranje vrata demo senzora vrata i prozora."
     },
     "402": {
       "Title": "Demo - otkriveno kretanje",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Gumb za smanjenje svjetline",
       "ConfigureOptions.DimmerInterval": "Korak zatamnjenja"
     },
+    "142": {
+      "Title": "Račun e-pošte",
+      "Description": "Pohranjuje informacije o računu e-pošte koje sistemski programi koriste za slanje/primanje e-pošte.",
+      "ConfigureOptions.Email.Sender": "1. E-mail adresa",
+      "ConfigureOptions.Email.SmtpServer": "2. Adresa SMTP poslužitelja",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP korisničko ime (nije obavezno)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP lozinka (nije obavezno)",
+      "ConfigureOptions.Email.SmtpPort": "5. Port SMTP poslužitelja",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP poslužitelj koristi SSL"
+    },
     "145": {
       "Title": "Pametni uređaj",
       "Description": "Uključite/isključite uređaj na temelju detekcije pokreta i ambijentalnog svjetla.",
@@ -250,6 +281,13 @@
       "Title": "Scenarij boja izlaska sunca",
       "Description": "Primjer scenarija \"izlaska sunca\" za LED svjetla koja mijenjaju boju.",
       "Scenarios.SunriseColors": "Veza na scenarij boja izlaska sunca"
+    },
+    "910": {
+      "Title": "Otkrivanje objekata",
+      "Description": "Otkrijte objekte pomoću prethodno obučenog YOLO11 modela.",
+      "ML.ObjectDetection": "Omogući otkrivanje objekata",
+      "ML.ObjectDetection.TriggerDetect": "Popis stvari odvojenih zarezima (na engleskom) koje će aktivirati alarm. (npr.: mačka, pas, osoba, ruksak, kofer)",
+      "ConfigureOptions.Yolo.ModelPath": "Put do datoteke modela YOLO11 (.onnx)"
     }
   }
 }

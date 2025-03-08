@@ -25,7 +25,7 @@
   "create_package": "ନୂଆ ପ୍ୟାକେଜ୍‍ ତିଆରି କରନ୍ତୁ",
   "programs_version": "ପ୍ରୋଗ୍ରାମର ସଂସ୍କରଣ",
   "http_settings": "HTTP ସେଟିଂସ୍",
-  "modules_groups": "ଗୋଷ୍ଠୀ ଏବଂ ମଡ୍ୟୁଲ୍‌ଗୁଡ଼ିକ",
+  "modules_groups": "ଗୋଷ୍ଠୀ ଏବଂ ମଡ୍ୟୁଲ୍ସ",
   "groups": "ଗୋଷ୍ଠୀଗୁଡିକ",
   "add_group": "ଗୋଷ୍ଠୀ ଯୋଡନ୍ତୁ",
   "edit_group": "ଗୋଷ୍ଠୀ ସମ୍ପାଦନ କରନ୍ତୁ",
@@ -118,8 +118,8 @@
   "program_status_broken": "ଭଗ୍ନ",
   "program_status_compile": "କମ୍ପାଇଲ୍ କରନ୍ତୁ",
   "automation_programming_guide": "ପ୍ରୋଗ୍ରାମିଂ ଗାଇଡ୍'",
-  "tap_to_disable": "ଅକ୍ଷମ କରିବାକୁ ଟାପ୍ କରନ୍ତୁ",
-  "tap_to_enable": "ସକ୍ଷମ କରିବାକୁ ଟାପ୍ କରନ୍ତୁ",
+  "tap_to_disable": "ଅକ୍ଷମ କରିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ",
+  "tap_to_enable": "ସକ୍ଷମ କରିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ",
   "program_data": "ପ୍ରୋଗ୍ରାମ୍ ଡାଟା",
   "visual_code": "ଭିଜୁଆଲ୍ କୋଡ୍",
   "generated_code": "ଜେନେରେଟ୍ ହୋଇଥିବା କୋଡ୍",
@@ -139,6 +139,13 @@
       "Description": "ଶେଷ ଡିମର୍ ସ୍ତରକୁ ସଂରକ୍ଷଣ କରନ୍ତୁ ଏବଂ ମନେରଖନ୍ତୁ।",
       "HomeGenie.LevelMemory": "ଚାଲୁ ଥିବା ସମୟରେ ଶେଷ ଆଲୋକ ସ୍ତରକୁ ମନେରଖନ୍ତୁ",
       "HomeGenie.LevelMemory.SimulateOnly": "କେବଳ ସିମୁଲେଟ୍ କରନ୍ତୁ"
+    },
+    "26": {
+      "Title": "ରଙ୍ଗୀନ ଆଲୋକ",
+      "Description": "HTTP API (V1) ବ୍ୟବହାର କରି Philips Hue ଲାଇଟ୍ ଇଣ୍ଟିଗ୍ରେସନ୍‌ର ଉଦାହରଣ। ବ୍ରିଜ୍‌ ସହିତ ସଂଯୋଗ କରିବା ପାଇଁ ଡିଫଲ୍ଟ ଉପଭୋକ୍ତା ହେଉଛି \"newdeveloper\" ଏବଂ ଏହା ପୂର୍ବରୁ ସକ୍ଷମ ହୋଇଥିବା ଉଚିତ।",
+      "ConfigureOptions.BridgeAddress": "ଫିଲିପ୍ସ ହ୍ୟୁ ବ୍ରିଜ୍ (V1) IP ଠିକଣା",
+      "ConfigureOptions.BridgeUsername": "ଉପଯୋଗକର୍ତ୍ତାନାମ",
+      "ConfigureOptions.LightsCount": "ଲାଇଟ୍ ସଂଖ୍ୟା"
     },
     "34": {
       "Title": "ପାଣିପାଗ ପୂର୍ବାନୁମାନ",
@@ -182,14 +189,24 @@
       "EnergyManagement.EnergySavingLevel": "ସର୍ବାଧିକ ଆଲୋକ ସ୍ତର (%)",
       "EnergyManagement.EnergySavingMode": "ସକ୍ଷମ କରନ୍ତୁ"
     },
+    "88": {
+      "Title": "ଜେନେରିକ୍ IP କ୍ୟାମେରା",
+      "Description": "ଏକ IP କ୍ୟାମେରାରୁ ପ୍ରତିଛବି ଫିଡ୍ ପ୍ରଦର୍ଶନ/ରୁଟ୍ କରନ୍ତୁ।",
+      "IpCamera.ImageURL": "କ୍ୟାମେରା ଇମେଜ୍ API URL (ଆପଣଙ୍କର କ୍ୟାମେରା ଡକ୍ୟୁମେଣ୍ଟ୍ ଦେଖନ୍ତୁ)",
+      "IpCamera.Username": "ଉପଯୋଗକର୍ତ୍ତା ନାମ (ଇଚ୍ଛାଧୀନ)",
+      "IpCamera.Password": "ପାସୱାର୍ଡ (ବୈକଳ୍ପିକ)",
+      "Widget.Config.fps": "ପ୍ରତି ସେକେଣ୍ଡରେ ଫ୍ରେମ୍",
+      "Widget.Config.size": "ୱିଜେଟ୍ ଆକାର"
+    },
     "90": {
       "Title": "ସୁରକ୍ଷା ଆଲାର୍ମ ସିଷ୍ଟମ୍",
       "Description": "ସୁରକ୍ଷା ଆଲାର୍ମ ସିଷ୍ଟମ କାର୍ଯ୍ୟକାରୀ କରିବା ପାଇଁ ସେନ୍ସର ଏବଂ ଅନ୍ୟାନ୍ୟ ଉପକରଣ ବ୍ୟବହାର କରନ୍ତୁ।",
       "HomeGenie.SecurityAlarm": "ଆଲାର୍ମ/ଷ୍ଟ୍ରୋବ୍ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ",
+      "HomeGenie.SecurityTriggerHome": "ସଶସ୍ତ୍ର ହେଲେ ମଧ୍ୟ ଟ୍ରିଗର ହୁଏ ଘର",
       "HomeGenie.SecuritySensor": "ସୁରକ୍ଷା ସେନ୍ସର ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ",
       "ConfigureOptions.Email.Recipients": "ଆଲାର୍ମ ବିଜ୍ଞପ୍ତି ପାଇଁ ପ୍ରାପ୍ତକର୍ତ୍ତାଙ୍କ ଇ-ମେଲଗୁଡ଼ିକର କମା ଦ୍ୱାରା ପୃଥକ ତାଲିକା",
       "ConfigureOptions.System.ArmDelay": "ହାତ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
-      "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍‌ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
+      "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
       "ConfigureOptions.System.SirenMaxTime": "ସାଇରନ ସର୍ବାଧିକ ସମୟ (ସେକେଣ୍ଡ, 0 = ଅସୀମ)",
       "ConfigureOptions.Trigger.ArmedProgram": "ସଶସ୍ତ୍ର ଥିବା ସମୟରେ ଚଲାଇବାକୁ କାର୍ଯ୍ୟକ୍ରମ",
       "ConfigureOptions.Trigger.DisarmedProgram": "ନିରସ୍ତ୍ର ହେବା ସମୟରେ ଚଲାଇବାକୁ ଥିବା କାର୍ଯ୍ୟକ୍ରମ",
@@ -199,6 +216,10 @@
       "Title": "ଇଭେଣ୍ଟ ଲଗିଂ",
       "Description": "ଡିଭାଇସ୍ କାର୍ଯ୍ୟକଳାପ ରେକର୍ଡ କରନ୍ତୁ।",
       "EventsLogger.EnableLogging": "ସକ୍ଷମ କରନ୍ତୁ"
+    },
+    "111": {
+      "Title": "କ୍ଲାଏଣ୍ଟ କନଫିଗରେସନ୍",
+      "Description": "UI ଏବଂ ଡ୍ୟାସବୋର୍ଡ ସେଟିଂସ୍ ଷ୍ଟୋର୍ କରିବାକୁ ବ୍ୟବହୃତ କ୍ଲାଏଣ୍ଟଙ୍କ ବିନ୍ୟାସ ପ୍ରୋଫାଇଲ୍ ପରିଚାଳନା ପାଇଁ API କାର୍ଯ୍ୟକାରୀ କରେ।"
     },
     "400": {
       "Title": "ଭର୍ଚୁଆଲ୍ ମଡ୍ୟୁଲ୍ ଡେମୋ",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "ଉଜ୍ଜ୍ୱଳତା ହ୍ରାସ ବଟନ୍",
       "ConfigureOptions.DimmerInterval": "ଡିମିଂ ଷ୍ଟେପ୍"
     },
+    "142": {
+      "Title": "ଇ-ମେଲ୍ ଆକାଉଣ୍ଟ",
+      "Description": "ଇମେଲ ପଠାଇବା/ପ୍ରାପ୍ତ କରିବା ପାଇଁ ସିଷ୍ଟମ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକ ଦ୍ୱାରା ବ୍ୟବହୃତ ଇମେଲ ଆକାଉଣ୍ଟ ସୂଚନା ସଂରକ୍ଷଣ କରେ।",
+      "ConfigureOptions.Email.Sender": "1. ଇ-ମେଲ୍ ଠିକଣା",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP ସର୍ଭର ଠିକଣା",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP ଉପଯୋଗକର୍ତ୍ତାନାମ (ବୈକଳ୍ପିକ)",
+      "ConfigureOptions.Email.SmtpPassword": "୪. SMTP ପାସୱାର୍ଡ (ବୈକଳ୍ପିକ)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP ସର୍ଭର ପୋର୍ଟ",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP ସର୍ଭର SSL ବ୍ୟବହାର କରେ"
+    },
     "145": {
       "Title": "ସ୍ମାର୍ଟ ଡିଭାଇସ୍",
       "Description": "ଗତି ଚିହ୍ନଟ ଏବଂ ଆମ୍ବିଏଣ୍ଟ ଆଲୋକ ଉପରେ ଆଧାର କରି ଡିଭାଇସକୁ ଚାଲୁ/ବନ୍ଦ କରନ୍ତୁ।",
@@ -250,6 +281,13 @@
       "Title": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗର ଦୃଶ୍ୟପଟ",
       "Description": "ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରୁଥିବା LED ଲାଇଟ୍ ପାଇଁ \"ସୂର୍ଯ୍ୟୋଦୟ\" ଦୃଶ୍ୟର ଉଦାହରଣ।",
       "Scenarios.SunriseColors": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗ ଦୃଶ୍ୟପଟର ଲିଙ୍କ୍"
+    },
+    "910": {
+      "Title": "ବସ୍ତୁ ଚିହ୍ନଟକରଣ",
+      "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO11 ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁଗୁଡ଼ିକୁ ଚିହ୍ନଟ କରନ୍ତୁ।",
+      "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟ ସକ୍ଷମ କରନ୍ତୁ",
+      "ML.ObjectDetection.TriggerDetect": "ଆଲାର୍ମ ଟ୍ରିଗର କରୁଥିବା ଜିନିଷଗୁଡ଼ିକର କମା-ବିଚ୍ଛେଦିତ ତାଲିକା (ଇଂରାଜୀରେ)। (ଯଥା: ବିଲେଇ, କୁକୁର, ବ୍ୟକ୍ତି, ବ୍ୟାକପ୍ୟାକ୍, ସୁଟକେସ୍)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "heal_network_button": "Warkar da hanyar sadarwa",
+  "heal_network_button": "Warkar da cibiyar sadarwa",
   "hard_reset_button": "Sake saitin masana'anta",
   "node_inclusion": "Ƙara na'ura",
   "node_exclusion": "Cire na'urar",
@@ -31,7 +31,7 @@
   "refresh_ports_button": "Sabunta jerin tashoshin jiragen ruwa",
   "calibration": "Daidaitawa",
   "calibrate": "Calibrate",
-  "edit_calibration_parameter": "Gyara lambar ma'auni",
-  "calibration_parameter_not_set": "Ba a saita lambar sigar daidaitawa ba",
+  "edit_calibration_parameter": "Shirya lambar sigar daidaitawa",
+  "calibration_parameter_not_set": "Ba a saita lambar ma'auni ba",
   "calibration_parameter_number": "Lambar sigar (duba littafin na'urar)"
 }

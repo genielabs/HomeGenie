@@ -11,7 +11,7 @@
   "interfaces": "インターフェース",
   "Protocols.UPnP": "UPnP コントローラー",
   "HomeAutomation.X10": "X10 コントローラー",
-  "HomeAutomation.ZWave": "Z-Wave コントローラ",
+  "HomeAutomation.ZWave": "Z-Wave コントローラー",
   "HomeAutomation.ZigBee": "ZigBee コントローラ",
   "device_port": "デバイスポート",
   "device_driver": "ドライバ",
@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "{{start}}から開始します。<span class=\"notranslate\"><br/></span>時間枠の終了を設定します。",
   "cronwizard_bindings_define_types_and_modules": "このスケジュールの対象となるタイプとモジュールを定義します（オプション）",
   "cronwizard_bindings_select_types": "タイプを選択",
-  "cronwizard_action_set_action_to_execute": "このイベントの発生時に実行するアクションを設定します",
+  "cronwizard_action_set_action_to_execute": "このイベントの発生時に実行するアクションを設定する",
   "cronwizard_action_preset_actions": "プリセットアクション",
   "cronwizard_action_preset_every_occurrence": "あらゆる出来事において",
   "cronwizard_action_preset_slot_start": "時間枠の開始時",
@@ -118,8 +118,8 @@
   "program_status_broken": "壊れた",
   "program_status_compile": "コンパイル",
   "automation_programming_guide": "プログラミングガイド'",
-  "tap_to_disable": "タップして無効にする",
-  "tap_to_enable": "タップして有効にする",
+  "tap_to_disable": "クリックして無効にする",
+  "tap_to_enable": "クリックして有効にする",
   "program_data": "プログラムデータ",
   "visual_code": "ビジュアルコード",
   "generated_code": "生成されたコード",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "電源を入れたときに最後の光レベルを記憶する",
       "HomeGenie.LevelMemory.SimulateOnly": "シミュレーションのみ"
     },
+    "26": {
+      "Title": "カラーライト",
+      "Description": "HTTP API (V1) を使用した Philips Hue ライトの統合の例。ブリッジに接続するデフォルトのユーザーは「newdeveloper」であり、すでに有効になっているはずです。",
+      "ConfigureOptions.BridgeAddress": "Philips Hue ブリッジ (V1) IP アドレス",
+      "ConfigureOptions.BridgeUsername": "ユーザー名",
+      "ConfigureOptions.LightsCount": "ライトの数"
+    },
     "34": {
       "Title": "天気予報",
       "Description": "Open Weather Map サービスからの天気と予報情報。このウィジェットを有効にするには、有効な API キーを入力してください。無料の API キーを取得するには、https://openweathermap.org/appid の指示に従ってください。",
@@ -152,7 +159,7 @@
       "Title": "ネットワークMQTT",
       "Description": "MQTT ブローカーに接続して、インターネット経由でどこからでも HomeGenie Panel アプリを使用したり、同じ MQTT ネットワーク上の HomeGenie デバイスを相互接続したりできます。",
       "MQTT.SensorPublish": "このモジュールによって発行されたイベントを公開する",
-      "ConfigureOptions.ClientId": "クライアントID。",
+      "ConfigureOptions.ClientId": "クライアント ID。",
       "ConfigureOptions.ServerAddress": "サーバーアドレス",
       "ConfigureOptions.ServerPort": "サーバーポート",
       "ConfigureOptions.Encryption": "エンドツーエンド暗号化（E2EE）を有効にする",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "最大光レベル（％）",
       "EnergyManagement.EnergySavingMode": "有効にする"
     },
+    "88": {
+      "Title": "汎用IPカメラ",
+      "Description": "IP カメラからの画像フィードを表示/ルーティングします。",
+      "IpCamera.ImageURL": "カメラ画像 API URL (カメラのドキュメントを参照)",
+      "IpCamera.Username": "ユーザー名（オプション）",
+      "IpCamera.Password": "パスワード（オプション）",
+      "Widget.Config.fps": "1秒あたりのフレーム数",
+      "Widget.Config.size": "ウィジェットのサイズ"
+    },
     "90": {
       "Title": "セキュリティアラームシステム",
-      "Description": "センサーやその他のデバイスを使用してセキュリティアラームシステムを実装します。",
+      "Description": "センサーやその他のデバイスを使用して、セキュリティアラームシステムを実装します。",
       "HomeGenie.SecurityAlarm": "アラーム/ストロボとして使用",
+      "HomeGenie.SecurityTriggerHome": "武装時にも発動します",
       "HomeGenie.SecuritySensor": "セキュリティセンサーとして使用",
       "ConfigureOptions.Email.Recipients": "アラーム通知の受信者の電子メールのコンマ区切りリスト",
       "ConfigureOptions.System.ArmDelay": "アーム遅延（秒）",
@@ -199,6 +216,10 @@
       "Title": "イベントログ",
       "Description": "デバイスのアクティビティを記録します。",
       "EventsLogger.EnableLogging": "有効にする"
+    },
+    "111": {
+      "Title": "クライアント構成",
+      "Description": "UI およびダッシュボードの設定を保存するために使用されるクライアントの構成プロファイルを管理するための API を実装します。"
     },
     "400": {
       "Title": "仮想モジュールのデモ",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "明るさを下げるボタン",
       "ConfigureOptions.DimmerInterval": "調光ステップ"
     },
+    "142": {
+      "Title": "電子メールアカウント",
+      "Description": "システム プログラムが電子メールの送受信に使用する電子メール アカウント情報を保存します。",
+      "ConfigureOptions.Email.Sender": "1. メールアドレス",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTPサーバーアドレス",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTPユーザー名（オプション）",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTPパスワード（オプション）",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTPサーバーポート",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTPサーバーはSSLを使用する"
+    },
     "145": {
       "Title": "スマートデバイス",
       "Description": "動きの検出と周囲の光に基づいてデバイスのオン/オフを切り替えます。",
@@ -244,12 +275,19 @@
       "HomeGenie.SmartLights.OnMotionDetect": "センサーによる制御（オプション）",
       "HomeGenie.SmartLights.CheckLuminosity": "光センサーによる制御（オプション）",
       "HomeGenie.SmartLights.SwitchOffTimeout": "非アクティブタイムアウト後に電源をオフにする（秒）",
-      "HomeGenie.SmartLights.MinLuminance": "輝度が以下の場合にオンにします:"
+      "HomeGenie.SmartLights.MinLuminance": "輝度が以下の場合はオンにします:"
     },
     "8": {
       "Title": "サンライズカラーズシナリオ",
       "Description": "色が変わる LED ライトの「日の出」シナリオの例。",
       "Scenarios.SunriseColors": "Sunrise Colorsシナリオへのリンク"
+    },
+    "910": {
+      "Title": "物体検出",
+      "Description": "事前トレーニング済みの YOLO11 モデルを使用してオブジェクトを検出します。",
+      "ML.ObjectDetection": "オブジェクトの検出を有効にする",
+      "ML.ObjectDetection.TriggerDetect": "アラームをトリガーするもののコンマ区切りリスト（英語）。（例：猫、犬、人、バックパック、スーツケース）",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
     }
   }
 }

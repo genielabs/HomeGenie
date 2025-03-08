@@ -94,6 +94,7 @@
   "saving_settings": "Salvataggio impostazioni",
   "operations_in_progress": "Operazione in corso",
   "connection_error": "Errore di connessione",
+  "no_video_signal": "Segnale video assente",
   "error_loading_config": "Errore caricamento configurazione",
   "error_occurred": "Si è verificato un errore",
   "info": "Info",
@@ -299,5 +300,19 @@
   "weather_data": "Dati meteorologici",
   "energy_monitor": "Monitor energetico",
   "video_source": "Sorgente video",
-  "custom_widget": "Widget personalizzato"
+  "custom_widget": "Widget personalizzato",
+  "contextual_help": "Guida contestuale",
+  "homegenie_website": "Sito HomeGenie",
+  "video_source_description": "Imposta il tipo di sorgente video, l'indirizzo, gli FPS e le dimensioni del widget.",
+  "source_type": "Tipo di sorgente video",
+  "http_address": "Indirizzo HTTP",
+  "frames_per_seconds": "Fotogrammi al secondo",
+  "widget_size": "Dimensioni del widget",
+  "live_streaming": "Trasmissione dal vivo",
+  "video_file": "File video",
+  "image_refresh": "Feed di immagini",
+  "large": "Grande",
+  "medium": "Medio",
+  "small": "Piccolo",
+  "auto": "Automatico"
 }

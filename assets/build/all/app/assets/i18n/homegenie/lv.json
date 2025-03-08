@@ -77,7 +77,7 @@
   "cronwizard_action_preset_actions": "Iepriekš iestatītas darbības",
   "cronwizard_action_preset_every_occurrence": "Par katru gadījumu",
   "cronwizard_action_preset_slot_start": "Laika spraugas sākumā",
-  "cronwizard_action_preset_slot_end": "Laika posma beigās",
+  "cronwizard_action_preset_slot_end": "Laika spraugas beigās",
   "cronwizard_action_custom_script": "Pielāgots darbības skripts",
   "cronwizard_action_no_action": "Nekādas darbības",
   "cronwizard_action_schedule_variable_hint": "Izmantojiet <span class=\"notranslate color-primary\">@ {{name}}</span> kā mainīgo cron izteiksmēs vai izmantojiet <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> automatizācijas programmās, lai atsauktos uz šo notikumu.",
@@ -99,8 +99,8 @@
   "scheduler_preset_action_config_program": "Programma",
   "scheduler_preset_action_config_options": "Iespējas",
   "scheduler_preset_action_program_say": "Sakiet",
-  "scheduler_preset_action_config_message": "Ziņa",
-  "save_and_build": "Saglabājiet un veidojiet",
+  "scheduler_preset_action_config_message": "Ziņojums",
+  "save_and_build": "Saglabāt un veidot",
   "toggle_widgets_preview": "Pārslēgt logrīku priekšskatījumu",
   "stop_program": "Pārtraukt programmu",
   "run_program": "Palaist programmu",
@@ -118,16 +118,16 @@
   "program_status_broken": "Salauzts",
   "program_status_compile": "Sastādīt",
   "automation_programming_guide": "Programmēšanas rokasgrāmata",
-  "tap_to_disable": "Pieskarieties, lai atspējotu",
-  "tap_to_enable": "Pieskarieties, lai iespējotu",
+  "tap_to_disable": "Noklikšķiniet, lai atspējotu",
+  "tap_to_enable": "Noklikšķiniet, lai iespējotu",
   "program_data": "Programmas dati",
   "visual_code": "Vizuālais kods",
   "generated_code": "Ģenerēts kods",
   "setup_code": "Iestatīšana",
   "main_code": "Galvenā",
   "context_code": "Konteksts",
-  "main_code_empty_note": "\"Galvenais\" kods ir tukšs. Izmantojiet redaktoru \"Vizuālais kods\", lai ģenerētu šo kodu: - Atveriet kategoriju \"Programma\" no komandu paletes kreisajā pusē - velciet bloku, kura tips ir \"Main\" vizuālā koda darbvietā. - Pievienojiet tajā citus koda blokus, lai īstenotu šīs programmas darbības un loģiku. Programmu \"Galvenā\" var palaist manuāli vai automātiski palaist, pamatojoties uz nosacījumiem, kas galu galā norādīti iestatīšanas kodā.",
-  "setup_code_empty_note": "\"Iestatīšanas\" kods ir tukšs. Izmantojiet redaktoru \"Vizuālais kods\", lai ģenerētu šo kodu: - Atveriet kategoriju \"Programma\" no komandu paletes kreisajā pusē - velciet bloku, kura tips ir \"Iestatīšana\" vizuālā koda darbvietā. - Pievienojiet tajā citus koda blokus, lai noteiktu nosacījumus, kas aktivizēs \"Galvenā\" koda izpildi. Šis kods tiek novērtēts katru reizi, kad notiek jauns notikums, un vismaz reizi minūtē.",
+  "main_code_empty_note": "\"Galvenais\" kods ir tukšs. Izmantojiet redaktoru \"Vizuālais kods\", lai ģenerētu šo kodu: - Atveriet kategoriju \"Programma\" no komandu paletes kreisajā pusē - velciet bloku, kura tips ir \"Galvenais\" vizuālā koda darbvietā - pievienojiet tajā citus koda blokus, lai īstenotu šīs programmas darbības un loģiku. Programmu \"Galvenā\" var palaist manuāli vai automātiski palaist, pamatojoties uz nosacījumiem, kas galu galā norādīti iestatīšanas kodā.",
+  "setup_code_empty_note": "\"Iestatīšanas\" kods ir tukšs. Izmantojiet redaktoru \"Vizuālais kods\", lai ģenerētu šo kodu: - Atveriet kategoriju \"Programma\" no komandu paletes kreisajā pusē - Velciet bloku, kura tips ir \"Setup\" vizuālā koda darbvietā. - Pievienojiet tajā citus koda blokus, lai noteiktu nosacījumus, kas aktivizēs \"Galvenā\" koda izpildi. Šis kods tiek novērtēts ikreiz, kad notiek jauns notikums, un vismaz reizi minūtē.",
   "capture_commands": "Uztveršanas komandas",
   "capture_commands_description": "Pievienojiet programmai visas logrīkiem manuāli izpildītās komandas.",
   "capture_commands_pause": "Pauze starp komandām",
@@ -139,6 +139,13 @@
       "Description": "Saglabājiet un atsauciet pēdējo aptumšošanas līmeni.",
       "HomeGenie.LevelMemory": "Atsaukt pēdējo apgaismojuma līmeni, kad tas ir ieslēgts",
       "HomeGenie.LevelMemory.SimulateOnly": "Tikai simulēt"
+    },
+    "26": {
+      "Title": "Krāsu gaismas",
+      "Description": "Philips Hue gaismu integrācijas piemērs, izmantojot HTTP API (V1). Noklusējuma lietotājs, lai izveidotu savienojumu ar tiltu, ir \"jaunizstrādātājs\", un tam jau ir jābūt iespējotam.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adrese",
+      "ConfigureOptions.BridgeUsername": "Lietotājvārds",
+      "ConfigureOptions.LightsCount": "Lukturu skaits"
     },
     "34": {
       "Title": "Laika prognoze",
@@ -178,14 +185,24 @@
     },
     "82": {
       "Title": "Enerģijas taupīšanas režīms",
-      "Description": "Saglabājiet apgaismojuma līmeni zem konfigurējamas procentuālās vērtības.",
+      "Description": "Turiet apgaismojuma līmeni zem konfigurējamas procentuālās vērtības.",
       "EnergyManagement.EnergySavingLevel": "Maksimālais apgaismojuma līmenis (%)",
       "EnergyManagement.EnergySavingMode": "Iespējot"
+    },
+    "88": {
+      "Title": "Vispārējā IP kamera",
+      "Description": "Parādīt/maršrutēt attēlu plūsmu no IP kameras.",
+      "IpCamera.ImageURL": "Kameras attēla API URL (skatiet kameras dokumentus)",
+      "IpCamera.Username": "Lietotājvārds (pēc izvēles)",
+      "IpCamera.Password": "Parole (pēc izvēles)",
+      "Widget.Config.fps": "Kadri sekundē",
+      "Widget.Config.size": "Logrīka izmērs"
     },
     "90": {
       "Title": "Apsardzes signalizācijas sistēma",
       "Description": "Izmantojiet sensorus un citas ierīces, lai ieviestu apsardzes signalizācijas sistēmu.",
       "HomeGenie.SecurityAlarm": "Izmantojiet kā modinātāju/strobe",
+      "HomeGenie.SecurityTriggerHome": "Ieslēdz arī, kad bruņota Home",
       "HomeGenie.SecuritySensor": "Izmantojiet kā drošības sensoru",
       "ConfigureOptions.Email.Recipients": "Ar komatu atdalīts trauksmes paziņojumu adresātu e-pasta ziņojumu saraksts",
       "ConfigureOptions.System.ArmDelay": "Rokas aizkave (sekundēs)",
@@ -199,6 +216,10 @@
       "Title": "Notikumu reģistrēšana",
       "Description": "Ierakstiet ierīces darbību.",
       "EventsLogger.EnableLogging": "Iespējot"
+    },
+    "111": {
+      "Title": "Klienta konfigurācija",
+      "Description": "Ievieš API, lai pārvaldītu klienta konfigurācijas profilus, kas tiek izmantoti lietotāja interfeisa un informācijas paneļu iestatījumu glabāšanai."
     },
     "400": {
       "Title": "Virtuālo moduļu demonstrācija",
@@ -220,7 +241,7 @@
     },
     "410": {
       "Title": "Sensoru simulators",
-      "Description": "Izstaro nejaušas sensoru vērtības.",
+      "Description": "Izstaro nejaušas sensora vērtības.",
       "Simulator.Sensor.Temperature": "Temperatūras sensors",
       "Simulator.Sensor.Humidity": "Mitruma sensors",
       "Simulator.Sensor.Luminance": "Gaismas sensors",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Spilgtuma samazināšanas poga",
       "ConfigureOptions.DimmerInterval": "Aptumšošanas solis"
     },
+    "142": {
+      "Title": "E-pasta konts",
+      "Description": "Saglabā e-pasta konta informāciju, ko sistēmas programmas izmanto e-pasta ziņojumu sūtīšanai/saņemšanai.",
+      "ConfigureOptions.Email.Sender": "1. E-pasta adrese",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP servera adrese",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP lietotājvārds (neobligāti)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP parole (neobligāti)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP servera ports",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP serveris izmanto SSL"
+    },
     "145": {
       "Title": "Viedā ierīce",
       "Description": "Ieslēdziet/izslēdziet ierīci, pamatojoties uz kustības noteikšanu un apkārtējo apgaismojumu.",
@@ -248,8 +279,15 @@
     },
     "8": {
       "Title": "Saullēkta krāsu scenārijs",
-      "Description": "\"Saullēkta\" scenārija piemērs krāsainām LED gaismām.",
+      "Description": "\"Saullēkta\" scenārija piemērs krāsu maināmām LED gaismām.",
       "Scenarios.SunriseColors": "Saite uz Sunrise Colors scenāriju"
+    },
+    "910": {
+      "Title": "Objektu noteikšana",
+      "Description": "Atklājiet objektus, izmantojot iepriekš apmācītu YOLO11 modeli.",
+      "ML.ObjectDetection": "Iespējot objektu noteikšanu",
+      "ML.ObjectDetection.TriggerDetect": "Ar komatu atdalīts to lietu saraksts (angļu valodā), kas aktivizēs trauksmi. (piem.: kaķis, suns, cilvēks, mugursoma, čemodāns)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
     }
   }
 }

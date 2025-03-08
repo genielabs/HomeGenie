@@ -68,6 +68,11 @@ namespace HomeGenie.Automation.Engines
             "Iot.Device",
             "Iot.Device.Common",
 #endif
+#if NET9_0_OR_GREATER
+            "Compunet.YoloSharp",
+            "Compunet.YoloSharp.Plotting",
+#endif
+            "Microsoft.Extensions.Options",
             "Newtonsoft.Json",
             "Newtonsoft.Json.Linq",
             "HomeGenie",
@@ -91,6 +96,12 @@ namespace HomeGenie.Automation.Engines
             "NWaves.Filters.Base",
             "NWaves.Operations",
             "NWaves.Utils",
+#if NET6_0_OR_GREATER
+            "SixLabors.ImageSharp",
+            "SixLabors.ImageSharp.PixelFormats",
+            "SixLabors.ImageSharp.Processing",
+            "SixLabors.ImageSharp.Formats.Png",
+#endif
 #if !NETCOREAPP
             "Raspberry",
             "Raspberry.Timers",
@@ -222,7 +233,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Assembly.Load("mscorlib").Location),
                     MetadataReference.CreateFromFile(typeof(Thread).GetTypeInfo().Assembly.Location),
                     MetadataReference.CreateFromFile(typeof(Stopwatch).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(System.Linq.Enumerable).GetTypeInfo().Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Windows.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Threading.Thread.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),
@@ -230,21 +241,41 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
                     
-                    // Microsoft IoT Framework
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "System.Device.Gpio.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UnitsNet.dll")),
-                    
-                    // Data / Signal processing
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NWaves.dll")),
-                    
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
 
+                    // Other
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Memory.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ObjectModel.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Core.dll")),
                     MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
 
+                    // Data / Signal processing / Machine Learning / Computer Vision / ONXX
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Extensions.Options.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.CpuMath.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Core.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Data.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.DataView.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.ImageAnalytics.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.KMeansClustering.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.OnnxRuntime.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.OnnxTransformer.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.PCA.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Compiler.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.Classifier.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.Recommender.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.StandardTrainers.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Transforms.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NWaves.dll")),
+#if NET6_0_OR_GREATER
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SixLabors.ImageSharp.dll")),
+#endif                    
+#if NET9_0_OR_GREATER
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YoloSharp.dll")),
+#endif                    
+                    // IO
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.Annotations.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.dll")),
@@ -258,6 +289,11 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UPnP.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MQTTnet.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "OnvifDiscovery.dll")),
+                                        
+                    // RaspberrySharp / Microsoft IoT Framework
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "System.Device.Gpio.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UnitsNet.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.Components.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.GeneralPurpose.dll")),
@@ -347,6 +383,7 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("System.Core.dll");
                 compilerParams.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
             }
+            compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Options.dll");
 
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MessagePack.dll");

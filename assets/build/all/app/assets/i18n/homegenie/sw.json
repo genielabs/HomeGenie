@@ -2,7 +2,7 @@
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "Karibu HomeGenie!",
   "welcome_subtitle": "Akili ya kiotomatiki inayoweza kupangwa",
-  "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi kwa hatua chache.",
+  "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi katika hatua chache.",
   "system_config_start_with_base_and_backup": "Rejesha kutoka kwa faili ya chelezo",
   "system_config_start_with_default_setup": "Usanidi chaguo-msingi",
   "system_config_include_demo": "Jumuisha onyesho lililo na shughuli za kifaa zilizoiga",
@@ -50,7 +50,7 @@
   "cronwizard_description_ending": "kwa",
   "cronwizard_description_at": "saa",
   "cronwizard_add_time_slot": "Ongeza nafasi ya wakati",
-  "cronwizard_add_exact_time": "Ongeza wakati halisi",
+  "cronwizard_add_exact_time": "Ongeza muda halisi",
   "cronwizard_start_time": "Wakati wa kuanza",
   "cronwizard_end_time": "Wakati wa mwisho",
   "cronwizard_minutes": "Dakika",
@@ -118,8 +118,8 @@
   "program_status_broken": "Imevunjika",
   "program_status_compile": "Kukusanya",
   "automation_programming_guide": "Mwongozo wa programu'",
-  "tap_to_disable": "Gusa ili kuzima",
-  "tap_to_enable": "Gusa ili kuwezesha",
+  "tap_to_disable": "Bofya ili kuzima",
+  "tap_to_enable": "Bofya ili kuwezesha",
   "program_data": "Data ya programu",
   "visual_code": "Msimbo wa kuona",
   "generated_code": "Msimbo uliozalishwa",
@@ -139,6 +139,13 @@
       "Description": "Hifadhi na kumbuka kiwango cha mwisho cha dimmer.",
       "HomeGenie.LevelMemory": "Kumbuka kiwango cha mwisho cha mwanga wakati umewashwa",
       "HomeGenie.LevelMemory.SimulateOnly": "Iga pekee"
+    },
+    "26": {
+      "Title": "Taa za rangi",
+      "Description": "Mfano Philips Hue taa ushirikiano kwa kutumia HTTP API (V1). Mtumiaji chaguo-msingi wa kuunganisha kwenye daraja ni \"msanidi mpya\" na inapaswa kuwa tayari kuwezeshwa.",
+      "ConfigureOptions.BridgeAddress": "Anwani ya IP ya Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeUsername": "Jina la mtumiaji",
+      "ConfigureOptions.LightsCount": "Idadi ya taa"
     },
     "34": {
       "Title": "Utabiri wa hali ya hewa",
@@ -182,10 +189,20 @@
       "EnergyManagement.EnergySavingLevel": "Kiwango cha juu cha mwanga (%)",
       "EnergyManagement.EnergySavingMode": "Wezesha"
     },
+    "88": {
+      "Title": "Kamera ya IP ya kawaida",
+      "Description": "Onyesha/elekeza mlisho wa picha kutoka kwa kamera ya IP.",
+      "IpCamera.ImageURL": "URL ya API ya picha ya kamera (tazama hati za kamera yako)",
+      "IpCamera.Username": "Jina la mtumiaji (si lazima)",
+      "IpCamera.Password": "Nenosiri (si lazima)",
+      "Widget.Config.fps": "Fremu kwa sekunde",
+      "Widget.Config.size": "Ukubwa wa Widget"
+    },
     "90": {
       "Title": "Mfumo wa Kengele ya Usalama",
       "Description": "Tumia vitambuzi na vifaa vingine kutekeleza mfumo wa kengele wa usalama.",
       "HomeGenie.SecurityAlarm": "Tumia kama kengele/strobe",
+      "HomeGenie.SecurityTriggerHome": "Pia huchochea ukiwa na silaha Nyumbani",
       "HomeGenie.SecuritySensor": "Tumia kama kihisi usalama",
       "ConfigureOptions.Email.Recipients": "Orodha iliyotenganishwa kwa koma ya wapokeaji barua pepe za arifa za kengele",
       "ConfigureOptions.System.ArmDelay": "Kuchelewa kwa mkono (sekunde)",
@@ -199,6 +216,10 @@
       "Title": "Uwekaji kumbukumbu wa matukio",
       "Description": "Rekodi shughuli za kifaa.",
       "EventsLogger.EnableLogging": "Wezesha"
+    },
+    "111": {
+      "Title": "Usanidi wa mteja",
+      "Description": "Hutekeleza API ya kudhibiti wasifu wa usanidi wa mteja ambao hutumika kuhifadhi mipangilio ya UI na dashibodi."
     },
     "400": {
       "Title": "Onyesho la Moduli za Mtandao",
@@ -237,6 +258,16 @@
       "ConfigureOptions.DimmerDownCode": "Kitufe cha kupunguza mwangaza",
       "ConfigureOptions.DimmerInterval": "Hatua ya kupungua"
     },
+    "142": {
+      "Title": "Akaunti ya barua pepe",
+      "Description": "Huhifadhi maelezo ya akaunti ya barua pepe yanayotumiwa na programu za mfumo kutuma/kupokea barua pepe.",
+      "ConfigureOptions.Email.Sender": "1. Anwani ya barua pepe",
+      "ConfigureOptions.Email.SmtpServer": "2. Anwani ya seva ya SMTP",
+      "ConfigureOptions.Email.SmtpUserName": "3. Jina la mtumiaji la SMTP (si lazima)",
+      "ConfigureOptions.Email.SmtpPassword": "4. Nenosiri la SMTP (si lazima)",
+      "ConfigureOptions.Email.SmtpPort": "5. bandari ya seva ya SMTP",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Seva ya SMTP tumia SSL"
+    },
     "145": {
       "Title": "Kifaa Mahiri",
       "Description": "Washa/uzima kifaa kulingana na utambuzi wa mwendo na mwanga uliopo.",
@@ -250,6 +281,13 @@
       "Title": "Scenario ya Rangi za Macheo",
       "Description": "Mfano hali ya \"Macheo\" ya kubadilisha rangi ya taa za LED.",
       "Scenarios.SunriseColors": "Unganisha kwa hali ya Rangi za Mawio"
+    },
+    "910": {
+      "Title": "Utambuzi wa kitu",
+      "Description": "Gundua vitu kwa kutumia kielelezo cha YOLO11 kilichofunzwa awali.",
+      "ML.ObjectDetection": "Washa utambuzi wa vitu",
+      "ML.ObjectDetection.TriggerDetect": "Orodha ya vitu iliyotenganishwa kwa koma (kwa Kiingereza) ambayo itasababisha kengele. (km: paka, mbwa, mtu, mkoba, mkoba)",
+      "ConfigureOptions.Yolo.ModelPath": "Njia ya muundo wa faili ya YOLO11 (.onnx)"
     }
   }
 }

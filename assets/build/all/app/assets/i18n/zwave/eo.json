@@ -11,7 +11,7 @@
   "adding_node": "Aldonante aparatan <strong class=\"color-accent\">{{node}}</strong> , bonvolu atendi...",
   "removing_node": "Forigante aparatan <strong class=\"color-accent\">{{node}}</strong> , bonvolu atendi...",
   "node_added": "Aparato <strong class=\"color-accent\">{{node}}</strong> sukcese aldonita",
-  "node_removed": "Aparato <strong class=\"color-accent\">{{node}}</strong> estis forigita",
+  "node_removed": "Aparato- <strong class=\"color-accent\">{{node}}</strong> estis forigita",
   "node_config": "Aparato agordo",
   "brand": "Marko",
   "product": "Produkto",
@@ -30,8 +30,8 @@
   "missing handler": "Mankas prizorganto",
   "refresh_ports_button": "Refreŝigi liston de havenoj",
   "calibration": "Kalibrado",
-  "calibrate": "Kalibre",
-  "edit_calibration_parameter": "Redakti kalibran parametron",
+  "calibrate": "Kalibro",
+  "edit_calibration_parameter": "Redakti kalibran parametron numeron",
   "calibration_parameter_not_set": "Kalibrado parametro numero ne estas agordita",
   "calibration_parameter_number": "Parametronumero (vidu aparatomanlibron)"
 }

@@ -1,6 +1,6 @@
 {
-  " ": "----------------------------------",
-  "welcome_to_homegenie": "HomeGenie кош келиңиз!",
+  " ": "-------------------------------------",
+  "welcome_to_homegenie": "HomeGenie'ге кош келиңиз!",
   "welcome_subtitle": "Программалануучу автоматташтырылган интеллект",
   "not_configured_yet": "Система азырынча конфигурациялана элек. Бул орнотуу устасы сизге системаңызды бир нече кадам менен иштетүүгө жардам берет.",
   "system_config_start_with_base_and_backup": "Камдык файлдан калыбына келтирүү",
@@ -34,7 +34,7 @@
   "group_modules": "Бул топтун модулдары",
   "modules": "Модульдер",
   "empty_group": "Бул топто модулдар жок.",
-  "scheduler_wizard": "Пландоочу уста",
+  "scheduler_wizard": "Пландаштыруу чебери",
   "schedule_event": "Окуя",
   "schedule_type_standard": "Стандарт",
   "schedule_type_range": "Дата диапазону",
@@ -68,7 +68,7 @@
   "cronwizard_dayowselect_selecteddaysow": "Аптанын тандалган күндөрү",
   "cronwizard_monthselect_everymonth": "Ай сайын",
   "cronwizard_monthselect_selectedmonths": "Тандалган айлар",
-  "cronwizard_schedule_set_exact_time": "Окуянын убактысын коюу.",
+  "cronwizard_schedule_set_exact_time": "Окуя убактысын коюу.",
   "cronwizard_schedule_set_slot_start": "Убакыттын башталышын коюңуз.",
   "cronwizard_schedule_set_slot_end": "{{start}} баштап.<span class=\"notranslate\"><br/></span> Убакыт аралыгын бүтүрүү.",
   "cronwizard_bindings_define_types_and_modules": "Бул графикке баш ийүүчү типтерди жана модулдарды аныктоо (милдеттүү эмес)",
@@ -78,7 +78,7 @@
   "cronwizard_action_preset_every_occurrence": "Ар бир окуя боюнча",
   "cronwizard_action_preset_slot_start": "Убакыт аралыгынын башында",
   "cronwizard_action_preset_slot_end": "Убакыт аралыгынын аягында",
-  "cronwizard_action_custom_script": "Ыңгайлаштырылган аракет скрипти",
+  "cronwizard_action_custom_script": "Ыңгайлаштырылган аракет сценарийи",
   "cronwizard_action_no_action": "Арекет жок",
   "cronwizard_action_schedule_variable_hint": "Cron туюнтмаларында өзгөрмө катары <span class=\"notranslate color-primary\">@ {{name}}</span> колдонуңуз же бул окуяга шилтеме кылуу үчүн автоматташтыруу программаларында <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> колдонуңуз.",
   "scheduler_preset_action_command_turn_on": "Күйгүзүү",
@@ -102,7 +102,7 @@
   "scheduler_preset_action_config_message": "Кабар",
   "save_and_build": "Сактоо жана куруу",
   "toggle_widgets_preview": "Виджеттерди алдын ала көрүү",
-  "stop_program": "Программаны токтотуу",
+  "stop_program": "Токтотуу программасы",
   "run_program": "Программаны иштетүү",
   "enable_to_run_program": "Аны иштетүү үчүн программаны иштетиңиз",
   "program_status_added": "Кошулган",
@@ -115,19 +115,19 @@
   "program_status_interrupted": "Үзгүлтүккө учурады",
   "program_status_disabled": "Өчүрүлгөн",
   "program_status_enabled": "Иштетилди",
-  "program_status_broken": "Сынган",
+  "program_status_broken": "Broken",
   "program_status_compile": "Compile",
   "automation_programming_guide": "Программалоо боюнча колдонмо'",
-  "tap_to_disable": "Өчүрүү үчүн таптаңыз",
-  "tap_to_enable": "Иштетүү үчүн таптаңыз",
+  "tap_to_disable": "Өчүрүү үчүн чыкылдатыңыз",
+  "tap_to_enable": "Иштетүү үчүн чыкылдатыңыз",
   "program_data": "Программа маалыматтары",
   "visual_code": "Визуалдык код",
   "generated_code": "Түзүлгөн код",
   "setup_code": "Жайгашуу",
   "main_code": "Негизги",
   "context_code": "Контекст",
-  "main_code_empty_note": "\"Негизги\" код бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы командалык палитрадан \"Программа\" категориясын ачыңыз - Визуалдык коддун жумушчу мейкиндигинде \"Негизги\" типтеги блокту сүйрөңүз - Бул программанын иш-аракеттерин жана логикасын ишке ашыруу үчүн анын ичине башка код блокторун кошуңуз \"Негизги\" программасы акыры Орнотуу кодунда берилген шарттардын негизинде кол менен же автоматтык түрдө иштетилет.",
-  "setup_code_empty_note": "\"Орнотуу\" коду бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы буйруктар палитрасынан \"Программа\" категориясын ачыңыз - Визуалдык коддун иштөө мейкиндигинде \"Орнотуу\" тибиндеги блокту сүйрөңүз - \"Негизги\" коддун аткарылышын шарттай турган шарттарды аныктоо үчүн анын ичине башка код блокторун кошуңуз Бул код жаңы окуя болгон сайын жана мүнөтүнө бир жолудан кем эмес бааланат.",
+  "main_code_empty_note": "\"Негизги\" код бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы командалык палитрадан \"Программа\" категориясын ачыңыз - Визуалдык коддун жумушчу мейкиндигинде \"Негизги\" тибиндеги блокту сүйрөңүз - Бул программанын иш-аракеттерин жана логикасын ишке ашыруу үчүн анын ичине башка код блокторун кошуңуз \"Негизги\" программасы акыры Орнотуу кодунда берилген шарттардын негизинде кол менен же автоматтык түрдө иштетилет.",
+  "setup_code_empty_note": "\"Орнотуу\" коду бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы командалык палитрадан \"Программа\" категориясын ачыңыз - Визуалдык коддун жумушчу мейкиндигинде \"Орнотуу\" тибиндеги блокту сүйрөңүз - \"Негизги\" коддун аткарылышын шарттай турган шарттарды аныктоо үчүн анын ичине башка код блокторун кошуңуз Бул код жаңы окуя болгон сайын жана мүнөтүнө бир жолудан кем эмес бааланат.",
   "capture_commands": "Тартуу буйруктары",
   "capture_commands_description": "Виджеттерде кол менен аткарылган бардык буйруктарды программага кошуңуз.",
   "capture_commands_pause": "Буйруктардын ортосунда тыныгуу",
@@ -140,6 +140,13 @@
       "HomeGenie.LevelMemory": "Күйгүзүлгөндө акыркы жарык деңгээлин кайра чакырыңыз",
       "HomeGenie.LevelMemory.SimulateOnly": "Окшош гана"
     },
+    "26": {
+      "Title": "Түстүү жарыктар",
+      "Description": "Мисал Philips Hue чырактарын HTTP API (V1) аркылуу интеграциялоо. Көпүрөгө туташуу үчүн демейки колдонуучу \"жаңы иштеп чыгуучу\" жана ал буга чейин иштетилген болушу керек.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP дареги",
+      "ConfigureOptions.BridgeUsername": "Колдонуучунун аты",
+      "ConfigureOptions.LightsCount": "Жарыктардын саны"
+    },
     "34": {
       "Title": "Аба ырайы",
       "Description": "Ачык Аба ырайы картасы кызматынан аба ырайы жана болжолдоо маалыматы. Бул виджетті иштетүү үчүн жарактуу API ачкычын киргизиңиз. Акысыз API ачкычын алуу үчүн https://openweathermap.org/appid дарегиндеги нускамаларды аткарыңыз.",
@@ -150,7 +157,7 @@
     },
     "77": {
       "Title": "Тармак MQTT",
-      "Description": "Интернет аркылуу каалаган жерден HomeGenie Panel колдонмосун колдонуу үчүн же бир эле MQTT тармагындагы HomeGenie түзмөктөрүн туташтыруу үчүн MQTT брокерине туташыңыз.",
+      "Description": "Интернет аркылуу каалаган жерден HomeGenie Panel колдонмосун колдонуу үчүн же ошол эле MQTT тармагындагы HomeGenie түзмөктөрүн туташтыруу үчүн MQTT брокерине туташыңыз.",
       "MQTT.SensorPublish": "Бул модул тарабынан чыгарылган окуяларды жарыялоо",
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "Сервердин дареги",
@@ -167,7 +174,7 @@
       "Description": "Термостаттын функцияларын ишке ашыруу үчүн каалаган температура сенсорун жана акылдуу которгучту колдонуңуз.",
       "VirtualThermostat.TemperatureModule": "Температура сенсору",
       "VirtualThermostat.HeatingSwitchModule": "Жылытуу өчүргүч",
-      "VirtualThermostat.CoolingSwitchModule": "Муздатуу өчүргүч",
+      "VirtualThermostat.CoolingSwitchModule": "Муздатуу алмаштыргыч",
       "ConfigureOptions.ThermostatsCount": "Термостаттардын саны"
     },
     "81": {
@@ -182,14 +189,24 @@
       "EnergyManagement.EnergySavingLevel": "Максималдуу жарык деңгээли (%)",
       "EnergyManagement.EnergySavingMode": "Иштетүү"
     },
+    "88": {
+      "Title": "Жалпы IP камера",
+      "Description": "IP камерадан сүрөт тартууну көрсөтүү/багыттоо.",
+      "IpCamera.ImageURL": "Камера сүрөтүнүн API URL'и (камераңыздын документтерин караңыз)",
+      "IpCamera.Username": "Колдонуучунун аты (милдеттүү эмес)",
+      "IpCamera.Password": "Сырсөз (милдеттүү эмес)",
+      "Widget.Config.fps": "секундасына кадр",
+      "Widget.Config.size": "Виджеттин өлчөмү"
+    },
     "90": {
       "Title": "Коопсуздук Сигнал системасы",
       "Description": "Коопсуздук сигнализация системасын ишке ашыруу үчүн сенсорлорду жана башка түзүлүштөрдү колдонуңуз.",
       "HomeGenie.SecurityAlarm": "Ойготкуч/строб катары колдонуңуз",
+      "HomeGenie.SecurityTriggerHome": "Ошондой эле үй куралданганда ишке кирет",
       "HomeGenie.SecuritySensor": "Коопсуздук сенсору катары колдонуңуз",
-      "ConfigureOptions.Email.Recipients": "Сигнал эскертмелери үчүн алуучулардын электрондук каттарынын үтүр менен бөлүнгөн тизмеси",
+      "ConfigureOptions.Email.Recipients": "Ойготкуч эскертмелери үчүн алуучулардын электрондук каттарынын үтүр менен бөлүнгөн тизмеси",
       "ConfigureOptions.System.ArmDelay": "Кол кечигүү (секунд)",
-      "ConfigureOptions.System.SirenStartTime": "Сиреналардын кечиктирилиши (секунд)",
+      "ConfigureOptions.System.SirenStartTime": "Сиреналар кечигүү (секунд)",
       "ConfigureOptions.System.SirenMaxTime": "Сиреналардын максималдуу убактысы (секунд, 0=чексиз)",
       "ConfigureOptions.Trigger.ArmedProgram": "Куралданганда иштей турган программа",
       "ConfigureOptions.Trigger.DisarmedProgram": "Куралсызданганда иштей турган программа",
@@ -197,8 +214,12 @@
     },
     "95": {
       "Title": "Окуяларды каттоо",
-      "Description": "Түзмөктүн аракетин жаздыруу.",
+      "Description": "Түзмөк аракетин жаздыруу.",
       "EventsLogger.EnableLogging": "Иштетүү"
+    },
+    "111": {
+      "Title": "Кардардын конфигурациясы",
+      "Description": "UI жана башкаруу такталарынын жөндөөлөрүн сактоо үчүн колдонулган кардардын конфигурация профилдерин башкаруу үчүн API ишке ашырат."
     },
     "400": {
       "Title": "Virtual Modules Demo",
@@ -225,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Нымдуулук сенсору",
       "Simulator.Sensor.Luminance": "Жарык сенсору",
       "Simulator.Meter.Watts": "Ватт метр",
-      "Simulator.Meter.Watts.Max": "Макс ватт кубаттуулугу",
+      "Simulator.Meter.Watts.Max": "Max Watt кубаттуулугу",
       "Simulator.Sensor.DataFrequency": "Симулятор чыгаруу жыштыгы"
     },
     "505": {
@@ -237,9 +258,19 @@
       "ConfigureOptions.DimmerDownCode": "Жарыктыкты азайтуу баскычы",
       "ConfigureOptions.DimmerInterval": "Караңгы кадам"
     },
+    "142": {
+      "Title": "E-mail аккаунту",
+      "Description": "Электрондук каттарды жөнөтүү/кабыл алуу үчүн тутум программалары колдонгон электрондук почта каттоо эсебинин маалыматын сактайт.",
+      "ConfigureOptions.Email.Sender": "1. E-mail дареги",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP серверинин дареги",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP колдонуучу аты (милдеттүү эмес)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP сырсөз (милдеттүү эмес)",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP сервер порту",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP сервери SSL колдонот"
+    },
     "145": {
       "Title": "Акылдуу түзмөк",
-      "Description": "Аппаратты кыймылды аныктоо жана айлана-чөйрө жарыгынын негизинде күйгүзүңүз/өчүңүз.",
+      "Description": "Аппаратты кыймылды аныктоо жана чөйрө жарыгынын негизинде күйгүзүңүз/өчүңүз.",
       "HomeGenie.SmartLights.Enable": "\"Акылдуу түзмөктү\" иштетүү",
       "HomeGenie.SmartLights.OnMotionDetect": "Сенсор тарабынан башкарылат (милдеттүү эмес)",
       "HomeGenie.SmartLights.CheckLuminosity": "Жарык сенсору тарабынан башкарылат (милдеттүү эмес)",
@@ -250,6 +281,13 @@
       "Title": "Күн чыгыш түстөрүнүн сценарийи",
       "Description": "Түсүн өзгөртүүчү LED жарыктары үчүн \"Күн чыгыш\" сценарийинин мисалы.",
       "Scenarios.SunriseColors": "Күн чыгыш түстөрүнүн сценарийине шилтеме"
+    },
+    "910": {
+      "Title": "Объектти аныктоо",
+      "Description": "Алдын ала даярдалган YOLO11 моделин колдонуп объекттерди аныктоо.",
+      "ML.ObjectDetection": "Объекттерди аныктоону иштетүү",
+      "ML.ObjectDetection.TriggerDetect": "Ойготкучту иштете турган нерселердин үтүр менен бөлүнгөн тизмеси (англис тилинде). (мис.: мышык, ит, адам, рюкзак, чемодан)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгү файлынын жолу (.onnx)"
     }
   }
 }

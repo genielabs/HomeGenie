@@ -31,7 +31,7 @@
   "refresh_ports_button": "Herlaai poortlys",
   "calibration": "Kalibrasie",
   "calibrate": "Kalibreer",
-  "edit_calibration_parameter": "Wysig kalibrasieparameternommer",
+  "edit_calibration_parameter": "Wysig kalibrasie parameter nommer",
   "calibration_parameter_not_set": "Kalibrasieparameternommer is nie gestel nie",
   "calibration_parameter_number": "Parameternommer (sien toestelhandleiding)"
 }

@@ -16,7 +16,7 @@
   "brand": "Zīmols",
   "product": "Produkts",
   "manufacturer_specific": "Konkrēts ražotājs",
-  "routing_info": "Maršruta informācija",
+  "routing_info": "Informācija par maršrutēšanu",
   "association_groups": "Asociāciju grupas",
   "association_description": "Šīs ierīces nosūta atskaites uz saišu grupās iekļautajiem mezgliem. Lai saņemtu atskaites no šīs ierīces, saistīšanas grupās iekļaujiet 1. mezglu (kontrolleri).",
   "associated_nodes": "Saistītie mezgli",
