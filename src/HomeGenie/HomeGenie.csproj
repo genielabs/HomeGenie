@@ -88,7 +88,7 @@
 
     <PackageReference Include="HG.NWaves" Version="0.9.6" />
     <PackageReference Include="HG.Raspberry.IO.SerialPeripheralInterface" Version="2.4.11" />
-    <PackageReference Include="MIG.HomeAutomation" Version="1.2.23" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.2.24" />
     <PackageReference Include="MIG.Protocols" Version="1.2.10" />
 
     <PackageReference Include="HG.Raspberry.IO.Components" Version="2.4.11" />
