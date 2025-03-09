@@ -50,9 +50,11 @@ namespace HomeGenie
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 _serviceHost = Host.CreateDefaultBuilder(args)
-                    //.UseSystemd() // <-- worked up to net 8, deprecated now
-                    // TODO: should ".UseWindowsService()" be set for Windows?
-                    .ConfigureServices((hostContext, services) => { services.AddHostedService<ServiceWorker>(); })
+                    .UseSystemd()
+                    .ConfigureServices((hostContext, services) =>
+                    {
+                        services.AddHostedService<ServiceWorker>();
+                    })
                     .Build();
             }
 #endif
