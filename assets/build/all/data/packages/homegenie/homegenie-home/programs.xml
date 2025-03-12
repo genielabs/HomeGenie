@@ -737,21 +737,28 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.Setup(() =&gt; {
-  Program
-      .AddFeature("", "Sensor:Widget.DisplayModule=homegenie/generic/camerainput", "ML.ObjectDetection", "Enable objects detection", "checkbox")
-      .AddFeature(
-          "",
-          "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
-          "ML.ObjectDetection.TriggerDetect",
-          "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
-          "text"
-      ).AddOption("Yolo.ModelPath", Data.GetFolder() + "/yolo11n.onnx", "Path of YOLO11 model file (.onnx)", "text");
-});
+    <ScriptSetup>Program
+    .AddFeature(
+        "",
+        ForCameraInputType,
+        ObjectDetection,
+        "Enable objects detection",
+        "checkbox")
+    .AddFeature(
+        "",
+        ForCameraInputType,
+        ObjectDetectionTrigger,
+        "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
+        "text")
+    .AddOption(
+        YoloModelPath,
+        Data.GetFolder() + "/yolo11n.onnx",
+        "Path of YOLO11 model file (.onnx)",
+        "text");
 
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>var inputModules = Modules.WithFeature("ML.ObjectDetection");
+    <ScriptSource>var inputModules = Modules.WithFeature( ObjectDetection );
 
 // Restart program if configuration has been changed to apply new settings.
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -762,8 +769,8 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   return true;
 });
 
-var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
-if (String.IsNullOrEmpty(yoloModelPath))
+var modelPath = Program.Option(YoloModelPath)?.Value;
+if (String.IsNullOrEmpty(modelPath))
 {
     Program.Notify($"Configure the path of YOLO11 'detect' model (.onnx file). {OptionButtons}");
     Pause(5);
@@ -775,68 +782,94 @@ if (String.IsNullOrEmpty(yoloModelPath))
 // *ML.net* and *YoloSharp* documentation
 
 
-while (Program.IsRunning)
+try 
 {
-    if (inputModules.SelectedModules.Count == 0) {
-        Pause(2);
-        continue;
-    }
-    inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+    using var detectPredictor = new YoloPredictor(modelPath);
 
-        try 
-        {
-            using var detectPredictor = new YoloPredictor(yoloModelPath);
+    while (Program.IsRunning)
+    {
+        if (inputModules.SelectedModules.Count == 0) {
+            Pause(2);
+            continue;
+        }
+        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
 
-            var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
-
-            //Console.WriteLine($"Result: {result}");
-            //Console.WriteLine($"Speed:  {result.Speed}");
-
-            var jsonResults = JsonConvert.SerializeObject(result);
-            var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
-            // Emit json data for the video player (overlay data)
-            module.Emit("Widget.Data.VideoPlayer.Overlay", jsonResults);
-
-            // Emit "Sensor.ObjectDetect" event if anything
-            // mathing the configured "TriggerDetect" list
-            // was detected in the scene.
-            string[] matchList = module
-                .Parameter("ML.ObjectDetection.TriggerDetect")?.Value?.Split(',')
-                .Select(p =&gt; p.Trim()).ToArray();
-            if (matchList.Length &gt; 0)
+            try 
             {
-                var matchedSubjects = new List&lt;string&gt;();
-                foreach (var r in result)
+
+                var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
+
+                //Console.WriteLine($"Result: {result}");
+                //Console.WriteLine($"Speed:  {result.Speed}");
+
+                if (result.Count() &gt; 0)
                 {
-                    var subject = r.Name.Name;
-                    if (matchList.Contains(subject) &amp;&amp; !matchedSubjects.Contains(subject))
+
+                    var jsonResults = JsonConvert.SerializeObject(result);
+                    var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
+                    // Emit json data for the video player (overlay data)
+                    module.Emit(VideoPlayerWidgetOverlay, jsonResults);
+
+                    // Emit "Sensor.ObjectDetect" event if anything
+                    // mathing the configured "TriggerDetect" list
+                    // was detected in the scene.
+                    string[] matchList = module
+                        .Parameter( ObjectDetectionTrigger )?.Value
+                        .Split(',').Select(p =&gt; p.Trim())
+                        .ToArray();
+                    if (matchList.Length &gt; 0)
                     {
-                        matchedSubjects.Add(subject);
+                        var matchedSubjects = new List&lt;string&gt;();
+                        foreach (var r in result)
+                        {
+                            var subject = r.Name.Name;
+                            if (matchList.Contains(subject) &amp;&amp; !matchedSubjects.Contains(subject))
+                            {
+                                matchedSubjects.Add(subject);
+                            }
+                        }
+                        if (matchedSubjects.Count &gt; 0)
+                        {
+                            // trigger an alarm for each detected subject
+                            module.Emit(ObjectDetect, "1");
+                            foreach (var s in matchedSubjects)
+                            {
+                                module.Emit(ObjectDetectSubject, s);
+                            }
+                            module.Emit(ObjectDetect, "0");
+                        }
+
                     }
-                }
-                if (matchedSubjects.Count &gt; 0)
-                {
-                    // trigger alarm    
-                    module.Emit("Sensor.ObjectDetect", "1");
-                    module.Emit("Sensor.ObjectDetect.Subject", String.Join(", ", matchedSubjects.ToArray()));
-                    Pause(.1);
-                    module.Emit("Sensor.ObjectDetect", "0");
+
                 }
 
+            } catch (Exception e) {
+                //Console.WriteLine(e.Message);
+                Pause(2);
             }
 
-        } catch (Exception e) {
-            //Console.WriteLine(e.Message);
-            Pause(2);
-        }
+        });
 
-    });
-
-    // pause half a second between each processed frame
-    Pause(.5);
+        // pause half a second between each processed frame
+        Pause(.5);
+    }
+}
+catch
+{
+    Program.Notify($"Error loading .onnx file. {OptionButtons}");
+    Pause(5);
+    return;
 }
 </ScriptSource>
-    <ScriptContext>const string OptionButtons = "[program_configure,program_disable]";
+    <ScriptContext>const string
+OptionButtons = "[program_configure,program_disable]",
+YoloModelPath = "Yolo.ModelPath",
+ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+ObjectDetection = "ML.ObjectDetection",
+ObjectDetectionTrigger = $"{ObjectDetection}.TriggerDetect",
+ObjectDetect = "Sensor.ObjectDetect",
+ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
+VideoPlayerWidgetOverlay = "Widget.Data.VideoPlayer.Overlay";
 </ScriptContext>
     <ScriptErrors />
     <Data />
@@ -845,9 +878,9 @@ while (Program.IsRunning)
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>object-detection</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>63030842108DA6154C3BEF4315DC96A5</Checksum>
+      <Checksum>C2275858FD4DB5B8CFCFB610216CB2CA</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
@@ -1121,7 +1154,7 @@ while (Program.IsRunning)
 const string STATUS_ARMED_AWAY = "Away";
 const string STATUS_ARMED_HOME = "Home";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

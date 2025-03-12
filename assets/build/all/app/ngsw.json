@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1741397419557,
+  "timestamp": 1741763612667,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.a52b8e1b4fb5a4a7.js",
+        "/app/main.c00d9830c1fe9667.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.a360d6e45b80c065.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
@@ -1198,7 +1198,7 @@
     "/app/assets/i18n/homegenie/id.json": "e12ab61db0e8f127b8b1bfc9a634698ae347257e",
     "/app/assets/i18n/homegenie/ig.json": "ce7943b3c30ebcebcb17e3909504aeb940ff2767",
     "/app/assets/i18n/homegenie/is.json": "e78179fa0afadbb8065205551ad892a2c93335fe",
-    "/app/assets/i18n/homegenie/it.json": "f441f97c222ee4621925ac3d9386237bef197874",
+    "/app/assets/i18n/homegenie/it.json": "7f2cda5476919f73ec553cc5bce8e6b4f8c5b1c6",
     "/app/assets/i18n/homegenie/ja.json": "e8388352d173c6cb6f12060fd6770178e4bcfa98",
     "/app/assets/i18n/homegenie/ka.json": "5f134d77c1d3975208ef4e3226dc316bac8ee706",
     "/app/assets/i18n/homegenie/kk.json": "811624cc6a4ac9ea851376437155a42ea5a16f43",
@@ -2130,8 +2130,8 @@
     "/app/assets/widgets/weather/images_alt/thunder.svg": "2ace7038dfd663330cecc350d680ef08206d62ff",
     "/app/assets/widgets/weather/images_alt/weather.svg": "c719c09048977fd40688272316b35ddf1bdf89e8",
     "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
-    "/app/index.html": "1506654e7bb8311398784e01d68d634c3daa136f",
-    "/app/main.a52b8e1b4fb5a4a7.js": "7cbaebed39e2db59f2bb23459ad72ca8ace3a7f9",
+    "/app/index.html": "a720b62649974f9189d9e5dc386ac1d99e829395",
+    "/app/main.c00d9830c1fe9667.js": "c13a206a576f6cd7469c589e375474948c4162d0",
     "/app/manifest.webmanifest": "519d8ee6b3b82c1add66c43f8ca2cf632326f342",
     "/app/material-symbols-outlined.04b52b454f3bc5eb.woff2": "c98322df19b0d30fa1e9fbe8723f9592d86f367d",
     "/app/material-symbols-rounded.eabca9e86b77ef91.woff2": "572cf3956b7b3ba46650c504f5d9a941ff77f377",

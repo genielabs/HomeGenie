@@ -29,6 +29,7 @@ using System.Text;
 using System.Xml.Serialization;
 
 using System.Net.Sockets;
+using System.Text.Json;
 using System.Threading.Tasks;
 using OpenSource.UPnP;
 
@@ -1294,6 +1295,17 @@ namespace HomeGenie.Service
                     }
                 }
             }
+        }
+
+        internal void modules_SetParameter(Module module, string parameter, string value)
+        {
+            var data = "{" + JsonSerializer.Serialize(parameter) + ": " + JsonSerializer.Serialize(value) + "}";
+            var command =
+                new MigInterfaceCommand(
+                    $"HomeAutomation.HomeGenie/Config/Modules.ParameterSet/{module.Domain}/{module.Address}"); 
+            var request = new MigClientRequest(null, command);
+            request.RequestData = Encoding.UTF8.GetBytes(data);
+            wshConfig.ProcessRequest(request);
         }
 
         #endregion

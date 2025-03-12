@@ -167,21 +167,6 @@ namespace HomeGenie.Automation.Scripting
             ModuleParameter value = null;
             if (module != null)
             {
-                /*
-                int retry = 10; // 500ms max
-                while (value == null && retry > 0)
-                {
-                    value = Utility.ModuleParameterGet(this.module, parameter);
-                    // TODO: sometimes ModuleParameterGet returns null even if a parameter exists!
-                    // TODO: not sure why is this bug occurring (threading issue?), but it's solved by retrying getting the value
-                    // TODO: consider this just as a temporary work-around, further investigation required
-                    if (value == null)
-                    {
-                        Thread.Sleep(50);
-                        retry--;
-                    }
-                }
-                */
                 value = Utility.ModuleParameterGet(module, parameter);
                 // create parameter if does not exists
                 if (value == null)
@@ -191,13 +176,26 @@ namespace HomeGenie.Automation.Scripting
             }
             return value;
         }
+        
+        /// <summary>
+        /// Sets the value of a parameter and emits associated event.
+        /// </summary>
+        /// <param name="parameter">Parameter name.</param>
+        /// <param name="value">Value to set.</param>
+        /// <returns>ModulesManager</returns>
+        public ModulesManager SetParameter(string parameter, string value)
+        {
+            homegenie.modules_SetParameter(module, parameter, value);
+            return this;
+        }
 
+        // TODO: shall this undocumented method be deprecated?
         public StoreHelper Store(string storeName)
         {
             StoreHelper storage = null;
             if (this.module != null)
             {
-                storage = new StoreHelper(this.module.Stores, storeName);
+                storage = new StoreHelper(module.Stores, storeName);
             }
             return storage;
         }

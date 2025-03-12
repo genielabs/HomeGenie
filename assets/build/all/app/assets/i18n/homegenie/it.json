@@ -505,7 +505,7 @@
 
     "910": {
       "Title":
-        "Rilevamento oggetti",
+        "Rileva oggetti",
       "Description":
         "Rileva oggetti utilizzando un modello YOLO11 pre-trained.",
       "ML.ObjectDetection":
