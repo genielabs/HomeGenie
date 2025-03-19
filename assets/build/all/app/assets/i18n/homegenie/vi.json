@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Vào cuối một khoảng thời gian",
   "cronwizard_action_custom_script": "Kịch bản hành động tùy chỉnh",
   "cronwizard_action_no_action": "Không có hành động",
-  "cronwizard_action_schedule_variable_hint": "Sử dụng <span class=\"notranslate color-primary\">@ {{name}}</span> làm biến trong biểu thức cron hoặc sử dụng <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> trong các chương trình tự động hóa để tham chiếu sự kiện này.",
+  "cronwizard_action_schedule_variable_hint": "Sử dụng <span class=\"notranslate color-primary\">@ {{name}}</span> làm biến trong biểu thức cron hoặc sử dụng <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> trong các chương trình tự động hóa để tham chiếu đến sự kiện này.",
   "scheduler_preset_action_command_turn_on": "Bật lên",
   "scheduler_preset_action_command_turn_off": "Tắt đi",
   "scheduler_preset_action_command_set_level": "Đặt mức",
@@ -201,7 +201,7 @@
     "90": {
       "Title": "Hệ thống báo động an ninh",
       "Description": "Sử dụng cảm biến và các thiết bị khác để triển khai hệ thống báo động an ninh.",
-      "HomeGenie.SecurityAlarm": "Sử dụng như báo thức/đèn nháy",
+      "HomeGenie.SecurityAlarm": "Sử dụng như báo thức/nhấp nháy",
       "HomeGenie.SecurityTriggerHome": "Cũng kích hoạt khi được trang bị Trang chủ",
       "HomeGenie.SecuritySensor": "Sử dụng như cảm biến an ninh",
       "ConfigureOptions.Email.Recipients": "Danh sách email của người nhận được phân tách bằng dấu phẩy để nhận thông báo cảnh báo",
@@ -287,6 +287,12 @@
       "Description": "Phát hiện vật thể bằng mô hình YOLO11 đã được đào tạo trước.",
       "ML.ObjectDetection": "Bật phát hiện đối tượng",
       "ML.ObjectDetection.TriggerDetect": "Danh sách các thứ được phân tách bằng dấu phẩy (bằng tiếng Anh) sẽ kích hoạt báo động. (ví dụ: mèo, chó, người, ba lô, vali)",
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Ước tính tư thế",
+      "Description": "Phát hiện điểm chính thông qua ước tính tư thế, sử dụng mô hình ONNX tùy chỉnh hoặc mô hình YOLOv11 được đào tạo trước mặc định (dành riêng cho tư thế của con người).",
+      "ML.PoseEstimation": "Cho phép ước tính tư thế",
       "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
     }
   }

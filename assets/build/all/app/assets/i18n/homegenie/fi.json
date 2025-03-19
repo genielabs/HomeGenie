@@ -224,7 +224,7 @@
     "400": {
       "Title": "Virtuaalimoduulien esittely",
       "Description": "Aseta virtuaalilaitteen arvot manuaalisesti.",
-      "Sensor.Temperature": "Lämpötila-arvo",
+      "Sensor.Temperature": "Lämpötilan arvo",
       "Sensor.Luminance": "Luminanssiarvo",
       "Sensor.MotionDetect": "Liiketunnistuksen tila",
       "Status.Battery": "Akun varaustaso",
@@ -285,8 +285,14 @@
     "910": {
       "Title": "Objektin tunnistus",
       "Description": "Tunnista esineet käyttämällä esikoulutettua YOLO11-mallia.",
-      "ML.ObjectDetection": "Ota esineiden tunnistus käyttöön",
+      "ML.ObjectDetection": "Ota kohteiden tunnistus käyttöön",
       "ML.ObjectDetection.TriggerDetect": "Pilkuilla eroteltu luettelo asioista (englanniksi), jotka laukaisevat hälytyksen. (esim.: kissa, koira, henkilö, reppu, matkalaukku)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11-mallitiedoston polku (.onnx)"
+    },
+    "911": {
+      "Title": "Aseman arvio",
+      "Description": "Avainpisteiden tunnistus asennon arvioinnin avulla, käyttämällä mukautettuja ONNX-malleja tai oletusarvoista esikoulutettua YOLOv11-mallia (ihmisen asentokohtainen).",
+      "ML.PoseEstimation": "Ota asennon arviointi käyttöön",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11-mallitiedoston polku (.onnx)"
     }
   }

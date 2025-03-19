@@ -75,7 +75,7 @@
   "cronwizard_bindings_select_types": "Seleccioneu tipus",
   "cronwizard_action_set_action_to_execute": "Estableix l'acció per executar-se en casos d'aquest esdeveniment",
   "cronwizard_action_preset_actions": "Accions predeterminades",
-  "cronwizard_action_preset_every_occurrence": "En cada esdeveniment",
+  "cronwizard_action_preset_every_occurrence": "En cada ocurrència",
   "cronwizard_action_preset_slot_start": "A l'inici d'una franja horària",
   "cronwizard_action_preset_slot_end": "Al final d'una franja horària",
   "cronwizard_action_custom_script": "Script d'acció personalitzat",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Digues",
   "scheduler_preset_action_config_message": "Missatge",
   "save_and_build": "Guarda i construeix",
-  "toggle_widgets_preview": "Commuta la vista prèvia dels ginys",
+  "toggle_widgets_preview": "Canvia la vista prèvia dels ginys",
   "stop_program": "Atura el programa",
   "run_program": "Executar el programa",
   "enable_to_run_program": "Habiliteu el programa per executar-lo",
@@ -206,7 +206,7 @@
       "HomeGenie.SecuritySensor": "Ús com a sensor de seguretat",
       "ConfigureOptions.Email.Recipients": "Llista separada per comes de correus electrònics de destinataris per a notificacions d'alarma",
       "ConfigureOptions.System.ArmDelay": "Retard del braç (segons)",
-      "ConfigureOptions.System.SirenStartTime": "Retard d'inici de sirenes (segons)",
+      "ConfigureOptions.System.SirenStartTime": "Retard de l'inici de les sirenes (segons)",
       "ConfigureOptions.System.SirenMaxTime": "Temps màxim de les sirenes (segons, 0=infinit)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programa que s'executa quan està armat",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa que s'executa quan està desarmat",
@@ -251,7 +251,7 @@
     },
     "505": {
       "Title": "Control remot",
-      "Description": "Controla el dispositiu amb un comandament a distància (IR o RF).",
+      "Description": "Controleu el dispositiu amb un comandament a distància (IR o RF).",
       "HomeGenie.RemoteControl.Enable": "Activa",
       "HomeGenie.RemoteControl.IRCode": "Botó de commutació",
       "ConfigureOptions.DimmerUpCode": "Botó per augmentar la brillantor",
@@ -287,6 +287,12 @@
       "Description": "Detecteu objectes mitjançant un model YOLO11 pre-entrenat.",
       "ML.ObjectDetection": "Activa la detecció d'objectes",
       "ML.ObjectDetection.TriggerDetect": "Llista de coses separades per comes (en anglès) que activaran l'alarma. (p. ex.: gat, gos, persona, motxilla, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer model YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Estimació de la postura",
+      "Description": "Detecció de punts clau mitjançant l'estimació de la postura, utilitzant models ONNX personalitzats o el model YOLOv11 pre-entrenat predeterminat (específic de la postura humana).",
+      "ML.PoseEstimation": "Activa l'estimació de la postura",
       "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer model YOLO11 (.onnx)"
     }
   }

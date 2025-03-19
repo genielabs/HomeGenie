@@ -78,7 +78,7 @@
   "cronwizard_action_preset_every_occurrence": "Vid varje händelse",
   "cronwizard_action_preset_slot_start": "Vid början av en tidslucka",
   "cronwizard_action_preset_slot_end": "I slutet av en tidslucka",
-  "cronwizard_action_custom_script": "Anpassat handlingsskript",
+  "cronwizard_action_custom_script": "Anpassat åtgärdsskript",
   "cronwizard_action_no_action": "Ingen åtgärd",
   "cronwizard_action_schedule_variable_hint": "Använd <span class=\"notranslate color-primary\">@ {{name}}</span> som en variabel i cron-uttryck eller använd <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> i automationsprogram för att referera till denna händelse.",
   "scheduler_preset_action_command_turn_on": "Sätta på",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Säga",
   "scheduler_preset_action_config_message": "Meddelande",
   "save_and_build": "Spara och bygg",
-  "toggle_widgets_preview": "Växla förhandsvisning av widgets",
+  "toggle_widgets_preview": "Växla förhandsvisning av widgetar",
   "stop_program": "Stoppa programmet",
   "run_program": "Kör programmet",
   "enable_to_run_program": "Aktivera programmet för att köra det",
@@ -207,7 +207,7 @@
       "ConfigureOptions.Email.Recipients": "Kommaseparerad lista över mottagares e-postmeddelanden för larmmeddelanden",
       "ConfigureOptions.System.ArmDelay": "Armeringsfördröjning (sekunder)",
       "ConfigureOptions.System.SirenStartTime": "Sirener startfördröjning (sekunder)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirens maxtid (sekunder, 0=oändlig)",
+      "ConfigureOptions.System.SirenMaxTime": "Sirens max tid (sekunder, 0=oändlig)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program för att köras när den är tillslagen",
       "ConfigureOptions.Trigger.DisarmedProgram": "Program som körs när det är avaktiverat",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program som körs när det utlöses"
@@ -243,7 +243,7 @@
       "Title": "Sensorsimulator",
       "Description": "Avge slumpmässiga sensorvärden.",
       "Simulator.Sensor.Temperature": "Temperaturgivare",
-      "Simulator.Sensor.Humidity": "Fuktsensor",
+      "Simulator.Sensor.Humidity": "Fuktighetssensor",
       "Simulator.Sensor.Luminance": "Ljussensor",
       "Simulator.Meter.Watts": "Wattmätare",
       "Simulator.Meter.Watts.Max": "Max Watt effekt",
@@ -283,10 +283,16 @@
       "Scenarios.SunriseColors": "Länk till Sunrise Colors scenario"
     },
     "910": {
-      "Title": "Objektdetektering",
+      "Title": "Objektdetektion",
       "Description": "Upptäck objekt med en förtränad YOLO11-modell.",
       "ML.ObjectDetection": "Aktivera objektdetektering",
       "ML.ObjectDetection.TriggerDetect": "Kommaseparerad lista över saker (på engelska) som kommer att utlösa larmet. (t.ex.: katt, hund, person, ryggsäck, resväska)",
+      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO11-modellfil (.onnx)"
+    },
+    "911": {
+      "Title": "Poseuppskattning",
+      "Description": "Nyckelpunktsdetektering via poseuppskattning, med hjälp av anpassade ONNX-modeller eller standardförtränad YOLOv11-modell (mänsklig posespecifik).",
+      "ML.PoseEstimation": "Aktivera ställningsuppskattning",
       "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO11-modellfil (.onnx)"
     }
   }

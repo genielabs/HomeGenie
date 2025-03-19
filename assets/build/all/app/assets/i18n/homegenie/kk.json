@@ -112,7 +112,7 @@
   "program_status_background": "Фон",
   "program_status_stopping": "Тоқтау",
   "program_status_stopped": "Тоқтады",
-  "program_status_interrupted": "Үзілді",
+  "program_status_interrupted": "Үзілген",
   "program_status_disabled": "Өшірілген",
   "program_status_enabled": "Қосылған",
   "program_status_broken": "Сынған",
@@ -232,7 +232,7 @@
       "Status.Level": "Күйін ауыстыру (қосу/өшіру)"
     },
     "401": {
-      "Title": "Демо - есікті ауыстырып қосу",
+      "Title": "Демо – есікті ауыстырып қосу",
       "Description": "Демонстрациялық есік-терезе сенсорының есігін ашық/жабуын имитациялайды."
     },
     "402": {
@@ -287,6 +287,12 @@
       "Description": "Алдын ала дайындалған YOLO11 үлгісін пайдаланып нысандарды анықтаңыз.",
       "ML.ObjectDetection": "Нысандарды анықтауды қосыңыз",
       "ML.ObjectDetection.TriggerDetect": "Дабылды қосатын заттардың үтірмен бөлінген тізімі (ағылшын тілінде). (мысалы: мысық, ит, адам, рюкзак, чемодан)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгі файлының жолы (.onnx)"
+    },
+    "911": {
+      "Title": "Позаны бағалау",
+      "Description": "Пайдаланушы ONNX үлгілерін немесе әдепкі алдын ала дайындалған YOLOv11 үлгісін (адам позасына тән) пайдаланып, позаны бағалау арқылы негізгі нүктені анықтау.",
+      "ML.PoseEstimation": "Позаны бағалауды қосыңыз",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгі файлының жолы (.onnx)"
     }
   }

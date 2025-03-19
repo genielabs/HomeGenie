@@ -507,11 +507,47 @@ Program.GoBackground();
     <Name>Generic IP Camera</Name>
     <Description>Generic IP camera module.</Description>
     <Group>Devices and Things</Group>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>IpCamera.ImageURL</Property>
+        <Description>Camera image API URL (see your camera docs)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:1:20:1:5</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>Widget.Config.fps</Property>
+        <Description>Max frames per second</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>IpCamera.Username</Property>
+        <Description>Username (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>password</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>IpCamera.Password</Property>
+        <Description>Password (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>select:small=small,medium=medium,large=big,auto=auto</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>Widget.Config.size</Property>
+        <Description>Widget size</Description>
+      </ProgramFeature>
+    </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
@@ -738,23 +774,24 @@ const string ADDRESS_PROPERTY = "KNX.Address";
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-    .AddFeature(
-        "",
-        ForCameraInputType,
-        ObjectDetection,
-        "Enable objects detection",
-        "checkbox")
-    .AddFeature(
-        "",
-        ForCameraInputType,
-        ObjectDetectionTrigger,
-        "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
-        "text")
-    .AddOption(
-        YoloModelPath,
-        Data.GetFolder() + "/yolo11n.onnx",
-        "Path of YOLO11 model file (.onnx)",
-        "text");
+  .AddFeature(
+    "",
+    ForCameraInputType,
+    ObjectDetection,
+    "Enable objects detection",
+    "checkbox"
+  ).AddFeature(
+    "",
+    ForCameraInputType,
+    ObjectDetectionTrigger,
+    "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
+    "text"
+  ).AddOption(
+    YoloModelPath,
+    Data.GetFolder() + "/yolo11n.onnx",
+    "Path of YOLO11 model file (.onnx)",
+    "text"
+  );
 
 Program.Run();
 </ScriptSetup>
@@ -808,7 +845,7 @@ try
                     var jsonResults = JsonConvert.SerializeObject(result);
                     var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
                     // Emit json data for the video player (overlay data)
-                    module.Emit(VideoPlayerWidgetOverlay, jsonResults);
+                    module.Emit(VideoPlayerWidgetOverlayDetect, jsonResults);
 
                     // Emit "Sensor.ObjectDetect" event if anything
                     // mathing the configured "TriggerDetect" list
@@ -851,7 +888,7 @@ try
         });
 
         // pause half a second between each processed frame
-        Pause(.5);
+        Pause(.05);
     }
 }
 catch
@@ -869,18 +906,18 @@ ObjectDetection = "ML.ObjectDetection",
 ObjectDetectionTrigger = $"{ObjectDetection}.TriggerDetect",
 ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
-VideoPlayerWidgetOverlay = "Widget.Data.VideoPlayer.Overlay";
+VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>object-detection</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>C2275858FD4DB5B8CFCFB610216CB2CA</Checksum>
+      <Checksum>24087F3AFC6A30F169D2258637388C9F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
@@ -902,6 +939,132 @@ VideoPlayerWidgetOverlay = "Widget.Data.VideoPlayer.Overlay";
         <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
         <Property>ML.ObjectDetection.TriggerDetect</Property>
         <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature(
+    "",
+    ForCameraInputType,
+    PoseDetection,
+    "Enable pose tracking",
+    "checkbox"
+  ).AddOption(
+    "Yolo.ModelPath",
+    Data.GetFolder() + "/yolo11n-pose.onnx",
+    "Path of YOLO11 model file (.onnx)",
+    "text"
+  );
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var inputModules = Modules.WithFeature(PoseDetection);
+
+// Restart program if configuration has been changed to apply new settings.
+When.ModuleParameterChanged( (module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions.")) {
+    if (Program.IsRunning) Program.Restart();
+    return true;
+  }
+  return true;
+});
+
+var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
+if (String.IsNullOrEmpty(yoloModelPath))
+{
+    Program.Notify($"Configure the path of YOLO11 'detect' model (.onnx file). {OptionButtons}");
+    Pause(5);
+    return;
+}
+
+
+// For details about this implemention see
+// *ML.net* and *YoloSharp* documentation
+try 
+{
+    using var detectPredictor = new YoloPredictor(yoloModelPath);
+
+    while (Program.IsRunning)
+    {
+        if (inputModules.SelectedModules.Count == 0) {
+            Pause(2);
+            continue;
+        }
+        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            try 
+            {
+
+                var result = detectPredictor.Pose((byte[])data);
+                //Console.WriteLine($"Result: {result}");
+                //Console.WriteLine($"Speed:  {result.Speed}");
+
+
+                if (result.Count() &gt; 0)
+                {
+
+                    var jsonResults = JsonConvert.SerializeObject(result);
+                    var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
+                    // Emit json data for the video player (overlay data)
+                    module.Emit(VideoPlayerWidgetOverlayPose, jsonResults);
+                    // Debug
+                    //Program.Emit(PoseDetection, jsonResults);
+
+                }
+
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+                Pause(2);
+            }
+
+        });
+
+        // pause 50ms between each processed frame
+        Pause(.05);
+    }
+
+}
+catch
+{
+    Program.Notify($"Could not find .onnx file. {OptionButtons}");
+    Pause(5);
+    return;
+}
+</ScriptSource>
+    <ScriptContext>const string
+OptionButtons = "[program_configure,program_disable]",
+YoloModelPath = "Yolo.ModelPath",
+ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+PoseDetection = "ML.PoseEstimation",
+VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-home</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>pose-estimation</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>9F701B9D70445A0CA2F4DB8B359D3688</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>911</Address>
+    <Name>Pose estimation</Name>
+    <Description>Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLOv11 model (human pose-specific).</Description>
+    <Group>Data Processing</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.PoseEstimation</Property>
+        <Description>Enable pose tracking</Description>
       </ProgramFeature>
     </Features>
     <AutoRestartEnabled>false</AutoRestartEnabled>

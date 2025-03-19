@@ -225,7 +225,7 @@
       "Title": "ورچوئل ماڊيولز ڊيمو",
       "Description": "ورچوئل ڊيوائس جا قدر دستي طور تي مقرر ڪريو.",
       "Sensor.Temperature": "گرمي پد جو قدر",
-      "Sensor.Luminance": "روشني جي قيمت",
+      "Sensor.Luminance": "روشني جو قدر",
       "Sensor.MotionDetect": "حرڪت جي ڳولا جي حيثيت",
       "Status.Battery": "بيٽري جي سطح",
       "Sensor.DoorWindow": "دروازي/دريءَ جي سينسر جي حيثيت (کليل/بند)",
@@ -287,6 +287,12 @@
       "Description": "اڳ ۾ تربيت يافته YOLO11 ماڊل استعمال ڪندي شين کي ڳوليو.",
       "ML.ObjectDetection": "شين جي ڳولا کي فعال ڪريو",
       "ML.ObjectDetection.TriggerDetect": "ڪاما سان الڳ ٿيل شين جي فهرست (انگريزي ۾) جيڪي الارم کي متحرڪ ڪنديون. (مثال طور: ٻلي، ڪتو، ماڻهو، بيڪ پيڪ، سوٽ ڪيس)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڊل فائل جو رستو (.onnx)"
+    },
+    "911": {
+      "Title": "پوز جو اندازو",
+      "Description": "ڪسٽم ONNX ماڊلز يا ڊفالٽ اڳ-تربيت يافته YOLOv11 ماڊل (انساني پوز لاءِ مخصوص) استعمال ڪندي پوز جي تخميني ذريعي ڪي پوائنٽ جي سڃاڻپ.",
+      "ML.PoseEstimation": "پوز جو اندازو فعال ڪريو",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڊل فائل جو رستو (.onnx)"
     }
   }

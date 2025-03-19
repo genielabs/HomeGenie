@@ -227,7 +227,7 @@
       "Sensor.Temperature": "Temperatuuri väärtus",
       "Sensor.Luminance": "Heleduse väärtus",
       "Sensor.MotionDetect": "Liikumistuvastuse olek",
-      "Status.Battery": "Aku tase",
+      "Status.Battery": "Aku laetuse tase",
       "Sensor.DoorWindow": "Ukse/akna anduri olek (avatud/suletud)",
       "Status.Level": "Lüliti olek (sisse/välja)"
     },
@@ -287,6 +287,12 @@
       "Description": "Tuvastage objekte, kasutades eelkoolitatud YOLO11 mudelit.",
       "ML.ObjectDetection": "Objektide tuvastamise lubamine",
       "ML.ObjectDetection.TriggerDetect": "Komadega eraldatud loend asjadest (inglise keeles), mis häire käivitavad. (nt: kass, koer, inimene, seljakott, kohver)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudeli faili tee (.onnx)"
+    },
+    "911": {
+      "Title": "Poosi hinnang",
+      "Description": "Võtmepunkti tuvastamine poosihinnangu abil, kasutades kohandatud ONNX-mudeleid või vaikimisi eelkoolitatud YOLOv11 mudelit (inimese poospetsiifiline).",
+      "ML.PoseEstimation": "Luba poseerimise hindamine",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudeli faili tee (.onnx)"
     }
   }

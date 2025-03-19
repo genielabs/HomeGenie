@@ -5,13 +5,13 @@
   "not_configured_yet": "E le'i fa'atulagaina le faiga. O le a fesoasoani lenei wizard seti ia te oe i le faʻaleleia o lau masini ma faʻagaoioia i ni nai laasaga.",
   "system_config_start_with_base_and_backup": "Toe fa'afo'i mai faila faila",
   "system_config_start_with_default_setup": "Seti masani",
-  "system_config_include_demo": "Fa'aaofia fa'ata'ita'iga fa'atasi ai ma gaioiga fa'ata'ita'i masini",
+  "system_config_include_demo": "Fa'aaofia fa'ata'ita'iga fa'atasi ai ma gaioiga fa'atusa masini",
   "system_config_additional_features": "Fa'aopoopo vaega",
   "system_config_manual_setup": "Seti tusilima",
   "interfaces": "Fa'afeso'ota'i",
   "Protocols.UPnP": "UPnP pule",
   "HomeAutomation.X10": "X10 pule",
-  "HomeAutomation.ZWave": "Pule ole Z-Wave",
+  "HomeAutomation.ZWave": "Z-Wave pule",
   "HomeAutomation.ZigBee": "ZigBee pule",
   "device_port": "Uafu masini",
   "device_driver": "Avetaavale",
@@ -24,13 +24,13 @@
   "upload_package": "La'u atu le afifi",
   "create_package": "Fausia le afifi fou",
   "programs_version": "Polokalama version",
-  "http_settings": "Fa'atonu HTTP",
+  "http_settings": "Fa'atonuga HTTP",
   "modules_groups": "Vaega ma modules",
   "groups": "Vaega",
   "add_group": "Faaopoopo vaega",
   "edit_group": "Fa'atonu vaega",
   "delete_group": "Aveese vaega",
-  "dashboard_from_group": "Fausia se dashboard mai le vaega lea",
+  "dashboard_from_group": "Fausia se dashboard mai lenei vaega",
   "group_modules": "Modules i lenei vaega",
   "modules": "Modules",
   "empty_group": "Leai ni modules i lenei vaega.",
@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Amata i le {{start}} .<span class=\"notranslate\"><br/></span> Seti le fa'ai'uga ole taimi.",
   "cronwizard_bindings_define_types_and_modules": "Fa'amatala ituaiga ma modules e fa'atatau i lenei fa'atulagaga (filifiliga)",
   "cronwizard_bindings_select_types": "Filifili ituaiga",
-  "cronwizard_action_set_action_to_execute": "Fa'atu le gaioiga e fa'atino i mea tutupu o lenei mea",
+  "cronwizard_action_set_action_to_execute": "Fa'atulaga se gaioiga e fa'atino i mea e tutupu i lenei fa'alavelave",
   "cronwizard_action_preset_actions": "Fa'atonu gaioiga",
   "cronwizard_action_preset_every_occurrence": "I mea uma e tutupu",
   "cronwizard_action_preset_slot_start": "I le amataga o se taimi avanoa",
@@ -125,11 +125,11 @@
   "generated_code": "Fausia code",
   "setup_code": "Seti",
   "main_code": "Autu",
-  "context_code": "Tulaga",
+  "context_code": "Si'osi'omaga",
   "main_code_empty_note": "\"Main\" code e gaogao. Fa'aaogā le fa'atonu \"Visual code\" e fa'atupu ai lenei fa'ailoga: - Tatala le vaega \"Polokalame\" mai le palette o le fa'atonuga i le itu agavale - Toso se poloka o le ituaiga \"Main\" i le va'aiga fa'ailoga va'aia - Fa'aopoopo i totonu isi poloka fa'ailoga e fa'atino ai gaioiga ma le fa'atatau o lenei polokalame O le polokalame \"Main\" e mafai ona fa'atino ma le lima po'o le fa'amataina otometi e fa'atatau i tu'utu'uga e tu'uina atu i le Setup code.",
-  "setup_code_empty_note": "\"Setup\" code e avanoa. Fa'aaogā le fa'atonu \"Visual code\" e fa'atupu ai lenei fa'ailoga: - Tatala le vaega \"Polokalame\" mai le palette o le fa'atonuga i le agavale - Toso se poloka o le ituaiga \"Setup\" i le va'aiga fa'ailoga va'aia - Fa'aopoopo i totonu isi poloka fa'ailoga e iloa ai tulaga o le a fa'aosoina ai le fa'atinoina o le \"Main\" code execution.",
+  "setup_code_empty_note": "\"Setup\" code e avanoa. Fa'aoga le fa'atonu \"Visual code\" e fa'atupu ai lenei fa'ailoga: - Tatala le vaega \"Polokalame\" mai le palette o le fa'atonuga i le agavale - Toso se poloka o le ituaiga \"Setup\" i le va'aiga fa'ailoga va'aia - Fa'aopoopo i totonu isi poloka fa'ailoga e iloa ai tulaga e fa'aosoina ai le \"Main\" code execution.",
   "capture_commands": "Pu'e poloaiga",
-  "capture_commands_description": "Fa'aopoopo uma fa'atonuga e fa'atino ma le lima i widget i le polokalame.",
+  "capture_commands_description": "Fa'aopoopo uma fa'atonuga e faia ma le lima i luga o widgets i le polokalame.",
   "capture_commands_pause": "Taofi i le va o poloaiga",
   "capture_pause_none": "Leai",
   "capture_pause_asis": "E pei ona iai",
@@ -138,11 +138,11 @@
       "Title": "Fa'amanatuga Tulaga",
       "Description": "Teu ma manatua le tulaga fa'aitiiti mulimuli.",
       "HomeGenie.LevelMemory": "Manatua le tulaga moli mulimuli pe a ki",
-      "HomeGenie.LevelMemory.SimulateOnly": "Fa'ata'ita'i na'o"
+      "HomeGenie.LevelMemory.SimulateOnly": "Na'o fa'atusa"
     },
     "26": {
       "Title": "moli lanu",
-      "Description": "Fa'ata'ita'iga Philips Hue moli tu'ufa'atasiga e fa'aaoga ai le HTTP API (V1). O le tagata fa'aoga fa'aletonu e fa'afeso'ota'i i le alalaupapa o le \"newdeveloper\" ma e tatau ona fa'aagaina.",
+      "Description": "Fa'ata'ita'iga Philips Hue moli tu'ufa'atasiga e fa'aaoga ai le HTTP API (V1). O le tagata fa'aoga le fa'aoga e fa'afeso'ota'i i le alalaupapa o le \"newdeveloper\" ma e tatau ona fa'agaoioia.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) tuatusi IP",
       "ConfigureOptions.BridgeUsername": "Username",
       "ConfigureOptions.LightsCount": "Numera o moli"
@@ -161,7 +161,7 @@
       "MQTT.SensorPublish": "Fa'asalalau mea na tutupu na fa'aolaina e lenei module",
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "tuatusi server",
-      "ConfigureOptions.ServerPort": "Taulaga server",
+      "ConfigureOptions.ServerPort": "Taulaga tautua",
       "ConfigureOptions.Encryption": "Fa'amalo le fa'ailoga fa'ailo (E2EE)",
       "ConfigureOptions.WebSockets": "Fa'aaoga WebSockets",
       "ConfigureOptions.TLS": "Fa'aola TLS/SSL",
@@ -214,7 +214,7 @@
     },
     "95": {
       "Title": "Fa'amaumauga o mea na tutupu",
-      "Description": "Faamaumau gaioioiga masini.",
+      "Description": "Fa'amaumau gaioioiga masini.",
       "EventsLogger.EnableLogging": "Fa'amalo"
     },
     "111": {
@@ -271,11 +271,11 @@
     "145": {
       "Title": "Masini Atamai",
       "Description": "Ki/tapē le masini e fa'atatau i le su'esu'eina o le gaioi ma le malamalama fa'aola.",
-      "HomeGenie.SmartLights.Enable": "Fa'aola 'Masini Atamai'",
+      "HomeGenie.SmartLights.Enable": "Fa'agaoi le 'Masini Atamai'",
       "HomeGenie.SmartLights.OnMotionDetect": "Pulea e le masini (filifiliga)",
       "HomeGenie.SmartLights.CheckLuminosity": "Pulea e le malamalama malamalama (filifiliga)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Tape pe a uma le taimi e le toaga ai (sekona)",
-      "HomeGenie.SmartLights.MinLuminance": "Ki'i pe a iai le malamalama i lalo:"
+      "HomeGenie.SmartLights.MinLuminance": "Fa'aola pe afai o lo'o i lalo le malamalama:"
     },
     "8": {
       "Title": "Fa'aaliga o Lanu o le La",
@@ -287,7 +287,13 @@
       "Description": "Su'e mea e fa'aaoga ai se fa'ata'ita'iga YOLO11 na a'oa'oina muamua.",
       "ML.ObjectDetection": "Fa'aaga mea e su'eina",
       "ML.ObjectDetection.TriggerDetect": "Lisi o mea e vaelua koma (i le Igilisi) e fa'aoso ai le fa'ailo. (faataitaiga: pusi, maile, tagata, ato faafafa, atopa'u)",
-      "ConfigureOptions.Yolo.ModelPath": "Ala o faila fa'ata'ita'iga YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ala o le faila fa'atusa YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Fa'atatau fua",
+      "Description": "Su'esu'ega autu e ala ile fua fa'atatau, fa'aogaina fa'ata'ita'iga masani ONNX po'o le fa'ata'ita'iga YOLOv11 na mua'i a'oa'oina (tagata fa'apitoa).",
+      "ML.PoseEstimation": "Fa'aagafua fua fa'atatau",
+      "ConfigureOptions.Yolo.ModelPath": "Ala o le faila fa'atusa YOLO11 (.onnx)"
     }
   }
 }

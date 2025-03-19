@@ -85,7 +85,7 @@
   "scheduler_preset_action_command_turn_off": "Κλείνω",
   "scheduler_preset_action_command_set_level": "Ρυθμίστε το επίπεδο",
   "scheduler_preset_action_config_level": "Επίπεδο",
-  "scheduler_preset_action_command_set_color": "Σετ χρώμα",
+  "scheduler_preset_action_command_set_color": "Σετ χρώματος",
   "scheduler_preset_action_config_color": "Χρώμα",
   "scheduler_preset_action_command_thermostat_mode": "Λειτουργία θερμοστάτη",
   "scheduler_preset_action_config_mode": "Τρόπος",
@@ -181,7 +181,7 @@
       "Title": "Ενεργειακό Monitor",
       "Description": "Δημιουργήστε στατιστικά στοιχεία για την κατανάλωση ενέργειας και τη χρήση συσκευών.",
       "EnergyManagement.MonitorStatus": "Παρακολούθηση κατάστασης",
-      "EnergyManagement.MonitorWatts": "Παρακολούθηση της κατανάλωσης ενέργειας"
+      "EnergyManagement.MonitorWatts": "Παρακολουθήστε την κατανάλωση ενέργειας"
     },
     "82": {
       "Title": "Λειτουργία εξοικονόμησης ενέργειας",
@@ -287,6 +287,12 @@
       "Description": "Εντοπίστε αντικείμενα χρησιμοποιώντας ένα προεκπαιδευμένο μοντέλο YOLO11.",
       "ML.ObjectDetection": "Ενεργοποίηση ανίχνευσης αντικειμένων",
       "ML.ObjectDetection.TriggerDetect": "Λίστα με κόμματα (στα αγγλικά) που θα ενεργοποιήσουν τον συναγερμό. (π.χ.: γάτα, σκύλος, άτομο, σακίδιο, βαλίτσα)",
+      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή αρχείου μοντέλου YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Εκτίμηση πόζας",
+      "Description": "Ανίχνευση σημείων κλειδιού μέσω εκτίμησης στάσης, χρησιμοποιώντας προσαρμοσμένα μοντέλα ONNX ή το προεπιλεγμένο προεκπαιδευμένο μοντέλο YOLOv11 (συγκεκριμένη για την ανθρώπινη στάση).",
+      "ML.PoseEstimation": "Ενεργοποίηση εκτίμησης πόζας",
       "ConfigureOptions.Yolo.ModelPath": "Διαδρομή αρχείου μοντέλου YOLO11 (.onnx)"
     }
   }

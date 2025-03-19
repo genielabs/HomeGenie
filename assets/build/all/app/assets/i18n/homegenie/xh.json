@@ -30,7 +30,7 @@
   "add_group": "Yongeza iqela",
   "edit_group": "Hlela iqela",
   "delete_group": "Cima iqela",
-  "dashboard_from_group": "Yenza ideshbhodi kweli qela",
+  "dashboard_from_group": "Yenza ideshibhodi kweli qela",
   "group_modules": "Iimodyuli kweli qela",
   "modules": "Iimodyuli",
   "empty_group": "Akukho zimodyuli kweli qela.",
@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Ukuqala {{start}} .<span class=\"notranslate\"><br/></span> Seta ixesha lokuphela kwexesha.",
   "cronwizard_bindings_define_types_and_modules": "Chaza iindidi kunye neemodyuli eziphantsi kolu cwangciso (ukhetho)",
   "cronwizard_bindings_select_types": "Khetha iintlobo",
-  "cronwizard_action_set_action_to_execute": "Cwangcisa inyathelo lokuphumeza kwiziganeko zesi siganeko",
+  "cronwizard_action_set_action_to_execute": "Cwangcisa inyathelo lokuphumeza kwiziganeko zalo msitho",
   "cronwizard_action_preset_actions": "Iintshukumo ezicwangcisiweyo",
   "cronwizard_action_preset_every_occurrence": "Kuyo yonke into eyenzekayo",
   "cronwizard_action_preset_slot_start": "Ekuqaleni kwexesha lokuphumla",
@@ -137,7 +137,7 @@
     "16": {
       "Title": "Imemori yeNqanaba",
       "Description": "Gcina kwaye ukhumbule inqanaba lokugqibela le-dimmer.",
-      "HomeGenie.LevelMemory": "Khumbula inqanaba lokugqibela lokukhanya xa lilayitiwe",
+      "HomeGenie.LevelMemory": "Khumbula inqanaba lokugqibela lokukhanya xa lulayitiwe",
       "HomeGenie.LevelMemory.SimulateOnly": "Ukulinganisa kuphela"
     },
     "26": {
@@ -149,7 +149,7 @@
     },
     "34": {
       "Title": "Uqikelelo lwemozulu",
-      "Description": "Imozulu kunye nolwazi loqikelelo oluvela kwinkonzo yeMephu yeMozulu eVulekileyo. Ukuvula le widget faka iqhosha elisebenzayo le-API. Landela imiyalelo ku-https://openweathermap.org/appid ukufumana isitshixo sasimahla se-API.",
+      "Description": "Imozulu kunye nolwazi loqikelelo oluvela kwinkonzo yeMephu yeMozulu eVulekileyo. Ukwenza le widget isebenze faka iqhosha elisebenzayo le-API. Landela imiyalelo ku-https://openweathermap.org/appid ukufumana isitshixo sasimahla se-API.",
       "ConfigureOptions.Location": "Igama lesixeko",
       "ConfigureOptions.Language": "Ulwimi (umz. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Hlaziya isithuba (imizuzu)",
@@ -185,7 +185,7 @@
     },
     "82": {
       "Title": "Imowudi yokonga amandla",
-      "Description": "Gcina umgangatho wokukhanya ungaphantsi kwepesenti elungisekayo.",
+      "Description": "Gcina umgangatho wokukhanya ngaphantsi kwepesenti eqwalaselweyo.",
       "EnergyManagement.EnergySavingLevel": "Inqanaba lokukhanya okukhulu (%)",
       "EnergyManagement.EnergySavingMode": "Vulela"
     },
@@ -272,7 +272,7 @@
       "Title": "Isixhobo esihlakaniphile",
       "Description": "Vula/cima isixhobo ngokusekwe ekubhaqweni kwentshukumo kunye nokukhanya kwendawo.",
       "HomeGenie.SmartLights.Enable": "Vula 'Isixhobo esiSmart'",
-      "HomeGenie.SmartLights.OnMotionDetect": "Ilawulwa nguluvo (ukhetho)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Ilawulwa sisivamvo (ukhetho)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ilawulwa sisivamvo sokukhanya (ukhetho)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Cima emva kwexesha lokungasebenzi (imizuzwana)",
       "HomeGenie.SmartLights.MinLuminance": "Layita ukuba ukukhanya kungezantsi:"
@@ -287,6 +287,12 @@
       "Description": "Khangela izinto usebenzisa imodeli ye-YOLO11 eqeqeshwe kwangaphambili.",
       "ML.ObjectDetection": "Yenza ukubonwa kwezinto",
       "ML.ObjectDetection.TriggerDetect": "Uluhlu olwahlulwe ngekoma lezinto (ngesiNgesi) oluzakuvusa isivusi. (umzekelo: ikati, inja, umntu, ubhaka, isutikheyisi)",
+      "ConfigureOptions.Yolo.ModelPath": "Indlela yefayile yomfuziselo weYOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Misa uqikelelo",
+      "Description": "Ubhaqo lwendawo ephambili ngoqikelelo lwendawo, kusetyenziswa imifuziselo ye-ONNX yesiko okanye imodeli ye-YOLOv11 eqeqeshelwe kwangaphambili (indlela yomntu ethile).",
+      "ML.PoseEstimation": "Yenza uqikelelo lokuma",
       "ConfigureOptions.Yolo.ModelPath": "Indlela yefayile yomfuziselo weYOLO11 (.onnx)"
     }
   }

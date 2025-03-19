@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "জেনেরিক আইপি ক্যামেরা",
-      "Description": "একটি আইপি ক্যামেরা থেকে ছবি ফিড প্রদর্শন/রুট করুন।",
+      "Description": "একটি আইপি ক্যামেরা থেকে ছবি ফিড প্রদর্শন/রাউট করুন।",
       "IpCamera.ImageURL": "ক্যামেরা ইমেজ API URL (আপনার ক্যামেরা ডক্স দেখুন)",
       "IpCamera.Username": "ব্যবহারকারীর নাম (ঐচ্ছিক)",
       "IpCamera.Password": "পাসওয়ার্ড (ঐচ্ছিক)",
@@ -209,7 +209,7 @@
       "ConfigureOptions.System.SirenStartTime": "সাইরেন শুরুর বিলম্ব (সেকেন্ড)",
       "ConfigureOptions.System.SirenMaxTime": "সাইরেন সর্বোচ্চ সময় (সেকেন্ড, 0 = অসীম)",
       "ConfigureOptions.Trigger.ArmedProgram": "সশস্ত্র অবস্থায় চালানোর জন্য প্রোগ্রাম",
-      "ConfigureOptions.Trigger.DisarmedProgram": "নিরস্ত্র করার সময় চালানোর জন্য প্রোগ্রাম",
+      "ConfigureOptions.Trigger.DisarmedProgram": "নিরস্ত্রীকরণের সময় চালানোর জন্য প্রোগ্রাম",
       "ConfigureOptions.Trigger.TriggeredProgram": "ট্রিগার হলে চালানোর জন্য প্রোগ্রাম"
     },
     "95": {
@@ -287,6 +287,12 @@
       "Description": "একটি পূর্ব-প্রশিক্ষিত YOLO11 মডেল ব্যবহার করে বস্তু সনাক্ত করুন।",
       "ML.ObjectDetection": "বস্তু সনাক্তকরণ সক্ষম করুন",
       "ML.ObjectDetection.TriggerDetect": "কমা দ্বারা পৃথক করা জিনিসপত্রের তালিকা (ইংরেজিতে) যা অ্যালার্ম ট্রিগার করবে। (যেমন: বিড়াল, কুকুর, ব্যক্তি, ব্যাকপ্যাক, স্যুটকেস)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 মডেল ফাইলের পথ (.onnx)"
+    },
+    "911": {
+      "Title": "ভঙ্গি অনুমান",
+      "Description": "কাস্টম ONNX মডেল অথবা ডিফল্ট প্রাক-প্রশিক্ষিত YOLOv11 মডেল (মানব ভঙ্গি-নির্দিষ্ট) ব্যবহার করে ভঙ্গি অনুমানের মাধ্যমে কীপয়েন্ট সনাক্তকরণ।",
+      "ML.PoseEstimation": "ভঙ্গি অনুমান সক্ষম করুন",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 মডেল ফাইলের পথ (.onnx)"
     }
   }

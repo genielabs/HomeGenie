@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Na kraju vremenskog intervala",
   "cronwizard_action_custom_script": "Prilagođena skripta akcije",
   "cronwizard_action_no_action": "Nema akcije",
-  "cronwizard_action_schedule_variable_hint": "Koristite <span class=\"notranslate color-primary\">@ {{name}}</span> kao varijablu u cron izrazima ili koristite <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> u programima za automatizaciju da referencirate ovaj događaj.",
+  "cronwizard_action_schedule_variable_hint": "Koristite <span class=\"notranslate color-primary\">@ {{name}}</span> kao varijablu u cron izrazima ili koristite <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> u programima za automatizaciju da biste referencirali ovaj događaj.",
   "scheduler_preset_action_command_turn_on": "Uključi",
   "scheduler_preset_action_command_turn_off": "Isključi",
   "scheduler_preset_action_command_set_level": "Podesite nivo",
@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Isključeno",
   "scheduler_preset_action_config_mode_heat": "Toplota",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomija toplote",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomičnost toplote",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Cool ekonomičnost",
   "scheduler_preset_action_program_run": "Pokreni program",
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Mrežni MQTT",
-      "Description": "Povežite se s MQTT brokerom da biste koristili aplikaciju HomeGenie Panel s bilo kojeg mjesta putem interneta ili za međusobno povezivanje HomeGenie uređaja na istoj MQTT mreži.",
+      "Description": "Povežite se s MQTT brokerom kako biste koristili aplikaciju HomeGenie Panel s bilo kojeg mjesta putem interneta ili za međusobno povezivanje HomeGenie uređaja na istoj MQTT mreži.",
       "MQTT.SensorPublish": "Objavite događaje koje emituje ovaj modul",
       "ConfigureOptions.ClientId": "Id. klijenta.",
       "ConfigureOptions.ServerAddress": "Adresa servera",
@@ -224,7 +224,7 @@
     "400": {
       "Title": "Demo virtuelnih modula",
       "Description": "Ručno postavite vrijednosti virtuelnog uređaja.",
-      "Sensor.Temperature": "Vrijednost temperature",
+      "Sensor.Temperature": "Temperaturna vrijednost",
       "Sensor.Luminance": "Vrijednost osvjetljenja",
       "Sensor.MotionDetect": "Status detekcije pokreta",
       "Status.Battery": "Nivo baterije",
@@ -243,7 +243,7 @@
       "Title": "Simulator senzora",
       "Description": "Emitujte nasumične vrijednosti senzora.",
       "Simulator.Sensor.Temperature": "Senzor temperature",
-      "Simulator.Sensor.Humidity": "Senzor vlage",
+      "Simulator.Sensor.Humidity": "Senzor vlažnosti",
       "Simulator.Sensor.Luminance": "Svetlosni senzor",
       "Simulator.Meter.Watts": "Watts metar",
       "Simulator.Meter.Watts.Max": "Max Watt snaga",
@@ -260,10 +260,10 @@
     },
     "142": {
       "Title": "E-mail nalog",
-      "Description": "Pohranjuje informacije o nalogu e-pošte koje koriste sistemski programi za slanje/primanje e-pošte.",
+      "Description": "Čuva informacije o nalogu e-pošte koje sistemski programi koriste za slanje/primanje e-pošte.",
       "ConfigureOptions.Email.Sender": "1. E-mail adresa",
       "ConfigureOptions.Email.SmtpServer": "2. Adresa SMTP servera",
-      "ConfigureOptions.Email.SmtpUserName": "3. SMTP korisničko ime (opciono)",
+      "ConfigureOptions.Email.SmtpUserName": "3. SMTP korisničko ime (opcionalno)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP lozinka (opciono)",
       "ConfigureOptions.Email.SmtpPort": "5. Port SMTP servera",
       "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP server koristi SSL"
@@ -286,7 +286,13 @@
       "Title": "Detekcija objekata",
       "Description": "Otkrijte objekte koristeći prethodno obučeni model YOLO11.",
       "ML.ObjectDetection": "Omogućite otkrivanje objekata",
-      "ML.ObjectDetection.TriggerDetect": "Lista stvari razdvojenih zarezima (na engleskom) koje će pokrenuti alarm. (npr. mačka, pas, osoba, ruksak, kofer)",
+      "ML.ObjectDetection.TriggerDetect": "Lista stvari razdvojenih zarezima (na engleskom) koje će pokrenuti alarm. (npr.: mačka, pas, osoba, ruksak, kofer)",
+      "ConfigureOptions.Yolo.ModelPath": "Putanja datoteke modela YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Procjena poza",
+      "Description": "Detekcija ključne tačke putem procene poze, koristeći prilagođene ONNX modele ili podrazumevani unapred obučeni YOLOv11 model (specifičan za pozu čoveka).",
+      "ML.PoseEstimation": "Omogući procjenu poze",
       "ConfigureOptions.Yolo.ModelPath": "Putanja datoteke modela YOLO11 (.onnx)"
     }
   }

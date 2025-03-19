@@ -67,7 +67,7 @@
   "cronwizard_dayselect_selecteddays": "Awọn ọjọ ti a yan",
   "cronwizard_dayowselect_selecteddaysow": "Awọn ọjọ ti a yan ti ọsẹ",
   "cronwizard_monthselect_everymonth": "Ni gbogbo oṣu",
-  "cronwizard_monthselect_selectedmonths": "Awọn osu ti a yan",
+  "cronwizard_monthselect_selectedmonths": "Awọn oṣu ti a yan",
   "cronwizard_schedule_set_exact_time": "Ṣeto akoko iṣẹlẹ.",
   "cronwizard_schedule_set_slot_start": "Ṣeto akoko Iho ibere.",
   "cronwizard_schedule_set_slot_end": "Bibẹrẹ ni {{start}} .<span class=\"notranslate\"><br/></span> Ṣeto akoko Iho ipari.",
@@ -132,7 +132,7 @@
   "capture_commands_description": "Ṣafikun gbogbo awọn aṣẹ ti a ṣe pẹlu ọwọ lori awọn ẹrọ ailorukọ si eto naa.",
   "capture_commands_pause": "Sinmi laarin awọn aṣẹ",
   "capture_pause_none": "Ko si",
-  "capture_pause_asis": "Bi o ti ri",
+  "capture_pause_asis": "Bi o ṣe jẹ",
   "$options": {
     "16": {
       "Title": "Iranti Ipele",
@@ -287,6 +287,12 @@
       "Description": "Wa awọn nkan nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
       "ML.ObjectDetection": "Mu wiwa nkan ṣiṣẹ",
       "ML.ObjectDetection.TriggerDetect": "Akojọ awọn ohun ti o ya sọtọ (ni ede Gẹẹsi) ti yoo fa itaniji naa. (fun apẹẹrẹ: ologbo, aja, eniyan, apoeyin, apoti)",
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Iṣiro iduro",
+      "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLOv11 ti a ti kọ tẹlẹ (pato-pato eniyan).",
+      "ML.PoseEstimation": "Mu iṣiro iduro ṣiṣẹ",
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
     }
   }

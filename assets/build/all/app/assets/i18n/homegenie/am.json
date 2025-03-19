@@ -1,5 +1,5 @@
 {
-  " ": "----------------------------------",
+  " ": "-----------------------------------",
   "welcome_to_homegenie": "ወደ HomeGenie እንኳን በደህና መጡ!",
   "welcome_subtitle": "በፕሮግራም ሊሰራ የሚችል አውቶሜሽን ብልህነት",
   "not_configured_yet": "ስርዓቱ ገና አልተዋቀረም። ይህ የማዋቀር ጠንቋይ ስርዓትዎን በጥቂት እርምጃዎች እንዲያነሱ እና እንዲሰሩ ይረዳዎታል።",
@@ -113,7 +113,7 @@
   "program_status_stopping": "ማቆም",
   "program_status_stopped": "ቆሟል",
   "program_status_interrupted": "ተቋርጧል",
-  "program_status_disabled": "ተሰናክሏል።",
+  "program_status_disabled": "ተሰናክሏል",
   "program_status_enabled": "ነቅቷል",
   "program_status_broken": "የተሰበረ",
   "program_status_compile": "ማጠናቀር",
@@ -126,10 +126,10 @@
   "setup_code": "ማዋቀር",
   "main_code": "ዋና",
   "context_code": "አውድ",
-  "main_code_empty_note": "\"ዋና\" ኮድ ባዶ ነው። ይህንን ኮድ ለማመንጨት የ\"Visual code\" አርታዒን ይጠቀሙ: - በግራ በኩል ካለው የትዕዛዝ ቤተ-ስዕል \"ፕሮግራም\" የሚለውን ምድብ ይክፈቱ - በምስላዊ ኮድ የስራ ቦታ ውስጥ \"ዋና\" የሚለውን ዓይነት ብሎክ ይጎትቱ - የዚህን ፕሮግራም ድርጊቶች እና አመክንዮዎች ለመተግበር በውስጡ ሌሎች የኮድ እገዳዎችን ይጨምሩ ፕሮግራሙ \"ዋና\" ውሎ አድሮ በማዋቀር ኮድ ውስጥ በተሰጡ ሁኔታዎች ላይ በመመስረት በእጅ ሊሰራ ወይም በራሱ ሊጀምር ይችላል.",
+  "main_code_empty_note": "\"ዋና\" ኮድ ባዶ ነው። ይህንን ኮድ ለማመንጨት የ\"Visual code\" አርታዒን ይጠቀሙ: - በግራ በኩል ካለው የትዕዛዝ ቤተ-ስዕል \"ፕሮግራም\" የሚለውን ምድብ ይክፈቱ - በምስላዊ ኮድ የስራ ቦታ ውስጥ \"ዋና\" የሚለውን አይነት እገዳ ይጎትቱ - የዚህን ፕሮግራም ድርጊቶች እና አመክንዮዎች ተግባራዊ ለማድረግ ሌሎች የኮድ እገዳዎችን ይጨምሩ ፕሮግራሙ \"ዋና\" በሂደት ላይ ባለው ማዋቀር ኮድ ውስጥ በተሰጡ ሁኔታዎች ላይ በመመስረት በእጅ ወይም በራስ-ሰር ሊጀመር ይችላል.",
   "setup_code_empty_note": "\"ማዋቀር\" ኮድ ባዶ ነው። ይህንን ኮድ ለማመንጨት የ\"Visual code\" አርታዒን ይጠቀሙ፡ - በግራ በኩል ካለው የትዕዛዝ ቤተ-ስዕል ላይ \"ፕሮግራም\" የሚለውን ምድብ ይክፈቱ - በምስላዊ ኮድ የስራ ቦታ ላይ ያለውን \"ማዋቀር\" አይነት ብሎክ ይጎትቱ - \"ዋና\" ኮድ አፈፃፀምን የሚቀሰቅሱትን ሁኔታዎች ለመወሰን በውስጡ ሌሎች የኮድ ብሎኮችን ይጨምሩ ይህ ኮድ አዲስ ክስተት በተፈጠረ ቁጥር እና ቢያንስ በደቂቃ አንድ ጊዜ ይገመገማል።",
   "capture_commands": "ትዕዛዞችን ይያዙ",
-  "capture_commands_description": "በፕሮግራሙ ላይ በእጅ የተከናወኑ ሁሉንም ትዕዛዞች በመግብሮች ላይ ያክሉ።",
+  "capture_commands_description": "በመግብሮች ላይ በእጅ የተከናወኑትን ሁሉንም ትዕዛዞች ወደ ፕሮግራሙ ያክሉ።",
   "capture_commands_pause": "በትእዛዞች መካከል ለአፍታ አቁም",
   "capture_pause_none": "ምንም",
   "capture_pause_asis": "እንዳለ",
@@ -171,7 +171,7 @@
     },
     "78": {
       "Title": "ስማርት ቴርሞስታት",
-      "Description": "ቴርሞስታት ተግባራዊነትን ለመተግበር ማንኛውንም የሙቀት ዳሳሽ እና ብልጥ ማብሪያ / ማጥፊያ ይጠቀሙ።",
+      "Description": "ቴርሞስታት ተግባርን ተግባራዊ ለማድረግ ማንኛውንም የሙቀት ዳሳሽ እና ብልጥ መቀየሪያ ይጠቀሙ።",
       "VirtualThermostat.TemperatureModule": "የሙቀት ዳሳሽ",
       "VirtualThermostat.HeatingSwitchModule": "ማሞቂያ መቀየሪያ",
       "VirtualThermostat.CoolingSwitchModule": "የማቀዝቀዣ መቀየሪያ",
@@ -253,7 +253,7 @@
       "Title": "የርቀት መቆጣጠሪያ",
       "Description": "የርቀት መቆጣጠሪያ (IR ወይም RF) በመጠቀም መሳሪያውን ይቆጣጠሩ።",
       "HomeGenie.RemoteControl.Enable": "አንቃ",
-      "HomeGenie.RemoteControl.IRCode": "አዝራር ቀያይር",
+      "HomeGenie.RemoteControl.IRCode": "ቀይር አዝራር",
       "ConfigureOptions.DimmerUpCode": "የብሩህነት መጨመር ቁልፍ",
       "ConfigureOptions.DimmerDownCode": "የብሩህነት ቅነሳ ቁልፍ",
       "ConfigureOptions.DimmerInterval": "የማደብዘዝ ደረጃ"
@@ -266,11 +266,11 @@
       "ConfigureOptions.Email.SmtpUserName": "3. የSMTP ተጠቃሚ ስም (አማራጭ)",
       "ConfigureOptions.Email.SmtpPassword": "4. የSMTP ይለፍ ቃል (አማራጭ)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP አገልጋይ ወደብ",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. የSMTP አገልጋይ SSLን ይጠቀማል"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP አገልጋይ SSL ይጠቀማል"
     },
     "145": {
       "Title": "ዘመናዊ መሣሪያ",
-      "Description": "በእንቅስቃሴ ማወቂያ እና በድባብ ብርሃን መሰረት መሳሪያውን ያብሩ/ያጥፉ።",
+      "Description": "በእንቅስቃሴ ማወቂያ እና በድባብ ብርሃን መሰረት መሳሪያውን ያብሩ/ያጥፉት።",
       "HomeGenie.SmartLights.Enable": "'ስማርት መሳሪያ'ን አንቃ",
       "HomeGenie.SmartLights.OnMotionDetect": "በዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
       "HomeGenie.SmartLights.CheckLuminosity": "በብርሃን ዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
@@ -287,6 +287,12 @@
       "Description": "አስቀድሞ የሰለጠነ YOLO11 ሞዴል በመጠቀም ነገሮችን ያግኙ።",
       "ML.ObjectDetection": "የነገሮችን መለየት አንቃ",
       "ML.ObjectDetection.TriggerDetect": "ማንቂያውን የሚያነቃቁ በነጠላ ሰረዝ የተለዩ የነገሮች ዝርዝር (በእንግሊዘኛ)። (ለምሳሌ፡ ድመት፣ ውሻ፣ ሰው፣ ቦርሳ፣ ሻንጣ)",
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
+    },
+    "911": {
+      "Title": "የቦታ ግምት",
+      "Description": "ብጁ የONNX ሞዴሎችን ወይም ነባሪው ቀድሞ የሰለጠነ YOLOv11 ሞዴል (የሰው አቀማመጥ-ተኮር) በመጠቀም የቁልፍ ነጥብ ማወቂያ በፖዝ ግምት።",
+      "ML.PoseEstimation": "የአቀማመጥ ግምትን አንቃ",
       "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
     }
   }

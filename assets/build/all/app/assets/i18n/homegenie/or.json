@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ସମୟ ସ୍ଲଟର ଶେଷରେ",
   "cronwizard_action_custom_script": "କଷ୍ଟମ୍ ଆକ୍ସନ୍ ସ୍କ୍ରିପ୍ଟ",
   "cronwizard_action_no_action": "କୌଣସି କାର୍ଯ୍ୟ ନାହିଁ",
-  "cronwizard_action_schedule_variable_hint": "ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ କ୍ରୋନ୍ ଏକ୍ସପ୍ରେସନରେ <span class=\"notranslate color-primary\">@ {{name}}</span> ଏକ ଭେରିଏବଲ୍ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ଅଟୋମେସନ୍ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
+  "cronwizard_action_schedule_variable_hint": "ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ କ୍ରୋନ୍ ପ୍ରକାଶନରେ <span class=\"notranslate color-primary\">@ {{name}}</span> ଏକ ଚଳକ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ସ୍ୱୟଂଚାଳିତ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
   "scheduler_preset_action_command_turn_on": "ଚାଲୁ କରନ୍ତୁ",
   "scheduler_preset_action_command_turn_off": "ବନ୍ଦ କରନ୍ତୁ",
   "scheduler_preset_action_command_set_level": "ସ୍ତର ସେଟ୍‌ କରନ୍ତୁ",
@@ -206,7 +206,7 @@
       "HomeGenie.SecuritySensor": "ସୁରକ୍ଷା ସେନ୍ସର ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ",
       "ConfigureOptions.Email.Recipients": "ଆଲାର୍ମ ବିଜ୍ଞପ୍ତି ପାଇଁ ପ୍ରାପ୍ତକର୍ତ୍ତାଙ୍କ ଇ-ମେଲଗୁଡ଼ିକର କମା ଦ୍ୱାରା ପୃଥକ ତାଲିକା",
       "ConfigureOptions.System.ArmDelay": "ହାତ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
-      "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
+      "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍‌ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
       "ConfigureOptions.System.SirenMaxTime": "ସାଇରନ ସର୍ବାଧିକ ସମୟ (ସେକେଣ୍ଡ, 0 = ଅସୀମ)",
       "ConfigureOptions.Trigger.ArmedProgram": "ସଶସ୍ତ୍ର ଥିବା ସମୟରେ ଚଲାଇବାକୁ କାର୍ଯ୍ୟକ୍ରମ",
       "ConfigureOptions.Trigger.DisarmedProgram": "ନିରସ୍ତ୍ର ହେବା ସମୟରେ ଚଲାଇବାକୁ ଥିବା କାର୍ଯ୍ୟକ୍ରମ",
@@ -287,6 +287,12 @@
       "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO11 ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁଗୁଡ଼ିକୁ ଚିହ୍ନଟ କରନ୍ତୁ।",
       "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟ ସକ୍ଷମ କରନ୍ତୁ",
       "ML.ObjectDetection.TriggerDetect": "ଆଲାର୍ମ ଟ୍ରିଗର କରୁଥିବା ଜିନିଷଗୁଡ଼ିକର କମା-ବିଚ୍ଛେଦିତ ତାଲିକା (ଇଂରାଜୀରେ)। (ଯଥା: ବିଲେଇ, କୁକୁର, ବ୍ୟକ୍ତି, ବ୍ୟାକପ୍ୟାକ୍, ସୁଟକେସ୍)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
+    },
+    "911": {
+      "Title": "ପୋଜ୍ ଆକଳନ",
+      "Description": "କଷ୍ଟମ୍ ONNX ମଡେଲ୍ କିମ୍ବା ଡିଫଲ୍ଟ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLOv11 ମଡେଲ୍ (ମାନବ ପୋଜ୍-ନିର୍ଦ୍ଦିଷ୍ଟ) ବ୍ୟବହାର କରି ପୋଜ୍ ଆକଳନ ମାଧ୍ୟମରେ କୀପଏଣ୍ଟ ଚିହ୍ନଟ।",
+      "ML.PoseEstimation": "ପୋଜ୍ ଆକଳନକୁ ସକ୍ଷମ କରନ୍ତୁ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
     }
   }

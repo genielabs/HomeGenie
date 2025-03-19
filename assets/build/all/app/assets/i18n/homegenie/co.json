@@ -33,9 +33,9 @@
   "dashboard_from_group": "Crea un dashboard da stu gruppu",
   "group_modules": "Moduli in stu gruppu",
   "modules": "Moduli",
-  "empty_group": "Nisun modulu in stu gruppu.",
+  "empty_group": "Nisun moduli in stu gruppu.",
   "scheduler_wizard": "Scheduler Wizard",
-  "schedule_event": "Avvenimentu",
+  "schedule_event": "Eventu",
   "schedule_type_standard": "Standard",
   "schedule_type_range": "Scala di data",
   "schedule_type_cron": "Espressione cron",
@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Off",
   "scheduler_preset_action_config_mode_heat": "Calore",
-  "scheduler_preset_action_config_mode_heat_eco": "Ecunumia di u calore",
+  "scheduler_preset_action_config_mode_heat_eco": "Ecunumia di calore",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Ecunumia fresca",
   "scheduler_preset_action_program_run": "Run prugrammu",
@@ -124,10 +124,10 @@
   "visual_code": "codice visuale",
   "generated_code": "codice generatu",
   "setup_code": "Istituisci",
-  "main_code": "Main",
+  "main_code": "Principale",
   "context_code": "Cuntestu",
   "main_code_empty_note": "U codice \"principale\" hè viotu. Aduprate l'editore \"Codice visuale\" per generà stu codice: - Aprite a categuria \"Programma\" da a paleta di cumandamenti à manca - Trascinate un bloccu di tipu \"Principale\" in u spaziu di travagliu di u codice visuale - Aghjunghjite in ellu altri blocchi di codice per implementà l'azzioni è a logica di stu prugramma.",
-  "setup_code_empty_note": "U codice \"Setup\" hè viotu. Aduprate l'editore \"Codice visuale\" per generà stu codice: - Aprite a categuria \"Programma\" da a paleta di cumandamenti à manca - Trascinate un bloccu di tipu \"Setup\" in u spaziu di travagliu di u codice visuale - Aghjunghjite in ellu altri blocchi di codice per determinà e cundizioni chì attivanu l'esecuzione di codice \"Principale\" Stu codice hè evaluatu ogni volta chì un novu avvenimentu accade è almenu una volta à minutu.",
+  "setup_code_empty_note": "U codice \"Setup\" hè viotu. Aduprate l'editore \"Codice visuale\" per generà stu codice: - Aprite a categuria \"Programma\" da a paleta di cumandamenti à manca - Trascinate un bloccu di tipu \"Setup\" in u spaziu di travagliu di u codice visuale - Aghjunghjite in ellu altri blocchi di codice per determinà e cundizioni chì attivanu l'esecuzione di u codice \"Principale\" Stu codice hè valutatu ogni volta chì un novu avvenimentu si verifica è almenu una volta per minutu.",
   "capture_commands": "Capture cumandamenti",
   "capture_commands_description": "Aghjunghjite tutti i cumandamenti realizati manualmente nantu à i widgets à u prugramma.",
   "capture_commands_pause": "Pausa trà i cumandamenti",
@@ -143,13 +143,13 @@
     "26": {
       "Title": "Luci di culore",
       "Description": "Esempiu di integrazione di luci Philips Hue cù l'API HTTP (V1). L'utilizatore predeterminatu per cunnette à u ponte hè \"nuvellu sviluppatore\" è deve esse digià attivatu.",
-      "ConfigureOptions.BridgeAddress": "Indirizzu IP Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) indirizzu IP",
       "ConfigureOptions.BridgeUsername": "Nome d'utilizatore",
       "ConfigureOptions.LightsCount": "Numero di luci"
     },
     "34": {
       "Title": "Previsioni Meteo",
-      "Description": "Meteo è informazioni di previsione da u serviziu Open Weather Map. Per attivà stu widget inserite una chjave API valida. Segui l'istruzzioni in https://openweathermap.org/appid per uttene una chjave API gratuita.",
+      "Description": "Meteo è informazioni di previsione da u serviziu Open Weather Map. Per attivà stu widget inserite una chjave API valida. Segui l'istruzzioni à https://openweathermap.org/appid per uttene una chjave API gratuita.",
       "ConfigureOptions.Location": "Nome di a cità",
       "ConfigureOptions.Language": "Lingua (es. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervallu d'aghjurnamentu (minuti)",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Camera IP generica",
       "Description": "Mostra / indirizza l'alimentazione di l'imagine da una camera IP.",
-      "IpCamera.ImageURL": "URL di l'API di l'imaghjini di a camera (vede i vostri documenti di càmera)",
+      "IpCamera.ImageURL": "URL API di l'imaghjini di a camera (vede i vostri documenti di càmera)",
       "IpCamera.Username": "Nome d'utilizatore (opcional)",
       "IpCamera.Password": "Password (opzionale)",
       "Widget.Config.fps": "Frames per seconda",
@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "Tempu max sirene (secondi, 0 = infinitu)",
       "ConfigureOptions.Trigger.ArmedProgram": "U prugramma per curriri quandu armatu",
       "ConfigureOptions.Trigger.DisarmedProgram": "U prugramma da esse svoltu quandu hè disarmatu",
-      "ConfigureOptions.Trigger.TriggeredProgram": "U prugramma per esse ghjudicatu quandu hè attivatu"
+      "ConfigureOptions.Trigger.TriggeredProgram": "U prugramma da esse svoltu quandu hè attivatu"
     },
     "95": {
       "Title": "Logging di eventi",
@@ -283,10 +283,16 @@
       "Scenarios.SunriseColors": "Link à u scenariu Sunrise Colors"
     },
     "910": {
-      "Title": "Rilevamentu di l'ughjettu",
+      "Title": "Rilevamentu d'ughjettu",
       "Description": "Detectà l'ogetti cù un mudellu YOLO11 pre-addestratu.",
       "ML.ObjectDetection": "Habilita a rilevazione di l'uggetti",
-      "ML.ObjectDetection.TriggerDetect": "Lista di cose separate da virgula (in inglese) chì attivanu l'alarma. (per esempiu: gattu, cane, persona, saccu, valigia)",
+      "ML.ObjectDetection.TriggerDetect": "Lista di cose separate da virgula (in inglese) chì attivanu l'alarma. (per esempiu: gattu, ghjacaru, persona, saccu, valigia)",
+      "ConfigureOptions.Yolo.ModelPath": "Percorsu di u schedariu mudellu YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Stima di posa",
+      "Description": "Rilevazione di punti chjave via stima di pose, utilizendu mudelli ONNX persunalizati o u mudellu YOLOv11 pre-addestratu predeterminatu (specificu à a pose umana).",
+      "ML.PoseEstimation": "Abilita l'estimazione di posa",
       "ConfigureOptions.Yolo.ModelPath": "Percorsu di u schedariu mudellu YOLO11 (.onnx)"
     }
   }

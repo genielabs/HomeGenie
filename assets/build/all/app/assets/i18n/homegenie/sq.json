@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Muajt e zgjedhur",
   "cronwizard_schedule_set_exact_time": "Vendosni kohën e ngjarjes.",
   "cronwizard_schedule_set_slot_start": "Cakto fillimin e slotit kohor.",
-  "cronwizard_schedule_set_slot_end": "Duke filluar në {{start}} .<span class=\"notranslate\"><br/></span> Cakto fundin e periudhës kohore.",
+  "cronwizard_schedule_set_slot_end": "Duke filluar në {{start}} .<span class=\"notranslate\"><br/></span> Cakto fundin e slotit kohor.",
   "cronwizard_bindings_define_types_and_modules": "Përcaktoni llojet dhe modulet që i nënshtrohen këtij orari (opsionale)",
   "cronwizard_bindings_select_types": "Zgjidhni llojet",
   "cronwizard_action_set_action_to_execute": "Cakto veprimin për të ekzekutuar në dukuritë e kësaj ngjarjeje",
@@ -118,7 +118,7 @@
   "program_status_broken": "E thyer",
   "program_status_compile": "Përpiloni",
   "automation_programming_guide": "Udhëzues programimi'",
-  "tap_to_disable": "Kliko për të çaktivizuar",
+  "tap_to_disable": "Klikoni për ta çaktivizuar",
   "tap_to_enable": "Kliko për të aktivizuar",
   "program_data": "Të dhënat e programit",
   "visual_code": "Kodi vizual",
@@ -171,7 +171,7 @@
     },
     "78": {
       "Title": "Termostat i zgjuar",
-      "Description": "Përdorni çdo sensor të temperaturës dhe çelës inteligjent për të zbatuar funksionalitetin e termostatit.",
+      "Description": "Përdorni çdo sensor të temperaturës dhe çelës inteligjent për të zbatuar funksionin e termostatit.",
       "VirtualThermostat.TemperatureModule": "Sensori i temperaturës",
       "VirtualThermostat.HeatingSwitchModule": "Çelësi i ngrohjes",
       "VirtualThermostat.CoolingSwitchModule": "Çelësi i ftohjes",
@@ -204,7 +204,7 @@
       "HomeGenie.SecurityAlarm": "Përdorni si alarm/strob",
       "HomeGenie.SecurityTriggerHome": "Shkakton gjithashtu kur armatosur Home",
       "HomeGenie.SecuritySensor": "Përdorni si sensor sigurie",
-      "ConfigureOptions.Email.Recipients": "Lista e e-mail-eve të marrësve të ndarë me presje për njoftimet e alarmit",
+      "ConfigureOptions.Email.Recipients": "Lista e ndara me presje e email-eve të marrësve për njoftimet e alarmit",
       "ConfigureOptions.System.ArmDelay": "Vonesa e krahut (sekonda)",
       "ConfigureOptions.System.SirenStartTime": "Vonesa e fillimit të sirenave (sekonda)",
       "ConfigureOptions.System.SirenMaxTime": "Koha maksimale e sirenave (sekonda, 0=pafund)",
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "Statusi i zbulimit të lëvizjes",
       "Status.Battery": "Niveli i baterisë",
       "Sensor.DoorWindow": "Gjendja e sensorit të dyerve/dritareve (e hapur/e mbyllur)",
-      "Status.Level": "Statusi i kyçjes (ndezur/fikur)"
+      "Status.Level": "Statusi i ndërrimit (ndezur/fikur)"
     },
     "401": {
       "Title": "Demo - Toggle Door",
@@ -287,6 +287,12 @@
       "Description": "Zbuloni objekte duke përdorur një model YOLO11 të para-stërvitur.",
       "ML.ObjectDetection": "Aktivizo zbulimin e objekteve",
       "ML.ObjectDetection.TriggerDetect": "Lista e gjërave të ndara me presje (në anglisht) që do të shkaktojnë alarmin. (p.sh.: mace, qen, person, çantë shpine, valixhe)",
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Vlerësimi i pozës",
+      "Description": "Zbulimi i pikave kyçe nëpërmjet vlerësimit të pozës, duke përdorur modele të personalizuara ONNX ose modelin e para-trajnuar YOLOv11 (specifike për pozën njerëzore).",
+      "ML.PoseEstimation": "Aktivizo vlerësimin e pozës",
       "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
     }
   }

@@ -1,7 +1,7 @@
 {
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "به HomeGenie خوش آمدید!",
-  "welcome_subtitle": "هوش اتوماسیون قابل برنامه ریزی",
+  "welcome_subtitle": "هوشمندی اتوماسیون قابل برنامه ریزی",
   "not_configured_yet": "سیستم هنوز پیکربندی نشده است. این جادوگر راه اندازی به شما در راه اندازی و راه اندازی سیستم خود در چند مرحله کمک می کند.",
   "system_config_start_with_base_and_backup": "بازیابی از فایل پشتیبان",
   "system_config_start_with_default_setup": "تنظیم پیش فرض",
@@ -64,7 +64,7 @@
   "cronwizard_hourselect_everynthhour": "هر ساعت معین",
   "cronwizard_hourselect_selectedhours": "ساعات انتخابی",
   "cronwizard_dayselect_everyday": "هر روز",
-  "cronwizard_dayselect_selecteddays": "روزهای منتخب",
+  "cronwizard_dayselect_selecteddays": "روزهای انتخاب شده",
   "cronwizard_dayowselect_selecteddaysow": "روزهای انتخابی هفته",
   "cronwizard_monthselect_everymonth": "هر ماه",
   "cronwizard_monthselect_selectedmonths": "ماه های منتخب",
@@ -116,7 +116,7 @@
   "program_status_disabled": "از کار افتاده است",
   "program_status_enabled": "فعال شد",
   "program_status_broken": "شکسته",
-  "program_status_compile": "کامپایل کنید",
+  "program_status_compile": "کامپایل",
   "automation_programming_guide": "راهنمای برنامه نویسی",
   "tap_to_disable": "برای غیرفعال کردن کلیک کنید",
   "tap_to_enable": "برای فعال کردن کلیک کنید",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "حساب ایمیل",
-      "Description": "اطلاعات حساب ایمیل مورد استفاده توسط برنامه های سیستم برای ارسال/دریافت ایمیل را ذخیره می کند.",
+      "Description": "اطلاعات حساب ایمیل مورد استفاده برنامه های سیستم را برای ارسال/دریافت ایمیل ذخیره می کند.",
       "ConfigureOptions.Email.Sender": "1. آدرس ایمیل",
       "ConfigureOptions.Email.SmtpServer": "2. آدرس سرور SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. نام کاربری SMTP (اختیاری)",
@@ -287,6 +287,12 @@
       "Description": "اشیاء را با استفاده از مدل YOLO11 از پیش آموزش دیده تشخیص دهید.",
       "ML.ObjectDetection": "فعال کردن تشخیص اشیاء",
       "ML.ObjectDetection.TriggerDetect": "فهرست چیزهایی که با کاما از هم جدا شده اند (به زبان انگلیسی) که زنگ را به صدا در می آورند. (به عنوان مثال: گربه، سگ، شخص، کوله پشتی، چمدان)",
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "تخمین پوز",
+      "Description": "تشخیص نقاط کلیدی از طریق تخمین پوز، با استفاده از مدل‌های سفارشی ONNX یا مدل YOLOv11 از پیش آموزش‌دیده شده (مخصوص وضعیت انسان).",
+      "ML.PoseEstimation": "تخمین پوز را فعال کنید",
       "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
     }
   }

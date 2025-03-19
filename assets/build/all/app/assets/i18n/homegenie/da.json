@@ -141,7 +141,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simuler kun"
     },
     "26": {
-      "Title": "Farvede lys",
+      "Title": "Farvelys",
       "Description": "Eksempel Philips Hue-lysintegration ved hjælp af HTTP API (V1). Standardbrugeren til at oprette forbindelse til broen er \"newdeveloper\", og den burde allerede være aktiveret.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adresse",
       "ConfigureOptions.BridgeUsername": "Brugernavn",
@@ -255,7 +255,7 @@
       "HomeGenie.RemoteControl.Enable": "Aktiver",
       "HomeGenie.RemoteControl.IRCode": "Skift knap",
       "ConfigureOptions.DimmerUpCode": "Knap til at øge lysstyrken",
-      "ConfigureOptions.DimmerDownCode": "Knap til at reducere lysstyrken",
+      "ConfigureOptions.DimmerDownCode": "Knap til sænkning af lysstyrke",
       "ConfigureOptions.DimmerInterval": "Dæmpningstrin"
     },
     "142": {
@@ -287,6 +287,12 @@
       "Description": "Registrer objekter ved hjælp af en præ-trænet YOLO11-model.",
       "ML.ObjectDetection": "Aktiver genkendelse af objekter",
       "ML.ObjectDetection.TriggerDetect": "Kommasepareret liste over ting (på engelsk), der vil udløse alarmen. (fx: kat, hund, person, rygsæk, kuffert)",
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
+    },
+    "911": {
+      "Title": "Positionsvurdering",
+      "Description": "Nøglepunktsdetektion via positur-estimering, ved hjælp af brugerdefinerede ONNX-modeller eller den forudtrænede YOLOv11-model (specifik for menneskelig stilling).",
+      "ML.PoseEstimation": "Aktiver estimering af stilling",
       "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
     }
   }

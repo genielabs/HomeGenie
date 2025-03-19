@@ -126,7 +126,7 @@
   "setup_code": "Nastavitev",
   "main_code": "Glavni",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Glavna\" koda je prazna. Uporabite urejevalnik \"Vizualna koda\", da ustvarite to kodo: - Odprite kategorijo \"Program\" iz ukazne palete na levi - Povlecite blok vrste \"Main\" v delovni prostor vizualne kode - Vanj dodajte druge bloke kode za izvajanje dejanj in logike tega programa. Program \"Main\" je mogoče zagnati ročno ali samodejno zagnati glede na pogoje, ki so na koncu podani v kodi za namestitev.",
+  "main_code_empty_note": "\"Glavna\" koda je prazna. Uporabite urejevalnik \"Vizualna koda\", da ustvarite to kodo: - Odprite kategorijo \"Program\" iz ukazne palete na levi - Povlecite blok vrste \"Main\" v delovni prostor vizualne kode - Vanj dodajte druge bloke kode za izvajanje dejanj in logike tega programa. Program \"Main\" je mogoče zagnati ročno ali samodejno na podlagi pogojev, ki so na koncu podani v kodi za namestitev.",
   "setup_code_empty_note": "Koda \"Nastavitve\" je prazna. Uporabite urejevalnik \"Vizualna koda\", da ustvarite to kodo: - Odprite kategorijo \"Program\" iz ukazne palete na levi - Povlecite blok tipa \"Nastavitev\" v delovnem prostoru vizualne kode - V njem dodajte druge bloke kode, da določite pogoje, ki bodo sprožili izvajanje \"Glavne\" kode. Ta koda se ovrednoti vsakič, ko se pojavi nov dogodek in vsaj enkrat na minuto.",
   "capture_commands": "Ukazi za zajemanje",
   "capture_commands_description": "V program dodajte vse ročno izvedene ukaze na gradnikih.",
@@ -232,7 +232,7 @@
       "Status.Level": "Stanje stikala (vklop/izklop)"
     },
     "401": {
-      "Title": "Demo - preklopna vrata",
+      "Title": "Demo - Preklopna vrata",
       "Description": "Simulira odprta/zaprta vrata demo senzorja za vrata in okna."
     },
     "402": {
@@ -287,6 +287,12 @@
       "Description": "Zaznavanje predmetov z vnaprej usposobljenim modelom YOLO11.",
       "ML.ObjectDetection": "Omogoči zaznavanje predmetov",
       "ML.ObjectDetection.TriggerDetect": "Z vejicami ločen seznam stvari (v angleščini), ki bodo sprožile alarm. (npr. mačka, pes, oseba, nahrbtnik, kovček)",
+      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Ocena položaja",
+      "Description": "Zaznavanje ključnih točk prek ocene položaja, z uporabo modelov ONNX po meri ali privzetega vnaprej usposobljenega modela YOLOv11 (specifičen za položaj človeka).",
+      "ML.PoseEstimation": "Omogoči oceno položaja",
       "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
     }
   }

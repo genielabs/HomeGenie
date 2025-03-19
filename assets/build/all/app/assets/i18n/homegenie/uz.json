@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Vaqt oralig'i oxirida",
   "cronwizard_action_custom_script": "Maxsus harakat skripti",
   "cronwizard_action_no_action": "Hech qanday harakat yo'q",
-  "cronwizard_action_schedule_variable_hint": "Cron ifodalarida oʻzgaruvchi sifatida <span class=\"notranslate color-primary\">@ {{name}}</span> foydalaning yoki ushbu hodisaga havola qilish uchun avtomatlashtirish dasturlarida <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> foydalaning.",
+  "cronwizard_action_schedule_variable_hint": "Ushbu hodisaga havola qilish uchun cron ifodalarida <span class=\"notranslate color-primary\">@ {{name}}</span> oʻzgaruvchi sifatida foydalaning yoki avtomatlashtirish dasturlarida <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> foydalaning.",
   "scheduler_preset_action_command_turn_on": "Yoqish; ishga tushirish",
   "scheduler_preset_action_command_turn_off": "O'chirib qo'yish",
   "scheduler_preset_action_command_set_level": "Darajani o'rnatish",
@@ -112,8 +112,8 @@
   "program_status_background": "Fon",
   "program_status_stopping": "To'xtash",
   "program_status_stopped": "To'xtatildi",
-  "program_status_interrupted": "Uzildi",
-  "program_status_disabled": "O'chirilgan",
+  "program_status_interrupted": "To'xtatildi",
+  "program_status_disabled": "O‘chirilgan",
   "program_status_enabled": "Yoqilgan",
   "program_status_broken": "Buzilgan",
   "program_status_compile": "Kompilyatsiya qilish",
@@ -126,7 +126,7 @@
   "setup_code": "Sozlash; o'rnatish",
   "main_code": "Asosiy",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Asosiy\" kod bo'sh. Ushbu kodni yaratish uchun \"Visual kod\" muharriridan foydalaning: - Chapdagi buyruqlar palitrasidan \"Dastur\" toifasini oching - Vizual kodning ish maydoniga \"Asosiy\" turdagi blokni torting - Ushbu dasturning harakatlari va mantiqini amalga oshirish uchun uning ichiga boshqa kod bloklarini qo'shing \"Asosiy\" dasturi oxirida O'rnatish kodida berilgan shartlarga asoslanib qo'lda yoki avtomatik ishga tushirilishi mumkin.",
+  "main_code_empty_note": "\"Asosiy\" kod bo'sh. Ushbu kodni yaratish uchun \"Visual kod\" muharriridan foydalaning: - Chapdagi buyruqlar palitrasidan \"Dastur\" toifasini oching - Vizual kod ish maydoniga \"Asosiy\" turdagi blokni torting - Ushbu dasturning harakatlari va mantig'ini amalga oshirish uchun uning ichiga boshqa kod bloklarini qo'shing \"Asosiy\" dasturi oxir-oqibat O'rnatish kodida berilgan shartlar asosida qo'lda yoki avtomatik ishga tushirilishi mumkin.",
   "setup_code_empty_note": "\"Sozlash\" kodi bo'sh. Ushbu kodni yaratish uchun \"Visual kod\" muharriridan foydalaning: - Chapdagi buyruqlar palitrasidan \"Dastur\" toifasini oching - Vizual kod ish maydoniga \"Sozlash\" turidagi blokni torting - \"Asosiy\" kodning bajarilishini ishga tushiradigan shartlarni aniqlash uchun uning ichiga boshqa kod bloklarini qo'shing. Ushbu kod har safar yangi hodisa yuz berganda va kamida daqiqada bir marta baholanadi.",
   "capture_commands": "Yozib olish buyruqlari",
   "capture_commands_description": "Vidjetlarda qo'lda bajarilgan barcha buyruqlarni dasturga qo'shing.",
@@ -149,7 +149,7 @@
     },
     "34": {
       "Title": "Ob-havo ma'lumoti",
-      "Description": "Ochiq ob-havo xaritasi xizmatidan ob-havo va prognoz ma'lumotlari. Ushbu vidjetni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://openweathermap.org/appid manzilidagi ko‘rsatmalarga amal qiling.",
+      "Description": "Ob-havo xaritasi xizmatidan ob-havo va prognoz ma'lumotlari. Ushbu vidjetni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://openweathermap.org/appid manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.Location": "Shahar nomi",
       "ConfigureOptions.Language": "Til (masalan, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Yangilash oralig'i (daqiqa)",
@@ -167,7 +167,7 @@
       "ConfigureOptions.TLS": "TLS/SSL ni yoqing",
       "ConfigureOptions.Username": "Foydalanuvchi nomi (ixtiyoriy)",
       "ConfigureOptions.Password": "Parol (ixtiyoriy)",
-      "ConfigureOptions.ImportExternal": "Tashqi modullarni import qiling"
+      "ConfigureOptions.ImportExternal": "Tashqi modullarni import qilish"
     },
     "78": {
       "Title": "Aqlli termostat",
@@ -208,7 +208,7 @@
       "ConfigureOptions.System.ArmDelay": "Qo'lning kechikishi (sekundlar)",
       "ConfigureOptions.System.SirenStartTime": "Sirenlarni boshlash kechikishi (soniya)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenlarning maksimal vaqti (soniyalar, 0 = cheksiz)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Qurollangan holatda ishlash uchun dastur",
+      "ConfigureOptions.Trigger.ArmedProgram": "Qurollangan holda ishlash uchun dastur",
       "ConfigureOptions.Trigger.DisarmedProgram": "Qurolsizlanganda ishga tushadigan dastur",
       "ConfigureOptions.Trigger.TriggeredProgram": "Ishga tushganda ishga tushadigan dastur"
     },
@@ -219,7 +219,7 @@
     },
     "111": {
       "Title": "Mijoz konfiguratsiyasi",
-      "Description": "UI va asboblar paneli sozlamalarini saqlash uchun ishlatiladigan mijozning konfiguratsiya profillarini boshqarish uchun APIni amalga oshiradi."
+      "Description": "UI va asboblar paneli sozlamalarini saqlash uchun foydalaniladigan mijozning konfiguratsiya profillarini boshqarish uchun APIni amalga oshiradi."
     },
     "400": {
       "Title": "Virtual modullar demo",
@@ -287,6 +287,12 @@
       "Description": "Oldindan o'rgatilgan YOLO11 modeli yordamida ob'ektlarni aniqlang.",
       "ML.ObjectDetection": "Ob'ektlarni aniqlashni yoqish",
       "ML.ObjectDetection.TriggerDetect": "Signalni ishga tushiradigan narsalarning vergul bilan ajratilgan ro'yxati (ingliz tilida). (masalan: mushuk, it, odam, ryukzak, chamadon)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
+    },
+    "911": {
+      "Title": "Pozani baholash",
+      "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLOv11 modeli (odamga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
+      "ML.PoseEstimation": "Pozni baholashni yoqish",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
     }
   }

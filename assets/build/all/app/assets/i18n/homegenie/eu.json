@@ -57,7 +57,7 @@
   "cronwizard_hours": "Orduak",
   "cronwizard_days": "Egunak",
   "cronwizard_months": "Hilabeteak",
-  "cronwizard_minuteselect_everyminute": "Minutu bakoitza",
+  "cronwizard_minuteselect_everyminute": "Minutu bakoitzean",
   "cronwizard_minuteselect_everynthminute": "Emandako minutu bakoitzean",
   "cronwizard_minuteselect_selectedminutes": "Hautatutako minutuak",
   "cronwizard_hourselect_everyhour": "Orduro",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "Aldatu widgeten aurrebista",
   "stop_program": "Gelditu programa",
   "run_program": "Exekutatu programa",
-  "enable_to_run_program": "Gaitu programa exekutatu ahal izateko",
+  "enable_to_run_program": "Gaitu programa exekutatzeko",
   "program_status_added": "Gehituta",
   "program_status_idle": "Geldirik",
   "program_status_setup": "Konfigurazioa",
@@ -181,7 +181,7 @@
       "Title": "Energia Monitorea",
       "Description": "Sortu energia-kontsumoari eta gailuen erabilerari buruzko estatistikak.",
       "EnergyManagement.MonitorStatus": "Monitorearen egoera",
-      "EnergyManagement.MonitorWatts": "Kontrolatu energia-kontsumoa"
+      "EnergyManagement.MonitorWatts": "Energia-kontsumoa kontrolatzea"
     },
     "82": {
       "Title": "Energia aurrezteko modua",
@@ -200,7 +200,7 @@
     },
     "90": {
       "Title": "Segurtasun Alarma Sistema",
-      "Description": "Erabili sentsoreak eta beste gailu batzuk segurtasun-alarma-sistema bat ezartzeko.",
+      "Description": "Erabili sentsoreak eta beste gailu batzuk segurtasun-alarma sistema bat ezartzeko.",
       "HomeGenie.SecurityAlarm": "Erabili alarma/estroboscopio gisa",
       "HomeGenie.SecurityTriggerHome": "Etxea armatuta dagoenean ere abiarazten da",
       "HomeGenie.SecuritySensor": "Erabili segurtasun sentsore gisa",
@@ -245,7 +245,7 @@
       "Simulator.Sensor.Temperature": "Tenperatura sentsorea",
       "Simulator.Sensor.Humidity": "Hezetasun sentsorea",
       "Simulator.Sensor.Luminance": "Argi sentsorea",
-      "Simulator.Meter.Watts": "Watt-neurgailua",
+      "Simulator.Meter.Watts": "Watt neurgailua",
       "Simulator.Meter.Watts.Max": "Watt potentzia maximoa",
       "Simulator.Sensor.DataFrequency": "Simulagailuak igortzeko maiztasuna"
     },
@@ -286,7 +286,13 @@
       "Title": "Objektuak hautematea",
       "Description": "Detektatu objektuak aldez aurretik trebatutako YOLO11 eredua erabiliz.",
       "ML.ObjectDetection": "Gaitu objektuak hautematea",
-      "ML.ObjectDetection.TriggerDetect": "Alarma piztuko duten gauzen zerrenda komaz bereizita (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
+      "ML.ObjectDetection.TriggerDetect": "Komaz bereizita alarma piztuko duten gauzen zerrenda (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 eredu-fitxategiaren bidea (.onnx)"
+    },
+    "911": {
+      "Title": "Pose estimazioa",
+      "Description": "Gako-puntuak hautematea pose estimazioaren bidez, ONNX eredu pertsonalizatuak edo aldez aurretik prestatutako YOLOv11 eredu lehenetsia erabiliz (gizakiaren jarreraren espezifikoa).",
+      "ML.PoseEstimation": "Gaitu poseen estimazioa",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 eredu-fitxategiaren bidea (.onnx)"
     }
   }

@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "din",
   "cronwizard_description_ending": "la",
   "cronwizard_description_at": "la",
-  "cronwizard_add_time_slot": "Adăugați intervalul de timp",
+  "cronwizard_add_time_slot": "Adăugați intervalul orar",
   "cronwizard_add_exact_time": "Adăugați ora exactă",
   "cronwizard_start_time": "Ora de începere",
   "cronwizard_end_time": "Ora de sfârșit",
@@ -219,7 +219,7 @@
     },
     "111": {
       "Title": "Configurarea clientului",
-      "Description": "Implementează API pentru gestionarea profilurilor de configurare ale clientului care sunt utilizate pentru a stoca setările UI și tablourile de bord."
+      "Description": "Implementează API-ul pentru gestionarea profilurilor de configurare ale clientului care sunt utilizate pentru a stoca setările UI și tablourile de bord."
     },
     "400": {
       "Title": "Demo de module virtuale",
@@ -237,7 +237,7 @@
     },
     "402": {
       "Title": "Demo - Mișcare detectată",
-      "Description": "Simulează detectarea mișcării multi-senzorului demo."
+      "Description": "Simulează detectarea mișcării multi-senzorului demonstrativ."
     },
     "410": {
       "Title": "Simulator de senzori",
@@ -287,6 +287,12 @@
       "Description": "Detectați obiecte folosind un model YOLO11 pre-antrenat.",
       "ML.ObjectDetection": "Activați detectarea obiectelor",
       "ML.ObjectDetection.TriggerDetect": "Listă de lucruri separate prin virgulă (în engleză) care vor declanșa alarma. (ex: pisică, câine, persoană, rucsac, valiză)",
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Estimarea pozitiei",
+      "Description": "Detectarea punctelor cheie prin estimarea pozitiei, folosind modele ONNX personalizate sau modelul YOLOv11 pre-antrenat implicit (specific pozitiei umane).",
+      "ML.PoseEstimation": "Activați estimarea pozitiei",
       "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
     }
   }

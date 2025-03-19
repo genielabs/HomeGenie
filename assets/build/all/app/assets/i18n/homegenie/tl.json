@@ -17,7 +17,7 @@
   "device_driver": "Driver",
   "flow_control": "Kontrol ng daloy",
   "controller": "Controller",
-  "programs": "Mga Programa",
+  "programs": "Mga programa",
   "repositories": "Mga repositoryo",
   "packages": "Mga package",
   "installed_packages": "Mga naka-install na pakete",
@@ -37,7 +37,7 @@
   "scheduler_wizard": "Scheduler Wizard",
   "schedule_event": "Kaganapan",
   "schedule_type_standard": "Pamantayan",
-  "schedule_type_range": "Saklaw ng petsa",
+  "schedule_type_range": "Hanay ng petsa",
   "schedule_type_cron": "Cron expression",
   "schedule_action": "Aksyon",
   "schedule_occurrence_preview": "Preview ng pangyayari",
@@ -54,7 +54,7 @@
   "cronwizard_start_time": "Oras ng pagsisimula",
   "cronwizard_end_time": "Oras ng pagtatapos",
   "cronwizard_minutes": "Mga minuto",
-  "cronwizard_hours": "Oras",
+  "cronwizard_hours": "Mga oras",
   "cronwizard_days": "Mga araw",
   "cronwizard_months": "mga buwan",
   "cronwizard_minuteselect_everyminute": "Bawat minuto",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "I-toggle ang preview ng mga widget",
   "stop_program": "Itigil ang programa",
   "run_program": "Patakbuhin ang programa",
-  "enable_to_run_program": "Paganahin ang programa upang patakbuhin ito",
+  "enable_to_run_program": "Paganahin ang program upang patakbuhin ito",
   "program_status_added": "Idinagdag",
   "program_status_idle": "Idle",
   "program_status_setup": "Setup",
@@ -123,7 +123,7 @@
   "program_data": "Data ng programa",
   "visual_code": "Visual code",
   "generated_code": "Binuo na code",
-  "setup_code": "Setup",
+  "setup_code": "Pag-setup",
   "main_code": "Pangunahing",
   "context_code": "Konteksto",
   "main_code_empty_note": "Walang laman ang \"Pangunahing\" code. Gamitin ang editor ng \"Visual code\" upang buuin ang code na ito: - Buksan ang kategoryang \"Programa\" mula sa command palette sa kaliwa - I-drag ang isang bloke ng uri ng \"Main\" sa workspace ng visual code - Magdagdag sa loob nito ng iba pang mga bloke ng code upang ipatupad ang mga aksyon at lohika ng program na ito Ang program na \"Main\" ay maaaring manual na patakbuhin o awtomatikong simulan batay sa mga kondisyon na kalaunan ay ibinigay sa Setup code.",
@@ -207,7 +207,7 @@
       "ConfigureOptions.Email.Recipients": "Pinaghiwalay ng kuwit ang listahan ng mga tatanggap ng mga e-mail para sa mga abiso ng alarma",
       "ConfigureOptions.System.ArmDelay": "Pagkaantala ng braso (segundo)",
       "ConfigureOptions.System.SirenStartTime": "Pagkaantala ng Pagsisimula ng Sirena (mga segundo)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirena max Time (segundo, 0=infinite)",
+      "ConfigureOptions.System.SirenMaxTime": "Sirena max na Oras (segundo, 0=infinite)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programang tatakbo kapag armado",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa na tatakbo kapag dinisarmahan",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programa na tatakbo kapag na-trigger"
@@ -226,7 +226,7 @@
       "Description": "Manu-manong itakda ang mga halaga ng virtual device.",
       "Sensor.Temperature": "Halaga ng temperatura",
       "Sensor.Luminance": "Halaga ng luminance",
-      "Sensor.MotionDetect": "Katayuan ng pag-detect ng paggalaw",
+      "Sensor.MotionDetect": "Katayuan ng pagtukoy ng paggalaw",
       "Status.Battery": "Antas ng baterya",
       "Sensor.DoorWindow": "Katayuan ng sensor ng pinto/window (bukas/sarado)",
       "Status.Level": "Lumipat ng katayuan (on/off)"
@@ -259,14 +259,14 @@
       "ConfigureOptions.DimmerInterval": "Pagdidilim na hakbang"
     },
     "142": {
-      "Title": "E-mail account",
-      "Description": "Nag-iimbak ng impormasyon ng e-mail account na ginagamit ng mga program ng system para sa pagpapadala/pagtanggap ng mga email.",
+      "Title": "E-Mail account",
+      "Description": "Nag-iimbak ng impormasyon ng e-mail account na ginagamit ng mga system program para sa pagpapadala/pagtanggap ng mga email.",
       "ConfigureOptions.Email.Sender": "1. E-Mail address",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP server address",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP username (opsyonal)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP password (opsyonal)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP server port",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ng SSL ang SMTP server"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ang SMTP server ng SSL"
     },
     "145": {
       "Title": "Smart Device",
@@ -287,6 +287,12 @@
       "Description": "Mag-detect ng mga bagay gamit ang isang pre-trained na modelo ng YOLO11.",
       "ML.ObjectDetection": "Paganahin ang pagtuklas ng mga bagay",
       "ML.ObjectDetection.TriggerDetect": "Listahan ng mga bagay na pinaghihiwalay ng kuwit (sa English) na magti-trigger ng alarma. (hal: pusa, aso, tao, backpack, maleta)",
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
+    },
+    "911": {
+      "Title": "Pagtataya ng pose",
+      "Description": "Keypoint detection sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelo ng YOLOv11 (human pose-specific).",
+      "ML.PoseEstimation": "Paganahin ang pagtatantya ng pose",
       "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
     }
   }

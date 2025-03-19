@@ -2,7 +2,7 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Bienvenue chez HomeGenie !",
   "welcome_subtitle": "L'intelligence de l'automatisation programmable",
-  "not_configured_yet": "Le système n'est pas encore configuré. Cet assistant de configuration vous aidera à mettre votre système en service en quelques étapes.",
+  "not_configured_yet": "Votre système n'est pas encore configuré. Cet assistant de configuration vous aidera à le mettre en service en quelques étapes.",
   "system_config_start_with_base_and_backup": "Restaurer à partir du fichier de sauvegarde",
   "system_config_start_with_default_setup": "Configuration par défaut",
   "system_config_include_demo": "Inclure une démonstration avec une activité d'appareil simulée",
@@ -19,7 +19,7 @@
   "controller": "Contrôleur",
   "programs": "Programmes",
   "repositories": "Dépôts",
-  "packages": "Paquets",
+  "packages": "Forfaits",
   "installed_packages": "Paquets installés",
   "upload_package": "Télécharger le package",
   "create_package": "Créer un nouveau package",
@@ -31,7 +31,7 @@
   "edit_group": "Modifier le groupe",
   "delete_group": "Supprimer le groupe",
   "dashboard_from_group": "Créer un tableau de bord à partir de ce groupe",
-  "group_modules": "Modules dans ce groupe",
+  "group_modules": "Modules de ce groupe",
   "modules": "Modules",
   "empty_group": "Aucun module dans ce groupe.",
   "scheduler_wizard": "Assistant de planification",
@@ -71,8 +71,8 @@
   "cronwizard_schedule_set_exact_time": "Définir l'heure de l'événement.",
   "cronwizard_schedule_set_slot_start": "Définir le début du créneau horaire.",
   "cronwizard_schedule_set_slot_end": "Commencer au {{start}} .<span class=\"notranslate\"><br/></span> Définir la fin du créneau horaire.",
-  "cronwizard_bindings_define_types_and_modules": "Définir les types et modules soumis à ce planning (facultatif)",
-  "cronwizard_bindings_select_types": "Sélectionner les types",
+  "cronwizard_bindings_define_types_and_modules": "Définir les types et les modules soumis à ce planning (facultatif)",
+  "cronwizard_bindings_select_types": "Sélectionnez les types",
   "cronwizard_action_set_action_to_execute": "Définir l'action à exécuter lors des occurrences de cet événement",
   "cronwizard_action_preset_actions": "Actions prédéfinies",
   "cronwizard_action_preset_every_occurrence": "À chaque occurrence",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "Basculer l'aperçu des widgets",
   "stop_program": "Arrêter le programme",
   "run_program": "Exécuter le programme",
-  "enable_to_run_program": "Activer le programme pour pouvoir l'exécuter",
+  "enable_to_run_program": "Activer le programme pour l'exécuter",
   "program_status_added": "Ajouté",
   "program_status_idle": "Inactif",
   "program_status_setup": "Installation",
@@ -126,8 +126,8 @@
   "setup_code": "Installation",
   "main_code": "Principal",
   "context_code": "Contexte",
-  "main_code_empty_note": "Le code \"Main\" est vide. Utilisez l'éditeur \"Code visuel\" pour générer ce code : - Ouvrez la catégorie \"Programme\" depuis la palette de commandes à gauche - Faites glisser un bloc de type \"Main\" dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour implémenter les actions et la logique de ce programme Le programme \"Main\" peut être exécuté manuellement ou démarré automatiquement en fonction des conditions éventuellement données dans le code d'installation.",
-  "setup_code_empty_note": "Le code \"Setup\" est vide. Utilisez l'éditeur \"Code visuel\" pour générer ce code : - Ouvrez la catégorie \"Programme\" depuis la palette de commandes à gauche - Faites glisser un bloc de type \"Setup\" dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour déterminer les conditions qui déclencheront l'exécution du code \"Main\" Ce code est évalué à chaque fois qu'un nouvel événement se produit et au moins une fois par minute.",
+  "main_code_empty_note": "Le code « Main » est vide. Utilisez l'éditeur de code visuel pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche. - Faites glisser un bloc de type « Main » dans l'espace de travail du code visuel. - Ajoutez-y d'autres blocs de code pour implémenter les actions et la logique de ce programme. Le programme « Main » peut être exécuté manuellement ou démarré automatiquement en fonction des conditions éventuellement données dans le code de configuration.",
+  "setup_code_empty_note": "Le code « Setup » est vide. Utilisez l'éditeur « Code visuel » pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche - Faites glisser un bloc de type « Setup » dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour déterminer les conditions qui déclencheront l'exécution du code « Main ». Ce code est évalué à chaque nouvel événement et au moins une fois par minute.",
   "capture_commands": "Commandes de capture",
   "capture_commands_description": "Ajoutez toutes les commandes exécutées manuellement sur les widgets au programme.",
   "capture_commands_pause": "Pause entre les commandes",
@@ -136,20 +136,20 @@
   "$options": {
     "16": {
       "Title": "Mémoire de niveau",
-      "Description": "Stocker et rappeler le dernier niveau de gradation.",
-      "HomeGenie.LevelMemory": "Rappelle le dernier niveau d'éclairage lors de l'allumage",
+      "Description": "Stockez et rappelez le dernier niveau de gradation.",
+      "HomeGenie.LevelMemory": "Rappeler le dernier niveau d'éclairage lors de l'allumage",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuler uniquement"
     },
     "26": {
       "Title": "Lumières colorées",
-      "Description": "Exemple d'intégration des éclairages Philips Hue à l'aide de l'API HTTP (V1). L'utilisateur par défaut pour se connecter au pont est « newdeveloper » et il doit déjà être activé.",
+      "Description": "Exemple d'intégration d'éclairages Philips Hue via l'API HTTP (V1). L'utilisateur par défaut pour se connecter au pont est « newdeveloper » et il devrait déjà être activé.",
       "ConfigureOptions.BridgeAddress": "Adresse IP du pont Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Nom d'utilisateur",
       "ConfigureOptions.LightsCount": "Nombre de lumières"
     },
     "34": {
       "Title": "Prévisions météorologiques",
-      "Description": "Informations et prévisions météorologiques du service Open Weather Map. Pour activer ce widget, saisissez une clé API valide. Suivez les instructions sur https://openweathermap.org/appid pour obtenir une clé API gratuite.",
+      "Description": "Informations météo et prévisions du service Open Weather Map. Pour activer ce widget, saisissez une clé API valide. Suivez les instructions sur https://openweathermap.org/appid pour obtenir une clé API gratuite.",
       "ConfigureOptions.Location": "Nom de la ville",
       "ConfigureOptions.Language": "Langue (par exemple EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervalle de mise à jour (minutes)",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Caméra IP générique",
       "Description": "Afficher/acheminer le flux d'images d'une caméra IP.",
-      "IpCamera.ImageURL": "URL de l'API d'image de la caméra (consultez la documentation de votre caméra)",
+      "IpCamera.ImageURL": "URL de l'API d'image de la caméra (voir la documentation de votre caméra)",
       "IpCamera.Username": "Nom d'utilisateur (facultatif)",
       "IpCamera.Password": "Mot de passe (facultatif)",
       "Widget.Config.fps": "Images par seconde",
@@ -207,13 +207,13 @@
       "ConfigureOptions.Email.Recipients": "Liste séparée par des virgules des e-mails des destinataires pour les notifications d'alarme",
       "ConfigureOptions.System.ArmDelay": "Délai d'armement (secondes)",
       "ConfigureOptions.System.SirenStartTime": "Délai de démarrage des sirènes (secondes)",
-      "ConfigureOptions.System.SirenMaxTime": "Durée maximale des sirènes (secondes, 0 = infini)",
+      "ConfigureOptions.System.SirenMaxTime": "Durée maximale des sirènes (secondes, 0 = infini)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programme à exécuter une fois armé",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programme à exécuter en cas de désarmement",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programme à exécuter lorsqu'il est déclenché"
     },
     "95": {
-      "Title": "Enregistrement des événements",
+      "Title": "Journalisation des événements",
       "Description": "Enregistrer l'activité de l'appareil.",
       "EventsLogger.EnableLogging": "Activer"
     },
@@ -227,9 +227,9 @@
       "Sensor.Temperature": "Valeur de température",
       "Sensor.Luminance": "Valeur de luminance",
       "Sensor.MotionDetect": "État de détection de mouvement",
-      "Status.Battery": "Niveau de batterie",
+      "Status.Battery": "Niveau de la batterie",
       "Sensor.DoorWindow": "État du capteur de porte/fenêtre (ouvert/fermé)",
-      "Status.Level": "État du commutateur (marche/arrêt)"
+      "Status.Level": "État de l'interrupteur (marche/arrêt)"
     },
     "401": {
       "Title": "Démo - Porte basculante",
@@ -270,23 +270,29 @@
     },
     "145": {
       "Title": "Appareil intelligent",
-      "Description": "Allumer/éteindre l'appareil en fonction de la détection de mouvement et de la lumière ambiante.",
-      "HomeGenie.SmartLights.Enable": "Activer « Appareil intelligent »",
+      "Description": "Allumez/éteignez l'appareil en fonction de la détection de mouvement et de la lumière ambiante.",
+      "HomeGenie.SmartLights.Enable": "Activer « Appareil intelligent »",
       "HomeGenie.SmartLights.OnMotionDetect": "Contrôlé par capteur (en option)",
       "HomeGenie.SmartLights.CheckLuminosity": "Contrôlé par capteur de lumière (en option)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Désactiver après un délai d'inactivité (secondes)",
       "HomeGenie.SmartLights.MinLuminance": "Activer si la luminance est inférieure à :"
     },
     "8": {
-      "Title": "Scénario de couleurs du lever du soleil",
+      "Title": "Scénario des couleurs du lever du soleil",
       "Description": "Exemple de scénario « Lever de soleil » pour les lumières LED à changement de couleur.",
       "Scenarios.SunriseColors": "Lien vers le scénario Sunrise Colors"
     },
     "910": {
       "Title": "Détection d'objets",
-      "Description": "Détectez des objets à l'aide d'un modèle YOLO11 pré-entraîné.",
+      "Description": "Détectez des objets à l’aide d’un modèle YOLO11 pré-entraîné.",
       "ML.ObjectDetection": "Activer la détection d'objets",
-      "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex : chat, chien, personne, sac à dos, valise)",
+      "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex. : chat, chien, personne, sac à dos, valise)",
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Estimation de la pose",
+      "Description": "Détection de points clés via l'estimation de la pose, à l'aide de modèles ONNX personnalisés ou du modèle YOLOv11 pré-entraîné par défaut (spécifique à la pose humaine).",
+      "ML.PoseEstimation": "Activer l'estimation de la pose",
       "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
     }
   }

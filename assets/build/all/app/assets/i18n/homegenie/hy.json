@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "-ից",
   "cronwizard_description_ending": "դեպի",
   "cronwizard_description_at": "ժամը",
-  "cronwizard_add_time_slot": "Ավելացրեք ժամանակի հատված",
+  "cronwizard_add_time_slot": "Ավելացրեք ժամանակային հատված",
   "cronwizard_add_exact_time": "Ավելացնել ճշգրիտ ժամանակը",
   "cronwizard_start_time": "Մեկնարկի ժամանակը",
   "cronwizard_end_time": "Ավարտի ժամանակը",
@@ -82,7 +82,7 @@
   "cronwizard_action_no_action": "Ոչ մի գործողություն",
   "cronwizard_action_schedule_variable_hint": "Օգտագործեք <span class=\"notranslate color-primary\">@ {{name}}</span> որպես փոփոխական cron արտահայտություններում կամ օգտագործեք <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ավտոմատացման ծրագրերում՝ այս իրադարձությանը հղում կատարելու համար:",
   "scheduler_preset_action_command_turn_on": "Միացնել",
-  "scheduler_preset_action_command_turn_off": "Անջատել",
+  "scheduler_preset_action_command_turn_off": "Անջատեք",
   "scheduler_preset_action_command_set_level": "Սահմանել մակարդակը",
   "scheduler_preset_action_config_level": "Մակարդակ",
   "scheduler_preset_action_command_set_color": "Սահմանել գույնը",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "Ընտրանքներ",
   "scheduler_preset_action_program_say": "Ասա",
   "scheduler_preset_action_config_message": "Հաղորդագրություն",
-  "save_and_build": "Պահպանեք և կառուցեք",
+  "save_and_build": "Խնայեք և կառուցեք",
   "toggle_widgets_preview": "Միացնել վիդջեթների նախադիտումը",
   "stop_program": "Stop ծրագիրը",
   "run_program": "Գործարկել ծրագիրը",
@@ -127,7 +127,7 @@
   "main_code": "Հիմնական",
   "context_code": "Համատեքստ",
   "main_code_empty_note": "«Հիմնական» կոդը դատարկ է: Այս կոդը ստեղծելու համար օգտագործեք «Visual code» խմբագրիչը. - Բացեք «Ծրագիր» կատեգորիան հրամանների պալիտից ձախ կողմում. - Քաշեք «Main» տիպի բլոկ վիզուալ կոդի աշխատանքային տարածքում. Ավելացնել դրա ներսում այլ կոդի բլոկներ՝ այս ծրագրի գործողություններն ու տրամաբանությունն իրականացնելու համար:",
-  "setup_code_empty_note": "«Setup» կոդը դատարկ է: Օգտագործեք «Visual code» խմբագրիչը այս կոդը ստեղծելու համար. - Բացեք «Ծրագիր» կատեգորիան հրամանների պալիտից ձախ կողմում. - Քաշեք «Setup» տեսակի բլոկ վիզուալ կոդի աշխատանքային տարածքում. Ավելացնել դրա ներսում այլ կոդի բլոկներ՝ որոշելու այն պայմանները, որոնք կգործարկեն «Հիմնական» կոդի կատարումը: Այս կոդը գնահատվում է ամեն անգամ, երբ նոր իրադարձություն է տեղի ունենում և առնվազն րոպեն մեկ:",
+  "setup_code_empty_note": "«Կարգավորում» կոդը դատարկ է: Օգտագործեք «Visual code» խմբագրիչը այս կոդը ստեղծելու համար. - Բացեք «Ծրագիր» կատեգորիան հրամանների պալիտից ձախ կողմում. - Քաշեք «Setup» տեսակի բլոկ վիզուալ կոդի աշխատանքային տարածքում. Ավելացնել դրա ներսում այլ կոդի բլոկներ՝ որոշելու այն պայմանները, որոնք կգործարկեն «Հիմնական» կոդի կատարումը: Այս կոդը գնահատվում է ամեն անգամ, երբ նոր իրադարձություն է տեղի ունենում և առնվազն րոպեն մեկ:",
   "capture_commands": "Գրավել հրամաններ",
   "capture_commands_description": "Ծրագրին ավելացրեք վիջեթների վրա ձեռքով կատարված բոլոր հրամանները:",
   "capture_commands_pause": "Դադար հրամանների միջև",
@@ -159,7 +159,7 @@
       "Title": "Ցանց MQTT",
       "Description": "Միացեք MQTT բրոքերին՝ ցանկացած վայրից ինտերնետի միջոցով HomeGenie Panel հավելվածն օգտագործելու կամ նույն MQTT ցանցում HomeGenie սարքերը փոխկապակցելու համար:",
       "MQTT.SensorPublish": "Հրապարակեք այս մոդուլի կողմից թողարկված իրադարձությունները",
-      "ConfigureOptions.ClientId": "Հաճախորդի ID.",
+      "ConfigureOptions.ClientId": "Հաճախորդի ID",
       "ConfigureOptions.ServerAddress": "Սերվերի հասցեն",
       "ConfigureOptions.ServerPort": "Սերվերի պորտ",
       "ConfigureOptions.Encryption": "Միացնել ծայրից ծայր կոդավորումը (E2EE)",
@@ -201,10 +201,10 @@
     "90": {
       "Title": "Անվտանգության ազդանշանային համակարգ",
       "Description": "Օգտագործեք սենսորներ և այլ սարքեր՝ անվտանգության ազդանշանային համակարգ կիրառելու համար:",
-      "HomeGenie.SecurityAlarm": "Օգտագործեք որպես ազդանշան/strobe",
+      "HomeGenie.SecurityAlarm": "Օգտագործեք որպես ահազանգ/ստրոբ",
       "HomeGenie.SecurityTriggerHome": "Նաև գործարկվում է, երբ զինված է Home",
       "HomeGenie.SecuritySensor": "Օգտագործեք որպես անվտանգության սենսոր",
-      "ConfigureOptions.Email.Recipients": "Ստորակետերով բաժանված ստացողների էլ. նամակների ցուցակ տագնապի ծանուցումների համար",
+      "ConfigureOptions.Email.Recipients": "Ստորակետերով առանձնացված ցուցակը ստացողների էլ. նամակների տագնապի ծանուցումների համար",
       "ConfigureOptions.System.ArmDelay": "Թևի հետաձգում (վայրկյան)",
       "ConfigureOptions.System.SirenStartTime": "Sirens Start Delay (վայրկյան)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens առավելագույն ժամանակը (վայրկյան, 0 = անսահման)",
@@ -229,11 +229,11 @@
       "Sensor.MotionDetect": "Շարժման հայտնաբերման կարգավիճակը",
       "Status.Battery": "Մարտկոցի մակարդակը",
       "Sensor.DoorWindow": "Դռների/պատուհանների սենսորի կարգավիճակը (բաց/փակ)",
-      "Status.Level": "Միացնել/անջատել կարգավիճակը"
+      "Status.Level": "Միացնել կարգավիճակը (միացնել/անջատել)"
     },
     "401": {
       "Title": "Դեմո - Փոխարկել դուռը",
-      "Description": "Նմանակում է դուռ-պատուհանի ցուցադրական սենսորի բաց/փակ դռները:"
+      "Description": "Նմանակում է դռների բաց/փակ դռների-պատուհանի ցուցադրական սենսորը:"
     },
     "402": {
       "Title": "Դեմո - հայտնաբերված շարժում",
@@ -287,6 +287,12 @@
       "Description": "Հայտնաբերեք առարկաներ՝ օգտագործելով նախապես պատրաստված YOLO11 մոդելը:",
       "ML.ObjectDetection": "Միացնել օբյեկտների հայտնաբերումը",
       "ML.ObjectDetection.TriggerDetect": "Ստորակետերով բաժանված իրերի ցուցակ (անգլերեն), որոնք կգործարկեն ահազանգը: (օրինակ՝ կատու, շուն, մարդ, ուսապարկ, ճամպրուկ)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 մոդելային ֆայլի ուղի (.onnx)"
+    },
+    "911": {
+      "Title": "Պոզի գնահատում",
+      "Description": "Հիմնական կետերի հայտնաբերում դիրքի գնահատման միջոցով՝ օգտագործելով հատուկ ONNX մոդելներ կամ լռելյայն նախապես պատրաստված YOLOv11 մոդելը (մարդու դիրքին հատուկ):",
+      "ML.PoseEstimation": "Միացնել դիրքի գնահատումը",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 մոդելային ֆայլի ուղի (.onnx)"
     }
   }

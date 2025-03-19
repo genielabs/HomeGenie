@@ -225,7 +225,7 @@
       "Title": "가상 모듈 데모",
       "Description": "가상 장치의 값을 수동으로 설정합니다.",
       "Sensor.Temperature": "온도 값",
-      "Sensor.Luminance": "휘도 값",
+      "Sensor.Luminance": "휘도값",
       "Sensor.MotionDetect": "동작 감지 상태",
       "Status.Battery": "배터리 수준",
       "Sensor.DoorWindow": "문/창 센서 상태(열림/닫힘)",
@@ -286,7 +286,13 @@
       "Title": "객체 감지",
       "Description": "사전 학습된 YOLO11 모델을 사용하여 객체를 감지합니다.",
       "ML.ObjectDetection": "객체 감지 활성화",
-      "ML.ObjectDetection.TriggerDetect": "경보를 발동할 수 있는 물건들의 쉼표로 구분된 목록(영어) (예: 고양이, 개, 사람, 백팩, 가방)",
+      "ML.ObjectDetection.TriggerDetect": "경보를 발생시킬 수 있는 것들의 쉼표로 구분된 목록(영어). (예: 고양이, 개, 사람, 백팩, 가방)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 모델 파일(.onnx)의 경로"
+    },
+    "911": {
+      "Title": "포즈 추정",
+      "Description": "사용자 정의 ONNX 모델이나 기본 사전 학습된 YOLOv11 모델(인간의 포즈에 따라 다름)을 사용하여 포즈 추정을 통해 주요 포인트를 감지합니다.",
+      "ML.PoseEstimation": "포즈 추정 활성화",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 모델 파일(.onnx)의 경로"
     }
   }

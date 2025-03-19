@@ -2,7 +2,7 @@
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "Karibu HomeGenie!",
   "welcome_subtitle": "Akili ya kiotomatiki inayoweza kupangwa",
-  "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi katika hatua chache.",
+  "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi kwa hatua chache.",
   "system_config_start_with_base_and_backup": "Rejesha kutoka kwa faili ya chelezo",
   "system_config_start_with_default_setup": "Usanidi chaguo-msingi",
   "system_config_include_demo": "Jumuisha onyesho lililo na shughuli za kifaa zilizoiga",
@@ -50,7 +50,7 @@
   "cronwizard_description_ending": "kwa",
   "cronwizard_description_at": "saa",
   "cronwizard_add_time_slot": "Ongeza nafasi ya wakati",
-  "cronwizard_add_exact_time": "Ongeza muda halisi",
+  "cronwizard_add_exact_time": "Ongeza wakati halisi",
   "cronwizard_start_time": "Wakati wa kuanza",
   "cronwizard_end_time": "Wakati wa mwisho",
   "cronwizard_minutes": "Dakika",
@@ -61,7 +61,7 @@
   "cronwizard_minuteselect_everynthminute": "Kila dakika",
   "cronwizard_minuteselect_selectedminutes": "Dakika zilizochaguliwa",
   "cronwizard_hourselect_everyhour": "Kila saa",
-  "cronwizard_hourselect_everynthhour": "Kila saa fulani",
+  "cronwizard_hourselect_everynthhour": "Kila saa",
   "cronwizard_hourselect_selectedhours": "Saa zilizochaguliwa",
   "cronwizard_dayselect_everyday": "Kila siku",
   "cronwizard_dayselect_selecteddays": "Siku zilizochaguliwa",
@@ -76,7 +76,7 @@
   "cronwizard_action_set_action_to_execute": "Weka kitendo cha kutekeleza juu ya matukio ya tukio hili",
   "cronwizard_action_preset_actions": "Vitendo vilivyowekwa mapema",
   "cronwizard_action_preset_every_occurrence": "Kwa kila tukio",
-  "cronwizard_action_preset_slot_start": "Mwanzoni mwa nafasi ya wakati",
+  "cronwizard_action_preset_slot_start": "Mwanzoni mwa muda",
   "cronwizard_action_preset_slot_end": "Mwishoni mwa muda",
   "cronwizard_action_custom_script": "Hati ya kitendo maalum",
   "cronwizard_action_no_action": "Hakuna hatua",
@@ -287,6 +287,12 @@
       "Description": "Gundua vitu kwa kutumia kielelezo cha YOLO11 kilichofunzwa awali.",
       "ML.ObjectDetection": "Washa utambuzi wa vitu",
       "ML.ObjectDetection.TriggerDetect": "Orodha ya vitu iliyotenganishwa kwa koma (kwa Kiingereza) ambayo itasababisha kengele. (km: paka, mbwa, mtu, mkoba, mkoba)",
+      "ConfigureOptions.Yolo.ModelPath": "Njia ya muundo wa faili ya YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Weka makadirio",
+      "Description": "Ugunduzi wa vipengele muhimu kupitia ukadiriaji wa mkao, kwa kutumia miundo maalum ya ONNX au muundo chaguomsingi wa YOLOv11 uliofunzwa mapema (mahali mahususi kwa binadamu).",
+      "ML.PoseEstimation": "Washa ukadiriaji wa mkao",
       "ConfigureOptions.Yolo.ModelPath": "Njia ya muundo wa faili ya YOLO11 (.onnx)"
     }
   }

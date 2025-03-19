@@ -34,7 +34,7 @@
   "group_modules": "Šios grupės moduliai",
   "modules": "Moduliai",
   "empty_group": "Šioje grupėje nėra modulių.",
-  "scheduler_wizard": "Planavimo vedlys",
+  "scheduler_wizard": "Planuoklio vedlys",
   "schedule_event": "Renginys",
   "schedule_type_standard": "Standartinis",
   "schedule_type_range": "Datų diapazonas",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "El. pašto paskyra",
-      "Description": "Saugo el. pašto paskyros informaciją, kurią sistemos programos naudoja el. laiškams siųsti/gauti.",
+      "Description": "Saugo el. pašto paskyros informaciją, kurią naudoja sistemos programos el. laiškams siųsti/gauti.",
       "ConfigureOptions.Email.Sender": "1. El. pašto adresas",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP serverio adresas",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP naudotojo vardas (neprivaloma)",
@@ -287,6 +287,12 @@
       "Description": "Aptikkite objektus naudodami iš anksto paruoštą YOLO11 modelį.",
       "ML.ObjectDetection": "Įgalinti objektų aptikimą",
       "ML.ObjectDetection.TriggerDetect": "Kableliais atskirtas dalykų sąrašas (anglų kalba), kurie suaktyvins aliarmą. (pvz.: katė, šuo, žmogus, kuprinė, lagaminas)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo kelias (.onnx)"
+    },
+    "911": {
+      "Title": "Pozos įvertinimas",
+      "Description": "Pagrindinio taško aptikimas naudojant pozos įvertinimą, naudojant pasirinktinius ONNX modelius arba numatytąjį iš anksto paruoštą YOLOv11 modelį (priklausomai nuo žmogaus pozos).",
+      "ML.PoseEstimation": "Įgalinti pozos įvertinimą",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo kelias (.onnx)"
     }
   }

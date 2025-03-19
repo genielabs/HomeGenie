@@ -514,7 +514,19 @@
         "Elenco separato da virgole di cose (in Inglese) che fanno scattare l'allarme. (e.g.: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath":
         "Percorso file del modello YOLO11 (.onnx)"
+    },
+
+    "911": {
+      "Title":
+        "Stima della posa",
+      "Description":
+        "Individuazione dei punti chiave tramite stima della posa, utilizzando modelli ONNX personalizzati oppure il modello YOLOv11 predefinito (specifico per la posa umana).",
+      "ML.PoseEstimation":
+        "Abilita stima della posa",
+      "ConfigureOptions.Yolo.ModelPath":
+        "Percorso file del modello YOLO11 (.onnx)"
     }
+
 
   }
 }

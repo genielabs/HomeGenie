@@ -119,7 +119,7 @@
   "program_status_compile": "Tiomsú",
   "automation_programming_guide": "Treoir ríomhchlárúcháin'",
   "tap_to_disable": "Cliceáil chun é a dhíchumasú",
-  "tap_to_enable": "Cliceáil chun é a chumasú",
+  "tap_to_enable": "Cliceáil chun a chumasú",
   "program_data": "Sonraí cláir",
   "visual_code": "Cóid amhairc",
   "generated_code": "Cód ginte",
@@ -158,7 +158,7 @@
     "77": {
       "Title": "Líonra MQTT",
       "Description": "Ceangail le bróicéir MQTT chun aip Painéal HomeGenie a úsáid ó áit ar bith tríd an Idirlíon nó chun feistí HomeGenie a idirnascadh ar an líonra MQTT céanna.",
-      "MQTT.SensorPublish": "Foilsigh teagmhais arna hastú ag an modúl seo",
+      "MQTT.SensorPublish": "Foilsigh imeachtaí arna n-eisiúint ag an modúl seo",
       "ConfigureOptions.ClientId": "Aitheantas an Chliaint.",
       "ConfigureOptions.ServerAddress": "Seoladh freastalaí",
       "ConfigureOptions.ServerPort": "Port freastalaí",
@@ -207,7 +207,7 @@
       "ConfigureOptions.Email.Recipients": "Liosta de na faighteoirí r-phoist scartha le camóga le haghaidh fógraí aláraim",
       "ConfigureOptions.System.ArmDelay": "Moill láimhe (soicindí)",
       "ConfigureOptions.System.SirenStartTime": "Moill Tosaigh Sirens (soicindí)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (soicindí, 0= gan teorainn)",
+      "ConfigureOptions.System.SirenMaxTime": "Sirens uas Am (soicindí, 0= gan teorainn)",
       "ConfigureOptions.Trigger.ArmedProgram": "Clár a rith nuair a arm",
       "ConfigureOptions.Trigger.DisarmedProgram": "Clár a rith nuair a dí-armáil",
       "ConfigureOptions.Trigger.TriggeredProgram": "Clár a rith nuair a spreagthach"
@@ -287,6 +287,12 @@
       "Description": "Bain úsáid as samhail YOLO11 réamh-oilte chun réada a bhrath.",
       "ML.ObjectDetection": "Cumasaigh rudaí a bhrath",
       "ML.ObjectDetection.TriggerDetect": "Liosta de na rudaí atá scartha le camóga (i mBéarla) a spreagfaidh an t-aláram. (m.sh.: cat, madra, duine, mála droma, mála taistil)",
+      "ConfigureOptions.Yolo.ModelPath": "Conair an chomhaid mhúnla YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Seasamh meastachán",
+      "Description": "Brath eochairphointí trí mheastachán staidiúir, ag baint úsáide as samhlacha saincheaptha ONNX nó an tsamhail réamhshocraithe YOLOv11 réamh-oilte (shonrach don duine).",
+      "ML.PoseEstimation": "Cumasaigh meastachán staidiúir",
       "ConfigureOptions.Yolo.ModelPath": "Conair an chomhaid mhúnla YOLO11 (.onnx)"
     }
   }

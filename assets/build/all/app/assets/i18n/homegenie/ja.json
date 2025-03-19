@@ -288,6 +288,12 @@
       "ML.ObjectDetection": "オブジェクトの検出を有効にする",
       "ML.ObjectDetection.TriggerDetect": "アラームをトリガーするもののコンマ区切りリスト（英語）。（例：猫、犬、人、バックパック、スーツケース）",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
+    },
+    "911": {
+      "Title": "姿勢推定",
+      "Description": "カスタム ONNX モデルまたはデフォルトの事前トレーニング済み YOLOv11 モデル (人間のポーズに固有) を使用したポーズ推定によるキーポイント検出。",
+      "ML.PoseEstimation": "姿勢推定を有効にする",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
     }
   }
 }

@@ -514,6 +514,17 @@
         "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath":
         "Path of YOLO11 model file (.onnx)"
+    },
+
+    "911": {
+      "Title":
+        "Pose estimation",
+      "Description":
+        "Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLOv11 model (human pose-specific).",
+      "ML.PoseEstimation":
+        "Enable pose estimation",
+      "ConfigureOptions.Yolo.ModelPath":
+        "Path of YOLO11 model file (.onnx)"
     }
 
   }

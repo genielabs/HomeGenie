@@ -153,7 +153,7 @@
       "ConfigureOptions.Location": "നഗരത്തിന്റെ പേര്",
       "ConfigureOptions.Language": "ഭാഷ (ഉദാ. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "അപ്‌ഡേറ്റ് ഇടവേള (മിനിറ്റ്)",
-      "ConfigureOptions.ApiKey": "ഓപ്പൺവെതർമാപ്പ് API കീ (APPID)"
+      "ConfigureOptions.ApiKey": "OpenWeatherMap API കീ (APPID)"
     },
     "77": {
       "Title": "നെറ്റ്‌വർക്ക് MQTT",
@@ -195,7 +195,7 @@
       "IpCamera.ImageURL": "ക്യാമറ ഇമേജ് API URL (നിങ്ങളുടെ ക്യാമറ ഡോക്‌സ് കാണുക)",
       "IpCamera.Username": "ഉപയോക്തൃനാമം (ഓപ്ഷണൽ)",
       "IpCamera.Password": "പാസ്‌വേഡ് (ഓപ്ഷണൽ)",
-      "Widget.Config.fps": "ഫ്രെയിമുകൾ / സെക്കൻഡ്",
+      "Widget.Config.fps": "സെക്കൻഡിൽ ഫ്രെയിമുകൾ",
       "Widget.Config.size": "വിജറ്റ് വലുപ്പം"
     },
     "90": {
@@ -287,6 +287,12 @@
       "Description": "മുൻകൂട്ടി പരിശീലിപ്പിച്ച YOLO11 മോഡൽ ഉപയോഗിച്ച് വസ്തുക്കളെ കണ്ടെത്തുക.",
       "ML.ObjectDetection": "വസ്തുക്കൾ കണ്ടെത്തൽ പ്രാപ്തമാക്കുക",
       "ML.ObjectDetection.TriggerDetect": "അലാറം ട്രിഗർ ചെയ്യുന്ന കാര്യങ്ങളുടെ കോമയാൽ വേർതിരിച്ച ലിസ്റ്റ് (ഇംഗ്ലീഷിൽ). (ഉദാ: പൂച്ച, നായ, വ്യക്തി, ബാക്ക്പാക്ക്, സ്യൂട്ട്കേസ്)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 മോഡൽ ഫയലിന്റെ (.onnx) പാത"
+    },
+    "911": {
+      "Title": "പോസ് എസ്റ്റിമേഷൻ",
+      "Description": "കസ്റ്റം ONNX മോഡലുകൾ അല്ലെങ്കിൽ ഡിഫോൾട്ട് മുൻകൂട്ടി പരിശീലിപ്പിച്ച YOLOv11 മോഡൽ (മനുഷ്യ പോസ്-നിർദ്ദിഷ്ട) ഉപയോഗിച്ച് പോസ് എസ്റ്റിമേഷൻ വഴി കീപോയിന്റ് കണ്ടെത്തൽ.",
+      "ML.PoseEstimation": "പോസ് എസ്റ്റിമേഷൻ പ്രവർത്തനക്ഷമമാക്കുക",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 മോഡൽ ഫയലിന്റെ (.onnx) പാത"
     }
   }

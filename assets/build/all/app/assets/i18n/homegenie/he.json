@@ -1,6 +1,6 @@
 {
   " ": "------------------------------------------",
-  "welcome_to_homegenie": "ברוכים הבאים ל-HomeGenie!",
+  "welcome_to_homegenie": "ברוכים הבאים אל HomeGenie!",
   "welcome_subtitle": "מודיעין האוטומציה הניתנת לתכנות",
   "not_configured_yet": "המערכת עדיין לא מוגדרת. אשף התקנה זה יעזור לך להפעיל את המערכת שלך בכמה שלבים.",
   "system_config_start_with_base_and_backup": "שחזר מקובץ גיבוי",
@@ -29,7 +29,7 @@
   "groups": "קבוצות",
   "add_group": "הוסף קבוצה",
   "edit_group": "ערוך קבוצה",
-  "delete_group": "מחק קבוצה",
+  "delete_group": "מחק את הקבוצה",
   "dashboard_from_group": "צור לוח מחוונים מקבוצה זו",
   "group_modules": "מודולים בקבוצה זו",
   "modules": "מודולים",
@@ -201,7 +201,7 @@
     "90": {
       "Title": "מערכת אזעקה אבטחה",
       "Description": "השתמש בחיישנים והתקנים אחרים כדי ליישם מערכת אזעקה אבטחה.",
-      "HomeGenie.SecurityAlarm": "השתמש כאזעקה/הסטרוב",
+      "HomeGenie.SecurityAlarm": "השתמש כאזעקה/מבט",
       "HomeGenie.SecurityTriggerHome": "מופעל גם כאשר הוא חמוש בבית",
       "HomeGenie.SecuritySensor": "השתמש כחיישן אבטחה",
       "ConfigureOptions.Email.Recipients": "רשימה מופרדת בפסיק של הודעות דואר אלקטרוני של נמענים עבור התראות אזעקה",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "חיישן לחות",
       "Simulator.Sensor.Luminance": "חיישן אור",
       "Simulator.Meter.Watts": "מד וואט",
-      "Simulator.Meter.Watts.Max": "עוצמת וואט מקסימלית",
+      "Simulator.Meter.Watts.Max": "הספק מקס וואט",
       "Simulator.Sensor.DataFrequency": "תדירות פליטת סימולטור"
     },
     "505": {
@@ -254,7 +254,7 @@
       "Description": "שלטו במכשיר באמצעות שלט (IR או RF).",
       "HomeGenie.RemoteControl.Enable": "לְאַפשֵׁר",
       "HomeGenie.RemoteControl.IRCode": "לחצן החלף",
-      "ConfigureOptions.DimmerUpCode": "לחצן הגברת בהירות",
+      "ConfigureOptions.DimmerUpCode": "כפתור הגברת בהירות",
       "ConfigureOptions.DimmerDownCode": "לחצן להפחתת בהירות",
       "ConfigureOptions.DimmerInterval": "שלב עמעום"
     },
@@ -287,6 +287,12 @@
       "Description": "זיהוי עצמים באמצעות מודל YOLO11 מיומן מראש.",
       "ML.ObjectDetection": "אפשר זיהוי אובייקטים",
       "ML.ObjectDetection.TriggerDetect": "רשימה מופרדת בפסיקים של דברים (באנגלית) שיפעילו את האזעקה. (למשל: חתול, כלב, אדם, תרמיל, מזוודה)",
+      "ConfigureOptions.Yolo.ModelPath": "נתיב של קובץ דגם YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "הערכת תנוחה",
+      "Description": "זיהוי נקודות מפתח באמצעות הערכת תנוחה, באמצעות דגמי ONNX מותאמים אישית או מודל YOLOv11 שהוכשר מראש המוגדר כברירת מחדל (ספציפי לתנוחה אנושית).",
+      "ML.PoseEstimation": "אפשר הערכת תנוחה",
       "ConfigureOptions.Yolo.ModelPath": "נתיב של קובץ דגם YOLO11 (.onnx)"
     }
   }

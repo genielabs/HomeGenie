@@ -42,7 +42,7 @@
   "schedule_action": "Aksyon",
   "schedule_occurrence_preview": "Preview ensidan an",
   "time_schedule": "Orè",
-  "occurrence": "Ensidan",
+  "occurrence": "Ensidans",
   "cronwizard_description_on": "sou",
   "cronwizard_description_from": "soti nan",
   "cronwizard_description_to": "pou",
@@ -59,13 +59,13 @@
   "cronwizard_months": "Mwa",
   "cronwizard_minuteselect_everyminute": "Chak minit",
   "cronwizard_minuteselect_everynthminute": "Chak minit bay yo",
-  "cronwizard_minuteselect_selectedminutes": "Minit yo chwazi",
+  "cronwizard_minuteselect_selectedminutes": "Chwazi minit",
   "cronwizard_hourselect_everyhour": "Chak èdtan",
   "cronwizard_hourselect_everynthhour": "Chak èdtan yo bay yo",
   "cronwizard_hourselect_selectedhours": "Lè yo chwazi",
   "cronwizard_dayselect_everyday": "Chak jou",
   "cronwizard_dayselect_selecteddays": "Jou seleksyone yo",
-  "cronwizard_dayowselect_selecteddaysow": "Jou seleksyone nan semèn nan",
+  "cronwizard_dayowselect_selecteddaysow": "Chwazi jou nan semèn nan",
   "cronwizard_monthselect_everymonth": "Chak mwa",
   "cronwizard_monthselect_selectedmonths": "Mwa chwazi yo",
   "cronwizard_schedule_set_exact_time": "Mete tan evènman an.",
@@ -129,7 +129,7 @@
   "main_code_empty_note": "Kòd \"Principal\" vid. Sèvi ak editè \"Kod vizyèl\" la pou jenere kòd sa a: - Louvri kategori \"Pwogram\" nan palèt kòmand ki sou bò gòch la - Trennen yon blòk ki kalite \"Principal\" nan espas travay kòd vizyèl la - Ajoute andedan li lòt blòk kòd pou aplike aksyon ak lojik pwogram sa a Pwogram \"Pwensipal\" la ka swa kouri manyèlman oswa oto-kòmanse dapre kondisyon ki evantyèlman yo bay nan kòd konfigirasyon an.",
   "setup_code_empty_note": "Kòd \"Enstalasyon\" vid. Sèvi ak editè \"Kod vizyèl\" la pou jenere kòd sa a: - Louvri kategori \"Pwogram\" nan palèt kòmand ki sou bò gòch la - Trennen yon blòk kalite \"Enstalasyon\" nan espas travay kòd vizyèl la - Ajoute andedan li lòt blòk kòd pou detèmine kondisyon ki pral deklanche kòd \"Principal\" Kòd sa a evalye chak fwa yon nouvo evènman rive e omwen yon fwa pa minit.",
   "capture_commands": "Capture kòmandman",
-  "capture_commands_description": "Ajoute tout kòmandman yo fè manyèlman sou widgets nan pwogram nan.",
+  "capture_commands_description": "Ajoute tout kòmandman ki fèt manyèlman sou widgets nan pwogram nan.",
   "capture_commands_pause": "Pran yon poz ant kòmandman yo",
   "capture_pause_none": "Okenn",
   "capture_pause_asis": "Kòm se",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Jenerik kamera IP",
       "Description": "Montre/route manje imaj ki soti nan yon kamera IP.",
-      "IpCamera.ImageURL": "URL API imaj kamera (gade dokiman kamera w yo)",
+      "IpCamera.ImageURL": "URL API imaj kamera (gade dokiman kamera ou yo)",
       "IpCamera.Username": "Non itilizatè (si ou vle)",
       "IpCamera.Password": "Modpas (si ou vle)",
       "Widget.Config.fps": "Ankadreman pou chak segonn",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Capteur imidite",
       "Simulator.Sensor.Luminance": "Capteur limyè",
       "Simulator.Meter.Watts": "Watt mèt",
-      "Simulator.Meter.Watts.Max": "Max pouvwa Watt",
+      "Simulator.Meter.Watts.Max": "Max Watt pouvwa",
       "Simulator.Sensor.DataFrequency": "Similatè emèt frekans"
     },
     "505": {
@@ -287,6 +287,12 @@
       "Description": "Detekte objè lè l sèvi avèk yon modèl YOLO11 pre-antre.",
       "ML.ObjectDetection": "Pèmèt deteksyon objè yo",
       "ML.ObjectDetection.TriggerDetect": "Lis bagay ki separe ak vigil (nan lang angle) ki pral deklanche alam la. (egzanp: chat, chen, moun, sakado, valiz)",
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Poze estimasyon",
+      "Description": "Deteksyon pwen kle atravè estimasyon poze, lè l sèvi avèk modèl ONNX koutim oswa modèl YOLOv11 pre-antrene defo (moun espesifik pou poze).",
+      "ML.PoseEstimation": "Pèmèt estimasyon poze",
       "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 (.onnx)"
     }
   }

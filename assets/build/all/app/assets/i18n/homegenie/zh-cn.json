@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "通用网络摄像机",
-      "Description": "显示/路由来自 IP 摄像机的图像馈送。",
+      "Description": "显示/路由来自 IP 摄像机的图像。",
       "IpCamera.ImageURL": "相机图像 API URL（请参阅相机文档）",
       "IpCamera.Username": "用户名（可选）",
       "IpCamera.Password": "密码（可选）",
@@ -287,6 +287,12 @@
       "Description": "使用预先训练的 YOLO11 模型检测物体。",
       "ML.ObjectDetection": "启用物体检测",
       "ML.ObjectDetection.TriggerDetect": "以逗号分隔的将触发警报的事物列表（英文）。（例如：猫、狗、人、背包、手提箱）",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
+    },
+    "911": {
+      "Title": "姿态估计",
+      "Description": "通过姿势估计进行关键点检测，使用自定义 ONNX 模型或默认预训练的 YOLOv11 模型（针对人体姿势）。",
+      "ML.PoseEstimation": "启用姿势估计",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
     }
   }

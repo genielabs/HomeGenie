@@ -28,7 +28,7 @@
   "modules_groups": "Grupoj kaj moduloj",
   "groups": "Grupoj",
   "add_group": "Aldonu grupon",
-  "edit_group": "Redakti grupon",
+  "edit_group": "Redaktu grupon",
   "delete_group": "Forigi grupon",
   "dashboard_from_group": "Kreu panelon el ĉi tiu grupo",
   "group_modules": "Moduloj en ĉi tiu grupo",
@@ -50,7 +50,7 @@
   "cronwizard_description_ending": "al",
   "cronwizard_description_at": "ĉe",
   "cronwizard_add_time_slot": "Aldonu tempon",
-  "cronwizard_add_exact_time": "Aldonu precizan tempon",
+  "cronwizard_add_exact_time": "Aldonu ĝustan tempon",
   "cronwizard_start_time": "Komenca tempo",
   "cronwizard_end_time": "Fintempo",
   "cronwizard_minutes": "Minutoj",
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "Stato de detekto de moviĝo",
       "Status.Battery": "Bateria nivelo",
       "Sensor.DoorWindow": "Statuso de sensilo pordo/fenestro (malferma/fermita)",
-      "Status.Level": "Ŝalti statuson (ŝaltita/malŝaltita)"
+      "Status.Level": "Ŝalti staton (ŝaltita/malŝaltita)"
     },
     "401": {
       "Title": "Demo - Baskuligi Pordon",
@@ -287,6 +287,12 @@
       "Description": "Detektu objektojn uzante antaŭtrejnitan modelon YOLO11.",
       "ML.ObjectDetection": "Ebligu la detekton de objektoj",
       "ML.ObjectDetection.TriggerDetect": "Komo-separata listo de aferoj (en la angla) kiuj ekigos la alarmon. (ekz.: kato, hundo, persono, tornistro, valizo)",
+      "ConfigureOptions.Yolo.ModelPath": "Vojo de YOLO11 modeldosiero (.onnx)"
+    },
+    "911": {
+      "Title": "Pozita takso",
+      "Description": "Ŝlosilpunktodetekto per pozotakso, uzante kutimajn ONNX-modelojn aŭ la defaŭltan antaŭtrejnitan YOLOv11-modelon (homa pozospecifa).",
+      "ML.PoseEstimation": "Ebligu takson de pozo",
       "ConfigureOptions.Yolo.ModelPath": "Vojo de YOLO11 modeldosiero (.onnx)"
     }
   }

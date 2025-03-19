@@ -1,11 +1,11 @@
 {
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "Hûn bi xêr hatin HomeGenie!",
-  "welcome_subtitle": "Zehmetiya xweseriya bernamekirî",
+  "welcome_subtitle": "Aqilmendiya otomatîkî ya bernamekirî",
   "not_configured_yet": "Pergal hêj nehatiye mîheng kirin. Ev sêrbazê sazkirinê dê ji we re bibe alîkar ku hûn di çend gavan de pergala xwe saz bikin û bixebitin.",
   "system_config_start_with_base_and_backup": "Ji pelê hilanînê vegerîne",
-  "system_config_start_with_default_setup": "Sazkirina standard",
-  "system_config_include_demo": "Bi çalakiya cîhaza simulkirî re demoyê têxe",
+  "system_config_start_with_default_setup": "Sazkirina xwerû",
+  "system_config_include_demo": "Demo bi çalakiya cîhaza simulkirî re tevde bikin",
   "system_config_additional_features": "taybetmendiyên Additional",
   "system_config_manual_setup": "setup Manual",
   "interfaces": "Interfaces",
@@ -77,13 +77,13 @@
   "cronwizard_action_preset_actions": "Çalakiyên pêşdibistanê",
   "cronwizard_action_preset_every_occurrence": "Li ser her bûyerê",
   "cronwizard_action_preset_slot_start": "Di destpêka deman de",
-  "cronwizard_action_preset_slot_end": "Di dawiya demsalê de",
+  "cronwizard_action_preset_slot_end": "Di dawiya demkî de",
   "cronwizard_action_custom_script": "Skrîpta çalakiya Custom",
   "cronwizard_action_no_action": "Çalakî tune",
   "cronwizard_action_schedule_variable_hint": "<span class=\"notranslate color-primary\">@ {{name}}</span> wekî guhêrbar di bêjeyên kronan de bikar bînin an jî <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> di bernameyên otomasyonê de bikar bînin da ku vê bûyerê referans bikin.",
   "scheduler_preset_action_command_turn_on": "Vekirin",
   "scheduler_preset_action_command_turn_off": "Temirandin",
-  "scheduler_preset_action_command_set_level": "Set asta",
+  "scheduler_preset_action_command_set_level": "Asta danîn",
   "scheduler_preset_action_config_level": "Deşt",
   "scheduler_preset_action_command_set_color": "Rengê danîn",
   "scheduler_preset_action_config_color": "Reng",
@@ -167,7 +167,7 @@
       "ConfigureOptions.TLS": "TLS/SSL çalak bike",
       "ConfigureOptions.Username": "Navê bikarhêner (vebijarkî)",
       "ConfigureOptions.Password": "Şîfre (vebijarkî)",
-      "ConfigureOptions.ImportExternal": "Modulên derveyî derxînin"
+      "ConfigureOptions.ImportExternal": "Import modulên derve"
     },
     "78": {
       "Title": "Thermostat Smart",
@@ -190,7 +190,7 @@
       "EnergyManagement.EnergySavingMode": "Bikêrkirin"
     },
     "88": {
-      "Title": "Kamera IP-ya gelemperî",
+      "Title": "Kamera IP ya gelemperî",
       "Description": "Ji kamerayek IP-ê vekêşana wêneyê nîşan bide / rêve bike.",
       "IpCamera.ImageURL": "URL-ya API-ya wêneya kamerayê (belgeyên kameraya xwe bibînin)",
       "IpCamera.Username": "Navê bikarhêner (vebijarkî)",
@@ -202,13 +202,13 @@
       "Title": "Sîstema Alarm Ewlekariyê",
       "Description": "Sensor û amûrên din bikar bînin ku pergala alarmê ya ewlehiyê bicîh bikin.",
       "HomeGenie.SecurityAlarm": "Wekî alarm / strobe bikar bînin",
-      "HomeGenie.SecurityTriggerHome": "Di heman demê de dema ku Xanî çekdar dike jî dest pê dike",
-      "HomeGenie.SecuritySensor": "Wekî senzorê ewlehiyê bikar bînin",
+      "HomeGenie.SecurityTriggerHome": "Di heman demê de dema ku Home çekdar dike jî dest pê dike",
+      "HomeGenie.SecuritySensor": "Wek sensor ewlehiyê bikar bînin",
       "ConfigureOptions.Email.Recipients": "Ji bo agahdariya alarmê navnîşa e-nameyên wergiran ji hev veqetand",
       "ConfigureOptions.System.ArmDelay": "Derengiya milê (çirkeyan)",
       "ConfigureOptions.System.SirenStartTime": "Derengiya Destpêkirina Sîrenan (çirk)",
       "ConfigureOptions.System.SirenMaxTime": "Dema herî zêde ya sîrenan (çirk, 0 = bêdawî)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Bername ku dema çekdar bimeşe",
+      "ConfigureOptions.Trigger.ArmedProgram": "Bernameya ku dema çekdar bimeşe",
       "ConfigureOptions.Trigger.DisarmedProgram": "Bername ku gava bêçek were xebitandin",
       "ConfigureOptions.Trigger.TriggeredProgram": "Bername ji bo xebitandinê dema ku were destpêkirin"
     },
@@ -228,7 +228,7 @@
       "Sensor.Luminance": "Nirxa ronahiyê",
       "Sensor.MotionDetect": "Rewşa tespîtkirina tevgerê",
       "Status.Battery": "Asta pîlê",
-      "Sensor.DoorWindow": "Rewşa senora derî/pencereyê (vekirî/girtî)",
+      "Sensor.DoorWindow": "Rewşa senora derî / pencereyê (vekirî/girtî)",
       "Status.Level": "Rewşa guherandinê (çalakî/çalakî)"
     },
     "401": {
@@ -287,6 +287,12 @@
       "Description": "Tiştan bi karanîna modelek YOLO11-a pêş-perwerdekirî kifş bikin.",
       "ML.ObjectDetection": "Vedîtina tiştan çalak bike",
       "ML.ObjectDetection.TriggerDetect": "Lîsteya ji hev veqetandî ya tiştên (bi Îngilîzî) ku dê alarmê derxînin. (mînak: pisîk, kûçik, kes, çente, valîz)",
+      "ConfigureOptions.Yolo.ModelPath": "Rêya pelê modela YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Pose estimation",
+      "Description": "Vedîtina xala sereke bi texmîna pozê, bi karanîna modelên ONNX-ê yên xwerû an modela YOLOv11-ya pêş-perwerdekirî ya xwerû (taybetî pozê mirovî) bikar tîne.",
+      "ML.PoseEstimation": "Texmîna pozê çalak bike",
       "ConfigureOptions.Yolo.ModelPath": "Rêya pelê modela YOLO11 (.onnx)"
     }
   }

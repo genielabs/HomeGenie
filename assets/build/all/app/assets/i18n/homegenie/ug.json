@@ -31,12 +31,12 @@
   "edit_group": "گۇرۇپپا تەھرىرلەش",
   "delete_group": "گۇرۇپپىنى ئۆچۈرۈڭ",
   "dashboard_from_group": "بۇ گۇرۇپپىدىن باشقۇرۇش تاختىسى قۇرۇڭ",
-  "group_modules": "بۇ گۇرۇپپىدىكى مودۇللار",
+  "group_modules": "بۇ گۇرۇپپىدىكى بۆلەكلەر",
   "modules": "Modules",
   "empty_group": "بۇ گۇرۇپپىدا مودۇل يوق.",
   "scheduler_wizard": "پىلانلىغۇچى",
   "schedule_event": "Event",
-  "schedule_type_standard": "Standard",
+  "schedule_type_standard": "ئۆلچەملىك",
   "schedule_type_range": "چېسلا دائىرىسى",
   "schedule_type_cron": "Cron expression",
   "schedule_action": "ھەرىكەت",
@@ -194,7 +194,7 @@
       "Description": "IP كامېراسىدىن كۆرسىتىش / لىنىيىلىك رەسىم يەملىرى.",
       "IpCamera.ImageURL": "كامېرا رەسىمى API URL (كامېرا ھۆججىتىڭىزنى كۆرۈڭ)",
       "IpCamera.Username": "ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
-      "IpCamera.Password": "پارول (ئىختىيارى)",
+      "IpCamera.Password": "پارول (ئىختىيارىي)",
       "Widget.Config.fps": "سېكۇنتتا رامكا",
       "Widget.Config.size": "كىچىك قورالنىڭ چوڭلۇقى"
     },
@@ -229,18 +229,18 @@
       "Sensor.MotionDetect": "ھەرىكەتنى بايقاش ھالىتى",
       "Status.Battery": "باتارېيە سەۋىيىسى",
       "Sensor.DoorWindow": "ئىشىك / كۆزنەك سېنزور ھالىتى (ئوچۇق / يېپىق)",
-      "Status.Level": "ئالماشتۇرۇش ھالىتى (on / off)"
+      "Status.Level": "Switch status (on / off)"
     },
     "401": {
       "Title": "Demo - ئىشىكنى تاقاش",
-      "Description": "ئىشىك ئىشىك دېرىزىسىنىڭ سېنزورىنىڭ ئىشىكنى ئوچۇق / يېپىق قىلىپ تەقلىد قىلىدۇ."
+      "Description": "ئىشىك ئىشىك دېرىزىسىنىڭ سېنزورىنىڭ ئوچۇق / يېپىقلىقىنى تەقلىد قىلىدۇ."
     },
     "402": {
       "Title": "Demo - ھەرىكەت بايقالدى",
       "Description": "Demo كۆپ سېنزورنىڭ ھەرىكەت بايقاشنى تەقلىد قىلىدۇ."
     },
     "410": {
-      "Title": "سېنزور تەقلىدلىگۈچىسى",
+      "Title": "سېنزور تەقلىدچىسى",
       "Description": "ئىختىيارى سېنزور قىممىتىنى چىقىرىڭ.",
       "Simulator.Sensor.Temperature": "تېمپېراتۇرا سېنزورى",
       "Simulator.Sensor.Humidity": "نەملىك سېنزورى",
@@ -271,7 +271,7 @@
     "145": {
       "Title": "Smart Device",
       "Description": "ھەرىكەتنى بايقاش ۋە مۇھىت نۇرىغا ئاساسەن ئۈسكۈنىنى قوزغىتىڭ ياكى ئېتىپ قويۇڭ.",
-      "HomeGenie.SmartLights.Enable": "«ئەقلىي ئىقتىدارلىق ئۈسكۈنى» نى قوزغىتىڭ",
+      "HomeGenie.SmartLights.Enable": "«ئەقلىي ئىقتىدارلىق ئۈسكۈنە» نى قوزغىتىڭ",
       "HomeGenie.SmartLights.OnMotionDetect": "سېنزور تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارىي)",
       "HomeGenie.SmartLights.CheckLuminosity": "نۇر سېنزورى تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارى)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "ھەرىكەتسىز ۋاقىت (سېكۇنت) دىن كېيىن ئېتىۋېتىڭ.",
@@ -287,6 +287,12 @@
       "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
       "ML.ObjectDetection": "جىسىملارنى بايقاشنى قوزغىتىڭ",
       "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار تىزىملىكى (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
+    },
+    "911": {
+      "Title": "Pose estimation",
+      "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLOv11 مودېلى (ئىنسانلارنىڭ تۇرقىغا خاس).",
+      "ML.PoseEstimation": "تۇراقلىق مۆلچەرنى قوزغىتىڭ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
     }
   }

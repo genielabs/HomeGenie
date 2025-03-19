@@ -5,7 +5,7 @@
   "not_configured_yet": "Das System ist noch nicht konfiguriert. Dieser Setup-Assistent hilft Ihnen, Ihr System in wenigen Schritten zum Laufen zu bringen.",
   "system_config_start_with_base_and_backup": "Wiederherstellen aus einer Sicherungsdatei",
   "system_config_start_with_default_setup": "Standardeinstellung",
-  "system_config_include_demo": "Demo mit simulierter Geräteaktivität einbinden",
+  "system_config_include_demo": "Demo mit simulierter Geräteaktivität einschließen",
   "system_config_additional_features": "Zusätzliche Funktionen",
   "system_config_manual_setup": "Manuelle Einrichtung",
   "interfaces": "Schnittstellen",
@@ -15,10 +15,10 @@
   "HomeAutomation.ZigBee": "ZigBee-Controller",
   "device_port": "Geräteanschluss",
   "device_driver": "Treiber",
-  "flow_control": "Durchflussregelung",
+  "flow_control": "Flusskontrolle",
   "controller": "Regler",
-  "programs": "Studiengänge",
-  "repositories": "Depots",
+  "programs": "Programme",
+  "repositories": "Repositorien",
   "packages": "Pakete",
   "installed_packages": "Installierte Pakete",
   "upload_package": "Paket hochladen",
@@ -51,7 +51,7 @@
   "cronwizard_description_at": "bei",
   "cronwizard_add_time_slot": "Zeitfenster hinzufügen",
   "cronwizard_add_exact_time": "Genaue Uhrzeit hinzufügen",
-  "cronwizard_start_time": "Zeit Ereignis",
+  "cronwizard_start_time": "Startzeit",
   "cronwizard_end_time": "Endzeit",
   "cronwizard_minutes": "Minuten",
   "cronwizard_hours": "Std",
@@ -68,12 +68,12 @@
   "cronwizard_dayowselect_selecteddaysow": "Ausgewählte Wochentage",
   "cronwizard_monthselect_everymonth": "Jeden Monat",
   "cronwizard_monthselect_selectedmonths": "Ausgewählte Monate",
-  "cronwizard_schedule_set_exact_time": "Ereigniszeit festlegen.",
-  "cronwizard_schedule_set_slot_start": "Zeitfensterbeginn festlegen.",
-  "cronwizard_schedule_set_slot_end": "Beginnend bei {{start}} .<span class=\"notranslate\"><br/></span> Zeitfenster-Ende festlegen.",
+  "cronwizard_schedule_set_exact_time": "Ereigniszeit einstellen.",
+  "cronwizard_schedule_set_slot_start": "Zeitfensterstart festlegen.",
+  "cronwizard_schedule_set_slot_end": "Beginnend bei {{start}} .<span class=\"notranslate\"><br/></span> Zeitfensterende festlegen.",
   "cronwizard_bindings_define_types_and_modules": "Definieren Sie Typen und Module, die diesem Zeitplan unterliegen (optional)",
   "cronwizard_bindings_select_types": "Typen auswählen",
-  "cronwizard_action_set_action_to_execute": "Legen Sie die Aktion fest, die bei Auftreten dieses Ereignisses ausgeführt werden soll.",
+  "cronwizard_action_set_action_to_execute": "Legen Sie die Aktion fest, die beim Auftreten dieses Ereignisses ausgeführt werden soll",
   "cronwizard_action_preset_actions": "Voreingestellte Aktionen",
   "cronwizard_action_preset_every_occurrence": "Bei jedem Vorkommen",
   "cronwizard_action_preset_slot_start": "Zu Beginn eines Zeitfensters",
@@ -119,15 +119,15 @@
   "program_status_compile": "Kompilieren",
   "automation_programming_guide": "Programmierhandbuch'",
   "tap_to_disable": "Klicken Sie hier, um zu deaktivieren",
-  "tap_to_enable": "Klicken Sie hier, um zu aktivieren",
+  "tap_to_enable": "Klicken Sie hier, um es zu aktivieren",
   "program_data": "Programmdaten",
   "visual_code": "Visueller Code",
   "generated_code": "Generierter Code",
   "setup_code": "Aufstellen",
   "main_code": "Hauptsächlich",
   "context_code": "Kontext",
-  "main_code_empty_note": "Der „Main“-Code ist leer. Verwenden Sie den „Visual Code“-Editor, um diesen Code zu generieren: - Öffnen Sie die Kategorie „Programm“ in der Befehlspalette links - Ziehen Sie einen Block vom Typ „Main“ in den Visual Code-Arbeitsbereich - Fügen Sie darin andere Codeblöcke hinzu, um Aktionen und Logik dieses Programms zu implementieren. Das Programm „Main“ kann entweder manuell ausgeführt oder automatisch gestartet werden, basierend auf den ggf. im Setup-Code angegebenen Bedingungen.",
-  "setup_code_empty_note": "Der „Setup“-Code ist leer. Verwenden Sie den „Visuellen Code“-Editor, um diesen Code zu generieren: - Öffnen Sie die Kategorie „Programm“ in der Befehlspalette links - Ziehen Sie einen Block vom Typ „Setup“ in den visuellen Code-Arbeitsbereich - Fügen Sie darin weitere Codeblöcke hinzu, um die Bedingungen festzulegen, die die Ausführung des „Haupt“-Codes auslösen. Dieser Code wird jedes Mal ausgewertet, wenn ein neues Ereignis eintritt, und mindestens einmal pro Minute.",
+  "main_code_empty_note": "Der „Main“-Code ist leer. Verwenden Sie den „Visuellen Code“-Editor, um diesen Code zu generieren: - Öffnen Sie die Kategorie „Programm“ in der Befehlspalette links. - Ziehen Sie einen Block vom Typ „Main“ in den Arbeitsbereich des visuellen Codes. - Fügen Sie darin weitere Codeblöcke ein, um die Aktionen und die Logik dieses Programms zu implementieren. Das Programm „Main“ kann entweder manuell ausgeführt oder basierend auf den im Setup-Code angegebenen Bedingungen automatisch gestartet werden.",
+  "setup_code_empty_note": "Der „Setup“-Code ist leer. Verwenden Sie den „Visuellen Code“-Editor, um diesen Code zu generieren: - Öffnen Sie die Kategorie „Programm“ in der Befehlspalette links. - Ziehen Sie einen Block vom Typ „Setup“ in den Arbeitsbereich des visuellen Codes. - Fügen Sie darin weitere Codeblöcke hinzu, um die Bedingungen festzulegen, die die Ausführung des „Haupt“-Codes auslösen. Dieser Code wird jedes Mal ausgewertet, wenn ein neues Ereignis eintritt, und mindestens einmal pro Minute.",
   "capture_commands": "Erfassungsbefehle",
   "capture_commands_description": "Fügen Sie dem Programm alle manuell an Widgets ausgeführten Befehle hinzu.",
   "capture_commands_pause": "Pause zwischen Befehlen",
@@ -141,8 +141,8 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Nur simulieren"
     },
     "26": {
-      "Title": "Farbige Lichter",
-      "Description": "Beispiel für die Integration von Philips Hue-Leuchten mithilfe der HTTP-API (V1). Der Standardbenutzer für die Verbindung mit der Bridge ist „newdeveloper“ und sollte bereits aktiviert sein.",
+      "Title": "Farblichter",
+      "Description": "Beispiel für die Integration von Philips Hue-Leuchten über die HTTP-API (V1). Der Standardbenutzer für die Verbindung mit der Bridge ist „newdeveloper“ und sollte bereits aktiviert sein.",
       "ConfigureOptions.BridgeAddress": "IP-Adresse der Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Benutzername",
       "ConfigureOptions.LightsCount": "Anzahl der Lichter"
@@ -157,9 +157,9 @@
     },
     "77": {
       "Title": "Netzwerk MQTT",
-      "Description": "Stellen Sie eine Verbindung zu einem MQTT-Broker her, um die HomeGenie Panel-App von überall über das Internet zu verwenden oder HomeGenie-Geräte im selben MQTT-Netzwerk zu verbinden.",
+      "Description": "Stellen Sie eine Verbindung zu einem MQTT-Broker her, um die HomeGenie Panel-App von überall über das Internet zu verwenden oder um HomeGenie-Geräte im selben MQTT-Netzwerk miteinander zu verbinden.",
       "MQTT.SensorPublish": "Von diesem Modul ausgegebene Ereignisse veröffentlichen",
-      "ConfigureOptions.ClientId": "Kunden-ID.",
+      "ConfigureOptions.ClientId": "Client-ID.",
       "ConfigureOptions.ServerAddress": "Serveradresse",
       "ConfigureOptions.ServerPort": "Server-Port",
       "ConfigureOptions.Encryption": "Aktivieren Sie die Ende-zu-Ende-Verschlüsselung (E2EE).",
@@ -175,13 +175,13 @@
       "VirtualThermostat.TemperatureModule": "Temperatursensor",
       "VirtualThermostat.HeatingSwitchModule": "Heizungsschalter",
       "VirtualThermostat.CoolingSwitchModule": "Kühlschalter",
-      "ConfigureOptions.ThermostatsCount": "Anzahl Thermostate"
+      "ConfigureOptions.ThermostatsCount": "Anzahl der Thermostate"
     },
     "81": {
       "Title": "Energiemonitor",
-      "Description": "Erstellen Sie Statistiken zum Energieverbrauch und zur Nutzung von Geräten.",
-      "EnergyManagement.MonitorStatus": "Status überwachen",
-      "EnergyManagement.MonitorWatts": "Überwachen Sie Ihren Energieverbrauch"
+      "Description": "Erstellen Sie Statistiken zum Energieverbrauch und zur Gerätenutzung.",
+      "EnergyManagement.MonitorStatus": "Monitorstatus",
+      "EnergyManagement.MonitorWatts": "Überwachen Sie den Energieverbrauch"
     },
     "82": {
       "Title": "Energiesparmodus",
@@ -192,25 +192,25 @@
     "88": {
       "Title": "Generische IP-Kamera",
       "Description": "Bild-Feed von einer IP-Kamera anzeigen/weiterleiten.",
-      "IpCamera.ImageURL": "API-URL für Kamerabilder (siehe Ihre Kameradokumentation)",
+      "IpCamera.ImageURL": "URL der Kamerabild-API (siehe Ihre Kameradokumentation)",
       "IpCamera.Username": "Benutzername (optional)",
       "IpCamera.Password": "Passwort (optional)",
       "Widget.Config.fps": "Bilder pro Sekunde",
-      "Widget.Config.size": "Widgetgröße"
+      "Widget.Config.size": "Widget-Größe"
     },
     "90": {
       "Title": "Sicherheitsalarmsystem",
       "Description": "Verwenden Sie Sensoren und andere Geräte, um ein Sicherheitsalarmsystem zu implementieren.",
-      "HomeGenie.SecurityAlarm": "Verwendung als Alarm/Blitzlicht",
-      "HomeGenie.SecurityTriggerHome": "Wird auch ausgelöst, wenn die Home-Taste aktiviert ist",
+      "HomeGenie.SecurityAlarm": "Verwendung als Alarm/Blitz",
+      "HomeGenie.SecurityTriggerHome": "Wird auch ausgelöst, wenn Home scharfgeschaltet ist",
       "HomeGenie.SecuritySensor": "Verwendung als Sicherheitssensor",
       "ConfigureOptions.Email.Recipients": "Komma-getrennte Liste von Empfänger-E-Mails für Alarmbenachrichtigungen",
       "ConfigureOptions.System.ArmDelay": "Aktivierungsverzögerung (Sekunden)",
       "ConfigureOptions.System.SirenStartTime": "Sirenenstartverzögerung (Sekunden)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirenen - Maximale Zeit (Sekunden, 0 = unendlich)",
+      "ConfigureOptions.System.SirenMaxTime": "Maximale Sirenenzeit (Sekunden, 0 = unendlich)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programm, das bei Scharfschaltung ausgeführt werden soll",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programm, das bei Deaktivierung ausgeführt werden soll",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Bei Auslösung auszuführendes Programm"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Programm, das bei Auslösung ausgeführt werden soll"
     },
     "95": {
       "Title": "Ereignisprotokollierung",
@@ -218,25 +218,25 @@
       "EventsLogger.EnableLogging": "Aktivieren"
     },
     "111": {
-      "Title": "Client-Konfiguration",
-      "Description": "Implementiert eine API zum Verwalten der Client-Konfigurationsprofile, die zum Speichern von UI- und Dashboard-Einstellungen verwendet werden."
+      "Title": "Clientkonfiguration",
+      "Description": "Implementiert eine API zum Verwalten der Konfigurationsprofile des Clients, die zum Speichern von UI- und Dashboard-Einstellungen verwendet werden."
     },
     "400": {
-      "Title": "Demo zu virtuellen Modulen",
+      "Title": "Demo virtueller Module",
       "Description": "Legen Sie die Werte des virtuellen Geräts manuell fest.",
       "Sensor.Temperature": "Temperaturwert",
-      "Sensor.Luminance": "Leuchtdichtewert",
+      "Sensor.Luminance": "Luminanzwert",
       "Sensor.MotionDetect": "Bewegungserkennungsstatus",
       "Status.Battery": "Batteriestand",
       "Sensor.DoorWindow": "Tür-/Fenstersensorstatus (offen/geschlossen)",
-      "Status.Level": "Schalterzustand (ein/aus)"
+      "Status.Level": "Schalterstatus (ein/aus)"
     },
     "401": {
       "Title": "Demo - Knebeltür",
       "Description": "Simuliert das Öffnen/Schließen der Tür des Demo-Tür-Fenster-Sensors."
     },
     "402": {
-      "Title": "Demo - Bewegungserkennung",
+      "Title": "Demo – Bewegungserkennung",
       "Description": "Simuliert die Bewegungserkennung eines Demo-Multisensors."
     },
     "410": {
@@ -247,14 +247,14 @@
       "Simulator.Sensor.Luminance": "Lichtsensor",
       "Simulator.Meter.Watts": "Wattmeter",
       "Simulator.Meter.Watts.Max": "Max. Wattleistung",
-      "Simulator.Sensor.DataFrequency": "Sendefrequenz des Simulators"
+      "Simulator.Sensor.DataFrequency": "Simulator-Emissionsfrequenz"
     },
     "505": {
       "Title": "Fernbedienung",
       "Description": "Steuern Sie das Gerät mit einer Fernbedienung (IR oder RF).",
       "HomeGenie.RemoteControl.Enable": "Aktivieren",
       "HomeGenie.RemoteControl.IRCode": "Umschaltfläche",
-      "ConfigureOptions.DimmerUpCode": "Taste zur Erhöhung der Helligkeit",
+      "ConfigureOptions.DimmerUpCode": "Taste zum Erhöhen der Helligkeit",
       "ConfigureOptions.DimmerDownCode": "Taste zum Verringern der Helligkeit",
       "ConfigureOptions.DimmerInterval": "Dimmstufe"
     },
@@ -271,15 +271,15 @@
     "145": {
       "Title": "Smartgerät",
       "Description": "Schalten Sie das Gerät basierend auf Bewegungserkennung und Umgebungslicht ein/aus.",
-      "HomeGenie.SmartLights.Enable": "„Smart Device“ aktivieren",
+      "HomeGenie.SmartLights.Enable": "Aktivieren Sie „Smart Device“",
       "HomeGenie.SmartLights.OnMotionDetect": "Sensorgesteuert (optional)",
       "HomeGenie.SmartLights.CheckLuminosity": "Steuerung durch Lichtsensor (optional)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Ausschalten nach Inaktivitäts-Timeout (Sekunden)",
-      "HomeGenie.SmartLights.MinLuminance": "Einschalten, wenn die Leuchtdichte unter folgendem Wert liegt:"
+      "HomeGenie.SmartLights.MinLuminance": "Einschalten, wenn die Luminanz unter folgendem Wert liegt:"
     },
     "8": {
       "Title": "Sonnenaufgangsfarben-Szenario",
-      "Description": "Beispiel eines „Sonnenaufgangs“-Szenarios für farbwechselnde LED-Leuchten.",
+      "Description": "Beispielszenario „Sonnenaufgang“ für farbwechselnde LED-Leuchten.",
       "Scenarios.SunriseColors": "Link zum Sunrise Colors-Szenario"
     },
     "910": {
@@ -287,6 +287,12 @@
       "Description": "Erkennen Sie Objekte mithilfe eines vortrainierten YOLO11-Modells.",
       "ML.ObjectDetection": "Objekterkennung aktivieren",
       "ML.ObjectDetection.TriggerDetect": "Durch Kommas getrennte Liste von Dingen (auf Englisch), die den Alarm auslösen. (zB: Katze, Hund, Person, Rucksack, Koffer)",
+      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO11-Modelldatei (.onnx)"
+    },
+    "911": {
+      "Title": "Posenschätzung",
+      "Description": "Schlüsselpunkterkennung durch Posenschätzung unter Verwendung benutzerdefinierter ONNX-Modelle oder des standardmäßig vortrainierten YOLOv11-Modells (spezifisch für die menschliche Pose).",
+      "ML.PoseEstimation": "Aktivieren der Posenschätzung",
       "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO11-Modelldatei (.onnx)"
     }
   }

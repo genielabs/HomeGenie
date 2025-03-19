@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "เวลาสูงสุดของไซเรน (วินาที, 0=อนันต์)",
       "ConfigureOptions.Trigger.ArmedProgram": "โปรแกรมที่จะรันเมื่อติดอาวุธ",
       "ConfigureOptions.Trigger.DisarmedProgram": "โปรแกรมที่จะรันเมื่อไม่มีอาวุธ",
-      "ConfigureOptions.Trigger.TriggeredProgram": "โปรแกรมที่จะรันเมื่อถูกทริกเกอร์"
+      "ConfigureOptions.Trigger.TriggeredProgram": "โปรแกรมที่จะทำงานเมื่อมีการทริกเกอร์"
     },
     "95": {
       "Title": "การบันทึกเหตุการณ์",
@@ -287,6 +287,12 @@
       "Description": "ตรวจจับวัตถุโดยใช้โมเดล YOLO11 ที่ได้รับการฝึกอบรมล่วงหน้า",
       "ML.ObjectDetection": "เปิดใช้งานการตรวจจับวัตถุ",
       "ML.ObjectDetection.TriggerDetect": "รายการสิ่งของที่คั่นด้วยจุลภาค (เป็นภาษาอังกฤษ) ที่จะทำให้เกิดการเตือนภัย (เช่น แมว สุนัข คน กระเป๋าเป้ กระเป๋าเดินทาง)",
+      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "การประมาณท่าทาง",
+      "Description": "การตรวจจับจุดสำคัญผ่านการประมาณท่าทาง โดยใช้โมเดล ONNX แบบกำหนดเองหรือโมเดล YOLOv11 ที่ได้รับการฝึกอบรมไว้ล่วงหน้าตามค่าเริ่มต้น (เฉพาะท่าทางของมนุษย์)",
+      "ML.PoseEstimation": "เปิดใช้งานการประมาณท่าทาง",
       "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO11 (.onnx)"
     }
   }

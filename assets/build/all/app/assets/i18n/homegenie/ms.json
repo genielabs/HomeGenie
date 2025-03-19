@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "-------------------------------------------",
   "welcome_to_homegenie": "Selamat datang ke HomeGenie!",
   "welcome_subtitle": "Perisikan automasi boleh atur cara",
   "not_configured_yet": "Sistem belum dikonfigurasikan lagi. Wizard persediaan ini akan membantu anda menyediakan dan menjalankan sistem anda dalam beberapa langkah.",
@@ -38,7 +38,7 @@
   "schedule_event": "Peristiwa",
   "schedule_type_standard": "Standard",
   "schedule_type_range": "Julat tarikh",
-  "schedule_type_cron": "Ungkapan Cron",
+  "schedule_type_cron": "Ungkapan cron",
   "schedule_action": "Tindakan",
   "schedule_occurrence_preview": "Pratonton kejadian",
   "time_schedule": "Jadual",
@@ -67,7 +67,7 @@
   "cronwizard_dayselect_selecteddays": "Hari yang dipilih",
   "cronwizard_dayowselect_selecteddaysow": "Hari yang dipilih dalam minggu",
   "cronwizard_monthselect_everymonth": "Setiap bulan",
-  "cronwizard_monthselect_selectedmonths": "Bulan terpilih",
+  "cronwizard_monthselect_selectedmonths": "Bulan yang dipilih",
   "cronwizard_schedule_set_exact_time": "Tetapkan masa acara.",
   "cronwizard_schedule_set_slot_start": "Tetapkan permulaan slot masa.",
   "cronwizard_schedule_set_slot_end": "Bermula pada {{start}} .<span class=\"notranslate\"><br/></span> Tetapkan tamat slot masa.",
@@ -135,14 +135,14 @@
   "capture_pause_asis": "Seperti yang ada",
   "$options": {
     "16": {
-      "Title": "Tahap Memori",
+      "Title": "Memori Tahap",
       "Description": "Simpan dan ingat semula tahap malap terakhir.",
       "HomeGenie.LevelMemory": "Ingat tahap cahaya terakhir apabila dihidupkan",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan sahaja"
     },
     "26": {
       "Title": "Lampu warna",
-      "Description": "Contoh penyepaduan lampu Philips Hue menggunakan API HTTP (V1). Pengguna lalai untuk menyambung ke jambatan ialah \"pembangun baharu\" dan ia sepatutnya sudah didayakan.",
+      "Description": "Contoh integrasi lampu Philips Hue menggunakan API HTTP (V1). Pengguna lalai untuk menyambung ke jambatan ialah \"pembangun baharu\" dan ia sepatutnya sudah didayakan.",
       "ConfigureOptions.BridgeAddress": "Alamat IP Philips Hue Bridge (V1).",
       "ConfigureOptions.BridgeUsername": "Nama pengguna",
       "ConfigureOptions.LightsCount": "Bilangan lampu"
@@ -219,7 +219,7 @@
     },
     "111": {
       "Title": "Konfigurasi pelanggan",
-      "Description": "Melaksanakan API untuk mengurus profil konfigurasi klien yang digunakan untuk menyimpan tetapan UI dan papan pemuka."
+      "Description": "Melaksanakan API untuk mengurus profil konfigurasi pelanggan yang digunakan untuk menyimpan tetapan UI dan papan pemuka."
     },
     "400": {
       "Title": "Demo Modul Maya",
@@ -259,7 +259,7 @@
       "ConfigureOptions.DimmerInterval": "Langkah memalapkan"
     },
     "142": {
-      "Title": "Akaun E-mel",
+      "Title": "Akaun E-Mel",
       "Description": "Menyimpan maklumat akaun e-mel yang digunakan oleh program sistem untuk menghantar/menerima e-mel.",
       "ConfigureOptions.Email.Sender": "1. Alamat e-mel",
       "ConfigureOptions.Email.SmtpServer": "2. Alamat pelayan SMTP",
@@ -287,6 +287,12 @@
       "Description": "Kesan objek menggunakan model YOLO11 yang telah terlatih.",
       "ML.ObjectDetection": "Dayakan pengesanan objek",
       "ML.ObjectDetection.TriggerDetect": "Senarai perkara yang dipisahkan koma (dalam bahasa Inggeris) yang akan mencetuskan penggera. (cth: kucing, anjing, orang, beg galas, beg pakaian)",
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Anggaran pose",
+      "Description": "Pengesanan titik kunci melalui anggaran pose, menggunakan model ONNX tersuai atau model YOLOv11 pra-latihan lalai (khusus pose manusia).",
+      "ML.PoseEstimation": "Dayakan anggaran pose",
       "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
     }
   }

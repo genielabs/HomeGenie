@@ -6,7 +6,7 @@
   "system_config_start_with_base_and_backup": "Gjenopprett fra sikkerhetskopifil",
   "system_config_start_with_default_setup": "Standard oppsett",
   "system_config_include_demo": "Inkluder demo med simulert enhetsaktivitet",
-  "system_config_additional_features": "Ekstra funksjoner",
+  "system_config_additional_features": "Ytterligere funksjoner",
   "system_config_manual_setup": "Manuelt oppsett",
   "interfaces": "Grensesnitt",
   "Protocols.UPnP": "UPnP-kontroller",
@@ -55,7 +55,7 @@
   "cronwizard_end_time": "Sluttid",
   "cronwizard_minutes": "Minutter",
   "cronwizard_hours": "Timer",
-  "cronwizard_days": "dager",
+  "cronwizard_days": "Dager",
   "cronwizard_months": "Måneder",
   "cronwizard_minuteselect_everyminute": "Hvert minutt",
   "cronwizard_minuteselect_everynthminute": "Hvert gitt minutt",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Si",
   "scheduler_preset_action_config_message": "Beskjed",
   "save_and_build": "Lagre og bygg",
-  "toggle_widgets_preview": "Slå av forhåndsvisning av widgets",
+  "toggle_widgets_preview": "Slå av widgets forhåndsvisning",
   "stop_program": "Stopp programmet",
   "run_program": "Kjør programmet",
   "enable_to_run_program": "Aktiver programmet for å kjøre det",
@@ -287,6 +287,12 @@
       "Description": "Oppdag objekter ved hjelp av en forhåndstrent YOLO11-modell.",
       "ML.ObjectDetection": "Aktiver gjenkjenning av objekter",
       "ML.ObjectDetection.TriggerDetect": "Kommaseparert liste over ting (på engelsk) som vil utløse alarmen. (f.eks: katt, hund, person, ryggsekk, koffert)",
+      "ConfigureOptions.Yolo.ModelPath": "Banen til YOLO11-modellfilen (.onnx)"
+    },
+    "911": {
+      "Title": "Posisjonsvurdering",
+      "Description": "Nøkkelpunktdeteksjon via positur-estimering, ved bruk av tilpassede ONNX-modeller eller standard forhåndstrent YOLOv11-modell (menneskelig positur-spesifikk).",
+      "ML.PoseEstimation": "Aktiver posisjonsestimat",
       "ConfigureOptions.Yolo.ModelPath": "Banen til YOLO11-modellfilen (.onnx)"
     }
   }

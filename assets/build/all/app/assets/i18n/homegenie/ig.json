@@ -3,7 +3,7 @@
   "welcome_to_homegenie": "Nnọọ na HomeGenie!",
   "welcome_subtitle": "The programmable akpaaka ọgụgụ isi",
   "not_configured_yet": "Ahazibeghị sistemụ ma. Ọkachamara ntọlite a ga-enyere gị aka n'ịkwalite sistemụ gị ma na-arụ ọrụ na usoro ole na ole.",
-  "system_config_start_with_base_and_backup": "Weghachi na faịlụ ndabere",
+  "system_config_start_with_base_and_backup": "Weghachi na ndabere faịlụ",
   "system_config_start_with_default_setup": "Ntọlite mbụ",
   "system_config_include_demo": "Tinye ihe ngosi nwere mmemme ngwaọrụ emepụtara",
   "system_config_additional_features": "Atụmatụ ndị ọzọ",
@@ -41,7 +41,7 @@
   "schedule_type_cron": "Okwu cron",
   "schedule_action": "Omume",
   "schedule_occurrence_preview": "Nlele ihe omume",
-  "time_schedule": "Usoro ihe omume",
+  "time_schedule": "Nhazi oge",
   "occurrence": "Ihe omume",
   "cronwizard_description_on": "na",
   "cronwizard_description_from": "si",
@@ -202,7 +202,7 @@
       "Title": "Sistemụ mkpu nchekwa",
       "Description": "Jiri sensọ na ngwaọrụ ndị ọzọ mejuputa sistemụ mkpu nchekwa.",
       "HomeGenie.SecurityAlarm": "Jiri dị ka mkpu/strobe",
-      "HomeGenie.SecurityTriggerHome": "Na-akpalikwa mgbe a na-eji ngwá agha n'ụlọ",
+      "HomeGenie.SecurityTriggerHome": "Na-akpalikwa mgbe a na-eji ngwá ụlọ",
       "HomeGenie.SecuritySensor": "Jiri dị ka ihe nchekwa ihe mmetụta",
       "ConfigureOptions.Email.Recipients": "E-mail ndị nnata kewapụrụ rịkọm maka ọkwa mkpu",
       "ConfigureOptions.System.ArmDelay": "Oge igbu oge (sekọnd abụọ)",
@@ -233,7 +233,7 @@
     },
     "401": {
       "Title": "Ihe ngosi - Gbanwee ọnụ ụzọ",
-      "Description": "Simulates ụzọ mepere/emechi nke ihe mmetụta ọnụ ụzọ-window ngosi."
+      "Description": "Na-emepe ọnụ ụzọ mepere/emechi nke ihe mmetụta ọnụ ụzọ-window ngosi."
     },
     "402": {
       "Title": "Ihe ngosi - Achọpụtara ngagharị",
@@ -275,11 +275,11 @@
       "HomeGenie.SmartLights.OnMotionDetect": "Ihe mmetụta na-achịkwa (nhọrọ)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ihe mmetụta ọkụ na-achịkwa (nhọrọ)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Gbanyụọ ka oge nkwụsịghị ọrụ (nkeji abụọ)",
-      "HomeGenie.SmartLights.MinLuminance": "Gbanye ma ọ bụrụ na luminance dị n'okpuru:"
+      "HomeGenie.SmartLights.MinLuminance": "Gbanwuo ma ọ bụrụ na luminance dị n'okpuru:"
     },
     "8": {
       "Title": "Ihe ngosi agba ọwụwa anyanwụ",
-      "Description": "Ihe atụ \"Ọwụwa anyanwụ\" dị n'ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
+      "Description": "Ọmụmaatụ \"Ọwụwa Anyanwụ\" ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
       "Scenarios.SunriseColors": "Njikọ na ọnọdụ ọdịda anyanwụ agba"
     },
     "910": {
@@ -287,6 +287,12 @@
       "Description": "Chọpụta ihe n'iji ụdị YOLO11 a zụrụ azụ.",
       "ML.ObjectDetection": "Kwado nchọpụta ihe",
       "ML.ObjectDetection.TriggerDetect": "Ndepụta ihe ndị kewapụrụ rịkọm (na Bekee) ga-akpalite mkpu. (dịka ọmụmaatụ: pusi, nkịta, mmadụ, akpa azụ, akpa)",
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Nhazi atụmatụ",
+      "Description": "Nchọpụta isi ihe site na nleba anya pose, na-eji ụdị ONNX omenala ma ọ bụ ụdị YOLOv11 a zụrụ nke ọma (kpọmkwem pose mmadụ).",
+      "ML.PoseEstimation": "Kwado ntule ọnọdụ",
       "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
     }
   }

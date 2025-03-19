@@ -37,7 +37,7 @@
   "scheduler_wizard": "Mayen Jadawalin",
   "schedule_event": "Lamarin",
   "schedule_type_standard": "Daidaitawa",
-  "schedule_type_range": "Kewayon kwanan wata",
+  "schedule_type_range": "Kwanan kwanan wata",
   "schedule_type_cron": "Maganar Cron",
   "schedule_action": "Aiki",
   "schedule_occurrence_preview": "Duban abin da ya faru",
@@ -75,7 +75,7 @@
   "cronwizard_bindings_select_types": "Zaɓi nau'ikan",
   "cronwizard_action_set_action_to_execute": "Saita mataki don aiwatar da abubuwan da suka faru na wannan taron",
   "cronwizard_action_preset_actions": "Ayyukan da aka saita",
-  "cronwizard_action_preset_every_occurrence": "A kan kowane abin da ya faru",
+  "cronwizard_action_preset_every_occurrence": "A kowane abin da ya faru",
   "cronwizard_action_preset_slot_start": "A farkon lokacin rani",
   "cronwizard_action_preset_slot_end": "A karshen lokacin ramin",
   "cronwizard_action_custom_script": "Rubutun ayyuka na al'ada",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "Zabuka",
   "scheduler_preset_action_program_say": "Ka ce",
   "scheduler_preset_action_config_message": "Sako",
-  "save_and_build": "Ajiye kuma gina",
+  "save_and_build": "Ajiye ku gina",
   "toggle_widgets_preview": "Juya samfotin widget din",
   "stop_program": "Tsaida shirin",
   "run_program": "Run shirin",
@@ -143,7 +143,7 @@
     "26": {
       "Title": "Hasken launi",
       "Description": "Misali Haɗin fitilun Philips Hue ta amfani da HTTP API (V1). Tsohuwar mai amfani don haɗawa da gadar shine \"sabon mai haɓakawa\" kuma ya kamata a riga an kunna shi.",
-      "ConfigureOptions.BridgeAddress": "Adireshin IP na Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) adireshin IP",
       "ConfigureOptions.BridgeUsername": "Sunan mai amfani",
       "ConfigureOptions.LightsCount": "Yawan fitilu"
     },
@@ -153,7 +153,7 @@
       "ConfigureOptions.Location": "Sunan birni",
       "ConfigureOptions.Language": "Harshe (misali. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Sabunta tazara (mintuna)",
-      "ConfigureOptions.ApiKey": "Maɓallin API na OpenWeatherMap (APPID)"
+      "ConfigureOptions.ApiKey": "OpenWeatherMap API key (APPID)"
     },
     "77": {
       "Title": "MQTT Network",
@@ -272,7 +272,7 @@
       "Title": "Na'urar Wayo",
       "Description": "Kunna/kashe na'urar bisa ga gano motsi da hasken yanayi.",
       "HomeGenie.SmartLights.Enable": "Kunna 'Smart Device'",
-      "HomeGenie.SmartLights.OnMotionDetect": "Sarrafa ta firikwensin (na zaɓi)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Sarrafa ta hanyar firikwensin (na zaɓi)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ana sarrafa ta ta firikwensin haske (na zaɓi)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Kashe bayan rashin aiki (daƙiƙa)",
       "HomeGenie.SmartLights.MinLuminance": "Kunna idan hasken yana ƙasa:"
@@ -287,6 +287,12 @@
       "Description": "Gano abubuwa ta amfani da ƙirar YOLO11 da aka riga aka horar.",
       "ML.ObjectDetection": "Kunna gano abubuwa",
       "ML.ObjectDetection.TriggerDetect": "Jerin abubuwan da aka raba waƙafi (a cikin Ingilishi) waɗanda zasu kunna ƙararrawa. (misali: cat, kare, mutum, jakar baya, akwati)",
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Matsayin ƙima",
+      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da ƙirar ONNX na al'ada ko ƙirar YOLOv11 da aka riga aka horar da ita (takamaiman matsayi na mutum).",
+      "ML.PoseEstimation": "Kunna kimar matsayi",
       "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
     }
   }

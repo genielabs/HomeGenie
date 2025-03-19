@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "කාල පරාසයක් අවසානයේ",
   "cronwizard_action_custom_script": "අභිරුචි ක්‍රියා ස්ක්‍රිප්ට්",
   "cronwizard_action_no_action": "ක්‍රියාමාර්ගයක් නැත",
-  "cronwizard_action_schedule_variable_hint": "ක්‍රෝන් ප්‍රකාශනවල <span class=\"notranslate color-primary\">@ {{name}}</span> විචල්‍යයක් ලෙස භාවිතා කරන්න හෝ මෙම සිදුවීම යොමු කිරීමට ස්වයංක්‍රීයකරණ වැඩසටහන්වල <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> භාවිතා කරන්න.",
+  "cronwizard_action_schedule_variable_hint": "ක්‍රෝන් ප්‍රකාශනවල <span class=\"notranslate color-primary\">@ {{name}}</span> විචල්‍යයක් ලෙස භාවිතා කරන්න හෝ මෙම සිදුවීම යොමු කිරීමට ස්වයංක්‍රීයකරණ වැඩසටහන් වල <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> භාවිතා කරන්න.",
   "scheduler_preset_action_command_turn_on": "ක්රියාත්මක කරන්න",
   "scheduler_preset_action_command_turn_off": "නිවා දමන්න",
   "scheduler_preset_action_command_set_level": "මට්ටම සකසන්න",
@@ -287,6 +287,12 @@
       "Description": "පෙර පුහුණු කළ YOLO11 ආකෘතියක් භාවිතයෙන් වස්තූන් හඳුනා ගන්න.",
       "ML.ObjectDetection": "වස්තු අනාවරණය සබල කරන්න",
       "ML.ObjectDetection.TriggerDetect": "අනතුරු ඇඟවීම අවුලුවන දේවල් (ඉංග්‍රීසියෙන්) කොමාවෙන් වෙන් කරන ලද ලැයිස්තුව. (උදා: පූසා, බල්ලා, පුද්ගලයා, බෑගය, ගමන් මල්ල)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ මාර්ගය (.onnx)"
+    },
+    "911": {
+      "Title": "ඉරියව් ඇස්තමේන්තුව",
+      "Description": "අභිරුචි ONNX ආකෘති හෝ පෙරනිමි පෙර-පුහුණු YOLOv11 ආකෘතිය (මානව ඉරියව්-විශේෂිත) භාවිතයෙන් ඉරියව් ඇස්තමේන්තුව හරහා යතුරු ලක්ෂ්‍ය හඳුනාගැනීම.",
+      "ML.PoseEstimation": "ඉරියව් ඇස්තමේන්තුව සබල කරන්න",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ (.onnx) මාර්ගය"
     }
   }

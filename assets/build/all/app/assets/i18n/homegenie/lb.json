@@ -8,7 +8,7 @@
   "system_config_include_demo": "Enthält Demo mat simuléierten Apparataktivitéit",
   "system_config_additional_features": "Zousätzlech Funktiounen",
   "system_config_manual_setup": "Manuell Setup",
-  "interfaces": "Interfaces",
+  "interfaces": "Schnëttplazen",
   "Protocols.UPnP": "UPnP Controller",
   "HomeAutomation.X10": "X10 Controller",
   "HomeAutomation.ZWave": "Z-Wave Controller",
@@ -77,7 +77,7 @@
   "cronwizard_action_preset_actions": "Preset Aktiounen",
   "cronwizard_action_preset_every_occurrence": "Op all Optriede",
   "cronwizard_action_preset_slot_start": "Um Ufank vun enger Zäit Slot",
-  "cronwizard_action_preset_slot_end": "Um Enn vun enger Zäit Slot",
+  "cronwizard_action_preset_slot_end": "Um Enn vun enger Zäit Stonneplang",
   "cronwizard_action_custom_script": "Benotzerdefinéiert Aktioun Skript",
   "cronwizard_action_no_action": "Keng Aktioun",
   "cronwizard_action_schedule_variable_hint": "Benotzt <span class=\"notranslate color-primary\">@ {{name}}</span> als Variabel an Cron Ausdréck oder benotzt <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> an Automatisatiounsprogrammer fir dëst Event ze referenzéieren.",
@@ -287,6 +287,12 @@
       "Description": "Entdeckt Objete mat engem pre-trainéierten YOLO11 Modell.",
       "ML.ObjectDetection": "Aktivéiert Objekterkennung",
       "ML.ObjectDetection.TriggerDetect": "Komma-getrennt Lëscht vu Saachen (op Englesch) déi den Alarm ausléisen. (zB: Kaz, Hond, Persoun, Rucksak, Koffer)",
+      "ConfigureOptions.Yolo.ModelPath": "Wee vum YOLO11 Modelldatei (.onnx)"
+    },
+    "911": {
+      "Title": "Pose Schätzung",
+      "Description": "Keypoint Detektioun iwwer Poseschätzung, mat personaliséierten ONNX Modeller oder dem Standard pre-trained YOLOv11 Modell (mënschlech Pose-spezifesch).",
+      "ML.PoseEstimation": "Aktivéiert Poseschätzung",
       "ConfigureOptions.Yolo.ModelPath": "Wee vum YOLO11 Modelldatei (.onnx)"
     }
   }

@@ -51,7 +51,7 @@
   "cronwizard_description_at": "at",
   "cronwizard_add_time_slot": "Idősáv hozzáadása",
   "cronwizard_add_exact_time": "Adja hozzá a pontos időt",
-  "cronwizard_start_time": "Kezdés időpontja",
+  "cronwizard_start_time": "Kezdési idő",
   "cronwizard_end_time": "Vége",
   "cronwizard_minutes": "Jegyzőkönyv",
   "cronwizard_hours": "Órák",
@@ -70,14 +70,14 @@
   "cronwizard_monthselect_selectedmonths": "Kiválasztott hónapok",
   "cronwizard_schedule_set_exact_time": "Állítsa be az esemény időpontját.",
   "cronwizard_schedule_set_slot_start": "Állítsa be az időrés kezdését.",
-  "cronwizard_schedule_set_slot_end": "Kezdve az {{start}} .<span class=\"notranslate\"><br/></span> Állítsa be az időrés végét.",
+  "cronwizard_schedule_set_slot_end": "{{start}} kezdve.<span class=\"notranslate\"><br/></span> Állítsa be az időrés végét.",
   "cronwizard_bindings_define_types_and_modules": "Olyan típusok és modulok meghatározása, amelyekre ez az ütemezés vonatkozik (opcionális)",
   "cronwizard_bindings_select_types": "Válasszon típusokat",
   "cronwizard_action_set_action_to_execute": "Állítsa be az esemény előfordulásakor végrehajtandó műveletet",
   "cronwizard_action_preset_actions": "Előre beállított műveletek",
   "cronwizard_action_preset_every_occurrence": "Minden előfordulásnál",
   "cronwizard_action_preset_slot_start": "Egy időrés kezdetén",
-  "cronwizard_action_preset_slot_end": "Egy időrés végén",
+  "cronwizard_action_preset_slot_end": "Egy idősáv végén",
   "cronwizard_action_custom_script": "Egyéni műveleti szkript",
   "cronwizard_action_no_action": "Nincs akció",
   "cronwizard_action_schedule_variable_hint": "Használja <span class=\"notranslate color-primary\">@ {{name}}</span> változóként a cron kifejezésekben, vagy használja <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> az automatizálási programokban az eseményre való hivatkozáshoz.",
@@ -135,7 +135,7 @@
   "capture_pause_asis": "Ahogy van",
   "$options": {
     "16": {
-      "Title": "Szint memória",
+      "Title": "Memória szint",
       "Description": "Tárolja és hívja elő az utolsó fényerő-szabályozó fokozatot.",
       "HomeGenie.LevelMemory": "Bekapcsoláskor hívja vissza az utolsó világítási szintet",
       "HomeGenie.LevelMemory.SimulateOnly": "Csak szimulálni"
@@ -159,7 +159,7 @@
       "Title": "Hálózati MQTT",
       "Description": "Csatlakozzon egy MQTT brókerhez, hogy a HomeGenie Panel alkalmazást bárhonnan interneten keresztül használhassa, vagy HomeGenie eszközöket csatlakoztasson ugyanazon az MQTT hálózaton.",
       "MQTT.SensorPublish": "A modul által kibocsátott események közzététele",
-      "ConfigureOptions.ClientId": "Ügyfél-azonosító",
+      "ConfigureOptions.ClientId": "Ügyfél azonosító",
       "ConfigureOptions.ServerAddress": "Szerver címe",
       "ConfigureOptions.ServerPort": "Szerver port",
       "ConfigureOptions.Encryption": "Végpontok közötti titkosítás engedélyezése (E2EE)",
@@ -180,7 +180,7 @@
     "81": {
       "Title": "Energiafigyelő",
       "Description": "Statisztikák készítése az energiafogyasztásról és az eszközök használatáról.",
-      "EnergyManagement.MonitorStatus": "Monitor állapota",
+      "EnergyManagement.MonitorStatus": "Monitor állapot",
       "EnergyManagement.MonitorWatts": "Az energiafogyasztás figyelése"
     },
     "82": {
@@ -233,7 +233,7 @@
     },
     "401": {
       "Title": "Demo - Toggle Door",
-      "Description": "A bemutató ajtó-ablak érzékelő ajtónyitást/zárását szimulálja."
+      "Description": "A bemutató ajtó-ablak érzékelő ajtónyitását/zárását szimulálja."
     },
     "402": {
       "Title": "Demo – Mozgás észlelve",
@@ -287,6 +287,12 @@
       "Description": "Tárgyak észlelése előre betanított YOLO11 modell segítségével.",
       "ML.ObjectDetection": "Objektumok észlelésének engedélyezése",
       "ML.ObjectDetection.TriggerDetect": "A riasztást kiváltó dolgok vesszővel elválasztott listája (angol nyelven). (pl.: macska, kutya, személy, hátizsák, bőrönd)",
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO11 modellfájl elérési útja (.onnx)"
+    },
+    "911": {
+      "Title": "Pózbecslés",
+      "Description": "Kulcspont-észlelés pózbecsléssel, egyéni ONNX-modellek vagy az alapértelmezett (emberi póz-specifikus) YOLOv11-modell használatával.",
+      "ML.PoseEstimation": "Pózbecslés engedélyezése",
       "ConfigureOptions.Yolo.ModelPath": "A YOLO11 modellfájl elérési útja (.onnx)"
     }
   }

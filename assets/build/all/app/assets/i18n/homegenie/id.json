@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">{{@ name}}</span> sebagai variabel dalam ekspresi cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> dalam program otomatisasi untuk merujuk peristiwa ini.",
   "scheduler_preset_action_command_turn_on": "Menyalakan",
   "scheduler_preset_action_command_turn_off": "Mematikan",
-  "scheduler_preset_action_command_set_level": "Mengatur level",
+  "scheduler_preset_action_command_set_level": "Atur level",
   "scheduler_preset_action_config_level": "Tingkat",
   "scheduler_preset_action_command_set_color": "Mengatur warna",
   "scheduler_preset_action_config_color": "Warna",
@@ -287,6 +287,12 @@
       "Description": "Mendeteksi objek menggunakan model YOLO11 yang telah dilatih sebelumnya.",
       "ML.ObjectDetection": "Aktifkan deteksi objek",
       "ML.ObjectDetection.TriggerDetect": "Daftar hal-hal (dalam bahasa Inggris) yang dipisahkan koma yang akan memicu alarm. (misalnya: kucing, anjing, orang, ransel, koper)",
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Estimasi pose",
+      "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLOv11 bawaan yang telah dilatih sebelumnya (khusus pose manusia).",
+      "ML.PoseEstimation": "Aktifkan estimasi pose",
       "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
     }
   }

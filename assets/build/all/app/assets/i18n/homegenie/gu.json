@@ -204,7 +204,7 @@
       "HomeGenie.SecurityAlarm": "એલાર્મ/સ્ટ્રોબ તરીકે ઉપયોગ કરો",
       "HomeGenie.SecurityTriggerHome": "સશસ્ત્ર હોય ત્યારે પણ ટ્રિગર થાય છે હોમ",
       "HomeGenie.SecuritySensor": "સુરક્ષા સેન્સર તરીકે ઉપયોગ કરો",
-      "ConfigureOptions.Email.Recipients": "એલાર્મ સૂચનાઓ માટે પ્રાપ્તકર્તાઓના ઇ-મેઇલ્સની અલ્પવિરામથી અલગ સૂચિ",
+      "ConfigureOptions.Email.Recipients": "એલાર્મ સૂચનાઓ માટે પ્રાપ્તકર્તાઓના ઇ-મેઇલ્સની અલ્પવિરામથી અલગ કરેલી સૂચિ",
       "ConfigureOptions.System.ArmDelay": "હાથ વિલંબ (સેકન્ડ)",
       "ConfigureOptions.System.SirenStartTime": "સાયરન શરૂ થવામાં વિલંબ (સેકન્ડ)",
       "ConfigureOptions.System.SirenMaxTime": "સાયરન મહત્તમ સમય (સેકન્ડ, 0 = અનંત)",
@@ -228,7 +228,7 @@
       "Sensor.Luminance": "લ્યુમિનન્સ મૂલ્ય",
       "Sensor.MotionDetect": "ગતિ શોધ સ્થિતિ",
       "Status.Battery": "બેટરી લેવલ",
-      "Sensor.DoorWindow": "દરવાજા/બારીના સેન્સરની સ્થિતિ (ખુલ્લું/બંધ)",
+      "Sensor.DoorWindow": "દરવાજા/બારીના સેન્સરની સ્થિતિ (ખુલ્લી/બંધ)",
       "Status.Level": "સ્વિચ સ્થિતિ (ચાલુ/બંધ)"
     },
     "401": {
@@ -287,6 +287,12 @@
       "Description": "પૂર્વ-પ્રશિક્ષિત YOLO11 મોડેલનો ઉપયોગ કરીને વસ્તુઓ શોધો.",
       "ML.ObjectDetection": "ઑબ્જેક્ટ શોધ સક્ષમ કરો",
       "ML.ObjectDetection.TriggerDetect": "અલ્પવિરામથી અલગ કરેલી વસ્તુઓની યાદી (અંગ્રેજીમાં) જે એલાર્મ વાગશે. (દા.ત.: બિલાડી, કૂતરો, વ્યક્તિ, બેકપેક, સુટકેસ)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
+    },
+    "911": {
+      "Title": "પોઝ અંદાજ",
+      "Description": "કસ્ટમ ONNX મોડેલ્સ અથવા ડિફોલ્ટ પૂર્વ-પ્રશિક્ષિત YOLOv11 મોડેલ (માનવ પોઝ-વિશિષ્ટ) નો ઉપયોગ કરીને પોઝ અંદાજ દ્વારા કીપોઇન્ટ શોધ.",
+      "ML.PoseEstimation": "પોઝ અંદાજ સક્ષમ કરો",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
     }
   }

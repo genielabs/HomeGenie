@@ -1,6 +1,6 @@
 {
   " ": "-------------------------------------------",
-  "welcome_to_homegenie": "Добре дојдовте во HomeGenie!",
+  "welcome_to_homegenie": "Добредојдовте во HomeGenie!",
   "welcome_subtitle": "Интелигенција за програмабилна автоматизација",
   "not_configured_yet": "Системот сè уште не е конфигуриран. Овој волшебник за поставување ќе ви помогне да го активирате и стартувате вашиот систем во неколку чекори.",
   "system_config_start_with_base_and_backup": "Врати од резервна датотека",
@@ -70,14 +70,14 @@
   "cronwizard_monthselect_selectedmonths": "Избрани месеци",
   "cronwizard_schedule_set_exact_time": "Поставете време на настанот.",
   "cronwizard_schedule_set_slot_start": "Поставете почеток на временскиот слот.",
-  "cronwizard_schedule_set_slot_end": "Почнувајќи од {{start}} .<span class=\"notranslate\"><br/></span> Поставете крај на временскиот слот.",
+  "cronwizard_schedule_set_slot_end": "Почнувајќи од {{start}} .<span class=\"notranslate\"><br/></span> Поставете го крајот на времето.",
   "cronwizard_bindings_define_types_and_modules": "Дефинирајте типови и модули кои се предмет на овој распоред (изборно)",
   "cronwizard_bindings_select_types": "Изберете типови",
   "cronwizard_action_set_action_to_execute": "Поставете дејство за извршување на појавите на овој настан",
   "cronwizard_action_preset_actions": "Претходно поставени дејства",
   "cronwizard_action_preset_every_occurrence": "На секоја појава",
   "cronwizard_action_preset_slot_start": "На почетокот на временскиот отвор",
-  "cronwizard_action_preset_slot_end": "На крајот од временскиот слот",
+  "cronwizard_action_preset_slot_end": "На крајот на временскиот слот",
   "cronwizard_action_custom_script": "Прилагодено сценарио за акција",
   "cronwizard_action_no_action": "Нема акција",
   "cronwizard_action_schedule_variable_hint": "Користете <span class=\"notranslate color-primary\">@ {{name}}</span> како променлива во изразите на cron или користете <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> во програмите за автоматизација за да го упатите овој настан.",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "Опции",
   "scheduler_preset_action_program_say": "Кажи",
   "scheduler_preset_action_config_message": "Порака",
-  "save_and_build": "Зачувај и изгради",
+  "save_and_build": "Заштедете и изградете",
   "toggle_widgets_preview": "Вклучете го прегледот на виџетите",
   "stop_program": "Стоп програма",
   "run_program": "Стартувај програма",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Сензор за влажност",
       "Simulator.Sensor.Luminance": "Сензор за светлина",
       "Simulator.Meter.Watts": "Мерач на вати",
-      "Simulator.Meter.Watts.Max": "Макс Ват моќ",
+      "Simulator.Meter.Watts.Max": "Макс Ват моќност",
       "Simulator.Sensor.DataFrequency": "Фреквенција на емитување на симулатор"
     },
     "505": {
@@ -287,6 +287,12 @@
       "Description": "Откријте предмети користејќи претходно обучен YOLO11 модел.",
       "ML.ObjectDetection": "Овозможи откривање објекти",
       "ML.ObjectDetection.TriggerDetect": "Список одделен со запирки на работи (на англиски) што ќе го активира алармот. (на пр: мачка, куче, лице, ранец, куфер)",
+      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Проценка на позата",
+      "Description": "Откривање клучна точка преку проценка на позата, со користење на сопствени модели ONNX или стандарден претходно обучен YOLOv11 модел (специфичен за човечка поза).",
+      "ML.PoseEstimation": "Овозможи проценка на поза",
       "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO11 (.onnx)"
     }
   }

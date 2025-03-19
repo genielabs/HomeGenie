@@ -127,7 +127,7 @@
   "main_code": "Hlavní",
   "context_code": "Kontext",
   "main_code_empty_note": "\"Hlavní\" kód je prázdný. Pomocí editoru \"Visual code\" vygenerujte tento kód: - Otevřete kategorii \"Program\" z palety příkazů vlevo - Přetáhněte blok typu \"Main\" na pracovní plochu vizuálního kódu - Přidejte do něj další bloky kódu pro implementaci akcí a logiky tohoto programu Program \"Main\" lze spustit buď ručně, nebo automaticky na základě podmínek případně uvedených v kódu nastavení.",
-  "setup_code_empty_note": "Kód \"Nastavení\" je prázdný. Pomocí editoru \"Visual code\" vygenerujte tento kód: - Otevřete kategorii \"Program\" z palety příkazů vlevo - Přetáhněte blok typu \"Setup\" na pracovní plochu vizuálního kódu - Přidejte do něj další bloky kódu, abyste určili podmínky, které spustí spuštění \"Hlavního\" kódu Tento kód se vyhodnotí pokaždé, když dojde k nové události a alespoň jednou za minutu.",
+  "setup_code_empty_note": "Kód \"Nastavení\" je prázdný. Pomocí editoru \"Visual code\" vygenerujte tento kód: - Otevřete kategorii \"Program\" z palety příkazů vlevo - Přetáhněte blok typu \"Setup\" na pracovní plochu vizuálního kódu - Přidejte do něj další bloky kódu, abyste určili podmínky, které spustí spuštění \"Hlavního\" kódu Tento kód se vyhodnotí pokaždé, když nastane nová událost a alespoň jednou za minutu.",
   "capture_commands": "Zachyťte příkazy",
   "capture_commands_description": "Přidejte do programu všechny příkazy prováděné ručně na widgetech.",
   "capture_commands_pause": "Pauza mezi příkazy",
@@ -195,20 +195,20 @@
       "IpCamera.ImageURL": "Adresa URL rozhraní API obrázku fotoaparátu (viz dokumenty k fotoaparátu)",
       "IpCamera.Username": "uživatelské jméno (volitelné)",
       "IpCamera.Password": "Heslo (volitelné)",
-      "Widget.Config.fps": "Snímky za sekundu",
+      "Widget.Config.fps": "Počet snímků za sekundu",
       "Widget.Config.size": "Velikost widgetu"
     },
     "90": {
       "Title": "Bezpečnostní poplachový systém",
       "Description": "Použijte senzory a další zařízení k implementaci bezpečnostního poplašného systému.",
       "HomeGenie.SecurityAlarm": "Použití jako alarm/stroboskop",
-      "HomeGenie.SecurityTriggerHome": "Spouští se také při aktivaci Home",
+      "HomeGenie.SecurityTriggerHome": "Spustí se také při aktivaci Home",
       "HomeGenie.SecuritySensor": "Použití jako bezpečnostní senzor",
       "ConfigureOptions.Email.Recipients": "Čárkami oddělený seznam příjemců e-mailů pro upozornění na alarm",
       "ConfigureOptions.System.ArmDelay": "Zpoždění paže (sekundy)",
       "ConfigureOptions.System.SirenStartTime": "Zpoždění spuštění sirén (sekundy)",
       "ConfigureOptions.System.SirenMaxTime": "Maximální čas sirén (sekundy, 0 = nekonečno)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Program spustit při aktivaci",
+      "ConfigureOptions.Trigger.ArmedProgram": "Program, který se spustí při aktivaci",
       "ConfigureOptions.Trigger.DisarmedProgram": "Program, který se spustí při deaktivaci",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program, který se spustí při spuštění"
     },
@@ -287,6 +287,12 @@
       "Description": "Detekujte objekty pomocí předem trénovaného modelu YOLO11.",
       "ML.ObjectDetection": "Povolit detekci objektů",
       "ML.ObjectDetection.TriggerDetect": "Čárkami oddělený seznam věcí (v angličtině), které spustí alarm. (např.: kočka, pes, osoba, batoh, kufr)",
+      "ConfigureOptions.Yolo.ModelPath": "Cesta souboru modelu YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Odhad pozice",
+      "Description": "Detekce klíčových bodů pomocí odhadu pozice pomocí vlastních modelů ONNX nebo výchozího předem trénovaného modelu YOLOv11 (specifické pro lidskou pozici).",
+      "ML.PoseEstimation": "Povolit odhad pozice",
       "ConfigureOptions.Yolo.ModelPath": "Cesta souboru modelu YOLO11 (.onnx)"
     }
   }

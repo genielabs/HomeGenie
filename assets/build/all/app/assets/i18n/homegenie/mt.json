@@ -126,8 +126,8 @@
   "setup_code": "Setup",
   "main_code": "Prinċipali",
   "context_code": "Kuntest",
-  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm.",
-  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur tal-\"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokk tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra tal-kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba fil-minuta.",
+  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm Il-programm \"Main\" jista 'jitħaddem manwalment jew awtomatikament ibbażat fuq kundizzjonijiet eventwalment mogħtija fil-kodiċi Setup.",
+  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra ta 'kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba kull minuta.",
   "capture_commands": "Qbid kmandi",
   "capture_commands_description": "Żid il-kmandi kollha mwettqa manwalment fuq widgets mal-programm.",
   "capture_commands_pause": "Pawża bejn il-kmandi",
@@ -175,7 +175,7 @@
       "VirtualThermostat.TemperatureModule": "Sensor tat-temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Swiċċ tat-tisħin",
       "VirtualThermostat.CoolingSwitchModule": "Swiċċ li jkessaħ",
-      "ConfigureOptions.ThermostatsCount": "Numru ta' termostats"
+      "ConfigureOptions.ThermostatsCount": "Numru ta' termostati"
     },
     "81": {
       "Title": "Monitor tal-Enerġija",
@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "Kamera IP ġenerika",
-      "Description": "Wiri/għalf ta' l-immaġni tar-rotta minn kamera IP.",
+      "Description": "Wiri/rotot immaġni tal-għalf minn kamera IP.",
       "IpCamera.ImageURL": "URL tal-API tal-immaġni tal-kamera (ara d-dokumenti tal-kamera tiegħek)",
       "IpCamera.Username": "Username (mhux obbligatorju)",
       "IpCamera.Password": "Password (mhux obbligatorju)",
@@ -285,8 +285,14 @@
     "910": {
       "Title": "Sejbien ta' oġġetti",
       "Description": "Issib oġġetti billi tuża mudell YOLO11 imħarreġ minn qabel.",
-      "ML.ObjectDetection": "Jippermettu l-iskoperta ta 'oġġetti",
+      "ML.ObjectDetection": "Jippermettu l-iskoperta tal-oġġetti",
       "ML.ObjectDetection.TriggerDetect": "Lista separata b'virgola ta' affarijiet (bl-Ingliż) li se jikkawżaw l-allarm. (eż.: qattus, kelb, persuna, backpack, bagalja)",
+      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Pożizzjoni stima",
+      "Description": "Sejbien ta 'punti ewlenin permezz ta' stima tal-pożi, bl-użu ta 'mudelli ONNX personalizzati jew il-mudell default YOLOv11 imħarreġ minn qabel (speċifiku għall-pożizzjoni umana).",
+      "ML.PoseEstimation": "Attiva l-istima tal-pożi",
       "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
     }
   }

@@ -55,9 +55,9 @@
   "cronwizard_end_time": "Tempus finis",
   "cronwizard_minutes": "Minuta",
   "cronwizard_hours": "Horae",
-  "cronwizard_days": "diebus",
+  "cronwizard_days": "Dierum",
   "cronwizard_months": "Menses",
-  "cronwizard_minuteselect_everyminute": "Singulis minutis",
+  "cronwizard_minuteselect_everyminute": "Omni momento",
   "cronwizard_minuteselect_everynthminute": "Omne datum minuta",
   "cronwizard_minuteselect_selectedminutes": "Electus minuta",
   "cronwizard_hourselect_everyhour": "Omnis hora",
@@ -266,7 +266,7 @@
       "ConfigureOptions.Email.SmtpUserName": "3. ESMTP username (libitum)",
       "ConfigureOptions.Email.SmtpPassword": "4. ESMTP password (libitum)",
       "ConfigureOptions.Email.SmtpPort": "5. ESMTP servo portum",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. ESMTP servo usum SSL"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. ESMTP servo usu SSL"
     },
     "145": {
       "Title": "Dolor Fabrica",
@@ -287,6 +287,12 @@
       "Description": "Objects deprehendere utens exemplar praecomprehensum YOLO11.",
       "ML.ObjectDetection": "Admitte obiecti deprehensio",
       "ML.ObjectDetection.TriggerDetect": "Comma-separatis rerum indice (anglice) id terrorem trigger. (eg: cattus, canis, persona, mantica, vidulus)",
+      "ConfigureOptions.Yolo.ModelPath": "Iter YOLO11 exemplar lima (.onnx)"
+    },
+    "911": {
+      "Title": "Pose aestimationem",
+      "Description": "Keypoint detectio per aestimationem ponunt, utens consuetudine ONNX exemplorum vel defectu praeordinationis YOLOv11 (hominis pose-specificae).",
+      "ML.PoseEstimation": "Admitte pose aestimationem",
       "ConfigureOptions.Yolo.ModelPath": "Iter YOLO11 exemplar lima (.onnx)"
     }
   }

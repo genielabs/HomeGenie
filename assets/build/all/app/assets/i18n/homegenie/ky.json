@@ -2,7 +2,7 @@
   " ": "-------------------------------------",
   "welcome_to_homegenie": "HomeGenie'ге кош келиңиз!",
   "welcome_subtitle": "Программалануучу автоматташтырылган интеллект",
-  "not_configured_yet": "Система азырынча конфигурациялана элек. Бул орнотуу устасы сизге системаңызды бир нече кадам менен иштетүүгө жардам берет.",
+  "not_configured_yet": "Система азырынча конфигурациялана элек. Бул орнотуу устасы системаңызды бир нече кадам менен иштетүүгө жардам берет.",
   "system_config_start_with_base_and_backup": "Камдык файлдан калыбына келтирүү",
   "system_config_start_with_default_setup": "Демейки жөндөө",
   "system_config_include_demo": "Демонстрацияны симуляцияланган түзмөк аракети менен камтыңыз",
@@ -73,12 +73,12 @@
   "cronwizard_schedule_set_slot_end": "{{start}} баштап.<span class=\"notranslate\"><br/></span> Убакыт аралыгын бүтүрүү.",
   "cronwizard_bindings_define_types_and_modules": "Бул графикке баш ийүүчү типтерди жана модулдарды аныктоо (милдеттүү эмес)",
   "cronwizard_bindings_select_types": "Түрлөрдү тандаңыз",
-  "cronwizard_action_set_action_to_execute": "Бул окуя болгон учурда аткарыла турган иш-аракетти орнотуңуз",
+  "cronwizard_action_set_action_to_execute": "Бул окуя болгон учурда аткарыла турган иш-аракетти коюңуз",
   "cronwizard_action_preset_actions": "Алдын ала коюлган аракеттер",
   "cronwizard_action_preset_every_occurrence": "Ар бир окуя боюнча",
   "cronwizard_action_preset_slot_start": "Убакыт аралыгынын башында",
   "cronwizard_action_preset_slot_end": "Убакыт аралыгынын аягында",
-  "cronwizard_action_custom_script": "Ыңгайлаштырылган аракет сценарийи",
+  "cronwizard_action_custom_script": "Ыңгайлаштырылган аракет скрипти",
   "cronwizard_action_no_action": "Арекет жок",
   "cronwizard_action_schedule_variable_hint": "Cron туюнтмаларында өзгөрмө катары <span class=\"notranslate color-primary\">@ {{name}}</span> колдонуңуз же бул окуяга шилтеме кылуу үчүн автоматташтыруу программаларында <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> колдонуңуз.",
   "scheduler_preset_action_command_turn_on": "Күйгүзүү",
@@ -126,7 +126,7 @@
   "setup_code": "Жайгашуу",
   "main_code": "Негизги",
   "context_code": "Контекст",
-  "main_code_empty_note": "\"Негизги\" код бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы командалык палитрадан \"Программа\" категориясын ачыңыз - Визуалдык коддун жумушчу мейкиндигинде \"Негизги\" тибиндеги блокту сүйрөңүз - Бул программанын иш-аракеттерин жана логикасын ишке ашыруу үчүн анын ичине башка код блокторун кошуңуз \"Негизги\" программасы акыры Орнотуу кодунда берилген шарттардын негизинде кол менен же автоматтык түрдө иштетилет.",
+  "main_code_empty_note": "\"Негизги\" код бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы командалык палитрадан \"Программа\" категориясын ачыңыз - Визуалдык коддун жумушчу мейкиндигинде \"Негизги\" типтеги блокту сүйрөңүз - Бул программанын иш-аракеттерин жана логикасын ишке ашыруу үчүн анын ичине башка код блокторун кошуңуз \"Негизги\" программасы акыры Орнотуу кодунда берилген шарттардын негизинде кол менен же автоматтык түрдө иштетилет.",
   "setup_code_empty_note": "\"Орнотуу\" коду бош. Бул кодду түзүү үчүн \"Визуалдык код\" редакторун колдонуңуз: - Сол жактагы командалык палитрадан \"Программа\" категориясын ачыңыз - Визуалдык коддун жумушчу мейкиндигинде \"Орнотуу\" тибиндеги блокту сүйрөңүз - \"Негизги\" коддун аткарылышын шарттай турган шарттарды аныктоо үчүн анын ичине башка код блокторун кошуңуз Бул код жаңы окуя болгон сайын жана мүнөтүнө бир жолудан кем эмес бааланат.",
   "capture_commands": "Тартуу буйруктары",
   "capture_commands_description": "Виджеттерде кол менен аткарылган бардык буйруктарды программага кошуңуз.",
@@ -136,7 +136,7 @@
   "$options": {
     "16": {
       "Title": "Level Memory",
-      "Description": "Акыркы диммер деңгээлин сактоо жана кайра чакыртып алуу.",
+      "Description": "Акыркы диммер деңгээлин сактап жана кайра чакырыңыз.",
       "HomeGenie.LevelMemory": "Күйгүзүлгөндө акыркы жарык деңгээлин кайра чакырыңыз",
       "HomeGenie.LevelMemory.SimulateOnly": "Окшош гана"
     },
@@ -162,7 +162,7 @@
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "Сервердин дареги",
       "ConfigureOptions.ServerPort": "Сервер порту",
-      "ConfigureOptions.Encryption": "Үчтөн аягына шифрлөөнү иштетүү (E2EE)",
+      "ConfigureOptions.Encryption": "Үчтөн аягына чейин шифрлөөнү иштетүү (E2EE)",
       "ConfigureOptions.WebSockets": "WebSockets колдонуңуз",
       "ConfigureOptions.TLS": "TLS/SSL иштетүү",
       "ConfigureOptions.Username": "Колдонуучунун аты (милдеттүү эмес)",
@@ -174,7 +174,7 @@
       "Description": "Термостаттын функцияларын ишке ашыруу үчүн каалаган температура сенсорун жана акылдуу которгучту колдонуңуз.",
       "VirtualThermostat.TemperatureModule": "Температура сенсору",
       "VirtualThermostat.HeatingSwitchModule": "Жылытуу өчүргүч",
-      "VirtualThermostat.CoolingSwitchModule": "Муздатуу алмаштыргыч",
+      "VirtualThermostat.CoolingSwitchModule": "Муздатуу өчүргүч",
       "ConfigureOptions.ThermostatsCount": "Термостаттардын саны"
     },
     "81": {
@@ -201,12 +201,12 @@
     "90": {
       "Title": "Коопсуздук Сигнал системасы",
       "Description": "Коопсуздук сигнализация системасын ишке ашыруу үчүн сенсорлорду жана башка түзүлүштөрдү колдонуңуз.",
-      "HomeGenie.SecurityAlarm": "Ойготкуч/строб катары колдонуңуз",
+      "HomeGenie.SecurityAlarm": "Сигнал/строб катары колдонуу",
       "HomeGenie.SecurityTriggerHome": "Ошондой эле үй куралданганда ишке кирет",
       "HomeGenie.SecuritySensor": "Коопсуздук сенсору катары колдонуңуз",
       "ConfigureOptions.Email.Recipients": "Ойготкуч эскертмелери үчүн алуучулардын электрондук каттарынын үтүр менен бөлүнгөн тизмеси",
       "ConfigureOptions.System.ArmDelay": "Кол кечигүү (секунд)",
-      "ConfigureOptions.System.SirenStartTime": "Сиреналар кечигүү (секунд)",
+      "ConfigureOptions.System.SirenStartTime": "Сиреналардын кечиктирилиши (секунд)",
       "ConfigureOptions.System.SirenMaxTime": "Сиреналардын максималдуу убактысы (секунд, 0=чексиз)",
       "ConfigureOptions.Trigger.ArmedProgram": "Куралданганда иштей турган программа",
       "ConfigureOptions.Trigger.DisarmedProgram": "Куралсызданганда иштей турган программа",
@@ -222,7 +222,7 @@
       "Description": "UI жана башкаруу такталарынын жөндөөлөрүн сактоо үчүн колдонулган кардардын конфигурация профилдерин башкаруу үчүн API ишке ашырат."
     },
     "400": {
-      "Title": "Virtual Modules Demo",
+      "Title": "Виртуалдык модулдардын демо",
       "Description": "Виртуалдык түзмөктүн маанилерин кол менен орнотуңуз.",
       "Sensor.Temperature": "Температуранын мааниси",
       "Sensor.Luminance": "Жарыктык мааниси",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Нымдуулук сенсору",
       "Simulator.Sensor.Luminance": "Жарык сенсору",
       "Simulator.Meter.Watts": "Ватт метр",
-      "Simulator.Meter.Watts.Max": "Max Watt кубаттуулугу",
+      "Simulator.Meter.Watts.Max": "Макс ватт кубаттуулугу",
       "Simulator.Sensor.DataFrequency": "Симулятор чыгаруу жыштыгы"
     },
     "505": {
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "E-mail аккаунту",
-      "Description": "Электрондук каттарды жөнөтүү/кабыл алуу үчүн тутум программалары колдонгон электрондук почта каттоо эсебинин маалыматын сактайт.",
+      "Description": "Электрондук каттарды жөнөтүү/кабыл алуу үчүн тутум программалары колдонгон электрондук почта эсебинин маалыматын сактайт.",
       "ConfigureOptions.Email.Sender": "1. E-mail дареги",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP серверинин дареги",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP колдонуучу аты (милдеттүү эмес)",
@@ -287,6 +287,12 @@
       "Description": "Алдын ала даярдалган YOLO11 моделин колдонуп объекттерди аныктоо.",
       "ML.ObjectDetection": "Объекттерди аныктоону иштетүү",
       "ML.ObjectDetection.TriggerDetect": "Ойготкучту иштете турган нерселердин үтүр менен бөлүнгөн тизмеси (англис тилинде). (мис.: мышык, ит, адам, рюкзак, чемодан)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгү файлынын жолу (.onnx)"
+    },
+    "911": {
+      "Title": "Поза баалоо",
+      "Description": "Ыңгайлаштырылган ONNX моделдерин же демейки алдын ала үйрөтүлгөн YOLOv11 моделин (адамдын позасына тиешелүү) колдонуу менен позаны баалоо аркылуу негизги чекитти аныктоо.",
+      "ML.PoseEstimation": "Позаны баалоону иштетүү",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгү файлынын жолу (.onnx)"
     }
   }

@@ -163,7 +163,7 @@
       "ConfigureOptions.ServerAddress": "Адрес сервера",
       "ConfigureOptions.ServerPort": "Порт сервера",
       "ConfigureOptions.Encryption": "Включить сквозное шифрование (E2EE)",
-      "ConfigureOptions.WebSockets": "Использовать WebSockets",
+      "ConfigureOptions.WebSockets": "Использовать веб-сокеты",
       "ConfigureOptions.TLS": "Включить TLS/SSL",
       "ConfigureOptions.Username": "Имя пользователя (необязательно)",
       "ConfigureOptions.Password": "Пароль (необязательно)",
@@ -287,6 +287,12 @@
       "Description": "Обнаружение объектов с использованием предварительно обученной модели YOLO11.",
       "ML.ObjectDetection": "Включить обнаружение объектов",
       "ML.ObjectDetection.TriggerDetect": "Список вещей, разделенных запятыми (на английском языке), которые вызовут срабатывание сигнализации. (например: кошка, собака, человек, рюкзак, чемодан)",
+      "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "Оценка позы",
+      "Description": "Обнаружение ключевых точек посредством оценки позы с использованием пользовательских моделей ONNX или предварительно обученной модели YOLOv11 по умолчанию (специфичной для позы человека).",
+      "ML.PoseEstimation": "Включить оценку позы",
       "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
     }
   }

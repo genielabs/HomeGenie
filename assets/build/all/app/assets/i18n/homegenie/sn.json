@@ -162,7 +162,7 @@
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "Sevha kero",
       "ConfigureOptions.ServerPort": "Server port",
-      "ConfigureOptions.Encryption": "Gonesa encryption yekupedzisira-ku-kuguma (E2EE)",
+      "ConfigureOptions.Encryption": "Gonesa magumo-kumagumo encryption (E2EE)",
       "ConfigureOptions.WebSockets": "Shandisa WebSockets",
       "ConfigureOptions.TLS": "Gonesa TLS/SSL",
       "ConfigureOptions.Username": "Username (sarudzo)",
@@ -228,7 +228,7 @@
       "Sensor.Luminance": "Luminance value",
       "Sensor.MotionDetect": "Mamiriro ekuona mafambiro",
       "Status.Battery": "Battery level",
-      "Sensor.DoorWindow": "Door / Window sensor chimiro (yakavhurika / yakavharwa)",
+      "Sensor.DoorWindow": "Door / Window sensor mamiriro (yakavhurika / yakavharwa)",
       "Status.Level": "Chinja chimiro (batidza/kudzima)"
     },
     "401": {
@@ -274,7 +274,7 @@
       "HomeGenie.SmartLights.Enable": "Vhura 'Smart Device'",
       "HomeGenie.SmartLights.OnMotionDetect": "Inodzorwa ne sensor (sarudzo)",
       "HomeGenie.SmartLights.CheckLuminosity": "Inodzorwa nechiedza sensor (sarudzo)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Dzima mushure menguva yekusaita basa (masekondi)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Dzima mushure mekutadza kuita basa (masekondi)",
       "HomeGenie.SmartLights.MinLuminance": "Batidza kana luminance iri pazasi:"
     },
     "8": {
@@ -287,6 +287,12 @@
       "Description": "Tsvaga zvinhu uchishandisa yakadzidziswa YOLO11 modhi.",
       "ML.ObjectDetection": "Ita kuti zvinhu zvionekwe",
       "ML.ObjectDetection.TriggerDetect": "Comma-yakapatsanurwa runyorwa rwezvinhu (muchiRungu) izvo zvinomutsa alarm. (semuenzaniso: katsi, imbwa, munhu, bhegi, bhegi)",
+      "ConfigureOptions.Yolo.ModelPath": "Nzira yeYOLO11 modhi faira (.onnx)"
+    },
+    "911": {
+      "Title": "Pose estimation",
+      "Description": "Keypoint yekuona kuburikidza nepose estimation, uchishandisa yakajairwa ONNX modhi kana yakagara yakadzidziswa YOLOv11 modhi (yemunhu pose-yakananga).",
+      "ML.PoseEstimation": "Bvisa kufungidzira kwepose",
       "ConfigureOptions.Yolo.ModelPath": "Nzira yeYOLO11 modhi faira (.onnx)"
     }
   }

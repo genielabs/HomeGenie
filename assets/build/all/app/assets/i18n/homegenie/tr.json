@@ -214,7 +214,7 @@
     },
     "95": {
       "Title": "Olayların kaydı",
-      "Description": "Cihaz etkinliğini kaydedin.",
+      "Description": "Cihaz aktivitesini kaydedin.",
       "EventsLogger.EnableLogging": "Olanak vermek"
     },
     "111": {
@@ -287,6 +287,12 @@
       "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri tespit edin.",
       "ML.ObjectDetection": "Nesne algılamayı etkinleştir",
       "ML.ObjectDetection.TriggerDetect": "Alarmı tetikleyecek şeylerin (İngilizce) virgülle ayrılmış listesi. (örneğin: kedi, köpek, kişi, sırt çantası, bavul)",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
+    },
+    "911": {
+      "Title": "Poz tahmini",
+      "Description": "Özel ONNX modelleri veya varsayılan önceden eğitilmiş YOLOv11 modeli (insan pozuna özgü) kullanılarak poz tahmini yoluyla anahtar nokta tespiti.",
+      "ML.PoseEstimation": "Poz tahminini etkinleştir",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
     }
   }

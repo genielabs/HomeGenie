@@ -2,12 +2,12 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "ຍິນດີຕ້ອນຮັບສູ່ HomeGenie!",
   "welcome_subtitle": "ອັດ​ຕະ​ໂນ​ມັດ​ອັດ​ຕະ​ໂນ​ມັດ​ຂອງ​ໂຄງ​ການ​",
-  "not_configured_yet": "ລະບົບບໍ່ໄດ້ຕັ້ງຄ່າເທື່ອ. ຕົວຊ່ວຍສ້າງນີ້ຈະຊ່ວຍເຈົ້າໃນການເຮັດໃຫ້ລະບົບຂອງເຈົ້າຂຶ້ນ ແລະເຮັດວຽກໄດ້ໃນສອງສາມຂັ້ນຕອນ.",
+  "not_configured_yet": "ລະບົບບໍ່ໄດ້ຕັ້ງຄ່າເທື່ອ. ຕົວຊ່ວຍສ້າງການຕັ້ງຄ່ານີ້ຈະຊ່ວຍເຈົ້າໃນການເຮັດໃຫ້ລະບົບຂອງເຈົ້າຂຶ້ນ ແລະເຮັດວຽກໄດ້ໃນສອງສາມຂັ້ນຕອນ.",
   "system_config_start_with_base_and_backup": "ຟື້ນ​ຟູ​ຈາກ​ໄຟລ​໌​າ​ຮອງ​",
   "system_config_start_with_default_setup": "ຕັ້ງຄ່າເລີ່ມຕົ້ນ",
   "system_config_include_demo": "ລວມເອົາການສາທິດກັບກິດຈະກໍາອຸປະກອນການຈໍາລອງ",
   "system_config_additional_features": "ຄຸນສົມບັດເພີ່ມເຕີມ",
-  "system_config_manual_setup": "ການ​ຕັ້ງ​ຄ່າ​ດ້ວຍ​ມື​",
+  "system_config_manual_setup": "ການຕິດຕັ້ງດ້ວຍມື",
   "interfaces": "ການໂຕ້ຕອບ",
   "Protocols.UPnP": "ຕົວຄວບຄຸມ UPnP",
   "HomeAutomation.X10": "ຕົວຄວບຄຸມ X10",
@@ -21,7 +21,7 @@
   "repositories": "ບ່ອນເກັບມ້ຽນ",
   "packages": "ການຫຸ້ມຫໍ່",
   "installed_packages": "ແພັກເກດທີ່ຕິດຕັ້ງແລ້ວ",
-  "upload_package": "ອັບໂຫຼດຊຸດ",
+  "upload_package": "ອັບໂຫຼດແພັກເກດ",
   "create_package": "ສ້າງຊຸດໃຫມ່",
   "programs_version": "ສະບັບໂປຣແກຣມ",
   "http_settings": "ການຕັ້ງຄ່າ HTTP",
@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "ເລີ່ມ {{start}} .<span class=\"notranslate\"><br/></span> ຕັ້ງເວລາສິ້ນສຸດ.",
   "cronwizard_bindings_define_types_and_modules": "ກໍານົດປະເພດແລະໂມດູນທີ່ຂຶ້ນກັບຕາຕະລາງນີ້ (ທາງເລືອກ)",
   "cronwizard_bindings_select_types": "ເລືອກປະເພດ",
-  "cronwizard_action_set_action_to_execute": "ກໍານົດການດໍາເນີນການເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
+  "cronwizard_action_set_action_to_execute": "ກໍານົດການປະຕິບັດເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
   "cronwizard_action_preset_actions": "ຄຳສັ່ງທີ່ຕັ້ງໄວ້ລ່ວງໜ້າ",
   "cronwizard_action_preset_every_occurrence": "ໃນທຸກໆເຫດການ",
   "cronwizard_action_preset_slot_start": "ໃນຕອນເລີ່ມຕົ້ນຂອງເວລາ",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "ທາງເລືອກ",
   "scheduler_preset_action_program_say": "ເວົ້າ",
   "scheduler_preset_action_config_message": "ຂໍ້ຄວາມ",
-  "save_and_build": "ບັນທຶກແລະສ້າງ",
+  "save_and_build": "ຊ່ວຍ​ປະ​ຢັດ​ແລະ​ການ​ກໍ່​ສ້າງ​",
   "toggle_widgets_preview": "ສະຫຼັບການສະແດງຕົວຢ່າງວິກເຈັດ",
   "stop_program": "ຢຸດໂຄງການ",
   "run_program": "ດໍາເນີນໂຄງການ",
@@ -111,7 +111,7 @@
   "program_status_running": "ແລ່ນ",
   "program_status_background": "ຄວາມເປັນມາ",
   "program_status_stopping": "ການຢຸດເຊົາ",
-  "program_status_stopped": "ຢຸດ",
+  "program_status_stopped": "ຢຸດເຊົາ",
   "program_status_interrupted": "ຂັດຂວາງ",
   "program_status_disabled": "ຄົນພິການ",
   "program_status_enabled": "ເປີດໃຊ້ແລ້ວ",
@@ -135,7 +135,7 @@
   "capture_pause_asis": "ດັ່ງທີ່",
   "$options": {
     "16": {
-      "Title": "ລະດັບຄວາມຈໍາ",
+      "Title": "ຫນ່ວຍຄວາມຈໍາລະດັບ",
       "Description": "ເກັບຮັກສາແລະຈື່ຈໍາລະດັບ dimmer ສຸດທ້າຍ.",
       "HomeGenie.LevelMemory": "ຈື່ລະດັບແສງສຸດທ້າຍເມື່ອເປີດ",
       "HomeGenie.LevelMemory.SimulateOnly": "ຈຳລອງເທົ່ານັ້ນ"
@@ -180,7 +180,7 @@
     "81": {
       "Title": "ຕິດຕາມກວດກາພະລັງງານ",
       "Description": "ສ້າງສະຖິຕິການບໍລິໂພກພະລັງງານ ແລະການນຳໃຊ້ອຸປະກອນ.",
-      "EnergyManagement.MonitorStatus": "ຕິດຕາມສະຖານະ",
+      "EnergyManagement.MonitorStatus": "ຕິດ​ຕາມ​ກວດ​ກາ​ສະ​ຖາ​ນະ​ພາບ​",
       "EnergyManagement.MonitorWatts": "ຕິດຕາມການບໍລິໂພກພະລັງງານ"
     },
     "82": {
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "ເຊັນເຊີຄວາມຊຸ່ມຊື່ນ",
       "Simulator.Sensor.Luminance": "ເຊັນເຊີແສງ",
       "Simulator.Meter.Watts": "ວັດວັດ",
-      "Simulator.Meter.Watts.Max": "ພະລັງງານສູງສຸດ",
+      "Simulator.Meter.Watts.Max": "ພະລັງງານສູງສຸດຂອງວັດ",
       "Simulator.Sensor.DataFrequency": "ຕົວຈຳລອງປ່ອຍຄວາມຖີ່"
     },
     "505": {
@@ -280,13 +280,19 @@
     "8": {
       "Title": "ສະຖານະການສີຂອງແສງຕາເວັນ",
       "Description": "ຕົວຢ່າງສະຖານະການ \"ຕາເວັນຂຶ້ນ\" ສໍາລັບໄຟ LED ປ່ຽນສີ.",
-      "Scenarios.SunriseColors": "ເຊື່ອມຕໍ່ກັບສະຖານະການ Sunrise Colors"
+      "Scenarios.SunriseColors": "ເຊື່ອມຕໍ່ກັບສະຖານະການສີ Sunrise"
     },
     "910": {
       "Title": "ກວດຫາວັດຖຸ",
       "Description": "ກວດຫາວັດຖຸໂດຍໃຊ້ຕົວແບບ YOLO11 ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.ObjectDetection": "ເປີດໃຊ້ການກວດຫາວັດຖຸ",
       "ML.ObjectDetection.TriggerDetect": "ລາຍຊື່ສິ່ງຕ່າງໆທີ່ຂັ້ນດ້ວຍເຄື່ອງໝາຍຈຸດ (ໃນພາສາອັງກິດ) ທີ່ຈະກະຕຸ້ນເຕືອນ. (ເຊັ່ນ: cat, dog, person, backpack, suitcase)",
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
+    },
+    "911": {
+      "Title": "ສ້າງການຄາດຄະເນ",
+      "Description": "ການກວດຫາຈຸດສຳຄັນຜ່ານການຄາດຄະເນການຕັ້ງຕົວແບບ, ໂດຍໃຊ້ໂມເດວ ONNX ແບບກຳນົດເອງ ຫຼືຮູບແບບ YOLOv11 ທີ່ໄດ້ຝຶກອົບຮົມໄວ້ກ່ອນເລີ່ມຕົ້ນ (ສະເພາະຕົວແບບຂອງມະນຸດ).",
+      "ML.PoseEstimation": "ເປີດ​ໃຊ້​ງານ​ການ​ຄາດ​ຄະ​ເນ​",
       "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
     }
   }
