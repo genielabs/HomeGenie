@@ -61,7 +61,7 @@
   "cronwizard_minuteselect_everynthminute": "Kila dakika",
   "cronwizard_minuteselect_selectedminutes": "Dakika zilizochaguliwa",
   "cronwizard_hourselect_everyhour": "Kila saa",
-  "cronwizard_hourselect_everynthhour": "Kila saa",
+  "cronwizard_hourselect_everynthhour": "Kila saa fulani",
   "cronwizard_hourselect_selectedhours": "Saa zilizochaguliwa",
   "cronwizard_dayselect_everyday": "Kila siku",
   "cronwizard_dayselect_selecteddays": "Siku zilizochaguliwa",
@@ -69,18 +69,18 @@
   "cronwizard_monthselect_everymonth": "Kila mwezi",
   "cronwizard_monthselect_selectedmonths": "Miezi iliyochaguliwa",
   "cronwizard_schedule_set_exact_time": "Weka wakati wa tukio.",
-  "cronwizard_schedule_set_slot_start": "Weka wakati wa kuanza.",
+  "cronwizard_schedule_set_slot_start": "Weka nafasi ya kuanza kwa wakati.",
   "cronwizard_schedule_set_slot_end": "Kuanzia {{start}} .<span class=\"notranslate\"><br/></span> Weka mwisho wa wakati.",
   "cronwizard_bindings_define_types_and_modules": "Bainisha aina na moduli ambazo ziko chini ya ratiba hii (si lazima)",
   "cronwizard_bindings_select_types": "Chagua aina",
   "cronwizard_action_set_action_to_execute": "Weka kitendo cha kutekeleza juu ya matukio ya tukio hili",
   "cronwizard_action_preset_actions": "Vitendo vilivyowekwa mapema",
   "cronwizard_action_preset_every_occurrence": "Kwa kila tukio",
-  "cronwizard_action_preset_slot_start": "Mwanzoni mwa muda",
+  "cronwizard_action_preset_slot_start": "Mwanzoni mwa nafasi ya wakati",
   "cronwizard_action_preset_slot_end": "Mwishoni mwa muda",
   "cronwizard_action_custom_script": "Hati ya kitendo maalum",
   "cronwizard_action_no_action": "Hakuna hatua",
-  "cronwizard_action_schedule_variable_hint": "Tumia <span class=\"notranslate color-primary\">@ {{name}}</span> kama kigezo katika misemo ya cron au tumia <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> katika programu za otomatiki kurejelea tukio hili.",
+  "cronwizard_action_schedule_variable_hint": "Tumia <span class=\"notranslate color-primary\">@ {{name}}</span> kama kigezo katika misemo ya cron au tumia <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> katika programu za kiotomatiki kurejelea tukio hili.",
   "scheduler_preset_action_command_turn_on": "Washa",
   "scheduler_preset_action_command_turn_off": "Zima",
   "scheduler_preset_action_command_set_level": "Weka kiwango",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Weka makadirio",
-      "Description": "Ugunduzi wa vipengele muhimu kupitia ukadiriaji wa mkao, kwa kutumia miundo maalum ya ONNX au muundo chaguomsingi wa YOLOv11 uliofunzwa mapema (mahali mahususi kwa binadamu).",
+      "Description": "Ugunduzi wa vipengele muhimu kupitia ukadiriaji wa mkao, kwa kutumia miundo maalum ya ONNX au muundo chaguomsingi wa YOLOv11 uliofunzwa awali (mahali mahususi kwa binadamu).",
       "ML.PoseEstimation": "Washa ukadiriaji wa mkao",
+      "ConfigureOptions.Yolo.ModelPath": "Njia ya muundo wa faili ya YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Mgawanyiko wa matukio",
+      "Description": "Tambua vitu na muhtasari wake kwa kutumia kielelezo cha YOLO11 kilichofunzwa awali.",
+      "ML.InstanceSegmentation": "Washa ugawaji wa mfano",
       "ConfigureOptions.Yolo.ModelPath": "Njia ya muundo wa faili ya YOLO11 (.onnx)"
     }
   }

@@ -35,7 +35,7 @@
   "modules": "Moduli",
   "empty_group": "Nisun moduli in stu gruppu.",
   "scheduler_wizard": "Scheduler Wizard",
-  "schedule_event": "Eventu",
+  "schedule_event": "Avvenimentu",
   "schedule_type_standard": "Standard",
   "schedule_type_range": "Scala di data",
   "schedule_type_cron": "Espressione cron",
@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Off",
   "scheduler_preset_action_config_mode_heat": "Calore",
-  "scheduler_preset_action_config_mode_heat_eco": "Ecunumia di calore",
+  "scheduler_preset_action_config_mode_heat_eco": "Ecunumia di u calore",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Ecunumia fresca",
   "scheduler_preset_action_program_run": "Run prugrammu",
@@ -124,7 +124,7 @@
   "visual_code": "codice visuale",
   "generated_code": "codice generatu",
   "setup_code": "Istituisci",
-  "main_code": "Principale",
+  "main_code": "Main",
   "context_code": "Cuntestu",
   "main_code_empty_note": "U codice \"principale\" hè viotu. Aduprate l'editore \"Codice visuale\" per generà stu codice: - Aprite a categuria \"Programma\" da a paleta di cumandamenti à manca - Trascinate un bloccu di tipu \"Principale\" in u spaziu di travagliu di u codice visuale - Aghjunghjite in ellu altri blocchi di codice per implementà l'azzioni è a logica di stu prugramma.",
   "setup_code_empty_note": "U codice \"Setup\" hè viotu. Aduprate l'editore \"Codice visuale\" per generà stu codice: - Aprite a categuria \"Programma\" da a paleta di cumandamenti à manca - Trascinate un bloccu di tipu \"Setup\" in u spaziu di travagliu di u codice visuale - Aghjunghjite in ellu altri blocchi di codice per determinà e cundizioni chì attivanu l'esecuzione di u codice \"Principale\" Stu codice hè valutatu ogni volta chì un novu avvenimentu si verifica è almenu una volta per minutu.",
@@ -201,7 +201,7 @@
     "90": {
       "Title": "Sistema d'Alarma di Sicurezza",
       "Description": "Aduprate sensori è altri dispositi per implementà un sistema di alarme di sicurità.",
-      "HomeGenie.SecurityAlarm": "Aduprà cum'è alarme / stroboscopiu",
+      "HomeGenie.SecurityAlarm": "Aduprà cum'è alarme / strobe",
       "HomeGenie.SecurityTriggerHome": "Si attiva ancu quandu armatu Home",
       "HomeGenie.SecuritySensor": "Aduprà cum'è sensore di sicurità",
       "ConfigureOptions.Email.Recipients": "Lista separata da virgule di e-mail di destinatari per notificazioni di alarme",
@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "Tempu max sirene (secondi, 0 = infinitu)",
       "ConfigureOptions.Trigger.ArmedProgram": "U prugramma per curriri quandu armatu",
       "ConfigureOptions.Trigger.DisarmedProgram": "U prugramma da esse svoltu quandu hè disarmatu",
-      "ConfigureOptions.Trigger.TriggeredProgram": "U prugramma da esse svoltu quandu hè attivatu"
+      "ConfigureOptions.Trigger.TriggeredProgram": "U prugramma per esse ghjudicatu quandu hè attivatu"
     },
     "95": {
       "Title": "Logging di eventi",
@@ -226,7 +226,7 @@
       "Description": "Definite manualmente i valori di u dispusitivu virtuale.",
       "Sensor.Temperature": "Valore di temperatura",
       "Sensor.Luminance": "Valore di luminanza",
-      "Sensor.MotionDetect": "Status di rilevazione di muvimentu",
+      "Sensor.MotionDetect": "Statu di rilevazione di muvimentu",
       "Status.Battery": "Livellu di batterie",
       "Sensor.DoorWindow": "Statu di sensore di porta / finestra (apertu / chjusu)",
       "Status.Level": "Cambia u statu (on/off)"
@@ -259,7 +259,7 @@
       "ConfigureOptions.DimmerInterval": "Passu di dimming"
     },
     "142": {
-      "Title": "contu E-Mail",
+      "Title": "contu e-mail",
       "Description": "Memorizza l'infurmazione di u contu di e-mail utilizatu da i prugrammi di u sistema per mandà / riceve email.",
       "ConfigureOptions.Email.Sender": "1. Indirizzu E-Mail",
       "ConfigureOptions.Email.SmtpServer": "2. indirizzu servore SMTP",
@@ -283,7 +283,7 @@
       "Scenarios.SunriseColors": "Link à u scenariu Sunrise Colors"
     },
     "910": {
-      "Title": "Rilevamentu d'ughjettu",
+      "Title": "Rilevamentu di l'ughjettu",
       "Description": "Detectà l'ogetti cù un mudellu YOLO11 pre-addestratu.",
       "ML.ObjectDetection": "Habilita a rilevazione di l'uggetti",
       "ML.ObjectDetection.TriggerDetect": "Lista di cose separate da virgula (in inglese) chì attivanu l'alarma. (per esempiu: gattu, ghjacaru, persona, saccu, valigia)",
@@ -293,6 +293,12 @@
       "Title": "Stima di posa",
       "Description": "Rilevazione di punti chjave via stima di pose, utilizendu mudelli ONNX persunalizati o u mudellu YOLOv11 pre-addestratu predeterminatu (specificu à a pose umana).",
       "ML.PoseEstimation": "Abilita l'estimazione di posa",
+      "ConfigureOptions.Yolo.ModelPath": "Percorsu di u schedariu mudellu YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentazione di l'istanza",
+      "Description": "Detectà l'uggetti è i so contorni utilizendu un mudellu YOLO11 pre-addestratu.",
+      "ML.InstanceSegmentation": "Abilita a segmentazione di l'istanza",
       "ConfigureOptions.Yolo.ModelPath": "Percorsu di u schedariu mudellu YOLO11 (.onnx)"
     }
   }

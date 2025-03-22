@@ -27,7 +27,7 @@
   "http_settings": "HTTP occasus",
   "modules_groups": "Coetus et moduli",
   "groups": "Groups",
-  "add_group": "Add coetus",
+  "add_group": "Addere coetus",
   "edit_group": "Edit group",
   "delete_group": "Delere coetus",
   "dashboard_from_group": "Creare ashboardday ex hoc coetu",
@@ -57,7 +57,7 @@
   "cronwizard_hours": "Horae",
   "cronwizard_days": "Dierum",
   "cronwizard_months": "Menses",
-  "cronwizard_minuteselect_everyminute": "Omni momento",
+  "cronwizard_minuteselect_everyminute": "Singulis minutis",
   "cronwizard_minuteselect_everynthminute": "Omne datum minuta",
   "cronwizard_minuteselect_selectedminutes": "Electus minuta",
   "cronwizard_hourselect_everyhour": "Omnis hora",
@@ -293,6 +293,12 @@
       "Title": "Pose aestimationem",
       "Description": "Keypoint detectio per aestimationem ponunt, utens consuetudine ONNX exemplorum vel defectu praeordinationis YOLOv11 (hominis pose-specificae).",
       "ML.PoseEstimation": "Admitte pose aestimationem",
+      "ConfigureOptions.Yolo.ModelPath": "Iter YOLO11 exemplar lima (.onnx)"
+    },
+    "912": {
+      "Title": "Exemplum justo",
+      "Description": "Res deprehendere earumque delineatas utentes exemplo praecognito YOLO11 .",
+      "ML.InstanceSegmentation": "Admitte exempli gratia justo",
       "ConfigureOptions.Yolo.ModelPath": "Iter YOLO11 exemplar lima (.onnx)"
     }
   }

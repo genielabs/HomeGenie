@@ -71,8 +71,8 @@
   "cronwizard_schedule_set_exact_time": "Issettja l-ħin tal-avveniment.",
   "cronwizard_schedule_set_slot_start": "Issettja l-bidu tas-slot tal-ħin.",
   "cronwizard_schedule_set_slot_end": "Tibda mill- {{start}} .<span class=\"notranslate\"><br/></span> Issettja t-tmiem tal-islott tal-ħin.",
-  "cronwizard_bindings_define_types_and_modules": "Iddefinixxi tipi u moduli li huma soġġetti għal din l-iskeda (mhux obbligatorju)",
-  "cronwizard_bindings_select_types": "Agħżel it-tipi",
+  "cronwizard_bindings_define_types_and_modules": "Iddefinixxi tipi u moduli li huma suġġetti għal din l-iskeda (mhux obbligatorju)",
+  "cronwizard_bindings_select_types": "Agħżel tipi",
   "cronwizard_action_set_action_to_execute": "Issettja azzjoni biex tesegwixxi fuq okkorrenzi ta' dan l-avveniment",
   "cronwizard_action_preset_actions": "Azzjonijiet issettjati minn qabel",
   "cronwizard_action_preset_every_occurrence": "Fuq kull okkorrenza",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Għid",
   "scheduler_preset_action_config_message": "Messaġġ",
   "save_and_build": "Issejvja u tibni",
-  "toggle_widgets_preview": "Toggle widgets preview",
+  "toggle_widgets_preview": "Aqleb il-previżjoni tal-widgets",
   "stop_program": "Waqqaf il-programm",
   "run_program": "Mexxi programm",
   "enable_to_run_program": "Ippermetti l-programm sabiex imexxih",
@@ -126,8 +126,8 @@
   "setup_code": "Setup",
   "main_code": "Prinċipali",
   "context_code": "Kuntest",
-  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm Il-programm \"Main\" jista 'jitħaddem manwalment jew awtomatikament ibbażat fuq kundizzjonijiet eventwalment mogħtija fil-kodiċi Setup.",
-  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra ta 'kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba kull minuta.",
+  "main_code_empty_note": "Il-kodiċi \"Prinċipali\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta 'kodiċi biex timplimenta azzjonijiet u loġika ta' dan il-programm.",
+  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur tal-\"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmand fuq ix-xellug - Iddreggja blokk tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fih blokki oħra tal-kodiċi biex tiddetermina l-kundizzjonijiet li se jikkawżaw l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba fil-minuta.",
   "capture_commands": "Qbid kmandi",
   "capture_commands_description": "Żid il-kmandi kollha mwettqa manwalment fuq widgets mal-programm.",
   "capture_commands_pause": "Pawża bejn il-kmandi",
@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "Kamera IP ġenerika",
-      "Description": "Wiri/rotot immaġni tal-għalf minn kamera IP.",
+      "Description": "Wiri/għalf ta' l-immaġni tar-rotta minn kamera IP.",
       "IpCamera.ImageURL": "URL tal-API tal-immaġni tal-kamera (ara d-dokumenti tal-kamera tiegħek)",
       "IpCamera.Username": "Username (mhux obbligatorju)",
       "IpCamera.Password": "Password (mhux obbligatorju)",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Pożizzjoni stima",
-      "Description": "Sejbien ta 'punti ewlenin permezz ta' stima tal-pożi, bl-użu ta 'mudelli ONNX personalizzati jew il-mudell default YOLOv11 imħarreġ minn qabel (speċifiku għall-pożizzjoni umana).",
-      "ML.PoseEstimation": "Attiva l-istima tal-pożi",
+      "Description": "Sejbien ta 'punti ewlenin permezz ta' stima tal-pożi, bl-użu ta 'mudelli ONNX personalizzati jew il-mudell default YOLOv11 imħarreġ minn qabel (speċifiku għall-pożi tal-bniedem).",
+      "ML.PoseEstimation": "Attiva stima tal-pożi",
+      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Issegmentazzjoni tal-istanza",
+      "Description": "Issib oġġetti u l-kontorni tagħhom billi tuża mudell YOLO11 imħarreġ minn qabel.",
+      "ML.InstanceSegmentation": "Ippermetti s-segmentazzjoni tal-istanza",
       "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
     }
   }

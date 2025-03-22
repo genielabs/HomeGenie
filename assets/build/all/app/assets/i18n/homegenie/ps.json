@@ -294,6 +294,12 @@
       "Description": "د پوز اټکل له لارې د کلیدي نقطو کشف، د دودیز ONNX ماډلونو یا د ډیفالټ دمخه روزل شوي YOLOv11 ماډل (د انسان پوز پورې اړوند) په کارولو سره.",
       "ML.PoseEstimation": "د پوز اټکل فعال کړئ",
       "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
+    },
+    "912": {
+      "Title": "د نمونې قطع کول",
+      "Description": "د مخکې له مخکې روزل شوي YOLO11 ماډل په کارولو سره شیان او د هغوی بڼې کشف کړئ.",
+      "ML.InstanceSegmentation": "د مثال قطع کول فعال کړئ",
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
     }
   }
 }

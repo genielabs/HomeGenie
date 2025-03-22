@@ -13,7 +13,7 @@
   "HomeAutomation.X10": "X10 controller",
   "HomeAutomation.ZWave": "Z-Wave controller",
   "HomeAutomation.ZigBee": "ZigBee controller",
-  "device_port": "Seranana fitaovana",
+  "device_port": "Port fitaovana",
   "device_driver": "Driver",
   "flow_control": "Fanaraha-maso ny fikorianan'ny rano",
   "controller": "-maso",
@@ -35,10 +35,10 @@
   "modules": "Modules",
   "empty_group": "Tsy misy modules amin'ity vondrona ity.",
   "scheduler_wizard": "Mpandrindra ny scheduler",
-  "schedule_event": "Hetsika",
+  "schedule_event": "Event",
   "schedule_type_standard": "Malagasy",
   "schedule_type_range": "Daty isan-karazany",
-  "schedule_type_cron": "Fomba fiteny Cron",
+  "schedule_type_cron": "Cron expression",
   "schedule_action": "Action",
   "schedule_occurrence_preview": "Topi-maso fisehoan-javatra",
   "time_schedule": "fandaharam-potoana",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Amin'ny faran'ny fe-potoana iray",
   "cronwizard_action_custom_script": "Script hetsika manokana",
   "cronwizard_action_no_action": "Tsy misy hetsika",
-  "cronwizard_action_schedule_variable_hint": "Mampiasà <span class=\"notranslate color-primary\">@ {{name}}</span> ho fari-pitenenana cron na ampiasao <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> amin'ny programa automatique mba hanondroana ity hetsika ity.",
+  "cronwizard_action_schedule_variable_hint": "Mampiasà <span class=\"notranslate color-primary\">@ {{name}}</span> ho faribolana amin'ny fitenenana cron na ampiasao <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> amin'ny programa automatique mba hanondroana ity hetsika ity.",
   "scheduler_preset_action_command_turn_on": "Alefaso",
   "scheduler_preset_action_command_turn_off": "Vonoy",
   "scheduler_preset_action_command_set_level": "Mametraha ambaratonga",
@@ -126,10 +126,10 @@
   "setup_code": "Hametraka",
   "main_code": "Main",
   "context_code": "teny manodidina",
-  "main_code_empty_note": "Foana ny kaody \"Main\". Ampiasao ny tonian-dahatsoratra \"Visual code\" hamoronana ity kaody ity: - Sokafy ny sokajy \"Programa\" avy amin'ny palette baiko eo ankavia - Tariho ny sakana misy karazana \"Main\" ao amin'ny sehatra fiasan'ny kaody hita maso - Ampio ao anatiny ireo sakana kaody hafa hampiharana hetsika sy lojika amin'ity programa ity Ny programa \"Main\" dia azo atao amin'ny tanana na manomboka mandeha ho azy araka ny fepetra omena ao amin'ny kaody Setup.",
+  "main_code_empty_note": "Foana ny kaody \"Main\". Ampiasao ny tonian-dahatsoratra \"Visual code\" hamoronana ity kaody ity: - Sokafy ny sokajy \"Programa\" avy amin'ny palette baiko eo ankavia - Tariho ny sakana misy karazana \"Main\" ao amin'ny sehatra fiasan'ny kaody hita maso - Ampio ao anatiny ireo sakana kaody hafa hampiharana ny hetsika sy lojika amin'ity programa ity Ny programa \"Main\" dia azo atao amin'ny tanana na manomboka mandeha ho azy araka ny fepetra omena ao amin'ny code Setup.",
   "setup_code_empty_note": "Foana ny kaody \"Setup\". Ampiasao ny tonian-dahatsoratra \"Visual code\" hamoronana ity kaody ity: - Sokafy ny sokajy \"Programa\" avy amin'ny palette baiko eo ankavia - Tariho ny sakana misy karazana \"Setup\" ao amin'ny sehatra fiasan'ny kaody hita maso - Ampio ao anatiny ireo sakana kaody hafa mba hamaritana ny fepetra izay hiteraka famonoana kaody \"Main\"",
   "capture_commands": "Misambotra baiko",
-  "capture_commands_description": "Ampio ny baiko rehetra natao tanana amin'ny widgets amin'ny programa.",
+  "capture_commands_description": "Ampio ny baiko rehetra atao amin'ny tanana amin'ny widgets amin'ny programa.",
   "capture_commands_pause": "Miato eo anelanelan'ny baiko",
   "capture_pause_none": "tsy misy",
   "capture_pause_asis": "Toy ny misy",
@@ -173,7 +173,7 @@
       "Title": "Smart Thermostat",
       "Description": "Mampiasà sensor mari-pana sy switch smart mba hampiharana ny fiasan'ny thermostat.",
       "VirtualThermostat.TemperatureModule": "sensor maripana",
-      "VirtualThermostat.HeatingSwitchModule": "Fanafanana switch",
+      "VirtualThermostat.HeatingSwitchModule": "Heating switch",
       "VirtualThermostat.CoolingSwitchModule": "Fanodinana mangatsiaka",
       "ConfigureOptions.ThermostatsCount": "Isan'ny thermostats"
     },
@@ -181,7 +181,7 @@
       "Title": "Energy Monitor",
       "Description": "Mamorona antontan'isa momba ny fanjifana angovo sy ny fampiasana fitaovana.",
       "EnergyManagement.MonitorStatus": "Manara-maso ny sata",
-      "EnergyManagement.MonitorWatts": "Manara-maso ny fandaniana angovo"
+      "EnergyManagement.MonitorWatts": "Manara-maso ny fanjifana angovo"
     },
     "82": {
       "Title": "Fomba fitsitsiana angovo",
@@ -209,7 +209,7 @@
       "ConfigureOptions.System.SirenStartTime": "Fanemorana ny fanombohan'ny Sirens (segondra)",
       "ConfigureOptions.System.SirenMaxTime": "Sirene max ora (segondra, 0=tsy manam-petra)",
       "ConfigureOptions.Trigger.ArmedProgram": "Fandaharana mihazakazaka rehefa mitam-piadiana",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Programa handeha rehefa tsy misy fitaovam-piadiana",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Programa mandeha rehefa tsy misy fitaovam-piadiana",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programa handeha rehefa trigger"
     },
     "95": {
@@ -227,7 +227,7 @@
       "Sensor.Temperature": "Sanda mari-pana",
       "Sensor.Luminance": "Sanda luminance",
       "Sensor.MotionDetect": "Toetran'ny motion detection",
-      "Status.Battery": "haavon'ny bateria",
+      "Status.Battery": "Ny haavon'ny bateria",
       "Sensor.DoorWindow": "Toetran'ny sensor varavarana/varavarankely (misokatra/mihidy)",
       "Status.Level": "Ampifamadiho ny sata (on/off)"
     },
@@ -242,7 +242,7 @@
     "410": {
       "Title": "Sensor simulator",
       "Description": "Mamoaka sanda sensor kisendrasendra.",
-      "Simulator.Sensor.Temperature": "sensor maripana",
+      "Simulator.Sensor.Temperature": "Sensor maripana",
       "Simulator.Sensor.Humidity": "Hamandoana sensor",
       "Simulator.Sensor.Luminance": "Fahazavana sensor",
       "Simulator.Meter.Watts": "Watt metatra",
@@ -262,7 +262,7 @@
       "Title": "Kaonty e-mail",
       "Description": "Mitahiry ny mombamomba ny kaonty mailaka ampiasain'ny programa rafitra amin'ny fandefasana/fandraisany mailaka.",
       "ConfigureOptions.Email.Sender": "1. Adiresy mailaka",
-      "ConfigureOptions.Email.SmtpServer": "2. Adiresy mpizara SMTP",
+      "ConfigureOptions.Email.SmtpServer": "2. Adiresin'ny mpizara SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. solon'anarana SMTP (tsy voatery)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP password (tsy voatery)",
       "ConfigureOptions.Email.SmtpPort": "5. Seranana mpizara SMTP",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Tombana pose",
-      "Description": "Famantarana ny hevi-dehibe amin'ny alalan'ny tombantombana pose, mampiasa maodely ONNX mahazatra na modely YOLOv11 efa voaofana mialoha (manokana ny maha-olona).",
+      "Description": "Famantarana ny hevi-dehibe amin'ny alàlan'ny tombantomban'ny pose, mampiasa maodely ONNX mahazatra na modely YOLOv11 efa voaofana mialoha (manokana ny maha-olona).",
       "ML.PoseEstimation": "Alefaso ny tombana pose",
+      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Fizarana ohatra",
+      "Description": "Tadiavo ny zavatra sy ny sariny amin'ny fampiasana modely YOLO11 efa voaofana mialoha.",
+      "ML.InstanceSegmentation": "Alefaso ny fizarana ohatra",
       "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
     }
   }

@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature(
+    "",
+    ForCameraInputType,
+    InstanceSegmentation,
+    "Enable instance segmentation",
+    "checkbox"
+  ).AddFeature(
+    "",
+    ForCameraInputType,
+    InstanceSegmentationTrigger,
+    "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
+    "text"
+  ).AddOption(
+    "Yolo.ModelPath",
+    Data.GetFolder() + "/yolo11n-seg.onnx",
+    "Path of YOLO11 model file (.onnx)",
+    "text"
+  );
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var inputModules = Modules.WithFeature(InstanceSegmentation);
+
+// Restart program if configuration has been changed to apply new settings.
+When.ModuleParameterChanged( (module, property) =&gt; {
+    if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions."))
+    {
+        if (Program.IsRunning) Program.Restart();
+        return true;
+    }
+    return true;
+});
+
+var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
+if (String.IsNullOrEmpty(yoloModelPath))
+{
+    Program.Notify($"Configure the path of YOLO11 'segment' model (.onnx file). {OptionButtons}");
+    Pause(5);
+    return;
+}
+
+
+// For details about this implemention see
+// *ML.net* and *YoloSharp* documentation
+
+
+try 
+{
+    var errorOccurred = false;
+    using var detectPredictor = new YoloPredictor(yoloModelPath);
+    while (Program.IsRunning)
+    {
+        if (inputModules.SelectedModules.Count == 0)
+        {
+            Pause(1);
+            continue;
+        }
+        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            try 
+            {
+                var result = detectPredictor.Segment((byte[])data);
+                //Console.WriteLine($"Result: {result}");
+                //Console.WriteLine($"Speed:  {result.Speed}");
+                var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
+                if (result.Count() &gt; 0)
+                {
+                    var output = new List&lt;SegmentResult&gt;();
+                    // Emit "Sensor.ObjectDetect.Subject.Data" event if anything
+                    // mathing the configured "TriggerDetect" list
+                    // was detected in the scene.
+                    string[] matchList = module
+                        .Parameter( InstanceSegmentationTrigger )?.Value
+                        .Split(',').Select(p =&gt; p.Trim())
+                        .Where(x =&gt; !string.IsNullOrEmpty(x))
+                        .ToArray();
+                    if (matchList.Length &gt; 0)
+                    {
+                        var filtered = new List&lt;Compunet.YoloSharp.Data.Segmentation&gt;();
+                        foreach (var r in result)
+                        {
+                            var subject = r.Name.Name;
+                            if (matchList.Contains(subject))
+                            {
+                                filtered.Add(r);
+                            }
+                        }
+                        if (filtered.Count &gt; 0)
+                        {
+                            module.Emit(ObjectDetect, "1");
+                            foreach (var r in filtered)
+                            {
+                                output.Add(new SegmentResult(){
+                                    Result = r,
+                                    Mask = ExtractAndApproximateContour(r.Mask, 100)
+                                });
+                                module.Emit(ObjectDetectSubject, r);
+                            }
+                            module.Emit(ObjectDetect, "0");
+                        }
+                    }
+                    else
+                    {
+                        foreach (var r in result)
+                        {
+                            output.Add(new SegmentResult(){
+                                Result = r,
+                                Mask = ExtractAndApproximateContour(r.Mask, 100)
+                            });
+                        }
+                    }
+
+                    if (output.Count &gt; 0)
+                    {
+                        // Emit json data for the video player (overlay data)
+                        var jsonResults = JsonConvert.SerializeObject(output);
+                        module.Emit(VideoPlayerWidgetOverlaySegment, jsonResults);                        
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                errorOccurred = true;
+                Console.WriteLine(e.Message);
+            }
+        });
+        if (errorOccurred)
+        {
+            errorOccurred = false;
+            Pause(5);
+        }
+    }
+}
+catch (Exception e)
+{
+    Program.Notify($"Error: {e.Message} {OptionButtons}");
+    Pause(5);
+    return;
+}
+</ScriptSource>
+    <ScriptContext>#using Compunet.YoloSharp.Memory
+
+const string
+OptionButtons = "[program_configure,program_disable]",
+YoloModelPath = "Yolo.ModelPath",
+ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+InstanceSegmentation = "ML.InstanceSegmentation",
+InstanceSegmentationTrigger = $"{InstanceSegmentation}.TriggerDetect",
+ObjectDetect = "Sensor.ObjectDetect",
+ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
+VideoPlayerWidgetOverlaySegment = "Widget.Data.VideoPlayer.Overlay.Segment";
+
+public class SegmentResult
+{
+    public Compunet.YoloSharp.Data.Segmentation Result;
+    public List&lt;MaskPoint&gt; Mask; 
+}
+
+public class MaskPoint
+{
+    public float X;
+    public float Y;
+    public MaskPoint(float x, float y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+public static List&lt;MaskPoint&gt; ExtractAndApproximateContour(BitmapBuffer r, int maxPoints = 25)
+{
+    var contour = ExtractContourPointsInternal(r);  // Get the initial contour
+
+    if (contour.Count &lt;= maxPoints)
+    {
+        return contour; // No need to approximate if already within the limit
+    }
+
+    // Implement a simple approximation by taking equally spaced points
+    var approximatedContour = new List&lt;MaskPoint&gt;();
+    double interval = (double)contour.Count / maxPoints;
+    for (int i = 0; i &lt; maxPoints - 1; i++)
+    {
+        int index = (int)Math.Round(i * interval); //Round for accuracy
+        approximatedContour.Add(contour[index]); // Add existing point at the index
+    }
+
+    //Ensure the loop has the final item; If the last isn't added, add it
+    if(approximatedContour.Last() != contour.Last()) {
+            approximatedContour.Add(contour.Last());
+    }
+
+    return approximatedContour;
+}
+
+
+private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r)
+{
+    int height = r.Height;
+    int width = r.Width;
+
+    // Helper function to check if a pixel is a border pixel
+    bool IsBorderPixel(BitmapBuffer mask, int x, int y)
+    {
+        if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+        {
+            return true;
+        }
+
+        return (mask[y, x - 1] &gt; 0.9 != mask[y, x] &gt; 0.9 ||
+                mask[y, x + 1] &gt; 0.9 != mask[y, x] &gt; 0.9 ||
+                mask[y - 1, x] &gt; 0.9 != mask[y, x] &gt; 0.9 ||
+                mask[y + 1, x] &gt; 0.9 != mask[y, x] &gt; 0.9);
+    }
+
+    // Find all contour pixels
+    var contourPixels = new List&lt;MaskPoint&gt;();
+    for (int y = 0; y &lt; height; y++)
+    {
+        for (int x = 0; x &lt; width; x++)
+        {
+            if (r[y, x] &gt; 0.9 &amp;&amp; IsBorderPixel(r, x, y))
+            {
+                contourPixels.Add(new MaskPoint(x, y));
+            }
+        }
+    }
+
+    if (contourPixels.Count == 0)
+    {
+        return new List&lt;MaskPoint&gt;(); // Return empty list if no shape found
+    }
+
+    // Order the contour pixels (nearest neighbor approach)
+    var contour = new List&lt;MaskPoint&gt;();
+    var startPixel = contourPixels[0];
+    contour.Add(startPixel);
+    contourPixels.Remove(startPixel);
+
+    var currentPixel = startPixel;
+
+    while (contourPixels.Count &gt; 0)
+    {
+        var nearestNeighbor = contourPixels
+            .OrderBy(p =&gt; Math.Sqrt(Math.Pow(p.X - currentPixel.X, 2) + Math.Pow(p.Y - currentPixel.Y, 2))) // Euclidean distance
+            .FirstOrDefault();
+
+        if (nearestNeighbor == null)  // No more neighbors found
+        {
+            break;
+        }
+
+        contour.Add(nearestNeighbor);
+        contourPixels.Remove(nearestNeighbor);
+        currentPixel = nearestNeighbor;
+    }
+
+    return contour;
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>instance-segmentation</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>57C08C36DF73EE65FCB3A1EBC86D359B</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>912</Address>
+    <Name>Instance Segmentation</Name>
+    <Description>Detect objects and their contour mask using a pre-trained YOLO11 model.
+</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.InstanceSegmentation</Property>
+        <Description>Enable instance segmentation</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.InstanceSegmentation.TriggerDetect</Property>
+        <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature(
+    "",
+    ForCameraInputType,
+    ObjectDetection,
+    "Enable objects detection",
+    "checkbox"
+  ).AddFeature(
+    "",
+    ForCameraInputType,
+    ObjectDetectionTrigger,
+    "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
+    "text"
+  ).AddOption(
+    YoloModelPath,
+    Data.GetFolder() + "/yolo11n.onnx",
+    "Path of YOLO11 model file (.onnx)",
+    "text"
+  );
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var inputModules = Modules.WithFeature( ObjectDetection );
+
+// Restart program if configuration has been changed to apply new settings.
+When.ModuleParameterChanged( (module, property) =&gt; {
+    if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions."))
+    {
+        if (Program.IsRunning) Program.Restart();
+        return true;
+    }
+    return true;
+});
+
+var modelPath = Program.Option(YoloModelPath)?.Value;
+if (String.IsNullOrEmpty(modelPath))
+{
+    Program.Notify($"Configure the path of YOLO11 'detect' model (.onnx file). {OptionButtons}");
+    Pause(5);
+    return;
+}
+
+
+// For details about this implemention see
+// *ML.net* and *YoloSharp* documentation
+
+
+try 
+{
+    var errorOccurred = false;
+    using var detectPredictor = new YoloPredictor(modelPath);
+    while (Program.IsRunning)
+    {
+        if (inputModules.SelectedModules.Count == 0)
+        {
+            Pause(1);
+            continue;
+        }
+        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            try 
+            {
+                var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
+                //Console.WriteLine($"Result: {result}");
+                //Console.WriteLine($"Speed:  {result.Speed}");
+                var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
+                if (result.Count() &gt; 0)
+                {
+                    var jsonResults = "";
+                    // Emit "Sensor.ObjectDetect.Subject.Data" event if anything
+                    // mathing the configured "TriggerDetect" list
+                    // was detected in the scene.
+                    string[] matchList = module
+                        .Parameter( ObjectDetectionTrigger )?.Value
+                        .Split(',').Select(p =&gt; p.Trim())
+                        .Where(x =&gt; !string.IsNullOrEmpty(x))
+                        .ToArray();
+                    if (matchList.Length &gt; 0)
+                    {
+                        var filtered = new List&lt;Compunet.YoloSharp.Data.Detection&gt;();
+                        foreach (var r in result)
+                        {
+                            var subject = r.Name.Name;
+                            if (matchList.Contains(subject))
+                            {
+                                filtered.Add(r);
+                            }
+                        }
+                        if (filtered.Count &gt; 0)
+                        {
+                            module.Emit(ObjectDetect, "1");
+                            foreach (var r in filtered)
+                            {
+                                module.Emit(ObjectDetectSubject, r);
+                            }
+                            module.Emit(ObjectDetect, "0");
+                            jsonResults = JsonConvert.SerializeObject(filtered);
+                        }
+                    }
+                    else
+                    {
+                        jsonResults = JsonConvert.SerializeObject(result);
+                    }
+
+                    if (jsonResults != "")
+                    {
+                        // Emit json data for the video player (overlay data)
+                        module.Emit(VideoPlayerWidgetOverlayDetect, jsonResults);                        
+                    }
+                }
+            } 
+            catch (Exception e)
+            {
+                errorOccurred = true;
+                Console.WriteLine(e.Message);
+            }
+        });
+        if (errorOccurred)
+        {
+            errorOccurred = false;
+            Pause(5);
+        }
+    }
+}
+catch (Exception e)
+{
+    Program.Notify($"Error: {e.Message} {OptionButtons}");
+    Pause(5);
+    return;
+}
+</ScriptSource>
+    <ScriptContext>const string
+OptionButtons = "[program_configure,program_disable]",
+YoloModelPath = "Yolo.ModelPath",
+ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+ObjectDetection = "ML.ObjectDetection",
+ObjectDetectionTrigger = $"{ObjectDetection}.TriggerDetect",
+ObjectDetect = "Sensor.ObjectDetect",
+ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
+VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>object-detection</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>32B5CE5DBF4BBCBC1D2B159888245C47</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>910</Address>
+    <Name>Object Detection</Name>
+    <Description>Detect objects using a pre-trained YOLO11 model.
+</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.ObjectDetection</Property>
+        <Description>Enable objects detection</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.ObjectDetection.TriggerDetect</Property>
+        <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program
+  .AddFeature(
+    "",
+    ForCameraInputType,
+    PoseDetection,
+    "Enable pose tracking",
+    "checkbox"
+  ).AddOption(
+    "Yolo.ModelPath",
+    Data.GetFolder() + "/yolo11n-pose.onnx",
+    "Path of YOLO11 model file (.onnx)",
+    "text"
+  );
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var inputModules = Modules.WithFeature(PoseDetection);
+
+// Restart program if configuration has been changed to apply new settings.
+When.ModuleParameterChanged( (module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions."))
+  {
+    if (Program.IsRunning) Program.Restart();
+    return true;
+  }
+  return true;
+});
+
+var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
+if (String.IsNullOrEmpty(yoloModelPath))
+{
+    Program.Notify($"Configure the path of YOLO11 'pose' model (.onnx file). {OptionButtons}");
+    Pause(5);
+    return;
+}
+
+
+// For details about this implemention see
+// *ML.net* and *YoloSharp* documentation
+
+
+try 
+{
+    var errorOccurred = false;
+    using var detectPredictor = new YoloPredictor(yoloModelPath);
+    while (Program.IsRunning)
+    {
+        if (inputModules.SelectedModules.Count == 0)
+        {
+            Pause(1);
+            continue;
+        }
+        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            try 
+            {
+                var result = detectPredictor.Pose((byte[])data);
+                //Console.WriteLine($"Result: {result}");
+                //Console.WriteLine($"Speed:  {result.Speed}");
+                if (result.Count() &gt; 0)
+                {
+                    var jsonResults = JsonConvert.SerializeObject(result);
+                    var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
+                    // Emit json data for the video player (overlay data)
+                    module.Emit(VideoPlayerWidgetOverlayPose, jsonResults);
+
+                    module.Emit(ObjectDetect, "1");
+                    foreach (var r in result)
+                    {
+                        module.Emit(ObjectDetectSubject, r);
+                    }
+                    module.Emit(ObjectDetect, "0");
+                }
+            }
+            catch (Exception e)
+            {
+                errorOccurred = true;
+                Console.WriteLine(e.Message);
+            }
+        });
+        if (errorOccurred)
+        {
+            errorOccurred = false;
+            Pause(5);
+        }
+    }
+}
+catch (Exception e)
+{
+    Program.Notify($"Error: {e.Message} {OptionButtons}");
+    Pause(5);
+    return;
+}
+</ScriptSource>
+    <ScriptContext>const string
+OptionButtons = "[program_configure,program_disable]",
+YoloModelPath = "Yolo.ModelPath",
+ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+PoseDetection = "ML.PoseEstimation",
+ObjectDetect = "Sensor.ObjectDetect",
+ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
+VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>pose-estimation</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>33ACCF5CBCB8C0791B6834D31E4A00F2</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>911</Address>
+    <Name>Pose estimation</Name>
+    <Description>Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLOv11 model (human pose-specific).</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <Property>ML.PoseEstimation</Property>
+        <Description>Enable pose tracking</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

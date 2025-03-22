@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Säga",
   "scheduler_preset_action_config_message": "Meddelande",
   "save_and_build": "Spara och bygg",
-  "toggle_widgets_preview": "Växla förhandsvisning av widgetar",
+  "toggle_widgets_preview": "Växla förhandsvisning av widgets",
   "stop_program": "Stoppa programmet",
   "run_program": "Kör programmet",
   "enable_to_run_program": "Aktivera programmet för att köra det",
@@ -283,7 +283,7 @@
       "Scenarios.SunriseColors": "Länk till Sunrise Colors scenario"
     },
     "910": {
-      "Title": "Objektdetektion",
+      "Title": "Objektdetektering",
       "Description": "Upptäck objekt med en förtränad YOLO11-modell.",
       "ML.ObjectDetection": "Aktivera objektdetektering",
       "ML.ObjectDetection.TriggerDetect": "Kommaseparerad lista över saker (på engelska) som kommer att utlösa larmet. (t.ex.: katt, hund, person, ryggsäck, resväska)",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Poseuppskattning",
-      "Description": "Nyckelpunktsdetektering via poseuppskattning, med hjälp av anpassade ONNX-modeller eller standardförtränad YOLOv11-modell (mänsklig posespecifik).",
+      "Description": "Nyckelpunktsdetektering via ställningsuppskattning, med hjälp av anpassade ONNX-modeller eller den förinställda YOLOv11-modellen (specifik för mänsklig pose).",
       "ML.PoseEstimation": "Aktivera ställningsuppskattning",
+      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO11-modellfil (.onnx)"
+    },
+    "912": {
+      "Title": "Instanssegmentering",
+      "Description": "Upptäck objekt och deras konturer med en förtränad YOLO11-modell.",
+      "ML.InstanceSegmentation": "Aktivera instanssegmentering",
       "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO11-modellfil (.onnx)"
     }
   }

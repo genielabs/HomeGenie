@@ -525,6 +525,17 @@
         "Enable pose estimation",
       "ConfigureOptions.Yolo.ModelPath":
         "Path of YOLO11 model file (.onnx)"
+    },
+
+    "912": {
+      "Title":
+        "Instance segmentation",
+      "Description":
+        "Detect objects and their outlines using a pre-trained YOLO11 model.",
+      "ML.InstanceSegmentation":
+        "Enable instance segmentation",
+      "ConfigureOptions.Yolo.ModelPath":
+        "Path of YOLO11 model file (.onnx)"
     }
 
   }

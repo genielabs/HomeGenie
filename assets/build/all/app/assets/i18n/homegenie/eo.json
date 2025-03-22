@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "Stato de detekto de moviĝo",
       "Status.Battery": "Bateria nivelo",
       "Sensor.DoorWindow": "Statuso de sensilo pordo/fenestro (malferma/fermita)",
-      "Status.Level": "Ŝalti staton (ŝaltita/malŝaltita)"
+      "Status.Level": "Ŝalti statuson (ŝaltita/malŝaltita)"
     },
     "401": {
       "Title": "Demo - Baskuligi Pordon",
@@ -255,7 +255,7 @@
       "HomeGenie.RemoteControl.Enable": "Ebligu",
       "HomeGenie.RemoteControl.IRCode": "Baskuli butonon",
       "ConfigureOptions.DimmerUpCode": "Butono por pliigi brilon",
-      "ConfigureOptions.DimmerDownCode": "Butono malpliigo de brilo",
+      "ConfigureOptions.DimmerDownCode": "Butono malpliigi helecon",
       "ConfigureOptions.DimmerInterval": "Mallumiganta paŝo"
     },
     "142": {
@@ -293,6 +293,12 @@
       "Title": "Pozita takso",
       "Description": "Ŝlosilpunktodetekto per pozotakso, uzante kutimajn ONNX-modelojn aŭ la defaŭltan antaŭtrejnitan YOLOv11-modelon (homa pozospecifa).",
       "ML.PoseEstimation": "Ebligu takson de pozo",
+      "ConfigureOptions.Yolo.ModelPath": "Vojo de YOLO11 modeldosiero (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentado de petskriboj",
+      "Description": "Detektu objektojn kaj iliajn konturojn per antaŭtrejnita YOLO11-modelo.",
+      "ML.InstanceSegmentation": "Ebligu ekzemplersegmentadon",
       "ConfigureOptions.Yolo.ModelPath": "Vojo de YOLO11 modeldosiero (.onnx)"
     }
   }

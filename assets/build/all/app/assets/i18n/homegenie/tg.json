@@ -170,7 +170,7 @@
       "ConfigureOptions.ImportExternal": "Воридоти модулҳои беруна"
     },
     "78": {
-      "Title": "Смарт термостат",
+      "Title": "Термостат интеллектуалӣ",
       "Description": "Барои амалӣ кардани функсияи термостат ҳама гуна сенсори ҳарорат ва гузариши интеллектуалиро истифода баред.",
       "VirtualThermostat.TemperatureModule": "Сенсори ҳарорат",
       "VirtualThermostat.HeatingSwitchModule": "Калиди гармидиҳӣ",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Камераи умумӣ IP",
       "Description": "Намоиш / масир канали тасвир аз камераи IP.",
-      "IpCamera.ImageURL": "URL-и тасвири камера (ба ҳуҷҷатҳои камераи худ нигаред)",
+      "IpCamera.ImageURL": "API-и тасвири камера (ба ҳуҷҷатҳои камераи худ нигаред)",
       "IpCamera.Username": "Номи корбар (ихтиёрӣ)",
       "IpCamera.Password": "Рамз (ихтиёрӣ)",
       "Widget.Config.fps": "Чорчубахо дар як сония",
@@ -237,7 +237,7 @@
     },
     "402": {
       "Title": "Намоиш - Ҳаракат муайян карда шуд",
-      "Description": "Муайян кардани ҳаракати намоишии бисёрсенсорро тақлид мекунад."
+      "Description": "Муайянкунии ҳаракати сенсори бисёрсоҳаи намоиширо тақлид мекунад."
     },
     "410": {
       "Title": "Симулятори сенсор",
@@ -265,7 +265,7 @@
       "ConfigureOptions.Email.SmtpServer": "2. Суроғаи сервери SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Номи корбари SMTP (ихтиёрӣ)",
       "ConfigureOptions.Email.SmtpPassword": "4. Пароли SMTP (ихтиёрӣ)",
-      "ConfigureOptions.Email.SmtpPort": "5. Порти сервери SMTP",
+      "ConfigureOptions.Email.SmtpPort": "5. Порт-сервери SMTP",
       "ConfigureOptions.Email.SmtpUseSsl": "6. Сервери SMTP SSL-ро истифода мебарад"
     },
     "145": {
@@ -284,7 +284,7 @@
     },
     "910": {
       "Title": "Муайянкунии объект",
-      "Description": "Бо истифода аз модели қаблан омӯзонидашудаи YOLO11 объектҳоро ошкор кунед.",
+      "Description": "Объектҳоро бо истифода аз модели қаблан омӯзонидашудаи YOLO11 муайян кунед.",
       "ML.ObjectDetection": "Муайян кардани объектҳоро фаъол созед",
       "ML.ObjectDetection.TriggerDetect": "Рӯйхати чизҳое, ки бо вергул ҷудо карда шудаанд (ба забони англисӣ), ки ҳушдорро ба вуҷуд меоранд. (масалан: гурба, саг, шахс, борхалта, ҷомадон)",
       "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO11 (.onnx)"
@@ -293,6 +293,12 @@
       "Title": "Баҳодиҳии поза",
       "Description": "Муайян кардани нуқтаи калидӣ тавассути баҳодиҳии поза, бо истифода аз моделҳои фармоишии ONNX ё модели пешфарз YOLOv11 (позиси хоси инсон).",
       "ML.PoseEstimation": "Баҳодиҳии позаро фаъол созед",
+      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Сегментизатсияи мисол",
+      "Description": "Бо истифода аз модели қаблан омӯзонидашудаи YOLO11 объектҳо ва контурҳои онҳоро муайян кунед.",
+      "ML.InstanceSegmentation": "Сегментизатсияи мисолҳоро фаъол созед",
       "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO11 (.onnx)"
     }
   }

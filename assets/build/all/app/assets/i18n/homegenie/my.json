@@ -3,7 +3,7 @@
   "welcome_to_homegenie": "HomeGenie မှကြိုဆိုပါတယ်။",
   "welcome_subtitle": "ပရိုဂရမ်လုပ်နိုင်သော အလိုအလျောက်စနစ်ဆိုင်ရာ ထောက်လှမ်းရေး",
   "not_configured_yet": "စနစ် မပြင်ဆင်ရသေးပါ။ ဤစနစ်ထည့်သွင်းမှု wizard သည် သင့်စနစ်ကို အဆင့်အနည်းငယ်အတွင်း စတင်လုပ်ဆောင်နိုင်စေရန် ကူညီပေးပါမည်။",
-  "system_config_start_with_base_and_backup": "အရန်ဖိုင်မှ ပြန်လည်ရယူပါ။",
+  "system_config_start_with_base_and_backup": "အရန်ဖိုင်မှ ပြန်ယူပါ။",
   "system_config_start_with_default_setup": "ပုံသေသတ်မှတ်မှု",
   "system_config_include_demo": "ပုံတူကိရိယာလုပ်ဆောင်ချက်နှင့်အတူ ဒီမိုကို ထည့်သွင်းပါ။",
   "system_config_additional_features": "အပိုဆောင်းအင်္ဂါရပ်များ",
@@ -33,14 +33,14 @@
   "dashboard_from_group": "ဤအဖွဲ့မှ ဒက်ရှ်ဘုတ်တစ်ခု ဖန်တီးပါ။",
   "group_modules": "ဤအုပ်စုရှိ မော်ဂျူးများ",
   "modules": "မော်ဂျူးများ",
-  "empty_group": "ဤအဖွဲ့တွင် module မရှိပါ။",
+  "empty_group": "ဤအုပ်စုတွင် module များမရှိပါ။",
   "scheduler_wizard": "အစီအစဉ်ဆွဲသူ Wizard",
   "schedule_event": "ပွဲ",
   "schedule_type_standard": "စံ",
   "schedule_type_range": "ရက်စွဲအပိုင်းအခြား",
   "schedule_type_cron": "Cron စကားရပ်",
   "schedule_action": "အက်ရှင်",
-  "schedule_occurrence_preview": "ဖြစ်ပျက်မှု အကြိုကြည့်ရှုမှု",
+  "schedule_occurrence_preview": "ဖြစ်ပျက်မှု အကြိုကြည့်ရှုခြင်း။",
   "time_schedule": "အချိန်ဇယား",
   "occurrence": "ဖြစ်ပျက်မှု",
   "cronwizard_description_on": "on",
@@ -66,7 +66,7 @@
   "cronwizard_dayselect_everyday": "နေ့တိုင်း",
   "cronwizard_dayselect_selecteddays": "ရွေးချယ်ထားသောနေ့ရက်များ",
   "cronwizard_dayowselect_selecteddaysow": "ရွေးချယ်ထားသော ရက်သတ္တပတ်များ",
-  "cronwizard_monthselect_everymonth": "လစဉ်",
+  "cronwizard_monthselect_everymonth": "လတိုင်း",
   "cronwizard_monthselect_selectedmonths": "ရွေးလများ",
   "cronwizard_schedule_set_exact_time": "ပွဲချိန်သတ်မှတ်ပါ။",
   "cronwizard_schedule_set_slot_start": "စတင်ချိန်ကို သတ်မှတ်ပါ။",
@@ -157,12 +157,12 @@
     },
     "77": {
       "Title": "ကွန်ရက် MQTT",
-      "Description": "အင်တာနက်မှတဆင့် မည်သည့်နေရာမှမဆို HomeGenie Panel အက်ပ်ကို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
+      "Description": "အင်တာနက်မှတစ်ဆင့် HomeGenie Panel အက်ပ်ကို မည်သည့်နေရာမှမဆို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
       "MQTT.SensorPublish": "ဤ module မှထုတ်လွှတ်သောဖြစ်ရပ်များကိုထုတ်ဝေပါ။",
       "ConfigureOptions.ClientId": "သုံးစွဲသူ ID။",
       "ConfigureOptions.ServerAddress": "ဆာဗာလိပ်စာ",
       "ConfigureOptions.ServerPort": "ဆာဗာဆိပ်ကမ်း",
-      "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်းကို ဖွင့်ပါ (E2EE)",
+      "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်း (E2EE) ကို ဖွင့်ပါ",
       "ConfigureOptions.WebSockets": "WebSockets ကိုသုံးပါ။",
       "ConfigureOptions.TLS": "TLS/SSL ကိုဖွင့်ပါ။",
       "ConfigureOptions.Username": "အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -280,7 +280,7 @@
     "8": {
       "Title": "နေထွက်အရောင်များ ဇာတ်လမ်း",
       "Description": "အရောင်ပြောင်း LED မီးများအတွက် \"နေထွက်\" မြင်ကွင်း ဥပမာ။",
-      "Scenarios.SunriseColors": "Sunrise Colors မြင်ကွင်းသို့ လင့်ခ်ချိတ်ပါ။"
+      "Scenarios.SunriseColors": "Sunrise Colours အခြေအနေသို့ လင့်ခ်ချိတ်ပါ။"
     },
     "910": {
       "Title": "အရာဝတ္ထု ထောက်လှမ်းခြင်း။",
@@ -292,7 +292,13 @@
     "911": {
       "Title": "ခန့်မှန်းခြေတင်ပါ။",
       "Description": "စိတ်ကြိုက် ONNX မော်ဒယ်များ သို့မဟုတ် မူရင်းကြိုတင်လေ့ကျင့်ထားသည့် YOLOv11 မော်ဒယ် (လူ့ပုံသဏ္ဍာန် သီးသန့်) ကို အသုံးပြု၍ pose ခန့်မှန်းချက်မှတစ်ဆင့် သော့ချက်ထောက်လှမ်းခြင်း။",
-      "ML.PoseEstimation": "pose ခန့်မှန်းချက်ကို ဖွင့်ပါ။",
+      "ML.PoseEstimation": "ပုံသဏ္ဍန်ခန့်မှန်းချက်ကို ဖွင့်ပါ။",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
+    },
+    "912": {
+      "Title": "ဥပမာ အပိုင်းခွဲခြင်း။",
+      "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO11 မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများနှင့် ၎င်းတို့၏ ကောက်ကြောင်းများကို ရှာဖွေပါ။",
+      "ML.InstanceSegmentation": "ဥပမာ အပိုင်းခွဲခြင်းကို ဖွင့်ပါ။",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
     }
   }

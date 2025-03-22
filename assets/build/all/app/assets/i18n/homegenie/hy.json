@@ -69,7 +69,7 @@
   "cronwizard_monthselect_everymonth": "Ամեն ամիս",
   "cronwizard_monthselect_selectedmonths": "Ընտրված ամիսներ",
   "cronwizard_schedule_set_exact_time": "Սահմանեք միջոցառման ժամանակը:",
-  "cronwizard_schedule_set_slot_start": "Սահմանեք ժամանակի մեկնարկը:",
+  "cronwizard_schedule_set_slot_start": "Սահմանել ժամային բնիկի մեկնարկը:",
   "cronwizard_schedule_set_slot_end": "Սկսած {{start}} .<span class=\"notranslate\"><br/></span> Սահմանեք ժամանակի ավարտը:",
   "cronwizard_bindings_define_types_and_modules": "Սահմանեք տեսակները և մոդուլները, որոնք ենթակա են այս ժամանակացույցին (ըստ ցանկության)",
   "cronwizard_bindings_select_types": "Ընտրեք տեսակները",
@@ -77,7 +77,7 @@
   "cronwizard_action_preset_actions": "Նախադրված գործողություններ",
   "cronwizard_action_preset_every_occurrence": "Ամեն դեպքի վրա",
   "cronwizard_action_preset_slot_start": "Ժամանակահատվածի սկզբում",
-  "cronwizard_action_preset_slot_end": "Ժամանակահատվածի վերջում",
+  "cronwizard_action_preset_slot_end": "Ժամկետի վերջում",
   "cronwizard_action_custom_script": "Հատուկ գործողությունների սցենար",
   "cronwizard_action_no_action": "Ոչ մի գործողություն",
   "cronwizard_action_schedule_variable_hint": "Օգտագործեք <span class=\"notranslate color-primary\">@ {{name}}</span> որպես փոփոխական cron արտահայտություններում կամ օգտագործեք <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ավտոմատացման ծրագրերում՝ այս իրադարձությանը հղում կատարելու համար:",
@@ -112,7 +112,7 @@
   "program_status_background": "Նախապատմություն",
   "program_status_stopping": "Դադարեցնելով",
   "program_status_stopped": "Դադարեցվեց",
-  "program_status_interrupted": "Ընդհատված",
+  "program_status_interrupted": "Ընդհատվել է",
   "program_status_disabled": "Հաշմանդամ",
   "program_status_enabled": "Միացված է",
   "program_status_broken": "Կոտրված",
@@ -127,7 +127,7 @@
   "main_code": "Հիմնական",
   "context_code": "Համատեքստ",
   "main_code_empty_note": "«Հիմնական» կոդը դատարկ է: Այս կոդը ստեղծելու համար օգտագործեք «Visual code» խմբագրիչը. - Բացեք «Ծրագիր» կատեգորիան հրամանների պալիտից ձախ կողմում. - Քաշեք «Main» տիպի բլոկ վիզուալ կոդի աշխատանքային տարածքում. Ավելացնել դրա ներսում այլ կոդի բլոկներ՝ այս ծրագրի գործողություններն ու տրամաբանությունն իրականացնելու համար:",
-  "setup_code_empty_note": "«Կարգավորում» կոդը դատարկ է: Օգտագործեք «Visual code» խմբագրիչը այս կոդը ստեղծելու համար. - Բացեք «Ծրագիր» կատեգորիան հրամանների պալիտից ձախ կողմում. - Քաշեք «Setup» տեսակի բլոկ վիզուալ կոդի աշխատանքային տարածքում. Ավելացնել դրա ներսում այլ կոդի բլոկներ՝ որոշելու այն պայմանները, որոնք կգործարկեն «Հիմնական» կոդի կատարումը: Այս կոդը գնահատվում է ամեն անգամ, երբ նոր իրադարձություն է տեղի ունենում և առնվազն րոպեն մեկ:",
+  "setup_code_empty_note": "«Setup» կոդը դատարկ է: Օգտագործեք «Visual code» խմբագրիչը այս կոդը ստեղծելու համար. - Բացեք «Ծրագիր» կատեգորիան հրամանների պալիտից ձախ կողմում. - Քաշեք «Setup» տեսակի բլոկ վիզուալ կոդի աշխատանքային տարածքում. Ավելացնել դրա ներսում այլ կոդի բլոկներ՝ որոշելու այն պայմանները, որոնք կգործարկեն «Հիմնական» կոդի կատարումը: Այս կոդը գնահատվում է ամեն անգամ, երբ նոր իրադարձություն է տեղի ունենում և առնվազն րոպեն մեկ:",
   "capture_commands": "Գրավել հրամաններ",
   "capture_commands_description": "Ծրագրին ավելացրեք վիջեթների վրա ձեռքով կատարված բոլոր հրամանները:",
   "capture_commands_pause": "Դադար հրամանների միջև",
@@ -159,9 +159,9 @@
       "Title": "Ցանց MQTT",
       "Description": "Միացեք MQTT բրոքերին՝ ցանկացած վայրից ինտերնետի միջոցով HomeGenie Panel հավելվածն օգտագործելու կամ նույն MQTT ցանցում HomeGenie սարքերը փոխկապակցելու համար:",
       "MQTT.SensorPublish": "Հրապարակեք այս մոդուլի կողմից թողարկված իրադարձությունները",
-      "ConfigureOptions.ClientId": "Հաճախորդի ID",
+      "ConfigureOptions.ClientId": "Հաճախորդի ID.",
       "ConfigureOptions.ServerAddress": "Սերվերի հասցեն",
-      "ConfigureOptions.ServerPort": "Սերվերի պորտ",
+      "ConfigureOptions.ServerPort": "Սերվերի նավահանգիստ",
       "ConfigureOptions.Encryption": "Միացնել ծայրից ծայր կոդավորումը (E2EE)",
       "ConfigureOptions.WebSockets": "Օգտագործեք WebSockets",
       "ConfigureOptions.TLS": "Միացնել TLS/SSL-ը",
@@ -180,7 +180,7 @@
     "81": {
       "Title": "Էներգիայի մոնիտոր",
       "Description": "Ստեղծեք վիճակագրություն էներգիայի սպառման և սարքերի օգտագործման վերաբերյալ:",
-      "EnergyManagement.MonitorStatus": "Մոնիտորի կարգավիճակը",
+      "EnergyManagement.MonitorStatus": "Դիտարկեք կարգավիճակը",
       "EnergyManagement.MonitorWatts": "Վերահսկել էներգիայի սպառումը"
     },
     "82": {
@@ -201,11 +201,11 @@
     "90": {
       "Title": "Անվտանգության ազդանշանային համակարգ",
       "Description": "Օգտագործեք սենսորներ և այլ սարքեր՝ անվտանգության ազդանշանային համակարգ կիրառելու համար:",
-      "HomeGenie.SecurityAlarm": "Օգտագործեք որպես ահազանգ/ստրոբ",
+      "HomeGenie.SecurityAlarm": "Օգտագործեք որպես ազդանշան/strobe",
       "HomeGenie.SecurityTriggerHome": "Նաև գործարկվում է, երբ զինված է Home",
       "HomeGenie.SecuritySensor": "Օգտագործեք որպես անվտանգության սենսոր",
       "ConfigureOptions.Email.Recipients": "Ստորակետերով առանձնացված ցուցակը ստացողների էլ. նամակների տագնապի ծանուցումների համար",
-      "ConfigureOptions.System.ArmDelay": "Թևի հետաձգում (վայրկյան)",
+      "ConfigureOptions.System.ArmDelay": "Թևի հետաձգում (վայրկյաններ)",
       "ConfigureOptions.System.SirenStartTime": "Sirens Start Delay (վայրկյան)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens առավելագույն ժամանակը (վայրկյան, 0 = անսահման)",
       "ConfigureOptions.Trigger.ArmedProgram": "Ծրագիր, որն աշխատում է զինված վիճակում",
@@ -229,11 +229,11 @@
       "Sensor.MotionDetect": "Շարժման հայտնաբերման կարգավիճակը",
       "Status.Battery": "Մարտկոցի մակարդակը",
       "Sensor.DoorWindow": "Դռների/պատուհանների սենսորի կարգավիճակը (բաց/փակ)",
-      "Status.Level": "Միացնել կարգավիճակը (միացնել/անջատել)"
+      "Status.Level": "Միացնել/անջատել կարգավիճակը"
     },
     "401": {
       "Title": "Դեմո - Փոխարկել դուռը",
-      "Description": "Նմանակում է դռների բաց/փակ դռների-պատուհանի ցուցադրական սենսորը:"
+      "Description": "Նմանակում է դուռ-պատուհանի ցուցադրական սենսորի բաց/փակ դռները:"
     },
     "402": {
       "Title": "Դեմո - հայտնաբերված շարժում",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "Էլեկտրոնային փոստի հաշիվ",
-      "Description": "Պահպանում է էլեկտրոնային փոստի հաշվի տվյալները, որոնք օգտագործվում են համակարգային ծրագրերի կողմից էլ. նամակներ ուղարկելու/ստանալու համար:",
+      "Description": "Պահպանում է էլփոստի հաշվի տվյալները, որոնք օգտագործվում են համակարգային ծրագրերի կողմից էլ. նամակներ ուղարկելու/ստանալու համար:",
       "ConfigureOptions.Email.Sender": "1. Էլեկտրոնային փոստի հասցե",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP սերվերի հասցեն",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP օգտվողի անուն (ըստ ցանկության)",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Պոզի գնահատում",
-      "Description": "Հիմնական կետերի հայտնաբերում դիրքի գնահատման միջոցով՝ օգտագործելով հատուկ ONNX մոդելներ կամ լռելյայն նախապես պատրաստված YOLOv11 մոդելը (մարդու դիրքին հատուկ):",
+      "Description": "Հիմնական կետերի հայտնաբերում դիրքի գնահատման միջոցով՝ օգտագործելով հատուկ ONNX մոդելներ կամ լռելյայն նախապես պատրաստված YOLOv11 մոդելը (հատուկ մարդու դիրքի համար):",
       "ML.PoseEstimation": "Միացնել դիրքի գնահատումը",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 մոդելային ֆայլի ուղի (.onnx)"
+    },
+    "912": {
+      "Title": "Օրինակների հատվածավորում",
+      "Description": "Հայտնաբերեք առարկաները և դրանց ուրվագծերը՝ օգտագործելով նախապես պատրաստված YOLO11 մոդելը:",
+      "ML.InstanceSegmentation": "Միացնել օրինակների հատվածավորումը",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 մոդելային ֆայլի ուղի (.onnx)"
     }
   }

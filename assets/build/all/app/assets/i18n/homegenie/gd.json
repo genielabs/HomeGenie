@@ -66,7 +66,7 @@
   "cronwizard_dayselect_everyday": "Gach latha",
   "cronwizard_dayselect_selecteddays": "Làithean taghte",
   "cronwizard_dayowselect_selecteddaysow": "Làithean na seachdain air an taghadh",
-  "cronwizard_monthselect_everymonth": "Gach mìos",
+  "cronwizard_monthselect_everymonth": "A h-uile mìos",
   "cronwizard_monthselect_selectedmonths": "Mìosan taghte",
   "cronwizard_schedule_set_exact_time": "Suidhich àm tachartais.",
   "cronwizard_schedule_set_slot_start": "Suidhich àm tòiseachaidh slot.",
@@ -77,7 +77,7 @@
   "cronwizard_action_preset_actions": "Gnìomhan ro-shuidhichte",
   "cronwizard_action_preset_every_occurrence": "Air gach tachartas",
   "cronwizard_action_preset_slot_start": "Aig toiseach sliotan ùine",
-  "cronwizard_action_preset_slot_end": "Aig deireadh an t-sloc ùine",
+  "cronwizard_action_preset_slot_end": "Aig deireadh sliotan ùine",
   "cronwizard_action_custom_script": "Sgriobt gnìomh gnàthaichte",
   "cronwizard_action_no_action": "Gun gnìomh",
   "cronwizard_action_schedule_variable_hint": "Cleachd <span class=\"notranslate color-primary\">@ {{name}}</span> mar chaochladair ann an abairtean cron no cleachd <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ann am prògraman fèin-ghluasaid gus iomradh a thoirt air an tachartas seo.",
@@ -127,7 +127,7 @@
   "main_code": "Prìomh",
   "context_code": "Co-theacs",
   "main_code_empty_note": "Tha an còd \"Prìomh\" falamh. Cleachd an deasaiche “Còd Lèirsinneach” gus an còd seo a ghineadh: - Fosgail an roinn “Program” bhon phaileas àithne air an taobh chlì - Slaod bloc den t-seòrsa “Prìomh” ann an àite-obrach a ’chòd lèirsinneach - Cuir a-steach e na bhlocaichean còd eile gus gnìomhan agus loidsig a’ phrògraim seo a chuir an gnìomh Faodar am prògram “Prìomh” a ruith le làimh no tòiseachadh gu fèin-ghluasadach stèidhichte air cumhachan a chaidh a thoirt seachad mu dheireadh sa chòd rèiteachaidh.",
-  "setup_code_empty_note": "Tha an còd “Setup” falamh. Cleachd an deasaiche “Còd Lèirsinneach” gus an còd seo a ghineadh: - Fosgail an roinn “Program” bhon phaileas àithne air an taobh chlì - Slaod bloc den t-seòrsa “Setup” ann an àite-obrach a’ chòd lèirsinneach - Cuir a-steach e na bhlocaichean còd eile gus faighinn a-mach dè na cumhaichean a bhrosnaicheas coileanadh còd “Prìomh” Thèid an còd seo a mheasadh gach uair a thachras tachartas ùr agus co-dhiù aon uair sa mhionaid.",
+  "setup_code_empty_note": "Tha an còd “Setup” falamh. Cleachd an deasaiche “Còd Lèirsinneach” gus an còd seo a ghineadh: - Fosgail an roinn “Program” bhon phaileas àithne air an taobh chlì - Slaod bloc den t-seòrsa “Setup” ann an àite-obrach a’ chòd lèirsinneach - Cuir a-steach e na bhlocaichean còd eile gus faighinn a-mach dè na cumhaichean a bhrosnaicheas coileanadh còd “Prìomh” Bidh an còd seo air a mheasadh gach uair a thachras tachartas ùr agus co-dhiù aon uair sa mhionaid.",
   "capture_commands": "Glac òrdughan",
   "capture_commands_description": "Cuir ris a h-uile àithne a thèid a dhèanamh le làimh air widgets ris a’ phrògram.",
   "capture_commands_pause": "Stad eadar òrdughan",
@@ -293,6 +293,12 @@
       "Title": "Suidhich tuairmse",
       "Description": "Lorg prìomh phuing tro mheasadh suidheachadh, a’ cleachdadh mhodalan àbhaisteach ONNX no am modal bunaiteach YOLOv11 ro-thrèanadh (sònraichte dha daoine).",
       "ML.PoseEstimation": "Dèan comas air tuairmse suidheachadh",
+      "ConfigureOptions.Yolo.ModelPath": "Slighe faidhle modail YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Sgaradh mar eisimpleir",
+      "Description": "Lorg nithean agus na dealbhan aca a’ cleachdadh modal YOLO11 ro-thrèanadh.",
+      "ML.InstanceSegmentation": "Dèan comas air sgaradh eisimpleir",
       "ConfigureOptions.Yolo.ModelPath": "Slighe faidhle modail YOLO11 (.onnx)"
     }
   }

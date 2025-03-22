@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "{{start}}から開始します。<span class=\"notranslate\"><br/></span>時間枠の終了を設定します。",
   "cronwizard_bindings_define_types_and_modules": "このスケジュールの対象となるタイプとモジュールを定義します（オプション）",
   "cronwizard_bindings_select_types": "タイプを選択",
-  "cronwizard_action_set_action_to_execute": "このイベントの発生時に実行するアクションを設定する",
+  "cronwizard_action_set_action_to_execute": "このイベントの発生時に実行するアクションを設定します",
   "cronwizard_action_preset_actions": "プリセットアクション",
   "cronwizard_action_preset_every_occurrence": "あらゆる出来事において",
   "cronwizard_action_preset_slot_start": "時間枠の開始時",
@@ -293,6 +293,12 @@
       "Title": "姿勢推定",
       "Description": "カスタム ONNX モデルまたはデフォルトの事前トレーニング済み YOLOv11 モデル (人間のポーズに固有) を使用したポーズ推定によるキーポイント検出。",
       "ML.PoseEstimation": "姿勢推定を有効にする",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
+    },
+    "912": {
+      "Title": "インスタンスのセグメンテーション",
+      "Description": "事前トレーニング済みの YOLO11 モデルを使用して、オブジェクトとその輪郭を検出します。",
+      "ML.InstanceSegmentation": "インスタンスセグメンテーションを有効にする",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
     }
   }

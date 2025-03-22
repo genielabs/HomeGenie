@@ -163,7 +163,7 @@
       "ConfigureOptions.ServerAddress": "Адрес сервера",
       "ConfigureOptions.ServerPort": "Порт сервера",
       "ConfigureOptions.Encryption": "Включить сквозное шифрование (E2EE)",
-      "ConfigureOptions.WebSockets": "Использовать веб-сокеты",
+      "ConfigureOptions.WebSockets": "Использовать WebSockets",
       "ConfigureOptions.TLS": "Включить TLS/SSL",
       "ConfigureOptions.Username": "Имя пользователя (необязательно)",
       "ConfigureOptions.Password": "Пароль (необязательно)",
@@ -293,6 +293,12 @@
       "Title": "Оценка позы",
       "Description": "Обнаружение ключевых точек посредством оценки позы с использованием пользовательских моделей ONNX или предварительно обученной модели YOLOv11 по умолчанию (специфичной для позы человека).",
       "ML.PoseEstimation": "Включить оценку позы",
+      "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Сегментация экземпляра",
+      "Description": "Обнаружение объектов и их контуров с помощью предварительно обученной модели YOLO11.",
+      "ML.InstanceSegmentation": "Включить сегментацию экземпляра",
       "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
     }
   }

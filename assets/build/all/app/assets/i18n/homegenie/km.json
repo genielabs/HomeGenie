@@ -153,7 +153,7 @@
       "ConfigureOptions.Location": "ឈ្មោះទីក្រុង",
       "ConfigureOptions.Language": "ភាសា (ឧ. EN, IT, FR, DE, ... )",
       "ConfigureOptions.UpdateInterval": "ធ្វើបច្ចុប្បន្នភាពចន្លោះពេល (នាទី)",
-      "ConfigureOptions.ApiKey": "OpenWeatherMap API key (APPID)"
+      "ConfigureOptions.ApiKey": "សោ OpenWeatherMap API (APPID)"
     },
     "77": {
       "Title": "បណ្តាញ MQTT",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "កំណត់ការប៉ាន់ស្មាន",
-      "Description": "ការរកឃើញចំណុចគន្លឹះតាមរយៈការប៉ាន់ប្រមាណដោយប្រើប្រាស់ម៉ូដែល ONNX ផ្ទាល់ខ្លួន ឬគំរូ YOLOv11 ដែលបានបណ្តុះបណ្តាលជាមុនលំនាំដើម (លក្ខណៈជាក់លាក់របស់មនុស្ស)។",
+      "Description": "ការរកឃើញចំណុចគន្លឹះតាមរយៈការប៉ាន់ប្រមាណបង្ក ដោយប្រើម៉ូដែល ONNX ផ្ទាល់ខ្លួន ឬគំរូ YOLOv11 ដែលបានបណ្តុះបណ្តាលជាមុនលំនាំដើម (លក្ខណៈជាក់លាក់របស់មនុស្ស)។",
       "ML.PoseEstimation": "បើក​ការ​ប៉ាន់​ស្មាន",
+      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "ការបែងចែកឧទាហរណ៍",
+      "Description": "រកឃើញវត្ថុ និងគ្រោងរបស់វាដោយប្រើគំរូ YOLO11 ដែលបានបណ្តុះបណ្តាលជាមុន។",
+      "ML.InstanceSegmentation": "បើកដំណើរការការបែងចែកឧទាហរណ៍",
       "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
     }
   }

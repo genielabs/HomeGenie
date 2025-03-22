@@ -51,7 +51,7 @@
   "cronwizard_description_at": "bij",
   "cronwizard_add_time_slot": "Tijdslot toevoegen",
   "cronwizard_add_exact_time": "Voeg exacte tijd toe",
-  "cronwizard_start_time": "Begintijd",
+  "cronwizard_start_time": "Starttijd",
   "cronwizard_end_time": "Eindtijd",
   "cronwizard_minutes": "Notulen",
   "cronwizard_hours": "Uren",
@@ -293,6 +293,12 @@
       "Title": "Schatting van de houding",
       "Description": "Detectie van belangrijke punten via houdingschatting, met behulp van aangepaste ONNX-modellen of het standaard vooraf getrainde YOLOv11-model (specifiek voor de houding van de mens).",
       "ML.PoseEstimation": "Pose-schatting inschakelen",
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
+    },
+    "912": {
+      "Title": "Instantie segmentatie",
+      "Description": "Detecteer objecten en hun contouren met behulp van een vooraf getraind YOLO11-model.",
+      "ML.InstanceSegmentation": "Instantiesegmentatie inschakelen",
       "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
     }
   }

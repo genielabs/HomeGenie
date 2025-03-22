@@ -142,14 +142,14 @@
     },
     "26": {
       "Title": "Svjetla u boji",
-      "Description": "Primjer integracije svjetala Philips Hue pomoću HTTP API-ja (V1). Zadani korisnik za spajanje na most je \"newdeveloper\" i već bi trebao biti omogućen.",
+      "Description": "Primjer integracije svjetala Philips Hue pomoću HTTP API-ja (V1). Zadani korisnik za spajanje na most je \"newdeveloper\" i trebao bi biti već omogućen.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adresa",
       "ConfigureOptions.BridgeUsername": "Korisničko ime",
       "ConfigureOptions.LightsCount": "Broj svjetala"
     },
     "34": {
       "Title": "Vremenska prognoza",
-      "Description": "Informacije o vremenu i prognozi iz servisa Open Weather Map. Za aktiviranje ovog widgeta unesite važeći API ključ. Slijedite upute na https://openweathermap.org/appid kako biste dobili besplatni API ključ.",
+      "Description": "Informacije o vremenu i prognozi iz usluge Open Weather Map. Za aktiviranje ovog widgeta unesite važeći API ključ. Slijedite upute na https://openweathermap.org/appid kako biste dobili besplatni API ključ.",
       "ConfigureOptions.Location": "Ime grada",
       "ConfigureOptions.Language": "Jezik (npr. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Interval ažuriranja (minute)",
@@ -171,7 +171,7 @@
     },
     "78": {
       "Title": "Pametni termostat",
-      "Description": "Koristite bilo koji senzor temperature i pametni prekidač za implementaciju funkcije termostata.",
+      "Description": "Koristite bilo koji temperaturni senzor i pametni prekidač za implementaciju funkcije termostata.",
       "VirtualThermostat.TemperatureModule": "Senzor temperature",
       "VirtualThermostat.HeatingSwitchModule": "Prekidač za grijanje",
       "VirtualThermostat.CoolingSwitchModule": "Prekidač za hlađenje",
@@ -293,6 +293,12 @@
       "Title": "Procjena poze",
       "Description": "Otkrivanje ključnih točaka putem procjene poze, korištenjem prilagođenih ONNX modela ili zadanog prethodno obučenog YOLOv11 modela (specifičan za pozu čovjeka).",
       "ML.PoseEstimation": "Omogući procjenu položaja",
+      "ConfigureOptions.Yolo.ModelPath": "Put do datoteke modela YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentacija instance",
+      "Description": "Otkrijte objekte i njihove obrise pomoću prethodno obučenog YOLO11 modela.",
+      "ML.InstanceSegmentation": "Omogući segmentaciju instance",
       "ConfigureOptions.Yolo.ModelPath": "Put do datoteke modela YOLO11 (.onnx)"
     }
   }

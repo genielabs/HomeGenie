@@ -142,8 +142,8 @@
     },
     "26": {
       "Title": "Goleuadau lliw",
-      "Description": "Enghraifft Integreiddio goleuadau Philips Hue gan ddefnyddio HTTP API (V1). Y defnyddiwr rhagosodedig i gysylltu â'r bont yw \"newdeveloper\" a dylai fod wedi'i alluogi eisoes.",
-      "ConfigureOptions.BridgeAddress": "Cyfeiriad IP Philips Hue Bridge (V1).",
+      "Description": "Enghraifft Integreiddio goleuadau Philips Hue gan ddefnyddio HTTP API (V1). Y defnyddiwr rhagosodedig i gysylltu â'r bont yw \"datblygwr newydd\" a dylai fod wedi'i alluogi eisoes.",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) cyfeiriad IP",
       "ConfigureOptions.BridgeUsername": "Enw defnyddiwr",
       "ConfigureOptions.LightsCount": "Nifer y goleuadau"
     },
@@ -293,6 +293,12 @@
       "Title": "Peri amcangyfrif",
       "Description": "Darganfod pwynt allweddol trwy amcangyfrif ystum, gan ddefnyddio modelau ONNX wedi'u teilwra neu'r model YOLOv11 diofyn a hyfforddwyd ymlaen llaw (penodol i ddyn).",
       "ML.PoseEstimation": "Galluogi amcangyfrif ystum",
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentu er enghraifft",
+      "Description": "Canfod gwrthrychau a'u hamlinelliadau gan ddefnyddio model YOLO11 sydd wedi'i hyfforddi ymlaen llaw.",
+      "ML.InstanceSegmentation": "Galluogi segmentu enghreifftiau",
       "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
     }
   }

@@ -67,7 +67,7 @@
   "cronwizard_dayselect_selecteddays": "Hari yang dipilih",
   "cronwizard_dayowselect_selecteddaysow": "Hari yang dipilih dalam minggu",
   "cronwizard_monthselect_everymonth": "Setiap bulan",
-  "cronwizard_monthselect_selectedmonths": "Bulan yang dipilih",
+  "cronwizard_monthselect_selectedmonths": "Bulan terpilih",
   "cronwizard_schedule_set_exact_time": "Tetapkan masa acara.",
   "cronwizard_schedule_set_slot_start": "Tetapkan permulaan slot masa.",
   "cronwizard_schedule_set_slot_end": "Bermula pada {{start}} .<span class=\"notranslate\"><br/></span> Tetapkan tamat slot masa.",
@@ -142,7 +142,7 @@
     },
     "26": {
       "Title": "Lampu warna",
-      "Description": "Contoh integrasi lampu Philips Hue menggunakan API HTTP (V1). Pengguna lalai untuk menyambung ke jambatan ialah \"pembangun baharu\" dan ia sepatutnya sudah didayakan.",
+      "Description": "Contoh penyepaduan lampu Philips Hue menggunakan API HTTP (V1). Pengguna lalai untuk menyambung ke jambatan ialah \"pembangun baharu\" dan ia sepatutnya sudah didayakan.",
       "ConfigureOptions.BridgeAddress": "Alamat IP Philips Hue Bridge (V1).",
       "ConfigureOptions.BridgeUsername": "Nama pengguna",
       "ConfigureOptions.LightsCount": "Bilangan lampu"
@@ -259,7 +259,7 @@
       "ConfigureOptions.DimmerInterval": "Langkah memalapkan"
     },
     "142": {
-      "Title": "Akaun E-Mel",
+      "Title": "Akaun E-mel",
       "Description": "Menyimpan maklumat akaun e-mel yang digunakan oleh program sistem untuk menghantar/menerima e-mel.",
       "ConfigureOptions.Email.Sender": "1. Alamat e-mel",
       "ConfigureOptions.Email.SmtpServer": "2. Alamat pelayan SMTP",
@@ -293,6 +293,12 @@
       "Title": "Anggaran pose",
       "Description": "Pengesanan titik kunci melalui anggaran pose, menggunakan model ONNX tersuai atau model YOLOv11 pra-latihan lalai (khusus pose manusia).",
       "ML.PoseEstimation": "Dayakan anggaran pose",
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Pembahagian contoh",
+      "Description": "Kesan objek dan garis besarnya menggunakan model YOLO11 yang telah terlatih.",
+      "ML.InstanceSegmentation": "Dayakan pembahagian contoh",
       "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
     }
   }

@@ -42,7 +42,7 @@
   "schedule_action": "Aksyon",
   "schedule_occurrence_preview": "Preview ensidan an",
   "time_schedule": "Orè",
-  "occurrence": "Ensidans",
+  "occurrence": "Ensidan",
   "cronwizard_description_on": "sou",
   "cronwizard_description_from": "soti nan",
   "cronwizard_description_to": "pou",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Jenerik kamera IP",
       "Description": "Montre/route manje imaj ki soti nan yon kamera IP.",
-      "IpCamera.ImageURL": "URL API imaj kamera (gade dokiman kamera ou yo)",
+      "IpCamera.ImageURL": "URL API imaj kamera (gade dokiman kamera w yo)",
       "IpCamera.Username": "Non itilizatè (si ou vle)",
       "IpCamera.Password": "Modpas (si ou vle)",
       "Widget.Config.fps": "Ankadreman pou chak segonn",
@@ -232,7 +232,7 @@
       "Status.Level": "Chanje estati (on/off)"
     },
     "401": {
-      "Title": "Demo - baskile pòt",
+      "Title": "Demo - aktive pòt",
       "Description": "Simulation pòt louvri/fèmen de démonstration detèktè pòt-fenèt."
     },
     "402": {
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Capteur imidite",
       "Simulator.Sensor.Luminance": "Capteur limyè",
       "Simulator.Meter.Watts": "Watt mèt",
-      "Simulator.Meter.Watts.Max": "Max Watt pouvwa",
+      "Simulator.Meter.Watts.Max": "Max pouvwa Watt",
       "Simulator.Sensor.DataFrequency": "Similatè emèt frekans"
     },
     "505": {
@@ -293,6 +293,12 @@
       "Title": "Poze estimasyon",
       "Description": "Deteksyon pwen kle atravè estimasyon poze, lè l sèvi avèk modèl ONNX koutim oswa modèl YOLOv11 pre-antrene defo (moun espesifik pou poze).",
       "ML.PoseEstimation": "Pèmèt estimasyon poze",
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmantasyon enstans",
+      "Description": "Detekte objè ak deskripsyon yo lè l sèvi avèk yon modèl YOLO11 pre-antre.",
+      "ML.InstanceSegmentation": "Pèmèt segmantasyon egzanp",
       "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 (.onnx)"
     }
   }

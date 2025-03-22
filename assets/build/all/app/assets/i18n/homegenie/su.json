@@ -2,7 +2,7 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Wilujeng sumping di HomeGenie!",
   "welcome_subtitle": "The kecerdasan automation programmable",
-  "not_configured_yet": "Sistim teu acan ngonpigurasi. Wizard pangaturan ieu bakal ngabantosan anjeun dina ngajalankeun sistem anjeun dina sababaraha léngkah.",
+  "not_configured_yet": "Sistem henteu acan dikonpigurasikeun. Wizard pangaturan ieu bakal ngabantosan anjeun dina ngajalankeun sistem anjeun dina sababaraha léngkah.",
   "system_config_start_with_base_and_backup": "Mulangkeun tina payel cadangan",
   "system_config_start_with_default_setup": "Setélan standar",
   "system_config_include_demo": "Kalebet demo sareng kagiatan alat simulasi",
@@ -15,7 +15,7 @@
   "HomeAutomation.ZigBee": "ZigBee controller",
   "device_port": "port alat",
   "device_driver": "Supir",
-  "flow_control": "Kontrol aliran",
+  "flow_control": "Ngadalikeun aliran",
   "controller": "Controller",
   "programs": "Program",
   "repositories": "Repositories",
@@ -54,7 +54,7 @@
   "cronwizard_start_time": "waktos ngamimitian",
   "cronwizard_end_time": "waktos tungtung",
   "cronwizard_minutes": "Menit",
-  "cronwizard_hours": "Jam-jaman",
+  "cronwizard_hours": "jam",
   "cronwizard_days": "Poé",
   "cronwizard_months": "sabulan",
   "cronwizard_minuteselect_everyminute": "Unggal menit",
@@ -88,7 +88,7 @@
   "scheduler_preset_action_command_set_color": "Nyetél warna",
   "scheduler_preset_action_config_color": "Warna",
   "scheduler_preset_action_command_thermostat_mode": "Modeu termostat",
-  "scheduler_preset_action_config_mode": "Modus",
+  "scheduler_preset_action_config_mode": "Modeu",
   "scheduler_preset_action_config_mode_on": "Dina",
   "scheduler_preset_action_config_mode_off": "Pareum",
   "scheduler_preset_action_config_mode_heat": "Panas",
@@ -204,7 +204,7 @@
       "HomeGenie.SecurityAlarm": "Paké salaku alarm / strobe",
       "HomeGenie.SecurityTriggerHome": "Ogé micu nalika pakarang Imah",
       "HomeGenie.SecuritySensor": "Paké salaku sensor kaamanan",
-      "ConfigureOptions.Email.Recipients": "Daptar e-mail panarima dipisahkeun koma pikeun béwara alarem",
+      "ConfigureOptions.Email.Recipients": "Daptar e-mail panarima anu dipisahkeun koma pikeun béwara alarem",
       "ConfigureOptions.System.ArmDelay": "Tunda panangan (detik)",
       "ConfigureOptions.System.SirenStartTime": "Sirene Mimitian Tunda (detik)",
       "ConfigureOptions.System.SirenMaxTime": "Sirene max Waktos (detik, 0=teu aya watesna)",
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Estimasi pose",
-      "Description": "Deteksi titik konci via estimasi pose, nganggo modél ONNX khusus atanapi modél standar YOLOv11 anu dilatih sateuacana (spésifik pose manusa).",
+      "Description": "Deteksi titik konci via estimasi pose, ngagunakeun modél ONNX khusus atanapi modél standar YOLOv11 anu tos dilatih (khusus pose manusa).",
       "ML.PoseEstimation": "Aktipkeun estimasi pose",
+      "ConfigureOptions.Yolo.ModelPath": "Jalur file modél YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentasi conto",
+      "Description": "Deteksi objék sareng garisna nganggo modél YOLO11 anu tos dilatih.",
+      "ML.InstanceSegmentation": "Aktipkeun segmentation conto",
       "ConfigureOptions.Yolo.ModelPath": "Jalur file modél YOLO11 (.onnx)"
     }
   }

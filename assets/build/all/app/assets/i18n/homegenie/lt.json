@@ -137,7 +137,7 @@
     "16": {
       "Title": "Lygio atmintis",
       "Description": "Išsaugokite ir prisiminkite paskutinį reguliatoriaus lygį.",
-      "HomeGenie.LevelMemory": "Prisiminkite paskutinį apšvietimo lygį, kai įjungta",
+      "HomeGenie.LevelMemory": "Prisiminkite paskutinį šviesos lygį, kai įjungta",
       "HomeGenie.LevelMemory.SimulateOnly": "Tik imituoti"
     },
     "26": {
@@ -293,6 +293,12 @@
       "Title": "Pozos įvertinimas",
       "Description": "Pagrindinio taško aptikimas naudojant pozos įvertinimą, naudojant pasirinktinius ONNX modelius arba numatytąjį iš anksto paruoštą YOLOv11 modelį (priklausomai nuo žmogaus pozos).",
       "ML.PoseEstimation": "Įgalinti pozos įvertinimą",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo kelias (.onnx)"
+    },
+    "912": {
+      "Title": "Pavyzdžių segmentavimas",
+      "Description": "Aptikkite objektus ir jų kontūrus naudodami iš anksto paruoštą YOLO11 modelį.",
+      "ML.InstanceSegmentation": "Įgalinti egzempliorių segmentavimą",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo kelias (.onnx)"
     }
   }

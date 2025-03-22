@@ -158,7 +158,7 @@
     "77": {
       "Title": "Líonra MQTT",
       "Description": "Ceangail le bróicéir MQTT chun aip Painéal HomeGenie a úsáid ó áit ar bith tríd an Idirlíon nó chun feistí HomeGenie a idirnascadh ar an líonra MQTT céanna.",
-      "MQTT.SensorPublish": "Foilsigh imeachtaí arna n-eisiúint ag an modúl seo",
+      "MQTT.SensorPublish": "Foilsigh teagmhais arna hastú ag an modúl seo",
       "ConfigureOptions.ClientId": "Aitheantas an Chliaint.",
       "ConfigureOptions.ServerAddress": "Seoladh freastalaí",
       "ConfigureOptions.ServerPort": "Port freastalaí",
@@ -184,7 +184,7 @@
       "EnergyManagement.MonitorWatts": "Monatóireacht a dhéanamh ar ídiú fuinnimh"
     },
     "82": {
-      "Title": "Mód Sábháil Fuinnimh",
+      "Title": "Mód Coigilt Fuinnimh",
       "Description": "Coinnigh an leibhéal solais faoi bhun céatadán configurable.",
       "EnergyManagement.EnergySavingLevel": "Uasleibhéal solais (%)",
       "EnergyManagement.EnergySavingMode": "Cumasaigh"
@@ -204,7 +204,7 @@
       "HomeGenie.SecurityAlarm": "Úsáid mar aláram/strobe",
       "HomeGenie.SecurityTriggerHome": "Chomh maith leis sin triggers nuair a Baile armtha",
       "HomeGenie.SecuritySensor": "Bain úsáid as mar braiteoir slándála",
-      "ConfigureOptions.Email.Recipients": "Liosta de na faighteoirí r-phoist scartha le camóga le haghaidh fógraí aláraim",
+      "ConfigureOptions.Email.Recipients": "Liosta de na faighteoirí r-phoist scartha le camóg le haghaidh fógraí aláraim",
       "ConfigureOptions.System.ArmDelay": "Moill láimhe (soicindí)",
       "ConfigureOptions.System.SirenStartTime": "Moill Tosaigh Sirens (soicindí)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens uas Am (soicindí, 0= gan teorainn)",
@@ -293,6 +293,12 @@
       "Title": "Seasamh meastachán",
       "Description": "Brath eochairphointí trí mheastachán staidiúir, ag baint úsáide as samhlacha saincheaptha ONNX nó an tsamhail réamhshocraithe YOLOv11 réamh-oilte (shonrach don duine).",
       "ML.PoseEstimation": "Cumasaigh meastachán staidiúir",
+      "ConfigureOptions.Yolo.ModelPath": "Conair an chomhaid mhúnla YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Deighilt cásanna",
+      "Description": "Bain úsáid as samhail réamh-oilte YOLO11 chun réada agus a n-imlíne a bhrath.",
+      "ML.InstanceSegmentation": "Cumasaigh deighilt shampla",
       "ConfigureOptions.Yolo.ModelPath": "Conair an chomhaid mhúnla YOLO11 (.onnx)"
     }
   }

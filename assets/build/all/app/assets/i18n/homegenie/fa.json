@@ -285,7 +285,7 @@
     "910": {
       "Title": "تشخیص اشیا",
       "Description": "اشیاء را با استفاده از مدل YOLO11 از پیش آموزش دیده تشخیص دهید.",
-      "ML.ObjectDetection": "فعال کردن تشخیص اشیاء",
+      "ML.ObjectDetection": "فعال کردن تشخیص اشیا",
       "ML.ObjectDetection.TriggerDetect": "فهرست چیزهایی که با کاما از هم جدا شده اند (به زبان انگلیسی) که زنگ را به صدا در می آورند. (به عنوان مثال: گربه، سگ، شخص، کوله پشتی، چمدان)",
       "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
     },
@@ -293,6 +293,12 @@
       "Title": "تخمین پوز",
       "Description": "تشخیص نقاط کلیدی از طریق تخمین پوز، با استفاده از مدل‌های سفارشی ONNX یا مدل YOLOv11 از پیش آموزش‌دیده شده (مخصوص وضعیت انسان).",
       "ML.PoseEstimation": "تخمین پوز را فعال کنید",
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "تقسیم بندی نمونه",
+      "Description": "با استفاده از مدل YOLO11 از پیش آموزش دیده، اشیاء و خطوط کلی آنها را تشخیص دهید.",
+      "ML.InstanceSegmentation": "بخش‌بندی نمونه را فعال کنید",
       "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
     }
   }

@@ -31,7 +31,7 @@
   "edit_group": "گۇرۇپپا تەھرىرلەش",
   "delete_group": "گۇرۇپپىنى ئۆچۈرۈڭ",
   "dashboard_from_group": "بۇ گۇرۇپپىدىن باشقۇرۇش تاختىسى قۇرۇڭ",
-  "group_modules": "بۇ گۇرۇپپىدىكى بۆلەكلەر",
+  "group_modules": "بۇ گۇرۇپپىدىكى مودۇللار",
   "modules": "Modules",
   "empty_group": "بۇ گۇرۇپپىدا مودۇل يوق.",
   "scheduler_wizard": "پىلانلىغۇچى",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ۋاقىت ئاخىرلاشقاندا",
   "cronwizard_action_custom_script": "ئىختىيارى ھەرىكەت قوليازمىسى",
   "cronwizard_action_no_action": "ھەرىكەت يوق",
-  "cronwizard_action_schedule_variable_hint": "Cron ئىپادىلەش ئۇسۇلىدا ئۆزگەرگۈچى مىقدار <span class=\"notranslate color-primary\">{{@ name}}</span> ئىشلىتىڭ ياكى <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ئاپتوماتىك پروگراممىلاردا ئىشلىتىڭ.",
+  "cronwizard_action_schedule_variable_hint": "Cron ئىپادىلەش ئۇسۇلىدا ئۆزگەرگۈچى مىقدار <span class=\"notranslate color-primary\">{{@ name}}</span> ئىشلىتىڭ ياكى <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ئاپتوماتىك پروگراممىدا ئىشلىتىڭ.",
   "scheduler_preset_action_command_turn_on": "قوزغىتىڭ",
   "scheduler_preset_action_command_turn_off": "تاقاش",
   "scheduler_preset_action_command_set_level": "سەۋىيە بەلگىلەڭ",
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Network MQTT",
-      "Description": "MQTT ۋاسىتىچىسىگە ئۇلىنىپ ، ئىنتېرنېت ئارقىلىق خالىغان يەردىن HomeGenie Panel دېتالىنى ئىشلىتىڭ ياكى ئوخشاش MQTT تورىدىكى HomeGenie ئۈسكۈنىلىرىنى ئۇلاڭ.",
+      "Description": "MQTT ۋاسىتىچىگە ئۇلىنىپ ، HomeGenie Panel دېتالىنى ئىنتېرنېت ئارقىلىق خالىغان يەردىن ئىشلىتىڭ ياكى ئوخشاش MQTT تورىدىكى HomeGenie ئۈسكۈنىلىرىنى ئۇلاڭ.",
       "MQTT.SensorPublish": "بۇ مودۇل چىقارغان ۋەقەلەرنى ئېلان قىلىڭ",
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "مۇلازىمېتىر ئادرېسى",
@@ -166,7 +166,7 @@
       "ConfigureOptions.WebSockets": "WebSockets نى ئىشلىتىڭ",
       "ConfigureOptions.TLS": "TLS / SSL نى قوزغىتىڭ",
       "ConfigureOptions.Username": "ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
-      "ConfigureOptions.Password": "پارول (ئىختىيارىي)",
+      "ConfigureOptions.Password": "پارول (ئىختىيارى)",
       "ConfigureOptions.ImportExternal": "سىرتقى مودۇللارنى ئەكىرىڭ"
     },
     "78": {
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "ھەرىكەتنى بايقاش ھالىتى",
       "Status.Battery": "باتارېيە سەۋىيىسى",
       "Sensor.DoorWindow": "ئىشىك / كۆزنەك سېنزور ھالىتى (ئوچۇق / يېپىق)",
-      "Status.Level": "Switch status (on / off)"
+      "Status.Level": "ئالماشتۇرۇش ھالىتى (on / off)"
     },
     "401": {
       "Title": "Demo - ئىشىكنى تاقاش",
@@ -240,7 +240,7 @@
       "Description": "Demo كۆپ سېنزورنىڭ ھەرىكەت بايقاشنى تەقلىد قىلىدۇ."
     },
     "410": {
-      "Title": "سېنزور تەقلىدچىسى",
+      "Title": "سېنزور تەقلىدلىگۈچىسى",
       "Description": "ئىختىيارى سېنزور قىممىتىنى چىقىرىڭ.",
       "Simulator.Sensor.Temperature": "تېمپېراتۇرا سېنزورى",
       "Simulator.Sensor.Humidity": "نەملىك سېنزورى",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "ئېلېكترونلۇق خەت ھېساباتى",
-      "Description": "ئېلېكترونلۇق خەت ئەۋەتىش / قوبۇل قىلىش ئۈچۈن سىستېما پروگراممىلىرى ئىشلىتىدىغان ئېلېكترونلۇق خەت ھېسابات ئۇچۇرلىرىنى ساقلايدۇ.",
+      "Description": "ئېلېكترونلۇق خەت ساندۇقى ئۇچۇرىنى ئېلېكترونلۇق خەت ئەۋەتىش / قوبۇل قىلىش ئۈچۈن سىستېما پروگراممىلىرى ئىشلىتىدۇ.",
       "ConfigureOptions.Email.Sender": "1. ئېلېكترونلۇق خەت ئادرېسى",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP مۇلازىمېتىر ئادرېسى",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
@@ -273,7 +273,7 @@
       "Description": "ھەرىكەتنى بايقاش ۋە مۇھىت نۇرىغا ئاساسەن ئۈسكۈنىنى قوزغىتىڭ ياكى ئېتىپ قويۇڭ.",
       "HomeGenie.SmartLights.Enable": "«ئەقلىي ئىقتىدارلىق ئۈسكۈنە» نى قوزغىتىڭ",
       "HomeGenie.SmartLights.OnMotionDetect": "سېنزور تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارىي)",
-      "HomeGenie.SmartLights.CheckLuminosity": "نۇر سېنزورى تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارى)",
+      "HomeGenie.SmartLights.CheckLuminosity": "نۇر سېنزورى تەرىپىدىن كونترول قىلىنىدۇ (ئىختىيارىي)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "ھەرىكەتسىز ۋاقىت (سېكۇنت) دىن كېيىن ئېتىۋېتىڭ.",
       "HomeGenie.SmartLights.MinLuminance": "يورۇقلۇق دەرىجىسى تۆۋەن بولسا ئېچىڭ:"
     },
@@ -286,13 +286,19 @@
       "Title": "ئوبيېكتنى بايقاش",
       "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
       "ML.ObjectDetection": "جىسىملارنى بايقاشنى قوزغىتىڭ",
-      "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار تىزىملىكى (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
+      "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
     },
     "911": {
       "Title": "Pose estimation",
       "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLOv11 مودېلى (ئىنسانلارنىڭ تۇرقىغا خاس).",
       "ML.PoseEstimation": "تۇراقلىق مۆلچەرنى قوزغىتىڭ",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
+    },
+    "912": {
+      "Title": "بۆلەك بۆلۈمى",
+      "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىم ۋە ئۇلارنىڭ تىزىمىنى ئېنىقلاڭ.",
+      "ML.InstanceSegmentation": "ئۈلگە بۆلەكنى قوزغىتىڭ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
     }
   }

@@ -58,7 +58,7 @@
   "cronwizard_days": "Matsatsi",
   "cronwizard_months": "Likhoeli",
   "cronwizard_minuteselect_everyminute": "Motsotso o mong le o mong",
-  "cronwizard_minuteselect_everynthminute": "Metsotso e 'ngoe le e 'ngoe e fanoeng",
+  "cronwizard_minuteselect_everynthminute": "Metsotso e meng le e meng",
   "cronwizard_minuteselect_selectedminutes": "Metsotso e khethiloeng",
   "cronwizard_hourselect_everyhour": "Hora e 'ngoe le e 'ngoe",
   "cronwizard_hourselect_everynthhour": "Lihora tse ling le tse ling",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Qetellong ea nako",
   "cronwizard_action_custom_script": "Sengoliloeng sa ketso",
   "cronwizard_action_no_action": "Ha ho ketso",
-  "cronwizard_action_schedule_variable_hint": "Sebelisa <span class=\"notranslate color-primary\">@ {{name}}</span> e le ntho e feto-fetohang ho cron kapa sebelisa <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> mananeong a automation ho supa ketsahalo ena.",
+  "cronwizard_action_schedule_variable_hint": "Sebelisa <span class=\"notranslate color-primary\">@ {{name}}</span> e le ntho e feto-fetohang ho cron kapa sebelisa <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> mananeong a ikemetseng ho supa ketsahalo ena.",
   "scheduler_preset_action_command_turn_on": "Bulela",
   "scheduler_preset_action_command_turn_off": "Koala",
   "scheduler_preset_action_command_set_level": "Beha boemo",
@@ -162,7 +162,7 @@
       "ConfigureOptions.ClientId": "Id ea moreki.",
       "ConfigureOptions.ServerAddress": "Aterese ea seva",
       "ConfigureOptions.ServerPort": "Boema-kepe ba seva",
-      "ConfigureOptions.Encryption": "Lumella mokhoa oa ho ngola oa ho qetela (E2EE)",
+      "ConfigureOptions.Encryption": "Numella mokhoa oa ho ngola o tlohang ho isa qetellong (E2EE)",
       "ConfigureOptions.WebSockets": "Sebelisa WebSockets",
       "ConfigureOptions.TLS": "E nolofalletsa TLS/SSL",
       "ConfigureOptions.Username": "Username (boikhethelo)",
@@ -228,7 +228,7 @@
       "Sensor.Luminance": "Boleng ba khanya",
       "Sensor.MotionDetect": "Boemo ba ho lemoha motsamao",
       "Status.Battery": "Boemo ba betri",
-      "Sensor.DoorWindow": "Boemo ba sensor ea monyako / fensetere (e butsoe / e koetsoe)",
+      "Sensor.DoorWindow": "Boemo ba sensor ea mamati / fensetere (e butsoe / e koetsoe)",
       "Status.Level": "Fetosa boemo (ho bulela/tima)"
     },
     "401": {
@@ -275,7 +275,7 @@
       "HomeGenie.SmartLights.OnMotionDetect": "E laoloa ke sensor (ho ikhethela)",
       "HomeGenie.SmartLights.CheckLuminosity": "E laoloa ke sensor ea leseli (ho ikhethela)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Koala ka mor'a nako ea ho se sebetse (metsotsoana)",
-      "HomeGenie.SmartLights.MinLuminance": "Bulela haeba leseli le ka tlase:"
+      "HomeGenie.SmartLights.MinLuminance": "Bulela haeba leseli le le ka tlase:"
     },
     "8": {
       "Title": "Mebala ea ho chaba ha Letsatsi",
@@ -293,6 +293,12 @@
       "Title": "Emisa khakanyo",
       "Description": "Ho lemoha lintlha tsa sehlooho ka khakanyo ea boemo, ho sebelisoa mefuta e tloahelehileng ea ONNX kapa moetso oa kamehla oa YOLOv11 o koetlisitsoeng esale pele (ka sebopeho sa motho).",
       "ML.PoseEstimation": "Lumella khakanyo ea boemo",
+      "ConfigureOptions.Yolo.ModelPath": "Tsela ea faele ea mohlala ea YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Karohano ea mohlala",
+      "Description": "Lekola lintho le moralo oa tsona u sebelisa mofuta oa YOLO11 o koetlisitsoeng esale pele.",
+      "ML.InstanceSegmentation": "Lumella ho arola mohlala",
       "ConfigureOptions.Yolo.ModelPath": "Tsela ea faele ea mohlala ea YOLO11 (.onnx)"
     }
   }

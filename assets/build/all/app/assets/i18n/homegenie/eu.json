@@ -57,7 +57,7 @@
   "cronwizard_hours": "Orduak",
   "cronwizard_days": "Egunak",
   "cronwizard_months": "Hilabeteak",
-  "cronwizard_minuteselect_everyminute": "Minutu bakoitzean",
+  "cronwizard_minuteselect_everyminute": "Minutu bakoitza",
   "cronwizard_minuteselect_everynthminute": "Emandako minutu bakoitzean",
   "cronwizard_minuteselect_selectedminutes": "Hautatutako minutuak",
   "cronwizard_hourselect_everyhour": "Orduro",
@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "IP kamera generikoa",
-      "Description": "Bistaratu/bideratu IP kamera batetik irudien jarioa.",
+      "Description": "Bistaratu/bideratu irudien jarioa IP kamera batetik.",
       "IpCamera.ImageURL": "Kameraren irudiaren APIaren URLa (ikusi zure kameraren dokumentuak)",
       "IpCamera.Username": "Erabiltzaile izena (aukerakoa)",
       "IpCamera.Password": "Pasahitza (aukerakoa)",
@@ -226,7 +226,7 @@
       "Description": "Ezarri eskuz gailu birtualaren balioak.",
       "Sensor.Temperature": "Tenperaturaren balioa",
       "Sensor.Luminance": "Luminantza-balioa",
-      "Sensor.MotionDetect": "Mugimenduak hautemateko egoera",
+      "Sensor.MotionDetect": "Mugimendua hautemateko egoera",
       "Status.Battery": "Bateria maila",
       "Sensor.DoorWindow": "Ate/Leiho sentsorearen egoera (ireki/itxita)",
       "Status.Level": "Aldatu egoera (aktibatu/desaktibatu)"
@@ -271,7 +271,7 @@
     "145": {
       "Title": "Gailu adimenduna",
       "Description": "Piztu/itzali gailua mugimendua hautemateko eta giro-argiaren arabera.",
-      "HomeGenie.SmartLights.Enable": "Gaitu 'Gailu adimenduna'",
+      "HomeGenie.SmartLights.Enable": "Gaitu \"Gailu adimenduna\"",
       "HomeGenie.SmartLights.OnMotionDetect": "Sentsore bidez kontrolatua (aukerakoa)",
       "HomeGenie.SmartLights.CheckLuminosity": "Argi sentsorearen bidez kontrolatua (aukerakoa)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Desaktibatu jarduerarik gabeko denbora-muga igaro ondoren (segundoak)",
@@ -286,13 +286,19 @@
       "Title": "Objektuak hautematea",
       "Description": "Detektatu objektuak aldez aurretik trebatutako YOLO11 eredua erabiliz.",
       "ML.ObjectDetection": "Gaitu objektuak hautematea",
-      "ML.ObjectDetection.TriggerDetect": "Komaz bereizita alarma piztuko duten gauzen zerrenda (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
+      "ML.ObjectDetection.TriggerDetect": "Alarma piztuko duten gauzen zerrenda komaz bereizita (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 eredu-fitxategiaren bidea (.onnx)"
     },
     "911": {
       "Title": "Pose estimazioa",
       "Description": "Gako-puntuak hautematea pose estimazioaren bidez, ONNX eredu pertsonalizatuak edo aldez aurretik prestatutako YOLOv11 eredu lehenetsia erabiliz (gizakiaren jarreraren espezifikoa).",
       "ML.PoseEstimation": "Gaitu poseen estimazioa",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 eredu-fitxategiaren bidea (.onnx)"
+    },
+    "912": {
+      "Title": "Instantzia-segmentazioa",
+      "Description": "Objektuak eta haien eskema detektatu aldez aurretik trebatutako YOLO11 eredua erabiliz.",
+      "ML.InstanceSegmentation": "Gaitu instantzien segmentazioa",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 eredu-fitxategiaren bidea (.onnx)"
     }
   }

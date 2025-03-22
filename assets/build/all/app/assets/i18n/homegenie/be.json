@@ -61,7 +61,7 @@
   "cronwizard_minuteselect_everynthminute": "Кожныя дадзены хвіліны",
   "cronwizard_minuteselect_selectedminutes": "Выбраныя хвіліны",
   "cronwizard_hourselect_everyhour": "Кожную гадзіну",
-  "cronwizard_hourselect_everynthhour": "Кожныя гадзіны",
+  "cronwizard_hourselect_everynthhour": "Кожныя зададзеныя гадзіны",
   "cronwizard_hourselect_selectedhours": "Выбраныя гадзіны",
   "cronwizard_dayselect_everyday": "Кожны дзень",
   "cronwizard_dayselect_selecteddays": "Выбраныя дні",
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Сетка MQTT",
-      "Description": "Падключыцеся да брокера MQTT, каб выкарыстоўваць праграму HomeGenie Panel з любога месца праз Інтэрнэт або злучыць прылады HomeGenie у адной сетцы MQTT.",
+      "Description": "Падключыцеся да брокера MQTT, каб выкарыстоўваць прыкладанне HomeGenie Panel з любога месца праз Інтэрнэт або злучыць прылады HomeGenie у адной сетцы MQTT.",
       "MQTT.SensorPublish": "Публікацыя падзей, выдадзеных гэтым модулем",
       "ConfigureOptions.ClientId": "Ідэнтыфікатар кліента.",
       "ConfigureOptions.ServerAddress": "Адрас сервера",
@@ -293,6 +293,12 @@
       "Title": "Ацэнка паставы",
       "Description": "Выяўленне ключавых кропак праз ацэнку позы, з выкарыстаннем карыстальніцкіх мадэляў ONNX або папярэдне падрыхтаванай мадэлі YOLOv11 па змаўчанні (спецыфічнай для позы чалавека).",
       "ML.PoseEstimation": "Уключыць ацэнку позы",
+      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Сегментацыя асобнікаў",
+      "Description": "Выяўляйце аб'екты і іх контуры з дапамогай папярэдне падрыхтаванай мадэлі YOLO11.",
+      "ML.InstanceSegmentation": "Уключыць сегментацыю асобніка",
       "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO11 (.onnx)"
     }
   }

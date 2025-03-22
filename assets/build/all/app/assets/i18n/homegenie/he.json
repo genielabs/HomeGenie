@@ -1,6 +1,6 @@
 {
   " ": "------------------------------------------",
-  "welcome_to_homegenie": "ברוכים הבאים אל HomeGenie!",
+  "welcome_to_homegenie": "ברוכים הבאים ל-HomeGenie!",
   "welcome_subtitle": "מודיעין האוטומציה הניתנת לתכנות",
   "not_configured_yet": "המערכת עדיין לא מוגדרת. אשף התקנה זה יעזור לך להפעיל את המערכת שלך בכמה שלבים.",
   "system_config_start_with_base_and_backup": "שחזר מקובץ גיבוי",
@@ -29,7 +29,7 @@
   "groups": "קבוצות",
   "add_group": "הוסף קבוצה",
   "edit_group": "ערוך קבוצה",
-  "delete_group": "מחק את הקבוצה",
+  "delete_group": "מחק קבוצה",
   "dashboard_from_group": "צור לוח מחוונים מקבוצה זו",
   "group_modules": "מודולים בקבוצה זו",
   "modules": "מודולים",
@@ -160,7 +160,7 @@
       "Description": "התחבר למתווך MQTT כדי להשתמש באפליקציית HomeGenie Panel מכל מקום דרך האינטרנט או כדי לחבר בין התקני HomeGenie באותה רשת MQTT.",
       "MQTT.SensorPublish": "פרסם אירועים הנפלטים על ידי מודול זה",
       "ConfigureOptions.ClientId": "זיהוי לקוח",
-      "ConfigureOptions.ServerAddress": "כתובת שרת",
+      "ConfigureOptions.ServerAddress": "כתובת השרת",
       "ConfigureOptions.ServerPort": "יציאת שרת",
       "ConfigureOptions.Encryption": "אפשר הצפנה מקצה לקצה (E2EE)",
       "ConfigureOptions.WebSockets": "השתמש ב- WebSockets",
@@ -232,7 +232,7 @@
       "Status.Level": "מצב מתג (הפעלה/כיבוי)"
     },
     "401": {
-      "Title": "הדגמה - החלפת דלת",
+      "Title": "הדגמה - Toggle Door",
       "Description": "מדמה דלת פתוחה/סגורה של חיישן דלת-חלון הדגמה."
     },
     "402": {
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "חיישן לחות",
       "Simulator.Sensor.Luminance": "חיישן אור",
       "Simulator.Meter.Watts": "מד וואט",
-      "Simulator.Meter.Watts.Max": "הספק מקס וואט",
+      "Simulator.Meter.Watts.Max": "עוצמת וואט מקסימלית",
       "Simulator.Sensor.DataFrequency": "תדירות פליטת סימולטור"
     },
     "505": {
@@ -293,6 +293,12 @@
       "Title": "הערכת תנוחה",
       "Description": "זיהוי נקודות מפתח באמצעות הערכת תנוחה, באמצעות דגמי ONNX מותאמים אישית או מודל YOLOv11 שהוכשר מראש המוגדר כברירת מחדל (ספציפי לתנוחה אנושית).",
       "ML.PoseEstimation": "אפשר הערכת תנוחה",
+      "ConfigureOptions.Yolo.ModelPath": "נתיב של קובץ דגם YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "פילוח מופע",
+      "Description": "זיהוי עצמים וקווי המתאר שלהם באמצעות מודל YOLO11 מיומן מראש.",
+      "ML.InstanceSegmentation": "אפשר פילוח מופעים",
       "ConfigureOptions.Yolo.ModelPath": "נתיב של קובץ דגם YOLO11 (.onnx)"
     }
   }

@@ -53,7 +53,7 @@
   "cronwizard_add_exact_time": "Bættu við nákvæmum tíma",
   "cronwizard_start_time": "Upphafstími",
   "cronwizard_end_time": "Lokatími",
-  "cronwizard_minutes": "Fundargerð",
+  "cronwizard_minutes": "Fundargerðir",
   "cronwizard_hours": "Klukkutímar",
   "cronwizard_days": "Dagar",
   "cronwizard_months": "Mánuðir",
@@ -78,7 +78,7 @@
   "cronwizard_action_preset_every_occurrence": "Við hvert atvik",
   "cronwizard_action_preset_slot_start": "Við upphaf tímaramma",
   "cronwizard_action_preset_slot_end": "Í lok tímaramma",
-  "cronwizard_action_custom_script": "Sérsniðið aðgerðarhandrit",
+  "cronwizard_action_custom_script": "Sérsniðið aðgerðaforskrift",
   "cronwizard_action_no_action": "Engin aðgerð",
   "cronwizard_action_schedule_variable_hint": "Notaðu <span class=\"notranslate color-primary\">@ {{name}}</span> sem breytu í cron tjáningum eða notaðu <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> í sjálfvirkniforritum til að vísa til þessa atburðar.",
   "scheduler_preset_action_command_turn_on": "Kveiktu á",
@@ -121,7 +121,7 @@
   "tap_to_disable": "Smelltu til að slökkva á",
   "tap_to_enable": "Smelltu til að virkja",
   "program_data": "Dagskrá gögn",
-  "visual_code": "Sjónræn kóða",
+  "visual_code": "Sjónrænn kóða",
   "generated_code": "Búinn til kóða",
   "setup_code": "Uppsetning",
   "main_code": "Aðal",
@@ -174,7 +174,7 @@
       "Description": "Notaðu hvaða hitaskynjara sem er og snjallrofa til að innleiða virkni hitastilla.",
       "VirtualThermostat.TemperatureModule": "Hitaskynjari",
       "VirtualThermostat.HeatingSwitchModule": "Hitunarrofi",
-      "VirtualThermostat.CoolingSwitchModule": "Kælirofi",
+      "VirtualThermostat.CoolingSwitchModule": "Kælingarrofi",
       "ConfigureOptions.ThermostatsCount": "Fjöldi hitastilla"
     },
     "81": {
@@ -201,7 +201,7 @@
     "90": {
       "Title": "Öryggisviðvörunarkerfi",
       "Description": "Notaðu skynjara og önnur tæki til að innleiða öryggisviðvörunarkerfi.",
-      "HomeGenie.SecurityAlarm": "Notaðu sem viðvörun/glampa",
+      "HomeGenie.SecurityAlarm": "Notist sem viðvörun/glampi",
       "HomeGenie.SecurityTriggerHome": "Virkar líka þegar vopnað er Heim",
       "HomeGenie.SecuritySensor": "Notaðu sem öryggisskynjara",
       "ConfigureOptions.Email.Recipients": "Kommuaðskilinn listi yfir tölvupósta viðtakenda fyrir viðvörunartilkynningar",
@@ -240,7 +240,7 @@
       "Description": "Hermir eftir hreyfiskynjun kynningar fjölskynjara."
     },
     "410": {
-      "Title": "Skynjarhermir",
+      "Title": "Skynjari hermir",
       "Description": "Gefa frá sér slembimælisgildi.",
       "Simulator.Sensor.Temperature": "Hitaskynjari",
       "Simulator.Sensor.Humidity": "Rakaskynjari",
@@ -293,6 +293,12 @@
       "Title": "Stöðumat",
       "Description": "Greining á lyklapunkti með mati á stöðu, með því að nota sérsniðin ONNX líkön eða sjálfgefna forþjálfaða YOLOv11 líkanið (sérstakt fyrir mannlega stellingu).",
       "ML.PoseEstimation": "Virkja mat á stöðu",
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO11 líkanskrár (.onnx)"
+    },
+    "912": {
+      "Title": "Dæmi skipting",
+      "Description": "Finndu hluti og útlínur þeirra með því að nota fyrirfram þjálfað YOLO11 líkan.",
+      "ML.InstanceSegmentation": "Virkja skiptingu tilvika",
       "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO11 líkanskrár (.onnx)"
     }
   }

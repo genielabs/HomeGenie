@@ -5,7 +5,7 @@
   "not_configured_yet": "სისტემა ჯერ არ არის კონფიგურირებული. დაყენების ეს ოსტატი დაგეხმარებათ თქვენი სისტემის ამოქმედებაში რამდენიმე ნაბიჯით.",
   "system_config_start_with_base_and_backup": "აღდგენა სარეზერვო ფაილიდან",
   "system_config_start_with_default_setup": "ნაგულისხმევი დაყენება",
-  "system_config_include_demo": "დემო ჩართვა მოწყობილობის სიმულირებული აქტივობით",
+  "system_config_include_demo": "ჩართეთ დემო სიმულირებული მოწყობილობის აქტივობით",
   "system_config_additional_features": "დამატებითი ფუნქციები",
   "system_config_manual_setup": "ხელით დაყენება",
   "interfaces": "ინტერფეისები",
@@ -95,7 +95,7 @@
   "scheduler_preset_action_config_mode_heat_eco": "სითბოს ეკონომია",
   "scheduler_preset_action_config_mode_cool": "მაგარია",
   "scheduler_preset_action_config_mode_cool_eco": "მაგარი ეკონომია",
-  "scheduler_preset_action_program_run": "გაუშვით პროგრამა",
+  "scheduler_preset_action_program_run": "პროგრამის გაშვება",
   "scheduler_preset_action_config_program": "პროგრამა",
   "scheduler_preset_action_config_options": "ოფციები",
   "scheduler_preset_action_program_say": "თქვი",
@@ -103,7 +103,7 @@
   "save_and_build": "შენახვა და აშენება",
   "toggle_widgets_preview": "ვიჯეტების გადახედვის გადართვა",
   "stop_program": "შეჩერების პროგრამა",
-  "run_program": "პროგრამის გაშვება",
+  "run_program": "გაუშვით პროგრამა",
   "enable_to_run_program": "ჩართეთ პროგრამა მისი გასაშვებად",
   "program_status_added": "დამატებულია",
   "program_status_idle": "უსაქმური",
@@ -165,7 +165,7 @@
       "ConfigureOptions.Encryption": "ჩართეთ ბოლოდან ბოლომდე დაშიფვრა (E2EE)",
       "ConfigureOptions.WebSockets": "გამოიყენეთ WebSockets",
       "ConfigureOptions.TLS": "ჩართეთ TLS/SSL",
-      "ConfigureOptions.Username": "მომხმარებლის სახელი (სურვილისამებრ)",
+      "ConfigureOptions.Username": "მომხმარებლის სახელი (არასავალდებულო)",
       "ConfigureOptions.Password": "პაროლი (სურვილისამებრ)",
       "ConfigureOptions.ImportExternal": "გარე მოდულების იმპორტი"
     },
@@ -293,6 +293,12 @@
       "Title": "პოზის შეფასება",
       "Description": "საკვანძო წერტილების გამოვლენა პოზის შეფასებით, მორგებული ONNX მოდელების ან ნაგულისხმევი წინასწარ გაწვრთნილი YOLOv11 მოდელის გამოყენებით (ადამიანის პოზისთვის სპეციფიკური).",
       "ML.PoseEstimation": "ჩართეთ პოზის შეფასება",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 მოდელის ფაილის გზა (.onnx)"
+    },
+    "912": {
+      "Title": "ინსტანციის სეგმენტაცია",
+      "Description": "აღმოაჩინე ობიექტები და მათი კონტურები წინასწარ გაწვრთნილი YOLO11 მოდელის გამოყენებით.",
+      "ML.InstanceSegmentation": "ინსტანციის სეგმენტაციის ჩართვა",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 მოდელის ფაილის გზა (.onnx)"
     }
   }

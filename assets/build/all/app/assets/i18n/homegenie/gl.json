@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Meses seleccionados",
   "cronwizard_schedule_set_exact_time": "Establece a hora do evento.",
   "cronwizard_schedule_set_slot_start": "Establecer o inicio da franxa horaria.",
-  "cronwizard_schedule_set_slot_end": "Comezando polo {{start}} .<span class=\"notranslate\"><br/></span> Establecer o final da franxa horaria.",
+  "cronwizard_schedule_set_slot_end": "Comezando polo {{start}} .<span class=\"notranslate\"><br/></span> Establecer o final do intervalo de tempo.",
   "cronwizard_bindings_define_types_and_modules": "Definir tipos e módulos que están suxeitos a esta programación (opcional)",
   "cronwizard_bindings_select_types": "Selecciona tipos",
   "cronwizard_action_set_action_to_execute": "Establece a acción para executar nas ocorrencias deste evento",
@@ -79,7 +79,7 @@
   "cronwizard_action_preset_slot_start": "No inicio dunha franxa horaria",
   "cronwizard_action_preset_slot_end": "Ao final dunha franxa horaria",
   "cronwizard_action_custom_script": "Script de acción personalizado",
-  "cronwizard_action_no_action": "Sen acción",
+  "cronwizard_action_no_action": "Ningunha acción",
   "cronwizard_action_schedule_variable_hint": "Use <span class=\"notranslate color-primary\">@ {{name}}</span> como variable nas expresións cron ou use <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> nos programas de automatización para facer referencia a este evento.",
   "scheduler_preset_action_command_turn_on": "Acende",
   "scheduler_preset_action_command_turn_off": "Apague",
@@ -126,7 +126,7 @@
   "setup_code": "Configuración",
   "main_code": "Principal",
   "context_code": "Contexto",
-  "main_code_empty_note": "O código \"Principal\" está baleiro. Use o editor \"Código visual\" para xerar este código: - Abra a categoría \"Programa\" desde a paleta de comandos da esquerda - Arrastre un bloque de tipo \"Principal\" no espazo de traballo do código visual - Engade no seu interior outros bloques de código para implementar as accións e a lóxica deste programa. O programa \"Principal\" pódese executar manualmente ou iniciarse automaticamente en función das condicións eventualmente indicadas no código de configuración.",
+  "main_code_empty_note": "O código \"principal\" está baleiro. Use o editor \"Código visual\" para xerar este código: - Abra a categoría \"Programa\" desde a paleta de comandos da esquerda - Arrastre un bloque de tipo \"Principal\" no espazo de traballo do código visual - Engade no seu interior outros bloques de código para implementar as accións e a lóxica deste programa. O programa \"Principal\" pódese executar manualmente ou iniciarse automaticamente en función das condicións eventualmente indicadas no código de configuración.",
   "setup_code_empty_note": "O código \"Configuración\" está baleiro. Use o editor \"Código visual\" para xerar este código: - Abra a categoría \"Programa\" desde a paleta de comandos da esquerda - Arrastre un bloque do tipo \"Configuración\" no espazo de traballo do código visual - Engade no seu interior outros bloques de código para determinar as condicións que desencadearán a execución do código \"Principal\" Este código avalíase cada vez que se produce un novo evento e polo menos unha vez por minuto.",
   "capture_commands": "Capturar comandos",
   "capture_commands_description": "Engade todos os comandos realizados manualmente en widgets ao programa.",
@@ -135,7 +135,7 @@
   "capture_pause_asis": "Tal e como está",
   "$options": {
     "16": {
-      "Title": "Memoria de nivel",
+      "Title": "Nivel Memoria",
       "Description": "Almacenar e recuperar o último nivel de atenuador.",
       "HomeGenie.LevelMemory": "Recorda o último nivel de luz cando estea acendido",
       "HomeGenie.LevelMemory.SimulateOnly": "Só simular"
@@ -201,7 +201,7 @@
     "90": {
       "Title": "Sistema de alarma de seguridade",
       "Description": "Use sensores e outros dispositivos para implementar un sistema de alarma de seguridade.",
-      "HomeGenie.SecurityAlarm": "Use como alarma/estroboscópico",
+      "HomeGenie.SecurityAlarm": "Usar como alarma/estroboscópico",
       "HomeGenie.SecurityTriggerHome": "Tamén se dispara cando está armado Home",
       "HomeGenie.SecuritySensor": "Use como sensor de seguridade",
       "ConfigureOptions.Email.Recipients": "Lista separada por comas dos correos electrónicos dos destinatarios para as notificacións de alarma",
@@ -280,7 +280,7 @@
     "8": {
       "Title": "Escenario das cores do amencer",
       "Description": "Exemplo de escenario \"Sunrise\" para luces LED que cambian de cor.",
-      "Scenarios.SunriseColors": "Ligazón ao escenario Sunrise Cores"
+      "Scenarios.SunriseColors": "Ligazón ao escenario Sunrise Colors"
     },
     "910": {
       "Title": "Detección de obxectos",
@@ -293,6 +293,12 @@
       "Title": "Estimación de poses",
       "Description": "Detección de puntos clave mediante a estimación da pose, utilizando modelos ONNX personalizados ou o modelo YOLOv11 preadestrado predeterminado (específico da pose humana).",
       "ML.PoseEstimation": "Activa a estimación de pose",
+      "ConfigureOptions.Yolo.ModelPath": "Ruta do ficheiro do modelo YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentación de instancias",
+      "Description": "Detecta obxectos e os seus contornos mediante un modelo YOLO11 adestrado previamente.",
+      "ML.InstanceSegmentation": "Activar a segmentación de instancias",
       "ConfigureOptions.Yolo.ModelPath": "Ruta do ficheiro do modelo YOLO11 (.onnx)"
     }
   }

@@ -67,7 +67,7 @@
   "cronwizard_dayselect_selecteddays": "Awọn ọjọ ti a yan",
   "cronwizard_dayowselect_selecteddaysow": "Awọn ọjọ ti a yan ti ọsẹ",
   "cronwizard_monthselect_everymonth": "Ni gbogbo oṣu",
-  "cronwizard_monthselect_selectedmonths": "Awọn oṣu ti a yan",
+  "cronwizard_monthselect_selectedmonths": "Awọn osu ti a yan",
   "cronwizard_schedule_set_exact_time": "Ṣeto akoko iṣẹlẹ.",
   "cronwizard_schedule_set_slot_start": "Ṣeto akoko Iho ibere.",
   "cronwizard_schedule_set_slot_end": "Bibẹrẹ ni {{start}} .<span class=\"notranslate\"><br/></span> Ṣeto akoko Iho ipari.",
@@ -269,7 +269,7 @@
       "ConfigureOptions.Email.SmtpUseSsl": "6. olupin SMTP lo SSL"
     },
     "145": {
-      "Title": "Ohun elo Smart",
+      "Title": "Smart Device",
       "Description": "Tan-an/pa ẹrọ naa da lori wiwa išipopada ati ina ibaramu.",
       "HomeGenie.SmartLights.Enable": "Mu 'Ẹrọ Smart ṣiṣẹ'",
       "HomeGenie.SmartLights.OnMotionDetect": "Ṣakoso nipasẹ sensọ (aṣayan)",
@@ -284,7 +284,7 @@
     },
     "910": {
       "Title": "Wiwa nkan",
-      "Description": "Wa awọn nkan nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
+      "Description": "Ṣawari awọn nkan nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
       "ML.ObjectDetection": "Mu wiwa nkan ṣiṣẹ",
       "ML.ObjectDetection.TriggerDetect": "Akojọ awọn ohun ti o ya sọtọ (ni ede Gẹẹsi) ti yoo fa itaniji naa. (fun apẹẹrẹ: ologbo, aja, eniyan, apoeyin, apoti)",
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
@@ -293,6 +293,12 @@
       "Title": "Iṣiro iduro",
       "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLOv11 ti a ti kọ tẹlẹ (pato-pato eniyan).",
       "ML.PoseEstimation": "Mu iṣiro iduro ṣiṣẹ",
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Apapọ apẹẹrẹ",
+      "Description": "Ṣewadii awọn nkan ati awọn ilana wọn nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
+      "ML.InstanceSegmentation": "Mu ipin apẹẹrẹ ṣiṣẹ",
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
     }
   }

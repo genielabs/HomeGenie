@@ -15,7 +15,7 @@
   "HomeAutomation.ZigBee": "Ovládač ZigBee",
   "device_port": "Port zariadenia",
   "device_driver": "Vodič",
-  "flow_control": "Riadenie toku",
+  "flow_control": "Kontrola prietoku",
   "controller": "Ovládač",
   "programs": "programy",
   "repositories": "úložiská",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "Prepnúť náhľad miniaplikácií",
   "stop_program": "Zastaviť program",
   "run_program": "Spustite program",
-  "enable_to_run_program": "Povoľte program, aby ste ho mohli spustiť",
+  "enable_to_run_program": "Ak chcete program spustiť, povoľte ho",
   "program_status_added": "Pridané",
   "program_status_idle": "Nečinný",
   "program_status_setup": "Nastavenie",
@@ -127,7 +127,7 @@
   "main_code": "Hlavné",
   "context_code": "Kontext",
   "main_code_empty_note": "\"Hlavný\" kód je prázdny. Na vygenerovanie tohto kódu použite editor \"Visual code\": - Otvorte kategóriu \"Program\" z palety príkazov vľavo - Presuňte blok typu \"Main\" na pracovnú plochu vizuálneho kódu - Pridajte doň ďalšie bloky kódu na implementáciu akcií a logiky tohto programu Program \"Main\" je možné spustiť manuálne alebo automaticky na základe podmienok, ktoré sú prípadne uvedené v kóde nastavenia.",
-  "setup_code_empty_note": "Kód \"Nastavenie\" je prázdny. Na vygenerovanie tohto kódu použite editor \"Vizuálneho kódu\": - Otvorte kategóriu \"Program\" z palety príkazov naľavo - Presuňte blok typu \"Nastavenie\" do pracovného priestoru vizuálneho kódu - Pridajte doň ďalšie bloky kódu na určenie podmienok, ktoré spustia spustenie \"Hlavného\" kódu Tento kód sa vyhodnotí vždy, keď nastane nová udalosť a aspoň raz za minútu.",
+  "setup_code_empty_note": "Kód \"Nastavenie\" je prázdny. Na vygenerovanie tohto kódu použite editor \"Vizuálneho kódu\": - Otvorte kategóriu \"Program\" z palety príkazov vľavo - Presuňte blok typu \"Nastavenie\" do pracovného priestoru vizuálneho kódu - Pridajte doň ďalšie bloky kódu na určenie podmienok, ktoré spustia spustenie \"Hlavného\" kódu Tento kód sa vyhodnotí vždy, keď nastane nová udalosť a aspoň raz za minútu.",
   "capture_commands": "Zachytiť príkazy",
   "capture_commands_description": "Pridajte do programu všetky príkazy vykonávané ručne na widgetoch.",
   "capture_commands_pause": "Pauza medzi príkazmi",
@@ -191,8 +191,8 @@
     },
     "88": {
       "Title": "Všeobecná IP kamera",
-      "Description": "Zobrazenie/smerovanie zdroja obrazu z IP kamery.",
-      "IpCamera.ImageURL": "Webová adresa rozhrania API obrázka fotoaparátu (pozrite si dokumentáciu k fotoaparátu)",
+      "Description": "Zobrazte/smerujte obraz z IP kamery.",
+      "IpCamera.ImageURL": "Webová adresa rozhrania API obrázka z fotoaparátu (pozrite si dokumentáciu k fotoaparátu)",
       "IpCamera.Username": "Používateľské meno (voliteľné)",
       "IpCamera.Password": "Heslo (voliteľné)",
       "Widget.Config.fps": "Počet snímok za sekundu",
@@ -200,7 +200,7 @@
     },
     "90": {
       "Title": "Bezpečnostný poplachový systém",
-      "Description": "Použite senzory a ďalšie zariadenia na implementáciu bezpečnostného poplachového systému.",
+      "Description": "Použite senzory a iné zariadenia na implementáciu bezpečnostného poplachového systému.",
       "HomeGenie.SecurityAlarm": "Použite ako alarm/stroboskop",
       "HomeGenie.SecurityTriggerHome": "Spustí sa aj pri aktivácii Home",
       "HomeGenie.SecuritySensor": "Použiť ako bezpečnostný senzor",
@@ -209,7 +209,7 @@
       "ConfigureOptions.System.SirenStartTime": "Oneskorenie spustenia sirén (sekundy)",
       "ConfigureOptions.System.SirenMaxTime": "Maximálny čas sirén (sekundy, 0 = nekonečno)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program, ktorý sa spustí pri aktivácii",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Program, ktorý sa má spustiť pri vypnutom strážení",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Program, ktorý sa spustí pri deaktivovaní stráženia",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program, ktorý sa spustí pri spustení"
     },
     "95": {
@@ -291,8 +291,14 @@
     },
     "911": {
       "Title": "Odhad pozície",
-      "Description": "Detekcia kľúčových bodov prostredníctvom odhadu pozície, pomocou vlastných modelov ONNX alebo predvoleného vopred trénovaného modelu YOLOv11 (špecifického pre ľudskú pozíciu).",
+      "Description": "Detekcia kľúčových bodov prostredníctvom odhadu pozície, s použitím vlastných modelov ONNX alebo predvoleného predtrénovaného modelu YOLOv11 (špecifického pre ľudskú pózu).",
       "ML.PoseEstimation": "Povoliť odhad pozície",
+      "ConfigureOptions.Yolo.ModelPath": "Cesta súboru modelu YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentácia inštancií",
+      "Description": "Detekujte objekty a ich obrysy pomocou vopred trénovaného modelu YOLO11.",
+      "ML.InstanceSegmentation": "Povoliť segmentáciu inštancií",
       "ConfigureOptions.Yolo.ModelPath": "Cesta súboru modelu YOLO11 (.onnx)"
     }
   }

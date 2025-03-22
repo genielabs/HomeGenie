@@ -3,7 +3,7 @@
   "welcome_to_homegenie": "Nnọọ na HomeGenie!",
   "welcome_subtitle": "The programmable akpaaka ọgụgụ isi",
   "not_configured_yet": "Ahazibeghị sistemụ ma. Ọkachamara ntọlite a ga-enyere gị aka n'ịkwalite sistemụ gị ma na-arụ ọrụ na usoro ole na ole.",
-  "system_config_start_with_base_and_backup": "Weghachi na ndabere faịlụ",
+  "system_config_start_with_base_and_backup": "Weghachi na faịlụ ndabere",
   "system_config_start_with_default_setup": "Ntọlite mbụ",
   "system_config_include_demo": "Tinye ihe ngosi nwere mmemme ngwaọrụ emepụtara",
   "system_config_additional_features": "Atụmatụ ndị ọzọ",
@@ -190,7 +190,7 @@
       "EnergyManagement.EnergySavingMode": "Kwado"
     },
     "88": {
-      "Title": "Igwefoto IP izugbe",
+      "Title": "Igwefoto IP nkịtị",
       "Description": "Gosipụta/nri ihe onyonyo ụzọ site na igwefoto IP.",
       "IpCamera.ImageURL": "URL API igwefoto (lee dọkụmentị igwefoto gị)",
       "IpCamera.Username": "Aha njirimara (nhọrọ)",
@@ -233,7 +233,7 @@
     },
     "401": {
       "Title": "Ihe ngosi - Gbanwee ọnụ ụzọ",
-      "Description": "Na-emepe ọnụ ụzọ mepere/emechi nke ihe mmetụta ọnụ ụzọ-window ngosi."
+      "Description": "Simulates ụzọ mepere/emechi nke ihe mmetụta ọnụ ụzọ-window ngosi."
     },
     "402": {
       "Title": "Ihe ngosi - Achọpụtara ngagharị",
@@ -270,7 +270,7 @@
     },
     "145": {
       "Title": "Ngwa smart",
-      "Description": "Gbanyụọ/ gbanyụọ ngwaọrụ dabere na nchọpụta ngagharị yana ọkụ gburugburu.",
+      "Description": "Gbanyụọ/ gbanyụọ ngwaọrụ dabere na nchọpụta ngagharị na ọkụ gburugburu.",
       "HomeGenie.SmartLights.Enable": "Kwado 'Ngwaọrụ smart'",
       "HomeGenie.SmartLights.OnMotionDetect": "Ihe mmetụta na-achịkwa (nhọrọ)",
       "HomeGenie.SmartLights.CheckLuminosity": "Ihe mmetụta ọkụ na-achịkwa (nhọrọ)",
@@ -279,7 +279,7 @@
     },
     "8": {
       "Title": "Ihe ngosi agba ọwụwa anyanwụ",
-      "Description": "Ọmụmaatụ \"Ọwụwa Anyanwụ\" ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
+      "Description": "Ihe atụ \"Ọwụwa anyanwụ\" dị n'ọnọdụ maka agba na-agbanwe ọkụ ikanam.",
       "Scenarios.SunriseColors": "Njikọ na ọnọdụ ọdịda anyanwụ agba"
     },
     "910": {
@@ -293,6 +293,12 @@
       "Title": "Nhazi atụmatụ",
       "Description": "Nchọpụta isi ihe site na nleba anya pose, na-eji ụdị ONNX omenala ma ọ bụ ụdị YOLOv11 a zụrụ nke ọma (kpọmkwem pose mmadụ).",
       "ML.PoseEstimation": "Kwado ntule ọnọdụ",
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Nkeji ihe atụ",
+      "Description": "Chọpụta ihe na nkọwapụta ha site na iji ihe atụ YOLO11 a zụrụ nke ọma.",
+      "ML.InstanceSegmentation": "Kwado nkebi ihe atụ",
       "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
     }
   }

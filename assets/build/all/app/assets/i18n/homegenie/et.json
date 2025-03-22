@@ -294,6 +294,12 @@
       "Description": "Võtmepunkti tuvastamine poosihinnangu abil, kasutades kohandatud ONNX-mudeleid või vaikimisi eelkoolitatud YOLOv11 mudelit (inimese poospetsiifiline).",
       "ML.PoseEstimation": "Luba poseerimise hindamine",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudeli faili tee (.onnx)"
+    },
+    "912": {
+      "Title": "Eksemplari segmenteerimine",
+      "Description": "Tuvastage objekte ja nende piirjooni, kasutades eelkoolitatud YOLO11 mudelit.",
+      "ML.InstanceSegmentation": "Luba eksemplari segmenteerimine",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudeli faili tee (.onnx)"
     }
   }
 }

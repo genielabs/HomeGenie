@@ -1,8 +1,8 @@
 {
-  " ": "------------------------------------------",
+  " ": "-----------------------------------------",
   "welcome_to_homegenie": "Takulandilani ku HomeGenie!",
   "welcome_subtitle": "The programmable automation intelligence",
-  "not_configured_yet": "Dongosolo silinakonzedwe panobe. Wizard yokhazikitsira iyi ikuthandizani kuti mukhazikitse dongosolo lanu ndikuyenda pang'onopang'ono.",
+  "not_configured_yet": "Dongosolo silinakonzedwe panobe. Wizard iyi yokhazikitsira ikuthandizani kuti mukhazikitse dongosolo lanu ndikuyenda pang'onopang'ono.",
   "system_config_start_with_base_and_backup": "Bwezerani kuchokera ku fayilo yosunga zobwezeretsera",
   "system_config_start_with_default_setup": "Kukhazikitsa kofikira",
   "system_config_include_demo": "Phatikizani chiwonetsero chokhala ndi zida zoyeserera",
@@ -71,7 +71,7 @@
   "cronwizard_schedule_set_exact_time": "Khazikitsani nthawi yochitika.",
   "cronwizard_schedule_set_slot_start": "Khazikitsani nthawi yoyambira.",
   "cronwizard_schedule_set_slot_end": "Kuyambira {{start}} .<span class=\"notranslate\"><br/></span> Khazikitsani nthawi yomaliza.",
-  "cronwizard_bindings_define_types_and_modules": "Fotokozani mitundu ndi ma module omwe ali pansi pa ndondomekoyi (posankha)",
+  "cronwizard_bindings_define_types_and_modules": "Tanthauzirani mitundu ndi ma module omwe ali pansi pa ndondomekoyi (posankha)",
   "cronwizard_bindings_select_types": "Sankhani mitundu",
   "cronwizard_action_set_action_to_execute": "Khazikitsani zomwe zichitike zikachitika",
   "cronwizard_action_preset_actions": "Zochita zokonzekeratu",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Pamapeto pa nthawi",
   "cronwizard_action_custom_script": "Script zochita mwamakonda",
   "cronwizard_action_no_action": "Palibe chochita",
-  "cronwizard_action_schedule_variable_hint": "Gwiritsani ntchito <span class=\"notranslate color-primary\">@ {{name}}</span> monga kusintha kwa mawu a cron kapena gwiritsani ntchito <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> m'mapulogalamu odzipangira okha kuti muwonetsetse chochitikachi.",
+  "cronwizard_action_schedule_variable_hint": "Gwiritsani ntchito <span class=\"notranslate color-primary\">@ {{name}}</span> monga kusintha kwa mawu a cron kapena gwiritsani ntchito <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> m'mapulogalamu odzipangira okha kuti muwonetse chochitikachi.",
   "scheduler_preset_action_command_turn_on": "Yatsani",
   "scheduler_preset_action_command_turn_off": "Zimitsa",
   "scheduler_preset_action_command_set_level": "Khazikitsani mlingo",
@@ -116,7 +116,7 @@
   "program_status_disabled": "Wolumala",
   "program_status_enabled": "Yayatsidwa",
   "program_status_broken": "Wosweka",
-  "program_status_compile": "Sungani",
+  "program_status_compile": "Lembani",
   "automation_programming_guide": "Pulogalamu yamapulogalamu'",
   "tap_to_disable": "Dinani kuti muyimitse",
   "tap_to_enable": "Dinani kuti muyambitse",
@@ -124,9 +124,9 @@
   "visual_code": "Kodi zowoneka",
   "generated_code": "Kodi yopangidwa",
   "setup_code": "Khazikitsa",
-  "main_code": "Main",
+  "main_code": "Chachikulu",
   "context_code": "Nkhani",
-  "main_code_empty_note": "Khodi \"Yaikulu\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Pulogalamu\" kuchokera pamndandanda wamalamulo kumanzere - Kokani chipika chamtundu wa \"Main\" mu malo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mugwiritse ntchito ndi malingaliro a pulogalamuyi.",
+  "main_code_empty_note": "Khodi \"Yaikulu\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Pulogalamu\" kuchokera pamndandanda wamalamulo kumanzere - Kokani chipika chamtundu wa \"Main\" pamalo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mugwiritse ntchito ndi malingaliro a pulogalamuyi.",
   "setup_code_empty_note": "Khodi ya \"kukhazikitsa\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Program\" kuchokera pamawu olamula kumanzere - Kokani chipika chamtundu wa \"Setup\" mu malo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mudziwe zomwe zingayambitse \"Main\" kukhazikitsa kachidindo Code iyi imawunikiridwa nthawi iliyonse chochitika chatsopano chichitika komanso kamodzi pa mphindi imodzi.",
   "capture_commands": "Jambulani malamulo",
   "capture_commands_description": "Onjezani malamulo onse opangidwa pamanja pa ma widget ku pulogalamuyi.",
@@ -185,7 +185,7 @@
     },
     "82": {
       "Title": "Njira Yopulumutsira Mphamvu",
-      "Description": "Sungani mulingo wa kuwala pansi pa kuchuluka kosinthika.",
+      "Description": "Sungani mlingo wa kuwala pansi pa chiwerengero chosinthika.",
       "EnergyManagement.EnergySavingLevel": "Mulingo wopepuka kwambiri (%)",
       "EnergyManagement.EnergySavingMode": "Yambitsani"
     },
@@ -270,7 +270,7 @@
     },
     "145": {
       "Title": "Smart Chipangizo",
-      "Description": "Yatsani/zimitsani chipangizochi potengera kuzindikira koyenda komanso kuwala kozungulira.",
+      "Description": "Yatsani/zimitsani chipangizochi potengera kuzindikira koyenda ndi kuwala kozungulira.",
       "HomeGenie.SmartLights.Enable": "Yambitsani 'Smart Chipangizo'",
       "HomeGenie.SmartLights.OnMotionDetect": "Imayendetsedwa ndi sensa (posankha)",
       "HomeGenie.SmartLights.CheckLuminosity": "Kuwongoleredwa ndi sensa yowala (posankha)",
@@ -293,6 +293,12 @@
       "Title": "Kuyerekeza",
       "Description": "Kuzindikira mfundo zazikuluzikulu pogwiritsa ntchito kuyerekezera kwazithunzi, pogwiritsa ntchito mitundu ya ONNX yokhazikika kapena mtundu wa YOLOv11 wophunzitsidwa kale (mawonekedwe amunthu).",
       "ML.PoseEstimation": "Yambitsani kuyerekeza kwazithunzi",
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentation yachitsanzo",
+      "Description": "Dziwani zinthu ndi ma autilaini awo pogwiritsa ntchito chitsanzo cha YOLO11 chophunzitsidwa kale.",
+      "ML.InstanceSegmentation": "Yambitsani magawo achitsanzo",
       "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
     }
   }

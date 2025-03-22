@@ -21,7 +21,7 @@
   "repositories": "Krātuves",
   "packages": "Pakas",
   "installed_packages": "Instalētās pakotnes",
-  "upload_package": "Augšupielādējiet paketi",
+  "upload_package": "Augšupielādēt pakotni",
   "create_package": "Izveidojiet jaunu paketi",
   "programs_version": "Programmas versija",
   "http_settings": "HTTP iestatījumi",
@@ -99,7 +99,7 @@
   "scheduler_preset_action_config_program": "Programma",
   "scheduler_preset_action_config_options": "Iespējas",
   "scheduler_preset_action_program_say": "Sakiet",
-  "scheduler_preset_action_config_message": "Ziņa",
+  "scheduler_preset_action_config_message": "Ziņojums",
   "save_and_build": "Saglabāt un veidot",
   "toggle_widgets_preview": "Pārslēgt logrīku priekšskatījumu",
   "stop_program": "Pārtraukt programmu",
@@ -293,6 +293,12 @@
       "Title": "Pozas novērtējums",
       "Description": "Atslēgas punktu noteikšana, izmantojot pozas aprēķinu, izmantojot pielāgotus ONNX modeļus vai noklusējuma iepriekš apmācītu YOLOv11 modeli (atkarīgs no cilvēka pozas).",
       "ML.PoseEstimation": "Iespējot pozas aprēķinu",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
+    },
+    "912": {
+      "Title": "Instanču segmentācija",
+      "Description": "Atklājiet objektus un to kontūras, izmantojot iepriekš apmācītu YOLO11 modeli.",
+      "ML.InstanceSegmentation": "Iespējot gadījumu segmentēšanu",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
     }
   }

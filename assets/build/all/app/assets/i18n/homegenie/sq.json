@@ -35,7 +35,7 @@
   "modules": "Modulet",
   "empty_group": "Nuk ka module në këtë grup.",
   "scheduler_wizard": "Magjistari i programuesit",
-  "schedule_event": "Ngjarje",
+  "schedule_event": "Ngjarja",
   "schedule_type_standard": "Standard",
   "schedule_type_range": "Gama e datave",
   "schedule_type_cron": "Shprehje Cron",
@@ -130,7 +130,7 @@
   "setup_code_empty_note": "Kodi \"Setup\" është bosh. Përdorni redaktorin \"Visual code\" për të gjeneruar këtë kod: - Hapni kategorinë \"Program\" nga paleta e komandave në të majtë - Zvarritni një bllok të tipit \"Setup\" në hapësirën e punës të kodit vizual - Shtoni brenda tij blloqe të tjera kodi për të përcaktuar kushtet që do të shkaktojnë ekzekutimin e kodit \"Kryesor\" Ky kod vlerësohet sa herë që ndodh një ngjarje e re dhe të paktën një herë në minutë.",
   "capture_commands": "Kapni komandat",
   "capture_commands_description": "Shtoni në program të gjitha komandat e kryera me dorë në widget.",
-  "capture_commands_pause": "Pushoni midis komandave",
+  "capture_commands_pause": "Ndalo midis komandave",
   "capture_pause_none": "Asnjë",
   "capture_pause_asis": "Siç është",
   "$options": {
@@ -153,7 +153,7 @@
       "ConfigureOptions.Location": "Emri i qytetit",
       "ConfigureOptions.Language": "Gjuha (p.sh. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervali i përditësimit (minuta)",
-      "ConfigureOptions.ApiKey": "Çelësi API i OpenWeatherMap (APPID)"
+      "ConfigureOptions.ApiKey": "Çelësi i OpenWeatherMap API (APPID)"
     },
     "77": {
       "Title": "Rrjeti MQTT",
@@ -293,6 +293,12 @@
       "Title": "Vlerësimi i pozës",
       "Description": "Zbulimi i pikave kyçe nëpërmjet vlerësimit të pozës, duke përdorur modele të personalizuara ONNX ose modelin e para-trajnuar YOLOv11 (specifike për pozën njerëzore).",
       "ML.PoseEstimation": "Aktivizo vlerësimin e pozës",
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentimi i shembullit",
+      "Description": "Zbuloni objektet dhe konturet e tyre duke përdorur një model YOLO11 të para-stërvitur.",
+      "ML.InstanceSegmentation": "Aktivizo ndarjen e shembullit",
       "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
     }
   }

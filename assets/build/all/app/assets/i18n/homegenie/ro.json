@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "din",
   "cronwizard_description_ending": "la",
   "cronwizard_description_at": "la",
-  "cronwizard_add_time_slot": "Adăugați intervalul orar",
+  "cronwizard_add_time_slot": "Adăugați intervalul de timp",
   "cronwizard_add_exact_time": "Adăugați ora exactă",
   "cronwizard_start_time": "Ora de începere",
   "cronwizard_end_time": "Ora de sfârșit",
@@ -196,7 +196,7 @@
       "IpCamera.Username": "Nume de utilizator (opțional)",
       "IpCamera.Password": "Parolă (opțional)",
       "Widget.Config.fps": "Cadre pe secundă",
-      "Widget.Config.size": "Dimensiunea widgetului"
+      "Widget.Config.size": "Dimensiunea widget-ului"
     },
     "90": {
       "Title": "Sistem de alarma de securitate",
@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "Timp maxim sirene (secunde, 0=infinit)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program pentru a rula când este armat",
       "ConfigureOptions.Trigger.DisarmedProgram": "Program de rulat când este dezarmat",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Program să ruleze atunci când este declanșat"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Program să ruleze când este declanșat"
     },
     "95": {
       "Title": "Înregistrare evenimente",
@@ -293,6 +293,12 @@
       "Title": "Estimarea pozitiei",
       "Description": "Detectarea punctelor cheie prin estimarea pozitiei, folosind modele ONNX personalizate sau modelul YOLOv11 pre-antrenat implicit (specific pozitiei umane).",
       "ML.PoseEstimation": "Activați estimarea pozitiei",
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentarea instanțelor",
+      "Description": "Detectați obiectele și contururile lor folosind un model YOLO11 pre-antrenat.",
+      "ML.InstanceSegmentation": "Activați segmentarea instanțelor",
       "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
     }
   }

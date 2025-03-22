@@ -214,7 +214,7 @@
     },
     "95": {
       "Title": "Olayların kaydı",
-      "Description": "Cihaz aktivitesini kaydedin.",
+      "Description": "Cihaz etkinliğini kaydedin.",
       "EventsLogger.EnableLogging": "Olanak vermek"
     },
     "111": {
@@ -293,6 +293,12 @@
       "Title": "Poz tahmini",
       "Description": "Özel ONNX modelleri veya varsayılan önceden eğitilmiş YOLOv11 modeli (insan pozuna özgü) kullanılarak poz tahmini yoluyla anahtar nokta tespiti.",
       "ML.PoseEstimation": "Poz tahminini etkinleştir",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
+    },
+    "912": {
+      "Title": "Örnek segmentasyonu",
+      "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri ve bunların ana hatlarını tespit edin.",
+      "ML.InstanceSegmentation": "Örnek segmentasyonunu etkinleştir",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
     }
   }

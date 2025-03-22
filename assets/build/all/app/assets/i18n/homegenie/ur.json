@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ٹائم سلاٹ کے اختتام پر",
   "cronwizard_action_custom_script": "حسب ضرورت ایکشن اسکرپٹ",
   "cronwizard_action_no_action": "کوئی کارروائی نہیں۔",
-  "cronwizard_action_schedule_variable_hint": "اس ایونٹ کا حوالہ دینے کے لیے <span class=\"notranslate color-primary\">@ {{name}}</span> کرون ایکسپریشنز میں متغیر کے طور پر استعمال کریں یا آٹومیشن پروگرامز میں <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> کا استعمال کریں۔",
+  "cronwizard_action_schedule_variable_hint": "کرون ایکسپریشنز میں متغیر کے طور پر <span class=\"notranslate color-primary\">@ {{name}}</span> استعمال کریں یا اس ایونٹ کا حوالہ دینے کے لیے آٹومیشن پروگرامز میں <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> کا استعمال کریں۔",
   "scheduler_preset_action_command_turn_on": "آن کریں۔",
   "scheduler_preset_action_command_turn_off": "بند کر دیں۔",
   "scheduler_preset_action_command_set_level": "سطح طے کریں۔",
@@ -202,12 +202,12 @@
       "Title": "سیکیورٹی الارم سسٹم",
       "Description": "سیکیورٹی الارم سسٹم کو نافذ کرنے کے لیے سینسر اور دیگر آلات استعمال کریں۔",
       "HomeGenie.SecurityAlarm": "الارم/اسٹروب کے طور پر استعمال کریں۔",
-      "HomeGenie.SecurityTriggerHome": "مسلح ہونے پر ہوم کو بھی متحرک کرتا ہے۔",
+      "HomeGenie.SecurityTriggerHome": "ہوم مسلح ہونے پر بھی متحرک ہوتا ہے۔",
       "HomeGenie.SecuritySensor": "سیکیورٹی سینسر کے طور پر استعمال کریں۔",
       "ConfigureOptions.Email.Recipients": "الارم کی اطلاعات کے لیے وصول کنندگان کی ای میلز کی کوما سے الگ کردہ فہرست",
       "ConfigureOptions.System.ArmDelay": "بازو میں تاخیر (سیکنڈ)",
       "ConfigureOptions.System.SirenStartTime": "سائرن شروع ہونے میں تاخیر (سیکنڈ)",
-      "ConfigureOptions.System.SirenMaxTime": "سائرن کا زیادہ سے زیادہ وقت (سیکنڈ، 0=لامحدود)",
+      "ConfigureOptions.System.SirenMaxTime": "سائرن کا زیادہ سے زیادہ وقت (سیکنڈ، 0 = لامحدود)",
       "ConfigureOptions.Trigger.ArmedProgram": "مسلح ہونے پر چلانے کا پروگرام",
       "ConfigureOptions.Trigger.DisarmedProgram": "غیر مسلح ہونے پر چلانے کے لیے پروگرام",
       "ConfigureOptions.Trigger.TriggeredProgram": "ٹرگر ہونے پر چلانے کے لیے پروگرام"
@@ -293,6 +293,12 @@
       "Title": "پوز کا تخمینہ",
       "Description": "اپنی مرضی کے مطابق ONNX ماڈلز یا پہلے سے تربیت یافتہ YOLOv11 ماڈل (انسانی پوز کے لیے مخصوص) کا استعمال کرتے ہوئے پوز تخمینہ کے ذریعے کلیدی پوائنٹ کا پتہ لگانا۔",
       "ML.PoseEstimation": "پوز تخمینہ کو فعال کریں۔",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڈل فائل کا راستہ (.onnx)"
+    },
+    "912": {
+      "Title": "مثال کی تقسیم",
+      "Description": "پہلے سے تربیت یافتہ YOLO11 ماڈل کا استعمال کرتے ہوئے اشیاء اور ان کے خاکوں کا پتہ لگائیں۔",
+      "ML.InstanceSegmentation": "مثال کی تقسیم کو فعال کریں۔",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڈل فائل کا راستہ (.onnx)"
     }
   }

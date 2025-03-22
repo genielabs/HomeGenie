@@ -44,9 +44,9 @@
   "time_schedule": "Cədvəl",
   "occurrence": "Baş vermə",
   "cronwizard_description_on": "haqqında",
-  "cronwizard_description_from": "-dan",
+  "cronwizard_description_from": "-dən",
   "cronwizard_description_to": "üçün",
-  "cronwizard_description_starting": "-dan",
+  "cronwizard_description_starting": "-dən",
   "cronwizard_description_ending": "üçün",
   "cronwizard_description_at": "saat",
   "cronwizard_add_time_slot": "Vaxt intervalı əlavə edin",
@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "Aktiv",
   "scheduler_preset_action_config_mode_off": "Söndür",
   "scheduler_preset_action_config_mode_heat": "İstilik",
-  "scheduler_preset_action_config_mode_heat_eco": "İstilik qənaəti",
+  "scheduler_preset_action_config_mode_heat_eco": "İstilik iqtisadiyyatı",
   "scheduler_preset_action_config_mode_cool": "Sərin",
   "scheduler_preset_action_config_mode_cool_eco": "Sərin iqtisadiyyat",
   "scheduler_preset_action_program_run": "Proqramı işə salın",
@@ -151,7 +151,7 @@
       "Title": "Hava Proqnozu",
       "Description": "Açıq Hava Xəritəsi xidmətindən hava və proqnoz məlumatları. Bu vidceti aktivləşdirmək üçün etibarlı API açarını daxil edin. Pulsuz API açarı əldə etmək üçün https://openweathermap.org/appid ünvanındakı təlimatlara əməl edin.",
       "ConfigureOptions.Location": "Şəhər adı",
-      "ConfigureOptions.Language": "Dil (məs. EN, IT, FR, DE, ...)",
+      "ConfigureOptions.Language": "Dil (məsələn, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Yeniləmə intervalı (dəqiqə)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API açarı (APPID)"
     },
@@ -271,7 +271,7 @@
     "145": {
       "Title": "Ağıllı Cihaz",
       "Description": "Hərəkət aşkarlanması və ətraf işığına əsasən cihazı yandırın/söndürün.",
-      "HomeGenie.SmartLights.Enable": "'Ağıllı Cihaz'ı aktivləşdirin",
+      "HomeGenie.SmartLights.Enable": "\"Ağıllı Cihazı\" aktivləşdirin",
       "HomeGenie.SmartLights.OnMotionDetect": "Sensor tərəfindən idarə olunur (isteğe bağlı)",
       "HomeGenie.SmartLights.CheckLuminosity": "İşıq sensoru ilə idarə olunur (isteğe bağlı)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Hərəkətsizlik fasiləsindən sonra söndürün (saniyələr)",
@@ -293,6 +293,12 @@
       "Title": "Poza qiymətləndirməsi",
       "Description": "Xüsusi ONNX modelləri və ya defolt əvvəlcədən öyrədilmiş YOLOv11 modelindən (insan pozasına xas) istifadə edərək poza qiymətləndirilməsi vasitəsilə əsas nöqtənin aşkarlanması.",
       "ML.PoseEstimation": "Poza qiymətləndirməsini aktivləşdirin",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
+    },
+    "912": {
+      "Title": "Nümunələrin seqmentasiyası",
+      "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri və onların konturlarını aşkar edin.",
+      "ML.InstanceSegmentation": "Nümunə seqmentasiyasını aktivləşdirin",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
     }
   }

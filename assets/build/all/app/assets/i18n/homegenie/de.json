@@ -294,6 +294,12 @@
       "Description": "Schlüsselpunkterkennung durch Posenschätzung unter Verwendung benutzerdefinierter ONNX-Modelle oder des standardmäßig vortrainierten YOLOv11-Modells (spezifisch für die menschliche Pose).",
       "ML.PoseEstimation": "Aktivieren der Posenschätzung",
       "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO11-Modelldatei (.onnx)"
+    },
+    "912": {
+      "Title": "Instanzsegmentierung",
+      "Description": "Erkennen Sie Objekte und ihre Umrisse mithilfe eines vortrainierten YOLO11-Modells.",
+      "ML.InstanceSegmentation": "Aktivieren der Instanzsegmentierung",
+      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO11-Modelldatei (.onnx)"
     }
   }
 }

@@ -25,7 +25,7 @@
   "create_package": "Gadzira pasuru itsva",
   "programs_version": "Zvirongwa shanduro",
   "http_settings": "Zvirongwa zveHTTP",
-  "modules_groups": "Mapoka uye modules",
+  "modules_groups": "Mapoka nemamodule",
   "groups": "Mapoka",
   "add_group": "Wedzera boka",
   "edit_group": "Rongedza boka",
@@ -162,7 +162,7 @@
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "Sevha kero",
       "ConfigureOptions.ServerPort": "Server port",
-      "ConfigureOptions.Encryption": "Gonesa magumo-kumagumo encryption (E2EE)",
+      "ConfigureOptions.Encryption": "Gonesa encryption yekupedzisira-ku-kuguma (E2EE)",
       "ConfigureOptions.WebSockets": "Shandisa WebSockets",
       "ConfigureOptions.TLS": "Gonesa TLS/SSL",
       "ConfigureOptions.Username": "Username (sarudzo)",
@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (masekondi, 0=isingagumi)",
       "ConfigureOptions.Trigger.ArmedProgram": "Chirongwa chekumhanya kana uine zvombo",
       "ConfigureOptions.Trigger.DisarmedProgram": "Chirongwa chekumhanya kana wabvisirwa zvombo",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Chirongwa chekumhanya kana chaitwa"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Chirongwa chekumhanya kana chabatidzwa"
     },
     "95": {
       "Title": "Zviitiko kutema",
@@ -247,7 +247,7 @@
       "Simulator.Sensor.Luminance": "Chiedza sensor",
       "Simulator.Meter.Watts": "Watts mita",
       "Simulator.Meter.Watts.Max": "Max Watt simba",
-      "Simulator.Sensor.DataFrequency": "Simulator inoburitsa frequency"
+      "Simulator.Sensor.DataFrequency": "Simulator emit frequency"
     },
     "505": {
       "Title": "Remote Control",
@@ -274,7 +274,7 @@
       "HomeGenie.SmartLights.Enable": "Vhura 'Smart Device'",
       "HomeGenie.SmartLights.OnMotionDetect": "Inodzorwa ne sensor (sarudzo)",
       "HomeGenie.SmartLights.CheckLuminosity": "Inodzorwa nechiedza sensor (sarudzo)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Dzima mushure mekutadza kuita basa (masekondi)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Dzima mushure menguva yekusaita basa (masekondi)",
       "HomeGenie.SmartLights.MinLuminance": "Batidza kana luminance iri pazasi:"
     },
     "8": {
@@ -292,7 +292,13 @@
     "911": {
       "Title": "Pose estimation",
       "Description": "Keypoint yekuona kuburikidza nepose estimation, uchishandisa yakajairwa ONNX modhi kana yakagara yakadzidziswa YOLOv11 modhi (yemunhu pose-yakananga).",
-      "ML.PoseEstimation": "Bvisa kufungidzira kwepose",
+      "ML.PoseEstimation": "Bvumira fungidziro yepose",
+      "ConfigureOptions.Yolo.ModelPath": "Nzira yeYOLO11 modhi faira (.onnx)"
+    },
+    "912": {
+      "Title": "Instance segmentation",
+      "Description": "Ziva zvinhu uye maratidziro azvo uchishandisa pre-yakadzidziswa YOLO11 modhi.",
+      "ML.InstanceSegmentation": "Bvumira muenzaniso segmentation",
       "ConfigureOptions.Yolo.ModelPath": "Nzira yeYOLO11 modhi faira (.onnx)"
     }
   }

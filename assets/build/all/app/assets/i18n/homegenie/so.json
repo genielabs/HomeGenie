@@ -2,7 +2,7 @@
   " ": "-----",
   "welcome_to_homegenie": "Ku soo dhawoow HomeGenie!",
   "welcome_subtitle": "Sirdoonka Automation-ka ee la baran karo",
-  "not_configured_yet": "Nidaamka weli ma habaysan Wizard habaynta ayaa kaa caawin doona in aad nidaamkaaga kor u qaaddo oo aad ku socoto dhawr tillaabo.",
+  "not_configured_yet": "Nidaamka weli ma habaysan Saaxir habaynta ayaa kaa caawin doona in aad nidaamkaaga kor u qaaddo oo aad ku socoto dhawr tillaabo.",
   "system_config_start_with_base_and_backup": "Ka soo celinta faylka kaydka",
   "system_config_start_with_default_setup": "Dejinta asalka ah",
   "system_config_include_demo": "Ku dar demo oo leh hawsha aaladda la matalay",
@@ -61,11 +61,11 @@
   "cronwizard_minuteselect_everynthminute": "Daqiiqado kasta oo la siiyo",
   "cronwizard_minuteselect_selectedminutes": "Daqiiqado la doortay",
   "cronwizard_hourselect_everyhour": "Saacad kasta",
-  "cronwizard_hourselect_everynthhour": "Saacad kasta oo la siiyo",
+  "cronwizard_hourselect_everynthhour": "Saacad kasta oo la bixiyo",
   "cronwizard_hourselect_selectedhours": "Saacadaha la doortay",
   "cronwizard_dayselect_everyday": "Maalin walba",
   "cronwizard_dayselect_selecteddays": "Maalmo la doortay",
-  "cronwizard_dayowselect_selecteddaysow": "Maalmaha toddobaadka la doortay",
+  "cronwizard_dayowselect_selecteddaysow": "Maalmaha toddobaadka ee la doortay",
   "cronwizard_monthselect_everymonth": "Bil walba",
   "cronwizard_monthselect_selectedmonths": "Bilaha la doortay",
   "cronwizard_schedule_set_exact_time": "Deji wakhtiga dhacdada",
@@ -76,9 +76,9 @@
   "cronwizard_action_set_action_to_execute": "Deji tallaabo aad ku fuliso dhacdooyinka dhacdadan",
   "cronwizard_action_preset_actions": "Ficilada hore loo dhigay",
   "cronwizard_action_preset_every_occurrence": "Dhacdo kasta",
-  "cronwizard_action_preset_slot_start": "Bilawga wakhti goynta",
+  "cronwizard_action_preset_slot_start": "Bilawga wakhtiga boosaska",
   "cronwizard_action_preset_slot_end": "Dhamaadka wakhtiga booska",
-  "cronwizard_action_custom_script": "Qoraalka ficilka gaarka ah",
+  "cronwizard_action_custom_script": "Qoraal ficil gaar ah",
   "cronwizard_action_no_action": "Wax ficil ah ma jiro",
   "cronwizard_action_schedule_variable_hint": "U isticmaal <span class=\"notranslate color-primary\">@ {{name}}</span> doorsoome ahaan tibaaxaha cron ama isticmaal <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> barnaamijyada otomaatiga ah si aad u tixraacdo dhacdadan.",
   "scheduler_preset_action_command_turn_on": "Daar",
@@ -126,17 +126,17 @@
   "setup_code": "Dejinta",
   "main_code": "Ugu weyn",
   "context_code": "Dulucda",
-  "main_code_empty_note": "Koodhka \"Main\" waa madhan. Isticmaal tifaftiraha \"Koodhka muuqaalka\" si aad u soo saarto code-kan: - Ka fur qaybta \"Barnaamijka\" ee palette amarka ee bidix - Jiid block ka mid ah nooca \"Main\" ee goobta shaqada code-ka - Ku dar gudaha gudaha blocks codes kale si loo fuliyo ficilada iyo macquulka barnaamijkan Barnaamijka \"Main\" wuxuu noqon karaa mid gacanta ku shaqeeya ama si toos ah loo bilaabo iyadoo lagu saleynayo shuruudaha ugu dambeyntii lagu bixiyay code Setup.",
+  "main_code_empty_note": "Koodhka \"Main\" waa madhan. Isticmaal tifaftiraha \"Visual code\" si aad u abuurto koodhkan: - Ka fur qaybta \"Barnaamijka\" ee palette amarka ee bidix - Jiid block ka mid ah nooca \"Main\" ee goobta shaqada code-ka - Ku dar gudaha gudaha blocks codes kale si loo fuliyo ficilada iyo macquulka barnaamijkan Barnaamijka \"Main\" wuxuu noqon karaa mid gacanta ku shaqeeya ama si toos ah loo bilaabo iyadoo lagu saleynayo shuruudaha ugu dambeyntii lagu bixiyay code Setup.",
   "setup_code_empty_note": "Koodhka \"Setup\" waa madhan. Isticmaal tifaftiraha \"Visual code\" si aad u soo saarto koodkan: - Ka fur qaybta \"Barnaamijka\" palette amarka ee bidix - Jiid block ka mid ah nooca \"Setup\" ee goobta shaqada code-ka - Ku dar gudaha codesyada kale si aad u go'aamiso shuruudaha kicin doona \"Main\" code fulinta code Tani waa la qiimeeyaa mar kasta oo dhacdo cusub dhacdo iyo ugu yaraan hal mar daqiiqadii.",
   "capture_commands": "Qabso amarrada",
   "capture_commands_description": "Ku dar dhammaan amarada gacanta lagu sameeyay barnaamijka.",
   "capture_commands_pause": "Haki inta u dhaxaysa amarada",
   "capture_pause_none": "Midna",
-  "capture_pause_asis": "Sida ay tahay",
+  "capture_pause_asis": "Siday tahay",
   "$options": {
     "16": {
       "Title": "Heerka Xusuusta",
-      "Description": "Kaydi oo dib u xasuuso heerkii dimmer ee u dambeeyay.",
+      "Description": "Kaydi oo dib u xasuuso heerkii u dambeeyay ee dimmer.",
       "HomeGenie.LevelMemory": "Dib u soo celi heerarkii nalka ee u dambeeyay marka la shido",
       "HomeGenie.LevelMemory.SimulateOnly": "Isku day kaliya"
     },
@@ -149,7 +149,7 @@
     },
     "34": {
       "Title": "Saadaasha Cimilada",
-      "Description": "Macluumaadka cimilada iyo saadaasha adeega Khariidadda Cimilada Furan. Si aad u dhaqaajiso widget-kan geli furaha API sax ah. Raac tilmaamaha https://openweathermap.org/appid si aad u hesho furaha API oo bilaash ah.",
+      "Description": "Macluumaadka cimilada iyo saadaasha adeega Khariidadda Cimilada Furan. Si aad u dhaqaajiso widget-kan gali furaha API sax ah. Raac tilmaamaha https://openweathermap.org/appid si aad u hesho furaha API oo bilaash ah.",
       "ConfigureOptions.Location": "Magaca magaalada",
       "ConfigureOptions.Language": "Luuqadda (tusaale. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Cusbooneysii inta u dhaxaysa (daqiiqado)",
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Shabakadda MQTT",
-      "Description": "Ku xidh dilaaliinta MQTT si aad u isticmaasho abka HomeGenie Panel meel kasta adoo isticmaalaya Internet ama si aad isugu xidho aaladaha HomeGenie isla shabakadda MQTT",
+      "Description": "Ku xidh dilaaliinta MQTT si aad u isticmaasho barnaamijka HomeGenie Panel meel kasta adoo adeegsanaya Internet ama si aad isugu xidho aaladaha HomeGenie isla shabakadda MQTT.",
       "MQTT.SensorPublish": "Daabac dhacdooyinka uu soo saaray cutubkani",
       "ConfigureOptions.ClientId": "Aqoonsiga macmiilka",
       "ConfigureOptions.ServerAddress": "Ciwaanka adeegaha",
@@ -171,7 +171,7 @@
     },
     "78": {
       "Title": "Heer kulka Smart",
-      "Description": "Isticmaal heerkul kasta oo dareemaha iyo beddelka smart si aad u hirgeliso shaqaynta heerkulbeegga.",
+      "Description": "Isticmaal heerkul kasta oo dareemaha iyo beddelka smart si aad u hirgeliso shaqeynta heerkulbeegga.",
       "VirtualThermostat.TemperatureModule": "Dareemaha heerkulka",
       "VirtualThermostat.HeatingSwitchModule": "Daar kuleyliyaha",
       "VirtualThermostat.CoolingSwitchModule": "qaboojinta beddelka",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Kamarada IP-ga guud",
       "Description": "Muujinta/muuska sawirka kaamirada IP-ga",
-      "IpCamera.ImageURL": "Sawirka kamarada API URL (eeg dukumentiyada kamaradaada)",
+      "IpCamera.ImageURL": "Sawirka kamaradda API URL (eeg dukumentiyada kamaradaada)",
       "IpCamera.Username": "Magaca isticmaale (ikhtiyaar)",
       "IpCamera.Password": "Furaha (ikhtiyaar)",
       "Widget.Config.fps": "Frames ilbiriqsikii",
@@ -202,8 +202,8 @@
       "Title": "Nidaamka Alaarmiga Amniga",
       "Description": "Isticmaal dareemayaasha iyo aaladaha kale si aad u hirgeliso nidaamka digniinta amniga.",
       "HomeGenie.SecurityAlarm": "U adeegso qaylo-dhaan / xinjir ahaan",
-      "HomeGenie.SecurityTriggerHome": "Sidoo kale kiciya marka guriga la hubeeyo",
-      "HomeGenie.SecuritySensor": "Isticmaal sida dareemaha amniga",
+      "HomeGenie.SecurityTriggerHome": "Sido kale kiciya marka guriga la hubeeyo",
+      "HomeGenie.SecuritySensor": "U isticmaal sida dareemaha amniga",
       "ConfigureOptions.Email.Recipients": "Liiska fariimaha e-mail-ka qaataha u kala saaraya wargelinta digniinta",
       "ConfigureOptions.System.ArmDelay": "Dib u dhigista gacanta (ilbiriqsi)",
       "ConfigureOptions.System.SirenStartTime": "Daahinta Bilawga Sirens (ilbiriqsi)",
@@ -223,7 +223,7 @@
     },
     "400": {
       "Title": "Modules Virtual Demo",
-      "Description": "Gacanta u deji qiyamka aaladda casriga ah.",
+      "Description": "Gacanta u deji qiyamka aaladda farsamada",
       "Sensor.Temperature": "Qiimaha heerkulka",
       "Sensor.Luminance": "Qiimaha iftiinka",
       "Sensor.MotionDetect": "Heerka ogaanshaha dhaqdhaqaaqa",
@@ -278,21 +278,27 @@
       "HomeGenie.SmartLights.MinLuminance": "Daar haddii iftiinku hoos yaallo:"
     },
     "8": {
-      "Title": "Muuqaalka Midabbada Qorrax-u-soo-baxa",
+      "Title": "Muuqaalka Midabada Qorrax-u-soo-baxa",
       "Description": "Tusaale \"Sunrise\" seenyo loogu talagalay midab beddelka nalalka LED.",
-      "Scenarios.SunriseColors": "Isku xirka muuqaalka midabada Qorrax-u-soo-baxa"
+      "Scenarios.SunriseColors": "Isku xirka muuqaalka Midabka Qorrax-u-soo-baxa"
     },
     "910": {
       "Title": "Ogaanshaha shayga",
       "Description": "Soo ogow walxaha addoo isticmaalaya qaabka YOLO11 horay loo tababaray.",
       "ML.ObjectDetection": "Daar ogaanshaha walxaha",
-      "ML.ObjectDetection.TriggerDetect": "Liiska walxaha kala-saaran (Ingiriisi) ee kicin doona qaylo-dhaanta. (tusaale: bisad, eey, qof, boorso, shandad)",
+      "ML.ObjectDetection.TriggerDetect": "Liiska walxaha kala-saaran (Ingiriisi) ee kicin doona qaylo-dhaanta. (tusaale: bisad, eey, qof, shandad dhabarka, shandad)",
       "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
     },
     "911": {
       "Title": "Qiyaasta booska",
-      "Description": "Ogaanshaha dhibicda furaha iyada oo la adeegsanayo qiimaynta gogoldhigga, iyadoo la adeegsanayo moodooyinka ONNX ee caadada u ah ama nooca YOLOv11 ee horay loo tababaray ee caadiga ahaa",
+      "Description": "Ogaanshaha dhibicda furaha iyada oo la adeegsanayo qiimaynta sawirka, iyadoo la adeegsanayo moodooyinka ONNX ee caadada u ah ama nooca YOLOv11 ee horay loo tababbaray ee caadiga ahaa",
       "ML.PoseEstimation": "Daree qiyaasta gogoldhigga",
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Tusaale ahaan kala qaybinta",
+      "Description": "Soo ogow walxaha iyo dulmarkooda adiga oo isticmaalaya qaabka YOLO11 horay loo tababaray.",
+      "ML.InstanceSegmentation": "Daar kala qaybinta tusaale",
       "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
     }
   }

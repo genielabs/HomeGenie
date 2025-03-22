@@ -117,7 +117,7 @@
   "program_status_enabled": "ప్రారంభించబడింది",
   "program_status_broken": "విరిగిపోయింది",
   "program_status_compile": "కంపైల్ చేయండి",
-  "automation_programming_guide": "ప్రోగ్రామింగ్ గైడ్ '",
+  "automation_programming_guide": "ప్రోగ్రామింగ్ గైడ్'",
   "tap_to_disable": "నిలిపివేయడానికి క్లిక్ చేయండి",
   "tap_to_enable": "ప్రారంభించడానికి క్లిక్ చేయండి",
   "program_data": "ప్రోగ్రామ్ డేటా",
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "మోషన్ డిటెక్షన్ స్థితి",
       "Status.Battery": "బ్యాటరీ స్థాయి",
       "Sensor.DoorWindow": "తలుపు/కిటికీ సెన్సార్ స్థితి (తెరిచి/మూసి)",
-      "Status.Level": "స్థితిని మార్చండి (ఆన్/ఆఫ్)"
+      "Status.Level": "స్థితిని మార్చు (ఆన్/ఆఫ్)"
     },
     "401": {
       "Title": "డెమో - టోగుల్ డోర్",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "తేమ సెన్సార్",
       "Simulator.Sensor.Luminance": "లైట్ సెన్సార్",
       "Simulator.Meter.Watts": "వాట్స్ మీటర్",
-      "Simulator.Meter.Watts.Max": "గరిష్ట వాట్ పవర్",
+      "Simulator.Meter.Watts.Max": "గరిష్ట వాట్ శక్తి",
       "Simulator.Sensor.DataFrequency": "సిమ్యులేటర్ ఉద్గార ఫ్రీక్వెన్సీ"
     },
     "505": {
@@ -293,6 +293,12 @@
       "Title": "అంచనా వేసిన భంగిమ",
       "Description": "కస్టమ్ ONNX మోడల్స్ లేదా డిఫాల్ట్ ప్రీ-ట్రైన్డ్ YOLOv11 మోడల్ (మానవ భంగిమ-నిర్దిష్ట) ఉపయోగించి భంగిమ అంచనా ద్వారా కీపాయింట్ గుర్తింపు.",
       "ML.PoseEstimation": "భంగిమ అంచనాను ప్రారంభించండి",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
+    },
+    "912": {
+      "Title": "ఇన్‌స్టన్స్ సెగ్మెంటేషన్",
+      "Description": "ముందుగా శిక్షణ పొందిన YOLO11 మోడల్‌ని ఉపయోగించి వస్తువులు మరియు వాటి రూపురేఖలను గుర్తించండి.",
+      "ML.InstanceSegmentation": "ఉదాహరణ విభజనను ప్రారంభించండి",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
     }
   }

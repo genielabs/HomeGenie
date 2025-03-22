@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>var dataFolder = Data.GetFolder(PresetsFolder);
 Data.AddToSystemBackup(dataFolder);
@@ -700,6 +700,7 @@ Action&lt;string&gt; apiHandle = (string cid) =&gt; {
       return response;
     } catch (Exception e) {
       Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
+      Pause(2);
       MqttIsConnected = false;
     }
     return new ResponseText("ERROR");
@@ -733,7 +734,8 @@ Action&lt;string&gt; apiHandle = (string cid) =&gt; {
     }
     catch (Exception e)
     {
-      Program.Notify($"ERROR #2: {e.Message} {OptionButtons}");
+      Program.Notify($"ERROR #3: {e.Message} {OptionButtons}");
+      Pause(2);
       MqttIsConnected = false;
     }
     return new ResponseText("ERROR");
@@ -861,6 +863,7 @@ MqttClient.Subscribe(subscribeTopic, (mtopic, bytespayload) =&gt; {
       }
     } catch (Exception e) {
       Program.Notify($"ERROR #1: {e.Message} {OptionButtons}");
+      Pause(2);
       MqttIsConnected = false;
     }
   }
@@ -1043,9 +1046,9 @@ class MqttCommand: MigInterfaceCommand {
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>mqtt-network</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>8039FD4B260BE2D178732A35DBCC16A5</Checksum>
+      <Checksum>61D9F2C0A6F9E119791517514B429A2B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>

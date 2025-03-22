@@ -294,6 +294,12 @@
       "Description": "કસ્ટમ ONNX મોડેલ્સ અથવા ડિફોલ્ટ પૂર્વ-પ્રશિક્ષિત YOLOv11 મોડેલ (માનવ પોઝ-વિશિષ્ટ) નો ઉપયોગ કરીને પોઝ અંદાજ દ્વારા કીપોઇન્ટ શોધ.",
       "ML.PoseEstimation": "પોઝ અંદાજ સક્ષમ કરો",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
+    },
+    "912": {
+      "Title": "ઇન્સ્ટન્સ સેગ્મેન્ટેશન",
+      "Description": "પૂર્વ-પ્રશિક્ષિત YOLO11 મોડેલનો ઉપયોગ કરીને વસ્તુઓ અને તેમની રૂપરેખા શોધો.",
+      "ML.InstanceSegmentation": "ઇન્સ્ટન્સ સેગ્મેન્ટેશન સક્ષમ કરો",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
     }
   }
 }

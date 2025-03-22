@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Digues",
   "scheduler_preset_action_config_message": "Missatge",
   "save_and_build": "Guarda i construeix",
-  "toggle_widgets_preview": "Canvia la vista prèvia dels ginys",
+  "toggle_widgets_preview": "Commuta la vista prèvia dels ginys",
   "stop_program": "Atura el programa",
   "run_program": "Executar el programa",
   "enable_to_run_program": "Habiliteu el programa per executar-lo",
@@ -293,6 +293,12 @@
       "Title": "Estimació de la postura",
       "Description": "Detecció de punts clau mitjançant l'estimació de la postura, utilitzant models ONNX personalitzats o el model YOLOv11 pre-entrenat predeterminat (específic de la postura humana).",
       "ML.PoseEstimation": "Activa l'estimació de la postura",
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer model YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentació d'instàncies",
+      "Description": "Detecteu objectes i els seus contorns mitjançant un model YOLO11 pre-entrenat.",
+      "ML.InstanceSegmentation": "Activa la segmentació d'instàncies",
       "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer model YOLO11 (.onnx)"
     }
   }

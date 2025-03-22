@@ -294,6 +294,12 @@
       "Description": "Detección de puntos clave a través de la estimación de la pose, utilizando modelos ONNX personalizados o el modelo YOLOv11 preentrenado predeterminado (específico de la pose humana).",
       "ML.PoseEstimation": "Habilitar estimación de pose",
       "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentación de instancias",
+      "Description": "Detecta objetos y sus contornos utilizando un modelo YOLO11 previamente entrenado.",
+      "ML.InstanceSegmentation": "Habilitar la segmentación de instancias",
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
     }
   }
 }

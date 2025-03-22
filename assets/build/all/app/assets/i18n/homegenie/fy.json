@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Sizze",
   "scheduler_preset_action_config_message": "Berjocht",
   "save_and_build": "Bewarje en bouwe",
-  "toggle_widgets_preview": "Widgetfoarbyld wikselje",
+  "toggle_widgets_preview": "Skeakelje widgetfoarbyld",
   "stop_program": "Stopje programma",
   "run_program": "Programma útfiere",
   "enable_to_run_program": "Aktivearje programma om it út te fieren",
@@ -126,11 +126,11 @@
   "setup_code": "Opsette",
   "main_code": "Foarnaamste",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Main\" koade is leech. Brûk de \"Visuele koade\"-bewurker om dizze koade te generearjen: - Iepenje de kategory \"Programma\" fanút it kommandopalet oan 'e lofterkant - Sleep in blok fan type \"Main\" yn 'e fisuele koade-wurkromte - Foegje oare koadeblokken deryn ta om aksjes en logika fan dit programma út te fieren.",
+  "main_code_empty_note": "\"Main\" koade is leech. Brûk de \"Visuele koade\" bewurker om dizze koade te generearjen: - Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant - Sleep in blok fan type \"Main\" yn 'e fisuele koade wurkromte - Foegje oare koadeblokken deryn ta om aksjes en logika fan dit programma te ymplementearjen.",
   "setup_code_empty_note": "\"Setup\" koade is leech. Brûk de \"Visuele koade\"-bewurker om dizze koade te generearjen: - Iepenje de kategory \"Programma\" fanút it kommandopalet oan de linkerkant - Sleep in blok fan type \"Setup\" yn 'e fisuele koade-wurkromte - Foegje oare koadeblokken deryn ta om de betingsten te bepalen dy't de útfiering fan 'Main' koade sille triggerje.",
   "capture_commands": "Capture kommando",
   "capture_commands_description": "Foegje alle kommando's mei de hân op widgets ta oan it programma.",
-  "capture_commands_pause": "Paus tusken kommando's",
+  "capture_commands_pause": "Pauze tusken kommando's",
   "capture_pause_none": "Gjin",
   "capture_pause_asis": "As is",
   "$options": {
@@ -171,11 +171,11 @@
     },
     "78": {
       "Title": "Smart termostaat",
-      "Description": "Brûk elke temperatuersensor en tûke switch om thermostaatfunksjonaliteit te ymplementearjen.",
+      "Description": "Brûk elke temperatuersensor en tûke switch om thermostaatfunksjonaliteit út te fieren.",
       "VirtualThermostat.TemperatureModule": "Temperatuer sensor",
       "VirtualThermostat.HeatingSwitchModule": "Ferwaarming switch",
       "VirtualThermostat.CoolingSwitchModule": "Cooling switch",
-      "ConfigureOptions.ThermostatsCount": "Oantal thermostaten"
+      "ConfigureOptions.ThermostatsCount": "Oantal thermostats"
     },
     "81": {
       "Title": "Enerzjy Monitor",
@@ -209,7 +209,7 @@
       "ConfigureOptions.System.SirenStartTime": "Sirenes start fertraging (sekonden)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenes max Tiid (sekonden, 0 = ûneinich)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programma om te rinnen as bewapene",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Programma om te rinnen as it útskeakele is",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Programma om te rinnen as útskeakele",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programma om te rinnen as trigger"
     },
     "95": {
@@ -223,7 +223,7 @@
     },
     "400": {
       "Title": "Firtuele Modules Demo",
-      "Description": "Hânmjittich ynstelle wearden fan de firtuele apparaat.",
+      "Description": "Werden fan it firtuele apparaat manuell ynstelle.",
       "Sensor.Temperature": "Temperatuer wearde",
       "Sensor.Luminance": "Luminânsje wearde",
       "Sensor.MotionDetect": "Bewegingsdeteksjestatus",
@@ -251,7 +251,7 @@
     },
     "505": {
       "Title": "Remote Control",
-      "Description": "Kontrolearje it apparaat mei in ôfstân (IR of RF).",
+      "Description": "Behearskje it apparaat mei in ôfstân (IR of RF).",
       "HomeGenie.RemoteControl.Enable": "Ynskeakelje",
       "HomeGenie.RemoteControl.IRCode": "Skeakelje knop",
       "ConfigureOptions.DimmerUpCode": "Knop foar ferheging fan helderheid",
@@ -293,6 +293,12 @@
       "Title": "Pose skatting",
       "Description": "Keypoint-deteksje fia poseskatting, mei gebrûk fan oanpaste ONNX-modellen as it standert pre-trained YOLOv11-model (minsklike pose-spesifyk).",
       "ML.PoseEstimation": "Posysjeskatting ynskeakelje",
+      "ConfigureOptions.Yolo.ModelPath": "Paad fan YOLO11-modelbestân (.onnx)"
+    },
+    "912": {
+      "Title": "Instance segmentation",
+      "Description": "Detektearje objekten en har sketsen mei in pre-trained YOLO11-model.",
+      "ML.InstanceSegmentation": "Aktivearje eksimplaarsegmentaasje",
       "ConfigureOptions.Yolo.ModelPath": "Paad fan YOLO11-modelbestân (.onnx)"
     }
   }

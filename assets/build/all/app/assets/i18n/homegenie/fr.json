@@ -126,7 +126,7 @@
   "setup_code": "Installation",
   "main_code": "Principal",
   "context_code": "Contexte",
-  "main_code_empty_note": "Le code « Main » est vide. Utilisez l'éditeur de code visuel pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche. - Faites glisser un bloc de type « Main » dans l'espace de travail du code visuel. - Ajoutez-y d'autres blocs de code pour implémenter les actions et la logique de ce programme. Le programme « Main » peut être exécuté manuellement ou démarré automatiquement en fonction des conditions éventuellement données dans le code de configuration.",
+  "main_code_empty_note": "Le code « Main » est vide. Utilisez l'éditeur de « Code visuel » pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche - Faites glisser un bloc de type « Main » dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour implémenter les actions et la logique de ce programme. Le programme « Main » peut être exécuté manuellement ou démarré automatiquement en fonction des conditions éventuellement données dans le code de configuration.",
   "setup_code_empty_note": "Le code « Setup » est vide. Utilisez l'éditeur « Code visuel » pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche - Faites glisser un bloc de type « Setup » dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour déterminer les conditions qui déclencheront l'exécution du code « Main ». Ce code est évalué à chaque nouvel événement et au moins une fois par minute.",
   "capture_commands": "Commandes de capture",
   "capture_commands_description": "Ajoutez toutes les commandes exécutées manuellement sur les widgets au programme.",
@@ -293,6 +293,12 @@
       "Title": "Estimation de la pose",
       "Description": "Détection de points clés via l'estimation de la pose, à l'aide de modèles ONNX personnalisés ou du modèle YOLOv11 pré-entraîné par défaut (spécifique à la pose humaine).",
       "ML.PoseEstimation": "Activer l'estimation de la pose",
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentation des instances",
+      "Description": "Détectez les objets et leurs contours à l'aide d'un modèle YOLO11 pré-entraîné.",
+      "ML.InstanceSegmentation": "Activer la segmentation des instances",
       "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
     }
   }

@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Isključeno",
   "scheduler_preset_action_config_mode_heat": "Toplota",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomičnost toplote",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomija toplote",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Cool ekonomičnost",
   "scheduler_preset_action_program_run": "Pokreni program",
@@ -105,7 +105,7 @@
   "stop_program": "Zaustavi program",
   "run_program": "Pokreni program",
   "enable_to_run_program": "Omogućite program da biste ga pokrenuli",
-  "program_status_added": "Dodato",
+  "program_status_added": "Dodano",
   "program_status_idle": "Idle",
   "program_status_setup": "Setup",
   "program_status_running": "Trčanje",
@@ -167,7 +167,7 @@
       "ConfigureOptions.TLS": "Omogućite TLS/SSL",
       "ConfigureOptions.Username": "Korisničko ime (opcionalno)",
       "ConfigureOptions.Password": "Lozinka (opcionalno)",
-      "ConfigureOptions.ImportExternal": "Uvezite eksterne module"
+      "ConfigureOptions.ImportExternal": "Uvoz eksternih modula"
     },
     "78": {
       "Title": "Smart Thermostat",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Generička IP kamera",
       "Description": "Prikažite/usmjerite feed slike sa IP kamere.",
-      "IpCamera.ImageURL": "URL API slike kamere (pogledajte dokumente vaše kamere)",
+      "IpCamera.ImageURL": "URL API za slike kamere (pogledajte dokumente vaše kamere)",
       "IpCamera.Username": "Korisničko ime (opcionalno)",
       "IpCamera.Password": "Lozinka (opcionalno)",
       "Widget.Config.fps": "Broj sličica u sekundi",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "E-mail nalog",
-      "Description": "Čuva informacije o nalogu e-pošte koje sistemski programi koriste za slanje/primanje e-pošte.",
+      "Description": "Pohranjuje informacije o nalogu e-pošte koje koriste sistemski programi za slanje/primanje e-pošte.",
       "ConfigureOptions.Email.Sender": "1. E-mail adresa",
       "ConfigureOptions.Email.SmtpServer": "2. Adresa SMTP servera",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP korisničko ime (opcionalno)",
@@ -286,13 +286,19 @@
       "Title": "Detekcija objekata",
       "Description": "Otkrijte objekte koristeći prethodno obučeni model YOLO11.",
       "ML.ObjectDetection": "Omogućite otkrivanje objekata",
-      "ML.ObjectDetection.TriggerDetect": "Lista stvari razdvojenih zarezima (na engleskom) koje će pokrenuti alarm. (npr.: mačka, pas, osoba, ruksak, kofer)",
+      "ML.ObjectDetection.TriggerDetect": "Lista stvari razdvojenih zarezima (na engleskom) koje će pokrenuti alarm. (npr. mačka, pas, osoba, ruksak, kofer)",
       "ConfigureOptions.Yolo.ModelPath": "Putanja datoteke modela YOLO11 (.onnx)"
     },
     "911": {
       "Title": "Procjena poza",
       "Description": "Detekcija ključne tačke putem procene poze, koristeći prilagođene ONNX modele ili podrazumevani unapred obučeni YOLOv11 model (specifičan za pozu čoveka).",
       "ML.PoseEstimation": "Omogući procjenu poze",
+      "ConfigureOptions.Yolo.ModelPath": "Putanja datoteke modela YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentacija instance",
+      "Description": "Otkrijte objekte i njihove obrise koristeći prethodno obučeni model YOLO11.",
+      "ML.InstanceSegmentation": "Omogućite segmentaciju instance",
       "ConfigureOptions.Yolo.ModelPath": "Putanja datoteke modela YOLO11 (.onnx)"
     }
   }

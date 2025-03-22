@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "Conta de e-mail",
-      "Description": "Armazena informações de contas de e-mail usadas por programas do sistema para enviar/receber e-mails.",
+      "Description": "Armazena informações da conta de e-mail usada pelos programas do sistema para enviar/receber e-mails.",
       "ConfigureOptions.Email.Sender": "1. Endereço de e-mail",
       "ConfigureOptions.Email.SmtpServer": "2. Endereço do servidor SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Nome de usuário SMTP (opcional)",
@@ -293,6 +293,12 @@
       "Title": "Estimativa de pose",
       "Description": "Detecção de pontos-chave por meio de estimativa de pose, usando modelos ONNX personalizados ou o modelo YOLOv11 pré-treinado padrão (específico para pose humana).",
       "ML.PoseEstimation": "Habilitar estimativa de pose",
+      "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentação de instância",
+      "Description": "Detecte objetos e seus contornos usando um modelo YOLO11 pré-treinado.",
+      "ML.InstanceSegmentation": "Habilitar segmentação de instância",
       "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
     }
   }

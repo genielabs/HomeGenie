@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ସମୟ ସ୍ଲଟର ଶେଷରେ",
   "cronwizard_action_custom_script": "କଷ୍ଟମ୍ ଆକ୍ସନ୍ ସ୍କ୍ରିପ୍ଟ",
   "cronwizard_action_no_action": "କୌଣସି କାର୍ଯ୍ୟ ନାହିଁ",
-  "cronwizard_action_schedule_variable_hint": "ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ କ୍ରୋନ୍ ପ୍ରକାଶନରେ <span class=\"notranslate color-primary\">@ {{name}}</span> ଏକ ଚଳକ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ସ୍ୱୟଂଚାଳିତ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
+  "cronwizard_action_schedule_variable_hint": "ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ କ୍ରୋନ୍ ଏକ୍ସପ୍ରେସନରେ <span class=\"notranslate color-primary\">@ {{name}}</span> ଏକ ଭେରିଏବଲ୍ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ଅଟୋମେସନ୍ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
   "scheduler_preset_action_command_turn_on": "ଚାଲୁ କରନ୍ତୁ",
   "scheduler_preset_action_command_turn_off": "ବନ୍ଦ କରନ୍ତୁ",
   "scheduler_preset_action_command_set_level": "ସ୍ତର ସେଟ୍‌ କରନ୍ତୁ",
@@ -178,7 +178,7 @@
       "ConfigureOptions.ThermostatsCount": "ଥର୍ମୋଷ୍ଟାଟ୍ ସଂଖ୍ୟା"
     },
     "81": {
-      "Title": "ଏନର୍ଜି ମନିଟର",
+      "Title": "ଏନର୍ଜି ମନିଟର୍",
       "Description": "ଶକ୍ତି ବ୍ୟବହାର ଏବଂ ଡିଭାଇସଗୁଡ଼ିକର ବ୍ୟବହାର ଉପରେ ପରିସଂଖ୍ୟାନ ସୃଷ୍ଟି କରନ୍ତୁ।",
       "EnergyManagement.MonitorStatus": "ମନିଟର ସ୍ଥିତି",
       "EnergyManagement.MonitorWatts": "ଶକ୍ତି ବ୍ୟବହାର ଉପରେ ନଜର ରଖନ୍ତୁ"
@@ -279,7 +279,7 @@
     },
     "8": {
       "Title": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗର ଦୃଶ୍ୟପଟ",
-      "Description": "ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରୁଥିବା LED ଲାଇଟ୍ ପାଇଁ \"ସୂର୍ଯ୍ୟୋଦୟ\" ଦୃଶ୍ୟର ଉଦାହରଣ।",
+      "Description": "ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରୁଥିବା LED ଲାଇଟ୍ ପାଇଁ \"ସୂର୍ଯ୍ୟୋଦୟ\" ପରିସ୍ଥିତିର ଉଦାହରଣ।",
       "Scenarios.SunriseColors": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗ ଦୃଶ୍ୟପଟର ଲିଙ୍କ୍"
     },
     "910": {
@@ -293,6 +293,12 @@
       "Title": "ପୋଜ୍ ଆକଳନ",
       "Description": "କଷ୍ଟମ୍ ONNX ମଡେଲ୍ କିମ୍ବା ଡିଫଲ୍ଟ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLOv11 ମଡେଲ୍ (ମାନବ ପୋଜ୍-ନିର୍ଦ୍ଦିଷ୍ଟ) ବ୍ୟବହାର କରି ପୋଜ୍ ଆକଳନ ମାଧ୍ୟମରେ କୀପଏଣ୍ଟ ଚିହ୍ନଟ।",
       "ML.PoseEstimation": "ପୋଜ୍ ଆକଳନକୁ ସକ୍ଷମ କରନ୍ତୁ",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
+    },
+    "912": {
+      "Title": "ଇନଷ୍ଟାନ୍ସ ବିଭାଜନ",
+      "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO11 ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁ ଏବଂ ସେମାନଙ୍କର ରୂପରେଖା ଚିହ୍ନଟ କରନ୍ତୁ।",
+      "ML.InstanceSegmentation": "ଇନଷ୍ଟାନ୍ସ ସେଗମେଣ୍ଟେସନ୍ ସକ୍ଷମ କରନ୍ତୁ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
     }
   }

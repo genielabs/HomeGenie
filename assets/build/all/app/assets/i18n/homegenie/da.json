@@ -141,7 +141,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simuler kun"
     },
     "26": {
-      "Title": "Farvelys",
+      "Title": "Farvede lys",
       "Description": "Eksempel Philips Hue-lysintegration ved hjælp af HTTP API (V1). Standardbrugeren til at oprette forbindelse til broen er \"newdeveloper\", og den burde allerede være aktiveret.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adresse",
       "ConfigureOptions.BridgeUsername": "Brugernavn",
@@ -293,6 +293,12 @@
       "Title": "Positionsvurdering",
       "Description": "Nøglepunktsdetektion via positur-estimering, ved hjælp af brugerdefinerede ONNX-modeller eller den forudtrænede YOLOv11-model (specifik for menneskelig stilling).",
       "ML.PoseEstimation": "Aktiver estimering af stilling",
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
+    },
+    "912": {
+      "Title": "Forekomstsegmentering",
+      "Description": "Opdag objekter og deres omrids ved hjælp af en præ-trænet YOLO11-model.",
+      "ML.InstanceSegmentation": "Aktiver instanssegmentering",
       "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
     }
   }

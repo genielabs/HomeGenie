@@ -185,7 +185,7 @@
     },
     "82": {
       "Title": "Chế độ tiết kiệm năng lượng",
-      "Description": "Giữ mức độ ánh sáng dưới một tỷ lệ phần trăm có thể cấu hình được.",
+      "Description": "Giữ mức độ ánh sáng dưới mức phần trăm có thể cấu hình được.",
       "EnergyManagement.EnergySavingLevel": "Mức độ ánh sáng tối đa (%)",
       "EnergyManagement.EnergySavingMode": "Cho phép"
     },
@@ -233,7 +233,7 @@
     },
     "401": {
       "Title": "Bản demo - Cửa chuyển đổi",
-      "Description": "Mô phỏng hoạt động đóng/mở cửa của cảm biến cửa sổ demo."
+      "Description": "Mô phỏng cửa mở/đóng của cảm biến cửa sổ demo."
     },
     "402": {
       "Title": "Bản demo - Phát hiện chuyển động",
@@ -293,6 +293,12 @@
       "Title": "Ước tính tư thế",
       "Description": "Phát hiện điểm chính thông qua ước tính tư thế, sử dụng mô hình ONNX tùy chỉnh hoặc mô hình YOLOv11 được đào tạo trước mặc định (dành riêng cho tư thế của con người).",
       "ML.PoseEstimation": "Cho phép ước tính tư thế",
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Phân đoạn trường hợp",
+      "Description": "Phát hiện vật thể và hình dạng của chúng bằng mô hình YOLO11 đã được đào tạo trước.",
+      "ML.InstanceSegmentation": "Bật phân đoạn phiên bản",
       "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
     }
   }

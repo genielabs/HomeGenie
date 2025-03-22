@@ -202,7 +202,7 @@
       "Title": "سيڪيورٽي الارم سسٽم",
       "Description": "سيڪيورٽي الارم سسٽم لاڳو ڪرڻ لاءِ سينسر ۽ ٻيا ڊوائيس استعمال ڪريو.",
       "HomeGenie.SecurityAlarm": "الارم/اسٽروب طور استعمال ڪريو",
-      "HomeGenie.SecurityTriggerHome": "جڏهن هٿياربند گهر ۾ هجي ته اهو پڻ شروع ٿئي ٿو",
+      "HomeGenie.SecurityTriggerHome": "جڏهن هٿياربند گهر ۾ به حرڪت ڪندو آهي",
       "HomeGenie.SecuritySensor": "سيڪيورٽي سينسر طور استعمال ڪريو",
       "ConfigureOptions.Email.Recipients": "الارم اطلاعن لاءِ وصول ڪندڙن جي ڪاما سان الڳ ٿيل اي ميلن جي فهرست",
       "ConfigureOptions.System.ArmDelay": "بازو جي دير (سيڪنڊ)",
@@ -226,7 +226,7 @@
       "Description": "ورچوئل ڊيوائس جا قدر دستي طور تي مقرر ڪريو.",
       "Sensor.Temperature": "گرمي پد جو قدر",
       "Sensor.Luminance": "روشني جو قدر",
-      "Sensor.MotionDetect": "حرڪت جي ڳولا جي حيثيت",
+      "Sensor.MotionDetect": "حرڪت جي سڃاڻپ جي حيثيت",
       "Status.Battery": "بيٽري جي سطح",
       "Sensor.DoorWindow": "دروازي/دريءَ جي سينسر جي حيثيت (کليل/بند)",
       "Status.Level": "سوئچ اسٽيٽس (آن/آف)"
@@ -293,6 +293,12 @@
       "Title": "پوز جو اندازو",
       "Description": "ڪسٽم ONNX ماڊلز يا ڊفالٽ اڳ-تربيت يافته YOLOv11 ماڊل (انساني پوز لاءِ مخصوص) استعمال ڪندي پوز جي تخميني ذريعي ڪي پوائنٽ جي سڃاڻپ.",
       "ML.PoseEstimation": "پوز جو اندازو فعال ڪريو",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڊل فائل جو رستو (.onnx)"
+    },
+    "912": {
+      "Title": "مثال جي ڀاڱيداري",
+      "Description": "اڳ ۾ تربيت يافته YOLO11 ماڊل استعمال ڪندي شين ۽ انهن جي خاڪن کي ڳوليو.",
+      "ML.InstanceSegmentation": "مثال جي ڀاڱيداري کي فعال ڪريو",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڊل فائل جو رستو (.onnx)"
     }
   }

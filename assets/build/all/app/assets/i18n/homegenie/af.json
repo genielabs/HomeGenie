@@ -294,6 +294,12 @@
       "Description": "Sleutelpuntbespeuring via poseskatting, deur gebruik te maak van pasgemaakte ONNX-modelle of die verstek vooraf-opgeleide YOLOv11-model (menslike houding-spesifiek).",
       "ML.PoseEstimation": "Aktiveer houdingskatting",
       "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modellêer (.onnx)"
+    },
+    "912": {
+      "Title": "Instansie segmentering",
+      "Description": "Bespeur voorwerpe en hul buitelyne deur 'n vooraf-opgeleide YOLO11-model te gebruik.",
+      "ML.InstanceSegmentation": "Aktiveer instansiesegmentering",
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modellêer (.onnx)"
     }
   }
 }

@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "通用网络摄像机",
-      "Description": "显示/路由来自 IP 摄像机的图像。",
+      "Description": "显示/路由来自 IP 摄像机的图像馈送。",
       "IpCamera.ImageURL": "相机图像 API URL（请参阅相机文档）",
       "IpCamera.Username": "用户名（可选）",
       "IpCamera.Password": "密码（可选）",
@@ -251,7 +251,7 @@
     },
     "505": {
       "Title": "遥控",
-      "Description": "使用遥控器（IR 或 RF）控制设备。",
+      "Description": "使用遥控器（红外线 (IR) 或射频 (RF)）控制设备。",
       "HomeGenie.RemoteControl.Enable": "使能够",
       "HomeGenie.RemoteControl.IRCode": "切换按钮",
       "ConfigureOptions.DimmerUpCode": "亮度增加按钮",
@@ -293,6 +293,12 @@
       "Title": "姿态估计",
       "Description": "通过姿势估计进行关键点检测，使用自定义 ONNX 模型或默认预训练的 YOLOv11 模型（针对人体姿势）。",
       "ML.PoseEstimation": "启用姿势估计",
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
+    },
+    "912": {
+      "Title": "实例分割",
+      "Description": "使用预先训练的 YOLO11 模型检测物体及其轮廓。",
+      "ML.InstanceSegmentation": "启用实例分割",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
     }
   }

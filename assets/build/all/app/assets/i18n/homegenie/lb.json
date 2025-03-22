@@ -8,7 +8,7 @@
   "system_config_include_demo": "Enthält Demo mat simuléierten Apparataktivitéit",
   "system_config_additional_features": "Zousätzlech Funktiounen",
   "system_config_manual_setup": "Manuell Setup",
-  "interfaces": "Schnëttplazen",
+  "interfaces": "Interfaces",
   "Protocols.UPnP": "UPnP Controller",
   "HomeAutomation.X10": "X10 Controller",
   "HomeAutomation.ZWave": "Z-Wave Controller",
@@ -293,6 +293,12 @@
       "Title": "Pose Schätzung",
       "Description": "Keypoint Detektioun iwwer Poseschätzung, mat personaliséierten ONNX Modeller oder dem Standard pre-trained YOLOv11 Modell (mënschlech Pose-spezifesch).",
       "ML.PoseEstimation": "Aktivéiert Poseschätzung",
+      "ConfigureOptions.Yolo.ModelPath": "Wee vum YOLO11 Modelldatei (.onnx)"
+    },
+    "912": {
+      "Title": "Instanz Segmentatioun",
+      "Description": "Entdeckt Objeten an hir Konturen mat engem pre-trainéierten YOLO11 Modell.",
+      "ML.InstanceSegmentation": "Aktivéiert Instanz Segmentatioun",
       "ConfigureOptions.Yolo.ModelPath": "Wee vum YOLO11 Modelldatei (.onnx)"
     }
   }

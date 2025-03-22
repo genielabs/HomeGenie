@@ -1,6 +1,6 @@
 {
   " ": "-------------------------------------------",
-  "welcome_to_homegenie": "Добредојдовте во HomeGenie!",
+  "welcome_to_homegenie": "Добре дојдовте во HomeGenie!",
   "welcome_subtitle": "Интелигенција за програмабилна автоматизација",
   "not_configured_yet": "Системот сè уште не е конфигуриран. Овој волшебник за поставување ќе ви помогне да го активирате и стартувате вашиот систем во неколку чекори.",
   "system_config_start_with_base_and_backup": "Врати од резервна датотека",
@@ -100,7 +100,7 @@
   "scheduler_preset_action_config_options": "Опции",
   "scheduler_preset_action_program_say": "Кажи",
   "scheduler_preset_action_config_message": "Порака",
-  "save_and_build": "Заштедете и изградете",
+  "save_and_build": "Зачувај и изгради",
   "toggle_widgets_preview": "Вклучете го прегледот на виџетите",
   "stop_program": "Стоп програма",
   "run_program": "Стартувај програма",
@@ -171,7 +171,7 @@
     },
     "78": {
       "Title": "Паметен термостат",
-      "Description": "Користете кој било температурен сензор и паметен прекинувач за да ја имплементирате функционалноста на термостатот.",
+      "Description": "Користете кој било сензор за температура и паметен прекинувач за да ја имплементирате функционалноста на термостатот.",
       "VirtualThermostat.TemperatureModule": "Сензор за температура",
       "VirtualThermostat.HeatingSwitchModule": "Прекинувач за греење",
       "VirtualThermostat.CoolingSwitchModule": "Прекинувач за ладење",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Сензор за влажност",
       "Simulator.Sensor.Luminance": "Сензор за светлина",
       "Simulator.Meter.Watts": "Мерач на вати",
-      "Simulator.Meter.Watts.Max": "Макс Ват моќност",
+      "Simulator.Meter.Watts.Max": "Макс Ват моќ",
       "Simulator.Sensor.DataFrequency": "Фреквенција на емитување на симулатор"
     },
     "505": {
@@ -265,7 +265,7 @@
       "ConfigureOptions.Email.SmtpServer": "2. Адреса на серверот SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Корисничко име SMTP (опционално)",
       "ConfigureOptions.Email.SmtpPassword": "4. Лозинка SMTP (опционално)",
-      "ConfigureOptions.Email.SmtpPort": "5. SMTP сервер порта",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP серверска порта",
       "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP серверот користи SSL"
     },
     "145": {
@@ -293,6 +293,12 @@
       "Title": "Проценка на позата",
       "Description": "Откривање клучна точка преку проценка на позата, со користење на сопствени модели ONNX или стандарден претходно обучен YOLOv11 модел (специфичен за човечка поза).",
       "ML.PoseEstimation": "Овозможи проценка на поза",
+      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Сегментација на пример",
+      "Description": "Откријте предмети и нивните контури користејќи претходно обучен модел YOLO11.",
+      "ML.InstanceSegmentation": "Овозможи сегментација на пример",
       "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO11 (.onnx)"
     }
   }

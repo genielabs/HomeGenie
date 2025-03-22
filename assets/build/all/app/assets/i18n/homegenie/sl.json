@@ -294,6 +294,12 @@
       "Description": "Zaznavanje ključnih točk prek ocene položaja, z uporabo modelov ONNX po meri ali privzetega vnaprej usposobljenega modela YOLOv11 (specifičen za položaj človeka).",
       "ML.PoseEstimation": "Omogoči oceno položaja",
       "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
+    },
+    "912": {
+      "Title": "Segmentacija primerkov",
+      "Description": "Zaznavanje predmetov in njihovih obrisov z vnaprej usposobljenim modelom YOLO11.",
+      "ML.InstanceSegmentation": "Omogoči segmentacijo primerkov",
+      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
     }
   }
 }
