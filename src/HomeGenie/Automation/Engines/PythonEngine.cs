@@ -75,16 +75,16 @@ namespace HomeGenie.Automation.Engines
             setupCodeLineOffset = script.Split('\n').Length - 1;
             foreach (var line in ProgramBlock.ScriptSetup.Split('\n'))
             {
-                if (line.Trim().Length > 0) script += $"    {line}\n";
+                script += $"  {line}\n";
             }
-            script += "    pass\n\n";
+            script += "  pass\n\n";
             script += "def __main__():\n";
             mainCodeLineOffset = script.Split('\n').Length - 1;
             foreach (var line in ProgramBlock.ScriptSource.Split('\n'))
             {
-                if (line.Trim().Length > 0) script += $"    {line}\n";
+                script += $"  {line}\n";
             }
-            script += "    pass\n\n";
+            script += "  pass\n\n";
             try
             {
                 scriptEngine.Execute(script, scriptScope);
@@ -94,8 +94,6 @@ namespace HomeGenie.Automation.Engines
                 // TODO: report errors
                 Console.WriteLine(e.Message);
             }
-
-            
             
             return true;
         }

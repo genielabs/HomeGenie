@@ -376,8 +376,10 @@ namespace HomeGenie.Service
 
         #region MIG Events Propagation / Logging
 
+        // TODO: refactor to RouteEvent
         internal void RaiseEvent(object sender, MigEvent evt)
         {
+            // TODO: refactor to RouteEvent  (even in MIG)
             migService.RaiseEvent(sender, evt);
         }
 
@@ -1145,7 +1147,7 @@ namespace HomeGenie.Service
                 // sort modules properties by name
                 foreach (var module in modules)
                 {
-                    module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
+                    module?.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
                     {
                         int c = -1;
                         try

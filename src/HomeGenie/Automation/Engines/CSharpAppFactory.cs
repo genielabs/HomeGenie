@@ -69,10 +69,31 @@ namespace HomeGenie.Automation.Engines
             "Iot.Device.Common",
 #endif
 #if NET9_0_OR_GREATER
+            // yolo
             "Compunet.YoloSharp",
             "Compunet.YoloSharp.Plotting",
+            "YoloData = Compunet.YoloSharp.Data",
+            // llama
+            "LLama",
+            "LLama.Abstractions",
+            "LLama.Batched",
+            "LLama.Common",
+            "LLama.Exceptions",
+            "LLama.Extensions",
+            "LLama.Native",
+            "LLama.Sampling",
+            "LLama.Transformers",
+            "LLamaSharp.KernelMemory",
+            "LLamaSharp.SemanticKernel",
+            "LLamaSharp.SemanticKernel.TextCompletion",
+            "Microsoft.SemanticKernel",
+            "LangChain.Providers",
+            "LangChain.Providers.HuggingFace.Downloader",
+            "LangChain.Providers.LLamaSharp",
+            "static LangChain.Chains.Chain",
 #endif
             "Microsoft.Extensions.Options",
+            "Microsoft.Extensions.Logging.Abstractions",
             "Newtonsoft.Json",
             "Newtonsoft.Json.Linq",
             "HomeGenie",
@@ -251,6 +272,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
 
                     // Data / Signal processing / Machine Learning / Computer Vision / ONXX
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Extensions.Logging.Abstractions.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Extensions.Options.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.CpuMath.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Core.dll")),
@@ -274,6 +296,39 @@ namespace HomeGenie.Automation.Scripting
 #endif                    
 #if NET9_0_OR_GREATER
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YoloSharp.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.KernelMemory.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.SemanticKernel.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.KernelMemory.Abstractions.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Core.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Extensions.DependencyInjection.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Databases.InMemory.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Abstractions.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Anthropic.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Anthropic.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Azure.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Azure.AI.OpenAI.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Polyfills.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.DeepSeek.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Google.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "GenerativeAI.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.HuggingFace.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HuggingFace.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Bcl.AsyncInterfaces.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.LLamaSharp.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Ollama.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Ollama.dll")),
+                    //
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.OpenAI.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "tryAGI.OpenAI.dll")),
 #endif                    
                     // IO
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.dll")),
@@ -384,6 +439,7 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
             }
             compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Options.dll");
+            compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Logging.Abstractions.dll");
 
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MessagePack.dll");
