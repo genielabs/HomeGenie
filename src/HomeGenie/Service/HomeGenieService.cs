@@ -318,7 +318,7 @@ namespace HomeGenie.Service
             return response;
         }
 
-        public List<Group> GetGroups(string namePrefix)
+        public List<Group> GetGroups(string namePrefix = "")
         {
             List<Group> group = null;
             if (namePrefix.ToLower() == "automation")
@@ -536,15 +536,15 @@ namespace HomeGenie.Service
 
         #region Initialization and Data Persistence
 
-        private Func<Type,Exception,bool> UpdateDatabaseErrorHandler = new Func<Type, Exception, bool>((t, e) =>
-            {
-                LogError(Domains.HomeAutomation_HomeGenie,
-                    string.Format("UpdateXmlDatabase<{0}>()", t.FullName), e.Message, "StackTrace",
-                    e.StackTrace);
-                return false;
-            });
+        private Func<Type,Exception,bool> UpdateDatabaseErrorHandler = (t, e) =>
+        {
+            LogError(Domains.HomeAutomation_HomeGenie,
+                string.Format("UpdateXmlDatabase<{0}>()", t.FullName), e.Message, "StackTrace",
+                e.StackTrace);
+            return false;
+        };
 
-        public bool UpdateGroupsDatabase(string namePrefix)
+        public bool UpdateGroupsDatabase(string namePrefix = "")
         {
             var groups = controlGroups;
             if (namePrefix.ToLower() == "automation")
@@ -1245,6 +1245,7 @@ namespace HomeGenie.Service
                     }
                     if (interfaceModules.Count > 0)
                     {
+                        bool modulesGroupAdded = false;
                         for (var i = 0; i < interfaceModules.Count; i++)
                         {
                             var migModule = interfaceModules[i];
@@ -1266,6 +1267,26 @@ namespace HomeGenie.Service
                                     module.Address = migModule.Address;
                                     systemModules.Add(module);
                                 }
+
+                                // Add UPnP devices automatically to UPnP group
+                                if (iface.GetDomain() == Domains.Protocols_UPnP)
+                                {
+                                    var upnpGroup = Groups.Find((group => group.Name == "UPnP"));
+                                    if (upnpGroup == null)
+                                    {
+                                        upnpGroup = new Group();
+                                        upnpGroup.Name = "UPnP";
+                                        Groups.Add(upnpGroup);
+                                        modulesGroupAdded = true;
+                                    }
+                                    bool exists = upnpGroup.Modules.Find((mr => mr.Domain == module.Domain && mr.Address == module.Address)) != null;
+                                    if (!exists)
+                                    {
+                                        upnpGroup.Modules.Add(new ModuleReference(){Domain = module.Domain, Address = module.Address});
+                                        modulesGroupAdded = true;
+                                    }
+                                }
+
                             }
 
                             if (String.IsNullOrEmpty(module.Description))
@@ -1278,6 +1299,10 @@ namespace HomeGenie.Service
                             {
                                 module.DeviceType = migModule.CustomData.Type;
                             }
+                        }
+                        if (modulesGroupAdded)
+                        {
+                            UpdateGroupsDatabase();
                         }
                     }
                 }

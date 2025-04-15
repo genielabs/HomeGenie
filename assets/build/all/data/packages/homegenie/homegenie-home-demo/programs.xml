@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>$$.program
   .useWidget('homegenie/generic/program');
@@ -430,7 +430,7 @@ Modules
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -464,40 +464,8 @@ Program.GoBackground();
     <ScriptSetup>/*
 || @title: Virtual Modules Demo App
 || @author: Generoso Martello
-|| @version: 1.0
-|| @updated: 2016-04-30 16:54
-|| @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
-||
-|| HomeGenie API reference
-||   https://homegenie.it/content/devs/programs/
-||   https://homegenie.it/api/ape/annotated.html
-||   https://homegenie.it/api/mig/overview.html
-*/
-
-const _domain = "HomeAutomation.Demo";
-
-// Add a temperature and luminance sensor
-$$.program.addModule(_domain, "1", "Sensor");
-$$.program.addFeature(_domain, "Sensor", "Sensor.Temperature", "Temperature value", "slider:-50:100:0.5");
-$$.program.addFeature(_domain, "Sensor", "Sensor.Humidity", "Humidity value", "slider:10:100:5");
-$$.program.addFeature(_domain, "Sensor", "Sensor.Luminance", "Luminance value", "slider:0:1000:1");
-$$.program.addFeature(_domain, "Sensor", "Sensor.MotionDetect", "Motion detection status", "slider:0:1:1");
-$$.program.addFeature(_domain, "Sensor", "Status.Battery", "Battery level", "slider:0:100:1");
-
-// Add a doorwindow sensor
-$$.program.addModule(_domain, "2", "DoorWindow");
-$$.program.addFeature(_domain, "DoorWindow", "Sensor.DoorWindow", "Door/Window sensor status (open/closed)", "slider:0:1:1");
-$$.program.addFeature(_domain, "DoorWindow", "Status.Battery", "Battery level", "slider:0:100:1");
-
-// Add an on/off switch
-$$.program.addModule(_domain, "3", "Switch");
-$$.program.addFeature(_domain, "Switch", "Status.Level", "Switch status (on/off)", "slider:0:1:1");
-
-$$.program.run();
-</ScriptSetup>
-    <ScriptSource>/*
-|| @title: Virtual Modules Demo App
-|| @author: Generoso Martello
+|| @version: 1.1
+|| @updated: 2025-04-08 19:28
 || @version: 1.0
 || @updated: 2016-04-30 16:54
 || @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
@@ -509,14 +477,58 @@ $$.program.run();
 */
 
 const domain = "HomeAutomation.Demo";
-const demoModules = $$.modules.inDomain(domain);
+const type = {
+  Sensor: "Sensor",
+  DoorWindow: "DoorWindow",
+  Switch: "Switch"
+};
+
+// Add a temperature and luminance sensor
+hg.program
+  .addModule(domain, "1", type.Sensor)
+  .addFeature(domain, type.Sensor, "Sensor.Temperature", "Temperature value", "slider:-50:100:0.5")
+  .addFeature(domain, type.Sensor, "Sensor.Humidity", "Humidity value", "slider:10:100:5")
+  .addFeature(domain, type.Sensor, "Sensor.Luminance", "Luminance value", "slider:0:1000:1")
+  .addFeature(domain, type.Sensor, "Sensor.MotionDetect", "Motion detection status", "slider:0:1:1")
+  .addFeature(domain, type.Sensor, "Status.Battery", "Battery level", "slider:0:100:1");
+
+// Add a doorwindow sensor
+hg.program
+  .addModule(domain, "2", type.DoorWindow)
+  .addFeature(domain, type.DoorWindow, "Sensor.DoorWindow", "Door/Window sensor status (open/closed)", "slider:0:1:1")
+  .addFeature(domain, type.DoorWindow, "Status.Battery", "Battery level", "slider:0:100:1");
+
+// Add an on/off switch
+hg.program
+  .addModule(domain, "3", type.Switch)
+  .addFeature(domain, type.Switch, "Status.Level", "Switch status (on/off)", "slider:0:1:1");
+
+hg.program.run();
+</ScriptSetup>
+    <ScriptSource>/*
+|| @title: Virtual Modules Demo App
+|| @author: Generoso Martello
+|| @version: 1.1
+|| @updated: 2025-04-08 19:28
+|| @version: 1.0
+|| @updated: 2016-04-30 16:54
+|| @licence: https://raw.githubusercontent.com/genielabs/HomeGenie/master/LICENSE_GPLV3.TXT
+||
+|| HomeGenie API reference
+||   https://homegenie.it/content/devs/programs/
+||   https://homegenie.it/api/ape/annotated.html
+||   https://homegenie.it/api/mig/overview.html
+*/
+
+const domain = "HomeAutomation.Demo";
+const demoModules = hg.modules.inDomain(domain);
 
 initialize();
 
 // handle API call for this domain
-$$.api.handle(domain, function(apiCall) {
+hg.api.handle(domain, function(apiCall) {
 
-  const ac = $$.api.parse(apiCall);
+  const ac = hg.api.parse(apiCall);
   // Example:
   //  if the "apiCall" is
   //    "http://&lt;homegenie_address&gt;/api/HomeAutomation.Demo/3/Control.Level/50/1000"
@@ -549,7 +561,7 @@ $$.api.handle(domain, function(apiCall) {
   }
 
   // beside the response, also return back requested data for debugging purpose
-  return JSON.stringify({
+  return {
     ResponseValue: response,
     ApiCall: apiCall,
     Domain: ac.domain,
@@ -558,11 +570,11 @@ $$.api.handle(domain, function(apiCall) {
     Options: ac.optionsString,
     Option1: ac.getOption(0),
     Option2: ac.getOption(1)
-  });
+  };
 
 });
 
-$$.program.goBackground();
+hg.program.goBackground();
 
 // let's give some default properties to virtual modules
 function initialize() {
@@ -571,43 +583,48 @@ function initialize() {
   if (multiSensor.instance.name == "") {
     multiSensor.instance.name = 'Multi Sensor';
   }
-  if (multiSensor.parameter("Sensor.Temperature").value == "") {
-    multiSensor.parameter("Sensor.Temperature").value = "25.5";
+  const temperature = multiSensor.parameter("Sensor.Temperature");
+  if (temperature.value == "") {
+    temperature.value = "25.5";
   }
-  if (multiSensor.parameter("Sensor.Luminance").value == "") {
-    multiSensor.parameter("Sensor.Luminance").value = "273";
+  const luminance = multiSensor.parameter("Sensor.Luminance");
+  if (luminance.value == "") {
+    luminance.value = "273";
   }
-  if (multiSensor.parameter("Sensor.MotionDetect").value == "") {
-    multiSensor.parameter("Sensor.MotionDetect").value = "0";
+  const motionDetect = multiSensor.parameter("Sensor.MotionDetect");
+  if (motionDetect.value == "") {
+    motionDetect.value = "0";
   }
   // Door Window
   const doorWindow = demoModules.withAddress("2").get();
   if (doorWindow.instance.name == "") {
     doorWindow.instance.name = "Door Sensor";
   }
-  if (doorWindow.parameter("Sensor.DoorWindow").value == "") {
-    doorWindow.parameter("Sensor.DoorWindow").value = "1";
+  const sensorDoorWindow = doorWindow.parameter("Sensor.DoorWindow");
+  if (sensorDoorWindow.value == "") {
+    sensorDoorWindow.value = "1";
   }
   // Boiler Switch
   const boilerSwitch = demoModules.withAddress("3").get();
   if (boilerSwitch.instance.name == "") {
     boilerSwitch.instance.name = "Boiler Switch";
   }
-  if (boilerSwitch.parameter("Status.Level").value == "") {
-    boilerSwitch.parameter("Status.Level").value = "0";
+  const statusLevel = boilerSwitch.parameter("Status.Level");
+  if (statusLevel.value == "") {
+    statusLevel.value = "0";
   }
 }</ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>virtual-modules-demo</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>5E98102CE7405645D9CDC0981FBD6970</Checksum>
+      <Checksum>2D1C3778E19B06B28E02CA7A39AE65F2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>400</Address>

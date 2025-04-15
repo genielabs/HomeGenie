@@ -281,6 +281,13 @@ namespace HomeGenie.Service
                         if (!exists)
                         {
                             homegenie.Groups.Add(group);
+                            // keep UPnP group always at last position
+                            var upnpGroup = homegenie.Groups.Find((g) => g.Name == "UPnP");
+                            if (upnpGroup != null)
+                            {
+                                homegenie.Groups.Remove(upnpGroup);
+                                homegenie.Groups.Add(upnpGroup);
+                            }
                         }
                         // merge modules
                         var targetGroup = homegenie.Groups.Find((g) => g.Name == group.Name);
