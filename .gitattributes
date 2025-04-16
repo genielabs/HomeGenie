@@ -1,0 +1,3 @@
+# exclude from github language stats
+docs/* linguist-documentation
+assets/* linguist-vendored
