@@ -87,7 +87,7 @@
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
     <PackageReference Include="UnitsNet" Version="5.70.0" />
 
-    <PackageReference Include="MIG.HomeAutomation" Version="1.2.24" />
+    <PackageReference Include="MIG.HomeAutomation" Version="1.2.25" />
     <PackageReference Include="MIG.Protocols" Version="1.2.10" />
 
     <PackageReference Include="MQTTnet" Version="4.3.7.1207" />

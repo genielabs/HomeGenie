@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
-    <ScriptSetup>$$.program
+    <ScriptSetup>hg.program
   .useWidget('homegenie/generic/program');
 </ScriptSetup>
     <ScriptSource>var motionDetect = "Sensor.MotionDetect";
-var motionSensor = $$.modules.inDomain("HomeAutomation.Demo").withAddress("1").get();
+var motionSensor = hg.modules.inDomain("HomeAutomation.Demo").withAddress("1").get();
 //var currentValue = motion.parameter(motionDetect).decimalValue;
 motionSensor.emit(motionDetect, "1");
-$$.pause(1);
+hg.pause(1);
 motionSensor.emit(motionDetect, "0");
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>demo-motion-detected</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>68CB503B0514BCBDAA2861EE4CA22257</Checksum>
+      <Checksum>E5DCD2972E2928CB577DD34CFC5E321D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>402</Address>
@@ -35,23 +35,23 @@ motionSensor.emit(motionDetect, "0");
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>$$.program.useWidget('homegenie/generic/program');</ScriptSetup>
+    <ScriptSetup>hg.program.useWidget('homegenie/generic/program');</ScriptSetup>
     <ScriptSource>var doorWindow = "Sensor.DoorWindow";
-var doorSensor = $$.modules.inDomain("HomeAutomation.Demo").withAddress("2").get();
+var doorSensor = hg.modules.inDomain("HomeAutomation.Demo").withAddress("2").get();
 var currentValue = doorSensor.parameter(doorWindow).decimalValue;
 doorSensor.emit(doorWindow, currentValue == 0 ? "1" : "0", "");
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>demo-toggle-door</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>C4027840317DE43A0F8545980A56FBB4</Checksum>
+      <Checksum>8CC92AA8346896A0709754FEF1C547E9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>401</Address>

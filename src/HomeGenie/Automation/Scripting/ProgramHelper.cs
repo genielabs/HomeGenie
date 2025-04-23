@@ -393,7 +393,7 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>ProgramHelper.</returns>
         /// <param name="domain">Domain.</param>
         /// <param name="address">Address.</param>
-        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).</param>
+        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, Motor, DoorWindow, MediaTransmitter, MediaReceiver).</param>
         /// <param name="widget">Widget to display this modules with.</param>
         /// <param name="implementedFeatures">Allow only features explicitly declared in this list</param>
         public ProgramHelper AddModule(string domain, string address, string type, string widget = "", string[] implementedFeatures = null)
@@ -422,7 +422,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="domain">Domain.</param>
         /// <param name="startAddress">Start address (numeric).</param>
         /// <param name="endAddress">End address (numeric).</param>
-        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, DoorWindow, MediaTransmitter, MediaReceiver).</param>
+        /// <param name="type">Type (Generic, Program, Switch, Light, Dimmer, Sensor, Temperature, Siren, Fan, Thermostat, Shutter, Motor, DoorWindow, MediaTransmitter, MediaReceiver).</param>
         /// <param name="widget">Widget to display these modules with.</param>
         /// <param name="implementedFeatures">Allow only features explicitly declared in this list</param>
         public ProgramHelper AddModules(
