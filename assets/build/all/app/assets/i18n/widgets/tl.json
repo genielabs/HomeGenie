@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Paganahin/Huwag paganahin ang mahabang pindutin upang muling ayusin ang mga widget",
   "$alarm_system": {
     "arm_home": "Bahay",
     "arm_away": "Malayo"

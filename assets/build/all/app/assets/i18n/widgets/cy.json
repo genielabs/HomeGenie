@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Galluogi/Analluogi pwyso'n hir i aildrefnu teclynnau",
   "$alarm_system": {
     "arm_home": "Cartref",
     "arm_away": "I ffwrdd"
@@ -7,6 +8,6 @@
     "label": "Label",
     "indicators": "Dangosyddion",
     "lights_control": "Goleuadau",
-    "switches_control": "Switsys"
+    "switches_control": "Switshis"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Виджеттерди иреттөө үчүн көпкө басууну иштетүү/өчүрүү",
   "$alarm_system": {
     "arm_home": "Үй",
     "arm_away": "Алыста"

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Включить/выключить долгое нажатие для изменения порядка виджетов",
   "$alarm_system": {
     "arm_home": "Дом",
     "arm_away": "Прочь"

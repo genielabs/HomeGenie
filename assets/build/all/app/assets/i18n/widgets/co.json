@@ -1,12 +1,13 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Attivà/Disattivà a pressione longa per riordinà i widget",
   "$alarm_system": {
-    "arm_home": "A casa",
-    "arm_away": "Via"
+    "arm_home": "Casa",
+    "arm_away": "Luntanu"
   },
   "$section_label": {
     "label": "Etichetta",
     "indicators": "Indicatori",
     "lights_control": "Luci",
-    "switches_control": "Cambia"
+    "switches_control": "Interruttori"
   }
 }

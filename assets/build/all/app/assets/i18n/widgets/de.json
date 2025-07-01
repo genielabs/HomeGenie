@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Aktivieren/Deaktivieren des langen Drückens zum Neuanordnen von Widgets",
   "$alarm_system": {
     "arm_home": "Heim",
     "arm_away": "Weg"
@@ -6,7 +7,7 @@
   "$section_label": {
     "label": "Etikett",
     "indicators": "Indikatoren",
-    "lights_control": "Beleuchtung",
+    "lights_control": "Lichter",
     "switches_control": "Schalter"
   }
 }

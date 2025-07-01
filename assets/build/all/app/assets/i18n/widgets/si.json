@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "විජට් නැවත ඇණවුම් කිරීමට දිගු එබීම සක්‍රිය/අක්‍රිය කරන්න",
   "$alarm_system": {
     "arm_home": "මුල් පිටුව",
     "arm_away": "ඉවතට"

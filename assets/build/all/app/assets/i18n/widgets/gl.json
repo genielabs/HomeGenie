@@ -1,7 +1,8 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Activar/Desactivar premer longamente para reordenar os widgets",
   "$alarm_system": {
-    "arm_home": "Casa",
-    "arm_away": "Fóra"
+    "arm_home": "Inicio",
+    "arm_away": "Lonxe"
   },
   "$section_label": {
     "label": "Etiqueta",

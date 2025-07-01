@@ -485,10 +485,11 @@ const ModuleTypes = {
   fan: 7,
   thermostat: 8,
   shutter: 9,
-  doorWindow: 10, // 0x0000000A
-  doorLock: 11, // 0x0000000B
-  mediaTransmitter: 12, // 0x0000000C
-  mediaReceiver: 13, // 0x0000000D
+  motor: 10, // 0x0000000A
+  doorWindow: 11, // 0x0000000B
+  doorLock: 12, // 0x0000000C
+  mediaTransmitter: 13, // 0x0000000D
+  mediaReceiver: 14 // 0x0000000E
 }
 
 /**Module instance. */

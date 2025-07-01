@@ -1,12 +1,13 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Ji bo ji nû ve rêzkirina widgetan pêlkirina dirêj çalak/neçalak bike",
   "$alarm_system": {
     "arm_home": "Xane",
     "arm_away": "Serve"
   },
   "$section_label": {
     "label": "Awanasî",
-    "indicators": "Indicators",
-    "lights_control": "Lights",
-    "switches_control": "Switches"
+    "indicators": "Nîşander",
+    "lights_control": "Ronahî",
+    "switches_control": "Guhêrbar"
   }
 }

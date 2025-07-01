@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Activer/désactiver l'appui long pour réorganiser les widgets",
   "$alarm_system": {
     "arm_home": "Maison",
     "arm_away": "Loin"
@@ -7,6 +8,6 @@
     "label": "Étiquette",
     "indicators": "Indicateurs",
     "lights_control": "Lumières",
-    "switches_control": "Interrupteurs"
+    "switches_control": "Commutateurs"
   }
 }

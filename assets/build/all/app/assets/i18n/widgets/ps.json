@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "د ویجټونو د بیا تنظیمولو لپاره اوږد فشار فعال/غیر فعال کړئ",
   "$alarm_system": {
     "arm_home": "کور",
     "arm_away": "لرې"

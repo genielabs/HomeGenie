@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Միացնել/անջատել երկար սեղմումը՝ վիջեթները վերադասավորելու համար",
   "$alarm_system": {
     "arm_home": "Տուն",
     "arm_away": "Հեռու"

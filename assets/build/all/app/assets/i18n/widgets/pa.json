@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "ਵਿਜੇਟਸ ਨੂੰ ਮੁੜ ਕ੍ਰਮਬੱਧ ਕਰਨ ਲਈ ਲੰਬੇ ਸਮੇਂ ਤੱਕ ਦਬਾਉਣ ਨੂੰ ਸਮਰੱਥ/ਅਯੋਗ ਕਰੋ",
   "$alarm_system": {
     "arm_home": "ਮੁੱਖ ਪੇਜ",
     "arm_away": "ਦੂਰ"

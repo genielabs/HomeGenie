@@ -1,10 +1,11 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Omogući/Onemogući dugi pritisak za promjenu redoslijeda widgeta",
   "$alarm_system": {
     "arm_home": "Dom",
-    "arm_away": "U gostima"
+    "arm_away": "Odsutan"
   },
   "$section_label": {
-    "label": "Label",
+    "label": "Oznaka",
     "indicators": "Indikatori",
     "lights_control": "Svjetla",
     "switches_control": "Prekidači"

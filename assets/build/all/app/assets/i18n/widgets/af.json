@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Aktiveer/Deaktiveer lang druk om widgets te herrangskik",
   "$alarm_system": {
     "arm_home": "Tuis",
     "arm_away": "Weg"

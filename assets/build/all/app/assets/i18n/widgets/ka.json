@@ -1,12 +1,13 @@
 {
+  "toggle_long_press_to_reorder_widgets": "ვიჯეტების თანმიმდევრობის შესაცვლელად ხანგრძლივად დაჭერით ჩართვა/გამორთვა",
   "$alarm_system": {
-    "arm_home": "მთავარი",
-    "arm_away": "მოშორებით"
+    "arm_home": "სახლი",
+    "arm_away": "შორს"
   },
   "$section_label": {
-    "label": "ლეიბლი",
+    "label": "ეტიკეტი",
     "indicators": "ინდიკატორები",
-    "lights_control": "განათებები",
+    "lights_control": "განათება",
     "switches_control": "გადამრთველები"
   }
 }

@@ -1,10 +1,11 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Povoliť/zakázať dlhé stlačenie na zmenu poradia widgetov",
   "$alarm_system": {
     "arm_home": "Domov",
     "arm_away": "Preč"
   },
   "$section_label": {
-    "label": "Označenie",
+    "label": "Štítok",
     "indicators": "Ukazovatele",
     "lights_control": "Svetlá",
     "switches_control": "Prepínače"

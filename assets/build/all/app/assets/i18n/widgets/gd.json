@@ -1,12 +1,13 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Cuir an comas/cuir dheth brùthadh fada gus na widgets ath-òrdachadh",
   "$alarm_system": {
-    "arm_home": "Dhachaigh",
+    "arm_home": "Dachaigh",
     "arm_away": "Air falbh"
   },
   "$section_label": {
-    "label": "Label",
+    "label": "Leubail",
     "indicators": "Comharran",
     "lights_control": "Solais",
-    "switches_control": "Switches"
+    "switches_control": "Suidsichean"
   }
 }

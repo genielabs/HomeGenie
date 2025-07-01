@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "ဝစ်ဂျက်များကို ပြန်စီရန် ကြာရှည်စွာ နှိပ်ခြင်းကို ဖွင့်/ပိတ်ပါ။",
   "$alarm_system": {
     "arm_home": "အိမ်",
     "arm_away": "ကွာ"

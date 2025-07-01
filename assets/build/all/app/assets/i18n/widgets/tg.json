@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Барои аз нав фармоиш додани виджетҳо пахши дарозро фаъол/хомӯш кунед",
   "$alarm_system": {
     "arm_home": "Хона",
     "arm_away": "Дур"

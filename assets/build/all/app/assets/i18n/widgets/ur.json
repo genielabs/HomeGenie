@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "ویجٹ کو دوبارہ ترتیب دینے کے لیے لانگ پریس کو فعال/غیر فعال کریں۔",
   "$alarm_system": {
     "arm_home": "گھر",
     "arm_away": "دور"
@@ -7,6 +8,6 @@
     "label": "لیبل",
     "indicators": "اشارے",
     "lights_control": "لائٹس",
-    "switches_control": "سوئچ کرتا ہے۔"
+    "switches_control": "سوئچز"
   }
 }

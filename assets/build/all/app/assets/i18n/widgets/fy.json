@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Lang yndrukke ynskeakelje/útskeakelje om widgets opnij te foljen",
   "$alarm_system": {
     "arm_home": "Thús",
     "arm_away": "Fuort"
@@ -7,6 +8,6 @@
     "label": "Etiket",
     "indicators": "Yndikatoaren",
     "lights_control": "Ljochten",
-    "switches_control": "Switches"
+    "switches_control": "Skeakels"
   }
 }

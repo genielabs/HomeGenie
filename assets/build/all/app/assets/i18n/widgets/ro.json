@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Activează/Dezactivează apăsarea lungă pentru reordonarea widgeturilor",
   "$alarm_system": {
     "arm_home": "Acasă",
     "arm_away": "Departe"

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Vidjetlarni qayta tartiblash uchun uzoq bosib turishni yoqish/o‘chirish",
   "$alarm_system": {
     "arm_home": "Uy",
     "arm_away": "Uzoqda"

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Виджеттердің ретін өзгерту үшін ұзақ басып тұруды қосу/өшіру",
   "$alarm_system": {
     "arm_home": "Үй",
     "arm_away": "Алыста"

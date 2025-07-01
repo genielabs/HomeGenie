@@ -1,11 +1,12 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Vidinate ümberjärjestamise lubamine/keelamine pika vajutusega",
   "$alarm_system": {
-    "arm_home": "Kodu",
-    "arm_away": "Eemal"
+    "arm_home": "Avaleht",
+    "arm_away": "Ära"
   },
   "$section_label": {
     "label": "Silt",
-    "indicators": "Näitajad",
+    "indicators": "Indikaatorid",
     "lights_control": "Tuled",
     "switches_control": "Lülitid"
   }

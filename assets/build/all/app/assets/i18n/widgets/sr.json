@@ -1,10 +1,11 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Омогући/онемогући дуги притисак за промену редоследа виџета",
   "$alarm_system": {
-    "arm_home": "Хоме",
-    "arm_away": "Аваи"
+    "arm_home": "Дом",
+    "arm_away": "Одсутни"
   },
   "$section_label": {
-    "label": "Лабел",
+    "label": "Ознака",
     "indicators": "Индикатори",
     "lights_control": "Светла",
     "switches_control": "Прекидачи"

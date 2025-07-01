@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "تمكين/تعطيل الضغط لفترة طويلة لإعادة ترتيب الأدوات",
   "$alarm_system": {
     "arm_home": "بيت",
     "arm_away": "بعيد"

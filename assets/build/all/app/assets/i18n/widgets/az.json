@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Vidcetləri yenidən sıralamaq üçün uzun basmağı aktivləşdirin/deaktiv edin",
   "$alarm_system": {
     "arm_home": "Ev",
     "arm_away": "Uzaqda"

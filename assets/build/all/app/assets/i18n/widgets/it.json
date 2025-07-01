@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Abilita/Disabilita la pressione prolungata per riordinare i widget",
   "$alarm_system": {
     "arm_home":
       "In casa",

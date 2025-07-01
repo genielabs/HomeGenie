@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Yambitsani/Letsani kusindikiza kwakutali kuti mukonzenso ma widget",
   "$alarm_system": {
     "arm_home": "Kunyumba",
     "arm_away": "Kutali"

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "विजेटहरू पुन: क्रमबद्ध गर्न लामो समयसम्म थिच्नुहोस् सक्षम/असक्षम गर्नुहोस्",
   "$alarm_system": {
     "arm_home": "गृह पृष्ठ",
     "arm_away": "टाढा"

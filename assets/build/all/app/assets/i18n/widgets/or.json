@@ -1,10 +1,11 @@
 {
+  "toggle_long_press_to_reorder_widgets": "ୱିଜେଟଗୁଡ଼ିକୁ ପୁନଃକ୍ରମରେ ରଖିବାକୁ ଅଧିକ ସମୟ ଦବାଇ ରଖିବା ସକ୍ଷମ/ଅକ୍ଷମ କରନ୍ତୁ",
   "$alarm_system": {
     "arm_home": "ଘର",
     "arm_away": "ବାହାରେ"
   },
   "$section_label": {
-    "label": "ଲେବଲ୍‍",
+    "label": "ଲେବଲ୍",
     "indicators": "ସୂଚକଗୁଡ଼ିକ",
     "lights_control": "ଲାଇଟ୍",
     "switches_control": "ସ୍ୱିଚ୍‌ଗୁଡ଼ିକ"

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Виджетүүдийг дахин эрэмблэхийн тулд удаан дарахыг идэвхжүүлэх/идэвхгүй болгох",
   "$alarm_system": {
     "arm_home": "Гэр",
     "arm_away": "Алс"

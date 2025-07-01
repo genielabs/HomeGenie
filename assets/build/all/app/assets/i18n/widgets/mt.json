@@ -1,7 +1,8 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Ippermetti/Iddiżattiva l-pressjoni twila biex tbiddel l-ordni tal-widgets",
   "$alarm_system": {
     "arm_home": "Dar",
-    "arm_away": "Bogħod"
+    "arm_away": "'Il bogħod"
   },
   "$section_label": {
     "label": "Tikketta",

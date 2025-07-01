@@ -1,10 +1,11 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Ota käyttöön/poista käytöstä pitkä painallus widgetien järjestämiseksi uudelleen",
   "$alarm_system": {
     "arm_home": "Kotiin",
-    "arm_away": "Pois"
+    "arm_away": "Poissa"
   },
   "$section_label": {
-    "label": "Label",
+    "label": "Tarra",
     "indicators": "Indikaattorit",
     "lights_control": "Valot",
     "switches_control": "Kytkimet"

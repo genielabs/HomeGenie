@@ -1,12 +1,13 @@
 {
+  "toggle_long_press_to_reorder_widgets": "אַקטיווירן/דיאַקטיווירן לאַנג דריקן צו ריאָרדערן ווידזשעטס",
   "$alarm_system": {
     "arm_home": "היים",
-    "arm_away": "אוועק"
+    "arm_away": "אַוועק"
   },
   "$section_label": {
-    "label": "לאַבעל",
-    "indicators": "ינדיקאַטאָרס",
-    "lights_control": "לייץ",
-    "switches_control": "סוויטשיז"
+    "label": "עטיקעט",
+    "indicators": "אינדיקאַטאָרן",
+    "lights_control": "ליכטער",
+    "switches_control": "סוויטשעס"
   }
 }

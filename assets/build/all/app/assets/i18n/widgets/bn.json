@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "উইজেটগুলি পুনরায় সাজানোর জন্য দীর্ঘক্ষণ প্রেস সক্ষম/অক্ষম করুন",
   "$alarm_system": {
     "arm_home": "হোম",
     "arm_away": "দূরে"

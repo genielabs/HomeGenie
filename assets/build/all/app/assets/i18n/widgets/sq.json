@@ -1,10 +1,11 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Aktivizo/çaktivizo shtypjen e gjatë për të rirenditur veglat",
   "$alarm_system": {
     "arm_home": "Shtëpi",
     "arm_away": "Larg"
   },
   "$section_label": {
-    "label": "Etiketa",
+    "label": "Etiketë",
     "indicators": "Treguesit",
     "lights_control": "Dritat",
     "switches_control": "Çelësat"

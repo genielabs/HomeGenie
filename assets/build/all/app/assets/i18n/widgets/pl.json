@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Włącz/wyłącz opcję długiego naciśnięcia w celu zmiany kolejności widżetów",
   "$alarm_system": {
     "arm_home": "Dom",
     "arm_away": "Z dala"

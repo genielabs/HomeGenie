@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Aktiver/deaktiver langt trykk for å endre rekkefølgen på widgeter",
   "$alarm_system": {
     "arm_home": "Hjem",
     "arm_away": "Borte"

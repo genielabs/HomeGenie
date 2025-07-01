@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Bật/Tắt chức năng nhấn lâu để sắp xếp lại các tiện ích",
   "$alarm_system": {
     "arm_home": "Trang chủ",
     "arm_away": "Xa"

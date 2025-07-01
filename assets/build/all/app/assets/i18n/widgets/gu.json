@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "વિજેટ્સને ફરીથી ગોઠવવા માટે લાંબા સમય સુધી દબાવીને સક્ષમ/અક્ષમ કરો",
   "$alarm_system": {
     "arm_home": "ઘર",
     "arm_away": "દૂર"

@@ -1,4 +1,5 @@
 {
+  "toggle_long_press_to_reorder_widgets": "启用/禁用长按重新排序小部件",
   "$alarm_system": {
     "arm_home": "家",
     "arm_away": "离开"

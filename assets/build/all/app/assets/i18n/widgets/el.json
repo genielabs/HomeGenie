@@ -1,11 +1,12 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Ενεργοποίηση/Απενεργοποίηση παρατεταμένου πατήματος για αναδιάταξη των γραφικών στοιχείων",
   "$alarm_system": {
     "arm_home": "Σπίτι",
     "arm_away": "Μακριά"
   },
   "$section_label": {
     "label": "Επιγραφή",
-    "indicators": "δείκτες",
+    "indicators": "Δείκτες",
     "lights_control": "Φώτα",
     "switches_control": "Διακόπτες"
   }

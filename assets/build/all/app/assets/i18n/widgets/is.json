@@ -1,7 +1,8 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Virkja/slökkva á lengi inni til að endurraða viðbætur",
   "$alarm_system": {
     "arm_home": "Heim",
-    "arm_away": "Burt"
+    "arm_away": "Í burtu"
   },
   "$section_label": {
     "label": "Merki",

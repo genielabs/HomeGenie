@@ -1,12 +1,13 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Gaitu/Desgaitu luze sakatuta widgetak berrantolatzeko",
   "$alarm_system": {
-    "arm_home": "Hasiera",
-    "arm_away": "Kanpoan"
+    "arm_home": "Etxea",
+    "arm_away": "Urruti"
   },
   "$section_label": {
     "label": "Etiketa",
     "indicators": "Adierazleak",
     "lights_control": "Argiak",
-    "switches_control": "Etengailuak"
+    "switches_control": "etengailuak"
   }
 }

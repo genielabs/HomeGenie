@@ -1,7 +1,8 @@
 {
+  "toggle_long_press_to_reorder_widgets": "Cumasaigh/Díchumasaigh brúigh fhada chun giuirléidí a athordú",
   "$alarm_system": {
     "arm_home": "Baile",
-    "arm_away": "Amach"
+    "arm_away": "Ar shiúl"
   },
   "$section_label": {
     "label": "Lipéad",
