@@ -31,4 +31,3 @@ namespace HomeGenie.Data
         public string Domain { get; set; }
     }
 }
-

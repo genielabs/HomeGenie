@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Xml.Serialization;
@@ -1226,11 +1227,12 @@ namespace HomeGenie.Service
         {
             lock (systemModules.LockObject)
             {
-                if (migService.Configuration.GetInterface(iface.GetDomain()).IsEnabled)
+                string domain = iface.GetDomain();
+                if (migService.Configuration.GetInterface(domain).IsEnabled)
                 {
                     var interfaceModules = iface.GetModules();
                     // delete removed modules
-                    var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain() && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
+                    var deleted = systemModules.FindAll(m => m.Domain == domain && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
                     foreach (var mod in deleted)
                     {
                         // only "real" modules defined by mig interfaces are considered
@@ -1245,7 +1247,19 @@ namespace HomeGenie.Service
                     }
                     if (interfaceModules.Count > 0)
                     {
+                        var groupName = domain.Split('.').Last();
+                        var domainGroup = Groups.Find((group => group.Name == groupName));
                         bool modulesGroupAdded = false;
+                        if (domainGroup == null)
+                        {
+                            // Add modules automatically to a group named
+                            // like the interface domain name (groupName)
+                            domainGroup = new Group();
+                            domainGroup.Name = groupName;
+                            Groups.Add(domainGroup);
+                            modulesGroupAdded = true;
+                        }
+
                         for (var i = 0; i < interfaceModules.Count; i++)
                         {
                             var migModule = interfaceModules[i];
@@ -1268,25 +1282,13 @@ namespace HomeGenie.Service
                                     systemModules.Add(module);
                                 }
 
-                                // Add UPnP devices automatically to UPnP group
-                                if (iface.GetDomain() == Domains.Protocols_UPnP)
+                                var groupModule = domainGroup.Modules.Find((mr => mr.Domain == module.Domain && mr.Address == module.Address));
+                                bool exists = (groupModule != null);
+                                if (!exists)
                                 {
-                                    var upnpGroup = Groups.Find((group => group.Name == "UPnP"));
-                                    if (upnpGroup == null)
-                                    {
-                                        upnpGroup = new Group();
-                                        upnpGroup.Name = "UPnP";
-                                        Groups.Add(upnpGroup);
-                                        modulesGroupAdded = true;
-                                    }
-                                    bool exists = upnpGroup.Modules.Find((mr => mr.Domain == module.Domain && mr.Address == module.Address)) != null;
-                                    if (!exists)
-                                    {
-                                        upnpGroup.Modules.Add(new ModuleReference(){Domain = module.Domain, Address = module.Address});
-                                        modulesGroupAdded = true;
-                                    }
+                                    domainGroup.Modules.Add(new ModuleReference(){Domain = module.Domain, Address = module.Address});
+                                    modulesGroupAdded = true;
                                 }
-
                             }
 
                             if (String.IsNullOrEmpty(module.Description))
@@ -1308,7 +1310,7 @@ namespace HomeGenie.Service
                 }
                 else
                 {
-                    var deleted = systemModules.FindAll(m => m.Domain == iface.GetDomain());
+                    var deleted = systemModules.FindAll(m => m.Domain == domain);
                     foreach (var mod in deleted)
                     {
                         var virtualParam = Utility.ModuleParameterGet(mod, Properties.VirtualModuleParentId);
