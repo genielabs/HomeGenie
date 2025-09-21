@@ -68,7 +68,7 @@ namespace HomeGenie.Automation.Engines
             "Iot.Device",
             "Iot.Device.Common",
 #endif
-#if NET9_0_OR_GREATER
+#if NET8_0_OR_GREATER
             // yolo
             "Compunet.YoloSharp",
             "Compunet.YoloSharp.Plotting",
@@ -294,7 +294,7 @@ namespace HomeGenie.Automation.Scripting
 #if NET6_0_OR_GREATER
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SixLabors.ImageSharp.dll")),
 #endif                    
-#if NET9_0_OR_GREATER
+#if NET8_0_OR_GREATER
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YoloSharp.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.KernelMemory.dll")),
@@ -337,7 +337,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.HomeAutomation.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "CM19Lib.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LiteDB.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NLog.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "GLabs.Logging.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Newtonsoft.Json.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SerialPortLib.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NetClientLib.dll")),
@@ -448,7 +448,7 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("MIG.HomeAutomation.dll");
             compilerParams.ReferencedAssemblies.Add("CM19Lib.dll");
             compilerParams.ReferencedAssemblies.Add("LiteDB.dll");
-            compilerParams.ReferencedAssemblies.Add("NLog.dll");
+            compilerParams.ReferencedAssemblies.Add("GLabs.Logging.dll");
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
 
             compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");

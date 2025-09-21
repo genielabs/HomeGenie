@@ -315,5 +315,9 @@
   "large": "Grande",
   "medium": "Medio",
   "small": "Piccolo",
-  "auto": "Automatico"
+  "auto": "Automatico",
+  "dashboard_wallpaper": "Sfondo dashboard",
+  "card_color": "Colore scheda",
+  "card_opacity": "Opacità scheda",
+  "card_blur": "Sfocatura scheda"
 }

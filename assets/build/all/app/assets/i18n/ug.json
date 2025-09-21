@@ -98,7 +98,7 @@
   "error_loading_config": "سەپلەش خاتالىقى",
   "error_occurred": "خاتالىق كۆرۈلدى",
   "info": "ئۇچۇر",
-  "fields": "مەيدان",
+  "fields": "Fields",
   "properties": "خاسلىقى",
   "parameters": "پارامېتىرلار",
   "unit": "بىرلىك",
@@ -145,7 +145,7 @@
   "enter_at_least_2_characters": "كەم دېگەندە 2 ھەرپ كىرگۈزۈڭ.",
   "add_widget": "كىچىك قورال قوشۇڭ",
   "widget_added_message": "« {{name}} » غا {{count}} قورالى (لار) قوشۇلدى.",
-  "no_compatible_modules_for_widget": "بۇ كىچىك قورال تىپىغا ماس كېلىدىغان سىستېمىدا ھېچقانداق مودۇل تېپىلمىدى.",
+  "no_compatible_modules_for_widget": "سىستېمىدا بۇ كىچىك قورال تىپىغا ماس كېلىدىغان مودۇل تېپىلمىدى.",
   "select_modules": "بۆلەكلەرنى تاللاڭ",
   "select_dashboard": "باشقۇرۇش تاختىسىنى تاللاڭ",
   "automation": "ئاپتوماتلاشتۇرۇش",
@@ -233,7 +233,7 @@
   "mqtt_connection_create_error": "MQTT ئۇلىنىشىدىكى خاتالىق",
   "light_theme": "يېنىك تېما",
   "dark_theme": "قاراڭغۇ تېما",
-  "enter_widget_path": "كىچىك قورالنىڭ يولىنى جەدۋەلگە كىرگۈزۈڭ:<category> /<widget_name>",
+  "enter_widget_path": "كىچىك قورالنىڭ يولىنى جەدۋەلگە كىرگۈزۈڭ:  /",
   "widget_only_letters_numbers": "پەقەت كىچىك ھەرپ ، سان ۋە بەلگىلەرنىلا ئۆز ئىچىگە ئالىدۇ.",
   "cloneable": "Cloneable",
   "autorestart_on_error": "خاتالىقتا ئاپتوماتىك قايتا قوزغىتىش",
@@ -315,5 +315,9 @@
   "large": "چوڭ",
   "medium": "ئوتتۇراھال",
   "small": "كىچىك",
-  "auto": "ئاپتوماتىك"
+  "auto": "ئاپتوماتىك",
+  "dashboard_wallpaper": "باش تاختا تام قەغىزى",
+  "card_color": "كارتا رەڭگى",
+  "card_opacity": "كارتا ئېنىقلىقى",
+  "card_blur": "كارتا تۇتۇق"
 }

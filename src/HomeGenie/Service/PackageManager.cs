@@ -849,7 +849,7 @@ namespace HomeGenie.Service
                 {
                     pkgList = JArray.Parse(File.ReadAllText(PackageManager.PACKAGE_LIST_FILE)).ToObject<List<dynamic>>();
                 }
-                catch (Exception e)
+                catch
                 {
                     // TODO: report exception
                 }

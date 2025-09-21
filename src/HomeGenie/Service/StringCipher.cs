@@ -27,7 +27,7 @@ namespace HomeGenie.Service
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             var password = new PasswordDeriveBytes(passPhrase, null);
             byte[] keyBytes = password.GetBytes(KeySize / 8);
-            using (var symmetricKey = Aes.Create("AesManaged"))
+            using (var symmetricKey = Aes.Create())
             {
                 symmetricKey.Mode = CipherMode.CBC;
                 var encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
@@ -48,7 +48,7 @@ namespace HomeGenie.Service
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
             var password = new PasswordDeriveBytes(passPhrase, null);
             byte[] keyBytes = password.GetBytes(KeySize / 8);
-            using (var symmetricKey = Aes.Create("AesManaged"))
+            using (var symmetricKey = Aes.Create())
             {
                 symmetricKey.Mode = CipherMode.CBC;
                 var decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);

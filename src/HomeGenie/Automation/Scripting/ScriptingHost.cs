@@ -22,7 +22,7 @@
 
 using System;
 
-using NLog;
+using GLabs.Logging;
 
 using HomeGenie.Service;
 

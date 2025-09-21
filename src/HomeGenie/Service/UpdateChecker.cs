@@ -477,7 +477,7 @@ namespace HomeGenie.Service
                                     //Console.WriteLine("   - REMOTE {0}", remoteHash);
                                 }
                             }
-                            catch (Exception e)
+                            catch
                             {
                                 // this mostly happen if the destinationFile is un use and cannot be opened,
                                 // file is then ignored if hash cannot be calculated
@@ -918,7 +918,7 @@ namespace HomeGenie.Service
             {
                 result = base.DownloadString(address);
             }
-            catch (Exception e)
+            catch
             {
                 // try using proxy
                 if (Environment.OSVersion.Platform == PlatformID.Unix && address.StartsWith("https://") && address.IndexOf("github.com/") > 0)
@@ -941,7 +941,7 @@ namespace HomeGenie.Service
             {
                 base.DownloadFile(address, fileName);
             }
-            catch (Exception e)
+            catch
             {
                 if (Environment.OSVersion.Platform == PlatformID.Unix && address.StartsWith("https://") && address.IndexOf("github.com/") > 0)
                 {

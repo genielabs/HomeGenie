@@ -26,9 +26,9 @@ using System.Linq;
 using System.Threading;
 using System.Text.RegularExpressions;
 
+using GLabs.Logging;
 using Innovative.SolarCalculator;
 using Newtonsoft.Json;
-using NLog;
 
 using HomeGenie.Service.Constants;
 
@@ -515,7 +515,7 @@ namespace HomeGenie.Automation.Scheduler
                 var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
                 return cronSchedule.GetNextOccurrences(dateStart.AddMinutes(-1), dateEnd).ToList();
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }

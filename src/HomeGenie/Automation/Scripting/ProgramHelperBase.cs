@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading;
 using System.IO;
 using System.Net;
@@ -22,15 +21,6 @@ namespace HomeGenie
         public ProgramHelperBase(HomeGenieService hg)
         {
             homegenie = hg;
-        }
-
-        /// <summary>
-        /// Gets the logger object.
-        /// </summary>
-        /// <value>The logger object.</value>
-        public NLog.Logger Log
-        {
-            get { return MigService.Log; }
         }
 
         /// <summary>

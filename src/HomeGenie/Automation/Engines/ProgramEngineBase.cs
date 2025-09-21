@@ -26,9 +26,8 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
+using GLabs.Logging;
 using Newtonsoft.Json;
-
-using NLog;
 
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Service;
@@ -38,7 +37,7 @@ namespace HomeGenie.Automation.Engines
 {
     public abstract class ProgramEngineBase
     {
-        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _log = LogManager.GetLogger("ProgramEngine");
 
         // Main program threads
         private Thread _startupThread;

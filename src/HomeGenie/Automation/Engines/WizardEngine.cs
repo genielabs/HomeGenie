@@ -57,7 +57,7 @@ namespace HomeGenie.Automation.Engines
                     Conditions = s.Conditions;
                     ConditionType = s.ConditionType;
                 }
-                catch (Exception e)
+                catch
                 {
                     // TODO: report initialization exception
                 }
@@ -72,13 +72,14 @@ namespace HomeGenie.Automation.Engines
                     ""blocks"": [{0}{1}]
                   }}
                 }}";
+                /*
                 const string setupBlock = @"{{
                   ""type"": ""setup_code"",
                   ""id"": ""{0}"",
                   ""inputs"": {{
                     ""SETUP"": {1}
                   }}
-                }}";
+                }}";*/
                 const string mainBlock = @"{{
                   ""type"": ""main_code"",
                   ""id"": ""{0}"",

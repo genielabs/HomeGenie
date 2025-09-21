@@ -96,7 +96,7 @@ namespace HomeGenie.Service.Handlers
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // TODO: handle exception here
                     }
@@ -402,7 +402,7 @@ namespace HomeGenie.Service.Handlers
                         // This works with HG > 1.4.x 
                         newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
                     }
-                    catch (Exception e)
+                    catch
                     {
                         // TODO: deprecate this 
                         // this is for backward compatibility with HG v1.3.x

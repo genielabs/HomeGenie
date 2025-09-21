@@ -32,6 +32,8 @@ using System.Xml.Serialization;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Threading.Tasks;
+
+using GLabs.Logging;
 using OpenSource.UPnP;
 
 using HomeGenie.Automation;
@@ -44,7 +46,6 @@ using MIG;
 using MIG.Gateways;
 using MIG.Gateways.Authentication;
 using MIG.Interfaces.HomeAutomation.Commons;
-using NLog;
 
 using Module = HomeGenie.Data.Module;
 
@@ -95,16 +96,6 @@ namespace HomeGenie.Service
         {
             RebuildPrograms = rebuildPrograms;
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            try
-            {
-                EnableOutputRedirect();
-            }
-            catch (Exception e)
-            {
-                // this happens when running as a Windows Service,
-                // output can't be redirected due to:
-                // IOException: "The handle is invalid."
-            }
 
             InitializeSystem();
             Reload();
@@ -205,8 +196,6 @@ namespace HomeGenie.Service
             }
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "ProgramEngine STOPPED");
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STOPPED");
-
-            SystemLogger.Instance.Dispose();
         }
 
         public void SaveData()
@@ -422,18 +411,6 @@ namespace HomeGenie.Service
         internal static void LogError(object err)
         {
             MigService.Log.Error(err);
-        }
-
-        private void EnableOutputRedirect()
-        {
-            Console.OutputEncoding = Encoding.UTF8;
-            var outputRedirect = new ConsoleRedirect();
-            outputRedirect.ProcessOutput = (outputLine) => {
-                if (SystemLogger.Instance.IsLogEnabled)
-                    SystemLogger.Instance.WriteToLog(outputLine);
-            };
-            Console.SetOut(outputRedirect);
-            Console.SetError(outputRedirect);
         }
 
         #endregion
@@ -1155,8 +1132,9 @@ namespace HomeGenie.Service
                         {
                             c = p1.Name.CompareTo(p2.Name);
                         }
-                        catch (Exception e)
+                        catch
                         {
+                            // ignored
                         }
                         return c;
                     });
@@ -1175,15 +1153,23 @@ namespace HomeGenie.Service
                         System.Text.RegularExpressions.Match result2 = re.Match(m2.Address);
 
                         string alphaPart1 = result1.Groups[1].Value.PadRight(8, '0');
-                        string numberPart1 = (String.IsNullOrWhiteSpace(result1.Groups[2].Value) ? m1.Address.PadLeft(8, '0') : result1.Groups[2].Value.PadLeft(8, '0'));
+                        string numberPart1 = (String.IsNullOrWhiteSpace(result1.Groups[2].Value)
+                            ? m1.Address.PadLeft(8, '0')
+                            : result1.Groups[2].Value.PadLeft(8, '0'));
                         string alphaPart2 = result2.Groups[1].Value.PadRight(8, '0');
-                        string numberPart2 = (String.IsNullOrWhiteSpace(result2.Groups[2].Value) ? m2.Address.PadLeft(8, '0') : result2.Groups[2].Value.PadLeft(8, '0'));
+                        string numberPart2 = (String.IsNullOrWhiteSpace(result2.Groups[2].Value)
+                            ? m2.Address.PadLeft(8, '0')
+                            : result2.Groups[2].Value.PadLeft(8, '0'));
 
                         string d1 = m1.Domain + "|" + alphaPart1 + numberPart1;
                         string d2 = m2.Domain + "|" + alphaPart2 + numberPart2;
 
                         c = d1.CompareTo(d2);
-                    } catch(Exception e) {}
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
                     return c;
                 });
             }
@@ -1433,14 +1419,9 @@ namespace HomeGenie.Service
                 {
                     systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
                     // setup logging
-                    if (!string.IsNullOrEmpty(systemConfiguration.HomeGenie.EnableLogFile) && systemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true"))
-                    {
-                        SystemLogger.Instance.OpenLog();
-                    }
-                    else
-                    {
-                        SystemLogger.Instance.CloseLog();
-                    }
+                    bool enableLogFile = (!string.IsNullOrEmpty(systemConfiguration.HomeGenie.EnableLogFile) &&
+                                          systemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true"));
+                    FileLogProcessor.SetEnabled(enableLogFile);
                     // Generate new System UID if required
                     if (String.IsNullOrEmpty(systemConfiguration.HomeGenie.GUID))
                     {
@@ -1509,7 +1490,7 @@ namespace HomeGenie.Service
                                     );
                                 }
                             }
-                            catch(Exception ex)
+                            catch
                             {
                                 // ignored
                             }

@@ -315,5 +315,9 @@
   "large": "Large",
   "medium": "Medium",
   "small": "Small",
-  "auto": "Automatic"
+  "auto": "Automatic",
+  "dashboard_wallpaper": "Dashboard Wallpaper",
+  "card_color": "Card color",
+  "card_opacity": "Card opacity",
+  "card_blur": "Card blur"
 }

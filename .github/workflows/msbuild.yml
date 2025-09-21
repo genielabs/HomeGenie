@@ -34,5 +34,5 @@ jobs:
       run: |
         dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net9.0
         dotnet build --framework net472 --configuration Release
-        dotnet build --framework net6.0 --configuration Release
+        dotnet build --framework net8.0 --configuration Release
         dotnet build --framework net9.0 --configuration Release

@@ -446,7 +446,7 @@ namespace HomeGenie.Service
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: report error 
             }

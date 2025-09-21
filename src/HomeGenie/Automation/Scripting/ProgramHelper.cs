@@ -26,12 +26,14 @@ using System.Diagnostics;
 using System.Threading;
 using System.Dynamic;
 using System.Globalization;
+
+using GLabs.Logging;
+using MIG.Interfaces.HomeAutomation.Commons;
 using Newtonsoft.Json;
 
 using HomeGenie.Data;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
-using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -47,12 +49,31 @@ namespace HomeGenie.Automation.Scripting
         private string myProgramDomain = Domains.HomeAutomation_HomeGenie_Automation;
         private object setupLock = new object();
 
+        private Logger programLogger;
+
         // whether 'Setup' has been executed
         private bool initialized;
 
         public ProgramHelper(HomeGenieService hg, int programId) : base(hg)
         {
             myProgramId = programId;
+        }
+
+        /// <summary>
+        /// Gets the logger object.
+        /// </summary>
+        /// <value>The logger object.</value>
+        public Logger Log
+        {
+            get
+            {
+                if (programLogger == null)
+                {
+                    string categoryName = $"Program:{myProgramId}";
+                    programLogger = LogManager.GetLogger(categoryName);
+                }
+                return programLogger;
+            }
         }
 
         /// <summary>
@@ -875,7 +896,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
             }
-            catch (Exception e)
+            catch
             {
                 Debugger.Break();
             }

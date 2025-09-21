@@ -24,11 +24,16 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using HomeGenie.Service;
-using HomeGenie.Service.Constants;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+using GLabs.Logging;
 using MIG;
+
+using HomeGenie.Service;
+using HomeGenie.Service.Constants;
+using HomeGenie.Service.Logging;
 
 namespace HomeGenie
 {
@@ -41,43 +46,53 @@ namespace HomeGenie
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
-#if !NETCOREAPP
+#if NETFRAMEWORK
+            // This is critical for runtime assembly loading and recompilation on Mono/.NET Framework.
+            // It prevents file locks on dynamically loaded/compiled DLLs by loading them from a shadow copy.            
             AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
 #endif
             Console.CancelKeyPress += Console_CancelKeyPress;
 
-#if NETCOREAPP
+            var hostBuilder = Host.CreateDefaultBuilder(args);
+            hostBuilder.ConfigureLogging((hostContext, logging) => 
+            {
+                logging.ClearProviders();
+                logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
+                logging.AddConsole();
+                logging.AddCustomFileLogger();
+            });
+            
+            hostBuilder.ConfigureServices((hostContext, services) => 
+            {
+                // Dependency Injection
+                services.AddHostedService<ServiceWorker>();
+            });
+
+#if !NETFRAMEWORK
+    #if NET6_0_OR_GREATER
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                _serviceHost = Host.CreateDefaultBuilder(args)
-                    .UseSystemd()
-                    .ConfigureServices((hostContext, services) =>
-                    {
-                        services.AddHostedService<ServiceWorker>();
-                    })
-                    .Build();
+                hostBuilder.UseSystemd();
             }
-#endif
+    #endif
             if (Environment.OSVersion.Platform != PlatformID.Unix && Environment.OSVersion.Platform != PlatformID.MacOSX)
             {
-                _serviceHost = Host.CreateDefaultBuilder(args)
-                    .UseWindowsService(options =>
-                    {
-                        options.ServiceName = ServiceName;
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.AddHostedService<ServiceWorker>();
-                    })
-                    .Build();
+                hostBuilder.UseWindowsService(options =>
+                {
+                    options.ServiceName = ServiceName;
+                });
             }
-            
-            if (_serviceHost == null)
-            {
-                _serviceHost = new LocalServiceHost(new ServiceWorker());
-            }
-            await _serviceHost
-                .RunAsync();
+#endif
+
+            _serviceHost = hostBuilder.Build();
+
+            var loggerFactory = _serviceHost.Services.GetRequiredService<ILoggerFactory>();
+            LogManager.Initialize(loggerFactory);
+
+            var startupLogger = LogManager.GetLogger("HomeGenie");
+            startupLogger.Info("Host configured. Starting service...");
+
+            await _serviceHost.RunAsync();
         }
 
         internal static void Quit(bool restartService)

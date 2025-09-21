@@ -110,7 +110,7 @@ namespace HomeGenie.Data
                         new JsonSerializerSettings() {Culture = CultureInfo.InvariantCulture}
                     );
                 }
-                catch (Exception e)
+                catch
                 {
                     // ignored
                 }

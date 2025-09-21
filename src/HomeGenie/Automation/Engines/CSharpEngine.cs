@@ -54,16 +54,19 @@ namespace HomeGenie.Automation.Engines
 
         public CSharpEngine(ProgramBlock pb) : base(pb)
         {
-#if !NETCOREAPP
-            // TODO: SetShadowCopyPath/SetShadowCopyFiles methods are deprecated...
-            // TODO: create own AppDomain for "programDomain" instead of using CurrentDomain
-            // TODO: and use AppDomainSetup to set shadow copy for each app domain
-            // TODO: !!! verify AppDomain compatibility with mono !!!
+#if NETFRAMEWORK
+            // This static flag prevents the setup from running more than once
             if (_isShadowCopySet) return;
             _isShadowCopySet = true;
+
             var domain = AppDomain.CurrentDomain;
+
+            // This is required for Mono compatibility to allow runtime assembly recompilation.
+            // It's obsolete, but necessary.
+#pragma warning disable CS0618
             domain.SetShadowCopyPath(Path.Combine(domain.BaseDirectory, "programs"));
             domain.SetShadowCopyFiles();
+#pragma warning restore CS0618
 #endif
         }
 

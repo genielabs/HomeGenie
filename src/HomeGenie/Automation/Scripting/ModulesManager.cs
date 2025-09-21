@@ -889,7 +889,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 response = homegenie.InterfaceControl(migCommand);
             }
-            catch(Exception e)
+            catch
             {
                 // TODO: should report the error?
             }

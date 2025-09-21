@@ -1,3 +1,4 @@
+// @ts-ignore
 declare class ContextOptions {
   contextId?: any;
   container?: Element;

@@ -25,13 +25,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+
+using GLabs.Logging;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
 using MQTTnet.Packets;
 using MQTTnet.Protocol;
 
-using NLog;
 using MqttClient = MQTTnet.Client.MqttClient;
 
 namespace HomeGenie.Automation.Scripting

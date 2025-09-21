@@ -430,16 +430,12 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {
                     string csvlog = "";
-                    string logpath = Path.Combine("log", "homegenie.log");
+                    string logpath = FileLogProcessor.GetLogPath();
                     if (migCommand.GetOption(1) == "1")
                     {
-                        logpath = Path.Combine("log", "homegenie.log.bak");
+                        logpath += ".bak";
                     }
-                    else if (SystemLogger.Instance != null)
-                    {
-                        SystemLogger.Instance.FlushLog();
-                    }
-                    if (File.Exists(logpath))
+                    if (!string.IsNullOrEmpty(logpath) && File.Exists(logpath))
                     {
                         using (var fs = new FileStream(logpath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                         using (var sr = new StreamReader(fs, Encoding.Default))
@@ -455,14 +451,14 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.Enable")
                 {
-                    SystemLogger.Instance.OpenLog();
+                    FileLogProcessor.SetEnabled(true);
                     homegenie.SystemConfiguration.HomeGenie.EnableLogFile = "true";
                     homegenie.SystemConfiguration.Update();
                     request.ResponseData = new ResponseStatus(Status.Ok);
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.Disable")
                 {
-                    SystemLogger.Instance.CloseLog();
+                    FileLogProcessor.SetEnabled(false);
                     homegenie.SystemConfiguration.HomeGenie.EnableLogFile = "false";
                     homegenie.SystemConfiguration.Update();
                     request.ResponseData = new ResponseStatus(Status.Ok);
@@ -575,7 +571,7 @@ namespace HomeGenie.Service.Handlers
                             })
                         }));
                     }
-                    catch (Exception e)
+                    catch
                     {
                         Utility.FolderCleanUp(tempFolderPath);
                         request.ResponseData = new ResponseStatus(Status.Error);

@@ -31,17 +31,15 @@ using System.Net.Mail;
 
 using System.Net.NetworkInformation;
 using System.Collections.Specialized;
-using System.Globalization;
 
+using GLabs.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using HomeGenie.Service;
-using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 
 using NetClientLib;
-using NLog;
 
 namespace HomeGenie.Automation.Scripting
 {

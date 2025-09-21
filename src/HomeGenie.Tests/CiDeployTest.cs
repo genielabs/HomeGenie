@@ -16,7 +16,7 @@ namespace HomeGenie.Tests
         [Test]
         public void Test1()
         {
-            Assert.True(true);
+            Assert.Pass();
         }
 
         [Test]
@@ -24,14 +24,14 @@ namespace HomeGenie.Tests
         {
             string releaseFile = Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "..", "..", "HomeGenie", "release_info.xml");
             var releaseInfo = UpdateChecker.GetReleaseFile(releaseFile);
-            Assert.NotNull(releaseInfo);
+            Assert.That(releaseInfo, Is.Not.Null);
             // check for $TRAVIS_TAG or APPVEYOR_REPO_TAG_NAME
             // to determine if this is a new release, if so
             // then update the version string in `release_info.xml` file
             string releaseTag = Environment.GetEnvironmentVariable("RELEASE_VERSION");
             if (!string.IsNullOrEmpty(releaseTag))
             {
-                Assert.True(releaseTag.StartsWith("v"));
+                Assert.That(releaseTag.StartsWith("v"),  Is.True);
                 releaseInfo.Version = releaseTag;
                 // add 15 minutes to prevent github release date
                 // be greater than actual release build date
@@ -43,7 +43,7 @@ namespace HomeGenie.Tests
                     serializer.Serialize(writer, releaseInfo);
                 }
             }
-            Assert.True(true);
+            Assert.Pass();
         }
     }
 }
