@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ड्यासबोर्ड वालपेपर",
   "card_color": "कार्डको रङ",
   "card_opacity": "कार्डको अस्पष्टता",
-  "card_blur": "कार्ड ब्लर"
+  "card_blur": "कार्ड ब्लर",
+  "upnp_dlna_device": "UPnP/DLNA उपकरण",
+  "no_modules_selected": "कुनै मोड्युल चयन गरिएको छैन।"
 }

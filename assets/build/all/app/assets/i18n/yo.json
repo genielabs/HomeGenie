@@ -2,7 +2,7 @@
   "home": "Ile",
   "setup": "Ṣeto",
   "preferences": "Awọn ayanfẹ",
-  "logging": "wíwọlé",
+  "logging": "Wọle",
   "exit": "Jade",
   "add": "Fi kun",
   "remove": "Yọ kuro",
@@ -212,7 +212,7 @@
   "play_on": "Mu ṣiṣẹ lori",
   "root_folder": "Gbongbo folda",
   "this_device": "Ẹrọ yii",
-  "no_files_found": "Ko ri awọn faili",
+  "no_files_found": "Ko si awọn faili ti a rii",
   "model": "Awoṣe",
   "added_module": "Fi kun titun module: {{name}} .",
   "operation_successful": "Iṣe aṣeyọri",
@@ -248,7 +248,7 @@
   "lighting": "Itanna",
   "today_counter": "Atako (loni)",
   "total_counter": "Lapapọ counter",
-  "actual_load": "fifuye gangan",
+  "actual_load": "Eru to daju",
   "armed": "Ologun",
   "disarmed": "Tu silẹ",
   "normal": "Deede",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Iṣẹṣọ ogiri Dasibodu",
   "card_color": "Awọ kaadi",
   "card_opacity": "Opacity kaadi",
-  "card_blur": "Kaadi blur"
+  "card_blur": "Kaadi blur",
+  "upnp_dlna_device": "Ẹrọ UPnP/DLNA",
+  "no_modules_selected": "Ko si awọn modulu ti a yan."
 }

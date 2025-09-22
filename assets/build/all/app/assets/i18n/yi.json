@@ -136,7 +136,7 @@
   "no_dashboards_configured": "קיין דאַשבאָרד קאָנפיגורירט.",
   "import_groups_as_dashboards": "אימפארטירן פון סערווער",
   "add_new_dashboard": "לייג צו א נייעם דעשבאָרד",
-  "rename_dashboard": "איבערנעמען דעם נאמען פון דעם דעשבאָרד",
+  "rename_dashboard": "איבערנעמען דעם נאָמען פון דעם דאַשבאָרד",
   "delete_dashboard": "אויסמעקן דאַשבאָרד",
   "delete_dashboard_confirm": "אויסמעקן \" {{name}} \" דעשבאָרד אויף אייביק?",
   "empty_dashboard": "ליידיקע דאַשבאָרד.",
@@ -155,7 +155,7 @@
   "restart": "ריסטאַרט",
   "listening_on_port": "צוהערן אויף פּאָרט",
   "password_enabled": "פּאַראָל אַקטיוויזירט",
-  "password_disabled": "פּאַראָל אויסגעלאָשן",
+  "password_disabled": "פּאַראָל דיסייבאַלד",
   "uptime": "אַפּטיים",
   "since": "זינט",
   "backup": "באַקאַפּ",
@@ -165,7 +165,7 @@
   "factory_reset": "פאַבריק צוריקשטעלן",
   "factory_reset_description": "צוריקשטעלן צו די פאַבריק סעטטינגס און איבערקאָנפיגורירן פֿון אָנהייב",
   "release_notes": "מעלדונג הערות",
-  "update_check": "דערהייַנטיקונג טשעק",
+  "update_check": "דערהייַנטיקונג קאָנטראָל",
   "manual_update": "מאַנועלע דערהייַנטיקונג",
   "manual_update_description": "אינסטאַלירן אַן אַפּדייט פֿון אַ .tgz אַרכיוו",
   "version": "ווערסיע",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "דאַשבאָרד טאַפּעט",
   "card_color": "קאַרטל קאָליר",
   "card_opacity": "קאַרטל אָופּאַסיטי",
-  "card_blur": "קאַרטל פֿאַרשווימען"
+  "card_blur": "קאַרטל פֿאַרשווימען",
+  "upnp_dlna_device": "UPnP/DLNA מיטל",
+  "no_modules_selected": "קיין מאָדולן אויסגעקליבן."
 }

@@ -284,7 +284,7 @@
   "installed": "Zainstalowano",
   "optional": "Fakultatywny",
   "program_disabled_note": "Program wyłączony. Można go ponownie włączyć z listy programów.",
-  "no_release_info_note": "Brak informacji o wydaniu (działa w środowisku deweloperskim?)",
+  "no_release_info_note": "Brak informacji o wydaniu (uruchamianie w środowisku deweloperskim?)",
   "local_version_modified": "Wersja lokalna została zmodyfikowana.",
   "update_to_version": "Aktualizacja dostępna do wersji ' {{version}} '",
   "switch": "Przełącznik",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Tapeta na pulpit",
   "card_color": "Kolor karty",
   "card_opacity": "Nieprzezroczystość karty",
-  "card_blur": "Rozmycie karty"
+  "card_blur": "Rozmycie karty",
+  "upnp_dlna_device": "Urządzenie UPnP/DLNA",
+  "no_modules_selected": "Nie wybrano żadnych modułów."
 }

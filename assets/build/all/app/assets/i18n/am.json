@@ -165,7 +165,7 @@
   "factory_reset": "የፋብሪካ ዳግም ማስጀመር",
   "factory_reset_description": "ወደ ፋብሪካ ቅንጅቶች ዳግም ያስጀምሩ እና ከባዶ ያዋቅሩ",
   "release_notes": "የልቀት ማስታወሻዎች",
-  "update_check": "ፍተሻን ያዘምኑ",
+  "update_check": "ቼክ ያዘምኑ",
   "manual_update": "በእጅ ዝማኔ",
   "manual_update_description": "ዝማኔን ከ .tgz ማህደር ጫን",
   "version": "ሥሪት",
@@ -173,7 +173,7 @@
   "remove_group": "ቡድን አስወግድ",
   "confirm_group_removal": "የቡድን ማስወገድ ይረጋገጥ?",
   "group_removal_message": "\" {{name}} \" የሚጠቀሙ አውቶማቲክ ፕሮግራሞች መስራት ሊያቆሙ ይችላሉ።",
-  "voice_control": "የድምጽ ቁጥጥር",
+  "voice_control": "የድምፅ ቁጥጥር",
   "clone_program": "Clone ፕሮግራም",
   "import_program": "ፕሮግራም አስመጣ",
   "add_new_program": "አዲስ ፕሮግራም ያክሉ",
@@ -184,7 +184,7 @@
   "widgets": "መግብሮች",
   "import_widget": "መግብር አስመጣ",
   "add_new_widget": "አዲስ መግብር ያክሉ",
-  "no_data_received_yet": "ውሂብ በመጠበቅ ላይ",
+  "no_data_received_yet": "ውሂብን በመጠበቅ ላይ",
   "backup_and_restore": "ምትኬ ያስቀምጡ እና ወደነበረበት ይመልሱ",
   "software_updates": "የሶፍትዌር ዝማኔዎች",
   "service_configuration": "የአገልግሎት ውቅር",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ዳሽቦርድ ልጣፍ",
   "card_color": "የካርድ ቀለም",
   "card_opacity": "የካርድ ግልጽነት",
-  "card_blur": "የካርድ ብዥታ"
+  "card_blur": "የካርድ ብዥታ",
+  "upnp_dlna_device": "UPnP/DLNA መሣሪያ",
+  "no_modules_selected": "ምንም ሞጁሎች አልተመረጡም።"
 }

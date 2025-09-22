@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Dashboard-baggrund",
   "card_color": "Kortfarve",
   "card_opacity": "Kortets opacitet",
-  "card_blur": "Sløring af kort"
+  "card_blur": "Sløring af kort",
+  "upnp_dlna_device": "UPnP/DLNA-enhed",
+  "no_modules_selected": "Ingen moduler valgt."
 }

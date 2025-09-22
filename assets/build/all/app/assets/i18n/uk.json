@@ -156,7 +156,7 @@
   "listening_on_port": "Прослуховування порту",
   "password_enabled": "Пароль увімкнено",
   "password_disabled": "Пароль вимкнено",
-  "uptime": "Час безвідмовної роботи",
+  "uptime": "Час безперебійної роботи",
   "since": "З",
   "backup": "Резервне копіювання",
   "backup_description": "Запакуйте та завантажте поточну конфігурацію системи",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Шпалери для панелі приладів",
   "card_color": "Колір картки",
   "card_opacity": "Непрозорість картки",
-  "card_blur": "Розмиття картки"
+  "card_blur": "Розмиття картки",
+  "upnp_dlna_device": "Пристрій UPnP/DLNA",
+  "no_modules_selected": "Модулі не вибрано."
 }

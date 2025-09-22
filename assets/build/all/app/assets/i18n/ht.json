@@ -230,7 +230,7 @@
   "confirm_delete_prompt": "Èske ou sèten ou vle efase atik sa a?",
   "mqtt_connection_delete_error": "Erè pandan m ap efase koneksyon MQTT a",
   "mqtt_configure_error": "Erè pandan konfigirasyon koneksyon MQTT la",
-  "mqtt_connection_create_error": "Erè pandan kreyasyon koneksyon MQTT a",
+  "mqtt_connection_create_error": "Erè pandan kreyasyon koneksyon MQTT la",
   "light_theme": "Tèm limyè",
   "dark_theme": "Tèm nwa",
   "enter_widget_path": "Antre chemen widjèt la nan fòm sa a:  /",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Papye pou tablodbò",
   "card_color": "Koulè kat la",
   "card_opacity": "Opakite kat la",
-  "card_blur": "Kat flou"
+  "card_blur": "Kat flou",
+  "upnp_dlna_device": "Aparèy UPnP/DLNA",
+  "no_modules_selected": "Pa gen modil ki chwazi."
 }

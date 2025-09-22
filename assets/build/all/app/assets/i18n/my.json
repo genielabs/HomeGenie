@@ -200,9 +200,9 @@
   "scatter_chart": "ကွက်ကျား",
   "data_monitor": "ဒေတာစောင့်ကြည့်",
   "add_chart": "ဇယားထည့်ပါ။",
-  "restore_original": "မူရင်းကို ပြန်ယူပါ။",
+  "restore_original": "မူရင်းကိုပြန်ယူပါ။",
   "upgrade": "အဆင့်မြှင့်ပါ။",
-  "installing_packages": "ပက်ကေ့ဂျ်များ ထည့်သွင်းခြင်း။",
+  "installing_packages": "အထုပ်များကို ထည့်သွင်းခြင်း။",
   "select_programs_to_restore": "အရန်သိမ်းခြင်းမှ ပြန်လည်ရယူရန် ပရိုဂရမ်များကို ရွေးချယ်ပါ။",
   "select_all": "အားလုံးကို ရွေးပါ။",
   "preparing_to_install": "ထည့်သွင်းရန် ပြင်ဆင်နေသည်...",
@@ -235,7 +235,7 @@
   "dark_theme": "အမှောင် အပြင်အဆင်",
   "enter_widget_path": "ဖောင်တွင် ဝစ်ဂျက်၏လမ်းကြောင်းကို ထည့်ပါ-  /",
   "widget_only_letters_numbers": "စာလုံးအသေး၊ နံပါတ်များနှင့် သင်္ကေတများသာ ပါဝင်နိုင်သည် / နှင့် -",
-  "cloneable": "Cloneable ပါ။",
+  "cloneable": "Cloneable",
   "autorestart_on_error": "အမှားအယွင်းကြောင့် အလိုအလျောက်ပြန်လည်စတင်ပါ။",
   "offline": "အော့ဖ်လိုင်း",
   "door_open": "ဖွင့်လှစ်ခဲ့သည်။",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ဒက်ရှ်ဘုတ် နောက်ခံပုံ",
   "card_color": "ကတ်အရောင်",
   "card_opacity": "ကတ်အလင်းပိတ်",
-  "card_blur": "ကတ်မှုန်ဝါးဝါး"
+  "card_blur": "ကတ်မှုန်ဝါးဝါး",
+  "upnp_dlna_device": "UPnP/DLNA စက်",
+  "no_modules_selected": "မော်ဂျူးများကို ရွေးချယ်ထားခြင်းမရှိပါ။"
 }

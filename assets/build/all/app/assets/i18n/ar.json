@@ -85,7 +85,7 @@
   "not_set": "غير محدد",
   "enable": "يُمكَِن",
   "disable": "إبطال",
-  "enabled": "مُمَكَّن",
+  "enabled": "مُمكّن",
   "disabled": "عاجز",
   "connect": "يتصل",
   "disconnect": "قطع الاتصال",
@@ -283,7 +283,7 @@
   "requires": "يتطلب",
   "installed": "تم التثبيت",
   "optional": "خياري",
-  "program_disabled_note": "البرنامج معطل. يُمكن إعادة تفعيله من قائمة البرامج.",
+  "program_disabled_note": "البرنامج مُعطَّل. يُمكن إعادة تفعيله من قائمة البرامج.",
   "no_release_info_note": "لا توجد معلومات الإصدار متاحة (يتم التشغيل في بيئة التطوير؟)",
   "local_version_modified": "تم تعديل الإصدار المحلي.",
   "update_to_version": "التحديث متاح للإصدار ' {{version}} '",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "خلفية لوحة القيادة",
   "card_color": "لون البطاقة",
   "card_opacity": "عتامة البطاقة",
-  "card_blur": "طمس البطاقة"
+  "card_blur": "طمس البطاقة",
+  "upnp_dlna_device": "جهاز UPnP/DLNA",
+  "no_modules_selected": "لم يتم تحديد أي وحدات."
 }

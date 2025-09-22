@@ -1,7 +1,7 @@
 {
   "home": "ບ້ານ",
   "setup": "ຕັ້ງຄ່າ",
-  "preferences": "ການຕັ້ງຄ່າ",
+  "preferences": "ຄວາມມັກ",
   "logging": "ການຕັດໄມ້",
   "exit": "ອອກໄປ",
   "add": "ເພີ່ມ",
@@ -229,7 +229,7 @@
   "confirm_delete": "ຢືນຢັນການລຶບ",
   "confirm_delete_prompt": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບລາຍການນີ້?",
   "mqtt_connection_delete_error": "ເກີດຄວາມຜິດພາດໃນການລຶບການເຊື່ອມຕໍ່ MQTT",
-  "mqtt_configure_error": "ເກີດຄວາມຜິດພາດໃນຂະນະທີ່ກຳນົດຄ່າການເຊື່ອມຕໍ່ MQTT",
+  "mqtt_configure_error": "ເກີດຄວາມຜິດພາດໃນການຕັ້ງຄ່າການເຊື່ອມຕໍ່ MQTT",
   "mqtt_connection_create_error": "ຜິດພາດໃນຂະນະທີ່ສ້າງການເຊື່ອມຕໍ່ MQTT",
   "light_theme": "ຮູບແບບສີສັນແຈ້ງ",
   "dark_theme": "ຮູບແບບສີສັນມືດ",
@@ -273,7 +273,7 @@
   "restart_now": "ເລີ່ມການບໍລິການໃໝ່ດຽວນີ້ບໍ?",
   "service_restart": "ເປີດບໍລິການຄືນໃໝ່",
   "service_stopping": "ການ​ບໍ​ລິ​ການ​ຢຸດ...",
-  "service_restart_notice": "ພຽງ​ແຕ່​ບໍ່​ພໍ​ເທົ່າ​ໃດ​, ໃນ​ປັດ​ຈຸ​ບັນ​ການ​ບໍ​ລິ​ການ​ແມ່ນ restarting...",
+  "service_restart_notice": "ພຽງ​ແຕ່​ບໍ່​ພໍ​ເທົ່າ​ໃດ​, ການ​ບໍ​ລິ​ການ​ກໍາ​ລັງ​ເລີ່ມ​ຕົ້ນ​ໃຫມ່​ໃນ​ປັດ​ຈຸ​ບັນ ...",
   "restart_complete": "ຣີສະຕາດສຳເລັດແລ້ວ.",
   "preparing_backup": "ກຳລັງກະກຽມການສຳຮອງຂໍ້ມູນ...",
   "backup_restore": "ກູ້ຄືນການສໍາຮອງຂໍ້ມູນ",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ຮູບວໍເປເປີ Dashboard",
   "card_color": "ສີບັດ",
   "card_opacity": "ຄວາມໂປ່ງໃສຂອງບັດ",
-  "card_blur": "ມົວບັດ"
+  "card_blur": "ມົວບັດ",
+  "upnp_dlna_device": "ອຸປະກອນ UPnP/DLNA",
+  "no_modules_selected": "ບໍ່ໄດ້ເລືອກໂມດູນ."
 }

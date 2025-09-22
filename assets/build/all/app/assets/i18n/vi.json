@@ -283,7 +283,7 @@
   "requires": "Yêu cầu",
   "installed": "Đã cài đặt",
   "optional": "Không bắt buộc",
-  "program_disabled_note": "Chương trình đã bị vô hiệu hóa. Bạn có thể bật lại chương trình từ danh sách chương trình.",
+  "program_disabled_note": "Chương trình đã bị vô hiệu hóa. Có thể bật lại từ danh sách chương trình.",
   "no_release_info_note": "Không có thông tin phát hành nào khả dụng (chạy trong môi trường dev?)",
   "local_version_modified": "Phiên bản địa phương đã được sửa đổi.",
   "update_to_version": "Bản cập nhật có sẵn cho phiên bản ' {{version}} '",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Hình nền bảng điều khiển",
   "card_color": "Màu thẻ",
   "card_opacity": "Độ mờ đục của thẻ",
-  "card_blur": "Làm mờ thẻ"
+  "card_blur": "Làm mờ thẻ",
+  "upnp_dlna_device": "Thiết bị UPnP/DLNA",
+  "no_modules_selected": "Không có mô-đun nào được chọn."
 }

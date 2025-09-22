@@ -197,7 +197,7 @@
   "chart_type": "Math o siart",
   "line_chart": "Llinellau",
   "bar_chart": "Bariau",
-  "scatter_chart": "Gwasgaru",
+  "scatter_chart": "Gwasgariad",
   "data_monitor": "Monitro data",
   "add_chart": "Ychwanegu siart",
   "restore_original": "Adfer y gwreiddiol",
@@ -287,7 +287,7 @@
   "no_release_info_note": "Dim gwybodaeth rhyddhau ar gael (yn rhedeg yn yr amgylchedd datblygu?)",
   "local_version_modified": "Mae'r fersiwn leol wedi'i haddasu.",
   "update_to_version": "Diweddariad ar gael i fersiwn ' {{version}} '",
-  "switch": "Newid",
+  "switch": "Switsh",
   "light": "Golau / Pylu",
   "color_light": "Golau Lliw",
   "sensor": "Synhwyrydd",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Papur Wal Dangosfwrdd",
   "card_color": "Lliw'r cerdyn",
   "card_opacity": "Anhryloywder cerdyn",
-  "card_blur": "Aneglurder cerdyn"
+  "card_blur": "Aneglurder cerdyn",
+  "upnp_dlna_device": "Dyfais UPnP/DLNA",
+  "no_modules_selected": "Dim modiwlau wedi'u dewis."
 }

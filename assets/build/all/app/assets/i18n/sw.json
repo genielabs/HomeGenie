@@ -276,7 +276,7 @@
   "service_restart_notice": "Dakika chache tu, huduma sasa inaanza tena...",
   "restart_complete": "Kuanzisha upya kumekamilika.",
   "preparing_backup": "Inatayarisha kuhifadhi...",
-  "backup_restore": "Urejeshaji nakala",
+  "backup_restore": "Kurejesha chelezo",
   "reset_factory_prompt": "Ungependa kuweka upya mipangilio ya kiwandani? Data na usanidi wa sasa utapotea.",
   "restoring_factory": "Inarejesha mipangilio ya kiwandani...",
   "factory_reset_completed": "Uwekaji upya wa kiwanda umekamilika.",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Karatasi ya Dashibodi",
   "card_color": "Rangi ya kadi",
   "card_opacity": "Uwazi wa kadi",
-  "card_blur": "Ukungu wa kadi"
+  "card_blur": "Ukungu wa kadi",
+  "upnp_dlna_device": "Kifaa cha UPnP/DLNA",
+  "no_modules_selected": "Hakuna moduli zilizochaguliwa."
 }

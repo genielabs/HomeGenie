@@ -223,7 +223,7 @@
   "restore_program": "원래 코드를 복원하시겠습니까?",
   "upgrade_program": "업그레이드 프로그램?",
   "latest_version_install": "최신 버전이 설치됩니다.",
-  "create_configuration": "새로운 구성 만들기",
+  "create_configuration": "새로운 구성을 만듭니다",
   "only_letters_numbers": "문자, 숫자, '-', '_'만 허용됩니다.",
   "delete_configuration": "\" {{name}} \" 구성을 삭제하시겠습니까?",
   "confirm_delete": "삭제 확인",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "대시보드 배경화면",
   "card_color": "카드 색상",
   "card_opacity": "카드 불투명도",
-  "card_blur": "카드 블러"
+  "card_blur": "카드 블러",
+  "upnp_dlna_device": "UPnP/DLNA 장치",
+  "no_modules_selected": "선택된 모듈이 없습니다."
 }

@@ -108,7 +108,7 @@
   "current": "A halin yanzu",
   "digital": "Dijital",
   "illuminance": "Haske",
-  "pressure": "Matsi",
+  "pressure": "Matsin lamba",
   "speed": "Gudu",
   "voltage": "Wutar lantarki",
   "theme": "Jigo",
@@ -273,7 +273,7 @@
   "restart_now": "Sake kunna sabis yanzu?",
   "service_restart": "Sake kunna sabis",
   "service_stopping": "Tsayawa sabis...",
-  "service_restart_notice": "'Yan lokuta kaɗan, yanzu sabis ɗin yana sake farawa...",
+  "service_restart_notice": "'Yan lokuta kaɗan, sabis ɗin yanzu yana sake farawa...",
   "restart_complete": "An gama farawa.",
   "preparing_backup": "Ana shirya madadin...",
   "backup_restore": "Mayar da Ajiyayyen",
@@ -283,7 +283,7 @@
   "requires": "Ana bukata",
   "installed": "An shigar",
   "optional": "Na zaɓi",
-  "program_disabled_note": "An kashe shirin. Ana iya sake kunna shi daga jerin shirye-shiryen.",
+  "program_disabled_note": "An kashe shirin Ana iya sake kunna shi daga jerin shirye-shiryen.",
   "no_release_info_note": "Babu bayanin sakin da aka samu (akan gudana a muhallin dev.?)",
   "local_version_modified": "An gyara sigar gida.",
   "update_to_version": "Akwai sabuntawa zuwa sigar' {{version}} '",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Fuskar bangon waya",
   "card_color": "Kalar kati",
   "card_opacity": "Batun kati",
-  "card_blur": "Kati blur"
+  "card_blur": "Kati blur",
+  "upnp_dlna_device": "Na'urar UPnP/DLNA",
+  "no_modules_selected": "Babu samfura da aka zaɓa."
 }

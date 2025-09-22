@@ -143,7 +143,7 @@
   "dashboard_name_already_exists": "Мұндай атаумен бақылау тақтасы бұрыннан бар.",
   "only_letters_numbers_spaces_allowed": "Тек әріптер, сандар және бос орындар рұқсат етіледі.",
   "enter_at_least_2_characters": "Кемінде 2 таңба енгізіңіз.",
-  "add_widget": "Виджетті қосыңыз",
+  "add_widget": "Виджет қосыңыз",
   "widget_added_message": "\" {{name}} \" {{count}} виджеттері қосылды.",
   "no_compatible_modules_for_widget": "Жүйеде осы виджет түрімен үйлесімді модульдер табылмады.",
   "select_modules": "Модульдерді таңдаңыз",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Басқару тақтасының тұсқағазы",
   "card_color": "Карточка түсі",
   "card_opacity": "Картаның мөлдірлігі",
-  "card_blur": "Картаның бұлыңғырлығы"
+  "card_blur": "Картаның бұлыңғырлығы",
+  "upnp_dlna_device": "UPnP/DLNA құрылғысы",
+  "no_modules_selected": "Ешбір модуль таңдалмаған."
 }

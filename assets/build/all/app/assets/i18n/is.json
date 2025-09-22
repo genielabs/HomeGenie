@@ -219,7 +219,7 @@
   "created_group_dashboard": "Búið til nýtt mælaborð úr þessum hópi.",
   "include_modules_tip": "Smelltu hér til að bæta einingum við þennan hóp.",
   "delete_program": "Eyða forriti?",
-  "action_cannot_be_undone": "Ekki er hægt að afturkalla þessa aðgerð.",
+  "action_cannot_be_undone": "Þessa aðgerð er ekki hægt að afturkalla.",
   "restore_program": "Endurheimta upprunalega kóðann?",
   "upgrade_program": "Uppfærsluforrit?",
   "latest_version_install": "Nýjasta útgáfan verður sett upp.",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Veggfóður mælaborðs",
   "card_color": "Litur korts",
   "card_opacity": "Gagnsæi korts",
-  "card_blur": "Óskýrt kort"
+  "card_blur": "Óskýrt kort",
+  "upnp_dlna_device": "UPnP/DLNA tæki",
+  "no_modules_selected": "Engar einingar valdar."
 }

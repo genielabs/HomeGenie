@@ -63,7 +63,7 @@
   "start": "Sākt",
   "stop": "Apstāties",
   "schedule": "Grafiks",
-  "scheduling_preview_day": "Priekšskatīt citu dienu",
+  "scheduling_preview_day": "Priekšskatiet citu dienu",
   "scheduling_no_occurrences": "Atlasītajā dienā nav notikumu.",
   "scheduling_events": "Plānotie notikumi",
   "scheduling_others": "Citi pasākumi",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Informācijas paneļa fona attēls",
   "card_color": "Kartes krāsa",
   "card_opacity": "Kartes necaurredzamība",
-  "card_blur": "Kartes izpludināšana"
+  "card_blur": "Kartes izpludināšana",
+  "upnp_dlna_device": "UPnP/DLNA ierīce",
+  "no_modules_selected": "Nav atlasīts neviens modulis."
 }

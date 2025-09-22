@@ -130,7 +130,7 @@
   "system_configuration_info": "Izberite začetno nastavitev za vaš sistem.",
   "system_settings": "Sistemske nastavitve",
   "events_log": "Dnevnik dogodkov",
-  "fullscreen": "Celoten zaslon",
+  "fullscreen": "Celozaslonski način",
   "arrange_widgets": "Razporedi gradnike",
   "dashboards": "Nadzorne plošče",
   "no_dashboards_configured": "Nadzorna plošča ni konfigurirana.",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Ozadje nadzorne plošče",
   "card_color": "Barva kartice",
   "card_opacity": "Neprozornost kartice",
-  "card_blur": "Zameglitev kartice"
+  "card_blur": "Zameglitev kartice",
+  "upnp_dlna_device": "Naprava UPnP/DLNA",
+  "no_modules_selected": "Ni izbranih modulov."
 }

@@ -144,7 +144,7 @@
   "only_letters_numbers_spaces_allowed": "ਸਿਰਫ਼ ਅੱਖਰ, ਨੰਬਰ ਅਤੇ ਖਾਲੀ ਥਾਂਵਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ।",
   "enter_at_least_2_characters": "ਘੱਟੋ-ਘੱਟ 2 ਅੱਖਰ ਦਰਜ ਕਰੋ।",
   "add_widget": "ਵਿਜੇਟ ਸ਼ਾਮਲ ਕਰੋ",
-  "widget_added_message": "\" {{name}} \" ਵਿੱਚ {{count}} ਵਿਜੇਟ ਜੋੜਿਆ ਗਿਆ।",
+  "widget_added_message": "\" {{name}} \" ਵਿੱਚ {{count}} ਵਿਜੇਟ(ਵਾਂ) ਜੋੜਿਆ ਗਿਆ।",
   "no_compatible_modules_for_widget": "ਇਸ ਵਿਜੇਟ ਕਿਸਮ ਦੇ ਅਨੁਕੂਲ ਸਿਸਟਮ ਵਿੱਚ ਕੋਈ ਮਾਡਿਊਲ ਨਹੀਂ ਮਿਲਿਆ।",
   "select_modules": "ਮਾਡਿਊਲ ਚੁਣੋ",
   "select_dashboard": "ਡੈਸ਼ਬੋਰਡ ਚੁਣੋ",
@@ -260,7 +260,7 @@
   "longitude": "ਲੰਬਕਾਰ",
   "location_name": "ਸਥਾਨ ਦਾ ਨਾਮ",
   "set_location": "ਟਿਕਾਣਾ ਸੈੱਟ ਕਰੋ",
-  "enter_location_name": "ਸਥਾਨ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+  "enter_location_name": "ਟਿਕਾਣੇ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
   "enable_logs": "ਯੋਗ ਬਣਾਓ",
   "download_logs": "ਲੌਗ ਫਾਈਲਾਂ ਡਾਊਨਲੋਡ ਕਰੋ",
   "empty_log": "ਹਾਲੇ ਕੋਈ ਲੌਗ ਫਾਈਲਾਂ ਉਪਲਬਧ ਨਹੀਂ ਹਨ",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ਡੈਸ਼ਬੋਰਡ ਵਾਲਪੇਪਰ",
   "card_color": "ਕਾਰਡ ਦਾ ਰੰਗ",
   "card_opacity": "ਕਾਰਡ ਧੁੰਦਲਾਪਨ",
-  "card_blur": "ਕਾਰਡ ਬਲਰ"
+  "card_blur": "ਕਾਰਡ ਬਲਰ",
+  "upnp_dlna_device": "UPnP/DLNA ਡਿਵਾਈਸ",
+  "no_modules_selected": "ਕੋਈ ਮਾਡਿਊਲ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ।"
 }

@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Обои для приборной панели",
   "card_color": "Цвет карты",
   "card_opacity": "Непрозрачность карты",
-  "card_blur": "Размытие карты"
+  "card_blur": "Размытие карты",
+  "upnp_dlna_device": "Устройство UPnP/DLNA",
+  "no_modules_selected": "Модули не выбраны."
 }

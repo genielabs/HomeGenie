@@ -113,7 +113,7 @@
   "voltage": "Напрежение",
   "theme": "Тема",
   "units": "Единици",
-  "command_code": "Команден код",
+  "command_code": "Код на командата",
   "notifications": "Известия",
   "language": "Език",
   "change_language": "Промяна на езика",
@@ -182,7 +182,7 @@
   "configure_program": "Конфигуриране",
   "custom_widgets": "Персонализирани джаджи",
   "widgets": "Джаджи",
-  "import_widget": "Импортиране на виджет",
+  "import_widget": "Импортиране на джаджа",
   "add_new_widget": "Добавяне на нов уиджет",
   "no_data_received_yet": "Чакане на данни",
   "backup_and_restore": "Архивиране и възстановяване",
@@ -284,7 +284,7 @@
   "installed": "Инсталирано",
   "optional": "По избор",
   "program_disabled_note": "Програмата е деактивирана. Може да бъде активирана отново от списъка с програми.",
-  "no_release_info_note": "Няма налична информация за изданието (работи ли в среда за разработка?)",
+  "no_release_info_note": "Няма налична информация за изданието (работи ли в развойна среда?)",
   "local_version_modified": "Локалната версия е променена.",
   "update_to_version": "Налична е актуализация за версия „ {{version}} “",
   "switch": "Превключвател",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Тапет на таблото за управление",
   "card_color": "Цвят на картата",
   "card_opacity": "Непрозрачност на картата",
-  "card_blur": "Размазване на картата"
+  "card_blur": "Размазване на картата",
+  "upnp_dlna_device": "UPnP/DLNA устройство",
+  "no_modules_selected": "Няма избрани модули."
 }

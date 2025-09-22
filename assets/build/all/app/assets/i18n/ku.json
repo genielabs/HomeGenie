@@ -117,7 +117,7 @@
   "notifications": "Agahdarî",
   "language": "Ziman",
   "change_language": "Ziman biguherîne",
-  "autodetect": "Otomatîk tespîtkirin",
+  "autodetect": "Otomatîkkirin",
   "active_client_configuration": "Mîhengkirina xerîdar a çalak",
   "regional_settings": "Mîhengên herêmî",
   "regional_settings_info": "Mîhengên cihê dê ji hêla sîstemê ve werin bikar anîn da ku demên rojê hesab bikin.",
@@ -165,7 +165,7 @@
   "factory_reset": "Vegerandina Kargehê",
   "factory_reset_description": "Vegerandina mîhengên kargehê û ji sifirê ji nû ve sazkirin",
   "release_notes": "Têbînîyên weşanê",
-  "update_check": "Kontrola nûvekirinê",
+  "update_check": "Kontrolkirina nûvekirinê",
   "manual_update": "Nûvekirina destî",
   "manual_update_description": "Nûvekirinê ji arşîveke .tgz saz bike",
   "version": "Awa",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Dîwarê Dashboardê",
   "card_color": "Rengê kartê",
   "card_opacity": "Neşefafîya kartê",
-  "card_blur": "Têkelbûna kartê"
+  "card_blur": "Têkelbûna kartê",
+  "upnp_dlna_device": "Amûra UPnP/DLNA",
+  "no_modules_selected": "Ti modul nehatine hilbijartin."
 }

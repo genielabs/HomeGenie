@@ -120,7 +120,7 @@
   "autodetect": "Automatesch Detektioun",
   "active_client_configuration": "Konfiguratioun vun der aktive Client",
   "regional_settings": "Regional Astellungen",
-  "regional_settings_info": "D'Standuertsastellungen ginn vum System benotzt fir d'Sonnzäiten ze berechnen.",
+  "regional_settings_info": "D'Standuertsastellungen ginn vum System benotzt fir d'Sonnezäiten ze berechnen.",
   "location": "Standuert",
   "formats": "Formater",
   "unit_system": "System",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Dashboard-Hannergrond",
   "card_color": "Faarf vun der Kaart",
   "card_opacity": "Kaartenopazitéit",
-  "card_blur": "Kaart verschwommen"
+  "card_blur": "Kaart verschwommen",
+  "upnp_dlna_device": "UPnP/DLNA-Apparat",
+  "no_modules_selected": "Keng Moduler ausgewielt."
 }

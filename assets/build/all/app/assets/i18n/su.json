@@ -7,7 +7,7 @@
   "add": "Tambihan",
   "remove": "Cabut",
   "delete": "Hapus",
-  "clone": "Klon",
+  "clone": "Kloning",
   "export": "Ékspor",
   "ok": "OKÉ",
   "cancel": "Ngabolaykeun",
@@ -175,7 +175,7 @@
   "group_removal_message": "Program otomatisasi anu nganggo \" {{name}} \" tiasa lirén damel.",
   "voice_control": "Kadali sora",
   "clone_program": "Program Klon",
-  "import_program": "program impor",
+  "import_program": "Program impor",
   "add_new_program": "Tambahkeun program anyar",
   "new_program": "program anyar",
   "disable_program": "Pareuman",
@@ -295,7 +295,7 @@
   "shutter": "Jepret / Buta",
   "motor": "Motor / Aktuator",
   "action_button": "Tombol Peta",
-  "section_label": "Label Bagéan",
+  "section_label": "Bagéan Label",
   "thermostat": "Thermostat",
   "alarm_system": "Sistim alarem",
   "weather_data": "Data Cuaca",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Wallpaper Dashboard",
   "card_color": "Warna kartu",
   "card_opacity": "Opacity kartu",
-  "card_blur": "Kartu kabur"
+  "card_blur": "Kartu kabur",
+  "upnp_dlna_device": "Alat UPnP/DLNA",
+  "no_modules_selected": "Henteu aya modul anu dipilih."
 }

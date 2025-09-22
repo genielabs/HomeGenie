@@ -228,7 +228,7 @@
   "delete_configuration": "\" {{name}} \" ఆకృతీకరణను తొలగించాలా?",
   "confirm_delete": "తొలగింపును నిర్ధారించండి",
   "confirm_delete_prompt": "మీరు ఈ అంశాన్ని తొలగించాలనుకుంటున్నారా?",
-  "mqtt_connection_delete_error": "MQTT కనెక్షన్‌ను తొలగించడంలో లోపం ఏర్పడింది",
+  "mqtt_connection_delete_error": "MQTT కనెక్షన్‌ను తొలగించడంలో లోపం ఏర్పడింది.",
   "mqtt_configure_error": "MQTT కనెక్షన్‌ను కాన్ఫిగర్ చేస్తున్నప్పుడు లోపం ఏర్పడింది.",
   "mqtt_connection_create_error": "MQTT కనెక్షన్‌ను సృష్టిస్తున్నప్పుడు లోపం ఏర్పడింది.",
   "light_theme": "తేలికపాటి థీమ్",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "డాష్‌బోర్డ్ వాల్‌పేపర్",
   "card_color": "కార్డ్ రంగు",
   "card_opacity": "కార్డ్ అస్పష్టత",
-  "card_blur": "కార్డ్ బ్లర్"
+  "card_blur": "కార్డ్ బ్లర్",
+  "upnp_dlna_device": "UPnP/DLNA పరికరం",
+  "no_modules_selected": "మాడ్యూళ్ళు ఎంచుకోబడలేదు."
 }

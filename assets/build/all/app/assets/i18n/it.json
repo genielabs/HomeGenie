@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Sfondo dashboard",
   "card_color": "Colore scheda",
   "card_opacity": "Opacità scheda",
-  "card_blur": "Sfocatura scheda"
+  "card_blur": "Sfocatura scheda",
+  "upnp_dlna_device": "Dispositivo UPnP/DLNA",
+  "no_modules_selected": "Nessun modulo selezionato."
 }

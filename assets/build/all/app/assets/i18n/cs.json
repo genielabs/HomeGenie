@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Tapeta palubní desky",
   "card_color": "Barva karty",
   "card_opacity": "Neprůhlednost karty",
-  "card_blur": "Rozmazání karty"
+  "card_blur": "Rozmazání karty",
+  "upnp_dlna_device": "Zařízení UPnP/DLNA",
+  "no_modules_selected": "Nebyly vybrány žádné moduly."
 }

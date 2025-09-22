@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Ταπετσαρία πίνακα ελέγχου",
   "card_color": "Χρώμα κάρτας",
   "card_opacity": "Αδιαφάνεια κάρτας",
-  "card_blur": "Θάμπωμα κάρτας"
+  "card_blur": "Θάμπωμα κάρτας",
+  "upnp_dlna_device": "Συσκευή UPnP/DLNA",
+  "no_modules_selected": "Δεν έχουν επιλεγεί ενότητες."
 }

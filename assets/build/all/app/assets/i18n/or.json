@@ -146,7 +146,7 @@
   "add_widget": "ୱିଜେଟ୍ ଯୋଗ କରନ୍ତୁ।",
   "widget_added_message": "\" {{name}} \" ରେ {{count}} ୱିଜେଟ୍ ଯୋଡାଗଲା।",
   "no_compatible_modules_for_widget": "ଏହି ୱିଜେଟ୍ ପ୍ରକାର ସହିତ ସୁସଙ୍ଗତ ସିଷ୍ଟମରେ କୌଣସି ମଡ୍ୟୁଲ୍ ମିଳିଲା ନାହିଁ।",
-  "select_modules": "ମଡ୍ୟୁଲ୍ ଚୟନ କରନ୍ତୁ",
+  "select_modules": "ମଡ୍ୟୁଲଗୁଡ଼ିକ ଚୟନ କରନ୍ତୁ",
   "select_dashboard": "ଡ୍ୟାସବୋର୍ଡ ଚୟନ କରନ୍ତୁ",
   "automation": "ସ୍ୱୟଂଚାଳିତକରଣ",
   "automation_programs": "ପ୍ରୋଗ୍ରାମ୍",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ଡ୍ୟାସବୋର୍ଡ ୱାଲପେପର",
   "card_color": "କାର୍ଡର ରଙ୍ଗ",
   "card_opacity": "କାର୍ଡ ଅସ୍ପଷ୍ଟତା",
-  "card_blur": "କାର୍ଡ ବ୍ଲର୍"
+  "card_blur": "କାର୍ଡ ବ୍ଲର୍",
+  "upnp_dlna_device": "UPnP/DLNA ଡିଭାଇସ୍",
+  "no_modules_selected": "କୌଣସି ମଡ୍ୟୁଲ୍ ଚୟନ କରାଯାଇନାହିଁ।"
 }

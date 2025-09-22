@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Prietaisų skydelio fonas",
   "card_color": "Kortelės spalva",
   "card_opacity": "Kortelės neskaidrumas",
-  "card_blur": "Kortelės suliejimas"
+  "card_blur": "Kortelės suliejimas",
+  "upnp_dlna_device": "UPnP/DLNA įrenginys",
+  "no_modules_selected": "Nepasirinkta jokių modulių."
 }

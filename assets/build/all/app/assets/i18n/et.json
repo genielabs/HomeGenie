@@ -259,7 +259,7 @@
   "latitude": "Laiuskraad",
   "longitude": "Pikkuskraad",
   "location_name": "Asukoha nimi",
-  "set_location": "Asukoha määramine",
+  "set_location": "Määra asukoht",
   "enter_location_name": "Sisestage asukoha nimi",
   "enable_logs": "Luba",
   "download_logs": "Logifailide allalaadimine",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Armatuurlaua taustapilt",
   "card_color": "Kaardi värv",
   "card_opacity": "Kaardi läbipaistmatus",
-  "card_blur": "Kaardi hägustamine"
+  "card_blur": "Kaardi hägustamine",
+  "upnp_dlna_device": "UPnP/DLNA seade",
+  "no_modules_selected": "Mooduleid pole valitud."
 }

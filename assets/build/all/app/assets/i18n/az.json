@@ -56,7 +56,7 @@
   "options": "Seçimlər",
   "programs": "Proqramlar",
   "scenes": "Səhnələr",
-  "applications": "Proqramlar",
+  "applications": "Tətbiqlər",
   "application_domain": "Tətbiq domeni",
   "package_info": "Paket məlumatı",
   "run": "Qaç",
@@ -292,7 +292,7 @@
   "color_light": "Rəng İşıq",
   "sensor": "Sensor",
   "door_lock": "Qapı Kilidi",
-  "shutter": "Pərdələr / Pərdələr",
+  "shutter": "Panjurlar / Pərdələr",
   "motor": "Motor / Aktuator",
   "action_button": "Fəaliyyət düyməsi",
   "section_label": "Bölmə Etiketi",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "İdarə paneli divar kağızı",
   "card_color": "Kartın rəngi",
   "card_opacity": "Kartın qeyri-şəffaflığı",
-  "card_blur": "Kartın bulanması"
+  "card_blur": "Kartın bulanması",
+  "upnp_dlna_device": "UPnP/DLNA Cihazı",
+  "no_modules_selected": "Heç bir modul seçilməyib."
 }

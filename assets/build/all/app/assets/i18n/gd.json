@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Pàipear-balla a' Bhòrd-stiùiridh",
   "card_color": "Dath cairt",
   "card_opacity": "Neo-shoilleireachd cairt",
-  "card_blur": "Doilleireachd cairt"
+  "card_blur": "Doilleireachd cairt",
+  "upnp_dlna_device": "Inneal UPnP/DLNA",
+  "no_modules_selected": "Cha deach modalan a thaghadh."
 }

@@ -11,7 +11,7 @@
   "export": "Экспорт",
   "ok": "Макул",
   "cancel": "Жокко чыгаруу",
-  "confirm": "ырастоо",
+  "confirm": "Ырастоо",
   "confirm_action": "Аракетти ырастоо",
   "confirm_request": "Сурамды ырастоо",
   "apply": "Колдонуу",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Куралдар тактасынын обои",
   "card_color": "Карта түсү",
   "card_opacity": "Картанын тунуктугу",
-  "card_blur": "Карта бүдөмүк"
+  "card_blur": "Карта бүдөмүк",
+  "upnp_dlna_device": "UPnP/DLNA түзмөгү",
+  "no_modules_selected": "Модул тандалган жок."
 }

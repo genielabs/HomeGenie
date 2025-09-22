@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Sfond tad-Dashboard",
   "card_color": "Kulur tal-karta",
   "card_opacity": "Opaċità tal-karta",
-  "card_blur": "Ċajpir tal-karta"
+  "card_blur": "Ċajpir tal-karta",
+  "upnp_dlna_device": "Apparat UPnP/DLNA",
+  "no_modules_selected": "Ma ntgħażlu l-ebda moduli."
 }

@@ -251,7 +251,7 @@
   "actual_load": "യഥാർത്ഥ ലോഡ്",
   "armed": "ആയുധധാരി",
   "disarmed": "നിരായുധീകരിച്ചു",
-  "normal": "സാധാരണ",
+  "normal": "സാധാരണം",
   "away": "ദൂരെ",
   "control_chat": "ചാറ്റ് നിയന്ത്രിക്കുക",
   "enter_commands": "കമാൻഡുകൾ നൽകുക",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ഡാഷ്‌ബോർഡ് വാൾപേപ്പർ",
   "card_color": "കാർഡ് നിറം",
   "card_opacity": "കാർഡ് അതാര്യത",
-  "card_blur": "കാർഡ് മങ്ങൽ"
+  "card_blur": "കാർഡ് മങ്ങൽ",
+  "upnp_dlna_device": "UPnP/DLNA ഉപകരണം",
+  "no_modules_selected": "മൊഡ്യൂളുകളൊന്നും തിരഞ്ഞെടുത്തിട്ടില്ല."
 }

@@ -137,7 +137,7 @@
   "import_groups_as_dashboards": "Sunucudan içe aktar",
   "add_new_dashboard": "Yeni gösterge paneli ekle",
   "rename_dashboard": "Panoyu yeniden adlandır",
-  "delete_dashboard": "Panoyu sil",
+  "delete_dashboard": "Gösterge tablosunu sil",
   "delete_dashboard_confirm": "\" {{name}} \" panosunu kalıcı olarak silmek istiyor musunuz?",
   "empty_dashboard": "Boş gösterge paneli.",
   "dashboard_name_already_exists": "Bu isimde bir gösterge paneli zaten mevcut.",
@@ -207,7 +207,7 @@
   "select_all": "Tümünü seç",
   "preparing_to_install": "Kuruluma hazırlanıyor...",
   "install_process_completing": "Sıkı tutunun! Neredeyse geldik!",
-  "restoring_from_backup": "Yedeklemeden geri yükleme yapılıyor...",
+  "restoring_from_backup": "Yedeklemeden geri yükleniyor...",
   "browse": "Göz at",
   "play_on": "Oynamaya devam et",
   "root_folder": "Kök klasör",
@@ -277,7 +277,7 @@
   "restart_complete": "Yeniden başlatma tamamlandı.",
   "preparing_backup": "Yedekleme hazırlanıyor...",
   "backup_restore": "Yedekleme geri yükleme",
-  "reset_factory_prompt": "Fabrika ayarlarına sıfırlamak mı istiyorsunuz? Mevcut verileriniz ve yapılandırmanız kaybolacaktır.",
+  "reset_factory_prompt": "Fabrika ayarlarına sıfırlamak mı istiyorsunuz? Mevcut veriler ve yapılandırma kaybolacak.",
   "restoring_factory": "Fabrika ayarlarına geri dönülüyor...",
   "factory_reset_completed": "Fabrika ayarlarına sıfırlama işlemi tamamlandı.",
   "requires": "Gereklilikler",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Gösterge Paneli Duvar Kağıdı",
   "card_color": "Kart rengi",
   "card_opacity": "Kart opaklığı",
-  "card_blur": "Kart bulanıklığı"
+  "card_blur": "Kart bulanıklığı",
+  "upnp_dlna_device": "UPnP/DLNA Cihazı",
+  "no_modules_selected": "Hiçbir modül seçilmedi."
 }

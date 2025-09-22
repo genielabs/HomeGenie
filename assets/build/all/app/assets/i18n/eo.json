@@ -272,7 +272,7 @@
   "password_length_note": "Pasvorto devas esti almenaŭ 5 signojn longa",
   "restart_now": "Ĉu rekomenci la servon nun?",
   "service_restart": "Servorekomenco",
-  "service_stopping": "Servo haltas...",
+  "service_stopping": "Servo haltiĝas...",
   "service_restart_notice": "Nur kelkajn momentojn, la servo nun rekomenciĝas...",
   "restart_complete": "Rekomenco kompletigita.",
   "preparing_backup": "Preparante sekurkopion...",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Instrumentpanela Tapeto",
   "card_color": "Kartkoloro",
   "card_opacity": "Karto-opakeco",
-  "card_blur": "Karta malklareco"
+  "card_blur": "Karta malklareco",
+  "upnp_dlna_device": "UPnP/DLNA Aparato",
+  "no_modules_selected": "Neniuj moduloj elektitaj."
 }

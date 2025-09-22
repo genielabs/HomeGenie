@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Fond d'écran du tableau de bord",
   "card_color": "Couleur de la carte",
   "card_opacity": "Opacité de la carte",
-  "card_blur": "Carte floue"
+  "card_blur": "Carte floue",
+  "upnp_dlna_device": "Appareil UPnP/DLNA",
+  "no_modules_selected": "Aucun module sélectionné."
 }

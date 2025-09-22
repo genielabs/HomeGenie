@@ -21,7 +21,7 @@
   "next": "Ar Aghaidh",
   "previous": "Roimhe Seo",
   "abort": "Toirmisc",
-  "retry": "Déan iarracht arís",
+  "retry": "Déan iarracht eile",
   "install": "Suiteáil",
   "uninstall": "Díshuiteáil",
   "open": "Oscail",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Páipéar Balla Painéil",
   "card_color": "Dath cárta",
   "card_opacity": "Teimhneacht cárta",
-  "card_blur": "Doiléiriú cárta"
+  "card_blur": "Doiléiriú cárta",
+  "upnp_dlna_device": "Gléas UPnP/DLNA",
+  "no_modules_selected": "Níl aon mhodúil roghnaithe."
 }

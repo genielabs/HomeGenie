@@ -2,7 +2,7 @@
   "home": "Casa",
   "setup": "Istituisci",
   "preferences": "Preferenze",
-  "logging": "Taglio di legnu",
+  "logging": "Registrazione di dati",
   "exit": "Surtita",
   "add": "Aghjunghje",
   "remove": "Eliminà",
@@ -273,7 +273,7 @@
   "restart_now": "Riavvià u serviziu avà?",
   "service_restart": "Riavviu di u serviziu",
   "service_stopping": "Fermata di u serviziu...",
-  "service_restart_notice": "Solu uni pochi mumenti, u serviziu hè avà in traccia di riavvià...",
+  "service_restart_notice": "Solu uni pochi mumenti, u serviziu hè avà in traccia di riparte...",
   "restart_complete": "Riavviu cumpletatu.",
   "preparing_backup": "Preparazione di a copia di salvezza...",
   "backup_restore": "Restaurazione di copia di salvezza",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Carta da parati di u cruscottu",
   "card_color": "Culore di a carta",
   "card_opacity": "Opacità di a carta",
-  "card_blur": "Sfocatura di a carta"
+  "card_blur": "Sfocatura di a carta",
+  "upnp_dlna_device": "Dispositivu UPnP/DLNA",
+  "no_modules_selected": "Nisun modulu hè statu sceltu."
 }

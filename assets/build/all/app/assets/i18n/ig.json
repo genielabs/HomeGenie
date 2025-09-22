@@ -275,7 +275,7 @@
   "service_stopping": "Nkwụsị ọrụ...",
   "service_restart_notice": "Naanị obere oge, ọrụ a na-amalitegharị ugbu a...",
   "restart_complete": "Malitegharịa ekwentị agwụla.",
-  "preparing_backup": "Na-akwado nkwado ndabere ...",
+  "preparing_backup": "Na-akwado nkwado ndabere...",
   "backup_restore": "Ndokwa ndabere",
   "reset_factory_prompt": "Tọgharịa na ntọala ụlọ ọrụ? A ga-efunahụ data na nhazi ugbu a.",
   "restoring_factory": "Na-eweghachi ntọala ụlọ ọrụ...",
@@ -284,13 +284,13 @@
   "installed": "arụnyere",
   "optional": "Nhọrọ",
   "program_disabled_note": "Agbanyụrụ mmemme. Enwere ike ime ya ọzọ site na ndepụta mmemme.",
-  "no_release_info_note": "Enweghị ozi ntọhapụ dị (na-agba ọsọ na gburugburu ebe obibi?)",
+  "no_release_info_note": "Enweghị ozi mwepụta dị (na-agba ọsọ na gburugburu ebe obibi?)",
   "local_version_modified": "Agbanwela ụdị mpaghara.",
   "update_to_version": "Mmelite dị na ụdị ' {{version}} '",
   "switch": "Gbanwee",
   "light": "Ìhè / Dimmer",
   "color_light": "Ìhè agba",
-  "sensor": "Sensọ",
+  "sensor": "Ihe mmetụta",
   "door_lock": "Mkpọchi ụzọ",
   "shutter": "Ihe mkpuchi / ndị ìsì",
   "motor": "moto / actuator",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Akwụkwọ ahụaja dashboard",
   "card_color": "Agba kaadị",
   "card_opacity": "Opacity kaadị",
-  "card_blur": "Kaadị blur"
+  "card_blur": "Kaadị blur",
+  "upnp_dlna_device": "Ngwaọrụ UPnP/DLNA",
+  "no_modules_selected": "Ọnweghị modul ahọpụtara."
 }

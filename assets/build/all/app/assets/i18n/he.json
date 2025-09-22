@@ -209,7 +209,7 @@
   "install_process_completing": "תחזיקו חזק! אנחנו כמעט שם!",
   "restoring_from_backup": "משחזר מגיבוי...",
   "browse": "לְדַפדֵף",
-  "play_on": "הפעל",
+  "play_on": "המשך לשחק",
   "root_folder": "תיקיית שורש",
   "this_device": "המכשיר הזה",
   "no_files_found": "לא נמצאו קבצים",
@@ -273,7 +273,7 @@
   "restart_now": "להפעיל מחדש את השירות עכשיו?",
   "service_restart": "הפעלה מחדש של השירות",
   "service_stopping": "הפסקת השירות...",
-  "service_restart_notice": "רק כמה רגעים, השירות מתחיל מחדש...",
+  "service_restart_notice": "רק עוד רגעים ספורים, השירות מתחיל מחדש...",
   "restart_complete": "ההפעלה מחדש הושלמה.",
   "preparing_backup": "מכין גיבוי...",
   "backup_restore": "שחזור גיבוי",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "טפט לוח המחוונים",
   "card_color": "צבע הכרטיס",
   "card_opacity": "אטימות הכרטיס",
-  "card_blur": "טשטוש כרטיסים"
+  "card_blur": "טשטוש כרטיסים",
+  "upnp_dlna_device": "התקן UPnP/DLNA",
+  "no_modules_selected": "לא נבחרו מודולים."
 }

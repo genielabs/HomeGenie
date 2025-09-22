@@ -295,7 +295,7 @@
   "shutter": "Persianas / Persianas",
   "motor": "Motor / Atuador",
   "action_button": "Botão de ação",
-  "section_label": "Etiqueta da seção",
+  "section_label": "Rótulo da seção",
   "thermostat": "Termostato",
   "alarm_system": "Sistema de alarme",
   "weather_data": "Dados meteorológicos",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Papel de parede do painel",
   "card_color": "Cor do cartão",
   "card_opacity": "Opacidade do cartão",
-  "card_blur": "Desfoque de cartão"
+  "card_blur": "Desfoque de cartão",
+  "upnp_dlna_device": "Dispositivo UPnP/DLNA",
+  "no_modules_selected": "Nenhum módulo selecionado."
 }

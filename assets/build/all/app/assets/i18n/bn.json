@@ -167,7 +167,7 @@
   "release_notes": "রিলিজ নোট",
   "update_check": "আপডেট চেক",
   "manual_update": "ম্যানুয়াল আপডেট",
-  "manual_update_description": "একটি .tgz আর্কাইভ থেকে আপডেট ইনস্টল করুন",
+  "manual_update_description": ".tgz আর্কাইভ থেকে আপডেট ইনস্টল করুন",
   "version": "সংস্করণ",
   "system_up_to_date": "সিস্টেমটি আপ টু ডেট আছে",
   "remove_group": "গ্রুপটি সরান",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ড্যাশবোর্ড ওয়ালপেপার",
   "card_color": "কার্ডের রঙ",
   "card_opacity": "কার্ডের অস্বচ্ছতা",
-  "card_blur": "কার্ড ব্লার"
+  "card_blur": "কার্ড ব্লার",
+  "upnp_dlna_device": "UPnP/DLNA ডিভাইস",
+  "no_modules_selected": "কোনও মডিউল নির্বাচিত হয়নি।"
 }

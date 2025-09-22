@@ -144,7 +144,7 @@
   "only_letters_numbers_spaces_allowed": "فقط حروف، اعداد و فاصله مجاز است.",
   "enter_at_least_2_characters": "حداقل ۲ کاراکتر وارد کنید.",
   "add_widget": "اضافه کردن ویجت",
-  "widget_added_message": "ابزارک(های) {{count}} به « {{name}} » اضافه شد.",
+  "widget_added_message": "ابزارک {{count}} به « {{name}} » اضافه شد.",
   "no_compatible_modules_for_widget": "هیچ ماژولی در سیستم یافت نشد که با این نوع ویجت سازگار باشد.",
   "select_modules": "ماژول‌ها را انتخاب کنید",
   "select_dashboard": "انتخاب داشبورد",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "تصویر زمینه داشبورد",
   "card_color": "رنگ کارت",
   "card_opacity": "کدورت کارت",
-  "card_blur": "تاری کارت"
+  "card_blur": "تاری کارت",
+  "upnp_dlna_device": "دستگاه UPnP/DLNA",
+  "no_modules_selected": "هیچ ماژولی انتخاب نشده است."
 }

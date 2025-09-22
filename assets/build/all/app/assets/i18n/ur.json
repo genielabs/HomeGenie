@@ -165,7 +165,7 @@
   "factory_reset": "فیکٹری ری سیٹ",
   "factory_reset_description": "فیکٹری کی ترتیبات پر دوبارہ ترتیب دیں اور شروع سے دوبارہ ترتیب دیں۔",
   "release_notes": "ریلیز نوٹس",
-  "update_check": "چیک اپ ڈیٹ کریں۔",
+  "update_check": "اپ ڈیٹ چیک",
   "manual_update": "دستی اپ ڈیٹ",
   "manual_update_description": ".tgz آرکائیو سے اپ ڈیٹ انسٹال کریں۔",
   "version": "ورژن",
@@ -186,9 +186,9 @@
   "add_new_widget": "نیا ویجیٹ شامل کریں۔",
   "no_data_received_yet": "ڈیٹا کا انتظار ہے۔",
   "backup_and_restore": "بیک اپ اور بحال کریں۔",
-  "software_updates": "سافٹ ویئر اپ ڈیٹس",
+  "software_updates": "سافٹ ویئر اپڈیٹس",
   "service_configuration": "سروس کی ترتیب",
-  "add_data_source": "ڈیٹا سورس شامل کریں۔",
+  "add_data_source": "ڈیٹا ماخذ شامل کریں۔",
   "edit_data_source": "ڈیٹا سورس میں ترمیم کریں۔",
   "add_to_dashboard": "ڈیش بورڈ میں شامل کریں۔",
   "fill": "بھرنا",
@@ -236,7 +236,7 @@
   "enter_widget_path": "ویجیٹ کا راستہ فارم میں درج کریں:  /",
   "widget_only_letters_numbers": "صرف چھوٹے حروف، نمبر اور علامتیں / اور - پر مشتمل ہو سکتا ہے۔",
   "cloneable": "کلون ایبل",
-  "autorestart_on_error": "غلطی پر آٹو ری اسٹارٹ",
+  "autorestart_on_error": "غلطی پر خودکار طور پر دوبارہ شروع کریں۔",
   "offline": "آف لائن",
   "door_open": "کھول دیا",
   "door_closed": "بند",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ڈیش بورڈ وال پیپر",
   "card_color": "کارڈ کا رنگ",
   "card_opacity": "کارڈ کی دھندلاپن",
-  "card_blur": "کارڈ بلر"
+  "card_blur": "کارڈ بلر",
+  "upnp_dlna_device": "UPnP/DLNA ڈیوائس",
+  "no_modules_selected": "کوئی ماڈیول منتخب نہیں کیا گیا۔"
 }

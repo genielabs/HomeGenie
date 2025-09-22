@@ -125,7 +125,7 @@
   "formats": "فارميٽ",
   "unit_system": "سسٽم",
   "metric": "ميٽرڪ",
-  "imperial": "شاهي",
+  "imperial": "امپيريل",
   "system_configuration": "سسٽم جي ترتيب",
   "system_configuration_info": "پنھنجي سسٽم لاءِ شروعاتي سيٽ اپ چونڊيو.",
   "system_settings": "سسٽم سيٽنگون",
@@ -212,7 +212,7 @@
   "play_on": "تي هلايو",
   "root_folder": "روٽ فولڊر",
   "this_device": "هي ڊوائيس",
-  "no_files_found": "ڪا به فائل نه ملي",
+  "no_files_found": "ڪابه فائل نه ملي",
   "model": "ماڊل",
   "added_module": "نئون ماڊل شامل ڪيو ويو: {{name}} .",
   "operation_successful": "آپريشن ڪامياب ٿيو",
@@ -227,7 +227,7 @@
   "only_letters_numbers": "صرف اکر، انگ، '-' ۽ '_' جي اجازت آهي.",
   "delete_configuration": "\" {{name}} \" جي ترتيب ختم ڪريو؟",
   "confirm_delete": "ختم ڪرڻ جي تصديق ڪريو",
-  "confirm_delete_prompt": "ڇا توهان کي پڪ آهي ته توهان هي شي ختم ڪرڻ چاهيو ٿا؟",
+  "confirm_delete_prompt": "ڇا توهان کي پڪ آهي ته توهان هي شيءِ ختم ڪرڻ چاهيو ٿا؟",
   "mqtt_connection_delete_error": "MQTT ڪنيڪشن کي ختم ڪرڻ ۾ غلطي",
   "mqtt_configure_error": "MQTT ڪنيڪشن ترتيب ڏيڻ ۾ غلطي",
   "mqtt_connection_create_error": "MQTT ڪنيڪشن ٺاهڻ دوران غلطي",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ڊيش بورڊ وال پيپر",
   "card_color": "ڪارڊ جو رنگ",
   "card_opacity": "ڪارڊ جي اوپيسيٽي",
-  "card_blur": "ڪارڊ بلر"
+  "card_blur": "ڪارڊ بلر",
+  "upnp_dlna_device": "UPnP/DLNA ڊوائس",
+  "no_modules_selected": "ڪو به ماڊيول نه چونڊيو ويو آهي."
 }

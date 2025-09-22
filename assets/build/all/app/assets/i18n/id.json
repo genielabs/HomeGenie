@@ -51,7 +51,7 @@
   "number": "Nomor",
   "module": "Modul",
   "modules": "Modul",
-  "bound_module": "Modul terikat tetap",
+  "bound_module": "Atur modul yang terikat",
   "statistics": "Statistik",
   "options": "Pilihan",
   "programs": "Program",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Wallpaper Dasbor",
   "card_color": "Warna kartu",
   "card_opacity": "Opasitas kartu",
-  "card_blur": "Kartu kabur"
+  "card_blur": "Kartu kabur",
+  "upnp_dlna_device": "Perangkat UPnP/DLNA",
+  "no_modules_selected": "Tidak ada modul yang dipilih."
 }

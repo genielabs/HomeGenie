@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Bakgrundsbild på instrumentpanelen",
   "card_color": "Kortfärg",
   "card_opacity": "Kortets opacitet",
-  "card_blur": "Kortsuddighet"
+  "card_blur": "Kortsuddighet",
+  "upnp_dlna_device": "UPnP/DLNA-enhet",
+  "no_modules_selected": "Inga moduler valda."
 }

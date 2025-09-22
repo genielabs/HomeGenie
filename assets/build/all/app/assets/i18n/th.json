@@ -285,7 +285,7 @@
   "optional": "ไม่จำเป็น",
   "program_disabled_note": "โปรแกรมถูกปิดใช้งาน สามารถเปิดใช้งานใหม่ได้จากรายการโปรแกรม",
   "no_release_info_note": "ไม่มีข้อมูลการเผยแพร่ (ทำงานในสภาพแวดล้อมการพัฒนาหรือไม่)",
-  "local_version_modified": "เวอร์ชันท้องถิ่นได้รับการปรับเปลี่ยนแล้ว",
+  "local_version_modified": "เวอร์ชันท้องถิ่นได้รับการปรับปรุงแล้ว",
   "update_to_version": "อัพเดทเป็นเวอร์ชั่น ' {{version}} ' ได้",
   "switch": "สวิตช์",
   "light": "ไฟ / หรี่แสง",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "วอลเปเปอร์แดชบอร์ด",
   "card_color": "สีของการ์ด",
   "card_opacity": "ความทึบของการ์ด",
-  "card_blur": "การ์ดเบลอ"
+  "card_blur": "การ์ดเบลอ",
+  "upnp_dlna_device": "อุปกรณ์ UPnP/DLNA",
+  "no_modules_selected": "ไม่มีโมดูลที่เลือก"
 }

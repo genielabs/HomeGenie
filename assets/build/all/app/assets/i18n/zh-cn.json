@@ -233,7 +233,7 @@
   "mqtt_connection_create_error": "创建 MQTT 连接时出错",
   "light_theme": "浅色主题",
   "dark_theme": "深色主题",
-  "enter_widget_path": "以如下形式输入小部件的路径：  /",
+  "enter_widget_path": "以以下形式输入小部件的路径：  /",
   "widget_only_letters_numbers": "只能包含小写字母、数字和符号 / 和 -",
   "cloneable": "可克隆",
   "autorestart_on_error": "出现错误时自动重启",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "仪表板壁纸",
   "card_color": "卡片颜色",
   "card_opacity": "卡片不透明度",
-  "card_blur": "卡片模糊"
+  "card_blur": "卡片模糊",
+  "upnp_dlna_device": "UPnP/DLNA 设备",
+  "no_modules_selected": "未选择任何模块。"
 }

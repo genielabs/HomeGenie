@@ -224,7 +224,7 @@
   "upgrade_program": "アップグレードプログラム?",
   "latest_version_install": "最新バージョンがインストールされます。",
   "create_configuration": "新しい構成を作成する",
-  "only_letters_numbers": "文字、数字、「-」および「_」のみ使用できます。",
+  "only_letters_numbers": "文字、数字、-、_ のみ使用できます。",
   "delete_configuration": "「 {{name}} 」設定を削除しますか?",
   "confirm_delete": "削除を確認",
   "confirm_delete_prompt": "このアイテムを削除してもよろしいですか?",
@@ -233,7 +233,7 @@
   "mqtt_connection_create_error": "MQTT接続の作成中にエラーが発生しました",
   "light_theme": "ライトテーマ",
   "dark_theme": "ダークテーマ",
-  "enter_widget_path": "フォームにウィジェットのパスを入力します:  /",
+  "enter_widget_path": "ウィジェットのパスを次のフォームに入力します:  /",
   "widget_only_letters_numbers": "小文字、数字、記号「/」と「-」のみ使用できます。",
   "cloneable": "クローン可能",
   "autorestart_on_error": "エラー時に自動再起動",
@@ -260,7 +260,7 @@
   "longitude": "経度",
   "location_name": "場所名",
   "set_location": "場所を設定する",
-  "enter_location_name": "場所名を入力してください",
+  "enter_location_name": "場所名を入力",
   "enable_logs": "有効にする",
   "download_logs": "ログファイルをダウンロードする",
   "empty_log": "ログファイルはまだ利用できません",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "ダッシュボードの壁紙",
   "card_color": "カードの色",
   "card_opacity": "カードの不透明度",
-  "card_blur": "カードのぼやけ"
+  "card_blur": "カードのぼやけ",
+  "upnp_dlna_device": "UPnP/DLNAデバイス",
+  "no_modules_selected": "モジュールが選択されていません。"
 }

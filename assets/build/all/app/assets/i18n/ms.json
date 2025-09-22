@@ -134,7 +134,7 @@
   "arrange_widgets": "Susun widget",
   "dashboards": "Papan pemuka",
   "no_dashboards_configured": "Tiada papan pemuka dikonfigurasikan.",
-  "import_groups_as_dashboards": "Import dari pelayan",
+  "import_groups_as_dashboards": "Import daripada pelayan",
   "add_new_dashboard": "Tambah papan pemuka baharu",
   "rename_dashboard": "Namakan semula papan pemuka",
   "delete_dashboard": "Padamkan papan pemuka",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Kertas Dinding Papan Pemuka",
   "card_color": "Warna kad",
   "card_opacity": "Kelegapan kad",
-  "card_blur": "Kad kabur"
+  "card_blur": "Kad kabur",
+  "upnp_dlna_device": "Peranti UPnP/DLNA",
+  "no_modules_selected": "Tiada modul dipilih."
 }

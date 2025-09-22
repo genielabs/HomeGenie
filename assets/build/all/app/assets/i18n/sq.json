@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Sfondi i Panelit të Kontrollit",
   "card_color": "Ngjyra e kartës",
   "card_opacity": "Opaciteti i kartës",
-  "card_blur": "Turbullimi i kartës"
+  "card_blur": "Turbullimi i kartës",
+  "upnp_dlna_device": "Pajisje UPnP/DLNA",
+  "no_modules_selected": "Nuk janë zgjedhur module."
 }

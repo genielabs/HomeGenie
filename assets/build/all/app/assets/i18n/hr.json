@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Pozadina nadzorne ploče",
   "card_color": "Boja kartice",
   "card_opacity": "Neprozirnost kartice",
-  "card_blur": "Zamućenje kartice"
+  "card_blur": "Zamućenje kartice",
+  "upnp_dlna_device": "UPnP/DLNA uređaj",
+  "no_modules_selected": "Nije odabran nijedan modul."
 }

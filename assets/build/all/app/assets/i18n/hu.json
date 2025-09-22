@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Műszerfal háttérkép",
   "card_color": "Kártya színe",
   "card_opacity": "Kártya átlátszósága",
-  "card_blur": "Kártya elmosása"
+  "card_blur": "Kártya elmosása",
+  "upnp_dlna_device": "UPnP/DLNA eszköz",
+  "no_modules_selected": "Nincsenek kiválasztva modulok."
 }

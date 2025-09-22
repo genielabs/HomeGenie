@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Aginte-paneleko horma-papera",
   "card_color": "Txartelaren kolorea",
   "card_opacity": "Txartelaren opakutasuna",
-  "card_blur": "Txartelaren lausotzea"
+  "card_blur": "Txartelaren lausotzea",
+  "upnp_dlna_device": "UPnP/DLNA gailua",
+  "no_modules_selected": "Ez da modulurik hautatu."
 }

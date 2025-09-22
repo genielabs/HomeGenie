@@ -180,7 +180,7 @@
   "new_program": "Novi program",
   "disable_program": "Onemogući",
   "configure_program": "Konfiguriraj",
-  "custom_widgets": "Prilagođeni widgeti",
+  "custom_widgets": "Prilagođeni vidžeti",
   "widgets": "Vidžeti",
   "import_widget": "Uvoz vidžeta",
   "add_new_widget": "Dodaj novi vidžet",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Pozadina kontrolne ploče",
   "card_color": "Boja kartice",
   "card_opacity": "Neprozirnost kartice",
-  "card_blur": "Zamućenje kartice"
+  "card_blur": "Zamućenje kartice",
+  "upnp_dlna_device": "UPnP/DLNA uređaj",
+  "no_modules_selected": "Nije odabran nijedan modul."
 }

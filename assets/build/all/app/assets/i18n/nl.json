@@ -279,7 +279,7 @@
   "backup_restore": "Back-up herstellen",
   "reset_factory_prompt": "Fabrieksinstellingen herstellen? Huidige gegevens en configuratie gaan verloren.",
   "restoring_factory": "Fabrieksinstellingen herstellen...",
-  "factory_reset_completed": "Fabrieksinstellingen herstellen voltooid.",
+  "factory_reset_completed": "Fabrieksinstellingen herstellen is voltooid.",
   "requires": "Vereist",
   "installed": "Geïnstalleerd",
   "optional": "Optioneel",
@@ -309,7 +309,7 @@
   "http_address": "HTTP-adres",
   "frames_per_seconds": "Frames per seconde",
   "widget_size": "Widgetgrootte",
-  "live_streaming": "Livestream",
+  "live_streaming": "Livestreaming",
   "video_file": "Videobestand",
   "image_refresh": "Afbeeldingsfeed",
   "large": "Groot",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Dashboardachtergrond",
   "card_color": "Kaartkleur",
   "card_opacity": "Kaartdekking",
-  "card_blur": "Kaart wazig"
+  "card_blur": "Kaart wazig",
+  "upnp_dlna_device": "UPnP/DLNA-apparaat",
+  "no_modules_selected": "Er zijn geen modules geselecteerd."
 }

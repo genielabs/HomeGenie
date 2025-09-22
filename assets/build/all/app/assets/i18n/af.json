@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Dashboard-agtergrond",
   "card_color": "Kaartkleur",
   "card_opacity": "Kaart ondeursigtigheid",
-  "card_blur": "Kaartvervaag"
+  "card_blur": "Kaartvervaag",
+  "upnp_dlna_device": "UPnP/DLNA-toestel",
+  "no_modules_selected": "Geen modules gekies nie."
 }

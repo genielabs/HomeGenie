@@ -53,7 +53,7 @@
   "modules": "Moduulit",
   "bound_module": "Aseta sidottu moduuli",
   "statistics": "Tilastot",
-  "options": "Vaihtoehdot",
+  "options": "Asetukset",
   "programs": "Ohjelmat",
   "scenes": "Kohtaukset",
   "applications": "Sovellukset",
@@ -206,7 +206,7 @@
   "select_programs_to_restore": "Valitse varmuuskopiosta palautettavat ohjelmat",
   "select_all": "Valitse kaikki",
   "preparing_to_install": "Valmistellaan asennusta...",
-  "install_process_completing": "Pysykää kuulolla! Melkein perillä!",
+  "install_process_completing": "Pysykää kuulolla! Olemme melkein perillä!",
   "restoring_from_backup": "Palautetaan varmuuskopiosta...",
   "browse": "Selaa",
   "play_on": "Pelaa",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Kojelaudan taustakuva",
   "card_color": "Kortin väri",
   "card_opacity": "Kortin läpinäkyvyys",
-  "card_blur": "Kortin sumennus"
+  "card_blur": "Kortin sumennus",
+  "upnp_dlna_device": "UPnP/DLNA-laite",
+  "no_modules_selected": "Ei valittuja moduuleja."
 }

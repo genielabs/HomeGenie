@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Fondo de pantalla del tablero",
   "card_color": "Color de la tarjeta",
   "card_opacity": "Opacidad de la tarjeta",
-  "card_blur": "Desenfoque de tarjeta"
+  "card_blur": "Desenfoque de tarjeta",
+  "upnp_dlna_device": "Dispositivo UPnP/DLNA",
+  "no_modules_selected": "No hay módulos seleccionados"
 }

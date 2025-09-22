@@ -212,7 +212,7 @@
   "play_on": "Redați mai departe",
   "root_folder": "Folderul rădăcină",
   "this_device": "Acest dispozitiv",
-  "no_files_found": "Nu s-au găsit fișiere",
+  "no_files_found": "Nu au fost găsite fișiere",
   "model": "Model",
   "added_module": "Adăugat un modul nou: {{name}} .",
   "operation_successful": "Operațiune reușită",
@@ -298,7 +298,7 @@
   "section_label": "Etichetă secțiune",
   "thermostat": "Termostat",
   "alarm_system": "Sistem de alarmă",
-  "weather_data": "Date meteo",
+  "weather_data": "Date meteorologice",
   "energy_monitor": "Monitor de energie",
   "video_source": "Sursă video",
   "custom_widget": "Widget personalizat",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Tapet de bord",
   "card_color": "Culoarea cardului",
   "card_opacity": "Opacitatea cardului",
-  "card_blur": "Estomparea cardului"
+  "card_blur": "Estomparea cardului",
+  "upnp_dlna_device": "Dispozitiv UPnP/DLNA",
+  "no_modules_selected": "Niciun modul selectat."
 }

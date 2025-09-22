@@ -63,7 +63,7 @@
   "start": "Initium",
   "stop": "Siste",
   "schedule": "Ordo",
-  "scheduling_preview_day": "Diem alium praevide",
+  "scheduling_preview_day": "Praevisum diei alium",
   "scheduling_no_occurrences": "Nullae eventus die electo.",
   "scheduling_events": "Eventa ordinata",
   "scheduling_others": "Alia eventa",
@@ -118,7 +118,7 @@
   "language": "Lingua",
   "change_language": "Mutare linguam",
   "autodetect": "Autodetectio",
-  "active_client_configuration": "Configuratio clientis activae",
+  "active_client_configuration": "Configuratio clientis activi",
   "regional_settings": "Configurationes regionales",
   "regional_settings_info": "Loci configurationes a systemate ad tempora solaria computanda adhibebuntur.",
   "location": "Locus",
@@ -141,7 +141,7 @@
   "delete_dashboard_confirm": "\" {{name}} \" tabulam instrumentorum perpetuo delere vis?",
   "empty_dashboard": "Tabula instrumentorum vacua.",
   "dashboard_name_already_exists": "Tabula instrumentorum hoc nomine iam exstat.",
-  "only_letters_numbers_spaces_allowed": "Litterae, numeri et spatia tantum permittuntur.",
+  "only_letters_numbers_spaces_allowed": "Litterae, numeri et spatia tantum permissa sunt.",
   "enter_at_least_2_characters": "Saltem duos characteres inscribe.",
   "add_widget": "Adde instrumentum",
   "widget_added_message": "{{count}} instrumentorum ad \" {{name}} \" additum est.",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Tabula Instrumentorum",
   "card_color": "Color chartae",
   "card_opacity": "Opacitas chartae",
-  "card_blur": "Imbrusio chartae"
+  "card_blur": "Improvisitas chartae",
+  "upnp_dlna_device": "Instrumentum UPnP/DLNA",
+  "no_modules_selected": "Nulla moduli selecta sunt."
 }

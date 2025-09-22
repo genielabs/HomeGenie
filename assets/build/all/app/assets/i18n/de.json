@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Dashboard-Hintergrundbild",
   "card_color": "Kartenfarbe",
   "card_opacity": "Kartenopazität",
-  "card_blur": "Kartenunschärfe"
+  "card_blur": "Kartenunschärfe",
+  "upnp_dlna_device": "UPnP/DLNA-Gerät",
+  "no_modules_selected": "Keine Module ausgewählt."
 }

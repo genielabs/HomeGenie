@@ -203,7 +203,7 @@
   "restore_original": "Restaura l'original",
   "upgrade": "Actualització",
   "installing_packages": "Instal·lació de paquets",
-  "select_programs_to_restore": "Seleccioneu els programes per restaurar des de la còpia de seguretat",
+  "select_programs_to_restore": "Selecciona els programes per restaurar des de la còpia de seguretat",
   "select_all": "Selecciona-ho tot",
   "preparing_to_install": "Preparant la instal·lació...",
   "install_process_completing": "Agafeu-vos fort! Ja gairebé hi som!",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Fons de pantalla del tauler de control",
   "card_color": "Color de la targeta",
   "card_opacity": "Opacitat de la targeta",
-  "card_blur": "Desenfocament de la targeta"
+  "card_blur": "Desenfocament de la targeta",
+  "upnp_dlna_device": "Dispositiu UPnP/DLNA",
+  "no_modules_selected": "No s'ha seleccionat cap mòdul."
 }

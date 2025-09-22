@@ -255,7 +255,7 @@
   "away": "ඉවතට",
   "control_chat": "කතාබස් පාලනය කරන්න",
   "enter_commands": "විධාන ඇතුළත් කරන්න",
-  "command_not_understood": "විධානය තේරුනේ නැහැ.",
+  "command_not_understood": "විධානය තේරුණේ නැත.",
   "latitude": "අක්ෂාංශ",
   "longitude": "දේශාංශ",
   "location_name": "ස්ථානයේ නම",
@@ -307,7 +307,7 @@
   "video_source_description": "වීඩියෝ මූලාශ්‍ර වර්ගය, ලිපිනය, FPS සහ විජට් ප්‍රමාණය සකසන්න.",
   "source_type": "වීඩියෝ මූලාශ්‍ර වර්ගය",
   "http_address": "HTTP ලිපිනය",
-  "frames_per_seconds": "තත්පරයට රාමු ගණන",
+  "frames_per_seconds": "තත්පරයට රාමු",
   "widget_size": "විජට් ප්‍රමාණය",
   "live_streaming": "සජීවී විකාශය",
   "video_file": "වීඩියෝ ගොනුව",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "උපකරණ පුවරු බිතුපත",
   "card_color": "කාඩ් පතේ වර්ණය",
   "card_opacity": "කාඩ් පාරාන්ධතාව",
-  "card_blur": "කාඩ් බොඳ කිරීම"
+  "card_blur": "කාඩ් බොඳ කිරීම",
+  "upnp_dlna_device": "UPnP/DLNA උපාංගය",
+  "no_modules_selected": "මොඩියුල තෝරාගෙන නොමැත."
 }

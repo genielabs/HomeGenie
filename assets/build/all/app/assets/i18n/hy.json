@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Պաստառի վահանակ",
   "card_color": "Քարտի գույնը",
   "card_opacity": "Քարտի անթափանցիկությունը",
-  "card_blur": "Քարտի մշուշոտում"
+  "card_blur": "Քարտի մշուշոտում",
+  "upnp_dlna_device": "UPnP/DLNA սարք",
+  "no_modules_selected": "Մոդուլներ չեն ընտրվել։"
 }

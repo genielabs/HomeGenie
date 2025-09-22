@@ -138,7 +138,7 @@
   "add_new_dashboard": "Legg til nytt dashbord",
   "rename_dashboard": "Gi nytt navn til dashbordet",
   "delete_dashboard": "Slett dashbordet",
-  "delete_dashboard_confirm": "Slette « {{name}} »-oversikten permanent?",
+  "delete_dashboard_confirm": "Slette dashbordet « {{name}} » permanent?",
   "empty_dashboard": "Tomt dashbord.",
   "dashboard_name_already_exists": "Et dashbord med dette navnet finnes allerede.",
   "only_letters_numbers_spaces_allowed": "Kun bokstaver, tall og mellomrom er tillatt.",
@@ -270,7 +270,7 @@
   "username": "Brukernavn",
   "set_new_password": "Angi nytt passord",
   "password_length_note": "Passordet må være minst 5 tegn langt",
-  "restart_now": "Start tjenesten på nytt nå?",
+  "restart_now": "Vil du starte tjenesten på nytt nå?",
   "service_restart": "Omstart av tjenesten",
   "service_stopping": "Tjenesten stopper ...",
   "service_restart_notice": "Bare noen få øyeblikk, tjenesten starter opp igjen ...",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Bakgrunnsbilde på dashbordet",
   "card_color": "Kortfarge",
   "card_opacity": "Kortets opasitet",
-  "card_blur": "Kort uskarpt"
+  "card_blur": "Kort uskarpt",
+  "upnp_dlna_device": "UPnP/DLNA-enhet",
+  "no_modules_selected": "Ingen moduler valgt."
 }

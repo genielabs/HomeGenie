@@ -76,7 +76,7 @@
   "sunset": "सूर्यास्त",
   "combine": "मिलाना",
   "compare": "तुलना करना",
-  "graph_mode": "ग्राफ़ मोड",
+  "graph_mode": "ग्राफ मोड",
   "data_filter": "डेटा फ़िल्टर",
   "data_filter_none": "(कोई नहीं)",
   "field": "मैदान",
@@ -92,7 +92,7 @@
   "connected": "जुड़े हुए",
   "disconnected": "डिस्कनेक्ट किया गया",
   "saving_settings": "सेटिंग्स सहेजना",
-  "operations_in_progress": "परिचालन प्रगति पर है",
+  "operations_in_progress": "संचालन प्रगति पर है",
   "connection_error": "संपर्क त्रुटि",
   "no_video_signal": "कोई वीडियो सिग्नल नहीं",
   "error_loading_config": "कॉन्फ़िगरेशन लोड करते समय त्रुटि",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "डैशबोर्ड वॉलपेपर",
   "card_color": "कार्ड का रंग",
   "card_opacity": "कार्ड की अपारदर्शिता",
-  "card_blur": "कार्ड धुंधला"
+  "card_blur": "कार्ड धुंधला",
+  "upnp_dlna_device": "UPnP/DLNA डिवाइस",
+  "no_modules_selected": "कोई मॉड्यूल चयनित नहीं."
 }

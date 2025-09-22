@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "დაფის ფონი",
   "card_color": "ბარათის ფერი",
   "card_opacity": "ბარათის გამჭვირვალობა",
-  "card_blur": "ბარათის დაბინდვა"
+  "card_blur": "ბარათის დაბინდვა",
+  "upnp_dlna_device": "UPnP/DLNA მოწყობილობა",
+  "no_modules_selected": "მოდულები არ არის არჩეული."
 }

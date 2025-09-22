@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Тапет на контролната табла",
   "card_color": "Боја на картичката",
   "card_opacity": "Непроѕирност на картичката",
-  "card_blur": "Замаглување на картичката"
+  "card_blur": "Замаглување на картичката",
+  "upnp_dlna_device": "UPnP/DLNA уред",
+  "no_modules_selected": "Не се избрани модули."
 }

@@ -269,7 +269,7 @@
   "password_protected_access": "Приступ заштићен лозинком",
   "username": "Корисничко име",
   "set_new_password": "Постави нову лозинку",
-  "password_length_note": "Лозинка мора бити дугачка најмање 5 знакова",
+  "password_length_note": "Лозинка мора бити дугачка најмање 5 карактера",
   "restart_now": "Да ли сада поново покренути услугу?",
   "service_restart": "Поновно покретање услуге",
   "service_stopping": "Услуга се зауставља...",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Позадина контролне табле",
   "card_color": "Боја картице",
   "card_opacity": "Непрозирност картице",
-  "card_blur": "Замућење картице"
+  "card_blur": "Замућење картице",
+  "upnp_dlna_device": "UPnP/DLNA уређај",
+  "no_modules_selected": "Није изабран ниједан модул."
 }

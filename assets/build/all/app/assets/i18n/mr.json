@@ -110,7 +110,7 @@
   "illuminance": "प्रकाशमानता",
   "pressure": "दबाव",
   "speed": "गती",
-  "voltage": "व्होल्टेज",
+  "voltage": "विद्युतदाब",
   "theme": "थीम",
   "units": "युनिट्स",
   "command_code": "कमांड कोड",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "डॅशबोर्ड वॉलपेपर",
   "card_color": "कार्डचा रंग",
   "card_opacity": "कार्ड अपारदर्शकता",
-  "card_blur": "कार्ड ब्लर"
+  "card_blur": "कार्ड ब्लर",
+  "upnp_dlna_device": "UPnP/DLNA डिव्हाइस",
+  "no_modules_selected": "कोणतेही मॉड्यूल निवडलेले नाहीत."
 }

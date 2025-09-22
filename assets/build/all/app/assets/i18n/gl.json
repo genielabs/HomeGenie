@@ -176,7 +176,7 @@
   "voice_control": "Control por voz",
   "clone_program": "Programa clonado",
   "import_program": "Importar programa",
-  "add_new_program": "Engadir novo programa",
+  "add_new_program": "Engadir un novo programa",
   "new_program": "Novo programa",
   "disable_program": "Desactivar",
   "configure_program": "Configurar",
@@ -284,7 +284,7 @@
   "installed": "Instalado",
   "optional": "Opcional",
   "program_disabled_note": "Programa desactivado. Pódese volver activar desde a lista de programas.",
-  "no_release_info_note": "Non hai información sobre a versión dispoñible (executándose no ambiente de desenvolvemento?)",
+  "no_release_info_note": "Non hai información sobre a versión dispoñible (executándose nun ambiente de desenvolvemento?)",
   "local_version_modified": "Modificouse a versión local.",
   "update_to_version": "Actualización dispoñible para a versión ' {{version}} '",
   "switch": "Interruptor",
@@ -319,5 +319,7 @@
   "dashboard_wallpaper": "Fondo de pantalla do panel de control",
   "card_color": "Cor da tarxeta",
   "card_opacity": "Opacidade da tarxeta",
-  "card_blur": "Desenfoque da tarxeta"
+  "card_blur": "Desenfoque da tarxeta",
+  "upnp_dlna_device": "Dispositivo UPnP/DLNA",
+  "no_modules_selected": "Non se seleccionaron módulos."
 }
