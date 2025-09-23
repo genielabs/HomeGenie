@@ -1,58 +1,72 @@
-# Contributing
+# Contributing to HomeGenie
 
-## How to contribute to HomeGenie
+First off, thank you for considering contributing to HomeGenie! We welcome any help, from reporting a bug to submitting a new feature. Every contribution is valuable and helps make HomeGenie better for everyone.
 
-#### **Did you find a bug?**
+This document provides a set of guidelines to help you contribute to the project in a way that is efficient and effective for everyone involved.
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/genielabs/HomeGenie/issues).
+## Code of Conduct
 
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/genielabs/HomeGenie/issues/new).
-Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample**
-or an **executable test case** demonstrating the expected behavior that is not occurring.
+This project and everyone participating in it is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior.
 
-#### **Did you write a patch that fixes a bug?**
+*(Nota: Dovresti creare un file `CODE_OF_CONDUCT.md`. Puoi generarne uno standard da un template come il [Contributor Covenant](https://www.contributor-covenant.org/)).*
 
-* Open a new GitHub pull request with the patch.
+## How Can I Contribute?
 
-* Ensure the PR description clearly describes the problem and solution.
-Include the relevant issue number if applicable.
+There are many ways to contribute to HomeGenie, and not all of them involve writing code.
 
-#### **Did you fix whitespace, format code, or make a purely cosmetic patch?**
+### 🐛 Reporting Bugs
 
-Changes that are cosmetic in nature and do not add anything substantial to the stability, functionality,
-or testability of HomeGenie will generally not be accepted unless discussed via the [issue tracker](https://github.com/genielabs/HomeGenie/issues).
+If you think you've found a bug, please ensure it hasn't already been reported by searching the existing [Issues](https://github.com/genielabs/HomeGenie/issues).
 
-#### **Do you intend to add a new feature or change an existing one?**
+If you can't find an existing issue, please [**open a new one**](https://github.com/genielabs/HomeGenie/issues/new/choose). When reporting a bug, please include:
+-   A clear and descriptive title.
+-   A detailed description of the problem, including what you expected to happen.
+-   Steps to reproduce the bug.
+-   Information about your environment (e.g., OS, HomeGenie version, relevant hardware).
+-   Screenshots or log file excerpts if applicable.
 
-File a new *[enhancement issue](https://github.com/genielabs/HomeGenie/issues/new?labels=enhancement)*.
+### ✨ Suggesting Enhancements or New Features
 
-#### **Do you have questions about the source code?**
+We love new ideas! If you have a suggestion for a new feature or an enhancement to an existing one, please start by [**opening an "enhancement" issue**](https://github.com/genielabs/HomeGenie/issues/new?labels=enhancement). This allows us to discuss the idea before any code is written.
 
-File a new *[question issue](https://github.com/genielabs/HomeGenie/issues/new?labels=question)*.
+Please provide as much detail as possible, including the problem you're trying to solve and why you think the feature would be valuable.
 
-#### **Do you want to contribute to the HomeGenie documentation?**
+### 📝 Contributing to the Documentation
 
-Source code of the documentation site is available from  **[homegenie.it](https://github.com/genielabs/homegenie.it)** repository.
+Good documentation is crucial. If you find a typo, want to improve a guide, or write a new one, you can contribute to our documentation repository:
+-   [**homegenie.it Website Repository**](https://github.com/genielabs/homegenie.it)
 
-#### **Coding styles and conventions**
+### 💻 Submitting Code Changes (Pull Requests)
 
-This project follows *Microsoft .Net* [coding conventions](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) and [naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions).
+Ready to submit a code contribution? That's fantastic!
 
-##### Releasing a new version
+1.  **Fork the repository** and create your branch from `master`.
+2.  **Make your changes.** Please ensure your code adheres to the project's coding style.
+3.  **Submit a Pull Request (PR)** to the `master` branch.
+4.  In your PR description, clearly explain the problem you are solving and the changes you have made. Reference any relevant issues (e.g., `Fixes #123`).
 
-To release a new version push a new tag using the format:
+**A note on cosmetic changes:** Pull requests that only fix whitespace, reformat code, or make other purely cosmetic changes will generally not be accepted unless they are part of a larger, functional change.
 
-`v<major>.<minor>.<patch>-{rc|beta|alpha}.<build>`
+## 🎨 Coding Style and Conventions
 
-example: `v1.4.0-beta.25`
+HomeGenie follows the official **Microsoft .NET Coding Conventions** and **Naming Guidelines**.
+-   [C# Coding Conventions](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/coding-conventions)
+-   [Naming Guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions)
 
-When a new tag is submitted the CI system will build the project, run tests and package assets.
-Assets will be also uploaded to the new release on GitHub repository.
+We use an `.editorconfig` file in the repository to help enforce these styles automatically. Please ensure your editor is configured to use it.
 
+## 🚀 Releasing a New Version (for Maintainers)
 
-#### Join HomeGenie team!
+To create a new release, a new tag must be pushed to the repository using the Semantic Versioning format:
 
-HomeGenie is a volunteer effort. We encourage you to pitch in and join the team!
+`v<major>.<minor>.<patch>[-<prerelease>.<build>]`
 
-Thanks! :heart:
+Examples:
+-   Stable Release: `v2.0.0`
+-   Pre-release: `v2.0.0-rc.1`
 
+When a new tag is pushed, the CI/CD workflow will automatically build the project, run tests, package the assets for all target platforms, and publish a new release on GitHub.
+
+---
+
+Thank you for your interest in making HomeGenie better! ❤️
