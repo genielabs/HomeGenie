@@ -173,10 +173,11 @@ This project is officially developed using **JetBrains Rider**.
 </p>
 
 ### Related Projects
--   [homegenie-packages](https://github.com/genielabs/homegenie-packages)
--   [mig-service-dotnet](https://github.com/genielabs/mig-service-dotnet)
--   [yot-user-interface](https://github.com/genielabs/yot)
--   ...and many more in the [genielabs organization](https://github.com/genielabs).
+
+- https://github.com/genielabs/mig-service-dotnet
+- https://github.com/genielabs/homegenie-mini
+- https://play.google.com/store/apps/details?id=com.glabs.homegenieplus
+- https://github.com/zuixjs/zuix
 
 ---
 
