@@ -65,7 +65,8 @@ To stop the application, press `CTRL + C`.
 
 ### Running as a System Service
 
-HomeGenie is designed to run as a background service.
+HomeGenie can be run directly from a terminal for easy setup and testing,
+or installed as a system service for continuous, unattended operation.
 
 #### Linux (systemd)
 
