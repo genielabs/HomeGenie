@@ -5,7 +5,7 @@
 <p align="center">
   <strong>The Programmable Automation Intelligence</strong>
   <br />
-  <a href="https://homegenie.it"><strong>homegenie.it</strong></a>
+  <a href="https://homegenie.it"><strong>www.homegenie.it</strong></a>
 </p>
 
 <p align="center">
@@ -123,6 +123,7 @@ You can find the exact address and port used by checking the `serviceaddress.txt
 To grant HomeGenie access to hardware like serial ports, USB devices, and GPIO, you may need to run additional commands.
 
 #### Audio & Voice Synthesis
+
 ```shell
 # For audio playback
 sudo apt-get install alsa-utils lame
@@ -131,6 +132,7 @@ sudo apt-get install libttspico-utils
 ```
 
 #### Serial Port & GPIO Access
+
 Add the `homegenie` user to the `dialout` and `gpio` groups:
 ```shell
 sudo usermod -a -G dialout homegenie
@@ -138,6 +140,7 @@ sudo usermod -a -G gpio homegenie
 ```
 
 #### X10 (CM15/CM19) USB Controller
+
 1.  Install the required library:
     ```shell
     sudo apt-get install libusb-1.0-0
@@ -156,21 +159,16 @@ sudo usermod -a -G gpio homegenie
 ## 💻 Development
 
 ### Contributing
+
 Contributions are welcome! Please read the [**CONTRIBUTING.md**](https://github.com/genielabs/HomeGenie/blob/master/CONTRIBUTING.md) file for guidelines.
 
 ### Repository Structure
+
 The main solution file is `HomeGenie.sln` located in the repository root.
 -   `src/HomeGenie`: The main application project, multi-targeted for `.NET Framework 4.7.2` and modern `.NET (6.0+)`.
 -   `src/HomeGenie.Tests`: Unit and integration tests.
 -   `src/SupportLibraries`: Utility libraries used by HomeGenie.
 -   `assets/`: Contains build assets, UI source code, and deployment scripts.
-
-### Development Environment
-This project is officially developed using **JetBrains Rider**.
-
-<p>
-  <a href="https://www.jetbrains.com/rider/"><img src="https://raw.githubusercontent.com/genielabs/HomeGenie/master/assets/github/rider-logo.svg" alt="JetBrains Rider Logo" width="100"></a>
-</p>
 
 ### Related Projects
 
@@ -182,4 +180,5 @@ This project is officially developed using **JetBrains Rider**.
 ---
 
 ### Disclaimer
+
 This software is provided "as is", without warranty of any kind. See the [LICENSE](LICENSE) file for more details.

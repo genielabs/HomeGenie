@@ -1,23 +1,24 @@
 ﻿/*
-    This file is part of HomeGenie Project source code.
+   Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
-    HomeGenie is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    HomeGenie is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 */
+
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: https://homegenie.it
  */
+
 using HomeGenie.Automation;
 using MIG;
 using System;
@@ -399,12 +400,12 @@ namespace HomeGenie.Service.Handlers
                 case "Programs.Add":
                     try
                     {
-                        // This works with HG > 1.4.x 
+                        // This works with HG > 1.4.x
                         newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
                     }
                     catch
                     {
-                        // TODO: deprecate this 
+                        // TODO: deprecate this
                         // this is for backward compatibility with HG v1.3.x
                         newProgram = new ProgramBlock() {
                             Group = migCommand.GetOption(0),
@@ -506,7 +507,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.modules_RefreshVirtualModules();
                     //homegenie.modules_Sort();
                     break;
-                
+
                 case "Programs.Arduino.FileLoad":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
                     sketchFile = migCommand.GetOption(1);
@@ -661,7 +662,7 @@ namespace HomeGenie.Service.Handlers
                                     {
                                         key = o.Name,
                                         value = o.Value,
-                                        timestamp = o.UpdateTime.ToString("o") 
+                                        timestamp = o.UpdateTime.ToString("o")
                                     }
                                 });
                             }
@@ -749,7 +750,7 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock program = homegenie.ProgramManager.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
-                bool wasEnabled = program.IsEnabled; 
+                bool wasEnabled = program.IsEnabled;
                 program.IsEnabled = false;
                 program.Engine.StopProgram();
                 program.IsEnabled = wasEnabled;

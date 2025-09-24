@@ -1,16 +1,26 @@
-LICENCE
+==================================================================
+  HomeGenie - The Programmable Automation Intelligence
+==================================================================
 
-Please read the LICENSE.TXT file.
+Thank you for using HomeGenie.
 
+LICENSE AND ATTRIBUTION
+-----------------------
+This software is licensed under the Apache License, Version 2.0.
+A copy of the license is included in this distribution in the file
+named `LICENSE.TXT`.
 
-DISCLAIMER
-==========
+This product includes third-party components. Required notices and
+attribution for these components can be found in the `NOTICE.TXT`
+file.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Please note that the software is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied, as detailed in the license.
 
+RESOURCES AND DOCUMENTATION
+---------------------------
+Project Website:    https://homegenie.it/
+Source Code:        https://github.com/genielabs/HomeGenie
 
-HOMEPAGE AND DOCUMENTATION
-==========================
-
-https://genielabs.github.io/HomeGenie
-https://www.homegenie.it
+Copyright (c) 2012-2025 G-Labs

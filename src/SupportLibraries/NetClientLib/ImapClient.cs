@@ -1,18 +1,17 @@
 ﻿/*
-    This file is part of HomeGenie Project source code.
+   Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
-    HomeGenie is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    HomeGenie is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 */
 
 /*
@@ -42,150 +41,150 @@ namespace NetClientLib
         protected int _prefix = 1;
 
         public ImapClient(string host, int port, bool ssl = false)
-        {    
+        {
             try
-            {    
-                _tcpClient = new System.Net.Sockets.TcpClient(host, port);    
+            {
+                _tcpClient = new System.Net.Sockets.TcpClient(host, port);
 
                 if (ssl)
-                {    
-                    var stream = new SslStream(_tcpClient.GetStream());    
-                    stream.AuthenticateAsClient(host);    
+                {
+                    var stream = new SslStream(_tcpClient.GetStream());
+                    stream.AuthenticateAsClient(host);
 
-                    _reader = new StreamReader(stream);    
-                    _writer = new StreamWriter(stream);    
+                    _reader = new StreamReader(stream);
+                    _writer = new StreamWriter(stream);
                 }
                 else
-                {    
-                    var stream = _tcpClient.GetStream();    
-                    _reader = new StreamReader(stream);    
-                    _writer = new StreamWriter(stream);    
-                }    
-                string greeting = _reader.ReadLine();    
+                {
+                    var stream = _tcpClient.GetStream();
+                    _reader = new StreamReader(stream);
+                    _writer = new StreamWriter(stream);
+                }
+                string greeting = _reader.ReadLine();
             }
             catch (Exception e)
-            {    
-                Console.WriteLine(e.Message);    
-            }    
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void Authenticate(string user, string pass)
-        {    
-            this.SendCommand(string.Format("LOGIN {0} {1}", user, pass));    
-            string response = this.GetResponse();    
+        {
+            this.SendCommand(string.Format("LOGIN {0} {1}", user, pass));
+            string response = this.GetResponse();
         }
 
         public List<string> GetFolders()
-        {    
-            this.SendCommand("LIST \"\" *");    
-            string response = this.GetResponse();    
+        {
+            this.SendCommand("LIST \"\" *");
+            string response = this.GetResponse();
 
-            string[] lines = response.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);    
-            List<string> folders = new List<string>();    
+            string[] lines = response.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            List<string> folders = new List<string>();
 
             foreach (string line in lines)
-            {    
-                MatchCollection m = Regex.Matches(line, "\\\"(.*?)\\\"");    
+            {
+                MatchCollection m = Regex.Matches(line, "\\\"(.*?)\\\"");
 
                 if (m.Count > 1)
-                {    
-                    string folderName = m[m.Count - 1].ToString().Trim(new char[] { '"' });  
-                    folders.Add(folderName);    
-                }    
-            }    
+                {
+                    string folderName = m[m.Count - 1].ToString().Trim(new char[] { '"' });
+                    folders.Add(folderName);
+                }
+            }
 
-            return folders;    
+            return folders;
         }
 
         public void SelectFolder(string folderName)
-        {    
-            this._selectedFolder = folderName;    
-            this.SendCommand("SELECT " + folderName);    
-            string response = this.GetResponse();    
+        {
+            this._selectedFolder = folderName;
+            this.SendCommand("SELECT " + folderName);
+            string response = this.GetResponse();
         }
 
         public int GetMessageCount()
-        {    
-            this.SendCommand("STATUS " + this._selectedFolder + " (messages)");    
-            string response = this.GetResponse();    
-            Match m = Regex.Match(response, "[0-9]*[0-9]");    
-            return Convert.ToInt32(m.ToString());    
+        {
+            this.SendCommand("STATUS " + this._selectedFolder + " (messages)");
+            string response = this.GetResponse();
+            Match m = Regex.Match(response, "[0-9]*[0-9]");
+            return Convert.ToInt32(m.ToString());
         }
 
         public int GetUnseenMessageCount()
-        {    
-            this.SendCommand("STATUS " + this._selectedFolder + " (unseen)");    
-            string response = this.GetResponse();    
-            Match m = Regex.Match(response, "[0-9]*[0-9]");    
-            return Convert.ToInt32(m.ToString());    
+        {
+            this.SendCommand("STATUS " + this._selectedFolder + " (unseen)");
+            string response = this.GetResponse();
+            Match m = Regex.Match(response, "[0-9]*[0-9]");
+            return Convert.ToInt32(m.ToString());
         }
 
         public string GetMessage(string uid, string section)
-        {    
-            this.SendCommand("UID FETCH " + uid + " BODY[" + section + "]");    
-            return this._GetMessage();    
+        {
+            this.SendCommand("UID FETCH " + uid + " BODY[" + section + "]");
+            return this._GetMessage();
         }
 
         public string GetMessage(int index, string section)
-        {    
-            this.SendCommand("FETCH " + index + " BODY[" + section + "]");    
-            return this._GetMessage();    
+        {
+            this.SendCommand("FETCH " + index + " BODY[" + section + "]");
+            return this._GetMessage();
         }
 
         protected string _GetMessage()
-        {    
-            string line = _reader.ReadLine();    
-            MatchCollection m = Regex.Matches(line, "\\{(.*?)\\}");    
+        {
+            string line = _reader.ReadLine();
+            MatchCollection m = Regex.Matches(line, "\\{(.*?)\\}");
 
             if (m.Count > 0)
-            {    
-                int length = Convert.ToInt32(m[0].ToString().Trim(new char[] { '{', '}' }));    
+            {
+                int length = Convert.ToInt32(m[0].ToString().Trim(new char[] { '{', '}' }));
 
-                char[] buffer = new char[length];    
-                int read = (length < 128) ? length : 128;    
-                int remaining = length;    
-                int offset = 0;    
+                char[] buffer = new char[length];
+                int read = (length < 128) ? length : 128;
+                int remaining = length;
+                int offset = 0;
                 while (true)
-                {    
-                    read = _reader.Read(buffer, offset, read);    
-                    remaining -= read;    
-                    offset += read;    
-                    read = (remaining >= 128) ? 128 : remaining;    
+                {
+                    read = _reader.Read(buffer, offset, read);
+                    remaining -= read;
+                    offset += read;
+                    read = (remaining >= 128) ? 128 : remaining;
 
                     if (remaining == 0)
-                    {    
-                        break;    
-                    }    
-                }    
-                return new String(buffer);    
-            }    
-            return "";    
+                    {
+                        break;
+                    }
+                }
+                return new String(buffer);
+            }
+            return "";
         }
 
         protected void SendCommand(string cmd)
-        {    
-            _writer.WriteLine("A" + _prefix.ToString() + " " + cmd);    
-            _writer.Flush();    
-            _prefix++;    
+        {
+            _writer.WriteLine("A" + _prefix.ToString() + " " + cmd);
+            _writer.Flush();
+            _prefix++;
         }
 
         protected string GetResponse()
-        {    
-            string response = string.Empty;    
+        {
+            string response = string.Empty;
 
             while (true)
-            {    
-                string line = _reader.ReadLine();    
-                string[] tags = line.Split(new char[] { ' ' });    
-                response += line + Environment.NewLine;    
+            {
+                string line = _reader.ReadLine();
+                string[] tags = line.Split(new char[] { ' ' });
+                response += line + Environment.NewLine;
                 if (tags[0].Substring(0, 1) == "A" && tags[1].Trim() == "OK" || tags[1].Trim() == "BAD" || tags[1].Trim() == "NO")
-                {    
-                    break;    
-                }    
+                {
+                    break;
+                }
 
-            }    
+            }
 
-            return response;    
+            return response;
         }
     }
 

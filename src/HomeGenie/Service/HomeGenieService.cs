@@ -1,18 +1,17 @@
 /*
-    This file is part of HomeGenie Project source code.
+   Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
-    HomeGenie is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    HomeGenie is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 */
 
 /*
@@ -459,7 +458,7 @@ namespace HomeGenie.Service
                     Task.Run(() =>
                     {
                         masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
-                    }); 
+                    });
                 }
                 // check if event routing has been disabled for this module
                 var eventsDisable = Utility.ModuleParameterGet(module, Properties.EventsDisable);
@@ -490,7 +489,7 @@ namespace HomeGenie.Service
         {
             if (args.Request.Context.Source != ContextSource.WebServiceGateway && args.Request.Context.Source != ContextSource.WebSocketGateway)
                 return;
-            
+
             HandleSystemApiRequest(args.Request);
         }
 
@@ -553,7 +552,7 @@ namespace HomeGenie.Service
                         var virtualModule = virtualModules[i];
                         var module = clonedModules
                             .Find(m => m.Domain == virtualModule.Domain && m.Address == virtualModule.Address);
-                        
+
                         if (module != null)
                         {
                             continue;
@@ -568,7 +567,7 @@ namespace HomeGenie.Service
                             virtualModule.ParentId
                         );
                     }
-                    
+
                     foreach (var module in clonedModules)
                     {
                         foreach (var parameter in module.Properties)
@@ -796,7 +795,7 @@ namespace HomeGenie.Service
                     ex.StackTrace
                 );
             }
-            // restore virtual modules list 
+            // restore virtual modules list
             systemModules.ForEach((m) =>
             {
                 var parentId = Utility.ModuleParameterGet(m, Properties.VirtualModuleParentId);
@@ -977,7 +976,7 @@ namespace HomeGenie.Service
                         }
                         return found;
                     });
-                    if (module != null && (program == null || 
+                    if (module != null && (program == null ||
                                            (!program.IsEnabled
                                             && (module.Domain != program.Domain
                                              || module.Address != program.Address.ToString()))))
@@ -1063,7 +1062,7 @@ namespace HomeGenie.Service
                             if (module != null && (program.Type.ToLower() == "visual" || program.Type.ToLower() == "wizard") && !program.IsEnabled)
                             {
                                 // TODO: deprecate "wizard" programs
-                                
+
                                 // only removes program's module if the program kind is "scenario",
                                 // while keep it for other types in order to hold program's configuration
                                 // that is stored as module's parameters
@@ -1317,7 +1316,7 @@ namespace HomeGenie.Service
             var data = "{" + JsonSerializer.Serialize(parameter) + ": " + JsonSerializer.Serialize(value) + "}";
             var command =
                 new MigInterfaceCommand(
-                    $"HomeAutomation.HomeGenie/Config/Modules.ParameterSet/{module.Domain}/{module.Address}"); 
+                    $"HomeAutomation.HomeGenie/Config/Modules.ParameterSet/{module.Domain}/{module.Address}");
             var request = new MigClientRequest(null, command);
             request.RequestData = Encoding.UTF8.GetBytes(data);
             wshConfig.ProcessRequest(request);

@@ -1,18 +1,17 @@
 ﻿/*
-    This file is part of HomeGenie Project source code.
+   Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
-    HomeGenie is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    HomeGenie is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 */
 
 /*
@@ -153,7 +152,7 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.InterIntegratedCircuit",
             "Raspberry.IO.SerialPeripheralInterface",
 #endif
-            "UnitsNet", // used both by Raspberry.IO and Microsoft.IoT 
+            "UnitsNet", // used both by Raspberry.IO and Microsoft.IoT
             "Utility = HomeGenie.Service.Utility"
         };
 
@@ -261,7 +260,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
-                    
+
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
 
                     // Other
@@ -293,7 +292,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NWaves.dll")),
 #if NET6_0_OR_GREATER
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SixLabors.ImageSharp.dll")),
-#endif                    
+#endif
 #if NET8_0_OR_GREATER
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YoloSharp.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.dll")),
@@ -329,7 +328,7 @@ namespace HomeGenie.Automation.Scripting
                     //
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.OpenAI.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "tryAGI.OpenAI.dll")),
-#endif                    
+#endif
                     // IO
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.Annotations.dll")),
@@ -344,7 +343,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UPnP.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MQTTnet.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "OnvifDiscovery.dll")),
-                                        
+
                     // RaspberrySharp / Microsoft IoT Framework
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "System.Device.Gpio.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll")),
@@ -459,7 +458,7 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("UPnP.dll");
 
             compilerParams.ReferencedAssemblies.Add("MQTTnet.dll");
-                    
+
             compilerParams.ReferencedAssemblies.Add("NWaves.dll");
 
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
@@ -497,7 +496,7 @@ namespace HomeGenie.Automation.Scripting
                 SetupCode = scriptSetup
             };
         }
-        
+
         /**
          * Parse custom "using" pre-processor directive to allow including namespaces in HG programs
          */

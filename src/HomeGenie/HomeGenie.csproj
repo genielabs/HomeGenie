@@ -20,7 +20,7 @@
     <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
     <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
     -->
-    <!-- 
+    <!--
       Suppress specific build warnings:
       - SYSLIB0024: 'AppDomain.Unload(AppDomain)' is obsolete
       - NU1701: Allows using old .NET Framework packages (like KNX.net) on modern .NET targets.
@@ -30,7 +30,7 @@
 </PropertyGroup>
 
   <!-- .NET Framework -->
-  
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <PackageReference Include="CronExpressionDescriptor" Version="1.21.2" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <!-- .NET (dotnet) / others -->
-  
+
   <ItemGroup Condition="'$(TargetFramework)' != 'net472'">
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
     <PackageReference Include="CronExpressionDescriptor" Version="2.44.0" />
@@ -171,6 +171,12 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <!-- Copy license files -->
+  <ItemGroup>
+    <Content Include="$(MSBuildProjectDirectory)/../../LICENSE" CopyToOutputDirectory="PreserveNewest" Link="LICENSE.TXT" />
+    <Content Include="$(MSBuildProjectDirectory)/../../NOTICE" CopyToOutputDirectory="PreserveNewest" Link="NOTICE.TXT" />
   </ItemGroup>
 
   <!-- Copy assets to target folder -->
