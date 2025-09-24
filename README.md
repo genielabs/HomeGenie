@@ -42,14 +42,14 @@ You can find the latest release assets on the [**GitHub Releases**](https://gith
 
 Download the `.zip` archive corresponding to your operating system and architecture:
 
-| Platform          | Archive Name                              |
-| ----------------- | ----------------------------------------- |
-| Windows (x64)     | `homegenie_*_win-x64.zip`                 |
-| macOS (x64)       | `homegenie_*_osx-x64.zip`                  |
-| Linux (x64)       | `homegenie_*_linux-x64.zip`                 |
-| Raspberry Pi (32-bit) | `homegenie_*_linux-arm.zip`                 |
-| Raspberry Pi (64-bit) | `homegenie_*_linux-arm64.zip`               |
-| .NET Framework 4.7.2 | `homegenie_*_net472.zip`                  |
+| Platform              | Archive Name                       |
+|-----------------------|------------------------------------|
+| Windows (x64)         | `homegenie_*_win-x64.zip`          |
+| macOS (x64)           | `homegenie_*_osx-x64.zip`          |
+| Linux (x64)           | `homegenie_*_linux-x64.zip`        |
+| Raspberry Pi (32-bit) | `homegenie_*_linux-arm.zip`        |
+| Raspberry Pi (64-bit) | `homegenie_*_linux-arm64.zip`      |
+| .NET Framework 4.7.2  | `homegenie_*_net472.zip`           |
 
 After downloading, unzip the archive. A new `homegenie` folder will be created.
 
@@ -71,8 +71,14 @@ HomeGenie is designed to run as a background service.
 
 1.  (Recommended) Create a dedicated user for the service and move the application files:
     ```shell
-    sudo useradd homegenie
-    sudo mv ./path-to/homegenie /home/homegenie
+    # Create a new system user named 'homegenie' with its home directory
+    sudo useradd -r -m -s /bin/false homegenie
+    
+    # Copy the application files into the new home directory
+    # Assumes you are in the directory where you extracted the zip
+    sudo cp -ar ./homegenie/* /home/homegenie/
+    
+    # Ensure the ownership of all files is correct
     sudo chown -R homegenie:homegenie /home/homegenie
     ```
 
@@ -80,14 +86,17 @@ HomeGenie is designed to run as a background service.
     ```ini
     [Unit]
     Description=HomeGenie Automation Server
-
+    After=network.target
+    
     [Service]
     Type=notify
     User=homegenie
+    Group=homegenie
     WorkingDirectory=/home/homegenie/
     ExecStart=/home/homegenie/HomeGenie
     Restart=on-failure
-
+    RestartSec=15s
+    
     [Install]
     WantedBy=multi-user.target
     ```
@@ -126,9 +135,9 @@ To grant HomeGenie access to hardware like serial ports, USB devices, and GPIO, 
 
 ```shell
 # For audio playback
-sudo apt-get install alsa-utils lame
+sudo apt install alsa-utils lame
 # For embedded text-to-speech
-sudo apt-get install libttspico-utils
+sudo apt install libttspico-utils
 ```
 
 #### Serial Port & GPIO Access
@@ -143,7 +152,7 @@ sudo usermod -a -G gpio homegenie
 
 1.  Install the required library:
     ```shell
-    sudo apt-get install libusb-1.0-0
+    sudo apt install libusb-1.0-0
     ```
 2.  Create a udev rule to grant access. Create the file `/etc/udev/rules.d/98-homegenie.rules` with the following content:
     ```
