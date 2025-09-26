@@ -18,7 +18,7 @@ HomeGenie is a versatile, open-source home automation platform written in .NET. 
 
 With its robust scripting engine and extensive hardware support, HomeGenie offers the freedom to create complex automation scenarios and integrate a vast array of devices, all while ensuring your data and logic remain securely within your own network.
 
-![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/homegenie_dashboard_03.jpg)
+![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/homegenie_dashboard_02.jpg)
 
 ## ✨ Key Features
 
