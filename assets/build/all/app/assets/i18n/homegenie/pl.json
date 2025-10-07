@@ -1,10 +1,10 @@
 {
-  " ": "------------------------------------------",
+  " ": "--------------------------------------------",
   "welcome_to_homegenie": "Witamy w HomeGenie!",
-  "welcome_subtitle": "Programowalna inteligencja automatyki",
+  "welcome_subtitle": "Programowalna inteligencja automatyzacji",
   "not_configured_yet": "System nie jest jeszcze skonfigurowany. Ten kreator konfiguracji pomoże Ci uruchomić system w kilku krokach.",
   "system_config_start_with_base_and_backup": "Przywróć z pliku kopii zapasowej",
-  "system_config_start_with_default_setup": "Domyślne ustawienia",
+  "system_config_start_with_default_setup": "Domyślna konfiguracja",
   "system_config_include_demo": "Dołącz demo z symulowaną aktywnością urządzenia",
   "system_config_additional_features": "Dodatkowe funkcje",
   "system_config_manual_setup": "Konfiguracja ręczna",
@@ -66,21 +66,21 @@
   "cronwizard_dayselect_everyday": "Codziennie",
   "cronwizard_dayselect_selecteddays": "Wybrane dni",
   "cronwizard_dayowselect_selecteddaysow": "Wybrane dni tygodnia",
-  "cronwizard_monthselect_everymonth": "Co miesiąc",
+  "cronwizard_monthselect_everymonth": "Każdego miesiąca",
   "cronwizard_monthselect_selectedmonths": "Wybrane miesiące",
   "cronwizard_schedule_set_exact_time": "Ustaw czas wydarzenia.",
-  "cronwizard_schedule_set_slot_start": "Ustaw początek przedziału czasowego.",
-  "cronwizard_schedule_set_slot_end": "Zaczynając od {{start}} .<span class=\"notranslate\"><br/></span> Ustaw koniec przedziału czasowego.",
+  "cronwizard_schedule_set_slot_start": "Ustaw przedział czasowy rozpoczęcia.",
+  "cronwizard_schedule_set_slot_end": "Rozpoczęcie o {{start}}.<span class=\"notranslate\"><br/></span> Ustaw koniec przedziału czasowego.",
   "cronwizard_bindings_define_types_and_modules": "Zdefiniuj typy i moduły podlegające temu harmonogramowi (opcjonalnie)",
   "cronwizard_bindings_select_types": "Wybierz typy",
-  "cronwizard_action_set_action_to_execute": "Ustaw akcję do wykonania w przypadku wystąpienia tego zdarzenia",
+  "cronwizard_action_set_action_to_execute": "Ustaw akcję do wykonania po wystąpieniu tego zdarzenia",
   "cronwizard_action_preset_actions": "Wstępnie ustawione działania",
   "cronwizard_action_preset_every_occurrence": "Przy każdym wystąpieniu",
   "cronwizard_action_preset_slot_start": "Na początku przedziału czasowego",
   "cronwizard_action_preset_slot_end": "Pod koniec przedziału czasowego",
   "cronwizard_action_custom_script": "Skrypt akcji niestandardowej",
-  "cronwizard_action_no_action": "Brak akcji",
-  "cronwizard_action_schedule_variable_hint": "Użyj <span class=\"notranslate color-primary\">@ {{name}}</span> jako zmiennej w wyrażeniach cron lub użyj <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> w programach automatyzacji, aby odwołać się do tego zdarzenia.",
+  "cronwizard_action_no_action": "Brak działania",
+  "cronwizard_action_schedule_variable_hint": "Użyj <span class=\"notranslate color-primary\">@{{name}}</span> jako zmiennej w wyrażeniach cron lub użyj <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> w programach automatyzacji, aby odwołać się do tego zdarzenia.",
   "scheduler_preset_action_command_turn_on": "Włączyć coś",
   "scheduler_preset_action_command_turn_off": "Wyłączyć coś",
   "scheduler_preset_action_command_set_level": "Ustaw poziom",
@@ -94,7 +94,7 @@
   "scheduler_preset_action_config_mode_heat": "Ciepło",
   "scheduler_preset_action_config_mode_heat_eco": "Gospodarka cieplna",
   "scheduler_preset_action_config_mode_cool": "Fajny",
-  "scheduler_preset_action_config_mode_cool_eco": "Fajna gospodarka",
+  "scheduler_preset_action_config_mode_cool_eco": "Chłodna gospodarka",
   "scheduler_preset_action_program_run": "Uruchom program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opcje",
@@ -126,8 +126,8 @@
   "setup_code": "Organizować coś",
   "main_code": "Główny",
   "context_code": "Kontekst",
-  "main_code_empty_note": "Kod „Main” jest pusty. Użyj edytora „Visual code”, aby wygenerować ten kod: - Otwórz kategorię „Program” z palety poleceń po lewej stronie - Przeciągnij blok typu „Main” w obszarze roboczym kodu wizualnego - Dodaj wewnątrz niego inne bloki kodu, aby zaimplementować akcje i logikę tego programu Program „Main” może być uruchomiony ręcznie lub automatycznie w zależności od warunków ostatecznie podanych w kodzie Setup.",
-  "setup_code_empty_note": "Kod „Setup” jest pusty. Użyj edytora „Visual code”, aby wygenerować ten kod: - Otwórz kategorię „Program” z palety poleceń po lewej stronie - Przeciągnij blok typu „Setup” w obszarze roboczym kodu wizualnego - Dodaj w nim inne bloki kodu, aby określić warunki, które spowodują wykonanie kodu „Main” Ten kod jest oceniany za każdym razem, gdy wystąpi nowe zdarzenie i co najmniej raz na minutę.",
+  "main_code_empty_note": "Kod „Główny” jest pusty. Użyj edytora „Kod wizualny”, aby wygenerować ten kod: - Otwórz kategorię „Program” z palety poleceń po lewej stronie - Przeciągnij blok typu „Główny” do obszaru roboczego kodu wizualnego - Dodaj do niego inne bloki kodu, aby zaimplementować akcje i logikę tego programu. Program „Główny” może być uruchamiany ręcznie lub automatycznie, w zależności od warunków podanych w kodzie konfiguracyjnym.",
+  "setup_code_empty_note": "Kod „Setup” jest pusty. Użyj edytora „Visual code”, aby wygenerować ten kod: - Otwórz kategorię „Program” z palety poleceń po lewej stronie. - Przeciągnij blok typu „Setup” do obszaru roboczego kodu wizualnego. - Dodaj do niego inne bloki kodu, aby określić warunki, które spowodują wykonanie kodu „Main”. Ten kod jest sprawdzany za każdym razem, gdy wystąpi nowe zdarzenie i co najmniej raz na minutę.",
   "capture_commands": "Polecenia przechwytywania",
   "capture_commands_description": "Dodaj do programu wszystkie polecenia wykonywane ręcznie na widżetach.",
   "capture_commands_pause": "Pauza między poleceniami",
@@ -142,7 +142,7 @@
     },
     "26": {
       "Title": "Kolorowe światła",
-      "Description": "Przykład integracji oświetlenia Philips Hue przy użyciu HTTP API (V1). Domyślnym użytkownikiem do łączenia się z mostem jest „newdeveloper” i powinien być już włączony.",
+      "Description": "Przykład integracji oświetlenia Philips Hue za pomocą interfejsu API HTTP (wersja 1). Domyślnym użytkownikiem łączącym się z mostem jest „newdeveloper” i powinien być już włączony.",
       "ConfigureOptions.BridgeAddress": "Adres IP mostka Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Nazwa użytkownika",
       "ConfigureOptions.LightsCount": "Liczba świateł"
@@ -166,7 +166,7 @@
       "ConfigureOptions.WebSockets": "Użyj WebSockets",
       "ConfigureOptions.TLS": "Włącz TLS/SSL",
       "ConfigureOptions.Username": "Nazwa użytkownika (opcjonalnie)",
-      "ConfigureOptions.Password": "Hasło (opcjonalne)",
+      "ConfigureOptions.Password": "Hasło (opcjonalnie)",
       "ConfigureOptions.ImportExternal": "Importuj moduły zewnętrzne"
     },
     "78": {
@@ -191,17 +191,17 @@
     },
     "88": {
       "Title": "Ogólna kamera IP",
-      "Description": "Wyświetlanie/kierowanie obrazu z kamery IP.",
+      "Description": "Wyświetlanie/przesyłanie obrazu z kamery IP.",
       "IpCamera.ImageURL": "Adres URL interfejsu API obrazu z kamery (zobacz dokumentację aparatu)",
       "IpCamera.Username": "Nazwa użytkownika (opcjonalnie)",
-      "IpCamera.Password": "Hasło (opcjonalne)",
+      "IpCamera.Password": "Hasło (opcjonalnie)",
       "Widget.Config.fps": "Klatki na sekundę",
       "Widget.Config.size": "Rozmiar widżetu"
     },
     "90": {
       "Title": "System alarmowy",
-      "Description": "Użyj czujników i innych urządzeń, aby wdrożyć system alarmowy.",
-      "HomeGenie.SecurityAlarm": "Używaj jako alarmu/stroboskopu",
+      "Description": "Użyj czujników i innych urządzeń do wdrożenia systemu alarmowego.",
+      "HomeGenie.SecurityAlarm": "Użyj jako alarmu/stroboskopu",
       "HomeGenie.SecurityTriggerHome": "Aktywuje się również po uzbrojeniu Home",
       "HomeGenie.SecuritySensor": "Użyj jako czujnika bezpieczeństwa",
       "ConfigureOptions.Email.Recipients": "Lista adresów e-mail odbiorców powiadomień alarmowych rozdzielona przecinkami",
@@ -214,12 +214,12 @@
     },
     "95": {
       "Title": "Rejestrowanie zdarzeń",
-      "Description": "Rejestruj aktywność urządzenia.",
+      "Description": "Rejestruje aktywność urządzenia.",
       "EventsLogger.EnableLogging": "Włączać"
     },
     "111": {
       "Title": "Konfiguracja klienta",
-      "Description": "Implementuje API do zarządzania profilami konfiguracji klienta, które służą do przechowywania ustawień interfejsu użytkownika i pulpitu nawigacyjnego."
+      "Description": "Implementuje API do zarządzania profilami konfiguracji klienta, które służą do przechowywania ustawień interfejsu użytkownika i pulpitów nawigacyjnych."
     },
     "400": {
       "Title": "Demonstracja modułów wirtualnych",
@@ -229,10 +229,10 @@
       "Sensor.MotionDetect": "Status wykrywania ruchu",
       "Status.Battery": "Poziom naładowania baterii",
       "Sensor.DoorWindow": "Status czujnika drzwi/okna (otwarty/zamknięty)",
-      "Status.Level": "Status przełącznika (wł./wył.)"
+      "Status.Level": "Status przełącznika (włączony/wyłączony)"
     },
     "401": {
-      "Title": "Demo - Przełącz drzwi",
+      "Title": "Demo - Drzwi przełączane",
       "Description": "Symuluje otwieranie/zamykanie drzwi demonstracyjnych za pomocą czujnika okna/drzwi."
     },
     "402": {
@@ -251,7 +251,7 @@
     },
     "505": {
       "Title": "Zdalne sterowanie",
-      "Description": "Sterowanie urządzeniem odbywa się za pomocą pilota (podczerwień lub RF).",
+      "Description": "Sterowanie urządzeniem odbywa się za pomocą pilota (IR lub RF).",
       "HomeGenie.RemoteControl.Enable": "Włączać",
       "HomeGenie.RemoteControl.IRCode": "Przycisk przełączania",
       "ConfigureOptions.DimmerUpCode": "Przycisk zwiększania jasności",
@@ -260,38 +260,38 @@
     },
     "142": {
       "Title": "Konto e-mail",
-      "Description": "Przechowuje informacje o kontach e-mail używanych przez programy systemowe do wysyłania/odbierania wiadomości e-mail.",
+      "Description": "Przechowuje informacje o koncie e-mail używanym przez programy systemowe do wysyłania/odbierania wiadomości e-mail.",
       "ConfigureOptions.Email.Sender": "1. Adres e-mail",
       "ConfigureOptions.Email.SmtpServer": "2. Adres serwera SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Nazwa użytkownika SMTP (opcjonalnie)",
       "ConfigureOptions.Email.SmtpPassword": "4. Hasło SMTP (opcjonalnie)",
       "ConfigureOptions.Email.SmtpPort": "5. Port serwera SMTP",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. Serwer SMTP używa SSL"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Serwer SMTP używa protokołu SSL"
     },
     "145": {
-      "Title": "Urządzenie inteligentne",
-      "Description": "Włączanie/wyłączanie urządzenia na podstawie wykrycia ruchu i oświetlenia otoczenia.",
+      "Title": "Inteligentne urządzenie",
+      "Description": "Włączaj/wyłączaj urządzenie na podstawie wykrycia ruchu i oświetlenia otoczenia.",
       "HomeGenie.SmartLights.Enable": "Włącz „Inteligentne urządzenie”",
       "HomeGenie.SmartLights.OnMotionDetect": "Sterowane czujnikiem (opcjonalnie)",
-      "HomeGenie.SmartLights.CheckLuminosity": "Sterowany czujnikiem światła (opcjonalnie)",
+      "HomeGenie.SmartLights.CheckLuminosity": "Sterowane czujnikiem światła (opcjonalnie)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Wyłącz po upływie limitu czasu bezczynności (sekundy)",
       "HomeGenie.SmartLights.MinLuminance": "Włącz, jeśli jasność jest poniżej:"
     },
     "8": {
       "Title": "Scenariusz kolorów wschodu słońca",
-      "Description": "Przykładowy scenariusz „Wschód słońca” dla świateł LED zmieniających kolor.",
+      "Description": "Przykładowy scenariusz „Wschodu słońca” dla zmieniających kolor świateł LED.",
       "Scenarios.SunriseColors": "Link do scenariusza Sunrise Colors"
     },
     "910": {
       "Title": "Wykrywanie obiektów",
-      "Description": "Wykrywaj obiekty przy użyciu wstępnie wytrenowanego modelu YOLO11.",
+      "Description": "Wykrywanie obiektów przy użyciu wstępnie wytrenowanego modelu YOLO11.",
       "ML.ObjectDetection": "Włącz wykrywanie obiektów",
       "ML.ObjectDetection.TriggerDetect": "Lista rzeczy (w języku angielskim), rozdzielonych przecinkami, które mogą wywołać alarm. (np.: kot, pies, osoba, plecak, walizka)",
       "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Oszacowanie pozy",
-      "Description": "Wykrywanie punktów kluczowych poprzez szacowanie pozy, przy użyciu niestandardowych modeli ONNX lub domyślnego, wstępnie wytrenowanego modelu YOLOv11 (zależnego od pozy człowieka).",
+      "Title": "Oszacowanie pozycji",
+      "Description": "Wykrywanie punktów kluczowych poprzez szacowanie pozycji przy użyciu niestandardowych modeli ONNX lub domyślnego, wstępnie wytrenowanego modelu YOLOv11 (zależnego od pozycji człowieka).",
       "ML.PoseEstimation": "Włącz szacowanie pozycji",
       "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "Wykrywaj obiekty i ich kontury przy użyciu wstępnie wytrenowanego modelu YOLO11.",
       "ML.InstanceSegmentation": "Włącz segmentację instancji",
       "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Obsługa intencji Gemini",
+      "Description": "Umożliwia sterowanie systemem inteligentnym za pomocą języka naturalnego za pomocą Google Gemini AI. Aby aktywować tę funkcję, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://aistudio.google.com/app/apikey, aby otrzymać bezpłatny klucz API.",
+      "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identyfikator modelu"
     }
   }
 }

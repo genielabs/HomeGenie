@@ -536,6 +536,17 @@
         "Enable instance segmentation",
       "ConfigureOptions.Yolo.ModelPath":
         "Path of YOLO11 model file (.onnx)"
+    },
+
+    "930": {
+      "Title":
+        "Gemini Intent Handler",
+      "Description":
+        "Enables natural language control for your smart system using Google's Gemini AI.\nTo activate this feature, enter a valid API key.\nFollow the instructions at https://aistudio.google.com/app/apikey to get a free API key.",
+      "ConfigureOptions.ApiKey":
+        "Google Gemini AI API key",
+      "ConfigureOptions.ModelId":
+        "Model ID"
     }
 
   }

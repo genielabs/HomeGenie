@@ -54,7 +54,7 @@
   "cronwizard_start_time": "Başlama vaxtı",
   "cronwizard_end_time": "Bitmə vaxtı",
   "cronwizard_minutes": "Dəqiqələr",
-  "cronwizard_hours": "Saatlar",
+  "cronwizard_hours": "Saat",
   "cronwizard_days": "Günlər",
   "cronwizard_months": "aylar",
   "cronwizard_minuteselect_everyminute": "Hər dəqiqə",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Seçilmiş aylar",
   "cronwizard_schedule_set_exact_time": "Tədbir vaxtını təyin edin.",
   "cronwizard_schedule_set_slot_start": "Başlanğıc vaxt aralığını təyin edin.",
-  "cronwizard_schedule_set_slot_end": "{{start}} başlayaraq.<span class=\"notranslate\"><br/></span> Vaxt aralığının sonunu təyin edin.",
+  "cronwizard_schedule_set_slot_end": "{{start}}-dan başlayaraq.<span class=\"notranslate\"><br/></span> Vaxt aralığının sonunu təyin edin.",
   "cronwizard_bindings_define_types_and_modules": "Bu cədvələ tabe olan növləri və modulları müəyyənləşdirin (isteğe bağlı)",
   "cronwizard_bindings_select_types": "Növləri seçin",
   "cronwizard_action_set_action_to_execute": "Bu hadisənin baş verməsinə dair icra etmək üçün fəaliyyət təyin edin",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Vaxt aralığının sonunda",
   "cronwizard_action_custom_script": "Fərdi fəaliyyət skripti",
   "cronwizard_action_no_action": "Fəaliyyət yoxdur",
-  "cronwizard_action_schedule_variable_hint": "Cron ifadələrində dəyişən kimi <span class=\"notranslate color-primary\">@ {{name}}</span> istifadə edin və ya bu hadisəyə istinad etmək üçün avtomatlaşdırma proqramlarında <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> istifadə edin.",
+  "cronwizard_action_schedule_variable_hint": "Cron ifadələrində dəyişən kimi <span class=\"notranslate color-primary\">@{{name}}</span> istifadə edin və ya bu hadisəyə istinad etmək üçün avtomatlaşdırma proqramlarında <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> istifadə edin.",
   "scheduler_preset_action_command_turn_on": "Yandırın",
   "scheduler_preset_action_command_turn_off": "Söndürün",
   "scheduler_preset_action_command_set_level": "Səviyyəni təyin edin",
@@ -92,7 +92,7 @@
   "scheduler_preset_action_config_mode_on": "Aktiv",
   "scheduler_preset_action_config_mode_off": "Söndür",
   "scheduler_preset_action_config_mode_heat": "İstilik",
-  "scheduler_preset_action_config_mode_heat_eco": "İstilik iqtisadiyyatı",
+  "scheduler_preset_action_config_mode_heat_eco": "İstilik qənaəti",
   "scheduler_preset_action_config_mode_cool": "Sərin",
   "scheduler_preset_action_config_mode_cool_eco": "Sərin iqtisadiyyat",
   "scheduler_preset_action_program_run": "Proqramı işə salın",
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "Hərəkət aşkarlama statusu",
       "Status.Battery": "Batareya səviyyəsi",
       "Sensor.DoorWindow": "Qapı/Pəncərə sensorunun vəziyyəti (açıq/qapalı)",
-      "Status.Level": "Vəziyyəti dəyişdirin (açma/söndürmə)"
+      "Status.Level": "Vəziyyəti dəyişdirin (yan/söndürün)"
     },
     "401": {
       "Title": "Demo - Qapını dəyişdirin",
@@ -278,7 +278,7 @@
       "HomeGenie.SmartLights.MinLuminance": "Parlaqlıq aşağıdadırsa, yandırın:"
     },
     "8": {
-      "Title": "Günəşin Doğuşu Rəngləri Ssenarisi",
+      "Title": "Günəşin Doğuş Rəngləri Ssenarisi",
       "Description": "Rəng dəyişdirən LED işıqlar üçün \"Günəşin doğuşu\" ssenarisi nümunəsi.",
       "Scenarios.SunriseColors": "Sunrise Colors ssenarisinə keçid"
     },
@@ -300,6 +300,12 @@
       "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri və onların konturlarını aşkar edin.",
       "ML.InstanceSegmentation": "Nümunə seqmentasiyasını aktivləşdirin",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
+    },
+    "930": {
+      "Title": "Əkizlər Niyyət İşləyicisi",
+      "Description": "Google-un Gemini AI-dan istifadə edərək ağıllı sisteminiz üçün təbii dil nəzarətini təmin edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatlara əməl edin.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
+      "ConfigureOptions.ModelId": "Model ID"
     }
   }
 }

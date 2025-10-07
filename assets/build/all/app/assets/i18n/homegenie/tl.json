@@ -17,7 +17,7 @@
   "device_driver": "Driver",
   "flow_control": "Kontrol ng daloy",
   "controller": "Controller",
-  "programs": "Mga programa",
+  "programs": "Mga Programa",
   "repositories": "Mga repositoryo",
   "packages": "Mga package",
   "installed_packages": "Mga naka-install na pakete",
@@ -54,7 +54,7 @@
   "cronwizard_start_time": "Oras ng pagsisimula",
   "cronwizard_end_time": "Oras ng pagtatapos",
   "cronwizard_minutes": "Mga minuto",
-  "cronwizard_hours": "Oras",
+  "cronwizard_hours": "Mga oras",
   "cronwizard_days": "Mga araw",
   "cronwizard_months": "mga buwan",
   "cronwizard_minuteselect_everyminute": "Bawat minuto",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Mga napiling buwan",
   "cronwizard_schedule_set_exact_time": "Itakda ang oras ng kaganapan.",
   "cronwizard_schedule_set_slot_start": "Itakda ang pagsisimula ng time slot.",
-  "cronwizard_schedule_set_slot_end": "Simula sa {{start}} .<span class=\"notranslate\"><br/></span> Itakda ang pagtatapos ng time slot.",
+  "cronwizard_schedule_set_slot_end": "Simula sa {{start}}.<span class=\"notranslate\"><br/></span> Itakda ang pagtatapos ng time slot.",
   "cronwizard_bindings_define_types_and_modules": "Tukuyin ang mga uri at module na napapailalim sa iskedyul na ito (opsyonal)",
   "cronwizard_bindings_select_types": "Pumili ng mga uri",
   "cronwizard_action_set_action_to_execute": "Magtakda ng aksyon na isasagawa sa mga paglitaw ng kaganapang ito",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Sa pagtatapos ng isang puwang ng oras",
   "cronwizard_action_custom_script": "Custom na script ng aksyon",
   "cronwizard_action_no_action": "Walang aksyon",
-  "cronwizard_action_schedule_variable_hint": "Gamitin <span class=\"notranslate color-primary\">@ {{name}}</span> bilang variable sa mga cron expression o gamitin <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> sa mga automation program para i-reference ang event na ito.",
+  "cronwizard_action_schedule_variable_hint": "Gamitin ang <span class=\"notranslate color-primary\">@{{name}}</span> bilang variable sa mga cron expression o gamitin ang <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> sa mga automation program upang i-reference ang kaganapang ito.",
   "scheduler_preset_action_command_turn_on": "I-on",
   "scheduler_preset_action_command_turn_off": "Patayin",
   "scheduler_preset_action_command_set_level": "Itakda ang antas",
@@ -207,7 +207,7 @@
       "ConfigureOptions.Email.Recipients": "Pinaghiwalay ng kuwit ang listahan ng mga tatanggap ng mga e-mail para sa mga abiso ng alarma",
       "ConfigureOptions.System.ArmDelay": "Pagkaantala ng braso (segundo)",
       "ConfigureOptions.System.SirenStartTime": "Pagkaantala ng Pagsisimula ng Sirena (mga segundo)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirena max na Oras (segundo, 0=infinite)",
+      "ConfigureOptions.System.SirenMaxTime": "Sirena max Time (segundo, 0=infinite)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programang tatakbo kapag armado",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa na tatakbo kapag dinisarmahan",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programa na tatakbo kapag na-trigger"
@@ -259,14 +259,14 @@
       "ConfigureOptions.DimmerInterval": "Pagdidilim na hakbang"
     },
     "142": {
-      "Title": "E-mail account",
+      "Title": "E-Mail account",
       "Description": "Nag-iimbak ng impormasyon ng e-mail account na ginagamit ng mga program ng system para sa pagpapadala/pagtanggap ng mga email.",
       "ConfigureOptions.Email.Sender": "1. E-Mail address",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP server address",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP username (opsyonal)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP password (opsyonal)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP server port",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ang SMTP server ng SSL"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ng SSL ang SMTP server"
     },
     "145": {
       "Title": "Smart Device",
@@ -280,7 +280,7 @@
     "8": {
       "Title": "Sunrise Colors Scenario",
       "Description": "Halimbawang senaryo ng \"Sunrise\" para sa pagpapalit ng kulay ng mga LED na ilaw.",
-      "Scenarios.SunriseColors": "Mag-link sa senaryo ng Sunrise Colors"
+      "Scenarios.SunriseColors": "Link sa Sunrise Colors scenario"
     },
     "910": {
       "Title": "Pagtuklas ng bagay",
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "Pagtataya ng pose",
-      "Description": "Keypoint detection sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelo ng YOLOv11 (human pose-specific).",
+      "Description": "Pag-detect ng keypoint sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelong YOLOv11 (human pose-specific).",
       "ML.PoseEstimation": "Paganahin ang pagtatantya ng pose",
       "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "I-detect ang mga bagay at ang kanilang mga balangkas gamit ang isang pre-trained na modelo ng YOLO11.",
       "ML.InstanceSegmentation": "I-enable ang pagse-segment ng instance",
       "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "Pinapagana ang natural na kontrol sa wika para sa iyong matalinong system gamit ang Gemini AI ng Google. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey upang makakuha ng libreng API key.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API key",
+      "ConfigureOptions.ModelId": "Model ID"
     }
   }
 }

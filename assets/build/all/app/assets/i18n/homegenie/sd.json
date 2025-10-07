@@ -1,5 +1,5 @@
 {
-  " ": "---------------------------------------------------",
+  " ": "----------------------------------------------",
   "welcome_to_homegenie": "هوم جيني ۾ ڀليڪار!",
   "welcome_subtitle": "پروگراميبل آٽوميشن انٽيليجنس",
   "not_configured_yet": "سسٽم اڃا تائين ترتيب ڏنل نه آهي. هي سيٽ اپ مددگار توهان جي سسٽم کي ڪجهه مرحلن ۾ هلائڻ ۾ مدد ڪندو.",
@@ -33,7 +33,7 @@
   "dashboard_from_group": "هن گروپ مان هڪ ڊيش بورڊ ٺاهيو",
   "group_modules": "هن گروپ ۾ ماڊلز",
   "modules": "ماڊيولز",
-  "empty_group": "هن گروپ ۾ ڪو به ماڊيول ناهي.",
+  "empty_group": "هن گروپ ۾ ڪو به ماڊل ناهي.",
   "scheduler_wizard": "شيڊولر مددگار",
   "schedule_event": "تقريب",
   "schedule_type_standard": "معياري",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "چونڊيل مهينا",
   "cronwizard_schedule_set_exact_time": "تقريب جو وقت مقرر ڪريو.",
   "cronwizard_schedule_set_slot_start": "شروعاتي وقت جي سلاٽ سيٽ ڪريو.",
-  "cronwizard_schedule_set_slot_end": "{{start}} کان شروع.<span class=\"notranslate\"><br/></span> وقت جي سلاٽ جي آخر کي سيٽ ڪريو.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> تي شروع ڪندي وقت جي سلاٽ جي آخر کي سيٽ ڪريو.",
   "cronwizard_bindings_define_types_and_modules": "هن شيڊول جي تابع قسمن ۽ ماڊلز جي وضاحت ڪريو (اختياري)",
   "cronwizard_bindings_select_types": "قسم چونڊيو",
   "cronwizard_action_set_action_to_execute": "هن واقعي جي واقعن تي عمل ڪرڻ لاءِ عمل مقرر ڪريو",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "هڪ وقت جي آخر ۾",
   "cronwizard_action_custom_script": "ڪسٽم ايڪشن اسڪرپٽ",
   "cronwizard_action_no_action": "ڪابه ڪارروائي ناهي",
-  "cronwizard_action_schedule_variable_hint": "ڪرون ايڪسپريشنز ۾ <span class=\"notranslate color-primary\">@ {{name}}</span> متغير طور استعمال ڪريو يا آٽوميشن پروگرامن ۾ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> استعمال ڪريو هن واقعي جي حوالي سان.",
+  "cronwizard_action_schedule_variable_hint": "ڪرون ايڪسپريشن ۾ <span class=\"notranslate color-primary\">@{{name}}</span> کي متغير طور استعمال ڪريو يا آٽوميشن پروگرامن ۾ هن واقعي جي حوالي لاءِ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> استعمال ڪريو.",
   "scheduler_preset_action_command_turn_on": "هلايو",
   "scheduler_preset_action_command_turn_off": "بند ڪريو",
   "scheduler_preset_action_command_set_level": "سطح مقرر ڪريو",
@@ -225,15 +225,15 @@
       "Title": "ورچوئل ماڊيولز ڊيمو",
       "Description": "ورچوئل ڊيوائس جا قدر دستي طور تي مقرر ڪريو.",
       "Sensor.Temperature": "گرمي پد جو قدر",
-      "Sensor.Luminance": "روشني جو قدر",
-      "Sensor.MotionDetect": "حرڪت جي سڃاڻپ جي حيثيت",
+      "Sensor.Luminance": "روشني جي قيمت",
+      "Sensor.MotionDetect": "حرڪت جي ڳولا جي حيثيت",
       "Status.Battery": "بيٽري جي سطح",
       "Sensor.DoorWindow": "دروازي/دريءَ جي سينسر جي حيثيت (کليل/بند)",
       "Status.Level": "سوئچ اسٽيٽس (آن/آف)"
     },
     "401": {
       "Title": "ڊيمو - ٽوگل دروازو",
-      "Description": "ڊيمو ڊور-ونڊو سينسر جي دروازي کي کولڻ/بند ڪرڻ جي نقل ڪري ٿو."
+      "Description": "ڊيمو ڊور-ونڊو سينسر جي دروازي جي کليل/بند ٿيڻ جي نقل ڪري ٿو."
     },
     "402": {
       "Title": "ڊيمو - حرڪت معلوم ٿي وئي",
@@ -300,6 +300,12 @@
       "Description": "اڳ ۾ تربيت يافته YOLO11 ماڊل استعمال ڪندي شين ۽ انهن جي خاڪن کي ڳوليو.",
       "ML.InstanceSegmentation": "مثال جي ڀاڱيداري کي فعال ڪريو",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڊل فائل جو رستو (.onnx)"
+    },
+    "930": {
+      "Title": "جيميني انٽينٽ هينڊلر",
+      "Description": "گوگل جي جيميني اي آءِ استعمال ڪندي توهان جي سمارٽ سسٽم لاءِ قدرتي ٻولي ڪنٽرول کي فعال ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",
+      "ConfigureOptions.ApiKey": "گوگل جيمنائي اي آءِ API ڪي",
+      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ"
     }
   }
 }

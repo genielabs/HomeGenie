@@ -1,5 +1,5 @@
 {
-  " ": "----------------------------------------",
+  " ": "--",
   "welcome_to_homegenie": "హోమ్‌జెనీకి స్వాగతం!",
   "welcome_subtitle": "ప్రోగ్రామబుల్ ఆటోమేషన్ ఇంటెలిజెన్స్",
   "not_configured_yet": "సిస్టమ్ ఇంకా కాన్ఫిగర్ చేయబడలేదు. ఈ సెటప్ విజార్డ్ కొన్ని దశల్లో మీ సిస్టమ్‌ను ప్రారంభించి, అమలు చేయడంలో మీకు సహాయపడుతుంది.",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "ఎంచుకున్న నెలలు",
   "cronwizard_schedule_set_exact_time": "ఈవెంట్ సమయాన్ని సెట్ చేయండి.",
   "cronwizard_schedule_set_slot_start": "ప్రారంభ సమయ స్లాట్‌ను సెట్ చేయండి.",
-  "cronwizard_schedule_set_slot_end": "{{start}} ప్రారంభమవుతుంది.<span class=\"notranslate\"><br/></span> సమయ స్లాట్ ముగింపును సెట్ చేయండి.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> నుండి ప్రారంభమవుతుంది. సమయ స్లాట్ ముగింపును సెట్ చేయండి.",
   "cronwizard_bindings_define_types_and_modules": "ఈ షెడ్యూల్‌కు లోబడి ఉండే రకాలు మరియు మాడ్యూల్‌లను నిర్వచించండి (ఐచ్ఛికం)",
   "cronwizard_bindings_select_types": "రకాలను ఎంచుకోండి",
   "cronwizard_action_set_action_to_execute": "ఈ ఈవెంట్ సంభవించినప్పుడు అమలు చేయడానికి చర్యను సెట్ చేయండి",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ఒక సమయ వ్యవధి ముగింపులో",
   "cronwizard_action_custom_script": "కస్టమ్ యాక్షన్ స్క్రిప్ట్",
   "cronwizard_action_no_action": "చర్య లేదు",
-  "cronwizard_action_schedule_variable_hint": "ఈ ఈవెంట్‌ను సూచించడానికి క్రాన్ ఎక్స్‌ప్రెషన్‌లలో <span class=\"notranslate color-primary\">@ {{name}}</span> వేరియబుల్‌గా ఉపయోగించండి లేదా ఆటోమేషన్ ప్రోగ్రామ్‌లలో <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ఉపయోగించండి.",
+  "cronwizard_action_schedule_variable_hint": "ఈ ఈవెంట్‌ను సూచించడానికి క్రాన్ ఎక్స్‌ప్రెషన్‌లలో <span class=\"notranslate color-primary\">@{{name}}</span>ని వేరియబుల్‌గా ఉపయోగించండి లేదా ఆటోమేషన్ ప్రోగ్రామ్‌లలో <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span>ని ఉపయోగించండి.",
   "scheduler_preset_action_command_turn_on": "ఆన్ చేయండి",
   "scheduler_preset_action_command_turn_off": "ఆపివేయండి",
   "scheduler_preset_action_command_set_level": "స్థాయిని సెట్ చేయండి",
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "మోషన్ డిటెక్షన్ స్థితి",
       "Status.Battery": "బ్యాటరీ స్థాయి",
       "Sensor.DoorWindow": "తలుపు/కిటికీ సెన్సార్ స్థితి (తెరిచి/మూసి)",
-      "Status.Level": "స్థితిని మార్చు (ఆన్/ఆఫ్)"
+      "Status.Level": "స్థితిని మార్చండి (ఆన్/ఆఫ్)"
     },
     "401": {
       "Title": "డెమో - టోగుల్ డోర్",
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "తేమ సెన్సార్",
       "Simulator.Sensor.Luminance": "లైట్ సెన్సార్",
       "Simulator.Meter.Watts": "వాట్స్ మీటర్",
-      "Simulator.Meter.Watts.Max": "గరిష్ట వాట్ శక్తి",
+      "Simulator.Meter.Watts.Max": "గరిష్ట వాట్ పవర్",
       "Simulator.Sensor.DataFrequency": "సిమ్యులేటర్ ఉద్గార ఫ్రీక్వెన్సీ"
     },
     "505": {
@@ -300,6 +300,12 @@
       "Description": "ముందుగా శిక్షణ పొందిన YOLO11 మోడల్‌ని ఉపయోగించి వస్తువులు మరియు వాటి రూపురేఖలను గుర్తించండి.",
       "ML.InstanceSegmentation": "ఉదాహరణ విభజనను ప్రారంభించండి",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
+    },
+    "930": {
+      "Title": "జెమిని ఇంటెంట్ హ్యాండ్లర్",
+      "Description": "Google యొక్క జెమిని AIని ఉపయోగించి మీ స్మార్ట్ సిస్టమ్ కోసం సహజ భాషా నియంత్రణను ప్రారంభిస్తుంది. ఈ ఫీచర్‌ని యాక్టివేట్ చేయడానికి, చెల్లుబాటు అయ్యే API కీని నమోదు చేయండి. ఉచిత API కీని పొందడానికి https://aistudio.google.com/app/apikeyలోని సూచనలను అనుసరించండి.",
+      "ConfigureOptions.ApiKey": "గూగుల్ జెమిని AI API కీ",
+      "ConfigureOptions.ModelId": "మోడల్ ఐడి"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  " ": "--------------------------------------------------",
+  " ": "----------------------------------------------",
   "welcome_to_homegenie": "होमजिनी मध्ये आपले स्वागत आहे!",
   "welcome_subtitle": "प्रोग्रामेबल ऑटोमेशन इंटेलिजेंस",
   "not_configured_yet": "सिस्टम अजून कॉन्फिगर केलेली नाही. हे सेटअप विझार्ड काही चरणांमध्ये तुमची सिस्टम सुरू करण्यास आणि चालू करण्यास मदत करेल.",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "निवडलेले महिने",
   "cronwizard_schedule_set_exact_time": "कार्यक्रमाची वेळ सेट करा.",
   "cronwizard_schedule_set_slot_start": "सुरुवातीचा वेळ स्लॉट सेट करा.",
-  "cronwizard_schedule_set_slot_end": "{{start}} सुरुवात.<span class=\"notranslate\"><br/></span> वेळ स्लॉटचा शेवट सेट करा.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> पासून सुरू होत आहे. वेळ स्लॉटचा शेवट सेट करा.",
   "cronwizard_bindings_define_types_and_modules": "या वेळापत्रकाच्या अधीन असलेले प्रकार आणि मॉड्यूल परिभाषित करा (पर्यायी)",
   "cronwizard_bindings_select_types": "प्रकार निवडा",
   "cronwizard_action_set_action_to_execute": "या घटनेच्या घटनांवर अंमलात आणण्यासाठी कृती सेट करा",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "वेळेच्या शेवटी",
   "cronwizard_action_custom_script": "कस्टम अॅक्शन स्क्रिप्ट",
   "cronwizard_action_no_action": "कोणतीही कृती नाही",
-  "cronwizard_action_schedule_variable_hint": "क्रॉन एक्सप्रेशन्समध्ये <span class=\"notranslate color-primary\">@ {{name}}</span> व्हेरिएबल म्हणून वापरा किंवा ऑटोमेशन प्रोग्राममध्ये <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> वापरून या इव्हेंटचा संदर्भ घ्या.",
+  "cronwizard_action_schedule_variable_hint": "क्रॉन एक्सप्रेशन्समध्ये व्हेरिएबल म्हणून <span class=\"notranslate color-primary\">@{{name}}</span> वापरा किंवा ऑटोमेशन प्रोग्राममध्ये या घटनेचा संदर्भ देण्यासाठी <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> वापरा.",
   "scheduler_preset_action_command_turn_on": "चालू करा",
   "scheduler_preset_action_command_turn_off": "बंद करा",
   "scheduler_preset_action_command_set_level": "पातळी सेट करा",
@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "सामान्य आयपी कॅमेरा",
-      "Description": "आयपी कॅमेऱ्यातून प्रतिमा फीड प्रदर्शित करा/मार्गावर पाठवा.",
+      "Description": "आयपी कॅमेऱ्यातून इमेज फीड प्रदर्शित करा/मार्ग दाखवा.",
       "IpCamera.ImageURL": "कॅमेरा इमेज API URL (तुमचे कॅमेरा दस्तऐवज पहा)",
       "IpCamera.Username": "वापरकर्तानाव (पर्यायी)",
       "IpCamera.Password": "पासवर्ड (पर्यायी)",
@@ -270,7 +270,7 @@
     },
     "145": {
       "Title": "स्मार्ट डिव्हाइस",
-      "Description": "मोशन डिटेक्शन आणि अॅम्बियंट लाइटच्या आधारे डिव्हाइस चालू/बंद करा.",
+      "Description": "गती शोधणे आणि सभोवतालच्या प्रकाशावर आधारित डिव्हाइस चालू/बंद करा.",
       "HomeGenie.SmartLights.Enable": "'स्मार्ट डिव्हाइस' सक्षम करा",
       "HomeGenie.SmartLights.OnMotionDetect": "सेन्सरद्वारे नियंत्रित (पर्यायी)",
       "HomeGenie.SmartLights.CheckLuminosity": "लाईट सेन्सरद्वारे नियंत्रित (पर्यायी)",
@@ -285,13 +285,13 @@
     "910": {
       "Title": "ऑब्जेक्ट शोधणे",
       "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडेल वापरून वस्तू शोधा.",
-      "ML.ObjectDetection": "ऑब्जेक्ट डिटेक्शन सक्षम करा",
+      "ML.ObjectDetection": "ऑब्जेक्ट्स डिटेक्शन सक्षम करा",
       "ML.ObjectDetection.TriggerDetect": "स्वल्पविरामाने विभक्त केलेल्या गोष्टींची यादी (इंग्रजीमध्ये) ज्या अलार्मला चालना देतील. (उदा.: मांजर, कुत्रा, व्यक्ती, बॅकपॅक, सुटकेस)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडेल फाइलचा मार्ग (.onnx)"
     },
     "911": {
       "Title": "पोझ अंदाज",
-      "Description": "कस्टम ONNX मॉडेल्स किंवा डीफॉल्ट पूर्व-प्रशिक्षित YOLOv11 मॉडेल (मानवी पोझ-विशिष्ट) वापरून पोझ अंदाजाद्वारे कीपॉइंट शोधणे.",
+      "Description": "कस्टम ONNX मॉडेल्स किंवा डीफॉल्ट पूर्व-प्रशिक्षित YOLOv11 मॉडेल (मानवी पोझ-विशिष्ट) वापरून पोझ अंदाजाद्वारे कीपॉइंट शोध.",
       "ML.PoseEstimation": "पोझ अंदाज सक्षम करा",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडेल फाइलचा मार्ग (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडेल वापरून वस्तू आणि त्यांची रूपरेषा शोधा.",
       "ML.InstanceSegmentation": "उदाहरण विभागणी सक्षम करा",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडेल फाइलचा मार्ग (.onnx)"
+    },
+    "930": {
+      "Title": "जेमिनी इंटेंट हँडलर",
+      "Description": "Google च्या Gemini AI वापरून तुमच्या स्मार्ट सिस्टमसाठी नैसर्गिक भाषा नियंत्रण सक्षम करते. हे वैशिष्ट्य सक्रिय करण्यासाठी, एक वैध API की प्रविष्ट करा. मोफत API की मिळविण्यासाठी https://aistudio.google.com/app/apikey वरील सूचनांचे अनुसरण करा.",
+      "ConfigureOptions.ApiKey": "गुगल जेमिनी एआय एपीआय की",
+      "ConfigureOptions.ModelId": "मॉडेल आयडी"
     }
   }
 }

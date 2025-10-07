@@ -33,7 +33,7 @@
   "dashboard_from_group": "ဤအဖွဲ့မှ ဒက်ရှ်ဘုတ်တစ်ခု ဖန်တီးပါ။",
   "group_modules": "ဤအုပ်စုရှိ မော်ဂျူးများ",
   "modules": "မော်ဂျူးများ",
-  "empty_group": "ဤအုပ်စုတွင် module များမရှိပါ။",
+  "empty_group": "ဤအဖွဲ့တွင် module မရှိပါ။",
   "scheduler_wizard": "အစီအစဉ်ဆွဲသူ Wizard",
   "schedule_event": "ပွဲ",
   "schedule_type_standard": "စံ",
@@ -66,11 +66,11 @@
   "cronwizard_dayselect_everyday": "နေ့တိုင်း",
   "cronwizard_dayselect_selecteddays": "ရွေးချယ်ထားသောနေ့ရက်များ",
   "cronwizard_dayowselect_selecteddaysow": "ရွေးချယ်ထားသော ရက်သတ္တပတ်များ",
-  "cronwizard_monthselect_everymonth": "လတိုင်း",
+  "cronwizard_monthselect_everymonth": "လစဉ်",
   "cronwizard_monthselect_selectedmonths": "ရွေးလများ",
   "cronwizard_schedule_set_exact_time": "ပွဲချိန်သတ်မှတ်ပါ။",
   "cronwizard_schedule_set_slot_start": "စတင်ချိန်ကို သတ်မှတ်ပါ။",
-  "cronwizard_schedule_set_slot_end": "{{start}} မှစတင်သည်။<span class=\"notranslate\"><br/></span> အချိန်အထိုင်အဆုံး သတ်မှတ်ပါ။",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> မှစတင်၍ အချိန်အထိုင်အဆုံး သတ်မှတ်ပါ။",
   "cronwizard_bindings_define_types_and_modules": "ဤအချိန်ဇယားအရ အမျိုးအစားများနှင့် မော်ဂျူးများကို သတ်မှတ်ပါ (ချန်လှပ်ထားနိုင်သည်)",
   "cronwizard_bindings_select_types": "အမျိုးအစားများကို ရွေးချယ်ပါ။",
   "cronwizard_action_set_action_to_execute": "ဤဖြစ်ရပ်ဖြစ်ပွားမှုအပေါ် လုပ်ဆောင်ရန် လုပ်ဆောင်ချက်ကို သတ်မှတ်ပါ။",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "အချိန်တစ်ခုရဲ့အဆုံးမှာ",
   "cronwizard_action_custom_script": "စိတ်ကြိုက်လုပ်ဆောင်ချက် ဇာတ်ညွှန်း",
   "cronwizard_action_no_action": "လုပ်ဆောင်ချက်မရှိပါ။",
-  "cronwizard_action_schedule_variable_hint": "cron အသုံးအနှုန်းများတွင် ပြောင်းလဲနိုင်သော <span class=\"notranslate color-primary\">@ {{name}}</span> အသုံးပြုပါ သို့မဟုတ် ဤဖြစ်ရပ်ကို ကိုးကားရန်အတွက် အလိုအလျောက်စနစ်ပရိုဂရမ်များတွင် <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> အသုံးပြုပါ။",
+  "cronwizard_action_schedule_variable_hint": "<span class=\"notranslate color-primary\">@{{name}}</span> ကို cron အသုံးအနှုန်းများတွင် ပြောင်းလဲမှုအဖြစ် အသုံးပြုပါ သို့မဟုတ် ဤဖြစ်ရပ်ကို ကိုးကားရန်အတွက် အလိုအလျောက်စနစ်ဆိုင်ရာ ပရိုဂရမ်များတွင် <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ကို အသုံးပြုပါ။",
   "scheduler_preset_action_command_turn_on": "ဖွင့်သည်",
   "scheduler_preset_action_command_turn_off": "ပိတ်ပါ။",
   "scheduler_preset_action_command_set_level": "အဆင့်သတ်မှတ်ပါ။",
@@ -97,7 +97,7 @@
   "scheduler_preset_action_config_mode_cool_eco": "စီးပွားရေးအေးတယ်။",
   "scheduler_preset_action_program_run": "ပရိုဂရမ်ကို လုပ်ဆောင်ပါ။",
   "scheduler_preset_action_config_program": "အစီအစဉ်",
-  "scheduler_preset_action_config_options": "ရွေးချယ်စရာများ",
+  "scheduler_preset_action_config_options": "ရွေးချယ်မှုများ",
   "scheduler_preset_action_program_say": "ဆိုပါတော့",
   "scheduler_preset_action_config_message": "မက်ဆေ့ချ်",
   "save_and_build": "သိမ်းဆည်းပြီး တည်ဆောက်ပါ။",
@@ -157,9 +157,9 @@
     },
     "77": {
       "Title": "ကွန်ရက် MQTT",
-      "Description": "အင်တာနက်မှတစ်ဆင့် HomeGenie Panel အက်ပ်ကို မည်သည့်နေရာမှမဆို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
+      "Description": "အင်တာနက်မှတဆင့် မည်သည့်နေရာမှမဆို HomeGenie Panel အက်ပ်ကို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
       "MQTT.SensorPublish": "ဤ module မှထုတ်လွှတ်သောဖြစ်ရပ်များကိုထုတ်ဝေပါ။",
-      "ConfigureOptions.ClientId": "သုံးစွဲသူ ID။",
+      "ConfigureOptions.ClientId": "ဖောက်သည် ID။",
       "ConfigureOptions.ServerAddress": "ဆာဗာလိပ်စာ",
       "ConfigureOptions.ServerPort": "ဆာဗာဆိပ်ကမ်း",
       "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်း (E2EE) ကို ဖွင့်ပါ",
@@ -202,7 +202,7 @@
       "Title": "လုံခြုံရေးအချက်ပေးစနစ်",
       "Description": "လုံခြုံရေးအချက်ပေးစနစ်တစ်ခုကို အကောင်အထည်ဖော်ရန် အာရုံခံကိရိယာများနှင့် အခြားစက်ပစ္စည်းများကို အသုံးပြုပါ။",
       "HomeGenie.SecurityAlarm": "နှိုးစက်/စထရိုဘီအဖြစ် အသုံးပြုပါ။",
-      "HomeGenie.SecurityTriggerHome": "ဒါကိုလည်း လက်နက်ကိုင်တပ်ဖွဲ့က ပင်မစာမျက်နှာမှာ ထားလိုက်တာ",
+      "HomeGenie.SecurityTriggerHome": "ဒါကိုလည်း လက်နက်ကိုင်တပ်ဖွဲ့က Home မှာ ထားလိုက်တာ",
       "HomeGenie.SecuritySensor": "လုံခြုံရေးအာရုံခံကိရိယာအဖြစ် အသုံးပြုပါ။",
       "ConfigureOptions.Email.Recipients": "နှိုးစက်သတိပေးချက်များအတွက် လက်ခံသူအီးမေးလ်များစာရင်းကို ကော်မာခွဲထားသည်။",
       "ConfigureOptions.System.ArmDelay": "လက်နှောင့်နှေးခြင်း (စက္ကန့်)",
@@ -237,7 +237,7 @@
     },
     "402": {
       "Title": "သရုပ်ပြ - လှုပ်ရှားမှုကို တွေ့ရှိထားသည်။",
-      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို အတုယူသည်။"
+      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို တုပသည်။"
     },
     "410": {
       "Title": "အာရုံခံခြင်း simulator",
@@ -250,17 +250,17 @@
       "Simulator.Sensor.DataFrequency": "Simulator သည် ကြိမ်နှုန်းကို ထုတ်လွှတ်သည်။"
     },
     "505": {
-      "Title": "အဝေးထိန်းစနစ်",
+      "Title": "အဝေးထိန်း",
       "Description": "အဝေးထိန်း (IR သို့မဟုတ် RF) ကို အသုံးပြု၍ စက်ပစ္စည်းကို ထိန်းချုပ်ပါ။",
       "HomeGenie.RemoteControl.Enable": "ဖွင့်ပါ။",
       "HomeGenie.RemoteControl.IRCode": "ခလုတ်နှိပ်ပါ။",
       "ConfigureOptions.DimmerUpCode": "တောက်ပမှုတိုးရန်ခလုတ်",
-      "ConfigureOptions.DimmerDownCode": "အလင်းအမှောင် ခလုတ်",
+      "ConfigureOptions.DimmerDownCode": "တောက်ပမှုကို လျှော့ချရန် ခလုတ်",
       "ConfigureOptions.DimmerInterval": "မှိန်းနေမိသည်။"
     },
     "142": {
       "Title": "အီးမေးလ်အကောင့်",
-      "Description": "အီးမေးလ်များပေးပို့ခြင်း/လက်ခံခြင်းအတွက် စနစ်ပရိုဂရမ်များမှ အသုံးပြုသော အီးမေးလ်အကောင့်အချက်အလက်ကို သိမ်းဆည်းသည်။",
+      "Description": "အီးမေးလ်များပေးပို့ခြင်း/လက်ခံခြင်းအတွက် စနစ်ပရိုဂရမ်များက အသုံးပြုသည့် အီးမေးလ်အကောင့်အချက်အလက်ကို သိမ်းဆည်းသည်။",
       "ConfigureOptions.Email.Sender": "1. အီးမေးလ်လိပ်စာ",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP ဆာဗာလိပ်စာ",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -270,7 +270,7 @@
     },
     "145": {
       "Title": "စမတ်ကိရိယာ",
-      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်အပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
+      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်ပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
       "HomeGenie.SmartLights.Enable": "'စမတ်စက်ပစ္စည်း' ကို ဖွင့်ပါ",
       "HomeGenie.SmartLights.OnMotionDetect": "အာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
       "HomeGenie.SmartLights.CheckLuminosity": "အလင်းအာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "ခန့်မှန်းခြေတင်ပါ။",
-      "Description": "စိတ်ကြိုက် ONNX မော်ဒယ်များ သို့မဟုတ် မူရင်းကြိုတင်လေ့ကျင့်ထားသည့် YOLOv11 မော်ဒယ် (လူ့ပုံသဏ္ဍာန် သီးသန့်) ကို အသုံးပြု၍ pose ခန့်မှန်းချက်မှတစ်ဆင့် သော့ချက်ထောက်လှမ်းခြင်း။",
+      "Description": "စိတ်ကြိုက် ONNX မော်ဒယ်များ သို့မဟုတ် ပုံသေ ကြိုတင်လေ့ကျင့်ထားသည့် YOLOv11 မော်ဒယ် (လူ့ပုံသဏ္ဍာန် သီးသန့်) ကို အသုံးပြု၍ pose ခန့်မှန်းချက်မှတစ်ဆင့် သော့ချက်ထောက်လှမ်းခြင်း။",
       "ML.PoseEstimation": "ပုံသဏ္ဍန်ခန့်မှန်းချက်ကို ဖွင့်ပါ။",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO11 မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများနှင့် ၎င်းတို့၏ ကောက်ကြောင်းများကို ရှာဖွေပါ။",
       "ML.InstanceSegmentation": "ဥပမာ အပိုင်းခွဲခြင်းကို ဖွင့်ပါ။",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "Google ၏ Gemini AI ကို အသုံးပြု၍ သင်၏စမတ်စနစ်အတွက် သဘာဝဘာသာစကားထိန်းချုပ်မှုကို ဖွင့်ပါ။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://aistudio.google.com/app/apikey တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID"
     }
   }
 }

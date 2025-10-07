@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Tambahkeun alat",
-  "node_exclusion": "Cabut alat",
-  "operation_timed_out": "Operasi waktos kaluar.",
-  "node_added": "Hasil ditambahkeun titik",
-  "turn_on_device_to_add": "Hurungkeun alat sareng pencét tombol papasangan salami 5 detik upami diperyogikeun",
-  "soft_reset_button": "Lemes reset"
-}

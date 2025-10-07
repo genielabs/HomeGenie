@@ -9,8 +9,8 @@
   "system_config_additional_features": "Fitur tambahan",
   "system_config_manual_setup": "Pengaturan manual",
   "interfaces": "Antarmuka",
-  "Protocols.UPnP": "pengontrol UPnP",
-  "HomeAutomation.X10": "pengontrol X10",
+  "Protocols.UPnP": "Pengontrol UPnP",
+  "HomeAutomation.X10": "Pengontrol X10",
   "HomeAutomation.ZWave": "Pengontrol Z-Wave",
   "HomeAutomation.ZigBee": "Pengontrol ZigBee",
   "device_port": "Port perangkat",
@@ -34,7 +34,7 @@
   "group_modules": "Modul dalam grup ini",
   "modules": "Modul",
   "empty_group": "Tidak ada modul dalam grup ini.",
-  "scheduler_wizard": "Panduan Penjadwalan",
+  "scheduler_wizard": "Panduan Penjadwal",
   "schedule_event": "Peristiwa",
   "schedule_type_standard": "Standar",
   "schedule_type_range": "Rentang tanggal",
@@ -52,7 +52,7 @@
   "cronwizard_add_time_slot": "Tambahkan slot waktu",
   "cronwizard_add_exact_time": "Tambahkan waktu yang tepat",
   "cronwizard_start_time": "Waktu mulai",
-  "cronwizard_end_time": "Akhir waktu",
+  "cronwizard_end_time": "Akhir zaman",
   "cronwizard_minutes": "Menit",
   "cronwizard_hours": "Jam",
   "cronwizard_days": "Hari",
@@ -62,7 +62,7 @@
   "cronwizard_minuteselect_selectedminutes": "Menit yang dipilih",
   "cronwizard_hourselect_everyhour": "Setiap jam",
   "cronwizard_hourselect_everynthhour": "Setiap jam yang diberikan",
-  "cronwizard_hourselect_selectedhours": "Jam pilihan",
+  "cronwizard_hourselect_selectedhours": "Jam-jam tertentu",
   "cronwizard_dayselect_everyday": "Setiap hari",
   "cronwizard_dayselect_selecteddays": "Hari-hari terpilih",
   "cronwizard_dayowselect_selecteddaysow": "Hari-hari tertentu dalam seminggu",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Bulan-bulan terpilih",
   "cronwizard_schedule_set_exact_time": "Tetapkan waktu acara.",
   "cronwizard_schedule_set_slot_start": "Tetapkan slot waktu mulai.",
-  "cronwizard_schedule_set_slot_end": "Dimulai dari {{start}} .<span class=\"notranslate\"><br/></span> Tetapkan akhir slot waktu.",
+  "cronwizard_schedule_set_slot_end": "Dimulai pada {{start}}.<span class=\"notranslate\"><br/></span> Tetapkan akhir slot waktu.",
   "cronwizard_bindings_define_types_and_modules": "Tentukan jenis dan modul yang tunduk pada jadwal ini (opsional)",
   "cronwizard_bindings_select_types": "Pilih jenis",
   "cronwizard_action_set_action_to_execute": "Tetapkan tindakan yang akan dijalankan pada kemunculan peristiwa ini",
@@ -80,12 +80,12 @@
   "cronwizard_action_preset_slot_end": "Di akhir slot waktu",
   "cronwizard_action_custom_script": "Skrip tindakan khusus",
   "cronwizard_action_no_action": "Tidak ada tindakan",
-  "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">{{@ name}}</span> sebagai variabel dalam ekspresi cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> dalam program otomatisasi untuk merujuk peristiwa ini.",
+  "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">@{{name}}</span> sebagai variabel dalam ekspresi cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> dalam program otomatisasi untuk merujuk peristiwa ini.",
   "scheduler_preset_action_command_turn_on": "Menyalakan",
   "scheduler_preset_action_command_turn_off": "Mematikan",
-  "scheduler_preset_action_command_set_level": "Mengatur level",
+  "scheduler_preset_action_command_set_level": "Tetapkan level",
   "scheduler_preset_action_config_level": "Tingkat",
-  "scheduler_preset_action_command_set_color": "Mengatur warna",
+  "scheduler_preset_action_command_set_color": "Atur warna",
   "scheduler_preset_action_config_color": "Warna",
   "scheduler_preset_action_command_thermostat_mode": "Mode termostat",
   "scheduler_preset_action_config_mode": "Mode",
@@ -94,8 +94,8 @@
   "scheduler_preset_action_config_mode_heat": "Panas",
   "scheduler_preset_action_config_mode_heat_eco": "Ekonomi panas",
   "scheduler_preset_action_config_mode_cool": "Dingin",
-  "scheduler_preset_action_config_mode_cool_eco": "Ekonomi yang keren",
-  "scheduler_preset_action_program_run": "Jalankan programnya",
+  "scheduler_preset_action_config_mode_cool_eco": "Ekonomi yang dingin",
+  "scheduler_preset_action_program_run": "Jalankan program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Pilihan",
   "scheduler_preset_action_program_say": "Mengatakan",
@@ -103,7 +103,7 @@
   "save_and_build": "Simpan dan bangun",
   "toggle_widgets_preview": "Alihkan pratinjau widget",
   "stop_program": "Hentikan program",
-  "run_program": "Jalankan programnya",
+  "run_program": "Jalankan program",
   "enable_to_run_program": "Aktifkan program untuk menjalankannya",
   "program_status_added": "Ditambahkan",
   "program_status_idle": "Menganggur",
@@ -126,16 +126,16 @@
   "setup_code": "Pengaturan",
   "main_code": "Utama",
   "context_code": "Konteks",
-  "main_code_empty_note": "Kode \"Utama\" kosong. Gunakan editor \"Kode visual\" untuk membuat kode ini: - Buka kategori \"Program\" dari palet perintah di sebelah kiri - Seret blok bertipe \"Utama\" di ruang kerja kode visual - Tambahkan blok kode lain di dalamnya untuk mengimplementasikan tindakan dan logika program ini Program \"Utama\" dapat dijalankan secara manual atau dimulai secara otomatis berdasarkan kondisi yang akhirnya diberikan dalam kode Pengaturan.",
-  "setup_code_empty_note": "Kode \"Setup\" kosong. Gunakan editor \"Visual code\" untuk membuat kode ini: - Buka kategori \"Program\" dari palet perintah di sebelah kiri - Seret blok bertipe \"Setup\" di ruang kerja kode visual - Tambahkan blok kode lain di dalamnya untuk menentukan kondisi yang akan memicu eksekusi kode \"Main\" Kode ini dievaluasi setiap kali terjadi peristiwa baru dan setidaknya satu menit sekali.",
+  "main_code_empty_note": "Kode \"Utama\" kosong. Gunakan editor \"Kode Visual\" untuk membuat kode ini: - Buka kategori \"Program\" dari palet perintah di sebelah kiri - Seret blok bertipe \"Utama\" ke dalam ruang kerja kode visual - Tambahkan blok kode lain di dalamnya untuk mengimplementasikan tindakan dan logika program ini. Program \"Utama\" dapat dijalankan secara manual atau otomatis berdasarkan kondisi yang diberikan dalam kode Pengaturan.",
+  "setup_code_empty_note": "Kode \"Pengaturan\" kosong. Gunakan editor \"Kode Visual\" untuk membuat kode ini: - Buka kategori \"Program\" dari palet perintah di sebelah kiri - Seret blok bertipe \"Pengaturan\" ke dalam ruang kerja kode visual - Tambahkan blok kode lain di dalamnya untuk menentukan kondisi yang akan memicu eksekusi kode \"Utama\". Kode ini dievaluasi setiap kali peristiwa baru terjadi dan setidaknya satu menit sekali.",
   "capture_commands": "Perintah penangkapan",
   "capture_commands_description": "Tambahkan semua perintah yang dijalankan secara manual pada widget ke program.",
-  "capture_commands_pause": "Jeda di antara perintah",
+  "capture_commands_pause": "Jeda antar perintah",
   "capture_pause_none": "Tidak ada",
   "capture_pause_asis": "Dengan adanya",
   "$options": {
     "16": {
-      "Title": "Tingkat Memori",
+      "Title": "Memori Tingkat",
       "Description": "Menyimpan dan memanggil kembali level peredup terakhir.",
       "HomeGenie.LevelMemory": "Ingat level lampu terakhir saat dinyalakan",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan saja"
@@ -143,7 +143,7 @@
     "26": {
       "Title": "Lampu warna",
       "Description": "Contoh integrasi lampu Philips Hue menggunakan HTTP API (V1). Pengguna default untuk terhubung ke bridge adalah \"newdeveloper\" dan seharusnya sudah diaktifkan.",
-      "ConfigureOptions.BridgeAddress": "Alamat IP Jembatan Philips Hue (V1)",
+      "ConfigureOptions.BridgeAddress": "Alamat IP Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Nama belakang",
       "ConfigureOptions.LightsCount": "Jumlah lampu"
     },
@@ -161,7 +161,7 @@
       "MQTT.SensorPublish": "Publikasikan peristiwa yang dipancarkan oleh modul ini",
       "ConfigureOptions.ClientId": "ID Klien.",
       "ConfigureOptions.ServerAddress": "Alamat server",
-      "ConfigureOptions.ServerPort": "Pelabuhan server",
+      "ConfigureOptions.ServerPort": "Port server",
       "ConfigureOptions.Encryption": "Aktifkan enkripsi ujung ke ujung (E2EE)",
       "ConfigureOptions.WebSockets": "Gunakan WebSockets",
       "ConfigureOptions.TLS": "Aktifkan TLS/SSL",
@@ -170,15 +170,15 @@
       "ConfigureOptions.ImportExternal": "Impor modul eksternal"
     },
     "78": {
-      "Title": "Termostat Cerdas",
+      "Title": "Termostat Pintar",
       "Description": "Gunakan sensor suhu dan sakelar pintar apa pun untuk menerapkan fungsi termostat.",
       "VirtualThermostat.TemperatureModule": "Sensor suhu",
-      "VirtualThermostat.HeatingSwitchModule": "saklar pemanas",
+      "VirtualThermostat.HeatingSwitchModule": "Sakelar pemanas",
       "VirtualThermostat.CoolingSwitchModule": "Sakelar pendingin",
       "ConfigureOptions.ThermostatsCount": "Jumlah termostat"
     },
     "81": {
-      "Title": "Monitor Energi",
+      "Title": "Pemantau Energi",
       "Description": "Hasilkan statistik tentang konsumsi energi dan penggunaan perangkat.",
       "EnergyManagement.MonitorStatus": "Memantau status",
       "EnergyManagement.MonitorWatts": "Memantau konsumsi energi"
@@ -191,7 +191,7 @@
     },
     "88": {
       "Title": "Kamera IP generik",
-      "Description": "Menampilkan/mengalihkan umpan gambar dari kamera IP.",
+      "Description": "Menampilkan/mengarahkan umpan gambar dari kamera IP.",
       "IpCamera.ImageURL": "URL API gambar kamera (lihat dokumen kamera Anda)",
       "IpCamera.Username": "Nama pengguna (opsional)",
       "IpCamera.Password": "Kata sandi (opsional)",
@@ -202,13 +202,13 @@
       "Title": "Sistem Alarm Keamanan",
       "Description": "Gunakan sensor dan perangkat lain untuk menerapkan sistem alarm keamanan.",
       "HomeGenie.SecurityAlarm": "Gunakan sebagai alarm/strobo",
-      "HomeGenie.SecurityTriggerHome": "Juga terpicu saat dipersenjatai Beranda",
+      "HomeGenie.SecurityTriggerHome": "Juga dipicu saat dipersenjatai Beranda",
       "HomeGenie.SecuritySensor": "Gunakan sebagai sensor keamanan",
       "ConfigureOptions.Email.Recipients": "Daftar penerima email yang dipisahkan koma untuk pemberitahuan alarm",
       "ConfigureOptions.System.ArmDelay": "Penundaan lengan (detik)",
       "ConfigureOptions.System.SirenStartTime": "Penundaan Mulai Sirene (detik)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirene waktu maks (detik, 0=tak terbatas)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Program untuk dijalankan saat bersenjata",
+      "ConfigureOptions.System.SirenMaxTime": "Sirene Waktu maks (detik, 0=tak terbatas)",
+      "ConfigureOptions.Trigger.ArmedProgram": "Program untuk dijalankan saat dipersenjatai",
       "ConfigureOptions.Trigger.DisarmedProgram": "Program untuk dijalankan saat dilucuti senjatanya",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program untuk dijalankan saat dipicu"
     },
@@ -228,12 +228,12 @@
       "Sensor.Luminance": "Nilai luminansi",
       "Sensor.MotionDetect": "Status deteksi gerakan",
       "Status.Battery": "Tingkat baterai",
-      "Sensor.DoorWindow": "Status sensor pintu/jendela (terbuka/tertutup)",
+      "Sensor.DoorWindow": "Status sensor Pintu/Jendela (terbuka/tertutup)",
       "Status.Level": "Beralih status (hidup/mati)"
     },
     "401": {
       "Title": "Demo - Pintu Toggle",
-      "Description": "Mensimulasikan pintu terbuka/tertutup dari sensor pintu-jendela demo."
+      "Description": "Simulasi pintu terbuka/tertutup dari sensor pintu-jendela demo."
     },
     "402": {
       "Title": "Demo - Gerakan Terdeteksi",
@@ -243,11 +243,11 @@
       "Title": "Simulator sensor",
       "Description": "Memancarkan nilai sensor acak.",
       "Simulator.Sensor.Temperature": "Sensor suhu",
-      "Simulator.Sensor.Humidity": "Sensor Kelembaban",
+      "Simulator.Sensor.Humidity": "Sensor kelembaban",
       "Simulator.Sensor.Luminance": "Sensor cahaya",
       "Simulator.Meter.Watts": "Pengukur Watt",
       "Simulator.Meter.Watts.Max": "Daya Watt Maksimum",
-      "Simulator.Sensor.DataFrequency": "Simulator memancarkan frekuensi"
+      "Simulator.Sensor.DataFrequency": "Frekuensi pancaran simulator"
     },
     "505": {
       "Title": "Kontrol Jarak Jauh",
@@ -260,26 +260,26 @@
     },
     "142": {
       "Title": "Akun email",
-      "Description": "Menyimpan informasi akun e-mail yang digunakan oleh program sistem untuk mengirim/menerima email.",
+      "Description": "Menyimpan info akun email yang digunakan oleh program sistem untuk mengirim/menerima email.",
       "ConfigureOptions.Email.Sender": "1. Alamat email",
       "ConfigureOptions.Email.SmtpServer": "2. Alamat server SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Nama pengguna SMTP (opsional)",
       "ConfigureOptions.Email.SmtpPassword": "4. Kata sandi SMTP (opsional)",
-      "ConfigureOptions.Email.SmtpPort": "5.Port server SMTP",
+      "ConfigureOptions.Email.SmtpPort": "5. Port server SMTP",
       "ConfigureOptions.Email.SmtpUseSsl": "6. Server SMTP menggunakan SSL"
     },
     "145": {
-      "Title": "Perangkat Cerdas",
+      "Title": "Perangkat Pintar",
       "Description": "Nyalakan/matikan perangkat berdasarkan deteksi gerakan dan cahaya sekitar.",
       "HomeGenie.SmartLights.Enable": "Aktifkan 'Perangkat Pintar'",
       "HomeGenie.SmartLights.OnMotionDetect": "Dikendalikan oleh sensor (opsional)",
       "HomeGenie.SmartLights.CheckLuminosity": "Dikendalikan oleh sensor cahaya (opsional)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Matikan setelah batas waktu tidak aktif (detik)",
-      "HomeGenie.SmartLights.MinLuminance": "Nyalakan jika pencahayaannya di bawah:"
+      "HomeGenie.SmartLights.MinLuminance": "Nyalakan jika pencahayaan di bawah:"
     },
     "8": {
       "Title": "Skenario Warna Matahari Terbit",
-      "Description": "Contoh skenario \"Sunrise\" untuk lampu LED yang berubah warna.",
+      "Description": "Contoh skenario \"Matahari Terbit\" untuk lampu LED yang berubah warna.",
       "Scenarios.SunriseColors": "Tautan ke skenario Warna Matahari Terbit"
     },
     "910": {
@@ -291,15 +291,21 @@
     },
     "911": {
       "Title": "Estimasi pose",
-      "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLOv11 bawaan yang telah dilatih sebelumnya (khusus pose manusia).",
+      "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLOv11 terlatih bawaan (pose khusus manusia).",
       "ML.PoseEstimation": "Aktifkan estimasi pose",
       "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
     },
     "912": {
       "Title": "Segmentasi instans",
-      "Description": "Mendeteksi objek dan garis luarnya menggunakan model YOLO11 yang telah dilatih sebelumnya.",
+      "Description": "Deteksi objek dan garis besarnya menggunakan model YOLO11 yang telah dilatih sebelumnya.",
       "ML.InstanceSegmentation": "Aktifkan segmentasi instans",
       "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Penangan Maksud Gemini",
+      "Description": "Mengaktifkan kontrol bahasa alami untuk sistem pintar Anda menggunakan Google Gemini AI. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
+      "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identitas Model"
     }
   }
 }

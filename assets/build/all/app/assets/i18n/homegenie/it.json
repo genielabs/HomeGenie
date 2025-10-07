@@ -536,8 +536,18 @@
         "Abilita la segmentazione delle istanze",
       "ConfigureOptions.Yolo.ModelPath":
         "Percorso del file modello YOLO11 (.onnx)"
-    }
+    },
 
+    "930": {
+      "Title":
+        "Gemini Intent Handler",
+      "Description":
+        "Abilita il controllo del tuo sistema smart tramite linguaggio naturale, utilizzando l'IA Gemini di Google.\nPer attivare questa funzionalità, inserisci una chiave API valida.\nSegui le istruzioni su https://aistudio.google.com/app/apikey per ottenere una chiave API gratuita.",
+      "ConfigureOptions.ApiKey":
+        "Chiave API Google Gemini AI",
+      "ConfigureOptions.ModelId":
+        "ID Modello"
+    }
 
   }
 }

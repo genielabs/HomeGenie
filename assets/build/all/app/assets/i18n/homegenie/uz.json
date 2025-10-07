@@ -33,7 +33,7 @@
   "dashboard_from_group": "Ushbu guruhdan asboblar paneli yarating",
   "group_modules": "Ushbu guruhdagi modullar",
   "modules": "Modullar",
-  "empty_group": "Ushbu guruhda modul yo'q.",
+  "empty_group": "Bu guruhda modul yoʻq.",
   "scheduler_wizard": "Rejalashtiruvchi usta",
   "schedule_event": "Tadbir",
   "schedule_type_standard": "Standart",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Tanlangan oylar",
   "cronwizard_schedule_set_exact_time": "Tadbir vaqtini belgilang.",
   "cronwizard_schedule_set_slot_start": "Boshlanish vaqtini belgilang.",
-  "cronwizard_schedule_set_slot_end": "{{start}} boshlab.<span class=\"notranslate\"><br/></span> Vaqt oralig'ining tugashini belgilang.",
+  "cronwizard_schedule_set_slot_end": "{{start}} dan boshlanadi.<span class=\"notranslate\"><br/></span> Vaqt oralig'ining tugashini belgilang.",
   "cronwizard_bindings_define_types_and_modules": "Ushbu jadvalga bo'ysunadigan turlar va modullarni aniqlang (ixtiyoriy)",
   "cronwizard_bindings_select_types": "Turlarni tanlang",
   "cronwizard_action_set_action_to_execute": "Ushbu hodisa sodir bo'lganda bajariladigan amalni o'rnating",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Vaqt oralig'i oxirida",
   "cronwizard_action_custom_script": "Maxsus harakat skripti",
   "cronwizard_action_no_action": "Hech qanday harakat yo'q",
-  "cronwizard_action_schedule_variable_hint": "Cron ifodalarida oʻzgaruvchi sifatida <span class=\"notranslate color-primary\">@ {{name}}</span> foydalaning yoki ushbu hodisaga havola qilish uchun avtomatlashtirish dasturlarida <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> foydalaning.",
+  "cronwizard_action_schedule_variable_hint": "<span class=\"notranslate color-primary\">@{{name}}</span> dan cron ifodalarida oʻzgaruvchi sifatida foydalaning yoki bu hodisaga havola qilish uchun avtomatlashtirish dasturlarida <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> dan foydalaning.",
   "scheduler_preset_action_command_turn_on": "Yoqish; ishga tushirish",
   "scheduler_preset_action_command_turn_off": "O'chirib qo'yish",
   "scheduler_preset_action_command_set_level": "Darajani o'rnatish",
@@ -112,7 +112,7 @@
   "program_status_background": "Fon",
   "program_status_stopping": "To'xtash",
   "program_status_stopped": "To'xtatildi",
-  "program_status_interrupted": "Uzildi",
+  "program_status_interrupted": "To'xtatildi",
   "program_status_disabled": "O'chirilgan",
   "program_status_enabled": "Yoqilgan",
   "program_status_broken": "Buzilgan",
@@ -167,7 +167,7 @@
       "ConfigureOptions.TLS": "TLS/SSL ni yoqing",
       "ConfigureOptions.Username": "Foydalanuvchi nomi (ixtiyoriy)",
       "ConfigureOptions.Password": "Parol (ixtiyoriy)",
-      "ConfigureOptions.ImportExternal": "Tashqi modullarni import qilish"
+      "ConfigureOptions.ImportExternal": "Tashqi modullarni import qiling"
     },
     "78": {
       "Title": "Aqlli termostat",
@@ -204,9 +204,9 @@
       "HomeGenie.SecurityAlarm": "Signal/strob sifatida foydalaning",
       "HomeGenie.SecurityTriggerHome": "Uy qurollanganda ham ishga tushadi",
       "HomeGenie.SecuritySensor": "Xavfsizlik sensori sifatida foydalaning",
-      "ConfigureOptions.Email.Recipients": "Signal bildirishnomalari uchun qabul qiluvchilarning elektron pochta xabarlarining vergul bilan ajratilgan roʻyxati",
+      "ConfigureOptions.Email.Recipients": "Signal bildirishnomalari uchun qabul qiluvchilarning elektron xatlari vergul bilan ajratilgan roʻyxati",
       "ConfigureOptions.System.ArmDelay": "Qo'lning kechikishi (sekundlar)",
-      "ConfigureOptions.System.SirenStartTime": "Sirenlarni ishga tushirish kechikishi (soniya)",
+      "ConfigureOptions.System.SirenStartTime": "Sirenlarni boshlash kechikishi (soniya)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenlarning maksimal vaqti (soniyalar, 0 = cheksiz)",
       "ConfigureOptions.Trigger.ArmedProgram": "Qurollangan holda ishlash uchun dastur",
       "ConfigureOptions.Trigger.DisarmedProgram": "Qurolsizlanganda ishga tushadigan dastur",
@@ -219,7 +219,7 @@
     },
     "111": {
       "Title": "Mijoz konfiguratsiyasi",
-      "Description": "UI va asboblar paneli sozlamalarini saqlash uchun foydalaniladigan mijozning konfiguratsiya profillarini boshqarish uchun APIni amalga oshiradi."
+      "Description": "UI va asboblar paneli sozlamalarini saqlash uchun ishlatiladigan mijozning konfiguratsiya profillarini boshqarish uchun APIni amalga oshiradi."
     },
     "400": {
       "Title": "Virtual modullar demo",
@@ -270,7 +270,7 @@
     },
     "145": {
       "Title": "Aqlli qurilma",
-      "Description": "Harakatni aniqlash va atrofdagi yorug'lik asosida qurilmani yoqing/o'chiring.",
+      "Description": "Harakatni aniqlash va atrof-muhit yorug'ligi asosida qurilmani yoqing/o'chiring.",
       "HomeGenie.SmartLights.Enable": "“Aqlli qurilma”ni yoqish",
       "HomeGenie.SmartLights.OnMotionDetect": "Sensor tomonidan boshqariladi (ixtiyoriy)",
       "HomeGenie.SmartLights.CheckLuminosity": "Yorug'lik sensori tomonidan boshqariladi (ixtiyoriy)",
@@ -279,7 +279,7 @@
     },
     "8": {
       "Title": "Quyosh chiqishi ranglari stsenariysi",
-      "Description": "Rangni o'zgartiruvchi LED chiroqlari uchun \"Sunrise\" stsenariysi misoli.",
+      "Description": "Rangni o'zgartiruvchi LED yoritgichlar uchun \"Sunrise\" stsenariysi misoli.",
       "Scenarios.SunriseColors": "Sunrise Colors stsenariysiga havola"
     },
     "910": {
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "Pozani baholash",
-      "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLOv11 modeli (insonga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
+      "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLOv11 modeli (odamga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
       "ML.PoseEstimation": "Pozni baholashni yoqish",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "Oldindan oʻrgatilgan YOLO11 modeli yordamida obʼyektlar va ularning konturlarini aniqlang.",
       "ML.InstanceSegmentation": "Misol segmentatsiyasini yoqing",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
+    },
+    "930": {
+      "Title": "Egizaklar niyati boshqaruvchisi",
+      "Description": "Google Gemini AI yordamida aqlli tizimingiz uchun tabiiy tilni boshqarish imkonini beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
+      "ConfigureOptions.ModelId": "Model ID"
     }
   }
 }

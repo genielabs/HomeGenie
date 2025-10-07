@@ -32,7 +32,7 @@
   "delete_group": "Share rukuni",
   "dashboard_from_group": "Ƙirƙiri dashboard daga wannan rukunin",
   "group_modules": "Modules a cikin wannan rukuni",
-  "modules": "Moduloli",
+  "modules": "Modules",
   "empty_group": "Babu kayayyaki a cikin wannan rukunin.",
   "scheduler_wizard": "Mayen Jadawalin",
   "schedule_event": "Lamarin",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Zababbun watanni",
   "cronwizard_schedule_set_exact_time": "Saita lokacin taron.",
   "cronwizard_schedule_set_slot_start": "Saita lokacin farawa.",
-  "cronwizard_schedule_set_slot_end": "Farawa daga {{start}} .<span class=\"notranslate\"><br/></span> Saita ƙarshen ramin lokaci.",
+  "cronwizard_schedule_set_slot_end": "Farawa a {{start}}.<span class=\"notranslate\"><br/></span> Saita ƙarshen ramin lokaci.",
   "cronwizard_bindings_define_types_and_modules": "Ƙayyade nau'o'i da kayayyaki waɗanda ke ƙarƙashin wannan jadawalin (na zaɓi)",
   "cronwizard_bindings_select_types": "Zaɓi nau'ikan",
   "cronwizard_action_set_action_to_execute": "Saita mataki don aiwatar da abubuwan da suka faru na wannan taron",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "A ƙarshen lokacin ramin",
   "cronwizard_action_custom_script": "Rubutun ayyuka na al'ada",
   "cronwizard_action_no_action": "Babu aiki",
-  "cronwizard_action_schedule_variable_hint": "Yi amfani da <span class=\"notranslate color-primary\">@ {{name}}</span> azaman mai canzawa a cikin maganganun cron ko amfani da <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> a cikin shirye-shiryen sarrafa kansa don yin la'akari da wannan taron.",
+  "cronwizard_action_schedule_variable_hint": "Yi amfani da <span class=\"notranslate color-primary\">@{{name}}</span> azaman mai canzawa a cikin maganganun cron ko amfani da <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> a cikin shirye-shiryen sarrafa kansa don yin la'akari da wannan taron.",
   "scheduler_preset_action_command_turn_on": "Kunna",
   "scheduler_preset_action_command_turn_off": "Kashe",
   "scheduler_preset_action_command_set_level": "Saita matakin",
@@ -127,7 +127,7 @@
   "main_code": "Babban",
   "context_code": "Magana",
   "main_code_empty_note": "Lambar \"Babban\" babu komai. Yi amfani da editan \"Kayan gani\" don samar da wannan lambar: - Buɗe nau'in \"Shirin\" daga palette na umarni a hagu - Jawo wani toshe nau'in \"Main\" a cikin filin aikin na'urar gani - Ƙara a ciki da sauran katangar lambar don aiwatar da ayyuka da dabaru na wannan shirin Shirin \"Main\" na iya zama ko dai yana gudana da hannu ko farawa ta atomatik bisa ga yanayin ƙarshe da aka bayar a cikin lambar saiti.",
-  "setup_code_empty_note": "Lambar \"Setup\" babu komai. Yi amfani da editan \"Kayan gani\" don samar da wannan lambar: - Buɗe nau'in \"Shirin\" daga palette na umarni a hagu - Jawo wani toshe nau'in \"Saitu\" a cikin filin aiki na lambar gani - Ƙara a cikinsa wasu katangar lambar don sanin yanayin da zai haifar da \"Babban\" code kisa Wannan lambar tana samun kimanta duk lokacin da wani sabon abu ya faru kuma aƙalla sau ɗaya a minti daya.",
+  "setup_code_empty_note": "Lambar \"Setup\" babu komai. Yi amfani da editan \"Kayan gani\" don samar da wannan lambar: - Buɗe nau'in \"Shirin\" daga palette na umarni a hagu - Jawo wani toshe nau'in \"Saitu\" a cikin filin aiki na lambar gani - Ƙara a cikinsa wasu katangar lambar don sanin yanayin da zai haifar da kisa lambar \"Babban\" Ana ƙididdige wannan lambar a duk lokacin da wani sabon abu ya faru kuma aƙalla sau ɗaya a minti daya.",
   "capture_commands": "Ɗaukar umarni",
   "capture_commands_description": "Ƙara duk umarnin da aka yi da hannu akan widget din zuwa shirin.",
   "capture_commands_pause": "Dakata tsakanin umarni",
@@ -143,7 +143,7 @@
     "26": {
       "Title": "Hasken launi",
       "Description": "Misali Haɗin fitilun Philips Hue ta amfani da HTTP API (V1). Tsohuwar mai amfani don haɗawa da gadar shine \"sabon mai haɓakawa\" kuma ya kamata a riga an kunna shi.",
-      "ConfigureOptions.BridgeAddress": "Adireshin IP na Philips Hue Bridge (V1).",
+      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) adireshin IP",
       "ConfigureOptions.BridgeUsername": "Sunan mai amfani",
       "ConfigureOptions.LightsCount": "Yawan fitilu"
     },
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Generic IP kamara",
       "Description": "Nuna/ ciyarwar hoton hanya daga kyamarar IP.",
-      "IpCamera.ImageURL": "Hoton API URL (duba takardun kyamarar ku)",
+      "IpCamera.ImageURL": "Hoton API URL (duba takardun kamara)",
       "IpCamera.Username": "Sunan mai amfani (na zaɓi)",
       "IpCamera.Password": "Kalmar wucewa (na zaɓi)",
       "Widget.Config.fps": "Frames a sakan daya",
@@ -263,7 +263,7 @@
       "Description": "Ana adana bayanan asusun imel ɗin da shirye-shiryen tsarin ke amfani da shi don aikawa da karɓar imel.",
       "ConfigureOptions.Email.Sender": "1. Adireshin Imel",
       "ConfigureOptions.Email.SmtpServer": "2. Adireshin uwar garken SMTP",
-      "ConfigureOptions.Email.SmtpUserName": "3. SMTP sunan mai amfani (na zaɓi)",
+      "ConfigureOptions.Email.SmtpUserName": "3. Sunan mai amfani na SMTP (na zaɓi)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP kalmar sirri (na zaɓi)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP tashar jiragen ruwa",
       "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP uwar garken amfani da SSL"
@@ -272,8 +272,8 @@
       "Title": "Na'urar Wayo",
       "Description": "Kunna/kashe na'urar bisa ga gano motsi da hasken yanayi.",
       "HomeGenie.SmartLights.Enable": "Kunna 'Smart Device'",
-      "HomeGenie.SmartLights.OnMotionDetect": "Sarrafa ta hanyar firikwensin (na zaɓi)",
-      "HomeGenie.SmartLights.CheckLuminosity": "Ana sarrafa ta firikwensin haske (na zaɓi)",
+      "HomeGenie.SmartLights.OnMotionDetect": "Sarrafa ta firikwensin (na zaɓi)",
+      "HomeGenie.SmartLights.CheckLuminosity": "Ana sarrafa ta ta firikwensin haske (na zaɓi)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Kashe bayan rashin aiki (daƙiƙa)",
       "HomeGenie.SmartLights.MinLuminance": "Kunna idan hasken yana ƙasa:"
     },
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "Matsayin ƙima",
-      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da samfuran ONNX na al'ada ko ƙirar YOLOv11 da aka riga aka horar da ita (takamaiman matsayi na ɗan adam).",
+      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da ƙirar ONNX na al'ada ko ƙirar YOLOv11 da aka riga aka horar da ita (takamaiman matsayi na mutum).",
       "ML.PoseEstimation": "Kunna kimar matsayi",
       "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "Gano abubuwa da fassarorinsu ta amfani da ƙirar YOLO11 da aka riga aka horar.",
       "ML.InstanceSegmentation": "Kunna sashin misali",
       "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "Yana ba da damar sarrafa harshe na halitta don tsarin ku mai wayo ta amfani da Google's Gemini AI. Don kunna wannan fasalin, shigar da maɓallin API mai aiki. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI key",
+      "ConfigureOptions.ModelId": "Model ID"
     }
   }
 }

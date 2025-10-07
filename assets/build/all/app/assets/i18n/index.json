@@ -60,9 +60,9 @@
     "name": "Chinese",
     "nativeName": "中文 (Zhōngwén), 汉语, 漢語"
   },
-  "co": {
-    "name": "Corsican",
-    "nativeName": "corsu, lingua corsa"
+  "zh-tw": {
+    "name": "Chinese (Traditional)",
+    "nativeName": "繁體中文 (Fántǐ Zhōngwén)"
   },
   "hr": {
     "name": "Croatian",
@@ -284,21 +284,9 @@
     "name": "Sindhi",
     "nativeName": "सिन्धी, سنڌي، سندھی‎"
   },
-  "sm": {
-    "name": "Samoan",
-    "nativeName": "gagana faa Samoa"
-  },
   "sr": {
     "name": "Serbian",
     "nativeName": "српски језик"
-  },
-  "gd": {
-    "name": "Scottish Gaelic; Gaelic",
-    "nativeName": "Gàidhlig"
-  },
-  "sn": {
-    "name": "Shona",
-    "nativeName": "chiShona"
   },
   "si": {
     "name": "Sinhala, Sinhalese",
@@ -316,17 +304,9 @@
     "name": "Somali",
     "nativeName": "Soomaaliga, af Soomaali"
   },
-  "st": {
-    "name": "Southern Sotho",
-    "nativeName": "Sesotho"
-  },
   "es": {
     "name": "Spanish; Castilian",
     "nativeName": "español, castellano"
-  },
-  "su": {
-    "name": "Sundanese",
-    "nativeName": "Basa Sunda"
   },
   "sw": {
     "name": "Swahili",
@@ -383,18 +363,6 @@
   "cy": {
     "name": "Welsh",
     "nativeName": "Cymraeg"
-  },
-  "fy": {
-    "name": "Western Frisian",
-    "nativeName": "Frysk"
-  },
-  "xh": {
-    "name": "Xhosa",
-    "nativeName": "isiXhosa"
-  },
-  "yi": {
-    "name": "Yiddish",
-    "nativeName": "ייִדיש"
   },
   "yo": {
     "name": "Yoruba",

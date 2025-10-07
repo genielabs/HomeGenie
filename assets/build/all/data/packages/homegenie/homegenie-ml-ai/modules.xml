@@ -1,6 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Module>
+    <Name>Gemini Intent Handler</Name>
+    <Description>Enables natural language control for your smart system using Google's Gemini AI.
+To activate this feature, enter a valid API key.
+Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>930</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ApiKey</Name>
+        <Value>?</Value>
+        <Description>Google Gemini AI API key</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T11:53:45.6200412Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ModelId</Name>
+        <Value>gemini-2.5-flash-lite</Value>
+        <Description>Model ID</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T11:53:45.6200482Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Notification</Name>
+        <Value>{"Title":"Gemini Intent Handler","Message":"ERROR #1: Gemini Intent Handler not properly configured. [program_configure]"}</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T21:32:09.0777913Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Background</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T21:32:00.1278176Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T21:31:58.9974774Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>930</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T21:32:00.1352132Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-06T21:31:58.6610371Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
     <Name>Instance Segmentation</Name>
     <Description>Detect objects and their contour mask using a pre-trained YOLO11 model.
 </Description>
@@ -46,7 +114,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:46:53.8674507Z</UpdateTime>
+        <UpdateTime>2025-10-06T11:53:45.6230963Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -105,7 +173,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:46:53.8674451Z</UpdateTime>
+        <UpdateTime>2025-10-06T11:53:45.6231003Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -163,7 +231,7 @@
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:46:53.8674476Z</UpdateTime>
+        <UpdateTime>2025-10-06T11:53:45.6231045Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

@@ -3,7 +3,7 @@
   "welcome_to_homegenie": "Chào mừng đến với HomeGenie!",
   "welcome_subtitle": "Trí thông minh tự động hóa có thể lập trình",
   "not_configured_yet": "Hệ thống chưa được cấu hình. Trình hướng dẫn thiết lập này sẽ giúp bạn thiết lập và chạy hệ thống chỉ trong vài bước.",
-  "system_config_start_with_base_and_backup": "Khôi phục từ tập tin sao lưu",
+  "system_config_start_with_base_and_backup": "Khôi phục từ tệp sao lưu",
   "system_config_start_with_default_setup": "Thiết lập mặc định",
   "system_config_include_demo": "Bao gồm bản demo với hoạt động thiết bị mô phỏng",
   "system_config_additional_features": "Các tính năng bổ sung",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "từ",
   "cronwizard_description_ending": "ĐẾN",
   "cronwizard_description_at": "Tại",
-  "cronwizard_add_time_slot": "Thêm khoảng thời gian",
+  "cronwizard_add_time_slot": "Thêm khung thời gian",
   "cronwizard_add_exact_time": "Thêm thời gian chính xác",
   "cronwizard_start_time": "Thời gian bắt đầu",
   "cronwizard_end_time": "Thời gian kết thúc",
@@ -67,27 +67,27 @@
   "cronwizard_dayselect_selecteddays": "Những ngày đã chọn",
   "cronwizard_dayowselect_selecteddaysow": "Những ngày trong tuần được chọn",
   "cronwizard_monthselect_everymonth": "Mỗi tháng",
-  "cronwizard_monthselect_selectedmonths": "Tháng đã chọn",
+  "cronwizard_monthselect_selectedmonths": "Những tháng đã chọn",
   "cronwizard_schedule_set_exact_time": "Đặt thời gian sự kiện.",
   "cronwizard_schedule_set_slot_start": "Đặt thời gian bắt đầu.",
-  "cronwizard_schedule_set_slot_end": "Bắt đầu từ lúc {{start}} .<span class=\"notranslate\"><br/></span> Đặt thời gian kết thúc.",
+  "cronwizard_schedule_set_slot_end": "Bắt đầu từ {{start}}.<span class=\"notranslate\"><br/></span> Đặt thời gian kết thúc.",
   "cronwizard_bindings_define_types_and_modules": "Xác định các loại và mô-đun tuân theo lịch trình này (tùy chọn)",
   "cronwizard_bindings_select_types": "Chọn loại",
-  "cronwizard_action_set_action_to_execute": "Đặt hành động thực hiện khi sự kiện này xảy ra",
-  "cronwizard_action_preset_actions": "Hành động cài đặt trước",
-  "cronwizard_action_preset_every_occurrence": "Vào mọi sự kiện xảy ra",
+  "cronwizard_action_set_action_to_execute": "Đặt hành động để thực hiện khi sự kiện này xảy ra",
+  "cronwizard_action_preset_actions": "Các hành động cài đặt trước",
+  "cronwizard_action_preset_every_occurrence": "Trong mọi sự kiện xảy ra",
   "cronwizard_action_preset_slot_start": "Vào lúc bắt đầu một khoảng thời gian",
   "cronwizard_action_preset_slot_end": "Vào cuối một khoảng thời gian",
   "cronwizard_action_custom_script": "Kịch bản hành động tùy chỉnh",
   "cronwizard_action_no_action": "Không có hành động",
-  "cronwizard_action_schedule_variable_hint": "Sử dụng <span class=\"notranslate color-primary\">@ {{name}}</span> làm biến trong biểu thức cron hoặc sử dụng <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> trong các chương trình tự động hóa để tham chiếu đến sự kiện này.",
+  "cronwizard_action_schedule_variable_hint": "Sử dụng <span class=\"notranslate color-primary\">@{{name}}</span> làm biến trong biểu thức cron hoặc sử dụng <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> trong các chương trình tự động hóa để tham chiếu đến sự kiện này.",
   "scheduler_preset_action_command_turn_on": "Bật lên",
-  "scheduler_preset_action_command_turn_off": "Tắt đi",
+  "scheduler_preset_action_command_turn_off": "Tắt",
   "scheduler_preset_action_command_set_level": "Đặt mức",
   "scheduler_preset_action_config_level": "Mức độ",
   "scheduler_preset_action_command_set_color": "Đặt màu",
   "scheduler_preset_action_config_color": "Màu sắc",
-  "scheduler_preset_action_command_thermostat_mode": "Chế độ nhiệt độ",
+  "scheduler_preset_action_command_thermostat_mode": "Chế độ điều chỉnh nhiệt độ",
   "scheduler_preset_action_config_mode": "Cách thức",
   "scheduler_preset_action_config_mode_on": "TRÊN",
   "scheduler_preset_action_config_mode_off": "Tắt",
@@ -117,17 +117,17 @@
   "program_status_enabled": "Đã bật",
   "program_status_broken": "Vỡ",
   "program_status_compile": "Biên dịch",
-  "automation_programming_guide": "Hướng dẫn lập trình'",
+  "automation_programming_guide": "Hướng dẫn lập trình",
   "tap_to_disable": "Nhấp để vô hiệu hóa",
   "tap_to_enable": "Nhấp để kích hoạt",
   "program_data": "Dữ liệu chương trình",
-  "visual_code": "Mã hình ảnh",
+  "visual_code": "Mã trực quan",
   "generated_code": "Mã đã tạo",
   "setup_code": "Cài đặt",
   "main_code": "Chủ yếu",
   "context_code": "Bối cảnh",
-  "main_code_empty_note": "Mã \"Main\" trống. Sử dụng trình soạn thảo \"Visual code\" để tạo mã này: - Mở danh mục \"Program\" từ bảng lệnh ở bên trái - Kéo một khối loại \"Main\" vào không gian làm việc của visual code - Thêm vào bên trong nó các khối mã khác để triển khai các hành động và logic của chương trình này Chương trình \"Main\" có thể được chạy thủ công hoặc tự động khởi động dựa trên các điều kiện cuối cùng được đưa ra trong mã Thiết lập.",
-  "setup_code_empty_note": "Mã \"Setup\" trống. Sử dụng trình soạn thảo \"Visual code\" để tạo mã này: - Mở danh mục \"Program\" từ bảng lệnh ở bên trái - Kéo một khối loại \"Setup\" vào không gian làm việc của visual code - Thêm vào bên trong nó các khối mã khác để xác định các điều kiện sẽ kích hoạt thực thi mã \"Main\" Mã này được đánh giá mỗi khi có sự kiện mới xảy ra và ít nhất một lần mỗi phút.",
+  "main_code_empty_note": "Mã \"Main\" trống. Sử dụng trình soạn thảo \"Visual code\" để tạo mã này: - Mở danh mục \"Program\" từ bảng lệnh bên trái - Kéo một khối kiểu \"Main\" vào không gian làm việc của Visual code - Thêm các khối mã khác vào bên trong để triển khai các hành động và logic của chương trình này. Chương trình \"Main\" có thể được chạy thủ công hoặc tự động khởi động dựa trên các điều kiện được đưa ra trong mã Thiết lập.",
+  "setup_code_empty_note": "Mã \"Thiết lập\" đang trống. Sử dụng trình soạn thảo \"Mã trực quan\" để tạo mã này: - Mở danh mục \"Chương trình\" từ bảng lệnh bên trái - Kéo một khối kiểu \"Thiết lập\" vào không gian làm việc của mã trực quan - Thêm các khối mã khác vào bên trong để xác định các điều kiện sẽ kích hoạt thực thi mã \"Chính\". Mã này được đánh giá mỗi khi có sự kiện mới xảy ra và ít nhất mỗi phút một lần.",
   "capture_commands": "Lệnh chụp",
   "capture_commands_description": "Thêm tất cả các lệnh được thực hiện thủ công trên các tiện ích vào chương trình.",
   "capture_commands_pause": "Tạm dừng giữa các lệnh",
@@ -142,7 +142,7 @@
     },
     "26": {
       "Title": "Đèn màu",
-      "Description": "Ví dụ tích hợp đèn Philips Hue bằng HTTP API (V1). Người dùng mặc định để kết nối với cầu nối là \"newdeveloper\" và người dùng này phải được bật.",
+      "Description": "Ví dụ tích hợp đèn Philips Hue bằng API HTTP (V1). Người dùng mặc định để kết nối với cầu nối là \"newdeveloper\" và người dùng này phải được bật sẵn.",
       "ConfigureOptions.BridgeAddress": "Địa chỉ IP của Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Tên người dùng",
       "ConfigureOptions.LightsCount": "Số lượng đèn"
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Mạng MQTT",
-      "Description": "Kết nối với môi giới MQTT để sử dụng ứng dụng HomeGenie Panel từ mọi nơi qua Internet hoặc để kết nối các thiết bị HomeGenie trên cùng một mạng MQTT.",
+      "Description": "Kết nối với môi giới MQTT để sử dụng ứng dụng HomeGenie Panel từ bất kỳ đâu qua Internet hoặc để kết nối các thiết bị HomeGenie trên cùng một mạng MQTT.",
       "MQTT.SensorPublish": "Xuất bản các sự kiện được phát ra bởi mô-đun này",
       "ConfigureOptions.ClientId": "Mã khách hàng",
       "ConfigureOptions.ServerAddress": "Địa chỉ máy chủ",
@@ -185,7 +185,7 @@
     },
     "82": {
       "Title": "Chế độ tiết kiệm năng lượng",
-      "Description": "Giữ mức độ ánh sáng dưới mức phần trăm có thể cấu hình được.",
+      "Description": "Giữ mức độ ánh sáng dưới một tỷ lệ phần trăm có thể cấu hình được.",
       "EnergyManagement.EnergySavingLevel": "Mức độ ánh sáng tối đa (%)",
       "EnergyManagement.EnergySavingMode": "Cho phép"
     },
@@ -201,10 +201,10 @@
     "90": {
       "Title": "Hệ thống báo động an ninh",
       "Description": "Sử dụng cảm biến và các thiết bị khác để triển khai hệ thống báo động an ninh.",
-      "HomeGenie.SecurityAlarm": "Sử dụng như báo thức/nhấp nháy",
+      "HomeGenie.SecurityAlarm": "Sử dụng như báo thức/đèn nhấp nháy",
       "HomeGenie.SecurityTriggerHome": "Cũng kích hoạt khi được trang bị Trang chủ",
       "HomeGenie.SecuritySensor": "Sử dụng như cảm biến an ninh",
-      "ConfigureOptions.Email.Recipients": "Danh sách email của người nhận được phân tách bằng dấu phẩy để nhận thông báo cảnh báo",
+      "ConfigureOptions.Email.Recipients": "Danh sách email người nhận được phân tách bằng dấu phẩy để nhận thông báo cảnh báo",
       "ConfigureOptions.System.ArmDelay": "Độ trễ của cánh tay (giây)",
       "ConfigureOptions.System.SirenStartTime": "Độ trễ khởi động còi báo động (giây)",
       "ConfigureOptions.System.SirenMaxTime": "Thời gian tối đa của còi báo động (giây, 0 = vô hạn)",
@@ -219,11 +219,11 @@
     },
     "111": {
       "Title": "Cấu hình máy khách",
-      "Description": "Triển khai API để quản lý hồ sơ cấu hình của máy khách được sử dụng để lưu trữ cài đặt giao diện người dùng và bảng thông tin."
+      "Description": "Triển khai API để quản lý hồ sơ cấu hình của khách hàng được sử dụng để lưu trữ cài đặt UI và bảng điều khiển."
     },
     "400": {
       "Title": "Bản demo mô-đun ảo",
-      "Description": "Thiết lập thủ công các giá trị của thiết bị ảo.",
+      "Description": "Đặt giá trị thủ công cho thiết bị ảo.",
       "Sensor.Temperature": "Giá trị nhiệt độ",
       "Sensor.Luminance": "Giá trị độ sáng",
       "Sensor.MotionDetect": "Trạng thái phát hiện chuyển động",
@@ -245,9 +245,9 @@
       "Simulator.Sensor.Temperature": "Cảm biến nhiệt độ",
       "Simulator.Sensor.Humidity": "Cảm biến độ ẩm",
       "Simulator.Sensor.Luminance": "Cảm biến ánh sáng",
-      "Simulator.Meter.Watts": "Đồng hồ đo watt",
+      "Simulator.Meter.Watts": "Công tơ watt",
       "Simulator.Meter.Watts.Max": "Công suất tối đa Watt",
-      "Simulator.Sensor.DataFrequency": "Tần số phát ra của máy mô phỏng"
+      "Simulator.Sensor.DataFrequency": "Tần số phát xạ của bộ mô phỏng"
     },
     "505": {
       "Title": "Điều khiển từ xa",
@@ -259,9 +259,9 @@
       "ConfigureOptions.DimmerInterval": "Bước làm mờ"
     },
     "142": {
-      "Title": "Tài khoản E-mail",
+      "Title": "Tài khoản email",
       "Description": "Lưu trữ thông tin tài khoản email được các chương trình hệ thống sử dụng để gửi/nhận email.",
-      "ConfigureOptions.Email.Sender": "1. Địa chỉ E-mail",
+      "ConfigureOptions.Email.Sender": "1. Địa chỉ email",
       "ConfigureOptions.Email.SmtpServer": "2. Địa chỉ máy chủ SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Tên người dùng SMTP (tùy chọn)",
       "ConfigureOptions.Email.SmtpPassword": "4. Mật khẩu SMTP (tùy chọn)",
@@ -278,15 +278,15 @@
       "HomeGenie.SmartLights.MinLuminance": "Bật nếu độ sáng thấp hơn:"
     },
     "8": {
-      "Title": "Kịch bản màu sắc mặt trời mọc",
+      "Title": "Kịch bản màu sắc bình minh",
       "Description": "Ví dụ về kịch bản \"Bình minh\" cho đèn LED đổi màu.",
       "Scenarios.SunriseColors": "Liên kết đến kịch bản Sunrise Colors"
     },
     "910": {
       "Title": "Phát hiện đối tượng",
-      "Description": "Phát hiện vật thể bằng mô hình YOLO11 đã được đào tạo trước.",
-      "ML.ObjectDetection": "Bật phát hiện đối tượng",
-      "ML.ObjectDetection.TriggerDetect": "Danh sách các thứ được phân tách bằng dấu phẩy (bằng tiếng Anh) sẽ kích hoạt báo động. (ví dụ: mèo, chó, người, ba lô, vali)",
+      "Description": "Phát hiện đối tượng bằng mô hình YOLO11 đã được đào tạo trước.",
+      "ML.ObjectDetection": "Cho phép phát hiện đối tượng",
+      "ML.ObjectDetection.TriggerDetect": "Danh sách các thứ được phân tách bằng dấu phẩy (bằng tiếng Anh) có thể kích hoạt báo động. (ví dụ: mèo, chó, người, ba lô, vali)",
       "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
     },
     "911": {
@@ -296,10 +296,16 @@
       "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Phân đoạn trường hợp",
-      "Description": "Phát hiện vật thể và hình dạng của chúng bằng mô hình YOLO11 đã được đào tạo trước.",
-      "ML.InstanceSegmentation": "Bật phân đoạn phiên bản",
+      "Title": "Phân đoạn phiên bản",
+      "Description": "Phát hiện các vật thể và đường viền của chúng bằng mô hình YOLO11 đã được đào tạo trước.",
+      "ML.InstanceSegmentation": "Cho phép phân đoạn phiên bản",
       "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Trình xử lý ý định Gemini",
+      "Description": "Cho phép kiểm soát ngôn ngữ tự nhiên cho hệ thống thông minh của bạn bằng Gemini AI của Google. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
+      "ConfigureOptions.ApiKey": "Khóa API AI Gemini của Google",
+      "ConfigureOptions.ModelId": "Mã số mô hình"
     }
   }
 }

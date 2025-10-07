@@ -349,7 +349,12 @@ namespace HomeGenie.Service.Handlers
                             "Content-Disposition",
                             "attachment; filename=\"" + filename + ".hgx\""
                         );
-                        request.ResponseData = builder.ToString();
+
+                        byte[] data = Encoding.UTF8.GetBytes(builder.ToString());
+                        var response = (request.Context.Data as HttpListenerContext).Response;
+                        response.ContentLength64 = data.Length; // È una buona pratica impostare la lunghezza
+                        response.OutputStream.Write(data, 0, data.Length);
+                        request.ResponseData = null;
                     }
                     break;
 

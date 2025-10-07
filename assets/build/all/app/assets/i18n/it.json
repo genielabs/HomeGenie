@@ -321,5 +321,7 @@
   "card_opacity": "Opacità scheda",
   "card_blur": "Sfocatura scheda",
   "upnp_dlna_device": "Dispositivo UPnP/DLNA",
-  "no_modules_selected": "Nessun modulo selezionato."
+  "no_modules_selected": "Nessun modulo selezionato.",
+  "select_interpreter": "Interprete selezionato:",
+  "builtin_simple_parser": "Interprete semplice integrato"
 }

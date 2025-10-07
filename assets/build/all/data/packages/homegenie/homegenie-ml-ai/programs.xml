@@ -1,6 +1,210 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
+    <ScriptSetup>// This method is used to register this program as a "AI intent handler"
+Program.Implements(
+    "@AI:IntentHandler",
+    API_URL
+)
+.AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
+.AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
+.Run();
+</ScriptSetup>
+    <ScriptSource>Api.Handle($"{API_URL}/Process", (userCommand) =&gt; {
+  /*
+    var devices = new List&lt;object&gt;
+    {
+        new { name = "LED strip", group = "Kitchen", address = "4", domain = "HomeAutomation.ZigBee" }
+        // ... other devices
+    };
+  */
+
+
+  // Check if Gemini API key and model were set
+  string geminiApiKey = Program.Option("ApiKey").Value.Trim();
+  string geminiModelId = Program.Option("ModelId").Value.Trim();
+  if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || String.IsNullOrEmpty(geminiModelId))
+  {
+    string error = "Gemini Intent Handler not properly configured.";
+    Program.Notify($"ERROR #1: {error} [program_configure]");
+    return new IntentHandlerResponse() {
+        answer = $"{error} Go to settings page to configure it."
+    };
+  }
+
+
+  var allowedDeviceTypes = new[] { "Dimmer", "Light", "Color" };
+  var devices = Modules.Groups
+    .SelectMany(
+        groupName =&gt; Modules.InGroup(groupName).SelectedModules
+                          .Where(module =&gt; allowedDeviceTypes.Contains(module.DeviceType.ToString())),
+        (groupName, module) =&gt; new
+        {
+            name = module.Name,
+            group = groupName,
+            address = module.Address,
+            domain = module.Domain
+        }
+    )
+    .ToList();
+
+  string devicesJson = JsonConvert.SerializeObject(devices, Formatting.Indented);
+  string fullPrompt = $"{GEMINI_SYSTEM_PROMPT}\n\nDEVICE LIST:\n{devicesJson}\n\nUSER COMMAND:\n\"{userCommand}\"";
+  var payload = new
+  {
+      contents = new[]
+      {
+          new
+          {
+              parts = new[]
+              {
+                  new { text = fullPrompt }
+              }
+          }
+      },
+      generationConfig = new
+      {
+          temperature = 0.3
+      }
+  };
+
+  string payloadJson = JsonConvert.SerializeObject(payload);
+  string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+  var data = Net
+    .WebService(geminiRequestUrl)
+    .AddHeader("Content-Type", "application/json")
+    .Post(payloadJson)
+    .GetData();
+
+  var response = new IntentHandlerResponse();
+
+  try
+  {
+      string commandJsonString = data.candidates[0].content.parts[0].text;
+      if (!string.IsNullOrEmpty(commandJsonString))
+      {
+          commandJsonString = commandJsonString.Trim();
+          if (commandJsonString.StartsWith("```json"))
+          {
+              commandJsonString = commandJsonString.Substring(7, commandJsonString.Length - 7 - 3).Trim();
+          }
+          dynamic hgCommand = JsonConvert.DeserializeObject&lt;dynamic&gt;(commandJsonString);
+          string answer = hgCommand.answer;
+
+        JArray commands = hgCommand.commands;
+
+        //Program.Notify(answer);
+        //Program.Say(answer);
+        response.answer = answer;
+
+        if (commands != null)
+        {
+            foreach (var commandToken in commands)
+            {
+                string command = commandToken.ToString();
+                if (command.ToUpper() != "NONE")
+                {
+                    Program.Log.Info($"Executing commands from Gemini: {command}");
+                    Api.Call(command);
+                    response.commands.Add(command);
+                }
+            }
+        }
+
+      }
+      else
+      {
+          //Program.Notify("Gemini's reply does not contain valid commands.");
+          response.answer = "invalid_reply";
+      }
+  }
+  catch (Exception ex)
+  {
+      //Program.Notify($"Error while processing dynamic response payload: {ex.Message}");
+      response.answer = $"error: ${ex.Message}";
+  }
+
+  return response;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>const string API_URL = "AI.IntentHandlers/Gemini";
+const string DEFAULT_MODEL_ID = "gemini-2.5-flash-lite";
+
+public class IntentHandlerResponse
+{
+    public string answer { get; set; }
+    public List&lt;string&gt; commands { get; set; }
+
+    public IntentHandlerResponse()
+    {
+        answer = "";
+        commands = new List&lt;string&gt;();
+    }
+}
+
+const string GEMINI_SYSTEM_PROMPT = @"You are a home automation assistant. Your only task is to convert user commands into a valid JSON object.
+
+**CRITICAL RULE: Your entire response must be ONLY a valid JSON object. The `answer` field inside the JSON must be in the exact same language as the `User Command`.**
+
+The JSON object must contain two keys: ""answer"" (a confirmation phrase) and ""commands"" (an array of API call strings).
+**For single actions, the ""commands"" array will contain just one element.**
+If the command is invalid, ""commands"" must be `[""NONE""]` and the ""answer"" must explain the issue in the user's language.
+
+API Structure:
+- On/Off: /api/{domain}/{address}/Control.On, /api/{domain}/{address}/Control.Off
+- Brightness (0-100): /api/{domain}/{address}/Control.Level/{value}
+- Color: /api/{domain}/{address}/Control.ColorHsb/{h},{s},{v} (normalized 0.0-1.0)
+
+Color Handling: Interpret color names and shades into HSB values. For pure colors, Saturation and Value are 1.0. (Red H=0.0, Green H=0.33, Blue H=0.66).
+
+--- EXAMPLES ---
+
+**MULTI-COMMAND EXAMPLE:**
+- Device List: [ { ""name"": ""Luce Principale"", ""group"": ""Cucina"", ""address"": ""1"", ""domain"": ""HomeAutomation.Light"" }, { ""name"": ""Desk"", ""group"": ""Studio"", ""address"": ""10"", ""domain"": ""HomeAutomation.Dimmer"" } ]
+- User Command: ""accendi la luce della cucina e la lampada Desk nello studio""
+- CORRECT OUTPUT: { ""answer"": ""Ok, accendo la Luce Principale in cucina e la lampada Desk nello studio."", ""commands"": [""/api/HomeAutomation.Light/1/Control.On"", ""/api/HomeAutomation.Dimmer/10/Control.On""] }
+
+FRENCH EXAMPLE:
+- Device List: [ { ""name"": ""Lampe"", ""group"": ""Salon"", ""address"": ""12"", ""domain"": ""HomeAutomation.Dimmer"" } ]
+- User Command: ""Allume la Lampe dans le Salon""
+- CORRECT OUTPUT: { ""answer"": ""D'accord, j'allume la Lampe dans le Salon."", ""commands"": [""/api/HomeAutomation.Dimmer/12/Control.On""] }
+
+ITALIAN SHADE EXAMPLE:
+- Device List: [ { ""name"": ""Desk"", ""group"": ""Studio"", ""address"": ""10"", ""domain"": ""HomeAutomation.Dimmer"" } ]
+- User Command: ""imposta il colore di Desk nello studio ad un celeste chiarissimo quasi bianco""
+- CORRECT OUTPUT: { ""answer"": ""Va bene, imposto la luce di Desk su un celeste molto chiaro."", ""commands"": [""/api/HomeAutomation.Dimmer/10/Control.ColorHsb/0.5,0.1,1.0""] }
+
+SPANISH INVALID COMMAND EXAMPLE:
+- User Command: ""Haz que el baño sea más discoteca""
+- CORRECT OUTPUT: { ""answer"": ""Lo siento, no entendí el comando 'haz que el baño sea más discoteca'."", ""commands"": [""NONE""] }";
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.1</PackageVersion>
+      <Id>gemini-intent-handler</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>C54E45664CA1D6827AE857619BE58E75</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>930</Address>
+    <Name>Gemini Intent Handler</Name>
+    <Description>Enables natural language control for your smart system using Google's Gemini AI.
+To activate this feature, enter a valid API key.
+Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program
   .AddFeature(
     "",
@@ -48,7 +252,7 @@ if (String.IsNullOrEmpty(yoloModelPath))
 // *ML.net* and *YoloSharp* documentation
 
 
-try 
+try
 {
     var errorOccurred = false;
     using var detectPredictor = new YoloPredictor(yoloModelPath);
@@ -60,7 +264,7 @@ try
             continue;
         }
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
-            try 
+            try
             {
                 var result = detectPredictor.Segment((byte[])data);
                 //Console.WriteLine($"Result: {result}");
@@ -117,7 +321,7 @@ try
                     {
                         // Emit json data for the video player (overlay data)
                         var jsonResults = JsonConvert.SerializeObject(output);
-                        module.Emit(VideoPlayerWidgetOverlaySegment, jsonResults);                        
+                        module.Emit(VideoPlayerWidgetOverlaySegment, jsonResults);
                     }
 
                 }
@@ -157,7 +361,7 @@ VideoPlayerWidgetOverlaySegment = "Widget.Data.VideoPlayer.Overlay.Segment";
 public class SegmentResult
 {
     public Compunet.YoloSharp.Data.Segmentation Result;
-    public List&lt;MaskPoint&gt; Mask; 
+    public List&lt;MaskPoint&gt; Mask;
 }
 
 public class MaskPoint
@@ -262,16 +466,16 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     return contour;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>57C08C36DF73EE65FCB3A1EBC86D359B</Checksum>
+      <Checksum>00719B2E60B2F8475660021B26C59070</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>912</Address>
@@ -348,7 +552,7 @@ if (String.IsNullOrEmpty(modelPath))
 // *ML.net* and *YoloSharp* documentation
 
 
-try 
+try
 {
     var errorOccurred = false;
     using var detectPredictor = new YoloPredictor(modelPath);
@@ -360,7 +564,7 @@ try
             continue;
         }
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
-            try 
+            try
             {
                 var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
                 //Console.WriteLine($"Result: {result}");
@@ -407,10 +611,10 @@ try
                     if (jsonResults != "")
                     {
                         // Emit json data for the video player (overlay data)
-                        module.Emit(VideoPlayerWidgetOverlayDetect, jsonResults);                        
+                        module.Emit(VideoPlayerWidgetOverlayDetect, jsonResults);
                     }
                 }
-            } 
+            }
             catch (Exception e)
             {
                 errorOccurred = true;
@@ -441,16 +645,16 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>32B5CE5DBF4BBCBC1D2B159888245C47</Checksum>
+      <Checksum>25864EC9FD1DDD23D766A6120AAD047B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
@@ -521,7 +725,7 @@ if (String.IsNullOrEmpty(yoloModelPath))
 // *ML.net* and *YoloSharp* documentation
 
 
-try 
+try
 {
     var errorOccurred = false;
     using var detectPredictor = new YoloPredictor(yoloModelPath);
@@ -533,7 +737,7 @@ try
             continue;
         }
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
-            try 
+            try
             {
                 var result = detectPredictor.Pose((byte[])data);
                 //Console.WriteLine($"Result: {result}");
@@ -582,16 +786,16 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.0</PackageVersion>
+      <PackageVersion>1.0.1</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>33ACCF5CBCB8C0791B6834D31E4A00F2</Checksum>
+      <Checksum>FB5034E061C398DFC73251D0C622CA4B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>911</Address>

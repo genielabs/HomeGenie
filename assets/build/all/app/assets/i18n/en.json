@@ -321,5 +321,7 @@
   "card_opacity": "Card opacity",
   "card_blur": "Card blur",
   "upnp_dlna_device": "UPnP/DLNA Device",
-  "no_modules_selected": "No modules selected."
+  "no_modules_selected": "No modules selected.",
+  "select_interpreter": "Selected interpreter:",
+  "builtin_simple_parser": "Built-in Simple Parser"
 }

@@ -2,11 +2,11 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Bem-vindo ao HomeGenie!",
   "welcome_subtitle": "A inteligência de automação programável",
-  "not_configured_yet": "O sistema ainda não está configurado. Este assistente de configuração ajudará você a colocar seu sistema em funcionamento em algumas etapas.",
+  "not_configured_yet": "O sistema ainda não está configurado. Este assistente de configuração ajudará você a colocar seu sistema em funcionamento em poucos passos.",
   "system_config_start_with_base_and_backup": "Restaurar do arquivo de backup",
   "system_config_start_with_default_setup": "Configuração padrão",
   "system_config_include_demo": "Incluir demonstração com atividade simulada do dispositivo",
-  "system_config_additional_features": "Características adicionais",
+  "system_config_additional_features": "Recursos adicionais",
   "system_config_manual_setup": "Configuração manual",
   "interfaces": "Interfaces",
   "Protocols.UPnP": "Controlador UPnP",
@@ -21,7 +21,7 @@
   "repositories": "Repositórios",
   "packages": "Pacotes",
   "installed_packages": "Pacotes instalados",
-  "upload_package": "Carregar pacote",
+  "upload_package": "Enviar pacote",
   "create_package": "Criar novo pacote",
   "programs_version": "Versão dos programas",
   "http_settings": "Configurações HTTP",
@@ -30,7 +30,7 @@
   "add_group": "Adicionar grupo",
   "edit_group": "Editar grupo",
   "delete_group": "Excluir grupo",
-  "dashboard_from_group": "Crie um painel deste grupo",
+  "dashboard_from_group": "Crie um painel a partir deste grupo",
   "group_modules": "Módulos neste grupo",
   "modules": "Módulos",
   "empty_group": "Nenhum módulo neste grupo.",
@@ -38,7 +38,7 @@
   "schedule_event": "Evento",
   "schedule_type_standard": "Padrão",
   "schedule_type_range": "Intervalo de datas",
-  "schedule_type_cron": "Expressão cron",
+  "schedule_type_cron": "Expressão Cron",
   "schedule_action": "Ação",
   "schedule_occurrence_preview": "Prévia da ocorrência",
   "time_schedule": "Agendar",
@@ -57,8 +57,8 @@
   "cronwizard_hours": "Horas",
   "cronwizard_days": "Dias",
   "cronwizard_months": "Meses",
-  "cronwizard_minuteselect_everyminute": "Cada minuto",
-  "cronwizard_minuteselect_everynthminute": "Cada minuto dado",
+  "cronwizard_minuteselect_everyminute": "A cada minuto",
+  "cronwizard_minuteselect_everynthminute": "A cada minuto dado",
   "cronwizard_minuteselect_selectedminutes": "Minutos selecionados",
   "cronwizard_hourselect_everyhour": "A cada hora",
   "cronwizard_hourselect_everynthhour": "A cada hora dada",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Meses selecionados",
   "cronwizard_schedule_set_exact_time": "Defina o horário do evento.",
   "cronwizard_schedule_set_slot_start": "Defina o intervalo de tempo de início.",
-  "cronwizard_schedule_set_slot_end": "Começando no {{start}} .<span class=\"notranslate\"><br/></span> Defina o horário de término.",
+  "cronwizard_schedule_set_slot_end": "Iniciando em {{start}}.<span class=\"notranslate\"><br/></span> Definir término do intervalo de tempo.",
   "cronwizard_bindings_define_types_and_modules": "Definir tipos e módulos que estão sujeitos a este cronograma (opcional)",
   "cronwizard_bindings_select_types": "Selecione os tipos",
   "cronwizard_action_set_action_to_execute": "Definir ação a ser executada em ocorrências deste evento",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "No final de um intervalo de tempo",
   "cronwizard_action_custom_script": "Script de ação personalizado",
   "cronwizard_action_no_action": "Nenhuma ação",
-  "cronwizard_action_schedule_variable_hint": "Use <span class=\"notranslate color-primary\">@ {{name}}</span> como uma variável em expressões cron ou use <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> em programas de automação para referenciar este evento.",
+  "cronwizard_action_schedule_variable_hint": "Use <span class=\"notranslate color-primary\">@{{name}}</span> como uma variável em expressões cron ou use <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> em programas de automação para referenciar este evento.",
   "scheduler_preset_action_command_turn_on": "Ligar",
   "scheduler_preset_action_command_turn_off": "Desligar",
   "scheduler_preset_action_command_set_level": "Definir nível",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "Alternar visualização de widgets",
   "stop_program": "Parar programa",
   "run_program": "Executar programa",
-  "enable_to_run_program": "Habilitar programa para executá-lo",
+  "enable_to_run_program": "Habilitar o programa para executá-lo",
   "program_status_added": "Adicionado",
   "program_status_idle": "Parado",
   "program_status_setup": "Configurar",
@@ -126,30 +126,30 @@
   "setup_code": "Configurar",
   "main_code": "Principal",
   "context_code": "Contexto",
-  "main_code_empty_note": "O código \"Main\" está vazio. Use o editor \"Visual code\" para gerar este código: - Abra a categoria \"Program\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Main\" no espaço de trabalho do código visual - Adicione dentro dele outros blocos de código para implementar ações e lógica deste programa O programa \"Main\" pode ser executado manualmente ou iniciado automaticamente com base em condições eventualmente fornecidas no código de configuração.",
-  "setup_code_empty_note": "O código \"Setup\" está vazio. Use o editor \"Visual code\" para gerar este código: - Abra a categoria \"Program\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Setup\" no espaço de trabalho do código visual - Adicione dentro dele outros blocos de código para determinar as condições que acionarão a execução do código \"Main\" Este código é avaliado toda vez que um novo evento ocorre e pelo menos uma vez por minuto.",
+  "main_code_empty_note": "O código \"Principal\" está vazio. Use o editor de \"Código Visual\" para gerar este código: - Abra a categoria \"Programa\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Principal\" para a área de trabalho do código visual - Adicione dentro dele outros blocos de código para implementar ações e lógica deste programa. O programa \"Principal\" pode ser executado manualmente ou iniciado automaticamente com base nas condições eventualmente fornecidas no código de configuração.",
+  "setup_code_empty_note": "O código \"Setup\" está vazio. Use o editor de \"Código Visual\" para gerar este código: - Abra a categoria \"Programa\" na paleta de comandos à esquerda - Arraste um bloco do tipo \"Setup\" para a área de trabalho do código visual - Adicione dentro dele outros blocos de código para determinar as condições que acionarão a execução do código \"Principal\". Este código é avaliado sempre que um novo evento ocorre e pelo menos uma vez por minuto.",
   "capture_commands": "Comandos de captura",
   "capture_commands_description": "Adicione todos os comandos executados manualmente em widgets ao programa.",
   "capture_commands_pause": "Pausa entre comandos",
   "capture_pause_none": "Nenhum",
-  "capture_pause_asis": "Como é",
+  "capture_pause_asis": "Como está",
   "$options": {
     "16": {
-      "Title": "Memória de nível",
+      "Title": "Memória de Nível",
       "Description": "Armazene e recupere o último nível do dimmer.",
-      "HomeGenie.LevelMemory": "Lembrar do último nível de luz quando ligado",
+      "HomeGenie.LevelMemory": "Lembrar o último nível de luz quando ligado",
       "HomeGenie.LevelMemory.SimulateOnly": "Simular apenas"
     },
     "26": {
       "Title": "Luzes coloridas",
-      "Description": "Exemplo de integração de luzes Philips Hue usando HTTP API (V1). O usuário padrão para conectar-se à bridge é \"newdeveloper\" e ele já deve estar habilitado.",
+      "Description": "Exemplo de integração de luzes Philips Hue usando API HTTP (V1). O usuário padrão para se conectar à ponte é \"newdeveloper\" e ela já deve estar habilitada.",
       "ConfigureOptions.BridgeAddress": "Endereço IP da Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Nome de usuário",
       "ConfigureOptions.LightsCount": "Número de luzes"
     },
     "34": {
       "Title": "Previsão do tempo",
-      "Description": "Informações de clima e previsão do tempo do serviço Open Weather Map. Para ativar este widget, insira uma chave de API válida. Siga as instruções em https://openweathermap.org/appid para obter uma chave de API gratuita.",
+      "Description": "Informações meteorológicas e de previsão do tempo do serviço Open Weather Map. Para ativar este widget, insira uma chave de API válida. Siga as instruções em https://openweathermap.org/appid para obter uma chave de API gratuita.",
       "ConfigureOptions.Location": "Nome da cidade",
       "ConfigureOptions.Language": "Idioma (por exemplo, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervalo de atualização (minutos)",
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Rede MQTT",
-      "Description": "Conecte-se a um broker MQTT para usar o aplicativo HomeGenie Panel de qualquer lugar via Internet ou para interconectar dispositivos HomeGenie na mesma rede MQTT.",
+      "Description": "Conecte-se a um corretor MQTT para usar o aplicativo HomeGenie Panel de qualquer lugar via Internet ou para interconectar dispositivos HomeGenie na mesma rede MQTT.",
       "MQTT.SensorPublish": "Publicar eventos emitidos por este módulo",
       "ConfigureOptions.ClientId": "ID do cliente.",
       "ConfigureOptions.ServerAddress": "Endereço do servidor",
@@ -178,7 +178,7 @@
       "ConfigureOptions.ThermostatsCount": "Número de termostatos"
     },
     "81": {
-      "Title": "Monitor de energia",
+      "Title": "Monitor de Energia",
       "Description": "Gere estatísticas sobre consumo de energia e uso de dispositivos.",
       "EnergyManagement.MonitorStatus": "Status do monitor",
       "EnergyManagement.MonitorWatts": "Monitorar o consumo de energia"
@@ -203,14 +203,14 @@
       "Description": "Use sensores e outros dispositivos para implementar um sistema de alarme de segurança.",
       "HomeGenie.SecurityAlarm": "Usar como alarme/estroboscópio",
       "HomeGenie.SecurityTriggerHome": "Também dispara quando armado Home",
-      "HomeGenie.SecuritySensor": "Use como sensor de segurança",
+      "HomeGenie.SecuritySensor": "Usar como sensor de segurança",
       "ConfigureOptions.Email.Recipients": "Lista separada por vírgulas de e-mails de destinatários para notificações de alarme",
       "ConfigureOptions.System.ArmDelay": "Atraso do braço (segundos)",
-      "ConfigureOptions.System.SirenStartTime": "Atraso no início das sirenes (segundos)",
+      "ConfigureOptions.System.SirenStartTime": "Atraso de início das sirenes (segundos)",
       "ConfigureOptions.System.SirenMaxTime": "Tempo máximo das sirenes (segundos, 0=infinito)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Programa para rodar quando armado",
+      "ConfigureOptions.Trigger.ArmedProgram": "Programa para executar quando armado",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa para executar quando desarmado",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Programa para executar quando acionado"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Programa para ser executado quando acionado"
     },
     "95": {
       "Title": "Registro de eventos",
@@ -243,11 +243,11 @@
       "Title": "Simulador de sensor",
       "Description": "Emite valores aleatórios do sensor.",
       "Simulator.Sensor.Temperature": "Sensor de temperatura",
-      "Simulator.Sensor.Humidity": "Sensor de humidade",
+      "Simulator.Sensor.Humidity": "Sensor de umidade",
       "Simulator.Sensor.Luminance": "Sensor de luz",
       "Simulator.Meter.Watts": "Medidor de watts",
       "Simulator.Meter.Watts.Max": "Potência máxima em watts",
-      "Simulator.Sensor.DataFrequency": "Simulador emite frequência"
+      "Simulator.Sensor.DataFrequency": "Frequência de emissão do simulador"
     },
     "505": {
       "Title": "Controle remoto",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "Conta de e-mail",
-      "Description": "Armazena informações da conta de e-mail usada pelos programas do sistema para enviar/receber e-mails.",
+      "Description": "Armazena informações de contas de e-mail usadas por programas do sistema para enviar/receber e-mails.",
       "ConfigureOptions.Email.Sender": "1. Endereço de e-mail",
       "ConfigureOptions.Email.SmtpServer": "2. Endereço do servidor SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Nome de usuário SMTP (opcional)",
@@ -279,14 +279,14 @@
     },
     "8": {
       "Title": "Cenário de cores do nascer do sol",
-      "Description": "Exemplo de cenário \"Sunrise\" para luzes LED que mudam de cor.",
+      "Description": "Exemplo de cenário \"Nascer do sol\" para luzes LED que mudam de cor.",
       "Scenarios.SunriseColors": "Link para o cenário Sunrise Colors"
     },
     "910": {
       "Title": "Detecção de objetos",
       "Description": "Detecte objetos usando um modelo YOLO11 pré-treinado.",
       "ML.ObjectDetection": "Habilitar detecção de objetos",
-      "ML.ObjectDetection.TriggerDetect": "Lista separada por vírgulas de coisas (em inglês) que dispararão o alarme. (por exemplo: gato, cachorro, pessoa, mochila, mala)",
+      "ML.ObjectDetection.TriggerDetect": "Lista separada por vírgulas de coisas (em inglês) que dispararão o alarme. (ex.: gato, cachorro, pessoa, mochila, mala)",
       "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
     },
     "911": {
@@ -300,6 +300,12 @@
       "Description": "Detecte objetos e seus contornos usando um modelo YOLO11 pré-treinado.",
       "ML.InstanceSegmentation": "Habilitar segmentação de instância",
       "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Manipulador de Intenções de Gêmeos",
+      "Description": "Habilita o controle de linguagem natural para seu sistema inteligente usando a IA Gemini do Google. Para ativar este recurso, insira uma chave de API válida. Siga as instruções em https://aistudio.google.com/app/apikey para obter uma chave de API gratuita.",
+      "ConfigureOptions.ApiKey": "Chave de API do Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID do modelo"
     }
   }
 }

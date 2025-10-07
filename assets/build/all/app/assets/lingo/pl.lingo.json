@@ -1,38 +1,77 @@
 {
-    "Commands" : [
-        {
-            "Command": "Control.On",
-            "Aliases": [ "włącz", "ON" ]
-        },
-        {
-            "Command": "Control.Off",
-            "Aliases": [ "wyłącz", "OFF" ]
-        },
-        {
-            "Command": "Control.Level",
-            "Aliases": [ "poziom" ]
-        },
-        {
-            "Command": "Control.Toggle",
-            "Aliases": [ "przełącz" ]
-        },
-        {
-            "Command": "Control.Run",
-            "Aliases": [ "start", "uruchom" ]
-        },
-        {
-            "Command": "Control.Break",
-            "Aliases": [ "stop", "przerwij" ]
-        }
-    ],
-    "Types" : [
-        {
-            "Type": "Light,Dimmer,Color",
-            "Aliases": [ "wszystkie światła", "światła", "każde światło" ]
-        },
-        {
-            "Type": "Switch",
-            "Aliases": [ "wszystkie przełączniki", "przełączniki", "każdy przełącznik" ]
-        }
-    ]
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "włącz",
+        "aktywuj",
+        "uruchom",
+        "otwórz"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "wyłącz",
+        "deaktywuj",
+        "zamknij"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "poziom",
+        "ustaw",
+        "reguluj",
+        "ściemnij"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "przełącz",
+        "zmień"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "uruchom",
+        "wykonaj",
+        "odtwórz",
+        "start"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "stop",
+        "zatrzymaj",
+        "przerwij",
+        "anuluj"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "światło",
+        "światła",
+        "oświetlenie",
+        "lampa",
+        "lampy"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "przełącznik",
+        "przełączniki",
+        "gniazdko",
+        "gniazdka",
+        "kontakt"
+      ]
+    }
+  ]
 }

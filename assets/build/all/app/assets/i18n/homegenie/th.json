@@ -2,21 +2,21 @@
   " ": "-",
   "welcome_to_homegenie": "ยินดีต้อนรับสู่ HomeGenie!",
   "welcome_subtitle": "ระบบอัตโนมัติอัจฉริยะที่สามารถตั้งโปรแกรมได้",
-  "not_configured_yet": "ระบบยังไม่ได้กำหนดค่า ตัวช่วยการตั้งค่านี้จะช่วยให้คุณติดตั้งและใช้งานระบบได้ในไม่กี่ขั้นตอน",
-  "system_config_start_with_base_and_backup": "กู้คืนจากไฟล์สำรอง",
+  "not_configured_yet": "ระบบยังไม่ได้กำหนดค่า ตัวช่วยการตั้งค่านี้จะช่วยคุณเริ่มต้นใช้งานระบบได้ในไม่กี่ขั้นตอน",
+  "system_config_start_with_base_and_backup": "คืนค่าจากไฟล์สำรอง",
   "system_config_start_with_default_setup": "การตั้งค่าเริ่มต้น",
   "system_config_include_demo": "รวมการสาธิตพร้อมกิจกรรมอุปกรณ์จำลอง",
   "system_config_additional_features": "คุณสมบัติเพิ่มเติม",
   "system_config_manual_setup": "การตั้งค่าด้วยตนเอง",
   "interfaces": "อินเทอร์เฟซ",
   "Protocols.UPnP": "ตัวควบคุม UPnP",
-  "HomeAutomation.X10": "ตัวควบคุม X10",
+  "HomeAutomation.X10": "คอนโทรลเลอร์ X10",
   "HomeAutomation.ZWave": "ตัวควบคุม Z-Wave",
   "HomeAutomation.ZigBee": "ตัวควบคุม ZigBee",
   "device_port": "พอร์ตอุปกรณ์",
   "device_driver": "คนขับรถ",
   "flow_control": "การควบคุมการไหล",
-  "controller": "ผู้ควบคุม",
+  "controller": "ตัวควบคุม",
   "programs": "โปรแกรม",
   "repositories": "ที่เก็บข้อมูล",
   "packages": "แพ็คเกจ",
@@ -34,7 +34,7 @@
   "group_modules": "โมดูลในกลุ่มนี้",
   "modules": "โมดูล",
   "empty_group": "ไม่มีโมดูลในกลุ่มนี้",
-  "scheduler_wizard": "ตัวช่วยสร้างการจัดตารางเวลา",
+  "scheduler_wizard": "ตัวช่วยสร้างการจัดกำหนดการ",
   "schedule_event": "เหตุการณ์",
   "schedule_type_standard": "มาตรฐาน",
   "schedule_type_range": "ช่วงวันที่",
@@ -58,7 +58,7 @@
   "cronwizard_days": "วัน",
   "cronwizard_months": "เดือน",
   "cronwizard_minuteselect_everyminute": "ทุกนาที",
-  "cronwizard_minuteselect_everynthminute": "ทุกนาทีที่ได้รับ",
+  "cronwizard_minuteselect_everynthminute": "ทุกนาทีที่กำหนด",
   "cronwizard_minuteselect_selectedminutes": "นาทีที่เลือก",
   "cronwizard_hourselect_everyhour": "ทุกชั่วโมง",
   "cronwizard_hourselect_everynthhour": "ทุกชั่วโมงที่กำหนด",
@@ -69,8 +69,8 @@
   "cronwizard_monthselect_everymonth": "ทุกเดือน",
   "cronwizard_monthselect_selectedmonths": "เดือนที่เลือก",
   "cronwizard_schedule_set_exact_time": "ตั้งเวลากิจกรรม",
-  "cronwizard_schedule_set_slot_start": "ตั้งค่าช่วงเวลาเริ่มต้น",
-  "cronwizard_schedule_set_slot_end": "เริ่มต้นที่ {{start}}<span class=\"notranslate\"><br/></span> ตั้งค่าช่วงเวลาสิ้นสุด",
+  "cronwizard_schedule_set_slot_start": "ตั้งค่าช่องเวลาเริ่มต้น",
+  "cronwizard_schedule_set_slot_end": "เริ่มต้นที่ {{start}}.<span class=\"notranslate\"><br/></span> ตั้งค่าสิ้นสุดช่วงเวลา",
   "cronwizard_bindings_define_types_and_modules": "กำหนดประเภทและโมดูลที่อยู่ภายใต้กำหนดการนี้ (ทางเลือก)",
   "cronwizard_bindings_select_types": "เลือกประเภท",
   "cronwizard_action_set_action_to_execute": "ตั้งค่าการดำเนินการที่จะดำเนินการเมื่อเกิดเหตุการณ์นี้",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "เมื่อสิ้นสุดช่วงเวลา",
   "cronwizard_action_custom_script": "สคริปต์การดำเนินการที่กำหนดเอง",
   "cronwizard_action_no_action": "ไม่มีการดำเนินการ",
-  "cronwizard_action_schedule_variable_hint": "ใช้ <span class=\"notranslate color-primary\">@ {{name}}</span> เป็นตัวแปรในนิพจน์ cron หรือใช้ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ในโปรแกรมอัตโนมัติเพื่ออ้างอิงเหตุการณ์นี้",
+  "cronwizard_action_schedule_variable_hint": "ใช้ <span class=\"notranslate color-primary\">@{{name}}</span> เป็นตัวแปรในนิพจน์ cron หรือใช้ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ในโปรแกรมอัตโนมัติเพื่ออ้างอิงเหตุการณ์นี้",
   "scheduler_preset_action_command_turn_on": "เปิดเครื่อง",
   "scheduler_preset_action_command_turn_off": "ปิดเครื่อง",
   "scheduler_preset_action_command_set_level": "ตั้งระดับ",
@@ -96,7 +96,7 @@
   "scheduler_preset_action_config_mode_cool": "เย็น",
   "scheduler_preset_action_config_mode_cool_eco": "เศรษฐกิจเย็นสบาย",
   "scheduler_preset_action_program_run": "รันโปรแกรม",
-  "scheduler_preset_action_config_program": "รายการโปรแกรม",
+  "scheduler_preset_action_config_program": "โปรแกรม",
   "scheduler_preset_action_config_options": "ตัวเลือก",
   "scheduler_preset_action_program_say": "พูด",
   "scheduler_preset_action_config_message": "ข้อความ",
@@ -112,7 +112,7 @@
   "program_status_background": "พื้นหลัง",
   "program_status_stopping": "การหยุด",
   "program_status_stopped": "หยุดแล้ว",
-  "program_status_interrupted": "ถูกขัดจังหวะ",
+  "program_status_interrupted": "ขัดจังหวะ",
   "program_status_disabled": "พิการ",
   "program_status_enabled": "เปิดใช้งานแล้ว",
   "program_status_broken": "แตกหัก",
@@ -121,18 +121,18 @@
   "tap_to_disable": "คลิกเพื่อปิดการใช้งาน",
   "tap_to_enable": "คลิกเพื่อเปิดใช้งาน",
   "program_data": "ข้อมูลโปรแกรม",
-  "visual_code": "โค้ดภาพ",
-  "generated_code": "สร้างรหัสแล้ว",
+  "visual_code": "รหัสภาพ",
+  "generated_code": "รหัสที่สร้างขึ้น",
   "setup_code": "การตั้งค่า",
   "main_code": "หลัก",
   "context_code": "บริบท",
-  "main_code_empty_note": "รหัส \"Main\" ว่างเปล่า ใช้ตัวแก้ไข \"รหัสภาพ\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"โปรแกรม\" จากแถบคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Main\" ในพื้นที่ทำงานของรหัสภาพ - เพิ่มบล็อกรหัสอื่นๆ เข้าไปเพื่อนำการทำงานและตรรกะของโปรแกรมนี้ไปใช้งาน โปรแกรม \"Main\" สามารถรันด้วยตนเองหรือเริ่มอัตโนมัติได้ขึ้นอยู่กับเงื่อนไขที่กำหนดไว้ในรหัสการติดตั้ง",
-  "setup_code_empty_note": "รหัส \"Setup\" ว่างเปล่า ใช้ตัวแก้ไข \"Visual code\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"Program\" จากแถบคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Setup\" ในพื้นที่ทำงานของรหัสภาพ - เพิ่มบล็อกรหัสอื่นๆ เข้าไปเพื่อกำหนดเงื่อนไขที่จะทริกเกอร์การทำงานของรหัส \"Main\" รหัสนี้จะได้รับการประเมินทุกครั้งที่มีเหตุการณ์ใหม่เกิดขึ้น และอย่างน้อยหนึ่งครั้งต่อนาที",
+  "main_code_empty_note": "รหัส \"Main\" ว่างเปล่า ให้ใช้ตัวแก้ไข \"Visual code\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"Program\" จากพาเล็ตคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Main\" ลงในพื้นที่ทำงานของ Visual code - เพิ่มบล็อกโค้ดอื่นๆ เข้าไปภายในเพื่อใช้การทำงานและตรรกะของโปรแกรมนี้ โปรแกรม \"Main\" สามารถรันด้วยตนเองหรือเริ่มอัตโนมัติได้ ขึ้นอยู่กับเงื่อนไขที่กำหนดไว้ในรหัสการติดตั้ง",
+  "setup_code_empty_note": "รหัส \"Setup\" ว่างเปล่า ให้ใช้ตัวแก้ไข \"Visual code\" เพื่อสร้างรหัสนี้: - เปิดหมวดหมู่ \"Program\" จากพาเล็ตคำสั่งทางด้านซ้าย - ลากบล็อกประเภท \"Setup\" ลงในพื้นที่ทำงานของ Visual code - เพิ่มบล็อกโค้ดอื่นๆ เข้าไปข้างในเพื่อกำหนดเงื่อนไขที่จะทริกเกอร์การทำงานของรหัส \"Main\" รหัสนี้จะถูกประเมินทุกครั้งที่มีเหตุการณ์ใหม่เกิดขึ้น และอย่างน้อยหนึ่งครั้งต่อนาที",
   "capture_commands": "คำสั่งจับภาพ",
   "capture_commands_description": "เพิ่มคำสั่งทั้งหมดที่ดำเนินการด้วยตนเองบนวิดเจ็ตลงในโปรแกรม",
   "capture_commands_pause": "หยุดชั่วคราวระหว่างคำสั่ง",
   "capture_pause_none": "ไม่มี",
-  "capture_pause_asis": "เป็นอยู่เช่นนั้น",
+  "capture_pause_asis": "ตามที่เป็นอยู่",
   "$options": {
     "16": {
       "Title": "ระดับความจำ",
@@ -142,46 +142,46 @@
     },
     "26": {
       "Title": "ไฟสี",
-      "Description": "ตัวอย่างการรวมไฟ Philips Hue เข้ากับ HTTP API (V1) ผู้ใช้เริ่มต้นในการเชื่อมต่อกับบริดจ์คือ \"newdeveloper\" และควรเปิดใช้งานไว้แล้ว",
+      "Description": "ตัวอย่างการผสานรวมไฟ Philips Hue โดยใช้ HTTP API (V1) ผู้ใช้เริ่มต้นที่จะเชื่อมต่อกับบริดจ์คือ \"newdeveloper\" และควรเปิดใช้งานไว้แล้ว",
       "ConfigureOptions.BridgeAddress": "ที่อยู่ IP ของ Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "ชื่อผู้ใช้",
       "ConfigureOptions.LightsCount": "จำนวนไฟ"
     },
     "34": {
       "Title": "พยากรณ์อากาศ",
-      "Description": "ข้อมูลสภาพอากาศและพยากรณ์อากาศจากบริการ Open Weather Map หากต้องการเปิดใช้งานวิดเจ็ตนี้ ให้ป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://openweathermap.org/appid เพื่อรับรหัส API ฟรี",
+      "Description": "ข้อมูลสภาพอากาศและพยากรณ์อากาศจากบริการ Open Weather Map หากต้องการเปิดใช้งานวิดเจ็ตนี้ โปรดป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://openweathermap.org/appid เพื่อรับรหัส API ฟรี",
       "ConfigureOptions.Location": "ชื่อเมือง",
       "ConfigureOptions.Language": "ภาษา (เช่น EN, IT, FR, DE, ...)",
-      "ConfigureOptions.UpdateInterval": "ระยะเวลาการอัพเดท (นาที)",
+      "ConfigureOptions.UpdateInterval": "ช่วงเวลาการอัปเดต (นาที)",
       "ConfigureOptions.ApiKey": "คีย์ API OpenWeatherMap (APPID)"
     },
     "77": {
       "Title": "เครือข่าย MQTT",
       "Description": "เชื่อมต่อกับโบรกเกอร์ MQTT เพื่อใช้แอป HomeGenie Panel จากทุกที่ผ่านทางอินเทอร์เน็ตหรือเชื่อมต่ออุปกรณ์ HomeGenie บนเครือข่าย MQTT เดียวกัน",
-      "MQTT.SensorPublish": "เผยแพร่กิจกรรมที่ปล่อยออกมาจากโมดูลนี้",
+      "MQTT.SensorPublish": "เผยแพร่เหตุการณ์ที่เกิดขึ้นจากโมดูลนี้",
       "ConfigureOptions.ClientId": "รหัสลูกค้า",
-      "ConfigureOptions.ServerAddress": "ที่อยู่เซิฟเวอร์",
+      "ConfigureOptions.ServerAddress": "ที่อยู่เซิร์ฟเวอร์",
       "ConfigureOptions.ServerPort": "พอร์ตเซิร์ฟเวอร์",
       "ConfigureOptions.Encryption": "เปิดใช้งานการเข้ารหัสแบบ end-to-end (E2EE)",
       "ConfigureOptions.WebSockets": "ใช้ WebSockets",
       "ConfigureOptions.TLS": "เปิดใช้งาน TLS/SSL",
       "ConfigureOptions.Username": "ชื่อผู้ใช้ (ไม่บังคับ)",
-      "ConfigureOptions.Password": "รหัสผ่าน (ไม่จำเป็น)",
+      "ConfigureOptions.Password": "รหัสผ่าน (ไม่บังคับ)",
       "ConfigureOptions.ImportExternal": "นำเข้าโมดูลภายนอก"
     },
     "78": {
       "Title": "เทอร์โมสตัทอัจฉริยะ",
       "Description": "ใช้เซ็นเซอร์วัดอุณหภูมิและสวิตช์อัจฉริยะเพื่อใช้งานฟังก์ชันเทอร์โมสตัท",
       "VirtualThermostat.TemperatureModule": "เซ็นเซอร์วัดอุณหภูมิ",
-      "VirtualThermostat.HeatingSwitchModule": "สวิตซ์ทำความร้อน",
-      "VirtualThermostat.CoolingSwitchModule": "สวิตซ์ปรับความเย็น",
+      "VirtualThermostat.HeatingSwitchModule": "สวิตช์ทำความร้อน",
+      "VirtualThermostat.CoolingSwitchModule": "สวิตช์ระบายความร้อน",
       "ConfigureOptions.ThermostatsCount": "จำนวนเทอร์โมสตัท"
     },
     "81": {
       "Title": "เครื่องตรวจสอบพลังงาน",
       "Description": "จัดทำสถิติการใช้พลังงานและการใช้งานอุปกรณ์",
-      "EnergyManagement.MonitorStatus": "ติดตามสถานะ",
-      "EnergyManagement.MonitorWatts": "ติดตามการใช้พลังงาน"
+      "EnergyManagement.MonitorStatus": "สถานะการติดตาม",
+      "EnergyManagement.MonitorWatts": "ตรวจสอบการใช้พลังงาน"
     },
     "82": {
       "Title": "โหมดประหยัดพลังงาน",
@@ -192,25 +192,25 @@
     "88": {
       "Title": "กล้อง IP ทั่วไป",
       "Description": "แสดง/กำหนดเส้นทางการฟีดภาพจากกล้อง IP",
-      "IpCamera.ImageURL": "URL API ของภาพจากกล้อง (ดูเอกสารเกี่ยวกับกล้องของคุณ)",
+      "IpCamera.ImageURL": "URL API ของภาพจากกล้อง (ดูเอกสารกล้องของคุณ)",
       "IpCamera.Username": "ชื่อผู้ใช้ (ไม่บังคับ)",
-      "IpCamera.Password": "รหัสผ่าน (ไม่จำเป็น)",
+      "IpCamera.Password": "รหัสผ่าน (ไม่บังคับ)",
       "Widget.Config.fps": "เฟรมต่อวินาที",
       "Widget.Config.size": "ขนาดวิดเจ็ต"
     },
     "90": {
-      "Title": "ระบบสัญญาณกันขโมย",
-      "Description": "ใช้เซ็นเซอร์และอุปกรณ์อื่นๆ เพื่อติดตั้งระบบแจ้งเตือนความปลอดภัย",
+      "Title": "ระบบสัญญาณเตือนภัย",
+      "Description": "ใช้เซ็นเซอร์และอุปกรณ์อื่นๆ เพื่อติดตั้งระบบสัญญาณเตือนภัย",
       "HomeGenie.SecurityAlarm": "ใช้เป็นสัญญาณเตือน/ไฟกระพริบ",
-      "HomeGenie.SecurityTriggerHome": "ยังทริกเกอร์เมื่อติดอาวุธที่บ้าน",
-      "HomeGenie.SecuritySensor": "ใช้เป็นเซนเซอร์ตรวจจับความปลอดภัย",
+      "HomeGenie.SecurityTriggerHome": "ยังทำงานเมื่อติดอาวุธที่บ้าน",
+      "HomeGenie.SecuritySensor": "ใช้เป็นเซ็นเซอร์รักษาความปลอดภัย",
       "ConfigureOptions.Email.Recipients": "รายชื่อผู้รับอีเมลที่คั่นด้วยจุลภาคสำหรับการแจ้งเตือนภัย",
       "ConfigureOptions.System.ArmDelay": "ความล่าช้าของแขน (วินาที)",
       "ConfigureOptions.System.SirenStartTime": "ความล่าช้าในการเริ่มการทำงานของไซเรน (วินาที)",
       "ConfigureOptions.System.SirenMaxTime": "เวลาสูงสุดของไซเรน (วินาที, 0=อนันต์)",
       "ConfigureOptions.Trigger.ArmedProgram": "โปรแกรมที่จะรันเมื่อติดอาวุธ",
-      "ConfigureOptions.Trigger.DisarmedProgram": "โปรแกรมที่จะรันเมื่อไม่มีอาวุธ",
-      "ConfigureOptions.Trigger.TriggeredProgram": "โปรแกรมที่จะทำงานเมื่อมีการทริกเกอร์"
+      "ConfigureOptions.Trigger.DisarmedProgram": "โปรแกรมที่จะรันเมื่อปลดอาวุธ",
+      "ConfigureOptions.Trigger.TriggeredProgram": "โปรแกรมที่จะรันเมื่อถูกเรียกใช้งาน"
     },
     "95": {
       "Title": "การบันทึกเหตุการณ์",
@@ -219,7 +219,7 @@
     },
     "111": {
       "Title": "การกำหนดค่าไคลเอนต์",
-      "Description": "นำ API มาใช้สำหรับการจัดการโปรไฟล์การกำหนดค่าของไคลเอนต์ที่ใช้ในการจัดเก็บการตั้งค่า UI และแดชบอร์ด"
+      "Description": "นำ API มาใช้เพื่อจัดการโปรไฟล์การกำหนดค่าของไคลเอนต์ที่ใช้ในการจัดเก็บการตั้งค่า UI และแดชบอร์ด"
     },
     "400": {
       "Title": "การสาธิตโมดูลเสมือนจริง",
@@ -229,7 +229,7 @@
       "Sensor.MotionDetect": "สถานะการตรวจจับการเคลื่อนไหว",
       "Status.Battery": "ระดับแบตเตอรี่",
       "Sensor.DoorWindow": "สถานะเซ็นเซอร์ประตู/หน้าต่าง (เปิด/ปิด)",
-      "Status.Level": "สวิตซ์สถานะ (เปิด/ปิด)"
+      "Status.Level": "สถานะสวิตช์ (เปิด/ปิด)"
     },
     "401": {
       "Title": "สาธิต - สลับประตู",
@@ -237,17 +237,17 @@
     },
     "402": {
       "Title": "สาธิต - ตรวจจับการเคลื่อนไหว",
-      "Description": "จำลองการตรวจจับการเคลื่อนไหวของตัวอย่างเซ็นเซอร์หลายตัว"
+      "Description": "จำลองการตรวจจับการเคลื่อนไหวของเซ็นเซอร์หลายตัวสาธิต"
     },
     "410": {
-      "Title": "เครื่องจำลองเซนเซอร์",
+      "Title": "เครื่องจำลองเซ็นเซอร์",
       "Description": "ปล่อยค่าเซนเซอร์แบบสุ่ม",
       "Simulator.Sensor.Temperature": "เซ็นเซอร์วัดอุณหภูมิ",
-      "Simulator.Sensor.Humidity": "เซ็นเซอร์วัดความชื้น",
+      "Simulator.Sensor.Humidity": "เซ็นเซอร์ความชื้น",
       "Simulator.Sensor.Luminance": "เซ็นเซอร์แสง",
       "Simulator.Meter.Watts": "วัตต์มิเตอร์",
       "Simulator.Meter.Watts.Max": "กำลังวัตต์สูงสุด",
-      "Simulator.Sensor.DataFrequency": "จำลองการปล่อยความถี่"
+      "Simulator.Sensor.DataFrequency": "ความถี่ในการปล่อยของจำลอง"
     },
     "505": {
       "Title": "รีโมทคอนโทรล",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "บัญชีอีเมล์",
-      "Description": "จัดเก็บข้อมูลบัญชีอีเมลที่ใช้โดยโปรแกรมระบบในการส่ง/รับอีเมล",
+      "Description": "เก็บข้อมูลบัญชีอีเมลที่ใช้โดยโปรแกรมระบบในการส่ง/รับอีเมล",
       "ConfigureOptions.Email.Sender": "1. ที่อยู่อีเมล",
       "ConfigureOptions.Email.SmtpServer": "2. ที่อยู่เซิร์ฟเวอร์ SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. ชื่อผู้ใช้ SMTP (ไม่บังคับ)",
@@ -286,12 +286,12 @@
       "Title": "การตรวจจับวัตถุ",
       "Description": "ตรวจจับวัตถุโดยใช้โมเดล YOLO11 ที่ได้รับการฝึกอบรมล่วงหน้า",
       "ML.ObjectDetection": "เปิดใช้งานการตรวจจับวัตถุ",
-      "ML.ObjectDetection.TriggerDetect": "รายการสิ่งของที่คั่นด้วยจุลภาค (เป็นภาษาอังกฤษ) ที่จะทำให้เกิดการเตือนภัย (เช่น แมว สุนัข คน กระเป๋าเป้ กระเป๋าเดินทาง)",
+      "ML.ObjectDetection.TriggerDetect": "รายการสิ่งของที่คั่นด้วยจุลภาค (เป็นภาษาอังกฤษ) ที่จะทำให้เกิดสัญญาณเตือน (เช่น แมว สุนัข คน กระเป๋าเป้ กระเป๋าเดินทาง)",
       "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO11 (.onnx)"
     },
     "911": {
       "Title": "การประมาณท่าทาง",
-      "Description": "การตรวจจับจุดสำคัญผ่านการประมาณท่าทาง โดยใช้โมเดล ONNX แบบกำหนดเองหรือโมเดล YOLOv11 ที่ได้รับการฝึกอบรมไว้ล่วงหน้าตามค่าเริ่มต้น (เฉพาะท่าทางของมนุษย์)",
+      "Description": "การตรวจจับจุดสำคัญผ่านการประมาณท่าทาง โดยใช้โมเดล ONNX ที่กำหนดเองหรือโมเดล YOLOv11 ที่ได้รับการฝึกอบรมไว้ล่วงหน้าตามค่าเริ่มต้น (เฉพาะท่าทางของมนุษย์)",
       "ML.PoseEstimation": "เปิดใช้งานการประมาณท่าทาง",
       "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO11 (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "ตรวจจับวัตถุและโครงร่างโดยใช้โมเดล YOLO11 ที่ได้รับการฝึกอบรมล่วงหน้า",
       "ML.InstanceSegmentation": "เปิดใช้งานการแบ่งส่วนอินสแตนซ์",
       "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "ตัวจัดการเจตนาของ Gemini",
+      "Description": "เปิดใช้งานการควบคุมภาษาธรรมชาติสำหรับระบบอัจฉริยะของคุณโดยใช้ Gemini AI ของ Google หากต้องการเปิดใช้งานฟีเจอร์นี้ ให้ป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://aistudio.google.com/app/apikey เพื่อรับรหัส API ฟรี",
+      "ConfigureOptions.ApiKey": "รหัส API ของ Google Gemini AI",
+      "ConfigureOptions.ModelId": "รหัสรุ่น"
     }
   }
 }

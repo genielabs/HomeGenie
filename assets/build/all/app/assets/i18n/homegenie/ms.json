@@ -67,10 +67,10 @@
   "cronwizard_dayselect_selecteddays": "Hari yang dipilih",
   "cronwizard_dayowselect_selecteddaysow": "Hari yang dipilih dalam minggu",
   "cronwizard_monthselect_everymonth": "Setiap bulan",
-  "cronwizard_monthselect_selectedmonths": "Bulan terpilih",
+  "cronwizard_monthselect_selectedmonths": "Bulan yang dipilih",
   "cronwizard_schedule_set_exact_time": "Tetapkan masa acara.",
   "cronwizard_schedule_set_slot_start": "Tetapkan permulaan slot masa.",
-  "cronwizard_schedule_set_slot_end": "Bermula pada {{start}} .<span class=\"notranslate\"><br/></span> Tetapkan tamat slot masa.",
+  "cronwizard_schedule_set_slot_end": "Bermula pada {{start}}.<span class=\"notranslate\"><br/></span> Tetapkan tamat slot masa.",
   "cronwizard_bindings_define_types_and_modules": "Tentukan jenis dan modul yang tertakluk kepada jadual ini (pilihan)",
   "cronwizard_bindings_select_types": "Pilih jenis",
   "cronwizard_action_set_action_to_execute": "Tetapkan tindakan untuk dilaksanakan pada kejadian acara ini",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Pada penghujung slot masa",
   "cronwizard_action_custom_script": "Skrip tindakan tersuai",
   "cronwizard_action_no_action": "Tiada tindakan",
-  "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">@ {{name}}</span> sebagai pembolehubah dalam ungkapan cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> dalam program automasi untuk merujuk acara ini.",
+  "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">@{{name}}</span> sebagai pembolehubah dalam ungkapan cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> dalam program automasi untuk merujuk acara ini.",
   "scheduler_preset_action_command_turn_on": "Hidupkan",
   "scheduler_preset_action_command_turn_off": "Matikan",
   "scheduler_preset_action_command_set_level": "Tetapkan tahap",
@@ -135,7 +135,7 @@
   "capture_pause_asis": "Seperti yang ada",
   "$options": {
     "16": {
-      "Title": "Memori Tahap",
+      "Title": "Tahap Memori",
       "Description": "Simpan dan ingat semula tahap malap terakhir.",
       "HomeGenie.LevelMemory": "Ingat tahap cahaya terakhir apabila dihidupkan",
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan sahaja"
@@ -259,7 +259,7 @@
       "ConfigureOptions.DimmerInterval": "Langkah memalapkan"
     },
     "142": {
-      "Title": "Akaun E-mel",
+      "Title": "Akaun E-Mel",
       "Description": "Menyimpan maklumat akaun e-mel yang digunakan oleh program sistem untuk menghantar/menerima e-mel.",
       "ConfigureOptions.Email.Sender": "1. Alamat e-mel",
       "ConfigureOptions.Email.SmtpServer": "2. Alamat pelayan SMTP",
@@ -300,6 +300,12 @@
       "Description": "Kesan objek dan garis besarnya menggunakan model YOLO11 yang telah terlatih.",
       "ML.InstanceSegmentation": "Dayakan pembahagian contoh",
       "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Pengendali Niat Gemini",
+      "Description": "Mendayakan kawalan bahasa semula jadi untuk sistem pintar anda menggunakan Gemini AI Google. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikut arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
+      "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID model"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  " ": "----------------------------------------",
+  " ": "--",
   "welcome_to_homegenie": "ಹೋಮ್‌ಜೆನಿ ಗೆ ಸುಸ್ವಾಗತ!",
   "welcome_subtitle": "ಪ್ರೊಗ್ರಾಮೆಬಲ್ ಆಟೊಮೇಷನ್ ಬುದ್ಧಿಮತ್ತೆ",
   "not_configured_yet": "ಸಿಸ್ಟಮ್ ಅನ್ನು ಇನ್ನೂ ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿಲ್ಲ. ಈ ಸೆಟಪ್ ವಿಝಾರ್ಡ್ ಕೆಲವು ಹಂತಗಳಲ್ಲಿ ನಿಮ್ಮ ಸಿಸ್ಟಮ್ ಅನ್ನು ಚಾಲನೆ ಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
@@ -19,7 +19,7 @@
   "controller": "ನಿಯಂತ್ರಕ",
   "programs": "ಕಾರ್ಯಕ್ರಮಗಳು",
   "repositories": "ಸಂಗ್ರಹಾಲಯಗಳು",
-  "packages": "ಪ್ಯಾಕೇಜುಗಳು",
+  "packages": "ಪ್ಯಾಕೇಜ್‌ಗಳು",
   "installed_packages": "ಸ್ಥಾಪಿಸಲಾದ ಪ್ಯಾಕೇಜ್‌ಗಳು",
   "upload_package": "ಪ್ಯಾಕೇಜ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
   "create_package": "ಹೊಸ ಪ್ಯಾಕೇಜ್ ರಚಿಸಿ",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "ಆಯ್ಕೆ ಮಾಡಿದ ತಿಂಗಳುಗಳು",
   "cronwizard_schedule_set_exact_time": "ಈವೆಂಟ್ ಸಮಯವನ್ನು ಹೊಂದಿಸಿ.",
   "cronwizard_schedule_set_slot_start": "ಪ್ರಾರಂಭದ ಸಮಯ ಸ್ಲಾಟ್ ಅನ್ನು ಹೊಂದಿಸಿ.",
-  "cronwizard_schedule_set_slot_end": "{{start}} ಪ್ರಾರಂಭವಾಗುತ್ತದೆ.<span class=\"notranslate\"><br/></span> ಸಮಯ ಸ್ಲಾಟ್ ಅಂತ್ಯವನ್ನು ಹೊಂದಿಸಿ.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> ರಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ. ಸಮಯ ಸ್ಲಾಟ್ ಅಂತ್ಯವನ್ನು ಹೊಂದಿಸಿ.",
   "cronwizard_bindings_define_types_and_modules": "ಈ ವೇಳಾಪಟ್ಟಿಗೆ ಒಳಪಟ್ಟಿರುವ ಪ್ರಕಾರಗಳು ಮತ್ತು ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ವ್ಯಾಖ್ಯಾನಿಸಿ (ಐಚ್ಛಿಕ)",
   "cronwizard_bindings_select_types": "ಪ್ರಕಾರಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
   "cronwizard_action_set_action_to_execute": "ಈ ಘಟನೆಯ ಸಂಭವಗಳ ಮೇಲೆ ಕಾರ್ಯಗತಗೊಳಿಸಲು ಕ್ರಿಯೆಯನ್ನು ಹೊಂದಿಸಿ",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ಸಮಯದ ಕೊನೆಯಲ್ಲಿ",
   "cronwizard_action_custom_script": "ಕಸ್ಟಮ್ ಆಕ್ಷನ್ ಸ್ಕ್ರಿಪ್ಟ್",
   "cronwizard_action_no_action": "ಯಾವುದೇ ಕ್ರಮವಿಲ್ಲ",
-  "cronwizard_action_schedule_variable_hint": "ಈ ಈವೆಂಟ್ ಅನ್ನು ಉಲ್ಲೇಖಿಸಲು ಕ್ರಾನ್ ಅಭಿವ್ಯಕ್ತಿಗಳಲ್ಲಿ <span class=\"notranslate color-primary\">@ {{name}}</span> ವೇರಿಯೇಬಲ್ ಆಗಿ ಬಳಸಿ ಅಥವಾ ಯಾಂತ್ರೀಕೃತಗೊಂಡ ಕಾರ್ಯಕ್ರಮಗಳಲ್ಲಿ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ಬಳಸಿ.",
+  "cronwizard_action_schedule_variable_hint": "ಈ ಈವೆಂಟ್ ಅನ್ನು ಉಲ್ಲೇಖಿಸಲು ಕ್ರಾನ್ ಅಭಿವ್ಯಕ್ತಿಗಳಲ್ಲಿ <span class=\"notranslate color-primary\">@{{name}}</span> ಅನ್ನು ವೇರಿಯೇಬಲ್ ಆಗಿ ಬಳಸಿ ಅಥವಾ ಯಾಂತ್ರೀಕೃತಗೊಂಡ ಕಾರ್ಯಕ್ರಮಗಳಲ್ಲಿ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ಅನ್ನು ಬಳಸಿ.",
   "scheduler_preset_action_command_turn_on": "ಆನ್ ಮಾಡಿ",
   "scheduler_preset_action_command_turn_off": "ಆಫ್ ಮಾಡಿ",
   "scheduler_preset_action_command_set_level": "ಮಟ್ಟವನ್ನು ಹೊಂದಿಸಿ",
@@ -300,6 +300,12 @@
       "Description": "ಪೂರ್ವ ತರಬೇತಿ ಪಡೆದ YOLO11 ಮಾದರಿಯನ್ನು ಬಳಸಿಕೊಂಡು ವಸ್ತುಗಳು ಮತ್ತು ಅವುಗಳ ಬಾಹ್ಯರೇಖೆಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.",
       "ML.InstanceSegmentation": "ನಿದರ್ಶನ ವಿಭಜನೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)"
+    },
+    "930": {
+      "Title": "ಜೆಮಿನಿ ಇಂಟೆಂಟ್ ಹ್ಯಾಂಡ್ಲರ್",
+      "Description": "Google ನ ಜೆಮಿನಿ AI ಬಳಸಿಕೊಂಡು ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್ ಸಿಸ್ಟಮ್‌ಗೆ ನೈಸರ್ಗಿಕ ಭಾಷಾ ನಿಯಂತ್ರಣವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು, ಮಾನ್ಯವಾದ API ಕೀಲಿಯನ್ನು ನಮೂದಿಸಿ. ಉಚಿತ API ಕೀಲಿಯನ್ನು ಪಡೆಯಲು https://aistudio.google.com/app/apikey ನಲ್ಲಿನ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.",
+      "ConfigureOptions.ApiKey": "ಗೂಗಲ್ ಜೆಮಿನಿ AI API ಕೀ",
+      "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ"
     }
   }
 }

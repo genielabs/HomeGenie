@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Awọn osu ti a yan",
   "cronwizard_schedule_set_exact_time": "Ṣeto akoko iṣẹlẹ.",
   "cronwizard_schedule_set_slot_start": "Ṣeto akoko Iho ibere.",
-  "cronwizard_schedule_set_slot_end": "Bibẹrẹ ni {{start}} .<span class=\"notranslate\"><br/></span> Ṣeto akoko Iho ipari.",
+  "cronwizard_schedule_set_slot_end": "Bibẹrẹ ni {{start}}.<span class=\"notranslate\"><br/></span> Ṣeto akoko Iho ipari.",
   "cronwizard_bindings_define_types_and_modules": "Ṣetumo awọn oriṣi ati awọn modulu ti o wa labẹ iṣeto yii (aṣayan)",
   "cronwizard_bindings_select_types": "Yan awọn iru",
   "cronwizard_action_set_action_to_execute": "Ṣeto igbese lati ṣiṣẹ lori awọn iṣẹlẹ ti iṣẹlẹ yii",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Ni opin akoko kan Iho",
   "cronwizard_action_custom_script": "Aṣa igbese akosile",
   "cronwizard_action_no_action": "Ko si igbese",
-  "cronwizard_action_schedule_variable_hint": "Lo <span class=\"notranslate color-primary\">@ {{name}}</span> bi oniyipada ninu awọn ikosile cron tabi lo <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ninu awọn eto adaṣe lati tọka iṣẹlẹ yii.",
+  "cronwizard_action_schedule_variable_hint": "Lo <span class=\"notranslate color-primary\">@{{name}}</span> bi oniyipada ninu awọn ikosile cron tabi lo <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ninu awọn eto adaṣe lati tọka iṣẹlẹ yii.",
   "scheduler_preset_action_command_turn_on": "Tan-an",
   "scheduler_preset_action_command_turn_off": "Paa",
   "scheduler_preset_action_command_set_level": "Ṣeto ipele",
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "Iṣiro iduro",
-      "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLOv11 ti a ti kọ tẹlẹ (pato-pato eniyan).",
+      "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLOv11 ti a ti kọkọ tẹlẹ (pato-pato eniyan).",
       "ML.PoseEstimation": "Mu iṣiro iduro ṣiṣẹ",
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "Ṣewadii awọn nkan ati awọn ilana wọn nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
       "ML.InstanceSegmentation": "Mu ipin apẹẹrẹ ṣiṣẹ",
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "Nṣiṣẹ iṣakoso ede adayeba fun eto ọlọgbọn rẹ nipa lilo Gemini AI Google. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
+      "ConfigureOptions.ModelId": "ID awoṣe"
     }
   }
 }

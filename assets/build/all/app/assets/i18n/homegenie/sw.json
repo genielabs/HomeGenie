@@ -2,7 +2,7 @@
   " ": "-----------------------------------------",
   "welcome_to_homegenie": "Karibu HomeGenie!",
   "welcome_subtitle": "Akili ya kiotomatiki inayoweza kupangwa",
-  "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi kwa hatua chache.",
+  "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi katika hatua chache.",
   "system_config_start_with_base_and_backup": "Rejesha kutoka kwa faili ya chelezo",
   "system_config_start_with_default_setup": "Usanidi chaguo-msingi",
   "system_config_include_demo": "Jumuisha onyesho lililo na shughuli za kifaa zilizoiga",
@@ -69,18 +69,18 @@
   "cronwizard_monthselect_everymonth": "Kila mwezi",
   "cronwizard_monthselect_selectedmonths": "Miezi iliyochaguliwa",
   "cronwizard_schedule_set_exact_time": "Weka wakati wa tukio.",
-  "cronwizard_schedule_set_slot_start": "Weka nafasi ya kuanza kwa wakati.",
-  "cronwizard_schedule_set_slot_end": "Kuanzia {{start}} .<span class=\"notranslate\"><br/></span> Weka mwisho wa wakati.",
+  "cronwizard_schedule_set_slot_start": "Weka wakati wa kuanza.",
+  "cronwizard_schedule_set_slot_end": "Kuanzia {{start}}.<span class=\"notranslate\"><br/></span> Weka mwisho wa wakati.",
   "cronwizard_bindings_define_types_and_modules": "Bainisha aina na moduli ambazo ziko chini ya ratiba hii (si lazima)",
   "cronwizard_bindings_select_types": "Chagua aina",
   "cronwizard_action_set_action_to_execute": "Weka kitendo cha kutekeleza juu ya matukio ya tukio hili",
   "cronwizard_action_preset_actions": "Vitendo vilivyowekwa mapema",
   "cronwizard_action_preset_every_occurrence": "Kwa kila tukio",
-  "cronwizard_action_preset_slot_start": "Mwanzoni mwa nafasi ya wakati",
+  "cronwizard_action_preset_slot_start": "Mwanzoni mwa muda",
   "cronwizard_action_preset_slot_end": "Mwishoni mwa muda",
   "cronwizard_action_custom_script": "Hati ya kitendo maalum",
   "cronwizard_action_no_action": "Hakuna hatua",
-  "cronwizard_action_schedule_variable_hint": "Tumia <span class=\"notranslate color-primary\">@ {{name}}</span> kama kigezo katika misemo ya cron au tumia <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> katika programu za kiotomatiki kurejelea tukio hili.",
+  "cronwizard_action_schedule_variable_hint": "Tumia <span class=\"notranslate color-primary\">@{{name}}</span> kama kigezo katika misemo ya cron au tumia <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> katika programu za otomatiki kurejelea tukio hili.",
   "scheduler_preset_action_command_turn_on": "Washa",
   "scheduler_preset_action_command_turn_off": "Zima",
   "scheduler_preset_action_command_set_level": "Weka kiwango",
@@ -209,7 +209,7 @@
       "ConfigureOptions.System.SirenStartTime": "Sirens Kuanza Kuchelewa (sekunde)",
       "ConfigureOptions.System.SirenMaxTime": "Muda wa juu wa Sirens (sekunde, 0=isio na mwisho)",
       "ConfigureOptions.Trigger.ArmedProgram": "Mpango wa kukimbia ukiwa na silaha",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Mpango wa kutekeleza wakati umevuliwa silaha",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Mpango wa kutekeleza wakati umenyang'anywa silaha",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programu ya kufanya kazi inapoanzishwa"
     },
     "95": {
@@ -300,6 +300,12 @@
       "Description": "Tambua vitu na muhtasari wake kwa kutumia kielelezo cha YOLO11 kilichofunzwa awali.",
       "ML.InstanceSegmentation": "Washa ugawaji wa mfano",
       "ConfigureOptions.Yolo.ModelPath": "Njia ya muundo wa faili ya YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Kidhibiti cha Nia ya Gemini",
+      "Description": "Huwasha udhibiti wa lugha asilia kwa mfumo wako mahiri kwa kutumia Gemini AI ya Google. Ili kuwezesha kipengele hiki, weka ufunguo halali wa API. Fuata maagizo katika https://aistudio.google.com/app/apikey ili kupata ufunguo wa API bila malipo.",
+      "ConfigureOptions.ApiKey": "Kitufe cha Google Gemini AI API",
+      "ConfigureOptions.ModelId": "Kitambulisho cha mfano"
     }
   }
 }

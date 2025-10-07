@@ -1,38 +1,74 @@
 ﻿{
-	"Commands" : [
-		{
-			"Command": "Control.On",
-			"Aliases": [ "включить", "вкл." ]
-		},
-		{
-			"Command": "Control.Off",
-			"Aliases": [ "выключить", "выкл." ]
-		},
-		{
-			"Command": "Control.Level",
-			"Aliases": [ "уровень" ]
-		},
-		{
-			"Command": "Control.Toggle",
-			"Aliases": [ "переключить" ]
-		},
-		{
-			"Command": "Control.Run",
-			"Aliases": [ "старт", "запуск", "запустить" ]
-		},
-		{
-			"Command": "Control.Break",
-			"Aliases": [ "стоп", "остановить" ]
-		}
-	],
-	"Types" : [
-		{
-			"Type": "Light,Dimmer,Color",
-			"Aliases": [ "весь свет", "свет", "все освещение" ]
-		},
-		{
-			"Type": "Switch",
-			"Aliases": [ "все выключатели", "выключатали", "каждый выключатель" ]
-		}
-	]
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "включи",
+        "активируй",
+        "запусти",
+        "открой"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "выключи",
+        "деактивируй",
+        "закрой"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "уровень",
+        "установи",
+        "яркость",
+        "громкость"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "переключи",
+        "измени"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "запусти",
+        "выполни",
+        "воспроизведи",
+        "старт"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "стоп",
+        "останови",
+        "прерви",
+        "отмени"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "свет",
+        "освещение",
+        "лампа",
+        "лампы"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "розетка",
+        "розетки",
+        "выключатель"
+      ]
+    }
+  ]
 }

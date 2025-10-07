@@ -1,17 +1,17 @@
 {
-  " ": "------------------------------------------------",
+  " ": "------------------------------------------",
   "welcome_to_homegenie": "होमजीनी में आपका स्वागत है!",
   "welcome_subtitle": "प्रोग्रामयोग्य स्वचालन बुद्धिमत्ता",
-  "not_configured_yet": "सिस्टम अभी तक कॉन्फ़िगर नहीं किया गया है। यह सेटअप विज़ार्ड आपको कुछ ही चरणों में अपना सिस्टम चालू करने में मदद करेगा।",
+  "not_configured_yet": "सिस्टम अभी कॉन्फ़िगर नहीं किया गया है। यह सेटअप विज़ार्ड आपको कुछ ही चरणों में अपना सिस्टम चालू करने में मदद करेगा।",
   "system_config_start_with_base_and_backup": "बैकअप फ़ाइल से पुनर्स्थापित करें",
   "system_config_start_with_default_setup": "डिफ़ॉल्ट सेटअप",
   "system_config_include_demo": "सिम्युलेटेड डिवाइस गतिविधि के साथ डेमो शामिल करें",
   "system_config_additional_features": "अतिरिक्त सुविधाओं",
   "system_config_manual_setup": "स्वतः व्यवस्था",
   "interfaces": "इंटरफेस",
-  "Protocols.UPnP": "यूपीएनपी नियंत्रक",
+  "Protocols.UPnP": "UPnP नियंत्रक",
   "HomeAutomation.X10": "X10 नियंत्रक",
-  "HomeAutomation.ZWave": "जेड-वेव नियंत्रक",
+  "HomeAutomation.ZWave": "Z-वेव नियंत्रक",
   "HomeAutomation.ZigBee": "ज़िगबी नियंत्रक",
   "device_port": "डिवाइस पोर्ट",
   "device_driver": "ड्राइवर",
@@ -22,7 +22,7 @@
   "packages": "संकुल",
   "installed_packages": "स्थापित पैकेज",
   "upload_package": "पैकेज अपलोड करें",
-  "create_package": "नया पैकेज बनाएं",
+  "create_package": "नया पैकेज बनाएँ",
   "programs_version": "कार्यक्रम संस्करण",
   "http_settings": "HTTP सेटिंग्स",
   "modules_groups": "समूह और मॉड्यूल",
@@ -30,7 +30,7 @@
   "add_group": "समूह जोड़ें",
   "edit_group": "समूह संपादित करें",
   "delete_group": "समूह हटाएं",
-  "dashboard_from_group": "इस समूह से एक डैशबोर्ड बनाएं",
+  "dashboard_from_group": "इस समूह से एक डैशबोर्ड बनाएँ",
   "group_modules": "इस समूह में मॉड्यूल",
   "modules": "मॉड्यूल",
   "empty_group": "इस समूह में कोई मॉड्यूल नहीं है.",
@@ -68,19 +68,19 @@
   "cronwizard_dayowselect_selecteddaysow": "सप्ताह के चयनित दिन",
   "cronwizard_monthselect_everymonth": "प्रत्येक माह",
   "cronwizard_monthselect_selectedmonths": "चयनित महीने",
-  "cronwizard_schedule_set_exact_time": "ईवेंट का समय निर्धारित करें.",
+  "cronwizard_schedule_set_exact_time": "घटना का समय निर्धारित करें.",
   "cronwizard_schedule_set_slot_start": "समय स्लॉट प्रारंभ सेट करें.",
-  "cronwizard_schedule_set_slot_end": "{{start}} से शुरू.<span class=\"notranslate\"><br/></span> समय स्लॉट समाप्ति सेट करें.",
-  "cronwizard_bindings_define_types_and_modules": "इस अनुसूची के अधीन आने वाले प्रकार और मॉड्यूल को परिभाषित करें (वैकल्पिक)",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> से शुरू होकर समय स्लॉट समाप्ति सेट करें।",
+  "cronwizard_bindings_define_types_and_modules": "इस अनुसूची के अधीन आने वाले प्रकार और मॉड्यूल परिभाषित करें (वैकल्पिक)",
   "cronwizard_bindings_select_types": "प्रकार चुनें",
   "cronwizard_action_set_action_to_execute": "इस घटना के घटित होने पर निष्पादित करने के लिए कार्रवाई सेट करें",
   "cronwizard_action_preset_actions": "पूर्व निर्धारित क्रियाएँ",
   "cronwizard_action_preset_every_occurrence": "हर घटना पर",
-  "cronwizard_action_preset_slot_start": "किसी समय स्लॉट के प्रारंभ में",
+  "cronwizard_action_preset_slot_start": "किसी समय स्लॉट की शुरुआत में",
   "cronwizard_action_preset_slot_end": "एक समय स्लॉट के अंत में",
   "cronwizard_action_custom_script": "कस्टम एक्शन स्क्रिप्ट",
   "cronwizard_action_no_action": "कोई कार्रवाई नहीं",
-  "cronwizard_action_schedule_variable_hint": "इस घटना को संदर्भित करने के लिए क्रॉन अभिव्यक्तियों में <span class=\"notranslate color-primary\">@ {{name}}</span> एक चर के रूप में उपयोग करें या स्वचालन प्रोग्रामों में <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> उपयोग करें।",
+  "cronwizard_action_schedule_variable_hint": "इस घटना को संदर्भित करने के लिए क्रॉन अभिव्यक्तियों में <span class=\"notranslate color-primary\">@{{name}}</span> को एक चर के रूप में उपयोग करें या स्वचालन प्रोग्राम में <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> का उपयोग करें।",
   "scheduler_preset_action_command_turn_on": "चालू करो",
   "scheduler_preset_action_command_turn_off": "बंद करें",
   "scheduler_preset_action_command_set_level": "स्तर निर्धारित करें",
@@ -100,9 +100,9 @@
   "scheduler_preset_action_config_options": "विकल्प",
   "scheduler_preset_action_program_say": "कहना",
   "scheduler_preset_action_config_message": "संदेश",
-  "save_and_build": "सहेजें और बनाएं",
+  "save_and_build": "सहेजें और बनाएँ",
   "toggle_widgets_preview": "विजेट पूर्वावलोकन टॉगल करें",
-  "stop_program": "कार्यक्रम बंद करें",
+  "stop_program": "कार्यक्रम रोकें",
   "run_program": "प्रोग्राम चलाएँ",
   "enable_to_run_program": "प्रोग्राम को चलाने के लिए उसे सक्षम करें",
   "program_status_added": "जोड़ा",
@@ -111,7 +111,7 @@
   "program_status_running": "दौड़ना",
   "program_status_background": "पृष्ठभूमि",
   "program_status_stopping": "रोक",
-  "program_status_stopped": "रोका गया",
+  "program_status_stopped": "रुका हुआ",
   "program_status_interrupted": "बाधित",
   "program_status_disabled": "अक्षम",
   "program_status_enabled": "सक्रिय",
@@ -126,8 +126,8 @@
   "setup_code": "स्थापित करना",
   "main_code": "मुख्य",
   "context_code": "प्रसंग",
-  "main_code_empty_note": "\"मुख्य\" कोड खाली है। इस कोड को बनाने के लिए \"विज़ुअल कोड\" संपादक का उपयोग करें: - बाईं ओर कमांड पैलेट से \"प्रोग्राम\" श्रेणी खोलें - विज़ुअल कोड वर्कस्पेस में \"मुख्य\" प्रकार का एक ब्लॉक खींचें - इस प्रोग्राम की क्रियाओं और तर्क को लागू करने के लिए इसके अंदर अन्य कोड ब्लॉक जोड़ें प्रोग्राम \"मुख्य\" को या तो मैन्युअल रूप से चलाया जा सकता है या सेटअप कोड में अंततः दी गई शर्तों के आधार पर स्वचालित रूप से शुरू किया जा सकता है।",
-  "setup_code_empty_note": "\"सेटअप\" कोड खाली है। इस कोड को बनाने के लिए \"विज़ुअल कोड\" संपादक का उपयोग करें: - बाईं ओर कमांड पैलेट से \"प्रोग्राम\" श्रेणी खोलें - विज़ुअल कोड वर्कस्पेस में \"सेटअप\" प्रकार का एक ब्लॉक खींचें - \"मुख्य\" कोड निष्पादन को ट्रिगर करने वाली स्थितियों को निर्धारित करने के लिए इसके अंदर अन्य कोड ब्लॉक जोड़ें यह कोड हर बार एक नई घटना होने पर और कम से कम एक मिनट में एक बार मूल्यांकन किया जाता है।",
+  "main_code_empty_note": "\"मुख्य\" कोड रिक्त है। इस कोड को जनरेट करने के लिए \"विज़ुअल कोड\" संपादक का उपयोग करें: - बाईं ओर स्थित कमांड पैलेट से \"प्रोग्राम\" श्रेणी खोलें - विज़ुअल कोड कार्यक्षेत्र में \"मुख्य\" प्रकार का एक ब्लॉक खींचें - इस प्रोग्राम की क्रियाओं और तर्क को लागू करने के लिए इसके अंदर अन्य कोड ब्लॉक जोड़ें। प्रोग्राम \"मुख्य\" को सेटअप कोड में दी गई शर्तों के आधार पर मैन्युअल रूप से या स्वचालित रूप से चलाया जा सकता है।",
+  "setup_code_empty_note": "\"सेटअप\" कोड खाली है। इस कोड को जनरेट करने के लिए \"विज़ुअल कोड\" एडिटर का इस्तेमाल करें: - बाईं ओर दिए गए कमांड पैलेट से \"प्रोग्राम\" श्रेणी खोलें - विज़ुअल कोड वर्कस्पेस में \"सेटअप\" प्रकार का एक ब्लॉक खींचें - \"मुख्य\" कोड निष्पादन को ट्रिगर करने वाली स्थितियाँ निर्धारित करने के लिए उसके अंदर अन्य कोड ब्लॉक जोड़ें। इस कोड का मूल्यांकन हर बार किसी नई घटना के घटित होने पर और कम से कम एक मिनट में एक बार किया जाता है।",
   "capture_commands": "कैप्चर कमांड",
   "capture_commands_description": "विजेट पर मैन्युअल रूप से निष्पादित सभी कमांड को प्रोग्राम में जोड़ें।",
   "capture_commands_pause": "आदेशों के बीच विराम",
@@ -135,21 +135,21 @@
   "capture_pause_asis": "जैसा है",
   "$options": {
     "16": {
-      "Title": "स्तर स्मृति",
+      "Title": "स्तरीय स्मृति",
       "Description": "अंतिम डिमर स्तर को संग्रहीत करें और याद करें।",
-      "HomeGenie.LevelMemory": "स्विच ऑन करते समय अंतिम प्रकाश स्तर को याद करें",
+      "HomeGenie.LevelMemory": "स्विच ऑन करते समय अंतिम प्रकाश स्तर याद रखें",
       "HomeGenie.LevelMemory.SimulateOnly": "केवल अनुकरण करें"
     },
     "26": {
       "Title": "रंगीन रोशनी",
-      "Description": "HTTP API (V1) का उपयोग करके Philips Hue लाइट्स एकीकरण का उदाहरण। ब्रिज से कनेक्ट करने के लिए डिफ़ॉल्ट उपयोगकर्ता \"newdeveloper\" है और इसे पहले से ही सक्षम किया जाना चाहिए।",
+      "Description": "HTTP API (V1) का उपयोग करके Philips Hue लाइट्स एकीकरण का उदाहरण। ब्रिज से कनेक्ट करने के लिए डिफ़ॉल्ट उपयोगकर्ता \"newdeveloper\" है और यह पहले से ही सक्षम होना चाहिए।",
       "ConfigureOptions.BridgeAddress": "फिलिप्स ह्यू ब्रिज (V1) आईपी पता",
       "ConfigureOptions.BridgeUsername": "उपयोगकर्ता नाम",
       "ConfigureOptions.LightsCount": "रोशनी की संख्या"
     },
     "34": {
       "Title": "मौसम पूर्वानुमान",
-      "Description": "ओपन वेदर मैप सेवा से मौसम और पूर्वानुमान की जानकारी। इस विजेट को सक्रिय करने के लिए एक मान्य API कुंजी दर्ज करें। निःशुल्क API कुंजी प्राप्त करने के लिए https://openweathermap.org/appid पर दिए गए निर्देशों का पालन करें।",
+      "Description": "ओपन वेदर मैप सेवा से मौसम और पूर्वानुमान की जानकारी प्राप्त करें। इस विजेट को सक्रिय करने के लिए एक मान्य API कुंजी दर्ज करें। मुफ़्त API कुंजी प्राप्त करने के लिए https://openweathermap.org/appid पर दिए गए निर्देशों का पालन करें।",
       "ConfigureOptions.Location": "शहर का नाम",
       "ConfigureOptions.Language": "भाषा (जैसे. EN, IT, FR, DE,...)",
       "ConfigureOptions.UpdateInterval": "अद्यतन अंतराल (मिनट)",
@@ -167,21 +167,21 @@
       "ConfigureOptions.TLS": "TLS/SSL सक्षम करें",
       "ConfigureOptions.Username": "उपयोगकर्ता नाम (वैकल्पिक)",
       "ConfigureOptions.Password": "पासवर्ड (वैकल्पिक)",
-      "ConfigureOptions.ImportExternal": "बाह्य मॉड्यूल आयात करें"
+      "ConfigureOptions.ImportExternal": "बाहरी मॉड्यूल आयात करें"
     },
     "78": {
       "Title": "स्मार्ट थर्मोस्टेट",
       "Description": "थर्मोस्टेट कार्यक्षमता को लागू करने के लिए किसी भी तापमान सेंसर और स्मार्ट स्विच का उपयोग करें।",
       "VirtualThermostat.TemperatureModule": "तापमान संवेदक",
       "VirtualThermostat.HeatingSwitchModule": "हीटिंग स्विच",
-      "VirtualThermostat.CoolingSwitchModule": "कूलिंग स्विच",
+      "VirtualThermostat.CoolingSwitchModule": "शीतलन स्विच",
       "ConfigureOptions.ThermostatsCount": "थर्मोस्टैट्स की संख्या"
     },
     "81": {
       "Title": "ऊर्जा मॉनिटर",
       "Description": "ऊर्जा खपत और उपकरणों के उपयोग पर आंकड़े तैयार करना।",
       "EnergyManagement.MonitorStatus": "मॉनिटर स्थिति",
-      "EnergyManagement.MonitorWatts": "ऊर्जा खपत पर नज़र रखें"
+      "EnergyManagement.MonitorWatts": "ऊर्जा खपत की निगरानी करें"
     },
     "82": {
       "Title": "ऊर्जा बचत मोड",
@@ -191,49 +191,49 @@
     },
     "88": {
       "Title": "सामान्य आईपी कैमरा",
-      "Description": "आईपी कैमरे से छवि फ़ीड प्रदर्शित/रूट करना।",
+      "Description": "आईपी कैमरे से छवि फ़ीड प्रदर्शित/रूट करें।",
       "IpCamera.ImageURL": "कैमरा छवि API URL (अपने कैमरे के दस्तावेज़ देखें)",
       "IpCamera.Username": "उपयोगकर्ता नाम (वैकल्पिक)",
       "IpCamera.Password": "पासवर्ड (वैकल्पिक)",
-      "Widget.Config.fps": "प्रति सेकंड फ्रेम",
+      "Widget.Config.fps": "प्रति सेकंड फ़्रेम",
       "Widget.Config.size": "विजेट का आकार"
     },
     "90": {
       "Title": "सुरक्षा अलार्म प्रणाली",
       "Description": "सुरक्षा अलार्म प्रणाली को लागू करने के लिए सेंसर और अन्य उपकरणों का उपयोग करें।",
       "HomeGenie.SecurityAlarm": "अलार्म/स्ट्रोब के रूप में उपयोग करें",
-      "HomeGenie.SecurityTriggerHome": "सशस्त्र होने पर भी ट्रिगर होता है होम",
+      "HomeGenie.SecurityTriggerHome": "सशस्त्र होने पर भी ट्रिगर होता है",
       "HomeGenie.SecuritySensor": "सुरक्षा सेंसर के रूप में उपयोग करें",
-      "ConfigureOptions.Email.Recipients": "अलार्म अधिसूचनाओं के लिए प्राप्तकर्ताओं के ईमेल की अल्पविराम से अलग की गई सूची",
+      "ConfigureOptions.Email.Recipients": "अलार्म सूचनाओं के लिए प्राप्तकर्ताओं के ईमेल की अल्पविराम से अलग की गई सूची",
       "ConfigureOptions.System.ArmDelay": "आर्म विलंब (सेकंड)",
       "ConfigureOptions.System.SirenStartTime": "सायरन प्रारंभ विलंब (सेकंड में)",
       "ConfigureOptions.System.SirenMaxTime": "सायरन का अधिकतम समय (सेकंड, 0=अनंत)",
-      "ConfigureOptions.Trigger.ArmedProgram": "हथियारबंद होने पर चलने वाला कार्यक्रम",
-      "ConfigureOptions.Trigger.DisarmedProgram": "निरस्त्रीकरण के समय चलने वाला कार्यक्रम",
+      "ConfigureOptions.Trigger.ArmedProgram": "सशस्त्र होने पर चलने वाला कार्यक्रम",
+      "ConfigureOptions.Trigger.DisarmedProgram": "निरस्त्रीकरण के समय चलने वाला प्रोग्राम",
       "ConfigureOptions.Trigger.TriggeredProgram": "ट्रिगर होने पर चलने वाला प्रोग्राम"
     },
     "95": {
-      "Title": "इवेंट लॉगिंग",
+      "Title": "ईवेंट लॉगिंग",
       "Description": "डिवाइस गतिविधि रिकॉर्ड करें.",
       "EventsLogger.EnableLogging": "सक्षम"
     },
     "111": {
       "Title": "क्लाइंट कॉन्फ़िगरेशन",
-      "Description": "क्लाइंट के कॉन्फ़िगरेशन प्रोफाइल को प्रबंधित करने के लिए API को कार्यान्वित करता है जिसका उपयोग UI और डैशबोर्ड सेटिंग्स को संग्रहीत करने के लिए किया जाता है।"
+      "Description": "क्लाइंट के कॉन्फ़िगरेशन प्रोफाइल को प्रबंधित करने के लिए API लागू करता है जिसका उपयोग UI और डैशबोर्ड सेटिंग्स को संग्रहीत करने के लिए किया जाता है।"
     },
     "400": {
       "Title": "वर्चुअल मॉड्यूल डेमो",
       "Description": "वर्चुअल डिवाइस के मान मैन्युअल रूप से सेट करें.",
       "Sensor.Temperature": "तापमान मान",
-      "Sensor.Luminance": "चमक मूल्य",
-      "Sensor.MotionDetect": "गति पहचान स्थिति",
+      "Sensor.Luminance": "चमक मान",
+      "Sensor.MotionDetect": "गति का पता लगाने की स्थिति",
       "Status.Battery": "बैटरी स्तर",
       "Sensor.DoorWindow": "दरवाजा/खिड़की सेंसर स्थिति (खुला/बंद)",
       "Status.Level": "स्विच स्थिति (चालू/बंद)"
     },
     "401": {
       "Title": "डेमो - टॉगल डोर",
-      "Description": "डेमो दरवाजा-खिड़की सेंसर का दरवाजा खुला/बंद अनुकरण करता है।"
+      "Description": "डेमो दरवाजा-खिड़की सेंसर के दरवाजे के खुलने/बंद होने का अनुकरण करता है।"
     },
     "402": {
       "Title": "डेमो - गति का पता चला",
@@ -262,20 +262,20 @@
       "Title": "ई-मेल खाता",
       "Description": "ईमेल भेजने/प्राप्त करने के लिए सिस्टम प्रोग्राम द्वारा उपयोग की जाने वाली ईमेल खाता जानकारी संग्रहीत करता है।",
       "ConfigureOptions.Email.Sender": "1. ई-मेल पता",
-      "ConfigureOptions.Email.SmtpServer": "2. एसएमटीपी सर्वर पता",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP सर्वर पता",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP उपयोगकर्ता नाम (वैकल्पिक)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP पासवर्ड (वैकल्पिक)",
-      "ConfigureOptions.Email.SmtpPort": "5. एसएमटीपी सर्वर पोर्ट",
+      "ConfigureOptions.Email.SmtpPort": "5. SMTP सर्वर पोर्ट",
       "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP सर्वर SSL का उपयोग करता है"
     },
     "145": {
       "Title": "स्मार्ट डिवाइस",
-      "Description": "गति का पता लगाने और परिवेशीय प्रकाश के आधार पर डिवाइस को चालू/बंद करें।",
+      "Description": "गति का पता लगाने और परिवेश प्रकाश के आधार पर डिवाइस को चालू/बंद करें।",
       "HomeGenie.SmartLights.Enable": "'स्मार्ट डिवाइस' सक्षम करें",
       "HomeGenie.SmartLights.OnMotionDetect": "सेंसर द्वारा नियंत्रित (वैकल्पिक)",
       "HomeGenie.SmartLights.CheckLuminosity": "प्रकाश संवेदक द्वारा नियंत्रित (वैकल्पिक)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "निष्क्रियता समय समाप्त होने के बाद बंद करें (सेकंड में)",
-      "HomeGenie.SmartLights.MinLuminance": "यदि प्रकाश की चमक निम्न से कम हो तो चालू करें:"
+      "HomeGenie.SmartLights.SwitchOffTimeout": "निष्क्रियता समय समाप्ति के बाद बंद करें (सेकंड में)",
+      "HomeGenie.SmartLights.MinLuminance": "यदि चमक निम्न से कम हो तो चालू करें:"
     },
     "8": {
       "Title": "सूर्योदय रंग परिदृश्य",
@@ -283,7 +283,7 @@
       "Scenarios.SunriseColors": "सूर्योदय रंग परिदृश्य के लिए लिंक"
     },
     "910": {
-      "Title": "वस्तु पहचान",
+      "Title": "वस्तु का पता लगाना",
       "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडल का उपयोग करके वस्तुओं का पता लगाएं।",
       "ML.ObjectDetection": "ऑब्जेक्ट पहचान सक्षम करें",
       "ML.ObjectDetection.TriggerDetect": "अल्पविराम से अलग की गई चीजों की सूची (अंग्रेजी में) जो अलार्म को ट्रिगर करेंगी। (उदाहरण: बिल्ली, कुत्ता, व्यक्ति, बैग, सूटकेस)",
@@ -296,10 +296,16 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडल फ़ाइल का पथ (.onnx)"
     },
     "912": {
-      "Title": "इंस्टेंस विभाजन",
+      "Title": "उदाहरण विभाजन",
       "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडल का उपयोग करके वस्तुओं और उनकी रूपरेखा का पता लगाएं।",
       "ML.InstanceSegmentation": "इंस्टेंस सेगमेंटेशन सक्षम करें",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडल फ़ाइल का पथ (.onnx)"
+    },
+    "930": {
+      "Title": "जेमिनी इंटेंट हैंडलर",
+      "Description": "Google के Gemini AI का उपयोग करके आपके स्मार्ट सिस्टम के लिए प्राकृतिक भाषा नियंत्रण सक्षम करता है। इस सुविधा को सक्रिय करने के लिए, एक मान्य API कुंजी दर्ज करें। निःशुल्क API कुंजी प्राप्त करने के लिए https://aistudio.google.com/app/apikey पर दिए गए निर्देशों का पालन करें।",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API कुंजी",
+      "ConfigureOptions.ModelId": "मॉडल आईडी"
     }
   }
 }

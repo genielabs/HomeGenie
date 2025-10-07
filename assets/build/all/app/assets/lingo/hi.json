@@ -1,0 +1,85 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "चालू करो",
+        "ऑन करो",
+        "खोल",
+        "on"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "बंद करो",
+        "ऑफ करो",
+        "बंद",
+        "off"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "स्तर",
+        "सेट करो",
+        "कम ज्यादा करो",
+        "level",
+        "set"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "बदलो",
+        "चेंज करो",
+        "toggle",
+        "change"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "शुरू करो",
+        "चलाओ",
+        "प्ले करो",
+        "run",
+        "start",
+        "play"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "रोको",
+        "बंद करो",
+        "कैंसल करो",
+        "stop",
+        "cancel"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "बत्ती",
+        "लाइट",
+        "रोशनी",
+        "light",
+        "lights"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "स्विच",
+        "प्लग",
+        "सॉकेट",
+        "switch",
+        "plug",
+        "socket"
+      ]
+    }
+  ]
+}

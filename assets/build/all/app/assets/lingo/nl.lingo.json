@@ -1,38 +1,78 @@
 ﻿{
-    "Commands" : [
-        {
-            "Command": "Control.On",
-            "Aliases": [ "inschakelen", "aan", "on" ]
-        },
-        {
-            "Command": "Control.Off",
-            "Aliases": [ "uitschakelen", "uit", "off" ]
-        },
-        {
-            "Command": "Control.Level",
-            "Aliases": [ "waarde", "nivo", "niveau" ]
-        },
-        {
-            "Command": "Control.Toggle",
-            "Aliases": [ "wissel", "wisselen", "omwisselen", "omkeren" ]
-        },
-		{
-			"Command": "Control.Run",
-			"Aliases": [ "starten", "start", "begin", "uitvoeren" ]
-		},
-		{
-			"Command": "Control.Break",
-			"Aliases": [ "stop", "stoppen", "afbreken", "onderbreken" ]
-		}
-    ],
-    "Types" : [
-        {
-            "Type": "Light,Dimmer,Color",
-            "Aliases": [ "alle lichten", "alle lampen", "iedere lamp", "lampen", "alle dimmers", "iedere dimmer", "dimmers"]
-        },
-        {
-            "Type": "Switch",
-            "Aliases": [ "alle schakelaars", "schakelaars", "iedere schakelaar" ]
-        }
-    ]
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "aan",
+        "aanzetten",
+        "inschakelen",
+        "activeer",
+        "open"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "uit",
+        "uitzetten",
+        "uitschakelen",
+        "deactiveer",
+        "sluit"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "niveau",
+        "zet",
+        "instellen",
+        "dim"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "wissel",
+        "schakel",
+        "verander"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "start",
+        "voer uit",
+        "speel af",
+        "activeer"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "stop",
+        "onderbreek",
+        "annuleer"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "licht",
+        "lichten",
+        "lampen",
+        "verlichting"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "schakelaar",
+        "schakelaars",
+        "stopcontact",
+        "stopcontacten"
+      ]
+    }
+  ]
 }

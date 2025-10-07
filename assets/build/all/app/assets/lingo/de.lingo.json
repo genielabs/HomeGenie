@@ -1,38 +1,79 @@
 ﻿{
-	"Commands" : [
-		{
-			"Command": "Control.On",
-			"Aliases": [ "einschalten", "on", "ein" ]
-		},
-		{
-			"Command": "Control.Off",
-			"Aliases": [ "ausschalten", "off", "aus" ]
-		},
-		{
-			"Command": "Control.Level",
-			"Aliases": [ "level", "Stufe", "Niveau" ]
-		},
-		{
-			"Command": "Control.Toggle",
-			"Aliases": [ "schalte", "wechseln" ]
-		},
-		{
-			"Command": "Control.Run",
-			"Aliases": [ "start", "laufen" ]
-		},
-		{
-			"Command": "Control.Break",
-			"Aliases": [ "stoppen", "unterbrechen" ]
-		}
-	],
-	"Types" : [
-		{
-			"Type": "Light,Dimmer,Color",
-			"Aliases": [ "alle lichter", "lichter", "jedes licht" ]
-		},
-		{
-			"Type": "Switch",
-			"Aliases": [ "alle schalter", "schalter", "jeder schalter" ]
-		}
-	]
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "ein",
+        "an",
+        "einschalten",
+        "anmachen",
+        "aktiviere",
+        "öffne"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "aus",
+        "ausschalten",
+        "ausmachen",
+        "deaktiviere",
+        "schließe"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "stufe",
+        "niveau",
+        "stelle",
+        "setze",
+        "dimme"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "umschalten",
+        "wechsle",
+        "ändere"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "starte",
+        "führe aus",
+        "spiele ab",
+        "aktiviere"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "stopp",
+        "halte an",
+        "unterbrich",
+        "brich ab"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "licht",
+        "lichter",
+        "beleuchtung"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "schalter",
+        "steckdose",
+        "steckdosen"
+      ]
+    }
+  ]
 }

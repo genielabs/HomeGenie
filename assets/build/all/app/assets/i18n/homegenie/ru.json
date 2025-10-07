@@ -2,10 +2,10 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Добро пожаловать в HomeGenie!",
   "welcome_subtitle": "Программируемый интеллект автоматизации",
-  "not_configured_yet": "Система еще не настроена. Этот мастер настройки поможет вам настроить и запустить систему за несколько шагов.",
-  "system_config_start_with_base_and_backup": "Восстановить из резервной копии",
+  "not_configured_yet": "Система ещё не настроена. Этот мастер настройки поможет вам настроить и запустить систему всего за несколько шагов.",
+  "system_config_start_with_base_and_backup": "Восстановить из файла резервной копии",
   "system_config_start_with_default_setup": "Настройка по умолчанию",
-  "system_config_include_demo": "Включить демонстрацию с имитацией активности устройства",
+  "system_config_include_demo": "Включить демо с имитацией активности устройства",
   "system_config_additional_features": "Дополнительные возможности",
   "system_config_manual_setup": "Ручная настройка",
   "interfaces": "Интерфейсы",
@@ -30,19 +30,19 @@
   "add_group": "Добавить группу",
   "edit_group": "Редактировать группу",
   "delete_group": "Удалить группу",
-  "dashboard_from_group": "Создать панель управления из этой группы",
+  "dashboard_from_group": "Создать панель инструментов из этой группы",
   "group_modules": "Модули в этой группе",
   "modules": "Модули",
-  "empty_group": "В этой группе нет модулей.",
+  "empty_group": "Модулей в этой группе нет.",
   "scheduler_wizard": "Мастер планировщика",
   "schedule_event": "Событие",
-  "schedule_type_standard": "Стандарт",
+  "schedule_type_standard": "Стандартный",
   "schedule_type_range": "Диапазон дат",
   "schedule_type_cron": "выражение Cron",
   "schedule_action": "Действие",
   "schedule_occurrence_preview": "Предварительный просмотр события",
   "time_schedule": "Расписание",
-  "occurrence": "Происшествие",
+  "occurrence": "Возникновение",
   "cronwizard_description_on": "на",
   "cronwizard_description_from": "от",
   "cronwizard_description_to": "к",
@@ -69,9 +69,9 @@
   "cronwizard_monthselect_everymonth": "Каждый месяц",
   "cronwizard_monthselect_selectedmonths": "Выбранные месяцы",
   "cronwizard_schedule_set_exact_time": "Установите время события.",
-  "cronwizard_schedule_set_slot_start": "Установите начало временного интервала.",
-  "cronwizard_schedule_set_slot_end": "Начиная с {{start}} .<span class=\"notranslate\"><br/></span> Установите конец временного интервала.",
-  "cronwizard_bindings_define_types_and_modules": "Определите типы и модули, на которые распространяется этот график (необязательно)",
+  "cronwizard_schedule_set_slot_start": "Установить начало временного интервала.",
+  "cronwizard_schedule_set_slot_end": "Начиная с {{start}}.<span class=\"notranslate\"><br/></span> Установить конец временного интервала.",
+  "cronwizard_bindings_define_types_and_modules": "Определите типы и модули, подпадающие под действие этого графика (необязательно)",
   "cronwizard_bindings_select_types": "Выберите типы",
   "cronwizard_action_set_action_to_execute": "Установить действие, которое будет выполняться при возникновении этого события",
   "cronwizard_action_preset_actions": "Предустановленные действия",
@@ -79,8 +79,8 @@
   "cronwizard_action_preset_slot_start": "В начале временного интервала",
   "cronwizard_action_preset_slot_end": "В конце временного интервала",
   "cronwizard_action_custom_script": "Пользовательский сценарий действия",
-  "cronwizard_action_no_action": "Никаких действий.",
-  "cronwizard_action_schedule_variable_hint": "Используйте <span class=\"notranslate color-primary\">{{@ name}}</span> как переменную в выражениях cron или используйте <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> в программах автоматизации для ссылки на это событие.",
+  "cronwizard_action_no_action": "Никаких действий",
+  "cronwizard_action_schedule_variable_hint": "Используйте <span class=\"notranslate color-primary\">@{{name}}</span> как переменную в выражениях cron или используйте <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> в программах автоматизации для ссылки на это событие.",
   "scheduler_preset_action_command_turn_on": "Включать",
   "scheduler_preset_action_command_turn_off": "Выключать",
   "scheduler_preset_action_command_set_level": "Установить уровень",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "Сказать",
   "scheduler_preset_action_config_message": "Сообщение",
   "save_and_build": "Сохранить и построить",
-  "toggle_widgets_preview": "Переключить предварительный просмотр виджетов",
+  "toggle_widgets_preview": "Включить предварительный просмотр виджетов",
   "stop_program": "Остановить программу",
   "run_program": "Запустить программу",
   "enable_to_run_program": "Включите программу, чтобы запустить ее",
@@ -126,8 +126,8 @@
   "setup_code": "Настраивать",
   "main_code": "Основной",
   "context_code": "Контекст",
-  "main_code_empty_note": "Код \"Main\" пуст. Используйте редактор \"Visual code\", чтобы сгенерировать этот код: - Откройте категорию \"Program\" из палитры команд слева - Перетащите блок типа \"Main\" в рабочую область визуального кода - Добавьте внутрь него другие блоки кода для реализации действий и логики этой программы Программа \"Main\" может быть запущена вручную или автоматически на основе условий, в конечном итоге заданных в коде настройки.",
-  "setup_code_empty_note": "Код \"Setup\" пуст. Используйте редактор \"Visual code\", чтобы сгенерировать этот код: - Откройте категорию \"Program\" из палитры команд слева - Перетащите блок типа \"Setup\" в рабочую область визуального кода - Добавьте в него другие блоки кода, чтобы определить условия, которые вызовут выполнение кода \"Main\" Этот код оценивается каждый раз, когда происходит новое событие и не реже одного раза в минуту.",
+  "main_code_empty_note": "Код «Main» пуст. Используйте редактор «Визуальный код» для генерации этого кода: - Откройте категорию «Программа» на палитре команд слева. - Перетащите блок типа «Main» в рабочую область визуального кода. - Добавьте в него другие блоки кода для реализации действий и логики этой программы. Программа «Main» может запускаться вручную или автоматически в зависимости от условий, заданных в коде настройки.",
+  "setup_code_empty_note": "Код «Setup» пуст. Используйте редактор «Visual code» для генерации этого кода: - Откройте категорию «Program» на палитре команд слева. - Перетащите блок типа «Setup» в рабочую область визуального кода. - Добавьте в него другие блоки кода, чтобы определить условия, при которых будет выполняться код «Main». Этот код вычисляется каждый раз при возникновении нового события и не реже одного раза в минуту.",
   "capture_commands": "Команды захвата",
   "capture_commands_description": "Добавьте в программу все команды, выполняемые вручную на виджетах.",
   "capture_commands_pause": "Пауза между командами",
@@ -137,33 +137,33 @@
     "16": {
       "Title": "Уровень памяти",
       "Description": "Сохранение и вызов последнего уровня диммера.",
-      "HomeGenie.LevelMemory": "Восстановить последний уровень освещенности при включении",
+      "HomeGenie.LevelMemory": "Запоминать последний уровень освещенности при включении",
       "HomeGenie.LevelMemory.SimulateOnly": "Только симуляция"
     },
     "26": {
       "Title": "Цветные огни",
-      "Description": "Пример интеграции Philips Hue lights с использованием HTTP API (V1). Пользователь по умолчанию для подключения к мосту — «newdeveloper», и он должен быть уже включен.",
+      "Description": "Пример интеграции светильников Philips Hue с использованием HTTP API (V1). Пользователь по умолчанию для подключения к мосту — «newdeveloper», и эта возможность должна быть уже включена.",
       "ConfigureOptions.BridgeAddress": "IP-адрес Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Имя пользователя",
       "ConfigureOptions.LightsCount": "Количество огней"
     },
     "34": {
       "Title": "Прогноз погоды",
-      "Description": "Информация о погоде и прогнозе от сервиса Open Weather Map. Чтобы активировать этот виджет, введите действительный ключ API. Следуйте инструкциям на https://openweathermap.org/appid, чтобы получить бесплатный ключ API.",
+      "Description": "Информация о погоде и прогнозе от сервиса Open Weather Map. Чтобы активировать этот виджет, введите действительный ключ API. Следуйте инструкциям на сайте https://openweathermap.org/appid, чтобы получить бесплатный ключ API.",
       "ConfigureOptions.Location": "Название города",
       "ConfigureOptions.Language": "Язык (например, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Интервал обновления (минуты)",
       "ConfigureOptions.ApiKey": "API-ключ OpenWeatherMap (APPID)"
     },
     "77": {
-      "Title": "Сетевой MQTT",
-      "Description": "Подключитесь к брокеру MQTT, чтобы использовать приложение HomeGenie Panel из любой точки мира через Интернет или для соединения устройств HomeGenie в одной сети MQTT.",
-      "MQTT.SensorPublish": "Публикация событий, генерируемых этим модулем",
+      "Title": "Сеть MQTT",
+      "Description": "Подключитесь к брокеру MQTT, чтобы использовать приложение HomeGenie Panel из любой точки мира через Интернет или соединить устройства HomeGenie в одной сети MQTT.",
+      "MQTT.SensorPublish": "Публиковать события, создаваемые этим модулем",
       "ConfigureOptions.ClientId": "Идентификатор клиента.",
       "ConfigureOptions.ServerAddress": "Адрес сервера",
       "ConfigureOptions.ServerPort": "Порт сервера",
       "ConfigureOptions.Encryption": "Включить сквозное шифрование (E2EE)",
-      "ConfigureOptions.WebSockets": "Использовать WebSockets",
+      "ConfigureOptions.WebSockets": "Использовать веб-сокеты",
       "ConfigureOptions.TLS": "Включить TLS/SSL",
       "ConfigureOptions.Username": "Имя пользователя (необязательно)",
       "ConfigureOptions.Password": "Пароль (необязательно)",
@@ -179,8 +179,8 @@
     },
     "81": {
       "Title": "Энергетический монитор",
-      "Description": "Формируйте статистику по потреблению энергии и использованию устройств.",
-      "EnergyManagement.MonitorStatus": "Мониторить статус",
+      "Description": "Формирование статистики по потреблению энергии и использованию устройств.",
+      "EnergyManagement.MonitorStatus": "Монитор статуса",
       "EnergyManagement.MonitorWatts": "Мониторинг потребления энергии"
     },
     "82": {
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Обычная IP-камера",
       "Description": "Отображение/маршрутизация изображения с IP-камеры.",
-      "IpCamera.ImageURL": "URL API изображения камеры (см. документацию к камере)",
+      "IpCamera.ImageURL": "URL API изображения камеры (см. документацию по вашей камере)",
       "IpCamera.Username": "Имя пользователя (необязательно)",
       "IpCamera.Password": "Пароль (необязательно)",
       "Widget.Config.fps": "Кадров в секунду",
@@ -201,16 +201,16 @@
     "90": {
       "Title": "Система охранной сигнализации",
       "Description": "Используйте датчики и другие устройства для реализации системы охранной сигнализации.",
-      "HomeGenie.SecurityAlarm": "Использовать как сигнализацию/стробоскоп",
-      "HomeGenie.SecurityTriggerHome": "Также срабатывает при постановке на охрану.",
+      "HomeGenie.SecurityAlarm": "Использовать как будильник/стробоскоп",
+      "HomeGenie.SecurityTriggerHome": "Также срабатывает при взятии под охрану.",
       "HomeGenie.SecuritySensor": "Использовать как датчик безопасности",
-      "ConfigureOptions.Email.Recipients": "Список адресов электронной почты получателей для оповещений о тревоге, разделенных запятыми",
+      "ConfigureOptions.Email.Recipients": "Список адресов электронной почты получателей для уведомлений о тревоге, разделенных запятыми",
       "ConfigureOptions.System.ArmDelay": "Задержка постановки на охрану (секунды)",
       "ConfigureOptions.System.SirenStartTime": "Задержка включения сирены (секунды)",
       "ConfigureOptions.System.SirenMaxTime": "Максимальное время сирены (секунды, 0=бесконечно)",
       "ConfigureOptions.Trigger.ArmedProgram": "Программа для запуска при постановке на охрану",
       "ConfigureOptions.Trigger.DisarmedProgram": "Программа для запуска при снятии с охраны",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Программа для запуска при срабатывании"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Программа, запускаемая при срабатывании триггера"
     },
     "95": {
       "Title": "Регистрация событий",
@@ -223,7 +223,7 @@
     },
     "400": {
       "Title": "Демонстрация виртуальных модулей",
-      "Description": "Вручную установите значения виртуального устройства.",
+      "Description": "Вручную задайте значения виртуального устройства.",
       "Sensor.Temperature": "Значение температуры",
       "Sensor.Luminance": "Значение яркости",
       "Sensor.MotionDetect": "Статус обнаружения движения",
@@ -232,25 +232,25 @@
       "Status.Level": "Состояние переключателя (вкл./выкл.)"
     },
     "401": {
-      "Title": "Демонстрация - Переключатель дверей",
+      "Title": "Демо - Переключатель дверей",
       "Description": "Имитирует открытие/закрытие двери демонстрационного датчика двери и окна."
     },
     "402": {
-      "Title": "Демонстрация — обнаружение движения",
+      "Title": "Демонстрация — Обнаружено движение",
       "Description": "Имитирует обнаружение движения демонстрационного мультисенсора."
     },
     "410": {
       "Title": "Симулятор датчика",
-      "Description": "Передача случайных значений датчиков.",
+      "Description": "Выдавать случайные значения датчиков.",
       "Simulator.Sensor.Temperature": "Датчик температуры",
       "Simulator.Sensor.Humidity": "Датчик влажности",
       "Simulator.Sensor.Luminance": "Датчик освещенности",
       "Simulator.Meter.Watts": "Ваттметр",
-      "Simulator.Meter.Watts.Max": "Макс. мощность Вт",
+      "Simulator.Meter.Watts.Max": "Максимальная мощность в ваттах",
       "Simulator.Sensor.DataFrequency": "Частота излучения симулятора"
     },
     "505": {
-      "Title": "Дистанционное управление",
+      "Title": "Пульт дистанционного управления",
       "Description": "Управляйте устройством с помощью пульта дистанционного управления (ИК или РЧ).",
       "HomeGenie.RemoteControl.Enable": "Давать возможность",
       "HomeGenie.RemoteControl.IRCode": "Кнопка переключения",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "Учетная запись электронной почты",
-      "Description": "Сохраняет информацию об учетной записи электронной почты, используемую системными программами для отправки/получения писем.",
+      "Description": "Сохраняет информацию об учетной записи электронной почты, используемую системными программами для отправки/получения сообщений электронной почты.",
       "ConfigureOptions.Email.Sender": "1. Адрес электронной почты",
       "ConfigureOptions.Email.SmtpServer": "2. Адрес SMTP-сервера",
       "ConfigureOptions.Email.SmtpUserName": "3. Имя пользователя SMTP (необязательно)",
@@ -274,8 +274,8 @@
       "HomeGenie.SmartLights.Enable": "Включить «Умное устройство»",
       "HomeGenie.SmartLights.OnMotionDetect": "Управляется датчиком (опционально)",
       "HomeGenie.SmartLights.CheckLuminosity": "Управляется датчиком освещенности (опционально)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Выключить после тайм-аута бездействия (секунды)",
-      "HomeGenie.SmartLights.MinLuminance": "Включать, если яркость ниже:"
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Выключить по истечении времени бездействия (секунды)",
+      "HomeGenie.SmartLights.MinLuminance": "Включить, если яркость ниже:"
     },
     "8": {
       "Title": "Сценарий «Цвета восхода солнца»",
@@ -286,20 +286,26 @@
       "Title": "Обнаружение объектов",
       "Description": "Обнаружение объектов с использованием предварительно обученной модели YOLO11.",
       "ML.ObjectDetection": "Включить обнаружение объектов",
-      "ML.ObjectDetection.TriggerDetect": "Список вещей, разделенных запятыми (на английском языке), которые вызовут срабатывание сигнализации. (например: кошка, собака, человек, рюкзак, чемодан)",
+      "ML.ObjectDetection.TriggerDetect": "Список вещей (на английском языке), которые вызовут срабатывание сигнализации, разделенный запятыми. (например: кошка, собака, человек, рюкзак, чемодан)",
       "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
     },
     "911": {
       "Title": "Оценка позы",
-      "Description": "Обнаружение ключевых точек посредством оценки позы с использованием пользовательских моделей ONNX или предварительно обученной модели YOLOv11 по умолчанию (специфичной для позы человека).",
+      "Description": "Обнаружение ключевых точек путем оценки позы с использованием пользовательских моделей ONNX или предварительно обученной по умолчанию модели YOLOv11 (специфичной для позы человека).",
       "ML.PoseEstimation": "Включить оценку позы",
       "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Сегментация экземпляра",
+      "Title": "Сегментация экземпляров",
       "Description": "Обнаружение объектов и их контуров с помощью предварительно обученной модели YOLO11.",
-      "ML.InstanceSegmentation": "Включить сегментацию экземпляра",
+      "ML.InstanceSegmentation": "Включить сегментацию экземпляров",
       "ConfigureOptions.Yolo.ModelPath": "Путь к файлу модели YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Обработчик намерений Gemini",
+      "Description": "Обеспечивает управление естественным языком для вашей интеллектуальной системы с помощью Gemini AI от Google. Чтобы активировать эту функцию, введите действительный ключ API. Следуйте инструкциям на странице https://aistudio.google.com/app/apikey, чтобы получить бесплатный ключ API.",
+      "ConfigureOptions.ApiKey": "API-ключ Google Gemini AI",
+      "ConfigureOptions.ModelId": "Идентификатор модели"
     }
   }
 }

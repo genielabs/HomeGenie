@@ -1,5 +1,5 @@
 {
-  " ": "----------------------------------------",
+  " ": "--",
   "welcome_to_homegenie": "HomeGenieக்கு வருக!",
   "welcome_subtitle": "நிரல்படுத்தக்கூடிய ஆட்டோமேஷன் நுண்ணறிவு",
   "not_configured_yet": "கணினி இன்னும் உள்ளமைக்கப்படவில்லை. இந்த அமைவு வழிகாட்டி சில படிகளில் உங்கள் கணினியை இயக்கி இயக்க உதவும்.",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "தேர்ந்தெடுக்கப்பட்ட மாதங்கள்",
   "cronwizard_schedule_set_exact_time": "நிகழ்வு நேரத்தை அமைக்கவும்.",
   "cronwizard_schedule_set_slot_start": "தொடக்க நேர இடைவெளியை அமைக்கவும்.",
-  "cronwizard_schedule_set_slot_end": "{{start}} தொடங்குகிறது.<span class=\"notranslate\"><br/></span> நேர இடைவெளி முடிவை அமைக்கவும்.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> இல் தொடங்கி நேர ஸ்லாட் முடிவை அமைக்கவும்.",
   "cronwizard_bindings_define_types_and_modules": "இந்த அட்டவணைக்கு உட்பட்ட வகைகள் மற்றும் தொகுதிகளை வரையறுக்கவும் (விரும்பினால்)",
   "cronwizard_bindings_select_types": "வகைகளைத் தேர்ந்தெடுக்கவும்",
   "cronwizard_action_set_action_to_execute": "இந்த நிகழ்வின் நிகழ்வுகளில் செயல்படுத்த வேண்டிய செயலை அமைக்கவும்.",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ஒரு நேர இடைவெளியின் முடிவில்",
   "cronwizard_action_custom_script": "தனிப்பயன் செயல் ஸ்கிரிப்ட்",
   "cronwizard_action_no_action": "எந்த நடவடிக்கையும் இல்லை",
-  "cronwizard_action_schedule_variable_hint": "இந்த நிகழ்வைக் குறிப்பிட, cron வெளிப்பாடுகளில் <span class=\"notranslate color-primary\">@ {{name}}</span> மாறியாகப் பயன்படுத்தவும் அல்லது ஆட்டோமேஷன் நிரல்களில் <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> பயன்படுத்தவும்.",
+  "cronwizard_action_schedule_variable_hint": "இந்த நிகழ்வைக் குறிப்பிட, cron வெளிப்பாடுகளில் <span class=\"notranslate color-primary\">@{{name}}</span> ஐ மாறியாகப் பயன்படுத்தவும் அல்லது தானியங்கு நிரல்களில் <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ஐப் பயன்படுத்தவும்.",
   "scheduler_preset_action_command_turn_on": "இயக்கு",
   "scheduler_preset_action_command_turn_off": "அணைக்கவும்",
   "scheduler_preset_action_command_set_level": "நிலையை அமை",
@@ -232,7 +232,7 @@
       "Status.Level": "நிலையை மாற்று (ஆன்/ஆஃப்)"
     },
     "401": {
-      "Title": "டெமோ - டோக்கிள் டோர்",
+      "Title": "டெமோ - டோர் மாற்று",
       "Description": "டெமோ கதவு-ஜன்னல் சென்சாரின் கதவு திறந்த/மூடப்படுவதை உருவகப்படுத்துகிறது."
     },
     "402": {
@@ -285,7 +285,7 @@
     "910": {
       "Title": "பொருள் கண்டறிதல்",
       "Description": "முன் பயிற்சி பெற்ற YOLO11 மாதிரியைப் பயன்படுத்தி பொருட்களைக் கண்டறியவும்.",
-      "ML.ObjectDetection": "பொருள் கண்டறிதலை இயக்கு",
+      "ML.ObjectDetection": "பொருட்களைக் கண்டறிதலை இயக்கு",
       "ML.ObjectDetection.TriggerDetect": "அலாரத்தைத் தூண்டும் விஷயங்களின் காற்புள்ளியால் பிரிக்கப்பட்ட பட்டியல் (ஆங்கிலத்தில்). (எ.கா: பூனை, நாய், நபர், முதுகுப்பை, சூட்கேஸ்)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 மாதிரி கோப்பின் பாதை (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "முன் பயிற்சி பெற்ற YOLO11 மாதிரியைப் பயன்படுத்தி பொருட்களையும் அவற்றின் வெளிப்புறங்களையும் கண்டறியவும்.",
       "ML.InstanceSegmentation": "நிகழ்வுப் பிரிவை இயக்கு",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 மாதிரி கோப்பின் பாதை (.onnx)"
+    },
+    "930": {
+      "Title": "ஜெமினி இன்டென்ட் ஹேண்ட்லர்",
+      "Description": "கூகிளின் ஜெமினி AI ஐப் பயன்படுத்தி உங்கள் ஸ்மார்ட் சிஸ்டத்திற்கு இயல்பான மொழி கட்டுப்பாட்டை இயக்குகிறது. இந்த அம்சத்தை செயல்படுத்த, செல்லுபடியாகும் API விசையை உள்ளிடவும். இலவச API விசையைப் பெற https://aistudio.google.com/app/apikey இல் உள்ள வழிமுறைகளைப் பின்பற்றவும்.",
+      "ConfigureOptions.ApiKey": "கூகிள் ஜெமினி AI API விசை",
+      "ConfigureOptions.ModelId": "மாதிரி ஐடி"
     }
   }
 }

@@ -2,12 +2,12 @@
   " ": "------------------------------------------",
   "welcome_to_homegenie": "ຍິນດີຕ້ອນຮັບສູ່ HomeGenie!",
   "welcome_subtitle": "ອັດ​ຕະ​ໂນ​ມັດ​ອັດ​ຕະ​ໂນ​ມັດ​ຂອງ​ໂຄງ​ການ​",
-  "not_configured_yet": "ລະບົບບໍ່ໄດ້ຕັ້ງຄ່າເທື່ອ. ຕົວຊ່ວຍສ້າງນີ້ຈະຊ່ວຍເຈົ້າໃນການເຮັດໃຫ້ລະບົບຂອງເຈົ້າຂຶ້ນ ແລະເຮັດວຽກໄດ້ໃນສອງສາມຂັ້ນຕອນ.",
+  "not_configured_yet": "ລະບົບບໍ່ໄດ້ຕັ້ງຄ່າເທື່ອ. ຕົວຊ່ວຍສ້າງການຕັ້ງຄ່ານີ້ຈະຊ່ວຍເຈົ້າໃນການເຮັດໃຫ້ລະບົບຂອງເຈົ້າຂຶ້ນ ແລະເຮັດວຽກໄດ້ໃນສອງສາມຂັ້ນຕອນ.",
   "system_config_start_with_base_and_backup": "ຟື້ນ​ຟູ​ຈາກ​ໄຟລ​໌​າ​ຮອງ​",
   "system_config_start_with_default_setup": "ຕັ້ງຄ່າເລີ່ມຕົ້ນ",
   "system_config_include_demo": "ລວມເອົາການສາທິດກັບກິດຈະກໍາອຸປະກອນການຈໍາລອງ",
   "system_config_additional_features": "ຄຸນສົມບັດເພີ່ມເຕີມ",
-  "system_config_manual_setup": "ການ​ຕັ້ງ​ຄ່າ​ດ້ວຍ​ມື​",
+  "system_config_manual_setup": "ການຕິດຕັ້ງດ້ວຍມື",
   "interfaces": "ການໂຕ້ຕອບ",
   "Protocols.UPnP": "ຕົວຄວບຄຸມ UPnP",
   "HomeAutomation.X10": "ຕົວຄວບຄຸມ X10",
@@ -21,7 +21,7 @@
   "repositories": "ບ່ອນເກັບມ້ຽນ",
   "packages": "ການຫຸ້ມຫໍ່",
   "installed_packages": "ແພັກເກດທີ່ຕິດຕັ້ງແລ້ວ",
-  "upload_package": "ອັບໂຫຼດຊຸດ",
+  "upload_package": "ອັບໂຫຼດແພັກເກດ",
   "create_package": "ສ້າງຊຸດໃຫມ່",
   "programs_version": "ສະບັບໂປຣແກຣມ",
   "http_settings": "ການຕັ້ງຄ່າ HTTP",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "ເດືອນທີ່ເລືອກ",
   "cronwizard_schedule_set_exact_time": "ຕັ້ງເວລານັດໝາຍ.",
   "cronwizard_schedule_set_slot_start": "ຕັ້ງເວລາເລີ່ມຕົ້ນ.",
-  "cronwizard_schedule_set_slot_end": "ເລີ່ມ {{start}} .<span class=\"notranslate\"><br/></span> ຕັ້ງເວລາສິ້ນສຸດ.",
+  "cronwizard_schedule_set_slot_end": "ເລີ່ມຕົ້ນທີ່ {{start}}.<span class=\"notranslate\"><br/></span> ຕັ້ງເວລາສິ້ນສຸດ.",
   "cronwizard_bindings_define_types_and_modules": "ກໍານົດປະເພດແລະໂມດູນທີ່ຂຶ້ນກັບຕາຕະລາງນີ້ (ທາງເລືອກ)",
   "cronwizard_bindings_select_types": "ເລືອກປະເພດ",
   "cronwizard_action_set_action_to_execute": "ກໍານົດການດໍາເນີນການເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ໃນຕອນທ້າຍຂອງເວລາ",
   "cronwizard_action_custom_script": "ສະຄຣິບຄຳສັ່ງແບບກຳນົດເອງ",
   "cronwizard_action_no_action": "ບໍ່ມີການປະຕິບັດ",
-  "cronwizard_action_schedule_variable_hint": "ໃຊ້ <span class=\"notranslate color-primary\">@ {{name}}</span> ເປັນຕົວແປໃນການສະແດງຜົນ cron ຫຼືໃຊ້ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ໃນໂປຣແກຣມອັດຕະໂນມັດເພື່ອອ້າງອີງເຫດການນີ້.",
+  "cronwizard_action_schedule_variable_hint": "ໃຊ້ <span class=\"notranslate color-primary\">@{{name}}</span> ເປັນຕົວແປໃນການສະແດງຜົນ cron ຫຼືໃຊ້ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ໃນໂປຣແກຣມອັດຕະໂນມັດເພື່ອອ້າງອີງເຫດການນີ້.",
   "scheduler_preset_action_command_turn_on": "ເປີດ",
   "scheduler_preset_action_command_turn_off": "ປິດ",
   "scheduler_preset_action_command_set_level": "ຕັ້ງລະດັບ",
@@ -137,7 +137,7 @@
     "16": {
       "Title": "ຫນ່ວຍຄວາມຈໍາລະດັບ",
       "Description": "ເກັບຮັກສາແລະຈື່ຈໍາລະດັບ dimmer ສຸດທ້າຍ.",
-      "HomeGenie.LevelMemory": "ຈື່ຈໍາລະດັບແສງສຸດທ້າຍເມື່ອເປີດ",
+      "HomeGenie.LevelMemory": "ຈື່ລະດັບແສງສຸດທ້າຍເມື່ອເປີດ",
       "HomeGenie.LevelMemory.SimulateOnly": "ຈຳລອງເທົ່ານັ້ນ"
     },
     "26": {
@@ -300,6 +300,12 @@
       "Description": "ກວດຫາວັດຖຸ ແລະໂຄງຮ່າງຂອງພວກມັນໂດຍໃຊ້ຕົວແບບ YOLO11 ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.InstanceSegmentation": "ເປີດໃຊ້ການແບ່ງສ່ວນຕົວຢ່າງ",
       "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "ເປີດໃຊ້ການຄວບຄຸມພາສາທໍາມະຊາດສໍາລັບລະບົບອັດສະລິຍະຂອງທ່ານໂດຍໃຊ້ Gemini AI ຂອງ Google. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ໃຫ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄໍາແນະນໍາຢູ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",
+      "ConfigureOptions.ApiKey": "ກະແຈ Google Gemini AI API",
+      "ConfigureOptions.ModelId": "ID ຕົວແບບ"
     }
   }
 }

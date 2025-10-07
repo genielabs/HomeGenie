@@ -2,7 +2,7 @@
   " ": "----------------------------------",
   "welcome_to_homegenie": "ወደ HomeGenie እንኳን በደህና መጡ!",
   "welcome_subtitle": "በፕሮግራም ሊሰራ የሚችል አውቶሜሽን ብልህነት",
-  "not_configured_yet": "ስርዓቱ ገና አልተዋቀረም። ይህ የማዋቀር ጠንቋይ ስርዓትዎን በጥቂት እርምጃዎች እንዲሰሩ እና እንዲሰሩ ይረዳዎታል።",
+  "not_configured_yet": "ስርዓቱ ገና አልተዋቀረም። ይህ የማዋቀር ጠንቋይ ስርዓትዎን በጥቂት እርምጃዎች እንዲያነሱ እና እንዲሰሩ ይረዳዎታል።",
   "system_config_start_with_base_and_backup": "ከመጠባበቂያ ፋይል ወደነበረበት መልስ",
   "system_config_start_with_default_setup": "ነባሪ ማዋቀር",
   "system_config_include_demo": "ማሳያን ከተመሳሰለ የመሣሪያ እንቅስቃሴ ጋር ያካትቱ",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "የተመረጡ ወራት",
   "cronwizard_schedule_set_exact_time": "የክስተቱን ጊዜ ያዘጋጁ።",
   "cronwizard_schedule_set_slot_start": "የሰዓት ማስገቢያ ጅምር ያዘጋጁ።",
-  "cronwizard_schedule_set_slot_end": "{{start}} ጀምሮ.<span class=\"notranslate\"><br/></span> የሰዓት ማስገቢያ ማብቂያን ያዘጋጁ።",
+  "cronwizard_schedule_set_slot_end": "ከ{{start}}.<span class=\"notranslate\"><br/></span> ጀምሮ የሰዓት ማስገቢያ ማብቂያ።",
   "cronwizard_bindings_define_types_and_modules": "ለዚህ መርሐግብር ተገዢ የሆኑትን ዓይነቶች እና ሞጁሎችን ይግለጹ (አማራጭ)",
   "cronwizard_bindings_select_types": "ዓይነቶችን ይምረጡ",
   "cronwizard_action_set_action_to_execute": "የዚህ ክስተት ክስተቶችን ለማስፈጸም እርምጃ ያዘጋጁ",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "በጊዜ ክፍተት መጨረሻ",
   "cronwizard_action_custom_script": "ብጁ የድርጊት ስክሪፕት",
   "cronwizard_action_no_action": "ምንም እርምጃ የለም።",
-  "cronwizard_action_schedule_variable_hint": "በክሮን አገላለጾች ውስጥ <span class=\"notranslate color-primary\">@ {{name}}</span> እንደ ተለዋዋጭ ይጠቀሙ ወይም ይህንን ክስተት ለማጣቀስ በአውቶማቲክ ፕሮግራሞች ውስጥ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ይጠቀሙ።",
+  "cronwizard_action_schedule_variable_hint": "በክሮን አገላለጾች ላይ <span class=\"notranslate color-primary\">@{{name}}</span>ን እንደ ተለዋዋጭ ተጠቀም ወይም ይህን ክስተት ለማጣቀስ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span>ን በራስ ሰር ፕሮግራሞች ተጠቀም።",
   "scheduler_preset_action_command_turn_on": "ማዞር",
   "scheduler_preset_action_command_turn_off": "አጥፋ",
   "scheduler_preset_action_command_set_level": "ደረጃ አዘጋጅ",
@@ -163,7 +163,7 @@
       "ConfigureOptions.ServerAddress": "የአገልጋይ አድራሻ",
       "ConfigureOptions.ServerPort": "የአገልጋይ ወደብ",
       "ConfigureOptions.Encryption": "ከጫፍ እስከ ጫፍ ምስጠራን አንቃ (E2EE)",
-      "ConfigureOptions.WebSockets": "WebSockets ተጠቀም",
+      "ConfigureOptions.WebSockets": "WebSockets ይጠቀሙ",
       "ConfigureOptions.TLS": "TLS/SSL ን አንቃ",
       "ConfigureOptions.Username": "የተጠቃሚ ስም (አማራጭ)",
       "ConfigureOptions.Password": "የይለፍ ቃል (አማራጭ)",
@@ -253,7 +253,7 @@
       "Title": "የርቀት መቆጣጠሪያ",
       "Description": "የርቀት መቆጣጠሪያ (IR ወይም RF) በመጠቀም መሳሪያውን ይቆጣጠሩ።",
       "HomeGenie.RemoteControl.Enable": "አንቃ",
-      "HomeGenie.RemoteControl.IRCode": "አዝራር ቀያይር",
+      "HomeGenie.RemoteControl.IRCode": "ቀይር አዝራር",
       "ConfigureOptions.DimmerUpCode": "የብሩህነት መጨመር ቁልፍ",
       "ConfigureOptions.DimmerDownCode": "የብሩህነት ቅነሳ ቁልፍ",
       "ConfigureOptions.DimmerInterval": "የማደብዘዝ ደረጃ"
@@ -262,7 +262,7 @@
       "Title": "የኢሜል መለያ",
       "Description": "በስርዓት ፕሮግራሞች ኢሜይሎችን ለመላክ/መቀበል የሚጠቀሙበትን የኢ-ሜል መለያ መረጃ ያከማቻል።",
       "ConfigureOptions.Email.Sender": "1. የኢሜል አድራሻ",
-      "ConfigureOptions.Email.SmtpServer": "2. SMTP አገልጋይ አድራሻ",
+      "ConfigureOptions.Email.SmtpServer": "2. የ SMTP አገልጋይ አድራሻ",
       "ConfigureOptions.Email.SmtpUserName": "3. የSMTP ተጠቃሚ ስም (አማራጭ)",
       "ConfigureOptions.Email.SmtpPassword": "4. የSMTP ይለፍ ቃል (አማራጭ)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP አገልጋይ ወደብ",
@@ -275,7 +275,7 @@
       "HomeGenie.SmartLights.OnMotionDetect": "በዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
       "HomeGenie.SmartLights.CheckLuminosity": "በብርሃን ዳሳሽ ቁጥጥር የሚደረግበት (አማራጭ)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "የእንቅስቃሴ-አልባነት ጊዜ ካለቀ በኋላ ያጥፉ (ሰከንዶች)",
-      "HomeGenie.SmartLights.MinLuminance": "መብራቱ ከታች ከሆነ ያብሩ:"
+      "HomeGenie.SmartLights.MinLuminance": "መብራቱ ከዚህ በታች ከሆነ ያብሩ፦"
     },
     "8": {
       "Title": "የፀሐይ መውጫ ቀለሞች ሁኔታ",
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "የቦታ ግምት",
-      "Description": "ብጁ የONNX ሞዴሎችን ወይም ነባሪው ቀድሞ የሰለጠነ YOLOv11 ሞዴል (የሰው አቀማመጥ-ተኮር) በመጠቀም የቁልፍ ነጥብ ማወቂያ በፖዝ ግምት።",
+      "Description": "ብጁ ONNX ሞዴሎችን ወይም ነባሪው ቀድሞ የሰለጠነ YOLOv11 ሞዴል (የሰው አቀማመጥ-ተኮር) በመጠቀም የቁልፍ ነጥብ ማወቂያ በፖዝ ግምት።",
       "ML.PoseEstimation": "የአቀማመጥ ግምትን አንቃ",
       "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "አስቀድሞ የሰለጠነ YOLO11 ሞዴል በመጠቀም ነገሮችን እና ገለጻዎቻቸውን ያግኙ።",
       "ML.InstanceSegmentation": "የአብነት ክፍፍልን አንቃ",
       "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
+    },
+    "930": {
+      "Title": "ጀሚኒ ሐሳብ ተቆጣጣሪ",
+      "Description": "የGoogle Gemini AIን በመጠቀም ለእርስዎ ዘመናዊ ስርዓት የተፈጥሮ ቋንቋ ቁጥጥርን ያነቃል። ይህንን ባህሪ ለማግበር የሚሰራ የኤፒአይ ቁልፍ ያስገቡ። ነፃ የኤፒአይ ቁልፍ ለማግኘት https://aistudio.google.com/app/apikey ላይ ያሉትን መመሪያዎች ይከተሉ።",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API ቁልፍ",
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ"
     }
   }
 }

@@ -1,38 +1,72 @@
 ﻿{
-	"Commands" : [
-		{
-			"Command": "Control.On",
-			"Aliases": [ "accendi", "on", "apri" ]
-		},
-		{
-			"Command": "Control.Off",
-			"Aliases": [ "spegni", "off", "chiudi" ]
-		},
-		{
-			"Command": "Control.Level",
-			"Aliases": [ "livello" ]
-		},
-		{
-			"Command": "Control.Toggle",
-			"Aliases": [ "inverti", "cambia" ]
-		},
-		{
-			"Command": "Control.Run",
-			"Aliases": [ "avvia", "esegui" ]
-		},
-		{
-			"Command": "Control.Break",
-			"Aliases": [ "ferma", "interrompi" ]
-		}
-	],
-	"Types" : [
-		{
-			"Type": "Light,Dimmer,Color",
-			"Aliases": [ "tutte le luci", "le luci" ]
-		},
-		{
-			"Type": "Switch",
-			"Aliases": [ "tutte le prese", "le prese" ]
-		}
-	]
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "accendi",
+        "attiva",
+        "on",
+        "apri"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "spegni",
+        "disattiva",
+        "off",
+        "chiudi"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "livello",
+        "imposta"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "commuta",
+        "inverti",
+        "cambia"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "avvia",
+        "esegui",
+        "riproduci"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "ferma",
+        "interrompi",
+        "arresta"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "luci",
+        "luce",
+        "illuminazione"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "prese",
+        "presa",
+        "interruttori",
+        "interruttore"
+      ]
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  " ": "----------------------------------------",
+  " ": "--",
   "welcome_to_homegenie": "HomeGenie වෙත සාදරයෙන් පිළිගනිමු!",
   "welcome_subtitle": "වැඩසටහන්ගත කළ හැකි ස්වයංක්‍රීයකරණ බුද්ධිය",
   "not_configured_yet": "පද්ධතිය තවමත් වින්‍යාස කර නොමැත. මෙම සැකසුම් විශාරදයා පියවර කිහිපයකින් ඔබේ පද්ධතිය ක්‍රියාත්මක කිරීමට උපකාරී වනු ඇත.",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "තෝරාගත් මාස",
   "cronwizard_schedule_set_exact_time": "සිදුවීම් වේලාව සකසන්න.",
   "cronwizard_schedule_set_slot_start": "ආරම්භක කාල පරතරය සකසන්න.",
-  "cronwizard_schedule_set_slot_end": "{{start}} සිට ආරම්භ වේ.<span class=\"notranslate\"><br/></span> කාල පරතරය අවසානය සකසන්න.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> සිට ආරම්භ වේලා කොටස අවසානය සකසන්න.",
   "cronwizard_bindings_define_types_and_modules": "මෙම කාලසටහනට යටත් වන වර්ග සහ මොඩියුල නිර්වචනය කරන්න (විකල්ප)",
   "cronwizard_bindings_select_types": "වර්ග තෝරන්න",
   "cronwizard_action_set_action_to_execute": "මෙම සිදුවීම සිදුවන අවස්ථා වලදී ක්‍රියාත්මක කිරීමට ක්‍රියාව සකසන්න.",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "කාල පරාසයක් අවසානයේ",
   "cronwizard_action_custom_script": "අභිරුචි ක්‍රියා ස්ක්‍රිප්ට්",
   "cronwizard_action_no_action": "ක්‍රියාමාර්ගයක් නැත",
-  "cronwizard_action_schedule_variable_hint": "ක්‍රෝන් ප්‍රකාශනවල <span class=\"notranslate color-primary\">@ {{name}}</span> විචල්‍යයක් ලෙස භාවිතා කරන්න හෝ මෙම සිදුවීම යොමු කිරීමට ස්වයංක්‍රීයකරණ වැඩසටහන් වල <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> භාවිතා කරන්න.",
+  "cronwizard_action_schedule_variable_hint": "ක්‍රෝන් ප්‍රකාශනවල විචල්‍යයක් ලෙස <span class=\"notranslate color-primary\">@{{name}}</span> භාවිතා කරන්න හෝ මෙම සිදුවීම යොමු කිරීමට ස්වයංක්‍රීයකරණ වැඩසටහන්වල <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> භාවිතා කරන්න.",
   "scheduler_preset_action_command_turn_on": "ක්රියාත්මක කරන්න",
   "scheduler_preset_action_command_turn_off": "නිවා දමන්න",
   "scheduler_preset_action_command_set_level": "මට්ටම සකසන්න",
@@ -162,7 +162,7 @@
       "ConfigureOptions.ClientId": "සේවාදායක හැඳුනුම්පත.",
       "ConfigureOptions.ServerAddress": "සේවාදායක ලිපිනය",
       "ConfigureOptions.ServerPort": "සේවාදායක තොට",
-      "ConfigureOptions.Encryption": "අන්තයේ සිට අන්තයට සංකේතනය සබල කරන්න (E2EE)",
+      "ConfigureOptions.Encryption": "අන්තයේ සිට අගට සංකේතනය සබල කරන්න (E2EE)",
       "ConfigureOptions.WebSockets": "වෙබ්සොකට් භාවිතා කරන්න",
       "ConfigureOptions.TLS": "TLS/SSL සබල කරන්න",
       "ConfigureOptions.Username": "පරිශීලක නාමය (විකල්ප)",
@@ -274,7 +274,7 @@
       "HomeGenie.SmartLights.Enable": "'ස්මාර්ට් උපාංගය' සක්‍රීය කරන්න",
       "HomeGenie.SmartLights.OnMotionDetect": "සංවේදකය මගින් පාලනය වේ (විකල්ප)",
       "HomeGenie.SmartLights.CheckLuminosity": "ආලෝක සංවේදකය මගින් පාලනය වේ (විකල්ප)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "අක්‍රියතාවයේ කල් ඉකුත්වීමෙන් පසු අක්‍රිය කරන්න (තත්පර)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "අක්‍රියතාවයේ කල් ඉකුත්වීමෙන් පසු (තත්පර) අක්‍රිය කරන්න",
       "HomeGenie.SmartLights.MinLuminance": "දීප්තිය අඩු නම් සක්‍රිය කරන්න:"
     },
     "8": {
@@ -293,13 +293,19 @@
       "Title": "ඉරියව් ඇස්තමේන්තුව",
       "Description": "අභිරුචි ONNX ආකෘති හෝ පෙරනිමි පෙර-පුහුණු YOLOv11 ආකෘතිය (මානව ඉරියව්-විශේෂිත) භාවිතයෙන් ඉරියව් ඇස්තමේන්තුව හරහා යතුරු ලක්ෂ්‍ය හඳුනාගැනීම.",
       "ML.PoseEstimation": "ඉරියව් ඇස්තමේන්තුව සබල කරන්න",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ (.onnx) මාර්ගය"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ මාර්ගය (.onnx)"
     },
     "912": {
       "Title": "අවස්ථා ඛණ්ඩනය",
       "Description": "පෙර පුහුණු කළ YOLO11 ආකෘතියක් භාවිතයෙන් වස්තූන් සහ ඒවායේ දළ සටහන් හඳුනා ගන්න.",
       "ML.InstanceSegmentation": "නිදර්ශන ඛණ්ඩනය සක්‍රීය කරන්න",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ (.onnx) මාර්ගය"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ මාර්ගය (.onnx)"
+    },
+    "930": {
+      "Title": "මිථුන අභිප්‍රායන් හසුරුවන්නා",
+      "Description": "Google හි Gemini AI භාවිතයෙන් ඔබේ ස්මාර්ට් පද්ධතිය සඳහා ස්වභාවික භාෂා පාලනය සක්‍රීය කරයි. මෙම විශේෂාංගය සක්‍රිය කිරීමට, වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://aistudio.google.com/app/apikey හි උපදෙස් අනුගමනය කරන්න.",
+      "ConfigureOptions.ApiKey": "ගූගල් මිථුන AI API යතුර",
+      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත"
     }
   }
 }

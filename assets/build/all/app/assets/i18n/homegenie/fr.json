@@ -19,7 +19,7 @@
   "controller": "Contrôleur",
   "programs": "Programmes",
   "repositories": "Dépôts",
-  "packages": "Forfaits",
+  "packages": "Paquets",
   "installed_packages": "Paquets installés",
   "upload_package": "Télécharger le package",
   "create_package": "Créer un nouveau package",
@@ -31,7 +31,7 @@
   "edit_group": "Modifier le groupe",
   "delete_group": "Supprimer le groupe",
   "dashboard_from_group": "Créer un tableau de bord à partir de ce groupe",
-  "group_modules": "Modules de ce groupe",
+  "group_modules": "Modules dans ce groupe",
   "modules": "Modules",
   "empty_group": "Aucun module dans ce groupe.",
   "scheduler_wizard": "Assistant de planification",
@@ -70,9 +70,9 @@
   "cronwizard_monthselect_selectedmonths": "Mois sélectionnés",
   "cronwizard_schedule_set_exact_time": "Définir l'heure de l'événement.",
   "cronwizard_schedule_set_slot_start": "Définir le début du créneau horaire.",
-  "cronwizard_schedule_set_slot_end": "Commencer au {{start}} .<span class=\"notranslate\"><br/></span> Définir la fin du créneau horaire.",
+  "cronwizard_schedule_set_slot_end": "À partir de {{start}}.<span class=\"notranslate\"><br/></span> Définir la fin du créneau horaire.",
   "cronwizard_bindings_define_types_and_modules": "Définir les types et les modules soumis à ce planning (facultatif)",
-  "cronwizard_bindings_select_types": "Sélectionnez les types",
+  "cronwizard_bindings_select_types": "Sélectionner les types",
   "cronwizard_action_set_action_to_execute": "Définir l'action à exécuter lors des occurrences de cet événement",
   "cronwizard_action_preset_actions": "Actions prédéfinies",
   "cronwizard_action_preset_every_occurrence": "À chaque occurrence",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "À la fin d'un créneau horaire",
   "cronwizard_action_custom_script": "Script d'action personnalisé",
   "cronwizard_action_no_action": "Aucune action",
-  "cronwizard_action_schedule_variable_hint": "Utilisez <span class=\"notranslate color-primary\">@ {{name}}</span> comme variable dans les expressions cron ou utilisez <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> dans les programmes d'automatisation pour référencer cet événement.",
+  "cronwizard_action_schedule_variable_hint": "Utilisez <span class=\"notranslate color-primary\">@{{name}}</span> comme variable dans les expressions cron ou utilisez <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> dans les programmes d'automatisation pour référencer cet événement.",
   "scheduler_preset_action_command_turn_on": "Allumer",
   "scheduler_preset_action_command_turn_off": "Éteindre",
   "scheduler_preset_action_command_set_level": "Définir le niveau",
@@ -126,8 +126,8 @@
   "setup_code": "Installation",
   "main_code": "Principal",
   "context_code": "Contexte",
-  "main_code_empty_note": "Le code « Main » est vide. Utilisez l'éditeur de « Code visuel » pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche - Faites glisser un bloc de type « Main » dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour implémenter les actions et la logique de ce programme. Le programme « Main » peut être exécuté manuellement ou démarré automatiquement en fonction des conditions éventuellement données dans le code de configuration.",
-  "setup_code_empty_note": "Le code « Setup » est vide. Utilisez l'éditeur « Code visuel » pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche - Faites glisser un bloc de type « Setup » dans l'espace de travail du code visuel - Ajoutez à l'intérieur d'autres blocs de code pour déterminer les conditions qui déclencheront l'exécution du code « Main ». Ce code est évalué à chaque nouvel événement et au moins une fois par minute.",
+  "main_code_empty_note": "Le code « Main » est vide. Utilisez l'éditeur de code visuel pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche. - Faites glisser un bloc de type « Main » dans l'espace de travail du code visuel. - Ajoutez-y d'autres blocs de code pour implémenter les actions et la logique de ce programme. Le programme « Main » peut être exécuté manuellement ou automatiquement en fonction des conditions éventuellement définies dans le code de configuration.",
+  "setup_code_empty_note": "Le code « Setup » est vide. Utilisez l'éditeur de code visuel pour générer ce code : - Ouvrez la catégorie « Programme » depuis la palette de commandes à gauche. - Faites glisser un bloc de type « Setup » dans l'espace de travail du code visuel. - Ajoutez-y d'autres blocs de code pour déterminer les conditions qui déclencheront l'exécution du code « Main ». Ce code est évalué à chaque nouvel événement et au moins une fois par minute.",
   "capture_commands": "Commandes de capture",
   "capture_commands_description": "Ajoutez toutes les commandes exécutées manuellement sur les widgets au programme.",
   "capture_commands_pause": "Pause entre les commandes",
@@ -142,7 +142,7 @@
     },
     "26": {
       "Title": "Lumières colorées",
-      "Description": "Exemple d'intégration d'éclairages Philips Hue via l'API HTTP (V1). L'utilisateur par défaut pour se connecter au pont est « newdeveloper » et il devrait déjà être activé.",
+      "Description": "Exemple d'intégration des éclairages Philips Hue via l'API HTTP (V1). L'utilisateur par défaut pour se connecter au pont est « newdeveloper » et il devrait déjà être activé.",
       "ConfigureOptions.BridgeAddress": "Adresse IP du pont Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Nom d'utilisateur",
       "ConfigureOptions.LightsCount": "Nombre de lumières"
@@ -227,9 +227,9 @@
       "Sensor.Temperature": "Valeur de température",
       "Sensor.Luminance": "Valeur de luminance",
       "Sensor.MotionDetect": "État de détection de mouvement",
-      "Status.Battery": "Niveau de la batterie",
+      "Status.Battery": "Niveau de batterie",
       "Sensor.DoorWindow": "État du capteur de porte/fenêtre (ouvert/fermé)",
-      "Status.Level": "État de l'interrupteur (marche/arrêt)"
+      "Status.Level": "État du commutateur (marche/arrêt)"
     },
     "401": {
       "Title": "Démo - Porte basculante",
@@ -275,7 +275,7 @@
       "HomeGenie.SmartLights.OnMotionDetect": "Contrôlé par capteur (en option)",
       "HomeGenie.SmartLights.CheckLuminosity": "Contrôlé par capteur de lumière (en option)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "Désactiver après un délai d'inactivité (secondes)",
-      "HomeGenie.SmartLights.MinLuminance": "Activer si la luminance est inférieure à :"
+      "HomeGenie.SmartLights.MinLuminance": "Activer si la luminance est inférieure à :"
     },
     "8": {
       "Title": "Scénario des couleurs du lever du soleil",
@@ -286,7 +286,7 @@
       "Title": "Détection d'objets",
       "Description": "Détectez des objets à l’aide d’un modèle YOLO11 pré-entraîné.",
       "ML.ObjectDetection": "Activer la détection d'objets",
-      "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex. : chat, chien, personne, sac à dos, valise)",
+      "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex. : chat, chien, personne, sac à dos, valise)",
       "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
     },
     "911": {
@@ -300,6 +300,12 @@
       "Description": "Détectez les objets et leurs contours à l'aide d'un modèle YOLO11 pré-entraîné.",
       "ML.InstanceSegmentation": "Activer la segmentation des instances",
       "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Gestionnaire d'intention Gemini",
+      "Description": "Activez le contrôle en langage naturel pour votre système intelligent grâce à l'IA Gemini de Google. Pour activer cette fonctionnalité, saisissez une clé API valide. Suivez les instructions sur https://aistudio.google.com/app/apikey pour obtenir une clé API gratuite.",
+      "ConfigureOptions.ApiKey": "Clé API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID du modèle"
     }
   }
 }

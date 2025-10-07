@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------------------------------",
+  " ": "----------------------------------------------",
   "welcome_to_homegenie": "هوم جینی ته ښه راغلاست!",
   "welcome_subtitle": "د پروګرام وړ اتوماتیک استخبارات",
   "not_configured_yet": "سیسټم لا تر اوسه تنظیم شوی نه دی. دا د تنظیم وزرډ به تاسو سره ستاسو سیسټم په څو مرحلو کې په فعالولو کې مرسته وکړي.",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "ټاکل شوې میاشتې",
   "cronwizard_schedule_set_exact_time": "د پیښې وخت تنظیم کړئ.",
   "cronwizard_schedule_set_slot_start": "د پیل وخت وټاکئ.",
-  "cronwizard_schedule_set_slot_end": "له {{start}} څخه پیل کول.<span class=\"notranslate\"><br/></span> د وخت سلاټ پای تنظیم کړئ.",
+  "cronwizard_schedule_set_slot_end": "په {{start}}.<span class=\"notranslate\"><br/></span> کې پیل کول د وخت سلاټ پای تنظیم کړئ.",
   "cronwizard_bindings_define_types_and_modules": "هغه ډولونه او ماډلونه تعریف کړئ چې د دې مهالویش تابع دي (اختیاري)",
   "cronwizard_bindings_select_types": "ډولونه غوره کړئ",
   "cronwizard_action_set_action_to_execute": "د دې پیښې په پیښو کې د اجرا کولو لپاره عمل تنظیم کړئ",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "د وخت په پای کې",
   "cronwizard_action_custom_script": "د عمل دودیز سکریپټ",
   "cronwizard_action_no_action": "هیڅ اقدام نشته",
-  "cronwizard_action_schedule_variable_hint": "د کرون په څرګندونو کې د متغیر په توګه <span class=\"notranslate color-primary\">@ {{name}}</span> وکاروئ یا د اتوماتیک پروګرامونو کې د دې پیښې د حوالې لپاره <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> وکاروئ.",
+  "cronwizard_action_schedule_variable_hint": "د کرون اظهاراتو کې د متغیر په توګه <span class=\"notranslate color-primary\">@{{name}}</span> وکاروئ یا د دې پیښې د حوالې لپاره په اتوماتیک پروګرامونو کې <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> وکاروئ.",
   "scheduler_preset_action_command_turn_on": "چالانول",
   "scheduler_preset_action_command_turn_off": "بندول",
   "scheduler_preset_action_command_set_level": "کچه تنظیم کړئ",
@@ -127,7 +127,7 @@
   "main_code": "اصلي",
   "context_code": "شرایط",
   "main_code_empty_note": "\"اصلي\" کوډ خالي دی. د دې کوډ د تولید لپاره د \"بصري کوډ\" مدیر وکاروئ: - د کیڼ اړخ د کمانډ پیلټ څخه د \"پروګرام\" کټګورۍ پرانیزئ - د بصري کوډ کاري ځای کې د \"اصلي\" ډول یو بلاک کش کړئ - د دې پروګرام د کړنو او منطق پلي کولو لپاره د کوډ نور بلاکونه دننه اضافه کړئ. پروګرام \"اصلي\" یا په لاسي ډول چلیدلی شي یا په اتوماتيک ډول پیل کیدی شي د شرایطو پراساس چې بالاخره د سیټ اپ کوډ کې ورکړل شوي.",
-  "setup_code_empty_note": "د \"سیټ اپ\" کوډ خالي دی. د دې کوډ د تولید لپاره د \"لید کوډ\" ایډیټر وکاروئ: - د کیڼ اړخ د کمانډ پیلټ څخه د \"پروګرام\" کټګورۍ پرانیزئ - د بصري کوډ کاري ځای کې د \"سیټ اپ\" ډول بلاک کش کړئ - د هغې دننه نور کوډ بلاکونه اضافه کړئ ترڅو هغه شرایط مشخص کړئ چې د \"اصلي\" کوډ اجرا به پیل کړي. دا کوډ هرکله چې نوې پیښه رامینځته کیږي او لږترلږه په یوه دقیقه کې یو ځل ارزول کیږي.",
+  "setup_code_empty_note": "د \"سیټ اپ\" کوډ خالي دی. د دې کوډ د تولید لپاره د \"لید کوډ\" ایډیټر وکاروئ: - د کیڼ اړخ د کمانډ پیلټ څخه د \"پروګرام\" کټګورۍ پرانیزئ - د بصري کوډ کاري ځای کې د \"سیټ اپ\" ډول بلاک کش کړئ - د هغې دننه نور کوډ بلاکونه اضافه کړئ ترڅو هغه شرایط وټاکي چې د \"اصلي\" کوډ اجرا به پیل کړي. دا کوډ هرکله چې نوې پیښه رامینځته کیږي او لږترلږه په یوه دقیقه کې یو ځل ارزول کیږي.",
   "capture_commands": "امرونه نیول",
   "capture_commands_description": "ټول هغه حکمونه چې په لاسي ډول په ویجټونو کې ترسره کیږي پروګرام ته اضافه کړئ.",
   "capture_commands_pause": "د امرونو ترمنځ وقفه",
@@ -202,7 +202,7 @@
       "Title": "د امنیت الارم سیسټم",
       "Description": "د امنیتي الارم سیسټم پلي کولو لپاره سینسرونه او نور وسایل وکاروئ.",
       "HomeGenie.SecurityAlarm": "د الارم/سټروب په توګه وکاروئ",
-      "HomeGenie.SecurityTriggerHome": "کله چې وسله وال وي نو هم محرک کیږي کور",
+      "HomeGenie.SecurityTriggerHome": "همدارنګه کله چې وسله وال وي نو پیل کوي",
       "HomeGenie.SecuritySensor": "د امنیتي سینسر په توګه وکاروئ",
       "ConfigureOptions.Email.Recipients": "د الارم خبرتیاو لپاره د ترلاسه کونکو بریښنالیکونو کوما جلا شوی لیست",
       "ConfigureOptions.System.ArmDelay": "د لاس ځنډ (ثانیې)",
@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "د سیرنونو اعظمي وخت (ثانیې، 0 = لامحدود)",
       "ConfigureOptions.Trigger.ArmedProgram": "د وسله وال کېدو پر مهال د چلولو پروګرام",
       "ConfigureOptions.Trigger.DisarmedProgram": "د بې وسلې کولو پر مهال د چلولو پروګرام",
-      "ConfigureOptions.Trigger.TriggeredProgram": "هغه پروګرام چې د فعالولو پر مهال چلېږي"
+      "ConfigureOptions.Trigger.TriggeredProgram": "کله چې پیل شي نو د چلولو لپاره پروګرام"
     },
     "95": {
       "Title": "د پیښو ثبت کول",
@@ -300,6 +300,12 @@
       "Description": "د مخکې له مخکې روزل شوي YOLO11 ماډل په کارولو سره شیان او د هغوی بڼې کشف کړئ.",
       "ML.InstanceSegmentation": "د مثال قطع کول فعال کړئ",
       "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
+    },
+    "930": {
+      "Title": "د جیمني ارادې سمبالونکی",
+      "Description": "د ګوګل د جیمني AI په کارولو سره ستاسو د سمارټ سیسټم لپاره د طبیعي ژبې کنټرول فعالوي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
+      "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
+      "ConfigureOptions.ModelId": "د ماډل ID"
     }
   }
 }

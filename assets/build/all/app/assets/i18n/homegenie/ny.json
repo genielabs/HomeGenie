@@ -8,7 +8,7 @@
   "system_config_include_demo": "Phatikizani chiwonetsero chokhala ndi zida zoyeserera",
   "system_config_additional_features": "Zowonjezera",
   "system_config_manual_setup": "Kukonzekera pamanja",
-  "interfaces": "Zolumikizana",
+  "interfaces": "Zolumikizirana",
   "Protocols.UPnP": "Woyang'anira UPnP",
   "HomeAutomation.X10": "Mtsogoleri wa X10",
   "HomeAutomation.ZWave": "Z-Wave controller",
@@ -20,7 +20,7 @@
   "programs": "Mapulogalamu",
   "repositories": "Zosungirako",
   "packages": "Phukusi",
-  "installed_packages": "Phukusi anaika",
+  "installed_packages": "Phukusi loyikidwa",
   "upload_package": "Kwezani phukusi",
   "create_package": "Pangani phukusi latsopano",
   "programs_version": "Mtundu wa mapulogalamu",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Miyezi yosankhidwa",
   "cronwizard_schedule_set_exact_time": "Khazikitsani nthawi yochitika.",
   "cronwizard_schedule_set_slot_start": "Khazikitsani nthawi yoyambira.",
-  "cronwizard_schedule_set_slot_end": "Kuyambira {{start}} .<span class=\"notranslate\"><br/></span> Khazikitsani nthawi yomaliza.",
+  "cronwizard_schedule_set_slot_end": "Kuyambira pa {{start}}.<span class=\"notranslate\"><br/></span> Khazikitsani nthawi yomaliza.",
   "cronwizard_bindings_define_types_and_modules": "Tanthauzirani mitundu ndi ma module omwe ali pansi pa ndondomekoyi (posankha)",
   "cronwizard_bindings_select_types": "Sankhani mitundu",
   "cronwizard_action_set_action_to_execute": "Khazikitsani zomwe zichitike zikachitika",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Pamapeto pa nthawi",
   "cronwizard_action_custom_script": "Script zochita mwamakonda",
   "cronwizard_action_no_action": "Palibe chochita",
-  "cronwizard_action_schedule_variable_hint": "Gwiritsani ntchito <span class=\"notranslate color-primary\">@ {{name}}</span> monga kusintha kwa mawu a cron kapena gwiritsani ntchito <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> m'mapulogalamu odzipangira okha kuti muwonetse chochitikachi.",
+  "cronwizard_action_schedule_variable_hint": "Gwiritsani ntchito <span class=\"notranslate color-primary\">@{{name}}</span> monga kusintha kwa mawu a cron kapena gwiritsani ntchito <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> mumapulogalamu ongogwiritsa ntchito kuti muwonetsetse chochitikachi.",
   "scheduler_preset_action_command_turn_on": "Yatsani",
   "scheduler_preset_action_command_turn_off": "Zimitsa",
   "scheduler_preset_action_command_set_level": "Khazikitsani mlingo",
@@ -124,7 +124,7 @@
   "visual_code": "Kodi zowoneka",
   "generated_code": "Kodi yopangidwa",
   "setup_code": "Khazikitsa",
-  "main_code": "Chachikulu",
+  "main_code": "Main",
   "context_code": "Nkhani",
   "main_code_empty_note": "Khodi \"Yaikulu\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Pulogalamu\" kuchokera pamndandanda wamalamulo kumanzere - Kokani chipika chamtundu wa \"Main\" pamalo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mugwiritse ntchito ndi malingaliro a pulogalamuyi.",
   "setup_code_empty_note": "Khodi ya \"kukhazikitsa\" ilibe kanthu. Gwiritsani ntchito mkonzi wa \"Visual code\" kuti mupange code iyi: - Tsegulani gulu la \"Program\" kuchokera pamawu olamula kumanzere - Kokani chipika chamtundu wa \"Setup\" mu malo ogwirira ntchito - Onjezani mkati mwake ma code ena kuti mudziwe zomwe zingayambitse \"Main\" kukhazikitsa kachidindo Code iyi imawunikiridwa nthawi iliyonse chochitika chatsopano chichitika komanso kamodzi pa mphindi imodzi.",
@@ -157,7 +157,7 @@
     },
     "77": {
       "Title": "Mtengo MQTT",
-      "Description": "Lumikizani kwa broker wa MQTT kuti mugwiritse ntchito pulogalamu ya HomeGenie Panel kulikonse kudzera pa intaneti kapena kulumikiza zida za HomeGenie pa netiweki yomweyo ya MQTT.",
+      "Description": "Lumikizanani ndi broker wa MQTT kuti mugwiritse ntchito pulogalamu ya HomeGenie Panel kuchokera kulikonse kudzera pa intaneti kapena kulumikiza zida za HomeGenie pa netiweki yomweyo ya MQTT.",
       "MQTT.SensorPublish": "Sindikizani zochitika zomwe zatulutsidwa ndi gawoli",
       "ConfigureOptions.ClientId": "Id ya kasitomala.",
       "ConfigureOptions.ServerAddress": "Adilesi ya seva",
@@ -184,8 +184,8 @@
       "EnergyManagement.MonitorWatts": "Yang'anirani momwe mungagwiritsire ntchito mphamvu"
     },
     "82": {
-      "Title": "Njira Yopulumutsira Mphamvu",
-      "Description": "Sungani mlingo wa kuwala pansi pa chiwerengero chosinthika.",
+      "Title": "Njira Yopulumutsa Mphamvu",
+      "Description": "Sungani mulingo wa kuwala pansi pa kuchuluka kosinthika.",
       "EnergyManagement.EnergySavingLevel": "Mulingo wopepuka kwambiri (%)",
       "EnergyManagement.EnergySavingMode": "Yambitsani"
     },
@@ -210,7 +210,7 @@
       "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (masekondi, 0=infinite)",
       "ConfigureOptions.Trigger.ArmedProgram": "Pulogalamu yoyendetsa pamene muli ndi zida",
       "ConfigureOptions.Trigger.DisarmedProgram": "Pulogalamu yoyambira ikachotsedwa",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Pulogalamu yoyambira ikatsegulidwa"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Pulogalamu yoyambira ikayambika"
     },
     "95": {
       "Title": "Kudula zochitika",
@@ -233,7 +233,7 @@
     },
     "401": {
       "Title": "Chiwonetsero - Toggle Door",
-      "Description": "Imatengera chitseko chotseguka / chotsekedwa cha sensor yazenera lazenera."
+      "Description": "Imatengera chitseko chotseguka / chotsekedwa cha sensor yawindo lazenera."
     },
     "402": {
       "Title": "Chiwonetsero - Zoyenda Zapezeka",
@@ -300,6 +300,12 @@
       "Description": "Dziwani zinthu ndi ma autilaini awo pogwiritsa ntchito chitsanzo cha YOLO11 chophunzitsidwa kale.",
       "ML.InstanceSegmentation": "Yambitsani magawo achitsanzo",
       "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "Imayatsa kuwongolera zilankhulo zachilengedwe pamakina anu anzeru pogwiritsa ntchito Google's Gemini AI. Kuti mutsegule izi, lowetsani kiyi yolondola ya API. Tsatirani malangizo pa https://aistudio.google.com/app/apikey kuti mupeze kiyi yaulere ya API.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API kiyi",
+      "ConfigureOptions.ModelId": "ID yachitsanzo"
     }
   }
 }

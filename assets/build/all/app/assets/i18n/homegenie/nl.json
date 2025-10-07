@@ -1,11 +1,11 @@
 {
-  " ": "---------------------------------------",
+  " ": "------------------------------------------",
   "welcome_to_homegenie": "Welkom bij HomeGenie!",
   "welcome_subtitle": "De programmeerbare automatiseringsintelligentie",
-  "not_configured_yet": "Systeem is nog niet geconfigureerd. Deze installatiewizard helpt u om uw systeem in een paar stappen aan de praat te krijgen.",
+  "not_configured_yet": "Het systeem is nog niet geconfigureerd. Deze installatiewizard helpt u in een paar stappen uw systeem operationeel te krijgen.",
   "system_config_start_with_base_and_backup": "Herstellen van back-upbestand",
-  "system_config_start_with_default_setup": "Standaardinstelling",
-  "system_config_include_demo": "Demo met gesimuleerde apparaatactiviteit toevoegen",
+  "system_config_start_with_default_setup": "Standaardinstellingen",
+  "system_config_include_demo": "Inclusief demo met gesimuleerde apparaatactiviteit",
   "system_config_additional_features": "Extra functies",
   "system_config_manual_setup": "Handmatige installatie",
   "interfaces": "Interfaces",
@@ -16,7 +16,7 @@
   "device_port": "Apparaatpoort",
   "device_driver": "Bestuurder",
   "flow_control": "Stroomregeling",
-  "controller": "Beheerder",
+  "controller": "Controller",
   "programs": "Programma's",
   "repositories": "Opslagplaatsen",
   "packages": "Pakketten",
@@ -32,9 +32,9 @@
   "delete_group": "Groep verwijderen",
   "dashboard_from_group": "Maak een dashboard van deze groep",
   "group_modules": "Modules in deze groep",
-  "modules": "Modulen",
-  "empty_group": "Geen modules in deze groep.",
-  "scheduler_wizard": "Wizard voor planning",
+  "modules": "Modules",
+  "empty_group": "Er zijn geen modules in deze groep.",
+  "scheduler_wizard": "Planner-wizard",
   "schedule_event": "Evenement",
   "schedule_type_standard": "Standaard",
   "schedule_type_range": "Datumbereik",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Geselecteerde maanden",
   "cronwizard_schedule_set_exact_time": "Stel de tijd van het evenement in.",
   "cronwizard_schedule_set_slot_start": "Stel het begintijdslot in.",
-  "cronwizard_schedule_set_slot_end": "Beginnend bij {{start}} .<span class=\"notranslate\"><br/></span> Eindtijdslot instellen.",
+  "cronwizard_schedule_set_slot_end": "Beginnend bij {{start}}.<span class=\"notranslate\"><br/></span> Einde tijdslot instellen.",
   "cronwizard_bindings_define_types_and_modules": "Definieer typen en modules die onder dit schema vallen (optioneel)",
   "cronwizard_bindings_select_types": "Selecteer typen",
   "cronwizard_action_set_action_to_execute": "Stel een actie in die moet worden uitgevoerd bij het optreden van deze gebeurtenis",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Aan het einde van een tijdslot",
   "cronwizard_action_custom_script": "Aangepast actiescript",
   "cronwizard_action_no_action": "Geen actie",
-  "cronwizard_action_schedule_variable_hint": "Gebruik <span class=\"notranslate color-primary\">@ {{name}}</span> als variabele in cron-expressies of gebruik <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> in automatiseringsprogramma's om naar deze gebeurtenis te verwijzen.",
+  "cronwizard_action_schedule_variable_hint": "Gebruik <span class=\"notranslate color-primary\">@{{name}}</span> als variabele in cron-expressies of gebruik <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in automatiseringsprogramma's om naar deze gebeurtenis te verwijzen.",
   "scheduler_preset_action_command_turn_on": "Aanzetten",
   "scheduler_preset_action_command_turn_off": "Uitschakelen",
   "scheduler_preset_action_command_set_level": "Niveau instellen",
@@ -102,9 +102,9 @@
   "scheduler_preset_action_config_message": "Bericht",
   "save_and_build": "Opslaan en bouwen",
   "toggle_widgets_preview": "Widgetvoorbeeld in-/uitschakelen",
-  "stop_program": "Programma stoppen",
+  "stop_program": "Stop programma",
   "run_program": "Programma uitvoeren",
-  "enable_to_run_program": "Schakel het programma in om het uit te kunnen voeren",
+  "enable_to_run_program": "Schakel het programma in om het te kunnen uitvoeren",
   "program_status_added": "Toegevoegd",
   "program_status_idle": "Inactief",
   "program_status_setup": "Instellen",
@@ -117,7 +117,7 @@
   "program_status_enabled": "Ingeschakeld",
   "program_status_broken": "Gebroken",
   "program_status_compile": "Compileren",
-  "automation_programming_guide": "Programmeerhandleiding",
+  "automation_programming_guide": "Programmeergids",
   "tap_to_disable": "Klik om uit te schakelen",
   "tap_to_enable": "Klik om in te schakelen",
   "program_data": "Programmagegevens",
@@ -126,8 +126,8 @@
   "setup_code": "Instellen",
   "main_code": "Voornaamst",
   "context_code": "Context",
-  "main_code_empty_note": "\"Main\"-code is leeg. Gebruik de \"Visual code\"-editor om deze code te genereren: - Open de categorie \"Program\" in het opdrachtpalet aan de linkerkant - Sleep een blok van het type \"Main\" in de visuele codewerkruimte - Voeg er andere codeblokken aan toe om acties en logica van dit programma te implementeren Het programma \"Main\" kan handmatig worden uitgevoerd of automatisch worden gestart op basis van voorwaarden die eventueel in de Setup-code worden gegeven.",
-  "setup_code_empty_note": "\"Setup\"-code is leeg. Gebruik de \"Visuele code\"-editor om deze code te genereren: - Open de categorie \"Programma\" in het opdrachtpalet aan de linkerkant - Sleep een blok van het type \"Setup\" in de visuele codewerkruimte - Voeg er andere codeblokken aan toe om de voorwaarden te bepalen die de uitvoering van de \"Main\"-code activeren Deze code wordt geëvalueerd telkens wanneer er een nieuwe gebeurtenis plaatsvindt en ten minste eenmaal per minuut.",
+  "main_code_empty_note": "De \"Main\"-code is leeg. Gebruik de \"Visuele code\"-editor om deze code te genereren: - Open de categorie \"Programma\" in het opdrachtenpalet aan de linkerkant. - Versleep een blok van het type \"Main\" naar de werkruimte voor visuele code. - Voeg daarbinnen andere codeblokken toe om de acties en logica van dit programma te implementeren. Het programma \"Main\" kan handmatig worden uitgevoerd of automatisch worden gestart, afhankelijk van de voorwaarden die eventueel in de installatiecode worden opgegeven.",
+  "setup_code_empty_note": "De \"Setup\"-code is leeg. Gebruik de \"Visuele code\"-editor om deze code te genereren: - Open de categorie \"Programma\" in het opdrachtenpalet aan de linkerkant. - Versleep een blok van het type \"Setup\" naar de werkruimte voor visuele code. - Voeg daarbinnen andere codeblokken toe om de voorwaarden te bepalen die de uitvoering van de \"Hoofd\"-code activeren. Deze code wordt geëvalueerd telkens wanneer er een nieuwe gebeurtenis plaatsvindt en minstens één keer per minuut.",
   "capture_commands": "Opnameopdrachten",
   "capture_commands_description": "Voeg alle opdrachten die handmatig op widgets worden uitgevoerd, toe aan het programma.",
   "capture_commands_pause": "Pauze tussen opdrachten",
@@ -135,13 +135,13 @@
   "capture_pause_asis": "Zoals het is",
   "$options": {
     "16": {
-      "Title": "Niveau Geheugen",
+      "Title": "Niveaugeheugen",
       "Description": "Opslaan en oproepen van het laatste dimmerniveau.",
       "HomeGenie.LevelMemory": "Laatste lichtniveau oproepen bij inschakelen",
       "HomeGenie.LevelMemory.SimulateOnly": "Alleen simuleren"
     },
     "26": {
-      "Title": "Kleur lichten",
+      "Title": "Kleurlichten",
       "Description": "Voorbeeld van integratie van Philips Hue-lampen met behulp van HTTP API (V1). De standaardgebruiker om verbinding te maken met de bridge is \"newdeveloper\" en deze zou al ingeschakeld moeten zijn.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adres",
       "ConfigureOptions.BridgeUsername": "Gebruikersnaam",
@@ -149,7 +149,7 @@
     },
     "34": {
       "Title": "Weersverwachting",
-      "Description": "Weers- en voorspellingsinformatie van de Open Weather Map-service. Voer een geldige API-sleutel in om deze widget te activeren. Volg de instructies op https://openweathermap.org/appid om een gratis API-sleutel te krijgen.",
+      "Description": "Weers- en voorspellingsinformatie van de Open Weather Map-service. Voer een geldige API-sleutel in om deze widget te activeren. Volg de instructies op https://openweathermap.org/appid om een gratis API-sleutel te verkrijgen.",
       "ConfigureOptions.Location": "Stadsnaam",
       "ConfigureOptions.Language": "Taal (bijv. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Update-interval (minuten)",
@@ -179,7 +179,7 @@
     },
     "81": {
       "Title": "Energiemonitor",
-      "Description": "Genereer statistieken over energieverbruik en het gebruik van apparaten.",
+      "Description": "Genereer statistieken over het energieverbruik en het gebruik van apparaten.",
       "EnergyManagement.MonitorStatus": "Monitorstatus",
       "EnergyManagement.MonitorWatts": "Energieverbruik bewaken"
     },
@@ -190,7 +190,7 @@
       "EnergyManagement.EnergySavingMode": "Inschakelen"
     },
     "88": {
-      "Title": "Algemene IP-camera",
+      "Title": "Generieke IP-camera",
       "Description": "Beeldfeed van een IP-camera weergeven/routeren.",
       "IpCamera.ImageURL": "Camera-afbeelding API-URL (zie uw cameradocumentatie)",
       "IpCamera.Username": "Gebruikersnaam (optioneel)",
@@ -204,12 +204,12 @@
       "HomeGenie.SecurityAlarm": "Gebruik als alarm/stroboscoop",
       "HomeGenie.SecurityTriggerHome": "Wordt ook geactiveerd wanneer Home is ingeschakeld",
       "HomeGenie.SecuritySensor": "Gebruik als beveiligingssensor",
-      "ConfigureOptions.Email.Recipients": "Door komma's gescheiden lijst met ontvangers van e-mails voor alarmmeldingen",
+      "ConfigureOptions.Email.Recipients": "Door komma's gescheiden lijst met e-mailontvangers voor alarmmeldingen",
       "ConfigureOptions.System.ArmDelay": "Armvertraging (seconden)",
-      "ConfigureOptions.System.SirenStartTime": "Sirenes Startvertraging (seconden)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirenes max Tijd (seconden, 0=oneindig)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Programma om te draaien wanneer gewapend",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Programma om te draaien wanneer uitgeschakeld",
+      "ConfigureOptions.System.SirenStartTime": "Sirene startvertraging (seconden)",
+      "ConfigureOptions.System.SirenMaxTime": "Maximale tijd van sirenes (seconden, 0=oneindig)",
+      "ConfigureOptions.Trigger.ArmedProgram": "Programma om te draaien wanneer bewapend",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Programma dat moet worden uitgevoerd wanneer het apparaat is uitgeschakeld",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programma dat moet worden uitgevoerd wanneer het wordt geactiveerd"
     },
     "95": {
@@ -219,10 +219,10 @@
     },
     "111": {
       "Title": "Clientconfiguratie",
-      "Description": "Implementeert een API voor het beheren van de configuratieprofielen van de klant die worden gebruikt om UI- en dashboardinstellingen op te slaan."
+      "Description": "Implementeert een API voor het beheren van clientconfiguratieprofielen die worden gebruikt om UI- en dashboardinstellingen op te slaan."
     },
     "400": {
-      "Title": "Virtuele modules demo",
+      "Title": "Demo van virtuele modules",
       "Description": "Handmatig waarden van het virtuele apparaat instellen.",
       "Sensor.Temperature": "Temperatuurwaarde",
       "Sensor.Luminance": "Luminantiewaarde",
@@ -232,7 +232,7 @@
       "Status.Level": "Schakelstatus (aan/uit)"
     },
     "401": {
-      "Title": "Demo - Schakeldeur",
+      "Title": "Demo - Toggle Door",
       "Description": "Simuleert het openen/sluiten van een demo deur-raamsensor."
     },
     "402": {
@@ -246,7 +246,7 @@
       "Simulator.Sensor.Humidity": "Vochtigheidssensor",
       "Simulator.Sensor.Luminance": "Lichtsensor",
       "Simulator.Meter.Watts": "Wattmeter",
-      "Simulator.Meter.Watts.Max": "Maximaal Watt vermogen",
+      "Simulator.Meter.Watts.Max": "Maximaal Watt-vermogen",
       "Simulator.Sensor.DataFrequency": "Simulator-uitzendfrequentie"
     },
     "505": {
@@ -256,7 +256,7 @@
       "HomeGenie.RemoteControl.IRCode": "Wisselknop",
       "ConfigureOptions.DimmerUpCode": "Knop voor het verhogen van de helderheid",
       "ConfigureOptions.DimmerDownCode": "Knop voor het verlagen van de helderheid",
-      "ConfigureOptions.DimmerInterval": "Dimmen stap"
+      "ConfigureOptions.DimmerInterval": "Dimstap"
     },
     "142": {
       "Title": "E-mailaccount",
@@ -274,32 +274,38 @@
       "HomeGenie.SmartLights.Enable": "'Smart Device' inschakelen",
       "HomeGenie.SmartLights.OnMotionDetect": "Aangestuurd door sensor (optioneel)",
       "HomeGenie.SmartLights.CheckLuminosity": "Aangestuurd door lichtsensor (optioneel)",
-      "HomeGenie.SmartLights.SwitchOffTimeout": "Uitschakelen na inactiviteitstime-out (seconden)",
+      "HomeGenie.SmartLights.SwitchOffTimeout": "Uitschakelen na inactiviteit (seconden)",
       "HomeGenie.SmartLights.MinLuminance": "Inschakelen als de luminantie lager is dan:"
     },
     "8": {
       "Title": "Zonsopgangkleuren Scenario",
-      "Description": "Voorbeeldscenario 'Zonsopgang' voor LED-verlichting die van kleur verandert.",
+      "Description": "Voorbeeldscenario \"Zonsopgang\" voor kleurveranderende LED-lampen.",
       "Scenarios.SunriseColors": "Link naar Sunrise Colors-scenario"
     },
     "910": {
       "Title": "Objectdetectie",
       "Description": "Detecteer objecten met behulp van een vooraf getraind YOLO11-model.",
       "ML.ObjectDetection": "Objectdetectie inschakelen",
-      "ML.ObjectDetection.TriggerDetect": "Door komma's gescheiden lijst met dingen (in het Engels) die het alarm activeren. (bijv.: kat, hond, persoon, rugzak, koffer)",
+      "ML.ObjectDetection.TriggerDetect": "Door komma's gescheiden lijst met dingen (in het Engels) die het alarm kunnen activeren. (bijv.: kat, hond, persoon, rugzak, koffer)",
       "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
     },
     "911": {
       "Title": "Schatting van de houding",
       "Description": "Detectie van belangrijke punten via houdingschatting, met behulp van aangepaste ONNX-modellen of het standaard vooraf getrainde YOLOv11-model (specifiek voor de houding van de mens).",
-      "ML.PoseEstimation": "Pose-schatting inschakelen",
+      "ML.PoseEstimation": "Positie-schatting inschakelen",
       "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
     },
     "912": {
-      "Title": "Instantie segmentatie",
+      "Title": "Instantiesegmentatie",
       "Description": "Detecteer objecten en hun contouren met behulp van een vooraf getraind YOLO11-model.",
       "ML.InstanceSegmentation": "Instantiesegmentatie inschakelen",
       "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
+    },
+    "930": {
+      "Title": "Gemini Intent Handler",
+      "Description": "Maakt natuurlijke taalbesturing voor uw slimme systeem mogelijk met behulp van Google's Gemini AI. Voer een geldige API-sleutel in om deze functie te activeren. Volg de instructies op https://aistudio.google.com/app/apikey om een gratis API-sleutel te ontvangen.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID"
     }
   }
 }

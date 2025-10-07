@@ -6,7 +6,7 @@
   "system_config_start_with_base_and_backup": "从备份文件恢复",
   "system_config_start_with_default_setup": "默认设置",
   "system_config_include_demo": "包含模拟设备活动的演示",
-  "system_config_additional_features": "其他功能",
+  "system_config_additional_features": "附加功能",
   "system_config_manual_setup": "手动设置",
   "interfaces": "接口",
   "Protocols.UPnP": "UPnP 控制器",
@@ -26,14 +26,14 @@
   "programs_version": "程序版本",
   "http_settings": "HTTP 设置",
   "modules_groups": "组和模块",
-  "groups": "群组",
+  "groups": "团体",
   "add_group": "添加组",
   "edit_group": "编辑组",
   "delete_group": "删除组",
   "dashboard_from_group": "从此组创建仪表板",
   "group_modules": "本组中的模块",
   "modules": "模块",
-  "empty_group": "该组中没有模块。",
+  "empty_group": "此组中没有模块。",
   "scheduler_wizard": "调度向导",
   "schedule_event": "事件",
   "schedule_type_standard": "标准",
@@ -50,7 +50,7 @@
   "cronwizard_description_ending": "到",
   "cronwizard_description_at": "在",
   "cronwizard_add_time_slot": "添加时间段",
-  "cronwizard_add_exact_time": "添加准确时间",
+  "cronwizard_add_exact_time": "添加确切时间",
   "cronwizard_start_time": "开始时间",
   "cronwizard_end_time": "结束时间",
   "cronwizard_minutes": "分钟",
@@ -58,29 +58,29 @@
   "cronwizard_days": "天",
   "cronwizard_months": "月份",
   "cronwizard_minuteselect_everyminute": "每分钟",
-  "cronwizard_minuteselect_everynthminute": "每分钟",
+  "cronwizard_minuteselect_everynthminute": "每给定分钟",
   "cronwizard_minuteselect_selectedminutes": "选定分钟",
   "cronwizard_hourselect_everyhour": "每小时",
-  "cronwizard_hourselect_everynthhour": "每个给定小时",
+  "cronwizard_hourselect_everynthhour": "每给定小时",
   "cronwizard_hourselect_selectedhours": "选定时间",
   "cronwizard_dayselect_everyday": "每天",
-  "cronwizard_dayselect_selecteddays": "已选择日期",
-  "cronwizard_dayowselect_selecteddaysow": "选定星期几",
-  "cronwizard_monthselect_everymonth": "每月",
+  "cronwizard_dayselect_selecteddays": "选定日期",
+  "cronwizard_dayowselect_selecteddaysow": "一周中选定的日期",
+  "cronwizard_monthselect_everymonth": "每个月",
   "cronwizard_monthselect_selectedmonths": "选定月份",
-  "cronwizard_schedule_set_exact_time": "設定事件時間。",
+  "cronwizard_schedule_set_exact_time": "设置事件时间。",
   "cronwizard_schedule_set_slot_start": "设置时间段开始。",
-  "cronwizard_schedule_set_slot_end": "从{{start}}开始。<span class=\"notranslate\"><br/></span>设置时间段结束。",
-  "cronwizard_bindings_define_types_and_modules": "定义符合此时间表的类型和模块（可选）",
+  "cronwizard_schedule_set_slot_end": "从 {{start}}.<span class=\"notranslate\"><br/></span> 开始设置时间段结束。",
+  "cronwizard_bindings_define_types_and_modules": "定义受此时间表约束的类型和模块（可选）",
   "cronwizard_bindings_select_types": "选择类型",
-  "cronwizard_action_set_action_to_execute": "设置此事件发生时执行的操作",
+  "cronwizard_action_set_action_to_execute": "设置发生此事件时执行的操作",
   "cronwizard_action_preset_actions": "预设动作",
   "cronwizard_action_preset_every_occurrence": "每次发生",
   "cronwizard_action_preset_slot_start": "在时间段开始时",
-  "cronwizard_action_preset_slot_end": "在一个时间段结束时",
+  "cronwizard_action_preset_slot_end": "在时间段结束时",
   "cronwizard_action_custom_script": "自定义动作脚本",
   "cronwizard_action_no_action": "没有行动",
-  "cronwizard_action_schedule_variable_hint": "在 cron 表达式中使用<span class=\"notranslate color-primary\">@ {{name}}</span>作为变量，或在自动化程序中使用<span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span>来引用此事件。",
+  "cronwizard_action_schedule_variable_hint": "在 cron 表达式中使用 <span class=\"notranslate color-primary\">@{{name}}</span> 作为变量，或在自动化程序中使用 <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> 来引用此事件。",
   "scheduler_preset_action_command_turn_on": "打开",
   "scheduler_preset_action_command_turn_off": "关",
   "scheduler_preset_action_command_set_level": "设置级别",
@@ -126,13 +126,13 @@
   "setup_code": "设置",
   "main_code": "主要的",
   "context_code": "语境",
-  "main_code_empty_note": "“Main”代码为空。使用“Visual code”编辑器生成此代码： - 从左侧的命令面板打开“Program”类别 - 将“Main”类型的块拖到Visual code工作区中 - 在其中添加其他代码块以实现此程序的操作和逻辑 程序“Main”可以手动运行，也可以根据设置代码中最终给出的条件自动启动。",
-  "setup_code_empty_note": "“Setup”代码为空。使用“Visual code”编辑器生成此代码： - 从左侧的命令面板打开“Program”类别 - 将“Setup”类型的块拖到可视化代码工作区中 - 在其中添加其他代码块以确定触发“Main”代码执行的条件 每次发生新事件时都会评估此代码，并且至少每分钟一次。",
+  "main_code_empty_note": "“主程序”代码为空。使用“可视化代码”编辑器生成此代码：- 从左侧的命令面板打开“程序”类别 - 将“主程序”类型的代码块拖放到可视化代码工作区 - 在其中添加其他代码块以实现此程序的操作和逻辑。“主程序”可以手动运行，也可以根据设置代码中最终给定的条件自动启动。",
+  "setup_code_empty_note": "“Setup”代码为空。请使用“Visual code”编辑器生成此代码：- 从左侧的命令面板打开“Program”类别 - 将“Setup”类型的代码块拖放到可视化代码工作区 - 在其中添加其他代码块，以确定触发“Main”代码执行的条件。每次发生新事件时，此代码都会被执行，并且至少每分钟执行一次。",
   "capture_commands": "捕获命令",
   "capture_commands_description": "将所有在小部件上手动执行的命令添加到程序中。",
   "capture_commands_pause": "命令之间暂停",
   "capture_pause_none": "没有任何",
-  "capture_pause_asis": "原样",
+  "capture_pause_asis": "现状",
   "$options": {
     "16": {
       "Title": "级别记忆",
@@ -141,15 +141,15 @@
       "HomeGenie.LevelMemory.SimulateOnly": "仅模拟"
     },
     "26": {
-      "Title": "彩色灯光",
-      "Description": "使用 HTTP API (V1) 的示例飞利浦 Hue 灯集成。连接到桥接器的默认用户是“newdeveloper”，并且应该已经启用。",
+      "Title": "彩色灯",
+      "Description": "使用 HTTP API (V1) 集成飞利浦 Hue 灯光的示例。连接网桥的默认用户是“newdeveloper”，并且该用户应该已启用。",
       "ConfigureOptions.BridgeAddress": "飞利浦 Hue Bridge (V1) IP 地址",
       "ConfigureOptions.BridgeUsername": "用户名",
-      "ConfigureOptions.LightsCount": "灯数"
+      "ConfigureOptions.LightsCount": "灯的数量"
     },
     "34": {
       "Title": "天气预报",
-      "Description": "来自 Open Weather Map 服务的天气和预报信息。要激活此小部件，请输入有效的 API 密钥。按照 https://openweathermap.org/appid 上的说明获取免费 API 密钥。",
+      "Description": "来自 Open Weather Map 服务的天气和预报信息。要激活此小部件，请输入有效的 API 密钥。请按照 https://openweathermap.org/appid 上的说明获取免费 API 密钥。",
       "ConfigureOptions.Location": "城市名称",
       "ConfigureOptions.Language": "语言（例如英语、意大利语、法语、德语……）",
       "ConfigureOptions.UpdateInterval": "更新间隔（分钟）",
@@ -162,7 +162,7 @@
       "ConfigureOptions.ClientId": "客户端 ID。",
       "ConfigureOptions.ServerAddress": "服务器地址",
       "ConfigureOptions.ServerPort": "服务器端口",
-      "ConfigureOptions.Encryption": "启用端到端加密 (E2EE)",
+      "ConfigureOptions.Encryption": "启用端到端加密（E2EE）",
       "ConfigureOptions.WebSockets": "使用 WebSockets",
       "ConfigureOptions.TLS": "启用 TLS/SSL",
       "ConfigureOptions.Username": "用户名（可选）",
@@ -175,12 +175,12 @@
       "VirtualThermostat.TemperatureModule": "温度传感器",
       "VirtualThermostat.HeatingSwitchModule": "加热开关",
       "VirtualThermostat.CoolingSwitchModule": "冷却开关",
-      "ConfigureOptions.ThermostatsCount": "温控器数量"
+      "ConfigureOptions.ThermostatsCount": "恒温器数量"
     },
     "81": {
       "Title": "能源监测器",
       "Description": "生成有关设备能源消耗和使用情况的统计数据。",
-      "EnergyManagement.MonitorStatus": "监视状态Monitor status",
+      "EnergyManagement.MonitorStatus": "监控状态",
       "EnergyManagement.MonitorWatts": "监控能源消耗"
     },
     "82": {
@@ -190,9 +190,9 @@
       "EnergyManagement.EnergySavingMode": "使能够"
     },
     "88": {
-      "Title": "通用网络摄像机",
-      "Description": "显示/路由来自 IP 摄像机的图像馈送。",
-      "IpCamera.ImageURL": "相机图像 API URL（请参阅相机文档）",
+      "Title": "通用IP摄像机",
+      "Description": "显示/路由来自 IP 摄像机的图像。",
+      "IpCamera.ImageURL": "相机图像 API URL（请参阅您的相机文档）",
       "IpCamera.Username": "用户名（可选）",
       "IpCamera.Password": "密码（可选）",
       "Widget.Config.fps": "每秒帧数",
@@ -202,14 +202,14 @@
       "Title": "安全警报系统",
       "Description": "使用传感器和其他设备实施安全警报系统。",
       "HomeGenie.SecurityAlarm": "用作警报/频闪灯",
-      "HomeGenie.SecurityTriggerHome": "武装主页时也会触发",
+      "HomeGenie.SecurityTriggerHome": "武装 Home 时也会触发",
       "HomeGenie.SecuritySensor": "用作安全传感器",
       "ConfigureOptions.Email.Recipients": "以逗号分隔的警报通知收件人电子邮件列表",
-      "ConfigureOptions.System.ArmDelay": "布防延时（秒）",
+      "ConfigureOptions.System.ArmDelay": "布防延迟（秒）",
       "ConfigureOptions.System.SirenStartTime": "警报器启动延迟（秒）",
       "ConfigureOptions.System.SirenMaxTime": "警报器最大时间（秒，0=无限）",
       "ConfigureOptions.Trigger.ArmedProgram": "武装时运行的程序",
-      "ConfigureOptions.Trigger.DisarmedProgram": "撤防时运行的程序",
+      "ConfigureOptions.Trigger.DisarmedProgram": "解除武装时运行的程序",
       "ConfigureOptions.Trigger.TriggeredProgram": "触发时运行的程序"
     },
     "95": {
@@ -219,7 +219,7 @@
     },
     "111": {
       "Title": "客户端配置",
-      "Description": "实现用于管理用于存储 UI 和仪表板设置的客户端配置文件的 API。"
+      "Description": "实现用于管理客户端配置文件的 API，这些配置文件用于存储 UI 和仪表板设置。"
     },
     "400": {
       "Title": "虚拟模块演示",
@@ -251,7 +251,7 @@
     },
     "505": {
       "Title": "遥控",
-      "Description": "使用遥控器（红外线 (IR) 或射频 (RF)）控制设备。",
+      "Description": "使用遥控器（红外线或射频）控制设备。",
       "HomeGenie.RemoteControl.Enable": "使能够",
       "HomeGenie.RemoteControl.IRCode": "切换按钮",
       "ConfigureOptions.DimmerUpCode": "亮度增加按钮",
@@ -262,25 +262,25 @@
       "Title": "电子邮件账户",
       "Description": "存储系统程序用于发送/接收电子邮件的电子邮件帐户信息。",
       "ConfigureOptions.Email.Sender": "1. 电子邮件地址",
-      "ConfigureOptions.Email.SmtpServer": "2.SMTP 服务器地址",
+      "ConfigureOptions.Email.SmtpServer": "2. SMTP 服务器地址",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP 用户名（可选）",
-      "ConfigureOptions.Email.SmtpPassword": "4.SMTP 密码（可选）",
-      "ConfigureOptions.Email.SmtpPort": "5.SMTP 服务器端口",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP 服务器使用 SSL"
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP 密码（可选）",
+      "ConfigureOptions.Email.SmtpPort": "5.SMTP服务器端口",
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP服务器使用SSL"
     },
     "145": {
       "Title": "智能设备",
       "Description": "根据运动检测和环境光打开/关闭设备。",
       "HomeGenie.SmartLights.Enable": "启用“智能设备”",
-      "HomeGenie.SmartLights.OnMotionDetect": "传感器控制（可选）",
+      "HomeGenie.SmartLights.OnMotionDetect": "由传感器控制（可选）",
       "HomeGenie.SmartLights.CheckLuminosity": "由光传感器控制（可选）",
       "HomeGenie.SmartLights.SwitchOffTimeout": "不活动超时后关闭（秒）",
-      "HomeGenie.SmartLights.MinLuminance": "如果亮度低于以下值则开启："
+      "HomeGenie.SmartLights.MinLuminance": "如果亮度低于以下值则打开："
     },
     "8": {
       "Title": "日出色彩场景",
       "Description": "变色 LED 灯的“日出”场景示例。",
-      "Scenarios.SunriseColors": "链接至日出色彩场景"
+      "Scenarios.SunriseColors": "日出色彩场景链接"
     },
     "910": {
       "Title": "物体检测",
@@ -290,7 +290,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
     },
     "911": {
-      "Title": "姿态估计",
+      "Title": "姿势估计",
       "Description": "通过姿势估计进行关键点检测，使用自定义 ONNX 模型或默认预训练的 YOLOv11 模型（针对人体姿势）。",
       "ML.PoseEstimation": "启用姿势估计",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
@@ -300,6 +300,12 @@
       "Description": "使用预先训练的 YOLO11 模型检测物体及其轮廓。",
       "ML.InstanceSegmentation": "启用实例分割",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11模型文件（.onnx）路径"
+    },
+    "930": {
+      "Title": "双子座意图处理程序",
+      "Description": "使用 Google Gemini AI 为您的智能系统启用自然语言控制。要激活此功能，请输入有效的 API 密钥。请按照 https://aistudio.google.com/app/apikey 上的说明获取免费 API 密钥。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API 密钥",
+      "ConfigureOptions.ModelId": "模型 ID"
     }
   }
 }

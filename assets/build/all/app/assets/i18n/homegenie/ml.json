@@ -1,7 +1,7 @@
 {
-  " ": "----------------------------------------",
+  " ": "--",
   "welcome_to_homegenie": "ഹോംജെനിയിലേക്ക് സ്വാഗതം!",
-  "welcome_subtitle": "പ്രോഗ്രാം ചെയ്യാവുന്ന ഓട്ടോമേഷൻ ഇന്റലിജൻസ്",
+  "welcome_subtitle": "പ്രോഗ്രാമബിൾ ഓട്ടോമേഷൻ ഇന്റലിജൻസ്",
   "not_configured_yet": "സിസ്റ്റം ഇതുവരെ കോൺഫിഗർ ചെയ്തിട്ടില്ല. ഈ സജ്ജീകരണ വിസാർഡ് കുറച്ച് ഘട്ടങ്ങളിലൂടെ നിങ്ങളുടെ സിസ്റ്റം പ്രവർത്തനക്ഷമമാക്കാൻ സഹായിക്കും.",
   "system_config_start_with_base_and_backup": "ബാക്കപ്പ് ഫയലിൽ നിന്ന് പുനഃസ്ഥാപിക്കുക",
   "system_config_start_with_default_setup": "ഡിഫോൾട്ട് സജ്ജീകരണം",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "തിരഞ്ഞെടുത്ത മാസങ്ങൾ",
   "cronwizard_schedule_set_exact_time": "പരിപാടിയുടെ സമയം സജ്ജമാക്കുക.",
   "cronwizard_schedule_set_slot_start": "ആരംഭ സമയ സ്ലോട്ട് സജ്ജമാക്കുക.",
-  "cronwizard_schedule_set_slot_end": "{{start}} ആരംഭിക്കുന്നു.<span class=\"notranslate\"><br/></span> സമയ സ്ലോട്ട് അവസാനം സജ്ജമാക്കുക.",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span>-ൽ ആരംഭിക്കുന്നു. സമയ സ്ലോട്ട് അവസാനം സജ്ജമാക്കുക.",
   "cronwizard_bindings_define_types_and_modules": "ഈ ഷെഡ്യൂളിന് വിധേയമായ തരങ്ങളും മൊഡ്യൂളുകളും നിർവചിക്കുക (ഓപ്ഷണൽ)",
   "cronwizard_bindings_select_types": "തരങ്ങൾ തിരഞ്ഞെടുക്കുക",
   "cronwizard_action_set_action_to_execute": "ഈ ഇവന്റ് സംഭവിക്കുമ്പോൾ നടപ്പിലാക്കേണ്ട പ്രവർത്തനം സജ്ജമാക്കുക.",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ഒരു സമയ ഇടവേളയുടെ അവസാനം",
   "cronwizard_action_custom_script": "ഇഷ്ടാനുസൃത ആക്ഷൻ സ്ക്രിപ്റ്റ്",
   "cronwizard_action_no_action": "നടപടിയില്ല",
-  "cronwizard_action_schedule_variable_hint": "ക്രോൺ എക്സ്പ്രഷനുകളിൽ <span class=\"notranslate color-primary\">@ {{name}}</span> ഒരു വേരിയബിളായി ഉപയോഗിക്കുക അല്ലെങ്കിൽ ഈ ഇവന്റ് റഫറൻസ് ചെയ്യുന്നതിന് ഓട്ടോമേഷൻ പ്രോഗ്രാമുകളിൽ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ഉപയോഗിക്കുക.",
+  "cronwizard_action_schedule_variable_hint": "ക്രോൺ എക്സ്പ്രഷനുകളിൽ <span class=\"notranslate color-primary\">@{{name}}</span> ഒരു വേരിയബിളായി ഉപയോഗിക്കുക അല്ലെങ്കിൽ ഈ ഇവന്റ് റഫറൻസ് ചെയ്യുന്നതിന് ഓട്ടോമേഷൻ പ്രോഗ്രാമുകളിൽ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ഉപയോഗിക്കുക.",
   "scheduler_preset_action_command_turn_on": "ഓൺ ചെയ്യുക",
   "scheduler_preset_action_command_turn_off": "ഓഫ് ചെയ്യുക",
   "scheduler_preset_action_command_set_level": "ലെവൽ സജ്ജമാക്കുക",
@@ -101,7 +101,7 @@
   "scheduler_preset_action_program_say": "പറയുക",
   "scheduler_preset_action_config_message": "സന്ദേശം",
   "save_and_build": "സംരക്ഷിക്കുക, നിർമ്മിക്കുക",
-  "toggle_widgets_preview": "വിജറ്റുകളുടെ പ്രിവ്യൂ മാറ്റുക",
+  "toggle_widgets_preview": "വിജറ്റ് പ്രിവ്യൂ ടോഗിൾ ചെയ്യുക",
   "stop_program": "പ്രോഗ്രാം നിർത്തുക",
   "run_program": "പ്രോഗ്രാം പ്രവർത്തിപ്പിക്കുക",
   "enable_to_run_program": "പ്രോഗ്രാം പ്രവർത്തിപ്പിക്കുന്നതിന് അത് പ്രവർത്തനക്ഷമമാക്കുക.",
@@ -117,7 +117,7 @@
   "program_status_enabled": "പ്രവർത്തനക്ഷമമാക്കി",
   "program_status_broken": "തകർന്നു",
   "program_status_compile": "സമാഹരിക്കുക",
-  "automation_programming_guide": "പ്രോഗ്രാമിംഗ് ഗൈഡ് '",
+  "automation_programming_guide": "പ്രോഗ്രാമിംഗ് ഗൈഡ്'",
   "tap_to_disable": "പ്രവർത്തനരഹിതമാക്കാൻ ക്ലിക്ക് ചെയ്യുക",
   "tap_to_enable": "പ്രാപ്തമാക്കാൻ ക്ലിക്കുചെയ്യുക",
   "program_data": "പ്രോഗ്രാം ഡാറ്റ",
@@ -195,7 +195,7 @@
       "IpCamera.ImageURL": "ക്യാമറ ഇമേജ് API URL (നിങ്ങളുടെ ക്യാമറ ഡോക്‌സ് കാണുക)",
       "IpCamera.Username": "ഉപയോക്തൃനാമം (ഓപ്ഷണൽ)",
       "IpCamera.Password": "പാസ്‌വേഡ് (ഓപ്ഷണൽ)",
-      "Widget.Config.fps": "ഫ്രെയിമുകൾ / സെക്കൻഡ്",
+      "Widget.Config.fps": "സെക്കൻഡിൽ ഫ്രെയിമുകൾ",
       "Widget.Config.size": "വിജറ്റ് വലുപ്പം"
     },
     "90": {
@@ -207,7 +207,7 @@
       "ConfigureOptions.Email.Recipients": "അലാറം അറിയിപ്പുകൾക്കായി സ്വീകർത്താക്കളുടെ ഇ-മെയിലുകളുടെ കോമയാൽ വേർതിരിച്ച ലിസ്റ്റ്",
       "ConfigureOptions.System.ArmDelay": "കൈ കാലതാമസം (സെക്കൻഡ്)",
       "ConfigureOptions.System.SirenStartTime": "സൈറണുകളുടെ ആരംഭ കാലതാമസം (സെക്കൻഡ്)",
-      "ConfigureOptions.System.SirenMaxTime": "സൈറണുകളുടെ പരമാവധി സമയം (സെക്കൻഡ്, 0 = അനന്തം)",
+      "ConfigureOptions.System.SirenMaxTime": "സൈറണുകൾ പരമാവധി സമയം (സെക്കൻഡ്, 0 = അനന്തം)",
       "ConfigureOptions.Trigger.ArmedProgram": "ആയുധം ധരിച്ചിരിക്കുമ്പോൾ പ്രവർത്തിപ്പിക്കാനുള്ള പ്രോഗ്രാം",
       "ConfigureOptions.Trigger.DisarmedProgram": "നിരായുധീകരിക്കുമ്പോൾ പ്രവർത്തിപ്പിക്കാനുള്ള പ്രോഗ്രാം",
       "ConfigureOptions.Trigger.TriggeredProgram": "ട്രിഗർ ചെയ്യുമ്പോൾ പ്രവർത്തിപ്പിക്കേണ്ട പ്രോഗ്രാം"
@@ -298,8 +298,14 @@
     "912": {
       "Title": "ഇൻസ്റ്റൻസ് സെഗ്മെന്റേഷൻ",
       "Description": "മുൻകൂട്ടി പരിശീലിപ്പിച്ച YOLO11 മോഡൽ ഉപയോഗിച്ച് വസ്തുക്കളെയും അവയുടെ രൂപരേഖകളെയും കണ്ടെത്തുക.",
-      "ML.InstanceSegmentation": "ഇൻസ്റ്റൻസ് സെഗ്‌മെന്റേഷൻ പ്രവർത്തനക്ഷമമാക്കുക",
+      "ML.InstanceSegmentation": "ഇൻസ്റ്റൻസ് സെഗ്മെന്റേഷൻ പ്രാപ്തമാക്കുക",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 മോഡൽ ഫയലിന്റെ (.onnx) പാത"
+    },
+    "930": {
+      "Title": "ജെമിനി ഇന്റന്റ് ഹാൻഡ്‌ലർ",
+      "Description": "ഗൂഗിളിന്റെ ജെമിനി AI ഉപയോഗിച്ച് നിങ്ങളുടെ സ്മാർട്ട് സിസ്റ്റത്തിനായി സ്വാഭാവിക ഭാഷാ നിയന്ത്രണം പ്രാപ്തമാക്കുന്നു. ഈ സവിശേഷത സജീവമാക്കുന്നതിന്, സാധുവായ ഒരു API കീ നൽകുക. സൗജന്യ API കീ ലഭിക്കുന്നതിന് https://aistudio.google.com/app/apikey എന്നതിലെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.",
+      "ConfigureOptions.ApiKey": "ഗൂഗിൾ ജെമിനി AI API കീ",
+      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി"
     }
   }
 }

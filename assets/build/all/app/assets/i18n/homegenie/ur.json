@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "منتخب مہینے",
   "cronwizard_schedule_set_exact_time": "تقریب کا وقت مقرر کریں۔",
   "cronwizard_schedule_set_slot_start": "ٹائم سلاٹ اسٹارٹ سیٹ کریں۔",
-  "cronwizard_schedule_set_slot_end": "{{start}} سے شروع ہو رہا ہے۔<span class=\"notranslate\"><br/></span> ٹائم سلاٹ اینڈ سیٹ کریں۔",
+  "cronwizard_schedule_set_slot_end": "{{start}} سے شروع ہو رہا ہے۔<span class=\"notranslate\"><br/></span> ٹائم سلاٹ اختتام کو سیٹ کریں۔",
   "cronwizard_bindings_define_types_and_modules": "ان اقسام اور ماڈیولز کی وضاحت کریں جو اس شیڈول کے تابع ہیں (اختیاری)",
   "cronwizard_bindings_select_types": "اقسام منتخب کریں۔",
   "cronwizard_action_set_action_to_execute": "اس واقعہ کی موجودگی پر عمل کرنے کے لیے ایکشن سیٹ کریں۔",
@@ -78,9 +78,9 @@
   "cronwizard_action_preset_every_occurrence": "ہر واقعہ پر",
   "cronwizard_action_preset_slot_start": "ٹائم سلاٹ کے آغاز میں",
   "cronwizard_action_preset_slot_end": "ٹائم سلاٹ کے اختتام پر",
-  "cronwizard_action_custom_script": "حسب ضرورت ایکشن اسکرپٹ",
+  "cronwizard_action_custom_script": "کسٹم ایکشن اسکرپٹ",
   "cronwizard_action_no_action": "کوئی کارروائی نہیں۔",
-  "cronwizard_action_schedule_variable_hint": "کرون ایکسپریشنز میں متغیر کے طور پر <span class=\"notranslate color-primary\">@ {{name}}</span> استعمال کریں یا اس ایونٹ کا حوالہ دینے کے لیے آٹومیشن پروگرامز میں <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> کا استعمال کریں۔",
+  "cronwizard_action_schedule_variable_hint": "اس ایونٹ کا حوالہ دینے کے لیے <span class=\"notranslate color-primary\">@{{name}}</span> کو کرون ایکسپریشنز میں متغیر کے طور پر استعمال کریں یا آٹومیشن پروگراموں میں <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> کا استعمال کریں۔",
   "scheduler_preset_action_command_turn_on": "آن کریں۔",
   "scheduler_preset_action_command_turn_off": "بند کر دیں۔",
   "scheduler_preset_action_command_set_level": "سطح طے کریں۔",
@@ -126,8 +126,8 @@
   "setup_code": "سیٹ اپ",
   "main_code": "مین",
   "context_code": "سیاق و سباق",
-  "main_code_empty_note": "\"مین\" کوڈ خالی ہے۔ اس کوڈ کو تیار کرنے کے لیے \"بصری کوڈ\" ایڈیٹر کا استعمال کریں: - بائیں طرف کمانڈ پیلیٹ سے زمرہ \"پروگرام\" کھولیں - بصری کوڈ ورک اسپیس میں \"مین\" قسم کا ایک بلاک گھسیٹیں - اس پروگرام کے اعمال اور منطق کو نافذ کرنے کے لیے اس کے اندر دوسرے کوڈ بلاکس شامل کریں پروگرام \"مین\" کو یا تو دستی طور پر چلایا جا سکتا ہے یا ایس کوڈ کی شرائط کی بنیاد پر خودکار طور پر شروع کیا جا سکتا ہے۔",
-  "setup_code_empty_note": "\"سیٹ اپ\" کوڈ خالی ہے۔ اس کوڈ کو بنانے کے لیے \"بصری کوڈ\" ایڈیٹر کا استعمال کریں: - بائیں طرف کمانڈ پیلیٹ سے زمرہ \"پروگرام\" کھولیں - بصری کوڈ ورک اسپیس میں \"سیٹ اپ\" قسم کے ایک بلاک کو گھسیٹیں - اس کے اندر دیگر کوڈ بلاکس شامل کریں تاکہ ان حالات کا تعین کیا جا سکے جو \"مین\" کوڈ پر عمل درآمد کو متحرک کریں گے جب بھی کوئی نیا واقعہ پیش آتا ہے اور کم از کم ایک بار اس کوڈ کا جائزہ لیا جاتا ہے۔",
+  "main_code_empty_note": "\"مین\" کوڈ خالی ہے۔ اس کوڈ کو تیار کرنے کے لیے \"بصری کوڈ\" ایڈیٹر کا استعمال کریں: - بائیں طرف کمانڈ پیلیٹ سے زمرہ \"پروگرام\" کھولیں - بصری کوڈ ورک اسپیس میں \"مین\" قسم کے ایک بلاک کو گھسیٹیں - اس پروگرام کے اعمال اور منطق کو لاگو کرنے کے لیے اس کے اندر دوسرے کوڈ بلاکس شامل کریں۔",
+  "setup_code_empty_note": "\"سیٹ اپ\" کوڈ خالی ہے۔ اس کوڈ کو تیار کرنے کے لیے \"بصری کوڈ\" ایڈیٹر کا استعمال کریں: - بائیں طرف کمانڈ پیلیٹ سے زمرہ \"پروگرام\" کھولیں - بصری کوڈ ورک اسپیس میں \"سیٹ اپ\" قسم کے ایک بلاک کو گھسیٹیں - اس کے اندر دیگر کوڈ بلاکس شامل کریں تاکہ ان حالات کا تعین کیا جا سکے جو \"مین\" کوڈ پر عمل درآمد کو متحرک کریں گے جب بھی کوئی نیا واقعہ پیش آتا ہے اور کم از کم ایک بار اس کوڈ کا جائزہ لیا جاتا ہے۔",
   "capture_commands": "کیپچر کمانڈز",
   "capture_commands_description": "ویجٹ پر دستی طور پر انجام دیے گئے تمام کمانڈز کو پروگرام میں شامل کریں۔",
   "capture_commands_pause": "حکموں کے درمیان وقفہ کریں۔",
@@ -202,9 +202,9 @@
       "Title": "سیکیورٹی الارم سسٹم",
       "Description": "سیکیورٹی الارم سسٹم کو نافذ کرنے کے لیے سینسر اور دیگر آلات استعمال کریں۔",
       "HomeGenie.SecurityAlarm": "الارم/اسٹروب کے طور پر استعمال کریں۔",
-      "HomeGenie.SecurityTriggerHome": "ہوم مسلح ہونے پر بھی متحرک ہوتا ہے۔",
+      "HomeGenie.SecurityTriggerHome": "مسلح ہونے پر ہوم کو بھی متحرک کرتا ہے۔",
       "HomeGenie.SecuritySensor": "سیکیورٹی سینسر کے طور پر استعمال کریں۔",
-      "ConfigureOptions.Email.Recipients": "الارم کی اطلاعات کے لیے وصول کنندگان کی ای میلز کی کوما سے الگ کردہ فہرست",
+      "ConfigureOptions.Email.Recipients": "الارم کی اطلاعات کے لیے وصول کنندگان کے ای میلز کی کوما سے الگ کردہ فہرست",
       "ConfigureOptions.System.ArmDelay": "بازو میں تاخیر (سیکنڈ)",
       "ConfigureOptions.System.SirenStartTime": "سائرن شروع ہونے میں تاخیر (سیکنڈ)",
       "ConfigureOptions.System.SirenMaxTime": "سائرن کا زیادہ سے زیادہ وقت (سیکنڈ، 0 = لامحدود)",
@@ -260,7 +260,7 @@
     },
     "142": {
       "Title": "ای میل اکاؤنٹ",
-      "Description": "ای میل اکاؤنٹ کی معلومات کو اسٹور کرتا ہے جو سسٹم پروگرامز کے ذریعے ای میلز بھیجنے/ وصول کرنے کے لیے استعمال ہوتا ہے۔",
+      "Description": "ای میل اکاؤنٹ کی معلومات کو اسٹور کرتا ہے جو سسٹم پروگرام کے ذریعے ای میلز بھیجنے/ وصول کرنے کے لیے استعمال ہوتا ہے۔",
       "ConfigureOptions.Email.Sender": "1. ای میل ایڈریس",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP سرور کا پتہ",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP صارف نام (اختیاری)",
@@ -300,6 +300,12 @@
       "Description": "پہلے سے تربیت یافتہ YOLO11 ماڈل کا استعمال کرتے ہوئے اشیاء اور ان کے خاکوں کا پتہ لگائیں۔",
       "ML.InstanceSegmentation": "مثال کی تقسیم کو فعال کریں۔",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڈل فائل کا راستہ (.onnx)"
+    },
+    "930": {
+      "Title": "جیمنی انٹینٹ ہینڈلر",
+      "Description": "Google کے Gemini AI کا استعمال کرتے ہوئے آپ کے سمارٹ سسٹم کے لیے قدرتی زبان کے کنٹرول کو فعال کرتا ہے۔ اس خصوصیت کو چالو کرنے کے لیے، ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://aistudio.google.com/app/apikey پر دی گئی ہدایات پر عمل کریں۔",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
+      "ConfigureOptions.ModelId": "ماڈل ID"
     }
   }
 }

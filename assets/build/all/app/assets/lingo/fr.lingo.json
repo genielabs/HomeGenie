@@ -1,38 +1,76 @@
 ﻿{
-	"Commands" : [
-		{
-			"Command": "Control.On",
-			"Aliases": [ "allumer", "ouvrir" ]
-		},
-		{
-			"Command": "Control.Off",
-			"Aliases": [ "éteindre", "fermer" ]
-		},
-		{
-			"Command": "Control.Level",
-			"Aliases": [ "niveau" ]
-		},
-		{
-			"Command": "Control.Toggle",
-			"Aliases": [ "inverseur" ]
-		},
-		{
-			"Command": "Control.Run",
-			"Aliases": [ "démarrage", "exécuté" ]
-		},
-		{
-			"Command": "Control.Break",
-			"Aliases": [ "arrêter", "interrompre" ]
-		}
-	],
-	"Types" : [
-		{
-			"Type": "Light,Dimmer,Color",
-			"Aliases": [ "toutes les lumières", "lumières", "toutes les lampes", "lampes" ]
-		},
-		{
-			"Type": "Switch",
-			"Aliases": [ "tous les interrupteurs", "tous les commutateurs", "tous les appareils", "interrupteurs", "commutateurs", "appareils" ]
-		}
-	]
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "allume",
+        "active",
+        "ouvre",
+        "marche"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "éteins",
+        "désactive",
+        "ferme",
+        "arrêt"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "niveau",
+        "règle",
+        "mets",
+        "intensité"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "bascule",
+        "change",
+        "inverse"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "exécute",
+        "lance",
+        "démarre",
+        "joue"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "arrête",
+        "stoppe",
+        "interromps",
+        "annule"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "lumière",
+        "lumières",
+        "éclairage"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "prise",
+        "prises",
+        "interrupteur",
+        "interrupteurs"
+      ]
+    }
+  ]
 }

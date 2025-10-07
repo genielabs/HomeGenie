@@ -1,0 +1,79 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "liga",
+        "acende",
+        "ativa",
+        "abre"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "desliga",
+        "apaga",
+        "desativa",
+        "fecha"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "nível",
+        "ajusta",
+        "define",
+        "coloca",
+        "seta"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "alterna",
+        "inverte",
+        "muda",
+        "troca"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "executa",
+        "inicia",
+        "roda",
+        "toca"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "para",
+        "interrompe",
+        "cancela"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "luz",
+        "luzes",
+        "lâmpada",
+        "lâmpadas",
+        "iluminação"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "interruptor",
+        "interruptores",
+        "tomada",
+        "tomadas"
+      ]
+    }
+  ]
+}

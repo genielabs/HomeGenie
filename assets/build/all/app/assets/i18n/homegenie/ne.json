@@ -1,8 +1,8 @@
 {
-  " ": "------------------------------------------------------------------",
+  " ": "----------------------------------------------",
   "welcome_to_homegenie": "HomeGenie मा स्वागत छ!",
   "welcome_subtitle": "प्रोग्रामेबल स्वचालन बुद्धिमत्ता",
-  "not_configured_yet": "प्रणाली अझै कन्फिगर गरिएको छैन। यो सेटअप विजार्डले केही चरणहरूमा तपाईंको प्रणालीलाई सुरु गर्न र चलाउन मद्दत गर्नेछ।",
+  "not_configured_yet": "प्रणाली अझै कन्फिगर गरिएको छैन। यो सेटअप विजार्डले केही चरणहरूमा तपाईंको प्रणालीलाई माथि उठाउन र चलाउन मद्दत गर्नेछ।",
   "system_config_start_with_base_and_backup": "ब्याकअप फाइलबाट पुनर्स्थापित गर्नुहोस्",
   "system_config_start_with_default_setup": "पूर्वनिर्धारित सेटअप",
   "system_config_include_demo": "नक्कली उपकरण गतिविधिको साथ डेमो समावेश गर्नुहोस्",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "चयन गरिएका महिनाहरू",
   "cronwizard_schedule_set_exact_time": "कार्यक्रम समय सेट गर्नुहोस्।",
   "cronwizard_schedule_set_slot_start": "सुरु हुने समय स्लट सेट गर्नुहोस्।",
-  "cronwizard_schedule_set_slot_end": "{{start}} सुरु गर्दै।<span class=\"notranslate\"><br/></span> समय स्लट अन्त्य सेट गर्नुहोस्।",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> बाट सुरु हुँदै समय स्लट अन्त्य सेट गर्नुहोस्।",
   "cronwizard_bindings_define_types_and_modules": "यस तालिकाको अधीनमा रहेका प्रकार र मोड्युलहरू परिभाषित गर्नुहोस् (वैकल्पिक)",
   "cronwizard_bindings_select_types": "प्रकारहरू चयन गर्नुहोस्",
   "cronwizard_action_set_action_to_execute": "यो घटना घटेमा कार्यान्वयन गर्ने कार्य सेट गर्नुहोस्",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "समय स्लटको अन्त्यमा",
   "cronwizard_action_custom_script": "अनुकूलन कार्य स्क्रिप्ट",
   "cronwizard_action_no_action": "कुनै कारबाही छैन",
-  "cronwizard_action_schedule_variable_hint": "क्रोन अभिव्यक्तिहरूमा <span class=\"notranslate color-primary\">@ {{name}}</span> चरको रूपमा प्रयोग गर्नुहोस् वा यो घटनालाई सन्दर्भ गर्न स्वचालन कार्यक्रमहरूमा <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> प्रयोग गर्नुहोस्।",
+  "cronwizard_action_schedule_variable_hint": "क्रोन अभिव्यक्तिहरूमा चरको रूपमा <span class=\"notranslate color-primary\">@{{name}}</span> प्रयोग गर्नुहोस् वा यो घटनालाई सन्दर्भ गर्न स्वचालन कार्यक्रमहरूमा <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> प्रयोग गर्नुहोस्।",
   "scheduler_preset_action_command_turn_on": "खोल्नुहोस्",
   "scheduler_preset_action_command_turn_off": "बन्द गर्नुहोस्",
   "scheduler_preset_action_command_set_level": "स्तर सेट गर्नुहोस्",
@@ -300,6 +300,12 @@
       "Description": "पूर्व-प्रशिक्षित YOLO11 मोडेल प्रयोग गरेर वस्तुहरू र तिनीहरूको रूपरेखा पत्ता लगाउनुहोस्।",
       "ML.InstanceSegmentation": "उदाहरण विभाजन सक्षम गर्नुहोस्",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 मोडेल फाइलको पथ (.onnx)"
+    },
+    "930": {
+      "Title": "जेमिनी इन्टेन्ट ह्यान्डलर",
+      "Description": "गुगलको जेमिनी एआई प्रयोग गरेर तपाईंको स्मार्ट प्रणालीको लागि प्राकृतिक भाषा नियन्त्रण सक्षम पार्छ। यो सुविधा सक्रिय गर्न, मान्य API कुञ्जी प्रविष्ट गर्नुहोस्। नि:शुल्क API कुञ्जी प्राप्त गर्न https://aistudio.google.com/app/apikey मा निर्देशनहरू पालना गर्नुहोस्।",
+      "ConfigureOptions.ApiKey": "गुगल जेमिनी एआई एपीआई कुञ्जी",
+      "ConfigureOptions.ModelId": "मोडेल आईडी"
     }
   }
 }

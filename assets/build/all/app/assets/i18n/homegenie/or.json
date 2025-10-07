@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "--------------------------------------------",
   "welcome_to_homegenie": "HomeGenieକୁ ସ୍ୱାଗତ!",
   "welcome_subtitle": "ପ୍ରୋଗ୍ରାମେବଲ୍ ଅଟୋମେସନ୍ ଇଣ୍ଟେଲିଜେନ୍ସ",
   "not_configured_yet": "ସିଷ୍ଟମ୍ ଏପର୍ଯ୍ୟନ୍ତ ବିନ୍ୟାସିତ ହୋଇନାହିଁ। ଏହି ସେଟଅପ୍ ୱିଜାର୍ଡ କିଛି ପଦକ୍ଷେପ ମଧ୍ୟରେ ଆପଣଙ୍କ ସିଷ୍ଟମକୁ ଚାଲୁ କରିବାରେ ସାହାଯ୍ୟ କରିବ।",
@@ -25,7 +25,7 @@
   "create_package": "ନୂଆ ପ୍ୟାକେଜ୍‍ ତିଆରି କରନ୍ତୁ",
   "programs_version": "ପ୍ରୋଗ୍ରାମର ସଂସ୍କରଣ",
   "http_settings": "HTTP ସେଟିଂସ୍",
-  "modules_groups": "ଗୋଷ୍ଠୀ ଏବଂ ମଡ୍ୟୁଲ୍ସ",
+  "modules_groups": "ଗୋଷ୍ଠୀ ଏବଂ ମଡ୍ୟୁଲ୍‌ଗୁଡ଼ିକ",
   "groups": "ଗୋଷ୍ଠୀଗୁଡିକ",
   "add_group": "ଗୋଷ୍ଠୀ ଯୋଡନ୍ତୁ",
   "edit_group": "ଗୋଷ୍ଠୀ ସମ୍ପାଦନ କରନ୍ତୁ",
@@ -58,7 +58,7 @@
   "cronwizard_days": "ଦିନଗୁଡିକ",
   "cronwizard_months": "ମାସ",
   "cronwizard_minuteselect_everyminute": "ପ୍ରତି ମିନିଟ୍‌ରେ",
-  "cronwizard_minuteselect_everynthminute": "ପ୍ରତି ଦିଆଯାଇଥିବା ମିନିଟ୍‌ରେ",
+  "cronwizard_minuteselect_everynthminute": "ପ୍ରତି ନିର୍ଦ୍ଦିଷ୍ଟ ମିନିଟ୍‌ରେ",
   "cronwizard_minuteselect_selectedminutes": "ଚୟନିତ ମିନିଟ୍",
   "cronwizard_hourselect_everyhour": "ପ୍ରତି ଘଣ୍ଟାରେ",
   "cronwizard_hourselect_everynthhour": "ପ୍ରତି ନିର୍ଦ୍ଦିଷ୍ଟ ଘଣ୍ଟାରେ",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "ଚୟନିତ ମାସଗୁଡ଼ିକ",
   "cronwizard_schedule_set_exact_time": "ଇଭେଣ୍ଟ ସମୟ ସେଟ୍ କରନ୍ତୁ।",
   "cronwizard_schedule_set_slot_start": "ସମୟ ସ୍ଲଟ୍ ଆରମ୍ଭ ସେଟ୍ କରନ୍ତୁ।",
-  "cronwizard_schedule_set_slot_end": "{{start}} ଆରମ୍ଭ ହେଉଛି।<span class=\"notranslate\"><br/></span> ସମୟ ସ୍ଲଟର ଶେଷ ସେଟ୍ କରନ୍ତୁ।",
+  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> ରୁ ଆରମ୍ଭ କରି ସମୟ ସ୍ଲଟ୍ ଶେଷ ସେଟ୍ କରନ୍ତୁ।",
   "cronwizard_bindings_define_types_and_modules": "ଏହି ସମୟସୂଚୀର ଅଧୀନରେ ଥିବା ପ୍ରକାର ଏବଂ ମଡ୍ୟୁଲଗୁଡ଼ିକୁ ପରିଭାଷିତ କରନ୍ତୁ (ଇଚ୍ଛାଧୀନ)",
   "cronwizard_bindings_select_types": "ପ୍ରକାରଗୁଡ଼ିକ ଚୟନ କରନ୍ତୁ",
   "cronwizard_action_set_action_to_execute": "ଏହି ଇଭେଣ୍ଟ ଘଟିଲେ କାର୍ଯ୍ୟକାରୀ କରିବା ପାଇଁ କାର୍ଯ୍ୟ ସେଟ୍ କରନ୍ତୁ",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "ସମୟ ସ୍ଲଟର ଶେଷରେ",
   "cronwizard_action_custom_script": "କଷ୍ଟମ୍ ଆକ୍ସନ୍ ସ୍କ୍ରିପ୍ଟ",
   "cronwizard_action_no_action": "କୌଣସି କାର୍ଯ୍ୟ ନାହିଁ",
-  "cronwizard_action_schedule_variable_hint": "ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ କ୍ରୋନ୍ ଏକ୍ସପ୍ରେସନରେ <span class=\"notranslate color-primary\">@ {{name}}</span> ଏକ ଭେରିଏବଲ୍ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ଅଟୋମେସନ୍ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
+  "cronwizard_action_schedule_variable_hint": "କ୍ରୋନ୍ ଏକ୍ସପ୍ରେସନରେ <span class=\"notranslate color-primary\">@{{name}}</span> କୁ ଏକ ଭେରିଏବଲ୍ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ ଅଟୋମେସନ୍ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
   "scheduler_preset_action_command_turn_on": "ଚାଲୁ କରନ୍ତୁ",
   "scheduler_preset_action_command_turn_off": "ବନ୍ଦ କରନ୍ତୁ",
   "scheduler_preset_action_command_set_level": "ସ୍ତର ସେଟ୍‌ କରନ୍ତୁ",
@@ -104,7 +104,7 @@
   "toggle_widgets_preview": "ୱିଜେଟ୍ ପ୍ରିଭ୍ୟୁ ଟୋଗଲ୍ କରନ୍ତୁ",
   "stop_program": "ପ୍ରୋଗ୍ରାମ୍ ବନ୍ଦ କରନ୍ତୁ",
   "run_program": "ପ୍ରୋଗ୍ରାମ୍ ଚଲାନ୍ତୁ",
-  "enable_to_run_program": "ପ୍ରୋଗ୍ରାମକୁ ଚଲାଇବା ପାଇଁ ଏହାକୁ ସକ୍ଷମ କରନ୍ତୁ।",
+  "enable_to_run_program": "ପ୍ରୋଗ୍ରାମକୁ ଚଲାଇବା ପାଇଁ ଏହାକୁ ସକ୍ଷମ କରନ୍ତୁ",
   "program_status_added": "ଯୋଡାଗଲା",
   "program_status_idle": "ନିଷ୍କ୍ରିୟ",
   "program_status_setup": "ସେଟଅପ୍ କରନ୍ତୁ",
@@ -207,7 +207,7 @@
       "ConfigureOptions.Email.Recipients": "ଆଲାର୍ମ ବିଜ୍ଞପ୍ତି ପାଇଁ ପ୍ରାପ୍ତକର୍ତ୍ତାଙ୍କ ଇ-ମେଲଗୁଡ଼ିକର କମା ଦ୍ୱାରା ପୃଥକ ତାଲିକା",
       "ConfigureOptions.System.ArmDelay": "ହାତ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
       "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍‌ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
-      "ConfigureOptions.System.SirenMaxTime": "ସାଇରନ ସର୍ବାଧିକ ସମୟ (ସେକେଣ୍ଡ, 0 = ଅସୀମ)",
+      "ConfigureOptions.System.SirenMaxTime": "ସାଇରନ୍ ସର୍ବାଧିକ ସମୟ (ସେକେଣ୍ଡ, 0 = ଅସୀମ)",
       "ConfigureOptions.Trigger.ArmedProgram": "ସଶସ୍ତ୍ର ଥିବା ସମୟରେ ଚଲାଇବାକୁ କାର୍ଯ୍ୟକ୍ରମ",
       "ConfigureOptions.Trigger.DisarmedProgram": "ନିରସ୍ତ୍ର ହେବା ସମୟରେ ଚଲାଇବାକୁ ଥିବା କାର୍ଯ୍ୟକ୍ରମ",
       "ConfigureOptions.Trigger.TriggeredProgram": "ଟ୍ରିଗର ହେଲେ ଚଲାଇବାକୁ ଥିବା ପ୍ରୋଗ୍ରାମ"
@@ -279,13 +279,13 @@
     },
     "8": {
       "Title": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗର ଦୃଶ୍ୟପଟ",
-      "Description": "ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରୁଥିବା LED ଲାଇଟ୍ ପାଇଁ \"ସୂର୍ଯ୍ୟୋଦୟ\" ପରିସ୍ଥିତିର ଉଦାହରଣ।",
+      "Description": "ରଙ୍ଗ ପରିବର୍ତ୍ତନ କରୁଥିବା LED ଲାଇଟ୍ ପାଇଁ \"ସୂର୍ଯ୍ୟୋଦୟ\" ଦୃଶ୍ୟର ଉଦାହରଣ।",
       "Scenarios.SunriseColors": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗ ଦୃଶ୍ୟପଟର ଲିଙ୍କ୍"
     },
     "910": {
       "Title": "ବସ୍ତୁ ଚିହ୍ନଟକରଣ",
       "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO11 ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁଗୁଡ଼ିକୁ ଚିହ୍ନଟ କରନ୍ତୁ।",
-      "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟ ସକ୍ଷମ କରନ୍ତୁ",
+      "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟକରଣ ସକ୍ଷମ କରନ୍ତୁ",
       "ML.ObjectDetection.TriggerDetect": "ଆଲାର୍ମ ଟ୍ରିଗର କରୁଥିବା ଜିନିଷଗୁଡ଼ିକର କମା-ବିଚ୍ଛେଦିତ ତାଲିକା (ଇଂରାଜୀରେ)। (ଯଥା: ବିଲେଇ, କୁକୁର, ବ୍ୟକ୍ତି, ବ୍ୟାକପ୍ୟାକ୍, ସୁଟକେସ୍)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO11 ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁ ଏବଂ ସେମାନଙ୍କର ରୂପରେଖା ଚିହ୍ନଟ କରନ୍ତୁ।",
       "ML.InstanceSegmentation": "ଇନଷ୍ଟାନ୍ସ ସେଗମେଣ୍ଟେସନ୍ ସକ୍ଷମ କରନ୍ତୁ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
+    },
+    "930": {
+      "Title": "ଜେମିନି ଇଣ୍ଟେଣ୍ଟ ହ୍ୟାଣ୍ଡଲର୍",
+      "Description": "Google ର Gemini AI ବ୍ୟବହାର କରି ଆପଣଙ୍କ ସ୍ମାର୍ଟ ସିଷ୍ଟମ ପାଇଁ ପ୍ରାକୃତିକ ଭାଷା ନିୟନ୍ତ୍ରଣ ସକ୍ଷମ କରେ। ଏହି ବୈଶିଷ୍ଟ୍ୟକୁ ସକ୍ରିୟ କରିବା ପାଇଁ, ଏକ ବୈଧ API କୀ ପ୍ରବେଶ କରନ୍ତୁ। ଏକ ମାଗଣା API କୀ ପାଇବା ପାଇଁ https://aistudio.google.com/app/apikey ରେ ଥିବା ନିର୍ଦ୍ଦେଶାବଳୀ ଅନୁସରଣ କରନ୍ତୁ।",
+      "ConfigureOptions.ApiKey": "ଗୁଗୁଲ୍ ଜେମିନି ଏଆଇ ଏପିଆଇ କୀ",
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି"
     }
   }
 }

@@ -5,7 +5,7 @@
   "not_configured_yet": "El sistema aún no está configurado. Este asistente de configuración le ayudará a ponerlo en funcionamiento en pocos pasos.",
   "system_config_start_with_base_and_backup": "Restaurar desde un archivo de respaldo",
   "system_config_start_with_default_setup": "Configuración predeterminada",
-  "system_config_include_demo": "Incluye demostración con actividad simulada del dispositivo.",
+  "system_config_include_demo": "Incluir demostración con actividad simulada del dispositivo",
   "system_config_additional_features": "Características adicionales",
   "system_config_manual_setup": "Configuración manual",
   "interfaces": "Interfaces",
@@ -70,8 +70,8 @@
   "cronwizard_monthselect_selectedmonths": "Meses seleccionados",
   "cronwizard_schedule_set_exact_time": "Establecer la hora del evento.",
   "cronwizard_schedule_set_slot_start": "Establecer franja horaria de inicio.",
-  "cronwizard_schedule_set_slot_end": "Empezando por {{start}} .<span class=\"notranslate\"><br/></span> Establecer la hora de finalización del intervalo de tiempo.",
-  "cronwizard_bindings_define_types_and_modules": "Define los tipos y módulos que están sujetos a este cronograma (opcional)",
+  "cronwizard_schedule_set_slot_end": "A partir de {{start}}.<span class=\"notranslate\"><br/></span> Establecer el final del intervalo de tiempo.",
+  "cronwizard_bindings_define_types_and_modules": "Definir tipos y módulos que están sujetos a este cronograma (opcional)",
   "cronwizard_bindings_select_types": "Seleccionar tipos",
   "cronwizard_action_set_action_to_execute": "Establecer la acción a ejecutar cuando se produzca este evento",
   "cronwizard_action_preset_actions": "Acciones preestablecidas",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Al final de un intervalo de tiempo",
   "cronwizard_action_custom_script": "Script de acción personalizado",
   "cronwizard_action_no_action": "Ninguna acción",
-  "cronwizard_action_schedule_variable_hint": "Utilice <span class=\"notranslate color-primary\">@ {{name}}</span> como una variable en expresiones cron o utilice <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> en programas de automatización para hacer referencia a este evento.",
+  "cronwizard_action_schedule_variable_hint": "Utilice <span class=\"notranslate color-primary\">@{{name}}</span> como variable en expresiones cron o utilice <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> en programas de automatización para hacer referencia a este evento.",
   "scheduler_preset_action_command_turn_on": "Encender",
   "scheduler_preset_action_command_turn_off": "Apagar",
   "scheduler_preset_action_command_set_level": "Establecer nivel",
@@ -126,8 +126,8 @@
   "setup_code": "Configuración",
   "main_code": "Principal",
   "context_code": "Contexto",
-  "main_code_empty_note": "El código \"Principal\" está vacío. Use el editor de \"Código visual\" para generar este código: - Abra la categoría \"Programa\" en la paleta de comandos de la izquierda. - Arrastre un bloque de tipo \"Principal\" al espacio de trabajo de código visual. - Añada dentro otros bloques de código para implementar las acciones y la lógica de este programa. El programa \"Principal\" puede ejecutarse manualmente o iniciarse automáticamente según las condiciones establecidas en el código de configuración.",
-  "setup_code_empty_note": "El código de \"Configuración\" está vacío. Use el editor de \"Código visual\" para generar este código: - Abra la categoría \"Programa\" en la paleta de comandos de la izquierda. - Arrastre un bloque de tipo \"Configuración\" al espacio de trabajo de código visual. - Añada dentro otros bloques de código para determinar las condiciones que activarán la ejecución del código \"Principal\". Este código se evalúa cada vez que ocurre un nuevo evento y al menos una vez por minuto.",
+  "main_code_empty_note": "El código \"Principal\" está vacío. Use el editor de \"Código visual\" para generar este código: - Abra la categoría \"Programa\" en la paleta de comandos de la izquierda. - Arrastre un bloque de tipo \"Principal\" al espacio de trabajo de código visual. - Añada dentro otros bloques de código para implementar las acciones y la lógica de este programa. El programa \"Principal\" puede ejecutarse manualmente o iniciarse automáticamente según las condiciones especificadas en el código de configuración.",
+  "setup_code_empty_note": "El código \"Configuración\" está vacío. Use el editor \"Código visual\" para generar este código: - Abra la categoría \"Programa\" en la paleta de comandos de la izquierda. - Arrastre un bloque de tipo \"Configuración\" al espacio de trabajo de código visual. - Añada dentro otros bloques de código para determinar las condiciones que activarán la ejecución del código \"Principal\". Este código se evalúa cada vez que ocurre un nuevo evento y al menos una vez por minuto.",
   "capture_commands": "Comandos de captura",
   "capture_commands_description": "Añade todos los comandos ejecutados manualmente en los widgets al programa.",
   "capture_commands_pause": "Pausa entre comandos",
@@ -149,7 +149,7 @@
     },
     "34": {
       "Title": "Pronóstico del tiempo",
-      "Description": "Información meteorológica y pronóstico del servicio Open Weather Map. Para activar este widget, introduce una clave API válida. Sigue las instrucciones en https://openweathermap.org/appid para obtener una clave API gratuita.",
+      "Description": "Información meteorológica y pronóstico del servicio Open Weather Map. Para activar este widget, introduzca una clave API válida. Siga las instrucciones en https://openweathermap.org/appid para obtener una clave API gratuita.",
       "ConfigureOptions.Location": "Nombre de la ciudad",
       "ConfigureOptions.Language": "Idioma (por ejemplo, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Intervalo de actualización (minutos)",
@@ -203,7 +203,7 @@
       "Description": "Utilice sensores y otros dispositivos para implementar un sistema de alarma de seguridad.",
       "HomeGenie.SecurityAlarm": "Usar como alarma/luz estroboscópica",
       "HomeGenie.SecurityTriggerHome": "También se activa cuando está armado Inicio",
-      "HomeGenie.SecuritySensor": "Utilizar como sensor de seguridad",
+      "HomeGenie.SecuritySensor": "Usar como sensor de seguridad",
       "ConfigureOptions.Email.Recipients": "Lista separada por comas de correos electrónicos de destinatarios para notificaciones de alarma",
       "ConfigureOptions.System.ArmDelay": "Retardo de armado (segundos)",
       "ConfigureOptions.System.SirenStartTime": "Retardo de inicio de las sirenas (segundos)",
@@ -232,7 +232,7 @@
       "Status.Level": "Estado del interruptor (encendido/apagado)"
     },
     "401": {
-      "Title": "Demostración - Puerta de palanca",
+      "Title": "Demo - Puerta de palanca",
       "Description": "Simula la apertura/cierre de la puerta del sensor de puerta-ventana de demostración."
     },
     "402": {
@@ -291,7 +291,7 @@
     },
     "911": {
       "Title": "Estimación de pose",
-      "Description": "Detección de puntos clave a través de la estimación de la pose, utilizando modelos ONNX personalizados o el modelo YOLOv11 preentrenado predeterminado (específico de la pose humana).",
+      "Description": "Detección de puntos clave mediante estimación de pose, utilizando modelos ONNX personalizados o el modelo YOLOv11 preentrenado predeterminado (específico de pose humana).",
       "ML.PoseEstimation": "Habilitar estimación de pose",
       "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
     },
@@ -300,6 +300,12 @@
       "Description": "Detecta objetos y sus contornos utilizando un modelo YOLO11 previamente entrenado.",
       "ML.InstanceSegmentation": "Habilitar la segmentación de instancias",
       "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Controlador de intenciones de Géminis",
+      "Description": "Permite el control del lenguaje natural en tu sistema inteligente mediante la IA Gemini de Google. Para activar esta función, introduce una clave API válida. Sigue las instrucciones en https://aistudio.google.com/app/apikey para obtener una clave API gratuita.",
+      "ConfigureOptions.ApiKey": "Clave API de Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identificación del modelo"
     }
   }
 }

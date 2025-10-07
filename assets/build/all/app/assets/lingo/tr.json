@@ -1,0 +1,76 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "aç",
+        "yak",
+        "çalıştır",
+        "etkinleştir"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "kapat",
+        "söndür",
+        "durdur",
+        "devre dışı bırak"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "seviye",
+        "ayarla",
+        "kur",
+        "kıs"
+      ]
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "değiştir",
+        "geçiş yap"
+      ]
+    },
+    {
+      "Command": "Control.Run",
+      "Aliases": [
+        "çalıştır",
+        "başlat",
+        "oynat",
+        "yürüt"
+      ]
+    },
+    {
+      "Command": "Control.Break",
+      "Aliases": [
+        "durdur",
+        "iptal et",
+        "kes"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "ışık",
+        "ışıkları",
+        "lamba",
+        "lambaları",
+        "aydınlatma"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "anahtar",
+        "anahtarları",
+        "priz",
+        "prizleri"
+      ]
+    }
+  ]
+}

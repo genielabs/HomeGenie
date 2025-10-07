@@ -446,9 +446,34 @@ namespace HomeGenie.Service
                 foreach (string file in Directory.EnumerateFiles(newFilesPath, "*", SearchOption.AllDirectories))
                 {
                     bool doNotCopy = false;
+                    bool angularUiCleanupDone = false;
 
                     string destinationFolder = Path.GetDirectoryName(file).Replace(newFilesPath, "").TrimStart('/').TrimStart('\\');
                     string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(AppDomain.CurrentDomain.BaseDirectory).ToArray()).TrimStart('/').TrimStart('\\');
+                    string fileName = Path.GetFileName(destinationFile);
+
+                    if (!angularUiCleanupDone && destinationFolder == "app" && fileName.EndsWith(".js"))
+                    {
+                        LogMessage("+ New Angular UI file detected. Cleaning up all old UI bundles...");
+                        try
+                        {
+                            string appDirectory = Path.GetDirectoryName(destinationFile);
+                            if (Directory.Exists(appDirectory))
+                            {
+                                string[] oldJsFiles = Directory.GetFiles(appDirectory, "*.js", SearchOption.TopDirectoryOnly);
+                                foreach (string oldFile in oldJsFiles)
+                                {
+                                    LogMessage($"- Deleting old UI file '{oldFile}'");
+                                    File.Delete(oldFile);
+                                }
+                            }
+                            angularUiCleanupDone = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            LogMessage($"! Warning: Could not clean up old UI files. {ex.Message}");
+                        }
+                    }
 
                     // Update file only if different from local one
                     bool processFile = false;
@@ -869,7 +894,7 @@ namespace HomeGenie.Service
 
             if (!success)
             {
-                LogMessage("+ ERROR updating Automation Programs");
+                LogMessage("! ERROR updating Automation Programs");
             }
             return success;
         }

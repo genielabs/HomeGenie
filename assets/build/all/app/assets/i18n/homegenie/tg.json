@@ -55,7 +55,7 @@
   "cronwizard_end_time": "Вақти анҷом",
   "cronwizard_minutes": "Дакикахо",
   "cronwizard_hours": "Соатхо",
-  "cronwizard_days": "Рузхо",
+  "cronwizard_days": "Рӯзҳо",
   "cronwizard_months": "Моххо",
   "cronwizard_minuteselect_everyminute": "Ҳар дақиқа",
   "cronwizard_minuteselect_everynthminute": "Ҳар дақиқаи додашуда",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Моҳҳои интихобшуда",
   "cronwizard_schedule_set_exact_time": "Вақти ҳодисаро таъин кунед.",
   "cronwizard_schedule_set_slot_start": "Оғози вақтро таъин кунед.",
-  "cronwizard_schedule_set_slot_end": "Сар аз {{start}} .<span class=\"notranslate\"><br/></span> Анҷоми вақтро таъин кунед.",
+  "cronwizard_schedule_set_slot_end": "Сар аз {{start}}.<span class=\"notranslate\"><br/></span> Анҷоми вақтро таъин кунед.",
   "cronwizard_bindings_define_types_and_modules": "Муайян кардани намудҳо ва модулҳое, ки ба ин ҷадвал тобеъанд (ихтиёрӣ)",
   "cronwizard_bindings_select_types": "Навъҳоро интихоб кунед",
   "cronwizard_action_set_action_to_execute": "Барои иҷро кардани рӯйдодҳои ин ҳодиса амал таъин кунед",
@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "Дар охири фосилаи вақт",
   "cronwizard_action_custom_script": "Скрипти амали фармоишӣ",
   "cronwizard_action_no_action": "Амал нест",
-  "cronwizard_action_schedule_variable_hint": "Барои истинод ба ин ҳодиса, <span class=\"notranslate color-primary\">@ {{name}}</span> ҳамчун тағирёбанда дар ифодаҳои cron истифода баред ё <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@ {{name}}\")</span> дар барномаҳои автоматикунонӣ истифода баред.",
+  "cronwizard_action_schedule_variable_hint": "<span class=\"notranslate color-primary\">@{{name}}</span>-ро ҳамчун тағирёбанда дар ифодаҳои cron истифода баред ё <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> -ро дар барномаҳои автоматизатсия барои истинод ба ин ҳодиса истифода баред.",
   "scheduler_preset_action_command_turn_on": "Даргирондан",
   "scheduler_preset_action_command_turn_off": "Хомӯш кардан",
   "scheduler_preset_action_command_set_level": "Сатҳи муқаррар кунед",
@@ -170,7 +170,7 @@
       "ConfigureOptions.ImportExternal": "Воридоти модулҳои беруна"
     },
     "78": {
-      "Title": "Термостат интеллектуалӣ",
+      "Title": "Смарт термостат",
       "Description": "Барои амалӣ кардани функсияи термостат ҳама гуна сенсори ҳарорат ва гузариши интеллектуалиро истифода баред.",
       "VirtualThermostat.TemperatureModule": "Сенсори ҳарорат",
       "VirtualThermostat.HeatingSwitchModule": "Калиди гармидиҳӣ",
@@ -192,7 +192,7 @@
     "88": {
       "Title": "Камераи умумӣ IP",
       "Description": "Намоиш / масир канали тасвир аз камераи IP.",
-      "IpCamera.ImageURL": "API-и тасвири камера (ба ҳуҷҷатҳои камераи худ нигаред)",
+      "IpCamera.ImageURL": "URL-и тасвири камера (ба ҳуҷҷатҳои камераи худ нигаред)",
       "IpCamera.Username": "Номи корбар (ихтиёрӣ)",
       "IpCamera.Password": "Рамз (ихтиёрӣ)",
       "Widget.Config.fps": "Чорчубахо дар як сония",
@@ -200,7 +200,7 @@
     },
     "90": {
       "Title": "Системаи огоҳкунии амният",
-      "Description": "Барои татбиқи системаи ҳушдордиҳии амниятӣ сенсорҳо ва дигар дастгоҳҳоро истифода баред.",
+      "Description": "Барои татбиқи системаи ҳушдордиҳии бехатарӣ сенсорҳо ва дигар дастгоҳҳоро истифода баред.",
       "HomeGenie.SecurityAlarm": "Ҳамчун ҳушдор/строб истифода баред",
       "HomeGenie.SecurityTriggerHome": "Инчунин ҳангоми мусаллаҳ кардани Home",
       "HomeGenie.SecuritySensor": "Ҳамчун сенсори амниятӣ истифода баред",
@@ -237,7 +237,7 @@
     },
     "402": {
       "Title": "Намоиш - Ҳаракат муайян карда шуд",
-      "Description": "Муайянкунии ҳаракати сенсори бисёрсоҳаи намоиширо тақлид мекунад."
+      "Description": "Муайян кардани ҳаракати намоишии бисёрсенсорро тақлид мекунад."
     },
     "410": {
       "Title": "Симулятори сенсор",
@@ -265,7 +265,7 @@
       "ConfigureOptions.Email.SmtpServer": "2. Суроғаи сервери SMTP",
       "ConfigureOptions.Email.SmtpUserName": "3. Номи корбари SMTP (ихтиёрӣ)",
       "ConfigureOptions.Email.SmtpPassword": "4. Пароли SMTP (ихтиёрӣ)",
-      "ConfigureOptions.Email.SmtpPort": "5. Порт-сервери SMTP",
+      "ConfigureOptions.Email.SmtpPort": "5. Порти сервери SMTP",
       "ConfigureOptions.Email.SmtpUseSsl": "6. Сервери SMTP SSL-ро истифода мебарад"
     },
     "145": {
@@ -300,6 +300,12 @@
       "Description": "Бо истифода аз модели қаблан омӯзонидашудаи YOLO11 объектҳо ва контурҳои онҳоро муайян кунед.",
       "ML.InstanceSegmentation": "Сегментизатсияи мисолҳоро фаъол созед",
       "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO11 (.onnx)"
+    },
+    "930": {
+      "Title": "Идоракунандаи нияти Gemini",
+      "Description": "Бо истифода аз Gemini AI-и Google назорати забони табииро барои системаи интеллектуалии шумо имкон медиҳад. Барои фаъол кардани ин хусусият, калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API дастурҳоро дар https://aistudio.google.com/app/apikey иҷро кунед.",
+      "ConfigureOptions.ApiKey": "Калиди API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Модели ID"
     }
   }
 }

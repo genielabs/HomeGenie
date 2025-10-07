@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Wedzera mudziyo",
-  "node_exclusion": "Bvisa mudziyo",
-  "operation_timed_out": "Operation yakapera.",
-  "node_added": "Yakawedzera node",
-  "turn_on_device_to_add": "Chinja pamudziyo wodzvanya bhatani rekubatanidza kwemasekonzi mashanu kana zvichidikanwa",
-  "soft_reset_button": "Soft reset"
-}
