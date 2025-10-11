@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Mu ṣiṣẹ/Pa titẹ gigun lati tun awọn ẹrọ ailorukọ to",
+  "$alarm_system": {
+    "arm_home": "Ile",
+    "arm_away": "Kuro"
+  },
+  "$section_label": {
+    "label": "Aami",
+    "indicators": "Awọn itọkasi",
+    "lights_control": "Awọn imọlẹ",
+    "switches_control": "Yipada"
+  }
+}

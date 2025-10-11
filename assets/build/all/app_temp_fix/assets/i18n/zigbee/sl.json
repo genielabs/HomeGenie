@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Dodajte napravo",
+  "node_exclusion": "Odstranite napravo",
+  "operation_timed_out": "Časovna omejitev operacije je potekla.",
+  "node_added": "Vozlišče je bilo uspešno dodano",
+  "turn_on_device_to_add": "Vklopite napravo in po potrebi pritisnite gumb za seznanjanje za 5 sekund",
+  "soft_reset_button": "Mehka ponastavitev"
+}

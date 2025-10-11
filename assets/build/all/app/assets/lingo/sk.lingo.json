@@ -1,0 +1,74 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "zapni",
+        "aktivuj",
+        "otvor"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "vypni",
+        "deaktivuj",
+        "zatvor"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "úroveň",
+        "nastav"
+      ],
+      "ExpectsValue": "number"
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "prepni",
+        "zmeň"
+      ]
+    },
+    {
+      "Command": "Programs.Run",
+      "Aliases": [
+        "spusti",
+        "štart",
+        "prehraj"
+      ]
+    },
+    {
+      "Command": "Programs.Break",
+      "Aliases": [
+        "zastav",
+        "stop",
+        "preruš",
+        "zruš"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "všetky svetlá",
+        "svetlá",
+        "každé svetlo",
+        "osvetlenie"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "všetky vypínače",
+        "vypínače",
+        "každý vypínač",
+        "všetky zásuvky",
+        "zásuvky",
+        "každá zásuvka"
+      ]
+    }
+  ]
+}

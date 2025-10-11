@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Vremenski raspon",
+  "stats.one_second": "Jedna sekunda",
+  "stats.five_seconds": "5 sekundi",
+  "stats.ten_seconds": "10 sekundi",
+  "stats.half_minute": "30 sekundi",
+  "stats.one_minute": "Jedna minuta",
+  "stats.ten_minutes": "10 minuta",
+  "stats.half_hour": "30 minuta",
+  "stats.one_hour": "Jedan sat",
+  "stats.three_hours": "3 sata",
+  "stats.six_hours": "6 sati",
+  "stats.twelve_hours": "12 sati",
+  "stats.twentyfour_hours": "24 sata",
+  "stats.chart_provider": "Dobavljač grafikona"
+}

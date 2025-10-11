@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "நேர வரம்பு",
+  "stats.one_second": "ஒரு வினாடி",
+  "stats.five_seconds": "5 வினாடிகள்",
+  "stats.ten_seconds": "10 வினாடிகள்",
+  "stats.half_minute": "30 வினாடிகள்",
+  "stats.one_minute": "ஒரு நிமிடம்",
+  "stats.ten_minutes": "10 நிமிடங்கள்",
+  "stats.half_hour": "30 நிமிடங்கள்",
+  "stats.one_hour": "ஒரு மணி நேரம்",
+  "stats.three_hours": "3 மணி நேரம்",
+  "stats.six_hours": "6 மணி நேரம்",
+  "stats.twelve_hours": "12 மணி நேரம்",
+  "stats.twentyfour_hours": "24 மணி நேரம்",
+  "stats.chart_provider": "விளக்கப்பட வழங்குநர்"
+}

@@ -1,0 +1,75 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "nyalakan",
+        "hidupkan",
+        "aktifkan",
+        "buka"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "matikan",
+        "padamkan",
+        "tutup"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "tahap",
+        "laraskan",
+        "tetapkan"
+      ],
+      "ExpectsValue": "number"
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "tukar",
+        "alih"
+      ]
+    },
+    {
+      "Command": "Programs.Run",
+      "Aliases": [
+        "jalankan",
+        "mulakan",
+        "mainkan"
+      ]
+    },
+    {
+      "Command": "Programs.Break",
+      "Aliases": [
+        "hentikan",
+        "berhenti",
+        "batalkan"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "semua lampu",
+        "lampu-lampu",
+        "setiap lampu",
+        "pencahayaan"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "semua suis",
+        "suis-suis",
+        "setiap suis",
+        "semua soket",
+        "soket-soket",
+        "setiap soket"
+      ]
+    }
+  ]
+}

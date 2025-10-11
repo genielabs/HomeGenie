@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Виджеттерди иреттөө үчүн көпкө басууну иштетүү/өчүрүү",
+  "$alarm_system": {
+    "arm_home": "Үй",
+    "arm_away": "Алыста"
+  },
+  "$section_label": {
+    "label": "Белги",
+    "indicators": "Көрсөткүчтөр",
+    "lights_control": "Жарыктар",
+    "switches_control": "Которгучтар"
+  }
+}

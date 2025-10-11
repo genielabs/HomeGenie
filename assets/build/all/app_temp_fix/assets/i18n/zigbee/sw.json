@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Ongeza kifaa",
+  "node_exclusion": "Ondoa kifaa",
+  "operation_timed_out": "Muda wa operesheni umekwisha.",
+  "node_added": "Imefaulu kuongeza nodi",
+  "turn_on_device_to_add": "Washa kifaa na ubonyeze kitufe cha kuoanisha kwa sekunde 5 ikiwa inahitajika",
+  "soft_reset_button": "Weka upya laini"
+}

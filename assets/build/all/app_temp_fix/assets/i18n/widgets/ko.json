@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "위젯을 다시 정렬하기 위해 길게 누르기 활성화/비활성화",
+  "$alarm_system": {
+    "arm_home": "집",
+    "arm_away": "떨어져 있는"
+  },
+  "$section_label": {
+    "label": "상표",
+    "indicators": "지표",
+    "lights_control": "허파",
+    "switches_control": "스위치"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "ۋاقىت دائىرىسى",
+  "stats.one_second": "بىر سېكۇنت",
+  "stats.five_seconds": "5 سېكۇنت",
+  "stats.ten_seconds": "10 سېكۇنت",
+  "stats.half_minute": "30 سېكۇنت",
+  "stats.one_minute": "بىر مىنۇت",
+  "stats.ten_minutes": "10 مىنۇت",
+  "stats.half_hour": "30 مىنۇت",
+  "stats.one_hour": "بىر سائەت",
+  "stats.three_hours": "3 سائەت",
+  "stats.six_hours": "6 سائەت",
+  "stats.twelve_hours": "12 سائەت",
+  "stats.twentyfour_hours": "24 سائەت",
+  "stats.chart_provider": "دىئاگرامما تەمىنلىگۈچى"
+}

@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Onjezani chipangizo",
+  "node_exclusion": "Chotsani chipangizo",
+  "operation_timed_out": "Ntchito yatha.",
+  "node_added": "Kuwonjeza bwino mfundo",
+  "turn_on_device_to_add": "Yatsani chipangizocho ndikusindikiza batani loyanjanitsa kwa masekondi 5 ngati pakufunika",
+  "soft_reset_button": "Kukhazikitsanso kofewa"
+}

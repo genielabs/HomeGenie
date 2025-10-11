@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "විජට් නැවත ඇණවුම් කිරීමට දිගු එබීම සක්‍රිය/අක්‍රිය කරන්න",
+  "$alarm_system": {
+    "arm_home": "මුල් පිටුව",
+    "arm_away": "ඉවතට"
+  },
+  "$section_label": {
+    "label": "ලේබලය",
+    "indicators": "දර්ශක",
+    "lights_control": "ලයිට්",
+    "switches_control": "ස්විච"
+  }
+}

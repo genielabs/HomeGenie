@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Legg til enhet",
+  "node_exclusion": "Fjern enheten",
+  "operation_timed_out": "Driften ble tidsavbrutt.",
+  "node_added": "Node er lagt til",
+  "turn_on_device_to_add": "Slå på enheten og trykk på sammenkoblingsknappen i 5 sekunder om nødvendig",
+  "soft_reset_button": "Myk tilbakestilling"
+}

@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "ເປີດ/ປິດການກົດຄ້າງໄວ້ເພື່ອຈັດຮຽງວິດເຈັດຄືນໃໝ່",
+  "$alarm_system": {
+    "arm_home": "ບ້ານ",
+    "arm_away": "ຫ່າງ"
+  },
+  "$section_label": {
+    "label": "ປ້າຍກຳກັບ",
+    "indicators": "ຕົວຊີ້ວັດ",
+    "lights_control": "ແສງໄຟ",
+    "switches_control": "ສະວິດ"
+  }
+}

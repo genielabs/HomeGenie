@@ -1,0 +1,81 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "tænd",
+        "slå til",
+        "sæt på",
+        "aktiver",
+        "åbn"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "sluk",
+        "slå fra",
+        "deaktiver",
+        "luk"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "niveau",
+        "indstil",
+        "sæt",
+        "dæmp"
+      ],
+      "ExpectsValue": "number"
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "skift",
+        "ændr",
+        "vend om"
+      ]
+    },
+    {
+      "Command": "Programs.Run",
+      "Aliases": [
+        "kør",
+        "start",
+        "afspil"
+      ]
+    },
+    {
+      "Command": "Programs.Break",
+      "Aliases": [
+        "stop",
+        "afbryd",
+        "annuller"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "alle lamper",
+        "lamper",
+        "alle lys",
+        "lys",
+        "hver lampe",
+        "belysning"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "alle kontakter",
+        "kontakter",
+        "hver kontakt",
+        "alle stikkontakter",
+        "stikkontakter",
+        "hver stikkontakt"
+      ]
+    }
+  ]
+}

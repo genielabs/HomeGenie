@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Activa/Desactiva la pulsació llarga per reordenar els widgets",
+  "$alarm_system": {
+    "arm_home": "Inici",
+    "arm_away": "Lluny"
+  },
+  "$section_label": {
+    "label": "Etiqueta",
+    "indicators": "Indicadors",
+    "lights_control": "Llums",
+    "switches_control": "Interruptors"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Widget'ları yeniden sıralamak için uzun basmayı etkinleştir/devre dışı bırak",
+  "$alarm_system": {
+    "arm_home": "Ev",
+    "arm_away": "Uzak"
+  },
+  "$section_label": {
+    "label": "Etiket",
+    "indicators": "Göstergeler",
+    "lights_control": "Işıklar",
+    "switches_control": "Anahtarlar"
+  }
+}

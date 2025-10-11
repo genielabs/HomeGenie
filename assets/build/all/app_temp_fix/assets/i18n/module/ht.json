@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Ranje tan",
+  "stats.one_second": "Yon segonn",
+  "stats.five_seconds": "5 segonn",
+  "stats.ten_seconds": "10 segonn",
+  "stats.half_minute": "30 segonn",
+  "stats.one_minute": "Yon minit",
+  "stats.ten_minutes": "10 minit",
+  "stats.half_hour": "30 minit",
+  "stats.one_hour": "Yon èdtan",
+  "stats.three_hours": "3 èdtan",
+  "stats.six_hours": "6 èdtan",
+  "stats.twelve_hours": "12 èdtan",
+  "stats.twentyfour_hours": "24 èdtan",
+  "stats.chart_provider": "Founisè tablo"
+}

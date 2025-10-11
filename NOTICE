@@ -1,18 +1,38 @@
 HomeGenie
-Copyright 2012-2025 G-Labs (https://github.com/genielabs)
-
-This product includes software developed by third parties and other components
-developed by G-Labs. The following is a list of these components and their licenses.
+Copyright 2012-2025 G-Labs (https://github.com/genielabs/HomeGenie)
 
 ================================================================================
-1.  Software under the Apache License, Version 2.0
+1.  HomeGenie Server License
 ================================================================================
 
-This product includes software developed by the Apache Software Foundation
-(http://www.apache.org/) and other third parties. You may obtain a copy of
-the license at http://www.apache.org/licenses/LICENSE-2.0.
+The HomeGenie Server software contained in this repository is licensed under the
+GNU Affero General Public License, Version 3.0 (AGPL-3.0). This change was made
+to comply with the licensing requirements of its dependencies.
 
-The following components are licensed under the Apache License 2.0:
+You may obtain a copy of the license at:
+https://www.gnu.org/licenses/agpl-3.0.html
+
+================================================================================
+2.  Third-Party and G-Labs Library Components
+================================================================================
+
+This product includes software developed by G-Labs and other third parties.
+The following is a list of these components and their respective licenses.
+
+--------------------------------------------------------------------------------
+2.1. Software under GNU AGPL-3.0
+--------------------------------------------------------------------------------
+
+  - YoloSharp (Copyright (c) 2023-2025 Andrew Bale)
+  - Pre-trained YOLO models (Copyright © Ultralytics)
+
+--------------------------------------------------------------------------------
+2.2. Software under the Apache License, Version 2.0
+--------------------------------------------------------------------------------
+
+A copy of the license is available at http://www.apache.org/licenses/LICENSE-2.0.
+
+  - GLabs.Logging (Copyright © 2025 G-Labs)
   - IronPython (Copyright © Microsoft Corporation.)
   - IronPython.StdLib (Copyright © Microsoft Corporation.)
   - Jint (Copyright © Sébastien Ros)
@@ -21,70 +41,45 @@ The following components are licensed under the Apache License 2.0:
   - NCrontab (Copyright 2011-2014 Atif Aziz, 2017-2020 Contrib. Josip Medved)
   - SuperSocket.ClientEngine.Core (Copyright 2009-2017 Kerry Jiang)
 
-================================================================================
-2.  SixLabors.ImageSharp
-================================================================================
+--------------------------------------------------------------------------------
+2.3. SixLabors.ImageSharp
+--------------------------------------------------------------------------------
 
-This product includes SixLabors.ImageSharp, which is licensed under the
-Six Labors Split License, Version 1.0. The license is based on the
-Apache License 2.0.
-
-A copy of the license can be found at:
-https://github.com/SixLabors/ImageSharp/blob/main/LICENSE
-
+Licensed under the Six Labors Split License, Version 1.0 (based on Apache 2.0).
+License: https://github.com/SixLabors/ImageSharp/blob/main/LICENSE
 Copyright © Six Labors
 
-================================================================================
-3.  SolarCalculator
-================================================================================
+--------------------------------------------------------------------------------
+2.4. Software under GNU LGPL-3.0
+--------------------------------------------------------------------------------
 
-This product includes SolarCalculator, which is licensed under the
-GNU Lesser General Public License (LGPL) version 3.0 or later.
+A copy of the license is available at http://www.gnu.org/licenses/lgpl-3.0.html.
 
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public License
-as published by the Free Software Foundation; either version 3 of
-the License, or (at your option) any later version.
+  - SolarCalculator (Source: https://github.com/porrey/Solar-Calculator)
 
-A copy of the LGPLv3 license is available at:
-http://www.gnu.org/licenses/lgpl-3.0.html
+--------------------------------------------------------------------------------
+2.5. Software under MIT License
+--------------------------------------------------------------------------------
 
-Source code for SolarCalculator can be found at:
-https://github.com/porrey/Solar-Calculator
+A copy of the license is available at https://opensource.org/licenses/MIT.
 
-================================================================================
-4.  Software under MIT License
-================================================================================
-
-This product includes software licensed under the MIT license.
-A copy of the MIT license can be found at:
-https://opensource.org/licenses/MIT
-
-The following components are licensed under the MIT License:
   - CronExpressionDescriptor (Copyright (c) 2013-2018 Brady Holt)
-  - GLabs.Logging (Copyright © 2025 G-Labs)
-  - HG.NWaves (Copyright © 2018-2022 G-Labs)
-  - HG.Raspberry.IO.* and HG.Raspberry.System
-    This component is a fork of the raspberry-sharp-io project.
-    Original project: https://github.com/raspberry-sharp/raspberry-sharp-io
-    Original copyright: Copyright (c) 2014-2015, Eric Bezinè
-    Modifications copyright: Copyright © 2015-2022 G-Labs
   - LangChain (Copyright (c) 2023-2024 LangChain)
   - LiteDB (Copyright (c) 2023 Mauricio David)
   - LLamaSharp and related packages (Copyright 2023 The LLamaSharp Authors)
-  - Microsoft .NET, System.*, and related libraries (Copyright (c) .NET Foundation and Contributors)
-    - Includes Microsoft.ML, Microsoft.Extensions.*, System.Device.Gpio, etc.
+  - Microsoft .NET and related libraries (Copyright (c) .NET Foundation and Contributors)
   - MQTTnet (Copyright (c) 2016-2023 Christian Kratky)
   - OnvifDiscovery (Copyright (c) 2019 Roger Zander)
   - SharpZipLib (Copyright © 2000-2018 SharpZipLib Contributors)
   - UnitsNet (Copyright (c) 2013-2022, Anders Borum)
-  - YoloSharp (Copyright (c) 2023-2024 Andrew Bale)
+  - HG.NWaves (Copyright © 2018-2022 G-Labs)
+    This component is a fork of the NWaves project (Copyright (c) 2020 ar1st0crat),
+    which is licensed under the MIT License.
+    Original project: https://github.com/ar1st0crat/NWaves
 
-================================================================================
-5.  Other Licenses
-================================================================================
+--------------------------------------------------------------------------------
+2.6. Software under BSD Licenses
+--------------------------------------------------------------------------------
 
-  - CommonMark.NET: BSD-3-Clause License
-    Copyright (c) 2014, Kārlis Gaņģis
-  - Esprima: BSD-2-Clause License
-    Copyright (c) 2012-2017, Ariya Hidayat, various contributors
+  - CommonMark.NET: BSD-3-Clause License (Copyright (c) 2014, Kārlis Gaņģis)
+  - Esprima: BSD-2-Clause License (Copyright (c) 2012-2017, Ariya Hidayat, various contributors)

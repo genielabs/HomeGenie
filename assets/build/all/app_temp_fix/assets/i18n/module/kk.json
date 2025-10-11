@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Уақыт аралығы",
+  "stats.one_second": "Бір секунд",
+  "stats.five_seconds": "5 секунд",
+  "stats.ten_seconds": "10 секунд",
+  "stats.half_minute": "30 секунд",
+  "stats.one_minute": "Бір минут",
+  "stats.ten_minutes": "10 минут",
+  "stats.half_hour": "30 минут",
+  "stats.one_hour": "Бір сағат",
+  "stats.three_hours": "3 сағат",
+  "stats.six_hours": "6 сағат",
+  "stats.twelve_hours": "12 сағат",
+  "stats.twentyfour_hours": "24 сағат",
+  "stats.chart_provider": "Диаграмма провайдері"
+}

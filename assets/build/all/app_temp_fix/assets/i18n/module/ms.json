@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Julat masa",
+  "stats.one_second": "Satu saat",
+  "stats.five_seconds": "5 saat",
+  "stats.ten_seconds": "10 saat",
+  "stats.half_minute": "30 saat",
+  "stats.one_minute": "Satu minit",
+  "stats.ten_minutes": "10 minit",
+  "stats.half_hour": "30 minit",
+  "stats.one_hour": "Satu jam",
+  "stats.three_hours": "3 jam",
+  "stats.six_hours": "6 jam",
+  "stats.twelve_hours": "12 jam",
+  "stats.twentyfour_hours": "24 jam",
+  "stats.chart_provider": "Pembekal carta"
+}

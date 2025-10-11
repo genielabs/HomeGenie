@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Увімкнути/вимкнути тривале натискання для зміни порядку віджетів",
+  "$alarm_system": {
+    "arm_home": "Дім",
+    "arm_away": "У гостях"
+  },
+  "$section_label": {
+    "label": "Мітка",
+    "indicators": "Індикатори",
+    "lights_control": "Вогні",
+    "switches_control": "Перемикачі"
+  }
+}

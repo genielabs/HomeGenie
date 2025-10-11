@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Gama kohore",
+  "stats.one_second": "Një sekondë",
+  "stats.five_seconds": "5 sekonda",
+  "stats.ten_seconds": "10 sekonda",
+  "stats.half_minute": "30 sekonda",
+  "stats.one_minute": "Një minutë",
+  "stats.ten_minutes": "10 minuta",
+  "stats.half_hour": "30 minuta",
+  "stats.one_hour": "Një orë",
+  "stats.three_hours": "3 orë",
+  "stats.six_hours": "6 orë",
+  "stats.twelve_hours": "12 orë",
+  "stats.twentyfour_hours": "24 orë",
+  "stats.chart_provider": "Ofruesi i grafikut"
+}

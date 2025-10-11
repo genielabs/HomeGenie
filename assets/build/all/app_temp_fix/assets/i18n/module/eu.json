@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Denbora tartea",
+  "stats.one_second": "Segundo bat",
+  "stats.five_seconds": "5 segundo",
+  "stats.ten_seconds": "10 segundo",
+  "stats.half_minute": "30 segundo",
+  "stats.one_minute": "Minutu bat",
+  "stats.ten_minutes": "10 minutu",
+  "stats.half_hour": "30 minutu",
+  "stats.one_hour": "Ordubete",
+  "stats.three_hours": "3 ordu",
+  "stats.six_hours": "6 ordu",
+  "stats.twelve_hours": "12 ordu",
+  "stats.twentyfour_hours": "24 ordu",
+  "stats.chart_provider": "Diagrama hornitzailea"
+}

@@ -1,0 +1,30 @@
+{
+  "stats.time_range":
+    "Intervallo",
+  "stats.one_second":
+    "Un secondo",
+  "stats.five_seconds":
+    "5 secondi",
+  "stats.ten_seconds":
+    "10 secondi",
+  "stats.half_minute":
+    "30 secondi",
+  "stats.one_minute":
+    "Un minuto",
+  "stats.ten_minutes":
+    "10 minuti",
+  "stats.half_hour":
+    "30 minuti",
+  "stats.one_hour":
+    "Un'ora",
+  "stats.three_hours":
+    "3 ore",
+  "stats.six_hours":
+    "6 ore",
+  "stats.twelve_hours":
+    "12 ore",
+  "stats.twentyfour_hours":
+    "24 ore",
+  "stats.chart_provider":
+    "Chart provider"
+}

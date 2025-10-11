@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Hosszan lenyomva tartás engedélyezése/letiltása a widgetek átrendezéséhez",
+  "$alarm_system": {
+    "arm_home": "Otthon",
+    "arm_away": "El"
+  },
+  "$section_label": {
+    "label": "Címke",
+    "indicators": "Indikátorok",
+    "lights_control": "Fények",
+    "switches_control": "Kapcsolók"
+  }
+}

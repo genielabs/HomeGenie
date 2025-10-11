@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Ystod amser",
+  "stats.one_second": "Un eiliad",
+  "stats.five_seconds": "5 eiliad",
+  "stats.ten_seconds": "10 eiliad",
+  "stats.half_minute": "30 eiliad",
+  "stats.one_minute": "Un funud",
+  "stats.ten_minutes": "10 munud",
+  "stats.half_hour": "30 munud",
+  "stats.one_hour": "Un awr",
+  "stats.three_hours": "3 awr",
+  "stats.six_hours": "6 awr",
+  "stats.twelve_hours": "12 awr",
+  "stats.twentyfour_hours": "24 awr",
+  "stats.chart_provider": "Darparwr siart"
+}

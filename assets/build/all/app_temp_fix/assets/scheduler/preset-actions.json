@@ -1,0 +1,100 @@
+[
+  {
+    "id": "command_turn_on",
+    "script": "$$.boundModules.on();\n"
+  },
+  {
+    "id": "command_turn_off",
+    "script": "$$.boundModules.off();\n"
+  },
+  {
+    "id": "command_set_level",
+    "script": "$$.boundModules.level = $level$;\n",
+    "config": {
+      "level": {
+        "type": "slider",
+        "options": {
+          "min": 0,
+          "max": 100,
+          "step": 1
+        },
+        "value": 0
+      }
+    }
+  },
+  {
+    "id": "command_set_color",
+    "script": "$$.boundModules.colorHsb = '$color$';\n",
+    "config": {
+      "color": {
+        "type": "color",
+        "value": "#ff0000",
+        "transform": "rgb:hsb"
+      }
+    }
+  },
+  {
+    "id": "command_thermostat_mode",
+    "script": "$$.boundModules\n  .command('Thermostat.ModeSet')\n  .submit('$mode$');\n",
+    "config": {
+      "mode": {
+        "type": "select",
+        "options": [
+          {
+            "id": "off",
+            "value": "Off"
+          },
+          {
+            "id": "heat",
+            "value": "Heat"
+          },
+          {
+            "id": "heat_eco",
+            "value": "HeatEconomy"
+          },
+          {
+            "id": "cool",
+            "value": "Cool"
+          },
+          {
+            "id": "cool_eco",
+            "value": "CoolEconomy"
+          }
+        ],
+        "value": "Off"
+      }
+    }
+  },
+  {
+    "id": "program_run",
+    "script": "$$.program.run('$program$', '$options$');\n",
+    "config": {
+      "program": {
+        "options": {
+        },
+        "type": "program-select",
+        "value": 0
+      },
+      "options": {
+        "options": {
+          "maxLength": 200
+        },
+        "type": "text",
+        "value": ""
+      }
+    }
+  },
+  {
+    "id": "program_say",
+    "script": "$$.program.say('$message$');\n",
+    "config": {
+      "message": {
+        "options": {
+          "maxLength": 200
+        },
+        "type": "text",
+        "value": ""
+      }
+    }
+  }
+]

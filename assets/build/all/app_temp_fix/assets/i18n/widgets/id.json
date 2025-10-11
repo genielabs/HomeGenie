@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Aktifkan/Nonaktifkan tekan lama untuk menyusun ulang widget",
+  "$alarm_system": {
+    "arm_home": "Rumah",
+    "arm_away": "Jauh"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Indikator",
+    "lights_control": "Lampu",
+    "switches_control": "Saklar"
+  }
+}

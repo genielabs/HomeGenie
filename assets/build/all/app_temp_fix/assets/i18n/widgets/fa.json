@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "فعال/غیرفعال کردن لمس طولانی برای تغییر ترتیب ویجت‌ها",
+  "$alarm_system": {
+    "arm_home": "خانه",
+    "arm_away": "دور"
+  },
+  "$section_label": {
+    "label": "برچسب",
+    "indicators": "شاخص‌ها",
+    "lights_control": "چراغ‌ها",
+    "switches_control": "سوئیچ‌ها"
+  }
+}

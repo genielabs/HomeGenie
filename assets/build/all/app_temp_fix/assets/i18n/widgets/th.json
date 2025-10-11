@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "เปิด/ปิดการกดยาวเพื่อเรียงลำดับวิดเจ็ตใหม่",
+  "$alarm_system": {
+    "arm_home": "บ้าน",
+    "arm_away": "ห่างออกไป"
+  },
+  "$section_label": {
+    "label": "ฉลาก",
+    "indicators": "ตัวบ่งชี้",
+    "lights_control": "ไฟส่องสว่าง",
+    "switches_control": "สวิตซ์"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Időtartomány",
+  "stats.one_second": "Egy másodperc",
+  "stats.five_seconds": "5 másodperc",
+  "stats.ten_seconds": "10 másodperc",
+  "stats.half_minute": "30 másodperc",
+  "stats.one_minute": "Egy perc",
+  "stats.ten_minutes": "10 perc",
+  "stats.half_hour": "30 perc",
+  "stats.one_hour": "Egy óra",
+  "stats.three_hours": "3 óra",
+  "stats.six_hours": "6 óra",
+  "stats.twelve_hours": "12 óra",
+  "stats.twentyfour_hours": "24 óra",
+  "stats.chart_provider": "Diagram szolgáltató"
+}

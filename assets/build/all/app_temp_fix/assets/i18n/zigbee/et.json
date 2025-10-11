@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Lisa seade",
+  "node_exclusion": "Eemaldage seade",
+  "operation_timed_out": "Toiming aegus.",
+  "node_added": "Sõlme lisamine õnnestus",
+  "turn_on_device_to_add": "Lülitage seade sisse ja vajutage vajadusel sidumisnuppu 5 sekundit",
+  "soft_reset_button": "Pehme lähtestamine"
+}

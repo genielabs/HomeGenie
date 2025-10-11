@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "ವಿಜೆಟ್‌ಗಳನ್ನು ಮರುಕ್ರಮಗೊಳಿಸಲು ದೀರ್ಘವಾಗಿ ಒತ್ತುವುದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ/ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+  "$alarm_system": {
+    "arm_home": "ಮರಳಿ ಪ್ರಥಮ ಪುಟಕ್ಕೆ",
+    "arm_away": "ದೂರ"
+  },
+  "$section_label": {
+    "label": "ಲೇಬಲ್",
+    "indicators": "ಸೂಚಕಗಳು",
+    "lights_control": "ದೀಪಗಳು",
+    "switches_control": "ಸ್ವಿಚ್‌ಗಳು"
+  }
+}

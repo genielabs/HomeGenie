@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Tambahkan perangkat",
+  "node_exclusion": "Hapus perangkat",
+  "operation_timed_out": "Waktu operasi habis.",
+  "node_added": "Berhasil menambahkan node",
+  "turn_on_device_to_add": "Nyalakan perangkat dan tekan tombol pairing selama 5 detik jika diperlukan",
+  "soft_reset_button": "Atur ulang lunak"
+}

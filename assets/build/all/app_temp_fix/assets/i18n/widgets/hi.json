@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "विजेट को पुनः क्रमित करने के लिए लंबे समय तक प्रेस को सक्षम/अक्षम करें",
+  "$alarm_system": {
+    "arm_home": "घर",
+    "arm_away": "दूर"
+  },
+  "$section_label": {
+    "label": "लेबल",
+    "indicators": "संकेतक",
+    "lights_control": "दीपक",
+    "switches_control": "स्विच"
+  }
+}

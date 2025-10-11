@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Habilitar/Desabilitar toque longo para reordenar widgets",
+  "$alarm_system": {
+    "arm_home": "Lar",
+    "arm_away": "Ausente"
+  },
+  "$section_label": {
+    "label": "Rótulo",
+    "indicators": "Indicadores",
+    "lights_control": "Luzes",
+    "switches_control": "Interruptores"
+  }
+}

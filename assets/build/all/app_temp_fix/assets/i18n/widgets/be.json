@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Уключыць/адключыць доўгае націсканне для змены парадку віджэтаў",
+  "$alarm_system": {
+    "arm_home": "Галоўная",
+    "arm_away": "У гасцях"
+  },
+  "$section_label": {
+    "label": "Этыкетка",
+    "indicators": "Паказчыкі",
+    "lights_control": "Агні",
+    "switches_control": "Перамыкачы"
+  }
+}

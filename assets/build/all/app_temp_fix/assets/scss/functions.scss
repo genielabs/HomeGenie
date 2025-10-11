@@ -1,0 +1,75 @@
+@mixin generate-theme-vars($theme) {
+  //default palette foreground/background:
+  $foreground-palette: map-get($theme, foreground);
+  $background-palette: map-get($theme, background);
+
+  /////////////////////////////////////////////////
+  // SCSS VARS
+  /////////////////////////////////////////////////
+
+  $primary: mat-color(map-get($theme, primary));
+  $accent: mat-color(map-get($theme, accent));
+  $warn: mat-color(map-get($theme, warn));
+
+  $base: mat-color($foreground-palette, base);
+  $divider: mat-color($foreground-palette, divider);
+  $dividers: mat-color($foreground-palette, dividers);
+  $disabled: mat-color($foreground-palette, disabled);
+  $disabled-button: mat-color($foreground-palette, disabled-button);
+  $disabled-text: mat-color($foreground-palette, disabled-text);
+  $hint-text: mat-color($foreground-palette, hint-text);
+  $secondary-text: mat-color($foreground-palette, secondary-text);
+  $icon: mat-color($foreground-palette, icon);
+  $icons: mat-color($foreground-palette, icons);
+  $text: mat-color($foreground-palette, text);
+  $slider-off: mat-color($foreground-palette, slider-off);
+  $slider-off-active: mat-color($foreground-palette, slider-off-active);
+
+  $status-bar: mat-color($background-palette, status-bar);
+  $app-bar: mat-color($background-palette, app-bar);
+  $background: mat-color($background-palette, background);
+  $hover: mat-color($background-palette, hover);
+  $card: mat-color($background-palette, card);
+  $dialog: mat-color($background-palette, dialog);
+  $disabled-button: mat-color($background-palette, disabled-button);
+  $raised-button: mat-color($background-palette, raised-button);
+  $focused-button: mat-color($background-palette, focused-button);
+  $selected-button: mat-color($background-palette, selected-button);
+  $selected-disabled-button: mat-color($background-palette, selected-disabled-button);
+  $disabled-button-toggle: mat-color($background-palette, disabled-button-toggle);
+
+  /////////////////////////////////////////////////
+  // CSS VARS
+  /////////////////////////////////////////////////
+
+
+  --primary-color: #{$primary};
+  --accent-color: #{$accent};
+  --warn-color: #{$warn};
+
+  --base-color: #{$base};
+  --divider-color: #{$divider};
+  --dividers-color: #{$dividers};
+  --disabled-color: #{$disabled};
+  --disabled-text-color: #{$disabled-text};
+  --hint-text-color: #{$hint-text};
+  --secondary-text-color: #{$secondary-text};
+  --icon-color: #{$icon};
+  --icons-color: #{$icons};
+  --text-color: #{$text};
+  --slider-off-color: #{$slider-off};
+  --slider-off-active-color: #{$slider-off-active};
+
+  --status-bar-color: #{$status-bar};
+  --app-bar-color: #{$app-bar};
+  --background-color: #{$background};
+  --hover-color: #{$hover};
+  --card-color: #{$card};
+  --dialog-color: #{$dialog};
+  --disabled-button-color: #{$disabled-button};
+  --raised-button-color: #{$raised-button};
+  --focused-button-color: #{$focused-button};
+  --selected-button-color: #{$selected-button};
+  --selected-disabled-button-color: #{$selected-disabled-button};
+  --disabled-button-toggle-color: #{$disabled-button-toggle};
+}

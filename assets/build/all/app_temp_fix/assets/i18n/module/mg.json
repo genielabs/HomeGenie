@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Fe-potoana",
+  "stats.one_second": "Iray segondra",
+  "stats.five_seconds": "5 segondra",
+  "stats.ten_seconds": "10 segondra",
+  "stats.half_minute": "30 segondra",
+  "stats.one_minute": "Iray minitra",
+  "stats.ten_minutes": "10 minitra",
+  "stats.half_hour": "30 minitra",
+  "stats.one_hour": "adiny iray",
+  "stats.three_hours": "3 ora",
+  "stats.six_hours": "6 ora",
+  "stats.twelve_hours": "12 ora",
+  "stats.twentyfour_hours": "24 ora",
+  "stats.chart_provider": "Mpanome tabilao"
+}

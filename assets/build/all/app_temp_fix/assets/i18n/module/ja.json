@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "時間範囲",
+  "stats.one_second": "1秒",
+  "stats.five_seconds": "5秒",
+  "stats.ten_seconds": "10秒",
+  "stats.half_minute": "30秒",
+  "stats.one_minute": "1分",
+  "stats.ten_minutes": "10分",
+  "stats.half_hour": "30分",
+  "stats.one_hour": "1時間",
+  "stats.three_hours": "3時間",
+  "stats.six_hours": "6時間",
+  "stats.twelve_hours": "12時間",
+  "stats.twentyfour_hours": "24時間",
+  "stats.chart_provider": "チャートプロバイダー"
+}

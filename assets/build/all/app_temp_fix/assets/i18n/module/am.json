@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "የጊዜ ክልል",
+  "stats.one_second": "አንድ ሰከንድ",
+  "stats.five_seconds": "5 ሰከንድ",
+  "stats.ten_seconds": "10 ሰከንድ",
+  "stats.half_minute": "30 ሰከንድ",
+  "stats.one_minute": "አንድ ደቂቃ",
+  "stats.ten_minutes": "10 ደቂቃዎች",
+  "stats.half_hour": "30 ደቂቃዎች",
+  "stats.one_hour": "አንድ ሰዓት",
+  "stats.three_hours": "3 ሰዓታት",
+  "stats.six_hours": "6 ሰዓታት",
+  "stats.twelve_hours": "12 ሰዓታት",
+  "stats.twentyfour_hours": "24 ሰዓታት",
+  "stats.chart_provider": "ገበታ አቅራቢ"
+}

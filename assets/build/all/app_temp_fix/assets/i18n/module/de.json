@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Zeitspanne",
+  "stats.one_second": "Eine Sekunde",
+  "stats.five_seconds": "5 Sekunden",
+  "stats.ten_seconds": "10 Sekunden",
+  "stats.half_minute": "30 Sekunden",
+  "stats.one_minute": "Eine Minute",
+  "stats.ten_minutes": "10 Minuten",
+  "stats.half_hour": "30 Minuten",
+  "stats.one_hour": "Eine Stunde",
+  "stats.three_hours": "3 Stunden",
+  "stats.six_hours": "6 Stunden",
+  "stats.twelve_hours": "12 Stunden",
+  "stats.twentyfour_hours": "24 Stunden",
+  "stats.chart_provider": "Diagrammanbieter"
+}

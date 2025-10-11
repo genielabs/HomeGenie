@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Omogoči/onemogoči dolg pritisk za spreminjanje vrstnega reda pripomočkov",
+  "$alarm_system": {
+    "arm_home": "Domov",
+    "arm_away": "Stran"
+  },
+  "$section_label": {
+    "label": "Oznaka",
+    "indicators": "Kazalniki",
+    "lights_control": "Luči",
+    "switches_control": "Stikala"
+  }
+}

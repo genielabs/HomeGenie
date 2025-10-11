@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Engadir dispositivo",
+  "node_exclusion": "Elimina o dispositivo",
+  "operation_timed_out": "Esgotouse o tempo da operación.",
+  "node_added": "Engadiuse correctamente o nodo",
+  "turn_on_device_to_add": "Acende o dispositivo e preme o botón de sincronización durante 5 segundos se é necesario",
+  "soft_reset_button": "Reinicio suave"
+}

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Tydreeks",
+  "stats.one_second": "Een sekonde",
+  "stats.five_seconds": "5 sekondes",
+  "stats.ten_seconds": "10 sekondes",
+  "stats.half_minute": "30 sekondes",
+  "stats.one_minute": "Een minuut",
+  "stats.ten_minutes": "10 minute",
+  "stats.half_hour": "30 minute",
+  "stats.one_hour": "Een uur",
+  "stats.three_hours": "3 ure",
+  "stats.six_hours": "6 uur",
+  "stats.twelve_hours": "12 uur",
+  "stats.twentyfour_hours": "24 uur",
+  "stats.chart_provider": "Grafiekverskaffer"
+}

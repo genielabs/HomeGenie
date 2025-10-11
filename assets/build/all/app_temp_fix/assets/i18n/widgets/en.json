@@ -1,0 +1,15 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Enable/Disable long press to reorder widgets",
+  "$alarm_system": {
+    "arm_home":
+      "Home",
+    "arm_away":
+      "Away"
+  },
+  "$section_label": {
+    "label":"Label",
+    "indicators": "Indicators",
+    "lights_control": "Lights",
+    "switches_control": "Switches"
+  }
+}

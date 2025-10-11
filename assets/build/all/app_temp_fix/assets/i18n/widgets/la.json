@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Diu premere ut instrumenta ordines mutes permittas/inhibeas.",
+  "$alarm_system": {
+    "arm_home": "Domus",
+    "arm_away": "Absum"
+  },
+  "$section_label": {
+    "label": "Titulus",
+    "indicators": "Indicatores",
+    "lights_control": "Lumina",
+    "switches_control": "Commutatores"
+  }
+}

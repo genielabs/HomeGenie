@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Включить/выключить долгое нажатие для изменения порядка виджетов",
+  "$alarm_system": {
+    "arm_home": "Дом",
+    "arm_away": "Прочь"
+  },
+  "$section_label": {
+    "label": "Этикетка",
+    "indicators": "Индикаторы",
+    "lights_control": "Огни",
+    "switches_control": "Переключатели"
+  }
+}

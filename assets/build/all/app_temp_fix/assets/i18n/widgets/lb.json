@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Aktivéieren/Deaktivéieren Laang drécken fir Widgets nei ze reorganiséieren",
+  "$alarm_system": {
+    "arm_home": "Heem",
+    "arm_away": "ewech"
+  },
+  "$section_label": {
+    "label": "Etikett",
+    "indicators": "Indikatoren",
+    "lights_control": "Luuchten",
+    "switches_control": "Schalter"
+  }
+}

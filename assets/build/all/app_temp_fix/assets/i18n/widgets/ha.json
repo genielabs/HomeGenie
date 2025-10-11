@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Kunna/A kashe dogon latsa don sake yin odar widget din",
+  "$alarm_system": {
+    "arm_home": "Gida",
+    "arm_away": "Away"
+  },
+  "$section_label": {
+    "label": "Lakabi",
+    "indicators": "Manuniya",
+    "lights_control": "Haske",
+    "switches_control": "Sauyawa"
+  }
+}

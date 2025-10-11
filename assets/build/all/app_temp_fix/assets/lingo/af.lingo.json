@@ -1,0 +1,78 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "aanskakel",
+        "aansit",
+        "aktiveer",
+        "maak oop"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "afskakel",
+        "afsit",
+        "deaktiveer",
+        "maak toe"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "vlak",
+        "stel",
+        "demp"
+      ],
+      "ExpectsValue": "number"
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "wissel",
+        "omkeer",
+        "verander"
+      ]
+    },
+    {
+      "Command": "Programs.Run",
+      "Aliases": [
+        "begin",
+        "start",
+        "speel",
+        "loop"
+      ]
+    },
+    {
+      "Command": "Programs.Break",
+      "Aliases": [
+        "stop",
+        "onderbreek",
+        "kanselleer"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "al die ligte",
+        "ligte",
+        "elke lig",
+        "beligting"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "al die skakelaars",
+        "skakelaars",
+        "elke skakelaar",
+        "al die sokke",
+        "sokke",
+        "elke sok"
+      ]
+    }
+  ]
+}

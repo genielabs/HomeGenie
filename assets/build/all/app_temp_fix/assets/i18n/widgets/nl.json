@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Lang indrukken om widgets opnieuw te ordenen in- of uitschakelen",
+  "$alarm_system": {
+    "arm_home": "Thuis",
+    "arm_away": "Weg"
+  },
+  "$section_label": {
+    "label": "Label",
+    "indicators": "Indicatoren",
+    "lights_control": "Lichten",
+    "switches_control": "Schakelaars"
+  }
+}

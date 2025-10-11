@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "Agregar dispositivo",
+  "node_exclusion": "Quitar dispositivo",
+  "operation_timed_out": "Se agotó el tiempo de operación.",
+  "node_added": "Nodo añadido con éxito",
+  "turn_on_device_to_add": "Encienda el dispositivo y presione el botón de emparejamiento durante 5 segundos si es necesario",
+  "soft_reset_button": "Reinicio suave"
+}

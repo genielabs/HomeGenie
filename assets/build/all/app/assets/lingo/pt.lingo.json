@@ -1,0 +1,79 @@
+{
+  "Commands": [
+    {
+      "Command": "Control.On",
+      "Aliases": [
+        "ligar",
+        "acender",
+        "ativar",
+        "abrir"
+      ]
+    },
+    {
+      "Command": "Control.Off",
+      "Aliases": [
+        "desligar",
+        "apagar",
+        "desativar",
+        "fechar"
+      ]
+    },
+    {
+      "Command": "Control.Level",
+      "Aliases": [
+        "nível",
+        "definir",
+        "ajustar",
+        "regular"
+      ],
+      "ExpectsValue": "number"
+    },
+    {
+      "Command": "Control.Toggle",
+      "Aliases": [
+        "alternar",
+        "inverter",
+        "trocar"
+      ]
+    },
+    {
+      "Command": "Programs.Run",
+      "Aliases": [
+        "iniciar",
+        "executar",
+        "rodar",
+        "reproduzir"
+      ]
+    },
+    {
+      "Command": "Programs.Break",
+      "Aliases": [
+        "parar",
+        "interromper",
+        "cancelar"
+      ]
+    }
+  ],
+  "Types": [
+    {
+      "Type": "Light,Dimmer,Color",
+      "Aliases": [
+        "todas as luzes",
+        "luzes",
+        "cada luz",
+        "iluminação"
+      ]
+    },
+    {
+      "Type": "Switch",
+      "Aliases": [
+        "todos os interruptores",
+        "interruptores",
+        "cada interruptor",
+        "todas as tomadas",
+        "tomadas",
+        "cada tomada"
+      ]
+    }
+  ]
+}

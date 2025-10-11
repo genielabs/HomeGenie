@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Діапазон часу",
+  "stats.one_second": "Одну секунду",
+  "stats.five_seconds": "5 секунд",
+  "stats.ten_seconds": "10 секунд",
+  "stats.half_minute": "30 секунд",
+  "stats.one_minute": "Одна хвилина",
+  "stats.ten_minutes": "10 хвилин",
+  "stats.half_hour": "30 хвилин",
+  "stats.one_hour": "Одна година",
+  "stats.three_hours": "3 години",
+  "stats.six_hours": "6 годин",
+  "stats.twelve_hours": "12 годин",
+  "stats.twentyfour_hours": "24 години",
+  "stats.chart_provider": "Постачальник діаграм"
+}

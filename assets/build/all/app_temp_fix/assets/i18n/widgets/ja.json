@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "ウィジェットの並べ替えを長押しで有効/無効にする",
+  "$alarm_system": {
+    "arm_home": "家",
+    "arm_away": "離れて"
+  },
+  "$section_label": {
+    "label": "ラベル",
+    "indicators": "指標",
+    "lights_control": "ライト",
+    "switches_control": "スイッチ"
+  }
+}

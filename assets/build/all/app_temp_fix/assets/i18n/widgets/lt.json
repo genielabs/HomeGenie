@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Įjungti / išjungti ilgą paspaudimą, kad pakeistumėte valdiklių tvarką",
+  "$alarm_system": {
+    "arm_home": "Pradžia",
+    "arm_away": "Išvykęs"
+  },
+  "$section_label": {
+    "label": "Etiketė",
+    "indicators": "Rodikliai",
+    "lights_control": "Šviesos",
+    "switches_control": "Jungikliai"
+  }
+}

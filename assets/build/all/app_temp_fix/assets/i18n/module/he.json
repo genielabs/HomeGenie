@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "טווח זמן",
+  "stats.one_second": "שנייה אחת",
+  "stats.five_seconds": "5 שניות",
+  "stats.ten_seconds": "10 שניות",
+  "stats.half_minute": "30 שניות",
+  "stats.one_minute": "דקה אחת",
+  "stats.ten_minutes": "10 דקות",
+  "stats.half_hour": "30 דקות",
+  "stats.one_hour": "שעה אחת",
+  "stats.three_hours": "3 שעות",
+  "stats.six_hours": "6 שעות",
+  "stats.twelve_hours": "12 שעות",
+  "stats.twentyfour_hours": "24 שעות",
+  "stats.chart_provider": "ספק תרשים"
+}

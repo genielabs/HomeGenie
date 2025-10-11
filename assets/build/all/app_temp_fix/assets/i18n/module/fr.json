@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "Plage horaire",
+  "stats.one_second": "Une seconde",
+  "stats.five_seconds": "5 secondes",
+  "stats.ten_seconds": "10 secondes",
+  "stats.half_minute": "30 secondes",
+  "stats.one_minute": "Une minute",
+  "stats.ten_minutes": "10 minutes",
+  "stats.half_hour": "30 minutes",
+  "stats.one_hour": "Une heure",
+  "stats.three_hours": "3 heures",
+  "stats.six_hours": "6 heures",
+  "stats.twelve_hours": "12 heures",
+  "stats.twentyfour_hours": "24 heures",
+  "stats.chart_provider": "Fournisseur de cartes"
+}

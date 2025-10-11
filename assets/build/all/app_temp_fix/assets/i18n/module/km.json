@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "ចន្លោះពេល",
+  "stats.one_second": "មួយវិនាទី",
+  "stats.five_seconds": "5 វិនាទី",
+  "stats.ten_seconds": "10 វិនាទី",
+  "stats.half_minute": "30 វិនាទី",
+  "stats.one_minute": "មួយនាទី",
+  "stats.ten_minutes": "10 នាទី។",
+  "stats.half_hour": "30 នាទី។",
+  "stats.one_hour": "មួយម៉ោង",
+  "stats.three_hours": "3 ម៉ោង។",
+  "stats.six_hours": "6 ម៉ោង។",
+  "stats.twelve_hours": "12 ម៉ោង។",
+  "stats.twentyfour_hours": "24 ម៉ោង។",
+  "stats.chart_provider": "អ្នកផ្តល់គំនូសតាង"
+}

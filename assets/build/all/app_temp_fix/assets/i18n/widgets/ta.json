@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "விட்ஜெட்களை மறுவரிசைப்படுத்த நீண்ட அழுத்தத்தை இயக்கு/முடக்கு",
+  "$alarm_system": {
+    "arm_home": "முகப்புப் பக்கம்",
+    "arm_away": "தொலைவில்"
+  },
+  "$section_label": {
+    "label": "லேபிள்",
+    "indicators": "குறிகாட்டிகள்",
+    "lights_control": "விளக்குகள்",
+    "switches_control": "சுவிட்சுகள்"
+  }
+}

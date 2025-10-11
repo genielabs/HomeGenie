@@ -1,0 +1,13 @@
+{
+  "toggle_long_press_to_reorder_widgets": "Aktivér/deaktiver langt tryk for at ændre rækkefølgen af widgets",
+  "$alarm_system": {
+    "arm_home": "Hjem",
+    "arm_away": "Væk"
+  },
+  "$section_label": {
+    "label": "Mærke",
+    "indicators": "Indikatorer",
+    "lights_control": "Lys",
+    "switches_control": "Afbrydere"
+  }
+}
