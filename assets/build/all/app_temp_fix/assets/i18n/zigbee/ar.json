@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "إضافة جهاز",
-  "node_exclusion": "إزالة الجهاز",
-  "operation_timed_out": "انتهت العملية.",
-  "node_added": "تمت إضافة العقدة بنجاح",
-  "turn_on_device_to_add": "قم بتشغيل الجهاز واضغط على زر الاقتران لمدة 5 ثوانٍ إذا لزم الأمر",
-  "soft_reset_button": "إعادة الضبط الناعمة"
-}

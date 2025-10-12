@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Adăugați dispozitivul",
-  "node_exclusion": "Scoateți dispozitivul",
-  "operation_timed_out": "Operațiunea a expirat.",
-  "node_added": "Nodul adăugat cu succes",
-  "turn_on_device_to_add": "Porniți dispozitivul și apăsați butonul de asociere timp de 5 secunde dacă este necesar",
-  "soft_reset_button": "Resetare soft"
-}

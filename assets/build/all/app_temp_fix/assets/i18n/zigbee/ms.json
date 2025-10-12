@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Tambah peranti",
-  "node_exclusion": "Alih keluar peranti",
-  "operation_timed_out": "Operasi tamat masa.",
-  "node_added": "Berjaya menambahkan nod",
-  "turn_on_device_to_add": "Hidupkan peranti dan tekan butang berpasangan selama 5 saat jika perlu",
-  "soft_reset_button": "Tetapan semula lembut"
-}

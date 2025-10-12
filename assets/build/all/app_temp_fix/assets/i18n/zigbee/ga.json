@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Cuir gléas leis",
-  "node_exclusion": "Bain gléas",
-  "operation_timed_out": "Chuaigh an oibríocht thar am.",
-  "node_added": "Cuireadh nód leis go rathúil",
-  "turn_on_device_to_add": "Cuir an gléas ar siúl agus brúigh an cnaipe péireála ar feadh 5 soicind más gá",
-  "soft_reset_button": "Athshocrú bog"
-}

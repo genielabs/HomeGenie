@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Gerät hinzufügen",
-  "node_exclusion": "Gerät entfernen",
-  "operation_timed_out": "Beim Vorgang ist eine Zeitüberschreitung aufgetreten.",
-  "node_added": "Knoten erfolgreich hinzugefügt",
-  "turn_on_device_to_add": "Schalten Sie das Gerät ein und drücken Sie bei Bedarf die Pairing-Taste für 5 Sekunden",
-  "soft_reset_button": "Soft-Reset"
-}

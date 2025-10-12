@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Cihaz əlavə edin",
-  "node_exclusion": "Cihazı çıxarın",
-  "operation_timed_out": "Əməliyyat vaxtı bitdi.",
-  "node_added": "Node uğurla əlavə edildi",
-  "turn_on_device_to_add": "Cihazı yandırın və lazım olduqda cütləşdirmə düyməsini 5 saniyə basın",
-  "soft_reset_button": "Yumşaq sıfırlama"
-}

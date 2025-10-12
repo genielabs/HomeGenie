@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Pridať zariadenie",
-  "node_exclusion": "Odstráňte zariadenie",
-  "operation_timed_out": "Časový limit operácie vypršal.",
-  "node_added": "Uzol bol úspešne pridaný",
-  "turn_on_device_to_add": "Zapnite zariadenie a v prípade potreby stlačte tlačidlo párovania na 5 sekúnd",
-  "soft_reset_button": "Mäkký reset"
-}

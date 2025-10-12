@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Aldonu aparaton",
-  "node_exclusion": "Forigi aparaton",
-  "operation_timed_out": "Operacio elĉerpita.",
-  "node_added": "Sukcese aldonita nodo",
-  "turn_on_device_to_add": "Ŝaltu la aparaton kaj premu la butonon de parigo dum 5 sekundoj se necese",
-  "soft_reset_button": "Soft reset"
-}

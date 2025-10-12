@@ -142,25 +142,6 @@ namespace HomeGenie.Service
 
             // it will check every 24 hours
             updateChecker.Start();
-
-            // TODO: This is a temporary fix for a bug in 2.0.0-rc.4 release
-            // TODO: remove after releasing 2.0.0-rc.5
-            // TODO: also remove the "app_temp_fix" from the build assets
-            if (Directory.Exists("app_temp_fix"))
-            {
-                try
-                {
-                    if (Directory.Exists("app"))
-                    {
-                        Directory.Move("app", "app_bak_" + DateTime.UtcNow.ToString("yyyyMMdd"));
-                    }
-                    Directory.Move("app_temp_fix", "app");
-                }
-                catch (Exception e)
-                {
-                    // ignored
-                }
-            }
         }
 
         public bool RebuildPrograms { get; set; }

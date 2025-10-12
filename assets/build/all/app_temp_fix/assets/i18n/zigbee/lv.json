@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Pievienot ierīci",
-  "node_exclusion": "Noņemiet ierīci",
-  "operation_timed_out": "Darbības noildze.",
-  "node_added": "Mezgls ir veiksmīgi pievienots",
-  "turn_on_device_to_add": "Ieslēdziet ierīci un, ja nepieciešams, 5 sekundes nospiediet pogu savienošanai pārī",
-  "soft_reset_button": "Mīksta atiestatīšana"
-}

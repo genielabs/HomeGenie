@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Ychwanegu dyfais",
-  "node_exclusion": "Dileu dyfais",
-  "operation_timed_out": "Daeth y llawdriniaeth i ben.",
-  "node_added": "Wedi ychwanegu nod yn llwyddiannus",
-  "turn_on_device_to_add": "Trowch y ddyfais ymlaen a gwasgwch y botwm paru am 5 eiliad os oes angen",
-  "soft_reset_button": "Ailosod meddal"
-}

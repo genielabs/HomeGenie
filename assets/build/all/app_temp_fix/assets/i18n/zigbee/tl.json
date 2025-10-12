@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Magdagdag ng device",
-  "node_exclusion": "Alisin ang device",
-  "operation_timed_out": "Nag-time out ang operasyon.",
-  "node_added": "Matagumpay na naidagdag ang node",
-  "turn_on_device_to_add": "I-on ang device at pindutin ang pairing button sa loob ng 5 segundo kung kinakailangan",
-  "soft_reset_button": "Soft reset"
-}

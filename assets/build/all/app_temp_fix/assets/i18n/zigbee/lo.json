@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "ເພີ່ມອຸປະກອນ",
-  "node_exclusion": "ເອົາອຸປະກອນອອກ",
-  "operation_timed_out": "ການດໍາເນີນງານຫມົດເວລາ.",
-  "node_added": "ເພີ່ມ node ສຳເລັດແລ້ວ",
-  "turn_on_device_to_add": "ສະຫຼັບອຸປະກອນ ແລະກົດປຸ່ມຈັບຄູ່ເປັນເວລາ 5 ວິນາທີ ຖ້າຕ້ອງການ",
-  "soft_reset_button": "ຣີເຊັດແບບອ່ອນໆ"
-}

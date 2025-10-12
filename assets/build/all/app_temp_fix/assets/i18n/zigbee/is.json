@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Bæta við tæki",
-  "node_exclusion": "Fjarlægðu tækið",
-  "operation_timed_out": "Aðgerð rann út.",
-  "node_added": "Hnúti var bætt við",
-  "turn_on_device_to_add": "Kveiktu á tækinu og ýttu á pörunarhnappinn í 5 sekúndur ef þörf krefur",
-  "soft_reset_button": "Mjúk endurstilling"
-}

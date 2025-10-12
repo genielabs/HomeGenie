@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Tilføj enhed",
-  "node_exclusion": "Fjern enheden",
-  "operation_timed_out": "Operation timeout.",
-  "node_added": "Node blev tilføjet",
-  "turn_on_device_to_add": "Tænd for enheden, og tryk på parringsknappen i 5 sekunder, hvis det er nødvendigt",
-  "soft_reset_button": "Blød nulstilling"
-}

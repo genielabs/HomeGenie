@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Shto pajisje",
-  "node_exclusion": "Hiq pajisjen",
-  "operation_timed_out": "Koha e operacionit përfundoi.",
-  "node_added": "Nyja u shtua me sukses",
-  "turn_on_device_to_add": "Ndizni pajisjen dhe shtypni butonin e çiftimit për 5 sekonda nëse kërkohet",
-  "soft_reset_button": "Rivendosja e butë"
-}

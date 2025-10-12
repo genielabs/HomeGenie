@@ -1,8 +1,0 @@
-{
-  "node_inclusion": "Afegeix un dispositiu",
-  "node_exclusion": "Elimina el dispositiu",
-  "operation_timed_out": "L'operació s'ha esgotat.",
-  "node_added": "Node afegit correctament",
-  "turn_on_device_to_add": "Enceneu el dispositiu i premeu el botó de vinculació durant 5 segons si cal",
-  "soft_reset_button": "Reinici suau"
-}
