@@ -14,6 +14,7 @@
   <a href="https://github.com/genielabs/HomeGenie/blob/master/LICENSE"><img src="https://img.shields.io/github/license/genielabs/HomeGenie.svg" alt="License"></a>
 </p>
 
+
 HomeGenie is a versatile, open-source home automation platform written in .NET. Designed for tinkerers, developers, and DIY enthusiasts, it provides a powerful, server-centric solution that runs on a wide range of hardware, from a Raspberry Pi to a dedicated home server.
 
 With its robust scripting engine and extensive hardware support, HomeGenie offers the freedom to create complex automation scenarios and integrate a vast array of devices, all while ensuring your data and logic remain securely within your own network.
@@ -33,8 +34,13 @@ With its robust scripting engine and extensive hardware support, HomeGenie offer
 
 ##  Documentation
 
-For detailed guides, API references, and tutorials, visit the official documentation website:
+For detailed guides, API references, and tutorials, visit the official documentation website:  
 **https://genielabs.github.io/HomeGenie**
+
+<p align="center">
+  <a href="https://deepwiki.com/genielabs/HomeGenie"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+</p>
+
 
 ## 💾 Installation
 
