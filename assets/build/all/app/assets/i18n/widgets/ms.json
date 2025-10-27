@@ -9,5 +9,11 @@
     "indicators": "Penunjuk",
     "lights_control": "lampu",
     "switches_control": "Suis"
+  },
+  "$ai_chat": {
+    "title": "Widget Sembang AI",
+    "intro": "hello! Saya pembantu LLM tempatan anda. Bagaimana saya boleh membantu anda?",
+    "no_bound_module": "Tiada modul LLM terikat. Sila buka tetapan widget untuk mengikat model bahasa.",
+    "start_typing_prompt": "Mula menaip gesaan..."
   }
 }

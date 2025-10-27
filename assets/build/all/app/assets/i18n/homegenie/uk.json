@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Теплоекономія",
   "scheduler_preset_action_config_mode_cool": "Круто",
   "scheduler_preset_action_config_mode_cool_eco": "Класна економіка",
+  "scheduler_preset_action_command_remote_control": "Дистанційне керування (надсилання ІЧ/РЧ-кодів)",
+  "scheduler_preset_action_config_data": "Дані",
   "scheduler_preset_action_program_run": "Запустити програму",
   "scheduler_preset_action_config_program": "Програма",
   "scheduler_preset_action_config_options": "Опції",
   "scheduler_preset_action_program_say": "Скажи",
+  "scheduler_preset_action_net_http_call": "Виклик веб-служби",
+  "scheduler_preset_action_config_url": "Адреса (URL)",
+  "scheduler_preset_action_pause": "Пауза",
+  "scheduler_preset_action_config_seconds": "Секунди",
   "scheduler_preset_action_config_message": "Повідомлення",
   "save_and_build": "Зберегти та створити",
   "toggle_widgets_preview": "Попередній перегляд віджетів",
@@ -124,7 +130,7 @@
   "visual_code": "Візуальний код",
   "generated_code": "Згенерований код",
   "setup_code": "Налаштування",
-  "main_code": "Головний",
+  "main_code": "Головне",
   "context_code": "Контекст",
   "main_code_empty_note": "Код \"Main\" порожній. Використайте редактор \"Візуальний код\", щоб згенерувати цей код: - Відкрийте категорію \"Програма\" з палітри команд ліворуч - Перетягніть блок типу \"Main\" у робочу область візуального коду - Додайте всередину нього інші блоки коду для реалізації дій та логіки цієї програми Програму \"Main\" можна запускати вручну або автоматично на основі умов, заданих у коді налаштування.",
   "setup_code_empty_note": "Код \"Налаштування\" порожній. Використайте редактор \"Візуального коду\", щоб згенерувати цей код: - Відкрийте категорію \"Програма\" з палітри команд ліворуч - Перетягніть блок типу \"Налаштування\" в робочу область візуального коду - Додайте всередину нього інші блоки коду, щоб визначити умови, які запускатимуть виконання \"Основного\" коду. Цей код обчислюється щоразу, коли відбувається нова подія, і принаймні раз на хвилину.",
@@ -241,7 +247,7 @@
     },
     "410": {
       "Title": "Симулятор датчика",
-      "Description": "Видавати випадкові значення датчиків.",
+      "Description": "Випромінювати випадкові значення датчиків.",
       "Simulator.Sensor.Temperature": "Датчик температури",
       "Simulator.Sensor.Humidity": "Датчик вологості",
       "Simulator.Sensor.Luminance": "Датчик світла",
@@ -306,6 +312,18 @@
       "Description": "Дозволяє керувати вашою розумною системою природною мовою за допомогою штучного інтелекту Gemini від Google. Щоб активувати цю функцію, введіть дійсний ключ API. Дотримуйтесь інструкцій на сторінці https://aistudio.google.com/app/apikey, щоб отримати безкоштовний ключ API.",
       "ConfigureOptions.ApiKey": "Ключ API штучного інтелекту Google Gemini",
       "ConfigureOptions.ModelId": "Ідентифікатор моделі"
+    },
+    "931": {
+      "Title": "Джеміні Віджет Джин",
+      "Description": "Ваш особистий штучний інтелект-джин для створення віджетів. Працює на Gemini, допомагає вам писати та налагоджувати код HTML, CSS та JavaScript безпосередньо в редакторі HomeGenie. Щоб активувати цю функцію, введіть дійсний ключ API. Дотримуйтесь інструкцій на сторінці https://aistudio.google.com/app/apikey, щоб отримати безкоштовний ключ API.",
+      "ConfigureOptions.ApiKey": "Ключ API штучного інтелекту Google Gemini",
+      "ConfigureOptions.ModelId": "Ідентифікатор моделі"
+    },
+    "940": {
+      "Title": "Локальний штучний інтелект (LLM)",
+      "Description": "Запустіть модель великої мови програмування (LLM) локально на вашому сервері HomeGenie. Ці моделі можна безкоштовно завантажити з таких платформ, як Hugging Face. Просто вкажіть шлях до файлу моделі у форматі GGUF. Зверніть увагу, що для забезпечення повної сумісності з різними моделями може знадобитися коригування параметрів, головним чином у контекстному коді.",
+      "ConfigureOptions.MaxTokens": "Максимальна кількість токенів (довжина відповіді)",
+      "ConfigureOptions.ModelPath": "Шлях до локального файлу GGUF"
     }
   }
 }

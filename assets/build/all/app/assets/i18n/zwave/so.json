@@ -7,11 +7,11 @@
   "enabling_node_exclusion": "Dajinta qaabka ka saarista noodhka, fadlan sug...",
   "inclusion_message": "Riix badhanka qalabka aad rabto inaad ku darto shabakadan.",
   "exclusion_message": "Riix badhanka qalabka aad rabto inaad ka saarto shabakadan.",
-  "task_duration_notice": "Hawshani waxa ay qaadan kartaa ilaa ilbidhiqsiyo <strong>{{timeout}}</strong> dhammayn ah.",
-  "adding_node": "Ku darida <strong class=\"color-accent\">{{node}}</strong> qalabka, fadlan sug...",
-  "removing_node": "Meesha laga saarayo <strong class=\"color-accent\">{{node}}</strong> aaladda, fadlan sug...",
+  "task_duration_notice": "Hawshan waxa ay qaadan kartaa ilaa <strong>{{timeout}}</strong> sekan in la dhamaystiro.",
+  "adding_node": "Ku darida qalabka <strong class=\"color-accent\">{{node}}</strong> , fadlan sug...",
+  "removing_node": "Meesha ka saaraysa <strong class=\"color-accent\">{{node}}</strong> , fadlan sug...",
   "node_added": "Qalabka <strong class=\"color-accent\">{{node}}</strong> si guul leh loogu daray",
-  "node_removed": "<strong class=\"color-accent\">{{node}}</strong> aaladda waa laga saaray",
+  "node_removed": "Qalabka <strong class=\"color-accent\">{{node}}</strong> waa la saaray",
   "node_config": "Qaabeynta aaladda",
   "brand": "Summada",
   "product": "Alaabta",
@@ -32,6 +32,6 @@
   "calibration": "Calibration",
   "calibrate": "Calibrate",
   "edit_calibration_parameter": "Wax ka beddel lambarka cabbirka cabbirka",
-  "calibration_parameter_not_set": "Lambarka cabbiraadda lama dejin",
+  "calibration_parameter_not_set": "Nambarka cabbirka cabbirka lama dejin",
   "calibration_parameter_number": "Nambarka cabbirka (eeg buug-gacmeedka qalabka)"
 }

@@ -9,5 +9,11 @@
     "indicators": "Táscairí",
     "lights_control": "Soilse",
     "switches_control": "Lasca"
+  },
+  "$ai_chat": {
+    "title": "Giuirléid Comhrá AI",
+    "intro": "Haigh! Is mise do chúntóir LLM áitiúil. Conas is féidir liom cabhrú leat?",
+    "no_bound_module": "Níl modúl LLM ceangailte. Oscail socruithe an ghiuirléid le samhail teanga a cheangal.",
+    "start_typing_prompt": "Tosaigh ag clóscríobh leid..."
   }
 }

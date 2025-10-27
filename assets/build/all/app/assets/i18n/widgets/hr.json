@@ -9,5 +9,11 @@
     "indicators": "Pokazatelji",
     "lights_control": "Svjetla",
     "switches_control": "Prekidači"
+  },
+  "$ai_chat": {
+    "title": "Widget za AI chat",
+    "intro": "Pozdrav! Ja sam vaš lokalni LLM asistent. Kako vam mogu pomoći?",
+    "no_bound_module": "Nijedan LLM modul nije povezan. Otvorite postavke widgeta za povezivanje jezičnog modela.",
+    "start_typing_prompt": "Počni tipkati upit..."
   }
 }

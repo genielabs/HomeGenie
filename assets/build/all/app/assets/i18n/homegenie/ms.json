@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------------",
+  " ": "------------------------------------------",
   "welcome_to_homegenie": "Selamat datang ke HomeGenie!",
   "welcome_subtitle": "Perisikan automasi boleh atur cara",
   "not_configured_yet": "Sistem belum dikonfigurasikan lagi. Wizard persediaan ini akan membantu anda menyediakan dan menjalankan sistem anda dalam beberapa langkah.",
@@ -38,7 +38,7 @@
   "schedule_event": "Peristiwa",
   "schedule_type_standard": "Standard",
   "schedule_type_range": "Julat tarikh",
-  "schedule_type_cron": "Ungkapan cron",
+  "schedule_type_cron": "Ungkapan Cron",
   "schedule_action": "Tindakan",
   "schedule_occurrence_preview": "Pratonton kejadian",
   "time_schedule": "Jadual",
@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">@{{name}}</span> sebagai pembolehubah dalam ungkapan cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> dalam program automasi untuk merujuk acara ini.",
   "scheduler_preset_action_command_turn_on": "Hidupkan",
   "scheduler_preset_action_command_turn_off": "Matikan",
-  "scheduler_preset_action_command_set_level": "Tetapkan tahap",
+  "scheduler_preset_action_command_set_level": "Tetapkan Tahap",
   "scheduler_preset_action_config_level": "Tahap",
-  "scheduler_preset_action_command_set_color": "Tetapkan warna",
+  "scheduler_preset_action_command_set_color": "Tetapkan Warna",
   "scheduler_preset_action_config_color": "warna",
-  "scheduler_preset_action_command_thermostat_mode": "Mod termostat",
+  "scheduler_preset_action_command_thermostat_mode": "Mod Termostat",
   "scheduler_preset_action_config_mode": "Mod",
   "scheduler_preset_action_config_mode_on": "hidup",
   "scheduler_preset_action_config_mode_off": "Mati",
   "scheduler_preset_action_config_mode_heat": "Panas",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomi haba",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomi Haba",
   "scheduler_preset_action_config_mode_cool": "Sejuk",
-  "scheduler_preset_action_config_mode_cool_eco": "Ekonomi sejuk",
-  "scheduler_preset_action_program_run": "Jalankan program",
+  "scheduler_preset_action_config_mode_cool_eco": "Ekonomi Sejuk",
+  "scheduler_preset_action_command_remote_control": "Kawalan Jauh (hantar kod IR/RF)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Jalankan Program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Pilihan",
   "scheduler_preset_action_program_say": "Katakanlah",
+  "scheduler_preset_action_net_http_call": "Hubungi Perkhidmatan Web",
+  "scheduler_preset_action_config_url": "Alamat (URL)",
+  "scheduler_preset_action_pause": "jeda",
+  "scheduler_preset_action_config_seconds": "Detik",
   "scheduler_preset_action_config_message": "Mesej",
   "save_and_build": "Simpan dan bina",
   "toggle_widgets_preview": "Togol pratonton widget",
@@ -117,16 +123,16 @@
   "program_status_enabled": "Didayakan",
   "program_status_broken": "Patah",
   "program_status_compile": "Susun",
-  "automation_programming_guide": "Panduan pengaturcaraan'",
+  "automation_programming_guide": "Panduan Pengaturcaraan'",
   "tap_to_disable": "Klik untuk melumpuhkan",
   "tap_to_enable": "Klik untuk membolehkan",
-  "program_data": "Data program",
-  "visual_code": "Kod visual",
-  "generated_code": "Kod yang dihasilkan",
+  "program_data": "Data Program",
+  "visual_code": "Kod Visual",
+  "generated_code": "Kod Dijana",
   "setup_code": "Persediaan",
   "main_code": "Utama",
   "context_code": "Konteks",
-  "main_code_empty_note": "Kod \"Utama\" kosong. Gunakan editor \"Kod Visual\" untuk menjana kod ini: - Buka kategori \"Program\" dari palet arahan di sebelah kiri - Seret blok jenis \"Utama\" dalam ruang kerja kod visual - Tambah di dalamnya blok kod lain untuk melaksanakan tindakan dan logik program ini Program \"Utama\" boleh dijalankan secara manual atau dimulakan secara automatik berdasarkan syarat yang akhirnya diberikan dalam kod Persediaan.",
+  "main_code_empty_note": "Kod \"Utama\" kosong. Gunakan editor \"Kod Visual\" untuk menjana kod ini: - Buka kategori \"Program\" daripada palet arahan di sebelah kiri - Seret blok jenis \"Utama\" dalam ruang kerja kod visual - Tambah di dalamnya blok kod lain untuk melaksanakan tindakan dan logik program ini Program \"Utama\" boleh dijalankan secara manual atau dimulakan secara automatik berdasarkan syarat yang akhirnya diberikan dalam kod Persediaan.",
   "setup_code_empty_note": "Kod \"Persediaan\" kosong. Gunakan editor \"Kod Visual\" untuk menjana kod ini: - Buka kategori \"Program\" daripada palet arahan di sebelah kiri - Seret blok jenis \"Persediaan\" dalam ruang kerja kod visual - Tambah di dalamnya blok kod lain untuk menentukan syarat yang akan mencetuskan pelaksanaan kod \"Utama\" Kod ini dinilai setiap kali peristiwa baharu berlaku dan sekurang-kurangnya sekali seminit.",
   "capture_commands": "Tangkap arahan",
   "capture_commands_description": "Tambahkan semua arahan yang dilakukan secara manual pada widget pada program.",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan sahaja"
     },
     "26": {
-      "Title": "Lampu warna",
+      "Title": "Lampu Warna",
       "Description": "Contoh penyepaduan lampu Philips Hue menggunakan API HTTP (V1). Pengguna lalai untuk menyambung ke jambatan ialah \"pembangun baharu\" dan ia sepatutnya sudah didayakan.",
       "ConfigureOptions.BridgeAddress": "Alamat IP Philips Hue Bridge (V1).",
       "ConfigureOptions.BridgeUsername": "Nama pengguna",
@@ -213,13 +219,13 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Program untuk dijalankan apabila dicetuskan"
     },
     "95": {
-      "Title": "Pengelogan peristiwa",
+      "Title": "Pengelogan Peristiwa",
       "Description": "Rakam aktiviti peranti.",
       "EventsLogger.EnableLogging": "Dayakan"
     },
     "111": {
-      "Title": "Konfigurasi pelanggan",
-      "Description": "Melaksanakan API untuk mengurus profil konfigurasi pelanggan yang digunakan untuk menyimpan tetapan UI dan papan pemuka."
+      "Title": "Konfigurasi Pelanggan",
+      "Description": "Melaksanakan API untuk mengurus profil konfigurasi klien yang digunakan untuk menyimpan tetapan UI dan papan pemuka."
     },
     "400": {
       "Title": "Demo Modul Maya",
@@ -240,7 +246,7 @@
       "Description": "Mensimulasikan pengesanan gerakan demo multi-sensor."
     },
     "410": {
-      "Title": "Simulator sensor",
+      "Title": "Simulator Sensor",
       "Description": "Pancarkan nilai sensor rawak.",
       "Simulator.Sensor.Temperature": "Penderia suhu",
       "Simulator.Sensor.Humidity": "Sensor kelembapan",
@@ -253,7 +259,7 @@
       "Title": "Alat Kawalan Jauh",
       "Description": "Kawal peranti menggunakan alat kawalan jauh (IR atau RF).",
       "HomeGenie.RemoteControl.Enable": "Dayakan",
-      "HomeGenie.RemoteControl.IRCode": "Butang togol",
+      "HomeGenie.RemoteControl.IRCode": "Togol butang",
       "ConfigureOptions.DimmerUpCode": "Butang peningkatan kecerahan",
       "ConfigureOptions.DimmerDownCode": "Butang penurunan kecerahan",
       "ConfigureOptions.DimmerInterval": "Langkah memalapkan"
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Pautan ke senario Warna Matahari Terbit"
     },
     "910": {
-      "Title": "Pengesanan objek",
+      "Title": "Pengesanan Objek",
       "Description": "Kesan objek menggunakan model YOLO11 yang telah terlatih.",
       "ML.ObjectDetection": "Dayakan pengesanan objek",
       "ML.ObjectDetection.TriggerDetect": "Senarai perkara yang dipisahkan koma (dalam bahasa Inggeris) yang akan mencetuskan penggera. (cth: kucing, anjing, orang, beg galas, beg pakaian)",
       "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Anggaran pose",
+      "Title": "Anggaran Pose",
       "Description": "Pengesanan titik kunci melalui anggaran pose, menggunakan model ONNX tersuai atau model YOLOv11 pra-latihan lalai (khusus pose manusia).",
       "ML.PoseEstimation": "Dayakan anggaran pose",
       "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Pembahagian contoh",
+      "Title": "Pembahagian Instance",
       "Description": "Kesan objek dan garis besarnya menggunakan model YOLO11 yang telah terlatih.",
       "ML.InstanceSegmentation": "Dayakan pembahagian contoh",
       "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Mendayakan kawalan bahasa semula jadi untuk sistem pintar anda menggunakan Gemini AI Google. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikut arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID model"
+    },
+    "931": {
+      "Title": "Gemini Widget Jin",
+      "Description": "Jin AI peribadi anda untuk penciptaan widget. Dikuasakan oleh Gemini, ia membantu anda menulis dan menyahpepijat kod HTML, CSS dan JavaScript terus dalam editor HomeGenie. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikut arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
+      "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID model"
+    },
+    "940": {
+      "Title": "AI Setempat (LLM)",
+      "Description": "Jalankan Model Bahasa Besar (LLM) secara setempat pada pelayan HomeGenie anda. Model-model ini boleh dimuat turun secara percuma daripada platform seperti Hugging Face. Hanya sediakan laluan ke fail model format GGUF. Sila ambil perhatian bahawa pelarasan pada parameter, terutamanya dalam Kod Konteks, mungkin diperlukan untuk memastikan keserasian penuh dengan model yang berbeza.",
+      "ConfigureOptions.MaxTokens": "Token Maks (panjang tindak balas)",
+      "ConfigureOptions.ModelPath": "Laluan ke fail GGUF setempat"
     }
   }
 }

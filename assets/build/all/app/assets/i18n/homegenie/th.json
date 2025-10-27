@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "ใช้ <span class=\"notranslate color-primary\">@{{name}}</span> เป็นตัวแปรในนิพจน์ cron หรือใช้ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ในโปรแกรมอัตโนมัติเพื่ออ้างอิงเหตุการณ์นี้",
   "scheduler_preset_action_command_turn_on": "เปิดเครื่อง",
   "scheduler_preset_action_command_turn_off": "ปิดเครื่อง",
-  "scheduler_preset_action_command_set_level": "ตั้งระดับ",
+  "scheduler_preset_action_command_set_level": "ตั้งค่าระดับ",
   "scheduler_preset_action_config_level": "ระดับ",
   "scheduler_preset_action_command_set_color": "ตั้งค่าสี",
   "scheduler_preset_action_config_color": "สี",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "ความร้อน",
   "scheduler_preset_action_config_mode_heat_eco": "เศรษฐกิจความร้อน",
   "scheduler_preset_action_config_mode_cool": "เย็น",
-  "scheduler_preset_action_config_mode_cool_eco": "เศรษฐกิจเย็นสบาย",
+  "scheduler_preset_action_config_mode_cool_eco": "เศรษฐกิจสุดเท่",
+  "scheduler_preset_action_command_remote_control": "รีโมทคอนโทรล (ส่งรหัส IR/RF)",
+  "scheduler_preset_action_config_data": "ข้อมูล",
   "scheduler_preset_action_program_run": "รันโปรแกรม",
   "scheduler_preset_action_config_program": "โปรแกรม",
   "scheduler_preset_action_config_options": "ตัวเลือก",
   "scheduler_preset_action_program_say": "พูด",
+  "scheduler_preset_action_net_http_call": "เรียกใช้บริการเว็บ",
+  "scheduler_preset_action_config_url": "ที่อยู่ (URL)",
+  "scheduler_preset_action_pause": "หยุดชั่วคราว",
+  "scheduler_preset_action_config_seconds": "วินาที",
   "scheduler_preset_action_config_message": "ข้อความ",
   "save_and_build": "บันทึกและสร้าง",
   "toggle_widgets_preview": "สลับการแสดงตัวอย่างวิดเจ็ต",
@@ -237,7 +243,7 @@
     },
     "402": {
       "Title": "สาธิต - ตรวจจับการเคลื่อนไหว",
-      "Description": "จำลองการตรวจจับการเคลื่อนไหวของเซ็นเซอร์หลายตัวสาธิต"
+      "Description": "จำลองการตรวจจับการเคลื่อนไหวของมัลติเซ็นเซอร์สาธิต"
     },
     "410": {
       "Title": "เครื่องจำลองเซ็นเซอร์",
@@ -306,6 +312,18 @@
       "Description": "เปิดใช้งานการควบคุมภาษาธรรมชาติสำหรับระบบอัจฉริยะของคุณโดยใช้ Gemini AI ของ Google หากต้องการเปิดใช้งานฟีเจอร์นี้ ให้ป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://aistudio.google.com/app/apikey เพื่อรับรหัส API ฟรี",
       "ConfigureOptions.ApiKey": "รหัส API ของ Google Gemini AI",
       "ConfigureOptions.ModelId": "รหัสรุ่น"
+    },
+    "931": {
+      "Title": "เจมินี่ วิดเจ็ต จินนี่",
+      "Description": "จินนี่ AI ส่วนตัวของคุณสำหรับการสร้างวิดเจ็ต ขับเคลื่อนโดย Gemini ช่วยให้คุณเขียนและแก้ไขโค้ด HTML, CSS และ JavaScript ได้โดยตรงภายในโปรแกรมแก้ไข HomeGenie หากต้องการเปิดใช้งานฟีเจอร์นี้ ให้ป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://aistudio.google.com/app/apikey เพื่อรับรหัส API ฟรี",
+      "ConfigureOptions.ApiKey": "รหัส API ของ Google Gemini AI",
+      "ConfigureOptions.ModelId": "รหัสรุ่น"
+    },
+    "940": {
+      "Title": "ปัญญาประดิษฐ์ระดับท้องถิ่น (LLM)",
+      "Description": "เรียกใช้ Large Language Model (LLM) บนเซิร์ฟเวอร์ HomeGenie ของคุณ คุณสามารถดาวน์โหลดโมเดลเหล่านี้ได้ฟรีจากแพลตฟอร์มต่างๆ เช่น Hugging Face เพียงระบุเส้นทางไปยังไฟล์โมเดลรูปแบบ GGUF โปรดทราบว่าอาจจำเป็นต้องปรับพารามิเตอร์ โดยส่วนใหญ่ภายใน Context Code เพื่อให้มั่นใจว่าสามารถใช้งานร่วมกับโมเดลต่างๆ ได้อย่างสมบูรณ์",
+      "ConfigureOptions.MaxTokens": "โทเค็นสูงสุด (ความยาวการตอบกลับ)",
+      "ConfigureOptions.ModelPath": "เส้นทางไปยังไฟล์ GGUF ในเครื่อง"
     }
   }
 }

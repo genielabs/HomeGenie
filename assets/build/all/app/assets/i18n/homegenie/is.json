@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Hitahagkerfi",
   "scheduler_preset_action_config_mode_cool": "Flott",
   "scheduler_preset_action_config_mode_cool_eco": "Kælandi hagkerfi",
+  "scheduler_preset_action_command_remote_control": "Fjarstýring (senda innrauð/útvarpskóða)",
+  "scheduler_preset_action_config_data": "Gögn",
   "scheduler_preset_action_program_run": "Keyra forrit",
   "scheduler_preset_action_config_program": "Dagskrá",
   "scheduler_preset_action_config_options": "Valkostir",
   "scheduler_preset_action_program_say": "Segðu",
+  "scheduler_preset_action_net_http_call": "Hringdu í vefþjónustu",
+  "scheduler_preset_action_config_url": "Heimilisfang (URL)",
+  "scheduler_preset_action_pause": "Gera hlé",
+  "scheduler_preset_action_config_seconds": "Sekúndur",
   "scheduler_preset_action_config_message": "Skilaboð",
   "save_and_build": "Vista og byggja",
   "toggle_widgets_preview": "Virkja forskoðun á viðmóti",
@@ -117,12 +123,12 @@
   "program_status_enabled": "Virkt",
   "program_status_broken": "Brotinn",
   "program_status_compile": "Þýða",
-  "automation_programming_guide": "Forritunarleiðbeiningar",
+  "automation_programming_guide": "Forritunarhandbók",
   "tap_to_disable": "Smelltu til að slökkva",
   "tap_to_enable": "Smelltu til að virkja",
   "program_data": "Forritsgögn",
   "visual_code": "Sjónræn kóði",
-  "generated_code": "Búinn til kóða",
+  "generated_code": "Búinn til kóði",
   "setup_code": "Uppsetning",
   "main_code": "Aðal",
   "context_code": "Samhengi",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Forrit sem keyrir þegar það er virkjað"
     },
     "95": {
-      "Title": "Skráning atburða",
+      "Title": "Atburðaskráning",
       "Description": "Skrá virkni tækisins.",
       "EventsLogger.EnableLogging": "Virkja"
     },
@@ -246,7 +252,7 @@
       "Simulator.Sensor.Humidity": "Rakastigsskynjari",
       "Simulator.Sensor.Luminance": "Ljósnemi",
       "Simulator.Meter.Watts": "Wattsmælir",
-      "Simulator.Meter.Watts.Max": "Hámarks afl í watt",
+      "Simulator.Meter.Watts.Max": "Hámarks afl í wattum",
       "Simulator.Sensor.DataFrequency": "Tíðni útsendingar hermir"
     },
     "505": {
@@ -256,7 +262,7 @@
       "HomeGenie.RemoteControl.IRCode": "Skipta um hnapp",
       "ConfigureOptions.DimmerUpCode": "Hnappur til að auka birtustig",
       "ConfigureOptions.DimmerDownCode": "Hnappur til að minnka birtustig",
-      "ConfigureOptions.DimmerInterval": "Dimmunarskref"
+      "ConfigureOptions.DimmerInterval": "Dimmunarstig"
     },
     "142": {
       "Title": "Netfang",
@@ -304,8 +310,20 @@
     "930": {
       "Title": "Gemini Intent Handler",
       "Description": "Virkjar stjórn á náttúrulegu tungumáli fyrir snjallkerfið þitt með Gemini gervigreind Google. Til að virkja þennan eiginleika skaltu slá inn gilt API-lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API-lykil.",
+      "ConfigureOptions.ApiKey": "Lykill fyrir Google Gemini gervigreindarforritaskil",
+      "ConfigureOptions.ModelId": "Gerðarauðkenni"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Þinn persónulegi gervigreindarandi fyrir gerð viðmóts. Knúið af Gemini, hjálpar það þér að skrifa og kemba HTML, CSS og JavaScript kóða beint í HomeGenie ritilnum. Til að virkja þennan eiginleika skaltu slá inn gilt API lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API lykil.",
       "ConfigureOptions.ApiKey": "Lykill fyrir gervigreindarforritaskil Google Gemini",
       "ConfigureOptions.ModelId": "Gerðarauðkenni"
+    },
+    "940": {
+      "Title": "Staðbundin gervigreind (LLM)",
+      "Description": "Keyrðu stórt tungumálalíkan (LLM) staðbundið á HomeGenie netþjóninum þínum. Hægt er að hlaða niður þessum líkönum ókeypis af kerfum eins og Hugging Face. Gefðu einfaldlega upp slóðina að líkanskrá í GGUF-sniði. Athugið að breytingar á breytum, aðallega innan samhengiskóðans, gætu verið nauðsynlegar til að tryggja fulla samhæfni við mismunandi líkön.",
+      "ConfigureOptions.MaxTokens": "Hámarksfjöldi tákna (svarlengd)",
+      "ConfigureOptions.ModelPath": "Slóð að staðbundinni GGUF skrá"
     }
   }
 }

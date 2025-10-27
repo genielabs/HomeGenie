@@ -9,5 +9,11 @@
     "indicators": "Tilmaamayaal",
     "lights_control": "Nalalka",
     "switches_control": "Gawaarida"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "Hello! Waxaan ahay kaaliyaha LLM deegaankaaga. Sideen ku caawin karaa?",
+    "no_bound_module": "Ma jiro module LLM xirma. Fadlan fur goobaha widget-ka si aad ugu xidho qaabka luqadda.",
+    "start_typing_prompt": "Bilow inaad qorto degdeg..."
   }
 }

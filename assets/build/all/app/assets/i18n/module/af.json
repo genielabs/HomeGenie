@@ -1,5 +1,5 @@
 {
-  "stats.time_range": "Tydreeks",
+  "stats.time_range": "Tydsreeks",
   "stats.one_second": "Een sekonde",
   "stats.five_seconds": "5 sekondes",
   "stats.ten_seconds": "10 sekondes",
@@ -8,7 +8,7 @@
   "stats.ten_minutes": "10 minute",
   "stats.half_hour": "30 minute",
   "stats.one_hour": "Een uur",
-  "stats.three_hours": "3 ure",
+  "stats.three_hours": "3 uur",
   "stats.six_hours": "6 uur",
   "stats.twelve_hours": "12 uur",
   "stats.twentyfour_hours": "24 uur",

@@ -34,7 +34,7 @@
   "group_modules": "ម៉ូឌុលនៅក្នុងក្រុមនេះ។",
   "modules": "ម៉ូឌុល",
   "empty_group": "មិនមានម៉ូឌុលនៅក្នុងក្រុមនេះទេ។",
-  "scheduler_wizard": "អ្នកជំនួយកម្មវិធីកំណត់ពេល",
+  "scheduler_wizard": "អ្នកជំនួយការអ្នករៀបចំកាលវិភាគ",
   "schedule_event": "ព្រឹត្តិការណ៍",
   "schedule_type_standard": "ស្តង់ដារ",
   "schedule_type_range": "ជួរកាលបរិច្ឆេទ",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "សេដ្ឋកិច្ចកំដៅ",
   "scheduler_preset_action_config_mode_cool": "ត្រជាក់",
   "scheduler_preset_action_config_mode_cool_eco": "សេដ្ឋកិច្ចត្រជាក់",
+  "scheduler_preset_action_command_remote_control": "ការបញ្ជាពីចម្ងាយ (ផ្ញើលេខកូដ IR/RF)",
+  "scheduler_preset_action_config_data": "ទិន្នន័យ",
   "scheduler_preset_action_program_run": "ដំណើរការកម្មវិធី",
   "scheduler_preset_action_config_program": "កម្មវិធី",
   "scheduler_preset_action_config_options": "ជម្រើស",
   "scheduler_preset_action_program_say": "និយាយ",
+  "scheduler_preset_action_net_http_call": "ហៅទូរស័ព្ទទៅសេវាគេហទំព័រ",
+  "scheduler_preset_action_config_url": "អាសយដ្ឋាន (URL)",
+  "scheduler_preset_action_pause": "ផ្អាក",
+  "scheduler_preset_action_config_seconds": "វិនាទី",
   "scheduler_preset_action_config_message": "សារ",
   "save_and_build": "រក្សាទុកនិងសាងសង់",
   "toggle_widgets_preview": "បិទ/បើកការមើលធាតុក្រាហ្វិកជាមុន",
@@ -117,7 +123,7 @@
   "program_status_enabled": "បានបើក",
   "program_status_broken": "ខូច",
   "program_status_compile": "ចងក្រង",
-  "automation_programming_guide": "ការណែនាំអំពីកម្មវិធី",
+  "automation_programming_guide": "មគ្គុទ្ទេសក៍កម្មវិធី",
   "tap_to_disable": "ចុចដើម្បីបិទ",
   "tap_to_enable": "ចុច​ដើម្បី​បើក",
   "program_data": "ទិន្នន័យកម្មវិធី",
@@ -153,7 +159,7 @@
       "ConfigureOptions.Location": "ឈ្មោះទីក្រុង",
       "ConfigureOptions.Language": "ភាសា (ឧ. EN, IT, FR, DE, ... )",
       "ConfigureOptions.UpdateInterval": "ធ្វើបច្ចុប្បន្នភាពចន្លោះពេល (នាទី)",
-      "ConfigureOptions.ApiKey": "សោ OpenWeatherMap API (APPID)"
+      "ConfigureOptions.ApiKey": "OpenWeatherMap API key (APPID)"
     },
     "77": {
       "Title": "បណ្តាញ MQTT",
@@ -247,7 +253,7 @@
       "Simulator.Sensor.Luminance": "ឧបករណ៍ចាប់សញ្ញាពន្លឺ",
       "Simulator.Meter.Watts": "វ៉ាត់ម៉ែត្រ",
       "Simulator.Meter.Watts.Max": "ថាមពលអតិបរមាវ៉ាត់",
-      "Simulator.Sensor.DataFrequency": "ក្លែងធ្វើបញ្ចេញប្រេកង់"
+      "Simulator.Sensor.DataFrequency": "កម្មវិធីត្រាប់តាមបញ្ចេញប្រេកង់"
     },
     "505": {
       "Title": "ការបញ្ជាពីចម្ងាយ",
@@ -290,13 +296,13 @@
       "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "កំណត់ការប៉ាន់ស្មាន",
-      "Description": "ការរកឃើញចំណុចគន្លឹះតាមរយៈការប៉ាន់ប្រមាណបង្ក ដោយប្រើម៉ូដែល ONNX ផ្ទាល់ខ្លួន ឬគំរូ YOLOv11 ដែលបានបណ្តុះបណ្តាលជាមុនលំនាំដើម (លក្ខណៈជាក់លាក់របស់មនុស្ស)។",
+      "Title": "ការប៉ាន់ប្រមាណ",
+      "Description": "ការរកឃើញចំណុចគន្លឹះតាមរយៈការប៉ាន់ប្រមាណដោយប្រើប្រាស់ម៉ូដែល ONNX ផ្ទាល់ខ្លួន ឬគំរូ YOLOv11 ដែលបានបណ្តុះបណ្តាលជាមុនលំនាំដើម (លក្ខណៈជាក់លាក់របស់មនុស្ស)។",
       "ML.PoseEstimation": "បើក​ការ​ប៉ាន់​ស្មាន",
       "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "ការបែងចែកឧទាហរណ៍",
+      "Title": "ការបែងចែកវត្ថុ",
       "Description": "រកឃើញវត្ថុ និងគ្រោងរបស់វាដោយប្រើគំរូ YOLO11 ដែលបានបណ្តុះបណ្តាលជាមុន។",
       "ML.InstanceSegmentation": "បើកដំណើរការការបែងចែកឧទាហរណ៍",
       "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "បើកការគ្រប់គ្រងភាសាធម្មជាតិសម្រាប់ប្រព័ន្ធឆ្លាតវៃរបស់អ្នកដោយប្រើ Gemini AI របស់ Google ។ ដើម្បីដំណើរការមុខងារនេះ សូមបញ្ចូលសោ API ត្រឹមត្រូវ។ អនុវត្តតាមការណែនាំនៅ https://aistudio.google.com/app/apikey ដើម្បីទទួលបានគន្លឹះ API ឥតគិតថ្លៃ។",
       "ConfigureOptions.ApiKey": "គន្លឹះ Google Gemini AI API",
       "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "ទេពកោសល្យ AI ផ្ទាល់ខ្លួនរបស់អ្នកសម្រាប់ការបង្កើតធាតុក្រាហ្វិក។ ដំណើរការដោយ Gemini វាជួយអ្នកក្នុងការសរសេរ និងបំបាត់កំហុសកូដ HTML, CSS និង JavaScript ដោយផ្ទាល់នៅក្នុងកម្មវិធីនិពន្ធ HomeGenie ។ ដើម្បីដំណើរការមុខងារនេះ សូមបញ្ចូលសោ API ត្រឹមត្រូវ។ អនុវត្តតាមការណែនាំនៅ https://aistudio.google.com/app/apikey ដើម្បីទទួលបានគន្លឹះ API ឥតគិតថ្លៃ។",
+      "ConfigureOptions.ApiKey": "គន្លឹះ Google Gemini AI API",
+      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល"
+    },
+    "940": {
+      "Title": "AI ក្នុងស្រុក (LLM)",
+      "Description": "ដំណើរការគំរូភាសាធំ (LLM) ក្នុងតំបន់នៅលើម៉ាស៊ីនមេ HomeGenie របស់អ្នក។ ម៉ូដែលទាំងនេះអាចទាញយកដោយឥតគិតថ្លៃពីវេទិកាដូចជា Hugging Face។ គ្រាន់តែផ្តល់ផ្លូវទៅកាន់ឯកសារគំរូទ្រង់ទ្រាយ GGUF ។ សូមចំណាំថាការកែតម្រូវប៉ារ៉ាម៉ែត្រ ជាចម្បងនៅក្នុងកូដបរិបទ អាចត្រូវបានទាមទារ ដើម្បីធានាបាននូវភាពឆបគ្នាពេញលេញជាមួយនឹងម៉ូដែលផ្សេងៗគ្នា។",
+      "ConfigureOptions.MaxTokens": "ថូខឹនអតិបរមា (ប្រវែងឆ្លើយតប)",
+      "ConfigureOptions.ModelPath": "ផ្លូវទៅកាន់ឯកសារ GGUF មូលដ្ឋាន"
     }
   }
 }

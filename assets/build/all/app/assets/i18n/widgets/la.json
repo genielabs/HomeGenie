@@ -1,5 +1,5 @@
 {
-  "toggle_long_press_to_reorder_widgets": "Diu premere ut instrumenta ordines mutes permittas/inhibeas.",
+  "toggle_long_press_to_reorder_widgets": "Diu premere ut instrumenta ordines mutes (vel \"widgets\") permittere/inhibere",
   "$alarm_system": {
     "arm_home": "Domus",
     "arm_away": "Absum"
@@ -9,5 +9,11 @@
     "indicators": "Indicatores",
     "lights_control": "Lumina",
     "switches_control": "Commutatores"
+  },
+  "$ai_chat": {
+    "title": "Instrumentum Colloquii Intelligentiae Artificialis",
+    "intro": "Salve! Adiutor LLM localis tuus sum. Quomodo te adiuvare possum?",
+    "no_bound_module": "Modulus LLM non ligatus est. Quaeso, configurationes instrumenti aperi ut exemplar linguae liges.",
+    "start_typing_prompt": "Incipe scribere admonitionem..."
   }
 }

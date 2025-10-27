@@ -9,5 +9,11 @@
     "indicators": "指標",
     "lights_control": "ライト",
     "switches_control": "スイッチ"
+  },
+  "$ai_chat": {
+    "title": "AIチャットウィジェット",
+    "intro": "こんにちは！地元のLLMアシスタントです。何かご用件はございますか？",
+    "no_bound_module": "LLMモジュールがバインドされていません。ウィジェット設定を開いて言語モデルをバインドしてください。",
+    "start_typing_prompt": "プロンプトの入力を開始します..."
   }
 }

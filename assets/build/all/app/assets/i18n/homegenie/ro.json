@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Economie de căldură",
   "scheduler_preset_action_config_mode_cool": "Rece",
   "scheduler_preset_action_config_mode_cool_eco": "Economie răcoroasă",
+  "scheduler_preset_action_command_remote_control": "Telecomandă (trimite coduri IR/RF)",
+  "scheduler_preset_action_config_data": "Date",
   "scheduler_preset_action_program_run": "Rulați programul",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opțiuni",
   "scheduler_preset_action_program_say": "Cuvânt",
+  "scheduler_preset_action_net_http_call": "Apelați un serviciu web",
+  "scheduler_preset_action_config_url": "Adresă (URL)",
+  "scheduler_preset_action_pause": "Pauză",
+  "scheduler_preset_action_config_seconds": "Secunde",
   "scheduler_preset_action_config_message": "Mesaj",
   "save_and_build": "Salvați și construiți",
   "toggle_widgets_preview": "Comutare previzualizare widgeturi",
@@ -143,7 +149,7 @@
     "26": {
       "Title": "Lumini colorate",
       "Description": "Exemplu de integrare a luminilor Philips Hue folosind API-ul HTTP (V1). Utilizatorul implicit pentru conectarea la bridge este „newdeveloper” și ar trebui să fie deja activat.",
-      "ConfigureOptions.BridgeAddress": "Adresă IP a Philips Hue Bridge (V1)",
+      "ConfigureOptions.BridgeAddress": "Adresă IP a podului Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Nume de utilizator",
       "ConfigureOptions.LightsCount": "Numărul de lumini"
     },
@@ -202,7 +208,7 @@
       "Title": "Sistem de alarmă de securitate",
       "Description": "Folosește senzori și alte dispozitive pentru a implementa un sistem de alarmă de securitate.",
       "HomeGenie.SecurityAlarm": "Utilizare ca alarmă/stroboscop",
-      "HomeGenie.SecurityTriggerHome": "Se declanșează și când este armat.",
+      "HomeGenie.SecurityTriggerHome": "Se declanșează și când este armat",
       "HomeGenie.SecuritySensor": "Utilizare ca senzor de securitate",
       "ConfigureOptions.Email.Recipients": "Listă de adrese de e-mail separate prin virgulă pentru notificări de alarmă",
       "ConfigureOptions.System.ArmDelay": "Întârziere braț (secunde)",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Program care va rula atunci când este declanșat"
     },
     "95": {
-      "Title": "Înregistrarea evenimentelor",
+      "Title": "Jurnalizare evenimente",
       "Description": "Înregistrați activitatea dispozitivului.",
       "EventsLogger.EnableLogging": "Permite"
     },
@@ -306,6 +312,18 @@
       "Description": "Activează controlul în limbaj natural pentru sistemul tău inteligent folosind inteligența artificială Gemini de la Google. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
       "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID-ul modelului"
+    },
+    "931": {
+      "Title": "Gemeni Widget Genie",
+      "Description": "Geniul tău personal cu inteligență artificială pentru crearea de widgeturi. Bazat pe Gemini, te ajută să scrii și să depanezi cod HTML, CSS și JavaScript direct în editorul HomeGenie. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
+      "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID-ul modelului"
+    },
+    "940": {
+      "Title": "Inteligență artificială locală (LLM)",
+      "Description": "Rulați un Model de Limbaj Mare (LLM) local pe serverul dvs. HomeGenie. Aceste modele pot fi descărcate gratuit de pe platforme precum Hugging Face. Pur și simplu furnizați calea către un fișier model în format GGUF. Rețineți că pot fi necesare ajustări ale parametrilor, în principal în cadrul Codului Contextual, pentru a asigura compatibilitatea deplină cu diferite modele.",
+      "ConfigureOptions.MaxTokens": "Număr maxim de tokenuri (lungimea răspunsului)",
+      "ConfigureOptions.ModelPath": "Calea către fișierul GGUF local"
     }
   }
 }

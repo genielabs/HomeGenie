@@ -1,5 +1,5 @@
 {
-  "stats.time_range": "Firxa tal-ħin",
+  "stats.time_range": "Firxa ta' żmien",
   "stats.one_second": "Sekonda waħda",
   "stats.five_seconds": "5 sekondi",
   "stats.ten_seconds": "10 sekondi",
@@ -7,7 +7,7 @@
   "stats.one_minute": "Minuta waħda",
   "stats.ten_minutes": "10 minuti",
   "stats.half_hour": "30 minuta",
-  "stats.one_hour": "Siegha",
+  "stats.one_hour": "Siegħa",
   "stats.three_hours": "3 sigħat",
   "stats.six_hours": "6 sigħat",
   "stats.twelve_hours": "12-il siegħa",

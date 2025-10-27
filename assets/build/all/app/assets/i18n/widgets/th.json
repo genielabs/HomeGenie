@@ -7,7 +7,13 @@
   "$section_label": {
     "label": "ฉลาก",
     "indicators": "ตัวบ่งชี้",
-    "lights_control": "ไฟส่องสว่าง",
-    "switches_control": "สวิตซ์"
+    "lights_control": "ไฟ",
+    "switches_control": "สวิตช์"
+  },
+  "$ai_chat": {
+    "title": "วิดเจ็ตแชท AI",
+    "intro": "สวัสดี! ฉันเป็นผู้ช่วย LLM ประจำพื้นที่ของคุณค่ะ มีอะไรให้ช่วยไหมคะ?",
+    "no_bound_module": "ไม่มีการผูกโมดูล LLM กรุณาเปิดการตั้งค่าวิดเจ็ตเพื่อผูกโมเดลภาษา",
+    "start_typing_prompt": "เริ่มพิมพ์คำเตือน..."
   }
 }

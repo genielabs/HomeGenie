@@ -21,7 +21,7 @@
   "repositories": "Repozitoriji",
   "packages": "Paketes",
   "installed_packages": "Instalētās pakotnes",
-  "upload_package": "Augšupielādēt paketi",
+  "upload_package": "Augšupielādēt pakotni",
   "create_package": "Izveidot jaunu paketi",
   "programs_version": "Programmas versija",
   "http_settings": "HTTP iestatījumi",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Ieslēgts",
   "scheduler_preset_action_config_mode_off": "Izslēgts",
   "scheduler_preset_action_config_mode_heat": "Siltums",
-  "scheduler_preset_action_config_mode_heat_eco": "Siltumenerģijas ekonomija",
+  "scheduler_preset_action_config_mode_heat_eco": "Siltuma ekonomija",
   "scheduler_preset_action_config_mode_cool": "Forši",
-  "scheduler_preset_action_config_mode_cool_eco": "Vēsa ekonomika",
+  "scheduler_preset_action_config_mode_cool_eco": "Vēsā ekonomika",
+  "scheduler_preset_action_command_remote_control": "Tālvadības pults (IR/RF kodu nosūtīšana)",
+  "scheduler_preset_action_config_data": "Dati",
   "scheduler_preset_action_program_run": "Palaist programmu",
   "scheduler_preset_action_config_program": "Programma",
   "scheduler_preset_action_config_options": "Iespējas",
   "scheduler_preset_action_program_say": "Saki",
+  "scheduler_preset_action_net_http_call": "Zvaniet tīmekļa pakalpojumam",
+  "scheduler_preset_action_config_url": "Adrese (URL)",
+  "scheduler_preset_action_pause": "Pauze",
+  "scheduler_preset_action_config_seconds": "Sekundes",
   "scheduler_preset_action_config_message": "Ziņojums",
   "save_and_build": "Saglabāt un veidot",
   "toggle_widgets_preview": "Pārslēgt logrīku priekšskatījumu",
@@ -122,11 +128,11 @@
   "tap_to_enable": "Noklikšķiniet, lai iespējotu",
   "program_data": "Programmas dati",
   "visual_code": "Vizuālais kods",
-  "generated_code": "Ģenerēts kods",
+  "generated_code": "Ģenerētais kods",
   "setup_code": "Iestatīšana",
   "main_code": "Galvenais",
   "context_code": "Konteksts",
-  "main_code_empty_note": "Kods \"Main\" ir tukšs. Izmantojiet redaktoru \"Visual code\", lai ģenerētu šo kodu: - Atveriet kategoriju \"Program\" no komandu paletes kreisajā pusē - Ievelciet bloku ar tipu \"Main\" vizuālā koda darbvietā - Pievienojiet tajā citus koda blokus, lai ieviestu šīs programmas darbības un loģiku Programmu \"Main\" var palaist manuāli vai automātiski startēt, pamatojoties uz nosacījumiem, kas galu galā norādīti iestatīšanas kodā.",
+  "main_code_empty_note": "\"Main\" kods ir tukšs. Izmantojiet \"Visual code\" redaktoru, lai ģenerētu šo kodu: - Atveriet kategoriju \"Program\" no komandu paletes kreisajā pusē - Ievelciet \"Main\" tipa bloku vizuālā koda darbvietā - Pievienojiet tajā citus koda blokus, lai ieviestu šīs programmas darbības un loģiku Programmu \"Main\" var palaist manuāli vai automātiski, pamatojoties uz nosacījumiem, kas galu galā norādīti iestatīšanas kodā.",
   "setup_code_empty_note": "Kods “Setup” ir tukšs. Izmantojiet redaktoru “Visual code”, lai ģenerētu šo kodu: - Atveriet kategoriju “Program” no komandu paletes kreisajā pusē - Ievelciet bloku ar tipu “Setup” vizuālā koda darbvietā - Pievienojiet tajā citus koda blokus, lai noteiktu nosacījumus, kas aktivizēs koda “Main” izpildi Šis kods tiek novērtēts ikreiz, kad notiek jauns notikums, un vismaz reizi minūtē.",
   "capture_commands": "Uztveršanas komandas",
   "capture_commands_description": "Pievienojiet programmai visas komandas, kas manuāli tiek izpildītas logrīkos.",
@@ -179,7 +185,7 @@
     },
     "81": {
       "Title": "Enerģijas monitors",
-      "Description": "Ģenerēt statistiku par ierīču enerģijas patēriņu un izmantošanu.",
+      "Description": "Ģenerēt statistiku par ierīču enerģijas patēriņu un lietošanu.",
       "EnergyManagement.MonitorStatus": "Monitora statuss",
       "EnergyManagement.MonitorWatts": "Enerģijas patēriņa uzraudzība"
     },
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
     },
     "912": {
-      "Title": "Instanču segmentācija",
+      "Title": "Instances segmentācija",
       "Description": "Noteikt objektus un to kontūras, izmantojot iepriekš apmācītu YOLO11 modeli.",
       "ML.InstanceSegmentation": "Iespējot instances segmentāciju",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Iespējo dabiskās valodas vadību jūsu viedierīcē, izmantojot Google Gemini mākslīgo intelektu. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",
       "ConfigureOptions.ApiKey": "Google Gemini mākslīgā intelekta API atslēga",
       "ConfigureOptions.ModelId": "Modeļa ID"
+    },
+    "931": {
+      "Title": "Dvīņu logrīka džins",
+      "Description": "Jūsu personīgais mākslīgā intelekta džins logrīku izveidei. Darbojas ar Gemini, tas palīdz jums rakstīt un atkļūdot HTML, CSS un JavaScript kodu tieši HomeGenie redaktorā. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",
+      "ConfigureOptions.ApiKey": "Google Gemini mākslīgā intelekta API atslēga",
+      "ConfigureOptions.ModelId": "Modeļa ID"
+    },
+    "940": {
+      "Title": "Vietējais mākslīgais intelekts (LLM)",
+      "Description": "Palaidiet lielo valodas modeli (LLM) lokāli savā HomeGenie serverī. Šos modeļus var bez maksas lejupielādēt no tādām platformām kā Hugging Face. Vienkārši norādiet ceļu uz GGUF formāta modeļa failu. Lūdzu, ņemiet vērā, ka, lai nodrošinātu pilnīgu saderību ar dažādiem modeļiem, var būt nepieciešamas parametru korekcijas, galvenokārt konteksta kodā.",
+      "ConfigureOptions.MaxTokens": "Maksimālais žetonu skaits (atbildes garums)",
+      "ConfigureOptions.ModelPath": "Ceļš uz lokālo GGUF failu"
     }
   }
 }

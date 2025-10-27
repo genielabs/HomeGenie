@@ -17,7 +17,7 @@
   "device_driver": "Driver",
   "flow_control": "Kontrol ng daloy",
   "controller": "Controller",
-  "programs": "Mga Programa",
+  "programs": "Mga programa",
   "repositories": "Mga repositoryo",
   "packages": "Mga package",
   "installed_packages": "Mga naka-install na pakete",
@@ -54,7 +54,7 @@
   "cronwizard_start_time": "Oras ng pagsisimula",
   "cronwizard_end_time": "Oras ng pagtatapos",
   "cronwizard_minutes": "Mga minuto",
-  "cronwizard_hours": "Mga oras",
+  "cronwizard_hours": "Oras",
   "cronwizard_days": "Mga araw",
   "cronwizard_months": "mga buwan",
   "cronwizard_minuteselect_everyminute": "Bawat minuto",
@@ -82,29 +82,35 @@
   "cronwizard_action_no_action": "Walang aksyon",
   "cronwizard_action_schedule_variable_hint": "Gamitin ang <span class=\"notranslate color-primary\">@{{name}}</span> bilang variable sa mga cron expression o gamitin ang <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> sa mga automation program upang i-reference ang kaganapang ito.",
   "scheduler_preset_action_command_turn_on": "I-on",
-  "scheduler_preset_action_command_turn_off": "Patayin",
-  "scheduler_preset_action_command_set_level": "Itakda ang antas",
+  "scheduler_preset_action_command_turn_off": "I-off",
+  "scheduler_preset_action_command_set_level": "Itakda ang Antas",
   "scheduler_preset_action_config_level": "Antas",
-  "scheduler_preset_action_command_set_color": "Itakda ang kulay",
+  "scheduler_preset_action_command_set_color": "Itakda ang Kulay",
   "scheduler_preset_action_config_color": "Kulay",
-  "scheduler_preset_action_command_thermostat_mode": "Thermostat mode",
+  "scheduler_preset_action_command_thermostat_mode": "Thermostat Mode",
   "scheduler_preset_action_config_mode": "Mode",
   "scheduler_preset_action_config_mode_on": "Naka-on",
   "scheduler_preset_action_config_mode_off": "Naka-off",
   "scheduler_preset_action_config_mode_heat": "Init",
-  "scheduler_preset_action_config_mode_heat_eco": "ekonomiya ng init",
+  "scheduler_preset_action_config_mode_heat_eco": "Heat Economy",
   "scheduler_preset_action_config_mode_cool": "Astig",
-  "scheduler_preset_action_config_mode_cool_eco": "Cool na ekonomiya",
-  "scheduler_preset_action_program_run": "Patakbuhin ang programa",
+  "scheduler_preset_action_config_mode_cool_eco": "Cool Economy",
+  "scheduler_preset_action_command_remote_control": "Remote Control (magpadala ng mga IR/RF code)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Patakbuhin ang Programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Mga pagpipilian",
   "scheduler_preset_action_program_say": "Sabihin",
+  "scheduler_preset_action_net_http_call": "Tumawag sa isang Web Service",
+  "scheduler_preset_action_config_url": "Address (URL)",
+  "scheduler_preset_action_pause": "I-pause",
+  "scheduler_preset_action_config_seconds": "Mga segundo",
   "scheduler_preset_action_config_message": "Mensahe",
   "save_and_build": "I-save at bumuo",
   "toggle_widgets_preview": "I-toggle ang preview ng mga widget",
   "stop_program": "Itigil ang programa",
   "run_program": "Patakbuhin ang programa",
-  "enable_to_run_program": "Paganahin ang program upang patakbuhin ito",
+  "enable_to_run_program": "Paganahin ang programa upang patakbuhin ito",
   "program_status_added": "Idinagdag",
   "program_status_idle": "Idle",
   "program_status_setup": "Setup",
@@ -117,17 +123,17 @@
   "program_status_enabled": "Pinagana",
   "program_status_broken": "Nasira",
   "program_status_compile": "Mag-compile",
-  "automation_programming_guide": "Gabay sa programming'",
+  "automation_programming_guide": "Gabay sa Programming'",
   "tap_to_disable": "I-click upang huwag paganahin",
   "tap_to_enable": "I-click upang paganahin",
-  "program_data": "Data ng programa",
-  "visual_code": "Visual code",
-  "generated_code": "Binuo na code",
+  "program_data": "Data ng Programa",
+  "visual_code": "Visual Code",
+  "generated_code": "Binuo na Code",
   "setup_code": "Setup",
   "main_code": "Pangunahing",
   "context_code": "Konteksto",
   "main_code_empty_note": "Walang laman ang \"Pangunahing\" code. Gamitin ang editor ng \"Visual code\" upang buuin ang code na ito: - Buksan ang kategoryang \"Programa\" mula sa command palette sa kaliwa - I-drag ang isang bloke ng uri ng \"Main\" sa workspace ng visual code - Magdagdag sa loob nito ng iba pang mga bloke ng code upang ipatupad ang mga aksyon at lohika ng program na ito Ang program na \"Main\" ay maaaring manual na patakbuhin o awtomatikong simulan batay sa mga kondisyon na kalaunan ay ibinigay sa Setup code.",
-  "setup_code_empty_note": "Walang laman ang \"Setup\" code. Gamitin ang editor ng \"Visual code\" upang buuin ang code na ito: - Buksan ang kategoryang \"Programa\" mula sa command palette sa kaliwa - I-drag ang isang bloke ng uri ng \"Setup\" sa workspace ng visual code - Magdagdag sa loob nito ng iba pang mga bloke ng code upang matukoy ang mga kundisyon na magti-trigger ng \"Pangunahing\" code execution Ang code na ito ay nasusuri sa tuwing may bagong kaganapan at hindi bababa sa isang beses sa isang minuto.",
+  "setup_code_empty_note": "Walang laman ang \"Setup\" code. Gamitin ang editor ng \"Visual code\" upang buuin ang code na ito: - Buksan ang kategoryang \"Programa\" mula sa command palette sa kaliwa - I-drag ang isang bloke ng uri ng \"Setup\" sa workspace ng visual code - Magdagdag sa loob nito ng iba pang mga bloke ng code upang matukoy ang mga kundisyon na magti-trigger ng \"Pangunahing\" code execution Ang code na ito ay nasusuri sa tuwing may mangyayaring bagong kaganapan at hindi bababa sa isang beses sa isang minuto.",
   "capture_commands": "Kunin ang mga utos",
   "capture_commands_description": "Idagdag ang lahat ng mga utos na ginawa nang manu-mano sa mga widget sa programa.",
   "capture_commands_pause": "I-pause sa pagitan ng mga utos",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Gayahin lamang"
     },
     "26": {
-      "Title": "Mga kulay na ilaw",
+      "Title": "Kulay ng mga Ilaw",
       "Description": "Halimbawa Philips Hue lights integration gamit ang HTTP API (V1). Ang default na user na kumonekta sa tulay ay \"newdeveloper\" at dapat ay naka-enable na ito.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP address",
       "ConfigureOptions.BridgeUsername": "Username",
@@ -149,7 +155,7 @@
     },
     "34": {
       "Title": "Pagtataya ng Panahon",
-      "Description": "Weather at impormasyon ng forecast mula sa serbisyo ng Open Weather Map. Upang i-activate ang widget na ito maglagay ng wastong API key. Sundin ang mga tagubilin sa https://openweathermap.org/appid para makakuha ng libreng API key.",
+      "Description": "Weather at impormasyon ng forecast mula sa serbisyo ng Open Weather Map. Upang i-activate ang widget na ito, maglagay ng wastong API key. Sundin ang mga tagubilin sa https://openweathermap.org/appid para makakuha ng libreng API key.",
       "ConfigureOptions.Location": "Pangalan ng lungsod",
       "ConfigureOptions.Language": "Wika (hal. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "I-update ang pagitan (minuto)",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Programa na tatakbo kapag na-trigger"
     },
     "95": {
-      "Title": "Pag-log ng mga kaganapan",
+      "Title": "Pag-log ng mga Kaganapan",
       "Description": "I-record ang aktibidad ng device.",
       "EventsLogger.EnableLogging": "Paganahin"
     },
     "111": {
-      "Title": "Configuration ng kliyente",
+      "Title": "Configuration ng Kliyente",
       "Description": "Nagpapatupad ng API para sa pamamahala ng mga profile ng configuration ng kliyente na ginagamit upang mag-imbak ng mga setting ng UI at mga dashboard."
     },
     "400": {
@@ -240,7 +246,7 @@
       "Description": "Ginagaya ang motion detection ng demo multi-sensor."
     },
     "410": {
-      "Title": "Sensor simulator",
+      "Title": "Sensor Simulator",
       "Description": "Maglabas ng mga random na halaga ng sensor.",
       "Simulator.Sensor.Temperature": "Sensor ng temperatura",
       "Simulator.Sensor.Humidity": "Sensor ng kahalumigmigan",
@@ -259,14 +265,14 @@
       "ConfigureOptions.DimmerInterval": "Pagdidilim na hakbang"
     },
     "142": {
-      "Title": "E-Mail account",
+      "Title": "E-Mail Account",
       "Description": "Nag-iimbak ng impormasyon ng e-mail account na ginagamit ng mga program ng system para sa pagpapadala/pagtanggap ng mga email.",
       "ConfigureOptions.Email.Sender": "1. E-Mail address",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP server address",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP username (opsyonal)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP password (opsyonal)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP server port",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ng SSL ang SMTP server"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. Gumagamit ang SMTP server ng SSL"
     },
     "145": {
       "Title": "Smart Device",
@@ -280,10 +286,10 @@
     "8": {
       "Title": "Sunrise Colors Scenario",
       "Description": "Halimbawang senaryo ng \"Sunrise\" para sa pagpapalit ng kulay ng mga LED na ilaw.",
-      "Scenarios.SunriseColors": "Link sa Sunrise Colors scenario"
+      "Scenarios.SunriseColors": "Mag-link sa senaryo ng Sunrise Colors"
     },
     "910": {
-      "Title": "Pagtuklas ng bagay",
+      "Title": "Object Detection",
       "Description": "Mag-detect ng mga bagay gamit ang isang pre-trained na modelo ng YOLO11.",
       "ML.ObjectDetection": "Paganahin ang pagtuklas ng mga bagay",
       "ML.ObjectDetection.TriggerDetect": "Listahan ng mga bagay na pinaghihiwalay ng kuwit (sa English) na magti-trigger ng alarma. (hal: pusa, aso, tao, backpack, maleta)",
@@ -291,21 +297,33 @@
     },
     "911": {
       "Title": "Pagtataya ng pose",
-      "Description": "Pag-detect ng keypoint sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelong YOLOv11 (human pose-specific).",
+      "Description": "Keypoint detection sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelo ng YOLOv11 (human pose-specific).",
       "ML.PoseEstimation": "Paganahin ang pagtatantya ng pose",
       "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
     },
     "912": {
-      "Title": "Pag-segment ng instance",
+      "Title": "Pag-segment ng Instance",
       "Description": "I-detect ang mga bagay at ang kanilang mga balangkas gamit ang isang pre-trained na modelo ng YOLO11.",
       "ML.InstanceSegmentation": "I-enable ang pagse-segment ng instance",
       "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
-      "Description": "Pinapagana ang natural na kontrol sa wika para sa iyong matalinong system gamit ang Gemini AI ng Google. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey upang makakuha ng libreng API key.",
+      "Description": "Pinapagana ang natural na kontrol sa wika para sa iyong matalinong system gamit ang Gemini AI ng Google. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
       "ConfigureOptions.ModelId": "Model ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Ang iyong personal na AI genie para sa paggawa ng widget. Pinapatakbo ng Gemini, tinutulungan ka nitong magsulat at mag-debug ng HTML, CSS, at JavaScript code nang direkta sa loob ng editor ng HomeGenie. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API key",
+      "ConfigureOptions.ModelId": "Model ID"
+    },
+    "940": {
+      "Title": "Lokal na AI (LLM)",
+      "Description": "Magpatakbo ng Large Language Model (LLM) nang lokal sa iyong HomeGenie server. Maaaring ma-download ang mga modelong ito nang libre mula sa mga platform tulad ng Hugging Face. Ibigay lang ang path sa isang GGUF format model file. Pakitandaan na ang mga pagsasaayos sa mga parameter, pangunahin sa loob ng Context Code, ay maaaring kailanganin upang matiyak ang ganap na pagkakatugma sa iba't ibang mga modelo.",
+      "ConfigureOptions.MaxTokens": "Max Token (haba ng tugon)",
+      "ConfigureOptions.ModelPath": "Path sa lokal na GGUF file"
     }
   }
 }

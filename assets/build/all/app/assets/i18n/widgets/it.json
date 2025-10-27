@@ -11,5 +11,11 @@
     "indicators": "Indicatori",
     "lights_control": "Luci",
     "switches_control": "Interruttori"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "Ciao! Sono il tuo assistente LLM locale. Come posso aiutarti?",
+    "no_bound_module": "Nessun modulo LLM associato. Apri le impostazioni del widget per associare un modello linguistico.",
+    "start_typing_prompt": "Chiedimi qualcosa..."
   }
 }

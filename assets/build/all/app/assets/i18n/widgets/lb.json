@@ -9,5 +9,11 @@
     "indicators": "Indikatoren",
     "lights_control": "Luuchten",
     "switches_control": "Schalter"
+  },
+  "$ai_chat": {
+    "title": "KI-Chat-Widget",
+    "intro": "Moien! Ech sinn Äre lokale LLM Assistent. Wéi kann ech Iech hëllefen?",
+    "no_bound_module": "Kee LLM-Modul gebonnen. Maacht w.e.g. d'Widget-Astellungen op fir e Sproochemodell ze bannen.",
+    "start_typing_prompt": "Fänkt un, eng Ufro ze schreiwen..."
   }
 }

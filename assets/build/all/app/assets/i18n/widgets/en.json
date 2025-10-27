@@ -11,5 +11,11 @@
     "indicators": "Indicators",
     "lights_control": "Lights",
     "switches_control": "Switches"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "Hello! I am your local LLM assistant. How can I help you?",
+    "no_bound_module": "No LLM module bound. Please open the widget settings to bind a language model.",
+    "start_typing_prompt": "Start typing a prompt..."
   }
 }

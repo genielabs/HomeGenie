@@ -10,7 +10,7 @@
   "system_config_manual_setup": "Fametrahana tanana",
   "interfaces": "interface",
   "Protocols.UPnP": "UPnP controller",
-  "HomeAutomation.X10": "Mpandrindra X10",
+  "HomeAutomation.X10": "X10 controller",
   "HomeAutomation.ZWave": "Z-Wave controller",
   "HomeAutomation.ZigBee": "ZigBee controller",
   "device_port": "Seranana fitaovana",
@@ -38,7 +38,7 @@
   "schedule_event": "Event",
   "schedule_type_standard": "Malagasy",
   "schedule_type_range": "Daty isan-karazany",
-  "schedule_type_cron": "Fomba fiteny Cron",
+  "schedule_type_cron": "Cron expression",
   "schedule_action": "Action",
   "schedule_occurrence_preview": "Topi-maso fisehoan-javatra",
   "time_schedule": "fandaharam-potoana",
@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Ampiasao ny <span class=\"notranslate color-primary\">@{{name}}</span> ho faribolana amin'ny teny cron na ampiasao ny <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> amin'ny programa automatique mba hanondroana ity hetsika ity.",
   "scheduler_preset_action_command_turn_on": "Alefaso",
   "scheduler_preset_action_command_turn_off": "Vonoy",
-  "scheduler_preset_action_command_set_level": "Mametraha ambaratonga",
+  "scheduler_preset_action_command_set_level": "Set Level",
   "scheduler_preset_action_config_level": "ambaratonga",
-  "scheduler_preset_action_command_set_color": "Mametraka loko",
+  "scheduler_preset_action_command_set_color": "Set Color",
   "scheduler_preset_action_config_color": "loko",
-  "scheduler_preset_action_command_thermostat_mode": "Thermostat fomba",
+  "scheduler_preset_action_command_thermostat_mode": "Thermostat Mode",
   "scheduler_preset_action_config_mode": "Mode",
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "NIALA",
   "scheduler_preset_action_config_mode_heat": "hafanana",
-  "scheduler_preset_action_config_mode_heat_eco": "Toekarena hafanana",
+  "scheduler_preset_action_config_mode_heat_eco": "Toe-karena hafanana",
   "scheduler_preset_action_config_mode_cool": "mangatsiatsiaka",
   "scheduler_preset_action_config_mode_cool_eco": "Toekarena mangatsiaka",
-  "scheduler_preset_action_program_run": "Mandehana programa",
+  "scheduler_preset_action_command_remote_control": "Fanaraha-maso lavitra (mandefa kaody IR/RF)",
+  "scheduler_preset_action_config_data": "NY FANAZAVANA",
+  "scheduler_preset_action_program_run": "Run Program",
   "scheduler_preset_action_config_program": "FANDAHARAM-POTOANA",
   "scheduler_preset_action_config_options": "FANDIKANA",
   "scheduler_preset_action_program_say": "LAZAIN'NY",
+  "scheduler_preset_action_net_http_call": "Miantso serivisy an-tranonkala",
+  "scheduler_preset_action_config_url": "Adiresy (URL)",
+  "scheduler_preset_action_pause": "Miato",
+  "scheduler_preset_action_config_seconds": "segondra",
   "scheduler_preset_action_config_message": "hAFATRA",
   "save_and_build": "Tehirizo ary manorina",
   "toggle_widgets_preview": "Safidio ny sarin'ny widgets",
@@ -120,16 +126,16 @@
   "automation_programming_guide": "Torolàlana momba ny fandaharana'",
   "tap_to_disable": "Kitiho raha tsy hanaisotra",
   "tap_to_enable": "Kitiho raha afaka",
-  "program_data": "Data fandaharana",
-  "visual_code": "Visual code",
+  "program_data": "Data Programa",
+  "visual_code": "Visual Code",
   "generated_code": "Kaody vokarina",
   "setup_code": "Hametraka",
   "main_code": "Main",
   "context_code": "teny manodidina",
   "main_code_empty_note": "Foana ny kaody \"Main\". Ampiasao ny tonian-dahatsoratra \"Visual code\" hamoronana ity kaody ity: - Sokafy ny sokajy \"Programa\" avy amin'ny palette baiko eo ankavia - Tariho ny sakana misy karazana \"Main\" ao amin'ny sehatra fiasan'ny kaody hita maso - Ampio ao anatiny ireo sakana kaody hafa hampiharana hetsika sy lojika amin'ity programa ity Ny programa \"Main\" dia azo atao amin'ny tanana na manomboka mandeha ho azy araka ny fepetra omena ao amin'ny kaody Setup.",
-  "setup_code_empty_note": "Foana ny kaody \"Setup\". Ampiasao ny tonian-dahatsoratra \"Visual code\" hamoronana ity kaody ity: - Sokafy ny sokajy \"Programa\" avy amin'ny palette baiko eo ankavia - Tariho ny bloc misy karazana \"Setup\" ao amin'ny toeram-piasana kaody hita maso - Ampio ao anatiny ireo sakana kaody hafa mba hamaritana ny fepetra izay hiteraka famonoana kaody \"Main\"",
+  "setup_code_empty_note": "Foana ny kaody \"Setup\". Ampiasao ny tonian-dahatsoratra \"Visual code\" hamoronana ity kaody ity: - Sokafy ny sokajy \"Programa\" avy amin'ny palette baiko eo ankavia - Tariho ny sakana misy karazana \"Setup\" ao amin'ny sehatra fiasan'ny kaody hita maso - Ampio ao anatiny ireo sakana kaody hafa mba hamaritana ny fepetra izay hiteraka famonoana kaody \"Main\"",
   "capture_commands": "Misambotra baiko",
-  "capture_commands_description": "Ampio ny baiko rehetra natao tanana amin'ny widgets amin'ny programa.",
+  "capture_commands_description": "Ampio ny baiko rehetra atao amin'ny tanana amin'ny widgets amin'ny programa.",
   "capture_commands_pause": "Miato eo anelanelan'ny baiko",
   "capture_pause_none": "tsy misy",
   "capture_pause_asis": "Toy ny misy",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simulate ihany"
     },
     "26": {
-      "Title": "Jiro miloko",
+      "Title": "Loko Jiro",
       "Description": "Ohatra ny fampidirana jiro Philips Hue mampiasa HTTP API (V1). Ny mpampiasa default mifandray amin'ny tetezana dia \"newdeveloper\" ary tokony ho efa alefa izany.",
       "ConfigureOptions.BridgeAddress": "Adiresy IP Philips Hue Bridge (V1).",
       "ConfigureOptions.BridgeUsername": "Anaran'ny mpampiasa",
@@ -191,8 +197,8 @@
     },
     "88": {
       "Title": "fakantsary IP generic",
-      "Description": "Asehoy/fanomezana fahana sary avy amin'ny fakantsary IP.",
-      "IpCamera.ImageURL": "URL API sary fakantsary (jereo ny dosie fakan-tsary)",
+      "Description": "Asehoy/fanjonoana sary avy amin'ny fakantsary IP.",
+      "IpCamera.ImageURL": "URL API sary fakan-tsary (jereo ny dosie fakan-tsary)",
       "IpCamera.Username": "Anarana mpampiasa (tsy voatery)",
       "IpCamera.Password": "Password (tsy voatery)",
       "Widget.Config.fps": "Frames isan-tsegondra",
@@ -207,18 +213,18 @@
       "ConfigureOptions.Email.Recipients": "Lisitr'ireo mpandray e-mail ho an'ny fampandrenesana fanairana",
       "ConfigureOptions.System.ArmDelay": "Fahatarana sandry (segondra)",
       "ConfigureOptions.System.SirenStartTime": "Fanemorana ny fanombohan'ny Sirens (segondra)",
-      "ConfigureOptions.System.SirenMaxTime": "Sirenina max ora (segondra, 0=tsy manam-petra)",
+      "ConfigureOptions.System.SirenMaxTime": "Sirene max ora (segondra, 0=tsy manam-petra)",
       "ConfigureOptions.Trigger.ArmedProgram": "Fandaharana mihazakazaka rehefa mitam-piadiana",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa mandeha rehefa tsy misy fitaovam-piadiana",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programa handeha rehefa trigger"
     },
     "95": {
-      "Title": "Firaketana hetsika",
+      "Title": "Events logging",
       "Description": "Raketo ny asan'ny fitaovana.",
       "EventsLogger.EnableLogging": "Tadiavo"
     },
     "111": {
-      "Title": "Fanofanana mpanjifa",
+      "Title": "Configuration mpanjifa",
       "Description": "Mampihatra API amin'ny fitantanana ny mombamomba ny fanefena an'ny mpanjifa izay ampiasaina hitehirizana ny UI sy ny dashboards."
     },
     "400": {
@@ -240,9 +246,9 @@
       "Description": "Manao simulates motion detection ny demo multi-sensor."
     },
     "410": {
-      "Title": "Sensor simulator",
+      "Title": "Sensor Simulator",
       "Description": "Mamoaka sanda sensor kisendrasendra.",
-      "Simulator.Sensor.Temperature": "sensor maripana",
+      "Simulator.Sensor.Temperature": "Sensor maripana",
       "Simulator.Sensor.Humidity": "Hamandoana sensor",
       "Simulator.Sensor.Luminance": "Fahazavana sensor",
       "Simulator.Meter.Watts": "Watt metatra",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Dimming dingana"
     },
     "142": {
-      "Title": "Kaonty e-mail",
+      "Title": "Kaonty mailaka",
       "Description": "Mitahiry ny mombamomba ny kaonty mailaka ampiasain'ny programa rafitra amin'ny fandefasana/fandraisany mailaka.",
       "ConfigureOptions.Email.Sender": "1. Adiresy mailaka",
       "ConfigureOptions.Email.SmtpServer": "2. Adiresin'ny mpizara SMTP",
@@ -270,7 +276,7 @@
     },
     "145": {
       "Title": "Smart Device",
-      "Description": "Ampidiro/ vonoina ny fitaovana mifototra amin'ny fahitana mihetsika sy ny hazavana manodidina.",
+      "Description": "Ampidiro / vonoina ny fitaovana mifototra amin'ny fahitana mihetsika sy ny hazavana manodidina.",
       "HomeGenie.SmartLights.Enable": "Alefaso ny 'Smart Device'",
       "HomeGenie.SmartLights.OnMotionDetect": "Voafehin'ny sensor (tsy voatery)",
       "HomeGenie.SmartLights.CheckLuminosity": "Voafehin'ny sensor maivana (tsy voatery)",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Rohy mankany amin'ny scenario Sunrise Colors"
     },
     "910": {
-      "Title": "Famantarana zavatra",
+      "Title": "Object Detection",
       "Description": "Mitadiava zavatra mampiasa maodely YOLO11 efa voaofana mialoha.",
       "ML.ObjectDetection": "Alefaso ny fitadiavana zavatra",
       "ML.ObjectDetection.TriggerDetect": "Lisitry ny zavatra misaraka amin'ny faingo (amin'ny teny anglisy) izay hiteraka fanairana. (oh: saka, alika, olona, kitapo, valizy)",
-      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Lalana misy rakitra modely YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Tombana pose",
+      "Title": "Tombana Pose",
       "Description": "Famantarana ny hevi-dehibe amin'ny alalan'ny tombantombana pose, mampiasa maodely ONNX mahazatra na modely YOLOv11 efa voaofana mialoha (manokana ny maha-olona).",
       "ML.PoseEstimation": "Alefaso ny tombana pose",
       "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Fizarana ohatra",
+      "Title": "Segmentation ohatra",
       "Description": "Tadiavo ny zavatra sy ny sariny amin'ny fampiasana modely YOLO11 efa voaofana mialoha.",
       "ML.InstanceSegmentation": "Alefaso ny fizarana ohatra",
       "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Mamela ny fifehezana ny fiteny voajanahary ho an'ny rafitra marani-tsainao mampiasa ny Gemini AI an'ny Google. Mba hampavitrika ity endri-javatra ity dia ampidiro fanalahidy API manan-kery. Araho ny toromarika ao amin'ny https://aistudio.google.com/app/apikey hahazoana fanalahidy API maimaim-poana.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
       "ConfigureOptions.ModelId": "ID modely"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Ny genie AI anao manokana amin'ny famoronana widget. Powered by Gemini, manampy anao hanoratra sy debug HTML, CSS ary JavaScript mivantana ao anatin'ny tonian-dahatsoratra HomeGenie. Mba hampavitrika ity endri-javatra ity dia ampidiro fanalahidy API manan-kery. Araho ny toromarika ao amin'ny https://aistudio.google.com/app/apikey hahazoana fanalahidy API maimaim-poana.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API key",
+      "ConfigureOptions.ModelId": "ID modely"
+    },
+    "940": {
+      "Title": "AI eo an-toerana (LLM)",
+      "Description": "Manaova Large Language Model (LLM) eo an-toerana amin'ny mpizara HomeGenie anao. Ireo modely ireo dia azo alaina maimaim-poana amin'ny sehatra toy ny Hugging Face. Omeo fotsiny ny lalana mankany amin'ny rakitra modely amin'ny endrika GGUF. Mariho fa mety ilaina ny fanitsiana ny mason-tsivana, indrindra ao anatin'ny Code Context, mba hahazoana antoka fa mifanaraka tanteraka amin'ny modely samihafa.",
+      "ConfigureOptions.MaxTokens": "Token'ny Max (lavany valiny)",
+      "ConfigureOptions.ModelPath": "Lalana mankany amin'ny rakitra GGUF eo an-toerana"
     }
   }
 }

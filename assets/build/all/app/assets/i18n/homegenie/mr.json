@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "निवडलेले महिने",
   "cronwizard_schedule_set_exact_time": "कार्यक्रमाची वेळ सेट करा.",
   "cronwizard_schedule_set_slot_start": "सुरुवातीचा वेळ स्लॉट सेट करा.",
-  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> पासून सुरू होत आहे. वेळ स्लॉटचा शेवट सेट करा.",
+  "cronwizard_schedule_set_slot_end": "{{start}} पासून सुरू होत आहे.<span class=\"notranslate\"><br/></span> वेळ स्लॉट समाप्ती सेट करा.",
   "cronwizard_bindings_define_types_and_modules": "या वेळापत्रकाच्या अधीन असलेले प्रकार आणि मॉड्यूल परिभाषित करा (पर्यायी)",
   "cronwizard_bindings_select_types": "प्रकार निवडा",
   "cronwizard_action_set_action_to_execute": "या घटनेच्या घटनांवर अंमलात आणण्यासाठी कृती सेट करा",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "चालू",
   "scheduler_preset_action_config_mode_off": "बंद",
   "scheduler_preset_action_config_mode_heat": "उष्णता",
-  "scheduler_preset_action_config_mode_heat_eco": "उष्णता बचत",
+  "scheduler_preset_action_config_mode_heat_eco": "उष्णता अर्थव्यवस्था",
   "scheduler_preset_action_config_mode_cool": "थंड",
-  "scheduler_preset_action_config_mode_cool_eco": "थंड अर्थव्यवस्था",
-  "scheduler_preset_action_program_run": "प्रोग्राम चालवा",
+  "scheduler_preset_action_config_mode_cool_eco": "कूल इकॉनॉमी",
+  "scheduler_preset_action_command_remote_control": "रिमोट कंट्रोल (IR/RF कोड पाठवा)",
+  "scheduler_preset_action_config_data": "डेटा",
+  "scheduler_preset_action_program_run": "कार्यक्रम चालवा",
   "scheduler_preset_action_config_program": "कार्यक्रम",
   "scheduler_preset_action_config_options": "पर्याय",
   "scheduler_preset_action_program_say": "म्हणा",
+  "scheduler_preset_action_net_http_call": "वेब सेवेला कॉल करा",
+  "scheduler_preset_action_config_url": "पत्ता (URL)",
+  "scheduler_preset_action_pause": "विराम द्या",
+  "scheduler_preset_action_config_seconds": "सेकंद",
   "scheduler_preset_action_config_message": "संदेश",
   "save_and_build": "जतन करा आणि तयार करा",
   "toggle_widgets_preview": "विजेट पूर्वावलोकन टॉगल करा",
@@ -126,7 +132,7 @@
   "setup_code": "सेटअप",
   "main_code": "मुख्य",
   "context_code": "संदर्भ",
-  "main_code_empty_note": "\"मेन\" कोड रिकामा आहे. हा कोड जनरेट करण्यासाठी \"व्हिज्युअल कोड\" एडिटर वापरा: - डावीकडील कमांड पॅलेटमधून \"प्रोग्राम\" श्रेणी उघडा - व्हिज्युअल कोड वर्कस्पेसमध्ये \"मेन\" प्रकाराचा ब्लॉक ड्रॅग करा - या प्रोग्रामच्या कृती आणि लॉजिकची अंमलबजावणी करण्यासाठी त्यामध्ये इतर कोड ब्लॉक जोडा. \"मेन\" प्रोग्राम सेटअप कोडमध्ये दिलेल्या अटींवर आधारित मॅन्युअली चालवता येतो किंवा ऑटो-स्टार्ट करता येतो.",
+  "main_code_empty_note": "\"मुख्य\" कोड रिकामा आहे. हा कोड जनरेट करण्यासाठी \"व्हिज्युअल कोड\" एडिटर वापरा: - डावीकडील कमांड पॅलेटमधून \"प्रोग्राम\" श्रेणी उघडा - व्हिज्युअल कोड वर्कस्पेसमध्ये \"मुख्य\" प्रकाराचा ब्लॉक ड्रॅग करा - या प्रोग्रामच्या कृती आणि लॉजिकची अंमलबजावणी करण्यासाठी त्यामध्ये इतर कोड ब्लॉक जोडा. \"मुख्य\" प्रोग्राम सेटअप कोडमध्ये दिलेल्या अटींवर आधारित मॅन्युअली चालवता येतो किंवा ऑटो-स्टार्ट करता येतो.",
   "setup_code_empty_note": "\"सेटअप\" कोड रिकामा आहे. हा कोड जनरेट करण्यासाठी \"व्हिज्युअल कोड\" एडिटर वापरा: - डावीकडील कमांड पॅलेटमधून \"प्रोग्राम\" श्रेणी उघडा - व्हिज्युअल कोड वर्कस्पेसमध्ये \"सेटअप\" प्रकाराचा ब्लॉक ड्रॅग करा - \"मेन\" कोड एक्झिक्युशन ट्रिगर करणाऱ्या परिस्थिती निश्चित करण्यासाठी त्यामध्ये इतर कोड ब्लॉक जोडा. प्रत्येक वेळी नवीन घटना घडल्यावर आणि किमान दर मिनिटाला एकदा तरी या कोडचे मूल्यांकन केले जाते.",
   "capture_commands": "कमांड कॅप्चर करा",
   "capture_commands_description": "विजेट्सवर मॅन्युअली केलेल्या सर्व कमांड प्रोग्राममध्ये जोडा.",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "ट्रिगर झाल्यावर चालवायचा प्रोग्राम"
     },
     "95": {
-      "Title": "कार्यक्रमांचे लॉगिंग",
+      "Title": "कार्यक्रम लॉगिंग",
       "Description": "डिव्हाइस क्रियाकलाप रेकॉर्ड करा.",
       "EventsLogger.EnableLogging": "सक्षम करा"
     },
@@ -283,7 +289,7 @@
       "Scenarios.SunriseColors": "सनराइज कलर्सच्या परिस्थितीची लिंक"
     },
     "910": {
-      "Title": "ऑब्जेक्ट शोधणे",
+      "Title": "ऑब्जेक्ट डिटेक्शन",
       "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडेल वापरून वस्तू शोधा.",
       "ML.ObjectDetection": "ऑब्जेक्ट्स डिटेक्शन सक्षम करा",
       "ML.ObjectDetection.TriggerDetect": "स्वल्पविरामाने विभक्त केलेल्या गोष्टींची यादी (इंग्रजीमध्ये) ज्या अलार्मला चालना देतील. (उदा.: मांजर, कुत्रा, व्यक्ती, बॅकपॅक, सुटकेस)",
@@ -306,6 +312,18 @@
       "Description": "Google च्या Gemini AI वापरून तुमच्या स्मार्ट सिस्टमसाठी नैसर्गिक भाषा नियंत्रण सक्षम करते. हे वैशिष्ट्य सक्रिय करण्यासाठी, एक वैध API की प्रविष्ट करा. मोफत API की मिळविण्यासाठी https://aistudio.google.com/app/apikey वरील सूचनांचे अनुसरण करा.",
       "ConfigureOptions.ApiKey": "गुगल जेमिनी एआय एपीआय की",
       "ConfigureOptions.ModelId": "मॉडेल आयडी"
+    },
+    "931": {
+      "Title": "जेमिनी विजेट जिनी",
+      "Description": "विजेट निर्मितीसाठी तुमचा वैयक्तिक एआय जिनी. जेमिनीद्वारे समर्थित, हे तुम्हाला होमजेनी एडिटरमध्ये थेट HTML, CSS आणि JavaScript कोड लिहिण्यास आणि डीबग करण्यास मदत करते. हे वैशिष्ट्य सक्रिय करण्यासाठी, एक वैध API की प्रविष्ट करा. मोफत API की मिळविण्यासाठी https://aistudio.google.com/app/apikey वरील सूचनांचे अनुसरण करा.",
+      "ConfigureOptions.ApiKey": "गुगल जेमिनी एआय एपीआय की",
+      "ConfigureOptions.ModelId": "मॉडेल आयडी"
+    },
+    "940": {
+      "Title": "स्थानिक एआय (एलएलएम)",
+      "Description": "तुमच्या HomeGenie सर्व्हरवर स्थानिक पातळीवर लार्ज लँग्वेज मॉडेल (LLM) चालवा. हे मॉडेल्स हगिंग फेस सारख्या प्लॅटफॉर्मवरून मोफत डाउनलोड करता येतात. फक्त GGUF फॉरमॅट मॉडेल फाइलचा मार्ग प्रदान करा. कृपया लक्षात ठेवा की वेगवेगळ्या मॉडेल्सशी पूर्ण सुसंगतता सुनिश्चित करण्यासाठी, प्रामुख्याने कॉन्टेक्स्ट कोडमध्ये पॅरामीटर्समध्ये समायोजन आवश्यक असू शकते.",
+      "ConfigureOptions.MaxTokens": "कमाल टोकन (प्रतिसाद लांबी)",
+      "ConfigureOptions.ModelPath": "स्थानिक GGUF फाइलचा मार्ग"
     }
   }
 }

@@ -48,6 +48,7 @@ namespace HomeGenie.Automation.Engines
           api: hg.api,
           // EventsHelper
           on: hg.when,
+          when: hg.when,
           // SerialPortHelper
           serial: hg.serialPort,
           // TcpClientHelper

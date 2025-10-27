@@ -81,11 +81,11 @@
   "cronwizard_action_custom_script": "Pasgemaakte aksieskrip",
   "cronwizard_action_no_action": "Geen aksie nie",
   "cronwizard_action_schedule_variable_hint": "Gebruik <span class=\"notranslate color-primary\">@{{name}}</span> as 'n veranderlike in cron-uitdrukkings of gebruik <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in outomatiseringsprogramme om na hierdie gebeurtenis te verwys.",
-  "scheduler_preset_action_command_turn_on": "Skakel aan",
-  "scheduler_preset_action_command_turn_off": "Skakel af",
+  "scheduler_preset_action_command_turn_on": "Skakel Aan",
+  "scheduler_preset_action_command_turn_off": "Skakel Af",
   "scheduler_preset_action_command_set_level": "Stel vlak",
   "scheduler_preset_action_config_level": "Vlak",
-  "scheduler_preset_action_command_set_color": "Stel kleur",
+  "scheduler_preset_action_command_set_color": "Stel Kleur",
   "scheduler_preset_action_config_color": "Kleur",
   "scheduler_preset_action_command_thermostat_mode": "Termostaatmodus",
   "scheduler_preset_action_config_mode": "Modus",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Hitte",
   "scheduler_preset_action_config_mode_heat_eco": "Hitte-ekonomie",
   "scheduler_preset_action_config_mode_cool": "Koel",
-  "scheduler_preset_action_config_mode_cool_eco": "Koel ekonomie",
-  "scheduler_preset_action_program_run": "Begin program",
+  "scheduler_preset_action_config_mode_cool_eco": "Koel Ekonomie",
+  "scheduler_preset_action_command_remote_control": "Afstandbeheer (stuur IR/RF-kodes)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Begin Program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opsies",
   "scheduler_preset_action_program_say": "Sê",
+  "scheduler_preset_action_net_http_call": "Bel 'n webdiens",
+  "scheduler_preset_action_config_url": "Adres (URL)",
+  "scheduler_preset_action_pause": "Pouseer",
+  "scheduler_preset_action_config_seconds": "Sekondes",
   "scheduler_preset_action_config_message": "Boodskap",
   "save_and_build": "Stoor en bou",
   "toggle_widgets_preview": "Wissel widgetvoorskou",
@@ -121,8 +127,8 @@
   "tap_to_disable": "Klik om te deaktiveer",
   "tap_to_enable": "Klik om te aktiveer",
   "program_data": "Programdata",
-  "visual_code": "Visuele kode",
-  "generated_code": "Gegenereerde kode",
+  "visual_code": "Visuele Kode",
+  "generated_code": "Gegenereerde Kode",
   "setup_code": "Opstelling",
   "main_code": "Hoof",
   "context_code": "Konteks",
@@ -136,7 +142,7 @@
   "$options": {
     "16": {
       "Title": "Vlakgeheue",
-      "Description": "Stoor en herroep laaste dimmervlak.",
+      "Description": "Stoor en herroep die laaste dimmervlak.",
       "HomeGenie.LevelMemory": "Herroep laaste ligvlak wanneer aangeskakel",
       "HomeGenie.LevelMemory.SimulateOnly": "Simuleer slegs"
     },
@@ -205,7 +211,7 @@
       "HomeGenie.SecurityTriggerHome": "Aktiveer ook wanneer Tuis geaktiveer",
       "HomeGenie.SecuritySensor": "Gebruik as sekuriteitsensor",
       "ConfigureOptions.Email.Recipients": "Komma-geskeide lys van ontvangers se e-posadresse vir alarmkennisgewings",
-      "ConfigureOptions.System.ArmDelay": "Bewapeningsvertraging (sekondes)",
+      "ConfigureOptions.System.ArmDelay": "Aanskakelvertraging (sekondes)",
       "ConfigureOptions.System.SirenStartTime": "Sirenes Aanvangsvertraging (sekondes)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenes maksimum tyd (sekondes, 0 = oneindig)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program om te loop wanneer gewapen",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Program om te loop wanneer dit geaktiveer word"
     },
     "95": {
-      "Title": "Gebeurtenislogboek",
+      "Title": "Gebeurtenislogging",
       "Description": "Neem toestelaktiwiteit op.",
       "EventsLogger.EnableLogging": "Aktiveer"
     },
@@ -222,7 +228,7 @@
       "Description": "Implementeer API vir die bestuur van kliënt se konfigurasieprofiele wat gebruik word om UI- en dashboardinstellings te stoor."
     },
     "400": {
-      "Title": "Virtuele Modules Demo",
+      "Title": "Demonstrasie van virtuele modules",
       "Description": "Stel die waardes van die virtuele toestel handmatig in.",
       "Sensor.Temperature": "Temperatuurwaarde",
       "Sensor.Luminance": "Luminansiewaarde",
@@ -306,6 +312,18 @@
       "Description": "Aktiveer natuurlike taalbeheer vir jou slimstelsel met behulp van Google se Gemini KI. Om hierdie kenmerk te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",
       "ConfigureOptions.ApiKey": "Google Gemini KI API-sleutel",
       "ConfigureOptions.ModelId": "Model-ID"
+    },
+    "931": {
+      "Title": "Tweeling-widget Genie",
+      "Description": "Jou persoonlike KI-gees vir die skep van widgets. Aangedryf deur Gemini, help dit jou om HTML-, CSS- en JavaScript-kode direk binne die HomeGenie-redigeerder te skryf en te ontfout. Om hierdie funksie te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",
+      "ConfigureOptions.ApiKey": "Google Gemini KI API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID"
+    },
+    "940": {
+      "Title": "Plaaslike KI (LLM)",
+      "Description": "Voer 'n Groot Taalmodel (LLM) plaaslik op jou HomeGenie-bediener uit. Hierdie modelle kan gratis afgelaai word vanaf platforms soos Hugging Face. Verskaf eenvoudig die pad na 'n GGUF-formaat modellêer. Let asseblief daarop dat aanpassings aan parameters, hoofsaaklik binne die Kontekskode, nodig mag wees om volle versoenbaarheid met verskillende modelle te verseker.",
+      "ConfigureOptions.MaxTokens": "Maksimum aantal tekens (responslengte)",
+      "ConfigureOptions.ModelPath": "Pad na plaaslike GGUF-lêer"
     }
   }
 }

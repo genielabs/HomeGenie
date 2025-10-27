@@ -8,6 +8,12 @@
     "label": "Étiquette",
     "indicators": "Indicateurs",
     "lights_control": "Lumières",
-    "switches_control": "Commutateurs"
+    "switches_control": "Interrupteurs"
+  },
+  "$ai_chat": {
+    "title": "Widget de chat IA",
+    "intro": "Bonjour ! Je suis votre assistant LLM local. Comment puis-je vous aider ?",
+    "no_bound_module": "Aucun module LLM n'est lié. Veuillez ouvrir les paramètres du widget pour lier un modèle de langue.",
+    "start_typing_prompt": "Commencez à taper une invite..."
   }
 }

@@ -33,7 +33,7 @@
   "dashboard_from_group": "ဤအဖွဲ့မှ ဒက်ရှ်ဘုတ်တစ်ခု ဖန်တီးပါ။",
   "group_modules": "ဤအုပ်စုရှိ မော်ဂျူးများ",
   "modules": "မော်ဂျူးများ",
-  "empty_group": "ဤအဖွဲ့တွင် module မရှိပါ။",
+  "empty_group": "ဤအုပ်စုတွင် module များမရှိပါ။",
   "scheduler_wizard": "အစီအစဉ်ဆွဲသူ Wizard",
   "schedule_event": "ပွဲ",
   "schedule_type_standard": "စံ",
@@ -45,9 +45,9 @@
   "occurrence": "ဖြစ်ပျက်မှု",
   "cronwizard_description_on": "on",
   "cronwizard_description_from": "ထံမှ",
-  "cronwizard_description_to": "ရန်",
+  "cronwizard_description_to": "သို့",
   "cronwizard_description_starting": "ထံမှ",
-  "cronwizard_description_ending": "ရန်",
+  "cronwizard_description_ending": "သို့",
   "cronwizard_description_at": "မှာ",
   "cronwizard_add_time_slot": "အချိန်ထပ်ထည့်ပါ။",
   "cronwizard_add_exact_time": "အချိန်အတိအကျထည့်ပါ။",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "ဂရန်",
   "scheduler_preset_action_config_mode_off": "ပိတ်သည်။",
   "scheduler_preset_action_config_mode_heat": "အပူ",
-  "scheduler_preset_action_config_mode_heat_eco": "စီးပွားရေးအပူ",
+  "scheduler_preset_action_config_mode_heat_eco": "အပူစီးပွားရေး",
   "scheduler_preset_action_config_mode_cool": "အေးတယ်။",
   "scheduler_preset_action_config_mode_cool_eco": "စီးပွားရေးအေးတယ်။",
-  "scheduler_preset_action_program_run": "ပရိုဂရမ်ကို လုပ်ဆောင်ပါ။",
+  "scheduler_preset_action_command_remote_control": "အဝေးထိန်းစနစ် (IR/RF ကုဒ်များ ပေးပို့ပါ)",
+  "scheduler_preset_action_config_data": "ဒေ",
+  "scheduler_preset_action_program_run": "ပရိုဂရမ်ကို Run လိုက်ပါ။",
   "scheduler_preset_action_config_program": "အစီအစဉ်",
   "scheduler_preset_action_config_options": "ရွေးချယ်မှုများ",
   "scheduler_preset_action_program_say": "ဆိုပါတော့",
+  "scheduler_preset_action_net_http_call": "ဝဘ်ဝန်ဆောင်မှုကို ခေါ်ပါ။",
+  "scheduler_preset_action_config_url": "လိပ်စာ (URL)",
+  "scheduler_preset_action_pause": "ခဏရပ်ပါ။",
+  "scheduler_preset_action_config_seconds": "စက္ကန့်",
   "scheduler_preset_action_config_message": "မက်ဆေ့ချ်",
   "save_and_build": "သိမ်းဆည်းပြီး တည်ဆောက်ပါ။",
   "toggle_widgets_preview": "ဝစ်ဂျက်များ အစမ်းကြည့်ရှုခြင်းကို ပြောင်းရန်",
@@ -117,11 +123,11 @@
   "program_status_enabled": "ဖွင့်ထားသည်။",
   "program_status_broken": "ကျိုးသည်။",
   "program_status_compile": "လုပ်ကြပါ။",
-  "automation_programming_guide": "ပရိုဂရမ်လမ်းညွှန်''",
+  "automation_programming_guide": "ပရိုဂရမ်းမင်းလမ်းညွှန်",
   "tap_to_disable": "ပိတ်ရန်နှိပ်ပါ။",
   "tap_to_enable": "ဖွင့်ရန် နှိပ်ပါ။",
   "program_data": "ပရိုဂရမ်ဒေတာ",
-  "visual_code": "အမြင်ကုဒ်",
+  "visual_code": "Visual Code",
   "generated_code": "ကုဒ်ထုတ်ပေးသည်။",
   "setup_code": "တည်ဆောက်သည်",
   "main_code": "အဓိက",
@@ -157,12 +163,12 @@
     },
     "77": {
       "Title": "ကွန်ရက် MQTT",
-      "Description": "အင်တာနက်မှတဆင့် မည်သည့်နေရာမှမဆို HomeGenie Panel အက်ပ်ကို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
+      "Description": "အင်တာနက်မှတစ်ဆင့် HomeGenie Panel အက်ပ်ကို မည်သည့်နေရာမှမဆို အသုံးပြုရန် သို့မဟုတ် MQTT ကွန်ရက်တစ်ခုတည်းရှိ HomeGenie စက်ပစ္စည်းများကို အပြန်အလှန်ချိတ်ဆက်ရန် MQTT ပွဲစားနှင့် ချိတ်ဆက်ပါ။",
       "MQTT.SensorPublish": "ဤ module မှထုတ်လွှတ်သောဖြစ်ရပ်များကိုထုတ်ဝေပါ။",
-      "ConfigureOptions.ClientId": "ဖောက်သည် ID။",
+      "ConfigureOptions.ClientId": "သုံးစွဲသူ ID။",
       "ConfigureOptions.ServerAddress": "ဆာဗာလိပ်စာ",
       "ConfigureOptions.ServerPort": "ဆာဗာဆိပ်ကမ်း",
-      "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်း (E2EE) ကို ဖွင့်ပါ",
+      "ConfigureOptions.Encryption": "အဆုံးမှ အဆုံး ကုဒ်ဝှက်ခြင်းကို ဖွင့်ပါ (E2EE)",
       "ConfigureOptions.WebSockets": "WebSockets ကိုသုံးပါ။",
       "ConfigureOptions.TLS": "TLS/SSL ကိုဖွင့်ပါ။",
       "ConfigureOptions.Username": "အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -202,7 +208,7 @@
       "Title": "လုံခြုံရေးအချက်ပေးစနစ်",
       "Description": "လုံခြုံရေးအချက်ပေးစနစ်တစ်ခုကို အကောင်အထည်ဖော်ရန် အာရုံခံကိရိယာများနှင့် အခြားစက်ပစ္စည်းများကို အသုံးပြုပါ။",
       "HomeGenie.SecurityAlarm": "နှိုးစက်/စထရိုဘီအဖြစ် အသုံးပြုပါ။",
-      "HomeGenie.SecurityTriggerHome": "ဒါကိုလည်း လက်နက်ကိုင်တပ်ဖွဲ့က Home မှာ ထားလိုက်တာ",
+      "HomeGenie.SecurityTriggerHome": "ဒါကိုလည်း လက်နက်ကိုင်တပ်ဖွဲ့က ပင်မစာမျက်နှာမှာ ထားလိုက်တာ",
       "HomeGenie.SecuritySensor": "လုံခြုံရေးအာရုံခံကိရိယာအဖြစ် အသုံးပြုပါ။",
       "ConfigureOptions.Email.Recipients": "နှိုးစက်သတိပေးချက်များအတွက် လက်ခံသူအီးမေးလ်များစာရင်းကို ကော်မာခွဲထားသည်။",
       "ConfigureOptions.System.ArmDelay": "လက်နှောင့်နှေးခြင်း (စက္ကန့်)",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "စတင်သောအခါတွင် လုပ်ဆောင်ရန် ပရိုဂရမ်"
     },
     "95": {
-      "Title": "အဖြစ်အပျက်များကို မှတ်တမ်းတင်ခြင်း။",
+      "Title": "ဖြစ်ရပ်များ မှတ်တမ်းရယူခြင်း။",
       "Description": "စက်ပစ္စည်းလှုပ်ရှားမှုကို မှတ်တမ်းတင်ပါ။",
       "EventsLogger.EnableLogging": "ဖွင့်ပါ။"
     },
     "111": {
-      "Title": "လိုင်းဖွဲ့စည်းမှု",
+      "Title": "Client Configuration",
       "Description": "UI နှင့် ဒက်ရှ်ဘုတ်ဆက်တင်များကို သိမ်းဆည်းရန် အသုံးပြုသည့် client ၏ ဖွဲ့စည်းမှုပုံစံပရိုဖိုင်များကို စီမံခန့်ခွဲရန်အတွက် API ကို အကောင်အထည်ဖော်ပါ။"
     },
     "400": {
@@ -237,10 +243,10 @@
     },
     "402": {
       "Title": "သရုပ်ပြ - လှုပ်ရှားမှုကို တွေ့ရှိထားသည်။",
-      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို တုပသည်။"
+      "Description": "သရုပ်ပြ အာရုံခံကိရိယာပေါင်းစုံ၏ ရွေ့လျားမှုကို ထောက်လှမ်းမှုကို အတုယူသည်။"
     },
     "410": {
-      "Title": "အာရုံခံခြင်း simulator",
+      "Title": "အာရုံခံ Simulator",
       "Description": "ကျပန်းအာရုံခံတန်ဖိုးများကို ထုတ်လွှတ်သည်။",
       "Simulator.Sensor.Temperature": "အပူချိန်အာရုံခံကိရိယာ",
       "Simulator.Sensor.Humidity": "စိုထိုင်းဆအာရုံခံကိရိယာ",
@@ -250,7 +256,7 @@
       "Simulator.Sensor.DataFrequency": "Simulator သည် ကြိမ်နှုန်းကို ထုတ်လွှတ်သည်။"
     },
     "505": {
-      "Title": "အဝေးထိန်း",
+      "Title": "အဝေးထိန်းစနစ်",
       "Description": "အဝေးထိန်း (IR သို့မဟုတ် RF) ကို အသုံးပြု၍ စက်ပစ္စည်းကို ထိန်းချုပ်ပါ။",
       "HomeGenie.RemoteControl.Enable": "ဖွင့်ပါ။",
       "HomeGenie.RemoteControl.IRCode": "ခလုတ်နှိပ်ပါ။",
@@ -260,7 +266,7 @@
     },
     "142": {
       "Title": "အီးမေးလ်အကောင့်",
-      "Description": "အီးမေးလ်များပေးပို့ခြင်း/လက်ခံခြင်းအတွက် စနစ်ပရိုဂရမ်များက အသုံးပြုသည့် အီးမေးလ်အကောင့်အချက်အလက်ကို သိမ်းဆည်းသည်။",
+      "Description": "အီးမေးလ်များပေးပို့ခြင်း/လက်ခံခြင်းအတွက် စနစ်ပရိုဂရမ်များမှ အသုံးပြုသော အီးမေးလ်အကောင့်အချက်အလက်ကို သိမ်းဆည်းသည်။",
       "ConfigureOptions.Email.Sender": "1. အီးမေးလ်လိပ်စာ",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP ဆာဗာလိပ်စာ",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP အသုံးပြုသူအမည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -270,7 +276,7 @@
     },
     "145": {
       "Title": "စမတ်ကိရိယာ",
-      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်ပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
+      "Description": "ရွေ့လျားမှုသိရှိနိုင်မှုနှင့် ပတ်ဝန်းကျင်အလင်းရောင်အပေါ်အခြေခံ၍ စက်ပစ္စည်းကို အဖွင့်/ပိတ်ပါ။",
       "HomeGenie.SmartLights.Enable": "'စမတ်စက်ပစ္စည်း' ကို ဖွင့်ပါ",
       "HomeGenie.SmartLights.OnMotionDetect": "အာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
       "HomeGenie.SmartLights.CheckLuminosity": "အလင်းအာရုံခံကိရိယာဖြင့် ထိန်းချုပ်ထားသည် (ချန်လှပ်ထားနိုင်သည်)",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Sunrise Colours အခြေအနေသို့ လင့်ခ်ချိတ်ပါ။"
     },
     "910": {
-      "Title": "အရာဝတ္ထု ထောက်လှမ်းခြင်း။",
+      "Title": "Object Detection",
       "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO11 မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများကို ရှာဖွေပါ။",
       "ML.ObjectDetection": "အရာဝတ္ထုများကို သိရှိခြင်းအား ဖွင့်ပါ။",
       "ML.ObjectDetection.TriggerDetect": "နှိုးစက်ကို အစပျိုးပေးမည့် ကော်မာ-ခြားထားသော အရာများစာရင်း (အင်္ဂလိပ်လို)။ (ဥပမာ- ကြောင်၊ ခွေး၊ လူ၊ ကျောပိုးအိတ်၊ ခရီးဆောင်အိတ်)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
     },
     "911": {
-      "Title": "ခန့်မှန်းခြေတင်ပါ။",
-      "Description": "စိတ်ကြိုက် ONNX မော်ဒယ်များ သို့မဟုတ် ပုံသေ ကြိုတင်လေ့ကျင့်ထားသည့် YOLOv11 မော်ဒယ် (လူ့ပုံသဏ္ဍာန် သီးသန့်) ကို အသုံးပြု၍ pose ခန့်မှန်းချက်မှတစ်ဆင့် သော့ချက်ထောက်လှမ်းခြင်း။",
-      "ML.PoseEstimation": "ပုံသဏ္ဍန်ခန့်မှန်းချက်ကို ဖွင့်ပါ။",
+      "Title": "Pose ခန့်မှန်းချက်",
+      "Description": "စိတ်ကြိုက် ONNX မော်ဒယ်များ သို့မဟုတ် မူရင်းကြိုတင်လေ့ကျင့်ထားသည့် YOLOv11 မော်ဒယ် (လူ့ပုံသဏ္ဍာန် သီးသန့်) ကို အသုံးပြု၍ pose ခန့်မှန်းချက်မှတစ်ဆင့် သော့ချက်ထောက်လှမ်းခြင်း။",
+      "ML.PoseEstimation": "pose ခန့်မှန်းချက်ကို ဖွင့်ပါ။",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
     },
     "912": {
-      "Title": "ဥပမာ အပိုင်းခွဲခြင်း။",
+      "Title": "Instance Segmentation",
       "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO11 မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများနှင့် ၎င်းတို့၏ ကောက်ကြောင်းများကို ရှာဖွေပါ။",
       "ML.InstanceSegmentation": "ဥပမာ အပိုင်းခွဲခြင်းကို ဖွင့်ပါ။",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Google ၏ Gemini AI ကို အသုံးပြု၍ သင်၏စမတ်စနစ်အတွက် သဘာဝဘာသာစကားထိန်းချုပ်မှုကို ဖွင့်ပါ။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://aistudio.google.com/app/apikey တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
       "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
       "ConfigureOptions.ModelId": "မော်ဒယ် ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "ဝစ်ဂျက်ဖန်တီးမှုအတွက် သင်၏ကိုယ်ပိုင် AI ပါရမီရှင်။ Gemini မှ စွမ်းဆောင်ထားသောကြောင့် ၎င်းသည် သင့်အား HomeGenie တည်းဖြတ်မှုအတွင်း HTML၊ CSS နှင့် JavaScript ကုဒ်များကို တိုက်ရိုက်ရေးသားပြီး အမှားရှာရန် ကူညီပေးသည်။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://aistudio.google.com/app/apikey တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID"
+    },
+    "940": {
+      "Title": "ဒေသတွင်း AI (LLM)",
+      "Description": "သင်၏ HomeGenie ဆာဗာတွင် ကြီးမားသော ဘာသာစကားပုံစံ (LLM) ကို စက်တွင်းတွင် လုပ်ဆောင်ပါ။ ဤမော်ဒယ်များကို Hugging Face ကဲ့သို့သော ပလပ်ဖောင်းများမှ အခမဲ့ ဒေါင်းလုဒ်လုပ်နိုင်ပါသည်။ GGUF ဖော်မတ် မော်ဒယ်ဖိုင်သို့ လမ်းကြောင်းကို ရိုးရှင်းစွာ ပံ့ပိုးပါ။ မတူညီသောမော်ဒယ်များနှင့် အပြည့်အဝလိုက်ဖက်မှုရှိစေရန်အတွက် အဓိကအားဖြင့် ဆက်စပ်ကုဒ်အတွင်း ကန့်သတ်ချက်များကို ချိန်ညှိမှုများ လိုအပ်နိုင်သည်ကို သတိပြုပါ။",
+      "ConfigureOptions.MaxTokens": "အများဆုံးတိုကင်များ (တုံ့ပြန်မှုကြာချိန်)",
+      "ConfigureOptions.ModelPath": "ဒေသဆိုင်ရာ GGUF ဖိုင်သို့ လမ်းကြောင်း"
     }
   }
 }

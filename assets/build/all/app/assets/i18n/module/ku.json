@@ -1,16 +1,16 @@
 {
-  "stats.time_range": "Rêzeya demê",
+  "stats.time_range": "Demjimêr",
   "stats.one_second": "Yek çirk",
-  "stats.five_seconds": "5 seconds",
-  "stats.ten_seconds": "10 seconds",
-  "stats.half_minute": "30 seconds",
-  "stats.one_minute": "One minute",
+  "stats.five_seconds": "5 çirke",
+  "stats.ten_seconds": "10 çirke",
+  "stats.half_minute": "30 çirke",
+  "stats.one_minute": "Yek deqe",
   "stats.ten_minutes": "10 deqîqe",
   "stats.half_hour": "30 deqîqe",
-  "stats.one_hour": "Yek saet",
-  "stats.three_hours": "3 saetan",
-  "stats.six_hours": "6 saetan",
-  "stats.twelve_hours": "12 saet",
-  "stats.twentyfour_hours": "24 saetan",
-  "stats.chart_provider": "Pêşkêşkerê nexşeyê"
+  "stats.one_hour": "Saetek",
+  "stats.three_hours": "3 demjimêr",
+  "stats.six_hours": "6 demjimêran",
+  "stats.twelve_hours": "12 demjimêr",
+  "stats.twentyfour_hours": "24 demjimêr",
+  "stats.chart_provider": "Pêşkêşvanê nexşeyan"
 }

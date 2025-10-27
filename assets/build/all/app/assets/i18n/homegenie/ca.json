@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Feu servir <span class=\"notranslate color-primary\">@{{name}}</span> com a variable en expressions cron o feu servir <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> en programes d'automatització per fer referència a aquest esdeveniment.",
   "scheduler_preset_action_command_turn_on": "Activa",
   "scheduler_preset_action_command_turn_off": "Desactiva",
-  "scheduler_preset_action_command_set_level": "Nivell definit",
+  "scheduler_preset_action_command_set_level": "Nivell definitiu",
   "scheduler_preset_action_config_level": "Nivell",
-  "scheduler_preset_action_command_set_color": "Defineix el color",
+  "scheduler_preset_action_command_set_color": "Estableix el color",
   "scheduler_preset_action_config_color": "Color",
   "scheduler_preset_action_command_thermostat_mode": "Mode termòstat",
   "scheduler_preset_action_config_mode": "Mode",
   "scheduler_preset_action_config_mode_on": "Activat",
   "scheduler_preset_action_config_mode_off": "Desactivat",
   "scheduler_preset_action_config_mode_heat": "Calor",
-  "scheduler_preset_action_config_mode_heat_eco": "Economia tèrmica",
+  "scheduler_preset_action_config_mode_heat_eco": "Economia de la calor",
   "scheduler_preset_action_config_mode_cool": "Genial",
   "scheduler_preset_action_config_mode_cool_eco": "Economia fresca",
+  "scheduler_preset_action_command_remote_control": "Control remot (envia codis IR/RF)",
+  "scheduler_preset_action_config_data": "Dades",
   "scheduler_preset_action_program_run": "Executa el programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Opcions",
   "scheduler_preset_action_program_say": "Dir",
+  "scheduler_preset_action_net_http_call": "Truca a un servei web",
+  "scheduler_preset_action_config_url": "Adreça (URL)",
+  "scheduler_preset_action_pause": "Pausa",
+  "scheduler_preset_action_config_seconds": "Segons",
   "scheduler_preset_action_config_message": "Missatge",
   "save_and_build": "Desa i crea",
   "toggle_widgets_preview": "Obre/tanca la vista prèvia dels widgets",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Només simula"
     },
     "26": {
-      "Title": "Llums de colors",
+      "Title": "Llums de color",
       "Description": "Exemple d'integració de llums Philips Hue mitjançant l'API HTTP (V1). L'usuari per defecte per connectar-se al pont és \"newdeveloper\" i ja hauria d'estar habilitat.",
       "ConfigureOptions.BridgeAddress": "Adreça IP del pont Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Nom d'usuari",
@@ -306,6 +312,18 @@
       "Description": "Activa el control del llenguatge natural per al teu sistema intel·ligent mitjançant la intel·ligència artificial Gemini de Google. Per activar aquesta funció, introdueix una clau API vàlida. Segueix les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",
       "ConfigureOptions.ApiKey": "Clau de l'API d'IA de Google Gemini",
       "ConfigureOptions.ModelId": "ID del model"
+    },
+    "931": {
+      "Title": "Geni del widget de Bessons",
+      "Description": "El vostre geni personal d'IA per a la creació de widgets. Amb la tecnologia de Gemini, us ajuda a escriure i depurar codi HTML, CSS i JavaScript directament dins de l'editor HomeGenie. Per activar aquesta funció, introduïu una clau API vàlida. Seguiu les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",
+      "ConfigureOptions.ApiKey": "Clau de l'API d'IA de Google Gemini",
+      "ConfigureOptions.ModelId": "ID del model"
+    },
+    "940": {
+      "Title": "IA local (LLM)",
+      "Description": "Executeu un Model de Llenguatge Gran (LLM) localment al vostre servidor HomeGenie. Aquests models es poden descarregar gratuïtament des de plataformes com Hugging Face. Només cal que proporcioneu la ruta a un fitxer de model en format GGUF. Tingueu en compte que pot ser necessari ajustar els paràmetres, principalment dins del Codi de Context, per garantir la compatibilitat total amb diferents models.",
+      "ConfigureOptions.MaxTokens": "Tokens màxims (longitud de la resposta)",
+      "ConfigureOptions.ModelPath": "Camí al fitxer GGUF local"
     }
   }
 }

@@ -23,7 +23,7 @@
   "installed_packages": "Installéiert Paketen",
   "upload_package": "Pak eroplueden",
   "create_package": "Neit Pak erstellen",
-  "programs_version": "Programmversioun",
+  "programs_version": "Versioun vum Programm",
   "http_settings": "HTTP-Astellungen",
   "modules_groups": "Gruppen a Moduler",
   "groups": "Gruppen",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Hëtztwirtschaft",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Cool Wirtschaft",
+  "scheduler_preset_action_command_remote_control": "Fernbedienung (IR/RF Coden schécken)",
+  "scheduler_preset_action_config_data": "Donnéeën",
   "scheduler_preset_action_program_run": "Programm ausféieren",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Optiounen",
   "scheduler_preset_action_program_say": "Soen",
+  "scheduler_preset_action_net_http_call": "Rufft e Webservice un",
+  "scheduler_preset_action_config_url": "Adress (URL)",
+  "scheduler_preset_action_pause": "Paus",
+  "scheduler_preset_action_config_seconds": "Sekonnen",
   "scheduler_preset_action_config_message": "Message",
   "save_and_build": "Späicheren a bauen",
   "toggle_widgets_preview": "Widget-Virschau ausschalten",
@@ -306,6 +312,18 @@
       "Description": "Erméiglecht d'Kontroll vun der natierlecher Sprooch fir Äert Smart-System mat der Gemini AI vu Google. Fir dës Funktioun z'aktivéieren, gitt e gültege API-Schlëssel an. Follegt den Instruktiounen op https://aistudio.google.com/app/apikey fir e gratis API-Schlëssel ze kréien.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API Schlëssel",
       "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Äre perséinleche KI-Genie fir d'Erstelle vu Widgets. Ugedriwwe vu Gemini, hëlleft et Iech HTML-, CSS- a JavaScript-Code direkt am HomeGenie-Editor ze schreiwen an ze debuggen. Fir dës Funktioun z'aktivéieren, gitt e gültege API-Schlëssel an. Follegt den Instruktiounen op https://aistudio.google.com/app/apikey fir e gratis API-Schlëssel ze kréien.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API Schlëssel",
+      "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "940": {
+      "Title": "Lokal KI (LLM)",
+      "Description": "Fiert e Large Language Model (LLM) lokal op Ärem HomeGenie Server aus. Dës Modeller kënnen gratis vu Plattforme wéi Hugging Face erofgeluede ginn. Gitt einfach de Wee zu enger Modelldatei am GGUF-Format un. W.e.g. notéiert datt Upassunge vun de Parameteren, haaptsächlech am Kontextcode, néideg kënne sinn, fir eng voll Kompatibilitéit mat verschiddene Modeller ze garantéieren.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (Äntwertlängt)",
+      "ConfigureOptions.ModelPath": "Wee zur lokaler GGUF-Datei"
     }
   }
 }

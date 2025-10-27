@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Gospodarka cieplna",
   "scheduler_preset_action_config_mode_cool": "Fajny",
   "scheduler_preset_action_config_mode_cool_eco": "Chłodna gospodarka",
+  "scheduler_preset_action_command_remote_control": "Zdalne sterowanie (wysyłanie kodów IR/RF)",
+  "scheduler_preset_action_config_data": "Dane",
   "scheduler_preset_action_program_run": "Uruchom program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opcje",
   "scheduler_preset_action_program_say": "Mowić",
+  "scheduler_preset_action_net_http_call": "Zadzwoń do usługi internetowej",
+  "scheduler_preset_action_config_url": "Adres (URL)",
+  "scheduler_preset_action_pause": "Pauza",
+  "scheduler_preset_action_config_seconds": "Towary drugiej jakości",
   "scheduler_preset_action_config_message": "Wiadomość",
   "save_and_build": "Zapisz i zbuduj",
   "toggle_widgets_preview": "Przełącz podgląd widżetów",
@@ -117,7 +123,7 @@
   "program_status_enabled": "Włączony",
   "program_status_broken": "Złamany",
   "program_status_compile": "Skompilować",
-  "automation_programming_guide": "Przewodnik programowania",
+  "automation_programming_guide": "Przewodnik po programowaniu",
   "tap_to_disable": "Kliknij, aby wyłączyć",
   "tap_to_enable": "Kliknij, aby włączyć",
   "program_data": "Dane programu",
@@ -279,7 +285,7 @@
     },
     "8": {
       "Title": "Scenariusz kolorów wschodu słońca",
-      "Description": "Przykładowy scenariusz „Wschodu słońca” dla zmieniających kolor świateł LED.",
+      "Description": "Przykładowy scenariusz „Wschodu słońca” dla świateł LED zmieniających kolor.",
       "Scenarios.SunriseColors": "Link do scenariusza Sunrise Colors"
     },
     "910": {
@@ -290,7 +296,7 @@
       "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Oszacowanie pozycji",
+      "Title": "Oszacowanie pozy",
       "Description": "Wykrywanie punktów kluczowych poprzez szacowanie pozycji przy użyciu niestandardowych modeli ONNX lub domyślnego, wstępnie wytrenowanego modelu YOLOv11 (zależnego od pozycji człowieka).",
       "ML.PoseEstimation": "Włącz szacowanie pozycji",
       "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Umożliwia sterowanie systemem inteligentnym za pomocą języka naturalnego za pomocą Google Gemini AI. Aby aktywować tę funkcję, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://aistudio.google.com/app/apikey, aby otrzymać bezpłatny klucz API.",
       "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identyfikator modelu"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Twój osobisty dżin AI do tworzenia widżetów. Oparty na technologii Gemini, pomaga pisać i debugować kod HTML, CSS i JavaScript bezpośrednio w edytorze HomeGenie. Aby aktywować tę funkcję, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://aistudio.google.com/app/apikey, aby otrzymać bezpłatny klucz API.",
+      "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identyfikator modelu"
+    },
+    "940": {
+      "Title": "Lokalna sztuczna inteligencja (LLM)",
+      "Description": "Uruchom lokalnie model LLM (Large Language Model) na serwerze HomeGenie. Modele te można pobrać bezpłatnie z platform takich jak Hugging Face. Wystarczy podać ścieżkę do pliku modelu w formacie GGUF. Należy pamiętać, że w celu zapewnienia pełnej zgodności z różnymi modelami może być konieczna modyfikacja parametrów, głównie w kodzie kontekstowym.",
+      "ConfigureOptions.MaxTokens": "Maksymalna liczba tokenów (długość odpowiedzi)",
+      "ConfigureOptions.ModelPath": "Ścieżka do lokalnego pliku GGUF"
     }
   }
 }

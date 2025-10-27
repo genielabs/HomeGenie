@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "~에",
   "scheduler_preset_action_config_mode_off": "끄다",
   "scheduler_preset_action_config_mode_heat": "열",
-  "scheduler_preset_action_config_mode_heat_eco": "열 경제성",
+  "scheduler_preset_action_config_mode_heat_eco": "열 경제",
   "scheduler_preset_action_config_mode_cool": "시원한",
   "scheduler_preset_action_config_mode_cool_eco": "쿨 이코노미",
+  "scheduler_preset_action_command_remote_control": "원격 제어(IR/RF 코드 전송)",
+  "scheduler_preset_action_config_data": "데이터",
   "scheduler_preset_action_program_run": "프로그램 실행",
   "scheduler_preset_action_config_program": "프로그램",
   "scheduler_preset_action_config_options": "옵션",
   "scheduler_preset_action_program_say": "말하다",
+  "scheduler_preset_action_net_http_call": "웹 서비스 호출",
+  "scheduler_preset_action_config_url": "주소(URL)",
+  "scheduler_preset_action_pause": "정지시키다",
+  "scheduler_preset_action_config_seconds": "초",
   "scheduler_preset_action_config_message": "메시지",
   "save_and_build": "저장하고 빌드하세요",
   "toggle_widgets_preview": "위젯 미리보기 전환",
@@ -121,12 +127,12 @@
   "tap_to_disable": "비활성화하려면 클릭하세요",
   "tap_to_enable": "클릭하여 활성화하세요",
   "program_data": "프로그램 데이터",
-  "visual_code": "시각적 코드",
+  "visual_code": "비주얼 코드",
   "generated_code": "생성된 코드",
   "setup_code": "설정",
   "main_code": "기본",
   "context_code": "문맥",
-  "main_code_empty_note": "\"Main\" 코드가 비어 있습니다. \"Visual Code\" 편집기를 사용하여 다음 코드를 생성하세요. - 왼쪽 명령 팔레트에서 \"Program\" 범주를 엽니다. - Visual Code 작업 영역에서 \"Main\" 유형의 블록을 드래그합니다. - 그 안에 이 프로그램의 동작과 로직을 구현하는 다른 코드 블록을 추가합니다. \"Main\" 프로그램은 설치 코드에 지정된 조건에 따라 수동으로 실행하거나 자동으로 시작할 수 있습니다.",
+  "main_code_empty_note": "\"Main\" 코드가 비어 있습니다. \"Visual Code\" 편집기를 사용하여 다음 코드를 생성하세요. - 왼쪽 명령 팔레트에서 \"Program\" 범주를 엽니다. - Visual Code 작업 공간에 \"Main\" 유형의 블록을 드래그합니다. - 그 안에 이 프로그램의 동작과 로직을 구현하는 다른 코드 블록을 추가합니다. \"Main\" 프로그램은 설치 코드에 지정된 조건에 따라 수동으로 실행하거나 자동으로 시작할 수 있습니다.",
   "setup_code_empty_note": "\"Setup\" 코드가 비어 있습니다. \"Visual Code\" 편집기를 사용하여 다음 코드를 생성하세요. - 왼쪽 명령 팔레트에서 \"Program\" 범주를 엽니다. - Visual Code 작업 영역에서 \"Setup\" 유형의 블록을 드래그합니다. - 그 안에 \"Main\" 코드 실행을 트리거하는 조건을 지정하는 다른 코드 블록을 추가합니다. 이 코드는 새 이벤트가 발생할 때마다, 그리고 최소 1분에 한 번씩 평가됩니다.",
   "capture_commands": "캡처 명령",
   "capture_commands_description": "위젯에서 수동으로 수행되는 모든 명령을 프로그램에 추가합니다.",
@@ -306,6 +312,18 @@
       "Description": "Google Gemini AI를 사용하여 스마트 시스템의 자연어 제어를 지원합니다. 이 기능을 활성화하려면 유효한 API 키를 입력하세요. https://aistudio.google.com/app/apikey의 안내에 따라 무료 API 키를 받으세요.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 키",
       "ConfigureOptions.ModelId": "모델 ID"
+    },
+    "931": {
+      "Title": "제미니 위젯 지니",
+      "Description": "위젯 제작을 위한 나만의 AI 지니. Gemini 기반이며, HomeGenie 편집기에서 HTML, CSS, JavaScript 코드를 직접 작성하고 디버깅할 수 있도록 도와줍니다. 이 기능을 활성화하려면 유효한 API 키를 입력하세요. https://aistudio.google.com/app/apikey의 안내에 따라 무료 API 키를 받으세요.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API 키",
+      "ConfigureOptions.ModelId": "모델 ID"
+    },
+    "940": {
+      "Title": "로컬 AI(LLM)",
+      "Description": "HomeGenie 서버에서 대규모 언어 모델(LLM)을 로컬로 실행하세요. 이 모델은 Hugging Face와 같은 플랫폼에서 무료로 다운로드할 수 있습니다. GGUF 형식 모델 파일의 경로를 입력하기만 하면 됩니다. 다른 모델과의 완벽한 호환성을 보장하기 위해 주로 컨텍스트 코드 내의 매개변수 조정이 필요할 수 있습니다.",
+      "ConfigureOptions.MaxTokens": "최대 토큰(응답 길이)",
+      "ConfigureOptions.ModelPath": "로컬 GGUF 파일 경로"
     }
   }
 }

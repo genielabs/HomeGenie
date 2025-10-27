@@ -1,0 +1,8 @@
+{
+  "node_inclusion": "新增設備",
+  "node_exclusion": "移除裝置",
+  "operation_timed_out": "操作超時。",
+  "node_added": "成功新增節點",
+  "turn_on_device_to_add": "開啟裝置並按下配對按鈕 5 秒鐘（如果需要）",
+  "soft_reset_button": "軟復位"
+}

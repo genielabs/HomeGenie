@@ -1,8 +1,8 @@
 {
   "node_inclusion": "Dodaj uređaj",
-  "node_exclusion": "Uklonite uređaj",
-  "operation_timed_out": "Isteklo je vrijeme operacije.",
-  "node_added": "Čvor je uspješno dodan",
-  "turn_on_device_to_add": "Uključite uređaj i pritisnite dugme za uparivanje na 5 sekundi ako je potrebno",
-  "soft_reset_button": "Soft reset"
+  "node_exclusion": "Ukloni uređaj",
+  "operation_timed_out": "Vremensko ograničenje operacije je isteklo.",
+  "node_added": "Čvor uspješno dodan",
+  "turn_on_device_to_add": "Uključite uređaj i po potrebi pritisnite dugme za uparivanje 5 sekundi",
+  "soft_reset_button": "Meko resetovanje"
 }

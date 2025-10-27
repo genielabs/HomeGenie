@@ -9,5 +9,11 @@
     "indicators": "Wskaźniki",
     "lights_control": "Ślepia",
     "switches_control": "Przełączniki"
+  },
+  "$ai_chat": {
+    "title": "Widżet czatu AI",
+    "intro": "Cześć! Jestem Twoim lokalnym asystentem LLM. W czym mogę pomóc?",
+    "no_bound_module": "Brak powiązania z modułem LLM. Otwórz ustawienia widżetu, aby powiązać model językowy.",
+    "start_typing_prompt": "Rozpocznij pisanie monitu..."
   }
 }

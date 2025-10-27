@@ -15,8 +15,8 @@
         "type": "slider",
         "options": {
           "min": 0,
-          "max": 100,
-          "step": 1
+          "max": 1.00,
+          "step": 0.01
         },
         "value": 0
       }
@@ -35,7 +35,7 @@
   },
   {
     "id": "command_thermostat_mode",
-    "script": "$$.boundModules\n  .command('Thermostat.ModeSet')\n  .submit('$mode$');\n",
+    "script": "$$.boundModules\n    .command('Thermostat.ModeSet')\n    .submit('$mode$');\n",
     "config": {
       "mode": {
         "type": "select",
@@ -62,6 +62,17 @@
           }
         ],
         "value": "Off"
+      }
+    }
+  },
+  {
+    "id": "command_remote_control",
+    "script": "cmd = $data$;\n  for (i = 0; i < cmd.length; i++) {\n    $$.boundModules\n      .command('Control.SendRaw')\n      .submit(cmd[i]);\n  }\n",
+    "config": {
+      "data": {
+        "type": "capture:Receiver.RawData",
+        "value": "",
+        "transform": "multiline:array"
       }
     }
   },
@@ -94,6 +105,35 @@
         },
         "type": "text",
         "value": ""
+      }
+    }
+  },
+  {
+    "id": "net_http_call",
+    "script": "$$.net.webService('$url$').call();\n",
+    "config": {
+      "url": {
+        "options": {
+          "maxLength": 1024
+        },
+        "type": "text",
+        "value": ""
+      }
+    }
+  },
+  {
+    "id": "pause",
+    "script": "$$.pause($seconds$);\n",
+    "config": {
+      "seconds": {
+        "type": "slider",
+        "options": {
+          "min": 0.01,
+          "max": 5,
+          "step": 0.01
+        },
+        "value": 0.1,
+        "transform": "time:seconds"
       }
     }
   }

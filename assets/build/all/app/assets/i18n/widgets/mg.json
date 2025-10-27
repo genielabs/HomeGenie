@@ -9,5 +9,11 @@
     "indicators": "tondro",
     "lights_control": "jiro",
     "switches_control": "Switches"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "Salama! Mpanampy LLM eo an-toerana aho. Ahoana no ahafahako manampy anao?",
+    "no_bound_module": "Tsy misy module LLM mifamatotra. Sokafy azafady ny kiran'ny widget mba hamatotra modely fiteny.",
+    "start_typing_prompt": "Manomboka manoratra bitsika..."
   }
 }

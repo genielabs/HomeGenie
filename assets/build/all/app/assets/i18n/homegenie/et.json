@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "Selle sündmuse viitamiseks kasutage cron-avaldistes muutujana <span class=\"notranslate color-primary\">@{{name}}</span> või automatiseerimisprogrammides <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span>.",
   "scheduler_preset_action_command_turn_on": "Lülita sisse",
   "scheduler_preset_action_command_turn_off": "Lülita välja",
-  "scheduler_preset_action_command_set_level": "Määrake tase",
+  "scheduler_preset_action_command_set_level": "Määra tase",
   "scheduler_preset_action_config_level": "Tase",
   "scheduler_preset_action_command_set_color": "Määra värv",
   "scheduler_preset_action_config_color": "Värv",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Soojusökonoomia",
   "scheduler_preset_action_config_mode_cool": "Lahe",
   "scheduler_preset_action_config_mode_cool_eco": "Lahe majandus",
+  "scheduler_preset_action_command_remote_control": "Kaugjuhtimispult (saatke IR/RF-koode)",
+  "scheduler_preset_action_config_data": "Andmed",
   "scheduler_preset_action_program_run": "Käivita programm",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Valikud",
   "scheduler_preset_action_program_say": "Ütle",
+  "scheduler_preset_action_net_http_call": "Helista veebiteenusele",
+  "scheduler_preset_action_config_url": "Aadress (URL)",
+  "scheduler_preset_action_pause": "Paus",
+  "scheduler_preset_action_config_seconds": "Sekundid",
   "scheduler_preset_action_config_message": "Sõnum",
   "save_and_build": "Salvesta ja ehita",
   "toggle_widgets_preview": "Vidinate eelvaate sisse/välja lülitamine",
@@ -202,7 +208,7 @@
       "Title": "Turvasignalisatsioonisüsteem",
       "Description": "Kasutage turvasignalisatsioonisüsteemi rakendamiseks andureid ja muid seadmeid.",
       "HomeGenie.SecurityAlarm": "Kasutage alarmi/stroboskoopina",
-      "HomeGenie.SecurityTriggerHome": "Käivitub ka siis, kui on sisse lülitatud Kodu",
+      "HomeGenie.SecurityTriggerHome": "Käivitub ka siis, kui on relvastatud Kodu",
       "HomeGenie.SecuritySensor": "Kasutage turvasensorina",
       "ConfigureOptions.Email.Recipients": "Komadega eraldatud loend häireteadete saajate e-posti aadressidest",
       "ConfigureOptions.System.ArmDelay": "Käivitusviivitus (sekundites)",
@@ -283,7 +289,7 @@
       "Scenarios.SunriseColors": "Link stsenaariumile „Päikesetõusu värvid“"
     },
     "910": {
-      "Title": "Objektide tuvastamine",
+      "Title": "Objekti tuvastamine",
       "Description": "Objektide tuvastamine eelnevalt treenitud YOLO11 mudeli abil.",
       "ML.ObjectDetection": "Objektide tuvastamise lubamine",
       "ML.ObjectDetection.TriggerDetect": "Komadega eraldatud nimekiri asjadest (inglise keeles), mis käivitavad alarmi. (nt: kass, koer, inimene, seljakott, kohver)",
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudelifaili (.onnx) tee"
     },
     "912": {
-      "Title": "Instantside segmenteerimine",
+      "Title": "Instantsi segmenteerimine",
       "Description": "Tuvastage objekte ja nende kontuure eelnevalt treenitud YOLO11 mudeli abil.",
       "ML.InstanceSegmentation": "Luba eksemplaride segmenteerimine",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudelifaili (.onnx) tee"
@@ -306,6 +312,18 @@
       "Description": "Võimaldab teie nutika süsteemi loomuliku keele juhtimist Google'i Gemini tehisintellekti abil. Selle funktsiooni aktiveerimiseks sisestage kehtiv API-võti. Tasuta API-võtme saamiseks järgige juhiseid aadressil https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini tehisintellekti API võti",
       "ConfigureOptions.ModelId": "Mudeli ID"
+    },
+    "931": {
+      "Title": "Kaksikute vidina džinn",
+      "Description": "Sinu isiklik tehisintellekti džinn vidinate loomiseks. Gemini toega seade aitab sul kirjutada ja siluda HTML-i, CSS-i ja JavaScripti koodi otse HomeGenie redaktoris. Selle funktsiooni aktiveerimiseks sisesta kehtiv API-võti. Tasuta API-võtme saamiseks järgi juhiseid aadressil https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini tehisintellekti API võti",
+      "ConfigureOptions.ModelId": "Mudeli ID"
+    },
+    "940": {
+      "Title": "Kohalik tehisintellekt (LLM)",
+      "Description": "Käivita oma HomeGenie serveris lokaalselt suurkeelemudel (LLM). Neid mudeleid saab tasuta alla laadida platvormidelt nagu Hugging Face. Lihtsalt sisesta GGUF-vormingus mudelifaili tee. Pane tähele, et parameetrite kohandamine, peamiselt kontekstikoodis, võib olla vajalik erinevate mudelitega täieliku ühilduvuse tagamiseks.",
+      "ConfigureOptions.MaxTokens": "Maksimaalne tokenite arv (vastuse pikkus)",
+      "ConfigureOptions.ModelPath": "Kohaliku GGUF-faili tee"
     }
   }
 }

@@ -1,0 +1,36 @@
+:host {
+    font-family: sans-serif;
+    min-width: 312px;
+}
+
+.container {
+    padding: 16px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+.level-text {
+    color: var(--text-color);
+    margin-right: 32px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.slider {
+    flex-grow: 1;
+    accent-color: var(--accent-color);
+}
+
+.icon {
+    fill: var(--secondary-text-color);
+}

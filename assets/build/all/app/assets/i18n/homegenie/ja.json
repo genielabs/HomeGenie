@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "選択した月",
   "cronwizard_schedule_set_exact_time": "イベント時間を設定します。",
   "cronwizard_schedule_set_slot_start": "時間枠の開始を設定します。",
-  "cronwizard_schedule_set_slot_end": "{{start}}.<span class=\"notranslate\"><br/></span> から開始して、時間枠の終了を設定します。",
+  "cronwizard_schedule_set_slot_end": "{{start}} から開始します。<span class=\"notranslate\"><br/></span> 時間枠の終了を設定します。",
   "cronwizard_bindings_define_types_and_modules": "このスケジュールの対象となるタイプとモジュールを定義します（オプション）",
   "cronwizard_bindings_select_types": "種類を選択",
   "cronwizard_action_set_action_to_execute": "このイベントの発生時に実行するアクションを設定する",
@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "このイベントを参照するには、cron 式の変数として <span class=\"notranslate color-primary\">@{{name}}</span> を使用するか、自動化プログラムで <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> を使用します。",
   "scheduler_preset_action_command_turn_on": "オンにする",
   "scheduler_preset_action_command_turn_off": "消す",
-  "scheduler_preset_action_command_set_level": "レベルを設定する",
+  "scheduler_preset_action_command_set_level": "レベル設定",
   "scheduler_preset_action_config_level": "レベル",
   "scheduler_preset_action_command_set_color": "色を設定する",
   "scheduler_preset_action_config_color": "色",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "熱",
   "scheduler_preset_action_config_mode_heat_eco": "熱経済",
   "scheduler_preset_action_config_mode_cool": "いいね",
-  "scheduler_preset_action_config_mode_cool_eco": "クールな経済",
-  "scheduler_preset_action_program_run": "プログラムを実行する",
+  "scheduler_preset_action_config_mode_cool_eco": "クールエコノミー",
+  "scheduler_preset_action_command_remote_control": "リモートコントロール（IR/RFコードの送信）",
+  "scheduler_preset_action_config_data": "データ",
+  "scheduler_preset_action_program_run": "プログラムを実行",
   "scheduler_preset_action_config_program": "プログラム",
   "scheduler_preset_action_config_options": "オプション",
   "scheduler_preset_action_program_say": "言う",
+  "scheduler_preset_action_net_http_call": "Webサービスを呼び出す",
+  "scheduler_preset_action_config_url": "住所（URL）",
+  "scheduler_preset_action_pause": "一時停止",
+  "scheduler_preset_action_config_seconds": "秒",
   "scheduler_preset_action_config_message": "メッセージ",
   "save_and_build": "保存して構築",
   "toggle_widgets_preview": "ウィジェットのプレビューを切り替える",
@@ -306,6 +312,18 @@
       "Description": "Google Gemini AI を活用し、スマートシステムの自然言語制御を可能にします。この機能を有効にするには、有効な API キーを入力してください。無料の API キーを取得するには、https://aistudio.google.com/app/apikey の手順に従ってください。",
       "ConfigureOptions.ApiKey": "Google Gemini AI APIキー",
       "ConfigureOptions.ModelId": "モデルID"
+    },
+    "931": {
+      "Title": "ジェミニウィジェットジーニー",
+      "Description": "ウィジェット作成のためのパーソナルAIジーニー。Geminiを搭載し、HomeGenieエディタ内で直接HTML、CSS、JavaScriptコードを記述・デバッグできます。この機能を有効にするには、有効なAPIキーを入力してください。無料のAPIキーを取得するには、https://aistudio.google.com/app/apikey の手順に従ってください。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI APIキー",
+      "ConfigureOptions.ModelId": "モデルID"
+    },
+    "940": {
+      "Title": "ローカルAI（法学修士）",
+      "Description": "HomeGenieサーバー上で大規模言語モデル（LLM）をローカルで実行できます。これらのモデルは、Hugging Faceなどのプラットフォームから無料でダウンロードできます。GGUF形式のモデルファイルへのパスを指定するだけです。異なるモデルとの完全な互換性を確保するには、主にコンテキストコード内のパラメータの調整が必要になる場合がありますのでご注意ください。",
+      "ConfigureOptions.MaxTokens": "最大トークン数（応答の長さ）",
+      "ConfigureOptions.ModelPath": "ローカル GGUF ファイルへのパス"
     }
   }
 }

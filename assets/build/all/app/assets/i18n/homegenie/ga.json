@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Bain úsáid as <span class=\"notranslate color-primary\">@{{name}}</span> mar athróg i léirithe cron nó bain úsáid as <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> i gcláir uathoibrithe chun tagairt a dhéanamh don imeacht seo.",
   "scheduler_preset_action_command_turn_on": "Cas air",
   "scheduler_preset_action_command_turn_off": "Múch",
-  "scheduler_preset_action_command_set_level": "Socraigh leibhéal",
+  "scheduler_preset_action_command_set_level": "Socraigh Leibhéal",
   "scheduler_preset_action_config_level": "Leibhéal",
-  "scheduler_preset_action_command_set_color": "Socraigh dath",
+  "scheduler_preset_action_command_set_color": "Socraigh Dath",
   "scheduler_preset_action_config_color": "Dath",
-  "scheduler_preset_action_command_thermostat_mode": "Mód teirmeastait",
+  "scheduler_preset_action_command_thermostat_mode": "Mód Teirmeastait",
   "scheduler_preset_action_config_mode": "Mód",
   "scheduler_preset_action_config_mode_on": "Ar siúl",
   "scheduler_preset_action_config_mode_off": "As",
   "scheduler_preset_action_config_mode_heat": "Teas",
-  "scheduler_preset_action_config_mode_heat_eco": "Geilleagar teasa",
+  "scheduler_preset_action_config_mode_heat_eco": "Geilleagar Teasa",
   "scheduler_preset_action_config_mode_cool": "Fionnuar",
-  "scheduler_preset_action_config_mode_cool_eco": "Geilleagar fionnuar",
-  "scheduler_preset_action_program_run": "Rith clár",
+  "scheduler_preset_action_config_mode_cool_eco": "Geilleagar Fionnuar",
+  "scheduler_preset_action_command_remote_control": "Cianrialtán (seol cóid IR/RF)",
+  "scheduler_preset_action_config_data": "Sonraí",
+  "scheduler_preset_action_program_run": "Rith Clár",
   "scheduler_preset_action_config_program": "Clár",
   "scheduler_preset_action_config_options": "Roghanna",
   "scheduler_preset_action_program_say": "Abair",
+  "scheduler_preset_action_net_http_call": "Glaoigh ar Sheirbhís Gréasáin",
+  "scheduler_preset_action_config_url": "Seoladh (URL)",
+  "scheduler_preset_action_pause": "Sos",
+  "scheduler_preset_action_config_seconds": "Soicindí",
   "scheduler_preset_action_config_message": "Teachtaireacht",
   "save_and_build": "Sábháil agus tóg",
   "toggle_widgets_preview": "Réamhamharc giuirléidí a scoránaigh",
@@ -117,12 +123,12 @@
   "program_status_enabled": "Cumasaithe",
   "program_status_broken": "Briste",
   "program_status_compile": "Tiomsú",
-  "automation_programming_guide": "Treoir ríomhchlárúcháin",
+  "automation_programming_guide": "Treoir Chlársceidealaithe",
   "tap_to_disable": "Cliceáil chun a dhíchumasú",
   "tap_to_enable": "Cliceáil chun a chumasú",
-  "program_data": "Sonraí an chláir",
-  "visual_code": "Cód amhairc",
-  "generated_code": "Cód ginte",
+  "program_data": "Sonraí an Chláir",
+  "visual_code": "Cód Amhairc",
+  "generated_code": "Cód Ginithe",
   "setup_code": "Socrú",
   "main_code": "Príomh",
   "context_code": "Comhthéacs",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Insamhladh amháin"
     },
     "26": {
-      "Title": "Soilse datha",
+      "Title": "Soilse Dath",
       "Description": "Sampla de chomhtháthú soilse Philips Hue ag baint úsáide as HTTP API (V1). Is é \"newdeveloper\" an t-úsáideoir réamhshocraithe chun ceangal leis an droichead agus ba chóir go mbeadh sé cumasaithe cheana féin.",
       "ConfigureOptions.BridgeAddress": "Seoladh IP Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Ainm úsáideora",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Clár le rith nuair a spreagtar é"
     },
     "95": {
-      "Title": "Logáil imeachtaí",
+      "Title": "Logáil Imeachtaí",
       "Description": "Taifead gníomhaíocht gléis.",
       "EventsLogger.EnableLogging": "Cumasaigh"
     },
     "111": {
-      "Title": "Cumraíocht cliant",
+      "Title": "Cumraíocht Cliant",
       "Description": "Cuireann sé API i bhfeidhm chun próifílí cumraíochta cliant a bhainistiú a úsáidtear chun socruithe Chomhéadain Úsáideora agus Painéil Rialaithe a stóráil."
     },
     "400": {
@@ -232,15 +238,15 @@
       "Status.Level": "Stádas an lasc (ar siúl/as)"
     },
     "401": {
-      "Title": "Taispeántas - Doras a Scoradáil",
-      "Description": "Insamhladh ar oscailt/dúnadh dorais de chuid braiteoir taispeána dorais-fuinneoige."
+      "Title": "Taispeántas - Doras a Scoráil",
+      "Description": "Insamhlaíonn sé doras oscailte/dúnta de chuid braiteoir taispeána dorais-fuinneoige."
     },
     "402": {
       "Title": "Taispeántas - Gluaiseacht Braite",
       "Description": "Insamhlaíonn braiteadh gluaisne ilbhraiteora taispeána."
     },
     "410": {
-      "Title": "Insamhlóir braiteora",
+      "Title": "Insamhlóir Braiteoirí",
       "Description": "Luachanna braiteora randamacha a astú.",
       "Simulator.Sensor.Temperature": "Braiteoir teochta",
       "Simulator.Sensor.Humidity": "Braiteoir taise",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Céim maolaithe"
     },
     "142": {
-      "Title": "Cuntas ríomhphoist",
+      "Title": "Cuntas Ríomhphoist",
       "Description": "Stórálann sé faisnéis faoi chuntais ríomhphoist a úsáideann cláir chórais chun ríomhphoist a sheoladh/a fháil.",
       "ConfigureOptions.Email.Sender": "1. Seoladh ríomhphoist",
       "ConfigureOptions.Email.SmtpServer": "2. Seoladh freastalaí SMTP",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Nasc chuig cás Dathanna Éirí Gréine"
     },
     "910": {
-      "Title": "Brath réada",
+      "Title": "Brathadóireacht Réada",
       "Description": "Braith réada ag baint úsáide as samhail YOLO11 réamh-oiliúna.",
       "ML.ObjectDetection": "Cumasaigh braiteadh réad",
       "ML.ObjectDetection.TriggerDetect": "Liosta rudaí (i mBéarla) a chuirfidh an t-aláram ar siúl, scartha le camóga. (m.sh.: cat, madra, duine, mála droma, mála taistil)",
       "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Meastachán staidiúir",
+      "Title": "Meastachán Staidiúir",
       "Description": "Brathphointe eochair trí mheastachán staidiúir, ag baint úsáide as samhlacha ONNX saincheaptha nó an tsamhail YOLOv11 réamh-oiliúna réamhshocraithe (shonrach do staidiúir an duine).",
       "ML.PoseEstimation": "Cumasaigh meastachán staidiúir",
       "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Deighilt samplaí",
+      "Title": "Deighilt Cásanna",
       "Description": "Braith rudaí agus a n-imlínte ag baint úsáide as samhail YOLO11 réamh-oiliúna.",
       "ML.InstanceSegmentation": "Cumasaigh deighilt samplaí",
       "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Cumasaíonn sé rialú teanga nádúrtha do do chóras cliste ag baint úsáide as Gemini AI Google. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",
       "ConfigureOptions.ApiKey": "Eochair API AI Google Gemini",
       "ConfigureOptions.ModelId": "Aitheantas Múnla"
+    },
+    "931": {
+      "Title": "Géine Giuirléid Gemini",
+      "Description": "Do ghiní pearsanta AI le haghaidh cruthú giuirléidí. Cumhachtaithe ag Gemini, cabhraíonn sé leat cód HTML, CSS, agus JavaScript a scríobh agus a dhífhabhtú go díreach laistigh d'eagarthóir HomeGenie. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",
+      "ConfigureOptions.ApiKey": "Eochair API AI Google Gemini",
+      "ConfigureOptions.ModelId": "Aitheantas Múnla"
+    },
+    "940": {
+      "Title": "Intleacht Shaorga Áitiúil (LLM)",
+      "Description": "Rith Samhail Teanga Mhór (LLM) go háitiúil ar do fhreastalaí HomeGenie. Is féidir na samhlacha seo a íoslódáil saor in aisce ó ardáin cosúil le Hugging Face. Níl le déanamh ach an cosán chuig comhad samhail i bhformáid GGUF a sholáthar. Tabhair faoi deara go mb’fhéidir go mbeadh gá le coigeartuithe ar pharaiméadair, go príomha laistigh den Chód Comhthéacs, chun comhoiriúnacht iomlán le samhlacha éagsúla a chinntiú.",
+      "ConfigureOptions.MaxTokens": "Uasmhéid Comharthaí (fad freagartha)",
+      "ConfigureOptions.ModelPath": "Cosán chuig an gcomhad GGUF áitiúil"
     }
   }
 }

@@ -58,7 +58,7 @@
   "cronwizard_days": "ଦିନଗୁଡିକ",
   "cronwizard_months": "ମାସ",
   "cronwizard_minuteselect_everyminute": "ପ୍ରତି ମିନିଟ୍‌ରେ",
-  "cronwizard_minuteselect_everynthminute": "ପ୍ରତି ନିର୍ଦ୍ଦିଷ୍ଟ ମିନିଟ୍‌ରେ",
+  "cronwizard_minuteselect_everynthminute": "ପ୍ରତି ଦିଆଯାଇଥିବା ମିନିଟ୍‌ରେ",
   "cronwizard_minuteselect_selectedminutes": "ଚୟନିତ ମିନିଟ୍",
   "cronwizard_hourselect_everyhour": "ପ୍ରତି ଘଣ୍ଟାରେ",
   "cronwizard_hourselect_everynthhour": "ପ୍ରତି ନିର୍ଦ୍ଦିଷ୍ଟ ଘଣ୍ଟାରେ",
@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "କ୍ରୋନ୍ ଏକ୍ସପ୍ରେସନରେ <span class=\"notranslate color-primary\">@{{name}}</span> କୁ ଏକ ଭେରିଏବଲ୍ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ଏହି ଘଟଣାକୁ ସୂଚିତ କରିବା ପାଇଁ ଅଟୋମେସନ୍ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକରେ <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ବ୍ୟବହାର କରନ୍ତୁ।",
   "scheduler_preset_action_command_turn_on": "ଚାଲୁ କରନ୍ତୁ",
   "scheduler_preset_action_command_turn_off": "ବନ୍ଦ କରନ୍ତୁ",
-  "scheduler_preset_action_command_set_level": "ସ୍ତର ସେଟ୍‌ କରନ୍ତୁ",
+  "scheduler_preset_action_command_set_level": "ସ୍ତର ସେଟ୍ କରନ୍ତୁ",
   "scheduler_preset_action_config_level": "ସ୍ତର",
   "scheduler_preset_action_command_set_color": "ରଙ୍ଗ ସେଟ୍ କରନ୍ତୁ",
   "scheduler_preset_action_config_color": "ରଙ୍ଗ",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "ଅନ୍",
   "scheduler_preset_action_config_mode_off": "ବନ୍ଦ ଅଛି",
   "scheduler_preset_action_config_mode_heat": "ଗରମ",
-  "scheduler_preset_action_config_mode_heat_eco": "ହିଟ୍ ଇକୋନମି",
+  "scheduler_preset_action_config_mode_heat_eco": "ହିଟ୍ ଇକୋନୋମି",
   "scheduler_preset_action_config_mode_cool": "ଥଣ୍ଡା",
-  "scheduler_preset_action_config_mode_cool_eco": "ଥଣ୍ଡା ଅର୍ଥନୀତି",
+  "scheduler_preset_action_config_mode_cool_eco": "କୁଲ୍ ଇକୋନୋମି",
+  "scheduler_preset_action_command_remote_control": "ରିମୋଟ୍ କଣ୍ଟ୍ରୋଲ୍ (IR/RF କୋଡ୍ ପଠାନ୍ତୁ)",
+  "scheduler_preset_action_config_data": "ତଥ୍ୟ",
   "scheduler_preset_action_program_run": "ପ୍ରୋଗ୍ରାମ୍ ଚଲାନ୍ତୁ",
   "scheduler_preset_action_config_program": "କାର୍ଯ୍ୟକ୍ରମ",
   "scheduler_preset_action_config_options": "ବିକଳ୍ପ",
   "scheduler_preset_action_program_say": "କୁହନ୍ତୁ",
+  "scheduler_preset_action_net_http_call": "ଏକ ୱେବ୍ ସେବାକୁ କଲ୍ କରନ୍ତୁ",
+  "scheduler_preset_action_config_url": "ଠିକଣା (URL)",
+  "scheduler_preset_action_pause": "ପଜ୍",
+  "scheduler_preset_action_config_seconds": "ସେକେଣ୍ଡ",
   "scheduler_preset_action_config_message": "ମେସେଜ୍",
   "save_and_build": "ସେଭ୍ କରନ୍ତୁ ଏବଂ ତିଆରି କରନ୍ତୁ",
   "toggle_widgets_preview": "ୱିଜେଟ୍ ପ୍ରିଭ୍ୟୁ ଟୋଗଲ୍ କରନ୍ତୁ",
@@ -178,7 +184,7 @@
       "ConfigureOptions.ThermostatsCount": "ଥର୍ମୋଷ୍ଟାଟ୍ ସଂଖ୍ୟା"
     },
     "81": {
-      "Title": "ଏନର୍ଜି ମନିଟର୍",
+      "Title": "ଏନର୍ଜି ମନିଟର",
       "Description": "ଶକ୍ତି ବ୍ୟବହାର ଏବଂ ଡିଭାଇସଗୁଡ଼ିକର ବ୍ୟବହାର ଉପରେ ପରିସଂଖ୍ୟାନ ସୃଷ୍ଟି କରନ୍ତୁ।",
       "EnergyManagement.MonitorStatus": "ମନିଟର ସ୍ଥିତି",
       "EnergyManagement.MonitorWatts": "ଶକ୍ତି ବ୍ୟବହାର ଉପରେ ନଜର ରଖନ୍ତୁ"
@@ -206,7 +212,7 @@
       "HomeGenie.SecuritySensor": "ସୁରକ୍ଷା ସେନ୍ସର ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ",
       "ConfigureOptions.Email.Recipients": "ଆଲାର୍ମ ବିଜ୍ଞପ୍ତି ପାଇଁ ପ୍ରାପ୍ତକର୍ତ୍ତାଙ୍କ ଇ-ମେଲଗୁଡ଼ିକର କମା ଦ୍ୱାରା ପୃଥକ ତାଲିକା",
       "ConfigureOptions.System.ArmDelay": "ହାତ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
-      "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍‌ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
+      "ConfigureOptions.System.SirenStartTime": "ସାଇରନ୍ ଆରମ୍ଭ ବିଳମ୍ବ (ସେକେଣ୍ଡ)",
       "ConfigureOptions.System.SirenMaxTime": "ସାଇରନ୍ ସର୍ବାଧିକ ସମୟ (ସେକେଣ୍ଡ, 0 = ଅସୀମ)",
       "ConfigureOptions.Trigger.ArmedProgram": "ସଶସ୍ତ୍ର ଥିବା ସମୟରେ ଚଲାଇବାକୁ କାର୍ଯ୍ୟକ୍ରମ",
       "ConfigureOptions.Trigger.DisarmedProgram": "ନିରସ୍ତ୍ର ହେବା ସମୟରେ ଚଲାଇବାକୁ ଥିବା କାର୍ଯ୍ୟକ୍ରମ",
@@ -218,7 +224,7 @@
       "EventsLogger.EnableLogging": "ସକ୍ଷମ କରନ୍ତୁ"
     },
     "111": {
-      "Title": "କ୍ଲାଏଣ୍ଟ କନଫିଗରେସନ୍",
+      "Title": "କ୍ଲାଏଣ୍ଟ ବିନ୍ୟାସକରଣ",
       "Description": "UI ଏବଂ ଡ୍ୟାସବୋର୍ଡ ସେଟିଂସ୍ ଷ୍ଟୋର୍ କରିବାକୁ ବ୍ୟବହୃତ କ୍ଲାଏଣ୍ଟଙ୍କ ବିନ୍ୟାସ ପ୍ରୋଫାଇଲ୍ ପରିଚାଳନା ପାଇଁ API କାର୍ଯ୍ୟକାରୀ କରେ।"
     },
     "400": {
@@ -240,7 +246,7 @@
       "Description": "ଡେମୋ ମଲ୍ଟି-ସେନ୍ସରର ଗତି ଚିହ୍ନଟକୁ ସିମୁଲେଟ୍ କରେ।"
     },
     "410": {
-      "Title": "ସେନ୍ସର୍ ସିମୁଲେଟର୍",
+      "Title": "ସେନ୍ସର୍ ସିମୁଲେଟର",
       "Description": "ଅନିୟମିତ ସେନ୍ସର ମୂଲ୍ୟ ନିର୍ଗତ କରନ୍ତୁ।",
       "Simulator.Sensor.Temperature": "ତାପମାତ୍ରା ସେନ୍ସର୍",
       "Simulator.Sensor.Humidity": "ଆର୍ଦ୍ରତା ସେନ୍ସର୍",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "ଡିମିଂ ଷ୍ଟେପ୍"
     },
     "142": {
-      "Title": "ଇ-ମେଲ୍ ଆକାଉଣ୍ଟ",
+      "Title": "ଇ-ମେଲ୍ ଖାତା",
       "Description": "ଇମେଲ ପଠାଇବା/ପ୍ରାପ୍ତ କରିବା ପାଇଁ ସିଷ୍ଟମ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକ ଦ୍ୱାରା ବ୍ୟବହୃତ ଇମେଲ ଆକାଉଣ୍ଟ ସୂଚନା ସଂରକ୍ଷଣ କରେ।",
       "ConfigureOptions.Email.Sender": "1. ଇ-ମେଲ୍ ଠିକଣା",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP ସର୍ଭର ଠିକଣା",
@@ -283,9 +289,9 @@
       "Scenarios.SunriseColors": "ସୂର୍ଯ୍ୟୋଦୟ ରଙ୍ଗ ଦୃଶ୍ୟପଟର ଲିଙ୍କ୍"
     },
     "910": {
-      "Title": "ବସ୍ତୁ ଚିହ୍ନଟକରଣ",
+      "Title": "ବସ୍ତୁ ଚିହ୍ନଟ",
       "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO11 ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁଗୁଡ଼ିକୁ ଚିହ୍ନଟ କରନ୍ତୁ।",
-      "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟକରଣ ସକ୍ଷମ କରନ୍ତୁ",
+      "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟ ସକ୍ଷମ କରନ୍ତୁ",
       "ML.ObjectDetection.TriggerDetect": "ଆଲାର୍ମ ଟ୍ରିଗର କରୁଥିବା ଜିନିଷଗୁଡ଼ିକର କମା-ବିଚ୍ଛେଦିତ ତାଲିକା (ଇଂରାଜୀରେ)। (ଯଥା: ବିଲେଇ, କୁକୁର, ବ୍ୟକ୍ତି, ବ୍ୟାକପ୍ୟାକ୍, ସୁଟକେସ୍)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
     },
@@ -306,6 +312,18 @@
       "Description": "Google ର Gemini AI ବ୍ୟବହାର କରି ଆପଣଙ୍କ ସ୍ମାର୍ଟ ସିଷ୍ଟମ ପାଇଁ ପ୍ରାକୃତିକ ଭାଷା ନିୟନ୍ତ୍ରଣ ସକ୍ଷମ କରେ। ଏହି ବୈଶିଷ୍ଟ୍ୟକୁ ସକ୍ରିୟ କରିବା ପାଇଁ, ଏକ ବୈଧ API କୀ ପ୍ରବେଶ କରନ୍ତୁ। ଏକ ମାଗଣା API କୀ ପାଇବା ପାଇଁ https://aistudio.google.com/app/apikey ରେ ଥିବା ନିର୍ଦ୍ଦେଶାବଳୀ ଅନୁସରଣ କରନ୍ତୁ।",
       "ConfigureOptions.ApiKey": "ଗୁଗୁଲ୍ ଜେମିନି ଏଆଇ ଏପିଆଇ କୀ",
       "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି"
+    },
+    "931": {
+      "Title": "ଜେମିନି ୱିଜେଟ୍ ଜିନି",
+      "Description": "ୱିଜେଟ୍ ସୃଷ୍ଟି ପାଇଁ ଆପଣଙ୍କର ବ୍ୟକ୍ତିଗତ AI ଜିନି। ଜେମିନି ଦ୍ୱାରା ପରିଚାଳିତ, ଏହା ଆପଣଙ୍କୁ HomeGenie ସମ୍ପାଦକ ମଧ୍ୟରେ ସିଧାସଳଖ HTML, CSS, ଏବଂ JavaScript କୋଡ୍ ଲେଖିବା ଏବଂ ଡିବଗ୍ କରିବାରେ ସାହାଯ୍ୟ କରେ। ଏହି ବୈଶିଷ୍ଟ୍ୟକୁ ସକ୍ରିୟ କରିବା ପାଇଁ, ଏକ ବୈଧ API କୀ ପ୍ରବେଶ କରନ୍ତୁ। ଏକ ମାଗଣା API କୀ ପାଇବା ପାଇଁ https://aistudio.google.com/app/apikey ରେ ଥିବା ନିର୍ଦ୍ଦେଶାବଳୀ ଅନୁସରଣ କରନ୍ତୁ।",
+      "ConfigureOptions.ApiKey": "ଗୁଗୁଲ୍ ଜେମିନି ଏଆଇ ଏପିଆଇ କୀ",
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି"
+    },
+    "940": {
+      "Title": "ସ୍ଥାନୀୟ AI (LLM)",
+      "Description": "ଆପଣଙ୍କର HomeGenie ସର୍ଭରରେ ସ୍ଥାନୀୟ ଭାବରେ ଏକ ବଡ଼ ଭାଷା ମଡେଲ୍ (LLM) ଚଲାନ୍ତୁ। ଏହି ମଡେଲ୍‌ଗୁଡ଼ିକୁ ହଗିଂ ଫେସ୍ ଭଳି ପ୍ଲାଟଫର୍ମରୁ ମାଗଣାରେ ଡାଉନଲୋଡ୍ କରାଯାଇପାରିବ। କେବଳ ଏକ GGUF ଫର୍ମାଟ୍ ମଡେଲ୍ ଫାଇଲ୍‌କୁ ପଥ ପ୍ରଦାନ କରନ୍ତୁ। ଦୟାକରି ଧ୍ୟାନ ଦିଅନ୍ତୁ ଯେ ବିଭିନ୍ନ ମଡେଲ୍ ସହିତ ପୂର୍ଣ୍ଣ ସୁସଙ୍ଗତତା ସୁନିଶ୍ଚିତ କରିବା ପାଇଁ ପାରାମିଟରଗୁଡ଼ିକରେ ସଂଶୋଧନ ଆବଶ୍ୟକ ହୋଇପାରେ, ମୁଖ୍ୟତଃ ପ୍ରସଙ୍ଗ କୋଡ୍ ମଧ୍ୟରେ।",
+      "ConfigureOptions.MaxTokens": "ସର୍ବାଧିକ ଟୋକନ୍ (ପ୍ରତିକ୍ରିୟା ଲମ୍ବ)",
+      "ConfigureOptions.ModelPath": "ସ୍ଥାନୀୟ GGUF ଫାଇଲକୁ ପଥ"
     }
   }
 }

@@ -9,5 +9,11 @@
     "indicators": "Nîşander",
     "lights_control": "Ronahî",
     "switches_control": "Guhêrbar"
+  },
+  "$ai_chat": {
+    "title": "Widgeta Sohbeta AI",
+    "intro": "Silav! Ez alîkarê LLM-ê yê herêmî me. Ez çawa dikarim alîkariya we bikim?",
+    "no_bound_module": "Modula LLM-ê nehatiye girêdan. Ji kerema xwe mîhengên widgetê vekin da ku modelek zimanî bi hev ve girêbidin.",
+    "start_typing_prompt": "Dest bi nivîsandina fermanekê bike..."
   }
 }

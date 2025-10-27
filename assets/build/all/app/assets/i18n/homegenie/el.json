@@ -40,7 +40,7 @@
   "schedule_type_range": "Εύρος ημερομηνιών",
   "schedule_type_cron": "Έκφραση Cron",
   "schedule_action": "Δράση",
-  "schedule_occurrence_preview": "Προεπισκόπηση περιστατικού",
+  "schedule_occurrence_preview": "Προεπισκόπηση εμφάνισης",
   "time_schedule": "Πρόγραμμα",
   "occurrence": "Περιστατικό",
   "cronwizard_description_on": "επί",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Επί",
   "scheduler_preset_action_config_mode_off": "Μακριά από",
   "scheduler_preset_action_config_mode_heat": "Θερμότητα",
-  "scheduler_preset_action_config_mode_heat_eco": "Οικονομία θερμότητας",
+  "scheduler_preset_action_config_mode_heat_eco": "Οικονομία θέρμανσης",
   "scheduler_preset_action_config_mode_cool": "Δροσερός",
-  "scheduler_preset_action_config_mode_cool_eco": "Ψυχρή οικονομία",
+  "scheduler_preset_action_config_mode_cool_eco": "Οικονομική λειτουργία",
+  "scheduler_preset_action_command_remote_control": "Τηλεχειριστήριο (αποστολή κωδικών IR/RF)",
+  "scheduler_preset_action_config_data": "Δεδομένα",
   "scheduler_preset_action_program_run": "Εκτέλεση προγράμματος",
   "scheduler_preset_action_config_program": "Πρόγραμμα",
   "scheduler_preset_action_config_options": "Επιλογές",
   "scheduler_preset_action_program_say": "Λέγω",
+  "scheduler_preset_action_net_http_call": "Καλέστε μια υπηρεσία ιστού",
+  "scheduler_preset_action_config_url": "Διεύθυνση (URL)",
+  "scheduler_preset_action_pause": "Παύση",
+  "scheduler_preset_action_config_seconds": "Δευτερόλεπτα",
   "scheduler_preset_action_config_message": "Μήνυμα",
   "save_and_build": "Αποθήκευση και δημιουργία",
   "toggle_widgets_preview": "Εναλλαγή προεπισκόπησης γραφικών στοιχείων",
@@ -117,11 +123,11 @@
   "program_status_enabled": "Ενεργοποιημένο",
   "program_status_broken": "Σπασμένος",
   "program_status_compile": "Συντάσσω",
-  "automation_programming_guide": "Οδηγός προγραμματισμού",
+  "automation_programming_guide": "Οδηγός Προγραμματισμού",
   "tap_to_disable": "Κάντε κλικ για απενεργοποίηση",
   "tap_to_enable": "Κάντε κλικ για ενεργοποίηση",
   "program_data": "Δεδομένα προγράμματος",
-  "visual_code": "Οπτικός κώδικας",
+  "visual_code": "Οπτικός Κώδικας",
   "generated_code": "Δημιουργημένος κώδικας",
   "setup_code": "Ρύθμιση",
   "main_code": "Κύριος",
@@ -201,7 +207,7 @@
     "90": {
       "Title": "Σύστημα συναγερμού ασφαλείας",
       "Description": "Χρησιμοποιήστε αισθητήρες και άλλες συσκευές για την εφαρμογή ενός συστήματος συναγερμού ασφαλείας.",
-      "HomeGenie.SecurityAlarm": "Χρήση ως ξυπνητήρι/φλοσομπόσκο",
+      "HomeGenie.SecurityAlarm": "Χρήση ως ξυπνητήρι/φλοσομπόλακας",
       "HomeGenie.SecurityTriggerHome": "Ενεργοποιείται επίσης όταν είναι οπλισμένο. Αρχική",
       "HomeGenie.SecuritySensor": "Χρήση ως αισθητήρα ασφαλείας",
       "ConfigureOptions.Email.Recipients": "Λίστα παραληπτών email για ειδοποιήσεις συναγερμού, διαχωρισμένη με κόμμα",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Πρόγραμμα που θα εκτελεστεί όταν ενεργοποιηθεί"
     },
     "95": {
-      "Title": "Καταγραφή συμβάντων",
+      "Title": "Καταγραφή Εκδηλώσεων",
       "Description": "Καταγραφή δραστηριότητας συσκευής.",
       "EventsLogger.EnableLogging": "Καθιστώ ικανό"
     },
@@ -240,7 +246,7 @@
       "Description": "Προσομοιώνει την ανίχνευση κίνησης του demo πολυαισθητήρα."
     },
     "410": {
-      "Title": "Προσομοιωτής αισθητήρα",
+      "Title": "Προσομοιωτής Αισθητήρων",
       "Description": "Εκπέμπει τυχαίες τιμές αισθητήρα.",
       "Simulator.Sensor.Temperature": "Αισθητήρας θερμοκρασίας",
       "Simulator.Sensor.Humidity": "Αισθητήρας υγρασίας",
@@ -290,13 +296,13 @@
       "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Εκτίμηση στάσης",
+      "Title": "Εκτίμηση Στάσης",
       "Description": "Ανίχνευση βασικών σημείων μέσω εκτίμησης στάσης, χρησιμοποιώντας προσαρμοσμένα μοντέλα ONNX ή το προεπιλεγμένο προ-εκπαιδευμένο μοντέλο YOLOv11 (ειδικό για ανθρώπινη στάση).",
       "ML.PoseEstimation": "Ενεργοποίηση εκτίμησης πόζας",
       "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Τμηματοποίηση στιγμιότυπων",
+      "Title": "Τμηματοποίηση Παρουσίας",
       "Description": "Εντοπίστε αντικείμενα και τα περιγράμματά τους χρησιμοποιώντας ένα προ-εκπαιδευμένο μοντέλο YOLO11.",
       "ML.InstanceSegmentation": "Ενεργοποίηση τμηματοποίησης παρουσίας",
       "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Επιτρέπει τον έλεγχο φυσικής γλώσσας για το έξυπνο σύστημά σας χρησιμοποιώντας το Gemini AI της Google. Για να ενεργοποιήσετε αυτήν τη λειτουργία, εισαγάγετε ένα έγκυρο κλειδί API. Ακολουθήστε τις οδηγίες στη διεύθυνση https://aistudio.google.com/app/apikey για να λάβετε ένα δωρεάν κλειδί API.",
       "ConfigureOptions.ApiKey": "Κλειδί API AI Google Gemini",
       "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου"
+    },
+    "931": {
+      "Title": "Τζίνι του Gemini Widget",
+      "Description": "Το προσωπικό σας τζίνι τεχνητής νοημοσύνης για τη δημιουργία widget. Με την υποστήριξη του Gemini, σας βοηθά να γράφετε και να εντοπίζετε σφάλματα κώδικα HTML, CSS και JavaScript απευθείας μέσα στον επεξεργαστή HomeGenie. Για να ενεργοποιήσετε αυτήν τη λειτουργία, εισαγάγετε ένα έγκυρο κλειδί API. Ακολουθήστε τις οδηγίες στη διεύθυνση https://aistudio.google.com/app/apikey για να λάβετε ένα δωρεάν κλειδί API.",
+      "ConfigureOptions.ApiKey": "Κλειδί API AI Google Gemini",
+      "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου"
+    },
+    "940": {
+      "Title": "Τοπική Τεχνητή Νοημοσύνη (LLM)",
+      "Description": "Εκτελέστε ένα Μεγάλο Γλωσσικό Μοντέλο (LLM) τοπικά στον διακομιστή HomeGenie. Αυτά τα μοντέλα μπορούν να ληφθούν δωρεάν από πλατφόρμες όπως το Hugging Face. Απλώς δώστε τη διαδρομή προς ένα αρχείο μοντέλου σε μορφή GGUF. Λάβετε υπόψη ότι ενδέχεται να απαιτούνται προσαρμογές στις παραμέτρους, κυρίως εντός του Κώδικα Συμφραζομένων, για να διασφαλιστεί η πλήρης συμβατότητα με διαφορετικά μοντέλα.",
+      "ConfigureOptions.MaxTokens": "Μέγιστος αριθμός διακριτικών (μήκος απόκρισης)",
+      "ConfigureOptions.ModelPath": "Διαδρομή προς το τοπικό αρχείο GGUF"
     }
   }
 }

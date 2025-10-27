@@ -30,7 +30,8 @@ $$.onUpdate(function(m,p){
     $$.boundModules.on();
     $$.data('status', '');
   }
-});</Script>
+});
+</Script>
     <BoundDevices>
       <string>Dimmer</string>
       <string>Color</string>
@@ -50,7 +51,7 @@ $$.onUpdate(function(m,p){
     <Name>Holidays.Summer</Name>
     <CronExpression>[ (* * 6-31 8 *) : (* * 1-3 9 *) ]</CronExpression>
     <Description>From August 6th to September 3rd</Description>
-    <Data>{"itemType":"2","from":"2016-08-06","to":"2016-09-03","time":[],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"1","occur_month_sel":[]}</Data>
+    <Data>{"itemType":2,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"none","template":{"forEach":{"commands":[]},"forStart":{"commands":[]},"forEnd":{"commands":[]}}},"from":"2016-08-06","to":"2016-09-03"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script />
     <BoundDevices />
@@ -60,7 +61,7 @@ $$.onUpdate(function(m,p){
     <Name>Holidays.Winter</Name>
     <CronExpression>[ (* * 18-31 12 *) : (* * 1-6 1 *) : (* * * 0 *) ]</CronExpression>
     <Description>From December 18th to January 6th</Description>
-    <Data>{"itemType":"2","from":"2016-12-18","to":"2016-01-06","time":[],"occur_min_type":"1","occur_min_step":"1","occur_min_sel":[],"occur_hour_type":"1","occur_hour_step":"1","occur_hour_sel":[],"occur_dayom_type":"1","occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":"1","occur_month_sel":[]}</Data>
+    <Data>{"itemType":2,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"none","template":{"forEach":{"commands":[]},"forStart":{"commands":[]},"forEnd":{"commands":[]}}},"from":"2016-12-18","to":"2017-01-06"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script />
     <BoundDevices />
@@ -72,25 +73,26 @@ $$.onUpdate(function(m,p){
  %
 (@Holidays.Summer : @Holidays.Winter)</CronExpression>
     <Description>Turn on half an hour after sunset until one hour before sunrise, then turn off (not active during holidays).</Description>
-    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.turn-on.js"},"forEnd":{"enabled":true,"script":"command.turn-off.js"}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"commands":[{"id":"command_turn_on"}]},"forEnd":{"enabled":true,"commands":[{"id":"command_turn_off"}]}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>// auto-generated code from template
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
-  // this is start of occurrences range
+  // this is start of a time slot
 
   $$.boundModules.on();
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
-  // this is end of occurrences range
+  // this is end of a time slot
 
   $$.boundModules.off();
 
 } else {
-  // this is for each other occurrences
+  // this is for any other single occurrence
+  // and every minute within a time slot
 
   //{each}//
 }
-    </Script>
+</Script>
     <BoundDevices>
       <string>Dimmer</string>
       <string>Color</string>
@@ -107,25 +109,30 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     <Name>Thermostat.Cool</Name>
     <CronExpression>(@SolarTimes.SolarNoon - 120 &gt; @SolarTimes.SolarNoon + 120) ; * * * 7,8 *</CronExpression>
     <Description>Set thermostat mode to 'Cool' in July and August, two hours before solar noon until two hours after.</Description>
-    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Cool"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Cool"}}]},"forEnd":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Off"}}]}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>// auto-generated code from template
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
-  // this is start of occurrences range
+  // this is start of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('Cool');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('Cool');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
-  // this is end of occurrences range
+  // this is end of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('Off');
 
 } else {
-  // this is for each other occurrences
+  // this is for any other single occurrence
+  // and every minute within a time slot
 
   //{each}//
 }
-    </Script>
+</Script>
     <BoundDevices>
       <string>Thermostat</string>
     </BoundDevices>
@@ -140,25 +147,30 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     <Name>Thermostat.Cool.Economy</Name>
     <CronExpression>(@SolarTimes.SolarNoon - 120 &gt; @SolarTimes.SolarNoon + 120) ; * * * 6,9 *</CronExpression>
     <Description>Set thermostat mode to 'Cool Economy' in June and September, two hours before solar noon until two hours after.</Description>
-    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"CoolEconomy"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"CoolEconomy"}}]},"forEnd":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Off"}}]}}},"from":"2016-06-20","to":"2016-06-20"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>// auto-generated code from template
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
-  // this is start of occurrences range
+  // this is start of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('CoolEconomy');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('CoolEconomy');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
-  // this is end of occurrences range
+  // this is end of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('Off');
 
 } else {
-  // this is for each other occurrences
+  // this is for any other single occurrence
+  // and every minute within a time slot
 
   //{each}//
 }
-    </Script>
+</Script>
     <BoundDevices>
       <string>Thermostat</string>
     </BoundDevices>
@@ -167,26 +179,31 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
   <SchedulerItem>
     <Name>Thermostat.Heat</Name>
     <CronExpression>(* * * 1,2,3,12 *) ; [ ((0 7 * * *) &gt; (0 11 * * *)) : ((0 16 * * *) &gt; (0 23 * * *)) ]</CronExpression>
-    <Description>From December to March, from 07:00 to 11:00 and from 16:00 to 23:00</Description>
-    <Data>{"itemType":1,"time":[{"start":"07:00","end":"11:00"},{"start":"16:00","end":"23:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["1","2","3","12"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Heat"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
+    <Description>>From December to March, from 07:00 to 11:00 and from 16:00 to 23:00</Description>
+    <Data>{"itemType":1,"time":[{"start":"07:00","end":"11:00"},{"start":"16:00","end":"23:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["1","2","3","12"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Heat"}}]},"forEnd":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Off"}}]}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>// auto-generated code from template
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
-  // this is start of occurrences range
+  // this is start of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('Heat');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('Heat');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
-  // this is end of occurrences range
+  // this is end of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('Off');
 
 } else {
-  // this is for each other occurrences
+  // this is for any other single occurrence
+  // and every minute within a time slot
 
   //{each}//
 }
-    </Script>
+</Script>
     <BoundDevices>
       <string>Thermostat</string>
     </BoundDevices>
@@ -201,25 +218,30 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
     <Name>Thermostat.Heat.Economy</Name>
     <CronExpression>(* * * 4,11 *) ; [ ((0 7 * * *) &gt; (0 10 * * *)) : ((0 20 * * *) &gt; (0 22 * * *)) ]</CronExpression>
     <Description>Only in April and November, from 07:00 to 10:00 and from 20:00 to 22:00</Description>
-    <Data>{"itemType":1,"time":[{"start":"07:00","end":"10:00"},{"start":"20:00","end":"22:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["4","11"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"HeatEconomy"}},"forEnd":{"enabled":true,"script":"command.thermostat-mode.js","config":{"mode":"Off"}}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
+    <Data>{"itemType":1,"time":[{"start":"07:00","end":"10:00"},{"start":"20:00","end":"22:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["4","11"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"HeatEconomy"}}]},"forEnd":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Off"}}]}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>// auto-generated code from template
 if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
-  // this is start of occurrences range
+  // this is start of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('HeatEconomy');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('HeatEconomy');
 
 } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
-  // this is end of occurrences range
+  // this is end of a time slot
 
-  $$.boundModules.command('Thermostat.ModeSet').submit('Off');
+  $$.boundModules
+    .command('Thermostat.ModeSet')
+    .submit('Off');
 
 } else {
-  // this is for each other occurrences
+  // this is for any other single occurrence
+  // and every minute within a time slot
 
   //{each}//
 }
-    </Script>
+</Script>
     <BoundDevices>
       <string>Thermostat</string>
     </BoundDevices>

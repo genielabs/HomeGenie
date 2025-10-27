@@ -1,9 +1,21 @@
+/*
+ * This is the Style of your widget.
+ * Styles are encapsulated using Shadow DOM.
+ *
+ * - The widget is placed inside a themed frame with rounded corners.
+ * - Use ':host' to apply styles that affect the widget's internal layout,
+ *   like display properties if needed.
+ * - Use CSS variables (e.g., var(--text-color)) to support HomeGenie themes.
+ */
 :host {
-    border: solid 1px;
-    border-radius: 12px;
+    /* ':host' is the root of your widget's Shadow DOM. */
+    /* By default, it's often best to leave it empty and style inner elements instead. */
 }
+
 .container {
-    background: var(--background-color);
-    min-height: 120px;
+    /* Apply padding here, inside the widget, not on the :host */
+    padding: 16px;
+    color: var(--text-color);
 }
+
 

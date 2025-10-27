@@ -196,6 +196,10 @@
         "Freddo",
     "scheduler_preset_action_config_mode_cool_eco":
         "Freddo eco",
+    "scheduler_preset_action_command_remote_control":
+        "Controllo remoto (invio codici IR/RF)",
+    "scheduler_preset_action_config_data":
+        "Dati",
     "scheduler_preset_action_program_run":
         "Esegui programma",
     "scheduler_preset_action_config_program":
@@ -204,6 +208,14 @@
         "Opzioni",
     "scheduler_preset_action_program_say":
         "Parla",
+    "scheduler_preset_action_net_http_call":
+        "Chiama un Servizio Web",
+    "scheduler_preset_action_config_url":
+        "Indirizzo (URL)",
+    "scheduler_preset_action_pause":
+        "Pausa",
+    "scheduler_preset_action_config_seconds":
+        "Secondi",
     "scheduler_preset_action_config_message":
         "Messaggio",
 " ":"--------------- PROGRAM EDITOR ------------------",
@@ -547,6 +559,28 @@
         "Chiave API Google Gemini AI",
       "ConfigureOptions.ModelId":
         "ID Modello"
+    },
+
+    "931": {
+      "Title":
+        "Gemini Widget Genie",
+      "Description":
+        "Il tuo genio AI personale per la creazione di widget. Basato su Gemini, ti aiuta a scrivere ed eseguire il debug di codice HTML, CSS e JavaScript direttamente all'interno dell'editor di HomeGenie.\nPer attivare questa funzionalità, inserisci una chiave API valida.\nSegui le istruzioni su https://aistudio.google.com/app/apikey per ottenere una chiave API gratuita.",
+      "ConfigureOptions.ApiKey":
+        "Chiave API Google Gemini AI",
+      "ConfigureOptions.ModelId":
+        "ID Modello"
+    },
+
+    "940": {
+      "Title":
+        "IA Locale (LLM)",
+      "Description":
+        "Esegui un Large Language Model (LLM) localmente sul tuo server HomeGenie. Questi modelli possono essere scaricati gratuitamente da piattaforme come Hugging Face.\n\nFornisci semplicemente il percorso di un modello in formato GGUF. Nota bene: per garantire la piena compatibilità con modelli diversi, potrebbero essere necessarie delle regolazioni ai parametri, principalmente all'interno del Context Code.",
+      "ConfigureOptions.MaxTokens":
+        "Token Massimi (lunghezza risposta)",
+      "ConfigureOptions.ModelPath":
+        "Percorso del file GGUF locale"
     }
 
   }

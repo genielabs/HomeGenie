@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Uża <span class=\"notranslate color-primary\">@{{name}}</span> bħala varjabbli f'espressjonijiet cron jew uża <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> fi programmi ta' awtomazzjoni biex tirreferi għal dan l-avveniment.",
   "scheduler_preset_action_command_turn_on": "Ixgħel",
   "scheduler_preset_action_command_turn_off": "Itfi",
-  "scheduler_preset_action_command_set_level": "Issettja l-livell",
+  "scheduler_preset_action_command_set_level": "Issettja l-Livell",
   "scheduler_preset_action_config_level": "Livell",
-  "scheduler_preset_action_command_set_color": "Issettja l-kulur",
+  "scheduler_preset_action_command_set_color": "Issettja l-Kulur",
   "scheduler_preset_action_config_color": "Kulur",
-  "scheduler_preset_action_command_thermostat_mode": "Modalità tat-termostat",
+  "scheduler_preset_action_command_thermostat_mode": "Modalità tat-Termostat",
   "scheduler_preset_action_config_mode": "Modalità",
   "scheduler_preset_action_config_mode_on": "Mixgħul",
   "scheduler_preset_action_config_mode_off": "Mitfi",
   "scheduler_preset_action_config_mode_heat": "Sħana",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomija tas-sħana",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomija tas-Sħana",
   "scheduler_preset_action_config_mode_cool": "Kessaħ",
-  "scheduler_preset_action_config_mode_cool_eco": "Ekonomija friska",
-  "scheduler_preset_action_program_run": "Mexxi l-programm",
+  "scheduler_preset_action_config_mode_cool_eco": "Ekonomija Kessaħ",
+  "scheduler_preset_action_command_remote_control": "Kontroll mill-bogħod (ibgħat kodiċijiet IR/RF)",
+  "scheduler_preset_action_config_data": "Dejta",
+  "scheduler_preset_action_program_run": "Mexxi l-Programm",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Għażliet",
   "scheduler_preset_action_program_say": "Għid",
+  "scheduler_preset_action_net_http_call": "Ċempel Servizz tal-Web",
+  "scheduler_preset_action_config_url": "Indirizz (URL)",
+  "scheduler_preset_action_pause": "Pawża",
+  "scheduler_preset_action_config_seconds": "Sekondi",
   "scheduler_preset_action_config_message": "Messaġġ",
   "save_and_build": "Issejvja u ibni",
   "toggle_widgets_preview": "Ixgħel il-previżjoni tal-widgets",
@@ -117,17 +123,17 @@
   "program_status_enabled": "Attivat",
   "program_status_broken": "Imkisser",
   "program_status_compile": "Ikkompila",
-  "automation_programming_guide": "Gwida għall-ipprogrammar",
+  "automation_programming_guide": "Gwida għall-Ipprogrammar",
   "tap_to_disable": "Ikklikkja biex tiddiżattiva",
   "tap_to_enable": "Ikklikkja biex tattiva",
-  "program_data": "Dejta tal-programm",
-  "visual_code": "Kodiċi viżwali",
-  "generated_code": "Kodiċi ġġenerat",
+  "program_data": "Dejta tal-Programm",
+  "visual_code": "Kodiċi Viżwali",
+  "generated_code": "Kodiċi Ġenerat",
   "setup_code": "Setup",
   "main_code": "Prinċipali",
   "context_code": "Kuntest",
   "main_code_empty_note": "Il-kodiċi \"Main\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmandi fuq ix-xellug - Iddreggja blokka tat-tip \"Main\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid fiha blokki oħra ta' kodiċi biex timplimenta l-azzjonijiet u l-loġika ta' dan il-programm Il-programm \"Main\" jista' jitħaddem manwalment jew jinbeda awtomatikament ibbażat fuq il-kundizzjonijiet eventwalment mogħtija fil-kodiċi tas-Setup.",
-  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmandi fuq ix-xellug - Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid ġewwa fiha blokki oħra ta' kodiċi biex tiddetermina l-kundizzjonijiet li jqanqlu l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba fil-minuta.",
+  "setup_code_empty_note": "Il-kodiċi \"Setup\" huwa vojt. Uża l-editur \"Kodiċi viżwali\" biex tiġġenera dan il-kodiċi: - Iftaħ il-kategorija \"Programm\" mill-paletta tal-kmandi fuq ix-xellug - Iddreggja blokka tat-tip \"Setup\" fl-ispazju tax-xogħol tal-kodiċi viżwali - Żid fiha blokki oħra ta' kodiċi biex tiddetermina l-kundizzjonijiet li jqanqlu l-eżekuzzjoni tal-kodiċi \"Prinċipali\" Dan il-kodiċi jiġi evalwat kull darba li jseħħ avveniment ġdid u mill-inqas darba fil-minuta.",
   "capture_commands": "Kmandi tal-qbid",
   "capture_commands_description": "Żid il-kmandi kollha mwettqa manwalment fuq il-widgets mal-programm.",
   "capture_commands_pause": "Pawża bejn il-kmandi",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simulazzjoni biss"
     },
     "26": {
-      "Title": "Dwal tal-kulur",
+      "Title": "Dwal tal-Kulur",
       "Description": "Eżempju ta' integrazzjoni tad-dwal Philips Hue bl-użu tal-HTTP API (V1). L-utent awtomatiku biex jikkonnettja mal-bridge huwa \"newdeveloper\" u dan għandu jkun diġà attivat.",
       "ConfigureOptions.BridgeAddress": "Indirizz IP tal-Pont Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Isem tal-Utent",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Programm li għandu jaħdem meta jiġi attivat"
     },
     "95": {
-      "Title": "Reġistrazzjoni tal-avvenimenti",
+      "Title": "Reġistrazzjoni tal-Avvenimenti",
       "Description": "Irreġistra l-attività tal-apparat.",
       "EventsLogger.EnableLogging": "Ippermetti"
     },
     "111": {
-      "Title": "Konfigurazzjoni tal-klijent",
+      "Title": "Konfigurazzjoni tal-Klijent",
       "Description": "Jimplimenta l-API għall-immaniġġjar tal-profili ta' konfigurazzjoni tal-klijent li jintużaw biex jaħżnu s-settings tal-UI u tad-dashboards."
     },
     "400": {
@@ -240,7 +246,7 @@
       "Description": "Jissimula s-sejbien tal-moviment ta' multi-sensor demo."
     },
     "410": {
-      "Title": "Simulatur tas-sensuri",
+      "Title": "Simulatur tas-Sensor",
       "Description": "Emetti valuri każwali tas-sensuri.",
       "Simulator.Sensor.Temperature": "Sensur tat-temperatura",
       "Simulator.Sensor.Humidity": "Sensur tal-umdità",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Link għax-xenarju tal-Kuluri tax-Xemx"
     },
     "910": {
-      "Title": "Sejbien ta' oġġetti",
+      "Title": "Sejbien ta' Oġġetti",
       "Description": "Sejbien ta' oġġetti bl-użu ta' mudell YOLO11 imħarreġ minn qabel.",
       "ML.ObjectDetection": "Ippermetti l-iskoperta tal-oġġetti",
       "ML.ObjectDetection.TriggerDetect": "Lista ta' affarijiet separati b'virgola (bl-Ingliż) li jattivaw l-allarm. (eż.: qattus, kelb, persuna, backpack, bagalja)",
       "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Stima tal-poża",
+      "Title": "Stima tal-Poża",
       "Description": "Sejbien ta' punti ewlenin permezz ta' stima tal-poża, bl-użu ta' mudelli ONNX apposta jew il-mudell YOLOv11 imħarreġ minn qabel (speċifiku għall-poża umana).",
       "ML.PoseEstimation": "Ippermetti l-istima tal-poża",
       "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Segmentazzjoni tal-istanza",
+      "Title": "Segmentazzjoni tal-Istanza",
       "Description": "Sejbien ta' oġġetti u l-kontorni tagħhom bl-użu ta' mudell YOLO11 imħarreġ minn qabel.",
       "ML.InstanceSegmentation": "Ippermetti s-segmentazzjoni tal-istanza",
       "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Jippermetti kontroll tal-lingwa naturali għas-sistema intelliġenti tiegħek bl-użu tal-Gemini AI ta' Google. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",
       "ConfigureOptions.ApiKey": "Ċavetta tal-API tal-AI tal-Google Gemini",
       "ConfigureOptions.ModelId": "ID tal-Mudell"
+    },
+    "931": {
+      "Title": "Widget tal-Ġenju tal-Gemini",
+      "Description": "Il-ġenju personali tal-AI tiegħek għall-ħolqien tal-widgets. Imħaddem minn Gemini, jgħinek tikteb u tiddibaggja kodiċi HTML, CSS, u JavaScript direttament fl-editur HomeGenie. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",
+      "ConfigureOptions.ApiKey": "Ċavetta tal-API tal-AI tal-Google Gemini",
+      "ConfigureOptions.ModelId": "ID tal-Mudell"
+    },
+    "940": {
+      "Title": "AI Lokali (LLM)",
+      "Description": "Mexxi Mudell ta' Lingwa Kbira (LLM) lokalment fuq is-server HomeGenie tiegħek. Dawn il-mudelli jistgħu jitniżżlu b'xejn minn pjattaformi bħal Hugging Face. Sempliċement ipprovdi t-triq għal fajl ta' mudell f'format GGUF. Jekk jogħġbok innota li jistgħu jkunu meħtieġa aġġustamenti għall-parametri, primarjament fil-Kodiċi tal-Kuntest, biex tiġi żgurata kompatibilità sħiħa ma' mudelli differenti.",
+      "ConfigureOptions.MaxTokens": "Tokens Massimi (tul tar-rispons)",
+      "ConfigureOptions.ModelPath": "Mogħdija għall-fajl GGUF lokali"
     }
   }
 }

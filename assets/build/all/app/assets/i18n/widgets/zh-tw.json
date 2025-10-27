@@ -1,0 +1,19 @@
+{
+  "toggle_long_press_to_reorder_widgets": "啟用/停用長按重新排序小工具",
+  "$alarm_system": {
+    "arm_home": "家",
+    "arm_away": "離開"
+  },
+  "$section_label": {
+    "label": "標籤",
+    "indicators": "指標",
+    "lights_control": "燈",
+    "switches_control": "開關"
+  },
+  "$ai_chat": {
+    "title": "AI聊天小工具",
+    "intro": "您好！我是您的LLM助理。請問有什麼可以幫到您？",
+    "no_bound_module": "未綁定 LLM 模組。請開啟小部件設定來綁定語言模型。",
+    "start_typing_prompt": "開始輸入提示..."
+  }
+}

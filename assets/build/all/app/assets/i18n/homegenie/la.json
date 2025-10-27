@@ -30,7 +30,7 @@
   "add_group": "Adde gregem",
   "edit_group": "Gregem recensere",
   "delete_group": "Delere gregem",
-  "dashboard_from_group": "Crea tabulam instrumentorum ex hoc grege",
+  "dashboard_from_group": "Tabulam instrumentorum ex hoc grege crea.",
   "group_modules": "Moduli in hoc grege",
   "modules": "Moduli",
   "empty_group": "Nullae moduli in hoc grege.",
@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Utere <span class=\"notranslate color-primary\">@{{name}}</span> ut variabili in expressionibus cron vel utere <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in programmatibus automationis ad hunc eventum referendum.",
   "scheduler_preset_action_command_turn_on": "Accende",
   "scheduler_preset_action_command_turn_off": "Exstingue",
-  "scheduler_preset_action_command_set_level": "Gradum constituere",
+  "scheduler_preset_action_command_set_level": "Gradum Constituere",
   "scheduler_preset_action_config_level": "Gradus",
-  "scheduler_preset_action_command_set_color": "Colorem constituere",
+  "scheduler_preset_action_command_set_color": "Colorem Constituere",
   "scheduler_preset_action_config_color": "Color",
-  "scheduler_preset_action_command_thermostat_mode": "Modus thermostati",
+  "scheduler_preset_action_command_thermostat_mode": "Modus Thermostaticus",
   "scheduler_preset_action_config_mode": "Modus",
   "scheduler_preset_action_config_mode_on": "In",
   "scheduler_preset_action_config_mode_off": "Exstinctus",
   "scheduler_preset_action_config_mode_heat": "Calor",
-  "scheduler_preset_action_config_mode_heat_eco": "Oeconomia caloris",
+  "scheduler_preset_action_config_mode_heat_eco": "Oeconomia Caloris",
   "scheduler_preset_action_config_mode_cool": "Frigidus",
-  "scheduler_preset_action_config_mode_cool_eco": "Oeconomia frigida",
-  "scheduler_preset_action_program_run": "Programma curre",
+  "scheduler_preset_action_config_mode_cool_eco": "Oeconomia Frigida",
+  "scheduler_preset_action_command_remote_control": "Imperium Remotum (mitte codices IR/RF)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Curre Programma",
   "scheduler_preset_action_config_program": "Programma",
   "scheduler_preset_action_config_options": "Optiones",
   "scheduler_preset_action_program_say": "Dic",
+  "scheduler_preset_action_net_http_call": "Voca Servitium Interretiale",
+  "scheduler_preset_action_config_url": "Inscriptio (URL)",
+  "scheduler_preset_action_pause": "Pausa",
+  "scheduler_preset_action_config_seconds": "Secunda",
   "scheduler_preset_action_config_message": "Nuntius",
   "save_and_build": "Serva et aedifica",
   "toggle_widgets_preview": "Praevisio instrumentorum (vel instrumentorum) commuta/activa",
@@ -117,16 +123,16 @@
   "program_status_enabled": "Activatum",
   "program_status_broken": "Fractus",
   "program_status_compile": "Compilatio",
-  "automation_programming_guide": "Ductor programmandi",
+  "automation_programming_guide": "Dux Programmandi",
   "tap_to_disable": "Preme ut inhibeas",
   "tap_to_enable": "Preme ut permittas",
-  "program_data": "Data programmatis",
-  "visual_code": "Codex visualis",
-  "generated_code": "Codex generatus",
+  "program_data": "Data Programmatis",
+  "visual_code": "Codex Visualis",
+  "generated_code": "Codex Generatus",
   "setup_code": "Configuratio",
   "main_code": "Praecipuus",
   "context_code": "Contextus",
-  "main_code_empty_note": "\"Main\" codex vacuus est. Utere editore \"Visual code\" ad hunc codicem generandum: - Aperi categoriam \"Program\" ex paletta mandatorum a sinistra - Trahe frustum generis \"Main\" in spatium laboris codicis visualis - Adde intra eum alios frustos codicis ad actiones et logicam huius programmatis implementandas. Programma \"Main\" vel manu curri vel automatice incipi potest secundum condiciones tandem in codice Setup datas.",
+  "main_code_empty_note": "\"Main\" codex vacuus est. Utere editore \"Visual code\" ad hunc codicem generandum: - Aperi categoriam \"Program\" ex paletta mandatorum a sinistra - Trahe frustum generis \"Main\" in spatium laboris codicis visualis - Adde intra eum alios frustos codicis ad actiones et logicam huius programmatis implementandas. Programma \"Main\" vel manu currere vel automatice incipi potest secundum condiciones tandem in codice Setup datas.",
   "setup_code_empty_note": "\"Setup\" codex vacuus est. Utere editore \"Visual code\" ad hunc codicem generandum: - Aperi categoriam \"Program\" ex paletta mandatorum a sinistra - Trahe frustum generis \"Setup\" in spatium laboris codicis visualis - Adde intra eum alios frustos codicis ad condiciones determinandas quae exsecutionem codicis \"Main\" incitabunt. Hic codex aestimatur quoties novus eventus accidit et saltem semel in minuto.",
   "capture_commands": "Mandata capere",
   "capture_commands_description": "Omnia mandata manu in instrumentis peracta programmati adde.",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simula tantum"
     },
     "26": {
-      "Title": "Lumina colorata",
+      "Title": "Lumina Colorata",
       "Description": "Exemplum integrationis luminarium Philips Hue utens HTTP API (V1). Usor implicitus ad pontem connectendum est \"newdeveloper\" et iam activus esse debet.",
       "ConfigureOptions.BridgeAddress": "Inscriptio IP Pontis Philips Hue (V1)",
       "ConfigureOptions.BridgeUsername": "Nomen usoris",
@@ -167,7 +173,7 @@
       "ConfigureOptions.TLS": "TLS/SSL activa",
       "ConfigureOptions.Username": "Nomen usoris (facultativum)",
       "ConfigureOptions.Password": "Tessera (facultativa)",
-      "ConfigureOptions.ImportExternal": "Importa modulos externos"
+      "ConfigureOptions.ImportExternal": "Modulos externos importare"
     },
     "78": {
       "Title": "Thermostatum Intelligentem",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Programma currens cum excitatum est"
     },
     "95": {
-      "Title": "Acta eventuum",
+      "Title": "Acta Eventuum",
       "Description": "Actionem machinae nota.",
       "EventsLogger.EnableLogging": "Activa"
     },
     "111": {
-      "Title": "Configuratio clientis",
+      "Title": "Configuratio Clientis",
       "Description": "API ad perfiles configurationis clientium administrandos implementat, qui ad optiones interfaciei usoris et tabularum instrumentorum servandas adhibentur."
     },
     "400": {
@@ -240,7 +246,7 @@
       "Description": "Detectionem motus multisensoris demonstrativi simulat."
     },
     "410": {
-      "Title": "Simulator sensorius",
+      "Title": "Simulator Sensoris",
       "Description": "Valores sensorios fortuitos emittere.",
       "Simulator.Sensor.Temperature": "Sensor temperaturae",
       "Simulator.Sensor.Humidity": "Sensor humiditatis",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Gradus obscurationis"
     },
     "142": {
-      "Title": "Ratio electronica",
+      "Title": "Ratio Epistularum Electronicarum",
       "Description": "Informationes rationis electronicae, quas programmata systematis ad epistulas mittendas/recipiendas adhibent, conservat.",
       "ConfigureOptions.Email.Sender": "1. Inscriptio electronica",
       "ConfigureOptions.Email.SmtpServer": "2. Inscriptio servi SMTP",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Nexus ad scenarium Colorum Solis Ortus"
     },
     "910": {
-      "Title": "Detectio obiecti",
+      "Title": "Detectio Obiectorum",
       "Description": "Obiecta detege utens modelo YOLO11 prae-exercitato.",
       "ML.ObjectDetection": "Detectionem rerum permitte",
       "ML.ObjectDetection.TriggerDetect": "Index rerum (Anglice) quae alarmum excitabunt, commatibus separatarum (exempli gratia: felis, canis, homo, saccus dorsualis, valis)",
       "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Aestimatio positionis",
+      "Title": "Aestimatio Positionis",
       "Description": "Detectio punctorum clavium per aestimationem positionis, utens exemplaribus ONNX propriis vel exemplari YOLOv11 prae-exercitato implicito (positioni humanae specifico).",
       "ML.PoseEstimation": "Aestimationem positionis activare",
       "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Segmentatio instantiarum",
+      "Title": "Segmentatio Instantiarum",
       "Description": "Obiecta earumque lineamenta detege utens modelo YOLO11 prae-exercitato.",
       "ML.InstanceSegmentation": "Segmentationem instantiarum permitte",
       "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Imperium linguae naturalis pro systemate tuo intelligenti per Gemini AI Google permittit. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
       "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identificatio exemplaris"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Genius tuus personalis intellegentiae artificialis ad creationem instrumentorum. A Gemini impulsus, te adiuvat ut codicem HTML, CSS, et JavaScript directe intra editorem HomeGenie scribere et corrigere possis. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
+      "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identificatio exemplaris"
+    },
+    "940": {
+      "Title": "Intellegentia Artificialis Localis (LLM)",
+      "Description": "Exemplar Linguae Magnum (MLM) in servo HomeGenie tuo localiter curre. Haec exempla gratis ex suggestis sicut Hugging Face depromi possunt. Simpliciter viam ad fasciculum exemplaris formae GGUF praebe. Nota bene adaptationes parametrorum, praesertim intra Codicem Contextualem, fortasse requiri ad plenam compatibilitatem cum variis exemplis confirmandam.",
+      "ConfigureOptions.MaxTokens": "Tesserae Maximae (longitudo responsorum)",
+      "ConfigureOptions.ModelPath": "Semita ad fasciculum GGUF localem"
     }
   }
 }

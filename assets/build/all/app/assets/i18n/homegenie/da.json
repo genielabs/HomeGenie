@@ -85,7 +85,7 @@
   "scheduler_preset_action_command_turn_off": "Sluk",
   "scheduler_preset_action_command_set_level": "Indstil niveau",
   "scheduler_preset_action_config_level": "Niveau",
-  "scheduler_preset_action_command_set_color": "Angiv farve",
+  "scheduler_preset_action_command_set_color": "Indstil farve",
   "scheduler_preset_action_config_color": "Farve",
   "scheduler_preset_action_command_thermostat_mode": "Termostattilstand",
   "scheduler_preset_action_config_mode": "Mode",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Varme",
   "scheduler_preset_action_config_mode_heat_eco": "Varmeøkonomi",
   "scheduler_preset_action_config_mode_cool": "Afkøle",
-  "scheduler_preset_action_config_mode_cool_eco": "Kølig økonomi",
+  "scheduler_preset_action_config_mode_cool_eco": "Cool økonomi",
+  "scheduler_preset_action_command_remote_control": "Fjernbetjening (send IR/RF-koder)",
+  "scheduler_preset_action_config_data": "Data",
   "scheduler_preset_action_program_run": "Kør program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Valgmuligheder",
   "scheduler_preset_action_program_say": "Sige",
+  "scheduler_preset_action_net_http_call": "Ring til en webtjeneste",
+  "scheduler_preset_action_config_url": "Adresse (URL)",
+  "scheduler_preset_action_pause": "Pause",
+  "scheduler_preset_action_config_seconds": "Sekunder",
   "scheduler_preset_action_config_message": "Besked",
   "save_and_build": "Gem og byg",
   "toggle_widgets_preview": "Slå forhåndsvisning af widgets til/fra",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simuler kun"
     },
     "26": {
-      "Title": "Farvede lys",
+      "Title": "Farvelys",
       "Description": "Eksempel på integration af Philips Hue-lys ved hjælp af HTTP API (V1). Standardbrugeren til at oprette forbindelse til broen er \"newdeveloper\", og den burde allerede være aktiveret.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP-adresse",
       "ConfigureOptions.BridgeUsername": "Brugernavn",
@@ -233,7 +239,7 @@
     },
     "401": {
       "Title": "Demo - Vippedør",
-      "Description": "Simulerer døråbning/lukning af en demo-dør-vindue-sensor."
+      "Description": "Simulerer døråbning/lukning af demo-dør-vindue-sensor."
     },
     "402": {
       "Title": "Demo - Bevægelse registreret",
@@ -253,7 +259,7 @@
       "Title": "Fjernbetjening",
       "Description": "Styr enheden med en fjernbetjening (IR eller RF).",
       "HomeGenie.RemoteControl.Enable": "Aktivér",
-      "HomeGenie.RemoteControl.IRCode": "Skift-knap",
+      "HomeGenie.RemoteControl.IRCode": "Slå knap til/fra",
       "ConfigureOptions.DimmerUpCode": "Knap til øgning af lysstyrke",
       "ConfigureOptions.DimmerDownCode": "Knap til reduktion af lysstyrke",
       "ConfigureOptions.DimmerInterval": "Dæmpningstrin"
@@ -290,7 +296,7 @@
       "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
     },
     "911": {
-      "Title": "Pose estimering",
+      "Title": "Posevurdering",
       "Description": "Nøglepunktsdetektion via posestimering ved hjælp af brugerdefinerede ONNX-modeller eller den standardforudtrænede YOLOv11-model (specifik for menneskeposer).",
       "ML.PoseEstimation": "Aktivér poseestimering",
       "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modelfil (.onnx)"
@@ -303,9 +309,21 @@
     },
     "930": {
       "Title": "Gemini Intent Handler",
-      "Description": "Aktiverer kontrol af naturligt sprog til dit smartsystem ved hjælp af Googles Gemini AI. For at aktivere denne funktion skal du indtaste en gyldig API-nøgle. Følg instruktionerne på https://aistudio.google.com/app/apikey for at få en gratis API-nøgle.",
+      "Description": "Aktiverer kontrol af naturligt sprog til dit smarte system ved hjælp af Googles Gemini AI. For at aktivere denne funktion skal du indtaste en gyldig API-nøgle. Følg instruktionerne på https://aistudio.google.com/app/apikey for at få en gratis API-nøgle.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøgle",
       "ConfigureOptions.ModelId": "Model-ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Din personlige AI-ånd til oprettelse af widgets. Drevet af Gemini hjælper den dig med at skrive og fejlfinde HTML-, CSS- og JavaScript-kode direkte i HomeGenie-editoren. For at aktivere denne funktion skal du indtaste en gyldig API-nøgle. Følg instruktionerne på https://aistudio.google.com/app/apikey for at få en gratis API-nøgle.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-nøgle",
+      "ConfigureOptions.ModelId": "Model-ID"
+    },
+    "940": {
+      "Title": "Lokal kunstig intelligens (LLM)",
+      "Description": "Kør en stor sprogmodel (LLM) lokalt på din HomeGenie-server. Disse modeller kan downloades gratis fra platforme som Hugging Face. Angiv blot stien til en modelfil i GGUF-format. Bemærk venligst, at justeringer af parametre, primært inden for kontekstkoden, kan være nødvendige for at sikre fuld kompatibilitet med forskellige modeller.",
+      "ConfigureOptions.MaxTokens": "Maks. antal tokens (svarlængde)",
+      "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil"
     }
   }
 }

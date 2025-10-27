@@ -9,5 +9,11 @@
     "indicators": "Indikaatorid",
     "lights_control": "Tuled",
     "switches_control": "Lülitid"
+  },
+  "$ai_chat": {
+    "title": "Tehisintellekti vestluse vidin",
+    "intro": "Tere! Olen teie kohalik õigusteaduse assistent. Kuidas saan teid aidata?",
+    "no_bound_module": "LLM-mooduliga pole seotud. Keelemudeli sidumiseks avage vidina seaded.",
+    "start_typing_prompt": "Hakka viipa kirjutama..."
   }
 }

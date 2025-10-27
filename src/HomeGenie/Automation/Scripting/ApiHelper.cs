@@ -102,7 +102,7 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 */
-        
+
         /// <summary>
         /// Parses the given (api call) string as a `MigInterfaceCommand` object.
         /// </summary>
@@ -135,7 +135,7 @@ namespace HomeGenie.Automation.Scripting
                 NetHelper netHelper = new NetHelper(homegenie);
                 netHelper
                     .WebService($"http://localhost:{port}/api/{apiCommand}")
-                    .Put(data?.ToString());
+                    .Put(data == null ? "" : data.ToString());
                 var username = homegenie.SystemConfiguration.HomeGenie.Username;
                 var password = homegenie.SystemConfiguration.HomeGenie.Password;
                 if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))

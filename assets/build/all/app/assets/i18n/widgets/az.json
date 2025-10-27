@@ -9,5 +9,11 @@
     "indicators": "Göstəricilər",
     "lights_control": "İşıqlar",
     "switches_control": "Keçidlər"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "salam! Mən sizin yerli LLM köməkçinizəm. Mən sizə necə kömək edə bilərəm?",
+    "no_bound_module": "LLM modulu bağlanmayıb. Dil modelini birləşdirmək üçün vidcet parametrlərini açın.",
+    "start_typing_prompt": "Bildiriş yazmağa başlayın..."
   }
 }

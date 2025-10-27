@@ -9,5 +9,11 @@
     "indicators": "Indicadors",
     "lights_control": "Llums",
     "switches_control": "Interruptors"
+  },
+  "$ai_chat": {
+    "title": "Widget de xat d'IA",
+    "intro": "Hola! Sóc el vostre assistent local de màster en dret. Com us puc ajudar?",
+    "no_bound_module": "No hi ha cap mòdul LLM vinculat. Obriu la configuració del widget per vincular un model d'idioma.",
+    "start_typing_prompt": "Comença a escriure una indicació..."
   }
 }

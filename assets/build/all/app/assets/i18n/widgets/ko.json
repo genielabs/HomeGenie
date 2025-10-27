@@ -9,5 +9,11 @@
     "indicators": "지표",
     "lights_control": "허파",
     "switches_control": "스위치"
+  },
+  "$ai_chat": {
+    "title": "AI 채팅 위젯",
+    "intro": "안녕하세요! 저는 지역 LLM 조수입니다. 무엇을 도와드릴까요?",
+    "no_bound_module": "LLM 모듈이 바인딩되지 않았습니다. 위젯 설정을 열어 언어 모델을 바인딩하세요.",
+    "start_typing_prompt": "프롬프트를 입력해 보세요..."
   }
 }

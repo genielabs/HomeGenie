@@ -1,16 +1,16 @@
 {
   "stats.time_range": "Laiko intervalas",
-  "stats.one_second": "Viena sekundė",
-  "stats.five_seconds": "5 sekundes",
+  "stats.one_second": "Vieną sekundę",
+  "stats.five_seconds": "5 sekundės",
   "stats.ten_seconds": "10 sekundžių",
   "stats.half_minute": "30 sekundžių",
-  "stats.one_minute": "Viena minutė",
+  "stats.one_minute": "Vieną minutę",
   "stats.ten_minutes": "10 minučių",
   "stats.half_hour": "30 minučių",
-  "stats.one_hour": "Viena valanda",
+  "stats.one_hour": "Vieną valandą",
   "stats.three_hours": "3 valandos",
   "stats.six_hours": "6 valandos",
   "stats.twelve_hours": "12 valandų",
   "stats.twentyfour_hours": "24 valandos",
-  "stats.chart_provider": "Diagramos teikėjas"
+  "stats.chart_provider": "Diagramų teikėjas"
 }

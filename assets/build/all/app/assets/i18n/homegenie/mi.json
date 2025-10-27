@@ -1,8 +1,8 @@
 {
   " ": "------------------------------------------",
   "welcome_to_homegenie": "Nau mai ki HomeGenie!",
-  "welcome_subtitle": "Ko te matauranga aunoatanga ka taea te whakarite",
-  "not_configured_yet": "Kaore ano kia whirihorahia te punaha. Ma tenei ruānuku tatūnga ka awhina koe ki te whakaara me te whakahaere i to punaha i roto i etahi waahanga.",
+  "welcome_subtitle": "Ko te mohiotanga aunoatanga ka taea te whakarite",
+  "not_configured_yet": "Kaore ano kia whirihorahia te punaha. Ma tenei ruānuku tatūnga koe e awhina ki te whakaara me te whakahaere i to punaha i roto i etahi kaupae.",
   "system_config_start_with_base_and_backup": "Whakaora mai i te kōnae pūrua",
   "system_config_start_with_default_setup": "Tatūnga taunoa",
   "system_config_include_demo": "Whakauruhia te demo me te mahi taputapu whakatairite",
@@ -58,7 +58,7 @@
   "cronwizard_days": "Nga ra",
   "cronwizard_months": "Marama",
   "cronwizard_minuteselect_everyminute": "Ia meneti",
-  "cronwizard_minuteselect_everynthminute": "Ia meneti kua hoatu",
+  "cronwizard_minuteselect_everynthminute": "Ia meneti",
   "cronwizard_minuteselect_selectedminutes": "Nga meneti kua tohua",
   "cronwizard_hourselect_everyhour": "Ia haora",
   "cronwizard_hourselect_everynthhour": "Ia haora kua hoatu",
@@ -68,12 +68,12 @@
   "cronwizard_dayowselect_selecteddaysow": "Nga ra kua tohua o te wiki",
   "cronwizard_monthselect_everymonth": "Ia marama",
   "cronwizard_monthselect_selectedmonths": "Ko nga marama kua tohua",
-  "cronwizard_schedule_set_exact_time": "Whakaritea te wa takahanga.",
+  "cronwizard_schedule_set_exact_time": "Tautuhia te wa takahanga.",
   "cronwizard_schedule_set_slot_start": "Tautuhi mokamoka wa timata.",
   "cronwizard_schedule_set_slot_end": "Ka timata i {{start}}.<span class=\"notranslate\"><br/></span> Tautuhi te mutunga mokamoka wa.",
   "cronwizard_bindings_define_types_and_modules": "Tautuhia nga momo me nga waahanga kei raro i tenei waarangi (he kowhiri)",
   "cronwizard_bindings_select_types": "Tohua momo",
-  "cronwizard_action_set_action_to_execute": "Whakaritehia he hohenga hei whakahaere i nga takanga o tenei takahanga",
+  "cronwizard_action_set_action_to_execute": "Whakaritea he mahi hei mahi i runga i nga takanga o tenei takahanga",
   "cronwizard_action_preset_actions": "Nga mahi tatūkē",
   "cronwizard_action_preset_every_occurrence": "I nga ahuatanga katoa",
   "cronwizard_action_preset_slot_start": "I te timatanga o te waahi waahi",
@@ -81,24 +81,30 @@
   "cronwizard_action_custom_script": "Tuhinga mahi ritenga",
   "cronwizard_action_no_action": "Karekau he mahi",
   "cronwizard_action_schedule_variable_hint": "Whakamahia <span class=\"notranslate color-primary\">@{{name}}</span> hei taurangi i roto i nga kupu cron, whakamahia ranei <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> i roto i nga papatono aunoa hei tohutoro i tenei takahanga.",
-  "scheduler_preset_action_command_turn_on": "Whakakā",
-  "scheduler_preset_action_command_turn_off": "Whakawetohia",
-  "scheduler_preset_action_command_set_level": "Tautuhi taumata",
+  "scheduler_preset_action_command_turn_on": "Tahuri",
+  "scheduler_preset_action_command_turn_off": "Whakaweto",
+  "scheduler_preset_action_command_set_level": "Tautuhi Taumata",
   "scheduler_preset_action_config_level": "Taumata",
-  "scheduler_preset_action_command_set_color": "Tautuhi tae",
+  "scheduler_preset_action_command_set_color": "Tautuhi Tae",
   "scheduler_preset_action_config_color": "Tae",
   "scheduler_preset_action_command_thermostat_mode": "Aratau Thermostat",
   "scheduler_preset_action_config_mode": "Aratau",
   "scheduler_preset_action_config_mode_on": "Kei runga",
   "scheduler_preset_action_config_mode_off": "Wehe",
   "scheduler_preset_action_config_mode_heat": "Te wera",
-  "scheduler_preset_action_config_mode_heat_eco": "Ohanga wera",
+  "scheduler_preset_action_config_mode_heat_eco": "Ohanga Wera",
   "scheduler_preset_action_config_mode_cool": "Matahau",
-  "scheduler_preset_action_config_mode_cool_eco": "Ohanga matao",
-  "scheduler_preset_action_program_run": "Whakahaere hōtaka",
+  "scheduler_preset_action_config_mode_cool_eco": "Ohanga Matahau",
+  "scheduler_preset_action_command_remote_control": "Mana Mamao (tuku waehere IR/RF)",
+  "scheduler_preset_action_config_data": "Raraunga",
+  "scheduler_preset_action_program_run": "Whakahaere Papatono",
   "scheduler_preset_action_config_program": "Papatono",
   "scheduler_preset_action_config_options": "Kōwhiringa",
   "scheduler_preset_action_program_say": "Mea atu",
+  "scheduler_preset_action_net_http_call": "Waea he Ratonga Tukutuku",
+  "scheduler_preset_action_config_url": "Wāhitau (URL)",
+  "scheduler_preset_action_pause": "Tatari",
+  "scheduler_preset_action_config_seconds": "Hekona",
   "scheduler_preset_action_config_message": "Karere",
   "save_and_build": "Whakaorangia me te hanga",
   "toggle_widgets_preview": "Takahuri widget arokite",
@@ -120,9 +126,9 @@
   "automation_programming_guide": "Aratohu Papatono'",
   "tap_to_disable": "Pāwhiri ki te mono",
   "tap_to_enable": "Paatohia kia taea ai",
-  "program_data": "Raraunga hotaka",
-  "visual_code": "Waehere tirohanga",
-  "generated_code": "Waehere hangaia",
+  "program_data": "Raraunga Papatono",
+  "visual_code": "Waehere Ataata",
+  "generated_code": "Waehere Hangaia",
   "setup_code": "Tatūnga",
   "main_code": "Matua",
   "context_code": "Horopaki",
@@ -141,9 +147,9 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Whakataurite anake"
     },
     "26": {
-      "Title": "Nga rama tae",
+      "Title": "Rarama Tae",
       "Description": "He tauira whakauru rama Philips Hue ma te whakamahi i te HTTP API (V1). Ko te kaiwhakamahi taunoa ki te hono atu ki te piriti he \"kaiwhakawhanake hou\" me te mea kua taea.",
-      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) wāhitau IP",
+      "ConfigureOptions.BridgeAddress": "Piriti Philips Hue (V1) wāhitau IP",
       "ConfigureOptions.BridgeUsername": "Ingoa Kaiwhakamahi",
       "ConfigureOptions.LightsCount": "Te maha o nga rama"
     },
@@ -195,7 +201,7 @@
       "IpCamera.ImageURL": "URL API whakaahua kamera (tirohia o tuhinga kamera)",
       "IpCamera.Username": "Ingoa Kaiwhakamahi (kōwhiringa)",
       "IpCamera.Password": "Kupuhipa (kōwhiringa)",
-      "Widget.Config.fps": "Papa mo ia hekona",
+      "Widget.Config.fps": "Nga papa mo ia hekona",
       "Widget.Config.size": "Rahi widget"
     },
     "90": {
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Ka whakahaeretia te papatono ina whakaohohia"
     },
     "95": {
-      "Title": "Takitaki takahanga",
+      "Title": "Takitaki Takahanga",
       "Description": "Tuhia nga mahi taputapu.",
       "EventsLogger.EnableLogging": "Whakahohe"
     },
     "111": {
-      "Title": "whirihoranga kiritaki",
+      "Title": "Whirihoranga Kiritaki",
       "Description": "Ka whakatinanahia te API mo te whakahaere i nga korero whirihoranga a te kiritaki e whakamahia ana ki te penapena i nga tautuhinga UI me nga papatohu."
     },
     "400": {
@@ -226,26 +232,26 @@
       "Description": "Tautuhi-a-ringa i nga uara o te taputapu mariko.",
       "Sensor.Temperature": "Te uara pāmahana",
       "Sensor.Luminance": "Uara maramara",
-      "Sensor.MotionDetect": "Te mana kitea nekehanga",
+      "Sensor.MotionDetect": "Te mana kitenga nekehanga",
       "Status.Battery": "taumata pākahiko",
       "Sensor.DoorWindow": "Tūnga pūoko tatau/matapihi (tuwhera/kati)",
       "Status.Level": "Whakawhiti te mana (whakakā/whakaweto)"
     },
     "401": {
       "Title": "Demo - Takahuri kuaha",
-      "Description": "Ka whakatauira i te kuaha tuwhera/kati o te puoko tatau-matapihi demo."
+      "Description": "Ka whakataurite i te kuaha tuwhera/kati o te puoko tatau-matapihi demo."
     },
     "402": {
       "Title": "Whakaaturanga - Kua Kitea Te Motini",
       "Description": "Ka whakatauira i te kitenga nekehanga o te tohu-maha-sensor."
     },
     "410": {
-      "Title": "simulator pūoko",
+      "Title": "Pūoko Simulator",
       "Description": "Tuku uara pūoko matapōkeretia.",
       "Simulator.Sensor.Temperature": "Pūoko pāmahana",
       "Simulator.Sensor.Humidity": "Pūoko haumākū",
       "Simulator.Sensor.Luminance": "Pūoko marama",
-      "Simulator.Meter.Watts": "Watt mita",
+      "Simulator.Meter.Watts": "Waata mita",
       "Simulator.Meter.Watts.Max": "Te kaha Watt Max",
       "Simulator.Sensor.DataFrequency": "Simulator tuku auau"
     },
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Te hikoi whakamarumaru"
     },
     "142": {
-      "Title": "Pūkete Ī-mēra",
+      "Title": "Pūkete Ī-Mēra",
       "Description": "Pupuri ana i nga korero kaute ī-mēra e whakamahia ana e nga kaupapa punaha mo te tuku/tango imeera.",
       "ConfigureOptions.Email.Sender": "1. Wāhitau ī-mēra",
       "ConfigureOptions.Email.SmtpServer": "2. Wāhitau tūmau SMTP",
@@ -279,24 +285,24 @@
     },
     "8": {
       "Title": "Tauaringa Tae o te Ra",
-      "Description": "He tauira \"Sunrise\" te ahuatanga mo te whakarereke i te tae o nga rama LED.",
+      "Description": "He tauira \"Sunrise\" te ahuatanga mo te huri i te tae o nga rama LED.",
       "Scenarios.SunriseColors": "Hononga ki te ahuatanga o te Sunrise Colors"
     },
     "910": {
-      "Title": "Te kitenga ahanoa",
+      "Title": "Rapunga Ahanoa",
       "Description": "Rapua nga taonga ma te whakamahi i te tauira YOLO11 kua whakangungua.",
       "ML.ObjectDetection": "Whakahohehia te kitenga ahanoa",
       "ML.ObjectDetection.TriggerDetect": "Ko te rarangi whakawehenga piko o nga mea (i te reo Ingarihi) ka puta te whakaoho. (hei tauira: ngeru, kuri, tangata, peketua, pekepeke)",
       "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Te whakatau tata",
+      "Title": "Whakatau Whakatau",
       "Description": "Te kimi tohu matua ma te whakatau tata, ma te whakamahi i nga tauira ONNX ritenga, i te tauira YOLOv11 kua whakangungua-mua ranei (whakaahua-tangata).",
       "ML.PoseEstimation": "Whakahohehia te whakatau tata",
       "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Te wehenga tauira",
+      "Title": "Tauira Wehewehenga",
       "Description": "Rapua he ahanoa me o raatau whakahuahua ma te whakamahi i te tauira YOLO11 kua oti te whakangungu.",
       "ML.InstanceSegmentation": "Whakahohehia te wehenga tauira",
       "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Ka taea te whakahaere reo maori mo to punaha atamai ma te whakamahi i te Gemini AI a Google. Hei whakahohe i tenei ahuatanga, whakauruhia he matua API whaimana. A pee i nga tohutohu i https://aistudio.google.com/app/apikey ki te tiki i te taviri API kore utu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI kī API",
       "ConfigureOptions.ModelId": "Tauira ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Ko to taangata AI mo te hanga widget. Na Gemini, ka awhina koe ki te tuhi me te patuiro i te HTML, CSS, me te waehere JavaScript ki roto tonu i te ētita HomeGenie. Hei whakahohe i tenei ahuatanga, whakauruhia he matua API whaimana. A pee i nga tohutohu i https://aistudio.google.com/app/apikey ki te tiki i te taviri API kore utu.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI kī API",
+      "ConfigureOptions.ModelId": "Tauira ID"
+    },
+    "940": {
+      "Title": "AI Paetata (LLM)",
+      "Description": "Whakahaerehia he Tauira Reo Nui (LLM) i to rohe i runga i to tūmau HomeGenie. Ka taea te tango i enei tauira mo te kore utu mai i nga papaaho penei i te Hugging Face. Me whakarato noa te ara ki te konae tauira hōputu GGUF. Kia mahara ko nga whakarereketanga ki nga tawhā, i roto i te Waehere Horopaki, ka hiahiatia pea kia pai ai te hototahi ki nga tauira rereke.",
+      "ConfigureOptions.MaxTokens": "Tohu Tohu (roa whakautu)",
+      "ConfigureOptions.ModelPath": "Ara ki te kōnae GGUF paetata"
     }
   }
 }

@@ -9,5 +9,11 @@
     "indicators": "Indikátory",
     "lights_control": "Světla",
     "switches_control": "Přepínače"
+  },
+  "$ai_chat": {
+    "title": "Widget chatu s umělou inteligencí",
+    "intro": "Dobrý den! Jsem váš místní asistent pro LLM. Jak vám mohu pomoci?",
+    "no_bound_module": "Není vázán žádný modul LLM. Otevřete prosím nastavení widgetu pro vázání jazykového modelu.",
+    "start_typing_prompt": "Začněte psát výzvu..."
   }
 }

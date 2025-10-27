@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "استخدم <span class=\"notranslate color-primary\">@{{name}}</span> كمتغير في تعبيرات cron أو استخدم <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> في برامج الأتمتة للإشارة إلى هذا الحدث.",
   "scheduler_preset_action_command_turn_on": "تشغيل",
   "scheduler_preset_action_command_turn_off": "إيقاف التشغيل",
-  "scheduler_preset_action_command_set_level": "ضبط المستوى",
+  "scheduler_preset_action_command_set_level": "تعيين المستوى",
   "scheduler_preset_action_config_level": "مستوى",
   "scheduler_preset_action_command_set_color": "تعيين اللون",
   "scheduler_preset_action_config_color": "لون",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "الاقتصاد في الحرارة",
   "scheduler_preset_action_config_mode_cool": "رائع",
   "scheduler_preset_action_config_mode_cool_eco": "اقتصاد بارد",
+  "scheduler_preset_action_command_remote_control": "التحكم عن بعد (إرسال رموز IR/RF)",
+  "scheduler_preset_action_config_data": "بيانات",
   "scheduler_preset_action_program_run": "تشغيل البرنامج",
   "scheduler_preset_action_config_program": "برنامج",
   "scheduler_preset_action_config_options": "خيارات",
   "scheduler_preset_action_program_say": "يقول",
+  "scheduler_preset_action_net_http_call": "الاتصال بخدمة الويب",
+  "scheduler_preset_action_config_url": "العنوان (URL)",
+  "scheduler_preset_action_pause": "يوقف",
+  "scheduler_preset_action_config_seconds": "ثواني",
   "scheduler_preset_action_config_message": "رسالة",
   "save_and_build": "احفظ وابني",
   "toggle_widgets_preview": "معاينة أدوات التبديل",
@@ -283,7 +289,7 @@
       "Scenarios.SunriseColors": "رابط إلى سيناريو ألوان شروق الشمس"
     },
     "910": {
-      "Title": "كشف الأشياء",
+      "Title": "اكتشاف الكائنات",
       "Description": "اكتشاف الكائنات باستخدام نموذج YOLO11 المدرب مسبقًا.",
       "ML.ObjectDetection": "تمكين اكتشاف الكائنات",
       "ML.ObjectDetection.TriggerDetect": "قائمة مفصولة بفواصل للأشياء (باللغة الإنجليزية) التي ستؤدي إلى تشغيل الإنذار. (على سبيل المثال: قطة، كلب، شخص، حقيبة ظهر، حقيبة سفر)",
@@ -306,6 +312,18 @@
       "Description": "يُمكّنك هذا من التحكم باللغة الطبيعية في نظامك الذكي باستخدام تقنية الذكاء الاصطناعي Gemini من جوجل. لتفعيل هذه الميزة، أدخل مفتاح واجهة برمجة تطبيقات صالحًا. اتبع التعليمات على الرابط https://aistudio.google.com/app/apikey للحصول على مفتاح واجهة برمجة تطبيقات مجاني.",
       "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
       "ConfigureOptions.ModelId": "معرف النموذج"
+    },
+    "931": {
+      "Title": "جني أداة الجوزاء",
+      "Description": "أداة الذكاء الاصطناعي الخاصة بك لإنشاء الأدوات. تعمل هذه الأداة بواسطة Gemini، وتساعدك على كتابة وتصحيح أكواد HTML وCSS وJavaScript مباشرةً داخل محرر HomeGenie. لتفعيل هذه الميزة، أدخل مفتاح API صالحًا. اتبع التعليمات على الرابط https://aistudio.google.com/app/apikey للحصول على مفتاح API مجاني.",
+      "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
+      "ConfigureOptions.ModelId": "معرف النموذج"
+    },
+    "940": {
+      "Title": "الذكاء الاصطناعي المحلي (ماجستير في القانون)",
+      "Description": "شغّل نموذج لغة كبير (LLM) محليًا على خادم HomeGenie. يمكن تنزيل هذه النماذج مجانًا من منصات مثل Hugging Face. ما عليك سوى توفير مسار ملف نموذج بتنسيق GGUF. يُرجى العلم أن تعديلات المعلمات، وخاصةً ضمن كود السياق، قد تكون مطلوبة لضمان التوافق التام مع النماذج المختلفة.",
+      "ConfigureOptions.MaxTokens": "الحد الأقصى للرموز (طول الاستجابة)",
+      "ConfigureOptions.ModelPath": "المسار إلى ملف GGUF المحلي"
     }
   }
 }

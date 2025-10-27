@@ -9,5 +9,11 @@
     "indicators": "Dangosyddion",
     "lights_control": "Goleuadau",
     "switches_control": "Switshis"
+  },
+  "$ai_chat": {
+    "title": "Teclyn Sgwrs Deallusrwydd Artiffisial",
+    "intro": "Helô! Fi yw eich cynorthwyydd LLM lleol. Sut alla i eich helpu chi?",
+    "no_bound_module": "Dim modiwl LLM wedi'i rwymo. Agorwch osodiadau'r teclyn i rwymo model iaith.",
+    "start_typing_prompt": "Dechreuwch deipio awgrym..."
   }
 }

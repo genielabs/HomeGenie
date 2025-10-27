@@ -82,8 +82,8 @@
   "cronwizard_action_no_action": "Nincs intézkedés",
   "cronwizard_action_schedule_variable_hint": "Használd a <span class=\"notranslate color-primary\">@{{name}}</span> változót a cron kifejezésekben, vagy a <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> értéket az automatizálási programokban erre az eseményre való hivatkozáshoz.",
   "scheduler_preset_action_command_turn_on": "Bekapcsol",
-  "scheduler_preset_action_command_turn_off": "Kapcsold ki",
-  "scheduler_preset_action_command_set_level": "Szint beállítása",
+  "scheduler_preset_action_command_turn_off": "Kikapcsolás",
+  "scheduler_preset_action_command_set_level": "Beállított szint",
   "scheduler_preset_action_config_level": "Szint",
   "scheduler_preset_action_command_set_color": "Szín beállítása",
   "scheduler_preset_action_config_color": "Szín",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Le",
   "scheduler_preset_action_config_mode_heat": "Hő",
-  "scheduler_preset_action_config_mode_heat_eco": "Hőtakarékosság",
+  "scheduler_preset_action_config_mode_heat_eco": "Hőgazdaság",
   "scheduler_preset_action_config_mode_cool": "Hűvös",
   "scheduler_preset_action_config_mode_cool_eco": "Hűvös gazdaság",
+  "scheduler_preset_action_command_remote_control": "Távirányító (IR/RF kódok küldése)",
+  "scheduler_preset_action_config_data": "Adat",
   "scheduler_preset_action_program_run": "Program futtatása",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opciók",
   "scheduler_preset_action_program_say": "Mondd",
+  "scheduler_preset_action_net_http_call": "Hívjon egy webszolgáltatást",
+  "scheduler_preset_action_config_url": "Cím (URL)",
+  "scheduler_preset_action_pause": "Szünet",
+  "scheduler_preset_action_config_seconds": "Másodperc",
   "scheduler_preset_action_config_message": "Üzenet",
   "save_and_build": "Mentés és építés",
   "toggle_widgets_preview": "Widgetek előnézetének be-/kikapcsolása",
@@ -191,7 +197,7 @@
     },
     "88": {
       "Title": "Általános IP-kamera",
-      "Description": "Képjel megjelenítése/útvonaltervezés egy IP-kamerából.",
+      "Description": "Képjel megjelenítése/útvonaltervezés egy IP-kameráról.",
       "IpCamera.ImageURL": "Kamerakép API URL-címe (lásd a kamera dokumentációját)",
       "IpCamera.Username": "Felhasználónév (opcionális)",
       "IpCamera.Password": "Jelszó (opcionális)",
@@ -283,7 +289,7 @@
       "Scenarios.SunriseColors": "Link a Napkelte színei forgatókönyvhöz"
     },
     "910": {
-      "Title": "Objektumészlelés",
+      "Title": "Objektumérzékelés",
       "Description": "Objektumok észlelése egy előre betanított YOLO11 modell segítségével.",
       "ML.ObjectDetection": "Objektumészlelés engedélyezése",
       "ML.ObjectDetection.TriggerDetect": "Vesszővel elválasztott lista (angol nyelven), amely kiváltja a riasztást. (pl.: macska, kutya, személy, hátizsák, bőrönd)",
@@ -306,6 +312,18 @@
       "Description": "Lehetővé teszi az intelligens rendszer természetes nyelvi vezérlését a Google Gemini mesterséges intelligenciájának használatával. A funkció aktiválásához adjon meg egy érvényes API-kulcsot. Kövesse a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kulcs",
       "ConfigureOptions.ModelId": "Modellazonosító"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Személyes mesterséges intelligencia által vezérelt dzsinned widgetek létrehozásához. A Gemini által működtetett program segít HTML, CSS és JavaScript kódok írásában és hibakeresésében közvetlenül a HomeGenie szerkesztőben. A funkció aktiválásához adj meg egy érvényes API-kulcsot. Kövesd a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API kulcs",
+      "ConfigureOptions.ModelId": "Modellazonosító"
+    },
+    "940": {
+      "Title": "Helyi mesterséges intelligencia (LLM)",
+      "Description": "Futtasson egy nagyméretű nyelvi modellt (LLM) helyben a HomeGenie szerverén. Ezek a modellek ingyenesen letölthetők olyan platformokról, mint a Hugging Face. Egyszerűen adja meg a GGUF formátumú modellfájl elérési útját. Kérjük, vegye figyelembe, hogy a paraméterek módosítására, elsősorban a kontextuskódon belül, szükség lehet a különböző modellekkel való teljes kompatibilitás biztosítása érdekében.",
+      "ConfigureOptions.MaxTokens": "Max. tokenek (válasz hossza)",
+      "ConfigureOptions.ModelPath": "A helyi GGUF fájl elérési útja"
     }
   }
 }

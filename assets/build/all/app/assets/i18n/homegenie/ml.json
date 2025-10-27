@@ -41,7 +41,7 @@
   "schedule_type_cron": "ക്രോൺ എക്സ്പ്രഷൻ",
   "schedule_action": "ആക്ഷൻ",
   "schedule_occurrence_preview": "സംഭവങ്ങളുടെ പ്രിവ്യൂ",
-  "time_schedule": "ഷെഡ്യൂൾ",
+  "time_schedule": "പട്ടിക",
   "occurrence": "സംഭവം",
   "cronwizard_description_on": "ഓൺ",
   "cronwizard_description_from": "നിന്ന്",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "ഹീറ്റ് എക്കണോമി",
   "scheduler_preset_action_config_mode_cool": "അടിപൊളി",
   "scheduler_preset_action_config_mode_cool_eco": "കൂൾ എക്കണോമി",
+  "scheduler_preset_action_command_remote_control": "റിമോട്ട് കൺട്രോൾ (IR/RF കോഡുകൾ അയയ്ക്കുക)",
+  "scheduler_preset_action_config_data": "ഡാറ്റ",
   "scheduler_preset_action_program_run": "പ്രോഗ്രാം പ്രവർത്തിപ്പിക്കുക",
   "scheduler_preset_action_config_program": "പ്രോഗ്രാം",
   "scheduler_preset_action_config_options": "ഓപ്ഷനുകൾ",
   "scheduler_preset_action_program_say": "പറയുക",
+  "scheduler_preset_action_net_http_call": "ഒരു വെബ് സേവനത്തിലേക്ക് വിളിക്കുക",
+  "scheduler_preset_action_config_url": "വിലാസം (URL)",
+  "scheduler_preset_action_pause": "താൽക്കാലികമായി നിർത്തുക",
+  "scheduler_preset_action_config_seconds": "സെക്കൻഡുകൾ",
   "scheduler_preset_action_config_message": "സന്ദേശം",
   "save_and_build": "സംരക്ഷിക്കുക, നിർമ്മിക്കുക",
   "toggle_widgets_preview": "വിജറ്റ് പ്രിവ്യൂ ടോഗിൾ ചെയ്യുക",
@@ -117,12 +123,12 @@
   "program_status_enabled": "പ്രവർത്തനക്ഷമമാക്കി",
   "program_status_broken": "തകർന്നു",
   "program_status_compile": "സമാഹരിക്കുക",
-  "automation_programming_guide": "പ്രോഗ്രാമിംഗ് ഗൈഡ്'",
+  "automation_programming_guide": "പ്രോഗ്രാമിംഗ് ഗൈഡ് '",
   "tap_to_disable": "പ്രവർത്തനരഹിതമാക്കാൻ ക്ലിക്ക് ചെയ്യുക",
   "tap_to_enable": "പ്രാപ്തമാക്കാൻ ക്ലിക്കുചെയ്യുക",
   "program_data": "പ്രോഗ്രാം ഡാറ്റ",
   "visual_code": "വിഷ്വൽ കോഡ്",
-  "generated_code": "സൃഷ്ടിച്ച കോഡ്",
+  "generated_code": "ജനറേറ്റഡ് കോഡ്",
   "setup_code": "സജ്ജമാക്കുക",
   "main_code": "പ്രധാനം",
   "context_code": "സന്ദർഭം",
@@ -153,7 +159,7 @@
       "ConfigureOptions.Location": "നഗരത്തിന്റെ പേര്",
       "ConfigureOptions.Language": "ഭാഷ (ഉദാ. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "അപ്‌ഡേറ്റ് ഇടവേള (മിനിറ്റ്)",
-      "ConfigureOptions.ApiKey": "OpenWeatherMap API കീ (APPID)"
+      "ConfigureOptions.ApiKey": "ഓപ്പൺവെതർമാപ്പ് API കീ (APPID)"
     },
     "77": {
       "Title": "നെറ്റ്‌വർക്ക് MQTT",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "ട്രിഗർ ചെയ്യുമ്പോൾ പ്രവർത്തിപ്പിക്കേണ്ട പ്രോഗ്രാം"
     },
     "95": {
-      "Title": "ഇവന്റുകൾ ലോഗിംഗ്",
+      "Title": "ഇവന്റ് ലോഗിംഗ്",
       "Description": "ഉപകരണ പ്രവർത്തനം രേഖപ്പെടുത്തുക.",
       "EventsLogger.EnableLogging": "പ്രാപ്തമാക്കുക"
     },
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 മോഡൽ ഫയലിന്റെ (.onnx) പാത"
     },
     "912": {
-      "Title": "ഇൻസ്റ്റൻസ് സെഗ്മെന്റേഷൻ",
+      "Title": "ഇൻസ്റ്റൻസ് സെഗ്‌മെന്റേഷൻ",
       "Description": "മുൻകൂട്ടി പരിശീലിപ്പിച്ച YOLO11 മോഡൽ ഉപയോഗിച്ച് വസ്തുക്കളെയും അവയുടെ രൂപരേഖകളെയും കണ്ടെത്തുക.",
       "ML.InstanceSegmentation": "ഇൻസ്റ്റൻസ് സെഗ്മെന്റേഷൻ പ്രാപ്തമാക്കുക",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 മോഡൽ ഫയലിന്റെ (.onnx) പാത"
@@ -306,6 +312,18 @@
       "Description": "ഗൂഗിളിന്റെ ജെമിനി AI ഉപയോഗിച്ച് നിങ്ങളുടെ സ്മാർട്ട് സിസ്റ്റത്തിനായി സ്വാഭാവിക ഭാഷാ നിയന്ത്രണം പ്രാപ്തമാക്കുന്നു. ഈ സവിശേഷത സജീവമാക്കുന്നതിന്, സാധുവായ ഒരു API കീ നൽകുക. സൗജന്യ API കീ ലഭിക്കുന്നതിന് https://aistudio.google.com/app/apikey എന്നതിലെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.",
       "ConfigureOptions.ApiKey": "ഗൂഗിൾ ജെമിനി AI API കീ",
       "ConfigureOptions.ModelId": "മോഡൽ ഐഡി"
+    },
+    "931": {
+      "Title": "ജെമിനി വിഡ്ജറ്റ് ജെനി",
+      "Description": "വിജറ്റ് സൃഷ്ടിക്കുന്നതിനുള്ള നിങ്ങളുടെ സ്വകാര്യ AI ജീനി. ജെമിനി നൽകുന്ന ഇത്, ഹോംജെനി എഡിറ്ററിൽ നേരിട്ട് HTML, CSS, JavaScript കോഡുകൾ എഴുതാനും ഡീബഗ് ചെയ്യാനും നിങ്ങളെ സഹായിക്കുന്നു. ഈ സവിശേഷത സജീവമാക്കുന്നതിന്, സാധുവായ ഒരു API കീ നൽകുക. സൗജന്യ API കീ ലഭിക്കുന്നതിന് https://aistudio.google.com/app/apikey എന്നതിലെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.",
+      "ConfigureOptions.ApiKey": "ഗൂഗിൾ ജെമിനി AI API കീ",
+      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി"
+    },
+    "940": {
+      "Title": "ലോക്കൽ AI (LLM)",
+      "Description": "നിങ്ങളുടെ HomeGenie സെർവറിൽ ഒരു ലാർജ് ലാംഗ്വേജ് മോഡൽ (LLM) ലോക്കലായി പ്രവർത്തിപ്പിക്കുക. ഹഗ്ഗിംഗ് ഫേസ് പോലുള്ള പ്ലാറ്റ്‌ഫോമുകളിൽ നിന്ന് ഈ മോഡലുകൾ സൗജന്യമായി ഡൗൺലോഡ് ചെയ്യാൻ കഴിയും. ഒരു GGUF ഫോർമാറ്റ് മോഡൽ ഫയലിലേക്കുള്ള പാത്ത് നൽകുക. വ്യത്യസ്ത മോഡലുകളുമായി പൂർണ്ണമായ അനുയോജ്യത ഉറപ്പാക്കാൻ, പ്രാഥമികമായി സന്ദർഭ കോഡിനുള്ളിൽ, പാരാമീറ്ററുകളിൽ ക്രമീകരണങ്ങൾ ആവശ്യമായി വന്നേക്കാം എന്നത് ശ്രദ്ധിക്കുക.",
+      "ConfigureOptions.MaxTokens": "പരമാവധി ടോക്കണുകൾ (പ്രതികരണ ദൈർഘ്യം)",
+      "ConfigureOptions.ModelPath": "ലോക്കൽ GGUF ഫയലിലേക്കുള്ള പാത"
     }
   }
 }

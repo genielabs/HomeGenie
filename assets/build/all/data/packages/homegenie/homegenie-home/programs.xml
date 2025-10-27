@@ -428,10 +428,10 @@ Program.GoBackground();
   <ProgramBlock>
     <ScriptSetup>const string domain = "Media.IpCamera";
 const string widget = "homegenie/generic/camerainput";
-const string filter = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput";
+const string filter = $"Sensor:Widget.DisplayModule={widget}";
 Program.Setup(() =&gt; {
   Program
-    .AddModules(domain, 1, 10, "Sensor", widget)
+    .AddModules(domain, 1, GENERIC_IP_CAMERA_COUNT, "Sensor", widget)
     .AddFeature(domain, filter, "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
     .AddFeature(domain, filter, "Widget.Config.fps", "Max frames per second", "slider:1:20:1:5")
     .AddFeature(domain, filter, "IpCamera.Username", "Username (optional)", "text")
@@ -441,15 +441,6 @@ Program.Setup(() =&gt; {
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
-for (int cam = 1; cam &lt; 10; cam++)
-{
-  var module = cameraModules.WithAddress(cam.ToString()).Get();
-  var cameraUrl = module.Parameter("IpCamera.ImageURL");
-  if (String.IsNullOrEmpty(cameraUrl?.Value))
-  {
-    cameraUrl.Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
-  }
-}
 
 // - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;camera_address&gt;/...
 Api.Handle("Media.IpCamera/", ( args ) =&gt; {
@@ -467,10 +458,14 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
     {
       // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;camera_address&gt;/Camera.GetPicture
       case "Camera.GetPicture":
-        data = Net
-          .WebService(module.Parameter("IpCamera.ImageURL").Value)
-          .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
-          .GetBytes();
+        string cameraUrl = module.Parameter("IpCamera.ImageURL").Value;
+        if (!String.IsNullOrEmpty(cameraUrl))
+        {
+          data = Net
+            .WebService(module.Parameter("IpCamera.ImageURL").Value)
+            .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
+            .GetBytes();
+        }
         break;
       case "Camera.MotionDetected":
         data = "{ 'ResponseValue' : 'OK' }";
@@ -490,7 +485,7 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptContext />
+    <ScriptContext>const int GENERIC_IP_CAMERA_COUNT = 5;</ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
@@ -498,9 +493,9 @@ Program.GoBackground();
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>generic-ip-camera</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>false</Required>
-      <Checksum>14BB7764525D5519B06897EE8F6516C7</Checksum>
+      <Checksum>4B6B6F4659921A37761ACA0F84BAF830</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
@@ -1268,9 +1263,9 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
     // Check setpoint for the current mode  
     var setPointReached = true;
     if (mode.StartsWith("Heat")) {
-      setPointReached = temperature.DecimalValue &gt;= setPoint.DecimalValue;
+      setPointReached = Math.Round(temperature.DecimalValue, 1) &gt;= Math.Round(setPoint.DecimalValue, 1);
     } else if (mode.StartsWith("Cool")) {
-      setPointReached = temperature.DecimalValue &lt;= setPoint.DecimalValue;
+      setPointReached = Math.Round(temperature.DecimalValue, 1) &lt;= Math.Round(setPoint.DecimalValue, 1);
     }
     if (!setPointReached)
     {
@@ -1425,16 +1420,16 @@ while (Program.IsRunning)
     <ScriptContext>const string MODULES_DOMAIN = "HomeAutomation.SmartThermostat";
 const string FEATURE_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>smart-thermostat</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>2E07C9427156338C2D0A061686058442</Checksum>
+      <Checksum>B7C8EB9C091E659EF164EC4114F12AAD</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>

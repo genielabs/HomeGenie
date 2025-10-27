@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "từ",
   "cronwizard_description_ending": "ĐẾN",
   "cronwizard_description_at": "Tại",
-  "cronwizard_add_time_slot": "Thêm khung thời gian",
+  "cronwizard_add_time_slot": "Thêm khoảng thời gian",
   "cronwizard_add_exact_time": "Thêm thời gian chính xác",
   "cronwizard_start_time": "Thời gian bắt đầu",
   "cronwizard_end_time": "Thời gian kết thúc",
@@ -81,7 +81,7 @@
   "cronwizard_action_custom_script": "Kịch bản hành động tùy chỉnh",
   "cronwizard_action_no_action": "Không có hành động",
   "cronwizard_action_schedule_variable_hint": "Sử dụng <span class=\"notranslate color-primary\">@{{name}}</span> làm biến trong biểu thức cron hoặc sử dụng <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> trong các chương trình tự động hóa để tham chiếu đến sự kiện này.",
-  "scheduler_preset_action_command_turn_on": "Bật lên",
+  "scheduler_preset_action_command_turn_on": "Bật",
   "scheduler_preset_action_command_turn_off": "Tắt",
   "scheduler_preset_action_command_set_level": "Đặt mức",
   "scheduler_preset_action_config_level": "Mức độ",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Tiết kiệm nhiệt",
   "scheduler_preset_action_config_mode_cool": "Mát mẻ",
   "scheduler_preset_action_config_mode_cool_eco": "Nền kinh tế mát mẻ",
+  "scheduler_preset_action_command_remote_control": "Điều khiển từ xa (gửi mã IR/RF)",
+  "scheduler_preset_action_config_data": "Dữ liệu",
   "scheduler_preset_action_program_run": "Chạy chương trình",
   "scheduler_preset_action_config_program": "Chương trình",
   "scheduler_preset_action_config_options": "Tùy chọn",
   "scheduler_preset_action_program_say": "Nói",
+  "scheduler_preset_action_net_http_call": "Gọi dịch vụ web",
+  "scheduler_preset_action_config_url": "Địa chỉ (URL)",
+  "scheduler_preset_action_pause": "Tạm dừng",
+  "scheduler_preset_action_config_seconds": "Giây",
   "scheduler_preset_action_config_message": "Tin nhắn",
   "save_and_build": "Lưu và xây dựng",
   "toggle_widgets_preview": "Chuyển đổi xem trước tiện ích",
@@ -121,13 +127,13 @@
   "tap_to_disable": "Nhấp để vô hiệu hóa",
   "tap_to_enable": "Nhấp để kích hoạt",
   "program_data": "Dữ liệu chương trình",
-  "visual_code": "Mã trực quan",
-  "generated_code": "Mã đã tạo",
+  "visual_code": "Mã hình ảnh",
+  "generated_code": "Mã được tạo",
   "setup_code": "Cài đặt",
   "main_code": "Chủ yếu",
   "context_code": "Bối cảnh",
   "main_code_empty_note": "Mã \"Main\" trống. Sử dụng trình soạn thảo \"Visual code\" để tạo mã này: - Mở danh mục \"Program\" từ bảng lệnh bên trái - Kéo một khối kiểu \"Main\" vào không gian làm việc của Visual code - Thêm các khối mã khác vào bên trong để triển khai các hành động và logic của chương trình này. Chương trình \"Main\" có thể được chạy thủ công hoặc tự động khởi động dựa trên các điều kiện được đưa ra trong mã Thiết lập.",
-  "setup_code_empty_note": "Mã \"Thiết lập\" đang trống. Sử dụng trình soạn thảo \"Mã trực quan\" để tạo mã này: - Mở danh mục \"Chương trình\" từ bảng lệnh bên trái - Kéo một khối kiểu \"Thiết lập\" vào không gian làm việc của mã trực quan - Thêm các khối mã khác vào bên trong để xác định các điều kiện sẽ kích hoạt thực thi mã \"Chính\". Mã này được đánh giá mỗi khi có sự kiện mới xảy ra và ít nhất mỗi phút một lần.",
+  "setup_code_empty_note": "Mã \"Thiết lập\" đang trống. Sử dụng trình soạn thảo \"Mã trực quan\" để tạo mã này: - Mở danh mục \"Chương trình\" từ bảng lệnh bên trái - Kéo một khối kiểu \"Thiết lập\" vào không gian làm việc mã trực quan - Thêm các khối mã khác vào bên trong để xác định các điều kiện sẽ kích hoạt thực thi mã \"Chính\". Mã này được đánh giá mỗi khi có sự kiện mới xảy ra và ít nhất mỗi phút một lần.",
   "capture_commands": "Lệnh chụp",
   "capture_commands_description": "Thêm tất cả các lệnh được thực hiện thủ công trên các tiện ích vào chương trình.",
   "capture_commands_pause": "Tạm dừng giữa các lệnh",
@@ -233,7 +239,7 @@
     },
     "401": {
       "Title": "Bản demo - Cửa chuyển đổi",
-      "Description": "Mô phỏng cửa mở/đóng của cảm biến cửa sổ demo."
+      "Description": "Mô phỏng hoạt động đóng/mở cửa của cảm biến cửa sổ demo."
     },
     "402": {
       "Title": "Bản demo - Phát hiện chuyển động",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Bước làm mờ"
     },
     "142": {
-      "Title": "Tài khoản email",
+      "Title": "Tài khoản E-Mail",
       "Description": "Lưu trữ thông tin tài khoản email được các chương trình hệ thống sử dụng để gửi/nhận email.",
       "ConfigureOptions.Email.Sender": "1. Địa chỉ email",
       "ConfigureOptions.Email.SmtpServer": "2. Địa chỉ máy chủ SMTP",
@@ -306,6 +312,18 @@
       "Description": "Cho phép kiểm soát ngôn ngữ tự nhiên cho hệ thống thông minh của bạn bằng Gemini AI của Google. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
       "ConfigureOptions.ApiKey": "Khóa API AI Gemini của Google",
       "ConfigureOptions.ModelId": "Mã số mô hình"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Trí tuệ nhân tạo AI cá nhân của bạn để tạo widget. Được hỗ trợ bởi Gemini, nó giúp bạn viết và gỡ lỗi mã HTML, CSS và JavaScript trực tiếp trong trình soạn thảo HomeGenie. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
+      "ConfigureOptions.ApiKey": "Khóa API AI Gemini của Google",
+      "ConfigureOptions.ModelId": "Mã số mô hình"
+    },
+    "940": {
+      "Title": "Trí tuệ nhân tạo địa phương (LLM)",
+      "Description": "Chạy Mô hình Ngôn ngữ Lớn (LLM) cục bộ trên máy chủ HomeGenie của bạn. Các mô hình này có thể được tải xuống miễn phí từ các nền tảng như Hugging Face. Chỉ cần cung cấp đường dẫn đến tệp mô hình định dạng GGUF. Xin lưu ý rằng có thể cần điều chỉnh các tham số, chủ yếu trong Mã Ngữ cảnh, để đảm bảo khả năng tương thích hoàn toàn với các mô hình khác nhau.",
+      "ConfigureOptions.MaxTokens": "Mã thông báo tối đa (độ dài phản hồi)",
+      "ConfigureOptions.ModelPath": "Đường dẫn đến tệp GGUF cục bộ"
     }
   }
 }

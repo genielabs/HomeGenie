@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "熱經濟性",
   "scheduler_preset_action_config_mode_cool": "涼爽的",
   "scheduler_preset_action_config_mode_cool_eco": "酷經濟",
+  "scheduler_preset_action_command_remote_control": "遠端控制（發送紅外線/射頻代碼）",
+  "scheduler_preset_action_config_data": "數據",
   "scheduler_preset_action_program_run": "運行程式",
   "scheduler_preset_action_config_program": "程式",
   "scheduler_preset_action_config_options": "選項",
   "scheduler_preset_action_program_say": "說",
+  "scheduler_preset_action_net_http_call": "呼叫 Web 服務",
+  "scheduler_preset_action_config_url": "地址（URL）",
+  "scheduler_preset_action_pause": "暫停",
+  "scheduler_preset_action_config_seconds": "秒",
   "scheduler_preset_action_config_message": "訊息",
   "save_and_build": "保存並建構",
   "toggle_widgets_preview": "切換小工具預覽",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "僅模擬"
     },
     "26": {
-      "Title": "彩色燈",
+      "Title": "彩色燈光",
       "Description": "使用 HTTP API (V1) 整合飛利浦 Hue 燈光的範例。連接網橋的預設使用者是“newdeveloper”，並且該使用者應該已啟用。",
       "ConfigureOptions.BridgeAddress": "飛利浦 Hue Bridge (V1) IP 位址",
       "ConfigureOptions.BridgeUsername": "使用者名稱",
@@ -192,7 +198,7 @@
     "88": {
       "Title": "通用IP攝影機",
       "Description": "顯示/路由來自 IP 攝影機的影像。",
-      "IpCamera.ImageURL": "相機圖像 API URL（請參閱您的相機文件）",
+      "IpCamera.ImageURL": "相機影像 API URL（請參閱您的相機文件）",
       "IpCamera.Username": "使用者名稱（可選）",
       "IpCamera.Password": "密碼（可選）",
       "Widget.Config.fps": "每秒影格數",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "觸發時運行的程序"
     },
     "95": {
-      "Title": "事件記錄",
+      "Title": "事件日誌",
       "Description": "記錄設備活動。",
       "EventsLogger.EnableLogging": "使能夠"
     },
@@ -306,6 +312,18 @@
       "Description": "使用 Google Gemini AI 為您的智慧型系統啟用自然語言控制。若要啟動此功能，請輸入有效的 API 金鑰。請依照 https://aistudio.google.com/app/apikey 上的說明取得免費 API 金鑰。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
       "ConfigureOptions.ModelId": "模型 ID"
+    },
+    "931": {
+      "Title": "雙子座小工具精靈",
+      "Description": "您的專屬 AI 小工具，幫助您輕鬆建立小工具。它由 Gemini 提供支持，可幫助您直接在 HomeGenie 編輯器中編寫和調試 HTML、CSS 和 JavaScript 程式碼。若要啟動此功能，請輸入有效的 API 金鑰。請按照 https://aistudio.google.com/app/apikey 上的說明取得免費的 API 金鑰。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
+      "ConfigureOptions.ModelId": "模型 ID"
+    },
+    "940": {
+      "Title": "本地人工智慧（法學碩士）",
+      "Description": "在您的 HomeGenie 伺服器上本地運行大型語言模型 (LLM)。這些模型可以從 Hugging Face 等平台免費下載。只需提供 GGUF 格式模型檔案的路徑即可。請注意，可能需要調整參數（主要是上下文程式碼中的參數），以確保與不同模型完全相容。",
+      "ConfigureOptions.MaxTokens": "最大令牌（響應長度）",
+      "ConfigureOptions.ModelPath": "本地 GGUF 檔案的路徑"
     }
   }
 }

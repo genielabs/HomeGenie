@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "Beginnt um {{start}}.<span class=\"notranslate\"><br/></span>. Ende des Zeitfensters festlegen.",
   "cronwizard_bindings_define_types_and_modules": "Definieren Sie Typen und Module, die diesem Zeitplan unterliegen (optional)",
   "cronwizard_bindings_select_types": "Typen auswählen",
-  "cronwizard_action_set_action_to_execute": "Legen Sie die Aktion fest, die beim Auftreten dieses Ereignisses ausgeführt werden soll",
+  "cronwizard_action_set_action_to_execute": "Aktion festlegen, die beim Auftreten dieses Ereignisses ausgeführt werden soll",
   "cronwizard_action_preset_actions": "Voreingestellte Aktionen",
   "cronwizard_action_preset_every_occurrence": "Bei jedem Vorkommen",
   "cronwizard_action_preset_slot_start": "Zu Beginn eines Zeitfensters",
@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "Verwenden Sie <span class=\"notranslate color-primary\">@{{name}}</span> als Variable in Cron-Ausdrücken oder verwenden Sie <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in Automatisierungsprogrammen, um auf dieses Ereignis zu verweisen.",
   "scheduler_preset_action_command_turn_on": "Einschalten",
   "scheduler_preset_action_command_turn_off": "Ausschalten",
-  "scheduler_preset_action_command_set_level": "Level einstellen",
+  "scheduler_preset_action_command_set_level": "Level festlegen",
   "scheduler_preset_action_config_level": "Ebene",
   "scheduler_preset_action_command_set_color": "Farbe festlegen",
   "scheduler_preset_action_config_color": "Farbe",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Wärmewirtschaft",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Coole Wirtschaft",
+  "scheduler_preset_action_command_remote_control": "Fernbedienung (IR/RF-Codes senden)",
+  "scheduler_preset_action_config_data": "Daten",
   "scheduler_preset_action_program_run": "Programm ausführen",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Optionen",
   "scheduler_preset_action_program_say": "Sagen",
+  "scheduler_preset_action_net_http_call": "Aufrufen eines Webdienstes",
+  "scheduler_preset_action_config_url": "Adresse (URL)",
+  "scheduler_preset_action_pause": "Pause",
+  "scheduler_preset_action_config_seconds": "Sekunden",
   "scheduler_preset_action_config_message": "Nachricht",
   "save_and_build": "Speichern und bauen",
   "toggle_widgets_preview": "Widget-Vorschau umschalten",
@@ -209,7 +215,7 @@
       "ConfigureOptions.System.SirenStartTime": "Sirenenstartverzögerung (Sekunden)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenen max. Zeit (Sekunden, 0 = unendlich)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programm, das bei Scharfschaltung ausgeführt wird",
-      "ConfigureOptions.Trigger.DisarmedProgram": "Programm, das bei Deaktivierung ausgeführt wird",
+      "ConfigureOptions.Trigger.DisarmedProgram": "Programm, das bei Deaktivierung ausgeführt werden soll",
       "ConfigureOptions.Trigger.TriggeredProgram": "Programm, das bei Auslösung ausgeführt werden soll"
     },
     "95": {
@@ -218,7 +224,7 @@
       "EventsLogger.EnableLogging": "Aktivieren"
     },
     "111": {
-      "Title": "Clientkonfiguration",
+      "Title": "Client-Konfiguration",
       "Description": "Implementiert eine API zum Verwalten der Konfigurationsprofile des Clients, die zum Speichern von UI- und Dashboard-Einstellungen verwendet werden."
     },
     "400": {
@@ -253,7 +259,7 @@
       "Title": "Fernbedienung",
       "Description": "Steuern Sie das Gerät mit einer Fernbedienung (IR oder RF).",
       "HomeGenie.RemoteControl.Enable": "Aktivieren",
-      "HomeGenie.RemoteControl.IRCode": "Umschaltfläche",
+      "HomeGenie.RemoteControl.IRCode": "Umschalttaste",
       "ConfigureOptions.DimmerUpCode": "Taste zum Erhöhen der Helligkeit",
       "ConfigureOptions.DimmerDownCode": "Taste zum Verringern der Helligkeit",
       "ConfigureOptions.DimmerInterval": "Dimmstufe"
@@ -306,6 +312,18 @@
       "Description": "Ermöglicht die Steuerung Ihres Smart-Systems in natürlicher Sprache mithilfe der Gemini-KI von Google. Geben Sie zur Aktivierung einen gültigen API-Schlüssel ein. Folgen Sie den Anweisungen unter https://aistudio.google.com/app/apikey, um einen kostenlosen API-Schlüssel zu erhalten.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlüssel",
       "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Ihr persönlicher KI-Genie zur Widget-Erstellung. Basierend auf Gemini hilft es Ihnen, HTML-, CSS- und JavaScript-Code direkt im HomeGenie-Editor zu schreiben und zu debuggen. Um diese Funktion zu aktivieren, geben Sie einen gültigen API-Schlüssel ein. Folgen Sie den Anweisungen unter https://aistudio.google.com/app/apikey, um einen kostenlosen API-Schlüssel zu erhalten.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlüssel",
+      "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "940": {
+      "Title": "Lokale KI (LLM)",
+      "Description": "Führen Sie ein Large Language Model (LLM) lokal auf Ihrem HomeGenie-Server aus. Diese Modelle können kostenlos von Plattformen wie Hugging Face heruntergeladen werden. Geben Sie einfach den Pfad zu einer Modelldatei im GGUF-Format an. Bitte beachten Sie, dass Anpassungen an Parametern, vor allem im Kontextcode, erforderlich sein können, um die volle Kompatibilität mit verschiedenen Modellen zu gewährleisten.",
+      "ConfigureOptions.MaxTokens": "Max. Token (Antwortlänge)",
+      "ConfigureOptions.ModelPath": "Pfad zur lokalen GGUF-Datei"
     }
   }
 }

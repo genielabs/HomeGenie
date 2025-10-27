@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "<span class=\"notranslate color-primary\">@{{name}}</span> wekî guhêrbar di îfadeyên cron de bikar bînin an jî <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> di bernameyên otomasyonê de bikar bînin da ku vê bûyerê referans bikin.",
   "scheduler_preset_action_command_turn_on": "Vekirin",
   "scheduler_preset_action_command_turn_off": "Temirandin",
-  "scheduler_preset_action_command_set_level": "Astê destnîşan bike",
+  "scheduler_preset_action_command_set_level": "Astê Saz Bike",
   "scheduler_preset_action_config_level": "Deşt",
-  "scheduler_preset_action_command_set_color": "Reng destnîşan bike",
+  "scheduler_preset_action_command_set_color": "Rengê Saz Bike",
   "scheduler_preset_action_config_color": "Reng",
-  "scheduler_preset_action_command_thermostat_mode": "Moda termostatê",
+  "scheduler_preset_action_command_thermostat_mode": "Moda Termostatê",
   "scheduler_preset_action_config_mode": "Awa",
   "scheduler_preset_action_config_mode_on": "Li",
   "scheduler_preset_action_config_mode_off": "Ji",
   "scheduler_preset_action_config_mode_heat": "Germa",
-  "scheduler_preset_action_config_mode_heat_eco": "Aboriya germê",
+  "scheduler_preset_action_config_mode_heat_eco": "Aboriya Germê",
   "scheduler_preset_action_config_mode_cool": "Xwînsar",
-  "scheduler_preset_action_config_mode_cool_eco": "Aboriya sar",
-  "scheduler_preset_action_program_run": "Bernameyê bixebitîne",
+  "scheduler_preset_action_config_mode_cool_eco": "Aboriya Sar",
+  "scheduler_preset_action_command_remote_control": "Kontrolkirina ji dûr ve (kodên IR/RF bişînin)",
+  "scheduler_preset_action_config_data": "Jimare",
+  "scheduler_preset_action_program_run": "Bernameyê Bixebitîne",
   "scheduler_preset_action_config_program": "Bername",
   "scheduler_preset_action_config_options": "Vebijêrk",
   "scheduler_preset_action_program_say": "Gotin",
+  "scheduler_preset_action_net_http_call": "Gazî Xizmeteke Webê Bike",
+  "scheduler_preset_action_config_url": "Navnîşan (URL)",
+  "scheduler_preset_action_pause": "Mizdan",
+  "scheduler_preset_action_config_seconds": "Çirke",
   "scheduler_preset_action_config_message": "Agah",
   "save_and_build": "Tomar bike û ava bike",
   "toggle_widgets_preview": "Pêşdîtina widgetan veke/bigire",
@@ -120,9 +126,9 @@
   "automation_programming_guide": "Rêbernameya Bernamesaziyê",
   "tap_to_disable": "Ji bo neçalakkirinê bitikîne",
   "tap_to_enable": "Ji bo çalakkirinê bitikîne",
-  "program_data": "Daneyên bernameyê",
-  "visual_code": "Koda dîtbarî",
-  "generated_code": "Koda çêkirî",
+  "program_data": "Daneyên Bernameyê",
+  "visual_code": "Koda Dîtbarî",
+  "generated_code": "Koda Çêkirî",
   "setup_code": "Damezirandin",
   "main_code": "Ser",
   "context_code": "Hevgirêk",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Tenê simulasyon bike"
     },
     "26": {
-      "Title": "Ronahîyên rengîn",
+      "Title": "Ronahîyên Rengîn",
       "Description": "Nimûneya entegrasyona çirayên Philips Hue bi karanîna HTTP API (V1). Bikarhênerê xwerû ji bo girêdana bi pirê \"newdeveloper\" e û divê ew jixwe çalak be.",
       "ConfigureOptions.BridgeAddress": "Navnîşana IP-ya Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Navê bikarhêner",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Bernameyek dê dema ku were çalakkirin bixebite"
     },
     "95": {
-      "Title": "Tomarkirina bûyeran",
+      "Title": "Tomarkirina Bûyeran",
       "Description": "Çalakiya cîhazê tomar bike.",
       "EventsLogger.EnableLogging": "Bikêrkirin"
     },
     "111": {
-      "Title": "Mîhengkirina xerîdar",
+      "Title": "Mîhengkirina Xerîdar",
       "Description": "API-yê ji bo birêvebirina profîlên mîhengkirinê yên xerîdar ên ku ji bo hilanîna mîhengên UI û dashboardan têne bikar anîn, bicîh tîne."
     },
     "400": {
@@ -233,21 +239,21 @@
     },
     "401": {
       "Title": "Demo - Deriyê Veguhêzbar",
-      "Description": "Vekirin/girtina derî ya sensora demo ya demo ya derî-paceyê sîmul dike."
+      "Description": "Vekirin/girtina derî ya sensora demo ya demo ya demo ya derî-paceyê sîmul dike."
     },
     "402": {
       "Title": "Demo - Tevger Hat Tesbîtkirin",
       "Description": "Tesbîtkirina tevgerê ya pir-sensorê demo sîmul dike."
     },
     "410": {
-      "Title": "Sîmulatora sensorê",
+      "Title": "Sîmulatora Sensorê",
       "Description": "Nirxên sensorên rasthatî belav bike.",
       "Simulator.Sensor.Temperature": "Sensorê germahiyê",
       "Simulator.Sensor.Humidity": "Sensorê şilbûnê",
       "Simulator.Sensor.Luminance": "Sensorê ronahiyê",
       "Simulator.Meter.Watts": "Pîvana watt",
       "Simulator.Meter.Watts.Max": "Hêza herî zêde ya Watt",
-      "Simulator.Sensor.DataFrequency": "Frekansa weşana simulatorê"
+      "Simulator.Sensor.DataFrequency": "Frekansa weşana simulasyonê"
     },
     "505": {
       "Title": "Kontrola ji dûr ve",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Girêdana senaryoya Sunrise Colors"
     },
     "910": {
-      "Title": "Tesbîtkirina tiştan",
+      "Title": "Tesbîtkirina Tiştan",
       "Description": "Bi karanîna modelek YOLO11-a pêş-perwerdekirî tiştan tespît bikin.",
       "ML.ObjectDetection": "Tesbîtkirina tiştan çalak bike",
       "ML.ObjectDetection.TriggerDetect": "Lîsteya tiştên ku bi vertîkalê ji hev veqetandî ne (bi Îngilîzî) ku dê alarmê bidin destpêkirin. (mînak: pisîk, kûçik, mirov, çenteya piştê, çente)",
       "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Texmîna pozê",
+      "Title": "Texmîna Pozê",
       "Description": "Tesbîtkirina xala sereke bi rêya texmîna pozê, bi karanîna modelên ONNX-ê yên xwerû an modela YOLOv11-a pêş-perwerdekirî ya xwerû (taybetî bi poza mirovan).",
       "ML.PoseEstimation": "Texmînkirina pozê çalak bike",
       "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Dabeşkirina nimûneyê",
+      "Title": "Dabeşkirina Nimûneyê",
       "Description": "Bi karanîna modelek YOLO11-a pêş-perwerdekirî tişt û xêzên wan tespît bikin.",
       "ML.InstanceSegmentation": "Dabeşkirina nimûneyê çalak bike",
       "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Bi karanîna Gemini AI ya Google-ê, kontrola zimanê xwezayî ji bo pergala we ya jîr çalak dike. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-yê ya derbasdar binivîse. Ji bo bidestxistina mifteyek API-yê ya belaş, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",
       "ConfigureOptions.ApiKey": "Mifteya API ya Google Gemini AI",
       "ConfigureOptions.ModelId": "Nasnameya Modelê"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Cinîya AI ya we ya şexsî ji bo afirandina widgetan. Bi hêza Gemini, ew ji we re dibe alîkar ku hûn koda HTML, CSS, û JavaScript rasterast di nav edîtorê HomeGenie de binivîsin û xeletiyan çareser bikin. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-ya derbasdar binivîsin. Ji bo ku mifteyek API-ya belaş bistînin, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",
+      "ConfigureOptions.ApiKey": "Mifteya API ya Google Gemini AI",
+      "ConfigureOptions.ModelId": "Nasnameya Modelê"
+    },
+    "940": {
+      "Title": "AI ya Herêmî (LLM)",
+      "Description": "Modelek Zimanî ya Mezin (LLM) li ser servera HomeGenie ya xwe bi awayekî herêmî bixebitîne. Ev model dikarin ji platformên wekî Hugging Face belaş werin daxistin. Tenê rêya pelê modela bi formata GGUF peyda bikin. Ji kerema xwe bala xwe bidinê ku ji bo misogerkirina lihevhatina tevahî bi modelên cûda re, dibe ku sererastkirinên parametreyan, bi giranî di nav Koda Kontekstê de, hewce bin.",
+      "ConfigureOptions.MaxTokens": "Maksimum Token (dirêjahiya bersivê)",
+      "ConfigureOptions.ModelPath": "Riya pelê GGUF ya herêmî"
     }
   }
 }

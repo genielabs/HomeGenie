@@ -9,5 +9,11 @@
     "indicators": "አመላካቾች",
     "lights_control": "መብራቶች",
     "switches_control": "መቀየሪያዎች"
+  },
+  "$ai_chat": {
+    "title": "AI የውይይት መግብር",
+    "intro": "ሀሎ! እኔ የአካባቢያችሁ LLM ረዳት ነኝ። ምን ልርዳሽ፧",
+    "no_bound_module": "ምንም የኤል.ኤም.ኤም. ሞጁል አይታሰርም። የቋንቋ ሞዴልን ለማሰር እባክህ የመግብር ቅንብሮችን ክፈት።",
+    "start_typing_prompt": "ጥያቄ መተየብ ጀምር..."
   }
 }

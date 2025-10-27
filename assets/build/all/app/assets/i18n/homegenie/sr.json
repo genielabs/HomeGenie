@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Топлота",
   "scheduler_preset_action_config_mode_heat_eco": "Економија грејања",
   "scheduler_preset_action_config_mode_cool": "Кул",
-  "scheduler_preset_action_config_mode_cool_eco": "Хладна економија",
+  "scheduler_preset_action_config_mode_cool_eco": "Кул економија",
+  "scheduler_preset_action_command_remote_control": "Даљински управљач (слање ИЦ/РФ кодова)",
+  "scheduler_preset_action_config_data": "Подаци",
   "scheduler_preset_action_program_run": "Покрени програм",
   "scheduler_preset_action_config_program": "Програм",
   "scheduler_preset_action_config_options": "Опције",
   "scheduler_preset_action_program_say": "Реци",
+  "scheduler_preset_action_net_http_call": "Позовите веб сервис",
+  "scheduler_preset_action_config_url": "Адреса (URL)",
+  "scheduler_preset_action_pause": "Пауза",
+  "scheduler_preset_action_config_seconds": "Секунде",
   "scheduler_preset_action_config_message": "Порука",
   "save_and_build": "Сачувај и изгради",
   "toggle_widgets_preview": "Укључи/искључи преглед виџета",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Програм који се покреће када се активира"
     },
     "95": {
-      "Title": "Евидентирање догађаја",
+      "Title": "Евиденција догађаја",
       "Description": "Снимите активност уређаја.",
       "EventsLogger.EnableLogging": "Омогући"
     },
@@ -225,7 +231,7 @@
       "Title": "Демо виртуелних модула",
       "Description": "Ручно подесите вредности виртуелног уређаја.",
       "Sensor.Temperature": "Вредност температуре",
-      "Sensor.Luminance": "Вредност луминанције",
+      "Sensor.Luminance": "Вредност луминације",
       "Sensor.MotionDetect": "Статус детекције покрета",
       "Status.Battery": "Ниво батерије",
       "Sensor.DoorWindow": "Статус сензора за врата/прозоре (отворено/затворено)",
@@ -236,7 +242,7 @@
       "Description": "Симулира отварање/затварање врата демо сензора врата-прозор."
     },
     "402": {
-      "Title": "Демо - Детектоване кретање",
+      "Title": "Демо - Детектовано кретање",
       "Description": "Симулира детекцију покрета демо мултисензора."
     },
     "410": {
@@ -287,25 +293,37 @@
       "Description": "Детекција објеката помоћу претходно обученог YOLO11 модела.",
       "ML.ObjectDetection": "Омогући детекцију објеката",
       "ML.ObjectDetection.TriggerDetect": "Списак ствари одвојених зарезима (на енглеском) које ће покренути аларм. (нпр.: мачка, пас, особа, ранац, кофер)",
-      "ConfigureOptions.Yolo.ModelPath": "Путања до датотеке модела YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Путања датотеке модела YOLO11 (.onnx)"
     },
     "911": {
       "Title": "Процена позе",
       "Description": "Детекција кључних тачака путем процене положаја, коришћењем прилагођених ONNX модела или подразумеваног претходно обученог YOLOv11 модела (специфичног за људски положај).",
       "ML.PoseEstimation": "Омогући процену позе",
-      "ConfigureOptions.Yolo.ModelPath": "Путања датотеке модела YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Путања до датотеке модела YOLO11 (.onnx)"
     },
     "912": {
       "Title": "Сегментација инстанци",
       "Description": "Детектовање објеката и њихових обриса помоћу претходно обученог YOLO11 модела.",
       "ML.InstanceSegmentation": "Омогући сегментацију инстанци",
-      "ConfigureOptions.Yolo.ModelPath": "Путања до датотеке модела YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Путања датотеке модела YOLO11 (.onnx)"
     },
     "930": {
       "Title": "Руковалац намерама Gemini",
       "Description": "Омогућава контролу природног језика за ваш паметни систем користећи Google-ов Gemini AI. Да бисте активирали ову функцију, унесите важећи API кључ. Пратите упутства на https://aistudio.google.com/app/apikey да бисте добили бесплатан API кључ.",
       "ConfigureOptions.ApiKey": "Кључ Google Gemini AI API-ја",
       "ConfigureOptions.ModelId": "ИД модела"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Ваш лични AI џин за креирање виџета. Покреће га Gemini, помаже вам да пишете и отклањате грешке у HTML, CSS и JavaScript коду директно у HomeGenie едитору. Да бисте активирали ову функцију, унесите важећи API кључ. Пратите упутства на https://aistudio.google.com/app/apikey да бисте добили бесплатан API кључ.",
+      "ConfigureOptions.ApiKey": "Кључ Google Gemini AI API-ја",
+      "ConfigureOptions.ModelId": "ИД модела"
+    },
+    "940": {
+      "Title": "Локална вештачка интелигенција (LLM)",
+      "Description": "Покрените модел великог језика (LLM) локално на вашем HomeGenie серверу. Ови модели се могу бесплатно преузети са платформи као што је Hugging Face. Једноставно наведите путању до датотеке модела у GGUF формату. Имајте у виду да ће можда бити потребно прилагођавање параметара, првенствено унутар контекстног кода, како би се осигурала потпуна компатибилност са различитим моделима.",
+      "ConfigureOptions.MaxTokens": "Максималан број токена (дужина одговора)",
+      "ConfigureOptions.ModelPath": "Путања до локалне GGUF датотеке"
     }
   }
 }

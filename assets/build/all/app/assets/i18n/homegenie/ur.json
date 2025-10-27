@@ -78,27 +78,33 @@
   "cronwizard_action_preset_every_occurrence": "ہر واقعہ پر",
   "cronwizard_action_preset_slot_start": "ٹائم سلاٹ کے آغاز میں",
   "cronwizard_action_preset_slot_end": "ٹائم سلاٹ کے اختتام پر",
-  "cronwizard_action_custom_script": "کسٹم ایکشن اسکرپٹ",
+  "cronwizard_action_custom_script": "حسب ضرورت ایکشن اسکرپٹ",
   "cronwizard_action_no_action": "کوئی کارروائی نہیں۔",
   "cronwizard_action_schedule_variable_hint": "اس ایونٹ کا حوالہ دینے کے لیے <span class=\"notranslate color-primary\">@{{name}}</span> کو کرون ایکسپریشنز میں متغیر کے طور پر استعمال کریں یا آٹومیشن پروگراموں میں <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> کا استعمال کریں۔",
   "scheduler_preset_action_command_turn_on": "آن کریں۔",
   "scheduler_preset_action_command_turn_off": "بند کر دیں۔",
-  "scheduler_preset_action_command_set_level": "سطح طے کریں۔",
+  "scheduler_preset_action_command_set_level": "لیول سیٹ کریں۔",
   "scheduler_preset_action_config_level": "سطح",
   "scheduler_preset_action_command_set_color": "رنگ سیٹ کریں۔",
   "scheduler_preset_action_config_color": "رنگ",
-  "scheduler_preset_action_command_thermostat_mode": "ترموسٹیٹ موڈ",
+  "scheduler_preset_action_command_thermostat_mode": "تھرموسٹیٹ موڈ",
   "scheduler_preset_action_config_mode": "موڈ",
   "scheduler_preset_action_config_mode_on": "پر",
   "scheduler_preset_action_config_mode_off": "آف",
   "scheduler_preset_action_config_mode_heat": "گرمی",
-  "scheduler_preset_action_config_mode_heat_eco": "گرمی کی معیشت",
+  "scheduler_preset_action_config_mode_heat_eco": "حرارتی معیشت",
   "scheduler_preset_action_config_mode_cool": "ٹھنڈا",
   "scheduler_preset_action_config_mode_cool_eco": "ٹھنڈی معیشت",
+  "scheduler_preset_action_command_remote_control": "ریموٹ کنٹرول (IR/RF کوڈ بھیجیں)",
+  "scheduler_preset_action_config_data": "ڈیٹا",
   "scheduler_preset_action_program_run": "پروگرام چلائیں۔",
   "scheduler_preset_action_config_program": "پروگرام",
   "scheduler_preset_action_config_options": "اختیارات",
   "scheduler_preset_action_program_say": "کہو",
+  "scheduler_preset_action_net_http_call": "ویب سروس کو کال کریں۔",
+  "scheduler_preset_action_config_url": "پتہ (URL)",
+  "scheduler_preset_action_pause": "توقف",
+  "scheduler_preset_action_config_seconds": "سیکنڈز",
   "scheduler_preset_action_config_message": "پیغام",
   "save_and_build": "محفوظ کریں اور بنائیں",
   "toggle_widgets_preview": "ویجٹ کا پیش نظارہ ٹوگل کریں۔",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "ٹرگر ہونے پر چلانے کے لیے پروگرام"
     },
     "95": {
-      "Title": "واقعات کی لاگنگ",
+      "Title": "ایونٹس لاگنگ",
       "Description": "آلہ کی سرگرمی ریکارڈ کریں۔",
       "EventsLogger.EnableLogging": "فعال کریں۔"
     },
     "111": {
-      "Title": "کلائنٹ کی ترتیب",
+      "Title": "کلائنٹ کنفیگریشن",
       "Description": "کلائنٹ کے کنفیگریشن پروفائلز کو منظم کرنے کے لیے API کو لاگو کرتا ہے جو UI اور ڈیش بورڈز کی ترتیبات کو اسٹور کرنے کے لیے استعمال ہوتے ہیں۔"
     },
     "400": {
@@ -292,11 +298,11 @@
     "911": {
       "Title": "پوز کا تخمینہ",
       "Description": "اپنی مرضی کے مطابق ONNX ماڈلز یا پہلے سے تربیت یافتہ YOLOv11 ماڈل (انسانی پوز کے لیے مخصوص) کا استعمال کرتے ہوئے پوز تخمینہ کے ذریعے کلیدی پوائنٹ کا پتہ لگانا۔",
-      "ML.PoseEstimation": "پوز تخمینہ کو فعال کریں۔",
+      "ML.PoseEstimation": "پوز کا تخمینہ فعال کریں۔",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڈل فائل کا راستہ (.onnx)"
     },
     "912": {
-      "Title": "مثال کی تقسیم",
+      "Title": "مثال سیگمنٹیشن",
       "Description": "پہلے سے تربیت یافتہ YOLO11 ماڈل کا استعمال کرتے ہوئے اشیاء اور ان کے خاکوں کا پتہ لگائیں۔",
       "ML.InstanceSegmentation": "مثال کی تقسیم کو فعال کریں۔",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 ماڈل فائل کا راستہ (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Google کے Gemini AI کا استعمال کرتے ہوئے آپ کے سمارٹ سسٹم کے لیے قدرتی زبان کے کنٹرول کو فعال کرتا ہے۔ اس خصوصیت کو چالو کرنے کے لیے، ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://aistudio.google.com/app/apikey پر دی گئی ہدایات پر عمل کریں۔",
       "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
       "ConfigureOptions.ModelId": "ماڈل ID"
+    },
+    "931": {
+      "Title": "جیمنی ویجیٹ جنی",
+      "Description": "ویجیٹ تخلیق کے لیے آپ کا ذاتی AI جنن۔ Gemini کے ذریعے تقویت یافتہ، یہ آپ کو HTML، CSS، اور JavaScript کوڈ کو براہ راست HomeGenie ایڈیٹر میں لکھنے اور ڈیبگ کرنے میں مدد کرتا ہے۔ اس خصوصیت کو چالو کرنے کے لیے، ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://aistudio.google.com/app/apikey پر دی گئی ہدایات پر عمل کریں۔",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
+      "ConfigureOptions.ModelId": "ماڈل ID"
+    },
+    "940": {
+      "Title": "مقامی AI (LLM)",
+      "Description": "اپنے HomeGenie سرور پر مقامی طور پر ایک بڑی زبان کا ماڈل (LLM) چلائیں۔ ان ماڈلز کو Hugging Face جیسے پلیٹ فارم سے مفت میں ڈاؤن لوڈ کیا جا سکتا ہے۔ بس ایک GGUF فارمیٹ ماڈل فائل کا راستہ فراہم کریں۔ براہ کرم نوٹ کریں کہ مختلف ماڈلز کے ساتھ مکمل مطابقت کو یقینی بنانے کے لیے بنیادی طور پر سیاق و سباق کے کوڈ میں پیرامیٹرز میں ایڈجسٹمنٹ کی ضرورت پڑ سکتی ہے۔",
+      "ConfigureOptions.MaxTokens": "زیادہ سے زیادہ ٹوکنز (جواب کی لمبائی)",
+      "ConfigureOptions.ModelPath": "مقامی GGUF فائل کا راستہ"
     }
   }
 }

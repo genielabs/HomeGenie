@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Вклучено",
   "scheduler_preset_action_config_mode_off": "Исклучено",
   "scheduler_preset_action_config_mode_heat": "Топлина",
-  "scheduler_preset_action_config_mode_heat_eco": "Економичност на топлина",
+  "scheduler_preset_action_config_mode_heat_eco": "Економија на топлина",
   "scheduler_preset_action_config_mode_cool": "Кул",
-  "scheduler_preset_action_config_mode_cool_eco": "Кул економичен",
+  "scheduler_preset_action_config_mode_cool_eco": "Кул Економија",
+  "scheduler_preset_action_command_remote_control": "Далечински управувач (испраќање IR/RF кодови)",
+  "scheduler_preset_action_config_data": "Податоци",
   "scheduler_preset_action_program_run": "Стартувај програма",
   "scheduler_preset_action_config_program": "Програма",
   "scheduler_preset_action_config_options": "Опции",
   "scheduler_preset_action_program_say": "Кажи",
+  "scheduler_preset_action_net_http_call": "Јавете се на веб-услуга",
+  "scheduler_preset_action_config_url": "Адреса (URL)",
+  "scheduler_preset_action_pause": "Пауза",
+  "scheduler_preset_action_config_seconds": "Секунди",
   "scheduler_preset_action_config_message": "Порака",
   "save_and_build": "Зачувај и изгради",
   "toggle_widgets_preview": "Вклучи/исклучи преглед на виџети",
@@ -120,7 +126,7 @@
   "automation_programming_guide": "Водич за програмирање",
   "tap_to_disable": "Кликнете за да оневозможите",
   "tap_to_enable": "Кликнете за да овозможите",
-  "program_data": "Податоци за програмата",
+  "program_data": "Податоци од програмата",
   "visual_code": "Визуелен код",
   "generated_code": "Генериран код",
   "setup_code": "Поставување",
@@ -137,7 +143,7 @@
     "16": {
       "Title": "Меморија на ниво",
       "Description": "Зачувајте го и повикајте го последното ниво на затемнување.",
-      "HomeGenie.LevelMemory": "Потсетете се на последното ниво на светлина кога е вклучено",
+      "HomeGenie.LevelMemory": "Потсети го последното ниво на светлина кога е вклучено",
       "HomeGenie.LevelMemory.SimulateOnly": "Само симулирај"
     },
     "26": {
@@ -261,7 +267,7 @@
     "142": {
       "Title": "Е-пошта сметка",
       "Description": "Ги зачувува информациите за сметката за е-пошта што ги користат системските програми за испраќање/примање е-пошта.",
-      "ConfigureOptions.Email.Sender": "1. Е-адреса",
+      "ConfigureOptions.Email.Sender": "1. Е-пошта адреса",
       "ConfigureOptions.Email.SmtpServer": "2. Адреса на SMTP серверот",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP корисничко име (опционално)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP лозинка (опционално)",
@@ -306,6 +312,18 @@
       "Description": "Овозможува контрола на природниот јазик за вашиот паметен систем користејќи ја вештачката интелигенција Gemini на Google. За да ја активирате оваа функција, внесете важечки API клуч. Следете ги упатствата на https://aistudio.google.com/app/apikey за да добиете бесплатен API клуч.",
       "ConfigureOptions.ApiKey": "API клуч за Google Gemini AI",
       "ConfigureOptions.ModelId": "ИД на модел"
+    },
+    "931": {
+      "Title": "Виџет Џини на Близнаци",
+      "Description": "Вашиот личен AI џин за креирање виџети. Овозможен од Gemini, ви помага да пишувате и дебагирате HTML, CSS и JavaScript код директно во уредникот HomeGenie. За да ја активирате оваа функција, внесете важечки API клуч. Следете ги упатствата на https://aistudio.google.com/app/apikey за да добиете бесплатен API клуч.",
+      "ConfigureOptions.ApiKey": "API клуч за Google Gemini AI",
+      "ConfigureOptions.ModelId": "ИД на модел"
+    },
+    "940": {
+      "Title": "Локален AI (LLM)",
+      "Description": "Стартувајте го локално Големиот јазичен модел (LLM) на вашиот HomeGenie сервер. Овие модели може да се преземат бесплатно од платформи како Hugging Face. Едноставно наведете ја патеката до датотеката со модел во формат GGUF. Ве молиме имајте предвид дека може да бидат потребни прилагодувања на параметрите, првенствено во рамките на контекстниот код, за да се обезбеди целосна компатибилност со различни модели.",
+      "ConfigureOptions.MaxTokens": "Максимален број на токени (должина на одговор)",
+      "ConfigureOptions.ModelPath": "Патека до локалната GGUF-датотека"
     }
   }
 }

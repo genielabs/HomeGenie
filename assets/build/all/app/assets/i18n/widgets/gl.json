@@ -1,5 +1,5 @@
 {
-  "toggle_long_press_to_reorder_widgets": "Activar/Desactivar premer longamente para reordenar os widgets",
+  "toggle_long_press_to_reorder_widgets": "Activar/Desactivar premer de xeito longo para reordenar os widgets",
   "$alarm_system": {
     "arm_home": "Inicio",
     "arm_away": "Lonxe"
@@ -9,5 +9,11 @@
     "indicators": "Indicadores",
     "lights_control": "Luces",
     "switches_control": "Interruptores"
+  },
+  "$ai_chat": {
+    "title": "Widget de chat de IA",
+    "intro": "Ola! Son o teu asistente local de LLM. En que podo axudarche?",
+    "no_bound_module": "Non hai módulo LLM vinculado. Abre a configuración do widget para vincular un modelo de idioma.",
+    "start_typing_prompt": "Comeza a escribir unha indicación..."
   }
 }

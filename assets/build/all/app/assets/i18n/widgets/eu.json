@@ -9,5 +9,11 @@
     "indicators": "Adierazleak",
     "lights_control": "Argiak",
     "switches_control": "etengailuak"
+  },
+  "$ai_chat": {
+    "title": "AI Txat Widget-a",
+    "intro": "Kaixo! Zure tokiko LLM laguntzailea naiz. Nola lagundu zaitzaket?",
+    "no_bound_module": "Ez dago LLM modulurik lotuta. Mesedez, ireki widgetaren ezarpenak hizkuntza-eredu bat lotzeko.",
+    "start_typing_prompt": "Hasi gonbidapen bat idazten..."
   }
 }

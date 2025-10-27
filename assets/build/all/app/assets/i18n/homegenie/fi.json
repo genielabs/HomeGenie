@@ -34,7 +34,7 @@
   "group_modules": "Tämän ryhmän moduulit",
   "modules": "Moduulit",
   "empty_group": "Tässä ryhmässä ei ole moduuleja.",
-  "scheduler_wizard": "Ajoitustoiminnon ohjattu toiminto",
+  "scheduler_wizard": "Ajoitusavustaja",
   "schedule_event": "Tapahtuma",
   "schedule_type_standard": "Standardi",
   "schedule_type_range": "Ajanjakso",
@@ -81,7 +81,7 @@
   "cronwizard_action_custom_script": "Mukautettu toimintoskripti",
   "cronwizard_action_no_action": "Ei toimintaa",
   "cronwizard_action_schedule_variable_hint": "Käytä <span class=\"notranslate color-primary\">@{{name}}</span> -muuttujaa cron-lausekkeissa tai <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> -muuttujaa automaatio-ohjelmissa viitataksesi tähän tapahtumaan.",
-  "scheduler_preset_action_command_turn_on": "Ota käyttöön",
+  "scheduler_preset_action_command_turn_on": "Käynnistä",
   "scheduler_preset_action_command_turn_off": "Sammuta",
   "scheduler_preset_action_command_set_level": "Aseta taso",
   "scheduler_preset_action_config_level": "Taso",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Lämpötalous",
   "scheduler_preset_action_config_mode_cool": "Viileä",
   "scheduler_preset_action_config_mode_cool_eco": "Viileä talous",
+  "scheduler_preset_action_command_remote_control": "Kaukosäädin (lähetä IR/RF-koodeja)",
+  "scheduler_preset_action_config_data": "Data",
   "scheduler_preset_action_program_run": "Suorita ohjelma",
   "scheduler_preset_action_config_program": "Ohjelmoida",
   "scheduler_preset_action_config_options": "Asetukset",
   "scheduler_preset_action_program_say": "Sanoa",
+  "scheduler_preset_action_net_http_call": "Soita verkkopalveluun",
+  "scheduler_preset_action_config_url": "Osoite (URL)",
+  "scheduler_preset_action_pause": "Tauko",
+  "scheduler_preset_action_config_seconds": "Sekuntia",
   "scheduler_preset_action_config_message": "Viesti",
   "save_and_build": "Tallenna ja rakenna",
   "toggle_widgets_preview": "Näytä/pikaviestimien esikatselu",
@@ -158,7 +164,7 @@
     "77": {
       "Title": "Verkko-MQTT",
       "Description": "Yhdistä MQTT-välittäjään käyttääksesi HomeGenie Panel -sovellusta mistä tahansa internetin kautta tai yhdistääksesi HomeGenie-laitteita samaan MQTT-verkkoon.",
-      "MQTT.SensorPublish": "Julkaise tämän moduulin lähettämät tapahtumat",
+      "MQTT.SensorPublish": "Tämän moduulin lähettämien tapahtumien julkaiseminen",
       "ConfigureOptions.ClientId": "Asiakastunnus",
       "ConfigureOptions.ServerAddress": "Palvelimen osoite",
       "ConfigureOptions.ServerPort": "Palvelimen portti",
@@ -201,7 +207,7 @@
     "90": {
       "Title": "Turvahälytysjärjestelmä",
       "Description": "Käytä antureita ja muita laitteita turvahälytysjärjestelmän toteuttamiseen.",
-      "HomeGenie.SecurityAlarm": "Käytä hälytyksenä/stroboskooppina",
+      "HomeGenie.SecurityAlarm": "Käytä hälytyksenä/vilkkuna",
       "HomeGenie.SecurityTriggerHome": "Laukaisee myös viritettynä Koti",
       "HomeGenie.SecuritySensor": "Käytä turva-anturina",
       "ConfigureOptions.Email.Recipients": "Pilkuilla erotettu luettelo hälytysilmoitusten vastaanottajien sähköpostiosoitteista",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Ohjelma, joka suoritetaan käynnistyessään"
     },
     "95": {
-      "Title": "Tapahtumien kirjaaminen",
+      "Title": "Tapahtumien lokikirjaus",
       "Description": "Tallenna laitteen toiminta.",
       "EventsLogger.EnableLogging": "Ota käyttöön"
     },
     "111": {
-      "Title": "Asiakkaan kokoonpano",
+      "Title": "Asiakkaan konfigurointi",
       "Description": "Toteuttaa API:n asiakkaan määritysprofiilien hallintaan, joita käytetään käyttöliittymän ja kojelaudan asetusten tallentamiseen."
     },
     "400": {
@@ -266,7 +272,7 @@
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP-käyttäjätunnus (valinnainen)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP-salasana (valinnainen)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP-palvelimen portti",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-palvelin käyttää SSL-salausta"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-palvelin käyttää SSL:ää"
     },
     "145": {
       "Title": "Älylaite",
@@ -283,7 +289,7 @@
       "Scenarios.SunriseColors": "Linkki auringonnousun värien skenaarioon"
     },
     "910": {
-      "Title": "Kohteiden tunnistus",
+      "Title": "Kohteen tunnistus",
       "Description": "Tunnista esineitä käyttämällä esikoulutettua YOLO11-mallia.",
       "ML.ObjectDetection": "Ota käyttöön objektien tunnistus",
       "ML.ObjectDetection.TriggerDetect": "Pilkuilla erotettu luettelo asioista (englanniksi), jotka laukaisevat hälytyksen. (esim. kissa, koira, henkilö, reppu, matkalaukku)",
@@ -303,9 +309,21 @@
     },
     "930": {
       "Title": "Gemini-aikeiden käsittelijä",
-      "Description": "Mahdollistaa luonnollisen kielen hallinnan älyjärjestelmässäsi Googlen Gemini-tekoälyn avulla. Aktivoi tämä ominaisuus antamalla kelvollinen API-avain. Saat ilmaisen API-avaimen seuraamalla ohjeita osoitteessa https://aistudio.google.com/app/apikey.",
+      "Description": "Mahdollistaa luonnollisen kielen hallinnan älyjärjestelmässäsi Googlen Gemini-tekoälyn avulla. Aktivoi tämä ominaisuus antamalla kelvollinen API-avain. Saat ilmaisen API-avaimen noudattamalla ohjeita osoitteessa https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI -API-avain",
       "ConfigureOptions.ModelId": "Mallitunnus"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Henkilökohtainen tekoälyhenkesi widgetien luomiseen. Gemini-pohjainen tekoäly auttaa sinua kirjoittamaan ja debugaamaan HTML-, CSS- ja JavaScript-koodia suoraan HomeGenie-editorissa. Aktivoi tämä ominaisuus antamalla kelvollinen API-avain. Saat ilmaisen API-avaimen seuraamalla ohjeita osoitteessa https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI -API-avain",
+      "ConfigureOptions.ModelId": "Mallitunnus"
+    },
+    "940": {
+      "Title": "Paikallinen tekoäly (LLM)",
+      "Description": "Suorita Large Language Model (LLM) paikallisesti HomeGenie-palvelimellasi. Nämä mallit voi ladata ilmaiseksi alustoilta, kuten Hugging Face. Anna vain polku GGUF-muotoiseen mallitiedostoon. Huomaa, että parametrien säätöjä, pääasiassa kontekstikoodissa, voidaan joutua tekemään täyden yhteensopivuuden varmistamiseksi eri mallien kanssa.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (vastauksen pituus)",
+      "ConfigureOptions.ModelPath": "Polku paikalliseen GGUF-tiedostoon"
     }
   }
 }

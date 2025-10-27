@@ -9,5 +9,11 @@
     "indicators": "Indikátorok",
     "lights_control": "Fények",
     "switches_control": "Kapcsolók"
+  },
+  "$ai_chat": {
+    "title": "AI csevegőwidget",
+    "intro": "Üdvözlöm! Én vagyok a helyi LLM asszisztens. Miben segíthetek?",
+    "no_bound_module": "Nincs LLM modulhoz kötve. Nyelvi modell kötéséhez nyissa meg a widget beállításait.",
+    "start_typing_prompt": "Kezdj el gépelni egy promptot..."
   }
 }

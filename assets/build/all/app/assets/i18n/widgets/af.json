@@ -9,5 +9,11 @@
     "indicators": "Aanwysers",
     "lights_control": "Ligte",
     "switches_control": "Skakelaars"
+  },
+  "$ai_chat": {
+    "title": "KI-kletslegstuk",
+    "intro": "Hallo! Ek is jou plaaslike LLM-assistent. Hoe kan ek jou help?",
+    "no_bound_module": "Geen LLM-module gebind nie. Maak asseblief die widget-instellings oop om 'n taalmodel te bind.",
+    "start_typing_prompt": "Begin om 'n aanwysingswoord te tik..."
   }
 }

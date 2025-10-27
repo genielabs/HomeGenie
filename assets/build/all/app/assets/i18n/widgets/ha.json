@@ -9,5 +9,11 @@
     "indicators": "Manuniya",
     "lights_control": "Haske",
     "switches_control": "Sauyawa"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "Sannu! Ni ne mataimaki na LLM na gida. Yaya zan iya taimaka ma ku?",
+    "no_bound_module": "Babu LLM module da aka ɗaure. Da fatan za a buɗe saitunan widget don ɗaure samfurin harshe.",
+    "start_typing_prompt": "Fara buga faɗakarwa..."
   }
 }

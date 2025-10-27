@@ -31,12 +31,12 @@
   "edit_group": "گۇرۇپپا تەھرىرلەش",
   "delete_group": "گۇرۇپپىنى ئۆچۈرۈڭ",
   "dashboard_from_group": "بۇ گۇرۇپپىدىن باشقۇرۇش تاختىسى قۇرۇڭ",
-  "group_modules": "بۇ گۇرۇپپىدىكى بۆلەكلەر",
+  "group_modules": "بۇ گۇرۇپپىدىكى مودۇللار",
   "modules": "Modules",
   "empty_group": "بۇ گۇرۇپپىدا مودۇل يوق.",
   "scheduler_wizard": "پىلانلىغۇچى",
   "schedule_event": "Event",
-  "schedule_type_standard": "ئۆلچەملىك",
+  "schedule_type_standard": "Standard",
   "schedule_type_range": "چېسلا دائىرىسى",
   "schedule_type_cron": "Cron expression",
   "schedule_action": "ھەرىكەت",
@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "<span class=\"notranslate color-primary\">@{{name}}</span> نى cron ئىپادىسىدە ئۆزگەرگۈچى مىقدار قىلىپ ئىشلىتىڭ ياكى ئاپتوماتىك پروگراممىلاردا <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> نى ئىشلىتىپ بۇ پائالىيەتنى ئىشلىتىڭ.",
   "scheduler_preset_action_command_turn_on": "قوزغىتىڭ",
   "scheduler_preset_action_command_turn_off": "تاقاش",
-  "scheduler_preset_action_command_set_level": "سەۋىيە بەلگىلەڭ",
+  "scheduler_preset_action_command_set_level": "دەرىجە بەلگىلەڭ",
   "scheduler_preset_action_config_level": "Level",
   "scheduler_preset_action_command_set_color": "رەڭ بەلگىلەڭ",
   "scheduler_preset_action_config_color": "رەڭ",
-  "scheduler_preset_action_command_thermostat_mode": "Thermostat mode",
+  "scheduler_preset_action_command_thermostat_mode": "Thermostat Mode",
   "scheduler_preset_action_config_mode": "Mode",
   "scheduler_preset_action_config_mode_on": "On",
   "scheduler_preset_action_config_mode_off": "Off",
   "scheduler_preset_action_config_mode_heat": "Heat",
-  "scheduler_preset_action_config_mode_heat_eco": "ئىسسىقلىق ئىقتىسادى",
+  "scheduler_preset_action_config_mode_heat_eco": "Heat Economy",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "سالقىن ئىقتىساد",
+  "scheduler_preset_action_command_remote_control": "يىراقتىن كونترول قىلىش (IR / RF كودى ئەۋەتىش)",
+  "scheduler_preset_action_config_data": "سانلىق مەلۇمات",
   "scheduler_preset_action_program_run": "پروگراممىنى ئىجرا قىلىڭ",
   "scheduler_preset_action_config_program": "پروگرامما",
   "scheduler_preset_action_config_options": "تاللانما",
   "scheduler_preset_action_program_say": "ئېيتقىن",
+  "scheduler_preset_action_net_http_call": "تور مۇلازىمىتىگە تېلېفون قىلىڭ",
+  "scheduler_preset_action_config_url": "ئادرېس (URL)",
+  "scheduler_preset_action_pause": "Pause",
+  "scheduler_preset_action_config_seconds": "سېكۇنت",
   "scheduler_preset_action_config_message": "ئۇچۇر",
   "save_and_build": "ساقلاش ۋە قۇرۇش",
   "toggle_widgets_preview": "كىچىك قوراللارنى ئالدىن كۆرۈش",
@@ -121,7 +127,7 @@
   "tap_to_disable": "چەكلەش ئۈچۈن چېكىڭ",
   "tap_to_enable": "قوزغىتىش ئۈچۈن چېكىڭ",
   "program_data": "پروگرامما سانلىق مەلۇماتلىرى",
-  "visual_code": "كۆرۈنۈش كودى",
+  "visual_code": "Visual Code",
   "generated_code": "ھاسىل قىلىنغان كود",
   "setup_code": "تەڭشەش",
   "main_code": "Main",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "پەقەت تەقلىد قىلىڭ"
     },
     "26": {
-      "Title": "رەڭلىك چىراغ",
+      "Title": "رەڭ چىرىغى",
       "Description": "مىسال Philips Hue HTTP API (V1) ئارقىلىق بىر گەۋدىلەشتۈرۈلگەن. كۆۋرۈككە ئۇلىنىدىغان سۈكۈتتىكى ئىشلەتكۈچى «يېڭى ئاچقۇچى» بولۇپ ، ئۇ ئاللىبۇرۇن قوزغىتىلغان بولۇشى كېرەك.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP ئادرېسى",
       "ConfigureOptions.BridgeUsername": "ئىشلەتكۈچى ئىسمى",
@@ -157,7 +163,7 @@
     },
     "77": {
       "Title": "Network MQTT",
-      "Description": "MQTT ۋاسىتىچىسىگە ئۇلىنىپ ، ئىنتېرنېت ئارقىلىق خالىغان يەردىن HomeGenie Panel دېتالىنى ئىشلىتىڭ ياكى ئوخشاش MQTT تورىدىكى HomeGenie ئۈسكۈنىلىرىنى ئۇلاڭ.",
+      "Description": "MQTT ۋاسىتىچىگە ئۇلىنىپ ، HomeGenie Panel دېتالىنى ئىنتېرنېت ئارقىلىق خالىغان يەردىن ئىشلىتىڭ ياكى ئوخشاش MQTT تورىدىكى HomeGenie ئۈسكۈنىلىرىنى ئۇلاڭ.",
       "MQTT.SensorPublish": "بۇ مودۇل چىقارغان ۋەقەلەرنى ئېلان قىلىڭ",
       "ConfigureOptions.ClientId": "Client Id.",
       "ConfigureOptions.ServerAddress": "مۇلازىمېتىر ئادرېسى",
@@ -191,7 +197,7 @@
     },
     "88": {
       "Title": "ئادەتتىكى IP كامېرا",
-      "Description": "IP كامېراسىدىن كۆرسىتىش / يول رەسىم رەسىمى.",
+      "Description": "IP كامېراسىدىن كۆرسىتىش / لىنىيىلىك رەسىم يەملىرى.",
       "IpCamera.ImageURL": "كامېرا رەسىمى API URL (كامېرا ھۆججىتىڭىزنى كۆرۈڭ)",
       "IpCamera.Username": "ئىشلەتكۈچى ئىسمى (ئىختىيارى)",
       "IpCamera.Password": "پارول (ئىختىيارىي)",
@@ -206,7 +212,7 @@
       "HomeGenie.SecuritySensor": "بىخەتەرلىك سېنزورى سۈپىتىدە ئىشلىتىڭ",
       "ConfigureOptions.Email.Recipients": "پەش ئارقىلىق ئاگاھلاندۇرۇش ئۇقتۇرۇشى تاپشۇرۇۋالغۇچىلارنىڭ ئېلېكترونلۇق خەت ساندۇقى",
       "ConfigureOptions.System.ArmDelay": "قول كېچىكىش (سېكۇنت)",
-      "ConfigureOptions.System.SirenStartTime": "سىرىنس كېچىكىشنى باشلايدۇ (سېكۇنت)",
+      "ConfigureOptions.System.SirenStartTime": "سىرېنس كېچىكىشنى باشلايدۇ (سېكۇنت)",
       "ConfigureOptions.System.SirenMaxTime": "Sirens max Time (سېكۇنت ، 0 = چەكسىز)",
       "ConfigureOptions.Trigger.ArmedProgram": "قوراللانغان ۋاقىتتا ئىجرا قىلىدىغان پروگرامما",
       "ConfigureOptions.Trigger.DisarmedProgram": "قورالسىزلانغان ۋاقىتتا ئىجرا قىلىنىدىغان پروگرامما",
@@ -218,7 +224,7 @@
       "EventsLogger.EnableLogging": "قوزغىتىش"
     },
     "111": {
-      "Title": "خېرىدارلارنىڭ سەپلىمىسى",
+      "Title": "Client Configuration",
       "Description": "UI ۋە باشقۇرۇش تاختىسىنىڭ تەڭشىكىنى ساقلاشقا ئىشلىتىلىدىغان خېرىدارلارنىڭ سەپلىمە ئارخىپىنى باشقۇرۇش ئۈچۈن API نى يولغا قويىدۇ."
     },
     "400": {
@@ -229,18 +235,18 @@
       "Sensor.MotionDetect": "ھەرىكەتنى بايقاش ھالىتى",
       "Status.Battery": "باتارېيە سەۋىيىسى",
       "Sensor.DoorWindow": "ئىشىك / كۆزنەك سېنزور ھالىتى (ئوچۇق / يېپىق)",
-      "Status.Level": "Switch status (on / off)"
+      "Status.Level": "ئالماشتۇرۇش ھالىتى (on / off)"
     },
     "401": {
       "Title": "Demo - ئىشىكنى تاقاش",
-      "Description": "ئىشىك ئىشىك دېرىزىسىنىڭ سېنزورىنىڭ ئىشىكنى ئوچۇق / يېپىق قىلىپ تەقلىد قىلىدۇ."
+      "Description": "ئىشىك ئىشىك دېرىزىسىنىڭ سېنزورىنىڭ ئوچۇق / يېپىقلىقىنى تەقلىد قىلىدۇ."
     },
     "402": {
       "Title": "Demo - ھەرىكەت بايقالدى",
       "Description": "Demo كۆپ سېنزورنىڭ ھەرىكەت بايقاشنى تەقلىد قىلىدۇ."
     },
     "410": {
-      "Title": "سېنزور تەقلىدچىسى",
+      "Title": "Sensor Simulator",
       "Description": "ئىختىيارى سېنزور قىممىتىنى چىقىرىڭ.",
       "Simulator.Sensor.Temperature": "تېمپېراتۇرا سېنزورى",
       "Simulator.Sensor.Humidity": "نەملىك سېنزورى",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "قۇياش نۇرى رەڭگىگە ئۇلىنىش"
     },
     "910": {
-      "Title": "ئوبيېكتنى بايقاش",
+      "Title": "ئوبيېكت بايقاش",
       "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
       "ML.ObjectDetection": "جىسىملارنى بايقاشنى قوزغىتىڭ",
       "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
     },
     "911": {
-      "Title": "Pose estimation",
-      "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLOv11 مودېلى (ئىنسانلارنىڭ قىياپىتىگە ماس كېلىدۇ).",
+      "Title": "Pose Estimation",
+      "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLOv11 مودېلى (ئىنسانلارنىڭ تۇرقىغا خاس).",
       "ML.PoseEstimation": "تۇراقلىق مۆلچەرنى قوزغىتىڭ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
     },
     "912": {
-      "Title": "بۆلەك بۆلۈمى",
+      "Title": "Instance Segmentation",
       "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىم ۋە ئۇلارنىڭ تىزىمىنى ئېنىقلاڭ.",
       "ML.InstanceSegmentation": "ئۈلگە بۆلەكنى قوزغىتىڭ",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "گۇگۇلنىڭ Gemini AI ئارقىلىق ئەقلىي ئىقتىدارلىق سىستېمىڭىزنىڭ تەبىئىي تىل كونترول قىلىشىنى قوزغىتىدۇ. بۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API كۇنۇپكىسىنى كىرگۈزۈڭ. ھەقسىز API ئاچقۇچىغا ئېرىشىش ئۈچۈن https://aistudio.google.com/app/apikey دىكى كۆرسەتمىلەرگە ئەگىشىڭ.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",
       "ConfigureOptions.ModelId": "Model ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "كىچىك قورال ياساش ئۈچۈن شەخسىي سۈنئىي ئەقىل گېنىڭىز. Gemini تەرىپىدىن ئىشلەنگەن ، ئۇ HomeGenie تەھرىرلىگۈچنىڭ ئىچىدە HTML ، CSS ۋە JavaScript كودىنى يېزىش ۋە يېشىشكە ياردەم بېرىدۇ. بۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API كۇنۇپكىسىنى كىرگۈزۈڭ. ھەقسىز API ئاچقۇچىغا ئېرىشىش ئۈچۈن https://aistudio.google.com/app/apikey دىكى كۆرسەتمىلەرگە ئەگىشىڭ.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",
+      "ConfigureOptions.ModelId": "Model ID"
+    },
+    "940": {
+      "Title": "يەرلىك AI (LLM)",
+      "Description": "HomeGenie مۇلازىمېتىرىڭىزدا يەرلىك چوڭ تىل مودېلى (LLM) نى ئىجرا قىلىڭ. بۇ مودېللارنى قۇچاقلاش يۈزى قاتارلىق سۇپىلاردىن ھەقسىز چۈشۈرگىلى بولىدۇ. پەقەت GGUF فورماتى مودېل ھۆججىتىنىڭ يولىنى تەمىنلەڭ. شۇنىڭغا دىققەت قىلىڭكى ، پارامېتىرلارنى تەڭشەش ئاساسلىقى مەزمۇن كودى ئىچىدە بولۇپ ، ئوخشىمىغان تىپلار بىلەن تولۇق ماسلىشىشچانلىقىغا كاپالەتلىك قىلىشى مۇمكىن.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (جاۋاب ئۇزۇنلۇقى)",
+      "ConfigureOptions.ModelPath": "يەرلىك GGUF ھۆججىتىگە يول"
     }
   }
 }

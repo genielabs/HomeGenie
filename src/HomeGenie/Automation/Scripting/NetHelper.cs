@@ -55,6 +55,7 @@ namespace HomeGenie.Automation.Scripting
         private string _webServiceUrl = "";
         private string _method = "post";
         private string _putData = "";
+        private static int _webServiceTimeout = 10;
 
         private string _mailService = "";
         private int _mailPort = -1;
@@ -311,6 +312,17 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
+        /// Sets the WebClient connection timeout. (default is 10 seconds)
+        /// </summary>
+        /// <param name="seconds"></param>
+        /// <returns>NetHelper.</returns>
+        public NetHelper WithTimeout(int seconds)
+        {
+            _webServiceTimeout = seconds;
+            return this;
+        }
+
+        /// <summary>
         /// Sends the specified string data using the PUT method.
         /// </summary>
         /// <param name="data">Data to send.</param>
@@ -529,8 +541,9 @@ namespace HomeGenie.Automation.Scripting
                 //}
                 // WebClient default timeout set to 10 seconds
                 if (webRequest != null)
-                    webRequest.Timeout = 10 * 1000;
-
+                {
+                    webRequest.Timeout = _webServiceTimeout * 1000;
+                }
                 return webRequest;
             }
         }

@@ -1,7 +1,10 @@
+:host {
+    justify-items: center;
+}
 .clock {
     position: relative;
     width: 110px; height: 110px;
-    margin: 24px; padding: 24px;
+    margin: 12px; padding: 24px;
     background-image: url('assets/widgets/analog-clock/clock.png');
     background-size: cover;
 }

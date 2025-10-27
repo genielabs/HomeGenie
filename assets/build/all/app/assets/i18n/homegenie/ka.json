@@ -48,7 +48,7 @@
   "cronwizard_description_to": "რომ",
   "cronwizard_description_starting": "-დან",
   "cronwizard_description_ending": "რომ",
-  "cronwizard_description_at": "ზე",
+  "cronwizard_description_at": "დროს",
   "cronwizard_add_time_slot": "დროის ინტერვალის დამატება",
   "cronwizard_add_exact_time": "ზუსტი დროის დამატება",
   "cronwizard_start_time": "დაწყების დრო",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "სითბოს ეკონომია",
   "scheduler_preset_action_config_mode_cool": "მაგარი",
   "scheduler_preset_action_config_mode_cool_eco": "მაგარი ეკონომიური",
+  "scheduler_preset_action_command_remote_control": "დისტანციური მართვა (ინფრაწითელი/RF კოდების გაგზავნა)",
+  "scheduler_preset_action_config_data": "მონაცემები",
   "scheduler_preset_action_program_run": "პროგრამის გაშვება",
   "scheduler_preset_action_config_program": "პროგრამა",
   "scheduler_preset_action_config_options": "პარამეტრები",
   "scheduler_preset_action_program_say": "თქვი",
+  "scheduler_preset_action_net_http_call": "ვებ სერვისთან დარეკვა",
+  "scheduler_preset_action_config_url": "მისამართი (URL)",
+  "scheduler_preset_action_pause": "პაუზა",
+  "scheduler_preset_action_config_seconds": "წამები",
   "scheduler_preset_action_config_message": "შეტყობინება",
   "save_and_build": "შენახვა და აწყობა",
   "toggle_widgets_preview": "ვიჯეტების გადახედვის გადართვა",
@@ -185,7 +191,7 @@
     },
     "82": {
       "Title": "ენერგიის დაზოგვის რეჟიმი",
-      "Description": "შეინარჩუნეთ განათების დონე კონფიგურირებად პროცენტზე დაბლა.",
+      "Description": "შეინარჩუნეთ განათების დონე კონფიგურირებადი პროცენტული მაჩვენებლის ქვემოთ.",
       "EnergyManagement.EnergySavingLevel": "მაქსიმალური განათების დონე (%)",
       "EnergyManagement.EnergySavingMode": "ჩართვა"
     },
@@ -306,6 +312,18 @@
       "Description": "Google-ის Gemini AI-ის გამოყენებით თქვენი ჭკვიანი სისტემისთვის ბუნებრივი ენის კონტროლს რთავს. ამ ფუნქციის გასააქტიურებლად, შეიყვანეთ მოქმედი API გასაღები. უფასო API გასაღების მისაღებად მიჰყევით ინსტრუქციებს https://aistudio.google.com/app/apikey-ზე.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API გასაღები",
       "ConfigureOptions.ModelId": "მოდელის ID"
+    },
+    "931": {
+      "Title": "ტყუპების ვიჯეტის ჯინი",
+      "Description": "თქვენი პერსონალური ხელოვნური ინტელექტის ჯინი ვიჯეტების შესაქმნელად. Gemini-ს მხარდაჭერით, ის დაგეხმარებათ HTML, CSS და JavaScript კოდის დაწერასა და გამართვაში პირდაპირ HomeGenie რედაქტორში. ამ ფუნქციის გასააქტიურებლად, შეიყვანეთ მოქმედი API გასაღები. მიჰყევით ინსტრუქციებს https://aistudio.google.com/app/apikey-ზე უფასო API გასაღების მისაღებად.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API გასაღები",
+      "ConfigureOptions.ModelId": "მოდელის ID"
+    },
+    "940": {
+      "Title": "ადგილობრივი ხელოვნური ინტელექტი (LLM)",
+      "Description": "გაუშვით დიდი ენის მოდელი (LLM) ლოკალურად თქვენს HomeGenie სერვერზე. ამ მოდელების უფასოდ ჩამოტვირთვა შესაძლებელია ისეთი პლატფორმებიდან, როგორიცაა Hugging Face. უბრალოდ მიუთითეთ GGUF ფორმატის მოდელის ფაილის გზა. გთხოვთ გაითვალისწინოთ, რომ სხვადასხვა მოდელებთან სრული თავსებადობის უზრუნველსაყოფად, შესაძლოა საჭირო გახდეს პარამეტრების კორექტირება, ძირითადად კონტექსტურ კოდში.",
+      "ConfigureOptions.MaxTokens": "მაქსიმალური ჟეტონები (პასუხის სიგრძე)",
+      "ConfigureOptions.ModelPath": "ლოკალური GGUF ფაილისკენ მიმავალი გზა"
     }
   }
 }

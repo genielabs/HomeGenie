@@ -9,5 +9,11 @@
     "indicators": "Rodikliai",
     "lights_control": "Šviesos",
     "switches_control": "Jungikliai"
+  },
+  "$ai_chat": {
+    "title": "Dirbtinio intelekto pokalbių valdiklis",
+    "intro": "Sveiki! Esu jūsų vietinis LLM asistentas. Kuo galiu jums padėti?",
+    "no_bound_module": "Nėra surišto LLM modulio. Norėdami susieti kalbos modelį, atidarykite valdiklio nustatymus.",
+    "start_typing_prompt": "Pradėkite rašyti raginimą..."
   }
 }

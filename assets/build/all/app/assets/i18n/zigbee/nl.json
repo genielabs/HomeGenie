@@ -1,7 +1,7 @@
 {
   "node_inclusion": "Apparaat toevoegen",
   "node_exclusion": "Apparaat verwijderen",
-  "operation_timed_out": "Bewerking is verlopen.",
+  "operation_timed_out": "De bewerking is verlopen.",
   "node_added": "Knooppunt succesvol toegevoegd",
   "turn_on_device_to_add": "Schakel het apparaat in en druk indien nodig 5 seconden op de koppelingsknop",
   "soft_reset_button": "Zachte reset"

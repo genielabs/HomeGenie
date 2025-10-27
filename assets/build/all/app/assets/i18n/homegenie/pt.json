@@ -87,18 +87,24 @@
   "scheduler_preset_action_config_level": "Nível",
   "scheduler_preset_action_command_set_color": "Definir cor",
   "scheduler_preset_action_config_color": "Cor",
-  "scheduler_preset_action_command_thermostat_mode": "Modo termostato",
+  "scheduler_preset_action_command_thermostat_mode": "Modo Termostato",
   "scheduler_preset_action_config_mode": "Modo",
   "scheduler_preset_action_config_mode_on": "Sobre",
   "scheduler_preset_action_config_mode_off": "Desligado",
   "scheduler_preset_action_config_mode_heat": "Aquecer",
-  "scheduler_preset_action_config_mode_heat_eco": "Economia de calor",
+  "scheduler_preset_action_config_mode_heat_eco": "Economia de Calor",
   "scheduler_preset_action_config_mode_cool": "Legal",
-  "scheduler_preset_action_config_mode_cool_eco": "Economia fria",
+  "scheduler_preset_action_config_mode_cool_eco": "Economia Fria",
+  "scheduler_preset_action_command_remote_control": "Controle remoto (envia códigos IR/RF)",
+  "scheduler_preset_action_config_data": "Dados",
   "scheduler_preset_action_program_run": "Executar programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Opções",
   "scheduler_preset_action_program_say": "Dizer",
+  "scheduler_preset_action_net_http_call": "Chamar um serviço da Web",
+  "scheduler_preset_action_config_url": "Endereço (URL)",
+  "scheduler_preset_action_pause": "Pausa",
+  "scheduler_preset_action_config_seconds": "Segundos",
   "scheduler_preset_action_config_message": "Mensagem",
   "save_and_build": "Salvar e construir",
   "toggle_widgets_preview": "Alternar visualização de widgets",
@@ -117,11 +123,11 @@
   "program_status_enabled": "Habilitado",
   "program_status_broken": "Quebrado",
   "program_status_compile": "Compilar",
-  "automation_programming_guide": "Guia de programação'",
+  "automation_programming_guide": "Guia de Programação'",
   "tap_to_disable": "Clique para desabilitar",
   "tap_to_enable": "Clique para habilitar",
   "program_data": "Dados do programa",
-  "visual_code": "Código visual",
+  "visual_code": "Código Visual",
   "generated_code": "Código gerado",
   "setup_code": "Configurar",
   "main_code": "Principal",
@@ -240,7 +246,7 @@
       "Description": "Simula a detecção de movimento do multissensor de demonstração."
     },
     "410": {
-      "Title": "Simulador de sensor",
+      "Title": "Simulador de Sensores",
       "Description": "Emite valores aleatórios do sensor.",
       "Simulator.Sensor.Temperature": "Sensor de temperatura",
       "Simulator.Sensor.Humidity": "Sensor de umidade",
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Segmentação de instância",
+      "Title": "Segmentação de Instância",
       "Description": "Detecte objetos e seus contornos usando um modelo YOLO11 pré-treinado.",
       "ML.InstanceSegmentation": "Habilitar segmentação de instância",
       "ConfigureOptions.Yolo.ModelPath": "Caminho do arquivo do modelo YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Habilita o controle de linguagem natural para seu sistema inteligente usando a IA Gemini do Google. Para ativar este recurso, insira uma chave de API válida. Siga as instruções em https://aistudio.google.com/app/apikey para obter uma chave de API gratuita.",
       "ConfigureOptions.ApiKey": "Chave de API do Google Gemini AI",
       "ConfigureOptions.ModelId": "ID do modelo"
+    },
+    "931": {
+      "Title": "Gênio do widget Gemini",
+      "Description": "Seu gênio da IA pessoal para criação de widgets. Desenvolvido pela Gemini, ele ajuda você a escrever e depurar códigos HTML, CSS e JavaScript diretamente no editor HomeGenie. Para ativar este recurso, insira uma chave de API válida. Siga as instruções em https://aistudio.google.com/app/apikey para obter uma chave de API gratuita.",
+      "ConfigureOptions.ApiKey": "Chave de API do Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID do modelo"
+    },
+    "940": {
+      "Title": "IA local (LLM)",
+      "Description": "Execute um Large Language Model (LLM) localmente no seu servidor HomeGenie. Esses modelos podem ser baixados gratuitamente em plataformas como o Hugging Face. Basta fornecer o caminho para um arquivo de modelo no formato GGUF. Observe que ajustes nos parâmetros, principalmente no Código de Contexto, podem ser necessários para garantir total compatibilidade com diferentes modelos.",
+      "ConfigureOptions.MaxTokens": "Tokens máximos (duração da resposta)",
+      "ConfigureOptions.ModelPath": "Caminho para o arquivo GGUF local"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   " ": "-------------------------------------",
   "welcome_to_homegenie": "HomeGenie-д тавтай морил!",
-  "welcome_subtitle": "Програмчлагдах автоматжуулалтын оюун ухаан",
+  "welcome_subtitle": "програмчлагдсан автоматжуулалтын оюун ухаан",
   "not_configured_yet": "Системийг хараахан тохируулаагүй байна. Энэхүү тохиргооны шидтэн нь хэдхэн алхмаар системээ ажиллуулахад тань туслах болно.",
   "system_config_start_with_base_and_backup": "Нөөц файлаас сэргээх",
   "system_config_start_with_default_setup": "Өгөгдмөл тохиргоо",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "-аас",
   "cronwizard_description_ending": "руу",
   "cronwizard_description_at": "цагт",
-  "cronwizard_add_time_slot": "Цагийн зай нэмнэ үү",
+  "cronwizard_add_time_slot": "Хугацаа нэмэх",
   "cronwizard_add_exact_time": "Тодорхой цагийг нэмнэ үү",
   "cronwizard_start_time": "Эхлэх цаг",
   "cronwizard_end_time": "Дуусах цаг",
@@ -70,7 +70,7 @@
   "cronwizard_monthselect_selectedmonths": "Сонгосон сарууд",
   "cronwizard_schedule_set_exact_time": "Үйл явдлын цагийг тохируулах.",
   "cronwizard_schedule_set_slot_start": "Эхлэх цагийг тохируулна уу.",
-  "cronwizard_schedule_set_slot_end": "{{start}}-аас эхэлнэ.<span class=\"notranslate\"><br/></span> Цагийн төгсгөлийг тохируулна уу.",
+  "cronwizard_schedule_set_slot_end": "{{start}}-с эхэлнэ.<span class=\"notranslate\"><br/></span> Цагийн төгсгөлийг тохируулна уу.",
   "cronwizard_bindings_define_types_and_modules": "Энэ хуваарьт хамаарах төрөл, модулиудыг тодорхойлох (заавал биш)",
   "cronwizard_bindings_select_types": "Төрөлүүдийг сонгоно уу",
   "cronwizard_action_set_action_to_execute": "Энэ үйл явдал тохиолдсон үед гүйцэтгэх үйлдлийг тохируулна уу",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Дулаан",
   "scheduler_preset_action_config_mode_heat_eco": "Дулааны хэмнэлт",
   "scheduler_preset_action_config_mode_cool": "Сайхан байна",
-  "scheduler_preset_action_config_mode_cool_eco": "Сэрүүн эдийн засаг",
+  "scheduler_preset_action_config_mode_cool_eco": "Сайхан эдийн засаг",
+  "scheduler_preset_action_command_remote_control": "Алсын удирдлага (IR/RF код илгээх)",
+  "scheduler_preset_action_config_data": "Өгөгдөл",
   "scheduler_preset_action_program_run": "Програмыг ажиллуулах",
   "scheduler_preset_action_config_program": "Програм",
   "scheduler_preset_action_config_options": "Сонголтууд",
   "scheduler_preset_action_program_say": "Хэлэх",
+  "scheduler_preset_action_net_http_call": "Вэб үйлчилгээ рүү залгаарай",
+  "scheduler_preset_action_config_url": "Хаяг (URL)",
+  "scheduler_preset_action_pause": "Түр зогсоох",
+  "scheduler_preset_action_config_seconds": "Секунд",
   "scheduler_preset_action_config_message": "Мессеж",
   "save_and_build": "Хадгалж, бүтээх",
   "toggle_widgets_preview": "Виджетүүдийг урьдчилан харахыг асаах/унтраах",
@@ -127,7 +133,7 @@
   "main_code": "Үндсэн",
   "context_code": "Контекст",
   "main_code_empty_note": "\"Үндсэн\" код хоосон байна. Энэ кодыг үүсгэхийн тулд \"Visual code\" засварлагчийг ашиглана уу: - Зүүн талд байгаа командын палитраас \"Програм\" гэсэн ангиллыг нээ - Визуал кодын ажлын талбарт \"Үндсэн\" төрлийн блокыг чирнэ үү - Энэ програмын үйлдэл, логикийг хэрэгжүүлэхийн тулд бусад кодын блокуудыг дотор нь нэмнэ үү.",
-  "setup_code_empty_note": "\"Тохиргоо\" код хоосон байна. Энэ кодыг үүсгэхийн тулд \"Visual code\" засварлагчийг ашиглана уу: - Зүүн талд байгаа командын палитраас \"Програм\" гэсэн ангиллыг нээ - Визуал кодын ажлын талбарт \"Тохиргоо\" төрлийн блокыг чирнэ үү - \"Үндсэн\" кодыг гүйцэтгэх нөхцөлийг тодорхойлохын тулд дотор нь бусад кодын блокуудыг нэмнэ. Энэ кодыг шинэ үйл явдал тохиолдох бүрт дор хаяж нэг удаа үнэлдэг.",
+  "setup_code_empty_note": "\"Тохиргоо\" код хоосон байна. Энэ кодыг үүсгэхийн тулд \"Visual code\" засварлагчийг ашиглана уу: - Зүүн талд байгаа командын палитраас \"Програм\" гэсэн категорийг нээ - Визуал кодын ажлын талбарт \"Тохиргоо\" төрлийн блокыг чирнэ үү - \"Үндсэн\" кодыг гүйцэтгэх нөхцөлийг тодорхойлохын тулд дотор нь бусад кодын блокуудыг нэмнэ. Энэ кодыг шинэ үйл явдал тохиолдох бүрт дор хаяж нэг удаа үнэлдэг.",
   "capture_commands": "Зураг авах командууд",
   "capture_commands_description": "Виджет дээр гараар гүйцэтгэсэн бүх командыг програмд нэмнэ үү.",
   "capture_commands_pause": "Командуудын хооронд түр зогсоох",
@@ -136,9 +142,9 @@
   "$options": {
     "16": {
       "Title": "Түвшин санах ой",
-      "Description": "Сүүлийн бүдэгрүүлэгчийн түвшинг хадгалж, эргэн санах.",
+      "Description": "Сүүлийн бүдэгрүүлэгчийн түвшинг хадгалж, эргүүлэн татах.",
       "HomeGenie.LevelMemory": "Асаах үед хамгийн сүүлийн гэрлийн түвшинг эргэн санах",
-      "HomeGenie.LevelMemory.SimulateOnly": "Зөвхөн симуляци хийх"
+      "HomeGenie.LevelMemory.SimulateOnly": "Зөвхөн дуурайлган хийх"
     },
     "26": {
       "Title": "Өнгөт гэрэл",
@@ -156,7 +162,7 @@
       "ConfigureOptions.ApiKey": "OpenWeatherMap API түлхүүр (APPID)"
     },
     "77": {
-      "Title": "MQTT сүлжээ",
+      "Title": "Сүлжээ MQTT",
       "Description": "MQTT брокертой холбогдож HomeGenie Panel програмыг хаанаас ч интернэтээр дамжуулан ашиглах эсвэл HomeGenie төхөөрөмжүүдийг ижил MQTT сүлжээнд холбох боломжтой.",
       "MQTT.SensorPublish": "Энэ модулийн үйл явдлуудыг нийтлэх",
       "ConfigureOptions.ClientId": "Үйлчлүүлэгчийн дугаар.",
@@ -164,7 +170,7 @@
       "ConfigureOptions.ServerPort": "Серверийн порт",
       "ConfigureOptions.Encryption": "Төгсгөл хоорондын шифрлэлтийг идэвхжүүлэх (E2EE)",
       "ConfigureOptions.WebSockets": "WebSockets ашиглах",
-      "ConfigureOptions.TLS": "TLS/SSL-г идэвхжүүл",
+      "ConfigureOptions.TLS": "TLS/SSL-г идэвхжүүлнэ үү",
       "ConfigureOptions.Username": "Хэрэглэгчийн нэр (заавал биш)",
       "ConfigureOptions.Password": "Нууц үг (заавал биш)",
       "ConfigureOptions.ImportExternal": "Гадаад модулиудыг импортлох"
@@ -229,10 +235,10 @@
       "Sensor.MotionDetect": "Хөдөлгөөн илрүүлэх төлөв",
       "Status.Battery": "Батерейны түвшин",
       "Sensor.DoorWindow": "Хаалга/Цонхны мэдрэгчийн төлөв (нээлттэй/хаалттай)",
-      "Status.Level": "Статус сэлгэх (асаах/унтраах)"
+      "Status.Level": "Төлөв сэлгэх (асаах/унтраах)"
     },
     "401": {
-      "Title": "Демо - Хаалга сэлгэх",
+      "Title": "Демо - Хаалгыг асаах/унтраах",
       "Description": "Демо хаалга-цонхны мэдрэгчийг онгойлгож/хаалтыг дуурайлган хийдэг."
     },
     "402": {
@@ -290,7 +296,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 загварын файлын зам (.onnx)"
     },
     "911": {
-      "Title": "Позын үнэлгээ",
+      "Title": "Позын тооцоолол",
       "Description": "Захиалгат ONNX загвар эсвэл өгөгдмөл урьдчилан бэлтгэгдсэн YOLOv11 загвар (хүний поз) ашиглан байрлалын тооцоололоор гол цэгийг илрүүлэх.",
       "ML.PoseEstimation": "Позын тооцооллыг идэвхжүүлэх",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 загварын файлын зам (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Google-ийн Gemini AI ашиглан таны ухаалаг системд байгалийн хэлний хяналтыг идэвхжүүлнэ. Энэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. Үнэгүй API түлхүүр авахын тулд https://aistudio.google.com/app/apikey дээрх зааврыг дагана уу.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",
       "ConfigureOptions.ModelId": "Загварын ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Виджет бүтээхэд зориулсан таны хувийн хиймэл оюун ухаан. Gemini-ээр дэмжигдсэн энэ нь танд HTML, CSS болон JavaScript кодыг HomeGenie засварлагч дотор шууд бичиж, дибаг хийхэд тусална. Энэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. Үнэгүй API түлхүүр авахын тулд https://aistudio.google.com/app/apikey дээрх зааврыг дагана уу.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",
+      "ConfigureOptions.ModelId": "Загварын ID"
+    },
+    "940": {
+      "Title": "Орон нутгийн AI (LLM)",
+      "Description": "Том хэлний загвар (LLM)-г өөрийн HomeGenie сервер дээр ажиллуул. Эдгээр загваруудыг Hugging Face гэх мэт платформоос үнэгүй татаж авах боломжтой. Зүгээр л GGUF форматын загвар файлын замыг зааж өгнө үү. Янз бүрийн загвартай бүрэн нийцтэй байдлыг хангахын тулд үндсэндээ контекст кодын хүрээнд параметрүүдийг тохируулах шаардлагатай болохыг анхаарна уу.",
+      "ConfigureOptions.MaxTokens": "Хамгийн их жетон (хариултын урт)",
+      "ConfigureOptions.ModelPath": "Орон нутгийн GGUF файлын зам"
     }
   }
 }

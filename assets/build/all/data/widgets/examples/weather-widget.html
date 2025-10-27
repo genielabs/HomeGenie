@@ -1,0 +1,31 @@
+<div class="container">
+    <!-- Current Weather Section -->
+    <div class="current-weather">
+        <div class="icon-container">
+            <img class="weather-icon-img" #weather_icon_img src="assets/widgets/weather/images/fill/01d.svg" alt="Weather Icon">
+        </div>
+        <div class="details">
+            <div class="city" #city>Not configured</div>
+            <div class="temperature"><span #temperature>20</span>°</div>
+            <div class="description" #description>Select a bound module</div>
+        </div>
+    </div>
+    <!-- Forecast Section -->
+    <div class="forecast-container">
+        <div class="forecast-day">
+            <div #forecast_1_day>Day 1</div>
+            <img class="forecast-icon-img" #forecast_1_icon_img src="assets/widgets/weather/images/fill/10d.svg" alt="Forecast Icon">
+            <div><strong #forecast_1_temp_max>22</strong>° / <span #forecast_1_temp_min>11</span>°</div>
+        </div>
+        <div class="forecast-day">
+            <div #forecast_2_day>Day 2</div>
+            <img class="forecast-icon-img" #forecast_2_icon_img src="assets/widgets/weather/images/fill/01d.svg" alt="Forecast Icon">
+            <div><strong #forecast_2_temp_max>22</strong>° / <span #forecast_2_temp_min>11</span>°</div>
+        </div>
+        <div class="forecast-day">
+            <div #forecast_3_day>Day 3</div>
+            <img class="forecast-icon-img" #forecast_3_icon_img src="assets/widgets/weather/images/fill/02d.svg" alt="Forecast Icon">
+            <div><strong #forecast_2_temp_max>22</strong>° / <span #forecast_2_temp_min>11</span>°</div>
+        </div>
+    </div>
+</div>

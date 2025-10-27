@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Värme",
   "scheduler_preset_action_config_mode_heat_eco": "Värmeekonomi",
   "scheduler_preset_action_config_mode_cool": "Sval",
-  "scheduler_preset_action_config_mode_cool_eco": "Sval ekonomi",
-  "scheduler_preset_action_program_run": "Kör programmet",
+  "scheduler_preset_action_config_mode_cool_eco": "Cool ekonomi",
+  "scheduler_preset_action_command_remote_control": "Fjärrkontroll (skicka IR/RF-koder)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Kör program",
   "scheduler_preset_action_config_program": "Programmera",
   "scheduler_preset_action_config_options": "Alternativ",
   "scheduler_preset_action_program_say": "Säga",
+  "scheduler_preset_action_net_http_call": "Ring en webbtjänst",
+  "scheduler_preset_action_config_url": "Adress (URL)",
+  "scheduler_preset_action_pause": "Paus",
+  "scheduler_preset_action_config_seconds": "Sekunder",
   "scheduler_preset_action_config_message": "Meddelande",
   "save_and_build": "Spara och bygga",
   "toggle_widgets_preview": "Växla förhandsgranskning av widgetar",
@@ -266,7 +272,7 @@
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP-användarnamn (valfritt)",
       "ConfigureOptions.Email.SmtpPassword": "4. SMTP-lösenord (valfritt)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP-serverport",
-      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-servern använder SSL"
+      "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP-server använder SSL"
     },
     "145": {
       "Title": "Smart enhet",
@@ -306,6 +312,18 @@
       "Description": "Aktiverar naturlig språkkontroll för ditt smarta system med Googles Gemini AI. För att aktivera den här funktionen, ange en giltig API-nyckel. Följ instruktionerna på https://aistudio.google.com/app/apikey för att få en gratis API-nyckel.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nyckel",
       "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Din personliga AI-genie för att skapa widgets. Drivs av Gemini, hjälper den dig att skriva och felsöka HTML-, CSS- och JavaScript-kod direkt i HomeGenie-redigeraren. För att aktivera den här funktionen, ange en giltig API-nyckel. Följ instruktionerna på https://aistudio.google.com/app/apikey för att få en gratis API-nyckel.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-nyckel",
+      "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "940": {
+      "Title": "Lokal AI (juridisk examen)",
+      "Description": "Kör en stor språkmodell (LLM) lokalt på din HomeGenie-server. Dessa modeller kan laddas ner gratis från plattformar som Hugging Face. Ange bara sökvägen till en modellfil i GGUF-format. Observera att justeringar av parametrar, främst inom kontextkoden, kan krävas för att säkerställa full kompatibilitet med olika modeller.",
+      "ConfigureOptions.MaxTokens": "Max antal tokens (svarslängd)",
+      "ConfigureOptions.ModelPath": "Sökväg till lokal GGUF-fil"
     }
   }
 }

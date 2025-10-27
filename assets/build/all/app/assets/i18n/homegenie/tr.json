@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Bu olaya başvurmak için cron ifadelerinde değişken olarak <span class=\"notranslate color-primary\">@{{name}}</span> kullanın veya otomasyon programlarında <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> kullanın.",
   "scheduler_preset_action_command_turn_on": "Aç",
   "scheduler_preset_action_command_turn_off": "Kapamak",
-  "scheduler_preset_action_command_set_level": "Seviyeyi ayarla",
+  "scheduler_preset_action_command_set_level": "Seviye Ayarla",
   "scheduler_preset_action_config_level": "Seviye",
-  "scheduler_preset_action_command_set_color": "Renk ayarla",
+  "scheduler_preset_action_command_set_color": "Renk Ayarla",
   "scheduler_preset_action_config_color": "Renk",
-  "scheduler_preset_action_command_thermostat_mode": "Termostat modu",
+  "scheduler_preset_action_command_thermostat_mode": "Termostat Modu",
   "scheduler_preset_action_config_mode": "Mod",
   "scheduler_preset_action_config_mode_on": "Açık",
   "scheduler_preset_action_config_mode_off": "Kapalı",
   "scheduler_preset_action_config_mode_heat": "Sıcaklık",
-  "scheduler_preset_action_config_mode_heat_eco": "Isı ekonomisi",
+  "scheduler_preset_action_config_mode_heat_eco": "Isı Ekonomisi",
   "scheduler_preset_action_config_mode_cool": "Serin",
-  "scheduler_preset_action_config_mode_cool_eco": "Serin ekonomi",
-  "scheduler_preset_action_program_run": "Programı çalıştır",
+  "scheduler_preset_action_config_mode_cool_eco": "Serin Ekonomi",
+  "scheduler_preset_action_command_remote_control": "Uzaktan Kumanda (IR/RF kodları gönder)",
+  "scheduler_preset_action_config_data": "Veri",
+  "scheduler_preset_action_program_run": "Programı Çalıştır",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Seçenekler",
   "scheduler_preset_action_program_say": "Söylemek",
+  "scheduler_preset_action_net_http_call": "Bir Web Servisini Arayın",
+  "scheduler_preset_action_config_url": "Adres (URL)",
+  "scheduler_preset_action_pause": "Duraklat",
+  "scheduler_preset_action_config_seconds": "Saniyeler",
   "scheduler_preset_action_config_message": "Mesaj",
   "save_and_build": "Kaydet ve oluştur",
   "toggle_widgets_preview": "Widget önizlemesini aç/kapat",
@@ -117,16 +123,16 @@
   "program_status_enabled": "Etkinleştirilmiş",
   "program_status_broken": "Kırık",
   "program_status_compile": "Derle",
-  "automation_programming_guide": "Programlama kılavuzu'",
+  "automation_programming_guide": "Programlama Kılavuzu'",
   "tap_to_disable": "Devre dışı bırakmak için tıklayın",
   "tap_to_enable": "Etkinleştirmek için tıklayın",
-  "program_data": "Program verileri",
-  "visual_code": "Görsel kod",
-  "generated_code": "Oluşturulan kod",
+  "program_data": "Program Verileri",
+  "visual_code": "Görsel Kod",
+  "generated_code": "Oluşturulan Kod",
   "setup_code": "Kurmak",
   "main_code": "Ana",
   "context_code": "Bağlam",
-  "main_code_empty_note": "\"Ana\" kod boş. Bu kodu oluşturmak için \"Görsel kod\" düzenleyicisini kullanın: - Soldaki komut paletinden \"Program\" kategorisini açın - Görsel kod çalışma alanına \"Ana\" türünde bir blok sürükleyin - Bu programın eylemlerini ve mantığını uygulamak için içine başka kod blokları ekleyin \"Ana\" programı, Kurulum kodunda verilen koşullara bağlı olarak manuel olarak veya otomatik olarak çalıştırılabilir.",
+  "main_code_empty_note": "\"Ana\" kodu boş. Bu kodu oluşturmak için \"Görsel kod\" düzenleyicisini kullanın: - Soldaki komut paletinden \"Program\" kategorisini açın - Görsel kod çalışma alanına \"Ana\" türünde bir blok sürükleyin - Bu programın eylemlerini ve mantığını uygulamak için içine başka kod blokları ekleyin \"Ana\" programı, Kurulum kodunda verilen koşullara bağlı olarak manuel olarak veya otomatik olarak çalıştırılabilir.",
   "setup_code_empty_note": "\"Kurulum\" kodu boş. Bu kodu oluşturmak için \"Görsel kod\" düzenleyicisini kullanın: - Soldaki komut paletinden \"Program\" kategorisini açın - Görsel kod çalışma alanına \"Kurulum\" türünde bir blok sürükleyin - \"Ana\" kod yürütülmesini tetikleyecek koşulları belirlemek için içine başka kod blokları ekleyin. Bu kod, her yeni olay gerçekleştiğinde ve en az dakikada bir değerlendirilir.",
   "capture_commands": "Yakalama komutları",
   "capture_commands_description": "Widget'lar üzerinde manuel olarak gerçekleştirilen tüm komutları programa ekleyin.",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Sadece simüle et"
     },
     "26": {
-      "Title": "Renkli ışıklar",
+      "Title": "Renkli Işıklar",
       "Description": "HTTP API (V1) kullanan Philips Hue ışık entegrasyonu örneği. Köprüye bağlanmak için varsayılan kullanıcı \"newdeveloper\"dır ve zaten etkinleştirilmiş olmalıdır.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP adresi",
       "ConfigureOptions.BridgeUsername": "Kullanıcı adı",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Tetiklendiğinde çalıştırılacak program"
     },
     "95": {
-      "Title": "Olay günlüğü",
+      "Title": "Olay Kaydı",
       "Description": "Cihaz etkinliğini kaydedin.",
       "EventsLogger.EnableLogging": "Olanak vermek"
     },
     "111": {
-      "Title": "İstemci yapılandırması",
+      "Title": "İstemci Yapılandırması",
       "Description": "Kullanıcı arayüzü ve pano ayarlarını depolamak için kullanılan istemci yapılandırma profillerini yönetmek için API uygular."
     },
     "400": {
@@ -240,7 +246,7 @@
       "Description": "Demo çoklu sensörünün hareket algılamasını simüle eder."
     },
     "410": {
-      "Title": "Sensör simülatörü",
+      "Title": "Sensör Simülatörü",
       "Description": "Rastgele sensör değerleri yayınla.",
       "Simulator.Sensor.Temperature": "Sıcaklık sensörü",
       "Simulator.Sensor.Humidity": "Nem sensörü",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Karartma adımı"
     },
     "142": {
-      "Title": "E-posta hesabı",
+      "Title": "E-posta Hesabı",
       "Description": "Sistem programlarının e-posta göndermek/almak için kullandığı e-posta hesap bilgilerini depolar.",
       "ConfigureOptions.Email.Sender": "1. E-posta adresi",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP sunucu adresi",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Sunrise Colors senaryosuna bağlantı"
     },
     "910": {
-      "Title": "Nesne algılama",
+      "Title": "Nesne Algılama",
       "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri tespit edin.",
       "ML.ObjectDetection": "Nesne algılamayı etkinleştir",
       "ML.ObjectDetection.TriggerDetect": "Alarmı tetikleyecek şeylerin (İngilizce) virgülle ayrılmış listesi. (örneğin: kedi, köpek, kişi, sırt çantası, bavul)",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
     },
     "911": {
-      "Title": "Poz tahmini",
+      "Title": "Poz Tahmini",
       "Description": "Özel ONNX modelleri veya varsayılan önceden eğitilmiş YOLOv11 modeli (insan duruşuna özgü) kullanılarak poz tahmini yoluyla anahtar nokta tespiti.",
       "ML.PoseEstimation": "Poz tahminini etkinleştir",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
     },
     "912": {
-      "Title": "Örnek segmentasyonu",
+      "Title": "Örnek Segmentasyonu",
       "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri ve onların ana hatlarını tespit edin.",
       "ML.InstanceSegmentation": "Örnek segmentasyonunu etkinleştir",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
@@ -306,6 +312,18 @@
       "Description": "Google'ın Gemini AI teknolojisini kullanarak akıllı sisteminiz için doğal dil kontrolünü etkinleştirir. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
       "ConfigureOptions.ModelId": "Model Kimliği"
+    },
+    "931": {
+      "Title": "İkizler Widget Cin'i",
+      "Description": "Widget oluşturmanız için kişisel yapay zeka cininiz. Gemini destekli bu özellik, HTML, CSS ve JavaScript kodlarını doğrudan HomeGenie düzenleyicisinde yazmanıza ve hata ayıklamanıza yardımcı olur. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
+      "ConfigureOptions.ModelId": "Model Kimliği"
+    },
+    "940": {
+      "Title": "Yerel Yapay Zeka (LLM)",
+      "Description": "HomeGenie sunucunuzda yerel olarak bir Büyük Dil Modeli (LLM) çalıştırın. Bu modeller, Hugging Face gibi platformlardan ücretsiz olarak indirilebilir. GGUF biçimli bir model dosyasının yolunu belirtmeniz yeterlidir. Farklı modellerle tam uyumluluğu sağlamak için, özellikle Bağlam Kodu içindeki parametrelerde ayarlamalar gerekebileceğini lütfen unutmayın.",
+      "ConfigureOptions.MaxTokens": "Maksimum Jeton (yanıt uzunluğu)",
+      "ConfigureOptions.ModelPath": "Yerel GGUF dosyasına giden yol"
     }
   }
 }

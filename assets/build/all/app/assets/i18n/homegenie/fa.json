@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "روشن",
   "scheduler_preset_action_config_mode_off": "خاموش",
   "scheduler_preset_action_config_mode_heat": "گرما",
-  "scheduler_preset_action_config_mode_heat_eco": "صرفه جویی در گرما",
+  "scheduler_preset_action_config_mode_heat_eco": "اقتصاد حرارتی",
   "scheduler_preset_action_config_mode_cool": "باحال",
   "scheduler_preset_action_config_mode_cool_eco": "اقتصاد عالی",
+  "scheduler_preset_action_command_remote_control": "کنترل از راه دور (ارسال کدهای IR/RF)",
+  "scheduler_preset_action_config_data": "داده‌ها",
   "scheduler_preset_action_program_run": "اجرای برنامه",
   "scheduler_preset_action_config_program": "برنامه",
   "scheduler_preset_action_config_options": "گزینه‌ها",
   "scheduler_preset_action_program_say": "بگو",
+  "scheduler_preset_action_net_http_call": "فراخوانی یک سرویس وب",
+  "scheduler_preset_action_config_url": "آدرس (URL)",
+  "scheduler_preset_action_pause": "مکث",
+  "scheduler_preset_action_config_seconds": "ثانیه‌ها",
   "scheduler_preset_action_config_message": "پیام",
   "save_and_build": "ذخیره و ساخت",
   "toggle_widgets_preview": "پیش‌نمایش ابزارک‌ها را تغییر دهید",
@@ -121,7 +127,7 @@
   "tap_to_disable": "برای غیرفعال کردن کلیک کنید",
   "tap_to_enable": "برای فعال کردن کلیک کنید",
   "program_data": "داده‌های برنامه",
-  "visual_code": "کد تصویری",
+  "visual_code": "کد ویژوال",
   "generated_code": "کد تولید شده",
   "setup_code": "راه‌اندازی",
   "main_code": "اصلی",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "برنامه‌ای که هنگام فعال شدن اجرا می‌شود"
     },
     "95": {
-      "Title": "ثبت وقایع",
+      "Title": "ثبت رویدادها",
       "Description": "فعالیت دستگاه را ثبت کنید.",
       "EventsLogger.EnableLogging": "فعال کردن"
     },
@@ -306,6 +312,18 @@
       "Description": "کنترل زبان طبیعی را برای سیستم هوشمند شما با استفاده از هوش مصنوعی Gemini گوگل فعال می‌کند. برای فعال کردن این ویژگی، یک کلید API معتبر وارد کنید. برای دریافت یک کلید API رایگان، دستورالعمل‌های موجود در https://aistudio.google.com/app/apikey را دنبال کنید.",
       "ConfigureOptions.ApiKey": "کلید API هوش مصنوعی گوگل جمینی",
       "ConfigureOptions.ModelId": "شناسه مدل"
+    },
+    "931": {
+      "Title": "ویجت جمینی جنی",
+      "Description": "هوش مصنوعی شخصی شما برای ساخت ویجت. این ابزار که توسط Gemini پشتیبانی می‌شود، به شما کمک می‌کند تا کدهای HTML، CSS و جاوا اسکریپت را مستقیماً در ویرایشگر HomeGenie بنویسید و اشکال‌زدایی کنید. برای فعال کردن این ویژگی، یک کلید API معتبر وارد کنید. برای دریافت یک کلید API رایگان، دستورالعمل‌های https://aistudio.google.com/app/apikey را دنبال کنید.",
+      "ConfigureOptions.ApiKey": "کلید API هوش مصنوعی گوگل جمینی",
+      "ConfigureOptions.ModelId": "شناسه مدل"
+    },
+    "940": {
+      "Title": "هوش مصنوعی محلی (LLM)",
+      "Description": "یک مدل زبان بزرگ (LLM) را به صورت محلی روی سرور HomeGenie خود اجرا کنید. این مدل‌ها را می‌توان به صورت رایگان از پلتفرم‌هایی مانند Hugging Face دانلود کرد. کافیست مسیر فایل مدل با فرمت GGUF را ارائه دهید. لطفاً توجه داشته باشید که ممکن است برای اطمینان از سازگاری کامل با مدل‌های مختلف، تنظیماتی در پارامترها، عمدتاً در داخل کد زمینه، لازم باشد.",
+      "ConfigureOptions.MaxTokens": "حداکثر توکن‌ها (طول پاسخ)",
+      "ConfigureOptions.ModelPath": "مسیر فایل محلی GGUF"
     }
   }
 }

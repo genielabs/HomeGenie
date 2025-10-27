@@ -71,7 +71,7 @@
   "cronwizard_schedule_set_exact_time": "Gosod amser y digwyddiad.",
   "cronwizard_schedule_set_slot_start": "Gosod dechrau'r slot amser.",
   "cronwizard_schedule_set_slot_end": "Gan ddechrau yn {{start}}.<span class=\"notranslate\"><br/></span> Gosod diwedd y slot amser.",
-  "cronwizard_bindings_define_types_and_modules": "Diffinio mathau a modiwlau sy'n ddarostyngedig i'r amserlen hon (dewisol)",
+  "cronwizard_bindings_define_types_and_modules": "Diffinio mathau a modiwlau sy'n ddarostyngedig i'r atodlen hon (dewisol)",
   "cronwizard_bindings_select_types": "Dewiswch fathau",
   "cronwizard_action_set_action_to_execute": "Gosod gweithred i'w gweithredu pan fydd y digwyddiad hwn yn digwydd",
   "cronwizard_action_preset_actions": "Camau gweithredu rhagosodedig",
@@ -81,24 +81,30 @@
   "cronwizard_action_custom_script": "Sgript gweithredu personol",
   "cronwizard_action_no_action": "Dim gweithredu",
   "cronwizard_action_schedule_variable_hint": "Defnyddiwch <span class=\"notranslate color-primary\">@{{name}}</span> fel newidyn mewn mynegiadau cron neu defnyddiwch <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> mewn rhaglenni awtomeiddio i gyfeirio at y digwyddiad hwn.",
-  "scheduler_preset_action_command_turn_on": "Troi ymlaen",
+  "scheduler_preset_action_command_turn_on": "Troi Ymlaen",
   "scheduler_preset_action_command_turn_off": "Diffoddwch",
-  "scheduler_preset_action_command_set_level": "Gosod lefel",
+  "scheduler_preset_action_command_set_level": "Gosod Lefel",
   "scheduler_preset_action_config_level": "Lefel",
-  "scheduler_preset_action_command_set_color": "Gosod lliw",
+  "scheduler_preset_action_command_set_color": "Gosod Lliw",
   "scheduler_preset_action_config_color": "Lliw",
-  "scheduler_preset_action_command_thermostat_mode": "Modd thermostat",
+  "scheduler_preset_action_command_thermostat_mode": "Modd Thermostat",
   "scheduler_preset_action_config_mode": "Modd",
   "scheduler_preset_action_config_mode_on": "Ymlaen",
   "scheduler_preset_action_config_mode_off": "I ffwrdd",
   "scheduler_preset_action_config_mode_heat": "Gwres",
-  "scheduler_preset_action_config_mode_heat_eco": "Economi gwres",
+  "scheduler_preset_action_config_mode_heat_eco": "Economi Gwres",
   "scheduler_preset_action_config_mode_cool": "Oer",
-  "scheduler_preset_action_config_mode_cool_eco": "Economi oer",
-  "scheduler_preset_action_program_run": "Rhedeg rhaglen",
+  "scheduler_preset_action_config_mode_cool_eco": "Economi Oer",
+  "scheduler_preset_action_command_remote_control": "Rheolydd o Bell (anfon codau IR/RF)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Rhedeg Rhaglen",
   "scheduler_preset_action_config_program": "Rhaglen",
   "scheduler_preset_action_config_options": "Dewisiadau",
   "scheduler_preset_action_program_say": "Dywedwch",
+  "scheduler_preset_action_net_http_call": "Ffoniwch Wasanaeth Gwe",
+  "scheduler_preset_action_config_url": "Cyfeiriad (URL)",
+  "scheduler_preset_action_pause": "Oedi",
+  "scheduler_preset_action_config_seconds": "Eiliadau",
   "scheduler_preset_action_config_message": "Neges",
   "save_and_build": "Arbed ac adeiladu",
   "toggle_widgets_preview": "Togglo rhagolwg teclynnau",
@@ -117,12 +123,12 @@
   "program_status_enabled": "Wedi'i alluogi",
   "program_status_broken": "Wedi torri",
   "program_status_compile": "Llunio",
-  "automation_programming_guide": "Canllaw rhaglennu",
+  "automation_programming_guide": "Canllaw Rhaglennu",
   "tap_to_disable": "Cliciwch i analluogi",
   "tap_to_enable": "Cliciwch i alluogi",
-  "program_data": "Data'r rhaglen",
-  "visual_code": "Cod gweledol",
-  "generated_code": "Cod a gynhyrchwyd",
+  "program_data": "Data'r Rhaglen",
+  "visual_code": "Cod Gweledol",
+  "generated_code": "Cod a Gynhyrchwyd",
   "setup_code": "Gosod",
   "main_code": "Prif",
   "context_code": "Cyd-destun",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Efelychu yn unig"
     },
     "26": {
-      "Title": "Goleuadau lliw",
+      "Title": "Goleuadau Lliw",
       "Description": "Enghraifft o integreiddio goleuadau Philips Hue gan ddefnyddio API HTTP (V1). Y defnyddiwr diofyn i gysylltu â'r bont yw \"newdeveloper\" a dylai fod wedi'i alluogi eisoes.",
       "ConfigureOptions.BridgeAddress": "Cyfeiriad IP Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Enw defnyddiwr",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Rhaglen i redeg pan gaiff ei sbarduno"
     },
     "95": {
-      "Title": "Cofnodi digwyddiadau",
+      "Title": "Cofnodi Digwyddiadau",
       "Description": "Cofnodi gweithgaredd dyfais.",
       "EventsLogger.EnableLogging": "Galluogi"
     },
     "111": {
-      "Title": "Ffurfweddiad cleient",
+      "Title": "Ffurfweddiad y Cleient",
       "Description": "Yn gweithredu API ar gyfer rheoli proffiliau ffurfweddu cleientiaid a ddefnyddir i storio gosodiadau UI a dangosfyrddau."
     },
     "400": {
@@ -240,7 +246,7 @@
       "Description": "Yn efelychu canfod symudiad aml-synhwyrydd demo."
     },
     "410": {
-      "Title": "Efelychydd synhwyrydd",
+      "Title": "Efelychydd Synhwyrydd",
       "Description": "Allyrru gwerthoedd synhwyrydd ar hap.",
       "Simulator.Sensor.Temperature": "Synhwyrydd tymheredd",
       "Simulator.Sensor.Humidity": "Synhwyrydd lleithder",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Cam pylu"
     },
     "142": {
-      "Title": "Cyfrif e-bost",
+      "Title": "Cyfrif E-bost",
       "Description": "Yn storio gwybodaeth cyfrif e-bost a ddefnyddir gan raglenni system ar gyfer anfon/derbyn negeseuon e-bost.",
       "ConfigureOptions.Email.Sender": "1. Cyfeiriad e-bost",
       "ConfigureOptions.Email.SmtpServer": "2. Cyfeiriad gweinydd SMTP",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Dolen i'r senario Lliwiau'r Haul"
     },
     "910": {
-      "Title": "Canfod gwrthrychau",
+      "Title": "Canfod Gwrthrychau",
       "Description": "Canfod gwrthrychau gan ddefnyddio model YOLO11 sydd wedi'i hyfforddi ymlaen llaw.",
       "ML.ObjectDetection": "Galluogi canfod gwrthrychau",
       "ML.ObjectDetection.TriggerDetect": "Rhestr o bethau (yn Saesneg) a fydd yn sbarduno'r larwm, wedi'u gwahanu gan goma. (e.e.: cath, ci, person, sach gefn, cês dillad)",
       "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Amcangyfrif ystum",
+      "Title": "Amcangyfrif Ystum",
       "Description": "Canfod pwyntiau allweddol trwy amcangyfrif ystum, gan ddefnyddio modelau ONNX personol neu'r model YOLOv11 wedi'i hyfforddi ymlaen llaw rhagosodedig (penodol i ystum dynol).",
       "ML.PoseEstimation": "Galluogi amcangyfrif ystum",
       "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Segmentu enghreifftiau",
+      "Title": "Segmentu Enghraifft",
       "Description": "Canfod gwrthrychau a'u hamlinelliadau gan ddefnyddio model YOLO11 sydd wedi'i hyfforddi ymlaen llaw.",
       "ML.InstanceSegmentation": "Galluogi segmentu enghreifftiau",
       "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Yn galluogi rheolaeth iaith naturiol ar gyfer eich system glyfar gan ddefnyddio Gemini AI Google. I actifadu'r nodwedd hon, nodwch allwedd API ddilys. Dilynwch y cyfarwyddiadau yn https://aistudio.google.com/app/apikey i gael allwedd API am ddim.",
       "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Model"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Eich genie AI personol ar gyfer creu teclynnau. Wedi'i bweru gan Gemini, mae'n eich helpu i ysgrifennu a dadfygio cod HTML, CSS, a JavaScript yn uniongyrchol o fewn golygydd HomeGenie. I actifadu'r nodwedd hon, nodwch allwedd API ddilys. Dilynwch y cyfarwyddiadau yn https://aistudio.google.com/app/apikey i gael allwedd API am ddim.",
+      "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Model"
+    },
+    "940": {
+      "Title": "Deallusrwydd Artiffisial Lleol (LLM)",
+      "Description": "Rhedeg Model Iaith Mawr (LLM) yn lleol ar eich gweinydd HomeGenie. Gellir lawrlwytho'r modelau hyn am ddim o lwyfannau fel Hugging Face. Darparwch y llwybr i ffeil model fformat GGUF yn unig. Sylwch y gallai fod angen addasiadau i baramedrau, yn bennaf o fewn y Cod Cyd-destun, i sicrhau cydnawsedd llawn â gwahanol fodelau.",
+      "ConfigureOptions.MaxTokens": "Uchafswm Tocynnau (hyd ymateb)",
+      "ConfigureOptions.ModelPath": "Llwybr i'r ffeil GGUF leol"
     }
   }
 }

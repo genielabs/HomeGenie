@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "د کرون اظهاراتو کې د متغیر په توګه <span class=\"notranslate color-primary\">@{{name}}</span> وکاروئ یا د دې پیښې د حوالې لپاره په اتوماتیک پروګرامونو کې <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> وکاروئ.",
   "scheduler_preset_action_command_turn_on": "چالانول",
   "scheduler_preset_action_command_turn_off": "بندول",
-  "scheduler_preset_action_command_set_level": "کچه تنظیم کړئ",
+  "scheduler_preset_action_command_set_level": "کچه وټاکئ",
   "scheduler_preset_action_config_level": "کچه",
   "scheduler_preset_action_command_set_color": "رنګ تنظیم کړئ",
   "scheduler_preset_action_config_color": "رنګ",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "د تودوخې اقتصاد",
   "scheduler_preset_action_config_mode_cool": "ارام",
   "scheduler_preset_action_config_mode_cool_eco": "سړه اقتصاد",
+  "scheduler_preset_action_command_remote_control": "ریموټ کنټرول (د IR/RF کوډونه واستوئ)",
+  "scheduler_preset_action_config_data": "د معلوماتو د",
   "scheduler_preset_action_program_run": "پروګرام چلول",
   "scheduler_preset_action_config_program": "پروګرام",
   "scheduler_preset_action_config_options": "انتخابونه",
   "scheduler_preset_action_program_say": "ووایه",
+  "scheduler_preset_action_net_http_call": "د ویب خدماتو ته زنګ ووهئ",
+  "scheduler_preset_action_config_url": "پته (URL)",
+  "scheduler_preset_action_pause": "وقفه",
+  "scheduler_preset_action_config_seconds": "ثانیې",
   "scheduler_preset_action_config_message": "پیغام",
   "save_and_build": "خوندي کړئ او جوړ کړئ",
   "toggle_widgets_preview": "د ویجیټونو مخکتنه بدل کړئ",
@@ -117,7 +123,7 @@
   "program_status_enabled": "فعال شوی",
   "program_status_broken": "مات شوی",
   "program_status_compile": "تالیف کول",
-  "automation_programming_guide": "د پروګرام کولو لارښود'",
+  "automation_programming_guide": "د پروګرام کولو لارښود",
   "tap_to_disable": "د غیر فعالولو لپاره کلیک وکړئ",
   "tap_to_enable": "د فعالولو لپاره کلیک وکړئ",
   "program_data": "د پروګرام معلومات",
@@ -127,7 +133,7 @@
   "main_code": "اصلي",
   "context_code": "شرایط",
   "main_code_empty_note": "\"اصلي\" کوډ خالي دی. د دې کوډ د تولید لپاره د \"بصري کوډ\" مدیر وکاروئ: - د کیڼ اړخ د کمانډ پیلټ څخه د \"پروګرام\" کټګورۍ پرانیزئ - د بصري کوډ کاري ځای کې د \"اصلي\" ډول یو بلاک کش کړئ - د دې پروګرام د کړنو او منطق پلي کولو لپاره د کوډ نور بلاکونه دننه اضافه کړئ. پروګرام \"اصلي\" یا په لاسي ډول چلیدلی شي یا په اتوماتيک ډول پیل کیدی شي د شرایطو پراساس چې بالاخره د سیټ اپ کوډ کې ورکړل شوي.",
-  "setup_code_empty_note": "د \"سیټ اپ\" کوډ خالي دی. د دې کوډ د تولید لپاره د \"لید کوډ\" ایډیټر وکاروئ: - د کیڼ اړخ د کمانډ پیلټ څخه د \"پروګرام\" کټګورۍ پرانیزئ - د بصري کوډ کاري ځای کې د \"سیټ اپ\" ډول بلاک کش کړئ - د هغې دننه نور کوډ بلاکونه اضافه کړئ ترڅو هغه شرایط وټاکي چې د \"اصلي\" کوډ اجرا به پیل کړي. دا کوډ هرکله چې نوې پیښه رامینځته کیږي او لږترلږه په یوه دقیقه کې یو ځل ارزول کیږي.",
+  "setup_code_empty_note": "د \"سیټ اپ\" کوډ خالي دی. د دې کوډ د تولید لپاره د \"لید کوډ\" ایډیټر وکاروئ: - د کیڼ اړخ د کمانډ پیلټ څخه د \"پروګرام\" کټګورۍ پرانیزئ - د بصري کوډ کاري ځای کې د \"سیټ اپ\" ډول بلاک کش کړئ - د هغې دننه نور کوډ بلاکونه اضافه کړئ ترڅو هغه شرایط مشخص کړئ چې د \"اصلي\" کوډ اجرا به پیل کړي. دا کوډ هرکله چې نوې پیښه رامینځته کیږي او لږترلږه په یوه دقیقه کې یو ځل ارزول کیږي.",
   "capture_commands": "امرونه نیول",
   "capture_commands_description": "ټول هغه حکمونه چې په لاسي ډول په ویجټونو کې ترسره کیږي پروګرام ته اضافه کړئ.",
   "capture_commands_pause": "د امرونو ترمنځ وقفه",
@@ -192,7 +198,7 @@
     "88": {
       "Title": "عمومي IP کیمره",
       "Description": "د آی پي کیمرې څخه د عکس فیډ ښودل/روټ کول.",
-      "IpCamera.ImageURL": "د کیمرې انځور API URL (د خپل کیمرې اسناد وګورئ)",
+      "IpCamera.ImageURL": "د کیمرې انځور API URL (ستاسو د کیمرې اسناد وګورئ)",
       "IpCamera.Username": "کارن نوم (اختیاري)",
       "IpCamera.Password": "پټنوم (اختیاري)",
       "Widget.Config.fps": "په ثانیه کې چوکاټونه",
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
     },
     "912": {
-      "Title": "د نمونې قطع کول",
+      "Title": "د مثال قطع کول",
       "Description": "د مخکې له مخکې روزل شوي YOLO11 ماډل په کارولو سره شیان او د هغوی بڼې کشف کړئ.",
       "ML.InstanceSegmentation": "د مثال قطع کول فعال کړئ",
       "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "د ګوګل د جیمني AI په کارولو سره ستاسو د سمارټ سیسټم لپاره د طبیعي ژبې کنټرول فعالوي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
       "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
       "ConfigureOptions.ModelId": "د ماډل ID"
+    },
+    "931": {
+      "Title": "د جیمني ویجیټ جینی",
+      "Description": "ستاسو شخصي مصنوعي ذهانت جینی د ویجیټ جوړولو لپاره. د جیمیني لخوا پرمخ وړل کیږي، دا تاسو سره د هوم جینی ایډیټر کې مستقیم د HTML، CSS، او جاواسکریپټ کوډ لیکلو او ډیبګ کولو کې مرسته کوي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
+      "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
+      "ConfigureOptions.ModelId": "د ماډل ID"
+    },
+    "940": {
+      "Title": "سیمه ییز مصنوعي ذهانت (LLM)",
+      "Description": "په خپل هوم جیني سرور کې په محلي ډول د لوی ژبې ماډل (LLM) چل کړئ. دا ماډلونه د هګینګ فیس په څیر پلیټ فارمونو څخه وړیا ډاونلوډ کیدی شي. په ساده ډول د GGUF فارمیټ ماډل فایل ته لاره چمتو کړئ. مهرباني وکړئ په یاد ولرئ چې د پیرامیټرو تنظیم کول، په عمده توګه د شرایطو کوډ دننه، ممکن د مختلف ماډلونو سره بشپړ مطابقت ډاډمن کولو لپاره اړین وي.",
+      "ConfigureOptions.MaxTokens": "اعظمي ټوکنونه (د ځواب اوږدوالی)",
+      "ConfigureOptions.ModelPath": "د ځایي GGUF فایل ته لاره"
     }
   }
 }

@@ -9,5 +9,11 @@
     "indicators": "Indikatorer",
     "lights_control": "Lys",
     "switches_control": "Brytere"
+  },
+  "$ai_chat": {
+    "title": "AI-chat-widget",
+    "intro": "Hallo! Jeg er din lokale LLM-assistent. Hvordan kan jeg hjelpe deg?",
+    "no_bound_module": "Ingen LLM-modul bundet. Åpne widgetinnstillingene for å binde en språkmodell.",
+    "start_typing_prompt": "Begynn å skrive en melding..."
   }
 }

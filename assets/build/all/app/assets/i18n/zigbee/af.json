@@ -1,8 +1,8 @@
 {
   "node_inclusion": "Voeg toestel by",
   "node_exclusion": "Verwyder toestel",
-  "operation_timed_out": "Operasie het uitgetel.",
-  "node_added": "Nodus is suksesvol bygevoeg",
-  "turn_on_device_to_add": "Skakel die toestel aan en druk die saambindknoppie vir 5 sekondes indien nodig",
+  "operation_timed_out": "Operasie het 'n tydsverloop gehad.",
+  "node_added": "Node suksesvol bygevoeg",
+  "turn_on_device_to_add": "Skakel die toestel aan en druk die paringsknoppie vir 5 sekondes indien nodig",
   "soft_reset_button": "Sagte herstel"
 }

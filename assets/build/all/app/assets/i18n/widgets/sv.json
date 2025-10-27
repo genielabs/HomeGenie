@@ -9,5 +9,11 @@
     "indicators": "Indikatorer",
     "lights_control": "Ljus",
     "switches_control": "Växlar"
+  },
+  "$ai_chat": {
+    "title": "AI-chattwidget",
+    "intro": "Hej! Jag är din lokala juridikassistent. Hur kan jag hjälpa dig?",
+    "no_bound_module": "Ingen LLM-modul är bunden. Öppna widgetinställningarna för att binda en språkmodell.",
+    "start_typing_prompt": "Börja skriva en prompt..."
   }
 }

@@ -238,8 +238,16 @@ namespace HomeGenie.Automation.Scripting
 #if NETCOREAPP
             var dotNetCoreDir = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
             var homeGenieDir = Path.GetDirectoryName(typeof(HomeGenieService).GetTypeInfo().Assembly.Location);
+
+            var diagnosticOptions = new Dictionary<string, ReportDiagnostic>
+            {
+                { "CS1701", ReportDiagnostic.Suppress }
+            };
+            var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                .WithSpecificDiagnosticOptions(diagnosticOptions);
+
             var compilation = CSharpCompilation.Create("a")
-                .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
+                .WithOptions(compilationOptions)
                 .AddReferences(
 
                     MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
@@ -258,6 +266,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Windows.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Threading.Thread.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Text.RegularExpressions.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
@@ -395,7 +404,8 @@ namespace HomeGenie.Automation.Scripting
                 GenerateExecutable = false,
                 IncludeDebugInformation = true,
                 TreatWarningsAsErrors = false,
-                OutputAssembly = outputDllFile
+                OutputAssembly = outputDllFile,
+                CompilerOptions = "/nowarn:1701"
                 // *** Useful for debugging
                 //,TempFiles = new TempFileCollection {KeepFiles = true}
             };
@@ -481,9 +491,7 @@ namespace HomeGenie.Automation.Scripting
         public static ParseCodeResult ParseCode(string scriptSetup, string scriptSource, string scriptContext)
         {
             var userIncludes = new List<string>();
-            //var scriptContext = "";
             scriptSetup = GetIncludes(scriptSetup, ref userIncludes);
-            //scriptSetup = GetContext(scriptSetup, ref scriptContext);
             scriptContext = GetIncludes(scriptContext, ref userIncludes);
             scriptSource = GetIncludes(scriptSource, ref userIncludes);
             var usingNs = String.Join(" ", Includes.Concat(userIncludes)

@@ -33,7 +33,7 @@
   "dashboard_from_group": "Ushbu guruhdan asboblar paneli yarating",
   "group_modules": "Ushbu guruhdagi modullar",
   "modules": "Modullar",
-  "empty_group": "Bu guruhda modul yoʻq.",
+  "empty_group": "Ushbu guruhda modul yo'q.",
   "scheduler_wizard": "Rejalashtiruvchi usta",
   "schedule_event": "Tadbir",
   "schedule_type_standard": "Standart",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Issiqlik",
   "scheduler_preset_action_config_mode_heat_eco": "Issiqlik tejamkorligi",
   "scheduler_preset_action_config_mode_cool": "Ajoyib",
-  "scheduler_preset_action_config_mode_cool_eco": "Salqin iqtisodiyot",
+  "scheduler_preset_action_config_mode_cool_eco": "Salqin iqtisod",
+  "scheduler_preset_action_command_remote_control": "Masofadan boshqarish pulti (IR/RF kodlarini yuborish)",
+  "scheduler_preset_action_config_data": "Ma'lumotlar",
   "scheduler_preset_action_program_run": "Dasturni ishga tushirish",
   "scheduler_preset_action_config_program": "Dastur",
   "scheduler_preset_action_config_options": "Variantlar",
   "scheduler_preset_action_program_say": "Ayting",
+  "scheduler_preset_action_net_http_call": "Veb-xizmatga qo'ng'iroq qiling",
+  "scheduler_preset_action_config_url": "Manzil (URL)",
+  "scheduler_preset_action_pause": "Pauza",
+  "scheduler_preset_action_config_seconds": "soniyalar",
   "scheduler_preset_action_config_message": "Xabar",
   "save_and_build": "Saqlash va qurish",
   "toggle_widgets_preview": "Vidjetlarni oldindan ko‘rishni yoqish/o‘chirish",
@@ -126,7 +132,7 @@
   "setup_code": "Sozlash; o'rnatish",
   "main_code": "Asosiy",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Asosiy\" kod bo'sh. Ushbu kodni yaratish uchun \"Visual kod\" muharriridan foydalaning: - Chapdagi buyruqlar palitrasidan \"Dastur\" toifasini oching - Vizual kod ish maydoniga \"Asosiy\" turdagi blokni torting - Ushbu dasturning harakatlari va mantig'ini amalga oshirish uchun uning ichiga boshqa kod bloklarini qo'shing \"Asosiy\" dasturi oxir-oqibat O'rnatish kodida berilgan shartlar asosida qo'lda yoki avtomatik ishga tushirilishi mumkin.",
+  "main_code_empty_note": "\"Asosiy\" kod bo'sh. Ushbu kodni yaratish uchun \"Visual kod\" muharriridan foydalaning: - Chapdagi buyruqlar palitrasidan \"Dastur\" toifasini oching - Vizual kodning ish maydoniga \"Asosiy\" turdagi blokni torting - Ushbu dasturning harakatlari va mantiqini amalga oshirish uchun uning ichiga boshqa kod bloklarini qo'shing \"Asosiy\" dasturi oxirida O'rnatish kodida berilgan shartlarga asoslanib qo'lda yoki avtomatik ishga tushirilishi mumkin.",
   "setup_code_empty_note": "\"Sozlash\" kodi bo'sh. Ushbu kodni yaratish uchun \"Visual kod\" muharriridan foydalaning: - Chapdagi buyruqlar palitrasidan \"Dastur\" toifasini oching - Vizual kod ish maydoniga \"Sozlash\" turidagi blokni torting - \"Asosiy\" kodning bajarilishini ishga tushiradigan shartlarni aniqlash uchun uning ichiga boshqa kod bloklarini qo'shing. Ushbu kod har safar yangi hodisa yuz berganda va kamida daqiqada bir marta baholanadi.",
   "capture_commands": "Yozib olish buyruqlari",
   "capture_commands_description": "Vidjetlarda qo'lda bajarilgan barcha buyruqlarni dasturga qo'shing.",
@@ -142,14 +148,14 @@
     },
     "26": {
       "Title": "Rangli chiroqlar",
-      "Description": "HTTP API (V1) yordamida Philips Hue chiroqlari integratsiyasiga misol. Ko'prikka ulanish uchun standart foydalanuvchi \"yangi ishlab chiquvchi\" bo'lib, u allaqachon yoqilgan bo'lishi kerak.",
+      "Description": "Misol uchun, HTTP API (V1) yordamida Philips Hue chiroqlari integratsiyasi. Ko'prikka ulanish uchun standart foydalanuvchi \"yangi dasturchi\" va u allaqachon yoqilgan bo'lishi kerak.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP manzili",
       "ConfigureOptions.BridgeUsername": "Foydalanuvchi nomi",
       "ConfigureOptions.LightsCount": "Chiroqlar soni"
     },
     "34": {
       "Title": "Ob-havo ma'lumoti",
-      "Description": "Ob-havo xaritasi xizmatidan ob-havo va prognoz ma'lumotlari. Ushbu vidjetni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://openweathermap.org/appid manzilidagi ko‘rsatmalarga amal qiling.",
+      "Description": "Ochiq ob-havo xaritasi xizmatidan ob-havo va prognoz ma'lumotlari. Ushbu vidjetni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://openweathermap.org/appid manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.Location": "Shahar nomi",
       "ConfigureOptions.Language": "Til (masalan, EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Yangilash oralig'i (daqiqa)",
@@ -205,10 +211,10 @@
       "HomeGenie.SecurityTriggerHome": "Uy qurollanganda ham ishga tushadi",
       "HomeGenie.SecuritySensor": "Xavfsizlik sensori sifatida foydalaning",
       "ConfigureOptions.Email.Recipients": "Signal bildirishnomalari uchun qabul qiluvchilarning elektron xatlari vergul bilan ajratilgan roʻyxati",
-      "ConfigureOptions.System.ArmDelay": "Qo'lning kechikishi (sekundlar)",
-      "ConfigureOptions.System.SirenStartTime": "Sirenlarni boshlash kechikishi (soniya)",
+      "ConfigureOptions.System.ArmDelay": "Qo'lni kechiktirish (sekundlar)",
+      "ConfigureOptions.System.SirenStartTime": "Sirenlarni ishga tushirish kechikishi (soniya)",
       "ConfigureOptions.System.SirenMaxTime": "Sirenlarning maksimal vaqti (soniyalar, 0 = cheksiz)",
-      "ConfigureOptions.Trigger.ArmedProgram": "Qurollangan holda ishlash uchun dastur",
+      "ConfigureOptions.Trigger.ArmedProgram": "Qurollangan holatda ishlash uchun dastur",
       "ConfigureOptions.Trigger.DisarmedProgram": "Qurolsizlanganda ishga tushadigan dastur",
       "ConfigureOptions.Trigger.TriggeredProgram": "Ishga tushganda ishga tushadigan dastur"
     },
@@ -270,7 +276,7 @@
     },
     "145": {
       "Title": "Aqlli qurilma",
-      "Description": "Harakatni aniqlash va atrof-muhit yorug'ligi asosida qurilmani yoqing/o'chiring.",
+      "Description": "Harakatni aniqlash va atrofdagi yorug'lik asosida qurilmani yoqing/o'chiring.",
       "HomeGenie.SmartLights.Enable": "“Aqlli qurilma”ni yoqish",
       "HomeGenie.SmartLights.OnMotionDetect": "Sensor tomonidan boshqariladi (ixtiyoriy)",
       "HomeGenie.SmartLights.CheckLuminosity": "Yorug'lik sensori tomonidan boshqariladi (ixtiyoriy)",
@@ -279,7 +285,7 @@
     },
     "8": {
       "Title": "Quyosh chiqishi ranglari stsenariysi",
-      "Description": "Rangni o'zgartiruvchi LED yoritgichlar uchun \"Sunrise\" stsenariysi misoli.",
+      "Description": "Rangni o'zgartiruvchi LED chiroqlari uchun \"Sunrise\" stsenariysi misoli.",
       "Scenarios.SunriseColors": "Sunrise Colors stsenariysiga havola"
     },
     "910": {
@@ -290,7 +296,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
     },
     "911": {
-      "Title": "Pozani baholash",
+      "Title": "Pozni baholash",
       "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLOv11 modeli (odamga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
       "ML.PoseEstimation": "Pozni baholashni yoqish",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
@@ -302,10 +308,22 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
     },
     "930": {
-      "Title": "Egizaklar niyati boshqaruvchisi",
+      "Title": "Egizaklar niyatini ishlovchi",
       "Description": "Google Gemini AI yordamida aqlli tizimingiz uchun tabiiy tilni boshqarish imkonini beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
       "ConfigureOptions.ModelId": "Model ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Vidjet yaratish uchun shaxsiy AI jiningiz. Gemini tomonidan quvvatlanadi, u to'g'ridan-to'g'ri HomeGenie muharririda HTML, CSS va JavaScript kodlarini yozish va disk raskadrovka qilishga yordam beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
+      "ConfigureOptions.ModelId": "Model ID"
+    },
+    "940": {
+      "Title": "Mahalliy AI (LLM)",
+      "Description": "HomeGenie serveringizda katta til modelini (LLM) mahalliy sifatida ishga tushiring. Ushbu modellarni Hugging Face kabi platformalardan bepul yuklab olish mumkin. GGUF formatidagi model fayliga yo'lni taqdim etish kifoya. Iltimos, turli modellar bilan to'liq muvofiqlikni ta'minlash uchun birinchi navbatda Kontekst Kodeksi doirasida parametrlarga tuzatishlar kiritish talab qilinishi mumkinligini unutmang.",
+      "ConfigureOptions.MaxTokens": "Maksimal tokenlar (javob uzunligi)",
+      "ConfigureOptions.ModelPath": "Mahalliy GGUF fayliga yo'l"
     }
   }
 }

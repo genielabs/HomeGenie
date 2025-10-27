@@ -1,8 +1,8 @@
 {
-  "node_inclusion": "Ajoute aparèy",
-  "node_exclusion": "Retire aparèy",
-  "operation_timed_out": "Operasyon kwonometre soti.",
-  "node_added": "Siksè te ajoute ne",
-  "turn_on_device_to_add": "Limen aparèy la epi peze bouton kouple a pou 5 segonn si sa nesesè",
-  "soft_reset_button": "Reset mou"
+  "node_inclusion": "Ajoute yon aparèy",
+  "node_exclusion": "Retire aparèy la",
+  "operation_timed_out": "Operasyon an te ekspire.",
+  "node_added": "Nœd ajoute avèk siksè",
+  "turn_on_device_to_add": "Limen aparèy la epi peze bouton koneksyon an pandan 5 segonn si sa nesesè.",
+  "soft_reset_button": "Reyajisteman mou"
 }

@@ -15,39 +15,15 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description>Google Gemini AI API key</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T11:53:45.6200412Z</UpdateTime>
+        <UpdateTime>2025-10-24T16:30:04.2633078Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ModelId</Name>
-        <Value>gemini-2.5-flash-lite</Value>
+        <Value>gemini-flash-latest</Value>
         <Description>Model ID</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T11:53:45.6200482Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Notification</Name>
-        <Value>{"Title":"Gemini Intent Handler","Message":"ERROR #1: Gemini Intent Handler not properly configured. [program_configure]"}</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T21:32:09.0777913Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Background</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T21:32:00.1278176Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Runtime.Error</Name>
-        <Value />
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T21:31:58.9974774Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.9524523Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -55,7 +31,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T21:32:00.1352132Z</UpdateTime>
+        <UpdateTime>2025-10-25T21:12:23.9598154Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -63,7 +39,51 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T21:31:58.6610371Z</UpdateTime>
+        <UpdateTime>2025-10-15T11:28:28.4044508Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Gemini Widget Genie</Name>
+    <Description>Your personal AI genie for widget creation. Powered by Gemini, it helps you write and debug HTML, CSS, and JavaScript code directly within the HomeGenie editor.
+To activate this feature, enter a valid API key.
+Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>931</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ApiKey</Name>
+        <Value>?</Value>
+        <Description>Google Gemini AI API key</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-24T01:08:29.9782108Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ModelId</Name>
+        <Value>gemini-flash-latest</Value>
+        <Description>Model ID</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-24T01:08:29.97856Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>931</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-25T21:12:23.9598264Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-19T23:58:30.551932Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -82,7 +102,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description>Path of YOLO11 model file (.onnx)</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T14:52:36.4909124Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.9107627Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Notification</Name>
@@ -90,7 +110,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T14:52:36.4909991Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.9110696Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -98,7 +118,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:46:53.867411Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:32.5062285Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -114,7 +134,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T11:53:45.6230963Z</UpdateTime>
+        <UpdateTime>2025-10-25T21:12:23.9598022Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -123,6 +143,57 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2025-03-20T10:28:01.2701826Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Lailama</Name>
+    <Description>Run a Large Language Model (LLM) locally on your HomeGenie server. These models can be downloaded for free from platforms like Hugging Face.
+Simply provide the path to a GGUF format model file. Please note that adjustments to parameters, primarily within the Context Code, may be required to ensure full compatibility with different models.</Description>
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>940</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.MaxTokens</Name>
+        <Value>256</Value>
+        <Description>Max Tokens (response length)</Description>
+        <FieldType>slider:64:4096:32</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-25T04:08:58.4408715Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.ModelPath</Name>
+        <Value />
+        <Description>Path to local GGUF file</Description>
+        <FieldType>text</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-25T21:12:23.9529887Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>LLM.TokenStream</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-25T21:12:25.1114925Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>940</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-25T21:12:23.965Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>custom/examples/local-ai-chat</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-10-25T20:16:55.4690219Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -141,7 +212,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description>Path of YOLO11 model file (.onnx)</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T14:52:36.4906315Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.8539348Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Notification</Name>
@@ -149,7 +220,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:46:20.355139Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.8543486Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -157,7 +228,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:46:35.4242993Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:32.5060465Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -173,7 +244,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T11:53:45.6231003Z</UpdateTime>
+        <UpdateTime>2025-10-25T21:12:23.9597835Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -199,7 +270,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description>Path of YOLO11 model file (.onnx)</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T14:52:36.4907296Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.8812947Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Notification</Name>
@@ -207,7 +278,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T14:52:36.490817Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:29.8815576Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
@@ -215,7 +286,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-03-21T16:35:15.2134436Z</UpdateTime>
+        <UpdateTime>2025-10-24T01:08:32.5063424Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
@@ -231,7 +302,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2025-10-06T11:53:45.6231045Z</UpdateTime>
+        <UpdateTime>2025-10-25T21:12:23.9597931Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>

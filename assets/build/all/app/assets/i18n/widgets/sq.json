@@ -9,5 +9,11 @@
     "indicators": "Treguesit",
     "lights_control": "Dritat",
     "switches_control": "Çelësat"
+  },
+  "$ai_chat": {
+    "title": "Widget i bisedës me inteligjencën artificiale",
+    "intro": "Përshëndetje! Unë jam asistenti juaj lokal i LLM. Si mund t'ju ndihmoj?",
+    "no_bound_module": "Nuk ka modul LLM të lidhur. Hap cilësimet e vegël për të lidhur një model gjuhe.",
+    "start_typing_prompt": "Filloni të shkruani një kërkesë..."
   }
 }

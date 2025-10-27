@@ -8,6 +8,12 @@
     "label": "Label",
     "indicators": "Indikator",
     "lights_control": "Lampu",
-    "switches_control": "Saklar"
+    "switches_control": "Sakelar"
+  },
+  "$ai_chat": {
+    "title": "Widget Obrolan AI",
+    "intro": "Halo! Saya asisten LLM lokal Anda. Ada yang bisa saya bantu?",
+    "no_bound_module": "Tidak ada modul LLM yang terikat. Silakan buka pengaturan widget untuk mengikat model bahasa.",
+    "start_typing_prompt": "Mulailah mengetik perintah..."
   }
 }

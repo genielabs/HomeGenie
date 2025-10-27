@@ -9,5 +9,11 @@
     "indicators": "Các chỉ số",
     "lights_control": "Đèn",
     "switches_control": "Công tắc"
+  },
+  "$ai_chat": {
+    "title": "Tiện ích trò chuyện AI",
+    "intro": "Xin chào! Tôi là trợ lý LLM tại địa phương của bạn. Tôi có thể giúp gì cho bạn?",
+    "no_bound_module": "Không có mô-đun LLM nào được liên kết. Vui lòng mở cài đặt tiện ích để liên kết mô hình ngôn ngữ.",
+    "start_typing_prompt": "Bắt đầu nhập lời nhắc..."
   }
 }

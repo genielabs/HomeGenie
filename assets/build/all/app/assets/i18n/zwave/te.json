@@ -8,10 +8,10 @@
   "inclusion_message": "మీరు ఈ నెట్‌వర్క్‌కి జోడించాలనుకుంటున్న పరికరంలోని బటన్‌ను నొక్కండి.",
   "exclusion_message": "మీరు ఈ నెట్‌వర్క్ నుండి తీసివేయాలనుకుంటున్న పరికరంలోని బటన్‌ను నొక్కండి.",
   "task_duration_notice": "ఈ పని పూర్తి కావడానికి <strong>{{timeout}}</strong> సెకన్లు పట్టవచ్చు.",
-  "adding_node": "పరికర <strong class=\"color-accent\">{{node}}</strong> జోడిస్తోంది, దయచేసి వేచి ఉండండి...",
-  "removing_node": "పరికర <strong class=\"color-accent\">{{node}}</strong> తొలగిస్తోంది, దయచేసి వేచి ఉండండి...",
-  "node_added": "పరికర <strong class=\"color-accent\">{{node}}</strong> విజయవంతంగా జోడించబడింది",
-  "node_removed": "పరికర <strong class=\"color-accent\">{{node}}</strong> తీసివేయబడింది",
+  "adding_node": "పరికరం <strong class=\"color-accent\">{{node}} ని</strong> జోడిస్తోంది, దయచేసి వేచి ఉండండి...",
+  "removing_node": "పరికరం <strong class=\"color-accent\">{{node}} ను</strong> తీసివేస్తోంది, దయచేసి వేచి ఉండండి...",
+  "node_added": "పరికరం <strong class=\"color-accent\">{{node}}</strong> విజయవంతంగా జోడించబడింది",
+  "node_removed": "పరికరం <strong class=\"color-accent\">{{node}}</strong> తీసివేయబడింది",
   "node_config": "పరికర కాన్ఫిగరేషన్",
   "brand": "బ్రాండ్",
   "product": "ఉత్పత్తి",
@@ -32,6 +32,6 @@
   "calibration": "క్రమాంకనం",
   "calibrate": "క్రమాంకనం చేయండి",
   "edit_calibration_parameter": "క్రమాంకనం పరామితి సంఖ్యను సవరించండి",
-  "calibration_parameter_not_set": "అమరిక పరామితి సంఖ్య సెట్ చేయబడలేదు",
+  "calibration_parameter_not_set": "అమరిక పరామితి సంఖ్య సెట్ చేయబడలేదు.",
   "calibration_parameter_number": "పరామితి సంఖ్య (పరికర మాన్యువల్ చూడండి)"
 }

@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "热经济性",
   "scheduler_preset_action_config_mode_cool": "凉爽的",
   "scheduler_preset_action_config_mode_cool_eco": "酷经济",
+  "scheduler_preset_action_command_remote_control": "远程控制（发送红外/射频代码）",
+  "scheduler_preset_action_config_data": "数据",
   "scheduler_preset_action_program_run": "运行程序",
   "scheduler_preset_action_config_program": "程序",
   "scheduler_preset_action_config_options": "选项",
   "scheduler_preset_action_program_say": "说",
+  "scheduler_preset_action_net_http_call": "调用 Web 服务",
+  "scheduler_preset_action_config_url": "地址（URL）",
+  "scheduler_preset_action_pause": "暂停",
+  "scheduler_preset_action_config_seconds": "秒",
   "scheduler_preset_action_config_message": "信息",
   "save_and_build": "保存并构建",
   "toggle_widgets_preview": "切换小部件预览",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "仅模拟"
     },
     "26": {
-      "Title": "彩色灯",
+      "Title": "彩色灯光",
       "Description": "使用 HTTP API (V1) 集成飞利浦 Hue 灯光的示例。连接网桥的默认用户是“newdeveloper”，并且该用户应该已启用。",
       "ConfigureOptions.BridgeAddress": "飞利浦 Hue Bridge (V1) IP 地址",
       "ConfigureOptions.BridgeUsername": "用户名",
@@ -192,7 +198,7 @@
     "88": {
       "Title": "通用IP摄像机",
       "Description": "显示/路由来自 IP 摄像机的图像。",
-      "IpCamera.ImageURL": "相机图像 API URL（请参阅您的相机文档）",
+      "IpCamera.ImageURL": "相机图像 API URL（请参阅相机文档）",
       "IpCamera.Username": "用户名（可选）",
       "IpCamera.Password": "密码（可选）",
       "Widget.Config.fps": "每秒帧数",
@@ -306,6 +312,18 @@
       "Description": "使用 Google Gemini AI 为您的智能系统启用自然语言控制。要激活此功能，请输入有效的 API 密钥。请按照 https://aistudio.google.com/app/apikey 上的说明获取免费 API 密钥。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 密钥",
       "ConfigureOptions.ModelId": "模型 ID"
+    },
+    "931": {
+      "Title": "双子座小工具精灵",
+      "Description": "您的专属 AI 小工具，助您轻松创建小工具。它由 Gemini 提供支持，可帮助您直接在 HomeGenie 编辑器中编写和调试 HTML、CSS 和 JavaScript 代码。要激活此功能，请输入有效的 API 密钥。请按照 https://aistudio.google.com/app/apikey 上的说明获取免费的 API 密钥。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API 密钥",
+      "ConfigureOptions.ModelId": "模型 ID"
+    },
+    "940": {
+      "Title": "本地人工智能（法学硕士）",
+      "Description": "在您的 HomeGenie 服务器上本地运行大型语言模型 (LLM)。这些模型可以从 Hugging Face 等平台免费下载。只需提供 GGUF 格式模型文件的路径即可。请注意，可能需要调整参数（主要是上下文代码中的参数），以确保与不同模型完全兼容。",
+      "ConfigureOptions.MaxTokens": "最大令牌（响应长度）",
+      "ConfigureOptions.ModelPath": "本地 GGUF 文件的路径"
     }
   }
 }

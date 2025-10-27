@@ -87,7 +87,7 @@
   "scheduler_preset_action_config_level": "سطح",
   "scheduler_preset_action_command_set_color": "رنگ مقرر ڪريو",
   "scheduler_preset_action_config_color": "رنگ",
-  "scheduler_preset_action_command_thermostat_mode": "ٿرموسٽيٽ موڊ",
+  "scheduler_preset_action_command_thermostat_mode": "ٿرموسٽٽ موڊ",
   "scheduler_preset_action_config_mode": "موڊ",
   "scheduler_preset_action_config_mode_on": "تي",
   "scheduler_preset_action_config_mode_off": "بند",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "گرمي معيشت",
   "scheduler_preset_action_config_mode_cool": "عمده",
   "scheduler_preset_action_config_mode_cool_eco": "ٿڌي معيشت",
+  "scheduler_preset_action_command_remote_control": "ريموٽ ڪنٽرول (IR/RF ڪوڊ موڪليو)",
+  "scheduler_preset_action_config_data": "ڊيٽا",
   "scheduler_preset_action_program_run": "پروگرام هلايو",
   "scheduler_preset_action_config_program": "پروگرام",
   "scheduler_preset_action_config_options": "اختيارن",
   "scheduler_preset_action_program_say": "چئو",
+  "scheduler_preset_action_net_http_call": "ويب سروس کي ڪال ڪريو",
+  "scheduler_preset_action_config_url": "پتو (URL)",
+  "scheduler_preset_action_pause": "روڪيو",
+  "scheduler_preset_action_config_seconds": "سيڪنڊ",
   "scheduler_preset_action_config_message": "پيغام",
   "save_and_build": "محفوظ ڪريو ۽ ٺاهيو",
   "toggle_widgets_preview": "ويجيٽس جي پريويو کي ٽوگل ڪريو",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "صرف نقل ڪريو"
     },
     "26": {
-      "Title": "رنگين بتيون",
+      "Title": "رنگ جون بتيون",
       "Description": "مثال طور، HTTP API (V1) استعمال ڪندي فلپس هيو لائيٽس انٽيگريشن. پل سان ڳنڍڻ لاءِ ڊفالٽ استعمال ڪندڙ \"newdeveloper\" آهي ۽ اهو اڳ ۾ ئي فعال هجڻ گهرجي.",
       "ConfigureOptions.BridgeAddress": "فلپس هيو برج (V1) IP پتو",
       "ConfigureOptions.BridgeUsername": "استعمال ڪندڙ جو نالو",
@@ -240,7 +246,7 @@
       "Description": "ڊيمو ملٽي سينسر جي حرڪت جي سڃاڻپ کي نقل ڪري ٿو."
     },
     "410": {
-      "Title": "سينسر سميوليٽر",
+      "Title": "سينسر سموليٽر",
       "Description": "بي ترتيب سينسر قدرن کي خارج ڪريو.",
       "Simulator.Sensor.Temperature": "گرمي پد سينسر",
       "Simulator.Sensor.Humidity": "نمي سينسر",
@@ -306,6 +312,18 @@
       "Description": "گوگل جي جيميني اي آءِ استعمال ڪندي توهان جي سمارٽ سسٽم لاءِ قدرتي ٻولي ڪنٽرول کي فعال ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",
       "ConfigureOptions.ApiKey": "گوگل جيمنائي اي آءِ API ڪي",
       "ConfigureOptions.ModelId": "ماڊل سڃاڻپ"
+    },
+    "931": {
+      "Title": "جيمينائي ويجيٽ جيني",
+      "Description": "ويجيٽ ٺاهڻ لاءِ توهان جو ذاتي AI جيني. جيميني پاران طاقتور، اهو توهان کي هوم جيني ايڊيٽر اندر سڌو سنئون HTML، CSS، ۽ جاوا اسڪرپٽ ڪوڊ لکڻ ۽ ڊيبگ ڪرڻ ۾ مدد ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",
+      "ConfigureOptions.ApiKey": "گوگل جيمنائي اي آءِ API ڪي",
+      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ"
+    },
+    "940": {
+      "Title": "مقامي AI (LLM)",
+      "Description": "پنهنجي هوم جيني سرور تي مقامي طور تي هڪ وڏي ٻولي ماڊل (LLM) هلايو. اهي ماڊل هگنگ فيس جهڙن پليٽ فارمن تان مفت ۾ ڊائون لوڊ ڪري سگهجن ٿا. بس هڪ GGUF فارميٽ ماڊل فائل جو رستو مهيا ڪريو. مهرباني ڪري نوٽ ڪريو ته مختلف ماڊلز سان مڪمل مطابقت کي يقيني بڻائڻ لاءِ، بنيادي طور تي ڪنٽيڪسٽ ڪوڊ اندر، پيرا ميٽرز ۾ ترتيب ڏيڻ جي ضرورت پئجي سگهي ٿي.",
+      "ConfigureOptions.MaxTokens": "وڌ ۾ وڌ ٽوڪن (جواب جي ڊيگهه)",
+      "ConfigureOptions.ModelPath": "مقامي GGUF فائل جو رستو"
     }
   }
 }

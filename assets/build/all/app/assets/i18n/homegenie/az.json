@@ -2,8 +2,8 @@
   " ": "-------------------------------------",
   "welcome_to_homegenie": "HomeGenie-ə xoş gəlmisiniz!",
   "welcome_subtitle": "Proqramlaşdırıla bilən avtomatlaşdırma kəşfiyyatı",
-  "not_configured_yet": "Sistem hələ konfiqurasiya olunmayıb. Bu quraşdırma ustası sisteminizi bir neçə addımda işə salmaqda sizə kömək edəcək.",
-  "system_config_start_with_base_and_backup": "Yedək faylından bərpa edin",
+  "not_configured_yet": "Sistem hələ konfiqurasiya olunmayıb. Bu quraşdırma ustası bir neçə addımda sisteminizi işə salmaqda sizə kömək edəcək.",
+  "system_config_start_with_base_and_backup": "Yedek fayldan bərpa edin",
   "system_config_start_with_default_setup": "Defolt quraşdırma",
   "system_config_include_demo": "Simulyasiya edilmiş cihaz fəaliyyəti ilə demo əlavə edin",
   "system_config_additional_features": "Əlavə xüsusiyyətlər",
@@ -40,13 +40,13 @@
   "schedule_type_range": "Tarix aralığı",
   "schedule_type_cron": "Cron ifadəsi",
   "schedule_action": "Fəaliyyət",
-  "schedule_occurrence_preview": "Hadisənin önizləməsi",
+  "schedule_occurrence_preview": "Hadisənin ilkin baxışı",
   "time_schedule": "Cədvəl",
   "occurrence": "Baş vermə",
   "cronwizard_description_on": "haqqında",
-  "cronwizard_description_from": "-dən",
+  "cronwizard_description_from": "-dan",
   "cronwizard_description_to": "üçün",
-  "cronwizard_description_starting": "-dən",
+  "cronwizard_description_starting": "-dan",
   "cronwizard_description_ending": "üçün",
   "cronwizard_description_at": "saat",
   "cronwizard_add_time_slot": "Vaxt intervalı əlavə edin",
@@ -54,7 +54,7 @@
   "cronwizard_start_time": "Başlama vaxtı",
   "cronwizard_end_time": "Bitmə vaxtı",
   "cronwizard_minutes": "Dəqiqələr",
-  "cronwizard_hours": "Saat",
+  "cronwizard_hours": "Saatlar",
   "cronwizard_days": "Günlər",
   "cronwizard_months": "aylar",
   "cronwizard_minuteselect_everyminute": "Hər dəqiqə",
@@ -71,7 +71,7 @@
   "cronwizard_schedule_set_exact_time": "Tədbir vaxtını təyin edin.",
   "cronwizard_schedule_set_slot_start": "Başlanğıc vaxt aralığını təyin edin.",
   "cronwizard_schedule_set_slot_end": "{{start}}-dan başlayaraq.<span class=\"notranslate\"><br/></span> Vaxt aralığının sonunu təyin edin.",
-  "cronwizard_bindings_define_types_and_modules": "Bu cədvələ tabe olan növləri və modulları müəyyənləşdirin (isteğe bağlı)",
+  "cronwizard_bindings_define_types_and_modules": "Bu cədvələ tabe olan növləri və modulları müəyyən edin (isteğe bağlı)",
   "cronwizard_bindings_select_types": "Növləri seçin",
   "cronwizard_action_set_action_to_execute": "Bu hadisənin baş verməsinə dair icra etmək üçün fəaliyyət təyin edin",
   "cronwizard_action_preset_actions": "Əvvəlcədən təyin edilmiş hərəkətlər",
@@ -85,20 +85,26 @@
   "scheduler_preset_action_command_turn_off": "Söndürün",
   "scheduler_preset_action_command_set_level": "Səviyyəni təyin edin",
   "scheduler_preset_action_config_level": "Səviyyə",
-  "scheduler_preset_action_command_set_color": "Rəng təyin edin",
+  "scheduler_preset_action_command_set_color": "Rəngi təyin edin",
   "scheduler_preset_action_config_color": "Rəng",
   "scheduler_preset_action_command_thermostat_mode": "Termostat rejimi",
   "scheduler_preset_action_config_mode": "Rejim",
   "scheduler_preset_action_config_mode_on": "Aktiv",
   "scheduler_preset_action_config_mode_off": "Söndür",
   "scheduler_preset_action_config_mode_heat": "İstilik",
-  "scheduler_preset_action_config_mode_heat_eco": "İstilik qənaəti",
+  "scheduler_preset_action_config_mode_heat_eco": "İstilik iqtisadiyyatı",
   "scheduler_preset_action_config_mode_cool": "Sərin",
-  "scheduler_preset_action_config_mode_cool_eco": "Sərin iqtisadiyyat",
+  "scheduler_preset_action_config_mode_cool_eco": "Sərin İqtisadiyyat",
+  "scheduler_preset_action_command_remote_control": "Uzaqdan İdarəetmə (IR/RF kodlarını göndərin)",
+  "scheduler_preset_action_config_data": "Data",
   "scheduler_preset_action_program_run": "Proqramı işə salın",
   "scheduler_preset_action_config_program": "Proqram",
   "scheduler_preset_action_config_options": "Seçimlər",
   "scheduler_preset_action_program_say": "deyin",
+  "scheduler_preset_action_net_http_call": "Veb xidmətinə zəng edin",
+  "scheduler_preset_action_config_url": "Ünvan (URL)",
+  "scheduler_preset_action_pause": "Fasilə",
+  "scheduler_preset_action_config_seconds": "Saniyələr",
   "scheduler_preset_action_config_message": "Mesaj",
   "save_and_build": "Saxla və qurun",
   "toggle_widgets_preview": "Vidcetlərin önizləməsini dəyişin",
@@ -117,17 +123,17 @@
   "program_status_enabled": "Aktivdir",
   "program_status_broken": "Sınıq",
   "program_status_compile": "Tərtib et",
-  "automation_programming_guide": "Proqramlaşdırma bələdçisi'",
+  "automation_programming_guide": "Proqramlaşdırma Bələdçisi'",
   "tap_to_disable": "Deaktiv etmək üçün klikləyin",
   "tap_to_enable": "Aktivləşdirmək üçün klikləyin",
   "program_data": "Proqram məlumatları",
   "visual_code": "Vizual kod",
-  "generated_code": "Yaradılmış kod",
+  "generated_code": "Yaradılmış Kod",
   "setup_code": "Quraşdırma",
   "main_code": "Əsas",
   "context_code": "Kontekst",
   "main_code_empty_note": "\"Əsas\" kod boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Solda yerləşən komandalar palitrasından \"Proqram\" kateqoriyasını açın - Vizual kod iş sahəsində \"Əsas\" tipli bloku sürükləyin - Bu proqramın hərəkətlərini və məntiqini həyata keçirmək üçün içərisinə başqa kod bloklarını əlavə edin \"Əsas\" proqramı nəhayət Quraşdırma kodunda verilmiş şərtlərə əsasən ya əl ilə işlədilə, ya da avtomatik işə sala bilər.",
-  "setup_code_empty_note": "\"Quraşdırma\" kodu boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Sol tərəfdəki komandalar palitrasından \"Proqram\" kateqoriyasını açın - Vizual kodun iş sahəsində \"Setup\" tipli bloku sürükləyin - \"Əsas\" kodun icrasına səbəb olacaq şərtləri müəyyən etmək üçün onun içinə digər kod bloklarını əlavə edin. Bu kod hər dəfə yeni hadisə baş verəndə və ən azı dəqiqədə bir dəfə qiymətləndirilir.",
+  "setup_code_empty_note": "\"Quraşdırma\" kodu boşdur. Bu kodu yaratmaq üçün \"Visual kod\" redaktorundan istifadə edin: - Soldakı əmrlər palitrasından \"Proqram\" kateqoriyasını açın - Vizual kodun iş sahəsində \"Quraşdırma\" tipli bloku sürükləyin - \"Əsas\" kodun icrasına səbəb olacaq şərtləri müəyyən etmək üçün onun içinə digər kod bloklarını əlavə edin. Bu kod hər dəfə yeni hadisə baş verəndə və ən azı dəqiqədə bir dəfə qiymətləndirilir.",
   "capture_commands": "Çəkmə əmrləri",
   "capture_commands_description": "Vidcetlərdə əl ilə yerinə yetirilən bütün əmrləri proqrama əlavə edin.",
   "capture_commands_pause": "Əmrlər arasında fasilə",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Yalnız simulyasiya edin"
     },
     "26": {
-      "Title": "Rəngli işıqlar",
+      "Title": "Rəngli İşıqlar",
       "Description": "HTTP API (V1) istifadə edərək Philips Hue işıqlarının inteqrasiyasına nümunə. Körpüyə qoşulmaq üçün standart istifadəçi \"yeni tərtibatçıdır\" və o, artıq aktivləşdirilməlidir.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP ünvanı",
       "ConfigureOptions.BridgeUsername": "İstifadəçi adı",
@@ -151,7 +157,7 @@
       "Title": "Hava Proqnozu",
       "Description": "Açıq Hava Xəritəsi xidmətindən hava və proqnoz məlumatları. Bu vidceti aktivləşdirmək üçün etibarlı API açarını daxil edin. Pulsuz API açarı əldə etmək üçün https://openweathermap.org/appid ünvanındakı təlimatlara əməl edin.",
       "ConfigureOptions.Location": "Şəhər adı",
-      "ConfigureOptions.Language": "Dil (məsələn, EN, IT, FR, DE, ...)",
+      "ConfigureOptions.Language": "Dil (məs. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "Yeniləmə intervalı (dəqiqə)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API açarı (APPID)"
     },
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Tətikləndikdə işə salınacaq proqram"
     },
     "95": {
-      "Title": "Hadisələrin qeydi",
+      "Title": "Hadisələrin Qeydiyyatı",
       "Description": "Cihaz fəaliyyətini qeyd edin.",
       "EventsLogger.EnableLogging": "Aktivləşdirin"
     },
     "111": {
-      "Title": "Müştəri konfiqurasiyası",
+      "Title": "Müştəri Konfiqurasiyası",
       "Description": "UI və tablosuna parametrləri saxlamaq üçün istifadə edilən müştərinin konfiqurasiya profillərini idarə etmək üçün API tətbiq edir."
     },
     "400": {
@@ -229,7 +235,7 @@
       "Sensor.MotionDetect": "Hərəkət aşkarlama statusu",
       "Status.Battery": "Batareya səviyyəsi",
       "Sensor.DoorWindow": "Qapı/Pəncərə sensorunun vəziyyəti (açıq/qapalı)",
-      "Status.Level": "Vəziyyəti dəyişdirin (yan/söndürün)"
+      "Status.Level": "Vəziyyəti dəyişdirin (açma/söndürmə)"
     },
     "401": {
       "Title": "Demo - Qapını dəyişdirin",
@@ -278,12 +284,12 @@
       "HomeGenie.SmartLights.MinLuminance": "Parlaqlıq aşağıdadırsa, yandırın:"
     },
     "8": {
-      "Title": "Günəşin Doğuş Rəngləri Ssenarisi",
+      "Title": "Günəşin Doğuşu Rəngləri Ssenarisi",
       "Description": "Rəng dəyişdirən LED işıqlar üçün \"Günəşin doğuşu\" ssenarisi nümunəsi.",
       "Scenarios.SunriseColors": "Sunrise Colors ssenarisinə keçid"
     },
     "910": {
-      "Title": "Obyekt aşkarlanması",
+      "Title": "Obyektin aşkarlanması",
       "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri aşkar edin.",
       "ML.ObjectDetection": "Obyektlərin aşkarlanmasını aktivləşdirin",
       "ML.ObjectDetection.TriggerDetect": "Siqnalı işə salacaq şeylərin vergüllə ayrılmış siyahısı (ingilis dilində). (məsələn: pişik, it, adam, kürək çantası, çamadan)",
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
     },
     "912": {
-      "Title": "Nümunələrin seqmentasiyası",
+      "Title": "Nümunə Seqmentasiyası",
       "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri və onların konturlarını aşkar edin.",
       "ML.InstanceSegmentation": "Nümunə seqmentasiyasını aktivləşdirin",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Google-un Gemini AI-dan istifadə edərək ağıllı sisteminiz üçün təbii dil nəzarətini təmin edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatlara əməl edin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
       "ConfigureOptions.ModelId": "Model ID"
+    },
+    "931": {
+      "Title": "Əkizlər Widget Cin",
+      "Description": "Vidcet yaratmaq üçün şəxsi AI cininiz. Əkizlər tərəfindən dəstəklənir, o, HTML, CSS və JavaScript kodunu birbaşa HomeGenie redaktoru daxilində yazmağa və sazlamanıza kömək edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatlara əməl edin.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
+      "ConfigureOptions.ModelId": "Model ID"
+    },
+    "940": {
+      "Title": "Yerli AI (LLM)",
+      "Description": "HomeGenie serverinizdə yerli olaraq Böyük Dil Modelini (LLM) işlədin. Bu modelləri Hugging Face kimi platformalardan pulsuz yükləmək olar. Sadəcə olaraq GGUF formatlı model faylının yolunu təmin edin. Nəzərə alın ki, müxtəlif modellərlə tam uyğunluğu təmin etmək üçün ilk növbədə Kontekst Kodu daxilində parametrlərə düzəlişlər tələb oluna bilər.",
+      "ConfigureOptions.MaxTokens": "Maksimum Tokenlər (cavab uzunluğu)",
+      "ConfigureOptions.ModelPath": "Yerli GGUF faylına yol"
     }
   }
 }

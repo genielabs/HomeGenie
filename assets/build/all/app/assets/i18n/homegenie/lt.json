@@ -5,7 +5,7 @@
   "not_configured_yet": "Sistema dar nesukonfigūruota. Šis sąrankos vedlys padės jums paleisti sistemą vos keliais žingsniais.",
   "system_config_start_with_base_and_backup": "Atkurti iš atsarginės kopijos failo",
   "system_config_start_with_default_setup": "Numatytoji sąranka",
-  "system_config_include_demo": "Įtraukti demonstracinę versiją su imituojamu įrenginio veikimu",
+  "system_config_include_demo": "Įtraukti demonstraciją su imituojamu įrenginio veikimu",
   "system_config_additional_features": "Papildomos funkcijos",
   "system_config_manual_setup": "Rankinis nustatymas",
   "interfaces": "Sąsajos",
@@ -49,7 +49,7 @@
   "cronwizard_description_starting": "iš",
   "cronwizard_description_ending": "į",
   "cronwizard_description_at": "ties",
-  "cronwizard_add_time_slot": "Pridėti laiko tarpą",
+  "cronwizard_add_time_slot": "Pridėti laiko intervalą",
   "cronwizard_add_exact_time": "Pridėti tikslų laiką",
   "cronwizard_start_time": "Pradžios laikas",
   "cronwizard_end_time": "Pabaigos laikas",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Šilumos ekonomija",
   "scheduler_preset_action_config_mode_cool": "Šaunu",
   "scheduler_preset_action_config_mode_cool_eco": "Vėsi ekonomika",
+  "scheduler_preset_action_command_remote_control": "Nuotolinio valdymo pultas (siųsti IR/RF kodus)",
+  "scheduler_preset_action_config_data": "Duomenys",
   "scheduler_preset_action_program_run": "Paleisti programą",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Parinktys",
   "scheduler_preset_action_program_say": "Sakyk",
+  "scheduler_preset_action_net_http_call": "Skambinkite žiniatinklio paslaugai",
+  "scheduler_preset_action_config_url": "Adresas (URL)",
+  "scheduler_preset_action_pause": "Pauzė",
+  "scheduler_preset_action_config_seconds": "Sekundės",
   "scheduler_preset_action_config_message": "Žinutė",
   "save_and_build": "Išsaugoti ir kurti",
   "toggle_widgets_preview": "Perjungti valdiklių peržiūrą",
@@ -137,7 +143,7 @@
     "16": {
       "Title": "Lygio atmintis",
       "Description": "Išsaugokite ir iškvieskite paskutinį reguliatoriaus lygį.",
-      "HomeGenie.LevelMemory": "Įjungus, prisiminkite paskutinį apšvietimo lygį",
+      "HomeGenie.LevelMemory": "Įjungus, prisiminkite paskutinį šviesos lygį",
       "HomeGenie.LevelMemory.SimulateOnly": "Tik imituoti"
     },
     "26": {
@@ -240,7 +246,7 @@
       "Description": "Imituoja demonstracinio kelių jutiklių judesio aptikimą."
     },
     "410": {
-      "Title": "Jutiklio simuliatorius",
+      "Title": "Jutiklių simuliatorius",
       "Description": "Skleisti atsitiktines jutiklio vertes.",
       "Simulator.Sensor.Temperature": "Temperatūros jutiklis",
       "Simulator.Sensor.Humidity": "Drėgmės jutiklis",
@@ -264,7 +270,7 @@
       "ConfigureOptions.Email.Sender": "1. El. pašto adresas",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP serverio adresas",
       "ConfigureOptions.Email.SmtpUserName": "3. SMTP vartotojo vardas (neprivaloma)",
-      "ConfigureOptions.Email.SmtpPassword": "4. SMTP slaptažodis (nebūtina)",
+      "ConfigureOptions.Email.SmtpPassword": "4. SMTP slaptažodis (neprivaloma)",
       "ConfigureOptions.Email.SmtpPort": "5. SMTP serverio prievadas",
       "ConfigureOptions.Email.SmtpUseSsl": "6. SMTP serveris naudoja SSL"
     },
@@ -306,6 +312,18 @@
       "Description": "Įgalina natūralios kalbos valdymą jūsų išmaniojoje sistemoje naudojant „Google Gemini“ dirbtinį intelektą. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
       "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
       "ConfigureOptions.ModelId": "Modelio ID"
+    },
+    "931": {
+      "Title": "Dvynių valdiklio džinas",
+      "Description": "Jūsų asmeninis dirbtinio intelekto džinas valdikliams kurti. Sukurtas „Gemini“ pagrindu, jis padeda rašyti ir derinti HTML, CSS ir „JavaScript“ kodus tiesiai „HomeGenie“ redaktoriuje. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
+      "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
+      "ConfigureOptions.ModelId": "Modelio ID"
+    },
+    "940": {
+      "Title": "Vietinis dirbtinis intelektas (LLM)",
+      "Description": "Paleiskite didelį kalbos modelį (LLM) lokaliai savo „HomeGenie“ serveryje. Šiuos modelius galima nemokamai atsisiųsti iš tokių platformų kaip „Hugging Face“. Tiesiog nurodykite kelią į GGUF formato modelio failą. Atkreipkite dėmesį, kad norint užtikrinti visišką suderinamumą su skirtingais modeliais, gali tekti koreguoti parametrus, pirmiausia kontekstiniame kode.",
+      "ConfigureOptions.MaxTokens": "Maksimalus žetonų skaičius (atsakymo ilgis)",
+      "ConfigureOptions.ModelPath": "Kelias į vietinį GGUF failą"
     }
   }
 }

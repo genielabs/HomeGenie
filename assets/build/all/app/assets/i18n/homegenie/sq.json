@@ -72,7 +72,7 @@
   "cronwizard_schedule_set_slot_start": "Cakto fillimin e intervalit kohor.",
   "cronwizard_schedule_set_slot_end": "Duke filluar nga {{start}}.<span class=\"notranslate\"><br/></span> Cakto fundin e intervalit kohor.",
   "cronwizard_bindings_define_types_and_modules": "Përcaktoni llojet dhe modulet që i nënshtrohen këtij orari (opsionale)",
-  "cronwizard_bindings_select_types": "Zgjidhni llojet",
+  "cronwizard_bindings_select_types": "Zgjidh llojet",
   "cronwizard_action_set_action_to_execute": "Cakto veprimin që do të ekzekutohet në rastet e kësaj ngjarjeje",
   "cronwizard_action_preset_actions": "Veprimet e paracaktuara",
   "cronwizard_action_preset_every_occurrence": "Në çdo rast",
@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "Përdorni <span class=\"notranslate color-primary\">@{{name}}</span> si një variabël në shprehjet cron ose përdorni <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> në programet e automatizimit për t'iu referuar kësaj ngjarjeje.",
   "scheduler_preset_action_command_turn_on": "Aktivizo",
   "scheduler_preset_action_command_turn_off": "Fike",
-  "scheduler_preset_action_command_set_level": "Cakto nivelin",
+  "scheduler_preset_action_command_set_level": "Vendos nivelin",
   "scheduler_preset_action_config_level": "Niveli",
   "scheduler_preset_action_command_set_color": "Cakto ngjyrën",
   "scheduler_preset_action_config_color": "Ngjyra",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Aktiv",
   "scheduler_preset_action_config_mode_off": "Joaktiv",
   "scheduler_preset_action_config_mode_heat": "Nxehtësia",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomia e nxehtësisë",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomia e Ngrohjes",
   "scheduler_preset_action_config_mode_cool": "I ftohtë",
   "scheduler_preset_action_config_mode_cool_eco": "Ekonomi e ftohtë",
-  "scheduler_preset_action_program_run": "Ekzekuto programin",
+  "scheduler_preset_action_command_remote_control": "Telekomandë (dërgo kode IR/RF)",
+  "scheduler_preset_action_config_data": "Të dhëna",
+  "scheduler_preset_action_program_run": "Ekzekuto Programin",
   "scheduler_preset_action_config_program": "Programi",
   "scheduler_preset_action_config_options": "Opsionet",
   "scheduler_preset_action_program_say": "Thuaj",
+  "scheduler_preset_action_net_http_call": "Telefononi një Shërbim Uebi",
+  "scheduler_preset_action_config_url": "Adresa (URL)",
+  "scheduler_preset_action_pause": "Pauzë",
+  "scheduler_preset_action_config_seconds": "Sekonda",
   "scheduler_preset_action_config_message": "Mesazh",
   "save_and_build": "Ruaj dhe ndërto",
   "toggle_widgets_preview": "Aktivizo/çaktivizo pamjen paraprake të veglave",
@@ -117,17 +123,17 @@
   "program_status_enabled": "Aktivizuar",
   "program_status_broken": "I thyer",
   "program_status_compile": "Kompiloni",
-  "automation_programming_guide": "Udhëzues programimi",
+  "automation_programming_guide": "Udhëzues Programimi",
   "tap_to_disable": "Kliko për të çaktivizuar",
   "tap_to_enable": "Kliko për të aktivizuar",
   "program_data": "Të dhënat e programit",
-  "visual_code": "Kodi vizual",
-  "generated_code": "Kod i gjeneruar",
+  "visual_code": "Kodi Vizual",
+  "generated_code": "Kodi i Gjeneruar",
   "setup_code": "Konfigurimi",
   "main_code": "Kryesore",
   "context_code": "Konteksti",
   "main_code_empty_note": "Kodi \"Main\" është bosh. Përdorni redaktorin \"Visual code\" për të gjeneruar këtë kod: - Hapni kategorinë \"Program\" nga paleta e komandave në të majtë - Zvarritni një bllok të tipit \"Main\" në hapësirën e punës së kodit vizual - Shtoni brenda tij blloqe të tjera kodi për të zbatuar veprimet dhe logjikën e këtij programi. Programi \"Main\" mund të ekzekutohet manualisht ose të niset automatikisht bazuar në kushtet e dhëna përfundimisht në kodin e Konfigurimit.",
-  "setup_code_empty_note": "Kodi \"Konfigurimi\" është bosh. Përdorni redaktorin \"Kodi vizual\" për të gjeneruar këtë kod: - Hapni kategorinë \"Programi\" nga paleta e komandave në të majtë - Zvarritni një bllok të tipit \"Konfigurimi\" në hapësirën e punës së kodit vizual - Shtoni brenda tij blloqe të tjera kodi për të përcaktuar kushtet që do të shkaktojnë ekzekutimin e kodit \"Kryesor\". Ky kod vlerësohet sa herë që ndodh një ngjarje e re dhe të paktën një herë në minutë.",
+  "setup_code_empty_note": "Kodi \"Konfigurimi\" është bosh. Përdorni redaktorin \"Kodi vizual\" për të gjeneruar këtë kod: - Hapni kategorinë \"Program\" nga paleta e komandave në të majtë - Zvarritni një bllok të tipit \"Konfigurimi\" në hapësirën e punës së kodit vizual - Shtoni brenda tij blloqe të tjera kodi për të përcaktuar kushtet që do të shkaktojnë ekzekutimin e kodit \"Kryesor\". Ky kod vlerësohet sa herë që ndodh një ngjarje e re dhe të paktën një herë në minutë.",
   "capture_commands": "Komandat e kapjes",
   "capture_commands_description": "Shtoni të gjitha komandat e kryera manualisht në widget-e në program.",
   "capture_commands_pause": "Pauzë midis komandave",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Vetëm simulo"
     },
     "26": {
-      "Title": "Dritat me ngjyra",
+      "Title": "Dritat me Ngjyra",
       "Description": "Shembull integrimi i dritave Philips Hue duke përdorur HTTP API (V1). Përdoruesi i parazgjedhur për t'u lidhur me urën është \"newdeveloper\" dhe duhet të jetë aktivizuar tashmë.",
       "ConfigureOptions.BridgeAddress": "Adresa IP e Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Emri i përdoruesit",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Programi për t'u ekzekutuar kur aktivizohet"
     },
     "95": {
-      "Title": "Regjistrimi i ngjarjeve",
+      "Title": "Regjistrimi i Ngjarjeve",
       "Description": "Regjistro aktivitetin e pajisjes.",
       "EventsLogger.EnableLogging": "Aktivizo"
     },
     "111": {
-      "Title": "Konfigurimi i klientit",
+      "Title": "Konfigurimi i Klientit",
       "Description": "Implementon API-në për menaxhimin e profileve të konfigurimit të klientit që përdoren për të ruajtur cilësimet e ndërfaqes së përdoruesit dhe të paneleve të kontrollit."
     },
     "400": {
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Hapi i errësimit"
     },
     "142": {
-      "Title": "Llogaria e email-it",
+      "Title": "Llogaria e Email-it",
       "Description": "Ruan informacionin e llogarisë së email-it të përdorur nga programet e sistemit për dërgimin/marrjen e email-eve.",
       "ConfigureOptions.Email.Sender": "1. Adresa e email-it",
       "ConfigureOptions.Email.SmtpServer": "2. Adresa e serverit SMTP",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Lidhje me skenarin Sunrise Colors"
     },
     "910": {
-      "Title": "Zbulimi i objekteve",
+      "Title": "Zbulimi i Objekteve",
       "Description": "Zbuloni objektet duke përdorur një model YOLO11 të para-trajnuar.",
       "ML.ObjectDetection": "Aktivizo zbulimin e objekteve",
       "ML.ObjectDetection.TriggerDetect": "Listë e ndarë me presje e gjërave (në anglisht) që do të aktivizojnë alarmin. (p.sh.: mace, qen, person, çantë shpine, valixhe)",
       "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Vlerësimi i pozës",
+      "Title": "Vlerësimi i Pozës",
       "Description": "Zbulimi i pikave kyçe nëpërmjet vlerësimit të pozës, duke përdorur modele ONNX të personalizuara ose modelin YOLOv11 të paracaktuar të trajnuar paraprakisht (specifik për pozën njerëzore).",
       "ML.PoseEstimation": "Aktivizo vlerësimin e pozës",
       "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Segmentimi i instancës",
+      "Title": "Segmentimi i Instancës",
       "Description": "Zbuloni objektet dhe skicat e tyre duke përdorur një model YOLO11 të para-trajnuar.",
       "ML.InstanceSegmentation": "Aktivizo segmentimin e instancës",
       "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Aktivizon kontrollin e gjuhës natyrore për sistemin tuaj inteligjent duke përdorur Gemini AI të Google. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",
       "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
       "ConfigureOptions.ModelId": "ID e modelit"
+    },
+    "931": {
+      "Title": "Xhindi i Widget-it të Binjakëve",
+      "Description": "Xhindi juaj personal i inteligjencës artificiale për krijimin e veglave. I mundësuar nga Gemini, ju ndihmon të shkruani dhe të debugoni kodin HTML, CSS dhe JavaScript direkt brenda redaktorit HomeGenie. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",
+      "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID e modelit"
+    },
+    "940": {
+      "Title": "AI Lokal (LLM)",
+      "Description": "Ekzekutoni një Model të Gjuhës së Madhe (LLM) lokalisht në serverin tuaj HomeGenie. Këto modele mund të shkarkohen falas nga platforma si Hugging Face. Thjesht jepni shtegun për një skedar modeli në formatin GGUF. Ju lutemi vini re se mund të kërkohen rregullime të parametrave, kryesisht brenda Kodit të Kontekstit, për të siguruar përputhshmëri të plotë me modele të ndryshme.",
+      "ConfigureOptions.MaxTokens": "Maksimumi i Tokenëve (gjatësia e përgjigjes)",
+      "ConfigureOptions.ModelPath": "Shtegu për në skedarin lokal GGUF"
     }
   }
 }

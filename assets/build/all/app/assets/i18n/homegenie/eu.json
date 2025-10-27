@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Piztuta",
   "scheduler_preset_action_config_mode_off": "Itzalita",
   "scheduler_preset_action_config_mode_heat": "Beroa",
-  "scheduler_preset_action_config_mode_heat_eco": "Bero-ekonomia",
+  "scheduler_preset_action_config_mode_heat_eco": "Bero Ekonomia",
   "scheduler_preset_action_config_mode_cool": "Ederra",
-  "scheduler_preset_action_config_mode_cool_eco": "Ekonomia freskoa.",
+  "scheduler_preset_action_config_mode_cool_eco": "Ekonomia Freskoa",
+  "scheduler_preset_action_command_remote_control": "Urrutiko agintea (bidali IR/RF kodeak)",
+  "scheduler_preset_action_config_data": "Datuak",
   "scheduler_preset_action_program_run": "Exekutatu programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Aukerak",
   "scheduler_preset_action_program_say": "Esan",
+  "scheduler_preset_action_net_http_call": "Deitu web zerbitzu bati",
+  "scheduler_preset_action_config_url": "Helbidea (URLa)",
+  "scheduler_preset_action_pause": "Pausatu",
+  "scheduler_preset_action_config_seconds": "Segundoak",
   "scheduler_preset_action_config_message": "Mezua",
   "save_and_build": "Gorde eta eraiki",
   "toggle_widgets_preview": "Widget-en aurrebista aktibatu/desaktibatu",
@@ -117,7 +123,7 @@
   "program_status_enabled": "Gaituta",
   "program_status_broken": "Hautsita",
   "program_status_compile": "Konpilatu",
-  "automation_programming_guide": "Programazio gida",
+  "automation_programming_guide": "Programazio Gida",
   "tap_to_disable": "Egin klik desgaitzeko",
   "tap_to_enable": "Egin klik gaitzeko",
   "program_data": "Programaren datuak",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simulatu bakarrik"
     },
     "26": {
-      "Title": "Koloretako argiak",
+      "Title": "Koloretako Argiak",
       "Description": "Philips Hue argien integrazioaren adibidea HTTP APIa (V1) erabiliz. Zubira konektatzeko erabiltzaile lehenetsia \"garatzaileberria\" da eta dagoeneko gaituta egon beharko luke.",
       "ConfigureOptions.BridgeAddress": "Philips Hue zubiaren (V1) IP helbidea",
       "ConfigureOptions.BridgeUsername": "Erabiltzaile-izena",
@@ -226,21 +232,21 @@
       "Description": "Eskuz ezarri gailu birtualaren balioak.",
       "Sensor.Temperature": "Tenperatura balioa",
       "Sensor.Luminance": "Luminantzia-balioa",
-      "Sensor.MotionDetect": "Mugimendu-detekzioaren egoera",
+      "Sensor.MotionDetect": "Mugimendu detekzioaren egoera",
       "Status.Battery": "Bateriaren maila",
       "Sensor.DoorWindow": "Ate/leiho sentsorearen egoera (irekita/itxita)",
       "Status.Level": "Etengailuaren egoera (piztuta/itzalita)"
     },
     "401": {
       "Title": "Demoa - Atea Txandakatu",
-      "Description": "Ate-leiho sentsorearen atea ireki/itxi dela simulatzen du."
+      "Description": "Demo ate-leiho sentsorearen atea ireki/itxi dela simulatzen du."
     },
     "402": {
       "Title": "Demoa - Mugimendua detektatu da",
       "Description": "Demo sentsore anitzeko mugimendu-detekzioa simulatzen du."
     },
     "410": {
-      "Title": "Sentsore simulagailua",
+      "Title": "Sentsore Simulatzailea",
       "Description": "Ausazko sentsore-balioak igorri.",
       "Simulator.Sensor.Temperature": "Tenperatura sentsorea",
       "Simulator.Sensor.Humidity": "Hezetasun sentsorea",
@@ -290,13 +296,13 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelo fitxategiaren bidea (.onnx)"
     },
     "911": {
-      "Title": "Jarreraren estimazioa",
+      "Title": "Jarreraren Estimazioa",
       "Description": "Puntu gakoen detekzioa jarreraren estimazioaren bidez, ONNX eredu pertsonalizatuak edo aurrez entrenatutako YOLOv11 eredu lehenetsia (gizakien jarrera espezifikoa) erabiliz.",
       "ML.PoseEstimation": "Gaitu jarreraren estimazioa",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelo fitxategiaren bidea (.onnx)"
     },
     "912": {
-      "Title": "Instantzia segmentatzea",
+      "Title": "Instantzia Segmentazioa",
       "Description": "Detektatu objektuak eta haien eskemak aurrez entrenatutako YOLO11 eredu bat erabiliz.",
       "ML.InstanceSegmentation": "Gaitu instantzien segmentazioa",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelo fitxategiaren bidea (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Google-ren Gemini AI erabiliz zure sistema adimendunerako hizkuntza naturalaren kontrola gaitzen du. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
       "ConfigureOptions.ModelId": "Modeloaren IDa"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Widgetak sortzeko zure IA jenio pertsonala. Gemini-k bultzatuta, HTML, CSS eta JavaScript kodea idazten eta arazten laguntzen dizu zuzenean HomeGenie editorean. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
+      "ConfigureOptions.ModelId": "Modeloaren IDa"
+    },
+    "940": {
+      "Title": "Tokiko AI (LLM)",
+      "Description": "Exekutatu Hizkuntza Eredu Handi (LLM) bat lokalki zure HomeGenie zerbitzarian. Eredu hauek doan deskargatu daitezke Hugging Face bezalako plataformetatik. Eman GGUF formatuko eredu fitxategi baten bidea. Kontuan izan parametroetan doikuntzak egin behar direla, batez ere Testuinguru Kodearen barruan, eredu ezberdinekin bateragarritasun osoa bermatzeko.",
+      "ConfigureOptions.MaxTokens": "Gehienezko tokenak (erantzunaren luzera)",
+      "ConfigureOptions.ModelPath": "Tokiko GGUF fitxategirako bidea"
     }
   }
 }

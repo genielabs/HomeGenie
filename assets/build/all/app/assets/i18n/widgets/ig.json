@@ -9,5 +9,11 @@
     "indicators": "Ihe ngosi",
     "lights_control": "Ọkụ",
     "switches_control": "Mgbanwe"
+  },
+  "$ai_chat": {
+    "title": "Wijetị Nkata AI",
+    "intro": "Nnọọ! Abụ m onye enyemaka LLM mpaghara gị. Kedu ka m ga-esi nyere gị aka?",
+    "no_bound_module": "Enweghị modul LLM jikọtara. Biko mepee ntọala wijetị iji kekọta ụdị asụsụ.",
+    "start_typing_prompt": "Malite pịnye ngwa ngwa..."
   }
 }

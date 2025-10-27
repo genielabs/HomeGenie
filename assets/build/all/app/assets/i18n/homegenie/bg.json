@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Икономия на топлина",
   "scheduler_preset_action_config_mode_cool": "Готино",
   "scheduler_preset_action_config_mode_cool_eco": "Готина икономика",
+  "scheduler_preset_action_command_remote_control": "Дистанционно управление (изпращане на IR/RF кодове)",
+  "scheduler_preset_action_config_data": "Данни",
   "scheduler_preset_action_program_run": "Стартиране на програма",
   "scheduler_preset_action_config_program": "Програма",
   "scheduler_preset_action_config_options": "Опции",
   "scheduler_preset_action_program_say": "Кажи",
+  "scheduler_preset_action_net_http_call": "Обадете се на уеб услуга",
+  "scheduler_preset_action_config_url": "Адрес (URL)",
+  "scheduler_preset_action_pause": "Пауза",
+  "scheduler_preset_action_config_seconds": "Секунди",
   "scheduler_preset_action_config_message": "Съобщение",
   "save_and_build": "Запази и изгради",
   "toggle_widgets_preview": "Превключване на предварителен преглед на джаджи",
@@ -302,10 +308,22 @@
       "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO11 (.onnx)"
     },
     "930": {
-      "Title": "Обработчик на намерения за Близнаци",
+      "Title": "Обработчик на намерения Gemini",
       "Description": "Активира контрол на естествения език за вашата интелигентна система, използвайки Gemini AI на Google. За да активирате тази функция, въведете валиден API ключ. Следвайте инструкциите на https://aistudio.google.com/app/apikey, за да получите безплатен API ключ.",
       "ConfigureOptions.ApiKey": "Ключ за Google Gemini AI API",
       "ConfigureOptions.ModelId": "Идентификационен номер на модела"
+    },
+    "931": {
+      "Title": "Джемини Уиджет Джийн",
+      "Description": "Вашият личен AI джин за създаване на джаджи. Задвижван от Gemini, той ви помага да пишете и отстранявате грешки в HTML, CSS и JavaScript код директно в редактора HomeGenie. За да активирате тази функция, въведете валиден API ключ. Следвайте инструкциите на https://aistudio.google.com/app/apikey, за да получите безплатен API ключ.",
+      "ConfigureOptions.ApiKey": "Ключ за Google Gemini AI API",
+      "ConfigureOptions.ModelId": "Идентификационен номер на модела"
+    },
+    "940": {
+      "Title": "Локален ИИ (LLM)",
+      "Description": "Стартирайте локално Large Language Model (LLM) на вашия HomeGenie сървър. Тези модели могат да бъдат изтеглени безплатно от платформи като Hugging Face. Просто предоставете пътя до файл с модел във формат GGUF. Моля, обърнете внимание, че може да се наложи да се направят корекции на параметрите, предимно в контекстния код, за да се осигури пълна съвместимост с различните модели.",
+      "ConfigureOptions.MaxTokens": "Максимален брой токени (дължина на отговора)",
+      "ConfigureOptions.ModelPath": "Път до локалния GGUF файл"
     }
   }
 }

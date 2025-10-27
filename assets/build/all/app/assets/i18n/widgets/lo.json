@@ -9,5 +9,11 @@
     "indicators": "ຕົວຊີ້ວັດ",
     "lights_control": "ແສງໄຟ",
     "switches_control": "ສະວິດ"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "ສະບາຍດີ! ຂ້ອຍເປັນຜູ້ຊ່ວຍ LLM ທ້ອງຖິ່ນຂອງເຈົ້າ. ຂ້ອຍສາມາດຊ່ວຍເຈົ້າໄດ້ແນວໃດ?",
+    "no_bound_module": "ບໍ່ມີໂມດູນ LLM ຖືກຜູກມັດ. ກະລຸນາເປີດການຕັ້ງຄ່າ widget ເພື່ອຜູກມັດຮູບແບບພາສາ.",
+    "start_typing_prompt": "ເລີ່ມພິມການເຕືອນ..."
   }
 }

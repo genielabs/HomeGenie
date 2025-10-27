@@ -1,0 +1,140 @@
+:host {
+  display: block;
+  height: 328px;
+  max-width: 460px;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+p {
+  padding-top: 0;
+}
+
+.header {
+  padding-left: 12px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* --- Chat History --- */
+.chat-history {
+  user-select: text;
+  background-color: transparent;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  border: 2px solid var(--divider-color);
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  border-radius: 12px;
+  padding: 10px 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.message .author {
+  color: var(--primary-color);
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.message.ai {
+  border: 2px solid var(--primary-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  align-self: flex-start;
+}
+
+.message.user {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  align-self: flex-end;
+}
+
+/* --- Input Area --- */
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid var(--divider-color);
+  gap: 10px;
+}
+
+textarea {
+  flex-grow: 1;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--divider-color);
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+  font-family: inherit;
+  font-size: 1em;
+  min-height: 40px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+button {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+}
+
+svg[\#arrow] {
+  fill: var(--background-color);
+}
+
+button:disabled svg {
+  opacity: 0.5;
+}
+
+button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+div[\#chat_history] pre {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+div[\#chat_history] p>code {
+  background-color: var(--card-color);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'Fira Code', 'Courier New', monospace;
+}

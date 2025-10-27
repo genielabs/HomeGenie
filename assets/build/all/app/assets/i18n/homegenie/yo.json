@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Lo <span class=\"notranslate color-primary\">@{{name}}</span> bi oniyipada ninu awọn ikosile cron tabi lo <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ninu awọn eto adaṣe lati tọka iṣẹlẹ yii.",
   "scheduler_preset_action_command_turn_on": "Tan-an",
   "scheduler_preset_action_command_turn_off": "Paa",
-  "scheduler_preset_action_command_set_level": "Ṣeto ipele",
+  "scheduler_preset_action_command_set_level": "Ṣeto Ipele",
   "scheduler_preset_action_config_level": "Ipele",
-  "scheduler_preset_action_command_set_color": "Ṣeto awọ",
+  "scheduler_preset_action_command_set_color": "Ṣeto Awọ",
   "scheduler_preset_action_config_color": "Àwọ̀",
-  "scheduler_preset_action_command_thermostat_mode": "Ipò thermostat",
+  "scheduler_preset_action_command_thermostat_mode": "Ipò Ooru",
   "scheduler_preset_action_config_mode": "Ipo",
-  "scheduler_preset_action_config_mode_on": "Tan-an",
+  "scheduler_preset_action_config_mode_on": "Lori",
   "scheduler_preset_action_config_mode_off": "Paa",
   "scheduler_preset_action_config_mode_heat": "Ooru",
-  "scheduler_preset_action_config_mode_heat_eco": "Ooru aje",
+  "scheduler_preset_action_config_mode_heat_eco": "Ooru Aje",
   "scheduler_preset_action_config_mode_cool": "Itura",
-  "scheduler_preset_action_config_mode_cool_eco": "Aje tutu",
-  "scheduler_preset_action_program_run": "Ṣiṣe eto",
+  "scheduler_preset_action_config_mode_cool_eco": "Itura Aje",
+  "scheduler_preset_action_command_remote_control": "Iṣakoso latọna jijin (firanṣẹ awọn koodu IR/RF)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Ṣiṣe Eto",
   "scheduler_preset_action_config_program": "Eto",
   "scheduler_preset_action_config_options": "Awọn aṣayan",
   "scheduler_preset_action_program_say": "Sọ",
+  "scheduler_preset_action_net_http_call": "Pe Iṣẹ Ayelujara kan",
+  "scheduler_preset_action_config_url": "Adirẹsi (URL)",
+  "scheduler_preset_action_pause": "Sinmi",
+  "scheduler_preset_action_config_seconds": "Aaya",
   "scheduler_preset_action_config_message": "Ifiranṣẹ",
   "save_and_build": "Fipamọ ati kọ",
   "toggle_widgets_preview": "Yi awotẹlẹ ẹrọ ailorukọ",
@@ -120,9 +126,9 @@
   "automation_programming_guide": "Itọsọna siseto'",
   "tap_to_disable": "Tẹ lati mu ṣiṣẹ",
   "tap_to_enable": "Tẹ lati mu ṣiṣẹ",
-  "program_data": "Data eto",
-  "visual_code": "Koodu wiwo",
-  "generated_code": "Ti ipilẹṣẹ koodu",
+  "program_data": "Data Eto",
+  "visual_code": "Visual Code",
+  "generated_code": "ti ipilẹṣẹ koodu",
   "setup_code": "Ṣeto",
   "main_code": "Akọkọ",
   "context_code": "Atokọ",
@@ -132,7 +138,7 @@
   "capture_commands_description": "Ṣafikun gbogbo awọn aṣẹ ti a ṣe pẹlu ọwọ lori awọn ẹrọ ailorukọ si eto naa.",
   "capture_commands_pause": "Sinmi laarin awọn aṣẹ",
   "capture_pause_none": "Ko si",
-  "capture_pause_asis": "Bi o ṣe jẹ",
+  "capture_pause_asis": "Bi o ti ri",
   "$options": {
     "16": {
       "Title": "Iranti Ipele",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Eto lati ṣiṣẹ nigbati o ba ti ṣiṣẹ"
     },
     "95": {
-      "Title": "Wiwa awọn iṣẹlẹ",
+      "Title": "Wọle Awọn iṣẹlẹ",
       "Description": "Ṣe igbasilẹ iṣẹ ṣiṣe ẹrọ.",
       "EventsLogger.EnableLogging": "Mu ṣiṣẹ"
     },
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Igbesẹ dimming"
     },
     "142": {
-      "Title": "E-mail iroyin",
+      "Title": "E-Mail Account",
       "Description": "Itaja alaye iroyin imeeli ti a lo nipasẹ awọn eto eto fun fifiranṣẹ/gbigba awọn imeeli.",
       "ConfigureOptions.Email.Sender": "1. E-mail adirẹsi",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP adirẹsi olupin",
@@ -283,7 +289,7 @@
       "Scenarios.SunriseColors": "Ọna asopọ si oju iṣẹlẹ Awọn awọ Ilaorun"
     },
     "910": {
-      "Title": "Wiwa nkan",
+      "Title": "Iwari Nkan",
       "Description": "Ṣawari awọn nkan nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
       "ML.ObjectDetection": "Mu wiwa nkan ṣiṣẹ",
       "ML.ObjectDetection.TriggerDetect": "Akojọ awọn ohun ti o ya sọtọ (ni ede Gẹẹsi) ti yoo fa itaniji naa. (fun apẹẹrẹ: ologbo, aja, eniyan, apoeyin, apoti)",
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Apapọ apẹẹrẹ",
+      "Title": "Apakan apẹẹrẹ",
       "Description": "Ṣewadii awọn nkan ati awọn ilana wọn nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
       "ML.InstanceSegmentation": "Mu ipin apẹẹrẹ ṣiṣẹ",
       "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Nṣiṣẹ iṣakoso ede adayeba fun eto ọlọgbọn rẹ nipa lilo Gemini AI Google. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
       "ConfigureOptions.ModelId": "ID awoṣe"
+    },
+    "931": {
+      "Title": "Gemini ailorukọ Ẹmi",
+      "Description": "Ẹmi AI ti ara ẹni fun ẹda ẹrọ ailorukọ. Agbara nipasẹ Gemini, o ṣe iranlọwọ fun ọ lati kọ ati ṣatunṣe HTML, CSS, ati koodu JavaScript taara laarin olootu HomeGenie. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
+      "ConfigureOptions.ModelId": "ID awoṣe"
+    },
+    "940": {
+      "Title": "AI agbegbe (LLM)",
+      "Description": "Ṣiṣe Awoṣe Ede nla kan (LLM) ni agbegbe lori olupin HomeGenie rẹ. Awọn awoṣe wọnyi le ṣe igbasilẹ fun ọfẹ lati awọn iru ẹrọ bii Face Face. Nìkan pese ọna si faili awoṣe kika GGUF kan. Jọwọ ṣe akiyesi pe awọn atunṣe si awọn paramita, nipataki laarin koodu Ọrọ, le nilo lati rii daju ibamu ni kikun pẹlu awọn awoṣe oriṣiriṣi.",
+      "ConfigureOptions.MaxTokens": "Awọn ami to pọju (ipari idahun)",
+      "ConfigureOptions.ModelPath": "Ona si faili GGUF agbegbe"
     }
   }
 }

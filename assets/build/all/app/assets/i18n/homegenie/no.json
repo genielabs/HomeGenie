@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Varmeøkonomi",
   "scheduler_preset_action_config_mode_cool": "Kjøle",
   "scheduler_preset_action_config_mode_cool_eco": "Kul økonomi",
+  "scheduler_preset_action_command_remote_control": "Fjernkontroll (send IR/RF-koder)",
+  "scheduler_preset_action_config_data": "Data",
   "scheduler_preset_action_program_run": "Kjør programmet",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Alternativer",
   "scheduler_preset_action_program_say": "Si",
+  "scheduler_preset_action_net_http_call": "Ring en webtjeneste",
+  "scheduler_preset_action_config_url": "Adresse (URL)",
+  "scheduler_preset_action_pause": "Pause",
+  "scheduler_preset_action_config_seconds": "Sekunder",
   "scheduler_preset_action_config_message": "Beskjed",
   "save_and_build": "Lagre og bygg",
   "toggle_widgets_preview": "Slå forhåndsvisning av widgeter av/på",
@@ -126,7 +132,7 @@
   "setup_code": "Oppsett",
   "main_code": "Hoved",
   "context_code": "Kontekst",
-  "main_code_empty_note": "«Main»-koden er tom. Bruk editoren «Visuell kode» til å generere denne koden: - Åpne kategorien «Program» fra kommandopaletten til venstre - Dra en blokk av typen «Main» inn i arbeidsområdet for visuell kode - Legg til andre kodeblokker i den for å implementere handlinger og logikk for dette programmet. Programmet «Main» kan enten kjøres manuelt eller startes automatisk basert på betingelser som til slutt gis i oppsettskoden.",
+  "main_code_empty_note": "«Main»-koden er tom. Bruk editoren «Visuell kode» til å generere denne koden: - Åpne kategorien «Program» fra kommandopaletten til venstre - Dra en blokk av typen «Main» inn i arbeidsområdet for visuell kode - Legg til andre kodeblokker i den for å implementere handlinger og logikk for dette programmet Programmet «Main» kan enten kjøres manuelt eller startes automatisk basert på betingelser som til slutt gis i oppsettskoden.",
   "setup_code_empty_note": "«Oppsett»-koden er tom. Bruk «Visuell kode»-editoren til å generere denne koden: - Åpne kategorien «Program» fra kommandopaletten til venstre - Dra en blokk av typen «Oppsett» inn i arbeidsområdet for visuell kode - Legg til andre kodeblokker i den for å bestemme betingelsene som vil utløse kjøring av «hoved»-kode. Denne koden evalueres hver gang en ny hendelse inntreffer, og minst én gang i minuttet.",
   "capture_commands": "Opptakskommandoer",
   "capture_commands_description": "Legg til alle kommandoer som utføres manuelt på widgeter i programmet.",
@@ -306,6 +312,18 @@
       "Description": "Aktiverer naturlig språkkontroll for smartsystemet ditt ved hjelp av Googles Gemini AI. For å aktivere denne funksjonen, skriv inn en gyldig API-nøkkel. Følg instruksjonene på https://aistudio.google.com/app/apikey for å få en gratis API-nøkkel.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøkkel",
       "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Din personlige AI-ånd for widget-oppretting. Drevet av Gemini, hjelper den deg med å skrive og feilsøke HTML-, CSS- og JavaScript-kode direkte i HomeGenie-editoren. For å aktivere denne funksjonen, skriv inn en gyldig API-nøkkel. Følg instruksjonene på https://aistudio.google.com/app/apikey for å få en gratis API-nøkkel.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-nøkkel",
+      "ConfigureOptions.ModelId": "Modell-ID"
+    },
+    "940": {
+      "Title": "Lokal kunstig intelligens (LLM)",
+      "Description": "Kjør en stor språkmodell (LLM) lokalt på HomeGenie-serveren din. Disse modellene kan lastes ned gratis fra plattformer som Hugging Face. Bare oppgi banen til en modellfil i GGUF-format. Vær oppmerksom på at justeringer av parametere, hovedsakelig innenfor kontekstkoden, kan være nødvendige for å sikre full kompatibilitet med forskjellige modeller.",
+      "ConfigureOptions.MaxTokens": "Maks. antall tokener (svarlengde)",
+      "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "stats.time_range": "時間範圍",
+  "stats.one_second": "一秒鐘",
+  "stats.five_seconds": "5秒",
+  "stats.ten_seconds": "10秒",
+  "stats.half_minute": "30秒",
+  "stats.one_minute": "一分鐘",
+  "stats.ten_minutes": "10分鐘",
+  "stats.half_hour": "30分鐘",
+  "stats.one_hour": "一小時",
+  "stats.three_hours": "3小時",
+  "stats.six_hours": "6小時",
+  "stats.twelve_hours": "12小時",
+  "stats.twentyfour_hours": "24小時",
+  "stats.chart_provider": "圖表提供者"
+}

@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Zapnuté",
   "scheduler_preset_action_config_mode_off": "Vypnuté",
   "scheduler_preset_action_config_mode_heat": "Teplo",
-  "scheduler_preset_action_config_mode_heat_eco": "Tepelná úspornosť",
+  "scheduler_preset_action_config_mode_heat_eco": "Tepelná ekonomika",
   "scheduler_preset_action_config_mode_cool": "Chladný",
   "scheduler_preset_action_config_mode_cool_eco": "Chladná ekonomika",
+  "scheduler_preset_action_command_remote_control": "Diaľkové ovládanie (odosielanie IR/RF kódov)",
+  "scheduler_preset_action_config_data": "Dáta",
   "scheduler_preset_action_program_run": "Spustiť program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Možnosti",
   "scheduler_preset_action_program_say": "Povedz",
+  "scheduler_preset_action_net_http_call": "Zavolajte webovú službu",
+  "scheduler_preset_action_config_url": "Adresa (URL)",
+  "scheduler_preset_action_pause": "Pozastaviť",
+  "scheduler_preset_action_config_seconds": "Sekundy",
   "scheduler_preset_action_config_message": "Správa",
   "save_and_build": "Uložiť a zostaviť",
   "toggle_widgets_preview": "Prepnúť ukážku widgetov",
@@ -192,7 +198,7 @@
     "88": {
       "Title": "Generická IP kamera",
       "Description": "Zobrazenie/smerovanie obrazového signálu z IP kamery.",
-      "IpCamera.ImageURL": "URL adresa API pre obrázky z kamery (pozrite si dokumentáciu k kamere)",
+      "IpCamera.ImageURL": "URL adresa API pre obrázky z fotoaparátu (pozrite si dokumentáciu k fotoaparátu)",
       "IpCamera.Username": "Používateľské meno (voliteľné)",
       "IpCamera.Password": "Heslo (voliteľné)",
       "Widget.Config.fps": "Počet snímok za sekundu",
@@ -306,6 +312,18 @@
       "Description": "Umožňuje ovládanie prirodzeného jazyka pre váš inteligentný systém pomocou umelej inteligencie Gemini od spoločnosti Google. Ak chcete túto funkciu aktivovať, zadajte platný kľúč API. Postupujte podľa pokynov na stránke https://aistudio.google.com/app/apikey a získajte bezplatný kľúč API.",
       "ConfigureOptions.ApiKey": "Kľúč API pre umelú inteligenciu Google Gemini",
       "ConfigureOptions.ModelId": "ID modelu"
+    },
+    "931": {
+      "Title": "Džin z widgetu Gemini",
+      "Description": "Váš osobný džin s umelou inteligenciou na tvorbu widgetov. Vďaka technológii Gemini vám pomôže písať a ladiť kód HTML, CSS a JavaScript priamo v editore HomeGenie. Ak chcete túto funkciu aktivovať, zadajte platný kľúč API. Postupujte podľa pokynov na stránke https://aistudio.google.com/app/apikey a získajte bezplatný kľúč API.",
+      "ConfigureOptions.ApiKey": "Kľúč API pre umelú inteligenciu Google Gemini",
+      "ConfigureOptions.ModelId": "ID modelu"
+    },
+    "940": {
+      "Title": "Lokálna umelá inteligencia (LLM)",
+      "Description": "Spustite lokálne na serveri HomeGenie model veľkého jazyka (LLM). Tieto modely si môžete bezplatne stiahnuť z platforiem ako Hugging Face. Stačí zadať cestu k súboru modelu vo formáte GGUF. Upozorňujeme, že na zabezpečenie úplnej kompatibility s rôznymi modelmi môžu byť potrebné úpravy parametrov, najmä v kontextovom kóde.",
+      "ConfigureOptions.MaxTokens": "Maximálny počet tokenov (dĺžka odpovede)",
+      "ConfigureOptions.ModelPath": "Cesta k lokálnemu súboru GGUF"
     }
   }
 }

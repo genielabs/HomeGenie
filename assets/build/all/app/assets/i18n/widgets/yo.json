@@ -9,5 +9,11 @@
     "indicators": "Awọn itọkasi",
     "lights_control": "Awọn imọlẹ",
     "switches_control": "Yipada"
+  },
+  "$ai_chat": {
+    "title": "AI Widget Awo",
+    "intro": "Pẹlẹ o! Emi ni oluranlọwọ LLM agbegbe rẹ. Bawo ni se le ran lowo?",
+    "no_bound_module": "Ko si LLM module owun. Jọwọ ṣii awọn eto ẹrọ ailorukọ lati di awoṣe ede kan.",
+    "start_typing_prompt": "Bẹrẹ titẹ itọka kan..."
   }
 }

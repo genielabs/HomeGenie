@@ -9,5 +9,11 @@
     "indicators": "Indikaattorit",
     "lights_control": "Valot",
     "switches_control": "Kytkimet"
+  },
+  "$ai_chat": {
+    "title": "Tekoälykeskusteluwidget",
+    "intro": "Hei! Olen paikallinen oikeustieteen maisterin assistenttisi. Miten voin auttaa sinua?",
+    "no_bound_module": "Ei LLM-moduuliin sidottua. Avaa widgetin asetukset kielimallin sitomiseksi.",
+    "start_typing_prompt": "Aloita kirjoittamaan kehotetta..."
   }
 }

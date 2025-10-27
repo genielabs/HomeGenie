@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "Économie de chaleur",
   "scheduler_preset_action_config_mode_cool": "Cool",
   "scheduler_preset_action_config_mode_cool_eco": "Économie cool",
+  "scheduler_preset_action_command_remote_control": "Télécommande (envoi de codes IR/RF)",
+  "scheduler_preset_action_config_data": "Données",
   "scheduler_preset_action_program_run": "Exécuter le programme",
   "scheduler_preset_action_config_program": "Programme",
   "scheduler_preset_action_config_options": "Options",
   "scheduler_preset_action_program_say": "Dire",
+  "scheduler_preset_action_net_http_call": "Appeler un service Web",
+  "scheduler_preset_action_config_url": "Adresse (URL)",
+  "scheduler_preset_action_pause": "Pause",
+  "scheduler_preset_action_config_seconds": "Secondes",
   "scheduler_preset_action_config_message": "Message",
   "save_and_build": "Économisez et construisez",
   "toggle_widgets_preview": "Basculer l'aperçu des widgets",
@@ -306,6 +312,18 @@
       "Description": "Activez le contrôle en langage naturel pour votre système intelligent grâce à l'IA Gemini de Google. Pour activer cette fonctionnalité, saisissez une clé API valide. Suivez les instructions sur https://aistudio.google.com/app/apikey pour obtenir une clé API gratuite.",
       "ConfigureOptions.ApiKey": "Clé API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID du modèle"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Votre génie IA personnel pour la création de widgets. Optimisé par Gemini, il vous aide à écrire et déboguer du code HTML, CSS et JavaScript directement dans l'éditeur HomeGenie. Pour activer cette fonctionnalité, saisissez une clé API valide. Suivez les instructions sur https://aistudio.google.com/app/apikey pour obtenir une clé API gratuite.",
+      "ConfigureOptions.ApiKey": "Clé API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID du modèle"
+    },
+    "940": {
+      "Title": "IA locale (LLM)",
+      "Description": "Exécutez un modèle de langage étendu (LLM) localement sur votre serveur HomeGenie. Ces modèles sont téléchargeables gratuitement sur des plateformes comme Hugging Face. Indiquez simplement le chemin d'accès à un fichier de modèle au format GGUF. Veuillez noter que des ajustements de paramètres, principalement dans le code contextuel, peuvent être nécessaires pour garantir une compatibilité totale avec différents modèles.",
+      "ConfigureOptions.MaxTokens": "Jetons max (longueur de la réponse)",
+      "ConfigureOptions.ModelPath": "Chemin vers le fichier GGUF local"
     }
   }
 }

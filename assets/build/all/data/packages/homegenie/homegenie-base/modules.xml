@@ -281,8 +281,8 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
         <UpdateTime>2017-08-17T17:32:30.133682Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Conditions.Temperature</Name>
-        <Value />
+        <Name>Sensor.Temperature</Name>
+        <Value>22.44</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>

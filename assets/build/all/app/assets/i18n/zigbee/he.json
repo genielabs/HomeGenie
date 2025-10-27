@@ -1,8 +1,8 @@
 {
   "node_inclusion": "הוסף מכשיר",
   "node_exclusion": "הסר את המכשיר",
-  "operation_timed_out": "תם הזמן הקצוב למבצע.",
+  "operation_timed_out": "זמן הפעולה הסתיים.",
   "node_added": "צומת נוסף בהצלחה",
-  "turn_on_device_to_add": "הפעל את המכשיר ולחץ על לחצן ההתאמה למשך 5 שניות במידת הצורך",
+  "turn_on_device_to_add": "הפעל את המכשיר ולחץ על כפתור הצימוד למשך 5 שניות במידת הצורך",
   "soft_reset_button": "איפוס רך"
 }

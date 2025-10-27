@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Sèvi ak <span class=\"notranslate color-primary\">@{{name}}</span> kòm yon varyab nan ekspresyon cron oubyen sèvi ak <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> nan pwogram automatisation pou fè referans a evènman sa a.",
   "scheduler_preset_action_command_turn_on": "Limen",
   "scheduler_preset_action_command_turn_off": "Etenn",
-  "scheduler_preset_action_command_set_level": "Nivo fikse",
+  "scheduler_preset_action_command_set_level": "Nivo Fikse",
   "scheduler_preset_action_config_level": "Nivo",
   "scheduler_preset_action_command_set_color": "Mete koulè",
   "scheduler_preset_action_config_color": "Koulè",
-  "scheduler_preset_action_command_thermostat_mode": "Mòd tèmosta",
+  "scheduler_preset_action_command_thermostat_mode": "Mòd Tèmosta",
   "scheduler_preset_action_config_mode": "Mòd",
   "scheduler_preset_action_config_mode_on": "Sou",
   "scheduler_preset_action_config_mode_off": "Etenn",
   "scheduler_preset_action_config_mode_heat": "Chalè",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomi chalè",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomi Chalè",
   "scheduler_preset_action_config_mode_cool": "Fre",
   "scheduler_preset_action_config_mode_cool_eco": "Ekonomi fre",
-  "scheduler_preset_action_program_run": "Kouri pwogram nan",
+  "scheduler_preset_action_command_remote_control": "Kontwòl remote (voye kòd IR/RF)",
+  "scheduler_preset_action_config_data": "Done",
+  "scheduler_preset_action_program_run": "Kouri Pwogram nan",
   "scheduler_preset_action_config_program": "Pwogram",
   "scheduler_preset_action_config_options": "Opsyon",
   "scheduler_preset_action_program_say": "Di",
+  "scheduler_preset_action_net_http_call": "Rele yon sèvis entènèt",
+  "scheduler_preset_action_config_url": "Adrès (URL)",
+  "scheduler_preset_action_pause": "Poze",
+  "scheduler_preset_action_config_seconds": "Segond",
   "scheduler_preset_action_config_message": "Mesaj",
   "save_and_build": "Sove epi konstwi",
   "toggle_widgets_preview": "Aktive/dezaktive aperçu widjèt yo",
@@ -117,11 +123,11 @@
   "program_status_enabled": "Aktive",
   "program_status_broken": "Kase",
   "program_status_compile": "Konpile",
-  "automation_programming_guide": "Gid pwogramasyon an",
+  "automation_programming_guide": "Gid Pwogramasyon",
   "tap_to_disable": "Klike pou dezaktive",
   "tap_to_enable": "Klike pou aktive",
-  "program_data": "Done pwogram yo",
-  "visual_code": "Kòd vizyèl",
+  "program_data": "Done Pwogram",
+  "visual_code": "Kòd Vizyèl",
   "generated_code": "Kòd ki pwodui",
   "setup_code": "Enstalasyon",
   "main_code": "Prensipal",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simile sèlman"
     },
     "26": {
-      "Title": "Limyè koulè",
+      "Title": "Limyè Koulè",
       "Description": "Egzanp entegrasyon limyè Philips Hue lè l sèvi avèk API HTTP (V1). Itilizatè pa defo pou konekte ak pon an se \"newdeveloper\" epi li ta dwe deja aktive.",
       "ConfigureOptions.BridgeAddress": "Adrès IP Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Non itilizatè",
@@ -158,7 +164,7 @@
     "77": {
       "Title": "Rezo MQTT",
       "Description": "Konekte ak yon koutye MQTT pou itilize aplikasyon HomeGenie Panel la nenpòt kote atravè Entènèt la oubyen pou konekte aparèy HomeGenie yo sou menm rezo MQTT la.",
-      "MQTT.SensorPublish": "Pibliye evènman ki emèt pa modil sa a",
+      "MQTT.SensorPublish": "Pibliye evènman modil sa a te bay yo",
       "ConfigureOptions.ClientId": "Idantifikasyon Kliyan.",
       "ConfigureOptions.ServerAddress": "Adrès sèvè a",
       "ConfigureOptions.ServerPort": "Pò sèvè a",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Pwogram pou fonksyone lè li deklanche"
     },
     "95": {
-      "Title": "Anrejistreman evènman yo",
+      "Title": "Anrejistreman Evènman yo",
       "Description": "Anrejistre aktivite aparèy la.",
       "EventsLogger.EnableLogging": "Aktive"
     },
     "111": {
-      "Title": "Konfigirasyon kliyan",
+      "Title": "Konfigirasyon Kliyan",
       "Description": "Aplike yon API pou jere pwofil konfigirasyon kliyan yo ki itilize pou estoke paramèt koòdone itilizatè ak tablodbò yo."
     },
     "400": {
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Etap gradyasyon"
     },
     "142": {
-      "Title": "Kont imel",
+      "Title": "Kont Imèl",
       "Description": "Sere enfòmasyon kont imel ke pwogram sistèm yo itilize pou voye/resevwa imel.",
       "ConfigureOptions.Email.Sender": "1. Adrès imel",
       "ConfigureOptions.Email.SmtpServer": "2. Adrès sèvè SMTP",
@@ -290,13 +296,13 @@
       "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 la (.onnx)"
     },
     "911": {
-      "Title": "Estimasyon poze",
+      "Title": "Estimasyon Poz",
       "Description": "Deteksyon pwen kle atravè estimasyon poze, lè l sèvi avèk modèl ONNX koutim oswa modèl YOLOv11 pre-antre pa defo a (espesifik pou yon poze imen).",
       "ML.PoseEstimation": "Aktive estimasyon pozisyon an",
       "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 la (.onnx)"
     },
     "912": {
-      "Title": "Segmantasyon enstans",
+      "Title": "Segmantasyon Enstans",
       "Description": "Detekte objè ak kontou yo lè l sèvi avèk yon modèl YOLO11 ki te deja antrene.",
       "ML.InstanceSegmentation": "Aktive segmentasyon egzanp lan",
       "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 la (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Pèmèt kontwòl lang natirèl pou sistèm entelijan ou a lè l sèvi avèk Gemini AI Google la. Pou aktive fonksyon sa a, antre yon kle API ki valab. Swiv enstriksyon yo nan https://aistudio.google.com/app/apikey pou jwenn yon kle API gratis.",
       "ConfigureOptions.ApiKey": "Kle API Google Gemini AI a",
       "ConfigureOptions.ModelId": "ID Modèl"
+    },
+    "931": {
+      "Title": "Widjè Gemini Jeni",
+      "Description": "Jeni entèlijans atifisyèl pèsonèl ou pou kreye widjèt. Avèk fonksyon Gemini, li ede w ekri epi debogaj kòd HTML, CSS, ak JavaScript dirèkteman nan editè HomeGenie a. Pou aktive fonksyon sa a, antre yon kle API ki valab. Swiv enstriksyon yo nan https://aistudio.google.com/app/apikey pou jwenn yon kle API gratis.",
+      "ConfigureOptions.ApiKey": "Kle API Google Gemini AI a",
+      "ConfigureOptions.ModelId": "ID Modèl"
+    },
+    "940": {
+      "Title": "IA Lokal (LLM)",
+      "Description": "Kouri yon Gwo Modèl Lang (LLM) lokalman sou sèvè HomeGenie ou a. Ou ka telechaje modèl sa yo gratis sou platfòm tankou Hugging Face. Senpleman bay chemen ki mennen nan yon fichye modèl fòma GGUF. Tanpri sonje ke ajisteman nan paramèt yo, sitou nan Kòd Kontèks la, ka nesesè pou asire konpatibilite konplè ak diferan modèl yo.",
+      "ConfigureOptions.MaxTokens": "Maksimòm jeton (longè repons)",
+      "ConfigureOptions.ModelPath": "Chemen pou dosye GGUF lokal la"
     }
   }
 }

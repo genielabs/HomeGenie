@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "వేడి",
   "scheduler_preset_action_config_mode_heat_eco": "వేడి ఆర్థిక వ్యవస్థ",
   "scheduler_preset_action_config_mode_cool": "బాగుంది",
-  "scheduler_preset_action_config_mode_cool_eco": "చల్లని ఆర్థిక వ్యవస్థ",
+  "scheduler_preset_action_config_mode_cool_eco": "కూల్ ఎకానమీ",
+  "scheduler_preset_action_command_remote_control": "రిమోట్ కంట్రోల్ (IR/RF కోడ్‌లను పంపండి)",
+  "scheduler_preset_action_config_data": "డేటా",
   "scheduler_preset_action_program_run": "ప్రోగ్రామ్‌ను అమలు చేయండి",
   "scheduler_preset_action_config_program": "కార్యక్రమం",
   "scheduler_preset_action_config_options": "ఎంపికలు",
   "scheduler_preset_action_program_say": "చెప్పండి",
+  "scheduler_preset_action_net_http_call": "వెబ్ సర్వీస్‌కు కాల్ చేయండి",
+  "scheduler_preset_action_config_url": "చిరునామా (URL)",
+  "scheduler_preset_action_pause": "పాజ్ చేయండి",
+  "scheduler_preset_action_config_seconds": "సెకన్లు",
   "scheduler_preset_action_config_message": "సందేశం",
   "save_and_build": "సేవ్ చేసి నిర్మించండి",
   "toggle_widgets_preview": "విడ్జెట్‌ల ప్రివ్యూను టోగుల్ చేయండి",
@@ -117,11 +123,11 @@
   "program_status_enabled": "ప్రారంభించబడింది",
   "program_status_broken": "విరిగిపోయింది",
   "program_status_compile": "కంపైల్ చేయండి",
-  "automation_programming_guide": "ప్రోగ్రామింగ్ గైడ్'",
+  "automation_programming_guide": "ప్రోగ్రామింగ్ గైడ్ '",
   "tap_to_disable": "నిలిపివేయడానికి క్లిక్ చేయండి",
   "tap_to_enable": "ప్రారంభించడానికి క్లిక్ చేయండి",
   "program_data": "ప్రోగ్రామ్ డేటా",
-  "visual_code": "దృశ్య కోడ్",
+  "visual_code": "విజువల్ కోడ్",
   "generated_code": "రూపొందించిన కోడ్",
   "setup_code": "సెటప్",
   "main_code": "ప్రధాన",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "ట్రిగ్గర్ చేయబడినప్పుడు అమలు చేయవలసిన ప్రోగ్రామ్"
     },
     "95": {
-      "Title": "ఈవెంట్‌ల లాగింగ్",
+      "Title": "ఈవెంట్స్ లాగింగ్",
       "Description": "పరికర కార్యాచరణను రికార్డ్ చేయండి.",
       "EventsLogger.EnableLogging": "ప్రారంభించు"
     },
@@ -229,7 +235,7 @@
       "Sensor.MotionDetect": "మోషన్ డిటెక్షన్ స్థితి",
       "Status.Battery": "బ్యాటరీ స్థాయి",
       "Sensor.DoorWindow": "తలుపు/కిటికీ సెన్సార్ స్థితి (తెరిచి/మూసి)",
-      "Status.Level": "స్థితిని మార్చండి (ఆన్/ఆఫ్)"
+      "Status.Level": "స్థితిని మార్చు (ఆన్/ఆఫ్)"
     },
     "401": {
       "Title": "డెమో - టోగుల్ డోర్",
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "డిమ్మింగ్ స్టెప్"
     },
     "142": {
-      "Title": "ఈ-మెయిల్ ఖాతా",
+      "Title": "ఇ-మెయిల్ ఖాతా",
       "Description": "ఈమెయిల్‌లను పంపడానికి/స్వీకరించడానికి సిస్టమ్ ప్రోగ్రామ్‌లు ఉపయోగించే ఈ-మెయిల్ ఖాతా సమాచారాన్ని నిల్వ చేస్తుంది.",
       "ConfigureOptions.Email.Sender": "1. ఇ-మెయిల్ చిరునామా",
       "ConfigureOptions.Email.SmtpServer": "2. SMTP సర్వర్ చిరునామా",
@@ -290,7 +296,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
     },
     "911": {
-      "Title": "అంచనా వేసిన భంగిమ",
+      "Title": "భంగిమ అంచనా",
       "Description": "కస్టమ్ ONNX మోడల్స్ లేదా డిఫాల్ట్ ప్రీ-ట్రైన్డ్ YOLOv11 మోడల్ (మానవ భంగిమ-నిర్దిష్ట) ఉపయోగించి భంగిమ అంచనా ద్వారా కీపాయింట్ గుర్తింపు.",
       "ML.PoseEstimation": "భంగిమ అంచనాను ప్రారంభించండి",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
@@ -306,6 +312,18 @@
       "Description": "Google యొక్క జెమిని AIని ఉపయోగించి మీ స్మార్ట్ సిస్టమ్ కోసం సహజ భాషా నియంత్రణను ప్రారంభిస్తుంది. ఈ ఫీచర్‌ని యాక్టివేట్ చేయడానికి, చెల్లుబాటు అయ్యే API కీని నమోదు చేయండి. ఉచిత API కీని పొందడానికి https://aistudio.google.com/app/apikeyలోని సూచనలను అనుసరించండి.",
       "ConfigureOptions.ApiKey": "గూగుల్ జెమిని AI API కీ",
       "ConfigureOptions.ModelId": "మోడల్ ఐడి"
+    },
+    "931": {
+      "Title": "జెమిని విడ్జెట్ జెనీ",
+      "Description": "విడ్జెట్ సృష్టి కోసం మీ వ్యక్తిగత AI జెనీ. జెమిని ద్వారా ఆధారితం, ఇది HomeGenie ఎడిటర్‌లోనే HTML, CSS మరియు JavaScript కోడ్‌లను వ్రాయడానికి మరియు డీబగ్ చేయడానికి మీకు సహాయపడుతుంది. ఈ ఫీచర్‌ను యాక్టివేట్ చేయడానికి, చెల్లుబాటు అయ్యే API కీని నమోదు చేయండి. ఉచిత API కీని పొందడానికి https://aistudio.google.com/app/apikeyలోని సూచనలను అనుసరించండి.",
+      "ConfigureOptions.ApiKey": "గూగుల్ జెమిని AI API కీ",
+      "ConfigureOptions.ModelId": "మోడల్ ఐడి"
+    },
+    "940": {
+      "Title": "స్థానిక AI (LLM)",
+      "Description": "మీ HomeGenie సర్వర్‌లో స్థానికంగా లార్జ్ లాంగ్వేజ్ మోడల్ (LLM)ని అమలు చేయండి. ఈ మోడల్‌లను హగ్గింగ్ ఫేస్ వంటి ప్లాట్‌ఫారమ్‌ల నుండి ఉచితంగా డౌన్‌లోడ్ చేసుకోవచ్చు. GGUF ఫార్మాట్ మోడల్ ఫైల్‌కు మార్గాన్ని అందించండి. విభిన్న మోడల్‌లతో పూర్తి అనుకూలతను నిర్ధారించడానికి ప్రధానంగా కాంటెక్స్ట్ కోడ్‌లోని పారామితులకు సర్దుబాట్లు అవసరం కావచ్చని దయచేసి గమనించండి.",
+      "ConfigureOptions.MaxTokens": "గరిష్ట టోకెన్లు (ప్రతిస్పందన పొడవు)",
+      "ConfigureOptions.ModelPath": "స్థానిక GGUF ఫైల్‌కు మార్గం"
     }
   }
 }

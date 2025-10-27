@@ -8,9 +8,9 @@
   "stats.ten_minutes": "10 mínútur",
   "stats.half_hour": "30 mínútur",
   "stats.one_hour": "Ein klukkustund",
-  "stats.three_hours": "3 klst",
-  "stats.six_hours": "6 klst",
-  "stats.twelve_hours": "12 tímar",
-  "stats.twentyfour_hours": "24 klst",
-  "stats.chart_provider": "Myndaveita"
+  "stats.three_hours": "3 klukkustundir",
+  "stats.six_hours": "6 klukkustundir",
+  "stats.twelve_hours": "12 klukkustundir",
+  "stats.twentyfour_hours": "24 klukkustundir",
+  "stats.chart_provider": "Myndritveita"
 }

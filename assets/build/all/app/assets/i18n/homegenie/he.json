@@ -34,7 +34,7 @@
   "group_modules": "מודולים בקבוצה זו",
   "modules": "מודולים",
   "empty_group": "אין מודולים בקבוצה זו.",
-  "scheduler_wizard": "אשף המתזמן",
+  "scheduler_wizard": "אשף מתזמן",
   "schedule_event": "מִקרֶה",
   "schedule_type_standard": "תֶקֶן",
   "schedule_type_range": "טווח תאריכים",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "כלכלת חום",
   "scheduler_preset_action_config_mode_cool": "לְהִתְקַרֵר",
   "scheduler_preset_action_config_mode_cool_eco": "כלכלה מגניבה",
+  "scheduler_preset_action_command_remote_control": "שלט רחוק (שליחת קודי IR/RF)",
+  "scheduler_preset_action_config_data": "נְתוּנִים",
   "scheduler_preset_action_program_run": "הפעלת תוכנית",
   "scheduler_preset_action_config_program": "תָכְנִית",
   "scheduler_preset_action_config_options": "אפשרויות",
   "scheduler_preset_action_program_say": "לוֹמַר",
+  "scheduler_preset_action_net_http_call": "התקשרו לשירות אינטרנט",
+  "scheduler_preset_action_config_url": "כתובת (URL)",
+  "scheduler_preset_action_pause": "הַפסָקָה",
+  "scheduler_preset_action_config_seconds": "שניות",
   "scheduler_preset_action_config_message": "הוֹדָעָה",
   "save_and_build": "שמור ובנה",
   "toggle_widgets_preview": "הפעל/הפעל תצוגה מקדימה של ווידג'טים",
@@ -121,7 +127,7 @@
   "tap_to_disable": "לחץ כדי להשבית",
   "tap_to_enable": "לחץ כדי להפעיל",
   "program_data": "נתוני התוכנית",
-  "visual_code": "קוד ויזואלי",
+  "visual_code": "קוד חזותי",
   "generated_code": "קוד שנוצר",
   "setup_code": "התקנה",
   "main_code": "רָאשִׁי",
@@ -202,7 +208,7 @@
       "Title": "מערכת אזעקה אבטחה",
       "Description": "השתמש בחיישנים ובמכשירים אחרים כדי ליישם מערכת אזעקה.",
       "HomeGenie.SecurityAlarm": "השתמש כאזעקה/מהבהב",
-      "HomeGenie.SecurityTriggerHome": "מופעל גם כאשר הוא מופעל בבית",
+      "HomeGenie.SecurityTriggerHome": "מופעל גם כאשר הוא מופעל על ידי בית",
       "HomeGenie.SecuritySensor": "שימוש כחיישן אבטחה",
       "ConfigureOptions.Email.Recipients": "רשימה מופרדת בפסיקים של כתובות דוא\"ל של נמענים עבור התראות אזעקה",
       "ConfigureOptions.System.ArmDelay": "השהיית הפעלה (שניות)",
@@ -271,7 +277,7 @@
     "145": {
       "Title": "מכשיר חכם",
       "Description": "הדלקה/כיבוי של המכשיר בהתבסס על זיהוי תנועה ותאורת הסביבה.",
-      "HomeGenie.SmartLights.Enable": "הפעלת 'מכשיר חכם'",
+      "HomeGenie.SmartLights.Enable": "הפעל 'מכשיר חכם'",
       "HomeGenie.SmartLights.OnMotionDetect": "נשלט על ידי חיישן (אופציונלי)",
       "HomeGenie.SmartLights.CheckLuminosity": "נשלט על ידי חיישן אור (אופציונלי)",
       "HomeGenie.SmartLights.SwitchOffTimeout": "כבה לאחר פסק זמן של חוסר פעילות (שניות)",
@@ -306,6 +312,18 @@
       "Description": "מאפשר שליטה בשפה טבעית עבור המערכת החכמה שלך באמצעות הבינה המלאכותית Gemini של גוגל. כדי להפעיל תכונה זו, הזן מפתח API תקף. פעל לפי ההוראות בכתובת https://aistudio.google.com/app/apikey כדי לקבל מפתח API בחינם.",
       "ConfigureOptions.ApiKey": "מפתח ה-API של גוגל ג'מיני לבינה מלאכותית",
       "ConfigureOptions.ModelId": "מזהה דגם"
+    },
+    "931": {
+      "Title": "ג'יני ווידג'ט של ג'מיני",
+      "Description": "ג'יני הבינה המלאכותית האישי שלך ליצירת ווידג'טים. מופעל על ידי Gemini, הוא עוזר לך לכתוב ולפתור באגים בקוד HTML, CSS ו-JavaScript ישירות בתוך עורך HomeGenie. כדי להפעיל תכונה זו, הזן מפתח API תקף. פעל לפי ההוראות בכתובת https://aistudio.google.com/app/apikey כדי לקבל מפתח API בחינם.",
+      "ConfigureOptions.ApiKey": "מפתח ה-API של גוגל ג'מיני לבינה מלאכותית",
+      "ConfigureOptions.ModelId": "מזהה דגם"
+    },
+    "940": {
+      "Title": "בינה מלאכותית מקומית (LLM)",
+      "Description": "הרץ מודל שפה גדול (LLM) באופן מקומי בשרת HomeGenie שלך. ניתן להוריד מודלים אלה בחינם מפלטפורמות כמו Hugging Face. פשוט ספק את הנתיב לקובץ מודל בפורמט GGUF. שימו לב שייתכן שיידרשו התאמות לפרמטרים, בעיקר בתוך קוד ההקשר, כדי להבטיח תאימות מלאה עם מודלים שונים.",
+      "ConfigureOptions.MaxTokens": "מקסימום אסימונים (אורך תגובה)",
+      "ConfigureOptions.ModelPath": "נתיב לקובץ GGUF מקומי"
     }
   }
 }

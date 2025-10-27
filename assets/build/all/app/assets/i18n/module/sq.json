@@ -1,5 +1,5 @@
 {
-  "stats.time_range": "Gama kohore",
+  "stats.time_range": "Diapazoni kohor",
   "stats.one_second": "Një sekondë",
   "stats.five_seconds": "5 sekonda",
   "stats.ten_seconds": "10 sekonda",
@@ -12,5 +12,5 @@
   "stats.six_hours": "6 orë",
   "stats.twelve_hours": "12 orë",
   "stats.twentyfour_hours": "24 orë",
-  "stats.chart_provider": "Ofruesi i grafikut"
+  "stats.chart_provider": "Ofruesi i grafikëve"
 }

@@ -83,7 +83,7 @@
   "cronwizard_action_schedule_variable_hint": "Uporabite <span class=\"notranslate color-primary\">@{{name}}</span> kot spremenljivko v izrazih cron ali pa uporabite <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> v programih za avtomatizacijo za sklicevanje na ta dogodek.",
   "scheduler_preset_action_command_turn_on": "Vklopi",
   "scheduler_preset_action_command_turn_off": "Izklopi",
-  "scheduler_preset_action_command_set_level": "Nastavljena raven",
+  "scheduler_preset_action_command_set_level": "Nastavi raven",
   "scheduler_preset_action_config_level": "Raven",
   "scheduler_preset_action_command_set_color": "Nastavi barvo",
   "scheduler_preset_action_config_color": "Barva",
@@ -91,14 +91,20 @@
   "scheduler_preset_action_config_mode": "Način",
   "scheduler_preset_action_config_mode_on": "Vklopljeno",
   "scheduler_preset_action_config_mode_off": "Izklopljeno",
-  "scheduler_preset_action_config_mode_heat": "Vročina",
+  "scheduler_preset_action_config_mode_heat": "Toplota",
   "scheduler_preset_action_config_mode_heat_eco": "Ogrevalna ekonomija",
   "scheduler_preset_action_config_mode_cool": "Kul",
   "scheduler_preset_action_config_mode_cool_eco": "Kul gospodarstvo",
+  "scheduler_preset_action_command_remote_control": "Daljinski upravljalnik (pošiljanje IR/RF kod)",
+  "scheduler_preset_action_config_data": "Podatki",
   "scheduler_preset_action_program_run": "Zaženi program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Možnosti",
   "scheduler_preset_action_program_say": "Reci",
+  "scheduler_preset_action_net_http_call": "Pokličite spletno storitev",
+  "scheduler_preset_action_config_url": "Naslov (URL)",
+  "scheduler_preset_action_pause": "Začasno ustavi",
+  "scheduler_preset_action_config_seconds": "Sekunde",
   "scheduler_preset_action_config_message": "Sporočilo",
   "save_and_build": "Shrani in zgradi",
   "toggle_widgets_preview": "Preklopi predogled gradnikov",
@@ -201,13 +207,13 @@
     "90": {
       "Title": "Varnostni alarmni sistem",
       "Description": "Za izvedbo varnostnega alarmnega sistema uporabite senzorje in druge naprave.",
-      "HomeGenie.SecurityAlarm": "Uporabite kot alarm/strobos",
+      "HomeGenie.SecurityAlarm": "Uporabite kot alarm/stroboskop",
       "HomeGenie.SecurityTriggerHome": "Sproži se tudi, ko je aktiviran Domači sistem",
       "HomeGenie.SecuritySensor": "Uporabite kot varnostni senzor",
       "ConfigureOptions.Email.Recipients": "Seznam e-poštnih naslovov prejemnikov za obvestila o alarmih, ločenih z vejicami",
       "ConfigureOptions.System.ArmDelay": "Zakasnitev vklopa (sekunde)",
       "ConfigureOptions.System.SirenStartTime": "Zakasnitev zagona sirene (sekunde)",
-      "ConfigureOptions.System.SirenMaxTime": "Najdaljši čas sirene (sekunde, 0 = neskončno)",
+      "ConfigureOptions.System.SirenMaxTime": "Najdaljši čas sirene (sekunde, 0=neskončno)",
       "ConfigureOptions.Trigger.ArmedProgram": "Program, ki se zažene, ko je naprava oborožena",
       "ConfigureOptions.Trigger.DisarmedProgram": "Program, ki se zažene ob razorožitvi",
       "ConfigureOptions.Trigger.TriggeredProgram": "Program, ki se zažene ob sprožitvi"
@@ -237,7 +243,7 @@
     },
     "402": {
       "Title": "Demo - Zaznano gibanje",
-      "Description": "Simulira zaznavanje gibanja demonstracijskega večsenzorskega sistema."
+      "Description": "Simulira zaznavanje gibanja demo multisenzorja."
     },
     "410": {
       "Title": "Simulator senzorjev",
@@ -247,7 +253,7 @@
       "Simulator.Sensor.Luminance": "Svetlobni senzor",
       "Simulator.Meter.Watts": "Vatmeter",
       "Simulator.Meter.Watts.Max": "Največja moč v vatih",
-      "Simulator.Sensor.DataFrequency": "Oddajna frekvenca simulatorja"
+      "Simulator.Sensor.DataFrequency": "Frekvenca oddajanja simulatorja"
     },
     "505": {
       "Title": "Daljinski upravljalnik",
@@ -306,6 +312,18 @@
       "Description": "Omogoča upravljanje naravnega jezika za vaš pametni sistem z uporabo Googlove umetne inteligence Gemini. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
       "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
       "ConfigureOptions.ModelId": "ID modela"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Vaš osebni duh umetne inteligence za ustvarjanje gradnikov. Poganja ga Gemini in vam pomaga pisati ter odpravljati napake v kodi HTML, CSS in JavaScript neposredno v urejevalniku HomeGenie. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
+      "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
+      "ConfigureOptions.ModelId": "ID modela"
+    },
+    "940": {
+      "Title": "Lokalna umetna inteligenca (LLM)",
+      "Description": "Lokalno na strežniku HomeGenie zaženite model velikega jezika (LLM). Te modele lahko brezplačno prenesete s platform, kot je Hugging Face. Preprosto navedite pot do datoteke modela v formatu GGUF. Upoštevajte, da bodo za zagotovitev popolne združljivosti z različnimi modeli morda potrebne prilagoditve parametrov, predvsem znotraj kontekstne kode.",
+      "ConfigureOptions.MaxTokens": "Največ žetonov (dolžina odgovora)",
+      "ConfigureOptions.ModelPath": "Pot do lokalne datoteke GGUF"
     }
   }
 }

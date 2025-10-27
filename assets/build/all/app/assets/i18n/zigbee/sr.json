@@ -1,8 +1,8 @@
 {
-  "node_inclusion": "Додајте уређај",
-  "node_exclusion": "Уклоните уређај",
-  "operation_timed_out": "Операција је истекла.",
+  "node_inclusion": "Додај уређај",
+  "node_exclusion": "Уклони уређај",
+  "operation_timed_out": "Временско ограничење операције је истекло.",
   "node_added": "Чвор је успешно додат",
   "turn_on_device_to_add": "Укључите уређај и притисните дугме за упаривање 5 секунди ако је потребно",
-  "soft_reset_button": "Софт ресет"
+  "soft_reset_button": "Софт ресетовање"
 }

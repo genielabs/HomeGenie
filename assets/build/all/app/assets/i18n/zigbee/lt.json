@@ -1,8 +1,8 @@
 {
   "node_inclusion": "Pridėti įrenginį",
-  "node_exclusion": "Pašalinkite įrenginį",
-  "operation_timed_out": "Baigėsi operacijos laikas.",
+  "node_exclusion": "Pašalinti įrenginį",
+  "operation_timed_out": "Operacijos skirtasis laikas baigėsi.",
   "node_added": "Mazgas sėkmingai pridėtas",
-  "turn_on_device_to_add": "Įjunkite įrenginį ir, jei reikia, 5 sekundes paspauskite susiejimo mygtuką",
-  "soft_reset_button": "Minkštas atstatymas"
+  "turn_on_device_to_add": "Įjunkite įrenginį ir, jei reikia, 5 sekundes palaikykite paspaudę susiejimo mygtuką.",
+  "soft_reset_button": "Švelnus atstatymas"
 }

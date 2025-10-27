@@ -71,7 +71,7 @@
   "cronwizard_schedule_set_exact_time": "Установите время события.",
   "cronwizard_schedule_set_slot_start": "Установить начало временного интервала.",
   "cronwizard_schedule_set_slot_end": "Начиная с {{start}}.<span class=\"notranslate\"><br/></span> Установить конец временного интервала.",
-  "cronwizard_bindings_define_types_and_modules": "Определите типы и модули, подпадающие под действие этого графика (необязательно)",
+  "cronwizard_bindings_define_types_and_modules": "Определите типы и модули, на которые распространяется этот график (необязательно)",
   "cronwizard_bindings_select_types": "Выберите типы",
   "cronwizard_action_set_action_to_execute": "Установить действие, которое будет выполняться при возникновении этого события",
   "cronwizard_action_preset_actions": "Предустановленные действия",
@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Нагревать",
   "scheduler_preset_action_config_mode_heat_eco": "Экономия тепла",
   "scheduler_preset_action_config_mode_cool": "Прохладный",
-  "scheduler_preset_action_config_mode_cool_eco": "Крутая экономика",
+  "scheduler_preset_action_config_mode_cool_eco": "Прохладная экономика",
+  "scheduler_preset_action_command_remote_control": "Дистанционное управление (отправка ИК/РЧ-кодов)",
+  "scheduler_preset_action_config_data": "Данные",
   "scheduler_preset_action_program_run": "Запустить программу",
   "scheduler_preset_action_config_program": "Программа",
   "scheduler_preset_action_config_options": "Параметры",
   "scheduler_preset_action_program_say": "Сказать",
+  "scheduler_preset_action_net_http_call": "Позвоните в веб-службу",
+  "scheduler_preset_action_config_url": "Адрес (URL)",
+  "scheduler_preset_action_pause": "Пауза",
+  "scheduler_preset_action_config_seconds": "Секунды",
   "scheduler_preset_action_config_message": "Сообщение",
   "save_and_build": "Сохранить и построить",
   "toggle_widgets_preview": "Включить предварительный просмотр виджетов",
@@ -192,7 +198,7 @@
     "88": {
       "Title": "Обычная IP-камера",
       "Description": "Отображение/маршрутизация изображения с IP-камеры.",
-      "IpCamera.ImageURL": "URL API изображения камеры (см. документацию по вашей камере)",
+      "IpCamera.ImageURL": "URL API изображения с камеры (см. документацию по вашей камере)",
       "IpCamera.Username": "Имя пользователя (необязательно)",
       "IpCamera.Password": "Пароль (необязательно)",
       "Widget.Config.fps": "Кадров в секунду",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Программа, запускаемая при срабатывании триггера"
     },
     "95": {
-      "Title": "Регистрация событий",
+      "Title": "Ведение журнала событий",
       "Description": "Запись активности устройства.",
       "EventsLogger.EnableLogging": "Давать возможность"
     },
@@ -240,7 +246,7 @@
       "Description": "Имитирует обнаружение движения демонстрационного мультисенсора."
     },
     "410": {
-      "Title": "Симулятор датчика",
+      "Title": "Симулятор сенсора",
       "Description": "Выдавать случайные значения датчиков.",
       "Simulator.Sensor.Temperature": "Датчик температуры",
       "Simulator.Sensor.Humidity": "Датчик влажности",
@@ -306,6 +312,18 @@
       "Description": "Обеспечивает управление естественным языком для вашей интеллектуальной системы с помощью Gemini AI от Google. Чтобы активировать эту функцию, введите действительный ключ API. Следуйте инструкциям на странице https://aistudio.google.com/app/apikey, чтобы получить бесплатный ключ API.",
       "ConfigureOptions.ApiKey": "API-ключ Google Gemini AI",
       "ConfigureOptions.ModelId": "Идентификатор модели"
+    },
+    "931": {
+      "Title": "Виджет Gemini Genie",
+      "Description": "Ваш персональный ИИ-джинн для создания виджетов. Работающий на базе Gemini, он помогает писать и отлаживать код HTML, CSS и JavaScript прямо в редакторе HomeGenie. Чтобы активировать эту функцию, введите действительный ключ API. Следуйте инструкциям на странице https://aistudio.google.com/app/apikey, чтобы получить бесплатный ключ API.",
+      "ConfigureOptions.ApiKey": "API-ключ Google Gemini AI",
+      "ConfigureOptions.ModelId": "Идентификатор модели"
+    },
+    "940": {
+      "Title": "Локальный ИИ (LLM)",
+      "Description": "Запустите большую языковую модель (LLM) локально на сервере HomeGenie. Эти модели можно бесплатно загрузить с таких платформ, как Hugging Face. Просто укажите путь к файлу модели в формате GGUF. Обратите внимание, что для обеспечения полной совместимости с различными моделями может потребоваться корректировка параметров, в первую очередь в коде контекста.",
+      "ConfigureOptions.MaxTokens": "Макс. количество токенов (длина ответа)",
+      "ConfigureOptions.ModelPath": "Путь к локальному файлу GGUF"
     }
   }
 }

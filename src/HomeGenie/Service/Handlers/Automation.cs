@@ -29,6 +29,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using HomeGenie.Service.Constants;
@@ -384,11 +385,40 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Implements":
-                    var implementingList = new List<ProgramBlock>(homegenie.ProgramManager
-                        .Programs
-                        .FindAll(p => p.ImplementedInterfaces
-                            .Exists(i => i.Identifier == migCommand.GetOption(0))
-                        )
+                    string pattern = migCommand.GetOption(0);
+                    string rule = migCommand.GetOption(1);
+                    if (string.IsNullOrEmpty(pattern))
+                    {
+                        request.ResponseData = new List<object>();
+                        break;
+                    }
+                    Func<string, bool> matcher;
+                    switch (rule?.ToLowerInvariant())
+                    {
+                        case null:
+                        case "":
+                        case "exact":
+                            matcher = (identifier) => identifier.Equals(pattern, StringComparison.OrdinalIgnoreCase);
+                            break;
+                        case "regex":
+                            try
+                            {
+                                var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+                                matcher = (identifier) => regex.IsMatch(identifier);
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                request.ResponseData = new ResponseStatus(Status.Error, $"Invalid regular expression pattern: {ex.Message}");
+                                return;
+                            }
+                            break;
+                        default:
+                            request.ResponseData = new ResponseStatus(Status.Error, $"Matching rule '{rule}' is not supported.");
+                            return;
+                    }
+                    var implementingList = new List<ProgramBlock>(
+                        homegenie.ProgramManager.Programs
+                            .FindAll(p => p.ImplementedInterfaces.Exists(i => matcher(i.Identifier)))
                     );
                     implementingList.Sort(delegate(ProgramBlock p1, ProgramBlock p2)
                     {
@@ -399,7 +429,7 @@ namespace HomeGenie.Service.Handlers
                     request.ResponseData = implementingList.Select(p => new
                     {
                         Program = p,
-                        ImplementedInterface = p.ImplementedInterfaces.Find(i => i.Identifier == migCommand.GetOption(0))
+                        ImplementedInterface = p.ImplementedInterfaces.First(i => matcher(i.Identifier))
                     });
                     break;
 
@@ -450,6 +480,7 @@ namespace HomeGenie.Service.Handlers
                         homegenie.UpdateProgramsDatabase();
                         // remove associated module entry
                         homegenie.Modules.RemoveAll(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == currentProgram.Address.ToString());
+                        homegenie.VirtualModules.RemoveAll(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && (m.Address == currentProgram.Address.ToString() || m.ParentId == currentProgram.Address.ToString()));
                         homegenie.UpdateModulesDatabase();
                     }
                     break;

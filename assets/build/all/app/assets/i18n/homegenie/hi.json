@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "पर",
   "scheduler_preset_action_config_mode_off": "बंद",
   "scheduler_preset_action_config_mode_heat": "गर्मी",
-  "scheduler_preset_action_config_mode_heat_eco": "ताप अर्थव्यवस्था",
+  "scheduler_preset_action_config_mode_heat_eco": "ऊष्मा अर्थव्यवस्था",
   "scheduler_preset_action_config_mode_cool": "ठंडा",
   "scheduler_preset_action_config_mode_cool_eco": "शांत अर्थव्यवस्था",
+  "scheduler_preset_action_command_remote_control": "रिमोट कंट्रोल (IR/RF कोड भेजें)",
+  "scheduler_preset_action_config_data": "डेटा",
   "scheduler_preset_action_program_run": "प्रोग्राम चलाएँ",
   "scheduler_preset_action_config_program": "कार्यक्रम",
   "scheduler_preset_action_config_options": "विकल्प",
   "scheduler_preset_action_program_say": "कहना",
+  "scheduler_preset_action_net_http_call": "वेब सेवा को कॉल करें",
+  "scheduler_preset_action_config_url": "पता (URL)",
+  "scheduler_preset_action_pause": "विराम",
+  "scheduler_preset_action_config_seconds": "सेकंड",
   "scheduler_preset_action_config_message": "संदेश",
   "save_and_build": "सहेजें और बनाएँ",
   "toggle_widgets_preview": "विजेट पूर्वावलोकन टॉगल करें",
@@ -121,7 +127,7 @@
   "tap_to_disable": "अक्षम करने के लिए क्लिक करें",
   "tap_to_enable": "सक्षम करने के लिए क्लिक करें",
   "program_data": "कार्यक्रम डेटा",
-  "visual_code": "दृश्य कोड",
+  "visual_code": "विज़ुअल कोड",
   "generated_code": "उत्पन्न कोड",
   "setup_code": "स्थापित करना",
   "main_code": "मुख्य",
@@ -306,6 +312,18 @@
       "Description": "Google के Gemini AI का उपयोग करके आपके स्मार्ट सिस्टम के लिए प्राकृतिक भाषा नियंत्रण सक्षम करता है। इस सुविधा को सक्रिय करने के लिए, एक मान्य API कुंजी दर्ज करें। निःशुल्क API कुंजी प्राप्त करने के लिए https://aistudio.google.com/app/apikey पर दिए गए निर्देशों का पालन करें।",
       "ConfigureOptions.ApiKey": "Google Gemini AI API कुंजी",
       "ConfigureOptions.ModelId": "मॉडल आईडी"
+    },
+    "931": {
+      "Title": "जेमिनी विजेट जिन्न",
+      "Description": "विजेट निर्माण के लिए आपका निजी AI जिन्न। जेमिनी द्वारा संचालित, यह आपको सीधे HomeGenie संपादक में HTML, CSS और JavaScript कोड लिखने और डीबग करने में मदद करता है। इस सुविधा को सक्रिय करने के लिए, एक मान्य API कुंजी दर्ज करें। मुफ़्त API कुंजी प्राप्त करने के लिए https://aistudio.google.com/app/apikey पर दिए गए निर्देशों का पालन करें।",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API कुंजी",
+      "ConfigureOptions.ModelId": "मॉडल आईडी"
+    },
+    "940": {
+      "Title": "स्थानीय एआई (एलएलएम)",
+      "Description": "अपने HomeGenie सर्वर पर स्थानीय रूप से एक लार्ज लैंग्वेज मॉडल (LLM) चलाएँ। ये मॉडल हगिंग फेस जैसे प्लेटफ़ॉर्म से मुफ़्त में डाउनलोड किए जा सकते हैं। बस एक GGUF फ़ॉर्मैट मॉडल फ़ाइल का पथ प्रदान करें। कृपया ध्यान दें कि विभिन्न मॉडलों के साथ पूर्ण संगतता सुनिश्चित करने के लिए, मुख्य रूप से संदर्भ कोड के अंतर्गत, मापदंडों में समायोजन की आवश्यकता हो सकती है।",
+      "ConfigureOptions.MaxTokens": "अधिकतम टोकन (प्रतिक्रिया लंबाई)",
+      "ConfigureOptions.ModelPath": "स्थानीय GGUF फ़ाइल का पथ"
     }
   }
 }

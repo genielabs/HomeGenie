@@ -82,23 +82,29 @@
   "cronwizard_action_no_action": "Sen acción",
   "cronwizard_action_schedule_variable_hint": "Usa <span class=\"notranslate color-primary\">@{{name}}</span> como variable en expresións cron ou usa <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> en programas de automatización para facer referencia a este evento.",
   "scheduler_preset_action_command_turn_on": "Activar",
-  "scheduler_preset_action_command_turn_off": "Apagar",
+  "scheduler_preset_action_command_turn_off": "Desactivar",
   "scheduler_preset_action_command_set_level": "Definir nivel",
   "scheduler_preset_action_config_level": "Nivel",
   "scheduler_preset_action_command_set_color": "Definir cor",
   "scheduler_preset_action_config_color": "Cor",
-  "scheduler_preset_action_command_thermostat_mode": "Modo do termostato",
+  "scheduler_preset_action_command_thermostat_mode": "Modo de termostato",
   "scheduler_preset_action_config_mode": "Modo",
   "scheduler_preset_action_config_mode_on": "Activado",
   "scheduler_preset_action_config_mode_off": "Desactivado",
   "scheduler_preset_action_config_mode_heat": "Calor",
   "scheduler_preset_action_config_mode_heat_eco": "Economía térmica",
   "scheduler_preset_action_config_mode_cool": "Xenial",
-  "scheduler_preset_action_config_mode_cool_eco": "Economía fría",
+  "scheduler_preset_action_config_mode_cool_eco": "Economía xenial",
+  "scheduler_preset_action_command_remote_control": "Control remoto (envía códigos IR/RF)",
+  "scheduler_preset_action_config_data": "Datos",
   "scheduler_preset_action_program_run": "Executar programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Opcións",
   "scheduler_preset_action_program_say": "Dicir",
+  "scheduler_preset_action_net_http_call": "Chamar a un servizo web",
+  "scheduler_preset_action_config_url": "Enderezo (URL)",
+  "scheduler_preset_action_pause": "Pausa",
+  "scheduler_preset_action_config_seconds": "Segundos",
   "scheduler_preset_action_config_message": "Mensaxe",
   "save_and_build": "Gardar e construír",
   "toggle_widgets_preview": "Activar/desactivar vista previa dos widgets",
@@ -210,7 +216,7 @@
       "ConfigureOptions.System.SirenMaxTime": "Tempo máximo das sirenas (segundos, 0=infinito)",
       "ConfigureOptions.Trigger.ArmedProgram": "Programa para executarse cando está armado",
       "ConfigureOptions.Trigger.DisarmedProgram": "Programa a executar cando estea desarmado",
-      "ConfigureOptions.Trigger.TriggeredProgram": "Programa a executar cando se active"
+      "ConfigureOptions.Trigger.TriggeredProgram": "Programa que se executará cando se active"
     },
     "95": {
       "Title": "Rexistro de eventos",
@@ -306,6 +312,18 @@
       "Description": "Activa o control da linguaxe natural para o teu sistema intelixente mediante a IA Gemini de Google. Para activar esta función, introduce unha clave API válida. Segue as instrucións en https://aistudio.google.com/app/apikey para obter unha clave API gratuíta.",
       "ConfigureOptions.ApiKey": "Clave da API de IA de Google Gemini",
       "ConfigureOptions.ModelId": "ID do modelo"
+    },
+    "931": {
+      "Title": "Xenio do widget de Xemelgos",
+      "Description": "O teu xenio persoal de IA para a creación de widgets. Con tecnoloxía Gemini, axúdache a escribir e depurar código HTML, CSS e JavaScript directamente dentro do editor HomeGenie. Para activar esta función, introduce unha clave API válida. Segue as instrucións en https://aistudio.google.com/app/apikey para obter unha clave API gratuíta.",
+      "ConfigureOptions.ApiKey": "Clave da API de IA de Google Gemini",
+      "ConfigureOptions.ModelId": "ID do modelo"
+    },
+    "940": {
+      "Title": "IA local (LLM)",
+      "Description": "Executa un modelo de linguaxe grande (LLM) localmente no teu servidor HomeGenie. Estes modelos pódense descargar de balde desde plataformas como Hugging Face. Simplemente proporciona a ruta a un ficheiro de modelo en formato GGUF. Ten en conta que poden ser necesarios axustes nos parámetros, principalmente dentro do código de contexto, para garantir a compatibilidade total con diferentes modelos.",
+      "ConfigureOptions.MaxTokens": "Tokens máximos (lonxitude da resposta)",
+      "ConfigureOptions.ModelPath": "Ruta ao ficheiro GGUF local"
     }
   }
 }

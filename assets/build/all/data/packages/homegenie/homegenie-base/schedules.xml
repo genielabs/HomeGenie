@@ -7,7 +7,7 @@
     <Data>{"itemType":1,"time":[{"start":"02:00","end":"02:00"}],"occur_min_type":1,"occur_min_step":30,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":12,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"script","template":{"forEach":{"enabled":false},"forStart":{"enabled":false},"forEnd":{"enabled":false}}},"from":"2021-04-23","to":"2021-04-23"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>$$.program.updateCheck();
-        </Script>
+</Script>
     <BoundDevices />
     <BoundModules />
   </SchedulerItem>

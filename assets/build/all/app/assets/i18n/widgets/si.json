@@ -1,5 +1,5 @@
 {
-  "toggle_long_press_to_reorder_widgets": "විජට් නැවත ඇණවුම් කිරීමට දිගු එබීම සක්‍රිය/අක්‍රිය කරන්න",
+  "toggle_long_press_to_reorder_widgets": "විජට් නැවත ඇණවුම් කිරීමට දිගු එබීම සක්‍රිය/අබල කරන්න",
   "$alarm_system": {
     "arm_home": "මුල් පිටුව",
     "arm_away": "ඉවතට"
@@ -9,5 +9,11 @@
     "indicators": "දර්ශක",
     "lights_control": "ලයිට්",
     "switches_control": "ස්විච"
+  },
+  "$ai_chat": {
+    "title": "AI කතාබස් විජට්",
+    "intro": "හෙලෝ! මම ඔබේ ප්‍රදේශයේ LLM සහායක. මම ඔබට උදව් කරන්නේ කෙසේද?",
+    "no_bound_module": "LLM මොඩියුලය බැඳී නොමැත. භාෂා ආකෘතියක් බැඳීමට කරුණාකර විජට් සැකසුම් විවෘත කරන්න.",
+    "start_typing_prompt": "විමසුමක් ටයිප් කිරීම ආරම්භ කරන්න..."
   }
 }

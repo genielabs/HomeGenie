@@ -83,22 +83,28 @@
   "cronwizard_action_schedule_variable_hint": "Gunakan <span class=\"notranslate color-primary\">@{{name}}</span> sebagai variabel dalam ekspresi cron atau gunakan <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> dalam program otomatisasi untuk merujuk peristiwa ini.",
   "scheduler_preset_action_command_turn_on": "Menyalakan",
   "scheduler_preset_action_command_turn_off": "Mematikan",
-  "scheduler_preset_action_command_set_level": "Tetapkan level",
+  "scheduler_preset_action_command_set_level": "Atur Tingkat",
   "scheduler_preset_action_config_level": "Tingkat",
-  "scheduler_preset_action_command_set_color": "Atur warna",
+  "scheduler_preset_action_command_set_color": "Atur Warna",
   "scheduler_preset_action_config_color": "Warna",
-  "scheduler_preset_action_command_thermostat_mode": "Mode termostat",
+  "scheduler_preset_action_command_thermostat_mode": "Mode Termostat",
   "scheduler_preset_action_config_mode": "Mode",
   "scheduler_preset_action_config_mode_on": "Pada",
   "scheduler_preset_action_config_mode_off": "Mati",
   "scheduler_preset_action_config_mode_heat": "Panas",
-  "scheduler_preset_action_config_mode_heat_eco": "Ekonomi panas",
+  "scheduler_preset_action_config_mode_heat_eco": "Ekonomi Panas",
   "scheduler_preset_action_config_mode_cool": "Dingin",
-  "scheduler_preset_action_config_mode_cool_eco": "Ekonomi yang dingin",
-  "scheduler_preset_action_program_run": "Jalankan program",
+  "scheduler_preset_action_config_mode_cool_eco": "Ekonomi Keren",
+  "scheduler_preset_action_command_remote_control": "Kontrol Jarak Jauh (mengirim kode IR/RF)",
+  "scheduler_preset_action_config_data": "Data",
+  "scheduler_preset_action_program_run": "Jalankan Program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Pilihan",
   "scheduler_preset_action_program_say": "Mengatakan",
+  "scheduler_preset_action_net_http_call": "Hubungi Layanan Web",
+  "scheduler_preset_action_config_url": "Alamat (URL)",
+  "scheduler_preset_action_pause": "Berhenti sebentar",
+  "scheduler_preset_action_config_seconds": "Detik",
   "scheduler_preset_action_config_message": "Pesan",
   "save_and_build": "Simpan dan bangun",
   "toggle_widgets_preview": "Alihkan pratinjau widget",
@@ -117,12 +123,12 @@
   "program_status_enabled": "Diaktifkan",
   "program_status_broken": "Rusak",
   "program_status_compile": "Menyusun",
-  "automation_programming_guide": "Panduan pemrograman",
+  "automation_programming_guide": "Panduan Pemrograman",
   "tap_to_disable": "Klik untuk menonaktifkan",
   "tap_to_enable": "Klik untuk mengaktifkan",
-  "program_data": "Data program",
-  "visual_code": "Kode visual",
-  "generated_code": "Kode yang dihasilkan",
+  "program_data": "Data Program",
+  "visual_code": "Kode Visual",
+  "generated_code": "Kode yang Dihasilkan",
   "setup_code": "Pengaturan",
   "main_code": "Utama",
   "context_code": "Konteks",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Simulasikan saja"
     },
     "26": {
-      "Title": "Lampu warna",
+      "Title": "Lampu Warna",
       "Description": "Contoh integrasi lampu Philips Hue menggunakan HTTP API (V1). Pengguna default untuk terhubung ke bridge adalah \"newdeveloper\" dan seharusnya sudah diaktifkan.",
       "ConfigureOptions.BridgeAddress": "Alamat IP Philips Hue Bridge (V1)",
       "ConfigureOptions.BridgeUsername": "Nama belakang",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Program untuk dijalankan saat dipicu"
     },
     "95": {
-      "Title": "Pencatatan peristiwa",
+      "Title": "Pencatatan Peristiwa",
       "Description": "Merekam aktivitas perangkat.",
       "EventsLogger.EnableLogging": "Memungkinkan"
     },
     "111": {
-      "Title": "Konfigurasi klien",
+      "Title": "Konfigurasi Klien",
       "Description": "Menerapkan API untuk mengelola profil konfigurasi klien yang digunakan untuk menyimpan pengaturan UI dan dasbor."
     },
     "400": {
@@ -240,12 +246,12 @@
       "Description": "Mensimulasikan deteksi gerakan pada demo multi-sensor."
     },
     "410": {
-      "Title": "Simulator sensor",
+      "Title": "Simulator Sensor",
       "Description": "Memancarkan nilai sensor acak.",
       "Simulator.Sensor.Temperature": "Sensor suhu",
       "Simulator.Sensor.Humidity": "Sensor kelembaban",
       "Simulator.Sensor.Luminance": "Sensor cahaya",
-      "Simulator.Meter.Watts": "Pengukur Watt",
+      "Simulator.Meter.Watts": "Watt meter",
       "Simulator.Meter.Watts.Max": "Daya Watt Maksimum",
       "Simulator.Sensor.DataFrequency": "Frekuensi pancaran simulator"
     },
@@ -259,7 +265,7 @@
       "ConfigureOptions.DimmerInterval": "Langkah peredupan"
     },
     "142": {
-      "Title": "Akun email",
+      "Title": "Akun Email",
       "Description": "Menyimpan info akun email yang digunakan oleh program sistem untuk mengirim/menerima email.",
       "ConfigureOptions.Email.Sender": "1. Alamat email",
       "ConfigureOptions.Email.SmtpServer": "2. Alamat server SMTP",
@@ -283,29 +289,41 @@
       "Scenarios.SunriseColors": "Tautan ke skenario Warna Matahari Terbit"
     },
     "910": {
-      "Title": "Deteksi objek",
+      "Title": "Deteksi Objek",
       "Description": "Mendeteksi objek menggunakan model YOLO11 yang telah dilatih sebelumnya.",
       "ML.ObjectDetection": "Aktifkan deteksi objek",
       "ML.ObjectDetection.TriggerDetect": "Daftar hal-hal (dalam bahasa Inggris) yang dipisahkan koma yang akan memicu alarm. (misalnya: kucing, anjing, orang, ransel, koper)",
       "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Estimasi pose",
+      "Title": "Estimasi Pose",
       "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLOv11 terlatih bawaan (pose khusus manusia).",
       "ML.PoseEstimation": "Aktifkan estimasi pose",
       "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Segmentasi instans",
+      "Title": "Segmentasi Instansi",
       "Description": "Deteksi objek dan garis besarnya menggunakan model YOLO11 yang telah dilatih sebelumnya.",
       "ML.InstanceSegmentation": "Aktifkan segmentasi instans",
       "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
     },
     "930": {
       "Title": "Penangan Maksud Gemini",
-      "Description": "Mengaktifkan kontrol bahasa alami untuk sistem pintar Anda menggunakan Google Gemini AI. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
+      "Description": "Mengaktifkan kontrol bahasa alami untuk sistem pintar Anda menggunakan Gemini AI Google. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identitas Model"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "AI Genie pribadi Anda untuk pembuatan widget. Didukung oleh Gemini, fitur ini membantu Anda menulis dan men-debug kode HTML, CSS, dan JavaScript langsung di dalam editor HomeGenie. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
+      "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identitas Model"
+    },
+    "940": {
+      "Title": "AI Lokal (LLM)",
+      "Description": "Jalankan Large Language Model (LLM) secara lokal di server HomeGenie Anda. Model-model ini dapat diunduh gratis dari platform seperti Hugging Face. Cukup berikan path ke berkas model berformat GGUF. Harap dicatat bahwa penyesuaian parameter, terutama dalam Kode Konteks, mungkin diperlukan untuk memastikan kompatibilitas penuh dengan berbagai model.",
+      "ConfigureOptions.MaxTokens": "Token Maksimum (panjang respons)",
+      "ConfigureOptions.ModelPath": "Jalur ke file GGUF lokal"
     }
   }
 }

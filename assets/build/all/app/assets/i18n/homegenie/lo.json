@@ -21,7 +21,7 @@
   "repositories": "ບ່ອນເກັບມ້ຽນ",
   "packages": "ການຫຸ້ມຫໍ່",
   "installed_packages": "ແພັກເກດທີ່ຕິດຕັ້ງແລ້ວ",
-  "upload_package": "ອັບໂຫຼດແພັກເກດ",
+  "upload_package": "ອັບໂຫຼດຊຸດ",
   "create_package": "ສ້າງຊຸດໃຫມ່",
   "programs_version": "ສະບັບໂປຣແກຣມ",
   "http_settings": "ການຕັ້ງຄ່າ HTTP",
@@ -73,7 +73,7 @@
   "cronwizard_schedule_set_slot_end": "ເລີ່ມຕົ້ນທີ່ {{start}}.<span class=\"notranslate\"><br/></span> ຕັ້ງເວລາສິ້ນສຸດ.",
   "cronwizard_bindings_define_types_and_modules": "ກໍານົດປະເພດແລະໂມດູນທີ່ຂຶ້ນກັບຕາຕະລາງນີ້ (ທາງເລືອກ)",
   "cronwizard_bindings_select_types": "ເລືອກປະເພດ",
-  "cronwizard_action_set_action_to_execute": "ກໍານົດການດໍາເນີນການເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
+  "cronwizard_action_set_action_to_execute": "ກໍານົດການປະຕິບັດເພື່ອປະຕິບັດການປະກົດຕົວຂອງເຫດການນີ້",
   "cronwizard_action_preset_actions": "ຄຳສັ່ງທີ່ຕັ້ງໄວ້ລ່ວງໜ້າ",
   "cronwizard_action_preset_every_occurrence": "ໃນທຸກໆເຫດການ",
   "cronwizard_action_preset_slot_start": "ໃນຕອນເລີ່ມຕົ້ນຂອງເວລາ",
@@ -85,7 +85,7 @@
   "scheduler_preset_action_command_turn_off": "ປິດ",
   "scheduler_preset_action_command_set_level": "ຕັ້ງລະດັບ",
   "scheduler_preset_action_config_level": "ລະດັບ",
-  "scheduler_preset_action_command_set_color": "ກໍານົດສີ",
+  "scheduler_preset_action_command_set_color": "ຕັ້ງສີ",
   "scheduler_preset_action_config_color": "ສີ",
   "scheduler_preset_action_command_thermostat_mode": "ໂໝດເຄື່ອງຄວບຄຸມອຸນຫະພູມ",
   "scheduler_preset_action_config_mode": "ໂໝດ",
@@ -95,12 +95,18 @@
   "scheduler_preset_action_config_mode_heat_eco": "ເສດຖະກິດຄວາມຮ້ອນ",
   "scheduler_preset_action_config_mode_cool": "ເຢັນ",
   "scheduler_preset_action_config_mode_cool_eco": "ເສດຖະກິດເຢັນ",
+  "scheduler_preset_action_command_remote_control": "ການຄວບຄຸມໄລຍະໄກ (ສົ່ງລະຫັດ IR/RF)",
+  "scheduler_preset_action_config_data": "ຂໍ້ມູນ",
   "scheduler_preset_action_program_run": "ດໍາເນີນໂຄງການ",
   "scheduler_preset_action_config_program": "ໂຄງການ",
   "scheduler_preset_action_config_options": "ທາງເລືອກ",
   "scheduler_preset_action_program_say": "ເວົ້າ",
+  "scheduler_preset_action_net_http_call": "ໂທຫາບໍລິການເວັບ",
+  "scheduler_preset_action_config_url": "ທີ່ຢູ່ (URL)",
+  "scheduler_preset_action_pause": "ຢຸດຊົ່ວຄາວ",
+  "scheduler_preset_action_config_seconds": "ວິນາທີ",
   "scheduler_preset_action_config_message": "ຂໍ້ຄວາມ",
-  "save_and_build": "ຊ່ວຍ​ປະ​ຢັດ​ແລະ​ການ​ກໍ່​ສ້າງ​",
+  "save_and_build": "ບັນທຶກແລະສ້າງ",
   "toggle_widgets_preview": "ສະຫຼັບການສະແດງຕົວຢ່າງວິກເຈັດ",
   "stop_program": "ຢຸດໂຄງການ",
   "run_program": "ດໍາເນີນໂຄງການ",
@@ -121,7 +127,7 @@
   "tap_to_disable": "ຄລິກເພື່ອປິດການໃຊ້ງານ",
   "tap_to_enable": "ຄລິກເພື່ອເປີດໃຊ້",
   "program_data": "ຂໍ້ມູນໂຄງການ",
-  "visual_code": "ລະຫັດສາຍຕາ",
+  "visual_code": "Visual Code",
   "generated_code": "ລະຫັດທີ່ສ້າງຂຶ້ນ",
   "setup_code": "ຕັ້ງຄ່າ",
   "main_code": "ຫຼັກ",
@@ -135,7 +141,7 @@
   "capture_pause_asis": "ດັ່ງທີ່",
   "$options": {
     "16": {
-      "Title": "ຫນ່ວຍຄວາມຈໍາລະດັບ",
+      "Title": "ລະດັບຄວາມຈໍາ",
       "Description": "ເກັບຮັກສາແລະຈື່ຈໍາລະດັບ dimmer ສຸດທ້າຍ.",
       "HomeGenie.LevelMemory": "ຈື່ລະດັບແສງສຸດທ້າຍເມື່ອເປີດ",
       "HomeGenie.LevelMemory.SimulateOnly": "ຈຳລອງເທົ່ານັ້ນ"
@@ -180,7 +186,7 @@
     "81": {
       "Title": "ຕິດຕາມກວດກາພະລັງງານ",
       "Description": "ສ້າງສະຖິຕິການບໍລິໂພກພະລັງງານ ແລະການນຳໃຊ້ອຸປະກອນ.",
-      "EnergyManagement.MonitorStatus": "ຕິດຕາມສະຖານະ",
+      "EnergyManagement.MonitorStatus": "ຕິດ​ຕາມ​ກວດ​ກາ​ສະ​ຖາ​ນະ​ພາບ​",
       "EnergyManagement.MonitorWatts": "ຕິດຕາມການບໍລິໂພກພະລັງງານ"
     },
     "82": {
@@ -226,7 +232,7 @@
       "Description": "ຕັ້ງຄ່າຂອງອຸປະກອນສະເໝືອນດ້ວຍຕົນເອງ.",
       "Sensor.Temperature": "ຄ່າອຸນຫະພູມ",
       "Sensor.Luminance": "ຄ່າຄວາມສະຫວ່າງ",
-      "Sensor.MotionDetect": "ສະຖານະກວດຈັບການເຄື່ອນໄຫວ",
+      "Sensor.MotionDetect": "ສະຖານະການກວດຈັບການເຄື່ອນໄຫວ",
       "Status.Battery": "ລະດັບຫມໍ້ໄຟ",
       "Sensor.DoorWindow": "ສະຖານະເຊັນເຊີປະຕູ/ປ່ອງຢ້ຽມ (ເປີດ/ປິດ)",
       "Status.Level": "ສະຫຼັບສະຖານະ (ເປີດ/ປິດ)"
@@ -283,14 +289,14 @@
       "Scenarios.SunriseColors": "ເຊື່ອມຕໍ່ກັບສະຖານະການສີ Sunrise"
     },
     "910": {
-      "Title": "ກວດຫາວັດຖຸ",
+      "Title": "ການກວດຫາວັດຖຸ",
       "Description": "ກວດຫາວັດຖຸໂດຍໃຊ້ຕົວແບບ YOLO11 ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.ObjectDetection": "ເປີດໃຊ້ການກວດຫາວັດຖຸ",
       "ML.ObjectDetection.TriggerDetect": "ລາຍຊື່ສິ່ງຕ່າງໆທີ່ຂັ້ນດ້ວຍເຄື່ອງໝາຍຈຸດ (ໃນພາສາອັງກິດ) ທີ່ຈະກະຕຸ້ນເຕືອນ. (ເຊັ່ນ: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "ສ້າງການຄາດຄະເນ",
+      "Title": "Pose ຄາດຄະເນ",
       "Description": "ການກວດຫາຈຸດສຳຄັນຜ່ານການຄາດຄະເນການຕັ້ງຕົວແບບ, ໂດຍໃຊ້ໂມເດວ ONNX ແບບກຳນົດເອງ ຫຼືຮູບແບບ YOLOv11 ທີ່ໄດ້ຝຶກອົບຮົມໄວ້ກ່ອນເລີ່ມຕົ້ນ (ສະເພາະຕົວແບບຂອງມະນຸດ).",
       "ML.PoseEstimation": "ເປີດ​ໃຊ້​ງານ​ການ​ຄາດ​ຄະ​ເນ​",
       "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "ເປີດໃຊ້ການຄວບຄຸມພາສາທໍາມະຊາດສໍາລັບລະບົບອັດສະລິຍະຂອງທ່ານໂດຍໃຊ້ Gemini AI ຂອງ Google. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ໃຫ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄໍາແນະນໍາຢູ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",
       "ConfigureOptions.ApiKey": "ກະແຈ Google Gemini AI API",
       "ConfigureOptions.ModelId": "ID ຕົວແບບ"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "genie AI ສ່ວນຕົວຂອງທ່ານສໍາລັບການສ້າງ widget. ຂັບເຄື່ອນໂດຍ Gemini, ມັນຊ່ວຍໃຫ້ທ່ານຂຽນແລະແກ້ໄຂລະຫັດ HTML, CSS, ແລະ JavaScript ໂດຍກົງພາຍໃນຕົວແກ້ໄຂ HomeGenie. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ກະລຸນາໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄໍາແນະນໍາຢູ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",
+      "ConfigureOptions.ApiKey": "ກະແຈ Google Gemini AI API",
+      "ConfigureOptions.ModelId": "ID ຕົວແບບ"
+    },
+    "940": {
+      "Title": "AI ທ້ອງຖິ່ນ (LLM)",
+      "Description": "ເປີດໃຊ້ຕົວແບບພາສາຂະໜາດໃຫຍ່ (LLM) ຢູ່ໃນເຄື່ອງໃນເຊີບເວີ HomeGenie ຂອງທ່ານ. ຮູບແບບເຫຼົ່ານີ້ສາມາດດາວໂຫຼດໄດ້ຟຣີຈາກເວທີເຊັ່ນ: Hugging Face. ພຽງແຕ່ໃຫ້ເສັ້ນທາງໄປຫາໄຟລ໌ຮູບແບບ GGUF. ກະລຸນາຮັບຊາບວ່າການປັບຕົວພາລາມິເຕີ, ຕົ້ນຕໍຢູ່ໃນລະຫັດບໍລິບົດ, ອາດຈະຈໍາເປັນຕ້ອງໄດ້ຮັບປະກັນຄວາມເຂົ້າກັນໄດ້ຢ່າງເຕັມທີ່ກັບຮູບແບບຕ່າງໆ.",
+      "ConfigureOptions.MaxTokens": "Max Token (ຄວາມຍາວການຕອບຮັບ)",
+      "ConfigureOptions.ModelPath": "ເສັ້ນທາງໄປຫາໄຟລ໌ GGUF ທ້ອງຖິ່ນ"
     }
   }
 }

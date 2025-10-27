@@ -94,11 +94,17 @@
   "scheduler_preset_action_config_mode_heat": "Vrućina",
   "scheduler_preset_action_config_mode_heat_eco": "Ekonomija grijanja",
   "scheduler_preset_action_config_mode_cool": "Kul",
-  "scheduler_preset_action_config_mode_cool_eco": "Hladna ekonomija",
+  "scheduler_preset_action_config_mode_cool_eco": "Kulna ekonomija",
+  "scheduler_preset_action_command_remote_control": "Daljinski upravljač (slanje IR/RF kodova)",
+  "scheduler_preset_action_config_data": "Podaci",
   "scheduler_preset_action_program_run": "Pokreni program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opcije",
   "scheduler_preset_action_program_say": "Reci",
+  "scheduler_preset_action_net_http_call": "Pozovite web servis",
+  "scheduler_preset_action_config_url": "Adresa (URL)",
+  "scheduler_preset_action_pause": "Pauza",
+  "scheduler_preset_action_config_seconds": "Sekunde",
   "scheduler_preset_action_config_message": "Poruka",
   "save_and_build": "Sačuvaj i izgradi",
   "toggle_widgets_preview": "Uključi/isključi pregled widgeta",
@@ -126,7 +132,7 @@
   "setup_code": "Postavljanje",
   "main_code": "Glavni",
   "context_code": "Kontekst",
-  "main_code_empty_note": "\"Glavni\" kod je prazan. Koristite editor \"Vizuelnog koda\" da biste generirali ovaj kod: - Otvorite kategoriju \"Program\" iz palete komandi s lijeve strane - Prevucite blok tipa \"Glavni\" u radni prostor vizuelnog koda - Dodajte unutar njega druge blokove koda da biste implementirali akcije i logiku ovog programa Program \"Glavni\" se može pokrenuti ručno ili automatski na osnovu uslova datih u kodu za podešavanje.",
+  "main_code_empty_note": "\"Glavni\" kod je prazan. Koristite editor \"Vizuelnog koda\" da biste generirali ovaj kod: - Otvorite kategoriju \"Program\" iz palete komandi s lijeve strane - Prevucite blok tipa \"Glavni\" u radni prostor vizuelnog koda - Dodajte unutar njega druge blokove koda za implementaciju akcija i logike ovog programa Program \"Glavni\" se može pokrenuti ručno ili automatski na osnovu uslova datih u kodu za podešavanje.",
   "setup_code_empty_note": "Kod \"Podešavanje\" je prazan. Koristite editor \"Vizuelnog koda\" da biste generisali ovaj kod: - Otvorite kategoriju \"Program\" iz palete komandi sa lijeve strane - Prevucite blok tipa \"Podešavanje\" u radni prostor vizuelnog koda - Dodajte unutar njega druge blokove koda da biste odredili uslove koji će pokrenuti izvršavanje \"Glavnog\" koda. Ovaj kod se evaluira svaki put kada se dogodi novi događaj i najmanje jednom u minuti.",
   "capture_commands": "Komande za snimanje",
   "capture_commands_description": "Dodajte sve komande koje se ručno izvršavaju na widgetima u program.",
@@ -306,6 +312,18 @@
       "Description": "Omogućava kontrolu prirodnog jezika za vaš pametni sistem pomoću Googleovog Gemini AI-a. Da biste aktivirali ovu funkciju, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey da biste dobili besplatni API ključ.",
       "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
       "ConfigureOptions.ModelId": "ID modela"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Vaš lični AI duh za kreiranje widgeta. Pokretan Gemini-jem, pomaže vam da pišete i otklanjate greške u HTML, CSS i JavaScript kodu direktno unutar HomeGenie editora. Da biste aktivirali ovu funkciju, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey da biste dobili besplatan API ključ.",
+      "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
+      "ConfigureOptions.ModelId": "ID modela"
+    },
+    "940": {
+      "Title": "Lokalna umjetna inteligencija (LLM)",
+      "Description": "Pokrenite Large Language Model (LLM) lokalno na vašem HomeGenie serveru. Ove modele možete besplatno preuzeti sa platformi poput Hugging Face. Jednostavno navedite putanju do datoteke modela u GGUF formatu. Imajte na umu da će možda biti potrebna prilagođavanja parametara, prvenstveno unutar kontekstnog koda, kako bi se osigurala potpuna kompatibilnost s različitim modelima.",
+      "ConfigureOptions.MaxTokens": "Maksimalni broj tokena (dužina odgovora)",
+      "ConfigureOptions.ModelPath": "Putanja do lokalne GGUF datoteke"
     }
   }
 }

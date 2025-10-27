@@ -1039,7 +1039,7 @@ class MqttCommand: MigInterfaceCommand {
     public string TransactionId {get; set;} = "";
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1075,10 +1075,10 @@ Program.UseWidget( "homegenie/environment/weather" )
 Program.Parameter("Astronomy.Sunset").Value = "";
 Program.Parameter("Astronomy.Sunrise").Value = "";
 Program.Parameter("Conditions.City").Value = "";
-Program.Parameter("Conditions.Temperature").Value = "";
 Program.Parameter("Conditions.DisplayLocation").Value = "";
 Program.Parameter("Conditions.IconType").Value = "";
 Program.Parameter("Conditions.Description").Value = "";
+Program.Parameter("Sensor.Temperature").Value = "22.44";
 
 Program.Parameter("EventsLogger.EnableLogging").Value = "On";
 Program.Run();
@@ -1295,16 +1295,16 @@ while (Program.IsRunning)
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>openweathermap</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>4B044176D2110D4A1DC97E6B00B5442C</Checksum>
+      <Checksum>C84E2793CF3B0CA530B08855628D8786</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>

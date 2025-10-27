@@ -1,8 +1,8 @@
 {
   "node_inclusion": "Amûrê lê zêde bike",
-  "node_exclusion": "Amûrê rakin",
-  "operation_timed_out": "Operasyon bi dawî bû.",
-  "node_added": "Node bi serketî hat zêdekirin",
-  "turn_on_device_to_add": "Amûrê biguherînin û ger hewce bike bişkoja hevberdanê 5 çirkeyan bikirtînin",
-  "soft_reset_button": "reset nerm"
+  "node_exclusion": "Amûrê jê bibe",
+  "operation_timed_out": "Demê operasyonê qediya.",
+  "node_added": "Girêk bi serkeftî hate zêdekirin",
+  "turn_on_device_to_add": "Amûrê vekin û heke pêwîst be bişkoja cotkirinê 5 saniyeyan bikirtînin",
+  "soft_reset_button": "Vesazkirina nerm"
 }

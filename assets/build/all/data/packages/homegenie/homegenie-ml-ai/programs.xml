@@ -10,244 +10,744 @@ Program.Implements(
 .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
 .Run();
 </ScriptSetup>
-    <ScriptSource>Api.Handle($"{API_URL}/Process", (userCommand) =&gt; {
-  /*
-    var devices = new List&lt;object&gt;
+    <ScriptSource>#using System.Text.RegularExpressions
+
+// Define constants for API paths
+const string API_PROMPT_SUBMIT = "Prompt.Submit";
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+
+// Load chat history at startup
+ChatSession.LoadHistory(Data.GetFolder());
+
+// ===================================================================
+// API HANDLER: Submit a new intent (user command)
+// ===================================================================
+Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt; 
+{
+    // 1. Validate configuration
+    string geminiApiKey = Program.Option("ApiKey").Value.Trim();
+    string geminiModelId = Program.Option("ModelId").Value.Trim();
+    if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
     {
-        new { name = "LED strip", group = "Kitchen", address = "4", domain = "HomeAutomation.ZigBee" }
-        // ... other devices
+        string error = "Gemini Intent Handler is not properly configured.";
+        Program.Notify($"ERROR: {error} Please configure the program options.");
+        return new ResponseText($"**Error:** {error} Go to the program's settings page to configure it.");
+    }
+
+    // 2. Build the current device list
+    string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
+    var devicesInGroups = Modules.Groups
+        .SelectMany(
+            groupName =&gt; Modules.InGroup(groupName).OfDeviceType(allowedTypes).SelectedModules,
+            (groupName, module) =&gt; new { name = module.Name, group = groupName, address = module.Address, domain = module.Domain, type = module.DeviceType }
+        ).ToList();
+    var uniqueIdsInGroups = new HashSet&lt;(string, string)&gt;(devicesInGroups.Select(d =&gt; (d.domain, d.address)));
+    var devicesWithoutGroup = Modules.OfDeviceType(allowedTypes).SelectedModules
+        .Where(module =&gt; !uniqueIdsInGroups.Contains((module.Domain, module.Address)))
+        .Select(module =&gt; new { name = module.Name, group = "", address = module.Address, domain = module.Domain, type = module.DeviceType });
+    devicesInGroups.AddRange(devicesWithoutGroup);
+    // Add Alarm System program module
+    devicesInGroups.Add(new { name = "Security Alarm System", group = "Dashboard", address = "90", domain = "HomeAutomation.HomeGenie.Automation", type = ModuleTypes.Sensor });
+    // Add all scripts/macros
+    var scriptMacros = Modules.OfDeviceType("Program").WithParameter("Widget.DisplayModule").SelectedModules
+        .Where(module =&gt; module.Address != "6" &amp;&amp; module.Address != "7" &amp;&amp; module.Properties.Find((p) =&gt; p.Name == "Widget.DisplayModule").Value == "homegenie/generic/program")
+        .Select(module =&gt; new { name = module.Name, group = "", address = module.Address, domain = module.Domain, type = module.DeviceType });
+    devicesInGroups.AddRange(scriptMacros);
+
+    string devicesJson = JsonConvert.SerializeObject(devicesInGroups, Formatting.Indented);
+
+    // 3. Prepare the user message with context
+    string formattedUserMessage = string.Format(USER_INPUT_TEMPLATE, devicesJson, userCommand as string);
+    var userMessage = new ChatMessage
+    {
+        Role = "user",
+        Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = formattedUserMessage } }
     };
-  */
-
-
-  // Check if Gemini API key and model were set
-  string geminiApiKey = Program.Option("ApiKey").Value.Trim();
-  string geminiModelId = Program.Option("ModelId").Value.Trim();
-  if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || String.IsNullOrEmpty(geminiModelId))
-  {
-    string error = "Gemini Intent Handler not properly configured.";
-    Program.Notify($"ERROR #1: {error} [program_configure]");
-    return new IntentHandlerResponse() {
-        answer = $"{error} Go to settings page to configure it."
+    var payloadContents = new List&lt;ChatMessage&gt;(ChatSession.History);
+    payloadContents.Add(userMessage);
+    
+    var payload = new
+    {
+        contents = payloadContents,
+        system_instruction = new { parts = new[] { new { text = GEMINI_SYSTEM_PROMPT } } },
+        generationConfig = new { temperature = 0.3 }
     };
-  }
 
+    try
+    {
+        // 4. Send the request to Gemini API
+        string payloadJson = JsonConvert.SerializeObject(payload);
+        string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+        var data = Net.WebService(geminiRequestUrl).WithTimeout(120).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
 
-  var allowedDeviceTypes = new[] { "Dimmer", "Light", "Color", "Switch", "Shutter", "DoorLock", "Thermostat" };
-  var devices = Modules.Groups
-    .SelectMany(
-        groupName =&gt; Modules.InGroup(groupName).SelectedModules
-                          .Where(module =&gt; allowedDeviceTypes.Contains(module.DeviceType.ToString())),
-        (groupName, module) =&gt; new
+        // 5. Process the response
+        string rawGeminiResponseJson = data?.candidates?[0]?.content?.parts?[0]?.text;
+
+        if (string.IsNullOrEmpty(rawGeminiResponseJson))
         {
-            name = module.Name,
-            group = groupName,
-            address = module.Address,
-            domain = module.Domain,
-            type = module.DeviceType
+            string error = "Received an empty or invalid response from the AI.";
+            Program.Notify($"ERROR: {error}");
+            return new ResponseText($"**Error:** {error}");
         }
-    )
-    .ToList();
 
-  string devicesJson = JsonConvert.SerializeObject(devices, Formatting.Indented);
-  string fullPrompt = $"{GEMINI_SYSTEM_PROMPT}\n\nDEVICE LIST:\n{devicesJson}\n\nUSER COMMAND:\n\"{userCommand}\"";
-  var payload = new
-  {
-      contents = new[]
-      {
-          new
-          {
-              parts = new[]
-              {
-                  new { text = fullPrompt }
-              }
-          }
-      },
-      generationConfig = new
-      {
-          temperature = 0.3
-      }
-  };
+        string jsonResponse = "";
+        string thoughtsChain = rawGeminiResponseJson;
 
-  string payloadJson = JsonConvert.SerializeObject(payload);
-  string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
-  var data = Net
-    .WebService(geminiRequestUrl)
-    .AddHeader("Content-Type", "application/json")
-    .Post(payloadJson)
-    .GetData();
+        string patternJsonBlock = @"```json\s*({[\s\S]*?})\s*```";
+        var matchJsonBlock = Regex.Match(rawGeminiResponseJson, patternJsonBlock, RegexOptions.Singleline);
 
-  var response = new IntentHandlerResponse();
-
-  try
-  {
-      string commandJsonString = data.candidates[0].content.parts[0].text;
-      if (!string.IsNullOrEmpty(commandJsonString))
-      {
-          commandJsonString = commandJsonString.Trim();
-          if (commandJsonString.StartsWith("```json"))
-          {
-              commandJsonString = commandJsonString.Substring(7, commandJsonString.Length - 7 - 3).Trim();
-          }
-          dynamic hgCommand = JsonConvert.DeserializeObject&lt;dynamic&gt;(commandJsonString);
-          string answer = hgCommand.answer;
-
-        JArray commands = hgCommand.commands;
-
-        //Program.Notify(answer);
-        //Program.Say(answer);
-        response.answer = answer;
-
-        if (commands != null)
+        if (matchJsonBlock.Success)
         {
-            foreach (var commandToken in commands)
+            jsonResponse = matchJsonBlock.Groups[1].Value;
+            thoughtsChain = rawGeminiResponseJson.Substring(0, matchJsonBlock.Index).Trim();
+        }
+        else
+        {
+            int lastBraceIndex = rawGeminiResponseJson.LastIndexOf('}');
+            if (lastBraceIndex != -1)
             {
-                string command = commandToken.ToString();
-                if (command.ToUpper() != "NONE")
+                int firstBraceIndex = rawGeminiResponseJson.LastIndexOf('{', lastBraceIndex);
+                if (firstBraceIndex != -1)
                 {
-                    Program.Log.Info($"Executing commands from Gemini: {command}");
-                    Api.Call(command);
-                    response.commands.Add(command);
+                    string potentialJson = rawGeminiResponseJson.Substring(firstBraceIndex);
+                    try
+                    {
+                        JObject.Parse(potentialJson); // Validate JSON
+                        jsonResponse = potentialJson;
+                        thoughtsChain = rawGeminiResponseJson.Substring(0, firstBraceIndex).Trim();
+                    }
+                    catch (JsonReaderException) { /* Invalid block, ignored */ }
                 }
             }
         }
 
-      }
-      else
-      {
-          //Program.Notify("Gemini's reply does not contain valid commands.");
-          response.answer = "invalid_reply";
-      }
-  }
-  catch (Exception ex)
-  {
-      //Program.Notify($"Error while processing dynamic response payload: {ex.Message}");
-      response.answer = $"error: ${ex.Message}";
-  }
+        if (string.IsNullOrEmpty(jsonResponse))
+        {
+            var fallbackResponse = new {
+                answer = rawGeminiResponseJson,
+                commands = new string[] {}
+            };
+            jsonResponse = JsonConvert.SerializeObject(fallbackResponse);
+            thoughtsChain = "N/A (No valid JSON block found in the response)";
+            Program.Log.Warn("Could not extract a valid JSON block from AI response.");
+        }
 
-  return response;
+        if (!string.IsNullOrEmpty(thoughtsChain))
+        {
+            Program.Log.Info($"AI Thought Process: {thoughtsChain}");
+        }
+
+        string friendlyAnswer = rawGeminiResponseJson;
+        try 
+        {
+            dynamic hgCommand = JsonConvert.DeserializeObject&lt;dynamic&gt;(jsonResponse);
+            friendlyAnswer = hgCommand.answer.ToString();
+            JArray commands = hgCommand.commands;
+
+            if (commands != null)
+            {
+                foreach (var commandToken in commands)
+                {
+                    string command = commandToken.ToString();
+                    if (!string.IsNullOrEmpty(command) &amp;&amp; command.ToUpper() != "NONE")
+                    {
+                        Program.Log.Info($"Executing command from Gemini: {command}");
+                        Api.Call(command);
+                    }
+                }
+            }
+        } 
+        catch (Exception parseEx) 
+        {
+            Program.Log.Warn($"Could not parse Gemini response as JSON. Treating as plain text. Error: {parseEx.Message}");
+        }
+
+        // 6. Update and save history
+        ChatSession.History.Add(userMessage);
+        var modelResponse = new ChatMessage
+        {
+            Role = "model",
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = jsonResponse } }
+        };
+        ChatSession.History.Add(modelResponse);
+        ChatSession.SaveHistory(Data.GetFolder());
+
+        // 7. Return the friendly answer to the UI
+        return new ResponseText(friendlyAnswer);
+    }
+    catch (Exception ex)
+    {
+        Program.Notify($"Error while calling Gemini API: {ex.Message}");
+        return new ResponseText($"**Error:** An exception occurred while contacting the AI service. Please check the logs.\n\n`{ex.Message}`");
+    }
 });
 
+
+// ===================================================================
+// API HANDLER: Get the current chat history
+// ===================================================================
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; 
+{
+    return ChatSession.History;
+});
+
+
+// ===================================================================
+// API HANDLER: Clear the chat history
+// ===================================================================
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; 
+{
+    try
+    {
+        ChatSession.History.Clear();
+        ChatSession.SaveHistory(Data.GetFolder());
+        Program.Log.Info("Gemini Intent Handler chat history has been cleared.");
+        return new ResponseStatus(Status.Ok);
+    }
+    catch (Exception ex)
+    {
+        Program.Notify($"Error clearing chat history: {ex.Message}");
+        return new ResponseStatus(Status.Error, "Could not clear history.");
+    }
+});
+
+
+// Run the program in the background
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>const string API_URL = "AI.IntentHandlers/Gemini";
-const string DEFAULT_MODEL_ID = "gemini-2.5-flash-lite";
-
-public class IntentHandlerResponse
-{
-    public string answer { get; set; }
-    public List&lt;string&gt; commands { get; set; }
-
-    public IntentHandlerResponse()
-    {
-        answer = "";
-        commands = new List&lt;string&gt;();
-    }
-}
+const string DEFAULT_MODEL_ID = "gemini-flash-latest";
 
 const string GEMINI_SYSTEM_PROMPT = """
-You are a home automation assistant named HomeJeanie, with a very friendly personality. Your primary task is to convert user commands into a valid JSON object. We can also chat about anything.
 
-**CRITICAL RULES:**
-1.  Your entire response must be ONLY a valid JSON object. Do not include ```json ```.
-2.  The "answer" field inside the JSON **MUST be in the exact same language as the `User Command`**. This is a primary instruction.
-3.  The JSON object must have "answer" (a confirmation phrase) and "commands" (an array of command objects).
-4.  For conversational replies without a specific command, return an empty "commands" array.
-5.  When confirming an action, use the simple past tense (e.g., "Ok, I've turned on the light").
+You are a home automation assistant called HomeJeanie.
 
-**DEVICE TYPES &amp; API STRUCTURE:**
-Each device in the DEVICE LIST has a `type` that tells you its capabilities.
+---
+**CRITICAL RULES**
+---
 
-- **For type `Light`, `Dimmer`, `Color`:**
-  - On/Off: `Control.On` / `Control.Off`
-  - Brightness (0-100): `Control.Level/{value}`
-  - Color (HSB, normalized 0.0-1.0): `Control.ColorHsb/{h},{s},{v}`
+1.  **JSON ONLY:** Your entire response MUST be ONLY a valid JSON object. No markdown. No chain thoughts. See "RESPONSE FORMAT" section for examples.
+2.  **USER'S LANGUAGE:** The "answer" field MUST be in the same language as the user's command.
+3.  **COMMAND ARRAY:** The "commands" field must be an array of strings. For conversational replies, it must be an empty array `[]`. If a command is invalid, it must be `["NONE"]`.
 
-- **For type `Switch`:**
-  - On/Off: `Control.On` / `Control.Off`
+---
+**API REFERENCE AND LOGIC**
+---
 
-- **For type `Thermostat`:**
-  - Set Mode: `Thermostat.ModeSet/{mode}`. Valid modes: `Off`, `Heat`, `Cool`, `HeatEconomy`, `CoolEconomy`.
-  - Set Temperature: `Thermostat.SetPointSet/{type}/{value}`. Valid types: `Heating`, `Cooling`. If unsure, default to `Heating`.
+**Command Hierarchy (CRITICAL):**
+1.  If a command involves **COLOR and BRIGHTNESS** for a device:
+    - Generate a SINGLE `Control.ColorHsb/{h},{s},{v}` command.
+    - Convert brightness percentage to a normalized value for `v` (e.g., 50% -&gt; 0.5).
+    - **FORBIDDEN ACTION:** DO NOT generate a separate `Control.Level` command.
+2.  If a command involves **only BRIGHTNESS**, generate a `Control.Level/{value}` command.
+3.  If a command involves **only ON/OFF**, generate `Control.On` or `Control.Off`.
 
-- **For type `DoorLock`:**
-  - Lock/Unlock: `Control.On` (Lock), `Control.Off` (Unlock).
+**Available Commands:**
+-   `Control.On`, `Control.Off`
+-   `Control.Level/{value}` (value: 0-100)
+-   `Control.ColorHsb/{h},{s},{v}` (h,s,v: 0.0-1.0)
+-   `Thermostat.ModeSet/{mode}` (mode: "Off", "Heat", "HeatEconomy", "Cool", "CoolEconomy")
+-   `Thermostat.SetPointSet/{type}/{value}`
+-   `Control.ArmAway`
+-   `Control.ArmHome`
+-   `Control.Disarm`
 
-If a command is invalid, `commands` should be `["NONE"]`.
+**API for running/stopping scenarios have to following syntax**
+-   `/api/HomeAutomation.HomeGenie/Automation/Programs.Run/{module_address}`
+-   `/api/HomeAutomation.HomeGenie/Automation/Programs.Break/{module_address}`
 
-**COLOR HANDLING RULE:**
-You are responsible for interpreting color names (e.g., 'red', 'light blue') and shades into normalized HSB values. For pure colors, Saturation (S) and Value (V) are 1.0. (Hue values: Red H=0.0, Green H=0.33, Blue H=0.66).
+---
+**VALID RESPONSES EXAMPLES**
+---
 
---- EXAMPLES ---
+**You must follow this format strictly.** First, think through the steps inside a `&lt;thought&gt;` block (this part MUST NOT be in your final output). Then, provide the final JSON.
 
-**ITALIAN - Multi-command with different actions:**
-- DEVICE LIST:
-[
-  { "name": "Luce Camera", "group": "Camera", "address": "1", "domain": "HomeAutomation.HomeGenie", "type": "Light" },
-  { "name": "Abat Jour", "group": "Camera", "address": "2", "domain": "HomeAutomation.HomeGenie", "type": "Color" }
-]
-- User Command: "spegni la luce della camera e imposta l'abat jour su un viola intenso"
-- CORRECT OUTPUT: {
-    "answer": "Fatto! Ho spento la Luce Camera e impostato l'Abat Jour su un viola intenso.",
+**EXAMPLE 1:**
+- **User Command:** "spegni la luce camera e imposta l'abat jour su un viola intenso al 20%"
+- **Your output MUST be:**
+{
+    "answer": "Fatto! Ho spento la Luce Camera e impostato l'Abat Jour su un viola intenso al 20%.",
     "commands": [
         "/api/HomeAutomation.HomeGenie/1/Control.Off",
-        "/api/HomeAutomation.HomeGenie/2/Control.ColorHsb/0.83,1.0,1.0"
+        "/api/HomeAutomation.HomeGenie/2/Control.ColorHsb/0.83,1.0,0.20"
     ]
 }
 
-**FRENCH - Simple command:**
-- DEVICE LIST: [ { "name": "Lampe", "group": "Salon", "address": "12", "domain": "HomeAutomation.HomeGenie", "type": "Dimmer" } ]
-- User Command: "Allume la Lampe dans le Salon"
-- CORRECT OUTPUT: {
-    "answer": "D'accord, j'ai allumé la Lampe dans le Salon.",
+**EXAMPLE 2:**
+- **User Command:** "imposta il termostato a 22 gradi"
+- **Your output MUST be:**
+{
+    "answer": "Ok, ho impostato il termostato a 22 gradi.",
     "commands": [
-        "/api/HomeAutomation.HomeGenie/12/Control.On"
+        "/api/HomeAutomation.SmartThermostat/1/Thermostat.SetPointSet/Heating/22"
     ]
 }
 
-**SPANISH - Thermostat command:**
-- DEVICE LIST: [ { "name": "Termostato", "group": "Salón", "address": "t-1", "domain": "HomeAutomation.HomeGenie", "type": "Thermostat" } ]
-- User Command: "pon el termostato del salón a 21 grados"
-- CORRECT OUTPUT: {
-    "answer": "Listo. He puesto el termostato del Salón a 21 grados para calentar.",
+**EXAMPLE 3:**
+- **User Command:** "avvia lo scenario alba"
+- **Your output MUST be:**
+{
+    "answer": "Ok, ho avviato lo scenario alba.",
     "commands": [
-        "/api/HomeAutomation.HomeGenie/t-1/Thermostat.SetPointSet/Heating/21"
+        "/api/HomeAutomation.HomeGenie/Automation/Programs.Run/8"
     ]
 }
 
-**PORTUGUESE - Brightness command:**
-- DEVICE LIST: [ { "name": "Luz da Sala", "group": "Sala", "address": "dim-5", "domain": "HomeAutomation.HomeGenie", "type": "Dimmer" } ]
-- User Command: "diminua a luz da sala para 30 por cento"
-- CORRECT OUTPUT: {
-    "answer": "Ok, diminuí a Luz da Sala para 30%.",
-    "commands": [
-        "/api/HomeAutomation.HomeGenie/dim-5/Control.Level/30"
-    ]
-}
+Now, begin.
 
-**JAPANESE - Conversational reply:**
-- User Command: "こんにちは、元気ですか"
-- CORRECT OUTPUT: {
-    "answer": "こんにちは！元気ですよ。何かお手伝いできることはありますか？",
-    "commands": []
-}
 """;
+
+const string USER_INPUT_TEMPLATE = """
+--- AVAILABLE DEVICES ---
+DEVICE LIST:
+{0}
+
+--- USER COMMAND ---
+{1}
+""";
+
+
+// POJO
+
+public class ChatMessage
+{
+    [JsonProperty("role")]
+    public string Role { get; set; }
+
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; }
+}
+
+public class MessagePart
+{
+    [JsonProperty("text")]
+    public string Text { get; set; }
+}
+
+static class ChatSession
+{
+    public static List&lt;ChatMessage&gt; History { get; set; } = new List&lt;ChatMessage&gt;();
+    private static readonly string FileName = "gemini_chathistory.json";
+
+    public static void SaveHistory(string path)
+    {
+        string filePath = Path.Combine(path, FileName);
+        try
+        {
+            string json = JsonConvert.SerializeObject(History, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+        catch (Exception ex)
+        {
+            //Program.Log.Error($"Failed to save chat history: {ex.Message}");
+        }
+    }
+
+    public static void LoadHistory(string path)
+    {
+        string filePath = Path.Combine(path, FileName);
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                var loadedHistory = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json);
+                if (loadedHistory != null)
+                {
+                    History = loadedHistory;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            History = new List&lt;ChatMessage&gt;();
+        }
+    }
+}
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>56FF2B45B8774EAE143A76612D3458B3</Checksum>
+      <Checksum>7A46481026128F4A716938CBCBC00674</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
     <Name>Gemini Intent Handler</Name>
     <Description>Enables natural language control for your smart system using Google's Gemini AI.
+To activate this feature, enter a valid API key.
+Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>// This method is used to register this program as a "AI intent handler"
+Program.Implements(
+    "@AI:WidgetGenie",
+    API_URL
+).AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
+ .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
+ .Run();
+</ScriptSetup>
+    <ScriptSource>// Define constants for API paths to avoid magic strings
+const string API_PROCESS = "Prompt.Submit";
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+
+// Load the chat history from disk at startup
+ChatSession.LoadHistory(Data.GetFolder());
+
+// ===================================================================
+// API HANDLER: Process a new user message
+// ===================================================================
+Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt; 
+{
+    // 1. Validate configuration
+    string geminiApiKey = Program.Option("ApiKey").Value.Trim();
+    string geminiModelId = Program.Option("ModelId").Value.Trim();
+    if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
+    {
+        string error = "Gemini AI Genie is not properly configured.";
+        Program.Notify($"ERROR: {error} Please configure the program options.");
+        return new ResponseText($"**Error:** {error} Go to the program's settings page to configure it.");
+    }
+
+    // 2. Prepare the user message
+    var userMessage = new ChatMessage
+    {
+        Role = "user",
+        Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = userCommand as string } }
+    };
+
+    // 3. Build the payload with the full history
+    var payloadContents = new List&lt;ChatMessage&gt;(ChatSession.History);
+    payloadContents.Add(userMessage);
+    
+    var payload = new
+    {
+        contents = payloadContents,
+        system_instruction = new
+        {
+            parts = new[]
+            {
+                new { text = GEMINI_SYSTEM_PROMPT }
+            }
+        },
+        generationConfig = new
+        {
+            temperature = 0.3
+        }
+    };
+
+    try
+    {
+        // 4. Send the request to Gemini API
+        string payloadJson = JsonConvert.SerializeObject(payload);
+        string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+        
+        var data = Net
+            .WebService(geminiRequestUrl)
+            .WithTimeout(120)
+            .AddHeader("Content-Type", "application/json")
+            .Post(payloadJson)
+            .GetData();
+
+        // 5. Process the response
+        // Using `?.` (null-conditional operator) for safe navigation
+        string geminiResponse = data?.candidates?[0]?.content?.parts?[0]?.text;
+
+        if (!string.IsNullOrEmpty(geminiResponse))
+        {
+            // Add both user message and model response to history
+            ChatSession.History.Add(userMessage);
+            var modelResponse = new ChatMessage
+            {
+                Role = "model",
+                Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = geminiResponse } }
+            };
+            ChatSession.History.Add(modelResponse);
+            ChatSession.SaveHistory(Data.GetFolder());
+
+            return new ResponseText(geminiResponse);
+        }
+        else
+        {
+            // Handle cases where Gemini returns an empty or malformed response
+            string error = "Received an empty or invalid response from the AI.";
+            Program.Notify($"ERROR: {error}");
+            return new ResponseText($"**Error:** {error}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Program.Notify($"Error while calling Gemini API: {ex.Message}");
+        return new ResponseText($"**Error:** An exception occurred while contacting the AI service. Please check the logs.\n\n`{ex.Message}`");
+    }
+});
+
+// ===================================================================
+// API HANDLER: Get the current chat history
+// ===================================================================
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; 
+{
+    return ChatSession.History;
+});
+
+// ===================================================================
+// API HANDLER: Clear the chat history
+// ===================================================================
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; 
+{
+    try
+    {
+        // Clear the in-memory history list
+        ChatSession.History.Clear();
+        // Save the empty history to disk to persist the change
+        ChatSession.SaveHistory(Data.GetFolder());
+        
+        Program.Log.Info("AI Genie chat history has been cleared.");
+        return new ResponseStatus(Status.Ok);
+    }
+    catch (Exception ex)
+    {
+        Program.Notify($"Error clearing chat history: {ex.Message}");
+        return new ResponseStatus(Status.Error, "Could not clear history.");
+    }
+});
+
+// Run the program in the background
+Program.GoBackground();</ScriptSource>
+    <ScriptContext>const string API_URL = "AI.WidgetGenie/Gemini";
+const string DEFAULT_MODEL_ID = "gemini-flash-latest";
+
+const string GEMINI_SYSTEM_PROMPT = """
+
+You are an expert AI assistant for the HomeGenie Server platform.
+Your ONLY task is to help users create custom widgets based on the zuix.js framework and HomeGenie Widget API.
+
+A widget consists of three code blocks: HTML (View), CSS (Style), and JavaScript (Controller).
+
+## Core Concepts
+- **Controller:** A class extending `ControllerInstance` with life-cycle callbacks (`onCreate`, etc.).
+- **View:** Standard HTML. Elements are linked to the controller using `#field_name`.
+- **Data Binding:** The `this.model()` object is a reactive proxy. Changes to `this.model().field_name` automatically update the corresponding `#field_name` element in the view.
+- **Events:** Use `(click)="myFunction()"` in HTML. The function must be exposed in `onInit` via `this.declare({ myFunction: this.myFunction.bind(this) })`.
+
+---
+**API REFERENCE &amp; MANDATORY RULES**
+---
+
+**1. ZUIX.JS &amp; VIEW LOGIC -- CRITICAL RULES**
+   - **FATAL: NO `{{ }}` INTERPOLATION.** Never use `{{ expression }}` in the HTML. Dynamic updates MUST be handled in the controller by updating the model.
+   - **DATA BINDING IS KING:** All dynamic UI updates MUST be driven by modifying the `this.model()` object. NEVER manipulate the DOM directly with `this.field('...').html()`.
+   - **PROVIDE DEFAULT VALUES IN HTML:** The HTML view MUST always contain sensible default content for preview purposes. NEVER generate empty tags for fields.
+     - **WRONG:** `&lt;span #status&gt;&lt;/span&gt;`
+     - **CORRECT:** `&lt;span #status&gt;Disarmed&lt;/span&gt;`
+
+**2. HOMEGENIE API -- CRITICAL RULES**
+   - **Module Fields (`field.key`):**
+     - Use `this.boundModule.field('Key.Name')` to get a specific field. DO NOT USE `this.boundModule.fields.find(...)`.
+     - **Available Keys:** `Status.Level`, `Status.ColorHsb`, `Sensor.Temperature`, `Conditions.IconType`, `HomeGenie.SecurityArmed` (values: "Away", "Home", "Disarmed").
+     - **STATE LOGIC:** NEVER use `Status.Power`. The ON/OFF state is ALWAYS derived from `Status.Level` (a level &gt; 0 means ON).
+   - **Module Commands (`control()`):**
+     - **Available Commands:** `Control.On`, `Control.Off`, `Control.Level/&lt;level&gt;`, `Control.ColorHsb/&lt;h&gt;,&lt;s&gt;,&lt;b&gt;`, `Control.ArmAway`, `Control.ArmHome`, `Control.Disarm`.
+     - **COMMAND LOGIC:** For ON/OFF, prefer `Control.On` and `Control.Off`.
+
+**3. DATA FORMATTING -- CRITICAL RULES**
+   - **DECIMAL SEPARATORS:** `field.value` is a string. Before `parseFloat()`, YOU MUST use `.replace(',', '.')`.
+
+**4. ICONS -- CRITICAL RULES**
+   - **SVG ICONS:** Use an `&lt;img&gt;` tag. The model contains the path, and the view binds it to the `src` attribute. Example: `&lt;img #icon src="path/to/default.svg"&gt;`.
+
+**OUTPUT FORMATTING -- MANDATORY**
+1.  **For widget requests:** Respond ONLY with three markdown code blocks (html, css, javascript).
+2.  **For other requests:** Respond with conversational text.
+3.  **LANGUAGE RULE:** Generated code and code comments MUST always be in English. Conversational text (e.g., for explanations or questions) MUST be in the same language as the user's last prompt.
+
+---
+**GOLDEN EXAMPLE: Switch Widget**
+---
+
+*If a user asks "create a widget for a switch", the output MUST follow this exact structure.*
+When generating a complete widget, you must also provide a brief, friendly explanation of the generated code.
+
+Your response structure MUST be as follows:
+1.  A short, conversational introduction in the user's language.
+2.  A clear explanation of the purpose and functionality of the widget.
+3.  The three code blocks (HTML, CSS, JavaScript), clearly labeled.
+4.  A concluding sentence guiding the user to copy and paste each block into the corresponding editor tab (View, Style, Controller).
+
+**EXAMPLE OF THE DESIRED RESPONSE STRUCTURE:**
+
+Of course! Here is a basic widget for a switch. It displays the switch's name and status, with a button to toggle it on and off. The button color will change to reflect the current state.
+
+Simply copy and paste each of the following code blocks into the corresponding editor tabs: View (HTML), Style (CSS), and Controller (JavaScript).
+
+Finally, remember to bind a module (the device) to this widget by clicking the settings button on the editor toolbar.
+
+```html
+&lt;div class="container"&gt;
+  &lt;strong #name&gt;Unknown Switch&lt;/strong&gt;
+  &lt;button (click)="toggleSwitch()"&gt;
+    &lt;span class="material-symbols-outlined" #icon&gt;toggle_off&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;span #status&gt;Off&lt;/span&gt;
+&lt;/div&gt;
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"&gt;
+```
+```css
+:host { display: block; }
+.container { padding: 16px; display: flex; align-items: center; gap: 12px; }
+button { background: none; border: none; cursor: pointer; }
+.material-symbols-outlined { font-size: 48px; }
+```
+```javascript
+class SwitchWidget extends ControllerInstance {
+
+  isOn = false;
+
+  onCreate() {
+    // Expose the toggleSwitch method to the HTML View
+    this.declare({
+      toggleSwitch: this.toggleSwitch
+    });
+
+    if (!this.boundModule) {
+      return;
+    }
+
+    // Subscribe to the external module's state
+    const levelField = this.boundModule.field('Status.Level');
+    if (levelField) {
+      this.subscribe(levelField, (field) =&gt; {
+        // When the external state changes, update the internal state
+        this.updateState(field.value);
+      });
+    }
+    
+    // Perform an initial sync when the widget is created
+    this.updateModel();
+  }
+  
+  updateModel() {
+      this.model().name = this.boundModule.name;
+      const levelField = this.boundModule.field('Status.Level');
+      if (levelField) {
+        this.updateState(levelField.value);
+      }
+  }
+
+  updateState(levelValue) {
+    const level = parseFloat(levelValue.replace(',', '.'));
+    this.isOn = level &gt; 0;
+    
+    // Update the reactive model. The view will update automatically.
+    this.model().status = this.isOn ? 'On' : 'Off';
+    this.model().icon = this.isOn ? 'toggle_on' : 'toggle_off';
+  }
+
+  toggleSwitch() {
+    if (!this.boundModule) return;
+    
+    const command = this.isOn ? 'Control.Off' : 'Control.On';
+    this.boundModule.control(command);
+    /*
+    or if you want to add a callback when the command is completed
+    this.boundModule.control(command).subscribe((res) =&gt; {
+      // command completed
+    });
+    */
+  }
+}
+```
+
+Now, begin.
+""";
+
+
+// POJO
+
+public class ChatMessage
+{
+    [JsonProperty("role")]
+    public string Role { get; set; }
+
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; }
+}
+
+public class MessagePart
+{
+    [JsonProperty("text")]
+    public string Text { get; set; }
+}
+
+static class ChatSession
+{
+    public static List&lt;ChatMessage&gt; History { get; set; } = new List&lt;ChatMessage&gt;();
+    private static readonly string FileName = "gemini_chathistory.json";
+
+    public static void SaveHistory(string path)
+    {
+        string filePath = Path.Combine(path, FileName);
+        try
+        {
+            string json = JsonConvert.SerializeObject(History, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+        catch (Exception ex)
+        {
+            //Program.Log.Error($"Failed to save chat history: {ex.Message}");
+        }
+    }
+
+    public static void LoadHistory(string path)
+    {
+        string filePath = Path.Combine(path, FileName);
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                var loadedHistory = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json);
+                if (loadedHistory != null)
+                {
+                    History = loadedHistory;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            History = new List&lt;ChatMessage&gt;();
+        }
+    }
+}
+</ScriptContext>
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>gemini-widget-genie</Id>
+      <Version>1.0.2</Version>
+      <Required>true</Required>
+      <Checksum>BEC152E192F00605C8705023C2CBB6B6</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>931</Address>
+    <Name>Gemini Widget Genie</Name>
+    <Description>Your personal AI genie for widget creation. Powered by Gemini, it helps you write and debug HTML, CSS, and JavaScript code directly within the HomeGenie editor.
 To activate this feature, enter a valid API key.
 Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.</Description>
     <Group>AI - Machine Learning</Group>
@@ -524,7 +1024,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -552,6 +1052,311 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
         <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
       </ProgramFeature>
     </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>//
+// SETUP block for the Local LLM automation program.
+//
+// This code is executed once when the program is enabled. Its primary roles are:
+// 1. To define the user-configurable options for this program.
+// 2. To specify the front-end widget used for the UI.
+// 3. To define the conditions and triggers for executing the Main block.
+//
+// In this case, .Run() finalizes the setup and proceeds to execute the Main block immediately.
+//
+Program
+  .AddOption(OPTION_MODEL_PATH, "", "Path to local GGUF file", "text")
+  .AddOption(OPTION_MAX_TOKENS, "512", "Max Tokens (response length)", "slider:64:4096:32")
+  .UseWidget("custom/examples/local-ai-chat")
+  .Run();
+</ScriptSetup>
+    <ScriptSource>//
+// MAIN block for the Local LLM automation program.
+//
+// This code is executed after the SETUP block. It is responsible for:
+// 1. Validating user-configured options.
+// 2. Initializing the LLamaSharp model, context, and chat session.
+// 3. Defining an API endpoint to handle user prompts.
+// 4. Managing the program's lifecycle and handling reconfiguration requests.
+//
+
+// A flag to signal that the program needs to be reloaded to apply new settings.
+var reconfigureRequired = false;
+// Register an event handler that listens for changes to any module parameter.
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  // Check if the change occurred in this program and affects a configuration option.
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    // Set the flag to true, which will trigger a restart of the Main block.
+    reconfigureRequired = true;
+  }
+  return true;
+});
+
+// --- 1. VALIDATION ---
+// Retrieve the model path from the program's configuration options.
+var modelPath = Program.Option(OPTION_MODEL_PATH).Value;
+
+// Check if the model path is configured.
+if (String.IsNullOrEmpty(modelPath))
+{
+  // If not, send a notification to the UI. The '[program_configure]' tag is a special
+  // command that prompts the UI to open the configuration dialog.
+  Program.Notify($"LLM model path not configured.[program_configure]");
+  Program.Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
+}
+// Check if the configured model file actually exists.
+else if (!File.Exists(modelPath)) 
+{
+  Program.Notify($"File not found: {modelPath}.[program_configure]");
+  Program.Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
+}
+else
+{
+  // --- 2. INITIALIZATION ---
+  // If validation passes, proceed to initialize the LLM.
+
+  // Apply the user-configured max tokens value to the inference parameters.
+  LailamaInferenceParams.MaxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
+
+  // Set up the model parameters, including context size and GPU layers to offload.
+  var parameters = new ModelParams(modelPath)
+  {
+      ContextSize = PARAMS_CONTEXT_SIZE,
+      GpuLayerCount = PARAMS_GPU_LAYER_SIZE
+  };
+ try {
+  // Load the LLM weights from the specified GGUF file into memory.
+  var model = LLamaWeights.LoadFromFile(parameters);
+  // Create a context for the model, which holds the state of the inference.
+  var context = model.CreateContext(parameters);
+
+  // Set up an executor to run the inference in an interactive (chat) mode.
+  var executor = new InteractiveExecutor(context);
+  var chatHistory = new ChatHistory();
+
+  // Create a clean, initial session state. This is used as a prototype to reset
+  // the chat session without having to re-initialize the entire model.
+  ChatSession prototypeSession =  ChatSession.InitializeSessionFromHistoryAsync(executor, chatHistory).GetAwaiter().GetResult();
+  var resetState = prototypeSession.GetSessionState();
+
+  // Create the main chat session that will be used for the conversation.
+  ChatSession session = new ChatSession(executor);
+
+  // Register a cleanup handler that runs when the program is stopping.
+  When.ProgramStopping(() =&gt; {
+      // release resources by resetting the session to its initial state.
+      session.LoadSession(resetState);
+      return true;
+  });
+
+  // Prepare the system prompt (defined in the Context block) to be injected into the chat history.
+  var systemMessage = new ChatHistory.Message(AuthorRole.System, GetSystemPrompt()); 
+  // Ensure the session is in a clean state before adding the system prompt.
+  session.LoadSession(resetState);
+  session.History.Messages.Add(systemMessage); 
+
+  // --- 3. API ENDPOINT ---
+  // Define an API endpoint that the front-end widget will call to send user prompts.
+  Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Process", (userInput) =&gt;  
+  {
+      var request = Api.Parse(userInput);
+      var input = BuildUserPrompt(request.OriginalRequest);
+      if (!String.IsNullOrEmpty(input))
+      {
+          // Asynchronously start the chat inference process with the user's message and inference parameters.
+          var sessionChat = session.ChatAsync(new ChatHistory.Message(AuthorRole.User, input), LailamaInferenceParams);
+
+          // Process the resulting token stream asynchronously.
+          ProcessAsync(sessionChat, (s) =&gt; {
+            // As each token (s) is generated...
+            if (!string.IsNullOrEmpty(s))
+            {
+              // ...emit it to the front-end widget via the specified field.
+              Program.Emit(FIELD_TOKENS_STREAM, s);
+            }
+          }).GetAwaiter().GetResult();
+      }
+      return new ResponseStatus(Status.Ok, "Processing: " + input);
+  });
+
+  // clear any previosuly reported error
+  Program.Emit(FIELD_STATUS_ERROR, "");
+
+ } catch (Exception e) { 
+
+
+    Program.Notify($"ERROR: {e.Message} [program_configure]");
+    Program.Emit(FIELD_STATUS_ERROR, e.Message);
+    Pause(5);
+
+  }
+
+}
+
+// Emit an empty string initially to ensure the stream field is created.
+Program.Emit(FIELD_TOKENS_STREAM, "");
+
+// --- 4. MAIN PROGRAM LOOP ---
+// This loop keeps the program alive and handles the reconfiguration logic.
+while (Program.IsRunning)
+{
+    // Check if the 'reconfigureRequired' flag was set by the event handler.
+    if (reconfigureRequired)
+    {
+        // If true, exit the Main block. HomeGenie will then automatically re-run
+        // this Main block from the top, reloading the new configuration.
+        return;
+    }
+    // Pause for 1 second to prevent this loop from consuming 100% CPU.
+    Pause(1);
+}
+</ScriptSource>
+    <ScriptContext>/* 
+||==============================================================================================
+|| LLM Inference Configuration
+|| These parameters control how the Large Language Model generates responses.
+||
+|| For detailed documentation on these parameters, see the LLamaSharp docs:
+|| https://scisharp.github.io/LLamaSharp/
+||==============================================================================================
+*/
+
+/**
+ * The context window size in tokens.
+ * This defines the model's "short-term memory," determining how much of the conversation
+ * history it can consider when generating a response. 4096 is a common value for many models.
+ */
+const int PARAMS_CONTEXT_SIZE = 4096;
+
+/**
+ * The number of model layers to offload to the GPU.
+ * Setting this to 0 disables GPU acceleration, forcing the model to run entirely on the CPU.
+ * Increase this value if you have a compatible GPU to significantly improve performance. A value
+ * like 32 or higher is common for GPU-accelerated inference.
+ */
+const int PARAMS_GPU_LAYER_SIZE = 0; // 0 = NO GPU, run on CPU only
+
+/// &lt;summary&gt;
+/// Defines the parameters for the LLM inference process.
+/// These settings control the creative and technical aspects of the text generation.
+/// &lt;/summary&gt;
+InferenceParams LailamaInferenceParams = new InferenceParams
+{
+    // Configures the sampling pipeline, which controls the creativity and coherence of the output.
+    SamplingPipeline = new DefaultSamplingPipeline
+    {
+        // Temperature: Controls randomness. Lower values (e.g., 0.2) make the output more
+        // deterministic and focused, while higher values (e.g., 0.8) make it more creative and random.
+        Temperature = 0.6f,
+
+        // TopP (Nucleus Sampling): The model considers only the most likely tokens that make up the
+        // cumulative probability specified here (0.95 = 95%). It helps prevent the model from
+        // picking very rare or nonsensical words.
+        TopP = 0.95f,
+
+        // RepeatPenalty: Discourages the model from repeating the same words or phrases.
+        // A value greater than 1.0 penalizes recently used tokens. 1.0 means no penalty.
+        RepeatPenalty = 1.1f 
+    },
+
+    // The maximum number of tokens (words or parts of words) to generate in a single response.
+    // This acts as a hard limit on the length of the AI's output.
+    MaxTokens = 256,   // This value is controlled from the program settings UI
+    
+    // A list of "stop sequences." The model will immediately stop generating text if it
+    // produces one of these strings. These are crucial for making the model end its turn
+    // in a chat conversation and are highly specific to the model being used.
+    // **This list often requires tuning based on the loaded LLM's specifications.**
+    AntiPrompts = new string[]
+    {
+        "&lt;｜User｜&gt;",
+        "&lt;｜end of sentence｜&gt;",
+        "&lt;&lt;/im_end&gt;&gt;",
+        "&lt;&lt;im_start&gt;&gt;",
+        "&lt;&lt;/im_start&gt;&gt;",
+        "&lt;think&gt;",
+        "&lt;/think&gt;",
+        "&lt;|im_end|&gt;",
+        "&lt;|im_start|&gt;",
+        "&lt;｜Assistant｜&gt;" 
+    }
+};
+
+/// &lt;summary&gt;
+/// Defines the System Prompt, which provides high-level instructions to the AI model.
+/// The System Prompt sets the context, persona, and constraints for the entire conversation.
+/// It acts as a permanent instruction that guides the model's behavior and response style.
+///
+/// HOW TO CREATE EFFECTIVE SYSTEM INSTRUCTIONS:
+/// 1.  **Define a Persona:** Start by telling the model *what it is* (e.g., "You are an expert AI assistant...").
+/// 2.  **Set the Primary Goal:** Clearly state its main objective or task ("Your ONLY task is to help users...").
+/// 3.  **Provide Context:** Give it relevant background information (e.g., "...for the HomeGenie Server platform," "...based on the zuix.js framework").
+/// 4.  **Establish Constraints and Rules:** Specify what the model *should not* do. Use strong, clear language like "ONLY," "DO NOT," "NEVER."
+/// 5.  **Specify Output Format:** If needed, you can instruct the model on how to format its responses (e.g., "Always provide code examples in Markdown blocks.").
+/// &lt;/summary&gt;
+const string LAILAMA_SYSTEM_PROMPT = """
+
+You are a concise and expert technical assistant running locally on a HomeGenie server.
+Your primary tasks are to help with programming, scripting, and system administration.
+
+- ALWAYS provide code in Markdown blocks.
+- Be direct and to the point. Do not add conversational fluff.
+- Your knowledge areas are: C#, JavaScript, Python, JSON, Visual Programming with Blockly and HomeGenie APIs of course.
+- You can help write automation programs for the HomeGenie platform.
+
+""";
+
+/*
+|| Program's options and emitted field
+*/
+const string OPTION_MODEL_PATH = "ModelPath";
+const string OPTION_MAX_TOKENS = "MaxTokens";
+const string FIELD_TOKENS_STREAM = "LLM.TokenStream";
+const string FIELD_STATUS_ERROR = "Status.Error";
+
+/* 
+|| Utility methods
+*/
+
+string GetSystemPrompt() {
+  return $"&lt;|im_start|&gt;system\n{LAILAMA_SYSTEM_PROMPT}&lt;|im_end|&gt;\n"; 
+}
+
+string BuildUserPrompt(string userInput) {
+  return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n" +
+         $"&lt;|im_start|&gt;assistant\n"; 
+}
+
+async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&lt;string&gt; callback)
+{
+    await foreach (string item in asyncEnumerable)
+    {
+        callback(item);
+    }
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>lailama</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>B945C787E3FFB1EA46CF49BC5C8C512A</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>940</Address>
+    <Name>Lailama</Name>
+    <Description>Run a Large Language Model (LLM) locally on your HomeGenie server. These models can be downloaded for free from platforms like Hugging Face.
+Simply provide the path to a GGUF format model file. Please note that adjustments to parameters, primarily within the Context Code, may be required to ensure full compatibility with different models.</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
@@ -703,7 +1508,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -844,7 +1649,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.1</PackageVersion>
+      <PackageVersion>1.0.2</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>

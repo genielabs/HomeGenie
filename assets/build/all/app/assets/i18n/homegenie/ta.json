@@ -83,9 +83,9 @@
   "cronwizard_action_schedule_variable_hint": "இந்த நிகழ்வைக் குறிப்பிட, cron வெளிப்பாடுகளில் <span class=\"notranslate color-primary\">@{{name}}</span> ஐ மாறியாகப் பயன்படுத்தவும் அல்லது தானியங்கு நிரல்களில் <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> ஐப் பயன்படுத்தவும்.",
   "scheduler_preset_action_command_turn_on": "இயக்கு",
   "scheduler_preset_action_command_turn_off": "அணைக்கவும்",
-  "scheduler_preset_action_command_set_level": "நிலையை அமை",
+  "scheduler_preset_action_command_set_level": "நிலையை அமைக்கவும்",
   "scheduler_preset_action_config_level": "நிலை",
-  "scheduler_preset_action_command_set_color": "வண்ணத்தை அமைக்கவும்",
+  "scheduler_preset_action_command_set_color": "நிறத்தை அமைக்கவும்",
   "scheduler_preset_action_config_color": "நிறம்",
   "scheduler_preset_action_command_thermostat_mode": "தெர்மோஸ்டாட் பயன்முறை",
   "scheduler_preset_action_config_mode": "பயன்முறை",
@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "வெப்ப சிக்கனம்",
   "scheduler_preset_action_config_mode_cool": "அருமை",
   "scheduler_preset_action_config_mode_cool_eco": "குளிர்ச்சியான பொருளாதாரம்",
+  "scheduler_preset_action_command_remote_control": "ரிமோட் கண்ட்ரோல் (IR/RF குறியீடுகளை அனுப்பு)",
+  "scheduler_preset_action_config_data": "தரவு",
   "scheduler_preset_action_program_run": "நிரலை இயக்கு",
   "scheduler_preset_action_config_program": "திட்டம்",
   "scheduler_preset_action_config_options": "விருப்பங்கள்",
   "scheduler_preset_action_program_say": "சொல்லுங்கள்",
+  "scheduler_preset_action_net_http_call": "ஒரு வலை சேவையை அழைக்கவும்",
+  "scheduler_preset_action_config_url": "முகவரி (URL)",
+  "scheduler_preset_action_pause": "இடைநிறுத்து",
+  "scheduler_preset_action_config_seconds": "வினாடிகள்",
   "scheduler_preset_action_config_message": "செய்தி",
   "save_and_build": "சேமித்து உருவாக்குங்கள்.",
   "toggle_widgets_preview": "விட்ஜெட்களின் மாதிரிக்காட்சியை மாற்று",
@@ -232,7 +238,7 @@
       "Status.Level": "நிலையை மாற்று (ஆன்/ஆஃப்)"
     },
     "401": {
-      "Title": "டெமோ - டோர் மாற்று",
+      "Title": "டெமோ - டோக்கிள் டோர்",
       "Description": "டெமோ கதவு-ஜன்னல் சென்சாரின் கதவு திறந்த/மூடப்படுவதை உருவகப்படுத்துகிறது."
     },
     "402": {
@@ -290,7 +296,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 மாதிரி கோப்பின் பாதை (.onnx)"
     },
     "911": {
-      "Title": "தோரணை மதிப்பீடு",
+      "Title": "போஸ் மதிப்பீடு",
       "Description": "தனிப்பயன் ONNX மாதிரிகள் அல்லது இயல்புநிலை முன் பயிற்சி பெற்ற YOLOv11 மாதிரி (மனித போஸ்-குறிப்பிட்டது) பயன்படுத்தி, போஸ் மதிப்பீடு மூலம் முக்கிய புள்ளி கண்டறிதல்.",
       "ML.PoseEstimation": "போஸ் மதிப்பீட்டை இயக்கு",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 மாதிரி கோப்பின் பாதை (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "கூகிளின் ஜெமினி AI ஐப் பயன்படுத்தி உங்கள் ஸ்மார்ட் சிஸ்டத்திற்கு இயல்பான மொழி கட்டுப்பாட்டை இயக்குகிறது. இந்த அம்சத்தை செயல்படுத்த, செல்லுபடியாகும் API விசையை உள்ளிடவும். இலவச API விசையைப் பெற https://aistudio.google.com/app/apikey இல் உள்ள வழிமுறைகளைப் பின்பற்றவும்.",
       "ConfigureOptions.ApiKey": "கூகிள் ஜெமினி AI API விசை",
       "ConfigureOptions.ModelId": "மாதிரி ஐடி"
+    },
+    "931": {
+      "Title": "ஜெமினி விட்ஜெட் ஜீனி",
+      "Description": "விட்ஜெட் உருவாக்கத்திற்கான உங்கள் தனிப்பட்ட AI ஜீனி. ஜெமினியால் இயக்கப்படும் இது, HomeGenie எடிட்டருக்குள் நேரடியாக HTML, CSS மற்றும் JavaScript குறியீட்டை எழுதவும் பிழைத்திருத்தவும் உதவுகிறது. இந்த அம்சத்தை செயல்படுத்த, செல்லுபடியாகும் API விசையை உள்ளிடவும். இலவச API விசையைப் பெற https://aistudio.google.com/app/apikey இல் உள்ள வழிமுறைகளைப் பின்பற்றவும்.",
+      "ConfigureOptions.ApiKey": "கூகிள் ஜெமினி AI API விசை",
+      "ConfigureOptions.ModelId": "மாதிரி ஐடி"
+    },
+    "940": {
+      "Title": "உள்ளூர் AI (LLM)",
+      "Description": "உங்கள் HomeGenie சேவையகத்தில் உள்ளூரில் ஒரு பெரிய மொழி மாதிரியை (LLM) இயக்கவும். இந்த மாதிரிகளை Hugging Face போன்ற தளங்களிலிருந்து இலவசமாக பதிவிறக்கம் செய்யலாம். GGUF வடிவமைப்பு மாதிரி கோப்பிற்கான பாதையை வழங்கவும். வெவ்வேறு மாதிரிகளுடன் முழு இணக்கத்தன்மையை உறுதிசெய்ய, முதன்மையாக சூழல் குறியீட்டிற்குள் உள்ள அளவுருக்களில் சரிசெய்தல் தேவைப்படலாம் என்பதை நினைவில் கொள்ளவும்.",
+      "ConfigureOptions.MaxTokens": "அதிகபட்ச டோக்கன்கள் (பதில் நீளம்)",
+      "ConfigureOptions.ModelPath": "உள்ளூர் GGUF கோப்பிற்கான பாதை"
     }
   }
 }

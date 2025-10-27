@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------------",
+  " ": "---------------------------------------------------------",
   "welcome_to_homegenie": "Dobrodošli u HomeGenie!",
   "welcome_subtitle": "Programabilna inteligencija automatizacije",
   "not_configured_yet": "Sustav još nije konfiguriran. Ovaj čarobnjak za postavljanje pomoći će vam da u nekoliko koraka pokrenete i pokrenete sustav.",
@@ -87,18 +87,24 @@
   "scheduler_preset_action_config_level": "Razina",
   "scheduler_preset_action_command_set_color": "Postavi boju",
   "scheduler_preset_action_config_color": "Boja",
-  "scheduler_preset_action_command_thermostat_mode": "Način rada termostata",
+  "scheduler_preset_action_command_thermostat_mode": "Način termostata",
   "scheduler_preset_action_config_mode": "Način rada",
   "scheduler_preset_action_config_mode_on": "Na",
   "scheduler_preset_action_config_mode_off": "Isključeno",
   "scheduler_preset_action_config_mode_heat": "Toplina",
   "scheduler_preset_action_config_mode_heat_eco": "Ekonomija grijanja",
   "scheduler_preset_action_config_mode_cool": "Hladno",
-  "scheduler_preset_action_config_mode_cool_eco": "Hladno gospodarstvo",
+  "scheduler_preset_action_config_mode_cool_eco": "Kulna ekonomija",
+  "scheduler_preset_action_command_remote_control": "Daljinski upravljač (slanje IR/RF kodova)",
+  "scheduler_preset_action_config_data": "Podaci",
   "scheduler_preset_action_program_run": "Pokreni program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opcije",
   "scheduler_preset_action_program_say": "Reći",
+  "scheduler_preset_action_net_http_call": "Pozovite web-servis",
+  "scheduler_preset_action_config_url": "Adresa (URL)",
+  "scheduler_preset_action_pause": "Pauza",
+  "scheduler_preset_action_config_seconds": "Sekunde",
   "scheduler_preset_action_config_message": "Poruka",
   "save_and_build": "Spremi i izgradi",
   "toggle_widgets_preview": "Uključi/isključi pregled widgeta",
@@ -286,7 +292,7 @@
       "Title": "Detekcija objekata",
       "Description": "Detektira objekte pomoću prethodno obučenog YOLO11 modela.",
       "ML.ObjectDetection": "Omogući otkrivanje objekata",
-      "ML.ObjectDetection.TriggerDetect": "Popis stvari (na engleskom) koje će aktivirati alarm, odvojen zarezima. (npr.: mačka, pas, osoba, ruksak, kofer)",
+      "ML.ObjectDetection.TriggerDetect": "Popis stvari (na engleskom) koje će pokrenuti alarm, odvojen zarezima. (npr.: mačka, pas, osoba, ruksak, kofer)",
       "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO11 (.onnx)"
     },
     "911": {
@@ -306,6 +312,18 @@
       "Description": "Omogućuje upravljanje prirodnim jezikom za vaš pametni sustav pomoću Googleovog Gemini AI-a. Da biste aktivirali ovu značajku, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey kako biste dobili besplatni API ključ.",
       "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
       "ConfigureOptions.ModelId": "ID modela"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Vaš osobni AI duh za izradu widgeta. Pokretan Geminijem, pomaže vam u pisanju i ispravljanju pogrešaka HTML, CSS i JavaScript koda izravno unutar HomeGenie editora. Da biste aktivirali ovu značajku, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey kako biste dobili besplatni API ključ.",
+      "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
+      "ConfigureOptions.ModelId": "ID modela"
+    },
+    "940": {
+      "Title": "Lokalna umjetna inteligencija (LLM)",
+      "Description": "Pokrenite Large Language Model (LLM) lokalno na svom HomeGenie poslužitelju. Ove modele možete besplatno preuzeti s platformi poput Hugging Face. Jednostavno navedite putanju do datoteke modela u GGUF formatu. Imajte na umu da će možda biti potrebne prilagodbe parametara, prvenstveno unutar kontekstnog koda, kako bi se osigurala potpuna kompatibilnost s različitim modelima.",
+      "ConfigureOptions.MaxTokens": "Maks. tokena (duljina odgovora)",
+      "ConfigureOptions.ModelPath": "Put do lokalne GGUF datoteke"
     }
   }
 }

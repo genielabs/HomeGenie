@@ -32,12 +32,12 @@
   "delete_group": "Share rukuni",
   "dashboard_from_group": "Ƙirƙiri dashboard daga wannan rukunin",
   "group_modules": "Modules a cikin wannan rukuni",
-  "modules": "Modules",
+  "modules": "Moduloli",
   "empty_group": "Babu kayayyaki a cikin wannan rukunin.",
   "scheduler_wizard": "Mayen Jadawalin",
   "schedule_event": "Lamarin",
   "schedule_type_standard": "Daidaitawa",
-  "schedule_type_range": "Kwanan kwanan wata",
+  "schedule_type_range": "Kewayon kwanan wata",
   "schedule_type_cron": "Maganar Cron",
   "schedule_action": "Aiki",
   "schedule_occurrence_preview": "Duban abin da ya faru",
@@ -83,24 +83,30 @@
   "cronwizard_action_schedule_variable_hint": "Yi amfani da <span class=\"notranslate color-primary\">@{{name}}</span> azaman mai canzawa a cikin maganganun cron ko amfani da <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> a cikin shirye-shiryen sarrafa kansa don yin la'akari da wannan taron.",
   "scheduler_preset_action_command_turn_on": "Kunna",
   "scheduler_preset_action_command_turn_off": "Kashe",
-  "scheduler_preset_action_command_set_level": "Saita matakin",
+  "scheduler_preset_action_command_set_level": "Saita Matsayi",
   "scheduler_preset_action_config_level": "Mataki",
-  "scheduler_preset_action_command_set_color": "Saita launi",
+  "scheduler_preset_action_command_set_color": "Saita Launi",
   "scheduler_preset_action_config_color": "Launi",
-  "scheduler_preset_action_command_thermostat_mode": "Yanayin zafi",
+  "scheduler_preset_action_command_thermostat_mode": "Yanayin Thermostat",
   "scheduler_preset_action_config_mode": "Yanayin",
   "scheduler_preset_action_config_mode_on": "Kunna",
   "scheduler_preset_action_config_mode_off": "Kashe",
   "scheduler_preset_action_config_mode_heat": "Zafi",
-  "scheduler_preset_action_config_mode_heat_eco": "Tattalin arzikin zafi",
+  "scheduler_preset_action_config_mode_heat_eco": "Zafi Tattalin Arziki",
   "scheduler_preset_action_config_mode_cool": "Sanyi",
-  "scheduler_preset_action_config_mode_cool_eco": "Cool tattalin arziki",
-  "scheduler_preset_action_program_run": "Run shirin",
+  "scheduler_preset_action_config_mode_cool_eco": "Cool Tattalin Arziki",
+  "scheduler_preset_action_command_remote_control": "Ikon nesa (aika lambobin IR/RF)",
+  "scheduler_preset_action_config_data": "Bayanai",
+  "scheduler_preset_action_program_run": "Run Shirin",
   "scheduler_preset_action_config_program": "Shirin",
   "scheduler_preset_action_config_options": "Zabuka",
   "scheduler_preset_action_program_say": "Ka ce",
+  "scheduler_preset_action_net_http_call": "Kira Sabis na Yanar Gizo",
+  "scheduler_preset_action_config_url": "Adireshi (URL)",
+  "scheduler_preset_action_pause": "Dakata",
+  "scheduler_preset_action_config_seconds": "Dakika",
   "scheduler_preset_action_config_message": "Sako",
-  "save_and_build": "Ajiye kuma gina",
+  "save_and_build": "Ajiye ku gina",
   "toggle_widgets_preview": "Juya samfotin widget din",
   "stop_program": "Tsaida shirin",
   "run_program": "Run shirin",
@@ -117,17 +123,17 @@
   "program_status_enabled": "An kunna",
   "program_status_broken": "Karye",
   "program_status_compile": "Tara",
-  "automation_programming_guide": "Jagorar shirye-shirye'",
+  "automation_programming_guide": "Jagorar Shirye-shiryen'",
   "tap_to_disable": "Danna don kashewa",
   "tap_to_enable": "Danna don kunna",
-  "program_data": "Bayanan shirin",
+  "program_data": "Bayanan Shirin",
   "visual_code": "Lambar gani",
-  "generated_code": "Ƙirƙirar code",
+  "generated_code": "Ƙirƙirar Code",
   "setup_code": "Saita",
   "main_code": "Babban",
   "context_code": "Magana",
   "main_code_empty_note": "Lambar \"Babban\" babu komai. Yi amfani da editan \"Kayan gani\" don samar da wannan lambar: - Buɗe nau'in \"Shirin\" daga palette na umarni a hagu - Jawo wani toshe nau'in \"Main\" a cikin filin aikin na'urar gani - Ƙara a ciki da sauran katangar lambar don aiwatar da ayyuka da dabaru na wannan shirin Shirin \"Main\" na iya zama ko dai yana gudana da hannu ko farawa ta atomatik bisa ga yanayin ƙarshe da aka bayar a cikin lambar saiti.",
-  "setup_code_empty_note": "Lambar \"Setup\" babu komai. Yi amfani da editan \"Kayan gani\" don samar da wannan lambar: - Buɗe nau'in \"Shirin\" daga palette na umarni a hagu - Jawo wani toshe nau'in \"Saitu\" a cikin filin aiki na lambar gani - Ƙara a cikinsa wasu katangar lambar don sanin yanayin da zai haifar da kisa lambar \"Babban\" Ana ƙididdige wannan lambar a duk lokacin da wani sabon abu ya faru kuma aƙalla sau ɗaya a minti daya.",
+  "setup_code_empty_note": "Lambar \"Setup\" babu komai. Yi amfani da editan \"Kayan gani\" don samar da wannan lambar: - Buɗe nau'in \"Shirin\" daga palette na umarni a hagu - Jawo wani toshe nau'in \"Saitu\" a cikin filin aiki na lambar gani - Ƙara a cikinsa wasu katangar lambar don sanin yanayin da zai haifar da \"Babban\" code kisa Wannan lambar tana samun kimanta duk lokacin da wani sabon abu ya faru kuma aƙalla sau ɗaya a minti daya.",
   "capture_commands": "Ɗaukar umarni",
   "capture_commands_description": "Ƙara duk umarnin da aka yi da hannu akan widget din zuwa shirin.",
   "capture_commands_pause": "Dakata tsakanin umarni",
@@ -141,9 +147,9 @@
       "HomeGenie.LevelMemory.SimulateOnly": "Yi kwaikwayon kawai"
     },
     "26": {
-      "Title": "Hasken launi",
+      "Title": "Launuka masu launi",
       "Description": "Misali Haɗin fitilun Philips Hue ta amfani da HTTP API (V1). Tsohuwar mai amfani don haɗawa da gadar shine \"sabon mai haɓakawa\" kuma ya kamata a riga an kunna shi.",
-      "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) adireshin IP",
+      "ConfigureOptions.BridgeAddress": "Adireshin IP na Philips Hue Bridge (V1).",
       "ConfigureOptions.BridgeUsername": "Sunan mai amfani",
       "ConfigureOptions.LightsCount": "Yawan fitilu"
     },
@@ -199,7 +205,7 @@
       "Widget.Config.size": "Girman widget"
     },
     "90": {
-      "Title": "Tsarin Ƙararrawar Tsaro",
+      "Title": "Tsarin Ƙararrawa na Tsaro",
       "Description": "Yi amfani da na'urori masu auna firikwensin da sauran na'urori don aiwatar da tsarin ƙararrawa na tsaro.",
       "HomeGenie.SecurityAlarm": "Yi amfani azaman ƙararrawa/strobe",
       "HomeGenie.SecurityTriggerHome": "Hakanan yana haifar da lokacin da makamai Gida",
@@ -213,12 +219,12 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Shirin da zai gudana lokacin da aka kunna"
     },
     "95": {
-      "Title": "Shigar abubuwa",
+      "Title": "Shigar abubuwan da suka faru",
       "Description": "Yi rikodin ayyukan na'urar.",
       "EventsLogger.EnableLogging": "Kunna"
     },
     "111": {
-      "Title": "Tsarin abokin ciniki",
+      "Title": "Kanfigareshan Abokin ciniki",
       "Description": "Yana aiwatar da API don sarrafa bayanan bayanan abokin ciniki waɗanda ake amfani da su don adana saitunan UI da dashboards."
     },
     "400": {
@@ -237,10 +243,10 @@
     },
     "402": {
       "Title": "Demo - An Gano Motsi",
-      "Description": "Yana daidaita gano motsi na firikwensin demo da yawa."
+      "Description": "Yana kwatanta gano motsi na firikwensin demo da yawa."
     },
     "410": {
-      "Title": "Sensor na'urar kwaikwayo",
+      "Title": "Sensor Simulator",
       "Description": "Fitar da ƙimar firikwensin bazuwar.",
       "Simulator.Sensor.Temperature": "firikwensin zafin jiki",
       "Simulator.Sensor.Humidity": "Na'urar jin zafi",
@@ -283,20 +289,20 @@
       "Scenarios.SunriseColors": "Hanyar haɗi zuwa yanayin Launuka na Rana"
     },
     "910": {
-      "Title": "Gano abu",
+      "Title": "Gane Abu",
       "Description": "Gano abubuwa ta amfani da ƙirar YOLO11 da aka riga aka horar.",
       "ML.ObjectDetection": "Kunna gano abubuwa",
       "ML.ObjectDetection.TriggerDetect": "Jerin abubuwan da aka raba waƙafi (a cikin Ingilishi) waɗanda zasu kunna ƙararrawa. (misali: cat, kare, mutum, jakar baya, akwati)",
       "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
     },
     "911": {
-      "Title": "Matsayin ƙima",
-      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da ƙirar ONNX na al'ada ko ƙirar YOLOv11 da aka riga aka horar da ita (takamaiman matsayi na mutum).",
+      "Title": "Ƙimar Matsayi",
+      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da samfuran ONNX na al'ada ko ƙirar YOLOv11 da aka riga aka horar da ita (takamaiman matsayi na ɗan adam).",
       "ML.PoseEstimation": "Kunna kimar matsayi",
       "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
     },
     "912": {
-      "Title": "Misali kashi",
+      "Title": "Rarraba Misali",
       "Description": "Gano abubuwa da fassarorinsu ta amfani da ƙirar YOLO11 da aka riga aka horar.",
       "ML.InstanceSegmentation": "Kunna sashin misali",
       "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Yana ba da damar sarrafa harshe na halitta don tsarin ku mai wayo ta amfani da Google's Gemini AI. Don kunna wannan fasalin, shigar da maɓallin API mai aiki. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
       "ConfigureOptions.ApiKey": "Google Gemini AI key",
       "ConfigureOptions.ModelId": "Model ID"
+    },
+    "931": {
+      "Title": "Gemini Widget Genie",
+      "Description": "Genie AI na ku don ƙirƙirar widget din. Gemini yana ƙarfafa shi, yana taimaka muku rubutawa da gyara HTML, CSS, da lambar JavaScript kai tsaye a cikin editan HomeGenie. Don kunna wannan fasalin, shigar da maɓallin API mai aiki. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI key",
+      "ConfigureOptions.ModelId": "Model ID"
+    },
+    "940": {
+      "Title": "Local AI (LLM)",
+      "Description": "Gudanar da Babban Samfuran Harshe (LLM) a gida akan sabar HomeGenie ku. Ana iya sauke waɗannan samfuran kyauta daga dandamali kamar Hugging Face. Kawai samar da hanyar zuwa fayil ɗin samfurin GGUF. Lura cewa ana iya buƙatar gyare-gyare ga sigogi, da farko a cikin Lambobin Magana, don tabbatar da cikakken dacewa tare da samfura daban-daban.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (tsawon amsa)",
+      "ConfigureOptions.ModelPath": "Hanya zuwa fayil na GGUF na gida"
     }
   }
 }

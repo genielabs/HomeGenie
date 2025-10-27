@@ -9,5 +9,11 @@
     "indicators": "Tohutohu",
     "lights_control": "Nga rama",
     "switches_control": "Whakawhiti"
+  },
+  "$ai_chat": {
+    "title": "AI Chat Widget",
+    "intro": "Kia ora! Ko ahau to kaiawhina LLM rohe. Me pehea taku awhina i a koe?",
+    "no_bound_module": "Kaore he waahanga LLM i herea. Tuwhera koa nga tautuhinga widget hei here i tetahi tauira reo.",
+    "start_typing_prompt": "Tīmatahia te patopato wawe..."
   }
 }

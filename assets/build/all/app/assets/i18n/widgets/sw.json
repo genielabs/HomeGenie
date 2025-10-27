@@ -9,5 +9,11 @@
     "indicators": "Viashiria",
     "lights_control": "Taa",
     "switches_control": "Swichi"
+  },
+  "$ai_chat": {
+    "title": "Wijeti ya Gumzo ya AI",
+    "intro": "Habari! Mimi ni msaidizi wako wa LLM wa karibu. Nikusaidieje?",
+    "no_bound_module": "Hakuna moduli ya LLM iliyofungwa. Tafadhali fungua mipangilio ya wijeti ili kuunganisha muundo wa lugha.",
+    "start_typing_prompt": "Anza kuandika kidokezo..."
   }
 }

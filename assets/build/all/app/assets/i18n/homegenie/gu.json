@@ -80,7 +80,7 @@
   "cronwizard_action_preset_slot_end": "સમય સ્લોટના અંતે",
   "cronwizard_action_custom_script": "કસ્ટમ એક્શન સ્ક્રિપ્ટ",
   "cronwizard_action_no_action": "કોઈ કાર્યવાહી નથી",
-  "cronwizard_action_schedule_variable_hint": "આ ઘટનાનો સંદર્ભ આપવા માટે ક્રોન અભિવ્યક્તિઓમાં ચલ તરીકે <span class=\"notranslate color-primary\">@{{name}}</span> નો ઉપયોગ કરો અથવા ઓટોમેશન પ્રોગ્રામ્સમાં <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> નો ઉપયોગ કરો.",
+  "cronwizard_action_schedule_variable_hint": "ક્રોન અભિવ્યક્તિઓમાં ચલ તરીકે <span class=\"notranslate color-primary\">@{{name}}</span> નો ઉપયોગ કરો અથવા આ ઘટનાનો સંદર્ભ આપવા માટે ઓટોમેશન પ્રોગ્રામ્સમાં <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> નો ઉપયોગ કરો.",
   "scheduler_preset_action_command_turn_on": "ચાલુ કરો",
   "scheduler_preset_action_command_turn_off": "બંધ કરો",
   "scheduler_preset_action_command_set_level": "સ્તર સેટ કરો",
@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "ચાલુ",
   "scheduler_preset_action_config_mode_off": "બંધ",
   "scheduler_preset_action_config_mode_heat": "ગરમી",
-  "scheduler_preset_action_config_mode_heat_eco": "ગરમીનો ઉપયોગ",
+  "scheduler_preset_action_config_mode_heat_eco": "ગરમી અર્થતંત્ર",
   "scheduler_preset_action_config_mode_cool": "કૂલ",
   "scheduler_preset_action_config_mode_cool_eco": "કૂલ ઇકોનોમી",
-  "scheduler_preset_action_program_run": "પ્રોગ્રામ ચલાવો",
+  "scheduler_preset_action_command_remote_control": "રિમોટ કંટ્રોલ (IR/RF કોડ મોકલો)",
+  "scheduler_preset_action_config_data": "ડેટા",
+  "scheduler_preset_action_program_run": "કાર્યક્રમ ચલાવો",
   "scheduler_preset_action_config_program": "કાર્યક્રમ",
   "scheduler_preset_action_config_options": "વિકલ્પો",
   "scheduler_preset_action_program_say": "કહો",
+  "scheduler_preset_action_net_http_call": "વેબ સેવાને કૉલ કરો",
+  "scheduler_preset_action_config_url": "સરનામું (URL)",
+  "scheduler_preset_action_pause": "થોભો",
+  "scheduler_preset_action_config_seconds": "સેકન્ડ",
   "scheduler_preset_action_config_message": "સંદેશ",
   "save_and_build": "સાચવો અને બનાવો",
   "toggle_widgets_preview": "વિજેટ પ્રીવ્યૂ ટૉગલ કરો",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "ફક્ત અનુકરણ કરો"
     },
     "26": {
-      "Title": "રંગીન લાઇટ્સ",
+      "Title": "રંગીન લાઈટ્સ",
       "Description": "HTTP API (V1) નો ઉપયોગ કરીને ફિલિપ્સ હ્યુ લાઇટ્સ ઇન્ટિગ્રેશનનું ઉદાહરણ. બ્રિજ સાથે કનેક્ટ થવા માટેનો ડિફોલ્ટ વપરાશકર્તા \"newdeveloper\" છે અને તે પહેલાથી જ સક્ષમ હોવો જોઈએ.",
       "ConfigureOptions.BridgeAddress": "ફિલિપ્સ હ્યુ બ્રિજ (V1) IP સરનામું",
       "ConfigureOptions.BridgeUsername": "વપરાશકર્તા નામ",
@@ -209,7 +215,7 @@
       "ConfigureOptions.System.SirenStartTime": "સાયરન શરૂ થવામાં વિલંબ (સેકન્ડ)",
       "ConfigureOptions.System.SirenMaxTime": "સાયરન મહત્તમ સમય (સેકન્ડ, 0 = અનંત)",
       "ConfigureOptions.Trigger.ArmedProgram": "સશસ્ત્ર હોય ત્યારે ચલાવવા માટેનો કાર્યક્રમ",
-      "ConfigureOptions.Trigger.DisarmedProgram": "નિઃશસ્ત્ર થવા પર ચલાવવા માટેનો કાર્યક્રમ",
+      "ConfigureOptions.Trigger.DisarmedProgram": "નિઃશસ્ત્ર થયા પછી ચલાવવા માટેનો કાર્યક્રમ",
       "ConfigureOptions.Trigger.TriggeredProgram": "ટ્રિગર થાય ત્યારે ચલાવવા માટેનો કાર્યક્રમ"
     },
     "95": {
@@ -228,7 +234,7 @@
       "Sensor.Luminance": "લ્યુમિનન્સ મૂલ્ય",
       "Sensor.MotionDetect": "ગતિ શોધ સ્થિતિ",
       "Status.Battery": "બેટરી લેવલ",
-      "Sensor.DoorWindow": "દરવાજા/બારીના સેન્સરની સ્થિતિ (ખુલ્લી/બંધ)",
+      "Sensor.DoorWindow": "દરવાજા/બારીના સેન્સરની સ્થિતિ (ખુલ્લું/બંધ)",
       "Status.Level": "સ્વિચ સ્થિતિ (ચાલુ/બંધ)"
     },
     "401": {
@@ -296,7 +302,7 @@
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
     },
     "912": {
-      "Title": "ઇન્સ્ટન્સ સેગ્મેન્ટેશન",
+      "Title": "ઇન્સ્ટન્સ સેગમેન્ટેશન",
       "Description": "પૂર્વ-પ્રશિક્ષિત YOLO11 મોડેલનો ઉપયોગ કરીને વસ્તુઓ અને તેમની રૂપરેખા શોધો.",
       "ML.InstanceSegmentation": "ઇન્સ્ટન્સ સેગ્મેન્ટેશન સક્ષમ કરો",
       "ConfigureOptions.Yolo.ModelPath": "YOLO11 મોડેલ ફાઇલનો પાથ (.onnx)"
@@ -306,6 +312,18 @@
       "Description": "Google ના Gemini AI નો ઉપયોગ કરીને તમારા સ્માર્ટ સિસ્ટમ માટે કુદરતી ભાષા નિયંત્રણ સક્ષમ કરે છે. આ સુવિધાને સક્રિય કરવા માટે, માન્ય API કી દાખલ કરો. મફત API કી મેળવવા માટે https://aistudio.google.com/app/apikey પરની સૂચનાઓનું પાલન કરો.",
       "ConfigureOptions.ApiKey": "ગૂગલ જેમિની એઆઈ એપીઆઈ કી",
       "ConfigureOptions.ModelId": "મોડેલ ID"
+    },
+    "931": {
+      "Title": "જેમિની વિજેટ જીની",
+      "Description": "વિજેટ બનાવવા માટે તમારી વ્યક્તિગત AI જીની. જેમિની દ્વારા સંચાલિત, તે તમને HomeGenie એડિટરમાં સીધા HTML, CSS અને JavaScript કોડ લખવા અને ડીબગ કરવામાં મદદ કરે છે. આ સુવિધાને સક્રિય કરવા માટે, માન્ય API કી દાખલ કરો. મફત API કી મેળવવા માટે https://aistudio.google.com/app/apikey પરની સૂચનાઓનું પાલન કરો.",
+      "ConfigureOptions.ApiKey": "ગૂગલ જેમિની એઆઈ એપીઆઈ કી",
+      "ConfigureOptions.ModelId": "મોડેલ ID"
+    },
+    "940": {
+      "Title": "સ્થાનિક AI (LLM)",
+      "Description": "તમારા HomeGenie સર્વર પર સ્થાનિક રીતે લાર્જ લેંગ્વેજ મોડેલ (LLM) ચલાવો. આ મોડેલો Hugging Face જેવા પ્લેટફોર્મ પરથી મફતમાં ડાઉનલોડ કરી શકાય છે. ફક્ત GGUF ફોર્મેટ મોડેલ ફાઇલનો પાથ પ્રદાન કરો. કૃપા કરીને નોંધ લો કે વિવિધ મોડેલો સાથે સંપૂર્ણ સુસંગતતા સુનિશ્ચિત કરવા માટે, મુખ્યત્વે સંદર્ભ કોડની અંદર, પરિમાણોમાં ગોઠવણોની જરૂર પડી શકે છે.",
+      "ConfigureOptions.MaxTokens": "મહત્તમ ટોકન્સ (પ્રતિભાવ લંબાઈ)",
+      "ConfigureOptions.ModelPath": "સ્થાનિક GGUF ફાઇલનો માર્ગ"
     }
   }
 }

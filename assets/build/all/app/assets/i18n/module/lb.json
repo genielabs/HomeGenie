@@ -1,5 +1,5 @@
 {
-  "stats.time_range": "Zäit Gamme",
+  "stats.time_range": "Zäitraum",
   "stats.one_second": "Eng Sekonn",
   "stats.five_seconds": "5 Sekonnen",
   "stats.ten_seconds": "10 Sekonnen",
@@ -12,5 +12,5 @@
   "stats.six_hours": "6 Stonnen",
   "stats.twelve_hours": "12 Stonnen",
   "stats.twentyfour_hours": "24 Stonnen",
-  "stats.chart_provider": "Chart Provider"
+  "stats.chart_provider": "Chart-Ubidder"
 }

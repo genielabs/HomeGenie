@@ -169,19 +169,19 @@
         "Use <span class=\"notranslate color-primary\">@{{name}}</span> as a variable in cron expressions or use <span class=\"notranslate color-primary\">Scheduler.IsScheduling(\"@{{name}}\")</span> in automation programs to reference this event.",
 " ":"--------------- SCHEDULER WIZARD ----------------",
     "scheduler_preset_action_command_turn_on":
-        "Turn on",
+        "Turn On",
     "scheduler_preset_action_command_turn_off":
-        "Turn off",
+        "Turn Off",
     "scheduler_preset_action_command_set_level":
-        "Set level",
+        "Set Level",
     "scheduler_preset_action_config_level":
         "Level",
     "scheduler_preset_action_command_set_color":
-        "Set color",
+        "Set Color",
     "scheduler_preset_action_config_color":
         "Color",
     "scheduler_preset_action_command_thermostat_mode":
-        "Thermostat mode",
+        "Thermostat Mode",
     "scheduler_preset_action_config_mode":
         "Mode",
     "scheduler_preset_action_config_mode_on":
@@ -191,19 +191,31 @@
     "scheduler_preset_action_config_mode_heat":
         "Heat",
     "scheduler_preset_action_config_mode_heat_eco":
-        "Heat economy",
+        "Heat Economy",
     "scheduler_preset_action_config_mode_cool":
         "Cool",
     "scheduler_preset_action_config_mode_cool_eco":
-        "Cool economy",
+        "Cool Economy",
+    "scheduler_preset_action_command_remote_control":
+        "Remote Control (send IR/RF codes)",
+    "scheduler_preset_action_config_data":
+        "Data",
     "scheduler_preset_action_program_run":
-        "Run program",
+        "Run Program",
     "scheduler_preset_action_config_program":
         "Program",
     "scheduler_preset_action_config_options":
         "Options",
     "scheduler_preset_action_program_say":
         "Say",
+    "scheduler_preset_action_net_http_call":
+        "Call a Web Service",
+    "scheduler_preset_action_config_url":
+        "Address (URL)",
+    "scheduler_preset_action_pause":
+        "Pause",
+    "scheduler_preset_action_config_seconds":
+        "Seconds",
     "scheduler_preset_action_config_message":
         "Message",
 " ":"---------------- PROGRAM EDITOR -----------------",
@@ -242,17 +254,17 @@
   "program_status_compile":
     "Compile",
   "automation_programming_guide":
-    "Programming guide'",
+    "Programming Guide'",
   "tap_to_disable":
     "Click to disable",
   "tap_to_enable":
     "Click to enable",
   "program_data":
-    "Program data",
+    "Program Data",
   "visual_code":
-    "Visual code",
+    "Visual Code",
   "generated_code":
-    "Generated code",
+    "Generated Code",
   "setup_code":
     "Setup",
   "main_code":
@@ -289,7 +301,7 @@
 
     "26": {
       "Title":
-        "Color lights",
+        "Color Lights",
       "Description":
         "Example Philips Hue lights integration using HTTP API (V1).\nThe default user to connect to the bridge is \"newdeveloper\" and it should be already enabled.",
       "ConfigureOptions.BridgeAddress":
@@ -406,13 +418,13 @@
     },
 
     "95": {
-      "Title": "Events logging",
+      "Title": "Events Logging",
       "Description": "Record device activity.",
       "EventsLogger.EnableLogging": "Enable"
     },
 
     "111": {
-      "Title": "Client configuration",
+      "Title": "Client Configuration",
       "Description": "Implements API for managing client's configuration profiles that are used to store UI and dashboards settings."
     },
 
@@ -438,7 +450,7 @@
     },
 
     "410": {
-      "Title": "Sensor simulator",
+      "Title": "Sensor Simulator",
       "Description": "Emit random sensor values.",
       "Simulator.Sensor.Temperature": "Temperature sensor",
       "Simulator.Sensor.Humidity": "Humidity sensor",
@@ -460,7 +472,7 @@
 
     "142": {
         "Title":
-            "E-Mail account",
+            "E-Mail Account",
         "Description":
             "Stores e-mail account info used by system programs for sending/receiving emails.",
         "ConfigureOptions.Email.Sender":
@@ -505,7 +517,7 @@
 
     "910": {
       "Title":
-        "Object detection",
+        "Object Detection",
       "Description":
         "Detect objects using a pre-trained YOLO11 model.",
       "ML.ObjectDetection":
@@ -518,7 +530,7 @@
 
     "911": {
       "Title":
-        "Pose estimation",
+        "Pose Estimation",
       "Description":
         "Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLOv11 model (human pose-specific).",
       "ML.PoseEstimation":
@@ -529,7 +541,7 @@
 
     "912": {
       "Title":
-        "Instance segmentation",
+        "Instance Segmentation",
       "Description":
         "Detect objects and their outlines using a pre-trained YOLO11 model.",
       "ML.InstanceSegmentation":
@@ -547,6 +559,28 @@
         "Google Gemini AI API key",
       "ConfigureOptions.ModelId":
         "Model ID"
+    },
+
+    "931": {
+      "Title":
+        "Gemini Widget Genie",
+      "Description":
+        "Your personal AI genie for widget creation. Powered by Gemini, it helps you write and debug HTML, CSS, and JavaScript code directly within the HomeGenie editor.\nTo activate this feature, enter a valid API key.\nFollow the instructions at https://aistudio.google.com/app/apikey to get a free API key.",
+      "ConfigureOptions.ApiKey":
+        "Google Gemini AI API key",
+      "ConfigureOptions.ModelId":
+        "Model ID"
+    },
+
+    "940": {
+      "Title":
+        "Local AI (LLM)",
+      "Description":
+        "Run a Large Language Model (LLM) locally on your HomeGenie server. These models can be downloaded for free from platforms like Hugging Face.\n\nSimply provide the path to a GGUF format model file. Please note that adjustments to parameters, primarily within the Context Code, may be required to ensure full compatibility with different models.",
+      "ConfigureOptions.MaxTokens":
+        "Max Tokens (response length)",
+      "ConfigureOptions.ModelPath":
+        "Path to local GGUF file"
     }
 
   }

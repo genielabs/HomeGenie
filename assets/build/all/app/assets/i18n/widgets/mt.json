@@ -1,5 +1,5 @@
 {
-  "toggle_long_press_to_reorder_widgets": "Ippermetti/Iddiżattiva l-pressjoni twila biex tbiddel l-ordni tal-widgets",
+  "toggle_long_press_to_reorder_widgets": "Ippermetti/Iddiżattiva l-ippressar twil biex tbiddel l-ordni tal-widgets",
   "$alarm_system": {
     "arm_home": "Dar",
     "arm_away": "'Il bogħod"
@@ -9,5 +9,11 @@
     "indicators": "Indikaturi",
     "lights_control": "Dwal",
     "switches_control": "Swiċċijiet"
+  },
+  "$ai_chat": {
+    "title": "Widget taċ-Chat tal-AI",
+    "intro": "Bongu! Jiena l-assistent lokali tiegħek tal-LLM. Kif nista' ngħinek?",
+    "no_bound_module": "L-ebda modulu LLM ma huwa marbut. Jekk jogħġbok iftaħ is-settings tal-widget biex torbot mudell tal-lingwa.",
+    "start_typing_prompt": "Ibda ittajpja prompt..."
   }
 }

@@ -95,10 +95,16 @@
   "scheduler_preset_action_config_mode_heat_eco": "තාප ආර්ථිකය",
   "scheduler_preset_action_config_mode_cool": "සිසිල්",
   "scheduler_preset_action_config_mode_cool_eco": "සිසිල් ආර්ථිකය",
+  "scheduler_preset_action_command_remote_control": "දුරස්ථ පාලකය (IR/RF කේත යවන්න)",
+  "scheduler_preset_action_config_data": "දත්ත",
   "scheduler_preset_action_program_run": "වැඩසටහන ක්‍රියාත්මක කරන්න",
   "scheduler_preset_action_config_program": "වැඩසටහන",
   "scheduler_preset_action_config_options": "විකල්ප",
   "scheduler_preset_action_program_say": "කියන්න",
+  "scheduler_preset_action_net_http_call": "වෙබ් සේවාවක් අමතන්න",
+  "scheduler_preset_action_config_url": "ලිපිනය (URL)",
+  "scheduler_preset_action_pause": "විරාමය",
+  "scheduler_preset_action_config_seconds": "තත්පර",
   "scheduler_preset_action_config_message": "පණිවිඩය",
   "save_and_build": "සුරකින්න සහ ගොඩනඟන්න",
   "toggle_widgets_preview": "විජට් පෙරදසුන ටොගල් කරන්න",
@@ -126,7 +132,7 @@
   "setup_code": "සැලසුම",
   "main_code": "ප්‍රධාන",
   "context_code": "සන්දර්භය",
-  "main_code_empty_note": "\"ප්‍රධාන\" කේතය හිස්. මෙම කේතය ජනනය කිරීමට \"දෘශ්‍ය කේත\" සංස්කාරකය භාවිතා කරන්න: - වම් පස ඇති විධාන පුවරුවෙන් \"ක්‍රමලේඛය\" කාණ්ඩය විවෘත කරන්න - දෘශ්‍ය කේත වැඩබිමෙහි \"ප්‍රධාන\" වර්ගයේ බ්ලොක් එකක් ඇදගෙන යන්න - මෙම වැඩසටහනේ ක්‍රියා සහ තර්කනය ක්‍රියාත්මක කිරීම සඳහා එයට වෙනත් කේත බ්ලොක් එකතු කරන්න. සැකසුම් කේතයේ අවසානයේ දී ඇති කොන්දේසි මත පදනම්ව \"ප්‍රධාන\" වැඩසටහන අතින් ක්‍රියාත්මක කළ හැකිය හෝ ස්වයංක්‍රීයව ආරම්භ කළ හැකිය.",
+  "main_code_empty_note": "\"ප්‍රධාන\" කේතය හිස්ය. මෙම කේතය ජනනය කිරීමට \"දෘශ්‍ය කේත\" සංස්කාරකය භාවිතා කරන්න: - වම් පස ඇති විධාන පුවරුවෙන් \"ක්‍රමලේඛය\" කාණ්ඩය විවෘත කරන්න - දෘශ්‍ය කේත වැඩබිමෙහි \"ප්‍රධාන\" වර්ගයේ බ්ලොක් එකක් ඇදගෙන යන්න - මෙම වැඩසටහනේ ක්‍රියා සහ තර්කනය ක්‍රියාත්මක කිරීම සඳහා එයට වෙනත් කේත බ්ලොක් එකතු කරන්න. සැකසුම් කේතයේ අවසානයේ දී ඇති කොන්දේසි මත පදනම්ව \"ප්‍රධාන\" වැඩසටහන අතින් ක්‍රියාත්මක කළ හැකිය හෝ ස්වයංක්‍රීයව ආරම්භ කළ හැකිය.",
   "setup_code_empty_note": "\"සැකසුම්\" කේතය හිස්ය. මෙම කේතය ජනනය කිරීමට \"දෘශ්‍ය කේත\" සංස්කාරකය භාවිතා කරන්න: - වම් පස ඇති විධාන පුවරුවෙන් \"වැඩසටහන\" කාණ්ඩය විවෘත කරන්න - දෘශ්‍ය කේත වැඩබිමෙහි \"සැකසුම්\" වර්ගයේ බ්ලොක් එකක් ඇදගෙන යන්න - \"ප්‍රධාන\" කේත ක්‍රියාත්මක කිරීම අවුලුවන කොන්දේසි තීරණය කිරීම සඳහා එය තුළ වෙනත් කේත බ්ලොක් එකතු කරන්න. මෙම කේතය නව සිදුවීමක් සිදුවන සෑම අවස්ථාවකම සහ අවම වශයෙන් විනාඩියකට වරක් ඇගයීමට ලක් කෙරේ.",
   "capture_commands": "විධාන ග්‍රහණය කරන්න",
   "capture_commands_description": "විජට් මත අතින් සිදු කරන සියලුම විධාන වැඩසටහනට එක් කරන්න.",
@@ -141,7 +147,7 @@
       "HomeGenie.LevelMemory.SimulateOnly": "අනුකරණය පමණි"
     },
     "26": {
-      "Title": "වර්ණ ලයිට්",
+      "Title": "වර්ණ ආලෝක",
       "Description": "උදාහරණය HTTP API (V1) භාවිතයෙන් Philips Hue ආලෝක ඒකාබද්ධ කිරීම. පාලමට සම්බන්ධ වීමට පෙරනිමි පරිශීලකයා \"newdeveloper\" වන අතර එය දැනටමත් සක්‍රීය කර තිබිය යුතුය.",
       "ConfigureOptions.BridgeAddress": "Philips Hue Bridge (V1) IP ලිපිනය",
       "ConfigureOptions.BridgeUsername": "පරිශීලක නාමය",
@@ -149,14 +155,14 @@
     },
     "34": {
       "Title": "කාලගුණ අනාවැකිය",
-      "Description": "විවෘත කාලගුණ සිතියම් සේවාවෙන් කාලගුණ සහ පුරෝකථන තොරතුරු. මෙම විජට් එක සක්‍රිය කිරීමට වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://openweathermap.org/appid හි උපදෙස් අනුගමනය කරන්න.",
+      "Description": "විවෘත කාලගුණ සිතියම් සේවාවෙන් කාලගුණය සහ පුරෝකථන තොරතුරු. මෙම විජට් එක සක්‍රිය කිරීමට වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://openweathermap.org/appid හි උපදෙස් අනුගමනය කරන්න.",
       "ConfigureOptions.Location": "නගරයේ නම",
       "ConfigureOptions.Language": "භාෂාව (උදා. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval": "යාවත්කාලීන කාල පරතරය (මිනිත්තු)",
       "ConfigureOptions.ApiKey": "OpenWeatherMap API යතුර (APPID)"
     },
     "77": {
-      "Title": "ජාල MQTT",
+      "Title": "ජාලය MQTT",
       "Description": "අන්තර්ජාලය හරහා ඕනෑම තැනක සිට HomeGenie Panel යෙදුම භාවිතා කිරීමට හෝ එකම MQTT ජාලයේ HomeGenie උපාංග අන්තර් සම්බන්ධ කිරීමට MQTT තැරැව්කරුවෙකු හා සම්බන්ධ වන්න.",
       "MQTT.SensorPublish": "මෙම මොඩියුලය මඟින් විමෝචනය වන සිදුවීම් ප්‍රකාශයට පත් කරන්න",
       "ConfigureOptions.ClientId": "සේවාදායක හැඳුනුම්පත.",
@@ -287,7 +293,7 @@
       "Description": "පෙර පුහුණු කළ YOLO11 ආකෘතියක් භාවිතයෙන් වස්තූන් හඳුනා ගන්න.",
       "ML.ObjectDetection": "වස්තු අනාවරණය සබල කරන්න",
       "ML.ObjectDetection.TriggerDetect": "අනතුරු ඇඟවීම අවුලුවන දේවල් (ඉංග්‍රීසියෙන්) කොමාවෙන් වෙන් කරන ලද ලැයිස්තුව. (උදා: පූසා, බල්ලා, පුද්ගලයා, බෑගය, ගමන් මල්ල)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ (.onnx) මාර්ගය"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ මාර්ගය (.onnx)"
     },
     "911": {
       "Title": "ඉරියව් ඇස්තමේන්තුව",
@@ -299,13 +305,25 @@
       "Title": "අවස්ථා ඛණ්ඩනය",
       "Description": "පෙර පුහුණු කළ YOLO11 ආකෘතියක් භාවිතයෙන් වස්තූන් සහ ඒවායේ දළ සටහන් හඳුනා ගන්න.",
       "ML.InstanceSegmentation": "නිදර්ශන ඛණ්ඩනය සක්‍රීය කරන්න",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ මාර්ගය (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO11 ආකෘති ගොනුවේ (.onnx) මාර්ගය"
     },
     "930": {
       "Title": "මිථුන අභිප්‍රායන් හසුරුවන්නා",
       "Description": "Google හි Gemini AI භාවිතයෙන් ඔබේ ස්මාර්ට් පද්ධතිය සඳහා ස්වභාවික භාෂා පාලනය සක්‍රීය කරයි. මෙම විශේෂාංගය සක්‍රිය කිරීමට, වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://aistudio.google.com/app/apikey හි උපදෙස් අනුගමනය කරන්න.",
       "ConfigureOptions.ApiKey": "ගූගල් මිථුන AI API යතුර",
       "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත"
+    },
+    "931": {
+      "Title": "ජෙමිනි විජට් ජෙනී",
+      "Description": "විජට් නිර්මාණය සඳහා ඔබේ පුද්ගලික AI ජෙනී. Gemini මගින් බල ගැන්වෙන එය, HomeGenie සංස්කාරකය තුළ කෙලින්ම HTML, CSS සහ JavaScript කේත ලිවීමට සහ නිදොස් කිරීමට ඔබට උපකාරී වේ. මෙම විශේෂාංගය සක්‍රිය කිරීමට, වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://aistudio.google.com/app/apikey හි උපදෙස් අනුගමනය කරන්න.",
+      "ConfigureOptions.ApiKey": "ගූගල් මිථුන AI API යතුර",
+      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත"
+    },
+    "940": {
+      "Title": "දේශීය AI (LLM)",
+      "Description": "ඔබගේ HomeGenie සේවාදායකයේ දේශීයව විශාල භාෂා ආකෘතියක් (LLM) ධාවනය කරන්න. මෙම ආකෘති Hugging Face වැනි වේදිකා වලින් නොමිලේ බාගත කළ හැක. GGUF ආකෘති ආකෘති ගොනුවකට මාර්ගය සරලව සපයන්න. විවිධ මාදිලි සමඟ පූර්ණ අනුකූලතාව සහතික කිරීම සඳහා, ප්‍රධාන වශයෙන් සන්දර්භ කේතය තුළ පරාමිතීන්ට ගැලපීම් අවශ්‍ය විය හැකි බව කරුණාවෙන් සලකන්න.",
+      "ConfigureOptions.MaxTokens": "උපරිම ටෝකන (ප්‍රතිචාර දිග)",
+      "ConfigureOptions.ModelPath": "දේශීය GGUF ගොනුවට මාර්ගය"
     }
   }
 }

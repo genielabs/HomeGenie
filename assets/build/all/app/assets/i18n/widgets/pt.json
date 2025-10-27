@@ -1,5 +1,5 @@
 {
-  "toggle_long_press_to_reorder_widgets": "Habilitar/Desabilitar toque longo para reordenar widgets",
+  "toggle_long_press_to_reorder_widgets": "Ativar/desativar toque longo para reordenar widgets",
   "$alarm_system": {
     "arm_home": "Lar",
     "arm_away": "Ausente"
@@ -9,5 +9,11 @@
     "indicators": "Indicadores",
     "lights_control": "Luzes",
     "switches_control": "Interruptores"
+  },
+  "$ai_chat": {
+    "title": "Widget de bate-papo com IA",
+    "intro": "Olá! Sou seu assistente local de mestrado em direito. Como posso ajudar?",
+    "no_bound_module": "Nenhum módulo LLM vinculado. Abra as configurações do widget para vincular um modelo de idioma.",
+    "start_typing_prompt": "Comece a digitar um prompt..."
   }
 }

@@ -92,13 +92,19 @@
   "scheduler_preset_action_config_mode_on": "Na",
   "scheduler_preset_action_config_mode_off": "Vypnuto",
   "scheduler_preset_action_config_mode_heat": "Teplo",
-  "scheduler_preset_action_config_mode_heat_eco": "Tepelná úspornost",
+  "scheduler_preset_action_config_mode_heat_eco": "Tepelná ekonomika",
   "scheduler_preset_action_config_mode_cool": "Ochladit",
   "scheduler_preset_action_config_mode_cool_eco": "Chladná ekonomika",
+  "scheduler_preset_action_command_remote_control": "Dálkové ovládání (odesílání IR/RF kódů)",
+  "scheduler_preset_action_config_data": "Data",
   "scheduler_preset_action_program_run": "Spustit program",
   "scheduler_preset_action_config_program": "Naprogramovat",
   "scheduler_preset_action_config_options": "Možnosti",
   "scheduler_preset_action_program_say": "Říci",
+  "scheduler_preset_action_net_http_call": "Volání webové služby",
+  "scheduler_preset_action_config_url": "Adresa (URL)",
+  "scheduler_preset_action_pause": "Pauza",
+  "scheduler_preset_action_config_seconds": "Sekundy",
   "scheduler_preset_action_config_message": "Zpráva",
   "save_and_build": "Uložit a sestavit",
   "toggle_widgets_preview": "Přepnout náhled widgetů",
@@ -213,7 +219,7 @@
       "ConfigureOptions.Trigger.TriggeredProgram": "Program, který se spustí při spuštění"
     },
     "95": {
-      "Title": "Protokolování událostí",
+      "Title": "Záznam událostí",
       "Description": "Zaznamenávat aktivitu zařízení.",
       "EventsLogger.EnableLogging": "Umožnit"
     },
@@ -306,6 +312,18 @@
       "Description": "Umožňuje ovládání přirozeného jazyka pro váš chytrý systém pomocí umělé inteligence Gemini od Googlu. Chcete-li tuto funkci aktivovat, zadejte platný klíč API. Postupujte podle pokynů na adrese https://aistudio.google.com/app/apikey a získejte bezplatný klíč API.",
       "ConfigureOptions.ApiKey": "Klíč Google Gemini API pro umělou inteligenci",
       "ConfigureOptions.ModelId": "ID modelu"
+    },
+    "931": {
+      "Title": "Džin z widgetu Gemini",
+      "Description": "Váš osobní džin s umělou inteligencí pro tvorbu widgetů. Poháněn technologií Gemini vám pomáhá psát a ladit kód HTML, CSS a JavaScript přímo v editoru HomeGenie. Chcete-li tuto funkci aktivovat, zadejte platný klíč API. Postupujte podle pokynů na adrese https://aistudio.google.com/app/apikey a získejte bezplatný klíč API.",
+      "ConfigureOptions.ApiKey": "Klíč Google Gemini API pro umělou inteligenci",
+      "ConfigureOptions.ModelId": "ID modelu"
+    },
+    "940": {
+      "Title": "Lokální umělá inteligence (LLM)",
+      "Description": "Spusťte lokálně na serveru HomeGenie model velkého jazyka (LLM). Tyto modely lze zdarma stáhnout z platforem, jako je Hugging Face. Stačí zadat cestu k souboru modelu ve formátu GGUF. Upozorňujeme, že pro zajištění plné kompatibility s různými modely může být nutné upravit parametry, zejména v kontextovém kódu.",
+      "ConfigureOptions.MaxTokens": "Max. počet tokenů (délka odpovědi)",
+      "ConfigureOptions.ModelPath": "Cesta k lokálnímu souboru GGUF"
     }
   }
 }

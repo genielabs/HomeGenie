@@ -9,5 +9,11 @@
     "indicators": "Indikatoren",
     "lights_control": "Lichter",
     "switches_control": "Schalter"
+  },
+  "$ai_chat": {
+    "title": "KI-Chat-Widget",
+    "intro": "Hallo! Ich bin Ihr lokaler LLM-Assistent. Wie kann ich Ihnen helfen?",
+    "no_bound_module": "Kein LLM-Modul gebunden. Bitte öffnen Sie die Widget-Einstellungen, um ein Sprachmodell zu binden.",
+    "start_typing_prompt": "Beginnen Sie mit der Eingabe einer Eingabeaufforderung ..."
   }
 }

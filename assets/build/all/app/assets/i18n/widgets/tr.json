@@ -9,5 +9,11 @@
     "indicators": "Göstergeler",
     "lights_control": "Işıklar",
     "switches_control": "Anahtarlar"
+  },
+  "$ai_chat": {
+    "title": "AI Sohbet Widget'ı",
+    "intro": "Merhaba! Ben yerel LLM asistanınızım. Size nasıl yardımcı olabilirim?",
+    "no_bound_module": "LLM modülü bağlı değil. Lütfen bir dil modelini bağlamak için widget ayarlarını açın.",
+    "start_typing_prompt": "Bir komut yazmaya başlayın..."
   }
 }

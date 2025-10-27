@@ -1,8 +1,8 @@
 {
-  "node_inclusion": "Addere fabrica",
-  "node_exclusion": "Remove fabrica",
-  "operation_timed_out": "Operatio opportuno.",
-  "node_added": "Feliciter additae nodi",
-  "turn_on_device_to_add": "Switch in fabrica et premere HYMENAEOS button pro V seconds, si requiratur",
-  "soft_reset_button": "mollis reset"
+  "node_inclusion": "Adde instrumentum",
+  "node_exclusion": "Instrumentum remove",
+  "operation_timed_out": "Operatio tempore exacto exspiravit.",
+  "node_added": "Nodus feliciter additus est.",
+  "turn_on_device_to_add": "Instrumentum accende et, si opus est, clavem coniunctionis per quinque secunda preme.",
+  "soft_reset_button": "Restitutio mollis"
 }
