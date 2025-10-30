@@ -24,10 +24,6 @@ class DisplayTemperature extends ControllerInstance {
                 viewModel.temperature = formatValue(field);
             });
 
-        } else {
-
-            utils.ui.tooltip('Set a bound module to enable this widget.', {duration: 5000});
-
         }
 
     }

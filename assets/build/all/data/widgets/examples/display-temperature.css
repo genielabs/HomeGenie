@@ -1,6 +1,4 @@
 :host {
-    border: solid #afafaf09;
-    border-radius: 12px;
     font-weight: lighter;
     height: 100%;
 }
@@ -17,10 +15,11 @@ svg {
     place-content: center;
     width: 280px;
     min-height: 145px;
+    padding-bottom: 12px;
 }
 
 .value {
-    color: var(--primary-color);
+    color: var(--secondary-text-color);
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 500%;
     font-weight: 300;
@@ -40,7 +39,6 @@ svg {
   font-size: 180%;
   overflow: hidden;
   text-overflow: ellipsis;
-  opacity: 0.6;
 }
 
 .unit {

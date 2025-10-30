@@ -179,7 +179,7 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
   <SchedulerItem>
     <Name>Thermostat.Heat</Name>
     <CronExpression>(* * * 1,2,3,12 *) ; [ ((0 7 * * *) &gt; (0 11 * * *)) : ((0 16 * * *) &gt; (0 23 * * *)) ]</CronExpression>
-    <Description>>From December to March, from 07:00 to 11:00 and from 16:00 to 23:00</Description>
+    <Description>From December to March, from 07:00 to 11:00 and from 16:00 to 23:00</Description>
     <Data>{"itemType":1,"time":[{"start":"07:00","end":"11:00"},{"start":"16:00","end":"23:00"}],"occur_min_type":1,"occur_min_step":1,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":1,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":2,"occur_month_sel":["1","2","3","12"],"action":{"type":"template","template":{"forEach":{},"forStart":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Heat"}}]},"forEnd":{"enabled":true,"commands":[{"id":"command_thermostat_mode","config":{"mode":"Off"}}]}}},"from":"2016-06-19","to":"2016-06-19"}</Data>
     <IsEnabled>true</IsEnabled>
     <Script>// auto-generated code from template
