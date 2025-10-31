@@ -8,8 +8,6 @@ This document provides a set of guidelines to help you contribute to the project
 
 This project and everyone participating in it is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior.
 
-*(Nota: Dovresti creare un file `CODE_OF_CONDUCT.md`. Puoi generarne uno standard da un template come il [Contributor Covenant](https://www.contributor-covenant.org/)).*
-
 ## How Can I Contribute?
 
 There are many ways to contribute to HomeGenie, and not all of them involve writing code.
