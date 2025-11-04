@@ -2,7 +2,11 @@
   text-align: center;
   border: solid #afafaf09;
   border-radius: 12px;
-  height: 100%;
+  min-width: 312px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .header {
     display: -webkit-flex;

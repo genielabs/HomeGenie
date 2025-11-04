@@ -100,10 +100,16 @@ Api.Handle($"{dataApiUrl}/SimpleAverage", (args) =&gt; {
         var startTime = double.Parse(request.GetOption(0));
         var endTime = double.Parse(request.GetOption(1));
         var chartWidth = double.Parse(request.GetOption(2));
-
-        var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
-        stats.History.Reverse();
-        return stats;
+        try
+        {
+            var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
+            stats.History.Reverse();
+            return stats;
+        }
+        catch (Exception e)
+        {
+            return e;
+        }
     }
     return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
 });
@@ -161,7 +167,7 @@ ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double start
     var stats = new ValueStatistics() {
         History = new TsList&lt;ValueStatistics.StatValue&gt;(
             parameter.Statistics.History
-                .Where(sv =&gt; sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
+                .Where(sv =&gt; sv != null &amp;&amp; sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
                     .ToList()
         )
     };
@@ -237,9 +243,9 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>stats-data-monitor</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>C43D945F1D855C164EA2FECB6927A093</Checksum>
+      <Checksum>4CB9D77C908124087131F3F2B319B235</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>570</Address>
@@ -1295,7 +1301,7 @@ while (Program.IsRunning)
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

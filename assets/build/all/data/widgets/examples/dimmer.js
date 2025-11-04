@@ -5,6 +5,14 @@
  * to prevent overwhelming the target device.
  */
 class Dimmer extends ControllerInstance {
+  // Widget Settings
+  settings = {
+    moduleSelect: {
+      // In the widget settings dialog
+      // show only modules with this field
+      typeFilter: 'Dimmer,Color'
+    }
+  };
 
   /**
    * A flag to prevent sending multiple commands simultaneously.

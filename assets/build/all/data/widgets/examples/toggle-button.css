@@ -1,8 +1,10 @@
 :host {
-  border: solid #afafaf0a;
-  border-radius: 12px;
   font-weight: lighter;
-  height: 100%;
+  min-width: 312px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .container {
   position: relative;

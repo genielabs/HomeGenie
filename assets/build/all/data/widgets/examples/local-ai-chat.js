@@ -4,6 +4,14 @@
  * responses from a Large Language Model (LLM), and renders Markdown.
  */
 class LocalAiChat extends ControllerInstance {
+  // Widget Settings
+  settings = {
+    moduleSelect: {
+      // In the widget settings dialog
+      // show only modules with this field
+      fieldFilter: 'LLM.TokenStream'
+    }
+  };
 
   // --- PROPERTIES ---
 
@@ -196,6 +204,12 @@ class LocalAiChat extends ControllerInstance {
 
     // Do nothing if there's no input or no module bound.
     if (!userInput || !this.boundModule) {
+      return;
+    }
+
+    if (!this.boundModule.isOnline) {
+      utils.ui
+        .tooltip('LLM module is not available at the moment.', {duration: 2000});
       return;
     }
 

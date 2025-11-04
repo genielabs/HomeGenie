@@ -1,18 +1,23 @@
 :host {
     font-family: sans-serif;
     min-width: 312px;
-}
-
-.container {
-    padding: 16px;
+    min-height: 180px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin: 18px;
     font-size: 1.1em;
+}
+.header h3 {
+  margin: 0;
+}
+
+.container {
+    padding: 16px;
+    margin-top: 32px;
 }
 
 .level-text {

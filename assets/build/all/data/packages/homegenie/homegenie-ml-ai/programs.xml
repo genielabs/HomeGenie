@@ -55,14 +55,17 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
         .Select(module =&gt; new { name = module.Name, group = "", address = module.Address, domain = module.Domain, type = module.DeviceType });
     devicesInGroups.AddRange(scriptMacros);
 
-    string devicesJson = JsonConvert.SerializeObject(devicesInGroups, Formatting.Indented);
+    //string devicesList = JsonConvert.SerializeObject(devicesInGroups, Formatting.Indented);
+    string devicesList = "";
+    foreach (var m in devicesInGroups) {
+      devicesList += $"- {m.name} | {m.type} | {m.group} | {m.domain}/{m.address}\n";
+    }
 
     // 3. Prepare the user message with context
-    string formattedUserMessage = string.Format(USER_INPUT_TEMPLATE, devicesJson, userCommand as string);
     var userMessage = new ChatMessage
     {
         Role = "user",
-        Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = formattedUserMessage } }
+        Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = userCommand as string } }
     };
     var payloadContents = new List&lt;ChatMessage&gt;(ChatSession.History);
     payloadContents.Add(userMessage);
@@ -70,7 +73,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
     var payload = new
     {
         contents = payloadContents,
-        system_instruction = new { parts = new[] { new { text = GEMINI_SYSTEM_PROMPT } } },
+        system_instruction = new { parts = new[] { new { text = GEMINI_SYSTEM_PROMPT.Replace("%%AVAILABLE_DEVICES%%", devicesList) } } },
         generationConfig = new { temperature = 0.3 }
     };
 
@@ -221,90 +224,52 @@ const string DEFAULT_MODEL_ID = "gemini-flash-latest";
 
 const string GEMINI_SYSTEM_PROMPT = """
 
-You are a home automation assistant called HomeJeanie.
+You are a home automation assistant called HomeGenie.
 
----
-**CRITICAL RULES**
----
 
-1.  **JSON ONLY:** Your entire response MUST be ONLY a valid JSON object. No markdown. No chain thoughts. See "RESPONSE FORMAT" section for examples.
+**RULES**
+
+1.  **JSON ONLY:** Your entire response MUST be ONLY a valid JSON object. No markdown. No chain thoughts.
 2.  **USER'S LANGUAGE:** The "answer" field MUST be in the same language as the user's command.
-3.  **COMMAND ARRAY:** The "commands" field must be an array of strings. For conversational replies, it must be an empty array `[]`. If a command is invalid, it must be `["NONE"]`.
+3.  **COMMAND ARRAY:** The "commands" field must be an array of strings. The reply might not contains a command in which case the `commands` array must be `["NONE"]`.
 
----
-**API REFERENCE AND LOGIC**
----
 
-**Command Hierarchy (CRITICAL):**
-1.  If a command involves **COLOR and BRIGHTNESS** for a device:
-    - Generate a SINGLE `Control.ColorHsb/{h},{s},{v}` command.
-    - Convert brightness percentage to a normalized value for `v` (e.g., 50% -&gt; 0.5).
-    - **FORBIDDEN ACTION:** DO NOT generate a separate `Control.Level` command.
-2.  If a command involves **only BRIGHTNESS**, generate a `Control.Level/{value}` command.
-3.  If a command involves **only ON/OFF**, generate `Control.On` or `Control.Off`.
+**AVAILABLE DEVICES**
+%%AVAILABLE_DEVICES%%
 
-**Available Commands:**
+
+**COMMANDS LIST**
 -   `Control.On`, `Control.Off`
 -   `Control.Level/{value}` (value: 0-100)
 -   `Control.ColorHsb/{h},{s},{v}` (h,s,v: 0.0-1.0)
 -   `Thermostat.ModeSet/{mode}` (mode: "Off", "Heat", "HeatEconomy", "Cool", "CoolEconomy")
--   `Thermostat.SetPointSet/{type}/{value}`
+-   `Thermostat.SetPointSet/{type}/{value}` (type: "Heating", "HeatingEconomy", "Cooling", "CoolingEconomy")
 -   `Control.ArmAway`
 -   `Control.ArmHome`
 -   `Control.Disarm`
 
-**API for running/stopping scenarios have to following syntax**
--   `/api/HomeAutomation.HomeGenie/Automation/Programs.Run/{module_address}`
--   `/api/HomeAutomation.HomeGenie/Automation/Programs.Break/{module_address}`
+**EXCEPTIONS**
+For type `Program` commands are in the form:
+-   `/api/HomeAutomation.HomeGenie/Automation/Programs.Run/&lt;numeric_address&gt;
+-   `/api/HomeAutomation.HomeGenie/Automation/Programs.Break/&lt;numeric_address&gt;
 
----
-**VALID RESPONSES EXAMPLES**
----
 
-**You must follow this format strictly.** First, think through the steps inside a `&lt;thought&gt;` block (this part MUST NOT be in your final output). Then, provide the final JSON.
+**EXAMPLE**
 
-**EXAMPLE 1:**
-- **User Command:** "spegni la luce camera e imposta l'abat jour su un viola intenso al 20%"
-- **Your output MUST be:**
+&lt;|im_start|&gt;user
+Spegni tutte le luci dello studio e poi accendi la caldaia.&lt;|im_end|&gt;
+
+&lt;|im_start|&gt;assistant
 {
-    "answer": "Fatto! Ho spento la Luce Camera e impostato l'Abat Jour su un viola intenso al 20%.",
-    "commands": [
-        "/api/HomeAutomation.HomeGenie/1/Control.Off",
-        "/api/HomeAutomation.HomeGenie/2/Control.ColorHsb/0.83,1.0,0.20"
-    ]
+  "answer": "Fatto! Ho spento la luce della scrivania e Ambient nello Studio e ho acceso la caldaia.",
+  "commands": [
+    "/api/HomeAutomation.PhilipsHue/3/Control.Off",
+    "/api/HomeAutomation.ZigBee/5/Control.Off",
+    "/api/HomeAutomation.HomeGenie/S2/Control.On"
+  ]
 }
+&lt;|im_end|&gt;
 
-**EXAMPLE 2:**
-- **User Command:** "imposta il termostato a 22 gradi"
-- **Your output MUST be:**
-{
-    "answer": "Ok, ho impostato il termostato a 22 gradi.",
-    "commands": [
-        "/api/HomeAutomation.SmartThermostat/1/Thermostat.SetPointSet/Heating/22"
-    ]
-}
-
-**EXAMPLE 3:**
-- **User Command:** "avvia lo scenario alba"
-- **Your output MUST be:**
-{
-    "answer": "Ok, ho avviato lo scenario alba.",
-    "commands": [
-        "/api/HomeAutomation.HomeGenie/Automation/Programs.Run/8"
-    ]
-}
-
-Now, begin.
-
-""";
-
-const string USER_INPUT_TEMPLATE = """
---- AVAILABLE DEVICES ---
-DEVICE LIST:
-{0}
-
---- USER COMMAND ---
-{1}
 """;
 
 
@@ -371,11 +336,11 @@ static class ChatSession
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>7A46481026128F4A716938CBCBC00674</Checksum>
+      <Checksum>893C70B05856058C5630729CE1F4D829</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -738,7 +703,7 @@ static class ChatSession
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1024,7 +989,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -1339,12 +1304,12 @@ async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&l
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>lailama</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -1508,7 +1473,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -1649,7 +1614,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>

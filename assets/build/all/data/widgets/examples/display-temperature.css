@@ -1,6 +1,8 @@
 :host {
     font-weight: lighter;
     height: 100%;
+    min-width: 312px;
+    min-height: 180px;
 }
 
 svg {
