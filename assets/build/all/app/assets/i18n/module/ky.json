@@ -12,5 +12,7 @@
   "stats.six_hours": "6 саат",
   "stats.twelve_hours": "12 саат",
   "stats.twentyfour_hours": "24 саат",
-  "stats.chart_provider": "Диаграмма камсыздоочу"
+  "stats.chart_provider": "Диаграмма камсыздоочу",
+  "stats.five_minutes": "5 мүнөт",
+  "stats.fifteen_minutes": "15 мүнөт"
 }

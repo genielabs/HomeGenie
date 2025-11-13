@@ -12,5 +12,7 @@
   "stats.six_hours": "6 שעות",
   "stats.twelve_hours": "12 שעות",
   "stats.twentyfour_hours": "24 שעות",
-  "stats.chart_provider": "ספק תרשימים"
+  "stats.chart_provider": "ספק תרשימים",
+  "stats.five_minutes": "5 דקות",
+  "stats.fifteen_minutes": "15 דקות"
 }

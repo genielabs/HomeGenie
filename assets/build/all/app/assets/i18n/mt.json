@@ -414,5 +414,12 @@
   "Status.Level": "Livell",
   "chart": "Ċart",
   "new_series_added": "Serje ġdida miżjuda.",
-  "series_deleted": "Serje mħassra."
+  "series_deleted": "Serje mħassra.",
+  "size": "Daqs",
+  "Status.ColorHsb": "Kulur (HSV)",
+  "week_of_year": "Ġimgħa tas-Sena",
+  "new_value": "Valur Ġdid",
+  "events_logger_database": "Database tal-Logger tal-Avvenimenti",
+  "volatile_statistics_cache": "Cache tal-Istatistika Volatili",
+  "data_storage": "Ħażna tad-Data"
 }

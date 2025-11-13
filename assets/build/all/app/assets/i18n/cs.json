@@ -414,5 +414,12 @@
   "Status.Level": "Úroveň",
   "chart": "Schéma",
   "new_series_added": "Přidána nová série.",
-  "series_deleted": "Série smazána."
+  "series_deleted": "Série smazána.",
+  "size": "Velikost",
+  "Status.ColorHsb": "Barva (HSV)",
+  "week_of_year": "Týden roku",
+  "new_value": "Nová hodnota",
+  "events_logger_database": "Databáze záznamníků událostí",
+  "volatile_statistics_cache": "Mezipaměť volatilních statistik",
+  "data_storage": "Ukládání dat"
 }

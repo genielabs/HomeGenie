@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ชั่วโมง",
   "stats.twelve_hours": "12 ชั่วโมง",
   "stats.twentyfour_hours": "24 ชั่วโมง",
-  "stats.chart_provider": "ผู้ให้บริการแผนภูมิ"
+  "stats.chart_provider": "ผู้ให้บริการแผนภูมิ",
+  "stats.five_minutes": "5 นาที",
+  "stats.fifteen_minutes": "15 นาที"
 }

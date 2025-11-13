@@ -74,13 +74,13 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.Implements("@Statistics:Provider", apiUrl, new {
+    <ScriptSetup>Program.Implements("@Statistics:Provider", ApiUrl, new {
     icon = "legend_toggle"
 }).Run();
 </ScriptSetup>
-    <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
+    <ScriptSource>Api.Handle(ApiUrl, (args) =&gt; {
     return new {
-        dataApi = dataApiUrl,
+        dataApi = DataApiUrl,
         scale = "time",
         filters = new string[] {
             "SimpleAverage",
@@ -90,8 +90,41 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     };
 });
 
-Api.Handle($"{dataApiUrl}/SimpleAverage", (args) =&gt; {
-    var request = Api.Parse(args);
+
+var ParseArgs = new Func&lt;object, MigInterfaceCommand&gt;((args) =&gt; {
+    string storageDomain = "";
+    string requestString = args is string ? args.ToString() : (args as MigInterfaceCommand).OriginalRequest;
+    int storageIndex = requestString.IndexOf("@");
+    if (storageIndex &gt; 0) {
+        storageDomain = requestString.Substring(storageIndex + 1).Split("/")[0];
+        var delimiter = $"@{storageDomain}/";
+        requestString = requestString.Substring(requestString.IndexOf(delimiter) + delimiter.Length);
+    }
+    return new MigInterfaceCommand(requestString, storageDomain);
+});
+
+
+Api.Handle($"{DataApiUrl}/TimeRange", (args) =&gt; {
+    var request = ParseArgs(args);
+    var storageDomain = request.Data.ToString();
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        if (string.IsNullOrEmpty(storageDomain))
+        {
+            // default data storage endpoint
+            storageDomain = "HomeAutomation.HomeGenie/Config/Modules.StatisticsGet";
+        }
+        return Api.Call($"{storageDomain}/{module.Instance.Domain}/{module.Instance.Address}/{parameter.Name}/TimeRange");
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+Api.Handle($"{DataApiUrl}/RawData", (args) =&gt; {
+    var request = ParseArgs(args);
+    var storageDomain = request.Data.ToString();
     var module = Modules.InDomain(request.Domain)
                         .WithAddress(request.Address)
                         .Get();
@@ -99,11 +132,10 @@ Api.Handle($"{dataApiUrl}/SimpleAverage", (args) =&gt; {
         var parameter = module.Parameter(request.Command);
         var startTime = double.Parse(request.GetOption(0));
         var endTime = double.Parse(request.GetOption(1));
-        var chartWidth = double.Parse(request.GetOption(2));
         try
         {
-            var stats = ApplySimpleAverageFilter(parameter, startTime, endTime, chartWidth);
-            stats.History.Reverse();
+            var stats = GetRawData(storageDomain, module.Instance, parameter, startTime, endTime);
+            stats.Reverse();
             return stats;
         }
         catch (Exception e)
@@ -114,8 +146,35 @@ Api.Handle($"{dataApiUrl}/SimpleAverage", (args) =&gt; {
     return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
 });
 
-Api.Handle($"{dataApiUrl}/MovingAverage", (args) =&gt; {
-    var request = Api.Parse(args);
+
+Api.Handle($"{DataApiUrl}/SimpleAverage", (args) =&gt; {
+    var request = ParseArgs(args);
+    var storageDomain = request.Data.ToString();
+    var module = Modules.InDomain(request.Domain)
+                        .WithAddress(request.Address)
+                        .Get();
+    if (module.Exists) {
+        var parameter = module.Parameter(request.Command);
+        var startTime = double.Parse(request.GetOption(0));
+        var endTime = double.Parse(request.GetOption(1));
+        var chartWidth = double.Parse(request.GetOption(2));
+        try
+        {
+            var stats = ApplySimpleAverageFilter(storageDomain, module.Instance, parameter, startTime, endTime, chartWidth);
+            stats.Reverse();
+            return stats;
+        }
+        catch (Exception e)
+        {
+            return e;
+        }
+    }
+    return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
+});
+
+Api.Handle($"{DataApiUrl}/MovingAverage", (args) =&gt; {
+    var request = ParseArgs(args);
+    var storageDomain = request.Data.ToString();
     var module = Modules.InDomain(request.Domain)
                         .WithAddress(request.Address)
                         .Get();
@@ -126,15 +185,16 @@ Api.Handle($"{dataApiUrl}/MovingAverage", (args) =&gt; {
         var chartWidth = double.Parse(request.GetOption(2));
 
         var filter = new MovingAverageFilter(windowSize);
-        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
-        stats.History.Reverse();
+        var stats = ApplyFilter(storageDomain, filter, module.Instance, parameter, startTime, endTime, chartWidth);
+        stats.Reverse();
         return stats;
     }
     return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
 });
 
-Api.Handle($"{dataApiUrl}/SavitzkyGolay", (args) =&gt; {
-    var request = Api.Parse(args);
+Api.Handle($"{DataApiUrl}/SavitzkyGolay", (args) =&gt; {
+    var request = ParseArgs(args);
+    var storageDomain = request.Data.ToString();
     var module = Modules.InDomain(request.Domain)
                         .WithAddress(request.Address)
                         .Get();
@@ -145,8 +205,8 @@ Api.Handle($"{dataApiUrl}/SavitzkyGolay", (args) =&gt; {
         var chartWidth = double.Parse(request.GetOption(2));
 
         var filter = new SavitzkyGolayFilter(windowSize);
-        var stats = ApplyFilter(filter, parameter, startTime, endTime, chartWidth);
-        stats.History.Reverse();
+        var stats = ApplyFilter(storageDomain, filter, module.Instance, parameter, startTime, endTime, chartWidth);
+        stats.Reverse();
         return stats;
     }
     return new ResponseStatus(Status.Error, $"Unknown module '{request.Domain}:{request.Address}'");
@@ -154,45 +214,70 @@ Api.Handle($"{dataApiUrl}/SavitzkyGolay", (args) =&gt; {
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptContext>const string apiUrl = "Statistics.Providers/DataMonitor";
-const string dataApiUrl = "DataProcessing.Filters/Series";
+    <ScriptContext>#using StatValue = HomeGenie.Data.ValueStatistics.StatValue
+
+const string ApiUrl = "Statistics.Providers/DataMonitor";
+const string DataApiUrl = "DataProcessing.Filters/Series";
 
 const int windowSize = 9;
 
-ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
+List&lt;StatValue&gt; GetRawData(string storageDomain, Module module, ModuleParameter parameter, double startTime, double endTime)
+{
     startTime = (long)startTime;
     endTime = (long)endTime;
 
-    // Copy parameter values history to a new object
-    var stats = new ValueStatistics() {
-        History = new TsList&lt;ValueStatistics.StatValue&gt;(
-            parameter.Statistics.History
-                .Where(sv =&gt; sv != null &amp;&amp; sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
-                    .ToList()
-        )
-    };
-    stats.History.Reverse();
+    var stats = new ValueStatistics();
 
+    if (String.IsNullOrEmpty(storageDomain)) {
+        // Read from runtime Statistics History
+        stats.History = new TsList&lt;StatValue&gt;(
+                parameter.Statistics.History
+                    .Where(sv =&gt; sv != null &amp;&amp; sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
+                    .ToList()
+            );
+    } else {
+        // Read from persistent database provider (such as Event Logger or remote cloud service)
+        var results = (List&lt;LoggerEvent&gt;)Api.Call($"{storageDomain}/{module.Domain}/{module.Address}/{parameter.Name}/{startTime}/{endTime}");
+        stats.History = new TsList&lt;StatValue&gt;(results
+            .Select(logEvent =&gt; {
+                string ev = logEvent.Value?.ToString().Replace(",", ".") ?? string.Empty;
+                double value;
+                if (!double.TryParse(ev, NumberStyles.Any, CultureInfo.InvariantCulture, out value))
+                {
+                    value = double.NaN;
+                }
+                return new StatValue(value, DateTimeOffset.FromUnixTimeMilliseconds(logEvent.UnixTimestamp).UtcDateTime);
+            }).Where(sv =&gt; !double.IsNaN(sv.Value)).ToList());
+    }
+
+    var data = stats.History;
+    data.Reverse();
+    return data;
+}
+
+List&lt;StatValue&gt; ApplySimpleAverageFilter(string storageDomain, Module module, ModuleParameter parameter, double startTime, double endTime, double chartWidth)
+{
+    var data = GetRawData(storageDomain, module, parameter, startTime, endTime);
     // Process time series
-    if (startTime &gt; 0 &amp;&amp; stats.History.Count &gt; 0 &amp;&amp; chartWidth &lt; stats.History.Count)
+    if (startTime &gt; 0 &amp;&amp; data.Count &gt; 0 &amp;&amp; chartWidth &lt; data.Count)
     {
-        var cts = stats.History.First().UnixTimestamp;
-        var cte = stats.History.Last().UnixTimestamp;
+        var cts = data.First().UnixTimestamp;
+        var cte = data.Last().UnixTimestamp;
         var stepMs = ((endTime - startTime) / chartWidth) * ((cte - cts) / (endTime - startTime));
         if (stepMs &lt; 1000) stepMs = 1000;
-        var resampledList = new List&lt;ValueStatistics.StatValue&gt;();
+        var resampledList = new List&lt;StatValue&gt;();
         cts -= (cts % stepMs);
         cts -= stepMs;
         var sum = 0D;
         var count = 0;
         int i = 0;
         var itemTimestamp = DateTime.UtcNow;
-        while (i &lt; stats.History.Count)
+        while (i &lt; data.Count)
         {
-            var item = stats.History[i];
+            var item = data[i];
             if (item.UnixTimestamp &gt;= cts)
             {
-                var resampled = new ValueStatistics.StatValue(
+                var resampled = new StatValue(
                     sum / count,
                     itemTimestamp
                 );
@@ -205,35 +290,35 @@ ValueStatistics ApplySimpleAverageFilter(ModuleParameter parameter, double start
             count++;
             i++;
         }
-        stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(resampledList);
+        data = new TsList&lt;StatValue&gt;(resampledList);
     }
-    return stats;
+    return data;
 }
 
-ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
+List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFilter filter, Module module, ModuleParameter parameter, double startTime, double endTime, double chartWidth) {
     var timeSpan = (endTime - startTime);
     var timeSpanMin = (timeSpan / 2);
-    var stats = ApplySimpleAverageFilter(parameter, startTime - timeSpanMin, endTime + timeSpanMin, chartWidth);
+    var data = ApplySimpleAverageFilter(storageDomain, module, parameter, startTime - timeSpanMin, endTime + timeSpanMin, chartWidth);
 
     // Process time series
-    var samples = stats.History
+    var samples = data
         .Select(sv =&gt; (float)sv.Value)
         .ToArray();
     var signal = new DiscreteSignal(50/*Hz sampling rate*/, samples);
     var smoothedSignal = filter.ApplyTo(signal);
-    var lst = new List&lt;ValueStatistics.StatValue&gt;();
+    var lst = new List&lt;StatValue&gt;();
     int boundsGap = (windowSize - 1) / 2;
-    for (int c = 0; c &lt; stats.History.Count - boundsGap; c++)
+    for (int c = 0; c &lt; data.Count - boundsGap; c++)
     {
-        var sv = stats.History[c];
+        var sv = data[c];
         if (sv.UnixTimestamp &gt;= startTime &amp;&amp; sv.UnixTimestamp &lt;= endTime)
         {
-            lst.Add(new ValueStatistics.StatValue(smoothedSignal[c + boundsGap], sv.Timestamp));
+            lst.Add(new StatValue(smoothedSignal[c + boundsGap], sv.Timestamp));
         }
     }
 
-    stats.History = new TsList&lt;ValueStatistics.StatValue&gt;(lst);
-    return stats;
+    data = new TsList&lt;StatValue&gt;(lst);
+    return data;
 }
 </ScriptContext>
     <ScriptErrors />
@@ -243,9 +328,9 @@ ValueStatistics ApplyFilter(NWaves.Filters.Base.IFilter filter, ModuleParameter 
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>stats-data-monitor</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>4CB9D77C908124087131F3F2B319B235</Checksum>
+      <Checksum>F7945A866C7285570C60C48B592CC37F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>570</Address>
@@ -302,56 +387,76 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>Program.Implements(
-    "@Statistics:Provider",
-    apiUrl,
-    new {
-        mode = "select_module",
-        field = "Meter.Watts.Hour",
-        type = "bar",
-        title = "W/h",
-        icon = "analytics"
-    }
-).Run();
+    <ScriptSetup>// Run the program's Main
+Program.Run();
 </ScriptSetup>
-    <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
-    return new {
-        dataApi = apiDataUrl,
-        scale = "linear",
-        labels = new string[] {
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun"
-        }
-    };
-});
-
-Api.Handle(apiDataUrl, (args) =&gt; {
+    <ScriptSource>// *************************************************************************
+// API HANDLER: Weekly Statistics Request (Daily Aggregation)
+// Manages the endpoint for retrieving the available week range and the 
+// average Watts/Hour statistics aggregated by day of the week.
+// Format: /Weekly/Meter.Watts.Hour/[Domain]/[Address]/[WeekNumber | BrowsingRange]
+// *************************************************************************
+Api.Handle("DataProcessing.Statistics/Weekly/Meter.Watts.Hour", (args) =&gt; {
     var request = Api.Parse(args);
-    return GetWeeklyStats(request.Domain, request.Address);
-    /*
-    return new double[] {
-        1, 2, 3, 4, 5, 6, 7
-    };
-    */
+    if (request.Command == "BrowsingRange")
+    {
+        // return results browsing info
+        return GetYearWeekRange();
+    }
+    ushort weekNumber = 0;
+    if (ushort.TryParse(request.Command, out weekNumber))
+    {
+        // return data for "weekNumber"
+        return GetWeeklyStats(request.Domain, request.Address, weekNumber);
+    }
+    // default to current week
+    return GetWeeklyStats(request.Domain, request.Address, (ushort)ISOWeek.GetWeekOfYear(DateTime.Now));
 });
 
+// *************************************************************************
+// API HANDLER: Hourly Statistics Request (Hourly Aggregation)
+// Manages the endpoint for retrieving the available week range and the 
+// average Watts/Hour statistics aggregated by hour of the day.
+// Format: /Hourly/Meter.Watts.Hour/[Domain]/[Address]/[WeekNumber | BrowsingRange]
+// *************************************************************************
+Api.Handle("DataProcessing.Statistics/Hourly/Meter.Watts.Hour", (args) =&gt; {
+    var request = Api.Parse(args);
+    if (request.Command == "BrowsingRange")
+    {
+        // return results browsing info
+        return GetYearWeekRange();
+    }
+    ushort weekNumber = 0;
+    if (ushort.TryParse(request.Command, out weekNumber))
+    {
+        // return data for "weekNumber"
+        return GetHourlyStats(request.Domain, request.Address, weekNumber);
+    }
+    // default to current week
+    return GetHourlyStats(request.Domain, request.Address, (ushort)ISOWeek.GetWeekOfYear(DateTime.Now));
+});
+
+// *************************************************************************
+// REAL-TIME DATA UPDATE PROCESS (Downsampling - Mobile Window)
+// Recalculates the average Watts consumption for the LAST HOUR (a mobile 60-minute 
+// window) and logs this rolling average. The process executes at a fixed 60-second 
+// interval and does NOT align to clock time.
+// *************************************************************************
 while (Program.IsRunning)
 {
 
-    // Calculates for each module average Watt consumption every hour
+    // Calculates for each module average Watt consumption over the last 60 minutes
     var now = DateTime.UtcNow;
     var monitorModules = Modules.WithFeature("EnergyManagement.MonitorWatts");
     monitorModules.Each((mod) =&gt; {
 
         double defaultValue = mod.Parameter("Meter.Watts").Statistics.Current.Value;
 
+        // NOTE ON DATA INTEGRITY: The underlying device must emit values 
+        // (including 0.0 when off) at regular intervals for this average to be accurate.
         var records = mod.Parameter("Meter.Watts").Statistics.History
-            .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; UpdateInterval);
+                .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; UpdateInterval);
+
         var avgWatt = records
             .Select(sv =&gt; sv.Value)
             .DefaultIfEmpty(defaultValue)
@@ -367,14 +472,11 @@ while (Program.IsRunning)
     });
 
     // Update stats every minute
-    Pause(60); 
+    Pause(60);
 
 }
 </ScriptSource>
-    <ScriptContext>const string apiUrl = "Statistics.Providers/WeeklyStats";
-const string apiDataUrl = "DataProcessing.Statistics/Weekly/Meter.Watts.Hour";
-
-const int UpdateInterval = 3600; // 1 hour
+    <ScriptContext>const int UpdateInterval = 3600; // 1 hour
 const string DbTable = "weekly";
 
 class WeeklyStat {
@@ -447,10 +549,9 @@ bool UpdateWeeklyStat(string domain, string address, string parameter, double wa
     return true;
 }
 
-double[] GetWeeklyStats(string domain, string address)
+double[] GetWeeklyStats(string domain, string address, ushort weekOfYear)
 {
     var results = new double[7];
-    var weekOfYear = (ushort)ISOWeek.GetWeekOfYear(DateTime.Now);
     lock(this)
     using(var db = Data.LiteDb(GetDbName()))
     {
@@ -467,7 +568,7 @@ double[] GetWeeklyStats(string domain, string address)
                         &amp;&amp; x.Address == address
                         &amp;&amp; x.YearWeek == weekOfYear
                         &amp;&amp; x.WeekDay == i);
-//                .Sum(x =&gt; x.WattsHour); // &lt;-- this doesn't work with Mono runtime 
+//                .Sum(x =&gt; x.WattsHour); // &lt;-- this doesn't work with Mono runtime
             double sum = 0;
             foreach(var s in sumValues) {
                 sum += s.WattsHour;
@@ -482,28 +583,119 @@ double[] GetWeeklyStats(string domain, string address)
     return results;
 }
 
+public double[] GetHourlyStats(string domain, string address, ushort targetWeekOfYear)
+{
+    var results = new double[24];
+    ushort weekToFilter = targetWeekOfYear; 
+
+    lock(this)
+    using(var db = Data.LiteDb(GetDbName()))
+    {
+        var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
+        stats.EnsureIndex(x =&gt; x.Domain);
+        stats.EnsureIndex(x =&gt; x.Address);
+        stats.EnsureIndex(x =&gt; x.DayHour);
+        stats.EnsureIndex(x =&gt; x.WeekDay);
+        stats.EnsureIndex(x =&gt; x.Parameter);
+
+        for (byte i = 0; i &lt; 24; i++) // i = DayHour
+        {
+            var sumValues = stats
+                .Find(x =&gt; x.Domain == domain
+                        &amp;&amp; x.Address == address
+                        &amp;&amp; x.YearWeek == weekToFilter
+                        &amp;&amp; x.DayHour == i);
+                        
+            double sum = 0;
+            
+            foreach(var s in sumValues) {
+                sum += s.WattsHour;
+            }
+            
+            double avg = sum / 7.0;             
+            results[i] = avg; 
+        }
+    }
+    return results;
+}
+
+public object GetYearWeekRange()
+{
+    ushort minYearWeek = 0;
+    ushort maxYearWeek = 0;
+    lock(this)
+    using(var db = Data.LiteDb(GetDbName()))
+    {
+        var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
+        if (stats.LongCount() &gt; 0)
+        {
+            var allStats = stats.FindAll().ToList();
+            if (allStats.Any())
+            {
+                minYearWeek = allStats.Min(x =&gt; x.YearWeek);
+                maxYearWeek = allStats.Max(x =&gt; x.YearWeek);
+            }
+        }
+    }
+    if (minYearWeek == 0 &amp;&amp; maxYearWeek == 0)
+    {
+        ushort currentWeek = (ushort)ISOWeek.GetWeekOfYear(DateTime.Now);
+        return new { WeekStart = currentWeek, WeekEnd = currentWeek };
+    }
+    return new {
+        Start = minYearWeek,
+        End = maxYearWeek,
+        Count = (maxYearWeek - minYearWeek) + 1,
+        Step = 1,
+        Base = minYearWeek,
+        Current = maxYearWeek,
+        Label = "week_of_year"
+    };
+}
+
+public string[] GetDayLabels()
+{
+    DayOfWeek[] desiredOrder = new DayOfWeek[]
+    {
+        DayOfWeek.Monday,    // 0
+        DayOfWeek.Tuesday,   // 1
+        DayOfWeek.Wednesday, // 2
+        DayOfWeek.Thursday,  // 3
+        DayOfWeek.Friday,    // 4
+        DayOfWeek.Saturday,  // 5
+        DayOfWeek.Sunday     // 6
+    };
+    DateTimeFormatInfo dtfi = CultureInfo.CurrentCulture.DateTimeFormat;
+    string[] finalLabels = new string[7];
+    for (int i = 0; i &lt; 7; i++)
+    {
+        DayOfWeek day = desiredOrder[i];
+        int labelIndex = (int)day;
+        finalLabels[i] = dtfi.AbbreviatedDayNames[labelIndex];
+    }
+    return finalLabels;
+}
+
 string GetDbName()
 {
     return $"energy_use_{DateTime.Now.Year}.db";
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
       <Required>false</Required>
-      <Checksum>86D69533E0D3CF36B570979B676193B0</Checksum>
+      <Checksum>D7E90C5B91E5B4B401E23219585DDC38</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
-    <Name>Energy use statistics</Name>
-    <Description>Monitors and collects data on energy consumption. Also implements a bar chart to visualize data.
-
-</Description>
+    <Name>Energy Use Statistics</Name>
+    <Description>Continuously monitors, aggregates, and logs energy consumption data (W/h) at fixed intervals. Implements a full API for browsing and querying historical datasets.</Description>
     <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -513,14 +705,19 @@ string GetDbName()
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Setup(() =&gt; {
-  Program.AddFeature("", "", EventsLoggingFeature, "Enable events logging", "checkbox");
+  Program
+    .AddFeature("", "", EventsLoggingFeature, "Enable events logging", "checkbox")
+    .Implements("@Statistics:Storage", EventsLoggingDomain, new {
+      icon = "database",
+      description = "events_logger_database"
+    });
 });
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var loggableModules = Modules.WithFeature(EventsLoggingFeature);
 
 When.ProgramStopping(() =&gt; {
-//  db.Dispose(); 
+//  db.Dispose();
   return true;
 });
 
@@ -529,52 +726,136 @@ When.ModuleParameterChanged((mod, p) =&gt; {
   if (loggableModules.SelectedModules.Contains(m)) {
     lock(mod.Get().Instance)
     using (var db = Data.LiteDb(m.Domain+"@"+m.Address+"-events-log")) {
-      db.Pragma("LIMIT_SIZE", 2097152);
-      var col = db.GetCollection&lt;LoggerEvent&gt;("events");
-      col.EnsureIndex(x =&gt; x.Domain);
-      col.EnsureIndex(x =&gt; x.Address);
-      col.EnsureIndex(x =&gt; x.Parameter);
+      var data = new LoggerEvent(m, p);
       try {
-        col.Insert(new LoggerEvent(m, p));
+        db.Pragma("LIMIT_SIZE", LIMIT_SIZE);
+        InsertData(db, data);
       } catch (Exception e) {
-        // insert error, remove some data
-        var col2 = db.GetCollection("events");
-        var data_list = col2.Find(Query.All(), 0, 100);
-        foreach (var row in data_list) 
+        // DB is full, delete some data
+        var colCheck = db.GetCollection&lt;LoggerEvent&gt;("events");
+        long totalCount = colCheck.LongCount();
+        if (totalCount &lt;= MAX_RECORDS_TO_KEEP)
         {
-          col2.Delete(row["_id"]);
-        }        
-        // retry insert
-        col.Insert(new LoggerEvent(m, p));
+            return true;
+        }
+
+        int recordsToSkip = (int)totalCount - MAX_RECORDS_TO_KEEP;
+        var limitRecord = colCheck.Query()
+            .OrderByDescending(x =&gt; x.UnixTimestamp)
+            .Skip(recordsToSkip)
+            .Limit(1)
+            .SingleOrDefault();
+        if (limitRecord != null)
+        {
+            ObjectId thresholdId = limitRecord.Id;
+            int deletedCount = colCheck.DeleteMany(x =&gt; x.Id &lt;= thresholdId);
+        }
+        /*
+        try {
+          db.Rebuild();
+        } catch (Exception ex) {
+          Program.Log.Error(ex);
+        }
+        */
+        // Retry insert
+        InsertData(db, data);
       }
     }
   }
   return true;
 });
 
-Api.Handle("HomeGenie.EventsLogger", (args) =&gt; {
+Api.Handle(EventsLoggingDomain, (args) =&gt; {
   var cmd = Api.Parse(args);
   var moduleDomain = cmd.Address;
   var moduleAddress = cmd.Command;
   var module = Modules.InDomain(moduleDomain).WithAddress(moduleAddress);
   var parameter = cmd.GetOption(0);
+
+  if(cmd.GetOption(1) == "TimeRange")
+  {
+    lock(module.Get().Instance)
+    using (var db = Data.LiteDb(moduleDomain+"@"+moduleAddress+"-events-log")) {
+      var col = db.GetCollection&lt;LoggerEvent&gt;("events");
+      var allResults = col.Query()
+          .Where(x =&gt; x.Parameter == parameter)
+          .Select(x =&gt; x.UnixTimestamp)
+          .ToList();
+      if (allResults.Any()) {
+            long min = allResults.Min();
+            long max = allResults.Max();
+            return new { Start = min, End = max, Count = allResults.Count };
+      }
+      return new { Start = 0L, End = 0L, Count = 0L };
+    }
+  }
+
+  long? startDateMs = GetUnixMs(cmd.GetOption(1));
+  long? endDateMs = GetUnixMs(cmd.GetOption(2));
+
+  int limitRows = -1;
+  if (!String.IsNullOrEmpty(cmd.GetOption(3)))
+  {
+    int.TryParse(cmd.GetOption(3), out limitRows);
+  }
+
+  int pageNumber = 1;
+  int.TryParse(cmd.GetOption(4), out pageNumber);
+  if (pageNumber &lt; 1) pageNumber = 1;
+
+  int skipRows = (pageNumber - 1) * limitRows;
+
   lock(module.Get().Instance)
   using (var db = Data.LiteDb(moduleDomain+"@"+moduleAddress+"-events-log")) {
-    db.Pragma("LIMIT_SIZE", 2097152);
     var col = db.GetCollection&lt;LoggerEvent&gt;("events");
-    var results = col.Query()
-      .Where(x =&gt; x.Parameter == parameter)
-      .OrderByDescending(x =&gt; x.Date)
-      //.Select(x =&gt; new { x.Name, NameUpper = x.Name.ToUpper() }) // &lt;-- transform data
-      .Limit(100)
-      .ToList();
-  	return results;
+    var query = col.Query()
+      .Where(x =&gt; x.Parameter == parameter);
+
+    if (startDateMs.HasValue &amp;&amp; startDateMs.Value != 0) {
+        query = query.Where(x =&gt; x.UnixTimestamp &gt;= startDateMs.Value);
+    }
+    if (endDateMs.HasValue &amp;&amp; endDateMs.Value != 0) {
+        query = query.Where(x =&gt; x.UnixTimestamp &lt;= endDateMs.Value);
+    }
+
+    List&lt;LoggerEvent&gt; results;
+    if (limitRows &gt; 0)
+    {
+      results = query
+        .OrderByDescending(x =&gt; x.UnixTimestamp)
+        .Skip(skipRows).Limit(limitRows)
+        .ToList();
+    } else {
+    	results = query
+        .OrderByDescending(x =&gt; x.UnixTimestamp)
+        .ToList();
+    }
+    return results;
   }
 });
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptContext>const string EventsLoggingFeature = "EventsLogger.EnableLogging";</ScriptContext>
+    <ScriptContext>const string EventsLoggingFeature = "EventsLogger.EnableLogging";
+const string EventsLoggingDomain = "HomeGenie.EventsLogger";
+
+const int LIMIT_SIZE = 2097152;
+const int MAX_RECORDS_TO_KEEP = 100;
+
+long? GetUnixMs(string unixMsString) {
+    if (long.TryParse(unixMsString, out long unixTimestampMs)) {
+        return unixTimestampMs;
+    }
+    return null;
+}
+
+void InsertData(LiteDatabase db, LoggerEvent data) {
+    var col = db.GetCollection&lt;LoggerEvent&gt;("events");
+    col.EnsureIndex(x =&gt; x.Parameter);
+    col.EnsureIndex(x =&gt; x.UnixTimestamp);
+    col.Insert(data);
+}
+</ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
@@ -582,9 +863,9 @@ Program.GoBackground();
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>events-logging</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>45CFE6FF025BD92488BBDBE491C4C98D</Checksum>
+      <Checksum>88F75AD3C5A8957108BF8C649D7A8A00</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>95</Address>
@@ -603,6 +884,67 @@ Program.GoBackground();
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Implements(
+    "@Statistics:Provider",
+    apiUrl,
+    new {
+        mode = "select_module",
+        field = "Meter.Watts.Hour",
+        type = "bar",
+        title = "W/h",
+        icon = "energy_program_time_used"
+    }
+).Run();
+</ScriptSetup>
+    <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
+    return new {
+        dataApi = apiDataUrl,
+        scale = "linear",
+        labels = GetHourLabels(),
+        refreshMs = 60000, // 1 minute
+        browsing = true
+    };
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>const string apiUrl = "Statistics.Providers/HourlyStats";
+const string apiDataUrl = "DataProcessing.Statistics/Hourly/Meter.Watts.Hour";
+
+public string[] GetHourLabels()
+{
+    var hourLabels = new List&lt;string&gt;(24);
+    for (int hour = 0; hour &lt; 24; hour++)
+    {
+        string label = $"{hour:D2}h";
+        hourLabels.Add(label);
+    }
+    return hourLabels.ToArray();
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>hourly-energy-use-chart</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>E14C3C92075902D2C770A9290C8AC110</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>574</Address>
+    <Name>Hourly Energy Consumption</Name>
+    <Description>Bar chart displaying the average Watts/Hour consumption for every hour of the day (00h-23h). Data is aggregated over the selected week and sourced from the Energy Use Statistics API.</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -958,7 +1300,7 @@ while (Program.IsRunning) {
           if (connected) {
               Program.Notify("Connected!");
               Program.Emit("MQTT.Status", "connected");
-              if (importExternal) 
+              if (importExternal)
               {
                 importModules(server);
               }
@@ -1054,7 +1396,7 @@ class MqttCommand: MigInterfaceCommand {
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>61D9F2C0A6F9E119791517514B429A2B</Checksum>
+      <Checksum>8C0D66916C7D8071C71AA2527BE73D97</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -1348,12 +1690,12 @@ Api.Handle(apiUrl, (args) =&gt; {
         dataApi = dataApiUrl,
         // Chart configuration
         scale = "linear",
-        type = "pie",
+        type = "doughnut",
         title = "kW/h today",
         labels = new string[] {
             "🍗 Oven",
             "🔥 Boiler",
-            "🥵 Heater",
+            "❄️ Refrigerator",
             "🍹 Living Room",
             "📖 Study"
         },
@@ -1363,6 +1705,18 @@ Api.Handle(apiUrl, (args) =&gt; {
             "rgb(250,234,177)",
             "rgb(255,247,218)",
             "rgb(255,253,244)"
+        },
+        refreshMs = 1800000, // 30 minutes
+        // Other chart.js options (see https://www.chartjs.org/)
+        options = new {
+            scales = new {
+                x = new {
+                    display = false
+                },
+                y = new {
+                    display = false
+                }
+            }
         }
     };
 });
@@ -1371,7 +1725,7 @@ Api.Handle(apiUrl, (args) =&gt; {
 Api.Handle(dataApiUrl, (args) =&gt; {
     // Just a demo, return fixed data
     return new double[] {
-        500, 400, 300, 200, 100
+        700, 400, 200, 200, 100
     };
 });
 
@@ -1388,9 +1742,9 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>pie-chart-stats-example</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>8B4B14BE32EBB0547A142489DF72CF43</Checksum>
+      <Checksum>D8F2F884BB3010580313BB3073D1347E</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>572</Address>
@@ -1517,12 +1871,12 @@ Program.GoBackground();
 // For NWaves DSP library documentation see:
 // https://github.com/ar1st0crat/NWaves?tab=readme-ov-file
 
-DiscreteSignal sinusoid = 
+DiscreteSignal sinusoid =
     new SineBuilder()
         .SetParameter("frequency", 200/*Hz*/)
         .SetParameter("phase", Math.PI)
-        .OfLength(50)
-        .SampledAt(5000/*Hz*/)
+        .OfLength(444)
+        .SampledAt(44444/*Hz*/)
         .Build();
 
 var samples = new List&lt;float&gt;(sinusoid.Samples);
@@ -1531,8 +1885,8 @@ while (Program.IsRunning)
     foreach (var s in samples)
     {
         double v = (s * .5) + .5;
-        Program.Emit("Sensor.SineWave", v);
-        // synchronize level of a module with sinewave value [0.0 .. 1.0]
+        Program.Emit("Sensor.SineWave", v * 1000);
+        // synchronize level of a module with sinewave values [0.0 .. 1.0]
         /*
         Program.RunAsyncTask(()=&gt;{
             Modules
@@ -1540,7 +1894,7 @@ while (Program.IsRunning)
                 .Level = v;
         });
         */
-        Pause(.1);
+        Pause(.05);
     }
 }
 </ScriptSource>
@@ -1552,9 +1906,9 @@ while (Program.IsRunning)
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>sine-wave-signal</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>false</Required>
-      <Checksum>8A7B7859913E6B47738A6E0FE1EEF77D</Checksum>
+      <Checksum>F09D3EDBC3FE43F726DEE5A8D7F496E2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>900</Address>
@@ -1566,5 +1920,78 @@ while (Program.IsRunning)
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
     <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Implements(
+    "@Statistics:Provider",
+    apiUrl,
+    new {
+        mode = "select_module",
+        field = "Meter.Watts.Hour",
+        type = "bar",
+        title = "W/h",
+        icon = "analytics"
+    }
+).Run();
+</ScriptSetup>
+    <ScriptSource>Api.Handle(apiUrl, (args) =&gt; {
+    return new {
+        dataApi = apiDataUrl,
+        scale = "linear",
+        labels = GetDayLabels(),
+        refreshMs = 60000, // 1 minute
+        browsing = true
+    };
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>const string apiUrl = "Statistics.Providers/WeeklyStats";
+const string apiDataUrl = "DataProcessing.Statistics/Weekly/Meter.Watts.Hour";
+
+public string[] GetDayLabels()
+{
+    DayOfWeek[] desiredOrder = new DayOfWeek[]
+    {
+        DayOfWeek.Monday,    // 0
+        DayOfWeek.Tuesday,   // 1
+        DayOfWeek.Wednesday, // 2
+        DayOfWeek.Thursday,  // 3
+        DayOfWeek.Friday,    // 4
+        DayOfWeek.Saturday,  // 5
+        DayOfWeek.Sunday     // 6
+    };
+    DateTimeFormatInfo dtfi = CultureInfo.CurrentCulture.DateTimeFormat;
+    string[] finalLabels = new string[7];
+    for (int i = 0; i &lt; 7; i++)
+    {
+        DayOfWeek day = desiredOrder[i];
+        int labelIndex = (int)day;
+        finalLabels[i] = dtfi.AbbreviatedDayNames[labelIndex];
+    }
+    return finalLabels;
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.2</PackageVersion>
+      <Id>weekly-energy-use-chart</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>B584D065DD0AE78A064665351C41495E</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>573</Address>
+    <Name>Weekly Energy Consumption</Name>
+    <Description>Bar chart displaying the average Watts/Hour consumption for each day of the week (Mon-Sun). Data is aggregated across all hours of the day and sourced from the Energy Use Statistics API.</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ordu",
   "stats.twelve_hours": "12 ordu",
   "stats.twentyfour_hours": "24 ordu",
-  "stats.chart_provider": "Diagrama hornitzailea"
+  "stats.chart_provider": "Diagrama hornitzailea",
+  "stats.five_minutes": "5 minutu",
+  "stats.fifteen_minutes": "15 minutu"
 }

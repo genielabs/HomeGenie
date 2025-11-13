@@ -12,5 +12,7 @@
   "stats.six_hours": "6 годин",
   "stats.twelve_hours": "12 годин",
   "stats.twentyfour_hours": "24 години",
-  "stats.chart_provider": "Постачальник діаграм"
+  "stats.chart_provider": "Постачальник діаграм",
+  "stats.five_minutes": "5 хвилин",
+  "stats.fifteen_minutes": "15 хвилин"
 }

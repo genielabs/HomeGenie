@@ -414,5 +414,12 @@
   "Status.Level": "Επίπεδο",
   "chart": "Διάγραμμα",
   "new_series_added": "Προστέθηκε νέα σειρά.",
-  "series_deleted": "Η σειρά διαγράφηκε."
+  "series_deleted": "Η σειρά διαγράφηκε.",
+  "size": "Μέγεθος",
+  "Status.ColorHsb": "Χρώμα (HSV)",
+  "week_of_year": "Εβδομάδα του Χρόνου",
+  "new_value": "Νέα Αξία",
+  "events_logger_database": "Βάση δεδομένων καταγραφής συμβάντων",
+  "volatile_statistics_cache": "Cache πτητικών στατιστικών στοιχείων",
+  "data_storage": "Αποθήκευση δεδομένων"
 }

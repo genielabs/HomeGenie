@@ -414,5 +414,12 @@
   "Status.Level": "Úroveň",
   "chart": "Graf",
   "new_series_added": "Pridaná nová séria.",
-  "series_deleted": "Séria bola odstránená."
+  "series_deleted": "Séria bola odstránená.",
+  "size": "Veľkosť",
+  "Status.ColorHsb": "Farba (HSV)",
+  "week_of_year": "Týždeň roka",
+  "new_value": "Nová hodnota",
+  "events_logger_database": "Databáza záznamníkov udalostí",
+  "volatile_statistics_cache": "Vyrovnávacia pamäť pre volatilné štatistiky",
+  "data_storage": "Ukladanie dát"
 }

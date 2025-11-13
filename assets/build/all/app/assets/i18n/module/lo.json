@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ຊົ່ວໂມງ",
   "stats.twelve_hours": "12 ຊົ່ວໂມງ",
   "stats.twentyfour_hours": "24 ຊົ່ວໂມງ",
-  "stats.chart_provider": "ຜູ້ໃຫ້ບໍລິການຕາຕະລາງ"
+  "stats.chart_provider": "ຜູ້ໃຫ້ບໍລິການຕາຕະລາງ",
+  "stats.five_minutes": "5 ນາທີ",
+  "stats.fifteen_minutes": "15 ນາທີ"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Mức độ",
   "chart": "Biểu đồ",
   "new_series_added": "Đã thêm loạt phim mới.",
-  "series_deleted": "Bộ truyện đã bị xóa."
+  "series_deleted": "Bộ truyện đã bị xóa.",
+  "size": "Kích cỡ",
+  "Status.ColorHsb": "Màu sắc (HSV)",
+  "week_of_year": "Tuần trong năm",
+  "new_value": "Giá trị mới",
+  "events_logger_database": "Cơ sở dữ liệu ghi nhật ký sự kiện",
+  "volatile_statistics_cache": "Bộ nhớ đệm thống kê dễ bay hơi",
+  "data_storage": "Lưu trữ dữ liệu"
 }

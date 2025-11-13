@@ -414,5 +414,12 @@
   "Status.Level": "Nivel",
   "chart": "Gráfico",
   "new_series_added": "Nova serie engadida.",
-  "series_deleted": "Serie eliminada."
+  "series_deleted": "Serie eliminada.",
+  "size": "Tamaño",
+  "Status.ColorHsb": "Cor (HSV)",
+  "week_of_year": "Semana do ano",
+  "new_value": "Novo valor",
+  "events_logger_database": "Base de datos do rexistrador de eventos",
+  "volatile_statistics_cache": "Caché de estatísticas volátiles",
+  "data_storage": "Almacenamento de datos"
 }

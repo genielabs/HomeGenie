@@ -12,5 +12,7 @@
   "stats.six_hours": "6 jam",
   "stats.twelve_hours": "12 jam",
   "stats.twentyfour_hours": "24 jam",
-  "stats.chart_provider": "Pembekal carta"
+  "stats.chart_provider": "Pembekal carta",
+  "stats.five_minutes": "5 minit",
+  "stats.fifteen_minutes": "15 minit"
 }

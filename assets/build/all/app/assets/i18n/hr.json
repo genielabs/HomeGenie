@@ -414,5 +414,12 @@
   "Status.Level": "Razina",
   "chart": "Grafikon",
   "new_series_added": "Dodana je nova serija.",
-  "series_deleted": "Serija je izbrisana."
+  "series_deleted": "Serija je izbrisana.",
+  "size": "Veličina",
+  "Status.ColorHsb": "Boja (HSV)",
+  "week_of_year": "Tjedan godine",
+  "new_value": "Nova vrijednost",
+  "events_logger_database": "Baza podataka zapisivača događaja",
+  "volatile_statistics_cache": "Predmemorija nestabilnih statistika",
+  "data_storage": "Pohrana podataka"
 }

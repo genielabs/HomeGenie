@@ -12,5 +12,7 @@
   "stats.six_hours": "6 сағат",
   "stats.twelve_hours": "12 сағат",
   "stats.twentyfour_hours": "24 сағат",
-  "stats.chart_provider": "Диаграмма провайдері"
+  "stats.chart_provider": "Диаграмма провайдері",
+  "stats.five_minutes": "5 минут",
+  "stats.fifteen_minutes": "15 минут"
 }

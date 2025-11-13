@@ -12,5 +12,7 @@
   "stats.six_hours": "6 сати",
   "stats.twelve_hours": "12 сати",
   "stats.twentyfour_hours": "24 сата",
-  "stats.chart_provider": "Добављач графикона"
+  "stats.chart_provider": "Добављач графикона",
+  "stats.five_minutes": "5 минута",
+  "stats.fifteen_minutes": "15 минута"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "நிலை",
   "chart": "விளக்கப்படம்",
   "new_series_added": "புதிய தொடர் சேர்க்கப்பட்டது.",
-  "series_deleted": "தொடர் நீக்கப்பட்டது."
+  "series_deleted": "தொடர் நீக்கப்பட்டது.",
+  "size": "அளவு",
+  "Status.ColorHsb": "நிறம் (HSV)",
+  "week_of_year": "ஆண்டின் வாரம்",
+  "new_value": "புதிய மதிப்பு",
+  "events_logger_database": "நிகழ்வுகள் பதிவர் தரவுத்தளம்",
+  "volatile_statistics_cache": "ஆவியாகும் புள்ளிவிவரங்கள் தற்காலிக சேமிப்பு",
+  "data_storage": "தரவு சேமிப்பு"
 }

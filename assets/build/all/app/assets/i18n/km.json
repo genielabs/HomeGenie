@@ -414,5 +414,12 @@
   "Status.Level": "កម្រិត",
   "chart": "គំនូសតាង",
   "new_series_added": "ស៊េរីថ្មីត្រូវបានបន្ថែម។",
-  "series_deleted": "បានលុបស៊េរី។"
+  "series_deleted": "បានលុបស៊េរី។",
+  "size": "ទំហំ",
+  "Status.ColorHsb": "ពណ៌ (HSV)",
+  "week_of_year": "សប្តាហ៍នៃឆ្នាំ",
+  "new_value": "តម្លៃថ្មី។",
+  "events_logger_database": "Events Logger Database",
+  "volatile_statistics_cache": "ឃ្លាំងសម្ងាត់ស្ថិតិងាយនឹងបង្កជាហេតុ",
+  "data_storage": "ការផ្ទុកទិន្នន័យ"
 }

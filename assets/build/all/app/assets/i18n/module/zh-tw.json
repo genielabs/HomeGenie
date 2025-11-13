@@ -12,5 +12,7 @@
   "stats.six_hours": "6小時",
   "stats.twelve_hours": "12小時",
   "stats.twentyfour_hours": "24小時",
-  "stats.chart_provider": "圖表提供者"
+  "stats.chart_provider": "圖表提供者",
+  "stats.five_minutes": "5分鐘",
+  "stats.fifteen_minutes": "15分鐘"
 }

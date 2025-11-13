@@ -12,5 +12,7 @@
   "stats.six_hours": "6 hodin",
   "stats.twelve_hours": "12 hodin",
   "stats.twentyfour_hours": "24 hodin",
-  "stats.chart_provider": "Poskytovatel grafů"
+  "stats.chart_provider": "Poskytovatel grafů",
+  "stats.five_minutes": "5 minut",
+  "stats.fifteen_minutes": "15 minut"
 }

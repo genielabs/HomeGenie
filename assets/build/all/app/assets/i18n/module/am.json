@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ሰዓታት",
   "stats.twelve_hours": "12 ሰዓታት",
   "stats.twentyfour_hours": "24 ሰዓታት",
-  "stats.chart_provider": "ገበታ አቅራቢ"
+  "stats.chart_provider": "ገበታ አቅራቢ",
+  "stats.five_minutes": "5 ደቂቃዎች",
+  "stats.fifteen_minutes": "15 ደቂቃዎች"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Tahap",
   "chart": "Carta",
   "new_series_added": "Siri baharu ditambah.",
-  "series_deleted": "Siri dipadamkan."
+  "series_deleted": "Siri dipadamkan.",
+  "size": "Saiz",
+  "Status.ColorHsb": "Warna (HSV)",
+  "week_of_year": "Minggu Tahun",
+  "new_value": "Nilai Baru",
+  "events_logger_database": "Pangkalan Data Logger Acara",
+  "volatile_statistics_cache": "Cache Statistik Meruap",
+  "data_storage": "Storan Data"
 }

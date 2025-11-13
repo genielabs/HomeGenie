@@ -414,5 +414,12 @@
   "Status.Level": "Lygis",
   "chart": "Diagrama",
   "new_series_added": "Pridėta nauja serija.",
-  "series_deleted": "Serija ištrinta."
+  "series_deleted": "Serija ištrinta.",
+  "size": "Dydis",
+  "Status.ColorHsb": "Spalva (HSV)",
+  "week_of_year": "Metų savaitė",
+  "new_value": "Nauja vertė",
+  "events_logger_database": "Įvykių registravimo duomenų bazė",
+  "volatile_statistics_cache": "Lakiosios statistikos talpykla",
+  "data_storage": "Duomenų saugojimas"
 }

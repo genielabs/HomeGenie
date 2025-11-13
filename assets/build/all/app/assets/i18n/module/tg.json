@@ -12,5 +12,7 @@
   "stats.six_hours": "6 соат",
   "stats.twelve_hours": "12 соат",
   "stats.twentyfour_hours": "24 соат",
-  "stats.chart_provider": "Таъминкунандаи диаграмма"
+  "stats.chart_provider": "Таъминкунандаи диаграмма",
+  "stats.five_minutes": "5 дақиқа",
+  "stats.fifteen_minutes": "15 дақиқа"
 }

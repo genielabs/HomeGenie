@@ -414,5 +414,12 @@
   "Status.Level": "Деңгей",
   "chart": "Диаграмма",
   "new_series_added": "Жаңа серия қосылды.",
-  "series_deleted": "Серия жойылды."
+  "series_deleted": "Серия жойылды.",
+  "size": "Өлшем",
+  "Status.ColorHsb": "Түс (HSV)",
+  "week_of_year": "Жыл аптасы",
+  "new_value": "Жаңа мән",
+  "events_logger_database": "Оқиғаларды тіркеуші дерекқор",
+  "volatile_statistics_cache": "Тұрақты статистикалық кэш",
+  "data_storage": "Деректерді сақтау"
 }

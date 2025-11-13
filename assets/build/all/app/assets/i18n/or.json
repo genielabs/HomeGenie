@@ -414,5 +414,12 @@
   "Status.Level": "ସ୍ତର",
   "chart": "ଚାର୍ଟ",
   "new_series_added": "ନୂତନ ସିରିଜ୍ ଯୋଡାଯାଇଛି।",
-  "series_deleted": "ସିରିଜ୍ ଡିଲିଟ୍‌ କରିଦିଆଗଲା।"
+  "series_deleted": "ସିରିଜ୍ ଡିଲିଟ୍‌ କରିଦିଆଗଲା।",
+  "size": "ଆକାର",
+  "Status.ColorHsb": "ରଙ୍ଗ (HSV)",
+  "week_of_year": "ବର୍ଷର ସପ୍ତାହ",
+  "new_value": "ନୂତନ ମୂଲ୍ୟ",
+  "events_logger_database": "ଇଭେଣ୍ଟ ଲଗର ଡାଟାବେସ୍",
+  "volatile_statistics_cache": "ଅସ୍ଥିର ପରିସଂଖ୍ୟାନ କ୍ୟାଶ୍",
+  "data_storage": "ଡାଟା ଷ୍ଟୋରେଜ୍"
 }

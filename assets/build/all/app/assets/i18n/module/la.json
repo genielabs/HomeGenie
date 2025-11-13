@@ -12,5 +12,7 @@
   "stats.six_hours": "Sex horae",
   "stats.twelve_hours": "Horae duodecim",
   "stats.twentyfour_hours": "XXIV horae",
-  "stats.chart_provider": "Provisor chartarum"
+  "stats.chart_provider": "Provisor chartarum",
+  "stats.five_minutes": "Quinque minuta",
+  "stats.fifteen_minutes": "Quindecim minuta"
 }

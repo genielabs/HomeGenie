@@ -414,5 +414,12 @@
   "Status.Level": "Līmenis",
   "chart": "Diagramma",
   "new_series_added": "Pievienota jauna sērija.",
-  "series_deleted": "Sērija izdzēsta."
+  "series_deleted": "Sērija izdzēsta.",
+  "size": "Izmērs",
+  "Status.ColorHsb": "Krāsa (HSV)",
+  "week_of_year": "Gada nedēļa",
+  "new_value": "Jauna vērtība",
+  "events_logger_database": "Notikumu reģistrētāja datubāze",
+  "volatile_statistics_cache": "Gaistošās statistikas kešatmiņa",
+  "data_storage": "Datu glabāšana"
 }

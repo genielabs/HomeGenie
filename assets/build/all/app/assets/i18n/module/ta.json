@@ -12,5 +12,7 @@
   "stats.six_hours": "6 மணி நேரம்",
   "stats.twelve_hours": "12 மணி நேரம்",
   "stats.twentyfour_hours": "24 மணி நேரம்",
-  "stats.chart_provider": "விளக்கப்பட வழங்குநர்"
+  "stats.chart_provider": "விளக்கப்பட வழங்குநர்",
+  "stats.five_minutes": "5 நிமிடங்கள்",
+  "stats.fifteen_minutes": "15 நிமிடங்கள்"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Lefel",
   "chart": "Siart",
   "new_series_added": "Cyfres newydd wedi'i hychwanegu.",
-  "series_deleted": "Cyfres wedi'i dileu."
+  "series_deleted": "Cyfres wedi'i dileu.",
+  "size": "Maint",
+  "Status.ColorHsb": "Lliw (HSV)",
+  "week_of_year": "Wythnos y Flwyddyn",
+  "new_value": "Gwerth Newydd",
+  "events_logger_database": "Cronfa Ddata Cofnodi Digwyddiadau",
+  "volatile_statistics_cache": "Storfa Ystadegau Anwadal",
+  "data_storage": "Storio Data"
 }

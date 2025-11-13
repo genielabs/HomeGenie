@@ -414,5 +414,12 @@
   "Status.Level": "स्तर",
   "chart": "चार्ट",
   "new_series_added": "नई श्रृंखला जोड़ी गई.",
-  "series_deleted": "श्रृंखला हटा दी गई."
+  "series_deleted": "श्रृंखला हटा दी गई.",
+  "size": "आकार",
+  "Status.ColorHsb": "रंग (एचएसवी)",
+  "week_of_year": "वर्ष का सप्ताह",
+  "new_value": "नया मूल्य",
+  "events_logger_database": "इवेंट लॉगर डेटाबेस",
+  "volatile_statistics_cache": "अस्थिर सांख्यिकी कैश",
+  "data_storage": "आधार सामग्री भंडारण"
 }

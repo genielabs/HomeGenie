@@ -414,5 +414,12 @@
   "Status.Level": "স্তর",
   "chart": "চার্ট",
   "new_series_added": "নতুন সিরিজ যোগ করা হয়েছে।",
-  "series_deleted": "সিরিজ মুছে ফেলা হয়েছে।"
+  "series_deleted": "সিরিজ মুছে ফেলা হয়েছে।",
+  "size": "আকার",
+  "Status.ColorHsb": "রঙ (HSV)",
+  "week_of_year": "বছরের সপ্তাহ",
+  "new_value": "নতুন মান",
+  "events_logger_database": "ইভেন্ট লগার ডাটাবেস",
+  "volatile_statistics_cache": "অস্থির পরিসংখ্যান ক্যাশে",
+  "data_storage": "তথ্য সংগ্রহস্থল"
 }

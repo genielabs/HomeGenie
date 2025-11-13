@@ -414,5 +414,12 @@
   "Status.Level": "Heerka",
   "chart": "Shaxda",
   "new_series_added": "Taxane cusub ayaa lagu daray.",
-  "series_deleted": "Taxanaha waa la tirtiray"
+  "series_deleted": "Taxanaha waa la tirtiray",
+  "size": "Cabbirka",
+  "Status.ColorHsb": "Midabka (HSV)",
+  "week_of_year": "Todobaadka sanadka",
+  "new_value": "Qiimaha Cusub",
+  "events_logger_database": "Dhacdooyinka Logger Database",
+  "volatile_statistics_cache": "Kaydka Tirakoobka Deggan",
+  "data_storage": "Kaydinta Xogta"
 }

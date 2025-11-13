@@ -414,5 +414,12 @@
   "Status.Level": "Ниво",
   "chart": "Графикон",
   "new_series_added": "Додата је нова серија.",
-  "series_deleted": "Серија је обрисана."
+  "series_deleted": "Серија је обрисана.",
+  "size": "Величина",
+  "Status.ColorHsb": "Боја (HSV)",
+  "week_of_year": "Недеља године",
+  "new_value": "Нова вредност",
+  "events_logger_database": "База података евиденције догађаја",
+  "volatile_statistics_cache": "Кеш меморије за нестабилну статистику",
+  "data_storage": "Складиштење података"
 }

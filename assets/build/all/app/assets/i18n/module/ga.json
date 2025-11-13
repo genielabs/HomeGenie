@@ -12,5 +12,7 @@
   "stats.six_hours": "6 uair an chloig",
   "stats.twelve_hours": "12 uair an chloig",
   "stats.twentyfour_hours": "24 uair an chloig",
-  "stats.chart_provider": "Soláthraí cairte"
+  "stats.chart_provider": "Soláthraí cairte",
+  "stats.five_minutes": "5 nóiméad",
+  "stats.fifteen_minutes": "15 nóiméad"
 }

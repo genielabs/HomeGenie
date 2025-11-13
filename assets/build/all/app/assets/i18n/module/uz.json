@@ -12,5 +12,7 @@
   "stats.six_hours": "6 soat",
   "stats.twelve_hours": "12 soat",
   "stats.twentyfour_hours": "24 soat",
-  "stats.chart_provider": "Grafik provayderi"
+  "stats.chart_provider": "Grafik provayderi",
+  "stats.five_minutes": "5 daqiqa",
+  "stats.fifteen_minutes": "15 daqiqa"
 }

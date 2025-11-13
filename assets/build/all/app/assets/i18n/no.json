@@ -414,5 +414,12 @@
   "Status.Level": "Nivå",
   "chart": "Diagram",
   "new_series_added": "Ny serie lagt til.",
-  "series_deleted": "Serien er slettet."
+  "series_deleted": "Serien er slettet.",
+  "size": "Størrelse",
+  "Status.ColorHsb": "Farge (HSV)",
+  "week_of_year": "Uke i året",
+  "new_value": "Ny verdi",
+  "events_logger_database": "Hendelsesloggerdatabase",
+  "volatile_statistics_cache": "Flyktig statistikkbuffer",
+  "data_storage": "Datalagring"
 }

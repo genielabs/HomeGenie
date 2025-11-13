@@ -12,5 +12,7 @@
   "stats.six_hours": "6 Stonnen",
   "stats.twelve_hours": "12 Stonnen",
   "stats.twentyfour_hours": "24 Stonnen",
-  "stats.chart_provider": "Chart-Ubidder"
+  "stats.chart_provider": "Chart-Ubidder",
+  "stats.five_minutes": "5 Minutten",
+  "stats.fifteen_minutes": "15 Minutten"
 }

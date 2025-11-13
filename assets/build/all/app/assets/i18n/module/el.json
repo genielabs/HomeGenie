@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ώρες",
   "stats.twelve_hours": "12 ώρες",
   "stats.twentyfour_hours": "24 ώρες",
-  "stats.chart_provider": "Πάροχος γραφημάτων"
+  "stats.chart_provider": "Πάροχος γραφημάτων",
+  "stats.five_minutes": "5 λεπτά",
+  "stats.fifteen_minutes": "15 λεπτά"
 }

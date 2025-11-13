@@ -12,5 +12,7 @@
   "stats.six_hours": "6 uur",
   "stats.twelve_hours": "12 uur",
   "stats.twentyfour_hours": "24 uur",
-  "stats.chart_provider": "Grafiekverskaffer"
+  "stats.chart_provider": "Grafiekverskaffer",
+  "stats.five_minutes": "5 minute",
+  "stats.fifteen_minutes": "15 minute"
 }

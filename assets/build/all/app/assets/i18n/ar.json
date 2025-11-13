@@ -414,5 +414,12 @@
   "Status.Level": "مستوى",
   "chart": "جدول",
   "new_series_added": "تمت إضافة سلسلة جديدة.",
-  "series_deleted": "تم حذف السلسلة."
+  "series_deleted": "تم حذف السلسلة.",
+  "size": "مقاس",
+  "Status.ColorHsb": "اللون (HSV)",
+  "week_of_year": "أسبوع السنة",
+  "new_value": "قيمة جديدة",
+  "events_logger_database": "قاعدة بيانات مسجل الأحداث",
+  "volatile_statistics_cache": "ذاكرة التخزين المؤقت للإحصائيات المتقلبة",
+  "data_storage": "تخزين البيانات"
 }

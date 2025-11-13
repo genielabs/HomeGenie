@@ -12,5 +12,7 @@
   "stats.six_hours": "6 საათი",
   "stats.twelve_hours": "12 საათი",
   "stats.twentyfour_hours": "24 საათი",
-  "stats.chart_provider": "დიაგრამის პროვაიდერი"
+  "stats.chart_provider": "დიაგრამის პროვაიდერი",
+  "stats.five_minutes": "5 წუთი",
+  "stats.fifteen_minutes": "15 წუთი"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Leibhéal",
   "chart": "Cairt",
   "new_series_added": "Sraith nua curtha leis.",
-  "series_deleted": "Sraith scriosta."
+  "series_deleted": "Sraith scriosta.",
+  "size": "Méid",
+  "Status.ColorHsb": "Dath (HSV)",
+  "week_of_year": "Seachtain na Bliana",
+  "new_value": "Luach Nua",
+  "events_logger_database": "Bunachar Sonraí Logálaí Imeachtaí",
+  "volatile_statistics_cache": "Taisce Staitisticí Luaineacha",
+  "data_storage": "Stóráil Sonraí"
 }

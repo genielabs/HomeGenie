@@ -915,10 +915,6 @@ namespace HomeGenie.Service.Handlers
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
                     var parameter = Utility.ModuleParameterGet(module, migCommand.GetOption(2));
-                    double startTime = 0;
-                    double.TryParse(migCommand.GetOption(3), out startTime);
-                    double endTime = 0;
-                    double.TryParse(migCommand.GetOption(4), out endTime);
                     if (parameter != null)
                     {
                         // List is copied to prevent "Collection was modified" errors when serializing to JSON
@@ -926,15 +922,38 @@ namespace HomeGenie.Service.Handlers
                         {
                             History = new TsList<ValueStatistics.StatValue>(parameter.Statistics.History)
                         };
-                        if (startTime > 0 && stats.History.Count > 0)
+                        if (migCommand.GetOption(3) == "TimeRange")
                         {
-                            stats.History = new TsList<ValueStatistics.StatValue>(
-                                stats.History
-                                    .Where(sv => sv.UnixTimestamp >= startTime && sv.UnixTimestamp <= endTime)
-                                    .ToList()
-                            );
+                            double minTimestamp = 0;
+                            double maxTimestamp = 0;
+                            if (stats.History.Count > 0)
+                            {
+                                minTimestamp = stats.History.Min(sv => sv.UnixTimestamp);
+                                maxTimestamp = stats.History.Max(sv => sv.UnixTimestamp);
+                            }
+                            request.ResponseData = new
+                            {
+                                Start = (long)Math.Floor(minTimestamp),
+                                End = (long)Math.Ceiling(maxTimestamp),
+                                Count = stats.History.Count
+                            };
                         }
-                        request.ResponseData = JsonConvert.SerializeObject(stats, Formatting.Indented);
+                        else
+                        {
+                            double startTime = 0;
+                            double.TryParse(migCommand.GetOption(3), out startTime);
+                            double endTime = 0;
+                            double.TryParse(migCommand.GetOption(4), out endTime);
+                            if (startTime > 0 && stats.History.Count > 0)
+                            {
+                                stats.History = new TsList<ValueStatistics.StatValue>(
+                                    stats.History
+                                        .Where(sv => sv.UnixTimestamp >= startTime && sv.UnixTimestamp <= endTime)
+                                        .ToList()
+                                );
+                            }
+                            request.ResponseData = JsonConvert.SerializeObject(stats, Formatting.Indented);
+                        }
                     }
                     else
                     {

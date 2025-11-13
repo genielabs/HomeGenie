@@ -414,5 +414,12 @@
   "Status.Level": "Niveau",
   "chart": "Grafiek",
   "new_series_added": "Nieuwe serie toegevoegd.",
-  "series_deleted": "Serie verwijderd."
+  "series_deleted": "Serie verwijderd.",
+  "size": "Maat",
+  "Status.ColorHsb": "Kleur (HSV)",
+  "week_of_year": "Week van het jaar",
+  "new_value": "Nieuwe waarde",
+  "events_logger_database": "Gebeurtenissenlogger-database",
+  "volatile_statistics_cache": "Cache voor vluchtige statistieken",
+  "data_storage": "Gegevensopslag"
 }

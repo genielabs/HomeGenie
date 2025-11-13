@@ -414,5 +414,12 @@
   "Status.Level": "Niveli",
   "chart": "Grafiku",
   "new_series_added": "Seri e re e shtuar.",
-  "series_deleted": "Seriali u fshi."
+  "series_deleted": "Seriali u fshi.",
+  "size": "Madhësia",
+  "Status.ColorHsb": "Ngjyra (HSV)",
+  "week_of_year": "Java e Vitit",
+  "new_value": "Vlerë e Re",
+  "events_logger_database": "Baza e të dhënave e Regjistruesit të Ngjarjeve",
+  "volatile_statistics_cache": "Memoria e përkohshme e statistikave të paqëndrueshme",
+  "data_storage": "Ruajtja e të dhënave"
 }

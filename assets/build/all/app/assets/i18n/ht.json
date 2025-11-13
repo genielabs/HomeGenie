@@ -414,5 +414,12 @@
   "Status.Level": "Nivo",
   "chart": "Tablo",
   "new_series_added": "Nouvo seri ajoute.",
-  "series_deleted": "Seri a efase."
+  "series_deleted": "Seri a efase.",
+  "size": "Gwosè",
+  "Status.ColorHsb": "Koulè (HSV)",
+  "week_of_year": "Semèn nan Ane a",
+  "new_value": "Nouvo Valè",
+  "events_logger_database": "Baz Done Anrejistrè Evènman yo",
+  "volatile_statistics_cache": "Kach Estatistik Volatil",
+  "data_storage": "Depo Done"
 }

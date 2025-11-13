@@ -414,5 +414,12 @@
   "Status.Level": "पातळी",
   "chart": "चार्ट",
   "new_series_added": "नवीन मालिका जोडली.",
-  "series_deleted": "मालिका हटवली."
+  "series_deleted": "मालिका हटवली.",
+  "size": "आकार",
+  "Status.ColorHsb": "रंग (HSV)",
+  "week_of_year": "वर्षाचा आठवडा",
+  "new_value": "नवीन मूल्य",
+  "events_logger_database": "इव्हेंट लॉगर डेटाबेस",
+  "volatile_statistics_cache": "अस्थिर सांख्यिकी कॅशे",
+  "data_storage": "डेटा स्टोरेज"
 }

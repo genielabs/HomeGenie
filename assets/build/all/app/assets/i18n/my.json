@@ -414,5 +414,12 @@
   "Status.Level": "အဆင့်",
   "chart": "ဇယား",
   "new_series_added": "စီးရီးအသစ် ထပ်ထည့်ထားပါတယ်။",
-  "series_deleted": "စီးရီးများကို ဖျက်လိုက်ပါပြီ။"
+  "series_deleted": "စီးရီးများကို ဖျက်လိုက်ပါပြီ။",
+  "size": "အရွယ်အစား",
+  "Status.ColorHsb": "အရောင် (HSV)",
+  "week_of_year": "တစ်နှစ်တာပတ်",
+  "new_value": "တန်ဖိုးအသစ်",
+  "events_logger_database": "Events Logger Database",
+  "volatile_statistics_cache": "Volatile Statistics Cache",
+  "data_storage": "ဒေတာသိုလှောင်မှု"
 }

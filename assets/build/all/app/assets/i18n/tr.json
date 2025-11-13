@@ -414,5 +414,12 @@
   "Status.Level": "Seviye",
   "chart": "Çizelge",
   "new_series_added": "Yeni seri eklendi.",
-  "series_deleted": "Dizi silindi."
+  "series_deleted": "Dizi silindi.",
+  "size": "Boyut",
+  "Status.ColorHsb": "Renk (HSV)",
+  "week_of_year": "Yılın Haftası",
+  "new_value": "Yeni Değer",
+  "events_logger_database": "Olay Kaydedici Veritabanı",
+  "volatile_statistics_cache": "Uçucu İstatistik Önbelleği",
+  "data_storage": "Veri Depolama"
 }

@@ -12,5 +12,7 @@
   "stats.six_hours": "6 godzin",
   "stats.twelve_hours": "12 godzin",
   "stats.twentyfour_hours": "24 godziny",
-  "stats.chart_provider": "Dostawca wykresów"
+  "stats.chart_provider": "Dostawca wykresów",
+  "stats.five_minutes": "5 minut",
+  "stats.fifteen_minutes": "15 minut"
 }

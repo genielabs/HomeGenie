@@ -414,5 +414,12 @@
   "Status.Level": "Taso",
   "chart": "Kartoittaa",
   "new_series_added": "Uusi sarja lisätty.",
-  "series_deleted": "Sarja poistettu."
+  "series_deleted": "Sarja poistettu.",
+  "size": "Koko",
+  "Status.ColorHsb": "Väri (HSV)",
+  "week_of_year": "Vuoden viikko",
+  "new_value": "Uusi arvo",
+  "events_logger_database": "Tapahtumalokitietokanta",
+  "volatile_statistics_cache": "Haihtuvien tilastojen välimuisti",
+  "data_storage": "Tietojen tallennus"
 }

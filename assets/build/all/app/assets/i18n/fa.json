@@ -414,5 +414,12 @@
   "Status.Level": "سطح",
   "chart": "نمودار",
   "new_series_added": "سری جدید اضافه شد.",
-  "series_deleted": "سریال حذف شد."
+  "series_deleted": "سریال حذف شد.",
+  "size": "اندازه",
+  "Status.ColorHsb": "رنگ (HSV)",
+  "week_of_year": "هفته سال",
+  "new_value": "ارزش جدید",
+  "events_logger_database": "پایگاه داده ثبت رویدادها",
+  "volatile_statistics_cache": "حافظه پنهان آمار فرار",
+  "data_storage": "ذخیره‌سازی داده‌ها"
 }

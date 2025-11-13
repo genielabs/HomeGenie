@@ -414,5 +414,12 @@
   "Status.Level": "ደረጃ",
   "chart": "ገበታ",
   "new_series_added": "አዲስ ተከታታይ ታክሏል።",
-  "series_deleted": "ተከታታይ ተሰርዟል።"
+  "series_deleted": "ተከታታይ ተሰርዟል።",
+  "size": "መጠን",
+  "Status.ColorHsb": "ቀለም (HSV)",
+  "week_of_year": "የአመቱ ሳምንት",
+  "new_value": "አዲስ እሴት",
+  "events_logger_database": "የክስተት ሎገር ዳታቤዝ",
+  "volatile_statistics_cache": "ተለዋዋጭ ስታትስቲክስ መሸጎጫ",
+  "data_storage": "የውሂብ ማከማቻ"
 }

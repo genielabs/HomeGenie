@@ -12,5 +12,7 @@
   "stats.six_hours": "6 hores",
   "stats.twelve_hours": "12 hores",
   "stats.twentyfour_hours": "24 hores",
-  "stats.chart_provider": "Proveïdor de gràfics"
+  "stats.chart_provider": "Proveïdor de gràfics",
+  "stats.five_minutes": "5 minuts",
+  "stats.fifteen_minutes": "15 minuts"
 }

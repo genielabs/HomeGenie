@@ -12,5 +12,7 @@
   "stats.six_hours": "۶ ساعت",
   "stats.twelve_hours": "۱۲ ساعت",
   "stats.twentyfour_hours": "۲۴ ساعت",
-  "stats.chart_provider": "ارائه دهنده نمودار"
+  "stats.chart_provider": "ارائه دهنده نمودار",
+  "stats.five_minutes": "۵ دقیقه",
+  "stats.fifteen_minutes": "۱۵ دقیقه"
 }

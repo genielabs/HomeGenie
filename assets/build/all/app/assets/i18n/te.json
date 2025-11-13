@@ -414,5 +414,12 @@
   "Status.Level": "స్థాయి",
   "chart": "చార్ట్",
   "new_series_added": "కొత్త సిరీస్ జోడించబడింది.",
-  "series_deleted": "సిరీస్ తొలగించబడింది."
+  "series_deleted": "సిరీస్ తొలగించబడింది.",
+  "size": "పరిమాణం",
+  "Status.ColorHsb": "రంగు (HSV)",
+  "week_of_year": "సంవత్సర వారం",
+  "new_value": "కొత్త విలువ",
+  "events_logger_database": "ఈవెంట్స్ లాగర్ డేటాబేస్",
+  "volatile_statistics_cache": "అస్థిర గణాంకాల కాష్",
+  "data_storage": "డేటా నిల్వ"
 }

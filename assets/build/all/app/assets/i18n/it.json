@@ -303,7 +303,7 @@
   "custom_widget": "Widget personalizzato",
   "contextual_help": "Guida contestuale",
   "homegenie_website": "Sito HomeGenie",
-  "video_source_description": "Imposta il tipo di sorgente video, l'indirizzo, gli FPS e le dimensioni del widget.",
+  "video_source_description": "Imposta il tipo di sorgente video, l'indirizzo e gli FPS.",
   "source_type": "Tipo di sorgente video",
   "http_address": "Indirizzo HTTP",
   "frames_per_seconds": "Fotogrammi al secondo",
@@ -414,5 +414,12 @@
   "Status.Level": "Livello",
   "chart": "Grafico",
   "new_series_added": "Nuova serie aggiunta.",
-  "series_deleted": "Serie eliminata."
+  "series_deleted": "Serie eliminata.",
+  "size": "Dimensione",
+  "Status.ColorHsb": "Colore (HSV)",
+  "week_of_year": "Settimana dell'anno",
+  "new_value": "Nuovo valore",
+  "events_logger_database": "Database del Logger Eventi",
+  "volatile_statistics_cache": "Cache Statistiche Volatile",
+  "data_storage": "Archivio Dati"
 }

@@ -12,5 +12,7 @@
   "stats.six_hours": "6 గంటలు",
   "stats.twelve_hours": "12 గంటలు",
   "stats.twentyfour_hours": "24 గంటలు",
-  "stats.chart_provider": "చార్ట్ ప్రొవైడర్"
+  "stats.chart_provider": "చార్ట్ ప్రొవైడర్",
+  "stats.five_minutes": "5 నిమిషాలు",
+  "stats.fifteen_minutes": "15 నిమిషాలు"
 }

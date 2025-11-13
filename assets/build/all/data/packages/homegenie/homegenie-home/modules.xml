@@ -1057,6 +1057,14 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <UpdateTime>2022-12-28T17:10:38.2274051Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>ConfigureOptions.EnsureCommandDelivery</Name>
+        <Value/>
+        <Description>Ensure command delivery with continuous transmission (pulse-mode).</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2025-11-12T23:34:59.6465919Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />

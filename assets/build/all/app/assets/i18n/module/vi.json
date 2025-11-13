@@ -12,5 +12,7 @@
   "stats.six_hours": "6 giờ",
   "stats.twelve_hours": "12 giờ",
   "stats.twentyfour_hours": "24 giờ",
-  "stats.chart_provider": "Nhà cung cấp biểu đồ"
+  "stats.chart_provider": "Nhà cung cấp biểu đồ",
+  "stats.five_minutes": "5 phút",
+  "stats.fifteen_minutes": "15 phút"
 }

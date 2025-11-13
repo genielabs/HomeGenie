@@ -414,5 +414,12 @@
   "Status.Level": "დონე",
   "chart": "დიაგრამა",
   "new_series_added": "ახალი სერია დაემატა.",
-  "series_deleted": "სერია წაშლილია."
+  "series_deleted": "სერია წაშლილია.",
+  "size": "ზომა",
+  "Status.ColorHsb": "ფერი (HSV)",
+  "week_of_year": "წლის კვირა",
+  "new_value": "ახალი ღირებულება",
+  "events_logger_database": "მოვლენების ჟურნალის მონაცემთა ბაზა",
+  "volatile_statistics_cache": "არასტაბილური სტატისტიკის ქეში",
+  "data_storage": "მონაცემთა შენახვა"
 }

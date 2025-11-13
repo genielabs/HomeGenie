@@ -12,5 +12,7 @@
   "stats.six_hours": "6 valandos",
   "stats.twelve_hours": "12 valandų",
   "stats.twentyfour_hours": "24 valandos",
-  "stats.chart_provider": "Diagramų teikėjas"
+  "stats.chart_provider": "Diagramų teikėjas",
+  "stats.five_minutes": "5 minutės",
+  "stats.fifteen_minutes": "15 minučių"
 }

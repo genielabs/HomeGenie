@@ -414,5 +414,12 @@
   "Status.Level": "Ниво",
   "chart": "Диаграма",
   "new_series_added": "Добавена е нова серия.",
-  "series_deleted": "Серията е изтрита."
+  "series_deleted": "Серията е изтрита.",
+  "size": "Размер",
+  "Status.ColorHsb": "Цвят (HSV)",
+  "week_of_year": "Седмица на годината",
+  "new_value": "Нова стойност",
+  "events_logger_database": "База данни за регистриране на събития",
+  "volatile_statistics_cache": "Кеш за променлива статистика",
+  "data_storage": "Съхранение на данни"
 }

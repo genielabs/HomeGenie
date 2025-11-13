@@ -414,5 +414,12 @@
   "Status.Level": "سطح",
   "chart": "چارٽ",
   "new_series_added": "نئون سلسلو شامل ڪيو ويو.",
-  "series_deleted": "سيريز ختم ڪئي وئي."
+  "series_deleted": "سيريز ختم ڪئي وئي.",
+  "size": "ماپ",
+  "Status.ColorHsb": "رنگ (HSV)",
+  "week_of_year": "سال جو هفتو",
+  "new_value": "نئون قدر",
+  "events_logger_database": "ايونٽس لاگر ڊيٽابيس",
+  "volatile_statistics_cache": "غير مستحڪم شماريات ڪيش",
+  "data_storage": "ڊيٽا اسٽوريج"
 }

@@ -12,5 +12,7 @@
   "stats.six_hours": "6 stundas",
   "stats.twelve_hours": "12 stundas",
   "stats.twentyfour_hours": "24 stundas",
-  "stats.chart_provider": "Diagrammu nodrošinātājs"
+  "stats.chart_provider": "Diagrammu nodrošinātājs",
+  "stats.five_minutes": "5 minūtes",
+  "stats.fifteen_minutes": "15 minūtes"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Antas",
   "chart": "Tsart",
   "new_series_added": "Nagdagdag ng bagong serye.",
-  "series_deleted": "Tinanggal ang serye."
+  "series_deleted": "Tinanggal ang serye.",
+  "size": "Sukat",
+  "Status.ColorHsb": "Kulay (HSV)",
+  "week_of_year": "Linggo ng Taon",
+  "new_value": "Bagong Halaga",
+  "events_logger_database": "Database ng Events Logger",
+  "volatile_statistics_cache": "Volatile Statistics Cache",
+  "data_storage": "Imbakan ng Data"
 }

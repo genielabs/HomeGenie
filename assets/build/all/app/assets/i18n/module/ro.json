@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ore",
   "stats.twelve_hours": "12 ore",
   "stats.twentyfour_hours": "24 de ore",
-  "stats.chart_provider": "Furnizor de diagrame"
+  "stats.chart_provider": "Furnizor de diagrame",
+  "stats.five_minutes": "5 minute",
+  "stats.fifteen_minutes": "15 minute"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Ọkwa",
   "chart": "Chart",
   "new_series_added": "Agbakwunyere usoro ọhụrụ.",
-  "series_deleted": "ehichapụrụ usoro."
+  "series_deleted": "ehichapụrụ usoro.",
+  "size": "Nha",
+  "Status.ColorHsb": "Agba (HSV)",
+  "week_of_year": "Izu nke Afọ",
+  "new_value": "Uru Ọhụrụ",
+  "events_logger_database": "Ebe nchekwa data Logger mmemme",
+  "volatile_statistics_cache": "Cache Statistics na-agbanwe agbanwe",
+  "data_storage": "Nchekwa data"
 }

@@ -12,5 +12,7 @@
   "stats.six_hours": "6 èdtan",
   "stats.twelve_hours": "12 èdtan",
   "stats.twentyfour_hours": "24 èdtan",
-  "stats.chart_provider": "Founisè tablo"
+  "stats.chart_provider": "Founisè tablo",
+  "stats.five_minutes": "5 minit",
+  "stats.fifteen_minutes": "15 minit"
 }

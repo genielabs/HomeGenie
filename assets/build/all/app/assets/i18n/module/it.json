@@ -26,5 +26,9 @@
   "stats.twentyfour_hours":
     "24 ore",
   "stats.chart_provider":
-    "Chart provider"
+    "Chart provider",
+  "stats.five_minutes":
+    "5 minuti",
+  "stats.fifteen_minutes":
+    "15 minuti"
 }

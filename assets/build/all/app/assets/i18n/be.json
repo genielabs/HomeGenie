@@ -414,5 +414,12 @@
   "Status.Level": "Узровень",
   "chart": "Дыяграма",
   "new_series_added": "Дададзены новыя серыі.",
-  "series_deleted": "Серыя выдалена."
+  "series_deleted": "Серыя выдалена.",
+  "size": "Памер",
+  "Status.ColorHsb": "Колер (HSV)",
+  "week_of_year": "Тыдзень года",
+  "new_value": "Новая каштоўнасць",
+  "events_logger_database": "База дадзеных рэгістратара падзей",
+  "volatile_statistics_cache": "Кэш нестабільнай статыстыкі",
+  "data_storage": "Захоўванне дадзеных"
 }

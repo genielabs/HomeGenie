@@ -414,5 +414,12 @@
   "Status.Level": "Уровень",
   "chart": "Диаграмма",
   "new_series_added": "Добавлена новая серия.",
-  "series_deleted": "Серия удалена."
+  "series_deleted": "Серия удалена.",
+  "size": "Размер",
+  "Status.ColorHsb": "Цвет (HSV)",
+  "week_of_year": "Неделя года",
+  "new_value": "Новая ценность",
+  "events_logger_database": "База данных регистратора событий",
+  "volatile_statistics_cache": "Кэш изменчивой статистики",
+  "data_storage": "Хранение данных"
 }

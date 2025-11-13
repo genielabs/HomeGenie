@@ -12,5 +12,7 @@
   "stats.six_hours": "6 klukkustundir",
   "stats.twelve_hours": "12 klukkustundir",
   "stats.twentyfour_hours": "24 klukkustundir",
-  "stats.chart_provider": "Myndritveita"
+  "stats.chart_provider": "Myndritveita",
+  "stats.five_minutes": "5 mínútur",
+  "stats.fifteen_minutes": "15 mínútur"
 }

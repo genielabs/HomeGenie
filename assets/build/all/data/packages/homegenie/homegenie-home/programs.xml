@@ -486,7 +486,7 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>const int GENERIC_IP_CAMERA_COUNT = 5;</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1212,16 +1212,21 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
-  .AddOption("ThermostatsCount", "1", "Number of thermostats to create", "slider:1:10:1")
-  .AddFeature(MODULES_DOMAIN, "Thermostat", FEATURE_TEMPERATURE_MODULE, "Temperature sensor", "module.text:any:any:sensor.temperature")
-  .AddFeature(MODULES_DOMAIN, "Thermostat", "VirtualThermostat.HeatingSwitchModule", "Heating switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
-  .AddFeature(MODULES_DOMAIN, "Thermostat", "VirtualThermostat.CoolingSwitchModule", "Cooling switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .AddOption(OPTION_THERMOSTAT_COUNT, "1", "Number of thermostats to create", "slider:1:10:1")
+  .AddOption(OPTION_ENSURE_COMMAND_DELIVERY, "", "Ensure command delivery with continuous transmission (pulse-mode).", "checkbox")
+  .AddFeature(SmartThermostatDomain, "Thermostat", FEATURE_TEMPERATURE_MODULE, "Temperature sensor", "module.text:any:any:sensor.temperature")
+  .AddFeature(SmartThermostatDomain, "Thermostat", "VirtualThermostat.HeatingSwitchModule", "Heating switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
+  .AddFeature(SmartThermostatDomain, "Thermostat", "VirtualThermostat.CoolingSwitchModule", "Cooling switch", "module.text:any:switch,light,dimmer,thermostat,shutter:any")
   .Run();
 </ScriptSetup>
-    <ScriptSource>var thermostatsCount = (int)Program.Option("ThermostatsCount").DecimalValue;
+    <ScriptSource>var thermostatsCount = (int)Program.Option(OPTION_THERMOSTAT_COUNT).DecimalValue;
 if (thermostatsCount &lt;= 0) thermostatsCount = 1;
-Program.AddModules(MODULES_DOMAIN, 1, thermostatsCount, "Thermostat", "homegenie/generic/thermostat");
-var thermostatModules = Modules.InDomain(MODULES_DOMAIN).OfDeviceType("Thermostat");
+Program.AddModules(SmartThermostatDomain, 1, thermostatsCount, "Thermostat", "homegenie/generic/thermostat");
+var thermostatModules = Modules.InDomain(SmartThermostatDomain).OfDeviceType("Thermostat");
+
+var EnsureCommandDelivery = new Func&lt;bool&gt;(() =&gt; {
+  return Program.Option(OPTION_ENSURE_COMMAND_DELIVERY).Value != "";
+});
 
 //var holdingMode = new bool[thermostatsCount];
 var currentMode = "";
@@ -1274,7 +1279,10 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
         thermostat.Emit("Thermostat.OperatingState", modePrefix + "ing");
       }
       // Turn switch module ON
-      switchModule.On();
+      if (switchModule.IsOff || EnsureCommandDelivery())
+      {
+        switchModule.On();
+      }
     }
     else
     {
@@ -1283,7 +1291,10 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
         thermostat.Emit("Thermostat.OperatingState", "Pending" + mode);
       }
       // Waiting
-      switchModule.Off();
+      if (switchModule.IsOn || EnsureCommandDelivery())
+      {
+        switchModule.Off();
+      }
     }
   }
   else
@@ -1292,7 +1303,10 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
     {
       thermostat.Emit("Thermostat.OperatingState", "Idle");
     }
-    switchModule.Off();
+    if (switchModule.IsOn || EnsureCommandDelivery())
+    {
+      switchModule.Off();
+    }
   }
   return true;
 });
@@ -1376,10 +1390,10 @@ When.ModuleParameterChanged((module, parameter)=&gt;{
 });
 
 // implement Web API calls as defined in the Thermostat widget
-Api.Handle(MODULES_DOMAIN, (args)=&gt;{
+Api.Handle(SmartThermostatDomain, (args)=&gt;{
   var request = Api.Parse(args);
   var option = request.GetOption(0);
-  var thermostat = Modules.InDomain(MODULES_DOMAIN).WithAddress(request.Address).Get();
+  var thermostat = Modules.InDomain(SmartThermostatDomain).WithAddress(request.Address).Get();
   if (!thermostat.Exists) return null;
   var index = int.Parse(thermostat.Instance.Address) - 1;
   var res = "ERROR"; // default response text
@@ -1417,19 +1431,22 @@ while (Program.IsRunning)
   Pause(60);
 }
 </ScriptSource>
-    <ScriptContext>const string MODULES_DOMAIN = "HomeAutomation.SmartThermostat";
+    <ScriptContext>const string SmartThermostatDomain = "HomeAutomation.SmartThermostat";
+
 const string FEATURE_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
+const string OPTION_THERMOSTAT_COUNT = "ThermostatsCount";
+const string OPTION_ENSURE_COMMAND_DELIVERY = "EnsureCommandDelivery";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>smart-thermostat</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>B7C8EB9C091E659EF164EC4114F12AAD</Checksum>
+      <Checksum>12B076F8FDA17BAFD0DD79BF7861B07A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>

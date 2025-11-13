@@ -414,5 +414,12 @@
   "Status.Level": "Рівень",
   "chart": "Діаграма",
   "new_series_added": "Додано нові серії.",
-  "series_deleted": "Серію видалено."
+  "series_deleted": "Серію видалено.",
+  "size": "Розмір",
+  "Status.ColorHsb": "Колір (HSV)",
+  "week_of_year": "Тиждень року",
+  "new_value": "Нова цінність",
+  "events_logger_database": "База даних реєстратора подій",
+  "volatile_statistics_cache": "Кеш нестабільної статистики",
+  "data_storage": "Зберігання даних"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Tingkat",
   "chart": "Bagan",
   "new_series_added": "Seri baru ditambahkan.",
-  "series_deleted": "Seri dihapus."
+  "series_deleted": "Seri dihapus.",
+  "size": "Ukuran",
+  "Status.ColorHsb": "Warna (HSV)",
+  "week_of_year": "Minggu Tahun Ini",
+  "new_value": "Nilai Baru",
+  "events_logger_database": "Basis Data Pencatat Peristiwa",
+  "volatile_statistics_cache": "Cache Statistik Volatil",
+  "data_storage": "Penyimpanan Data"
 }

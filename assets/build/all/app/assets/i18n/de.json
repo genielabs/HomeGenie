@@ -414,5 +414,12 @@
   "Status.Level": "Ebene",
   "chart": "Diagramm",
   "new_series_added": "Neue Serien hinzugefügt.",
-  "series_deleted": "Serie abgesetzt."
+  "series_deleted": "Serie abgesetzt.",
+  "size": "Größe",
+  "Status.ColorHsb": "Farbe (HSV)",
+  "week_of_year": "Woche des Jahres",
+  "new_value": "Neuer Wert",
+  "events_logger_database": "Ereignisprotokolldatenbank",
+  "volatile_statistics_cache": "Volatilitätsstatistik-Cache",
+  "data_storage": "Datenspeicherung"
 }

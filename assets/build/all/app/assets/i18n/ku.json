@@ -414,5 +414,12 @@
   "Status.Level": "Deşt",
   "chart": "Qebale",
   "new_series_added": "Zîncîreyeke nû lê zêde kirin.",
-  "series_deleted": "Rêzefîlm hat jêbirin."
+  "series_deleted": "Rêzefîlm hat jêbirin.",
+  "size": "Mezinayî",
+  "Status.ColorHsb": "Reng (HSV)",
+  "week_of_year": "Hefteya Salê",
+  "new_value": "Nirxa Nû",
+  "events_logger_database": "Databasa Tomarkera Bûyeran",
+  "volatile_statistics_cache": "Keşeya Statîstîkên Guherbar",
+  "data_storage": "Hilanîna Daneyan"
 }

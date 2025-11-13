@@ -414,5 +414,12 @@
   "Status.Level": "Сатҳи",
   "chart": "Диаграмма",
   "new_series_added": "Силсилаи нав илова карда шуд.",
-  "series_deleted": "Силсила нест карда шуд."
+  "series_deleted": "Силсила нест карда шуд.",
+  "size": "Андоза",
+  "Status.ColorHsb": "Ранг (HSV)",
+  "week_of_year": "Ҳафтаи сол",
+  "new_value": "Арзиши нав",
+  "events_logger_database": "Пойгоҳи додаҳои рӯйдодҳо",
+  "volatile_statistics_cache": "Кэши омори идоранашаванда",
+  "data_storage": "Нигоҳдории маълумот"
 }

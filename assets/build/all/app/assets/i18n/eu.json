@@ -414,5 +414,12 @@
   "Status.Level": "Maila",
   "chart": "Diagrama",
   "new_series_added": "Serie berria gehitu da.",
-  "series_deleted": "Seriea ezabatuta."
+  "series_deleted": "Seriea ezabatuta.",
+  "size": "Tamaina",
+  "Status.ColorHsb": "Kolorea (HSV)",
+  "week_of_year": "Urteko astea",
+  "new_value": "Balio Berria",
+  "events_logger_database": "Gertaeren erregistroaren datu-basea",
+  "volatile_statistics_cache": "Estatistika-katxe aldakorra",
+  "data_storage": "Datuen biltegiratzea"
 }

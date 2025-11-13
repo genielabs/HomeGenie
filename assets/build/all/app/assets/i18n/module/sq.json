@@ -12,5 +12,7 @@
   "stats.six_hours": "6 orë",
   "stats.twelve_hours": "12 orë",
   "stats.twentyfour_hours": "24 orë",
-  "stats.chart_provider": "Ofruesi i grafikëve"
+  "stats.chart_provider": "Ofruesi i grafikëve",
+  "stats.five_minutes": "5 minuta",
+  "stats.fifteen_minutes": "15 minuta"
 }

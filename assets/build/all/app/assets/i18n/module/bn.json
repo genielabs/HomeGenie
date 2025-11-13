@@ -12,5 +12,7 @@
   "stats.six_hours": "৬ ঘন্টা",
   "stats.twelve_hours": "১২ ঘন্টা",
   "stats.twentyfour_hours": "২৪ ঘন্টা",
-  "stats.chart_provider": "চার্ট প্রদানকারী"
+  "stats.chart_provider": "চার্ট প্রদানকারী",
+  "stats.five_minutes": "৫ মিনিট",
+  "stats.fifteen_minutes": "১৫ মিনিট"
 }

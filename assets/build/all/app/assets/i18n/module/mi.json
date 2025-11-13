@@ -12,5 +12,7 @@
   "stats.six_hours": "6 haora",
   "stats.twelve_hours": "12 haora",
   "stats.twentyfour_hours": "24 haora",
-  "stats.chart_provider": "Kaiwhakarato tūtohi"
+  "stats.chart_provider": "Kaiwhakarato tūtohi",
+  "stats.five_minutes": "5 meneti",
+  "stats.fifteen_minutes": "15 meneti"
 }

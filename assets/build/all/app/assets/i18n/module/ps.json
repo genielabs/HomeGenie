@@ -12,5 +12,7 @@
   "stats.six_hours": "۶ ساعته",
   "stats.twelve_hours": "۱۲ ساعته",
   "stats.twentyfour_hours": "۲۴ ساعته",
-  "stats.chart_provider": "د چارټ چمتو کوونکی"
+  "stats.chart_provider": "د چارټ چمتو کوونکی",
+  "stats.five_minutes": "۵ دقیقې",
+  "stats.fifteen_minutes": "۱۵ دقیقې"
 }

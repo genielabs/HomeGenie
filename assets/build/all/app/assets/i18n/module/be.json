@@ -12,5 +12,7 @@
   "stats.six_hours": "6 гадзін",
   "stats.twelve_hours": "12 гадзін",
   "stats.twentyfour_hours": "24 гадзіны",
-  "stats.chart_provider": "Пастаўшчык дыяграм"
+  "stats.chart_provider": "Пастаўшчык дыяграм",
+  "stats.five_minutes": "5 хвілін",
+  "stats.fifteen_minutes": "15 хвілін"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Szint",
   "chart": "Diagram",
   "new_series_added": "Új sorozat hozzáadva.",
-  "series_deleted": "Sorozat törölve."
+  "series_deleted": "Sorozat törölve.",
+  "size": "Méret",
+  "Status.ColorHsb": "Szín (HSV)",
+  "week_of_year": "Az év hete",
+  "new_value": "Új érték",
+  "events_logger_database": "Eseménynaplózó adatbázis",
+  "volatile_statistics_cache": "Illékony statisztikai gyorsítótár",
+  "data_storage": "Adattárolás"
 }

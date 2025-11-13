@@ -12,5 +12,7 @@
   "stats.six_hours": "6 цаг",
   "stats.twelve_hours": "12 цаг",
   "stats.twentyfour_hours": "24 цаг",
-  "stats.chart_provider": "График нийлүүлэгч"
+  "stats.chart_provider": "График нийлүүлэгч",
+  "stats.five_minutes": "5 минут",
+  "stats.fifteen_minutes": "15 минут"
 }

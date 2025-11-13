@@ -12,5 +12,7 @@
   "stats.six_hours": "awa 6",
   "stats.twelve_hours": "awa 12",
   "stats.twentyfour_hours": "awa 24",
-  "stats.chart_provider": "Onye na-eweta eserese"
+  "stats.chart_provider": "Onye na-eweta eserese",
+  "stats.five_minutes": "Nkeji 5",
+  "stats.fifteen_minutes": "Nkeji 15"
 }

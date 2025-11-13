@@ -12,5 +12,7 @@
   "stats.six_hours": "6 timer",
   "stats.twelve_hours": "12 timer",
   "stats.twentyfour_hours": "24 timer",
-  "stats.chart_provider": "Diagramleverandør"
+  "stats.chart_provider": "Diagramleverandør",
+  "stats.five_minutes": "5 minutter",
+  "stats.fifteen_minutes": "15 minutter"
 }

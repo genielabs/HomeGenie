@@ -414,5 +414,12 @@
   "Status.Level": "මට්ටමින්",
   "chart": "ප්‍රස්ථාරය",
   "new_series_added": "නව මාලාවක් එකතු කරන ලදී.",
-  "series_deleted": "මාලාව මකා දමන ලදී."
+  "series_deleted": "මාලාව මකා දමන ලදී.",
+  "size": "ප්‍රමාණය",
+  "Status.ColorHsb": "වර්ණය (HSV)",
+  "week_of_year": "වසරේ සතිය",
+  "new_value": "නව අගය",
+  "events_logger_database": "සිදුවීම් ලොගර් දත්ත සමුදාය",
+  "volatile_statistics_cache": "වාෂ්පශීලී සංඛ්‍යාලේඛන හැඹිලිය",
+  "data_storage": "දත්ත ගබඩා කිරීම"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "수준",
   "chart": "차트",
   "new_series_added": "새로운 시리즈가 추가되었습니다.",
-  "series_deleted": "시리즈가 삭제되었습니다."
+  "series_deleted": "시리즈가 삭제되었습니다.",
+  "size": "크기",
+  "Status.ColorHsb": "색상(HSV)",
+  "week_of_year": "연중 주",
+  "new_value": "새로운 가치",
+  "events_logger_database": "이벤트 로거 데이터베이스",
+  "volatile_statistics_cache": "휘발성 통계 캐시",
+  "data_storage": "데이터 저장"
 }

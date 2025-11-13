@@ -414,5 +414,12 @@
   "Status.Level": "سطح",
   "chart": "چارٹ",
   "new_series_added": "نئی سیریز شامل کی گئی۔",
-  "series_deleted": "سیریز حذف کر دی گئی۔"
+  "series_deleted": "سیریز حذف کر دی گئی۔",
+  "size": "سائز",
+  "Status.ColorHsb": "رنگ (HSV)",
+  "week_of_year": "سال کا ہفتہ",
+  "new_value": "نئی قدر",
+  "events_logger_database": "ایونٹس لاگر ڈیٹا بیس",
+  "volatile_statistics_cache": "غیر مستحکم شماریات کیش",
+  "data_storage": "ڈیٹا اسٹوریج"
 }

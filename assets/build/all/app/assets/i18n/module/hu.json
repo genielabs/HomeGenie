@@ -12,5 +12,7 @@
   "stats.six_hours": "6 óra",
   "stats.twelve_hours": "12 óra",
   "stats.twentyfour_hours": "24 óra",
-  "stats.chart_provider": "Diagramszolgáltató"
+  "stats.chart_provider": "Diagramszolgáltató",
+  "stats.five_minutes": "5 perc",
+  "stats.fifteen_minutes": "15 perc"
 }

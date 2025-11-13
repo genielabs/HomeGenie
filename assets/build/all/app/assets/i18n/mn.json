@@ -414,5 +414,12 @@
   "Status.Level": "Түвшин",
   "chart": "График",
   "new_series_added": "Шинэ цуврал нэмэгдсэн.",
-  "series_deleted": "Цуврал устгасан."
+  "series_deleted": "Цуврал устгасан.",
+  "size": "Хэмжээ",
+  "Status.ColorHsb": "Өнгө (HSV)",
+  "week_of_year": "Жилийн долоо хоног",
+  "new_value": "Шинэ үнэ цэнэ",
+  "events_logger_database": "Үйл явдал бүртгэгчийн мэдээллийн сан",
+  "volatile_statistics_cache": "Тогтворгүй статистик кэш",
+  "data_storage": "Өгөгдөл хадгалах"
 }

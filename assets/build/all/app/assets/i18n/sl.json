@@ -414,5 +414,12 @@
   "Status.Level": "Raven",
   "chart": "Grafikon",
   "new_series_added": "Dodana nova serija.",
-  "series_deleted": "Serija je izbrisana."
+  "series_deleted": "Serija je izbrisana.",
+  "size": "Velikost",
+  "Status.ColorHsb": "Barva (HSV)",
+  "week_of_year": "Teden leta",
+  "new_value": "Nova vrednost",
+  "events_logger_database": "Zbirka podatkov beležilnika dogodkov",
+  "volatile_statistics_cache": "Predpomnilnik nestanovitnih statističnih podatkov",
+  "data_storage": "Shranjevanje podatkov"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "ലെവൽ",
   "chart": "ചാർട്ട്",
   "new_series_added": "പുതിയ പരമ്പര ചേർത്തു.",
-  "series_deleted": "പരമ്പര ഇല്ലാതാക്കി."
+  "series_deleted": "പരമ്പര ഇല്ലാതാക്കി.",
+  "size": "വലുപ്പം",
+  "Status.ColorHsb": "നിറം (HSV)",
+  "week_of_year": "വർഷത്തിലെ ആഴ്ച",
+  "new_value": "പുതിയ മൂല്യം",
+  "events_logger_database": "ഇവന്റ് ലോഗർ ഡാറ്റാബേസ്",
+  "volatile_statistics_cache": "വോളറ്റൈൽ സ്റ്റാറ്റിസ്റ്റിക്സ് കാഷെ",
+  "data_storage": "ഡാറ്റ സംഭരണം"
 }

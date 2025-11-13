@@ -414,5 +414,12 @@
   "Status.Level": "ಮಟ್ಟ",
   "chart": "ಚಾರ್ಟ್",
   "new_series_added": "ಹೊಸ ಸರಣಿಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ.",
-  "series_deleted": "ಸರಣಿಯನ್ನು ಅಳಿಸಲಾಗಿದೆ."
+  "series_deleted": "ಸರಣಿಯನ್ನು ಅಳಿಸಲಾಗಿದೆ.",
+  "size": "ಗಾತ್ರ",
+  "Status.ColorHsb": "ಬಣ್ಣ (HSV)",
+  "week_of_year": "ವರ್ಷದ ವಾರ",
+  "new_value": "ಹೊಸ ಮೌಲ್ಯ",
+  "events_logger_database": "ಈವೆಂಟ್‌ಗಳ ಲಾಗರ್ ಡೇಟಾಬೇಸ್",
+  "volatile_statistics_cache": "ಬಾಷ್ಪಶೀಲ ಅಂಕಿಅಂಶಗಳ ಸಂಗ್ರಹ",
+  "data_storage": "ಡೇಟಾ ಸಂಗ್ರಹಣೆ"
 }

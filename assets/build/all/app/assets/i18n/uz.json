@@ -414,5 +414,12 @@
   "Status.Level": "Daraja",
   "chart": "Grafik",
   "new_series_added": "Yangi seriya qo'shildi.",
-  "series_deleted": "Seriya oʻchirildi."
+  "series_deleted": "Seriya oʻchirildi.",
+  "size": "Hajmi",
+  "Status.ColorHsb": "Rang (HSV)",
+  "week_of_year": "Yil haftasi",
+  "new_value": "Yangi qiymat",
+  "events_logger_database": "Voqealar jurnali ma'lumotlar bazasi",
+  "volatile_statistics_cache": "O'zgaruvchan statistika keshi",
+  "data_storage": "Ma'lumotlarni saqlash"
 }

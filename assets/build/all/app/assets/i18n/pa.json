@@ -414,5 +414,12 @@
   "Status.Level": "ਪੱਧਰ",
   "chart": "ਚਾਰਟ",
   "new_series_added": "ਨਵੀਂ ਲੜੀ ਜੋੜੀ ਗਈ।",
-  "series_deleted": "ਲੜੀ ਮਿਟਾਈ ਗਈ।"
+  "series_deleted": "ਲੜੀ ਮਿਟਾਈ ਗਈ।",
+  "size": "ਆਕਾਰ",
+  "Status.ColorHsb": "ਰੰਗ (HSV)",
+  "week_of_year": "ਸਾਲ ਦਾ ਹਫ਼ਤਾ",
+  "new_value": "ਨਵਾਂ ਮੁੱਲ",
+  "events_logger_database": "ਇਵੈਂਟ ਲਾਗਰ ਡੇਟਾਬੇਸ",
+  "volatile_statistics_cache": "ਅਸਥਿਰ ਅੰਕੜੇ ਕੈਸ਼",
+  "data_storage": "ਡਾਟਾ ਸਟੋਰੇਜ"
 }

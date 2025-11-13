@@ -414,5 +414,12 @@
   "Status.Level": "ระดับ",
   "chart": "แผนภูมิ",
   "new_series_added": "เพิ่มซีรีย์ใหม่",
-  "series_deleted": "ซีรีย์ถูกลบแล้ว"
+  "series_deleted": "ซีรีย์ถูกลบแล้ว",
+  "size": "ขนาด",
+  "Status.ColorHsb": "สี (HSV)",
+  "week_of_year": "สัปดาห์ของปี",
+  "new_value": "ค่าใหม่",
+  "events_logger_database": "ฐานข้อมูลบันทึกเหตุการณ์",
+  "volatile_statistics_cache": "แคชสถิติความผันผวน",
+  "data_storage": "การจัดเก็บข้อมูล"
 }

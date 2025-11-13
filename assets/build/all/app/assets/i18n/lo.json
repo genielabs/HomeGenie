@@ -414,5 +414,12 @@
   "Status.Level": "ລະດັບ",
   "chart": "ຕາຕະລາງ",
   "new_series_added": "ເພີ່ມຊຸດໃໝ່ແລ້ວ.",
-  "series_deleted": "ລຶບຊຸດແລ້ວ."
+  "series_deleted": "ລຶບຊຸດແລ້ວ.",
+  "size": "ຂະໜາດ",
+  "Status.ColorHsb": "ສີ (HSV)",
+  "week_of_year": "ອາທິດຂອງປີ",
+  "new_value": "ຄ່າໃໝ່",
+  "events_logger_database": "ຖານຂໍ້ມູນ Logger ເຫດການ",
+  "volatile_statistics_cache": "Cache ສະຖິຕິການຜັນຜວນ",
+  "data_storage": "ການເກັບຮັກສາຂໍ້ມູນ"
 }

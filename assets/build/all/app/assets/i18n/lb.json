@@ -414,5 +414,12 @@
   "Status.Level": "Niveau",
   "chart": "Grafik",
   "new_series_added": "Nei Serie derbäigesat.",
-  "series_deleted": "Serie geläscht."
+  "series_deleted": "Serie geläscht.",
+  "size": "Gréisst",
+  "Status.ColorHsb": "Faarf (HSV)",
+  "week_of_year": "Woch vum Joer",
+  "new_value": "Neie Wäert",
+  "events_logger_database": "Eventlogger Datebank",
+  "volatile_statistics_cache": "Volatil Statistik Cache",
+  "data_storage": "Datenspeicherung"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Taumata",
   "chart": "Tūtohi",
   "new_series_added": "Kua taapirihia nga raupapa hou.",
-  "series_deleted": "Kua mukua te raupapa."
+  "series_deleted": "Kua mukua te raupapa.",
+  "size": "Rahi",
+  "Status.ColorHsb": "Tae (HSV)",
+  "week_of_year": "Wiki o te Tau",
+  "new_value": "Uara Hou",
+  "events_logger_database": "Raraunga Raraunga Takahanga",
+  "volatile_statistics_cache": "Keteroki Tauanga Pukarere",
+  "data_storage": "Rokiroki Raraunga"
 }

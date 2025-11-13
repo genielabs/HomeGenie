@@ -5,10 +5,9 @@
 Program.Implements(
     "@AI:IntentHandler",
     API_URL
-)
-.AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
-.AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
-.Run();
+).AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
+ .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
+ .Run();
 </ScriptSetup>
     <ScriptSource>#using System.Text.RegularExpressions
 
@@ -257,7 +256,7 @@ For type `Program` commands are in the form:
 **EXAMPLE**
 
 &lt;|im_start|&gt;user
-Spegni tutte le luci dello studio e poi accendi la caldaia.&lt;|im_end|&gt;
+Spegni tutte le luci dello studio e poi accendi la caldaia e anche i riscaldamenti.&lt;|im_end|&gt;
 
 &lt;|im_start|&gt;assistant
 {
@@ -265,7 +264,8 @@ Spegni tutte le luci dello studio e poi accendi la caldaia.&lt;|im_end|&gt;
   "commands": [
     "/api/HomeAutomation.PhilipsHue/3/Control.Off",
     "/api/HomeAutomation.ZigBee/5/Control.Off",
-    "/api/HomeAutomation.HomeGenie/S2/Control.On"
+    "/api/HomeAutomation.HomeGenie/S2/Control.On",
+    "/api/HomeAutomation.SmartThermostat/1/Thermostat.ModeSet/Heat"
   ]
 }
 &lt;|im_end|&gt;
@@ -338,9 +338,9 @@ static class ChatSession
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>893C70B05856058C5630729CE1F4D829</Checksum>
+      <Checksum>E6A95A95F71C03A9C1326BB29387D340</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>

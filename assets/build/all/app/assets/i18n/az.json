@@ -414,5 +414,12 @@
   "Status.Level": "Səviyyə",
   "chart": "Qrafik",
   "new_series_added": "Yeni seriya əlavə edildi.",
-  "series_deleted": "Serial silindi."
+  "series_deleted": "Serial silindi.",
+  "size": "Ölçü",
+  "Status.ColorHsb": "Rəng (HSV)",
+  "week_of_year": "İl Həftəsi",
+  "new_value": "Yeni Dəyər",
+  "events_logger_database": "Hadisələr qeyd edən verilənlər bazası",
+  "volatile_statistics_cache": "Dəyişən Statistika Keşi",
+  "data_storage": "Məlumat Saxlama"
 }

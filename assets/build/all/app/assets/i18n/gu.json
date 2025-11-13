@@ -414,5 +414,12 @@
   "Status.Level": "સ્તર",
   "chart": "ચાર્ટ",
   "new_series_added": "નવી શ્રેણી ઉમેરી.",
-  "series_deleted": "શ્રેણી કાઢી નાખી."
+  "series_deleted": "શ્રેણી કાઢી નાખી.",
+  "size": "કદ",
+  "Status.ColorHsb": "રંગ (HSV)",
+  "week_of_year": "વર્ષનો અઠવાડિયું",
+  "new_value": "નવું મૂલ્ય",
+  "events_logger_database": "ઇવેન્ટ્સ લોગર ડેટાબેઝ",
+  "volatile_statistics_cache": "અસ્થિર આંકડા કેશ",
+  "data_storage": "ડેટા સ્ટોરેજ"
 }

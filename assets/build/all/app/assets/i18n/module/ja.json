@@ -12,5 +12,7 @@
   "stats.six_hours": "6時間",
   "stats.twelve_hours": "12時間",
   "stats.twentyfour_hours": "24時間",
-  "stats.chart_provider": "チャートプロバイダー"
+  "stats.chart_provider": "チャートプロバイダー",
+  "stats.five_minutes": "5分",
+  "stats.fifteen_minutes": "15分"
 }

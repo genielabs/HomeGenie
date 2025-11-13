@@ -414,5 +414,12 @@
   "Status.Level": "Stig",
   "chart": "Tafla",
   "new_series_added": "Ný sería bætt við.",
-  "series_deleted": "Röð eytt."
+  "series_deleted": "Röð eytt.",
+  "size": "Stærð",
+  "Status.ColorHsb": "Litur (HSV)",
+  "week_of_year": "Vika ársins",
+  "new_value": "Nýtt gildi",
+  "events_logger_database": "Gagnagrunnur atburðaskráningar",
+  "volatile_statistics_cache": "Skyndiminni fyrir sveiflukennda tölfræði",
+  "data_storage": "Gagnageymsla"
 }

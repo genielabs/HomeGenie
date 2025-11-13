@@ -414,5 +414,12 @@
   "Status.Level": "レベル",
   "chart": "チャート",
   "new_series_added": "新しいシリーズが追加されました。",
-  "series_deleted": "シリーズが削除されました。"
+  "series_deleted": "シリーズが削除されました。",
+  "size": "サイズ",
+  "Status.ColorHsb": "色（HSV）",
+  "week_of_year": "年間週",
+  "new_value": "新しい価値",
+  "events_logger_database": "イベントロガーデータベース",
+  "volatile_statistics_cache": "揮発性統計キャッシュ",
+  "data_storage": "データストレージ"
 }

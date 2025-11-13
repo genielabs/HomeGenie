@@ -414,5 +414,12 @@
   "Status.Level": "等级",
   "chart": "图表",
   "new_series_added": "新增剧集。",
-  "series_deleted": "剧集已删除。"
+  "series_deleted": "剧集已删除。",
+  "size": "尺寸",
+  "Status.ColorHsb": "颜色（HSV）",
+  "week_of_year": "一年中的第几周",
+  "new_value": "新价值",
+  "events_logger_database": "事件日志数据库",
+  "volatile_statistics_cache": "易失性统计缓存",
+  "data_storage": "数据存储"
 }

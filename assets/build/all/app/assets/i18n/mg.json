@@ -414,5 +414,12 @@
   "Status.Level": "ambaratonga",
   "chart": "tabilao",
   "new_series_added": "Niampy andiany vaovao.",
-  "series_deleted": "Voafafa ny andiany."
+  "series_deleted": "Voafafa ny andiany.",
+  "size": "Size",
+  "Status.ColorHsb": "Loko (HSV)",
+  "week_of_year": "Herinandron'ny taona",
+  "new_value": "Sanda vaovao",
+  "events_logger_database": "Events Logger Database",
+  "volatile_statistics_cache": "Volatile Statistics Cache",
+  "data_storage": "fitahirizana angona"
 }

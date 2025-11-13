@@ -414,5 +414,12 @@
   "Status.Level": "Mlingo",
   "chart": "Tchati",
   "new_series_added": "Mndandanda watsopano wawonjezedwa.",
-  "series_deleted": "Mndandanda wachotsedwa."
+  "series_deleted": "Mndandanda wachotsedwa.",
+  "size": "Kukula",
+  "Status.ColorHsb": "Mtundu (HSV)",
+  "week_of_year": "Mlungu wa Chaka",
+  "new_value": "Mtengo Watsopano",
+  "events_logger_database": "Zochitika Logger Database",
+  "volatile_statistics_cache": "Posungira Zowerengera Zosasinthika",
+  "data_storage": "Kusungirako Data"
 }

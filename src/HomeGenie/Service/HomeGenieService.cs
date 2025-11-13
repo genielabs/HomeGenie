@@ -1096,6 +1096,8 @@ namespace HomeGenie.Service
                             }
                             module.Address = program.Address.ToString();
                             module.DeviceType = ModuleTypes.Program;
+                            module.Name = program.Name;
+                            module.Description = program.Description;
                         }
                         catch (Exception ex)
                         {

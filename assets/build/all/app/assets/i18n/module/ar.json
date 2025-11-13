@@ -12,5 +12,7 @@
   "stats.six_hours": "6 ساعات",
   "stats.twelve_hours": "12 ساعة",
   "stats.twentyfour_hours": "24 ساعة",
-  "stats.chart_provider": "مزود المخططات"
+  "stats.chart_provider": "مزود المخططات",
+  "stats.five_minutes": "5 دقائق",
+  "stats.fifteen_minutes": "15 دقيقة"
 }

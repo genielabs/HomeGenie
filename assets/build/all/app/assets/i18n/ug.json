@@ -414,5 +414,12 @@
   "Status.Level": "Level",
   "chart": "Chart",
   "new_series_added": "يېڭى يۈرۈشلۈكلەر قوشۇلدى.",
-  "series_deleted": "يۈرۈشلۈك ئۆچۈرۈلدى."
+  "series_deleted": "يۈرۈشلۈك ئۆچۈرۈلدى.",
+  "size": "چوڭلۇقى",
+  "Status.ColorHsb": "رەڭ (HSV)",
+  "week_of_year": "يىل ھەپتىلىكى",
+  "new_value": "يېڭى قىممەت",
+  "events_logger_database": "ھادىسە خاتىرىلەش ساندانى",
+  "volatile_statistics_cache": "تۇراقسىز ستاتىستىكا ساقلىغۇچ",
+  "data_storage": "سانلىق مەلۇمات ساقلاش"
 }

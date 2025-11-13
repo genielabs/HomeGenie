@@ -414,5 +414,12 @@
   "Status.Level": "Poziom",
   "chart": "Wykres",
   "new_series_added": "Dodano nową serię.",
-  "series_deleted": "Seria usunięta."
+  "series_deleted": "Seria usunięta.",
+  "size": "Rozmiar",
+  "Status.ColorHsb": "Kolor (HSV)",
+  "week_of_year": "Tydzień w roku",
+  "new_value": "Nowa wartość",
+  "events_logger_database": "Baza danych rejestratora zdarzeń",
+  "volatile_statistics_cache": "Pamięć podręczna statystyk lotnych",
+  "data_storage": "Przechowywanie danych"
 }

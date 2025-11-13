@@ -414,5 +414,12 @@
   "Status.Level": "רָמָה",
   "chart": "תַרשִׁים",
   "new_series_added": "סדרה חדשה נוספה.",
-  "series_deleted": "הסדרה נמחקה."
+  "series_deleted": "הסדרה נמחקה.",
+  "size": "גוֹדֶל",
+  "Status.ColorHsb": "צבע (HSV)",
+  "week_of_year": "שבוע בשנה",
+  "new_value": "ערך חדש",
+  "events_logger_database": "מסד נתונים של לוגר אירועים",
+  "volatile_statistics_cache": "מטמון סטטיסטיקות נדיף",
+  "data_storage": "אחסון נתונים"
 }

@@ -21,6 +21,8 @@
  */
 
 using System;
+using LiteDB;
+using Newtonsoft.Json;
 
 namespace HomeGenie.Data
 {
@@ -34,18 +36,16 @@ namespace HomeGenie.Data
 
         public LoggerEvent(Module module, ModuleParameter parameter)
         {
-            this.Domain = module.Domain;
-            this.Address = module.Address;
-            this.Description = module.Name;
-            this.Parameter = parameter.Name;
-            this.Value = parameter.GetData(); // get the raw object value
-            this.Date = parameter.UpdateTime;
+            Parameter = parameter.Name;
+            Value = parameter.GetData(); // get the raw object value
+            UnixTimestamp = new DateTimeOffset(parameter.UpdateTime.ToUniversalTime()).ToUnixTimeMilliseconds();
         }
-        public string Domain { get; set; }
-        public string Address { get; set; }
-        public string Description { get; set; }
+
+        [BsonId]
+        [JsonIgnore]
+        public ObjectId Id { get; set; }
         public string Parameter { get; set; }
         public object Value { get; set; }
-        public DateTime Date { get; set; }
+        public long UnixTimestamp { get; set; }
     }
 }

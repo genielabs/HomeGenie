@@ -12,5 +12,7 @@
   "stats.six_hours": "6시간",
   "stats.twelve_hours": "12시간",
   "stats.twentyfour_hours": "24시간",
-  "stats.chart_provider": "차트 제공자"
+  "stats.chart_provider": "차트 제공자",
+  "stats.five_minutes": "5분",
+  "stats.fifteen_minutes": "15분"
 }

@@ -414,5 +414,12 @@
   "Status.Level": "Մակարդակ",
   "chart": "Գրաֆիկ",
   "new_series_added": "Ավելացվել է նոր շարք։",
-  "series_deleted": "Սերիալը ջնջված է։"
+  "series_deleted": "Սերիալը ջնջված է։",
+  "size": "Չափս",
+  "Status.ColorHsb": "Գույն (HSV)",
+  "week_of_year": "Տարվա շաբաթ",
+  "new_value": "Նոր արժեք",
+  "events_logger_database": "Իրադարձությունների գրանցողների տվյալների բազա",
+  "volatile_statistics_cache": "Անկայուն վիճակագրության քեշ",
+  "data_storage": "Տվյալների պահեստավորում"
 }

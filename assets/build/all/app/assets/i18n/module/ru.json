@@ -12,5 +12,7 @@
   "stats.six_hours": "6 часов",
   "stats.twelve_hours": "12 часов",
   "stats.twentyfour_hours": "24 часа",
-  "stats.chart_provider": "Поставщик диаграмм"
+  "stats.chart_provider": "Поставщик диаграмм",
+  "stats.five_minutes": "5 минут",
+  "stats.fifteen_minutes": "15 минут"
 }

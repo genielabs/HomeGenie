@@ -414,5 +414,12 @@
   "Status.Level": "Kiwango",
   "chart": "Chati",
   "new_series_added": "Mfululizo mpya umeongezwa.",
-  "series_deleted": "Mfululizo umefutwa."
+  "series_deleted": "Mfululizo umefutwa.",
+  "size": "Ukubwa",
+  "Status.ColorHsb": "Rangi (HSV)",
+  "week_of_year": "Wiki ya Mwaka",
+  "new_value": "Thamani Mpya",
+  "events_logger_database": "Hifadhidata ya Kirekodi cha Matukio",
+  "volatile_statistics_cache": "Akiba ya Takwimu Tete",
+  "data_storage": "Hifadhi ya Data"
 }

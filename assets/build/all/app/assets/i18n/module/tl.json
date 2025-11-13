@@ -12,5 +12,7 @@
   "stats.six_hours": "6 na oras",
   "stats.twelve_hours": "12 oras",
   "stats.twentyfour_hours": "24 na oras",
-  "stats.chart_provider": "Tagabigay ng tsart"
+  "stats.chart_provider": "Tagabigay ng tsart",
+  "stats.five_minutes": "5 minuto",
+  "stats.fifteen_minutes": "15 minuto"
 }

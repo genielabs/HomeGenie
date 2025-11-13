@@ -414,5 +414,12 @@
   "Status.Level": "Tase",
   "chart": "Diagramm",
   "new_series_added": "Uus sari lisatud.",
-  "series_deleted": "Seeria kustutatud."
+  "series_deleted": "Seeria kustutatud.",
+  "size": "Suurus",
+  "Status.ColorHsb": "Värv (HSV)",
+  "week_of_year": "Aasta nädal",
+  "new_value": "Uus väärtus",
+  "events_logger_database": "Sündmuste logija andmebaas",
+  "volatile_statistics_cache": "Lenduv statistika vahemälu",
+  "data_storage": "Andmete salvestamine"
 }

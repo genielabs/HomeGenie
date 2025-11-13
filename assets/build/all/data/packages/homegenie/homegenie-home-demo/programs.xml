@@ -12,7 +12,7 @@ hg.pause(1);
 motionSensor.emit(motionDetect, "0");
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -42,7 +42,7 @@ var currentValue = doorSensor.parameter(doorWindow).decimalValue;
 doorSensor.emit(doorWindow, currentValue == 0 ? "1" : "0", "");
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -155,6 +155,9 @@ while (Program.IsRunning) {
   });
 
   // Meter.Watts
+  // REMINDER: Emitting the calculated value (including 0.0) is essential to ensure 
+  // accurate historical logging. Zero values must be logged at regular intervals 
+  // to correctly calculate average consumption when the device is off.
   featureModules = Modules.WithFeature("Simulator." + WATTS_FIELD);
   featureModules.Each( (module) =&gt; {
     var frequency = module.Parameter(EMIT_FREQUENCY_FIELD);
@@ -167,28 +170,23 @@ while (Program.IsRunning) {
         double variation = (new Random().NextDouble() - 0.5) / 2;
         value += variation;
       }
-      if (field.DecimalValue == 0 &amp;&amp; value &gt; 0) {
-        module.Emit(WATTS_FIELD, 0);
-      }
-      if (value &gt; 0 || field.DecimalValue != 0) {
-	      module.Emit(WATTS_FIELD, Math.Round(value, 2));
-      }
+      module.Emit(WATTS_FIELD, Math.Round(value, 2));
     }
     return false; // continue iterating
   });
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>sensor-simulator</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>74C519FB95CBEBAEB277E78BF4D3BF91</Checksum>
+      <Checksum>2E96D496F2AFD6B1EB2BBEF7029E8202</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>410</Address>
@@ -615,7 +613,7 @@ function initialize() {
   }
 }</ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

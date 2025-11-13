@@ -12,5 +12,7 @@
   "stats.six_hours": "6 maola",
   "stats.twelve_hours": "12 maola",
   "stats.twentyfour_hours": "24 maola",
-  "stats.chart_provider": "Wopereka ma chart"
+  "stats.chart_provider": "Wopereka ma chart",
+  "stats.five_minutes": "Mphindi 5",
+  "stats.fifteen_minutes": "Mphindi 15"
 }

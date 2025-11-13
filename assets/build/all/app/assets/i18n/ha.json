@@ -414,5 +414,12 @@
   "Status.Level": "Mataki",
   "chart": "Chart",
   "new_series_added": "An ƙara sabon jerin.",
-  "series_deleted": "An share jerin."
+  "series_deleted": "An share jerin.",
+  "size": "Girman",
+  "Status.ColorHsb": "Launi (HSV)",
+  "week_of_year": "Makon Shekara",
+  "new_value": "Sabon Daraja",
+  "events_logger_database": "Database Logger Events",
+  "volatile_statistics_cache": "Ƙididdiga maras tabbas",
+  "data_storage": "Adana Bayanai"
 }
