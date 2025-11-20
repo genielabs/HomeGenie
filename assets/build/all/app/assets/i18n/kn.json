@@ -421,5 +421,16 @@
   "new_value": "ಹೊಸ ಮೌಲ್ಯ",
   "events_logger_database": "ಈವೆಂಟ್‌ಗಳ ಲಾಗರ್ ಡೇಟಾಬೇಸ್",
   "volatile_statistics_cache": "ಬಾಷ್ಪಶೀಲ ಅಂಕಿಅಂಶಗಳ ಸಂಗ್ರಹ",
-  "data_storage": "ಡೇಟಾ ಸಂಗ್ರಹಣೆ"
+  "data_storage": "ಡೇಟಾ ಸಂಗ್ರಹಣೆ",
+  "none": "ಯಾವುದೂ ಇಲ್ಲ",
+  "SimpleAverage": "ಸರಳ ಸರಾಸರಿ",
+  "MovingAverage": "ಚಲಿಸುವ ಸರಾಸರಿ",
+  "SavitzkyGolay": "ಸ್ಯಾವಿಟ್ಜ್ಕಿ–ಗೋಲೆ",
+  "data_object": "ಡೇಟಾ ವಸ್ತು",
+  "thermostat_mode": "ಥರ್ಮೋಸ್ಟಾಟ್ ಮೋಡ್",
+  "deactivated": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ",
+  "activate": "ಸಕ್ರಿಯಗೊಳಿಸಿ",
+  "deactivate": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+  "detected": "ಪತ್ತೆಯಾಗಿದೆ",
+  "alarmed": "ಎಚ್ಚರಿಕೆ ನೀಡಲಾಗಿದೆ"
 }

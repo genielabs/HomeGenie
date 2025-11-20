@@ -421,5 +421,16 @@
   "new_value": "Nouvo Valè",
   "events_logger_database": "Baz Done Anrejistrè Evènman yo",
   "volatile_statistics_cache": "Kach Estatistik Volatil",
-  "data_storage": "Depo Done"
+  "data_storage": "Depo Done",
+  "none": "Okenn",
+  "SimpleAverage": "Mwayèn Senp",
+  "MovingAverage": "Mwayèn mobil",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objè Done",
+  "thermostat_mode": "Mòd Tèmosta",
+  "deactivated": "Dezaktive",
+  "activate": "Aktive",
+  "deactivate": "Dezaktive",
+  "detected": "Detekte",
+  "alarmed": "Alam"
 }

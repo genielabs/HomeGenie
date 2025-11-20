@@ -421,5 +421,16 @@
   "new_value": "Neie Wäert",
   "events_logger_database": "Eventlogger Datebank",
   "volatile_statistics_cache": "Volatil Statistik Cache",
-  "data_storage": "Datenspeicherung"
+  "data_storage": "Datenspeicherung",
+  "none": "Keen",
+  "SimpleAverage": "Einfache Duerchschnëtt",
+  "MovingAverage": "Gleitende Duerchschnëtt",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Datenobjekt",
+  "thermostat_mode": "Thermostatmodus",
+  "deactivated": "Deaktivéiert",
+  "activate": "Aktivéieren",
+  "deactivate": "Deaktivéieren",
+  "detected": "Detektéiert",
+  "alarmed": "Alarméiert"
 }

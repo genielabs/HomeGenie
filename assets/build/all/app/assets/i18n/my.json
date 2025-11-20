@@ -421,5 +421,16 @@
   "new_value": "တန်ဖိုးအသစ်",
   "events_logger_database": "Events Logger Database",
   "volatile_statistics_cache": "Volatile Statistics Cache",
-  "data_storage": "ဒေတာသိုလှောင်မှု"
+  "data_storage": "ဒေတာသိုလှောင်မှု",
+  "none": "တစ်ခုမှ",
+  "SimpleAverage": "ရိုးရှင်းသောပျမ်းမျှ",
+  "MovingAverage": "ပျမ်းမျှရွေ့လျား",
+  "SavitzkyGolay": "Switzky-Golay",
+  "data_object": "Data Object ပါ။",
+  "thermostat_mode": "အပူချိန်ထိန်းကိရိယာမုဒ်",
+  "deactivated": "ပိတ်ထားသည်။",
+  "activate": "အသက်သွင်းပါ။",
+  "deactivate": "ပိတ်လိုက်ပါ။",
+  "detected": "စစ်ဆေးတွေ့ရှိခဲ့သည်။",
+  "alarmed": "အထိတ်တလန့်"
 }

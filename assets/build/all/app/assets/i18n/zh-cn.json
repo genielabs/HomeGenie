@@ -421,5 +421,16 @@
   "new_value": "新价值",
   "events_logger_database": "事件日志数据库",
   "volatile_statistics_cache": "易失性统计缓存",
-  "data_storage": "数据存储"
+  "data_storage": "数据存储",
+  "none": "没有任何",
+  "SimpleAverage": "简单平均法",
+  "MovingAverage": "移动平均线",
+  "SavitzkyGolay": "萨维茨基-戈莱",
+  "data_object": "数据对象",
+  "thermostat_mode": "恒温器模式",
+  "deactivated": "已停用",
+  "activate": "激活",
+  "deactivate": "停用",
+  "detected": "已检测到",
+  "alarmed": "惊慌"
 }

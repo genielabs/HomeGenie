@@ -421,5 +421,16 @@
   "new_value": "Uara Hou",
   "events_logger_database": "Raraunga Raraunga Takahanga",
   "volatile_statistics_cache": "Keteroki Tauanga Pukarere",
-  "data_storage": "Rokiroki Raraunga"
+  "data_storage": "Rokiroki Raraunga",
+  "none": "Karekau",
+  "SimpleAverage": "Wawaenga Maama",
+  "MovingAverage": "Wawaenga Nuku",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Ahanoa Raraunga",
+  "thermostat_mode": "Aratau Thermostat",
+  "deactivated": "Kua whakakorehia",
+  "activate": "Whakahohe",
+  "deactivate": "Whakawetohia",
+  "detected": "Kua kitea",
+  "alarmed": "Maharahara"
 }

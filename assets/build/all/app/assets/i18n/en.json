@@ -420,5 +420,16 @@
   "new_value": "New Value",
   "events_logger_database": "Events Logger Database",
   "volatile_statistics_cache": "Volatile Statistics Cache",
-  "data_storage": "Data Storage"
+  "data_storage": "Data Storage",
+  "none": "None",
+  "SimpleAverage": "Simple Average",
+  "MovingAverage": "Moving Average",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Data Object",
+  "thermostat_mode": "Thermostat Mode",
+  "deactivated": "Deactivated",
+  "activate": "Activate",
+  "deactivate": "Deactivate",
+  "detected": "Detected",
+  "alarmed": "Alarmed"
 }

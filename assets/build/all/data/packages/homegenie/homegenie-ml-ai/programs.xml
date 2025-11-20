@@ -812,7 +812,15 @@ try
                         }
                         if (filtered.Count &gt; 0)
                         {
-                            module.Emit(ObjectDetect, "1");
+                            if (module.Parameter(ObjectDetect).DecimalValue != filtered.Count) 
+                            {
+                                module.Emit(ObjectDetect, filtered.Count);
+                            }
+                            else
+                            {
+                                // update value and timestamp only, do not emit event
+                                module.Parameter(ObjectDetect).SetData(filtered.Count);   
+                            }
                             foreach (var r in filtered)
                             {
                                 output.Add(new SegmentResult(){
@@ -821,7 +829,10 @@ try
                                 });
                                 module.Emit(ObjectDetectSubject, r);
                             }
-                            module.Emit(ObjectDetect, "0");
+                        }
+                        else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5) 
+                        {
+                            module.Emit(ObjectDetect, 0);
                         }
                     }
                     else
@@ -984,16 +995,16 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     return contour;
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>instance-segmentation</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>00719B2E60B2F8475660021B26C59070</Checksum>
+      <Checksum>C66626FF29C68B321C6563E3BB3872D6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>912</Address>
@@ -1351,7 +1362,6 @@ Simply provide the path to a GGUF format model file. Please note that adjustment
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var inputModules = Modules.WithFeature( ObjectDetection );
-
 // Restart program if configuration has been changed to apply new settings.
 When.ModuleParameterChanged( (module, property) =&gt; {
     if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions."))
@@ -1417,13 +1427,24 @@ try
                         }
                         if (filtered.Count &gt; 0)
                         {
-                            module.Emit(ObjectDetect, "1");
+                            if (module.Parameter(ObjectDetect).DecimalValue != filtered.Count) 
+                            {
+                                module.Emit(ObjectDetect, filtered.Count);
+                            }
+                            else
+                            {
+                                // update value and timestamp only, do not emit event
+                                module.Parameter(ObjectDetect).SetData(filtered.Count);   
+                            }
                             foreach (var r in filtered)
                             {
                                 module.Emit(ObjectDetectSubject, r);
                             }
-                            module.Emit(ObjectDetect, "0");
                             jsonResults = JsonConvert.SerializeObject(filtered);
+                        }
+                        else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5) 
+                        {
+                            module.Emit(ObjectDetect, 0);
                         }
                     }
                     else
@@ -1468,16 +1489,16 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>object-detection</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>25864EC9FD1DDD23D766A6120AAD047B</Checksum>
+      <Checksum>B7CA86D23DC7EE4520DA0284DF0AC368</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
@@ -1562,22 +1583,34 @@ try
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
             try
             {
+                var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
                 var result = detectPredictor.Pose((byte[])data);
                 //Console.WriteLine($"Result: {result}");
                 //Console.WriteLine($"Speed:  {result.Speed}");
                 if (result.Count() &gt; 0)
                 {
                     var jsonResults = JsonConvert.SerializeObject(result);
-                    var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
                     // Emit json data for the video player (overlay data)
                     module.Emit(VideoPlayerWidgetOverlayPose, jsonResults);
 
-                    module.Emit(ObjectDetect, "1");
+                    if (module.Parameter(ObjectDetect).DecimalValue != result.Count) 
+                    {
+                        module.Emit(ObjectDetect, result.Count);
+                    }
+                    else
+                    {
+                        // update value and timestamp only, do not emit event
+                        module.Parameter(ObjectDetect).SetData(result.Count);   
+                    }
+
                     foreach (var r in result)
                     {
                         module.Emit(ObjectDetectSubject, r);
                     }
-                    module.Emit(ObjectDetect, "0");
+                }
+                else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5) 
+                {
+                    module.Emit(ObjectDetect, 0);
                 }
             }
             catch (Exception e)
@@ -1609,16 +1642,16 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>pose-estimation</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>FB5034E061C398DFC73251D0C622CA4B</Checksum>
+      <Checksum>F67AAB91A888270A27A447F8728A1701</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>911</Address>

@@ -421,5 +421,16 @@
   "new_value": "نوی ارزښت",
   "events_logger_database": "د پیښو لوګر ډیټابیس",
   "volatile_statistics_cache": "بې ثباته احصایې زیرمه",
-  "data_storage": "د معلوماتو ذخیره کول"
+  "data_storage": "د معلوماتو ذخیره کول",
+  "none": "هیڅ نه",
+  "SimpleAverage": "ساده اوسط",
+  "MovingAverage": "د حرکت اوسط",
+  "SavitzkyGolay": "ساویتزکي – ګولای",
+  "data_object": "د معلوماتو څیز",
+  "thermostat_mode": "د ترموسټاټ حالت",
+  "deactivated": "غیر فعال شوی",
+  "activate": "فعال کړئ",
+  "deactivate": "غیر فعال کړئ",
+  "detected": "کشف شو",
+  "alarmed": "وارخطا"
 }

@@ -421,5 +421,16 @@
   "new_value": "Uusi arvo",
   "events_logger_database": "Tapahtumalokitietokanta",
   "volatile_statistics_cache": "Haihtuvien tilastojen välimuisti",
-  "data_storage": "Tietojen tallennus"
+  "data_storage": "Tietojen tallennus",
+  "none": "Ei mitään",
+  "SimpleAverage": "Yksinkertainen keskiarvo",
+  "MovingAverage": "Liukuva keskiarvo",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Tieto-objekti",
+  "thermostat_mode": "Termostaattitila",
+  "deactivated": "Deaktivoitu",
+  "activate": "Aktivoida",
+  "deactivate": "Deaktivoi",
+  "detected": "Havaittu",
+  "alarmed": "Hälyssä"
 }

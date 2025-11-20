@@ -421,5 +421,16 @@
   "new_value": "Uus väärtus",
   "events_logger_database": "Sündmuste logija andmebaas",
   "volatile_statistics_cache": "Lenduv statistika vahemälu",
-  "data_storage": "Andmete salvestamine"
+  "data_storage": "Andmete salvestamine",
+  "none": "Puudub",
+  "SimpleAverage": "Lihtne keskmine",
+  "MovingAverage": "Liikuv keskmine",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Andmeobjekt",
+  "thermostat_mode": "Termostaadi režiim",
+  "deactivated": "Deaktiveeritud",
+  "activate": "Aktiveeri",
+  "deactivate": "Deaktiveeri",
+  "detected": "Tuvastatud",
+  "alarmed": "Ärevil"
 }

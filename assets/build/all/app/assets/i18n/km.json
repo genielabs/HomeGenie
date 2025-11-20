@@ -421,5 +421,16 @@
   "new_value": "តម្លៃថ្មី។",
   "events_logger_database": "Events Logger Database",
   "volatile_statistics_cache": "ឃ្លាំងសម្ងាត់ស្ថិតិងាយនឹងបង្កជាហេតុ",
-  "data_storage": "ការផ្ទុកទិន្នន័យ"
+  "data_storage": "ការផ្ទុកទិន្នន័យ",
+  "none": "គ្មាន",
+  "SimpleAverage": "មធ្យមសាមញ្ញ",
+  "MovingAverage": "ផ្លាស់ទីជាមធ្យម",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "វត្ថុទិន្នន័យ",
+  "thermostat_mode": "របៀបកម្តៅ",
+  "deactivated": "បិទដំណើរការ",
+  "activate": "ធ្វើឱ្យសកម្ម",
+  "deactivate": "អសកម្ម",
+  "detected": "បានរកឃើញ",
+  "alarmed": "តក់ស្លុត"
 }

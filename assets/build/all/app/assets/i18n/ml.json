@@ -421,5 +421,16 @@
   "new_value": "പുതിയ മൂല്യം",
   "events_logger_database": "ഇവന്റ് ലോഗർ ഡാറ്റാബേസ്",
   "volatile_statistics_cache": "വോളറ്റൈൽ സ്റ്റാറ്റിസ്റ്റിക്സ് കാഷെ",
-  "data_storage": "ഡാറ്റ സംഭരണം"
+  "data_storage": "ഡാറ്റ സംഭരണം",
+  "none": "ഒന്നുമില്ല",
+  "SimpleAverage": "സിമ്പിൾ ആവറേജ്",
+  "MovingAverage": "മൂവിംഗ് ആവറേജ്",
+  "SavitzkyGolay": "സാവിറ്റ്സ്കി–ഗോലെ",
+  "data_object": "ഡാറ്റ ഒബ്ജക്റ്റ്",
+  "thermostat_mode": "തെർമോസ്റ്റാറ്റ് മോഡ്",
+  "deactivated": "നിർജ്ജീവമാക്കി",
+  "activate": "സജീവമാക്കുക",
+  "deactivate": "നിർജ്ജീവമാക്കുക",
+  "detected": "കണ്ടെത്തി",
+  "alarmed": "പരിഭ്രാന്തി"
 }

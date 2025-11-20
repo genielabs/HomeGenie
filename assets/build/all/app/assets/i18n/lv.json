@@ -421,5 +421,16 @@
   "new_value": "Jauna vērtība",
   "events_logger_database": "Notikumu reģistrētāja datubāze",
   "volatile_statistics_cache": "Gaistošās statistikas kešatmiņa",
-  "data_storage": "Datu glabāšana"
+  "data_storage": "Datu glabāšana",
+  "none": "Neviens",
+  "SimpleAverage": "Vienkāršs vidējais",
+  "MovingAverage": "Slīdošais vidējais",
+  "SavitzkyGolay": "Savickis-Golajs",
+  "data_object": "Datu objekts",
+  "thermostat_mode": "Termostata režīms",
+  "deactivated": "Deaktivizēts",
+  "activate": "Aktivizēt",
+  "deactivate": "Deaktivizēt",
+  "detected": "Atklāts",
+  "alarmed": "Satraukts"
 }

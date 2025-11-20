@@ -421,5 +421,16 @@
   "new_value": "Yeni Dəyər",
   "events_logger_database": "Hadisələr qeyd edən verilənlər bazası",
   "volatile_statistics_cache": "Dəyişən Statistika Keşi",
-  "data_storage": "Məlumat Saxlama"
+  "data_storage": "Məlumat Saxlama",
+  "none": "Heç biri",
+  "SimpleAverage": "Sadə Orta",
+  "MovingAverage": "Hərəkətli Orta",
+  "SavitzkyGolay": "Savitzky – Qolay",
+  "data_object": "Məlumat obyekti",
+  "thermostat_mode": "Termostat rejimi",
+  "deactivated": "Deaktiv edilib",
+  "activate": "Aktivləşdirin",
+  "deactivate": "Deaktiv edin",
+  "detected": "Aşkarlandı",
+  "alarmed": "Həyəcanlı"
 }

@@ -421,5 +421,16 @@
   "new_value": "新しい価値",
   "events_logger_database": "イベントロガーデータベース",
   "volatile_statistics_cache": "揮発性統計キャッシュ",
-  "data_storage": "データストレージ"
+  "data_storage": "データストレージ",
+  "none": "なし",
+  "SimpleAverage": "単純平均",
+  "MovingAverage": "移動平均",
+  "SavitzkyGolay": "サヴィツキー・ゴレイ",
+  "data_object": "データオブジェクト",
+  "thermostat_mode": "サーモスタットモード",
+  "deactivated": "非アクティブ化",
+  "activate": "活性化",
+  "deactivate": "無効化",
+  "detected": "検出",
+  "alarmed": "警戒"
 }

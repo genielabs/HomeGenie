@@ -421,5 +421,16 @@
   "new_value": "Luach Nua",
   "events_logger_database": "Bunachar Sonraí Logálaí Imeachtaí",
   "volatile_statistics_cache": "Taisce Staitisticí Luaineacha",
-  "data_storage": "Stóráil Sonraí"
+  "data_storage": "Stóráil Sonraí",
+  "none": "Dada",
+  "SimpleAverage": "Meán Simplí",
+  "MovingAverage": "Meán Bogtha",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Réada Sonraí",
+  "thermostat_mode": "Mód Teirmeastait",
+  "deactivated": "Díghníomhachtaithe",
+  "activate": "Gníomhachtaigh",
+  "deactivate": "Díghníomhachtaigh",
+  "detected": "Braiteadh",
+  "alarmed": "Scaoilte"
 }

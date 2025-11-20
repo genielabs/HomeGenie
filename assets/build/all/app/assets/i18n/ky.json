@@ -421,5 +421,16 @@
   "new_value": "Жаңы баалуулук",
   "events_logger_database": "Events Logger маалымат базасы",
   "volatile_statistics_cache": "Туруктуу статистикалык кэш",
-  "data_storage": "Маалыматтарды сактоо"
+  "data_storage": "Маалыматтарды сактоо",
+  "none": "Жок",
+  "SimpleAverage": "Жөнөкөй орточо",
+  "MovingAverage": "Кыймылдуу орточо",
+  "SavitzkyGolay": "Савицки-Голай",
+  "data_object": "Маалымат объектиси",
+  "thermostat_mode": "Термостат режими",
+  "deactivated": "Өчүрүлгөн",
+  "activate": "Иштетүү",
+  "deactivate": "Өчүрүү",
+  "detected": "Аныкталды",
+  "alarmed": "Кооптуу"
 }

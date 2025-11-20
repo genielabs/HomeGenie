@@ -421,5 +421,16 @@
   "new_value": "Giá trị mới",
   "events_logger_database": "Cơ sở dữ liệu ghi nhật ký sự kiện",
   "volatile_statistics_cache": "Bộ nhớ đệm thống kê dễ bay hơi",
-  "data_storage": "Lưu trữ dữ liệu"
+  "data_storage": "Lưu trữ dữ liệu",
+  "none": "Không có",
+  "SimpleAverage": "Trung bình đơn giản",
+  "MovingAverage": "Đường trung bình động",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Đối tượng dữ liệu",
+  "thermostat_mode": "Chế độ điều chỉnh nhiệt độ",
+  "deactivated": "Đã hủy kích hoạt",
+  "activate": "Kích hoạt",
+  "deactivate": "Hủy kích hoạt",
+  "detected": "Đã phát hiện",
+  "alarmed": "Báo động"
 }

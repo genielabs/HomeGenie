@@ -421,5 +421,16 @@
   "new_value": "قيمة جديدة",
   "events_logger_database": "قاعدة بيانات مسجل الأحداث",
   "volatile_statistics_cache": "ذاكرة التخزين المؤقت للإحصائيات المتقلبة",
-  "data_storage": "تخزين البيانات"
+  "data_storage": "تخزين البيانات",
+  "none": "لا أحد",
+  "SimpleAverage": "المتوسط البسيط",
+  "MovingAverage": "المتوسط المتحرك",
+  "SavitzkyGolay": "سافيتسكي-جولاي",
+  "data_object": "كائن البيانات",
+  "thermostat_mode": "وضع الترموستات",
+  "deactivated": "تم إلغاء تنشيطه",
+  "activate": "فعل",
+  "deactivate": "إلغاء التنشيط",
+  "detected": "مُكتَشَف",
+  "alarmed": "منزعج"
 }

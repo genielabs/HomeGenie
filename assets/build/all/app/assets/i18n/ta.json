@@ -421,5 +421,16 @@
   "new_value": "புதிய மதிப்பு",
   "events_logger_database": "நிகழ்வுகள் பதிவர் தரவுத்தளம்",
   "volatile_statistics_cache": "ஆவியாகும் புள்ளிவிவரங்கள் தற்காலிக சேமிப்பு",
-  "data_storage": "தரவு சேமிப்பு"
+  "data_storage": "தரவு சேமிப்பு",
+  "none": "யாரும் இல்லை",
+  "SimpleAverage": "எளிய சராசரி",
+  "MovingAverage": "நகரும் சராசரி",
+  "SavitzkyGolay": "சாவிட்ஸ்கி–கோலே",
+  "data_object": "தரவு பொருள்",
+  "thermostat_mode": "தெர்மோஸ்டாட் பயன்முறை",
+  "deactivated": "முடக்கப்பட்டது",
+  "activate": "செயல்படுத்து",
+  "deactivate": "செயலிழக்கச் செய்",
+  "detected": "கண்டறியப்பட்டது",
+  "alarmed": "எச்சரிக்கை"
 }

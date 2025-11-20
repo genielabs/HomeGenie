@@ -421,5 +421,16 @@
   "new_value": "Yangi qiymat",
   "events_logger_database": "Voqealar jurnali ma'lumotlar bazasi",
   "volatile_statistics_cache": "O'zgaruvchan statistika keshi",
-  "data_storage": "Ma'lumotlarni saqlash"
+  "data_storage": "Ma'lumotlarni saqlash",
+  "none": "Yo'q",
+  "SimpleAverage": "Oddiy o'rtacha",
+  "MovingAverage": "Harakatlanuvchi oʻrtacha",
+  "SavitzkyGolay": "Savitskiy-Golay",
+  "data_object": "Ma'lumotlar ob'ekti",
+  "thermostat_mode": "Termostat rejimi",
+  "deactivated": "Oʻchirilgan",
+  "activate": "Faollashtirish",
+  "deactivate": "Faolsizlantirish",
+  "detected": "Aniqlandi",
+  "alarmed": "Xavotirlangan"
 }

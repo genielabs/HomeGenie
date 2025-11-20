@@ -421,5 +421,16 @@
   "new_value": "Thamani Mpya",
   "events_logger_database": "Hifadhidata ya Kirekodi cha Matukio",
   "volatile_statistics_cache": "Akiba ya Takwimu Tete",
-  "data_storage": "Hifadhi ya Data"
+  "data_storage": "Hifadhi ya Data",
+  "none": "Hakuna",
+  "SimpleAverage": "Rahisi Wastani",
+  "MovingAverage": "Wastani wa Kusonga",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Kitu cha Data",
+  "thermostat_mode": "Hali ya Thermostat",
+  "deactivated": "Imezimwa",
+  "activate": "Amilisha",
+  "deactivate": "Zima",
+  "detected": "Imegunduliwa",
+  "alarmed": "Kushtushwa"
 }

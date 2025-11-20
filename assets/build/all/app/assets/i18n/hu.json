@@ -421,5 +421,16 @@
   "new_value": "Új érték",
   "events_logger_database": "Eseménynaplózó adatbázis",
   "volatile_statistics_cache": "Illékony statisztikai gyorsítótár",
-  "data_storage": "Adattárolás"
+  "data_storage": "Adattárolás",
+  "none": "Egyik sem",
+  "SimpleAverage": "Egyszerű átlag",
+  "MovingAverage": "Mozgóátlag",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Adatobjektum",
+  "thermostat_mode": "Termosztát mód",
+  "deactivated": "Deaktivált",
+  "activate": "Aktiválás",
+  "deactivate": "Deaktiválás",
+  "detected": "Észlelt",
+  "alarmed": "Riasztott"
 }

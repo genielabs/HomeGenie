@@ -421,5 +421,16 @@
   "new_value": "Новая каштоўнасць",
   "events_logger_database": "База дадзеных рэгістратара падзей",
   "volatile_statistics_cache": "Кэш нестабільнай статыстыкі",
-  "data_storage": "Захоўванне дадзеных"
+  "data_storage": "Захоўванне дадзеных",
+  "none": "Няма",
+  "SimpleAverage": "Простае сярэдняе",
+  "MovingAverage": "Слізгальная сярэдняя",
+  "SavitzkyGolay": "Савіцкі-Голай",
+  "data_object": "Аб'ект дадзеных",
+  "thermostat_mode": "Рэжым тэрмастата",
+  "deactivated": "Дэактывавана",
+  "activate": "Актываваць",
+  "deactivate": "Дэактываваць",
+  "detected": "Выяўлена",
+  "alarmed": "Трывожаны"
 }

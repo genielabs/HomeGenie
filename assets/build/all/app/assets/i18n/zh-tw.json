@@ -421,5 +421,16 @@
   "new_value": "新價值",
   "events_logger_database": "事件日誌資料庫",
   "volatile_statistics_cache": "易失性統計緩存",
-  "data_storage": "資料儲存"
+  "data_storage": "資料儲存",
+  "none": "沒有任何",
+  "SimpleAverage": "簡單平均法",
+  "MovingAverage": "移動平均線",
+  "SavitzkyGolay": "薩維茨基-戈萊",
+  "data_object": "資料對象",
+  "thermostat_mode": "恆溫器模式",
+  "deactivated": "已停用",
+  "activate": "啟用設定",
+  "deactivate": "停用",
+  "detected": "已檢測到",
+  "alarmed": "驚慌"
 }

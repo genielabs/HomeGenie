@@ -421,5 +421,16 @@
   "new_value": "নতুন মান",
   "events_logger_database": "ইভেন্ট লগার ডাটাবেস",
   "volatile_statistics_cache": "অস্থির পরিসংখ্যান ক্যাশে",
-  "data_storage": "তথ্য সংগ্রহস্থল"
+  "data_storage": "তথ্য সংগ্রহস্থল",
+  "none": "কোনটিই নয়",
+  "SimpleAverage": "সরল গড়",
+  "MovingAverage": "চলমান গড়",
+  "SavitzkyGolay": "সাভিৎস্কি–গোলে",
+  "data_object": "ডেটা অবজেক্ট",
+  "thermostat_mode": "থার্মোস্ট্যাট মোড",
+  "deactivated": "নিষ্ক্রিয় করা হয়েছে",
+  "activate": "সক্রিয় করুন",
+  "deactivate": "নিষ্ক্রিয় করুন",
+  "detected": "সনাক্ত করা হয়েছে",
+  "alarmed": "শঙ্কিত"
 }

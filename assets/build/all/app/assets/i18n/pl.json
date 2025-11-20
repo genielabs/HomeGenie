@@ -421,5 +421,16 @@
   "new_value": "Nowa wartość",
   "events_logger_database": "Baza danych rejestratora zdarzeń",
   "volatile_statistics_cache": "Pamięć podręczna statystyk lotnych",
-  "data_storage": "Przechowywanie danych"
+  "data_storage": "Przechowywanie danych",
+  "none": "Nic",
+  "SimpleAverage": "Prosta średnia",
+  "MovingAverage": "Średnia ruchoma",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Obiekt danych",
+  "thermostat_mode": "Tryb termostatu",
+  "deactivated": "Dezaktywowany",
+  "activate": "Aktywować",
+  "deactivate": "Dezaktywować",
+  "detected": "Wykryto",
+  "alarmed": "Zaniepokojony"
 }

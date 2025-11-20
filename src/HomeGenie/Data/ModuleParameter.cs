@@ -238,9 +238,9 @@ namespace HomeGenie.Data
         }
 
         /// <summary>
-        /// Gets the idle time (time elapsed since last update).
+        /// Gets the idle time in seconds (time elapsed since last update).
         /// </summary>
-        /// <value>The idle time.</value>
+        /// <value>The idle time (seconds).</value>
         [XmlIgnore, JsonIgnore, BsonIgnore]
         public double IdleTime
         {

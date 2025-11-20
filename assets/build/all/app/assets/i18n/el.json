@@ -421,5 +421,16 @@
   "new_value": "Νέα Αξία",
   "events_logger_database": "Βάση δεδομένων καταγραφής συμβάντων",
   "volatile_statistics_cache": "Cache πτητικών στατιστικών στοιχείων",
-  "data_storage": "Αποθήκευση δεδομένων"
+  "data_storage": "Αποθήκευση δεδομένων",
+  "none": "Κανένας",
+  "SimpleAverage": "Απλός μέσος όρος",
+  "MovingAverage": "Κινητός Μέσος Όρος",
+  "SavitzkyGolay": "Σαβίτσκι-Γκολέι",
+  "data_object": "Αντικείμενο δεδομένων",
+  "thermostat_mode": "Λειτουργία θερμοστάτη",
+  "deactivated": "Απενεργοποιημένο",
+  "activate": "Δραστηριοποιώ",
+  "deactivate": "Απενεργοποίηση",
+  "detected": "Εντοπίστηκε",
+  "alarmed": "Ανησυχημένος"
 }

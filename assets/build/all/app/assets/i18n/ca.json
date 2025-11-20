@@ -421,5 +421,16 @@
   "new_value": "Nou valor",
   "events_logger_database": "Base de dades del registrador d'esdeveniments",
   "volatile_statistics_cache": "Memòria cau d'estadístiques volàtils",
-  "data_storage": "Emmagatzematge de dades"
+  "data_storage": "Emmagatzematge de dades",
+  "none": "Cap",
+  "SimpleAverage": "Mitjana simple",
+  "MovingAverage": "Mitjana mòbil",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objecte de dades",
+  "thermostat_mode": "Mode termòstat",
+  "deactivated": "Desactivat",
+  "activate": "Activa",
+  "deactivate": "Desactiva",
+  "detected": "Detectat",
+  "alarmed": "Alarmat"
 }

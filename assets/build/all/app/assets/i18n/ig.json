@@ -421,5 +421,16 @@
   "new_value": "Uru Ọhụrụ",
   "events_logger_database": "Ebe nchekwa data Logger mmemme",
   "volatile_statistics_cache": "Cache Statistics na-agbanwe agbanwe",
-  "data_storage": "Nchekwa data"
+  "data_storage": "Nchekwa data",
+  "none": "Ọ dịghị",
+  "SimpleAverage": "Nkezi Dị Mfe",
+  "MovingAverage": "Nkezi na-akpụ akpụ",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Ihe data",
+  "thermostat_mode": "Ọnọdụ okpomọkụ",
+  "deactivated": "Agbanyụrụ",
+  "activate": "Mee ka ọ rụọ ọrụ",
+  "deactivate": "Gbanyụọ",
+  "detected": "Achọpụtara",
+  "alarmed": "Ụjọ tụrụ"
 }

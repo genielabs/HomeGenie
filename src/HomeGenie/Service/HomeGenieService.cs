@@ -1098,6 +1098,14 @@ namespace HomeGenie.Service
                             module.DeviceType = ModuleTypes.Program;
                             module.Name = program.Name;
                             module.Description = program.Description;
+                            if (Utility.ModuleParameterGet(module, Properties.ProgramStatus) == null)
+                            {
+                                Utility.ModuleParameterSet(
+                                    module,
+                                    Properties.ProgramStatus,
+                                    !program.IsEnabled ? "Disabled" : program.IsBackground ? "Background" : program.IsRunning ? "Running" : "Idle"
+                                );
+                            }
                         }
                         catch (Exception ex)
                         {

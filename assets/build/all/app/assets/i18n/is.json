@@ -421,5 +421,16 @@
   "new_value": "Nýtt gildi",
   "events_logger_database": "Gagnagrunnur atburðaskráningar",
   "volatile_statistics_cache": "Skyndiminni fyrir sveiflukennda tölfræði",
-  "data_storage": "Gagnageymsla"
+  "data_storage": "Gagnageymsla",
+  "none": "Enginn",
+  "SimpleAverage": "Einfalt meðaltal",
+  "MovingAverage": "Hreyfanlegt meðaltal",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Gagnahlutur",
+  "thermostat_mode": "Hitastillirstilling",
+  "deactivated": "Óvirkt",
+  "activate": "Virkja",
+  "deactivate": "Slökkva á",
+  "detected": "Greint",
+  "alarmed": "Viðvörun"
 }

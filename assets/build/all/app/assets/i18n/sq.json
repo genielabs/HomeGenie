@@ -421,5 +421,16 @@
   "new_value": "Vlerë e Re",
   "events_logger_database": "Baza e të dhënave e Regjistruesit të Ngjarjeve",
   "volatile_statistics_cache": "Memoria e përkohshme e statistikave të paqëndrueshme",
-  "data_storage": "Ruajtja e të dhënave"
+  "data_storage": "Ruajtja e të dhënave",
+  "none": "Asnjë",
+  "SimpleAverage": "Mesatarja e thjeshtë",
+  "MovingAverage": "Mesatarja Lëvizëse",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objekti i të dhënave",
+  "thermostat_mode": "Modaliteti i termostatit",
+  "deactivated": "Çaktivizuar",
+  "activate": "Aktivizo",
+  "deactivate": "Çaktivizo",
+  "detected": "U zbulua",
+  "alarmed": "I alarmuar"
 }

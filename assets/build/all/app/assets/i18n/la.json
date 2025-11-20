@@ -421,5 +421,16 @@
   "new_value": "Novum Valorem",
   "events_logger_database": "Index Eventuum",
   "volatile_statistics_cache": "Cella Statistica Volatilis",
-  "data_storage": "Repositorium Datorum"
+  "data_storage": "Repositorium Datorum",
+  "none": "Nullus",
+  "SimpleAverage": "Simplex Media",
+  "MovingAverage": "Media Mobilis",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Obiectum Datorum",
+  "thermostat_mode": "Modus Thermostaticus",
+  "deactivated": "Inactivatus",
+  "activate": "Activa",
+  "deactivate": "Deactivare",
+  "detected": "Detectum",
+  "alarmed": "Perterritus"
 }

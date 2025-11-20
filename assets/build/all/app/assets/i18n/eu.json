@@ -421,5 +421,16 @@
   "new_value": "Balio Berria",
   "events_logger_database": "Gertaeren erregistroaren datu-basea",
   "volatile_statistics_cache": "Estatistika-katxe aldakorra",
-  "data_storage": "Datuen biltegiratzea"
+  "data_storage": "Datuen biltegiratzea",
+  "none": "Bat ere ez",
+  "SimpleAverage": "Batez besteko sinplea",
+  "MovingAverage": "Batez besteko mugikorra",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Datu-objektua",
+  "thermostat_mode": "Termostato modua",
+  "deactivated": "Desaktibatuta",
+  "activate": "Aktibatu",
+  "deactivate": "Desaktibatu",
+  "detected": "Detektatua",
+  "alarmed": "Alarmatuta"
 }

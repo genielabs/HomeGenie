@@ -421,5 +421,16 @@
   "new_value": "Нова стойност",
   "events_logger_database": "База данни за регистриране на събития",
   "volatile_statistics_cache": "Кеш за променлива статистика",
-  "data_storage": "Съхранение на данни"
+  "data_storage": "Съхранение на данни",
+  "none": "Няма",
+  "SimpleAverage": "Проста средна стойност",
+  "MovingAverage": "Плъзгаща се средна",
+  "SavitzkyGolay": "Савицки-Голай",
+  "data_object": "Обект с данни",
+  "thermostat_mode": "Режим на термостата",
+  "deactivated": "Деактивирано",
+  "activate": "Активиране",
+  "deactivate": "Деактивиране",
+  "detected": "Открито",
+  "alarmed": "Разтревожен"
 }

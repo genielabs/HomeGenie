@@ -421,5 +421,16 @@
   "new_value": "Nouvelle valeur",
   "events_logger_database": "Base de données du journal des événements",
   "volatile_statistics_cache": "Cache de statistiques volatiles",
-  "data_storage": "stockage de données"
+  "data_storage": "stockage de données",
+  "none": "Aucun",
+  "SimpleAverage": "Moyenne simple",
+  "MovingAverage": "Moyenne mobile",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objet de données",
+  "thermostat_mode": "Mode thermostat",
+  "deactivated": "Désactivé",
+  "activate": "Activer",
+  "deactivate": "Désactiver",
+  "detected": "Détecté",
+  "alarmed": "Alarmé"
 }

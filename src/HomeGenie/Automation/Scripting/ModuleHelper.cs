@@ -21,7 +21,6 @@
  */
 
 using System;
-using System.Threading;
 using HomeGenie.Data;
 using HomeGenie.Service;
 
@@ -193,7 +192,7 @@ namespace HomeGenie.Automation.Scripting
         public StoreHelper Store(string storeName)
         {
             StoreHelper storage = null;
-            if (this.module != null)
+            if (module != null)
             {
                 storage = new StoreHelper(module.Stores, storeName);
             }
@@ -212,8 +211,8 @@ namespace HomeGenie.Automation.Scripting
             try
             {
                 var actionEvent = homegenie.MigService.GetEvent(
-                    this.Instance.Domain,
-                    this.Instance.Address,
+                    Instance.Domain,
+                    Instance.Address,
                     description,
                     parameter,
                     value
@@ -223,8 +222,8 @@ namespace HomeGenie.Automation.Scripting
             catch (Exception ex)
             {
                 HomeGenieService.LogError(
-                    this.Instance.Domain,
-                    this.Instance.Address,
+                    Instance.Domain,
+                    Instance.Address,
                     ex.Message,
                     "Exception.StackTrace",
                     ex.StackTrace

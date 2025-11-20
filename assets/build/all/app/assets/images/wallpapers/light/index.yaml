@@ -1,0 +1,37 @@
+wallpapers:
+
+  - background:
+      file: 01.jpg
+      title: White Squares
+      copyright: ...
+    card:
+      color: "#f6f6f6"
+      opacity: 80
+      blur: 50
+
+  - background:
+      file: 02.jpg
+      title: Blue Dunes
+      copyright: ...
+    card:
+      color: "#f6f6f6"
+      opacity: 50
+      blur: 30
+
+  - background:
+      file: 03.jpg
+      title: Color Shapes
+      copyright: ...
+    card:
+      color: "#f6f6f6"
+      opacity: 50
+      blur: 40
+
+  - background:
+      file: 04.jpg
+      title: Red Shades
+      copyright: ...
+    card:
+      color: "#fffcf0"
+      opacity: 65
+      blur: 50

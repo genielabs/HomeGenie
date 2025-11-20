@@ -421,5 +421,16 @@
   "new_value": "Sabon Daraja",
   "events_logger_database": "Database Logger Events",
   "volatile_statistics_cache": "Ƙididdiga maras tabbas",
-  "data_storage": "Adana Bayanai"
+  "data_storage": "Adana Bayanai",
+  "none": "Babu",
+  "SimpleAverage": "Matsakaici Mai Sauƙi",
+  "MovingAverage": "Matsakaicin Motsi",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Bayanan Bayani",
+  "thermostat_mode": "Yanayin Thermostat",
+  "deactivated": "An kashe",
+  "activate": "Kunna",
+  "deactivate": "Kashe",
+  "detected": "An gano",
+  "alarmed": "A firgice"
 }

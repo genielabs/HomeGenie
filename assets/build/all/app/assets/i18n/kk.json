@@ -421,5 +421,16 @@
   "new_value": "Жаңа мән",
   "events_logger_database": "Оқиғаларды тіркеуші дерекқор",
   "volatile_statistics_cache": "Тұрақты статистикалық кэш",
-  "data_storage": "Деректерді сақтау"
+  "data_storage": "Деректерді сақтау",
+  "none": "Жоқ",
+  "SimpleAverage": "Қарапайым орташа",
+  "MovingAverage": "Жылжымалы орташа",
+  "SavitzkyGolay": "Савицки – Голай",
+  "data_object": "Деректер нысаны",
+  "thermostat_mode": "Термостат режимі",
+  "deactivated": "Өшірілген",
+  "activate": "Іске қосу",
+  "deactivate": "Өшіру",
+  "detected": "Анықталды",
+  "alarmed": "Дабыл"
 }

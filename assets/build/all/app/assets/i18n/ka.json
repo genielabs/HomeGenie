@@ -421,5 +421,16 @@
   "new_value": "ახალი ღირებულება",
   "events_logger_database": "მოვლენების ჟურნალის მონაცემთა ბაზა",
   "volatile_statistics_cache": "არასტაბილური სტატისტიკის ქეში",
-  "data_storage": "მონაცემთა შენახვა"
+  "data_storage": "მონაცემთა შენახვა",
+  "none": "არცერთი",
+  "SimpleAverage": "მარტივი საშუალო",
+  "MovingAverage": "მოძრავი საშუალო",
+  "SavitzkyGolay": "სავიცკი-გოლაი",
+  "data_object": "მონაცემთა ობიექტი",
+  "thermostat_mode": "თერმოსტატის რეჟიმი",
+  "deactivated": "დეაქტივირებული",
+  "activate": "გააქტიურება",
+  "deactivate": "დეაქტივაცია",
+  "detected": "აღმოჩენილია",
+  "alarmed": "შეშფოთებული"
 }

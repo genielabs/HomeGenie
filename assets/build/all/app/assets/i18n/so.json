@@ -421,5 +421,16 @@
   "new_value": "Qiimaha Cusub",
   "events_logger_database": "Dhacdooyinka Logger Database",
   "volatile_statistics_cache": "Kaydka Tirakoobka Deggan",
-  "data_storage": "Kaydinta Xogta"
+  "data_storage": "Kaydinta Xogta",
+  "none": "Midna",
+  "SimpleAverage": "Dhexdhexaad Fudud",
+  "MovingAverage": "Celceliska Dhaqdhaqaaqa",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Shayga Xogta",
+  "thermostat_mode": "Qaabka kulaylka",
+  "deactivated": "Demiyey",
+  "activate": "Daar",
+  "deactivate": "Dami",
+  "detected": "La ogaaday",
+  "alarmed": "Ka naxay"
 }

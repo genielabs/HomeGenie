@@ -421,5 +421,16 @@
   "new_value": "Арзиши нав",
   "events_logger_database": "Пойгоҳи додаҳои рӯйдодҳо",
   "volatile_statistics_cache": "Кэши омори идоранашаванда",
-  "data_storage": "Нигоҳдории маълумот"
+  "data_storage": "Нигоҳдории маълумот",
+  "none": "Ҳеҷ",
+  "SimpleAverage": "Миёнаи оддӣ",
+  "MovingAverage": "Миёнаи ҳаракаткунанда",
+  "SavitzkyGolay": "Савицки-Голай",
+  "data_object": "Объекти маълумот",
+  "thermostat_mode": "Ҳолати термостат",
+  "deactivated": "Хомӯш карда шуд",
+  "activate": "Фаъол кардан",
+  "deactivate": "Хомӯш кардан",
+  "detected": "Муайян карда шуд",
+  "alarmed": "Ҳушдор"
 }

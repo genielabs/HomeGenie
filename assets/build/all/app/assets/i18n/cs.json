@@ -421,5 +421,16 @@
   "new_value": "Nová hodnota",
   "events_logger_database": "Databáze záznamníků událostí",
   "volatile_statistics_cache": "Mezipaměť volatilních statistik",
-  "data_storage": "Ukládání dat"
+  "data_storage": "Ukládání dat",
+  "none": "Žádný",
+  "SimpleAverage": "Jednoduchý průměr",
+  "MovingAverage": "Klouzavý průměr",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Datový objekt",
+  "thermostat_mode": "Režim termostatu",
+  "deactivated": "Deaktivováno",
+  "activate": "Aktivovat",
+  "deactivate": "Deaktivovat",
+  "detected": "Detekováno",
+  "alarmed": "Znepokojený"
 }

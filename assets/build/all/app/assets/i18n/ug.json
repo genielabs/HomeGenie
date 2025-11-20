@@ -421,5 +421,16 @@
   "new_value": "يېڭى قىممەت",
   "events_logger_database": "ھادىسە خاتىرىلەش ساندانى",
   "volatile_statistics_cache": "تۇراقسىز ستاتىستىكا ساقلىغۇچ",
-  "data_storage": "سانلىق مەلۇمات ساقلاش"
+  "data_storage": "سانلىق مەلۇمات ساقلاش",
+  "none": "ياق",
+  "SimpleAverage": "ئاددى ئوتتۇرىچە قىممەت",
+  "MovingAverage": "يۆتكىلىشچان ئوتتۇرىچە قىممەت",
+  "SavitzkyGolay": "Savitzky - Golay",
+  "data_object": "سانلىق مەلۇمات ئوبيېكتى",
+  "thermostat_mode": "Thermostat Mode",
+  "deactivated": "ئەمەلدىن قالدۇرۇلدى",
+  "activate": "ئاكتىپلاش",
+  "deactivate": "ئىناۋەتسىز",
+  "detected": "بايقالدى",
+  "alarmed": "ئاگاھلاندۇرۇلدى"
 }

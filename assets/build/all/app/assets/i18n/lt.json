@@ -421,5 +421,16 @@
   "new_value": "Nauja vertė",
   "events_logger_database": "Įvykių registravimo duomenų bazė",
   "volatile_statistics_cache": "Lakiosios statistikos talpykla",
-  "data_storage": "Duomenų saugojimas"
+  "data_storage": "Duomenų saugojimas",
+  "none": "Nėra",
+  "SimpleAverage": "Paprastas vidurkis",
+  "MovingAverage": "Slenkamasis vidurkis",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Duomenų objektas",
+  "thermostat_mode": "Termostato režimas",
+  "deactivated": "Išaktyvinta",
+  "activate": "Aktyvuoti",
+  "deactivate": "Išjungti",
+  "detected": "Aptikta",
+  "alarmed": "Sunerimęs"
 }

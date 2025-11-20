@@ -421,5 +421,16 @@
   "new_value": "Нова вредност",
   "events_logger_database": "База података евиденције догађаја",
   "volatile_statistics_cache": "Кеш меморије за нестабилну статистику",
-  "data_storage": "Складиштење података"
+  "data_storage": "Складиштење података",
+  "none": "Ниједан",
+  "SimpleAverage": "Једноставан просек",
+  "MovingAverage": "Покретни просек",
+  "SavitzkyGolay": "Савицки–Голеј",
+  "data_object": "Објекат података",
+  "thermostat_mode": "Режим термостата",
+  "deactivated": "Деактивирано",
+  "activate": "Активирај",
+  "deactivate": "Деактивирај",
+  "detected": "Откривено",
+  "alarmed": "Узнемирен"
 }

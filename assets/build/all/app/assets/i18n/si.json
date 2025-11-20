@@ -421,5 +421,16 @@
   "new_value": "නව අගය",
   "events_logger_database": "සිදුවීම් ලොගර් දත්ත සමුදාය",
   "volatile_statistics_cache": "වාෂ්පශීලී සංඛ්‍යාලේඛන හැඹිලිය",
-  "data_storage": "දත්ත ගබඩා කිරීම"
+  "data_storage": "දත්ත ගබඩා කිරීම",
+  "none": "කිසිවක් නැත",
+  "SimpleAverage": "සරල සාමාන්‍යය",
+  "MovingAverage": "චලනය වන සාමාන්‍යය",
+  "SavitzkyGolay": "සැවිට්ස්කි–ගෝලේ",
+  "data_object": "දත්ත වස්තුව",
+  "thermostat_mode": "තාප ස්ථාය ප්‍රකාරය",
+  "deactivated": "අක්‍රිය කරන ලදී",
+  "activate": "සක්‍රිය කරන්න",
+  "deactivate": "අක්‍රිය කරන්න",
+  "detected": "අනාවරණය විය",
+  "alarmed": "අනතුරු ඇඟවීය"
 }

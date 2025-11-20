@@ -768,7 +768,7 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow";
+    <ScriptSetup>var sensorTypes = "Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.ObjectDetect,Sensor.Alarm,Sensor.DoorWindow";
 var alarmTypes = "Siren,Light,Dimmer,Color,Switch";
 Program.Setup(() =&gt; {
   Program
@@ -792,31 +792,36 @@ Program.Parameter("EventsLogger.EnableLogging").Value = "On";
 Program.Run();
 </ScriptSetup>
     <ScriptSource>// Events History
-var history = new List&lt;dynamic&gt;();
-var historyLimit = 24; // hours
-var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, param)=&gt;{
-  dynamic evt = new ExpandoObject();
+var historyDataFile = Path.Combine(Data.GetFolder(), "alarm_system_history.dat");
+// Tell HomeGenie to include this data file in system backups
+Data.AddToSystemBackup(historyDataFile);
+// Load saved history
+var history = GetLast48HoursEvents(historyDataFile);
+var historyLimit = 24 * 7; // hours (one week)
+var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, p)=&gt;{
+  var evt = new MigEvent();
   evt.Domain = mod.Domain;
-  evt.Address = mod.Address;
-  evt.Name = mod.Name;
-  evt.Parameter = param.Name;
-  evt.Value = param.Value;
-  evt.Timestamp = param.UpdateTime;
+  evt.Source = mod.Address;
+  evt.Description = mod.Name;
+  evt.Property = p.Name;
+  evt.Value = p.Value;
+  evt.Timestamp = p.UpdateTime;
   // remove any previous event of the same type (the history only keep the last occurrence of a same event)
-  history.RemoveAll(e =&gt; e.Domain == evt.Domain &amp;&amp; e.Address == evt.Address &amp;&amp; e.Parameter == evt.Parameter &amp;&amp; e.Value == evt.Value);
+  history.RemoveAll(e =&gt; e.Domain == evt.Domain &amp;&amp; e.Source == evt.Source &amp;&amp; e.Property == evt.Property &amp;&amp; e.Value.ToString() == evt.Value.ToString());
   history.Add(evt);
   // keeep size within historyLimit (minutes)
   while ((DateTime.UtcNow - history[history.Count - 1].Timestamp).TotalHours &gt; historyLimit)
   {
     history.RemoveAll(sv =&gt; (DateTime.UtcNow - sv.Timestamp).TotalHours &gt; historyLimit);
   }
+  SaveEventsAsync(history, historyDataFile).Wait();
   // this event will cause the widget to update its data
   Program.Emit("Program.UiRefresh", "refresh", "Security system sensor event");
 });
 
 var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
   Program.RunAsyncTask(()=&gt; {
-    if (Program.Parameter("Status.Level").Value == "0")
+    if (Program.Parameter(ModuleEvents.Status_Level).Value == "0")
     {
       // disarming
       Program.Emit("HomeGenie.SecurityTriggered", "0");
@@ -827,13 +832,13 @@ var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
       Pause( Program.Option("System.ArmDelay").DecimalValue );
     }
     var status = "";
-    if (Program.Parameter("Status.Level").Value == "0")
+    if (Program.Parameter(ModuleEvents.Status_Level).Value == "0")
       status = STATUS_DISARMED;
     else
       status = (armHome ? STATUS_ARMED_HOME : STATUS_ARMED_AWAY);
     Program.Emit("HomeGenie.SecurityArmed", status);
     // run armed/disarmed program
-    if (Program.Parameter("Status.Level").Value != "0")
+    if (Program.Parameter(ModuleEvents.Status_Level).Value != "0")
     {
       var armedProgram = Program.Option("Trigger.ArmedProgram").Value;
       if (armedProgram != "")
@@ -853,26 +858,28 @@ var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
 });
 
 // module events handling
-When.ModuleParameterChanged((module, parameter)=&gt; {
+When.ModuleParameterChanged((module, p)=&gt; {
   bool moduleAlarmed = false;
-  if (module.HasFeature("HomeGenie.SecuritySensor")
+  if ((module.HasFeature("HomeGenie.SecuritySensor")
       &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value != "1"
-      &amp;&amp; (   parameter.Name == "Status.Level"
-          || parameter.Name == "Status.DoorLock"
-          || parameter.Name == "Sensor.Generic"
-          || parameter.Name == "Sensor.Alarm"
-          || parameter.Name == "Sensor.Tamper"
-          || parameter.Name == "Sensor.ObjectDetect"
-          || parameter.Name == "Sensor.MotionDetect"
-          || parameter.Name == "Sensor.DoorWindow"
-          || parameter.Name == "Sensor.Flood"
-          || parameter.Name == "Sensor.Smoke"
-          || parameter.Name == "Sensor.Heat"
-          || parameter.Name == "Sensor.CarbonMonoxide"
-          || parameter.Name == "Sensor.CarbonDioxide" ))
+      // for all ModuleEvents see https://github.com/genielabs/mig-homeauto/blob/master/MIG.HomeAutomation/Commons/ModuleEvents.cs
+      &amp;&amp; (   p.Is(ModuleEvents.Status_Level)
+          || p.Is(ModuleEvents.Status_DoorLock)
+          || p.Is(ModuleEvents.Sensor_Generic)
+          || p.Is(ModuleEvents.Sensor_Alarm)
+          || p.Is(ModuleEvents.Sensor_Tamper)
+          || p.Is("Sensor.ObjectDetect")
+          || p.Is(ModuleEvents.Sensor_MotionDetect)
+          || p.Is(ModuleEvents.Sensor_DoorWindow)
+          || p.Is(ModuleEvents.Sensor_Flood)
+          || p.Is(ModuleEvents.Sensor_Smoke)
+          || p.Is(ModuleEvents.Sensor_Heat)
+          || p.Is(ModuleEvents.Sensor_CarbonMonoxide)
+          || p.Is(ModuleEvents.Sensor_CarbonDioxide) ))
+      || (module.Instance == Program.Module &amp;&amp; (p.Is("HomeGenie.SecurityArmed") || p.Is(ModuleEvents.Status_Level))))
   {
-    AddHistoryEvent(module.Instance, parameter);
-    if (parameter.DecimalValue &gt; 0 &amp;&amp; Program.Parameter("HomeGenie.SecurityArmed").Value != STATUS_DISARMED)
+    AddHistoryEvent(module.Instance, p);
+    if (p.DecimalValue &gt; 0 &amp;&amp; Program.Parameter("HomeGenie.SecurityArmed").Value != STATUS_DISARMED)
     {
       if (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_AWAY ||
           (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_HOME &amp;&amp; module.HasFeature("HomeGenie.SecurityTriggerHome")))
@@ -882,11 +889,12 @@ When.ModuleParameterChanged((module, parameter)=&gt; {
   if (moduleAlarmed)
   {
     Program.Emit("HomeGenie.SecurityTriggerSource",
-                       	module.Instance.Name + " " + parameter.Name + " (" +
-                        module.Instance.Domain + "." +
-                        module.Instance.Address + ")"
-                      );
+      module.Instance.Domain + ":" + module.Instance.Address + " (" + module.Instance.Name + ")"
+    );
     Program.Emit("HomeGenie.SecurityTriggered", "1");
+
+    AddHistoryEvent(Program.Module, Program.Parameter("HomeGenie.SecurityTriggered"));
+
     var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
     if (triggeredProgram != "")
     {
@@ -909,18 +917,18 @@ Api.Handle(Program.Module.Domain + "/" + Program.Module.Address, (args) =&gt; {
       {
         case "Control.On":
         case "Control.ArmAway":
-        	Program.Emit("Status.Level", "1");
+        	Program.Emit(ModuleEvents.Status_Level, "1");
         	_armdisarm(false);
         	res = new ResponseText("ARMING AWAY");
         	break;
         case "Control.ArmHome":
-        	Program.Emit("Status.Level", "1");
+        	Program.Emit(ModuleEvents.Status_Level, "1");
         	_armdisarm(true);
         	res = new ResponseText("ARMING HOME");
         	break;
         case "Control.Off":
         case "Control.Disarm":
-        	Program.Emit("Status.Level", "0");
+        	Program.Emit(ModuleEvents.Status_Level, "0");
         	_armdisarm(false);
         	res = new ResponseText("DISARMED");
         	break;
@@ -944,7 +952,7 @@ Api.Handle(Program.Module.Domain + "/" + Program.Module.Address, (args) =&gt; {
 var sirenModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren");
 var alarmModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light,Color");
 
-if (Program.Parameter("Status.Level").Value != "0") {
+if (Program.Parameter(ModuleEvents.Status_Level).Value != "0") {
   var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
   if (triggeredProgram != "")
   {
@@ -1011,17 +1019,43 @@ while (Program.IsRunning)
     <ScriptContext>const string STATUS_DISARMED = "Disarmed";
 const string STATUS_ARMED_AWAY = "Away";
 const string STATUS_ARMED_HOME = "Home";
+
+public async Task SaveEventsAsync(List&lt;MigEvent&gt; events, string filePath)
+{
+    byte[] bytes = MessagePackSerializer.Serialize(events);
+    await File.WriteAllBytesAsync(filePath, bytes);
+}
+
+public async Task&lt;List&lt;MigEvent&gt;&gt; LoadEventsAsync(string filePath)
+{
+    var events = new List&lt;MigEvent&gt;();
+    if (File.Exists(filePath)) {
+        byte[] bytes = await File.ReadAllBytesAsync(filePath);        
+        events = MessagePackSerializer.Deserialize&lt;List&lt;MigEvent&gt;&gt;(bytes);
+    }
+    return events;
+}
+
+public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
+{
+    var allHistory = LoadEventsAsync(dataFilePath).GetAwaiter().GetResult();
+    DateTime cutoffTime = DateTime.UtcNow.AddHours(-48);
+    var recentEvents = allHistory
+        .Where(e =&gt; e.Timestamp &gt;= cutoffTime)
+        .ToList();
+    return recentEvents;
+}
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>security-alarm-system</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>8A0DECD513D880B3AC7D3F1819AC4633</Checksum>
+      <Checksum>D131D8E17D00D7706A7146BE1C4B264E</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1032,14 +1066,14 @@ const string STATUS_ARMED_HOME = "Home";
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
+        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.ObjectDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
         <Property>HomeGenie.SecuritySensor</Property>
         <Description>Use as Security Sensor</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
+        <ForTypes>Sensor,DoorWindow,DoorLock : Status.Level,Sensor.MotionDetect,Sensor.ObjectDetect,Sensor.Alarm,Sensor.DoorWindow</ForTypes>
         <Property>HomeGenie.SecurityTriggerHome</Property>
         <Description>Also trigger when armed Home</Description>
       </ProgramFeature>

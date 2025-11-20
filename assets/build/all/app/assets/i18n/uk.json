@@ -421,5 +421,16 @@
   "new_value": "Нова цінність",
   "events_logger_database": "База даних реєстратора подій",
   "volatile_statistics_cache": "Кеш нестабільної статистики",
-  "data_storage": "Зберігання даних"
+  "data_storage": "Зберігання даних",
+  "none": "Жоден",
+  "SimpleAverage": "Просте середнє",
+  "MovingAverage": "Ковзне середнє",
+  "SavitzkyGolay": "Савіцький–Голей",
+  "data_object": "Об'єкт даних",
+  "thermostat_mode": "Режим термостата",
+  "deactivated": "Деактивовано",
+  "activate": "Активувати",
+  "deactivate": "Деактивувати",
+  "detected": "Виявлено",
+  "alarmed": "Стривжений"
 }

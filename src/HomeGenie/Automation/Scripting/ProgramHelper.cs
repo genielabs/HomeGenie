@@ -679,10 +679,12 @@ namespace HomeGenie.Automation.Scripting
                 Properties.ProgramStatus,
                 "Background"
             );
+            GetProgramBlock().IsBackground = true;
             while (homegenie.ProgramManager.Enabled && this.IsEnabled)
             {
                 Thread.Sleep(1000);
             }
+            GetProgramBlock().IsBackground = false;
         }
 
         /// <summary>

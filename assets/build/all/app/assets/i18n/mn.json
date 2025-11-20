@@ -421,5 +421,16 @@
   "new_value": "Шинэ үнэ цэнэ",
   "events_logger_database": "Үйл явдал бүртгэгчийн мэдээллийн сан",
   "volatile_statistics_cache": "Тогтворгүй статистик кэш",
-  "data_storage": "Өгөгдөл хадгалах"
+  "data_storage": "Өгөгдөл хадгалах",
+  "none": "Байхгүй",
+  "SimpleAverage": "Энгийн дундаж",
+  "MovingAverage": "Хөдөлгөөнт дундаж",
+  "SavitzkyGolay": "Савицки-Голай",
+  "data_object": "Өгөгдлийн объект",
+  "thermostat_mode": "Термостатын горим",
+  "deactivated": "Идэвхгүй болгосон",
+  "activate": "Идэвхжүүлэх",
+  "deactivate": "Идэвхгүй болгох",
+  "detected": "Илэрсэн",
+  "alarmed": "Сэтгэл түгшсэн"
 }

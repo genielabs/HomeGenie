@@ -96,6 +96,8 @@ namespace HomeGenie.Automation
 
         [XmlIgnore, JsonIgnore]
         public bool WillRun { get; set; }
+        [XmlIgnore, JsonIgnore]
+        public bool IsBackground { get; set; }
         [XmlIgnore]
         public bool IsRunning { get; set; }
 

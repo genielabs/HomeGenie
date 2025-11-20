@@ -421,5 +421,16 @@
   "new_value": "Новая ценность",
   "events_logger_database": "База данных регистратора событий",
   "volatile_statistics_cache": "Кэш изменчивой статистики",
-  "data_storage": "Хранение данных"
+  "data_storage": "Хранение данных",
+  "none": "Никто",
+  "SimpleAverage": "Простое среднее",
+  "MovingAverage": "Скользящая средняя",
+  "SavitzkyGolay": "Савицкий–Голей",
+  "data_object": "Объект данных",
+  "thermostat_mode": "Режим термостата",
+  "deactivated": "Деактивировано",
+  "activate": "Активировать",
+  "deactivate": "Деактивировать",
+  "detected": "Обнаружено",
+  "alarmed": "Встревоженный"
 }

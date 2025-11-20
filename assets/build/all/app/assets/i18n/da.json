@@ -421,5 +421,16 @@
   "new_value": "Ny værdi",
   "events_logger_database": "Hændelsesloggerdatabase",
   "volatile_statistics_cache": "Volatil statistikcache",
-  "data_storage": "Datalagring"
+  "data_storage": "Datalagring",
+  "none": "Ingen",
+  "SimpleAverage": "Simpelt gennemsnit",
+  "MovingAverage": "Glidende gennemsnit",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Dataobjekt",
+  "thermostat_mode": "Termostattilstand",
+  "deactivated": "Deaktiveret",
+  "activate": "Aktivér",
+  "deactivate": "Deaktiver",
+  "detected": "Opdaget",
+  "alarmed": "Alarmeret"
 }

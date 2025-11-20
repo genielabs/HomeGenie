@@ -421,5 +421,16 @@
   "new_value": "Mtengo Watsopano",
   "events_logger_database": "Zochitika Logger Database",
   "volatile_statistics_cache": "Posungira Zowerengera Zosasinthika",
-  "data_storage": "Kusungirako Data"
+  "data_storage": "Kusungirako Data",
+  "none": "Palibe",
+  "SimpleAverage": "Avereji Yosavuta",
+  "MovingAverage": "Kusuntha Avereji",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "Chinthu cha Data",
+  "thermostat_mode": "Thermostat Mode",
+  "deactivated": "Zazimitsidwa",
+  "activate": "Yambitsani",
+  "deactivate": "Tsetsani",
+  "detected": "Zapezeka",
+  "alarmed": "Wachita mantha"
 }

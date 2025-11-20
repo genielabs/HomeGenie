@@ -421,5 +421,16 @@
   "new_value": "नवीन मूल्य",
   "events_logger_database": "इव्हेंट लॉगर डेटाबेस",
   "volatile_statistics_cache": "अस्थिर सांख्यिकी कॅशे",
-  "data_storage": "डेटा स्टोरेज"
+  "data_storage": "डेटा स्टोरेज",
+  "none": "काहीही नाही",
+  "SimpleAverage": "साधी सरासरी",
+  "MovingAverage": "मूव्हिंग अॅव्हरेज",
+  "SavitzkyGolay": "सॅविट्झकी-गोले",
+  "data_object": "डेटा ऑब्जेक्ट",
+  "thermostat_mode": "थर्मोस्टॅट मोड",
+  "deactivated": "निष्क्रिय केले",
+  "activate": "सक्रिय करा",
+  "deactivate": "निष्क्रिय करा",
+  "detected": "आढळले",
+  "alarmed": "घाबरले"
 }

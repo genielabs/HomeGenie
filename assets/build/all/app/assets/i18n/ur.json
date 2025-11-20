@@ -421,5 +421,16 @@
   "new_value": "نئی قدر",
   "events_logger_database": "ایونٹس لاگر ڈیٹا بیس",
   "volatile_statistics_cache": "غیر مستحکم شماریات کیش",
-  "data_storage": "ڈیٹا اسٹوریج"
+  "data_storage": "ڈیٹا اسٹوریج",
+  "none": "کوئی نہیں۔",
+  "SimpleAverage": "سادہ اوسط",
+  "MovingAverage": "حرکت پذیری اوسط",
+  "SavitzkyGolay": "Savitzky – Golay",
+  "data_object": "ڈیٹا آبجیکٹ",
+  "thermostat_mode": "تھرموسٹیٹ موڈ",
+  "deactivated": "غیر فعال",
+  "activate": "چالو کریں۔",
+  "deactivate": "غیر فعال کریں۔",
+  "detected": "پتہ چلا",
+  "alarmed": "چوکنا"
 }

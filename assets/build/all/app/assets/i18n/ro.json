@@ -421,5 +421,16 @@
   "new_value": "Valoare nouă",
   "events_logger_database": "Baza de date a jurnalului de evenimente",
   "volatile_statistics_cache": "Memorie cache volatilă pentru statistici",
-  "data_storage": "Stocarea datelor"
+  "data_storage": "Stocarea datelor",
+  "none": "Nici unul",
+  "SimpleAverage": "Medie simplă",
+  "MovingAverage": "Medie mobilă",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Obiect de date",
+  "thermostat_mode": "Mod termostat",
+  "deactivated": "Dezactivat",
+  "activate": "Activa",
+  "deactivate": "Dezactivare",
+  "detected": "Detectat",
+  "alarmed": "Alarmat"
 }

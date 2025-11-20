@@ -421,5 +421,16 @@
   "new_value": "새로운 가치",
   "events_logger_database": "이벤트 로거 데이터베이스",
   "volatile_statistics_cache": "휘발성 통계 캐시",
-  "data_storage": "데이터 저장"
+  "data_storage": "데이터 저장",
+  "none": "없음",
+  "SimpleAverage": "단순 평균",
+  "MovingAverage": "이동 평균",
+  "SavitzkyGolay": "사비츠키-골레이",
+  "data_object": "데이터 객체",
+  "thermostat_mode": "온도 조절 모드",
+  "deactivated": "비활성화됨",
+  "activate": "활성화",
+  "deactivate": "비활성화",
+  "detected": "감지됨",
+  "alarmed": "놀랐다"
 }

@@ -421,5 +421,16 @@
   "new_value": "नयाँ मान",
   "events_logger_database": "घटना लगर डाटाबेस",
   "volatile_statistics_cache": "अस्थिर तथ्याङ्क क्यास",
-  "data_storage": "डेटा भण्डारण"
+  "data_storage": "डेटा भण्डारण",
+  "none": "कुनै पनि होइन",
+  "SimpleAverage": "साधारण औसत",
+  "MovingAverage": "मुभिङ एभरेज",
+  "SavitzkyGolay": "साभित्स्की–गोले",
+  "data_object": "डेटा वस्तु",
+  "thermostat_mode": "थर्मोस्टेट मोड",
+  "deactivated": "निष्क्रिय पारियो",
+  "activate": "सक्रिय गर्नुहोस्",
+  "deactivate": "निष्क्रिय पार्नुहोस्",
+  "detected": "पत्ता लाग्यो",
+  "alarmed": "सचेत"
 }

@@ -421,5 +421,16 @@
   "new_value": "Nirxa Nû",
   "events_logger_database": "Databasa Tomarkera Bûyeran",
   "volatile_statistics_cache": "Keşeya Statîstîkên Guherbar",
-  "data_storage": "Hilanîna Daneyan"
+  "data_storage": "Hilanîna Daneyan",
+  "none": "Netû",
+  "SimpleAverage": "Navînîya Sade",
+  "MovingAverage": "Navînîya Guherbar",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objeya Daneyan",
+  "thermostat_mode": "Moda Termostatê",
+  "deactivated": "Neçalakkirî",
+  "activate": "Çalak bike",
+  "deactivate": "Neçalak bike",
+  "detected": "Tesbîtkirî",
+  "alarmed": "Hişyar bû"
 }

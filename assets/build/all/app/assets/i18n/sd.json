@@ -421,5 +421,16 @@
   "new_value": "نئون قدر",
   "events_logger_database": "ايونٽس لاگر ڊيٽابيس",
   "volatile_statistics_cache": "غير مستحڪم شماريات ڪيش",
-  "data_storage": "ڊيٽا اسٽوريج"
+  "data_storage": "ڊيٽا اسٽوريج",
+  "none": "ڪو به نه",
+  "SimpleAverage": "سادي سراسري",
+  "MovingAverage": "هلندڙ اوسط",
+  "SavitzkyGolay": "ساويتزڪي-گولي",
+  "data_object": "ڊيٽا شئي",
+  "thermostat_mode": "ٿرموسٽٽ موڊ",
+  "deactivated": "غير فعال ٿيل",
+  "activate": "چالو ڪريو",
+  "deactivate": "غير فعال ڪريو",
+  "detected": "معلوم ٿيو",
+  "alarmed": "ڊڄي ويو"
 }

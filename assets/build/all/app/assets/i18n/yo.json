@@ -421,5 +421,16 @@
   "new_value": "Iye Tuntun",
   "events_logger_database": "Events Logger aaye data",
   "volatile_statistics_cache": "Kaṣe Iṣiro Iyipada",
-  "data_storage": "Ibi ipamọ data"
+  "data_storage": "Ibi ipamọ data",
+  "none": "Ko si",
+  "SimpleAverage": "Irọrun Apapọ",
+  "MovingAverage": "Gbigbe Apapọ",
+  "SavitzkyGolay": "Savitzky – Golay",
+  "data_object": "Nkan Data",
+  "thermostat_mode": "Ipò Ooru",
+  "deactivated": "Maṣiṣẹ",
+  "activate": "Mu ṣiṣẹ",
+  "deactivate": "Muu ṣiṣẹ",
+  "detected": "Ti ṣawari",
+  "alarmed": "Ibalẹ"
 }

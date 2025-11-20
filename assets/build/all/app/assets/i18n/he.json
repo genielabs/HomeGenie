@@ -421,5 +421,16 @@
   "new_value": "ערך חדש",
   "events_logger_database": "מסד נתונים של לוגר אירועים",
   "volatile_statistics_cache": "מטמון סטטיסטיקות נדיף",
-  "data_storage": "אחסון נתונים"
+  "data_storage": "אחסון נתונים",
+  "none": "אַף לֹא אֶחָד",
+  "SimpleAverage": "ממוצע פשוט",
+  "MovingAverage": "ממוצע נע",
+  "SavitzkyGolay": "סביצקי-גולאי",
+  "data_object": "אובייקט נתונים",
+  "thermostat_mode": "מצב תרמוסטט",
+  "deactivated": "מושבת",
+  "activate": "לְהַפְעִיל",
+  "deactivate": "בטל",
+  "detected": "זוהה",
+  "alarmed": "נבהל"
 }

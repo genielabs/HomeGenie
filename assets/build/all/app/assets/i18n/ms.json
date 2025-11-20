@@ -421,5 +421,16 @@
   "new_value": "Nilai Baru",
   "events_logger_database": "Pangkalan Data Logger Acara",
   "volatile_statistics_cache": "Cache Statistik Meruap",
-  "data_storage": "Storan Data"
+  "data_storage": "Storan Data",
+  "none": "tiada",
+  "SimpleAverage": "Purata Mudah",
+  "MovingAverage": "Purata Pergerakan",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objek Data",
+  "thermostat_mode": "Mod Termostat",
+  "deactivated": "dinyahaktifkan",
+  "activate": "Aktifkan",
+  "deactivate": "Nyahaktifkan",
+  "detected": "Dikesan",
+  "alarmed": "cemas"
 }

@@ -421,5 +421,16 @@
   "new_value": "Nytt värde",
   "events_logger_database": "Händelseloggningsdatabas",
   "volatile_statistics_cache": "Volatila statistikcache",
-  "data_storage": "Datalagring"
+  "data_storage": "Datalagring",
+  "none": "Ingen",
+  "SimpleAverage": "Enkelt medelvärde",
+  "MovingAverage": "Glidande medelvärde",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Dataobjekt",
+  "thermostat_mode": "Termostatläge",
+  "deactivated": "Inaktiverad",
+  "activate": "Aktivera",
+  "deactivate": "Avaktivera",
+  "detected": "Upptäckt",
+  "alarmed": "Orolig"
 }

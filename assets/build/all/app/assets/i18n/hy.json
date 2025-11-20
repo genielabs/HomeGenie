@@ -421,5 +421,16 @@
   "new_value": "Նոր արժեք",
   "events_logger_database": "Իրադարձությունների գրանցողների տվյալների բազա",
   "volatile_statistics_cache": "Անկայուն վիճակագրության քեշ",
-  "data_storage": "Տվյալների պահեստավորում"
+  "data_storage": "Տվյալների պահեստավորում",
+  "none": "Ոչ մեկը",
+  "SimpleAverage": "Պարզ միջին",
+  "MovingAverage": "Շարժական միջին",
+  "SavitzkyGolay": "Սավիցկի-Գոլայ",
+  "data_object": "Տվյալների օբյեկտ",
+  "thermostat_mode": "Ջերմակարգավորիչի ռեժիմ",
+  "deactivated": "Անջատված",
+  "activate": "Ակտիվացնել",
+  "deactivate": "Անջատել",
+  "detected": "Հայտնաբերվել է",
+  "alarmed": "Անհանգստացած"
 }

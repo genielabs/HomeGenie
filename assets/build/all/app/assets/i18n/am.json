@@ -421,5 +421,16 @@
   "new_value": "አዲስ እሴት",
   "events_logger_database": "የክስተት ሎገር ዳታቤዝ",
   "volatile_statistics_cache": "ተለዋዋጭ ስታትስቲክስ መሸጎጫ",
-  "data_storage": "የውሂብ ማከማቻ"
+  "data_storage": "የውሂብ ማከማቻ",
+  "none": "ምንም",
+  "SimpleAverage": "ቀላል አማካይ",
+  "MovingAverage": "አማካኝ የሚንቀሳቀስ",
+  "SavitzkyGolay": "ሳቪትዝኪ - ጎላይ",
+  "data_object": "የውሂብ ነገር",
+  "thermostat_mode": "ቴርሞስታት ሁነታ",
+  "deactivated": "ቦዝኗል",
+  "activate": "አግብር",
+  "deactivate": "አቦዝን",
+  "detected": "ተገኝቷል",
+  "alarmed": "ደነገጥኩ።"
 }

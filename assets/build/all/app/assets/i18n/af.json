@@ -421,5 +421,16 @@
   "new_value": "Nuwe Waarde",
   "events_logger_database": "Gebeurtenisloggerdatabasis",
   "volatile_statistics_cache": "Vlugtige Statistiekkas",
-  "data_storage": "Databerging"
+  "data_storage": "Databerging",
+  "none": "Geen",
+  "SimpleAverage": "Eenvoudige Gemiddelde",
+  "MovingAverage": "Bewegende Gemiddelde",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Data-objek",
+  "thermostat_mode": "Termostaatmodus",
+  "deactivated": "Gedeaktiveer",
+  "activate": "Aktiveer",
+  "deactivate": "Deaktiveer",
+  "detected": "Opgespoor",
+  "alarmed": "Gealarmeerd"
 }

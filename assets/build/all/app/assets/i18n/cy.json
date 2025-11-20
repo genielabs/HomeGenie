@@ -421,5 +421,16 @@
   "new_value": "Gwerth Newydd",
   "events_logger_database": "Cronfa Ddata Cofnodi Digwyddiadau",
   "volatile_statistics_cache": "Storfa Ystadegau Anwadal",
-  "data_storage": "Storio Data"
+  "data_storage": "Storio Data",
+  "none": "Dim",
+  "SimpleAverage": "Cyfartaledd Syml",
+  "MovingAverage": "Cyfartaledd Symudol",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Gwrthrych Data",
+  "thermostat_mode": "Modd Thermostat",
+  "deactivated": "Wedi'i ddadactifadu",
+  "activate": "Actifadu",
+  "deactivate": "Dadactifadu",
+  "detected": "Wedi'i ganfod",
+  "alarmed": "Wedi dychryn"
 }

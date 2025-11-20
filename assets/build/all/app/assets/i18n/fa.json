@@ -421,5 +421,16 @@
   "new_value": "ارزش جدید",
   "events_logger_database": "پایگاه داده ثبت رویدادها",
   "volatile_statistics_cache": "حافظه پنهان آمار فرار",
-  "data_storage": "ذخیره‌سازی داده‌ها"
+  "data_storage": "ذخیره‌سازی داده‌ها",
+  "none": "هیچکدام",
+  "SimpleAverage": "میانگین ساده",
+  "MovingAverage": "میانگین متحرک",
+  "SavitzkyGolay": "ساویتسکی-گولای",
+  "data_object": "شیء داده",
+  "thermostat_mode": "حالت ترموستات",
+  "deactivated": "غیرفعال شده",
+  "activate": "فعال کردن",
+  "deactivate": "غیرفعال کردن",
+  "detected": "شناسایی شد",
+  "alarmed": "نگران"
 }

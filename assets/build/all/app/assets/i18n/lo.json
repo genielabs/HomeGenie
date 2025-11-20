@@ -421,5 +421,16 @@
   "new_value": "ຄ່າໃໝ່",
   "events_logger_database": "ຖານຂໍ້ມູນ Logger ເຫດການ",
   "volatile_statistics_cache": "Cache ສະຖິຕິການຜັນຜວນ",
-  "data_storage": "ການເກັບຮັກສາຂໍ້ມູນ"
+  "data_storage": "ການເກັບຮັກສາຂໍ້ມູນ",
+  "none": "ບໍ່ມີ",
+  "SimpleAverage": "ສະ​ເລ່ຍ​ງ່າຍ​ດາຍ​",
+  "MovingAverage": "ການເຄື່ອນຍ້າຍສະເລ່ຍ",
+  "SavitzkyGolay": "Savitzky-Golay",
+  "data_object": "ວັດຖຸຂໍ້ມູນ",
+  "thermostat_mode": "ໂໝດເຄື່ອງຄວບຄຸມອຸນຫະພູມ",
+  "deactivated": "ປິດການນຳໃຊ້ແລ້ວ",
+  "activate": "ເປີດໃຊ້",
+  "deactivate": "ປິດໃຊ້ງານ",
+  "detected": "ກວດພົບ",
+  "alarmed": "ຕົກໃຈ"
 }

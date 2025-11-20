@@ -421,5 +421,16 @@
   "new_value": "ନୂତନ ମୂଲ୍ୟ",
   "events_logger_database": "ଇଭେଣ୍ଟ ଲଗର ଡାଟାବେସ୍",
   "volatile_statistics_cache": "ଅସ୍ଥିର ପରିସଂଖ୍ୟାନ କ୍ୟାଶ୍",
-  "data_storage": "ଡାଟା ଷ୍ଟୋରେଜ୍"
+  "data_storage": "ଡାଟା ଷ୍ଟୋରେଜ୍",
+  "none": "କିଛି ନୁହେଁ",
+  "SimpleAverage": "ସରଳ ହାରାହାରି",
+  "MovingAverage": "ଗତିଶୀଳ ହାର",
+  "SavitzkyGolay": "ସାଭିଜ୍କି–ଗୋଲାଏ",
+  "data_object": "ଡାଟା ବସ୍ତୁ",
+  "thermostat_mode": "ଥର୍ମୋଷ୍ଟାଟ୍ ମୋଡ୍",
+  "deactivated": "ନିଷ୍କ୍ରିୟ କରାଯାଇଛି",
+  "activate": "ସକ୍ରିୟ କରନ୍ତୁ",
+  "deactivate": "ନିଷ୍କ୍ରିୟ କରନ୍ତୁ",
+  "detected": "ଚିହ୍ନଟ ହୋଇଛି",
+  "alarmed": "ସତର୍କ"
 }

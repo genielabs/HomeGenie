@@ -421,5 +421,16 @@
   "new_value": "Valur Ġdid",
   "events_logger_database": "Database tal-Logger tal-Avvenimenti",
   "volatile_statistics_cache": "Cache tal-Istatistika Volatili",
-  "data_storage": "Ħażna tad-Data"
+  "data_storage": "Ħażna tad-Data",
+  "none": "Xejn",
+  "SimpleAverage": "Medja Sempliċi",
+  "MovingAverage": "Medja Mobbli",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Oġġett tad-Data",
+  "thermostat_mode": "Modalità tat-Termostat",
+  "deactivated": "Diżattivat",
+  "activate": "Attiva",
+  "deactivate": "Iddiżattiva",
+  "detected": "Skopert",
+  "alarmed": "Allarmat"
 }

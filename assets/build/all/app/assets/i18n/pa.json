@@ -421,5 +421,16 @@
   "new_value": "ਨਵਾਂ ਮੁੱਲ",
   "events_logger_database": "ਇਵੈਂਟ ਲਾਗਰ ਡੇਟਾਬੇਸ",
   "volatile_statistics_cache": "ਅਸਥਿਰ ਅੰਕੜੇ ਕੈਸ਼",
-  "data_storage": "ਡਾਟਾ ਸਟੋਰੇਜ"
+  "data_storage": "ਡਾਟਾ ਸਟੋਰੇਜ",
+  "none": "ਕੋਈ ਨਹੀਂ",
+  "SimpleAverage": "ਸਧਾਰਨ ਔਸਤ",
+  "MovingAverage": "ਮੂਵਿੰਗ ਔਸਤ",
+  "SavitzkyGolay": "ਸਾਵਿਤਜ਼ਕੀ–ਗੋਲੇ",
+  "data_object": "ਡਾਟਾ ਵਸਤੂ",
+  "thermostat_mode": "ਥਰਮੋਸਟੈਟ ਮੋਡ",
+  "deactivated": "ਅਕਿਰਿਆਸ਼ੀਲ ਕੀਤਾ ਗਿਆ",
+  "activate": "ਕਿਰਿਆਸ਼ੀਲ ਕਰੋ",
+  "deactivate": "ਅਕਿਰਿਆਸ਼ੀਲ ਕਰੋ",
+  "detected": "ਪਤਾ ਲੱਗਿਆ",
+  "alarmed": "ਘਬਰਾ ਗਿਆ"
 }

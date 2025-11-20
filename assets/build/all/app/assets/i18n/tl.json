@@ -421,5 +421,16 @@
   "new_value": "Bagong Halaga",
   "events_logger_database": "Database ng Events Logger",
   "volatile_statistics_cache": "Volatile Statistics Cache",
-  "data_storage": "Imbakan ng Data"
+  "data_storage": "Imbakan ng Data",
+  "none": "wala",
+  "SimpleAverage": "Simpleng Average",
+  "MovingAverage": "Moving Average",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Bagay ng Data",
+  "thermostat_mode": "Thermostat Mode",
+  "deactivated": "Na-deactivate",
+  "activate": "I-activate",
+  "deactivate": "I-deactivate",
+  "detected": "Natukoy",
+  "alarmed": "Naalarma"
 }

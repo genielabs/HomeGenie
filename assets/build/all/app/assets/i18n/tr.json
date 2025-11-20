@@ -421,5 +421,16 @@
   "new_value": "Yeni Değer",
   "events_logger_database": "Olay Kaydedici Veritabanı",
   "volatile_statistics_cache": "Uçucu İstatistik Önbelleği",
-  "data_storage": "Veri Depolama"
+  "data_storage": "Veri Depolama",
+  "none": "Hiçbiri",
+  "SimpleAverage": "Basit Ortalama",
+  "MovingAverage": "Hareketli Ortalama",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Veri Nesnesi",
+  "thermostat_mode": "Termostat Modu",
+  "deactivated": "Devre dışı bırakıldı",
+  "activate": "Etkinleştir",
+  "deactivate": "Devre dışı bırak",
+  "detected": "Saptanmış",
+  "alarmed": "Alarma geçmiş"
 }

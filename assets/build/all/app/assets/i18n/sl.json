@@ -421,5 +421,16 @@
   "new_value": "Nova vrednost",
   "events_logger_database": "Zbirka podatkov beležilnika dogodkov",
   "volatile_statistics_cache": "Predpomnilnik nestanovitnih statističnih podatkov",
-  "data_storage": "Shranjevanje podatkov"
+  "data_storage": "Shranjevanje podatkov",
+  "none": "Nobena",
+  "SimpleAverage": "Preprosto povprečje",
+  "MovingAverage": "Drseče povprečje",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Podatkovni objekt",
+  "thermostat_mode": "Način termostata",
+  "deactivated": "Deaktivirano",
+  "activate": "Aktiviraj",
+  "deactivate": "Deaktiviraj",
+  "detected": "Zaznano",
+  "alarmed": "Zaskrbljen"
 }

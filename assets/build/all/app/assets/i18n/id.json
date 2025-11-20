@@ -421,5 +421,16 @@
   "new_value": "Nilai Baru",
   "events_logger_database": "Basis Data Pencatat Peristiwa",
   "volatile_statistics_cache": "Cache Statistik Volatil",
-  "data_storage": "Penyimpanan Data"
+  "data_storage": "Penyimpanan Data",
+  "none": "Tidak ada",
+  "SimpleAverage": "Rata-rata Sederhana",
+  "MovingAverage": "Rata-rata Bergerak",
+  "SavitzkyGolay": "Savitzky–Golay",
+  "data_object": "Objek Data",
+  "thermostat_mode": "Mode Termostat",
+  "deactivated": "Dinonaktifkan",
+  "activate": "Mengaktifkan",
+  "deactivate": "Menonaktifkan",
+  "detected": "Terdeteksi",
+  "alarmed": "Khawatir"
 }

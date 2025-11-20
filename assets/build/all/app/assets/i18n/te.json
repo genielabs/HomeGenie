@@ -421,5 +421,16 @@
   "new_value": "కొత్త విలువ",
   "events_logger_database": "ఈవెంట్స్ లాగర్ డేటాబేస్",
   "volatile_statistics_cache": "అస్థిర గణాంకాల కాష్",
-  "data_storage": "డేటా నిల్వ"
+  "data_storage": "డేటా నిల్వ",
+  "none": "ఏదీ లేదు",
+  "SimpleAverage": "సాధారణ సగటు",
+  "MovingAverage": "కదిలే సగటు",
+  "SavitzkyGolay": "సావిట్జ్కీ–గోలే",
+  "data_object": "డేటా ఆబ్జెక్ట్",
+  "thermostat_mode": "థర్మోస్టాట్ మోడ్",
+  "deactivated": "నిష్క్రియం చేయబడింది",
+  "activate": "యాక్టివేట్ చేయండి",
+  "deactivate": "నిష్క్రియం చేయి",
+  "detected": "గుర్తించబడింది",
+  "alarmed": "అప్రమత్తమైంది"
 }
