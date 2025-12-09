@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objektu noteikšana",
-      "Description": "Noteikt objektus, izmantojot iepriekš apmācītu YOLO11 modeli.",
+      "Description": "Noteikt objektus, izmantojot iepriekš apmācītu YOLO modeli.",
       "ML.ObjectDetection": "Iespējot objektu noteikšanu",
       "ML.ObjectDetection.TriggerDetect": "Ar komatiem atdalīts lietu saraksts (angļu valodā), kas aktivizēs trauksmi. (piemēram: kaķis, suns, cilvēks, mugursoma, koferis)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)"
     },
     "911": {
       "Title": "Pozas novērtējums",
-      "Description": "Atslēgpunktu noteikšana, izmantojot pozas novērtējumu, pielāgotus ONNX modeļus vai noklusējuma iepriekš apmācītu YOLOv11 modeli (cilvēka pozai specifisku).",
+      "Description": "Atslēgpunktu noteikšana, izmantojot pozas novērtējumu, pielāgotus ONNX modeļus vai noklusējuma iepriekš apmācītu YOLO modeli (cilvēka pozai specifisku).",
       "ML.PoseEstimation": "Iespējot pozas novērtēšanu",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)"
     },
     "912": {
       "Title": "Instances segmentācija",
-      "Description": "Noteikt objektus un to kontūras, izmantojot iepriekš apmācītu YOLO11 modeli.",
+      "Description": "Noteikt objektus un to kontūras, izmantojot iepriekš apmācītu YOLO modeli.",
       "ML.InstanceSegmentation": "Iespējot instances segmentāciju",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modeļa faila ceļš (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)"
     },
     "930": {
       "Title": "Gemini nodomu apstrādātājs",

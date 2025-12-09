@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "객체 감지",
-      "Description": "사전 학습된 YOLO11 모델을 사용하여 객체를 감지합니다.",
+      "Description": "사전 학습된 YOLO 모델을 사용하여 객체를 감지합니다.",
       "ML.ObjectDetection": "객체 감지 활성화",
       "ML.ObjectDetection.TriggerDetect": "경보를 울리는 물건들을 쉼표로 구분하여 나열한 영어 목록입니다. (예: 고양이, 개, 사람, 배낭, 여행 가방)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 모델 파일(.onnx)의 경로"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로"
     },
     "911": {
       "Title": "포즈 추정",
-      "Description": "사용자 정의 ONNX 모델이나 기본 사전 학습된 YOLOv11 모델(인간 포즈별)을 사용하여 포즈 추정을 통해 주요 포인트를 감지합니다.",
+      "Description": "사용자 정의 ONNX 모델이나 기본 사전 학습된 YOLO 모델(인간 포즈별)을 사용하여 포즈 추정을 통해 주요 포인트를 감지합니다.",
       "ML.PoseEstimation": "포즈 추정 활성화",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 모델 파일(.onnx)의 경로"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로"
     },
     "912": {
       "Title": "인스턴스 분할",
-      "Description": "사전 학습된 YOLO11 모델을 사용하여 객체와 객체 윤곽을 감지합니다.",
+      "Description": "사전 학습된 YOLO 모델을 사용하여 객체와 객체 윤곽을 감지합니다.",
       "ML.InstanceSegmentation": "인스턴스 분할 활성화",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 모델 파일(.onnx)의 경로"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로"
     },
     "930": {
       "Title": "제미니 인텐트 핸들러",

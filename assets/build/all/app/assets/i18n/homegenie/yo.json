@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Iwari Nkan",
-      "Description": "Ṣawari awọn nkan nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
+      "Description": "Ṣawari awọn nkan nipa lilo awoṣe YOLO ti a ti kọ tẹlẹ.",
       "ML.ObjectDetection": "Mu wiwa nkan ṣiṣẹ",
       "ML.ObjectDetection.TriggerDetect": "Akojọ awọn ohun ti o ya sọtọ (ni ede Gẹẹsi) ti yoo fa itaniji naa. (fun apẹẹrẹ: ologbo, aja, eniyan, apoeyin, apoti)",
-      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)"
     },
     "911": {
       "Title": "Iṣiro iduro",
-      "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLOv11 ti a ti kọkọ tẹlẹ (pato-pato eniyan).",
+      "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLO ti a ti kọkọ tẹlẹ (pato-pato eniyan).",
       "ML.PoseEstimation": "Mu iṣiro iduro ṣiṣẹ",
-      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)"
     },
     "912": {
       "Title": "Apakan apẹẹrẹ",
-      "Description": "Ṣewadii awọn nkan ati awọn ilana wọn nipa lilo awoṣe YOLO11 ti a ti kọ tẹlẹ.",
+      "Description": "Ṣewadii awọn nkan ati awọn ilana wọn nipa lilo awoṣe YOLO ti a ti kọ tẹlẹ.",
       "ML.InstanceSegmentation": "Mu ipin apẹẹrẹ ṣiṣẹ",
-      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

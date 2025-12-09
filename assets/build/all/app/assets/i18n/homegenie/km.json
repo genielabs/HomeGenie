@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "ការរកឃើញវត្ថុ",
-      "Description": "រកឃើញវត្ថុដោយប្រើគំរូ YOLO11 ដែលបានបណ្តុះបណ្តាលជាមុន។",
+      "Description": "រកឃើញវត្ថុដោយប្រើគំរូ YOLO ដែលបានបណ្តុះបណ្តាលជាមុន។",
       "ML.ObjectDetection": "បើកការរកឃើញវត្ថុ",
       "ML.ObjectDetection.TriggerDetect": "បញ្ជីវត្ថុដែលបំបែកដោយសញ្ញាក្បៀស (ជាភាសាអង់គ្លេស) ដែលនឹងបង្កឱ្យមានការជូនដំណឹង។ (ឧទាហរណ៍៖ ឆ្មា ឆ្កែ មនុស្ស កាបូបស្ពាយ វ៉ាលី)",
-      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO (.onnx)"
     },
     "911": {
       "Title": "ការប៉ាន់ប្រមាណ",
-      "Description": "ការរកឃើញចំណុចគន្លឹះតាមរយៈការប៉ាន់ប្រមាណដោយប្រើប្រាស់ម៉ូដែល ONNX ផ្ទាល់ខ្លួន ឬគំរូ YOLOv11 ដែលបានបណ្តុះបណ្តាលជាមុនលំនាំដើម (លក្ខណៈជាក់លាក់របស់មនុស្ស)។",
+      "Description": "ការរកឃើញចំណុចគន្លឹះតាមរយៈការប៉ាន់ប្រមាណដោយប្រើប្រាស់ម៉ូដែល ONNX ផ្ទាល់ខ្លួន ឬគំរូ YOLO ដែលបានបណ្តុះបណ្តាលជាមុនលំនាំដើម (លក្ខណៈជាក់លាក់របស់មនុស្ស)។",
       "ML.PoseEstimation": "បើក​ការ​ប៉ាន់​ស្មាន",
-      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO (.onnx)"
     },
     "912": {
       "Title": "ការបែងចែកវត្ថុ",
-      "Description": "រកឃើញវត្ថុ និងគ្រោងរបស់វាដោយប្រើគំរូ YOLO11 ដែលបានបណ្តុះបណ្តាលជាមុន។",
+      "Description": "រកឃើញវត្ថុ និងគ្រោងរបស់វាដោយប្រើគំរូ YOLO ដែលបានបណ្តុះបណ្តាលជាមុន។",
       "ML.InstanceSegmentation": "បើកដំណើរការការបែងចែកឧទាហរណ៍",
-      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ផ្លូវនៃឯកសារគំរូ YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

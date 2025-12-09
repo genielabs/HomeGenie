@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Tesbîtkirina Tiştan",
-      "Description": "Bi karanîna modelek YOLO11-a pêş-perwerdekirî tiştan tespît bikin.",
+      "Description": "Bi karanîna modelek YOLO-a pêş-perwerdekirî tiştan tespît bikin.",
       "ML.ObjectDetection": "Tesbîtkirina tiştan çalak bike",
       "ML.ObjectDetection.TriggerDetect": "Lîsteya tiştên ku bi vertîkalê ji hev veqetandî ne (bi Îngilîzî) ku dê alarmê bidin destpêkirin. (mînak: pisîk, kûçik, mirov, çenteya piştê, çente)",
-      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)"
     },
     "911": {
       "Title": "Texmîna Pozê",
-      "Description": "Tesbîtkirina xala sereke bi rêya texmîna pozê, bi karanîna modelên ONNX-ê yên xwerû an modela YOLOv11-a pêş-perwerdekirî ya xwerû (taybetî bi poza mirovan).",
+      "Description": "Tesbîtkirina xala sereke bi rêya texmîna pozê, bi karanîna modelên ONNX-ê yên xwerû an modela YOLO-a pêş-perwerdekirî ya xwerû (taybetî bi poza mirovan).",
       "ML.PoseEstimation": "Texmînkirina pozê çalak bike",
-      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)"
     },
     "912": {
       "Title": "Dabeşkirina Nimûneyê",
-      "Description": "Bi karanîna modelek YOLO11-a pêş-perwerdekirî tişt û xêzên wan tespît bikin.",
+      "Description": "Bi karanîna modelek YOLO-a pêş-perwerdekirî tişt û xêzên wan tespît bikin.",
       "ML.InstanceSegmentation": "Dabeşkirina nimûneyê çalak bike",
-      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)"
     },
     "930": {
       "Title": "Gerînendeyê Niyeta Gemini",

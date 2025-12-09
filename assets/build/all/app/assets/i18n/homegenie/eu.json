@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objektuen detekzioa",
-      "Description": "Aurrez entrenatutako YOLO11 eredu bat erabiliz objektuak detektatu.",
+      "Description": "Aurrez entrenatutako YOLO eredu bat erabiliz objektuak detektatu.",
       "ML.ObjectDetection": "Objektuen detekzioa gaitu",
       "ML.ObjectDetection.TriggerDetect": "Alarma eragingo duten gauzen zerrenda komaz bereizita (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelo fitxategiaren bidea (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)"
     },
     "911": {
       "Title": "Jarreraren Estimazioa",
-      "Description": "Puntu gakoen detekzioa jarreraren estimazioaren bidez, ONNX eredu pertsonalizatuak edo aurrez entrenatutako YOLOv11 eredu lehenetsia (gizakien jarrera espezifikoa) erabiliz.",
+      "Description": "Puntu gakoen detekzioa jarreraren estimazioaren bidez, ONNX eredu pertsonalizatuak edo aurrez entrenatutako YOLO eredu lehenetsia (gizakien jarrera espezifikoa) erabiliz.",
       "ML.PoseEstimation": "Gaitu jarreraren estimazioa",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelo fitxategiaren bidea (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)"
     },
     "912": {
       "Title": "Instantzia Segmentazioa",
-      "Description": "Detektatu objektuak eta haien eskemak aurrez entrenatutako YOLO11 eredu bat erabiliz.",
+      "Description": "Detektatu objektuak eta haien eskemak aurrez entrenatutako YOLO eredu bat erabiliz.",
       "ML.InstanceSegmentation": "Gaitu instantzien segmentazioa",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelo fitxategiaren bidea (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)"
     },
     "930": {
       "Title": "Gemini Asmoen Kudeatzailea",

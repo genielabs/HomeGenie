@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Detekcija objekata",
-      "Description": "Detekciju objekata vrši pomoću prethodno obučenog YOLO11 modela.",
+      "Description": "Detekciju objekata vrši pomoću prethodno obučenog YOLO modela.",
       "ML.ObjectDetection": "Omogući detekciju objekata",
       "ML.ObjectDetection.TriggerDetect": "Zarezom odvojena lista stvari (na engleskom) koje će aktivirati alarm. (npr.: mačka, pas, osoba, ruksak, kofer)",
-      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO (.onnx)"
     },
     "911": {
       "Title": "Procjena poze",
-      "Description": "Detekcija ključnih tačaka putem procjene poze, korištenjem prilagođenih ONNX modela ili zadanog prethodno obučenog YOLOv11 modela (specifičnog za ljudsku pozu).",
+      "Description": "Detekcija ključnih tačaka putem procjene poze, korištenjem prilagođenih ONNX modela ili zadanog prethodno obučenog YOLO modela (specifičnog za ljudsku pozu).",
       "ML.PoseEstimation": "Omogući procjenu poze",
-      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentacija instanci",
-      "Description": "Detektuj objekte i njihove obrise koristeći prethodno obučeni YOLO11 model.",
+      "Description": "Detektuj objekte i njihove obrise koristeći prethodno obučeni YOLO model.",
       "ML.InstanceSegmentation": "Omogući segmentaciju instanci",
-      "ConfigureOptions.Yolo.ModelPath": "Putanja do YOLO11 datoteke modela (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Putanja do YOLO datoteke modela (.onnx)"
     },
     "930": {
       "Title": "Rukovatelj namjerama Gemini",

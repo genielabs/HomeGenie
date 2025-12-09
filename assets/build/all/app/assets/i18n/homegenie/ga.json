@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Brathadóireacht Réada",
-      "Description": "Braith réada ag baint úsáide as samhail YOLO11 réamh-oiliúna.",
+      "Description": "Braith réada ag baint úsáide as samhail YOLO réamh-oiliúna.",
       "ML.ObjectDetection": "Cumasaigh braiteadh réad",
       "ML.ObjectDetection.TriggerDetect": "Liosta rudaí (i mBéarla) a chuirfidh an t-aláram ar siúl, scartha le camóga. (m.sh.: cat, madra, duine, mála droma, mála taistil)",
-      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)"
     },
     "911": {
       "Title": "Meastachán Staidiúir",
-      "Description": "Brathphointe eochair trí mheastachán staidiúir, ag baint úsáide as samhlacha ONNX saincheaptha nó an tsamhail YOLOv11 réamh-oiliúna réamhshocraithe (shonrach do staidiúir an duine).",
+      "Description": "Brathphointe eochair trí mheastachán staidiúir, ag baint úsáide as samhlacha ONNX saincheaptha nó an tsamhail YOLO réamh-oiliúna réamhshocraithe (shonrach do staidiúir an duine).",
       "ML.PoseEstimation": "Cumasaigh meastachán staidiúir",
-      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)"
     },
     "912": {
       "Title": "Deighilt Cásanna",
-      "Description": "Braith rudaí agus a n-imlínte ag baint úsáide as samhail YOLO11 réamh-oiliúna.",
+      "Description": "Braith rudaí agus a n-imlínte ag baint úsáide as samhail YOLO réamh-oiliúna.",
       "ML.InstanceSegmentation": "Cumasaigh deighilt samplaí",
-      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)"
     },
     "930": {
       "Title": "Láimhseálaí Intinne Gemini",

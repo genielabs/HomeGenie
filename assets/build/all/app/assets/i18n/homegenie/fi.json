@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Kohteen tunnistus",
-      "Description": "Tunnista esineitä käyttämällä esikoulutettua YOLO11-mallia.",
+      "Description": "Tunnista esineitä käyttämällä esikoulutettua YOLO-mallia.",
       "ML.ObjectDetection": "Ota käyttöön objektien tunnistus",
       "ML.ObjectDetection.TriggerDetect": "Pilkuilla erotettu luettelo asioista (englanniksi), jotka laukaisevat hälytyksen. (esim. kissa, koira, henkilö, reppu, matkalaukku)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11-mallitiedoston polku (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)"
     },
     "911": {
       "Title": "Asennon arviointi",
-      "Description": "Avainpisteiden tunnistus asennon arvioinnin avulla, käyttämällä mukautettuja ONNX-malleja tai oletusarvoista esikoulutettua YOLOv11-mallia (ihmisen asentokohtainen).",
+      "Description": "Avainpisteiden tunnistus asennon arvioinnin avulla, käyttämällä mukautettuja ONNX-malleja tai oletusarvoista esikoulutettua YOLO-mallia (ihmisen asentokohtainen).",
       "ML.PoseEstimation": "Ota asennon arviointi käyttöön",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11-mallitiedoston polku (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)"
     },
     "912": {
       "Title": "Instanssien segmentointi",
-      "Description": "Tunnista esineitä ja niiden ääriviivoja käyttämällä esikoulutettua YOLO11-mallia.",
+      "Description": "Tunnista esineitä ja niiden ääriviivoja käyttämällä esikoulutettua YOLO-mallia.",
       "ML.InstanceSegmentation": "Ota käyttöön instanssien segmentointi",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11-mallitiedoston polku (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)"
     },
     "930": {
       "Title": "Gemini-aikeiden käsittelijä",

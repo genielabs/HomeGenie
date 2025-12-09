@@ -519,35 +519,35 @@
       "Title":
         "Identifica oggetti",
       "Description":
-        "Identifica oggetti utilizzando un modello YOLO11 pre-trained.",
+        "Identifica oggetti utilizzando un modello YOLO pre-trained.",
       "ML.ObjectDetection":
         "Abilita identificazione oggetti",
       "ML.ObjectDetection.TriggerDetect":
         "Elenco separato da virgole di cose (in Inglese) che fanno scattare l'allarme. (e.g.: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath":
-        "Percorso file del modello YOLO11 (.onnx)"
+        "Percorso file del modello YOLO (.onnx)"
     },
 
     "911": {
       "Title":
         "Stima della posa",
       "Description":
-        "Individuazione dei punti chiave tramite stima della posa, utilizzando modelli ONNX personalizzati oppure il modello YOLOv11 predefinito (specifico per la posa umana).",
+        "Individuazione dei punti chiave tramite stima della posa, utilizzando modelli ONNX personalizzati oppure il modello YOLO predefinito (specifico per la posa umana).",
       "ML.PoseEstimation":
         "Abilita stima della posa",
       "ConfigureOptions.Yolo.ModelPath":
-        "Percorso file del modello YOLO11 (.onnx)"
+        "Percorso file del modello YOLO (.onnx)"
     },
 
     "912": {
       "Title":
         "Segmentazione delle istanze",
       "Description":
-        "Identifica oggetti e i loro contorni utilizzando un modello YOLO11 pre-addestrato.",
+        "Identifica oggetti e i loro contorni utilizzando un modello YOLO pre-addestrato.",
       "ML.InstanceSegmentation":
         "Abilita la segmentazione delle istanze",
       "ConfigureOptions.Yolo.ModelPath":
-        "Percorso del file modello YOLO11 (.onnx)"
+        "Percorso del file modello YOLO (.onnx)"
     },
 
     "930": {

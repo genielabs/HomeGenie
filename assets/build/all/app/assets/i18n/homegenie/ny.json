@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Kuzindikira kwa chinthu",
-      "Description": "Dziwani zinthu pogwiritsa ntchito mtundu wa YOLO11 wophunzitsidwa kale.",
+      "Description": "Dziwani zinthu pogwiritsa ntchito mtundu wa YOLO wophunzitsidwa kale.",
       "ML.ObjectDetection": "Yambitsani kuzindikira zinthu",
       "ML.ObjectDetection.TriggerDetect": "Mndandanda wazinthu zosiyanitsidwa ndi koma (mu Chingerezi) zomwe zingayambitse alamu. (monga: mphaka, galu, munthu, chikwama, sutikesi)",
-      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)"
     },
     "911": {
       "Title": "Pose Kuyerekeza",
-      "Description": "Kuzindikira mfundo zazikuluzikulu pogwiritsa ntchito kuyerekezera kwazithunzi, pogwiritsa ntchito mitundu ya ONNX yokhazikika kapena mtundu wa YOLOv11 wophunzitsidwa kale (mawonekedwe amunthu).",
+      "Description": "Kuzindikira mfundo zazikuluzikulu pogwiritsa ntchito kuyerekezera kwazithunzi, pogwiritsa ntchito mitundu ya ONNX yokhazikika kapena mtundu wa YOLO wophunzitsidwa kale (mawonekedwe amunthu).",
       "ML.PoseEstimation": "Yambitsani kuyerekeza kwazithunzi",
-      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)"
     },
     "912": {
       "Title": "Gawo lachitsanzo",
-      "Description": "Dziwani zinthu ndi ma autilaini awo pogwiritsa ntchito chitsanzo cha YOLO11 chophunzitsidwa kale.",
+      "Description": "Dziwani zinthu ndi ma autilaini awo pogwiritsa ntchito chitsanzo cha YOLO chophunzitsidwa kale.",
       "ML.InstanceSegmentation": "Yambitsani magawo achitsanzo",
-      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

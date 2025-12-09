@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Object Detection",
-      "Description": "Mitadiava zavatra mampiasa maodely YOLO11 efa voaofana mialoha.",
+      "Description": "Mitadiava zavatra mampiasa maodely YOLO efa voaofana mialoha.",
       "ML.ObjectDetection": "Alefaso ny fitadiavana zavatra",
       "ML.ObjectDetection.TriggerDetect": "Lisitry ny zavatra misaraka amin'ny faingo (amin'ny teny anglisy) izay hiteraka fanairana. (oh: saka, alika, olona, kitapo, valizy)",
-      "ConfigureOptions.Yolo.ModelPath": "Lalana misy rakitra modely YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Lalana misy rakitra modely YOLO (.onnx)"
     },
     "911": {
       "Title": "Tombana Pose",
-      "Description": "Famantarana ny hevi-dehibe amin'ny alalan'ny tombantombana pose, mampiasa maodely ONNX mahazatra na modely YOLOv11 efa voaofana mialoha (manokana ny maha-olona).",
+      "Description": "Famantarana ny hevi-dehibe amin'ny alalan'ny tombantombana pose, mampiasa maodely ONNX mahazatra na modely YOLO efa voaofana mialoha (manokana ny maha-olona).",
       "ML.PoseEstimation": "Alefaso ny tombana pose",
-      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentation ohatra",
-      "Description": "Tadiavo ny zavatra sy ny sariny amin'ny fampiasana modely YOLO11 efa voaofana mialoha.",
+      "Description": "Tadiavo ny zavatra sy ny sariny amin'ny fampiasana modely YOLO efa voaofana mialoha.",
       "ML.InstanceSegmentation": "Alefaso ny fizarana ohatra",
-      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

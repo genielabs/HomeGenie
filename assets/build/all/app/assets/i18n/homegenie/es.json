@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Detección de objetos",
-      "Description": "Detecta objetos utilizando un modelo YOLO11 previamente entrenado.",
+      "Description": "Detecta objetos utilizando un modelo YOLO previamente entrenado.",
       "ML.ObjectDetection": "Habilitar la detección de objetos",
       "ML.ObjectDetection.TriggerDetect": "Lista separada por comas de cosas (en inglés) que activarán la alarma. (ej: gato, perro, persona, mochila, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)"
     },
     "911": {
       "Title": "Estimación de pose",
-      "Description": "Detección de puntos clave mediante estimación de pose, utilizando modelos ONNX personalizados o el modelo YOLOv11 preentrenado predeterminado (específico de pose humana).",
+      "Description": "Detección de puntos clave mediante estimación de pose, utilizando modelos ONNX personalizados o el modelo YOLO preentrenado predeterminado (específico de pose humana).",
       "ML.PoseEstimation": "Habilitar estimación de pose",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentación de instancias",
-      "Description": "Detecta objetos y sus contornos utilizando un modelo YOLO11 previamente entrenado.",
+      "Description": "Detecta objetos y sus contornos utilizando un modelo YOLO previamente entrenado.",
       "ML.InstanceSegmentation": "Habilitar la segmentación de instancias",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)"
     },
     "930": {
       "Title": "Controlador de intenciones de Géminis",

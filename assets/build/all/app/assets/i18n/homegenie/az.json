@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Obyektin aşkarlanması",
-      "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri aşkar edin.",
+      "Description": "Əvvəlcədən öyrədilmiş YOLO modelindən istifadə edərək obyektləri aşkar edin.",
       "ML.ObjectDetection": "Obyektlərin aşkarlanmasını aktivləşdirin",
       "ML.ObjectDetection.TriggerDetect": "Siqnalı işə salacaq şeylərin vergüllə ayrılmış siyahısı (ingilis dilində). (məsələn: pişik, it, adam, kürək çantası, çamadan)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)"
     },
     "911": {
       "Title": "Poza qiymətləndirməsi",
-      "Description": "Xüsusi ONNX modelləri və ya defolt əvvəlcədən öyrədilmiş YOLOv11 modelindən (insan pozasına xas) istifadə edərək poza qiymətləndirilməsi vasitəsilə əsas nöqtənin aşkarlanması.",
+      "Description": "Xüsusi ONNX modelləri və ya defolt əvvəlcədən öyrədilmiş YOLO modelindən (insan pozasına xas) istifadə edərək poza qiymətləndirilməsi vasitəsilə əsas nöqtənin aşkarlanması.",
       "ML.PoseEstimation": "Poza qiymətləndirməsini aktivləşdirin",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)"
     },
     "912": {
       "Title": "Nümunə Seqmentasiyası",
-      "Description": "Əvvəlcədən öyrədilmiş YOLO11 modelindən istifadə edərək obyektləri və onların konturlarını aşkar edin.",
+      "Description": "Əvvəlcədən öyrədilmiş YOLO modelindən istifadə edərək obyektləri və onların konturlarını aşkar edin.",
       "ML.InstanceSegmentation": "Nümunə seqmentasiyasını aktivləşdirin",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylının yolu (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)"
     },
     "930": {
       "Title": "Əkizlər Niyyət İşləyicisi",

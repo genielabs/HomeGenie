@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Voorwerpopsporing",
-      "Description": "Bespeur voorwerpe met behulp van 'n voorafopgeleide YOLO11-model.",
+      "Description": "Bespeur voorwerpe met behulp van 'n voorafopgeleide YOLO-model.",
       "ML.ObjectDetection": "Aktiveer voorwerpopsporing",
       "ML.ObjectDetection.TriggerDetect": "Komma-geskeide lys van dinge (in Engels) wat die alarm sal aktiveer. (bv.: kat, hond, persoon, rugsak, tas)",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modellêer (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)"
     },
     "911": {
       "Title": "Pose-skatting",
-      "Description": "Sleutelpuntopsporing via poseberaming, met behulp van persoonlike ONNX-modelle of die standaard voorafopgeleide YOLOv11-model (menslike pose-spesifiek).",
+      "Description": "Sleutelpuntopsporing via poseberaming, met behulp van persoonlike ONNX-modelle of die standaard voorafopgeleide YOLO-model (menslike pose-spesifiek).",
       "ML.PoseEstimation": "Aktiveer pose-skatting",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modellêer (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)"
     },
     "912": {
       "Title": "Instansiesegmentering",
-      "Description": "Bespeur voorwerpe en hul buitelyne met behulp van 'n vooraf opgeleide YOLO11-model.",
+      "Description": "Bespeur voorwerpe en hul buitelyne met behulp van 'n vooraf opgeleide YOLO-model.",
       "ML.InstanceSegmentation": "Aktiveer instansiesegmentering",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modellêer (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Hanteerder",

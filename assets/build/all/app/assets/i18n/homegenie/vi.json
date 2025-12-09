@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Phát hiện đối tượng",
-      "Description": "Phát hiện đối tượng bằng mô hình YOLO11 đã được đào tạo trước.",
+      "Description": "Phát hiện đối tượng bằng mô hình YOLO đã được đào tạo trước.",
       "ML.ObjectDetection": "Cho phép phát hiện đối tượng",
       "ML.ObjectDetection.TriggerDetect": "Danh sách các thứ được phân tách bằng dấu phẩy (bằng tiếng Anh) có thể kích hoạt báo động. (ví dụ: mèo, chó, người, ba lô, vali)",
-      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)"
     },
     "911": {
       "Title": "Ước tính tư thế",
-      "Description": "Phát hiện điểm chính thông qua ước tính tư thế, sử dụng mô hình ONNX tùy chỉnh hoặc mô hình YOLOv11 được đào tạo trước mặc định (dành riêng cho tư thế của con người).",
+      "Description": "Phát hiện điểm chính thông qua ước tính tư thế, sử dụng mô hình ONNX tùy chỉnh hoặc mô hình YOLO được đào tạo trước mặc định (dành riêng cho tư thế của con người).",
       "ML.PoseEstimation": "Cho phép ước tính tư thế",
-      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)"
     },
     "912": {
       "Title": "Phân đoạn phiên bản",
-      "Description": "Phát hiện các vật thể và đường viền của chúng bằng mô hình YOLO11 đã được đào tạo trước.",
+      "Description": "Phát hiện các vật thể và đường viền của chúng bằng mô hình YOLO đã được đào tạo trước.",
       "ML.InstanceSegmentation": "Cho phép phân đoạn phiên bản",
-      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)"
     },
     "930": {
       "Title": "Trình xử lý ý định Gemini",

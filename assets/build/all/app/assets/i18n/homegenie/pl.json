@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Wykrywanie obiektów",
-      "Description": "Wykrywanie obiektów przy użyciu wstępnie wytrenowanego modelu YOLO11.",
+      "Description": "Wykrywanie obiektów przy użyciu wstępnie wytrenowanego modelu YOLO.",
       "ML.ObjectDetection": "Włącz wykrywanie obiektów",
       "ML.ObjectDetection.TriggerDetect": "Lista rzeczy (w języku angielskim), rozdzielonych przecinkami, które mogą wywołać alarm. (np.: kot, pies, osoba, plecak, walizka)",
-      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)"
     },
     "911": {
       "Title": "Oszacowanie pozy",
-      "Description": "Wykrywanie punktów kluczowych poprzez szacowanie pozycji przy użyciu niestandardowych modeli ONNX lub domyślnego, wstępnie wytrenowanego modelu YOLOv11 (zależnego od pozycji człowieka).",
+      "Description": "Wykrywanie punktów kluczowych poprzez szacowanie pozycji przy użyciu niestandardowych modeli ONNX lub domyślnego, wstępnie wytrenowanego modelu YOLO (zależnego od pozycji człowieka).",
       "ML.PoseEstimation": "Włącz szacowanie pozycji",
-      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentacja instancji",
-      "Description": "Wykrywaj obiekty i ich kontury przy użyciu wstępnie wytrenowanego modelu YOLO11.",
+      "Description": "Wykrywaj obiekty i ich kontury przy użyciu wstępnie wytrenowanego modelu YOLO.",
       "ML.InstanceSegmentation": "Włącz segmentację instancji",
-      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)"
     },
     "930": {
       "Title": "Obsługa intencji Gemini",

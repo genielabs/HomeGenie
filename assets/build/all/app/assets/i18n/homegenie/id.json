@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Deteksi Objek",
-      "Description": "Mendeteksi objek menggunakan model YOLO11 yang telah dilatih sebelumnya.",
+      "Description": "Mendeteksi objek menggunakan model YOLO yang telah dilatih sebelumnya.",
       "ML.ObjectDetection": "Aktifkan deteksi objek",
       "ML.ObjectDetection.TriggerDetect": "Daftar hal-hal (dalam bahasa Inggris) yang dipisahkan koma yang akan memicu alarm. (misalnya: kucing, anjing, orang, ransel, koper)",
-      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)"
     },
     "911": {
       "Title": "Estimasi Pose",
-      "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLOv11 terlatih bawaan (pose khusus manusia).",
+      "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLO terlatih bawaan (pose khusus manusia).",
       "ML.PoseEstimation": "Aktifkan estimasi pose",
-      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentasi Instansi",
-      "Description": "Deteksi objek dan garis besarnya menggunakan model YOLO11 yang telah dilatih sebelumnya.",
+      "Description": "Deteksi objek dan garis besarnya menggunakan model YOLO yang telah dilatih sebelumnya.",
       "ML.InstanceSegmentation": "Aktifkan segmentasi instans",
-      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)"
     },
     "930": {
       "Title": "Penangan Maksud Gemini",

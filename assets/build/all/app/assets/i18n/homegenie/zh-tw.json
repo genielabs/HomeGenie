@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "物體偵測",
-      "Description": "使用預先訓練的 YOLO11 模型偵測物體。",
+      "Description": "使用預先訓練的 YOLO 模型偵測物體。",
       "ML.ObjectDetection": "啟用物體偵測",
       "ML.ObjectDetection.TriggerDetect": "以逗號分隔的將觸發警報的事物清單（英文）。 （例如：貓、狗、人、背包、手提箱）",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11模型檔案（.onnx）路徑"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑"
     },
     "911": {
       "Title": "姿勢估計",
-      "Description": "透過姿勢估計進行關鍵點檢測，使用自訂 ONNX 模型或預設預訓練的 YOLOv11 模型（針對人體姿勢）。",
+      "Description": "透過姿勢估計進行關鍵點檢測，使用自訂 ONNX 模型或預設預訓練的 YOLO 模型（針對人體姿勢）。",
       "ML.PoseEstimation": "啟用姿勢估計",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11模型檔案（.onnx）路徑"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑"
     },
     "912": {
       "Title": "實例分割",
-      "Description": "使用預先訓練的 YOLO11 模型偵測物體及其輪廓。",
+      "Description": "使用預先訓練的 YOLO 模型偵測物體及其輪廓。",
       "ML.InstanceSegmentation": "啟用實例分割",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11模型檔案（.onnx）路徑"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑"
     },
     "930": {
       "Title": "雙子座意圖處理程序",

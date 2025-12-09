@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "ऑब्जेक्ट डिटेक्शन",
-      "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडेल वापरून वस्तू शोधा.",
+      "Description": "पूर्व-प्रशिक्षित YOLO मॉडेल वापरून वस्तू शोधा.",
       "ML.ObjectDetection": "ऑब्जेक्ट्स डिटेक्शन सक्षम करा",
       "ML.ObjectDetection.TriggerDetect": "स्वल्पविरामाने विभक्त केलेल्या गोष्टींची यादी (इंग्रजीमध्ये) ज्या अलार्मला चालना देतील. (उदा.: मांजर, कुत्रा, व्यक्ती, बॅकपॅक, सुटकेस)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडेल फाइलचा मार्ग (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडेल फाइलचा मार्ग (.onnx)"
     },
     "911": {
       "Title": "पोझ अंदाज",
-      "Description": "कस्टम ONNX मॉडेल्स किंवा डीफॉल्ट पूर्व-प्रशिक्षित YOLOv11 मॉडेल (मानवी पोझ-विशिष्ट) वापरून पोझ अंदाजाद्वारे कीपॉइंट शोध.",
+      "Description": "कस्टम ONNX मॉडेल्स किंवा डीफॉल्ट पूर्व-प्रशिक्षित YOLO मॉडेल (मानवी पोझ-विशिष्ट) वापरून पोझ अंदाजाद्वारे कीपॉइंट शोध.",
       "ML.PoseEstimation": "पोझ अंदाज सक्षम करा",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडेल फाइलचा मार्ग (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडेल फाइलचा मार्ग (.onnx)"
     },
     "912": {
       "Title": "उदाहरण विभाजन",
-      "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडेल वापरून वस्तू आणि त्यांची रूपरेषा शोधा.",
+      "Description": "पूर्व-प्रशिक्षित YOLO मॉडेल वापरून वस्तू आणि त्यांची रूपरेषा शोधा.",
       "ML.InstanceSegmentation": "उदाहरण विभागणी सक्षम करा",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडेल फाइलचा मार्ग (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडेल फाइलचा मार्ग (.onnx)"
     },
     "930": {
       "Title": "जेमिनी इंटेंट हँडलर",

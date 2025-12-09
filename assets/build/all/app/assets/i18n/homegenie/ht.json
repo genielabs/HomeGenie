@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Deteksyon objè",
-      "Description": "Detekte objè yo lè l sèvi avèk yon modèl YOLO11 ki te deja antrene.",
+      "Description": "Detekte objè yo lè l sèvi avèk yon modèl YOLO ki te deja antrene.",
       "ML.ObjectDetection": "Aktive deteksyon objè yo",
       "ML.ObjectDetection.TriggerDetect": "Lis bagay separe pa virgil (an Angle) ki pral deklanche alam lan. (pa egzanp: chat, chen, moun, sakado, valiz)",
-      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 la (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)"
     },
     "911": {
       "Title": "Estimasyon Poz",
-      "Description": "Deteksyon pwen kle atravè estimasyon poze, lè l sèvi avèk modèl ONNX koutim oswa modèl YOLOv11 pre-antre pa defo a (espesifik pou yon poze imen).",
+      "Description": "Deteksyon pwen kle atravè estimasyon poze, lè l sèvi avèk modèl ONNX koutim oswa modèl YOLO pre-antre pa defo a (espesifik pou yon poze imen).",
       "ML.PoseEstimation": "Aktive estimasyon pozisyon an",
-      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 la (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)"
     },
     "912": {
       "Title": "Segmantasyon Enstans",
-      "Description": "Detekte objè ak kontou yo lè l sèvi avèk yon modèl YOLO11 ki te deja antrene.",
+      "Description": "Detekte objè ak kontou yo lè l sèvi avèk yon modèl YOLO ki te deja antrene.",
       "ML.InstanceSegmentation": "Aktive segmentasyon egzanp lan",
-      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO11 la (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)"
     },
     "930": {
       "Title": "Jemini Intent Handler",

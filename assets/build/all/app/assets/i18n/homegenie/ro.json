@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Detectarea obiectelor",
-      "Description": "Detectează obiecte folosind un model YOLO11 pre-antrenat.",
+      "Description": "Detectează obiecte folosind un model YOLO pre-antrenat.",
       "ML.ObjectDetection": "Activează detectarea obiectelor",
       "ML.ObjectDetection.TriggerDetect": "Listă de lucruri separate prin virgulă (în engleză) care vor declanșa alarma. (de exemplu: pisică, câine, persoană, rucsac, valiză)",
-      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)"
     },
     "911": {
       "Title": "Estimarea poziției",
-      "Description": "Detectarea punctelor cheie prin estimarea poziției, utilizând modele ONNX personalizate sau modelul implicit YOLOv11 pre-antrenat (specific poziției umane).",
+      "Description": "Detectarea punctelor cheie prin estimarea poziției, utilizând modele ONNX personalizate sau modelul implicit YOLO pre-antrenat (specific poziției umane).",
       "ML.PoseEstimation": "Activează estimarea poziției",
-      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentarea instanței",
-      "Description": "Detectează obiecte și contururile acestora folosind un model YOLO11 pre-antrenat.",
+      "Description": "Detectează obiecte și contururile acestora folosind un model YOLO pre-antrenat.",
       "ML.InstanceSegmentation": "Activează segmentarea instanței",
-      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemeni Intent Handler",

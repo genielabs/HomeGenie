@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Zbulimi i Objekteve",
-      "Description": "Zbuloni objektet duke përdorur një model YOLO11 të para-trajnuar.",
+      "Description": "Zbuloni objektet duke përdorur një model YOLO të para-trajnuar.",
       "ML.ObjectDetection": "Aktivizo zbulimin e objekteve",
       "ML.ObjectDetection.TriggerDetect": "Listë e ndarë me presje e gjërave (në anglisht) që do të aktivizojnë alarmin. (p.sh.: mace, qen, person, çantë shpine, valixhe)",
-      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)"
     },
     "911": {
       "Title": "Vlerësimi i Pozës",
-      "Description": "Zbulimi i pikave kyçe nëpërmjet vlerësimit të pozës, duke përdorur modele ONNX të personalizuara ose modelin YOLOv11 të paracaktuar të trajnuar paraprakisht (specifik për pozën njerëzore).",
+      "Description": "Zbulimi i pikave kyçe nëpërmjet vlerësimit të pozës, duke përdorur modele ONNX të personalizuara ose modelin YOLO të paracaktuar të trajnuar paraprakisht (specifik për pozën njerëzore).",
       "ML.PoseEstimation": "Aktivizo vlerësimin e pozës",
-      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentimi i Instancës",
-      "Description": "Zbuloni objektet dhe skicat e tyre duke përdorur një model YOLO11 të para-trajnuar.",
+      "Description": "Zbuloni objektet dhe skicat e tyre duke përdorur një model YOLO të para-trajnuar.",
       "ML.InstanceSegmentation": "Aktivizo segmentimin e instancës",
-      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)"
     },
     "930": {
       "Title": "Trajneri i Synimeve të Binjakëve",

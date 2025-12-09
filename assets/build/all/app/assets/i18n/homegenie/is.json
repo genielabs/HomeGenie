@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Hlutagreining",
-      "Description": "Greina hluti með því að nota fyrirfram þjálfaða YOLO11 líkan.",
+      "Description": "Greina hluti með því að nota fyrirfram þjálfaða YOLO líkan.",
       "ML.ObjectDetection": "Virkja greiningu hluta",
       "ML.ObjectDetection.TriggerDetect": "Listi yfir hluti (á ensku) sem munu virkja viðvörunina, aðskilinn með kommu. (t.d.: köttur, hundur, manneskja, bakpoki, ferðataska)",
-      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO11 líkanskrár (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)"
     },
     "911": {
       "Title": "Mat á stellingu",
-      "Description": "Lykilpunktagreining með stellingarmati, með því að nota sérsniðnar ONNX líkön eða sjálfgefna forþjálfaða YOLOv11 líkanið (sértækt fyrir stellingu manna).",
+      "Description": "Lykilpunktagreining með stellingarmati, með því að nota sérsniðnar ONNX líkön eða sjálfgefna forþjálfaða YOLO líkanið (sértækt fyrir stellingu manna).",
       "ML.PoseEstimation": "Virkja stöðuáætlun",
-      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO11 líkanskrár (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)"
     },
     "912": {
       "Title": "Tilviksskipting",
-      "Description": "Greina hluti og útlínur þeirra með því að nota fyrirfram þjálfaða YOLO11 líkan.",
+      "Description": "Greina hluti og útlínur þeirra með því að nota fyrirfram þjálfaða YOLO líkan.",
       "ML.InstanceSegmentation": "Virkja tilvikaskiptingu",
-      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO11 líkanskrár (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

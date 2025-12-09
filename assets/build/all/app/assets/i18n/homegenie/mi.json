@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Rapunga Ahanoa",
-      "Description": "Rapua nga taonga ma te whakamahi i te tauira YOLO11 kua whakangungua.",
+      "Description": "Rapua nga taonga ma te whakamahi i te tauira YOLO kua whakangungua.",
       "ML.ObjectDetection": "Whakahohehia te kitenga ahanoa",
       "ML.ObjectDetection.TriggerDetect": "Ko te rarangi whakawehenga piko o nga mea (i te reo Ingarihi) ka puta te whakaoho. (hei tauira: ngeru, kuri, tangata, peketua, pekepeke)",
-      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)"
     },
     "911": {
       "Title": "Whakatau Whakatau",
-      "Description": "Te kimi tohu matua ma te whakatau tata, ma te whakamahi i nga tauira ONNX ritenga, i te tauira YOLOv11 kua whakangungua-mua ranei (whakaahua-tangata).",
+      "Description": "Te kimi tohu matua ma te whakatau tata, ma te whakamahi i nga tauira ONNX ritenga, i te tauira YOLO kua whakangungua-mua ranei (whakaahua-tangata).",
       "ML.PoseEstimation": "Whakahohehia te whakatau tata",
-      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)"
     },
     "912": {
       "Title": "Tauira Wehewehenga",
-      "Description": "Rapua he ahanoa me o raatau whakahuahua ma te whakamahi i te tauira YOLO11 kua oti te whakangungu.",
+      "Description": "Rapua he ahanoa me o raatau whakahuahua ma te whakamahi i te tauira YOLO kua oti te whakangungu.",
       "ML.InstanceSegmentation": "Whakahohehia te wehenga tauira",
-      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

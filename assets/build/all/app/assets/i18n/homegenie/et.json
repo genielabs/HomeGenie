@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objekti tuvastamine",
-      "Description": "Objektide tuvastamine eelnevalt treenitud YOLO11 mudeli abil.",
+      "Description": "Objektide tuvastamine eelnevalt treenitud YOLO mudeli abil.",
       "ML.ObjectDetection": "Objektide tuvastamise lubamine",
       "ML.ObjectDetection.TriggerDetect": "Komadega eraldatud nimekiri asjadest (inglise keeles), mis käivitavad alarmi. (nt: kass, koer, inimene, seljakott, kohver)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudelifaili (.onnx) tee"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee"
     },
     "911": {
       "Title": "Poosi hindamine",
-      "Description": "Võtmepunktide tuvastamine poosi hindamise abil, kasutades kohandatud ONNX-mudeleid või vaikimisi eelnevalt treenitud YOLOv11 mudelit (inimese poosispetsiifiline).",
+      "Description": "Võtmepunktide tuvastamine poosi hindamise abil, kasutades kohandatud ONNX-mudeleid või vaikimisi eelnevalt treenitud YOLO mudelit (inimese poosispetsiifiline).",
       "ML.PoseEstimation": "Luba poosi hindamine",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudelifaili (.onnx) tee"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee"
     },
     "912": {
       "Title": "Instantsi segmenteerimine",
-      "Description": "Tuvastage objekte ja nende kontuure eelnevalt treenitud YOLO11 mudeli abil.",
+      "Description": "Tuvastage objekte ja nende kontuure eelnevalt treenitud YOLO mudeli abil.",
       "ML.InstanceSegmentation": "Luba eksemplaride segmenteerimine",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 mudelifaili (.onnx) tee"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee"
     },
     "930": {
       "Title": "Gemini kavatsuste käitleja",

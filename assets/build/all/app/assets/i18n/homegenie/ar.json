@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "اكتشاف الكائنات",
-      "Description": "اكتشاف الكائنات باستخدام نموذج YOLO11 المدرب مسبقًا.",
+      "Description": "اكتشاف الكائنات باستخدام نموذج YOLO المدرب مسبقًا.",
       "ML.ObjectDetection": "تمكين اكتشاف الكائنات",
       "ML.ObjectDetection.TriggerDetect": "قائمة مفصولة بفواصل للأشياء (باللغة الإنجليزية) التي ستؤدي إلى تشغيل الإنذار. (على سبيل المثال: قطة، كلب، شخص، حقيبة ظهر، حقيبة سفر)",
-      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)"
     },
     "911": {
       "Title": "تقدير الوضع",
-      "Description": "اكتشاف النقاط الرئيسية من خلال تقدير الوضع، باستخدام نماذج ONNX المخصصة أو نموذج YOLOv11 المدرب مسبقًا الافتراضي (محدد للوضع البشري).",
+      "Description": "اكتشاف النقاط الرئيسية من خلال تقدير الوضع، باستخدام نماذج ONNX المخصصة أو نموذج YOLO المدرب مسبقًا الافتراضي (محدد للوضع البشري).",
       "ML.PoseEstimation": "تمكين تقدير الوضع",
-      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)"
     },
     "912": {
       "Title": "تجزئة المثيلات",
-      "Description": "اكتشاف الكائنات ومخططاتها باستخدام نموذج YOLO11 المدرب مسبقًا.",
+      "Description": "اكتشاف الكائنات ومخططاتها باستخدام نموذج YOLO المدرب مسبقًا.",
       "ML.InstanceSegmentation": "تمكين تقسيم المثيلات",
-      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)"
     },
     "930": {
       "Title": "معالج نوايا الجوزاء",

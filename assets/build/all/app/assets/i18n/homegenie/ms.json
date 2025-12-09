@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Pengesanan Objek",
-      "Description": "Kesan objek menggunakan model YOLO11 yang telah terlatih.",
+      "Description": "Kesan objek menggunakan model YOLO yang telah terlatih.",
       "ML.ObjectDetection": "Dayakan pengesanan objek",
       "ML.ObjectDetection.TriggerDetect": "Senarai perkara yang dipisahkan koma (dalam bahasa Inggeris) yang akan mencetuskan penggera. (cth: kucing, anjing, orang, beg galas, beg pakaian)",
-      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)"
     },
     "911": {
       "Title": "Anggaran Pose",
-      "Description": "Pengesanan titik kunci melalui anggaran pose, menggunakan model ONNX tersuai atau model YOLOv11 pra-latihan lalai (khusus pose manusia).",
+      "Description": "Pengesanan titik kunci melalui anggaran pose, menggunakan model ONNX tersuai atau model YOLO pra-latihan lalai (khusus pose manusia).",
       "ML.PoseEstimation": "Dayakan anggaran pose",
-      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)"
     },
     "912": {
       "Title": "Pembahagian Instance",
-      "Description": "Kesan objek dan garis besarnya menggunakan model YOLO11 yang telah terlatih.",
+      "Description": "Kesan objek dan garis besarnya menggunakan model YOLO yang telah terlatih.",
       "ML.InstanceSegmentation": "Dayakan pembahagian contoh",
-      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)"
     },
     "930": {
       "Title": "Pengendali Niat Gemini",

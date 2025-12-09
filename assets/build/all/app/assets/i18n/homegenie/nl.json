@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objectdetectie",
-      "Description": "Detecteer objecten met behulp van een vooraf getraind YOLO11-model.",
+      "Description": "Detecteer objecten met behulp van een vooraf getraind YOLO-model.",
       "ML.ObjectDetection": "Objectdetectie inschakelen",
       "ML.ObjectDetection.TriggerDetect": "Door komma's gescheiden lijst met dingen (in het Engels) die het alarm kunnen activeren. (bijv.: kat, hond, persoon, rugzak, koffer)",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)"
     },
     "911": {
       "Title": "Schatting van de houding",
-      "Description": "Detectie van belangrijke punten via houdingschatting, met behulp van aangepaste ONNX-modellen of het standaard vooraf getrainde YOLOv11-model (specifiek voor de houding van de mens).",
+      "Description": "Detectie van belangrijke punten via houdingschatting, met behulp van aangepaste ONNX-modellen of het standaard vooraf getrainde YOLO-model (specifiek voor de houding van de mens).",
       "ML.PoseEstimation": "Positie-schatting inschakelen",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)"
     },
     "912": {
       "Title": "Instantiesegmentatie",
-      "Description": "Detecteer objecten en hun contouren met behulp van een vooraf getraind YOLO11-model.",
+      "Description": "Detecteer objecten en hun contouren met behulp van een vooraf getraind YOLO-model.",
       "ML.InstanceSegmentation": "Instantiesegmentatie inschakelen",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO11-modelbestand (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

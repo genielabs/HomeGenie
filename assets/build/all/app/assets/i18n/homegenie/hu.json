@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objektumérzékelés",
-      "Description": "Objektumok észlelése egy előre betanított YOLO11 modell segítségével.",
+      "Description": "Objektumok észlelése egy előre betanított YOLO modell segítségével.",
       "ML.ObjectDetection": "Objektumészlelés engedélyezése",
       "ML.ObjectDetection.TriggerDetect": "Vesszővel elválasztott lista (angol nyelven), amely kiváltja a riasztást. (pl.: macska, kutya, személy, hátizsák, bőrönd)",
-      "ConfigureOptions.Yolo.ModelPath": "A YOLO11 modellfájl (.onnx) elérési útja"
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja"
     },
     "911": {
       "Title": "Pózbecslés",
-      "Description": "Kulcspont-észlelés pózbecsléssel, egyéni ONNX modellek vagy az alapértelmezett előre betanított YOLOv11 modell (emberi póz-specifikus) használatával.",
+      "Description": "Kulcspont-észlelés pózbecsléssel, egyéni ONNX modellek vagy az alapértelmezett előre betanított YOLO modell (emberi póz-specifikus) használatával.",
       "ML.PoseEstimation": "Pózbecslés engedélyezése",
-      "ConfigureOptions.Yolo.ModelPath": "A YOLO11 modellfájl (.onnx) elérési útja"
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja"
     },
     "912": {
       "Title": "Példány szegmentálás",
-      "Description": "Objektumok és körvonalaik észlelése egy előre betanított YOLO11 modell segítségével.",
+      "Description": "Objektumok és körvonalaik észlelése egy előre betanított YOLO modell segítségével.",
       "ML.InstanceSegmentation": "Példányszegmentálás engedélyezése",
-      "ConfigureOptions.Yolo.ModelPath": "A YOLO11 modellfájl (.onnx) elérési útja"
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja"
     },
     "930": {
       "Title": "Gemini szándékkezelő",

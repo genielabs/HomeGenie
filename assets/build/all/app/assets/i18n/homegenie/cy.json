@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Canfod Gwrthrychau",
-      "Description": "Canfod gwrthrychau gan ddefnyddio model YOLO11 sydd wedi'i hyfforddi ymlaen llaw.",
+      "Description": "Canfod gwrthrychau gan ddefnyddio model YOLO sydd wedi'i hyfforddi ymlaen llaw.",
       "ML.ObjectDetection": "Galluogi canfod gwrthrychau",
       "ML.ObjectDetection.TriggerDetect": "Rhestr o bethau (yn Saesneg) a fydd yn sbarduno'r larwm, wedi'u gwahanu gan goma. (e.e.: cath, ci, person, sach gefn, cês dillad)",
-      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)"
     },
     "911": {
       "Title": "Amcangyfrif Ystum",
-      "Description": "Canfod pwyntiau allweddol trwy amcangyfrif ystum, gan ddefnyddio modelau ONNX personol neu'r model YOLOv11 wedi'i hyfforddi ymlaen llaw rhagosodedig (penodol i ystum dynol).",
+      "Description": "Canfod pwyntiau allweddol trwy amcangyfrif ystum, gan ddefnyddio modelau ONNX personol neu'r model YOLO wedi'i hyfforddi ymlaen llaw rhagosodedig (penodol i ystum dynol).",
       "ML.PoseEstimation": "Galluogi amcangyfrif ystum",
-      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentu Enghraifft",
-      "Description": "Canfod gwrthrychau a'u hamlinelliadau gan ddefnyddio model YOLO11 sydd wedi'i hyfforddi ymlaen llaw.",
+      "Description": "Canfod gwrthrychau a'u hamlinelliadau gan ddefnyddio model YOLO sydd wedi'i hyfforddi ymlaen llaw.",
       "ML.InstanceSegmentation": "Galluogi segmentu enghreifftiau",
-      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)"
     },
     "930": {
       "Title": "Triniwr Bwriad Gemini",

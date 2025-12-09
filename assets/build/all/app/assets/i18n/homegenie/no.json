@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objektdeteksjon",
-      "Description": "Oppdag objekter ved hjelp av en forhåndstrent YOLO11-modell.",
+      "Description": "Oppdag objekter ved hjelp av en forhåndstrent YOLO-modell.",
       "ML.ObjectDetection": "Aktiver objektgjenkjenning",
       "ML.ObjectDetection.TriggerDetect": "Kommaseparert liste over ting (på engelsk) som vil utløse alarmen. (f.eks.: katt, hund, person, ryggsekk, koffert)",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)"
     },
     "911": {
       "Title": "Positionsestimering",
-      "Description": "Nøkkelpunktdeteksjon via positureestimering, ved bruk av tilpassede ONNX-modeller eller den standard forhåndstrente YOLOv11-modellen (spesifikk for menneskelig positur).",
+      "Description": "Nøkkelpunktdeteksjon via positureestimering, ved bruk av tilpassede ONNX-modeller eller den standard forhåndstrente YOLO-modellen (spesifikk for menneskelig positur).",
       "ML.PoseEstimation": "Aktiver positurestimering",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)"
     },
     "912": {
       "Title": "Instanssegmentering",
-      "Description": "Oppdag objekter og deres omriss ved hjelp av en forhåndstrent YOLO11-modell.",
+      "Description": "Oppdag objekter og deres omriss ved hjelp av en forhåndstrent YOLO-modell.",
       "ML.InstanceSegmentation": "Aktiver forekomstsegmentering",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO11-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Zaznavanje predmetov",
-      "Description": "Zaznavanje predmetov z uporabo vnaprej naučenega modela YOLO11.",
+      "Description": "Zaznavanje predmetov z uporabo vnaprej naučenega modela YOLO.",
       "ML.ObjectDetection": "Omogoči zaznavanje predmetov",
       "ML.ObjectDetection.TriggerDetect": "Seznam stvari (v angleščini), ločenih z vejicami, ki bodo sprožile alarm. (npr.: mačka, pes, oseba, nahrbtnik, kovček)",
-      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO (.onnx)"
     },
     "911": {
       "Title": "Ocena poze",
-      "Description": "Zaznavanje ključnih točk z ocenjevanjem položaja, z uporabo prilagojenih modelov ONNX ali privzetega predhodno naučenega modela YOLOv11 (specifičnega za človeški položaj).",
+      "Description": "Zaznavanje ključnih točk z ocenjevanjem položaja, z uporabo prilagojenih modelov ONNX ali privzetega predhodno naučenega modela YOLO (specifičnega za človeški položaj).",
       "ML.PoseEstimation": "Omogoči oceno poze",
-      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentacija primerkov",
-      "Description": "Zaznavanje predmetov in njihovih obrisov z uporabo predhodno naučenega modela YOLO11.",
+      "Description": "Zaznavanje predmetov in njihovih obrisov z uporabo predhodno naučenega modela YOLO.",
       "ML.InstanceSegmentation": "Omogoči segmentacijo primerkov",
-      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pot do datoteke modela YOLO (.onnx)"
     },
     "930": {
       "Title": "Upravljavec namer Gemini",

@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "ການກວດຫາວັດຖຸ",
-      "Description": "ກວດຫາວັດຖຸໂດຍໃຊ້ຕົວແບບ YOLO11 ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
+      "Description": "ກວດຫາວັດຖຸໂດຍໃຊ້ຕົວແບບ YOLO ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.ObjectDetection": "ເປີດໃຊ້ການກວດຫາວັດຖຸ",
       "ML.ObjectDetection.TriggerDetect": "ລາຍຊື່ສິ່ງຕ່າງໆທີ່ຂັ້ນດ້ວຍເຄື່ອງໝາຍຈຸດ (ໃນພາສາອັງກິດ) ທີ່ຈະກະຕຸ້ນເຕືອນ. (ເຊັ່ນ: cat, dog, person, backpack, suitcase)",
-      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)"
     },
     "911": {
       "Title": "Pose ຄາດຄະເນ",
-      "Description": "ການກວດຫາຈຸດສຳຄັນຜ່ານການຄາດຄະເນການຕັ້ງຕົວແບບ, ໂດຍໃຊ້ໂມເດວ ONNX ແບບກຳນົດເອງ ຫຼືຮູບແບບ YOLOv11 ທີ່ໄດ້ຝຶກອົບຮົມໄວ້ກ່ອນເລີ່ມຕົ້ນ (ສະເພາະຕົວແບບຂອງມະນຸດ).",
+      "Description": "ການກວດຫາຈຸດສຳຄັນຜ່ານການຄາດຄະເນການຕັ້ງຕົວແບບ, ໂດຍໃຊ້ໂມເດວ ONNX ແບບກຳນົດເອງ ຫຼືຮູບແບບ YOLO ທີ່ໄດ້ຝຶກອົບຮົມໄວ້ກ່ອນເລີ່ມຕົ້ນ (ສະເພາະຕົວແບບຂອງມະນຸດ).",
       "ML.PoseEstimation": "ເປີດ​ໃຊ້​ງານ​ການ​ຄາດ​ຄະ​ເນ​",
-      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)"
     },
     "912": {
       "Title": "ການແບ່ງສ່ວນຕົວຢ່າງ",
-      "Description": "ກວດຫາວັດຖຸ ແລະໂຄງຮ່າງຂອງພວກມັນໂດຍໃຊ້ຕົວແບບ YOLO11 ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
+      "Description": "ກວດຫາວັດຖຸ ແລະໂຄງຮ່າງຂອງພວກມັນໂດຍໃຊ້ຕົວແບບ YOLO ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.InstanceSegmentation": "ເປີດໃຊ້ການແບ່ງສ່ວນຕົວຢ່າງ",
-      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

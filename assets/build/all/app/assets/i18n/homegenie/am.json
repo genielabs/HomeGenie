@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "የነገር ማወቂያ",
-      "Description": "አስቀድሞ የሰለጠነ YOLO11 ሞዴል በመጠቀም ነገሮችን ያግኙ።",
+      "Description": "አስቀድሞ የሰለጠነ YOLO ሞዴል በመጠቀም ነገሮችን ያግኙ።",
       "ML.ObjectDetection": "የነገሮችን መለየት አንቃ",
       "ML.ObjectDetection.TriggerDetect": "ማንቂያውን የሚያነቃቁ በነጠላ ሰረዝ የተለዩ የነገሮች ዝርዝር (በእንግሊዘኛ)። (ለምሳሌ፡ ድመት፣ ውሻ፣ ሰው፣ ቦርሳ፣ ሻንጣ)",
-      "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)"
     },
     "911": {
       "Title": "Pose ግምት",
-      "Description": "ብጁ ONNX ሞዴሎችን ወይም ነባሪው ቀድሞ የሰለጠነ YOLOv11 ሞዴል (የሰው አቀማመጥ-ተኮር) በመጠቀም የቁልፍ ነጥብ ማወቂያ በፖዝ ግምት።",
+      "Description": "ብጁ ONNX ሞዴሎችን ወይም ነባሪው ቀድሞ የሰለጠነ YOLO ሞዴል (የሰው አቀማመጥ-ተኮር) በመጠቀም የቁልፍ ነጥብ ማወቂያ በፖዝ ግምት።",
       "ML.PoseEstimation": "የአቀማመጥ ግምትን አንቃ",
-      "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)"
     },
     "912": {
       "Title": "የአብነት ክፍፍል",
-      "Description": "አስቀድሞ የሰለጠነ YOLO11 ሞዴል በመጠቀም ነገሮችን እና ገለጻዎቻቸውን ያግኙ።",
+      "Description": "አስቀድሞ የሰለጠነ YOLO ሞዴል በመጠቀም ነገሮችን እና ገለጻዎቻቸውን ያግኙ።",
       "ML.InstanceSegmentation": "የአብነት ክፍፍልን አንቃ",
-      "ConfigureOptions.Yolo.ModelPath": "የYOLO11 ሞዴል ፋይል መንገድ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)"
     },
     "930": {
       "Title": "ጀሚኒ ሐሳብ ተቆጣጣሪ",

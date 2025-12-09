@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Ogaanshaha Shayga",
-      "Description": "Soo ogow walxaha addoo isticmaalaya qaabka YOLO11 horay loo tababaray.",
+      "Description": "Soo ogow walxaha addoo isticmaalaya qaabka YOLO horay loo tababaray.",
       "ML.ObjectDetection": "Daar ogaanshaha walxaha",
       "ML.ObjectDetection.TriggerDetect": "Liiska walxaha kala-saaran (Ingiriisi) ee kicin doona qaylo-dhaanta. (tusaale: bisad, eey, qof, shandad dhabarka, shandad)",
-      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)"
     },
     "911": {
       "Title": "Qiyaasta booska",
-      "Description": "Ogaanshaha dhibicda furaha iyada oo la adeegsanayo qiimaynta gogoldhigga, iyadoo la adeegsanayo moodooyinka ONNX ee caadiga ah ama nooca YOLOv11 ee horay loo tababaray ee caadiga ahaa",
+      "Description": "Ogaanshaha dhibicda furaha iyada oo la adeegsanayo qiimaynta gogoldhigga, iyadoo la adeegsanayo moodooyinka ONNX ee caadiga ah ama nooca YOLO ee horay loo tababaray ee caadiga ahaa",
       "ML.PoseEstimation": "Daree qiyaasta gogoldhigga",
-      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)"
     },
     "912": {
       "Title": "Qaybta Tusaalaha",
-      "Description": "Soo ogow walxaha iyo dulmarkooda adiga oo isticmaalaya qaabka YOLO11 horay loo tababaray.",
+      "Description": "Soo ogow walxaha iyo dulmarkooda adiga oo isticmaalaya qaabka YOLO horay loo tababaray.",
       "ML.InstanceSegmentation": "Daar kala qaybinta tusaale",
-      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

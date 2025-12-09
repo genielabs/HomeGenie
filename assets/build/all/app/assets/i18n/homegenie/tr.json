@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Nesne Algılama",
-      "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri tespit edin.",
+      "Description": "Önceden eğitilmiş bir YOLO modeli kullanarak nesneleri tespit edin.",
       "ML.ObjectDetection": "Nesne algılamayı etkinleştir",
       "ML.ObjectDetection.TriggerDetect": "Alarmı tetikleyecek şeylerin (İngilizce) virgülle ayrılmış listesi. (örneğin: kedi, köpek, kişi, sırt çantası, bavul)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu"
     },
     "911": {
       "Title": "Poz Tahmini",
-      "Description": "Özel ONNX modelleri veya varsayılan önceden eğitilmiş YOLOv11 modeli (insan duruşuna özgü) kullanılarak poz tahmini yoluyla anahtar nokta tespiti.",
+      "Description": "Özel ONNX modelleri veya varsayılan önceden eğitilmiş YOLO modeli (insan duruşuna özgü) kullanılarak poz tahmini yoluyla anahtar nokta tespiti.",
       "ML.PoseEstimation": "Poz tahminini etkinleştir",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu"
     },
     "912": {
       "Title": "Örnek Segmentasyonu",
-      "Description": "Önceden eğitilmiş bir YOLO11 modeli kullanarak nesneleri ve onların ana hatlarını tespit edin.",
+      "Description": "Önceden eğitilmiş bir YOLO modeli kullanarak nesneleri ve onların ana hatlarını tespit edin.",
       "ML.InstanceSegmentation": "Örnek segmentasyonunu etkinleştir",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model dosyasının (.onnx) yolu"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu"
     },
     "930": {
       "Title": "Gemini Niyet İşleyicisi",

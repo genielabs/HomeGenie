@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "د شیانو کشف",
-      "Description": "د مخکې له مخکې روزل شوي YOLO11 ماډل په کارولو سره شیان کشف کړئ.",
+      "Description": "د مخکې له مخکې روزل شوي YOLO ماډل په کارولو سره شیان کشف کړئ.",
       "ML.ObjectDetection": "د شیانو کشف فعال کړئ",
       "ML.ObjectDetection.TriggerDetect": "د کوما سره جلا شوي د شیانو لیست (په انګلیسي کې) چې الارم به پیل کړي. (د مثال په توګه: پیشو، سپی، سړی، بیک پیک، سوټ کیس)",
-      "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)"
     },
     "911": {
       "Title": "د پوز اټکل",
-      "Description": "د پوز اټکل له لارې د کلیدي نقطو کشف، د دودیز ONNX ماډلونو یا د ډیفالټ دمخه روزل شوي YOLOv11 ماډل (د انسان پوز پورې اړوند) په کارولو سره.",
+      "Description": "د پوز اټکل له لارې د کلیدي نقطو کشف، د دودیز ONNX ماډلونو یا د ډیفالټ دمخه روزل شوي YOLO ماډل (د انسان پوز پورې اړوند) په کارولو سره.",
       "ML.PoseEstimation": "د پوز اټکل فعال کړئ",
-      "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)"
     },
     "912": {
       "Title": "د مثال قطع کول",
-      "Description": "د مخکې له مخکې روزل شوي YOLO11 ماډل په کارولو سره شیان او د هغوی بڼې کشف کړئ.",
+      "Description": "د مخکې له مخکې روزل شوي YOLO ماډل په کارولو سره شیان او د هغوی بڼې کشف کړئ.",
       "ML.InstanceSegmentation": "د مثال قطع کول فعال کړئ",
-      "ConfigureOptions.Yolo.ModelPath": "د YOLO11 ماډل فایل لاره (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)"
     },
     "930": {
       "Title": "د جیمني ارادې سمبالونکی",

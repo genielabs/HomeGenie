@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objektų aptikimas",
-      "Description": "Aptikti objektus naudojant iš anksto apmokytą YOLO11 modelį.",
+      "Description": "Aptikti objektus naudojant iš anksto apmokytą YOLO modelį.",
       "ML.ObjectDetection": "Įgalinti objektų aptikimą",
       "ML.ObjectDetection.TriggerDetect": "Kableliais atskirtas sąrašas dalykų (anglų kalba), kurie suaktyvins žadintuvą. (pvz.: katė, šuo, žmogus, kuprinė, lagaminas)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo (.onnx) kelias"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias"
     },
     "911": {
       "Title": "Pozos įvertinimas",
-      "Description": "Pagrindinių taškų aptikimas naudojant pozos įvertinimą, pasirinktinius ONNX modelius arba numatytąjį iš anksto apmokytą YOLOv11 modelį (specifinį žmogaus pozai).",
+      "Description": "Pagrindinių taškų aptikimas naudojant pozos įvertinimą, pasirinktinius ONNX modelius arba numatytąjį iš anksto apmokytą YOLO modelį (specifinį žmogaus pozai).",
       "ML.PoseEstimation": "Įgalinti pozos įvertinimą",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo (.onnx) kelias"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias"
     },
     "912": {
       "Title": "Egzempliorių segmentavimas",
-      "Description": "Aptikti objektus ir jų kontūrus naudojant iš anksto apmokytą YOLO11 modelį.",
+      "Description": "Aptikti objektus ir jų kontūrus naudojant iš anksto apmokytą YOLO modelį.",
       "ML.InstanceSegmentation": "Įgalinti egzempliorių segmentavimą",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 modelio failo (.onnx) kelias"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias"
     },
     "930": {
       "Title": "Gemini ketinimų tvarkytojas",

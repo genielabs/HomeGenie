@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "تشخیص شیء",
-      "Description": "تشخیص اشیاء با استفاده از یک مدل YOLO11 از پیش آموزش دیده.",
+      "Description": "تشخیص اشیاء با استفاده از یک مدل YOLO از پیش آموزش دیده.",
       "ML.ObjectDetection": "فعال کردن تشخیص اشیاء",
       "ML.ObjectDetection.TriggerDetect": "فهرستی از چیزهایی که با ویرگول از هم جدا می‌شوند (به انگلیسی) که باعث به صدا درآمدن زنگ هشدار می‌شوند. (مثلاً: گربه، سگ، شخص، کوله پشتی، چمدان)",
-      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)"
     },
     "911": {
       "Title": "تخمین ژست",
-      "Description": "تشخیص نقاط کلیدی از طریق تخمین حالت بدن، با استفاده از مدل‌های سفارشی ONNX یا مدل پیش‌فرض و از پیش آموزش‌دیده YOLOv11 (مختص حالت بدن انسان).",
+      "Description": "تشخیص نقاط کلیدی از طریق تخمین حالت بدن، با استفاده از مدل‌های سفارشی ONNX یا مدل پیش‌فرض و از پیش آموزش‌دیده YOLO (مختص حالت بدن انسان).",
       "ML.PoseEstimation": "فعال کردن تخمین ژست",
-      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)"
     },
     "912": {
       "Title": "تقسیم‌بندی نمونه",
-      "Description": "تشخیص اشیاء و خطوط بیرونی آنها با استفاده از یک مدل از پیش آموزش دیده YOLO11.",
+      "Description": "تشخیص اشیاء و خطوط بیرونی آنها با استفاده از یک مدل از پیش آموزش دیده YOLO.",
       "ML.InstanceSegmentation": "فعال کردن تقسیم‌بندی نمونه",
-      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)"
     },
     "930": {
       "Title": "هندلر اینتنت جمینی",

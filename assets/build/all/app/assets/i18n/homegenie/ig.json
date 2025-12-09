@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Nchọpụta ihe",
-      "Description": "Chọpụta ihe n'iji ụdị YOLO11 a zụrụ azụ.",
+      "Description": "Chọpụta ihe n'iji ụdị YOLO a zụrụ azụ.",
       "ML.ObjectDetection": "Kwado nchọpụta ihe",
       "ML.ObjectDetection.TriggerDetect": "Ndepụta ihe ndị kewapụrụ rịkọm (na Bekee) ga-akpalite mkpu. (dịka ọmụmaatụ: pusi, nkịta, mmadụ, akpa azụ, akpa)",
-      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)"
     },
     "911": {
       "Title": "Ntụle ọnọdụ",
-      "Description": "Nchọpụta isi ihe site na nleba anya pose, na-eji ụdị ONNX omenala ma ọ bụ ụdị YOLOv11 a zụrụ nke ọma (kpọmkwem pose mmadụ).",
+      "Description": "Nchọpụta isi ihe site na nleba anya pose, na-eji ụdị ONNX omenala ma ọ bụ ụdị YOLO a zụrụ nke ọma (kpọmkwem pose mmadụ).",
       "ML.PoseEstimation": "Kwado ntule ọnọdụ",
-      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)"
     },
     "912": {
       "Title": "Nkeji ihe atụ",
-      "Description": "Chọpụta ihe na ndepụta ha site n'iji ụdị YOLO11 a zụrụ azụ.",
+      "Description": "Chọpụta ihe na ndepụta ha site n'iji ụdị YOLO a zụrụ azụ.",
       "ML.InstanceSegmentation": "Kwado nkebi ihe atụ",
-      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

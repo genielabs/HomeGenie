@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Object Detection",
-      "Description": "Mag-detect ng mga bagay gamit ang isang pre-trained na modelo ng YOLO11.",
+      "Description": "Mag-detect ng mga bagay gamit ang isang pre-trained na modelo ng YOLO.",
       "ML.ObjectDetection": "Paganahin ang pagtuklas ng mga bagay",
       "ML.ObjectDetection.TriggerDetect": "Listahan ng mga bagay na pinaghihiwalay ng kuwit (sa English) na magti-trigger ng alarma. (hal: pusa, aso, tao, backpack, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)"
     },
     "911": {
       "Title": "Pagtataya ng pose",
-      "Description": "Keypoint detection sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelo ng YOLOv11 (human pose-specific).",
+      "Description": "Keypoint detection sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelo ng YOLO (human pose-specific).",
       "ML.PoseEstimation": "Paganahin ang pagtatantya ng pose",
-      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)"
     },
     "912": {
       "Title": "Pag-segment ng Instance",
-      "Description": "I-detect ang mga bagay at ang kanilang mga balangkas gamit ang isang pre-trained na modelo ng YOLO11.",
+      "Description": "I-detect ang mga bagay at ang kanilang mga balangkas gamit ang isang pre-trained na modelo ng YOLO.",
       "ML.InstanceSegmentation": "I-enable ang pagse-segment ng instance",
-      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO11 model file (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

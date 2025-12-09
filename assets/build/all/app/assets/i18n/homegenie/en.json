@@ -519,35 +519,35 @@
       "Title":
         "Object Detection",
       "Description":
-        "Detect objects using a pre-trained YOLO11 model.",
+        "Detect objects using a pre-trained YOLO model.",
       "ML.ObjectDetection":
         "Enable objects detection",
       "ML.ObjectDetection.TriggerDetect":
         "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath":
-        "Path of YOLO11 model file (.onnx)"
+        "Path of YOLO model file (.onnx)"
     },
 
     "911": {
       "Title":
         "Pose Estimation",
       "Description":
-        "Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLOv11 model (human pose-specific).",
+        "Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLO model (human pose-specific).",
       "ML.PoseEstimation":
         "Enable pose estimation",
       "ConfigureOptions.Yolo.ModelPath":
-        "Path of YOLO11 model file (.onnx)"
+        "Path of YOLO model file (.onnx)"
     },
 
     "912": {
       "Title":
         "Instance Segmentation",
       "Description":
-        "Detect objects and their outlines using a pre-trained YOLO11 model.",
+        "Detect objects and their outlines using a pre-trained YOLO model.",
       "ML.InstanceSegmentation":
         "Enable instance segmentation",
       "ConfigureOptions.Yolo.ModelPath":
-        "Path of YOLO11 model file (.onnx)"
+        "Path of YOLO model file (.onnx)"
     },
 
     "930": {

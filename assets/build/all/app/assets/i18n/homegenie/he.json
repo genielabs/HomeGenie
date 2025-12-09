@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "זיהוי עצמים",
-      "Description": "זיהוי עצמים באמצעות מודל YOLO11 שאומן מראש.",
+      "Description": "זיהוי עצמים באמצעות מודל YOLO שאומן מראש.",
       "ML.ObjectDetection": "הפעלת זיהוי אובייקטים",
       "ML.ObjectDetection.TriggerDetect": "רשימה מופרדת בפסיקים של דברים (באנגלית) שיפעילו את האזעקה. (לדוגמה: חתול, כלב, אדם, תרמיל, מזוודה)",
-      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)"
     },
     "911": {
       "Title": "הערכת תנוחה",
-      "Description": "זיהוי נקודות מפתח באמצעות הערכת תנוחה, באמצעות מודלים של ONNX מותאמים אישית או מודל YOLOv11 שאומן מראש כברירת מחדל (ספציפי לתנוחה אנושית).",
+      "Description": "זיהוי נקודות מפתח באמצעות הערכת תנוחה, באמצעות מודלים של ONNX מותאמים אישית או מודל YOLO שאומן מראש כברירת מחדל (ספציפי לתנוחה אנושית).",
       "ML.PoseEstimation": "הפעלת הערכת תנוחה",
-      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)"
     },
     "912": {
       "Title": "פילוח מופעים",
-      "Description": "זיהוי עצמים וקווי המתאר שלהם באמצעות מודל YOLO11 שאומן מראש.",
+      "Description": "זיהוי עצמים וקווי המתאר שלהם באמצעות מודל YOLO שאומן מראש.",
       "ML.InstanceSegmentation": "הפעל פילוח מופעים",
-      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)"
     },
     "930": {
       "Title": "מטפל כוונות ג'מיני",

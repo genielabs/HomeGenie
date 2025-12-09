@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Detectio Obiectorum",
-      "Description": "Obiecta detege utens modelo YOLO11 prae-exercitato.",
+      "Description": "Obiecta detege utens modelo YOLO prae-exercitato.",
       "ML.ObjectDetection": "Detectionem rerum permitte",
       "ML.ObjectDetection.TriggerDetect": "Index rerum (Anglice) quae alarmum excitabunt, commatibus separatarum (exempli gratia: felis, canis, homo, saccus dorsualis, valis)",
-      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)"
     },
     "911": {
       "Title": "Aestimatio Positionis",
-      "Description": "Detectio punctorum clavium per aestimationem positionis, utens exemplaribus ONNX propriis vel exemplari YOLOv11 prae-exercitato implicito (positioni humanae specifico).",
+      "Description": "Detectio punctorum clavium per aestimationem positionis, utens exemplaribus ONNX propriis vel exemplari YOLO prae-exercitato implicito (positioni humanae specifico).",
       "ML.PoseEstimation": "Aestimationem positionis activare",
-      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentatio Instantiarum",
-      "Description": "Obiecta earumque lineamenta detege utens modelo YOLO11 prae-exercitato.",
+      "Description": "Obiecta earumque lineamenta detege utens modelo YOLO prae-exercitato.",
       "ML.InstanceSegmentation": "Segmentationem instantiarum permitte",
-      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

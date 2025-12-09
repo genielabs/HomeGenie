@@ -739,7 +739,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
   ).AddOption(
     "Yolo.ModelPath",
     Data.GetFolder() + "/yolo11n-seg.onnx",
-    "Path of YOLO11 model file (.onnx)",
+    "Path of YOLO model file (.onnx)",
     "text"
   );
 
@@ -760,7 +760,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
 if (String.IsNullOrEmpty(yoloModelPath))
 {
-    Program.Notify($"Configure the path of YOLO11 'segment' model (.onnx file). {OptionButtons}");
+    Program.Notify($"Configure the path of YOLO 'segment' model (.onnx file). {OptionButtons}");
     Pause(5);
     return;
 }
@@ -1002,14 +1002,14 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>instance-segmentation</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>C66626FF29C68B321C6563E3BB3872D6</Checksum>
+      <Checksum>C249CD2182AD04DD7226B7713540740C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>912</Address>
     <Name>Instance Segmentation</Name>
-    <Description>Detect objects and their contour mask using a pre-trained YOLO11 model.
+    <Description>Detect objects and their contour mask using a pre-trained YOLO model.
 </Description>
     <Group>AI - Machine Learning</Group>
     <Features>
@@ -1355,7 +1355,7 @@ Simply provide the path to a GGUF format model file. Please note that adjustment
   ).AddOption(
     YoloModelPath,
     Data.GetFolder() + "/yolo11n.onnx",
-    "Path of YOLO11 model file (.onnx)",
+    "Path of YOLO model file (.onnx)",
     "text"
   );
 
@@ -1375,7 +1375,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 var modelPath = Program.Option(YoloModelPath)?.Value;
 if (String.IsNullOrEmpty(modelPath))
 {
-    Program.Notify($"Configure the path of YOLO11 'detect' model (.onnx file). {OptionButtons}");
+    Program.Notify($"Configure the path of YOLO 'detect' model (.onnx file). {OptionButtons}");
     Pause(5);
     return;
 }
@@ -1496,14 +1496,14 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>object-detection</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>B7CA86D23DC7EE4520DA0284DF0AC368</Checksum>
+      <Checksum>3D2F4F592448A4868B9A61FB4B111C5B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
     <Name>Object Detection</Name>
-    <Description>Detect objects using a pre-trained YOLO11 model.
+    <Description>Detect objects using a pre-trained YOLO model.
 </Description>
     <Group>AI - Machine Learning</Group>
     <Features>
@@ -1538,7 +1538,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
   ).AddOption(
     "Yolo.ModelPath",
     Data.GetFolder() + "/yolo11n-pose.onnx",
-    "Path of YOLO11 model file (.onnx)",
+    "Path of YOLO model file (.onnx)",
     "text"
   );
 
@@ -1559,7 +1559,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 var yoloModelPath = Program.Option("Yolo.ModelPath")?.Value;
 if (String.IsNullOrEmpty(yoloModelPath))
 {
-    Program.Notify($"Configure the path of YOLO11 'pose' model (.onnx file). {OptionButtons}");
+    Program.Notify($"Configure the path of YOLO 'pose' model (.onnx file). {OptionButtons}");
     Pause(5);
     return;
 }
@@ -1649,14 +1649,14 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>pose-estimation</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>F67AAB91A888270A27A447F8728A1701</Checksum>
+      <Checksum>D8CA796A879E90B543897366A4702CBF</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>911</Address>
     <Name>Pose estimation</Name>
-    <Description>Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLOv11 model (human pose-specific).</Description>
+    <Description>Keypoint detection via pose estimation, using custom ONNX models or the default pre-trained YOLO model (human pose-specific).</Description>
     <Group>AI - Machine Learning</Group>
     <Features>
       <ProgramFeature>

@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Gane Abu",
-      "Description": "Gano abubuwa ta amfani da ƙirar YOLO11 da aka riga aka horar.",
+      "Description": "Gano abubuwa ta amfani da ƙirar YOLO da aka riga aka horar.",
       "ML.ObjectDetection": "Kunna gano abubuwa",
       "ML.ObjectDetection.TriggerDetect": "Jerin abubuwan da aka raba waƙafi (a cikin Ingilishi) waɗanda zasu kunna ƙararrawa. (misali: cat, kare, mutum, jakar baya, akwati)",
-      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)"
     },
     "911": {
       "Title": "Ƙimar Matsayi",
-      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da samfuran ONNX na al'ada ko ƙirar YOLOv11 da aka riga aka horar da ita (takamaiman matsayi na ɗan adam).",
+      "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da samfuran ONNX na al'ada ko ƙirar YOLO da aka riga aka horar da ita (takamaiman matsayi na ɗan adam).",
       "ML.PoseEstimation": "Kunna kimar matsayi",
-      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)"
     },
     "912": {
       "Title": "Rarraba Misali",
-      "Description": "Gano abubuwa da fassarorinsu ta amfani da ƙirar YOLO11 da aka riga aka horar.",
+      "Description": "Gano abubuwa da fassarorinsu ta amfani da ƙirar YOLO da aka riga aka horar.",
       "ML.InstanceSegmentation": "Kunna sashin misali",
-      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

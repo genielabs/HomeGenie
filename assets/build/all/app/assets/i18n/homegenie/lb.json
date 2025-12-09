@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Objetdetektioun",
-      "Description": "Objeten mat engem virtrainéierte YOLO11-Modell erkennen.",
+      "Description": "Objeten mat engem virtrainéierte YOLO-Modell erkennen.",
       "ML.ObjectDetection": "Objetdetektioun aktivéieren",
       "ML.ObjectDetection.TriggerDetect": "Komma-getrennt Lëscht vun de Saachen (op Englesch), déi den Alarm ausléisen. (z.B.: Kaz, Hond, Persoun, Rucksak, Koffer)",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO11 Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)"
     },
     "911": {
       "Title": "Pose Schätzung",
-      "Description": "Schlësselpunktdetektioun iwwer Pose-Schätzung, mat Hëllef vu personaliséierte ONNX-Modeller oder dem Standard-virtrainéierte YOLOv11-Modell (mënschlech Pose-spezifesch).",
+      "Description": "Schlësselpunktdetektioun iwwer Pose-Schätzung, mat Hëllef vu personaliséierte ONNX-Modeller oder dem Standard-virtrainéierte YOLO-Modell (mënschlech Pose-spezifesch).",
       "ML.PoseEstimation": "Pose-Schätzung aktivéieren",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO11 Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)"
     },
     "912": {
       "Title": "Instanzsegmentéierung",
-      "Description": "Objeten an hir Konturen mat engem virtrainéierte YOLO11-Modell erkennen.",
+      "Description": "Objeten an hir Konturen mat engem virtrainéierte YOLO-Modell erkennen.",
       "ML.InstanceSegmentation": "Instanzsegmentéierung aktivéieren",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO11 Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

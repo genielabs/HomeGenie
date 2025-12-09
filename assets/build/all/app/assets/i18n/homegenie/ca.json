@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Detecció d'objectes",
-      "Description": "Detectar objectes mitjançant un model YOLO11 preentrenat.",
+      "Description": "Detectar objectes mitjançant un model YOLO preentrenat.",
       "ML.ObjectDetection": "Activa la detecció d'objectes",
       "ML.ObjectDetection.TriggerDetect": "Llista separada per comes de coses (en anglès) que activaran l'alarma. (per exemple: gat, gos, persona, motxilla, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)"
     },
     "911": {
       "Title": "Estimació de la postura",
-      "Description": "Detecció de punts clau mitjançant estimació de poses, utilitzant models ONNX personalitzats o el model YOLOv11 preentrenat per defecte (específic de la pose humana).",
+      "Description": "Detecció de punts clau mitjançant estimació de poses, utilitzant models ONNX personalitzats o el model YOLO preentrenat per defecte (específic de la pose humana).",
       "ML.PoseEstimation": "Activa l'estimació de la postura",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentació d'instàncies",
-      "Description": "Detecta objectes i els seus contorns mitjançant un model YOLO11 preentrenat.",
+      "Description": "Detecta objectes i els seus contorns mitjançant un model YOLO preentrenat.",
       "ML.InstanceSegmentation": "Habilita la segmentació d'instàncies",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)"
     },
     "930": {
       "Title": "Gestor d'intencions de Bessons",

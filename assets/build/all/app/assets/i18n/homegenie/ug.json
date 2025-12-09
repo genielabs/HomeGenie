@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "ئوبيېكت بايقاش",
-      "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
+      "Description": "ئالدىن تەربىيەلەنگەن YOLO مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
       "ML.ObjectDetection": "جىسىملارنى بايقاشنى قوزغىتىڭ",
       "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)"
     },
     "911": {
       "Title": "Pose Estimation",
-      "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLOv11 مودېلى (ئىنسانلارنىڭ تۇرقىغا خاس).",
+      "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLO مودېلى (ئىنسانلارنىڭ تۇرقىغا خاس).",
       "ML.PoseEstimation": "تۇراقلىق مۆلچەرنى قوزغىتىڭ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)"
     },
     "912": {
       "Title": "Instance Segmentation",
-      "Description": "ئالدىن تەربىيەلەنگەن YOLO11 مودېلى ئارقىلىق جىسىم ۋە ئۇلارنىڭ تىزىمىنى ئېنىقلاڭ.",
+      "Description": "ئالدىن تەربىيەلەنگەن YOLO مودېلى ئارقىلىق جىسىم ۋە ئۇلارنىڭ تىزىمىنى ئېنىقلاڭ.",
       "ML.InstanceSegmentation": "ئۈلگە بۆلەكنى قوزغىتىڭ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 مودېل ھۆججىتىنىڭ يولى (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",

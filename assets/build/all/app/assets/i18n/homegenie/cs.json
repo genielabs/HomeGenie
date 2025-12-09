@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Detekce objektů",
-      "Description": "Detekujte objekty pomocí předtrénovaného modelu YOLO11.",
+      "Description": "Detekujte objekty pomocí předtrénovaného modelu YOLO.",
       "ML.ObjectDetection": "Povolit detekci objektů",
       "ML.ObjectDetection.TriggerDetect": "Seznam věcí (v angličtině), které spustí alarm, oddělený čárkami. (např.: kočka, pes, osoba, batoh, kufr)",
-      "ConfigureOptions.Yolo.ModelPath": "Cesta k souboru modelu YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cesta k souboru modelu YOLO (.onnx)"
     },
     "911": {
       "Title": "Odhad pózy",
-      "Description": "Detekce klíčových bodů pomocí odhadu pozice, s využitím vlastních modelů ONNX nebo výchozího předtrénovaného modelu YOLOv11 (specifického pro lidskou pozice).",
+      "Description": "Detekce klíčových bodů pomocí odhadu pozice, s využitím vlastních modelů ONNX nebo výchozího předtrénovaného modelu YOLO (specifického pro lidskou pozice).",
       "ML.PoseEstimation": "Povolit odhad pozice",
-      "ConfigureOptions.Yolo.ModelPath": "Cesta k souboru modelu YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cesta k souboru modelu YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentace instancí",
-      "Description": "Detekujte objekty a jejich obrysy pomocí předtrénovaného modelu YOLO11.",
+      "Description": "Detekujte objekty a jejich obrysy pomocí předtrénovaného modelu YOLO.",
       "ML.InstanceSegmentation": "Povolit segmentaci instancí",
-      "ConfigureOptions.Yolo.ModelPath": "Cesta k souboru modelu YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cesta k souboru modelu YOLO (.onnx)"
     },
     "930": {
       "Title": "Obsluha záměrů Gemini",

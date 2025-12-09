@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "वस्तु का पता लगाना",
-      "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडल का उपयोग करके वस्तुओं का पता लगाएं।",
+      "Description": "पूर्व-प्रशिक्षित YOLO मॉडल का उपयोग करके वस्तुओं का पता लगाएं।",
       "ML.ObjectDetection": "ऑब्जेक्ट पहचान सक्षम करें",
       "ML.ObjectDetection.TriggerDetect": "अल्पविराम से अलग की गई चीजों की सूची (अंग्रेजी में) जो अलार्म को ट्रिगर करेंगी। (उदाहरण: बिल्ली, कुत्ता, व्यक्ति, बैग, सूटकेस)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडल फ़ाइल का पथ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)"
     },
     "911": {
       "Title": "मुद्रा अनुमान",
-      "Description": "कस्टम ONNX मॉडल या डिफ़ॉल्ट पूर्व-प्रशिक्षित YOLOv11 मॉडल (मानव मुद्रा-विशिष्ट) का उपयोग करके मुद्रा अनुमान के माध्यम से मुख्य बिंदु का पता लगाना।",
+      "Description": "कस्टम ONNX मॉडल या डिफ़ॉल्ट पूर्व-प्रशिक्षित YOLO मॉडल (मानव मुद्रा-विशिष्ट) का उपयोग करके मुद्रा अनुमान के माध्यम से मुख्य बिंदु का पता लगाना।",
       "ML.PoseEstimation": "पोज़ अनुमान सक्षम करें",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडल फ़ाइल का पथ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)"
     },
     "912": {
       "Title": "उदाहरण विभाजन",
-      "Description": "पूर्व-प्रशिक्षित YOLO11 मॉडल का उपयोग करके वस्तुओं और उनकी रूपरेखा का पता लगाएं।",
+      "Description": "पूर्व-प्रशिक्षित YOLO मॉडल का उपयोग करके वस्तुओं और उनकी रूपरेखा का पता लगाएं।",
       "ML.InstanceSegmentation": "इंस्टेंस सेगमेंटेशन सक्षम करें",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 मॉडल फ़ाइल का पथ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)"
     },
     "930": {
       "Title": "जेमिनी इंटेंट हैंडलर",

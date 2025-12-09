@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "物体検出",
-      "Description": "事前トレーニング済みの YOLO11 モデルを使用してオブジェクトを検出します。",
+      "Description": "事前トレーニング済みの YOLO モデルを使用してオブジェクトを検出します。",
       "ML.ObjectDetection": "オブジェクト検出を有効にする",
       "ML.ObjectDetection.TriggerDetect": "アラームをトリガーする項目（英語）のコンマ区切りリスト。（例：猫、犬、人、バックパック、スーツケース）",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス"
     },
     "911": {
       "Title": "姿勢推定",
-      "Description": "カスタム ONNX モデルまたはデフォルトの事前トレーニング済み YOLOv11 モデル (人間のポーズに固有) を使用したポーズ推定によるキーポイント検出。",
+      "Description": "カスタム ONNX モデルまたはデフォルトの事前トレーニング済み YOLO モデル (人間のポーズに固有) を使用したポーズ推定によるキーポイント検出。",
       "ML.PoseEstimation": "姿勢推定を有効にする",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス"
     },
     "912": {
       "Title": "インスタンスセグメンテーション",
-      "Description": "事前トレーニング済みの YOLO11 モデルを使用して、オブジェクトとその輪郭を検出します。",
+      "Description": "事前トレーニング済みの YOLO モデルを使用して、オブジェクトとその輪郭を検出します。",
       "ML.InstanceSegmentation": "インスタンスセグメンテーションを有効にする",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 モデルファイル (.onnx) のパス"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス"
     },
     "930": {
       "Title": "ジェミニ インテント ハンドラー",

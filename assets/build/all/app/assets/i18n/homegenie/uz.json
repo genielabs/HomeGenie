@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Ob'ektni aniqlash",
-      "Description": "Oldindan o'rgatilgan YOLO11 modeli yordamida ob'ektlarni aniqlang.",
+      "Description": "Oldindan o'rgatilgan YOLO modeli yordamida ob'ektlarni aniqlang.",
       "ML.ObjectDetection": "Ob'ektlarni aniqlashni yoqish",
       "ML.ObjectDetection.TriggerDetect": "Signalni ishga tushiradigan narsalarning vergul bilan ajratilgan ro'yxati (ingliz tilida). (masalan: mushuk, it, odam, ryukzak, chamadon)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)"
     },
     "911": {
       "Title": "Pozni baholash",
-      "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLOv11 modeli (odamga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
+      "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLO modeli (odamga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
       "ML.PoseEstimation": "Pozni baholashni yoqish",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)"
     },
     "912": {
       "Title": "Namuna segmentatsiyasi",
-      "Description": "Oldindan oʻrgatilgan YOLO11 modeli yordamida obʼyektlar va ularning konturlarini aniqlang.",
+      "Description": "Oldindan oʻrgatilgan YOLO modeli yordamida obʼyektlar va ularning konturlarini aniqlang.",
       "ML.InstanceSegmentation": "Misol segmentatsiyasini yoqing",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 model faylining yoʻli (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)"
     },
     "930": {
       "Title": "Egizaklar niyatini ishlovchi",

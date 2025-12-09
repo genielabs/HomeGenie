@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Détection d'objets",
-      "Description": "Détectez des objets à l’aide d’un modèle YOLO11 pré-entraîné.",
+      "Description": "Détectez des objets à l’aide d’un modèle YOLO pré-entraîné.",
       "ML.ObjectDetection": "Activer la détection d'objets",
       "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex. : chat, chien, personne, sac à dos, valise)",
-      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)"
     },
     "911": {
       "Title": "Estimation de la pose",
-      "Description": "Détection de points clés via l'estimation de la pose, à l'aide de modèles ONNX personnalisés ou du modèle YOLOv11 pré-entraîné par défaut (spécifique à la pose humaine).",
+      "Description": "Détection de points clés via l'estimation de la pose, à l'aide de modèles ONNX personnalisés ou du modèle YOLO pré-entraîné par défaut (spécifique à la pose humaine).",
       "ML.PoseEstimation": "Activer l'estimation de la pose",
-      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)"
     },
     "912": {
       "Title": "Segmentation des instances",
-      "Description": "Détectez les objets et leurs contours à l'aide d'un modèle YOLO11 pré-entraîné.",
+      "Description": "Détectez les objets et leurs contours à l'aide d'un modèle YOLO pré-entraîné.",
       "ML.InstanceSegmentation": "Activer la segmentation des instances",
-      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO11 (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)"
     },
     "930": {
       "Title": "Gestionnaire d'intention Gemini",

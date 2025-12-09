@@ -290,22 +290,22 @@
     },
     "910": {
       "Title": "Объектти аныктоо",
-      "Description": "Алдын ала даярдалган YOLO11 моделин колдонуп объекттерди аныктоо.",
+      "Description": "Алдын ала даярдалган YOLO моделин колдонуп объекттерди аныктоо.",
       "ML.ObjectDetection": "Объекттерди аныктоону иштетүү",
       "ML.ObjectDetection.TriggerDetect": "Ойготкучту иштете турган нерселердин үтүр менен бөлүнгөн тизмеси (англис тилинде). (мис.: мышык, ит, адам, рюкзак, чемодан)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгү файлынын жолу (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)"
     },
     "911": {
       "Title": "Позаны баалоо",
-      "Description": "Ыңгайлаштырылган ONNX моделдерин же демейки алдын ала даярдалган YOLOv11 моделин (адамдын позасына тиешелүү) колдонуу менен позаны баалоо аркылуу негизги чекитти аныктоо.",
+      "Description": "Ыңгайлаштырылган ONNX моделдерин же демейки алдын ала даярдалган YOLO моделин (адамдын позасына тиешелүү) колдонуу менен позаны баалоо аркылуу негизги чекитти аныктоо.",
       "ML.PoseEstimation": "Позаны баалоону иштетүү",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгү файлынын жолу (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)"
     },
     "912": {
       "Title": "Instance Segmentation",
-      "Description": "Алдын ала даярдалган YOLO11 моделин колдонуу менен объекттерди жана алардын контурларын табыңыз.",
+      "Description": "Алдын ала даярдалган YOLO моделин колдонуу менен объекттерди жана алардын контурларын табыңыз.",
       "ML.InstanceSegmentation": "Мисал сегментациясын иштетүү",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO11 үлгү файлынын жолу (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
