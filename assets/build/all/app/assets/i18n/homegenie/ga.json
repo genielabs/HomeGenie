@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Aitheantas Múnla"
     },
     "940": {
-      "Title": "Intleacht Shaorga Áitiúil (LLM)",
-      "Description": "Rith Samhail Teanga Mhór (LLM) go háitiúil ar do fhreastalaí HomeGenie. Is féidir na samhlacha seo a íoslódáil saor in aisce ó ardáin cosúil le Hugging Face. Níl le déanamh ach an cosán chuig comhad samhail i bhformáid GGUF a sholáthar. Tabhair faoi deara go mb’fhéidir go mbeadh gá le coigeartuithe ar pharaiméadair, go príomha laistigh den Chód Comhthéacs, chun comhoiriúnacht iomlán le samhlacha éagsúla a chinntiú.",
+      "Title": "Intleacht Shaorga Áitiúil",
+      "Description": "Rith LLManna den scoth go díreach ar do fhreastalaí HomeGenie. Áirítear API iomlán chun an AI a rialú ó chláir agus scripteanna eile.",
       "ConfigureOptions.MaxTokens": "Uasmhéid Comharthaí (fad freagartha)",
-      "ConfigureOptions.ModelPath": "Cosán chuig an gcomhad GGUF áitiúil"
+      "ConfigureOptions.ModelPath": "Cosán chuig an gcomhad GGUF áitiúil",
+      "ConfigureOptions.ModelFile": "Samhail"
+    },
+    "575": {
+      "Title": "Bainisteoir Íoslódála",
+      "Description": "Seirbhís aistrithe comhad HTTP(S) láidir, neamhshioncrónach atá inrochtana trí API tiomnaithe. Bainistíonn sé an saolré íoslódála iomlán, ag tacú le sos/atosú (ag baint úsáide as ceanntásca Raoin) agus láimhseáil comhad sealadach (.part)."
     }
   }
 }

@@ -11,9 +11,16 @@
     "switches_control": "Interruptors"
   },
   "$ai_chat": {
-    "title": "Widget de xat d'IA",
-    "intro": "Hola! Sóc el vostre assistent local de màster en dret. Com us puc ajudar?",
-    "no_bound_module": "No hi ha cap mòdul LLM vinculat. Obriu la configuració del widget per vincular un model d'idioma.",
-    "start_typing_prompt": "Comença a escriure una indicació..."
+    "intro": "Hola! Sóc la teva IA local. Com et puc ajudar?",
+    "start_typing_prompt": "Comença a escriure una indicació...",
+    "download_title": "Descarrega el fitxer LLM necessari:",
+    "teaser_description": "Aprofita el poder de la IA generativa al teu maquinari. Xateja, escriu codi o crea automatitzacions avançades amb la seguretat d'un sistema local i privat.",
+    "select_model": "Selecciona un model",
+    "feat_private": "Privat",
+    "feat_offline": "Ràpid i local",
+    "feat_automation": "Automatització",
+    "loading_model": "S'està carregant el model a la memòria... Això pot trigar uns instants.",
+    "model": "Model",
+    "status": "Estat"
   }
 }

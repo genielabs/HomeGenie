@@ -11,9 +11,16 @@
     "switches_control": "Prekidači"
   },
   "$ai_chat": {
-    "title": "Vidžet za AI chat",
-    "intro": "Zdravo! Ja sam vaš lokalni LLM asistent. Kako vam mogu pomoći?",
-    "no_bound_module": "Nijedan LLM modul nije povezan. Molimo vas da otvorite postavke widgeta da biste povezali jezički model.",
-    "start_typing_prompt": "Počni kucati upit..."
+    "intro": "Zdravo! Ja sam vaša lokalna umjetna inteligencija. Kako vam mogu pomoći?",
+    "start_typing_prompt": "Počni kucati upit...",
+    "download_title": "Preuzmite potrebnu LLM datoteku:",
+    "teaser_description": "Iskoristite snagu generativne umjetne inteligencije na svom hardveru. Čavrljajte, pišite kod ili gradite napredne automatizacije uz sigurnost lokalnog i privatnog sistema.",
+    "select_model": "Odaberite model",
+    "feat_private": "Privatno",
+    "feat_offline": "Brzo i lokalno",
+    "feat_automation": "Automatizacija",
+    "loading_model": "Učitavanje modela u memoriju... Ovo može potrajati nekoliko trenutaka.",
+    "model": "Model",
+    "status": "Status"
   }
 }

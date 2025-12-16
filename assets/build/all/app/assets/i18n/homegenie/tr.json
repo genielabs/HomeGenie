@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Model Kimliği"
     },
     "940": {
-      "Title": "Yerel Yapay Zeka (LLM)",
-      "Description": "HomeGenie sunucunuzda yerel olarak bir Büyük Dil Modeli (LLM) çalıştırın. Bu modeller, Hugging Face gibi platformlardan ücretsiz olarak indirilebilir. GGUF biçimli bir model dosyasının yolunu belirtmeniz yeterlidir. Farklı modellerle tam uyumluluğu sağlamak için, özellikle Bağlam Kodu içindeki parametrelerde ayarlamalar gerekebileceğini lütfen unutmayın.",
-      "ConfigureOptions.MaxTokens": "Maksimum Jeton (yanıt uzunluğu)",
-      "ConfigureOptions.ModelPath": "Yerel GGUF dosyasına giden yol"
+      "Title": "Yerel Yapay Zeka",
+      "Description": "En gelişmiş LLM'leri doğrudan HomeGenie sunucunuzda çalıştırın. Yapay zekayı diğer programlar ve komut dosyalarından kontrol etmek için eksiksiz bir API içerir.",
+      "ConfigureOptions.MaxTokens": "Maksimum Token Sayısı (yanıt uzunluğu)",
+      "ConfigureOptions.ModelPath": "Yerel GGUF dosyasına giden yol",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "İndirme Yöneticisi",
+      "Description": "Özel bir API aracılığıyla erişilebilen, sağlam, eşzamansız bir HTTP(S) dosya aktarım hizmeti. İndirme işleminin tüm yaşam döngüsünü yönetir, duraklatma/devam ettirme (Range başlıkları kullanarak) ve geçici dosya işleme (.part) desteği sunar."
     }
   }
 }

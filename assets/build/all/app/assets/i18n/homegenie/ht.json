@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID Modèl"
     },
     "940": {
-      "Title": "IA Lokal (LLM)",
-      "Description": "Kouri yon Gwo Modèl Lang (LLM) lokalman sou sèvè HomeGenie ou a. Ou ka telechaje modèl sa yo gratis sou platfòm tankou Hugging Face. Senpleman bay chemen ki mennen nan yon fichye modèl fòma GGUF. Tanpri sonje ke ajisteman nan paramèt yo, sitou nan Kòd Kontèks la, ka nesesè pou asire konpatibilite konplè ak diferan modèl yo.",
+      "Title": "IA lokal",
+      "Description": "Kouri LLM dènye kri yo dirèkteman sou sèvè HomeGenie ou a. Gen ladan yon API konplè pou kontwole IA a soti nan lòt pwogram ak script.",
       "ConfigureOptions.MaxTokens": "Maksimòm jeton (longè repons)",
-      "ConfigureOptions.ModelPath": "Chemen pou dosye GGUF lokal la"
+      "ConfigureOptions.ModelPath": "Chemen pou dosye GGUF lokal la",
+      "ConfigureOptions.ModelFile": "Modèl"
+    },
+    "575": {
+      "Title": "Manadjè Telechajman",
+      "Description": "Yon sèvis transfè fichye HTTP(S) asenkron ki solid, aksesib atravè yon API dedye. Li jere tout sik lavi telechajman an, li sipòte poz/rekòmanse (lè l sèvi avèk antèt Range) ak jesyon fichye tanporè (.part)."
     }
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modellazonosító"
     },
     "940": {
-      "Title": "Helyi mesterséges intelligencia (LLM)",
-      "Description": "Futtasson egy nagyméretű nyelvi modellt (LLM) helyben a HomeGenie szerverén. Ezek a modellek ingyenesen letölthetők olyan platformokról, mint a Hugging Face. Egyszerűen adja meg a GGUF formátumú modellfájl elérési útját. Kérjük, vegye figyelembe, hogy a paraméterek módosítására, elsősorban a kontextuskódon belül, szükség lehet a különböző modellekkel való teljes kompatibilitás biztosítása érdekében.",
+      "Title": "Helyi mesterséges intelligencia",
+      "Description": "Futtasson korszerű LLM-eket közvetlenül a HomeGenie szerverén. Teljes API-t tartalmaz a mesterséges intelligencia más programokból és szkriptekből történő vezérléséhez.",
       "ConfigureOptions.MaxTokens": "Max. tokenek (válasz hossza)",
-      "ConfigureOptions.ModelPath": "A helyi GGUF fájl elérési útja"
+      "ConfigureOptions.ModelPath": "A helyi GGUF fájl elérési útja",
+      "ConfigureOptions.ModelFile": "Modell"
+    },
+    "575": {
+      "Title": "Letöltéskezelő",
+      "Description": "Egy robusztus, aszinkron HTTP(S) fájlátviteli szolgáltatás, amely egy dedikált API-n keresztül érhető el. Kezeli a teljes letöltési életciklust, támogatja a szüneteltetést/folytatást (tartományfejlécek használatával) és az ideiglenes fájlok kezelését (.part)."
     }
   }
 }

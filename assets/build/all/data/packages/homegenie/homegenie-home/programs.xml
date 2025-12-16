@@ -428,7 +428,7 @@ Program.GoBackground();
   <ProgramBlock>
     <ScriptSetup>const string domain = "Media.IpCamera";
 const string widget = "homegenie/generic/camerainput";
-const string filter = $"Sensor:Widget.DisplayModule={widget}";
+const string filter = "Sensor:Widget.DisplayModule=" + widget;
 Program.Setup(() =&gt; {
   Program
     .AddModules(domain, 1, GENERIC_IP_CAMERA_COUNT, "Sensor", widget)
@@ -486,16 +486,16 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>const int GENERIC_IP_CAMERA_COUNT = 5;</ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>generic-ip-camera</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>false</Required>
-      <Checksum>4B6B6F4659921A37761ACA0F84BAF830</Checksum>
+      <Checksum>286EF97F9732C74F0123487F373E5477</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
@@ -1046,7 +1046,7 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
     return recentEvents;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

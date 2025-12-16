@@ -130,7 +130,15 @@ namespace HomeGenie.Automation.Scheduler
                 scriptEngine = new Engine();
                 scriptEngine.SetValue("hg", hgScriptingHost);
                 scriptEngine.SetValue("event", eventItem);
-                scriptEngine.Execute(InitScript + "\nfunction __action__() {\n" + eventItem.Script + "\n}\n");
+                try
+                {
+                    scriptEngine.Execute(InitScript + "\nfunction __action__() {\n" + eventItem.Script + "\n}\n");
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debugger.Break();
+                    // TODO: log exception
+                }
             }
 
             isRunning = true;

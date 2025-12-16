@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Kitambulisho cha mfano"
     },
     "940": {
-      "Title": "AI ya ndani (LLM)",
-      "Description": "Tekeleza Muundo Kubwa wa Lugha (LLM) ndani ya nchi kwenye seva yako ya HomeGenie. Miundo hii inaweza kupakuliwa bila malipo kutoka kwa majukwaa kama vile Hugging Face. Toa tu njia ya faili ya muundo wa GGUF. Tafadhali kumbuka kuwa marekebisho ya vigezo, hasa ndani ya Kanuni ya Muktadha, yanaweza kuhitajika ili kuhakikisha utangamano kamili na mifano tofauti.",
-      "ConfigureOptions.MaxTokens": "Tokeni za kiwango cha juu (urefu wa majibu)",
-      "ConfigureOptions.ModelPath": "Njia ya faili ya GGUF ya ndani"
+      "Title": "AI ya Ndani",
+      "Description": "Endesha LLM za kisasa moja kwa moja kwenye seva yako ya HomeGenie. Inajumuisha API kamili ya kudhibiti AI kutoka kwa programu na hati zingine.",
+      "ConfigureOptions.MaxTokens": "Tokeni za Juu (urefu wa majibu)",
+      "ConfigureOptions.ModelPath": "Njia ya faili ya GGUF ya ndani",
+      "ConfigureOptions.ModelFile": "Mfano"
+    },
+    "575": {
+      "Title": "Kidhibiti cha Upakuaji",
+      "Description": "Huduma thabiti na isiyo na mpangilio ya uhamishaji faili ya HTTP(S) inayopatikana kupitia API maalum. Inasimamia mzunguko kamili wa upakuaji, ikiunga mkono kusitisha/kuendelea (kwa kutumia vichwa vya habari vya Range) na utunzaji wa faili wa muda (.part)."
     }
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Mudeli ID"
     },
     "940": {
-      "Title": "Kohalik tehisintellekt (LLM)",
-      "Description": "Käivita oma HomeGenie serveris lokaalselt suurkeelemudel (LLM). Neid mudeleid saab tasuta alla laadida platvormidelt nagu Hugging Face. Lihtsalt sisesta GGUF-vormingus mudelifaili tee. Pane tähele, et parameetrite kohandamine, peamiselt kontekstikoodis, võib olla vajalik erinevate mudelitega täieliku ühilduvuse tagamiseks.",
+      "Title": "Kohalik tehisintellekt",
+      "Description": "Käivita tipptasemel õigusteaduse programme (LLM) otse oma HomeGenie serveris. Sisaldab täielikku API-t tehisintellekti juhtimiseks teistest programmidest ja skriptidest.",
       "ConfigureOptions.MaxTokens": "Maksimaalne tokenite arv (vastuse pikkus)",
-      "ConfigureOptions.ModelPath": "Kohaliku GGUF-faili tee"
+      "ConfigureOptions.ModelPath": "Kohaliku GGUF-faili tee",
+      "ConfigureOptions.ModelFile": "Mudel"
+    },
+    "575": {
+      "Title": "Allalaadimishaldur",
+      "Description": "Töökindel ja asünkroonne HTTP(S)-failiedastusteenus, millele pääseb ligi spetsiaalse API kaudu. See haldab kogu allalaadimise elutsüklit, toetades peatamist/jätkamist (kasutades vahemiku päiseid) ja ajutiste failide haldamist (.part)."
     }
   }
 }

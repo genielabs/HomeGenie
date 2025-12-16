@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID-ul modelului"
     },
     "940": {
-      "Title": "Inteligență artificială locală (LLM)",
-      "Description": "Rulați un Model de Limbaj Mare (LLM) local pe serverul dvs. HomeGenie. Aceste modele pot fi descărcate gratuit de pe platforme precum Hugging Face. Pur și simplu furnizați calea către un fișier model în format GGUF. Rețineți că pot fi necesare ajustări ale parametrilor, în principal în cadrul Codului Contextual, pentru a asigura compatibilitatea deplină cu diferite modele.",
+      "Title": "IA locală",
+      "Description": "Rulați LLM-uri de ultimă generație direct pe serverul dvs. HomeGenie. Include o API completă pentru a controla inteligența artificială din alte programe și scripturi.",
       "ConfigureOptions.MaxTokens": "Număr maxim de tokenuri (lungimea răspunsului)",
-      "ConfigureOptions.ModelPath": "Calea către fișierul GGUF local"
+      "ConfigureOptions.ModelPath": "Calea către fișierul GGUF local",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Manager de descărcări",
+      "Description": "Un serviciu robust, asincron, de transfer de fișiere HTTP(S), accesibil printr-o API dedicată. Acesta gestionează întregul ciclu de viață al descărcării, oferind suport pentru pauză/reluare (folosind antete Range) și gestionarea temporară a fișierelor (.part)."
     }
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modell-ID"
     },
     "940": {
-      "Title": "Lokal AI (juridisk examen)",
-      "Description": "Kör en stor språkmodell (LLM) lokalt på din HomeGenie-server. Dessa modeller kan laddas ner gratis från plattformar som Hugging Face. Ange bara sökvägen till en modellfil i GGUF-format. Observera att justeringar av parametrar, främst inom kontextkoden, kan krävas för att säkerställa full kompatibilitet med olika modeller.",
+      "Title": "Lokal AI",
+      "Description": "Kör toppmoderna LLM:er direkt på din HomeGenie-server. Inkluderar ett komplett API för att styra AI:n från andra program och skript.",
       "ConfigureOptions.MaxTokens": "Max antal tokens (svarslängd)",
-      "ConfigureOptions.ModelPath": "Sökväg till lokal GGUF-fil"
+      "ConfigureOptions.ModelPath": "Sökväg till lokal GGUF-fil",
+      "ConfigureOptions.ModelFile": "Modell"
+    },
+    "575": {
+      "Title": "Nedladdningshanteraren",
+      "Description": "En robust, asynkron HTTP(S)-filöverföringstjänst som är tillgänglig via ett dedikerat API. Den hanterar hela nedladdningslivscykeln, med stöd för paus/återupptagning (med hjälp av Range-rubriker) och hantering av tillfälliga filer (.part)."
     }
   }
 }

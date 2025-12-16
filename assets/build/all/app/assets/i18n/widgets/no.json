@@ -11,9 +11,16 @@
     "switches_control": "Brytere"
   },
   "$ai_chat": {
-    "title": "AI-chat-widget",
-    "intro": "Hallo! Jeg er din lokale LLM-assistent. Hvordan kan jeg hjelpe deg?",
-    "no_bound_module": "Ingen LLM-modul bundet. Åpne widgetinnstillingene for å binde en språkmodell.",
-    "start_typing_prompt": "Begynn å skrive en melding..."
+    "intro": "Hallo! Jeg er din lokale AI. Hvordan kan jeg hjelpe deg?",
+    "start_typing_prompt": "Begynn å skrive en melding...",
+    "download_title": "Last ned nødvendig LLM-fil:",
+    "teaser_description": "Utnytt kraften til generativ AI på maskinvaren din. Chat, skriv kode eller bygg avanserte automatiseringer med sikkerheten til et lokalt og privat system.",
+    "select_model": "Velg en modell",
+    "feat_private": "Privat",
+    "feat_offline": "Raskt og lokalt",
+    "feat_automation": "Automasjon",
+    "loading_model": "Laster inn modellen i minnet ... Dette kan ta noen øyeblikk.",
+    "model": "Modell",
+    "status": "Status"
   }
 }

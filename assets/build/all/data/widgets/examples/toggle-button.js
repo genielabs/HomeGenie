@@ -24,11 +24,14 @@ class ToggleButton extends ControllerInstance {
       // toggles the bound module on/off
       toggle: () => bm?.control('Control.Toggle'),
       // adds button "pressed" class if level is > 0
-      buttonState: ($el) => (statusLevel?.value > 0)
+      buttonState: ($el) => (+statusLevel?.value > 0)
           ? $el.addClass('pressed')
           : $el.removeClass('pressed'),
       // is bound module selected?
       bound: bm != null,
+      level() {
+        return +statusLevel?.value;
+      }
     });
 //zuix.componentize(this.view());
   }

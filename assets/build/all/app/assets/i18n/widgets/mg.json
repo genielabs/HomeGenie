@@ -11,9 +11,16 @@
     "switches_control": "Switches"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "Salama! Mpanampy LLM eo an-toerana aho. Ahoana no ahafahako manampy anao?",
-    "no_bound_module": "Tsy misy module LLM mifamatotra. Sokafy azafady ny kiran'ny widget mba hamatotra modely fiteny.",
-    "start_typing_prompt": "Manomboka manoratra bitsika..."
+    "intro": "Manao ahoana! Izaho no AI eo an-toerana misy anao. Inona no azoko anampiana anao?",
+    "start_typing_prompt": "Atombohy manoratra baiko...",
+    "download_title": "Sintomy ny rakitra LLM ilaina:",
+    "teaser_description": "Ampiasao ny herin'ny Generative AI amin'ny fitaovanao. Miresaha, manorata kaody, na manamboara automatique mandroso miaraka amin'ny fiarovana ny rafitra eo an-toerana sy tsy miankina.",
+    "select_model": "Mifidiana modely",
+    "feat_private": "TSY MIANKINA",
+    "feat_offline": "Haingana sy eo an-toerana",
+    "feat_automation": "automatique",
+    "loading_model": "Eo am-pampidirana ny modely ao amin'ny fitadidiana... Mety haharitra fotoana fohy izany.",
+    "model": "MODELY",
+    "status": "sata"
   }
 }

@@ -1,23 +1,178 @@
-<div class="container">
+<div class="container" @if="document.fullscreenElement !== null"
+                        @then="$this.addClass('fullscreen')"
+                        @else="$this.removeClass('fullscreen')">
     <div class="header">
+
       <h2 #title>AI Chat Widget</h2>
+
+      <div @hide-if="document.fullscreenElement !== null || initStatus() !== 'Ready' || currentModel() === ''"
+            class="fullscreen-button"
+            (click)="context.view().requestFullscreen()">
+          <span class="material-symbols">fullscreen</span>      
+      </div>
+
     </div>
 
-    <div class="chat-history" #chat_history>
+    <div @hide-if="getDownloadStatus() !== 'Complete'"
+        #chat_history class="chat-history">
         <div class="message ai">
-            <span class="author">AI Genie</span>
-            <div class="text" #intro>Hello! I am your local LLM assistant. How can I help you?</div>
+            <span class="author label">AI Genie</span>
+            <div class="text" @translate="intro">Hello! I am your local LLM assistant. How can I help you?</div>
         </div>
     </div>
 
-    <div class="input-area">
-        <textarea #prompt_input placeholder="Start typing a prompt" (keydown)="handleKeyDown(event)" maxlength="1024"></textarea>
-        <button #send_button (click)="sendMessage()">
-            <svg #arrow width="48px" height="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.03 12.53L13.03 15.53C12.88 15.68 12.69 15.75 12.5 15.75C12.31 15.75 12.12 15.68 11.97 15.53C11.68 15.24 11.68 14.76 11.97 14.47L13.69 12.75H8.5C8.09 12.75 7.75 12.41 7.75 12C7.75 11.59 8.09 11.25 8.5 11.25H13.69L11.97 9.53C11.68 9.24 11.68 8.76 11.97 8.47C12.26 8.18 12.74 8.18 13.03 8.47L16.03 11.47C16.32 11.76 16.32 12.24 16.03 12.53Z"/>
-            </svg>
-            <img #loading src="assets/images/3-dots-rotate.svg">
-            <img #typing src="assets/images/3-dots-fade.svg">
+    <div @active
+          @if="isDownloadingFile()"
+           @then="$this.removeClass('hidden')"
+           @else="$this.addClass('hidden')"
+        class="download-info">
+
+      <div style="justify-self:center">
+
+        <div class="title" @set="this.innerHTML = modelId()"></div>
+        <div class="progress-bar-wrapper">
+
+          <div class="progress-bar" @set="this.style.width = `${getDownloadProgress()}%`">
+            <div class="name" @set="this.innerHTML = `${getDownloadProgress()} %`"></div>
+          </div>
+          
+        </div>
+
+        <div layout="row center-center" style="gap:12px">
+
+          <button (click)="control('DownloadCancel')">
+            <span class="material-symbols color-warn">close_small</span>
+          </button>
+
+          <button @active
+                  @if="getDownloadStatus() === 'Downloading'"
+                   @then="$this.removeClass('hidden')"
+                   @else="$this.addClass('hidden')"
+                  (click)="control('DownloadPause')">
+            <span class="material-symbols">pause</span>
+          </button>
+
+          <button @active
+                  @if="getDownloadStatus() === 'Paused'"
+                   @then="$this.removeClass('hidden')"
+                   @else="$this.addClass('hidden')"
+                  (click)="control('DownloadResume')">
+            <span class="material-symbols">resume</span>
+          </button>
+
+        </div>
+
+        <div @active
+              @if="getDownloadStatus() === 'Error'"
+               @then="$this.removeClass('hidden')"
+               @else="$this.addClass('hidden')"
+              class="warn-message"
+              @set="this.innerHTML = getDownloadError()"></div>
+
+      </div>
+
+    </div>
+
+    <div @active
+          @if="getDownloadStatus() === 'Pending'"
+           @then="$this.removeClass('hidden')"
+           @else="$this.addClass('hidden')"
+        class="download-info">
+
+      <div @active
+            @if="!taskId()"
+             @then="$this.show()"
+             @else="$this.hide()"
+            style="justify-self:center;margin-top: 48px;">
+
+        <div class="label" @translate="download_title">Download required LLM file:</div>
+
+        <div class="title" @set="this.innerHTML = modelId()"></div>
+
+        <div layout="row center-center" style="gap: 12px; margin-top: 24px;">
+
+          <button (click)="control('DownloadStart')">
+            <span class="material-symbols">download_for_offline</span>
+          </button>
+
+        </div>
+
+      </div>
+      <div @active
+            @if="taskId() === 'Pending'"
+             @then="$this.show()"
+             @else="$this.hide()"
+          class="intro-container">
+
+          <p class="description" @translate="teaser_description">
+              Harness the power of Generative AI on your hardware.
+              Build advanced automations with the security of a local and private system.
+          </p>
+
+          <div class="feature-box">
+              <div class="feature-item">
+                  <span class="material-symbols-outlined label">lock</span>
+                  <span @translate="feat_private">100% Private</span>
+              </div>
+              <div class="feature-item">
+                  <span class="material-symbols-outlined label">offline_bolt</span>
+                  <span @translate="feat_offline">Works offline</span>
+              </div>
+              <div class="feature-item">
+                  <span class="material-symbols-outlined label">rule_settings</span>
+                  <span @translate="feat_automation">Automation</span>
+              </div>
+          </div>
+
+          <button (click)="configure()" class="configure-button">
+            <span class="material-symbols-outlined">psychology</span>
+            <span @translate="select_model">Select a Model</span>
+          </button>
+
+      </div>
+
+    </div>
+
+    <div @hide-if="getDownloadStatus() !== 'Complete'" class="input-area">
+        <textarea #prompt_input
+            placeholder="Start typing a prompt" maxlength="65536"
+            (keydown)="handleKeyDown(event)"></textarea>
+        <button #send_button (click)="isStreaming() ? control('Stop') : sendMessage()">
+          <span #arrow class="material-symbols">arrow_forward</span>
+          <img #loading class="svg-icon-black" src="assets/images/3-dots-rotate.svg">
+          <div #typing class="loader"></div>
+          <span #typing class="material-symbols">stop</span>
         </button>
     </div>
+
+
+    <div @active
+          @if="isModelStarting()"
+           @then="$this.css({display: 'flex'})"
+           @else="$this.hide()"
+          class="llm-init-screen">
+
+
+        <div layout="column center-left">
+          <div class="label" @translate="model">Model</div>
+          <div class="name" self="stretch"
+                @set="this.innerHTML = currentModel()"></div>
+        </div>
+
+        <div layout="column center-left" style="margin-top:6px">
+          <div class="label" @translate="status">Status</div>
+          <div class="name"
+                @set="this.innerHTML = initStatus()"></div>
+        </div>
+
+
+        <div class="loading-spinner-container">
+          <div class="loading-spinner"></div>
+        </div>
+
+
+        <div class="description" self="size-x1" @translate="loading_model">Loading model into memory... This may take a few moments.</div>
+
+    </div>
+
 </div>

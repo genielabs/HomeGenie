@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modeloaren IDa"
     },
     "940": {
-      "Title": "Tokiko AI (LLM)",
-      "Description": "Exekutatu Hizkuntza Eredu Handi (LLM) bat lokalki zure HomeGenie zerbitzarian. Eredu hauek doan deskargatu daitezke Hugging Face bezalako plataformetatik. Eman GGUF formatuko eredu fitxategi baten bidea. Kontuan izan parametroetan doikuntzak egin behar direla, batez ere Testuinguru Kodearen barruan, eredu ezberdinekin bateragarritasun osoa bermatzeko.",
-      "ConfigureOptions.MaxTokens": "Gehienezko tokenak (erantzunaren luzera)",
-      "ConfigureOptions.ModelPath": "Tokiko GGUF fitxategirako bidea"
+      "Title": "Tokiko IA",
+      "Description": "Exekutatu punta-puntako LLMak zuzenean zure HomeGenie zerbitzarian. API osoa barne hartzen du IA beste programa eta script batzuetatik kontrolatzeko.",
+      "ConfigureOptions.MaxTokens": "Token maximoak (erantzunaren luzera)",
+      "ConfigureOptions.ModelPath": "Tokiko GGUF fitxategirako bidea",
+      "ConfigureOptions.ModelFile": "Modeloa"
+    },
+    "575": {
+      "Title": "Deskarga kudeatzailea",
+      "Description": "HTTP(S) fitxategien transferentzia zerbitzu sendo eta asinkronoa, API dedikatu baten bidez eskuragarri. Deskargatzeko bizi-ziklo osoa kudeatzen du, pausatu/berrabiarazi (Interval goiburuak erabiliz) eta aldi baterako fitxategien kudeaketa (.part) onartzen ditu."
     }
   }
 }

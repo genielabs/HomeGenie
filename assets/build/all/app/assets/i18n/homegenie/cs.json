@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID modelu"
     },
     "940": {
-      "Title": "Lokální umělá inteligence (LLM)",
-      "Description": "Spusťte lokálně na serveru HomeGenie model velkého jazyka (LLM). Tyto modely lze zdarma stáhnout z platforem, jako je Hugging Face. Stačí zadat cestu k souboru modelu ve formátu GGUF. Upozorňujeme, že pro zajištění plné kompatibility s různými modely může být nutné upravit parametry, zejména v kontextovém kódu.",
+      "Title": "Lokální umělá inteligence",
+      "Description": "Spouštějte nejmodernější LLM přímo na svém serveru HomeGenie. Zahrnuje kompletní API pro ovládání umělé inteligence z jiných programů a skriptů.",
       "ConfigureOptions.MaxTokens": "Max. počet tokenů (délka odpovědi)",
-      "ConfigureOptions.ModelPath": "Cesta k lokálnímu souboru GGUF"
+      "ConfigureOptions.ModelPath": "Cesta k lokálnímu souboru GGUF",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Správce stahování",
+      "Description": "Robustní, asynchronní služba pro přenos souborů HTTP(S), dostupná prostřednictvím specializovaného API. Spravuje celý životní cyklus stahování, podporuje pozastavení/obnovení (pomocí záhlaví Range) a zpracování dočasných souborů (.part)."
     }
   }
 }

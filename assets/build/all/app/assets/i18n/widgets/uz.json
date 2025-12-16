@@ -11,9 +11,16 @@
     "switches_control": "Kalitlar"
   },
   "$ai_chat": {
-    "title": "AI Chat vidjeti",
-    "intro": "Salom! Men sizning mahalliy LLM yordamchingizman. Sizga qanday yordam berishim mumkin?",
-    "no_bound_module": "LLM moduli bogʻlanmagan. Til modelini ulash uchun vidjet sozlamalarini oching.",
-    "start_typing_prompt": "Soʻrov yozishni boshlang..."
+    "intro": "Salom! Men sizning mahalliy AIman. Sizga qanday yordam bera olaman?",
+    "start_typing_prompt": "So'rov yozishni boshlang...",
+    "download_title": "Kerakli LLM faylini yuklab oling:",
+    "teaser_description": "Qurilmangizda Generativ AI kuchidan foydalaning. Mahalliy va xususiy tizim xavfsizligi bilan suhbatlashing, kod yozing yoki ilg'or avtomatlashtirishlarni yarating.",
+    "select_model": "Modelni tanlang",
+    "feat_private": "Xususiy",
+    "feat_offline": "Tez va mahalliy",
+    "feat_automation": "Avtomatlashtirish",
+    "loading_model": "Model xotiraga yuklanmoqda... Bu bir necha daqiqa vaqt olishi mumkin.",
+    "model": "Model",
+    "status": "Holat"
   }
 }

@@ -11,9 +11,16 @@
     "switches_control": "Växlar"
   },
   "$ai_chat": {
-    "title": "AI-chattwidget",
-    "intro": "Hej! Jag är din lokala juridikassistent. Hur kan jag hjälpa dig?",
-    "no_bound_module": "Ingen LLM-modul är bunden. Öppna widgetinställningarna för att binda en språkmodell.",
-    "start_typing_prompt": "Börja skriva en prompt..."
+    "intro": "Hej! Jag är er lokala AI. Hur kan jag hjälpa er?",
+    "start_typing_prompt": "Börja skriva en prompt...",
+    "download_title": "Ladda ner nödvändig LLM-fil:",
+    "teaser_description": "Utnyttja kraften hos generativ AI på din hårdvara. Chatta, skriv kod eller bygg avancerade automatiseringar med säkerheten hos ett lokalt och privat system.",
+    "select_model": "Välj en modell",
+    "feat_private": "Privat",
+    "feat_offline": "Snabbt och lokalt",
+    "feat_automation": "Automatisering",
+    "loading_model": "Laddar modellen till minnet... Det kan ta en liten stund.",
+    "model": "Modell",
+    "status": "Status"
   }
 }

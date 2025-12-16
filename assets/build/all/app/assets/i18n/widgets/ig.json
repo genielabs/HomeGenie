@@ -11,9 +11,16 @@
     "switches_control": "Mgbanwe"
   },
   "$ai_chat": {
-    "title": "Wijetị Nkata AI",
-    "intro": "Nnọọ! Abụ m onye enyemaka LLM mpaghara gị. Kedu ka m ga-esi nyere gị aka?",
-    "no_bound_module": "Enweghị modul LLM jikọtara. Biko mepee ntọala wijetị iji kekọta ụdị asụsụ.",
-    "start_typing_prompt": "Malite pịnye ngwa ngwa..."
+    "intro": "Ndewo! Abụ m onye na-ahụ maka ọgụgụ isi obodo gị. Kedu ka m ga-esi nyere gị aka?",
+    "start_typing_prompt": "Malite ịpịnye ihe ozugbo...",
+    "download_title": "Budata faịlụ LLM achọrọ:",
+    "teaser_description": "Jiri ike nke Generative AI mee ihe na ngwaike gị. Kpaa nkata, dee koodu, ma ọ bụ wuo akpaaka dị elu site na nchekwa nke sistemụ mpaghara na nkeonwe.",
+    "select_model": "Họrọ ụdị",
+    "feat_private": "Nkeonwe",
+    "feat_offline": "Ngwa ngwa na mpaghara",
+    "feat_automation": "Akpaaka",
+    "loading_model": "Na-ebugo ụdị ihe nlereanya n'ime ebe nchekwa... Nke a nwere ike were obere oge.",
+    "model": "Ụdị nlereanya",
+    "status": "Ọkwa"
   }
 }

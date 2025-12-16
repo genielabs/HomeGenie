@@ -11,9 +11,16 @@
     "switches_control": "Çelësat"
   },
   "$ai_chat": {
-    "title": "Widget i bisedës me inteligjencën artificiale",
-    "intro": "Përshëndetje! Unë jam asistenti juaj lokal i LLM. Si mund t'ju ndihmoj?",
-    "no_bound_module": "Nuk ka modul LLM të lidhur. Hap cilësimet e vegël për të lidhur një model gjuhe.",
-    "start_typing_prompt": "Filloni të shkruani një kërkesë..."
+    "intro": "Përshëndetje! Unë jam inteligjenca artificiale lokale. Si mund t'ju ndihmoj?",
+    "start_typing_prompt": "Filloni të shkruani një kërkesë...",
+    "download_title": "Shkarkoni skedarin e kërkuar LLM:",
+    "teaser_description": "Shfrytëzoni fuqinë e Inteligjencës Artificiale Gjenerative në harduerin tuaj. Bisedoni, shkruani kod ose ndërtoni automatizime të përparuara me sigurinë e një sistemi lokal dhe privat.",
+    "select_model": "Zgjidhni një model",
+    "feat_private": "Privat",
+    "feat_offline": "Shpejt dhe Lokal",
+    "feat_automation": "Automatizimi",
+    "loading_model": "Duke ngarkuar modelin në memorie... Kjo mund të zgjasë disa çaste.",
+    "model": "Model",
+    "status": "Statusi"
   }
 }

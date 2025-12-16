@@ -11,9 +11,16 @@
     "switches_control": "Sauyawa"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "Sannu! Ni ne mataimaki na LLM na gida. Yaya zan iya taimaka ma ku?",
-    "no_bound_module": "Babu LLM module da aka ɗaure. Da fatan za a buɗe saitunan widget don ɗaure samfurin harshe.",
-    "start_typing_prompt": "Fara buga faɗakarwa..."
+    "intro": "Sannu! Ni ne AI na yankinku. Ta yaya zan iya taimaka muku?",
+    "start_typing_prompt": "Fara rubuta saƙo...",
+    "download_title": "Sauke fayil ɗin LLM da ake buƙata:",
+    "teaser_description": "Yi amfani da ƙarfin Generative AI akan kayan aikinka. Yi hira, rubuta lambar sirri, ko gina ingantattun na'urori masu sarrafa kansu tare da tsaron tsarin gida da na sirri.",
+    "select_model": "Zaɓi Samfuri",
+    "feat_private": "Mai zaman kansa",
+    "feat_offline": "Da sauri da kuma na gida",
+    "feat_automation": "Aiki da kai",
+    "loading_model": "Ana loda samfurin zuwa ƙwaƙwalwar ajiya... Wannan na iya ɗaukar ɗan lokaci.",
+    "model": "Samfuri",
+    "status": "Matsayi"
   }
 }

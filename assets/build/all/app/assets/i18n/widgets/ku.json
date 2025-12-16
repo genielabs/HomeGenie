@@ -11,9 +11,16 @@
     "switches_control": "Guhêrbar"
   },
   "$ai_chat": {
-    "title": "Widgeta Sohbeta AI",
-    "intro": "Silav! Ez alîkarê LLM-ê yê herêmî me. Ez çawa dikarim alîkariya we bikim?",
-    "no_bound_module": "Modula LLM-ê nehatiye girêdan. Ji kerema xwe mîhengên widgetê vekin da ku modelek zimanî bi hev ve girêbidin.",
-    "start_typing_prompt": "Dest bi nivîsandina fermanekê bike..."
+    "intro": "Silav! Ez AI-ya herêmî ya we me. Ez çawa dikarim alîkariya we bikim?",
+    "start_typing_prompt": "Dest bi nivîsandina fermanekê bike...",
+    "download_title": "Pelê LLM-ê yê pêwîst dakêşin:",
+    "teaser_description": "Hêza AI-ya Generative li ser alavên xwe bikar bînin. Bi ewlehiya pergalek herêmî û taybet sohbet bikin, kodê binivîsin, an jî otomasyonên pêşkeftî ava bikin.",
+    "select_model": "Modelek Hilbijêre",
+    "feat_private": "Taybet",
+    "feat_offline": "Lez û Herêmî",
+    "feat_automation": "Otomatîkî",
+    "loading_model": "Model tê barkirin nav bîrê... Ev dibe ku çend kêliyan bidome.",
+    "model": "Cins",
+    "status": "Cî"
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Model ID"
     },
     "940": {
-      "Title": "Local AI (LLM)",
-      "Description": "Gudanar da Babban Samfuran Harshe (LLM) a gida akan sabar HomeGenie ku. Ana iya sauke waɗannan samfuran kyauta daga dandamali kamar Hugging Face. Kawai samar da hanyar zuwa fayil ɗin samfurin GGUF. Lura cewa ana iya buƙatar gyare-gyare ga sigogi, da farko a cikin Lambobin Magana, don tabbatar da cikakken dacewa tare da samfura daban-daban.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (tsawon amsa)",
-      "ConfigureOptions.ModelPath": "Hanya zuwa fayil na GGUF na gida"
+      "Title": "AI na gida",
+      "Description": "Gudanar da LLMs na zamani kai tsaye akan sabar HomeGenie ɗinku. Ya haɗa da cikakken API don sarrafa AI daga wasu shirye-shirye da rubutun.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (tsawon amsawa)",
+      "ConfigureOptions.ModelPath": "Hanya zuwa fayil na GGUF na gida",
+      "ConfigureOptions.ModelFile": "Samfuri"
+    },
+    "575": {
+      "Title": "Manajan Saukewa",
+      "Description": "Sabis mai ƙarfi, mara daidaituwa na HTTP(S) sabis ne da ake samu ta hanyar API mai ƙwazo. Yana kula da cikakken zagayowar saukewa, yana tallafawa dakatarwa/ci gaba (ta amfani da kanun labarai na Range) da kuma sarrafa fayil na ɗan lokaci (.part)."
     }
   }
 }

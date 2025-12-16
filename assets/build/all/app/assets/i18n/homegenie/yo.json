@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID awoṣe"
     },
     "940": {
-      "Title": "AI agbegbe (LLM)",
-      "Description": "Ṣiṣe Awoṣe Ede nla kan (LLM) ni agbegbe lori olupin HomeGenie rẹ. Awọn awoṣe wọnyi le ṣe igbasilẹ fun ọfẹ lati awọn iru ẹrọ bii Face Face. Nìkan pese ọna si faili awoṣe kika GGUF kan. Jọwọ ṣe akiyesi pe awọn atunṣe si awọn paramita, nipataki laarin koodu Ọrọ, le nilo lati rii daju ibamu ni kikun pẹlu awọn awoṣe oriṣiriṣi.",
-      "ConfigureOptions.MaxTokens": "Awọn ami to pọju (ipari idahun)",
-      "ConfigureOptions.ModelPath": "Ona si faili GGUF agbegbe"
+      "Title": "AI agbegbe",
+      "Description": "Ṣiṣẹ́ àwọn LLM tuntun taara lórí olupin HomeGenie rẹ. Ó ní API pípé láti ṣàkóso AI láti inú àwọn ètò àti àwọn ìwé àkọsílẹ̀ mìíràn.",
+      "ConfigureOptions.MaxTokens": "Àwọn àmì tó pọ̀ jùlọ (gígùn ìdáhùn)",
+      "ConfigureOptions.ModelPath": "Ona si faili GGUF agbegbe",
+      "ConfigureOptions.ModelFile": "Àwòṣe"
+    },
+    "575": {
+      "Title": "Olùṣàkóso Ìgbàsílẹ̀",
+      "Description": "Iṣẹ́ gbigbe faili HTTP(S) tó lágbára, tí kò ṣeé lò tí a lè lò nípasẹ̀ API pàtàkì kan. Ó ń ṣàkóso ìgbésí ayé ìgbàsílẹ̀ kíkún, ó ń ṣe àtìlẹ́yìn fún ìdádúró/ìbẹ̀rẹ̀ (nípa lílo àwọn àkọlé Range) àti mímú fáìlì ìgbà díẹ̀ (.part)."
     }
   }
 }

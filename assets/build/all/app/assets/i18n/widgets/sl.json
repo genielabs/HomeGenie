@@ -11,9 +11,16 @@
     "switches_control": "Stikala"
   },
   "$ai_chat": {
-    "title": "Pripomoček za klepet z umetno inteligenco",
-    "intro": "Pozdravljeni! Sem vaš lokalni asistent za magisterij prava. Kako vam lahko pomagam?",
-    "no_bound_module": "Modul LLM ni vezan. Odprite nastavitve gradnika, da povežete jezikovni model.",
-    "start_typing_prompt": "Začni tipkati poziv ..."
+    "intro": "Pozdravljeni! Sem vaša lokalna umetna inteligenca. Kako vam lahko pomagam?",
+    "start_typing_prompt": "Začni tipkati poziv ...",
+    "download_title": "Prenesite zahtevano datoteko LLM:",
+    "teaser_description": "Izkoristite moč generativne umetne inteligence na svoji strojni opremi. Klepetajte, pišite kodo ali gradite napredne avtomatizacije z varnostjo lokalnega in zasebnega sistema.",
+    "select_model": "Izberite model",
+    "feat_private": "Zasebno",
+    "feat_offline": "Hitro in lokalno",
+    "feat_automation": "Avtomatizacija",
+    "loading_model": "Nalaganje modela v pomnilnik ... To lahko traja nekaj trenutkov.",
+    "model": "Model",
+    "status": "Stanje"
   }
 }

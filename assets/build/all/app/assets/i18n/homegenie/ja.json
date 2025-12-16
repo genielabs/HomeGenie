@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "モデルID"
     },
     "940": {
-      "Title": "ローカルAI（法学修士）",
-      "Description": "HomeGenieサーバー上で大規模言語モデル（LLM）をローカルで実行できます。これらのモデルは、Hugging Faceなどのプラットフォームから無料でダウンロードできます。GGUF形式のモデルファイルへのパスを指定するだけです。異なるモデルとの完全な互換性を確保するには、主にコンテキストコード内のパラメータの調整が必要になる場合がありますのでご注意ください。",
+      "Title": "ローカルAI",
+      "Description": "HomeGenieサーバー上で最先端のLLMを直接実行できます。他のプログラムやスクリプトからAIを制御するための完全なAPIが含まれています。",
       "ConfigureOptions.MaxTokens": "最大トークン数（応答の長さ）",
-      "ConfigureOptions.ModelPath": "ローカル GGUF ファイルへのパス"
+      "ConfigureOptions.ModelPath": "ローカル GGUF ファイルへのパス",
+      "ConfigureOptions.ModelFile": "モデル"
+    },
+    "575": {
+      "Title": "ダウンロードマネージャー",
+      "Description": "専用API経由でアクセスできる、堅牢な非同期HTTP(S)ファイル転送サービスです。ダウンロードライフサイクル全体を管理し、一時停止/再開（Rangeヘッダーを使用）と一時ファイル（.part）の処理をサポートします。"
     }
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Aqoonsiga Model"
     },
     "940": {
-      "Title": "Deegaanka AI (LLM)",
-      "Description": "Ku socodsii Model Luqadda Weyn (LLM) gudaha server-kaaga HomeGenie. Moodooyinkan waxaa lagala soo degsan karaa lacag la'aan goobaha sida Hugging Face. Kaliya bixi dariiqa faylka qaabka GGUF Fadlan ogow in hagaajinta cabbirada, ugu horrayn gudaha Xeerka Macnaha guud, laga yaabo in loo baahdo si loo hubiyo in si buuxda ula jaanqaadi karo noocyo kala duwan.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (dhererka jawaabta)",
-      "ConfigureOptions.ModelPath": "Jidka loo maro faylka GGUF deegaanka"
+      "Title": "AI-ga maxalliga ah",
+      "Description": "Ku socodsii LLM-yada casriga ah si toos ah server-kaaga HomeGenie. Waxaa ku jira API buuxa si loo xakameeyo AI-ga barnaamijyada kale iyo qoraallada.",
+      "ConfigureOptions.MaxTokens": "Calaamadaha ugu Sareeya (dhererka jawaabta)",
+      "ConfigureOptions.ModelPath": "Jidka loo maro faylka GGUF deegaanka",
+      "ConfigureOptions.ModelFile": "Moodel"
+    },
+    "575": {
+      "Title": "Maareeyaha Soo dejinta",
+      "Description": "Adeeg wareejinta faylka HTTP(S) oo adag oo aan isku mid ahayn oo laga heli karo API gaar ah. Waxay maamushaa wareegga nolosha oo dhan ee soo dejinta, waxay taageertaa joojinta/dib u bilaabista (iyadoo adeegsanaysa cinwaanada Range) iyo maaraynta faylka ku meel gaarka ah (.part)."
     }
   }
 }

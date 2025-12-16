@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ScriptSetup>var dataFolder = Data.GetFolder(PresetsFolder);
 Data.AddToSystemBackup(dataFolder);
@@ -56,7 +56,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -326,7 +326,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -336,6 +336,651 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <Address>570</Address>
     <Name>Data Monitor</Name>
     <Description>Real-time data visualization and monitoring.</Description>
+    <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Run();</ScriptSetup>
+    <ScriptSource>// Initialize the central download manager
+var downloadManager = new DownloadManager();
+
+// Ensure resources are released when the program stops
+When.ProgramStopping(() =&gt; {
+    downloadManager.Dispose();
+    return true;
+});
+
+// Define the API endpoint for DownloadManager interactions
+Api.Handle("System.Utility/DownloadManager", (args) =&gt; {
+
+    var request = Api.Parse(args);
+    dynamic data = null;
+
+    // Attempt to deserialize input data (handles both string and byte arrays)
+    try
+    {
+        string jsonString = request.Data is string ? request.Data.ToString() : System.Text.Encoding.UTF8.GetString((byte[])request.Data);
+        data = JsonConvert.DeserializeObject&lt;dynamic&gt;(jsonString);
+    }
+    catch (Exception ex)
+    {
+        data = request.Data.ToString();
+    }
+
+    object responseData = null;
+    bool success = true;
+
+    try
+    {
+        // Handle different operations based on the 'Command' parameter
+        switch(request.Command) {
+
+            case "Enqueue":
+                // Validate inputs and add a new download to the queue
+                if (data == null) throw new ArgumentException("Enqueue command requires a data payload (Url and Path).");
+                if (data.Url == null) throw new ArgumentException("Missing 'Url' parameter in Enqueue request.");
+                if (data.Path == null) throw new ArgumentException("Missing 'Path' parameter in Enqueue request.");
+
+                string url = data.Url.ToString();
+                string destinationFolder = data.Path.ToString();
+
+                if (string.IsNullOrWhiteSpace(url)) throw new ArgumentException("Url cannot be empty.");
+                if (string.IsNullOrWhiteSpace(destinationFolder)) throw new ArgumentException("Folder cannot be empty.");
+
+                string payloadJson = data.ToString();
+
+                // Start the task and return the assigned ID
+                var task = downloadManager.EnqueueDownload(url, destinationFolder, payloadJson);
+
+                responseData = new {
+                    Id = task.Id,
+                    Url = task.Url,
+                    Status = task.Status.ToString()
+                };
+                break;
+
+            case "QueueList":
+                // Retrieve the full list of downloads with status and progress
+                responseData = downloadManager.GetTasks()
+                    .Select(t =&gt; new {
+                        t.Id,
+                        t.Url,
+                        t.DestinationFilePath,
+                        Status = t.Status.ToString(),
+                        t.TotalBytes,
+                        t.BytesDownloaded,
+                        t.ProgressPercentage,
+                        t.ErrorMessage
+                    }).ToList();
+                break;
+
+            case "GetStatus":
+
+                if (data == null) throw new ArgumentException("GetStatus command requires a data payload (DestinationFilePath).");
+                string destinationPathToSearch = data.ToString();
+                if (string.IsNullOrWhiteSpace(destinationPathToSearch)) throw new ArgumentException("DestinationFilePath cannot be empty.");
+
+                var task2 = downloadManager.GetTasks()
+                    .FirstOrDefault(t =&gt; t.DestinationFilePath == destinationPathToSearch);
+
+                if (task2 == null)
+                {
+                    responseData = null;
+                    break;
+                }
+
+                if (task2.Status == DownloadStatus.Completed &amp;&amp; !System.IO.File.Exists(task2.DestinationFilePath))
+                {
+                    downloadManager.DeleteDownload(task2.Id);
+                    Program.Log.Info($"Download task {task2.Id} removed (Completed but file missing at: {task2.DestinationFilePath}).");
+                    responseData = null;
+                    break;
+                }
+
+                responseData = new
+                {
+                    task2.Id,
+                    task2.Url,
+                    task2.DestinationFilePath,
+                    Status = task2.Status.ToString(),
+                    task2.TotalBytes,
+                    task2.BytesDownloaded,
+                    task2.ProgressPercentage,
+                    task2.ErrorMessage
+                };
+                break;
+
+            case "Pause":
+            case "Resume":
+            case "Delete":
+                // Handle control actions (Pause, Resume, Delete) on a specific task ID
+                if (data == null) throw new ArgumentException($"{request.Command} command requires a data payload (Id).");
+                if (data.Id == null) throw new ArgumentException("Missing Task Id.");
+
+                Guid taskId = Guid.Parse(data.Id.ToString());
+                bool operationResult = false;
+
+                switch(request.Command)
+                {
+                    case "Pause":
+                        operationResult = downloadManager.PauseDownload(taskId);
+                        break;
+                    case "Resume":
+                        operationResult = downloadManager.ResumeDownload(taskId);
+                        break;
+                    case "Delete":
+                        operationResult = downloadManager.DeleteDownload(taskId);
+                        break;
+                }
+
+                responseData = new {
+                    Id = taskId,
+                    Command = request.Command,
+                    Success = operationResult,
+                    Message = operationResult ? $"{request.Command} successful." : $"{request.Command} failed or Task not found/ineligible."
+                };
+                break;
+
+            default:
+                success = false;
+                responseData = new { Error = $"Unknown command: {request.Command}" };
+                break;
+        }
+    }
+    catch (Exception ex)
+    {
+        // Global error handler: log exception and prepare error response
+        success = false;
+        Program.Log.Error($"DownloadManager API Error: {request.Command} failed. {ex.Message}");
+        responseData = new { Error = ex.Message, Trace = ex.StackTrace };
+    }
+
+    // Return the operation result as a JSON object
+    return JsonConvert.SerializeObject(new {
+        Success = success,
+        Data = responseData
+    });
+});
+
+
+// Keep the script running in the background
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>#using System.Collections.Concurrent
+#using System.Net.Http
+#using System.Net.Http.Headers
+
+/// &lt;summary&gt;
+/// Represents the current state of a download request.
+/// &lt;/summary&gt;
+public enum DownloadStatus
+{
+    Pending,        // Waiting to be started
+    Downloading,    // Download in progress
+    Paused,         // Interrupted by the user (waiting for Resume)
+    Error,          // Failed (e.g., HTTP or I/O error)
+    Completed,      // Successfully completed
+    Cancelled       // Aborted by the user
+}
+
+/// &lt;summary&gt;
+/// Represents a single download task within the manager.
+/// Holds all necessary metadata, state, and control objects.
+/// &lt;/summary&gt;
+public class DownloadTask : IDisposable
+{
+    // --- Request and Destination Information ---
+
+    /// &lt;summary&gt;Unique identifier for the download task.&lt;/summary&gt;
+    public Guid Id { get; } = Guid.NewGuid();
+
+    /// &lt;summary&gt;The full URL of the resource to be downloaded.&lt;/summary&gt;
+    public string Url { get; }
+
+    /// &lt;summary&gt;The destination folder.&lt;/summary&gt;
+    public string DestinationFolder { get; }
+
+    /// &lt;summary&gt;The name of the file.&lt;/summary&gt;
+    public string FileName { get; }
+
+    /// &lt;summary&gt;
+    /// Full path to the destination file (calculated from Folder + FileName).
+    /// &lt;/summary&gt;
+    public string DestinationFilePath
+    {
+        get =&gt; Path.Combine(DestinationFolder, FileName);
+    }
+
+    /// &lt;summary&gt;Serialized requester payload (e.g., JSON) to be saved in the .info file.&lt;/summary&gt;
+    public string OriginatorPayloadJson { get; }
+
+    // --- Status and Progress ---
+
+    /// &lt;summary&gt;The current status of the download.&lt;/summary&gt;
+    public DownloadStatus Status { get; set; } = DownloadStatus.Pending;
+
+    /// &lt;summary&gt;Total size of the file in bytes (from HTTP Content-Length header).&lt;/summary&gt;
+    public long TotalBytes { get; set; } = 0;
+
+    /// &lt;summary&gt;Number of bytes downloaded so far.&lt;/summary&gt;
+    public long BytesDownloaded { get; set; } = 0;
+
+    /// &lt;summary&gt;Calculates the download completion percentage.&lt;/summary&gt;
+    public double ProgressPercentage =&gt; TotalBytes &gt; 0
+        ? (double)BytesDownloaded / TotalBytes * 100
+        : 0;
+
+    /// &lt;summary&gt;Description of the last error, if Status is Error.&lt;/summary&gt;
+    public string ErrorMessage { get; set; }
+
+    // --- Control Objects (Pause / Cancel) ---
+
+    /// &lt;summary&gt;
+    /// The cancellation token source. Used to signal interruption (Pause/Cancel) to the download operation.
+    /// Must be recreated for each start/resume operation.
+    /// &lt;/summary&gt;
+    public CancellationTokenSource CancellationTokenSource { get; set; }
+
+    /// &lt;summary&gt;The running asynchronous Task that performs the download operation.&lt;/summary&gt;
+    public System.Threading.Tasks.Task DownloadOperation { get; set; }
+
+    // --- Utility Properties ---
+
+    public string PartFilePath
+    {
+        get =&gt; DestinationFilePath + ".part";
+    }
+
+    /// &lt;summary&gt;Gets the full path for the metadata file (.info).&lt;/summary&gt;
+    public string InfoFilePath
+    {
+        get
+        {
+            // Changes extension of the destination file to ".info"
+            return Path.ChangeExtension(DestinationFilePath, ".info");
+        }
+    }
+
+    // --- Constructor ---
+
+    /// &lt;summary&gt;
+    /// Initializes a new instance of the DownloadTask class.
+    /// &lt;/summary&gt;
+    /// &lt;param name="url"&gt;The URL of the file.&lt;/param&gt;
+    /// &lt;param name="destinationPath"&gt;The path where the file will be saved.&lt;/param&gt;
+    /// &lt;param name="payloadJson"&gt;The JSON payload from the originator.&lt;/param&gt;
+    public DownloadTask(string url, string destinationFolder, string payloadJson)
+    {
+        if (string.IsNullOrWhiteSpace(url)) throw new ArgumentException("URL cannot be empty.", nameof(url));
+        if (string.IsNullOrWhiteSpace(destinationFolder)) throw new ArgumentException("Destination folder cannot be empty.", nameof(destinationFolder));
+
+        string calculatedFileName = GetFileNameFromUrl(url);
+        if (string.IsNullOrWhiteSpace(calculatedFileName)) throw new ArgumentException("Could not extract a valid file name from the URL.", nameof(url));
+
+        Url = url;
+        DestinationFolder = destinationFolder;
+        FileName = calculatedFileName;
+        OriginatorPayloadJson = payloadJson ?? "{}";
+    }
+
+    /// &lt;summary&gt;
+    /// Extracts the file name from the given URL string.
+    /// &lt;/summary&gt;
+    private static string GetFileNameFromUrl(string urlString)
+    {
+        try
+        {
+            Uri uri = new Uri(urlString);
+            string fileName = Path.GetFileName(uri.LocalPath);
+
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return "download_" + Guid.NewGuid().ToString().Substring(0, 8);
+            }
+            return fileName;
+        }
+        catch (UriFormatException)
+        {
+            return null;
+        }
+    }
+
+    // --- IDisposable Implementation ---
+
+    private bool disposed = false;
+
+    /// &lt;summary&gt;
+    /// Disposes of unmanaged resources, specifically the CancellationTokenSource.
+    /// &lt;/summary&gt;
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                // Dispose managed resources
+                CancellationTokenSource?.Dispose();
+            }
+            // Dispose unmanaged resources (none applicable here)
+            disposed = true;
+        }
+    }
+}
+
+
+public class DownloadManager : IDisposable
+{
+    private readonly ConcurrentDictionary&lt;Guid, DownloadTask&gt; _tasks;
+    private readonly HttpClient _httpClient;
+    private readonly SemaphoreSlim _concurrencyLimiter;
+    private const int MaxConcurrentDownloads = 5;
+
+    private bool _disposed = false;
+
+    public DownloadManager()
+    {
+        _tasks = new ConcurrentDictionary&lt;Guid, DownloadTask&gt;();
+        _httpClient = new HttpClient();
+        _concurrencyLimiter = new SemaphoreSlim(MaxConcurrentDownloads, MaxConcurrentDownloads);
+    }
+
+    /// &lt;summary&gt;
+    /// Submits a new download request or registers a task to be managed.
+    /// &lt;/summary&gt;
+    /// &lt;param name="url"&gt;The file URL.&lt;/param&gt;
+    /// &lt;param name="destinationFolder"&gt;The destination folder path.&lt;/param&gt;
+    /// &lt;param name="payloadJson"&gt;The custom payload JSON.&lt;/param&gt;
+    /// &lt;returns&gt;The created DownloadTask object.&lt;/returns&gt;
+    public DownloadTask EnqueueDownload(string url, string destinationFolder, string payloadJson)
+    {
+        var task = new DownloadTask(url, destinationFolder, payloadJson);
+        _tasks.TryAdd(task.Id, task);
+
+        task.DownloadOperation = StartOrResumeDownloadAsync(task);
+        return task;
+    }
+
+    /// &lt;summary&gt;
+    /// Gets a read-only list of all managed download tasks.
+    /// &lt;/summary&gt;
+    public System.Collections.Generic.IReadOnlyList&lt;DownloadTask&gt; GetTasks()
+    {
+        return _tasks.Values.ToList();
+    }
+
+    /// &lt;summary&gt;
+    /// Attempts to pause an active download task.
+    /// &lt;/summary&gt;
+    public bool PauseDownload(Guid taskId)
+    {
+        if (_tasks.TryGetValue(taskId, out var task) &amp;&amp; task.Status == DownloadStatus.Downloading)
+        {
+            // Signaling the CancellationToken will cause the DownloadLoop to exit gracefully.
+            task.CancellationTokenSource?.Cancel();
+            // The status will be updated to Paused inside the DownloadLoop's catch block.
+            return true;
+        }
+        return false;
+    }
+
+    /// &lt;summary&gt;
+    /// Resumes a paused task, or starts a pending one if a slot is available.
+    /// &lt;/summary&gt;
+    public bool ResumeDownload(Guid taskId)
+    {
+        if (_tasks.TryGetValue(taskId, out var task) &amp;&amp; (task.Status == DownloadStatus.Paused || task.Status == DownloadStatus.Error))
+        {
+            // Re-start the task; the logic handles resume internally.
+            task.DownloadOperation = StartOrResumeDownloadAsync(task);
+            return true;
+        }
+        return false;
+    }
+
+    /// &lt;summary&gt;
+    /// The core method that manages concurrency and executes the download logic.
+    /// &lt;/summary&gt;
+    private async System.Threading.Tasks.Task StartOrResumeDownloadAsync(DownloadTask task)
+    {
+        // Wait for an available concurrency slot.
+        await _concurrencyLimiter.WaitAsync();
+
+        if (task.Status == DownloadStatus.Cancelled || task.Status == DownloadStatus.Completed)
+        {
+            _concurrencyLimiter.Release();
+            return;
+        }
+
+        // Initialize or recreate the CancellationTokenSource for the new run
+        task.CancellationTokenSource?.Dispose();
+        task.CancellationTokenSource = new CancellationTokenSource();
+        task.Status = DownloadStatus.Downloading;
+        task.ErrorMessage = "";
+
+        try
+        {
+            await DownloadLoop(task, task.CancellationTokenSource.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            // Caught when PauseDownload or CancelAllActiveTasks is called.
+            if (task.Status != DownloadStatus.Cancelled)
+            {
+                task.Status = DownloadStatus.Paused;
+                task.ErrorMessage = "Paused";
+            }
+        }
+        catch (System.Exception ex)
+        {
+            // General errors (network, file system, etc.)
+            task.Status = DownloadStatus.Error;
+            task.ErrorMessage = $"Download failed: {ex.Message}";
+        }
+        finally
+        {
+            _concurrencyLimiter.Release();
+            // Clean up the CancellationTokenSource
+            task.CancellationTokenSource?.Dispose();
+            task.CancellationTokenSource = null;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Performs the HTTP download logic, handling Range headers for resume and directory creation.
+    /// &lt;/summary&gt;
+    private async System.Threading.Tasks.Task DownloadLoop(DownloadTask task, CancellationToken cancellationToken)
+    {
+        var resumeMode = task.BytesDownloaded &gt; 0;
+        var request = new HttpRequestMessage(HttpMethod.Get, task.Url);
+
+        if (resumeMode)
+        {
+            // Range Header logic for resume
+            request.Headers.Range = new RangeHeaderValue(task.BytesDownloaded, null);
+        }
+
+        using (var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+        {
+            response.EnsureSuccessStatusCode();
+
+            if (!resumeMode)
+            {
+                // Only set TotalBytes on first start
+                task.TotalBytes = response.Content.Headers.ContentLength ?? 0;
+            }
+
+            var directoryPath = Path.GetDirectoryName(task.DestinationFilePath);
+            if (!string.IsNullOrWhiteSpace(directoryPath))
+            {
+                System.IO.Directory.CreateDirectory(directoryPath);
+            }
+
+            // Open existing .part file when resuming a download.
+            var fileMode = resumeMode ? System.IO.FileMode.Append : System.IO.FileMode.Create;
+
+            using (var fileStream = new System.IO.FileStream(task.PartFilePath, fileMode, System.IO.FileAccess.Write, System.IO.FileShare.None))
+            using (var httpStream = await response.Content.ReadAsStreamAsync())
+            {
+                var buffer = new byte[81920];
+                int bytesRead;
+
+                while ((bytesRead = await httpStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) &gt; 0)
+                {
+                    await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
+
+                    task.BytesDownloaded += bytesRead;
+                }
+            }
+
+            if (System.IO.File.Exists(task.DestinationFilePath))
+            {
+                System.IO.File.Delete(task.DestinationFilePath);
+            }
+            System.IO.File.Move(task.PartFilePath, task.DestinationFilePath);
+        }
+
+        // Post-Download Actions
+        task.Status = DownloadStatus.Completed;
+        await SaveInfoFile(task);
+    }
+
+    /// &lt;summary&gt;
+    /// Saves the OriginatorPayloadJson to the .info file.
+    /// &lt;/summary&gt;
+    private System.Threading.Tasks.Task SaveInfoFile(DownloadTask task)
+    {
+        return System.IO.File.WriteAllTextAsync(task.InfoFilePath, task.OriginatorPayloadJson);
+    }
+
+    /// &lt;summary&gt;
+    /// Stops the task, removes it from the manager, and deletes associated files (Requirement 5).
+    /// &lt;/summary&gt;
+    public bool DeleteDownload(Guid taskId)
+    {
+        if (_tasks.TryRemove(taskId, out var task))
+        {
+            // 1. Stop the active download immediately (if running)
+            task.CancellationTokenSource?.Cancel();
+            task.Status = DownloadStatus.Cancelled;
+
+            try
+            {
+                // 2. Delete main file (even partial one)
+                if (System.IO.File.Exists(task.DestinationFilePath))
+                {
+                    System.IO.File.Delete(task.DestinationFilePath);
+                }
+
+                // 2.1 Delete PARTIAL file (.part)
+                if (System.IO.File.Exists(task.PartFilePath))
+                {
+                    System.IO.File.Delete(task.PartFilePath);
+                }
+
+                // 3. Delete .info file
+                if (System.IO.File.Exists(task.InfoFilePath))
+                {
+                    System.IO.File.Delete(task.InfoFilePath);
+                }
+
+                // 4. Dispose and clean up task resources
+                task.Dispose();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                // Re-add the task if cleanup failed? Depends on desired behavior. For simplicity, just return false.
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // *****************************************************************
+    // * IDisposable Implementation for Cleanup *
+    // *****************************************************************
+
+    /// &lt;summary&gt;
+    /// Cancels all active (Downloading or Pending) tasks before cleanup.
+    /// &lt;/summary&gt;
+    public void CancelAllActiveTasks()
+    {
+        var activeTasks = _tasks.Values
+            .Where(t =&gt; t.Status == DownloadStatus.Downloading || t.Status == DownloadStatus.Pending || t.Status == DownloadStatus.Paused)
+            .ToList();
+
+        foreach (var task in activeTasks)
+        {
+            if (task.Status == DownloadStatus.Downloading || task.Status == DownloadStatus.Paused)
+            {
+                task.Status = DownloadStatus.Cancelled;
+                task.CancellationTokenSource?.Cancel();
+            }
+            else if (task.Status == DownloadStatus.Pending)
+            {
+                task.Status = DownloadStatus.Cancelled;
+            }
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Releases the unmanaged and managed resources.
+    /// &lt;/summary&gt;
+    public void Dispose()
+    {
+        Dispose(true);
+        System.GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed) return;
+
+        if (disposing)
+        {
+            // 1. Cancel all active tasks to free up any running threads/tasks
+            CancelAllActiveTasks();
+
+            // 2. Dispose managed resources
+            _httpClient.Dispose();
+            _concurrencyLimiter.Dispose();
+
+            // 3. Dispose of all DownloadTask instances
+            foreach(var task in _tasks.Values)
+            {
+                task.Dispose();
+            }
+            _tasks.Clear();
+        }
+
+        _disposed = true;
+    }
+}</ScriptContext>
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.3</PackageVersion>
+      <Id>download-manager</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>43F5B501DC7F608D5D0EC644F1ABB330</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>575</Address>
+    <Name>Download Manager</Name>
+    <Description>A robust, asynchronous HTTP(S) file transfer service accessible via a dedicated API. It manages the full download lifecycle, supporting pause/resume (using Range headers) and temporary file handling (.part).</Description>
     <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -369,7 +1014,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -392,7 +1037,7 @@ Program.Run();
 </ScriptSetup>
     <ScriptSource>// *************************************************************************
 // API HANDLER: Weekly Statistics Request (Daily Aggregation)
-// Manages the endpoint for retrieving the available week range and the 
+// Manages the endpoint for retrieving the available week range and the
 // average Watts/Hour statistics aggregated by day of the week.
 // Format: /Weekly/Meter.Watts.Hour/[Domain]/[Address]/[WeekNumber | BrowsingRange]
 // *************************************************************************
@@ -415,7 +1060,7 @@ Api.Handle("DataProcessing.Statistics/Weekly/Meter.Watts.Hour", (args) =&gt; {
 
 // *************************************************************************
 // API HANDLER: Hourly Statistics Request (Hourly Aggregation)
-// Manages the endpoint for retrieving the available week range and the 
+// Manages the endpoint for retrieving the available week range and the
 // average Watts/Hour statistics aggregated by hour of the day.
 // Format: /Hourly/Meter.Watts.Hour/[Domain]/[Address]/[WeekNumber | BrowsingRange]
 // *************************************************************************
@@ -438,8 +1083,8 @@ Api.Handle("DataProcessing.Statistics/Hourly/Meter.Watts.Hour", (args) =&gt; {
 
 // *************************************************************************
 // REAL-TIME DATA UPDATE PROCESS (Downsampling - Mobile Window)
-// Recalculates the average Watts consumption for the LAST HOUR (a mobile 60-minute 
-// window) and logs this rolling average. The process executes at a fixed 60-second 
+// Recalculates the average Watts consumption for the LAST HOUR (a mobile 60-minute
+// window) and logs this rolling average. The process executes at a fixed 60-second
 // interval and does NOT align to clock time.
 // *************************************************************************
 while (Program.IsRunning)
@@ -452,7 +1097,7 @@ while (Program.IsRunning)
 
         double defaultValue = mod.Parameter("Meter.Watts").Statistics.Current.Value;
 
-        // NOTE ON DATA INTEGRITY: The underlying device must emit values 
+        // NOTE ON DATA INTEGRITY: The underlying device must emit values
         // (including 0.0 when off) at regular intervals for this average to be accurate.
         var records = mod.Parameter("Meter.Watts").Statistics.History
                 .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; UpdateInterval);
@@ -586,7 +1231,7 @@ double[] GetWeeklyStats(string domain, string address, ushort weekOfYear)
 public double[] GetHourlyStats(string domain, string address, ushort targetWeekOfYear)
 {
     var results = new double[24];
-    ushort weekToFilter = targetWeekOfYear; 
+    ushort weekToFilter = targetWeekOfYear;
 
     lock(this)
     using(var db = Data.LiteDb(GetDbName()))
@@ -605,15 +1250,15 @@ public double[] GetHourlyStats(string domain, string address, ushort targetWeekO
                         &amp;&amp; x.Address == address
                         &amp;&amp; x.YearWeek == weekToFilter
                         &amp;&amp; x.DayHour == i);
-                        
+
             double sum = 0;
-            
+
             foreach(var s in sumValues) {
                 sum += s.WattsHour;
             }
-            
-            double avg = sum / 7.0;             
-            results[i] = avg; 
+
+            double avg = sum / 7.0;
+            results[i] = avg;
         }
     }
     return results;
@@ -621,27 +1266,37 @@ public double[] GetHourlyStats(string domain, string address, ushort targetWeekO
 
 public object GetYearWeekRange()
 {
-    ushort minYearWeek = 0;
-    ushort maxYearWeek = 0;
+    ushort minYearWeek = ushort.MaxValue;
+    ushort maxYearWeek = 0; 
+    bool foundAny = false;
+
     lock(this)
     using(var db = Data.LiteDb(GetDbName()))
     {
         var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
-        if (stats.LongCount() &gt; 0)
+        var allStats = stats.FindAll(); 
+        
+        foreach (var stat in allStats)
         {
-            var allStats = stats.FindAll().ToList();
-            if (allStats.Any())
+            ushort currentYearWeek = stat.YearWeek;
+            if (!foundAny || currentYearWeek &lt; minYearWeek)
             {
-                minYearWeek = allStats.Min(x =&gt; x.YearWeek);
-                maxYearWeek = allStats.Max(x =&gt; x.YearWeek);
+                minYearWeek = currentYearWeek;
             }
+            if (!foundAny || currentYearWeek &gt; maxYearWeek)
+            {
+                maxYearWeek = currentYearWeek;
+            }
+            foundAny = true;
         }
     }
-    if (minYearWeek == 0 &amp;&amp; maxYearWeek == 0)
+
+    if (!foundAny)
     {
         ushort currentWeek = (ushort)ISOWeek.GetWeekOfYear(DateTime.Now);
         return new { WeekStart = currentWeek, WeekEnd = currentWeek };
     }
+    
     return new {
         Start = minYearWeek,
         End = maxYearWeek,
@@ -681,16 +1336,16 @@ string GetDbName()
     return $"energy_use_{DateTime.Now.Year}.db";
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
       <Required>false</Required>
-      <Checksum>D7E90C5B91E5B4B401E23219585DDC38</Checksum>
+      <Checksum>8BD5E82E9F84D3895C385BC6C519996D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
@@ -861,7 +1516,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -925,12 +1580,12 @@ public string[] GetHourLabels()
     return hourLabels.ToArray();
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -1392,7 +2047,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -1648,7 +2303,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1740,7 +2395,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -1832,7 +2487,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1904,7 +2559,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -1972,12 +2627,12 @@ public string[] GetDayLabels()
     return finalLabels;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>

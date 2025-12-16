@@ -11,9 +11,16 @@
     "switches_control": "Keçidlər"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "salam! Mən sizin yerli LLM köməkçinizəm. Mən sizə necə kömək edə bilərəm?",
-    "no_bound_module": "LLM modulu bağlanmayıb. Dil modelini birləşdirmək üçün vidcet parametrlərini açın.",
-    "start_typing_prompt": "Bildiriş yazmağa başlayın..."
+    "intro": "Salam! Mən sizin yerli süni intellektinizəm. Sizə necə kömək edə bilərəm?",
+    "start_typing_prompt": "Bir sorğu yazmağa başlayın...",
+    "download_title": "Tələb olunan LLM faylını yükləyin:",
+    "teaser_description": "Avadanlıqlarınızda Generativ Süni İntellektdən istifadə edin. Yerli və özəl sistemin təhlükəsizliyi ilə söhbət edin, kod yazın və ya qabaqcıl avtomatlaşdırmalar qurun.",
+    "select_model": "Model seçin",
+    "feat_private": "Şəxsi",
+    "feat_offline": "Sürətli və Yerli",
+    "feat_automation": "Avtomatlaşdırma",
+    "loading_model": "Model yaddaşa yüklənir... Bu bir neçə dəqiqə çəkə bilər.",
+    "model": "Model",
+    "status": "Status"
   }
 }

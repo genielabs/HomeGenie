@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID modely"
     },
     "940": {
-      "Title": "AI eo an-toerana (LLM)",
-      "Description": "Manaova Large Language Model (LLM) eo an-toerana amin'ny mpizara HomeGenie anao. Ireo modely ireo dia azo alaina maimaim-poana amin'ny sehatra toy ny Hugging Face. Omeo fotsiny ny lalana mankany amin'ny rakitra modely amin'ny endrika GGUF. Mariho fa mety ilaina ny fanitsiana ny mason-tsivana, indrindra ao anatin'ny Code Context, mba hahazoana antoka fa mifanaraka tanteraka amin'ny modely samihafa.",
-      "ConfigureOptions.MaxTokens": "Token'ny Max (lavany valiny)",
-      "ConfigureOptions.ModelPath": "Lalana mankany amin'ny rakitra GGUF eo an-toerana"
+      "Title": "AI eo an-toerana",
+      "Description": "Ampandehano mivantana amin'ny mpizara HomeGenie anao ireo LLM maoderina. Ahitana API feno hifehezana ny AI avy amin'ny programa sy script hafa.",
+      "ConfigureOptions.MaxTokens": "Tokens ambony indrindra (halavan'ny valiny)",
+      "ConfigureOptions.ModelPath": "Lalana mankany amin'ny rakitra GGUF eo an-toerana",
+      "ConfigureOptions.ModelFile": "MODELY"
+    },
+    "575": {
+      "Title": "Mpitantana ny fampidinana",
+      "Description": "Serivisy famindrana rakitra HTTP(S) matanjaka sy tsy mifanindry azo idirana amin'ny alàlan'ny API natokana. Izy io no mitantana ny tsingerin'ny fampidinana manontolo, manohana ny fiatoana/famerenana (mampiasa lohatenin'ny Range) sy ny fikirakirana rakitra vonjimaika (.part)."
     }
   }
 }

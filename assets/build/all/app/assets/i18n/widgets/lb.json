@@ -11,9 +11,16 @@
     "switches_control": "Schalter"
   },
   "$ai_chat": {
-    "title": "KI-Chat-Widget",
-    "intro": "Moien! Ech sinn Äre lokale LLM Assistent. Wéi kann ech Iech hëllefen?",
-    "no_bound_module": "Kee LLM-Modul gebonnen. Maacht w.e.g. d'Widget-Astellungen op fir e Sproochemodell ze bannen.",
-    "start_typing_prompt": "Fänkt un, eng Ufro ze schreiwen..."
+    "intro": "Moien! Ech sinn Är lokal KI. Wéi kann ech Iech hëllefen?",
+    "start_typing_prompt": "Fänkt un, eng Ufro ze schreiwen...",
+    "download_title": "Déi néideg LLM-Datei eroflueden:",
+    "teaser_description": "Notzt d'Kraaft vun der generativer KI op Ärer Hardware. Chat, schreift Code oder baut fortgeschratt Automatisatiounen mat der Sécherheet vun engem lokalen a privaten System.",
+    "select_model": "Wielt e Modell",
+    "feat_private": "Privat",
+    "feat_offline": "Schnell a Lokal",
+    "feat_automation": "Automatiséierung",
+    "loading_model": "Modell gëtt an de Späicher gelueden... Dëst kéint e puer Momenter daueren.",
+    "model": "Modell",
+    "status": "Status"
   }
 }

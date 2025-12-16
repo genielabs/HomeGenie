@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Identitas Model"
     },
     "940": {
-      "Title": "AI Lokal (LLM)",
-      "Description": "Jalankan Large Language Model (LLM) secara lokal di server HomeGenie Anda. Model-model ini dapat diunduh gratis dari platform seperti Hugging Face. Cukup berikan path ke berkas model berformat GGUF. Harap dicatat bahwa penyesuaian parameter, terutama dalam Kode Konteks, mungkin diperlukan untuk memastikan kompatibilitas penuh dengan berbagai model.",
+      "Title": "AI Lokal",
+      "Description": "Jalankan LLM (Learning Learning Model) canggih langsung di server HomeGenie Anda. Termasuk API lengkap untuk mengontrol AI dari program dan skrip lain.",
       "ConfigureOptions.MaxTokens": "Token Maksimum (panjang respons)",
-      "ConfigureOptions.ModelPath": "Jalur ke file GGUF lokal"
+      "ConfigureOptions.ModelPath": "Jalur ke file GGUF lokal",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Pengelola Unduhan",
+      "Description": "Layanan transfer file HTTP(S) asinkron yang andal dan dapat diakses melalui API khusus. Layanan ini mengelola seluruh siklus unduhan, mendukung jeda/lanjutkan (menggunakan header Range) dan penanganan file sementara (.part)."
     }
   }
 }

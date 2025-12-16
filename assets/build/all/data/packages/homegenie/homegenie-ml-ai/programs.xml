@@ -1042,13 +1042,22 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
 // 2. To specify the front-end widget used for the UI.
 // 3. To define the conditions and triggers for executing the Main block.
 //
-// In this case, .Run() finalizes the setup and proceeds to execute the Main block immediately.
+// In this case, Program.Run() executes the Main block immediately.
 //
-Program
-  .AddOption(OPTION_MODEL_PATH, "", "Path to local GGUF file", "text")
-  .AddOption(OPTION_MAX_TOKENS, "512", "Max Tokens (response length)", "slider:64:4096:32")
-  .UseWidget("custom/examples/local-ai-chat")
-  .Run();
+
+var modelsList = LoadModelList(Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME));
+var models = string.Join(",", modelsList.Select(item =&gt; $"{item.Value.Name}={item.Key}"));
+
+Program.Setup(() =&gt; {
+  // Options, widget and other program related settings should always be defined in
+  // the "Setup" delegate.
+  Program
+    .AddOption(OPTION_MAX_TOKENS, "1536", "Max Tokens (response length)", "slider:64:4096:32")
+    .AddOption(OPTION_MODEL_FILE, "", "Model", $"select:{ models }")
+    .UseWidget("custom/examples/local-ai-chat");
+});
+
+Program.Run();
 </ScriptSetup>
     <ScriptSource>//
 // MAIN block for the Local LLM automation program.
@@ -1056,255 +1065,591 @@ Program
 // This code is executed after the SETUP block. It is responsible for:
 // 1. Validating user-configured options.
 // 2. Initializing the LLamaSharp model, context, and chat session.
-// 3. Defining an API endpoint to handle user prompts.
-// 4. Managing the program's lifecycle and handling reconfiguration requests.
+// 3. Defining API endpoints to handle model downloads and user prompts.
+// 4. Managing the program's lifecycle and memory cleanup.
 //
 
-// A flag to signal that the program needs to be reloaded to apply new settings.
+// Flag to signal that the program needs to be reloaded to apply new settings.
 var reconfigureRequired = false;
+
 // Register an event handler that listens for changes to any module parameter.
+// If a "ConfigureOptions" parameter changes, we trigger a restart.
 When.ModuleParameterChanged((module, parameter) =&gt; {
-  // Check if the change occurred in this program and affects a configuration option.
   if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
-    // Set the flag to true, which will trigger a restart of the Main block.
     reconfigureRequired = true;
   }
   return true;
 });
 
-// --- 1. VALIDATION ---
-// Retrieve the model path from the program's configuration options.
-var modelPath = Program.Option(OPTION_MODEL_PATH).Value;
+// Load model configuration and paths
+var modelList = LoadModelList(Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME));
+var selectedModel = Program.Option(OPTION_MODEL_FILE).Value;
+string localModelFile = Path.Combine(Data.GetFolder(), selectedModel);
 
-// Check if the model path is configured.
+
+// --- API: LLM DOWNLOAD MANAGEMENT ---
+// These endpoints are called by the UI to manage the GGUF file download.
+
+Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p) =&gt; {
+     // Enqueue the download task via System.Utility/DownloadManager
+     var model = modelList[selectedModel];
+     Program.Emit(FIELD_DOWNLOAD, "Requested");
+     var item = JsonConvert.SerializeObject(new {
+         Name = model.Name,
+         Url = model.Url,
+         Path = Data.GetFolder()
+     });
+     Api.Call("System.Utility/DownloadManager/Enqueue", item);
+     return new ResponseStatus(Status.Ok);
+
+}).Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadCancel", (p) =&gt; {
+     // Cancel and delete the current download task
+     Program.Emit(FIELD_DOWNLOAD, "Pending");
+     var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
+     var res = Api.Call("System.Utility/DownloadManager/Delete", item);
+     Program.Emit(FIELD_DOWNLOAD_ID, "Pending");
+     Program.Emit(Program.Option(OPTION_MODEL_FILE).Name, "");
+     return new ResponseStatus(Status.Ok);
+
+}).Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadPause", (p) =&gt; {
+     Program.Emit(FIELD_DOWNLOAD, "Paused");
+     var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
+     var res = Api.Call("System.Utility/DownloadManager/Pause", item);
+     return new ResponseStatus(Status.Ok);
+
+}).Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadResume", (p) =&gt; {
+     var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
+     var res = Api.Call("System.Utility/DownloadManager/Resume", item);
+     return new ResponseStatus(Status.Ok);
+});
+
+
+// Clear previous ID
+Program.Emit("LLM.Id", "");
+
+
+// --- MODEL FILE CHECK &amp; DOWNLOAD LOOP ---
+// If the model file does not exist, enter a loop to monitor the download status.
+if (!File.Exists(localModelFile)) {
+
+  while (!File.Exists(localModelFile))
+  {
+    dynamic response = Api.Call("System.Utility/DownloadManager/GetStatus", localModelFile);
+    dynamic fileStatus = JsonConvert.DeserializeObject&lt;dynamic&gt;(response);  
+
+    if ((bool)fileStatus?.Success)
+    {
+      var task = fileStatus?.Data;
+      if (task != null)
+      {
+        // CASE 1: Download in progress. Update UI fields.
+        Program
+          .Emit(FIELD_DOWNLOAD, task.Status.ToString())
+          .Emit(FIELD_DOWNLOAD_ID, task.Id.ToString())
+          .Emit(FIELD_DOWNLOAD_TASK, task.DestinationFilePath.ToString())
+          .Emit(FIELD_DOWNLOAD_ERROR, task.ErrorMessage.ToString())
+          .Emit(FIELD_DOWNLOAD_PROGRESS, task.ProgressPercentage.ToString("F2", CultureInfo.InvariantCulture));
+        
+        if (task.ProgressPercentage &gt;= 100) 
+        {
+          break; // Download complete, exit loop
+        }
+      }
+      else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
+      {
+        // CASE 2: No active task. Set status to 'Pending' so the UI shows the "Select Model" button.
+        Program
+          .Emit(FIELD_DOWNLOAD, "Pending")
+          .Emit(FIELD_DOWNLOAD_ID, String.IsNullOrEmpty(selectedModel) ? "Pending" : "")
+          .Emit(FIELD_DOWNLOAD_TASK, String.IsNullOrEmpty(selectedModel) ? localModelFile : localModelFile)
+          .Emit(FIELD_DOWNLOAD_PROGRESS, "0");
+      }
+    }
+
+    if (reconfigureRequired) return;
+
+    Pause(2); // Poll status every 2 seconds
+  }
+
+  // File exists. Mark as complete and force a reload to initialize the engine.
+  Program
+    .Emit(FIELD_STATUS_ERROR, "") 
+    .Emit(FIELD_DOWNLOAD, "Complete")
+    .Emit(FIELD_DOWNLOAD_PROGRESS, "100");
+
+  return;
+}
+else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
+{
+  // File already exists on startup. Ensure UI reflects "Complete" state.
+  Program
+    .Emit(FIELD_DOWNLOAD, "Complete")
+    .Emit(FIELD_DOWNLOAD_ID, "")
+    .Emit(FIELD_DOWNLOAD_PROGRESS, "100")
+    .Emit(FIELD_DOWNLOAD_TASK, localModelFile);
+}
+
+
+// --- LLM ENGINE INITIALIZATION ---
+
+Program
+  .Emit("LLM.Id", selectedModel)
+  .Emit(FIELD_STATUS_ERROR, "")
+  .Emit(FIELD_STATUS_INIT, $"Starting");
+
+var templateType = modelList[selectedModel].Template;
+var modelPath = localModelFile;
+
+// Core LLamaSharp objects
+LLamaWeights model = null;
+LLamaContext context = null;
+ChatSession session = null;
+CancellationTokenSource generationCts = null;
+
+// Define cleanup action to release unmanaged memory (RAM/VRAM)
+var dispose = new Action(() =&gt; {
+  session = null;
+  if (context != null) {
+      context.Dispose();
+      context = null;
+  }
+  if (model != null) {
+      model.Dispose();
+      model = null;
+  }
+  // Force Garbage Collection to reclaim memory immediately
+  GC.Collect();
+  GC.WaitForPendingFinalizers();
+});
+
+
+// Validation
 if (String.IsNullOrEmpty(modelPath))
 {
-  // If not, send a notification to the UI. The '[program_configure]' tag is a special
-  // command that prompts the UI to open the configuration dialog.
-  Program.Notify($"LLM model path not configured.[program_configure]");
-  Program.Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
+  Program
+    .Notify($"LLM model path not configured.[program_configure]")
+    .Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
 }
-// Check if the configured model file actually exists.
 else if (!File.Exists(modelPath)) 
 {
-  Program.Notify($"File not found: {modelPath}.[program_configure]");
-  Program.Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
+  Program
+    .Notify($"File not found: {modelPath}.[program_configure]")
+    .Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
 }
 else
 {
-  // --- 2. INITIALIZATION ---
-  // If validation passes, proceed to initialize the LLM.
+  // Register cleanup handler when program stops/restarts
+  When.ProgramStopping(() =&gt; {
+      dispose();
+      return true; 
+  });
 
-  // Apply the user-configured max tokens value to the inference parameters.
+  // Apply configuration
   LailamaInferenceParams.MaxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
-
-  // Set up the model parameters, including context size and GPU layers to offload.
   var parameters = new ModelParams(modelPath)
   {
       ContextSize = PARAMS_CONTEXT_SIZE,
       GpuLayerCount = PARAMS_GPU_LAYER_SIZE
   };
- try {
-  // Load the LLM weights from the specified GGUF file into memory.
-  var model = LLamaWeights.LoadFromFile(parameters);
-  // Create a context for the model, which holds the state of the inference.
-  var context = model.CreateContext(parameters);
 
-  // Set up an executor to run the inference in an interactive (chat) mode.
+ try {
+  // Load Weights and Context
+  model = LLamaWeights.LoadFromFile(parameters);
+  context = model.CreateContext(parameters);
+
+  // Initialize Chat Session
   var executor = new InteractiveExecutor(context);
   var chatHistory = new ChatHistory();
 
-  // Create a clean, initial session state. This is used as a prototype to reset
-  // the chat session without having to re-initialize the entire model.
+  // Create prototype session to manage state resets
   ChatSession prototypeSession =  ChatSession.InitializeSessionFromHistoryAsync(executor, chatHistory).GetAwaiter().GetResult();
   var resetState = prototypeSession.GetSessionState();
 
-  // Create the main chat session that will be used for the conversation.
-  ChatSession session = new ChatSession(executor);
+  session = new ChatSession(executor);
 
-  // Register a cleanup handler that runs when the program is stopping.
-  When.ProgramStopping(() =&gt; {
-      // release resources by resetting the session to its initial state.
-      session.LoadSession(resetState);
-      return true;
-  });
-
-  // Prepare the system prompt (defined in the Context block) to be injected into the chat history.
-  var systemMessage = new ChatHistory.Message(AuthorRole.System, GetSystemPrompt()); 
-  // Ensure the session is in a clean state before adding the system prompt.
+  // Inject System Prompt
+  var systemMessage = new ChatHistory.Message(AuthorRole.System, GetSystemPrompt(templateType)); 
   session.LoadSession(resetState);
-  session.History.Messages.Add(systemMessage); 
+  session.History.Messages.Add(systemMessage);
 
-  // --- 3. API ENDPOINT ---
-  // Define an API endpoint that the front-end widget will call to send user prompts.
-  Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Process", (userInput) =&gt;  
-  {
+
+  // --- WARMUP PHASE ---
+  // Perform a dummy inference to initialize KV cache and avoid latency on first user request.
+  Program.Emit(FIELD_STATUS_INIT, "WarmingUp");
+  try {
+      var preWarmupState = session.GetSessionState();
+      var warmupParams = new InferenceParams() { MaxTokens = 1 };
+      Task.Run(async () =&gt; {
+          await foreach (var token in session.ChatAsync(new ChatHistory.Message(AuthorRole.User, " "), warmupParams))
+          {
+             // consume tokens...
+          }
+      }).GetAwaiter().GetResult();
+      // Restore clean state (remove warmup interaction)
+      session.LoadSession(preWarmupState);
+  } catch (Exception ex) {
+      Program.Log.Warn($"Warmup warning: {ex.Message}");
+  }
+  Program.Emit(FIELD_STATUS_INIT, "Ready");
+
+
+  // --- API: INFERENCE CONTROL ---
+
+  Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Stop", (p) =&gt; {
+      // Endpoint to abort current generation
+      if (generationCts != null)
+      {
+          generationCts.Cancel();
+          Program.Emit(FIELD_TOKENS_STREAM, "\n\n[STOPPED]");
+      }
+      return new ResponseStatus(Status.Ok);
+
+  }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/Process", (userInput) =&gt; {
+
       var request = Api.Parse(userInput);
-      var input = BuildUserPrompt(request.OriginalRequest);
+      var input = BuildUserPrompt(templateType, request.OriginalRequest);
+      
       if (!String.IsNullOrEmpty(input))
       {
-          // Asynchronously start the chat inference process with the user's message and inference parameters.
-          var sessionChat = session.ChatAsync(new ChatHistory.Message(AuthorRole.User, input), LailamaInferenceParams);
+          if (generationCts != null) generationCts.Dispose();
+          generationCts = new CancellationTokenSource();
 
-          // Process the resulting token stream asynchronously.
-          ProcessAsync(sessionChat, (s) =&gt; {
-            // As each token (s) is generated...
-            if (!string.IsNullOrEmpty(s))
+          // Inject Current Time as metadata (enclosed in double brackets so the model ignores it)
+          var now = DateTime.Now.ToString("g", CultureInfo.InvariantCulture); 
+          string inputWithTime = $"[[Current Time: {now}]]\n\n{input}";
+
+          // Run inference in a background thread
+          Task.Run(async () =&gt; {
+            try 
             {
-              // ...emit it to the front-end widget via the specified field.
-              Program.Emit(FIELD_TOKENS_STREAM, s);
+              var sessionChat = session.ChatAsync(new ChatHistory.Message(AuthorRole.User, inputWithTime), LailamaInferenceParams, 
+                        cancellationToken: generationCts.Token);
+
+              // SMART BUFFERING STRATEGY
+              // We accumulate tokens in a buffer to detect and remove unwanted patterns
+              // that might be split across multiple tokens (e.g. split tags).
+              string streamBuffer = "";
+              
+              // Prepare stop lists
+              var technicalTags = LailamaInferenceParams.AntiPrompts.Where(x =&gt; x.StartsWith("&lt;")).ToArray();
+              var textStops = LailamaInferenceParams.AntiPrompts.Where(x =&gt; !x.StartsWith("&lt;")).ToArray();
+              string[] visualArtifacts = { 
+                  "/assistant/avatar", 
+                  "/avatar", 
+                  "![avatar]", 
+                  "![image]" 
+              };
+
+              ProcessAsync(sessionChat, (token) =&gt; {
+                
+                if (string.IsNullOrEmpty(token)) return;
+
+                // 1. Append to buffer
+                streamBuffer += token;
+
+                // 2. Filter Visual Artifacts (Remove completely)
+                foreach (var art in visualArtifacts)
+                {
+                    if (streamBuffer.Contains(art))
+                        streamBuffer = streamBuffer.Replace(art, "");
+                }
+
+                // 3. Filter Technical Tags (e.g., &lt;|end_of_sentence|&gt;)
+                foreach (var tag in technicalTags)
+                {
+                    if (streamBuffer.Contains(tag))
+                        streamBuffer = streamBuffer.Replace(tag, "");
+                }
+
+                // 4. Handle Textual Stops (e.g., "User:", "System:")
+                
+                // A. Check if buffer ENDS with a stop word (Generation finished)
+                foreach (var stop in textStops)
+                {
+                    if (streamBuffer.EndsWith(stop))
+                    {
+                        streamBuffer = ""; // Clear buffer to hide the stop word
+                        return; 
+                    }
+                }
+
+                // B. Check if buffer STARTs to form a stop word (Potential split token)
+                bool isPotentialDanger = false;
+                foreach (var stop in textStops)
+                {
+                    if (stop.StartsWith(streamBuffer))
+                    {
+                        isPotentialDanger = true;
+                        break;
+                    }
+                }
+
+                // C. Safe to Emit?
+                // Emit if it's not a potential stop word OR if the buffer is getting too long to be one.
+                if (!isPotentialDanger || streamBuffer.Length &gt; 25)
+                {
+                    Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
+                    streamBuffer = ""; 
+                }
+
+              }).GetAwaiter().GetResult();
+              
+              // 5. Final Flush
+              // Emit remaining buffer content if valid
+              if (!string.IsNullOrEmpty(streamBuffer))
+              {
+                  foreach (var tag in technicalTags) streamBuffer = streamBuffer.Replace(tag, "");
+                  if (!string.IsNullOrWhiteSpace(streamBuffer))
+                  {
+                      Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
+                  }
+              }
+
             }
-          }).GetAwaiter().GetResult();
+            catch (OperationCanceledException)
+            {
+                Program.Log.Info("Generation stopped by user.");
+            }
+            catch (Exception ex)
+            {
+                Program.Emit(FIELD_STATUS_ERROR, ex.Message);
+            }
+
+            generationCts?.Dispose();
+            generationCts = null;
+
+          });
       }
       return new ResponseStatus(Status.Ok, "Processing: " + input);
   });
 
-  // clear any previosuly reported error
+  // Clear errors on success
   Program.Emit(FIELD_STATUS_ERROR, "");
 
  } catch (Exception e) { 
-
-
-    Program.Notify($"ERROR: {e.Message} [program_configure]");
-    Program.Emit(FIELD_STATUS_ERROR, e.Message);
+    Program
+      .Notify($"ERROR: {e.Message} [program_configure]")
+      .Emit(FIELD_STATUS_ERROR, e.Message);
     Pause(5);
-
   }
-
 }
 
-// Emit an empty string initially to ensure the stream field is created.
+// Ensure stream field is initialized
 Program.Emit(FIELD_TOKENS_STREAM, "");
 
-// --- 4. MAIN PROGRAM LOOP ---
-// This loop keeps the program alive and handles the reconfiguration logic.
+
+// --- KEEP-ALIVE LOOP ---
 while (Program.IsRunning)
 {
-    // Check if the 'reconfigureRequired' flag was set by the event handler.
     if (reconfigureRequired)
     {
-        // If true, exit the Main block. HomeGenie will then automatically re-run
-        // this Main block from the top, reloading the new configuration.
-        return;
+        dispose();
+        return; // Triggers HomeGenie restart of the block
     }
-    // Pause for 1 second to prevent this loop from consuming 100% CPU.
     Pause(1);
-}
-</ScriptSource>
+}</ScriptSource>
     <ScriptContext>/* 
 ||==============================================================================================
 || LLM Inference Configuration
-|| These parameters control how the Large Language Model generates responses.
-||
-|| For detailed documentation on these parameters, see the LLamaSharp docs:
-|| https://scisharp.github.io/LLamaSharp/
 ||==============================================================================================
 */
 
-/**
- * The context window size in tokens.
- * This defines the model's "short-term memory," determining how much of the conversation
- * history it can consider when generating a response. 4096 is a common value for many models.
- */
+const string LAILAMA_SYSTEM_PROMPT = """
+You are "Lailama", an expert technical assistant running locally on a HomeGenie server.
+
+RULES:
+1. **NO INTERNAL MONOLOGUE**: Start the response IMMEDIATELY.
+2. **METADATA FILTER**: User inputs start with `[[Current Time: ...]]`. **IGNORE THIS BLOCK COMPLETELY**. Do not greet the time. Do not mention the time unless explicitly asked "What time is it?".
+3. **FOCUS**: Reply ONLY to the text that comes AFTER the `[[...]]` block.
+4. **LANGUAGE**: Reply in the same language as the user.
+5. **STYLE**: Friendly and professional.
+""";
+
+/* Options Constants */
+const string OPTION_MODEL_PATH = "ModelPath";
+const string OPTION_MAX_TOKENS = "MaxTokens";
+const string OPTION_MODEL_FILE = "ModelFile";
+
+const string FIELD_TOKENS_STREAM = "LLM.TokenStream";
+const string FIELD_STATUS_INIT = "Status.Init";
+const string FIELD_STATUS_ERROR = "Status.Error";
+const string FIELD_DOWNLOAD = "Status.Download";
+const string FIELD_DOWNLOAD_ID = "Status.Download.Id";
+const string FIELD_DOWNLOAD_TASK = "Status.Download.Task";
+const string FIELD_DOWNLOAD_ERROR = "Status.Download.Error";
+const string FIELD_DOWNLOAD_PROGRESS = "Status.Download.Progress";
+
+const string CONFIG_FILE_NAME = "models.yaml";
+
 const int PARAMS_CONTEXT_SIZE = 4096;
+const int PARAMS_GPU_LAYER_SIZE = 0; // 0 = CPU only
 
-/**
- * The number of model layers to offload to the GPU.
- * Setting this to 0 disables GPU acceleration, forcing the model to run entirely on the CPU.
- * Increase this value if you have a compatible GPU to significantly improve performance. A value
- * like 32 or higher is common for GPU-accelerated inference.
- */
-const int PARAMS_GPU_LAYER_SIZE = 0; // 0 = NO GPU, run on CPU only
+public class ModelInfo {
+  public string Url = "";
+  public string Name = "";
+  public string Description = "";
+  public string Size = "";
+  public string Template = "";
+}
 
-/// &lt;summary&gt;
-/// Defines the parameters for the LLM inference process.
-/// These settings control the creative and technical aspects of the text generation.
-/// &lt;/summary&gt;
+public static Dictionary&lt;string, ModelInfo&gt; LoadModelList(string configFilePath = CONFIG_FILE_NAME)
+{
+    string fullPath = configFilePath;
+    try
+    {
+        string yaml = File.ReadAllText(fullPath);
+        var deserializer = new DeserializerBuilder().Build();
+        var modelList = deserializer.Deserialize&lt;Dictionary&lt;string, ModelInfo&gt;&gt;(yaml);
+        return modelList;
+    }
+    catch (Exception ex)
+    {
+        return new Dictionary&lt;string, ModelInfo&gt;();
+    }
+}
+
+
 InferenceParams LailamaInferenceParams = new InferenceParams
 {
-    // Configures the sampling pipeline, which controls the creativity and coherence of the output.
     SamplingPipeline = new DefaultSamplingPipeline
     {
-        // Temperature: Controls randomness. Lower values (e.g., 0.2) make the output more
-        // deterministic and focused, while higher values (e.g., 0.8) make it more creative and random.
-        Temperature = 0.6f,
-
-        // TopP (Nucleus Sampling): The model considers only the most likely tokens that make up the
-        // cumulative probability specified here (0.95 = 95%). It helps prevent the model from
-        // picking very rare or nonsensical words.
+        // Temperature: 0.6 is a balanced value for most models
+        Temperature = 0.4f, 
         TopP = 0.95f,
-
-        // RepeatPenalty: Discourages the model from repeating the same words or phrases.
-        // A value greater than 1.0 penalizes recently used tokens. 1.0 means no penalty.
         RepeatPenalty = 1.1f 
     },
-
-    // The maximum number of tokens (words or parts of words) to generate in a single response.
-    // This acts as a hard limit on the length of the AI's output.
-    MaxTokens = 256,   // This value is controlled from the program settings UI
+    MaxTokens = 1024, 
     
-    // A list of "stop sequences." The model will immediately stop generating text if it
-    // produces one of these strings. These are crucial for making the model end its turn
-    // in a chat conversation and are highly specific to the model being used.
-    // **This list often requires tuning based on the loaded LLM's specifications.**
+    // ROBUST STOP LIST
+    // Comprehensive list to handle various models (ChatML, Llama, Phi, etc.)
     AntiPrompts = new string[]
     {
-        "&lt;｜User｜&gt;",
-        "&lt;｜end of sentence｜&gt;",
-        "&lt;&lt;/im_end&gt;&gt;",
-        "&lt;&lt;im_start&gt;&gt;",
-        "&lt;&lt;/im_start&gt;&gt;",
-        "&lt;think&gt;",
-        "&lt;/think&gt;",
-        "&lt;|im_end|&gt;",
-        "&lt;|im_start|&gt;",
-        "&lt;｜Assistant｜&gt;" 
+        // ==============================================================================
+        // GROUP 1: OFFICIAL STOP TOKENS (EOS)
+        // These are the internal signals used by specific models to say "I am done".
+        // ==============================================================================
+        "&lt;|im_end|&gt;",           // Standard ChatML (Qwen, DeepSeek Coder, Microsoft Phi)
+        "&lt;|endoftext|&gt;",        // Generic standard (GPT-2/3 roots)
+        "&lt;|eot_id|&gt;",           // Llama 3 (End of Turn)
+        "&lt;|eom_id|&gt;",           // Llama 3 (End of Message - rarer but possible)
+        "&lt;|end|&gt;",              // Phi-3
+        "&lt;end_of_turn&gt;",        // Gemma 2
+        "&lt;|end_of_sentence|&gt;",  // DeepSeek V2/V3 (Often emitted as text in GGUF)
+        "&lt;|end_of_response|&gt;",  // Newer "Reasoning" models (DeepSeek R1/Granite)
+
+        // ==============================================================================
+        // GROUP 2: START OF NEXT TURN TOKENS
+        // If the model forgets to stop, it tries to start the next role. We catch it here.
+        // ==============================================================================
+        "&lt;|im_start|&gt;",         // ChatML: Model tries to start a new block
+        "&lt;|start_header_id|&gt;",  // Llama 3: Model tries to write header for user/system
+        "&lt;|user|&gt;",             // Phi-3: Model tries to impersonate user
+        "&lt;start_of_turn&gt;",      // Gemma: Model tries to start new turn
+        "&lt;|begin_of_sentence|&gt;",// DeepSeek: Often marks the start of a new line
+        "&lt;|start_response|&gt;",   // Reasoning models: Marks start of final answer
+        "Answer: ",             // DeepSeek: Prevents infinite answer loop 
+
+        // --- Assistant Self-Reference Stoppers (DeepSeek) ---
+        "Assistant:",   
+        "\nAssistant:", 
+        "Response:",    
+        "\nResponse:",  
+        "### Assistant",
+        "### Response",
+
+        // ==============================================================================
+        // GROUP 3: TEXTUAL HALLUCINATIONS (The "Chat Mode" leftovers)
+        // Models like DeepSeek/Mistral often write "User:" plain text when confused.
+        // ==============================================================================
+        
+        // --- User Stoppers ---
+        "\nUser:",              // SAFEST: Newline + User + Colon. (Standard chat format)
+        "\nUser ",              // Newline + User + Space (Catches "User " without colon)
+        "User:",                // Word + Colon (Catches "User:" at start of line without \n)
+        "### Instruction",      // Alpaca/Vicuna style stop
+        "### User",             // Common variation
+
+        // --- System Stoppers ---
+        "\nSystem:",            // Prevents model from hallucinating System instructions
+        "System:",              
+        
+        // --- DeepSeek Specific ---
+        // DeepSeek sometimes outputs a double newline before the User tag.
+        "\n\nUser:",
+        "\n\nSystem:",
+        "\n\nAssistant:"
     }
 };
 
-/// &lt;summary&gt;
-/// Defines the System Prompt, which provides high-level instructions to the AI model.
-/// The System Prompt sets the context, persona, and constraints for the entire conversation.
-/// It acts as a permanent instruction that guides the model's behavior and response style.
-///
-/// HOW TO CREATE EFFECTIVE SYSTEM INSTRUCTIONS:
-/// 1.  **Define a Persona:** Start by telling the model *what it is* (e.g., "You are an expert AI assistant...").
-/// 2.  **Set the Primary Goal:** Clearly state its main objective or task ("Your ONLY task is to help users...").
-/// 3.  **Provide Context:** Give it relevant background information (e.g., "...for the HomeGenie Server platform," "...based on the zuix.js framework").
-/// 4.  **Establish Constraints and Rules:** Specify what the model *should not* do. Use strong, clear language like "ONLY," "DO NOT," "NEVER."
-/// 5.  **Specify Output Format:** If needed, you can instruct the model on how to format its responses (e.g., "Always provide code examples in Markdown blocks.").
-/// &lt;/summary&gt;
-const string LAILAMA_SYSTEM_PROMPT = """
-
-You are a concise and expert technical assistant running locally on a HomeGenie server.
-Your primary tasks are to help with programming, scripting, and system administration.
-
-- ALWAYS provide code in Markdown blocks.
-- Be direct and to the point. Do not add conversational fluff.
-- Your knowledge areas are: C#, JavaScript, Python, JSON, Visual Programming with Blockly and HomeGenie APIs of course.
-- You can help write automation programs for the HomeGenie platform.
-
-""";
-
-/*
-|| Program's options and emitted field
-*/
-const string OPTION_MODEL_PATH = "ModelPath";
-const string OPTION_MAX_TOKENS = "MaxTokens";
-const string FIELD_TOKENS_STREAM = "LLM.TokenStream";
-const string FIELD_STATUS_ERROR = "Status.Error";
 
 /* 
 || Utility methods
 */
 
-string GetSystemPrompt() {
-  return $"&lt;|im_start|&gt;system\n{LAILAMA_SYSTEM_PROMPT}&lt;|im_end|&gt;\n"; 
+string GetSystemPrompt(string templateType, string prompt = LAILAMA_SYSTEM_PROMPT) {
+  switch (templateType) {
+    case "llama3":
+      // Llama 3 uses a specific system header tag
+      return $"&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt;\n\n{prompt}\n&lt;|eot_id|&gt;";
+    
+    case "phi3":
+      // Phi-3 does NOT have an official system tag.
+      // Best practice is to place it as plain text at the absolute beginning.
+      return $"{prompt}\n\n";
+
+    case "gemma":
+      // Gemma technically supports a 'system' turn, but it is often ignored.
+      // We simulate a user turn followed by a model acknowledgment to force context adherence.
+       return $"&lt;start_of_turn&gt;user\n{prompt}&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\nOK.&lt;end_of_turn&gt;\n";
+
+    case "alpaca":
+    case "openchat":
+      // These models often accept instructions before the first turn
+      return $"{prompt}\n\n";
+
+    case "deepseek":
+      // DeepSeek Chat V2/V3
+      // Insert system prompt at absolute start, after BOS (Begin Of Sentence).
+      return $"&lt;|begin_of_sentence|&gt;{prompt}\n\n";
+
+    case "chatml":
+    default:
+      // Standard ChatML
+      return $"&lt;|im_start|&gt;system\n{prompt}\n&lt;|im_end|&gt;\n"; 
+  }
 }
 
-string BuildUserPrompt(string userInput) {
-  return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n" +
-         $"&lt;|im_start|&gt;assistant\n"; 
+string BuildUserPrompt(string templateType, string userInput) {
+  switch (templateType) {
+    case "llama3":
+      // Llama 3: Reinforcing instruction to match user's language
+      return $"&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;\n\n{userInput}&lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;\n\n";
+    
+    case "phi3":
+      // Phi-3: Similar reinforcement strategy
+      return $"&lt;|user|&gt;\n{userInput}&lt;|end|&gt;\n&lt;|assistant|&gt;\n";
+
+    case "alpaca":
+      return $"### Instruction:\n{userInput}\n\n### Response:\n";
+
+    case "openchat":
+      return $"GPT4 Correct User: {userInput}&lt;|end_of_turn|&gt;GPT4 Correct Assistant:";
+
+    case "gemma":
+      // Gemma reinforcement
+      return "&lt;start_of_turn&gt;user\n" + 
+             userInput + 
+             "&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\n";
+    
+    case "deepseek":
+      // Note: DeepSeek is very sensitive to newlines (\n\n) between User and Assistant
+      return $"User:{userInput}\n\nAssistant: ";
+
+    case "chatml":
+    default:
+      // Pure ChatML
+      return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\n"; 
+  }
 }
 
 async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&lt;string&gt; callback)
@@ -1313,8 +1658,7 @@ async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&l
     {
         callback(item);
     }
-}
-</ScriptContext>
+}</ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
@@ -1322,15 +1666,14 @@ async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&l
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>B945C787E3FFB1EA46CF49BC5C8C512A</Checksum>
+      <Checksum>2A994A58AADB032C5A7FD6419D391164</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
     <Name>Lailama</Name>
-    <Description>Run a Large Language Model (LLM) locally on your HomeGenie server. These models can be downloaded for free from platforms like Hugging Face.
-Simply provide the path to a GGUF format model file. Please note that adjustments to parameters, primarily within the Context Code, may be required to ensure full compatibility with different models.</Description>
+    <Description>Harness the power of Generative AI on your hardware. Chat, write code, or build advanced automations with the security of a local and private system.</Description>
     <Group>AI - Machine Learning</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>

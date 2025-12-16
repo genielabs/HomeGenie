@@ -11,9 +11,16 @@
     "switches_control": "Prepínače"
   },
   "$ai_chat": {
-    "title": "Widget s umelou inteligenciou pre chat",
-    "intro": "Dobrý deň! Som váš miestny asistent LLM. Ako vám môžem pomôcť?",
-    "no_bound_module": "Nie je prepojený žiadny modul LLM. Otvorte nastavenia widgetu a prepojte jazykový model.",
-    "start_typing_prompt": "Začnite písať výzvu..."
+    "intro": "Ahoj! Som vaša miestna umelá inteligencia. Ako vám môžem pomôcť?",
+    "start_typing_prompt": "Začnite písať výzvu...",
+    "download_title": "Stiahnite si požadovaný súbor LLM:",
+    "teaser_description": "Využite silu generatívnej umelej inteligencie na svojom hardvéri. Chatujte, píšte kód alebo vytvárajte pokročilé automatizácie s bezpečnosťou lokálneho a súkromného systému.",
+    "select_model": "Vyberte model",
+    "feat_private": "Súkromné",
+    "feat_offline": "Rýchle a lokálne",
+    "feat_automation": "Automatizácia",
+    "loading_model": "Načítava sa model do pamäte... Môže to chvíľu trvať.",
+    "model": "Model",
+    "status": "Stav"
   }
 }

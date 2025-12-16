@@ -11,9 +11,16 @@
     "switches_control": "Comutatoare"
   },
   "$ai_chat": {
-    "title": "Widget de chat cu inteligență artificială",
-    "intro": "Bună! Sunt asistentul dumneavoastră local de LLM. Cum vă pot ajuta?",
-    "no_bound_module": "Niciun modul LLM este legat. Deschideți setările widgetului pentru a lega un model lingvistic.",
-    "start_typing_prompt": "Începeți să tastați o solicitare..."
+    "intro": "Salut! Sunt inteligența artificială locală. Cum te pot ajuta?",
+    "start_typing_prompt": "Începeți să tastați o solicitare...",
+    "download_title": "Descărcați fișierul LLM necesar:",
+    "teaser_description": "Valorificați puterea inteligenței artificiale generative pe hardware-ul dvs. Discutați, scrieți cod sau construiți automatizări avansate cu securitatea unui sistem local și privat.",
+    "select_model": "Selectați un model",
+    "feat_private": "Privat",
+    "feat_offline": "Rapid și local",
+    "feat_automation": "Automatizare",
+    "loading_model": "Se încarcă modelul în memorie... Acest proces poate dura câteva momente.",
+    "model": "Model",
+    "status": "Stare"
   }
 }

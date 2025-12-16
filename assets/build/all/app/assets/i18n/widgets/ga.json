@@ -11,9 +11,16 @@
     "switches_control": "Lasca"
   },
   "$ai_chat": {
-    "title": "Giuirléid Comhrá AI",
-    "intro": "Haigh! Is mise do chúntóir LLM áitiúil. Conas is féidir liom cabhrú leat?",
-    "no_bound_module": "Níl modúl LLM ceangailte. Oscail socruithe an ghiuirléid le samhail teanga a cheangal.",
-    "start_typing_prompt": "Tosaigh ag clóscríobh leid..."
+    "intro": "Haigh! Is mise d'Intleacht Shaorga áitiúil. Conas is féidir liom cabhrú leat?",
+    "start_typing_prompt": "Tosaigh ag clóscríobh leid...",
+    "download_title": "Íoslódáil an comhad LLM riachtanach:",
+    "teaser_description": "Bain úsáid as cumhacht na hintleachta saorga giniúna ar do chrua-earraí. Déan comhrá, scríobh cód, nó tóg uathoibrithe chun cinn le slándáil chórais áitiúil agus phríobháidigh.",
+    "select_model": "Roghnaigh Samhail",
+    "feat_private": "Príobháideach",
+    "feat_offline": "Gasta agus Áitiúil",
+    "feat_automation": "Uathoibriú",
+    "loading_model": "Ag lódáil an tsamhail isteach sa chuimhne... D’fhéadfadh sé seo cúpla nóiméad a thógáil.",
+    "model": "Samhail",
+    "status": "Stádas"
   }
 }

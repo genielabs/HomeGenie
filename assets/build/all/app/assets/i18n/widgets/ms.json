@@ -11,9 +11,16 @@
     "switches_control": "Suis"
   },
   "$ai_chat": {
-    "title": "Widget Sembang AI",
-    "intro": "hello! Saya pembantu LLM tempatan anda. Bagaimana saya boleh membantu anda?",
-    "no_bound_module": "Tiada modul LLM terikat. Sila buka tetapan widget untuk mengikat model bahasa.",
-    "start_typing_prompt": "Mula menaip gesaan..."
+    "intro": "Halo! Saya AI tempatan anda. Bagaimanakah saya boleh membantu anda?",
+    "start_typing_prompt": "Mula menaip gesaan...",
+    "download_title": "Muat turun fail LLM yang diperlukan:",
+    "teaser_description": "Manfaatkan kuasa Generatif AI pada perkakasan anda. Bersembang, menulis kod atau membina automasi lanjutan dengan keselamatan sistem tempatan dan persendirian.",
+    "select_model": "Pilih Model",
+    "feat_private": "Persendirian",
+    "feat_offline": "Pantas dan Tempatan",
+    "feat_automation": "Automasi",
+    "loading_model": "Memuatkan model ke dalam memori... Ini mungkin mengambil masa beberapa saat.",
+    "model": "Model",
+    "status": "Status"
   }
 }

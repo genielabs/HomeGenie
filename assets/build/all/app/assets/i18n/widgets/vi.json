@@ -11,9 +11,16 @@
     "switches_control": "Công tắc"
   },
   "$ai_chat": {
-    "title": "Tiện ích trò chuyện AI",
-    "intro": "Xin chào! Tôi là trợ lý LLM tại địa phương của bạn. Tôi có thể giúp gì cho bạn?",
-    "no_bound_module": "Không có mô-đun LLM nào được liên kết. Vui lòng mở cài đặt tiện ích để liên kết mô hình ngôn ngữ.",
-    "start_typing_prompt": "Bắt đầu nhập lời nhắc..."
+    "intro": "Chào! Tôi là trí tuệ nhân tạo địa phương của bạn. Tôi có thể giúp gì cho bạn?",
+    "start_typing_prompt": "Bắt đầu nhập lời nhắc...",
+    "download_title": "Tải xuống tệp LLM cần thiết:",
+    "teaser_description": "Khai thác sức mạnh của Trí tuệ nhân tạo tạo sinh (Generative AI) trên phần cứng của bạn. Trò chuyện, viết mã hoặc xây dựng các quy trình tự động hóa nâng cao với sự bảo mật của một hệ thống cục bộ và riêng tư.",
+    "select_model": "Chọn một mẫu",
+    "feat_private": "Riêng tư",
+    "feat_offline": "Nhanh chóng và tiện lợi",
+    "feat_automation": "Tự động hóa",
+    "loading_model": "Đang tải mô hình vào bộ nhớ... Quá trình này có thể mất vài phút.",
+    "model": "Người mẫu",
+    "status": "Trạng thái"
   }
 }

@@ -64,6 +64,7 @@ A copy of the license is available at http://www.gnu.org/licenses/lgpl-3.0.html.
 A copy of the license is available at https://opensource.org/licenses/MIT.
 
   - CronExpressionDescriptor (Copyright (c) 2013-2018 Brady Holt)
+  - YamlDotNet (Copyright (c) 2008-2024 Antoine Aubry and contributors)
   - LangChain (Copyright (c) 2023-2024 LangChain)
   - LiteDB (Copyright (c) 2023 Mauricio David)
   - LLamaSharp and related packages (Copyright 2023 The LLamaSharp Authors)

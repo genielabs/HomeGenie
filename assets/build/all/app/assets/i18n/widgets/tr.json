@@ -11,9 +11,16 @@
     "switches_control": "Anahtarlar"
   },
   "$ai_chat": {
-    "title": "AI Sohbet Widget'ı",
-    "intro": "Merhaba! Ben yerel LLM asistanınızım. Size nasıl yardımcı olabilirim?",
-    "no_bound_module": "LLM modülü bağlı değil. Lütfen bir dil modelini bağlamak için widget ayarlarını açın.",
-    "start_typing_prompt": "Bir komut yazmaya başlayın..."
+    "intro": "Merhaba! Ben yerel yapay zekânızım. Size nasıl yardımcı olabilirim?",
+    "start_typing_prompt": "Komut istemini yazmaya başlayın...",
+    "download_title": "Gerekli LLM dosyasını indirin:",
+    "teaser_description": "Donanımınızda Üretken Yapay Zekanın gücünden yararlanın. Yerel ve özel bir sistemin güvenliğiyle sohbet edin, kod yazın veya gelişmiş otomasyonlar oluşturun.",
+    "select_model": "Bir Model Seçin",
+    "feat_private": "Özel",
+    "feat_offline": "Hızlı ve Yerel",
+    "feat_automation": "Otomasyon",
+    "loading_model": "Model belleğe yükleniyor... Bu işlem birkaç dakika sürebilir.",
+    "model": "Model",
+    "status": "Durum"
   }
 }

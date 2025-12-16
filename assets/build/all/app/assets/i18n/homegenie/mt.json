@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID tal-Mudell"
     },
     "940": {
-      "Title": "AI Lokali (LLM)",
-      "Description": "Mexxi Mudell ta' Lingwa Kbira (LLM) lokalment fuq is-server HomeGenie tiegħek. Dawn il-mudelli jistgħu jitniżżlu b'xejn minn pjattaformi bħal Hugging Face. Sempliċement ipprovdi t-triq għal fajl ta' mudell f'format GGUF. Jekk jogħġbok innota li jistgħu jkunu meħtieġa aġġustamenti għall-parametri, primarjament fil-Kodiċi tal-Kuntest, biex tiġi żgurata kompatibilità sħiħa ma' mudelli differenti.",
+      "Title": "AI Lokali",
+      "Description": "Mexxi LLMs avvanzati direttament fuq is-server HomeGenie tiegħek. Jinkludi API sħiħa biex tikkontrolla l-AI minn programmi u skripts oħra.",
       "ConfigureOptions.MaxTokens": "Tokens Massimi (tul tar-rispons)",
-      "ConfigureOptions.ModelPath": "Mogħdija għall-fajl GGUF lokali"
+      "ConfigureOptions.ModelPath": "Mogħdija għall-fajl GGUF lokali",
+      "ConfigureOptions.ModelFile": "Mudell"
+    },
+    "575": {
+      "Title": "Maniġer tat-Tniżżil",
+      "Description": "Servizz robust u asinkroniku ta' trasferiment ta' fajls HTTP(S) aċċessibbli permezz ta' API dedikata. Jimmaniġġja ċ-ċiklu sħiħ tal-ħajja tat-tniżżil, jappoġġja pawża/tkomplija (bl-użu ta' Range headers) u mmaniġġjar temporanju ta' fajls (.part)."
     }
   }
 }

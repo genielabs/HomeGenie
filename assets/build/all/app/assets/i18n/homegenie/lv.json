@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modeļa ID"
     },
     "940": {
-      "Title": "Vietējais mākslīgais intelekts (LLM)",
-      "Description": "Palaidiet lielo valodas modeli (LLM) lokāli savā HomeGenie serverī. Šos modeļus var bez maksas lejupielādēt no tādām platformām kā Hugging Face. Vienkārši norādiet ceļu uz GGUF formāta modeļa failu. Lūdzu, ņemiet vērā, ka, lai nodrošinātu pilnīgu saderību ar dažādiem modeļiem, var būt nepieciešamas parametru korekcijas, galvenokārt konteksta kodā.",
+      "Title": "Vietējais mākslīgais intelekts",
+      "Description": "Palaidiet jaunākās paaudzes LLM tieši savā HomeGenie serverī. Iekļauts pilns API, lai kontrolētu mākslīgo intelektu no citām programmām un skriptiem.",
       "ConfigureOptions.MaxTokens": "Maksimālais žetonu skaits (atbildes garums)",
-      "ConfigureOptions.ModelPath": "Ceļš uz lokālo GGUF failu"
+      "ConfigureOptions.ModelPath": "Ceļš uz lokālo GGUF failu",
+      "ConfigureOptions.ModelFile": "Modelis"
+    },
+    "575": {
+      "Title": "Lejupielāžu pārvaldnieks",
+      "Description": "Stabils, asinhrons HTTP(S) failu pārsūtīšanas pakalpojums, kas pieejams, izmantojot īpašu API. Tas pārvalda pilnu lejupielādes dzīves ciklu, atbalstot pauzi/atsākšanu (izmantojot diapazona galvenes) un pagaidu failu apstrādi (.part)."
     }
   }
 }

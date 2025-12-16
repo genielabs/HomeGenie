@@ -11,9 +11,16 @@
     "switches_control": "Przełączniki"
   },
   "$ai_chat": {
-    "title": "Widżet czatu AI",
-    "intro": "Cześć! Jestem Twoim lokalnym asystentem LLM. W czym mogę pomóc?",
-    "no_bound_module": "Brak powiązania z modułem LLM. Otwórz ustawienia widżetu, aby powiązać model językowy.",
-    "start_typing_prompt": "Rozpocznij pisanie monitu..."
+    "intro": "Cześć! Jestem Twoim lokalnym AI. W czym mogę pomóc?",
+    "start_typing_prompt": "Rozpocznij pisanie monitu...",
+    "download_title": "Pobierz wymagany plik LLM:",
+    "teaser_description": "Wykorzystaj moc generatywnej sztucznej inteligencji na swoim sprzęcie. Czatuj, pisz kod lub twórz zaawansowane automatyzacje z bezpieczeństwem lokalnego i prywatnego systemu.",
+    "select_model": "Wybierz model",
+    "feat_private": "Prywatny",
+    "feat_offline": "Szybko i lokalnie",
+    "feat_automation": "Automatyzacja",
+    "loading_model": "Ładowanie modelu do pamięci... Może to potrwać chwilę.",
+    "model": "Model",
+    "status": "Status"
   }
 }

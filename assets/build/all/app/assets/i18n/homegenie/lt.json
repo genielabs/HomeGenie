@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modelio ID"
     },
     "940": {
-      "Title": "Vietinis dirbtinis intelektas (LLM)",
-      "Description": "Paleiskite didelį kalbos modelį (LLM) lokaliai savo „HomeGenie“ serveryje. Šiuos modelius galima nemokamai atsisiųsti iš tokių platformų kaip „Hugging Face“. Tiesiog nurodykite kelią į GGUF formato modelio failą. Atkreipkite dėmesį, kad norint užtikrinti visišką suderinamumą su skirtingais modeliais, gali tekti koreguoti parametrus, pirmiausia kontekstiniame kode.",
+      "Title": "Vietinis dirbtinis intelektas",
+      "Description": "Paleiskite pažangiausias LLM programas tiesiogiai savo „HomeGenie“ serveryje. Apima visą API sąsają, skirtą dirbtiniam intelektui valdyti iš kitų programų ir scenarijų.",
       "ConfigureOptions.MaxTokens": "Maksimalus žetonų skaičius (atsakymo ilgis)",
-      "ConfigureOptions.ModelPath": "Kelias į vietinį GGUF failą"
+      "ConfigureOptions.ModelPath": "Kelias į vietinį GGUF failą",
+      "ConfigureOptions.ModelFile": "Modelis"
+    },
+    "575": {
+      "Title": "Atsisiuntimų tvarkyklė",
+      "Description": "Tvirta, asinchroninė HTTP(S) failų perdavimo paslauga, pasiekiama per specialią API sąsają. Ji valdo visą atsisiuntimo ciklą, palaikydama pristabdymą / tęsimą (naudojant diapazono antraštes) ir laikinų failų tvarkymą (.part)."
     }
   }
 }

@@ -11,9 +11,16 @@
     "switches_control": "开关"
   },
   "$ai_chat": {
-    "title": "AI聊天小部件",
-    "intro": "您好！我是您的LLM助理。请问有什么可以帮到您？",
-    "no_bound_module": "未绑定 LLM 模块。请打开小部件设置来绑定语言模型。",
-    "start_typing_prompt": "开始输入提示..."
+    "intro": "您好！我是您的本地人工智能。我能帮您什么吗？",
+    "start_typing_prompt": "开始输入提示信息……",
+    "download_title": "下载所需的LLM文件：",
+    "teaser_description": "在您的硬件上驾驭生成式人工智能的强大功能。在本地私密系统的安全性下，进行聊天、编写代码或构建高级自动化流程。",
+    "select_model": "选择型号",
+    "feat_private": "私人的",
+    "feat_offline": "快速本地",
+    "feat_automation": "自动化",
+    "loading_model": "将模型加载到内存中……这可能需要几分钟时间。",
+    "model": "模型",
+    "status": "地位"
   }
 }

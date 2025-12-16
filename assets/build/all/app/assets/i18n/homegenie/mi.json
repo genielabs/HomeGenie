@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Tauira ID"
     },
     "940": {
-      "Title": "AI Paetata (LLM)",
-      "Description": "Whakahaerehia he Tauira Reo Nui (LLM) i to rohe i runga i to tūmau HomeGenie. Ka taea te tango i enei tauira mo te kore utu mai i nga papaaho penei i te Hugging Face. Me whakarato noa te ara ki te konae tauira hōputu GGUF. Kia mahara ko nga whakarereketanga ki nga tawhā, i roto i te Waehere Horopaki, ka hiahiatia pea kia pai ai te hototahi ki nga tauira rereke.",
-      "ConfigureOptions.MaxTokens": "Tohu Tohu (roa whakautu)",
-      "ConfigureOptions.ModelPath": "Ara ki te kōnae GGUF paetata"
+      "Title": "AI ā-Rohe",
+      "Description": "Whakahaerehia ngā LLM hou rawa atu i runga i tō tūmau HomeGenie. Kei roto ko te API katoa hei whakahaere i te AI mai i ētahi atu papatono me ngā tuhinga.",
+      "ConfigureOptions.MaxTokens": "Ngā Tohu Mōrahi (roa whakautu)",
+      "ConfigureOptions.ModelPath": "Ara ki te kōnae GGUF paetata",
+      "ConfigureOptions.ModelFile": "Tauira"
+    },
+    "575": {
+      "Title": "Kaiwhakahaere Tikiake",
+      "Description": "He ratonga whakawhiti kōnae HTTP(S) pakari, kore-tukutahi, e wātea ana mā te API motuhake. Ka whakahaere i te huringa katoa o te tango, e tautoko ana i te whakamutu/tīmata anō (mā te whakamahi i ngā pane Range) me te whakahaere kōnae rangitahi (.part)."
     }
   }
 }

@@ -14,8 +14,17 @@
   },
   "$ai_chat": {
     "title": "AI Chat Widget",
-    "intro": "Ciao! Sono il tuo assistente LLM locale. Come posso aiutarti?",
+    "intro": "Ciao! Sono la tua IA locale. Come posso aiutarti?",
     "no_bound_module": "Nessun modulo LLM associato. Apri le impostazioni del widget per associare un modello linguistico.",
-    "start_typing_prompt": "Chiedimi qualcosa..."
+    "start_typing_prompt": "Chiedimi qualcosa...",
+    "download_title": "Scarica il file LLM richiesto:",
+    "teaser_description": "Sfrutta la potenza dell'IA Generativa sul tuo hardware. Chatta, scrivi codice o crea automazioni avanzate con la sicurezza di un sistema locale e privato.",
+    "select_model": "Seleziona un Modello",
+    "feat_private": "Privata",
+    "feat_offline": "Non richiede internet",
+    "feat_automation": "Automazione",
+    "loading_model": "Caricamento del modello in memoria... Potrebbe richiedere qualche istante.",
+    "model": "Modello",
+    "status": "Stato"
   }
 }

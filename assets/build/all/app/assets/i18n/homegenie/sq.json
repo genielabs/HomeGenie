@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID e modelit"
     },
     "940": {
-      "Title": "AI Lokal (LLM)",
-      "Description": "Ekzekutoni një Model të Gjuhës së Madhe (LLM) lokalisht në serverin tuaj HomeGenie. Këto modele mund të shkarkohen falas nga platforma si Hugging Face. Thjesht jepni shtegun për një skedar modeli në formatin GGUF. Ju lutemi vini re se mund të kërkohen rregullime të parametrave, kryesisht brenda Kodit të Kontekstit, për të siguruar përputhshmëri të plotë me modele të ndryshme.",
+      "Title": "IA lokale",
+      "Description": "Ekzekutoni LLM-të e teknologjisë së fundit direkt në serverin tuaj HomeGenie. Përfshin një API të plotë për të kontrolluar IA-në nga programe dhe skripte të tjera.",
       "ConfigureOptions.MaxTokens": "Maksimumi i Tokenëve (gjatësia e përgjigjes)",
-      "ConfigureOptions.ModelPath": "Shtegu për në skedarin lokal GGUF"
+      "ConfigureOptions.ModelPath": "Shtegu për në skedarin lokal GGUF",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Menaxheri i Shkarkimeve",
+      "Description": "Një shërbim i fuqishëm dhe asinkron transferimi skedarësh HTTP(S), i arritshëm nëpërmjet një API-je të dedikuar. Ai menaxhon ciklin e plotë jetësor të shkarkimit, duke mbështetur pauzën/rifillimin (duke përdorur headers Range) dhe trajtimin e përkohshëm të skedarëve (.part)."
     }
   }
 }

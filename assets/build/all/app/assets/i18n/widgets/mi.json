@@ -11,9 +11,16 @@
     "switches_control": "Whakawhiti"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "Kia ora! Ko ahau to kaiawhina LLM rohe. Me pehea taku awhina i a koe?",
-    "no_bound_module": "Kaore he waahanga LLM i herea. Tuwhera koa nga tautuhinga widget hei here i tetahi tauira reo.",
-    "start_typing_prompt": "Tīmatahia te patopato wawe..."
+    "intro": "Kia ora! Ko au tō koutou AI ā-rohe. Me pēhea taku āwhina i a koe?",
+    "start_typing_prompt": "Tīmata te pato i tētahi tohu...",
+    "download_title": "Tikiake i te kōnae LLM e hiahiatia ana:",
+    "teaser_description": "Whakamahia te mana o te Generative AI i runga i ō taputapu. Kōrerorero, tuhi waehere, hanga rānei i ngā aunoatanga matatau me te haumarutanga o tētahi pūnaha ā-rohe, tūmataiti hoki.",
+    "select_model": "Kōwhiria he Tauira",
+    "feat_private": "tūmataiti",
+    "feat_offline": "Tere me te Ā-Rohe",
+    "feat_automation": "Aunoatanga",
+    "loading_model": "E utaina ana te tauira ki te mahara... Tērā pea ka roa te wā.",
+    "model": "Tauira",
+    "status": "Tūnga"
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Model ID"
     },
     "940": {
-      "Title": "Lokal na AI (LLM)",
-      "Description": "Magpatakbo ng Large Language Model (LLM) nang lokal sa iyong HomeGenie server. Maaaring ma-download ang mga modelong ito nang libre mula sa mga platform tulad ng Hugging Face. Ibigay lang ang path sa isang GGUF format model file. Pakitandaan na ang mga pagsasaayos sa mga parameter, pangunahin sa loob ng Context Code, ay maaaring kailanganin upang matiyak ang ganap na pagkakatugma sa iba't ibang mga modelo.",
-      "ConfigureOptions.MaxTokens": "Max Token (haba ng tugon)",
-      "ConfigureOptions.ModelPath": "Path sa lokal na GGUF file"
+      "Title": "Lokal na AI",
+      "Description": "Magpatakbo ng mga makabagong LLM nang direkta sa iyong HomeGenie server. May kasamang kumpletong API para kontrolin ang AI mula sa iba pang mga programa at script.",
+      "ConfigureOptions.MaxTokens": "Pinakamataas na Token (haba ng tugon)",
+      "ConfigureOptions.ModelPath": "Path sa lokal na GGUF file",
+      "ConfigureOptions.ModelFile": "Modelo"
+    },
+    "575": {
+      "Title": "Tagapamahala ng Pag-download",
+      "Description": "Isang matibay at asynchronous na serbisyo ng paglilipat ng HTTP(S) file na maa-access sa pamamagitan ng isang nakalaang API. Pinamamahalaan nito ang buong siklo ng buhay ng pag-download, sinusuportahan ang pag-pause/resume (gamit ang mga header ng Range) at pansamantalang paghawak ng file (.part)."
     }
   }
 }

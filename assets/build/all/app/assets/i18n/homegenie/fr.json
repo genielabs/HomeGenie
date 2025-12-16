@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID du modèle"
     },
     "940": {
-      "Title": "IA locale (LLM)",
-      "Description": "Exécutez un modèle de langage étendu (LLM) localement sur votre serveur HomeGenie. Ces modèles sont téléchargeables gratuitement sur des plateformes comme Hugging Face. Indiquez simplement le chemin d'accès à un fichier de modèle au format GGUF. Veuillez noter que des ajustements de paramètres, principalement dans le code contextuel, peuvent être nécessaires pour garantir une compatibilité totale avec différents modèles.",
-      "ConfigureOptions.MaxTokens": "Jetons max (longueur de la réponse)",
-      "ConfigureOptions.ModelPath": "Chemin vers le fichier GGUF local"
+      "Title": "IA locale",
+      "Description": "Exécutez des modèles linguistiques de pointe directement sur votre serveur HomeGenie. Inclut une API complète pour contrôler l'IA depuis d'autres programmes et scripts.",
+      "ConfigureOptions.MaxTokens": "Nombre maximal de jetons (longueur de la réponse)",
+      "ConfigureOptions.ModelPath": "Chemin vers le fichier GGUF local",
+      "ConfigureOptions.ModelFile": "Modèle"
+    },
+    "575": {
+      "Title": "Gestionnaire de téléchargement",
+      "Description": "Un service de transfert de fichiers HTTP(S) robuste et asynchrone, accessible via une API dédiée. Il gère l'intégralité du cycle de vie du téléchargement, prenant en charge la pause/reprise (via les en-têtes Range) et la gestion des fichiers temporaires (.part)."
     }
   }
 }

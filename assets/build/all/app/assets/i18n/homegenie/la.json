@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Identificatio exemplaris"
     },
     "940": {
-      "Title": "Intellegentia Artificialis Localis (LLM)",
-      "Description": "Exemplar Linguae Magnum (MLM) in servo HomeGenie tuo localiter curre. Haec exempla gratis ex suggestis sicut Hugging Face depromi possunt. Simpliciter viam ad fasciculum exemplaris formae GGUF praebe. Nota bene adaptationes parametrorum, praesertim intra Codicem Contextualem, fortasse requiri ad plenam compatibilitatem cum variis exemplis confirmandam.",
+      "Title": "Intellegentia Artificialis Localis",
+      "Description": "Curre programmata LLM recentissima directe in servo tuo HomeGenie. API plenam includit ad intellegentiam artificialem ex aliis programmatibus et scriptis moderandam.",
       "ConfigureOptions.MaxTokens": "Tesserae Maximae (longitudo responsorum)",
-      "ConfigureOptions.ModelPath": "Semita ad fasciculum GGUF localem"
+      "ConfigureOptions.ModelPath": "Semita ad fasciculum GGUF localem",
+      "ConfigureOptions.ModelFile": "Modellum"
+    },
+    "575": {
+      "Title": "Administrator Deductionum",
+      "Description": "Servitium robustum et asynchronum translationis fasciculorum HTTP(S), per API dedicatam accessibile. Totum cyclum vitae demptionis administrat, pausam/continuationem (per inscriptiones intervallorum) et tractationem fasciculorum temporariorum (.part) sustinens."
     }
   }
 }

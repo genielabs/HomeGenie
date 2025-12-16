@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID model"
     },
     "940": {
-      "Title": "AI Setempat (LLM)",
-      "Description": "Jalankan Model Bahasa Besar (LLM) secara setempat pada pelayan HomeGenie anda. Model-model ini boleh dimuat turun secara percuma daripada platform seperti Hugging Face. Hanya sediakan laluan ke fail model format GGUF. Sila ambil perhatian bahawa pelarasan pada parameter, terutamanya dalam Kod Konteks, mungkin diperlukan untuk memastikan keserasian penuh dengan model yang berbeza.",
-      "ConfigureOptions.MaxTokens": "Token Maks (panjang tindak balas)",
-      "ConfigureOptions.ModelPath": "Laluan ke fail GGUF setempat"
+      "Title": "AI Tempatan",
+      "Description": "Jalankan LLM canggih terus pada pelayan HomeGenie anda. Termasuk API penuh untuk mengawal AI daripada program dan skrip lain.",
+      "ConfigureOptions.MaxTokens": "Token Maks (panjang respons)",
+      "ConfigureOptions.ModelPath": "Laluan ke fail GGUF setempat",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Pengurus Muat Turun",
+      "Description": "Perkhidmatan pemindahan fail HTTP(S) yang mantap dan tidak segerak yang boleh diakses melalui API khusus. Ia mengurus kitaran hayat muat turun penuh, menyokong jeda/sambung semula (menggunakan pengepala Julat) dan pengendalian fail sementara (.part)."
     }
   }
 }

@@ -11,9 +11,16 @@
     "switches_control": "Schalter"
   },
   "$ai_chat": {
-    "title": "KI-Chat-Widget",
-    "intro": "Hallo! Ich bin Ihr lokaler LLM-Assistent. Wie kann ich Ihnen helfen?",
-    "no_bound_module": "Kein LLM-Modul gebunden. Bitte öffnen Sie die Widget-Einstellungen, um ein Sprachmodell zu binden.",
-    "start_typing_prompt": "Beginnen Sie mit der Eingabe einer Eingabeaufforderung ..."
+    "intro": "Hallo! Ich bin Ihre lokale KI. Wie kann ich Ihnen helfen?",
+    "start_typing_prompt": "Beginnen Sie mit der Eingabeaufforderung...",
+    "download_title": "Erforderliche LLM-Datei herunterladen:",
+    "teaser_description": "Nutzen Sie die Leistungsfähigkeit generativer KI auf Ihrer Hardware. Chatten Sie, schreiben Sie Code oder erstellen Sie fortschrittliche Automatisierungen mit der Sicherheit eines lokalen und privaten Systems.",
+    "select_model": "Wählen Sie ein Modell aus",
+    "feat_private": "Privat",
+    "feat_offline": "Schnell und lokal",
+    "feat_automation": "Automatisierung",
+    "loading_model": "Das Modell wird in den Speicher geladen... Dies kann einige Augenblicke dauern.",
+    "model": "Modell",
+    "status": "Status"
   }
 }

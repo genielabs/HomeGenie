@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Model ID"
     },
     "940": {
-      "Title": "Mahalliy AI (LLM)",
-      "Description": "HomeGenie serveringizda katta til modelini (LLM) mahalliy sifatida ishga tushiring. Ushbu modellarni Hugging Face kabi platformalardan bepul yuklab olish mumkin. GGUF formatidagi model fayliga yo'lni taqdim etish kifoya. Iltimos, turli modellar bilan to'liq muvofiqlikni ta'minlash uchun birinchi navbatda Kontekst Kodeksi doirasida parametrlarga tuzatishlar kiritish talab qilinishi mumkinligini unutmang.",
+      "Title": "Mahalliy AI",
+      "Description": "Eng zamonaviy LLMlarni to'g'ridan-to'g'ri HomeGenie serveringizda ishga tushiring. Boshqa dasturlar va skriptlardan sun'iy intellektni boshqarish uchun to'liq API ni o'z ichiga oladi.",
       "ConfigureOptions.MaxTokens": "Maksimal tokenlar (javob uzunligi)",
-      "ConfigureOptions.ModelPath": "Mahalliy GGUF fayliga yo'l"
+      "ConfigureOptions.ModelPath": "Mahalliy GGUF fayliga yo'l",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Yuklab olish menejeri",
+      "Description": "Maxsus API orqali kirish mumkin bo'lgan mustahkam, asinxron HTTP(S) fayl uzatish xizmati. U to'liq yuklab olish hayot aylanishini boshqaradi, pauza/davom ettirishni (Range sarlavhalaridan foydalangan holda) va vaqtinchalik fayllarni qayta ishlashni (.part) qo'llab-quvvatlaydi."
     }
   }
 }

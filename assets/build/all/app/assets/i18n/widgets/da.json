@@ -11,9 +11,16 @@
     "switches_control": "Afbrydere"
   },
   "$ai_chat": {
-    "title": "AI-chatwidget",
-    "intro": "Hej! Jeg er din lokale LLM-assistent. Hvordan kan jeg hjælpe dig?",
-    "no_bound_module": "Intet LLM-modul bundet. Åbn venligst widgetindstillingerne for at binde en sprogmodel.",
-    "start_typing_prompt": "Begynd at skrive en prompt..."
+    "intro": "Hej! Jeg er din lokale kunstige intelligens. Hvordan kan jeg hjælpe dig?",
+    "start_typing_prompt": "Begynd at skrive en prompt...",
+    "download_title": "Download den nødvendige LLM-fil:",
+    "teaser_description": "Udnyt kraften i generativ kunstig intelligens på din hardware. Chat, skriv kode eller byg avancerede automatiseringer med sikkerheden fra et lokalt og privat system.",
+    "select_model": "Vælg en model",
+    "feat_private": "Privat",
+    "feat_offline": "Hurtigt og lokalt",
+    "feat_automation": "Automatisering",
+    "loading_model": "Indlæser model i hukommelsen... Dette kan tage et par øjeblikke.",
+    "model": "Model",
+    "status": "Status"
   }
 }

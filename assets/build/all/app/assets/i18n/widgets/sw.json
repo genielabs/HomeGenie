@@ -11,9 +11,16 @@
     "switches_control": "Swichi"
   },
   "$ai_chat": {
-    "title": "Wijeti ya Gumzo ya AI",
-    "intro": "Habari! Mimi ni msaidizi wako wa LLM wa karibu. Nikusaidieje?",
-    "no_bound_module": "Hakuna moduli ya LLM iliyofungwa. Tafadhali fungua mipangilio ya wijeti ili kuunganisha muundo wa lugha.",
-    "start_typing_prompt": "Anza kuandika kidokezo..."
+    "intro": "Habari! Mimi ni mtaalamu wa akili bandia wa eneo lako. Ninawezaje kukusaidia?",
+    "start_typing_prompt": "Anza kuandika kidokezo...",
+    "download_title": "Pakua faili ya LLM inayohitajika:",
+    "teaser_description": "Tumia nguvu ya Generative AI kwenye vifaa vyako. Piga gumzo, andika msimbo, au jenga otomatiki za hali ya juu kwa usalama wa mfumo wa ndani na wa kibinafsi.",
+    "select_model": "Chagua Mfano",
+    "feat_private": "Privat",
+    "feat_offline": "Haraka na ya Karibu",
+    "feat_automation": "Otomatiki",
+    "loading_model": "Inapakia modeli kwenye kumbukumbu... Hii inaweza kuchukua muda mfupi.",
+    "model": "Mfano",
+    "status": "Hali"
   }
 }

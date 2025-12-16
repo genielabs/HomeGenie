@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID yachitsanzo"
     },
     "940": {
-      "Title": "Local AI (LLM)",
-      "Description": "Thamangani Large Language Model (LLM) kwanuko pa seva yanu ya HomeGenie. Mitundu iyi imatha kutsitsidwa kwaulere pamapulatifomu ngati Hugging Face. Ingoperekani njira yopita ku fayilo yachitsanzo ya GGUF. Chonde dziwani kuti kusintha kwa magawo, makamaka mkati mwa Context Code, kungafunike kuti muwonetsetse kugwirizana kwathunthu ndi mitundu yosiyanasiyana.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (utali wamayankho)",
-      "ConfigureOptions.ModelPath": "Njira yopita ku fayilo ya GGUF yakomweko"
+      "Title": "AI Yapafupi",
+      "Description": "Yendetsani ma LLM apamwamba kwambiri mwachindunji pa seva yanu ya HomeGenie. Muli ndi API yonse yowongolera AI kuchokera ku mapulogalamu ena ndi zolemba.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (kutalika kwa yankho)",
+      "ConfigureOptions.ModelPath": "Njira yopita ku fayilo ya GGUF yakomweko",
+      "ConfigureOptions.ModelFile": "Chitsanzo"
+    },
+    "575": {
+      "Title": "Woyang'anira Tsitsani",
+      "Description": "Utumiki wamphamvu komanso wosasinthasintha wa HTTP(S) wosamutsa mafayilo womwe umapezeka kudzera mu API yapadera. Umayang'anira moyo wonse wotsitsa, kuthandizira kuyimitsa/kuyambiranso (pogwiritsa ntchito mitu ya Range) ndi kusamalira mafayilo kwakanthawi (.part)."
     }
   }
 }

@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Gerðarauðkenni"
     },
     "940": {
-      "Title": "Staðbundin gervigreind (LLM)",
-      "Description": "Keyrðu stórt tungumálalíkan (LLM) staðbundið á HomeGenie netþjóninum þínum. Hægt er að hlaða niður þessum líkönum ókeypis af kerfum eins og Hugging Face. Gefðu einfaldlega upp slóðina að líkanskrá í GGUF-sniði. Athugið að breytingar á breytum, aðallega innan samhengiskóðans, gætu verið nauðsynlegar til að tryggja fulla samhæfni við mismunandi líkön.",
+      "Title": "Staðbundin gervigreind",
+      "Description": "Keyrðu nýjustu LLM-kerfin beint á HomeGenie-þjóninum þínum. Inniheldur fullt forritaskil (API) til að stjórna gervigreindinni frá öðrum forritum og forskriftum.",
       "ConfigureOptions.MaxTokens": "Hámarksfjöldi tákna (svarlengd)",
-      "ConfigureOptions.ModelPath": "Slóð að staðbundinni GGUF skrá"
+      "ConfigureOptions.ModelPath": "Slóð að staðbundinni GGUF skrá",
+      "ConfigureOptions.ModelFile": "Fyrirmynd"
+    },
+    "575": {
+      "Title": "Niðurhalsstjóri",
+      "Description": "Öflug, ósamstillt HTTP(S) skráaflutningsþjónusta sem er aðgengileg í gegnum sérstakt API. Hún stýrir öllum niðurhalsferlinu, styður hlé/halda áfram (með því að nota Range hausa) og meðhöndlun tímabundinna skráa (.part)."
     }
   }
 }

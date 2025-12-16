@@ -11,9 +11,16 @@
     "switches_control": "Lülitid"
   },
   "$ai_chat": {
-    "title": "Tehisintellekti vestluse vidin",
-    "intro": "Tere! Olen teie kohalik õigusteaduse assistent. Kuidas saan teid aidata?",
-    "no_bound_module": "LLM-mooduliga pole seotud. Keelemudeli sidumiseks avage vidina seaded.",
-    "start_typing_prompt": "Hakka viipa kirjutama..."
+    "intro": "Tere! Olen teie kohalik tehisintellekt. Kuidas saan teid aidata?",
+    "start_typing_prompt": "Hakka viipa kirjutama...",
+    "download_title": "Laadige alla vajalik LLM-fail:",
+    "teaser_description": "Rakenda oma riistvaral generatiivse tehisintellekti võimsust. Vestle, kirjuta koodi või loo täiustatud automatiseeringuid kohaliku ja privaatse süsteemi turvalisuse abil.",
+    "select_model": "Valige mudel",
+    "feat_private": "Privaatne",
+    "feat_offline": "Kiire ja kohalik",
+    "feat_automation": "Automatiseerimine",
+    "loading_model": "Mudeli laadimine mällu... See võib võtta paar hetke.",
+    "model": "Mudel",
+    "status": "Staatus"
   }
 }

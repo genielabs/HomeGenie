@@ -1,3 +1,5 @@
+@import 'assets/styles/widget-ui.css';
+
 :host {
   font-weight: lighter;
   min-width: 312px;
@@ -6,6 +8,15 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.filled {
+  font-variation-settings:
+    'opsz' 24,
+    'wght' 400,
+    'FILL' 1,
+    'GRAD' 0 !important;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -26,6 +37,9 @@
   box-shadow: rgba(0, 0, 0, 0.4) 0 4px 6px 0;
   cursor: pointer;
   transition: all 100ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .button.pressed {
   border: solid 6px #dbffdb;
@@ -46,7 +60,7 @@
 }
 .button .button-icon {
   opacity: 0.25;
-  margin: 8px
+  scale: 2;
 }
 .button.pressed .button-icon {
   fill: white;

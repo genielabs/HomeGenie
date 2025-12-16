@@ -11,9 +11,16 @@
     "switches_control": "Mga switch"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "Hello! Ako ang iyong lokal na katulong sa LLM. Paano kita matutulungan?",
-    "no_bound_module": "Walang LLM module na nakatali. Mangyaring buksan ang mga setting ng widget upang itali ang isang modelo ng wika.",
-    "start_typing_prompt": "Magsimulang mag-type ng prompt..."
+    "intro": "Kumusta! Ako ang lokal na AI ninyo. Paano kita matutulungan?",
+    "start_typing_prompt": "Simulan ang pag-type ng prompt...",
+    "download_title": "I-download ang kinakailangang LLM file:",
+    "teaser_description": "Gamitin ang kapangyarihan ng Generative AI sa iyong hardware. Makipag-chat, magsulat ng code, o bumuo ng mga advanced na automation gamit ang seguridad ng isang lokal at pribadong sistema.",
+    "select_model": "Pumili ng Modelo",
+    "feat_private": "Pribado",
+    "feat_offline": "Mabilis at Lokal",
+    "feat_automation": "Awtomasyon",
+    "loading_model": "Nilo-load ang modelo sa memorya... Maaaring tumagal ito nang ilang sandali.",
+    "model": "Modelo",
+    "status": "Katayuan"
   }
 }

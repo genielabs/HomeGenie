@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Identyfikator modelu"
     },
     "940": {
-      "Title": "Lokalna sztuczna inteligencja (LLM)",
-      "Description": "Uruchom lokalnie model LLM (Large Language Model) na serwerze HomeGenie. Modele te można pobrać bezpłatnie z platform takich jak Hugging Face. Wystarczy podać ścieżkę do pliku modelu w formacie GGUF. Należy pamiętać, że w celu zapewnienia pełnej zgodności z różnymi modelami może być konieczna modyfikacja parametrów, głównie w kodzie kontekstowym.",
+      "Title": "Lokalna sztuczna inteligencja",
+      "Description": "Uruchamiaj najnowocześniejsze programy LLM bezpośrednio na serwerze HomeGenie. Zawiera pełne API do sterowania sztuczną inteligencją z poziomu innych programów i skryptów.",
       "ConfigureOptions.MaxTokens": "Maksymalna liczba tokenów (długość odpowiedzi)",
-      "ConfigureOptions.ModelPath": "Ścieżka do lokalnego pliku GGUF"
+      "ConfigureOptions.ModelPath": "Ścieżka do lokalnego pliku GGUF",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Menedżer pobierania",
+      "Description": "Niezawodna, asynchroniczna usługa transferu plików HTTP(S) dostępna za pośrednictwem dedykowanego interfejsu API. Zarządza pełnym cyklem pobierania, obsługując wstrzymywanie/wznawianie (za pomocą nagłówków Range) oraz obsługę plików tymczasowych (.part)."
     }
   }
 }

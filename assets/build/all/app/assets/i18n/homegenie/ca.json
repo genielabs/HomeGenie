@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID del model"
     },
     "940": {
-      "Title": "IA local (LLM)",
-      "Description": "Executeu un Model de Llenguatge Gran (LLM) localment al vostre servidor HomeGenie. Aquests models es poden descarregar gratuïtament des de plataformes com Hugging Face. Només cal que proporcioneu la ruta a un fitxer de model en format GGUF. Tingueu en compte que pot ser necessari ajustar els paràmetres, principalment dins del Codi de Context, per garantir la compatibilitat total amb diferents models.",
+      "Title": "IA local",
+      "Description": "Executeu LLM d'última generació directament al vostre servidor HomeGenie. Inclou una API completa per controlar la IA des d'altres programes i scripts.",
       "ConfigureOptions.MaxTokens": "Tokens màxims (longitud de la resposta)",
-      "ConfigureOptions.ModelPath": "Camí al fitxer GGUF local"
+      "ConfigureOptions.ModelPath": "Camí al fitxer GGUF local",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Gestor de descàrregues",
+      "Description": "Un servei robust i asíncron de transferència de fitxers HTTP(S) accessible a través d'una API dedicada. Gestiona tot el cicle de vida de la descàrrega, permetent la pausa/represa (mitjançant capçaleres de rang) i la gestió de fitxers temporals (.part)."
     }
   }
 }

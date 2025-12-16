@@ -11,9 +11,16 @@
     "switches_control": "Rofar"
   },
   "$ai_chat": {
-    "title": "Spjallgræja með gervigreind",
-    "intro": "Hæ! Ég er aðstoðarmaður þinn í LLM-námi. Hvernig get ég aðstoðað þig?",
-    "no_bound_module": "Engin LLM eining tengd. Vinsamlegast opnaðu stillingar viðmótsins til að binda tungumálalíkan.",
-    "start_typing_prompt": "Byrjaðu að skrifa fyrirmæli..."
+    "intro": "Hæ! Ég er gervigreindin þín á staðnum. Hvernig get ég aðstoðað þig?",
+    "start_typing_prompt": "Byrjaðu að skrifa fyrirmæli...",
+    "download_title": "Sækja nauðsynlega LLM skrá:",
+    "teaser_description": "Nýttu kraftinn í kynslóðargervigreind í vélbúnaðinum þínum. Spjallaðu, skrifaðu kóða eða smíðaðu háþróaða sjálfvirkni með öryggi staðbundins og einkarekins kerfis.",
+    "select_model": "Veldu líkan",
+    "feat_private": "Einkamál",
+    "feat_offline": "Hratt og staðbundið",
+    "feat_automation": "Sjálfvirkni",
+    "loading_model": "Hleður líkani inn í minni... Þetta gæti tekið smá stund.",
+    "model": "Fyrirmynd",
+    "status": "Staða"
   }
 }

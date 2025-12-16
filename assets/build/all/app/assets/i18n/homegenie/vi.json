@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Mã số mô hình"
     },
     "940": {
-      "Title": "Trí tuệ nhân tạo địa phương (LLM)",
-      "Description": "Chạy Mô hình Ngôn ngữ Lớn (LLM) cục bộ trên máy chủ HomeGenie của bạn. Các mô hình này có thể được tải xuống miễn phí từ các nền tảng như Hugging Face. Chỉ cần cung cấp đường dẫn đến tệp mô hình định dạng GGUF. Xin lưu ý rằng có thể cần điều chỉnh các tham số, chủ yếu trong Mã Ngữ cảnh, để đảm bảo khả năng tương thích hoàn toàn với các mô hình khác nhau.",
-      "ConfigureOptions.MaxTokens": "Mã thông báo tối đa (độ dài phản hồi)",
-      "ConfigureOptions.ModelPath": "Đường dẫn đến tệp GGUF cục bộ"
+      "Title": "Trí tuệ nhân tạo địa phương",
+      "Description": "Chạy các hệ thống quản lý ngôn ngữ tự động (LLM) tiên tiến trực tiếp trên máy chủ HomeGenie của bạn. Bao gồm API đầy đủ để điều khiển trí tuệ nhân tạo từ các chương trình và tập lệnh khác.",
+      "ConfigureOptions.MaxTokens": "Số lượng token tối đa (độ dài phản hồi)",
+      "ConfigureOptions.ModelPath": "Đường dẫn đến tệp GGUF cục bộ",
+      "ConfigureOptions.ModelFile": "Người mẫu"
+    },
+    "575": {
+      "Title": "Trình quản lý tải xuống",
+      "Description": "Một dịch vụ truyền tải tập tin HTTP(S) mạnh mẽ, không đồng bộ, có thể truy cập thông qua API chuyên dụng. Nó quản lý toàn bộ vòng đời tải xuống, hỗ trợ tạm dừng/tiếp tục (sử dụng tiêu đề Range) và xử lý tập tin tạm thời (.part)."
     }
   }
 }

@@ -11,9 +11,16 @@
     "switches_control": "Sakelar"
   },
   "$ai_chat": {
-    "title": "Widget Obrolan AI",
-    "intro": "Halo! Saya asisten LLM lokal Anda. Ada yang bisa saya bantu?",
-    "no_bound_module": "Tidak ada modul LLM yang terikat. Silakan buka pengaturan widget untuk mengikat model bahasa.",
-    "start_typing_prompt": "Mulailah mengetik perintah..."
+    "intro": "Halo! Saya adalah AI lokal Anda. Bagaimana saya bisa membantu Anda?",
+    "start_typing_prompt": "Mulailah mengetikkan perintah...",
+    "download_title": "Unduh berkas LLM yang dibutuhkan:",
+    "teaser_description": "Manfaatkan kekuatan AI Generatif pada perangkat keras Anda. Berbincang, menulis kode, atau membangun otomatisasi tingkat lanjut dengan keamanan sistem lokal dan pribadi.",
+    "select_model": "Pilih Model",
+    "feat_private": "Pribadi",
+    "feat_offline": "Cepat dan Lokal",
+    "feat_automation": "Otomatisasi",
+    "loading_model": "Memuat model ke dalam memori... Ini mungkin membutuhkan beberapa saat.",
+    "model": "Model",
+    "status": "Status"
   }
 }

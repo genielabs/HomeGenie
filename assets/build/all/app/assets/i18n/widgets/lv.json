@@ -11,9 +11,16 @@
     "switches_control": "Slēdži"
   },
   "$ai_chat": {
-    "title": "Mākslīgā intelekta tērzēšanas logrīks",
-    "intro": "Sveiki! Esmu jūsu vietējais LLM asistents. Kā varu jums palīdzēt?",
-    "no_bound_module": "Nav piesaistīta LLM moduļa. Lūdzu, atveriet logrīka iestatījumus, lai piesaistītu valodas modeli.",
-    "start_typing_prompt": "Sāciet rakstīt uzvedni..."
+    "intro": "Sveiki! Esmu jūsu vietējais mākslīgais intelekts. Kā varu jums palīdzēt?",
+    "start_typing_prompt": "Sāciet rakstīt uzvedni...",
+    "download_title": "Lejupielādējiet nepieciešamo LLM failu:",
+    "teaser_description": "Izmantojiet ģeneratīvā mākslīgā intelekta jaudu savā aparatūrā. Tērzējiet, rakstiet kodu vai veidojiet uzlabotas automatizācijas, izmantojot lokālas un privātas sistēmas drošību.",
+    "select_model": "Izvēlieties modeli",
+    "feat_private": "Privāts",
+    "feat_offline": "Ātri un lokāli",
+    "feat_automation": "Automatizācija",
+    "loading_model": "Notiek modeļa ielāde atmiņā... Tas var aizņemt dažas minūtes.",
+    "model": "Modelis",
+    "status": "Statuss"
   }
 }

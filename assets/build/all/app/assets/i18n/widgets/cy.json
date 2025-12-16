@@ -11,9 +11,16 @@
     "switches_control": "Switshis"
   },
   "$ai_chat": {
-    "title": "Teclyn Sgwrs Deallusrwydd Artiffisial",
-    "intro": "Helô! Fi yw eich cynorthwyydd LLM lleol. Sut alla i eich helpu chi?",
-    "no_bound_module": "Dim modiwl LLM wedi'i rwymo. Agorwch osodiadau'r teclyn i rwymo model iaith.",
-    "start_typing_prompt": "Dechreuwch deipio awgrym..."
+    "intro": "Helô! Fi yw eich AI lleol. Sut alla i eich helpu chi?",
+    "start_typing_prompt": "Dechreuwch deipio awgrym...",
+    "download_title": "Lawrlwythwch y ffeil LLM sydd ei hangen:",
+    "teaser_description": "Manteisiwch ar bŵer Deallusrwydd Artiffisial Cynhyrchiol ar eich caledwedd. Sgwrsio, ysgrifennu cod, neu adeiladu awtomeiddio uwch gyda diogelwch system leol a phreifat.",
+    "select_model": "Dewiswch Fodel",
+    "feat_private": "Preifat",
+    "feat_offline": "Cyflym a Lleol",
+    "feat_automation": "Awtomeiddio",
+    "loading_model": "Yn llwytho model i'r cof... Gall hyn gymryd ychydig eiliadau.",
+    "model": "Model",
+    "status": "Statws"
   }
 }

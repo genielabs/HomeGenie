@@ -149,25 +149,24 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
   </Module>
   <Module>
     <Name>Lailama</Name>
-    <Description>Run a Large Language Model (LLM) locally on your HomeGenie server. These models can be downloaded for free from platforms like Hugging Face.
-Simply provide the path to a GGUF format model file. Please note that adjustments to parameters, primarily within the Context Code, may be required to ensure full compatibility with different models.</Description>
+    <Description>Harness the power of Generative AI on your hardware. Chat, write code, or build advanced automations with the security of a local and private system.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.MaxTokens</Name>
-        <Value>256</Value>
+        <Value>2048</Value>
         <Description>Max Tokens (response length)</Description>
         <FieldType>slider:64:4096:32</FieldType>
         <ParentId>0</ParentId>
         <UpdateTime>2025-10-25T04:08:58.4408715Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.ModelPath</Name>
+        <Name>ConfigureOptions.ModelFile</Name>
         <Value />
-        <Description>Path to local GGUF file</Description>
-        <FieldType>text</FieldType>
+        <Description>Model</Description>
+        <FieldType>select:</FieldType>
         <ParentId>0</ParentId>
         <UpdateTime>2025-10-25T21:12:23.9529887Z</UpdateTime>
       </ModuleParameter>

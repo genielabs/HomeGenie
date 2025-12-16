@@ -11,9 +11,16 @@
     "switches_control": "Gawaarida"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "Hello! Waxaan ahay kaaliyaha LLM deegaankaaga. Sideen ku caawin karaa?",
-    "no_bound_module": "Ma jiro module LLM xirma. Fadlan fur goobaha widget-ka si aad ugu xidho qaabka luqadda.",
-    "start_typing_prompt": "Bilow inaad qorto degdeg..."
+    "intro": "Salaan! Waxaan ahay AI-gaaga maxalliga ah. Sideen kuu caawin karaa?",
+    "start_typing_prompt": "Bilow inaad qorto tilmaan...",
+    "download_title": "Soo dejiso faylka LLM ee loo baahan yahay:",
+    "teaser_description": "Ku isticmaal awoodda Generative AI qalabkaaga. La sheekayso, qor kood, ama dhis otomaatigyo horumarsan iyadoo la adeegsanayo amniga nidaamka maxalliga ah iyo kan gaarka loo leeyahay.",
+    "select_model": "Dooro Moodel",
+    "feat_private": "Gaar ah",
+    "feat_offline": "Degdeg ah oo Maxalli ah",
+    "feat_automation": "Otomaatig",
+    "loading_model": "Moodeelka oo ku shubaya xusuusta... Tani waxay qaadan kartaa dhowr daqiiqo.",
+    "model": "Moodel",
+    "status": "Xaaladda"
   }
 }

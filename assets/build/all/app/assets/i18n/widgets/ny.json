@@ -11,9 +11,16 @@
     "switches_control": "Masinthidwe"
   },
   "$ai_chat": {
-    "title": "AI Chat Widget",
-    "intro": "Moni! Ndine wothandizira ku LLM kwanuko. Ndingakuthandizeni bwanji?",
-    "no_bound_module": "Palibe gawo la LLM lomangidwa. Chonde tsegulani zochunira za widget kuti mumange mtundu wachilankhulo.",
-    "start_typing_prompt": "Yambani kulemba chidziwitso..."
+    "intro": "Moni! Ine ndine katswiri wa zamaganizo wa m'dera lanu. Kodi ndingakuthandizeni bwanji?",
+    "start_typing_prompt": "Yambani kulemba pempho...",
+    "download_title": "Tsitsani fayilo ya LLM yomwe mukufuna:",
+    "teaser_description": "Gwiritsani ntchito mphamvu ya Generative AI pa hardware yanu. Chezani, lembani ma code, kapena pangani makina odziyimira pawokha pogwiritsa ntchito chitetezo cha makina am'deralo komanso achinsinsi.",
+    "select_model": "Sankhani Chitsanzo",
+    "feat_private": "Zachinsinsi",
+    "feat_offline": "Mwachangu komanso Kwapafupi",
+    "feat_automation": "Zokha zokha",
+    "loading_model": "Kuyika chitsanzo mu memori... Izi zingatenge mphindi zingapo.",
+    "model": "Chitsanzo",
+    "status": "Udindo"
   }
 }

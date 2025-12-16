@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Model-ID"
     },
     "940": {
-      "Title": "Plaaslike KI (LLM)",
-      "Description": "Voer 'n Groot Taalmodel (LLM) plaaslik op jou HomeGenie-bediener uit. Hierdie modelle kan gratis afgelaai word vanaf platforms soos Hugging Face. Verskaf eenvoudig die pad na 'n GGUF-formaat modellêer. Let asseblief daarop dat aanpassings aan parameters, hoofsaaklik binne die Kontekskode, nodig mag wees om volle versoenbaarheid met verskillende modelle te verseker.",
+      "Title": "Plaaslike KI",
+      "Description": "Laat die nuutste LLM's direk op jou HomeGenie-bediener loop. Sluit 'n volledige API in om die KI vanaf ander programme en skrifte te beheer.",
       "ConfigureOptions.MaxTokens": "Maksimum aantal tekens (responslengte)",
-      "ConfigureOptions.ModelPath": "Pad na plaaslike GGUF-lêer"
+      "ConfigureOptions.ModelPath": "Pad na plaaslike GGUF-lêer",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Aflaaibestuurder",
+      "Description": "'n Robuuste, asynchrone HTTP(S)-lêeroordragdiens wat toeganklik is via 'n toegewyde API. Dit bestuur die volle aflaai-lewensiklus, ondersteun pouse/hervatting (met behulp van Range-opskrifte) en tydelike lêerhantering (.part)."
     }
   }
 }

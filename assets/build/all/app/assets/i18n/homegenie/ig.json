@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "NJ nlereanya"
     },
     "940": {
-      "Title": "Mpaghara AI (LLM)",
-      "Description": "Gbaa Ụdị Asụsụ buru ibu (LLM) na mpaghara gị na sava HomeGenie. Enwere ike ibudata ụdị ndị a n'efu site na nyiwe dị ka ịmakụ ihu. Naanị nye ụzọ gaa na faịlụ ụdị GGUF. Biko mara na enwere ike ịchọ mgbanwe na paramita, nke kachasị n'ime Usoro Ọdịnaya, iji hụ na ndakọrịta zuru oke na ụdị dị iche iche.",
-      "ConfigureOptions.MaxTokens": "Max Token (ogologo nzaghachi)",
-      "ConfigureOptions.ModelPath": "Ụzọ gaa faịlụ GGUF mpaghara"
+      "Title": "AI mpaghara",
+      "Description": "Gbaa LLMs kachasị ọhụrụ ozugbo na sava HomeGenie gị. Gụnyere API zuru oke iji chịkwaa AI site na mmemme na edemede ndị ọzọ.",
+      "ConfigureOptions.MaxTokens": "Max Tokens (ogologo nzaghachi)",
+      "ConfigureOptions.ModelPath": "Ụzọ gaa faịlụ GGUF mpaghara",
+      "ConfigureOptions.ModelFile": "Ụdị nlereanya"
+    },
+    "575": {
+      "Title": "Onye njikwa nbudata",
+      "Description": "Ọrụ mbufe faịlụ HTTP(S) siri ike, nke a na-anaghị ejikọta ọnụ nke enwere ike ịnweta site na API raara onwe ya nye. Ọ na-ejikwa usoro nbudata zuru oke, na-akwado nkwụsịtụ/maliteghachi (site na iji isi okwu Range) na njikwa faịlụ nwa oge (.part)."
     }
   }
 }

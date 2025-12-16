@@ -11,9 +11,16 @@
     "switches_control": "Switch"
   },
   "$ai_chat": {
-    "title": "Widjèt Chat IA",
-    "intro": "Bonjou! Mwen se asistan LLM lokal ou a. Kijan m ka ede w?",
-    "no_bound_module": "Pa gen modil LLM ki lye. Tanpri ouvri paramèt widjèt la pou lye yon modèl lang.",
-    "start_typing_prompt": "Kòmanse tape yon envit..."
+    "intro": "Bonjou! Mwen se IA lokal ou a. Kijan m ka ede w?",
+    "start_typing_prompt": "Kòmanse tape yon envit...",
+    "download_title": "Telechaje fichye LLM ki nesesè a:",
+    "teaser_description": "Sèvi ak puisans IA jeneratif la sou pyès ki nan konpitè ou a. Chat, ekri kòd, oswa konstwi automatisation avanse avèk sekirite yon sistèm lokal ak prive.",
+    "select_model": "Chwazi yon Modèl",
+    "feat_private": "Prive",
+    "feat_offline": "Rapid ak Lokal",
+    "feat_automation": "Otomatizasyon",
+    "loading_model": "Ap chaje modèl la nan memwa... Sa ka pran kèk moman.",
+    "model": "Modèl",
+    "status": "Estati"
   }
 }

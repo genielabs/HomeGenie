@@ -178,9 +178,77 @@ namespace HomeGenie.Service
                 package, "package.json");
             var packageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(packageFile));
             string repositoryFolder = Path.Combine(Utility.GetDataFolder(), "packages", packageData.Repository);
+            XmlSerializer serializer;
+            string modulesDatabase = Path.Combine(repositoryFolder, packageData.Id, "modules.xml");
+            if (File.Exists(modulesDatabase))
+            {
+                serializer = new XmlSerializer(typeof(List<Module>));
+                using (var reader = new StreamReader(modulesDatabase))
+                {
+                    var modules = (List<Module>)serializer.Deserialize(reader);
+                    foreach (var module in modules)
+                    {
+                        homegenie.Modules.RemoveAll((m) => m.Domain == module.Domain && module.Address == m.Address);
+                        homegenie.Modules.Add(module);
+                    }
+                    homegenie.UpdateModulesDatabase();
+                }
+            }
+            string groupsDatabase = Path.Combine(repositoryFolder, packageData.Id, "groups.xml");
+            if (File.Exists(groupsDatabase))
+            {
+                serializer = new XmlSerializer(typeof(List<Group>));
+                using (var reader = new StreamReader(groupsDatabase))
+                {
+                    var pkgGroups = (List<Group>)serializer.Deserialize(reader);
+                    foreach (var group in pkgGroups)
+                    {
+                        bool exists = homegenie.Groups.Find((g) => g.Name == group.Name) != null;
+                        if (!exists)
+                        {
+                            homegenie.Groups.Add(group);
+                            // keep UPnP group always at last position
+                            var upnpGroup = homegenie.Groups.Find((g) => g.Name == "UPnP");
+                            if (upnpGroup != null)
+                            {
+                                homegenie.Groups.Remove(upnpGroup);
+                                homegenie.Groups.Add(upnpGroup);
+                            }
+                        }
+                        // merge modules
+                        var targetGroup = homegenie.Groups.Find((g) => g.Name == group.Name);
+                        foreach (var mr in group.Modules)
+                        {
+                            exists = targetGroup.Modules.Find((tmr) =>
+                                tmr.Domain == mr.Domain && tmr.Address == mr.Address) != null;
+                            if (!exists)
+                            {
+                                targetGroup.Modules.Add(mr);
+                            }
+                        }
+                    }
+                    homegenie.UpdateGroupsDatabase("");
+                }
+            }
+            string scheduleDatabase = Path.Combine(repositoryFolder, packageData.Id, "schedules.xml");
+            if (File.Exists(scheduleDatabase))
+            {
+                serializer = new XmlSerializer(typeof(List<SchedulerItem>));
+                using (var reader = new StreamReader(scheduleDatabase))
+                {
+                    var pkgSchedules = (List<SchedulerItem>)serializer.Deserialize(reader);
+                    foreach (var schedule in pkgSchedules)
+                    {
+                        homegenie.ProgramManager.SchedulerService.Remove(schedule.Name);
+                        homegenie.ProgramManager.SchedulerService.Items.Add(schedule);
+                    }
+                    homegenie.UpdateSchedulerDatabase();
+                }
+            }
+
             string programsDatabase = Path.Combine(repositoryFolder, packageData.Id, "programs.xml");
             ProgramBlock programToInstall;
-            var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
+            serializer = new XmlSerializer(typeof(List<ProgramBlock>));
             using (var reader = new StreamReader(programsDatabase))
             {
                 var programs = (List<ProgramBlock>)serializer.Deserialize(reader);
@@ -252,72 +320,6 @@ namespace HomeGenie.Service
                     }
                 }
                 homegenie.UpdateProgramsDatabase();
-            }
-            string modulesDatabase = Path.Combine(repositoryFolder, packageData.Id, "modules.xml");
-            if (File.Exists(modulesDatabase))
-            {
-                serializer = new XmlSerializer(typeof(List<Module>));
-                using (var reader = new StreamReader(modulesDatabase))
-                {
-                    var modules = (List<Module>)serializer.Deserialize(reader);
-                    foreach (var module in modules)
-                    {
-                        homegenie.Modules.RemoveAll((m) => m.Domain == module.Domain && module.Address == m.Address);
-                        homegenie.Modules.Add(module);
-                    }
-                    homegenie.UpdateModulesDatabase();
-                }
-            }
-            string groupsDatabase = Path.Combine(repositoryFolder, packageData.Id, "groups.xml");
-            if (File.Exists(groupsDatabase))
-            {
-                serializer = new XmlSerializer(typeof(List<Group>));
-                using (var reader = new StreamReader(groupsDatabase))
-                {
-                    var pkgGroups = (List<Group>)serializer.Deserialize(reader);
-                    foreach (var group in pkgGroups)
-                    {
-                        bool exists = homegenie.Groups.Find((g) => g.Name == group.Name) != null;
-                        if (!exists)
-                        {
-                            homegenie.Groups.Add(group);
-                            // keep UPnP group always at last position
-                            var upnpGroup = homegenie.Groups.Find((g) => g.Name == "UPnP");
-                            if (upnpGroup != null)
-                            {
-                                homegenie.Groups.Remove(upnpGroup);
-                                homegenie.Groups.Add(upnpGroup);
-                            }
-                        }
-                        // merge modules
-                        var targetGroup = homegenie.Groups.Find((g) => g.Name == group.Name);
-                        foreach (var mr in group.Modules)
-                        {
-                            exists = targetGroup.Modules.Find((tmr) =>
-                                tmr.Domain == mr.Domain && tmr.Address == mr.Address) != null;
-                            if (!exists)
-                            {
-                                targetGroup.Modules.Add(mr);
-                            }
-                        }
-                    }
-                    homegenie.UpdateGroupsDatabase("");
-                }
-            }
-            string scheduleDatabase = Path.Combine(repositoryFolder, packageData.Id, "schedules.xml");
-            if (File.Exists(scheduleDatabase))
-            {
-                serializer = new XmlSerializer(typeof(List<SchedulerItem>));
-                using (var reader = new StreamReader(scheduleDatabase))
-                {
-                    var pkgSchedules = (List<SchedulerItem>)serializer.Deserialize(reader);
-                    foreach (var schedule in pkgSchedules)
-                    {
-                        homegenie.ProgramManager.SchedulerService.Remove(schedule.Name);
-                        homegenie.ProgramManager.SchedulerService.Items.Add(schedule);
-                    }
-                    homegenie.UpdateSchedulerDatabase();
-                }
             }
 
             dynamic pkgData = new ExpandoObject();

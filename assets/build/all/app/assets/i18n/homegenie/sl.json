@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID modela"
     },
     "940": {
-      "Title": "Lokalna umetna inteligenca (LLM)",
-      "Description": "Lokalno na strežniku HomeGenie zaženite model velikega jezika (LLM). Te modele lahko brezplačno prenesete s platform, kot je Hugging Face. Preprosto navedite pot do datoteke modela v formatu GGUF. Upoštevajte, da bodo za zagotovitev popolne združljivosti z različnimi modeli morda potrebne prilagoditve parametrov, predvsem znotraj kontekstne kode.",
+      "Title": "Lokalna umetna inteligenca",
+      "Description": "Zaženite najsodobnejše LLM-je neposredno na strežniku HomeGenie. Vključuje celoten API za upravljanje umetne inteligence iz drugih programov in skriptov.",
       "ConfigureOptions.MaxTokens": "Največ žetonov (dolžina odgovora)",
-      "ConfigureOptions.ModelPath": "Pot do lokalne datoteke GGUF"
+      "ConfigureOptions.ModelPath": "Pot do lokalne datoteke GGUF",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Upravitelj prenosov",
+      "Description": "Robustna, asinhrona storitev prenosa datotek HTTP(S), dostopna prek namenskega API-ja. Upravlja celoten življenjski cikel prenosa, podpira pavzo/nadaljevanje (z uporabo glav Range) in začasno obdelavo datotek (.part)."
     }
   }
 }

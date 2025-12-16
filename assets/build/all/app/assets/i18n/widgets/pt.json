@@ -11,9 +11,16 @@
     "switches_control": "Interruptores"
   },
   "$ai_chat": {
-    "title": "Widget de bate-papo com IA",
-    "intro": "Olá! Sou seu assistente local de mestrado em direito. Como posso ajudar?",
-    "no_bound_module": "Nenhum módulo LLM vinculado. Abra as configurações do widget para vincular um modelo de idioma.",
-    "start_typing_prompt": "Comece a digitar um prompt..."
+    "intro": "Olá! Sou a sua IA local. Como posso ajudar?",
+    "start_typing_prompt": "Comece a digitar um comando...",
+    "download_title": "Baixe o arquivo LLM necessário:",
+    "teaser_description": "Aproveite o poder da IA generativa em seu hardware. Converse, escreva código ou crie automações avançadas com a segurança de um sistema local e privado.",
+    "select_model": "Selecione um modelo",
+    "feat_private": "Privado",
+    "feat_offline": "Rápido e local",
+    "feat_automation": "Automação",
+    "loading_model": "Carregando o modelo na memória... Isso pode levar alguns instantes.",
+    "model": "Modelo",
+    "status": "Status"
   }
 }

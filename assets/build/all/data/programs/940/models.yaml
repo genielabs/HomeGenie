@@ -1,0 +1,114 @@
+# ------------------
+# Google Gemma
+# ------------------
+
+gemma-3-4b-it.Q8_0.gguf:
+  Name: MaziyarPanahi/gemma-3-4b-it-GGUF
+  Description:
+  Size: 3.19 GB
+  Url: https://huggingface.co/MaziyarPanahi/gemma-3-4b-it-GGUF/resolve/main/gemma-3-4b-it.Q8_0.gguf?download=true
+  Template: gemma
+
+
+# ------------------
+# GPT-5.x
+# ------------------
+
+Qwen3-8B-GPT-5.2-High-Reasoning-Distill.i1-Q4_K_M.gguf:
+  Name: mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF
+  Description:
+  Size: 5.03 GB
+  Url: https://huggingface.co/mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF/resolve/main/Qwen3-8B-GPT-5.2-High-Reasoning-Distill.i1-Q4_K_M.gguf?download=true
+  Template: chatml
+
+Qwen3-14B-GPT-5.2-Distill.q4_k_m.gguf:
+  Name: TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF
+  Url: https://huggingface.co/TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF/resolve/main/Qwen3-14B-GPT-5.2-Distill.q4_k_m.gguf?download=true
+  Template: chatml
+
+GPT-5-Distill-Qwen3-4B-Instruct-Q6_K.gguf:
+  Name: Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF
+  Url: https://huggingface.co/Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF/resolve/main/GPT-5-Distill-Qwen3-4B-Instruct-Q6_K.gguf?download=true
+  Template: chatml
+
+
+
+# ------------------
+# LLama 3
+#-------------------
+
+# Super fast!! the fastest. Currently seems to ignore system-prompt
+llama-3.2-1b-instruct-q8_0.gguf:
+  Name: hugging-quants/Llama-3.2-1B-Instruct-Q8_0-GGUF
+  Url: https://huggingface.co/hugging-quants/Llama-3.2-1B-Instruct-Q8_0-GGUF/resolve/main/llama-3.2-1b-instruct-q8_0.gguf?download=true
+  Template: llama3
+
+# --- The Uncensored Agent (Llama 3.1 based) ---
+Hermes-3-Llama-3.1-8B.Q8_0.gguf:
+  Name: NousResearch/Hermes-3-Llama-3.1-8B
+  Url: https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-8B-GGUF/resolve/main/Hermes-3-Llama-3.1-8B.Q8_0.gguf?download=true
+  Template: chatml
+
+
+
+# ------------------
+# Qwen3
+# ------------------
+
+Qwen3-8B-Q8_0.gguf:
+  Name: Qwen/Qwen3-8B-GGUF
+  Description:
+  Size:
+  Url: https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q8_0.gguf?download=true
+  Template: chatml
+
+Qwen3-4B-Q5_K_M.gguf:
+  Name: Qwen/Qwen3-4B-GGUF
+  Url: https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q5_K_M.gguf?download=true
+  Template: chatml
+
+Qwen3-1.7B-Q8_0.gguf:
+  Name: Qwen/Qwen3-1.7B-GGUF
+  Url: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q8_0.gguf?download=true
+  Template: chatml
+
+qwen2.5-coder-7b-instruct-q5_k_m.gguf:
+  Name: Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
+  Url: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/resolve/main/qwen2.5-coder-7b-instruct-q5_k_m.gguf?download=true
+  Template: chatml
+
+qwen2.5-1.5b-instruct-q8_0.gguf:
+  Name: Qwen/Qwen2.5-1.5B-Instruct-GGUF
+  Url: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-q8_0.gguf?download=true
+  Template: chatml
+
+qwen2.5-3b-instruct-q5_k_m.gguf:
+  Name: Qwen/Qwen2.5-3B-Instruct-GGUF
+  Url: https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q5_k_m.gguf?download=true
+  Template: chatml
+
+qwen2.5-1.5b-instruct-fp16.gguf:
+  Name: Qwen/Qwen2.5-1.5B-Instruct-GGUF
+  Url: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-fp16.gguf?download=true
+  Template: chatml
+
+
+
+# ------------------
+# DeepSeek 3.x
+# ------------------
+
+Qwen3-8B-DeepSeek-v3.2-Speciale-Distill.q4_k_m.gguf:
+  Name: TeichAI/Qwen3-8B-DeepSeek-v3.2-Speciale-Distill-GGUF
+  Url: https://huggingface.co/TeichAI/Qwen3-8B-DeepSeek-v3.2-Speciale-Distill-GGUF/resolve/main/Qwen3-8B-DeepSeek-v3.2-Speciale-Distill.q4_k_m.gguf?download=true
+  Template: deepseek
+
+Nemotron-Orchestrator-8B-DeepSeek-v3.2-Speciale-Distill.q4_k_m.gguf:
+  Name: TeichAI/Nemotron-Orchestrator-8B-DeepSeek-v3.2-Speciale-Distill-GGUF
+  Url: https://huggingface.co/TeichAI/Nemotron-Orchestrator-8B-DeepSeek-v3.2-Speciale-Distill-GGUF/resolve/main/Nemotron-Orchestrator-8B-DeepSeek-v3.2-Speciale-Distill.q4_k_m.gguf?download=true
+  Template: deepseek
+
+DeepSeek-R1-0528-Qwen3-8B-Q8_0.gguf:
+  Name: unsloth/DeepSeek-R1-0528-Qwen3-8B
+  Url: https://huggingface.co/unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF/resolve/main/DeepSeek-R1-0528-Qwen3-8B-Q8_0.gguf?download=true
+  Template: deepseek

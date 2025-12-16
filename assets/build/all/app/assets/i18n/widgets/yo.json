@@ -11,9 +11,16 @@
     "switches_control": "Yipada"
   },
   "$ai_chat": {
-    "title": "AI Widget Awo",
-    "intro": "Pẹlẹ o! Emi ni oluranlọwọ LLM agbegbe rẹ. Bawo ni se le ran lowo?",
-    "no_bound_module": "Ko si LLM module owun. Jọwọ ṣii awọn eto ẹrọ ailorukọ lati di awoṣe ede kan.",
-    "start_typing_prompt": "Bẹrẹ titẹ itọka kan..."
+    "intro": "Ẹ n lẹ o! Èmi ni AI agbègbè yín. Báwo ni mo ṣe lè ràn yín lọ́wọ́?",
+    "start_typing_prompt": "Bẹ̀rẹ̀ sí í tẹ ìbéèrè kan...",
+    "download_title": "Ṣe igbasilẹ faili LLM ti a beere:",
+    "teaser_description": "Lo agbára Generative AI lórí ẹ̀rọ rẹ. Bá wọn sọ̀rọ̀, kọ kódì, tàbí kọ́ àwọn ẹ̀rọ aládàáni tó ti ní ìlọsíwájú pẹ̀lú ààbò ètò ìbílẹ̀ àti ti àdáni.",
+    "select_model": "Yan Àwòṣe kan",
+    "feat_private": "Ikọkọ",
+    "feat_offline": "Yára àti Àdúgbò",
+    "feat_automation": "Adaṣiṣẹ adaṣe",
+    "loading_model": "N n gbe awoṣe sinu iranti... Eyi le gba iṣẹju diẹ.",
+    "model": "Àwòṣe",
+    "status": "Ipò"
   }
 }

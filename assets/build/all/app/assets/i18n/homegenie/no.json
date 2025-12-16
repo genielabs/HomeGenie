@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modell-ID"
     },
     "940": {
-      "Title": "Lokal kunstig intelligens (LLM)",
-      "Description": "Kjør en stor språkmodell (LLM) lokalt på HomeGenie-serveren din. Disse modellene kan lastes ned gratis fra plattformer som Hugging Face. Bare oppgi banen til en modellfil i GGUF-format. Vær oppmerksom på at justeringer av parametere, hovedsakelig innenfor kontekstkoden, kan være nødvendige for å sikre full kompatibilitet med forskjellige modeller.",
+      "Title": "Lokal AI",
+      "Description": "Kjør toppmoderne LLM-er direkte på HomeGenie-serveren din. Inkluderer et komplett API for å kontrollere AI-en fra andre programmer og skript.",
       "ConfigureOptions.MaxTokens": "Maks. antall tokener (svarlengde)",
-      "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil"
+      "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil",
+      "ConfigureOptions.ModelFile": "Modell"
+    },
+    "575": {
+      "Title": "Nedlastingsbehandler",
+      "Description": "En robust, asynkron HTTP(S)-filoverføringstjeneste tilgjengelig via et dedikert API. Den administrerer hele nedlastingslivssyklusen, støtter pause/gjenoppta (ved hjelp av Range-overskrifter) og håndtering av midlertidige filer (.part)."
     }
   }
 }

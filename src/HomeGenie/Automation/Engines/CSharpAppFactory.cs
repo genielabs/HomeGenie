@@ -154,7 +154,9 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.SerialPeripheralInterface",
 #endif
             "UnitsNet", // used both by Raspberry.IO and Microsoft.IoT
-            "Utility = HomeGenie.Service.Utility"
+            "Utility = HomeGenie.Service.Utility",
+            "YamlDotNet.Serialization",
+            "YamlDotNet.Serialization.NamingConventions"
         };
 
         public static int ProgramCodeOffset => Includes.Count() + 11;
@@ -275,7 +277,9 @@ namespace HomeGenie.Automation.Scripting
 
                     // Other
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.Concurrent.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Memory.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Http.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ObjectModel.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Core.dll")),
                     MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
@@ -339,7 +343,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.OpenAI.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "tryAGI.OpenAI.dll")),
 #endif
-                    // IO
+                    // IO and Utility
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.Annotations.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.dll")),
@@ -353,6 +357,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UPnP.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MQTTnet.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "OnvifDiscovery.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YamlDotNet.dll")),
 
                     // RaspberrySharp / Microsoft IoT Framework
                     MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "System.Device.Gpio.dll")),
@@ -404,11 +409,17 @@ namespace HomeGenie.Automation.Scripting
                 GenerateExecutable = false,
                 IncludeDebugInformation = true,
                 TreatWarningsAsErrors = false,
-                OutputAssembly = outputDllFile,
-                CompilerOptions = "/nowarn:1701"
+                OutputAssembly = outputDllFile
                 // *** Useful for debugging
                 //,TempFiles = new TempFileCollection {KeepFiles = true}
             };
+
+            // Build compiler options
+            string memoryDllPath = "System.Memory.dll";
+            string aliasName = "mem";
+            compilerParams.CompilerOptions = $"/r:{aliasName}=\"{memoryDllPath}\"";
+            string warningCode = "1701,1702";
+            compilerParams.CompilerOptions += $" /nowarn:{warningCode}";
 
             // Mono runtime 2/3 compatibility fix
             // TODO: this may not be required anymore
@@ -451,6 +462,8 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Options.dll");
             compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Logging.Abstractions.dll");
 
+            compilerParams.ReferencedAssemblies.Add("System.Net.Http.dll");
+
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MessagePack.dll");
             compilerParams.ReferencedAssemblies.Add("MessagePack.Annotations.dll");
@@ -471,6 +484,8 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("MQTTnet.dll");
 
             compilerParams.ReferencedAssemblies.Add("NWaves.dll");
+
+            compilerParams.ReferencedAssemblies.Add("YamlDotNet.dll");
 
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
             compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");

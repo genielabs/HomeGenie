@@ -11,9 +11,16 @@
     "switches_control": "Kytkimet"
   },
   "$ai_chat": {
-    "title": "Tekoälykeskusteluwidget",
-    "intro": "Hei! Olen paikallinen oikeustieteen maisterin assistenttisi. Miten voin auttaa sinua?",
-    "no_bound_module": "Ei LLM-moduuliin sidottua. Avaa widgetin asetukset kielimallin sitomiseksi.",
-    "start_typing_prompt": "Aloita kirjoittamaan kehotetta..."
+    "intro": "Hei! Olen paikallinen tekoälynne. Kuinka voin auttaa teitä?",
+    "start_typing_prompt": "Aloita kirjoittamaan kehotetta...",
+    "download_title": "Lataa tarvittava LLM-tiedosto:",
+    "teaser_description": "Hyödynnä generatiivisen tekoälyn teho laitteistossasi. Keskustele, kirjoita koodia tai rakenna edistyneitä automaatioita paikallisen ja yksityisen järjestelmän turvallisuuden avulla.",
+    "select_model": "Valitse malli",
+    "feat_private": "Yksityinen",
+    "feat_offline": "Nopea ja paikallinen",
+    "feat_automation": "Automaatio",
+    "loading_model": "Mallia ladataan muistiin... Tämä voi kestää hetken.",
+    "model": "Malli",
+    "status": "Status"
   }
 }

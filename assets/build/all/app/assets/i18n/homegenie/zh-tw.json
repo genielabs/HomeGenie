@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "模型 ID"
     },
     "940": {
-      "Title": "本地人工智慧（法學碩士）",
-      "Description": "在您的 HomeGenie 伺服器上本地運行大型語言模型 (LLM)。這些模型可以從 Hugging Face 等平台免費下載。只需提供 GGUF 格式模型檔案的路徑即可。請注意，可能需要調整參數（主要是上下文程式碼中的參數），以確保與不同模型完全相容。",
-      "ConfigureOptions.MaxTokens": "最大令牌（響應長度）",
-      "ConfigureOptions.ModelPath": "本地 GGUF 檔案的路徑"
+      "Title": "本地人工智慧",
+      "Description": "直接在您的 HomeGenie 伺服器上執行最先進的 LLM（邏輯邏輯模型）。包含完整的 API，可從其他程式和腳本控制 AI。",
+      "ConfigureOptions.MaxTokens": "最大令牌數（響應長度）",
+      "ConfigureOptions.ModelPath": "本地 GGUF 檔案的路徑",
+      "ConfigureOptions.ModelFile": "模型"
+    },
+    "575": {
+      "Title": "下載管理器",
+      "Description": "一個功能強大的非同步 HTTP(S) 檔案傳輸服務，可透過專用 API 存取。它管理完整的下載生命週期，支援暫停/恢復（使用 Range 標頭）和臨時檔案處理（.part）。"
     }
   }
 }

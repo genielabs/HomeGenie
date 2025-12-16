@@ -11,9 +11,16 @@
     "switches_control": "Schakelaars"
   },
   "$ai_chat": {
-    "title": "AI Chat-widget",
-    "intro": "Hallo! Ik ben uw lokale LLM-assistent. Hoe kan ik u helpen?",
-    "no_bound_module": "Geen LLM-module gebonden. Open de widgetinstellingen om een taalmodel te binden.",
-    "start_typing_prompt": "Begin met het typen van een opdracht..."
+    "intro": "Hallo! Ik ben uw lokale AI. Hoe kan ik u helpen?",
+    "start_typing_prompt": "Begin met het typen van een prompt...",
+    "download_title": "Download het benodigde LLM-bestand:",
+    "teaser_description": "Benut de kracht van generatieve AI op uw eigen hardware. Chat, schrijf code of bouw geavanceerde automatiseringen met de veiligheid van een lokaal en privé systeem.",
+    "select_model": "Selecteer een model",
+    "feat_private": "Privé",
+    "feat_offline": "Snel en lokaal",
+    "feat_automation": "Automatisering",
+    "loading_model": "Het model wordt in het geheugen geladen... Dit kan even duren.",
+    "model": "Model",
+    "status": "Status"
   }
 }

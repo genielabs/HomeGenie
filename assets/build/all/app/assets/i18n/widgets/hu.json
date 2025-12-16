@@ -11,9 +11,16 @@
     "switches_control": "Kapcsolók"
   },
   "$ai_chat": {
-    "title": "AI csevegőwidget",
-    "intro": "Üdvözlöm! Én vagyok a helyi LLM asszisztens. Miben segíthetek?",
-    "no_bound_module": "Nincs LLM modulhoz kötve. Nyelvi modell kötéséhez nyissa meg a widget beállításait.",
-    "start_typing_prompt": "Kezdj el gépelni egy promptot..."
+    "intro": "Üdvözlöm! Én vagyok a helyi mesterséges intelligencia. Miben segíthetek?",
+    "start_typing_prompt": "Kezdj el gépelni egy promptot...",
+    "download_title": "Töltse le a szükséges LLM fájlt:",
+    "teaser_description": "Használja ki a generatív mesterséges intelligencia erejét hardverén. Csevegjen, írjon kódot, vagy építsen fejlett automatizálásokat egy helyi és privát rendszer biztonságával.",
+    "select_model": "Válasszon egy modellt",
+    "feat_private": "Magán",
+    "feat_offline": "Gyors és helyi",
+    "feat_automation": "Automatizálás",
+    "loading_model": "Modell betöltése a memóriába... Ez eltarthat egy ideig.",
+    "model": "Modell",
+    "status": "Állapot"
   }
 }

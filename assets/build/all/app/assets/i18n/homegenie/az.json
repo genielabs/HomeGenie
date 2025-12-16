@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Model ID"
     },
     "940": {
-      "Title": "Yerli AI (LLM)",
-      "Description": "HomeGenie serverinizdə yerli olaraq Böyük Dil Modelini (LLM) işlədin. Bu modelləri Hugging Face kimi platformalardan pulsuz yükləmək olar. Sadəcə olaraq GGUF formatlı model faylının yolunu təmin edin. Nəzərə alın ki, müxtəlif modellərlə tam uyğunluğu təmin etmək üçün ilk növbədə Kontekst Kodu daxilində parametrlərə düzəlişlər tələb oluna bilər.",
+      "Title": "Yerli süni intellekt",
+      "Description": "Ən müasir LLM-ləri birbaşa HomeGenie serverinizdə işlədin. Digər proqramlardan və skriptlərdən süni intellekt idarə etmək üçün tam API daxildir.",
       "ConfigureOptions.MaxTokens": "Maksimum Tokenlər (cavab uzunluğu)",
-      "ConfigureOptions.ModelPath": "Yerli GGUF faylına yol"
+      "ConfigureOptions.ModelPath": "Yerli GGUF faylına yol",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Yükləmə Meneceri",
+      "Description": "Xüsusi API vasitəsilə əldə edilə bilən güclü, asinxron HTTP(S) fayl ötürmə xidməti. Tam yükləmə həyat dövrünü idarə edir, fasilə/davam (Range başlıqlarından istifadə edərək) və müvəqqəti fayl emalını (.part) dəstəkləyir."
     }
   }
 }

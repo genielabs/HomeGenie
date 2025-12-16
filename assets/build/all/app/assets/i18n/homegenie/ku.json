@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Nasnameya Modelê"
     },
     "940": {
-      "Title": "AI ya Herêmî (LLM)",
-      "Description": "Modelek Zimanî ya Mezin (LLM) li ser servera HomeGenie ya xwe bi awayekî herêmî bixebitîne. Ev model dikarin ji platformên wekî Hugging Face belaş werin daxistin. Tenê rêya pelê modela bi formata GGUF peyda bikin. Ji kerema xwe bala xwe bidinê ku ji bo misogerkirina lihevhatina tevahî bi modelên cûda re, dibe ku sererastkirinên parametreyan, bi giranî di nav Koda Kontekstê de, hewce bin.",
+      "Title": "AI-ya herêmî",
+      "Description": "LLM-yên herî pêşketî rasterast li ser servera xwe ya HomeGenie bimeşînin. API-yek tevahî vedihewîne da ku AI-ê ji bername û skrîptên din kontrol bike.",
       "ConfigureOptions.MaxTokens": "Maksimum Token (dirêjahiya bersivê)",
-      "ConfigureOptions.ModelPath": "Riya pelê GGUF ya herêmî"
+      "ConfigureOptions.ModelPath": "Riya pelê GGUF ya herêmî",
+      "ConfigureOptions.ModelFile": "Cins"
+    },
+    "575": {
+      "Title": "Gerînendeyê Dakêşanê",
+      "Description": "Xizmeteke veguhastina pelan a HTTP(S) ya asinkron û bihêz ku bi rêya API-yeke taybet ve tê gihîştin. Ew tevahiya çerxa jiyana dakêşanê birêve dibe, piştgirîya rawestandin/domandinê (bi karanîna sernivîsên Range) û birêvebirina pelan a demkî (.part) dike."
     }
   }
 }

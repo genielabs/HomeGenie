@@ -11,9 +11,16 @@
     "switches_control": "Interruptores"
   },
   "$ai_chat": {
-    "title": "Widget de chat con IA",
-    "intro": "¡Hola! Soy tu asistente local de LLM. ¿Cómo puedo ayudarte?",
-    "no_bound_module": "No hay módulo LLM vinculado. Abra la configuración del widget para vincular un modelo de idioma.",
-    "start_typing_prompt": "Comience a escribir un mensaje..."
+    "intro": "¡Hola! Soy tu IA local. ¿Cómo puedo ayudarte?",
+    "start_typing_prompt": "Comience a escribir un mensaje...",
+    "download_title": "Descargue el archivo LLM requerido:",
+    "teaser_description": "Aproveche el poder de la IA generativa en su hardware. Chatee, codifique o cree automatizaciones avanzadas con la seguridad de un sistema local y privado.",
+    "select_model": "Seleccione un modelo",
+    "feat_private": "Privado",
+    "feat_offline": "Rápido y local",
+    "feat_automation": "Automatización",
+    "loading_model": "Cargando modelo en memoria... Esto puede tardar unos instantes.",
+    "model": "Modelo",
+    "status": "Estado"
   }
 }

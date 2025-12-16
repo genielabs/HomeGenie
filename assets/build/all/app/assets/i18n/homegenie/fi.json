@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Mallitunnus"
     },
     "940": {
-      "Title": "Paikallinen tekoäly (LLM)",
-      "Description": "Suorita Large Language Model (LLM) paikallisesti HomeGenie-palvelimellasi. Nämä mallit voi ladata ilmaiseksi alustoilta, kuten Hugging Face. Anna vain polku GGUF-muotoiseen mallitiedostoon. Huomaa, että parametrien säätöjä, pääasiassa kontekstikoodissa, voidaan joutua tekemään täyden yhteensopivuuden varmistamiseksi eri mallien kanssa.",
+      "Title": "Paikallinen tekoäly",
+      "Description": "Suorita huippuluokan LLM-ohjelmia suoraan HomeGenie-palvelimellasi. Sisältää täyden API:n tekoälyn ohjaamiseen muista ohjelmista ja skripteistä.",
       "ConfigureOptions.MaxTokens": "Max Tokens (vastauksen pituus)",
-      "ConfigureOptions.ModelPath": "Polku paikalliseen GGUF-tiedostoon"
+      "ConfigureOptions.ModelPath": "Polku paikalliseen GGUF-tiedostoon",
+      "ConfigureOptions.ModelFile": "Malli"
+    },
+    "575": {
+      "Title": "Latausten hallinta",
+      "Description": "Vankka, asynkroninen HTTP(S)-tiedostonsiirtopalvelu, johon pääsee käsiksi erillisen API:n kautta. Se hallitsee koko latauksen elinkaarta tukemalla taukoa/jatkamista (käyttäen Range-otsikoita) ja väliaikaisten tiedostojen käsittelyä (.part)."
     }
   }
 }

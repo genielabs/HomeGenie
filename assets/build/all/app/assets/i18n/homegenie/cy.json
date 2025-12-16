@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "ID Model"
     },
     "940": {
-      "Title": "Deallusrwydd Artiffisial Lleol (LLM)",
-      "Description": "Rhedeg Model Iaith Mawr (LLM) yn lleol ar eich gweinydd HomeGenie. Gellir lawrlwytho'r modelau hyn am ddim o lwyfannau fel Hugging Face. Darparwch y llwybr i ffeil model fformat GGUF yn unig. Sylwch y gallai fod angen addasiadau i baramedrau, yn bennaf o fewn y Cod Cyd-destun, i sicrhau cydnawsedd llawn â gwahanol fodelau.",
+      "Title": "Deallusrwydd Artiffisial Lleol",
+      "Description": "Rhedeg LLMs o'r radd flaenaf yn uniongyrchol ar eich gweinydd HomeGenie. Yn cynnwys API llawn i reoli'r AI o raglenni a sgriptiau eraill.",
       "ConfigureOptions.MaxTokens": "Uchafswm Tocynnau (hyd ymateb)",
-      "ConfigureOptions.ModelPath": "Llwybr i'r ffeil GGUF leol"
+      "ConfigureOptions.ModelPath": "Llwybr i'r ffeil GGUF leol",
+      "ConfigureOptions.ModelFile": "Model"
+    },
+    "575": {
+      "Title": "Rheolwr Lawrlwytho",
+      "Description": "Gwasanaeth trosglwyddo ffeiliau HTTP(S) ansyncronig, cadarn sydd ar gael trwy API pwrpasol. Mae'n rheoli cylch bywyd llawn y lawrlwythiad, gan gefnogi oedi/ailddechrau (gan ddefnyddio penawdau Range) a thrin ffeiliau dros dro (.part)."
     }
   }
 }

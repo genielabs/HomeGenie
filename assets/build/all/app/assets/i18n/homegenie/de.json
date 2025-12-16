@@ -320,10 +320,15 @@
       "ConfigureOptions.ModelId": "Modell-ID"
     },
     "940": {
-      "Title": "Lokale KI (LLM)",
-      "Description": "Führen Sie ein Large Language Model (LLM) lokal auf Ihrem HomeGenie-Server aus. Diese Modelle können kostenlos von Plattformen wie Hugging Face heruntergeladen werden. Geben Sie einfach den Pfad zu einer Modelldatei im GGUF-Format an. Bitte beachten Sie, dass Anpassungen an Parametern, vor allem im Kontextcode, erforderlich sein können, um die volle Kompatibilität mit verschiedenen Modellen zu gewährleisten.",
-      "ConfigureOptions.MaxTokens": "Max. Token (Antwortlänge)",
-      "ConfigureOptions.ModelPath": "Pfad zur lokalen GGUF-Datei"
+      "Title": "Lokale KI",
+      "Description": "Führen Sie hochmoderne LLMs direkt auf Ihrem HomeGenie-Server aus. Beinhaltet eine vollständige API zur Steuerung der KI aus anderen Programmen und Skripten.",
+      "ConfigureOptions.MaxTokens": "Maximale Anzahl an Tokens (Antwortlänge)",
+      "ConfigureOptions.ModelPath": "Pfad zur lokalen GGUF-Datei",
+      "ConfigureOptions.ModelFile": "Modell"
+    },
+    "575": {
+      "Title": "Download-Manager",
+      "Description": "Ein robuster, asynchroner HTTP(S)-Dateiübertragungsdienst, der über eine dedizierte API zugänglich ist. Er verwaltet den gesamten Download-Lebenszyklus und unterstützt das Anhalten/Fortsetzen (mittels Range-Headern) sowie die Verarbeitung temporärer Dateien (.part)."
     }
   }
 }

@@ -1,9 +1,28 @@
+@import 'assets/styles/widget-ui.css';
+@import 'assets/styles/flex-layout-attribute.min.css';
+
 :host {
   display: block;
-  height: 328px;
-  max-width: 460px;
+  max-width: 492px;
+  height: 100%;
   width: 100%;
   font-family: sans-serif;
+}
+
+.dark-theme .svg-icon-black {
+  filter:invert(1);
+}
+
+.label {
+  color: var(--primary-color);
+}
+
+.warn-message {
+  margin-top: 12px;
+  border: solid 1px var(--warn-color);
+  border-radius:4px;padding:6px;
+  color: var(--text-color);
+  font-size: 80%;
 }
 
 p {
@@ -14,10 +33,15 @@ p {
   padding-left: 12px;
 }
 
+.fullscreen {
+  background-color: var(--card-color);
+  height: 100%!important;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 330px;
   overflow: hidden;
 }
 
@@ -25,7 +49,7 @@ p {
 .chat-history {
   user-select: text;
   background-color: transparent;
-  flex-grow: 1;
+  flex-grow: 2;
   overflow-y: auto;
   padding: 16px;
   display: flex;
@@ -45,7 +69,6 @@ p {
 }
 
 .message .author {
-  color: var(--primary-color);
   font-size: 0.8em;
   font-weight: bold;
   margin-bottom: 4px;
@@ -91,29 +114,31 @@ textarea:focus {
 }
 
 button {
-  background-color: var(--accent-color);
+  stroke: var(--accent-color);
+  border: solid 1px rgba(127, 127, 127, 0.35);
+  background-color: rgba(127, 127, 127, 0.05);
   color: var(--text-color);
-  border: none;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
+  min-width: 48px;
   height: 48px;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: var(--primary-color);
+  border: solid 1px rgba(127, 127, 127, 0.5);
+  background-color: rgba(127, 127, 127, 0.15);
+}
+button:active {
+  background-color: rgba(127, 127, 127, 0.35);
 }
 
-svg[\#arrow] {
-  fill: var(--background-color);
-}
-
-button:disabled svg {
+button:disabled span {
   opacity: 0.5;
+  display: none;
 }
 
 button:disabled {
@@ -137,4 +162,199 @@ div[\#chat_history] p>code {
   border-radius: 4px;
   font-size: 0.9em;
   font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+
+/* Download progress bar */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.progress-bar-wrapper {
+  min-width: 320px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: solid 1px var(--secondary-text-color);
+  background-color: var(--background-color);
+  overflow: hidden;
+
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(127, 127, 127, 0.2) 40%,
+    transparent 90%
+  );
+  
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+
+.progress-bar {
+  border-radius: 12px;
+  height: 24px;
+  background: var(--accent-color);
+  text-align: center;
+  place-content: center;
+  place-self: start;
+}
+
+.download-info {
+  position: absolute;
+  top: 48px; left: 0; right: 0; bottom: 48px;
+  margin:12px;
+  color: var(--background-color);
+  align-self: center;
+}
+.download-info .title {
+  color: var(--secondary-text-color);
+  max-width: 360px;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+/* --- Cursor Animation --- */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.message.streaming .text::after {
+  content: '▋';
+  display: inline-block;
+  animation: cursor-blink 1s step-start infinite;
+  color: var(--primary-color);
+  margin-left: 4px;
+  vertical-align: baseline; 
+}
+
+.message.streaming .text > p:last-child {
+  display: inline;
+  margin-bottom: 0;
+}
+
+
+
+
+
+
+.loading-spinner-container {
+  position:relative;
+  width:32px;
+  height:32px;
+  margin:24px;
+}
+.loading-spinner {
+  position: absolute;
+
+  width: 27px;
+  height: 27px;
+  
+  border-radius: 50%;
+  
+  border: 3.5px solid var(--card-color);
+  border-top-color: var(--primary-color); 
+  border-right-color: var(--primary-color); 
+  border-bottom-color: var(--primary-color); 
+  
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.intro-container {
+  top:0;
+  color: var(--text-color);
+}
+.feature-box {
+  margin-left: 48px;
+  margin-right: 48px;
+  margin-bottom: 24px;
+}
+.feature-item {
+  margin-left: 24px;
+  display: flex;
+  gap: 10px;
+  height: 26px;
+}
+.intro-container .description {
+  padding: 12px;
+}
+
+
+
+.configure-button {
+  gap:6px;
+  place-self: center;
+  margin-top: 12px;
+  padding-right: 12px;
+}
+
+.fullscreen-button {
+  position:absolute;
+  right: 48px;
+  top: 8px;;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor:pointer;
+  border-radius: 48px;
+}
+.fullscreen-button:hover {
+  background-color: rgba(127, 127, 127, 0.15);
+}
+.fullscreen-button:active {
+  background-color: rgba(127, 127, 127, 0.35);
+}
+
+
+.name {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 90%;
+}
+
+.description {
+  color: var(--secondary-text-color);
+  margin: 12px;
+}
+
+.llm-init-screen {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  position:absolute;
+  top:52px; /* let header visible */
+  left:0;
+  bottom:0;
+  right:0;
+
+  color:var(--text-color);
+  backdrop-filter:opacity(0.25);
+  background:var(--card-color);
+  border-radius: 4px;
+
+  margin-top:52px;
+  padding:12px;
+  margin: 4px;
 }

@@ -10,50 +10,18 @@ class LocalAiChat extends ControllerInstance {
       // In the widget settings dialog
       // show only modules with this field
       fieldFilter: 'LLM.TokenStream'
-    }
+    },
+    sizeOptions: ['medium', 'big']
   };
 
-  // --- PROPERTIES ---
-
-  /**
-   * Holds a reference to the HTML element containing the latest AI message.
-   * This is used to progressively update the content during a streaming response.
-   * @type {HTMLElement|null}
-   */
   currentAiMessageElement = null;
-
-  /**
-   * A buffer to accumulate the raw text from the AI's streaming response.
-   * @type {string}
-   */
   currentAiTextBuffer = '';
-
-  /**
-   * A timeout used to detect the end of a streaming response.
-   * It is reset with each new token and fires when tokens stop arriving.
-   * @type {number|null}
-   */
   streamEndTimeout = null;
-
-  /**
-   * A flag to identify the very first token of a new AI response,
-   * used to reset the buffer and UI state.
-   * @type {boolean}
-   */
   isFirstToken = true;
-
-  /**
-   * Stores the `marked` library instance once it's loaded from the CDN.
-   * @type {object|null}
-   */
   markedLib = null;
-
-  /**
-   * Default UI message to show when no LLM module is bound to the widget.
-   * This can be replaced by a translated string.
-   * @type {string}
-   */
   textNoBoundModule = 'No module bound. Open widget settings to bind an LLM module.'
+  renderUpdateTimer = null;
+  isStreaming = false;
 
   /**
    * `onInit` lifecycle hook, called before the component's view is created.
@@ -64,6 +32,16 @@ class LocalAiChat extends ControllerInstance {
     zuix.using('script', './assets/js/marked.min.js', () => {
       this.markedLib = window.marked;
     });
+    // create `@translate` handler
+    zuix.store('handlers')['translate'] = ($view, $el, lastResult, refreshCallback) => {
+      const tag = $el.attr('@translate');
+      this.translate('$ai_chat.' + tag).subscribe((tr) => {
+        if (tr.indexOf('.$ai_chat.') === -1){
+          $el.html(tr);
+        }
+      });
+      //refreshCallback(lastResult);
+    };
   }
 
   /**
@@ -71,11 +49,54 @@ class LocalAiChat extends ControllerInstance {
    * Used for initial setup, event handling, and data subscriptions.
    */
   onCreate() {
+    const self = this;
     // Expose methods to be callable from the component's view (HTML).
-    this.declare({
+    const instance = {
       sendMessage: this.sendMessage,
-      handleKeyDown: this.handleKeyDown
-    });
+      handleKeyDown: this.handleKeyDown,
+      module: this.boundModule || null,
+      control(cmd) {
+        self.boundModule?.control(cmd);
+      },
+      isStreaming() {
+        return self.isStreaming;
+      },
+      isModelStarting() {
+        return self.boundModule && instance.errorStatus() === '' && instance.getDownloadStatus() === 'Complete' && instance.initStatus() !== 'Ready';
+      },
+      configure() {
+        self.showSettings();
+      },
+      initStatus() {
+        return self.boundModule?.field('Status.Init')?.value || '';
+      },
+      errorStatus() {
+        return self.boundModule?.field('Status.Error')?.value || '';
+      },
+      taskId() {
+        return self.boundModule?.field('Status.Download.Id')?.value || '';
+      },
+      modelId() {
+        return self.boundModule?.field('Status.Download.Task')?.value.split('/').pop() || '';
+      },
+      currentModel() {
+        return self.boundModule?.field('LLM.Id')?.value || '';
+      },
+      getDownloadStatus() {
+        return self.boundModule?.field('Status.Download')?.value || 'Complete';
+      },
+      getDownloadError() {
+        return self.boundModule?.field('Status.Download.Error')?.value || '';
+      },
+      getDownloadProgress() {
+        return +self.boundModule?.field('Status.Download.Progress')?.value || 0;
+      },
+      isDownloadingFile() {
+        const status = self.boundModule?.field('Status.Download')?.value;
+        return status === 'Requested' || status === 'Downloading' || status === 'Error' || status === 'Paused';
+      }
+    };
+    this.declare(instance);
 
     // Load and apply translated strings to the UI.
     // (from `/assets/i18n/widgets/` folder)
@@ -98,8 +119,7 @@ class LocalAiChat extends ControllerInstance {
     var tokenStream = this.boundModule.field('LLM.TokenStream');
     if (!tokenStream) return;
 
-    // Subscribe to the token stream field. This callback will be executed
-    // for each new token received from the LLM.
+    // Subscribe to the token stream field.
     this.subscribe(tokenStream, (field) => {
       // Ignore tokens if we are not expecting an AI response.
       if (!this.currentAiMessageElement) return;
@@ -111,18 +131,43 @@ class LocalAiChat extends ControllerInstance {
         this.currentAiTextBuffer = '';
         this.isFirstToken = false;
         this.setStreaming();
+
+        // Immediate render for the first token to reduce perceived latency
+        this.currentAiTextBuffer += word;
+        this.renderMarkdown(this.currentAiMessageElement, this.currentAiTextBuffer);
+      } else {
+        // Accumulate text
+        this.currentAiTextBuffer += word;
+
+        // Instead of rendering on every single token, we use a timer to limit 
+        // updates to once every 50ms. This prevents CPU saturation on long responses.
+        if (!this.renderUpdateTimer) {
+          this.renderUpdateTimer = setTimeout(() => {
+            this.renderMarkdown(this.currentAiMessageElement, this.currentAiTextBuffer);
+            this.renderUpdateTimer = null;
+          }, 50);
+        }
       }
 
-      // Append the new token to the raw text buffer.
-      this.currentAiTextBuffer += word;
-
-      // Render the entire accumulated buffer as Markdown in the current AI message element.
-      this.renderMarkdown(this.currentAiMessageElement, this.currentAiTextBuffer);
-
-      // Reset the stream-end timeout. If no new token arrives within 1.5 seconds,
-      // we'll consider the stream finished.
+      // Reset the stream-end timeout.
       clearTimeout(this.streamEndTimeout);
       this.streamEndTimeout = setTimeout(() => {
+
+        // STREAM FINISHED:
+        // Ensure any pending throttled render is cancelled and force a final update
+        // to guarantee the complete text is displayed.
+
+        if (this.renderUpdateTimer) {
+          clearTimeout(this.renderUpdateTimer);
+          this.renderUpdateTimer = null;
+        }
+        this.renderMarkdown(this.currentAiMessageElement, this.currentAiTextBuffer);
+
+        // Remove the 'streaming' class to hide the cursor.
+        if (this.currentAiMessageElement) {
+          this.currentAiMessageElement.classList.remove('streaming');
+        }
+
         this.setReady();
         // Return focus to the input field for a better user experience.
         this.field('prompt_input').get().focus();
@@ -132,22 +177,22 @@ class LocalAiChat extends ControllerInstance {
     // Get the Error status field
     var statusError = this.boundModule.field('Status.Error');
     if (statusError) {
-        this.subscribe(statusError, (f) => {
-            this.checkError(f, true);
-        });
-        this.checkError(statusError);
+      this.subscribe(statusError, (f) => {
+        this.checkError(f, true);
+      });
+      this.checkError(statusError);
     }
   }
 
   // --- UI STATE MANAGEMENT METHODS ---
 
   enableInput() {
-    this.field('send_button').attr('disabled', null);
+    //    this.field('send_button').attr('disabled', null);
     this.field('prompt_input').attr('disabled', null);
   }
 
   disableInput() {
-    this.field('send_button').attr('disabled', true);
+    //    this.field('send_button').attr('disabled', true);
     this.field('prompt_input').attr('disabled', true);
   }
   setProcessing() {
@@ -161,23 +206,25 @@ class LocalAiChat extends ControllerInstance {
     this.field('arrow').hide();
     this.field('loading').hide();
     this.field('typing').show();
+    this.isStreaming = true;
   }
   setReady() {
+    this.isStreaming = false;
     this.enableInput();
     this.field('typing').hide();
     this.field('loading').hide();
     this.field('arrow').show();
   }
   checkError(errorField, focus = false) {
-      if (errorField.value !== '') {
-        this.addMessageToHistory('ai', (`[ERROR] ${errorField.value}`));
-        this.disableInput();
-      } else {
-        this.enableInput();
-        if (focus) {
-            this.field('prompt_input').get().focus();
-        }
+    if (errorField.value !== '') {
+      this.addMessageToHistory('ai', (`[ERROR] ${errorField.value}`));
+      this.disableInput();
+    } else {
+      this.enableInput();
+      if (focus) {
+        this.field('prompt_input').get().focus();
       }
+    }
   }
 
   /**
@@ -191,7 +238,9 @@ class LocalAiChat extends ControllerInstance {
       const html = this.markedLib.parse(markdownText);
       // Insert the resulting HTML into the '.text' child of the target element.
       targetElement.querySelector('.text').innerHTML = html;
-      this.scrollToBottom();
+
+      // Use 'true' to enable Smart Scroll (only scroll if user is already near bottom)
+      this.scrollToBottom(true);
     }
   }
 
@@ -209,7 +258,7 @@ class LocalAiChat extends ControllerInstance {
 
     if (!this.boundModule.isOnline) {
       utils.ui
-        .tooltip('LLM module is not available at the moment.', {duration: 2000});
+        .tooltip('LLM module is not available at the moment.', { duration: 2000 });
       return;
     }
 
@@ -221,14 +270,17 @@ class LocalAiChat extends ControllerInstance {
     this.addMessageToHistory('user', userInput);
 
     // Prepare for the AI's response:
-    // 1. Add a placeholder message to the UI for the AI. A cursor '▌' is used as a visual cue.
-    // 2. Initialize the text buffer and stream state.
-    // 3. Store a reference to the newly created AI message element for progressive updates.
-    this.currentAiTextBuffer = '▌';
+    // 1. Initialize buffer as empty (Cursor is now handled via CSS).
+    this.currentAiTextBuffer = '';
+
+    // 2. Create the message element.
     this.currentAiMessageElement = this.addMessageToHistory('ai', this.currentAiTextBuffer);
+
+    // 3. Add 'streaming' class to show the blinking cursor immediately.
+    this.currentAiMessageElement.classList.add('streaming');
+
     this.isFirstToken = true;
 
-    // Trigger the 'Process' control on the bound module, passing the user's input.
     this.boundModule.control('Process', userInput);
   }
 
@@ -246,7 +298,7 @@ class LocalAiChat extends ControllerInstance {
     messageContainer.className = `message ${author}`;
 
     const authorSpan = document.createElement('span');
-    authorSpan.className = 'author';
+    authorSpan.className = 'author label';
     authorSpan.textContent = (author === 'ai' ? 'AI Genie' : 'Tu');
 
     const textDiv = document.createElement('div');
@@ -255,7 +307,7 @@ class LocalAiChat extends ControllerInstance {
     // User messages are also rendered as Markdown for consistency (e.g., to show code snippets).
     if (author === 'user') {
       if (this.markedLib) {
-        const html = this.markedLib.parse(text);
+        const html = this.markedLib.parseInline(text.trim());
         textDiv.innerHTML = html;
       } else {
         textDiv.textContent = text;
@@ -288,14 +340,33 @@ class LocalAiChat extends ControllerInstance {
 
   /**
    * Scrolls the chat history container to the bottom.
+   * @param {boolean} smartScroll If true, checks if user is reading history before scrolling.
    */
-  scrollToBottom() {
+  scrollToBottom(smartScroll = false) {
     const chatHistoryElement = this.field('chat_history').get();
-    if (chatHistoryElement) {
-      setTimeout(() => {
-        chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
-      });
+    if (!chatHistoryElement) return;
+
+    if (smartScroll) {
+      // Threshold in pixels to define "near bottom". 
+      // Since we throttle updates, the new content chunk is usually small, 
+      // so 150px is a safe buffer to detect if user is following the stream.
+      const threshold = 150;
+
+      // Calculate distance from bottom *after* content update.
+      // Formula: Total Height - Scrolled Amount - Visible Height
+      const distanceFromBottom = chatHistoryElement.scrollHeight - chatHistoryElement.scrollTop - chatHistoryElement.clientHeight;
+
+      // If the distance is larger than the threshold, it means the user 
+      // has actively scrolled up to read previous messages. Do not disturb them.
+      if (distanceFromBottom > threshold) {
+        return;
+      }
     }
+
+    // Force scroll to bottom (default behavior or if user is near bottom)
+    setTimeout(() => {
+      chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
+    });
   }
 
   /**
@@ -304,9 +375,6 @@ class LocalAiChat extends ControllerInstance {
   translateUI() {
     this.translate('$ai_chat.title').subscribe((tr) => {
       this.model().title = tr;
-    });
-    this.translate('$ai_chat.intro').subscribe((tr) => {
-      this.model().intro = tr;
     });
     this.translate('$ai_chat.no_bound_module').subscribe((tr) => {
       this.textNoBoundModule = tr;
