@@ -329,6 +329,38 @@
     "575": {
       "Title": "Downloadmanager",
       "Description": "E robusten, asynchronen HTTP(S)-Dateitransferservice, deen iwwer eng dedizéiert API zougänglech ass. E geréiert de komplette Download-Liewenszyklus, ënnerstëtzt Paus/Weiderufnahme (mat Range-Header) an temporär Dateibehandlung (.part)."
+    },
+    "576": {
+      "Title": "Dateimanager",
+      "Description": "E sécheren, API-gedriwwene Service fir Dateien am Basisdateordner vum Programm ze liesen an ze schreiwen. En ënnerstëtzt souwuel réie binär Dateien wéi och UTF-8 Stringinhalt iwwer dedizéiert ReadText- a WriteText-Kommandoen."
+    },
+    "577": {
+      "Title": "Chat-Verlaf-Service",
+      "Description": "Zentraliséierten HomeGenie-Service fir d'Gestioun an d'Späichere vun AI-Chatprotokoller. Iwwer eng eenheetlech API (System.Utility/ChatHistory) bitt en Cloud- a lokalen LLMs e gemeinsame Kontext, automatiséiert JSON-Späicherung a Echtzäit-Historiqueverwaltung."
+    },
+    "578": {
+      "Title": "Kontextmotor",
+      "Description": "Zentraliséierte Service fir dynamesch KI-Promptgeneratioun. Et fëllt d'Virlagen mat der Lëscht vun kontrolléierbaren Apparater an dem Live-Systemstatus (Wieder, Energie, Sensoren), wat eng komplett Echtzäit-Hausbewosstsinn fir d'KI garantéiert."
+    },
+    "570": {
+      "Title": "Dateniwwerwaacher",
+      "Description": "Zentraliséierten Analyseservice fir historesch Modulstatistik. Et erméiglecht eng dynamesch Ofruffung vun Zäitreihendaten mat agebaute Signalveraarbechtungsfilteren (Simple Average, Moving Average, Savitzky-Golay) fir propper, geglättete Daten fir Diagrammer an Systemiwwerwaachung ze liwweren."
+    },
+    "571": {
+      "Title": "Energieverbrauchsstatistik",
+      "Description": "Iwwerwaacht, sammelt a protokolléiert Energieverbrauchsdaten (W/h) kontinuéierlech a reegelméissegen Intervaller. Implementéiert eng komplett API fir d'Duerchsichen an d'Ofrue vun historeschen Datensätz."
+    },
+    "572": {
+      "Title": "Beispill fir Statistike vun engem Kuchdiagramm",
+      "Description": "Beispill vun engem Diagrammprovider, deen als Kuchdiagramm mat stateschen Donnéeën duergestallt gëtt."
+    },
+    "573": {
+      "Title": "Wëchentlechen Energieverbrauch",
+      "Description": "Balkendiagramm, dat den duerchschnëttleche Watt/Stonn-Verbrauch fir all Dag vun der Woch (Méindes-Sonndes) weist. D'Donnéeë ginn iwwer all Stonne vum Dag aggregéiert a stamen aus der Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Stonnelaang Energieverbrauch",
+      "Description": "Balkendiagramm, dat den duerchschnëttleche Watt/Stonn-Verbrauch fir all Stonn vum Dag (00:00-23:00 Auer) weist. D'Donnéeë ginn iwwer déi gewielte Woch zesummegefaasst a stamen aus der Energy Use Statistics API."
     }
   }
 }

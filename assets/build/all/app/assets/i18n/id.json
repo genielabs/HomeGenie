@@ -459,5 +459,14 @@
   "western": "Barat",
   "my_list": "Daftar Saya",
   "top_rated": "Peringkat Teratas",
-  "continue_watching": "Terus Menonton"
+  "continue_watching": "Terus Menonton",
+  "download": "Unduh",
+  "downloading": "Sedang mengunduh...",
+  "resume": "Melanjutkan",
+  "pause": "Berhenti sebentar",
+  "thoughts": "Pikiran",
+  "api_calls": "Perintah API",
+  "show_code": "Tampilkan Kode",
+  "copy_api_call": "Salin string panggilan API",
+  "copy_full_api_url": "Salin URL API lengkap"
 }

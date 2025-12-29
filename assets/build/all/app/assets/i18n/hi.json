@@ -459,5 +459,14 @@
   "western": "वेस्टर्न",
   "my_list": "मेरी सूची",
   "top_rated": "टॉप रेटेड",
-  "continue_watching": "देखना जारी रखें"
+  "continue_watching": "देखना जारी रखें",
+  "download": "डाउनलोड करना",
+  "downloading": "डाउनलोड हो रहा है...",
+  "resume": "फिर शुरू करना",
+  "pause": "विराम",
+  "thoughts": "विचार",
+  "api_calls": "एपीआई कमांड",
+  "show_code": "कोड दिखाएँ",
+  "copy_api_call": "API कॉल स्ट्रिंग कॉपी करें",
+  "copy_full_api_url": "पूरा एपीआई यूआरएल कॉपी करें"
 }

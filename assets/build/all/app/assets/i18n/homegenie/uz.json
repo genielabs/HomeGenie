@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "HomeGenie-ga xush kelibsiz!",
   "welcome_subtitle": "Dasturlashtiriladigan avtomatlashtirish razvedkasi",
   "not_configured_yet": "Tizim hali sozlanmagan. Ushbu sozlash ustasi tizimingizni bir necha bosqichda ishga tushirishga yordam beradi.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Yuklab olish menejeri",
       "Description": "Maxsus API orqali kirish mumkin bo'lgan mustahkam, asinxron HTTP(S) fayl uzatish xizmati. U to'liq yuklab olish hayot aylanishini boshqaradi, pauza/davom ettirishni (Range sarlavhalaridan foydalangan holda) va vaqtinchalik fayllarni qayta ishlashni (.part) qo'llab-quvvatlaydi."
+    },
+    "576": {
+      "Title": "Fayl menejeri",
+      "Description": "Dasturning asosiy ma'lumotlar papkasidagi fayllarni o'qish va yozish uchun xavfsiz, API asosidagi xizmat. U maxsus ReadText va WriteText buyruqlari orqali xom ikkilik va UTF-8 satrli tarkibni qo'llab-quvvatlaydi."
+    },
+    "577": {
+      "Title": "Chat tarixi xizmati",
+      "Description": "Sun'iy intellekt chat jurnallarini boshqarish va saqlash uchun markazlashtirilgan HomeGenie xizmati. Birlashtirilgan API (System.Utility/ChatHistory) orqali u bulutli va mahalliy LLMlarni umumiy kontekst, avtomatlashtirilgan JSON xotirasi va real vaqt rejimida tarixni boshqarish bilan ta'minlaydi."
+    },
+    "578": {
+      "Title": "Kontekst mexanizmi",
+      "Description": "Dinamik AI buyruqlarini yaratish uchun markazlashtirilgan xizmat. U shablonlarni boshqariladigan qurilmalar ro'yxati va tizimning jonli holati (ob-havo, energiya, sensorlar) bilan to'ldiradi, bu esa AI uchun uyda real vaqt rejimida to'liq xabardorlikni ta'minlaydi."
+    },
+    "570": {
+      "Title": "Ma'lumotlar monitori",
+      "Description": "Tarixiy modul statistikasi uchun markazlashtirilgan tahlil xizmati. Bu grafiklar va tizim monitoringi uchun toza, silliqlangan ma'lumotlarni taqdim etish maqsadida o'rnatilgan signalni qayta ishlash filtrlari (Simple Average, Moving Average, Savitzky-Golay) yordamida vaqt qatorlari ma'lumotlarini dinamik ravishda olish imkonini beradi."
+    },
+    "571": {
+      "Title": "Energiyadan foydalanish statistikasi",
+      "Description": "Energiya sarfi ma'lumotlarini (Vt/soat) muntazam ravishda kuzatib boradi, umumlashtiradi va qayd qiladi. Tarixiy ma'lumotlar to'plamlarini ko'rib chiqish va so'rovlarni amalga oshirish uchun to'liq API-ni joriy qiladi."
+    },
+    "572": {
+      "Title": "Pirog diagrammasi statistikasi misoli",
+      "Description": "Statik ma'lumotlarga ega doira shaklidagi diagramma sifatida ko'rsatiladigan namunaviy diagramma provayderi."
+    },
+    "573": {
+      "Title": "Haftalik energiya sarfi",
+      "Description": "Haftaning har bir kuni (Dushanba-Yakshanba) uchun o'rtacha vatt/soat iste'molini ko'rsatuvchi ustunli diagramma. Ma'lumotlar kunning barcha soatlari bo'yicha umumlashtiriladi va Energiyadan foydalanish statistikasi API'sidan olinadi."
+    },
+    "574": {
+      "Title": "Soatlik energiya sarfi",
+      "Description": "Kunning har bir soati (00-23 soat) uchun o'rtacha vatt/soat iste'molini ko'rsatuvchi ustunli diagramma. Ma'lumotlar tanlangan hafta davomida to'planadi va Energiyadan foydalanish statistikasi API'sidan olinadi."
     }
   }
 }

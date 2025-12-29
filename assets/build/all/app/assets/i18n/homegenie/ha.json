@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "Barka da zuwa HomeGenie!",
   "welcome_subtitle": "Hannun hankali na atomatik na shirye-shirye",
   "not_configured_yet": "Ba a saita tsarin ba tukuna. Wannan saitin maye zai taimaka muku wajen haɓaka tsarin ku a cikin ƴan matakai.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Manajan Saukewa",
       "Description": "Sabis mai ƙarfi, mara daidaituwa na HTTP(S) sabis ne da ake samu ta hanyar API mai ƙwazo. Yana kula da cikakken zagayowar saukewa, yana tallafawa dakatarwa/ci gaba (ta amfani da kanun labarai na Range) da kuma sarrafa fayil na ɗan lokaci (.part)."
+    },
+    "576": {
+      "Title": "Mai sarrafa fayil",
+      "Description": "Sabis mai aminci wanda API ke jagoranta don karantawa da rubuta fayiloli a cikin babban fayil ɗin bayanai na shirin. Yana tallafawa abubuwan da ke cikin tsarin binary da UTF-8 ta hanyar umarnin ReadText da WriteText na musamman."
+    },
+    "577": {
+      "Title": "Sabis na Tarihin Hira",
+      "Description": "Sabis na HomeGenie mai tsakiya don sarrafawa da dagewa da rajistar tattaunawa ta AI. Ta hanyar API mai haɗin kai (System.Utility/ChatHistory), yana samar da girgije da LLM na gida tare da mahallin da aka raba, ajiyar JSON ta atomatik, da kuma sarrafa tarihin lokaci-lokaci."
+    },
+    "578": {
+      "Title": "Injin Yanayi",
+      "Description": "Sabis na tsakiya don samar da saurin AI mai ƙarfi. Yana cike samfura tare da jerin na'urori masu sarrafawa da yanayin tsarin kai tsaye (yanayi, kuzari, na'urori masu auna firikwensin), yana tabbatar da cikakken wayar da kan jama'a game da AI a gida a ainihin lokaci."
+    },
+    "570": {
+      "Title": "Mai Kula da Bayanai",
+      "Description": "Sabis na nazari mai zurfi don ƙididdigar tsarin tarihi. Yana ba da damar dawo da bayanai masu motsi na jerin lokaci tare da matattara masu sarrafa sigina da aka gina a ciki (Matsakaicin Matsakaici Mai Sauƙi, Matsakaicin Motsi, Savitzky-Golay) don samar da bayanai masu tsabta da santsi don jadawali da sa ido kan tsarin."
+    },
+    "571": {
+      "Title": "Kididdigar Amfani da Makamashi",
+      "Description": "Yana ci gaba da sa ido, tattarawa, da kuma yin rikodin bayanan amfani da makamashi (W/h) a lokaci-lokaci. Yana aiwatar da cikakken API don bincika bayanai na tarihi da kuma bincika su."
+    },
+    "572": {
+      "Title": "Misalin Taswirar Keke",
+      "Description": "Misalin mai samar da jadawalin da ke nuna jadawalin kek tare da bayanai marasa canzawa."
+    },
+    "573": {
+      "Title": "Amfani da Makamashi na Mako-mako",
+      "Description": "Jadawalin sanduna wanda ke nuna matsakaicin amfani da Watts/Awa na kowace rana ta mako (Litinin-Lahadi). Ana tattara bayanai a duk sa'o'in yini kuma an samo su daga API na Kididdigar Amfani da Makamashi."
+    },
+    "574": {
+      "Title": "Amfani da Makamashi a Sa'a",
+      "Description": "Taswirar sandar da ke nuna matsakaicin amfani da Watts/Hour na kowace awa ta yini (00h-23h). Ana tattara bayanai a cikin makon da aka zaɓa kuma an samo su daga API ɗin Kididdigar Amfani da Makamashi."
     }
   }
 }

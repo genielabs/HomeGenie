@@ -459,5 +459,14 @@
   "western": "Punent",
   "my_list": "Il-Lista Tiegħi",
   "top_rated": "L-Aqwa Klassifikazzjoni",
-  "continue_watching": "Kompli Ara"
+  "continue_watching": "Kompli Ara",
+  "download": "Niżżel",
+  "downloading": "Qed niżżel...",
+  "resume": "Sommarju",
+  "pause": "Pawża",
+  "thoughts": "Ħsibijiet",
+  "api_calls": "Kmandi tal-API",
+  "show_code": "Uri l-Kodiċi",
+  "copy_api_call": "Ikkopja s-sekwenza tas-sejħa tal-API",
+  "copy_full_api_url": "Ikkopja l-URL sħiħ tal-API"
 }

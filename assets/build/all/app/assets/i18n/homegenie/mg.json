@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "-------------------------------------------",
   "welcome_to_homegenie": "Tongasoa eto amin'ny HomeGenie!",
   "welcome_subtitle": "Ny faharanitan-tsaina automatique azo zahana",
   "not_configured_yet": "Tsy mbola voarindra ny rafitra. Ity wizard setup ity dia hanampy anao amin'ny fampandehanana ny rafitrao amin'ny dingana vitsivitsy.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Mpitantana ny fampidinana",
       "Description": "Serivisy famindrana rakitra HTTP(S) matanjaka sy tsy mifanindry azo idirana amin'ny alàlan'ny API natokana. Izy io no mitantana ny tsingerin'ny fampidinana manontolo, manohana ny fiatoana/famerenana (mampiasa lohatenin'ny Range) sy ny fikirakirana rakitra vonjimaika (.part)."
+    },
+    "576": {
+      "Title": "Mpitantana rakitra",
+      "Description": "Serivisy azo antoka sy tarihin'ny API ho an'ny famakiana sy fanoratana rakitra ao anatin'ny lahatahiry angon-drakitra fototra an'ny programa. Manohana ny votoatin'ny tady binary manta sy UTF-8 amin'ny alàlan'ny baiko ReadText sy WriteText natokana izy io."
+    },
+    "577": {
+      "Title": "Serivisy Tantaran'ny Resaka",
+      "Description": "Serivisy HomeGenie afovoany ho an'ny fitantanana sy fitazonana ny log chat AI. Amin'ny alàlan'ny API mitambatra (System.Utility/ChatHistory), dia manome LLM rahona sy eo an-toerana miaraka amin'ny context iraisana, fitahirizana JSON mandeha ho azy, ary fitantanana tantara amin'ny fotoana tena izy."
+    },
+    "578": {
+      "Title": "Motera Context",
+      "Description": "Serivisy foibe ho an'ny famoronana bitsika AI mavitrika. Mameno môdely misy lisitry ny fitaovana azo fehezina sy ny satan'ny rafitra mivantana (toetr'andro, angovo, sensor) izy io, izay miantoka ny fahatsiarovan-tena tanteraka ao an-trano ho an'ny AI."
+    },
+    "570": {
+      "Title": "Fanaraha-maso ny angon-drakitra",
+      "Description": "Serivisy famakafakana foibe ho an'ny antontan'isa momba ny môdely ara-tantara. Izy io dia ahafahana maka angon-drakitra mitohy amin'ny fotoana miaraka amin'ny sivana fanodinana famantarana tafiditra (Simple Average, Moving Average, Savitzky-Golay) mba hanomezana angon-drakitra madio sy voalamina ho an'ny tabilao sy ny fanaraha-maso ny rafitra."
+    },
+    "571": {
+      "Title": "Statistika momba ny fampiasana angovo",
+      "Description": "Manara-maso, manangona ary mirakitra tsy tapaka ny angon-drakitra momba ny fandaniana angovo (W/h) amin'ny elanelam-potoana tsy tapaka. Mampihatra API feno ho an'ny fijerena sy ny fikarohana angon-drakitra ara-tantara."
+    },
+    "572": {
+      "Title": "Ohatra amin'ny statistika amin'ny tabilao boribory",
+      "Description": "Ohatra mpamatsy tabilao izay aseho ho tabilao boribory misy angona tsy miovaova."
+    },
+    "573": {
+      "Title": "Fanjifana Angovo Isan-kerinandro",
+      "Description": "Tabilao bara mampiseho ny salan'isa fanjifana Watts/Ora isan'andro amin'ny herinandro (Alatsinainy-Alahady). Angonina mandritra ny ora rehetra amin'ny andro ny angona ary avy amin'ny Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Fanjifana Angovo Isan'ora",
+      "Description": "Tabilao bara mampiseho ny salan'isa fanjifana Watts/Ora isaky ny ora amin'ny andro (00h-23h). Angonina mandritra ny herinandro voafantina ny angona ary avy amin'ny Energy Use Statistics API."
     }
   }
 }

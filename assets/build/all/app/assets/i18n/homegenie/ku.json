@@ -328,7 +328,39 @@
     },
     "575": {
       "Title": "Gerînendeyê Dakêşanê",
-      "Description": "Xizmeteke veguhastina pelan a HTTP(S) ya asinkron û bihêz ku bi rêya API-yeke taybet ve tê gihîştin. Ew tevahiya çerxa jiyana dakêşanê birêve dibe, piştgirîya rawestandin/domandinê (bi karanîna sernivîsên Range) û birêvebirina pelan a demkî (.part) dike."
+      "Description": "Xizmeteke veguhastina pelan a HTTP(S) ya bihêz û asenkron ku bi rêya API-yeke taybet ve tê gihîştin. Ew tevahiya çerxa jiyana dakêşanê birêve dibe, piştgirîya rawestandin/domandinê (bi karanîna sernivîsên Range) û birêvebirina pelan a demkî (.part) dike."
+    },
+    "576": {
+      "Title": "Gerînendeyê Pelan",
+      "Description": "Xizmeteke ewle û bi API-yê ve girêdayî ye ji bo xwendin û nivîsandina pelan di nav peldanka daneyên bingehîn ên bernameyê de. Ew hem naveroka rêza duqatî ya xav û hem jî naveroka rêzika UTF-8 bi rêya fermanên ReadText û WriteText ên taybet piştgirî dike."
+    },
+    "577": {
+      "Title": "Xizmeta Dîroka Sohbetê",
+      "Description": "Xizmeta navendî ya HomeGenie ji bo birêvebirin û domandina tomarên sohbeta AI. Bi rêya API-yek yekgirtî (System.Utility/ChatHistory), ew ji bo LLM-yên ewr û herêmî çarçoveyek hevpar, hilanîna JSON-a otomatîk û rêveberiya dîroka rast-dem peyda dike."
+    },
+    "578": {
+      "Title": "Motora Kontekstê",
+      "Description": "Xizmeteke navendî ji bo çêkirina fermanên AI-ya dînamîk. Ew şablonan bi lîsteya cîhazên kontrolkirî û rewşa pergalê ya zindî (hewa, enerjî, sensor) tijî dike, û haydariya malê ya rast-dem ji bo AI-ê misoger dike."
+    },
+    "570": {
+      "Title": "Çavdêrê Daneyan",
+      "Description": "Xizmeta analîzê ya navendî ji bo statîstîkên modulên dîrokî. Ew bi fîlterên pêvajoya sînyalê yên çêkirî (Navînîya Sade, Navînîya Tevgerbar, Savitzky-Golay) vegerandina dînamîk a daneyên rêze-demê gengaz dike da ku daneyên paqij û nermkirî ji bo nexşeyan û çavdêriya pergalê peyda bike."
+    },
+    "571": {
+      "Title": "Statîstîkên Bikaranîna Enerjiyê",
+      "Description": "Daneyên xerckirina enerjiyê (W/h) bi berdewamî di navberên birêkûpêk de dişopîne, kom dike û tomar dike. API-yek tevahî ji bo gerandin û lêpirsîna setên daneyên dîrokî bicîh tîne."
+    },
+    "572": {
+      "Title": "Nimûneya Statîstîkên Nexşeya Pî",
+      "Description": "Nimûneya pêşkêşvanê nexşeyan ku wekî nexşeyek pî bi daneyên statîk render dike."
+    },
+    "573": {
+      "Title": "Xerckirina Enerjiyê ya Heftane",
+      "Description": "Nexşeya barî ku xerckirina navînî ya Watt/Saet ji bo her roja hefteyê (Duşem-Yekşem) nîşan dide. Daneyên li seranserê hemî demjimêrên rojê têne berhev kirin û ji API-ya Statîstîkên Bikaranîna Enerjiyê têne wergirtin."
+    },
+    "574": {
+      "Title": "Xerckirina Enerjiyê ya Saetî",
+      "Description": "Nexşeya barî ku xerckirina navînî ya Watt/Saet ji bo her saetek rojê (00h-23h) nîşan dide. Daneyên li ser hefteya bijartî têne berhev kirin û ji API-ya Statîstîkên Bikaranîna Enerjiyê têne wergirtin."
     }
   }
 }

@@ -329,6 +329,38 @@
     "575": {
       "Title": "Nedladdningshanteraren",
       "Description": "En robust, asynkron HTTP(S)-filöverföringstjänst som är tillgänglig via ett dedikerat API. Den hanterar hela nedladdningslivscykeln, med stöd för paus/återupptagning (med hjälp av Range-rubriker) och hantering av tillfälliga filer (.part)."
+    },
+    "576": {
+      "Title": "Filhanteraren",
+      "Description": "En säker, API-driven tjänst för att läsa och skriva filer i programmets basmapp för datamappar. Den stöder både rå binärfil och UTF-8-stränginnehåll via dedikerade ReadText- och WriteText-kommandon."
+    },
+    "577": {
+      "Title": "Chatthistoriktjänst",
+      "Description": "Centraliserad HomeGenie-tjänst för hantering och bevarande av AI-chattloggar. Genom ett enhetligt API (System.Utility/ChatHistory) förser den molnbaserade och lokala LLM:er med en delad kontext, automatiserad JSON-lagring och historikhantering i realtid."
+    },
+    "578": {
+      "Title": "Kontextmotor",
+      "Description": "Centraliserad tjänst för dynamisk generering av AI-meddelanden. Den fyller i mallar med en lista över styrbara enheter och systemstatus i realtid (väder, energi, sensorer), vilket säkerställer total realtidsmedvetenhet om hemmet för AI:n."
+    },
+    "570": {
+      "Title": "Dataövervakare",
+      "Description": "Centraliserad analystjänst för historisk modulstatistik. Den möjliggör dynamisk hämtning av tidsseriedata med inbyggda signalbehandlingsfilter (Enkelt medelvärde, Glidande medelvärde, Savitzky-Golay) för att ge rena, utjämnade data för diagram och systemövervakning."
+    },
+    "571": {
+      "Title": "Statistik över energianvändning",
+      "Description": "Övervakar, aggregerar och loggar kontinuerligt energiförbrukningsdata (W/h) med jämna mellanrum. Implementerar ett komplett API för att bläddra bland och fråga efter historiska datamängder."
+    },
+    "572": {
+      "Title": "Exempel på statistik för cirkeldiagram",
+      "Description": "Exempel på diagramleverantör som renderas som ett cirkeldiagram med statiska data."
+    },
+    "573": {
+      "Title": "Veckovis energiförbrukning",
+      "Description": "Stapeldiagram som visar den genomsnittliga watt/timme-förbrukningen för varje veckodag (mån–sön). Data aggregeras över alla dygnets timmar och hämtas från API:et för energianvändningsstatistik."
+    },
+    "574": {
+      "Title": "Timförbrukning av energi",
+      "Description": "Stapeldiagram som visar den genomsnittliga watt/timme-förbrukningen för varje timme på dagen (00:00–23:00). Data aggregeras under den valda veckan och hämtas från API:et för energianvändningsstatistik."
     }
   }
 }

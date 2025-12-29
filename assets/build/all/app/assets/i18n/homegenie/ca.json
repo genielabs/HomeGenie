@@ -329,6 +329,38 @@
     "575": {
       "Title": "Gestor de descàrregues",
       "Description": "Un servei robust i asíncron de transferència de fitxers HTTP(S) accessible a través d'una API dedicada. Gestiona tot el cicle de vida de la descàrrega, permetent la pausa/represa (mitjançant capçaleres de rang) i la gestió de fitxers temporals (.part)."
+    },
+    "576": {
+      "Title": "Gestor de fitxers",
+      "Description": "Un servei segur basat en API per llegir i escriure fitxers dins de la carpeta de dades base del programa. Admet tant contingut binari en brut com cadenes UTF-8 mitjançant ordres dedicades ReadText i WriteText."
+    },
+    "577": {
+      "Title": "Servei d'historial de xats",
+      "Description": "Servei HomeGenie centralitzat per a la gestió i la persistència de registres de xat d'IA. A través d'una API unificada (System.Utility/ChatHistory), proporciona als LLM locals i al núvol un context compartit, emmagatzematge JSON automatitzat i gestió de l'historial en temps real."
+    },
+    "578": {
+      "Title": "Motor de context",
+      "Description": "Servei centralitzat per a la generació dinàmica de peticions d'IA. Omple les plantilles amb la llista de dispositius controlables i l'estat del sistema en directe (temps, energia, sensors), garantint un coneixement total de la llar en temps real per a la IA."
+    },
+    "570": {
+      "Title": "Monitor de dades",
+      "Description": "Servei d'anàlisi centralitzat per a estadístiques històriques de mòduls. Permet la recuperació dinàmica de dades de sèries temporals amb filtres de processament de senyals integrats (mitjana simple, mitjana mòbil, Savitzky-Golay) per proporcionar dades netes i suavitzades per a gràfics i monitorització del sistema."
+    },
+    "571": {
+      "Title": "Estadístiques de consum d'energia",
+      "Description": "Supervisa, agrega i registra contínuament les dades de consum d'energia (W/h) a intervals regulars. Implementa una API completa per navegar i consultar conjunts de dades històriques."
+    },
+    "572": {
+      "Title": "Exemple d'estadístiques de gràfic circular",
+      "Description": "Exemple de proveïdor de gràfics que es renderitza com a gràfic circular amb dades estàtiques."
+    },
+    "573": {
+      "Title": "Consum d'energia setmanal",
+      "Description": "Gràfic de barres que mostra el consum mitjà de watts/hora per a cada dia de la setmana (de dilluns a diumenge). Les dades s'agreguen de totes les hores del dia i provenen de l'API d'estadístiques d'ús energètic."
+    },
+    "574": {
+      "Title": "Consum d'energia per hora",
+      "Description": "Gràfic de barres que mostra el consum mitjà de watts/hora per a cada hora del dia (00h-23h). Les dades s'agreguen durant la setmana seleccionada i provenen de l'API d'estadístiques d'ús energètic."
     }
   }
 }

@@ -329,6 +329,38 @@
     "575": {
       "Title": "Pengurus Muat Turun",
       "Description": "Perkhidmatan pemindahan fail HTTP(S) yang mantap dan tidak segerak yang boleh diakses melalui API khusus. Ia mengurus kitaran hayat muat turun penuh, menyokong jeda/sambung semula (menggunakan pengepala Julat) dan pengendalian fail sementara (.part)."
+    },
+    "576": {
+      "Title": "Pengurus Fail",
+      "Description": "Perkhidmatan yang selamat dan dipacu API untuk membaca dan menulis fail dalam folder data asas program. Ia menyokong kandungan rentetan binari mentah dan UTF-8 melalui arahan ReadText dan WriteText khusus."
+    },
+    "577": {
+      "Title": "Perkhidmatan Sejarah Sembang",
+      "Description": "Perkhidmatan HomeGenie berpusat untuk mengurus dan mengekalkan log sembang AI. Melalui API bersatu (System.Utility/ChatHistory), ia menyediakan LLM awan dan tempatan dengan konteks kongsi, storan JSON automatik dan pengurusan sejarah masa nyata."
+    },
+    "578": {
+      "Title": "Enjin Konteks",
+      "Description": "Perkhidmatan berpusat untuk penjanaan gesaan AI dinamik. Ia mengisi templat dengan senarai peranti yang boleh dikawal dan status sistem langsung (cuaca, tenaga, sensor), memastikan kesedaran rumah masa nyata sepenuhnya untuk AI."
+    },
+    "570": {
+      "Title": "Pemantau Data",
+      "Description": "Perkhidmatan analisis berpusat untuk statistik modul sejarah. Ia membolehkan pengambilan data siri masa secara dinamik dengan penapis pemprosesan isyarat terbina dalam (Purata Ringkas, Purata Bergerak, Savitzky-Golay) untuk menyediakan data yang bersih dan terlicin untuk carta dan pemantauan sistem."
+    },
+    "571": {
+      "Title": "Statistik Penggunaan Tenaga",
+      "Description": "Memantau, mengagregat dan merekodkan data penggunaan tenaga (W/j) secara berterusan pada selang masa yang tetap. Melaksanakan API penuh untuk menyemak imbas dan membuat pertanyaan tentang set data sejarah."
+    },
+    "572": {
+      "Title": "Contoh Statistik Carta Pai",
+      "Description": "Contoh penyedia carta yang dipaparkan sebagai carta pai dengan data statik."
+    },
+    "573": {
+      "Title": "Penggunaan Tenaga Mingguan",
+      "Description": "Carta bar yang memaparkan purata penggunaan Watt/Jam untuk setiap hari dalam seminggu (Isnin-Ahad). Data diagregatkan merentasi semua jam dalam sehari dan diperoleh daripada API Statistik Penggunaan Tenaga."
+    },
+    "574": {
+      "Title": "Penggunaan Tenaga Setiap Jam",
+      "Description": "Carta bar memaparkan purata penggunaan Watt/Jam untuk setiap jam dalam sehari (00h-23h). Data diagregatkan sepanjang minggu yang dipilih dan diperoleh daripada API Statistik Penggunaan Tenaga."
     }
   }
 }

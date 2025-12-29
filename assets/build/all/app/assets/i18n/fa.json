@@ -459,5 +459,14 @@
   "western": "غربی",
   "my_list": "فهرست من",
   "top_rated": "دارای بالاترین امتیاز",
-  "continue_watching": "ادامه تماشا"
+  "continue_watching": "ادامه تماشا",
+  "download": "دانلود",
+  "downloading": "در حال دانلود...",
+  "resume": "رزومه",
+  "pause": "مکث",
+  "thoughts": "افکار",
+  "api_calls": "دستورات API",
+  "show_code": "نمایش کد",
+  "copy_api_call": "رشته فراخوانی API را کپی کنید",
+  "copy_full_api_url": "کپی کردن آدرس کامل API"
 }

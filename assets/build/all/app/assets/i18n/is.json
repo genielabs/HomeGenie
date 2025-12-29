@@ -459,5 +459,14 @@
   "western": "Vesturlanda",
   "my_list": "Listinn minn",
   "top_rated": "Hæst metið",
-  "continue_watching": "Halda áfram að horfa"
+  "continue_watching": "Halda áfram að horfa",
+  "download": "Sækja",
+  "downloading": "Sæki...",
+  "resume": "Ferilskrá",
+  "pause": "Gera hlé",
+  "thoughts": "Hugsanir",
+  "api_calls": "API skipanir",
+  "show_code": "Sýna kóða",
+  "copy_api_call": "Afrita API-kallstreng",
+  "copy_full_api_url": "Afrita alla vefslóð forritaskila"
 }

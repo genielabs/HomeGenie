@@ -459,5 +459,14 @@
   "western": "Västra",
   "my_list": "Min lista",
   "top_rated": "Högst betygsatt",
-  "continue_watching": "Fortsätt titta"
+  "continue_watching": "Fortsätt titta",
+  "download": "Ladda ner",
+  "downloading": "Laddar ner...",
+  "resume": "Resume",
+  "pause": "Paus",
+  "thoughts": "Tankar",
+  "api_calls": "API-kommandon",
+  "show_code": "Visa kod",
+  "copy_api_call": "Kopiera API-anropssträng",
+  "copy_full_api_url": "Kopiera fullständig API-URL"
 }

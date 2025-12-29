@@ -459,5 +459,14 @@
   "western": "மேற்கத்திய",
   "my_list": "எனது பட்டியல்",
   "top_rated": "சிறந்த மதிப்பீடு பெற்றது",
-  "continue_watching": "தொடர்ந்து பாருங்கள்"
+  "continue_watching": "தொடர்ந்து பாருங்கள்",
+  "download": "பதிவிறக்கவும்",
+  "downloading": "பதிவிறக்குகிறது...",
+  "resume": "சுருக்கம்",
+  "pause": "இடைநிறுத்து",
+  "thoughts": "எண்ணங்கள்",
+  "api_calls": "API கட்டளைகள்",
+  "show_code": "குறியீட்டைக் காட்டு",
+  "copy_api_call": "API அழைப்பு சரத்தை நகலெடு",
+  "copy_full_api_url": "முழு API URL ஐ நகலெடுக்கவும்"
 }

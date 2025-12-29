@@ -459,5 +459,14 @@
   "western": "Заходні",
   "my_list": "Мой спіс",
   "top_rated": "Найлепшыя",
-  "continue_watching": "Працягвайце глядзець"
+  "continue_watching": "Працягвайце глядзець",
+  "download": "Спампаваць",
+  "downloading": "Спампоўваецца...",
+  "resume": "Рэзюмэ",
+  "pause": "Паўза",
+  "thoughts": "Думкі",
+  "api_calls": "Каманды API",
+  "show_code": "Паказаць код",
+  "copy_api_call": "Скапіяваць радок выкліку API",
+  "copy_full_api_url": "Скапіяваць поўны URL-адрас API"
 }

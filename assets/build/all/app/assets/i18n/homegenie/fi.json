@@ -329,6 +329,38 @@
     "575": {
       "Title": "Latausten hallinta",
       "Description": "Vankka, asynkroninen HTTP(S)-tiedostonsiirtopalvelu, johon pääsee käsiksi erillisen API:n kautta. Se hallitsee koko latauksen elinkaarta tukemalla taukoa/jatkamista (käyttäen Range-otsikoita) ja väliaikaisten tiedostojen käsittelyä (.part)."
+    },
+    "576": {
+      "Title": "Tiedostonhallinta",
+      "Description": "Suojattu, API-pohjainen palvelu tiedostojen lukemiseen ja kirjoittamiseen ohjelman perustietokansiossa. Se tukee sekä raakaa binäärimuotoa että UTF-8-merkkijonomuotoista sisältöä erillisten ReadText- ja WriteText-komentojen kautta."
+    },
+    "577": {
+      "Title": "Keskusteluhistoriapalvelu",
+      "Description": "Keskitetty HomeGenie-palvelu tekoälykeskustelulokien hallintaan ja säilyttämiseen. Yhtenäisen API:n (System.Utility/ChatHistory) kautta se tarjoaa pilvi- ja paikallisille LLM-järjestelmille jaetun kontekstin, automatisoidun JSON-tallennuksen ja reaaliaikaisen historianhallinnan."
+    },
+    "578": {
+      "Title": "Kontekstimoottori",
+      "Description": "Keskitetty palvelu dynaamiseen tekoälykehotteiden luontiin. Se täyttää mallipohjat ohjattavien laitteiden luettelolla ja reaaliaikaisella järjestelmän tilalla (sää, energia, anturit) varmistaen tekoälyn täyden reaaliaikaisen kodin tilanteen."
+    },
+    "570": {
+      "Title": "Datamonitori",
+      "Description": "Keskitetty analyysipalvelu historiallisille moduulitilastoille. Se mahdollistaa aikasarjadatan dynaamisen haun sisäänrakennetuilla signaalinkäsittelysuodattimilla (yksinkertainen keskiarvo, liukuva keskiarvo, Savitzky-Golay), mikä tarjoaa puhdasta ja tasoitettua dataa kaavioihin ja järjestelmän valvontaan."
+    },
+    "571": {
+      "Title": "Energiankulutustilastot",
+      "Description": "Valvoo, kokoaa ja kirjaa energiankulutustietoja (W/h) jatkuvasti säännöllisin väliajoin. Toteuttaa täyden API:n historiallisten datajoukkojen selaamiseen ja kyselyyn."
+    },
+    "572": {
+      "Title": "Esimerkki ympyrädiagrammista",
+      "Description": "Esimerkki kaavion tarjoajasta, joka renderöityy ympyräkaaviona staattisilla tiedoilla."
+    },
+    "573": {
+      "Title": "Viikoittainen energiankulutus",
+      "Description": "Pylväsdiagrammi, joka näyttää keskimääräisen wattituntikulutuksen viikon jokaisena päivänä (ma-su). Tiedot on koottu kaikilta vuorokauden tunneilta ja ne ovat peräisin Energy Use Statistics API:sta."
+    },
+    "574": {
+      "Title": "Tuntikohtainen energiankulutus",
+      "Description": "Pylväsdiagrammi, joka näyttää keskimääräisen wattituntikulutuksen jokaiselle päivän tunnille (00–23). Tiedot on koottu valitulta viikolta ja ne ovat peräisin Energy Use Statistics API:sta."
     }
   }
 }

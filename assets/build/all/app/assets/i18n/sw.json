@@ -459,5 +459,14 @@
   "western": "Magharibi",
   "my_list": "Orodha Yangu",
   "top_rated": "Iliyokadiriwa Juu",
-  "continue_watching": "Endelea Kutazama"
+  "continue_watching": "Endelea Kutazama",
+  "download": "Pakua",
+  "downloading": "Inapakua...",
+  "resume": "Wasifu",
+  "pause": "Sitisha",
+  "thoughts": "Mawazo",
+  "api_calls": "Amri za API",
+  "show_code": "Onyesha Msimbo",
+  "copy_api_call": "Nakili mfuatano wa simu ya API",
+  "copy_full_api_url": "Nakili URL kamili ya API"
 }

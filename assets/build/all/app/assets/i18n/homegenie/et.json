@@ -329,6 +329,38 @@
     "575": {
       "Title": "Allalaadimishaldur",
       "Description": "Töökindel ja asünkroonne HTTP(S)-failiedastusteenus, millele pääseb ligi spetsiaalse API kaudu. See haldab kogu allalaadimise elutsüklit, toetades peatamist/jätkamist (kasutades vahemiku päiseid) ja ajutiste failide haldamist (.part)."
+    },
+    "576": {
+      "Title": "Failihaldur",
+      "Description": "Turvaline API-põhine teenus programmi baasandmete kausta failide lugemiseks ja kirjutamiseks. See toetab nii toorbinaarset kui ka UTF-8 stringisisu spetsiaalsete ReadText ja WriteText käskude kaudu."
+    },
+    "577": {
+      "Title": "Vestlusajaloo teenus",
+      "Description": "Tsentraliseeritud HomeGenie teenus tehisintellekti vestluslogide haldamiseks ja säilitamiseks. Ühtse API (System.Utility/ChatHistory) kaudu pakub see pilve- ja kohalikele LLM-idele jagatud konteksti, automatiseeritud JSON-salvestusruumi ja reaalajas ajaloohaldust."
+    },
+    "578": {
+      "Title": "Kontekstimootor",
+      "Description": "Tsentraliseeritud teenus dünaamiliste tehisintellekti käskude genereerimiseks. See täidab mallid juhitavate seadmete loendi ja reaalajas süsteemi olekuga (ilm, energia, andurid), tagades tehisintellektile täieliku reaalajas koduse teadlikkuse."
+    },
+    "570": {
+      "Title": "Andmemonitor",
+      "Description": "Tsentraliseeritud analüüsiteenus ajaloolise moodulstatistika jaoks. See võimaldab aegridade andmete dünaamilist hankimist sisseehitatud signaalitöötlusfiltrite (lihtne keskmine, libisev keskmine, Savitzky-Golay) abil, et pakkuda puhtaid ja silutud andmeid diagrammide ja süsteemi jälgimise jaoks."
+    },
+    "571": {
+      "Title": "Energiatarbimise statistika",
+      "Description": "Jälgib, koondab ja logib pidevalt energiatarbimise andmeid (W/h) regulaarsete intervallidega. Rakendab täielikku API-t ajalooliste andmekogumite sirvimiseks ja päringute tegemiseks."
+    },
+    "572": {
+      "Title": "Sektordiagrammi statistika näide",
+      "Description": "Näidisdiagrammi pakkujast, mis renderdab staatiliste andmetega sektordiagrammina."
+    },
+    "573": {
+      "Title": "Nädala energiatarve",
+      "Description": "Tulpdiagramm, mis kuvab iga nädalapäeva (E-P) keskmist vattide/tunni tarbimist. Andmed koondatakse kõigi päevatundide kohta ja pärinevad energiakasutuse statistika API-st."
+    },
+    "574": {
+      "Title": "Tunnine energiatarve",
+      "Description": "Tulpdiagramm, mis kuvab keskmist vattide/tunni tarbimist iga päeva tunni kohta (00–23). Andmed koondatakse valitud nädala kohta ja pärinevad energiakasutuse statistika API-st."
     }
   }
 }

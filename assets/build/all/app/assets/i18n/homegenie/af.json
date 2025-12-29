@@ -329,6 +329,38 @@
     "575": {
       "Title": "Aflaaibestuurder",
       "Description": "'n Robuuste, asynchrone HTTP(S)-lêeroordragdiens wat toeganklik is via 'n toegewyde API. Dit bestuur die volle aflaai-lewensiklus, ondersteun pouse/hervatting (met behulp van Range-opskrifte) en tydelike lêerhantering (.part)."
+    },
+    "576": {
+      "Title": "Lêerbestuurder",
+      "Description": "'n Veilige, API-gedrewe diens vir die lees en skryf van lêers binne die program se basisdata-lêergids. Dit ondersteun beide rou binêre en UTF-8-stringinhoud via toegewyde ReadText- en WriteText-opdragte."
+    },
+    "577": {
+      "Title": "Kletsgeskiedenisdiens",
+      "Description": "Gesentraliseerde HomeGenie-diens vir die bestuur en bewaring van KI-kletslogboeke. Deur 'n verenigde API (System.Utility/ChatHistory) bied dit wolk- en plaaslike LLM's 'n gedeelde konteks, outomatiese JSON-berging en intydse geskiedenisbestuur."
+    },
+    "578": {
+      "Title": "Konteks-enjin",
+      "Description": "Gesentraliseerde diens vir dinamiese KI-aanwysingsgenerering. Dit vul sjablone met die lys van beheerbare toestelle en die regstreekse stelselstatus (weer, energie, sensors), wat totale intydse huisbewustheid vir die KI verseker."
+    },
+    "570": {
+      "Title": "Datamonitor",
+      "Description": "Gesentraliseerde ontledingsdiens vir historiese modulestatistieke. Dit maak dinamiese herwinning van tydreeksdata moontlik met ingeboude seinverwerkingsfilters (Eenvoudige Gemiddelde, Bewegende Gemiddelde, Savitzky-Golay) om skoon, gladgemaakte data vir grafieke en stelselmonitering te verskaf."
+    },
+    "571": {
+      "Title": "Energieverbruikstatistieke",
+      "Description": "Monitor, versamel en teken energieverbruiksdata (W/h) voortdurend met gereelde tussenposes aan. Implementeer 'n volledige API vir die blaai en navraag van historiese datastelle."
+    },
+    "572": {
+      "Title": "Voorbeeld van 'n sirkelgrafiekstatistiek",
+      "Description": "Voorbeeld van 'n grafiekverskaffer wat as 'n sirkelgrafiek met statiese data weergee."
+    },
+    "573": {
+      "Title": "Weeklikse Energieverbruik",
+      "Description": "Staafgrafiek wat die gemiddelde Watt/Uur-verbruik vir elke dag van die week (Maandag-Sondag) vertoon. Data word oor alle ure van die dag saamgevoeg en is verkry vanaf die Energieverbruikstatistieke-API."
+    },
+    "574": {
+      "Title": "Uurlikse Energieverbruik",
+      "Description": "Staafgrafiek wat die gemiddelde Watt/Uur-verbruik vir elke uur van die dag (00:00-23:00) vertoon. Data word oor die gekose week saamgevoeg en is verkry vanaf die Energieverbruikstatistieke-API."
     }
   }
 }

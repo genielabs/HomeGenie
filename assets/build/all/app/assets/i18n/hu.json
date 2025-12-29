@@ -459,5 +459,14 @@
   "western": "Nyugati",
   "my_list": "Saját listám",
   "top_rated": "Legjobbra értékelt",
-  "continue_watching": "Folytassa a nézést"
+  "continue_watching": "Folytassa a nézést",
+  "download": "Letöltés",
+  "downloading": "Letöltés...",
+  "resume": "Önéletrajz",
+  "pause": "Szünet",
+  "thoughts": "Gondolatok",
+  "api_calls": "API-parancsok",
+  "show_code": "Kód megjelenítése",
+  "copy_api_call": "API-hívási karakterlánc másolása",
+  "copy_full_api_url": "Teljes API URL másolása"
 }

@@ -329,6 +329,38 @@
     "575": {
       "Title": "Pengelola Unduhan",
       "Description": "Layanan transfer file HTTP(S) asinkron yang andal dan dapat diakses melalui API khusus. Layanan ini mengelola seluruh siklus unduhan, mendukung jeda/lanjutkan (menggunakan header Range) dan penanganan file sementara (.part)."
+    },
+    "576": {
+      "Title": "Pengelola File",
+      "Description": "Layanan berbasis API yang aman untuk membaca dan menulis file di dalam folder data dasar program. Layanan ini mendukung konten biner mentah dan string UTF-8 melalui perintah ReadText dan WriteText khusus."
+    },
+    "577": {
+      "Title": "Layanan Riwayat Obrolan",
+      "Description": "Layanan HomeGenie terpusat untuk mengelola dan menyimpan log obrolan AI. Melalui API terpadu (System.Utility/ChatHistory), layanan ini menyediakan konteks bersama bagi LLM (Learning Language Manager) berbasis cloud dan lokal, penyimpanan JSON otomatis, dan manajemen riwayat secara real-time."
+    },
+    "578": {
+      "Title": "Mesin Konteks",
+      "Description": "Layanan terpusat untuk pembuatan perintah AI dinamis. Layanan ini mengisi templat dengan daftar perangkat yang dapat dikontrol dan status sistem secara langsung (cuaca, energi, sensor), memastikan kesadaran rumah secara real-time bagi AI."
+    },
+    "570": {
+      "Title": "Monitor Data",
+      "Description": "Layanan analisis terpusat untuk statistik modul historis. Layanan ini memungkinkan pengambilan data deret waktu secara dinamis dengan filter pemrosesan sinyal bawaan (Rata-rata Sederhana, Rata-rata Bergerak, Savitzky-Golay) untuk menyediakan data yang bersih dan halus untuk grafik dan pemantauan sistem."
+    },
+    "571": {
+      "Title": "Statistik Penggunaan Energi",
+      "Description": "Memantau, mengumpulkan, dan mencatat data konsumsi energi (W/jam) secara terus menerus pada interval reguler. Mengimplementasikan API lengkap untuk menelusuri dan menanyakan kumpulan data historis."
+    },
+    "572": {
+      "Title": "Contoh Statistik Diagram Lingkaran",
+      "Description": "Contoh penyedia grafik yang menampilkan grafik sebagai diagram lingkaran dengan data statis."
+    },
+    "573": {
+      "Title": "Konsumsi Energi Mingguan",
+      "Description": "Grafik batang yang menampilkan konsumsi Watt/Jam rata-rata untuk setiap hari dalam seminggu (Senin-Minggu). Data dikumpulkan di seluruh jam dalam sehari dan bersumber dari API Statistik Penggunaan Energi."
+    },
+    "574": {
+      "Title": "Konsumsi Energi Per Jam",
+      "Description": "Grafik batang yang menampilkan konsumsi Watt/Jam rata-rata untuk setiap jam dalam sehari (00h-23h). Data dikumpulkan selama minggu yang dipilih dan bersumber dari API Statistik Penggunaan Energi."
     }
   }
 }

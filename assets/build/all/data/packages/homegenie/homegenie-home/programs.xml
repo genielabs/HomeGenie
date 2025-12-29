@@ -176,6 +176,23 @@ var operatingDevices = energyMonitor.Parameter("EnergyMonitor.OperatingDevices")
 var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
 var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches");
 
+var dataFilePath = Path.Combine(Data.GetFolder(), $"energy_monitor{energyMonitor.Instance.Address}_history.bin");
+try
+{
+  using (BinaryReader reader = new BinaryReader(File.Open(dataFilePath, FileMode.Open))) {
+    wattCounter.SetData(reader.ReadDouble());
+    wattCounterToday.SetData(reader.ReadDouble());
+    int count = reader.ReadInt32();
+    for (int i = 0; i &lt; count; i++) {
+        wattLoad.Statistics.History.Add(new ValueStatistics.StatValue(reader.ReadDouble(), DateTime.FromBinary(reader.ReadInt64())));
+    }
+  }
+}
+catch (Exception e)
+{
+  Program.Log.Warn(e);
+}
+
 // initialize
 if (energyMonitor.Instance.Name == "") {
   energyMonitor.Instance.Name = "Energy Monitor";
@@ -212,19 +229,30 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   var now = DateTime.UtcNow;
   bool updateCounter = (DateTime.Now - counterUpdateTimestamp).TotalSeconds &gt;= counterUpdateInterval;
   monitorModules.Each((mod) =&gt; {
-    if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0 || mod.Parameter("Status.Level").DecimalValue &gt; 0)
+    var wattsParam = mod.Parameter("Meter.Watts");
+    if (wattsParam.DecimalValue &gt; 0 || mod.Parameter("Status.Level").DecimalValue &gt; 0)
     {
-      if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; mod.Parameter("Meter.Watts").IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
+      if (mod.HasFeature("EnergyManagement.MonitorWatts") &amp;&amp; wattsParam.IdleTime &lt; 300) // drop value if not updated in the last 5 minutes
       {
+        double w = wattsParam.DecimalValue;
         if (updateCounter) {
-          double defaultValue = mod.Parameter("Meter.Watts").Statistics.Current.Value;
-          var avgWatt = mod.Parameter("Meter.Watts").Statistics.History
-            .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; counterUpdateInterval)
-            .Select(sv =&gt; sv.Value)
-            .DefaultIfEmpty(defaultValue)
-            .Average();
-          totalLoad += avgWatt;
-        } else if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0) {
+          try 
+          {
+            double defaultValue = wattsParam.Statistics.Current.Value;
+            double avgWatt = defaultValue;
+            avgWatt = wattsParam.Statistics.History
+              .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; sv.Value &lt;= WATT_VALUE_ERROR_MAX &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; counterUpdateInterval)
+              .Select(sv =&gt; sv.Value)
+              .DefaultIfEmpty(defaultValue)
+              .Average();
+            totalLoad += avgWatt;
+          }
+          catch (Exception e)
+          {
+            Program.Log.Warn(e);
+            //Program.Notify(e.Message);
+          }
+        } else if (w &gt; 0 &amp;&amp; w &lt;= WATT_VALUE_ERROR_MAX) {
           totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
         }
       }
@@ -263,6 +291,19 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
   {
     wattLoad.Value = load;
     emit(wattLoad);
+    if (updateCounter)
+    {
+      // persist watt load data
+      using (BinaryWriter writer = new BinaryWriter(File.Open(dataFilePath, FileMode.Create))) {
+        writer.Write(wattCounter.GetData&lt;double&gt;());
+        writer.Write(wattCounterToday.GetData&lt;double&gt;());
+        writer.Write(wattLoad.Statistics.History.Count);
+        foreach (var item in wattLoad.Statistics.History) {
+          writer.Write(item.Value);
+          writer.Write(item.Timestamp.ToBinary());
+        }
+      }
+    }
   }
   if (operatingDevices.DecimalValue != devcount)
   {
@@ -319,17 +360,18 @@ while (Program.IsRunning)
   Pause(5);
 }
 </ScriptSource>
-    <ScriptContext />
-    <ScriptErrors />
+    <ScriptContext>const int WATT_VALUE_ERROR_MAX =  7000;
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>energy-monitor</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>A1306295F508BE98DDF77F671BB495AE</Checksum>
+      <Checksum>5176CD02B6CE296A91CC9B1B8B980250</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -486,7 +528,7 @@ Api.Handle("Media.IpCamera/", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>const int GENERIC_IP_CAMERA_COUNT = 5;</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

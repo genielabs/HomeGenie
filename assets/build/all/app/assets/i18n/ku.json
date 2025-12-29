@@ -459,5 +459,14 @@
   "western": "Rajava",
   "my_list": "Lîsteya Min",
   "top_rated": "Bilindtirîn Nirxandin",
-  "continue_watching": "Berdewamiya Temaşekirinê"
+  "continue_watching": "Berdewamiya Temaşekirinê",
+  "download": "Daxistin",
+  "downloading": "Daxistin...",
+  "resume": "Dîsa vekirin",
+  "pause": "Mizdan",
+  "thoughts": "Raman",
+  "api_calls": "Fermanên API-ê",
+  "show_code": "Kodê nîşan bide",
+  "copy_api_call": "Zincîra banga API-yê kopî bike",
+  "copy_full_api_url": "URL-ya API-ya tevahî kopî bike"
 }

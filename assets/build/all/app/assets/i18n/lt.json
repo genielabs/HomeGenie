@@ -459,5 +459,14 @@
   "western": "Vakarų",
   "my_list": "Mano sąrašas",
   "top_rated": "Geriausiai įvertinti",
-  "continue_watching": "Tęsti žiūrėjimą"
+  "continue_watching": "Tęsti žiūrėjimą",
+  "download": "Atsisiųsti",
+  "downloading": "Atsisiunčiama...",
+  "resume": "Gyvenimo aprašymas",
+  "pause": "Pauzė",
+  "thoughts": "Mintys",
+  "api_calls": "API komandos",
+  "show_code": "Rodyti kodą",
+  "copy_api_call": "Kopijuoti API iškvietimo eilutę",
+  "copy_full_api_url": "Kopijuoti visą API URL"
 }

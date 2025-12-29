@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "HomeGenie-ə xoş gəlmisiniz!",
   "welcome_subtitle": "Proqramlaşdırıla bilən avtomatlaşdırma kəşfiyyatı",
   "not_configured_yet": "Sistem hələ konfiqurasiya olunmayıb. Bu quraşdırma ustası bir neçə addımda sisteminizi işə salmaqda sizə kömək edəcək.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Yükləmə Meneceri",
       "Description": "Xüsusi API vasitəsilə əldə edilə bilən güclü, asinxron HTTP(S) fayl ötürmə xidməti. Tam yükləmə həyat dövrünü idarə edir, fasilə/davam (Range başlıqlarından istifadə edərək) və müvəqqəti fayl emalını (.part) dəstəkləyir."
+    },
+    "576": {
+      "Title": "Fayl Meneceri",
+      "Description": "Proqramın əsas məlumat qovluğunda faylları oxumaq və yazmaq üçün təhlükəsiz, API ilə idarə olunan bir xidmət. Xüsusi ReadText və WriteText əmrləri vasitəsilə həm xam ikili, həm də UTF-8 sətir məzmununu dəstəkləyir."
+    },
+    "577": {
+      "Title": "Söhbət Tarixçəsi Xidməti",
+      "Description": "Süni intellekt söhbət qeydlərini idarə etmək və saxlamaq üçün mərkəzləşdirilmiş HomeGenie xidməti. Vahid API (System.Utility/ChatHistory) vasitəsilə bulud və yerli LLM-ləri paylaşılan kontekst, avtomatlaşdırılmış JSON yaddaşı və real vaxt tarixçəsi idarəetməsi ilə təmin edir."
+    },
+    "578": {
+      "Title": "Kontekst Mühərriki",
+      "Description": "Dinamik süni intellekt sorğularının yaradılması üçün mərkəzləşdirilmiş xidmət. Şablonları idarə oluna bilən cihazların siyahısı və canlı sistem statusu (hava, enerji, sensorlar) ilə doldurur və süni intellekt üçün real vaxt rejimində evdə tam məlumatlılığı təmin edir."
+    },
+    "570": {
+      "Title": "Məlumat Monitoru",
+      "Description": "Tarixi modul statistikası üçün mərkəzləşdirilmiş analiz xidməti. Diaqramlar və sistem monitorinqi üçün təmiz, hamarlanmış məlumatlar təmin etmək məqsədilə daxili siqnal emalı filtrləri (Sadə Orta, Hərəkətli Orta, Savitzky-Golay) ilə zaman seriyası məlumatlarının dinamik şəkildə əldə edilməsinə imkan verir."
+    },
+    "571": {
+      "Title": "Enerji İstifadəsi Statistikası",
+      "Description": "Enerji istehlakı məlumatlarını (Vt/saat) müntəzəm olaraq izləyir, aqreqasiya edir və qeyd edir. Tarixi məlumat dəstlərinə baxmaq və sorğu göndərmək üçün tam API tətbiq edir."
+    },
+    "572": {
+      "Title": "Dairəvi Diaqram Statistikası nümunəsi",
+      "Description": "Statik məlumatlarla dairəvi diaqram kimi göstərilən nümunə diaqram təminatçısı."
+    },
+    "573": {
+      "Title": "Həftəlik Enerji İstehlakı",
+      "Description": "Həftənin hər günü (B.e.-Bazar) üçün orta Vatt/Saat istehlakını göstərən sütunlu diaqram. Məlumatlar günün bütün saatları üzrə toplanır və Enerji İstifadəsi Statistikası API-sindən əldə edilir."
+    },
+    "574": {
+      "Title": "Saatlıq Enerji İstehlakı",
+      "Description": "Günün hər saatı (00-23 saat) üçün orta Vatt/Saat istehlakını göstərən sütunlu diaqram. Məlumatlar seçilmiş həftə üzrə toplanır və Enerji İstifadəsi Statistikası API-sindən əldə edilir."
     }
   }
 }

@@ -459,5 +459,14 @@
   "western": "מערבי",
   "my_list": "הרשימה שלי",
   "top_rated": "מדורג גבוה",
-  "continue_watching": "המשך צפייה"
+  "continue_watching": "המשך צפייה",
+  "download": "הורדה",
+  "downloading": "מוריד...",
+  "resume": "קוֹרוֹת חַיִים",
+  "pause": "הַפסָקָה",
+  "thoughts": "מחשבות",
+  "api_calls": "פקודות API",
+  "show_code": "הצג קוד",
+  "copy_api_call": "העתקת מחרוזת קריאה ל-API",
+  "copy_full_api_url": "העתקת כתובת URL מלאה של ה-API"
 }

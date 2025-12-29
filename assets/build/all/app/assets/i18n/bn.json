@@ -459,5 +459,14 @@
   "western": "পশ্চিমা",
   "my_list": "আমার তালিকা",
   "top_rated": "শীর্ষ রেট",
-  "continue_watching": "দেখা চালিয়ে যান"
+  "continue_watching": "দেখা চালিয়ে যান",
+  "download": "ডাউনলোড করুন",
+  "downloading": "ডাউনলোড হচ্ছে...",
+  "resume": "জীবনবৃত্তান্ত",
+  "pause": "বিরতি",
+  "thoughts": "চিন্তাভাবনা",
+  "api_calls": "API কমান্ড",
+  "show_code": "কোড দেখান",
+  "copy_api_call": "API কল স্ট্রিং কপি করুন",
+  "copy_full_api_url": "সম্পূর্ণ API URL কপি করুন"
 }

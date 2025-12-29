@@ -459,5 +459,14 @@
   "western": "Gorllewinol",
   "my_list": "Fy Rhestr",
   "top_rated": "Gradd Uchaf",
-  "continue_watching": "Parhau i Wylio"
+  "continue_watching": "Parhau i Wylio",
+  "download": "Lawrlwytho",
+  "downloading": "Wrthi'n lawrlwytho...",
+  "resume": "Ail-ddechrau",
+  "pause": "Oedi",
+  "thoughts": "Meddyliau",
+  "api_calls": "Gorchmynion API",
+  "show_code": "Dangos y Cod",
+  "copy_api_call": "Copïo llinyn galwad API",
+  "copy_full_api_url": "Copïo URL API llawn"
 }

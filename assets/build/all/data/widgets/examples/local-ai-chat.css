@@ -9,6 +9,10 @@
   font-family: sans-serif;
 }
 
+think {
+  color: var(--secondary-text-color);
+}
+
 .dark-theme .svg-icon-black {
   filter:invert(1);
 }

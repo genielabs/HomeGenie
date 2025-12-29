@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "-------------------------------------------",
   "welcome_to_homegenie": "Nau mai ki HomeGenie!",
   "welcome_subtitle": "Ko te mohiotanga aunoatanga ka taea te whakarite",
   "not_configured_yet": "Kaore ano kia whirihorahia te punaha. Ma tenei ruānuku tatūnga koe e awhina ki te whakaara me te whakahaere i to punaha i roto i etahi kaupae.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Kaiwhakahaere Tikiake",
       "Description": "He ratonga whakawhiti kōnae HTTP(S) pakari, kore-tukutahi, e wātea ana mā te API motuhake. Ka whakahaere i te huringa katoa o te tango, e tautoko ana i te whakamutu/tīmata anō (mā te whakamahi i ngā pane Range) me te whakahaere kōnae rangitahi (.part)."
+    },
+    "576": {
+      "Title": "Kaiwhakahaere Kōnae",
+      "Description": "He ratonga haumaru, e whakahaerehia ana e te API, mō te pānui me te tuhi i ngā kōnae i roto i te kōpaki raraunga turanga o te kaupapa. Ka tautokohia e ia ngā ihirangi aho rua mata me te UTF-8 mā roto i ngā whakahau ReadText me WriteText motuhake."
+    },
+    "577": {
+      "Title": "Ratonga Hītori Kōrerorero",
+      "Description": "He ratonga HomeGenie pokapū mō te whakahaere me te pupuri i ngā rangitaki kōrerorero AI. Mā te API kotahi (System.Utility/ChatHistory), ka whakaratohia he horopaki tiritahi ki ngā LLM kapua me ngā LLM ā-rohe, he rokiroki JSON aunoa, me te whakahaere hītori wā-tūturu."
+    },
+    "578": {
+      "Title": "Mīhini Horopaki",
+      "Description": "Ratonga pokapū mō te whakaputa i ngā tohu AI hihiri. Ka whakakīia e ia ngā tauira ki te rārangi o ngā taputapu ka taea te whakahaere me te tūnga o te pūnaha ora (huarere, pūngao, pūoko), kia mōhio ai te AI ki te kāinga i te wā tūturu."
+    },
+    "570": {
+      "Title": "Aroturuki Raraunga",
+      "Description": "Ratonga tātari pokapū mō ngā tatauranga mō ngā kōwae hītori. Ka taea te tiki hihiri i ngā raraunga raupapa-wā me ngā tātari tukatuka tohu kua hangaia (Simple Average, Moving Average, Savitzky-Golay) hei whakarato raraunga ma, maeneene hoki mō ngā tūtohi me te aroturuki pūnaha."
+    },
+    "571": {
+      "Title": "Ngā Tatauranga Whakamahinga Pūngao",
+      "Description": "Ka aroturuki tonu, ka kohikohi, ka tuhi hoki i ngā raraunga whakapaunga pūngao (W/h) i ngā wā auau. Ka whakatinana i tētahi API katoa mō te tirotiro me te uiui i ngā huinga raraunga tawhito."
+    },
+    "572": {
+      "Title": "Tauira Tatauranga Tūtohi Porowhita",
+      "Description": "He tauira kaiwhakarato tūtohi e whakaatu ana hei tūtohi porowhita me ngā raraunga pūmau."
+    },
+    "573": {
+      "Title": "Te Whakapaunga Pūngao ia Wiki",
+      "Description": "He tūtohi pae e whakaatu ana i te toharite o te whakamahinga o te Watts/Hāora mō ia rā o te wiki (Mane-Rātapu). Ka kohikohia ngā raraunga puta noa i ngā hāora katoa o te rā, ā, ka ahu mai i te Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Te Whakamahinga Pūngao ia Hāora",
+      "Description": "He tūtohi pae e whakaatu ana i te toharite o te whakamahinga o ngā Watts/Hāora mō ia hāora o te rā (00h-23h). Ka kohikohia ngā raraunga mō te wiki kua tīpakohia, ā, ka ahu mai i te Energy Use Statistics API."
     }
   }
 }

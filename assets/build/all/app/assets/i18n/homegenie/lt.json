@@ -329,6 +329,38 @@
     "575": {
       "Title": "Atsisiuntimų tvarkyklė",
       "Description": "Tvirta, asinchroninė HTTP(S) failų perdavimo paslauga, pasiekiama per specialią API sąsają. Ji valdo visą atsisiuntimo ciklą, palaikydama pristabdymą / tęsimą (naudojant diapazono antraštes) ir laikinų failų tvarkymą (.part)."
+    },
+    "576": {
+      "Title": "Failų tvarkyklė",
+      "Description": "Saugi, API valdoma paslauga, skirta skaityti ir rašyti failus programos baziniame duomenų aplanke. Ji palaiko tiek neapdorotą dvejetainį, tiek UTF-8 eilučių turinį per specialias „ReadText“ ir „WriteText“ komandas."
+    },
+    "577": {
+      "Title": "Pokalbių istorijos paslauga",
+      "Description": "Centralizuota „HomeGenie“ paslauga, skirta dirbtinio intelekto pokalbių žurnalams tvarkyti ir saugoti. Naudodama vieningą API (System.Utility/ChatHistory), ji suteikia debesies ir vietinėms LLMs bendrą kontekstą, automatizuotą JSON saugyklą ir realaus laiko istorijos valdymą."
+    },
+    "578": {
+      "Title": "Konteksto variklis",
+      "Description": "Centralizuota dinaminio dirbtinio intelekto užklausų generavimo paslauga. Ji užpildo šablonus valdomų įrenginių sąrašu ir realiuoju laiku rodoma sistemos būsena (oras, energija, jutikliai), užtikrindama visapusišką dirbtinio intelekto informuotumą apie namus realiuoju laiku."
+    },
+    "570": {
+      "Title": "Duomenų monitorius",
+      "Description": "Centralizuota istorinės modulio statistikos analizės paslauga. Ji leidžia dinamiškai gauti laiko eilučių duomenis naudojant integruotus signalų apdorojimo filtrus (paprastąjį vidurkį, slenkamąjį vidurkį, Savitzky-Golay), kad diagramoms ir sistemos stebėjimui būtų pateikti švarūs, išlyginti duomenys."
+    },
+    "571": {
+      "Title": "Energijos naudojimo statistika",
+      "Description": "Nuolat stebi, kaupia ir reguliariai registruoja energijos suvartojimo duomenis (W/h). Įdiegia visavertę API sąsają, skirtą naršyti ir ieškoti istorinių duomenų rinkinių."
+    },
+    "572": {
+      "Title": "Skritulinės diagramos statistikos pavyzdys",
+      "Description": "Diagramos teikėjo, kuris atvaizduojamas kaip skritulinė diagrama su statiniais duomenimis, pavyzdys."
+    },
+    "573": {
+      "Title": "Savaitinis energijos suvartojimas",
+      "Description": "Juostinė diagrama, kurioje rodomas vidutinis kiekvienos savaitės dienos (pirmadienio–sekmadienio) suvartojimas vatais per valandą. Duomenys apibendrinami visomis dienos valandomis ir gaunami iš energijos naudojimo statistikos API."
+    },
+    "574": {
+      "Title": "Valandinis energijos suvartojimas",
+      "Description": "Juostinė diagrama, rodanti vidutinį energijos suvartojimą vatais per valandą kiekvieną paros valandą (00–23 val.). Duomenys apibendrinami per pasirinktą savaitę ir gaunami iš energijos naudojimo statistikos API."
     }
   }
 }

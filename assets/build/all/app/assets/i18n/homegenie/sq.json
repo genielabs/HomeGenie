@@ -328,7 +328,39 @@
     },
     "575": {
       "Title": "Menaxheri i Shkarkimeve",
-      "Description": "Një shërbim i fuqishëm dhe asinkron transferimi skedarësh HTTP(S), i arritshëm nëpërmjet një API-je të dedikuar. Ai menaxhon ciklin e plotë jetësor të shkarkimit, duke mbështetur pauzën/rifillimin (duke përdorur headers Range) dhe trajtimin e përkohshëm të skedarëve (.part)."
+      "Description": "Një shërbim i fuqishëm dhe asinkron transferimi skedarësh HTTP(S), i arritshëm nëpërmjet një API-je të dedikuar. Ai menaxhon ciklin e plotë jetësor të shkarkimit, duke mbështetur pauzën/rifillimin (duke përdorur titujt Range) dhe trajtimin e përkohshëm të skedarëve (.part)."
+    },
+    "576": {
+      "Title": "Menaxheri i skedarëve",
+      "Description": "Një shërbim i sigurt, i drejtuar nga API, për leximin dhe shkrimin e skedarëve brenda dosjes së të dhënave bazë të programit. Ai mbështet përmbajtjen binare të papërpunuar dhe atë të vargjeve UTF-8 nëpërmjet komandave të dedikuara ReadText dhe WriteText."
+    },
+    "577": {
+      "Title": "Shërbimi i Historikut të Bisedave",
+      "Description": "Shërbim i centralizuar HomeGenie për menaxhimin dhe ruajtjen e regjistrave të bisedave me inteligjencë artificiale. Përmes një API-je të unifikuar (System.Utility/ChatHistory), ai u ofron LLM-ve në cloud dhe lokale një kontekst të përbashkët, ruajtje të automatizuar JSON dhe menaxhim të historikut në kohë reale."
+    },
+    "578": {
+      "Title": "Motori i Kontekstit",
+      "Description": "Shërbim i centralizuar për gjenerimin dinamik të kërkesave të IA-së. Ai i mbush shabllonet me listën e pajisjeve të kontrollueshme dhe statusin e sistemit në kohë reale (moti, energjia, sensorët), duke siguruar ndërgjegjësim të plotë në kohë reale për shtëpinë nga IA."
+    },
+    "570": {
+      "Title": "Monitori i të Dhënave",
+      "Description": "Shërbim analize i centralizuar për statistikat e modulit historik. Ai mundëson rikthimin dinamik të të dhënave të serive kohore me filtra të integruar të përpunimit të sinjalit (Mesatare e Thjeshtë, Mesatare Lëvizëse, Savitzky-Golay) për të ofruar të dhëna të pastra dhe të zbutura për grafikët dhe monitorimin e sistemit."
+    },
+    "571": {
+      "Title": "Statistikat e Përdorimit të Energjisë",
+      "Description": "Monitoron, grumbullon dhe regjistron vazhdimisht të dhënat e konsumit të energjisë (W/h) në intervale të rregullta. Zbaton një API të plotë për shfletimin dhe kërkimin e të dhënave historike."
+    },
+    "572": {
+      "Title": "Shembull i Statistikave të Grafikut Rrethor",
+      "Description": "Shembull i ofruesit të grafikëve që paraqitet si një grafik rrethor me të dhëna statike."
+    },
+    "573": {
+      "Title": "Konsumi javor i energjisë",
+      "Description": "Grafik me shtylla që shfaq konsumin mesatar të vatëve/orë për çdo ditë të javës (e hënë-e diel). Të dhënat janë të agreguara në të gjitha orët e ditës dhe janë marrë nga API-ja e Statistikave të Përdorimit të Energjisë."
+    },
+    "574": {
+      "Title": "Konsumi i Energjisë në Ora",
+      "Description": "Grafik me shtylla që shfaq konsumin mesatar të vatëve/orë për çdo orë të ditës (00:00-23:00). Të dhënat grumbullohen gjatë javës së zgjedhur dhe burojnë nga API-ja e Statistikave të Përdorimit të Energjisë."
     }
   }
 }

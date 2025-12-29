@@ -459,5 +459,14 @@
   "western": "Западный",
   "my_list": "Мой список",
   "top_rated": "Лучший рейтинг",
-  "continue_watching": "Продолжить просмотр"
+  "continue_watching": "Продолжить просмотр",
+  "download": "Скачать",
+  "downloading": "Загрузка...",
+  "resume": "Резюме",
+  "pause": "Пауза",
+  "thoughts": "Мысли",
+  "api_calls": "Команды API",
+  "show_code": "Показать код",
+  "copy_api_call": "Скопировать строку вызова API",
+  "copy_full_api_url": "Скопировать полный URL API"
 }

@@ -459,5 +459,14 @@
   "western": "დასავლური",
   "my_list": "ჩემი სია",
   "top_rated": "ყველაზე მაღალი რეიტინგი",
-  "continue_watching": "ყურების გაგრძელება"
+  "continue_watching": "ყურების გაგრძელება",
+  "download": "ჩამოტვირთვა",
+  "downloading": "ჩამოტვირთვა...",
+  "resume": "რეზიუმე",
+  "pause": "პაუზა",
+  "thoughts": "ფიქრები",
+  "api_calls": "API ბრძანებები",
+  "show_code": "კოდის ჩვენება",
+  "copy_api_call": "API-ის გამოძახების სტრიქონის კოპირება",
+  "copy_full_api_url": "სრული API URL-ის კოპირება"
 }

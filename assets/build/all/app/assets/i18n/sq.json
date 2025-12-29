@@ -459,5 +459,14 @@
   "western": "Perëndimor",
   "my_list": "Lista ime",
   "top_rated": "Më të vlerësuarat",
-  "continue_watching": "Vazhdo të shikosh"
+  "continue_watching": "Vazhdo të shikosh",
+  "download": "Shkarko",
+  "downloading": "Duke shkarkuar...",
+  "resume": "Rezyme",
+  "pause": "Pauzë",
+  "thoughts": "Mendime",
+  "api_calls": "Komandat e API-t",
+  "show_code": "Shfaq Kodin",
+  "copy_api_call": "Kopjo vargun e thirrjes së API-t",
+  "copy_full_api_url": "Kopjo URL-në e plotë të API-t"
 }

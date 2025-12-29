@@ -459,5 +459,14 @@
   "western": "Mendebaldekoa",
   "my_list": "Nire zerrenda",
   "top_rated": "Hobekien baloratua",
-  "continue_watching": "Jarraitu ikusten"
+  "continue_watching": "Jarraitu ikusten",
+  "download": "Deskargatu",
+  "downloading": "Deskargatzen...",
+  "resume": "Curriculuma",
+  "pause": "Pausatu",
+  "thoughts": "Pentsamenduak",
+  "api_calls": "API komandoak",
+  "show_code": "Erakutsi kodea",
+  "copy_api_call": "Kopiatu API dei-katea",
+  "copy_full_api_url": "Kopiatu API URL osoa"
 }

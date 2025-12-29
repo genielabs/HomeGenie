@@ -459,5 +459,14 @@
   "western": "Tây",
   "my_list": "Danh sách của tôi",
   "top_rated": "Đánh giá cao nhất",
-  "continue_watching": "Tiếp tục xem"
+  "continue_watching": "Tiếp tục xem",
+  "download": "Tải xuống",
+  "downloading": "Đang tải xuống...",
+  "resume": "Bản tóm tắt",
+  "pause": "Tạm dừng",
+  "thoughts": "Suy nghĩ",
+  "api_calls": "Lệnh API",
+  "show_code": "Hiển thị mã",
+  "copy_api_call": "Sao chép chuỗi lệnh gọi API",
+  "copy_full_api_url": "Sao chép URL API đầy đủ"
 }

@@ -459,5 +459,14 @@
   "western": "Lwès",
   "my_list": "Lis mwen an",
   "top_rated": "Pi byen note",
-  "continue_watching": "Kontinye Gade"
+  "continue_watching": "Kontinye Gade",
+  "download": "Telechaje",
+  "downloading": "Ap telechaje...",
+  "resume": "Rezime",
+  "pause": "Poze",
+  "thoughts": "Panse",
+  "api_calls": "Kòmand API yo",
+  "show_code": "Montre Kòd",
+  "copy_api_call": "Kopye chèn apèl API a",
+  "copy_full_api_url": "Kopye URL API konplè a"
 }

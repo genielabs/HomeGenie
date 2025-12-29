@@ -329,6 +329,38 @@
     "575": {
       "Title": "Trình quản lý tải xuống",
       "Description": "Một dịch vụ truyền tải tập tin HTTP(S) mạnh mẽ, không đồng bộ, có thể truy cập thông qua API chuyên dụng. Nó quản lý toàn bộ vòng đời tải xuống, hỗ trợ tạm dừng/tiếp tục (sử dụng tiêu đề Range) và xử lý tập tin tạm thời (.part)."
+    },
+    "576": {
+      "Title": "Trình quản lý tập tin",
+      "Description": "Một dịch vụ bảo mật, dựa trên API, để đọc và ghi các tập tin trong thư mục dữ liệu gốc của chương trình. Nó hỗ trợ cả nội dung nhị phân thô và chuỗi UTF-8 thông qua các lệnh ReadText và WriteText chuyên dụng."
+    },
+    "577": {
+      "Title": "Dịch vụ lịch sử trò chuyện",
+      "Description": "Dịch vụ HomeGenie tập trung để quản lý và lưu trữ nhật ký trò chuyện AI. Thông qua API thống nhất (System.Utility/ChatHistory), nó cung cấp cho các hệ thống quản lý lịch sử cuộc gọi (LLM) trên đám mây và cục bộ ngữ cảnh được chia sẻ, lưu trữ JSON tự động và quản lý lịch sử theo thời gian thực."
+    },
+    "578": {
+      "Title": "Công cụ ngữ cảnh",
+      "Description": "Dịch vụ tập trung tạo ra các lời nhắc AI động. Nó điền vào các mẫu với danh sách các thiết bị có thể điều khiển và trạng thái hệ thống trực tiếp (thời tiết, năng lượng, cảm biến), đảm bảo khả năng nhận biết ngôi nhà theo thời gian thực hoàn toàn cho AI."
+    },
+    "570": {
+      "Title": "Trình giám sát dữ liệu",
+      "Description": "Dịch vụ phân tích tập trung cho số liệu thống kê lịch sử của mô-đun. Nó cho phép truy xuất động dữ liệu chuỗi thời gian với các bộ lọc xử lý tín hiệu tích hợp (Trung bình đơn giản, Trung bình trượt, Savitzky-Golay) để cung cấp dữ liệu sạch, được làm mịn cho biểu đồ và giám sát hệ thống."
+    },
+    "571": {
+      "Title": "Thống kê sử dụng năng lượng",
+      "Description": "Liên tục giám sát, tổng hợp và ghi lại dữ liệu tiêu thụ năng lượng (W/h) theo định kỳ. Triển khai API đầy đủ để duyệt và truy vấn các tập dữ liệu lịch sử."
+    },
+    "572": {
+      "Title": "Ví dụ về biểu đồ hình tròn thống kê",
+      "Description": "Ví dụ về một nhà cung cấp biểu đồ hiển thị dưới dạng biểu đồ hình tròn với dữ liệu tĩnh."
+    },
+    "573": {
+      "Title": "Mức tiêu thụ năng lượng hàng tuần",
+      "Description": "Biểu đồ cột hiển thị mức tiêu thụ điện năng trung bình (Watts/giờ) cho mỗi ngày trong tuần (Thứ Hai - Chủ Nhật). Dữ liệu được tổng hợp từ tất cả các giờ trong ngày và được lấy từ API Thống kê Sử dụng Năng lượng."
+    },
+    "574": {
+      "Title": "Mức tiêu thụ năng lượng hàng giờ",
+      "Description": "Biểu đồ cột hiển thị mức tiêu thụ điện năng trung bình (Watts/giờ) cho mỗi giờ trong ngày (00h-23h). Dữ liệu được tổng hợp trong tuần đã chọn và được lấy từ API Thống kê Sử dụng Năng lượng."
     }
   }
 }

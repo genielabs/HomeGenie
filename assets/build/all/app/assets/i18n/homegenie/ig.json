@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "Nnọọ na HomeGenie!",
   "welcome_subtitle": "The programmable akpaaka ọgụgụ isi",
   "not_configured_yet": "Ahazibeghị sistemụ ma. Ọkachamara ntọlite a ga-enyere gị aka n'ịkwalite sistemụ gị ma na-arụ ọrụ na usoro ole na ole.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Onye njikwa nbudata",
       "Description": "Ọrụ mbufe faịlụ HTTP(S) siri ike, nke a na-anaghị ejikọta ọnụ nke enwere ike ịnweta site na API raara onwe ya nye. Ọ na-ejikwa usoro nbudata zuru oke, na-akwado nkwụsịtụ/maliteghachi (site na iji isi okwu Range) na njikwa faịlụ nwa oge (.part)."
+    },
+    "576": {
+      "Title": "Onye njikwa faịlụ",
+      "Description": "Ọrụ nchekwa, nke API na-achịkwa maka ịgụ na ide faịlụ n'ime folda data ntọala mmemme ahụ. Ọ na-akwado ma ọdịnaya eriri binary na UTF-8 site na iwu ReadText na WriteText raara onwe ya nye."
+    },
+    "577": {
+      "Title": "Ọrụ Akụkọ Nkata",
+      "Description": "Ọrụ HomeGenie nke etiti maka ijikwa na ịnọgide na-enwe ndekọ nkata AI. Site na API jikọtara ọnụ (System.Utility/ChatHistory), ọ na-enye igwe ojii na LLM mpaghara nwere ọnọdụ ekekọrịtara, nchekwa JSON akpaka, na njikwa akụkọ ihe mere eme n'oge."
+    },
+    "578": {
+      "Title": "Injin Ọdịnaya",
+      "Description": "Ọrụ etiti maka mmepụta ngwa ngwa AI na-agbanwe agbanwe. Ọ na-ejupụta ndebiri nwere ndepụta ngwaọrụ ndị a na-achịkwa yana ọnọdụ sistemụ dị ndụ (ihu igwe, ike, ihe mmetụta), na-eme ka a mara AI n'ụlọ n'oge dị adị."
+    },
+    "570": {
+      "Title": "Nyocha Data",
+      "Description": "Ọrụ nyocha etiti maka ọnụọgụgụ modulu akụkọ ihe mere eme. Ọ na-enye ohere ịnweta data usoro oge yana nzacha nhazi mgbaàmà arụnyere n'ime ya (Mfe Nkezi, Nkezi Mbugharị, Savitzky-Golay) iji nye data dị ọcha, dị nro maka eserese na nlekota sistemụ."
+    },
+    "571": {
+      "Title": "Ọnụọgụgụ Ojiji Ike",
+      "Description": "Na-enyocha, na-achịkọta, ma na-edekọ data oriri ike (W/h) mgbe niile. Na-etinye API zuru oke maka ịchọgharị na ịjụ ajụjụ gbasara data akụkọ ihe mere eme."
+    },
+    "572": {
+      "Title": "Ihe atụ nke stats chaatị achịcha",
+      "Description": "Ihe atụ nke onye na-enye chaatị nke na-egosi dị ka chaatị achịcha nwere data kwụ ọtọ."
+    },
+    "573": {
+      "Title": "Oriri Ike Kwa Izu",
+      "Description": "Chaatị mmanya na-egosi nkezi oriri Watts/Awa maka ụbọchị ọ bụla n'izu (Mọnde-Sọnde). A na-achịkọta data n'ime awa niile nke ụbọchị ma nweta ya site na API Energy Use Statistics."
+    },
+    "574": {
+      "Title": "Oriri Ike kwa elekere",
+      "Description": "Chaatị mmanya na-egosi nkezi oriri Watts/Awa maka awa ọ bụla n'ụbọchị (00h-23h). A na-achịkọta data n'ime izu ahọpụtara ma nweta ya site na API Energy Use Statistics."
     }
   }
 }

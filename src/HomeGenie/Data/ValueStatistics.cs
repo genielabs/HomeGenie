@@ -116,7 +116,7 @@ namespace HomeGenie.Data
         /// <value>The current.</value>
         public StatValue Current
         {
-            get { return historyValues.Count > 0 ? historyValues[0] : null; }
+            get { return historyValues.Count > 0 ? historyValues[0] : new StatValue(0, DateTime.UtcNow); }
         }
 
         /// <summary>

@@ -459,5 +459,14 @@
   "western": "Батыс",
   "my_list": "Менің тізімім",
   "top_rated": "Ең жоғары бағаланған",
-  "continue_watching": "Көруді жалғастыру"
+  "continue_watching": "Көруді жалғастыру",
+  "download": "Жүктеп алу",
+  "downloading": "Жүктелуде...",
+  "resume": "Түйіндеме",
+  "pause": "Кідірту",
+  "thoughts": "Ойлар",
+  "api_calls": "API командалары",
+  "show_code": "Кодты көрсету",
+  "copy_api_call": "API шақыру жолын көшіру",
+  "copy_full_api_url": "Толық API URL мекенжайын көшіру"
 }

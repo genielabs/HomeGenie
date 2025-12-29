@@ -459,5 +459,14 @@
   "western": "Západný",
   "my_list": "Môj zoznam",
   "top_rated": "Najlepšie hodnotené",
-  "continue_watching": "Pokračovať v sledovaní"
+  "continue_watching": "Pokračovať v sledovaní",
+  "download": "Stiahnuť",
+  "downloading": "Sťahovanie...",
+  "resume": "Životopis",
+  "pause": "Pozastaviť",
+  "thoughts": "Myšlienky",
+  "api_calls": "Príkazy API",
+  "show_code": "Zobraziť kód",
+  "copy_api_call": "Kopírovať reťazec volania API",
+  "copy_full_api_url": "Kopírovať celú URL adresu API"
 }

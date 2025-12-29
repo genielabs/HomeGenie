@@ -329,6 +329,38 @@
     "575": {
       "Title": "Tagapamahala ng Pag-download",
       "Description": "Isang matibay at asynchronous na serbisyo ng paglilipat ng HTTP(S) file na maa-access sa pamamagitan ng isang nakalaang API. Pinamamahalaan nito ang buong siklo ng buhay ng pag-download, sinusuportahan ang pag-pause/resume (gamit ang mga header ng Range) at pansamantalang paghawak ng file (.part)."
+    },
+    "576": {
+      "Title": "Tagapamahala ng File",
+      "Description": "Isang ligtas at pinapagana ng API na serbisyo para sa pagbabasa at pagsusulat ng mga file sa loob ng base data folder ng programa. Sinusuportahan nito ang parehong raw binary at UTF-8 string content sa pamamagitan ng mga nakalaang ReadText at WriteText command."
+    },
+    "577": {
+      "Title": "Serbisyo sa Kasaysayan ng Chat",
+      "Description": "Sentralisadong serbisyo ng HomeGenie para sa pamamahala at pagpapanatili ng mga AI chat log. Sa pamamagitan ng isang pinag-isang API (System.Utility/ChatHistory), nagbibigay ito sa mga cloud at lokal na LLM ng isang nakabahaging konteksto, awtomatikong imbakan ng JSON, at pamamahala ng kasaysayan sa real-time."
+    },
+    "578": {
+      "Title": "Makina ng Konteksto",
+      "Description": "Sentralisadong serbisyo para sa dynamic na pagbuo ng AI prompt. Pinupunan nito ang mga template ng listahan ng mga kontroladong device at ang live system status (panahon, enerhiya, sensor), na tinitiyak ang kabuuang real-time na kamalayan sa bahay para sa AI."
+    },
+    "570": {
+      "Title": "Monitor ng Datos",
+      "Description": "Sentralisadong serbisyo sa pagsusuri para sa mga istatistika ng makasaysayang modyul. Nagbibigay-daan ito sa dynamic na pagkuha ng data ng time-series na may built-in na mga filter sa pagproseso ng signal (Simple Average, Moving Average, Savitzky-Golay) upang magbigay ng malinis at pinakinis na data para sa mga tsart at pagsubaybay sa sistema."
+    },
+    "571": {
+      "Title": "Mga Istatistika ng Paggamit ng Enerhiya",
+      "Description": "Patuloy na sinusubaybayan, pinagsasama-sama, at tinatala ang datos ng pagkonsumo ng enerhiya (W/h) sa mga regular na pagitan. Nagpapatupad ng isang kumpletong API para sa pag-browse at pag-query sa mga makasaysayang dataset."
+    },
+    "572": {
+      "Title": "Halimbawa ng mga Istatistika ng Pie Chart",
+      "Description": "Halimbawang provider ng tsart na nagpapakita bilang pie chart na may static na data."
+    },
+    "573": {
+      "Title": "Lingguhang Pagkonsumo ng Enerhiya",
+      "Description": "Bar chart na nagpapakita ng average na konsumo ng Watts/Oras para sa bawat araw ng linggo (Lunes-Linggo). Ang data ay pinagsama-sama sa lahat ng oras ng araw at kinukuha mula sa Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Pagkonsumo ng Enerhiya kada Oras",
+      "Description": "Bar chart na nagpapakita ng average na konsumo ng Watts/Oras para sa bawat oras ng araw (00h-23h). Ang datos ay pinagsama-sama sa napiling linggo at kinuha mula sa Energy Use Statistics API."
     }
   }
 }

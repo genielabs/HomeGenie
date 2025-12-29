@@ -329,6 +329,38 @@
     "575": {
       "Title": "Manager de descărcări",
       "Description": "Un serviciu robust, asincron, de transfer de fișiere HTTP(S), accesibil printr-o API dedicată. Acesta gestionează întregul ciclu de viață al descărcării, oferind suport pentru pauză/reluare (folosind antete Range) și gestionarea temporară a fișierelor (.part)."
+    },
+    "576": {
+      "Title": "Manager de fișiere",
+      "Description": "Un serviciu securizat, bazat pe API, pentru citirea și scrierea fișierelor în folderul de date de bază al programului. Acesta acceptă atât conținut binar brut, cât și șiruri UTF-8 prin comenzi dedicate ReadText și WriteText."
+    },
+    "577": {
+      "Title": "Serviciu de istoric al chaturilor",
+      "Description": "Serviciu centralizat HomeGenie pentru gestionarea și persistența jurnalelor de chat bazate pe inteligență artificială. Prin intermediul unei API unificate (System.Utility/ChatHistory), oferă jurnalelor de chat locale și în cloud un context partajat, stocare JSON automată și gestionare a istoricului în timp real."
+    },
+    "578": {
+      "Title": "Motor de context",
+      "Description": "Serviciu centralizat pentru generarea dinamică de solicitări prin intermediul inteligenței artificiale. Acesta completează șabloanele cu lista de dispozitive controlabile și starea sistemului în timp real (vreme, energie, senzori), asigurând o conștientizare totală a locuinței în timp real pentru inteligența artificială."
+    },
+    "570": {
+      "Title": "Monitor de date",
+      "Description": "Serviciu centralizat de analiză pentru statisticile istorice ale modulelor. Acesta permite recuperarea dinamică a datelor din seriile temporale cu filtre de procesare a semnalelor încorporate (Medie simplă, Medie mobilă, Savitzky-Golay) pentru a oferi date curate și uniformizate pentru grafice și monitorizarea sistemului."
+    },
+    "571": {
+      "Title": "Statistici privind consumul de energie",
+      "Description": "Monitorizează, agregă și înregistrează continuu datele privind consumul de energie (W/h) la intervale regulate. Implementează o API completă pentru răsfoirea și interogarea seturilor de date istorice."
+    },
+    "572": {
+      "Title": "Exemplu de statistici pentru diagrame circulare",
+      "Description": "Exemplu de furnizor de diagrame care se afișează ca o diagramă circulară cu date statice."
+    },
+    "573": {
+      "Title": "Consum săptămânal de energie",
+      "Description": "Diagramă cu bare care afișează consumul mediu de wați/oră pentru fiecare zi a săptămânii (luni-duminică). Datele sunt agregate pentru toate orele zilei și provin din API-ul Energy Use Statistics."
+    },
+    "574": {
+      "Title": "Consum orar de energie",
+      "Description": "Diagramă cu bare care afișează consumul mediu de wați/oră pentru fiecare oră a zilei (00:00-23:00). Datele sunt agregate pe parcursul săptămânii selectate și provin din API-ul Energy Use Statistics."
     }
   }
 }

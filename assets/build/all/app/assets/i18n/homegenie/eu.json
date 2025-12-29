@@ -329,6 +329,38 @@
     "575": {
       "Title": "Deskarga kudeatzailea",
       "Description": "HTTP(S) fitxategien transferentzia zerbitzu sendo eta asinkronoa, API dedikatu baten bidez eskuragarri. Deskargatzeko bizi-ziklo osoa kudeatzen du, pausatu/berrabiarazi (Interval goiburuak erabiliz) eta aldi baterako fitxategien kudeaketa (.part) onartzen ditu."
+    },
+    "576": {
+      "Title": "Fitxategi kudeatzailea",
+      "Description": "Programaren oinarrizko datuen karpetan fitxategiak irakurri eta idazteko API bidezko zerbitzu segurua. Eduki bitar gordina eta UTF-8 katea onartzen ditu ReadText eta WriteText komando dedikatuen bidez."
+    },
+    "577": {
+      "Title": "Txat Historia Zerbitzua",
+      "Description": "HomeGenie zerbitzu zentralizatua IA txat erregistroak kudeatzeko eta mantentzeko. API bateratu baten bidez (System.Utility/ChatHistory), hodeiko eta tokiko LLMei testuinguru partekatua, JSON biltegiratze automatizatua eta denbora errealeko historiaren kudeaketa eskaintzen die."
+    },
+    "578": {
+      "Title": "Testuinguru-motorra",
+      "Description": "AI bidezko galdera dinamikoak sortzeko zerbitzu zentralizatua. Txantiloiak kontrola daitezkeen gailuen zerrendarekin eta sistemaren egoerarekin (eguraldia, energia, sentsoreak) betetzen ditu, AIak etxearen denbora errealeko kontzientzia osoa bermatuz."
+    },
+    "570": {
+      "Title": "Datuen monitore",
+      "Description": "Moduluko estatistika historikoetarako analisi zerbitzu zentralizatua. Denbora-serieko datuen berreskurapen dinamikoa ahalbidetzen du, seinaleen prozesatzeko iragazki integratuekin (batez besteko sinplea, batez besteko mugikorra, Savitzky-Golay), grafikoetarako eta sistemaren monitorizaziorako datu garbi eta leunduak eskaintzeko."
+    },
+    "571": {
+      "Title": "Energia Erabileraren Estatistikak",
+      "Description": "Energia-kontsumoaren datuak (W/h) etengabe kontrolatzen, biltzen eta erregistratzen ditu aldizka. API oso bat ezartzen du datu-multzo historikoak arakatzeko eta kontsultatzeko."
+    },
+    "572": {
+      "Title": "Diagrama zirkularren estatistiken adibidea",
+      "Description": "Datu estatikoekin zirkulu-diagrama gisa errendatzen den diagrama-hornitzailearen adibidea."
+    },
+    "573": {
+      "Title": "Asteko energia-kontsumoa",
+      "Description": "Asteko egun bakoitzeko (astelehenetik igandera) watt/orduko batez besteko kontsumoa erakusten duen barra-diagrama. Datuak eguneko ordu guztietakoak dira eta Energia Erabileraren Estatistiken APItik datoz."
+    },
+    "574": {
+      "Title": "Orduko energia-kontsumoa",
+      "Description": "Barra-diagrama, eguneko ordu bakoitzeko (00:00etatik 23:00etara) watt/orduko batez besteko kontsumoa erakusten duena. Datuak hautatutako astean zehar agregatzen dira eta Energia Erabileraren Estatistiken APItik datoz."
     }
   }
 }

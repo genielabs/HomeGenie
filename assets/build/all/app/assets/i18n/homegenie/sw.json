@@ -1,5 +1,5 @@
 {
-  " ": "-----------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "Karibu HomeGenie!",
   "welcome_subtitle": "Akili ya kiotomatiki inayoweza kupangwa",
   "not_configured_yet": "Mfumo bado haujasanidiwa. Kichawi hiki cha usanidi kitakusaidia kupata mfumo wako na kufanya kazi kwa hatua chache.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Kidhibiti cha Upakuaji",
       "Description": "Huduma thabiti na isiyo na mpangilio ya uhamishaji faili ya HTTP(S) inayopatikana kupitia API maalum. Inasimamia mzunguko kamili wa upakuaji, ikiunga mkono kusitisha/kuendelea (kwa kutumia vichwa vya habari vya Range) na utunzaji wa faili wa muda (.part)."
+    },
+    "576": {
+      "Title": "Kidhibiti Faili",
+      "Description": "Huduma salama, inayoendeshwa na API ya kusoma na kuandika faili ndani ya folda ya data ya msingi ya programu. Inasaidia maudhui ghafi ya binary na UTF-8 kupitia amri maalum za ReadText na WriteText."
+    },
+    "577": {
+      "Title": "Huduma ya Historia ya Gumzo",
+      "Description": "Huduma ya HomeGenie iliyounganishwa kwa ajili ya kudhibiti na kuendelea kumbukumbu za gumzo za AI. Kupitia API iliyounganishwa (System.Utility/ChatHistory), hutoa LLM za wingu na za ndani zenye muktadha ulioshirikiwa, hifadhi otomatiki ya JSON, na usimamizi wa historia ya wakati halisi."
+    },
+    "578": {
+      "Title": "Injini ya Muktadha",
+      "Description": "Huduma ya kati kwa ajili ya uzalishaji wa haraka wa AI unaobadilika. Inajaza violezo na orodha ya vifaa vinavyoweza kudhibitiwa na hali ya mfumo hai (hali ya hewa, nishati, vitambuzi), kuhakikisha ufahamu kamili wa nyumbani kwa AI kwa wakati halisi."
+    },
+    "570": {
+      "Title": "Kifuatiliaji cha Data",
+      "Description": "Huduma ya uchanganuzi wa kati kwa takwimu za moduli za kihistoria. Inawezesha urejeshaji wa data ya mfululizo wa muda kwa kutumia vichujio vya usindikaji wa mawimbi vilivyojengewa ndani (Wastani Rahisi, Wastani Unaosonga, Savitzky-Golay) ili kutoa data safi na laini kwa chati na ufuatiliaji wa mfumo."
+    },
+    "571": {
+      "Title": "Takwimu za Matumizi ya Nishati",
+      "Description": "Hufuatilia, hukusanya, na kurekodi data ya matumizi ya nishati (W/h) kila mara kwa vipindi vya kawaida. Hutekeleza API kamili ya kuvinjari na kuuliza seti za data za kihistoria."
+    },
+    "572": {
+      "Title": "Mfano wa Takwimu za Chati ya Pai",
+      "Description": "Mfano wa mtoa chati anayeonyesha kama chati ya pai yenye data tuli."
+    },
+    "573": {
+      "Title": "Matumizi ya Nishati ya Kila Wiki",
+      "Description": "Chati ya miraba inayoonyesha wastani wa matumizi ya Wati/Saa kwa kila siku ya wiki (Jumatatu-Jumapili). Data hukusanywa katika saa zote za siku na hutoka kwenye API ya Takwimu za Matumizi ya Nishati."
+    },
+    "574": {
+      "Title": "Matumizi ya Nishati kwa Saa",
+      "Description": "Chati ya miraba inayoonyesha wastani wa matumizi ya Wati/Saa kwa kila saa ya siku (00h-23h). Data hukusanywa kwa wiki iliyochaguliwa na kupatikana kutoka kwa API ya Takwimu za Matumizi ya Nishati."
     }
   }
 }

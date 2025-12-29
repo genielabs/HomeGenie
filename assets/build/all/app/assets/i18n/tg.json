@@ -459,5 +459,14 @@
   "western": "ғарбӣ",
   "my_list": "Рӯйхати ман",
   "top_rated": "Баҳои баландтарин",
-  "continue_watching": "Давом доданро тамошо кунед"
+  "continue_watching": "Давом доданро тамошо кунед",
+  "download": "Боргирӣ",
+  "downloading": "Боргирӣ мешавад...",
+  "resume": "Хулоса",
+  "pause": "Таваққуф",
+  "thoughts": "Андешаҳо",
+  "api_calls": "Фармонҳои API",
+  "show_code": "Рамзро нишон диҳед",
+  "copy_api_call": "Нусхабардории сатри даъвати API",
+  "copy_full_api_url": "Нусхабардории URL-и пурраи API"
 }

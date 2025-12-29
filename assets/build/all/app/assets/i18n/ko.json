@@ -459,5 +459,14 @@
   "western": "서부 사람",
   "my_list": "내 목록",
   "top_rated": "최고 평점",
-  "continue_watching": "계속 시청하기"
+  "continue_watching": "계속 시청하기",
+  "download": "다운로드",
+  "downloading": "다운로드 중...",
+  "resume": "재개하다",
+  "pause": "정지시키다",
+  "thoughts": "생각들",
+  "api_calls": "API 명령",
+  "show_code": "코드 표시",
+  "copy_api_call": "API 호출 문자열 복사",
+  "copy_full_api_url": "전체 API URL을 복사하세요"
 }

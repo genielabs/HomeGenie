@@ -11,7 +11,8 @@ class LocalAiChat extends ControllerInstance {
       // show only modules with this field
       fieldFilter: 'LLM.TokenStream'
     },
-    sizeOptions: ['medium', 'big']
+    sizeOptions: ['medium', 'big'],
+    defaultSize: 'big'
   };
 
   currentAiMessageElement = null;
@@ -55,9 +56,8 @@ class LocalAiChat extends ControllerInstance {
       sendMessage: this.sendMessage,
       handleKeyDown: this.handleKeyDown,
       module: this.boundModule || null,
-      control(cmd) {
-        self.boundModule?.control(cmd);
-      },
+      control: this.control,
+      intent: this.intent,
       isStreaming() {
         return self.isStreaming;
       },
@@ -281,7 +281,7 @@ class LocalAiChat extends ControllerInstance {
 
     this.isFirstToken = true;
 
-    this.boundModule.control('Process', userInput);
+    this.control('Prompt.Submit', userInput);
   }
 
   /**
@@ -382,5 +382,28 @@ class LocalAiChat extends ControllerInstance {
     this.translate('$ai_chat.start_typing_prompt').subscribe((tr) => {
       this.field('prompt_input').get().placeholder = tr;
     });
+  }
+
+  control(cmd, data) {
+    const bm = this.boundModule;
+    if (bm) {
+      bm.control(cmd, data);
+    }
+  }
+
+  intent(cmd, data) {
+    const bm = this.boundModule;
+    if (bm) {
+      data = encodeURIComponent(data);
+      const intentHandlerApi = bm.field('@AI:IntentHandler');
+      if (intentHandlerApi) {
+        this.apiCall(`${intentHandlerApi.value}/${cmd}/${data}`)
+            .subscribe(res => {
+              console.log(res);
+            });
+      } else {
+        bm.control(cmd, data);
+      }
+    }
   }
 }

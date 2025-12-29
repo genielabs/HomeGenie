@@ -329,6 +329,38 @@
     "575": {
       "Title": "Administrador de descargas",
       "Description": "Un servicio robusto y asincrónico de transferencia de archivos HTTP(S), accesible mediante una API dedicada. Gestiona todo el ciclo de descarga, permitiendo pausar/reanudar (mediante encabezados de rango) y gestionar archivos temporales (.part)."
+    },
+    "576": {
+      "Title": "Gestor de archivos",
+      "Description": "Un servicio seguro basado en API para leer y escribir archivos dentro de la carpeta de datos base del programa. Admite contenido binario sin procesar y cadenas UTF-8 mediante comandos dedicados ReadText y WriteText."
+    },
+    "577": {
+      "Title": "Servicio de historial de chat",
+      "Description": "Servicio centralizado HomeGenie para la gestión y conservación de registros de chat de IA. Mediante una API unificada (System.Utility/ChatHistory), proporciona a los LLM locales y en la nube un contexto compartido, almacenamiento JSON automatizado y gestión del historial en tiempo real."
+    },
+    "578": {
+      "Title": "Motor de contexto",
+      "Description": "Servicio centralizado para la generación dinámica de avisos de IA. Completa plantillas con la lista de dispositivos controlables y el estado del sistema en tiempo real (clima, energía, sensores), lo que garantiza que la IA esté al tanto del estado del hogar en tiempo real."
+    },
+    "570": {
+      "Title": "Monitor de datos",
+      "Description": "Servicio de análisis centralizado para estadísticas históricas de módulos. Permite la recuperación dinámica de datos de series temporales con filtros de procesamiento de señales integrados (promedio simple, promedio móvil, Savitzky-Golay) para proporcionar datos limpios y precisos para gráficos y monitorización del sistema."
+    },
+    "571": {
+      "Title": "Estadísticas de uso de energía",
+      "Description": "Monitorea, agrega y registra continuamente los datos de consumo de energía (W/h) a intervalos regulares. Implementa una API completa para explorar y consultar conjuntos de datos históricos."
+    },
+    "572": {
+      "Title": "Ejemplo de estadísticas de gráfico circular",
+      "Description": "Proveedor de gráficos de ejemplo que se representa como un gráfico circular con datos estáticos."
+    },
+    "573": {
+      "Title": "Consumo semanal de energía",
+      "Description": "Gráfico de barras que muestra el consumo promedio de vatios/hora cada día de la semana (lun-dom). Los datos se agregan a lo largo de todas las horas del día y se obtienen de la API de Estadísticas de Consumo de Energía."
+    },
+    "574": {
+      "Title": "Consumo de energía por hora",
+      "Description": "Gráfico de barras que muestra el consumo promedio de vatios/hora para cada hora del día (00:00-23:00). Los datos se agregan a lo largo de la semana seleccionada y provienen de la API de Estadísticas de Consumo de Energía."
     }
   }
 }

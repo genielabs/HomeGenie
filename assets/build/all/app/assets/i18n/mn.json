@@ -459,5 +459,14 @@
   "western": "Баруун",
   "my_list": "Миний жагсаалт",
   "top_rated": "Хамгийн өндөр үнэлгээтэй",
-  "continue_watching": "Үргэлжлүүлэн үзэх"
+  "continue_watching": "Үргэлжлүүлэн үзэх",
+  "download": "Татаж авах",
+  "downloading": "Татаж авч байна...",
+  "resume": "Анкет",
+  "pause": "Түр зогсоох",
+  "thoughts": "Бодол санаа",
+  "api_calls": "API командууд",
+  "show_code": "Кодыг харуулах",
+  "copy_api_call": "API дуудлагын мөрийг хуулах",
+  "copy_full_api_url": "Бүрэн API URL-г хуулах"
 }

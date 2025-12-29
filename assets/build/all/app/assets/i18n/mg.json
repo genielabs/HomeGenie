@@ -459,5 +459,14 @@
   "western": "ANDREFANA",
   "my_list": "Ny lisitrako",
   "top_rated": "Naoty ambony indrindra",
-  "continue_watching": "Tohizo ny fijerena"
+  "continue_watching": "Tohizo ny fijerena",
+  "download": "DOWNLOAD",
+  "downloading": "Mampidina...",
+  "resume": "CV",
+  "pause": "Fiatoana",
+  "thoughts": "hevitra",
+  "api_calls": "baiko API",
+  "show_code": "Asehoy ny kaody",
+  "copy_api_call": "Adikao ny tady fiantsoana API",
+  "copy_full_api_url": "Adikao ny URL API feno"
 }

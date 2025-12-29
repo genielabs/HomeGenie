@@ -459,5 +459,14 @@
   "western": "Westlech",
   "my_list": "Meng Lëscht",
   "top_rated": "Top Bewäertung",
-  "continue_watching": "Weider kucken"
+  "continue_watching": "Weider kucken",
+  "download": "Eroflueden",
+  "downloading": "Eroflueden...",
+  "resume": "CV",
+  "pause": "Paus",
+  "thoughts": "Gedanken",
+  "api_calls": "API-Kommandoen",
+  "show_code": "Code weisen",
+  "copy_api_call": "API-Uruffstring kopéieren",
+  "copy_full_api_url": "Déi komplett API-URL kopéieren"
 }

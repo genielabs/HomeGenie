@@ -459,5 +459,14 @@
   "western": "Western",
   "my_list": "Ndepụta m",
   "top_rated": "Ego kacha elu",
-  "continue_watching": "Gaa n'ihu na-ekiri"
+  "continue_watching": "Gaa n'ihu na-ekiri",
+  "download": "Budata",
+  "downloading": "Na-ebudata...",
+  "resume": "Ọmụmụ ihe malitegharịa",
+  "pause": "Kwụsịtụ",
+  "thoughts": "Echiche",
+  "api_calls": "Iwu API",
+  "show_code": "Gosi Koodu",
+  "copy_api_call": "Detuo eriri oku API",
+  "copy_full_api_url": "Detuo URL API zuru oke"
 }

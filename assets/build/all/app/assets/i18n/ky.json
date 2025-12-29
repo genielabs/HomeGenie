@@ -459,5 +459,14 @@
   "western": "Батыш",
   "my_list": "Менин тизмем",
   "top_rated": "Эң жогору бааланган",
-  "continue_watching": "Көрүүнү улантыңыз"
+  "continue_watching": "Көрүүнү улантыңыз",
+  "download": "Жүктөп алуу",
+  "downloading": "Жүктөлүп алынууда...",
+  "resume": "Резюме",
+  "pause": "Тыным",
+  "thoughts": "Ойлор",
+  "api_calls": "API буйруктары",
+  "show_code": "Кодду көрсөтүү",
+  "copy_api_call": "API чакыруу сабын көчүрүү",
+  "copy_full_api_url": "Толук API URL'ин көчүрүү"
 }
