@@ -329,6 +329,38 @@
     "575": {
       "Title": "Rheolwr Lawrlwytho",
       "Description": "Gwasanaeth trosglwyddo ffeiliau HTTP(S) ansyncronig, cadarn sydd ar gael trwy API pwrpasol. Mae'n rheoli cylch bywyd llawn y lawrlwythiad, gan gefnogi oedi/ailddechrau (gan ddefnyddio penawdau Range) a thrin ffeiliau dros dro (.part)."
+    },
+    "576": {
+      "Title": "Rheolwr Ffeiliau",
+      "Description": "Gwasanaeth diogel, wedi'i yrru gan API, ar gyfer darllen ac ysgrifennu ffeiliau o fewn ffolder data sylfaenol y rhaglen. Mae'n cefnogi cynnwys deuaidd crai a chynnwys llinynnol UTF-8 trwy orchmynion ReadText a WriteText pwrpasol."
+    },
+    "577": {
+      "Title": "Gwasanaeth Hanes Sgwrsio",
+      "Description": "Gwasanaeth HomeGenie canolog ar gyfer rheoli a pharhau logiau sgwrsio AI. Trwy API unedig (System.Utility/ChatHistory), mae'n darparu cyd-destun a rennir, storfa JSON awtomataidd, a rheoli hanes amser real i LLMs cwmwl a lleol."
+    },
+    "578": {
+      "Title": "Peiriant Cyd-destun",
+      "Description": "Gwasanaeth canolog ar gyfer cynhyrchu awgrymiadau AI deinamig. Mae'n llenwi templedi gyda'r rhestr o ddyfeisiau y gellir eu rheoli a statws byw'r system (tywydd, ynni, synwyryddion), gan sicrhau ymwybyddiaeth gartref lawn amser real ar gyfer yr AI."
+    },
+    "570": {
+      "Title": "Monitro Data",
+      "Description": "Gwasanaeth dadansoddi canolog ar gyfer ystadegau modiwl hanesyddol. Mae'n galluogi adfer data cyfres amser yn ddeinamig gyda hidlwyr prosesu signalau adeiledig (Cyfartaledd Syml, Cyfartaledd Symudol, Savitzky-Golay) i ddarparu data glân, llyfn ar gyfer siartiau a monitro systemau."
+    },
+    "571": {
+      "Title": "Ystadegau Defnydd Ynni",
+      "Description": "Yn monitro, crynhoi a chofnodi data defnydd ynni (W/awr) yn barhaus ar adegau rheolaidd. Yn gweithredu API llawn ar gyfer pori ac ymholi setiau data hanesyddol."
+    },
+    "572": {
+      "Title": "Enghraifft o Ystadegau Siart Cylch",
+      "Description": "Darparwr siart enghreifftiol sy'n rendro fel siart cylch gyda data statig."
+    },
+    "573": {
+      "Title": "Defnydd Ynni Wythnosol",
+      "Description": "Siart bar yn dangos y defnydd Watiau/Awr cyfartalog ar gyfer pob diwrnod o'r wythnos (Llun-Sul). Mae data wedi'i agregu ar draws pob awr o'r dydd ac wedi'i ffynhonnellu o'r API Ystadegau Defnydd Ynni."
+    },
+    "574": {
+      "Title": "Defnydd Ynni Fesul Awr",
+      "Description": "Siart bar yn dangos y defnydd Watiau/Awr cyfartalog ar gyfer pob awr o'r dydd (00h-23h). Mae data wedi'i agregu dros yr wythnos a ddewiswyd ac wedi'i ffynhonnellu o'r API Ystadegau Defnydd Ynni."
     }
   }
 }

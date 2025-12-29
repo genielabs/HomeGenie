@@ -459,5 +459,14 @@
   "western": "ຕາເວັນຕົກ",
   "my_list": "ບັນຊີລາຍຊື່ຂອງຂ້ອຍ",
   "top_rated": "ອັນດັບສູງສຸດ",
-  "continue_watching": "ສືບຕໍ່ເບິ່ງ"
+  "continue_watching": "ສືບຕໍ່ເບິ່ງ",
+  "download": "ດາວໂຫຼດ",
+  "downloading": "ກຳລັງດາວໂຫຼດ...",
+  "resume": "ປະຫວັດຫຍໍ້",
+  "pause": "ຢຸດຊົ່ວຄາວ",
+  "thoughts": "ຄວາມຄິດ",
+  "api_calls": "ຄຳສັ່ງ API",
+  "show_code": "ສະແດງລະຫັດ",
+  "copy_api_call": "ສຳເນົາສະຕຣິງການເອີ້ນໃຊ້ API",
+  "copy_full_api_url": "ສຳເນົາ URL API ເຕັມ"
 }

@@ -459,5 +459,14 @@
   "western": "Occidental",
   "my_list": "La meva llista",
   "top_rated": "Millor valorat",
-  "continue_watching": "Continua mirant"
+  "continue_watching": "Continua mirant",
+  "download": "Descarrega",
+  "downloading": "Descarregant...",
+  "resume": "Currículum vitae",
+  "pause": "Pausa",
+  "thoughts": "Pensaments",
+  "api_calls": "Comandes de l'API",
+  "show_code": "Mostra el codi",
+  "copy_api_call": "Copia la cadena de crida de l'API",
+  "copy_full_api_url": "Copia l'URL completa de l'API"
 }

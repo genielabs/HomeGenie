@@ -329,6 +329,38 @@
     "575": {
       "Title": "Upravitelj preuzimanja",
       "Description": "Robusna, asinhrona HTTP(S) usluga prijenosa datoteka dostupna putem namjenskog API-ja. Upravlja cijelim životnim ciklusom preuzimanja, podržavajući pauziranje/nastavak (korištenjem Range zaglavlja) i rukovanje privremenim datotekama (.part)."
+    },
+    "576": {
+      "Title": "Upravitelj datoteka",
+      "Description": "Sigurna usluga, vođena API-jem, za čitanje i pisanje datoteka unutar mape osnovnih podataka programa. Podržava i sirovi binarni i UTF-8 string sadržaj putem namjenskih naredbi ReadText i WriteText."
+    },
+    "577": {
+      "Title": "Usluga historije razgovora",
+      "Description": "Centralizirana HomeGenie usluga za upravljanje i pohranjivanje AI zapisa chata. Putem ujedinjenog API-ja (System.Utility/ChatHistory), pruža cloud i lokalne LLM-ove sa zajedničkim kontekstom, automatiziranim JSON skladištenjem i upravljanjem historijom u stvarnom vremenu."
+    },
+    "578": {
+      "Title": "Kontekstualni mehanizam",
+      "Description": "Centralizirana usluga za dinamičko generiranje upita od strane umjetne inteligencije. Popunjava predloške listom uređaja koje je moguće kontrolirati i statusom sistema u stvarnom vremenu (vrijeme, energija, senzori), osiguravajući potpunu informiranost umjetne inteligencije o domu u stvarnom vremenu."
+    },
+    "570": {
+      "Title": "Monitor podataka",
+      "Description": "Centralizirana analitička usluga za historijsku statistiku modula. Omogućava dinamičko preuzimanje podataka vremenskih serija pomoću ugrađenih filtera za obradu signala (jednostavni prosjek, pokretni prosjek, Savitzky-Golay) kako bi se obezbijedili čisti, izglađeni podaci za grafikone i praćenje sistema."
+    },
+    "571": {
+      "Title": "Statistika potrošnje energije",
+      "Description": "Kontinuirano prati, agregira i bilježi podatke o potrošnji energije (W/h) u redovnim intervalima. Implementira potpuni API za pregledavanje i ispitivanje historijskih skupova podataka."
+    },
+    "572": {
+      "Title": "Primjer statistike tortnog grafikona",
+      "Description": "Primjer pružatelja grafikona koji se prikazuje kao tortni grafikon sa statičkim podacima."
+    },
+    "573": {
+      "Title": "Sedmična potrošnja energije",
+      "Description": "Trakasti grafikon koji prikazuje prosječnu potrošnju u vatima/sat za svaki dan u sedmici (pon-ned). Podaci se agregiraju za sve sate u danu i potiču iz API-ja za statistiku potrošnje energije."
+    },
+    "574": {
+      "Title": "Potrošnja energije po satu",
+      "Description": "Trakasti grafikon koji prikazuje prosječnu potrošnju u vatima/satu za svaki sat u danu (00h-23h). Podaci se agregiraju tokom odabrane sedmice i potiču iz API-ja za statistiku korištenja energije."
     }
   }
 }

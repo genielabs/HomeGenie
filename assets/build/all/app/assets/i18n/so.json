@@ -459,5 +459,14 @@
   "western": "Galbeed",
   "my_list": "Liiskayga",
   "top_rated": "Sare loo qiimeeyay",
-  "continue_watching": "Sii wad Daawashada"
+  "continue_watching": "Sii wad Daawashada",
+  "download": "Soo dejiso",
+  "downloading": "Soo dejinaya...",
+  "resume": "Dib-u-bilaabis",
+  "pause": "Jooji",
+  "thoughts": "Fikradaha",
+  "api_calls": "Amarrada API",
+  "show_code": "Muuji Koodhka",
+  "copy_api_call": "Nuqul ka samee xarigga wicitaanka API",
+  "copy_full_api_url": "Nuqul ka samee URL-ka API-ga oo buuxa"
 }

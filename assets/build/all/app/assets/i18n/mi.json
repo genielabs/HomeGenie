@@ -459,5 +459,14 @@
   "western": "Te uru",
   "my_list": "Taku Rarangi",
   "top_rated": "Whakatauranga Runga",
-  "continue_watching": "Matakitaki tonu"
+  "continue_watching": "Matakitaki tonu",
+  "download": "Tikiake",
+  "downloading": "Kei te tikiake...",
+  "resume": "Tātaritanga",
+  "pause": "Whakamutua",
+  "thoughts": "Ngā Whakaaro",
+  "api_calls": "Ngā whakahau API",
+  "show_code": "Whakaaturia te Waehere",
+  "copy_api_call": "Tāruatia te aho karanga API",
+  "copy_full_api_url": "Tāruatia te URL API katoa"
 }

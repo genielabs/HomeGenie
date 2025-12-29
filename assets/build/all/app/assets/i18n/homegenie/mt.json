@@ -329,6 +329,38 @@
     "575": {
       "Title": "Maniġer tat-Tniżżil",
       "Description": "Servizz robust u asinkroniku ta' trasferiment ta' fajls HTTP(S) aċċessibbli permezz ta' API dedikata. Jimmaniġġja ċ-ċiklu sħiħ tal-ħajja tat-tniżżil, jappoġġja pawża/tkomplija (bl-użu ta' Range headers) u mmaniġġjar temporanju ta' fajls (.part)."
+    },
+    "576": {
+      "Title": "Maniġer tal-Fajls",
+      "Description": "Servizz sigur, immexxi mill-API għall-qari u l-kitba ta' fajls fil-folder tad-dejta bażi tal-programm. Jappoġġja kemm kontenut binarju mhux ipproċessat kif ukoll string UTF-8 permezz ta' kmandi ddedikati ReadText u WriteText."
+    },
+    "577": {
+      "Title": "Servizz tal-Istorja taċ-Chat",
+      "Description": "Servizz ċentralizzat HomeGenie għall-ġestjoni u l-persistenza tal-logs taċ-chat tal-AI. Permezz ta' API unifikata (System.Utility/ChatHistory), jipprovdi LLMs lokali u fil-cloud b'kuntest kondiviż, ħażna JSON awtomatizzata, u ġestjoni tal-istorja f'ħin reali."
+    },
+    "578": {
+      "Title": "Magna tal-Kuntest",
+      "Description": "Servizz ċentralizzat għall-ġenerazzjoni dinamika ta' prompts tal-AI. Jimla l-mudelli bil-lista ta' apparati kontrollabbli u l-istatus tas-sistema live (temp, enerġija, sensuri), u jiżgura għarfien totali tad-dar f'ħin reali għall-AI."
+    },
+    "570": {
+      "Title": "Monitor tad-Data",
+      "Description": "Servizz ċentralizzat ta' analiżi għal statistika storika tal-moduli. Jippermetti l-irkupru dinamiku ta' dejta tas-serje tal-ħin b'filtri tal-ipproċessar tas-sinjali integrati (Medja Sempliċi, Medja Mobbli, Savitzky-Golay) biex jipprovdi dejta nadifa u llixxata għal mapep u monitoraġġ tas-sistema."
+    },
+    "571": {
+      "Title": "Statistika dwar l-Użu tal-Enerġija",
+      "Description": "Jimmonitorja, jiġbor flimkien, u jirreġistra kontinwament id-dejta tal-konsum tal-enerġija (W/h) f'intervalli regolari. Jimplimenta API sħiħa għall-browsing u l-interrogazzjoni ta' settijiet ta' dejta storiċi."
+    },
+    "572": {
+      "Title": "Eżempju ta' Statistika ta' Pie Chart",
+      "Description": "Eżempju ta' fornitur ta' ċart li jidher bħala pie chart b'dejta statika."
+    },
+    "573": {
+      "Title": "Konsum tal-Enerġija ta' Kull Ġimgħa",
+      "Description": "Grafika bil-bars li turi l-konsum medju ta' Watts/Siegħa għal kull jum tal-ġimgħa (Mit-Tnejn sal-Ħadd). Id-dejta hija aggregata fis-sigħat kollha tal-ġurnata u ġejja mill-API tal-Istatistika tal-Użu tal-Enerġija."
+    },
+    "574": {
+      "Title": "Konsum tal-Enerġija kull Siegħa",
+      "Description": "Grafika bil-bars li turi l-konsum medju ta' Watts/Siegħa għal kull siegħa tal-ġurnata (00h-23h). Id-dejta hija aggregata matul il-ġimgħa magħżula u ġejja mill-API tal-Istatistika tal-Użu tal-Enerġija."
     }
   }
 }

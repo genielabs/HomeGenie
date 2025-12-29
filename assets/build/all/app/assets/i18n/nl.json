@@ -459,5 +459,14 @@
   "western": "Westers",
   "my_list": "Mijn lijst",
   "top_rated": "Top beoordeeld",
-  "continue_watching": "Blijf kijken"
+  "continue_watching": "Blijf kijken",
+  "download": "Download",
+  "downloading": "Bezig met downloaden...",
+  "resume": "Cv",
+  "pause": "Pauze",
+  "thoughts": "Gedachten",
+  "api_calls": "API-opdrachten",
+  "show_code": "Toon code",
+  "copy_api_call": "Kopieer de API-aanroepreeks",
+  "copy_full_api_url": "Kopieer de volledige API-URL"
 }

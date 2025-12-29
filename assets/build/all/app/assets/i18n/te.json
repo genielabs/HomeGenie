@@ -459,5 +459,14 @@
   "western": "పాశ్చాత్య",
   "my_list": "నా జాబితా",
   "top_rated": "అత్యధిక రేటింగ్ పొందినవి",
-  "continue_watching": "చూడటం కొనసాగించండి"
+  "continue_watching": "చూడటం కొనసాగించండి",
+  "download": "డౌన్¬లోడ్ చేయండి",
+  "downloading": "డౌన్‌లోడ్ చేస్తోంది...",
+  "resume": "పునఃప్రారంభం",
+  "pause": "పాజ్ చేయండి",
+  "thoughts": "ఆలోచనలు",
+  "api_calls": "API ఆదేశాలు",
+  "show_code": "కోడ్ చూపించు",
+  "copy_api_call": "API కాల్ స్ట్రింగ్‌ను కాపీ చేయండి",
+  "copy_full_api_url": "పూర్తి API URLను కాపీ చేయి"
 }

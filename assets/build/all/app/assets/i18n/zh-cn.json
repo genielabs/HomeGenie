@@ -459,5 +459,14 @@
   "western": "西",
   "my_list": "我的列表",
   "top_rated": "评分最高",
-  "continue_watching": "继续观看"
+  "continue_watching": "继续观看",
+  "download": "下载",
+  "downloading": "正在下载……",
+  "resume": "恢复",
+  "pause": "暂停",
+  "thoughts": "想法",
+  "api_calls": "API命令",
+  "show_code": "显示代码",
+  "copy_api_call": "复制 API 调用字符串",
+  "copy_full_api_url": "复制完整的 API URL"
 }

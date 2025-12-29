@@ -459,5 +459,14 @@
   "western": "Qərb",
   "my_list": "Mənim Siyahım",
   "top_rated": "Ən yüksək qiymətləndirilmiş",
-  "continue_watching": "Baxmağa Davam Edin"
+  "continue_watching": "Baxmağa Davam Edin",
+  "download": "Yükləyin",
+  "downloading": "Yüklənir...",
+  "resume": "CV",
+  "pause": "Fasilə",
+  "thoughts": "Düşüncələr",
+  "api_calls": "API əmrləri",
+  "show_code": "Kodu göstər",
+  "copy_api_call": "API çağırış sətrini kopyalayın",
+  "copy_full_api_url": "Tam API URL-ni kopyalayın"
 }

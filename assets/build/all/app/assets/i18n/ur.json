@@ -459,5 +459,14 @@
   "western": "مغربی",
   "my_list": "میری فہرست",
   "top_rated": "ٹاپ ریٹیڈ",
-  "continue_watching": "دیکھنا جاری رکھیں"
+  "continue_watching": "دیکھنا جاری رکھیں",
+  "download": "ڈاؤن لوڈ کریں۔",
+  "downloading": "ڈاؤن لوڈ ہو رہا ہے...",
+  "resume": "دوبارہ شروع کریں۔",
+  "pause": "توقف",
+  "thoughts": "خیالات",
+  "api_calls": "API کمانڈز",
+  "show_code": "کوڈ دکھائیں۔",
+  "copy_api_call": "API کال سٹرنگ کاپی کریں۔",
+  "copy_full_api_url": "مکمل API URL کاپی کریں۔"
 }

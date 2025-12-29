@@ -459,5 +459,14 @@
   "western": "Արևմտյան",
   "my_list": "Իմ ցուցակը",
   "top_rated": "Ամենաբարձր գնահատականով",
-  "continue_watching": "Շարունակել դիտելը"
+  "continue_watching": "Շարունակել դիտելը",
+  "download": "Ներբեռնել",
+  "downloading": "Ներբեռնվում է...",
+  "resume": "Ռեզյումե",
+  "pause": "Դադար",
+  "thoughts": "Մտքեր",
+  "api_calls": "API հրամաններ",
+  "show_code": "Ցուցադրել կոդը",
+  "copy_api_call": "Պատճենել API կանչի տողը",
+  "copy_full_api_url": "Պատճենել API-ի ամբողջական URL-ը"
 }

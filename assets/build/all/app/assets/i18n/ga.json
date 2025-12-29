@@ -459,5 +459,14 @@
   "western": "Thiar",
   "my_list": "Mo Liosta",
   "top_rated": "Barr-Rátáilte",
-  "continue_watching": "Lean ar aghaidh ag faire"
+  "continue_watching": "Lean ar aghaidh ag faire",
+  "download": "Íoslódáil",
+  "downloading": "Ag íoslódáil...",
+  "resume": "Atosú",
+  "pause": "Sos",
+  "thoughts": "Smaointe",
+  "api_calls": "Orduithe API",
+  "show_code": "Taispeáin an Cód",
+  "copy_api_call": "Cóipeáil teaghrán glao API",
+  "copy_full_api_url": "Cóipeáil URL iomlán an API"
 }

@@ -459,5 +459,14 @@
   "western": "Zakumadzulo",
   "my_list": "Mndandanda Wanga",
   "top_rated": "Ovoteledwa Kwambiri",
-  "continue_watching": "Pitirizani Kuonera"
+  "continue_watching": "Pitirizani Kuonera",
+  "download": "Tsitsani",
+  "downloading": "Kutsitsa...",
+  "resume": "Pitilizani",
+  "pause": "Imani kaye",
+  "thoughts": "Maganizo",
+  "api_calls": "Malamulo a API",
+  "show_code": "Onetsani Khodi",
+  "copy_api_call": "Koperani chingwe choyimbira cha API",
+  "copy_full_api_url": "Koperani API URL yonse"
 }

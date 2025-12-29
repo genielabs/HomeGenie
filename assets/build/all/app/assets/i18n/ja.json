@@ -459,5 +459,14 @@
   "western": "西洋",
   "my_list": "マイリスト",
   "top_rated": "トップ評価",
-  "continue_watching": "視聴を続ける"
+  "continue_watching": "視聴を続ける",
+  "download": "ダウンロード",
+  "downloading": "ダウンロード中...",
+  "resume": "再開する",
+  "pause": "一時停止",
+  "thoughts": "考え",
+  "api_calls": "APIコマンド",
+  "show_code": "コードを表示",
+  "copy_api_call": "API呼び出し文字列をコピー",
+  "copy_full_api_url": "完全なAPI URLをコピー"
 }

@@ -137,7 +137,7 @@
         <textarea #prompt_input
             placeholder="Start typing a prompt" maxlength="65536"
             (keydown)="handleKeyDown(event)"></textarea>
-        <button #send_button (click)="isStreaming() ? control('Stop') : sendMessage()">
+        <button #send_button (click)="isStreaming() ? intentHandler('Prompt.Cancel') : sendMessage()">
           <span #arrow class="material-symbols">arrow_forward</span>
           <img #loading class="svg-icon-black" src="assets/images/3-dots-rotate.svg">
           <div #typing class="loader"></div>

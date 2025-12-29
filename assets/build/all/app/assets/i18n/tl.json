@@ -459,5 +459,14 @@
   "western": "Kanluranin",
   "my_list": "Aking Listahan",
   "top_rated": "Nangungunang Na-rate",
-  "continue_watching": "Ituloy ang Panonood"
+  "continue_watching": "Ituloy ang Panonood",
+  "download": "I-download",
+  "downloading": "Dina-download...",
+  "resume": "Resume",
+  "pause": "Ihinto",
+  "thoughts": "Mga Kaisipan",
+  "api_calls": "Mga utos ng API",
+  "show_code": "Ipakita ang Kodigo",
+  "copy_api_call": "Kopyahin ang string ng tawag sa API",
+  "copy_full_api_url": "Kopyahin ang buong URL ng API"
 }

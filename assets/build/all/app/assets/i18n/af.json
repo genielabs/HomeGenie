@@ -459,5 +459,14 @@
   "western": "Westerse",
   "my_list": "My lys",
   "top_rated": "Topgegradeer",
-  "continue_watching": "Gaan voort met kyk"
+  "continue_watching": "Gaan voort met kyk",
+  "download": "Laai af",
+  "downloading": "Laai tans af...",
+  "resume": "CV",
+  "pause": "Pouseer",
+  "thoughts": "Gedagtes",
+  "api_calls": "API-opdragte",
+  "show_code": "Wys Kode",
+  "copy_api_call": "Kopieer API-oproepstring",
+  "copy_full_api_url": "Kopieer volledige API-URL"
 }

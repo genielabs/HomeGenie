@@ -329,6 +329,38 @@
     "575": {
       "Title": "Manadjè Telechajman",
       "Description": "Yon sèvis transfè fichye HTTP(S) asenkron ki solid, aksesib atravè yon API dedye. Li jere tout sik lavi telechajman an, li sipòte poz/rekòmanse (lè l sèvi avèk antèt Range) ak jesyon fichye tanporè (.part)."
+    },
+    "576": {
+      "Title": "Manadjè Dosye",
+      "Description": "Yon sèvis an sekirite, ki fonksyone grasa API, pou li epi ekri fichye nan dosye done debaz pwogram nan. Li sipòte tou de kontni binè kri ak chèn UTF-8 atravè kòmand ReadText ak WriteText dedye."
+    },
+    "577": {
+      "Title": "Sèvis Istwa Chat",
+      "Description": "Sèvis HomeGenie santralize pou jere epi konsève jounal chat IA yo. Atravè yon API inifye (System.Utility/ChatHistory), li bay LLM nan nwaj la ak lokal yo yon kontèks pataje, depo JSON otomatik, ak jesyon istwa an tan reyèl."
+    },
+    "578": {
+      "Title": "Motè Kontèks",
+      "Description": "Sèvis santralize pou jenerasyon envit dinamik ak entèlijans atifisyèl (IA). Li ranpli modèl yo ak lis aparèy ki ka kontwole yo ak estati sistèm an dirèk (tan, enèji, detèktè), sa ki asire yon konsyans total sou kay la an tan reyèl pou IA a."
+    },
+    "570": {
+      "Title": "Monitè Done",
+      "Description": "Sèvis analiz santralize pou estatistik modil istorik. Li pèmèt rekipere dinamik done seri tanporèl ak filtè pwosesis siyal entegre (Mwayèn Senp, Mwayèn Mobil, Savitzky-Golay) pou bay done pwòp ak lis pou graf ak siveyans sistèm."
+    },
+    "571": {
+      "Title": "Estatistik sou Itilizasyon Enèji",
+      "Description": "Kontinyèlman kontwole, rasanble, epi anrejistre done konsomasyon enèji (W/h) nan entèval regilye. Aplike yon API konplè pou browse ak rechèche ansanm done istorik yo."
+    },
+    "572": {
+      "Title": "Egzanp Estatistik sou yon graf sikilè",
+      "Description": "Egzanp founisè tablo ki rann kòm yon graf sikilè ak done estatik."
+    },
+    "573": {
+      "Title": "Konsomasyon Enèji chak semèn",
+      "Description": "Grafik ba ki montre konsomasyon mwayèn Watts/Èdtan pou chak jou nan semèn nan (Lendi-Dimanch). Done yo rasanble sou tout èdtan nan jounen an epi yo soti nan API Estatistik Itilizasyon Enèji a."
+    },
+    "574": {
+      "Title": "Konsomasyon enèji chak èdtan",
+      "Description": "Grafik ba ki montre konsomasyon mwayèn Watts/Èdtan pou chak èdtan nan jounen an (00h-23h). Done yo rasanble sou semèn ki chwazi a epi yo soti nan API Estatistik Itilizasyon Enèji a."
     }
   }
 }

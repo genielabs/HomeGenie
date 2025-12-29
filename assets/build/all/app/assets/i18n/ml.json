@@ -459,5 +459,14 @@
   "western": "പടിഞ്ഞാറൻ",
   "my_list": "എന്റെ ലിസ്റ്റ്",
   "top_rated": "മികച്ച റേറ്റിംഗ് ഉള്ളവ",
-  "continue_watching": "കാണുന്നത് തുടരുക"
+  "continue_watching": "കാണുന്നത് തുടരുക",
+  "download": "ഇറക്കുമതി",
+  "downloading": "ഡൗൺലോഡ് ചെയ്യുന്നു...",
+  "resume": "പുനരാരംഭിക്കുക",
+  "pause": "താൽക്കാലികമായി നിർത്തുക",
+  "thoughts": "ചിന്തകൾ",
+  "api_calls": "API കമാൻഡുകൾ",
+  "show_code": "കോഡ് കാണിക്കുക",
+  "copy_api_call": "API കോൾ സ്ട്രിംഗ് പകർത്തുക",
+  "copy_full_api_url": "പൂർണ്ണ API URL പകർത്തുക"
 }

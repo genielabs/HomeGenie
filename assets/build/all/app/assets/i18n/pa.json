@@ -459,5 +459,14 @@
   "western": "ਪੱਛਮੀ",
   "my_list": "ਮੇਰੀ ਸੂਚੀ",
   "top_rated": "ਸਭ ਤੋਂ ਵਧੀਆ ਦਰਜਾ ਪ੍ਰਾਪਤ",
-  "continue_watching": "ਦੇਖਣਾ ਜਾਰੀ ਰੱਖੋ"
+  "continue_watching": "ਦੇਖਣਾ ਜਾਰੀ ਰੱਖੋ",
+  "download": "ਡਾਊਨਲੋਡ",
+  "downloading": "ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+  "resume": "ਰੈਜ਼ਿਊਮੇ",
+  "pause": "ਵਿਰਾਮ",
+  "thoughts": "ਵਿਚਾਰ",
+  "api_calls": "API ਕਮਾਂਡਾਂ",
+  "show_code": "ਕੋਡ ਦਿਖਾਓ",
+  "copy_api_call": "API ਕਾਲ ਸਤਰ ਕਾਪੀ ਕਰੋ",
+  "copy_full_api_url": "ਪੂਰਾ API URL ਕਾਪੀ ਕਰੋ"
 }

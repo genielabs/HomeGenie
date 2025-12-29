@@ -459,5 +459,14 @@
   "western": "Rietumu",
   "my_list": "Mans saraksts",
   "top_rated": "Augstāk novērtētais",
-  "continue_watching": "Turpināt skatīties"
+  "continue_watching": "Turpināt skatīties",
+  "download": "Lejupielādēt",
+  "downloading": "Lejupielādē...",
+  "resume": "CV",
+  "pause": "Pauze",
+  "thoughts": "Domas",
+  "api_calls": "API komandas",
+  "show_code": "Rādīt kodu",
+  "copy_api_call": "Kopēt API izsaukuma virkni",
+  "copy_full_api_url": "Kopēt pilnu API URL"
 }

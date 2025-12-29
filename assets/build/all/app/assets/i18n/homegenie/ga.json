@@ -328,7 +328,39 @@
     },
     "575": {
       "Title": "Bainisteoir Íoslódála",
-      "Description": "Seirbhís aistrithe comhad HTTP(S) láidir, neamhshioncrónach atá inrochtana trí API tiomnaithe. Bainistíonn sé an saolré íoslódála iomlán, ag tacú le sos/atosú (ag baint úsáide as ceanntásca Raoin) agus láimhseáil comhad sealadach (.part)."
+      "Description": "Seirbhís láidir, neamhshioncrónach aistrithe comhad HTTP(S) atá inrochtana trí API tiomnaithe. Bainistíonn sé an saolré íoslódála iomlán, ag tacú le sos/atosú (ag baint úsáide as ceanntásca Raoin) agus láimhseáil comhad sealadach (.part)."
+    },
+    "576": {
+      "Title": "Bainisteoir Comhad",
+      "Description": "Seirbhís shlán, faoi thiomáint API, chun comhaid a léamh agus a scríobh laistigh de fhillteán sonraí bunúsach an chláir. Tacaíonn sé le hábhar dénártha amh agus ábhar teaghrán UTF-8 trí orduithe tiomnaithe ReadText agus WriteText."
+    },
+    "577": {
+      "Title": "Seirbhís Stair Comhrá",
+      "Description": "Seirbhís láraithe HomeGenie chun logaí comhrá AI a bhainistiú agus a choinneáil beo. Trí API aontaithe (System.Utility/ChatHistory), soláthraíonn sé comhthéacs comhroinnte, stóráil uathoibrithe JSON, agus bainistíocht staire fíor-ama do LLManna scamall agus áitiúla."
+    },
+    "578": {
+      "Title": "Inneall Comhthéacs",
+      "Description": "Seirbhís láraithe chun leideanna dinimiciúla AI a ghiniúint. Líonann sé teimpléid leis an liosta de ghléasanna inrialaithe agus stádas beo an chórais (aimsir, fuinneamh, braiteoirí), rud a chinntíonn feasacht iomlán fíor-ama sa bhaile don AI."
+    },
+    "570": {
+      "Title": "Monatóir Sonraí",
+      "Description": "Seirbhís anailíse láraithe do staitisticí stairiúla modúl. Cuireann sé ar chumas aisghabháil dhinimiciúil sonraí sraithe ama le scagairí próiseála comharthaí ionsuite (Meán Simplí, Meán Gluaisteach, Savitzky-Golay) chun sonraí glana, réidhe a sholáthar do chairteacha agus do mhonatóireacht chórais."
+    },
+    "571": {
+      "Title": "Staitisticí Úsáide Fuinnimh",
+      "Description": "Déanann monatóireacht, comhiomlánú agus logáil leanúnach ar shonraí tomhaltais fuinnimh (W/u) ag eatraimh rialta. Cuireann sé API iomlán i bhfeidhm chun tacair sonraí stairiúla a bhrabhsáil agus a fhiosrú."
+    },
+    "572": {
+      "Title": "Sampla de Staitisticí Cairte Pie",
+      "Description": "Soláthraí cairte samplach a rindreáiltear mar chairt phíce le sonraí statach."
+    },
+    "573": {
+      "Title": "Tomhaltas Fuinnimh Seachtainiúil",
+      "Description": "Cairt barra a thaispeánann an meántomhaltas Vata/Uair do gach lá den tseachtain (Luan-Domh). Déantar sonraí a chomhiomlánú thar gach uair an chloig den lá agus foinsítear iad ó API Staitisticí Úsáide Fuinnimh."
+    },
+    "574": {
+      "Title": "Tomhaltas Fuinnimh in aghaidh na hUaire",
+      "Description": "Cairt barra a thaispeánann an meántomhaltas Vata/Uair an chloig do gach uair an chloig den lá (00h-23h). Déantar na sonraí a chomhiomlánú thar an tseachtain roghnaithe agus foinsítear iad ó API Staitisticí Úsáide Fuinnimh."
     }
   }
 }

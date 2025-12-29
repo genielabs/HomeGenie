@@ -459,5 +459,14 @@
   "western": "ಪಾಶ್ಚಾತ್ಯ",
   "my_list": "ನನ್ನ ಪಟ್ಟಿ",
   "top_rated": "ಅತ್ಯುತ್ತಮ ರೇಟಿಂಗ್",
-  "continue_watching": "ನೋಡುವುದನ್ನು ಮುಂದುವರಿಸಿ"
+  "continue_watching": "ನೋಡುವುದನ್ನು ಮುಂದುವರಿಸಿ",
+  "download": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
+  "downloading": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...",
+  "resume": "ಪುನರಾರಂಭ",
+  "pause": "ವಿರಾಮಗೊಳಿಸಿ",
+  "thoughts": "ಆಲೋಚನೆಗಳು",
+  "api_calls": "API ಆಜ್ಞೆಗಳು",
+  "show_code": "ಕೋಡ್ ತೋರಿಸಿ",
+  "copy_api_call": "API ಕರೆ ಸ್ಟ್ರಿಂಗ್ ಅನ್ನು ನಕಲಿಸಿ",
+  "copy_full_api_url": "ಪೂರ್ಣ API URL ಅನ್ನು ನಕಲಿಸಿ"
 }

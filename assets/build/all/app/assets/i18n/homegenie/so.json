@@ -1,5 +1,5 @@
 {
-  " ": "-----",
+  " ": "-- ...",
   "welcome_to_homegenie": "Ku soo dhawoow HomeGenie!",
   "welcome_subtitle": "Sirdoonka Automation-ka ee la baran karo",
   "not_configured_yet": "Nidaamka weli ma habaysan Wizard habaynta ayaa kaa caawin doona in aad nidaamkaaga kor u qaaddo oo aad ku socoto dhawr tillaabo.",
@@ -328,7 +328,39 @@
     },
     "575": {
       "Title": "Maareeyaha Soo dejinta",
-      "Description": "Adeeg wareejinta faylka HTTP(S) oo adag oo aan isku mid ahayn oo laga heli karo API gaar ah. Waxay maamushaa wareegga nolosha oo dhan ee soo dejinta, waxay taageertaa joojinta/dib u bilaabista (iyadoo adeegsanaysa cinwaanada Range) iyo maaraynta faylka ku meel gaarka ah (.part)."
+      "Description": "Adeeg wareejinta faylka HTTP(S) oo adag oo aan isku mid ahayn oo laga heli karo API gaar ah. Waxay maamushaa wareegga nolosha oo dhan, iyadoo taageerta hakinta/dib u bilaabista (iyadoo adeegsanaysa cinwaanada Range) iyo maaraynta faylka ku meel gaarka ah (.part)."
+    },
+    "576": {
+      "Title": "Maareeyaha Faylka",
+      "Description": "Adeeg ammaan ah oo API-ku-saleysan oo loogu talagalay akhrinta iyo qorista faylasha ku jira faylka xogta saldhigga ah ee barnaamijka. Waxay taageertaa labadaba waxyaabaha ku jira nooca binary-ga cayriin iyo UTF-8 iyada oo loo marayo amarrada ReadText iyo WriteText ee gaarka ah."
+    },
+    "577": {
+      "Title": "Adeegga Taariikhda Sheekaysiga",
+      "Description": "Adeeg HomeGenie oo dhexe oo loogu talagalay maaraynta iyo sii wadida diiwaannada sheekaysiga AI. Iyada oo loo marayo API midaysan (System.Utility/ChatHistory), waxay bixisaa daruur iyo LLMs maxalli ah oo leh macnaha guud ee la wadaago, kaydinta JSON ee otomaatiga ah, iyo maaraynta taariikhda waqtiga-dhabta ah."
+    },
+    "578": {
+      "Title": "Mashiinka Macnaha Guud",
+      "Description": "Adeeg dhexe oo loogu talagalay soo saarista degdegga ah ee AI. Waxay ku buuxisaa qaababka liiska aaladaha la xakamayn karo iyo xaaladda nidaamka tooska ah (cimilada, tamarta, dareemayaasha), iyadoo hubinaysa wacyigelin buuxda oo guriga ah oo loogu talagalay AI."
+    },
+    "570": {
+      "Title": "Kormeeraha Xogta",
+      "Description": "Adeeg falanqayn dhexe oo loogu talagalay tirakoobka module-ka taariikhiga ah. Waxay awood u siineysaa soo celinta firfircoon ee xogta taxanaha waqtiga oo leh shaandheeyayaasha habaynta calaamadaha ee ku dhex jira (Average Simple, Moving Celceliska, Savitzky-Golay) si loo bixiyo xog nadiif ah oo siman oo loogu talagalay jaantusyada iyo la socodka nidaamka."
+    },
+    "571": {
+      "Title": "Tirakoobka Isticmaalka Tamarta",
+      "Description": "Si joogto ah ayuu ula socdaa, isu geeyaa, una diiwaangeliyaa xogta isticmaalka tamarta (W/h) wakhtiyo joogto ah. Wuxuu hirgeliyaa API buuxa oo loogu talagalay daalacashada iyo weydiinta xogta taariikhiga ah."
+    },
+    "572": {
+      "Title": "Tusaalaha Tirakoobka Shaxda Pie",
+      "Description": "Tusaale ahaan bixiyaha jaantuska oo u muuqda jaantus jajab ah oo leh xog aan isbeddelin."
+    },
+    "573": {
+      "Title": "Isticmaalka Tamarta Toddobaadlaha ah",
+      "Description": "Shaxda baarka oo muujinaysa celceliska isticmaalka Watts/Saacadaha maalin kasta oo usbuuca ah (Isniin-Axad). Xogta waxaa la isku soo ururiyaa dhammaan saacadaha maalinta waxaana laga soo qaatay API-ga Tirakoobka Isticmaalka Tamarta."
+    },
+    "574": {
+      "Title": "Isticmaalka Tamarta Saacadlaha ah",
+      "Description": "Shaxda baarka oo muujinaysa celceliska isticmaalka Watts/Saacadda saacad kasta oo maalinta ah (00h-23h). Xogta waxaa la isku soo ururiyay toddobaadka la doortay waxaana laga soo qaatay API-ga Tirakoobka Isticmaalka Tamarta."
     }
   }
 }

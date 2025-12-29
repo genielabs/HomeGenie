@@ -459,5 +459,14 @@
   "western": "Oorun",
   "my_list": "Akojọ Mi",
   "top_rated": "Top won won",
-  "continue_watching": "Tesiwaju Wiwo"
+  "continue_watching": "Tesiwaju Wiwo",
+  "download": "Ṣe igbasilẹ",
+  "downloading": "Ngbasilẹ...",
+  "resume": "Ìbẹ̀rẹ̀ iṣẹ́-ṣíwájú",
+  "pause": "Dúró díẹ̀",
+  "thoughts": "Àwọn èrò",
+  "api_calls": "Àwọn àṣẹ API",
+  "show_code": "Fi Kóòdù Hàn",
+  "copy_api_call": "Daakọ okun ipe API",
+  "copy_full_api_url": "Da gbogbo URL API kọ"
 }

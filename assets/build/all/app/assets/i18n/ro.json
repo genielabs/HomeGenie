@@ -459,5 +459,14 @@
   "western": "Vest",
   "my_list": "Lista mea",
   "top_rated": "Cele mai bine cotate",
-  "continue_watching": "Continuă să vizionezi"
+  "continue_watching": "Continuă să vizionezi",
+  "download": "Descărcare",
+  "downloading": "Se descarcă...",
+  "resume": "Relua",
+  "pause": "Pauză",
+  "thoughts": "Gânduri",
+  "api_calls": "Comenzi API",
+  "show_code": "Afișați codul",
+  "copy_api_call": "Copiați șirul de apel API",
+  "copy_full_api_url": "Copiați adresa URL API completă"
 }

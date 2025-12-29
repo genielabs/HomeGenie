@@ -459,5 +459,14 @@
   "western": "Yamma",
   "my_list": "Jerin Nawa",
   "top_rated": "Mafi Girma",
-  "continue_watching": "Ci gaba da Kallo"
+  "continue_watching": "Ci gaba da Kallo",
+  "download": "Saukewa",
+  "downloading": "Ana saukewa...",
+  "resume": "Ci gaba da karatu",
+  "pause": "Dakatar da",
+  "thoughts": "Tunani",
+  "api_calls": "Umarnin API",
+  "show_code": "Nuna Lamba",
+  "copy_api_call": "Kwafi layin kiran API",
+  "copy_full_api_url": "Kwafi cikakken URL na API"
 }

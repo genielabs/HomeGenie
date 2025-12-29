@@ -1,5 +1,5 @@
 {
-  " ": "------------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "Takulandilani ku HomeGenie!",
   "welcome_subtitle": "The programmable automation intelligence",
   "not_configured_yet": "Dongosolo silinakonzedwe panobe. Wizard iyi yokhazikitsira ikuthandizani kuti mukhazikitse dongosolo lanu ndikuyenda pang'onopang'ono.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Woyang'anira Tsitsani",
       "Description": "Utumiki wamphamvu komanso wosasinthasintha wa HTTP(S) wosamutsa mafayilo womwe umapezeka kudzera mu API yapadera. Umayang'anira moyo wonse wotsitsa, kuthandizira kuyimitsa/kuyambiranso (pogwiritsa ntchito mitu ya Range) ndi kusamalira mafayilo kwakanthawi (.part)."
+    },
+    "576": {
+      "Title": "Woyang'anira Mafayilo",
+      "Description": "Utumiki wotetezeka, woyendetsedwa ndi API wowerengera ndi kulemba mafayilo mkati mwa chikwatu cha deta ya pulogalamuyo. Umathandizira zonse ziwiri za raw binary ndi UTF-8 string content kudzera mu malamulo apadera a ReadText ndi WriteText."
+    },
+    "577": {
+      "Title": "Utumiki wa Mbiri ya Macheza",
+      "Description": "Utumiki wa HomeGenie wokhazikika wowongolera ndi kusunga zolemba za macheza a AI. Kudzera mu API yogwirizana (System.Utility/ChatHistory), imapereka ma LLM amtambo ndi am'deralo okhala ndi zinthu zogawana, malo osungira a JSON okha, komanso kasamalidwe ka mbiri yakale nthawi yeniyeni."
+    },
+    "578": {
+      "Title": "Injini Yogwirizana",
+      "Description": "Utumiki wapakati wopangira AI mwachangu. Umadzaza ma tempuleti ndi mndandanda wa zida zowongolera komanso momwe makina amagwirira ntchito (nyengo, mphamvu, masensa), kuonetsetsa kuti chidziwitso chonse cha AI chikuchitika panyumba nthawi yeniyeni."
+    },
+    "570": {
+      "Title": "Chowunikira Deta",
+      "Description": "Utumiki wowunikira wapakati pa ziwerengero zakale za module. Umathandizira kupeza deta ya nthawi pogwiritsa ntchito zosefera zokonzera zizindikiro (Simple Average, Moving Average, Savitzky-Golay) kuti upereke deta yoyera komanso yosalala ya ma chart ndi kuwunika kwa makina."
+    },
+    "571": {
+      "Title": "Ziwerengero Zogwiritsira Ntchito Mphamvu",
+      "Description": "Imayang'anira, kusonkhanitsa, ndi kulemba deta yogwiritsira ntchito mphamvu (W/h) nthawi zonse. Imagwiritsa ntchito API yonse yofufuzira ndi kufufuza ma data akale."
+    },
+    "572": {
+      "Title": "Chitsanzo cha ziwerengero za tchati cha pie",
+      "Description": "Chitsanzo cha wopereka tchati chomwe chimawoneka ngati tchati cha pie chokhala ndi data yosasinthika."
+    },
+    "573": {
+      "Title": "Kugwiritsa Ntchito Mphamvu Sabata Lililonse",
+      "Description": "Tchati cha mipiringidzo chomwe chikuwonetsa kuchuluka kwa ma Watts/Ola omwe amagwiritsidwa ntchito tsiku lililonse la sabata (Lolemba-Lamlungu). Deta imasonkhanitsidwa m'maola onse a tsikulo ndipo imachokera ku Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Kugwiritsa Ntchito Mphamvu pa Ola Lililonse",
+      "Description": "Tchati cha mipiringidzo chomwe chikuwonetsa kuchuluka kwa ma Watts/Ola omwe amagwiritsidwa ntchito pa ola lililonse la tsiku (00h-23h). Deta imasonkhanitsidwa pamodzi pa sabata yosankhidwa ndikupeza kuchokera ku Energy Use Statistics API."
     }
   }
 }

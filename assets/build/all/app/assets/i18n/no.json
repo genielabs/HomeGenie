@@ -459,5 +459,14 @@
   "western": "Vestlig",
   "my_list": "Min liste",
   "top_rated": "Topprangert",
-  "continue_watching": "Fortsett å se"
+  "continue_watching": "Fortsett å se",
+  "download": "Last ned",
+  "downloading": "Laster ned...",
+  "resume": "Gjenoppta",
+  "pause": "Pause",
+  "thoughts": "Tanker",
+  "api_calls": "API-kommandoer",
+  "show_code": "Vis kode",
+  "copy_api_call": "Kopier API-kallstreng",
+  "copy_full_api_url": "Kopier fullstendig API-URL"
 }

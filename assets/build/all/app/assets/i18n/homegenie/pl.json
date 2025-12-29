@@ -329,6 +329,38 @@
     "575": {
       "Title": "Menedżer pobierania",
       "Description": "Niezawodna, asynchroniczna usługa transferu plików HTTP(S) dostępna za pośrednictwem dedykowanego interfejsu API. Zarządza pełnym cyklem pobierania, obsługując wstrzymywanie/wznawianie (za pomocą nagłówków Range) oraz obsługę plików tymczasowych (.part)."
+    },
+    "576": {
+      "Title": "Menedżer plików",
+      "Description": "Bezpieczna, oparta na API usługa do odczytu i zapisu plików w folderze danych bazowych programu. Obsługuje zarówno surowe dane binarne, jak i ciągi znaków UTF-8 za pośrednictwem dedykowanych poleceń ReadText i WriteText."
+    },
+    "577": {
+      "Title": "Usługa historii czatów",
+      "Description": "Scentralizowana usługa HomeGenie do zarządzania i przechowywania logów czatów AI. Poprzez ujednolicone API (System.Utility/ChatHistory) zapewnia chmurowym i lokalnym systemom LLM współdzielony kontekst, automatyczne przechowywanie danych JSON oraz zarządzanie historią w czasie rzeczywistym."
+    },
+    "578": {
+      "Title": "Silnik kontekstowy",
+      "Description": "Scentralizowana usługa do dynamicznego generowania komunikatów AI. Wypełnia szablony listą sterowalnych urządzeń i aktualnym stanem systemu (pogoda, zużycie energii, czujniki), zapewniając pełną kontrolę nad domem w czasie rzeczywistym dla AI."
+    },
+    "570": {
+      "Title": "Monitor danych",
+      "Description": "Scentralizowana usługa analizy historycznych statystyk modułów. Umożliwia dynamiczne pobieranie danych szeregów czasowych z wbudowanymi filtrami przetwarzania sygnału (uśrednianie proste, uśrednianie ruchome, Savitzky-Golay), zapewniając czyste, wygładzone dane do wykresów i monitorowania systemu."
+    },
+    "571": {
+      "Title": "Statystyki zużycia energii",
+      "Description": "Ciągłe monitorowanie, agregowanie i rejestrowanie danych dotyczących zużycia energii (W/h) w regularnych odstępach czasu. Implementacja pełnego API do przeglądania i wykonywania zapytań w historycznych zestawach danych."
+    },
+    "572": {
+      "Title": "Przykład statystyk wykresu kołowego",
+      "Description": "Przykładowy dostawca wykresów, który generuje wykres kołowy ze statycznymi danymi."
+    },
+    "573": {
+      "Title": "Tygodniowe zużycie energii",
+      "Description": "Wykres słupkowy przedstawiający średnie zużycie energii w watach na godzinę dla każdego dnia tygodnia (pon.-niedz.). Dane są agregowane ze wszystkich godzin dnia i pochodzą z interfejsu API statystyk zużycia energii."
+    },
+    "574": {
+      "Title": "Godzinowe zużycie energii",
+      "Description": "Wykres słupkowy przedstawiający średnie zużycie energii w watach na godzinę dla każdej godziny dnia (00-23). Dane są agregowane dla wybranego tygodnia i pochodzą z interfejsu API statystyk zużycia energii."
     }
   }
 }

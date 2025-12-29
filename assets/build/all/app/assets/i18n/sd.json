@@ -459,5 +459,14 @@
   "western": "مغربي",
   "my_list": "منهنجي فهرست",
   "top_rated": "اعليٰ درجه بندي وارو",
-  "continue_watching": "ڏسڻ جاري رکو"
+  "continue_watching": "ڏسڻ جاري رکو",
+  "download": "ڊائون لوڊ ڪريو",
+  "downloading": "ڊائون لوڊ ٿي رهيو آهي...",
+  "resume": "شروع ڪريو",
+  "pause": "روڪيو",
+  "thoughts": "خيالَ",
+  "api_calls": "API حڪم",
+  "show_code": "ڪوڊ ڏيکاريو",
+  "copy_api_call": "API ڪال اسٽرنگ ڪاپي ڪريو",
+  "copy_full_api_url": "مڪمل API URL ڪاپي ڪريو"
 }

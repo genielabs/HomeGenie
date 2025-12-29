@@ -329,6 +329,38 @@
     "575": {
       "Title": "Lejupielāžu pārvaldnieks",
       "Description": "Stabils, asinhrons HTTP(S) failu pārsūtīšanas pakalpojums, kas pieejams, izmantojot īpašu API. Tas pārvalda pilnu lejupielādes dzīves ciklu, atbalstot pauzi/atsākšanu (izmantojot diapazona galvenes) un pagaidu failu apstrādi (.part)."
+    },
+    "576": {
+      "Title": "Failu pārvaldnieks",
+      "Description": "Drošs, API balstīts pakalpojums failu lasīšanai un rakstīšanai programmas bāzes datu mapē. Tas atbalsta gan neapstrādātu bināro, gan UTF-8 virkņu saturu, izmantojot īpašas ReadText un WriteText komandas."
+    },
+    "577": {
+      "Title": "Tērzēšanas vēstures pakalpojums",
+      "Description": "Centralizēts HomeGenie pakalpojums mākslīgā intelekta tērzēšanas žurnālu pārvaldībai un saglabāšanai. Izmantojot vienotu API (System.Utility/ChatHistory), tas nodrošina mākoņa un lokālos LLM ar koplietojamu kontekstu, automatizētu JSON krātuvi un reāllaika vēstures pārvaldību."
+    },
+    "578": {
+      "Title": "Konteksta dzinējs",
+      "Description": "Centralizēts pakalpojums dinamiskai mākslīgā intelekta (AI) uzvedņu ģenerēšanai. Tas aizpilda veidnes ar kontrolējamo ierīču sarakstu un tiešsaistes sistēmas statusu (laika apstākļi, enerģija, sensori), nodrošinot pilnīgu reāllaika informētību par mājām AI."
+    },
+    "570": {
+      "Title": "Datu monitors",
+      "Description": "Centralizēts analīzes pakalpojums vēsturiskajai moduļu statistikai. Tas nodrošina dinamisku laika rindu datu izgūšanu ar iebūvētiem signālu apstrādes filtriem (vienkāršais vidējais, slīdošais vidējais, Savitzka-Golaja filtrs), lai nodrošinātu tīrus, izlīdzinātus datus diagrammām un sistēmas uzraudzībai."
+    },
+    "571": {
+      "Title": "Enerģijas patēriņa statistika",
+      "Description": "Nepārtraukti uzrauga, apkopo un regulāri reģistrē enerģijas patēriņa datus (W/h). Ievieš pilnu API vēsturisko datu kopu pārlūkošanai un vaicāšanai."
+    },
+    "572": {
+      "Title": "Sektoru diagrammas statistikas piemērs",
+      "Description": "Diagrammu nodrošinātāja piemērs, kas tiek atveidots kā sektoru diagramma ar statiskiem datiem."
+    },
+    "573": {
+      "Title": "Nedēļas enerģijas patēriņš",
+      "Description": "Stabiņu diagramma, kurā attēlots vidējais patēriņš vatos stundā katrai nedēļas dienai (pirmdien–svētdien). Dati tiek apkopoti visās diennakts stundās un iegūti no enerģijas patēriņa statistikas API."
+    },
+    "574": {
+      "Title": "Stundas enerģijas patēriņš",
+      "Description": "Stabiņu diagramma, kurā attēlots vidējais patēriņš vatos stundā katrai diennakts stundai (no 00:00 līdz 23:00). Dati tiek apkopoti atlasītajā nedēļā un iegūti no enerģijas patēriņa statistikas API."
     }
   }
 }

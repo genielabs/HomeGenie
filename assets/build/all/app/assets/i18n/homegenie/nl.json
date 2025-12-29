@@ -329,6 +329,38 @@
     "575": {
       "Title": "Downloadmanager",
       "Description": "Een robuuste, asynchrone HTTP(S)-bestandsoverdrachtservice die toegankelijk is via een speciale API. Deze service beheert de volledige downloadcyclus en ondersteunt pauzeren/hervatten (met behulp van Range-headers) en de afhandeling van tijdelijke bestanden (.part)."
+    },
+    "576": {
+      "Title": "Bestandsbeheerder",
+      "Description": "Een veilige, API-gestuurde service voor het lezen en schrijven van bestanden in de basisgegevensmap van het programma. Het ondersteunt zowel binaire bestanden als UTF-8-tekenreeksen via speciale ReadText- en WriteText-opdrachten."
+    },
+    "577": {
+      "Title": "Chatgeschiedenisservice",
+      "Description": "Een gecentraliseerde HomeGenie-service voor het beheren en opslaan van AI-chatlogs. Via een uniforme API (System.Utility/ChatHistory) biedt het cloud- en lokale LLM's een gedeelde context, geautomatiseerde JSON-opslag en realtime geschiedenisbeheer."
+    },
+    "578": {
+      "Title": "Context Engine",
+      "Description": "Gecentraliseerde service voor het dynamisch genereren van AI-prompts. Deze service vult sjablonen met een lijst van aanstuurbare apparaten en de actuele systeemstatus (weer, energieverbruik, sensoren), waardoor de AI volledig realtime inzicht heeft in de woning."
+    },
+    "570": {
+      "Title": "Gegevensmonitor",
+      "Description": "Gecentraliseerde analyseservice voor historische modulestatistieken. Deze service maakt dynamische ophalen van tijdreeksgegevens mogelijk met ingebouwde signaalverwerkingsfilters (eenvoudig gemiddelde, voortschrijdend gemiddelde, Savitzky-Golay) om schone, afgevlakte gegevens te leveren voor grafieken en systeemmonitoring."
+    },
+    "571": {
+      "Title": "Statistieken over energieverbruik",
+      "Description": "Het systeem monitort, aggregeert en registreert continu gegevens over energieverbruik (W/u) met regelmatige tussenintervalen. Het biedt een volledige API voor het bekijken en opvragen van historische datasets."
+    },
+    "572": {
+      "Title": "Voorbeeld van statistieken in een cirkeldiagram",
+      "Description": "Voorbeeld van een grafiekprovider die een cirkeldiagram met statische gegevens weergeeft."
+    },
+    "573": {
+      "Title": "Wekelijks energieverbruik",
+      "Description": "Staafdiagram met het gemiddelde wattuurverbruik voor elke dag van de week (ma-zo). De gegevens zijn verzameld over alle uren van de dag en afkomstig van de Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Uurlijks energieverbruik",
+      "Description": "Staafdiagram met het gemiddelde wattuurverbruik voor elk uur van de dag (00:00-23:00). De gegevens zijn verzameld over de geselecteerde week en afkomstig van de Energy Use Statistics API."
     }
   }
 }

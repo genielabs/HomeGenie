@@ -329,6 +329,38 @@
     "575": {
       "Title": "İndirme Yöneticisi",
       "Description": "Özel bir API aracılığıyla erişilebilen, sağlam, eşzamansız bir HTTP(S) dosya aktarım hizmeti. İndirme işleminin tüm yaşam döngüsünü yönetir, duraklatma/devam ettirme (Range başlıkları kullanarak) ve geçici dosya işleme (.part) desteği sunar."
+    },
+    "576": {
+      "Title": "Dosya Yöneticisi",
+      "Description": "Programın temel veri klasöründeki dosyaları okumak ve yazmak için güvenli, API tabanlı bir hizmettir. Özel ReadText ve WriteText komutları aracılığıyla hem ham ikili hem de UTF-8 dize içeriğini destekler."
+    },
+    "577": {
+      "Title": "Sohbet Geçmişi Hizmeti",
+      "Description": "Yapay zekâ sohbet kayıtlarını yönetmek ve saklamak için merkezi HomeGenie hizmeti. Birleşik bir API (System.Utility/ChatHistory) aracılığıyla, bulut ve yerel LLM'lere paylaşılan bir bağlam, otomatik JSON depolama ve gerçek zamanlı geçmiş yönetimi sağlar."
+    },
+    "578": {
+      "Title": "Bağlam Motoru",
+      "Description": "Dinamik yapay zeka komut istemi oluşturmaya yönelik merkezi hizmet. Kontrol edilebilir cihazların listesi ve canlı sistem durumu (hava durumu, enerji, sensörler) ile şablonları doldurarak yapay zeka için evin gerçek zamanlı olarak tam farkındalığını sağlar."
+    },
+    "570": {
+      "Title": "Veri Monitörü",
+      "Description": "Tarihsel modül istatistikleri için merkezi analiz hizmeti. Zaman serisi verilerinin dinamik olarak alınmasını sağlayan bu hizmet, yerleşik sinyal işleme filtreleri (Basit Ortalama, Hareketli Ortalama, Savitzky-Golay) ile grafikler ve sistem izleme için temiz ve düzeltilmiş veriler sunar."
+    },
+    "571": {
+      "Title": "Enerji Kullanım İstatistikleri",
+      "Description": "Enerji tüketim verilerini (W/sa) düzenli aralıklarla sürekli olarak izler, toplar ve kaydeder. Geçmiş veri kümelerine göz atmak ve sorgulamak için eksiksiz bir API sunar."
+    },
+    "572": {
+      "Title": "Pasta Grafiği İstatistik Örneği",
+      "Description": "Statik verilerle pasta grafiği olarak görüntüleyen örnek grafik sağlayıcı."
+    },
+    "573": {
+      "Title": "Haftalık Enerji Tüketimi",
+      "Description": "Haftanın her günü (Pazartesi-Pazar) için ortalama Watt/Saat tüketimini gösteren çubuk grafik. Veriler günün tüm saatlerinden toplanmış olup Enerji Kullanım İstatistikleri API'sinden alınmıştır."
+    },
+    "574": {
+      "Title": "Saatlik Enerji Tüketimi",
+      "Description": "Günün her saati için (00:00-23:00) ortalama Watt/Saat tüketimini gösteren çubuk grafik. Veriler seçilen hafta üzerinden toplanmış ve Enerji Kullanım İstatistikleri API'sinden alınmıştır."
     }
   }
 }

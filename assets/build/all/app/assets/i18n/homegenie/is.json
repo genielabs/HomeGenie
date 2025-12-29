@@ -329,6 +329,38 @@
     "575": {
       "Title": "Niðurhalsstjóri",
       "Description": "Öflug, ósamstillt HTTP(S) skráaflutningsþjónusta sem er aðgengileg í gegnum sérstakt API. Hún stýrir öllum niðurhalsferlinu, styður hlé/halda áfram (með því að nota Range hausa) og meðhöndlun tímabundinna skráa (.part)."
+    },
+    "576": {
+      "Title": "Skráarstjóri",
+      "Description": "Örugg, API-knúin þjónusta til að lesa og skrifa skrár innan grunngagnamöppu forritsins. Hún styður bæði hrá tvíundarskrár og UTF-8 strengjaefni með sérstökum ReadText og WriteText skipunum."
+    },
+    "577": {
+      "Title": "Þjónusta við spjallferil",
+      "Description": "Miðlæg HomeGenie þjónusta til að stjórna og viðhalda spjallskrám með gervigreind. Með sameinaðri API (System.Utility/ChatHistory) veitir hún skýja- og staðbundnum LLM-kerfum sameiginlegt samhengi, sjálfvirka JSON-geymslu og rauntímasögustjórnun."
+    },
+    "578": {
+      "Title": "Samhengisvél",
+      "Description": "Miðlæg þjónusta fyrir kraftmikla gervigreindarfyrirmæli. Hún fyllir út sniðmát með lista yfir stjórnanleg tæki og rauntíma stöðu kerfisins (veður, orka, skynjarar), sem tryggir algjöra rauntímavitund um heimilið fyrir gervigreindina."
+    },
+    "570": {
+      "Title": "Gagnaeftirlit",
+      "Description": "Miðlæg greiningarþjónusta fyrir sögulegar tölfræðieiningar. Hún gerir kleift að sækja tímaröðargögn á kraftmikinn hátt með innbyggðum merkjavinnslusíum (einfalt meðaltal, hlaupandi meðaltal, Savitzky-Golay) til að veita hrein og jöfn gögn fyrir töflur og kerfisvöktun."
+    },
+    "571": {
+      "Title": "Tölfræði um orkunotkun",
+      "Description": "Fylgist stöðugt með, safnar saman og skráir orkunotkunargögn (W/klst.) með reglulegu millibili. Innleiðir fullt forritaskil (API) til að skoða og leita í söguleg gagnasöfn."
+    },
+    "572": {
+      "Title": "Dæmi um tölfræði um skífurit",
+      "Description": "Dæmi um myndritsveitu sem birtist sem skífurit með kyrrstöðum."
+    },
+    "573": {
+      "Title": "Vikuleg orkunotkun",
+      "Description": "Súlurit sem sýnir meðalnotkun í vöttum/klst. fyrir hvern dag vikunnar (mán-sun). Gögnum er safnað saman fyrir allar klukkustundir dagsins og fengið úr orkunotkunartölfræðiforritaskilinu."
+    },
+    "574": {
+      "Title": "Orkunotkun á klukkustund",
+      "Description": "Súlurit sem sýnir meðalnotkun í vöttum/klst. fyrir hverja klukkustund dagsins (kl. 00-23). Gögnum er safnað saman yfir valda viku og fengið úr orkunotkunartölfræðiforritaskilinu."
     }
   }
 }

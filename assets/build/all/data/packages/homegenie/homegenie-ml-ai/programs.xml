@@ -1,78 +1,308 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
-    <ScriptSetup>// This method is used to register this program as a "AI intent handler"
+    <ScriptSetup>Program.Run();
+</ScriptSetup>
+    <ScriptSource>// ===================================================================
+// CONTEXT ENGINE - SYSTEM UTILITY
+// ===================================================================
+// This service generates dynamic prompts for LLM handlers.
+// It populates templates with the list of controllable devices and 
+// current system status (Weather, Energy, Security, and live states).
+// ===================================================================
+
+Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
+    var request = Api.Parse(args);
+    string template = (string)request.Data;
+
+    if (string.IsNullOrEmpty(template))
+    {
+        template = "**AVAILABLE MODULES**\n\n%%AVAILABLE_DEVICES%%\n\n**CURRENT SYSTEM STATUS** (Timestamp: %%CURRENT_TIME%%)\n\n%%SYSTEM_STATUS%%\n";
+    }
+
+    // --- 1. COLLECT USER-CONFIGURED MODULES ---
+    // We create a unified list of ModuleHelpers that the user is allowed to control.
+    var userModules = new List&lt;ModuleHelper&gt;();
+    
+    // Physical devices (Lights, Switches, Thermostats, etc.)
+    string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
+    Modules.OfDeviceType(allowedTypes).Each((m) =&gt; {
+        userModules.Add(m);
+        return false; // Continue iteration
+    });
+
+    // Scenarios and Macros (Programs configured with the generic program widget)
+    Modules.OfDeviceType("Program").WithParameter("Widget.DisplayModule").Each((m) =&gt; {
+        // Filter out system loggers and ensure it's a user-facing program
+        if (m.Instance.Address != "6" &amp;&amp; m.Instance.Address != "7"
+            &amp;&amp; m.Instance.Address != "34" &amp;&amp; m.Instance.Address != "940"
+            &amp;&amp; !String.IsNullOrWhiteSpace(m.Parameter("Widget.DisplayModule").Value))
+        {
+            userModules.Add(m);
+        }
+        return false;
+    });
+
+    // --- 2. GENERATE AVAILABLE DEVICES LIST (Directory) ---
+    // This section provides the AI with a clean list of IDs and types.
+    // Live states (ON/OFF) are NOT included here to keep the list stable.
+    var devicesSb = new StringBuilder();
+    foreach (var m in userModules) {
+        var type = m.Instance.DeviceType.ToString();
+        // exception
+        if (type == "Program" &amp;&amp; m.Parameter("Widget.DisplayModule").Value != "homegenie/generic/program")
+        {
+            type = m.Parameter("Widget.DisplayModule").Value;
+            if (type.LastIndexOf("/") &gt; 0)
+            {
+                type = type.Substring(type.LastIndexOf("/") + 1);
+            }
+        }
+        devicesSb.AppendLine($"- {m.Instance.Name} | {type} | {m.Instance.Domain}/{m.Instance.Address}");
+    }
+
+    // --- 3. GENERATE SYSTEM STATUS REPORT (Live Context) ---
+    // This section provides the AI with real-time situational awareness.
+    var statusSb = new StringBuilder();
+    
+    // A. Core System Reports (Weather, Energy, Alarm, Master Thermostat)
+    statusSb.AppendLine("## SYSTEM REPORT");
+    
+    var weather = Modules.InDomain("HomeAutomation.HomeGenie.Automation").WithAddress("34").Get();
+    if (weather.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetWeatherStatus(weather));
+
+    var energy = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+    if (energy.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetEnergyStatus(energy));
+
+    var alarm = Modules.InDomain("HomeAutomation.HomeGenie.Automation").WithAddress("90").Get();
+    if (alarm.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetSecurityStatus(alarm));
+
+    var thermo = Modules.InDomain("HomeAutomation.SmartThermostat").WithAddress("1").Get();
+    if (thermo.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetThermostatStatus(thermo));
+
+    // B. Individual Devices Live Status
+    // Provides a 1:1 status update for the devices listed in the directory.
+    statusSb.AppendLine("\n## DEVICES STATUS");
+    foreach (var m in userModules) {
+        var info = PromptHelpers.GetModuleStatus(m);
+        if (!string.IsNullOrEmpty(info)) statusSb.AppendLine("- " + info);
+    }
+
+    // --- 4. TEMPLATE ASSEMBLY ---
+    // Replace placeholders with generated content and current server time.
+    return template
+        .Replace("%%AVAILABLE_DEVICES%%", devicesSb.ToString())
+        .Replace("%%SYSTEM_STATUS%%", statusSb.ToString())
+        .Replace("%%CURRENT_TIME%%", DateTime.Now.ToString("f", System.Globalization.CultureInfo.InvariantCulture));
+});
+
+// Run in background to stay available for LLM handler requests
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>public static class PromptHelpers
+{
+    /**
+     * Helper to format double values for the AI.
+     * Ensures the dot is always used as the decimal separator (Invariant Culture).
+     */
+    public static string Fmt(double val, string unit = "")
+    {
+        if (double.IsNaN(val) || double.IsInfinity(val)) return "N/A";
+        return val.ToString("F1", CultureInfo.InvariantCulture) + unit;
+    }
+
+    /**
+     * Extracts weather conditions, exterior temperature, and wind speed.
+     */
+    public static string GetWeatherStatus(ModuleHelper m)
+    {
+        var condition = m.Parameter("Conditions.Status").Value;
+        if (string.IsNullOrWhiteSpace(condition)) condition = m.Parameter("Conditions.Description").Value;
+        
+        var temp = Fmt(m.Parameter("Sensor.Temperature").DecimalValue, "°C");
+        var wind = Fmt(m.Parameter("Sensor.Wind.Speed").DecimalValue, " Kph");
+        
+        return $"Weather: {(string.IsNullOrEmpty(condition) ? "Unknown" : condition)} | Exterior Temp: {temp} | Wind: {wind}";
+    }
+
+    /**
+     * Summarizes energy load, daily usage, and active device counts.
+     */
+    public static string GetEnergyStatus(ModuleHelper m)
+    {
+        var load = Fmt(m.Parameter("EnergyMonitor.WattLoad").DecimalValue, "W");
+        var todayKwh = (m.Parameter("EnergyMonitor.WattCounter.Today").DecimalValue / 1000.0).ToString("F2", CultureInfo.InvariantCulture) + " kWh";
+        
+        var lights = m.Parameter("EnergyMonitor.OperatingLights").Value;
+        var appliances = m.Parameter("EnergyMonitor.OperatingSwitches").Value;
+        
+        return $"Energy: Load {load} | Today's Usage: {todayKwh} (Active -&gt; Lights: {lights}, Appliances: {appliances})";
+    }
+
+    /**
+     * Reports the alarm arming mode and whether the security system is currently triggered.
+     */
+    public static string GetSecurityStatus(ModuleHelper m)
+    {
+        var state = m.Parameter("HomeGenie.SecurityArmed").Value;
+        var triggered = m.Parameter("HomeGenie.SecurityTriggered").DecimalValue &gt; 0 ? " !!ALARM TRIGGERED!!" : "";
+        
+        return $"Security: System is {state}{triggered}";
+    }
+
+    /**
+     * Reports ambient temperature, target setpoint, and the current operating state.
+     */
+    public static string GetThermostatStatus(ModuleHelper m)
+    {
+        var ambient = Fmt(m.Parameter("Sensor.Temperature").DecimalValue, "°C");
+        var target = Fmt(m.Parameter("Thermostat.SetPoint.Heating").DecimalValue, "°C");
+        var state = m.Parameter("Thermostat.OperatingState").Value;
+        
+        return $"Thermostat: Ambient {ambient} | Target {target} (State: {state})";
+    }
+
+    /**
+     * Extracts a concise status string for any module (Sensors, Actuators, or Programs).
+     * Used for the dynamic System Update/Status report.
+     */
+    public static string GetModuleStatus(ModuleHelper m)
+    {
+        // Skip modules with no name to keep the prompt clean
+        if (string.IsNullOrWhiteSpace(m.Instance.Name)) return "";
+
+        var statusParts = new List&lt;string&gt;();
+
+        // 1. PROGRAMS (Scenarios/Macros)
+        if (m.Instance.DeviceType.ToString() == "Program")
+        {
+            var pStatus = m.Parameter("Program.Status").Value;
+            statusParts.Add("Status: " + (string.IsNullOrEmpty(pStatus) ? "Idle" : pStatus));
+        }
+
+        // 2. SENSORS (Environmental parameters)
+        if (m.HasParameter("Sensor.Temperature")) 
+            statusParts.Add("Temp: " + Fmt(m.Parameter("Sensor.Temperature").DecimalValue, "°C"));
+        
+        if (m.HasParameter("Sensor.Humidity")) 
+            statusParts.Add("Hum: " + Fmt(m.Parameter("Sensor.Humidity").DecimalValue, "%"));
+        
+        if (m.HasParameter("Sensor.Luminance")) 
+            statusParts.Add("Luminance: " + m.Parameter("Sensor.Luminance").Value + " lux");
+        
+        if (m.HasParameter("Sensor.Motion")) 
+            statusParts.Add("Motion: " + (m.Parameter("Sensor.Motion").DecimalValue &gt; 0 ? "Detected" : "None"));
+
+        // 3. ACTUATORS (Lights, Switches, Dimmer, Shutters)
+        // Reports live state (ON/OFF/%) for the system status update
+        if (m.HasParameter("Status.Level")) 
+        {
+            var level = m.Parameter("Status.Level").DecimalValue;
+            string state = (level &gt; 0) ? "ON" : "OFF";
+            
+            // Append percentage for dimmers or color lights
+            if (level &gt; 0 &amp;&amp; level &lt;= 1) state = "ON"; // Standard binary
+            else if (level &gt; 1) state += $" ({level}%)";
+            
+            statusParts.Add("State: " + state);
+        }
+        
+        // Final fallback to ensure the AI knows the device is reachable
+        if (statusParts.Count == 0) statusParts.Add("Status: Online");
+
+        return $"{m.Instance.Name}: {string.Join(", ", statusParts)}";
+    }
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.4</PackageVersion>
+      <Id>context-engine</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>D49099C173C084DE1E8DF2C832E7298A</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>578</Address>
+    <Name>Context Engine</Name>
+    <Description>Centralized service for dynamic AI prompt generation. It populates templates with the list of controllable devices and the live system status (weather, energy, sensors), ensuring total real-time home awareness for the AI.</Description>
+    <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>// Path to the external markdown file for system instructions
+var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+
+// This method is used to register this program as a "AI intent handler"
 Program.Implements(
     "@AI:IntentHandler",
     API_URL
 ).AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
  .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
+ .AddOption("SystemInstructions", "", "System Instructions", $"editor:file:{systemPromptFile}:markdown")
  .Run();
 </ScriptSetup>
-    <ScriptSource>#using System.Text.RegularExpressions
+    <ScriptSource>// 1. Validate configuration
+string geminiApiKey = Program.Option("ApiKey").Value.Trim();
+string geminiModelId = Program.Option("ModelId").Value.Trim();
+if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
+{
+    string error = "Gemini Intent Handler is not properly configured.";
+    //Program.Notify($"ERROR: {error} Please configure the program options.");
+    Program.Emit("Status.Init", "NotConfigured");
+}
+else
+{
+    Program.Emit("Status.Init", "Ready");
+}
 
-// Define constants for API paths
-const string API_PROMPT_SUBMIT = "Prompt.Submit";
-const string API_HISTORY_GET = "History.Get";
-const string API_HISTORY_CLEAR = "History.Clear";
+bool reconfigureRequired = false;
+// Register event handler to trigger a restart if configuration options change.
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  return true;
+});
 
-// Load chat history at startup
-ChatSession.LoadHistory(Data.GetFolder());
+// 2. Build the current device list
+string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
 
 // ===================================================================
 // API HANDLER: Submit a new intent (user command)
 // ===================================================================
 Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt; 
 {
-    // 1. Validate configuration
-    string geminiApiKey = Program.Option("ApiKey").Value.Trim();
-    string geminiModelId = Program.Option("ModelId").Value.Trim();
-    if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
-    {
-        string error = "Gemini Intent Handler is not properly configured.";
-        Program.Notify($"ERROR: {error} Please configure the program options.");
-        return new ResponseText($"**Error:** {error} Go to the program's settings page to configure it.");
-    }
+    // Get the current history from the centralized service
+    var storeId = Program.Module.Address;
+    var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+    var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
-    // 2. Build the current device list
-    string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
-    var devicesInGroups = Modules.Groups
-        .SelectMany(
-            groupName =&gt; Modules.InGroup(groupName).OfDeviceType(allowedTypes).SelectedModules,
-            (groupName, module) =&gt; new { name = module.Name, group = groupName, address = module.Address, domain = module.Domain, type = module.DeviceType }
-        ).ToList();
-    var uniqueIdsInGroups = new HashSet&lt;(string, string)&gt;(devicesInGroups.Select(d =&gt; (d.domain, d.address)));
-    var devicesWithoutGroup = Modules.OfDeviceType(allowedTypes).SelectedModules
-        .Where(module =&gt; !uniqueIdsInGroups.Contains((module.Domain, module.Address)))
-        .Select(module =&gt; new { name = module.Name, group = "", address = module.Address, domain = module.Domain, type = module.DeviceType });
-    devicesInGroups.AddRange(devicesWithoutGroup);
-    // Add Alarm System program module
-    devicesInGroups.Add(new { name = "Security Alarm System", group = "Dashboard", address = "90", domain = "HomeAutomation.HomeGenie.Automation", type = ModuleTypes.Sensor });
-    // Add all scripts/macros
-    var scriptMacros = Modules.OfDeviceType("Program").WithParameter("Widget.DisplayModule").SelectedModules
-        .Where(module =&gt; module.Address != "6" &amp;&amp; module.Address != "7" &amp;&amp; module.Properties.Find((p) =&gt; p.Name == "Widget.DisplayModule").Value == "homegenie/generic/program")
-        .Select(module =&gt; new { name = module.Name, group = "", address = module.Address, domain = module.Domain, type = module.DeviceType });
-    devicesInGroups.AddRange(scriptMacros);
+    // Prepare the current user message
+    var userMessage = ChatMessage.Create("user", userCommand as string);
 
-    //string devicesList = JsonConvert.SerializeObject(devicesInGroups, Formatting.Indented);
-    string devicesList = "";
-    foreach (var m in devicesInGroups) {
-      devicesList += $"- {m.name} | {m.type} | {m.group} | {m.domain}/{m.address}\n";
-    }
-
-    // 3. Prepare the user message with context
-    var userMessage = new ChatMessage
-    {
-        Role = "user",
-        Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = userCommand as string } }
-    };
-    var payloadContents = new List&lt;ChatMessage&gt;(ChatSession.History);
+    // Combine them for the AI request payload
+    // This list now contains [History] + [Current Message]
     payloadContents.Add(userMessage);
-    
+
+    // Path to the external markdown file for system instructions
+    var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+    var promptText = "";
+    try { promptText = File.ReadAllText(systemPromptFile); } catch (Exception e) { /* Handle error */ }
+
+    var systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
+
     var payload = new
     {
         contents = payloadContents,
-        system_instruction = new { parts = new[] { new { text = GEMINI_SYSTEM_PROMPT.Replace("%%AVAILABLE_DEVICES%%", devicesList) } } },
+        system_instruction = new { parts = new[] { new { text = systemPrompt } } },
         generationConfig = new { temperature = 0.3 }
     };
 
@@ -93,8 +323,8 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             return new ResponseText($"**Error:** {error}");
         }
 
-        string jsonResponse = "";
-        string thoughtsChain = rawGeminiResponseJson;
+        string jsonResponse = rawGeminiResponseJson;
+        string thoughtsChain = "";
 
         string patternJsonBlock = @"```json\s*({[\s\S]*?})\s*```";
         var matchJsonBlock = Regex.Match(rawGeminiResponseJson, patternJsonBlock, RegexOptions.Singleline);
@@ -124,59 +354,33 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             }
         }
 
-        if (string.IsNullOrEmpty(jsonResponse))
-        {
-            var fallbackResponse = new {
-                answer = rawGeminiResponseJson,
-                commands = new string[] {}
-            };
-            jsonResponse = JsonConvert.SerializeObject(fallbackResponse);
-            thoughtsChain = "N/A (No valid JSON block found in the response)";
-            Program.Log.Warn("Could not extract a valid JSON block from AI response.");
-        }
+        var extracted = Api.Call($"{Program.Module.Domain}/940/Extract/{WebUtility.UrlEncode(jsonResponse)}");
+        var messageParts = (extracted as List&lt;string&gt;)
+                .Select(segment =&gt; new MessagePart { Text = segment + "\n" })
+                .ToList();
 
-        if (!string.IsNullOrEmpty(thoughtsChain))
-        {
-            Program.Log.Info($"AI Thought Process: {thoughtsChain}");
-        }
+        // --- 6. UPDATE CENTRALIZED HISTORY SERVICE ---
 
-        string friendlyAnswer = rawGeminiResponseJson;
-        try 
-        {
-            dynamic hgCommand = JsonConvert.DeserializeObject&lt;dynamic&gt;(jsonResponse);
-            friendlyAnswer = hgCommand.answer.ToString();
-            JArray commands = hgCommand.commands;
-
-            if (commands != null)
-            {
-                foreach (var commandToken in commands)
-                {
-                    string command = commandToken.ToString();
-                    if (!string.IsNullOrEmpty(command) &amp;&amp; command.ToUpper() != "NONE")
-                    {
-                        Program.Log.Info($"Executing command from Gemini: {command}");
-                        Api.Call(command);
-                    }
-                }
-            }
-        } 
-        catch (Exception parseEx) 
-        {
-            Program.Log.Warn($"Could not parse Gemini response as JSON. Treating as plain text. Error: {parseEx.Message}");
-        }
-
-        // 6. Update and save history
-        ChatSession.History.Add(userMessage);
+        // A. Add the User message to the system service
+        Api.Call("System.Utility/ChatHistory/Add", new {
+            StoreId = storeId,
+            Message = userMessage
+        });
+        // B. Create the Model response message using the interleaved parts [text, api-call, text...]
         var modelResponse = new ChatMessage
         {
             Role = "model",
-            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = jsonResponse } }
+            Parts = messageParts
         };
-        ChatSession.History.Add(modelResponse);
-        ChatSession.SaveHistory(Data.GetFolder());
+        // C. Add the Model response to the system service
+        // The service automatically handles persistence (saving to JSON)
+        Api.Call("System.Utility/ChatHistory/Add", new {
+            StoreId = storeId,
+            Message = modelResponse
+        });
 
         // 7. Return the friendly answer to the UI
-        return new ResponseText(friendlyAnswer);
+        return new ResponseText(String.Join('\n', (extracted as List&lt;string&gt;)));
     }
     catch (Exception ex)
     {
@@ -185,149 +389,54 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
     }
 });
 
-
 // ===================================================================
 // API HANDLER: Get the current chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; 
 {
-    return ChatSession.History;
+    return Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address });
 });
-
 
 // ===================================================================
 // API HANDLER: Clear the chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; 
 {
-    try
-    {
-        ChatSession.History.Clear();
-        ChatSession.SaveHistory(Data.GetFolder());
-        Program.Log.Info("Gemini Intent Handler chat history has been cleared.");
-        return new ResponseStatus(Status.Ok);
-    }
-    catch (Exception ex)
-    {
-        Program.Notify($"Error clearing chat history: {ex.Message}");
-        return new ResponseStatus(Status.Error, "Could not clear history.");
-    }
+    var storeId = Program.Module.Address;
+    Program.Log.Info($"Clearing history for module {storeId}...");
+    return Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
 });
 
-
 // Run the program in the background
-Program.GoBackground();
-</ScriptSource>
-    <ScriptContext>const string API_URL = "AI.IntentHandlers/Gemini";
-const string DEFAULT_MODEL_ID = "gemini-flash-latest";
-
-const string GEMINI_SYSTEM_PROMPT = """
-
-You are a home automation assistant called HomeGenie.
-
-
-**RULES**
-
-1.  **JSON ONLY:** Your entire response MUST be ONLY a valid JSON object. No markdown. No chain thoughts.
-2.  **USER'S LANGUAGE:** The "answer" field MUST be in the same language as the user's command.
-3.  **COMMAND ARRAY:** The "commands" field must be an array of strings. The reply might not contains a command in which case the `commands` array must be `["NONE"]`.
-
-
-**AVAILABLE DEVICES**
-%%AVAILABLE_DEVICES%%
-
-
-**COMMANDS LIST**
--   `Control.On`, `Control.Off`
--   `Control.Level/{value}` (value: 0-100)
--   `Control.ColorHsb/{h},{s},{v}` (h,s,v: 0.0-1.0)
--   `Thermostat.ModeSet/{mode}` (mode: "Off", "Heat", "HeatEconomy", "Cool", "CoolEconomy")
--   `Thermostat.SetPointSet/{type}/{value}` (type: "Heating", "HeatingEconomy", "Cooling", "CoolingEconomy")
--   `Control.ArmAway`
--   `Control.ArmHome`
--   `Control.Disarm`
-
-**EXCEPTIONS**
-For type `Program` commands are in the form:
--   `/api/HomeAutomation.HomeGenie/Automation/Programs.Run/&lt;numeric_address&gt;
--   `/api/HomeAutomation.HomeGenie/Automation/Programs.Break/&lt;numeric_address&gt;
-
-
-**EXAMPLE**
-
-&lt;|im_start|&gt;user
-Spegni tutte le luci dello studio e poi accendi la caldaia e anche i riscaldamenti.&lt;|im_end|&gt;
-
-&lt;|im_start|&gt;assistant
+while (Program.IsRunning &amp;&amp; !reconfigureRequired)
 {
-  "answer": "Fatto! Ho spento la luce della scrivania e Ambient nello Studio e ho acceso la caldaia.",
-  "commands": [
-    "/api/HomeAutomation.PhilipsHue/3/Control.Off",
-    "/api/HomeAutomation.ZigBee/5/Control.Off",
-    "/api/HomeAutomation.HomeGenie/S2/Control.On",
-    "/api/HomeAutomation.SmartThermostat/1/Thermostat.ModeSet/Heat"
-  ]
+    Pause(1);
 }
-&lt;|im_end|&gt;
+</ScriptSource>
+    <ScriptContext>#using System.Text.RegularExpressions
 
-""";
+const string API_URL = "AI.IntentHandlers/Gemini";
+
+const string API_PROMPT_SUBMIT = "Prompt.Submit";
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+
+const string DEFAULT_MODEL_ID = "gemini-2.5-flash-lite";
 
 
 // POJO
 
-public class ChatMessage
-{
-    [JsonProperty("role")]
-    public string Role { get; set; }
-
-    [JsonProperty("parts")]
-    public List&lt;MessagePart&gt; Parts { get; set; }
-}
-
-public class MessagePart
-{
+public class MessagePart {
     [JsonProperty("text")]
     public string Text { get; set; }
 }
-
-static class ChatSession
-{
-    public static List&lt;ChatMessage&gt; History { get; set; } = new List&lt;ChatMessage&gt;();
-    private static readonly string FileName = "gemini_chathistory.json";
-
-    public static void SaveHistory(string path)
-    {
-        string filePath = Path.Combine(path, FileName);
-        try
-        {
-            string json = JsonConvert.SerializeObject(History, Formatting.Indented);
-            File.WriteAllText(filePath, json);
-        }
-        catch (Exception ex)
-        {
-            //Program.Log.Error($"Failed to save chat history: {ex.Message}");
-        }
-    }
-
-    public static void LoadHistory(string path)
-    {
-        string filePath = Path.Combine(path, FileName);
-        try
-        {
-            if (File.Exists(filePath))
-            {
-                string json = File.ReadAllText(filePath);
-                var loadedHistory = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json);
-                if (loadedHistory != null)
-                {
-                    History = loadedHistory;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            History = new List&lt;ChatMessage&gt;();
-        }
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage { Role = role, Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } };
     }
 }
 </ScriptContext>
@@ -336,11 +445,11 @@ static class ChatSession
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.5</Version>
+      <Version>1.0.8</Version>
       <Required>true</Required>
-      <Checksum>E6A95A95F71C03A9C1326BB29387D340</Checksum>
+      <Checksum>3406A441886ABB6861B701B0948AF9A2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -356,67 +465,85 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>// This method is used to register this program as a "AI intent handler"
+    <ScriptSetup>// Path to the external markdown file for system instructions
+var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+
+// This method is used to register this program as a "AI intent handler"
 Program.Implements(
     "@AI:WidgetGenie",
     API_URL
 ).AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
  .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
+ .AddOption("SystemInstructions", "", "System Instructions", $"editor:file:{systemPromptFile}:markdown")
  .Run();
 </ScriptSetup>
-    <ScriptSource>// Define constants for API paths to avoid magic strings
-const string API_PROCESS = "Prompt.Submit";
-const string API_HISTORY_GET = "History.Get";
-const string API_HISTORY_CLEAR = "History.Clear";
+    <ScriptSource>// ===================================================================
+// GEMINI INTENT HANDLER - UPDATED FOR CENTRALIZED HISTORY SERVICE
+// ===================================================================
+// 1. Validate configuration
+string geminiApiKey = Program.Option("ApiKey").Value.Trim();
+string geminiModelId = Program.Option("ModelId").Value.Trim();
+if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
+{
+    string error = "Gemini Intent Handler is not properly configured.";
+    //Program.Notify($"ERROR: {error} Please configure the program options.");
+    Program.Emit("Status.Init", "NotConfigured");
+}
+else
+{
+    Program.Emit("Status.Init", "Ready");
+}
 
-// Load the chat history from disk at startup
-ChatSession.LoadHistory(Data.GetFolder());
+bool reconfigureRequired = false;
+// Register event handler to trigger a restart if configuration options change.
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  return true;
+});
+
+// Helper to get the current StoreId (unique for this module)
+string storeId = Program.Module.Address;
 
 // ===================================================================
 // API HANDLER: Process a new user message
 // ===================================================================
 Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt; 
 {
-    // 1. Validate configuration
-    string geminiApiKey = Program.Option("ApiKey").Value.Trim();
-    string geminiModelId = Program.Option("ModelId").Value.Trim();
-    if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
-    {
-        string error = "Gemini AI Genie is not properly configured.";
-        Program.Notify($"ERROR: {error} Please configure the program options.");
-        return new ResponseText($"**Error:** {error} Go to the program's settings page to configure it.");
-    }
 
-    // 2. Prepare the user message
-    var userMessage = new ChatMessage
-    {
-        Role = "user",
-        Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = userCommand as string } }
-    };
+    // 2. Fetch the current history from the centralized System Service
+    var storeId = Program.Module.Address;
+    var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+    var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
-    // 3. Build the payload with the full history
-    var payloadContents = new List&lt;ChatMessage&gt;(ChatSession.History);
+    // 3. Prepare the new user message
+    var userMessage = ChatMessage.Create("user", userCommand as string);
+
+    // 4. Add User Message to the centralized history immediately
+    Api.Call("System.Utility/ChatHistory/Add", new {
+        StoreId = storeId,
+        Message = userMessage
+    });
+
+    // 5. Prepare the System Prompt
+    var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+    var promptText = "";
+    try { promptText = File.ReadAllText(systemPromptFile); } catch { promptText = "You are a helpful home automation assistant."; }
+
+    // 6. Build the API Request Payload (History + New Message)
     payloadContents.Add(userMessage);
     
     var payload = new
     {
         contents = payloadContents,
-        system_instruction = new
-        {
-            parts = new[]
-            {
-                new { text = GEMINI_SYSTEM_PROMPT }
-            }
-        },
-        generationConfig = new
-        {
-            temperature = 0.3
-        }
+        system_instruction = new { parts = new[] { new { text = promptText } } },
+        generationConfig = new { temperature = 0.3 }
     };
 
     try
     {
-        // 4. Send the request to Gemini API
+        // 7. Send the request to Gemini API
         string payloadJson = JsonConvert.SerializeObject(payload);
         string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
         
@@ -427,274 +554,77 @@ Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt;
             .Post(payloadJson)
             .GetData();
 
-        // 5. Process the response
-        // Using `?.` (null-conditional operator) for safe navigation
+        // 8. Process the AI response
         string geminiResponse = data?.candidates?[0]?.content?.parts?[0]?.text;
 
         if (!string.IsNullOrEmpty(geminiResponse))
         {
-            // Add both user message and model response to history
-            ChatSession.History.Add(userMessage);
-            var modelResponse = new ChatMessage
-            {
-                Role = "model",
-                Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = geminiResponse } }
-            };
-            ChatSession.History.Add(modelResponse);
-            ChatSession.SaveHistory(Data.GetFolder());
+            // 9. Add Model Response to the centralized history
+            var modelResponse = ChatMessage.Create("model", geminiResponse);
+            Api.Call("System.Utility/ChatHistory/Add", new {
+                StoreId = storeId,
+                Message = modelResponse
+            });
 
             return new ResponseText(geminiResponse);
         }
         else
         {
-            // Handle cases where Gemini returns an empty or malformed response
-            string error = "Received an empty or invalid response from the AI.";
-            Program.Notify($"ERROR: {error}");
-            return new ResponseText($"**Error:** {error}");
+            Program.Log.Warn("Gemini returned an empty response.");
+            return new ResponseText("**Error:** The AI returned an empty response.");
         }
     }
     catch (Exception ex)
     {
-        Program.Notify($"Error while calling Gemini API: {ex.Message}");
-        return new ResponseText($"**Error:** An exception occurred while contacting the AI service. Please check the logs.\n\n`{ex.Message}`");
+        Program.Notify($"Gemini API Error: {ex.Message}");
+        return new ResponseText($"**Error:** Could not contact Gemini service. `{ex.Message}`");
     }
 });
 
 // ===================================================================
 // API HANDLER: Get the current chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; 
 {
-    return ChatSession.History;
+    return Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address });
 });
 
 // ===================================================================
 // API HANDLER: Clear the chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; 
 {
-    try
-    {
-        // Clear the in-memory history list
-        ChatSession.History.Clear();
-        // Save the empty history to disk to persist the change
-        ChatSession.SaveHistory(Data.GetFolder());
-        
-        Program.Log.Info("AI Genie chat history has been cleared.");
-        return new ResponseStatus(Status.Ok);
-    }
-    catch (Exception ex)
-    {
-        Program.Notify($"Error clearing chat history: {ex.Message}");
-        return new ResponseStatus(Status.Error, "Could not clear history.");
-    }
+    var storeId = Program.Module.Address;
+    Program.Log.Info($"Clearing history for module {storeId}...");
+    return Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
 });
 
-// Run the program in the background
-Program.GoBackground();</ScriptSource>
+// Run in background to keep API endpoints active
+while (Program.IsRunning &amp;&amp; !reconfigureRequired)
+{
+    Pause(1);
+}
+</ScriptSource>
     <ScriptContext>const string API_URL = "AI.WidgetGenie/Gemini";
 const string DEFAULT_MODEL_ID = "gemini-flash-latest";
 
-const string GEMINI_SYSTEM_PROMPT = """
-
-You are an expert AI assistant for the HomeGenie Server platform.
-Your ONLY task is to help users create custom widgets based on the zuix.js framework and HomeGenie Widget API.
-
-A widget consists of three code blocks: HTML (View), CSS (Style), and JavaScript (Controller).
-
-## Core Concepts
-- **Controller:** A class extending `ControllerInstance` with life-cycle callbacks (`onCreate`, etc.).
-- **View:** Standard HTML. Elements are linked to the controller using `#field_name`.
-- **Data Binding:** The `this.model()` object is a reactive proxy. Changes to `this.model().field_name` automatically update the corresponding `#field_name` element in the view.
-- **Events:** Use `(click)="myFunction()"` in HTML. The function must be exposed in `onInit` via `this.declare({ myFunction: this.myFunction.bind(this) })`.
-
----
-**API REFERENCE &amp; MANDATORY RULES**
----
-
-**1. ZUIX.JS &amp; VIEW LOGIC -- CRITICAL RULES**
-   - **FATAL: NO `{{ }}` INTERPOLATION.** Never use `{{ expression }}` in the HTML. Dynamic updates MUST be handled in the controller by updating the model.
-   - **DATA BINDING IS KING:** All dynamic UI updates MUST be driven by modifying the `this.model()` object. NEVER manipulate the DOM directly with `this.field('...').html()`.
-   - **PROVIDE DEFAULT VALUES IN HTML:** The HTML view MUST always contain sensible default content for preview purposes. NEVER generate empty tags for fields.
-     - **WRONG:** `&lt;span #status&gt;&lt;/span&gt;`
-     - **CORRECT:** `&lt;span #status&gt;Disarmed&lt;/span&gt;`
-
-**2. HOMEGENIE API -- CRITICAL RULES**
-   - **Module Fields (`field.key`):**
-     - Use `this.boundModule.field('Key.Name')` to get a specific field. DO NOT USE `this.boundModule.fields.find(...)`.
-     - **Available Keys:** `Status.Level`, `Status.ColorHsb`, `Sensor.Temperature`, `Conditions.IconType`, `HomeGenie.SecurityArmed` (values: "Away", "Home", "Disarmed").
-     - **STATE LOGIC:** NEVER use `Status.Power`. The ON/OFF state is ALWAYS derived from `Status.Level` (a level &gt; 0 means ON).
-   - **Module Commands (`control()`):**
-     - **Available Commands:** `Control.On`, `Control.Off`, `Control.Level/&lt;level&gt;`, `Control.ColorHsb/&lt;h&gt;,&lt;s&gt;,&lt;b&gt;`, `Control.ArmAway`, `Control.ArmHome`, `Control.Disarm`.
-     - **COMMAND LOGIC:** For ON/OFF, prefer `Control.On` and `Control.Off`.
-
-**3. DATA FORMATTING -- CRITICAL RULES**
-   - **DECIMAL SEPARATORS:** `field.value` is a string. Before `parseFloat()`, YOU MUST use `.replace(',', '.')`.
-
-**4. ICONS -- CRITICAL RULES**
-   - **SVG ICONS:** Use an `&lt;img&gt;` tag. The model contains the path, and the view binds it to the `src` attribute. Example: `&lt;img #icon src="path/to/default.svg"&gt;`.
-
-**OUTPUT FORMATTING -- MANDATORY**
-1.  **For widget requests:** Respond ONLY with three markdown code blocks (html, css, javascript).
-2.  **For other requests:** Respond with conversational text.
-3.  **LANGUAGE RULE:** Generated code and code comments MUST always be in English. Conversational text (e.g., for explanations or questions) MUST be in the same language as the user's last prompt.
-
----
-**GOLDEN EXAMPLE: Switch Widget**
----
-
-*If a user asks "create a widget for a switch", the output MUST follow this exact structure.*
-When generating a complete widget, you must also provide a brief, friendly explanation of the generated code.
-
-Your response structure MUST be as follows:
-1.  A short, conversational introduction in the user's language.
-2.  A clear explanation of the purpose and functionality of the widget.
-3.  The three code blocks (HTML, CSS, JavaScript), clearly labeled.
-4.  A concluding sentence guiding the user to copy and paste each block into the corresponding editor tab (View, Style, Controller).
-
-**EXAMPLE OF THE DESIRED RESPONSE STRUCTURE:**
-
-Of course! Here is a basic widget for a switch. It displays the switch's name and status, with a button to toggle it on and off. The button color will change to reflect the current state.
-
-Simply copy and paste each of the following code blocks into the corresponding editor tabs: View (HTML), Style (CSS), and Controller (JavaScript).
-
-Finally, remember to bind a module (the device) to this widget by clicking the settings button on the editor toolbar.
-
-```html
-&lt;div class="container"&gt;
-  &lt;strong #name&gt;Unknown Switch&lt;/strong&gt;
-  &lt;button (click)="toggleSwitch()"&gt;
-    &lt;span class="material-symbols-outlined" #icon&gt;toggle_off&lt;/span&gt;
-  &lt;/button&gt;
-  &lt;span #status&gt;Off&lt;/span&gt;
-&lt;/div&gt;
-&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"&gt;
-```
-```css
-:host { display: block; }
-.container { padding: 16px; display: flex; align-items: center; gap: 12px; }
-button { background: none; border: none; cursor: pointer; }
-.material-symbols-outlined { font-size: 48px; }
-```
-```javascript
-class SwitchWidget extends ControllerInstance {
-
-  isOn = false;
-
-  onCreate() {
-    // Expose the toggleSwitch method to the HTML View
-    this.declare({
-      toggleSwitch: this.toggleSwitch
-    });
-
-    if (!this.boundModule) {
-      return;
-    }
-
-    // Subscribe to the external module's state
-    const levelField = this.boundModule.field('Status.Level');
-    if (levelField) {
-      this.subscribe(levelField, (field) =&gt; {
-        // When the external state changes, update the internal state
-        this.updateState(field.value);
-      });
-    }
-    
-    // Perform an initial sync when the widget is created
-    this.updateModel();
-  }
-  
-  updateModel() {
-      this.model().name = this.boundModule.name;
-      const levelField = this.boundModule.field('Status.Level');
-      if (levelField) {
-        this.updateState(levelField.value);
-      }
-  }
-
-  updateState(levelValue) {
-    const level = parseFloat(levelValue.replace(',', '.'));
-    this.isOn = level &gt; 0;
-    
-    // Update the reactive model. The view will update automatically.
-    this.model().status = this.isOn ? 'On' : 'Off';
-    this.model().icon = this.isOn ? 'toggle_on' : 'toggle_off';
-  }
-
-  toggleSwitch() {
-    if (!this.boundModule) return;
-    
-    const command = this.isOn ? 'Control.Off' : 'Control.On';
-    this.boundModule.control(command);
-    /*
-    or if you want to add a callback when the command is completed
-    this.boundModule.control(command).subscribe((res) =&gt; {
-      // command completed
-    });
-    */
-  }
-}
-```
-
-Now, begin.
-""";
-
+const string API_PROCESS = "Prompt.Submit";
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
 
 // POJO
 
-public class ChatMessage
-{
-    [JsonProperty("role")]
-    public string Role { get; set; }
-
-    [JsonProperty("parts")]
-    public List&lt;MessagePart&gt; Parts { get; set; }
-}
-
-public class MessagePart
-{
+public class MessagePart {
     [JsonProperty("text")]
     public string Text { get; set; }
 }
-
-static class ChatSession
-{
-    public static List&lt;ChatMessage&gt; History { get; set; } = new List&lt;ChatMessage&gt;();
-    private static readonly string FileName = "gemini_chathistory.json";
-
-    public static void SaveHistory(string path)
-    {
-        string filePath = Path.Combine(path, FileName);
-        try
-        {
-            string json = JsonConvert.SerializeObject(History, Formatting.Indented);
-            File.WriteAllText(filePath, json);
-        }
-        catch (Exception ex)
-        {
-            //Program.Log.Error($"Failed to save chat history: {ex.Message}");
-        }
-    }
-
-    public static void LoadHistory(string path)
-    {
-        string filePath = Path.Combine(path, FileName);
-        try
-        {
-            if (File.Exists(filePath))
-            {
-                string json = File.ReadAllText(filePath);
-                var loadedHistory = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json);
-                if (loadedHistory != null)
-                {
-                    History = loadedHistory;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            History = new List&lt;ChatMessage&gt;();
-        }
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage { Role = role, Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } };
     }
 }
 </ScriptContext>
@@ -703,11 +633,11 @@ static class ChatSession
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.6</Version>
       <Required>true</Required>
-      <Checksum>BEC152E192F00605C8705023C2CBB6B6</Checksum>
+      <Checksum>99A57BC98F48FBAC9A8058FA33F36637</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
@@ -995,12 +925,12 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     return contour;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1034,46 +964,77 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>//
-// SETUP block for the Local LLM automation program.
-//
-// This code is executed once when the program is enabled. Its primary roles are:
-// 1. To define the user-configurable options for this program.
-// 2. To specify the front-end widget used for the UI.
-// 3. To define the conditions and triggers for executing the Main block.
-//
-// In this case, Program.Run() executes the Main block immediately.
-//
+    <ScriptSetup>// ===================================================================
+// SETUP BLOCK - PROGRAM INITIALIZATION
+// ===================================================================
+// This block is executed once when the program is enabled. 
+// It is responsible for:
+// 1. Loading the available models for the UI selection.
+// 2. Registering the program as a system-wide AI Intent Handler.
+// 3. Defining user-configurable options (tokens, model, prompt).
+// 4. Linking the specific front-end chat widget.
+// ===================================================================
 
+// --- 1. PRE-SETUP CONFIGURATION DATA ---
+
+// Load available GGUF models from models.yaml to populate the dropdown
 var modelsList = LoadModelList(Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME));
 var models = string.Join(",", modelsList.Select(item =&gt; $"{item.Value.Name}={item.Key}"));
 
+// Path to the external markdown file for system instructions
+var systemPromptFile = Path.Combine(Data.GetFolder(), "system_prompt.txt");
+
+
+// --- 2. PROGRAM SETUP DELEGATE ---
+
 Program.Setup(() =&gt; {
-  // Options, widget and other program related settings should always be defined in
-  // the "Setup" delegate.
+  
   Program
+    // Implement the AI Intent Handler interface to allow system integration
+    .Implements(
+      "@AI:IntentHandler",
+      API_URL
+    )
+    
+    // UI Options Definition:
+    // - Response length limit (Max Tokens)
+    // - Model selection dropdown (populated from models.yaml)
+    // - System Instructions (Markdown editor linked to system_prompt.txt)
     .AddOption(OPTION_MAX_TOKENS, "1536", "Max Tokens (response length)", "slider:64:4096:32")
     .AddOption(OPTION_MODEL_FILE, "", "Model", $"select:{ models }")
-    .UseWidget("custom/examples/local-ai-chat");
+    .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "System Instructions", $"editor:file:{systemPromptFile}:markdown")
+    
+    // Assign the custom UI widget for the chat interface
+    .UseWidget("custom/examples/local-ai-chat")
+    .Emit("@AI:IntentHandler", API_URL); // notify widgets
+
 });
 
+
+// --- 3. EXECUTION ---
+
+// Trigger the transition to the MAIN block
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>//
-// MAIN block for the Local LLM automation program.
-//
-// This code is executed after the SETUP block. It is responsible for:
-// 1. Validating user-configured options.
-// 2. Initializing the LLamaSharp model, context, and chat session.
-// 3. Defining API endpoints to handle model downloads and user prompts.
-// 4. Managing the program's lifecycle and memory cleanup.
-//
+    <ScriptSource>// ===================================================================
+// LOCAL LLM AUTOMATION PROGRAM (LLamaSharp Edition)
+// ===================================================================
+// This block manages the integration of a Local Language Model (GGUF)
+// for home automation control within HomeGenie.
+// 
+// Main Responsibilities:
+// 1. Model download management via System DownloadManager.
+// 2. LLamaSharp engine initialization (VRAM/RAM management).
+// 3. Dynamic device inventory generation for the System Prompt.
+// 4. Token streaming with smart buffering and artifact filtering.
+// 5. Automatic execution of API commands extracted from AI responses.
+// ===================================================================
 
-// Flag to signal that the program needs to be reloaded to apply new settings.
+// --- 1. CONFIGURATION AND STATE INITIALIZATION ---
+
 var reconfigureRequired = false;
 
-// Register an event handler that listens for changes to any module parameter.
-// If a "ConfigureOptions" parameter changes, we trigger a restart.
+// Register event handler to trigger a restart if configuration options change.
 When.ModuleParameterChanged((module, parameter) =&gt; {
   if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
     reconfigureRequired = true;
@@ -1081,19 +1042,23 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
   return true;
 });
 
-// Load model configuration and paths
+// Load model configurations and file paths
 var modelList = LoadModelList(Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME));
 var selectedModel = Program.Option(OPTION_MODEL_FILE).Value;
 string localModelFile = Path.Combine(Data.GetFolder(), selectedModel);
 
+// Reset UI status fields
+Program
+  .Emit("LLM.Id", "")
+  .Emit(FIELD_STATUS_INIT, "NotConfigured");
 
-// --- API: LLM DOWNLOAD MANAGEMENT ---
-// These endpoints are called by the UI to manage the GGUF file download.
+
+// --- 2. API: DOWNLOAD MANAGEMENT ---
+// These endpoints bridge the UI with the system's DownloadManager utility.
 
 Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p) =&gt; {
-     // Enqueue the download task via System.Utility/DownloadManager
      var model = modelList[selectedModel];
-     Program.Emit(FIELD_DOWNLOAD, "Requested");
+     Program.Emit(FIELD_STATUS_INIT, "Download").Emit(FIELD_DOWNLOAD, "Requested");
      var item = JsonConvert.SerializeObject(new {
          Name = model.Name,
          Url = model.Url,
@@ -1103,35 +1068,39 @@ Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p
      return new ResponseStatus(Status.Ok);
 
 }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadCancel", (p) =&gt; {
-     // Cancel and delete the current download task
      Program.Emit(FIELD_DOWNLOAD, "Pending");
      var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
-     var res = Api.Call("System.Utility/DownloadManager/Delete", item);
+     Api.Call("System.Utility/DownloadManager/Delete", item);
      Program.Emit(FIELD_DOWNLOAD_ID, "Pending");
      Program.Emit(Program.Option(OPTION_MODEL_FILE).Name, "");
      return new ResponseStatus(Status.Ok);
 
 }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadPause", (p) =&gt; {
-     Program.Emit(FIELD_DOWNLOAD, "Paused");
-     var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
-     var res = Api.Call("System.Utility/DownloadManager/Pause", item);
-     return new ResponseStatus(Status.Ok);
+    Program.Emit(FIELD_DOWNLOAD, "Paused");
+    var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
+    Api.Call("System.Utility/DownloadManager/Pause", item);
+    return new ResponseStatus(Status.Ok);
 
 }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadResume", (p) =&gt; {
-     var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
-     var res = Api.Call("System.Utility/DownloadManager/Resume", item);
-     return new ResponseStatus(Status.Ok);
+    var item = JsonConvert.SerializeObject(new { Id = Program.Parameter(FIELD_DOWNLOAD_ID)?.Value });
+    Api.Call("System.Utility/DownloadManager/Resume", item);
+    return new ResponseStatus(Status.Ok);
 });
 
 
-// Clear previous ID
-Program.Emit("LLM.Id", "");
+// --- 2.1 INFERENCE POST-PROCESSING HELPER METHOD (shared for using by other programs)
+Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Extract", (modelResponse) =&gt; {
+    // Post-Process AI reply and execute local commands 
+    var request = Api.Parse(modelResponse);
+    var response = WebUtility.UrlDecode(request.OriginalRequest);
+    return ExtractAndExecute(Api, response);
+});
 
 
-// --- MODEL FILE CHECK &amp; DOWNLOAD LOOP ---
-// If the model file does not exist, enter a loop to monitor the download status.
+// --- 3. MODEL FILE VERIFICATION &amp; MONITORING LOOP ---
+
 if (!File.Exists(localModelFile)) {
-
+  // Model file missing: enter monitoring loop until download is finished.
   while (!File.Exists(localModelFile))
   {
     dynamic response = Api.Call("System.Utility/DownloadManager/GetStatus", localModelFile);
@@ -1142,7 +1111,7 @@ if (!File.Exists(localModelFile)) {
       var task = fileStatus?.Data;
       if (task != null)
       {
-        // CASE 1: Download in progress. Update UI fields.
+        // Update UI with real-time download progress
         Program
           .Emit(FIELD_DOWNLOAD, task.Status.ToString())
           .Emit(FIELD_DOWNLOAD_ID, task.Id.ToString())
@@ -1150,38 +1119,33 @@ if (!File.Exists(localModelFile)) {
           .Emit(FIELD_DOWNLOAD_ERROR, task.ErrorMessage.ToString())
           .Emit(FIELD_DOWNLOAD_PROGRESS, task.ProgressPercentage.ToString("F2", CultureInfo.InvariantCulture));
         
-        if (task.ProgressPercentage &gt;= 100) 
-        {
-          break; // Download complete, exit loop
-        }
+        if (task.ProgressPercentage &gt;= 100) break; 
       }
       else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
       {
-        // CASE 2: No active task. Set status to 'Pending' so the UI shows the "Select Model" button.
+        // No active task found for this file
         Program
           .Emit(FIELD_DOWNLOAD, "Pending")
           .Emit(FIELD_DOWNLOAD_ID, String.IsNullOrEmpty(selectedModel) ? "Pending" : "")
-          .Emit(FIELD_DOWNLOAD_TASK, String.IsNullOrEmpty(selectedModel) ? localModelFile : localModelFile)
+          .Emit(FIELD_DOWNLOAD_TASK, localModelFile)
           .Emit(FIELD_DOWNLOAD_PROGRESS, "0");
       }
     }
 
     if (reconfigureRequired) return;
-
     Pause(2); // Poll status every 2 seconds
   }
 
-  // File exists. Mark as complete and force a reload to initialize the engine.
   Program
     .Emit(FIELD_STATUS_ERROR, "") 
     .Emit(FIELD_DOWNLOAD, "Complete")
     .Emit(FIELD_DOWNLOAD_PROGRESS, "100");
 
-  return;
+  return; // Program will restart to initialize the engine with the new file
 }
 else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
 {
-  // File already exists on startup. Ensure UI reflects "Complete" state.
+  // File already exists; ensure UI state is consistent
   Program
     .Emit(FIELD_DOWNLOAD, "Complete")
     .Emit(FIELD_DOWNLOAD_ID, "")
@@ -1190,7 +1154,7 @@ else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
 }
 
 
-// --- LLM ENGINE INITIALIZATION ---
+// --- 4. LLM ENGINE INITIALIZATION (LLamaSharp) ---
 
 Program
   .Emit("LLM.Id", selectedModel)
@@ -1200,51 +1164,35 @@ Program
 var templateType = modelList[selectedModel].Template;
 var modelPath = localModelFile;
 
-// Core LLamaSharp objects
 LLamaWeights model = null;
 LLamaContext context = null;
 ChatSession session = null;
 CancellationTokenSource generationCts = null;
 
-// Define cleanup action to release unmanaged memory (RAM/VRAM)
+// Cleanup action to release unmanaged resources (VRAM/RAM)
 var dispose = new Action(() =&gt; {
   session = null;
-  if (context != null) {
-      context.Dispose();
-      context = null;
-  }
-  if (model != null) {
-      model.Dispose();
-      model = null;
-  }
-  // Force Garbage Collection to reclaim memory immediately
+  if (context != null) { context.Dispose(); context = null; }
+  if (model != null) { model.Dispose(); model = null; }
   GC.Collect();
   GC.WaitForPendingFinalizers();
 });
 
-
-// Validation
+// Basic path validation
 if (String.IsNullOrEmpty(modelPath))
 {
-  Program
-    .Notify($"LLM model path not configured.[program_configure]")
-    .Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
+  Program.Notify($"LLM model path not configured.[program_configure]").Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
 }
 else if (!File.Exists(modelPath)) 
 {
-  Program
-    .Notify($"File not found: {modelPath}.[program_configure]")
-    .Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
+  Program.Notify($"File not found: {modelPath}.[program_configure]").Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
 }
 else
 {
-  // Register cleanup handler when program stops/restarts
-  When.ProgramStopping(() =&gt; {
-      dispose();
-      return true; 
-  });
+  // Ensure cleanup on stop
+  When.ProgramStopping(() =&gt; { dispose(); return true; });
 
-  // Apply configuration
+  // Load Inference Parameters
   LailamaInferenceParams.MaxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
   var parameters = new ModelParams(modelPath)
   {
@@ -1252,40 +1200,66 @@ else
       GpuLayerCount = PARAMS_GPU_LAYER_SIZE
   };
 
- try {
-  // Load Weights and Context
+// try {
+  // Load Model Weights and Context
   model = LLamaWeights.LoadFromFile(parameters);
   context = model.CreateContext(parameters);
 
-  // Initialize Chat Session
   var executor = new InteractiveExecutor(context);
   var chatHistory = new ChatHistory();
 
-  // Create prototype session to manage state resets
-  ChatSession prototypeSession =  ChatSession.InitializeSessionFromHistoryAsync(executor, chatHistory).GetAwaiter().GetResult();
-  var resetState = prototypeSession.GetSessionState();
+  // --- 5. SYSTEM PROMPT CONFIGURATION AND CHAT SESSION INIT ---
+  var promptText = "";
+  try { promptText = File.ReadAllText(Path.Combine(Data.GetFolder(), "system_prompt.txt")); } catch (Exception e) { }
 
-  session = new ChatSession(executor);
+  var systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
 
-  // Inject System Prompt
-  var systemMessage = new ChatHistory.Message(AuthorRole.System, GetSystemPrompt(templateType)); 
+  // Clean initialization
+  var systemMessage = new ChatHistory.Message(AuthorRole.System, (string)systemPrompt);
+  chatHistory.Messages.Add(systemMessage);
+
+
+  // SYNC: Fetch clean history from the System Service and sync LLamaSharp session
+  string storeId = Program.Module.Address;
+  try {
+      var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+      dynamic unifiedlHistory = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+
+      if (unifiedlHistory != null) {
+
+          // Re-populate with clean messages from service
+          foreach(ChatMessage msg in unifiedlHistory) {
+              var role = msg.Role == "user" ? AuthorRole.User : AuthorRole.Assistant;
+
+              // --- FIX: Uso di un ciclo classico invece di LINQ .Select() ---
+              var partsTextList = new List&lt;string&gt;();
+              foreach (var part in msg.Parts) {
+                  partsTextList.Add(part.Text);
+              }
+              string combinedText = string.Join("\n", partsTextList);
+              chatHistory.Messages.Add(new ChatHistory.Message(role, combinedText));
+          }
+      }
+  } catch (Exception ex) { 
+      Program.Log.Error("Sync error: " + ex.Message); 
+  }
+
+
+  // Final session starts with the System Prompt already in history
+  session = new ChatSession(executor, chatHistory);
+
+  var resetState = session.GetSessionState();
   session.LoadSession(resetState);
-  session.History.Messages.Add(systemMessage);
 
-
-  // --- WARMUP PHASE ---
-  // Perform a dummy inference to initialize KV cache and avoid latency on first user request.
+  // --- 6. WARMUP PHASE ---
+  // Perform a dummy inference to pre-populate the KV cache and avoid latency on first use.
   Program.Emit(FIELD_STATUS_INIT, "WarmingUp");
   try {
       var preWarmupState = session.GetSessionState();
       var warmupParams = new InferenceParams() { MaxTokens = 1 };
       Task.Run(async () =&gt; {
-          await foreach (var token in session.ChatAsync(new ChatHistory.Message(AuthorRole.User, " "), warmupParams))
-          {
-             // consume tokens...
-          }
+          await foreach (var token in session.ChatAsync(new ChatHistory.Message(AuthorRole.User, " "), warmupParams)) { }
       }).GetAwaiter().GetResult();
-      // Restore clean state (remove warmup interaction)
       session.LoadSession(preWarmupState);
   } catch (Exception ex) {
       Program.Log.Warn($"Warmup warning: {ex.Message}");
@@ -1293,183 +1267,204 @@ else
   Program.Emit(FIELD_STATUS_INIT, "Ready");
 
 
-  // --- API: INFERENCE CONTROL ---
+  // --- 7. INFERENCE LOGIC AND TOKEN PROCESSING ---
+  /**
+    * Processes the user input, handles LLM inference, manages the token stream,
+    * and synchronizes with the centralized Chat History Service.
+    * 
+    * @param rawInput The clean text entered by the user.
+    * @param synchronous Whether to wait for the full response before returning.
+    * @return The full generated response (if synchronous), otherwise an empty string.
+    */
+  var processInput = new Func&lt;string, bool, string&gt;((rawInput, synchronous) =&gt; {
 
-  Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Stop", (p) =&gt; {
-      // Endpoint to abort current generation
-      if (generationCts != null)
+      if (generationCts != null) generationCts.Dispose();
+      generationCts = new CancellationTokenSource();
+
+      string fullInput = rawInput;
+      if (CONTEXT_SEND_SYSTEM_INFO)
       {
+        string systemInfo = (string)Api.Call("System.Utility/ContextEngine/Render", "%%SYSTEM_STATUS%%");
+        fullInput = systemInfo + "\n\n" + rawInput;
+      }
+
+
+      // 2. PERSIST USER MESSAGE: Save the CLEAN raw input to the service
+      Api.Call("System.Utility/ChatHistory/Add", new {
+          StoreId = storeId,
+          Message = ChatMessage.Create("user", rawInput)
+      });
+
+      // 3. TEMPLATING: Prepare input for the engine (but don't save this to history!)
+      string templatedInput = BuildUserPrompt(templateType, fullInput);
+
+      var process = new Func&lt;bool, string&gt;((sync) =&gt; {
+          // Send the templated input to the engine
+          var sessionChat = session.ChatAsync(
+              new ChatHistory.Message(AuthorRole.User, templatedInput), 
+              LailamaInferenceParams, 
+              cancellationToken: generationCts.Token
+          );
+
+          string streamBuffer = "";
+          string fullReply = "";
+          var technicalTags = LailamaInferenceParams.AntiPrompts.Where(x =&gt; x.StartsWith("&lt;")).ToArray();
+          var textStops = LailamaInferenceParams.AntiPrompts.Where(x =&gt; !x.StartsWith("&lt;")).ToArray();
+          string[] visualArtifacts = { "/assistant/avatar", "/avatar", "![avatar]", "![image]" };
+
+          ProcessAsync(sessionChat, (token) =&gt; {
+              if (string.IsNullOrEmpty(token)) return;
+              streamBuffer += token;
+              fullReply += token;
+
+              foreach (var art in visualArtifacts) if (streamBuffer.Contains(art)) streamBuffer = streamBuffer.Replace(art, "");
+              foreach (var tag in technicalTags) if (streamBuffer.Contains(tag)) streamBuffer = streamBuffer.Replace(tag, "");
+              foreach (var stop in textStops) {
+                  if (streamBuffer.EndsWith(stop)) { streamBuffer = ""; return; }
+              }
+
+              bool isPotentialDanger = false;
+              foreach (var stop in textStops) if (stop.StartsWith(streamBuffer)) { isPotentialDanger = true; break; }
+
+              if (!isPotentialDanger || streamBuffer.Length &gt; 25) {
+                  Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
+                  streamBuffer = ""; 
+              }
+          }).GetAwaiter().GetResult();
+          
+          if (!string.IsNullOrEmpty(streamBuffer)) {
+              foreach (var tag in technicalTags) streamBuffer = streamBuffer.Replace(tag, "");
+              if (!string.IsNullOrWhiteSpace(streamBuffer)) Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
+          }
+          Program.Emit(FIELD_TOKENS_STREAM, "");
+
+          // 4. COMMAND EXECUTION AND PERSISTENCE
+          var messageSegments = ExtractAndExecute(Api, fullReply);
+
+          var modelResponse = new ChatMessage {
+              Role = "model",
+              Parts = messageSegments.Select(s =&gt; new MessagePart { Text = s }).ToList()
+          };
+
+          Api.Call("System.Utility/ChatHistory/Add", new {
+              StoreId = storeId,
+              Message = modelResponse
+          });
+
+          if (CONTEXT_SEND_SYSTEM_INFO)
+          {
+            // Replace content with the clean text (without systemInfo)
+            var lastUserMsg = session.History.Messages.LastOrDefault(m =&gt; m.AuthorRole == AuthorRole.User);
+            if (lastUserMsg != null)
+            {
+                lastUserMsg.Content = rawInput; 
+            }
+          }
+
+          return fullReply;
+      });
+
+      if (synchronous) return process(true);
+
+      Task.Run(() =&gt; {
+          try { process(false); }
+          catch (OperationCanceledException) { Program.Log.Info("Inference stopped."); }
+          catch (Exception ex) { Program.Emit(FIELD_STATUS_ERROR, ex.Message); }
+          finally { generationCts?.Dispose(); generationCts = null; }
+      });
+
+      return "";
+  });
+
+
+  // --- 8. API ENDPOINTS: INFERENCE AND CHAT ---
+
+  Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userInput) =&gt; {
+      // Direct intent submission (e.g. from external modules or scripts)
+      string input = WebUtility.UrlDecode((string)userInput);
+      if (!String.IsNullOrEmpty(input))
+      {
+          processInput(input, false);
+      }
+      return new ResponseStatus(Status.Ok, "Processing: " + input);
+
+  }).Handle($"{API_URL}/{API_PROMPT_CANCEL}", (userCommand) =&gt; {
+      // Abort current generation
+      if (generationCts != null) {
           generationCts.Cancel();
           Program.Emit(FIELD_TOKENS_STREAM, "\n\n[STOPPED]");
       }
       return new ResponseStatus(Status.Ok);
 
-  }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/Process", (userInput) =&gt; {
+  }).Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; {
+ 
+    return Api.Call("System.Utility/ChatHistory/Get", new {
+        StoreId = Program.Module.Address
+    });
 
-      var request = Api.Parse(userInput);
-      var input = BuildUserPrompt(templateType, request.OriginalRequest);
-      
-      if (!String.IsNullOrEmpty(input))
-      {
-          if (generationCts != null) generationCts.Dispose();
-          generationCts = new CancellationTokenSource();
+  }).Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; {
 
-          // Inject Current Time as metadata (enclosed in double brackets so the model ignores it)
-          var now = DateTime.Now.ToString("g", CultureInfo.InvariantCulture); 
-          string inputWithTime = $"[[Current Time: {now}]]\n\n{input}";
+    var storeId = Program.Module.Address;
+    Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
+    if (session != null &amp;&amp; resetState != null) 
+    {
+        session.LoadSession(resetState);
+        if (session.History.Messages.Count &gt; 0)
+        {
+            session.History.Messages.Clear();
+            context.NativeHandle.MemoryClear(data: true);
+            systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
+            systemMessage = new ChatHistory.Message(AuthorRole.System, (string)systemPrompt);
+            session.History.Messages.Add(systemMessage);
+        }
+    }
+    Program.Log.Info($"[Module {storeId}] Cleared: Engine and Service are now empty.");
+    return new ResponseStatus(Status.Ok);
 
-          // Run inference in a background thread
-          Task.Run(async () =&gt; {
-            try 
-            {
-              var sessionChat = session.ChatAsync(new ChatHistory.Message(AuthorRole.User, inputWithTime), LailamaInferenceParams, 
-                        cancellationToken: generationCts.Token);
-
-              // SMART BUFFERING STRATEGY
-              // We accumulate tokens in a buffer to detect and remove unwanted patterns
-              // that might be split across multiple tokens (e.g. split tags).
-              string streamBuffer = "";
-              
-              // Prepare stop lists
-              var technicalTags = LailamaInferenceParams.AntiPrompts.Where(x =&gt; x.StartsWith("&lt;")).ToArray();
-              var textStops = LailamaInferenceParams.AntiPrompts.Where(x =&gt; !x.StartsWith("&lt;")).ToArray();
-              string[] visualArtifacts = { 
-                  "/assistant/avatar", 
-                  "/avatar", 
-                  "![avatar]", 
-                  "![image]" 
-              };
-
-              ProcessAsync(sessionChat, (token) =&gt; {
-                
-                if (string.IsNullOrEmpty(token)) return;
-
-                // 1. Append to buffer
-                streamBuffer += token;
-
-                // 2. Filter Visual Artifacts (Remove completely)
-                foreach (var art in visualArtifacts)
-                {
-                    if (streamBuffer.Contains(art))
-                        streamBuffer = streamBuffer.Replace(art, "");
-                }
-
-                // 3. Filter Technical Tags (e.g., &lt;|end_of_sentence|&gt;)
-                foreach (var tag in technicalTags)
-                {
-                    if (streamBuffer.Contains(tag))
-                        streamBuffer = streamBuffer.Replace(tag, "");
-                }
-
-                // 4. Handle Textual Stops (e.g., "User:", "System:")
-                
-                // A. Check if buffer ENDS with a stop word (Generation finished)
-                foreach (var stop in textStops)
-                {
-                    if (streamBuffer.EndsWith(stop))
-                    {
-                        streamBuffer = ""; // Clear buffer to hide the stop word
-                        return; 
-                    }
-                }
-
-                // B. Check if buffer STARTs to form a stop word (Potential split token)
-                bool isPotentialDanger = false;
-                foreach (var stop in textStops)
-                {
-                    if (stop.StartsWith(streamBuffer))
-                    {
-                        isPotentialDanger = true;
-                        break;
-                    }
-                }
-
-                // C. Safe to Emit?
-                // Emit if it's not a potential stop word OR if the buffer is getting too long to be one.
-                if (!isPotentialDanger || streamBuffer.Length &gt; 25)
-                {
-                    Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
-                    streamBuffer = ""; 
-                }
-
-              }).GetAwaiter().GetResult();
-              
-              // 5. Final Flush
-              // Emit remaining buffer content if valid
-              if (!string.IsNullOrEmpty(streamBuffer))
-              {
-                  foreach (var tag in technicalTags) streamBuffer = streamBuffer.Replace(tag, "");
-                  if (!string.IsNullOrWhiteSpace(streamBuffer))
-                  {
-                      Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
-                  }
-              }
-
-            }
-            catch (OperationCanceledException)
-            {
-                Program.Log.Info("Generation stopped by user.");
-            }
-            catch (Exception ex)
-            {
-                Program.Emit(FIELD_STATUS_ERROR, ex.Message);
-            }
-
-            generationCts?.Dispose();
-            generationCts = null;
-
-          });
-      }
-      return new ResponseStatus(Status.Ok, "Processing: " + input);
   });
 
-  // Clear errors on success
   Program.Emit(FIELD_STATUS_ERROR, "");
-
+/*
  } catch (Exception e) { 
-    Program
-      .Notify($"ERROR: {e.Message} [program_configure]")
-      .Emit(FIELD_STATUS_ERROR, e.Message);
+    Program.Notify($"ERROR: {e.Message} [program_configure]").Emit(FIELD_STATUS_ERROR, e.Message);
     Pause(5);
-  }
+  }*/
 }
 
-// Ensure stream field is initialized
 Program.Emit(FIELD_TOKENS_STREAM, "");
 
+// --- 9. KEEP-ALIVE AND LIFECYCLE MONITORING ---
 
-// --- KEEP-ALIVE LOOP ---
 while (Program.IsRunning)
 {
     if (reconfigureRequired)
     {
         dispose();
-        return; // Triggers HomeGenie restart of the block
+        return; // Exiting this loop triggers HomeGenie to reload the program block
     }
     Pause(1);
-}</ScriptSource>
-    <ScriptContext>/* 
-||==============================================================================================
-|| LLM Inference Configuration
-||==============================================================================================
-*/
+}
+</ScriptSource>
+    <ScriptContext>#using System.Text.RegularExpressions
 
-const string LAILAMA_SYSTEM_PROMPT = """
-You are "Lailama", an expert technical assistant running locally on a HomeGenie server.
+// ===================================================================
+// CONFIGURATION AND CONSTANTS
+// ===================================================================
 
-RULES:
-1. **NO INTERNAL MONOLOGUE**: Start the response IMMEDIATELY.
-2. **METADATA FILTER**: User inputs start with `[[Current Time: ...]]`. **IGNORE THIS BLOCK COMPLETELY**. Do not greet the time. Do not mention the time unless explicitly asked "What time is it?".
-3. **FOCUS**: Reply ONLY to the text that comes AFTER the `[[...]]` block.
-4. **LANGUAGE**: Reply in the same language as the user.
-5. **STYLE**: Friendly and professional.
-""";
+/* Internal API Routing */
+const string API_URL = "AI.IntentHandlers/Lailama";
+const string API_PROMPT_SUBMIT = "Prompt.Submit";
+const string API_PROMPT_CANCEL = "Prompt.Cancel";
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
 
-/* Options Constants */
+/* Module Option Keys */
 const string OPTION_MODEL_PATH = "ModelPath";
 const string OPTION_MAX_TOKENS = "MaxTokens";
 const string OPTION_MODEL_FILE = "ModelFile";
+const string OPTION_SYSTEM_INSTRUCTIONS = "SystemInstructions";
 
+/* UI and Status Field Names */
 const string FIELD_TOKENS_STREAM = "LLM.TokenStream";
 const string FIELD_STATUS_INIT = "Status.Init";
 const string FIELD_STATUS_ERROR = "Status.Error";
@@ -1479,10 +1474,15 @@ const string FIELD_DOWNLOAD_TASK = "Status.Download.Task";
 const string FIELD_DOWNLOAD_ERROR = "Status.Download.Error";
 const string FIELD_DOWNLOAD_PROGRESS = "Status.Download.Progress";
 
+/* Resource Settings */
 const string CONFIG_FILE_NAME = "models.yaml";
-
 const int PARAMS_CONTEXT_SIZE = 4096;
-const int PARAMS_GPU_LAYER_SIZE = 0; // 0 = CPU only
+const int PARAMS_GPU_LAYER_SIZE = 0; // Set &gt; 0 to enable GPU offloading (VRAM)
+const bool CONTEXT_SEND_SYSTEM_INFO = false;
+
+// ===================================================================
+// DATA MODELS AND CONFIGURATION LOADING
+// ===================================================================
 
 public class ModelInfo {
   public string Url = "";
@@ -1492,6 +1492,9 @@ public class ModelInfo {
   public string Template = "";
 }
 
+/**
+ * Loads the list of available models from a YAML configuration file.
+ */
 public static Dictionary&lt;string, ModelInfo&gt; LoadModelList(string configFilePath = CONFIG_FILE_NAME)
 {
     string fullPath = configFilePath;
@@ -1499,134 +1502,130 @@ public static Dictionary&lt;string, ModelInfo&gt; LoadModelList(string configFil
     {
         string yaml = File.ReadAllText(fullPath);
         var deserializer = new DeserializerBuilder().Build();
-        var modelList = deserializer.Deserialize&lt;Dictionary&lt;string, ModelInfo&gt;&gt;(yaml);
-        return modelList;
+        return deserializer.Deserialize&lt;Dictionary&lt;string, ModelInfo&gt;&gt;(yaml);
     }
     catch (Exception ex)
     {
+        // Return empty dictionary if file is missing or corrupt
         return new Dictionary&lt;string, ModelInfo&gt;();
     }
 }
 
+public class MessagePart {
+    [JsonProperty("text")]
+    public string Text { get; set; }
+}
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage { Role = role, Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } };
+    }
+}
+
+// ===================================================================
+// INFERENCE PARAMETERS (Sampling &amp; Stop Sequences)
+// ===================================================================
 
 InferenceParams LailamaInferenceParams = new InferenceParams
 {
     SamplingPipeline = new DefaultSamplingPipeline
     {
-        // Temperature: 0.6 is a balanced value for most models
-        Temperature = 0.4f, 
+        Temperature = 0.4f, // Lower temperature for more deterministic/factual responses
         TopP = 0.95f,
         RepeatPenalty = 1.1f 
     },
     MaxTokens = 1024, 
     
-    // ROBUST STOP LIST
-    // Comprehensive list to handle various models (ChatML, Llama, Phi, etc.)
+    // ANTI-PROMPTS (Stop Sequences)
+    // This list prevents the model from "hallucinating" both sides of the conversation
+    // or continuing indefinitely after providing the answer.
     AntiPrompts = new string[]
     {
-        // ==============================================================================
-        // GROUP 1: OFFICIAL STOP TOKENS (EOS)
-        // These are the internal signals used by specific models to say "I am done".
-        // ==============================================================================
-        "&lt;|im_end|&gt;",           // Standard ChatML (Qwen, DeepSeek Coder, Microsoft Phi)
-        "&lt;|endoftext|&gt;",        // Generic standard (GPT-2/3 roots)
-        "&lt;|eot_id|&gt;",           // Llama 3 (End of Turn)
-        "&lt;|eom_id|&gt;",           // Llama 3 (End of Message - rarer but possible)
+        // --- GROUP 1: OFFICIAL EOS (End Of Sentence) TOKENS ---
+        // Internal markers specific to each model architecture.
+        "&lt;|im_end|&gt;",           // ChatML (Qwen, Phi-3, Yi)
+        "&lt;|endoftext|&gt;",        // GPT-based standards
+        "&lt;|eot_id|&gt;",           // Llama 3
+        "&lt;|eom_id|&gt;",           // Llama 3 (End of Message)
         "&lt;|end|&gt;",              // Phi-3
         "&lt;end_of_turn&gt;",        // Gemma 2
-        "&lt;|end_of_sentence|&gt;",  // DeepSeek V2/V3 (Often emitted as text in GGUF)
-        "&lt;|end_of_response|&gt;",  // Newer "Reasoning" models (DeepSeek R1/Granite)
+        "&lt;|end_of_sentence|&gt;",  // DeepSeek
+        "&lt;|end_of_response|&gt;",  // DeepSeek R1 / Reasoning models
 
-        // ==============================================================================
-        // GROUP 2: START OF NEXT TURN TOKENS
-        // If the model forgets to stop, it tries to start the next role. We catch it here.
-        // ==============================================================================
-        "&lt;|im_start|&gt;",         // ChatML: Model tries to start a new block
-        "&lt;|start_header_id|&gt;",  // Llama 3: Model tries to write header for user/system
-        "&lt;|user|&gt;",             // Phi-3: Model tries to impersonate user
-        "&lt;start_of_turn&gt;",      // Gemma: Model tries to start new turn
-        "&lt;|begin_of_sentence|&gt;",// DeepSeek: Often marks the start of a new line
-        "&lt;|start_response|&gt;",   // Reasoning models: Marks start of final answer
-        "Answer: ",             // DeepSeek: Prevents infinite answer loop 
+        // --- GROUP 2: TURN-START MARKERS ---
+        // Used to catch the model if it tries to generate the next User/System turn.
+        "&lt;|im_start|&gt;",         // ChatML
+        "&lt;|start_header_id|&gt;",  // Llama 3
+        "&lt;|user|&gt;",             // Phi-3
+        "&lt;start_of_turn&gt;",      // Gemma
+        "&lt;|begin_of_sentence|&gt;",// DeepSeek
+        "&lt;|start_response|&gt;",   // Reasoning response start
+        "Answer: ",             // DeepSeek fallback
 
-        // --- Assistant Self-Reference Stoppers (DeepSeek) ---
+        // --- GROUP 3: TEXTUAL FALLBACKS ---
+        // Prevents the model from writing plain-text labels like "Assistant:" or "User:".
         "Assistant:",   
         "\nAssistant:", 
         "Response:",    
         "\nResponse:",  
         "### Assistant",
         "### Response",
-
-        // ==============================================================================
-        // GROUP 3: TEXTUAL HALLUCINATIONS (The "Chat Mode" leftovers)
-        // Models like DeepSeek/Mistral often write "User:" plain text when confused.
-        // ==============================================================================
-        
-        // --- User Stoppers ---
-        "\nUser:",              // SAFEST: Newline + User + Colon. (Standard chat format)
-        "\nUser ",              // Newline + User + Space (Catches "User " without colon)
-        "User:",                // Word + Colon (Catches "User:" at start of line without \n)
-        "### Instruction",      // Alpaca/Vicuna style stop
-        "### User",             // Common variation
-
-        // --- System Stoppers ---
-        "\nSystem:",            // Prevents model from hallucinating System instructions
-        "System:",              
-        
-        // --- DeepSeek Specific ---
-        // DeepSeek sometimes outputs a double newline before the User tag.
+        "\nUser:",
+        "\nUser ",
+        "User:",
+        "### Instruction",
+        "### User",
+        "\nSystem:",
+        "System:",
         "\n\nUser:",
         "\n\nSystem:",
         "\n\nAssistant:"
     }
 };
 
+// ===================================================================
+// PROMPT TEMPLATING LOGIC
+// ===================================================================
 
-/* 
-|| Utility methods
-*/
-
-string GetSystemPrompt(string templateType, string prompt = LAILAMA_SYSTEM_PROMPT) {
+/**
+ * Wraps the system instructions in the format required by the specific model template.
+ */
+string GetSystemPrompt(string templateType, string prompt) {
   switch (templateType) {
     case "llama3":
-      // Llama 3 uses a specific system header tag
       return $"&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt;\n\n{prompt}\n&lt;|eot_id|&gt;";
     
     case "phi3":
-      // Phi-3 does NOT have an official system tag.
-      // Best practice is to place it as plain text at the absolute beginning.
       return $"{prompt}\n\n";
 
     case "gemma":
-      // Gemma technically supports a 'system' turn, but it is often ignored.
-      // We simulate a user turn followed by a model acknowledgment to force context adherence.
        return $"&lt;start_of_turn&gt;user\n{prompt}&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\nOK.&lt;end_of_turn&gt;\n";
 
     case "alpaca":
     case "openchat":
-      // These models often accept instructions before the first turn
       return $"{prompt}\n\n";
 
     case "deepseek":
-      // DeepSeek Chat V2/V3
-      // Insert system prompt at absolute start, after BOS (Begin Of Sentence).
       return $"&lt;|begin_of_sentence|&gt;{prompt}\n\n";
 
     case "chatml":
     default:
-      // Standard ChatML
       return $"&lt;|im_start|&gt;system\n{prompt}\n&lt;|im_end|&gt;\n"; 
   }
 }
 
+/**
+ * Wraps user input and prepares the assistant's response header based on the template.
+ */
 string BuildUserPrompt(string templateType, string userInput) {
   switch (templateType) {
     case "llama3":
-      // Llama 3: Reinforcing instruction to match user's language
       return $"&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;\n\n{userInput}&lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;\n\n";
     
     case "phi3":
-      // Phi-3: Similar reinforcement strategy
       return $"&lt;|user|&gt;\n{userInput}&lt;|end|&gt;\n&lt;|assistant|&gt;\n";
 
     case "alpaca":
@@ -1636,39 +1635,112 @@ string BuildUserPrompt(string templateType, string userInput) {
       return $"GPT4 Correct User: {userInput}&lt;|end_of_turn|&gt;GPT4 Correct Assistant:";
 
     case "gemma":
-      // Gemma reinforcement
-      return "&lt;start_of_turn&gt;user\n" + 
-             userInput + 
-             "&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\n";
+      return "&lt;start_of_turn&gt;user\n" + userInput + "&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\n";
     
     case "deepseek":
-      // Note: DeepSeek is very sensitive to newlines (\n\n) between User and Assistant
       return $"User:{userInput}\n\nAssistant: ";
 
     case "chatml":
     default:
-      // Pure ChatML
       return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\n"; 
   }
 }
 
+// ===================================================================
+// UTILITY HELPERS AND CONTENT EXTRACTION
+// ===================================================================
+
+/**
+ * Helper to process the asynchronous token stream from the LLM.
+ */
 async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&lt;string&gt; callback)
 {
     await foreach (string item in asyncEnumerable)
     {
         callback(item);
     }
-}</ScriptContext>
-    <ScriptErrors />
+}
+
+public class ApiCallBlock
+{
+    public string Content { get; set; }
+    public int StartIndex { get; set; }
+    public int EndIndex { get; set; }
+}
+
+public class CodeBlockExtractor
+{
+    // Regex che cattura l'intero blocco comprese le etichette di apertura e chiusura
+    private const string ApiCallPattern = @"(```api-call[\s\S]*?```)";
+    
+    /**
+     * Extracts interleaved text and API blocks.
+     * API segments are returned exactly as: ```api-call\n...\n```
+     */
+    public static List&lt;string&gt; ExtractInterleaved(string sourceText)
+    {
+        var result = new List&lt;string&gt;();
+        if (string.IsNullOrEmpty(sourceText)) return result;
+
+        // Regex.Split con il pattern tra parentesi tonde include i "delimitatori" nel risultato
+        var parts = Regex.Split(sourceText, ApiCallPattern, RegexOptions.Singleline);
+
+        foreach (var part in parts)
+        {
+            if (string.IsNullOrEmpty(part)) continue;
+            
+            // Aggiungiamo il segmento alla lista (sia esso testo o blocco api-call)
+            result.Add(part.Trim());
+        }
+
+        return result;
+    }
+}
+
+/**
+ * Executes API calls and returns the interleaved list [text, ```api-call\n...\n```, text, ...]
+ */
+public List&lt;string&gt; ExtractAndExecute(dynamic Api, string response)
+{
+    var segments = CodeBlockExtractor.ExtractInterleaved(response);   
+    foreach (var segment in segments)
+    {
+        if (segment.StartsWith("```api-call"))
+        {
+            string commandsRaw = segment
+                .Replace("```api-call", "")
+                .Replace("```", "")
+                .Trim();
+
+            var commands = commandsRaw.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);            
+            foreach(var cmd in commands) 
+            {
+                string cleanCmd = cmd.Trim();
+                if (!string.IsNullOrEmpty(cleanCmd))
+                {
+                    Program.Log.Info($"Executing: {cleanCmd}");
+                    try {
+                        Api.Call($"/api/{cleanCmd}");
+                    } catch (Exception e) {
+                        Program.Log.Error($"API Error: {cleanCmd} - {e.Message}");
+                    }
+                }
+            }
+        }
+    }
+    return segments;
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>2A994A58AADB032C5A7FD6419D391164</Checksum>
+      <Checksum>9098869A1A53D958C7CE9DC8DF2CBDF4</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -1832,12 +1904,12 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1985,12 +2057,12 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>

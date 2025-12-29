@@ -348,7 +348,8 @@
       "VirtualThermostat.TemperatureModule": "Sensore di temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Interruttore Heating",
       "VirtualThermostat.CoolingSwitchModule": "Interruttore Cooling",
-      "ConfigureOptions.ThermostatsCount": "Numero di termostati"
+      "ConfigureOptions.ThermostatsCount": "Numero di termostati",
+      "ConfigureOptions.EnsureCommandDelivery": "Assicura la consegna del comando tramite trasmissione continua (modalità pulse)."
     },
 
     "81": {
@@ -558,7 +559,9 @@
       "ConfigureOptions.ApiKey":
         "Chiave API Google Gemini AI",
       "ConfigureOptions.ModelId":
-        "ID Modello"
+        "ID Modello",
+      "ConfigureOptions.SystemInstructions":
+        "Istruzioni di Sistema"
     },
 
     "931": {
@@ -569,7 +572,9 @@
       "ConfigureOptions.ApiKey":
         "Chiave API Google Gemini AI",
       "ConfigureOptions.ModelId":
-        "ID Modello"
+        "ID Modello",
+      "ConfigureOptions.SystemInstructions":
+        "Istruzioni di Sistema"
     },
 
     "940": {
@@ -580,7 +585,9 @@
       "ConfigureOptions.MaxTokens":
         "Token Massimi (lunghezza risposta)",
       "ConfigureOptions.ModelFile":
-        "Modello"
+        "Modello",
+      "ConfigureOptions.SystemInstructions":
+        "Istruzioni di Sistema"
     },
 
     "575": {
@@ -588,7 +595,54 @@
         "Gestore Download",
       "Description":
         "Un servizio di trasferimento file HTTP(S) robusto e asincrono, accessibile tramite API dedicata. Gestisce l'intero ciclo di vita del download, supportando pausa/ripresa (tramite header Range) e la gestione dei file temporanei (.part)."
+    },
+    "576": {
+      "Title":
+        "Gestore File",
+      "Description":
+        "Un servizio sicuro basato su API per la lettura e la scrittura di file all'interno della cartella dati di base del programma. Supporta sia contenuti binari grezzi che stringhe UTF-8 tramite i comandi dedicati ReadText e WriteText."
+    },
+    "577": {
+      "Title":
+        "Servizio Cronologia Chat",
+      "Description":
+        "Servizio centralizzato di HomeGenie per la gestione e la persistenza dei log delle chat AI. Attraverso un'API unificata (System.Utility/ChatHistory), fornisce ai modelli LLM cloud e locali un contesto condiviso, archiviazione JSON automatizzata e gestione della cronologia in tempo reale."
+    },
+    "578": {
+      "Title":
+        "Motore di Contesto",
+      "Description":
+        "Servizio centralizzato per la generazione dinamica di prompt per l'IA. Popola i template con l'elenco dei dispositivi controllabili e lo stato del sistema in tempo reale (meteo, energia, sensori), garantendo all'IA una consapevolezza totale della casa in tempo reale."
+    },
+    "570": {
+      "Title":
+        "Monitor Dati",
+      "Description":
+        "Servizio di analisi centralizzato per le statistiche storiche dei moduli. Consente il recupero dinamico di dati di serie temporali con filtri di elaborazione del segnale integrati (Media Semplice, Media Mobile, Savitzky-Golay) per fornire dati puliti e livellati per grafici e monitoraggio di sistema."
+    },
+    "571": {
+      "Title":
+        "Statistiche Consumo Energetico",
+      "Description":
+        "Monitora, aggrega e registra continuamente i dati di consumo energetico (W/h) a intervalli regolari. Implementa un'API completa per la consultazione e l'interrogazione dei set di dati storici."
+    },
+    "572": {
+      "Title":
+        "Esempio Grafico a Torta",
+      "Description":
+        "Esempio di fornitore di grafici che visualizza un grafico a torta basato su dati statici."
+    },
+    "573": {
+      "Title":
+        "Consumo Energetico Settimanale",
+      "Description":
+        "Grafico a barre che visualizza il consumo medio in Watt/ora per ogni giorno della settimana (Lun-Dom). I dati sono aggregati su tutte le ore del giorno e provengono dalle API del servizio 'Statistiche Consumo Energetico'."
+    },
+    "574": {
+      "Title":
+        "Consumo Energetico Orario",
+      "Description":
+        "Grafico a barre che visualizza il consumo medio in Watt/ora per ogni ora del giorno (00h-23h). I dati sono aggregati sulla base della settimana selezionata e provengono dalle API del servizio 'Statistiche Consumo Energetico'."
     }
-
   }
 }

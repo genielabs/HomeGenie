@@ -329,6 +329,38 @@
     "575": {
       "Title": "Gestionnaire de téléchargement",
       "Description": "Un service de transfert de fichiers HTTP(S) robuste et asynchrone, accessible via une API dédiée. Il gère l'intégralité du cycle de vie du téléchargement, prenant en charge la pause/reprise (via les en-têtes Range) et la gestion des fichiers temporaires (.part)."
+    },
+    "576": {
+      "Title": "Gestionnaire de fichiers",
+      "Description": "Un service sécurisé, basé sur une API, permettant de lire et d'écrire des fichiers dans le répertoire de données de base du programme. Il prend en charge les données binaires brutes et les chaînes de caractères UTF-8 grâce aux commandes dédiées ReadText et WriteText."
+    },
+    "577": {
+      "Title": "Service d'historique des conversations",
+      "Description": "HomeGenie est un service centralisé permettant de gérer et de conserver les journaux de conversation des IA. Grâce à une API unifiée (System.Utility/ChatHistory), il offre aux environnements LLM cloud et locaux un contexte partagé, un stockage JSON automatisé et une gestion de l'historique en temps réel."
+    },
+    "578": {
+      "Title": "Moteur de contexte",
+      "Description": "Service centralisé pour la génération dynamique d'invites IA. Il alimente les modèles avec la liste des appareils contrôlables et l'état du système en temps réel (météo, énergie, capteurs), garantissant ainsi une connaissance complète et en temps réel de l'état du domicile pour l'IA."
+    },
+    "570": {
+      "Title": "Moniteur de données",
+      "Description": "Service d'analyse centralisé des statistiques historiques des modules. Il permet la récupération dynamique de données de séries temporelles grâce à des filtres de traitement du signal intégrés (moyenne simple, moyenne mobile, Savitzky-Golay) afin de fournir des données propres et lissées pour les graphiques et la surveillance du système."
+    },
+    "571": {
+      "Title": "Statistiques sur la consommation d'énergie",
+      "Description": "Ce système surveille, agrège et enregistre en continu les données de consommation énergétique (W/h) à intervalles réguliers. Il met en œuvre une API complète permettant de consulter et d'interroger les données historiques."
+    },
+    "572": {
+      "Title": "Exemple de statistiques sur un graphique circulaire",
+      "Description": "Exemple de fournisseur de graphiques qui s'affiche sous forme de graphique circulaire avec des données statiques."
+    },
+    "573": {
+      "Title": "Consommation d'énergie hebdomadaire",
+      "Description": "Graphique à barres affichant la consommation moyenne en watts par heure pour chaque jour de la semaine (du lundi au dimanche). Les données sont agrégées pour toutes les heures de la journée et proviennent de l'API des statistiques de consommation d'énergie."
+    },
+    "574": {
+      "Title": "Consommation d'énergie horaire",
+      "Description": "Graphique à barres affichant la consommation moyenne en watts par heure pour chaque heure de la journée (00h-23h). Les données sont agrégées sur la semaine sélectionnée et proviennent de l'API des statistiques de consommation d'énergie."
     }
   }
 }

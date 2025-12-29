@@ -348,7 +348,8 @@
       "VirtualThermostat.TemperatureModule": "Temperature sensor",
       "VirtualThermostat.HeatingSwitchModule": "Heating switch",
       "VirtualThermostat.CoolingSwitchModule": "Cooling switch",
-      "ConfigureOptions.ThermostatsCount": "Number of thermostats"
+      "ConfigureOptions.ThermostatsCount": "Number of thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Ensure command delivery with continuous transmission (pulse-mode)."
     },
 
     "81": {
@@ -558,7 +559,9 @@
       "ConfigureOptions.ApiKey":
         "Google Gemini AI API key",
       "ConfigureOptions.ModelId":
-        "Model ID"
+        "Model ID",
+      "ConfigureOptions.SystemInstructions":
+        "System Instructions"
     },
 
     "931": {
@@ -569,7 +572,9 @@
       "ConfigureOptions.ApiKey":
         "Google Gemini AI API key",
       "ConfigureOptions.ModelId":
-        "Model ID"
+        "Model ID",
+      "ConfigureOptions.SystemInstructions":
+        "System Instructions"
     },
 
     "940": {
@@ -580,7 +585,9 @@
       "ConfigureOptions.MaxTokens":
         "Max Tokens (response length)",
       "ConfigureOptions.ModelFile":
-        "Model"
+        "Model",
+      "ConfigureOptions.SystemInstructions":
+        "System Instructions"
     },
 
     "575": {
@@ -588,7 +595,54 @@
         "Download Manager",
       "Description":
         "A robust, asynchronous HTTP(S) file transfer service accessible via a dedicated API. It manages the full download lifecycle, supporting pause/resume (using Range headers) and temporary file handling (.part)."
+    },
+    "576": {
+      "Title":
+        "File Manager",
+      "Description":
+        "A secure, API-driven service for reading and writing files within the program's base data folder. It supports both raw binary and UTF-8 string content via dedicated ReadText and WriteText commands."
+    },
+    "577": {
+      "Title":
+        "Chat History Service",
+      "Description":
+        "Centralized HomeGenie service for managing and persisting AI chat logs. Through a unified API (System.Utility/ChatHistory), it provides cloud and local LLMs with a shared context, automated JSON storage, and real-time history management."
+    },
+    "578": {
+      "Title":
+        "Context Engine",
+      "Description":
+        "Centralized service for dynamic AI prompt generation. It populates templates with the list of controllable devices and the live system status (weather, energy, sensors), ensuring total real-time home awareness for the AI."
+    },
+    "570": {
+      "Title":
+        "Data Monitor",
+      "Description":
+        "Centralized analysis service for historical module statistics. It enables dynamic retrieval of time-series data with built-in signal processing filters (Simple Average, Moving Average, Savitzky-Golay) to provide clean, smoothed data for charts and system monitoring."
+    },
+    "571": {
+      "Title":
+        "Energy Use Statistics",
+      "Description":
+        "Continuously monitors, aggregates, and logs energy consumption data (W/h) at regular intervals. Implements a full API for browsing and querying historical datasets."
+    },
+    "572": {
+      "Title":
+        "Pie Chart Stats example",
+      "Description":
+        "Example chart provider that renders as a pie chart with static data."
+    },
+    "573": {
+      "Title":
+        "Weekly Energy Consumption",
+      "Description":
+        "Bar chart displaying the average Watts/Hour consumption for each day of the week (Mon-Sun). Data is aggregated across all hours of the day and sourced from the Energy Use Statistics API."
+    },
+    "574": {
+      "Title":
+        "Hourly Energy Consumption",
+      "Description":
+        "Bar chart displaying the average Watts/Hour consumption for every hour of the day (00h-23h). Data is aggregated over the selected week and sourced from the Energy Use Statistics API."
     }
-
   }
 }

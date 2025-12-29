@@ -329,6 +329,38 @@
     "575": {
       "Title": "Letöltéskezelő",
       "Description": "Egy robusztus, aszinkron HTTP(S) fájlátviteli szolgáltatás, amely egy dedikált API-n keresztül érhető el. Kezeli a teljes letöltési életciklust, támogatja a szüneteltetést/folytatást (tartományfejlécek használatával) és az ideiglenes fájlok kezelését (.part)."
+    },
+    "576": {
+      "Title": "Fájlkezelő",
+      "Description": "Biztonságos, API-vezérelt szolgáltatás fájlok olvasásához és írásához a program alapadat-mappájában. Támogatja mind a nyers bináris, mind az UTF-8 karakterláncos tartalmat dedikált ReadText és WriteText parancsokon keresztül."
+    },
+    "577": {
+      "Title": "Csevegési előzmények szolgáltatás",
+      "Description": "Központosított HomeGenie szolgáltatás mesterséges intelligencia alapú csevegésnaplók kezeléséhez és mentéséhez. Egy egységes API-n (System.Utility/ChatHistory) keresztül megosztott kontextust, automatizált JSON-tárolást és valós idejű előzménykezelést biztosít a felhőalapú és helyi LLM-ek számára."
+    },
+    "578": {
+      "Title": "Kontextusmotor",
+      "Description": "Központosított szolgáltatás a dinamikus mesterséges intelligencia alapú promptgeneráláshoz. Feltölti a sablonokat a vezérelhető eszközök listájával és az élő rendszerállapottal (időjárás, energia, érzékelők), biztosítva a mesterséges intelligencia számára a teljes valós idejű otthoni tudatosságot."
+    },
+    "570": {
+      "Title": "Adatfigyelő",
+      "Description": "Központosított elemző szolgáltatás a historikus modulstatisztikákhoz. Lehetővé teszi az idősoros adatok dinamikus lekérését beépített jelfeldolgozó szűrőkkel (egyszerű átlag, mozgóátlag, Savitzky-Golay), hogy tiszta, simított adatokat biztosítson diagramokhoz és rendszermonitorozáshoz."
+    },
+    "571": {
+      "Title": "Energiafelhasználási statisztikák",
+      "Description": "Folyamatosan figyeli, összesíti és naplózza az energiafogyasztási adatokat (W/h) rendszeres időközönként. Teljes API-t valósít meg a korábbi adatkészletek böngészéséhez és lekérdezéséhez."
+    },
+    "572": {
+      "Title": "Kördiagram statisztikák példája",
+      "Description": "Példa diagramszolgáltatóra, amely statikus adatokkal rendelkező kördiagramként jelenít meg."
+    },
+    "573": {
+      "Title": "Heti energiafogyasztás",
+      "Description": "Oszlopdiagram, amely a hét minden napjára (hétfőtől vasárnapig) vonatkozó átlagos watt/óra fogyasztást mutatja. Az adatok a nap minden órájában összesítettek, és az Energy Use Statistics API-ból származnak."
+    },
+    "574": {
+      "Title": "Óránkénti energiafogyasztás",
+      "Description": "Oszlopdiagram, amely a nap minden órájára (00:00-23:00) vonatkozó átlagos watt/óra fogyasztást mutatja. Az adatok a kiválasztott hétre összesítve jelennek meg, forrásuk az Energy Use Statistics API."
     }
   }
 }

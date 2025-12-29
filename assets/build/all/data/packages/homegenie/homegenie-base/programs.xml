@@ -1,5 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program.Run();
+</ScriptSetup>
+    <ScriptSource>// ===================================================================
+// MULTI-STORE CHAT HISTORY SERVICE
+// ===================================================================
+
+string dataFolder = Data.GetFolder();
+
+Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
+    var request = Api.Parse(args);
+    
+    dynamic data = (request.Data is string) ? JObject.Parse((string)request.Data) : JObject.FromObject(request.Data);
+
+    string storeId = data?.StoreId?.ToString() ?? "default";
+    var currentHistory = HistoryStore.GetStore(dataFolder, storeId);
+
+    switch(request.Command) {
+
+        case "Get":
+
+            return currentHistory;
+
+        case "Add":
+
+            var msg = JsonConvert.DeserializeObject&lt;ChatMessage&gt;(data.Message.ToString());
+            if (msg != null) {
+                currentHistory.Add(msg);
+                HistoryStore.Save(dataFolder, storeId);
+            }
+            return new { Count = currentHistory.Count };
+
+        case "PopLast":
+
+            if (currentHistory.Count &gt; 0) {
+                currentHistory.RemoveAt(currentHistory.Count - 1);
+                HistoryStore.Save(dataFolder, storeId);
+            }
+            return new { Count = currentHistory.Count };
+
+        case "Clear":
+
+            currentHistory.Clear();
+            HistoryStore.Save(dataFolder, storeId);
+            return new { Status = "Cleared" };
+
+        default:
+            return new ResponseStatus(Status.Error, $"Unknown command: {request.Command}");
+    }
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>
+// --- POJO MODELS ---
+
+public class MessagePart
+{
+    [JsonProperty("text")]
+    public string Text { get; set; }
+}
+
+public class ChatMessage
+{
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+
+    public static ChatMessage Create(string role, string text)
+    {
+        return new ChatMessage { 
+            Role = role, 
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } 
+        };
+    }
+}
+
+// --- MULTI-STORE PERSISTENCE ---
+
+public static class HistoryStore
+{
+    // Dizionario che tiene in memoria le diverse cronologie caricate
+    public static Dictionary&lt;string, List&lt;ChatMessage&gt;&gt; Stores { get; set; } = new Dictionary&lt;string, List&lt;ChatMessage&gt;&gt;();
+
+    private static string GetFilePath(string folder, string storeId)
+    {
+        return Path.Combine(folder, $"history_{storeId}.json");
+    }
+
+    public static List&lt;ChatMessage&gt; GetStore(string folder, string storeId)
+    {
+        if (!Stores.ContainsKey(storeId))
+        {
+            Load(folder, storeId);
+        }
+        return Stores[storeId];
+    }
+
+    public static bool Load(string folder, string storeId)
+    {
+        try {
+            string path = GetFilePath(folder, storeId);
+            if (File.Exists(path)) {
+                var list = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(File.ReadAllText(path));
+                Stores[storeId] = list ?? new List&lt;ChatMessage&gt;();
+                return true;
+            }
+        } catch { }
+        Stores[storeId] = new List&lt;ChatMessage&gt;();
+        return false;
+    }
+
+    public static bool Save(string folder, string storeId)
+    {
+        try {
+            if (!Stores.ContainsKey(storeId)) return false;
+            string path = GetFilePath(folder, storeId);
+            File.WriteAllText(path, JsonConvert.SerializeObject(Stores[storeId], Formatting.Indented));
+            return true;
+        } catch { return false; }
+    }
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.4</PackageVersion>
+      <Id>chat-history-service</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>3257E9D93488EB5073035391A0AFD9F1</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>577</Address>
+    <Name>Chat History Service</Name>
+    <Description>Centralized HomeGenie service for managing and persisting AI chat logs. Through a unified API (System.Utility/ChatHistory), it provides cloud and local LLMs with a shared context, automated JSON storage, and real-time history management.</Description>
+    <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>var dataFolder = Data.GetFolder(PresetsFolder);
 Data.AddToSystemBackup(dataFolder);
@@ -56,7 +202,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -321,12 +467,12 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     return data;
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -335,7 +481,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>570</Address>
     <Name>Data Monitor</Name>
-    <Description>Real-time data visualization and monitoring.</Description>
+    <Description>Centralized analysis service for historical module statistics. It enables dynamic retrieval of time-series data with built-in signal processing filters (Simple Average, Moving Average, Savitzky-Golay) to provide clean, smoothed data for charts and system monitoring.</Description>
     <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -971,9 +1117,9 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>download-manager</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
       <Checksum>43F5B501DC7F608D5D0EC644F1ABB330</Checksum>
     </PackageInfo>
@@ -981,7 +1127,7 @@ public class DownloadManager : IDisposable
     <Address>575</Address>
     <Name>Download Manager</Name>
     <Description>A robust, asynchronous HTTP(S) file transfer service accessible via a dedicated API. It manages the full download lifecycle, supporting pause/resume (using Range headers) and temporary file handling (.part).</Description>
-    <Group>Data Processing</Group>
+    <Group>Utilities</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
@@ -1014,7 +1160,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1100,7 +1246,7 @@ while (Program.IsRunning)
         // NOTE ON DATA INTEGRITY: The underlying device must emit values
         // (including 0.0 when off) at regular intervals for this average to be accurate.
         var records = mod.Parameter("Meter.Watts").Statistics.History
-                .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; UpdateInterval);
+                .FindAll(sv =&gt; sv.Value &gt;= 0 &amp;&amp; sv.Value &lt;= WATT_VALUE_ERROR_MAX &amp;&amp; (now - sv.Timestamp).TotalSeconds &lt; UpdateInterval);
 
         var avgWatt = records
             .Select(sv =&gt; sv.Value)
@@ -1123,6 +1269,7 @@ while (Program.IsRunning)
 </ScriptSource>
     <ScriptContext>const int UpdateInterval = 3600; // 1 hour
 const string DbTable = "weekly";
+const double WATT_VALUE_ERROR_MAX = 7000;
 
 class WeeklyStat {
     [BsonId]
@@ -1267,15 +1414,15 @@ public double[] GetHourlyStats(string domain, string address, ushort targetWeekO
 public object GetYearWeekRange()
 {
     ushort minYearWeek = ushort.MaxValue;
-    ushort maxYearWeek = 0; 
+    ushort maxYearWeek = 0;
     bool foundAny = false;
 
     lock(this)
     using(var db = Data.LiteDb(GetDbName()))
     {
         var stats = db.GetCollection&lt;WeeklyStat&gt;(DbTable);
-        var allStats = stats.FindAll(); 
-        
+        var allStats = stats.FindAll();
+
         foreach (var stat in allStats)
         {
             ushort currentYearWeek = stat.YearWeek;
@@ -1296,7 +1443,7 @@ public object GetYearWeekRange()
         ushort currentWeek = (ushort)ISOWeek.GetWeekOfYear(DateTime.Now);
         return new { WeekStart = currentWeek, WeekEnd = currentWeek };
     }
-    
+
     return new {
         Start = minYearWeek,
         End = maxYearWeek,
@@ -1336,21 +1483,21 @@ string GetDbName()
     return $"energy_use_{DateTime.Now.Year}.db";
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
       <Required>false</Required>
-      <Checksum>8BD5E82E9F84D3895C385BC6C519996D</Checksum>
+      <Checksum>A57965D0B4E782C5ED2B01C6230982B7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
     <Name>Energy Use Statistics</Name>
-    <Description>Continuously monitors, aggregates, and logs energy consumption data (W/h) at fixed intervals. Implements a full API for browsing and querying historical datasets.</Description>
+    <Description>Continuously monitors, aggregates, and logs energy consumption data (W/h) at regular intervals. Implements a full API for browsing and querying historical datasets.</Description>
     <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -1516,7 +1663,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1539,6 +1686,153 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Run();</ScriptSetup>
+    <ScriptSource>Api.Handle("HomeAutomation.HomeGenie/FileManager", (args) =&gt; {
+
+    var request = Api.Parse(args);
+
+    string basePath = Path.Combine(Data.GetFolder(), "..");
+    string relativeFilePath = request.GetOption(0);
+
+    string responseData = "";
+    bool success = true;
+
+    try
+    {
+        if (string.IsNullOrWhiteSpace(relativeFilePath))
+            throw new ArgumentException("Missing relative file path (Option 0) in the request.");
+
+        switch(request.Command) {
+
+            case "Write":
+                if (request.Data == null) throw new ArgumentException("Missing content data (request.Data) in the request.");
+
+                FileManagerLogic.WriteFile(basePath, relativeFilePath, (byte[])request.Data);
+
+                responseData = $"File '{relativeFilePath}' successfully written.";
+                break;
+
+            case "WriteText":
+                if (request.Data is byte[] rawBytes)
+                {
+                    string contentString = Encoding.UTF8.GetString(rawBytes);
+                    FileManagerLogic.WriteFileAsString(basePath, relativeFilePath, contentString);
+
+                    responseData = $"Text file '{relativeFilePath}' successfully written.";
+                }
+                else
+                {
+                    throw new ArgumentException("WriteText requires a valid string or byte[] content in the request data.");
+                }
+                break;
+
+            case "Read":
+                byte[] fileContent = FileManagerLogic.ReadFile(basePath, relativeFilePath);
+
+                return fileContent;
+                break;
+
+            case "ReadText":
+                 string fileStringContent = FileManagerLogic.ReadFileAsString(basePath, relativeFilePath);
+
+                return fileStringContent;
+                break;
+
+            default:
+                success = false;
+                responseData = $"Unknown command: {request.Command}";
+                break;
+        }
+    }
+    catch (Exception ex)
+    {
+        success = false;
+        responseData = ex.Message;
+    }
+
+    return new ResponseStatus(success ? Status.Ok : Status.Error, responseData);
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>public static class FileManagerLogic
+{
+    private static string GetSafeFullPath(string basePath, string relativeFilePath)
+    {
+        if (string.IsNullOrWhiteSpace(basePath))
+            throw new ArgumentException("Base path cannot be null or empty.", nameof(basePath));
+
+        if (string.IsNullOrWhiteSpace(relativeFilePath))
+            throw new ArgumentException("Relative file path cannot be null or empty.", nameof(relativeFilePath));
+
+        string normalizedFullPath = Path.GetFullPath(relativeFilePath);
+        string normalizedBasePath = Path.GetFullPath(basePath);
+
+        if (!normalizedFullPath.StartsWith(normalizedBasePath, StringComparison.OrdinalIgnoreCase))
+        {
+             throw new UnauthorizedAccessException($"Access denied. Path traversal detected. File must be within: {normalizedBasePath}");
+        }
+
+        string? directoryPath = Path.GetDirectoryName(normalizedFullPath);
+        if (directoryPath != null &amp;&amp; !Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        return normalizedFullPath;
+    }
+
+    public static void WriteFile(string basePath, string relativeFilePath, byte[] contentBytes)
+    {
+        string fullPath = GetSafeFullPath(basePath, relativeFilePath);
+        File.WriteAllBytes(fullPath, contentBytes);
+    }
+
+    public static byte[] ReadFile(string basePath, string relativeFilePath)
+    {
+        string fullPath = GetSafeFullPath(basePath, relativeFilePath);
+        if (!File.Exists(fullPath))
+        {
+             throw new FileNotFoundException($"The file was not found at '{fullPath}'.");
+        }
+        return File.ReadAllBytes(fullPath);
+    }
+
+    public static void WriteFileAsString(string basePath, string relativeFilePath, string contentString)
+    {
+        byte[] contentBytes = Encoding.UTF8.GetBytes(contentString);
+        WriteFile(basePath, relativeFilePath, contentBytes);
+    }
+
+    public static string ReadFileAsString(string basePath, string relativeFilePath)
+    {
+        byte[] fileBytes = ReadFile(basePath, relativeFilePath);
+        return Encoding.UTF8.GetString(fileBytes);
+    }
+}</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.4</PackageVersion>
+      <Id>file-manager</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>45A509656A53CC9D1A38F8301A04FCD6</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>576</Address>
+    <Name>File Manager</Name>
+    <Description>A secure, API-driven service for reading and writing files within the program's base data folder. It supports both raw binary and UTF-8 string content via dedicated ReadText and WriteText commands.</Description>
+    <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -1585,7 +1879,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2047,7 +2341,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -2303,7 +2597,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2395,7 +2689,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -2487,7 +2781,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2559,7 +2853,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -2632,7 +2926,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>

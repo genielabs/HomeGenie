@@ -459,5 +459,14 @@
   "western": "ምዕራባዊ",
   "my_list": "የእኔ ዝርዝር",
   "top_rated": "ከፍተኛ ደረጃ የተሰጠው",
-  "continue_watching": "መመልከቱን ይቀጥሉ"
+  "continue_watching": "መመልከቱን ይቀጥሉ",
+  "download": "አውርድ",
+  "downloading": "በማውረድ ላይ...",
+  "resume": "የስራ ልምድ ማስረጃ",
+  "pause": "ለአፍታ አቁም",
+  "thoughts": "ሀሳቦች",
+  "api_calls": "የኤፒአይ ትዕዛዞች",
+  "show_code": "ኮድ አሳይ",
+  "copy_api_call": "የኤፒአይ ጥሪ ሕብረቁምፊን ይቅዱ",
+  "copy_full_api_url": "ሙሉውን የኤፒአይ ዩአርኤል ይቅዱ"
 }

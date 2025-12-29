@@ -459,5 +459,14 @@
   "western": "බටහිර",
   "my_list": "මගේ ලැයිස්තුව",
   "top_rated": "ඉහළම ශ්‍රේණිගත කිරීම් සහිත",
-  "continue_watching": "නැරඹීම දිගටම කරගෙන යන්න"
+  "continue_watching": "නැරඹීම දිගටම කරගෙන යන්න",
+  "download": "බාගත කරන්න",
+  "downloading": "බාගනිමින්...",
+  "resume": "අරඹන්න",
+  "pause": "විරාමය",
+  "thoughts": "සිතුවිලි",
+  "api_calls": "API විධාන",
+  "show_code": "කේතය පෙන්වන්න",
+  "copy_api_call": "API ඇමතුම් අනුලකුණු වැල පිටපත් කරන්න",
+  "copy_full_api_url": "සම්පූර්ණ API URL එක පිටපත් කරන්න"
 }

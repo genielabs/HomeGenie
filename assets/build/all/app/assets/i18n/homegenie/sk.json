@@ -329,6 +329,38 @@
     "575": {
       "Title": "Správca sťahovania",
       "Description": "Robustná, asynchrónna služba prenosu súborov HTTP(S) dostupná prostredníctvom vyhradeného rozhrania API. Spravuje celý životný cyklus sťahovania, podporuje pozastavenie/obnovenie (pomocou hlavičiek Range) a spracovanie dočasných súborov (.part)."
+    },
+    "576": {
+      "Title": "Správca súborov",
+      "Description": "Bezpečná služba riadená rozhraním API na čítanie a zápis súborov v základnom dátovom priečinku programu. Podporuje surový binárny obsah aj reťazcový obsah UTF-8 prostredníctvom vyhradených príkazov ReadText a WriteText."
+    },
+    "577": {
+      "Title": "Služba histórie chatu",
+      "Description": "Centralizovaná služba HomeGenie na správu a uchovávanie protokolov chatu s umelou inteligenciou. Prostredníctvom jednotného rozhrania API (System.Utility/ChatHistory) poskytuje cloudovým a lokálnym LLM zdieľaný kontext, automatizované úložisko JSON a správu histórie v reálnom čase."
+    },
+    "578": {
+      "Title": "Kontextový nástroj",
+      "Description": "Centralizovaná služba pre dynamické generovanie výziev pre umelú inteligenciu. Napĺňa šablóny zoznamom ovládateľných zariadení a stavom systému v reálnom čase (počasie, energia, senzory), čím zabezpečuje úplný prehľad o domácnosti v reálnom čase pre umelú inteligenciu."
+    },
+    "570": {
+      "Title": "Monitor údajov",
+      "Description": "Centralizovaná analytická služba pre historické štatistiky modulov. Umožňuje dynamické vyhľadávanie časových radov údajov pomocou vstavaných filtrov na spracovanie signálu (jednoduchý priemer, kĺzavý priemer, Savitzky-Golay) a poskytuje čisté a vyhladené údaje pre grafy a monitorovanie systému."
+    },
+    "571": {
+      "Title": "Štatistika spotreby energie",
+      "Description": "Nepretržite monitoruje, agreguje a zaznamenáva údaje o spotrebe energie (W/h) v pravidelných intervaloch. Implementuje kompletné API na prehliadanie a vyhľadávanie historických súborov údajov."
+    },
+    "572": {
+      "Title": "Príklad štatistík koláčového grafu",
+      "Description": "Príklad poskytovateľa grafu, ktorý sa vykresľuje ako koláčový graf so statickými údajmi."
+    },
+    "573": {
+      "Title": "Týždenná spotreba energie",
+      "Description": "Stĺpcový graf zobrazujúci priemernú spotrebu vo wattoch/hodinu pre každý deň v týždni (pondelok – nedeľa). Údaje sú agregované za všetky hodiny dňa a pochádzajú z rozhrania Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Hodinová spotreba energie",
+      "Description": "Stĺpcový graf zobrazujúci priemernú spotrebu vo wattoch/hodinu za každú hodinu dňa (00:00 – 23:00). Údaje sú agregované za vybraný týždeň a pochádzajú z rozhrania Energy Use Statistics API."
     }
   }
 }

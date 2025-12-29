@@ -329,6 +329,38 @@
     "575": {
       "Title": "Gerenciador de downloads",
       "Description": "Um serviço robusto e assíncrono de transferência de arquivos HTTP(S) acessível por meio de uma API dedicada. Ele gerencia todo o ciclo de vida do download, suportando pausa/retomada (usando cabeçalhos Range) e manipulação de arquivos temporários (.part)."
+    },
+    "576": {
+      "Title": "Gerenciador de arquivos",
+      "Description": "Um serviço seguro, baseado em API, para leitura e gravação de arquivos na pasta de dados base do programa. Ele suporta conteúdo binário bruto e strings UTF-8 por meio de comandos dedicados ReadText e WriteText."
+    },
+    "577": {
+      "Title": "Serviço de histórico de bate-papo",
+      "Description": "Serviço centralizado HomeGenie para gerenciar e armazenar registros de bate-papo com IA. Por meio de uma API unificada (System.Utility/ChatHistory), ele fornece aos LLMs na nuvem e locais um contexto compartilhado, armazenamento JSON automatizado e gerenciamento de histórico em tempo real."
+    },
+    "578": {
+      "Title": "Motor de Contexto",
+      "Description": "Serviço centralizado para geração dinâmica de avisos por IA. Ele preenche modelos com a lista de dispositivos controláveis e o status do sistema em tempo real (clima, energia, sensores), garantindo total conhecimento da casa em tempo real para a IA."
+    },
+    "570": {
+      "Title": "Monitor de dados",
+      "Description": "Serviço de análise centralizada para estatísticas históricas de módulos. Permite a recuperação dinâmica de dados de séries temporais com filtros de processamento de sinal integrados (Média Simples, Média Móvel, Savitzky-Golay) para fornecer dados limpos e suavizados para gráficos e monitoramento do sistema."
+    },
+    "571": {
+      "Title": "Estatísticas de uso de energia",
+      "Description": "Monitora, agrega e registra continuamente dados de consumo de energia (W/h) em intervalos regulares. Implementa uma API completa para navegar e consultar conjuntos de dados históricos."
+    },
+    "572": {
+      "Title": "Exemplo de gráfico de pizza para estatísticas",
+      "Description": "Exemplo de provedor de gráficos que renderiza um gráfico de pizza com dados estáticos."
+    },
+    "573": {
+      "Title": "Consumo semanal de energia",
+      "Description": "Gráfico de barras exibindo o consumo médio de Watts/Hora para cada dia da semana (segunda a domingo). Os dados são agregados ao longo de todas as horas do dia e provenientes da API de Estatísticas de Uso de Energia."
+    },
+    "574": {
+      "Title": "Consumo de energia por hora",
+      "Description": "Gráfico de barras que exibe o consumo médio de Watts/Hora para cada hora do dia (00h-23h). Os dados são agregados ao longo da semana selecionada e provenientes da API de Estatísticas de Uso de Energia."
     }
   }
 }

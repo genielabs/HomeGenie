@@ -459,5 +459,14 @@
   "western": "Occidentalis",
   "my_list": "Index Meus",
   "top_rated": "Optime Aestimati",
-  "continue_watching": "Perge Spectare"
+  "continue_watching": "Perge Spectare",
+  "download": "Deprime",
+  "downloading": "Depromitur...",
+  "resume": "Curriculum Vitae",
+  "pause": "Pausa",
+  "thoughts": "Cogitationes",
+  "api_calls": "Mandata API",
+  "show_code": "Codicem Monstra",
+  "copy_api_call": "Exscribe seriem vocationis API",
+  "copy_full_api_url": "URL API plenam exscribere"
 }

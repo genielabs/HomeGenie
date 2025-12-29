@@ -459,5 +459,14 @@
   "western": "Vestlig",
   "my_list": "Min liste",
   "top_rated": "Topbedømt",
-  "continue_watching": "Fortsæt med at se"
+  "continue_watching": "Fortsæt med at se",
+  "download": "Download",
+  "downloading": "Downloader...",
+  "resume": "Genoptage",
+  "pause": "Pause",
+  "thoughts": "Tanker",
+  "api_calls": "API-kommandoer",
+  "show_code": "Vis kode",
+  "copy_api_call": "Kopiér API-kaldsstreng",
+  "copy_full_api_url": "Kopiér den fulde API-URL"
 }

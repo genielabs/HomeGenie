@@ -329,6 +329,38 @@
     "575": {
       "Title": "Nedlastingsbehandler",
       "Description": "En robust, asynkron HTTP(S)-filoverføringstjeneste tilgjengelig via et dedikert API. Den administrerer hele nedlastingslivssyklusen, støtter pause/gjenoppta (ved hjelp av Range-overskrifter) og håndtering av midlertidige filer (.part)."
+    },
+    "576": {
+      "Title": "Filbehandler",
+      "Description": "En sikker, API-drevet tjeneste for lesing og skriving av filer i programmets basismappe. Den støtter både rå binærfil og UTF-8-strenginnhold via dedikerte ReadText- og WriteText-kommandoer."
+    },
+    "577": {
+      "Title": "Chathistorikktjeneste",
+      "Description": "Sentralisert HomeGenie-tjeneste for administrasjon og oppbevaring av AI-chatlogger. Gjennom et enhetlig API (System.Utility/ChatHistory) gir den skybaserte og lokale LLM-er en delt kontekst, automatisert JSON-lagring og sanntidshistorikkadministrasjon."
+    },
+    "578": {
+      "Title": "Kontekstmotor",
+      "Description": "Sentralisert tjeneste for dynamisk generering av AI-meldinger. Den fyller ut maler med listen over kontrollerbare enheter og systemstatus i sanntid (vær, energi, sensorer), noe som sikrer fullstendig sanntidsinformasjon om hjemmet for AI-en."
+    },
+    "570": {
+      "Title": "Datamonitor",
+      "Description": "Sentralisert analysetjeneste for historisk modulstatistikk. Den muliggjør dynamisk henting av tidsseriedata med innebygde signalbehandlingsfiltre (Enkelt gjennomsnitt, Glidende gjennomsnitt, Savitzky-Golay) for å gi rene, jevne data for diagrammer og systemovervåking."
+    },
+    "571": {
+      "Title": "Statistikk over energibruk",
+      "Description": "Overvåker, aggregerer og logger kontinuerlig energiforbruksdata (W/t) med jevne mellomrom. Implementerer et komplett API for å bla gjennom og spørre historiske datasett."
+    },
+    "572": {
+      "Title": "Eksempel på statistikk for sektordiagram",
+      "Description": "Eksempel på diagramleverandør som gjengis som et sektordiagram med statiske data."
+    },
+    "573": {
+      "Title": "Ukentlig energiforbruk",
+      "Description": "Stolpediagram som viser gjennomsnittlig watt/time-forbruk for hver ukedag (man–søn). Dataene er samlet over alle døgnets timer og hentet fra API-et for energibruksstatistikk."
+    },
+    "574": {
+      "Title": "Timebasert energiforbruk",
+      "Description": "Stolpediagram som viser gjennomsnittlig watt/time-forbruk for hver time på dagen (00:00–23:00). Dataene er samlet inn for den valgte uken og hentet fra API-et for energibruksstatistikk."
     }
   }
 }

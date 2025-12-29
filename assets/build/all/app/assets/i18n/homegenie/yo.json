@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------------------",
+  " ": "-- ...",
   "welcome_to_homegenie": "Kaabo si HomeGenie!",
   "welcome_subtitle": "Imọye adaṣe adaṣe ti eto",
   "not_configured_yet": "Eto ko tunto sibẹsibẹ. Oluṣeto iṣeto yii yoo ṣe iranlọwọ fun ọ ni gbigbe eto rẹ soke ati ṣiṣe ni awọn igbesẹ diẹ.",
@@ -329,6 +329,38 @@
     "575": {
       "Title": "Olùṣàkóso Ìgbàsílẹ̀",
       "Description": "Iṣẹ́ gbigbe faili HTTP(S) tó lágbára, tí kò ṣeé lò tí a lè lò nípasẹ̀ API pàtàkì kan. Ó ń ṣàkóso ìgbésí ayé ìgbàsílẹ̀ kíkún, ó ń ṣe àtìlẹ́yìn fún ìdádúró/ìbẹ̀rẹ̀ (nípa lílo àwọn àkọlé Range) àti mímú fáìlì ìgbà díẹ̀ (.part)."
+    },
+    "576": {
+      "Title": "Olùṣàkóso Faili",
+      "Description": "Iṣẹ́ tó ní ààbò, tó ń lo API fún kíkà àti kíkọ àwọn fáìlì nínú fáìlì ìpìlẹ̀ dátà ètò náà. Ó ń ṣe àtìlẹ́yìn fún àkóónú binary àti UTF-8 string nípasẹ̀ àwọn àṣẹ ReadText àti WriteText tí a yà sọ́tọ̀."
+    },
+    "577": {
+      "Title": "Iṣẹ́ Ìtàn Ìfọ̀rọ̀wérọ̀",
+      "Description": "Iṣẹ́ HomeGenie tí a ṣe ní àárín gbùngbùn fún ṣíṣàkóso àti pípa àwọn àkọsílẹ̀ ìfọ̀rọ̀wérọ̀ AI. Nípasẹ̀ API kan tí a ṣọ̀kan (System.Utility/ChatHistory), ó ń pèsè àwọsánmà àti àwọn LLM agbègbè pẹ̀lú àyíká tí a pín, ibi ìpamọ́ JSON aládàáṣe, àti ìṣàkóso ìtàn ní àkókò gidi."
+    },
+    "578": {
+      "Title": "Ẹ̀rọ Àyíká",
+      "Description": "Iṣẹ́ tó wà ní àárín gbùngbùn fún ìṣẹ̀dá ìṣíṣẹ́ AI tó ń ṣiṣẹ́ dáadáa. Ó kún àwọn àwòṣe pẹ̀lú àkójọ àwọn ẹ̀rọ tó ṣeé ṣàkóso àti ipò ètò tó wà láàyè (ojú ọjọ́, agbára, àwọn sensọ̀), èyí tó ń rí i dájú pé gbogbo ènìyàn mọ̀ nípa AI ní ilé gidi."
+    },
+    "570": {
+      "Title": "Atẹle Dátà",
+      "Description": "Iṣẹ́ ìṣàyẹ̀wò àárín gbùngbùn fún àwọn statistiki módùlù ìtàn. Ó ń jẹ́ kí a gba àwọn data onípele-àkókò padà pẹ̀lú àwọn àlẹ̀mọ́ ìṣiṣẹ́ àmì tí a ṣe sínú rẹ̀ (Simple Average, Moving Average, Savitzky-Golay) láti pèsè àwọn data mímọ́, tí a mú rọ̀ fún àwọn àtẹ àti ìṣàyẹ̀wò ètò."
+    },
+    "571": {
+      "Title": "Àwọn Àlàyé Nípa Lilo Agbára",
+      "Description": "Ó ń ṣe àkíyèsí, kó jọ, àti ṣàkọsílẹ̀ ìlò agbára (W/h) ní àwọn àkókò déédéé. Ó ń lo API pípé fún wíwá kiri àti ṣíṣe ìbéèrè lórí àwọn ìwádìí ìtàn."
+    },
+    "572": {
+      "Title": "Àpẹẹrẹ Àtẹ Àtẹ",
+      "Description": "Àpẹẹrẹ olùpèsè àtẹ tí ó ń ṣe àfihàn gẹ́gẹ́ bí àtẹ àtẹ pẹ̀lú dátà àìdúró."
+    },
+    "573": {
+      "Title": "Lilo Agbara Ni Osẹ-Ọsẹ",
+      "Description": "Àtẹ ìtẹ̀wé tí ó ń fi ìwọ̀n Watt/Wákàtí tí a lò fún ọjọ́ kọ̀ọ̀kan nínú ọ̀sẹ̀ hàn (Ọjọ́ Àìkú sí Ọjọ́ Àìkú). A kó àwọn dátà jọ ní gbogbo wákàtí ọjọ́ náà, a sì wá láti inú Agbára Lilo Àkójọpọ̀."
+    },
+    "574": {
+      "Title": "Lilo Agbara Wakati",
+      "Description": "Àtẹ ìtẹ̀wé tí ó ń fi ìwọ̀n ìlò Watt/Wákàtí tí a lò fún gbogbo wákàtí ọjọ́ (00h-23h) hàn. A kó àwọn dátà jọ ní ọ̀sẹ̀ tí a yàn, a sì wá láti inú Agbára Lilo Àkójọpọ̀."
     }
   }
 }

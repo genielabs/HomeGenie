@@ -459,5 +459,14 @@
   "western": "Δυτικός",
   "my_list": "Η λίστα μου",
   "top_rated": "Κορυφαία βαθμολογία",
-  "continue_watching": "Συνέχεια παρακολούθησης"
+  "continue_watching": "Συνέχεια παρακολούθησης",
+  "download": "Λήψη",
+  "downloading": "Λήψη...",
+  "resume": "Περίληψη",
+  "pause": "Παύση",
+  "thoughts": "Σκέψεις",
+  "api_calls": "Εντολές API",
+  "show_code": "Εμφάνιση κωδικού",
+  "copy_api_call": "Αντιγραφή συμβολοσειράς κλήσης API",
+  "copy_full_api_url": "Αντιγραφή πλήρους διεύθυνσης URL API"
 }

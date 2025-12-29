@@ -459,5 +459,14 @@
   "western": "Lääne",
   "my_list": "Minu nimekiri",
   "top_rated": "Kõrgeima hinnanguga",
-  "continue_watching": "Jätka vaatamist"
+  "continue_watching": "Jätka vaatamist",
+  "download": "Laadi alla",
+  "downloading": "Allalaadimine...",
+  "resume": "CV",
+  "pause": "Paus",
+  "thoughts": "Mõtted",
+  "api_calls": "API-käsud",
+  "show_code": "Näita koodi",
+  "copy_api_call": "Kopeeri API kutse string",
+  "copy_full_api_url": "Kopeeri täielik API URL"
 }

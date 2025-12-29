@@ -459,5 +459,14 @@
   "western": "G'arbiy",
   "my_list": "Mening ro'yxatim",
   "top_rated": "Eng yuqori baholangan",
-  "continue_watching": "Tomosha qilishda davom eting"
+  "continue_watching": "Tomosha qilishda davom eting",
+  "download": "Yuklab olish",
+  "downloading": "Yuklab olinmoqda...",
+  "resume": "Rezyume; qayta boshlash",
+  "pause": "To'xtatib turish",
+  "thoughts": "Fikrlar",
+  "api_calls": "API buyruqlari",
+  "show_code": "Kodni ko'rsatish",
+  "copy_api_call": "API chaqiruv satrini nusxalash",
+  "copy_full_api_url": "To'liq API URL manzilini nusxalash"
 }

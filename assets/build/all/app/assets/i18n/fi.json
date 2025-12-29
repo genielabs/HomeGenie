@@ -459,5 +459,14 @@
   "western": "Länsimainen",
   "my_list": "Oma lista",
   "top_rated": "Parhaiten arvioidut",
-  "continue_watching": "Jatka katselua"
+  "continue_watching": "Jatka katselua",
+  "download": "Lataa",
+  "downloading": "Ladataan...",
+  "resume": "Jatkaa",
+  "pause": "Tauko",
+  "thoughts": "Ajatuksia",
+  "api_calls": "API-komennot",
+  "show_code": "Näytä koodi",
+  "copy_api_call": "Kopioi API-kutsumerkkijono",
+  "copy_full_api_url": "Kopioi koko API-URL-osoite"
 }

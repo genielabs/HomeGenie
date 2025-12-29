@@ -459,5 +459,14 @@
   "western": "Zapadni",
   "my_list": "Moja lista",
   "top_rated": "Najbolje ocijenjeno",
-  "continue_watching": "Nastavi gledati"
+  "continue_watching": "Nastavi gledati",
+  "download": "Preuzmi",
+  "downloading": "Preuzimanje...",
+  "resume": "Životopis",
+  "pause": "Pauza",
+  "thoughts": "Misli",
+  "api_calls": "API naredbe",
+  "show_code": "Prikaži kod",
+  "copy_api_call": "Kopiraj niz poziva API-ja",
+  "copy_full_api_url": "Kopiraj cijeli API URL"
 }

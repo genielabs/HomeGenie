@@ -459,5 +459,14 @@
   "western": "Western",
   "my_list": "مېنىڭ تىزىملىكىم",
   "top_rated": "Top Rated",
-  "continue_watching": "داۋاملىق كۆزىتىڭ"
+  "continue_watching": "داۋاملىق كۆزىتىڭ",
+  "download": "چۈشۈرۈش",
+  "downloading": "چۈشۈرۈۋېلىنىۋاتىدۇ...",
+  "resume": "رېزىيۇمې",
+  "pause": "توختاپ قېلىش",
+  "thoughts": "ئوي-پىكىرلەر",
+  "api_calls": "API بۇيرۇقلىرى",
+  "show_code": "كودنى كۆرسىتىش",
+  "copy_api_call": "API چاقىرىش قۇرىنى كۆچۈرۈش",
+  "copy_full_api_url": "تولۇق API URL نى كۆچۈرۈڭ"
 }

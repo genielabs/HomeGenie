@@ -329,6 +329,38 @@
     "575": {
       "Title": "Administrator Deductionum",
       "Description": "Servitium robustum et asynchronum translationis fasciculorum HTTP(S), per API dedicatam accessibile. Totum cyclum vitae demptionis administrat, pausam/continuationem (per inscriptiones intervallorum) et tractationem fasciculorum temporariorum (.part) sustinens."
+    },
+    "576": {
+      "Title": "Administrator Archivorum",
+      "Description": "Servitium securum, per API ductum, ad fasciculos legendos et scribendos intra fasciculum datorum basicorum programmatis. Sustinet contenta tam binaria cruda quam series UTF-8 per praecepta dedicata ReadText et WriteText."
+    },
+    "577": {
+      "Title": "Servitium Historiae Colloquiorum",
+      "Description": "Servitium HomeGenie centralizatum ad acta colloquiorum artificialium administranda et conservanda. Per API unificatam (System.Utility/ChatHistory), praebet LLMs nubilum et locales contextum communem, repositorium JSON automaticum, et administrationem historiae in tempore reali."
+    },
+    "578": {
+      "Title": "Machina Contextus",
+      "Description": "Servitium centralizatum ad dynamicam intelligentiae artificialis incitationem generandam. Formulas implet indice instrumentorum moderabilium et statu systematis in tempore reali (tempestate, energia, sensoribus), ita ut plena notitia domus in tempore reali pro intelligentia artificiali praestetur."
+    },
+    "570": {
+      "Title": "Monitor Datorum",
+      "Description": "Servitium centralizatum analysis statisticarum historicarum modulorum. Recuperationem dynamicam datorum serierum temporalium permittit cum filtris processus signorum inclusis (Media Simplex, Media Mobilis, Savitzky-Golay) ut data munda et levigata pro diagrammatibus et monitoribus systematis praebeantur."
+    },
+    "571": {
+      "Title": "Statisticae Usus Energiae",
+      "Description": "Consumptionem energiae (W/h) continenter monitorat, aggregat, et anotat intervallis regularibus. API plenam ad perscrutandas et interrogandas collectiones datorum historicorum implementat."
+    },
+    "572": {
+      "Title": "Exemplum Statisticarum Diagrammatis Circularis",
+      "Description": "Exemplum provisoris chartae quae ut charta circularis cum datis staticis redditur."
+    },
+    "573": {
+      "Title": "Consumptio Energiae Hebdomadalis",
+      "Description": "Diagramma columnarium consumptionem mediam Watts/Horae pro singulis diebus hebdomadis (Lunae-Solis) ostendens. Data per omnes horas diei aggregantur et ex API Statisticarum Usus Energiae derivantur."
+    },
+    "574": {
+      "Title": "Consumptio Energiae Horaria",
+      "Description": "Diagramma columnarium consumptionem mediam Watts/Horae pro qualibet hora diei (00:00-23:00) ostendens. Data per hebdomadam selectam aggregata sunt et ex API Statisticarum Usus Energiae derivantur."
     }
   }
 }

@@ -459,5 +459,14 @@
   "western": "ทางทิศตะวันตก",
   "my_list": "รายการของฉัน",
   "top_rated": "อันดับสูงสุด",
-  "continue_watching": "รับชมต่อ"
+  "continue_watching": "รับชมต่อ",
+  "download": "ดาวน์โหลด",
+  "downloading": "กำลังดาวน์โหลด...",
+  "resume": "ประวัติย่อ",
+  "pause": "หยุดชั่วคราว",
+  "thoughts": "ความคิด",
+  "api_calls": "คำสั่ง API",
+  "show_code": "แสดงโค้ด",
+  "copy_api_call": "คัดลอกสตริงการเรียกใช้ API",
+  "copy_full_api_url": "คัดลอก URL API แบบเต็ม"
 }

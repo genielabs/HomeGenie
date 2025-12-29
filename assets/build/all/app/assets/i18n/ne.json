@@ -459,5 +459,14 @@
   "western": "पश्चिमी",
   "my_list": "मेरो सूची",
   "top_rated": "शीर्ष मूल्याङ्कन गरिएको",
-  "continue_watching": "हेरिरहनुहोस्"
+  "continue_watching": "हेरिरहनुहोस्",
+  "download": "डाउनलोड गर्नुहोस्",
+  "downloading": "डाउनलोड गर्दै...",
+  "resume": "पुनःसुरु गर्नुहोस्",
+  "pause": "पज गर्नुहोस्",
+  "thoughts": "विचारहरू",
+  "api_calls": "API आदेशहरू",
+  "show_code": "कोड देखाउनुहोस्",
+  "copy_api_call": "API कल स्ट्रिङ प्रतिलिपि गर्नुहोस्",
+  "copy_full_api_url": "पूरा API URL प्रतिलिपि गर्नुहोस्"
 }

@@ -459,5 +459,14 @@
   "western": "Западен",
   "my_list": "Моят списък",
   "top_rated": "Най-високо оценени",
-  "continue_watching": "Продължете да гледате"
+  "continue_watching": "Продължете да гледате",
+  "download": "Изтегляне",
+  "downloading": "Изтегляне...",
+  "resume": "Автобиография",
+  "pause": "Пауза",
+  "thoughts": "Мисли",
+  "api_calls": "API команди",
+  "show_code": "Покажи код",
+  "copy_api_call": "Копиране на низ за извикване на API",
+  "copy_full_api_url": "Копиране на пълния URL адрес на API"
 }

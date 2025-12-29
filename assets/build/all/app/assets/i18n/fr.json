@@ -459,5 +459,14 @@
   "western": "Occidental",
   "my_list": "Ma liste",
   "top_rated": "Les mieux notés",
-  "continue_watching": "Continuer à regarder"
+  "continue_watching": "Continuer à regarder",
+  "download": "Télécharger",
+  "downloading": "Téléchargement...",
+  "resume": "CV",
+  "pause": "Pause",
+  "thoughts": "Pensées",
+  "api_calls": "Commandes API",
+  "show_code": "Afficher le code",
+  "copy_api_call": "Copier la chaîne d'appel API",
+  "copy_full_api_url": "Copier l'URL complète de l'API"
 }

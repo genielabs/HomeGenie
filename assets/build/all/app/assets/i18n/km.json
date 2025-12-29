@@ -459,5 +459,14 @@
   "western": "លោកខាងលិច",
   "my_list": "បញ្ជីរបស់ខ្ញុំ",
   "top_rated": "ចំណាត់ថ្នាក់កំពូល",
-  "continue_watching": "បន្តមើល"
+  "continue_watching": "បន្តមើល",
+  "download": "ទាញយក",
+  "downloading": "កំពុងទាញយក...",
+  "resume": "ប្រវត្តិរូបសង្ខេប",
+  "pause": "ផ្អាក",
+  "thoughts": "គំនិត",
+  "api_calls": "ពាក្យបញ្ជា API",
+  "show_code": "បង្ហាញលេខកូដ",
+  "copy_api_call": "ចម្លងខ្សែអក្សរហៅ API",
+  "copy_full_api_url": "ចម្លង URL API ពេញលេញ"
 }

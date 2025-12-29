@@ -459,5 +459,14 @@
   "western": "الغربي",
   "my_list": "قائمتي",
   "top_rated": "الأعلى تقييمًا",
-  "continue_watching": "متابعة المشاهدة"
+  "continue_watching": "متابعة المشاهدة",
+  "download": "تحميل",
+  "downloading": "جارٍ التنزيل...",
+  "resume": "سيرة ذاتية",
+  "pause": "يوقف",
+  "thoughts": "أفكار",
+  "api_calls": "أوامر واجهة برمجة التطبيقات",
+  "show_code": "عرض الرمز",
+  "copy_api_call": "نسخ سلسلة استدعاء واجهة برمجة التطبيقات",
+  "copy_full_api_url": "انسخ عنوان URL الكامل لواجهة برمجة التطبيقات"
 }

@@ -329,6 +329,38 @@
     "575": {
       "Title": "Download-Manager",
       "Description": "Ein robuster, asynchroner HTTP(S)-Dateiübertragungsdienst, der über eine dedizierte API zugänglich ist. Er verwaltet den gesamten Download-Lebenszyklus und unterstützt das Anhalten/Fortsetzen (mittels Range-Headern) sowie die Verarbeitung temporärer Dateien (.part)."
+    },
+    "576": {
+      "Title": "Dateimanager",
+      "Description": "Ein sicherer, API-gesteuerter Dienst zum Lesen und Schreiben von Dateien im Basisdatenordner des Programms. Er unterstützt sowohl binäre Daten als auch UTF-8-Zeichenketten über die Befehle `ReadText` und `WriteText`."
+    },
+    "577": {
+      "Title": "Chatverlaufsdienst",
+      "Description": "Zentralisierter HomeGenie-Dienst zur Verwaltung und Speicherung von KI-Chatprotokollen. Über eine einheitliche API (System.Utility/ChatHistory) bietet er Cloud- und lokalen LLMs einen gemeinsamen Kontext, automatisierte JSON-Speicherung und Echtzeit-Verlaufsverwaltung."
+    },
+    "578": {
+      "Title": "Kontext-Engine",
+      "Description": "Zentraler Dienst zur dynamischen Generierung von KI-Prompts. Er füllt Vorlagen mit der Liste der steuerbaren Geräte und dem aktuellen Systemstatus (Wetter, Energie, Sensoren) und gewährleistet so eine vollständige Echtzeit-Überwachung des gesamten Hauses für die KI."
+    },
+    "570": {
+      "Title": "Datenmonitor",
+      "Description": "Zentralisierter Analysedienst für historische Modulstatistiken. Er ermöglicht den dynamischen Abruf von Zeitreihendaten mit integrierten Signalverarbeitungsfiltern (einfacher Durchschnitt, gleitender Durchschnitt, Savitzky-Golay), um saubere, geglättete Daten für Diagramme und Systemüberwachung bereitzustellen."
+    },
+    "571": {
+      "Title": "Energieverbrauchsstatistik",
+      "Description": "Überwacht, aggregiert und protokolliert kontinuierlich und in regelmäßigen Abständen Daten zum Energieverbrauch (Wh). Implementiert eine vollständige API zum Durchsuchen und Abfragen historischer Datensätze."
+    },
+    "572": {
+      "Title": "Beispiel für Statistiken in einem Kreisdiagramm",
+      "Description": "Beispiel eines Diagrammanbieters, der ein Tortendiagramm mit statischen Daten darstellt."
+    },
+    "573": {
+      "Title": "Wöchentlicher Energieverbrauch",
+      "Description": "Das Balkendiagramm zeigt den durchschnittlichen Wattstundenverbrauch für jeden Wochentag (Mo-So). Die Daten wurden über alle Tagesstunden aggregiert und stammen von der Energy Use Statistics API."
+    },
+    "574": {
+      "Title": "Stündlicher Energieverbrauch",
+      "Description": "Das Balkendiagramm zeigt den durchschnittlichen Wattstundenverbrauch für jede Stunde des Tages (00:00–23:00 Uhr). Die Daten wurden über die ausgewählte Woche aggregiert und stammen von der Energy Use Statistics API."
     }
   }
 }
